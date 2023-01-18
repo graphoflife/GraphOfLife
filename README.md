@@ -1,4 +1,7 @@
-### Hi there 👋
+## Game of Evolution 
+# Emergence of a 3D Network through Autonomous Particles
+
+I present a new algorithm that explores the evolution of complex and dynamic 3D structures through the behavior of autonomous particles. The algorithm utilizes different feedforward neural networks to govern the behavior of each particle, which are linked together to form a graph. These particles interact with their neighbors and compete for limited resources, in the form of fungible tokens, in order to survive and reproduce. Over time, the competition sorts out fragile behaviors while promoting the growth of antifragile ones. The algorithm allows for a wide range of settings and options where ambiguities appeared, leading to diverse incentive structures and macroscopic structures. Through testing various combinations of settings, I was able to observe the emergence of decentralized three-dimensional networks.
 
 <!--
 **GameOfEvolution/GameOfEvolution** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
