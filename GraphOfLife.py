@@ -57,6 +57,7 @@ The following lines of code determine how the simulation is run and which SimOpt
 Also plotting settings can be adjusted as well as the initial conditions of the simulation 
 (Token amount and Init particle amount)
 particles are the agents.
+Have fun while watching evolving life
 """
 
 
