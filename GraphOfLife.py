@@ -1389,6 +1389,7 @@ class Particle:
         if self.new_behavior is self.behavior:
             data.win_behavior_is_self_history[-1] += 1
 
+    def apply_new_behavior(self, sim_options):
         self.behavior = Behavior(sim_options=sim_options, parent_behavior=self.new_behavior)
 
     def link_amount(self):
@@ -2137,7 +2138,7 @@ class Particle:
 
         if self.reproduce_at_home or not sim_options.get(SimOptionsEnum.CAN_PLANT):
             data.reproduced_particles_history[-1] += 1.0
-            new_behavior = Behavior(sim_options=sim_options, parent_behavior=self.reproduction_behavior)
+            new_behavior = Behavior(sim_options=sim_options, parent_behavior=self.behavior)
             new_particle = Particle(token=self.reproduction_tokens, behavior=new_behavior)
             new_particle.to_mutate = True
             if self.inherit_walker_position and sim_options.get(SimOptionsEnum.CAN_INHERIT_WALKER_POSITION):
@@ -2160,7 +2161,7 @@ class Particle:
             all_links.append(new_link)
         else:   # Plant
             data.planted_particles_history[-1] += 1.0
-            new_behavior = Behavior(sim_options=sim_options, parent_behavior=self.reproduction_behavior)
+            new_behavior = Behavior(sim_options=sim_options, parent_behavior=self.behavior)
             new_particle = Particle(token=self.reproduction_tokens, behavior=new_behavior)
             new_particle.to_mutate = True
             if self.inherit_walker_position and sim_options.get(SimOptionsEnum.CAN_INHERIT_WALKER_POSITION):
@@ -2580,6 +2581,9 @@ class Simulation:
             # Eval Game
             for cur_par in self.particles:
                 cur_par.eval_game(sim_options=self.sim_options, data=self.data)
+
+            for cur_par in self.particles:
+                cur_par.apply_new_behavior(sim_options=self.sim_options)
 
             # Check Activity
             for cur_link in self.links:
