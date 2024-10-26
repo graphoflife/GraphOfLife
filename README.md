@@ -10,6 +10,6 @@ In this work, I try to engineer artificial life in a graph-based system called g
 Open one of the RunSimulation<Variant>.py files and fill in the options and if neccessary the simulation settings to load and run it.
 
 
-[![GoE](https://img.youtube.com/vi/mht3h-DAFWo/0.jpg)](https://www.youtube.com/watch?v=mht3h-DAFWo)
+[![GoE](https://img.youtube.com/vi/J2W1eh4ZWJ8/0.jpg)](https://www.youtube.com/watch?v=J2W1eh4ZWJ8)
 
-https://www.youtube.com/watch?v=mht3h-DAFWo
+https://www.youtube.com/watch?v=J2W1eh4ZWJ8
