@@ -7,8 +7,8 @@ In this work, I try to engineer artificial life in a graph-based system called g
 
 # How to run:
 
-Download the file GraphOfLife.py and the two folders "graph life v012e best 0.0" and "graph life v012e best 1.0" and keep them in the same folder as in this repository.
-Then run the GraphOfLife.py file and change the lines until line 130 if the simulation should be run differently (how to load simulation options? How many images should be generated per iteration? How many tokens should the algorithm have?).
+Open one of the RunSimulation<Variant>.py files and fill in the options and if neccessary the simulation settings to load and run it.
+
 
 [![GoE](https://img.youtube.com/vi/mht3h-DAFWo/0.jpg)](https://www.youtube.com/watch?v=mht3h-DAFWo)
 
