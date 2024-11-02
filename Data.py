@@ -14,6 +14,7 @@ class Data:
 
         self.max_token_track = []
         self.max_attack_track = []
+        self.max_age_track = []
 
         self.link_amount_history_init = []
         self.link_amount_history_after_phase1 = []

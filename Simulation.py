@@ -575,6 +575,8 @@ class Simulation:
         beh_ages_var = float(np.var(beh_ages))
 
         ages = [cur_par.age for cur_par in self.particles]
+        self.data.max_age_track.append(max(ages))
+
         ages_var = float(np.var(ages))
         link_ages = [cur_link.age for cur_link in self.links]
         link_ages_var = float(np.var(link_ages))
@@ -1105,7 +1107,9 @@ class Simulation:
                 axs[ax_index].plot(x_iter, self.data.max_attack_track, color=linecolor)
                 ax_index += 1
 
-
+                axs[ax_index].set_title(f"Max age track")
+                axs[ax_index].plot(x_iter, self.data.max_age_track, color=linecolor)
+                ax_index += 1
 
                 for ax in axs:
                     ax.grid(axis="y")
