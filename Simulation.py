@@ -411,6 +411,8 @@ class Simulation:
     def prepare_game_phase(self):
 
         self.data.particle_amount_history_after_phase1.append(len(self.particles))
+
+        self.data.link_amount_history_after_phase1.append(len(self.links))
     def prepare(self):
         """
         Prepare iteration information for data analysis
@@ -997,9 +999,9 @@ class Simulation:
                 ax_index += 1
 
                 axs[ax_index].set_title(
-                    f"Particle and Link Amount {self.data.particle_amount_history[-1]} {self.data.link_amount_history[-1]}")
-                axs[ax_index].plot(x_iter, self.data.particle_amount_history, color=linecolor)
-                axs[ax_index].plot(x_iter, self.data.link_amount_history, color=linecolor)
+                    f"Particle and Link Amount {self.data.particle_amount_history_init[-1]} {self.data.link_amount_history_init[-1]}")
+                axs[ax_index].plot(x_iter, self.data.particle_amount_history_init, color=linecolor)
+                axs[ax_index].plot(x_iter, self.data.link_amount_history_init, color=linecolor)
                 ax_index += 1
 
                 axs[ax_index].set_title(f"Links per Particle  {round(self.data.links_per_particle_history[-1], 4)}")

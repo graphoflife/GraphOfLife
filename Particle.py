@@ -311,8 +311,12 @@ class Particle:
         data.token_self_invested_history[-1] += token_outputs[0, 0]
 
         self.blotto_competition_here[self] = token_outputs[0, 0]
+        if token_outputs[0, 0] > 0:
+            data.attacked_with_x_tokens.append(token_outputs[0, 0])
 
         for i, cur_node in enumerate(self.nodes):
+            if token_outputs[1, i] > 0:
+                data.attacked_with_x_tokens.append(token_outputs[1, i])
             cur_node.link.active_value += token_outputs[1, i]
             data.token_other_invested_history[-1] += token_outputs[1, i]
             cur_node.other_node.particle.blotto_competition_here[self] = token_outputs[1, i]

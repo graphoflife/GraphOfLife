@@ -16,7 +16,7 @@ LOADING_FILE = "Engineered 4 Probabilistic except Blotto.csv"
 FRAME_AMOUNT = int(1000*60*60)
 
 # The path to the output folder, where the images get saved
-run_options_dict[RunOptionsEnum.SAVE_FOLDER] = r"D:\NewGraphCompetition Outputs\Single2" #r"D:\GameOfEvolution\outputs"
+run_options_dict[RunOptionsEnum.SAVE_FOLDER] = r"D:\NewGraphCompetition Outputs\Single3" #r"D:\GameOfEvolution\outputs"
 
 
 
@@ -24,7 +24,7 @@ run_options_dict[RunOptionsEnum.SAVE_FOLDER] = r"D:\NewGraphCompetition Outputs\
 run_options_dict[RunOptionsEnum.INIT_AGENT_AMOUNT] = 10
 
 # Amount of tokens range that exist. Determines the max size of Network and max Memory usage
-TOKEN_AMOUNT_RANGE = [250, 250]
+TOKEN_AMOUNT_RANGE = [750, 750]
 
 # Should save images
 run_options_dict[RunOptionsEnum.PLOTTING] = True
