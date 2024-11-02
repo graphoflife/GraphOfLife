@@ -135,6 +135,8 @@ class NewSimOptions:
     OUTPUT_AMOUNT = 36
     LAYER_SIZES = [int(INPUT_AMOUNT * 0.75)] * 2
 
+    name = ""
+
     def set_random_settings(self, change_settings_probability):
         for key in self.all_options:
             if np.random.rand() < change_settings_probability:
@@ -172,6 +174,9 @@ class NewSimOptions:
                 writer.writerow([key.name, single_option.option])
 
     def load(self, filename: str, foldername:str):
+
+        self.name=filename
+
         # Ensure filename ends with .csv
         filepath = os.path.join(foldername, filename)
 

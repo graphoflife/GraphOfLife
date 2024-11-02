@@ -902,7 +902,7 @@ class Simulation:
                 ax_index = 0
 
                 plt.subplots_adjust(wspace=0.35, hspace=0.35)
-                ax1.set_title(f"Game of Evolution, {self.name}, AT={token_amount_particles}, "
+                ax1.set_title(f"Game of Evolution, {self.name}, AT={token_amount_particles}, File={self.sim_options.name}"
                               f"{self.sim_options.get_description()}")
 
                 self.plot_birth_tree(ax=ax2, cur_smooth_plot=i)

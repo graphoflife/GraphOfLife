@@ -10,7 +10,7 @@ run_options_dict = {}
 
 # String of Folder Path, if not set to None: all options in LOADING_FOLDER will be run after each other
 LOADING_FOLDER = rf"C:\Users\stefa\OneDrive\Dokumente\GitHub\GraphOfLife\Promising SimOptions Candidates"
-LOADING_FILE = "Engineered 4 Probabilistic except Blotto.csv"
+LOADING_FILE = "Engineered 4 Probabilistic except Blotto, keeps one Token.csv"
 
 # How many Frames should be saved until the Simulation stops
 FRAME_AMOUNT = int(1000*60*60)
