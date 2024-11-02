@@ -233,6 +233,7 @@ class Simulation:
         """
 
         # Game Phase
+        self.prepare_game_phase()
         for cur_par in self.particles:
             cur_par.prepare_information(sim_options=self.sim_options)
 
@@ -407,7 +408,9 @@ class Simulation:
         return H
 
 
+    def prepare_game_phase(self):
 
+        self.data.particle_amount_history_after_phase1.append(len(self.particles))
     def prepare(self):
         """
         Prepare iteration information for data analysis
@@ -1015,7 +1018,7 @@ class Simulation:
                 ax_index += 1
 
                 axs[ax_index].set_title(f"Reproduction Tokens ")
-                axs[ax_index].plot(x_iter, self.data.kept_repro_tokens_history, color="cornflowerblue")
+                axs[ax_index].plot(x_iter, self.data.kept_repro_tokens_history, color=linecolor)
                 ax_index += 1
 
 
@@ -1034,13 +1037,15 @@ class Simulation:
                 axs[ax_index].plot(x_iter, self.data.inactive_links_history, color=linecolor)
                 ax_index += 1
 
-                axs[ax_index].set_title(f"Swapped Particles {round(self.data.swap_percentage_history[-1], 4)}")
-                axs[ax_index].plot(x_iter, self.data.swap_percentage_history, color=linecolor)
-                ax_index += 1
+                if self.sim_options.get(SimOptionsEnum.CAN_SWAP):
+                    axs[ax_index].set_title(f"Swapped Particles {round(self.data.swap_percentage_history[-1], 4)}")
+                    axs[ax_index].plot(x_iter, self.data.swap_percentage_history, color=linecolor)
+                    ax_index += 1
 
-                axs[ax_index].set_title(f"Reconnections {round(self.data.reconnection_history[-1], 4)}")
-                axs[ax_index].plot(x_iter, self.data.reconnection_history, color=linecolor)
-                ax_index += 1
+                if self.sim_options.get(SimOptionsEnum.CAN_RECONNECT):
+                    axs[ax_index].set_title(f"Reconnections {round(self.data.reconnection_history[-1], 4)}")
+                    axs[ax_index].plot(x_iter, self.data.reconnection_history, color=linecolor)
+                    ax_index += 1
 
                 axs[ax_index].set_title(f"Token Invested Self")
                 axs[ax_index].plot(x_iter, self.data.token_self_invested_history, color=linecolor)
@@ -1061,6 +1066,11 @@ class Simulation:
                 bins = np.linspace(0.0, 1.0, 30)
                 axs[ax_index].hist(self.data.relative_win_token_percentage_array_history, rwidth=1, bins=bins, color=linecolor, edgecolor=edgecolor)
                 axs[ax_index].set_title(f"Win Token Relative Percentage Distribution Total")
+                ax_index += 1
+
+                bins = np.linspace(0.0, max(self.data.attacked_with_x_tokens), 30)
+                axs[ax_index].hist(self.data.attacked_with_x_tokens, rwidth=1, bins=bins, color=linecolor, edgecolor=edgecolor)
+                axs[ax_index].set_title(f"Tokens used to attack (self or other)")
                 ax_index += 1
 
                 temp = 1.0

@@ -41,7 +41,7 @@ run_options_dict[RunOptionsEnum.KEEP_X_GROUPS] = 1
 ANGLE_SHIFT_RANGE = [0.5 * np.pi / 180, 1.0 * np.pi / 180]
 
 # Image amount plotted during each "plot iteration", higher means smoother (but slower)
-SMOOTH_PLOTS_RANGE = [10, 20]
+SMOOTH_PLOTS_RANGE = [12, 12]
 
 # Every X iteration is a "plot iteration"
 PLOT_EVERY_X_ITERATIONS_RANGE = [1, 1]

@@ -9,8 +9,11 @@ class Data:
         """
         Initialize all all data variables
         """
-        self.particle_amount_history = []
-        self.link_amount_history = []
+        self.particle_amount_history_init = []
+        self.particle_amount_history_after_phase1 = []
+
+        self.link_amount_history_init = []
+        self.link_amount_history_after_phase1 = []
         self.percent_home_history = []
         self.dim_max_history = []
         self.dim_mean_history = []
@@ -47,6 +50,7 @@ class Data:
         self.relative_win_token_percentage_history = []
         self.relative_win_token_percentage_stddev_history = []
         self.relative_win_token_percentage_array_history = []
+        self.attacked_with_x_tokens = []
 
         self.win_behavior_is_self_history = []
         self.each_relative_win_token_percentage_array_history = []
@@ -61,11 +65,11 @@ class Data:
     def prepare(self, particles, links):
 
         # Prepare data arrays for analysis
-        self.particle_amount_history.append(len(particles))
-        self.link_amount_history.append(len(links))
-        self.links_per_particle_history.append(self.link_amount_history[-1]/self.particle_amount_history[-1])
+        self.particle_amount_history_init.append(len(particles))
+        self.link_amount_history_init.append(len(links))
+        self.links_per_particle_history.append(self.link_amount_history_init[-1]/self.particle_amount_history_init[-1])
         sum_x = sum([1 for cur_par in particles if cur_par is cur_par.walker_position])
-        self.percent_home_history.append(sum_x / len(particles))
+        self.percent_home_history.append(sum_x / self.particle_amount_history_init[-1])
         self.swap_percentage_history.append(0.0)
         self.new_links_spawned_history.append(0.0)
         self.declined_new_links_history.append(0.0)
@@ -84,7 +88,10 @@ class Data:
 
         self.relative_win_token_percentage_history.append([])
 
+
+
         self.each_relative_win_token_percentage_array_history = []
+        self.attacked_with_x_tokens = []
 
         self.win_behavior_is_self_history.append(0.0)
 
@@ -110,17 +117,18 @@ class Data:
 
     def renormalize(self, token_amount):
 
-        self.swap_percentage_history[-1] = self.swap_percentage_history[-1] / self.particle_amount_history[-1]
-        self.new_links_spawned_history[-1] = self.new_links_spawned_history[-1] / self.particle_amount_history[-1]
-        self.declined_new_links_history[-1] = self.declined_new_links_history[-1] / self.particle_amount_history[-1]
-        self.planted_particles_history[-1] = self.planted_particles_history[-1] / self.particle_amount_history[-1]
-        self.reproduced_particles_history[-1] = self.reproduced_particles_history[-1] / self.particle_amount_history[-1]
-        self.died_particles_history[-1] = self.died_particles_history[-1] / self.particle_amount_history[-1]
+        self.swap_percentage_history[-1] = self.swap_percentage_history[-1] / self.particle_amount_history_init[-1]
+        self.new_links_spawned_history[-1] = self.new_links_spawned_history[-1] / self.particle_amount_history_init[-1]
+        self.declined_new_links_history[-1] = self.declined_new_links_history[-1] / self.particle_amount_history_init[-1]
+        self.planted_particles_history[-1] = self.planted_particles_history[-1] / self.particle_amount_history_init[-1]
+        self.reproduced_particles_history[-1] = self.reproduced_particles_history[-1] / self.particle_amount_history_init[-1]
+
+        self.died_particles_history[-1] = self.died_particles_history[-1] / self.particle_amount_history_after_phase1[-1]
         self.kept_repro_tokens_history[-1] = self.kept_repro_tokens_history[-1] / token_amount
 
-        self.reconnection_history[-1] /= self.particle_amount_history[-1]
+        self.reconnection_history[-1] /= self.particle_amount_history_init[-1]
 
-        self.inactive_links_history[-1] /= max(self.link_amount_history[-1],1)
+        self.inactive_links_history[-1] /= max(self.link_amount_history_after_phase1[-1],1)
 
         self.token_self_invested_history[-1] /= token_amount
         self.token_other_invested_history[-1] /= token_amount
@@ -137,5 +145,5 @@ class Data:
             self.relative_win_token_percentage_history[-1] = 0.0
 
 
-        self.win_behavior_is_self_history[-1] /= self.particle_amount_history[-1]
+        self.win_behavior_is_self_history[-1] /= self.particle_amount_history_after_phase1[-1]
 

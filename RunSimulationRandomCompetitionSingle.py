@@ -57,7 +57,7 @@ while True:
     path = os.path.join(parent_dir, name)
     os.makedirs(path, exist_ok=True)
 
-    iterations_per_competition = 100
+    iterations_per_competition = 99999999
 
     for i in range(iterations_per_competition):
 
@@ -181,11 +181,11 @@ while True:
 
         for cur_sim in all_simulations:
             if sum([cur_par.token for cur_par in cur_sim.particles]) > 0.1*ALL_TOKEN_AMOUNT_INIT:
-                cur_sim.run_options_dict[RunOptionsEnum.SMOOTH_PLOTS] = 8
-                cur_sim.run_options_dict[RunOptionsEnum.PLOT_EVERY_X_ITERATIONS] = 1
+                cur_sim.run_options_dict[RunOptionsEnum.SMOOTH_PLOTS] = 1
+                cur_sim.run_options_dict[RunOptionsEnum.PLOT_EVERY_X_ITERATIONS] = 10
             else:
-                cur_sim.run_options_dict[RunOptionsEnum.SMOOTH_PLOTS] = 8
-                cur_sim.run_options_dict[RunOptionsEnum.PLOT_EVERY_X_ITERATIONS] = 1
+                cur_sim.run_options_dict[RunOptionsEnum.SMOOTH_PLOTS] = 1
+                cur_sim.run_options_dict[RunOptionsEnum.PLOT_EVERY_X_ITERATIONS] = 10
 
         for cur_sim in all_simulations.copy():
             if len(cur_sim.particles) == 0:
