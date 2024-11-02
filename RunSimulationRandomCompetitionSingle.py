@@ -17,7 +17,7 @@ import datetime as datetime
 
 
 # Amount of tokens range that exist. Determines the max size of Network and max Memory usage
-ALL_TOKEN_AMOUNT_INIT = 1500
+ALL_TOKEN_AMOUNT_INIT = 2000
 
 # Should save images
 
@@ -48,11 +48,11 @@ while True:
 
     all_simulations = []
     iteration = 0
-    TOKEN_PER_SIMULATION = 1500
+    TOKEN_PER_SIMULATION = ALL_TOKEN_AMOUNT_INIT
     ALL_TOKEN_AMOUNT = ALL_TOKEN_AMOUNT_INIT
 
     name = f"Single_" + datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S_%f")
-    parent_dir = r"D:\NewGraphCompetition Outputs\Single1"
+    parent_dir = r"C:\Users\stefa\Temporär\GraphOfLifeOutput"
 
     path = os.path.join(parent_dir, name)
     os.makedirs(path, exist_ok=True)
@@ -84,7 +84,7 @@ while True:
             run_options_dict[RunOptionsEnum.ITERATION_AMOUNT] = 1
 
             simulation_options = NewSimOptions()
-            simulation_options.load(r"Engineered 4 Probabilistic except Blotto",r"D:\NewGraphCompetition Outputs\Favorite")
+            simulation_options.load(r"Engineered 4 Probabilistic except Blotto.csv",r"C:\Users\stefa\GameOfEvolution\Promising SimOptions Candidates")
             simulation = Simulation(sim_options=simulation_options, run_options_dict=run_options_dict)
             all_simulations.append(simulation)
             ALL_TOKEN_AMOUNT -= TOKEN_PER_SIMULATION
@@ -162,12 +162,13 @@ while True:
 
 
         if tokens_to_distribute > 0:
-            KEEP = max([1, round(tokens_to_distribute*run_options_dict[RunOptionsEnum.PERCENTAGE_OF_TOKENS_FOR_NEW_SIMULATIONS])])
+            KEEP = 0
+
             ALL_TOKEN_AMOUNT += KEEP
             tokens_to_distribute -= KEEP
-            p = np.array([cur_par.behavior_age for cur_par in all_particles])
-            p = p.max() + 1 - p
-            p=p / p.sum()
+            #p = np.array([cur_par.behavior_age for cur_par in all_particles])
+            #p = p.max() + 1 - p
+            #p=p / p.sum()
             for _ in range(int(tokens_to_distribute)):
 
                 chosen_particle = np.random.choice(all_particles)
