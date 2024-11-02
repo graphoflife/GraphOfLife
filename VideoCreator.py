@@ -4,12 +4,12 @@ from natsort import natsorted
 
 # Set the path to the directory containing the numbered PNG files
 
-path = r'outputs'
+path = r'D:\NewGraphCompetition Outputs\Single2'
 min_amount = 1
-make_one = False
+make_one = True
 
 all_pngs = []
-name = None
+name = "Video1"
 
 for cur_dir in os.listdir(path):
 

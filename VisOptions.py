@@ -6,16 +6,23 @@ black_color = [0, 0, 0, 1]
 
 class VisOptions:
 
-    backgroundcolor = (1, 1, 1, 1)
+    backgroundcolor = (0.1, 0.1, 0.1, 1)
     backgroundcolor2 = (1, 1, 1, 1)
 
-    cmap = mcolors.LinearSegmentedColormap.from_list("black_colormap", [black_color, black_color], N=256)
-    cmap_edge = mcolors.LinearSegmentedColormap.from_list("black_colormap", [black_color, black_color], N=256)
-    max_size_edge = 7.0
-    min_size_edge = 3.5
-    max_size_node = 1200
-    min_size_node = 600
+    #cmap = mcolors.LinearSegmentedColormap.from_list("black_colormap", [black_color, black_color], N=256)
+    #cmap_edge = mcolors.LinearSegmentedColormap.from_list("black_colormap", [black_color, black_color], N=256)
+    cmap = plt.cm.cool
+    cmap_edge = plt.cm.Wistia
+
+    max_size_edge = 3
+    min_size_edge = 1.5
+    max_size_node = 150
+    min_size_node = 75
     mutate_rgb = 0.05
+
+    def __init__(self):
+        self.min_size_node = self.max_size_node*self.min_size_edge/self.max_size_edge
+
 
     def randomize(self):
         self.backgroundcolor = plt.cm.binary(np.random.uniform(0.0, 1.0))
@@ -33,4 +40,3 @@ class VisOptions:
         self.min_size_edge = np.random.uniform(0, 0.5)
 
         self.max_size_node = np.random.uniform(30, 120)
-        self.min_size_node = self.max_size_node*self.min_size_edge/self.max_size_edge

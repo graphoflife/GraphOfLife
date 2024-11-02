@@ -285,8 +285,6 @@ class Simulation:
             # Redistribute
             fragmentation_groups = self.get_fragmentation()
             fragmentation_groups.sort(key=lambda x: len(x), reverse=True)
-            print(fragmentation_groups[0])
-            print(fragmentation_groups[-1])
             tokens_to_distribute = 0
             if len(fragmentation_groups) > self.run_options_dict[RunOptionsEnum.KEEP_X_GROUPS]:
                 for cur_group in fragmentation_groups[self.run_options_dict[RunOptionsEnum.KEEP_X_GROUPS]:]:
@@ -301,9 +299,8 @@ class Simulation:
                                     dead_links=self.dead_links)
 
             for _ in range(int(tokens_to_distribute)):
-                p = np.array([cur_par.behavior_age for cur_par in self.particles])
-                p = p.max() + 1 - p
-                chosen_particle = np.random.choice(self.particles, p=p / p.sum())
+
+                chosen_particle = np.random.choice(self.particles)
                 chosen_particle.token += 1
 
             # redistribution end
@@ -886,8 +883,8 @@ class Simulation:
 
                 col_amount_tot = col_amount_main + col_amount_diagrams
 
-                ax1 = plt.subplot2grid((row_amount_tot, col_amount_tot), (0, 0), colspan=col_amount_main, rowspan=row_amount_tot-3)
-                ax2 = plt.subplot2grid((row_amount_tot, col_amount_tot), (row_amount_tot-3, 0), colspan=col_amount_main, rowspan=3)
+                ax1 = plt.subplot2grid((row_amount_tot, col_amount_tot), (0, 0), colspan=col_amount_main, rowspan=row_amount_tot-2)
+                ax2 = plt.subplot2grid((row_amount_tot, col_amount_tot), (row_amount_tot-2, 0), colspan=col_amount_main, rowspan=2)
 
                 axs = []
 
