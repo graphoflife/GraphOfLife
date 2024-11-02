@@ -561,7 +561,10 @@ class Simulation:
         for cur_link in self.links:
             self.g.add_edge(cur_link.node1.particle, cur_link.node2.particle, weight=1)
 
+
         tokens = [cur_par.token for cur_par in self.particles]
+        self.data.max_token_track.append(max(tokens))
+        self.data.max_attack_track.append(max(self.data.attacked_with_x_tokens))
         tokens_var = float(np.var(tokens))
         particles_at_position = [len(cur_par.walker_position.particles_at_this_position) for cur_par in
                                  self.particles]
@@ -1039,6 +1042,7 @@ class Simulation:
                 axs[ax_index].plot(x_iter, self.data.inactive_links_history, color=linecolor)
                 ax_index += 1
 
+                """
                 if self.sim_options.get(SimOptionsEnum.CAN_SWAP):
                     axs[ax_index].set_title(f"Swapped Particles {round(self.data.swap_percentage_history[-1], 4)}")
                     axs[ax_index].plot(x_iter, self.data.swap_percentage_history, color=linecolor)
@@ -1048,6 +1052,7 @@ class Simulation:
                     axs[ax_index].set_title(f"Reconnections {round(self.data.reconnection_history[-1], 4)}")
                     axs[ax_index].plot(x_iter, self.data.reconnection_history, color=linecolor)
                     ax_index += 1
+                """
 
                 axs[ax_index].set_title(f"Token Invested Self")
                 axs[ax_index].plot(x_iter, self.data.token_self_invested_history, color=linecolor)
@@ -1075,6 +1080,7 @@ class Simulation:
                 axs[ax_index].set_title(f"Tokens used to attack (self or other)")
                 ax_index += 1
 
+                """
                 temp = 1.0
                 if len(self.data.each_relative_win_token_percentage_array_history) > 0:
                     temp =max(self.data.each_relative_win_token_percentage_array_history)
@@ -1084,10 +1090,19 @@ class Simulation:
                                    color=linecolor, edgecolor=edgecolor)
                 axs[ax_index].set_title(f"Win Token Relative Percentage Distribution Each")
                 ax_index += 1
+                """
 
 
                 axs[ax_index].set_title(f"Win Behavior is Self")
                 axs[ax_index].plot(x_iter, self.data.win_behavior_is_self_history, color=linecolor)
+                ax_index += 1
+
+                axs[ax_index].set_title(f"Max Token Track")
+                axs[ax_index].plot(x_iter, self.data.max_token_track, color=linecolor)
+                ax_index += 1
+
+                axs[ax_index].set_title(f"Max attack value track")
+                axs[ax_index].plot(x_iter, self.data.max_attack_track, color=linecolor)
                 ax_index += 1
 
 

@@ -12,6 +12,9 @@ class Data:
         self.particle_amount_history_init = []
         self.particle_amount_history_after_phase1 = []
 
+        self.max_token_track = []
+        self.max_attack_track = []
+
         self.link_amount_history_init = []
         self.link_amount_history_after_phase1 = []
         self.percent_home_history = []
@@ -116,6 +119,7 @@ class Data:
 
 
     def renormalize(self, token_amount):
+
 
         self.swap_percentage_history[-1] = self.swap_percentage_history[-1] / self.particle_amount_history_init[-1]
         self.new_links_spawned_history[-1] = self.new_links_spawned_history[-1] / self.particle_amount_history_init[-1]
