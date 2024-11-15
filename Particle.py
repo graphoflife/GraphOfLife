@@ -44,6 +44,8 @@ class Particle:
         self.blotto_winner_here = None
         self.blotto_winner_repro = None
 
+        self.link_creation_particles_for_reproduction = None
+
 
 
 
@@ -191,6 +193,7 @@ class Particle:
         self.can_new_link = True
         self.reconnection_node = None
         self.reconnection_particle = None
+        self.link_creation_particles_for_reproduction = []
 
         np.random.shuffle(self.nodes)
 
@@ -511,10 +514,14 @@ class Particle:
                                      pos_link_connection
                                      ])
             output_arrays_self.append(self.behavior.get_output(input_array=input_array, sim_options=sim_options))
-            input_array[0] = 1.0
-            output_arrays_other.append(cur_node.other_node.particle.behavior.get_output(input_array=input_array, sim_options=sim_options))
-            input_array[1] = 1.0
-            output_arrays_walker.append(self.walker_position.behavior.get_output(input_array=input_array, sim_options=sim_options))
+
+            if sim_options.get(SimOptionsEnum.ONLY_USE_OWN_BEHAVIOR) == False:
+                input_array[0] = 1.0
+                output_arrays_other.append(cur_node.other_node.particle.behavior.get_output(input_array=input_array, sim_options=sim_options))
+            if sim_options.get(SimOptionsEnum.CAN_DECLINE_NEW_LINK) == True or sim_options.get(SimOptionsEnum.ONLY_USE_OWN_BEHAVIOR) == False:
+                input_array[1] = 1.0
+                output_arrays_walker.append(self.walker_position.behavior.get_output(input_array=input_array, sim_options=sim_options))
+
             input_array[0] = 0.0
             for j, cur_par in enumerate(self.particles_at_this_position):
                 if sim_options.get(SimOptionsEnum.MOVE_ON_OWN_BY_SELF):
@@ -525,8 +532,10 @@ class Particle:
                     outputs_for_walkers_at_this_position[j].append(cur_par.behavior.get_output(input_array=input_array, sim_options=sim_options))
 
         output_arrays_self = np.hstack(output_arrays_self)
-        output_arrays_other = np.hstack(output_arrays_other)
-        output_arrays_walker = np.hstack(output_arrays_walker)
+        if len(output_arrays_other) > 0:
+            output_arrays_other = np.hstack(output_arrays_other)
+        if len(output_arrays_walker) > 0:
+            output_arrays_walker = np.hstack(output_arrays_walker)
 
 
         for j, cur_par in enumerate(self.particles_at_this_position):
@@ -847,6 +856,36 @@ class Particle:
         self.inherit_walker_position = choice
         index += 2
 
+
+        # Get particles to connect the newly reproduced particle to
+        output_arrays = output_arrays_self  #TODO only self option available
+        self_yes = np.sum(output_arrays[index, :])
+        self_no = np.sum(output_arrays[index+1, :])
+        walker_yes = np.sum(output_arrays[index+2, :])
+        walker_no = np.sum(output_arrays[index+3, :])
+        neighbor_yes = output_arrays[index + 4, :]
+        neighbor_no = output_arrays[index + 5, :]
+
+
+
+        to_choose = [True, False]
+        choice_self = self.make_choice(to_choose=to_choose, p=[self_yes, self_no],
+                                  choice_type=sim_options.get(SimOptionsEnum.REPRODUCTION_LINKS_DECISION, particle=self))
+        if choice_self:
+            self.link_creation_particles_for_reproduction.append(self)
+        choice_walker = self.make_choice(to_choose=to_choose, p=[walker_yes, walker_no],
+                                  choice_type=sim_options.get(SimOptionsEnum.REPRODUCTION_LINKS_DECISION, particle=self))
+        if choice_walker:
+            self.link_creation_particles_for_reproduction.append(self.walker_position)
+
+        for i, cur_node in enumerate(self.nodes):
+            choice_neighbor = self.make_choice(to_choose=to_choose, p=[neighbor_yes[i], neighbor_no[i]],
+                                           choice_type=sim_options.get(SimOptionsEnum.REPRODUCTION_LINKS_DECISION, particle=self))
+            if choice_neighbor:
+                self.link_creation_particles_for_reproduction.append(cur_node.other_node.particle)
+        self.link_creation_particles_for_reproduction = list(set(self.link_creation_particles_for_reproduction))
+        index += 6
+
     @staticmethod
     def get_correct_output(use_x, output_arrays_self, output_arrays_other, output_arrays_walker):
         """
@@ -914,36 +953,58 @@ class Particle:
         self.reproduction_tokens = 0
         all_particles.append(new_particle)
 
-        if self.reproduce_at_home or not sim_options.get(SimOptionsEnum.CAN_PLANT):
+        if sim_options.get(SimOptionsEnum.NEW_REPRODUCTION_LINK_PRODUCTION):
             data.reproduced_particles_history[-1] += 1.0
 
-            if pos is not None:
-                pos[new_particle] = pos[self].copy() * np.random.normal(1, 0.001)
-                vel[new_particle] = vel[self].copy()
+            for cur_link_par in self.link_creation_particles_for_reproduction:
+                new_link = Link(particle1=cur_link_par, particle2=new_particle)
 
-            for cur_node in self.nodes:
-                if cur_node.is_shifting:
-                    cur_node.switch_to_particle(particle=new_particle)
+                if pos is not None:
+                    pos[new_particle] = pos[self].copy() * np.random.normal(1, 0.001)
+                    vel[new_particle] = vel[self].copy()
 
-            new_link = Link(particle1=self, particle2=new_particle)
-            if pos is not None:
-                new_link.node1.vis_pos = pos[self].copy()
-                new_link.node2.vis_pos = pos[new_particle].copy()
+                if pos is not None:
+                    new_link.node1.vis_pos = pos[self].copy()
+                    new_link.node2.vis_pos = pos[new_particle].copy()
 
-            all_links.append(new_link)
-        else:   # Plant
-            data.planted_particles_history[-1] += 1.0
+                if sim_options.get(SimOptionsEnum.CAN_STILL_SHIFT_AT_NEW_REPRODUCTION):
+                    for cur_node in self.nodes:
+                        if cur_node.is_shifting:
+                            cur_node.switch_to_particle(particle=new_particle)
 
-            if pos is not None:
-                pos[new_particle] = pos[self.plant_particle].copy() * np.random.normal(1, 0.001)
-                vel[new_particle] = np.zeros(3)
+                all_links.append(new_link)
 
-            new_link = Link(particle1=self.plant_particle, particle2=new_particle)
-            if pos is not None:
-                new_link.node1.vis_pos = pos[self].copy()
-                new_link.node2.vis_pos = pos[new_particle].copy()
+        else:
+            if self.reproduce_at_home or not sim_options.get(SimOptionsEnum.CAN_PLANT):
+                data.reproduced_particles_history[-1] += 1.0
 
-            all_links.append(new_link)
+                if pos is not None:
+                    pos[new_particle] = pos[self].copy() * np.random.normal(1, 0.001)
+                    vel[new_particle] = vel[self].copy()
+
+                for cur_node in self.nodes:
+                    if cur_node.is_shifting:
+                        cur_node.switch_to_particle(particle=new_particle)
+
+                new_link = Link(particle1=self, particle2=new_particle)
+                if pos is not None:
+                    new_link.node1.vis_pos = pos[self].copy()
+                    new_link.node2.vis_pos = pos[new_particle].copy()
+
+                all_links.append(new_link)
+            else:   # Plant
+                data.planted_particles_history[-1] += 1.0
+
+                if pos is not None:
+                    pos[new_particle] = pos[self.plant_particle].copy() * np.random.normal(1, 0.001)
+                    vel[new_particle] = np.zeros(3)
+
+                new_link = Link(particle1=self.plant_particle, particle2=new_particle)
+                if pos is not None:
+                    new_link.node1.vis_pos = pos[self].copy()
+                    new_link.node2.vis_pos = pos[new_particle].copy()
+
+                all_links.append(new_link)
 
     def check_death(self, sim_options, all_links, all_particles, data, dead_particles, dead_links):
         """

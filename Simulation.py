@@ -227,6 +227,8 @@ class Simulation:
                               vel=self.vel, indexer_f=self.index_behavior, logger=self.logger)
 
 
+        self.kill_duplicate_links(sim_options=self.sim_options, all_links=self.links, dead_links=self.dead_links)
+
         """
         if result_repro_percentage != self.data.planted_particles_history[-1] + self.data.reproduced_particles_history[-1]:
             self.logger.warning("Shouldnt happen 2")
@@ -253,7 +255,6 @@ class Simulation:
         for cur_par in self.particles:
             cur_par.apply_new_behavior(sim_options=self.sim_options, data=self.data, indexer_f=self.index_behavior)
 
-        # TODO makes probably no sense because they have a disadvantage
         # Check Activity
         for cur_link in self.links:
             if cur_link.active_value > 0:
@@ -313,56 +314,12 @@ class Simulation:
         token_amount = sum([cur_par.token for cur_par in self.particles])
         self.data.renormalize(token_amount=token_amount)
 
-        """
-        if self.sim_options.get(SimOptionsEnum.META_EVOLUTION_DEC) or self.sim_options.get(SimOptionsEnum.META_EVOLUTION_USE_X_BEH) :
-            result = {}
-            for cur_par in self.particles:
-                for cur_beh in cur_par.behavior.meta_options.keys():
-                    if cur_beh not in result.keys():
-                        result[cur_beh] = {}
-                    option = cur_par.behavior.meta_options[cur_beh]
-                    if option not in result[cur_beh].keys():
-                        result[cur_beh][option] = 1
-                    else:
-                        result[cur_beh][option] += 1
-            for cur_key in result:
-                result[cur_key] = {key: result[cur_key][key] for key in sorted(result[cur_key])}
 
-            print(result)
-        """
 
         if self.run_options_dict[RunOptionsEnum.PLOTTING]:
             self.plot_network()
 
-        """            
-        crit1 = len(self.particles) < 10 and self.current_iteration > 20
-        crit12 = len(self.particles) < 5
-        if crit1 or crit12:
-            break
 
-        if self.run_options_dict[RunOptionsEnum.CAN_EXIT]:
-            hastocrit = self.current_iteration > 30
-            crit2 = all(np.array(self.data.shannon_entropy[-10:]) < 0.25) and hastocrit
-            crit4 = False # all(np.array(self.data.died_particles_history[-10:]) < 0.01) and hastocrit
-            crit5 = False # all(np.array(self.data.reproduced_particles_history[-5:]) + np.array(self.data.planted_particles_history[-5:]) < 0.01) and hastocrit
-            crit6 = all(np.array(self.data.links_per_particle_history[-5:]) < 1.01) and hastocrit
-            crit9 = all(np.array(self.data.links_per_particle_history[-5:]) > 5) and hastocrit
-            crit10 = all(np.array(self.data.token_other_invested_history[-5:]) < 0.01) and hastocrit
-            link_amounts = [cur_par.link_amount() for cur_par in self.particles]
-            self.data.link_amount_crit_array.append(max(link_amounts) > 30*np.quantile(link_amounts, 0.9))
-            self.data.link_amount_crit_array2.append(max(link_amounts) > 250)
-
-            crit11 = all(self.data.link_amount_crit_array[-5:])
-            crit12 = all(self.data.link_amount_crit_array2[-5:])
-            if crit11:
-                print("max link amount too large", self.name)
-            if crit12:
-                print("max link amount too large > 250", self.name)
-            if crit1 or crit2 or crit4 or crit5 or crit6 or crit9 or crit10:
-
-                break
-
-        """
 
         self.current_iteration += 1
 
@@ -564,7 +521,7 @@ class Simulation:
 
         tokens = [cur_par.token for cur_par in self.particles]
         self.data.max_token_track.append(max(tokens))
-        self.data.max_attack_track.append(max(self.data.attacked_with_x_tokens))
+        self.data.max_attack_track.append(max(self.data.attacked_with_x_tokens, default=0))
         tokens_var = float(np.var(tokens))
         particles_at_position = [len(cur_par.walker_position.particles_at_this_position) for cur_par in
                                  self.particles]
@@ -1101,14 +1058,17 @@ class Simulation:
 
                 axs[ax_index].set_title(f"Max Token Track")
                 axs[ax_index].plot(x_iter, self.data.max_token_track, color=linecolor)
+                axs[ax_index].set_yscale('log')
                 ax_index += 1
 
                 axs[ax_index].set_title(f"Max attack value track")
                 axs[ax_index].plot(x_iter, self.data.max_attack_track, color=linecolor)
+                axs[ax_index].set_yscale('log')
                 ax_index += 1
 
                 axs[ax_index].set_title(f"Max age track")
                 axs[ax_index].plot(x_iter, self.data.max_age_track, color=linecolor)
+                axs[ax_index].set_yscale('log')
                 ax_index += 1
 
                 for ax in axs:

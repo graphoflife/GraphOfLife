@@ -126,6 +126,10 @@ class SimOptionsEnum(Enum):
 
     ONLY_USE_OWN_BEHAVIOR = auto()
 
+    NEW_REPRODUCTION_LINK_PRODUCTION = auto()
+    CAN_STILL_SHIFT_AT_NEW_REPRODUCTION = auto()
+    REPRODUCTION_LINKS_DECISION = auto()
+
 class NewSimOptions:
 
     # Neural Network
@@ -803,4 +807,32 @@ class NewSimOptions:
                                                       probability=[0.0, 1.0],   #TODO
                                                       can_meta_evolve=False,
                                                       meta_type=MetaEnum.NONE)
+
+        temp_enum = SimOptionsEnum.NEW_REPRODUCTION_LINK_PRODUCTION
+        self.all_options[temp_enum] = SingleSimOption(name=temp_enum,
+                                                      short_name="NRLP",
+                                                      option=False,
+                                                      options=[False, True],
+                                                      probability=[1.0, 1.0],
+                                                      can_meta_evolve=False,
+                                                      meta_type=MetaEnum.NONE)
+
+        temp_enum = SimOptionsEnum.CAN_STILL_SHIFT_AT_NEW_REPRODUCTION
+        self.all_options[temp_enum] = SingleSimOption(name=temp_enum,
+                                                      short_name="CSSANR",
+                                                      option=False,
+                                                      options=[False, True],
+                                                      probability=[1.0, 1.0],
+                                                      can_meta_evolve=False,
+                                                      meta_type=MetaEnum.NONE)
+
+        temp_enum = SimOptionsEnum.REPRODUCTION_LINKS_DECISION
+        self.all_options[temp_enum] = SingleSimOption(name=temp_enum,
+                                                      short_name="RLD",
+                                                      option="PROB",
+                                                      options=["MAX", "PROB", "RANDOM"],
+                                                      probability=[3.0, 3.0, 1.0],
+                                                      can_meta_evolve = True,
+                                                      meta_type=MetaEnum.DECISION)
+
 
