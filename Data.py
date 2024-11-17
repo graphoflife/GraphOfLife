@@ -66,6 +66,11 @@ class Data:
         self.birth_tree = []
         self.next_birth_layer = []
 
+        self.token_power_law_exponent_history = []
+        self.par_concentration_power_law_exponent_history = []
+        self.link_amounts_power_law_exponent_history = []
+        self.ages_power_law_exponent_history = []
+
     def prepare(self, particles, links):
 
         # Prepare data arrays for analysis

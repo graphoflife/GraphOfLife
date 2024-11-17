@@ -15,6 +15,7 @@ import datetime as datetime
 import matplotlib
 import logging
 from numbers import Number
+from scipy.stats import linregress
 matplotlib.use('Agg')
 
 VERSION = "v015a_graph_of_life"
@@ -499,7 +500,38 @@ class Simulation:
             link_set.append(cur_link.node1.particle)
             link_set.append(cur_link.node2.particle)
 
+    def calculate_power_law_exponent(self, data):
+        """
+        Calculate the power-law exponent of a given dataset.
 
+        Parameters:
+        - data (list or numpy array): List of integer values.
+
+        Returns:
+        - float: The slope (negative of the power-law exponent).
+        """
+
+
+        # Create histogram in log space
+        bins = np.logspace(np.log10(min(data)), np.log10(max(data)), num=50)
+        hist, edges = np.histogram(data, bins=bins, density=True)
+
+        # Calculate bin centers
+        bin_centers = (edges[:-1] + edges[1:]) / 2
+
+        # Log-log transformation
+        log_x = np.log10(bin_centers)
+        log_y = np.log10(hist)
+
+        # Linear regression to find the slope
+        valid = (hist > 0)  # Ignore bins with zero probability
+        slope, _, _, _, _ = linregress(log_x[valid], log_y[valid])
+
+        return -slope  # Return the power-law exponent
+
+    # Test the function with the synthetic data
+    calculated_slope = calculate_power_law_exponent(data)
+    calculated_slope
 
     def plot_network(self):
         """
@@ -522,19 +554,27 @@ class Simulation:
         tokens = [cur_par.token for cur_par in self.particles]
         self.data.max_token_track.append(max(tokens))
         self.data.max_attack_track.append(max(self.data.attacked_with_x_tokens, default=0))
-        tokens_var = float(np.var(tokens))
+        token_power_law_exponent = self.calculate_power_law_exponent(tokens)
+        self.data.token_power_law_exponent_history.append(token_power_law_exponent)
         particles_at_position = [len(cur_par.walker_position.particles_at_this_position) for cur_par in
                                  self.particles]
-        particles_at_position_var = float(np.var(particles_at_position))
+        par_concentration_power_law_exponent = self.calculate_power_law_exponent(particles_at_position)
+        self.data.par_concentration_power_law_exponent_history.append(par_concentration_power_law_exponent)
+
         link_amounts = [cur_par.link_amount() for cur_par in self.particles]
-        link_amounts_var = float(np.var(link_amounts))
+        link_amounts_power_law_exponent = self.calculate_power_law_exponent(link_amounts)
+        self.data.link_amounts_power_law_exponent_history.append(link_amounts_power_law_exponent)
+
         beh_ages = [cur_par.behavior_age for cur_par in self.particles]
         beh_ages_var = float(np.var(beh_ages))
 
         ages = [cur_par.age for cur_par in self.particles]
         self.data.max_age_track.append(max(ages))
 
-        ages_var = float(np.var(ages))
+        ages_power_law_exponent = self.calculate_power_law_exponent(ages)
+        self.data.ages_power_law_exponent_history.append(ages_power_law_exponent)
+
+
         link_ages = [cur_link.age for cur_link in self.links]
         link_ages_var = float(np.var(link_ages))
 
@@ -845,13 +885,14 @@ class Simulation:
 
                 col_amount_main = 4
 
-                row_amount_tot = 9
+                row_amount_tot = 11
                 col_amount_diagrams = 3
+                birth_tree_rows = 3
 
                 col_amount_tot = col_amount_main + col_amount_diagrams
 
-                ax1 = plt.subplot2grid((row_amount_tot, col_amount_tot), (0, 0), colspan=col_amount_main, rowspan=row_amount_tot-2)
-                ax2 = plt.subplot2grid((row_amount_tot, col_amount_tot), (row_amount_tot-2, 0), colspan=col_amount_main, rowspan=2)
+                ax1 = plt.subplot2grid((row_amount_tot, col_amount_tot), (0, 0), colspan=col_amount_main, rowspan=row_amount_tot-birth_tree_rows)
+                ax2 = plt.subplot2grid((row_amount_tot, col_amount_tot), (row_amount_tot-birth_tree_rows, 0), colspan=col_amount_main, rowspan=birth_tree_rows)
 
                 axs = []
 
@@ -871,7 +912,7 @@ class Simulation:
                 self.data.max_token_amount_history = max(int(self.data.max_token_amount_history * backlash), max(tokens))
                 bins = np.linspace(0.0, max(tokens), 30)
                 axs[ax_index].hist(tokens, rwidth=1, bins=bins, color=linecolor, edgecolor=edgecolor)
-                axs[ax_index].set_title(f"Particle Tokens, var={round(tokens_var, 3)}")
+                axs[ax_index].set_title(f"Particle Tokens")
                 # axs[ax_index].set_yscale('log')
                 ax_index += 1
 
@@ -879,23 +920,43 @@ class Simulation:
                                                      max(particles_at_position))
                 bins = np.linspace(0.0, max(particles_at_position), 30)
                 axs[ax_index].hist(particles_at_position, rwidth=1, bins=bins, color=linecolor, edgecolor=edgecolor)
-                axs[ax_index].set_title(f"Particle Concentration, var={round(particles_at_position_var, 3)}")
+                axs[ax_index].set_title(f"Particle Concentration, PL_exp={round(par_concentration_power_law_exponent, 5)}")
                 # axs[ax_index].set_yscale('log')
                 self.data.max_link_amount_history = max(int(self.data.max_link_amount_history * backlash), max(link_amounts))
                 ax_index += 1
 
                 bins = np.linspace(0.0, self.data.max_link_amount_history, 30)
                 axs[ax_index].hist(link_amounts, rwidth=1, bins=bins, color=linecolor, edgecolor=edgecolor)
-                axs[ax_index].set_title(f"Link Amount Distribution, var={round(link_amounts_var, 3)}")
+                axs[ax_index].set_title(f"Link Amount Distribution, PL_exp={round(link_amounts_power_law_exponent, 5)}")
                 # axs[ax_index].set_yscale('log')
                 ax_index += 1
 
                 self.data.max_age_history = max(int(self.data.max_age_history * backlash), max(ages))
                 bins = np.linspace(0.0, max(ages), 30)
                 axs[ax_index].hist(ages, rwidth=1, bins=bins, color=linecolor, edgecolor=edgecolor)
-                axs[ax_index].set_title(f"Particle Age Distribution, var={round(ages_var, 3)}")
+                axs[ax_index].set_title(f"Particle Age Distribution, PL_exp={round(ages_power_law_exponent, 3)}")
                 # axs[ax_index].set_yscale('log')
                 ax_index += 1
+
+                x_iter = np.linspace(0, self.current_iteration, len(self.data.percent_home_history))
+
+                axs[ax_index].set_title(f"Token Power Law Exponent, PL_exp={round(self.data.token_power_law_exponent_history[-1], 5)}")
+                axs[ax_index].plot(x_iter, self.data.token_power_law_exponent_history, color=linecolor)
+                ax_index += 1
+
+                axs[ax_index].set_title(f"Particle Conc- Power Law Exponent, PL_exp={round(self.data.par_concentration_power_law_exponent_history[-1], 5)}")
+                axs[ax_index].plot(x_iter, self.data.par_concentration_power_law_exponent_history, color=linecolor)
+                ax_index += 1
+
+                axs[ax_index].set_title(f"Link Amount Power Law Exponent, PL_exp={round(self.data.link_amounts_power_law_exponent_history[-1], 5)}")
+                axs[ax_index].plot(x_iter, self.data.link_amounts_power_law_exponent_history, color=linecolor)
+                ax_index += 1
+
+                axs[ax_index].set_title(f"Age Power Law Exponent, PL_exp={round(self.data.ages_power_law_exponent_history[-1], 5)}")
+                axs[ax_index].plot(x_iter, self.data.ages_power_law_exponent_history, color=linecolor)
+                ax_index += 1
+
+
 
                 self.data.max_beh_age_history = max(int(self.data.max_beh_age_history * backlash), max(beh_ages))
                 bins = np.linspace(0.0, max(beh_ages), 30)
@@ -950,7 +1011,6 @@ class Simulation:
                 axs[ax_index].set_ylim(0.0, 5.5)
                 ax_index += 1
 
-                x_iter = np.linspace(0, self.current_iteration, len(self.data.percent_home_history))
 
                 axs[ax_index].set_title(f"Steps Diameter {round(self.data.mean_steps_history[-1], 4)}")
                 axs[ax_index].plot(x_iter, self.data.mean_steps_history, color=linecolor)
