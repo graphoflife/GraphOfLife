@@ -502,7 +502,7 @@ class Simulation:
 
     def calculate_power_law_exponent(self, data):
         """
-        Calculate the power-law exponent of a given dataset.
+        Calculate the power-law exponent of a given dataset with dynamic bins.
 
         Parameters:
         - data (list or numpy array): List of integer values.
@@ -510,10 +510,14 @@ class Simulation:
         Returns:
         - float: The slope (negative of the power-law exponent).
         """
+        import numpy as np
+        from scipy.stats import linregress
 
+        # Unique values in the data as bins
+        unique_values = np.unique(data)
+        bins = np.append(unique_values, unique_values[-1] + 1)  # Extend the last bin
 
-        # Create histogram in log space
-        bins = np.logspace(np.log10(min(data)), np.log10(max(data)), num=50)
+        # Create histogram
         hist, edges = np.histogram(data, bins=bins, density=True)
 
         # Calculate bin centers
@@ -529,9 +533,6 @@ class Simulation:
 
         return -slope  # Return the power-law exponent
 
-    # Test the function with the synthetic data
-    calculated_slope = calculate_power_law_exponent(data)
-    calculated_slope
 
     def plot_network(self):
         """
