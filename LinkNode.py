@@ -14,7 +14,6 @@ class LinkNode:
     is_shifting = None
     is_swapping = None
     is_reconnecting = None
-    is_accepting_other_suggestion = None
     information = None
     reconnection_direction_rating = None
 
@@ -69,7 +68,6 @@ class LinkNode:
         self.is_shifting = False
         self.is_swapping = False
         self.is_reconnecting = False
-        self.is_accepting_other_suggestion = False
 
     def reset_info(self):
         """
@@ -80,4 +78,3 @@ class LinkNode:
         self.is_shifting = False
         self.is_swapping = False
         self.is_reconnecting = False
-        self.is_accepting_other_suggestion = False

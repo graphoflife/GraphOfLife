@@ -130,6 +130,9 @@ class SimOptionsEnum(Enum):
     CAN_STILL_SHIFT_AT_NEW_REPRODUCTION = auto()
     REPRODUCTION_LINKS_DECISION = auto()
 
+    CHECK_DEATH_AFTER_PHASE_1 = auto()
+    FRAGMENTATION_REDISTRIBUTION_AFTER_PHASE_1 = auto()
+
 class NewSimOptions:
 
     # Neural Network
@@ -542,15 +545,6 @@ class NewSimOptions:
                                                       meta_type=MetaEnum.NONE)
 
 
-        temp_enum = SimOptionsEnum.INACTIVITY_KILLS_WHICH_PARTICLE
-        self.all_options[temp_enum] = SingleSimOption(name=temp_enum,
-                                                      short_name="IKWP",
-                                                      option="MIN",
-                                                      options=["MIN", "MAX", "RANDOM"],
-                                                      probability=[1.0, 1.0, 1.0],
-                                                      can_meta_evolve=False,
-                                                      meta_type=MetaEnum.NONE)
-
         temp_enum = SimOptionsEnum.META_EVOLUTION_DEC
         self.all_options[temp_enum] = SingleSimOption(name=temp_enum,
                                                       short_name="ME",
@@ -747,7 +741,7 @@ class NewSimOptions:
                                                       short_name="WBW",
                                                       option=False,
                                                       options=[True, False],
-                                                      probability=[1.0, 0.0],   #TODO
+                                                      probability=[1.0, 0.0],   #TODO COMPETITION TOGGLE
                                                       can_meta_evolve=False,
                                                       meta_type=MetaEnum.NONE)
 
@@ -835,4 +829,20 @@ class NewSimOptions:
                                                       can_meta_evolve = True,
                                                       meta_type=MetaEnum.DECISION)
 
+        temp_enum = SimOptionsEnum.CHECK_DEATH_AFTER_PHASE_1
+        self.all_options[temp_enum] = SingleSimOption(name=temp_enum,
+                                                      short_name="CDAP1",
+                                                      option=False,
+                                                      options=[False, True],
+                                                      probability=[1.0, 1.0],
+                                                      can_meta_evolve=False,
+                                                      meta_type=MetaEnum.NONE)
 
+        temp_enum = SimOptionsEnum.FRAGMENTATION_REDISTRIBUTION_AFTER_PHASE_1
+        self.all_options[temp_enum] = SingleSimOption(name=temp_enum,
+                                                      short_name="FRAP1",
+                                                      option=False,
+                                                      options=[False, True],
+                                                      probability=[1.0, 1.0],
+                                                      can_meta_evolve=False,
+                                                      meta_type=MetaEnum.NONE)

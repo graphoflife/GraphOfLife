@@ -15,10 +15,12 @@ import datetime as datetime
 import matplotlib
 import logging
 from numbers import Number
+import pickle
+
 from scipy.stats import linregress
 matplotlib.use('Agg')
 
-VERSION = "v015a_graph_of_life"
+VERSION = "v016a_graph_of_life"
 
 
 class RunOptionsEnum(Enum):
@@ -85,7 +87,9 @@ class Simulation:
         self.links = []
         self.sim_options_original = sim_options
         self.sim_options = copy.deepcopy(self.sim_options_original)
+
         self.data = Data()
+
         self.current_iteration = 0
         self.angle = 0
         self.cur_behavior_index = 0
@@ -111,23 +115,27 @@ class Simulation:
 
         os.makedirs(output_dir, exist_ok=True)
         os.makedirs(every_option_dir, exist_ok=True)
-        if self.run_options_dict[RunOptionsEnum.PLOTTING]:
-            os.makedirs(path, exist_ok=True)
-            self.sim_options.save(self.name, path)
-            log_path = os.path.join(path, "log")
 
-            handler = logging.FileHandler(log_path, mode='a')  # append mode
-            formatter = logging.Formatter('%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s', '%H:%M:%S')
-            handler.setFormatter(formatter)
+        self.path_for_pickle_information = os.path.join(path, "Pickle_Simulation_Information")
 
-            logger = logging.getLogger(log_path)
-            logger.setLevel(logging.DEBUG)
-            logger.addHandler(handler)
+        os.makedirs(path, exist_ok=True)
+        os.makedirs(self.path_for_pickle_information, exist_ok=True)
 
-            # This prevents the log messages from being duplicated in the python output
-            logger.propagate = False
-            self.logger = logger
-            self.logger.warning("init")
+        self.sim_options.save(self.name, path)
+        log_path = os.path.join(path, "log")
+
+        handler = logging.FileHandler(log_path, mode='a')  # append mode
+        formatter = logging.Formatter('%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s', '%H:%M:%S')
+        handler.setFormatter(formatter)
+
+        logger = logging.getLogger(log_path)
+        logger.setLevel(logging.DEBUG)
+        logger.addHandler(handler)
+
+        # This prevents the log messages from being duplicated in the python output
+        logger.propagate = False
+        self.logger = logger
+        self.logger.warning("init")
 
         self.sim_options.save(self.name, every_option_dir)
 
@@ -145,14 +153,14 @@ class Simulation:
         init_token_per_particle = int(self.run_options_dict[RunOptionsEnum.TOKEN_AMOUNT]/self.run_options_dict[RunOptionsEnum.INIT_AGENT_AMOUNT])
         for i in range(self.run_options_dict[RunOptionsEnum.INIT_AGENT_AMOUNT]):
             new_behavior = Behavior(sim_options=sim_options, indexer_f=self.index_behavior, data=self.data)
-            self.particles.append(Particle(token=init_token_per_particle, behavior=new_behavior))
+            self.particles.append(Particle(token=init_token_per_particle, behavior=new_behavior, data=self.data))
         if self.run_options_dict[RunOptionsEnum.INIT_AGENT_AMOUNT] == 2:
-            self.links.append(Link(particle1=self.particles[0], particle2=self.particles[1]))
+            self.links.append(Link(particle1=self.particles[0], particle2=self.particles[1], data=self.data))
         elif self.run_options_dict[RunOptionsEnum.INIT_AGENT_AMOUNT] > 2:
 
             for i in range(len(self.particles)-1):
                 for j in range(i+1, len(self.particles)):
-                    self.links.append(Link(particle1=self.particles[i], particle2=self.particles[j]))
+                    self.links.append(Link(particle1=self.particles[i], particle2=self.particles[j], data=self.data))
             print(len(self.links), len(self.particles)*(len(self.particles) - 1)/2)
 
 
@@ -166,7 +174,14 @@ class Simulation:
                     else:
                         already_connected.append(cur_node.other_node.particle)
 
-    def run_single_iteration(self, redistribute = False):
+
+    def run_single_iteration(self, fragmentation_redistribution = False):
+        self.sim_options = copy.deepcopy(self.sim_options_original)
+
+        self.run_single_iteration_phase1(fragmentation_redistribution=fragmentation_redistribution)
+        self.run_single_iteration_phase2(fragmentation_redistribution=fragmentation_redistribution)
+
+    def run_single_iteration_phase1(self, fragmentation_redistribution = False):
 
         self.sim_options = copy.deepcopy(self.sim_options_original)
 
@@ -230,31 +245,67 @@ class Simulation:
 
         self.kill_duplicate_links(sim_options=self.sim_options, all_links=self.links, dead_links=self.dead_links)
 
-        """
-        if result_repro_percentage != self.data.planted_particles_history[-1] + self.data.reproduced_particles_history[-1]:
-            self.logger.warning("Shouldnt happen 2")
-        """
+        # check death after phase 1 inlsucively redistribution
+        if self.sim_options.get(SimOptionsEnum.CHECK_DEATH_AFTER_PHASE_1):
+            for cur_par in self.particles.copy():
+                cur_par.check_death_after_phase_1(sim_options=self.sim_options, all_links=self.links,
+                                    all_particles=self.particles, data=self.data, dead_particles=self.dead_particles,
+                                    dead_links=self.dead_links)
+
+            if fragmentation_redistribution and self.sim_options.get(SimOptionsEnum.FRAGMENTATION_REDISTRIBUTION_AFTER_PHASE_1):
+                # Redistribute
+                fragmentation_groups = self.get_fragmentation()
+                fragmentation_groups.sort(key=lambda x: len(x), reverse=True)
+                tokens_to_distribute = 0
+                if len(fragmentation_groups) > self.run_options_dict[RunOptionsEnum.KEEP_X_GROUPS]:
+                    for cur_group in fragmentation_groups[self.run_options_dict[RunOptionsEnum.KEEP_X_GROUPS]:]:
+                        for cur_par in cur_group:
+                            tokens_to_distribute += cur_par.token
+                            cur_par.token = 0
+
+                # Check Death
+                for cur_par in self.particles.copy():
+                    cur_par.check_death_after_phase_1(sim_options=self.sim_options, all_links=self.links,
+                                        all_particles=self.particles, data=self.data, dead_particles=self.dead_particles,
+                                        dead_links=self.dead_links)
+
+                for _ in range(int(tokens_to_distribute)):
+
+                    chosen_particle = np.random.choice(self.particles)
+                    chosen_particle.token += 1
+
+                # redistribution end
+
+    def run_single_iteration_phase2(self, fragmentation_redistribution=False):
+
 
         # Game Phase
         self.prepare_game_phase()
         for cur_par in self.particles:
             cur_par.prepare_information(sim_options=self.sim_options)
 
+        # Simulation Logger
+        self.data.simulation_iteration_logger.store_simulation_iteration_information_p1(simulation=self)
+
         # Observation Phase 2
         for cur_par in self.particles:
             cur_par.process_information_and_make_decisions_game_phase(sim_options=self.sim_options, data=self.data,
                                                                       all_particles=self.particles)
 
-
-
         # Eval Game
         for cur_par in self.particles:
             cur_par.eval_game(sim_options=self.sim_options, data=self.data, indexer_f=self.index_behavior)
 
-
         # Apply Behavior
         for cur_par in self.particles:
             cur_par.apply_new_behavior(sim_options=self.sim_options, data=self.data, indexer_f=self.index_behavior)
+
+        # 8 Mutate
+        mutate_all_each_iteration = self.sim_options.get(SimOptionsEnum.MUTATE_ALL_EACH_ITERATION)
+        for cur_par in self.particles:
+            if cur_par.to_mutate or mutate_all_each_iteration:
+                cur_par.behavior.mutate(sim_options=self.sim_options, vis_options=self.vis_options)
+
 
         # Check Activity
         for cur_link in self.links:
@@ -269,7 +320,6 @@ class Simulation:
                 cur_link.check_inactivity(sim_options=self.sim_options, all_links=self.links,
                                           data=self.data, dead_links=self.dead_links)
 
-
         # self.kill_duplicate_links(sim_options=self.sim_options,all_links=self.links,dead_links=self.dead_links)
         # Check Death
         for cur_par in self.particles.copy():
@@ -278,13 +328,7 @@ class Simulation:
                                 dead_links=self.dead_links)
 
 
-        # 8 Mutate
-        mutate_all_each_iteration = self.sim_options.get(SimOptionsEnum.MUTATE_ALL_EACH_ITERATION)
-        for cur_par in self.particles:
-            if cur_par.to_mutate or mutate_all_each_iteration:
-                cur_par.behavior.mutate(sim_options=self.sim_options, vis_options=self.vis_options)
-
-        if redistribute:
+        if fragmentation_redistribution:
             # Redistribute
             fragmentation_groups = self.get_fragmentation()
             fragmentation_groups.sort(key=lambda x: len(x), reverse=True)
@@ -308,6 +352,8 @@ class Simulation:
 
             # redistribution end
 
+        # Simulation Logger
+        self.data.simulation_iteration_logger.store_simulation_iteration_information_p2(simulation=self)
 
         self.data.sort_birth_layer()
 
@@ -321,10 +367,16 @@ class Simulation:
             self.plot_network()
 
 
+        save_path_pickle = os.path.join(self.path_for_pickle_information, f"Iteration {self.current_iteration}.pkl")
+
+        # 🕒 Time Pickle saving
+        with open(save_path_pickle, "wb") as f:
+            pickle.dump(self.data.simulation_iteration_logger, f)
+
 
         self.current_iteration += 1
 
-    def run_main_loop(self, redistribute = False):
+    def run_main_loop(self, fragmentation_redistribution = False):
         """
         The main loop of the simulation.
         :param iterations: The amount of iterations that are executed
@@ -341,7 +393,7 @@ class Simulation:
         while iterations > 0:
             if len(self.particles) == 0:
                 break
-            self.run_single_iteration(redistribute)
+            self.run_single_iteration(fragmentation_redistribution)
             iterations -= 1
 
             

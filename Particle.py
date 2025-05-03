@@ -10,7 +10,10 @@ class Particle:
     The autonomous particle that is the core of the simulation.
     """
 
-    def __init__(self, token, behavior):
+    def __init__(self, token, behavior, data):
+
+        self.sim_data = data
+        self.id = data.get_new_node_index()
 
         self.nodes = []
         self.token = token
@@ -53,6 +56,7 @@ class Particle:
         if self.reconnection_node is not None:
             self.reconnection_node.switch_to_particle(self.reconnection_particle)
             data.reconnection_history[-1] += 1.0
+            data.simulation_iteration_logger.link_reconnections_p1.append((self.id,self.reconnection_node.link.id,self.reconnection_particle.id))
 
     def get_own_node_to_other_particle(self, other_particle):
         for cur_node in self.nodes:
@@ -84,6 +88,7 @@ class Particle:
         :param data: Data for analysis
         """
         winner_particle_here, sum_token_here = self.get_winner_and_amount_of_competition(sim_options=sim_options, competition=self.blotto_competition_here)
+        data.simulation_iteration_logger.game_winner_p2.append((self.id, winner_particle_here.id))
 
         if sim_options.get(SimOptionsEnum.WINNER_TOKEN_GO_TO_COMPETITION_PLACE):
             self.token += sum_token_here
@@ -120,8 +125,9 @@ class Particle:
 
     def apply_new_behavior(self, sim_options, indexer_f, data):
 
+        old_behavior = self.behavior
         self.behavior = Behavior(sim_options=sim_options, parent_behavior=self.new_behavior, indexer_f=indexer_f, data=data)
-
+        data.simulation_iteration_logger.game_behavior_transfer_p2.append((self.id, old_behavior.id, self.new_behavior.id, self.behavior.id))
     def link_amount(self):
         """
         :return: Gets the amount of links this particle has.
@@ -314,6 +320,7 @@ class Particle:
         data.token_self_invested_history[-1] += token_outputs[0, 0]
 
         self.blotto_competition_here[self] = token_outputs[0, 0]
+        data.simulation_iteration_logger.token_attacks_p2.append((self.id, self.id, token_outputs[0, 0]))
         if token_outputs[0, 0] > 0:
             data.attacked_with_x_tokens.append(token_outputs[0, 0])
 
@@ -323,6 +330,8 @@ class Particle:
             cur_node.link.active_value += token_outputs[1, i]
             data.token_other_invested_history[-1] += token_outputs[1, i]
             cur_node.other_node.particle.blotto_competition_here[self] = token_outputs[1, i]
+            data.simulation_iteration_logger.token_attacks_p2.append((self.id, cur_node.other_node.particle.id, token_outputs[1, i]))
+
         self.token = 0
         index += 2
 
@@ -944,11 +953,14 @@ class Particle:
             logger.warning("WARNING, shouldnt happen, repro token error")
 
         new_behavior = Behavior(sim_options=sim_options, parent_behavior=self.behavior, indexer_f=indexer_f, data=data)
-        new_particle = Particle(token=self.reproduction_tokens, behavior=new_behavior)
+        new_particle = Particle(token=self.reproduction_tokens, behavior=new_behavior, data=data)
         new_particle.to_mutate = True
+
+        data.simulation_iteration_logger.reproduced_nodes_p1.append((self.id, new_particle.id))
 
         if self.inherit_walker_position and sim_options.get(SimOptionsEnum.CAN_INHERIT_WALKER_POSITION):
             new_particle.move_to_particle(self.walker_position)
+            data.simulation_iteration_logger.inherit_walker_position_p1.append((self.id, new_particle.id, self.walker_position.id))
 
         self.reproduction_tokens = 0
         all_particles.append(new_particle)
@@ -957,7 +969,8 @@ class Particle:
             data.reproduced_particles_history[-1] += 1.0
 
             for cur_link_par in self.link_creation_particles_for_reproduction:
-                new_link = Link(particle1=cur_link_par, particle2=new_particle)
+                new_link = Link(particle1=cur_link_par, particle2=new_particle, data=data)
+                data.simulation_iteration_logger.reproduction_new_links_p1.append((self.id, new_particle.id, cur_link_par.id))
 
                 if pos is not None:
                     pos[new_particle] = pos[self].copy() * np.random.normal(1, 0.001)
@@ -971,7 +984,7 @@ class Particle:
                     for cur_node in self.nodes:
                         if cur_node.is_shifting:
                             cur_node.switch_to_particle(particle=new_particle)
-
+                            data.simulation_iteration_logger.links_shifts_p1.append((self.id, cur_node.link.id, new_particle.id))
                 all_links.append(new_link)
 
         else:
@@ -985,8 +998,11 @@ class Particle:
                 for cur_node in self.nodes:
                     if cur_node.is_shifting:
                         cur_node.switch_to_particle(particle=new_particle)
+                        data.simulation_iteration_logger.links_shifts_p1.append((self.id, cur_node.link.id, new_particle.id))
 
-                new_link = Link(particle1=self, particle2=new_particle)
+                new_link = Link(particle1=self, particle2=new_particle, data=data)
+                data.simulation_iteration_logger.reproduction_new_links_p1.append((self.id, new_particle.id, self.id))
+
                 if pos is not None:
                     new_link.node1.vis_pos = pos[self].copy()
                     new_link.node2.vis_pos = pos[new_particle].copy()
@@ -994,12 +1010,15 @@ class Particle:
                 all_links.append(new_link)
             else:   # Plant
                 data.planted_particles_history[-1] += 1.0
+                data.simulation_iteration_logger.planted_children_p1.append(self.id)
 
                 if pos is not None:
                     pos[new_particle] = pos[self.plant_particle].copy() * np.random.normal(1, 0.001)
                     vel[new_particle] = np.zeros(3)
 
-                new_link = Link(particle1=self.plant_particle, particle2=new_particle)
+                new_link = Link(particle1=self.plant_particle, particle2=new_particle, data=data)
+                data.simulation_iteration_logger.reproduction_new_links_p1.append((self.id, new_particle.id, self.plant_particle.id))
+
                 if pos is not None:
                     new_link.node1.vis_pos = pos[self].copy()
                     new_link.node2.vis_pos = pos[new_particle].copy()
@@ -1017,40 +1036,79 @@ class Particle:
         """
         if self.token == 0:
             data.died_particles_history[-1] += 1.0
-            for cur_node in self.nodes.copy():
-                cur_node.link.kill_link(sim_options=sim_options, all_links=all_links, dead_links=dead_links)
+            data.simulation_iteration_logger.dead_nodes_p2.append(self.id)
 
             self.walker_position.particles_at_this_position.remove(self)
 
             for cur_par in self.particles_at_this_position.copy():
+
                 if sim_options.get(SimOptionsEnum.MOVE_RANDOMLY_WHEN_DEATH):
                     if len(self.nodes) == 0:
-                        cur_par.move_to_particle(cur_par)
+                        move_par = cur_par
                     else:
                         choice = np.random.choice(self.nodes)
-                        cur_par.move_to_particle(choice.other_node.particle)
+                        move_par = choice.other_node.particle
 
                 elif sim_options.get(SimOptionsEnum.CAN_MOVE_WHEN_DEATH):
 
                     if cur_par.go_particle is self or len(cur_par.go_particle.nodes) == 0:
-                        cur_par.move_to_particle(cur_par)
+                        move_par = cur_par
                     else:
-                        cur_par.move_to_particle(cur_par.go_particle)
+                        move_par = cur_par.go_particle
                 else:
-                    cur_par.move_to_particle(cur_par)
+                    move_par = cur_par
+
+                cur_par.move_to_particle(move_par)
+                data.simulation_iteration_logger.walker_movements_because_death_p2.append((cur_par.id, self.id, move_par.id))
+
+            for cur_node in self.nodes.copy():
+                cur_node.link.kill_link(sim_options=sim_options, all_links=all_links, dead_links=dead_links)
 
             all_particles.remove(self)
             dead_particles.append(self)
 
+    def check_death_after_phase_1(self, sim_options, all_links, all_particles, data, dead_particles, dead_links):
+        """
+        If particle has no tokens anymore, it vanishes. The particle that inherits the links is chosen by the heritage
+        ratings of the particle.
+        :param sim_options: Options of Simulation
+        :param all_links: Array of all links of simulation
+        :param all_particles: Array of all particles of simulation
+        :param data: Data for analysis
+        """
+        if self.token == 0:
+            data.died_particles_history[-1] += 1.0
+            data.simulation_iteration_logger.dead_nodes_p1.append(self.id)
+
+            self.walker_position.particles_at_this_position.remove(self)
+
+            for cur_par in self.particles_at_this_position.copy():
+                if len(self.nodes) == 0:
+                    move_par = cur_par
+                else:
+                    choice = np.random.choice(self.nodes)
+                    move_par = choice.other_node.particle
+                cur_par.move_to_particle(move_par)
+
+                data.simulation_iteration_logger.walker_movements_because_death_p1.append((cur_par.id, self.id, move_par.id))
+
+
+            for cur_node in self.nodes.copy():
+                cur_node.link.kill_link(sim_options=sim_options, all_links=all_links, dead_links=dead_links)
+
+            all_particles.remove(self)
+            dead_particles.append(self)
 
     def move_to_particle(self, particle):
         """
         Moves the reference/position Particle to another particle
         :param particle: Move reference/position to this particle
         """
+        origin_particle = self.walker_position
         self.walker_position.particles_at_this_position.remove(self)
         self.walker_position = particle
         self.walker_position.particles_at_this_position.append(self)
+        self.sim_data.simulation_iteration_logger.walker_movements_p1.append((self.id, origin_particle.id, particle.id))
 
     def try_making_new_link(self, sim_options, all_links, data, pos):
 
@@ -1061,10 +1119,12 @@ class Particle:
             # if reached -> not connected
             if not self.can_new_link:
                 data.declined_new_links_history[-1] += 1.0
+                data.simulation_iteration_logger.declined_links.append(self.id)
                 return  # new link has been declined
 
             data.new_links_spawned_history[-1] += 1.0
-            new_link = Link(particle1=self, particle2=self.walker_position)
+            new_link = Link(particle1=self, particle2=self.walker_position, data=data)
+            data.simulation_iteration_logger.new_links_to_walker_p1.append((self.id, self.walker_position.id))
             if pos is not None:
                 new_link.node1.vis_pos = pos[self]
                 new_link.node2.vis_pos = pos[self]

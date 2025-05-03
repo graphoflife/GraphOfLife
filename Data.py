@@ -1,14 +1,121 @@
 import numpy as np
+import json
+
+class Serializable:
+    def to_dict(self):
+        return self.__dict__
+
+    @classmethod
+    def from_dict(cls, data):
+        obj = cls.__new__(cls)  # Create instance without calling __init__
+        obj.__dict__.update(data)
+        return obj
+
+    def save_json(self, filepath):
+        with open(filepath, 'w') as f:
+            json.dump(self.to_dict(), f, indent=2)
+
+    @classmethod
+    def load_json(cls, filepath):
+        with open(filepath, 'r') as f:
+            data = json.load(f)
+        return cls.from_dict(data)
+
+class SimulationIterationLogger:
+
+    def __init__(self):
+
+        # after phase 1
+        self.nodes_p1 = [] #node_id
+        self.edges_p1 = [] #edge_id, node1_id, node2_id
+        self.behaviors_p1 = [] #node_id, corresponding_behavior_id
+        self.node_walkers_p1 = [] #node_id, walker_node_id
+        self.node_tokens_p1 = [] #node_id, token_amount
+
+        self.behavior_swaps_p1 = [] #node1_id, node2_id
+        self.link_reconnections_p1 = [] #node_id, edge_id, node_id_to_switch_to
+        self.new_links_to_walker_p1 = [] #node1_id, node2_id
+        self.declined_links = [] #node_id
+        self.walker_movements_p1 = [] #node_id, node_id_walker_origin, node_id_walker_destination
+        self.reproduced_nodes_p1 = [] #node_id_parent, node_id_child
+        self.inherit_walker_position_p1 = [] #node_id_parent, node_id_child, node_id_walker
+        self.reproduction_new_links_p1 = [] #node_id_parent, node_id_child, node_id_child_to_connect
+        self.planted_children_p1 = [] #node_id_parent
+        self.links_shifts_p1 = [] #node_id_that_shifts, edge_id_to_switch, node_id_switch_to
+        self.dead_nodes_p1 = [] # node_id
+        self.walker_movements_because_death_p1 = [] # node_id, node_id_walker_origin (the one that died), node_id_walker_destination
+
+        # after phase 2
+        self.nodes_p2 = [] #node_id
+        self.edges_p2 = [] #edge_id, node1_id, node2_id
+        self.behaviors_p2 = [] #node_id, corresponding_behavior_id
+        self.node_walkers_p2 = [] #node_id, walker_node_id
+        self.node_tokens_p2 = [] #node_id, token_amount
+
+        self.token_attacks_p2 = [] #node_id_sender, node_id_receiver, token_amount
+        self.walker_movements_because_death_p2 = [] #node_id, node_id_walker_origin (the one that died), node_id_walker_destination
+        self.game_winner_p2 = [] #node_id_of_competition_place, node_id_of_winner
+        self.game_behavior_transfer_p2 = []  # node_id, old_behavior_id, parent_behavior_id, new_behavior_id
+        self.dead_nodes_p2 = []# node_id
+
+        self.node_ages_p2 = [] #node_id, age
+        self.behavior_ages_p2 = [] # behavior_id, age
+
+        self.killed_links_tot = [] # edge_id (done in kill link)
+
+    def store_simulation_iteration_information_p1(self, simulation):
+
+        for cur_par in simulation.particles:
+            self.nodes_p1.append(cur_par.id)
+            self.behaviors_p1.append((cur_par.id, cur_par.behavior.id))
+            self.node_walkers_p1.append((cur_par.id, cur_par.walker_position.id))
+            self.node_tokens_p1.append((cur_par.id, int(cur_par.token)))
+        for cur_link in simulation.links:
+            self.edges_p1.append((cur_link.id, cur_link.node1.particle.id, cur_link.node2.particle.id))
+
+    def store_simulation_iteration_information_p2(self, simulation):
+        for cur_par in simulation.particles:
+            self.nodes_p2.append(cur_par.id)
+            self.behaviors_p2.append((cur_par.id, cur_par.behavior.id))
+            self.node_walkers_p2.append((cur_par.id, cur_par.walker_position.id))
+            self.node_tokens_p2.append((cur_par.id, int(cur_par.token)))
+
+            self.node_ages_p2.append((cur_par.id, cur_par.age))
+            self.behavior_ages_p2.append((cur_par.behavior.id, cur_par.behavior_age))
+
+        for cur_link in simulation.links:
+            self.edges_p2.append((cur_link.id, cur_link.node1.particle.id, cur_link.node2.particle.id))
+
 
 class Data:
     """
     Data container for analysis of the simulation.
     """
 
+    def get_new_node_index(self):
+        self.current_node_index += 1
+        return self.current_node_index
+
+    def get_new_edge_index(self):
+        self.current_edge_index += 1
+        return self.current_edge_index
+
+    def get_new_behavior_index(self):
+        self.current_behavior_index += 1
+        return self.current_behavior_index
+
+
     def __init__(self):
         """
         Initialize all all data variables
         """
+
+        self.current_node_index = 0
+        self.current_edge_index = 0
+        self.current_behavior_index = 0
+
+        self.simulation_iteration_logger = None
+
         self.particle_amount_history_init = []
         self.particle_amount_history_after_phase1 = []
 
@@ -72,6 +179,8 @@ class Data:
         self.ages_power_law_exponent_history = []
 
     def prepare(self, particles, links):
+
+        self.simulation_iteration_logger = SimulationIterationLogger()
 
         # Prepare data arrays for analysis
         self.particle_amount_history_init.append(len(particles))

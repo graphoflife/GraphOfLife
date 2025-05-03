@@ -18,7 +18,11 @@ class Link:
     vis_max_color_value = None
 
 
-    def __init__(self, particle1, particle2):
+    def __init__(self, particle1, particle2, data):
+
+        self.sim_data = data
+        self.id = data.get_new_edge_index()
+
         self.node1 = LinkNode()
         self.node2 = LinkNode()
         if particle1 is None or particle2 is None:
@@ -66,6 +70,8 @@ class Link:
             self.node1.particle.behavior, self.node2.particle.behavior = self.node2.particle.behavior, \
                                                                          self.node1.particle.behavior
 
+            data.simulation_iteration_logger.behavior_swaps_p1.append((self.node1.particle.id, self.node2.particle.id))
+
 
     def kill_link(self, sim_options, all_links, dead_links):
         """
@@ -79,6 +85,7 @@ class Link:
         self.node2.disconnect()
         all_links.remove(self)
         dead_links.append(self)
+        self.sim_data.simulation_iteration_logger.killed_links_tot.append(self.id)
 
 
 

@@ -9,6 +9,9 @@ class Behavior:
 
     def __init__(self, sim_options: NewSimOptions, indexer_f, data, parent_behavior=None):
 
+        self.sim_data = data
+        self.id = data.get_new_behavior_index()
+
         self.index = indexer_f()
         self.parent_index = -1
         self.parent_of_parent = -1
