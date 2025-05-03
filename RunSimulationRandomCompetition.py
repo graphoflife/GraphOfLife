@@ -5,7 +5,7 @@ import datetime as datetime
 
 
 # Amount of tokens range that exist. Determines the max size of Network and max Memory usage
-ALL_TOKEN_AMOUNT_INIT = 25*10*10
+ALL_TOKEN_AMOUNT_INIT = 25*20*10
 
 
 def redistribute_tokens_across_simulations(all_simulations, phase = 1):
@@ -67,12 +67,12 @@ while True:
     ALL_TOKEN_AMOUNT = ALL_TOKEN_AMOUNT_INIT
 
     name = f"Competition_" + datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S_%f")
-    parent_dir = r"C:\Users\stefa\GameOfEvolution\outputs\Competition"
+    parent_dir = r"D:\GraphOfLifeOuputs"
 
     path = os.path.join(parent_dir, name)
     os.makedirs(path, exist_ok=True)
 
-    iterations_per_competition = 1000
+    iterations_per_competition = 500
 
     for i in range(iterations_per_competition):
 
@@ -116,7 +116,20 @@ while True:
         redistribute_tokens_across_simulations(all_simulations=all_simulations, phase=2)
 
         print(f"Next Iteration {i}")
-        print("All tokens", ALL_TOKEN_AMOUNT + sum([sum([cur_par.token for cur_par in cur_sim.particles]) for cur_sim in all_simulations]))
+        print("All tokens", sum([sum([cur_par.token for cur_par in cur_sim.particles]) for cur_sim in all_simulations]))
+        print("Simulation Amount", len(all_simulations))
+
+        tokens_to_distribute = 0
+        all_particles = []
+        for cur_sim in all_simulations.copy():
+            if len(cur_sim.particles) <= 3:
+                tokens_to_distribute += sum([cur_par.token for cur_par in cur_sim.particles])
+                all_simulations.remove(cur_sim)
+            else:
+                all_particles += cur_sim.particles
+        for _ in range(int(tokens_to_distribute)):
+            choice = np.random.choice(all_particles)
+            choice.token += 1
 
         if len(all_simulations) == 1:
             break
