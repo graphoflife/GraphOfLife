@@ -394,6 +394,10 @@ class Simulation:
             if len(self.particles) == 0:
                 break
             self.run_single_iteration(fragmentation_redistribution)
+            print("Tokens", sum([cur_par.token for cur_par in self.particles]),
+                  ", Particles", len(self.particles),
+                  ", Links", len(self.links),
+                  ", Iteration", self.current_iteration, self.name)
             iterations -= 1
 
             
