@@ -956,7 +956,7 @@ class Particle:
         new_particle = Particle(token=self.reproduction_tokens, behavior=new_behavior, data=data)
         new_particle.to_mutate = True
 
-        data.simulation_iteration_logger.reproduced_nodes_p1.append((self.id, new_particle.id))
+        data.simulation_iteration_logger.reproduced_nodes_p1.append((self.id, new_particle.id, self.reproduction_tokens))
 
         if self.inherit_walker_position and sim_options.get(SimOptionsEnum.CAN_INHERIT_WALKER_POSITION):
             new_particle.move_to_particle(self.walker_position)

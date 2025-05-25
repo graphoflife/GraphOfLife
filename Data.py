@@ -56,7 +56,7 @@ class SimulationIterationLogger:
         self.walker_movements_because_death_p2 = [] #node_id, node_id_walker_origin (the one that died), node_id_walker_destination
         self.game_winner_p2 = [] #node_id_of_competition_place, node_id_of_winner
         self.game_behavior_transfer_p2 = []  # node_id, old_behavior_id, parent_behavior_id, new_behavior_id
-        self.dead_nodes_p2 = []# node_id
+        self.dead_nodes_p2 = [] # node_id
 
         self.node_ages_p2 = [] #node_id, age
         self.behavior_ages_p2 = [] # behavior_id, age
