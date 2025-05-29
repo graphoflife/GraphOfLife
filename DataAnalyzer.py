@@ -6,7 +6,13 @@ import networkx as nx
 
 # TODO Recreate current diagrams
 
+# TODO seperately try to understand p1 and p2 maybe?
+
+# TODO dimensionality
+
 # TODO make analysis per node
+
+# TODO track inactive links
 
 # TODO find reason for death in p2... part of smaller network or no tokens there after game?
 
@@ -211,38 +217,40 @@ class Node:
     int_behavior_age_before_p1: int = None # TODO
     int_behavior_age_after_p2: int = None  # TODO
 
-    amount_token_before_p1: int = None # TODO
-    amount_token_used_for_reproduction: int = None # TODO
+    amount_token_before_p1: int = None
+    amount_token_used_for_reproduction: int = None
+
     id_of_child: int = None
     id_of_parent: int = None
 
-    amount_token_received_during_p1_through_redistribution: int = None # TODO
-    bool_did_plant: bool = None # TODO
-    amount_token_after_p1: int = None # TODO
-    amount_token_used_for_defense: int = None # TODO
-    dict_token_used_for_node_attacks: dict = None # TODO
-    amount_token_used_for_attack: int = None # TODO
-    dict_blotto_competition_here: dict = None # TODO
-    amount_total_competition_token: int = None # TODO
-    amount_token_that_winner_has_allocated: int = None # TODO
-    bool_did_win_at_home: bool = None # TODO
-    bool_did_win_elsewhere: bool = None # TODO
-    ids_did_win_at_these_nodes = None # TODO
-    amount_wins_somewhere = None # TODO
-    amount_wins_elsewhere = None # TODO
+    amount_token_received_during_p1_through_redistribution: int = None
+    bool_did_plant: bool = None
+    amount_token_after_p1: int = None
+    amount_token_used_for_defense: int = None
+    dict_token_used_for_node_attacks: dict = None
+    amount_token_used_for_attack: int = None
+    dict_blotto_competition_here: dict = None
+    amount_total_competition_token: int = None
+    amount_token_that_winner_has_allocated: int = None
+    bool_did_win_at_home: bool = None
+    bool_did_win_elsewhere: bool = None
+    ids_did_win_at_these_nodes = None
+    amount_wins_somewhere = None
+    amount_wins_elsewhere = None
 
-    amount_token_after_p2: int = None # TODO
+    amount_token_after_p2: int = None
 
-    bool_spawned_this_iteration_p1: bool = None # TODO
-    bool_did_reproduce_this_iteration_p1: bool = None # TODO
-    bool_died_because_all_tokens_used_for_reproduction_during_p1: bool = None # TODO
-    bool_died_instantly_after_spawning_during_p1: bool = None # TODO
-    bool_died_because_it_was_part_of_smaller_fragmented_network_p1: bool = None # TODO
-    bool_died_during_p1: bool = None # TODO
+    bool_spawned_this_iteration_p1: bool = None
+    bool_did_reproduce_this_iteration_p1: bool = None
+    bool_died_because_all_tokens_used_for_reproduction_during_p1: bool = None
+    bool_died_instantly_after_spawning_during_p1: bool = None
+    bool_died_because_it_was_part_of_smaller_fragmented_network_p1: bool = None
+    bool_died_during_p1: bool = None
 
-    bool_died_because_of_competition_p2: bool = None # TODO
-    bool_died_because_it_was_part_of_smaller_fragmented_network_p2: bool = None # TODO
-    bool_died_during_p2: bool = None # TODO
+    bool_died_because_of_competition_p2: bool = None
+    bool_died_because_it_was_part_of_smaller_fragmented_network_p2: bool = None
+    bool_died_during_p2: bool = None
+    amount_token_received_during_p2_through_redistribution: int = None # TODO
 
 
     float_dimensionality_after_p1: float = None # TODO
@@ -278,8 +286,11 @@ class Node:
     float_community_membership_after_p1: float = None # TODO
     float_community_membership_after_p2: float = None # TODO
 
-    float_hubs_and_authorities_after_p1: float = None # TODO
-    float_hubs_and_authorities_after_p2: float = None # TODO
+    float_hubs_score_after_p1: float = None # TODO
+    float_hubs_score_after_p2: float = None # TODO
+
+    float_authority_score_after_p1: float = None # TODO
+    float_authority_score_after_p2: float = None # TODO
 
     float_ollivier_ricci_curvature_after_p1: float = None # TODO
     float_ollivier_ricci_curvature_after_p2: float = None # TODO
@@ -295,9 +306,6 @@ class Node:
 
     float_shannon_entropy_after_p1: float = None # TODO
     float_shannon_entropy_after_p2: float = None # TODO
-
-    float_node_communicability_after_p1: float = None # TODO
-    float_node_communicability_after_p2: float = None # TODO
 
 
 all_nodes = {}
@@ -321,6 +329,116 @@ for cur_node_id in ids_unique_nodes:
         cur_node.ids_neighboring_nodes_after_p2 = list(G_after_p2.neighbors(cur_node_id))
         cur_node.amount_neighbors_after_p2 = G_after_p2.degree(cur_node_id)
 
+
+closeness_centrality_after_p1 = nx.closeness_centrality(G_after_p1)
+closeness_centrality_after_p2 = nx.closeness_centrality(G_after_p2)
+
+betweenness_after_p1 = nx.betweenness_centrality(G_after_p1)
+betweenness_after_p2 = nx.betweenness_centrality(G_after_p2)
+
+eigenvector_after_p1 = nx.eigenvector_centrality(G_after_p1, max_iter=1000)
+eigenvector_after_p2 = nx.eigenvector_centrality(G_after_p2, max_iter=1000)
+
+clustering_after_p1 = nx.clustering(G_after_p1)
+clustering_after_p2 = nx.clustering(G_after_p2)
+
+k_core_after_p1 = nx.core_number(G_after_p1)
+k_core_after_p2 = nx.core_number(G_after_p2)
+
+local_efficiency_after_p1 = {n: nx.local_efficiency(G_after_p1.subgraph(G_after_p1.neighbors(n)).copy()) for n in G_after_p1.nodes()}
+local_efficiency_after_p2 = {n: nx.local_efficiency(G_after_p2.subgraph(G_after_p2.neighbors(n)).copy()) for n in G_after_p2.nodes()}
+
+eccentricity_after_p1 = nx.eccentricity(G_after_p1)
+eccentricity_after_p2 = nx.eccentricity(G_after_p2)
+
+avg_shortest_path_len_after_p1 = {n: sum(nx.single_source_shortest_path_length(G_after_p1, n).values()) / (len(G_after_p1) - 1) for n in G_after_p1.nodes()}
+avg_shortest_path_len_after_p2 = {n: sum(nx.single_source_shortest_path_length(G_after_p2, n).values()) / (len(G_after_p2) - 1) for n in G_after_p2.nodes()}
+
+assortativity_after_p1 = nx.degree_assortativity_coefficient(G_after_p1)
+assortativity_after_p2 = nx.degree_assortativity_coefficient(G_after_p2)
+
+max_r_after_p1 = max(dict(nx.eccentricity(G_after_p1)).values())
+max_r_after_p2 = max(dict(nx.eccentricity(G_after_p2)).values())
+def compute_fractal_dimensionality(G, max_r):
+    fractal_dim = {n: [] for n in G.nodes()}
+    for node in G.nodes():
+        for r in range(max_r + 1):
+            nodes_within_r = nx.single_source_shortest_path_length(G, node, cutoff=r)
+            fractal_dim[node].append(len(nodes_within_r))
+    return fractal_dim
+
+fractal_dim_list_after_p1 = compute_fractal_dimensionality(G_after_p1, max_r_after_p1)
+fractal_dim_list_after_p2 = compute_fractal_dimensionality(G_after_p2, max_r_after_p2)
+
+from networkx.algorithms import community, hits, communicability
+from scipy.stats import entropy
+
+communities_after_p1 = list(community.greedy_modularity_communities(G_after_p1))
+community_membership_after_p1 = {}
+for i, comm in enumerate(communities_after_p1):
+    for node in comm:
+        community_membership_after_p1[node] = i
+communities_after_p2 = list(community.greedy_modularity_communities(G_after_p2))
+community_membership_after_p2 = {}
+for i, comm in enumerate(communities_after_p2):
+    for node in comm:
+        community_membership_after_p2[node] = i
+
+hubs_after_p1, authorities_after_p1 = hits(G_after_p1, max_iter=1000)
+hubs_after_p2, authorities_after_p2 = hits(G_after_p2, max_iter=1000)
+
+def shannon_entropy_per_node(G):
+    A = nx.to_numpy_array(G)
+    D_inv = np.linalg.inv(np.diag(A.sum(axis=1)))
+    P = D_inv @ A  # Transition matrix
+    entropies = {}
+    for i, node in enumerate(G.nodes()):
+        p_i = P[i]
+        entropies[node] = entropy(p_i[p_i > 0], base=2)
+    return entropies
+
+shannon_ent_after_p1 = shannon_entropy_per_node(G_after_p1)
+shannon_ent_after_p2 = shannon_entropy_per_node(G_after_p2)
+
+
+
+def safe_setattr(node_obj, attr, value):
+    if node_obj is not None:
+        setattr(node_obj, attr, value)
+
+# Replace dict_name and attribute_name accordingly
+def assign_from_dict(data_dict, attr_name):
+    for node_id, value in data_dict.items():
+        node = all_nodes.get(node_id)
+        safe_setattr(node, attr_name, value)
+
+# Assign from all dictionaries (after_p1)
+assign_from_dict(closeness_centrality_after_p1, 'float_closeness_centrality_after_p1')
+assign_from_dict(betweenness_after_p1, 'float_betweenness_centrality_after_p1')
+assign_from_dict(eigenvector_after_p1, 'float_eigenvector_centrality_after_p1')
+assign_from_dict(clustering_after_p1, 'float_clustering_coefficient_after_p1')
+assign_from_dict(k_core_after_p1, 'float_k_core_number_after_p1')
+assign_from_dict(local_efficiency_after_p1, 'float_local_efficiency_after_p1')
+assign_from_dict(eccentricity_after_p1, 'float_eccentricity_after_p1')
+assign_from_dict(avg_shortest_path_len_after_p1, 'float_average_shortest_path_length_after_p1')
+assign_from_dict(shannon_ent_after_p1, 'float_shannon_entropy_after_p1')
+assign_from_dict(hubs_after_p1, 'float_hubs_score_after_p1')
+assign_from_dict(authorities_after_p1, 'float_authority_score_after_p1')
+assign_from_dict(community_membership_after_p1, 'float_community_membership_after_p1')
+
+# Do the same for after_p2
+assign_from_dict(closeness_centrality_after_p2, 'float_closeness_centrality_after_p2')
+assign_from_dict(betweenness_after_p2, 'float_betweenness_centrality_after_p2')
+assign_from_dict(eigenvector_after_p2, 'float_eigenvector_centrality_after_p2')
+assign_from_dict(clustering_after_p2, 'float_clustering_coefficient_after_p2')
+assign_from_dict(k_core_after_p2, 'float_k_core_number_after_p2')
+assign_from_dict(local_efficiency_after_p2, 'float_local_efficiency_after_p2')
+assign_from_dict(eccentricity_after_p2, 'float_eccentricity_after_p2')
+assign_from_dict(avg_shortest_path_len_after_p2, 'float_average_shortest_path_length_after_p2')
+assign_from_dict(shannon_ent_after_p2, 'float_shannon_entropy_after_p2')
+assign_from_dict(hubs_after_p2, 'float_hubs_score_after_p2')
+assign_from_dict(authorities_after_p2, 'float_authority_score_after_p2')
+assign_from_dict(community_membership_after_p2, 'float_community_membership_after_p2')
 
 
 for cur_node_walker in last_step.node_walkers_p2:
@@ -366,7 +484,7 @@ for cur_repro in cur_step.reproduced_nodes_p1:
     child_node.bool_died_because_it_was_part_of_smaller_fragmented_network_p1 = False
 for cur_node_id in ids_nodes_before_p1:
     cur_node = all_nodes[cur_node_id]
-    cur_node.amount_token_used_for_reproduction = amount_token_used_for_reproduction or 0
+    cur_node.amount_token_used_for_reproduction = cur_node.amount_token_used_for_reproduction or 0
     cur_node.bool_did_reproduce_this_iteration_p1 = cur_node.bool_did_reproduce_this_iteration_p1 or False
     cur_node.bool_died_because_all_tokens_used_for_reproduction_during_p1 = cur_node.bool_died_because_all_tokens_used_for_reproduction_during_p1 or False
 for cur_node_id in list(set(ids_nodes_after_p1 + ids_nodes_after_p2)):
@@ -396,39 +514,83 @@ for cur_node_id in ids_nodes_before_p1:
     cur_node = all_nodes[cur_node_id]
     cur_node.bool_did_plant = cur_node.bool_did_plant or False
 
+for cur_node_id in ids_nodes_after_p1:
+    cur_node = all_nodes[cur_node_id]
+    cur_node.dict_blotto_competition_here = {}
+    cur_node.dict_token_used_for_node_attacks = {}
+    cur_node.amount_token_used_for_attack = 0
+    cur_node.amount_token_used_for_defense = 0
+    cur_node.amount_total_competition_token = 0
+    cur_node.bool_died_because_it_was_part_of_smaller_fragmented_network_p2 = False
+for cur_token_attack in cur_step.token_attacks_p2:
 
-amount_token_before_p1: int = None
-amount_token_used_for_reproduction: int = None
-amount_token_received_during_p1_through_redistribution: int = None # TODO
-bool_did_plant: bool = None
-amount_token_after_p1: int = None
-amount_token_used_for_defense: int = None # TODO
-dict_token_used_for_node_attacks: dict = None # TODO
-amount_token_used_for_attack: int = None # TODO
-dict_blotto_competition_here: dict = None # TODO
-amount_total_competition_token: int = None # TODO
-amount_token_that_winner_has_allocated: int = None # TODO
-bool_did_win_at_home: bool = None # TODO
-bool_did_win_elsewhere: bool = None # TODO
-ids_did_win_at_these_nodes = None # TODO
-amount_wins_somewhere = None # TODO
-amount_wins_elsewhere = None # TODO
+    attacker_node_id = cur_token_attack[0]
+    attacked_node_id = cur_token_attack[1]
+    amount_token_attack = cur_token_attack[2]
 
-amount_token_after_p2: int = None
+    attacker_node = all_nodes[attacker_node_id]
+    attacked_node = all_nodes[attacked_node_id]
 
-
-bool_spawned_this_iteration_p1: bool = None
-bool_did_reproduce_this_iteration_p1: bool = None
-bool_died_because_all_tokens_used_for_reproduction_during_p1: bool = None
-bool_died_instantly_after_spawning_during_p1: bool = None
-bool_died_because_it_was_part_of_smaller_fragmented_network_p1: bool = None
-bool_died_during_p1: bool = None
-
-bool_died_because_of_competition_p2: bool = None # TODO
-bool_died_because_it_was_part_of_smaller_fragmented_network_p2: bool = None # TODO
-bool_died_during_p2: bool = None
+    attacked_node.dict_blotto_competition_here[attacker_node_id] = amount_token_attack
+    attacker_node.dict_token_used_for_node_attacks[attacked_node_id] = amount_token_attack
+    if attacker_node_id == attacked_node_id:
+        attacker_node.amount_token_used_for_defense += amount_token_attack
+    else:
+        attacker_node.amount_token_used_for_attack += amount_token_attack
+    attacked_node.amount_total_competition_token += amount_token_attack
+for cur_node_id in ids_nodes_after_p1:
+    cur_node = all_nodes[cur_node_id]
+    # TODO this is only true if WINNER_TOKEN_GO_TO_COMPETITION_PLACE = True
+    if cur_node.amount_total_competition_token == 0:
+        cur_node.bool_died_because_of_competition_p2 = True
+    else:
+        cur_node.bool_died_because_of_competition_p2 = False
+        if cur_node_id in ids_nodes_death_during_p2:
+            cur_node.bool_died_because_it_was_part_of_smaller_fragmented_network_p2 = True
 
 
+
+
+for cur_node_id in ids_nodes_after_p1:
+    cur_node = all_nodes[cur_node_id]
+    cur_node.bool_did_win_elsewhere = False
+    cur_node.ids_did_win_at_these_nodes = []
+    cur_node.amount_wins_somewhere = 0
+    cur_node.amount_wins_elsewhere = 0
+for cur_game_winner in cur_step.game_winner_p2:
+    competition_node_id = cur_game_winner[0]
+    winner_node_id = cur_game_winner[1]
+
+    competition_node = all_nodes[competition_node_id]
+    winner_node = all_nodes[winner_node_id]
+
+    competition_node.amount_token_that_winner_has_allocated = competition_node.dict_blotto_competition_here[winner_node_id]
+    if competition_node_id == winner_node_id:
+        competition_node.bool_did_win_at_home = True
+    else:
+        competition_node.bool_did_win_at_home = False
+        winner_node.bool_did_win_elsewhere = True
+        winner_node.amount_wins_elsewhere += 1
+    winner_node.amount_wins_somewhere += 1
+    winner_node.ids_did_win_at_these_nodes.append(competition_node_id)
+
+for cur_node_id in ids_nodes_after_p1:
+    cur_node = all_nodes[cur_node_id]
+    if cur_node.bool_spawned_this_iteration_p1:
+        reproduction_tokens = all_nodes[cur_node.id_of_parent].amount_token_used_for_reproduction
+        cur_node.amount_token_received_during_p1_through_redistribution = cur_node.amount_token_after_p1 - reproduction_tokens
+    else:
+        reproduction_tokens = cur_node.amount_token_used_for_reproduction
+        token_amount_before = cur_node.amount_token_before_p1
+        token_amount_after = cur_node.amount_token_after_p1
+        cur_node.amount_token_received_during_p1_through_redistribution = token_amount_after - token_amount_before + reproduction_tokens
+
+for cur_node_id in ids_nodes_after_p2:
+    # TODO this is only true if WINNER_TOKEN_GO_TO_COMPETITION_PLACE = True
+    cur_node = all_nodes[cur_node_id]
+    token_after = cur_node.amount_token_after_p2
+    competition_token = cur_node.amount_total_competition_token
+    cur_node.amount_token_received_during_p2_through_redistribution = token_after - competition_token
 
 def get_distribution_amount_token_used_for_reproduction_(reproduced_nodes_p1):
     counter_dict_to_fill = {}
