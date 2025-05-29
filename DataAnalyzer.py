@@ -234,6 +234,8 @@ class Node:
     amount_token_that_winner_has_allocated: int = None
     bool_did_win_at_home: bool = None
     bool_did_win_elsewhere: bool = None
+    bool_did_win_somewhere: bool = None
+
     ids_did_win_at_these_nodes = None
     amount_wins_somewhere = None
     amount_wins_elsewhere = None
@@ -250,47 +252,44 @@ class Node:
     bool_died_because_of_competition_p2: bool = None
     bool_died_because_it_was_part_of_smaller_fragmented_network_p2: bool = None
     bool_died_during_p2: bool = None
-    amount_token_received_during_p2_through_redistribution: int = None # TODO
+    amount_token_received_during_p2_through_redistribution: int = None
 
 
     float_dimensionality_after_p1: float = None # TODO
     float_dimensionality_after_p2: float = None # TODO
 
-    float_closeness_centrality_after_p1: float = None # TODO
-    float_closeness_centrality_after_p2: float = None # TODO
+    float_closeness_centrality_after_p1: float = None
+    float_closeness_centrality_after_p2: float = None
 
-    float_betweenness_centrality_after_p1: float = None # TODO
-    float_betweenness_centrality_after_p2: float = None # TODO
+    float_betweenness_centrality_after_p1: float = None
+    float_betweenness_centrality_after_p2: float = None
 
-    float_eigenvector_centrality_after_p1: float = None # TODO
-    float_eigenvector_centrality_after_p2: float = None # TODO
+    float_eigenvector_centrality_after_p1: float = None
+    float_eigenvector_centrality_after_p2: float = None
 
-    float_clustering_coefficient_after_p1: float = None # TODO
-    float_clustering_coefficient_after_p2: float = None # TODO
+    float_clustering_coefficient_after_p1: float = None
+    float_clustering_coefficient_after_p2: float = None
 
-    float_k_core_number_after_p1: float = None # TODO
-    float_k_core_number_after_p2: float = None # TODO
+    float_k_core_number_after_p1: float = None
+    float_k_core_number_after_p2: float = None
 
-    float_local_efficiency_after_p1: float = None # TODO
-    float_local_efficiency_after_p2: float = None # TODO
+    float_local_efficiency_after_p1: float = None
+    float_local_efficiency_after_p2: float = None
 
-    float_eccentricity_after_p1: float = None # TODO
-    float_eccentricity_after_p2: float = None # TODO
+    float_eccentricity_after_p1: float = None
+    float_eccentricity_after_p2: float = None
 
-    float_average_shortest_path_length_after_p1: float = None # TODO
-    float_average_shortest_path_length_after_p2: float = None # TODO
+    float_average_shortest_path_length_after_p1: float = None
+    float_average_shortest_path_length_after_p2: float = None
 
-    float_assortativity_after_p1: float = None # TODO
-    float_assortativity_after_p2: float = None # TODO
+    float_community_membership_after_p1: float = None
+    float_community_membership_after_p2: float = None
 
-    float_community_membership_after_p1: float = None # TODO
-    float_community_membership_after_p2: float = None # TODO
+    float_hubs_score_after_p1: float = None
+    float_hubs_score_after_p2: float = None
 
-    float_hubs_score_after_p1: float = None # TODO
-    float_hubs_score_after_p2: float = None # TODO
-
-    float_authority_score_after_p1: float = None # TODO
-    float_authority_score_after_p2: float = None # TODO
+    float_authority_score_after_p1: float = None
+    float_authority_score_after_p2: float = None
 
     float_ollivier_ricci_curvature_after_p1: float = None # TODO
     float_ollivier_ricci_curvature_after_p2: float = None # TODO
@@ -301,11 +300,8 @@ class Node:
     floats_fractal_dimensionality_curve_after_p1 = None # TODO
     floats_fractal_dimensionality_curve_after_p2 = None # TODO
 
-    float_random_walk_return_probability_after_p1: float = None # TODO
-    float_random_walk_return_probability_after_p2: float = None # TODO
-
-    float_shannon_entropy_after_p1: float = None # TODO
-    float_shannon_entropy_after_p2: float = None # TODO
+    float_shannon_entropy_after_p1: float = None
+    float_shannon_entropy_after_p2: float = None
 
 
 all_nodes = {}
@@ -354,8 +350,7 @@ eccentricity_after_p2 = nx.eccentricity(G_after_p2)
 avg_shortest_path_len_after_p1 = {n: sum(nx.single_source_shortest_path_length(G_after_p1, n).values()) / (len(G_after_p1) - 1) for n in G_after_p1.nodes()}
 avg_shortest_path_len_after_p2 = {n: sum(nx.single_source_shortest_path_length(G_after_p2, n).values()) / (len(G_after_p2) - 1) for n in G_after_p2.nodes()}
 
-assortativity_after_p1 = nx.degree_assortativity_coefficient(G_after_p1)
-assortativity_after_p2 = nx.degree_assortativity_coefficient(G_after_p2)
+
 
 max_r_after_p1 = max(dict(nx.eccentricity(G_after_p1)).values())
 max_r_after_p2 = max(dict(nx.eccentricity(G_after_p2)).values())
@@ -400,7 +395,8 @@ def shannon_entropy_per_node(G):
 shannon_ent_after_p1 = shannon_entropy_per_node(G_after_p1)
 shannon_ent_after_p2 = shannon_entropy_per_node(G_after_p2)
 
-
+global_assortativity_after_p1 = nx.degree_assortativity_coefficient(G_after_p1)
+global_assortativity_after_p2 = nx.degree_assortativity_coefficient(G_after_p2)
 
 def safe_setattr(node_obj, attr, value):
     if node_obj is not None:
@@ -554,6 +550,8 @@ for cur_node_id in ids_nodes_after_p1:
 for cur_node_id in ids_nodes_after_p1:
     cur_node = all_nodes[cur_node_id]
     cur_node.bool_did_win_elsewhere = False
+    cur_node.bool_did_win_somewhere = False
+
     cur_node.ids_did_win_at_these_nodes = []
     cur_node.amount_wins_somewhere = 0
     cur_node.amount_wins_elsewhere = 0
@@ -563,8 +561,8 @@ for cur_game_winner in cur_step.game_winner_p2:
 
     competition_node = all_nodes[competition_node_id]
     winner_node = all_nodes[winner_node_id]
-
     competition_node.amount_token_that_winner_has_allocated = competition_node.dict_blotto_competition_here[winner_node_id]
+    winner_node.bool_did_win_somewhere = True
     if competition_node_id == winner_node_id:
         competition_node.bool_did_win_at_home = True
     else:
@@ -702,3 +700,90 @@ def get_token_attack_along_edge_distribution(token_attacks):
 distribution_token_attack_along_edge_before_p1_counter_dict = get_token_attack_along_edge_distribution(last_step.token_attacks_p2)
 distribution_token_attack_along_edge_after_p2_counter_dict = get_token_attack_along_edge_distribution(cur_step.token_attacks_p2)
 
+
+
+
+# Plotting
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Configuration
+x_attr = "float_hubs_score_after_p1"
+y_attr = "amount_token_after_p1"
+default_color = "black"
+default_marker = "o"
+default_size = 50
+
+special_colors = [["red", "bool_did_win_somewhere", "True",]]
+
+
+special_markers = [
+    #["s", "bool_did_win_elsewhere", True],
+    #["^", "bool_did_win_at_home", True]
+]
+
+size_attr = "amount_token_after_p1"
+size_min = 10
+size_max = 300
+
+# Build plot data
+x_vals, y_vals, colors, markers, sizes = [], [], [], [], []
+for node in all_nodes.values():
+    x_val = getattr(node, x_attr, None)
+    y_val = getattr(node, y_attr, None)
+    size_val = getattr(node, size_attr, 0)
+
+    if x_val is None or y_val is None:
+        continue
+
+    # Color selection
+    node_color = default_color
+    for rule in special_colors:
+        match = all(str(getattr(node, rule[i], None)) == str(rule[i+1]) for i in range(1, len(rule), 2))
+        if match:
+            node_color = rule[0]
+            break
+
+    # Marker selection
+    node_marker = default_marker
+    for rule in special_markers:
+        match = all(str(getattr(node, rule[i], None)) == str(rule[i+1]) for i in range(1, len(rule), 2))
+        if match:
+            node_marker = rule[0]
+            break
+
+    # Size scaling
+    scaled_size = np.interp(size_val, [0, 100], [size_min, size_max])
+
+    x_vals.append(x_val)
+    y_vals.append(y_val)
+    colors.append(node_color)
+    markers.append(node_marker)
+    sizes.append(scaled_size)
+
+# Plot each marker group separately
+plt.style.use("seaborn-v0_8-whitegrid")
+unique_markers = set(markers)
+fig, ax = plt.subplots(figsize=(10, 7))
+for marker in unique_markers:
+    idx = [i for i, m in enumerate(markers) if m == marker]
+    ax.scatter(
+        [x_vals[i] for i in idx],
+        [y_vals[i] for i in idx],
+        c=[colors[i] for i in idx],
+        s=[sizes[i] for i in idx],
+        marker=marker,
+        edgecolors='white',
+        alpha=0.8,
+        linewidths=0.6,
+        label=f"marker: {marker}"
+    )
+
+# Aesthetic polish
+ax.set_xlabel(x_attr.replace("_", " ").capitalize(), fontsize=12)
+ax.set_ylabel(y_attr.replace("_", " ").capitalize(), fontsize=12)
+ax.set_title("Node Scatter Plot", fontsize=14)
+ax.grid(True, linestyle='--', alpha=0.5)
+ax.legend(title="Marker Groups", loc='best')
+plt.tight_layout()
+plt.show()
