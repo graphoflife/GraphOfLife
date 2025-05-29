@@ -37,7 +37,7 @@ class SimulationIterationLogger:
         self.new_links_to_walker_p1 = [] #node1_id, node2_id
         self.declined_links = [] #node_id
         self.walker_movements_p1 = [] #node_id, node_id_walker_origin, node_id_walker_destination
-        self.reproduced_nodes_p1 = [] #node_id_parent, node_id_child
+        self.reproduced_nodes_p1 = [] #node_id_parent, node_id_child, reproduction_token_amount
         self.inherit_walker_position_p1 = [] #node_id_parent, node_id_child, node_id_walker
         self.reproduction_new_links_p1 = [] #node_id_parent, node_id_child, node_id_child_to_connect
         self.planted_children_p1 = [] #node_id_parent
