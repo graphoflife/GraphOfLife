@@ -214,6 +214,8 @@ class Node:
     amount_token_before_p1: int = None # TODO
     amount_token_used_for_reproduction: int = None # TODO
     id_of_child: int = None
+    id_of_parent: int = None
+
     amount_token_received_during_p1_through_redistribution: int = None # TODO
     bool_did_plant: bool = None # TODO
     amount_token_after_p1: int = None # TODO
@@ -359,20 +361,41 @@ for cur_repro in cur_step.reproduced_nodes_p1:
         parent_node.bool_died_because_all_tokens_used_for_reproduction_during_p1 = True
     child_node = all_nodes[cur_repro[1]]
     child_node.bool_spawned_this_iteration_p1 = True
+    child_node.id_of_parent = cur_repro[0]
+    child_node.bool_died_instantly_after_spawning_during_p1 = False
+    child_node.bool_died_because_it_was_part_of_smaller_fragmented_network_p1 = False
 for cur_node_id in ids_nodes_before_p1:
     cur_node = all_nodes[cur_node_id]
     cur_node.amount_token_used_for_reproduction = amount_token_used_for_reproduction or 0
     cur_node.bool_did_reproduce_this_iteration_p1 = cur_node.bool_did_reproduce_this_iteration_p1 or False
     cur_node.bool_died_because_all_tokens_used_for_reproduction_during_p1 = cur_node.bool_died_because_all_tokens_used_for_reproduction_during_p1 or False
-
-for cur_node_id in list(set()):
+for cur_node_id in list(set(ids_nodes_after_p1 + ids_nodes_after_p2)):
     cur_node = all_nodes[cur_node_id]
-    cur_node.bool_spaw< ned_this_iteration_p1 = cur_node.bool_spawned_this_iteration_p1 or False
+    cur_node.bool_spawned_this_iteration_p1 = cur_node.bool_spawned_this_iteration_p1 or False
+for cur_node_id in ids_newly_reproduced_nodes_that_instantly_died:
+    cur_node = all_nodes[cur_node_id]
+    cur_node.bool_died_instantly_after_spawning_during_p1 = True
+    cur_node.bool_died_because_it_was_part_of_smaller_fragmented_network_p1 = True
+
+for cur_node_id in cur_step.dead_nodes_p1:
+    all_nodes[cur_node_id].bool_died_during_p1 = True
+for cur_node_id in list(set(ids_nodes_before_p1 + ids_newly_reproduced_nodes)):
+    cur_node = all_nodes[cur_node_id]
+    cur_node.bool_died_during_p1 = cur_node.bool_died_during_p1 or False
+
+for cur_node_id in cur_step.dead_nodes_p2:
+    all_nodes[cur_node_id].bool_died_during_p2 = True
+for cur_node_id in ids_nodes_after_p1:
+    cur_node = all_nodes[cur_node_id]
+    cur_node.bool_died_during_p2 = cur_node.bool_died_during_p2 or False
 
 
+for cur_node_id in cur_step.planted_children_p1:
+    all_nodes[cur_node_id].bool_did_plant = True
+for cur_node_id in ids_nodes_before_p1:
+    cur_node = all_nodes[cur_node_id]
+    cur_node.bool_did_plant = cur_node.bool_did_plant or False
 
-for cur_node_id in ids_unique_nodes:
-    all_nodes[cur_node_id].bool_did_plant = cur_node_id in cur_step.planted_children_p1
 
 amount_token_before_p1: int = None
 amount_token_used_for_reproduction: int = None
@@ -397,13 +420,13 @@ amount_token_after_p2: int = None
 bool_spawned_this_iteration_p1: bool = None
 bool_did_reproduce_this_iteration_p1: bool = None
 bool_died_because_all_tokens_used_for_reproduction_during_p1: bool = None
-bool_died_instantly_after_spawning_during_p1: bool = None # TODO
-bool_died_because_it_was_part_of_smaller_fragmented_network_p1: bool = None # TODO
-bool_died_during_p1: bool = None # TODO
+bool_died_instantly_after_spawning_during_p1: bool = None
+bool_died_because_it_was_part_of_smaller_fragmented_network_p1: bool = None
+bool_died_during_p1: bool = None
 
 bool_died_because_of_competition_p2: bool = None # TODO
 bool_died_because_it_was_part_of_smaller_fragmented_network_p2: bool = None # TODO
-bool_died_during_p2: bool = None # TODO
+bool_died_during_p2: bool = None
 
 
 
