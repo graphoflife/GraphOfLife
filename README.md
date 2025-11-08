@@ -1,6 +1,9 @@
 # Graph of Life
 
-**Exploring Open‑ended-Evolution with Spatial-Evolutionary-Game-Theory and Neural Networks**
+**Exploring Open‑ended-Evolution with Spatial-Evolutionary-Game-Theory, Graph Theory and Neural Networks**
+
+*An Attempt at Engineering Artificial Life*
+
 
 Graph of Life is a compact research engine for exploring **open‑ended evolution** in a spatial setting. Agents live on the nodes of an undirected graph and carry tiny neural “brains.” Each iteration has two phases.
 

@@ -901,7 +901,7 @@ def _main() -> None:
         print(f"🌍 Starting run {run_counter}, folder: {simulation.run_dir}")
         for t in range(max_steps):
             simulation.step(t)
-            print(f"Run {run_counter}, iteration {t} finished (nodes: {simulation.G.number_of_nodes()})")
+            print(f"Run {run_counter}, iteration {t} finished (nodes: {simulation.G.number_of_nodes()}, edges: {simulation.G.number_of_edges()})")
             if simulation.G.number_of_nodes() <= 10:
                 print(f"⚠️ Run {run_counter} crashed at step {t} (nodes ≤ 10), restarting…")
                 break
