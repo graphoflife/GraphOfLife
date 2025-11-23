@@ -51,7 +51,7 @@ import numpy as np
 # ----------------------------------------------------------------------------
 
 # Determinism of decisions (per-token in Blotto; per-comparison elsewhere)
-PROBABILISTIC_DECISIONS: bool = False
+PROBABILISTIC_DECISIONS: bool = True
 
 # Draw k-core visualizations every 10 steps.
 DRAW: bool = False
@@ -60,17 +60,14 @@ DRAW: bool = False
 BASE_DIR = os.path.join(os.path.dirname(__file__), "GraphOfLifeOutputs")
 os.makedirs(BASE_DIR, exist_ok=True)
 
-# Extra features injected into the input vector during Blotto (scaled like others)
-EXTRA_BLOTTO_FEATS: int = 8
-
 # Indices of output heads (rows of the Brain's output)
 HEAD = {
-    "REPRO": slice(0, 2),        # yes/no to reproduce (aggregated)
-    "LINK": slice(2, 4),         # yes/no to link new child to candidate
-    "SHIFT": slice(4, 6),        # move existing (u,v) edge to (child,v)
-    "RECONNECT": slice(6, 9),    # choose edge to drop & new neighbor
-    "BLOTTO": 9,                 # single scalar score for blotto choice
-    "WALKER": slice(10, 12),     # yes/no to create walker link
+    "REPRO": slice(0, 4),        # yes/no to reproduce (aggregated)
+    "LINK": slice(4, 6),         # yes/no to link new child to candidate
+    "SHIFT": slice(6, 8),        # move existing (u,v) edge to (child,v)
+    "RECONNECT": slice(8, 12),   # choose edge to drop & new neighbor
+    "BLOTTO": 12,                # single scalar score for blotto choice
+    "WALKER": slice(13, 15),     # yes/no to create walker link
 }
 
 # ----------------------------------------------------------------------------
@@ -127,13 +124,14 @@ class Brain:
     as *heads* (see HEAD), accessed by slices / indices.
     """
 
-    _next_brain_id = 0
+    _next_brain_id = 1
+    rec = None  # set to a callable(event_dict) by the engine (e.g., list.append)
 
     def __init__(self) -> None:
         # Base features were 29; we add 8 blotto extras (zeros during reproduction).
         n_inputs = 37
         hidden_sizes = [25, 20, 20]
-        n_outputs = 12
+        n_outputs = 15
 
         assert n_inputs > 0 and n_outputs > 0
         self.layer_sizes = [int(n_inputs)] + [int(h) for h in hidden_sizes] + [int(n_outputs)]
@@ -147,7 +145,8 @@ class Brain:
             self.weights.append(W)
             self.biases.append(b)
 
-        self.brain_id = Brain._next_brain_id
+        self.brain_id: int = Brain._next_brain_id
+        self.parent_brain_id = None
         Brain._next_brain_id += 1
 
     def forward(self, x: np.ndarray | List[float]) -> np.ndarray:
@@ -165,22 +164,31 @@ class Brain:
         return a.squeeze() if a.shape[1] == 1 else a
 
     def copy(self) -> "Brain":
-        new = Brain()
-        new.weights = [w.copy() for w in self.weights]
-        new.biases = [b.copy() for b in self.biases]
-        return new
+        new_brain = Brain()
+        new_brain.weights = [w.copy() for w in self.weights]
+        new_brain.biases = [b.copy() for b in self.biases]
+        new_brain.parent_brain_id = self.brain_id
+        if Brain.rec: Brain.rec({"t":"copy","from":int(self.brain_id),"to":int(new_brain.brain_id)})
+
+        return new_brain
 
     def mutate(
         self,
-        weight_noise_std: float = 0.3,
-        bias_noise_std: float = 0.3,
-        p_weight_noise: float = 0.2,
-        p_bias_noise: float = 0.2,
-        p_weight_reset: float = 0.2,
-        p_bias_reset: float = 0.2,
+        mutate_prob: float = 0.1,
+        weight_noise_std: float = 0.2,
+        bias_noise_std: float = 0.2,
+        p_weight_noise: float = 0.1,
+        p_bias_noise: float = 0.1,
+        p_weight_reset: float = 0.1,
+        p_bias_reset: float = 0.1,
         reset_fraction: float = 0.10,
-    ) -> None:
+    ) -> bool:
         """Mutate in place via Gaussian noise + optional random resets."""
+        if (np.random.random() > mutate_prob):
+            return
+
+        old_id = self.brain_id
+
         reset_fraction = float(np.clip(reset_fraction, 0.0, 1.0))
         for i, (W, b) in enumerate(zip(self.weights, self.biases)):
             # Weight noise (masked)
@@ -200,6 +208,12 @@ class Brain:
                 reset_maskb = np.random.random(b.shape) < reset_fraction
                 b = np.where(reset_maskb, np.random.normal(0.0, 1.0, size=b.shape), b)
             self.biases[i] = b.astype(float)
+
+        self.parent_brain_id = old_id
+        self.brain_id = Brain._next_brain_id
+        Brain._next_brain_id += 1
+        if Brain.rec: Brain.rec({"t": "mut", "from": int(self.parent_brain_id), "to": int(self.brain_id)})
+
 
 # ----------------------------------------------------------------------------
 # GraphOfLife
@@ -239,6 +253,8 @@ class GraphOfLife:
         self.run_dir = os.path.join(BASE_DIR, f"run_{ts}")
         os.makedirs(self.run_dir, exist_ok=True)
         self._snapshot_source()
+        self.genotype_events: List[Dict[str, int]] = []
+        Brain.rec = self.genotype_events.append
 
     # ----------------- helpers -----------------
     def _neighbors(self, u: int) -> List[int]:
@@ -565,25 +581,33 @@ class GraphOfLife:
             walker_logits_all = Y[HEAD["WALKER"], :]
 
             # Reproduction decision (aggregated over core candidates)
-            K_core = len(core_candidates)
-            repro_core = repro_logits_all[:, :K_core]
-            repro_logits_vec = np.mean(repro_core, axis=1)  # (2,)
-            vals = np.maximum(0.0, repro_logits_vec)
+            repro_core = repro_logits_all[:, :len(core_candidates)]  # shape (4, K_core)
+            yes_logit = float(np.mean(repro_core[0, :]))
+            no_logit = float(np.mean(repro_core[1, :]))
+            if PROBABILISTIC_DECISIONS:
+                y = max(0.0, yes_logit)
+                n = max(0.0, no_logit)
+                s = y + n
+                p_yes = (y / s) if s > 0.0 else 0.0
+                will_reproduce = (np.random.rand() < p_yes)
+            else:
+                will_reproduce = (yes_logit > no_logit)
+
+            # (B) Child/keep fraction from last two rows
+            frac_vec = np.mean(repro_core[2:4, :], axis=1)  # (2,) -> [child_part, keep_part]
+            vals = np.maximum(0.0, frac_vec)
             s = float(np.sum(vals))
             probs = (vals / s) if s > 0.0 else np.full_like(vals, 1.0 / len(vals))
-            child_tokens = int(np.floor(probs[0] * t_u))
 
-            # Log per-(u,v) contributions (core only)
-            repro_logits_contrib = [
-                {"candidate": int(v), "logits": [float(repro_core[0, i]), float(repro_core[1, i])]}
-                for i, v in enumerate(core_candidates)
-            ]
+            if will_reproduce:
+                child_tokens = int(np.floor(probs[0] * t_u))
+            else:
+                child_tokens = 0
+
 
             rec: Dict[str, Any] = {
                 "agent_id": int(u),
                 "tokens_before": int(t_u),
-                "repro_logits": [float(repro_logits_vec[0]), float(repro_logits_vec[1])],
-                "repro_prob_child": float(probs[0]),
                 "repro_tokens": int(child_tokens),
                 "child_created": False,
                 "child_id": None,
@@ -595,10 +619,8 @@ class GraphOfLife:
                     "far_node": int(chosen_far) if chosen_far is not None else None,
                     "far_weight": int(far_weight) if far_weight is not None else None,
                     "already_connected": None,
-                    "decision_logits": None,
                     "created_new_link": False,
                 },
-                "repro_logits_contrib": repro_logits_contrib,
             }
 
             if child_tokens >= 1:
@@ -607,6 +629,7 @@ class GraphOfLife:
 
                 # Create child & copy brain
                 child_brain = self.brains[u].copy()
+                child_brain.mutate()
                 cid = self.next_agent_id
                 self.next_agent_id += 1
                 self.G.add_node(cid)
@@ -618,7 +641,11 @@ class GraphOfLife:
                     yes_logit = float(link_logits_all[0, col_idx])
                     no_logit = float(link_logits_all[1, col_idx])
                     if PROBABILISTIC_DECISIONS:
-                        p_yes = _softmax_logits([yes_logit, no_logit])[0]
+
+                        y = max(0.0, yes_logit)
+                        n = max(0.0, no_logit)
+                        s = y + n
+                        p_yes = (y / s) if s > 0.0 else 0.0
                         choose = bool(np.random.rand() < p_yes)
                     else:
                         choose = bool(yes_logit > no_logit)
@@ -645,7 +672,10 @@ class GraphOfLife:
                     shift_yes = float(shift_logits_all[0, col_idx])
                     shift_no = float(shift_logits_all[1, col_idx])
                     if PROBABILISTIC_DECISIONS:
-                        p_yes = _softmax_logits([shift_yes, shift_no])[0]
+                        y = max(0.0, yes_logit)
+                        n = max(0.0, no_logit)
+                        s = y + n
+                        p_yes = (y / s) if s > 0.0 else 0.0
                         shifted = bool(np.random.rand() < p_yes)
                     else:
                         shifted = bool(shift_yes > shift_no)
@@ -658,26 +688,53 @@ class GraphOfLife:
                 for idx, v in enumerate(neighbors_u):
                     col_idx = 1 + idx
                     no_val = float(reconn_logits_all[0, col_idx])
-                    which_link = float(reconn_logits_all[1, col_idx])
-                    which_target = float(reconn_logits_all[2, col_idx])
-                    reconnect_votes.append({"edge": (int(u), int(v)), "no_val": no_val, "link_val": which_link, "target_val": which_target})
+                    yes_val = float(reconn_logits_all[1, col_idx])
+                    which_link = float(reconn_logits_all[2, col_idx])
+                    which_target = float(reconn_logits_all[3, col_idx])
+                    reconnect_votes.append({"edge": (int(u), int(v)), "no_val": no_val, "yes_val": yes_val, "link_val": which_link, "target_val": which_target})
 
                 if reconnect_votes:
                     sum_no = sum(rv["no_val"] for rv in reconnect_votes)
-                    sum_yes = sum(rv["link_val"] for rv in reconnect_votes)
+                    sum_yes = sum(rv["yes_val"] for rv in reconnect_votes)
                     if PROBABILISTIC_DECISIONS:
-                        p_yes = _softmax_logits([sum_yes, sum_no])[0]
+                        y = max(0.0, yes_logit)
+                        n = max(0.0, no_logit)
+                        s = y + n
+                        p_yes = (y / s) if s > 0.0 else 0.0
                         do_reconnect = bool(np.random.rand() < p_yes)
                     else:
                         do_reconnect = bool(sum_yes > sum_no)
                     if do_reconnect:
-                        edge_choice = max(reconnect_votes, key=lambda rv: rv["link_val"]) if not PROBABILISTIC_DECISIONS else reconnect_votes[int(np.random.choice(len(reconnect_votes), p=_softmax_logits([rv["link_val"] for rv in reconnect_votes])))]
+                        # --- pick which edge to drop (by link_val) ---
+                        if PROBABILISTIC_DECISIONS:
+                            link_scores = [max(0.0, rv["link_val"]) for rv in reconnect_votes]
+                            s = float(sum(link_scores))
+                            link_probs = ([w / s for w in link_scores]
+                                          if s > 0.0 else [1.0 / len(reconnect_votes)] * len(reconnect_votes))
+                            idx_edge = int(np.random.choice(len(reconnect_votes), p=link_probs))
+                        else:
+                            idx_edge = int(np.argmax([rv["link_val"] for rv in reconnect_votes]))
+                        edge_choice = reconnect_votes[idx_edge]
                         old_v = int(edge_choice["edge"][1])
-                        target_choice = max(reconnect_votes, key=lambda rv: rv["target_val"]) if not PROBABILISTIC_DECISIONS else reconnect_votes[int(np.random.choice(len(reconnect_votes), p=_softmax_logits([rv["target_val"] for rv in reconnect_votes])))]
+
+                        # --- pick the new neighbor target (by target_val) ---
+                        if PROBABILISTIC_DECISIONS:
+                            targ_scores = [max(0.0, rv["target_val"]) for rv in reconnect_votes]
+                            s = float(sum(targ_scores))
+                            targ_probs = ([w / s for w in targ_scores]
+                                          if s > 0.0 else [1.0 / len(reconnect_votes)] * len(reconnect_votes))
+                            idx_target = int(np.random.choice(len(reconnect_votes), p=targ_probs))
+                        else:
+                            idx_target = int(np.argmax([rv["target_val"] for rv in reconnect_votes]))
+                        target_choice = reconnect_votes[idx_target]
                         new_v = int(target_choice["edge"][1])
+
                         if new_v != u and new_v != old_v and self.G.has_node(new_v):
                             reconns_to_apply.append((u, old_v, new_v))
-                            rec["reconnect_choices"].append({"old_edge": (int(u), int(old_v)), "new_neighbor": int(new_v)})
+                            rec["reconnect_choices"].append({
+                                "old_edge": (int(u), int(old_v)),
+                                "new_neighbor": int(new_v)
+                            })
 
             # Walker-link (applies even if no child was created)
             if chosen_far is not None:
@@ -685,13 +742,16 @@ class GraphOfLife:
                 wl_yes = float(walker_logits_all[0, last_idx])
                 wl_no = float(walker_logits_all[1, last_idx])
                 if PROBABILISTIC_DECISIONS:
-                    p_yes = _softmax_logits([wl_yes, wl_no])[0]
+                    y = max(0.0, yes_logit)
+                    n = max(0.0, no_logit)
+                    s = y + n
+                    p_yes = (y / s) if s > 0.0 else 0.0
                     want_link = bool(np.random.rand() < p_yes)
                 else:
                     want_link = bool(wl_yes > wl_no)
                 already_connected = self.G.has_edge(u, chosen_far) or (u == chosen_far)
                 rec["walker_choice"]["already_connected"] = bool(already_connected)
-                rec["walker_choice"]["decision_logits"] = [wl_yes, wl_no]
+                #rec["walker_choice"]["decision_logits"] = [wl_yes, wl_no]
                 if want_link and not already_connected and self.G.has_node(chosen_far):
                     new_links_to_apply.append((u, chosen_far))
                     rec["walker_choice"]["created_new_link"] = True
@@ -716,13 +776,15 @@ class GraphOfLife:
 
         log["cleanup"] = self._cleanup_and_redistribute()
         log["post_state"] = self._snapshot_graph()
+        log["genotype_events"] = list(self.genotype_events)
+        self.genotype_events.clear()
         path = self._save_step_file(2 * t, log)
         if t % 10 == 0 and DRAW:
             self._draw(f"Round {t} — After Phase 1", f"step_{2 * t:05d}_phase1.png")
         return path
 
     # ----------------------------------------------------------------------------
-    # Phase 2: Blotto (one token per round)
+    # Phase 2: Blotto
     # ----------------------------------------------------------------------------
     def blotto_phase(self, t: int) -> str:
         from collections import defaultdict
@@ -855,11 +917,9 @@ class GraphOfLife:
             self.G.remove_edges_from(to_remove)
         log["pruned_edges"] = [(int(u), int(v)) for (u, v) in to_remove]
 
-        # Cleanup, mutate, persist
+        # Cleanup, persist
         log["cleanup"] = self._cleanup_and_redistribute()
         log["post_state"] = self._snapshot_graph()
-        for brain in self.brains.values():
-            brain.mutate()
 
         # Aggregated per-agent allocation counts (compat) + exact sequence
         for u in list(self.G.nodes()) + [x for x in allocation_sequence.keys() if x not in self.G.nodes()]:
@@ -868,6 +928,8 @@ class GraphOfLife:
             log["allocations"].append({"agent_id": int(u), "tokens_before": int(self.tokens.get(u, 0)), "targets": [int(v) for v in tgs], "alloc": alloc_counts})
         log["allocation_sequence"] = {str(u): [int(x) for x in seq] for u, seq in allocation_sequence.items()}
 
+        log["genotype_events"] = list(self.genotype_events)
+        self.genotype_events.clear()
         path = self._save_step_file(2 * t + 1, log)
         if t % 10 == 0 and DRAW:
             self._draw(f"Round {t} — After Phase 2", f"step_{2 * t + 1:05d}_phase2.png")
@@ -885,10 +947,10 @@ class GraphOfLife:
 # ----------------------------------------------------------------------------
 
 def _main() -> None:
-    n = 1000
-    k = 100
+    n = 500
+    k = 50
     total_tokens = 200_000
-    max_steps = 100_000
+    max_steps = 500_000
 
     def make_simulation() -> GraphOfLife:
         G0 = nx.watts_strogatz_graph(n=n, k=k, p=0)
