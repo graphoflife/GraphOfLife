@@ -51,7 +51,7 @@ import numpy as np
 # ----------------------------------------------------------------------------
 
 # Determinism of decisions (per-token in Blotto; per-comparison elsewhere)
-PROBABILISTIC_DECISIONS: bool = False
+PROBABILISTIC_DECISIONS: bool = True
 
 # Draw k-core visualizations every 10 steps.
 DRAW: bool = False
@@ -174,7 +174,7 @@ class Brain:
 
     def mutate(
         self,
-        mutate_prob: float = 0.3,
+        mutate_prob: float = 0.1,
         weight_noise_std: float = 0.2,
         bias_noise_std: float = 0.2,
         p_weight_noise: float = 0.1,
@@ -629,7 +629,6 @@ class GraphOfLife:
 
                 # Create child & copy brain
                 child_brain = self.brains[u].copy()
-                child_brain.mutate()
                 cid = self.next_agent_id
                 self.next_agent_id += 1
                 self.G.add_node(cid)
@@ -900,6 +899,7 @@ class GraphOfLife:
             contenders = [s for s, a in offers_map.items() if a == max_amt]
             winner = random.choice(contenders)
             new_brains[v] = self.brains[winner].copy()
+            new_brains[v].mutate()
             new_tokens[v] = int(incoming_totals[v])
             log["winners"][str(v)] = {"winner": int(winner), "max_amount": int(max_amt)}
             if winner != v:
