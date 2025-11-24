@@ -51,7 +51,7 @@ import numpy as np
 # ----------------------------------------------------------------------------
 
 # Determinism of decisions (per-token in Blotto; per-comparison elsewhere)
-PROBABILISTIC_DECISIONS: bool = True
+PROBABILISTIC_DECISIONS: bool = False
 
 # Draw k-core visualizations every 10 steps.
 DRAW: bool = False
@@ -140,8 +140,8 @@ class Brain:
         self.weights: List[np.ndarray] = []
         self.biases: List[np.ndarray] = []
         for fan_in, fan_out in zip(self.layer_sizes[:-1], self.layer_sizes[1:]):
-            W = np.random.normal(0.0, 1.0, size=(fan_out, fan_in)).astype(float)
-            b = np.random.normal(0.0, 1.0, size=(fan_out, 1)).astype(float)
+            W = np.random.normal(0.0, 1.0 / np.sqrt(fan_in), size=(fan_out, fan_in))
+            b = np.zeros((fan_out, 1))
             self.weights.append(W)
             self.biases.append(b)
 
@@ -174,7 +174,7 @@ class Brain:
 
     def mutate(
         self,
-        mutate_prob: float = 0.1,
+        mutate_prob: float = 0.3,
         weight_noise_std: float = 0.2,
         bias_noise_std: float = 0.2,
         p_weight_noise: float = 0.1,
@@ -182,7 +182,7 @@ class Brain:
         p_weight_reset: float = 0.1,
         p_bias_reset: float = 0.1,
         reset_fraction: float = 0.10,
-    ) -> bool:
+    ) -> None:
         """Mutate in place via Gaussian noise + optional random resets."""
         if (np.random.random() > mutate_prob):
             return
@@ -672,8 +672,8 @@ class GraphOfLife:
                     shift_yes = float(shift_logits_all[0, col_idx])
                     shift_no = float(shift_logits_all[1, col_idx])
                     if PROBABILISTIC_DECISIONS:
-                        y = max(0.0, yes_logit)
-                        n = max(0.0, no_logit)
+                        y = max(0.0, shift_yes)
+                        n = max(0.0, shift_no)
                         s = y + n
                         p_yes = (y / s) if s > 0.0 else 0.0
                         shifted = bool(np.random.rand() < p_yes)
@@ -697,8 +697,8 @@ class GraphOfLife:
                     sum_no = sum(rv["no_val"] for rv in reconnect_votes)
                     sum_yes = sum(rv["yes_val"] for rv in reconnect_votes)
                     if PROBABILISTIC_DECISIONS:
-                        y = max(0.0, yes_logit)
-                        n = max(0.0, no_logit)
+                        y = max(0.0, sum_yes)
+                        n = max(0.0, sum_no)
                         s = y + n
                         p_yes = (y / s) if s > 0.0 else 0.0
                         do_reconnect = bool(np.random.rand() < p_yes)
@@ -742,8 +742,8 @@ class GraphOfLife:
                 wl_yes = float(walker_logits_all[0, last_idx])
                 wl_no = float(walker_logits_all[1, last_idx])
                 if PROBABILISTIC_DECISIONS:
-                    y = max(0.0, yes_logit)
-                    n = max(0.0, no_logit)
+                    y = max(0.0, wl_yes)
+                    n = max(0.0, wl_no)
                     s = y + n
                     p_yes = (y / s) if s > 0.0 else 0.0
                     want_link = bool(np.random.rand() < p_yes)
@@ -949,7 +949,7 @@ class GraphOfLife:
 def _main() -> None:
     n = 500
     k = 50
-    total_tokens = 200_000
+    total_tokens = 100_000
     max_steps = 500_000
 
     def make_simulation() -> GraphOfLife:
