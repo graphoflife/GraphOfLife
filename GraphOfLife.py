@@ -51,7 +51,32 @@ import numpy as np
 # ----------------------------------------------------------------------------
 
 # Determinism of decisions (per-token in Blotto; per-comparison elsewhere)
-PROBABILISTIC_DECISIONS: bool = True
+PROBABILISTIC_DECISIONS: bool = False
+
+# ---- Blotto rule variants ----
+#   "ALLOCATE_AND_CONQUER": highest allocator at node v implants its brain into v
+#   "ALLOCATE_AND_ROB"    : winner-for-v *collects* all tokens allocated to v; no brain copying
+BLOTTO_MODE: str = "ALLOCATE_AND_CONQUER"   # default keeps current behavior
+
+# ---- Mutation policy toggles ----
+# Mutate when a brain is copied in reproduction (child creation)
+MUTATE_ON_REPRO_COPY: bool = False          # default preserves current behavior (no mutation there)
+
+# Mutate when a brain is copied in Blotto (only relevant for ALLOCATE_AND_CONQUER)
+MUTATE_ON_BLOTTO_COPY: bool = True          # default preserves current behavior (there was mutation already)
+
+# Mutate all brains at the very end of Blotto (after outcomes are applied)
+MUTATE_ALL_AFTER_BLOTTO: bool = False       # default off
+
+# ---- Reproduction decision variant ----
+# True  -> ignore yes/no logits; use averaged fraction logits over core to set child_tokens
+# False -> use standard yes/no logits to decide whether reproduction occurs at all
+REPRO_CORE_FRACTIONS_ONLY: bool = False  # default preserves current behavior
+
+# ---- Walker/reach reset policy (only for ALLOCATE_AND_CONQUER) ----
+# True  -> (default) reset reach_counts[v] and record walker_resets when a brain is (re)implanted at v
+# False -> keep previous reach_counts[v]; do not push v into walker_resets
+RESET_REACH_ON_CONQUER: bool = True
 
 # Draw k-core visualizations every 10 steps.
 DRAW: bool = False
@@ -130,7 +155,7 @@ class Brain:
     def __init__(self) -> None:
         # Base features were 29; we add 8 blotto extras (zeros during reproduction).
         n_inputs = 37
-        hidden_sizes = [25, 20, 20]
+        hidden_sizes = [35, 30, 25, 20]
         n_outputs = 15
 
         assert n_inputs > 0 and n_outputs > 0
@@ -174,7 +199,7 @@ class Brain:
 
     def mutate(
         self,
-        mutate_prob: float = 0.1,
+        mutate_prob: float = 0.3,
         weight_noise_std: float = 0.2,
         bias_noise_std: float = 0.2,
         p_weight_noise: float = 0.1,
@@ -582,28 +607,44 @@ class GraphOfLife:
 
             # Reproduction decision (aggregated over core candidates)
             repro_core = repro_logits_all[:, :len(core_candidates)]  # shape (4, K_core)
-            yes_logit = float(np.mean(repro_core[0, :]))
-            no_logit = float(np.mean(repro_core[1, :]))
-            if PROBABILISTIC_DECISIONS:
-                y = max(0.0, yes_logit)
-                n = max(0.0, no_logit)
-                s = y + n
-                p_yes = (y / s) if s > 0.0 else 0.0
-                will_reproduce = (np.random.rand() < p_yes)
-            else:
-                will_reproduce = (yes_logit > no_logit)
+            # rows: [yes_logit_row, no_logit_row, child_frac_row, keep_frac_row]
+            # t_u: current tokens at u (int)
 
-            # (B) Child/keep fraction from last two rows
-            frac_vec = np.mean(repro_core[2:4, :], axis=1)  # (2,) -> [child_part, keep_part]
-            vals = np.maximum(0.0, frac_vec)
-            s = float(np.sum(vals))
-            probs = (vals / s) if s > 0.0 else np.full_like(vals, 1.0 / len(vals))
+            if REPRO_CORE_FRACTIONS_ONLY:
+                # (A) Ignore explicit yes/no; deterministically split using averaged fractions
+                frac_vec = np.mean(repro_core[2:4, :], axis=1)  # shape (2,) -> [child_part, keep_part]
+                vals = np.maximum(0.0, frac_vec)
+                s = float(np.sum(vals))
+                probs = (vals / s) if s > 0.0 else np.full_like(vals, 1.0 / len(vals))
 
-            if will_reproduce:
                 child_tokens = int(np.floor(probs[0] * t_u))
-            else:
-                child_tokens = 0
 
+            else:
+                # (B) Original yes/no gate to decide reproduction at all
+                yes_logit = float(np.mean(repro_core[0, :]))
+                no_logit = float(np.mean(repro_core[1, :]))
+
+                if PROBABILISTIC_DECISIONS:
+                    y = max(0.0, yes_logit)
+                    n = max(0.0, no_logit)
+                    s = y + n
+                    p_yes = (y / s) if s > 0.0 else 0.0
+                    will_reproduce = (np.random.rand() < p_yes)
+                else:
+                    will_reproduce = (yes_logit > no_logit)
+
+                if will_reproduce:
+                    frac_vec = np.mean(repro_core[2:4, :], axis=1)  # [child_part, keep_part]
+                    vals = np.maximum(0.0, frac_vec)
+                    s = float(np.sum(vals))
+                    probs = (vals / s) if s > 0.0 else np.full_like(vals, 1.0 / len(vals))
+
+                    child_tokens = int(np.floor(probs[0] * t_u))
+                else:
+                    child_tokens = 0
+
+            # Safety: ensure conservation and non-negativity
+            child_tokens = max(0, min(int(t_u), int(child_tokens)))
 
             rec: Dict[str, Any] = {
                 "agent_id": int(u),
@@ -629,6 +670,8 @@ class GraphOfLife:
 
                 # Create child & copy brain
                 child_brain = self.brains[u].copy()
+                if MUTATE_ON_REPRO_COPY:
+                    child_brain.mutate()  # optional child-on-copy mutation
                 cid = self.next_agent_id
                 self.next_agent_id += 1
                 self.G.add_node(cid)
@@ -885,31 +928,86 @@ class GraphOfLife:
         new_tokens = dict(self.tokens)
         new_brains = dict(self.brains)
         walker_resets: List[int] = []
-        for v in list(self.G.nodes()):
-            offers_map = per_target_allocators[v]
-            log["incoming_offers"][str(v)] = [(int(s), int(a)) for (s, a) in offers_map.items()]
-            if not offers_map:
+
+        if BLOTTO_MODE == "ALLOCATE_AND_CONQUER":
+            for v in list(self.G.nodes()):
+                offers_map = per_target_allocators[v]
+                log["incoming_offers"][str(v)] = [(int(s), int(a)) for (s, a) in offers_map.items()]
+                if not offers_map:
+                    new_tokens[v] = 0
+                    new_brains[v] = self.brains[v].copy()
+                    if MUTATE_ON_BLOTTO_COPY:
+                        new_brains[v].mutate()
+                    if RESET_REACH_ON_CONQUER:
+                        neighbors_vid = [int(w) for w in self.G.neighbors(v)]
+                        self.reach_counts[v] = {int(v): 1, **{nv: 1 for nv in neighbors_vid}}
+                        walker_resets.append(int(v))
+                    # else: keep existing self.reach_counts[v] and do not append to walker_resets
+                    continue
+
+                max_amt = max(offers_map.values())
+                contenders = [s for s, a in offers_map.items() if a == max_amt]
+                winner = random.choice(contenders)
+
+                # implant winner's brain into v
+                new_brains[v] = self.brains[winner].copy()
+                if MUTATE_ON_BLOTTO_COPY:
+                    new_brains[v].mutate()
+
+                new_tokens[v] = int(incoming_totals[v])
+                log["winners"][str(v)] = {"winner": int(winner), "max_amount": int(max_amt)}
+
+                if winner != v:
+                    if RESET_REACH_ON_CONQUER:
+                        neighbors_vid = [int(w) for w in self.G.neighbors(v)]
+                        self.reach_counts[v] = {int(v): 1, **{nv: 1 for nv in neighbors_vid}}
+                        walker_resets.append(int(v))
+                    # else: preserve existing self.reach_counts[v]; no walker_resets entry
+
+        elif BLOTTO_MODE == "ALLOCATE_AND_ROB":
+            # Accumulate winnings for each winner w: sum_v incoming_totals[v] where w wins v
+            winnings: Dict[int, int] = {u: 0 for u in self.G.nodes()}
+            for v in list(self.G.nodes()):
+                offers_map = per_target_allocators[v]
+                log["incoming_offers"][str(v)] = [(int(s), int(a)) for (s, a) in offers_map.items()]
+
+                if not offers_map:
+                    # nobody allocated to v -> its allocated total is zero; no one gains; v ends with 0
+                    new_tokens[v] = 0
+                    # brain at v stays as-is; no resets, no copying
+                    new_brains[v] = self.brains[v]
+                    continue
+
+                max_amt = max(offers_map.values())
+                contenders = [s for s, a in offers_map.items() if a == max_amt]
+                winner = random.choice(contenders)
+
+                # Transfer all tokens allocated to v to the winner node (collector)
+                winnings[winner] = winnings.get(winner, 0) + int(incoming_totals[v])
+
+                # Target node v keeps no tokens from allocations (they were "robbed")
                 new_tokens[v] = 0
-                new_brains[v] = self.brains[v].copy()
-                neighbors_vid = [int(w) for w in self.G.neighbors(v)]
-                self.reach_counts[v] = {int(v): 1, **{nv: 1 for nv in neighbors_vid}}
-                walker_resets.append(int(v))
-                continue
-            max_amt = max(offers_map.values())
-            contenders = [s for s, a in offers_map.items() if a == max_amt]
-            winner = random.choice(contenders)
-            new_brains[v] = self.brains[winner].copy()
-            new_brains[v].mutate()
-            new_tokens[v] = int(incoming_totals[v])
-            log["winners"][str(v)] = {"winner": int(winner), "max_amount": int(max_amt)}
-            if winner != v:
-                neighbors_vid = [int(w) for w in self.G.neighbors(v)]
-                self.reach_counts[v] = {int(v): 1, **{nv: 1 for nv in neighbors_vid}}
-                walker_resets.append(int(v))
+                new_brains[v] = self.brains[v]  # no copying here
+                log["winners"][str(v)] = {"winner": int(winner), "max_amount": int(max_amt)}
+
+            # Apply winnings onto winners' tokens
+            for w, gain in winnings.items():
+                new_tokens[w] = new_tokens.get(w, 0) + int(gain)
+
+        else:
+            raise ValueError(f"Unknown BLOTTO_MODE: {BLOTTO_MODE}")
 
         log["walker_resets"] = walker_resets
+
+        # Commit state
         self.tokens = new_tokens
         self.brains = new_brains
+
+        # Optional global mutation at end of blotto (applies to both modes)
+        if MUTATE_ALL_AFTER_BLOTTO:
+            for b in self.brains.values():
+                b.mutate()
+
 
         # Prune edges with no flow
         to_remove = [e for e, f in edge_flow.items() if f == 0]
@@ -948,12 +1046,12 @@ class GraphOfLife:
 
 def _main() -> None:
     n = 500
-    k = 50
+    k = 30
     total_tokens = 100_000
     max_steps = 500_000
 
     def make_simulation() -> GraphOfLife:
-        G0 = nx.watts_strogatz_graph(n=n, k=k, p=0)
+        G0 = nx.watts_strogatz_graph(n=n, k=k, p=0.15)
         return GraphOfLife(G0, total_tokens=total_tokens)
 
     run_counter = 0
