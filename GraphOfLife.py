@@ -63,10 +63,10 @@ BLOTTO_MODE: str = "ALLOCATE_AND_CONQUER"   # default keeps current behavior
 MUTATE_ON_REPRO_COPY: bool = False          # default preserves current behavior (no mutation there)
 
 # Mutate when a brain is copied in Blotto (only relevant for ALLOCATE_AND_CONQUER)
-MUTATE_ON_BLOTTO_COPY: bool = True          # default preserves current behavior (there was mutation already)
+MUTATE_ON_BLOTTO_COPY: bool = False          # default preserves current behavior (there was mutation already)
 
 # Mutate all brains at the very end of Blotto (after outcomes are applied)
-MUTATE_ALL_AFTER_BLOTTO: bool = False       # default off
+MUTATE_ALL_AFTER_BLOTTO: bool = True       # default off
 
 # ---- Reproduction decision variant ----
 # True  -> ignore yes/no logits; use averaged fraction logits over core to set child_tokens
@@ -77,6 +77,13 @@ REPRO_CORE_FRACTIONS_ONLY: bool = False  # default preserves current behavior
 # True  -> (default) reset reach_counts[v] and record walker_resets when a brain is (re)implanted at v
 # False -> keep previous reach_counts[v]; do not push v into walker_resets
 RESET_REACH_ON_CONQUER: bool = True
+
+# ---- Blotto allocation scheduling ----
+# "FULL_ALLOCATION"              : one observation; each agent allocates all its tokens at once by relative scores
+# "STEP_ALLOCATION_WEAKEST_FIRST": (current behavior) every agent with >=1 token allocates 1 token each round
+# "STEP_ALLOCATION_STRONGEST_FIRST": only agents with the current per-round max remaining tokens allocate 1 token
+BLOTTO_ALLOCATION_MODE: str = "STEP_ALLOCATION_STRONGEST_FIRST"
+
 
 # Draw k-core visualizations every 10 steps.
 DRAW: bool = False
@@ -154,8 +161,8 @@ class Brain:
 
     def __init__(self) -> None:
         # Base features were 29; we add 8 blotto extras (zeros during reproduction).
-        n_inputs = 37
-        hidden_sizes = [35, 30, 25, 20]
+        n_inputs = 49
+        hidden_sizes = [45, 40, 35, 30]
         n_outputs = 15
 
         assert n_inputs > 0 and n_outputs > 0
@@ -198,46 +205,97 @@ class Brain:
         return new_brain
 
     def mutate(
-        self,
-        mutate_prob: float = 0.3,
-        weight_noise_std: float = 0.2,
-        bias_noise_std: float = 0.2,
-        p_weight_noise: float = 0.1,
-        p_bias_noise: float = 0.1,
-        p_weight_reset: float = 0.1,
-        p_bias_reset: float = 0.1,
-        reset_fraction: float = 0.10,
+            self,
+            mutate_prob: float = 0.5,
+            weight_noise_std: float = 0.2,
+            bias_noise_std: float = 0.2,
+            p_weight_noise: float = 0.1,
+            p_bias_noise: float = 0.1,
+            p_weight_reset: float = 0.1,
+            p_bias_reset: float = 0.1,
+            reset_fraction: float = 0.10,
+            layerwise_scale: bool = True,
     ) -> None:
-        """Mutate in place via Gaussian noise + optional random resets."""
-        if (np.random.random() > mutate_prob):
+        """Mutate in place via Gaussian noise + optional random resets.
+
+        - With probability `mutate_prob`, this brain is mutated.
+        - Noise is applied sparsely (p_*_noise masks).
+        - A subset of parameters can be fully re-sampled (resets).
+        - If `layerwise_scale=True`, noise and resets are scaled per-layer
+          using 1/sqrt(fan_in) similar to Xavier init.
+        """
+        if np.random.random() > mutate_prob:
             return
 
         old_id = self.brain_id
-
         reset_fraction = float(np.clip(reset_fraction, 0.0, 1.0))
+
         for i, (W, b) in enumerate(zip(self.weights, self.biases)):
-            # Weight noise (masked)
-            mask = np.random.random(W.shape) < p_weight_noise
-            W = W + np.random.normal(0.0, weight_noise_std, size=W.shape) * mask
+            fan_in = W.shape[1]
 
-            # Weight reset
-            if (np.random.random() < p_weight_reset) and (reset_fraction > 0):
-                reset_mask = np.random.random(W.shape) < reset_fraction
-                W = np.where(reset_mask, np.random.normal(0.0, 1.0, size=W.shape), W)
-            self.weights[i] = W.astype(float)
+            # Scale factors per layer (smaller steps for wider layers)
+            if layerwise_scale and fan_in > 0:
+                base_scale = 1.0 / np.sqrt(fan_in)
+            else:
+                base_scale = 1.0
 
-            # Bias noise & reset
-            maskb = np.random.random(b.shape) < p_bias_noise
-            b = b + np.random.normal(0.0, bias_noise_std, size=b.shape) * maskb
-            if (np.random.random() < p_bias_reset) and (reset_fraction > 0):
-                reset_maskb = np.random.random(b.shape) < reset_fraction
-                b = np.where(reset_maskb, np.random.normal(0.0, 1.0, size=b.shape), b)
-            self.biases[i] = b.astype(float)
+            # Effective std per layer
+            w_noise_std_layer = float(weight_noise_std) * base_scale
+            b_noise_std_layer = float(bias_noise_std) * base_scale
 
+            # --- Weights: sparse additive noise ---
+            if p_weight_noise > 0.0 and w_noise_std_layer > 0.0:
+                mask = np.random.random(W.shape) < p_weight_noise
+                W = W + np.random.normal(
+                    loc=0.0,
+                    scale=w_noise_std_layer,
+                    size=W.shape,
+                ) * mask
+
+            # --- Weights: random resets (Xavier-like, consistent with init) ---
+            if (p_weight_reset > 0.0) and (reset_fraction > 0.0):
+                if np.random.random() < p_weight_reset:
+                    reset_mask = np.random.random(W.shape) < reset_fraction
+                    if np.any(reset_mask):
+                        W_new = np.random.normal(
+                            loc=0.0,
+                            scale=1.0 / np.sqrt(fan_in) if fan_in > 0 else 1.0,
+                            size=W.shape,
+                        )
+                        W = np.where(reset_mask, W_new, W)
+
+            self.weights[i] = W.astype(float, copy=False)
+
+            # --- Biases: sparse additive noise ---
+            if p_bias_noise > 0.0 and b_noise_std_layer > 0.0:
+                maskb = np.random.random(b.shape) < p_bias_noise
+                b = b + np.random.normal(
+                    loc=0.0,
+                    scale=b_noise_std_layer,
+                    size=b.shape,
+                ) * maskb
+
+            # --- Biases: random resets (small, zero-centered) ---
+            if (p_bias_reset > 0.0) and (reset_fraction > 0.0):
+                if np.random.random() < p_bias_reset:
+                    reset_maskb = np.random.random(b.shape) < reset_fraction
+                    if np.any(reset_maskb):
+                        # Biases were initialized to 0; we keep them small
+                        b_new = np.random.normal(
+                            loc=0.0,
+                            scale=b_noise_std_layer if b_noise_std_layer > 0 else 0.01,
+                            size=b.shape,
+                        )
+                        b = np.where(reset_maskb, b_new, b)
+
+            self.biases[i] = b.astype(float, copy=False)
+
+        # Track lineage
         self.parent_brain_id = old_id
         self.brain_id = Brain._next_brain_id
         Brain._next_brain_id += 1
-        if Brain.rec: Brain.rec({"t": "mut", "from": int(self.parent_brain_id), "to": int(self.brain_id)})
+        if Brain.rec:
+            Brain.rec({"t": "mut", "from": int(self.parent_brain_id), "to": int(self.brain_id)})
 
 
 # ----------------------------------------------------------------------------
@@ -328,9 +386,8 @@ class GraphOfLife:
         base = [f * scale for f in base]
 
         if extra_feats is None:
-            extras_scaled = [0.0] * 8
+            extras_scaled = [0.0] * 20
         else:
-            assert len(extra_feats) == 8, "extra_feats length mismatch"
             extras_scaled = [float(x) * scale for x in extra_feats]
 
         return np.array([own_obs] + base + extras_scaled, dtype=float)
@@ -825,11 +882,13 @@ class GraphOfLife:
             self._draw(f"Round {t} — After Phase 1", f"step_{2 * t:05d}_phase1.png")
         return path
 
+
     # ----------------------------------------------------------------------------
     # Phase 2: Blotto
     # ----------------------------------------------------------------------------
     def blotto_phase(self, t: int) -> str:
         from collections import defaultdict
+        from typing import Dict, Any, List, Tuple
 
         log: Dict[str, Any] = {
             "phase": "blotto",
@@ -842,6 +901,7 @@ class GraphOfLife:
 
         deg, neighs, q_tok, q_deg = self._precompute_features()
 
+        # Per-round state for allocation
         remaining = {u: int(self.tokens.get(u, 0)) for u in self.G.nodes()}
         incoming_totals = {v: 0 for v in self.G.nodes()}
         per_target_allocators: Dict[int, Dict[int, int]] = {v: {} for v in self.G.nodes()}
@@ -850,18 +910,16 @@ class GraphOfLife:
         allocation_sequence = {u: [] for u in self.G.nodes()}
 
         def leader_info(v: int) -> Tuple[int, set[int]]:
+            """Max allocation on v so far and the set of current leaders."""
             allocs = per_target_allocators[v]
             if not allocs:
                 return 0, set()
             m = max(allocs.values())
             return m, {s for s, a in allocs.items() if a == m}
 
-        while True:
-            eligible = [u for u in self.G.nodes() if remaining.get(u, 0) >= 1]
-            if not eligible:
-                break
-
-            # Snapshot shared by this round
+        # --------------------- Allocation scheduling ---------------------
+        def compute_snapshot_views():
+            # Snapshot shared by this round (or for FULL_ALLOCATION: single snapshot)
             snapshot_incoming_totals = incoming_totals.copy()
             snapshot_leader_max: Dict[int, int] = {}
             snapshot_leader_set: Dict[int, set[int]] = {}
@@ -869,62 +927,213 @@ class GraphOfLife:
                 m, s = leader_info(v)
                 snapshot_leader_max[v] = m
                 snapshot_leader_set[v] = s
+            return snapshot_incoming_totals, snapshot_leader_max, snapshot_leader_set
 
-            decisions: Dict[int, int] = {}
-            for u in eligible:
-                targets = [u] + neighs[u]
-                X_cols: List[np.ndarray] = []
-                for v in targets:
-                    if u == v:
-                        has_flow = 1.0
-                    else:
-                        e = tuple(sorted((u, v)))
-                        has_flow = 1.0 if edge_flow.get(e, 0) > 0 else 0.0
-                    u_to_v = float(u_sent_to_v[(u, v)])
-                    v_to_v = float(u_sent_to_v[(v, v)])
-                    max_on_v = float(snapshot_leader_max[v])
-                    leaders_v = snapshot_leader_set[v]
-                    leader_cnt = len(leaders_v)
-                    u_wins_v_now = (1.0 / leader_cnt) if (max_on_v > 0 and leader_cnt > 0 and u in leaders_v) else 0.0
-
-                    extra_feats = [
-                        float(snapshot_incoming_totals[v]),
-                        max_on_v,
-                        has_flow,
-                        u_to_v,
-                        v_to_v,
-                        u_wins_v_now,
-                        float(remaining[u]),
-                        float(remaining.get(v, 0)),
-                    ]
-                    X_cols.append(self._input_vec_fast(u, v, deg, q_tok, q_deg, extra_feats=extra_feats))
-
-                X = np.column_stack(X_cols)
-                Y = self.brains[u].forward(X)
-                scores = np.asarray(Y[HEAD["BLOTTO"], :], dtype=float)
-
-                if PROBABILISTIC_DECISIONS:
-                    vals = np.maximum(0.0, scores)
-                    s = float(vals.sum())
-                    probs = (vals / s) if s > 0 else np.full_like(vals, 1.0 / len(vals))
-                    idx = int(np.random.choice(len(targets), p=probs))
+        def forward_scores_for(u, snapshot_incoming_totals, snapshot_leader_max, snapshot_leader_set):
+            targets = [u] + neighs[u]
+            X_cols: List[np.ndarray] = []
+            for v in targets:
+                # --- existing lightweight context ---
+                if u == v:
+                    has_flow = 1.0
                 else:
-                    idx = int(np.argmax(scores))
-                decisions[u] = int(targets[idx])
-
-            # Apply all decisions simultaneously
-            for u, v in decisions.items():
-                remaining[u] -= 1
-                incoming_totals[v] += 1
-                per_target_allocators[v][u] = per_target_allocators[v].get(u, 0) + 1
-                u_sent_to_v[(u, v)] += 1
-                if u != v:
                     e = tuple(sorted((u, v)))
-                    if e in edge_flow:
-                        edge_flow[e] += 1
-                allocation_sequence[u].append(int(v))
+                    has_flow = 1.0 if edge_flow.get(e, 0) > 0 else 0.0
+                u_to_v = float(u_sent_to_v[(u, v)])  # how much u already sent to v in this phase
+                v_to_v = float(u_sent_to_v[(v, v)])  # how much v self-sent so far
+                max_on_v = float(snapshot_leader_max[v])
+                leaders_v = snapshot_leader_set[v]
+                leader_cnt = len(leaders_v)
+                u_is_leader_now = 1.0 if (max_on_v > 0 and u in leaders_v) else 0.0
+                u_wins_v_now = (1.0 / leader_cnt) if (max_on_v > 0 and leader_cnt > 0 and u in leaders_v) else 0.0
 
-        # Outcomes
+                # --- NEW: opponent capacity / competitiveness at v ---
+                # Potential allocators for v are v plus its neighbors
+                pot_allocators_v = [v] + neighs[v]
+                # Competitors for u at v exclude u
+                competitors = [w for w in pot_allocators_v if w != u]
+
+                # Remaining tokens among parties
+                rem_u = int(remaining.get(u, 0))
+                rem_v = int(remaining.get(v, 0))
+                comp_rem = [int(remaining.get(w, 0)) for w in competitors]
+                comp_rem_sum = float(sum(comp_rem))
+                comp_rem_max = float(max(comp_rem) if comp_rem else 0.0)
+
+                # Upper bound of what could still flow into v this phase
+                pot_inflow_total = float(sum(int(remaining.get(w, 0)) for w in pot_allocators_v))
+                u_share_upper = (float(rem_u) / pot_inflow_total) if pot_inflow_total > 0.0 else 0.0
+
+                # Allocations to v so far (this phase)
+                allocs_map = per_target_allocators[v]
+                comp_alloc_sum_ex_u = float(sum(a for s, a in allocs_map.items() if s != u))
+                comp_alloc_max_ex_u = float(max([a for s, a in allocs_map.items() if s != u], default=0))
+
+                # Leader gap (top minus second)
+                vals_now = list(allocs_map.values())
+                if not vals_now:
+                    leader_gap = 0.0
+                    leader_gap_norm = 0.0
+                    tie_count_now = 0.0
+                else:
+                    top = max(vals_now)
+                    tie_count_now = float(sum(1 for a in vals_now if a == top))
+                    second = max([a for a in vals_now if a < top], default=0)
+                    leader_gap = float(top - second)
+                    leader_gap_norm = leader_gap / (1.0 + float(top))
+
+                # How many *more* tokens u would need to strictly lead right now
+                u_now = float(allocs_map.get(u, 0))
+                # Best rival's count (if u is not unique leader)
+                best_rival = float(max([a for s, a in allocs_map.items() if s != u], default=0))
+                # If u already strictly leads, deficit is 0; if tied or behind, need (best_rival - u_now + 1)
+                u_deficit_to_lead = float(max(0, int(best_rival - u_now + 1)))
+
+                extra_feats = [
+                    # --- original extras (keep order) ---
+                    float(snapshot_incoming_totals[v]),  # cumulative inflow to v so far
+                    max_on_v,  # current max offers on v
+                    has_flow,  # has any edge flow on (u,v)
+                    u_to_v,  # u->v so far
+                    v_to_v,  # v->v so far
+                    u_wins_v_now,  # if leading, split of the tie
+                    float(rem_u),  # remaining[u]
+                    float(rem_v),  # remaining[v]
+                    # --- new opponent-awareness & competitiveness ---
+                    float(pot_inflow_total),  # upper bound of tokens that can still go to v
+                    float(u_share_upper),  # u's share of that bound
+                    float(len(competitors)),  # number of competitors at v (excl. u)
+                    float(comp_rem_sum),  # competitors' remaining sum
+                    float(comp_rem_max),  # competitors' remaining max
+                    float(comp_alloc_sum_ex_u),  # competitor allocations to v so far
+                    float(comp_alloc_max_ex_u),  # competitor max allocation to v so far
+                    float(leader_gap),  # top-second gap at v now
+                    float(leader_gap_norm),  # normalized gap
+                    float(tie_count_now),  # number of current co-leaders at v
+                    float(u_is_leader_now),  # binary: is u among leaders now
+                    float(u_deficit_to_lead),  # tokens u needs to strictly lead at v now
+                ]
+
+                X_cols.append(self._input_vec_fast(u, v, deg, q_tok, q_deg, extra_feats=extra_feats))
+
+            X = np.column_stack(X_cols)
+            Y = self.brains[u].forward(X)
+            scores = np.asarray(Y[HEAD["BLOTTO"], :], dtype=float)
+            return targets, scores
+
+        if BLOTTO_ALLOCATION_MODE == "FULL_ALLOCATION":
+            # One observation; each agent allocates all tokens at once by relative scores.
+            snapshot_incoming_totals, snapshot_leader_max, snapshot_leader_set = compute_snapshot_views()
+            for u in list(self.G.nodes()):
+                t_u = int(remaining.get(u, 0))
+                if t_u <= 0:
+                    continue
+                targets, scores = forward_scores_for(u, snapshot_incoming_totals, snapshot_leader_max,
+                                                     snapshot_leader_set)
+
+                vals = np.maximum(0.0, scores)
+                s = float(vals.sum())
+                if s <= 0.0:
+                    probs = np.full_like(vals, 1.0 / len(vals), dtype=float)
+                else:
+                    probs = (vals / s).astype(float)
+
+                # Largest remainder apportionment to conserve tokens exactly
+                raw = probs * float(t_u)
+                alloc_int = np.floor(raw).astype(int)
+                rem = t_u - int(alloc_int.sum())
+                if rem > 0:
+                    fractional = raw - alloc_int
+                    order = np.argsort(-fractional)[:rem]
+                    for k in order:
+                        alloc_int[k] += 1
+
+                # Apply all allocations for u
+                for idx, v in enumerate(targets):
+                    a = int(alloc_int[idx])
+                    if a <= 0:
+                        continue
+                    incoming_totals[v] += a
+                    per_target_allocators[v][u] = per_target_allocators[v].get(u, 0) + a
+                    u_sent_to_v[(u, v)] += a
+                    if u != v:
+                        e = tuple(sorted((u, v)))
+                        if e in edge_flow:
+                            edge_flow[e] += a
+                    allocation_sequence[u].extend([int(v)] * a)
+                remaining[u] = 0  # all tokens allocated in one shot
+
+        elif BLOTTO_ALLOCATION_MODE == "STEP_ALLOCATION_WEAKEST_FIRST":
+            # Current behavior: each round every node with >=1 token allocates 1 token.
+            while True:
+                eligible = [u for u in self.G.nodes() if remaining.get(u, 0) >= 1]
+                if not eligible:
+                    break
+                snapshot_incoming_totals, snapshot_leader_max, snapshot_leader_set = compute_snapshot_views()
+                decisions: Dict[int, int] = {}
+                for u in eligible:
+                    targets, scores = forward_scores_for(u, snapshot_incoming_totals, snapshot_leader_max,
+                                                         snapshot_leader_set)
+                    if PROBABILISTIC_DECISIONS:
+                        vals = np.maximum(0.0, scores)
+                        s = float(vals.sum())
+                        probs = (vals / s) if s > 0 else np.full_like(vals, 1.0 / len(vals))
+                        idx = int(np.random.choice(len(targets), p=probs))
+                    else:
+                        idx = int(np.argmax(scores))
+                    decisions[u] = int(targets[idx])
+
+                # Apply all one-token decisions simultaneously
+                for u, v in decisions.items():
+                    remaining[u] -= 1
+                    incoming_totals[v] += 1
+                    per_target_allocators[v][u] = per_target_allocators[v].get(u, 0) + 1
+                    u_sent_to_v[(u, v)] += 1
+                    if u != v:
+                        e = tuple(sorted((u, v)))
+                        if e in edge_flow:
+                            edge_flow[e] += 1
+                    allocation_sequence[u].append(int(v))
+
+        elif BLOTTO_ALLOCATION_MODE == "STEP_ALLOCATION_STRONGEST_FIRST":
+            # Only nodes with the current max remaining tokens allocate 1 per round.
+            while True:
+                elig = [u for u in self.G.nodes() if remaining.get(u, 0) >= 1]
+                if not elig:
+                    break
+                max_rem = max(remaining[u] for u in elig)
+                eligible = [u for u in elig if remaining[u] == max_rem]
+
+                snapshot_incoming_totals, snapshot_leader_max, snapshot_leader_set = compute_snapshot_views()
+                decisions: Dict[int, int] = {}
+                for u in eligible:
+                    targets, scores = forward_scores_for(u, snapshot_incoming_totals, snapshot_leader_max,
+                                                         snapshot_leader_set)
+                    if PROBABILISTIC_DECISIONS:
+                        vals = np.maximum(0.0, scores)
+                        s = float(vals.sum())
+                        probs = (vals / s) if s > 0 else np.full_like(vals, 1.0 / len(vals))
+                        idx = int(np.random.choice(len(targets), p=probs))
+                    else:
+                        idx = int(np.argmax(scores))
+                    decisions[u] = int(targets[idx])
+
+                # Apply all one-token decisions for the strongest set
+                for u, v in decisions.items():
+                    remaining[u] -= 1
+                    incoming_totals[v] += 1
+                    per_target_allocators[v][u] = per_target_allocators[v].get(u, 0) + 1
+                    u_sent_to_v[(u, v)] += 1
+                    if u != v:
+                        e = tuple(sorted((u, v)))
+                        if e in edge_flow:
+                            edge_flow[e] += 1
+                    allocation_sequence[u].append(int(v))
+        else:
+            raise ValueError(f"Unknown BLOTTO_ALLOCATION_MODE: {BLOTTO_ALLOCATION_MODE}")
+        # ------------------- end allocation scheduling -------------------
+
+        # --------------------------- Outcomes ----------------------------
         new_tokens = dict(self.tokens)
         new_brains = dict(self.brains)
         walker_resets: List[int] = []
@@ -942,14 +1151,13 @@ class GraphOfLife:
                         neighbors_vid = [int(w) for w in self.G.neighbors(v)]
                         self.reach_counts[v] = {int(v): 1, **{nv: 1 for nv in neighbors_vid}}
                         walker_resets.append(int(v))
-                    # else: keep existing self.reach_counts[v] and do not append to walker_resets
                     continue
 
                 max_amt = max(offers_map.values())
                 contenders = [s for s, a in offers_map.items() if a == max_amt]
                 winner = random.choice(contenders)
 
-                # implant winner's brain into v
+                # Implant winner's brain into v
                 new_brains[v] = self.brains[winner].copy()
                 if MUTATE_ON_BLOTTO_COPY:
                     new_brains[v].mutate()
@@ -957,40 +1165,33 @@ class GraphOfLife:
                 new_tokens[v] = int(incoming_totals[v])
                 log["winners"][str(v)] = {"winner": int(winner), "max_amount": int(max_amt)}
 
-                if winner != v:
-                    if RESET_REACH_ON_CONQUER:
-                        neighbors_vid = [int(w) for w in self.G.neighbors(v)]
-                        self.reach_counts[v] = {int(v): 1, **{nv: 1 for nv in neighbors_vid}}
-                        walker_resets.append(int(v))
-                    # else: preserve existing self.reach_counts[v]; no walker_resets entry
+                if winner != v and RESET_REACH_ON_CONQUER:
+                    neighbors_vid = [int(w) for w in self.G.neighbors(v)]
+                    self.reach_counts[v] = {int(v): 1, **{nv: 1 for nv in neighbors_vid}}
+                    walker_resets.append(int(v))
 
         elif BLOTTO_MODE == "ALLOCATE_AND_ROB":
-            # Accumulate winnings for each winner w: sum_v incoming_totals[v] where w wins v
+            # Winners collect tokens from targets; brains are never copied here.
             winnings: Dict[int, int] = {u: 0 for u in self.G.nodes()}
             for v in list(self.G.nodes()):
                 offers_map = per_target_allocators[v]
                 log["incoming_offers"][str(v)] = [(int(s), int(a)) for (s, a) in offers_map.items()]
 
                 if not offers_map:
-                    # nobody allocated to v -> its allocated total is zero; no one gains; v ends with 0
                     new_tokens[v] = 0
-                    # brain at v stays as-is; no resets, no copying
-                    new_brains[v] = self.brains[v]
+                    new_brains[v] = self.brains[v]  # unchanged
                     continue
 
                 max_amt = max(offers_map.values())
                 contenders = [s for s, a in offers_map.items() if a == max_amt]
                 winner = random.choice(contenders)
 
-                # Transfer all tokens allocated to v to the winner node (collector)
                 winnings[winner] = winnings.get(winner, 0) + int(incoming_totals[v])
-
-                # Target node v keeps no tokens from allocations (they were "robbed")
                 new_tokens[v] = 0
-                new_brains[v] = self.brains[v]  # no copying here
+                new_brains[v] = self.brains[v]  # no copying
                 log["winners"][str(v)] = {"winner": int(winner), "max_amount": int(max_amt)}
 
-            # Apply winnings onto winners' tokens
+            # Apply winnings to winner nodes
             for w, gain in winnings.items():
                 new_tokens[w] = new_tokens.get(w, 0) + int(gain)
 
@@ -999,7 +1200,7 @@ class GraphOfLife:
 
         log["walker_resets"] = walker_resets
 
-        # Commit state
+        # Commit outcome state
         self.tokens = new_tokens
         self.brains = new_brains
 
@@ -1008,7 +1209,7 @@ class GraphOfLife:
             for b in self.brains.values():
                 b.mutate()
 
-
+        # -------------------- Prune, cleanup, persist --------------------
         # Prune edges with no flow
         to_remove = [e for e, f in edge_flow.items() if f == 0]
         if to_remove:
@@ -1023,7 +1224,12 @@ class GraphOfLife:
         for u in list(self.G.nodes()) + [x for x in allocation_sequence.keys() if x not in self.G.nodes()]:
             tgs = [u] + (neighs.get(u, []))
             alloc_counts = [int(u_sent_to_v[(u, v)]) for v in tgs]
-            log["allocations"].append({"agent_id": int(u), "tokens_before": int(self.tokens.get(u, 0)), "targets": [int(v) for v in tgs], "alloc": alloc_counts})
+            log["allocations"].append({
+                "agent_id": int(u),
+                "tokens_before": int(self.tokens.get(u, 0)),
+                "targets": [int(v) for v in tgs],
+                "alloc": alloc_counts
+            })
         log["allocation_sequence"] = {str(u): [int(x) for x in seq] for u, seq in allocation_sequence.items()}
 
         log["genotype_events"] = list(self.genotype_events)
@@ -1051,7 +1257,7 @@ def _main() -> None:
     max_steps = 500_000
 
     def make_simulation() -> GraphOfLife:
-        G0 = nx.watts_strogatz_graph(n=n, k=k, p=0.15)
+        G0 = nx.watts_strogatz_graph(n=n, k=k, p=0.2)
         return GraphOfLife(G0, total_tokens=total_tokens)
 
     run_counter = 0
