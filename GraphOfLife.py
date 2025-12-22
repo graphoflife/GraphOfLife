@@ -36,7 +36,6 @@ import hashlib
 import json
 import math
 import os
-import random
 import shutil
 import subprocess
 
@@ -78,6 +77,12 @@ REPRO_CORE_FRACTIONS_ONLY: bool = False  # default preserves current behavior
 # False -> keep previous reach_counts[v]; do not push v into walker_resets
 RESET_REACH_ON_CONQUER: bool = True
 
+# ---- Exchange Messages ----
+# True  -> Agents can exchange messages
+# False -> CANNOT
+EXCHANGE_MESSAGES: bool = True
+MESSAGE_NUMBER_AMOUNT = 4
+
 # ---- Blotto allocation scheduling ----
 # "FULL_ALLOCATION"              : one observation; each agent allocates all its tokens at once by relative scores
 # "STEP_ALLOCATION_WEAKEST_FIRST": (current behavior) every agent with >=1 token allocates 1 token each round
@@ -100,6 +105,7 @@ HEAD = {
     "RECONNECT": slice(8, 12),   # choose edge to drop & new neighbor
     "BLOTTO": 12,                # single scalar score for blotto choice
     "WALKER": slice(13, 15),     # yes/no to create walker link
+    "MESSAGE": slice(15, 15 + MESSAGE_NUMBER_AMOUNT),   # Numbers to exchange messages
 }
 
 # ----------------------------------------------------------------------------
@@ -160,10 +166,12 @@ class Brain:
     rec = None  # set to a callable(event_dict) by the engine (e.g., list.append)
 
     def __init__(self) -> None:
-        # Base features were 29; we add 8 blotto extras (zeros during reproduction).
-        n_inputs = 49
-        hidden_sizes = [45, 40, 35, 30]
-        n_outputs = 15
+        # Base features were 29 + 20 blotto extras = 49.
+        # Messaging adds 4 * MESSAGE_NUMBER_AMOUNT inputs:
+        # (u->u, u->v, v->u, v->v), each of length M.
+        n_inputs = 49 + 4 * MESSAGE_NUMBER_AMOUNT
+        hidden_sizes = [50, 45, 40, 35, 30]
+        n_outputs = 15 + MESSAGE_NUMBER_AMOUNT
 
         assert n_inputs > 0 and n_outputs > 0
         self.layer_sizes = [int(n_inputs)] + [int(h) for h in hidden_sizes] + [int(n_outputs)]
@@ -206,7 +214,7 @@ class Brain:
 
     def mutate(
             self,
-            mutate_prob: float = 0.5,
+            mutate_prob: float = 0.35,
             weight_noise_std: float = 0.2,
             bias_noise_std: float = 0.2,
             p_weight_noise: float = 0.1,
@@ -325,6 +333,7 @@ class GraphOfLife:
         self.tokens: Dict[int, int] = {aid: 0 for aid in self.G.nodes()}
         self.brains: Dict[int, Brain] = {aid: Brain() for aid in self.G.nodes()}
         self.reach_counts: Dict[int, Dict[int, int]] = {aid: {aid: 1} for aid in self.G.nodes()}
+        self.messages: Dict[int, Dict[int, List[float]]] = {aid: {} for aid in self.G.nodes()}
 
         # Initialize tokens uniformly
         N = self.G.number_of_nodes()
@@ -332,8 +341,28 @@ class GraphOfLife:
             self.tokens[aid] = int(self.total_tokens / N)
 
         # Run folder
-        ts = datetime.now().strftime("%Y%m%d_%H%M%S_%f")[:-3]
-        self.run_dir = os.path.join(BASE_DIR, f"run_{ts}")
+        date_str = datetime.now().strftime("%Y_%m_%d")
+        prefix = f"GOL_{date_str}__"
+
+        # Find existing run folders for today
+        existing_runs = []
+        for name in os.listdir(BASE_DIR):
+            full_path = os.path.join(BASE_DIR, name)
+            if not os.path.isdir(full_path):
+                continue
+            if not name.startswith(prefix):
+                continue
+
+            # Extract the numeric suffix, e.g. "001" from "run_20251214_001"
+            suffix = name[len(prefix):]
+            if len(suffix) == 3 and suffix.isdigit():
+                existing_runs.append(int(suffix))
+
+        # Determine next index (start at 1 → "001")
+        next_idx = (max(existing_runs) + 1) if existing_runs else 1
+
+        folder_name = f"{prefix}{next_idx:03d}"
+        self.run_dir = os.path.join(BASE_DIR, folder_name)
         os.makedirs(self.run_dir, exist_ok=True)
         self._snapshot_source()
         self.genotype_events: List[Dict[str, int]] = []
@@ -385,12 +414,54 @@ class GraphOfLife:
         base = [own_t, tgt_t, own_deg, tgt_deg] + q_tok[u] + q_tok[v] + q_deg[u] + q_deg[v]
         base = [f * scale for f in base]
 
+
         if extra_feats is None:
             extras_scaled = [0.0] * 20
         else:
             extras_scaled = [float(x) * scale for x in extra_feats]
 
-        return np.array([own_obs] + base + extras_scaled, dtype=float)
+        # ---- Messaging features (always included) ----
+        # Pull 4*M values: (u->u), (u->v), (v->u), (v->v)
+        M = MESSAGE_NUMBER_AMOUNT
+        def _msg(src: int, dst: int) -> List[float]:
+            vec = self.messages.get(src, {}).get(dst, None)
+            if vec is None:
+                return [0.0] * M
+            out = list(vec[:M])
+            if len(out) < M:
+                out += [0.0] * (M - len(out))
+            return out
+        msg_feats = _msg(u, u) + _msg(u, v) + _msg(v, u) + _msg(v, v)
+        msg_feats = [m * scale for m in msg_feats]
+
+        return np.array([own_obs] + base + extras_scaled + msg_feats, dtype=float)
+
+
+
+
+    # ---------------------------------------------------------------------
+    # Messaging emission helper: write Y[HEAD["MESSAGE"]] into self.messages
+    # for each (u -> v) in the order of 'targets' (columns of X / Y).
+    # Call this immediately after ANY observation forward pass.
+    # ---------------------------------------------------------------------
+    def _emit_messages(self, u: int, targets: List[int], Y: np.ndarray) -> None:
+        if EXCHANGE_MESSAGES:
+            M = MESSAGE_NUMBER_AMOUNT
+            msg_rows = Y[HEAD["MESSAGE"], :]  # shape: (M, len(targets)) or (len(targets),) if M==1
+            # Ensure 2D shape even if M==1
+            if M == 1 and msg_rows.ndim == 1:
+                msg_rows = np.array([msg_rows])
+            # Hard-coded squashing to [-1, 1]
+            msg_rows = np.tanh(msg_rows)
+
+            for j, v in enumerate(targets):
+                col = msg_rows[:, j].astype(float).tolist()
+                # Defensive pad/truncate to length M
+                if len(col) < M:
+                    col = col + [0.0] * (M - len(col))
+                elif len(col) > M:
+                    col = col[:M]
+                self.messages.setdefault(u, {})[int(v)] = col
 
     # ----- logging utilities -----
     def _snapshot_graph(self) -> Dict[str, Any]:
@@ -654,7 +725,9 @@ class GraphOfLife:
             all_candidates = core_candidates + [chosen_far] if chosen_far is not None else core_candidates
             X_cols = [self._input_vec_fast(u, v, deg, q_tok, q_deg) for v in all_candidates]
             X = np.column_stack(X_cols)
-            Y = self.brains[u].forward(X)  # (12, K)
+            Y = self.brains[u].forward(X)
+            # Emit messages for reproduction-time observation
+            self._emit_messages(u, all_candidates, Y)
 
             repro_logits_all = Y[HEAD["REPRO"], :]
             link_logits_all = Y[HEAD["LINK"], :]
@@ -761,6 +834,7 @@ class GraphOfLife:
                 self.brains[cid] = child_brain
                 neighbors_cid = [int(v) for v in self.G.neighbors(cid)]
                 self.reach_counts[cid] = {int(cid): 1, **{nv: 1 for nv in neighbors_cid}}
+                self.messages[cid] = {}
                 self.tokens[u] = keep_tokens
 
                 rec.update({"child_created": True, "child_id": int(cid), "link_choices": link_logs})
@@ -899,7 +973,25 @@ class GraphOfLife:
             "pruned_edges": [],
         }
 
+        # Snapshot pre-blotto state for logging
+        tokens_before_phase = dict(self.tokens)
+        brains_before_phase = {u: b.brain_id for u, b in self.brains.items()}
+
         deg, neighs, q_tok, q_deg = self._precompute_features()
+
+
+        # ---------------------------------------------------------------
+        # Pre-blotto messaging-only observation:
+        # Every agent observes self+neighbors, emits MESSAGE head stored as
+        # self.messages[u][v] (last message u->v).
+        # ---------------------------------------------------------------
+        for u in list(self.G.nodes()):
+            targets = [u] + neighs[u]
+            X_cols = [self._input_vec_fast(u, v, deg, q_tok, q_deg, extra_feats=None) for v in targets]
+            X = np.column_stack(X_cols)
+            Y = self.brains[u].forward(X)
+            # NEW: emit messages for this observation
+            self._emit_messages(u, targets, Y)
 
         # Per-round state for allocation
         remaining = {u: int(self.tokens.get(u, 0)) for u in self.G.nodes()}
@@ -1018,6 +1110,8 @@ class GraphOfLife:
 
             X = np.column_stack(X_cols)
             Y = self.brains[u].forward(X)
+            # Emit messages for this blotto observation
+            self._emit_messages(u, targets, Y)
             scores = np.asarray(Y[HEAD["BLOTTO"], :], dtype=float)
             return targets, scores
 
@@ -1155,7 +1249,7 @@ class GraphOfLife:
 
                 max_amt = max(offers_map.values())
                 contenders = [s for s, a in offers_map.items() if a == max_amt]
-                winner = random.choice(contenders)
+                winner = int(np.random.choice(contenders))
 
                 # Implant winner's brain into v
                 new_brains[v] = self.brains[winner].copy()
@@ -1184,7 +1278,7 @@ class GraphOfLife:
 
                 max_amt = max(offers_map.values())
                 contenders = [s for s, a in offers_map.items() if a == max_amt]
-                winner = random.choice(contenders)
+                winner = int(np.random.choice(contenders))
 
                 winnings[winner] = winnings.get(winner, 0) + int(incoming_totals[v])
                 new_tokens[v] = 0
@@ -1220,13 +1314,27 @@ class GraphOfLife:
         log["cleanup"] = self._cleanup_and_redistribute()
         log["post_state"] = self._snapshot_graph()
 
+
+        # Messaging dictionary hygiene: at end of Blotto, keep only self+neighbors
+        # and only entries pointing to nodes still present.
+        for u in list(self.messages.keys()):
+            if not self.G.has_node(u):
+                self.messages.pop(u, None)
+                continue
+            allowed = set([u] + [int(w) for w in self.G.neighbors(u)])
+            keep: Dict[int, List[float]] = {}
+            for v, vec in self.messages.get(u, {}).items():
+                if v in allowed and self.G.has_node(v):
+                    keep[v] = vec
+            self.messages[u] = keep
+
         # Aggregated per-agent allocation counts (compat) + exact sequence
         for u in list(self.G.nodes()) + [x for x in allocation_sequence.keys() if x not in self.G.nodes()]:
             tgs = [u] + (neighs.get(u, []))
             alloc_counts = [int(u_sent_to_v[(u, v)]) for v in tgs]
             log["allocations"].append({
                 "agent_id": int(u),
-                "tokens_before": int(self.tokens.get(u, 0)),
+                "tokens_before": int(tokens_before_phase.get(u, 0)),
                 "targets": [int(v) for v in tgs],
                 "alloc": alloc_counts
             })
@@ -1251,10 +1359,12 @@ class GraphOfLife:
 # ----------------------------------------------------------------------------
 
 def _main() -> None:
-    n = 500
-    k = 30
-    total_tokens = 100_000
+
+    total_tokens = 20_000
     max_steps = 500_000
+
+    n = int(total_tokens/100)
+    k = int(n/100)
 
     def make_simulation() -> GraphOfLife:
         G0 = nx.watts_strogatz_graph(n=n, k=k, p=0.2)
