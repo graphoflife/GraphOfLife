@@ -49,6 +49,9 @@ import numpy as np
 # Configuration & constants
 # ----------------------------------------------------------------------------
 
+# Total amount of tokens (they are conserved over time)
+TOTAL_TOKENS = 10_000
+
 # Determinism of decisions (per-token in Blotto; per-comparison elsewhere)
 PROBABILISTIC_DECISIONS: bool = False
 
@@ -66,6 +69,19 @@ MUTATE_ON_BLOTTO_COPY: bool = False          # default preserves current behavio
 
 # Mutate all brains at the very end of Blotto (after outcomes are applied)
 MUTATE_ALL_AFTER_BLOTTO: bool = True       # default off
+
+# ---- Mutation Hyperparameters ----
+# Probability that a brain undergoes mutation during a copy event
+MUTATION_PROBABILITY: float = 0.35
+
+# Standard deviation of Gaussian noise added to weights/biases
+MUTATION_NOISE_STD: float = 0.2
+
+# Probability of a specific weight parameter receiving noise
+MUTATION_SPARSITY: float = 0.1
+
+
+
 
 # ---- Reproduction decision variant ----
 # True  -> ignore yes/no logits; use averaged fraction logits over core to set child_tokens
@@ -89,9 +105,15 @@ MESSAGE_NUMBER_AMOUNT = 4
 # "STEP_ALLOCATION_STRONGEST_FIRST": only agents with the current per-round max remaining tokens allocate 1 token
 BLOTTO_ALLOCATION_MODE: str = "STEP_ALLOCATION_STRONGEST_FIRST"
 
+# ---- Brain Architecture ----
+# Defines the number of neurons in hidden layers.
+# Empty list [] implies a linear perceptron (Input -> Output).
+BRAIN_HIDDEN_LAYERS: List[int] = [50, 45, 40, 35, 30]
 
 # Draw k-core visualizations every 10 steps.
-DRAW: bool = False
+DRAW: bool = True
+DRAW_EVERY_X_ITERATIONS = 100
+
 
 # Output directory (created beside this file by default)
 BASE_DIR = os.path.join(os.path.dirname(__file__), "GraphOfLifeOutputs")
@@ -170,7 +192,7 @@ class Brain:
         # Messaging adds 4 * MESSAGE_NUMBER_AMOUNT inputs:
         # (u->u, u->v, v->u, v->v), each of length M.
         n_inputs = 49 + 4 * MESSAGE_NUMBER_AMOUNT
-        hidden_sizes = [50, 45, 40, 35, 30]
+        hidden_sizes = BRAIN_HIDDEN_LAYERS
         n_outputs = 15 + MESSAGE_NUMBER_AMOUNT
 
         assert n_inputs > 0 and n_outputs > 0
@@ -212,48 +234,28 @@ class Brain:
 
         return new_brain
 
-    def mutate(
-            self,
-            mutate_prob: float = 0.35,
-            weight_noise_std: float = 0.2,
-            bias_noise_std: float = 0.2,
-            p_weight_noise: float = 0.1,
-            p_bias_noise: float = 0.1,
-            p_weight_reset: float = 0.1,
-            p_bias_reset: float = 0.1,
-            reset_fraction: float = 0.10,
-            layerwise_scale: bool = True,
-    ) -> None:
+    def mutate(self) -> None:
         """Mutate in place via Gaussian noise + optional random resets.
-
-        - With probability `mutate_prob`, this brain is mutated.
-        - Noise is applied sparsely (p_*_noise masks).
-        - A subset of parameters can be fully re-sampled (resets).
-        - If `layerwise_scale=True`, noise and resets are scaled per-layer
-          using 1/sqrt(fan_in) similar to Xavier init.
         """
-        if np.random.random() > mutate_prob:
+        if np.random.random() > MUTATION_PROBABILITY:
             return
 
         old_id = self.brain_id
-        reset_fraction = float(np.clip(reset_fraction, 0.0, 1.0))
+        reset_fraction = float(np.clip(MUTATION_SPARSITY, 0.0, 1.0))
 
         for i, (W, b) in enumerate(zip(self.weights, self.biases)):
             fan_in = W.shape[1]
 
             # Scale factors per layer (smaller steps for wider layers)
-            if layerwise_scale and fan_in > 0:
-                base_scale = 1.0 / np.sqrt(fan_in)
-            else:
-                base_scale = 1.0
+            base_scale = 1.0 / np.sqrt(fan_in)
 
             # Effective std per layer
-            w_noise_std_layer = float(weight_noise_std) * base_scale
-            b_noise_std_layer = float(bias_noise_std) * base_scale
+            w_noise_std_layer = float(MUTATION_NOISE_STD) * base_scale
+            b_noise_std_layer = float(MUTATION_NOISE_STD) * base_scale
 
             # --- Weights: sparse additive noise ---
-            if p_weight_noise > 0.0 and w_noise_std_layer > 0.0:
-                mask = np.random.random(W.shape) < p_weight_noise
+            if MUTATION_SPARSITY > 0.0 and w_noise_std_layer > 0.0:
+                mask = np.random.random(W.shape) < MUTATION_SPARSITY
                 W = W + np.random.normal(
                     loc=0.0,
                     scale=w_noise_std_layer,
@@ -261,8 +263,8 @@ class Brain:
                 ) * mask
 
             # --- Weights: random resets (Xavier-like, consistent with init) ---
-            if (p_weight_reset > 0.0) and (reset_fraction > 0.0):
-                if np.random.random() < p_weight_reset:
+            if (MUTATION_SPARSITY > 0.0) and (reset_fraction > 0.0):
+                if np.random.random() < MUTATION_SPARSITY:
                     reset_mask = np.random.random(W.shape) < reset_fraction
                     if np.any(reset_mask):
                         W_new = np.random.normal(
@@ -275,8 +277,8 @@ class Brain:
             self.weights[i] = W.astype(float, copy=False)
 
             # --- Biases: sparse additive noise ---
-            if p_bias_noise > 0.0 and b_noise_std_layer > 0.0:
-                maskb = np.random.random(b.shape) < p_bias_noise
+            if MUTATION_SPARSITY > 0.0 and b_noise_std_layer > 0.0:
+                maskb = np.random.random(b.shape) < MUTATION_SPARSITY
                 b = b + np.random.normal(
                     loc=0.0,
                     scale=b_noise_std_layer,
@@ -284,8 +286,8 @@ class Brain:
                 ) * maskb
 
             # --- Biases: random resets (small, zero-centered) ---
-            if (p_bias_reset > 0.0) and (reset_fraction > 0.0):
-                if np.random.random() < p_bias_reset:
+            if (MUTATION_SPARSITY > 0.0) and (reset_fraction > 0.0):
+                if np.random.random() < MUTATION_SPARSITY:
                     reset_maskb = np.random.random(b.shape) < reset_fraction
                     if np.any(reset_maskb):
                         # Biases were initialized to 0; we keep them small
@@ -365,6 +367,7 @@ class GraphOfLife:
         self.run_dir = os.path.join(BASE_DIR, folder_name)
         os.makedirs(self.run_dir, exist_ok=True)
         self._snapshot_source()
+        self._save_configuration()
         self.genotype_events: List[Dict[str, int]] = []
         Brain.rec = self.genotype_events.append
 
@@ -508,7 +511,7 @@ class GraphOfLife:
             layers_edges.setdefault(L, []).append(e)
 
         def size_of(u: int) -> float:
-            return (self.tokens.get(u, 0) + 1) * 8
+            return (self.tokens.get(u, 0) + 1)/12
 
         def color_of(u: int) -> int:
             return self.tokens.get(u, 0)
@@ -525,7 +528,7 @@ class GraphOfLife:
             if not edgelist:
                 continue
             edge_alpha = 0.5 / (2**L)
-            nx.draw_networkx_edges(self.G, pos2d, edgelist=edgelist, alpha=edge_alpha, width=2.5 if L == 0 else 2.0)
+            nx.draw_networkx_edges(self.G, pos2d, edgelist=edgelist, alpha=edge_alpha, width=0.5 if L == 0 else 0.3)
 
         mappable_for_cb = None
         for L in layer_keys_sorted:
@@ -605,6 +608,37 @@ class GraphOfLife:
             except Exception:
                 pass
 
+    def _save_configuration(self) -> None:
+        """
+        Dynamically extracts all global constants (UPPERCASE variables)
+        and saves them to a manifest file for reproducibility.
+        """
+        # 1. Introspect the global scope to find settings
+        config_data = {}
+        # We access globals() from the module where the class is defined
+        g = globals()
+
+        for name, value in g.items():
+            # Criteria: Must be Uppercase, not a private variable (_), and not a class definition/module
+            if name.isupper() and not name.startswith("_"):
+                # specific check to exclude imported modules if they happen to be aliased to CAPS
+                if not isinstance(value, type) and not hasattr(value, "__file__"):
+                    config_data[name] = value
+
+        # 2. Write to config.txt (Human readable, handles types like 'slice' gracefully)
+        txt_path = os.path.join(self.run_dir, "config.txt")
+        with open(txt_path, "w") as f:
+            f.write(f"# GraphOfLife Configuration Manifest\n")
+            f.write(f"# Timestamp: {datetime.now().isoformat()}\n")
+            f.write("-" * 40 + "\n")
+
+            # Sort keys for consistent readability
+            for key in sorted(config_data.keys()):
+                val_str = str(config_data[key])
+                # Clean up newlines in string representations if any
+                val_str = val_str.replace("\n", " ")
+                f.write(f"{key}: {val_str}\n")
+
     # ----------------------------------------------------------------------------
     # Phase 1: Reproduction
     # ----------------------------------------------------------------------------
@@ -683,6 +717,8 @@ class GraphOfLife:
         report["survivors_count"] = self.G.number_of_nodes()
         assert sum(self.tokens.values()) == self.total_tokens, "Token conservation violated!"
         return report
+
+
 
     def reproduction_phase(self, t: int) -> str:
         log: Dict[str, Any] = {"phase": "reproduction", "pre_state": self._snapshot_graph(), "decisions": []}
@@ -952,7 +988,7 @@ class GraphOfLife:
         log["genotype_events"] = list(self.genotype_events)
         self.genotype_events.clear()
         path = self._save_step_file(2 * t, log)
-        if t % 10 == 0 and DRAW:
+        if t % DRAW_EVERY_X_ITERATIONS == 0 and DRAW:
             self._draw(f"Round {t} — After Phase 1", f"step_{2 * t:05d}_phase1.png")
         return path
 
@@ -1343,7 +1379,7 @@ class GraphOfLife:
         log["genotype_events"] = list(self.genotype_events)
         self.genotype_events.clear()
         path = self._save_step_file(2 * t + 1, log)
-        if t % 10 == 0 and DRAW:
+        if t % DRAW_EVERY_X_ITERATIONS == 0 and DRAW:
             self._draw(f"Round {t} — After Phase 2", f"step_{2 * t + 1:05d}_phase2.png")
         return path
 
@@ -1360,15 +1396,14 @@ class GraphOfLife:
 
 def _main() -> None:
 
-    total_tokens = 20_000
     max_steps = 500_000
 
-    n = int(total_tokens/100)
-    k = int(n/100)
+    n = int(TOTAL_TOKENS/100)
+    k = max([int(n/100), 5])
 
     def make_simulation() -> GraphOfLife:
         G0 = nx.watts_strogatz_graph(n=n, k=k, p=0.2)
-        return GraphOfLife(G0, total_tokens=total_tokens)
+        return GraphOfLife(G0, total_tokens=TOTAL_TOKENS)
 
     run_counter = 0
     while True:
