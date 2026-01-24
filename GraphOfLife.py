@@ -29,7 +29,7 @@ import numpy as np
 # ----------------------------------------------------------------------------
 
 # Total amount of tokens (conserved)
-TOTAL_TOKENS = 40_000
+TOTAL_TOKENS = 20_000
 
 # ---- Token Creation ----
 CREATE_X_NEW_TOKENS_EACH_PHASE: int = 0
@@ -38,15 +38,19 @@ CREATE_X_NEW_TOKENS_EACH_PHASE: int = 0
 PROBABILISTIC_DECISIONS: bool = False
 
 # ---- Blotto rule variants ----
-#   "ALLOCATE_AND_CONQUER": highest allocator at node v implants its brain into v
-#   "ALLOCATE_AND_ROB"    : winner-for-v *collects* all tokens allocated to v; no brain copying
-BLOTTO_MODE: str = "ALLOCATE_AND_CONQUER"
+#   "ALLOCATE_AND_CONQUER"      : highest allocator at node v implants its brain into v
+#   "ALLOCATE_AND_ROB"          : winner-for-v *collects* all tokens allocated to v; no brain copying
+#   "ALLOCATE_AND_DO_NOTHING"   : No Brain gets overwritten. But they dont want the links to disappear
+
+BLOTTO_MODE: str = "ALLOCATE_AND_DO_NOTHING"
 
 # ---- Blotto allocation scheduling ----
 # "FULL_ALLOCATION"              : one observation; each agent allocates all its tokens at once by relative scores
 # "STEP_ALLOCATION_WEAKEST_FIRST": (current behavior) every agent with >=1 token allocates 1 token each round
 # "STEP_ALLOCATION_STRONGEST_FIRST": only agents with the current per-round max remaining tokens allocate 1 token
-BLOTTO_ALLOCATION_MODE: str = "STEP_ALLOCATION_STRONGEST_FIRST"
+# "STEP_ALLOCATION_AS_WISHED": they can choose when to allocate
+
+BLOTTO_ALLOCATION_MODE: str = "STEP_ALLOCATION_AS_WISHED"
 
 # ---- Reproduction decision variant ----
 REPRO_CORE_FRACTIONS_ONLY: bool = False
@@ -87,14 +91,14 @@ MESSAGE_NUMBER_AMOUNT = 5
 # ---- Token Redistribution Physics----
 # "GLOBAL_UNIFORM": Tokens from removed nodes are distributed to all survivors (Manna from Heaven).
 # "LOCAL_SCAVENGING": Tokens from removed nodes go to surviving neighbors. Isolated tokens go global.
-TOKEN_REDISTRIBUTION_MODE: str = "LOCAL_SCAVENGING"
+TOKEN_REDISTRIBUTION_MODE: str = "GLOBAL_UNIFORM"
 
 # ---- Brain Architecture ----
 BRAIN_HIDDEN_LAYERS: List[int] = [50, 45, 40, 35, 30]
 
 # Visualization
 DRAW: bool = True
-DRAW_EVERY_X_ITERATIONS = 100
+DRAW_EVERY_X_ITERATIONS = 50
 
 # Output directory
 BASE_DIR = os.path.join(os.path.dirname(__file__), "GraphOfLifeOutputs")
@@ -110,6 +114,8 @@ HEAD = {
     "WALKER": slice(13, 15),
     "MESSAGE": slice(15, 15 + MESSAGE_NUMBER_AMOUNT),
     "WALKER_DIR": 15 + MESSAGE_NUMBER_AMOUNT,
+    "ALLOCATE_YN": slice(15 + MESSAGE_NUMBER_AMOUNT + 1,15 + MESSAGE_NUMBER_AMOUNT + 3),
+
 }
 
 
@@ -174,7 +180,7 @@ class Brain:
         n_inputs = 53 + 4 * MESSAGE_NUMBER_AMOUNT + RANDOM_INPUT_AMOUNT
 
         hidden_sizes = BRAIN_HIDDEN_LAYERS
-        n_outputs = 15 + MESSAGE_NUMBER_AMOUNT + 1
+        n_outputs = 15 + MESSAGE_NUMBER_AMOUNT + 3
 
         assert n_inputs > 0 and n_outputs > 0
         self.layer_sizes = [int(n_inputs)] + [int(h) for h in hidden_sizes] + [int(n_outputs)]
@@ -1028,10 +1034,11 @@ class GraphOfLife:
             X = np.column_stack(X_cols)
             Y = self.brains[u].forward(X)
             scores = np.asarray(Y[HEAD["BLOTTO"], :], dtype=float)
-            return targets, scores
+            alloc_yn_logits = np.asarray(Y[HEAD["ALLOCATE_YN"], :], dtype=float)
+            return targets, scores, alloc_yn_logits
 
         # --------------------------------------------------------------------
-        # 4. Allocation Scheduling (Restored All Modes)
+        # 4. Allocation Scheduling
         # --------------------------------------------------------------------
 
         if BLOTTO_ALLOCATION_MODE == "FULL_ALLOCATION":
@@ -1041,7 +1048,7 @@ class GraphOfLife:
                 t_u = int(remaining.get(u, 0))
                 if t_u <= 0: continue
 
-                targets, scores = forward_scores_for(u, snapshot_incoming_totals, snapshot_leader_max,
+                targets, scores, _ = forward_scores_for(u, snapshot_incoming_totals, snapshot_leader_max,
                                                      snapshot_leader_set)
 
                 vals = np.maximum(0.0, scores)
@@ -1082,7 +1089,7 @@ class GraphOfLife:
                 snap_tot, snap_max, snap_set = compute_snapshot_views()
                 decisions = {}
                 for u in eligible:
-                    targets, scores = forward_scores_for(u, snap_tot, snap_max, snap_set)
+                    targets, scores, _ = forward_scores_for(u, snap_tot, snap_max, snap_set)
                     if PROBABILISTIC_DECISIONS:
                         vals = np.maximum(0.0, scores)
                         s = float(vals.sum())
@@ -1113,7 +1120,7 @@ class GraphOfLife:
                 snap_tot, snap_max, snap_set = compute_snapshot_views()
                 decisions = {}
                 for u in eligible:
-                    targets, scores = forward_scores_for(u, snap_tot, snap_max, snap_set)
+                    targets, scores, _ = forward_scores_for(u, snap_tot, snap_max, snap_set)
                     if PROBABILISTIC_DECISIONS:
                         vals = np.maximum(0.0, scores)
                         s = float(vals.sum())
@@ -1133,74 +1140,149 @@ class GraphOfLife:
                         if e in edge_flow: edge_flow[e] += 1
                     allocation_sequence[u].append(int(v))
 
+        elif BLOTTO_ALLOCATION_MODE == "STEP_ALLOCATION_AS_WISHED":
+            # Mode D: Voluntary Contribution with Forced Ceiling
+            while True:
+                elig = [u for u in self.G.nodes() if remaining.get(u, 0) >= 1]
+                if not elig: break
+
+                # The "Ceiling": The game cannot last longer than the richest player allows.
+                max_rem = max(remaining[u] for u in elig)
+
+                snap_tot, snap_max, snap_set = compute_snapshot_views()
+                decisions = {}
+
+                for u in elig:
+                    # Constraint: If I am the richest, I MUST play to prevent stalling.
+                    is_forced = (remaining[u] == max_rem)
+
+                    targets, scores, yn_logits = forward_scores_for(u, snap_tot, snap_max, snap_set)
+
+                    # --- DECISION: Do I want to allocate? ---
+                    # We take the mean across all targets to determine the agent's general "mood".
+                    # yn_logits shape is (2, N_targets). Row 0 = Yes, Row 1 = No.
+                    avg_yes = float(np.mean(yn_logits[0, :]))
+                    avg_no = float(np.mean(yn_logits[1, :]))
+
+                    wants_to_play = False
+
+                    if PROBABILISTIC_DECISIONS:
+                        # Softmax on the average Yes vs No
+                        vy = np.exp(avg_yes)
+                        vn = np.exp(avg_no)
+                        p_yes = vy / (vy + vn) if (vy + vn) > 0 else 0.5
+                        if np.random.rand() < p_yes:
+                            wants_to_play = True
+                    else:
+                        # Hard Argmax
+                        if avg_yes > avg_no:
+                            wants_to_play = True
+
+                    # --- EXECUTION ---
+                    if is_forced or wants_to_play:
+                        # Pick the best target based on BLOTTO scores
+                        if PROBABILISTIC_DECISIONS:
+                            vals = np.maximum(0.0, scores)
+                            s = float(vals.sum())
+                            probs = (vals / s) if s > 0 else np.full_like(vals, 1.0 / len(vals))
+                            idx = int(np.random.choice(len(targets), p=probs))
+                        else:
+                            idx = int(np.argmax(scores))
+
+                        decisions[u] = int(targets[idx])
+
+                # Apply Decisions
+                for u, v in decisions.items():
+                    remaining[u] -= 1
+                    incoming_totals[v] += 1
+                    per_target_allocators[v][u] = per_target_allocators[v].get(u, 0) + 1
+                    u_sent_to_v[(u, v)] += 1
+                    if u != v:
+                        e = tuple(sorted((u, v)))
+                        if e in edge_flow: edge_flow[e] += 1
+                    allocation_sequence[u].append(int(v))
+
         else:
             raise ValueError(f"Unknown BLOTTO_ALLOCATION_MODE: {BLOTTO_ALLOCATION_MODE}")
 
-            # --------------------------------------------------------------------
-            # 3. Resolution (Conquest vs Robbery)
-            # --------------------------------------------------------------------
-            new_tokens = dict(self.tokens)
-            new_brains = dict(self.brains)
-            walker_resets: List[int] = []
+        # --------------------------------------------------------------------
+        # 5. Resolution (Conquest vs Robbery vs Transfer)
+        # --------------------------------------------------------------------
+        new_tokens = dict(self.tokens)
+        new_brains = dict(self.brains)
+        walker_resets: List[int] = []
 
-            if BLOTTO_MODE == "ALLOCATE_AND_CONQUER":
-                for v in list(self.G.nodes()):
-                    offers = per_target_allocators[v]
-                    if not offers:
-                        new_tokens[v] = 0
-                        # Survival: Clone self
-                        new_brains[v] = self.brains[v].copy()
-                        if MUTATE_ON_BLOTTO_COPY: new_brains[v].mutate()
-
-                        # Logic: Even if no one attacked, if we reset on conquer, we often reset on survival too
-                        # (Optional, but consistent with Old Code logic to ensure freshness)
-                        if RESET_REACH_ON_CONQUER:
-                            neighbors_vid = [int(w) for w in self.G.neighbors(v)]
-                            self.reach_counts[v] = {int(v): 1, **{nv: 1 for nv in neighbors_vid}}
-                            walker_resets.append(int(v))
-                        continue
-
-                    max_amt = max(offers.values())
-                    winners = [s for s, a in offers.items() if a == max_amt]
-                    winner = int(np.random.choice(winners))
-
-                    # Genetic Takeover (Brain Overwrite)
-                    new_brains[v] = self.brains[winner].copy()
+        if BLOTTO_MODE == "ALLOCATE_AND_CONQUER":
+            for v in list(self.G.nodes()):
+                offers = per_target_allocators[v]
+                if not offers:
+                    new_tokens[v] = 0
+                    # Survival: Clone self
+                    new_brains[v] = self.brains[v].copy()
                     if MUTATE_ON_BLOTTO_COPY: new_brains[v].mutate()
-                    new_tokens[v] = int(incoming_totals[v])
-                    log["winners"][str(v)] = {"winner": int(winner), "max_amount": int(max_amt)}
 
-                    if winner != v and RESET_REACH_ON_CONQUER:
-                        # Reset memory of the conquered node
+                    if RESET_REACH_ON_CONQUER:
                         neighbors_vid = [int(w) for w in self.G.neighbors(v)]
                         self.reach_counts[v] = {int(v): 1, **{nv: 1 for nv in neighbors_vid}}
                         walker_resets.append(int(v))
+                    continue
 
-            elif BLOTTO_MODE == "ALLOCATE_AND_ROB":
-                winnings: Dict[int, int] = {u: 0 for u in self.G.nodes()}
-                for v in list(self.G.nodes()):
-                    offers = per_target_allocators[v]
-                    if not offers:
-                        new_tokens[v] = 0
-                        new_brains[v] = self.brains[v]  # Keep own brain
-                        continue
+                max_amt = max(offers.values())
+                winners = [s for s, a in offers.items() if a == max_amt]
+                winner = int(np.random.choice(winners))
 
-                    max_amt = max(offers.values())
-                    winners = [s for s, a in offers.items() if a == max_amt]
-                    winner = int(np.random.choice(winners))
+                # Genetic Takeover (Brain Overwrite)
+                new_brains[v] = self.brains[winner].copy()
+                if MUTATE_ON_BLOTTO_COPY: new_brains[v].mutate()
+                new_tokens[v] = int(incoming_totals[v])
+                log["winners"][str(v)] = {"winner": int(winner), "max_amount": int(max_amt)}
 
-                    # Winner gets the tokens, Loser (v) keeps the brain but loses tokens
-                    winnings[winner] = winnings.get(winner, 0) + int(incoming_totals[v])
+                if winner != v and RESET_REACH_ON_CONQUER:
+                    # Reset memory of the conquered node
+                    neighbors_vid = [int(w) for w in self.G.neighbors(v)]
+                    self.reach_counts[v] = {int(v): 1, **{nv: 1 for nv in neighbors_vid}}
+                    walker_resets.append(int(v))
+
+        elif BLOTTO_MODE == "ALLOCATE_AND_ROB":
+            winnings: Dict[int, int] = {u: 0 for u in self.G.nodes()}
+            for v in list(self.G.nodes()):
+                offers = per_target_allocators[v]
+                if not offers:
                     new_tokens[v] = 0
-                    new_brains[v] = self.brains[v]
-                    log["winners"][str(v)] = {"winner": int(winner), "max_amount": int(max_amt)}
+                    new_brains[v] = self.brains[v]  # Keep own brain
+                    continue
 
-                # Apply winnings to the robbers
-                for w, gain in winnings.items():
-                    new_tokens[w] = new_tokens.get(w, 0) + int(gain)
+                max_amt = max(offers.values())
+                winners = [s for s, a in offers.items() if a == max_amt]
+                winner = int(np.random.choice(winners))
 
-            else:
-                raise ValueError(f"Unknown BLOTTO_MODE: {BLOTTO_MODE}")
+                # Winner gets the tokens, Loser (v) keeps the brain but loses tokens
+                winnings[winner] = winnings.get(winner, 0) + int(incoming_totals[v])
+                new_tokens[v] = 0
+                new_brains[v] = self.brains[v]
+                log["winners"][str(v)] = {"winner": int(winner), "max_amount": int(max_amt)}
+
+            # Apply winnings to the robbers
+            for w, gain in winnings.items():
+                new_tokens[w] = new_tokens.get(w, 0) + int(gain)
+
+        # === NEW MODE ADDED HERE ===
+        elif BLOTTO_MODE == "ALLOCATE_AND_DO_NOTHING":
+            # Simple Wealth Transfer:
+            # Tokens move based on allocation, but Brains are never overwritten.
+            # useful for cooperative maintenance of the network structure.
+            for v in list(self.G.nodes()):
+                # The node simply possesses whatever was allocated to it
+                # (either by itself or by neighbors).
+                new_tokens[v] = int(incoming_totals[v])
+
+                # Brains persist (no conquest)
+                new_brains[v] = self.brains[v]
+
+                # We do not reset walkers because no conquest occurred.
+
+        else:
+            raise ValueError(f"Unknown BLOTTO_MODE: {BLOTTO_MODE}")
 
         log["walker_resets"] = walker_resets
 
