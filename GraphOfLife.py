@@ -1,103 +1,46 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-GraphOfLife — Open‑ended Evolution on a Mutable Graph (GitHub v1)
-=================================================================
+GraphOfLife — Open-Ended Evolution on a Mutable Graph
+==============================================================================
 
-This engine simulates **open‑ended evolution** on a dynamic, undirected graph.
-Each node is an *agent* with a lightweight neural "brain" that observes local
-state and makes discrete decisions in two phases per iteration:
 
-1) **Reproduction phase** — agents may spawn a child, rewire edges, and create
-   new links. Topology edits are applied simultaneously.
-
-2) **Blotto phase** — agents compete for positions using a round‑based,
-   *one‑token‑at‑a‑time* allocation game. Decisions are lockstep per round so all
-   agents observe the same snapshot when allocating each token. Winners implant
-   their brain into the occupied node. Edges without flow are pruned.
-
-**Goals**
-- Minimal, reproducible code that still supports *ever‑evolving strategies*.
-- Rich, per‑phase JSON logs for analysis and reverse‑engineering.
-- Token conservation across phases (sum of tokens is invariant).
-
-**Outputs per iteration**
-- `step_XXXXX.json` files capturing pre/post state, decisions, and cleanup.
-- Optional PNG snapshots (`DRAW=True`).
-- A copy of this source file + SHA256 in each run folder for reproducibility.
 
 """
 from __future__ import annotations
 
-from dataclasses import dataclass
 from typing import Any, Dict, List, Tuple
 from datetime import datetime
 import hashlib
 import json
-import math
 import os
 import shutil
-import subprocess
 
-import matplotlib  # set backend before importing pyplot
+import matplotlib
+
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import networkx as nx
 import numpy as np
 
+
 # ----------------------------------------------------------------------------
-# Configuration & constants
+# Configuration & Constants
 # ----------------------------------------------------------------------------
 
-# Total amount of tokens (they are conserved over time)
-TOTAL_TOKENS = 10_000
+# Total amount of tokens (conserved)
+TOTAL_TOKENS = 40_000
 
-# Determinism of decisions (per-token in Blotto; per-comparison elsewhere)
+# ---- Token Creation ----
+CREATE_X_NEW_TOKENS_EACH_PHASE: int = 0
+
+# Determinism
 PROBABILISTIC_DECISIONS: bool = False
 
 # ---- Blotto rule variants ----
 #   "ALLOCATE_AND_CONQUER": highest allocator at node v implants its brain into v
 #   "ALLOCATE_AND_ROB"    : winner-for-v *collects* all tokens allocated to v; no brain copying
-BLOTTO_MODE: str = "ALLOCATE_AND_CONQUER"   # default keeps current behavior
-
-# ---- Mutation policy toggles ----
-# Mutate when a brain is copied in reproduction (child creation)
-MUTATE_ON_REPRO_COPY: bool = False          # default preserves current behavior (no mutation there)
-
-# Mutate when a brain is copied in Blotto (only relevant for ALLOCATE_AND_CONQUER)
-MUTATE_ON_BLOTTO_COPY: bool = False          # default preserves current behavior (there was mutation already)
-
-# Mutate all brains at the very end of Blotto (after outcomes are applied)
-MUTATE_ALL_AFTER_BLOTTO: bool = True       # default off
-
-# ---- Mutation Hyperparameters ----
-# Probability that a brain undergoes mutation during a copy event
-MUTATION_PROBABILITY: float = 0.35
-
-# Standard deviation of Gaussian noise added to weights/biases
-MUTATION_NOISE_STD: float = 0.2
-
-# Probability of a specific weight parameter receiving noise
-MUTATION_SPARSITY: float = 0.1
-
-
-
-
-# ---- Reproduction decision variant ----
-# True  -> ignore yes/no logits; use averaged fraction logits over core to set child_tokens
-# False -> use standard yes/no logits to decide whether reproduction occurs at all
-REPRO_CORE_FRACTIONS_ONLY: bool = False  # default preserves current behavior
-
-# ---- Walker/reach reset policy (only for ALLOCATE_AND_CONQUER) ----
-# True  -> (default) reset reach_counts[v] and record walker_resets when a brain is (re)implanted at v
-# False -> keep previous reach_counts[v]; do not push v into walker_resets
-RESET_REACH_ON_CONQUER: bool = True
-
-# ---- Exchange Messages ----
-# True  -> Agents can exchange messages
-# False -> CANNOT
-EXCHANGE_MESSAGES: bool = True
-MESSAGE_NUMBER_AMOUNT = 4
+BLOTTO_MODE: str = "ALLOCATE_AND_CONQUER"
 
 # ---- Blotto allocation scheduling ----
 # "FULL_ALLOCATION"              : one observation; each agent allocates all its tokens at once by relative scores
@@ -105,46 +48,79 @@ MESSAGE_NUMBER_AMOUNT = 4
 # "STEP_ALLOCATION_STRONGEST_FIRST": only agents with the current per-round max remaining tokens allocate 1 token
 BLOTTO_ALLOCATION_MODE: str = "STEP_ALLOCATION_STRONGEST_FIRST"
 
+# ---- Reproduction decision variant ----
+REPRO_CORE_FRACTIONS_ONLY: bool = False
+
+# ---- Mutation policy toggles ----
+MUTATE_ON_REPRO_COPY: bool = False
+MUTATE_ON_BLOTTO_COPY: bool = False
+MUTATE_ALL_AFTER_BLOTTO: bool = True
+
+# ---- Mutation Hyperparameters ----
+MUTATION_PROBABILITY: float = 0.5
+MUTATION_NOISE_STD: float = 0.2
+MUTATION_SPARSITY: float = 0.1
+
+# ---- Input Noise (New) ----
+# Amount of random inputs (Uniform -2 to 2) added to every observation
+RANDOM_INPUT_AMOUNT: int = 5
+
+# ---- Walkermode ----
+# PSEUDO_RANDOM_ONE_PER_ITERATION -> one per iteration
+# PSEUDO_RANDOM_ONE_PER_TOKEN -> one per token
+# PSEUDO_RANDOM_ONE_PER_TOKEN_LOG -> one per log2(token)+1
+# PSEUDO_RANDOM_ONE_PER_TOKEN_RANDOM_WALK -> one per token random walk
+# PSEUDO_RANDOM_ONE_PER_TOKEN_RANDOM_WALK_LOG -> one per log2(token)+1 token random walk
+# WALK_ON_OWN_PER_TOKEN -> Active navigation driven by Brain, steps = tokens
+# WALK_ON_OWN_PER_LOG_TOKEN -> Active navigation driven by Brain, steps = log2(tokens)+1
+# NO_WALKER -> no walker
+
+WALKER_MODE: str = "WALK_ON_OWN_PER_LOG_TOKEN"
+
+# ---- Walker/reach reset policy ----
+RESET_REACH_ON_CONQUER: bool = True
+
+# ---- Exchange Messages ----
+EXCHANGE_MESSAGES: bool = True
+MESSAGE_NUMBER_AMOUNT = 5
+
+# ---- Token Redistribution Physics----
+# "GLOBAL_UNIFORM": Tokens from removed nodes are distributed to all survivors (Manna from Heaven).
+# "LOCAL_SCAVENGING": Tokens from removed nodes go to surviving neighbors. Isolated tokens go global.
+TOKEN_REDISTRIBUTION_MODE: str = "LOCAL_SCAVENGING"
+
 # ---- Brain Architecture ----
-# Defines the number of neurons in hidden layers.
-# Empty list [] implies a linear perceptron (Input -> Output).
 BRAIN_HIDDEN_LAYERS: List[int] = [50, 45, 40, 35, 30]
 
-# Draw k-core visualizations every 10 steps.
+# Visualization
 DRAW: bool = True
 DRAW_EVERY_X_ITERATIONS = 100
 
-
-# Output directory (created beside this file by default)
+# Output directory
 BASE_DIR = os.path.join(os.path.dirname(__file__), "GraphOfLifeOutputs")
 os.makedirs(BASE_DIR, exist_ok=True)
 
-# Indices of output heads (rows of the Brain's output)
+# Output Heads
 HEAD = {
-    "REPRO": slice(0, 4),        # yes/no to reproduce (aggregated)
-    "LINK": slice(4, 6),         # yes/no to link new child to candidate
-    "SHIFT": slice(6, 8),        # move existing (u,v) edge to (child,v)
-    "RECONNECT": slice(8, 12),   # choose edge to drop & new neighbor
-    "BLOTTO": 12,                # single scalar score for blotto choice
-    "WALKER": slice(13, 15),     # yes/no to create walker link
-    "MESSAGE": slice(15, 15 + MESSAGE_NUMBER_AMOUNT),   # Numbers to exchange messages
+    "REPRO": slice(0, 4),
+    "LINK": slice(4, 6),
+    "SHIFT": slice(6, 8),
+    "RECONNECT": slice(8, 12),
+    "BLOTTO": 12,
+    "WALKER": slice(13, 15),
+    "MESSAGE": slice(15, 15 + MESSAGE_NUMBER_AMOUNT),
+    "WALKER_DIR": 15 + MESSAGE_NUMBER_AMOUNT,
 }
 
-# ----------------------------------------------------------------------------
-# Utility: math helpers
-# ----------------------------------------------------------------------------
 
-def _softmax_logits(vals: List[float]) -> np.ndarray:
-    arr = np.asarray(vals, dtype=float)
-    m = np.max(arr)
-    exp = np.exp(arr - m)  # numeric stability
-    z = exp.sum()
-    return exp / z if z > 0 else np.full_like(arr, 1.0 / len(arr))
-
+# ----------------------------------------------------------------------------
+# Mathematical Utilities
+# ----------------------------------------------------------------------------
 
 def _six_quantiles(sorted_vals: List[float]) -> List[float]:
-    """Return [q0, q20, q40, q60, q80, q100] with linear interpolation.
-    Expects *sorted* values. Returns zeros for empty input.
+    """
+    Compresses a distribution into 6 representative quantiles.
+    Used to give the brain a summary of neighborhood statistics.
     """
     if not sorted_vals:
         return [0.0] * 6
@@ -163,7 +139,7 @@ def _six_quantiles(sorted_vals: List[float]) -> List[float]:
 
 
 def _sigmoid(x: np.ndarray) -> np.ndarray:
-    # Stable sigmoid
+    """Stable Sigmoid activation."""
     pos = x >= 0
     neg = ~pos
     z = np.empty_like(x, dtype=float)
@@ -172,33 +148,37 @@ def _sigmoid(x: np.ndarray) -> np.ndarray:
     z[neg] = ex / (1.0 + ex)
     return z
 
-# ----------------------------------------------------------------------------
-# Brain: simple FFNN
-# ----------------------------------------------------------------------------
 
+# ----------------------------------------------------------------------------
+# The Brain (Neural Substrate)
+# ----------------------------------------------------------------------------
 
 class Brain:
-    """Feed‑forward NN with configurable hidden layers.
-
-    Hidden layers use sigmoid; output layer is linear. We treat the output rows
-    as *heads* (see HEAD), accessed by slices / indices.
-    """
-
     _next_brain_id = 1
-    rec = None  # set to a callable(event_dict) by the engine (e.g., list.append)
+    rec = None
 
     def __init__(self) -> None:
-        # Base features were 29 + 20 blotto extras = 49.
-        # Messaging adds 4 * MESSAGE_NUMBER_AMOUNT inputs:
-        # (u->u, u->v, v->u, v->v), each of length M.
-        n_inputs = 49 + 4 * MESSAGE_NUMBER_AMOUNT
+        """
+        Initializes a Feed-Forward Neural Network.
+
+        Input Layer Anatomy (Total ~77 neurons):
+        - Base (29): Local topology and wealth (Log-Scaled).
+        - Blotto Context (20): Competition metrics (Active only in Blotto phase).
+        - Walker Context (4): Spatial-temporal navigation data (Active only in Walker phase).
+        - Messages (20): Signals from neighbors.
+        - Noise (4): Entropy injection.
+        """
+        # Base breakdown: 1 (obs_is_self) + 4 (scalars) + 24 (quantiles) = 29
+        # Contexts: 20 (Blotto) + 4 (Walker) = 24
+        # Total Static Inputs = 53
+        n_inputs = 53 + 4 * MESSAGE_NUMBER_AMOUNT + RANDOM_INPUT_AMOUNT
+
         hidden_sizes = BRAIN_HIDDEN_LAYERS
-        n_outputs = 15 + MESSAGE_NUMBER_AMOUNT
+        n_outputs = 15 + MESSAGE_NUMBER_AMOUNT + 1
 
         assert n_inputs > 0 and n_outputs > 0
         self.layer_sizes = [int(n_inputs)] + [int(h) for h in hidden_sizes] + [int(n_outputs)]
 
-        # Xavier/Glorot-ish initialization
         self.weights: List[np.ndarray] = []
         self.biases: List[np.ndarray] = []
         for fan_in, fan_out in zip(self.layer_sizes[:-1], self.layer_sizes[1:]):
@@ -212,10 +192,6 @@ class Brain:
         Brain._next_brain_id += 1
 
     def forward(self, x: np.ndarray | List[float]) -> np.ndarray:
-        """Forward pass.
-        - Input: shape (n_inputs,) or (n_inputs, batch)
-        - Returns: shape (n_outputs,) or (n_outputs, batch)
-        """
         a = np.asarray(x, dtype=float)
         if a.ndim == 1:
             a = a.reshape(-1, 1)
@@ -230,77 +206,49 @@ class Brain:
         new_brain.weights = [w.copy() for w in self.weights]
         new_brain.biases = [b.copy() for b in self.biases]
         new_brain.parent_brain_id = self.brain_id
-        if Brain.rec: Brain.rec({"t":"copy","from":int(self.brain_id),"to":int(new_brain.brain_id)})
-
+        if Brain.rec: Brain.rec({"t": "copy", "from": int(self.brain_id), "to": int(new_brain.brain_id)})
         return new_brain
 
     def mutate(self) -> None:
-        """Mutate in place via Gaussian noise + optional random resets.
-        """
+        """Applies Gaussian noise and sparsity to weights."""
         if np.random.random() > MUTATION_PROBABILITY:
             return
-
         old_id = self.brain_id
         reset_fraction = float(np.clip(MUTATION_SPARSITY, 0.0, 1.0))
 
         for i, (W, b) in enumerate(zip(self.weights, self.biases)):
             fan_in = W.shape[1]
-
-            # Scale factors per layer (smaller steps for wider layers)
             base_scale = 1.0 / np.sqrt(fan_in)
+            w_std = float(MUTATION_NOISE_STD) * base_scale
+            b_std = float(MUTATION_NOISE_STD) * base_scale
 
-            # Effective std per layer
-            w_noise_std_layer = float(MUTATION_NOISE_STD) * base_scale
-            b_noise_std_layer = float(MUTATION_NOISE_STD) * base_scale
-
-            # --- Weights: sparse additive noise ---
-            if MUTATION_SPARSITY > 0.0 and w_noise_std_layer > 0.0:
+            # Weight Perturbation
+            if MUTATION_SPARSITY > 0.0 and w_std > 0.0:
                 mask = np.random.random(W.shape) < MUTATION_SPARSITY
-                W = W + np.random.normal(
-                    loc=0.0,
-                    scale=w_noise_std_layer,
-                    size=W.shape,
-                ) * mask
+                W = W + np.random.normal(0.0, w_std, size=W.shape) * mask
 
-            # --- Weights: random resets (Xavier-like, consistent with init) ---
+            # Structural Reset (Rarely replace weights entirely)
             if (MUTATION_SPARSITY > 0.0) and (reset_fraction > 0.0):
                 if np.random.random() < MUTATION_SPARSITY:
                     reset_mask = np.random.random(W.shape) < reset_fraction
                     if np.any(reset_mask):
-                        W_new = np.random.normal(
-                            loc=0.0,
-                            scale=1.0 / np.sqrt(fan_in) if fan_in > 0 else 1.0,
-                            size=W.shape,
-                        )
+                        W_new = np.random.normal(0.0, base_scale, size=W.shape)
                         W = np.where(reset_mask, W_new, W)
-
             self.weights[i] = W.astype(float, copy=False)
 
-            # --- Biases: sparse additive noise ---
-            if MUTATION_SPARSITY > 0.0 and b_noise_std_layer > 0.0:
+            # Bias Perturbation
+            if MUTATION_SPARSITY > 0.0 and b_std > 0.0:
                 maskb = np.random.random(b.shape) < MUTATION_SPARSITY
-                b = b + np.random.normal(
-                    loc=0.0,
-                    scale=b_noise_std_layer,
-                    size=b.shape,
-                ) * maskb
+                b = b + np.random.normal(0.0, b_std, size=b.shape) * maskb
 
-            # --- Biases: random resets (small, zero-centered) ---
             if (MUTATION_SPARSITY > 0.0) and (reset_fraction > 0.0):
                 if np.random.random() < MUTATION_SPARSITY:
                     reset_maskb = np.random.random(b.shape) < reset_fraction
                     if np.any(reset_maskb):
-                        # Biases were initialized to 0; we keep them small
-                        b_new = np.random.normal(
-                            loc=0.0,
-                            scale=b_noise_std_layer if b_noise_std_layer > 0 else 0.01,
-                            size=b.shape,
-                        )
+                        b_new = np.random.normal(0.0, b_std if b_std > 0 else 0.01, size=b.shape)
                         b = np.where(reset_maskb, b_new, b)
-
             self.biases[i] = b.astype(float, copy=False)
 
-        # Track lineage
         self.parent_brain_id = old_id
         self.brain_id = Brain._next_brain_id
         Brain._next_brain_id += 1
@@ -309,18 +257,16 @@ class Brain:
 
 
 # ----------------------------------------------------------------------------
-# GraphOfLife
+# The Arena (GraphOfLife)
 # ----------------------------------------------------------------------------
 
-
 class GraphOfLife:
-    """Two-phase evolutionary dynamics on a mutable graph with rich logs."""
-
     def __init__(self, G_init: nx.Graph, total_tokens: int) -> None:
-        # Persistent agent IDs: 0..N-1 initially
         self.G = nx.Graph()
         self.next_agent_id = 0
         old2new: Dict[Any, int] = {}
+
+        # Initialize Topology
         for n in G_init.nodes():
             aid = self.next_agent_id
             self.next_agent_id += 1
@@ -329,40 +275,30 @@ class GraphOfLife:
         for u, v in G_init.edges():
             self.G.add_edge(old2new[u], old2new[v])
 
+        # Initialize State
         self.total_tokens = int(total_tokens)
-
-        # Per-agent state
         self.tokens: Dict[int, int] = {aid: 0 for aid in self.G.nodes()}
         self.brains: Dict[int, Brain] = {aid: Brain() for aid in self.G.nodes()}
         self.reach_counts: Dict[int, Dict[int, int]] = {aid: {aid: 1} for aid in self.G.nodes()}
         self.messages: Dict[int, Dict[int, List[float]]] = {aid: {} for aid in self.G.nodes()}
 
-        # Initialize tokens uniformly
+        # Distribute Initial Wealth
         N = self.G.number_of_nodes()
         for aid in self.G.nodes():
             self.tokens[aid] = int(self.total_tokens / N)
 
-        # Run folder
+        # Setup Logging
         date_str = datetime.now().strftime("%Y_%m_%d")
         prefix = f"GOL_{date_str}__"
-
-        # Find existing run folders for today
         existing_runs = []
         for name in os.listdir(BASE_DIR):
             full_path = os.path.join(BASE_DIR, name)
-            if not os.path.isdir(full_path):
-                continue
-            if not name.startswith(prefix):
-                continue
-
-            # Extract the numeric suffix, e.g. "001" from "run_20251214_001"
+            if not os.path.isdir(full_path): continue
+            if not name.startswith(prefix): continue
             suffix = name[len(prefix):]
             if len(suffix) == 3 and suffix.isdigit():
                 existing_runs.append(int(suffix))
-
-        # Determine next index (start at 1 → "001")
         next_idx = (max(existing_runs) + 1) if existing_runs else 1
-
         folder_name = f"{prefix}{next_idx:03d}"
         self.run_dir = os.path.join(BASE_DIR, folder_name)
         os.makedirs(self.run_dir, exist_ok=True)
@@ -371,422 +307,431 @@ class GraphOfLife:
         self.genotype_events: List[Dict[str, int]] = []
         Brain.rec = self.genotype_events.append
 
-    # ----------------- helpers -----------------
     def _neighbors(self, u: int) -> List[int]:
         return list(self.G.neighbors(u))
 
-    def _precompute_features(self) -> Tuple[Dict[int, float], Dict[int, List[int]], Dict[int, List[float]], Dict[int, List[float]]]:
-        deg = {u: float(self.G.degree[u]) for u in self.G.nodes()}
+    def _precompute_features(self) -> Tuple[
+        Dict[int, float],
+        Dict[int, List[int]],
+        Dict[int, List[float]],
+        Dict[int, List[float]],
+        Dict[int, float]
+    ]:
+        """
+        Calculates the Global Sensory Manifold (O(N)).
+        Crucially, applies Log-Norm scaling to all wealth and degree values.
+        This allows the brain to perceive orders of magnitude differences.
+        """
+        # Log-Scale the Globals
+        log_tokens = {u: np.log1p(max(0, val)) for u, val in self.tokens.items()}
+        log_degrees = {u: np.log1p(float(self.G.degree[u])) for u in self.G.nodes()}
+
         neighs = {u: list(self.G.neighbors(u)) for u in self.G.nodes()}
+
         q_tok: Dict[int, List[float]] = {}
         q_deg: Dict[int, List[float]] = {}
+
+        # Calculate Local Statistics
         for u, N in neighs.items():
-            neigh_tokens = sorted(int(self.tokens.get(n, 0)) for n in N)
-            neigh_degs = sorted(float(self.G.degree[n]) for n in N)
-            q_tok[u] = _six_quantiles(neigh_tokens) if neigh_tokens else [0.0] * 6
-            q_deg[u] = _six_quantiles(neigh_degs) if neigh_degs else [0.0] * 6
-        return deg, neighs, q_tok, q_deg
+            if not N:
+                q_tok[u] = [0.0] * 6
+                q_deg[u] = [0.0] * 6
+                continue
+            # Sort the already-logged values
+            n_log_tok = sorted(log_tokens[n] for n in N)
+            n_log_deg = sorted(log_degrees[n] for n in N)
+            q_tok[u] = _six_quantiles(n_log_tok)
+            q_deg[u] = _six_quantiles(n_log_deg)
+
+        return log_degrees, neighs, q_tok, q_deg, log_tokens
 
     def _input_vec_fast(
-        self,
-        u: int,
-        v: int,
-        deg: Dict[int, float],
-        q_tok: Dict[int, List[float]],
-        q_deg: Dict[int, List[float]],
-        extra_feats: List[float] | None = None,
-        scale: float = 0.1,
+            self,
+            u: int,
+            v: int,
+            log_deg: Dict[int, float],
+            q_tok: Dict[int, List[float]],
+            q_deg: Dict[int, List[float]],
+            log_tok_map: Dict[int, float],
+            blotto_feats: List[float] | None = None,  # 20 dimensions
+            walker_feats: List[float] | None = None,  # 4 dimensions
+            scale: float = 0.1,
     ) -> np.ndarray:
-        """Build the per-(observer,target) input vector.
-
-        During reproduction `extra_feats` is None (zeros appended).
-        During blotto, `extra_feats` contains information important for blotto phase
-          0) total_on_v            : sum of tokens allocated to node v so far
-          1) current_max_on_v      : max tokens any single bidder has on v so far
-          2) edge_has_flow         : 1 if some token flowed on (u,v); for u==v we set 1
-          3) u_to_v                : tokens already sent by u to v
-          4) v_to_v                : tokens already sent by v to itself
-          5) u_wins_v_now          : tie‑aware win prob for u on v (1/|leaders| or 0)
-          6) remaining_alloc_u     : tokens u still can allocate in this phase
-          7) remaining_alloc_v     : tokens v still can allocate in this phase
         """
+        Constructs the high-dimensional sensory vector for the Brain.
+        Enforces strict separation between Blotto and Walker contexts.
+        """
+
+        # 1. Base Topology (29 dims)
         own_obs = int(u == v)
-        own_t, tgt_t = int(self.tokens.get(u, 0)), int(self.tokens.get(v, 0))
-        own_deg, tgt_deg = deg[u], deg[v]
+        own_t_log = log_tok_map.get(u, 0.0)
+        tgt_t_log = log_tok_map.get(v, 0.0)
+        own_d_log = log_deg[u]
+        tgt_d_log = log_deg[v]
 
-        base = [own_t, tgt_t, own_deg, tgt_deg] + q_tok[u] + q_tok[v] + q_deg[u] + q_deg[v]
-        base = [f * scale for f in base]
+        base = [own_t_log, tgt_t_log, own_d_log, tgt_d_log] + q_tok[u] + q_tok[v] + q_deg[u] + q_deg[v]
 
-
-        if extra_feats is None:
-            extras_scaled = [0.0] * 20
+        # 2. Blotto Context (20 dims) - Competition Metrics
+        if blotto_feats is None:
+            blotto_vec = [0.0] * 20
         else:
-            extras_scaled = [float(x) * scale for x in extra_feats]
+            blotto_vec = [np.log1p(max(0.0, float(x))) for x in blotto_feats]
 
-        # ---- Messaging features (always included) ----
-        # Pull 4*M values: (u->u), (u->v), (v->u), (v->v)
+        # 3. Walker Context (4 dims) - Spatial-Temporal Awareness
+        if walker_feats is None:
+            walker_vec = [0.0] * 4
+        else:
+            walker_vec = [np.log1p(max(0.0, float(x))) for x in walker_feats]
+
+        # 4. Social Messaging
         M = MESSAGE_NUMBER_AMOUNT
+
         def _msg(src: int, dst: int) -> List[float]:
             vec = self.messages.get(src, {}).get(dst, None)
-            if vec is None:
-                return [0.0] * M
+            if vec is None: return [0.0] * M
             out = list(vec[:M])
-            if len(out) < M:
-                out += [0.0] * (M - len(out))
+            if len(out) < M: out += [0.0] * (M - len(out))
             return out
+
         msg_feats = _msg(u, u) + _msg(u, v) + _msg(v, u) + _msg(v, v)
-        msg_feats = [m * scale for m in msg_feats]
 
-        return np.array([own_obs] + base + extras_scaled + msg_feats, dtype=float)
+        # 5. Thermodynamic Noise (Symmetry Breaking)
+        if RANDOM_INPUT_AMOUNT > 0:
+            noise = np.random.uniform(-2.0, 2.0, size=RANDOM_INPUT_AMOUNT).tolist()
+        else:
+            noise = []
 
+        # Concatenate all sensory streams
+        return np.array([own_obs] + base + blotto_vec + walker_vec + msg_feats + noise, dtype=float)
 
-
-
-    # ---------------------------------------------------------------------
-    # Messaging emission helper: write Y[HEAD["MESSAGE"]] into self.messages
-    # for each (u -> v) in the order of 'targets' (columns of X / Y).
-    # Call this immediately after ANY observation forward pass.
-    # ---------------------------------------------------------------------
     def _emit_messages(self, u: int, targets: List[int], Y: np.ndarray) -> None:
+        """Propagates communication signals from the Brain to neighbors."""
         if EXCHANGE_MESSAGES:
             M = MESSAGE_NUMBER_AMOUNT
-            msg_rows = Y[HEAD["MESSAGE"], :]  # shape: (M, len(targets)) or (len(targets),) if M==1
-            # Ensure 2D shape even if M==1
+            msg_rows = Y[HEAD["MESSAGE"], :]
             if M == 1 and msg_rows.ndim == 1:
                 msg_rows = np.array([msg_rows])
-            # Hard-coded squashing to [-1, 1]
             msg_rows = np.tanh(msg_rows)
-
             for j, v in enumerate(targets):
                 col = msg_rows[:, j].astype(float).tolist()
-                # Defensive pad/truncate to length M
                 if len(col) < M:
                     col = col + [0.0] * (M - len(col))
                 elif len(col) > M:
                     col = col[:M]
                 self.messages.setdefault(u, {})[int(v)] = col
 
-    # ----- logging utilities -----
-    def _snapshot_graph(self) -> Dict[str, Any]:
-        nodes: List[Dict[str, Any]] = []
-        for u in self.G.nodes():
-            nodes.append(
-                {
-                    "agent_id": int(u),
-                    "tokens": int(self.tokens.get(u, 0)),
-                    "brain_id": int(self.brains[u].brain_id) if u in self.brains else None,
-                    "degree": int(self.G.degree[u]),
-                    "neighbors": [int(v) for v in self._neighbors(u)],
-                }
-            )
-        edges = [(int(u), int(v)) for u, v in self.G.edges()]
-        return {"nodes": nodes, "edges": edges}
-
-    def _save_step_file(self, idx: int, blob: Dict[str, Any]) -> str:
-        path = os.path.join(self.run_dir, f"step_{idx:05d}.json")
-        with open(path, "w") as f:
-            json.dump(blob, f, indent=2)
-        return path
-
-    def _draw(self, title: str, fname: str, k_max: int = 3) -> None:
-        """Layered k‑core visualization with decaying transparency."""
-        if self.G.number_of_nodes() == 0:
-            return
-        pos3d = nx.spring_layout(self.G, dim=3, seed=42)
-        pos2d = {n: (c[0], c[1]) for n, c in pos3d.items()}
-
-        coreness = nx.core_number(self.G) if self.G.number_of_edges() > 0 else {u: 0 for u in self.G.nodes()}
-        layer_k = {u: min(coreness.get(u, 0), k_max) for u in self.G.nodes()}
-        L_node = {u: (k_max - layer_k[u]) for u in self.G.nodes()}
-
-        layers_nodes: Dict[int, List[int]] = {}
-        for u, L in L_node.items():
-            layers_nodes.setdefault(L, []).append(u)
-
-        L_edge: Dict[Tuple[int, int], int] = {}
-        for (u, v) in self.G.edges():
-            L_edge[(u, v)] = max(L_node[u], L_node[v])
-        layers_edges: Dict[int, List[Tuple[int, int]]] = {}
-        for e, L in L_edge.items():
-            layers_edges.setdefault(L, []).append(e)
-
-        def size_of(u: int) -> float:
-            return (self.tokens.get(u, 0) + 1)/12
-
-        def color_of(u: int) -> int:
-            return self.tokens.get(u, 0)
-
-        vmin = 0
-        vmax = max([0] + [self.tokens.get(u, 0) for u in self.G.nodes()])
-        cmap = matplotlib.colormaps.get_cmap("viridis")
-
-        layer_keys_sorted = sorted(layers_nodes.keys(), reverse=True)
-        plt.figure(figsize=(8, 6))
-
-        for L in sorted(layers_edges.keys(), reverse=True):
-            edgelist = layers_edges[L]
-            if not edgelist:
-                continue
-            edge_alpha = 0.5 / (2**L)
-            nx.draw_networkx_edges(self.G, pos2d, edgelist=edgelist, alpha=edge_alpha, width=0.5 if L == 0 else 0.3)
-
-        mappable_for_cb = None
-        for L in layer_keys_sorted:
-            nlist = layers_nodes[L]
-            if not nlist:
-                continue
-            node_alpha = 1.0 / (2**L)
-            sizes = [size_of(u) for u in nlist]
-            colors = [color_of(u) for u in nlist]
-            coll = nx.draw_networkx_nodes(
-                self.G,
-                pos2d,
-                nodelist=nlist,
-                node_size=sizes,
-                node_color=colors,
-                cmap=cmap,
-                vmin=vmin,
-                vmax=vmax,
-                alpha=node_alpha,
-            )
-            mappable_for_cb = coll
-
-        if mappable_for_cb is not None:
-            plt.colorbar(mappable_for_cb, label="Tokens")
-        plt.title(title)
-        plt.axis("off")
-        plt.savefig(os.path.join(self.run_dir, fname), dpi=130, bbox_inches="tight")
-        plt.close("all")
-
-    # ----- reproducibility -----
-    def _snapshot_source(self) -> None:
-        """Copy this .py into the run folder and write a SHA‑256 + git meta."""
-        try:
-            src_path = os.path.abspath(__file__)
-            dst_path = os.path.join(self.run_dir, os.path.basename(src_path))
-            shutil.copy2(src_path, dst_path)
-            h = hashlib.sha256()
-            with open(src_path, "rb") as f:
-                for chunk in iter(lambda: f.read(65536), b""):
-                    h.update(chunk)
-            with open(dst_path + ".sha256", "w") as f:
-                f.write(h.hexdigest() + "\n")
-
-            git_info: Dict[str, Any] = {}
-            try:
-                probe = os.path.dirname(src_path)
-                for _ in range(5):
-                    if os.path.isdir(os.path.join(probe, ".git")):
-                        break
-                    parent = os.path.dirname(probe)
-                    if parent == probe:
-                        probe = os.path.dirname(src_path)
-                        break
-                    probe = parent
-                commit = (
-                    subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=probe, stderr=subprocess.DEVNULL)
-                    .decode()
-                    .strip()
-                )
-                dirty = subprocess.call(["git", "diff", "--quiet"], cwd=probe, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-                git_info = {"repo_root": probe, "commit": commit, "dirty": bool(dirty)}
-            except Exception:
-                pass
-
-            meta = {
-                "source_filename": os.path.basename(src_path),
-                "sha256": h.hexdigest(),
-                "git": git_info,
-                "timestamp": datetime.now().isoformat(timespec="seconds"),
-            }
-            with open(os.path.join(self.run_dir, "source_meta.json"), "w") as f:
-                json.dump(meta, f, indent=2)
-        except Exception as e:
-            try:
-                with open(os.path.join(self.run_dir, "source_snapshot_error.txt"), "w") as f:
-                    f.write(repr(e))
-            except Exception:
-                pass
-
-    def _save_configuration(self) -> None:
+    # ------------------------------------------------------------------------
+    # Phase 1: The Walker & Reproduction
+    # ------------------------------------------------------------------------
+    def _update_reach_counts_passive(self) -> None:
         """
-        Dynamically extracts all global constants (UPPERCASE variables)
-        and saves them to a manifest file for reproducibility.
+        Restored legacy logic for passive diffusion and random walks.
+        This handles all WALKER_MODE variants except the new 'WALK_ON_OWN'.
         """
-        # 1. Introspect the global scope to find settings
-        config_data = {}
-        # We access globals() from the module where the class is defined
-        g = globals()
-
-        for name, value in g.items():
-            # Criteria: Must be Uppercase, not a private variable (_), and not a class definition/module
-            if name.isupper() and not name.startswith("_"):
-                # specific check to exclude imported modules if they happen to be aliased to CAPS
-                if not isinstance(value, type) and not hasattr(value, "__file__"):
-                    config_data[name] = value
-
-        # 2. Write to config.txt (Human readable, handles types like 'slice' gracefully)
-        txt_path = os.path.join(self.run_dir, "config.txt")
-        with open(txt_path, "w") as f:
-            f.write(f"# GraphOfLife Configuration Manifest\n")
-            f.write(f"# Timestamp: {datetime.now().isoformat()}\n")
-            f.write("-" * 40 + "\n")
-
-            # Sort keys for consistent readability
-            for key in sorted(config_data.keys()):
-                val_str = str(config_data[key])
-                # Clean up newlines in string representations if any
-                val_str = val_str.replace("\n", " ")
-                f.write(f"{key}: {val_str}\n")
-
-    # ----------------------------------------------------------------------------
-    # Phase 1: Reproduction
-    # ----------------------------------------------------------------------------
-    def _advance_reach_counts(self) -> None:
-        """Advance per-agent walker reach counts by one step (including stay)."""
         G = self.G
         new_maps: Dict[int, Dict[int, int]] = {}
-        for u in list(G.nodes()):
-            prev = self.reach_counts.get(u, {u: 1})
-            prev = {w: c for w, c in prev.items() if G.has_node(w)}  # prune dead
-            if not prev:
+        nodes_list = list(G.nodes())
+
+        # --------------------------------------------------------------------
+        # Mode 1: Persistent Diffusion (One step per iteration)
+        # --------------------------------------------------------------------
+        if WALKER_MODE == "PSEUDO_RANDOM_ONE_PER_ITERATION":
+            for u in nodes_list:
+                # 1. Prune dead nodes from history
+                prev = self.reach_counts.get(u, {u: 1})
+                prev = {w: c for w, c in prev.items() if G.has_node(w)}
+
+                # 2. If empty after prune, re-init basic
+                if not prev:
+                    new_maps[u] = {u: 1}
+                    continue
+
+                # 3. Single diffusion step
+                acc: Dict[int, int] = {}
+                for r, c in prev.items():
+                    # Flow to neighbors
+                    for w in list(G.neighbors(r)):
+                        acc[w] = acc.get(w, 0) + int(c)
+                    # Stay (self-loop)
+                    acc[r] = acc.get(r, 0) + int(c)
+                new_maps[u] = acc or {u: 1}
+
+            self.reach_counts = new_maps
+
+        # --------------------------------------------------------------------
+        # Mode 2: Multi-step Diffusion (Renormalized 'Soft Attention')
+        # --------------------------------------------------------------------
+        elif WALKER_MODE == "PSEUDO_RANDOM_ONE_PER_TOKEN" or WALKER_MODE == "PSEUDO_RANDOM_ONE_PER_TOKEN_LOG":
+            # Pre-fetch neighbors to avoid repeated G.neighbors calls
+            adj_cache = {u: list(G.neighbors(u)) for u in nodes_list}
+
+            for u in nodes_list:
+                # 1. Initialize with FLOATs to support continuous diffusion
+                #    All core neighbors start with max intensity (1.0).
+                current_counts: Dict[int, float] = {u: 1.0}
+                for v in adj_cache[u]:
+                    current_counts[v] = 1.0
+
+                # 2. Determine horizon based on tokens
+                tok_count = int(self.tokens.get(u, 0))
+                if WALKER_MODE == "PSEUDO_RANDOM_ONE_PER_TOKEN_LOG":
+                    # Fix: Use tok_count, not undefined 'steps'
+                    steps = int(np.log2(tok_count)) + 1 if tok_count > 0 else 0
+                else:
+                    steps = tok_count
+
+                # 3. Iterate diffusion 'steps' times
+                for _ in range(steps):
+                    next_counts: Dict[int, float] = {}
+
+                    # Standard Diffusion: Mass at r spreads to r and neighbors
+                    for r, count in current_counts.items():
+                        # Optimization: Skip negligible contributions
+                        if count < 1e-9:
+                            continue
+
+                        # Retrieve neighbors (safe fallback if node is new/distant)
+                        r_neighbors = adj_cache.get(r)
+                        if r_neighbors is None:
+                            if G.has_node(r):
+                                r_neighbors = list(G.neighbors(r))
+                            else:
+                                r_neighbors = []
+
+                        # Add mass (accumulate)
+                        # Self-loop
+                        next_counts[r] = next_counts.get(r, 0.0) + count
+                        # Neighbors
+                        for w in r_neighbors:
+                            next_counts[w] = next_counts.get(w, 0.0) + count
+
+                    # --- RENORMALIZATION STEP ---
+                    # Normalize so the 'hottest' node has value 1.0 to prevent overflow
+                    if next_counts:
+                        max_val = max(next_counts.values())
+                        if max_val > 0:
+                            scale = 1.0 / max_val
+                            for k in next_counts:
+                                next_counts[k] *= scale
+
+                    current_counts = next_counts
+
+                new_maps[u] = current_counts
+
+            self.reach_counts = new_maps
+
+        # --------------------------------------------------------------------
+        # Mode 3: Monte Carlo Random Walk (Dirac Delta)
+        # --------------------------------------------------------------------
+        elif WALKER_MODE == "PSEUDO_RANDOM_ONE_PER_TOKEN_RANDOM_WALK" or WALKER_MODE == "PSEUDO_RANDOM_ONE_PER_TOKEN_RANDOM_WALK_LOG":
+            # 1. Pre-fetch adjacency
+            adj_cache = {n: list(G.neighbors(n)) for n in nodes_list}
+
+            for u in nodes_list:
+                # 2. Determine Walk Length
+                tokens = int(self.tokens.get(u, 0))
+
+                if WALKER_MODE == "PSEUDO_RANDOM_ONE_PER_TOKEN_RANDOM_WALK_LOG":
+                    steps = int(np.log2(tokens)) + 2 if tokens > 0 else 1
+                else:
+                    steps = tokens + 1
+
+                curr = u
+
+                # 3. Perform the Monte Carlo Random Walk
+                for _ in range(steps):
+                    neighbors = adj_cache.get(curr, [])
+                    if not neighbors:
+                        break  # Trapped
+
+                    # Uniform random selection of neighbor
+                    idx = np.random.randint(len(neighbors))
+                    curr = neighbors[idx]
+
+                # 4. Record the final destination
+                new_maps[u] = {curr: 1}
+
+            self.reach_counts = new_maps
+
+        # --------------------------------------------------------------------
+        # Mode 4: Disabled
+        # --------------------------------------------------------------------
+        elif WALKER_MODE == "NO_WALKER":
+            for u in nodes_list:
                 new_maps[u] = {u: 1}
-                continue
-            acc: Dict[int, int] = {}
-            for r, c in prev.items():
-                for w in list(G.neighbors(r)):
-                    acc[w] = acc.get(w, 0) + int(c)
-                acc[r] = acc.get(r, 0) + int(c)  # stay
-            new_maps[u] = acc or {u: 1}
-        self.reach_counts = new_maps
+            self.reach_counts = new_maps
 
-    def _cleanup_and_redistribute(self) -> Dict[str, Any]:
-        """Cleanup and report exactly what happened (see return dict)."""
-        report: Dict[str, Any] = {
-            "resurrected": False,
-            "resurrect_agent": None,
-            "removed_zero_nodes": [],
-            "removed_components": [],
-            "redistributed_tokens": 0,
-            "survivors_count": self.G.number_of_nodes(),
-        }
+        else:
+            # Fallback for unknown modes (or if ACTIVE mode is set but this was called by mistake)
+            # Default to self-reach only to prevent crashes
+            for u in nodes_list:
+                new_maps[u] = {u: 1}
+            self.reach_counts = new_maps
 
-        # Remove zero-token nodes (optional in P1; always in P2)
-        zero_nodes = [u for u in list(self.G.nodes()) if self.tokens.get(u, 0) <= 0]
-        if zero_nodes:
-            self.G.remove_nodes_from(zero_nodes)
-            for u in zero_nodes:
-                self.tokens.pop(u, None)
-                self.brains.pop(u, None)
-                self.reach_counts.pop(u, None)
-            report["removed_zero_nodes"] = [int(u) for u in zero_nodes]
+    def _perform_active_walk(
+            self,
+            u: int,
+            log_deg: Dict[int, float],
+            q_tok: Dict[int, List[float]],
+            q_deg: Dict[int, List[float]],
+            log_tok_map: Dict[int, float]
+    ) -> List[int]:
+        """
+        The Homunculus: An active, brain-driven walker.
+        The agent projects a viewpoint to traverse the graph, accumulating
+        spatial-temporal context to decide where to form new links.
+        """
+        curr = u
+        tokens = int(self.tokens.get(u, 0))
 
-        # If empty, resurrect a single node holding all tokens
-        if self.G.number_of_nodes() == 0:
-            aid = self.next_agent_id
-            self.next_agent_id += 1
-            self.G.add_node(aid)
-            self.tokens = {aid: self.total_tokens}
-            self.brains = {aid: Brain()}
-            self.reach_counts = {aid: {aid: 1}}
-            report.update({"resurrected": True, "resurrect_agent": int(aid), "survivors_count": 1})
-            return report
+        # Calculate exploration budget (Log Wealth)
+        if "LOG" in WALKER_MODE:
+            total_steps = int(np.log2(tokens)) + 1 if tokens > 0 else 1
+        else:
+            total_steps = tokens
 
-        # Keep only largest connected component; redistribute removed tokens uniformly
-        comps = list(nx.connected_components(self.G))
-        comps.sort(key=len, reverse=True)
-        if len(comps) > 1:
-            keep = comps[0]
-            remove = set().union(*comps[1:])
-            tokens_to_redistribute = int(sum(self.tokens.get(u, 0) for u in remove))
-            self.G.remove_nodes_from(list(remove))
-            for u in remove:
-                self.tokens.pop(u, None)
-                self.brains.pop(u, None)
-                self.reach_counts.pop(u, None)
+        # Distance helper (robust to disconnected components)
+        def get_dist(source, target):
+            if source == target: return 0
+            try:
+                return nx.shortest_path_length(self.G, source=source, target=target)
+            except nx.NetworkXNoPath:
+                return 9999.0
 
-            survivors = list(self.G.nodes())
-            if tokens_to_redistribute > 0 and survivors:
-                draws = np.random.multinomial(tokens_to_redistribute, [1 / len(survivors)] * len(survivors))
-                for u, add in zip(survivors, draws):
-                    self.tokens[u] = self.tokens.get(u, 0) + int(add)
+        for step_idx in range(total_steps):
+            if not self.G.has_node(curr): break
 
-            report["removed_components"] = [list(map(int, c)) for c in comps[1:]]
-            report["redistributed_tokens"] = int(tokens_to_redistribute)
+            neighbors = list(self.G.neighbors(curr))
+            candidates = [curr] + neighbors
 
-        report["survivors_count"] = self.G.number_of_nodes()
-        assert sum(self.tokens.values()) == self.total_tokens, "Token conservation violated!"
-        return report
+            # --- Spatial-Temporal Context ---
+            steps_taken = step_idx
+            steps_left = total_steps - step_idx
+            dist_from_home_current = get_dist(u, curr)
 
+            X_cols = []
+            for cand in candidates:
+                if cand == curr:
+                    dist_from_home_cand = dist_from_home_current
+                else:
+                    dist_from_home_cand = get_dist(u, cand)
 
+                # Pack Context for the Brain
+                # 1. Past Effort, 2. Future Budget, 3. Current Range, 4. Projected Range
+                walker_context = [
+                    float(steps_taken),
+                    float(steps_left),
+                    float(dist_from_home_current),
+                    float(dist_from_home_cand)
+                ]
+
+                # Activate Walker Cortex (blotto_feats=None)
+                vec = self._input_vec_fast(
+                    curr, cand, log_deg, q_tok, q_deg, log_tok_map,
+                    blotto_feats=None,
+                    walker_feats=walker_context
+                )
+                X_cols.append(vec)
+
+            X = np.column_stack(X_cols)
+            Y = self.brains[u].forward(X)
+
+            # Decision: Where to step next?
+            dir_scores = Y[HEAD["WALKER_DIR"], :]
+
+            if PROBABILISTIC_DECISIONS:
+                vals = np.maximum(0.0, dir_scores)
+                s = float(vals.sum())
+                probs = (vals / s) if s > 0 else np.full_like(vals, 1.0 / len(vals))
+                idx = int(np.random.choice(len(candidates), p=probs))
+            else:
+                idx = int(np.argmax(dir_scores))
+
+            curr = candidates[idx]
+
+        # Return the final destination found by the walker
+        return [curr]
 
     def reproduction_phase(self, t: int) -> str:
+        """
+        Agents use their wealth to reproduce, modify topology, and create links
+        to distant nodes discovered by the Active Walker.
+        """
         log: Dict[str, Any] = {"phase": "reproduction", "pre_state": self._snapshot_graph(), "decisions": []}
 
-        self._advance_reach_counts()
-        deg, neighs, q_tok, q_deg = self._precompute_features()
+        # O(N) Precomputation of Sensory Manifold
+        log_deg, neighs, q_tok, q_deg, log_tok_map = self._precompute_features()
 
-        shifts_to_apply: List[Tuple[int, int, int]] = []  # (u, v, child_id)
-        reconns_to_apply: List[Tuple[int, int, int]] = []  # (u, old_v, new_v)
-        new_links_to_apply: List[Tuple[int, int]] = []     # (u, far_node)
+        # 1. The Walker (Discovery)
+        walker_candidates_map: Dict[int, List[int]] = {}
+        if "WALK_ON_OWN" in WALKER_MODE:
+            for u in list(self.G.nodes()):
+                if self.tokens.get(u, 0) > 0:
+                    cands = self._perform_active_walk(u, log_deg, q_tok, q_deg, log_tok_map)
+                    walker_candidates_map[u] = cands
+        else:
+            self._update_reach_counts_passive()
+            for u in list(self.G.nodes()):
+                rc_map = self.reach_counts.get(u, {u: 1})
+                neighbors_u = set(neighs[u])
+                rc_items_far = [
+                    (v, c) for v, c in rc_map.items()
+                    if v != u and v not in neighbors_u and self.G.has_node(v) and c > 0
+                ]
+                if rc_items_far:
+                    nodes_far, weights_far = zip(*rc_items_far)
+                    weights_arr = np.asarray(weights_far, dtype=float)
+                    wsum = float(weights_arr.sum())
+                    if wsum > 0.0:
+                        probs_far = weights_arr / wsum
+                        idx_far = int(np.random.choice(len(nodes_far), p=probs_far))
+                        walker_candidates_map[u] = [int(nodes_far[idx_far])]
+
+        # 2. Decision Making
+        shifts_to_apply: List[Tuple[int, int, int]] = []
+        reconns_to_apply: List[Tuple[int, int, int]] = []
+        new_links_to_apply: List[Tuple[int, int]] = []
 
         for u in list(self.G.nodes()):
             t_u = int(self.tokens.get(u, 0))
-            if t_u <= 0:
-                continue
+            if t_u <= 0: continue
 
+            # Candidates: Self + Neighbors + Walker Discovery
             neighbors_u = list(neighs[u])
             core_candidates = [u] + neighbors_u
+            w_cands = walker_candidates_map.get(u, [])
+            w_cands = [wc for wc in w_cands if self.G.has_node(wc)]
+            all_candidates = core_candidates + w_cands
 
-            # Walker choice: pick one far node from reach memory (weighted)
-            rc_map = self.reach_counts.get(u, {u: 1})
-            neigh_set = set(neighbors_u)
-            rc_items_far = [
-                (v, c)
-                for v, c in rc_map.items()
-                if v != u and v not in neigh_set and self.G.has_node(v) and c > 0
-            ]
-            chosen_far = None
-            far_weight = None
-            if rc_items_far:
-                nodes_far, weights_far = zip(*rc_items_far)
-                weights_arr = np.asarray(weights_far, dtype=float)
-                wsum = float(weights_arr.sum())
-                if wsum > 0.0:
-                    probs_far = weights_arr / wsum
-                    idx_far = int(np.random.choice(len(nodes_far), p=probs_far))
-                    chosen_far = int(nodes_far[idx_far])
-                    far_weight = int(weights_far[idx_far])
+            # Observe Environment (Standard Cortex, No Special Context)
+            X_cols = [self._input_vec_fast(
+                u, v, log_deg, q_tok, q_deg, log_tok_map,
+                blotto_feats=None,
+                walker_feats=None
+            ) for v in all_candidates]
 
-            all_candidates = core_candidates + [chosen_far] if chosen_far is not None else core_candidates
-            X_cols = [self._input_vec_fast(u, v, deg, q_tok, q_deg) for v in all_candidates]
             X = np.column_stack(X_cols)
             Y = self.brains[u].forward(X)
-            # Emit messages for reproduction-time observation
             self._emit_messages(u, all_candidates, Y)
 
+            # Parse Neural Outputs
             repro_logits_all = Y[HEAD["REPRO"], :]
             link_logits_all = Y[HEAD["LINK"], :]
             shift_logits_all = Y[HEAD["SHIFT"], :]
             reconn_logits_all = Y[HEAD["RECONNECT"], :]
             walker_logits_all = Y[HEAD["WALKER"], :]
 
-            # Reproduction decision (aggregated over core candidates)
-            repro_core = repro_logits_all[:, :len(core_candidates)]  # shape (4, K_core)
-            # rows: [yes_logit_row, no_logit_row, child_frac_row, keep_frac_row]
-            # t_u: current tokens at u (int)
-
+            # A. Reproduction (Gate)
+            repro_core = repro_logits_all[:, :len(core_candidates)]
             if REPRO_CORE_FRACTIONS_ONLY:
-                # (A) Ignore explicit yes/no; deterministically split using averaged fractions
-                frac_vec = np.mean(repro_core[2:4, :], axis=1)  # shape (2,) -> [child_part, keep_part]
+                # Direct investment calculation (Logic from Old Code)
+                frac_vec = np.mean(repro_core[2:4, :], axis=1)
                 vals = np.maximum(0.0, frac_vec)
                 s = float(np.sum(vals))
                 probs = (vals / s) if s > 0.0 else np.full_like(vals, 1.0 / len(vals))
-
                 child_tokens = int(np.floor(probs[0] * t_u))
-
             else:
-                # (B) Original yes/no gate to decide reproduction at all
+                # Binary Gate Decision (Logic from Old Code)
                 yes_logit = float(np.mean(repro_core[0, :]))
                 no_logit = float(np.mean(repro_core[1, :]))
 
@@ -800,186 +745,133 @@ class GraphOfLife:
                     will_reproduce = (yes_logit > no_logit)
 
                 if will_reproduce:
-                    frac_vec = np.mean(repro_core[2:4, :], axis=1)  # [child_part, keep_part]
+                    # Calculate Investment Fraction
+                    frac_vec = np.mean(repro_core[2:4, :], axis=1)
                     vals = np.maximum(0.0, frac_vec)
                     s = float(np.sum(vals))
                     probs = (vals / s) if s > 0.0 else np.full_like(vals, 1.0 / len(vals))
-
                     child_tokens = int(np.floor(probs[0] * t_u))
                 else:
                     child_tokens = 0
 
-            # Safety: ensure conservation and non-negativity
             child_tokens = max(0, min(int(t_u), int(child_tokens)))
 
             rec: Dict[str, Any] = {
-                "agent_id": int(u),
-                "tokens_before": int(t_u),
-                "repro_tokens": int(child_tokens),
-                "child_created": False,
-                "child_id": None,
-                "link_choices": [],
-                "shift_choices": [],
-                "reconnect_choices": [],
-                "reached_nodes_hist": {int(k): int(v) for k, v in (rc_map.items() if rc_map else [])},
-                "walker_choice": {
-                    "far_node": int(chosen_far) if chosen_far is not None else None,
-                    "far_weight": int(far_weight) if far_weight is not None else None,
-                    "already_connected": None,
-                    "created_new_link": False,
-                },
+                "agent_id": int(u), "tokens_before": int(t_u), "repro_tokens": int(child_tokens),
+                "child_created": False, "link_choices": [], "shift_choices": [],
+                "reconnect_choices": [], "walker_decisions": []
             }
 
             if child_tokens >= 1:
+                # B. Create Child
                 child_tokens = max(1, min(child_tokens, t_u))
                 keep_tokens = t_u - child_tokens
-
-                # Create child & copy brain
                 child_brain = self.brains[u].copy()
-                if MUTATE_ON_REPRO_COPY:
-                    child_brain.mutate()  # optional child-on-copy mutation
+                if MUTATE_ON_REPRO_COPY: child_brain.mutate()
+
                 cid = self.next_agent_id
                 self.next_agent_id += 1
                 self.G.add_node(cid)
 
-                # Child link creation (core candidates only)
-                chosen_links: List[int] = []
-                link_logs: List[Dict[str, Any]] = []
+                # Link Child to Neighbors
+                chosen_links = []
                 for col_idx, v in enumerate(core_candidates):
-                    yes_logit = float(link_logits_all[0, col_idx])
-                    no_logit = float(link_logits_all[1, col_idx])
-                    if PROBABILISTIC_DECISIONS:
-
-                        y = max(0.0, yes_logit)
-                        n = max(0.0, no_logit)
-                        s = y + n
-                        p_yes = (y / s) if s > 0.0 else 0.0
-                        choose = bool(np.random.rand() < p_yes)
-                    else:
-                        choose = bool(yes_logit > no_logit)
-                    if choose:
-                        chosen_links.append(v)
-                    link_logs.append({"candidate": int(v), "yes_logit": yes_logit, "no_logit": no_logit, "chosen": choose})
+                    yes_l = float(link_logits_all[0, col_idx])
+                    no_l = float(link_logits_all[1, col_idx])
+                    choose = bool(yes_l > no_l)
+                    if choose: chosen_links.append(v)
+                    rec["link_choices"].append({"candidate": int(v), "yes": yes_l, "no": no_l, "chosen": choose})
 
                 for v in chosen_links:
-                    if v != cid and self.G.has_node(v):
-                        self.G.add_edge(cid, v)
+                    if v != cid and self.G.has_node(v): self.G.add_edge(cid, v)
 
-                # Finalize tokens/brains
                 self.tokens[cid] = child_tokens
                 self.brains[cid] = child_brain
-                neighbors_cid = [int(v) for v in self.G.neighbors(cid)]
-                self.reach_counts[cid] = {int(cid): 1, **{nv: 1 for nv in neighbors_cid}}
+                self.reach_counts[cid] = {int(cid): 1}
                 self.messages[cid] = {}
                 self.tokens[u] = keep_tokens
+                rec.update({"child_created": True, "child_id": int(cid)})
 
-                rec.update({"child_created": True, "child_id": int(cid), "link_choices": link_logs})
-
-                # Shifting (per original neighbor only)
+                # C. Shift Edges (Handover relations to child)
                 for idx, v in enumerate(neighbors_u):
                     col_idx = 1 + idx
-                    shift_yes = float(shift_logits_all[0, col_idx])
-                    shift_no = float(shift_logits_all[1, col_idx])
-                    if PROBABILISTIC_DECISIONS:
-                        y = max(0.0, shift_yes)
-                        n = max(0.0, shift_no)
-                        s = y + n
-                        p_yes = (y / s) if s > 0.0 else 0.0
-                        shifted = bool(np.random.rand() < p_yes)
-                    else:
-                        shifted = bool(shift_yes > shift_no)
-                    rec["shift_choices"].append({"edge": (int(u), int(v)), "yes_logit": shift_yes, "no_logit": shift_no, "shifted": shifted})
-                    if shifted:
-                        shifts_to_apply.append((u, v, cid))
+                    sy, sn = float(shift_logits_all[0, col_idx]), float(shift_logits_all[1, col_idx])
+                    shifted = bool(sy > sn)
+                    rec["shift_choices"].append({"edge": (u, v), "shifted": shifted})
+                    if shifted: shifts_to_apply.append((u, v, cid))
 
-                # Reconnection: pick one edge and one target if "yes" wins
-                reconnect_votes: List[Dict[str, float]] = []
-                for idx, v in enumerate(neighbors_u):
-                    col_idx = 1 + idx
-                    no_val = float(reconn_logits_all[0, col_idx])
-                    yes_val = float(reconn_logits_all[1, col_idx])
-                    which_link = float(reconn_logits_all[2, col_idx])
-                    which_target = float(reconn_logits_all[3, col_idx])
-                    reconnect_votes.append({"edge": (int(u), int(v)), "no_val": no_val, "yes_val": yes_val, "link_val": which_link, "target_val": which_target})
-
-                if reconnect_votes:
-                    sum_no = sum(rv["no_val"] for rv in reconnect_votes)
-                    sum_yes = sum(rv["yes_val"] for rv in reconnect_votes)
-                    if PROBABILISTIC_DECISIONS:
-                        y = max(0.0, sum_yes)
-                        n = max(0.0, sum_no)
-                        s = y + n
-                        p_yes = (y / s) if s > 0.0 else 0.0
-                        do_reconnect = bool(np.random.rand() < p_yes)
-                    else:
-                        do_reconnect = bool(sum_yes > sum_no)
-                    if do_reconnect:
-                        # --- pick which edge to drop (by link_val) ---
-                        if PROBABILISTIC_DECISIONS:
-                            link_scores = [max(0.0, rv["link_val"]) for rv in reconnect_votes]
-                            s = float(sum(link_scores))
-                            link_probs = ([w / s for w in link_scores]
-                                          if s > 0.0 else [1.0 / len(reconnect_votes)] * len(reconnect_votes))
-                            idx_edge = int(np.random.choice(len(reconnect_votes), p=link_probs))
-                        else:
-                            idx_edge = int(np.argmax([rv["link_val"] for rv in reconnect_votes]))
-                        edge_choice = reconnect_votes[idx_edge]
-                        old_v = int(edge_choice["edge"][1])
-
-                        # --- pick the new neighbor target (by target_val) ---
-                        if PROBABILISTIC_DECISIONS:
-                            targ_scores = [max(0.0, rv["target_val"]) for rv in reconnect_votes]
-                            s = float(sum(targ_scores))
-                            targ_probs = ([w / s for w in targ_scores]
-                                          if s > 0.0 else [1.0 / len(reconnect_votes)] * len(reconnect_votes))
-                            idx_target = int(np.random.choice(len(reconnect_votes), p=targ_probs))
-                        else:
-                            idx_target = int(np.argmax([rv["target_val"] for rv in reconnect_votes]))
-                        target_choice = reconnect_votes[idx_target]
-                        new_v = int(target_choice["edge"][1])
-
-                        if new_v != u and new_v != old_v and self.G.has_node(new_v):
-                            reconns_to_apply.append((u, old_v, new_v))
-                            rec["reconnect_choices"].append({
-                                "old_edge": (int(u), int(old_v)),
-                                "new_neighbor": int(new_v)
-                            })
-
-            # Walker-link (applies even if no child was created)
-            if chosen_far is not None:
-                last_idx = len(all_candidates) - 1
-                wl_yes = float(walker_logits_all[0, last_idx])
-                wl_no = float(walker_logits_all[1, last_idx])
+            # D. Reconnect (Rewire existing edges)
+            reconnect_votes: List[Dict[str, float]] = []
+            for idx, v in enumerate(neighbors_u):
+                col_idx = 1 + idx
+                reconnect_votes.append({
+                    "edge": (int(u), int(v)),
+                    "no": float(reconn_logits_all[0, col_idx]),
+                    "yes": float(reconn_logits_all[1, col_idx]),
+                    "link": float(reconn_logits_all[2, col_idx]),
+                    "target": float(reconn_logits_all[3, col_idx])
+                })
+            if reconnect_votes:
+                sum_no = sum(rv["no"] for rv in reconnect_votes)
+                sum_yes = sum(rv["yes"] for rv in reconnect_votes)
                 if PROBABILISTIC_DECISIONS:
-                    y = max(0.0, wl_yes)
-                    n = max(0.0, wl_no)
-                    s = y + n
-                    p_yes = (y / s) if s > 0.0 else 0.0
-                    want_link = bool(np.random.rand() < p_yes)
+                    y, n = max(0.0, sum_yes), max(0.0, sum_no)
+                    p = (y / (y + n)) if (y + n) > 0 else 0.0
+                    do_rec = bool(np.random.rand() < p)
                 else:
-                    want_link = bool(wl_yes > wl_no)
-                already_connected = self.G.has_edge(u, chosen_far) or (u == chosen_far)
-                rec["walker_choice"]["already_connected"] = bool(already_connected)
-                #rec["walker_choice"]["decision_logits"] = [wl_yes, wl_no]
-                if want_link and not already_connected and self.G.has_node(chosen_far):
-                    new_links_to_apply.append((u, chosen_far))
-                    rec["walker_choice"]["created_new_link"] = True
+                    do_rec = bool(sum_yes > sum_no)
+                if do_rec:
+                    scores = [rv["link"] for rv in reconnect_votes]
+                    if PROBABILISTIC_DECISIONS:
+                        vals = np.maximum(0.0, scores)
+                        s = vals.sum()
+                        probs = vals / s if s > 0 else np.ones(len(scores)) / len(scores)
+                        idx_e = int(np.random.choice(len(reconnect_votes), p=probs))
+                    else:
+                        idx_e = int(np.argmax(scores))
+                    old_v = int(reconnect_votes[idx_e]["edge"][1])
+                    t_scores = [rv["target"] for rv in reconnect_votes]
+                    if PROBABILISTIC_DECISIONS:
+                        vals = np.maximum(0.0, t_scores)
+                        s = vals.sum()
+                        probs = vals / s if s > 0 else np.ones(len(t_scores)) / len(t_scores)
+                        idx_t = int(np.random.choice(len(reconnect_votes), p=probs))
+                    else:
+                        idx_t = int(np.argmax(t_scores))
+                    new_v = int(reconnect_votes[idx_t]["edge"][1])
+                    if new_v != u and new_v != old_v and self.G.has_node(new_v):
+                        reconns_to_apply.append((u, old_v, new_v))
+                        rec["reconnect_choices"].append({"old": (int(u), int(old_v)), "new": int(new_v)})
+
+            # E. Walker Link Creation (Long-distance connections)
+            offset = len(core_candidates)
+            for i, far_node in enumerate(w_cands):
+                col_idx = offset + i
+                wy = float(walker_logits_all[0, col_idx])
+                wn = float(walker_logits_all[1, col_idx])
+                want_link = bool(wy > wn)
+
+                already = self.G.has_edge(u, far_node) or (u == far_node)
+                if want_link and not already and self.G.has_node(far_node):
+                    new_links_to_apply.append((u, far_node))
+
+                rec["walker_decisions"].append({
+                    "candidate": int(far_node), "created_link": want_link and not already
+                })
 
             log["decisions"].append(rec)
 
-        # Apply deferred topology edits
+        # 3. Apply Topology Edits
         for (u, v, cid) in shifts_to_apply:
             if self.G.has_node(cid) and self.G.has_edge(u, v):
-                if not self.G.has_edge(cid, v) and cid != v:
-                    self.G.add_edge(cid, v)
+                if not self.G.has_edge(cid, v) and cid != v: self.G.add_edge(cid, v)
                 self.G.remove_edge(u, v)
         for (u, old_v, new_v) in reconns_to_apply:
             if self.G.has_edge(u, old_v) and u != new_v:
                 self.G.remove_edge(u, old_v)
-                if not self.G.has_edge(u, new_v):
-                    self.G.add_edge(u, new_v)
+                if not self.G.has_edge(u, new_v): self.G.add_edge(u, new_v)
         for (u, v) in new_links_to_apply:
-            if self.G.has_node(u) and self.G.has_node(v) and u != v and not self.G.has_edge(u, v):
+            if self.G.has_node(u) and self.G.has_node(v) and u != v:
                 self.G.add_edge(u, v)
         self.G.remove_edges_from(list(nx.selfloop_edges(self.G)))
 
@@ -987,18 +879,22 @@ class GraphOfLife:
         log["post_state"] = self._snapshot_graph()
         log["genotype_events"] = list(self.genotype_events)
         self.genotype_events.clear()
-        path = self._save_step_file(2 * t, log)
+
         if t % DRAW_EVERY_X_ITERATIONS == 0 and DRAW:
-            self._draw(f"Round {t} — After Phase 1", f"step_{2 * t:05d}_phase1.png")
-        return path
+            self._draw(f"Round {t} — After Phase 1", f"step_{2 * t :05d}_phase1.png")
 
+        return self._save_step_file(2 * t, log)
 
-    # ----------------------------------------------------------------------------
-    # Phase 2: Blotto
-    # ----------------------------------------------------------------------------
+    # ------------------------------------------------------------------------
+    # Phase 2: Blotto (Competition)
+    # ------------------------------------------------------------------------
+
     def blotto_phase(self, t: int) -> str:
+        """
+        Agents compete for node dominance.
+        They observe neighbors and 'bid' tokens to conquer or rob them.
+        """
         from collections import defaultdict
-        from typing import Dict, Any, List, Tuple
 
         log: Dict[str, Any] = {
             "phase": "blotto",
@@ -1008,28 +904,33 @@ class GraphOfLife:
             "winners": {},
             "pruned_edges": [],
         }
-
-        # Snapshot pre-blotto state for logging
         tokens_before_phase = dict(self.tokens)
-        brains_before_phase = {u: b.brain_id for u, b in self.brains.items()}
 
-        deg, neighs, q_tok, q_deg = self._precompute_features()
+        # --------------------------------------------------------------------
+        # 1. Precompute Sensory Manifold (New Code Logic)
+        # --------------------------------------------------------------------
+        log_deg, neighs, q_tok, q_deg, log_tok_map = self._precompute_features()
 
-
-        # ---------------------------------------------------------------
-        # Pre-blotto messaging-only observation:
-        # Every agent observes self+neighbors, emits MESSAGE head stored as
-        # self.messages[u][v] (last message u->v).
-        # ---------------------------------------------------------------
+        # --------------------------------------------------------------------
+        # 2. Observation Pass (Generate Messages)
+        # --------------------------------------------------------------------
         for u in list(self.G.nodes()):
             targets = [u] + neighs[u]
-            X_cols = [self._input_vec_fast(u, v, deg, q_tok, q_deg, extra_feats=None) for v in targets]
+
+            # Use New Code input vector (walker_feats=None)
+            X_cols = [self._input_vec_fast(
+                u, v, log_deg, q_tok, q_deg, log_tok_map,
+                blotto_feats=None,
+                walker_feats=None
+            ) for v in targets]
+
             X = np.column_stack(X_cols)
             Y = self.brains[u].forward(X)
-            # NEW: emit messages for this observation
             self._emit_messages(u, targets, Y)
 
-        # Per-round state for allocation
+        # --------------------------------------------------------------------
+        # 3. Setup Allocation State
+        # --------------------------------------------------------------------
         remaining = {u: int(self.tokens.get(u, 0)) for u in self.G.nodes()}
         incoming_totals = {v: 0 for v in self.G.nodes()}
         per_target_allocators: Dict[int, Dict[int, int]] = {v: {} for v in self.G.nodes()}
@@ -1037,72 +938,64 @@ class GraphOfLife:
         edge_flow = {tuple(sorted(e)): 0 for e in self.G.edges()}
         allocation_sequence = {u: [] for u in self.G.nodes()}
 
+        # Helper to get current leaders at a node
         def leader_info(v: int) -> Tuple[int, set[int]]:
-            """Max allocation on v so far and the set of current leaders."""
             allocs = per_target_allocators[v]
-            if not allocs:
-                return 0, set()
+            if not allocs: return 0, set()
             m = max(allocs.values())
             return m, {s for s, a in allocs.items() if a == m}
 
-        # --------------------- Allocation scheduling ---------------------
+        # Helper to snapshot the board state for the next round of decisions
         def compute_snapshot_views():
-            # Snapshot shared by this round (or for FULL_ALLOCATION: single snapshot)
             snapshot_incoming_totals = incoming_totals.copy()
-            snapshot_leader_max: Dict[int, int] = {}
-            snapshot_leader_set: Dict[int, set[int]] = {}
+            snapshot_leader_max = {}
+            snapshot_leader_set = {}
             for v in self.G.nodes():
                 m, s = leader_info(v)
                 snapshot_leader_max[v] = m
                 snapshot_leader_set[v] = s
             return snapshot_incoming_totals, snapshot_leader_max, snapshot_leader_set
 
+        # Helper to calculate Neural Scores for a set of targets
         def forward_scores_for(u, snapshot_incoming_totals, snapshot_leader_max, snapshot_leader_set):
             targets = [u] + neighs[u]
             X_cols: List[np.ndarray] = []
+
             for v in targets:
-                # --- existing lightweight context ---
+                # --- Calculate Context Features (Old Code Math) ---
                 if u == v:
                     has_flow = 1.0
                 else:
                     e = tuple(sorted((u, v)))
                     has_flow = 1.0 if edge_flow.get(e, 0) > 0 else 0.0
-                u_to_v = float(u_sent_to_v[(u, v)])  # how much u already sent to v in this phase
-                v_to_v = float(u_sent_to_v[(v, v)])  # how much v self-sent so far
+
+                u_to_v = float(u_sent_to_v[(u, v)])
+                v_to_v = float(u_sent_to_v[(v, v)])
                 max_on_v = float(snapshot_leader_max[v])
                 leaders_v = snapshot_leader_set[v]
                 leader_cnt = len(leaders_v)
                 u_is_leader_now = 1.0 if (max_on_v > 0 and u in leaders_v) else 0.0
                 u_wins_v_now = (1.0 / leader_cnt) if (max_on_v > 0 and leader_cnt > 0 and u in leaders_v) else 0.0
 
-                # --- NEW: opponent capacity / competitiveness at v ---
-                # Potential allocators for v are v plus its neighbors
                 pot_allocators_v = [v] + neighs[v]
-                # Competitors for u at v exclude u
                 competitors = [w for w in pot_allocators_v if w != u]
 
-                # Remaining tokens among parties
                 rem_u = int(remaining.get(u, 0))
                 rem_v = int(remaining.get(v, 0))
                 comp_rem = [int(remaining.get(w, 0)) for w in competitors]
                 comp_rem_sum = float(sum(comp_rem))
                 comp_rem_max = float(max(comp_rem) if comp_rem else 0.0)
 
-                # Upper bound of what could still flow into v this phase
                 pot_inflow_total = float(sum(int(remaining.get(w, 0)) for w in pot_allocators_v))
                 u_share_upper = (float(rem_u) / pot_inflow_total) if pot_inflow_total > 0.0 else 0.0
 
-                # Allocations to v so far (this phase)
                 allocs_map = per_target_allocators[v]
                 comp_alloc_sum_ex_u = float(sum(a for s, a in allocs_map.items() if s != u))
                 comp_alloc_max_ex_u = float(max([a for s, a in allocs_map.items() if s != u], default=0))
 
-                # Leader gap (top minus second)
                 vals_now = list(allocs_map.values())
                 if not vals_now:
-                    leader_gap = 0.0
-                    leader_gap_norm = 0.0
-                    tie_count_now = 0.0
+                    leader_gap, leader_gap_norm, tie_count_now = 0.0, 0.0, 0.0
                 else:
                     top = max(vals_now)
                     tie_count_now = float(sum(1 for a in vals_now if a == top))
@@ -1110,54 +1003,44 @@ class GraphOfLife:
                     leader_gap = float(top - second)
                     leader_gap_norm = leader_gap / (1.0 + float(top))
 
-                # How many *more* tokens u would need to strictly lead right now
                 u_now = float(allocs_map.get(u, 0))
-                # Best rival's count (if u is not unique leader)
                 best_rival = float(max([a for s, a in allocs_map.items() if s != u], default=0))
-                # If u already strictly leads, deficit is 0; if tied or behind, need (best_rival - u_now + 1)
                 u_deficit_to_lead = float(max(0, int(best_rival - u_now + 1)))
 
+                # Pack the 20 raw metrics
                 extra_feats = [
-                    # --- original extras (keep order) ---
-                    float(snapshot_incoming_totals[v]),  # cumulative inflow to v so far
-                    max_on_v,  # current max offers on v
-                    has_flow,  # has any edge flow on (u,v)
-                    u_to_v,  # u->v so far
-                    v_to_v,  # v->v so far
-                    u_wins_v_now,  # if leading, split of the tie
-                    float(rem_u),  # remaining[u]
-                    float(rem_v),  # remaining[v]
-                    # --- new opponent-awareness & competitiveness ---
-                    float(pot_inflow_total),  # upper bound of tokens that can still go to v
-                    float(u_share_upper),  # u's share of that bound
-                    float(len(competitors)),  # number of competitors at v (excl. u)
-                    float(comp_rem_sum),  # competitors' remaining sum
-                    float(comp_rem_max),  # competitors' remaining max
-                    float(comp_alloc_sum_ex_u),  # competitor allocations to v so far
-                    float(comp_alloc_max_ex_u),  # competitor max allocation to v so far
-                    float(leader_gap),  # top-second gap at v now
-                    float(leader_gap_norm),  # normalized gap
-                    float(tie_count_now),  # number of current co-leaders at v
-                    float(u_is_leader_now),  # binary: is u among leaders now
-                    float(u_deficit_to_lead),  # tokens u needs to strictly lead at v now
+                    float(snapshot_incoming_totals[v]), max_on_v, has_flow, u_to_v, v_to_v, u_wins_v_now,
+                    float(rem_u), float(rem_v), float(pot_inflow_total), float(u_share_upper),
+                    float(len(competitors)), float(comp_rem_sum), float(comp_rem_max),
+                    float(comp_alloc_sum_ex_u), float(comp_alloc_max_ex_u),
+                    float(leader_gap), float(leader_gap_norm), float(tie_count_now),
+                    float(u_is_leader_now), float(u_deficit_to_lead),
                 ]
 
-                X_cols.append(self._input_vec_fast(u, v, deg, q_tok, q_deg, extra_feats=extra_feats))
+                # --- Activate Blotto Cortex (New Code Signature) ---
+                # Note: _input_vec_fast will handle log-scaling of extra_feats
+                X_cols.append(self._input_vec_fast(
+                    u, v, log_deg, q_tok, q_deg, log_tok_map,
+                    blotto_feats=extra_feats,
+                    walker_feats=None
+                ))
 
             X = np.column_stack(X_cols)
             Y = self.brains[u].forward(X)
-            # Emit messages for this blotto observation
-            self._emit_messages(u, targets, Y)
             scores = np.asarray(Y[HEAD["BLOTTO"], :], dtype=float)
             return targets, scores
 
+        # --------------------------------------------------------------------
+        # 4. Allocation Scheduling (Restored All Modes)
+        # --------------------------------------------------------------------
+
         if BLOTTO_ALLOCATION_MODE == "FULL_ALLOCATION":
-            # One observation; each agent allocates all tokens at once by relative scores.
+            # Mode A: One-shot full allocation (Old Code Logic)
             snapshot_incoming_totals, snapshot_leader_max, snapshot_leader_set = compute_snapshot_views()
             for u in list(self.G.nodes()):
                 t_u = int(remaining.get(u, 0))
-                if t_u <= 0:
-                    continue
+                if t_u <= 0: continue
+
                 targets, scores = forward_scores_for(u, snapshot_incoming_totals, snapshot_leader_max,
                                                      snapshot_leader_set)
 
@@ -1168,42 +1051,38 @@ class GraphOfLife:
                 else:
                     probs = (vals / s).astype(float)
 
-                # Largest remainder apportionment to conserve tokens exactly
+                # Largest remainder apportionment
                 raw = probs * float(t_u)
                 alloc_int = np.floor(raw).astype(int)
                 rem = t_u - int(alloc_int.sum())
                 if rem > 0:
                     fractional = raw - alloc_int
                     order = np.argsort(-fractional)[:rem]
-                    for k in order:
-                        alloc_int[k] += 1
+                    for k in order: alloc_int[k] += 1
 
-                # Apply all allocations for u
+                # Apply
                 for idx, v in enumerate(targets):
                     a = int(alloc_int[idx])
-                    if a <= 0:
-                        continue
+                    if a <= 0: continue
                     incoming_totals[v] += a
                     per_target_allocators[v][u] = per_target_allocators[v].get(u, 0) + a
                     u_sent_to_v[(u, v)] += a
                     if u != v:
                         e = tuple(sorted((u, v)))
-                        if e in edge_flow:
-                            edge_flow[e] += a
+                        if e in edge_flow: edge_flow[e] += a
                     allocation_sequence[u].extend([int(v)] * a)
-                remaining[u] = 0  # all tokens allocated in one shot
+                remaining[u] = 0
 
         elif BLOTTO_ALLOCATION_MODE == "STEP_ALLOCATION_WEAKEST_FIRST":
-            # Current behavior: each round every node with >=1 token allocates 1 token.
+            # Mode B: Round-robin, 1 token per round, everyone plays (Old Code Logic)
             while True:
                 eligible = [u for u in self.G.nodes() if remaining.get(u, 0) >= 1]
-                if not eligible:
-                    break
-                snapshot_incoming_totals, snapshot_leader_max, snapshot_leader_set = compute_snapshot_views()
-                decisions: Dict[int, int] = {}
+                if not eligible: break
+
+                snap_tot, snap_max, snap_set = compute_snapshot_views()
+                decisions = {}
                 for u in eligible:
-                    targets, scores = forward_scores_for(u, snapshot_incoming_totals, snapshot_leader_max,
-                                                         snapshot_leader_set)
+                    targets, scores = forward_scores_for(u, snap_tot, snap_max, snap_set)
                     if PROBABILISTIC_DECISIONS:
                         vals = np.maximum(0.0, scores)
                         s = float(vals.sum())
@@ -1213,7 +1092,6 @@ class GraphOfLife:
                         idx = int(np.argmax(scores))
                     decisions[u] = int(targets[idx])
 
-                # Apply all one-token decisions simultaneously
                 for u, v in decisions.items():
                     remaining[u] -= 1
                     incoming_totals[v] += 1
@@ -1221,24 +1099,21 @@ class GraphOfLife:
                     u_sent_to_v[(u, v)] += 1
                     if u != v:
                         e = tuple(sorted((u, v)))
-                        if e in edge_flow:
-                            edge_flow[e] += 1
+                        if e in edge_flow: edge_flow[e] += 1
                     allocation_sequence[u].append(int(v))
 
         elif BLOTTO_ALLOCATION_MODE == "STEP_ALLOCATION_STRONGEST_FIRST":
-            # Only nodes with the current max remaining tokens allocate 1 per round.
+            # Mode C: Round-robin, only max-token agents play (New Code / Current Logic)
             while True:
                 elig = [u for u in self.G.nodes() if remaining.get(u, 0) >= 1]
-                if not elig:
-                    break
+                if not elig: break
                 max_rem = max(remaining[u] for u in elig)
                 eligible = [u for u in elig if remaining[u] == max_rem]
 
-                snapshot_incoming_totals, snapshot_leader_max, snapshot_leader_set = compute_snapshot_views()
-                decisions: Dict[int, int] = {}
+                snap_tot, snap_max, snap_set = compute_snapshot_views()
+                decisions = {}
                 for u in eligible:
-                    targets, scores = forward_scores_for(u, snapshot_incoming_totals, snapshot_leader_max,
-                                                         snapshot_leader_set)
+                    targets, scores = forward_scores_for(u, snap_tot, snap_max, snap_set)
                     if PROBABILISTIC_DECISIONS:
                         vals = np.maximum(0.0, scores)
                         s = float(vals.sum())
@@ -1248,7 +1123,6 @@ class GraphOfLife:
                         idx = int(np.argmax(scores))
                     decisions[u] = int(targets[idx])
 
-                # Apply all one-token decisions for the strongest set
                 for u, v in decisions.items():
                     remaining[u] -= 1
                     incoming_totals[v] += 1
@@ -1256,77 +1130,77 @@ class GraphOfLife:
                     u_sent_to_v[(u, v)] += 1
                     if u != v:
                         e = tuple(sorted((u, v)))
-                        if e in edge_flow:
-                            edge_flow[e] += 1
+                        if e in edge_flow: edge_flow[e] += 1
                     allocation_sequence[u].append(int(v))
+
         else:
             raise ValueError(f"Unknown BLOTTO_ALLOCATION_MODE: {BLOTTO_ALLOCATION_MODE}")
-        # ------------------- end allocation scheduling -------------------
 
-        # --------------------------- Outcomes ----------------------------
-        new_tokens = dict(self.tokens)
-        new_brains = dict(self.brains)
-        walker_resets: List[int] = []
+            # --------------------------------------------------------------------
+            # 3. Resolution (Conquest vs Robbery)
+            # --------------------------------------------------------------------
+            new_tokens = dict(self.tokens)
+            new_brains = dict(self.brains)
+            walker_resets: List[int] = []
 
-        if BLOTTO_MODE == "ALLOCATE_AND_CONQUER":
-            for v in list(self.G.nodes()):
-                offers_map = per_target_allocators[v]
-                log["incoming_offers"][str(v)] = [(int(s), int(a)) for (s, a) in offers_map.items()]
-                if not offers_map:
-                    new_tokens[v] = 0
-                    new_brains[v] = self.brains[v].copy()
-                    if MUTATE_ON_BLOTTO_COPY:
-                        new_brains[v].mutate()
-                    if RESET_REACH_ON_CONQUER:
+            if BLOTTO_MODE == "ALLOCATE_AND_CONQUER":
+                for v in list(self.G.nodes()):
+                    offers = per_target_allocators[v]
+                    if not offers:
+                        new_tokens[v] = 0
+                        # Survival: Clone self
+                        new_brains[v] = self.brains[v].copy()
+                        if MUTATE_ON_BLOTTO_COPY: new_brains[v].mutate()
+
+                        # Logic: Even if no one attacked, if we reset on conquer, we often reset on survival too
+                        # (Optional, but consistent with Old Code logic to ensure freshness)
+                        if RESET_REACH_ON_CONQUER:
+                            neighbors_vid = [int(w) for w in self.G.neighbors(v)]
+                            self.reach_counts[v] = {int(v): 1, **{nv: 1 for nv in neighbors_vid}}
+                            walker_resets.append(int(v))
+                        continue
+
+                    max_amt = max(offers.values())
+                    winners = [s for s, a in offers.items() if a == max_amt]
+                    winner = int(np.random.choice(winners))
+
+                    # Genetic Takeover (Brain Overwrite)
+                    new_brains[v] = self.brains[winner].copy()
+                    if MUTATE_ON_BLOTTO_COPY: new_brains[v].mutate()
+                    new_tokens[v] = int(incoming_totals[v])
+                    log["winners"][str(v)] = {"winner": int(winner), "max_amount": int(max_amt)}
+
+                    if winner != v and RESET_REACH_ON_CONQUER:
+                        # Reset memory of the conquered node
                         neighbors_vid = [int(w) for w in self.G.neighbors(v)]
                         self.reach_counts[v] = {int(v): 1, **{nv: 1 for nv in neighbors_vid}}
                         walker_resets.append(int(v))
-                    continue
 
-                max_amt = max(offers_map.values())
-                contenders = [s for s, a in offers_map.items() if a == max_amt]
-                winner = int(np.random.choice(contenders))
+            elif BLOTTO_MODE == "ALLOCATE_AND_ROB":
+                winnings: Dict[int, int] = {u: 0 for u in self.G.nodes()}
+                for v in list(self.G.nodes()):
+                    offers = per_target_allocators[v]
+                    if not offers:
+                        new_tokens[v] = 0
+                        new_brains[v] = self.brains[v]  # Keep own brain
+                        continue
 
-                # Implant winner's brain into v
-                new_brains[v] = self.brains[winner].copy()
-                if MUTATE_ON_BLOTTO_COPY:
-                    new_brains[v].mutate()
+                    max_amt = max(offers.values())
+                    winners = [s for s, a in offers.items() if a == max_amt]
+                    winner = int(np.random.choice(winners))
 
-                new_tokens[v] = int(incoming_totals[v])
-                log["winners"][str(v)] = {"winner": int(winner), "max_amount": int(max_amt)}
-
-                if winner != v and RESET_REACH_ON_CONQUER:
-                    neighbors_vid = [int(w) for w in self.G.neighbors(v)]
-                    self.reach_counts[v] = {int(v): 1, **{nv: 1 for nv in neighbors_vid}}
-                    walker_resets.append(int(v))
-
-        elif BLOTTO_MODE == "ALLOCATE_AND_ROB":
-            # Winners collect tokens from targets; brains are never copied here.
-            winnings: Dict[int, int] = {u: 0 for u in self.G.nodes()}
-            for v in list(self.G.nodes()):
-                offers_map = per_target_allocators[v]
-                log["incoming_offers"][str(v)] = [(int(s), int(a)) for (s, a) in offers_map.items()]
-
-                if not offers_map:
+                    # Winner gets the tokens, Loser (v) keeps the brain but loses tokens
+                    winnings[winner] = winnings.get(winner, 0) + int(incoming_totals[v])
                     new_tokens[v] = 0
-                    new_brains[v] = self.brains[v]  # unchanged
-                    continue
+                    new_brains[v] = self.brains[v]
+                    log["winners"][str(v)] = {"winner": int(winner), "max_amount": int(max_amt)}
 
-                max_amt = max(offers_map.values())
-                contenders = [s for s, a in offers_map.items() if a == max_amt]
-                winner = int(np.random.choice(contenders))
+                # Apply winnings to the robbers
+                for w, gain in winnings.items():
+                    new_tokens[w] = new_tokens.get(w, 0) + int(gain)
 
-                winnings[winner] = winnings.get(winner, 0) + int(incoming_totals[v])
-                new_tokens[v] = 0
-                new_brains[v] = self.brains[v]  # no copying
-                log["winners"][str(v)] = {"winner": int(winner), "max_amount": int(max_amt)}
-
-            # Apply winnings to winner nodes
-            for w, gain in winnings.items():
-                new_tokens[w] = new_tokens.get(w, 0) + int(gain)
-
-        else:
-            raise ValueError(f"Unknown BLOTTO_MODE: {BLOTTO_MODE}")
+            else:
+                raise ValueError(f"Unknown BLOTTO_MODE: {BLOTTO_MODE}")
 
         log["walker_resets"] = walker_resets
 
@@ -1334,25 +1208,24 @@ class GraphOfLife:
         self.tokens = new_tokens
         self.brains = new_brains
 
-        # Optional global mutation at end of blotto (applies to both modes)
-        if MUTATE_ALL_AFTER_BLOTTO:
-            for b in self.brains.values():
-                b.mutate()
+        # --------------------------------------------------------------------
+        # 6. Cleanup & Logging
+        # --------------------------------------------------------------------
 
-        # -------------------- Prune, cleanup, persist --------------------
-        # Prune edges with no flow
+        # Mutation Pulse (Global)
+        if MUTATE_ALL_AFTER_BLOTTO:
+            for b in self.brains.values(): b.mutate()
+
+        # Prune dead edges
         to_remove = [e for e, f in edge_flow.items() if f == 0]
-        if to_remove:
-            self.G.remove_edges_from(to_remove)
+        if to_remove: self.G.remove_edges_from(to_remove)
         log["pruned_edges"] = [(int(u), int(v)) for (u, v) in to_remove]
 
-        # Cleanup, persist
+        # Call the robust cleanup function
         log["cleanup"] = self._cleanup_and_redistribute()
         log["post_state"] = self._snapshot_graph()
 
-
-        # Messaging dictionary hygiene: at end of Blotto, keep only self+neighbors
-        # and only entries pointing to nodes still present.
+        # Messaging Dictionary Hygiene
         for u in list(self.messages.keys()):
             if not self.G.has_node(u):
                 self.messages.pop(u, None)
@@ -1364,9 +1237,10 @@ class GraphOfLife:
                     keep[v] = vec
             self.messages[u] = keep
 
-        # Aggregated per-agent allocation counts (compat) + exact sequence
+        # Aggregated Logs
         for u in list(self.G.nodes()) + [x for x in allocation_sequence.keys() if x not in self.G.nodes()]:
             tgs = [u] + (neighs.get(u, []))
+            # Safe access for logging even if u died
             alloc_counts = [int(u_sent_to_v[(u, v)]) for v in tgs]
             log["allocations"].append({
                 "agent_id": int(u),
@@ -1378,28 +1252,225 @@ class GraphOfLife:
 
         log["genotype_events"] = list(self.genotype_events)
         self.genotype_events.clear()
-        path = self._save_step_file(2 * t + 1, log)
+
         if t % DRAW_EVERY_X_ITERATIONS == 0 and DRAW:
             self._draw(f"Round {t} — After Phase 2", f"step_{2 * t + 1:05d}_phase2.png")
-        return path
 
-    # ----------------- One full round -----------------
+        return self._save_step_file(2 * t + 1, log)
+
+    # ------------------------------------------------------------------------
+    # Cleanup: The Physics of Death
+    # ------------------------------------------------------------------------
+    def _cleanup_and_redistribute(self) -> Dict[str, Any]:
+        """
+        Applies the 'Physics of Death' and topology cleanup.
+
+        Rules:
+        1. Nodes with <= 0 tokens are removed (Starvation).
+        2. Only the Largest Connected Component survives (Isolation).
+        3. Redistribution (Conservation of Resources):
+           - GLOBAL_UNIFORM: Tokens from dead/pruned nodes are pooled and shared active-globally.
+           - LOCAL_SCAVENGING: Tokens flow to surviving neighbors. Isolated tokens go active-globally.
+        """
+        report: Dict[str, Any] = {
+            "resurrected": False,
+            "resurrect_agent": None,
+            "removed_zero_nodes": [],
+            "removed_components": [],
+            "redistributed_tokens": 0,
+            "survivors_count": 0,
+        }
+
+        # --------------------------------------------------------------------
+        # 1. Identification Phase (Who dies? Who survives?)
+        # --------------------------------------------------------------------
+
+        # A. Identify Starved Nodes (Zero Tokens)
+        zero_nodes = [u for u in self.G.nodes() if self.tokens.get(u, 0) <= 0]
+        report["removed_zero_nodes"] = [int(u) for u in zero_nodes]
+
+        # B. Simulate Graph after starvation to find components
+        # We need a temporary view of the graph where zero_nodes are gone
+        G_active = self.G.copy()
+        G_active.remove_nodes_from(zero_nodes)
+
+        # C. Identify Isolated Components (Pruning)
+        survivors_set = set()
+        pruned_nodes = set()
+
+        if G_active.number_of_nodes() > 0:
+            comps = list(nx.connected_components(G_active))
+            comps.sort(key=len, reverse=True)
+
+            # The largest component survives
+            survivors_set = set(comps[0])
+
+            # All smaller components are pruned
+            if len(comps) > 1:
+                for c in comps[1:]:
+                    pruned_nodes.update(c)
+                report["removed_components"] = [list(map(int, c)) for c in comps[1:]]
+
+        # The total list of nodes being removed from the simulation
+        # (We use a set to avoid duplicates, though sets should be disjoint here)
+        all_doomed_nodes = set(zero_nodes) | pruned_nodes
+
+        # --------------------------------------------------------------------
+        # 2. Redistribution Phase (The Physics)
+        # --------------------------------------------------------------------
+        global_pool = CREATE_X_NEW_TOKENS_EACH_PHASE
+
+        # Iterate through every dying node to distribute its earthly possessions
+        for u in all_doomed_nodes:
+            amt = self.tokens.get(u, 0)
+            if amt <= 0:
+                continue
+
+            if TOKEN_REDISTRIBUTION_MODE == "LOCAL_SCAVENGING":
+                # Scavenging Rule:
+                # Tokens flow to "neighbors that are still alive".
+                # We check the ORIGINAL graph (self.G) to find who 'u' was connected to.
+                neighbors = list(self.G.neighbors(u))
+
+                # Filter for neighbors who are in the 'survivors_set' (The Giant Component)
+                beneficiaries = [v for v in neighbors if v in survivors_set]
+
+                if beneficiaries:
+                    # Distribute locally to survivors
+                    count = len(beneficiaries)
+                    share = amt // count
+                    remainder = amt % count
+                    for idx, v in enumerate(beneficiaries):
+                        self.tokens[v] += (share + (1 if idx < remainder else 0))
+                else:
+                    # No connection to the survivors? (e.g., totally isolated island).
+                    # The tokens evaporate to the global atmosphere.
+                    global_pool += amt
+            else:
+                # GLOBAL_UNIFORM Rule:
+                # All tokens from dying nodes go to the global pot.
+                global_pool += amt
+
+        # --------------------------------------------------------------------
+        # 3. Execution Phase (Surgery)
+        # --------------------------------------------------------------------
+
+        if all_doomed_nodes:
+            self.G.remove_nodes_from(list(all_doomed_nodes))
+            for u in all_doomed_nodes:
+                self.tokens.pop(u, None)
+                self.brains.pop(u, None)
+                self.reach_counts.pop(u, None)
+                self.messages.pop(u, None)
+
+        # --------------------------------------------------------------------
+        # 4. Global Settling & Resurrection
+        # --------------------------------------------------------------------
+
+        # Distribute the global pool (Manna)
+        survivors = list(self.G.nodes())
+        if global_pool > 0 and survivors:
+            # Multinomial for integer conservation
+            draws = np.random.multinomial(global_pool, [1 / len(survivors)] * len(survivors))
+            for u, add in zip(survivors, draws):
+                self.tokens[u] = self.tokens.get(u, 0) + int(add)
+
+        report["redistributed_tokens"] = int(global_pool)
+        report["survivors_count"] = self.G.number_of_nodes()
+
+        # Resurrect if the world is empty
+        if self.G.number_of_nodes() == 0:
+            aid = self.next_agent_id
+            self.next_agent_id += 1
+            self.G.add_node(aid)
+            self.tokens = {aid: self.total_tokens}
+            self.brains = {aid: Brain()}
+            self.reach_counts = {aid: {aid: 1}}
+            self.messages = {aid: {}}
+            report.update({"resurrected": True, "resurrect_agent": int(aid), "survivors_count": 1})
+
+        return report
+
     def step(self, t: int) -> Tuple[str, str]:
         p1 = self.reproduction_phase(t)
         p2 = self.blotto_phase(t)
         return p1, p2
 
+    # ------------------------------------------------------------------------
+    # Visualization & IO (Standard)
+    # ------------------------------------------------------------------------
 
-# ----------------------------------------------------------------------------
-# Demo / Quickstart
-# ----------------------------------------------------------------------------
+    def _snapshot_graph(self) -> Dict[str, Any]:
+        """Captures graph state for replay."""
+        nodes = []
+        for u in self.G.nodes():
+            nodes.append({
+                "agent_id": int(u), "tokens": int(self.tokens.get(u, 0)),
+                "brain_id": int(self.brains[u].brain_id),
+                "neighbors": [int(v) for v in self._neighbors(u)]
+            })
+        return {"nodes": nodes, "edges": [(int(u), int(v)) for u, v in self.G.edges()]}
+
+    def _save_step_file(self, idx: int, blob: Dict[str, Any]) -> str:
+        path = os.path.join(self.run_dir, f"step_{idx:05d}.json")
+        with open(path, "w") as f: json.dump(blob, f, indent=2)
+        return path
+
+    def _snapshot_source(self) -> None:
+        try:
+            src = os.path.abspath(__file__)
+            dst = os.path.join(self.run_dir, os.path.basename(src))
+            shutil.copy2(src, dst)
+        except:
+            pass
+
+    def _save_configuration(self) -> None:
+        with open(os.path.join(self.run_dir, "config.txt"), "w") as f:
+            for k, v in globals().items():
+                if k.isupper() and not k.startswith("_"): f.write(f"{k}: {v}\n")
+
+    def _draw(self, title: str, fname: str, k_max: int = 3) -> None:
+        if self.G.number_of_nodes() == 0: return
+        pos3d = nx.spring_layout(self.G, dim=3, seed=42)
+        pos2d = {n: (c[0], c[1]) for n, c in pos3d.items()}
+        coreness = nx.core_number(self.G) if self.G.number_of_edges() > 0 else {u: 0 for u in self.G.nodes()}
+        layer_k = {u: min(coreness.get(u, 0), k_max) for u in self.G.nodes()}
+        L_node = {u: (k_max - layer_k[u]) for u in self.G.nodes()}
+        layers_nodes: Dict[int, List[int]] = {}
+        for u, L in L_node.items(): layers_nodes.setdefault(L, []).append(u)
+        L_edge = {(u, v): max(L_node[u], L_node[v]) for (u, v) in self.G.edges()}
+        layers_edges: Dict[int, List[Tuple[int, int]]] = {}
+        for e, L in L_edge.items(): layers_edges.setdefault(L, []).append(e)
+
+        plt.figure(figsize=(8, 6))
+        vmin = 0
+        vmax = max([0] + [self.tokens.get(u, 0) for u in self.G.nodes()])
+        cmap = matplotlib.colormaps.get_cmap("viridis")
+        for L in sorted(layers_edges.keys(), reverse=True):
+            edgelist = layers_edges[L]
+            if not edgelist: continue
+            edge_alpha = 0.5 / (2 ** L)
+            nx.draw_networkx_edges(self.G, pos2d, edgelist=edgelist, alpha=edge_alpha, width=0.5 if L == 0 else 0.3)
+        for L in sorted(layers_nodes.keys(), reverse=True):
+            nlist = layers_nodes[L]
+            if not nlist: continue
+            node_alpha = 1.0 / (2 ** L)
+            nx.draw_networkx_nodes(
+                self.G, pos2d, nodelist=nlist,
+                node_size=[(self.tokens.get(u, 0) + 1) / 12 for u in nlist],
+                node_color=[self.tokens.get(u, 0) for u in nlist],
+                cmap=cmap, vmin=vmin, vmax=vmax, alpha=node_alpha,
+            )
+        plt.title(title)
+        plt.axis("off")
+        plt.savefig(os.path.join(self.run_dir, fname), dpi=130, bbox_inches="tight")
+        plt.close("all")
+
 
 def _main() -> None:
-
     max_steps = 500_000
-
-    n = int(TOTAL_TOKENS/100)
-    k = max([int(n/100), 5])
+    n = int(TOTAL_TOKENS / 100)
+    k = max([int(n / 100), 5])
 
     def make_simulation() -> GraphOfLife:
         G0 = nx.watts_strogatz_graph(n=n, k=k, p=0.2)
@@ -1412,12 +1483,11 @@ def _main() -> None:
         print(f"🌍 Starting run {run_counter}, folder: {simulation.run_dir}")
         for t in range(max_steps):
             simulation.step(t)
-            print(f"Run {run_counter}, iteration {t} finished (nodes: {simulation.G.number_of_nodes()}, edges: {simulation.G.number_of_edges()})")
-            if simulation.G.number_of_nodes() <= 10:
-                print(f"⚠️ Run {run_counter} crashed at step {t} (nodes ≤ 10), restarting…")
+            print(f"Run {run_counter}, iteration {t} finished (nodes: {simulation.G.number_of_nodes()}, edges: {simulation.G.number_of_edges()}, tokens: {sum(simulation.tokens.values())})")
+
+            if simulation.G.number_of_nodes() <= 50:
+                print(f"⚠️ Run {run_counter} extinction event. Restarting.")
                 break
-        else:
-            print(f"✅ Run {run_counter} finished {max_steps} iterations, restarting fresh…")
 
 
 if __name__ == "__main__":
