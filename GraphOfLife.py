@@ -3,9 +3,6 @@
 """
 GraphOfLife — Open-Ended Evolution on a Mutable Graph
 ==============================================================================
-
-
-
 """
 from __future__ import annotations
 
@@ -23,16 +20,15 @@ import matplotlib.pyplot as plt
 import networkx as nx
 import numpy as np
 
-
 # ----------------------------------------------------------------------------
 # Configuration & Constants
 # ----------------------------------------------------------------------------
 
 # Total amount of tokens (conserved)
-TOTAL_TOKENS = 20_000
+TOTAL_TOKENS = 50_000
 
 # ---- Token Creation ----
-CREATE_X_NEW_TOKENS_EACH_PHASE: int = 0
+CREATE_X_NEW_TOKENS_EACH_PHASE: int = 10
 
 # Determinism
 PROBABILISTIC_DECISIONS: bool = False
@@ -42,7 +38,10 @@ PROBABILISTIC_DECISIONS: bool = False
 #   "ALLOCATE_AND_ROB"          : winner-for-v *collects* all tokens allocated to v; no brain copying
 #   "ALLOCATE_AND_DO_NOTHING"   : No Brain gets overwritten. But they dont want the links to disappear
 
-BLOTTO_MODE: str = "ALLOCATE_AND_DO_NOTHING"
+BLOTTO_MODE: str = "ALLOCATE_AND_CONQUER"
+
+ALLOW_REVOLUTIONS = True
+FORCE_REVOLUTIONS =  False
 
 # ---- Blotto allocation scheduling ----
 # "FULL_ALLOCATION"              : one observation; each agent allocates all its tokens at once by relative scores
@@ -50,7 +49,7 @@ BLOTTO_MODE: str = "ALLOCATE_AND_DO_NOTHING"
 # "STEP_ALLOCATION_STRONGEST_FIRST": only agents with the current per-round max remaining tokens allocate 1 token
 # "STEP_ALLOCATION_AS_WISHED": they can choose when to allocate
 
-BLOTTO_ALLOCATION_MODE: str = "STEP_ALLOCATION_AS_WISHED"
+BLOTTO_ALLOCATION_MODE: str = "STEP_ALLOCATION_STRONGEST_FIRST"
 
 # ---- Reproduction decision variant ----
 REPRO_CORE_FRACTIONS_ONLY: bool = False
@@ -61,7 +60,7 @@ MUTATE_ON_BLOTTO_COPY: bool = False
 MUTATE_ALL_AFTER_BLOTTO: bool = True
 
 # ---- Mutation Hyperparameters ----
-MUTATION_PROBABILITY: float = 0.5
+MUTATION_PROBABILITY: float = 0.25
 MUTATION_NOISE_STD: float = 0.2
 MUTATION_SPARSITY: float = 0.1
 
@@ -79,7 +78,7 @@ RANDOM_INPUT_AMOUNT: int = 5
 # WALK_ON_OWN_PER_LOG_TOKEN -> Active navigation driven by Brain, steps = log2(tokens)+1
 # NO_WALKER -> no walker
 
-WALKER_MODE: str = "WALK_ON_OWN_PER_LOG_TOKEN"
+WALKER_MODE: str = "PSEUDO_RANDOM_ONE_PER_ITERATION"
 
 # ---- Walker/reach reset policy ----
 RESET_REACH_ON_CONQUER: bool = True
@@ -90,7 +89,7 @@ MESSAGE_NUMBER_AMOUNT = 5
 
 # ---- Token Redistribution Physics----
 # "GLOBAL_UNIFORM": Tokens from removed nodes are distributed to all survivors (Manna from Heaven).
-# "LOCAL_SCAVENGING": Tokens from removed nodes go to surviving neighbors. Isolated tokens go global.
+# "LOCAL_SCAVENGING": Tokens from removed nodes go to surviving neighbors. Isolated tokens go global. #TODO wrongly implemented
 TOKEN_REDISTRIBUTION_MODE: str = "GLOBAL_UNIFORM"
 
 # ---- Brain Architecture ----
@@ -114,8 +113,8 @@ HEAD = {
     "WALKER": slice(13, 15),
     "MESSAGE": slice(15, 15 + MESSAGE_NUMBER_AMOUNT),
     "WALKER_DIR": 15 + MESSAGE_NUMBER_AMOUNT,
-    "ALLOCATE_YN": slice(15 + MESSAGE_NUMBER_AMOUNT + 1,15 + MESSAGE_NUMBER_AMOUNT + 3),
-
+    "ALLOCATE_YN": slice(15 + MESSAGE_NUMBER_AMOUNT + 1, 15 + MESSAGE_NUMBER_AMOUNT + 3),
+    "REVOLUTION_YN": slice(15 + MESSAGE_NUMBER_AMOUNT + 3, 15 + MESSAGE_NUMBER_AMOUNT + 5),
 }
 
 
@@ -167,20 +166,21 @@ class Brain:
         """
         Initializes a Feed-Forward Neural Network.
 
-        Input Layer Anatomy (Total ~77 neurons):
+        Input Layer Anatomy:
         - Base (29): Local topology and wealth (Log-Scaled).
-        - Blotto Context (20): Competition metrics (Active only in Blotto phase).
-        - Walker Context (4): Spatial-temporal navigation data (Active only in Walker phase).
+        - Blotto Context (25): Competition metrics + Revolution Metrics.
+        - Walker Context (4): Spatial-temporal navigation data.
         - Messages (20): Signals from neighbors.
         - Noise (4): Entropy injection.
         """
         # Base breakdown: 1 (obs_is_self) + 4 (scalars) + 24 (quantiles) = 29
-        # Contexts: 20 (Blotto) + 4 (Walker) = 24
-        # Total Static Inputs = 53
-        n_inputs = 53 + 4 * MESSAGE_NUMBER_AMOUNT + RANDOM_INPUT_AMOUNT
+        # Contexts: 25 (Blotto) + 4 (Walker) = 29
+        # Total Static Inputs = 58
+        n_inputs = 58 + 4 * MESSAGE_NUMBER_AMOUNT + RANDOM_INPUT_AMOUNT
 
         hidden_sizes = BRAIN_HIDDEN_LAYERS
-        n_outputs = 15 + MESSAGE_NUMBER_AMOUNT + 3
+        # Outputs: 15 (Standard) + Msg + 3 (WalkerDir/AllocYN) + 2 (RevYN)
+        n_outputs = 15 + MESSAGE_NUMBER_AMOUNT + 3 + 2
 
         assert n_inputs > 0 and n_outputs > 0
         self.layer_sizes = [int(n_inputs)] + [int(h) for h in hidden_sizes] + [int(n_outputs)]
@@ -359,7 +359,7 @@ class GraphOfLife:
             q_tok: Dict[int, List[float]],
             q_deg: Dict[int, List[float]],
             log_tok_map: Dict[int, float],
-            blotto_feats: List[float] | None = None,  # 20 dimensions
+            blotto_feats: List[float] | None = None,  # 25 dimensions now
             walker_feats: List[float] | None = None,  # 4 dimensions
             scale: float = 0.1,
     ) -> np.ndarray:
@@ -377,9 +377,9 @@ class GraphOfLife:
 
         base = [own_t_log, tgt_t_log, own_d_log, tgt_d_log] + q_tok[u] + q_tok[v] + q_deg[u] + q_deg[v]
 
-        # 2. Blotto Context (20 dims) - Competition Metrics
+        # 2. Blotto Context (25 dims) - Competition Metrics + Revolution
         if blotto_feats is None:
-            blotto_vec = [0.0] * 20
+            blotto_vec = [0.0] * 25
         else:
             blotto_vec = [np.log1p(max(0.0, float(x))) for x in blotto_feats]
 
@@ -481,7 +481,6 @@ class GraphOfLife:
                 # 2. Determine horizon based on tokens
                 tok_count = int(self.tokens.get(u, 0))
                 if WALKER_MODE == "PSEUDO_RANDOM_ONE_PER_TOKEN_LOG":
-                    # Fix: Use tok_count, not undefined 'steps'
                     steps = int(np.log2(tok_count)) + 1 if tok_count > 0 else 0
                 else:
                     steps = tok_count
@@ -793,7 +792,9 @@ class GraphOfLife:
 
                 self.tokens[cid] = child_tokens
                 self.brains[cid] = child_brain
-                self.reach_counts[cid] = {int(cid): 1}
+                #self.reach_counts[cid] = {int(cid): 1}
+                neighbors_cid = [int(w) for w in self.G.neighbors(cid)]
+                self.reach_counts[cid] = {int(cid): 1, **{nv: 1 for nv in neighbors_cid}}
                 self.messages[cid] = {}
                 self.tokens[u] = keep_tokens
                 rec.update({"child_created": True, "child_id": int(cid)})
@@ -940,16 +941,80 @@ class GraphOfLife:
         remaining = {u: int(self.tokens.get(u, 0)) for u in self.G.nodes()}
         incoming_totals = {v: 0 for v in self.G.nodes()}
         per_target_allocators: Dict[int, Dict[int, int]] = {v: {} for v in self.G.nodes()}
+        revolution_allocators: Dict[int, Dict[int, int]] = {v: {} for v in self.G.nodes()}  # NEW: Revolution pool
         u_sent_to_v = defaultdict(int)
         edge_flow = {tuple(sorted(e)): 0 for e in self.G.edges()}
         allocation_sequence = {u: [] for u in self.G.nodes()}
 
-        # Helper to get current leaders at a node
+        # Helper: Determine "King" of a node
         def leader_info(v: int) -> Tuple[int, set[int]]:
             allocs = per_target_allocators[v]
             if not allocs: return 0, set()
             m = max(allocs.values())
             return m, {s for s, a in allocs.items() if a == m}
+
+        # Helper: Calculate hypothetical Revolution Winner (for Context)
+        def check_revolution_status(v: int) -> Tuple[bool, int | None]:
+            """Returns (Did Revolution Win?, Winner ID) based on CURRENT state."""
+            if not ALLOW_REVOLUTIONS: return False, None
+
+            # 1. Identify the "Hegemon" / Standard King (Global Max Allocator)
+            allocs = per_target_allocators.get(v, {})
+            if not allocs: return False, None
+
+            max_val = max(allocs.values())
+            # Deterministic tie-breaking for input stability: pick largest Agent ID
+            hegemon_candidates = [a for a, amt in allocs.items() if amt == max_val]
+            hegemon = max(hegemon_candidates)
+            hegemon_tokens = max_val
+
+            # 2. Get Revolutionaries
+            revs = revolution_allocators.get(v, {})
+            if not revs: return False, None
+
+            # 3. Build the "Mob"
+            # Mob = All revolutionaries EXCEPT the Hegemon
+            # (Even if Hegemon is in revs, they are the target, so they are removed from the mob)
+            mob = []
+            for ag, tok in revs.items():
+                if ag != hegemon:
+                    mob.append((ag, tok))
+
+            if not mob: return False, None
+
+            # 4. Sort Mob by tokens (Weakest -> Strongest)
+            mob.sort(key=lambda x: x[1])
+
+            # 5. The Mutiny Logic
+            current_lower_sum = 0
+            total_mob_tokens = sum(t for a, t in mob)
+
+            processed_index = 0
+            while processed_index < len(mob):
+                # Handle groups of identical token amounts
+                current_amount = mob[processed_index][1]
+                current_group = []
+                while processed_index < len(mob) and mob[processed_index][1] == current_amount:
+                    current_group.append(mob[processed_index])
+                    processed_index += 1
+
+                # Update Lower Class Sum
+                group_sum = sum(t for a, t in current_group)
+                current_lower_sum += group_sum
+
+                # Calculate Resistance (Upper Class + Hegemon)
+                remaining_upper_tokens = total_mob_tokens - current_lower_sum
+                resistance_total = remaining_upper_tokens + hegemon_tokens
+
+                # 6. The Critical Check
+                if current_lower_sum > resistance_total:
+                    # Revolution Wins.
+                    # Winner is one of the group that tipped the scale.
+                    # Deterministic pick for features: max ID
+                    winner_id = max([a for a, t in current_group])
+                    return True, winner_id
+
+            return False, None
 
         # Helper to snapshot the board state for the next round of decisions
         def compute_snapshot_views():
@@ -1013,7 +1078,31 @@ class GraphOfLife:
                 best_rival = float(max([a for s, a in allocs_map.items() if s != u], default=0))
                 u_deficit_to_lead = float(max(0, int(best_rival - u_now + 1)))
 
-                # Pack the 20 raw metrics
+                # --- Revolution Features (New) ---
+                rev_total = float(sum(revolution_allocators[v].values()))
+                rev_own = float(revolution_allocators[v].get(u, 0))
+
+                # Check Revolution state on the fly
+                is_rev_success, rev_winner_id = check_revolution_status(v)
+
+                # "tell if the one that allocated the most is also the biggest in the total competition"
+                # (Interpreted as: Is the standard King also the Revolution Leader?)
+                rev_pool = revolution_allocators[v]
+                if rev_pool:
+                    max_rev_contrib = max(rev_pool.values())
+                    rev_leaders = [ag for ag, am in rev_pool.items() if am == max_rev_contrib]
+                    # Check if any standard leader is also a revolution leader
+                    king_is_rev_king = 1.0 if (not leaders_v.isdisjoint(rev_leaders)) else 0.0
+                else:
+                    king_is_rev_king = 0.0
+
+                # "if he would currently be the winner" (Considering Revolution logic)
+                if is_rev_success:
+                    am_i_winner_total = 1.0 if rev_winner_id == u else 0.0
+                else:
+                    am_i_winner_total = u_wins_v_now
+
+                # Pack the 25 raw metrics (20 old + 5 new)
                 extra_feats = [
                     float(snapshot_incoming_totals[v]), max_on_v, has_flow, u_to_v, v_to_v, u_wins_v_now,
                     float(rem_u), float(rem_v), float(pot_inflow_total), float(u_share_upper),
@@ -1021,6 +1110,8 @@ class GraphOfLife:
                     float(comp_alloc_sum_ex_u), float(comp_alloc_max_ex_u),
                     float(leader_gap), float(leader_gap_norm), float(tie_count_now),
                     float(u_is_leader_now), float(u_deficit_to_lead),
+                    # New Revolution Features:
+                    rev_total, rev_own, king_is_rev_king, am_i_winner_total, max_on_v
                 ]
 
                 # --- Activate Blotto Cortex (New Code Signature) ---
@@ -1035,7 +1126,9 @@ class GraphOfLife:
             Y = self.brains[u].forward(X)
             scores = np.asarray(Y[HEAD["BLOTTO"], :], dtype=float)
             alloc_yn_logits = np.asarray(Y[HEAD["ALLOCATE_YN"], :], dtype=float)
-            return targets, scores, alloc_yn_logits
+            rev_yn_logits = np.asarray(Y[HEAD["REVOLUTION_YN"], :], dtype=float)  # Shape (2, Num_Targets)
+
+            return targets, scores, alloc_yn_logits, rev_yn_logits
 
         # --------------------------------------------------------------------
         # 4. Allocation Scheduling
@@ -1048,8 +1141,9 @@ class GraphOfLife:
                 t_u = int(remaining.get(u, 0))
                 if t_u <= 0: continue
 
-                targets, scores, _ = forward_scores_for(u, snapshot_incoming_totals, snapshot_leader_max,
-                                                     snapshot_leader_set)
+                targets, scores, _, rev_logits = forward_scores_for(u, snapshot_incoming_totals,
+                                                                    snapshot_leader_max,
+                                                                    snapshot_leader_set)
 
                 vals = np.maximum(0.0, scores)
                 s = float(vals.sum())
@@ -1074,6 +1168,16 @@ class GraphOfLife:
                     incoming_totals[v] += a
                     per_target_allocators[v][u] = per_target_allocators[v].get(u, 0) + a
                     u_sent_to_v[(u, v)] += a
+
+                    # Revolution Check (Batch)
+                    # For Full Allocation, we check the logits for this target once
+                    # If Yes > No, ALL tokens for this target count as Revolution tokens
+                    rev_yes = float(rev_logits[0, idx])
+                    rev_no = float(rev_logits[1, idx])
+
+                    if FORCE_REVOLUTIONS or (rev_yes > rev_no):
+                        revolution_allocators[v][u] = revolution_allocators[v].get(u, 0) + a
+
                     if u != v:
                         e = tuple(sorted((u, v)))
                         if e in edge_flow: edge_flow[e] += a
@@ -1088,8 +1192,10 @@ class GraphOfLife:
 
                 snap_tot, snap_max, snap_set = compute_snapshot_views()
                 decisions = {}
+                rev_decisions = {}  # Map u -> Bool (is_revolution)
+
                 for u in eligible:
-                    targets, scores, _ = forward_scores_for(u, snap_tot, snap_max, snap_set)
+                    targets, scores, _, rev_logits = forward_scores_for(u, snap_tot, snap_max, snap_set)
                     if PROBABILISTIC_DECISIONS:
                         vals = np.maximum(0.0, scores)
                         s = float(vals.sum())
@@ -1099,10 +1205,19 @@ class GraphOfLife:
                         idx = int(np.argmax(scores))
                     decisions[u] = int(targets[idx])
 
+                    # Revolution Decision for this specific token
+                    rev_yes = float(rev_logits[0, idx])
+                    rev_no = float(rev_logits[1, idx])
+                    rev_decisions[u] = (rev_yes > rev_no)
+
                 for u, v in decisions.items():
                     remaining[u] -= 1
                     incoming_totals[v] += 1
                     per_target_allocators[v][u] = per_target_allocators[v].get(u, 0) + 1
+
+                    if FORCE_REVOLUTIONS or rev_decisions[u]:
+                        revolution_allocators[v][u] = revolution_allocators[v].get(u, 0) + 1
+
                     u_sent_to_v[(u, v)] += 1
                     if u != v:
                         e = tuple(sorted((u, v)))
@@ -1119,8 +1234,10 @@ class GraphOfLife:
 
                 snap_tot, snap_max, snap_set = compute_snapshot_views()
                 decisions = {}
+                rev_decisions = {}
+
                 for u in eligible:
-                    targets, scores, _ = forward_scores_for(u, snap_tot, snap_max, snap_set)
+                    targets, scores, _, rev_logits = forward_scores_for(u, snap_tot, snap_max, snap_set)
                     if PROBABILISTIC_DECISIONS:
                         vals = np.maximum(0.0, scores)
                         s = float(vals.sum())
@@ -1130,10 +1247,19 @@ class GraphOfLife:
                         idx = int(np.argmax(scores))
                     decisions[u] = int(targets[idx])
 
+                    # Revolution Decision for this specific token
+                    rev_yes = float(rev_logits[0, idx])
+                    rev_no = float(rev_logits[1, idx])
+                    rev_decisions[u] = (rev_yes > rev_no)
+
                 for u, v in decisions.items():
                     remaining[u] -= 1
                     incoming_totals[v] += 1
                     per_target_allocators[v][u] = per_target_allocators[v].get(u, 0) + 1
+
+                    if FORCE_REVOLUTIONS or rev_decisions[u]:
+                        revolution_allocators[v][u] = revolution_allocators[v].get(u, 0) + 1
+
                     u_sent_to_v[(u, v)] += 1
                     if u != v:
                         e = tuple(sorted((u, v)))
@@ -1151,36 +1277,32 @@ class GraphOfLife:
 
                 snap_tot, snap_max, snap_set = compute_snapshot_views()
                 decisions = {}
+                rev_decisions = {}
 
                 for u in elig:
                     # Constraint: If I am the richest, I MUST play to prevent stalling.
                     is_forced = (remaining[u] == max_rem)
 
-                    targets, scores, yn_logits = forward_scores_for(u, snap_tot, snap_max, snap_set)
+                    targets, scores, yn_logits, rev_logits = forward_scores_for(u, snap_tot, snap_max, snap_set)
 
                     # --- DECISION: Do I want to allocate? ---
-                    # We take the mean across all targets to determine the agent's general "mood".
-                    # yn_logits shape is (2, N_targets). Row 0 = Yes, Row 1 = No.
                     avg_yes = float(np.mean(yn_logits[0, :]))
                     avg_no = float(np.mean(yn_logits[1, :]))
 
                     wants_to_play = False
 
                     if PROBABILISTIC_DECISIONS:
-                        # Softmax on the average Yes vs No
                         vy = np.exp(avg_yes)
                         vn = np.exp(avg_no)
                         p_yes = vy / (vy + vn) if (vy + vn) > 0 else 0.5
                         if np.random.rand() < p_yes:
                             wants_to_play = True
                     else:
-                        # Hard Argmax
                         if avg_yes > avg_no:
                             wants_to_play = True
 
                     # --- EXECUTION ---
                     if is_forced or wants_to_play:
-                        # Pick the best target based on BLOTTO scores
                         if PROBABILISTIC_DECISIONS:
                             vals = np.maximum(0.0, scores)
                             s = float(vals.sum())
@@ -1191,11 +1313,20 @@ class GraphOfLife:
 
                         decisions[u] = int(targets[idx])
 
+                        # Revolution Decision
+                        rev_yes = float(rev_logits[0, idx])
+                        rev_no = float(rev_logits[1, idx])
+                        rev_decisions[u] = (rev_yes > rev_no)
+
                 # Apply Decisions
                 for u, v in decisions.items():
                     remaining[u] -= 1
                     incoming_totals[v] += 1
                     per_target_allocators[v][u] = per_target_allocators[v].get(u, 0) + 1
+
+                    if FORCE_REVOLUTIONS or rev_decisions[u]:
+                        revolution_allocators[v][u] = revolution_allocators[v].get(u, 0) + 1
+
                     u_sent_to_v[(u, v)] += 1
                     if u != v:
                         e = tuple(sorted((u, v)))
@@ -1212,6 +1343,85 @@ class GraphOfLife:
         new_brains = dict(self.brains)
         walker_resets: List[int] = []
 
+        # Helper: Determine Winner with Revolution Logic
+        def resolve_winner(v: int) -> Tuple[int, int]:
+            """
+            Returns (winner_id, winning_amount).
+            Implements 'Tipping Point' Mutiny logic: Lower Class vs (Hegemon + Upper Class)
+            """
+            offers = per_target_allocators[v]
+            if not offers: return v, 0
+
+            # 1. Identify the "Hegemon" / Standard King
+            # This is the max allocator from the GLOBAL offers, not just the revolution.
+            max_amt = max(offers.values())
+            standard_winners = [s for s, a in offers.items() if a == max_amt]
+
+            # If standard win (no revolution allowed), pick random max allocator
+            if not ALLOW_REVOLUTIONS:
+                return int(np.random.choice(standard_winners)), max_amt
+
+            # We pick one "Hegemon" to represent the establishment.
+            # (If there are multiple Kings with equal tokens, we pick one randomly to be the target)
+            hegemon = int(np.random.choice(standard_winners))
+            hegemon_tokens = max_amt
+
+            revs = revolution_allocators.get(v, {})
+            if not revs:
+                # No revolution exists -> Standard King wins
+                return hegemon, max_amt
+
+            # 2. Build the "Mob"
+            # The Mob is everyone in the revolution EXCEPT the Hegemon.
+            # Even if the Hegemon allocated revolution tokens, they are removed from the "Mutiny" pool
+            # because they are the one being fought against.
+            mob = []
+            for ag, tok in revs.items():
+                if ag != hegemon:
+                    mob.append((ag, tok))
+
+            # If the Mob is empty (e.g. only the King is in the revolution), King wins.
+            if not mob:
+                return hegemon, max_amt
+
+            # 3. Sort Mob by tokens (Weakest -> Strongest)
+            mob.sort(key=lambda x: x[1])
+
+            # 4. The Mutiny Logic (Lower Class vs Upper Class + Hegemon)
+            current_lower_sum = 0
+            total_mob_tokens = sum(t for a, t in mob)
+
+            processed_index = 0
+            while processed_index < len(mob):
+                # Handle groups of identical token amounts (e.g. multiple agents with 1 token)
+                current_amount = mob[processed_index][1]
+                current_group = []
+                while processed_index < len(mob) and mob[processed_index][1] == current_amount:
+                    current_group.append(mob[processed_index])
+                    processed_index += 1
+
+                # Update Lower Class Sum (The attackers)
+                group_sum = sum(t for a, t in current_group)
+                current_lower_sum += group_sum
+
+                # Calculate Resistance (The defenders)
+                # Resistance = (Remaining Mob / Upper Class) + (The Hegemon's Tokens)
+                remaining_upper_tokens = total_mob_tokens - current_lower_sum
+                resistance_total = remaining_upper_tokens + hegemon_tokens
+
+                # 5. The Critical Check
+                # Does the Lower Class overpower the Establishment + Upper Class?
+                if current_lower_sum > resistance_total:
+                    # Revolution Wins!
+                    # The winner is one of the "tipping point" agents.
+                    rev_winner = int(np.random.choice([a for a, t in current_group]))
+
+                    # Return the winner ID, and max_amt (to keep logs consistent)
+                    return rev_winner, max_amt
+
+            # 6. If loop finishes, the Mutiny Failed (Hegemon was too strong)
+            return hegemon, max_amt
+
         if BLOTTO_MODE == "ALLOCATE_AND_CONQUER":
             for v in list(self.G.nodes()):
                 offers = per_target_allocators[v]
@@ -1227,9 +1437,8 @@ class GraphOfLife:
                         walker_resets.append(int(v))
                     continue
 
-                max_amt = max(offers.values())
-                winners = [s for s, a in offers.items() if a == max_amt]
-                winner = int(np.random.choice(winners))
+                # RESOLVE
+                winner, max_amt = resolve_winner(v)
 
                 # Genetic Takeover (Brain Overwrite)
                 new_brains[v] = self.brains[winner].copy()
@@ -1252,9 +1461,8 @@ class GraphOfLife:
                     new_brains[v] = self.brains[v]  # Keep own brain
                     continue
 
-                max_amt = max(offers.values())
-                winners = [s for s, a in offers.items() if a == max_amt]
-                winner = int(np.random.choice(winners))
+                # RESOLVE
+                winner, max_amt = resolve_winner(v)
 
                 # Winner gets the tokens, Loser (v) keeps the brain but loses tokens
                 winnings[winner] = winnings.get(winner, 0) + int(incoming_totals[v])
@@ -1565,7 +1773,8 @@ def _main() -> None:
         print(f"🌍 Starting run {run_counter}, folder: {simulation.run_dir}")
         for t in range(max_steps):
             simulation.step(t)
-            print(f"Run {run_counter}, iteration {t} finished (nodes: {simulation.G.number_of_nodes()}, edges: {simulation.G.number_of_edges()}, tokens: {sum(simulation.tokens.values())})")
+            print(
+                f"Run {run_counter}, iteration {t} finished (nodes: {simulation.G.number_of_nodes()}, edges: {simulation.G.number_of_edges()}, tokens: {sum(simulation.tokens.values())})")
 
             if simulation.G.number_of_nodes() <= 50:
                 print(f"⚠️ Run {run_counter} extinction event. Restarting.")
