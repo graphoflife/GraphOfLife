@@ -1,0 +1,223 @@
+/*
+ * The Runs tab: create simulations, drive them, and pick one to inspect.
+ *
+ * The form is generated from whatever the server reports as its defaults, so
+ * adding a field to SimConfig only needs a matching input in index.html.
+ */
+const RunsView = {
+  defaults: null,
+  runs: [],
+  pollTimer: null,
+
+  async init() {
+    this.form = document.getElementById('newRunForm');
+    this.listEl = document.getElementById('runList');
+    this.errorEl = document.getElementById('createError');
+
+    this.form.addEventListener('submit', e => this.onCreate(e));
+    document.getElementById('resetDefaults').addEventListener('click', () => this.applyDefaults());
+    document.getElementById('refreshRuns').addEventListener('click', () => this.refresh());
+
+    // Keep the derived brain shape in view while the settings are edited.
+    for (const id of ['cfg_message_amount', 'cfg_random_input_amount', 'cfg_hidden_layers',
+                      'cfg_total_tokens', 'cfg_n_nodes', 'cfg_k_neighbors']) {
+      const el = document.getElementById(id);
+      if (el) el.addEventListener('input', () => this.updateDerived());
+    }
+
+    try {
+      this.defaults = await API.defaults();
+      this.applyDefaults();
+    } catch (err) {
+      this.errorEl.textContent = `Could not reach the server: ${err.message}`;
+    }
+    await this.refresh();
+  },
+
+  // ---- form ------------------------------------------------------------
+
+  applyDefaults() {
+    if (!this.defaults) return;
+    const cfg = this.defaults.config;
+
+    for (const input of this.form.querySelectorAll('[data-cfg]')) {
+      const key = input.dataset.cfg;
+      const value = cfg[key];
+      if (input.type === 'checkbox') {
+        input.checked = Boolean(value);
+      } else if (Array.isArray(value)) {
+        input.value = value.join(', ');
+      } else {
+        input.value = (value === null || value === undefined) ? '' : value;
+      }
+    }
+    this.errorEl.textContent = '';
+    this.updateDerived();
+  },
+
+  readConfig() {
+    const config = {};
+    for (const input of this.form.querySelectorAll('[data-cfg]')) {
+      const key = input.dataset.cfg;
+
+      if (input.type === 'checkbox') {
+        config[key] = input.checked;
+      } else if (key === 'hidden_layers') {
+        config[key] = input.value.split(',')
+          .map(s => parseInt(s.trim(), 10))
+          .filter(n => Number.isFinite(n) && n > 0);
+      } else if (input.value === '') {
+        // Blank means "use the default"; seed blank means "random".
+        if (key === 'seed') config[key] = null;
+      } else {
+        const num = Number(input.value);
+        config[key] = Number.isFinite(num) ? num : input.value;
+      }
+    }
+    return config;
+  },
+
+  updateDerived() {
+    const el = document.getElementById('derivedInfo');
+    if (!el) return;
+    const cfg = this.readConfig();
+
+    const messages = cfg.message_amount ?? 5;
+    const noise = cfg.random_input_amount ?? 5;
+    const inputs = 29 + 4 * messages + noise;
+    const outputs = 11 + messages;
+
+    const totalTokens = cfg.total_tokens || 0;
+    const n = cfg.n_nodes > 0 ? cfg.n_nodes : Math.floor(totalTokens / 100);
+    const k = cfg.k_neighbors > 0 ? cfg.k_neighbors : Math.max(Math.floor(n / 100), 5);
+
+    const layers = (cfg.hidden_layers && cfg.hidden_layers.length) ? cfg.hidden_layers : [50, 45, 40, 35, 30];
+    const sizes = [inputs, ...layers, outputs];
+    let params = 0;
+    for (let i = 0; i < sizes.length - 1; i++) params += sizes[i] * sizes[i + 1] + sizes[i + 1];
+
+    el.textContent =
+      `Brain ${sizes.join('→')} · ${formatNumber(params)} params · ` +
+      `seed graph n=${formatNumber(n)}, k=${k} · ` +
+      `checkpoint ≈ ${formatBytes(params * 8 * Math.max(1, n))}`;
+  },
+
+  async onCreate(event) {
+    event.preventDefault();
+    this.errorEl.textContent = '';
+    try {
+      const name = document.getElementById('runName').value;
+      const meta = await API.createRun(name, this.readConfig());
+      document.getElementById('runName').value = '';
+      await this.refresh();
+      this.errorEl.textContent = `Created "${meta.name}".`;
+      this.errorEl.classList.add('ok');
+      setTimeout(() => this.errorEl.classList.remove('ok'), 2500);
+    } catch (err) {
+      this.errorEl.textContent = err.message;
+    }
+  },
+
+  // ---- list ------------------------------------------------------------
+
+  async refresh() {
+    try {
+      const data = await API.listRuns();
+      this.runs = data.runs || [];
+      this.render();
+      Viewer.syncRunPicker(this.runs);
+      this.schedulePoll();
+    } catch (err) {
+      this.listEl.innerHTML = `<p class="empty">Could not load runs: ${err.message}</p>`;
+    }
+  },
+
+  /** Poll only while something is actually running. */
+  schedulePoll() {
+    clearTimeout(this.pollTimer);
+    if (this.runs.some(r => r.running)) {
+      this.pollTimer = setTimeout(() => this.refresh(), 1500);
+    }
+  },
+
+  render() {
+    if (!this.runs.length) {
+      this.listEl.innerHTML = '<p class="empty">No simulations yet. Create one above.</p>';
+      return;
+    }
+
+    this.listEl.innerHTML = '';
+    for (const run of this.runs) {
+      this.listEl.appendChild(this.card(run));
+    }
+  },
+
+  card(run) {
+    const el = document.createElement('div');
+    el.className = 'run-card';
+
+    const cfg = run.config || {};
+    const canResume = run.has_checkpoint && !run.running;
+
+    el.innerHTML = `
+      <div class="run-head">
+        <div>
+          <h3>${escapeHtml(run.name)}</h3>
+          <span class="run-id">${run.id}</span>
+        </div>
+        <span class="status status-${run.status}">${run.status}</span>
+      </div>
+      <div class="run-meta">
+        <span><b>${formatNumber(run.iteration)}</b> iterations</span>
+        <span><b>${formatNumber(run.frame_count)}</b> frames</span>
+        <span><b>${formatNumber(cfg.total_tokens)}</b> tokens</span>
+        <span>${formatBytes(run.size_bytes)}</span>
+        <span>${formatTime(run.created_at)}</span>
+      </div>
+      ${run.checkpoint_iteration !== null && run.checkpoint_iteration !== undefined
+        ? `<div class="run-meta"><span class="hint">Resume point at iteration ${formatNumber(run.checkpoint_iteration)}</span></div>`
+        : ''}
+      ${run.error ? `<pre class="run-error">${escapeHtml(run.error)}</pre>` : ''}
+      <div class="run-actions">
+        <input type="number" class="steps-input" placeholder="steps" min="1" title="How many iterations to run. Blank runs to the configured maximum.">
+        <button class="primary" data-act="start">${canResume ? 'Resume' : 'Start'}</button>
+        <button data-act="stop" ${run.running ? '' : 'disabled'}>Stop</button>
+        <button data-act="open">Inspect</button>
+        <button class="danger" data-act="delete">Delete</button>
+      </div>
+    `;
+
+    const stepsInput = el.querySelector('.steps-input');
+    el.querySelector('[data-act="start"]').addEventListener('click', async () => {
+      const steps = parseInt(stepsInput.value, 10);
+      try {
+        await API.startRun(run.id, Number.isFinite(steps) && steps > 0 ? steps : null);
+        await this.refresh();
+      } catch (err) { alert(err.message); }
+    });
+
+    el.querySelector('[data-act="stop"]').addEventListener('click', async () => {
+      try { await API.stopRun(run.id); await this.refresh(); }
+      catch (err) { alert(err.message); }
+    });
+
+    el.querySelector('[data-act="open"]').addEventListener('click', () => {
+      App.showView('viewer');
+      Viewer.load(run.id);
+    });
+
+    el.querySelector('[data-act="delete"]').addEventListener('click', async () => {
+      if (!confirm(`Delete "${run.name}" and all of its recorded data? This cannot be undone.`)) return;
+      try { await API.deleteRun(run.id); await this.refresh(); }
+      catch (err) { alert(err.message); }
+    });
+
+    return el;
+  }
+};
+
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text ?? '';
+  return div.innerHTML;
+}

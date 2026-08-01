@@ -16,10 +16,14 @@ owns two things:
 
 Nothing is optimized toward a goal. Whatever survives, survives.
 
+This module is the engine. It holds no file paths and no UI: it advances a
+world and hands back a frame describing what happened. Persistence lives in
+gol_store.py, the HTTP API in gol_server.py, and the visualization in web/.
+
 
 HOW ONE STEP WORKS
 ------------------
-Each call to `step(t)` runs two phases in order.
+Each call to `step(t)` runs two phases in order and returns one frame each.
 
 PHASE 1 — REPRODUCTION
   1. Precompute the sensory manifold: log-scaled tokens and degrees for every
@@ -70,15 +74,9 @@ CLEANUP (after both phases)
   1. Nodes at zero tokens starve and are removed.
   2. Only the largest connected component survives; splinter groups are culled.
   3. All tokens from the dead are pooled and redistributed uniformly at random
-     across the survivors (GLOBAL_UNIFORM), keeping the global count conserved.
+     across the survivors, keeping the global count conserved.
   4. If the world empties completely, a single fresh agent is resurrected
      holding every token.
-
-THE OUTER LOOP
-  Runs until the graph falls to <= 50 nodes, calls that an extinction, and
-  restarts from a fresh random graph. Forever.
-
-Every half-step is written to disk as replayable JSON.
 
 
 AGENT-CONTROLLED RANDOMNESS
@@ -87,89 +85,39 @@ There is no global "be probabilistic" switch. Each discrete decision is paired
 with a MODE head, and the agent decides for itself whether that decision is
 read as a probability or as a hard maximum. The choice is part of the genome
 and therefore evolves.
+
+
+LINEAGE
+-------
+Two independent ancestries are tracked, and they are not the same thing:
+
+  * NODE lineage   — `parent_of[child] = parent`, who spawned whom in phase 1.
+  * BRAIN lineage  — `brain_id` / `parent_brain_id`, which survives conquest.
+                     When an agent conquers a node, the node keeps its own id
+                     but receives the conqueror's genome.
 """
 from __future__ import annotations
 
 from typing import Any, Dict, List, Tuple
-from datetime import datetime
-import json
-import os
-import shutil
 
-import matplotlib
-
-matplotlib.use("Agg")
-import matplotlib.pyplot as plt
 import networkx as nx
 import numpy as np
 
-# ----------------------------------------------------------------------------
-# Configuration
-# ----------------------------------------------------------------------------
+from gol_config import SimConfig
 
-# Total amount of tokens (conserved across the whole simulation).
-TOTAL_TOKENS: int = 150_000
+# Node ids use -1 to mean "no parent" (founder or resurrected agent).
+NO_PARENT = -1
 
-# Tokens injected into the world each cleanup. 0 keeps the economy closed.
-CREATE_X_NEW_TOKENS_EACH_PHASE: int = 0
-
-# ---- Mutation ----
-MUTATION_PROBABILITY: float = 0.5
-MUTATION_NOISE_STD: float = 0.2
-MUTATION_SPARSITY: float = 0.1
-
-# ---- Sensory input ----
-# Uniform(-2, 2) values appended to every observation, for symmetry breaking.
-RANDOM_INPUT_AMOUNT: int = 5
-
-# ---- Messaging ----
-EXCHANGE_MESSAGES: bool = True
-MESSAGE_NUMBER_AMOUNT: int = 5
-
-# ---- Brain architecture ----
-BRAIN_HIDDEN_LAYERS: List[int] = [50, 45, 40, 35, 30]
-
-# ---- Visualization ----
-DRAW: bool = True
-DRAW_EVERY_X_ITERATIONS: int = 50
-
-# ---- Output ----
-BASE_DIR = os.path.join(os.path.dirname(__file__), "GraphOfLifeOutputs")
-os.makedirs(BASE_DIR, exist_ok=True)
-
-
-# ----------------------------------------------------------------------------
-# Brain input / output layout
-# ----------------------------------------------------------------------------
-#
-# INPUT (54 values), built per (observer u, candidate v) pair:
-#     1   is this candidate myself?
-#     4   log tokens of u and v, log degree of u and v
-#    24   six-quantile summaries of u's and v's neighborhoods (tokens, degrees)
-#    20   four message vectors: u->u, u->v, v->u, v->v
-#     5   uniform noise
-#
-N_BASE_INPUTS = 29  # 1 + 4 + 24
-N_INPUTS = N_BASE_INPUTS + 4 * MESSAGE_NUMBER_AMOUNT + RANDOM_INPUT_AMOUNT
-
-# OUTPUT (16 values), one column per observed candidate.
-HEAD = {
-    # Fraction of my tokens to invest into a newborn child.
-    "REPRO_FRACTION": slice(0, 2),
-    # Should the newborn be linked to this candidate? (yes, no)
-    "LINK": slice(2, 4),
-    # Read LINK as a probability, or as a hard maximum? (yes, no)
-    "LINK_MODE": slice(4, 6),
-    # Desirability of allocating tokens to this candidate.
-    "BLOTTO": 6,
-    # Spread allocation proportionally, or go all-in on the best target?
-    "BLOTTO_MODE": slice(7, 9),
-    # Portion of the tokens sent here that count as revolution tokens.
-    "REV_FRACTION": slice(9, 11),
-    # Signal broadcast to this candidate.
-    "MESSAGE": slice(11, 11 + MESSAGE_NUMBER_AMOUNT),
+# Output row layout, one column per observed candidate.
+HEAD_FIXED = {
+    "REPRO_FRACTION": slice(0, 2),   # fraction of my tokens to invest in a child
+    "LINK": slice(2, 4),             # link the newborn to this candidate?
+    "LINK_MODE": slice(4, 6),        # read LINK as probability, or as maximum?
+    "BLOTTO": 6,                     # desirability of allocating tokens here
+    "BLOTTO_MODE": slice(7, 9),      # spread proportionally, or go all-in?
+    "REV_FRACTION": slice(9, 11),    # portion of this allocation that revolts
 }
-N_OUTPUTS = 11 + MESSAGE_NUMBER_AMOUNT
+MESSAGE_START = 11
 
 
 # ----------------------------------------------------------------------------
@@ -258,79 +206,80 @@ class Brain:
     """
     A feed-forward network with sigmoid hidden layers and a linear output.
 
-    It is evaluated on a whole candidate set at once: pass a matrix of shape
-    (N_INPUTS, n_candidates) and get back (N_OUTPUTS, n_candidates), so one
+    Evaluated on a whole candidate set at once: pass a matrix of shape
+    (n_inputs, n_candidates) and get back (n_outputs, n_candidates), so one
     forward pass scores an entire neighborhood.
+
+    Brain ids are assigned from a counter owned by the World, not a class
+    global, so a resumed run continues its lineage numbering exactly.
     """
 
-    _next_brain_id = 1
-    rec = None  # optional sink for genotype lineage events
+    __slots__ = ("weights", "biases", "brain_id", "parent_brain_id", "cfg")
 
-    def __init__(self) -> None:
-        self.layer_sizes = [N_INPUTS] + list(BRAIN_HIDDEN_LAYERS) + [N_OUTPUTS]
-
+    def __init__(self, cfg: SimConfig, brain_id: int, allocate: bool = True) -> None:
+        self.cfg = cfg
+        self.brain_id = brain_id
+        self.parent_brain_id: int = -1
         self.weights: List[np.ndarray] = []
         self.biases: List[np.ndarray] = []
-        for fan_in, fan_out in zip(self.layer_sizes[:-1], self.layer_sizes[1:]):
-            self.weights.append(np.random.normal(0.0, 1.0 / np.sqrt(fan_in), size=(fan_out, fan_in)))
-            self.biases.append(np.zeros((fan_out, 1)))
 
-        self.brain_id: int = Brain._next_brain_id
-        self.parent_brain_id: int | None = None
-        Brain._next_brain_id += 1
+        if allocate:
+            sizes = [cfg.n_inputs()] + list(cfg.hidden_layers) + [cfg.n_outputs()]
+            for fan_in, fan_out in zip(sizes[:-1], sizes[1:]):
+                self.weights.append(np.random.normal(0.0, 1.0 / np.sqrt(fan_in), size=(fan_out, fan_in)))
+                self.biases.append(np.zeros((fan_out, 1)))
 
     def forward(self, x: np.ndarray) -> np.ndarray:
-        """Always returns a 2-D array of shape (N_OUTPUTS, n_candidates)."""
+        """Always returns a 2-D array of shape (n_outputs, n_candidates)."""
         a = np.asarray(x, dtype=float)
         if a.ndim == 1:
             a = a.reshape(-1, 1)
         for i, (W, b) in enumerate(zip(self.weights, self.biases)):
             z = W @ a + b
-            is_last = i == len(self.weights) - 1
-            a = z if is_last else _sigmoid(z)
+            a = z if i == len(self.weights) - 1 else _sigmoid(z)
         return a
 
-    def copy(self) -> "Brain":
-        clone = Brain()
+    def copy_into(self, brain_id: int) -> "Brain":
+        clone = Brain(self.cfg, brain_id, allocate=False)
         clone.weights = [w.copy() for w in self.weights]
         clone.biases = [b.copy() for b in self.biases]
         clone.parent_brain_id = self.brain_id
-        if Brain.rec:
-            Brain.rec({"t": "copy", "from": int(self.brain_id), "to": int(clone.brain_id)})
         return clone
 
-    def mutate(self) -> None:
-        """Sparse Gaussian perturbation, plus an occasional structural reset."""
-        if np.random.random() > MUTATION_PROBABILITY:
-            return
+    def mutate(self, brain_id: int) -> bool:
+        """
+        Sparse Gaussian perturbation, plus an occasional structural reset.
 
-        old_id = self.brain_id
-        reset_fraction = float(np.clip(MUTATION_SPARSITY, 0.0, 1.0))
+        Returns True if the genome actually changed, in which case it has taken
+        on `brain_id` as a new identity.
+        """
+        cfg = self.cfg
+        if np.random.random() > cfg.mutation_probability:
+            return False
 
+        reset_fraction = float(np.clip(cfg.mutation_sparsity, 0.0, 1.0))
         for i, (W, b) in enumerate(zip(self.weights, self.biases)):
             base_scale = 1.0 / np.sqrt(W.shape[1])
-            std = MUTATION_NOISE_STD * base_scale
+            std = cfg.mutation_noise_std * base_scale
+            self.weights[i] = self._perturb(W, std, base_scale, reset_fraction, cfg)
+            self.biases[i] = self._perturb(b, std, std if std > 0 else 0.01, reset_fraction, cfg)
 
-            self.weights[i] = self._perturb(W, std, base_scale, reset_fraction)
-            self.biases[i] = self._perturb(b, std, std if std > 0 else 0.01, reset_fraction)
-
-        self.parent_brain_id = old_id
-        self.brain_id = Brain._next_brain_id
-        Brain._next_brain_id += 1
-        if Brain.rec:
-            Brain.rec({"t": "mut", "from": int(old_id), "to": int(self.brain_id)})
+        self.parent_brain_id = self.brain_id
+        self.brain_id = brain_id
+        return True
 
     @staticmethod
-    def _perturb(M: np.ndarray, noise_std: float, reset_std: float, reset_fraction: float) -> np.ndarray:
+    def _perturb(M: np.ndarray, noise_std: float, reset_std: float,
+                 reset_fraction: float, cfg: SimConfig) -> np.ndarray:
         """Jitter a sparse subset of entries, then rarely re-draw some outright."""
-        if MUTATION_SPARSITY <= 0.0:
+        if cfg.mutation_sparsity <= 0.0:
             return M
 
         if noise_std > 0.0:
-            jitter_mask = np.random.random(M.shape) < MUTATION_SPARSITY
-            M = M + np.random.normal(0.0, noise_std, size=M.shape) * jitter_mask
+            jitter = np.random.random(M.shape) < cfg.mutation_sparsity
+            M = M + np.random.normal(0.0, noise_std, size=M.shape) * jitter
 
-        if reset_fraction > 0.0 and np.random.random() < MUTATION_SPARSITY:
+        if reset_fraction > 0.0 and np.random.random() < cfg.mutation_sparsity:
             reset_mask = np.random.random(M.shape) < reset_fraction
             if np.any(reset_mask):
                 M = np.where(reset_mask, np.random.normal(0.0, reset_std, size=M.shape), M)
@@ -343,10 +292,22 @@ class Brain:
 # ----------------------------------------------------------------------------
 
 class GraphOfLife:
-    def __init__(self, G_init: nx.Graph, total_tokens: int) -> None:
-        # Relabel the seed graph to dense integer agent ids.
+    def __init__(self, G_init: nx.Graph | None, cfg: SimConfig, _empty: bool = False) -> None:
+        self.cfg = cfg
         self.G = nx.Graph()
         self.next_agent_id = 0
+        self.next_brain_id = 1
+        self.iteration = 0
+
+        self.tokens: Dict[int, int] = {}
+        self.brains: Dict[int, Brain] = {}
+        self.messages: Dict[int, Dict[int, List[float]]] = {}
+        self.parent_of: Dict[int, int] = {}
+
+        if _empty:
+            return
+
+        # Relabel the seed graph to dense integer agent ids.
         old2new: Dict[Any, int] = {}
         for n in G_init.nodes():
             old2new[n] = self.next_agent_id
@@ -355,20 +316,42 @@ class GraphOfLife:
         for u, v in G_init.edges():
             self.G.add_edge(old2new[u], old2new[v])
 
-        # Agent state.
-        self.total_tokens = int(total_tokens)
-        self.brains: Dict[int, Brain] = {aid: Brain() for aid in self.G.nodes()}
-        self.messages: Dict[int, Dict[int, List[float]]] = {aid: {} for aid in self.G.nodes()}
+        share = cfg.total_tokens // self.G.number_of_nodes()
+        for aid in self.G.nodes():
+            self.tokens[aid] = share
+            self.brains[aid] = self._new_brain()
+            self.messages[aid] = {}
+            self.parent_of[aid] = NO_PARENT
 
-        share = self.total_tokens // self.G.number_of_nodes()
-        self.tokens: Dict[int, int] = {aid: share for aid in self.G.nodes()}
+        # Hand any rounding remainder to the founders so the count is exact.
+        self._settle_remainder()
 
-        self.run_dir = self._make_run_dir()
-        self._snapshot_source()
-        self._save_configuration()
+    # ------------------------------------------------------------------------
+    # Identity helpers
+    # ------------------------------------------------------------------------
 
-        self.genotype_events: List[Dict[str, int]] = []
-        Brain.rec = self.genotype_events.append
+    def _new_brain(self) -> Brain:
+        brain = Brain(self.cfg, self.next_brain_id)
+        self.next_brain_id += 1
+        return brain
+
+    def _copy_brain(self, source: Brain) -> Brain:
+        clone = source.copy_into(self.next_brain_id)
+        self.next_brain_id += 1
+        return clone
+
+    def _mutate_brain(self, brain: Brain) -> None:
+        if brain.mutate(self.next_brain_id):
+            self.next_brain_id += 1
+
+    def _settle_remainder(self) -> None:
+        """Give any integer-division leftover to random survivors."""
+        deficit = self.cfg.total_tokens - sum(self.tokens.values())
+        survivors = list(self.G.nodes())
+        if deficit > 0 and survivors:
+            draws = np.random.multinomial(deficit, [1 / len(survivors)] * len(survivors))
+            for u, extra in zip(survivors, draws):
+                self.tokens[u] += int(extra)
 
     # ------------------------------------------------------------------------
     # Sensory manifold
@@ -401,45 +384,30 @@ class GraphOfLife:
 
         return log_degrees, neighs, q_tok, q_deg, log_tokens
 
-    def _input_vec(
-            self,
-            u: int,
-            v: int,
-            log_deg: Dict[int, float],
-            q_tok: Dict[int, List[float]],
-            q_deg: Dict[int, List[float]],
-            log_tok: Dict[int, float],
-    ) -> np.ndarray:
-        """Assemble the 54-value sensory vector for observer `u` looking at `v`."""
+    def _input_vec(self, u: int, v: int, log_deg, q_tok, q_deg, log_tok) -> np.ndarray:
+        """Assemble the sensory vector for observer `u` looking at candidate `v`."""
+        cfg = self.cfg
         base = (
             [log_tok.get(u, 0.0), log_tok.get(v, 0.0), log_deg[u], log_deg[v]]
             + q_tok[u] + q_tok[v] + q_deg[u] + q_deg[v]
         )
 
-        M = MESSAGE_NUMBER_AMOUNT
+        m = cfg.message_amount
 
         def msg(src: int, dst: int) -> List[float]:
             vec = self.messages.get(src, {}).get(dst)
             if vec is None:
-                return [0.0] * M
-            out = list(vec[:M])
-            return out + [0.0] * (M - len(out))
+                return [0.0] * m
+            out = list(vec[:m])
+            return out + [0.0] * (m - len(out))
 
         msg_feats = msg(u, u) + msg(u, v) + msg(v, u) + msg(v, v)
-        noise = np.random.uniform(-2.0, 2.0, size=RANDOM_INPUT_AMOUNT).tolist()
+        noise = np.random.uniform(-2.0, 2.0, size=cfg.random_input_amount).tolist()
 
         return np.array([int(u == v)] + base + msg_feats + noise, dtype=float)
 
-    def _observe(
-            self,
-            u: int,
-            candidates: List[int],
-            log_deg: Dict[int, float],
-            q_tok: Dict[int, List[float]],
-            q_deg: Dict[int, List[float]],
-            log_tok: Dict[int, float],
-    ) -> np.ndarray:
-        """One forward pass scoring every candidate. Returns (N_OUTPUTS, n_candidates)."""
+    def _observe(self, u: int, candidates: List[int], log_deg, q_tok, q_deg, log_tok) -> np.ndarray:
+        """One forward pass scoring every candidate."""
         X = np.column_stack([
             self._input_vec(u, v, log_deg, q_tok, q_deg, log_tok) for v in candidates
         ])
@@ -447,27 +415,23 @@ class GraphOfLife:
 
     def _emit_messages(self, u: int, targets: List[int], Y: np.ndarray) -> None:
         """Broadcast `u`'s message head to each observed target."""
-        if not EXCHANGE_MESSAGES:
+        cfg = self.cfg
+        if not cfg.exchange_messages or cfg.message_amount <= 0:
             return
-        msg_rows = np.tanh(Y[HEAD["MESSAGE"], :])
+        rows = np.tanh(Y[MESSAGE_START:MESSAGE_START + cfg.message_amount, :])
         for j, v in enumerate(targets):
-            self.messages.setdefault(u, {})[int(v)] = msg_rows[:, j].astype(float).tolist()
+            self.messages.setdefault(u, {})[int(v)] = rows[:, j].astype(float).tolist()
 
     # ------------------------------------------------------------------------
     # Phase 1: Reproduction
     # ------------------------------------------------------------------------
 
-    def reproduction_phase(self, t: int) -> str:
+    def reproduction_phase(self, record_decisions: bool) -> Dict[str, Any]:
         """
         Agents spend their own tokens to spawn children and choose the newborn's
         connections. No other topology change happens here.
         """
-        log: Dict[str, Any] = {
-            "phase": "reproduction",
-            "pre_state": self._snapshot_graph(),
-            "decisions": [],
-        }
-
+        decisions: List[Dict[str, Any]] = []
         log_deg, neighs, q_tok, q_deg, log_tok = self._precompute_features()
 
         for u in list(self.G.nodes()):
@@ -480,89 +444,68 @@ class GraphOfLife:
             self._emit_messages(u, candidates, Y)
 
             # How much of myself do I give away? Averaged over the whole view.
-            frac_logits = np.mean(Y[HEAD["REPRO_FRACTION"], :], axis=1)
-            child_tokens = int(np.floor(_share_of_first(frac_logits[0], frac_logits[1]) * tokens_u))
+            frac = np.mean(Y[HEAD_FIXED["REPRO_FRACTION"], :], axis=1)
+            child_tokens = int(np.floor(_share_of_first(frac[0], frac[1]) * tokens_u))
             child_tokens = max(0, min(tokens_u, child_tokens))
 
-            record: Dict[str, Any] = {
-                "agent_id": int(u),
-                "tokens_before": tokens_u,
-                "repro_tokens": child_tokens,
-                "child_created": False,
-                "link_choices": [],
-            }
+            if child_tokens < 1:
+                continue
 
-            if child_tokens >= 1:
-                child_id = self._spawn_child(u, tokens_u, child_tokens, candidates, Y, record)
-                record.update({"child_created": True, "child_id": int(child_id)})
-
-            log["decisions"].append(record)
+            child_id, links = self._spawn_child(u, tokens_u, child_tokens, candidates, Y)
+            if record_decisions:
+                decisions.append({
+                    "agent": int(u),
+                    "tokens_before": tokens_u,
+                    "invested": child_tokens,
+                    "child": int(child_id),
+                    "links": [int(v) for v in links],
+                })
 
         self.G.remove_edges_from(list(nx.selfloop_edges(self.G)))
+        cleanup = self._cleanup_and_redistribute()
 
-        log["cleanup"] = self._cleanup_and_redistribute()
-        log["post_state"] = self._snapshot_graph()
-        log["genotype_events"] = list(self.genotype_events)
-        self.genotype_events.clear()
+        return self._frame(phase=1, cleanup=cleanup,
+                           decisions={"births": decisions} if record_decisions else None)
 
-        if DRAW and t % DRAW_EVERY_X_ITERATIONS == 0:
-            self._draw(f"Round {t} — After Phase 1", f"step_{2 * t:05d}_phase1.png")
-
-        return self._save_step_file(2 * t, log)
-
-    def _spawn_child(
-            self,
-            parent: int,
-            parent_tokens: int,
-            child_tokens: int,
-            candidates: List[int],
-            Y: np.ndarray,
-            record: Dict[str, Any],
-    ) -> int:
+    def _spawn_child(self, parent: int, parent_tokens: int, child_tokens: int,
+                     candidates: List[int], Y: np.ndarray) -> Tuple[int, List[int]]:
         """Create the newborn, wire it up, and debit the parent."""
         child_id = self.next_agent_id
         self.next_agent_id += 1
         self.G.add_node(child_id)
 
         # The child inherits a mutated copy; the parent pays the full price.
-        self.brains[child_id] = self.brains[parent].copy()
-        self.brains[child_id].mutate()
+        child_brain = self._copy_brain(self.brains[parent])
+        self._mutate_brain(child_brain)
+        self.brains[child_id] = child_brain
+
         self.tokens[child_id] = child_tokens
         self.tokens[parent] = parent_tokens - child_tokens
         self.messages[child_id] = {}
+        self.parent_of[child_id] = int(parent)
 
-        link_logits = Y[HEAD["LINK"], :]
-        link_mode = Y[HEAD["LINK_MODE"], :]
+        link_logits = Y[HEAD_FIXED["LINK"], :]
+        link_mode = Y[HEAD_FIXED["LINK_MODE"], :]
 
+        linked: List[int] = []
         for col, v in enumerate(candidates):
-            linked = _choose_binary(
-                link_logits[0, col], link_logits[1, col],
-                link_mode[0, col], link_mode[1, col],
-            )
-            record["link_choices"].append({"candidate": int(v), "chosen": linked})
-            if linked and v != child_id and self.G.has_node(v):
-                self.G.add_edge(child_id, v)
+            if _choose_binary(link_logits[0, col], link_logits[1, col],
+                              link_mode[0, col], link_mode[1, col]):
+                if v != child_id and self.G.has_node(v):
+                    self.G.add_edge(child_id, v)
+                    linked.append(v)
 
-        return child_id
+        return child_id, linked
 
     # ------------------------------------------------------------------------
     # Phase 2: Blotto
     # ------------------------------------------------------------------------
 
-    def blotto_phase(self, t: int) -> str:
+    def blotto_phase(self, record_decisions: bool) -> Dict[str, Any]:
         """
         Every agent spends its entire token pool bidding on itself and its
         neighbors. The winner of each node implants its brain there.
         """
-        log: Dict[str, Any] = {
-            "phase": "blotto",
-            "pre_state": self._snapshot_graph(),
-            "allocations": [],
-            "winners": {},
-            "pruned_edges": [],
-        }
-        tokens_before = dict(self.tokens)
-
         log_deg, neighs, q_tok, q_deg, log_tok = self._precompute_features()
 
         # --- 1. Message pass, so allocation decisions see fresh signals -------
@@ -572,12 +515,11 @@ class GraphOfLife:
             self._emit_messages(u, targets, Y)
 
         # --- 2. One-shot allocation ------------------------------------------
-        # How much each agent sent to each target, and how much of that was
-        # flagged as revolutionary.
         allocations_to: Dict[int, Dict[int, int]] = {v: {} for v in self.G.nodes()}
         revolution_to: Dict[int, Dict[int, int]] = {v: {} for v in self.G.nodes()}
         incoming_totals: Dict[int, int] = {v: 0 for v in self.G.nodes()}
         edge_flow: Dict[Tuple[int, int], int] = {tuple(sorted(e)): 0 for e in self.G.edges()}
+        alloc_records: List[Dict[str, Any]] = []
 
         for u in list(self.G.nodes()):
             tokens_u = int(self.tokens.get(u, 0))
@@ -587,22 +529,24 @@ class GraphOfLife:
             targets = [u] + list(neighs[u])
             Y = self._observe(u, targets, log_deg, q_tok, q_deg, log_tok)
 
-            scores = np.asarray(Y[HEAD["BLOTTO"], :], dtype=float)
-            mode_logits = np.mean(Y[HEAD["BLOTTO_MODE"], :], axis=1)
+            scores = np.asarray(Y[HEAD_FIXED["BLOTTO"], :], dtype=float)
+            mode = np.mean(Y[HEAD_FIXED["BLOTTO_MODE"], :], axis=1)
 
             # The agent picks its own doctrine: spread by score, or all-in.
-            # (Drop this branch and always call _apportion for pure spreading.)
-            if mode_logits[0] > mode_logits[1]:
+            spread = bool(mode[0] > mode[1])
+            if spread:
                 alloc = _apportion(scores, tokens_u)
             else:
                 alloc = np.zeros(len(targets), dtype=int)
                 alloc[int(np.argmax(scores))] = tokens_u
 
-            rev_logits = Y[HEAD["REV_FRACTION"], :]
+            rev_logits = Y[HEAD_FIXED["REV_FRACTION"], :]
+            rev_amounts: List[int] = []
 
             for idx, v in enumerate(targets):
                 amount = int(alloc[idx])
                 if amount <= 0:
+                    rev_amounts.append(0)
                     continue
 
                 incoming_totals[v] += amount
@@ -611,6 +555,7 @@ class GraphOfLife:
                 # Only part of what I send here needs to be revolutionary.
                 rev_share = _share_of_first(rev_logits[0, idx], rev_logits[1, idx])
                 rev_amount = int(np.floor(rev_share * amount))
+                rev_amounts.append(rev_amount)
                 if rev_amount > 0:
                     revolution_to[v][u] = revolution_to[v].get(u, 0) + rev_amount
 
@@ -619,16 +564,20 @@ class GraphOfLife:
                     if edge in edge_flow:
                         edge_flow[edge] += amount
 
-            log["allocations"].append({
-                "agent_id": int(u),
-                "tokens_before": int(tokens_before.get(u, 0)),
-                "targets": [int(v) for v in targets],
-                "alloc": [int(a) for a in alloc],
-            })
+            if record_decisions:
+                alloc_records.append({
+                    "agent": int(u),
+                    "tokens": tokens_u,
+                    "spread": spread,
+                    "targets": [int(v) for v in targets],
+                    "alloc": [int(a) for a in alloc],
+                    "revolt": rev_amounts,
+                })
 
         # --- 3. Resolve every contested node ---------------------------------
         new_tokens = dict(self.tokens)
         new_brains = dict(self.brains)
+        winners: List[Dict[str, int]] = []
 
         for v in list(self.G.nodes()):
             offers = allocations_to[v]
@@ -636,41 +585,47 @@ class GraphOfLife:
                 # Nobody wanted this node, not even itself. It starves, but its
                 # lineage gets one last copy before cleanup decides its fate.
                 new_tokens[v] = 0
-                new_brains[v] = self.brains[v].copy()
+                new_brains[v] = self._copy_brain(self.brains[v])
                 continue
 
-            winner, max_amount = self._resolve_winner(offers, revolution_to[v])
-            new_brains[v] = self.brains[winner].copy()
+            winner, max_amount, by_revolt = self._resolve_winner(offers, revolution_to[v])
+            new_brains[v] = self._copy_brain(self.brains[winner])
             new_tokens[v] = int(incoming_totals[v])
-            log["winners"][str(v)] = {"winner": int(winner), "max_amount": int(max_amount)}
+
+            if record_decisions:
+                winners.append({
+                    "node": int(v),
+                    "winner": int(winner),
+                    "amount": int(max_amount),
+                    "revolt": int(by_revolt),
+                })
 
         self.tokens = new_tokens
         self.brains = new_brains
 
         # --- 4. Aftermath -----------------------------------------------------
         for brain in self.brains.values():
-            brain.mutate()
+            self._mutate_brain(brain)
 
         dead_edges = [e for e, flow in edge_flow.items() if flow == 0]
         if dead_edges:
             self.G.remove_edges_from(dead_edges)
-        log["pruned_edges"] = [(int(u), int(v)) for (u, v) in dead_edges]
 
-        log["cleanup"] = self._cleanup_and_redistribute()
-        log["post_state"] = self._snapshot_graph()
-
+        cleanup = self._cleanup_and_redistribute()
         self._prune_stale_messages()
 
-        log["genotype_events"] = list(self.genotype_events)
-        self.genotype_events.clear()
-
-        if DRAW and t % DRAW_EVERY_X_ITERATIONS == 0:
-            self._draw(f"Round {t} — After Phase 2", f"step_{2 * t + 1:05d}_phase2.png")
-
-        return self._save_step_file(2 * t + 1, log)
+        decisions = None
+        if record_decisions:
+            decisions = {
+                "allocations": alloc_records,
+                "winners": winners,
+                "pruned_edges": [[int(a), int(b)] for a, b in dead_edges],
+            }
+        return self._frame(phase=2, cleanup=cleanup, decisions=decisions)
 
     @staticmethod
-    def _resolve_winner(offers: Dict[int, int], revolutionaries: Dict[int, int]) -> Tuple[int, int]:
+    def _resolve_winner(offers: Dict[int, int],
+                        revolutionaries: Dict[int, int]) -> Tuple[int, int, bool]:
         """
         Decide who takes a node, given every offer made on it.
 
@@ -685,14 +640,14 @@ class GraphOfLife:
         that tipped it — so a crowd of small allocators can take a node from
         someone who outspent all of them individually.
 
-        Returns (winner_id, hegemon's allocation).
+        Returns (winner_id, hegemon's allocation, whether a revolution won).
         """
         max_amount = max(offers.values())
         hegemon = int(np.random.choice([a for a, amt in offers.items() if amt == max_amount]))
 
         mob = [(agent, tokens) for agent, tokens in revolutionaries.items() if agent != hegemon]
         if not mob:
-            return hegemon, max_amount
+            return hegemon, max_amount, False
 
         mob.sort(key=lambda pair: pair[1])
         total_mob_tokens = sum(tokens for _, tokens in mob)
@@ -710,10 +665,10 @@ class GraphOfLife:
 
             upper_class = total_mob_tokens - lower_class
             if lower_class > upper_class + max_amount:
-                return int(np.random.choice(rung)), max_amount
+                return int(np.random.choice(rung)), max_amount, True
 
         # The mutiny never reached critical mass.
-        return hegemon, max_amount
+        return hegemon, max_amount, False
 
     # ------------------------------------------------------------------------
     # Cleanup: the physics of death
@@ -731,16 +686,12 @@ class GraphOfLife:
         """
         report: Dict[str, Any] = {
             "resurrected": False,
-            "resurrect_agent": None,
-            "removed_zero_nodes": [],
-            "removed_components": [],
-            "redistributed_tokens": 0,
-            "survivors_count": 0,
+            "starved": 0,
+            "orphaned": 0,
+            "redistributed": 0,
         }
 
-        # --- Who dies? --------------------------------------------------------
         starved = [u for u in self.G.nodes() if self.tokens.get(u, 0) <= 0]
-        report["removed_zero_nodes"] = [int(u) for u in starved]
 
         G_active = self.G.copy()
         G_active.remove_nodes_from(starved)
@@ -750,12 +701,12 @@ class GraphOfLife:
             components = sorted(nx.connected_components(G_active), key=len, reverse=True)
             for c in components[1:]:
                 orphaned.update(c)
-            report["removed_components"] = [list(map(int, c)) for c in components[1:]]
 
         doomed = set(starved) | orphaned
+        report["starved"] = len(starved)
+        report["orphaned"] = len(orphaned)
 
-        # --- Collect the estate ----------------------------------------------
-        global_pool = CREATE_X_NEW_TOKENS_EACH_PHASE
+        global_pool = self.cfg.tokens_created_per_phase
         for u in doomed:
             global_pool += max(0, self.tokens.get(u, 0))
 
@@ -765,27 +716,25 @@ class GraphOfLife:
                 self.tokens.pop(u, None)
                 self.brains.pop(u, None)
                 self.messages.pop(u, None)
+                self.parent_of.pop(u, None)
 
-        # --- Manna from heaven ------------------------------------------------
         survivors = list(self.G.nodes())
         if global_pool > 0 and survivors:
             # Multinomial keeps the token count exactly conserved.
             draws = np.random.multinomial(global_pool, [1 / len(survivors)] * len(survivors))
             for u, extra in zip(survivors, draws):
                 self.tokens[u] = self.tokens.get(u, 0) + int(extra)
+        report["redistributed"] = int(global_pool)
 
-        report["redistributed_tokens"] = int(global_pool)
-        report["survivors_count"] = self.G.number_of_nodes()
-
-        # --- Resurrection -----------------------------------------------------
         if self.G.number_of_nodes() == 0:
             aid = self.next_agent_id
             self.next_agent_id += 1
             self.G.add_node(aid)
-            self.tokens = {aid: self.total_tokens}
-            self.brains = {aid: Brain()}
+            self.tokens = {aid: self.cfg.total_tokens}
+            self.brains = {aid: self._new_brain()}
             self.messages = {aid: {}}
-            report.update({"resurrected": True, "resurrect_agent": int(aid), "survivors_count": 1})
+            self.parent_of = {aid: NO_PARENT}
+            report["resurrected"] = True
 
         return report
 
@@ -796,140 +745,169 @@ class GraphOfLife:
                 self.messages.pop(u, None)
                 continue
             allowed = {u} | {int(w) for w in self.G.neighbors(u)}
-            self.messages[u] = {
-                v: vec for v, vec in self.messages[u].items() if v in allowed
-            }
-
-    def step(self, t: int) -> Tuple[str, str]:
-        return self.reproduction_phase(t), self.blotto_phase(t)
+            self.messages[u] = {v: vec for v, vec in self.messages[u].items() if v in allowed}
 
     # ------------------------------------------------------------------------
-    # Persistence & visualization
+    # Stepping
     # ------------------------------------------------------------------------
 
-    def _make_run_dir(self) -> str:
-        prefix = f"GOLS_{datetime.now().strftime('%Y_%m_%d')}__"
-        existing = [
-            int(name[len(prefix):])
-            for name in os.listdir(BASE_DIR)
-            if name.startswith(prefix)
-            and os.path.isdir(os.path.join(BASE_DIR, name))
-            and name[len(prefix):].isdigit()
-            and len(name[len(prefix):]) == 3
+    def step(self, record_decisions: bool = True) -> List[Dict[str, Any]]:
+        """Advance one full iteration. Returns one frame per phase."""
+        frames = [
+            self.reproduction_phase(record_decisions),
+            self.blotto_phase(record_decisions),
         ]
-        run_dir = os.path.join(BASE_DIR, f"{prefix}{(max(existing) + 1) if existing else 1:03d}")
-        os.makedirs(run_dir, exist_ok=True)
-        return run_dir
+        self.iteration += 1
+        return frames
 
-    def _snapshot_graph(self) -> Dict[str, Any]:
-        """Capture the full world state for replay."""
-        return {
-            "nodes": [
-                {
-                    "agent_id": int(u),
-                    "tokens": int(self.tokens.get(u, 0)),
-                    "brain_id": int(self.brains[u].brain_id),
-                    "neighbors": [int(v) for v in self.G.neighbors(u)],
-                }
-                for u in self.G.nodes()
-            ],
-            "edges": [(int(u), int(v)) for u, v in self.G.edges()],
+    def is_extinct(self) -> bool:
+        return self.G.number_of_nodes() <= self.cfg.extinction_threshold
+
+    # ------------------------------------------------------------------------
+    # Frames (what the viewer consumes)
+    # ------------------------------------------------------------------------
+
+    def _frame(self, phase: int, cleanup: Dict[str, Any],
+               decisions: Dict[str, Any] | None) -> Dict[str, Any]:
+        """
+        Snapshot the world for the viewer.
+
+        Node arrays are parallel and index-aligned; edges reference node ids
+        directly. Both lineages travel with every frame so the UI can build
+        genealogies without replaying the run.
+        """
+        nodes = sorted(self.G.nodes())
+        brains = self.brains
+
+        frame: Dict[str, Any] = {
+            "iteration": self.iteration,
+            "phase": phase,
+            "ids": [int(u) for u in nodes],
+            "tokens": [int(self.tokens.get(u, 0)) for u in nodes],
+            "brain_ids": [int(brains[u].brain_id) for u in nodes],
+            "parent_brain_ids": [int(brains[u].parent_brain_id) for u in nodes],
+            "parent_ids": [int(self.parent_of.get(u, NO_PARENT)) for u in nodes],
+            "edges": [[int(u), int(v)] for u, v in self.G.edges()],
+            "cleanup": cleanup,
+            "summary": {
+                "nodes": self.G.number_of_nodes(),
+                "edges": self.G.number_of_edges(),
+                "tokens": int(sum(self.tokens.values())),
+            },
+        }
+        if decisions is not None:
+            frame["decisions"] = decisions
+        return frame
+
+    # ------------------------------------------------------------------------
+    # Checkpointing
+    # ------------------------------------------------------------------------
+
+    def to_checkpoint(self) -> Dict[str, np.ndarray]:
+        """
+        Flatten the whole world into arrays for np.savez_compressed.
+
+        Every brain shares one architecture, so layer `i` of all agents stacks
+        into a single (n_agents, fan_out, fan_in) array. That is what makes
+        checkpoints compress well.
+        """
+        nodes = sorted(self.G.nodes())
+        index = {u: i for i, u in enumerate(nodes)}
+
+        blob: Dict[str, np.ndarray] = {
+            "ids": np.array(nodes, dtype=np.int64),
+            "tokens": np.array([self.tokens[u] for u in nodes], dtype=np.int64),
+            "brain_ids": np.array([self.brains[u].brain_id for u in nodes], dtype=np.int64),
+            "parent_brain_ids": np.array([self.brains[u].parent_brain_id for u in nodes], dtype=np.int64),
+            "parent_ids": np.array([self.parent_of.get(u, NO_PARENT) for u in nodes], dtype=np.int64),
+            "edges": np.array([[index[u], index[v]] for u, v in self.G.edges()],
+                              dtype=np.int64).reshape(-1, 2),
+            "counters": np.array([self.next_agent_id, self.next_brain_id, self.iteration],
+                                 dtype=np.int64),
         }
 
-    def _save_step_file(self, idx: int, blob: Dict[str, Any]) -> str:
-        path = os.path.join(self.run_dir, f"step_{idx:05d}.json")
-        with open(path, "w") as f:
-            json.dump(blob, f, indent=2)
-        return path
+        n_layers = len(self.brains[nodes[0]].weights) if nodes else 0
+        blob["n_layers"] = np.array([n_layers], dtype=np.int64)
+        for layer in range(n_layers):
+            blob[f"W{layer}"] = np.stack([self.brains[u].weights[layer] for u in nodes])
+            blob[f"b{layer}"] = np.stack([self.brains[u].biases[layer] for u in nodes])
 
-    def _snapshot_source(self) -> None:
-        """Keep a copy of the exact code that produced this run."""
-        try:
-            src = os.path.abspath(__file__)
-            shutil.copy2(src, os.path.join(self.run_dir, os.path.basename(src)))
-        except OSError:
-            pass
+        # Preserve the RNG stream so a resumed run is not merely similar.
+        state = np.random.get_state()
+        blob["rng_keys"] = state[1].astype(np.uint32)
+        blob["rng_scalars"] = np.array([state[2], state[3], state[4]], dtype=np.float64)
 
-    def _save_configuration(self) -> None:
-        with open(os.path.join(self.run_dir, "config.txt"), "w") as f:
-            for k, v in globals().items():
-                if k.isupper() and not k.startswith("_"):
-                    f.write(f"{k}: {v}\n")
+        return blob
 
-    def _draw(self, title: str, fname: str, k_max: int = 3) -> None:
-        """Render the graph, fading out nodes in the shallower k-cores."""
-        if self.G.number_of_nodes() == 0:
-            return
+    @classmethod
+    def from_checkpoint(cls, blob: Any, cfg: SimConfig) -> "GraphOfLife":
+        """Rebuild a world saved by `to_checkpoint`."""
+        world = cls(None, cfg, _empty=True)
 
-        pos3d = nx.spring_layout(self.G, dim=3, seed=42)
-        pos2d = {n: (c[0], c[1]) for n, c in pos3d.items()}
+        ids = blob["ids"].tolist()
+        tokens = blob["tokens"].tolist()
+        brain_ids = blob["brain_ids"].tolist()
+        parent_brain_ids = blob["parent_brain_ids"].tolist()
+        parent_ids = blob["parent_ids"].tolist()
 
-        coreness = nx.core_number(self.G) if self.G.number_of_edges() > 0 else {u: 0 for u in self.G.nodes()}
-        depth = {u: k_max - min(coreness.get(u, 0), k_max) for u in self.G.nodes()}
+        world.G.add_nodes_from(ids)
+        for a, b in blob["edges"].tolist():
+            world.G.add_edge(ids[a], ids[b])
 
-        nodes_by_depth: Dict[int, List[int]] = {}
-        for u, d in depth.items():
-            nodes_by_depth.setdefault(d, []).append(u)
+        n_layers = int(blob["n_layers"][0])
+        weights = [blob[f"W{i}"] for i in range(n_layers)]
+        biases = [blob[f"b{i}"] for i in range(n_layers)]
 
-        edges_by_depth: Dict[int, List[Tuple[int, int]]] = {}
-        for u, v in self.G.edges():
-            edges_by_depth.setdefault(max(depth[u], depth[v]), []).append((u, v))
+        for i, u in enumerate(ids):
+            brain = Brain(cfg, int(brain_ids[i]), allocate=False)
+            brain.parent_brain_id = int(parent_brain_ids[i])
+            brain.weights = [w[i].copy() for w in weights]
+            brain.biases = [b[i].copy() for b in biases]
 
-        plt.figure(figsize=(8, 6))
-        vmax = max([0] + [self.tokens.get(u, 0) for u in self.G.nodes()])
+            world.brains[u] = brain
+            world.tokens[u] = int(tokens[i])
+            world.messages[u] = {}
+            world.parent_of[u] = int(parent_ids[i])
 
-        for d in sorted(edges_by_depth, reverse=True):
-            nx.draw_networkx_edges(
-                self.G, pos2d, edgelist=edges_by_depth[d],
-                alpha=0.5 / (2 ** d), width=0.5 if d == 0 else 0.3,
-            )
-        for d in sorted(nodes_by_depth, reverse=True):
-            nlist = nodes_by_depth[d]
-            nx.draw_networkx_nodes(
-                self.G, pos2d, nodelist=nlist,
-                node_size=[(self.tokens.get(u, 0) + 1) / 12 for u in nlist],
-                node_color=[self.tokens.get(u, 0) for u in nlist],
-                cmap=matplotlib.colormaps.get_cmap("viridis"),
-                vmin=0, vmax=vmax, alpha=1.0 / (2 ** d),
-            )
+        counters = blob["counters"].tolist()
+        world.next_agent_id, world.next_brain_id, world.iteration = (
+            int(counters[0]), int(counters[1]), int(counters[2])
+        )
 
-        plt.title(title)
-        plt.axis("off")
-        plt.savefig(os.path.join(self.run_dir, fname), dpi=130, bbox_inches="tight")
-        plt.close("all")
+        scalars = blob["rng_scalars"].tolist()
+        np.random.set_state((
+            "MT19937", blob["rng_keys"].astype(np.uint32),
+            int(scalars[0]), int(scalars[1]), float(scalars[2]),
+        ))
+
+        return world
 
 
 # ----------------------------------------------------------------------------
-# Entry point
+# Construction helper
 # ----------------------------------------------------------------------------
+
+def new_world(cfg: SimConfig) -> GraphOfLife:
+    """Create a fresh world from a Watts-Strogatz seed graph."""
+    if cfg.seed is not None:
+        np.random.seed(int(cfg.seed) % (2 ** 32))
+    G0 = nx.watts_strogatz_graph(n=cfg.resolved_n(), k=cfg.resolved_k(), p=cfg.rewire_p)
+    return GraphOfLife(G0, cfg)
+
 
 def _main() -> None:
-    max_steps = 500_000
-    n = int(TOTAL_TOKENS / 100)
-    k = max([int(n / 100), 5])
+    """Headless run, for driving the engine without the web UI."""
+    cfg = SimConfig()
+    world = new_world(cfg)
+    print(f"🌍 n={cfg.resolved_n()} k={cfg.resolved_k()} tokens={cfg.total_tokens}")
 
-    def make_simulation() -> GraphOfLife:
-        G0 = nx.watts_strogatz_graph(n=n, k=k, p=0.2)
-        return GraphOfLife(G0, total_tokens=TOTAL_TOKENS)
-
-    run_counter = 0
-    while True:
-        simulation = make_simulation()
-        run_counter += 1
-        print(f"🌍 Starting run {run_counter}, folder: {simulation.run_dir}")
-
-        for t in range(max_steps):
-            simulation.step(t)
-            print(
-                f"Run {run_counter}, iteration {t} finished "
-                f"(nodes: {simulation.G.number_of_nodes()}, "
-                f"edges: {simulation.G.number_of_edges()}, "
-                f"tokens: {sum(simulation.tokens.values())})"
-            )
-
-            if simulation.G.number_of_nodes() <= 50:
-                print(f"⚠️ Run {run_counter} extinction event. Restarting.")
-                break
+    for t in range(cfg.max_steps):
+        world.step(record_decisions=False)
+        print(f"iteration {t}: nodes={world.G.number_of_nodes()} "
+              f"edges={world.G.number_of_edges()} tokens={sum(world.tokens.values())}")
+        if world.is_extinct():
+            print("⚠️ Extinction.")
+            break
 
 
 if __name__ == "__main__":

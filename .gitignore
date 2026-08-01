@@ -1,5 +1,6 @@
 .pylibs/
 GraphOfLifeOutputs/
+GraphOfLifeRuns/
 __pycache__/
 *.pyc
 .venv/
