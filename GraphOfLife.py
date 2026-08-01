@@ -3,9 +3,6 @@
 """
 GraphOfLife — Open-Ended Evolution on a Mutable Graph
 ==============================================================================
-TODO
-More efficient blotto allocation. Simplfiy algorithm a bit.
-Still allocate one at a time, but in each direction one can be allocated in one iteration. and if none is allocated at beginning in next iteration in this direction can still be allocated none
 """
 from __future__ import annotations
 
