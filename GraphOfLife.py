@@ -710,7 +710,6 @@ class GraphOfLife:
             core_candidates = [u] + neighbors_u
             w_cands = walker_candidates_map.get(u, [])
             w_cands = [wc for wc in w_cands if self.G.has_node(wc)]
-            print(f"should always be length 1: {len(w_cands)}")
             all_candidates = core_candidates + w_cands
 
             # Observe Environment (Standard Cortex, No Special Context)
