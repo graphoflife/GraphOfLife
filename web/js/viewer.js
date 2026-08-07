@@ -34,7 +34,7 @@ const Viewer = {
     // including how the graph arranges itself, not just its colours.
     forceCharge: 120, forceLink: 0.12, forceCenter: 0.012,
     forceAngular: 0.15, forceDamping: 0.86,
-    dimensions: 2, autoFit: true
+    dimensions: 3, autoFit: true
   },
 
   init() {
@@ -53,6 +53,13 @@ const Viewer = {
     this.bindToggles();
     this.bindPresets();
     this.refreshPresetList();
+
+    // The declared defaults are only values until something applies them, so
+    // push them into the layout, the renderer and the controls up front.
+    this.applyLayoutSettings();
+    this.syncControlsFromSettings();
+    this.setDimensions(this.settings.dimensions);
+    this.setAutoFit(this.settings.autoFit);
 
     if (window.ResizeObserver) {
       this._observer = new ResizeObserver(() => this.resize());
@@ -128,7 +135,7 @@ const Viewer = {
     });
 
     for (const btn of document.querySelectorAll('[data-preset]')) {
-      btn.addEventListener('click', () => this.applySettings(Presets.BUILT_IN[btn.dataset.preset]));
+      btn.addEventListener('click', () => this.applySettings(Presets.builtIn(btn.dataset.preset)));
     }
   },
 
