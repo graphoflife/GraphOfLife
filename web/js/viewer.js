@@ -28,7 +28,13 @@ const Viewer = {
     edgeFlatColor: '#5f7d95', edgeWidthBy: 'constant',
     edgeWidthMin: 0.3, edgeWidthMax: 1.6, edgeAlpha: 0.25,
     bgStyle: 'solid', bgColorA: '#0d1117', bgColorB: '#1d2530',
-    showLegend: true, layoutCarry: true
+    showLegend: true, layoutCarry: true,
+
+    // Layout lives in the settings too, so a preset restores the whole look
+    // including how the graph arranges itself, not just its colours.
+    forceCharge: 120, forceLink: 0.12, forceCenter: 0.012,
+    forceAngular: 0.15, forceDamping: 0.86,
+    dimensions: 2, autoFit: true
   },
 
   init() {
@@ -100,24 +106,21 @@ const Viewer = {
     bind('showLegend', 'showLegend', v => v, false);
     bind('layoutCarry', 'layoutCarry', v => v, false);
 
-    // Layout forces feed the simulation rather than the settings object.
-    const force = (id, prop) => {
+    // Layout sliders are ordinary settings; applyLayoutSettings pushes them
+    // into the simulation so presets and the controls stay in step.
+    for (const id of ['forceCharge', 'forceLink', 'forceCenter', 'forceAngular', 'forceDamping']) {
       const el = document.getElementById(id);
-      if (!el) return;
+      if (!el) continue;
       el.addEventListener('input', () => {
-        this.layout[prop] = Number(el.value);
+        this.settings[id] = Number(el.value);
+        this.applyLayoutSettings();
         this.layout.reheat(0.6);
       });
-    };
-    force('forceCharge', 'charge');
-    force('forceLink', 'linkStrength');
-    force('forceCenter', 'centerStrength');
-    force('forceAngular', 'angularStrength');
-    force('forceDamping', 'damping');
+    }
 
     document.getElementById('btnReheat').addEventListener('click', () => this.layout.reheat(1));
     document.getElementById('btnRelayout').addEventListener('click', () => this.layout.scatter());
-    document.getElementById('btnFit').addEventListener('click', () => this.renderer.fit(this.layout.bounds()));
+    document.getElementById('btnFit').addEventListener('click', () => this.setAutoFit(!this.settings.autoFit));
     document.getElementById('btnReloadFrames').addEventListener('click', () => this.reload());
 
     document.getElementById('runPicker').addEventListener('change', e => {
@@ -211,6 +214,28 @@ const Viewer = {
     });
   },
 
+  /**
+   * Keep the whole graph framed until the camera is touched.
+   *
+   * Pressing Fit view turns this on and it stays on, refitting as the layout
+   * settles and as frames change. Any pan, zoom or orbit is taken as "I want to
+   * look at this myself" and switches it off.
+   */
+  setAutoFit(on) {
+    this.settings.autoFit = Boolean(on);
+    document.getElementById('btnFit').classList.toggle('active', this.settings.autoFit);
+    if (this.settings.autoFit) this.renderer.fit(this.layout.bounds());
+  },
+
+  applyLayoutSettings() {
+    const s = this.settings;
+    this.layout.charge = s.forceCharge;
+    this.layout.linkStrength = s.forceLink;
+    this.layout.centerStrength = s.forceCenter;
+    this.layout.angularStrength = s.forceAngular;
+    this.layout.damping = s.forceDamping;
+  },
+
   /** How many positions make up one whole iteration under the current filter. */
   stride() {
     return this.phaseFilter === 'all' ? 2 : 1;
@@ -236,6 +261,7 @@ const Viewer = {
 
       if (rotating) this.renderer.rotate(dx * 0.007, dy * 0.007);
       else this.renderer.pan(dx, dy);
+      this.setAutoFit(false);
     });
 
     // Middle-click drag would otherwise trigger autoscroll.
@@ -246,6 +272,7 @@ const Viewer = {
       const rect = this.canvas.getBoundingClientRect();
       this.renderer.zoomAt(e.clientX - rect.left, e.clientY - rect.top,
                            e.deltaY < 0 ? 1.12 : 1 / 1.12);
+      this.setAutoFit(false);
     }, { passive: false });
 
     this.canvas.addEventListener('mousemove', e => {
@@ -263,6 +290,7 @@ const Viewer = {
   // ------------------------------------------------------------------
 
   setDimensions(dims) {
+    this.settings.dimensions = dims;
     this.layout.setDimensions(dims);
     this.renderer.setMode3D(dims === 3);
 
@@ -477,24 +505,63 @@ const Viewer = {
     // Node counts are also given as a share of the population that entered the
     // phase — "40 births" reads very differently at 100 agents than at 4,000.
     const base = s.nodesBefore || s.nodes || 0;
-    const share = v => (base && v !== null) ? ` (${((v / base) * 100).toFixed(1)}%)` : '';
+    const withShare = v => (base && v !== null && v !== undefined)
+      ? `${formatNumber(v)} <i>${((v / base) * 100).toFixed(1)}%</i>` : formatNumber(v);
+
+    const int = v => formatNumber(Math.round(v));
+    const pct = v => `${(v * 100).toFixed(1)}%`;
+    const dec = (v, n = 2) => v.toFixed(n);
 
     const cells = [
+      // Topology
       ['nodes', 'Nodes', formatNumber(s.nodes)],
       ['edges', 'Edges', formatNumber(s.edges)],
-      ['tokens', 'Tokens', formatNumber(s.tokens)],
-      ['meanDegree', 'Mean degree', s.meanDegree.toFixed(2)],
+      ['density', 'Density', `${(s.density * 100).toFixed(2)}%`],
+      ['meanDegree', 'Mean degree', dec(s.meanDegree)],
+      ['medianDegree', 'Median degree', dec(s.medianDegree, 1)],
       ['maxDegree', 'Max degree', formatNumber(s.maxDegree)],
-      ['medianTokens', 'Median tokens', formatNumber(Math.round(s.medianTokens))],
+      ['minDegree', 'Min degree', formatNumber(s.minDegree)],
+      ['leaves', 'Leaves', withShare(s.leaves)],
+
+      // Wealth
+      ['tokens', 'Tokens', formatNumber(s.tokens)],
+      ['meanTokens', 'Mean tokens', int(s.meanTokens)],
+      ['medianTokens', 'Median tokens', int(s.medianTokens)],
       ['maxTokens', 'Richest', formatNumber(s.maxTokens)],
-      ['gini', 'Gini', s.gini.toFixed(3)],
+      ['minTokens', 'Poorest', formatNumber(s.minTokens)],
+      ['gini', 'Gini', dec(s.gini, 3)],
+      ['topDecileShare', 'Top 10% hold', pct(s.topDecileShare)],
+
+      // Genome
       ['distinctBrains', 'Distinct brains', formatNumber(s.distinctBrains)],
-      ['brainDiversity', 'Brain diversity', `${(s.brainDiversity * 100).toFixed(1)}%`]
+      ['brainDiversity', 'Brain diversity', pct(s.brainDiversity)],
+      ['distinctLineages', 'Distinct lineages', formatNumber(s.distinctLineages)]
     ];
-    if (s.births !== null) cells.push(['births', 'Births', formatNumber(s.births) + share(s.births)]);
-    if (s.revolutions !== null) cells.push(['revolutions', 'Revolutions', formatNumber(s.revolutions) + share(s.revolutions)]);
-    if (s.starved !== null) cells.push(['starved', 'Starved', formatNumber(s.starved) + share(s.starved)]);
-    if (s.orphaned !== null) cells.push(['orphaned', 'Culled', formatNumber(s.orphaned) + share(s.orphaned)]);
+
+    // Reproduction phase
+    if (s.births !== null) {
+      cells.push(['births', 'Births', withShare(s.births)]);
+      cells.push(['meanInvestedShare', 'Mean investment', pct(s.meanInvestedShare)]);
+      cells.push(['meanChildLinks', 'Links per child', dec(s.meanChildLinks)]);
+    }
+
+    // Game phase
+    if (s.totalFlow !== null) {
+      cells.push(['totalFlow', 'Tokens moved', formatNumber(s.totalFlow)]);
+      cells.push(['meanEdgeFlow', 'Mean edge flow', dec(s.meanEdgeFlow, 1)]);
+      cells.push(['maxEdgeFlow', 'Max edge flow', formatNumber(s.maxEdgeFlow)]);
+      cells.push(['selfAllocationShare', 'Kept at home', pct(s.selfAllocationShare)]);
+      cells.push(['revoltShare', 'Revolt tokens', pct(s.revoltShare)]);
+      cells.push(['spreadShare', 'Spread doctrine', pct(s.spreadShare)]);
+    }
+    if (s.revolutions !== null) cells.push(['revolutions', 'Revolutions', withShare(s.revolutions)]);
+    if (s.heldHomeShare !== null) cells.push(['heldHomeShare', 'Held own node', pct(s.heldHomeShare)]);
+    if (s.prunedEdges !== null) cells.push(['prunedEdges', 'Pruned edges', formatNumber(s.prunedEdges)]);
+
+    // Cleanup
+    if (s.starved !== null) cells.push(['starved', 'Starved', withShare(s.starved)]);
+    if (s.orphaned !== null) cells.push(['orphaned', 'Culled', withShare(s.orphaned)]);
+    if (s.redistributed !== null) cells.push(['redistributed', 'Redistributed', formatNumber(s.redistributed)]);
 
     strip.innerHTML = cells.map(([key, label, value]) =>
       `<button class="stat" data-stat="${key}" data-label="${label}" title="Click for an explanation and its history">
@@ -519,24 +586,79 @@ const Viewer = {
 
   showHover(i, x, y) {
     if (i < 0) { this.hoverCard.classList.add('hidden'); return; }
-    const f = this.frame;
+    const d = this.metrics.nodeDetail(i);
 
-    this.hoverCard.innerHTML = `
-      <b>Node ${f.ids[i]}</b><br>
-      Tokens ${formatNumber(f.tokens[i])}<br>
-      Degree ${this.metrics.degree[i]}<br>
-      Brain ${f.brain_ids[i]} <span class="hint">(from ${f.parent_brain_ids[i]})</span><br>
-      Spawned by ${f.parent_ids[i] >= 0 ? f.parent_ids[i] : '—'}
-    `;
-    this.hoverCard.style.left = `${x + 14}px`;
-    this.hoverCard.style.top = `${y + 14}px`;
+    const rows = [
+      `<b>Node ${d.id}</b> <span class="hint">#${d.rank} by wealth</span>`,
+      `Tokens ${formatNumber(d.tokens)} <span class="hint">(${(d.tokenShare * 100).toFixed(2)}% of world)</span>`,
+      `Degree ${d.degree}`,
+      `Brain ${d.brainId} <span class="hint">from ${d.parentBrainId}</span>`,
+      `Spawned by ${d.spawnedBy !== null ? d.spawnedBy : '—'}`
+    ];
+
+    // What this agent did depends on which phase produced the frame.
+    if (d.phase === 1) {
+      rows.push('<hr>');
+      if (d.newbornOf !== undefined) {
+        rows.push(`<b class="good">Born this phase</b> from ${d.newbornOf}`);
+      }
+      if (d.reproduced === null) {
+        rows.push('<span class="hint">decisions not recorded</span>');
+      } else if (d.reproduced) {
+        rows.push(`<b class="good">Reproduced: yes</b>`);
+        rows.push(`Invested ${formatNumber(d.invested)}` +
+                  (d.investedShare !== null ? ` <span class="hint">(${(d.investedShare * 100).toFixed(1)}% of its tokens)</span>` : ''));
+        rows.push(`Child ${d.child} · ${d.childLinks} link${d.childLinks === 1 ? '' : 's'}`);
+      } else {
+        rows.push('Reproduced: no');
+      }
+    } else {
+      rows.push('<hr>');
+      if (d.allocated === undefined) {
+        rows.push('<span class="hint">decisions not recorded</span>');
+      } else {
+        rows.push(`Allocated ${formatNumber(d.allocated)} <span class="hint">(${d.doctrine})</span>`);
+        rows.push(`Kept at home ${formatNumber(d.keptAtHome)}` +
+                  (d.allocated ? ` <span class="hint">(${((d.keptAtHome / d.allocated) * 100).toFixed(0)}%)</span>` : ''));
+        rows.push(`Revolt tokens ${formatNumber(d.revolted)}`);
+      }
+
+      if (d.heldHome === undefined) {
+        rows.push('<span class="hint">no bids on this node</span>');
+      } else if (d.heldHome) {
+        rows.push(`<b class="good">Held its own node</b> <span class="hint">(bid ${formatNumber(d.winningBid)})</span>`);
+      } else {
+        rows.push(`<b class="bad">Taken by ${d.takenBy}</b> <span class="hint">(bid ${formatNumber(d.winningBid)})</span>`);
+      }
+      if (d.wonByRevolt) rows.push('<b class="warnText">Decided by revolution</b>');
+      if (d.nodesWon) rows.push(`Won ${d.nodesWon} node${d.nodesWon === 1 ? '' : 's'} this phase`);
+    }
+
+    this.hoverCard.innerHTML = rows.join('<br>').replace(/<br><hr><br>/g, '<hr>');
+
+    // Flip the card when it would otherwise run off the canvas.
+    const wrap = this.canvas.getBoundingClientRect();
+    this.hoverCard.style.left = '0px';
+    this.hoverCard.style.top = '0px';
     this.hoverCard.classList.remove('hidden');
+    const card = this.hoverCard.getBoundingClientRect();
+
+    const left = (x + 14 + card.width > wrap.width) ? x - card.width - 14 : x + 14;
+    const top = (y + 14 + card.height > wrap.height) ? y - card.height - 14 : y + 14;
+    this.hoverCard.style.left = `${Math.max(4, left)}px`;
+    this.hoverCard.style.top = `${Math.max(4, top)}px`;
   },
 
   applySettings(preset) {
     if (!preset) return;
     Object.assign(this.settings, preset);
+
     this.syncControlsFromSettings();
+    this.applyLayoutSettings();
+    if (preset.dimensions) this.setDimensions(preset.dimensions);
+    this.setAutoFit(this.settings.autoFit);
+    this.layout.reheat(0.6);
+
     this.rebuildMetrics();
     this.updateCharts();
   },
@@ -576,6 +698,7 @@ const Viewer = {
     this.lastTime = time;
 
     this.layout.tick();
+    if (this.settings.autoFit) this.renderer.fit(this.layout.bounds());
 
     if (this.playing && this.visible.length) {
       const fps = Number(document.getElementById('playSpeed').value) || 6;

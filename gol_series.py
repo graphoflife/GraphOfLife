@@ -22,11 +22,11 @@ from typing import Any, Dict, List
 import gol_store as store
 
 # Bump when a formula below changes, so stale caches are discarded.
-SERIES_VERSION = 1
+SERIES_VERSION = 2
 
 # Keys that count nodes, and are therefore also meaningful as a share of the
 # population that entered the phase.
-NODE_COUNT_KEYS = ("births", "revolutions", "starved", "orphaned")
+NODE_COUNT_KEYS = ("births", "revolutions", "starved", "orphaned", "leaves")
 
 
 def _gini(values: List[int]) -> float:
@@ -47,6 +47,14 @@ def _gini(values: List[int]) -> float:
     if cumulative <= 0:
         return 0.0
     return (len(ordered) + 1 - 2 * weighted / cumulative) / len(ordered)
+
+
+def _median(values: List[float]) -> float:
+    if not values:
+        return 0.0
+    ordered = sorted(values)
+    mid = len(ordered) // 2
+    return float(ordered[mid]) if len(ordered) % 2 else (ordered[mid - 1] + ordered[mid]) / 2
 
 
 def frame_stats(frame: Dict[str, Any]) -> Dict[str, Any]:
@@ -75,6 +83,60 @@ def frame_stats(frame: Dict[str, Any]) -> Dict[str, Any]:
 
     winners = decisions.get("winners")
     revolutions = sum(1 for w in winners if w.get("revolt")) if winners else None
+    held_home = (sum(1 for w in winners if w.get("winner") == w.get("node")) / len(winners)
+                 if winners else None)
+
+    births = decisions.get("births")
+    mean_invested = None
+    mean_links = None
+    if births is not None:
+        if births:
+            mean_invested = sum(
+                (b["invested"] / b["tokens_before"]) if b.get("tokens_before") else 0.0
+                for b in births) / len(births)
+            mean_links = sum(len(b.get("links") or []) for b in births) / len(births)
+        else:
+            mean_invested = 0.0
+            mean_links = 0.0
+
+    # Edge traffic, rebuilt from the allocations rather than stored per edge.
+    total_flow = mean_flow = max_flow = None
+    self_share = revolt_share = spread_share = None
+    allocations = decisions.get("allocations")
+    if allocations is not None:
+        flow: Dict[Any, int] = {}
+        allocated = kept = revolted = 0
+        spread_count = 0
+        for record in allocations:
+            agent = record["agent"]
+            if record.get("spread"):
+                spread_count += 1
+            revolts = record.get("revolt") or []
+            for i, target in enumerate(record["targets"]):
+                amount = record["alloc"][i]
+                if not amount:
+                    continue
+                allocated += amount
+                if target == agent:
+                    kept += amount
+                else:
+                    key = (agent, target) if agent < target else (target, agent)
+                    flow[key] = flow.get(key, 0) + amount
+                if i < len(revolts):
+                    revolted += revolts[i]
+
+        values = list(flow.values())
+        total_flow = sum(values)
+        mean_flow = (total_flow / len(values)) if values else 0.0
+        max_flow = max(values) if values else 0
+        self_share = (kept / allocated) if allocated else 0.0
+        revolt_share = (revolted / allocated) if allocated else 0.0
+        spread_share = (spread_count / len(allocations)) if allocations else 0.0
+
+    top_count = max(1, round(n * 0.1))
+    ordered_desc = sorted(tokens, reverse=True)
+    total_tokens = sum(tokens)
+    top_share = (sum(ordered_desc[:top_count]) / total_tokens) if total_tokens else 0.0
 
     return {
         "iteration": frame.get("iteration", 0),
@@ -90,10 +152,29 @@ def frame_stats(frame: Dict[str, Any]) -> Dict[str, Any]:
         "gini": _gini(tokens),
         "distinctBrains": distinct_brains,
         "brainDiversity": (distinct_brains / n) if n else 0.0,
-        "births": len(decisions["births"]) if "births" in decisions else None,
+        "distinctLineages": len(set(frame.get("parent_brain_ids", []))),
+        "density": (2 * len(edges)) / (n * (n - 1)) if n > 1 else 0.0,
+        "medianDegree": _median(degrees),
+        "minDegree": min(degrees) if degrees else 0,
+        "leaves": sum(1 for d in degrees if d == 1),
+        "meanTokens": (total_tokens / n) if n else 0.0,
+        "minTokens": min(tokens) if tokens else 0,
+        "topDecileShare": top_share,
+        "births": len(births) if births is not None else None,
+        "meanInvestedShare": mean_invested,
+        "meanChildLinks": mean_links,
         "revolutions": revolutions,
+        "heldHomeShare": held_home,
+        "totalFlow": total_flow,
+        "meanEdgeFlow": mean_flow,
+        "maxEdgeFlow": max_flow,
+        "selfAllocationShare": self_share,
+        "revoltShare": revolt_share,
+        "spreadShare": spread_share,
+        "prunedEdges": len(decisions["pruned_edges"]) if "pruned_edges" in decisions else None,
         "starved": cleanup.get("starved"),
         "orphaned": cleanup.get("orphaned"),
+        "redistributed": cleanup.get("redistributed"),
     }
 
 

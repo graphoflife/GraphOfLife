@@ -469,3 +469,32 @@ details.control-group > summary:hover h3 { color: var(--text); }
   .runs-panel { position: static; max-height: none; }
   .config-columns { grid-template-columns: 1fr; }
 }
+
+/* Inline share next to a node-count statistic. */
+.stat-val i {
+  font-style: normal;
+  font-size: 11px;
+  color: var(--muted);
+  margin-left: 3px;
+}
+.stat-val { white-space: nowrap; }
+
+/* The Fit view button is sticky, so it needs an on state. */
+#btnFit.active { background: var(--accent-dim); color: #fff; }
+
+/* Hover card sections and verdicts. */
+.hover-card hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 6px 0;
+}
+.hover-card .good { color: var(--ok); }
+.hover-card .bad { color: #ff8f7a; }
+.hover-card .warnText { color: #d29922; }
+
+/* Many more statistics now, so give the strip a ceiling and let it scroll. */
+.stats-strip {
+  max-height: 190px;
+  overflow-y: auto;
+  align-content: flex-start;
+}

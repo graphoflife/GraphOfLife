@@ -178,8 +178,13 @@
         </div>
         <div class="seg" id="phaseToggle" role="group" aria-label="Phase filter">
           <button class="seg-btn active" data-phase="all">All phases</button>
-          <button class="seg-btn" data-phase="1">Reproduction</button>
-          <button class="seg-btn" data-phase="2">Game</button>
+          <button class="seg-btn" data-phase="1">After reproduction</button>
+          <button class="seg-btn" data-phase="2">After game</button>
+        </div>
+        <div class="seg" role="group" aria-label="Layout actions">
+          <button class="seg-btn" id="btnReheat" title="Stir the layout without moving anything">Reheat</button>
+          <button class="seg-btn" id="btnRelayout" title="Scatter and start the layout over">Fresh layout</button>
+          <button class="seg-btn" id="btnFit" title="Keep the whole graph in view until you move the camera">Fit view</button>
         </div>
         <span class="hint" id="dimHint">Drag to pan · scroll to zoom</span>
       </div>
@@ -201,7 +206,7 @@
     <div class="resizer" id="viewerResizer" title="Drag to resize"></div>
 
     <aside class="controls" id="viewerControls">
-      <details class="control-group" open>
+      <details class="control-group">
         <summary><h3>Run</h3></summary>
         <div class="group-body">
           <select id="runPicker"></select>
@@ -211,7 +216,7 @@
         </div>
       </details>
 
-      <details class="control-group" open>
+      <details class="control-group">
         <summary><h3>Nodes</h3></summary>
         <div class="group-body">
           <label>Colour by
@@ -245,7 +250,7 @@
         </div>
       </details>
 
-      <details class="control-group" open>
+      <details class="control-group">
         <summary><h3>Edges</h3></summary>
         <div class="group-body">
           <label class="check"><input type="checkbox" id="edgeShow" checked> Draw edges</label>
@@ -307,16 +312,11 @@
           <label>Angular spread <input type="range" id="forceAngular" min="0" max="1" step="0.01" value="0.15"></label>
           <small class="hint">Spreads each node's edges evenly — 180° at degree 2, 120° at degree 3.</small>
           <label>Damping <input type="range" id="forceDamping" min="0.5" max="0.98" step="0.01" value="0.86"></label>
-          <div class="control-row">
-            <button id="btnReheat" class="ghost small">Reheat</button>
-            <button id="btnRelayout" class="ghost small">Fresh layout</button>
-            <button id="btnFit" class="ghost small">Fit view</button>
-          </div>
           <label class="check"><input type="checkbox" id="layoutCarry" checked> Carry positions between frames</label>
         </div>
       </details>
 
-      <details class="control-group" open>
+      <details class="control-group">
         <summary><h3>Presets</h3></summary>
         <div class="group-body">
           <div class="control-row">

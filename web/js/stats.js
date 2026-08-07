@@ -210,15 +210,121 @@ class FrameMetrics {
     return this._edgeNorm(kind, a, b);
   }
 
+  // ---- per-node decisions --------------------------------------------
+
+  /**
+   * What each agent actually did this phase, keyed by node id.
+   *
+   * Built once and reused by the hover card. Which fields exist depends on the
+   * phase: a reproduction frame knows about births, a game frame about
+   * allocations and conquests.
+   */
+  get decisionIndex() {
+    if (this._decisions) return this._decisions;
+
+    const d = this.frame.decisions || {};
+    const births = new Map();     // parent id -> birth record
+    const newborns = new Map();   // child id  -> parent id
+    const allocations = new Map();// agent id  -> allocation record
+    const winners = new Map();    // node id   -> winner record
+    const conquests = new Map();  // agent id  -> nodes it took
+
+    for (const b of d.births || []) {
+      births.set(b.agent, b);
+      newborns.set(b.child, b.agent);
+    }
+    for (const a of d.allocations || []) allocations.set(a.agent, a);
+    for (const w of d.winners || []) {
+      winners.set(w.node, w);
+      conquests.set(w.winner, (conquests.get(w.winner) || 0) + 1);
+    }
+
+    this._decisions = { births, newborns, allocations, winners, conquests };
+    return this._decisions;
+  }
+
+  /** Everything worth telling the reader about one node, for the hover card. */
+  nodeDetail(i) {
+    const f = this.frame;
+    const id = f.ids[i];
+    const idx = this.decisionIndex;
+
+    const detail = {
+      id,
+      tokens: f.tokens[i],
+      degree: this.degree[i],
+      tokenShare: this.totalTokens ? f.tokens[i] / this.totalTokens : 0,
+      brainId: f.brain_ids[i],
+      parentBrainId: f.parent_brain_ids[i],
+      spawnedBy: f.parent_ids[i] >= 0 ? f.parent_ids[i] : null,
+      rank: this.wealthRank(i),
+      phase: f.phase
+    };
+
+    if (f.phase === 1) {
+      const birth = idx.births.get(id);
+      detail.reproduced = idx.births.size ? Boolean(birth) : null;
+      if (birth) {
+        detail.invested = birth.invested;
+        detail.investedShare = birth.tokens_before ? birth.invested / birth.tokens_before : null;
+        detail.child = birth.child;
+        detail.childLinks = birth.links ? birth.links.length : 0;
+      }
+      const bornFrom = idx.newborns.get(id);
+      if (bornFrom !== undefined) detail.newbornOf = bornFrom;
+    } else {
+      const alloc = idx.allocations.get(id);
+      if (alloc) {
+        const total = alloc.alloc.reduce((a, b) => a + b, 0);
+        const selfIndex = alloc.targets.indexOf(id);
+        detail.allocated = total;
+        detail.keptAtHome = selfIndex >= 0 ? alloc.alloc[selfIndex] : 0;
+        detail.revolted = alloc.revolt ? alloc.revolt.reduce((a, b) => a + b, 0) : 0;
+        detail.doctrine = alloc.spread ? 'spread' : 'all-in';
+      }
+
+      const win = idx.winners.get(id);
+      if (win) {
+        // "Held home" means the agent standing on this node kept it; anything
+        // else means a neighbour moved its genome in.
+        detail.heldHome = win.winner === id;
+        detail.takenBy = win.winner === id ? null : win.winner;
+        detail.winningBid = win.amount;
+        detail.wonByRevolt = Boolean(win.revolt);
+      }
+      detail.nodesWon = idx.conquests.get(id) || 0;
+    }
+
+    return detail;
+  }
+
+  wealthRank(i) {
+    if (!this._wealthRank) {
+      const order = Array.from(this.frame.tokens.keys())
+        .sort((a, b) => this.frame.tokens[b] - this.frame.tokens[a]);
+      const rank = new Int32Array(order.length);
+      order.forEach((nodeIndex, position) => { rank[nodeIndex] = position + 1; });
+      this._wealthRank = rank;
+    }
+    return this._wealthRank[i];
+  }
+
   // ---- summary --------------------------------------------------------
+
+  /** Tokens carried by each edge this phase, as a plain array. */
+  flowValues() {
+    return Array.from(this.flow.values());
+  }
 
   summary() {
     const f = this.frame;
     const n = f.ids.length;
     const degrees = Array.from(this.degree);
     const tokens = f.tokens;
+    const d = f.decisions || {};
 
-    const mean = arr => arr.length ? arr.reduce((a, b) => a + b, 0) / arr.length : 0;
+    const sum = arr => arr.reduce((a, b) => a + b, 0);
+    const mean = arr => arr.length ? sum(arr) / arr.length : 0;
     const median = arr => {
       if (!arr.length) return 0;
       const s = [...arr].sort((a, b) => a - b);
@@ -237,30 +343,104 @@ class FrameMetrics {
       ? (sorted.length + 1 - 2 * weighted / cumulative) / sorted.length
       : 0;
 
-    const distinctBrains = new Set(f.brain_ids).size;
+    // Share held by the richest tenth — a blunter, more readable companion to
+    // the Gini coefficient.
+    const topCount = Math.max(1, Math.round(n * 0.1));
+    const topShare = cumulative > 0
+      ? sum(sorted.slice(-topCount)) / cumulative
+      : 0;
 
-    return {
+    const distinctBrains = new Set(f.brain_ids).size;
+    const distinctLineages = new Set(f.parent_brain_ids).size;
+
+    const out = {
       iteration: f.iteration,
       phase: f.phase,
       // How many nodes entered this phase. Older runs predate the field, in
       // which case the caller falls back to the previous frame's node count.
       nodesBefore: (typeof f.nodes_before === 'number') ? f.nodes_before : null,
+
+      // Topology
       nodes: n,
       edges: f.edges.length,
-      tokens: this.totalTokens,
+      density: n > 1 ? (2 * f.edges.length) / (n * (n - 1)) : 0,
       meanDegree: mean(degrees),
+      medianDegree: median(degrees),
       maxDegree: degrees.length ? Math.max(...degrees) : 0,
+      minDegree: degrees.length ? Math.min(...degrees) : 0,
+      leaves: degrees.filter(x => x === 1).length,
+
+      // Wealth
+      tokens: this.totalTokens,
+      meanTokens: mean(Array.from(tokens)),
       medianTokens: median(tokens),
       maxTokens: tokens.length ? Math.max(...tokens) : 0,
+      minTokens: tokens.length ? Math.min(...tokens) : 0,
       gini,
+      topDecileShare: topShare,
+
+      // Genome
       distinctBrains,
       brainDiversity: n ? distinctBrains / n : 0,
-      births: (f.decisions && f.decisions.births) ? f.decisions.births.length : null,
-      revolutions: (f.decisions && f.decisions.winners)
-        ? f.decisions.winners.filter(w => w.revolt).length : null,
+      distinctLineages,
+
+      // Cleanup, present on both phases
       starved: f.cleanup ? f.cleanup.starved : null,
-      orphaned: f.cleanup ? f.cleanup.orphaned : null
+      orphaned: f.cleanup ? f.cleanup.orphaned : null,
+      redistributed: f.cleanup ? f.cleanup.redistributed : null,
+
+      births: null, meanInvestedShare: null, meanChildLinks: null,
+      revolutions: null, totalFlow: null, meanEdgeFlow: null, maxEdgeFlow: null,
+      selfAllocationShare: null, revoltShare: null, spreadShare: null,
+      heldHomeShare: null, prunedEdges: null
     };
+
+    // ---- reproduction phase ----
+    if (d.births) {
+      const births = d.births;
+      out.births = births.length;
+      out.meanInvestedShare = births.length
+        ? mean(births.map(b => b.tokens_before ? b.invested / b.tokens_before : 0))
+        : 0;
+      out.meanChildLinks = births.length
+        ? mean(births.map(b => (b.links || []).length))
+        : 0;
+    }
+
+    // ---- game phase ----
+    if (d.allocations) {
+      const allocations = d.allocations;
+      let allocatedTotal = 0, keptAtHome = 0, revolted = 0, spreadCount = 0;
+
+      for (const a of allocations) {
+        const total = sum(a.alloc);
+        allocatedTotal += total;
+        const selfIndex = a.targets.indexOf(a.agent);
+        if (selfIndex >= 0) keptAtHome += a.alloc[selfIndex];
+        if (a.revolt) revolted += sum(a.revolt);
+        if (a.spread) spreadCount++;
+      }
+
+      out.selfAllocationShare = allocatedTotal ? keptAtHome / allocatedTotal : 0;
+      out.revoltShare = allocatedTotal ? revolted / allocatedTotal : 0;
+      out.spreadShare = allocations.length ? spreadCount / allocations.length : 0;
+
+      const flows = this.flowValues();
+      out.totalFlow = sum(flows);
+      out.meanEdgeFlow = mean(flows);
+      out.maxEdgeFlow = flows.length ? Math.max(...flows) : 0;
+    }
+
+    if (d.winners) {
+      out.revolutions = d.winners.filter(w => w.revolt).length;
+      out.heldHomeShare = d.winners.length
+        ? d.winners.filter(w => w.winner === w.node).length / d.winners.length
+        : 0;
+    }
+
+    if (d.pruned_edges) out.prunedEdges = d.pruned_edges.length;
+
+    return out;
   }
 }
 

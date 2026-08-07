@@ -28,12 +28,31 @@ const StatDetail = {
     births: 'Agents that reproduced this phase, each spending part of its own tokens to do so.',
     revolutions: 'Nodes taken by a coalition rather than by the single largest allocator. A revolution succeeds when the accumulated weaker allocators outweigh everyone above them plus the hegemon.',
     starved: 'Agents removed for holding zero tokens.',
-    orphaned: 'Agents removed for being outside the largest connected component. They may have been perfectly wealthy — they were simply cut off.'
+    orphaned: 'Agents removed for being outside the largest connected component. They may have been perfectly wealthy — they were simply cut off.',
+    density: 'Edges present as a share of every edge that could exist. Falls quickly as the population grows, since possible edges grow with the square of the node count.',
+    medianDegree: 'The middle agent\'s number of connections. Well below the mean means a few hubs are carrying the average.',
+    minDegree: 'Connections held by the least connected agent.',
+    leaves: 'Agents with exactly one connection. They depend entirely on a single neighbour, and lose their place in the graph if that edge is pruned.',
+    meanTokens: 'Total tokens divided by the number of agents. Since tokens are conserved, this moves only because the population changes.',
+    minTokens: 'Wealth of the poorest surviving agent. Anything that reached zero was already removed by cleanup.',
+    topDecileShare: 'Share of all tokens held by the richest tenth of agents. A blunter companion to the Gini coefficient — easier to picture, less sensitive to the middle of the distribution.',
+    distinctLineages: 'How many different parent genomes are represented. Lower than the distinct brain count, since many mutated children share one parent.',
+    meanInvestedShare: 'Average share of its own tokens that a reproducing agent handed to its child. Reproduction is paid for out of the parent\'s own life, so this is how much of itself the average parent gave away.',
+    meanChildLinks: 'Average number of connections a newborn was wired to. One means children hang off a single neighbour; higher values mean they are born well embedded.',
+    totalFlow: 'Tokens that crossed an edge this phase, ignoring what agents kept on themselves. This is the volume of actual traffic in the network.',
+    meanEdgeFlow: 'Average tokens carried per edge that carried anything. Edges that carried nothing are pruned at the end of the phase.',
+    maxEdgeFlow: 'Tokens carried by the single busiest edge — the largest bid sent along one connection.',
+    selfAllocationShare: 'Share of all allocated tokens that agents kept on their own node rather than spending on neighbours. High values mean a defensive population; low values mean an aggressive one.',
+    revoltShare: 'Share of allocated tokens flagged as revolutionary. Revolution tokens count toward coalitions against the largest allocator instead of backing the strongest bid.',
+    spreadShare: 'Share of agents that spread their tokens proportionally across targets rather than going all-in on a single one. The choice is made by each agent\'s own mode head, so this tracks an evolving strategy.',
+    heldHomeShare: 'Share of nodes whose occupant kept the node. The rest were taken over, with the winner\'s genome copied in.',
+    prunedEdges: 'Edges removed for carrying no tokens this phase. Connections have to be used to survive.',
+    redistributed: 'Tokens recovered from agents that died this phase and scattered uniformly over the survivors, keeping the global count conserved.'
   },
 
   // Statistics that count nodes, and so are also meaningful as a percentage
   // of the population that entered the phase.
-  SHARE_KEYS: new Set(['births', 'revolutions', 'starved', 'orphaned']),
+  SHARE_KEYS: new Set(['births', 'revolutions', 'starved', 'orphaned', 'leaves']),
 
   init() {
     this.el = document.getElementById('statDetail');
