@@ -231,7 +231,7 @@ const Viewer = {
   setAutoFit(on) {
     this.settings.autoFit = Boolean(on);
     document.getElementById('btnFit').classList.toggle('active', this.settings.autoFit);
-    if (this.settings.autoFit) this.renderer.fit(this.layout.bounds());
+    if (this.settings.autoFit) this.renderer.fitToContent(this.layout);
   },
 
   applyLayoutSettings() {
@@ -308,7 +308,7 @@ const Viewer = {
       ? 'Drag to pan · alt-drag or middle-drag to orbit · scroll to zoom'
       : 'Drag to pan · scroll to zoom';
 
-    this.renderer.fit(this.layout.bounds());
+    this.renderer.fitToContent(this.layout);
   },
 
   /**
@@ -417,7 +417,7 @@ const Viewer = {
 
     this.emptyEl.style.display = 'none';
     await this.goToPosition(Math.min(this.position, this.visible.length - 1), true);
-    this.renderer.fit(this.layout.bounds());
+    this.renderer.fitToContent(this.layout);
   },
 
   async reload() {
@@ -740,7 +740,7 @@ const Viewer = {
     this.renderer.resize();
     if (!this._framed && this.renderer.cssWidth > 0 && this.frame) {
       this._framed = true;
-      this.renderer.fit(this.layout.bounds());
+      this.renderer.fitToContent(this.layout);
     }
     this.redraw();
   },
@@ -757,7 +757,7 @@ const Viewer = {
     this.lastTime = time;
 
     this.layout.tick();
-    if (this.settings.autoFit) this.renderer.fit(this.layout.bounds());
+    if (this.settings.autoFit) this.renderer.fitToContent(this.layout);
 
     if (this.playing && this.visible.length) {
       const fps = Number(document.getElementById('playSpeed').value) || 6;

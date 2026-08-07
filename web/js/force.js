@@ -168,22 +168,38 @@ class ForceLayout {
     const k = this.centerStrength * this.alpha;
     const use3D = this.is3D;
 
+    // No node may cross more than a couple of rest lengths in one tick. This is
+    // the backstop: whatever the forces conspire to produce, positions can only
+    // grow linearly, so the drawing cannot blow past the point where repulsion
+    // stops working and never recovers.
+    const maxSpeed = Math.max(1, this.linkDistance * 2);
+    const maxSpeedSq = maxSpeed * maxSpeed;
+
     for (const p of nodes) {
       p.vx -= p.x * k;
       p.vy -= p.y * k;
       p.vx *= this.damping;
       p.vy *= this.damping;
-      p.x += p.vx;
-      p.y += p.vy;
 
       if (use3D) {
         p.vz -= p.z * k;
         p.vz *= this.damping;
-        p.z += p.vz;
       } else {
         p.z = 0;
         p.vz = 0;
       }
+
+      const speedSq = p.vx * p.vx + p.vy * p.vy + p.vz * p.vz;
+      if (speedSq > maxSpeedSq) {
+        const brake = maxSpeed / Math.sqrt(speedSq);
+        p.vx *= brake;
+        p.vy *= brake;
+        p.vz *= brake;
+      }
+
+      p.x += p.vx;
+      p.y += p.vy;
+      if (use3D) p.z += p.vz;
     }
 
     this.alpha *= 0.985;
@@ -215,6 +231,13 @@ class ForceLayout {
     const maxDistSq = cell * cell;
     const zRange = use3D ? 1 : 0;
 
+    // Repulsion goes as 1/distance^2, so a pair that is almost coincident gets
+    // an unbounded kick. Flooring the distance at a fraction of the rest length
+    // caps that at a force the springs can still answer; without it a crowded
+    // graph flings nodes far enough that the grid stops seeing them at all,
+    // and nothing pulls the drawing back.
+    const minDistSq = Math.max(1, (this.linkDistance * 0.2) ** 2);
+
     for (const p of nodes) {
       const cx = Math.floor(p.x / cell);
       const cy = Math.floor(p.y / cell);
@@ -239,14 +262,14 @@ class ForceLayout {
 
               // Two nodes exactly on top of each other have no direction to
               // separate along, so nudge them apart randomly.
-              if (dSq < 0.01) {
+              if (dSq < 1e-6) {
                 dx = (Math.random() - 0.5) * 0.1;
                 dy = (Math.random() - 0.5) * 0.1;
                 dz = use3D ? (Math.random() - 0.5) * 0.1 : 0;
                 dSq = dx * dx + dy * dy + dz * dz;
               }
 
-              const force = strength / dSq;
+              const force = strength / Math.max(dSq, minDistSq);
               p.vx += dx * force;
               p.vy += dy * force;
               if (use3D) p.vz += dz * force;

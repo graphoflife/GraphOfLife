@@ -498,3 +498,20 @@ details.control-group > summary:hover h3 { color: var(--text); }
   overflow-y: auto;
   align-content: flex-start;
 }
+
+/* Run picker sits with the view controls rather than in the settings list. */
+.run-inline { display: inline-flex; align-items: stretch; gap: 6px; }
+.run-inline select {
+  width: auto;
+  min-width: 190px;
+  max-width: 300px;
+  font-size: 12px;
+  padding: 4px 8px;
+}
+.seg-btn.standalone {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+/* The toggle row carries more now, so let it wrap tidily. */
+.view-toggles { row-gap: 8px; }

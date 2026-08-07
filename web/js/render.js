@@ -48,17 +48,71 @@ class GraphRenderer {
     this.pitch = Math.max(-limit, Math.min(limit, this.pitch + dPitch));
   }
 
+  /**
+   * Frame the graph as tightly as the canvas allows.
+   *
+   * Measured from where the nodes actually land on screen rather than from
+   * their world-space bounding box. In 3D those differ: rotation swings the
+   * depth axis into view and the perspective divide shrinks far nodes, so a
+   * world-space box has to be padded generously to avoid clipping and ends up
+   * leaving a wide empty margin. Projecting first removes the guesswork.
+   *
+   * Because the perspective divide depends on the scale being solved for, 3D
+   * takes a second pass to settle; in 2D the projection is linear and one is
+   * exact.
+   */
+  fitToContent(layout, padding = 0.015) {
+    if (!layout || !layout.ids.length || !this.cssWidth) return;
+
+    const passes = this.mode3D ? 2 : 1;
+    for (let pass = 0; pass < passes; pass++) {
+      const box = this._projectedBounds(layout);
+      if (!box) return;
+
+      const availableW = this.cssWidth * (1 - padding * 2);
+      const availableH = this.cssHeight * (1 - padding * 2);
+      const factor = Math.min(availableW / box.width, availableH / box.height);
+      if (!Number.isFinite(factor) || factor <= 0) return;
+
+      this.view.scale = Math.max(0.02, Math.min(60, this.view.scale * factor));
+
+      // Scaling moves everything, so recentre against the new projection.
+      const after = this._projectedBounds(layout);
+      if (!after) return;
+      this.view.offsetX += this.cssWidth / 2 - after.centerX;
+      this.view.offsetY += this.cssHeight / 2 - after.centerY;
+    }
+  }
+
+  /** Screen-space extent of every node under the current camera. */
+  _projectedBounds(layout) {
+    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+
+    for (const id of layout.ids) {
+      const p = layout.pos.get(id);
+      if (!p) continue;
+      const s = this.project(p);
+      if (!Number.isFinite(s.x) || !Number.isFinite(s.y)) continue;
+      if (s.x < minX) minX = s.x;
+      if (s.y < minY) minY = s.y;
+      if (s.x > maxX) maxX = s.x;
+      if (s.y > maxY) maxY = s.y;
+    }
+    if (!Number.isFinite(minX)) return null;
+
+    // A single node, or a perfectly flat line, has no extent in one axis.
+    const width = Math.max(1e-6, maxX - minX);
+    const height = Math.max(1e-6, maxY - minY);
+    return { width, height, centerX: (minX + maxX) / 2, centerY: (minY + maxY) / 2 };
+  }
+
   /** Fit the given world-space bounds into the canvas. */
   fit(bounds) {
     const w = bounds.maxX - bounds.minX;
     const h = bounds.maxY - bounds.minY;
     if (w <= 0 || h <= 0) return;
 
-    // In 3D the projection shrinks things, and rotation can swing the depth
-    // axis into view, so leave extra room rather than clipping on every turn.
-    const margin = this.mode3D ? 0.62 : 1;
-    const scale = Math.min(this.cssWidth / w, this.cssHeight / h) * margin;
-
+    const scale = Math.min(this.cssWidth / w, this.cssHeight / h);
     this.view.scale = scale;
     this.view.offsetX = this.cssWidth / 2 - (bounds.minX + w / 2) * scale;
     this.view.offsetY = this.cssHeight / 2 - (bounds.minY + h / 2) * scale;
