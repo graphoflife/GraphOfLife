@@ -591,6 +591,7 @@ const Viewer = {
     // Reproduction phase
     if (s.births !== null) {
       cells.push(['births', 'Births', withShare(s.births)]);
+      cells.push(['reproTokenShare', 'Tokens to offspring', pct(s.reproTokenShare)]);
       cells.push(['meanInvestedShare', 'Mean investment', pct(s.meanInvestedShare)]);
       cells.push(['meanChildLinks', 'Links per child', dec(s.meanChildLinks)]);
     }

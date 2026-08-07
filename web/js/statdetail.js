@@ -37,6 +37,7 @@ const StatDetail = {
     minTokens: 'Wealth of the poorest surviving agent. Anything that reached zero was already removed by cleanup.',
     topDecileShare: 'Share of all tokens held by the richest tenth of agents. A blunter companion to the Gini coefficient — easier to picture, less sensitive to the middle of the distribution.',
     distinctLineages: 'How many different parent genomes are represented. Lower than the distinct brain count, since many mutated children share one parent.',
+    reproTokenShare: 'Share of every token in the world that was committed to newborns this phase, counting what each parent handed over. This measures how much of the whole economy the population spent on reproducing, whereas Mean investment averages what each individual parent gave away as a fraction of its own pile — a world where a handful of poor agents each give away everything scores high on one and low on the other.',
     meanInvestedShare: 'Average share of its own tokens that a reproducing agent handed to its child. Reproduction is paid for out of the parent\'s own life, so this is how much of itself the average parent gave away.',
     meanChildLinks: 'Average number of connections a newborn was wired to. One means children hang off a single neighbour; higher values mean they are born well embedded.',
     totalFlow: 'Tokens that crossed an edge this phase, ignoring what agents kept on themselves. This is the volume of actual traffic in the network.',

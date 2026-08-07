@@ -450,6 +450,7 @@ class FrameMetrics {
       redistributed: f.cleanup ? f.cleanup.redistributed : null,
 
       births: null, meanInvestedShare: null, meanChildLinks: null,
+      reproTokenShare: null,
       revolutions: null, totalFlow: null, meanEdgeFlow: null, maxEdgeFlow: null,
       selfAllocationShare: null, revoltShare: null, spreadShare: null,
       heldHomeShare: null, prunedEdges: null
@@ -465,6 +466,13 @@ class FrameMetrics {
       out.meanChildLinks = births.length
         ? mean(births.map(b => (b.links || []).length))
         : 0;
+
+      // What share of the entire economy was committed to newborns this
+      // phase. Distinct from meanInvestedShare, which averages each parent's
+      // share of its own pile and so says nothing about how much of the world
+      // that amounted to.
+      const invested = sum(births.map(b => b.invested));
+      out.reproTokenShare = this.totalTokens ? invested / this.totalTokens : 0;
     }
 
     // ---- game phase ----

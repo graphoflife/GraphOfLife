@@ -22,7 +22,7 @@ from typing import Any, Dict, List
 import gol_store as store
 
 # Bump when a formula below changes, so stale caches are discarded.
-SERIES_VERSION = 4
+SERIES_VERSION = 5
 
 # Keys that count nodes, and are therefore also meaningful as a share of the
 # population that entered the phase.
@@ -105,7 +105,9 @@ def frame_stats(frame: Dict[str, Any], previous: Dict[str, Any] | None = None) -
     births = decisions.get("births")
     mean_invested = None
     mean_links = None
+    repro_token_share = None
     if births is not None:
+        repro_token_share = (sum(b["invested"] for b in births) / sum(tokens)) if sum(tokens) else 0.0
         if births:
             mean_invested = sum(
                 (b["invested"] / b["tokens_before"]) if b.get("tokens_before") else 0.0
@@ -193,6 +195,7 @@ def frame_stats(frame: Dict[str, Any], previous: Dict[str, Any] | None = None) -
         "losers": losers,
         "births": len(births) if births is not None else None,
         "meanInvestedShare": mean_invested,
+        "reproTokenShare": repro_token_share,
         "meanChildLinks": mean_links,
         "revolutions": revolutions,
         "heldHomeShare": held_home,
