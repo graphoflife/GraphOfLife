@@ -227,6 +227,10 @@
               <option value="log_token_delta">Token change (log, signed)</option>
               <option value="abs_token_delta">Token change (magnitude)</option>
               <option value="log_abs_token_delta">Token change (log magnitude)</option>
+              <option value="loops">Loops through it</option>
+              <option value="log_loops">Loops through it (log)</option>
+              <option value="triangles">Triangles</option>
+              <option value="log_triangles">Triangles (log)</option>
               <option value="constant">Constant</option>
             </select>
           </label>
@@ -240,6 +244,10 @@
               <option value="log_degree">Degree (log)</option>
               <option value="abs_token_delta">Token change (magnitude)</option>
               <option value="log_abs_token_delta">Token change (log magnitude)</option>
+              <option value="loops">Loops through it</option>
+              <option value="log_loops">Loops through it (log)</option>
+              <option value="triangles">Triangles</option>
+              <option value="log_triangles">Triangles (log)</option>
               <option value="constant">Constant</option>
             </select>
           </label>
@@ -265,6 +273,9 @@
               <option value="log_avg_degree">Average endpoint degree (log)</option>
               <option value="flow">Token flow (game phase)</option>
               <option value="log_flow">Token flow (log)</option>
+              <option value="loops">Loops through it</option>
+              <option value="triangles">Triangles</option>
+              <option value="bridge">Bridge (on no loop)</option>
               <option value="source">Inherit from node colour</option>
             </select>
           </label>
@@ -279,6 +290,9 @@
               <option value="log_avg_degree">Average endpoint degree (log)</option>
               <option value="flow">Token flow (game phase)</option>
               <option value="log_flow">Token flow (log)</option>
+              <option value="loops">Loops through it</option>
+              <option value="triangles">Triangles</option>
+              <option value="bridge">Bridge (on no loop)</option>
             </select>
           </label>
           <label>Min width <input type="range" id="edgeWidthMin" min="0.1" max="4" step="0.1" value="0.3"></label>
@@ -354,6 +368,7 @@
 </div>
 
 <script src="js/colormaps.js"></script>
+<script src="js/graphstats.js"></script>
 <script src="js/api.js"></script>
 <script src="js/force.js"></script>
 <script src="js/render.js"></script>

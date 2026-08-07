@@ -16,13 +16,14 @@ and new numbers.
 from __future__ import annotations
 
 import json
+import math
 import os
 from typing import Any, Dict, List
 
 import gol_store as store
 
 # Bump when a formula below changes, so stale caches are discarded.
-SERIES_VERSION = 5
+SERIES_VERSION = 7
 
 # Keys that count nodes, and are therefore also meaningful as a share of the
 # population that entered the phase.
@@ -48,6 +49,183 @@ def _gini(values: List[int]) -> float:
     if cumulative <= 0:
         return 0.0
     return (len(ordered) + 1 - 2 * weighted / cumulative) / len(ordered)
+
+
+def _shannon(counts) -> float:
+    """Shannon entropy of a set of counts, in bits."""
+    total = sum(counts)
+    if total <= 0:
+        return 0.0
+    h = 0.0
+    for c in counts:
+        if c <= 0:
+            continue
+        p = c / total
+        h -= p * math.log2(p)
+    return h
+
+
+def _structure(ids: List[int], edges: List[List[int]]) -> Dict[str, Any]:
+    """
+    Loops, triangles and dimension, mirroring web/js/graphstats.js.
+
+    Kept in step with the browser implementation so a frame's number matches
+    the point plotted for it.
+    """
+    adj: Dict[int, set] = {i: set() for i in ids}
+    for a, b in edges:
+        if a != b and a in adj and b in adj:
+            adj[a].add(b)
+            adj[b].add(a)
+
+    def component_labels(neighbours):
+        label, count = {}, 0
+        for start in ids:
+            if start in label:
+                continue
+            stack = [start]
+            label[start] = count
+            while stack:
+                u = stack.pop()
+                for v in neighbours.get(u, ()):
+                    if v not in label:
+                        label[v] = count
+                        stack.append(v)
+            count += 1
+        return label, count
+
+    # --- bridges, by iterative depth-first search ---
+    edge_index = {}
+    for i, (a, b) in enumerate(edges):
+        edge_index[(a, b) if a < b else (b, a)] = i
+
+    disc: Dict[int, int] = {}
+    low: Dict[int, int] = {}
+    bridges: set = set()
+    timer = 0
+
+    for root in ids:
+        if root in disc:
+            continue
+        stack = [[root, None, iter(adj[root])]]
+        disc[root] = low[root] = timer
+        timer += 1
+
+        while stack:
+            top = stack[-1]
+            node, parent, it = top[0], top[1], top[2]
+            nxt = next(it, None)
+
+            if nxt is None:
+                stack.pop()
+                if stack:
+                    u, v = stack[-1][0], node
+                    low[u] = min(low[u], low[v])
+                    if low[v] > disc[u]:
+                        idx = edge_index.get((u, v) if u < v else (v, u))
+                        if idx is not None:
+                            bridges.add(idx)
+                continue
+
+            if nxt == parent:
+                top[1] = None      # skip the edge we arrived on, once
+                continue
+            if nxt in disc:
+                low[node] = min(low[node], disc[nxt])
+                continue
+            disc[nxt] = low[nxt] = timer
+            timer += 1
+            stack.append([nxt, node, iter(adj[nxt])])
+
+    # --- 2-edge-connected components, once the bridges are removed ---
+    stripped: Dict[int, set] = {i: set() for i in ids}
+    for i, (a, b) in enumerate(edges):
+        if i in bridges or a == b:
+            continue
+        if a in stripped and b in stripped:
+            stripped[a].add(b)
+            stripped[b].add(a)
+
+    block_label, block_count = component_labels(stripped)
+    nodes_in = [0] * block_count
+    edges_in = [0] * block_count
+    for i in ids:
+        nodes_in[block_label[i]] += 1
+    for i, (a, b) in enumerate(edges):
+        if i not in bridges:
+            edges_in[block_label[a]] += 1
+
+    _, component_count = component_labels(adj)
+    cycle_rank = max(0, len(edges) - len(ids) + component_count)
+
+    # --- triangles ---
+    triangle_total = 0
+    for a, b in edges:
+        na, nb = adj.get(a), adj.get(b)
+        if not na or not nb:
+            continue
+        small, large = (na, nb) if len(na) <= len(nb) else (nb, na)
+        triangle_total += sum(1 for w in small if w in large)
+    triangle_total = round(triangle_total / 3)
+
+    triples = sum(len(adj[i]) * (len(adj[i]) - 1) / 2 for i in ids)
+    transitivity = (3 * triangle_total / triples) if triples > 0 else 0.0
+
+    # --- ball-growth dimension ---
+    dimension = None
+    n = len(ids)
+    if n >= 8:
+        seeds, max_radius = 24, 5
+        step = max(1, n // min(seeds, n))
+        volume = [0.0] * (max_radius + 1)
+        sampled = 0
+        for s_i in range(0, n, step):
+            seen = {ids[s_i]}
+            shell = [ids[s_i]]
+            volume[0] += 1
+            for r in range(1, max_radius + 1):
+                nxt_shell = []
+                for u in shell:
+                    for v in adj.get(u, ()):
+                        if v not in seen:
+                            seen.add(v)
+                            nxt_shell.append(v)
+                shell = nxt_shell
+                volume[r] += len(seen)
+                if not shell:
+                    for rr in range(r + 1, max_radius + 1):
+                        volume[rr] += len(seen)
+                    break
+            sampled += 1
+
+        if sampled:
+            volumes = [v / sampled for v in volume]
+            xs, ys = [], []
+            for r in range(1, max_radius + 1):
+                if volumes[r] > n * 0.5:
+                    continue
+                shell_size = volumes[r] - volumes[r - 1]
+                if shell_size <= 0:
+                    continue
+                xs.append(math.log(r))
+                ys.append(math.log(shell_size))
+            if len(xs) >= 2:
+                mx = sum(xs) / len(xs)
+                my = sum(ys) / len(ys)
+                num = sum((x - mx) * (y - my) for x, y in zip(xs, ys))
+                den = sum((x - mx) ** 2 for x in xs)
+                # The shell exponent is d - 1.
+                dimension = (num / den + 1) if den > 0 else None
+
+    return {
+        "cycleRank": cycle_rank,
+        "loopDensity": (cycle_rank / len(edges)) if edges else 0.0,
+        "bridges": len(bridges),
+        "components": component_count,
+        "triangles": triangle_total,
+        "transitivity": transitivity,
+        "dimension": dimension,
+    }
 
 
 def _median(values: List[float]) -> float:
@@ -162,6 +340,18 @@ def frame_stats(frame: Dict[str, Any], previous: Dict[str, Any] | None = None) -
         gainers = sum(1 for v in delta if v > 0)
         losers = sum(1 for v in delta if v < 0)
 
+    structure = _structure(ids, edges)
+
+    degree_hist: Dict[int, int] = {}
+    for d in degrees:
+        degree_hist[d] = degree_hist.get(d, 0) + 1
+    degree_entropy = _shannon(degree_hist.values())
+    degree_classes = len(degree_hist)
+    degree_evenness = (degree_entropy / math.log2(degree_classes)) if degree_classes > 1 else 0.0
+
+    token_entropy = _shannon(tokens)
+    token_evenness = (token_entropy / math.log2(n)) if n > 1 else 0.0
+
     top_count = max(1, round(n * 0.1))
     ordered_desc = sorted(tokens, reverse=True)
     total_tokens = sum(tokens)
@@ -189,6 +379,11 @@ def frame_stats(frame: Dict[str, Any], previous: Dict[str, Any] | None = None) -
         "meanTokens": (total_tokens / n) if n else 0.0,
         "minTokens": min(tokens) if tokens else 0,
         "topDecileShare": top_share,
+        "degreeEntropy": degree_entropy,
+        "degreeEvenness": degree_evenness,
+        "tokenEntropy": token_entropy,
+        "tokenEvenness": token_evenness,
+        **structure,
         "maxTokenAdded": max_added,
         "maxTokenLost": max_lost,
         "gainers": gainers,

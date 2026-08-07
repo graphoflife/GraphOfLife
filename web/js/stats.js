@@ -42,6 +42,10 @@ class FrameMetrics {
     abs_token_delta: 'Token change (size)',
     log_token_delta: 'Token change (log)',
     log_abs_token_delta: 'Token change (log size)',
+    loops: 'Loops through it',
+    log_loops: 'Loops through it (log)',
+    triangles: 'Triangles',
+    log_triangles: 'Triangles (log)',
     brain_id: 'Brain id',
     parent_brain_id: 'Parent brain id',
     age: 'Node id (age)',
@@ -61,7 +65,7 @@ class FrameMetrics {
       const n = Math.sign(v) * Math.round(Math.expm1(Math.abs(v)));
       return (n > 0 ? '+' : '') + n.toLocaleString('en-US');
     }
-    if (kind === 'log_abs_token_delta') {
+    if (kind === 'log_abs_token_delta' || kind === 'log_loops' || kind === 'log_triangles') {
       return Math.round(Math.expm1(v)).toLocaleString('en-US');
     }
     if (kind === 'token_share') return `${(v * 100).toFixed(2)}%`;
@@ -127,6 +131,12 @@ class FrameMetrics {
           break;
         case 'log_abs_token_delta':
           out[i] = Math.log1p(Math.abs(this.delta[i]));
+          break;
+        case 'loops':      out[i] = this.structure.loops.nodeLoops.get(f.ids[i]) || 0; break;
+        case 'log_loops':  out[i] = Math.log1p(this.structure.loops.nodeLoops.get(f.ids[i]) || 0); break;
+        case 'triangles':  out[i] = this.structure.triangles.perNode.get(f.ids[i]) || 0; break;
+        case 'log_triangles':
+          out[i] = Math.log1p(this.structure.triangles.perNode.get(f.ids[i]) || 0);
           break;
         case 'brain_id':        out[i] = f.brain_ids[i]; break;
         case 'parent_brain_id': out[i] = f.parent_brain_ids[i]; break;
@@ -206,6 +216,19 @@ class FrameMetrics {
         const key = a < b ? `${a},${b}` : `${b},${a}`;
         return this.flow.get(key) || 0;
       }
+      case 'loops': {
+        const i = this.edgeSlot(a, b);
+        return i < 0 ? 0 : this.structure.loops.edgeLoops[i];
+      }
+      case 'triangles': {
+        const i = this.edgeSlot(a, b);
+        return i < 0 ? 0 : this.structure.triangles.perEdge[i];
+      }
+      case 'bridge': {
+        // 1 when the edge lies on no loop at all.
+        const i = this.edgeSlot(a, b);
+        return (i >= 0 && this.structure.loops.edgeLoops[i] === 0) ? 1 : 0;
+      }
       default: return 0;
     }
   }
@@ -259,6 +282,40 @@ class FrameMetrics {
     const kind = this.settings.edgeWidthBy;
     if (kind === 'constant') return 0;
     return this._edgeNorm(kind, a, b);
+  }
+
+  // ---- structure: loops, triangles, dimension -------------------------
+
+  /**
+   * Adjacency, loops, triangles and dimension for this frame.
+   *
+   * Built on first use and kept, since these cost real work and most frames
+   * are drawn without anyone asking for them.
+   */
+  get structure() {
+    if (this._structure) return this._structure;
+
+    const f = this.frame;
+    const adj = GraphStats.adjacency(f.ids, f.edges);
+    const loops = GraphStats.loops(f.ids, f.edges, adj);
+    const triangles = GraphStats.triangles(f.ids, f.edges, adj);
+    const dimension = GraphStats.dimension(f.ids, adj);
+
+    // Edge lookups are by endpoint pair, since the renderer walks edges by id.
+    const edgeKey = new Map();
+    for (let i = 0; i < f.edges.length; i++) {
+      const [a, b] = f.edges[i];
+      edgeKey.set(a < b ? `${a},${b}` : `${b},${a}`, i);
+    }
+
+    this._structure = { adj, loops, triangles, dimension, edgeKey };
+    return this._structure;
+  }
+
+  edgeSlot(a, b) {
+    const key = a < b ? `${a},${b}` : `${b},${a}`;
+    const i = this.structure.edgeKey.get(key);
+    return i === undefined ? -1 : i;
   }
 
   // ---- per-node decisions --------------------------------------------
@@ -439,6 +496,11 @@ class FrameMetrics {
       gainers: this.delta.filter(v => v > 0).length,
       losers: this.delta.filter(v => v < 0).length,
 
+      // Structure
+      cycleRank: null, loopDensity: null, bridges: null, triangles: null,
+      transitivity: null, degreeEntropy: null, degreeEvenness: null,
+      tokenEntropy: null, tokenEvenness: null, dimension: null, components: null,
+
       // Genome
       distinctBrains,
       brainDiversity: n ? distinctBrains / n : 0,
@@ -507,6 +569,25 @@ class FrameMetrics {
     }
 
     if (d.pruned_edges) out.prunedEdges = d.pruned_edges.length;
+
+    // ---- structure ----
+    const st = this.structure;
+    out.cycleRank = st.loops.cycleRank;
+    out.loopDensity = f.edges.length ? st.loops.cycleRank / f.edges.length : 0;
+    out.bridges = st.loops.bridges;
+    out.components = st.loops.componentCount;
+    out.triangles = st.triangles.total;
+    out.transitivity = GraphStats.transitivity(f.ids, st.adj, st.triangles.total);
+    out.dimension = st.dimension.estimate;
+
+    out.degreeEntropy = GraphStats.degreeEntropy(degrees);
+    // Against the most even the same number of classes could be, so 1 means
+    // every degree is equally common.
+    const degreeClasses = new Set(degrees).size;
+    out.degreeEvenness = degreeClasses > 1 ? out.degreeEntropy / Math.log2(degreeClasses) : 0;
+
+    out.tokenEntropy = GraphStats.entropyOfCounts(Array.from(tokens));
+    out.tokenEvenness = n > 1 ? out.tokenEntropy / Math.log2(n) : 0;
 
     return out;
   }

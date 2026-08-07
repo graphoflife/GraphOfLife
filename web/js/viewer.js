@@ -585,7 +585,18 @@ const Viewer = {
       // Genome
       ['distinctBrains', 'Distinct brains', formatNumber(s.distinctBrains)],
       ['brainDiversity', 'Brain diversity', pct(s.brainDiversity)],
-      ['distinctLineages', 'Distinct lineages', formatNumber(s.distinctLineages)]
+      ['distinctLineages', 'Distinct lineages', formatNumber(s.distinctLineages)],
+
+      // Structure
+      ['cycleRank', 'Loops', formatNumber(s.cycleRank)],
+      ['loopDensity', 'Loop density', pct(s.loopDensity)],
+      ['bridges', 'Bridges', formatNumber(s.bridges)],
+      ['triangles', 'Triangles', formatNumber(s.triangles)],
+      ['transitivity', 'Clustering', dec(s.transitivity, 3)],
+      ['dimension', 'Dimension', s.dimension === null ? '—' : dec(s.dimension, 2)],
+      ['degreeEntropy', 'Degree entropy', `${dec(s.degreeEntropy, 2)} bits`],
+      ['tokenEntropy', 'Token entropy', `${dec(s.tokenEntropy, 2)} bits`],
+      ['tokenEvenness', 'Token evenness', pct(s.tokenEvenness)]
     ];
 
     // Reproduction phase
