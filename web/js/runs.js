@@ -9,6 +9,29 @@ const RunsView = {
   runs: [],
   pollTimer: null,
 
+  // Which config keys to show on a run card, and how to label them. Kept
+  // explicit so cards stay readable rather than dumping the whole dataclass.
+  SETTING_LABELS: [
+    ['total_tokens', 'tokens'],
+    ['n_nodes', 'n'],
+    ['k_neighbors', 'k'],
+    ['rewire_p', 'p'],
+    ['hidden_layers', 'hidden'],
+    ['message_amount', 'msg'],
+    ['random_input_amount', 'noise'],
+    ['exchange_messages', 'exchange'],
+    ['mutation_probability', 'mut p'],
+    ['mutation_noise_std', 'mut std'],
+    ['mutation_sparsity', 'mut sparse'],
+    ['tokens_created_per_phase', 'created/phase'],
+    ['max_steps', 'max iter'],
+    ['extinction_threshold', 'extinct <'],
+    ['checkpoint_every', 'ckpt every'],
+    ['export_every', 'record every'],
+    ['export_decisions', 'decisions'],
+    ['seed', 'seed']
+  ],
+
   async init() {
     this.form = document.getElementById('newRunForm');
     this.listEl = document.getElementById('runList');
@@ -18,11 +41,8 @@ const RunsView = {
     document.getElementById('resetDefaults').addEventListener('click', () => this.applyDefaults());
     document.getElementById('refreshRuns').addEventListener('click', () => this.refresh());
 
-    // Keep the derived brain shape in view while the settings are edited.
-    for (const id of ['cfg_message_amount', 'cfg_random_input_amount', 'cfg_hidden_layers',
-                      'cfg_total_tokens', 'cfg_n_nodes', 'cfg_k_neighbors']) {
-      const el = document.getElementById(id);
-      if (el) el.addEventListener('input', () => this.updateDerived());
+    for (const input of this.form.querySelectorAll('[data-cfg]')) {
+      input.addEventListener('input', () => this.updateDerived());
     }
 
     try {
@@ -41,15 +61,10 @@ const RunsView = {
     const cfg = this.defaults.config;
 
     for (const input of this.form.querySelectorAll('[data-cfg]')) {
-      const key = input.dataset.cfg;
-      const value = cfg[key];
-      if (input.type === 'checkbox') {
-        input.checked = Boolean(value);
-      } else if (Array.isArray(value)) {
-        input.value = value.join(', ');
-      } else {
-        input.value = (value === null || value === undefined) ? '' : value;
-      }
+      const value = cfg[input.dataset.cfg];
+      if (input.type === 'checkbox') input.checked = Boolean(value);
+      else if (Array.isArray(value)) input.value = value.join(', ');
+      else input.value = (value === null || value === undefined) ? '' : value;
     }
     this.errorEl.textContent = '';
     this.updateDerived();
@@ -67,7 +82,7 @@ const RunsView = {
           .map(s => parseInt(s.trim(), 10))
           .filter(n => Number.isFinite(n) && n > 0);
       } else if (input.value === '') {
-        // Blank means "use the default"; seed blank means "random".
+        // Blank means "use the default"; a blank seed means "random".
         if (key === 'seed') config[key] = null;
       } else {
         const num = Number(input.value);
@@ -87,8 +102,7 @@ const RunsView = {
     const inputs = 29 + 4 * messages + noise;
     const outputs = 11 + messages;
 
-    const totalTokens = cfg.total_tokens || 0;
-    const n = cfg.n_nodes > 0 ? cfg.n_nodes : Math.floor(totalTokens / 100);
+    const n = cfg.n_nodes > 0 ? cfg.n_nodes : Math.floor((cfg.total_tokens || 0) / 100);
     const k = cfg.k_neighbors > 0 ? cfg.k_neighbors : Math.max(Math.floor(n / 100), 5);
 
     const layers = (cfg.hidden_layers && cfg.hidden_layers.length) ? cfg.hidden_layers : [50, 45, 40, 35, 30];
@@ -142,63 +156,76 @@ const RunsView = {
 
   render() {
     if (!this.runs.length) {
-      this.listEl.innerHTML = '<p class="empty">No simulations yet. Create one above.</p>';
+      this.listEl.innerHTML = '<p class="empty">No simulations yet. Create one on the left.</p>';
       return;
     }
-
     this.listEl.innerHTML = '';
-    for (const run of this.runs) {
-      this.listEl.appendChild(this.card(run));
+    for (const run of this.runs) this.listEl.appendChild(this.card(run));
+  },
+
+  settingsHtml(cfg) {
+    const parts = [];
+    for (const [key, label] of this.SETTING_LABELS) {
+      let value = cfg[key];
+      if (value === null || value === undefined || value === '') value = 'auto';
+      else if (Array.isArray(value)) value = value.join('/');
+      else if (typeof value === 'boolean') value = value ? 'yes' : 'no';
+      else if (typeof value === 'number') value = formatNumber(value);
+      parts.push(`<span><i>${label}</i> ${escapeHtml(String(value))}</span>`);
     }
+    return `<div class="run-settings">${parts.join('')}</div>`;
   },
 
   card(run) {
     const el = document.createElement('div');
     el.className = 'run-card';
-
     const cfg = run.config || {};
-    const canResume = run.has_checkpoint && !run.running;
+
+    // One button that flips between starting and stopping, rather than two
+    // where only ever one of them applies.
+    const running = Boolean(run.running);
+    const actionLabel = running ? 'Stop' : (run.has_checkpoint ? 'Resume' : 'Start');
 
     el.innerHTML = `
       <div class="run-head">
         <div>
           <h3>${escapeHtml(run.name)}</h3>
-          <span class="run-id">${run.id}</span>
+          ${run.name !== run.id ? `<span class="run-id">${escapeHtml(run.id)}</span>` : ''}
         </div>
         <span class="status status-${run.status}">${run.status}</span>
       </div>
       <div class="run-meta">
-        <span><b>${formatNumber(run.iteration)}</b> iterations</span>
+        <span><b>${formatNumber(run.iteration)}</b> iter</span>
         <span><b>${formatNumber(run.frame_count)}</b> frames</span>
-        <span><b>${formatNumber(cfg.total_tokens)}</b> tokens</span>
         <span>${formatBytes(run.size_bytes)}</span>
+        ${(run.checkpoint_iteration !== null && run.checkpoint_iteration !== undefined)
+          ? `<span>resume @ ${formatNumber(run.checkpoint_iteration)}</span>` : ''}
         <span>${formatTime(run.created_at)}</span>
       </div>
-      ${run.checkpoint_iteration !== null && run.checkpoint_iteration !== undefined
-        ? `<div class="run-meta"><span class="hint">Resume point at iteration ${formatNumber(run.checkpoint_iteration)}</span></div>`
-        : ''}
+      ${this.settingsHtml(cfg)}
       ${run.error ? `<pre class="run-error">${escapeHtml(run.error)}</pre>` : ''}
       <div class="run-actions">
-        <input type="number" class="steps-input" placeholder="steps" min="1" title="How many iterations to run. Blank runs to the configured maximum.">
-        <button class="primary" data-act="start">${canResume ? 'Resume' : 'Start'}</button>
-        <button data-act="stop" ${run.running ? '' : 'disabled'}>Stop</button>
+        <input type="number" class="steps-input" placeholder="steps" min="1"
+               title="How many iterations to run. Blank runs to the configured maximum."
+               ${running ? 'disabled' : ''}>
+        <button class="${running ? 'warn' : 'primary'}" data-act="toggle">${actionLabel}</button>
         <button data-act="open">Inspect</button>
         <button class="danger" data-act="delete">Delete</button>
       </div>
     `;
 
     const stepsInput = el.querySelector('.steps-input');
-    el.querySelector('[data-act="start"]').addEventListener('click', async () => {
-      const steps = parseInt(stepsInput.value, 10);
+
+    el.querySelector('[data-act="toggle"]').addEventListener('click', async () => {
       try {
-        await API.startRun(run.id, Number.isFinite(steps) && steps > 0 ? steps : null);
+        if (running) {
+          await API.stopRun(run.id);
+        } else {
+          const steps = parseInt(stepsInput.value, 10);
+          await API.startRun(run.id, Number.isFinite(steps) && steps > 0 ? steps : null);
+        }
         await this.refresh();
       } catch (err) { alert(err.message); }
-    });
-
-    el.querySelector('[data-act="stop"]').addEventListener('click', async () => {
-      try { await API.stopRun(run.id); await this.refresh(); }
-      catch (err) { alert(err.message); }
     });
 
     el.querySelector('[data-act="open"]').addEventListener('click', () => {

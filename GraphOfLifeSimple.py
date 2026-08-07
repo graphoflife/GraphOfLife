@@ -432,6 +432,9 @@ class GraphOfLife:
         connections. No other topology change happens here.
         """
         decisions: List[Dict[str, Any]] = []
+        # Captured before anything changes, so the viewer can express births and
+        # deaths as a share of the population that actually faced this phase.
+        nodes_before = self.G.number_of_nodes()
         log_deg, neighs, q_tok, q_deg, log_tok = self._precompute_features()
 
         for u in list(self.G.nodes()):
@@ -464,7 +467,7 @@ class GraphOfLife:
         self.G.remove_edges_from(list(nx.selfloop_edges(self.G)))
         cleanup = self._cleanup_and_redistribute()
 
-        return self._frame(phase=1, cleanup=cleanup,
+        return self._frame(phase=1, cleanup=cleanup, nodes_before=nodes_before,
                            decisions={"births": decisions} if record_decisions else None)
 
     def _spawn_child(self, parent: int, parent_tokens: int, child_tokens: int,
@@ -506,6 +509,7 @@ class GraphOfLife:
         Every agent spends its entire token pool bidding on itself and its
         neighbors. The winner of each node implants its brain there.
         """
+        nodes_before = self.G.number_of_nodes()
         log_deg, neighs, q_tok, q_deg, log_tok = self._precompute_features()
 
         # --- 1. Message pass, so allocation decisions see fresh signals -------
@@ -621,7 +625,8 @@ class GraphOfLife:
                 "winners": winners,
                 "pruned_edges": [[int(a), int(b)] for a, b in dead_edges],
             }
-        return self._frame(phase=2, cleanup=cleanup, decisions=decisions)
+        return self._frame(phase=2, cleanup=cleanup, nodes_before=nodes_before,
+                           decisions=decisions)
 
     @staticmethod
     def _resolve_winner(offers: Dict[int, int],
@@ -767,7 +772,7 @@ class GraphOfLife:
     # Frames (what the viewer consumes)
     # ------------------------------------------------------------------------
 
-    def _frame(self, phase: int, cleanup: Dict[str, Any],
+    def _frame(self, phase: int, cleanup: Dict[str, Any], nodes_before: int,
                decisions: Dict[str, Any] | None) -> Dict[str, Any]:
         """
         Snapshot the world for the viewer.
@@ -782,6 +787,7 @@ class GraphOfLife:
         frame: Dict[str, Any] = {
             "iteration": self.iteration,
             "phase": phase,
+            "nodes_before": int(nodes_before),
             "ids": [int(u) for u in nodes],
             "tokens": [int(self.tokens.get(u, 0)) for u in nodes],
             "brain_ids": [int(brains[u].brain_id) for u in nodes],

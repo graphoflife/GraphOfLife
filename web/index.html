@@ -19,131 +19,130 @@
 
 <!-- ==================== RUNS VIEW ==================== -->
 <main id="view-runs" class="view active">
-  <section class="panel">
-    <h2>New simulation</h2>
-    <form id="newRunForm" class="config-form">
-      <div class="field wide">
-        <label for="runName">Name</label>
-        <input type="text" id="runName" placeholder="e.g. high mutation, small world">
-      </div>
+  <div class="runs-layout" id="runsLayout">
 
-      <fieldset>
-        <legend>Economy</legend>
-        <div class="field">
-          <label for="cfg_total_tokens">Total tokens</label>
-          <input type="number" id="cfg_total_tokens" data-cfg="total_tokens" min="1" step="1">
-          <small>Conserved. Also sets the default graph size.</small>
+    <section class="panel new-run-panel">
+      <h2>New simulation</h2>
+      <form id="newRunForm" class="config-form">
+        <div class="field name-field">
+          <label for="runName">Name <span class="hint">(blank = auto, e.g. GOL_26_08_07_n001)</span></label>
+          <input type="text" id="runName" placeholder="leave blank for the generated id">
         </div>
-        <div class="field">
-          <label for="cfg_tokens_created_per_phase">Tokens created per phase</label>
-          <input type="number" id="cfg_tokens_created_per_phase" data-cfg="tokens_created_per_phase" min="0" step="1">
-          <small>0 keeps the economy closed.</small>
-        </div>
-      </fieldset>
 
-      <fieldset>
-        <legend>Seed graph (Watts-Strogatz)</legend>
-        <div class="field">
-          <label for="cfg_n_nodes">Nodes <span class="hint">(0 = tokens/100)</span></label>
-          <input type="number" id="cfg_n_nodes" data-cfg="n_nodes" min="0" step="1">
-        </div>
-        <div class="field">
-          <label for="cfg_k_neighbors">Neighbors k <span class="hint">(0 = auto)</span></label>
-          <input type="number" id="cfg_k_neighbors" data-cfg="k_neighbors" min="0" step="1">
-        </div>
-        <div class="field">
-          <label for="cfg_rewire_p">Rewire p</label>
-          <input type="number" id="cfg_rewire_p" data-cfg="rewire_p" min="0" max="1" step="0.01">
-        </div>
-      </fieldset>
+        <div class="config-columns">
+          <fieldset>
+            <legend>Economy</legend>
+            <div class="field">
+              <label for="cfg_total_tokens">Total tokens</label>
+              <input type="number" id="cfg_total_tokens" data-cfg="total_tokens" min="1" step="1">
+            </div>
+            <div class="field">
+              <label for="cfg_tokens_created_per_phase">Created per phase</label>
+              <input type="number" id="cfg_tokens_created_per_phase" data-cfg="tokens_created_per_phase" min="0" step="1">
+            </div>
+            <legend class="sub">Seed graph</legend>
+            <div class="field">
+              <label for="cfg_n_nodes">Nodes <span class="hint">(0 = auto)</span></label>
+              <input type="number" id="cfg_n_nodes" data-cfg="n_nodes" min="0" step="1">
+            </div>
+            <div class="field">
+              <label for="cfg_k_neighbors">Neighbors k <span class="hint">(0 = auto)</span></label>
+              <input type="number" id="cfg_k_neighbors" data-cfg="k_neighbors" min="0" step="1">
+            </div>
+            <div class="field">
+              <label for="cfg_rewire_p">Rewire p</label>
+              <input type="number" id="cfg_rewire_p" data-cfg="rewire_p" min="0" max="1" step="0.01">
+            </div>
+          </fieldset>
 
-      <fieldset>
-        <legend>Brain</legend>
-        <div class="field">
-          <label for="cfg_hidden_layers">Hidden layers</label>
-          <input type="text" id="cfg_hidden_layers" data-cfg="hidden_layers" placeholder="50, 45, 40, 35, 30">
-          <small>Comma separated.</small>
+          <fieldset>
+            <legend>Brain</legend>
+            <div class="field">
+              <label for="cfg_hidden_layers">Hidden layers</label>
+              <input type="text" id="cfg_hidden_layers" data-cfg="hidden_layers" placeholder="50, 45, 40">
+            </div>
+            <div class="field">
+              <label for="cfg_message_amount">Message size</label>
+              <input type="number" id="cfg_message_amount" data-cfg="message_amount" min="0" step="1">
+            </div>
+            <div class="field">
+              <label for="cfg_random_input_amount">Noise inputs</label>
+              <input type="number" id="cfg_random_input_amount" data-cfg="random_input_amount" min="0" step="1">
+            </div>
+            <div class="field checkbox">
+              <label><input type="checkbox" id="cfg_exchange_messages" data-cfg="exchange_messages"> Exchange messages</label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Mutation</legend>
+            <div class="field">
+              <label for="cfg_mutation_probability">Probability</label>
+              <input type="number" id="cfg_mutation_probability" data-cfg="mutation_probability" min="0" max="1" step="0.01">
+            </div>
+            <div class="field">
+              <label for="cfg_mutation_noise_std">Noise std</label>
+              <input type="number" id="cfg_mutation_noise_std" data-cfg="mutation_noise_std" min="0" step="0.01">
+            </div>
+            <div class="field">
+              <label for="cfg_mutation_sparsity">Sparsity</label>
+              <input type="number" id="cfg_mutation_sparsity" data-cfg="mutation_sparsity" min="0" max="1" step="0.01">
+            </div>
+            <div class="field">
+              <label for="cfg_seed">Seed <span class="hint">(blank = random)</span></label>
+              <input type="number" id="cfg_seed" data-cfg="seed" step="1">
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Run control</legend>
+            <div class="field">
+              <label for="cfg_max_steps">Max iterations</label>
+              <input type="number" id="cfg_max_steps" data-cfg="max_steps" min="1" step="1">
+            </div>
+            <div class="field">
+              <label for="cfg_extinction_threshold">Extinction below</label>
+              <input type="number" id="cfg_extinction_threshold" data-cfg="extinction_threshold" min="0" step="1">
+            </div>
+            <div class="field">
+              <label for="cfg_checkpoint_every">Checkpoint every</label>
+              <input type="number" id="cfg_checkpoint_every" data-cfg="checkpoint_every" min="0" step="1">
+            </div>
+            <div class="field">
+              <label for="cfg_export_every">Record every</label>
+              <input type="number" id="cfg_export_every" data-cfg="export_every" min="1" step="1">
+            </div>
+            <div class="field checkbox">
+              <label><input type="checkbox" id="cfg_export_decisions" data-cfg="export_decisions"> Record decisions</label>
+            </div>
+          </fieldset>
         </div>
-        <div class="field">
-          <label for="cfg_message_amount">Message size</label>
-          <input type="number" id="cfg_message_amount" data-cfg="message_amount" min="0" step="1">
-        </div>
-        <div class="field">
-          <label for="cfg_random_input_amount">Noise inputs</label>
-          <input type="number" id="cfg_random_input_amount" data-cfg="random_input_amount" min="0" step="1">
-        </div>
-        <div class="field checkbox">
-          <label><input type="checkbox" id="cfg_exchange_messages" data-cfg="exchange_messages"> Exchange messages</label>
-        </div>
+
         <p class="derived" id="derivedInfo"></p>
-      </fieldset>
 
-      <fieldset>
-        <legend>Mutation</legend>
-        <div class="field">
-          <label for="cfg_mutation_probability">Probability</label>
-          <input type="number" id="cfg_mutation_probability" data-cfg="mutation_probability" min="0" max="1" step="0.01">
+        <div class="form-actions">
+          <button type="submit" class="primary">Create run</button>
+          <button type="button" id="resetDefaults">Reset to defaults</button>
+          <span class="form-error" id="createError"></span>
         </div>
-        <div class="field">
-          <label for="cfg_mutation_noise_std">Noise std</label>
-          <input type="number" id="cfg_mutation_noise_std" data-cfg="mutation_noise_std" min="0" step="0.01">
-        </div>
-        <div class="field">
-          <label for="cfg_mutation_sparsity">Sparsity</label>
-          <input type="number" id="cfg_mutation_sparsity" data-cfg="mutation_sparsity" min="0" max="1" step="0.01">
-        </div>
-      </fieldset>
+      </form>
+    </section>
 
-      <fieldset>
-        <legend>Run control</legend>
-        <div class="field">
-          <label for="cfg_max_steps">Max iterations</label>
-          <input type="number" id="cfg_max_steps" data-cfg="max_steps" min="1" step="1">
-        </div>
-        <div class="field">
-          <label for="cfg_extinction_threshold">Extinction below</label>
-          <input type="number" id="cfg_extinction_threshold" data-cfg="extinction_threshold" min="0" step="1">
-        </div>
-        <div class="field">
-          <label for="cfg_checkpoint_every">Checkpoint every</label>
-          <input type="number" id="cfg_checkpoint_every" data-cfg="checkpoint_every" min="0" step="1">
-          <small>Iterations between resume points. Only the latest is kept.</small>
-        </div>
-        <div class="field">
-          <label for="cfg_seed">Seed <span class="hint">(blank = random)</span></label>
-          <input type="number" id="cfg_seed" data-cfg="seed" step="1">
-        </div>
-        <div class="field">
-          <label for="cfg_export_every">Record every</label>
-          <input type="number" id="cfg_export_every" data-cfg="export_every" min="1" step="1">
-          <small>1 records every iteration.</small>
-        </div>
-        <div class="field checkbox">
-          <label><input type="checkbox" id="cfg_export_decisions" data-cfg="export_decisions"> Record decisions</label>
-          <small>Enables the decision inspector. Costs disk.</small>
-        </div>
-      </fieldset>
+    <div class="resizer" id="runsResizer" title="Drag to resize"></div>
 
-      <div class="form-actions">
-        <button type="submit" class="primary">Create run</button>
-        <button type="button" id="resetDefaults">Reset to defaults</button>
-        <span class="form-error" id="createError"></span>
+    <section class="panel runs-panel">
+      <div class="panel-head">
+        <h2>Simulations on this machine</h2>
+        <button id="refreshRuns" class="ghost small">Refresh</button>
       </div>
-    </form>
-  </section>
-
-  <section class="panel">
-    <div class="panel-head">
-      <h2>Simulations on this machine</h2>
-      <button id="refreshRuns" class="ghost">Refresh</button>
-    </div>
-    <div id="runList" class="run-list"></div>
-  </section>
+      <div id="runList" class="run-list"></div>
+    </section>
+  </div>
 </main>
 
 <!-- ==================== VIEWER VIEW ==================== -->
 <main id="view-viewer" class="view">
-  <div class="viewer-layout">
+  <div class="viewer-layout" id="viewerLayout">
 
     <div class="canvas-column">
       <div class="canvas-wrap">
@@ -159,10 +158,30 @@
         <button id="btnNext" title="Next frame (→)">▶︎</button>
         <button id="btnLast" title="Last frame (End)">⏭</button>
         <input type="range" id="frameSlider" min="0" max="0" value="0">
-        <span class="frame-label" id="frameLabel">—</span>
+
+        <!-- Fixed-width so the bar cannot reflow as the text length changes. -->
+        <span class="frame-label" id="frameLabel">
+          <span class="fl-iter" id="flIter">—</span>
+          <span class="fl-phase" id="flPhase"></span>
+          <span class="fl-pos" id="flPos"></span>
+        </span>
+
         <label class="speed">Speed
           <input type="range" id="playSpeed" min="1" max="30" value="6">
         </label>
+      </div>
+
+      <div class="view-toggles">
+        <div class="seg" id="dimToggle" role="group" aria-label="Dimensions">
+          <button class="seg-btn active" data-dim="2">2D</button>
+          <button class="seg-btn" data-dim="3">3D</button>
+        </div>
+        <div class="seg" id="phaseToggle" role="group" aria-label="Phase filter">
+          <button class="seg-btn active" data-phase="all">All phases</button>
+          <button class="seg-btn" data-phase="1">Reproduction</button>
+          <button class="seg-btn" data-phase="2">Game</button>
+        </div>
+        <span class="hint" id="dimHint">Drag to pan · scroll to zoom</span>
       </div>
 
       <div class="stats-strip" id="statsStrip"></div>
@@ -179,127 +198,168 @@
       </div>
     </div>
 
-    <aside class="controls">
-      <div class="control-group">
-        <h3>Run</h3>
-        <select id="runPicker"></select>
-        <div class="control-row">
-          <button id="btnReloadFrames" class="ghost small">Reload frames</button>
+    <div class="resizer" id="viewerResizer" title="Drag to resize"></div>
+
+    <aside class="controls" id="viewerControls">
+      <details class="control-group" open>
+        <summary><h3>Run</h3></summary>
+        <div class="group-body">
+          <select id="runPicker"></select>
+          <div class="control-row">
+            <button id="btnReloadFrames" class="ghost small">Reload frames</button>
+          </div>
         </div>
-      </div>
+      </details>
 
-      <div class="control-group">
-        <h3>Nodes</h3>
-        <label>Colour by
-          <select id="nodeColorBy">
-            <option value="tokens">Tokens</option>
-            <option value="log_tokens">Tokens (log)</option>
-            <option value="degree">Degree</option>
-            <option value="brain_id">Brain id</option>
-            <option value="parent_brain_id">Parent brain id</option>
-            <option value="age">Node id (age)</option>
-            <option value="token_share">Share of total tokens</option>
-            <option value="constant">Constant</option>
-          </select>
-        </label>
-        <label>Colour map
-          <select id="nodeColormap"></select>
-        </label>
-        <label class="check"><input type="checkbox" id="nodeColorReverse"> Reverse map</label>
-        <label>Size by
-          <select id="nodeSizeBy">
-            <option value="tokens">Tokens</option>
-            <option value="log_tokens">Tokens (log)</option>
-            <option value="degree">Degree</option>
-            <option value="constant">Constant</option>
-          </select>
-        </label>
-        <label>Min size <input type="range" id="nodeSizeMin" min="0.5" max="10" step="0.5" value="1.5"></label>
-        <label>Max size <input type="range" id="nodeSizeMax" min="1" max="40" step="0.5" value="9"></label>
-        <label>Opacity <input type="range" id="nodeAlpha" min="0.05" max="1" step="0.05" value="0.9"></label>
-        <label class="check"><input type="checkbox" id="nodeOutline"> Outline</label>
-      </div>
-
-      <div class="control-group">
-        <h3>Edges</h3>
-        <label class="check"><input type="checkbox" id="edgeShow" checked> Draw edges</label>
-        <label>Colour by
-          <select id="edgeColorBy">
-            <option value="constant">Constant</option>
-            <option value="avg_tokens">Average endpoint tokens</option>
-            <option value="min_tokens">Weaker endpoint tokens</option>
-            <option value="max_tokens">Stronger endpoint tokens</option>
-            <option value="avg_degree">Average endpoint degree</option>
-            <option value="flow">Token flow (phase 2)</option>
-            <option value="source">Inherit from node colour</option>
-          </select>
-        </label>
-        <label>Colour map
-          <select id="edgeColormap"></select>
-        </label>
-        <label>Flat colour <input type="color" id="edgeFlatColor" value="#5f7d95"></label>
-        <label>Width by
-          <select id="edgeWidthBy">
-            <option value="constant">Constant</option>
-            <option value="avg_tokens">Average endpoint tokens</option>
-            <option value="avg_degree">Average endpoint degree</option>
-            <option value="flow">Token flow (phase 2)</option>
-          </select>
-        </label>
-        <label>Min width <input type="range" id="edgeWidthMin" min="0.1" max="4" step="0.1" value="0.3"></label>
-        <label>Max width <input type="range" id="edgeWidthMax" min="0.2" max="10" step="0.1" value="1.6"></label>
-        <label>Opacity <input type="range" id="edgeAlpha" min="0.02" max="1" step="0.02" value="0.25"></label>
-      </div>
-
-      <div class="control-group">
-        <h3>Background</h3>
-        <label>Style
-          <select id="bgStyle">
-            <option value="solid">Solid</option>
-            <option value="radial">Radial gradient</option>
-            <option value="linear">Linear gradient</option>
-          </select>
-        </label>
-        <label>Colour A <input type="color" id="bgColorA" value="#0d1117"></label>
-        <label>Colour B <input type="color" id="bgColorB" value="#1d2530"></label>
-        <label class="check"><input type="checkbox" id="showLegend" checked> Show legend</label>
-      </div>
-
-      <div class="control-group">
-        <h3>Layout</h3>
-        <label>Repulsion <input type="range" id="forceCharge" min="10" max="400" step="10" value="120"></label>
-        <label>Link strength <input type="range" id="forceLink" min="0.01" max="0.6" step="0.01" value="0.12"></label>
-        <label>Centering <input type="range" id="forceCenter" min="0" max="0.1" step="0.002" value="0.012"></label>
-        <label>Angular spread <input type="range" id="forceAngular" min="0" max="1" step="0.01" value="0.15"></label>
-        <small class="hint">Spreads each node's edges evenly around it — 180° at degree 2, 120° at degree 3. Dense graphs need a higher setting to show it.</small>
-        <label>Damping <input type="range" id="forceDamping" min="0.5" max="0.98" step="0.01" value="0.86"></label>
-        <div class="control-row">
-          <button id="btnReheat" class="ghost small">Reheat</button>
-          <button id="btnRelayout" class="ghost small">Fresh layout</button>
-          <button id="btnFit" class="ghost small">Fit view</button>
+      <details class="control-group" open>
+        <summary><h3>Nodes</h3></summary>
+        <div class="group-body">
+          <label>Colour by
+            <select id="nodeColorBy">
+              <option value="tokens">Tokens</option>
+              <option value="log_tokens">Tokens (log)</option>
+              <option value="degree">Degree</option>
+              <option value="log_degree">Degree (log)</option>
+              <option value="brain_id">Brain id</option>
+              <option value="parent_brain_id">Parent brain id</option>
+              <option value="age">Node id (age)</option>
+              <option value="token_share">Share of total tokens</option>
+              <option value="constant">Constant</option>
+            </select>
+          </label>
+          <label>Colour map <select id="nodeColormap"></select></label>
+          <label class="check"><input type="checkbox" id="nodeColorReverse"> Reverse map</label>
+          <label>Size by
+            <select id="nodeSizeBy">
+              <option value="tokens">Tokens</option>
+              <option value="log_tokens">Tokens (log)</option>
+              <option value="degree">Degree</option>
+              <option value="log_degree">Degree (log)</option>
+              <option value="constant">Constant</option>
+            </select>
+          </label>
+          <label>Min size <input type="range" id="nodeSizeMin" min="0.5" max="10" step="0.5" value="1.5"></label>
+          <label>Max size <input type="range" id="nodeSizeMax" min="1" max="40" step="0.5" value="9"></label>
+          <label>Opacity <input type="range" id="nodeAlpha" min="0.05" max="1" step="0.05" value="0.9"></label>
+          <label class="check"><input type="checkbox" id="nodeOutline"> Outline</label>
         </div>
-        <label class="check"><input type="checkbox" id="layoutCarry" checked> Carry positions between frames</label>
-        <small class="hint">Newborns start near their parent, so lineages stay visually together.</small>
-      </div>
+      </details>
 
-      <div class="control-group">
-        <h3>Presets</h3>
-        <div class="control-row">
-          <button class="ghost small" data-preset="wealth">Wealth</button>
-          <button class="ghost small" data-preset="lineage">Lineage</button>
-          <button class="ghost small" data-preset="structure">Structure</button>
-          <button class="ghost small" data-preset="minimal">Minimal</button>
+      <details class="control-group" open>
+        <summary><h3>Edges</h3></summary>
+        <div class="group-body">
+          <label class="check"><input type="checkbox" id="edgeShow" checked> Draw edges</label>
+          <label>Colour by
+            <select id="edgeColorBy">
+              <option value="constant">Constant</option>
+              <option value="avg_tokens">Average endpoint tokens</option>
+              <option value="log_avg_tokens">Average endpoint tokens (log)</option>
+              <option value="min_tokens">Weaker endpoint tokens</option>
+              <option value="max_tokens">Stronger endpoint tokens</option>
+              <option value="avg_degree">Average endpoint degree</option>
+              <option value="log_avg_degree">Average endpoint degree (log)</option>
+              <option value="flow">Token flow (game phase)</option>
+              <option value="log_flow">Token flow (log)</option>
+              <option value="source">Inherit from node colour</option>
+            </select>
+          </label>
+          <label>Colour map <select id="edgeColormap"></select></label>
+          <label>Flat colour <input type="color" id="edgeFlatColor" value="#5f7d95"></label>
+          <label>Width by
+            <select id="edgeWidthBy">
+              <option value="constant">Constant</option>
+              <option value="avg_tokens">Average endpoint tokens</option>
+              <option value="log_avg_tokens">Average endpoint tokens (log)</option>
+              <option value="avg_degree">Average endpoint degree</option>
+              <option value="log_avg_degree">Average endpoint degree (log)</option>
+              <option value="flow">Token flow (game phase)</option>
+              <option value="log_flow">Token flow (log)</option>
+            </select>
+          </label>
+          <label>Min width <input type="range" id="edgeWidthMin" min="0.1" max="4" step="0.1" value="0.3"></label>
+          <label>Max width <input type="range" id="edgeWidthMax" min="0.2" max="10" step="0.1" value="1.6"></label>
+          <label>Opacity <input type="range" id="edgeAlpha" min="0.02" max="1" step="0.02" value="0.25"></label>
         </div>
-      </div>
+      </details>
+
+      <details class="control-group">
+        <summary><h3>Background</h3></summary>
+        <div class="group-body">
+          <label>Style
+            <select id="bgStyle">
+              <option value="solid">Solid</option>
+              <option value="radial">Radial gradient</option>
+              <option value="linear">Linear gradient</option>
+            </select>
+          </label>
+          <label>Colour A <input type="color" id="bgColorA" value="#0d1117"></label>
+          <label>Colour B <input type="color" id="bgColorB" value="#1d2530"></label>
+          <label class="check"><input type="checkbox" id="showLegend" checked> Show legend</label>
+        </div>
+      </details>
+
+      <details class="control-group">
+        <summary><h3>Layout</h3></summary>
+        <div class="group-body">
+          <label>Repulsion <input type="range" id="forceCharge" min="10" max="400" step="10" value="120"></label>
+          <label>Link strength <input type="range" id="forceLink" min="0.01" max="0.6" step="0.01" value="0.12"></label>
+          <label>Centering <input type="range" id="forceCenter" min="0" max="0.1" step="0.002" value="0.012"></label>
+          <label>Angular spread <input type="range" id="forceAngular" min="0" max="1" step="0.01" value="0.15"></label>
+          <small class="hint">Spreads each node's edges evenly — 180° at degree 2, 120° at degree 3.</small>
+          <label>Damping <input type="range" id="forceDamping" min="0.5" max="0.98" step="0.01" value="0.86"></label>
+          <div class="control-row">
+            <button id="btnReheat" class="ghost small">Reheat</button>
+            <button id="btnRelayout" class="ghost small">Fresh layout</button>
+            <button id="btnFit" class="ghost small">Fit view</button>
+          </div>
+          <label class="check"><input type="checkbox" id="layoutCarry" checked> Carry positions between frames</label>
+        </div>
+      </details>
+
+      <details class="control-group" open>
+        <summary><h3>Presets</h3></summary>
+        <div class="group-body">
+          <div class="control-row">
+            <button class="ghost small" data-preset="wealth">Wealth</button>
+            <button class="ghost small" data-preset="lineage">Lineage</button>
+            <button class="ghost small" data-preset="structure">Structure</button>
+            <button class="ghost small" data-preset="minimal">Minimal</button>
+          </div>
+          <label class="saved-label">Saved presets</label>
+          <select id="savedPresets" size="4"></select>
+          <div class="control-row">
+            <input type="text" id="presetName" placeholder="preset name" class="preset-name">
+          </div>
+          <div class="control-row">
+            <button id="btnSavePreset" class="ghost small">Save</button>
+            <button id="btnApplyPreset" class="ghost small">Apply</button>
+            <button id="btnUpdatePreset" class="ghost small">Update</button>
+            <button id="btnDeletePreset" class="ghost small danger">Delete</button>
+          </div>
+        </div>
+      </details>
     </aside>
   </div>
 </main>
+
+<!-- Statistic detail: explanation plus history across the run -->
+<div id="statDetail" class="stat-detail hidden">
+  <div class="stat-detail-head">
+    <h3 id="statDetailTitle">—</h3>
+    <button id="statDetailClose" class="ghost small">✕</button>
+  </div>
+  <p id="statDetailText" class="stat-detail-text"></p>
+  <canvas id="statDetailChart" height="170"></canvas>
+  <p id="statDetailFoot" class="hint"></p>
+</div>
 
 <script src="js/colormaps.js"></script>
 <script src="js/api.js"></script>
 <script src="js/force.js"></script>
 <script src="js/render.js"></script>
 <script src="js/stats.js"></script>
+<script src="js/statdetail.js"></script>
+<script src="js/presets.js"></script>
 <script src="js/runs.js"></script>
 <script src="js/viewer.js"></script>
 <script src="js/app.js"></script>

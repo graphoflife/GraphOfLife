@@ -19,7 +19,7 @@ class SimConfig:
 
     # ---- Economy ----
     # Total tokens in the world. Conserved unless tokens_created_per_phase > 0.
-    total_tokens: int = 150_000
+    total_tokens: int = 10_000
     # Tokens injected at every cleanup. 0 keeps the economy closed.
     tokens_created_per_phase: int = 0
 
@@ -42,9 +42,9 @@ class SimConfig:
     mutation_sparsity: float = 0.1
 
     # ---- Run control ----
-    max_steps: int = 500_000
+    max_steps: int = 10_000
     # Below this node count the run is declared extinct and stops.
-    extinction_threshold: int = 50
+    extinction_threshold: int = 20
     # Write a resume checkpoint every N iterations. 0 disables checkpointing.
     checkpoint_every: int = 20
     # Random seed for reproducibility. None means "seed from entropy".

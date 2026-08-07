@@ -23,6 +23,7 @@ API
     POST   /api/runs/<id>/start       start or resume  {steps?}
     POST   /api/runs/<id>/stop        ask a running worker to stop
     GET    /api/runs/<id>/frames/<n>  one recorded frame
+    GET    /api/runs/<id>/series      per-frame statistics for the whole run
 """
 from __future__ import annotations
 
@@ -263,6 +264,11 @@ class Handler(BaseHTTPRequestHandler):
 
             if len(parts) == 3 and parts[:2] == ["api", "runs"]:
                 self._send_json(self._decorate(store.load_meta(parts[2])))
+                return
+
+            if len(parts) == 4 and parts[:2] == ["api", "runs"] and parts[3] == "series":
+                import gol_series
+                self._send_json(gol_series.build_series(parts[2]))
                 return
 
             if len(parts) == 5 and parts[:2] == ["api", "runs"] and parts[3] == "frames":

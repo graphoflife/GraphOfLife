@@ -1,4 +1,4 @@
-/* Tab switching and start-up. */
+/* Tab switching, panel resizing, and start-up. */
 const App = {
   view: 'runs',
 
@@ -8,7 +8,59 @@ const App = {
     }
 
     Viewer.init();
+    StatDetail.init();
     RunsView.init();
+
+    // Both layouts are two panes plus a drag handle; the handle sets the width
+    // of the second column and the choice is remembered per layout.
+    this.makeResizable('runsLayout', 'runsResizer', 'gol.width.runs', 320, 900, 420);
+    this.makeResizable('viewerLayout', 'viewerResizer', 'gol.width.viewer', 200, 620, 268);
+  },
+
+  /**
+   * Turn a divider into a drag handle that resizes the right-hand column.
+   *
+   * The width is applied to the grid template rather than the panel itself, so
+   * the canvas column reflows and its ResizeObserver picks the change up.
+   */
+  makeResizable(layoutId, resizerId, storageKey, min, max, fallback) {
+    const layout = document.getElementById(layoutId);
+    const resizer = document.getElementById(resizerId);
+    if (!layout || !resizer) return;
+
+    const clamp = w => Math.max(min, Math.min(max, w));
+    const apply = w => { layout.style.gridTemplateColumns = `1fr 6px ${clamp(w)}px`; };
+
+    const stored = Number(localStorage.getItem(storageKey));
+    apply(Number.isFinite(stored) && stored > 0 ? stored : fallback);
+
+    let dragging = false;
+
+    resizer.addEventListener('mousedown', e => {
+      dragging = true;
+      document.body.classList.add('resizing');
+      e.preventDefault();
+    });
+
+    window.addEventListener('mousemove', e => {
+      if (!dragging) return;
+      // Measured from the right edge, which is where the panel actually ends.
+      apply(layout.getBoundingClientRect().right - e.clientX);
+    });
+
+    window.addEventListener('mouseup', () => {
+      if (!dragging) return;
+      dragging = false;
+      document.body.classList.remove('resizing');
+
+      const width = parseInt(layout.style.gridTemplateColumns.split(' ').pop(), 10);
+      if (Number.isFinite(width)) localStorage.setItem(storageKey, String(width));
+    });
+
+    resizer.addEventListener('dblclick', () => {
+      apply(fallback);
+      localStorage.setItem(storageKey, String(fallback));
+    });
   },
 
   showView(name) {

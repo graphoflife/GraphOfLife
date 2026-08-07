@@ -33,6 +33,7 @@ class FrameMetrics {
     tokens: 'Tokens',
     log_tokens: 'Tokens (log)',
     degree: 'Degree',
+    log_degree: 'Degree (log)',
     brain_id: 'Brain id',
     parent_brain_id: 'Parent brain id',
     age: 'Node id (age)',
@@ -41,7 +42,9 @@ class FrameMetrics {
   };
 
   static formatValue(v, kind) {
-    if (kind === 'log_tokens') return Math.round(Math.expm1(v)).toLocaleString('en-US');
+    if (kind === 'log_tokens' || kind === 'log_degree') {
+      return Math.round(Math.expm1(v)).toLocaleString('en-US');
+    }
     if (kind === 'token_share') return `${(v * 100).toFixed(2)}%`;
     return Math.round(v).toLocaleString('en-US');
   }
@@ -93,6 +96,7 @@ class FrameMetrics {
         case 'tokens':          out[i] = f.tokens[i]; break;
         case 'log_tokens':      out[i] = Math.log1p(f.tokens[i]); break;
         case 'degree':          out[i] = this.degree[i]; break;
+        case 'log_degree':      out[i] = Math.log1p(this.degree[i]); break;
         case 'brain_id':        out[i] = f.brain_ids[i]; break;
         case 'parent_brain_id': out[i] = f.parent_brain_ids[i]; break;
         case 'age':             out[i] = f.ids[i]; break;
@@ -140,7 +144,9 @@ class FrameMetrics {
     if (ia === undefined || ib === undefined) return 0;
     const f = this.frame;
 
-    switch (kind) {
+    // Log variants share the underlying quantity; only the scale differs, and
+    // that is applied once in _edgeNorm rather than duplicated per case.
+    switch (FrameMetrics.baseEdgeKind(kind)) {
       case 'avg_tokens': return (f.tokens[ia] + f.tokens[ib]) / 2;
       case 'min_tokens': return Math.min(f.tokens[ia], f.tokens[ib]);
       case 'max_tokens': return Math.max(f.tokens[ia], f.tokens[ib]);
@@ -151,6 +157,11 @@ class FrameMetrics {
       }
       default: return 0;
     }
+  }
+
+  /** Strip a leading `log_` to get the quantity underneath. */
+  static baseEdgeKind(kind) {
+    return kind.startsWith('log_') ? kind.slice(4) : kind;
   }
 
   _edgeRange(kind) {
@@ -168,28 +179,35 @@ class FrameMetrics {
     return range;
   }
 
-  edgeColorNorm(a, b) {
-    const kind = this.settings.edgeColorBy;
+  /**
+   * Normalised value for an edge under the given mode.
+   *
+   * Raw flow is heavily skewed — a handful of edges carry most of the tokens —
+   * so it is always read on a log scale; everything else offers log as an
+   * explicit `log_` option.
+   */
+  _edgeNorm(kind, a, b) {
     if (kind === 'constant' || kind === 'source') return 0.5;
-    // Flow is heavily skewed — a log scale keeps the busiest edges from
-    // flattening everything else into a single colour.
-    if (kind === 'flow') {
-      const range = this._edgeRange(kind);
-      return FrameMetrics._norm(Math.log1p(this._edgeRaw(kind, a, b)),
-                                [Math.log1p(range[0]), Math.log1p(range[1])]);
+
+    const range = this._edgeRange(kind);
+    const value = this._edgeRaw(kind, a, b);
+
+    if (kind === 'flow' || kind.startsWith('log_')) {
+      return FrameMetrics._norm(Math.log1p(Math.max(0, value)),
+                                [Math.log1p(Math.max(0, range[0])),
+                                 Math.log1p(Math.max(0, range[1]))]);
     }
-    return FrameMetrics._norm(this._edgeRaw(kind, a, b), this._edgeRange(kind));
+    return FrameMetrics._norm(value, range);
+  }
+
+  edgeColorNorm(a, b) {
+    return this._edgeNorm(this.settings.edgeColorBy, a, b);
   }
 
   edgeWidthNorm(a, b) {
     const kind = this.settings.edgeWidthBy;
     if (kind === 'constant') return 0;
-    if (kind === 'flow') {
-      const range = this._edgeRange(kind);
-      return FrameMetrics._norm(Math.log1p(this._edgeRaw(kind, a, b)),
-                                [Math.log1p(range[0]), Math.log1p(range[1])]);
-    }
-    return FrameMetrics._norm(this._edgeRaw(kind, a, b), this._edgeRange(kind));
+    return this._edgeNorm(kind, a, b);
   }
 
   // ---- summary --------------------------------------------------------
@@ -224,6 +242,9 @@ class FrameMetrics {
     return {
       iteration: f.iteration,
       phase: f.phase,
+      // How many nodes entered this phase. Older runs predate the field, in
+      // which case the caller falls back to the previous frame's node count.
+      nodesBefore: (typeof f.nodes_before === 'number') ? f.nodes_before : null,
       nodes: n,
       edges: f.edges.length,
       tokens: this.totalTokens,

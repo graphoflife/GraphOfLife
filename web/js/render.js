@@ -1,10 +1,15 @@
 /*
- * Canvas renderer for a single frame.
+ * Canvas renderer for a single frame, in two or three dimensions.
  *
  * Everything visual is driven by a settings object: which quantity drives node
  * colour, which drives node size, the same for edges, background style, and
  * opacities. The renderer only maps numbers to pixels — it never decides what
  * a value means.
+ *
+ * 3D is a projection, not a separate engine. Points are rotated by yaw and
+ * pitch, given a perspective divide, and drawn back-to-front so nearer nodes
+ * cover farther ones. In 2D the same path runs with the rotation skipped, so
+ * there is one drawing routine rather than two.
  */
 class GraphRenderer {
   constructor(canvas) {
@@ -12,6 +17,15 @@ class GraphRenderer {
     this.ctx = canvas.getContext('2d');
     this.view = { scale: 1, offsetX: 0, offsetY: 0 };
     this.dpr = window.devicePixelRatio || 1;
+
+    this.mode3D = false;
+    this.yaw = 0.6;
+    this.pitch = -0.35;
+    // Distance of the eye from the scene centre, in world units. Larger means
+    // a flatter, more orthographic look.
+    this.cameraDistance = 900;
+
+    this._depthOrder = [];
   }
 
   resize() {
@@ -23,24 +37,71 @@ class GraphRenderer {
     this.cssHeight = rect.height;
   }
 
+  setMode3D(on) {
+    this.mode3D = Boolean(on);
+  }
+
+  rotate(dYaw, dPitch) {
+    this.yaw += dYaw;
+    // Stop short of straight up or down; passing the pole flips the scene.
+    const limit = Math.PI / 2 - 0.05;
+    this.pitch = Math.max(-limit, Math.min(limit, this.pitch + dPitch));
+  }
+
   /** Fit the given world-space bounds into the canvas. */
   fit(bounds) {
     const w = bounds.maxX - bounds.minX;
     const h = bounds.maxY - bounds.minY;
     if (w <= 0 || h <= 0) return;
 
-    const scale = Math.min(this.cssWidth / w, this.cssHeight / h);
+    // In 3D the projection shrinks things, and rotation can swing the depth
+    // axis into view, so leave extra room rather than clipping on every turn.
+    const margin = this.mode3D ? 0.62 : 1;
+    const scale = Math.min(this.cssWidth / w, this.cssHeight / h) * margin;
+
     this.view.scale = scale;
     this.view.offsetX = this.cssWidth / 2 - (bounds.minX + w / 2) * scale;
     this.view.offsetY = this.cssHeight / 2 - (bounds.minY + h / 2) * scale;
   }
 
-  toScreen(p) {
+  /**
+   * World point to screen point.
+   *
+   * Returns a depth alongside the coordinates: larger means nearer the eye.
+   * In 2D the depth is constant and the perspective divide is skipped.
+   */
+  project(p) {
+    if (!this.mode3D) {
+      return {
+        x: p.x * this.view.scale + this.view.offsetX,
+        y: p.y * this.view.scale + this.view.offsetY,
+        depth: 0,
+        k: 1
+      };
+    }
+
+    const cosYaw = Math.cos(this.yaw), sinYaw = Math.sin(this.yaw);
+    const cosPitch = Math.cos(this.pitch), sinPitch = Math.sin(this.pitch);
+
+    // Yaw about the vertical axis, then pitch about the horizontal one.
+    const x1 = p.x * cosYaw + p.z * sinYaw;
+    const z1 = -p.x * sinYaw + p.z * cosYaw;
+    const y2 = p.y * cosPitch - z1 * sinPitch;
+    const z2 = p.y * sinPitch + z1 * cosPitch;
+
+    // Perspective divide, clamped so a node level with the eye cannot explode.
+    const denominator = Math.max(0.25, 1 + (z2 * this.view.scale) / this.cameraDistance);
+    const k = 1 / denominator;
+
     return {
-      x: p.x * this.view.scale + this.view.offsetX,
-      y: p.y * this.view.scale + this.view.offsetY
+      x: x1 * this.view.scale * k + this.view.offsetX,
+      y: y2 * this.view.scale * k + this.view.offsetY,
+      depth: -z2,
+      k
     };
   }
+
+  toScreen(p) { return this.project(p); }
 
   toWorld(sx, sy) {
     return {
@@ -74,8 +135,16 @@ class GraphRenderer {
     this._background(ctx, settings);
 
     if (frame) {
-      if (settings.edgeShow) this._edges(ctx, frame, metrics, layout, settings);
-      this._nodes(ctx, frame, metrics, layout, settings);
+      // One projection pass per draw, reused by edges, nodes and picking.
+      const screen = new Map();
+      for (const id of frame.ids) {
+        const p = layout.pos.get(id);
+        if (p) screen.set(id, this.project(p));
+      }
+      this._screen = screen;
+
+      if (settings.edgeShow) this._edges(ctx, frame, metrics, screen, settings);
+      this._nodes(ctx, frame, metrics, screen, settings);
       if (settings.showLegend) this._legend(ctx, metrics, settings);
     }
 
@@ -100,25 +169,22 @@ class GraphRenderer {
     ctx.fillRect(0, 0, w, h);
   }
 
-  _edges(ctx, frame, metrics, layout, s) {
+  _edges(ctx, frame, metrics, screen, s) {
     const edges = frame.edges;
     const flat = s.edgeColorBy === 'constant';
+    const uniformWidth = s.edgeWidthBy === 'constant';
 
     ctx.globalAlpha = s.edgeAlpha;
-    if (flat) {
-      ctx.strokeStyle = s.edgeFlatColor;
-      ctx.lineWidth = s.edgeWidthMin;
-    }
 
     // A single path is far cheaper than per-edge strokes, so the flat/constant
     // combination — the common case at scale — gets a fast path.
-    const uniformWidth = s.edgeWidthBy === 'constant';
     if (flat && uniformWidth) {
+      ctx.strokeStyle = s.edgeFlatColor;
+      ctx.lineWidth = s.edgeWidthMin;
       ctx.beginPath();
       for (const [a, b] of edges) {
-        const pa = layout.pos.get(a), pb = layout.pos.get(b);
-        if (!pa || !pb) continue;
-        const sa = this.toScreen(pa), sb = this.toScreen(pb);
+        const sa = screen.get(a), sb = screen.get(b);
+        if (!sa || !sb) continue;
         ctx.moveTo(sa.x, sa.y);
         ctx.lineTo(sb.x, sb.y);
       }
@@ -128,8 +194,8 @@ class GraphRenderer {
     }
 
     for (const [a, b] of edges) {
-      const pa = layout.pos.get(a), pb = layout.pos.get(b);
-      if (!pa || !pb) continue;
+      const sa = screen.get(a), sb = screen.get(b);
+      if (!sa || !sb) continue;
 
       const t = metrics.edgeColorNorm(a, b);
       ctx.strokeStyle = flat
@@ -139,9 +205,10 @@ class GraphRenderer {
             : colormapCss(s.edgeColormap, t, 1, false));
 
       const wNorm = metrics.edgeWidthNorm(a, b);
-      ctx.lineWidth = s.edgeWidthMin + (s.edgeWidthMax - s.edgeWidthMin) * wNorm;
+      let width = s.edgeWidthMin + (s.edgeWidthMax - s.edgeWidthMin) * wNorm;
+      if (this.mode3D) width *= (sa.k + sb.k) / 2;
 
-      const sa = this.toScreen(pa), sb = this.toScreen(pb);
+      ctx.lineWidth = Math.max(0.05, width);
       ctx.beginPath();
       ctx.moveTo(sa.x, sa.y);
       ctx.lineTo(sb.x, sb.y);
@@ -150,23 +217,40 @@ class GraphRenderer {
     ctx.globalAlpha = 1;
   }
 
-  _nodes(ctx, frame, metrics, layout, s) {
+  _nodes(ctx, frame, metrics, screen, s) {
     const ids = frame.ids;
     ctx.globalAlpha = s.nodeAlpha;
 
-    for (let i = 0; i < ids.length; i++) {
-      const p = layout.pos.get(ids[i]);
-      if (!p) continue;
+    // Back to front, so nearer nodes cover farther ones. In 2D every depth is
+    // equal and the sort is skipped entirely.
+    let order = this._depthOrder;
+    if (order.length !== ids.length) {
+      order = this._depthOrder = new Array(ids.length);
+    }
+    for (let i = 0; i < ids.length; i++) order[i] = i;
 
-      const screen = this.toScreen(p);
+    if (this.mode3D) {
+      order.sort((i, j) => {
+        const a = screen.get(ids[i]), b = screen.get(ids[j]);
+        return (a ? a.depth : 0) - (b ? b.depth : 0);
+      });
+    }
+
+    for (const i of order) {
+      const point = screen.get(ids[i]);
+      if (!point) continue;
+
       // Skip anything comfortably off-screen.
-      if (screen.x < -50 || screen.y < -50 ||
-          screen.x > this.cssWidth + 50 || screen.y > this.cssHeight + 50) continue;
+      if (point.x < -50 || point.y < -50 ||
+          point.x > this.cssWidth + 50 || point.y > this.cssHeight + 50) continue;
 
-      const radius = s.nodeSizeMin + (s.nodeSizeMax - s.nodeSizeMin) * metrics.nodeSizeNorm(i);
+      let radius = s.nodeSizeMin + (s.nodeSizeMax - s.nodeSizeMin) * metrics.nodeSizeNorm(i);
+      if (this.mode3D) radius *= point.k;
+      if (radius < 0.2) continue;
+
       ctx.fillStyle = metrics.nodeColorCssByIndex(i, 1);
       ctx.beginPath();
-      ctx.arc(screen.x, screen.y, radius, 0, Math.PI * 2);
+      ctx.arc(point.x, point.y, radius, 0, Math.PI * 2);
       ctx.fill();
 
       if (s.nodeOutline && radius > 2) {
@@ -208,12 +292,17 @@ class GraphRenderer {
   pick(frame, layout, sx, sy, maxPixels = 12) {
     if (!frame) return -1;
     let best = -1, bestDist = maxPixels * maxPixels;
+    const screen = this._screen;
 
     for (let i = 0; i < frame.ids.length; i++) {
-      const p = layout.pos.get(frame.ids[i]);
-      if (!p) continue;
-      const screen = this.toScreen(p);
-      const dx = screen.x - sx, dy = screen.y - sy;
+      const point = screen ? screen.get(frame.ids[i]) : null;
+      const projected = point || (() => {
+        const p = layout.pos.get(frame.ids[i]);
+        return p ? this.project(p) : null;
+      })();
+      if (!projected) continue;
+
+      const dx = projected.x - sx, dy = projected.y - sy;
       const dSq = dx * dx + dy * dy;
       if (dSq < bestDist) { bestDist = dSq; best = i; }
     }

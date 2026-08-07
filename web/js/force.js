@@ -1,5 +1,5 @@
 /*
- * Force-directed layout.
+ * Force-directed layout, in two or three dimensions.
  *
  * Written by hand rather than pulled from a CDN so the viewer keeps working
  * offline on any machine you clone the repo onto.
@@ -19,21 +19,55 @@
  * Positions persist across frames: a node keeps its coordinates as long as it
  * is alive, and a newborn is seeded next to its parent. That is what stops the
  * graph from scrambling every time you step forward.
+ *
+ * Every node always carries a z coordinate. In 2D mode it is simply held at
+ * zero, which keeps one code path for both modes and lets a switch to 3D lift
+ * the existing drawing off the plane instead of starting over.
  */
 class ForceLayout {
   constructor() {
-    this.pos = new Map();      // id -> {x, y, vx, vy}
+    this.pos = new Map();       // id -> {x, y, z, vx, vy, vz}
     this.ids = [];
     this.edges = [];
     this.adjacency = new Map(); // id -> [neighbour ids], for the angular force
     this.alpha = 1;
 
+    this.dimensions = 2;
     this.charge = 120;
     this.linkStrength = 0.12;
     this.linkDistance = 24;
     this.centerStrength = 0.012;
     this.angularStrength = 0.15;
     this.damping = 0.86;
+
+    // Spreading spokes pairwise costs O(d^2) at a node of degree d. Hubs are
+    // pinned by their own edges and barely move anyway, so past this degree the
+    // angular force is skipped rather than paid for.
+    this.maxAngularDegree = 24;
+  }
+
+  get is3D() { return this.dimensions === 3; }
+
+  /**
+   * Switch between 2D and 3D.
+   *
+   * Going up gives every node a small random z so the repulsion has something
+   * to work with — starting perfectly coplanar leaves no reason to separate.
+   * Going down flattens z back to zero.
+   */
+  setDimensions(dims) {
+    if (dims === this.dimensions) return;
+    this.dimensions = dims;
+
+    for (const p of this.pos.values()) {
+      if (dims === 3) {
+        p.z = (Math.random() - 0.5) * this.linkDistance * 2;
+      } else {
+        p.z = 0;
+      }
+      p.vz = 0;
+    }
+    this.reheat(0.8);
   }
 
   /**
@@ -57,13 +91,14 @@ class ForceLayout {
       // A newborn appears just beside its parent, so lineages stay together.
       const parent = parents ? parents[i] : -1;
       const anchor = (parent >= 0) ? this.pos.get(parent) : null;
-      const angle = Math.random() * Math.PI * 2;
       const radius = anchor ? spawnRadius : 200 * Math.sqrt(Math.random());
+      const dir = this._randomDirection();
+
       next.set(id, {
-        x: (anchor ? anchor.x : 0) + Math.cos(angle) * radius,
-        y: (anchor ? anchor.y : 0) + Math.sin(angle) * radius,
-        vx: 0,
-        vy: 0
+        x: (anchor ? anchor.x : 0) + dir.x * radius,
+        y: (anchor ? anchor.y : 0) + dir.y * radius,
+        z: (anchor ? anchor.z : 0) + dir.z * radius,
+        vx: 0, vy: 0, vz: 0
       });
     }
 
@@ -71,6 +106,18 @@ class ForceLayout {
     this.ids = ids;
     this.edges = edges;
     this._buildAdjacency();
+  }
+
+  _randomDirection() {
+    const angle = Math.random() * Math.PI * 2;
+    if (!this.is3D) {
+      return { x: Math.cos(angle), y: Math.sin(angle), z: 0 };
+    }
+    // Uniform on the sphere: cosine of the polar angle must be uniform, or
+    // points bunch at the poles.
+    const cosPolar = Math.random() * 2 - 1;
+    const sinPolar = Math.sqrt(1 - cosPolar * cosPolar);
+    return { x: sinPolar * Math.cos(angle), y: sinPolar * Math.sin(angle), z: cosPolar };
   }
 
   /** Neighbour lists, rebuilt once per frame for the angular force. */
@@ -93,11 +140,12 @@ class ForceLayout {
 
   scatter() {
     for (const p of this.pos.values()) {
-      const angle = Math.random() * Math.PI * 2;
       const radius = 250 * Math.sqrt(Math.random());
-      p.x = Math.cos(angle) * radius;
-      p.y = Math.sin(angle) * radius;
-      p.vx = p.vy = 0;
+      const dir = this._randomDirection();
+      p.x = dir.x * radius;
+      p.y = dir.y * radius;
+      p.z = dir.z * radius;
+      p.vx = p.vy = p.vz = 0;
     }
     this.alpha = 1;
   }
@@ -117,8 +165,9 @@ class ForceLayout {
     this._springs();
     this._angularSpread();
 
-    // Centering + integration.
     const k = this.centerStrength * this.alpha;
+    const use3D = this.is3D;
+
     for (const p of nodes) {
       p.vx -= p.x * k;
       p.vy -= p.y * k;
@@ -126,6 +175,15 @@ class ForceLayout {
       p.vy *= this.damping;
       p.x += p.vx;
       p.y += p.vy;
+
+      if (use3D) {
+        p.vz -= p.z * k;
+        p.vz *= this.damping;
+        p.z += p.vz;
+      } else {
+        p.z = 0;
+        p.vz = 0;
+      }
     }
 
     this.alpha *= 0.985;
@@ -142,9 +200,12 @@ class ForceLayout {
   _repel(nodes) {
     const cell = Math.max(20, this.linkDistance * 2.2);
     const grid = new Map();
+    const use3D = this.is3D;
 
     for (const p of nodes) {
-      const key = `${Math.floor(p.x / cell)},${Math.floor(p.y / cell)}`;
+      const key = use3D
+        ? `${Math.floor(p.x / cell)},${Math.floor(p.y / cell)},${Math.floor(p.z / cell)}`
+        : `${Math.floor(p.x / cell)},${Math.floor(p.y / cell)}`;
       let bucket = grid.get(key);
       if (!bucket) grid.set(key, bucket = []);
       bucket.push(p);
@@ -152,34 +213,44 @@ class ForceLayout {
 
     const strength = this.charge * this.alpha;
     const maxDistSq = cell * cell;
+    const zRange = use3D ? 1 : 0;
 
     for (const p of nodes) {
       const cx = Math.floor(p.x / cell);
       const cy = Math.floor(p.y / cell);
+      const cz = use3D ? Math.floor(p.z / cell) : 0;
 
       for (let ox = -1; ox <= 1; ox++) {
         for (let oy = -1; oy <= 1; oy++) {
-          const bucket = grid.get(`${cx + ox},${cy + oy}`);
-          if (!bucket) continue;
+          for (let oz = -zRange; oz <= zRange; oz++) {
+            const key = use3D
+              ? `${cx + ox},${cy + oy},${cz + oz}`
+              : `${cx + ox},${cy + oy}`;
+            const bucket = grid.get(key);
+            if (!bucket) continue;
 
-          for (const q of bucket) {
-            if (q === p) continue;
-            let dx = p.x - q.x;
-            let dy = p.y - q.y;
-            let dSq = dx * dx + dy * dy;
-            if (dSq > maxDistSq) continue;
+            for (const q of bucket) {
+              if (q === p) continue;
+              let dx = p.x - q.x;
+              let dy = p.y - q.y;
+              let dz = use3D ? p.z - q.z : 0;
+              let dSq = dx * dx + dy * dy + dz * dz;
+              if (dSq > maxDistSq) continue;
 
-            // Two nodes exactly on top of each other have no direction to
-            // separate along, so nudge them apart randomly.
-            if (dSq < 0.01) {
-              dx = (Math.random() - 0.5) * 0.1;
-              dy = (Math.random() - 0.5) * 0.1;
-              dSq = dx * dx + dy * dy;
+              // Two nodes exactly on top of each other have no direction to
+              // separate along, so nudge them apart randomly.
+              if (dSq < 0.01) {
+                dx = (Math.random() - 0.5) * 0.1;
+                dy = (Math.random() - 0.5) * 0.1;
+                dz = use3D ? (Math.random() - 0.5) * 0.1 : 0;
+                dSq = dx * dx + dy * dy + dz * dz;
+              }
+
+              const force = strength / dSq;
+              p.vx += dx * force;
+              p.vy += dy * force;
+              if (use3D) p.vz += dz * force;
             }
-
-            const force = strength / dSq;
-            p.vx += dx * force;
-            p.vy += dy * force;
           }
         }
       }
@@ -188,6 +259,8 @@ class ForceLayout {
 
   _springs() {
     const strength = this.linkStrength * this.alpha;
+    const use3D = this.is3D;
+
     for (const [a, b] of this.edges) {
       const pa = this.pos.get(a);
       const pb = this.pos.get(b);
@@ -195,18 +268,27 @@ class ForceLayout {
 
       const dx = pb.x - pa.x;
       const dy = pb.y - pa.y;
-      const dist = Math.sqrt(dx * dx + dy * dy) || 0.001;
+      const dz = use3D ? pb.z - pa.z : 0;
+      const dist = Math.sqrt(dx * dx + dy * dy + dz * dz) || 0.001;
       const push = (dist - this.linkDistance) / dist * strength;
 
       const fx = dx * push * 0.5;
       const fy = dy * push * 0.5;
+      const fz = dz * push * 0.5;
       pa.vx += fx; pa.vy += fy;
       pb.vx -= fx; pb.vy -= fy;
+      if (use3D) { pa.vz += fz; pb.vz -= fz; }
     }
   }
 
+  _angularSpread() {
+    if (this.angularStrength * this.alpha <= 0) return;
+    if (this.is3D) this._angularSpread3D();
+    else this._angularSpread2D();
+  }
+
   /**
-   * Angular resolution: spread each node's incident edges evenly around it.
+   * Angular resolution in the plane: spread each node's incident edges evenly.
    *
    * For a node of degree d the ideal gap between neighbouring edges is
    * 2*pi/d — 180 degrees at degree 2, 120 at degree 3. Sorting the incident
@@ -230,14 +312,11 @@ class ForceLayout {
    * sliding that node onto the line between its neighbours, which is precisely
    * the 180-degree arrangement being asked for.
    */
-  _angularSpread() {
+  _angularSpread2D() {
     const strength = this.angularStrength * this.alpha;
-    if (strength <= 0) return;
-
     const TWO_PI = Math.PI * 2;
 
     for (const [id, neighbours] of this.adjacency) {
-      // A single edge has nothing to spread against.
       if (neighbours.length < 2) continue;
       const centre = this.pos.get(id);
       if (!centre) continue;
@@ -248,7 +327,6 @@ class ForceLayout {
         if (!q) continue;
         const dx = q.x - centre.x;
         const dy = q.y - centre.y;
-        // Two nodes on top of each other have no angle to speak of.
         if (dx * dx + dy * dy < 1e-6) continue;
         spokes.push({ q, dx, dy, angle: Math.atan2(dy, dx) });
       }
@@ -271,8 +349,6 @@ class ForceLayout {
         // tick; the layout should ease into shape, not snap.
         const step = Math.min(ideal - gap, 0.3) * strength * 0.5;
 
-        // `b` is the one further round, so it rotates counter-clockwise and
-        // `a` clockwise, opening the gap between them.
         const bx = -b.dy * step, by = b.dx * step;
         const ax = a.dy * step, ay = -a.dx * step;
 
@@ -288,20 +364,136 @@ class ForceLayout {
     }
   }
 
+  /**
+   * The same idea on a sphere.
+   *
+   * Sorting by angle has no meaning in three dimensions, so instead each pair
+   * of spokes repels along the sphere: any two that sit closer than the ideal
+   * 2*pi/d separation get pushed apart tangentially, leaving edge lengths to
+   * the springs. Two spokes settle antipodally at 180 degrees and three settle
+   * into a plane at 120, matching the flat case exactly.
+   *
+   * Past three the target is a floor rather than a unique arrangement, so the
+   * result is whichever valid configuration is nearest to hand: four spokes
+   * typically settle square and planar at 90 degrees rather than into a
+   * tetrahedron, since coming from a flat drawing that is the closer
+   * equilibrium and both satisfy "no pair closer than the ideal".
+   */
+  _angularSpread3D() {
+    const strength = this.angularStrength * this.alpha;
+
+    for (const [id, neighbours] of this.adjacency) {
+      const degree = neighbours.length;
+      if (degree < 2 || degree > this.maxAngularDegree) continue;
+      const centre = this.pos.get(id);
+      if (!centre) continue;
+
+      const spokes = [];
+      for (const nid of neighbours) {
+        const q = this.pos.get(nid);
+        if (!q) continue;
+        const dx = q.x - centre.x, dy = q.y - centre.y, dz = q.z - centre.z;
+        const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
+        if (dist < 1e-3) continue;
+        spokes.push({ q, dist, ux: dx / dist, uy: dy / dist, uz: dz / dist });
+      }
+      if (spokes.length < 2) continue;
+
+      // Even spacing of d directions on a sphere; exact for 2 and 3, and a
+      // reasonable target beyond that.
+      const idealCos = Math.cos(Math.min(Math.PI, (Math.PI * 2) / spokes.length));
+      let rx = 0, ry = 0, rz = 0;
+
+      for (let i = 0; i < spokes.length; i++) {
+        for (let j = i + 1; j < spokes.length; j++) {
+          const a = spokes[i], b = spokes[j];
+          const dot = a.ux * b.ux + a.uy * b.uy + a.uz * b.uz;
+          if (dot <= idealCos) continue;   // already far enough apart
+
+          // Direction that separates the two spokes.
+          let sx = b.ux - a.ux, sy = b.uy - a.uy, sz = b.uz - a.uz;
+          const sLen = Math.sqrt(sx * sx + sy * sy + sz * sz);
+          if (sLen < 1e-6) {
+            // Perfectly coincident spokes: pick any perpendicular to break the tie.
+            sx = -a.uy; sy = a.ux; sz = 0;
+            const fallback = Math.sqrt(sx * sx + sy * sy) || 1;
+            sx /= fallback; sy /= fallback;
+          } else {
+            sx /= sLen; sy /= sLen; sz /= sLen;
+          }
+
+          const step = Math.min(dot - idealCos, 0.5) * strength * 0.5;
+
+          // Each end moves along its OWN tangent plane. Without projecting out
+          // the radial component the separation direction also lengthens the
+          // spoke, and because the step scales with distance that feeds back on
+          // itself — the drawing inflates without bound instead of settling.
+          const bT = ForceLayout._tangent(sx, sy, sz, b);
+          const aT = ForceLayout._tangent(-sx, -sy, -sz, a);
+          if (!bT || !aT) continue;
+
+          const bStep = step * b.dist;
+          const aStep = step * a.dist;
+
+          const bvx = bT.x * bStep, bvy = bT.y * bStep, bvz = bT.z * bStep;
+          const avx = aT.x * aStep, avy = aT.y * aStep, avz = aT.z * aStep;
+
+          b.q.vx += bvx; b.q.vy += bvy; b.q.vz += bvz;
+          a.q.vx += avx; a.q.vy += avy; a.q.vz += avz;
+
+          rx -= bvx + avx;
+          ry -= bvy + avy;
+          rz -= bvz + avz;
+        }
+      }
+
+      centre.vx += rx; centre.vy += ry; centre.vz += rz;
+    }
+  }
+
+  /**
+   * Unit vector along (x, y, z) with the part parallel to `spoke` removed.
+   *
+   * Moving a neighbour along this direction turns the spoke without changing
+   * its length, which is what keeps the angular force from inflating the
+   * drawing. Returns null when the input is purely radial and there is no
+   * tangent to speak of.
+   */
+  static _tangent(x, y, z, spoke) {
+    const radial = x * spoke.ux + y * spoke.uy + z * spoke.uz;
+    const tx = x - radial * spoke.ux;
+    const ty = y - radial * spoke.uy;
+    const tz = z - radial * spoke.uz;
+
+    const len = Math.sqrt(tx * tx + ty * ty + tz * tz);
+    if (len < 1e-9) return null;
+    return { x: tx / len, y: ty / len, z: tz / len };
+  }
+
   /** Bounding box of the current layout, padded slightly. */
   bounds() {
-    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+    let minX = Infinity, minY = Infinity, minZ = Infinity;
+    let maxX = -Infinity, maxY = -Infinity, maxZ = -Infinity;
+
     for (const id of this.ids) {
       const p = this.pos.get(id);
       if (!p) continue;
       if (p.x < minX) minX = p.x;
       if (p.y < minY) minY = p.y;
+      if (p.z < minZ) minZ = p.z;
       if (p.x > maxX) maxX = p.x;
       if (p.y > maxY) maxY = p.y;
+      if (p.z > maxZ) maxZ = p.z;
     }
-    if (!Number.isFinite(minX)) return { minX: -100, minY: -100, maxX: 100, maxY: 100 };
+    if (!Number.isFinite(minX)) {
+      return { minX: -100, minY: -100, minZ: 0, maxX: 100, maxY: 100, maxZ: 0 };
+    }
+
     const padX = (maxX - minX) * 0.06 + 20;
     const padY = (maxY - minY) * 0.06 + 20;
-    return { minX: minX - padX, minY: minY - padY, maxX: maxX + padX, maxY: maxY + padY };
+    return {
+      minX: minX - padX, minY: minY - padY, minZ,
+      maxX: maxX + padX, maxY: maxY + padY, maxZ
+    };
   }
 }

@@ -89,22 +89,41 @@ def meta_path(run_id: str) -> str:
 # Run lifecycle
 # ----------------------------------------------------------------------------
 
+def next_run_id() -> str:
+    """
+    Allocate the next run id of the form GOL_YY_MM_DD_nNNN.
+
+    The counter restarts each day, so ids stay short and sort naturally. It is
+    derived from what is already on disk rather than stored, so deleting the
+    newest run of the day frees its number again.
+    """
+    _ensure_base()
+    prefix = time.strftime("GOL_%y_%m_%d_n")
+
+    used = []
+    for name in os.listdir(BASE_DIR):
+        if name.startswith(prefix) and name[len(prefix):].isdigit():
+            used.append(int(name[len(prefix):]))
+
+    counter = (max(used) + 1) if used else 1
+    run_id = f"{prefix}{counter:03d}"
+    while os.path.exists(os.path.join(BASE_DIR, run_id)):
+        counter += 1
+        run_id = f"{prefix}{counter:03d}"
+    return run_id
+
+
 def create_run(name: str, cfg: SimConfig) -> Dict[str, Any]:
     """Allocate a new run directory and write its initial metadata."""
     _ensure_base()
 
-    stamp = time.strftime("%Y%m%d_%H%M%S")
-    run_id = stamp
-    suffix = 1
-    while os.path.exists(os.path.join(BASE_DIR, run_id)):
-        suffix += 1
-        run_id = f"{stamp}_{suffix}"
-
+    run_id = next_run_id()
     os.makedirs(frames_dir(run_id), exist_ok=True)
 
     meta = {
         "id": run_id,
-        "name": (name or "").strip() or f"Run {stamp}",
+        # The id doubles as the default name; a typed name overrides it.
+        "name": (name or "").strip() or run_id,
         "created_at": time.time(),
         "status": "idle",
         "iteration": 0,
