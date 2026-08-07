@@ -538,6 +538,10 @@ const Viewer = {
       ['minTokens', 'Poorest', formatNumber(s.minTokens)],
       ['gini', 'Gini', dec(s.gini, 3)],
       ['topDecileShare', 'Top 10% hold', pct(s.topDecileShare)],
+      ['maxTokenAdded', 'Max token added', `+${formatNumber(s.maxTokenAdded)}`],
+      ['maxTokenLost', 'Max token lost', `-${formatNumber(s.maxTokenLost)}`],
+      ['gainers', 'Gained', withShare(s.gainers)],
+      ['losers', 'Lost', withShare(s.losers)],
 
       // Genome
       ['distinctBrains', 'Distinct brains', formatNumber(s.distinctBrains)],
@@ -599,6 +603,7 @@ const Viewer = {
       `<b>Node ${d.id}</b> <span class="hint">#${d.rank} by wealth</span>`,
       `Tokens ${formatNumber(d.tokens)} <span class="hint">(${(d.tokenShare * 100).toFixed(2)}% of world)</span>`,
       `Degree ${d.degree}`,
+      d.hasDelta ? this.deltaRow(d) : '<span class="hint">token change not recorded</span>',
       `Brain ${d.brainId} <span class="hint">from ${d.parentBrainId}</span>`,
       `Spawned by ${d.spawnedBy !== null ? d.spawnedBy : '—'}`
     ];
@@ -654,6 +659,19 @@ const Viewer = {
     const top = (y + 14 + card.height > wrap.height) ? y - card.height - 14 : y + 14;
     this.hoverCard.style.left = `${Math.max(4, left)}px`;
     this.hoverCard.style.top = `${Math.max(4, top)}px`;
+  },
+
+  /** How this node's pile moved across the phase, phrased for the reader. */
+  deltaRow(d) {
+    if (d.delta > 0) {
+      const born = d.phase === 1 && d.newbornOf !== undefined;
+      return `<b class="good">+${formatNumber(d.delta)} tokens</b>` +
+             (born ? ' <span class="hint">(endowment at birth)</span>' : '');
+    }
+    if (d.delta < 0) {
+      return `<b class="bad">${formatNumber(d.delta)} tokens</b>`;
+    }
+    return 'No token change';
   },
 
   applySettings(preset) {

@@ -22,11 +22,12 @@ from typing import Any, Dict, List
 import gol_store as store
 
 # Bump when a formula below changes, so stale caches are discarded.
-SERIES_VERSION = 2
+SERIES_VERSION = 3
 
 # Keys that count nodes, and are therefore also meaningful as a share of the
 # population that entered the phase.
-NODE_COUNT_KEYS = ("births", "revolutions", "starved", "orphaned", "leaves")
+NODE_COUNT_KEYS = ("births", "revolutions", "starved", "orphaned", "leaves",
+                   "gainers", "losers")
 
 
 def _gini(values: List[int]) -> float:
@@ -133,6 +134,17 @@ def frame_stats(frame: Dict[str, Any]) -> Dict[str, Any]:
         revolt_share = (revolted / allocated) if allocated else 0.0
         spread_share = (spread_count / len(allocations)) if allocations else 0.0
 
+    # Per-node token change across the phase. Absent on runs recorded before
+    # deltas were tracked, in which case the metrics stay None rather than
+    # claiming everyone broke even.
+    delta = frame.get("delta")
+    max_added = max_lost = gainers = losers = None
+    if delta:
+        max_added = max(0, max(delta))
+        max_lost = max(0, -min(delta))
+        gainers = sum(1 for v in delta if v > 0)
+        losers = sum(1 for v in delta if v < 0)
+
     top_count = max(1, round(n * 0.1))
     ordered_desc = sorted(tokens, reverse=True)
     total_tokens = sum(tokens)
@@ -160,6 +172,10 @@ def frame_stats(frame: Dict[str, Any]) -> Dict[str, Any]:
         "meanTokens": (total_tokens / n) if n else 0.0,
         "minTokens": min(tokens) if tokens else 0,
         "topDecileShare": top_share,
+        "maxTokenAdded": max_added,
+        "maxTokenLost": max_lost,
+        "gainers": gainers,
+        "losers": losers,
         "births": len(births) if births is not None else None,
         "meanInvestedShare": mean_invested,
         "meanChildLinks": mean_links,

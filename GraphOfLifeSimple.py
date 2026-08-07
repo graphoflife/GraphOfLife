@@ -433,8 +433,10 @@ class GraphOfLife:
         """
         decisions: List[Dict[str, Any]] = []
         # Captured before anything changes, so the viewer can express births and
-        # deaths as a share of the population that actually faced this phase.
+        # deaths as a share of the population that actually faced this phase,
+        # and show how much each agent gained or lost across it.
         nodes_before = self.G.number_of_nodes()
+        tokens_before = dict(self.tokens)
         log_deg, neighs, q_tok, q_deg, log_tok = self._precompute_features()
 
         for u in list(self.G.nodes()):
@@ -468,6 +470,7 @@ class GraphOfLife:
         cleanup = self._cleanup_and_redistribute()
 
         return self._frame(phase=1, cleanup=cleanup, nodes_before=nodes_before,
+                           tokens_before=tokens_before,
                            decisions={"births": decisions} if record_decisions else None)
 
     def _spawn_child(self, parent: int, parent_tokens: int, child_tokens: int,
@@ -510,6 +513,7 @@ class GraphOfLife:
         neighbors. The winner of each node implants its brain there.
         """
         nodes_before = self.G.number_of_nodes()
+        tokens_before = dict(self.tokens)
         log_deg, neighs, q_tok, q_deg, log_tok = self._precompute_features()
 
         # --- 1. Message pass, so allocation decisions see fresh signals -------
@@ -626,7 +630,7 @@ class GraphOfLife:
                 "pruned_edges": [[int(a), int(b)] for a, b in dead_edges],
             }
         return self._frame(phase=2, cleanup=cleanup, nodes_before=nodes_before,
-                           decisions=decisions)
+                           tokens_before=tokens_before, decisions=decisions)
 
     @staticmethod
     def _resolve_winner(offers: Dict[int, int],
@@ -773,6 +777,7 @@ class GraphOfLife:
     # ------------------------------------------------------------------------
 
     def _frame(self, phase: int, cleanup: Dict[str, Any], nodes_before: int,
+               tokens_before: Dict[int, int],
                decisions: Dict[str, Any] | None) -> Dict[str, Any]:
         """
         Snapshot the world for the viewer.
@@ -793,6 +798,12 @@ class GraphOfLife:
             "brain_ids": [int(brains[u].brain_id) for u in nodes],
             "parent_brain_ids": [int(brains[u].parent_brain_id) for u in nodes],
             "parent_ids": [int(self.parent_of.get(u, NO_PARENT)) for u in nodes],
+            # What this phase did to each agent's pile, end to end: a parent
+            # paying for a child, a newborn receiving its endowment, a node
+            # conquered or defended, plus whatever cleanup redistributed. A
+            # node that did not exist beforehand counts its whole balance as
+            # gained.
+            "delta": [int(self.tokens.get(u, 0)) - int(tokens_before.get(u, 0)) for u in nodes],
             "edges": [[int(u), int(v)] for u, v in self.G.edges()],
             "cleanup": cleanup,
             "summary": {

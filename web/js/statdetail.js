@@ -47,12 +47,17 @@ const StatDetail = {
     spreadShare: 'Share of agents that spread their tokens proportionally across targets rather than going all-in on a single one. The choice is made by each agent\'s own mode head, so this tracks an evolving strategy.',
     heldHomeShare: 'Share of nodes whose occupant kept the node. The rest were taken over, with the winner\'s genome copied in.',
     prunedEdges: 'Edges removed for carrying no tokens this phase. Connections have to be used to survive.',
+    maxTokenAdded: 'The largest gain any single agent made this phase. In a reproduction phase that is usually a newborn receiving its endowment; in a game phase it is a node that collected a heavy bid, often one that was conquered by a wealthy neighbour.',
+    maxTokenLost: 'The largest loss any single agent took this phase, given as a positive number. In a reproduction phase that is a parent paying for a child; in a game phase it is an agent that spent its pile on neighbours and got little back.',
+    gainers: 'Agents that ended the phase with more tokens than they started it with.',
+    losers: 'Agents that ended the phase with fewer tokens than they started it with.',
     redistributed: 'Tokens recovered from agents that died this phase and scattered uniformly over the survivors, keeping the global count conserved.'
   },
 
   // Statistics that count nodes, and so are also meaningful as a percentage
   // of the population that entered the phase.
-  SHARE_KEYS: new Set(['births', 'revolutions', 'starved', 'orphaned', 'leaves']),
+  SHARE_KEYS: new Set(['births', 'revolutions', 'starved', 'orphaned', 'leaves',
+                       'gainers', 'losers']),
 
   init() {
     this.el = document.getElementById('statDetail');

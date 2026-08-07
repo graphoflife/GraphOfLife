@@ -14,13 +14,17 @@ class FrameMetrics {
     frame.ids.forEach((id, i) => this.index.set(id, i));
 
     this.degree = this._degrees();
+    // Runs recorded before deltas existed simply have none; treat that as no
+    // change rather than letting undefined leak into the colour maths.
+    this.delta = frame.delta || new Array(frame.ids.length).fill(0);
+    this.hasDelta = Boolean(frame.delta);
     this.flow = this._edgeFlow();
     this.totalTokens = frame.tokens.reduce((a, b) => a + b, 0);
 
     this.colorValues = this._values(settings.nodeColorBy);
-    this.colorRange = this._range(this.colorValues);
+    this.colorRange = this._range(this.colorValues, settings.nodeColorBy);
     this.sizeValues = this._values(settings.nodeSizeBy);
-    this.sizeRange = this._range(this.sizeValues);
+    this.sizeRange = this._range(this.sizeValues, settings.nodeSizeBy);
 
     this.colorLabel = FrameMetrics.LABELS[settings.nodeColorBy] || settings.nodeColorBy;
     this.colorRangeText = [
@@ -34,6 +38,8 @@ class FrameMetrics {
     log_tokens: 'Tokens (log)',
     degree: 'Degree',
     log_degree: 'Degree (log)',
+    token_delta: 'Token change',
+    abs_token_delta: 'Token change (size)',
     brain_id: 'Brain id',
     parent_brain_id: 'Parent brain id',
     age: 'Node id (age)',
@@ -44,6 +50,10 @@ class FrameMetrics {
   static formatValue(v, kind) {
     if (kind === 'log_tokens' || kind === 'log_degree') {
       return Math.round(Math.expm1(v)).toLocaleString('en-US');
+    }
+    if (kind === 'token_delta') {
+      const n = Math.round(v);
+      return (n > 0 ? '+' : '') + n.toLocaleString('en-US');
     }
     if (kind === 'token_share') return `${(v * 100).toFixed(2)}%`;
     return Math.round(v).toLocaleString('en-US');
@@ -97,6 +107,8 @@ class FrameMetrics {
         case 'log_tokens':      out[i] = Math.log1p(f.tokens[i]); break;
         case 'degree':          out[i] = this.degree[i]; break;
         case 'log_degree':      out[i] = Math.log1p(this.degree[i]); break;
+        case 'token_delta':     out[i] = this.delta[i]; break;
+        case 'abs_token_delta': out[i] = Math.abs(this.delta[i]); break;
         case 'brain_id':        out[i] = f.brain_ids[i]; break;
         case 'parent_brain_id': out[i] = f.parent_brain_ids[i]; break;
         case 'age':             out[i] = f.ids[i]; break;
@@ -107,7 +119,27 @@ class FrameMetrics {
     return out;
   }
 
-  _range(values) {
+  /**
+   * Quantities that read as "up or down" rather than "more or less".
+   *
+   * These get a range centred on zero so the middle of the colour map means no
+   * change, and a gain of 50 is the same distance from centre as a loss of 50.
+   * Stretching them to fit min..max would put the neutral point wherever the
+   * data happened to land.
+   */
+  static CENTERED = new Set(['token_delta']);
+
+  _range(values, kind) {
+    if (FrameMetrics.CENTERED.has(kind)) {
+      let extent = 0;
+      for (const v of values) extent = Math.max(extent, Math.abs(v));
+      if (extent < 1e-9) extent = 1;
+      return [-extent, extent];
+    }
+    return this._rangeLinear(values);
+  }
+
+  _rangeLinear(values) {
     let lo = Infinity, hi = -Infinity;
     for (const v of values) {
       if (v < lo) lo = v;
@@ -258,7 +290,9 @@ class FrameMetrics {
       parentBrainId: f.parent_brain_ids[i],
       spawnedBy: f.parent_ids[i] >= 0 ? f.parent_ids[i] : null,
       rank: this.wealthRank(i),
-      phase: f.phase
+      phase: f.phase,
+      delta: this.delta[i],
+      hasDelta: this.hasDelta
     };
 
     if (f.phase === 1) {
@@ -378,6 +412,13 @@ class FrameMetrics {
       minTokens: tokens.length ? Math.min(...tokens) : 0,
       gini,
       topDecileShare: topShare,
+
+      // Biggest single swing either way this phase. Losses are reported as a
+      // positive magnitude so the two read side by side.
+      maxTokenAdded: this.delta.length ? Math.max(0, ...this.delta) : 0,
+      maxTokenLost: this.delta.length ? Math.max(0, ...this.delta.map(v => -v)) : 0,
+      gainers: this.delta.filter(v => v > 0).length,
+      losers: this.delta.filter(v => v < 0).length,
 
       // Genome
       distinctBrains,
