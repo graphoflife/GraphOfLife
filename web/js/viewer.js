@@ -231,7 +231,12 @@ const Viewer = {
   setAutoFit(on) {
     this.settings.autoFit = Boolean(on);
     document.getElementById('btnFit').classList.toggle('active', this.settings.autoFit);
-    if (this.settings.autoFit) this.renderer.fitToContent(this.layout);
+
+    if (this.settings.autoFit) {
+      this.renderer.fitToContent(this.layout);   // aim; the camera glides there
+    } else {
+      this.renderer.holdCurrentView();           // stop chasing, stay put
+    }
   },
 
   applyLayoutSettings() {
@@ -417,7 +422,7 @@ const Viewer = {
 
     this.emptyEl.style.display = 'none';
     await this.goToPosition(Math.min(this.position, this.visible.length - 1), true);
-    this.renderer.fitToContent(this.layout);
+    this.renderer.fitToContent(this.layout, undefined, switching);
   },
 
   async reload() {
@@ -740,7 +745,7 @@ const Viewer = {
     this.renderer.resize();
     if (!this._framed && this.renderer.cssWidth > 0 && this.frame) {
       this._framed = true;
-      this.renderer.fitToContent(this.layout);
+      this.renderer.fitToContent(this.layout, undefined, true);
     }
     this.redraw();
   },
@@ -758,6 +763,7 @@ const Viewer = {
 
     this.layout.tick();
     if (this.settings.autoFit) this.renderer.fitToContent(this.layout);
+    this.renderer.stepCamera();
 
     if (this.playing && this.visible.length) {
       const fps = Number(document.getElementById('playSpeed').value) || 6;

@@ -15,7 +15,18 @@ class GraphRenderer {
   constructor(canvas) {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
+    // Where the camera is, and where it is heading. Fitting only ever moves
+    // the target; the view chases it under stepCamera, so the framing glides
+    // rather than jumping every time the graph shifts.
     this.view = { scale: 1, offsetX: 0, offsetY: 0 };
+    this.targetView = { scale: 1, offsetX: 0, offsetY: 0 };
+    this.cameraVelocity = { logScale: 0, x: 0, y: 0 };
+    // Critically damped: the camera reaches its target in about 27 frames
+    // without sailing past it. Overshoot would swing the graph out of frame and
+    // back, which reads as a wobble rather than as smoothness.
+    this.cameraStiffness = 0.17;
+    this.cameraDamping = 0.5;
+
     this.dpr = window.devicePixelRatio || 1;
 
     this.mode3D = false;
@@ -61,27 +72,104 @@ class GraphRenderer {
    * takes a second pass to settle; in 2D the projection is linear and one is
    * exact.
    */
-  fitToContent(layout, padding = 0.015) {
-    if (!layout || !layout.ids.length || !this.cssWidth) return;
+  fitToContent(layout, padding = 0.015, snap = false) {
+    const target = this.computeFitTarget(layout, padding);
+    if (!target) return;
 
+    this.targetView = target;
+    if (snap) this.snapToTarget();
+  }
+
+  /**
+   * Work out the tight framing without moving the camera there.
+   *
+   * The solver has to project, and projecting reads the current view, so it
+   * borrows the view, converges, then hands it back untouched.
+   */
+  computeFitTarget(layout, padding = 0.015) {
+    if (!layout || !layout.ids.length || !this.cssWidth) return null;
+
+    const saved = { ...this.view };
+    const restore = () => { this.view = saved; };
     const passes = this.mode3D ? 2 : 1;
+
     for (let pass = 0; pass < passes; pass++) {
       const box = this._projectedBounds(layout);
-      if (!box) return;
+      if (!box) { restore(); return null; }
 
       const availableW = this.cssWidth * (1 - padding * 2);
       const availableH = this.cssHeight * (1 - padding * 2);
       const factor = Math.min(availableW / box.width, availableH / box.height);
-      if (!Number.isFinite(factor) || factor <= 0) return;
+      if (!Number.isFinite(factor) || factor <= 0) { restore(); return null; }
 
-      this.view.scale = Math.max(0.02, Math.min(60, this.view.scale * factor));
+      this.view.scale = GraphRenderer.clampScale(this.view.scale * factor);
 
       // Scaling moves everything, so recentre against the new projection.
       const after = this._projectedBounds(layout);
-      if (!after) return;
+      if (!after) { restore(); return null; }
       this.view.offsetX += this.cssWidth / 2 - after.centerX;
       this.view.offsetY += this.cssHeight / 2 - after.centerY;
     }
+
+    const target = { ...this.view };
+    restore();
+    return target;
+  }
+
+  static clampScale(s) {
+    return Math.max(0.02, Math.min(60, s));
+  }
+
+  /** Put the camera on its target immediately, for a first framing. */
+  snapToTarget() {
+    this.view = { ...this.targetView };
+    this.cameraVelocity = { logScale: 0, x: 0, y: 0 };
+  }
+
+  /** Stop chasing: whatever the camera is looking at becomes the target. */
+  holdCurrentView() {
+    this.targetView = { ...this.view };
+    this.cameraVelocity = { logScale: 0, x: 0, y: 0 };
+  }
+
+  /**
+   * Move the camera one step toward its target.
+   *
+   * A spring with its own velocity rather than a straight interpolation, so
+   * the framing eases in and out and keeps gliding for a moment after the
+   * target stops — which is what makes it read as smooth even while the graph
+   * underneath is still jostling.
+   *
+   * Scale travels in log space: halving and doubling then take the same time,
+   * where a linear zoom would crawl at one end and lurch at the other.
+   */
+  stepCamera() {
+    const target = this.targetView;
+    const v = this.cameraVelocity;
+    const k = this.cameraStiffness;
+    const d = this.cameraDamping;
+
+    const logNow = Math.log(this.view.scale);
+    const logTarget = Math.log(target.scale);
+
+    const dLog = logTarget - logNow;
+    const dx = target.offsetX - this.view.offsetX;
+    const dy = target.offsetY - this.view.offsetY;
+
+    // Once the remaining move is under a pixel, land exactly rather than
+    // creeping forever.
+    if (Math.abs(dLog) < 1e-4 && Math.abs(dx) < 0.05 && Math.abs(dy) < 0.05) {
+      this.snapToTarget();
+      return;
+    }
+
+    v.logScale = (v.logScale + dLog * k) * d;
+    v.x = (v.x + dx * k) * d;
+    v.y = (v.y + dy * k) * d;
+
+    this.view.scale = GraphRenderer.clampScale(Math.exp(logNow + v.logScale));
+    this.view.offsetX += v.x;
+    this.view.offsetY += v.y;
   }
 
   /** Screen-space extent of every node under the current camera. */
@@ -116,6 +204,7 @@ class GraphRenderer {
     this.view.scale = scale;
     this.view.offsetX = this.cssWidth / 2 - (bounds.minX + w / 2) * scale;
     this.view.offsetY = this.cssHeight / 2 - (bounds.minY + h / 2) * scale;
+    this.holdCurrentView();
   }
 
   /**
@@ -166,15 +255,18 @@ class GraphRenderer {
 
   zoomAt(sx, sy, factor) {
     const before = this.toWorld(sx, sy);
-    this.view.scale = Math.max(0.02, Math.min(60, this.view.scale * factor));
+    this.view.scale = GraphRenderer.clampScale(this.view.scale * factor);
     const after = this.toWorld(sx, sy);
     this.view.offsetX += (after.x - before.x) * this.view.scale;
     this.view.offsetY += (after.y - before.y) * this.view.scale;
+    // Hand control over, or the spring would drag the view back.
+    this.holdCurrentView();
   }
 
   pan(dx, dy) {
     this.view.offsetX += dx;
     this.view.offsetY += dy;
+    this.holdCurrentView();
   }
 
   // ------------------------------------------------------------------
