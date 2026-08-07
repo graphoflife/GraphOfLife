@@ -40,6 +40,8 @@ class FrameMetrics {
     log_degree: 'Degree (log)',
     token_delta: 'Token change',
     abs_token_delta: 'Token change (size)',
+    log_token_delta: 'Token change (log)',
+    log_abs_token_delta: 'Token change (log size)',
     brain_id: 'Brain id',
     parent_brain_id: 'Parent brain id',
     age: 'Node id (age)',
@@ -54,6 +56,13 @@ class FrameMetrics {
     if (kind === 'token_delta') {
       const n = Math.round(v);
       return (n > 0 ? '+' : '') + n.toLocaleString('en-US');
+    }
+    if (kind === 'log_token_delta') {
+      const n = Math.sign(v) * Math.round(Math.expm1(Math.abs(v)));
+      return (n > 0 ? '+' : '') + n.toLocaleString('en-US');
+    }
+    if (kind === 'log_abs_token_delta') {
+      return Math.round(Math.expm1(v)).toLocaleString('en-US');
     }
     if (kind === 'token_share') return `${(v * 100).toFixed(2)}%`;
     return Math.round(v).toLocaleString('en-US');
@@ -109,6 +118,16 @@ class FrameMetrics {
         case 'log_degree':      out[i] = Math.log1p(this.degree[i]); break;
         case 'token_delta':     out[i] = this.delta[i]; break;
         case 'abs_token_delta': out[i] = Math.abs(this.delta[i]); break;
+        // Log of the magnitude with the sign put back on. A handful of huge
+        // swings would otherwise squash every ordinary gain and loss into the
+        // middle of the colour map; this keeps the direction while compressing
+        // the scale.
+        case 'log_token_delta':
+          out[i] = Math.sign(this.delta[i]) * Math.log1p(Math.abs(this.delta[i]));
+          break;
+        case 'log_abs_token_delta':
+          out[i] = Math.log1p(Math.abs(this.delta[i]));
+          break;
         case 'brain_id':        out[i] = f.brain_ids[i]; break;
         case 'parent_brain_id': out[i] = f.parent_brain_ids[i]; break;
         case 'age':             out[i] = f.ids[i]; break;
@@ -127,7 +146,7 @@ class FrameMetrics {
    * Stretching them to fit min..max would put the neutral point wherever the
    * data happened to land.
    */
-  static CENTERED = new Set(['token_delta']);
+  static CENTERED = new Set(['token_delta', 'log_token_delta']);
 
   _range(values, kind) {
     if (FrameMetrics.CENTERED.has(kind)) {

@@ -457,6 +457,8 @@ const Viewer = {
       return;
     }
 
+    await this.ensureDelta(this.frame, index);
+
     this.emptyEl.style.display = 'none';
     this.layout.setFrame(this.frame.ids, this.frame.edges,
                          this.frame.parent_ids, this.settings.layoutCarry);
@@ -467,6 +469,38 @@ const Viewer = {
     this.updateStats();
     this.updateCharts();
     if (!StatDetail.el.classList.contains('hidden')) StatDetail.redraw();
+  },
+
+  /**
+   * Fill in per-node token change for frames recorded before the engine
+   * tracked it.
+   *
+   * A node's balance when a phase began is simply its balance at the end of
+   * the previous phase, which is the previous frame — so the same number the
+   * engine writes can be recovered without re-running anything. A node absent
+   * from the previous frame did not exist yet, and counts its whole balance as
+   * gained, matching how the engine treats a newborn.
+   *
+   * Only valid when every phase was recorded: with `export_every` above one,
+   * consecutive frames are further apart than a single phase and the
+   * difference would span more than the phase being shown.
+   */
+  async ensureDelta(frame, index) {
+    if (frame.delta || index <= 0) return;
+    if (this.meta && this.meta.config && (this.meta.config.export_every || 1) !== 1) return;
+
+    let previous;
+    try {
+      previous = await this.fetchFrame(index - 1);
+    } catch (err) {
+      return;   // no earlier frame to compare against; leave it unrecorded
+    }
+
+    const before = new Map();
+    previous.ids.forEach((id, i) => before.set(id, previous.tokens[i]));
+
+    frame.delta = frame.ids.map((id, i) => frame.tokens[i] - (before.get(id) ?? 0));
+    frame.delta_reconstructed = true;
   },
 
   rebuildMetrics() {

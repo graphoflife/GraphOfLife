@@ -22,7 +22,7 @@ from typing import Any, Dict, List
 import gol_store as store
 
 # Bump when a formula below changes, so stale caches are discarded.
-SERIES_VERSION = 3
+SERIES_VERSION = 4
 
 # Keys that count nodes, and are therefore also meaningful as a share of the
 # population that entered the phase.
@@ -58,7 +58,22 @@ def _median(values: List[float]) -> float:
     return float(ordered[mid]) if len(ordered) % 2 else (ordered[mid - 1] + ordered[mid]) / 2
 
 
-def frame_stats(frame: Dict[str, Any]) -> Dict[str, Any]:
+def _reconstruct_delta(frame: Dict[str, Any], previous: Dict[str, Any] | None) -> List[int] | None:
+    """
+    Per-node token change for frames recorded before the engine tracked it.
+
+    A node's balance entering a phase is its balance at the end of the previous
+    one, so the previous frame supplies exactly what the engine would have
+    stored. A node missing from it did not exist yet and counts its whole
+    balance as gained, matching how a newborn is treated.
+    """
+    if previous is None:
+        return None
+    before = dict(zip(previous.get("ids", []), previous.get("tokens", [])))
+    return [t - before.get(i, 0) for i, t in zip(frame.get("ids", []), frame.get("tokens", []))]
+
+
+def frame_stats(frame: Dict[str, Any], previous: Dict[str, Any] | None = None) -> Dict[str, Any]:
     """Reduce one frame to the scalars the viewer plots."""
     tokens = frame.get("tokens", [])
     ids = frame.get("ids", [])
@@ -137,7 +152,7 @@ def frame_stats(frame: Dict[str, Any]) -> Dict[str, Any]:
     # Per-node token change across the phase. Absent on runs recorded before
     # deltas were tracked, in which case the metrics stay None rather than
     # claiming everyone broke even.
-    delta = frame.get("delta")
+    delta = frame.get("delta") or _reconstruct_delta(frame, previous)
     max_added = max_lost = gainers = losers = None
     if delta:
         max_added = max(0, max(delta))
@@ -237,13 +252,30 @@ def build_series(run_id: str) -> Dict[str, Any]:
     if len(rows) > total:
         rows = rows[:total]
 
+    # Frames written before deltas were tracked need their predecessor to
+    # reconstruct the change, so the previous frame is carried along.
+    every = 1
+    try:
+        every = max(1, int(store.load_meta(run_id).get("config", {}).get("export_every", 1)))
+    except (OSError, ValueError, json.JSONDecodeError):
+        pass
+
+    previous = None
+    if every == 1 and len(rows) > 0:
+        try:
+            previous = store.read_frame(run_id, len(rows) - 1)
+        except (OSError, json.JSONDecodeError):
+            previous = None
+
     changed = len(rows) > len(cache.get("rows", []))
     for index in range(len(rows), total):
         try:
-            rows.append(frame_stats(store.read_frame(run_id, index)))
-            changed = True
+            frame = store.read_frame(run_id, index)
         except (OSError, json.JSONDecodeError, KeyError):
             break
+        rows.append(frame_stats(frame, previous if every == 1 else None))
+        previous = frame
+        changed = True
 
     if changed or len(rows) != len(cache.get("rows", [])):
         _save_cache(run_id, {"version": SERIES_VERSION, "rows": rows})
