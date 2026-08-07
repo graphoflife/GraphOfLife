@@ -110,6 +110,7 @@ const Viewer = {
     force('forceCharge', 'charge');
     force('forceLink', 'linkStrength');
     force('forceCenter', 'centerStrength');
+    force('forceAngular', 'angularStrength');
     force('forceDamping', 'damping');
 
     document.getElementById('btnReheat').addEventListener('click', () => this.layout.reheat(1));
