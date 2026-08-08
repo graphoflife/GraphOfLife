@@ -24,6 +24,7 @@ API
     POST   /api/runs/<id>/stop        ask a running worker to stop
     GET    /api/runs/<id>/frames/<n>  one recorded frame
     GET    /api/runs/<id>/series      per-frame statistics for the whole run
+    GET    /api/runs/<id>/series/progress   how far a rebuild has got
 """
 from __future__ import annotations
 
@@ -269,6 +270,12 @@ class Handler(BaseHTTPRequestHandler):
             if len(parts) == 4 and parts[:2] == ["api", "runs"] and parts[3] == "series":
                 import gol_series
                 self._send_json(gol_series.build_series(parts[2]))
+                return
+
+            if (len(parts) == 5 and parts[:2] == ["api", "runs"]
+                    and parts[3] == "series" and parts[4] == "progress"):
+                import gol_series
+                self._send_json(gol_series.progress(parts[2]))
                 return
 
             if len(parts) == 5 and parts[:2] == ["api", "runs"] and parts[3] == "frames":

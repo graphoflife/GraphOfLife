@@ -78,6 +78,9 @@ const StatDetail = {
     this.textEl = document.getElementById('statDetailText');
     this.footEl = document.getElementById('statDetailFoot');
     this.canvas = document.getElementById('statDetailChart');
+    this.progressEl = document.getElementById('statDetailProgress');
+    this.progressFill = document.getElementById('statDetailProgressFill');
+    this.progressLabel = document.getElementById('statDetailProgressLabel');
 
     document.getElementById('statDetailClose').addEventListener('click', () => this.close());
     document.addEventListener('keydown', e => {
@@ -104,23 +107,88 @@ const StatDetail = {
     this.currentKey = key;
     this.titleEl.textContent = label || key;
     this.textEl.textContent = this.EXPLANATIONS[key] || 'No description for this value.';
-    this.footEl.textContent = 'Loading history…';
     this.el.classList.remove('hidden');
 
+    const runId = Viewer.runId;
+    const cached = this.seriesCache.has(runId);
+    if (!cached) this.showProgress();
+
     try {
-      this.series = await this.load(Viewer.runId);
+      this.series = await this.load(runId);
     } catch (err) {
+      this.hideProgress();
       this.footEl.textContent = `Could not load history: ${err.message}`;
       return;
     }
+    this.hideProgress();
     this.redraw();
   },
 
   async load(runId) {
     if (this.seriesCache.has(runId)) return this.seriesCache.get(runId);
-    const payload = await API.getSeries(runId);
-    this.seriesCache.set(runId, payload);
-    return payload;
+
+    // Watch the build while it runs. Changing a statistic invalidates the
+    // cache, and re-reading every frame of a long run takes long enough that a
+    // blank wait is worse than useless.
+    const watching = this.watchProgress(runId);
+    try {
+      const payload = await API.getSeries(runId);
+      this.seriesCache.set(runId, payload);
+      return payload;
+    } finally {
+      watching.stop();
+    }
+  },
+
+  // ---- progress ------------------------------------------------------
+
+  showProgress() {
+    this.footEl.textContent = '';
+    this.progressEl.classList.remove('hidden');
+    this.setProgress(null, 0, 0);
+  },
+
+  hideProgress() {
+    this.progressEl.classList.add('hidden');
+  },
+
+  /**
+   * Move the bar.
+   *
+   * A null fraction means the server has not said how much there is to do yet,
+   * so the bar sweeps rather than claiming a position it cannot know.
+   */
+  setProgress(fraction, done, total) {
+    if (fraction === null) {
+      this.progressFill.classList.add('indeterminate');
+      this.progressFill.style.width = '';
+      this.progressLabel.textContent = 'Reading frames…';
+      return;
+    }
+    this.progressFill.classList.remove('indeterminate');
+    this.progressFill.style.width = `${Math.round(fraction * 100)}%`;
+    this.progressLabel.textContent =
+      `Reading frames… ${formatNumber(done)} of ${formatNumber(total)} (${Math.round(fraction * 100)}%)`;
+  },
+
+  /** Poll the server for build progress until told to stop. */
+  watchProgress(runId) {
+    let stopped = false;
+    const tick = async () => {
+      if (stopped) return;
+      try {
+        const p = await API.getSeriesProgress(runId);
+        if (!stopped) {
+          if (p.building && p.total > 0) this.setProgress(p.done / p.total, p.done, p.total);
+          else this.setProgress(null, 0, 0);
+        }
+      } catch (err) {
+        // A failed poll only costs the bar its accuracy, never the load.
+      }
+      if (!stopped) setTimeout(tick, 250);
+    };
+    setTimeout(tick, 120);
+    return { stop() { stopped = true; } };
   },
 
   /**

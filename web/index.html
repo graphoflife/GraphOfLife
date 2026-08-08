@@ -384,6 +384,12 @@
     <button id="statDetailClose" class="ghost small">✕</button>
   </div>
   <p id="statDetailText" class="stat-detail-text"></p>
+
+  <div id="statDetailProgress" class="progress hidden">
+    <div class="progress-track"><div class="progress-fill" id="statDetailProgressFill"></div></div>
+    <span class="progress-label" id="statDetailProgressLabel">Reading frames…</span>
+  </div>
+
   <canvas id="statDetailChart" height="170"></canvas>
   <p id="statDetailFoot" class="hint"></p>
 </div>

@@ -18,9 +18,39 @@ from __future__ import annotations
 import json
 import math
 import os
+import threading
 from typing import Any, Dict, List
 
 import gol_store as store
+
+# Progress of in-flight builds, so the browser can show how far along a rebuild
+# is instead of sitting on a blank wait. Reads happen on a different thread from
+# the build, since the server handles each request in its own.
+_PROGRESS: Dict[str, Dict[str, Any]] = {}
+_PROGRESS_LOCK = threading.Lock()
+_BUILD_LOCKS: Dict[str, threading.Lock] = {}
+
+
+def _build_lock(run_id: str) -> threading.Lock:
+    """One lock per run, so two callers do not rebuild the same series twice."""
+    with _PROGRESS_LOCK:
+        lock = _BUILD_LOCKS.get(run_id)
+        if lock is None:
+            lock = _BUILD_LOCKS[run_id] = threading.Lock()
+        return lock
+
+
+def _set_progress(run_id: str, done: int, total: int, building: bool = True) -> None:
+    with _PROGRESS_LOCK:
+        _PROGRESS[run_id] = {"building": building, "done": done, "total": total}
+
+
+def progress(run_id: str) -> Dict[str, Any]:
+    """How far a build has got, for the progress bar."""
+    with _PROGRESS_LOCK:
+        state = _PROGRESS.get(run_id)
+    return dict(state) if state else {"building": False, "done": 0, "total": 0}
+
 
 # Bump when a formula below changes, so stale caches are discarded.
 SERIES_VERSION = 7
@@ -424,6 +454,14 @@ def build_series(run_id: str) -> Dict[str, Any]:
     resumed and its history truncated, the cache is trimmed to match rather than
     describing frames that no longer exist.
     """
+    with _build_lock(run_id):
+        try:
+            return _build_series_locked(run_id)
+        finally:
+            _set_progress(run_id, 0, 0, building=False)
+
+
+def _build_series_locked(run_id: str) -> Dict[str, Any]:
     total = store.count_frames(run_id)
     cache = _load_cache(run_id)
     rows: List[Dict[str, Any]] = cache.get("rows", [])
@@ -448,6 +486,10 @@ def build_series(run_id: str) -> Dict[str, Any]:
             previous = None
 
     changed = len(rows) > len(cache.get("rows", []))
+    remaining = total - len(rows)
+    if remaining > 0:
+        _set_progress(run_id, len(rows), total, building=True)
+
     for index in range(len(rows), total):
         try:
             frame = store.read_frame(run_id, index)
@@ -456,6 +498,10 @@ def build_series(run_id: str) -> Dict[str, Any]:
         rows.append(frame_stats(frame, previous if every == 1 else None))
         previous = frame
         changed = True
+
+        # Often enough to feel live, rarely enough not to thrash the lock.
+        if index % 25 == 0:
+            _set_progress(run_id, index + 1, total, building=True)
 
     if changed or len(rows) != len(cache.get("rows", [])):
         _save_cache(run_id, {"version": SERIES_VERSION, "rows": rows})

@@ -33,7 +33,8 @@ const API = {
   startRun(id, steps)   { return this._request('POST', `/api/runs/${encodeURIComponent(id)}/start`, { steps }); },
   stopRun(id)           { return this._request('POST', `/api/runs/${encodeURIComponent(id)}/stop`); },
   getFrame(id, index)   { return this._request('GET', `/api/runs/${encodeURIComponent(id)}/frames/${index}`); },
-  getSeries(id)         { return this._request('GET', `/api/runs/${encodeURIComponent(id)}/series`); }
+  getSeries(id)         { return this._request('GET', `/api/runs/${encodeURIComponent(id)}/series`); },
+  getSeriesProgress(id) { return this._request('GET', `/api/runs/${encodeURIComponent(id)}/series/progress`); }
 };
 
 /** Human-readable byte size. */

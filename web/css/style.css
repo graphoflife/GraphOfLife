@@ -557,3 +557,38 @@ details.control-group > summary:hover h3 { color: var(--text); }
 .stat-group-count { margin-left: auto; color: #5b6b7c; font-size: 10px; letter-spacing: 0; }
 .stat-group-body { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 10px 10px; }
 .stat-group .stat { background: var(--panel-2); }
+
+/* Progress bar for a statistics rebuild */
+.progress { margin: 4px 0 10px; }
+.progress.hidden { display: none; }
+.progress-track {
+  height: 6px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  border-radius: 3px;
+  transition: width 0.2s ease-out;
+}
+/* Before the server reports a total there is nothing honest to show as a
+   fraction, so the bar sweeps instead of claiming a position. */
+.progress-fill.indeterminate {
+  width: 35%;
+  animation: progress-sweep 1.1s ease-in-out infinite;
+}
+@keyframes progress-sweep {
+  0%   { margin-left: -35%; }
+  100% { margin-left: 100%; }
+}
+.progress-label {
+  display: block;
+  margin-top: 5px;
+  font-size: 11px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
