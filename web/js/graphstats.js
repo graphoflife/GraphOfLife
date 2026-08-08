@@ -46,55 +46,129 @@ const GraphStats = {
    * one by one is hopeless (their number grows exponentially), but this is
    * exact and costs nothing.
    *
-   * For "how many loops is this node or edge part of", the honest answer comes
-   * from 2-edge-connected components. An edge that lies on no loop at all is a
-   * bridge: removing it splits the graph. Take the bridges out and what remains
-   * falls into components in which every edge lies on some loop, and each such
-   * component has its own cycle rank — the number of independent loops running
-   * through that part of the graph. Those components partition the nodes, so
-   * every node gets exactly one number.
+   * Bridges are also reported: an edge on no loop at all, whose removal splits
+   * the graph. Per-node and per-edge loop counts come from
+   * `cycleParticipation` rather than from here.
    */
   loops(ids, edges, adj) {
-    const bridges = this._bridges(ids, edges, adj);
-
-    // Rebuild adjacency without the bridges; what is left is 2-edge-connected.
-    const stripped = new Map();
-    for (const id of ids) stripped.set(id, new Set());
-    let bridgeCount = 0;
-
-    for (let i = 0; i < edges.length; i++) {
-      if (bridges.has(i)) { bridgeCount++; continue; }
-      const [a, b] = edges[i];
-      const sa = stripped.get(a), sb = stripped.get(b);
-      if (sa && sb && a !== b) { sa.add(b); sb.add(a); }
-    }
-
-    const { label, count } = this.components(ids, stripped);
-
-    // Cycle rank of each 2-edge-connected component.
-    const nodesIn = new Array(count).fill(0);
-    const edgesIn = new Array(count).fill(0);
-    for (const id of ids) nodesIn[label.get(id)]++;
-    for (let i = 0; i < edges.length; i++) {
-      if (bridges.has(i)) continue;
-      edgesIn[label.get(edges[i][0])]++;
-    }
-    const rankOf = nodesIn.map((n, c) => Math.max(0, edgesIn[c] - n + 1));
-
-    const nodeLoops = new Map();
-    for (const id of ids) nodeLoops.set(id, rankOf[label.get(id)]);
-
-    const edgeLoops = new Int32Array(edges.length);
-    for (let i = 0; i < edges.length; i++) {
-      edgeLoops[i] = bridges.has(i) ? 0 : rankOf[label.get(edges[i][0])];
-    }
-
-    // Whole-graph cycle rank, over however many components the graph has.
+    const bridgeSet = this._bridges(ids, edges, adj);
     const whole = this.components(ids, adj);
     const cycleRank = Math.max(0, edges.length - ids.length + whole.count);
 
-    return { cycleRank, bridges: bridgeCount, nodeLoops, edgeLoops,
-             blockCount: count, componentCount: whole.count };
+    const participation = this.cycleParticipation(ids, edges, adj);
+
+    return {
+      cycleRank,
+      bridges: bridgeSet.size,
+      componentCount: whole.count,
+      nodeLoops: participation.perNode,
+      edgeLoops: participation.perEdge,
+      basisSize: participation.basisSize,
+      meanCycleLength: participation.meanLength
+    };
+  },
+
+  /**
+   * How many loops each node and edge actually lies on.
+   *
+   * Counting every loop through an element is intractable — the number of
+   * cycles in a graph grows exponentially — so this counts a *basis* instead.
+   * Take a spanning tree; each of the remaining edges closes exactly one loop,
+   * its fundamental cycle, and those cycles form an independent set that
+   * generates every other loop in the graph. There are exactly `cycleRank` of
+   * them, so the counts are on the same footing as the total.
+   *
+   * The tree is built breadth-first, which keeps the fundamental cycles short
+   * and local rather than sending them on long detours through the graph. A
+   * different tree would give a different basis, so treat these as a fair
+   * sample of the loop structure rather than a canonical answer — but unlike
+   * the cycle rank of a whole 2-edge-connected block, which hands every node in
+   * the core the same large number, this actually distinguishes a node that
+   * many loops run through from one that only a couple do.
+   */
+  cycleParticipation(ids, edges, adj) {
+    const perNode = new Map();
+    for (const id of ids) perNode.set(id, 0);
+    const perEdge = new Int32Array(edges.length);
+
+    const edgeIndex = new Map();
+    for (let i = 0; i < edges.length; i++) {
+      const [a, b] = edges[i];
+      edgeIndex.set(a < b ? `${a},${b}` : `${b},${a}`, i);
+    }
+
+    // Breadth-first spanning forest.
+    const parent = new Map(), depth = new Map();
+    const seen = new Set();
+    for (const root of ids) {
+      if (seen.has(root)) continue;
+      seen.add(root); parent.set(root, null); depth.set(root, 0);
+      const queue = [root];
+      for (let qi = 0; qi < queue.length; qi++) {
+        const u = queue[qi];
+        for (const v of adj.get(u) || []) {
+          if (seen.has(v)) continue;
+          seen.add(v); parent.set(v, u); depth.set(v, depth.get(u) + 1);
+          queue.push(v);
+        }
+      }
+    }
+
+    const treeEdges = new Set();
+    for (const [child, up] of parent) {
+      if (up === null) continue;
+      treeEdges.add(child < up ? `${child},${up}` : `${up},${child}`);
+    }
+
+    const bump = (a, b) => {
+      const i = edgeIndex.get(a < b ? `${a},${b}` : `${b},${a}`);
+      if (i !== undefined) perEdge[i]++;
+    };
+
+    let basisSize = 0, totalLength = 0;
+
+    for (let i = 0; i < edges.length; i++) {
+      const [a, b] = edges[i];
+      const key = a < b ? `${a},${b}` : `${b},${a}`;
+      if (treeEdges.has(key)) continue;          // tree edges close no new loop
+      if (!depth.has(a) || !depth.has(b)) continue;
+
+      // Climb both ends to their common ancestor; that path plus this edge is
+      // the fundamental cycle.
+      let x = a, y = b;
+      const left = [], right = [];
+      let guard = 0;
+      const limit = ids.length + 1;
+
+      while (depth.get(x) > depth.get(y) && guard++ < limit) { left.push(x); x = parent.get(x); }
+      while (depth.get(y) > depth.get(x) && guard++ < limit) { right.push(y); y = parent.get(y); }
+      while (x !== y && guard++ < limit) {
+        left.push(x); right.push(y);
+        x = parent.get(x); y = parent.get(y);
+      }
+      if (x !== y) continue;                     // different trees; no cycle
+
+      const meeting = x;
+      basisSize++;
+      totalLength += left.length + right.length + 1;
+
+      // Nodes on the cycle: both climbs plus the ancestor they met at.
+      for (const n of left) perNode.set(n, perNode.get(n) + 1);
+      for (const n of right) perNode.set(n, perNode.get(n) + 1);
+      perNode.set(meeting, perNode.get(meeting) + 1);
+
+      // Edges: the closing edge, then each tree step taken on the way up.
+      perEdge[i]++;
+      let prev = a;
+      for (const n of left) { if (n !== prev) bump(prev, n); prev = n; }
+      bump(prev, meeting);
+      prev = b;
+      for (const n of right) { if (n !== prev) bump(prev, n); prev = n; }
+      bump(prev, meeting);
+    }
+
+    return { perNode, perEdge, basisSize,
+             meanLength: basisSize ? totalLength / basisSize : 0 };
   },
 
   /**

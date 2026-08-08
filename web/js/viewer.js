@@ -32,9 +32,13 @@ const Viewer = {
 
     // Layout lives in the settings too, so a preset restores the whole look
     // including how the graph arranges itself, not just its colours.
-    forceCharge: 120, forceLink: 0.12, forceCenter: 0.012,
+    forceCharge: 20, forceLink: 0.12, forceCenter: 0.012,
     forceAngular: 0.15, forceDamping: 0.86,
-    dimensions: 3, autoFit: true
+    dimensions: 3, autoFit: true,
+
+    // Histogram axis scales, per chart and per axis.
+    histDegreeX: 'linear', histDegreeY: 'linear',
+    histTokenX: 'log', histTokenY: 'linear'
   },
 
   init() {
@@ -52,6 +56,7 @@ const Viewer = {
     this.bindCanvas();
     this.bindToggles();
     this.bindPresets();
+    this.bindAxisToggles();
     this.refreshPresetList();
 
     // The declared defaults are only values until something applies them, so
@@ -136,6 +141,30 @@ const Viewer = {
 
     for (const btn of document.querySelectorAll('[data-preset]')) {
       btn.addEventListener('click', () => this.applySettings(Presets.builtIn(btn.dataset.preset)));
+    }
+  },
+
+  bindAxisToggles() {
+    for (const group of document.querySelectorAll('.axis-group')) {
+      const key = 'hist' + group.dataset.axis.charAt(0).toUpperCase() + group.dataset.axis.slice(1);
+      for (const btn of group.querySelectorAll('.axis-btn')) {
+        btn.addEventListener('click', () => {
+          this.settings[key] = btn.dataset.scale;
+          for (const sibling of group.querySelectorAll('.axis-btn')) {
+            sibling.classList.toggle('active', sibling === btn);
+          }
+          this.updateCharts();
+        });
+      }
+    }
+  },
+
+  syncAxisToggles() {
+    for (const group of document.querySelectorAll('.axis-group')) {
+      const key = 'hist' + group.dataset.axis.charAt(0).toUpperCase() + group.dataset.axis.slice(1);
+      for (const btn of group.querySelectorAll('.axis-btn')) {
+        btn.classList.toggle('active', btn.dataset.scale === this.settings[key]);
+      }
     }
   },
 
@@ -543,9 +572,38 @@ const Viewer = {
     }
   },
 
+  /**
+   * Which category each statistic belongs to, and the order within it.
+   *
+   * Phase-specific groups simply come out empty on the other phase, so the
+   * Reproduction section disappears on a game frame rather than showing a row
+   * of dashes.
+   */
+  STAT_GROUPS: [
+    { key: 'general', label: 'General', open: true, keys: [
+      'nodes', 'edges', 'tokens', 'meanTokens', 'medianTokens', 'maxTokens', 'minTokens',
+      'gini', 'topDecileShare', 'tokenEntropy', 'tokenEvenness',
+      'maxTokenAdded', 'maxTokenLost', 'gainers', 'losers',
+      'starved', 'orphaned', 'redistributed',
+      'distinctBrains', 'brainDiversity', 'distinctLineages'
+    ] },
+    { key: 'reproduction', label: 'Reproduction', open: true, keys: [
+      'births', 'reproTokenShare', 'meanInvestedShare', 'meanChildLinks'
+    ] },
+    { key: 'blotto', label: 'Game (Blotto)', open: true, keys: [
+      'totalFlow', 'meanEdgeFlow', 'maxEdgeFlow', 'selfAllocationShare',
+      'revoltShare', 'spreadShare', 'revolutions', 'heldHomeShare', 'prunedEdges'
+    ] },
+    { key: 'structure', label: 'Structure', open: false, keys: [
+      'density', 'meanDegree', 'medianDegree', 'maxDegree', 'minDegree', 'leaves',
+      'cycleRank', 'loopDensity', 'bridges', 'triangles', 'transitivity',
+      'dimension', 'degreeEntropy', 'degreeEvenness', 'components'
+    ] }
+  ],
+
   updateStats() {
-    const strip = document.getElementById('statsStrip');
-    if (!this.metrics) { strip.innerHTML = ''; return; }
+    const container = document.getElementById('statsStrip');
+    if (!this.metrics) { container.innerHTML = ''; return; }
     const s = this.metrics.summary();
 
     // Node counts are also given as a share of the population that entered the
@@ -558,91 +616,110 @@ const Viewer = {
     const pct = v => `${(v * 100).toFixed(1)}%`;
     const dec = (v, n = 2) => v.toFixed(n);
 
-    const cells = [
-      // Topology
-      ['nodes', 'Nodes', formatNumber(s.nodes)],
-      ['edges', 'Edges', formatNumber(s.edges)],
-      ['density', 'Density', `${(s.density * 100).toFixed(2)}%`],
-      ['meanDegree', 'Mean degree', dec(s.meanDegree)],
-      ['medianDegree', 'Median degree', dec(s.medianDegree, 1)],
-      ['maxDegree', 'Max degree', formatNumber(s.maxDegree)],
-      ['minDegree', 'Min degree', formatNumber(s.minDegree)],
-      ['leaves', 'Leaves', withShare(s.leaves)],
+    // label and formatted value for every statistic that has one this frame
+    const cells = {
+      nodes: ['Nodes', formatNumber(s.nodes)],
+      edges: ['Edges', formatNumber(s.edges)],
+      tokens: ['Tokens', formatNumber(s.tokens)],
+      meanTokens: ['Mean tokens', int(s.meanTokens)],
+      medianTokens: ['Median tokens', int(s.medianTokens)],
+      maxTokens: ['Richest', formatNumber(s.maxTokens)],
+      minTokens: ['Poorest', formatNumber(s.minTokens)],
+      gini: ['Gini', dec(s.gini, 3)],
+      topDecileShare: ['Top 10% hold', pct(s.topDecileShare)],
+      tokenEntropy: ['Token entropy', `${dec(s.tokenEntropy)} bits`],
+      tokenEvenness: ['Token evenness', pct(s.tokenEvenness)],
+      maxTokenAdded: ['Max token added', `+${formatNumber(s.maxTokenAdded)}`],
+      maxTokenLost: ['Max token lost', `-${formatNumber(s.maxTokenLost)}`],
+      gainers: ['Gained', withShare(s.gainers)],
+      losers: ['Lost', withShare(s.losers)],
+      distinctBrains: ['Distinct brains', formatNumber(s.distinctBrains)],
+      brainDiversity: ['Brain diversity', pct(s.brainDiversity)],
+      distinctLineages: ['Distinct lineages', formatNumber(s.distinctLineages)],
 
-      // Wealth
-      ['tokens', 'Tokens', formatNumber(s.tokens)],
-      ['meanTokens', 'Mean tokens', int(s.meanTokens)],
-      ['medianTokens', 'Median tokens', int(s.medianTokens)],
-      ['maxTokens', 'Richest', formatNumber(s.maxTokens)],
-      ['minTokens', 'Poorest', formatNumber(s.minTokens)],
-      ['gini', 'Gini', dec(s.gini, 3)],
-      ['topDecileShare', 'Top 10% hold', pct(s.topDecileShare)],
-      ['maxTokenAdded', 'Max token added', `+${formatNumber(s.maxTokenAdded)}`],
-      ['maxTokenLost', 'Max token lost', `-${formatNumber(s.maxTokenLost)}`],
-      ['gainers', 'Gained', withShare(s.gainers)],
-      ['losers', 'Lost', withShare(s.losers)],
+      density: ['Density', `${(s.density * 100).toFixed(2)}%`],
+      meanDegree: ['Mean degree', dec(s.meanDegree)],
+      medianDegree: ['Median degree', dec(s.medianDegree, 1)],
+      maxDegree: ['Max degree', formatNumber(s.maxDegree)],
+      minDegree: ['Min degree', formatNumber(s.minDegree)],
+      leaves: ['Leaves', withShare(s.leaves)],
+      cycleRank: ['Loops', formatNumber(s.cycleRank)],
+      loopDensity: ['Loop density', pct(s.loopDensity)],
+      bridges: ['Bridges', formatNumber(s.bridges)],
+      triangles: ['Triangles', formatNumber(s.triangles)],
+      transitivity: ['Clustering', dec(s.transitivity, 3)],
+      dimension: ['Dimension', s.dimension === null ? '—' : dec(s.dimension)],
+      degreeEntropy: ['Degree entropy', `${dec(s.degreeEntropy)} bits`],
+      degreeEvenness: ['Degree evenness', pct(s.degreeEvenness)],
+      components: ['Components', formatNumber(s.components)]
+    };
 
-      // Genome
-      ['distinctBrains', 'Distinct brains', formatNumber(s.distinctBrains)],
-      ['brainDiversity', 'Brain diversity', pct(s.brainDiversity)],
-      ['distinctLineages', 'Distinct lineages', formatNumber(s.distinctLineages)],
-
-      // Structure
-      ['cycleRank', 'Loops', formatNumber(s.cycleRank)],
-      ['loopDensity', 'Loop density', pct(s.loopDensity)],
-      ['bridges', 'Bridges', formatNumber(s.bridges)],
-      ['triangles', 'Triangles', formatNumber(s.triangles)],
-      ['transitivity', 'Clustering', dec(s.transitivity, 3)],
-      ['dimension', 'Dimension', s.dimension === null ? '—' : dec(s.dimension, 2)],
-      ['degreeEntropy', 'Degree entropy', `${dec(s.degreeEntropy, 2)} bits`],
-      ['tokenEntropy', 'Token entropy', `${dec(s.tokenEntropy, 2)} bits`],
-      ['tokenEvenness', 'Token evenness', pct(s.tokenEvenness)]
-    ];
-
-    // Reproduction phase
+    // Present only when the phase produced them.
     if (s.births !== null) {
-      cells.push(['births', 'Births', withShare(s.births)]);
-      cells.push(['reproTokenShare', 'Tokens to offspring', pct(s.reproTokenShare)]);
-      cells.push(['meanInvestedShare', 'Mean investment', pct(s.meanInvestedShare)]);
-      cells.push(['meanChildLinks', 'Links per child', dec(s.meanChildLinks)]);
+      cells.births = ['Births', withShare(s.births)];
+      cells.reproTokenShare = ['Tokens to offspring', pct(s.reproTokenShare)];
+      cells.meanInvestedShare = ['Mean investment', pct(s.meanInvestedShare)];
+      cells.meanChildLinks = ['Links per child', dec(s.meanChildLinks)];
     }
-
-    // Game phase
     if (s.totalFlow !== null) {
-      cells.push(['totalFlow', 'Tokens moved', formatNumber(s.totalFlow)]);
-      cells.push(['meanEdgeFlow', 'Mean edge flow', dec(s.meanEdgeFlow, 1)]);
-      cells.push(['maxEdgeFlow', 'Max edge flow', formatNumber(s.maxEdgeFlow)]);
-      cells.push(['selfAllocationShare', 'Kept at home', pct(s.selfAllocationShare)]);
-      cells.push(['revoltShare', 'Revolt tokens', pct(s.revoltShare)]);
-      cells.push(['spreadShare', 'Spread doctrine', pct(s.spreadShare)]);
+      cells.totalFlow = ['Tokens moved', formatNumber(s.totalFlow)];
+      cells.meanEdgeFlow = ['Mean edge flow', dec(s.meanEdgeFlow, 1)];
+      cells.maxEdgeFlow = ['Max edge flow', formatNumber(s.maxEdgeFlow)];
+      cells.selfAllocationShare = ['Kept at home', pct(s.selfAllocationShare)];
+      cells.revoltShare = ['Revolt tokens', pct(s.revoltShare)];
+      cells.spreadShare = ['Spread doctrine', pct(s.spreadShare)];
     }
-    if (s.revolutions !== null) cells.push(['revolutions', 'Revolutions', withShare(s.revolutions)]);
-    if (s.heldHomeShare !== null) cells.push(['heldHomeShare', 'Held own node', pct(s.heldHomeShare)]);
-    if (s.prunedEdges !== null) cells.push(['prunedEdges', 'Pruned edges', formatNumber(s.prunedEdges)]);
+    if (s.revolutions !== null) cells.revolutions = ['Revolutions', withShare(s.revolutions)];
+    if (s.heldHomeShare !== null) cells.heldHomeShare = ['Held own node', pct(s.heldHomeShare)];
+    if (s.prunedEdges !== null) cells.prunedEdges = ['Pruned edges', formatNumber(s.prunedEdges)];
+    if (s.starved !== null) cells.starved = ['Starved', withShare(s.starved)];
+    if (s.orphaned !== null) cells.orphaned = ['Culled', withShare(s.orphaned)];
+    if (s.redistributed !== null) cells.redistributed = ['Redistributed', formatNumber(s.redistributed)];
 
-    // Cleanup
-    if (s.starved !== null) cells.push(['starved', 'Starved', withShare(s.starved)]);
-    if (s.orphaned !== null) cells.push(['orphaned', 'Culled', withShare(s.orphaned)]);
-    if (s.redistributed !== null) cells.push(['redistributed', 'Redistributed', formatNumber(s.redistributed)]);
+    // Remember which sections were open, so redrawing a frame does not fold
+    // everything back up under the reader.
+    const wasOpen = new Map();
+    for (const el of container.querySelectorAll('.stat-group')) {
+      wasOpen.set(el.dataset.group, el.open);
+    }
 
-    strip.innerHTML = cells.map(([key, label, value]) =>
-      `<button class="stat" data-stat="${key}" data-label="${label}" title="Click for an explanation and its history">
-         <span class="stat-key">${label}</span><span class="stat-val">${value}</span>
-       </button>`).join('');
+    const html = [];
+    for (const group of this.STAT_GROUPS) {
+      const present = group.keys.filter(k => cells[k]);
+      if (!present.length) continue;
 
-    for (const el of strip.querySelectorAll('.stat')) {
+      const open = wasOpen.has(group.key) ? wasOpen.get(group.key) : group.open;
+      const body = present.map(k => {
+        const [label, value] = cells[k];
+        return `<button class="stat" data-stat="${k}" data-label="${label}"
+                  title="Click for an explanation and its history">
+                  <span class="stat-key">${label}</span><span class="stat-val">${value}</span>
+                </button>`;
+      }).join('');
+
+      html.push(`<details class="stat-group" data-group="${group.key}"${open ? ' open' : ''}>
+          <summary>${group.label}<span class="stat-group-count">${present.length}</span></summary>
+          <div class="stat-group-body">${body}</div>
+        </details>`);
+    }
+    container.innerHTML = html.join('');
+
+    for (const el of container.querySelectorAll('.stat')) {
       el.addEventListener('click', () => StatDetail.open(el.dataset.stat, el.dataset.label));
     }
   },
 
   updateCharts() {
     if (!this.metrics) return;
+    const s = this.settings;
+
     drawHistogram(document.getElementById('degreeHist'), Array.from(this.metrics.degree), {
-      bins: 30, colormap: this.settings.nodeColormap, reverse: this.settings.nodeColorReverse
+      bins: 30, colormap: s.nodeColormap, reverse: s.nodeColorReverse,
+      logScale: s.histDegreeX === 'log', logCount: s.histDegreeY === 'log'
     });
     drawHistogram(document.getElementById('tokenHist'), this.frame.tokens, {
-      bins: 30, colormap: this.settings.nodeColormap,
-      reverse: this.settings.nodeColorReverse, logScale: true
+      bins: 30, colormap: s.nodeColormap, reverse: s.nodeColorReverse,
+      logScale: s.histTokenX === 'log', logCount: s.histTokenY === 'log'
     });
   },
 
@@ -730,6 +807,7 @@ const Viewer = {
     Object.assign(this.settings, preset);
 
     this.syncControlsFromSettings();
+    this.syncAxisToggles();
     this.applyLayoutSettings();
     if (preset.dimensions) this.setDimensions(preset.dimensions);
     this.setAutoFit(this.settings.autoFit);

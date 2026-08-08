@@ -15,7 +15,7 @@ const Presets = {
 
   /** Layout every built-in starts from, unless it says otherwise. */
   BASE_LAYOUT: {
-    forceCharge: 120, forceLink: 0.12, forceCenter: 0.012,
+    forceCharge: 20, forceLink: 0.12, forceCenter: 0.012,
     forceAngular: 0.15, forceDamping: 0.86,
     dimensions: 3, layoutCarry: true, autoFit: true
   },
@@ -25,14 +25,14 @@ const Presets = {
       nodeColorBy: 'log_tokens', nodeColormap: 'inferno', nodeSizeBy: 'tokens',
       edgeColorBy: 'constant', edgeWidthBy: 'constant', edgeAlpha: 0.18,
       bgStyle: 'radial', nodeAlpha: 0.95,
-      forceCharge: 140, forceLink: 0.12, forceCenter: 0.012,
+      forceCharge: 24, forceLink: 0.12, forceCenter: 0.012,
       forceAngular: 0.15, forceDamping: 0.86, dimensions: 3
     },
     lineage: {
       nodeColorBy: 'brain_id', nodeColormap: 'turbo', nodeSizeBy: 'log_tokens',
       edgeColorBy: 'source', edgeAlpha: 0.3, bgStyle: 'solid', nodeAlpha: 0.9,
       // Looser and more open, so separate lineages drift apart visibly.
-      forceCharge: 170, forceLink: 0.09, forceCenter: 0.009,
+      forceCharge: 45, forceLink: 0.09, forceCenter: 0.009,
       forceAngular: 0.2, forceDamping: 0.88, dimensions: 3
     },
     structure: {
@@ -41,14 +41,14 @@ const Presets = {
       bgStyle: 'linear', nodeAlpha: 0.85,
       // Strong angular spread and tight links, which is what makes the
       // branching shape of the graph legible.
-      forceCharge: 120, forceLink: 0.2, forceCenter: 0.014,
+      forceCharge: 12, forceLink: 0.2, forceCenter: 0.014,
       forceAngular: 0.5, forceDamping: 0.86, dimensions: 3
     },
     minimal: {
       nodeColorBy: 'constant', nodeColormap: 'grayscale', nodeSizeBy: 'constant',
       edgeColorBy: 'constant', edgeWidthBy: 'constant', edgeAlpha: 0.12,
       bgStyle: 'solid', nodeAlpha: 0.7,
-      forceCharge: 100, forceLink: 0.12, forceCenter: 0.012,
+      forceCharge: 18, forceLink: 0.12, forceCenter: 0.012,
       forceAngular: 0.08, forceDamping: 0.86, dimensions: 3
     }
   },

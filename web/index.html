@@ -193,15 +193,35 @@
         <span class="hint" id="dimHint">Drag to pan · alt-drag or middle-drag to orbit · scroll to zoom</span>
       </div>
 
-      <div class="stats-strip" id="statsStrip"></div>
+      <div class="stats-groups" id="statsStrip"></div>
 
       <div class="charts">
         <figure>
-          <figcaption>Degree distribution</figcaption>
+          <figcaption>
+            <span>Degree distribution</span>
+            <span class="axis-toggles">
+              <span class="axis-group" data-axis="degreeX">x
+                <button class="axis-btn active" data-scale="linear">lin</button><button class="axis-btn" data-scale="log">log</button>
+              </span>
+              <span class="axis-group" data-axis="degreeY">y
+                <button class="axis-btn active" data-scale="linear">lin</button><button class="axis-btn" data-scale="log">log</button>
+              </span>
+            </span>
+          </figcaption>
           <canvas id="degreeHist" height="150"></canvas>
         </figure>
         <figure>
-          <figcaption>Token distribution <span class="hint">(log scale)</span></figcaption>
+          <figcaption>
+            <span>Token distribution</span>
+            <span class="axis-toggles">
+              <span class="axis-group" data-axis="tokenX">x
+                <button class="axis-btn" data-scale="linear">lin</button><button class="axis-btn active" data-scale="log">log</button>
+              </span>
+              <span class="axis-group" data-axis="tokenY">y
+                <button class="axis-btn active" data-scale="linear">lin</button><button class="axis-btn" data-scale="log">log</button>
+              </span>
+            </span>
+          </figcaption>
           <canvas id="tokenHist" height="150"></canvas>
         </figure>
       </div>
@@ -320,7 +340,8 @@
       <details class="control-group">
         <summary><h3>Layout</h3></summary>
         <div class="group-body">
-          <label>Repulsion <input type="range" id="forceCharge" min="10" max="400" step="10" value="120"></label>
+          <label>Repulsion <input type="range" id="forceCharge" min="0" max="200" step="1" value="20"></label>
+          <small class="hint">All-pairs, so the graph spreads globally. At 0 only the springs act and it clumps tightly.</small>
           <label>Link strength <input type="range" id="forceLink" min="0.01" max="0.6" step="0.01" value="0.12"></label>
           <label>Centering <input type="range" id="forceCenter" min="0" max="0.1" step="0.002" value="0.012"></label>
           <label>Angular spread <input type="range" id="forceAngular" min="0" max="1" step="0.01" value="0.15"></label>

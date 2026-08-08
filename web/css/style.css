@@ -515,3 +515,45 @@ details.control-group > summary:hover h3 { color: var(--text); }
 
 /* The toggle row carries more now, so let it wrap tidily. */
 .view-toggles { row-gap: 8px; }
+
+/* Histogram axis scale toggles */
+.charts figcaption { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.axis-toggles { display: inline-flex; gap: 10px; align-items: center; }
+.axis-group { display: inline-flex; align-items: center; gap: 3px; color: #6b7c8d; font-size: 10px; }
+.axis-btn {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 10px;
+  padding: 1px 5px;
+  border-radius: 4px;
+  line-height: 1.4;
+}
+.axis-btn.active { background: var(--accent-dim); color: #fff; border-color: var(--accent-dim); }
+
+/* Statistics, grouped into collapsible categories */
+.stats-groups { margin-top: 10px; display: flex; flex-direction: column; gap: 6px; }
+.stat-group {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.stat-group > summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 7px 10px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  color: var(--muted);
+}
+.stat-group > summary::-webkit-details-marker { display: none; }
+.stat-group > summary::before { content: '▸'; font-size: 9px; transition: transform 0.15s; }
+.stat-group[open] > summary::before { transform: rotate(90deg); }
+.stat-group > summary:hover { color: var(--text); }
+.stat-group-count { margin-left: auto; color: #5b6b7c; font-size: 10px; letter-spacing: 0; }
+.stat-group-body { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 10px 10px; }
+.stat-group .stat { background: var(--panel-2); }

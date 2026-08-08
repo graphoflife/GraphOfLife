@@ -603,7 +603,8 @@ class FrameMetrics {
  * when a handful of agents hold most of the economy.
  */
 function drawHistogram(canvas, values, options = {}) {
-  const { bins = 32, colormap = 'viridis', reverse = false, logScale = false } = options;
+  const { bins = 32, colormap = 'viridis', reverse = false,
+          logScale = false, logCount = false } = options;
   const ctx = canvas.getContext('2d');
   const dpr = window.devicePixelRatio || 1;
   const rect = canvas.getBoundingClientRect();
@@ -637,8 +638,14 @@ function drawHistogram(canvas, values, options = {}) {
   const plotH = h - padBottom - padTop;
   const barW = w / bins;
 
+  // A log count axis lets a long tail of rare values stay visible next to a
+  // spike that would otherwise flatten everything else to nothing.
+  const barFraction = c => logCount
+    ? (c > 0 ? Math.log1p(c) / Math.log1p(peak) : 0)
+    : c / peak;
+
   for (let i = 0; i < bins; i++) {
-    const barH = (counts[i] / peak) * plotH;
+    const barH = barFraction(counts[i]) * plotH;
     ctx.fillStyle = colormapCss(colormap, i / (bins - 1), 0.92, reverse);
     ctx.fillRect(i * barW, padTop + plotH - barH, Math.max(1, barW - 1), barH);
   }
@@ -651,6 +658,6 @@ function drawHistogram(canvas, values, options = {}) {
   ctx.fillText(fmt(lo), 2, h - 4);
   const hiText = fmt(hi);
   ctx.fillText(hiText, w - ctx.measureText(hiText).width - 2, h - 4);
-  const peakText = `peak ${peak}`;
+  const peakText = `peak ${peak}${logCount ? ' · log' : ''}`;
   ctx.fillText(peakText, (w - ctx.measureText(peakText).width) / 2, h - 4);
 }

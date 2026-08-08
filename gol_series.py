@@ -137,24 +137,6 @@ def _structure(ids: List[int], edges: List[List[int]]) -> Dict[str, Any]:
             timer += 1
             stack.append([nxt, node, iter(adj[nxt])])
 
-    # --- 2-edge-connected components, once the bridges are removed ---
-    stripped: Dict[int, set] = {i: set() for i in ids}
-    for i, (a, b) in enumerate(edges):
-        if i in bridges or a == b:
-            continue
-        if a in stripped and b in stripped:
-            stripped[a].add(b)
-            stripped[b].add(a)
-
-    block_label, block_count = component_labels(stripped)
-    nodes_in = [0] * block_count
-    edges_in = [0] * block_count
-    for i in ids:
-        nodes_in[block_label[i]] += 1
-    for i, (a, b) in enumerate(edges):
-        if i not in bridges:
-            edges_in[block_label[a]] += 1
-
     _, component_count = component_labels(adj)
     cycle_rank = max(0, len(edges) - len(ids) + component_count)
 

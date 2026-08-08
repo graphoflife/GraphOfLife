@@ -5,10 +5,10 @@
  * offline on any machine you clone the repo onto.
  *
  * Four forces per tick:
- *   repulsion  — every node pushes its neighbours in space apart. Evaluated
- *                against a uniform spatial grid rather than all pairs, so cost
- *                is roughly O(n) instead of O(n^2). This is what lets it handle
- *                a few thousand nodes.
+ *   repulsion  — every node pushes every other apart, approximated with a
+ *                Barnes-Hut tree so the cost is O(n log n) rather than
+ *                quadratic. Being all-pairs rather than merely local is what
+ *                lets the drawing spread outward instead of staying balled up.
  *   springs    — graph edges pull their endpoints toward a rest length.
  *   angular    — a node's incident edges spread evenly around it, so a degree-2
  *                node straightens toward 180 degrees, a degree-3 node toward
@@ -33,12 +33,16 @@ class ForceLayout {
     this.alpha = 1;
 
     this.dimensions = 2;
-    this.charge = 120;
+    this.charge = 20;
     this.linkStrength = 0.12;
     this.linkDistance = 24;
     this.centerStrength = 0.012;
     this.angularStrength = 0.15;
     this.damping = 0.86;
+
+    // Barnes-Hut opening angle: how distant a clump must be before it is
+    // treated as one body. Larger is faster and coarser.
+    this.theta = 0.9;
 
     // Spreading spokes pairwise costs O(d^2) at a node of degree d. Hubs are
     // pinned by their own edges and barely move anyway, so past this degree the
@@ -207,77 +211,158 @@ class ForceLayout {
   }
 
   /**
-   * Short-range repulsion using a uniform grid.
+   * All-pairs repulsion, approximated with a Barnes-Hut tree.
    *
-   * Only nodes sharing a cell or an adjacent cell interact. Beyond the cell
-   * size the force is negligible anyway, so the approximation costs little and
-   * turns the quadratic blow-up into something linear.
+   * Every node pushes on every other, which is what a spring layout of the
+   * NetworkX kind does and what makes a drawing spread outward: distant parts
+   * still feel each other and push apart, so branches fan out instead of
+   * folding back over the middle.
+   *
+   * The previous version only looked at neighbouring cells of a uniform grid.
+   * That is cheap, but it means two clusters a few cell-widths apart exert no
+   * force on each other whatsoever, so the drawing stays balled up however long
+   * it runs.
+   *
+   * Doing it honestly would cost O(n^2). Instead the nodes are bucketed into a
+   * tree, and a clump far enough away is treated as a single body sitting at
+   * its centre of mass — the standard Barnes-Hut trade, accurate where it
+   * matters and O(n log n) overall.
    */
   _repel(nodes) {
-    const cell = Math.max(20, this.linkDistance * 2.2);
-    const grid = new Map();
-    const use3D = this.is3D;
-
-    for (const p of nodes) {
-      const key = use3D
-        ? `${Math.floor(p.x / cell)},${Math.floor(p.y / cell)},${Math.floor(p.z / cell)}`
-        : `${Math.floor(p.x / cell)},${Math.floor(p.y / cell)}`;
-      let bucket = grid.get(key);
-      if (!bucket) grid.set(key, bucket = []);
-      bucket.push(p);
-    }
-
     const strength = this.charge * this.alpha;
-    const maxDistSq = cell * cell;
-    const zRange = use3D ? 1 : 0;
+    if (strength <= 0) return;
+
+    const root = this._buildTree(nodes);
+    if (!root) return;
 
     // Repulsion goes as 1/distance^2, so a pair that is almost coincident gets
     // an unbounded kick. Flooring the distance at a fraction of the rest length
-    // caps that at a force the springs can still answer; without it a crowded
-    // graph flings nodes far enough that the grid stops seeing them at all,
-    // and nothing pulls the drawing back.
+    // caps that at a force the springs can still answer.
     const minDistSq = Math.max(1, (this.linkDistance * 0.2) ** 2);
+    const thetaSq = this.theta * this.theta;
 
     for (const p of nodes) {
-      const cx = Math.floor(p.x / cell);
-      const cy = Math.floor(p.y / cell);
-      const cz = use3D ? Math.floor(p.z / cell) : 0;
+      this._applyTree(p, root, strength, minDistSq, thetaSq);
+    }
+  }
 
-      for (let ox = -1; ox <= 1; ox++) {
-        for (let oy = -1; oy <= 1; oy++) {
-          for (let oz = -zRange; oz <= zRange; oz++) {
-            const key = use3D
-              ? `${cx + ox},${cy + oy},${cz + oz}`
-              : `${cx + ox},${cy + oy}`;
-            const bucket = grid.get(key);
-            if (!bucket) continue;
+  /** Bucket the nodes into a quad- or octree with centres of mass. */
+  _buildTree(nodes) {
+    let minX = Infinity, minY = Infinity, minZ = Infinity;
+    let maxX = -Infinity, maxY = -Infinity, maxZ = -Infinity;
+    for (const p of nodes) {
+      if (p.x < minX) minX = p.x; if (p.x > maxX) maxX = p.x;
+      if (p.y < minY) minY = p.y; if (p.y > maxY) maxY = p.y;
+      if (p.z < minZ) minZ = p.z; if (p.z > maxZ) maxZ = p.z;
+    }
+    if (!Number.isFinite(minX)) return null;
 
-            for (const q of bucket) {
-              if (q === p) continue;
-              let dx = p.x - q.x;
-              let dy = p.y - q.y;
-              let dz = use3D ? p.z - q.z : 0;
-              let dSq = dx * dx + dy * dy + dz * dz;
-              if (dSq > maxDistSq) continue;
+    const use3D = this.is3D;
+    const size = Math.max(maxX - minX, maxY - minY, use3D ? maxZ - minZ : 0, 1e-6);
+    const root = this._cell((minX + maxX) / 2, (minY + maxY) / 2, use3D ? (minZ + maxZ) / 2 : 0, size);
 
-              // Two nodes exactly on top of each other have no direction to
-              // separate along, so nudge them apart randomly.
-              if (dSq < 1e-6) {
-                dx = (Math.random() - 0.5) * 0.1;
-                dy = (Math.random() - 0.5) * 0.1;
-                dz = use3D ? (Math.random() - 0.5) * 0.1 : 0;
-                dSq = dx * dx + dy * dy + dz * dz;
-              }
+    for (const p of nodes) this._insert(root, p, 0, use3D);
+    return root;
+  }
 
-              const force = strength / Math.max(dSq, minDistSq);
-              p.vx += dx * force;
-              p.vy += dy * force;
-              if (use3D) p.vz += dz * force;
-            }
-          }
-        }
+  _cell(cx, cy, cz, size) {
+    return { cx, cy, cz, size, mass: 0, mx: 0, my: 0, mz: 0, body: null, kids: null };
+  }
+
+  _insert(cell, p, depth, use3D) {
+    // Running centre of mass for this cell.
+    cell.mass += 1;
+    cell.mx += p.x; cell.my += p.y; cell.mz += p.z;
+
+    // Past a certain depth, coincident points would subdivide forever.
+    if (depth > 20) return;
+
+    if (!cell.kids && cell.body === null && cell.mass === 1) {
+      cell.body = p;
+      return;
+    }
+
+    if (!cell.kids) {
+      cell.kids = new Array(use3D ? 8 : 4).fill(null);
+      const existing = cell.body;
+      cell.body = null;
+      if (existing) this._place(cell, existing, depth, use3D);
+    }
+    this._place(cell, p, depth, use3D);
+  }
+
+  _place(cell, p, depth, use3D) {
+    const half = cell.size / 2;
+    let index = (p.x > cell.cx ? 1 : 0) | (p.y > cell.cy ? 2 : 0);
+    if (use3D && p.z > cell.cz) index |= 4;
+
+    let kid = cell.kids[index];
+    if (!kid) {
+      const quarter = half / 2;
+      kid = this._cell(
+        cell.cx + (p.x > cell.cx ? quarter : -quarter),
+        cell.cy + (p.y > cell.cy ? quarter : -quarter),
+        use3D ? cell.cz + (p.z > cell.cz ? quarter : -quarter) : 0,
+        half
+      );
+      cell.kids[index] = kid;
+    }
+    this._insert(kid, p, depth + 1, use3D);
+  }
+
+  /**
+   * Push `p` away from a cell.
+   *
+   * A cell whose width is small compared to its distance is summarised by its
+   * centre of mass; otherwise its children are visited in turn. `theta` sets
+   * where that line falls — larger is faster and coarser.
+   */
+  _applyTree(p, cell, strength, minDistSq, thetaSq) {
+    if (cell.mass === 0) return;
+    const use3D = this.is3D;
+
+    if (cell.body) {
+      if (cell.body === p) return;
+      this._pairPush(p, cell.body.x, cell.body.y, cell.body.z, 1, strength, minDistSq, use3D);
+      return;
+    }
+
+    const comX = cell.mx / cell.mass;
+    const comY = cell.my / cell.mass;
+    const comZ = cell.mz / cell.mass;
+
+    const dx = p.x - comX, dy = p.y - comY, dz = use3D ? p.z - comZ : 0;
+    const distSq = dx * dx + dy * dy + dz * dz;
+
+    if (distSq > 0 && (cell.size * cell.size) / distSq < thetaSq) {
+      this._pairPush(p, comX, comY, comZ, cell.mass, strength, minDistSq, use3D);
+      return;
+    }
+
+    if (cell.kids) {
+      for (const kid of cell.kids) {
+        if (kid) this._applyTree(p, kid, strength, minDistSq, thetaSq);
       }
     }
+  }
+
+  _pairPush(p, x, y, z, mass, strength, minDistSq, use3D) {
+    let dx = p.x - x, dy = p.y - y, dz = use3D ? p.z - z : 0;
+    let distSq = dx * dx + dy * dy + dz * dz;
+
+    // Two nodes exactly on top of each other have no direction to separate
+    // along, so nudge them apart randomly.
+    if (distSq < 1e-9) {
+      dx = (Math.random() - 0.5) * 0.1;
+      dy = (Math.random() - 0.5) * 0.1;
+      dz = use3D ? (Math.random() - 0.5) * 0.1 : 0;
+      distSq = dx * dx + dy * dy + dz * dz;
+    }
+
+    const force = (strength * mass) / Math.max(distSq, minDistSq);
+    p.vx += dx * force;
+    p.vy += dy * force;
+    if (use3D) p.vz += dz * force;
   }
 
   _springs() {
