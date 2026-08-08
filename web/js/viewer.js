@@ -300,9 +300,17 @@ const Viewer = {
       const dx = e.clientX - lastX, dy = e.clientY - lastY;
       lastX = e.clientX; lastY = e.clientY;
 
-      if (rotating) this.renderer.rotate(dx * 0.007, dy * 0.007);
-      else this.renderer.pan(dx, dy);
-      this.setAutoFit(false);
+      if (rotating) {
+        // Orbiting does not fight the framing, it changes what "framed" means:
+        // a graph that filled the canvas from one angle needs a different scale
+        // from another. So auto-fit stays on and re-frames as you turn.
+        this.renderer.rotate(dx * 0.007, dy * 0.007);
+      } else {
+        // Panning is a deliberate "let me look over here", which auto-fit would
+        // immediately undo, so it hands control over.
+        this.renderer.pan(dx, dy);
+        this.setAutoFit(false);
+      }
     });
 
     // Middle-click drag would otherwise trigger autoscroll.
@@ -313,6 +321,9 @@ const Viewer = {
       const rect = this.canvas.getBoundingClientRect();
       this.renderer.zoomAt(e.clientX - rect.left, e.clientY - rect.top,
                            e.deltaY < 0 ? 1.12 : 1 / 1.12);
+      // Grouped with panning rather than with orbiting: auto-fit owns the
+      // scale, so leaving it on here would undo the zoom on the very next
+      // frame and the wheel would feel dead.
       this.setAutoFit(false);
     }, { passive: false });
 
