@@ -687,8 +687,10 @@ const Viewer = {
       cells.meanEdgeFlow = ['Mean edge flow', dec(s.meanEdgeFlow, 1)];
       cells.maxEdgeFlow = ['Max edge flow', formatNumber(s.maxEdgeFlow)];
       cells.selfAllocationShare = ['Kept at home', pct(s.selfAllocationShare)];
-      cells.revoltShare = ['Revolt tokens', pct(s.revoltShare)];
       cells.spreadShare = ['Spread doctrine', pct(s.spreadShare)];
+      // Null when the run has revolutions off. Formatting that as 0% would
+      // claim nobody revolted, when in fact nobody could.
+      if (s.revoltShare !== null) cells.revoltShare = ['Revolt tokens', pct(s.revoltShare)];
     }
     if (s.revolutions !== null) cells.revolutions = ['Revolutions', withShare(s.revolutions)];
     if (s.heldHomeShare !== null) cells.heldHomeShare = ['Held own node', pct(s.heldHomeShare)];

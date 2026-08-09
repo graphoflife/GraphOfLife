@@ -112,10 +112,10 @@ def build_heads(cfg: SimConfig):
     """
     Which output rows mean what, for this configuration.
 
-    The handover rows exist only when the option is on. Always reserving them
+    The optional rows exist only when their option is on. Always reserving them
     would change the brain's shape for every run, and a checkpoint saved under
-    one shape cannot be resumed under another — so a run without handover keeps
-    exactly the architecture it started with.
+    one shape cannot be resumed under another — so a run keeps exactly the
+    architecture it started with.
     """
     heads = {
         "REPRO_FRACTION": slice(0, 2),   # fraction of my tokens to invest in a child
@@ -123,9 +123,11 @@ def build_heads(cfg: SimConfig):
         "LINK_MODE": slice(4, 6),        # read LINK as probability, or as maximum?
         "BLOTTO": 6,                     # desirability of allocating tokens here
         "BLOTTO_MODE": slice(7, 9),      # spread proportionally, or go all-in?
-        "REV_FRACTION": slice(9, 11),    # portion of this allocation that revolts
     }
-    nxt = 11
+    nxt = 9
+    if cfg.allow_revolutions:
+        heads["REV_FRACTION"] = slice(nxt, nxt + 2)   # portion of this allocation that revolts
+        nxt += 2
     if cfg.allow_handover:
         heads["HANDOVER"] = slice(nxt, nxt + 2)       # give this edge to the child?
         heads["HANDOVER_MODE"] = slice(nxt + 2, nxt + 4)
@@ -611,7 +613,8 @@ class GraphOfLife:
                 alloc = np.zeros(len(targets), dtype=int)
                 alloc[int(np.argmax(scores))] = tokens_u
 
-            rev_logits = Y[self.heads["REV_FRACTION"], :]
+            revolts_allowed = self.cfg.allow_revolutions
+            rev_logits = Y[self.heads["REV_FRACTION"], :] if revolts_allowed else None
             rev_amounts: List[int] = []
 
             for idx, v in enumerate(targets):
@@ -624,11 +627,14 @@ class GraphOfLife:
                 allocations_to[v][u] = allocations_to[v].get(u, 0) + amount
 
                 # Only part of what I send here needs to be revolutionary.
-                rev_share = _share_of_first(rev_logits[0, idx], rev_logits[1, idx])
-                rev_amount = int(np.floor(rev_share * amount))
-                rev_amounts.append(rev_amount)
-                if rev_amount > 0:
-                    revolution_to[v][u] = revolution_to[v].get(u, 0) + rev_amount
+                if revolts_allowed:
+                    rev_share = _share_of_first(rev_logits[0, idx], rev_logits[1, idx])
+                    rev_amount = int(np.floor(rev_share * amount))
+                    rev_amounts.append(rev_amount)
+                    if rev_amount > 0:
+                        revolution_to[v][u] = revolution_to[v].get(u, 0) + rev_amount
+                else:
+                    rev_amounts.append(0)
 
                 if u != v:
                     edge = tuple(sorted((u, v)))
@@ -636,14 +642,19 @@ class GraphOfLife:
                         edge_flow[edge] += amount
 
             if record_decisions:
-                alloc_records.append({
+                record = {
                     "agent": int(u),
                     "tokens": tokens_u,
                     "spread": spread,
                     "targets": [int(v) for v in targets],
                     "alloc": [int(a) for a in alloc],
-                    "revolt": rev_amounts,
-                })
+                }
+                # Absent rather than zero when revolutions are off, so the
+                # viewer can tell "not part of these rules" from "allowed but
+                # nobody used it".
+                if revolts_allowed:
+                    record["revolt"] = rev_amounts
+                alloc_records.append(record)
 
         # --- 3. Resolve every contested node ---------------------------------
         new_tokens = dict(self.tokens)
@@ -664,12 +675,14 @@ class GraphOfLife:
             new_tokens[v] = int(incoming_totals[v])
 
             if record_decisions:
-                winners.append({
+                entry = {
                     "node": int(v),
                     "winner": int(winner),
                     "amount": int(max_amount),
-                    "revolt": int(by_revolt),
-                })
+                }
+                if self.cfg.allow_revolutions:
+                    entry["revolt"] = int(by_revolt)
+                winners.append(entry)
 
         self.tokens = new_tokens
         self.brains = new_brains
@@ -711,6 +724,11 @@ class GraphOfLife:
         tips, the revolution succeeds and the winner is drawn from the group
         that tipped it — so a crowd of small allocators can take a node from
         someone who outspent all of them individually.
+
+        With revolutions disabled no tokens are ever flagged, so the mob is
+        always empty and the node simply goes to whoever allocated the most,
+        ties broken at random. That is the whole of the alternative rule; it
+        needs no separate branch.
 
         Returns (winner_id, hegemon's allocation, whether a revolution won).
         """

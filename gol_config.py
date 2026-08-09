@@ -10,12 +10,26 @@ started with, and old runs stay readable after the defaults change.
 from __future__ import annotations
 
 from dataclasses import dataclass, asdict, field, fields
-from typing import Any, Dict, List
+from typing import Any, ClassVar, Dict, List
 
 
 @dataclass
 class SimConfig:
     """All parameters of a single simulation run."""
+
+    # What a run did before a setting existed.
+    #
+    # A stored configuration that predates one of these fields has to resolve
+    # to the behaviour it actually had, not to whatever the default is today.
+    # Handover did not exist, so an old run ran without it; revolutions were
+    # unconditional, so an old run ran with them. Getting this wrong would not
+    # merely mislabel a card — it would change the brain's shape and make the
+    # run's own checkpoint unloadable. Configurations written by the interface
+    # always carry both keys, so an absent one really does mean "older".
+    LEGACY_WHEN_ABSENT: ClassVar[Dict[str, Any]] = {
+        "allow_handover": False,
+        "allow_revolutions": True,
+    }
 
     # ---- Economy ----
     # Total tokens in the world. Conserved unless tokens_created_per_phase > 0.
@@ -36,12 +50,15 @@ class SimConfig:
     random_input_amount: int = 5
     exchange_messages: bool = True
 
-    # ---- Topology ----
+    # ---- Rules ----
     # Let a parent hand one of its own connections to the newborn: the edge
-    # moves from parent to child rather than being copied. Off by default, and
-    # deliberately so — turning it on adds four outputs to the brain, so a run
-    # started without it cannot be resumed with it.
-    allow_handover: bool = False
+    # moves from parent to child rather than being copied.
+    allow_handover: bool = True
+
+    # Let a coalition of smaller allocators unseat the largest one. With this
+    # off, a node simply goes to whoever allocated the most, ties broken at
+    # random, and the revolution fraction head disappears from the brain.
+    allow_revolutions: bool = True
 
     # ---- Mutation ----
     mutation_probability: float = 0.5
@@ -82,10 +99,13 @@ class SimConfig:
         return base + 4 * self.message_amount + self.random_input_amount
 
     def n_outputs(self) -> int:
-        # 11 fixed heads, 4 more when handover is enabled, then the message
-        # vector. Conditional rather than always present so that a run without
-        # handover keeps exactly the architecture it was checkpointed with.
-        return 11 + (4 if self.allow_handover else 0) + self.message_amount
+        # 9 always-present heads, plus the optional ones, then the message
+        # vector. Conditional rather than always present so that a run keeps
+        # exactly the architecture it was checkpointed with.
+        return (9
+                + (2 if self.allow_revolutions else 0)
+                + (4 if self.allow_handover else 0)
+                + self.message_amount)
 
     def head_layout(self) -> Dict[str, Any]:
         """Output row layout. Mirrors the engine's heads, for the UI to display."""
@@ -95,9 +115,11 @@ class SimConfig:
             "LINK_MODE": [4, 6],
             "BLOTTO": [6, 7],
             "BLOTTO_MODE": [7, 9],
-            "REV_FRACTION": [9, 11],
         }
-        nxt = 11
+        nxt = 9
+        if self.allow_revolutions:
+            layout["REV_FRACTION"] = [nxt, nxt + 2]
+            nxt += 2
         if self.allow_handover:
             layout["HANDOVER"] = [nxt, nxt + 2]
             layout["HANDOVER_MODE"] = [nxt + 2, nxt + 4]
@@ -117,6 +139,9 @@ class SimConfig:
         """Build a config from untrusted input, ignoring unknown keys."""
         known = {f.name for f in fields(cls)}
         clean = {k: v for k, v in (data or {}).items() if k in known}
+
+        for key, legacy in cls.LEGACY_WHEN_ABSENT.items():
+            clean.setdefault(key, legacy)
 
         if "hidden_layers" in clean:
             clean["hidden_layers"] = [int(x) for x in clean["hidden_layers"] if int(x) > 0]

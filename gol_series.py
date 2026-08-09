@@ -53,7 +53,7 @@ def progress(run_id: str) -> Dict[str, Any]:
 
 
 # Bump when a formula below changes, so stale caches are discarded.
-SERIES_VERSION = 9
+SERIES_VERSION = 10
 
 # At most this many iterations are analysed for a run's history.
 #
@@ -298,7 +298,10 @@ def frame_stats(frame: Dict[str, Any], previous: Dict[str, Any] | None = None) -
     cleanup = frame.get("cleanup") or {}
 
     winners = decisions.get("winners")
-    revolutions = sum(1 for w in winners if w.get("revolt")) if winners else None
+    # Absent when the run has revolutions off, rather than a misleading zero.
+    revolutions = None
+    if winners and any("revolt" in w for w in winners):
+        revolutions = sum(1 for w in winners if w.get("revolt"))
     held_home = (sum(1 for w in winners if w.get("winner") == w.get("node")) / len(winners)
                  if winners else None)
 
@@ -351,8 +354,9 @@ def frame_stats(frame: Dict[str, Any], previous: Dict[str, Any] | None = None) -
         mean_flow = (total_flow / len(values)) if values else 0.0
         max_flow = max(values) if values else 0
         self_share = (kept / allocated) if allocated else 0.0
-        revolt_share = (revolted / allocated) if allocated else 0.0
         spread_share = (spread_count / len(allocations)) if allocations else 0.0
+        if any("revolt" in r for r in allocations):
+            revolt_share = (revolted / allocated) if allocated else 0.0
 
     # Per-node token change across the phase. Absent on runs recorded before
     # deltas were tracked, in which case the metrics stay None rather than

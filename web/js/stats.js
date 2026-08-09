@@ -559,8 +559,12 @@ class FrameMetrics {
       }
 
       out.selfAllocationShare = allocatedTotal ? keptAtHome / allocatedTotal : 0;
-      out.revoltShare = allocatedTotal ? revolted / allocatedTotal : 0;
       out.spreadShare = allocations.length ? spreadCount / allocations.length : 0;
+      // Left null when the run has revolutions switched off, so the reader can
+      // tell that apart from a phase where nobody revolted.
+      if (allocations.some(a => a.revolt !== undefined)) {
+        out.revoltShare = allocatedTotal ? revolted / allocatedTotal : 0;
+      }
 
       const flows = this.flowValues();
       out.totalFlow = sum(flows);
@@ -569,7 +573,9 @@ class FrameMetrics {
     }
 
     if (d.winners) {
-      out.revolutions = d.winners.filter(w => w.revolt).length;
+      if (d.winners.some(w => w.revolt !== undefined)) {
+        out.revolutions = d.winners.filter(w => w.revolt).length;
+      }
       out.heldHomeShare = d.winners.length
         ? d.winners.filter(w => w.winner === w.node).length / d.winners.length
         : 0;
