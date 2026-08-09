@@ -53,7 +53,17 @@ def progress(run_id: str) -> Dict[str, Any]:
 
 
 # Bump when a formula below changes, so stale caches are discarded.
-SERIES_VERSION = 7
+SERIES_VERSION = 8
+
+# At most this many iterations are analysed for a run's history.
+#
+# The cost is not in reading the frames — decompressing and parsing one takes
+# about 2ms, against 16ms to work out its loops, triangles and dimension. A run
+# of fifty thousand frames would therefore take a quarter of an hour to
+# summarise in full, for a chart a few hundred pixels wide that cannot show
+# that detail anyway. Sampling evenly across the run keeps the shape of every
+# curve while bounding the work.
+MAX_SAMPLED_ITERATIONS = 2000
 
 # Keys that count nodes, and are therefore also meaningful as a share of the
 # population that entered the phase.
@@ -419,6 +429,20 @@ def frame_stats(frame: Dict[str, Any], previous: Dict[str, Any] | None = None) -
     }
 
 
+def _sample_stride(total_iterations: int) -> int:
+    """
+    How many iterations to skip between samples.
+
+    Kept to powers of two so that when a run grows past the limit the existing
+    samples stay valid: every second one is dropped and the rest are reused,
+    rather than the whole history being recomputed against a shifted grid.
+    """
+    stride = 1
+    while total_iterations // stride > MAX_SAMPLED_ITERATIONS:
+        stride *= 2
+    return stride
+
+
 def _cache_path(run_id: str) -> str:
     return os.path.join(store.run_dir(run_id), "series.json")
 
@@ -462,59 +486,83 @@ def build_series(run_id: str) -> Dict[str, Any]:
 
 
 def _build_series_locked(run_id: str) -> Dict[str, Any]:
-    total = store.count_frames(run_id)
+    total_frames = store.count_frames(run_id)
+    # Frames come in pairs, one per phase, so an iteration is two of them.
+    total_iterations = max(0, total_frames // 2)
+    stride = _sample_stride(total_iterations)
+
     cache = _load_cache(run_id)
     rows: List[Dict[str, Any]] = cache.get("rows", [])
+    cached_stride = int(cache.get("stride", 1) or 1)
 
     # A resumed run can be shorter than what we last saw.
-    if len(rows) > total:
-        rows = rows[:total]
+    rows = [r for r in rows if r.get("_frame", 0) < total_frames]
+
+    # The run has grown past the limit since last time: thin what we have
+    # rather than starting over.
+    if cached_stride < stride:
+        rows = [r for r in rows if (r["_frame"] // 2) % stride == 0]
+
+    done_iterations = {r["_frame"] // 2 for r in rows}
+
+    # Both phases of an iteration are kept, so the phase filter still has game
+    # frames to show; sampling only the even indices would drop them entirely.
+    wanted: List[int] = []
+    for it in range(0, total_iterations, stride):
+        if it in done_iterations:
+            continue
+        wanted.extend([2 * it, 2 * it + 1])
+    wanted = [i for i in wanted if i < total_frames]
 
     # Frames written before deltas were tracked need their predecessor to
-    # reconstruct the change, so the previous frame is carried along.
+    # reconstruct the change. That is only sound for genuinely consecutive
+    # frames, which within a sampled iteration means its second phase.
     every = 1
     try:
         every = max(1, int(store.load_meta(run_id).get("config", {}).get("export_every", 1)))
     except (OSError, ValueError, json.JSONDecodeError):
         pass
+    can_reconstruct = (every == 1)
+
+    changed = bool(wanted) or cached_stride != stride or len(rows) != len(cache.get("rows", []))
+    if wanted:
+        _set_progress(run_id, 0, len(wanted), building=True)
 
     previous = None
-    if every == 1 and len(rows) > 0:
-        try:
-            previous = store.read_frame(run_id, len(rows) - 1)
-        except (OSError, json.JSONDecodeError):
-            previous = None
-
-    changed = len(rows) > len(cache.get("rows", []))
-    remaining = total - len(rows)
-    if remaining > 0:
-        _set_progress(run_id, len(rows), total, building=True)
-
-    for index in range(len(rows), total):
+    for step, index in enumerate(wanted):
         try:
             frame = store.read_frame(run_id, index)
         except (OSError, json.JSONDecodeError, KeyError):
             break
-        rows.append(frame_stats(frame, previous if every == 1 else None))
+
+        prior = previous if (can_reconstruct and index % 2 == 1) else None
+        row = frame_stats(frame, prior)
+        row["_frame"] = index
+        rows.append(row)
         previous = frame
-        changed = True
 
-        # Often enough to feel live, rarely enough not to thrash the lock.
-        if index % 25 == 0:
-            _set_progress(run_id, index + 1, total, building=True)
+        # Often enough to feel live, rarely enough to thrash the lock.
+        if step % 10 == 0:
+            _set_progress(run_id, step + 1, len(wanted), building=True)
 
-    if changed or len(rows) != len(cache.get("rows", [])):
-        _save_cache(run_id, {"version": SERIES_VERSION, "rows": rows})
+    rows.sort(key=lambda r: r["_frame"])
+
+    if changed:
+        _save_cache(run_id, {"version": SERIES_VERSION, "stride": stride, "rows": rows})
 
     if not rows:
-        return {"count": 0, "keys": [], "series": {}, "nodeCountKeys": list(NODE_COUNT_KEYS)}
+        return {"count": 0, "keys": [], "series": {}, "stride": stride,
+                "sampled": False, "nodeCountKeys": list(NODE_COUNT_KEYS)}
 
-    keys = [k for k in rows[0].keys()]
+    keys = [k for k in rows[0].keys() if k != "_frame"]
     series = {k: [row.get(k) for row in rows] for k in keys}
 
     return {
         "count": len(rows),
         "keys": keys,
         "series": series,
+        "stride": stride,
+        "sampled": stride > 1,
+        "totalIterations": total_iterations,
         "nodeCountKeys": list(NODE_COUNT_KEYS),
     }

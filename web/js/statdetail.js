@@ -10,6 +10,30 @@
  * phases alone gives a curve of game phases alone rather than a sawtooth
  * alternating between two different kinds of moment.
  */
+/**
+ * Round numbers to rule a grid at.
+ *
+ * A grid drawn at whatever the data happens to span gives labels like 0.0473,
+ * which are noise to read. This steps up to the nearest 1, 2, 2.5 or 5 times a
+ * power of ten, so the lines land on values worth putting a number against.
+ */
+function niceTicks(lo, hi, target = 5) {
+  if (!(hi > lo)) return { ticks: [lo], step: 1 };
+
+  const rough = (hi - lo) / Math.max(1, target);
+  const magnitude = Math.pow(10, Math.floor(Math.log10(rough)));
+  const scaled = rough / magnitude;
+  const step = magnitude *
+    (scaled <= 1 ? 1 : scaled <= 2 ? 2 : scaled <= 2.5 ? 2.5 : scaled <= 5 ? 5 : 10);
+
+  const ticks = [];
+  for (let v = Math.ceil(lo / step) * step; v <= hi + step * 1e-6; v += step) {
+    // Repeated addition drifts; snap a near-zero tick to exactly zero.
+    ticks.push(Math.abs(v) < step * 1e-9 ? 0 : v);
+  }
+  return { ticks, step };
+}
+
 const StatDetail = {
   seriesCache: new Map(),   // runId -> series payload
   currentKey: null,
@@ -162,13 +186,13 @@ const StatDetail = {
     if (fraction === null) {
       this.progressFill.classList.add('indeterminate');
       this.progressFill.style.width = '';
-      this.progressLabel.textContent = 'Reading frames…';
+      this.progressLabel.textContent = 'Analysing frames…';
       return;
     }
     this.progressFill.classList.remove('indeterminate');
     this.progressFill.style.width = `${Math.round(fraction * 100)}%`;
     this.progressLabel.textContent =
-      `Reading frames… ${formatNumber(done)} of ${formatNumber(total)} (${Math.round(fraction * 100)}%)`;
+      `Analysing frames… ${formatNumber(done)} of ${formatNumber(total)} (${Math.round(fraction * 100)}%)`;
   },
 
   /** Poll the server for build progress until told to stop. */
@@ -253,36 +277,82 @@ const StatDetail = {
       return;
     }
 
-    const padL = 52, padR = 10, padT = 10, padB = 22;
+    const padL = 62, padR = 12, padT = 10, padB = 30;
     const plotW = w - padL - padR, plotH = h - padT - padB;
 
     let lo = Math.min(...ys), hi = Math.max(...ys);
-    if (hi - lo < 1e-9) { lo -= 0.5; hi += 0.5; }
+    if (hi - lo < 1e-12) { lo -= 0.5; hi += 0.5; }
 
-    const xAt = i => padL + (xs.length === 1 ? plotW / 2 : (i / (xs.length - 1)) * plotW);
+    // Widen to the round numbers, so the top and bottom lines are labelled
+    // values rather than wherever the data happened to stop.
+    const yGrid = niceTicks(lo, hi, 5);
+    if (yGrid.ticks.length > 1) {
+      lo = Math.min(lo, yGrid.ticks[0]);
+      hi = Math.max(hi, yGrid.ticks[yGrid.ticks.length - 1]);
+    }
+
+    const xLo = xs[0], xHi = xs[xs.length - 1];
+    const xGrid = niceTicks(xLo, xHi, 5);
+
+    const xAt = v => padL + (xHi === xLo ? plotW / 2 : ((v - xLo) / (xHi - xLo)) * plotW);
     const yAt = v => padT + plotH - ((v - lo) / (hi - lo)) * plotH;
 
-    // Axes
-    ctx.strokeStyle = '#26313e';
+    const fmtY = v => asShare
+      ? `${+v.toFixed(2)}%`
+      : (Math.abs(v) >= 1000 ? Math.round(v).toLocaleString('en-US')
+                             : String(+v.toFixed(Math.abs(v) < 1 ? 3 : 2)));
+
+    ctx.font = '10px system-ui, sans-serif';
     ctx.lineWidth = 1;
+
+    // Horizontal grid
+    for (const v of yGrid.ticks) {
+      const y = Math.round(yAt(v)) + 0.5;
+      if (y < padT - 1 || y > padT + plotH + 1) continue;
+      ctx.strokeStyle = '#1e2733';
+      ctx.beginPath();
+      ctx.moveTo(padL, y);
+      ctx.lineTo(padL + plotW, y);
+      ctx.stroke();
+
+      ctx.fillStyle = '#8fa3b5';
+      const label = fmtY(v);
+      ctx.fillText(label, padL - 6 - ctx.measureText(label).width, y + 3);
+    }
+
+    // Vertical grid
+    for (const v of xGrid.ticks) {
+      const x = Math.round(xAt(v)) + 0.5;
+      if (x < padL - 1 || x > padL + plotW + 1) continue;
+      ctx.strokeStyle = '#1e2733';
+      ctx.beginPath();
+      ctx.moveTo(x, padT);
+      ctx.lineTo(x, padT + plotH);
+      ctx.stroke();
+
+      ctx.fillStyle = '#8fa3b5';
+      const label = Math.round(v).toLocaleString('en-US');
+      ctx.fillText(label, x - ctx.measureText(label).width / 2, h - 12);
+    }
+
+    // Axes, a shade brighter than the grid
+    ctx.strokeStyle = '#33404f';
     ctx.beginPath();
-    ctx.moveTo(padL, padT); ctx.lineTo(padL, padT + plotH); ctx.lineTo(padL + plotW, padT + plotH);
+    ctx.moveTo(padL + 0.5, padT);
+    ctx.lineTo(padL + 0.5, padT + plotH + 0.5);
+    ctx.lineTo(padL + plotW, padT + plotH + 0.5);
     ctx.stroke();
 
-    // Where the currently shown frame sits, so the number in the strip has a
-    // visible home on the curve.
+    // Where the frame on screen sits, so the number in the strip has a home
     const currentIteration = Viewer.frame ? Viewer.frame.iteration : null;
-    if (currentIteration !== null) {
-      const idx = xs.indexOf(currentIteration);
-      if (idx >= 0) {
-        ctx.strokeStyle = '#4fb3ff';
-        ctx.globalAlpha = 0.45;
-        ctx.beginPath();
-        ctx.moveTo(xAt(idx), padT);
-        ctx.lineTo(xAt(idx), padT + plotH);
-        ctx.stroke();
-        ctx.globalAlpha = 1;
-      }
+    if (currentIteration !== null && currentIteration >= xLo && currentIteration <= xHi) {
+      ctx.strokeStyle = '#4fb3ff';
+      ctx.globalAlpha = 0.45;
+      ctx.beginPath();
+      ctx.moveTo(xAt(currentIteration), padT);
+      ctx.lineTo(xAt(currentIteration), padT + plotH);
+      ctx.stroke();
+      ctx.globalAlpha = 1;
     }
 
     // The curve
@@ -290,26 +360,20 @@ const StatDetail = {
     ctx.lineWidth = 1.6;
     ctx.beginPath();
     for (let i = 0; i < ys.length; i++) {
-      const x = xAt(i), y = yAt(ys[i]);
+      const x = xAt(xs[i]), y = yAt(ys[i]);
       if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
     }
     ctx.stroke();
 
-    // Labels
-    const fmt = v => asShare
-      ? `${v.toFixed(1)}%`
-      : (Math.abs(v) >= 1000 ? Math.round(v).toLocaleString('en-US') : (+v.toFixed(3)).toString());
+    ctx.fillStyle = '#5b6b7c';
+    ctx.font = '9px system-ui, sans-serif';
+    const axisLabel = 'iteration';
+    ctx.fillText(axisLabel, padL + plotW - ctx.measureText(axisLabel).width, h - 1);
 
-    ctx.fillStyle = '#8fa3b5';
-    ctx.font = '10px system-ui, sans-serif';
-    ctx.fillText(fmt(hi), 4, padT + 8);
-    ctx.fillText(fmt(lo), 4, padT + plotH);
-    ctx.fillText(`iter ${xs[0]}`, padL, h - 6);
-    const lastLabel = `iter ${xs[xs.length - 1]}`;
-    ctx.fillText(lastLabel, padL + plotW - ctx.measureText(lastLabel).width, h - 6);
-
+    const sampled = this.series && this.series.sampled;
     this.footEl.textContent =
-      `${ys.length} recorded ${ys.length === 1 ? 'frame' : 'frames'} · ${Viewer.phaseFilterLabel()}` +
-      (asShare ? ' · shown as a share of the nodes that entered the phase' : '');
+      `${formatNumber(ys.length)} point${ys.length === 1 ? '' : 's'} · ${Viewer.phaseFilterLabel()}` +
+      (asShare ? ' · shown as a share of the nodes that entered the phase' : '') +
+      (sampled ? ` · sampled every ${formatNumber(this.series.stride)} iterations` : '');
   }
 };
