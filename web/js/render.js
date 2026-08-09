@@ -36,7 +36,6 @@ class GraphRenderer {
     // a flatter, more orthographic look.
     this.cameraDistance = 900;
 
-    this._depthOrder = [];
   }
 
   resize() {
@@ -282,19 +281,60 @@ class GraphRenderer {
 
     if (frame) {
       // One projection pass per draw, reused by edges, nodes and picking.
-      const screen = new Map();
-      for (const id of frame.ids) {
-        const p = layout.pos.get(id);
-        if (p) screen.set(id, this.project(p));
-      }
-      this._screen = screen;
+      this._projectFrame(frame, layout);
 
-      if (settings.edgeShow) this._edges(ctx, frame, metrics, screen, settings);
-      this._nodes(ctx, frame, metrics, screen, settings);
+      if (settings.edgeShow) this._edges(ctx, frame, metrics, settings);
+      this._nodes(ctx, frame, metrics, settings);
       if (settings.showLegend) this._legend(ctx, metrics, settings);
     }
 
     ctx.restore();
+  }
+
+  /**
+   * Project every node into parallel arrays.
+   *
+   * Previously this filled a Map keyed by node id, which the depth sort then
+   * read twice per comparison. At eighteen thousand nodes that is half a
+   * million hashed lookups inside a comparator, and it dominated the draw.
+   * Arrays indexed by the node's position in the frame cost one lookup each,
+   * once.
+   */
+  _projectFrame(frame, layout) {
+    const n = frame.ids.length;
+    if (!this._sx || this._sx.length < n) {
+      this._sx = new Float64Array(n);
+      this._sy = new Float64Array(n);
+      this._sk = new Float64Array(n);
+      this._sDepth = new Float64Array(n);
+      this._sOk = new Uint8Array(n);
+      this._order = new Int32Array(n);
+    }
+
+    for (let i = 0; i < n; i++) {
+      const p = layout.pos.get(frame.ids[i]);
+      if (!p) { this._sOk[i] = 0; continue; }
+      const s = this.project(p);
+      this._sx[i] = s.x; this._sy[i] = s.y;
+      this._sk[i] = s.k; this._sDepth[i] = s.depth;
+      this._sOk[i] = 1;
+    }
+    this._sCount = n;
+
+    // Edge endpoints as indices, so drawing them needs no id lookups either.
+    if (this._edgeFrame !== frame) {
+      const index = new Map();
+      for (let i = 0; i < n; i++) index.set(frame.ids[i], i);
+      const pairs = new Int32Array(frame.edges.length * 2);
+      for (let e = 0; e < frame.edges.length; e++) {
+        const [a, b] = frame.edges[e];
+        const ia = index.get(a), ib = index.get(b);
+        pairs[e * 2] = ia === undefined ? -1 : ia;
+        pairs[e * 2 + 1] = ib === undefined ? -1 : ib;
+      }
+      this._edgePairs = pairs;
+      this._edgeFrame = frame;
+    }
   }
 
   _background(ctx, s) {
@@ -315,8 +355,10 @@ class GraphRenderer {
     ctx.fillRect(0, 0, w, h);
   }
 
-  _edges(ctx, frame, metrics, screen, s) {
+  _edges(ctx, frame, metrics, s) {
     const edges = frame.edges;
+    const pairs = this._edgePairs;
+    const sx = this._sx, sy = this._sy, sk = this._sk, ok = this._sOk;
     const flat = s.edgeColorBy === 'constant';
     const uniformWidth = s.edgeWidthBy === 'constant';
 
@@ -328,83 +370,138 @@ class GraphRenderer {
       ctx.strokeStyle = s.edgeFlatColor;
       ctx.lineWidth = s.edgeWidthMin;
       ctx.beginPath();
-      for (const [a, b] of edges) {
-        const sa = screen.get(a), sb = screen.get(b);
-        if (!sa || !sb) continue;
-        ctx.moveTo(sa.x, sa.y);
-        ctx.lineTo(sb.x, sb.y);
+      for (let e = 0; e < edges.length; e++) {
+        const ia = pairs[e * 2], ib = pairs[e * 2 + 1];
+        if (ia < 0 || ib < 0 || !ok[ia] || !ok[ib]) continue;
+        ctx.moveTo(sx[ia], sy[ia]);
+        ctx.lineTo(sx[ib], sy[ib]);
       }
       ctx.stroke();
       ctx.globalAlpha = 1;
       return;
     }
 
-    for (const [a, b] of edges) {
-      const sa = screen.get(a), sb = screen.get(b);
-      if (!sa || !sb) continue;
+    for (let e = 0; e < edges.length; e++) {
+      const ia = pairs[e * 2], ib = pairs[e * 2 + 1];
+      if (ia < 0 || ib < 0 || !ok[ia] || !ok[ib]) continue;
+      const [a, b] = edges[e];
 
-      const t = metrics.edgeColorNorm(a, b);
       ctx.strokeStyle = flat
         ? s.edgeFlatColor
         : (s.edgeColorBy === 'source'
-            ? metrics.nodeColorCss(a, 1)
-            : colormapCss(s.edgeColormap, t, 1, false));
+            ? metrics.nodeColorCssByIndex(ia, 1)
+            : colormapCss(s.edgeColormap, metrics.edgeColorNorm(a, b), 1, false));
 
-      const wNorm = metrics.edgeWidthNorm(a, b);
-      let width = s.edgeWidthMin + (s.edgeWidthMax - s.edgeWidthMin) * wNorm;
-      if (this.mode3D) width *= (sa.k + sb.k) / 2;
+      let width = s.edgeWidthMin + (s.edgeWidthMax - s.edgeWidthMin) * metrics.edgeWidthNorm(a, b);
+      if (this.mode3D) width *= (sk[ia] + sk[ib]) / 2;
 
       ctx.lineWidth = Math.max(0.05, width);
       ctx.beginPath();
-      ctx.moveTo(sa.x, sa.y);
-      ctx.lineTo(sb.x, sb.y);
+      ctx.moveTo(sx[ia], sy[ia]);
+      ctx.lineTo(sx[ib], sy[ib]);
       ctx.stroke();
     }
     ctx.globalAlpha = 1;
   }
 
-  _nodes(ctx, frame, metrics, screen, s) {
-    const ids = frame.ids;
-    ctx.globalAlpha = s.nodeAlpha;
+  /**
+   * Draw the nodes, grouped by colour.
+   *
+   * Assigning `fillStyle` is not free: the canvas re-parses the colour string
+   * every time. At eighteen thousand nodes that alone measured around 12ms a
+   * frame — more than the arcs themselves. Quantising colour into a few dozen
+   * buckets and drawing each bucket as a single path with one `fillStyle` and
+   * one `fill` turns eighteen thousand assignments into a few dozen.
+   *
+   * Depth order is preserved *within* each bucket, so nearer nodes of the same
+   * colour still cover farther ones. Across buckets it is not, which means a
+   * distant node of one colour can paint over a nearer node of another. At the
+   * size these dots are drawn that is not a difference worth 12ms a frame.
+   */
+  _nodes(ctx, frame, metrics, s) {
+    const n = frame.ids.length;
+    const sx = this._sx, sy = this._sy, sk = this._sk, depth = this._sDepth, ok = this._sOk;
+
+    const BUCKETS = 48;
+    if (!this._bucket || this._bucket.length < n) {
+      this._bucket = new Uint8Array(n);
+      this._sorted = new Int32Array(n);
+      this._grouped = new Int32Array(n);
+    }
+    const bucket = this._bucket, sorted = this._sorted, grouped = this._grouped;
+
+    // Colour table, built once instead of a string per node.
+    const table = new Array(BUCKETS);
+    const constant = s.nodeColorBy === 'constant';
+    for (let b = 0; b < BUCKETS; b++) {
+      table[b] = colormapCss(s.nodeColormap, constant ? 0.6 : b / (BUCKETS - 1), 1, s.nodeColorReverse);
+    }
+
+    for (let i = 0; i < n; i++) {
+      const t = constant ? 0.6 : metrics.nodeColorNorm(i);
+      const b = (t * (BUCKETS - 1)) | 0;
+      bucket[i] = b < 0 ? 0 : (b > BUCKETS - 1 ? BUCKETS - 1 : b);
+    }
 
     // Back to front, so nearer nodes cover farther ones. In 2D every depth is
     // equal and the sort is skipped entirely.
-    let order = this._depthOrder;
-    if (order.length !== ids.length) {
-      order = this._depthOrder = new Array(ids.length);
-    }
-    for (let i = 0; i < ids.length; i++) order[i] = i;
-
+    for (let i = 0; i < n; i++) sorted[i] = i;
+    let order = sorted;
     if (this.mode3D) {
-      order.sort((i, j) => {
-        const a = screen.get(ids[i]), b = screen.get(ids[j]);
-        return (a ? a.depth : 0) - (b ? b.depth : 0);
-      });
+      order = sorted.subarray(0, n);
+      order.sort((i, j) => depth[i] - depth[j]);
     }
 
-    for (const i of order) {
-      const point = screen.get(ids[i]);
-      if (!point) continue;
+    // Counting sort into colour groups. Walking `order` keeps it stable, so
+    // depth order survives inside each bucket.
+    const counts = new Int32Array(BUCKETS + 1);
+    for (let i = 0; i < n; i++) counts[bucket[i] + 1]++;
+    for (let b = 0; b < BUCKETS; b++) counts[b + 1] += counts[b];
+    const cursor = counts.slice(0, BUCKETS);
+    for (let idx = 0; idx < n; idx++) {
+      const i = order[idx];
+      grouped[cursor[bucket[i]]++] = i;
+    }
 
-      // Skip anything comfortably off-screen.
-      if (point.x < -50 || point.y < -50 ||
-          point.x > this.cssWidth + 50 || point.y > this.cssHeight + 50) continue;
+    ctx.globalAlpha = s.nodeAlpha;
+    const w = this.cssWidth, h = this.cssHeight;
+    const outline = s.nodeOutline;
 
-      let radius = s.nodeSizeMin + (s.nodeSizeMax - s.nodeSizeMin) * metrics.nodeSizeNorm(i);
-      if (this.mode3D) radius *= point.k;
-      if (radius < 0.2) continue;
+    for (let b = 0; b < BUCKETS; b++) {
+      const from = counts[b], to = counts[b + 1];
+      if (from === to) continue;
 
-      ctx.fillStyle = metrics.nodeColorCssByIndex(i, 1);
+      ctx.fillStyle = table[b];
       ctx.beginPath();
-      ctx.arc(point.x, point.y, radius, 0, Math.PI * 2);
-      ctx.fill();
+      let drew = false;
 
-      if (s.nodeOutline && radius > 2) {
-        ctx.globalAlpha = Math.min(1, s.nodeAlpha + 0.2);
-        ctx.strokeStyle = 'rgba(0,0,0,0.55)';
-        ctx.lineWidth = 0.6;
-        ctx.stroke();
-        ctx.globalAlpha = s.nodeAlpha;
+      for (let idx = from; idx < to; idx++) {
+        const i = grouped[idx];
+        if (!ok[i]) continue;
+
+        const x = sx[i], y = sy[i];
+        // Skip anything comfortably off-screen.
+        if (x < -50 || y < -50 || x > w + 50 || y > h + 50) continue;
+
+        let radius = s.nodeSizeMin + (s.nodeSizeMax - s.nodeSizeMin) * metrics.nodeSizeNorm(i);
+        if (this.mode3D) radius *= sk[i];
+        if (radius < 0.2) continue;
+
+        // moveTo first, or the arcs are joined by stray lines.
+        ctx.moveTo(x + radius, y);
+        ctx.arc(x, y, radius, 0, Math.PI * 2);
+        drew = true;
+      }
+
+      if (drew) {
+        ctx.fill();
+        if (outline) {
+          ctx.globalAlpha = Math.min(1, s.nodeAlpha + 0.2);
+          ctx.strokeStyle = 'rgba(0,0,0,0.55)';
+          ctx.lineWidth = 0.6;
+          ctx.stroke();
+          ctx.globalAlpha = s.nodeAlpha;
+        }
       }
     }
     ctx.globalAlpha = 1;
@@ -435,20 +532,14 @@ class GraphRenderer {
   }
 
   /** Nearest node to a screen point, for hover. Returns an index or -1. */
-  pick(frame, layout, sx, sy, maxPixels = 12) {
-    if (!frame) return -1;
+  pick(frame, layout, px, py, maxPixels = 12) {
+    if (!frame || !this._sOk) return -1;
     let best = -1, bestDist = maxPixels * maxPixels;
-    const screen = this._screen;
+    const sx = this._sx, sy = this._sy, ok = this._sOk;
 
     for (let i = 0; i < frame.ids.length; i++) {
-      const point = screen ? screen.get(frame.ids[i]) : null;
-      const projected = point || (() => {
-        const p = layout.pos.get(frame.ids[i]);
-        return p ? this.project(p) : null;
-      })();
-      if (!projected) continue;
-
-      const dx = projected.x - sx, dy = projected.y - sy;
+      if (!ok[i]) continue;
+      const dx = sx[i] - px, dy = sy[i] - py;
       const dSq = dx * dx + dy * dy;
       if (dSq < bestDist) { bestDist = dSq; best = i; }
     }

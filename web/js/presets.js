@@ -16,7 +16,7 @@ const Presets = {
   /** Layout every built-in starts from, unless it says otherwise. */
   BASE_LAYOUT: {
     forceCharge: 20, forceLink: 0.12, forceCenter: 0.012,
-    forceAngular: 0.15, forceDamping: 0.86,
+    forceAngular: 0.15, forceDamping: 0.86, forceTheta: 1.2,
     dimensions: 3, layoutCarry: true, autoFit: true
   },
 

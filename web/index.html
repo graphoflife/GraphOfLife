@@ -347,6 +347,8 @@
           <label>Angular spread <input type="range" id="forceAngular" min="0" max="1" step="0.01" value="0.15"></label>
           <small class="hint">Spreads each node's edges evenly — 180° at degree 2, 120° at degree 3.</small>
           <label>Damping <input type="range" id="forceDamping" min="0.5" max="0.98" step="0.01" value="0.86"></label>
+          <label>Repulsion detail <input type="range" id="forceTheta" min="0.6" max="2.5" step="0.05" value="1.2"></label>
+          <small class="hint">How closely all-pairs repulsion is approximated. Lower is more exact and much slower; the cost falls with the cube of this. Raise it on very large graphs.</small>
           <label class="check"><input type="checkbox" id="layoutCarry" checked> Carry positions between frames</label>
         </div>
       </details>

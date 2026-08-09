@@ -33,7 +33,7 @@ const Viewer = {
     // Layout lives in the settings too, so a preset restores the whole look
     // including how the graph arranges itself, not just its colours.
     forceCharge: 20, forceLink: 0.12, forceCenter: 0.012,
-    forceAngular: 0.15, forceDamping: 0.86,
+    forceAngular: 0.15, forceDamping: 0.86, forceTheta: 1.2,
     dimensions: 3, autoFit: true,
 
     // Histogram axis scales, per chart and per axis.
@@ -120,7 +120,8 @@ const Viewer = {
 
     // Layout sliders are ordinary settings; applyLayoutSettings pushes them
     // into the simulation so presets and the controls stay in step.
-    for (const id of ['forceCharge', 'forceLink', 'forceCenter', 'forceAngular', 'forceDamping']) {
+    for (const id of ['forceCharge', 'forceLink', 'forceCenter', 'forceAngular',
+                      'forceDamping', 'forceTheta']) {
       const el = document.getElementById(id);
       if (!el) continue;
       el.addEventListener('input', () => {
@@ -275,6 +276,7 @@ const Viewer = {
     this.layout.centerStrength = s.forceCenter;
     this.layout.angularStrength = s.forceAngular;
     this.layout.damping = s.forceDamping;
+    this.layout.theta = s.forceTheta;
   },
 
   /** How many positions make up one whole iteration under the current filter. */
