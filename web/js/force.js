@@ -687,6 +687,27 @@ class ForceLayout {
     return { x: tx / len, y: ty / len, z: tz / len };
   }
 
+  /**
+   * Copy the positions into a flat array, in `ids` order.
+   *
+   * The renderer reads this rather than the Map, so it does not care whether
+   * the layout ran on this thread or arrived from a worker — both present the
+   * same three floats per node in the same order.
+   */
+  syncPositions() {
+    const n = this.ids.length;
+    if (!this.positions || this.positions.length < n * 3) {
+      this.positions = new Float32Array(n * 3);
+    }
+    const out = this.positions;
+    for (let i = 0; i < n; i++) {
+      const p = this.pos.get(this.ids[i]);
+      const o = i * 3;
+      if (p) { out[o] = p.x; out[o + 1] = p.y; out[o + 2] = p.z; }
+    }
+    return out;
+  }
+
   /** Bounding box of the current layout, padded slightly. */
   bounds() {
     let minX = Infinity, minY = Infinity, minZ = Infinity;

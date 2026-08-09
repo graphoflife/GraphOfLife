@@ -44,7 +44,9 @@ const Viewer = {
   init() {
     this.canvas = document.getElementById('graphCanvas');
     this.renderer = new GraphRenderer(this.canvas);
-    this.layout = new ForceLayout();
+    // The layout runs in a worker when one is available, so a slow tick on a
+    // large graph cannot freeze the interface.
+    this.layout = new LayoutClient();
     this.emptyEl = document.getElementById('canvasEmpty');
     this.hoverCard = document.getElementById('hoverCard');
 
@@ -271,12 +273,14 @@ const Viewer = {
 
   applyLayoutSettings() {
     const s = this.settings;
-    this.layout.charge = s.forceCharge;
-    this.layout.linkStrength = s.forceLink;
-    this.layout.centerStrength = s.forceCenter;
-    this.layout.angularStrength = s.forceAngular;
-    this.layout.damping = s.forceDamping;
-    this.layout.theta = s.forceTheta;
+    this.layout.setParams({
+      charge: s.forceCharge,
+      linkStrength: s.forceLink,
+      centerStrength: s.forceCenter,
+      angularStrength: s.forceAngular,
+      damping: s.forceDamping,
+      theta: s.forceTheta
+    });
   },
 
   /** How many positions make up one whole iteration under the current filter. */
@@ -432,7 +436,9 @@ const Viewer = {
     this.runId = runId;
     if (switching) {
       this.cache.clear();
-      this.layout.pos.clear();
+      // Positions from the previous run mean nothing here; the next setFrame
+      // is told not to carry them over.
+      this._dropPositions = true;
       this.position = 0;
       this.frameIndex = 0;
     }
@@ -507,8 +513,9 @@ const Viewer = {
     await this.ensureDelta(this.frame, index);
 
     this.emptyEl.style.display = 'none';
-    this.layout.setFrame(this.frame.ids, this.frame.edges,
-                         this.frame.parent_ids, this.settings.layoutCarry);
+    const carry = this.settings.layoutCarry && !this._dropPositions;
+    this._dropPositions = false;
+    this.layout.setFrame(this.frame.ids, this.frame.edges, this.frame.parent_ids, carry);
     this.layout.reheat(this.settings.layoutCarry ? 0.35 : 1);
 
     this.rebuildMetrics();
@@ -864,7 +871,11 @@ const Viewer = {
     const dt = Math.min(0.1, (time - this.lastTime) / 1000) || 0;
     this.lastTime = time;
 
+    // With a worker this returns immediately: the layout is advancing on its
+    // own thread and the loop's only job is to draw what has arrived. Without
+    // one it advances the layout here, as before.
     this.layout.tick();
+
     if (this.settings.autoFit) this.renderer.fitToContent(this.layout);
     this.renderer.stepCamera();
 

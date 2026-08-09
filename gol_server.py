@@ -385,6 +385,13 @@ class Handler(BaseHTTPRequestHandler):
         self.send_header("Content-Type", ctype or "application/octet-stream")
         self.send_header("Content-Length", str(len(body)))
         self.send_header("Cache-Control", "no-store")
+        # Cross-origin isolation, which is what unlocks SharedArrayBuffer. With
+        # it the layout worker writes positions straight into memory the page
+        # reads; without it they come back as copies, which still works but
+        # costs a couple of hundred kilobytes a frame. Everything served here
+        # is same-origin, so nothing is broken by asking for it.
+        self.send_header("Cross-Origin-Opener-Policy", "same-origin")
+        self.send_header("Cross-Origin-Embedder-Policy", "require-corp")
         self.end_headers()
         self.wfile.write(body)
 

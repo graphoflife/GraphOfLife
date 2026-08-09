@@ -72,6 +72,7 @@ class GraphRenderer {
    * exact.
    */
   fitToContent(layout, padding = 0.015, snap = false) {
+    if (!layout || !layout.positions || !layout.positions.length) return;
     const target = this.computeFitTarget(layout, padding);
     if (!target) return;
 
@@ -87,6 +88,7 @@ class GraphRenderer {
    */
   computeFitTarget(layout, padding = 0.015) {
     if (!layout || !layout.ids.length || !this.cssWidth) return null;
+    if (!layout.positions || layout.positions.length < 3) return null;
 
     const saved = { ...this.view };
     const restore = () => { this.view = saved; };
@@ -175,10 +177,14 @@ class GraphRenderer {
   _projectedBounds(layout) {
     let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
 
-    for (const id of layout.ids) {
-      const p = layout.pos.get(id);
-      if (!p) continue;
-      const s = this.project(p);
+    const pos = layout.positions;
+    const n = Math.min(layout.ids.length, Math.floor(pos.length / 3));
+    const point = this._boundsScratch || (this._boundsScratch = { x: 0, y: 0, z: 0 });
+
+    for (let i = 0; i < n; i++) {
+      const o = i * 3;
+      point.x = pos[o]; point.y = pos[o + 1]; point.z = pos[o + 2];
+      const s = this.project(point);
       if (!Number.isFinite(s.x) || !Number.isFinite(s.y)) continue;
       if (s.x < minX) minX = s.x;
       if (s.y < minY) minY = s.y;
@@ -311,10 +317,18 @@ class GraphRenderer {
       this._order = new Int32Array(n);
     }
 
+    // Positions arrive as three floats per node, in the same order as
+    // frame.ids, whether the layout ran here or in a worker.
+    const pos = layout.positions;
+    const have = Math.min(n, Math.floor(pos.length / 3));
+    const point = this._scratch || (this._scratch = { x: 0, y: 0, z: 0 });
+
     for (let i = 0; i < n; i++) {
-      const p = layout.pos.get(frame.ids[i]);
-      if (!p) { this._sOk[i] = 0; continue; }
-      const s = this.project(p);
+      if (i >= have) { this._sOk[i] = 0; continue; }
+      const o = i * 3;
+      point.x = pos[o]; point.y = pos[o + 1]; point.z = pos[o + 2];
+
+      const s = this.project(point);
       this._sx[i] = s.x; this._sy[i] = s.y;
       this._sk[i] = s.k; this._sDepth[i] = s.depth;
       this._sOk[i] = 1;
