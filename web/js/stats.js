@@ -376,6 +376,7 @@ class FrameMetrics {
       detail.reproduced = idx.births.size ? Boolean(birth) : null;
       if (birth) {
         detail.invested = birth.invested;
+        detail.handedOver = birth.handed_over ? birth.handed_over.length : null;
         detail.investedShare = birth.tokens_before ? birth.invested / birth.tokens_before : null;
         detail.child = birth.child;
         detail.childLinks = birth.links ? birth.links.length : 0;
@@ -512,7 +513,7 @@ class FrameMetrics {
       redistributed: f.cleanup ? f.cleanup.redistributed : null,
 
       births: null, meanInvestedShare: null, meanChildLinks: null,
-      reproTokenShare: null,
+      reproTokenShare: null, handovers: null,
       revolutions: null, totalFlow: null, meanEdgeFlow: null, maxEdgeFlow: null,
       selfAllocationShare: null, revoltShare: null, spreadShare: null,
       heldHomeShare: null, prunedEdges: null
@@ -535,6 +536,12 @@ class FrameMetrics {
       // that amounted to.
       const invested = sum(births.map(b => b.invested));
       out.reproTokenShare = this.totalTokens ? invested / this.totalTokens : 0;
+
+      // Only present on runs with handover enabled; absent means the mechanic
+      // was off, which is not the same as it being on and never used.
+      if (births.some(b => b.handed_over !== undefined)) {
+        out.handovers = sum(births.map(b => (b.handed_over || []).length));
+      }
     }
 
     // ---- game phase ----

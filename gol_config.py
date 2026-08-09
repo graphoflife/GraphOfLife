@@ -36,6 +36,13 @@ class SimConfig:
     random_input_amount: int = 5
     exchange_messages: bool = True
 
+    # ---- Topology ----
+    # Let a parent hand one of its own connections to the newborn: the edge
+    # moves from parent to child rather than being copied. Off by default, and
+    # deliberately so — turning it on adds four outputs to the brain, so a run
+    # started without it cannot be resumed with it.
+    allow_handover: bool = False
+
     # ---- Mutation ----
     mutation_probability: float = 0.5
     mutation_noise_std: float = 0.2
@@ -75,21 +82,28 @@ class SimConfig:
         return base + 4 * self.message_amount + self.random_input_amount
 
     def n_outputs(self) -> int:
-        # 11 fixed heads + the message vector
-        return 11 + self.message_amount
+        # 11 fixed heads, 4 more when handover is enabled, then the message
+        # vector. Conditional rather than always present so that a run without
+        # handover keeps exactly the architecture it was checkpointed with.
+        return 11 + (4 if self.allow_handover else 0) + self.message_amount
 
     def head_layout(self) -> Dict[str, Any]:
-        """Output row layout. Mirrors HEAD in the engine, for the UI to display."""
-        m = self.message_amount
-        return {
+        """Output row layout. Mirrors the engine's heads, for the UI to display."""
+        layout = {
             "REPRO_FRACTION": [0, 2],
             "LINK": [2, 4],
             "LINK_MODE": [4, 6],
             "BLOTTO": [6, 7],
             "BLOTTO_MODE": [7, 9],
             "REV_FRACTION": [9, 11],
-            "MESSAGE": [11, 11 + m],
         }
+        nxt = 11
+        if self.allow_handover:
+            layout["HANDOVER"] = [nxt, nxt + 2]
+            layout["HANDOVER_MODE"] = [nxt + 2, nxt + 4]
+            nxt += 4
+        layout["MESSAGE"] = [nxt, nxt + self.message_amount]
+        return layout
 
     # --------------------------------------------------------------------
     # Serialization

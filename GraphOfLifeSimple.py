@@ -108,16 +108,30 @@ from gol_config import SimConfig
 # Node ids use -1 to mean "no parent" (founder or resurrected agent).
 NO_PARENT = -1
 
-# Output row layout, one column per observed candidate.
-HEAD_FIXED = {
-    "REPRO_FRACTION": slice(0, 2),   # fraction of my tokens to invest in a child
-    "LINK": slice(2, 4),             # link the newborn to this candidate?
-    "LINK_MODE": slice(4, 6),        # read LINK as probability, or as maximum?
-    "BLOTTO": 6,                     # desirability of allocating tokens here
-    "BLOTTO_MODE": slice(7, 9),      # spread proportionally, or go all-in?
-    "REV_FRACTION": slice(9, 11),    # portion of this allocation that revolts
-}
-MESSAGE_START = 11
+def build_heads(cfg: SimConfig):
+    """
+    Which output rows mean what, for this configuration.
+
+    The handover rows exist only when the option is on. Always reserving them
+    would change the brain's shape for every run, and a checkpoint saved under
+    one shape cannot be resumed under another — so a run without handover keeps
+    exactly the architecture it started with.
+    """
+    heads = {
+        "REPRO_FRACTION": slice(0, 2),   # fraction of my tokens to invest in a child
+        "LINK": slice(2, 4),             # link the newborn to this candidate?
+        "LINK_MODE": slice(4, 6),        # read LINK as probability, or as maximum?
+        "BLOTTO": 6,                     # desirability of allocating tokens here
+        "BLOTTO_MODE": slice(7, 9),      # spread proportionally, or go all-in?
+        "REV_FRACTION": slice(9, 11),    # portion of this allocation that revolts
+    }
+    nxt = 11
+    if cfg.allow_handover:
+        heads["HANDOVER"] = slice(nxt, nxt + 2)       # give this edge to the child?
+        heads["HANDOVER_MODE"] = slice(nxt + 2, nxt + 4)
+        nxt += 4
+    heads["MESSAGE_START"] = nxt
+    return heads
 
 
 # ----------------------------------------------------------------------------
@@ -294,6 +308,7 @@ class Brain:
 class GraphOfLife:
     def __init__(self, G_init: nx.Graph | None, cfg: SimConfig, _empty: bool = False) -> None:
         self.cfg = cfg
+        self.heads = build_heads(cfg)
         self.G = nx.Graph()
         self.next_agent_id = 0
         self.next_brain_id = 1
@@ -418,7 +433,8 @@ class GraphOfLife:
         cfg = self.cfg
         if not cfg.exchange_messages or cfg.message_amount <= 0:
             return
-        rows = np.tanh(Y[MESSAGE_START:MESSAGE_START + cfg.message_amount, :])
+        start = self.heads["MESSAGE_START"]
+        rows = np.tanh(Y[start:start + cfg.message_amount, :])
         for j, v in enumerate(targets):
             self.messages.setdefault(u, {})[int(v)] = rows[:, j].astype(float).tolist()
 
@@ -432,6 +448,7 @@ class GraphOfLife:
         connections. No other topology change happens here.
         """
         decisions: List[Dict[str, Any]] = []
+        handovers: List[Tuple[int, int, int]] = []
         # Captured before anything changes, so the viewer can express births and
         # deaths as a share of the population that actually faced this phase,
         # and show how much each agent gained or lost across it.
@@ -449,7 +466,7 @@ class GraphOfLife:
             self._emit_messages(u, candidates, Y)
 
             # How much of myself do I give away? Averaged over the whole view.
-            frac = np.mean(Y[HEAD_FIXED["REPRO_FRACTION"], :], axis=1)
+            frac = np.mean(Y[self.heads["REPRO_FRACTION"], :], axis=1)
             child_tokens = int(np.floor(_share_of_first(frac[0], frac[1]) * tokens_u))
             child_tokens = max(0, min(tokens_u, child_tokens))
 
@@ -457,6 +474,13 @@ class GraphOfLife:
                 continue
 
             child_id, links = self._spawn_child(u, tokens_u, child_tokens, candidates, Y)
+
+            # Which of the parent's own connections move to the newborn. Applied
+            # after every birth, so nobody's neighbour list changes underfoot.
+            given = self._choose_handovers(u, child_id, candidates, Y)
+            for v in given:
+                handovers.append((u, int(v), child_id))
+
             if record_decisions:
                 decisions.append({
                     "agent": int(u),
@@ -464,7 +488,20 @@ class GraphOfLife:
                     "invested": child_tokens,
                     "child": int(child_id),
                     "links": [int(v) for v in links],
+                    "handed_over": [int(v) for v in given],
                 })
+
+        # Hand the chosen edges over: the child gains the connection, the parent
+        # loses it. If the newborn was already wired to that neighbour by the
+        # link decision, adding it again is a no-op — the graph holds an edge
+        # once — so a handover can never leave a duplicate behind, only move
+        # where the single edge is anchored.
+        for parent, v, child in handovers:
+            if not (self.G.has_node(child) and self.G.has_edge(parent, v)):
+                continue
+            if child != v:
+                self.G.add_edge(child, v)
+            self.G.remove_edge(parent, v)
 
         self.G.remove_edges_from(list(nx.selfloop_edges(self.G)))
         cleanup = self._cleanup_and_redistribute()
@@ -490,8 +527,8 @@ class GraphOfLife:
         self.messages[child_id] = {}
         self.parent_of[child_id] = int(parent)
 
-        link_logits = Y[HEAD_FIXED["LINK"], :]
-        link_mode = Y[HEAD_FIXED["LINK_MODE"], :]
+        link_logits = Y[self.heads["LINK"], :]
+        link_mode = Y[self.heads["LINK_MODE"], :]
 
         linked: List[int] = []
         for col, v in enumerate(candidates):
@@ -502,6 +539,32 @@ class GraphOfLife:
                     linked.append(v)
 
         return child_id, linked
+
+    def _choose_handovers(self, parent: int, child: int,
+                          candidates: List[int], Y: np.ndarray) -> List[int]:
+        """
+        Which of the parent's connections are handed to the newborn.
+
+        Read exactly like the link decision: a pair of logits says yes or no,
+        and a second pair decides whether that pair is read as a probability or
+        as a plain maximum. Only the neighbour columns are considered — column
+        zero is the parent looking at itself, and there is no edge there to give
+        away.
+        """
+        if not self.cfg.allow_handover:
+            return []
+
+        logits = Y[self.heads["HANDOVER"], :]
+        mode = Y[self.heads["HANDOVER_MODE"], :]
+
+        given: List[int] = []
+        for col in range(1, len(candidates)):
+            v = candidates[col]
+            if v == child:
+                continue
+            if _choose_binary(logits[0, col], logits[1, col], mode[0, col], mode[1, col]):
+                given.append(v)
+        return given
 
     # ------------------------------------------------------------------------
     # Phase 2: Blotto
@@ -537,8 +600,8 @@ class GraphOfLife:
             targets = [u] + list(neighs[u])
             Y = self._observe(u, targets, log_deg, q_tok, q_deg, log_tok)
 
-            scores = np.asarray(Y[HEAD_FIXED["BLOTTO"], :], dtype=float)
-            mode = np.mean(Y[HEAD_FIXED["BLOTTO_MODE"], :], axis=1)
+            scores = np.asarray(Y[self.heads["BLOTTO"], :], dtype=float)
+            mode = np.mean(Y[self.heads["BLOTTO_MODE"], :], axis=1)
 
             # The agent picks its own doctrine: spread by score, or all-in.
             spread = bool(mode[0] > mode[1])
@@ -548,7 +611,7 @@ class GraphOfLife:
                 alloc = np.zeros(len(targets), dtype=int)
                 alloc[int(np.argmax(scores))] = tokens_u
 
-            rev_logits = Y[HEAD_FIXED["REV_FRACTION"], :]
+            rev_logits = Y[self.heads["REV_FRACTION"], :]
             rev_amounts: List[int] = []
 
             for idx, v in enumerate(targets):
@@ -860,6 +923,7 @@ class GraphOfLife:
     def from_checkpoint(cls, blob: Any, cfg: SimConfig) -> "GraphOfLife":
         """Rebuild a world saved by `to_checkpoint`."""
         world = cls(None, cfg, _empty=True)
+        world.heads = build_heads(cfg)
 
         ids = blob["ids"].tolist()
         tokens = blob["tokens"].tolist()

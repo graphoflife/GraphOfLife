@@ -53,7 +53,7 @@ def progress(run_id: str) -> Dict[str, Any]:
 
 
 # Bump when a formula below changes, so stale caches are discarded.
-SERIES_VERSION = 8
+SERIES_VERSION = 9
 
 # At most this many iterations are analysed for a run's history.
 #
@@ -306,8 +306,11 @@ def frame_stats(frame: Dict[str, Any], previous: Dict[str, Any] | None = None) -
     mean_invested = None
     mean_links = None
     repro_token_share = None
+    handovers = None
     if births is not None:
         repro_token_share = (sum(b["invested"] for b in births) / sum(tokens)) if sum(tokens) else 0.0
+        if any("handed_over" in b for b in births):
+            handovers = sum(len(b.get("handed_over") or []) for b in births)
         if births:
             mean_invested = sum(
                 (b["invested"] / b["tokens_before"]) if b.get("tokens_before") else 0.0
@@ -413,6 +416,7 @@ def frame_stats(frame: Dict[str, Any], previous: Dict[str, Any] | None = None) -
         "births": len(births) if births is not None else None,
         "meanInvestedShare": mean_invested,
         "reproTokenShare": repro_token_share,
+        "handovers": handovers,
         "meanChildLinks": mean_links,
         "revolutions": revolutions,
         "heldHomeShare": held_home,

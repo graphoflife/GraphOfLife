@@ -347,6 +347,16 @@ class Handler(BaseHTTPRequestHandler):
         """Attach live facts the metadata file cannot know on its own."""
         run_id = meta["id"]
         meta = dict(meta)
+
+        # A run created before a setting existed has no entry for it, and the
+        # interface would have nothing to show. Round-tripping through
+        # SimConfig fills in exactly the default the engine will itself use, so
+        # a card reports what the run actually does rather than a blank. Only
+        # the response is normalised; what is on disk is left alone.
+        try:
+            meta["config"] = SimConfig.from_dict(meta.get("config", {})).to_dict()
+        except (TypeError, ValueError):
+            pass  # an unreadable config is still better shown as it was stored
         meta["running"] = POOL.is_running(run_id)
         meta["has_checkpoint"] = store.has_checkpoint(run_id)
         try:

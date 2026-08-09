@@ -608,7 +608,7 @@ const Viewer = {
       'distinctBrains', 'brainDiversity', 'distinctLineages'
     ] },
     { key: 'reproduction', label: 'Reproduction', open: true, keys: [
-      'births', 'reproTokenShare', 'meanInvestedShare', 'meanChildLinks'
+      'births', 'reproTokenShare', 'meanInvestedShare', 'meanChildLinks', 'handovers'
     ] },
     { key: 'blotto', label: 'Game (Blotto)', open: true, keys: [
       'totalFlow', 'meanEdgeFlow', 'maxEdgeFlow', 'selfAllocationShare',
@@ -680,6 +680,7 @@ const Viewer = {
       cells.reproTokenShare = ['Tokens to offspring', pct(s.reproTokenShare)];
       cells.meanInvestedShare = ['Mean investment', pct(s.meanInvestedShare)];
       cells.meanChildLinks = ['Links per child', dec(s.meanChildLinks)];
+      if (s.handovers !== null) cells.handovers = ['Handovers', formatNumber(s.handovers)];
     }
     if (s.totalFlow !== null) {
       cells.totalFlow = ['Tokens moved', formatNumber(s.totalFlow)];
@@ -769,6 +770,9 @@ const Viewer = {
         rows.push(`Invested ${formatNumber(d.invested)}` +
                   (d.investedShare !== null ? ` <span class="hint">(${(d.investedShare * 100).toFixed(1)}% of its tokens)</span>` : ''));
         rows.push(`Child ${d.child} · ${d.childLinks} link${d.childLinks === 1 ? '' : 's'}`);
+        if (d.handedOver !== null && d.handedOver !== undefined) {
+          rows.push(`Handed over ${d.handedOver} connection${d.handedOver === 1 ? '' : 's'}`);
+        }
       } else {
         rows.push('Reproduced: no');
       }
