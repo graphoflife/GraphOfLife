@@ -866,6 +866,7 @@ const Viewer = {
 
   /** Paint one frame immediately, without waiting for the animation loop. */
   redraw() {
+    if (this.layout && !this.layout.positionsMatchFrame) return;
     if (this.renderer.cssWidth > 0) {
       this.renderer.draw(this.frame, this.metrics, this.layout, this.settings);
     }
@@ -879,6 +880,15 @@ const Viewer = {
     // own thread and the loop's only job is to draw what has arrived. Without
     // one it advances the layout here, as before.
     this.layout.tick();
+
+    // A frame change reaches the worker before its coordinates come back. Until
+    // they do, the positions we hold are ordered by the previous frame's ids,
+    // and drawing the new ids against them paints one frame of nonsense. The
+    // canvas simply keeps what it already shows for that moment.
+    if (!this.layout.positionsMatchFrame) {
+      requestAnimationFrame(t => this.animate(t));
+      return;
+    }
 
     if (this.settings.autoFit) this.renderer.fitToContent(this.layout);
     this.renderer.stepCamera();

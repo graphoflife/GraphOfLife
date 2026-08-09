@@ -23,6 +23,8 @@ const layout = new ForceLayout();
 let running = false;
 let scheduled = false;
 let shared = null;        // Float32Array over a SharedArrayBuffer, when available
+let sharedGen = 0;        // which buffer generation `shared` refers to
+let frameGen = 0;         // which frame the published coordinates are ordered by
 let ticksDone = 0;
 
 // How long to spend ticking before handing positions back. A little under a
@@ -53,7 +55,16 @@ function publish() {
 }
 
 function report(positions) {
-  const message = { type: 'positions', alpha: layout.alpha, count: layout.ids.length, ticks: ticksDone };
+  const message = {
+    type: 'positions',
+    alpha: layout.alpha,
+    count: layout.ids.length,
+    ticks: ticksDone,
+    // Which buffer these coordinates were written into, and which frame's id
+    // order they follow. The page waits for both before reading them.
+    gen: sharedGen,
+    frameGen
+  };
   if (positions) message.positions = positions;
   postMessage(message);
 }
@@ -97,11 +108,16 @@ self.onmessage = (e) => {
       break;
 
     case 'buffer':
-      // The page grew the shared buffer because the graph did.
+      // The page grew the shared buffer because the graph did. Fill it at once
+      // and say so, rather than leaving the page waiting on the next batch
+      // with nothing valid to read.
       shared = msg.buffer ? new Float32Array(msg.buffer) : null;
+      sharedGen = msg.gen || 0;
+      report(publish());
       break;
 
     case 'frame':
+      frameGen = msg.gen || 0;
       layout.setFrame(msg.ids, msg.edges, msg.parents, msg.carry);
       // Answer immediately: the page has a new frame to draw and should not
       // wait a whole batch for coordinates.
