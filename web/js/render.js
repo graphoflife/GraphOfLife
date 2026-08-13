@@ -404,7 +404,7 @@ class GraphRenderer {
         ? s.edgeFlatColor
         : (s.edgeColorBy === 'source'
             ? metrics.nodeColorCssByIndex(ia, 1)
-            : colormapCss(s.edgeColormap, metrics.edgeColorNorm(a, b), 1, false));
+            : colormapCss(s.edgeColormap, metrics.edgeColorNorm(a, b), 1, s.edgeColorReverse));
 
       let width = s.edgeWidthMin + (s.edgeWidthMax - s.edgeWidthMin) * metrics.edgeWidthNorm(a, b);
       if (this.mode3D) width *= (sk[ia] + sk[ib]) / 2;
@@ -477,9 +477,25 @@ class GraphRenderer {
       grouped[cursor[bucket[i]]++] = i;
     }
 
-    ctx.globalAlpha = s.nodeAlpha;
     const w = this.cssWidth, h = this.cssHeight;
     const outline = s.nodeOutline;
+
+    // Radius is wanted twice — once for the glow, once for the node — and it
+    // is the same number both times.
+    if (!this._sRadius || this._sRadius.length < n) this._sRadius = new Float64Array(n);
+    const radii = this._sRadius;
+    for (let i = 0; i < n; i++) {
+      let r = s.nodeSizeMin + (s.nodeSizeMax - s.nodeSizeMin) * metrics.nodeSizeNorm(i);
+      if (this.mode3D) r *= sk[i];
+      radii[i] = r;
+    }
+
+    const visible = (i) => ok[i] && sx[i] >= -50 && sy[i] >= -50
+                        && sx[i] <= w + 50 && sy[i] <= h + 50;
+
+    if (s.nodeGlow) this._glow(ctx, s, table, counts, grouped, radii, visible);
+
+    ctx.globalAlpha = s.nodeAlpha;
 
     for (let b = 0; b < BUCKETS; b++) {
       const from = counts[b], to = counts[b + 1];
@@ -491,17 +507,13 @@ class GraphRenderer {
 
       for (let idx = from; idx < to; idx++) {
         const i = grouped[idx];
-        if (!ok[i]) continue;
+        if (!visible(i)) continue;
 
-        const x = sx[i], y = sy[i];
-        // Skip anything comfortably off-screen.
-        if (x < -50 || y < -50 || x > w + 50 || y > h + 50) continue;
-
-        let radius = s.nodeSizeMin + (s.nodeSizeMax - s.nodeSizeMin) * metrics.nodeSizeNorm(i);
-        if (this.mode3D) radius *= sk[i];
+        const radius = radii[i];
         if (radius < 0.2) continue;
 
         // moveTo first, or the arcs are joined by stray lines.
+        const x = sx[i], y = sy[i];
         ctx.moveTo(x + radius, y);
         ctx.arc(x, y, radius, 0, Math.PI * 2);
         drew = true;
@@ -510,15 +522,83 @@ class GraphRenderer {
       if (drew) {
         ctx.fill();
         if (outline) {
-          ctx.globalAlpha = Math.min(1, s.nodeAlpha + 0.2);
-          ctx.strokeStyle = 'rgba(0,0,0,0.55)';
-          ctx.lineWidth = 0.6;
+          ctx.globalAlpha = Math.min(1, s.nodeAlpha * s.nodeOutlineAlpha + 0.2);
+          ctx.strokeStyle = s.nodeOutlineColor;
+          ctx.lineWidth = s.nodeOutlineWidth;
           ctx.stroke();
           ctx.globalAlpha = s.nodeAlpha;
         }
       }
     }
     ctx.globalAlpha = 1;
+  }
+
+  /**
+   * A halo under each node.
+   *
+   * Canvas shadows would be the obvious way and are far too slow to use per
+   * node at this scale. Instead each node gets a pair of oversized translucent
+   * discs drawn additively: where they overlap they accumulate, which is what
+   * makes a dense cluster read as brighter than a lone node — the thing that
+   * actually looks like light.
+   *
+   * Additive blending means the glow only shows against a dark background. On
+   * a white one it has nothing to add to and quietly does nothing.
+   *
+   * Colouring by the outline gives one fill for every node on screen, so the
+   * whole pass is a single path. Colouring by the node reuses the buckets the
+   * caller already sorted, costing one fill per bucket rather than per node.
+   */
+  _glow(ctx, s, table, counts, grouped, radii, visible) {
+    const sx = this._sx, sy = this._sy;
+    const BUCKETS = table.length;
+    const byNode = s.nodeGlowColorBy === 'node';
+    const size = Math.max(1.05, s.nodeGlowSize);
+
+    ctx.save();
+    ctx.globalCompositeOperation = 'lighter';
+
+    // Two rings rather than one, so the halo fades outward instead of ending
+    // at a hard edge. The inner ring carries most of the weight.
+    const rings = [[size, 0.45], [1 + (size - 1) * 0.5, 0.55]];
+
+    for (const [scale, share] of rings) {
+      ctx.globalAlpha = s.nodeGlowStrength * share;
+
+      if (byNode) {
+        for (let b = 0; b < BUCKETS; b++) {
+          const from = counts[b], to = counts[b + 1];
+          if (from === to) continue;
+          ctx.fillStyle = table[b];
+          ctx.beginPath();
+          let drew = false;
+          for (let idx = from; idx < to; idx++) {
+            const i = grouped[idx];
+            if (!visible(i) || radii[i] < 0.2) continue;
+            const r = radii[i] * scale;
+            ctx.moveTo(sx[i] + r, sy[i]);
+            ctx.arc(sx[i], sy[i], r, 0, Math.PI * 2);
+            drew = true;
+          }
+          if (drew) ctx.fill();
+        }
+      } else {
+        ctx.fillStyle = s.nodeOutlineColor;
+        ctx.beginPath();
+        let drew = false;
+        for (let idx = 0; idx < counts[BUCKETS]; idx++) {
+          const i = grouped[idx];
+          if (!visible(i) || radii[i] < 0.2) continue;
+          const r = radii[i] * scale;
+          ctx.moveTo(sx[i] + r, sy[i]);
+          ctx.arc(sx[i], sy[i], r, 0, Math.PI * 2);
+          drew = true;
+        }
+        if (drew) ctx.fill();
+      }
+    }
+
+    ctx.restore();
   }
 
   _legend(ctx, metrics, s) {

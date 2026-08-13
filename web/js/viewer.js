@@ -24,9 +24,16 @@ const Viewer = {
     nodeColorBy: 'tokens', nodeColorLog: false,
     nodeColormap: 'viridis', nodeColorReverse: false,
     nodeSizeBy: 'tokens', nodeSizeLog: false, nodeSizeMin: 1.5, nodeSizeMax: 9,
-    nodeAlpha: 0.9, nodeOutline: false,
+    nodeAlpha: 0.9,
+    nodeOutline: false, nodeOutlineColor: '#000000',
+    nodeOutlineAlpha: 0.55, nodeOutlineWidth: 0.6,
+    // Glow defaults to the node's own colour rather than the outline's. The
+    // effect is additive, and the default outline is black, which adds
+    // nothing — switching it on would look broken rather than subtle.
+    nodeGlow: false, nodeGlowColorBy: 'node',
+    nodeGlowSize: 2.6, nodeGlowStrength: 0.35,
     edgeShow: true, edgeColorBy: 'constant', edgeColorLog: false,
-    edgeColormap: 'cividis',
+    edgeColormap: 'cividis', edgeColorReverse: false,
     edgeFlatColor: '#5f7d95', edgeWidthBy: 'constant', edgeWidthLog: false,
     edgeWidthMin: 0.3, edgeWidthMax: 1.6, edgeAlpha: 0.25,
     bgStyle: 'solid', bgColorA: '#0d1117', bgColorB: '#1d2530',
@@ -113,11 +120,19 @@ const Viewer = {
     bind('nodeSizeMax', 'nodeSizeMax', num, false);
     bind('nodeAlpha', 'nodeAlpha', num, false);
     bind('nodeOutline', 'nodeOutline', v => v, false);
+    bind('nodeOutlineColor', 'nodeOutlineColor', v => v, false);
+    bind('nodeOutlineAlpha', 'nodeOutlineAlpha', num, false);
+    bind('nodeOutlineWidth', 'nodeOutlineWidth', num, false);
+    bind('nodeGlow', 'nodeGlow', v => v, false);
+    bind('nodeGlowColorBy', 'nodeGlowColorBy', v => v, false);
+    bind('nodeGlowSize', 'nodeGlowSize', num, false);
+    bind('nodeGlowStrength', 'nodeGlowStrength', num, false);
 
     bind('edgeShow', 'edgeShow', v => v, false);
     bind('edgeColorBy', 'edgeColorBy');
     bind('edgeColorLog', 'edgeColorLog');
     bind('edgeColormap', 'edgeColormap', v => v, false);
+    bind('edgeColorReverse', 'edgeColorReverse', v => v, false);
     bind('edgeFlatColor', 'edgeFlatColor', v => v, false);
     bind('edgeWidthBy', 'edgeWidthBy');
     bind('edgeWidthLog', 'edgeWidthLog');
