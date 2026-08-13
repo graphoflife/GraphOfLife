@@ -15,6 +15,7 @@ const Viewer = {
   frame: null,
   metrics: null,
   cache: new Map(),
+  inflight: new Map(),   // index -> in-progress fetch, so one request serves all askers
   playing: false,
   playAccumulator: 0,
   lastTime: 0,
@@ -491,6 +492,7 @@ const Viewer = {
     this.runId = runId;
     if (switching) {
       this.cache.clear();
+      this.inflight.clear();
       // Positions from the previous run mean nothing here; the next setFrame
       // is told not to carry them over.
       this._dropPositions = true;
@@ -531,21 +533,57 @@ const Viewer = {
   async reload() {
     if (!this.runId) return;
     this.cache.clear();
+    this.inflight.clear();
     StatDetail.invalidate(this.runId);
     await this.load(this.runId);
   },
 
   async fetchFrame(index) {
     if (this.cache.has(index)) return this.cache.get(index);
+    // Sharing the promise, not just the result: scrubbing quickly asks for the
+    // same frame several times before the first answer lands, and each of
+    // those used to become its own request.
+    const inflight = this.inflight.get(index);
+    if (inflight) return inflight;
 
-    const frame = await API.getFrame(this.runId, index);
-    this.cache.set(index, frame);
+    const request = API.getFrame(this.runId, index).then(
+      frame => {
+        this.cache.set(index, frame);
+        // Bounded cache: frames carry full topology and can be large.
+        if (this.cache.size > 60) {
+          this.cache.delete(this.cache.keys().next().value);
+        }
+        this.inflight.delete(index);
+        return frame;
+      },
+      err => { this.inflight.delete(index); throw err; }
+    );
+    this.inflight.set(index, request);
+    return request;
+  },
 
-    // Bounded cache: frames carry full topology and can be large.
-    if (this.cache.size > 60) {
-      this.cache.delete(this.cache.keys().next().value);
+  /**
+   * Warm the frames the reader is about to reach.
+   *
+   * Reading a frame is the slowest part of moving between them — decompressing
+   * and parsing twenty thousand nodes measured anywhere from 55ms to 400ms,
+   * far more than everything the browser then does with it. Almost all of that
+   * can happen while the current frame is still on screen, because which frame
+   * comes next is not a guess: playback runs one way, and so does holding down
+   * an arrow key.
+   *
+   * Deliberately not awaited. A prefetch that fails or arrives late costs
+   * nothing, since the real fetch will simply find it missing and ask again.
+   */
+  prefetch(fromPosition, direction, count = 2) {
+    if (!this.runId || !this.visible.length || !direction) return;
+    for (let k = 1; k <= count; k++) {
+      const position = fromPosition + direction * k;
+      if (position < 0 || position >= this.visible.length) return;
+      const index = this.visible[position];
+      if (this.cache.has(index) || this.inflight.has(index)) continue;
+      this.fetchFrame(index).catch(() => {});
     }
-    return frame;
   },
 
   async goToPosition(position, force = false) {
@@ -553,19 +591,34 @@ const Viewer = {
     const target = Math.max(0, Math.min(this.visible.length - 1, position));
     if (target === this.position && this.frame && !force) return;
 
+    // Which way the reader is moving, so the frames ahead can be warmed.
+    const heading = Math.sign(target - this.position) || this._heading || 1;
+    this._heading = heading;
+
     this.position = target;
     const index = this.visible[target];
     this.frameIndex = index;
+    this.prefetch(target, heading);
 
+    let frame;
     try {
-      this.frame = await this.fetchFrame(index);
+      frame = await this.fetchFrame(index);
     } catch (err) {
+      if (this.position !== target) return;
       this.emptyEl.textContent = `Frame ${index} could not be read: ${err.message}`;
       this.emptyEl.style.display = '';
       return;
     }
 
+    // Scrubbing faster than frames can be read leaves several of these in
+    // flight at once, and they do not finish in the order they were asked
+    // for. Whichever was asked for last is the one the reader wants, so an
+    // older answer arriving late is dropped rather than painted over it.
+    if (this.position !== target) return;
+
+    this.frame = frame;
     await this.ensureDelta(this.frame, index);
+    if (this.position !== target) return;
 
     this.emptyEl.style.display = 'none';
     const carry = this.settings.layoutCarry && !this._dropPositions;
@@ -681,7 +734,14 @@ const Viewer = {
   updateStats() {
     const container = document.getElementById('statsStrip');
     if (!this.metrics) { container.innerHTML = ''; return; }
-    const s = this.metrics.summary();
+
+    // Whether the reader currently has the Structure group open decides
+    // whether its statistics are worth computing at all: they cost more than
+    // everything else on this strip put together.
+    const existing = container.querySelector('.stat-group[data-group="structure"]');
+    const structureGroup = this.STAT_GROUPS.find(g => g.key === 'structure');
+    const structureOpen = existing ? existing.open : Boolean(structureGroup && structureGroup.open);
+    const s = this.metrics.summary(structureOpen);
 
     // Node counts are also given as a share of the population that entered the
     // phase — "40 births" reads very differently at 100 agents than at 4,000.
@@ -689,9 +749,9 @@ const Viewer = {
     const withShare = v => (base && v !== null && v !== undefined)
       ? `${formatNumber(v)} <i>${((v / base) * 100).toFixed(1)}%</i>` : formatNumber(v);
 
-    const int = v => formatNumber(Math.round(v));
-    const pct = v => `${(v * 100).toFixed(1)}%`;
-    const dec = (v, n = 2) => v.toFixed(n);
+    const int = v => (v === null || v === undefined) ? '\u2014' : formatNumber(Math.round(v));
+    const pct = v => (v === null || v === undefined) ? '\u2014' : `${(v * 100).toFixed(1)}%`;
+    const dec = (v, n = 2) => (v === null || v === undefined) ? '\u2014' : v.toFixed(n);
 
     // label and formatted value for every statistic that has one this frame
     const cells = {
@@ -720,19 +780,24 @@ const Viewer = {
       maxDegree: ['Max degree', formatNumber(s.maxDegree)],
       minDegree: ['Min degree', formatNumber(s.minDegree)],
       leaves: ['Leaves', withShare(s.leaves)],
-      cycleRank: ['Loops', formatNumber(s.cycleRank)],
-      loopDensity: ['Loop density', pct(s.loopDensity)],
-      bridges: ['Bridges', formatNumber(s.bridges)],
-      triangles: ['Triangles', formatNumber(s.triangles)],
-      transitivity: ['Clustering', dec(s.transitivity, 3)],
-      dimension: ['Dimension', s.dimension === null ? '—' : dec(s.dimension)],
-      radius: ['Radius', formatNumber(s.radius)],
-      diameter: ['Diameter', formatNumber(s.diameter)],
-      meanPathLength: ['Mean path', dec(s.meanPathLength)],
       degreeEntropy: ['Degree entropy', `${dec(s.degreeEntropy)} bits`],
-      degreeEvenness: ['Degree evenness', pct(s.degreeEvenness)],
-      components: ['Components', formatNumber(s.components)]
+      degreeEvenness: ['Degree evenness', pct(s.degreeEvenness)]
     };
+
+    // Only computed while the Structure group is open, since walking the whole
+    // graph costs more than the rest of this strip together.
+    if (structureOpen) {
+      cells.cycleRank = ['Loops', formatNumber(s.cycleRank)];
+      cells.loopDensity = ['Loop density', pct(s.loopDensity)];
+      cells.bridges = ['Bridges', formatNumber(s.bridges)];
+      cells.triangles = ['Triangles', formatNumber(s.triangles)];
+      cells.transitivity = ['Clustering', dec(s.transitivity, 3)];
+      cells.dimension = ['Dimension', dec(s.dimension)];
+      cells.radius = ['Radius', formatNumber(s.radius)];
+      cells.diameter = ['Diameter', formatNumber(s.diameter)];
+      cells.meanPathLength = ['Mean path', dec(s.meanPathLength)];
+      cells.components = ['Components', formatNumber(s.components)];
+    }
 
     // Present only when the phase produced them.
     if (s.births !== null) {
@@ -790,6 +855,13 @@ const Viewer = {
 
     for (const el of container.querySelectorAll('.stat')) {
       el.addEventListener('click', () => StatDetail.open(el.dataset.stat, el.dataset.label));
+    }
+
+    // Opening Structure is what asks for those statistics, so redraw the strip
+    // once they can be computed. Closing it costs nothing and needs no redraw.
+    const group = container.querySelector('.stat-group[data-group="structure"]');
+    if (group && !structureOpen) {
+      group.addEventListener('toggle', () => { if (group.open) this.updateStats(); }, { once: true });
     }
   },
 

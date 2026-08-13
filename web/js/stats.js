@@ -18,7 +18,6 @@ class FrameMetrics {
     // change rather than letting undefined leak into the colour maths.
     this.delta = frame.delta || new Array(frame.ids.length).fill(0);
     this.hasDelta = Boolean(frame.delta);
-    this.flow = this._edgeFlow();
     this.totalTokens = frame.tokens.reduce((a, b) => a + b, 0);
     this.curvature = this._curvature();
 
@@ -57,17 +56,31 @@ class FrameMetrics {
     const decisions = this.frame.decisions;
     if (!decisions || !decisions.allocations) return flow;
 
+    const index = this.index;
+    const stride = this.frame.ids.length + 1;
+
     for (const record of decisions.allocations) {
       const source = record.agent;
+      const is = index.get(source);
+      if (is === undefined) continue;
+
       for (let i = 0; i < record.targets.length; i++) {
         const target = record.targets[i];
         const amount = record.alloc[i];
         if (!amount || target === source) continue;
-        const key = source < target ? `${source},${target}` : `${target},${source}`;
+        const it = index.get(target);
+        if (it === undefined) continue;
+
+        const key = is < it ? is * stride + it : it * stride + is;
         flow.set(key, (flow.get(key) || 0) + amount);
       }
     }
     return flow;
+  }
+
+  get flow() {
+    if (!this._flow) this._flow = this._edgeFlow();
+    return this._flow;
   }
 
   get hasFlow() { return this.flow.size > 0; }
@@ -215,7 +228,8 @@ class FrameMetrics {
       case 'max_degree': return Math.max(this.degree[ia], this.degree[ib]);
       case 'avg_curvature': return (this.curvature[ia] + this.curvature[ib]) / 2;
       case 'flow': {
-        const key = a < b ? `${a},${b}` : `${b},${a}`;
+        const stride = this.frame.ids.length + 1;
+        const key = ia < ib ? ia * stride + ib : ib * stride + ia;
         return this.flow.get(key) || 0;
       }
       case 'loops': {
@@ -437,7 +451,13 @@ class FrameMetrics {
     return Array.from(this.flow.values());
   }
 
-  summary() {
+  /**
+   * The numbers under the canvas.
+   *
+   * `includeStructure` gates the handful that need the whole graph walked;
+   * without it they stay null and the strip simply omits them.
+   */
+  summary(includeStructure = true) {
     const f = this.frame;
     const n = f.ids.length;
     const degrees = Array.from(this.degree);
@@ -602,17 +622,27 @@ class FrameMetrics {
     if (d.pruned_edges) out.prunedEdges = d.pruned_edges.length;
 
     // ---- structure ----
-    const st = this.structure;
-    out.cycleRank = st.loops.cycleRank;
-    out.loopDensity = f.edges.length ? st.loops.cycleRank / f.edges.length : 0;
-    out.bridges = st.loops.bridges;
-    out.components = st.loops.componentCount;
-    out.triangles = st.triangles.total;
-    out.transitivity = GraphStats.transitivity(f.ids, st.adj, st.triangles.total);
-    out.dimension = st.dimension.estimate;
-    out.radius = st.distances.radius;
-    out.diameter = st.distances.diameter;
-    out.meanPathLength = st.distances.meanPathLength;
+    //
+    // Loops, bridges, triangles, dimension and the distance sweeps are by far
+    // the most expensive thing here — around 250ms of a 280ms summary at
+    // twenty thousand nodes, which is what made stepping between frames feel
+    // heavy. The group they feed is collapsed by default, so the reader was
+    // usually paying for numbers nobody was looking at. The caller asks for
+    // them when the group is open, and the rest of the summary no longer
+    // waits on them.
+    if (includeStructure) {
+      const st = this.structure;
+      out.cycleRank = st.loops.cycleRank;
+      out.loopDensity = f.edges.length ? st.loops.cycleRank / f.edges.length : 0;
+      out.bridges = st.loops.bridges;
+      out.components = st.loops.componentCount;
+      out.triangles = st.triangles.total;
+      out.transitivity = GraphStats.transitivity(f.ids, st.adj, st.triangles.total);
+      out.dimension = st.dimension.estimate;
+      out.radius = st.distances.radius;
+      out.diameter = st.distances.diameter;
+      out.meanPathLength = st.distances.meanPathLength;
+    }
 
     out.degreeEntropy = GraphStats.degreeEntropy(degrees);
     // Against the most even the same number of classes could be, so 1 means
