@@ -87,39 +87,125 @@ class ForceLayout {
   /**
    * Adopt a new frame, keeping the positions of nodes that still exist.
    * `parents` maps a node id to the id that spawned it.
+   *
+   * Seeding a newborn beside its parent is what keeps lineages together. The
+   * parent is not always there to be found, though: consecutive shown frames
+   * can be several generations apart — a phase filter halves them, a run that
+   * records every Nth iteration thins them further, and fast playback outruns
+   * the layout. Whole generations then pass unseen, and a newborn's parent may
+   * itself have been born and died between two frames that were drawn.
+   *
+   * Giving up after one hop dropped those nodes at the origin, which is why a
+   * burst of them appeared in the middle of the view whenever playback ran
+   * ahead. So the search climbs: parent, grandparent, and up the line until it
+   * finds an ancestor that still holds a position. Failing that it borrows
+   * from whichever neighbours are already placed, since a newborn is wired to
+   * its parent's neighbourhood and that is roughly where it belongs. Only a
+   * node with no placed ancestor and no placed neighbour falls back to the
+   * middle, which in practice means the very first frame.
    */
   setFrame(ids, edges, parents, carryPositions) {
     if (!carryPositions) this.pos.clear();
 
+    // Adopted before seeding rather than after, so the neighbour lists the
+    // layout needs anyway are already built when the fallback below wants
+    // them. Otherwise finding a newborn's neighbours meant a second pass over
+    // every edge in the graph.
+    this.ids = ids;
+    this.edges = edges;
+    this._buildAdjacency();
+
     const next = new Map();
     const spawnRadius = this.linkDistance * 0.6;
 
-    for (let i = 0; i < ids.length; i++) {
-      const id = ids[i];
-      const existing = this.pos.get(id);
-      if (existing) {
-        next.set(id, existing);
-        continue;
+    // Where each id sits in this frame, so an ancestor can be followed even
+    // when it is itself newly born and has no position of its own yet. Built
+    // only if the climb ever needs a second hop: when frames arrive in order
+    // every parent is already placed and this is never touched.
+    let slot = null;
+    const slotOf = (id) => {
+      if (!slot) {
+        slot = new Map();
+        for (let k = 0; k < ids.length; k++) slot.set(ids[k], k);
+      }
+      return slot.get(id);
+    };
+
+    // Long chains are walked once and the answer shared by everything along
+    // them, so a deep lineage costs one climb rather than one per descendant.
+    const MAX_CLIMB = 200;
+    const climbed = new Map();
+
+    const ancestorAnchor = (startId) => {
+      if (startId === undefined || startId < 0) return null;
+      // The overwhelmingly common case, and the only one worth keeping free of
+      // allocation: frames in order, parent still alive and already placed.
+      const direct = this.pos.get(startId);
+      if (direct) return direct;
+      if (climbed.has(startId)) return climbed.get(startId);
+
+      const chain = [];
+      let current = startId, found = null, hops = 0;
+
+      while (current !== undefined && current >= 0 && hops < MAX_CLIMB) {
+        const known = this.pos.get(current);
+        if (known) { found = known; break; }
+        if (climbed.has(current)) { found = climbed.get(current); break; }
+
+        chain.push(current);
+        const i = slotOf(current);
+        if (i === undefined) break;   // this ancestor is gone from the frame
+        current = parents ? parents[i] : -1;
+        hops++;
       }
 
-      // A newborn appears just beside its parent, so lineages stay together.
-      const parent = parents ? parents[i] : -1;
-      const anchor = (parent >= 0) ? this.pos.get(parent) : null;
-      const radius = anchor ? spawnRadius : 200 * Math.sqrt(Math.random());
-      const dir = this._randomDirection();
+      for (const id of chain) climbed.set(id, found);
+      return found;
+    };
 
-      next.set(id, {
+    const place = (anchor) => {
+      const dir = this._randomDirection();
+      const radius = anchor ? spawnRadius : 200 * Math.sqrt(Math.random());
+      return {
         x: (anchor ? anchor.x : 0) + dir.x * radius,
         y: (anchor ? anchor.y : 0) + dir.y * radius,
         z: (anchor ? anchor.z : 0) + dir.z * radius,
         vx: 0, vy: 0, vz: 0
-      });
+      };
+    };
+
+    const unplaced = [];
+    for (let i = 0; i < ids.length; i++) {
+      const id = ids[i];
+      const existing = this.pos.get(id);
+      if (existing) { next.set(id, existing); continue; }
+
+      const anchor = ancestorAnchor(parents ? parents[i] : -1);
+      if (anchor) next.set(id, place(anchor));
+      else unplaced.push(id);
+    }
+
+    // Whatever the lineage could not account for, the topology usually can.
+    // Averaging the placed neighbours puts the node inside the neighbourhood
+    // it is wired to rather than at the centre of the whole graph.
+    if (unplaced.length) {
+      const still = [];
+      for (const id of unplaced) {
+        let x = 0, y = 0, z = 0, count = 0;
+        for (const other of (this.adjacency.get(id) || [])) {
+          const p = next.get(other);
+          if (!p) continue;
+          x += p.x; y += p.y; z += p.z; count++;
+        }
+        if (count) next.set(id, place({ x: x / count, y: y / count, z: z / count }));
+        else still.push(id);
+      }
+      // Anything left knows nobody that has been placed — a genuinely new
+      // component, or the first frame of a run.
+      for (const id of still) next.set(id, place(null));
     }
 
     this.pos = next;
-    this.ids = ids;
-    this.edges = edges;
-    this._buildAdjacency();
   }
 
   _randomDirection() {
