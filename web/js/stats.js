@@ -341,13 +341,15 @@ class FrameMetrics {
       births.set(b.agent, b);
       newborns.set(b.child, b.agent);
     }
+    const rewires = new Map();
+    for (const r of d.rewires || []) rewires.set(r.agent, r);
     for (const a of d.allocations || []) allocations.set(a.agent, a);
     for (const w of d.winners || []) {
       winners.set(w.node, w);
       conquests.set(w.winner, (conquests.get(w.winner) || 0) + 1);
     }
 
-    this._decisions = { births, newborns, allocations, winners, conquests };
+    this._decisions = { births, newborns, allocations, winners, conquests, rewires };
     return this._decisions;
   }
 
@@ -383,6 +385,9 @@ class FrameMetrics {
       }
       const bornFrom = idx.newborns.get(id);
       if (bornFrom !== undefined) detail.newbornOf = bornFrom;
+
+      const moved = idx.rewires.get(id);
+      if (moved) detail.rewire = { edge: moved.edge, to: moved.to };
     } else {
       const alloc = idx.allocations.get(id);
       if (alloc) {
@@ -513,11 +518,16 @@ class FrameMetrics {
       redistributed: f.cleanup ? f.cleanup.redistributed : null,
 
       births: null, meanInvestedShare: null, meanChildLinks: null,
-      reproTokenShare: null, handovers: null,
+      reproTokenShare: null, handovers: null, rewires: null,
       revolutions: null, totalFlow: null, meanEdgeFlow: null, maxEdgeFlow: null,
       selfAllocationShare: null, revoltShare: null, spreadShare: null,
       heldHomeShare: null, prunedEdges: null
     };
+
+    // Rewiring happens during the reproduction phase but is nobody's child:
+    // absent when the rule is off, rather than a zero that reads as "nobody
+    // chose to".
+    if (d.rewires !== undefined) out.rewires = d.rewires.length;
 
     // ---- reproduction phase ----
     if (d.births) {

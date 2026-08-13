@@ -53,7 +53,7 @@ def progress(run_id: str) -> Dict[str, Any]:
 
 
 # Bump when a formula below changes, so stale caches are discarded.
-SERIES_VERSION = 10
+SERIES_VERSION = 11
 
 # At most this many iterations are analysed for a run's history.
 #
@@ -305,6 +305,9 @@ def frame_stats(frame: Dict[str, Any], previous: Dict[str, Any] | None = None) -
     held_home = (sum(1 for w in winners if w.get("winner") == w.get("node")) / len(winners)
                  if winners else None)
 
+    rewires = decisions.get("rewires")
+    rewire_count = len(rewires) if rewires is not None else None
+
     births = decisions.get("births")
     mean_invested = None
     mean_links = None
@@ -421,6 +424,7 @@ def frame_stats(frame: Dict[str, Any], previous: Dict[str, Any] | None = None) -
         "meanInvestedShare": mean_invested,
         "reproTokenShare": repro_token_share,
         "handovers": handovers,
+        "rewires": rewire_count,
         "meanChildLinks": mean_links,
         "revolutions": revolutions,
         "heldHomeShare": held_home,

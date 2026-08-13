@@ -77,6 +77,10 @@
               <small>A parent may give one of its own connections to the newborn.</small>
             </div>
             <div class="field checkbox">
+              <label><input type="checkbox" id="cfg_allow_rewire" data-cfg="allow_rewire"> Allow rewire</label>
+              <small>An agent may hand one of its own edges to another of its neighbours, dropping out of the middle.</small>
+            </div>
+            <div class="field checkbox">
               <label><input type="checkbox" id="cfg_allow_revolutions" data-cfg="allow_revolutions"> Allow revolutions</label>
               <small>Off, a node goes to whoever allocated the most, ties at random. Each option changes the brain's outputs, so neither can be altered on an existing run.</small>
             </div>

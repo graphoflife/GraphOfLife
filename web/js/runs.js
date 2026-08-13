@@ -22,6 +22,7 @@ const RunsView = {
     ['exchange_messages', 'exchange'],
     ['allow_handover', 'handover'],
     ['allow_revolutions', 'revolutions'],
+    ['allow_rewire', 'rewire'],
     ['mutation_probability', 'mut p'],
     ['mutation_noise_std', 'mut std'],
     ['mutation_sparsity', 'mut sparse'],
@@ -105,7 +106,8 @@ const RunsView = {
     // Revolutions add a fraction pair; handover adds a yes/no pair plus its
     // mode pair. Both are absent from the brain when switched off.
     const outputs = 9 + (cfg.allow_revolutions ? 2 : 0)
-                      + (cfg.allow_handover ? 4 : 0) + messages;
+                      + (cfg.allow_handover ? 4 : 0)
+                      + (cfg.allow_rewire ? 8 : 0) + messages;
 
     const n = cfg.n_nodes > 0 ? cfg.n_nodes : Math.floor((cfg.total_tokens || 0) / 100);
     const k = cfg.k_neighbors > 0 ? cfg.k_neighbors : Math.max(Math.floor(n / 100), 5);

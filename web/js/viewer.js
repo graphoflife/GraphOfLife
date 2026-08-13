@@ -608,7 +608,8 @@ const Viewer = {
       'distinctBrains', 'brainDiversity', 'distinctLineages'
     ] },
     { key: 'reproduction', label: 'Reproduction', open: true, keys: [
-      'births', 'reproTokenShare', 'meanInvestedShare', 'meanChildLinks', 'handovers'
+      'births', 'reproTokenShare', 'meanInvestedShare', 'meanChildLinks',
+      'handovers', 'rewires'
     ] },
     { key: 'blotto', label: 'Game (Blotto)', open: true, keys: [
       'totalFlow', 'meanEdgeFlow', 'maxEdgeFlow', 'selfAllocationShare',
@@ -682,6 +683,7 @@ const Viewer = {
       cells.meanChildLinks = ['Links per child', dec(s.meanChildLinks)];
       if (s.handovers !== null) cells.handovers = ['Handovers', formatNumber(s.handovers)];
     }
+    if (s.rewires !== null) cells.rewires = ['Rewires', formatNumber(s.rewires)];
     if (s.totalFlow !== null) {
       cells.totalFlow = ['Tokens moved', formatNumber(s.totalFlow)];
       cells.meanEdgeFlow = ['Mean edge flow', dec(s.meanEdgeFlow, 1)];
@@ -764,6 +766,9 @@ const Viewer = {
       rows.push('<hr>');
       if (d.newbornOf !== undefined) {
         rows.push(`<b class="good">Born this phase</b> from ${d.newbornOf}`);
+      }
+      if (d.rewire) {
+        rows.push(`Gave its edge to ${d.rewire.edge} over to ${d.rewire.to}`);
       }
       if (d.reproduced === null) {
         rows.push('<span class="hint">decisions not recorded</span>');
