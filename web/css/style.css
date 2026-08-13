@@ -516,8 +516,28 @@ details.control-group > summary:hover h3 { color: var(--text); }
 /* The toggle row carries more now, so let it wrap tidily. */
 .view-toggles { row-gap: 8px; }
 
-/* Histogram axis scale toggles */
-.charts figcaption { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+/* Chart headers: the metric pickers sit in the caption, scales on the right. */
+.charts figcaption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.chart-pair { display: inline-flex; gap: 4px; align-items: center; min-width: 0; }
+.chart-metric {
+  width: auto;
+  min-width: 0;
+  max-width: 190px;
+  flex: 0 1 auto;
+  font-size: 11px;
+  padding: 2px 4px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text);
+}
+.chart-pair .chart-metric { max-width: 130px; }
 .axis-toggles { display: inline-flex; gap: 10px; align-items: center; }
 .axis-group { display: inline-flex; align-items: center; gap: 3px; color: #6b7c8d; font-size: 10px; }
 .axis-btn {

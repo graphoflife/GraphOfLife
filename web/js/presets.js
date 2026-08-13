@@ -22,32 +22,62 @@ const Presets = {
 
   BUILT_IN: {
     wealth: {
-      nodeColorBy: 'log_tokens', nodeColormap: 'inferno', nodeSizeBy: 'tokens',
+      nodeColorBy: 'tokens', nodeColorLog: true, nodeColormap: 'inferno',
+      nodeSizeBy: 'tokens', nodeSizeLog: false,
       edgeColorBy: 'constant', edgeWidthBy: 'constant', edgeAlpha: 0.18,
       bgStyle: 'radial', nodeAlpha: 0.95,
+      distMetric: 'node:tokens', histDistX: 'log', histDistY: 'linear',
+      heatX: 'node:degree', heatY: 'node:tokens',
+      histHeatX: 'linear', histHeatY: 'log', histHeatCount: 'log',
       forceCharge: 24, forceLink: 0.12, forceCenter: 0.012,
       forceAngular: 0.15, forceDamping: 0.86, dimensions: 3
     },
     lineage: {
-      nodeColorBy: 'brain_id', nodeColormap: 'turbo', nodeSizeBy: 'log_tokens',
+      nodeColorBy: 'brain_id', nodeColorLog: false, nodeColormap: 'turbo',
+      nodeSizeBy: 'tokens', nodeSizeLog: true,
       edgeColorBy: 'source', edgeAlpha: 0.3, bgStyle: 'solid', nodeAlpha: 0.9,
+      distMetric: 'node:brain_id', histDistX: 'linear', histDistY: 'log',
+      heatX: 'node:age', heatY: 'node:tokens',
+      histHeatX: 'linear', histHeatY: 'log', histHeatCount: 'log',
       // Looser and more open, so separate lineages drift apart visibly.
       forceCharge: 45, forceLink: 0.09, forceCenter: 0.009,
       forceAngular: 0.2, forceDamping: 0.88, dimensions: 3
     },
     structure: {
-      nodeColorBy: 'log_degree', nodeColormap: 'cividis', nodeSizeBy: 'degree',
-      edgeColorBy: 'log_avg_degree', edgeWidthBy: 'log_avg_degree', edgeAlpha: 0.35,
+      nodeColorBy: 'degree', nodeColorLog: true, nodeColormap: 'cividis',
+      nodeSizeBy: 'degree', nodeSizeLog: false,
+      edgeColorBy: 'avg_degree', edgeColorLog: true,
+      edgeWidthBy: 'avg_degree', edgeWidthLog: true, edgeAlpha: 0.35,
       bgStyle: 'linear', nodeAlpha: 0.85,
+      distMetric: 'node:degree', histDistX: 'linear', histDistY: 'log',
+      heatX: 'node:degree', heatY: 'node:loops',
+      histHeatX: 'linear', histHeatY: 'log', histHeatCount: 'log',
       // Strong angular spread and tight links, which is what makes the
       // branching shape of the graph legible.
       forceCharge: 12, forceLink: 0.2, forceCenter: 0.014,
       forceAngular: 0.5, forceDamping: 0.86, dimensions: 3
     },
+    flow: {
+      // Where wealth is running uphill: curvature says which nodes sit in a
+      // valley their neighbours are draining into, and which are the peaks.
+      nodeColorBy: 'token_curvature', nodeColorLog: true, nodeColormap: 'coolwarm',
+      nodeSizeBy: 'abs_token_delta', nodeSizeLog: true,
+      edgeColorBy: 'flow', edgeColorLog: true, edgeWidthBy: 'flow',
+      edgeWidthLog: true, edgeAlpha: 0.4,
+      bgStyle: 'solid', nodeAlpha: 0.9,
+      distMetric: 'node:token_curvature', histDistX: 'log', histDistY: 'log',
+      heatX: 'node:tokens', heatY: 'node:token_curvature',
+      histHeatX: 'log', histHeatY: 'log', histHeatCount: 'log',
+      forceCharge: 20, forceLink: 0.12, forceCenter: 0.012,
+      forceAngular: 0.15, forceDamping: 0.86, dimensions: 3
+    },
     minimal: {
       nodeColorBy: 'constant', nodeColormap: 'grayscale', nodeSizeBy: 'constant',
       edgeColorBy: 'constant', edgeWidthBy: 'constant', edgeAlpha: 0.12,
       bgStyle: 'solid', nodeAlpha: 0.7,
+      distMetric: 'node:degree', histDistX: 'linear', histDistY: 'linear',
+      heatX: 'node:degree', heatY: 'node:tokens',
+      histHeatX: 'linear', histHeatY: 'log', histHeatCount: 'log',
       forceCharge: 18, forceLink: 0.12, forceCenter: 0.012,
       forceAngular: 0.08, forceDamping: 0.86, dimensions: 3
     }

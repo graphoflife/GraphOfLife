@@ -21,11 +21,13 @@ const Viewer = {
   phaseFilter: 'all',
 
   settings: {
-    nodeColorBy: 'tokens', nodeColormap: 'viridis', nodeColorReverse: false,
-    nodeSizeBy: 'tokens', nodeSizeMin: 1.5, nodeSizeMax: 9,
+    nodeColorBy: 'tokens', nodeColorLog: false,
+    nodeColormap: 'viridis', nodeColorReverse: false,
+    nodeSizeBy: 'tokens', nodeSizeLog: false, nodeSizeMin: 1.5, nodeSizeMax: 9,
     nodeAlpha: 0.9, nodeOutline: false,
-    edgeShow: true, edgeColorBy: 'constant', edgeColormap: 'cividis',
-    edgeFlatColor: '#5f7d95', edgeWidthBy: 'constant',
+    edgeShow: true, edgeColorBy: 'constant', edgeColorLog: false,
+    edgeColormap: 'cividis',
+    edgeFlatColor: '#5f7d95', edgeWidthBy: 'constant', edgeWidthLog: false,
     edgeWidthMin: 0.3, edgeWidthMax: 1.6, edgeAlpha: 0.25,
     bgStyle: 'solid', bgColorA: '#0d1117', bgColorB: '#1d2530',
     showLegend: true, layoutCarry: true,
@@ -36,9 +38,13 @@ const Viewer = {
     forceAngular: 0.15, forceDamping: 0.86, forceTheta: 1.2,
     dimensions: 3, autoFit: true,
 
-    // Histogram axis scales, per chart and per axis.
-    histDegreeX: 'linear', histDegreeY: 'linear',
-    histTokenX: 'log', histTokenY: 'linear'
+    // Which quantity each chart plots, and the scale of each axis. Chart
+    // metrics are domain-qualified, since `loops` means one thing for a node
+    // and another for an edge.
+    distMetric: 'node:tokens',
+    histDistX: 'log', histDistY: 'linear',
+    heatX: 'node:degree', heatY: 'node:tokens',
+    histHeatX: 'linear', histHeatY: 'log', histHeatCount: 'log'
   },
 
   init() {
@@ -52,6 +58,7 @@ const Viewer = {
 
     populateColormapSelect(document.getElementById('nodeColormap'), this.settings.nodeColormap);
     populateColormapSelect(document.getElementById('edgeColormap'), this.settings.edgeColormap);
+    this.populateMetricSelects();
 
     this.bindControls();
     this.bindPlayback();
@@ -97,9 +104,11 @@ const Viewer = {
     const num = v => Number(v);
 
     bind('nodeColorBy', 'nodeColorBy');
+    bind('nodeColorLog', 'nodeColorLog');
     bind('nodeColormap', 'nodeColormap');
     bind('nodeColorReverse', 'nodeColorReverse');
     bind('nodeSizeBy', 'nodeSizeBy');
+    bind('nodeSizeLog', 'nodeSizeLog');
     bind('nodeSizeMin', 'nodeSizeMin', num, false);
     bind('nodeSizeMax', 'nodeSizeMax', num, false);
     bind('nodeAlpha', 'nodeAlpha', num, false);
@@ -107,9 +116,17 @@ const Viewer = {
 
     bind('edgeShow', 'edgeShow', v => v, false);
     bind('edgeColorBy', 'edgeColorBy');
+    bind('edgeColorLog', 'edgeColorLog');
     bind('edgeColormap', 'edgeColormap', v => v, false);
     bind('edgeFlatColor', 'edgeFlatColor', v => v, false);
     bind('edgeWidthBy', 'edgeWidthBy');
+    bind('edgeWidthLog', 'edgeWidthLog');
+
+    // The charts read from the metrics that already exist, so switching one
+    // costs a redraw rather than a rebuild.
+    bind('distMetric', 'distMetric', v => v, false);
+    bind('heatX', 'heatX', v => v, false);
+    bind('heatY', 'heatY', v => v, false);
     bind('edgeWidthMin', 'edgeWidthMin', num, false);
     bind('edgeWidthMax', 'edgeWidthMax', num, false);
     bind('edgeAlpha', 'edgeAlpha', num, false);
@@ -145,6 +162,29 @@ const Viewer = {
     for (const btn of document.querySelectorAll('[data-preset]')) {
       btn.addEventListener('click', () => this.applySettings(Presets.builtIn(btn.dataset.preset)));
     }
+  },
+
+  /**
+   * Fill every metric menu from the shared registry.
+   *
+   * Doing it here rather than in the markup keeps one list of quantities: a
+   * metric added to Metrics shows up in all five menus without the HTML and
+   * the code drifting apart.
+   */
+  populateMetricSelects() {
+    const s = this.settings;
+    Metrics.fillSelect(document.getElementById('nodeColorBy'), 'node',
+                       { extras: [Metrics.CONSTANT], selected: s.nodeColorBy });
+    Metrics.fillSelect(document.getElementById('nodeSizeBy'), 'node',
+                       { extras: [Metrics.CONSTANT], selected: s.nodeSizeBy });
+    Metrics.fillSelect(document.getElementById('edgeColorBy'), 'edge',
+                       { extras: [Metrics.CONSTANT, Metrics.INHERIT], selected: s.edgeColorBy });
+    Metrics.fillSelect(document.getElementById('edgeWidthBy'), 'edge',
+                       { extras: [Metrics.CONSTANT], selected: s.edgeWidthBy });
+
+    Metrics.fillDomainSelect(document.getElementById('distMetric'), s.distMetric);
+    Metrics.fillDomainSelect(document.getElementById('heatX'), s.heatX);
+    Metrics.fillDomainSelect(document.getElementById('heatY'), s.heatY);
   },
 
   bindAxisToggles() {
@@ -738,18 +778,63 @@ const Viewer = {
     }
   },
 
+  /** Raw values for a domain-qualified metric, whichever domain it names. */
+  chartValues(parsed) {
+    return parsed.domain === 'edge'
+      ? this.metrics.edgeValues(parsed.key)
+      : this.metrics.nodeValues(parsed.key);
+  },
+
   updateCharts() {
     if (!this.metrics) return;
     const s = this.settings;
 
-    drawHistogram(document.getElementById('degreeHist'), Array.from(this.metrics.degree), {
+    const dist = Metrics.parse(s.distMetric);
+    drawHistogram(document.getElementById('distHist'), this.chartValues(dist), {
       bins: 30, colormap: s.nodeColormap, reverse: s.nodeColorReverse,
-      logScale: s.histDegreeX === 'log', logCount: s.histDegreeY === 'log'
+      logScale: s.histDistX === 'log', logCount: s.histDistY === 'log',
+      signed: Metrics.isSigned(dist.domain, dist.key),
+      format: v => Metrics.format(dist.domain, dist.key, v)
     });
-    drawHistogram(document.getElementById('tokenHist'), this.frame.tokens, {
-      bins: 30, colormap: s.nodeColormap, reverse: s.nodeColorReverse,
-      logScale: s.histTokenX === 'log', logCount: s.histTokenY === 'log'
+
+    const heat = document.getElementById('heatMap');
+    const x = Metrics.parse(s.heatX), y = Metrics.parse(s.heatY);
+
+    // A node value and an edge value describe different things, and there is
+    // no correspondence between the two lists to pair them by. Say so rather
+    // than plotting a grid that would mean nothing.
+    if (x.domain !== y.domain) {
+      drawHeatmap(heat, null, null, {
+        message: 'Pick two node metrics or two edge metrics — mixing them has no pairing.'
+      });
+      return;
+    }
+
+    drawHeatmap(heat, this.chartValues(x), this.chartValues(y), {
+      colormap: s.nodeColormap, reverse: s.nodeColorReverse,
+      logX: s.histHeatX === 'log', logY: s.histHeatY === 'log',
+      logCount: s.histHeatCount === 'log',
+      signedX: Metrics.isSigned(x.domain, x.key),
+      signedY: Metrics.isSigned(y.domain, y.key),
+      formatX: v => Metrics.format(x.domain, x.key, v),
+      formatY: v => Metrics.format(y.domain, y.key, v)
     });
+  },
+
+  /**
+   * Curvature, phrased as what it means rather than as a bare number: whether
+   * this agent sits below or above the neighbourhood it is wired into.
+   */
+  curvatureRow(d) {
+    const v = Math.round(d.curvature);
+    if (v === 0) return `Curvature 0 <span class="hint">(level with its neighbours)</span>`;
+    const perNeighbour = d.degree ? Math.round(d.curvature / d.degree) : 0;
+    const sense = v > 0
+      ? `poorer than its neighbours by ${formatNumber(Math.abs(perNeighbour))} each`
+      : `richer than its neighbours by ${formatNumber(Math.abs(perNeighbour))} each`;
+    const cls = v > 0 ? 'bad' : 'good';
+    return `Curvature <span class="${cls}">${v > 0 ? '+' : ''}${formatNumber(v)}</span>` +
+           ` <span class="hint">(${sense})</span>`;
   },
 
   showHover(i, x, y) {
@@ -760,6 +845,7 @@ const Viewer = {
       `<b>Node ${d.id}</b> <span class="hint">#${d.rank} by wealth</span>`,
       `Tokens ${formatNumber(d.tokens)} <span class="hint">(${(d.tokenShare * 100).toFixed(2)}% of world)</span>`,
       `Degree ${d.degree}`,
+      this.curvatureRow(d),
       d.hasDelta ? this.deltaRow(d) : '<span class="hint">token change not recorded</span>',
       `Brain ${d.brainId} <span class="hint">from ${d.parentBrainId}</span>`,
       `Spawned by ${d.spawnedBy !== null ? d.spawnedBy : '—'}`
@@ -839,7 +925,7 @@ const Viewer = {
 
   applySettings(preset) {
     if (!preset) return;
-    Object.assign(this.settings, preset);
+    Object.assign(this.settings, Metrics.migrateSettings({ ...preset }));
 
     this.syncControlsFromSettings();
     this.syncAxisToggles();

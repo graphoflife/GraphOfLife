@@ -20,56 +20,19 @@ class FrameMetrics {
     this.hasDelta = Boolean(frame.delta);
     this.flow = this._edgeFlow();
     this.totalTokens = frame.tokens.reduce((a, b) => a + b, 0);
+    this.curvature = this._curvature();
 
-    this.colorValues = this._values(settings.nodeColorBy);
-    this.colorRange = this._range(this.colorValues, settings.nodeColorBy);
-    this.sizeValues = this._values(settings.nodeSizeBy);
-    this.sizeRange = this._range(this.sizeValues, settings.nodeSizeBy);
+    this.colorValues = this.scaledNodeValues(settings.nodeColorBy, settings.nodeColorLog);
+    this.colorRange = this.nodeRange(settings.nodeColorBy, settings.nodeColorLog);
+    this.sizeValues = this.scaledNodeValues(settings.nodeSizeBy, settings.nodeSizeLog);
+    this.sizeRange = this.nodeRange(settings.nodeSizeBy, settings.nodeSizeLog);
 
-    this.colorLabel = FrameMetrics.LABELS[settings.nodeColorBy] || settings.nodeColorBy;
+    this.colorLabel = Metrics.label('node', settings.nodeColorBy)
+      + (settings.nodeColorLog ? ' (log)' : '');
     this.colorRangeText = [
-      FrameMetrics.formatValue(this.colorRange[0], settings.nodeColorBy),
-      FrameMetrics.formatValue(this.colorRange[1], settings.nodeColorBy)
+      Metrics.format('node', settings.nodeColorBy, this.colorRange[0], settings.nodeColorLog),
+      Metrics.format('node', settings.nodeColorBy, this.colorRange[1], settings.nodeColorLog)
     ];
-  }
-
-  static LABELS = {
-    tokens: 'Tokens',
-    log_tokens: 'Tokens (log)',
-    degree: 'Degree',
-    log_degree: 'Degree (log)',
-    token_delta: 'Token change',
-    abs_token_delta: 'Token change (size)',
-    log_token_delta: 'Token change (log)',
-    log_abs_token_delta: 'Token change (log size)',
-    loops: 'Loops through it',
-    log_loops: 'Loops through it (log)',
-    triangles: 'Triangles',
-    log_triangles: 'Triangles (log)',
-    brain_id: 'Brain id',
-    parent_brain_id: 'Parent brain id',
-    age: 'Node id (age)',
-    token_share: 'Share of tokens',
-    constant: 'Constant'
-  };
-
-  static formatValue(v, kind) {
-    if (kind === 'log_tokens' || kind === 'log_degree') {
-      return Math.round(Math.expm1(v)).toLocaleString('en-US');
-    }
-    if (kind === 'token_delta') {
-      const n = Math.round(v);
-      return (n > 0 ? '+' : '') + n.toLocaleString('en-US');
-    }
-    if (kind === 'log_token_delta') {
-      const n = Math.sign(v) * Math.round(Math.expm1(Math.abs(v)));
-      return (n > 0 ? '+' : '') + n.toLocaleString('en-US');
-    }
-    if (kind === 'log_abs_token_delta' || kind === 'log_loops' || kind === 'log_triangles') {
-      return Math.round(Math.expm1(v)).toLocaleString('en-US');
-    }
-    if (kind === 'token_share') return `${(v * 100).toFixed(2)}%`;
-    return Math.round(v).toLocaleString('en-US');
   }
 
   _degrees() {
@@ -109,46 +72,80 @@ class FrameMetrics {
 
   get hasFlow() { return this.flow.size > 0; }
 
-  _values(kind) {
+  /**
+   * Raw per-node values for one metric, in frame order.
+   *
+   * No scaling is applied here: a metric has one set of values, and whether
+   * they are read linearly or logarithmically is the reader's choice. Cached,
+   * since the charts and the renderer often want the same one.
+   */
+  nodeValues(key) {
+    if (!this._nodeCache) this._nodeCache = new Map();
+    const hit = this._nodeCache.get(key);
+    if (hit) return hit;
+
     const f = this.frame;
     const n = f.ids.length;
     const out = new Float64Array(n);
 
     for (let i = 0; i < n; i++) {
-      switch (kind) {
-        case 'tokens':          out[i] = f.tokens[i]; break;
-        case 'log_tokens':      out[i] = Math.log1p(f.tokens[i]); break;
-        case 'degree':          out[i] = this.degree[i]; break;
-        case 'log_degree':      out[i] = Math.log1p(this.degree[i]); break;
-        case 'token_delta':     out[i] = this.delta[i]; break;
-        case 'abs_token_delta': out[i] = Math.abs(this.delta[i]); break;
-        // Log of the magnitude with the sign put back on. A handful of huge
-        // swings would otherwise squash every ordinary gain and loss into the
-        // middle of the colour map; this keeps the direction while compressing
-        // the scale.
-        case 'log_token_delta':
-          out[i] = Math.sign(this.delta[i]) * Math.log1p(Math.abs(this.delta[i]));
-          break;
-        case 'log_abs_token_delta':
-          out[i] = Math.log1p(Math.abs(this.delta[i]));
-          break;
+      switch (key) {
+        case 'tokens':           out[i] = f.tokens[i]; break;
+        case 'degree':           out[i] = this.degree[i]; break;
+        case 'token_delta':      out[i] = this.delta[i]; break;
+        case 'abs_token_delta':  out[i] = Math.abs(this.delta[i]); break;
+        case 'token_curvature':  out[i] = this.curvature[i]; break;
         case 'loops':      out[i] = this.structure.loops.nodeLoops.get(f.ids[i]) || 0; break;
-        case 'log_loops':  out[i] = Math.log1p(this.structure.loops.nodeLoops.get(f.ids[i]) || 0); break;
         case 'triangles':  out[i] = this.structure.triangles.perNode.get(f.ids[i]) || 0; break;
-        case 'log_triangles':
-          out[i] = Math.log1p(this.structure.triangles.perNode.get(f.ids[i]) || 0);
-          break;
-        case 'brain_id':        out[i] = f.brain_ids[i]; break;
-        case 'parent_brain_id': out[i] = f.parent_brain_ids[i]; break;
-        case 'age':             out[i] = f.ids[i]; break;
-        case 'token_share':     out[i] = this.totalTokens ? f.tokens[i] / this.totalTokens : 0; break;
-        default:                out[i] = 0.5;
+        case 'brain_id':         out[i] = f.brain_ids[i]; break;
+        case 'parent_brain_id':  out[i] = f.parent_brain_ids[i]; break;
+        case 'age':              out[i] = f.ids[i]; break;
+        case 'token_share':      out[i] = this.totalTokens ? f.tokens[i] / this.totalTokens : 0; break;
+        default:                 out[i] = 0.5;
       }
     }
+    this._nodeCache.set(key, out);
+    return out;
+  }
+
+  /** The same values under the reader's choice of scale. */
+  scaledNodeValues(key, log) {
+    const raw = this.nodeValues(key);
+    if (!log) return raw;
+    const signed = Metrics.isSigned('node', key);
+    const out = new Float64Array(raw.length);
+    for (let i = 0; i < raw.length; i++) out[i] = Metrics.applyLog(raw[i], signed);
     return out;
   }
 
   /**
+   * How far each node's pile sits below the average of what surrounds it.
+   *
+   * The sum of the neighbours' tokens less the node's own times its degree —
+   * the graph Laplacian applied to wealth. Positive means a node is poorer
+   * than its neighbourhood and sits in a valley; negative means it is a peak
+   * its neighbours drain toward. Zero means it is exactly level with them,
+   * which is what a flat stretch of the graph looks like.
+   *
+   * Walked over edges rather than through an adjacency map, so it costs one
+   * pass and does not force the structure to be built.
+   */
+  _curvature() {
+    const f = this.frame;
+    const n = f.ids.length;
+    const out = new Float64Array(n);
+
+    for (const [a, b] of f.edges) {
+      const ia = this.index.get(a), ib = this.index.get(b);
+      if (ia === undefined || ib === undefined || ia === ib) continue;
+      out[ia] += f.tokens[ib];
+      out[ib] += f.tokens[ia];
+    }
+    for (let i = 0; i < n; i++) out[i] -= this.degree[i] * f.tokens[i];
+    return out;
+  }
+
+    /**
    * Quantities that read as "up or down" rather than "more or less".
    *
    * These get a range centred on zero so the middle of the colour map means no
@@ -156,16 +153,19 @@ class FrameMetrics {
    * Stretching them to fit min..max would put the neutral point wherever the
    * data happened to land.
    */
-  static CENTERED = new Set(['token_delta', 'log_token_delta']);
+  nodeRange(key, log) {
+    return this._rangeOf(this.scaledNodeValues(key, log), Metrics.isSigned('node', key));
+  }
 
-  _range(values, kind) {
-    if (FrameMetrics.CENTERED.has(kind)) {
-      let extent = 0;
-      for (const v of values) extent = Math.max(extent, Math.abs(v));
-      if (extent < 1e-9) extent = 1;
-      return [-extent, extent];
-    }
-    return this._rangeLinear(values);
+  _rangeOf(values, signed) {
+    if (!signed) return this._rangeLinear(values);
+    // Centred, so the middle of the colour map is no change and a gain of 50
+    // sits as far from centre as a loss of 50. Stretching to fit min..max
+    // would put the neutral point wherever the data happened to land.
+    let extent = 0;
+    for (const v of values) extent = Math.max(extent, Math.abs(v));
+    if (extent < 1e-9) extent = 1;
+    return [-extent, extent];
   }
 
   _rangeLinear(values) {
@@ -205,13 +205,15 @@ class FrameMetrics {
     if (ia === undefined || ib === undefined) return 0;
     const f = this.frame;
 
-    // Log variants share the underlying quantity; only the scale differs, and
-    // that is applied once in _edgeNorm rather than duplicated per case.
-    switch (FrameMetrics.baseEdgeKind(kind)) {
+    switch (kind) {
       case 'avg_tokens': return (f.tokens[ia] + f.tokens[ib]) / 2;
       case 'min_tokens': return Math.min(f.tokens[ia], f.tokens[ib]);
       case 'max_tokens': return Math.max(f.tokens[ia], f.tokens[ib]);
+      case 'token_gap':  return Math.abs(f.tokens[ia] - f.tokens[ib]);
       case 'avg_degree': return (this.degree[ia] + this.degree[ib]) / 2;
+      case 'min_degree': return Math.min(this.degree[ia], this.degree[ib]);
+      case 'max_degree': return Math.max(this.degree[ia], this.degree[ib]);
+      case 'avg_curvature': return (this.curvature[ia] + this.curvature[ib]) / 2;
       case 'flow': {
         const key = a < b ? `${a},${b}` : `${b},${a}`;
         return this.flow.get(key) || 0;
@@ -233,55 +235,56 @@ class FrameMetrics {
     }
   }
 
-  /** Strip a leading `log_` to get the quantity underneath. */
-  static baseEdgeKind(kind) {
-    return kind.startsWith('log_') ? kind.slice(4) : kind;
+  /** Raw per-edge values for one metric, in frame edge order. Cached. */
+  edgeValues(key) {
+    if (!this._edgeCache) this._edgeCache = new Map();
+    const hit = this._edgeCache.get(key);
+    if (hit) return hit;
+
+    const edges = this.frame.edges;
+    const out = new Float64Array(edges.length);
+    for (let e = 0; e < edges.length; e++) {
+      out[e] = this._edgeRaw(key, edges[e][0], edges[e][1]);
+    }
+    this._edgeCache.set(key, out);
+    return out;
   }
 
-  _edgeRange(kind) {
-    if (!this._edgeRanges) this._edgeRanges = new Map();
-    if (this._edgeRanges.has(kind)) return this._edgeRanges.get(kind);
+  scaledEdgeValues(key, log) {
+    const raw = this.edgeValues(key);
+    if (!log) return raw;
+    const signed = Metrics.isSigned('edge', key);
+    const out = new Float64Array(raw.length);
+    for (let i = 0; i < raw.length; i++) out[i] = Metrics.applyLog(raw[i], signed);
+    return out;
+  }
 
-    let lo = Infinity, hi = -Infinity;
-    for (const [a, b] of this.frame.edges) {
-      const v = this._edgeRaw(kind, a, b);
-      if (v < lo) lo = v;
-      if (v > hi) hi = v;
-    }
-    const range = (!Number.isFinite(lo) || hi - lo < 1e-9) ? [0, 1] : [lo, hi];
-    this._edgeRanges.set(kind, range);
+  edgeRange(key, log) {
+    if (!this._edgeRanges) this._edgeRanges = new Map();
+    const cacheKey = `${key}|${log ? 1 : 0}`;
+    if (this._edgeRanges.has(cacheKey)) return this._edgeRanges.get(cacheKey);
+
+    const range = this._rangeOf(this.scaledEdgeValues(key, log),
+                               Metrics.isSigned('edge', key));
+    this._edgeRanges.set(cacheKey, range);
     return range;
   }
 
-  /**
-   * Normalised value for an edge under the given mode.
-   *
-   * Raw flow is heavily skewed — a handful of edges carry most of the tokens —
-   * so it is always read on a log scale; everything else offers log as an
-   * explicit `log_` option.
-   */
-  _edgeNorm(kind, a, b) {
+  _edgeNorm(kind, log, a, b) {
     if (kind === 'constant' || kind === 'source') return 0.5;
-
-    const range = this._edgeRange(kind);
     const value = this._edgeRaw(kind, a, b);
-
-    if (kind === 'flow' || kind.startsWith('log_')) {
-      return FrameMetrics._norm(Math.log1p(Math.max(0, value)),
-                                [Math.log1p(Math.max(0, range[0])),
-                                 Math.log1p(Math.max(0, range[1]))]);
-    }
-    return FrameMetrics._norm(value, range);
+    const scaled = log ? Metrics.applyLog(value, Metrics.isSigned('edge', kind)) : value;
+    return FrameMetrics._norm(scaled, this.edgeRange(kind, log));
   }
 
   edgeColorNorm(a, b) {
-    return this._edgeNorm(this.settings.edgeColorBy, a, b);
+    return this._edgeNorm(this.settings.edgeColorBy, this.settings.edgeColorLog, a, b);
   }
 
   edgeWidthNorm(a, b) {
     const kind = this.settings.edgeWidthBy;
     if (kind === 'constant') return 0;
-    return this._edgeNorm(kind, a, b);
+    return this._edgeNorm(kind, this.settings.edgeWidthLog, a, b);
   }
 
   // ---- structure: loops, triangles, dimension -------------------------
@@ -369,6 +372,7 @@ class FrameMetrics {
       parentBrainId: f.parent_brain_ids[i],
       spawnedBy: f.parent_ids[i] >= 0 ? f.parent_ids[i] : null,
       rank: this.wealthRank(i),
+      curvature: this.curvature[i],
       phase: f.phase,
       delta: this.delta[i],
       hasDelta: this.hasDelta
@@ -624,17 +628,11 @@ class FrameMetrics {
 }
 
 // --------------------------------------------------------------------------
-// Histograms
+// Charts
 // --------------------------------------------------------------------------
 
-/**
- * Draw a bar histogram into a canvas.
- * `logScale` bins on log1p, which is what makes the token distribution legible
- * when a handful of agents hold most of the economy.
- */
-function drawHistogram(canvas, values, options = {}) {
-  const { bins = 32, colormap = 'viridis', reverse = false,
-          logScale = false, logCount = false } = options;
+/** Shared canvas setup: size to the element's box in device pixels. */
+function _prepareCanvas(canvas) {
   const ctx = canvas.getContext('2d');
   const dpr = window.devicePixelRatio || 1;
   const rect = canvas.getBoundingClientRect();
@@ -642,25 +640,44 @@ function drawHistogram(canvas, values, options = {}) {
   canvas.width = Math.max(1, Math.floor(rect.width * dpr));
   canvas.height = Math.max(1, Math.floor(rect.height * dpr));
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.clearRect(0, 0, rect.width, rect.height);
+  return { ctx, w: rect.width, h: rect.height };
+}
 
-  const w = rect.width, h = rect.height;
-  ctx.clearRect(0, 0, w, h);
+function _noData(ctx, w, h, message = 'no data') {
+  ctx.fillStyle = '#5b6b7c';
+  ctx.font = '11px system-ui, sans-serif';
+  ctx.fillText(message, 8, h / 2);
+}
 
-  if (!values || !values.length) {
-    ctx.fillStyle = '#5b6b7c';
-    ctx.font = '11px system-ui, sans-serif';
-    ctx.fillText('no data', 8, h / 2);
-    return;
-  }
+/**
+ * Draw a bar histogram of one metric.
+ *
+ * Values arrive raw; `logScale` is applied here rather than by the caller so
+ * the axis can be labelled in the units the reader actually chose. `signed`
+ * keeps the direction of quantities that run either way, which is what lets
+ * token change and curvature be read on a log scale at all.
+ */
+function drawHistogram(canvas, values, options = {}) {
+  const { bins = 32, colormap = 'viridis', reverse = false,
+          logScale = false, logCount = false, signed = false,
+          format = v => Math.round(v).toLocaleString('en-US') } = options;
 
-  const mapped = logScale ? Array.from(values, v => Math.log1p(Math.max(0, v))) : Array.from(values);
-  let lo = Math.min(...mapped), hi = Math.max(...mapped);
+  const { ctx, w, h } = _prepareCanvas(canvas);
+  if (!values || !values.length) { _noData(ctx, w, h); return; }
+
+  const mapped = logScale
+    ? Array.from(values, v => Metrics.applyLog(v, signed))
+    : Array.from(values);
+
+  let lo = Infinity, hi = -Infinity;
+  for (const v of mapped) { if (v < lo) lo = v; if (v > hi) hi = v; }
+  if (!Number.isFinite(lo)) { _noData(ctx, w, h); return; }
   if (hi - lo < 1e-9) hi = lo + 1;
 
   const counts = new Array(bins).fill(0);
   for (const v of mapped) {
-    const b = Math.min(bins - 1, Math.floor((v - lo) / (hi - lo) * bins));
-    counts[b]++;
+    counts[Math.min(bins - 1, Math.floor((v - lo) / (hi - lo) * bins))]++;
   }
   const peak = Math.max(...counts) || 1;
 
@@ -680,14 +697,97 @@ function drawHistogram(canvas, values, options = {}) {
     ctx.fillRect(i * barW, padTop + plotH - barH, Math.max(1, barW - 1), barH);
   }
 
-  // Axis: lowest and highest bin edge, in original units.
+  const back = v => logScale ? Metrics.undoLog(v, signed) : v;
   ctx.fillStyle = '#8fa3b5';
   ctx.font = '10px system-ui, sans-serif';
-  const back = v => logScale ? Math.expm1(v) : v;
-  const fmt = v => Math.round(back(v)).toLocaleString('en-US');
-  ctx.fillText(fmt(lo), 2, h - 4);
-  const hiText = fmt(hi);
+  ctx.fillText(format(back(lo)), 2, h - 4);
+  const hiText = format(back(hi));
   ctx.fillText(hiText, w - ctx.measureText(hiText).width - 2, h - 4);
-  const peakText = `peak ${peak}${logCount ? ' · log' : ''}`;
+  const peakText = `peak ${peak}${logCount ? ' \u00b7 log' : ''}`;
   ctx.fillText(peakText, (w - ctx.measureText(peakText).width) / 2, h - 4);
+}
+
+/**
+ * Draw a two-dimensional binned heatmap of one metric against another.
+ *
+ * Each item — a node, or an edge — contributes one point, so the two arrays
+ * must describe the same things in the same order. That is why the caller is
+ * required to keep both axes in one domain: pairing a node value with an edge
+ * value would count things that have no correspondence at all.
+ *
+ * Cell colour is the count in that bin, which is nearly always the quantity
+ * with the widest spread on the chart: a handful of cells hold most of the
+ * population. `logCount` is usually what makes the rest of the grid visible.
+ */
+function drawHeatmap(canvas, xs, ys, options = {}) {
+  const { binsX = 34, binsY = 22, colormap = 'viridis', reverse = false,
+          logX = false, logY = false, logCount = true,
+          signedX = false, signedY = false,
+          formatX = v => Math.round(v).toLocaleString('en-US'),
+          formatY = v => Math.round(v).toLocaleString('en-US'),
+          message = null } = options;
+
+  const { ctx, w, h } = _prepareCanvas(canvas);
+  if (message) { _noData(ctx, w, h, message); return; }
+  if (!xs || !ys || !xs.length || xs.length !== ys.length) { _noData(ctx, w, h); return; }
+
+  const mx = logX ? Float64Array.from(xs, v => Metrics.applyLog(v, signedX)) : xs;
+  const my = logY ? Float64Array.from(ys, v => Metrics.applyLog(v, signedY)) : ys;
+
+  const extent = (arr) => {
+    let lo = Infinity, hi = -Infinity;
+    for (const v of arr) { if (v < lo) lo = v; if (v > hi) hi = v; }
+    if (!Number.isFinite(lo)) return null;
+    return hi - lo < 1e-9 ? [lo, lo + 1] : [lo, hi];
+  };
+  const ex = extent(mx), ey = extent(my);
+  if (!ex || !ey) { _noData(ctx, w, h); return; }
+
+  const padLeft = 38, padBottom = 15, padTop = 4, padRight = 2;
+  const plotW = Math.max(1, w - padLeft - padRight);
+  const plotH = Math.max(1, h - padBottom - padTop);
+
+  const counts = new Int32Array(binsX * binsY);
+  for (let i = 0; i < mx.length; i++) {
+    const bx = Math.min(binsX - 1, Math.floor((mx[i] - ex[0]) / (ex[1] - ex[0]) * binsX));
+    const by = Math.min(binsY - 1, Math.floor((my[i] - ey[0]) / (ey[1] - ey[0]) * binsY));
+    counts[by * binsX + bx]++;
+  }
+  let peak = 0;
+  for (const c of counts) if (c > peak) peak = c;
+  if (!peak) { _noData(ctx, w, h); return; }
+
+  const shade = c => logCount ? Math.log1p(c) / Math.log1p(peak) : c / peak;
+
+  // Empty cells stay as background rather than taking the colour map's zero,
+  // so "nothing here" reads differently from "the lowest value on the scale".
+  const cellW = plotW / binsX, cellH = plotH / binsY;
+  for (let by = 0; by < binsY; by++) {
+    for (let bx = 0; bx < binsX; bx++) {
+      const c = counts[by * binsX + bx];
+      if (!c) continue;
+      ctx.fillStyle = colormapCss(colormap, shade(c), 1, reverse);
+      // y runs upward on screen, so the top row is the last bin.
+      const px = padLeft + bx * cellW;
+      const py = padTop + (binsY - 1 - by) * cellH;
+      ctx.fillRect(px, py, Math.ceil(cellW), Math.ceil(cellH));
+    }
+  }
+
+  const backX = v => logX ? Metrics.undoLog(v, signedX) : v;
+  const backY = v => logY ? Metrics.undoLog(v, signedY) : v;
+
+  ctx.fillStyle = '#8fa3b5';
+  ctx.font = '10px system-ui, sans-serif';
+
+  // y axis: high at the top, low at the bottom of the plot.
+  ctx.fillText(formatY(backY(ey[1])), 2, padTop + 8);
+  ctx.fillText(formatY(backY(ey[0])), 2, padTop + plotH - 1);
+
+  // x axis, plus what the colour means.
+  ctx.fillText(formatX(backX(ex[0])), padLeft, h - 3);
+  const hiText = formatX(backX(ex[1]));
+  ctx.fillText(hiText, w - ctx.measureText(hiText).width - 2, h - 3);
+  const peakText = `peak ${peak}${logCount ? ' \u00b7 log' : ''}`;
+  ctx.fillText(peakText, padLeft + (plotW - ctx.measureText(peakText).width) / 2, h - 3);
 }
