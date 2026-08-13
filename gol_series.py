@@ -53,7 +53,7 @@ def progress(run_id: str) -> Dict[str, Any]:
 
 
 # Bump when a formula below changes, so stale caches are discarded.
-SERIES_VERSION = 11
+SERIES_VERSION = 13
 
 # At most this many iterations are analysed for a run's history.
 #
@@ -63,7 +63,7 @@ SERIES_VERSION = 11
 # summarise in full, for a chart a few hundred pixels wide that cannot show
 # that detail anyway. Sampling evenly across the run keeps the shape of every
 # curve while bounding the work.
-MAX_SAMPLED_ITERATIONS = 2000
+MAX_SAMPLED_ITERATIONS = 1000
 
 # Keys that count nodes, and are therefore also meaningful as a share of the
 # population that entered the phase.
@@ -193,9 +193,85 @@ def _structure(ids: List[int], edges: List[List[int]]) -> Dict[str, Any]:
     triples = sum(len(adj[i]) * (len(adj[i]) - 1) / 2 for i in ids)
     transitivity = (3 * triangle_total / triples) if triples > 0 else 0.0
 
+    n = len(ids)
+
+    # --- radius, diameter, mean path length ---
+    #
+    # Mirrors distances() in web/js/graphstats.js. Exact answers need every
+    # pair's shortest path; a spread of sources is swept instead, plus a second
+    # sweep from the furthest node found, which is what makes the diameter
+    # estimate tight. The diameter is a lower bound and the radius an upper one.
+    radius = diameter = mean_path = None
+    if n >= 2:
+        order = {node: i for i, node in enumerate(ids)}
+        # Neighbours by position, built once, so the sweeps are integer work
+        # rather than repeated dictionary lookups.
+        neighbours: List[List[int]] = [[] for _ in range(n)]
+        for a, b in edges:
+            if a == b:
+                continue
+            ia, ib = order.get(a), order.get(b)
+            if ia is None or ib is None:
+                continue
+            neighbours[ia].append(ib)
+            neighbours[ib].append(ia)
+
+        reached_sum = 0
+        reached_count = 0
+        state = {"farthest": 0}
+
+        def sweep(start_index: int, count_toward_mean: bool = True) -> int:
+            nonlocal reached_sum, reached_count
+            dist = [-1] * n
+            dist[start_index] = 0
+            queue = [start_index]
+            ecc = 0
+            head = 0
+            while head < len(queue):
+                i = queue[head]
+                head += 1
+                d = dist[i]
+                if d > ecc:
+                    ecc = d
+                    state["farthest"] = i
+                if count_toward_mean:
+                    reached_sum += d
+                    reached_count += 1
+                for j in neighbours[i]:
+                    if dist[j] != -1:
+                        continue
+                    dist[j] = d + 1
+                    queue.append(j)
+            if count_toward_mean:
+                reached_count -= 1      # do not count the source's own zero
+            return ecc
+
+        # Each sweep walks the whole graph, so the total is sources x (V + E).
+        # Holding that near a fixed budget keeps the cost flat as the
+        # population grows.
+        per_sweep = max(1, n + 2 * len(edges))
+        sources = max(8, min(16, round(250_000 / per_sweep)))
+
+        step = max(1, n // min(sources, n))
+        radius, diameter, deepest, deepest_from = None, 0, 0, 0
+        for i in range(0, n, step):
+            ecc = sweep(i)
+            radius = ecc if radius is None else min(radius, ecc)
+            diameter = max(diameter, ecc)
+            if ecc > deepest:
+                deepest, deepest_from = ecc, state["farthest"]
+
+        # Excluded from the mean: this source is the most peripheral node found,
+        # so its distances run long by construction. Folding them in dragged
+        # the average up by a third of its value when few sources were swept.
+        if deepest > 0:
+            diameter = max(diameter, sweep(deepest_from, count_toward_mean=False))
+
+        radius = radius or 0
+        mean_path = (reached_sum / reached_count) if reached_count > 0 else 0.0
+
     # --- ball-growth dimension ---
     dimension = None
-    n = len(ids)
     if n >= 8:
         seeds, max_radius = 24, 5
         step = max(1, n // min(seeds, n))
@@ -247,6 +323,9 @@ def _structure(ids: List[int], edges: List[List[int]]) -> Dict[str, Any]:
         "triangles": triangle_total,
         "transitivity": transitivity,
         "dimension": dimension,
+        "radius": radius,
+        "diameter": diameter,
+        "meanPathLength": mean_path,
     }
 
 
@@ -305,8 +384,10 @@ def frame_stats(frame: Dict[str, Any], previous: Dict[str, Any] | None = None) -
     held_home = (sum(1 for w in winners if w.get("winner") == w.get("node")) / len(winners)
                  if winners else None)
 
-    rewires = decisions.get("rewires")
-    rewire_count = len(rewires) if rewires is not None else None
+    rewire_count = (frame.get("summary") or {}).get("rewires")
+    if rewire_count is None:
+        rewires = decisions.get("rewires")
+        rewire_count = len(rewires) if rewires is not None else None
 
     births = decisions.get("births")
     mean_invested = None

@@ -300,6 +300,7 @@ class FrameMetrics {
     const loops = GraphStats.loops(f.ids, f.edges, adj);
     const triangles = GraphStats.triangles(f.ids, f.edges, adj);
     const dimension = GraphStats.dimension(f.ids, adj);
+    const distances = GraphStats.distances(f.ids, adj);
 
     // Edge lookups are by endpoint pair, since the renderer walks edges by id.
     const edgeKey = new Map();
@@ -308,7 +309,7 @@ class FrameMetrics {
       edgeKey.set(a < b ? `${a},${b}` : `${b},${a}`, i);
     }
 
-    this._structure = { adj, loops, triangles, dimension, edgeKey };
+    this._structure = { adj, loops, triangles, dimension, distances, edgeKey };
     return this._structure;
   }
 
@@ -505,6 +506,7 @@ class FrameMetrics {
       // Structure
       cycleRank: null, loopDensity: null, bridges: null, triangles: null,
       transitivity: null, degreeEntropy: null, degreeEvenness: null,
+      radius: null, diameter: null, meanPathLength: null,
       tokenEntropy: null, tokenEvenness: null, dimension: null, components: null,
 
       // Genome
@@ -527,7 +529,9 @@ class FrameMetrics {
     // Rewiring happens during the reproduction phase but is nobody's child:
     // absent when the rule is off, rather than a zero that reads as "nobody
     // chose to".
-    if (d.rewires !== undefined) out.rewires = d.rewires.length;
+    const framedRewires = (f.summary || {}).rewires;
+    if (framedRewires !== undefined) out.rewires = framedRewires;
+    else if (d.rewires !== undefined) out.rewires = d.rewires.length;
 
     // ---- reproduction phase ----
     if (d.births) {
@@ -602,6 +606,9 @@ class FrameMetrics {
     out.triangles = st.triangles.total;
     out.transitivity = GraphStats.transitivity(f.ids, st.adj, st.triangles.total);
     out.dimension = st.dimension.estimate;
+    out.radius = st.distances.radius;
+    out.diameter = st.distances.diameter;
+    out.meanPathLength = st.distances.meanPathLength;
 
     out.degreeEntropy = GraphStats.degreeEntropy(degrees);
     // Against the most even the same number of classes could be, so 1 means

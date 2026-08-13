@@ -476,6 +476,7 @@ class GraphOfLife:
         handovers: List[Tuple[int, int, int]] = []
         rewires: List[Tuple[int, int, int]] = []
         rewire_records: List[Dict[str, int]] = []
+        applied_rewires = 0
         # Captured before anything changes, so the viewer can express births and
         # deaths as a share of the population that actually faced this phase,
         # and show how much each agent gained or lost across it.
@@ -514,9 +515,6 @@ class GraphOfLife:
             for v in given:
                 handovers.append((u, int(v), child_id))
 
-            if record_decisions and move is not None:
-                rewire_records.append({"agent": int(u), "edge": int(move[0]), "to": int(move[1])})
-
             if record_decisions:
                 decisions.append({
                     "agent": int(u),
@@ -544,6 +542,10 @@ class GraphOfLife:
                 continue
             self.G.remove_edge(agent, old_v)
             self.G.add_edge(recipient, old_v)
+            applied_rewires += 1
+            if record_decisions:
+                rewire_records.append(
+                    {"agent": int(agent), "edge": int(old_v), "to": int(recipient)})
 
         # Hand the chosen edges over: the child gains the connection, the parent
         # loses it. If the newborn was already wired to that neighbour by the
@@ -568,8 +570,10 @@ class GraphOfLife:
             if self.cfg.allow_rewire:
                 payload["rewires"] = rewire_records
 
+        extra = {"rewires": applied_rewires} if self.cfg.allow_rewire else None
         return self._frame(phase=1, cleanup=cleanup, nodes_before=nodes_before,
-                           tokens_before=tokens_before, decisions=payload)
+                           tokens_before=tokens_before, decisions=payload,
+                           summary_extra=extra)
 
     def _spawn_child(self, parent: int, parent_tokens: int, child_tokens: int,
                      candidates: List[int], Y: np.ndarray) -> Tuple[int, List[int]]:
@@ -970,7 +974,8 @@ class GraphOfLife:
 
     def _frame(self, phase: int, cleanup: Dict[str, Any], nodes_before: int,
                tokens_before: Dict[int, int],
-               decisions: Dict[str, Any] | None) -> Dict[str, Any]:
+               decisions: Dict[str, Any] | None,
+               summary_extra: Dict[str, Any] | None = None) -> Dict[str, Any]:
         """
         Snapshot the world for the viewer.
 
@@ -1004,6 +1009,8 @@ class GraphOfLife:
                 "tokens": int(sum(self.tokens.values())),
             },
         }
+        if summary_extra:
+            frame["summary"].update(summary_extra)
         if decisions is not None:
             frame["decisions"] = decisions
         return frame

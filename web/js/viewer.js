@@ -617,6 +617,7 @@ const Viewer = {
     ] },
     { key: 'structure', label: 'Structure', open: false, keys: [
       'density', 'meanDegree', 'medianDegree', 'maxDegree', 'minDegree', 'leaves',
+      'radius', 'diameter', 'meanPathLength',
       'cycleRank', 'loopDensity', 'bridges', 'triangles', 'transitivity',
       'dimension', 'degreeEntropy', 'degreeEvenness', 'components'
     ] }
@@ -670,6 +671,9 @@ const Viewer = {
       triangles: ['Triangles', formatNumber(s.triangles)],
       transitivity: ['Clustering', dec(s.transitivity, 3)],
       dimension: ['Dimension', s.dimension === null ? '—' : dec(s.dimension)],
+      radius: ['Radius', formatNumber(s.radius)],
+      diameter: ['Diameter', formatNumber(s.diameter)],
+      meanPathLength: ['Mean path', dec(s.meanPathLength)],
       degreeEntropy: ['Degree entropy', `${dec(s.degreeEntropy)} bits`],
       degreeEvenness: ['Degree evenness', pct(s.degreeEvenness)],
       components: ['Components', formatNumber(s.components)]

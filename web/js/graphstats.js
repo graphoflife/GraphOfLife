@@ -278,6 +278,111 @@ const GraphStats = {
   },
 
   /**
+   * How far apart the graph is: radius, diameter and mean path length.
+   *
+   * The eccentricity of a node is its distance to the furthest node from it.
+   * The diameter is the largest eccentricity in the graph and the radius the
+   * smallest, so the two bracket how spread out it is — the diameter is the
+   * worst case, the radius is how central the most central node manages to be.
+   *
+   * Exact answers need every pair's shortest path, which is O(V*E): billions of
+   * steps on a graph of this size, every frame. Instead a spread of sources is
+   * swept, plus a second sweep from the furthest node any of them found. That
+   * last step is the standard double-sweep trick and is what makes the diameter
+   * estimate tight — on a tree it is exact.
+   *
+   * The estimates are therefore one-sided and honestly so: the diameter is a
+   * lower bound, since a pair further apart may simply not have been sampled,
+   * and the radius an upper bound, since some unsampled node may be more
+   * central than any tried.
+   */
+  distances(ids, adj, { budget = 250000, minSources = 8, maxSources = 16 } = {}) {
+    const n = ids.length;
+    if (n < 2) return { radius: 0, diameter: 0, meanPathLength: 0 };
+
+    // Each sweep walks the whole graph, so the total is sources x (V + E).
+    // Holding that near a fixed budget keeps the cost flat as the population
+    // grows: a small graph gets many starting points, a large one a few. The
+    // double sweep at the end does most of the work for the diameter anyway,
+    // so what is lost is tightness on the radius rather than the headline.
+    let reach = 0;
+    for (const id of ids) reach += (adj.get(id) || []).size || 0;
+    const perSweep = Math.max(1, n + reach);
+    const sources = Math.max(minSources, Math.min(maxSources, Math.round(budget / perSweep)));
+
+    // Neighbours by position rather than by id, built once. The sweeps below
+    // then do pure integer work: seventeen passes over a Map of Sets spends
+    // most of its time in hashed lookups rather than in the search.
+    const index = new Map();
+    for (let i = 0; i < n; i++) index.set(ids[i], i);
+
+    const neighbours = new Array(n);
+    for (let i = 0; i < n; i++) {
+      const list = [];
+      for (const nb of adj.get(ids[i]) || []) {
+        const j = index.get(nb);
+        if (j !== undefined) list.push(j);
+      }
+      neighbours[i] = list;
+    }
+
+    const dist = new Int32Array(n);
+    const queue = new Int32Array(n);
+
+    // Returns the eccentricity of `startIndex`, and records the furthest node
+    // and the distances summed over everything it reached.
+    let farthestNode = 0, reachedSum = 0, reachedCount = 0;
+    const sweep = (startIndex, countTowardMean = true) => {
+      dist.fill(-1);
+      dist[startIndex] = 0;
+      queue[0] = startIndex;
+      let head = 0, tail = 1, ecc = 0, sum = 0, seen = 0;
+
+      while (head < tail) {
+        const i = queue[head++];
+        const d = dist[i];
+        if (d > ecc) { ecc = d; farthestNode = i; }
+        sum += d;
+        seen++;
+
+        for (const j of neighbours[i]) {
+          if (dist[j] !== -1) continue;
+          dist[j] = d + 1;
+          queue[tail++] = j;
+        }
+      }
+      if (countTowardMean) {
+        reachedSum += sum;
+        reachedCount += seen - 1;    // do not count the source's own zero
+      }
+      return ecc;
+    };
+
+    const step = Math.max(1, Math.floor(n / Math.min(sources, n)));
+    let radius = Infinity, diameter = 0, deepest = 0, deepestFrom = 0;
+
+    for (let i = 0; i < n; i += step) {
+      const ecc = sweep(i);
+      if (ecc < radius) radius = ecc;
+      if (ecc > diameter) diameter = ecc;
+      if (ecc > deepest) { deepest = ecc; deepestFrom = farthestNode; }
+    }
+
+    // Double sweep: the node furthest from any source is usually an endpoint of
+    // a longest path, so measuring from there tightens the diameter.
+    // Excluded from the mean: this source is the most peripheral node found,
+    // so its distances run long by construction. Folding them in dragged the
+    // average up by a third of its value when few sources were swept.
+    if (deepest > 0) diameter = Math.max(diameter, sweep(deepestFrom, false));
+
+    return {
+      radius: Number.isFinite(radius) ? radius : 0,
+      diameter,
+      meanPathLength: reachedCount > 0 ? reachedSum / reachedCount : 0
+    };
+  },
+
+  /**
    * Global clustering coefficient.
    *
    * Three times the triangles over the number of connected triples: the chance
