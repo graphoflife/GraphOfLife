@@ -108,6 +108,7 @@ class FrameMetrics {
         case 'token_delta':      out[i] = this.delta[i]; break;
         case 'abs_token_delta':  out[i] = Math.abs(this.delta[i]); break;
         case 'token_curvature':  out[i] = this.curvature[i]; break;
+        case 'token_curvature_pre': out[i] = this.curvatureBefore[i]; break;
         case 'loops':      out[i] = this.structure.loops.nodeLoops.get(f.ids[i]) || 0; break;
         case 'triangles':  out[i] = this.structure.triangles.perNode.get(f.ids[i]) || 0; break;
         case 'brain_id':         out[i] = f.brain_ids[i]; break;
@@ -128,6 +129,59 @@ class FrameMetrics {
     const signed = Metrics.isSigned('node', key);
     const out = new Float64Array(raw.length);
     for (let i = 0; i < raw.length; i++) out[i] = Metrics.applyLog(raw[i], signed);
+    return out;
+  }
+
+  /**
+   * The same curvature, but on the graph as it stood before this phase.
+   *
+   * Read against the token change the phase produced, this is the pair a
+   * diffusion law is written in: how far a node sat below its neighbourhood,
+   * and how much it then gained. Taking the curvature from the current frame
+   * instead would pair the change with the state it had already produced,
+   * which answers a different and much less interesting question.
+   *
+   * Both the tokens and the wiring come from the earlier frame, since the
+   * phase moves edges as well as tokens. A node that was not there yet has no
+   * before to speak of and gets NaN, which the charts drop — those are the
+   * points the reader is told will not line up.
+   */
+  get curvatureBefore() {
+    if (this._curvatureBefore) return this._curvatureBefore;
+
+    const f = this.frame;
+    const n = f.ids.length;
+    const out = new Float64Array(n);
+    const previous = f.previous;
+
+    if (!previous) {
+      out.fill(NaN);
+      this._curvatureBefore = out;
+      return out;
+    }
+
+    // Curvature on the earlier graph, in that graph's own node order.
+    const m = previous.ids.length;
+    const slot = new Map();
+    for (let j = 0; j < m; j++) slot.set(previous.ids[j], j);
+
+    const degree = new Int32Array(m);
+    const curve = new Float64Array(m);
+    for (const [a, b] of previous.edges) {
+      const ja = slot.get(a), jb = slot.get(b);
+      if (ja === undefined || jb === undefined || ja === jb) continue;
+      degree[ja]++; degree[jb]++;
+      curve[ja] += previous.tokens[jb];
+      curve[jb] += previous.tokens[ja];
+    }
+    for (let j = 0; j < m; j++) curve[j] -= degree[j] * previous.tokens[j];
+
+    // Carried across to this frame's node order; anything newly born is NaN.
+    for (let i = 0; i < n; i++) {
+      const j = slot.get(f.ids[i]);
+      out[i] = (j === undefined) ? NaN : curve[j];
+    }
+    this._curvatureBefore = out;
     return out;
   }
 
@@ -176,7 +230,10 @@ class FrameMetrics {
     // sits as far from centre as a loss of 50. Stretching to fit min..max
     // would put the neutral point wherever the data happened to land.
     let extent = 0;
-    for (const v of values) extent = Math.max(extent, Math.abs(v));
+    for (const v of values) {
+      if (Number.isNaN(v)) continue;
+      extent = Math.max(extent, Math.abs(v));
+    }
     if (extent < 1e-9) extent = 1;
     return [-extent, extent];
   }
@@ -184,6 +241,7 @@ class FrameMetrics {
   _rangeLinear(values) {
     let lo = Infinity, hi = -Infinity;
     for (const v of values) {
+      if (Number.isNaN(v)) continue;   // a gap, not a value
       if (v < lo) lo = v;
       if (v > hi) hi = v;
     }
@@ -192,6 +250,7 @@ class FrameMetrics {
   }
 
   static _norm(v, [lo, hi]) {
+    if (Number.isNaN(v)) return 0.5;
     return Math.min(1, Math.max(0, (v - lo) / (hi - lo)));
   }
 
@@ -696,9 +755,15 @@ function drawHistogram(canvas, values, options = {}) {
   const { ctx, w, h } = _prepareCanvas(canvas);
   if (!values || !values.length) { _noData(ctx, w, h); return; }
 
-  const mapped = logScale
-    ? Array.from(values, v => Metrics.applyLog(v, signed))
-    : Array.from(values);
+  // Values can be missing — a "before the phase" quantity has none for a node
+  // that did not exist yet. Those are dropped rather than counted as zero.
+  const mapped = [];
+  let skipped = 0;
+  for (const raw of values) {
+    if (Number.isNaN(raw)) { skipped++; continue; }
+    mapped.push(logScale ? Metrics.applyLog(raw, signed) : raw);
+  }
+  if (!mapped.length) { _noData(ctx, w, h, 'no values for this frame'); return; }
 
   let lo = Infinity, hi = -Infinity;
   for (const v of mapped) { if (v < lo) lo = v; if (v > hi) hi = v; }
@@ -733,7 +798,8 @@ function drawHistogram(canvas, values, options = {}) {
   ctx.fillText(format(back(lo)), 2, h - 4);
   const hiText = format(back(hi));
   ctx.fillText(hiText, w - ctx.measureText(hiText).width - 2, h - 4);
-  const peakText = `peak ${peak}${logCount ? ' \u00b7 log' : ''}`;
+  const peakText = `peak ${peak}${logCount ? ' \u00b7 log' : ''}`
+    + (skipped ? ` \u00b7 ${skipped.toLocaleString('en-US')} without a value` : '');
   ctx.fillText(peakText, (w - ctx.measureText(peakText).width) / 2, h - 4);
 }
 
@@ -761,8 +827,18 @@ function drawHeatmap(canvas, xs, ys, options = {}) {
   if (message) { _noData(ctx, w, h, message); return; }
   if (!xs || !ys || !xs.length || xs.length !== ys.length) { _noData(ctx, w, h); return; }
 
-  const mx = logX ? Float64Array.from(xs, v => Metrics.applyLog(v, signedX)) : xs;
-  const my = logY ? Float64Array.from(ys, v => Metrics.applyLog(v, signedY)) : ys;
+  // A point needs a value on both axes. Where either is missing there is
+  // nothing to plot it against, so it is dropped — which is why the two
+  // quantities can have different counts and still be compared honestly.
+  const mx = [], my = [];
+  let dropped = 0;
+  for (let i = 0; i < xs.length; i++) {
+    const a = xs[i], b = ys[i];
+    if (Number.isNaN(a) || Number.isNaN(b)) { dropped++; continue; }
+    mx.push(logX ? Metrics.applyLog(a, signedX) : a);
+    my.push(logY ? Metrics.applyLog(b, signedY) : b);
+  }
+  if (!mx.length) { _noData(ctx, w, h, 'nothing has a value on both axes'); return; }
 
   const extent = (arr) => {
     let lo = Infinity, hi = -Infinity;
@@ -818,6 +894,8 @@ function drawHeatmap(canvas, xs, ys, options = {}) {
   ctx.fillText(formatX(backX(ex[0])), padLeft, h - 3);
   const hiText = formatX(backX(ex[1]));
   ctx.fillText(hiText, w - ctx.measureText(hiText).width - 2, h - 3);
-  const peakText = `peak ${peak}${logCount ? ' \u00b7 log' : ''}`;
+  const peakText = `${mx.length.toLocaleString('en-US')} paired \u00b7 peak ${peak}`
+    + (logCount ? ' \u00b7 log' : '')
+    + (dropped ? ` \u00b7 ${dropped.toLocaleString('en-US')} unpaired` : '');
   ctx.fillText(peakText, padLeft + (plotW - ctx.measureText(peakText).width) / 2, h - 3);
 }

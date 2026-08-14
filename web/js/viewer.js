@@ -138,11 +138,12 @@ const Viewer = {
     bind('edgeWidthBy', 'edgeWidthBy');
     bind('edgeWidthLog', 'edgeWidthLog');
 
-    // The charts read from the metrics that already exist, so switching one
-    // costs a redraw rather than a rebuild.
-    bind('distMetric', 'distMetric', v => v, false);
-    bind('heatX', 'heatX', v => v, false);
-    bind('heatY', 'heatY', v => v, false);
+    // These rebuild rather than merely redraw, because a chart may name a
+    // quantity measured before the phase, and it is the rebuild that goes and
+    // fetches the frame such a quantity is read from.
+    bind('distMetric', 'distMetric');
+    bind('heatX', 'heatX');
+    bind('heatY', 'heatY');
     bind('edgeWidthMin', 'edgeWidthMin', num, false);
     bind('edgeWidthMax', 'edgeWidthMax', num, false);
     bind('edgeAlpha', 'edgeAlpha', num, false);
@@ -618,6 +619,7 @@ const Viewer = {
 
     this.frame = frame;
     await this.ensureDelta(this.frame, index);
+    if (this.needsPreviousFrame()) await this.ensurePrevious(this.frame, index);
     if (this.position !== target) return;
 
     this.emptyEl.style.display = 'none';
@@ -666,7 +668,57 @@ const Viewer = {
   },
 
   rebuildMetrics() {
-    if (this.frame) this.metrics = new FrameMetrics(this.frame, this.settings);
+    if (!this.frame) return;
+    this.metrics = new FrameMetrics(this.frame, this.settings);
+
+    // A "before the phase" metric reads the frame that came before this one.
+    // Fetch it once, then rebuild on top of it — the view stays usable in the
+    // meantime, showing the metric as absent rather than blocking on a read.
+    if (this.needsPreviousFrame() && this.frame.previous === undefined) {
+      const frame = this.frame;
+      this.ensurePrevious(frame, this.frameIndex).then(() => {
+        if (this.frame !== frame) return;    // the reader has moved on
+        this.metrics = new FrameMetrics(frame, this.settings);
+        this.updateCharts();
+        this.updateStats();
+      });
+    }
+  },
+
+  /** Whether anything currently on screen is measured before the phase. */
+  needsPreviousFrame() {
+    const s = this.settings;
+    const keys = [
+      s.nodeColorBy, s.nodeSizeBy,
+      Metrics.parse(s.distMetric).key,
+      Metrics.parse(s.heatX).key,
+      Metrics.parse(s.heatY).key
+    ];
+    return keys.some(k => Metrics.needsPrevious(k));
+  },
+
+  /**
+   * Attach the frame this one followed, which is the state the phase started
+   * from.
+   *
+   * Set to null rather than left undefined when there is nothing usable, so
+   * the lookup is not retried on every rebuild. With export_every above one
+   * the previous recorded frame is several iterations back rather than the
+   * state this phase began in, and comparing against it would be wrong rather
+   * than merely approximate, so that case is refused outright.
+   */
+  async ensurePrevious(frame, index) {
+    if (!frame || frame.previous !== undefined) return;
+    if (index <= 0) { frame.previous = null; return; }
+    if (this.meta && this.meta.config && (this.meta.config.export_every || 1) !== 1) {
+      frame.previous = null;
+      return;
+    }
+    try {
+      frame.previous = await this.fetchFrame(index - 1);
+    } catch (err) {
+      frame.previous = null;
+    }
   },
 
   togglePlay() {

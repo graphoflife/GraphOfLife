@@ -25,6 +25,10 @@ const Metrics = {
     { key: 'token_delta',      label: 'Token change', signed: true },
     { key: 'abs_token_delta',  label: 'Token change (magnitude)' },
     { key: 'token_curvature',  label: 'Token curvature', signed: true },
+    // Measured on the graph as it stood before this phase ran, so it can be
+    // read against the change the phase then produced.
+    { key: 'token_curvature_pre', label: 'Token curvature (before phase)',
+      signed: true, needsPrevious: true },
     { key: 'loops',            label: 'Loops through it' },
     { key: 'triangles',        label: 'Triangles' },
     { key: 'token_share',      label: 'Share of total tokens', format: 'share' },
@@ -66,6 +70,19 @@ const Metrics = {
     if (key === 'source') return this.INHERIT.label;
     const m = this.get(domain, key);
     return m ? m.label : key;
+  },
+
+  /**
+   * Metrics that describe the state before the phase rather than after it.
+   *
+   * These need the preceding frame, and they have no value at all for a node
+   * that did not exist yet — which is the point: a newborn has no "before" to
+   * have changed from. Those come back as NaN and are dropped by the charts.
+   */
+  NEEDS_PREVIOUS: new Set(['token_curvature_pre']),
+
+  needsPrevious(key) {
+    return this.NEEDS_PREVIOUS.has(key);
   },
 
   /** Whether this quantity is centred on zero rather than running upward. */
