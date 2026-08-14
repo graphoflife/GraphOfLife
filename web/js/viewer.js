@@ -617,11 +617,19 @@ const Viewer = {
     // older answer arriving late is dropped rather than painted over it.
     if (this.position !== target) return;
 
-    this.frame = frame;
-    await this.ensureDelta(this.frame, index);
-    if (this.needsPreviousFrame()) await this.ensurePrevious(this.frame, index);
+    // Everything that might wait goes here, while the page is still drawing the
+    // frame it already had. Adopting the new one first and reading afterwards
+    // opened a gap: a real fetch lets an animation frame run, and the page
+    // would paint the new frame's edges against the previous frame's
+    // positions — every edge joining whichever nodes happened to occupy those
+    // slots, which is the burst of clutter that lasted a frame.
+    await this.ensureDelta(frame, index);
+    if (this.needsPreviousFrame()) await this.ensurePrevious(frame, index);
     if (this.position !== target) return;
 
+    // From here to setFrame there is no await, so what the page draws and what
+    // the layout holds change together or not at all.
+    this.frame = frame;
     this.emptyEl.style.display = 'none';
     const carry = this.settings.layoutCarry && !this._dropPositions;
     this._dropPositions = false;
@@ -683,6 +691,22 @@ const Viewer = {
         this.updateStats();
       });
     }
+  },
+
+  /**
+   * Whether the positions on hand really describe the frame about to be drawn.
+   *
+   * Two things have to hold. The layout's coordinates must belong to the frame
+   * the layout was last given — that is the generation check — and that frame
+   * must be the one the page is showing. The second half is the one that bit:
+   * the layout can be perfectly self-consistent on a frame the viewer has
+   * already moved past, and drawing then indexes one frame's edges into
+   * another frame's coordinates.
+   */
+  get readyToDraw() {
+    if (!this.layout.positionsMatchFrame) return false;
+    if (!this.frame) return true;
+    return this.layout.ids === this.frame.ids;
   },
 
   /** Whether anything currently on screen is measured before the phase. */
@@ -1121,7 +1145,7 @@ const Viewer = {
     // they do, the positions we hold are ordered by the previous frame's ids,
     // and drawing the new ids against them paints one frame of nonsense. The
     // canvas simply keeps what it already shows for that moment.
-    if (!this.layout.positionsMatchFrame) {
+    if (!this.readyToDraw) {
       requestAnimationFrame(t => this.animate(t));
       return;
     }
