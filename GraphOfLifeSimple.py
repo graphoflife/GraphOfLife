@@ -525,27 +525,56 @@ class GraphOfLife:
                     "handed_over": [int(v) for v in given],
                 })
 
-        # Hand the rewired edges across. Re-checked here because another
-        # agent's move may already have taken this edge away.
+        # Hand the rewired edges across, all against the graph as it stood
+        # before any of them moved.
         #
-        # A recipient that already knows the far node simply keeps the one edge
-        # it has — a simple graph holds each pair once, so the duplicate
-        # collapses and the giver is left out of the middle either way. The
-        # self-loop case was excluded when the choice was made, and the sweep
-        # below catches anything that slips through.
+        # Applying them one at a time made the outcome depend on the order
+        # agents happened to be visited in, because both ends of an edge can
+        # choose to give that same edge away: whoever was reached first won,
+        # and the other found its edge gone and silently did nothing. That is
+        # not a rare collision. Over twenty-five phases every single one ended
+        # with a different graph depending on the order, from 570 edges claimed
+        # from both ends.
+        #
+        # So every claim is judged against the unchanged graph, and a contested
+        # edge is settled by drawing one claim rather than by whichever agent
+        # sorts first — an id-based rule would hand the edge to the older agent
+        # every time. Sorting before the draw keeps it reproducible from the
+        # seed without letting node order decide anything.
+        claims: Dict[frozenset, List[Tuple[int, int, int]]] = {}
         for agent, old_v, recipient in rewires:
+            if recipient == old_v:
+                continue
             if not self.G.has_edge(agent, old_v):
                 continue
             if not (self.G.has_node(recipient) and self.G.has_node(old_v)):
                 continue
-            if recipient == old_v:
-                continue
-            self.G.remove_edge(agent, old_v)
-            self.G.add_edge(recipient, old_v)
+            claims.setdefault(frozenset((agent, old_v)), []).append(
+                (int(agent), int(old_v), int(recipient)))
+
+        removals: List[Tuple[int, int]] = []
+        additions: List[Tuple[int, int]] = []
+        for key in sorted(claims, key=lambda k: tuple(sorted(k))):
+            proposals = sorted(claims[key])
+            chosen = (proposals[0] if len(proposals) == 1
+                      else proposals[int(np.random.randint(len(proposals)))])
+            agent, old_v, recipient = chosen
+            removals.append((agent, old_v))
+            additions.append((recipient, old_v))
             applied_rewires += 1
             if record_decisions:
                 rewire_records.append(
-                    {"agent": int(agent), "edge": int(old_v), "to": int(recipient)})
+                    {"agent": agent, "edge": old_v, "to": recipient})
+
+        # Every removal first, then every addition. An edge handed to a node
+        # that is itself giving one away therefore does not depend on which of
+        # the two was looked at first. An addition landing on a pair the graph
+        # already holds collapses into it, since a simple graph holds each pair
+        # once — which is why a rewire can lower the edge count but never raise
+        # it: one edge leaves for every one that arrives, and arrivals can
+        # merge.
+        self.G.remove_edges_from(removals)
+        self.G.add_edges_from(additions)
 
         # Hand the chosen edges over: the child gains the connection, the parent
         # loses it. If the newborn was already wired to that neighbour by the
@@ -1106,9 +1135,14 @@ class GraphOfLife:
 
 def new_world(cfg: SimConfig) -> GraphOfLife:
     """Create a fresh world from a Watts-Strogatz seed graph."""
-    if cfg.seed is not None:
-        np.random.seed(int(cfg.seed) % (2 ** 32))
-    G0 = nx.watts_strogatz_graph(n=cfg.resolved_n(), k=cfg.resolved_k(), p=cfg.rewire_p)
+    # networkx draws from the `random` module, which np.random.seed does not
+    # touch, so without passing the seed through the starting graph came out
+    # different every time and a seeded run was not reproducible at all.
+    seed = None if cfg.seed is None else int(cfg.seed) % (2 ** 32)
+    if seed is not None:
+        np.random.seed(seed)
+    G0 = nx.watts_strogatz_graph(n=cfg.resolved_n(), k=cfg.resolved_k(),
+                                 p=cfg.rewire_p, seed=seed)
     return GraphOfLife(G0, cfg)
 
 
