@@ -1018,6 +1018,8 @@ const Viewer = {
   },
 
   togglePlay() {
+    // Whatever was in flight no longer paces anything.
+    if (this.playing) this._stepping = false;
     this.playing = !this.playing;
     document.getElementById('btnPlay').textContent = this.playing ? '❚❚' : '▶';
   },
@@ -1428,10 +1430,30 @@ const Viewer = {
     if (this.playing && this.visible.length) {
       const fps = Number(document.getElementById('playSpeed').value) || 6;
       this.playAccumulator += dt;
+
       if (this.playAccumulator >= 1 / fps) {
-        this.playAccumulator = 0;
-        if (this.position >= this.visible.length - 1) this.togglePlay();
-        else this.goToPosition(this.position + 1);
+        if (this._stepping) {
+          // The previous frame has not arrived yet. Asking for the next one
+          // anyway is worse than useless: goToPosition moves the position at
+          // once but adopts the frame only when it lands, and a request whose
+          // position has already moved on is dropped as stale. Firing faster
+          // than frames can be read therefore superseded every one of them,
+          // and the view stopped while the requests carried on — at thirty a
+          // second, sixty-three asked for and fourteen ever shown.
+          //
+          // Held at the threshold rather than left to accumulate, so playback
+          // picks straight up when the frame lands instead of lurching through
+          // the backlog it built while waiting.
+          this.playAccumulator = 1 / fps;
+        } else if (this.position >= this.visible.length - 1) {
+          this.playAccumulator = 0;
+          this.togglePlay();
+        } else {
+          this.playAccumulator = 0;
+          this._stepping = true;
+          this.goToPosition(this.position + 1)
+            .finally(() => { this._stepping = false; });
+        }
       }
     }
 
