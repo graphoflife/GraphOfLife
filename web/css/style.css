@@ -668,3 +668,25 @@ details.control-group > summary:hover h3 { color: var(--text); }
 .viewer-layout:-webkit-full-screen { background: var(--bg); }
 
 #btnFullscreen[aria-pressed="true"] { background: var(--accent-dim); color: #fff; }
+
+/* Focus: the clicked node's neighbourhood, and how far out it reaches. */
+.seg-field {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0 8px;
+  font-size: 11px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.seg-field input {
+  width: 46px;
+  padding: 2px 4px;
+  font-size: 11px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text);
+}
+.focus-note { font-size: 11px; color: var(--accent); align-self: center; }
+.focus-note:empty { display: none; }

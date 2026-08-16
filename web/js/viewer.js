@@ -16,6 +16,14 @@ const Viewer = {
   metrics: null,
   cache: new Map(),
   inflight: new Map(),   // index -> in-progress fetch, so one request serves all askers
+  // Focus: the graph is cropped to what lies within a few steps of one node.
+  // `fullFrame` is what was read from disk; `frame` is what is on screen, and
+  // the two differ only while a focus is set.
+  fullFrame: null,
+  focusId: null,
+  focusNeighbours: [],   // remembered while the focus node is alive, for the fallback
+  focusNote: '',
+
   playing: false,
   playAccumulator: 0,
   lastTime: 0,
@@ -45,6 +53,11 @@ const Viewer = {
     forceCharge: 20, forceLink: 0.12, forceCenter: 0.012,
     forceAngular: 0.15, forceDamping: 0.86, forceTheta: 1.2,
     dimensions: 3, autoFit: true,
+
+    // How far out from the focused node the view reaches. A setting rather
+    // than plain state, so a preset carries it; which node is focused is not,
+    // since node ids mean nothing across runs.
+    focusRadius: 2,
 
     // Which quantity each chart plots, and the scale of each axis. Chart
     // metrics are domain-qualified, since `loops` means one thing for a node
@@ -171,6 +184,15 @@ const Viewer = {
     document.getElementById('btnRelayout').addEventListener('click', () => this.layout.scatter());
     document.getElementById('btnFit').addEventListener('click', () => this.setAutoFit(!this.settings.autoFit));
     document.getElementById('btnFullscreen').addEventListener('click', () => this.toggleFullscreen());
+    document.getElementById('btnClearFocus').addEventListener('click', () => this.setFocus(null));
+
+    const radius = document.getElementById('focusRadius');
+    radius.addEventListener('change', () => {
+      const value = Math.max(1, Math.min(12, Math.round(Number(radius.value) || 1)));
+      radius.value = value;
+      this.settings.focusRadius = value;
+      if (this.focusId !== null) this.refocus(true);
+    });
 
     // The browser owns this state — Esc and the window chrome can change it
     // without going through the button — so the button follows the event
@@ -320,6 +342,161 @@ const Viewer = {
   },
 
   // ------------------------------------------------------------------
+  // Focus: one node's neighbourhood, a few steps out
+  // ------------------------------------------------------------------
+
+  /**
+   * Crop a frame to what lies within `focusRadius` steps of the focused node.
+   *
+   * Everything on screen then describes the neighbourhood rather than the
+   * world: the layout spreads only these nodes, and the statistics, charts and
+   * hover card are all computed from the cropped frame. That is the point — a
+   * neighbourhood you can actually read — but it does mean a node at the edge
+   * of the ball shows the degree it has *here*, not the degree it has in the
+   * whole graph. What you see is what is measured.
+   *
+   * The focused node does not always survive the phase. It is followed to a
+   * neighbour when it dies, and the whole graph comes back only when the
+   * neighbourhood went with it.
+   */
+  focusFrame(full) {
+    if (!full || this.focusId === null) return full;
+
+    const adjacency = new Map();
+    for (const id of full.ids) adjacency.set(id, []);
+    for (const [a, b] of full.edges) {
+      if (a === b) continue;
+      const la = adjacency.get(a), lb = adjacency.get(b);
+      if (la) la.push(b);
+      if (lb) lb.push(a);
+    }
+
+    let anchor = this.focusId;
+    if (!adjacency.has(anchor)) {
+      // Gone this phase. Its neighbours from the last frame it was in are the
+      // only handle left on where it was, so the densest survivor inherits the
+      // focus — that keeps the view in the thick of the same neighbourhood
+      // rather than on whichever id happened to be listed first.
+      const gone = anchor;
+      let best = null, bestDegree = -1;
+      for (const id of this.focusNeighbours) {
+        const list = adjacency.get(id);
+        if (!list) continue;
+        if (list.length > bestDegree) { best = id; bestDegree = list.length; }
+      }
+      if (best === null) {
+        this.setFocus(null, `node ${gone} and everything around it is gone \u2014 showing the whole graph`);
+        return full;
+      }
+      anchor = best;
+      this.focusId = best;
+      this.focusNote = `node ${gone} died \u2014 following neighbour ${best}`;
+    }
+
+    this.focusNeighbours = adjacency.get(anchor).slice();
+
+    // The ball, breadth first.
+    const inBall = new Set([anchor]);
+    let layer = [anchor];
+    for (let step = 0; step < this.settings.focusRadius && layer.length; step++) {
+      const next = [];
+      for (const u of layer) {
+        for (const v of adjacency.get(u)) {
+          if (inBall.has(v)) continue;
+          inBall.add(v);
+          next.push(v);
+        }
+      }
+      layer = next;
+    }
+
+    const keep = [];
+    for (let i = 0; i < full.ids.length; i++) if (inBall.has(full.ids[i])) keep.push(i);
+    const take = arr => (arr ? keep.map(i => arr[i]) : undefined);
+
+    const sub = {
+      iteration: full.iteration,
+      phase: full.phase,
+      nodes_before: full.nodes_before,
+      ids: keep.map(i => full.ids[i]),
+      tokens: take(full.tokens),
+      brain_ids: take(full.brain_ids),
+      parent_brain_ids: take(full.parent_brain_ids),
+      parent_ids: take(full.parent_ids),
+      edges: full.edges.filter(([a, b]) => inBall.has(a) && inBall.has(b)),
+      cleanup: full.cleanup,
+      previous: full.previous,
+      focusAnchor: anchor
+    };
+    if (full.delta) sub.delta = take(full.delta);
+
+    // Decisions are filtered to the agents on screen, so the reproduction and
+    // game statistics describe this neighbourhood too rather than the world.
+    const d = full.decisions;
+    if (d) {
+      sub.decisions = {};
+      if (d.births) sub.decisions.births = d.births.filter(b => inBall.has(b.agent));
+      if (d.rewires) sub.decisions.rewires = d.rewires.filter(r => inBall.has(r.agent));
+      if (d.allocations) sub.decisions.allocations = d.allocations.filter(a => inBall.has(a.agent));
+      if (d.winners) sub.decisions.winners = d.winners.filter(w => inBall.has(w.node));
+      if (d.pruned_edges) sub.decisions.pruned_edges = d.pruned_edges;
+    }
+
+    // The frame-level rewire count is a whole-graph number; dropping it makes
+    // the stat fall back to counting the records that survived the crop.
+    sub.summary = {
+      nodes: sub.ids.length,
+      edges: sub.edges.length,
+      tokens: sub.tokens.reduce((a, b) => a + b, 0)
+    };
+    return sub;
+  },
+
+  /** Point the view at a node, or at nothing. */
+  setFocus(id, note = '') {
+    this.focusId = id;
+    this.focusNote = note;
+    if (id === null) this.focusNeighbours = [];
+    this.refocus(true);
+  },
+
+  /** Rebuild what is on screen from the frame that was read. */
+  refocus(reframe = false) {
+    if (!this.fullFrame) { this.updateFocusUi(); return; }
+
+    this.frame = this.focusFrame(this.fullFrame);
+    // Handed over together, so nothing is ever drawn against the other one's
+    // node ordering.
+    this.layout.setFrame(this.frame.ids, this.frame.edges, this.frame.parent_ids,
+                         this.settings.layoutCarry);
+    this.layout.reheat(reframe ? 1 : 0.5);
+
+    this.rebuildMetrics();
+    this.updateStats();
+    this.updateCharts();
+    this.updateFocusUi();
+    if (reframe) this.setAutoFit(true);
+  },
+
+  updateFocusUi() {
+    const note = document.getElementById('focusNote');
+    const clear = document.getElementById('btnClearFocus');
+    const focused = this.focusId !== null;
+
+    if (clear) clear.disabled = !focused;
+    if (!note) return;
+
+    if (!focused) { note.textContent = this.focusNote || ''; return; }
+    const shown = this.frame ? this.frame.ids.length : 0;
+    const whole = this.fullFrame ? this.fullFrame.ids.length : 0;
+    note.textContent =
+      `Focus: node ${this.focusId}, ${this.settings.focusRadius} step`
+      + `${this.settings.focusRadius === 1 ? '' : 's'} out \u2014 `
+      + `${formatNumber(shown)} of ${formatNumber(whole)} nodes`
+      + (this.focusNote ? ` \u00b7 ${this.focusNote}` : '');
+  },
+
+  // ------------------------------------------------------------------
   // Fullscreen
   // ------------------------------------------------------------------
 
@@ -410,13 +587,14 @@ const Viewer = {
   },
 
   bindCanvas() {
-    let dragging = false, rotating = false, lastX = 0, lastY = 0;
+    let dragging = false, rotating = false, lastX = 0, lastY = 0, moved = 0;
 
     this.canvas.addEventListener('mousedown', e => {
       // Alt-drag or the middle button orbits; plain drag always pans.
       rotating = this.renderer.mode3D && (e.altKey || e.button === 1);
       dragging = !rotating;
       lastX = e.clientX; lastY = e.clientY;
+      moved = 0;
       if (e.button === 1) e.preventDefault();
     });
 
@@ -426,6 +604,7 @@ const Viewer = {
       if (!dragging && !rotating) return;
       const dx = e.clientX - lastX, dy = e.clientY - lastY;
       lastX = e.clientX; lastY = e.clientY;
+      moved += Math.abs(dx) + Math.abs(dy);
 
       if (rotating) {
         // Orbiting does not fight the framing, it changes what "framed" means:
@@ -453,6 +632,18 @@ const Viewer = {
       // frame and the wheel would feel dead.
       this.setAutoFit(false);
     }, { passive: false });
+
+    // A click is a mousedown and mouseup in about the same place. Panning uses
+    // the same button, so without the distance test every pan would land on
+    // whatever node it finished over.
+    this.canvas.addEventListener('click', e => {
+      if (moved > 4 || !this.frame) return;
+      const rect = this.canvas.getBoundingClientRect();
+      const i = this.renderer.pick(this.frame, this.layout,
+                                   e.clientX - rect.left, e.clientY - rect.top);
+      if (i >= 0) this.setFocus(this.frame.ids[i]);
+      else if (this.focusId !== null) this.setFocus(null);
+    });
 
     this.canvas.addEventListener('mousemove', e => {
       if (!this.frame || dragging || rotating) return;
@@ -558,6 +749,11 @@ const Viewer = {
     if (switching) {
       this.cache.clear();
       this.inflight.clear();
+      // Node ids from the previous run mean nothing here.
+      this.focusId = null;
+      this.focusNeighbours = [];
+      this.focusNote = '';
+      this.fullFrame = null;
       // Positions from the previous run mean nothing here; the next setFrame
       // is told not to carry them over.
       this._dropPositions = true;
@@ -693,7 +889,9 @@ const Viewer = {
 
     // From here to setFrame there is no await, so what the page draws and what
     // the layout holds change together or not at all.
-    this.frame = frame;
+    this.fullFrame = frame;
+    this.focusNote = '';
+    this.frame = this.focusFrame(frame);
     this.emptyEl.style.display = 'none';
     const carry = this.settings.layoutCarry && !this._dropPositions;
     this._dropPositions = false;
@@ -704,6 +902,7 @@ const Viewer = {
     this.updateSlider();
     this.updateStats();
     this.updateCharts();
+    this.updateFocusUi();
     if (!StatDetail.el.classList.contains('hidden')) StatDetail.redraw();
   },
 

@@ -202,6 +202,14 @@
           <button class="seg-btn" id="btnFullscreen" aria-pressed="false"
                   title="Fill the screen with the view (F, or Esc to leave)">Fullscreen</button>
         </div>
+        <div class="seg" role="group" aria-label="Focus">
+          <label class="seg-field" title="How many steps out from the clicked node to keep">
+            Focus steps
+            <input type="number" id="focusRadius" min="1" max="12" step="1" value="2">
+          </label>
+          <button class="seg-btn" id="btnClearFocus" title="Show the whole graph again" disabled>Show all</button>
+        </div>
+        <span class="focus-note" id="focusNote"></span>
         <div class="run-inline">
           <select id="runPicker" title="Which run to inspect"></select>
           <button id="btnReloadFrames" class="seg-btn standalone" title="Re-read frames from disk">Reload</button>
