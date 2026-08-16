@@ -258,10 +258,15 @@ button.small { padding: 4px 9px; font-size: 12px; }
 .stat-key { display: block; font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
 .stat-val { display: block; font-size: 15px; font-variant-numeric: tabular-nums; }
 
-.charts { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+.charts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 12px; }
 .charts figure { margin: 0; background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 10px; }
 .charts figcaption { font-size: 11.5px; color: var(--muted); margin-bottom: 6px; }
-.charts canvas { width: 100%; display: block; }
+/* Height pinned in CSS rather than left to the element's aspect ratio.
+   Sizing the backing store rewrites the width and height attributes, and those
+   attributes are what a width:100% canvas derives its height from — so each
+   redraw fed the next one and the box drifted to whatever the ratio implied,
+   which on a wide column was three times the height asked for. */
+.charts canvas { width: 100%; height: 190px; display: block; }
 
 /* ---- controls sidebar ---- */
 .controls {
@@ -690,6 +695,11 @@ details.control-group > summary:hover h3 { color: var(--text); }
 .focus-note { font-size: 11px; color: var(--accent); align-self: center; }
 .focus-note:empty { display: none; }
 
-/* The trajectory runs the full width beneath the other two. */
-.charts .chart-wide { grid-column: 1 / -1; }
+/* Three abreast normally. Below that the trajectory takes the full width of a
+   two-column row rather than being squeezed, and gets the height back. */
+@media (max-width: 1200px) {
+  .charts { grid-template-columns: 1fr 1fr; }
+  .charts .chart-wide { grid-column: 1 / -1; }
+  .charts .chart-wide canvas { height: 240px; }
+}
 .chart-wide .chart-metric { max-width: 240px; }

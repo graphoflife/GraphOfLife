@@ -1385,6 +1385,11 @@ const Viewer = {
     if (!this.metrics) return;
     const s = this.settings;
 
+    // First, and before anything below can return early. It used to sit after
+    // the heatmap's domain check, so picking a node metric against an edge one
+    // stopped the trajectory redrawing at all and its own controls went dead.
+    this.updateTrajectory();
+
     const dist = Metrics.parse(s.distMetric);
     drawHistogram(document.getElementById('distHist'), this.chartValues(dist), {
       bins: 30, colormap: s.nodeColormap, reverse: s.nodeColorReverse,
@@ -1405,8 +1410,6 @@ const Viewer = {
       });
       return;
     }
-
-    this.updateTrajectory();
 
     drawHeatmap(heat, this.chartValues(x), this.chartValues(y), {
       colormap: s.nodeColormap, reverse: s.nodeColorReverse,
