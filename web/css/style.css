@@ -689,3 +689,7 @@ details.control-group > summary:hover h3 { color: var(--text); }
 }
 .focus-note { font-size: 11px; color: var(--accent); align-self: center; }
 .focus-note:empty { display: none; }
+
+/* The trajectory runs the full width beneath the other two. */
+.charts .chart-wide { grid-column: 1 / -1; }
+.chart-wide .chart-metric { max-width: 240px; }

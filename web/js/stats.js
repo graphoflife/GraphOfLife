@@ -919,3 +919,114 @@ function drawHeatmap(canvas, xs, ys, options = {}) {
     + (dropped ? ` \u00b7 ${dropped.toLocaleString('en-US')} unpaired` : '');
   ctx.fillText(peakText, padLeft + (plotW - ctx.measureText(peakText).width) / 2, h - 3);
 }
+
+/**
+ * Draw the path two statistics trace against each other over a run.
+ *
+ * Neither axis is time: each point is one moment, placed by what the two
+ * statistics read then, and the colour says when. A run that settles draws a
+ * path that wanders into a corner and stays; one that cycles draws a loop;
+ * one that never settles keeps moving through fresh colour to the end.
+ *
+ * Points arrive already ordered in time and already paired — deciding which
+ * value belongs with which is the caller's job, since it depends on which
+ * phases the two statistics are recorded in.
+ */
+function drawTrajectory(canvas, points, options = {}) {
+  const { colormap = 'viridis', reverse = false,
+          logX = false, logY = false,
+          xLabel = '', yLabel = '', footer = '',
+          message = null } = options;
+
+  const { ctx, w, h } = _prepareCanvas(canvas);
+  if (message) { _noData(ctx, w, h, message); return; }
+  if (!points || points.length < 2) {
+    _noData(ctx, w, h, 'not enough of the run has both of these yet');
+    return;
+  }
+
+  const mapX = v => (logX ? Metrics.applyLog(v, v < 0) : v);
+  const mapY = v => (logY ? Metrics.applyLog(v, v < 0) : v);
+
+  let loX = Infinity, hiX = -Infinity, loY = Infinity, hiY = -Infinity;
+  let loT = Infinity, hiT = -Infinity;
+  for (const p of points) {
+    const x = mapX(p.x), y = mapY(p.y);
+    if (x < loX) loX = x; if (x > hiX) hiX = x;
+    if (y < loY) loY = y; if (y > hiY) hiY = y;
+    if (p.t < loT) loT = p.t; if (p.t > hiT) hiT = p.t;
+  }
+  if (!Number.isFinite(loX) || !Number.isFinite(loY)) { _noData(ctx, w, h); return; }
+  if (hiX - loX < 1e-12) hiX = loX + 1;
+  if (hiY - loY < 1e-12) hiY = loY + 1;
+  const spanT = (hiT - loT) || 1;
+
+  const padLeft = 54, padBottom = 30, padTop = 10, padRight = 10;
+  const plotW = Math.max(1, w - padLeft - padRight);
+  const plotH = Math.max(1, h - padBottom - padTop);
+  const px = v => padLeft + (mapX(v) - loX) / (hiX - loX) * plotW;
+  const py = v => padTop + plotH - (mapY(v) - loY) / (hiY - loY) * plotH;
+
+  // Frame, so the path is read against something rather than floating.
+  ctx.strokeStyle = 'rgba(143,163,181,0.25)';
+  ctx.lineWidth = 1;
+  ctx.strokeRect(padLeft + 0.5, padTop + 0.5, plotW - 1, plotH - 1);
+
+  // One stroke per segment: the colour has to change along the path, and that
+  // is the whole point of drawing it this way.
+  ctx.lineWidth = 1.6;
+  ctx.lineJoin = 'round';
+  ctx.lineCap = 'round';
+  for (let i = 1; i < points.length; i++) {
+    const a = points[i - 1], b = points[i];
+    ctx.strokeStyle = colormapCss(colormap, (b.t - loT) / spanT, 0.9, reverse);
+    ctx.beginPath();
+    ctx.moveTo(px(a.x), py(a.y));
+    ctx.lineTo(px(b.x), py(b.y));
+    ctx.stroke();
+  }
+
+  // Where it started and where it ended, which the colour alone leaves you to
+  // work out.
+  const first = points[0], last = points[points.length - 1];
+  ctx.fillStyle = colormapCss(colormap, 0, 1, reverse);
+  ctx.beginPath(); ctx.arc(px(first.x), py(first.y), 3.5, 0, Math.PI * 2); ctx.fill();
+  ctx.strokeStyle = '#e6edf3'; ctx.lineWidth = 1; ctx.stroke();
+  ctx.fillStyle = colormapCss(colormap, 1, 1, reverse);
+  ctx.beginPath(); ctx.arc(px(last.x), py(last.y), 3.5, 0, Math.PI * 2); ctx.fill();
+  ctx.stroke();
+
+  const fmt = v => {
+    const a = Math.abs(v);
+    if (a >= 1000) return Math.round(v).toLocaleString('en-US');
+    if (a >= 10) return v.toFixed(1);
+    if (a >= 0.01) return v.toFixed(3);
+    return v.toExponential(1);
+  };
+  const back = (v, log) => (log ? Metrics.undoLog(v, v < 0) : v);
+
+  ctx.font = '10px system-ui, sans-serif';
+  ctx.fillStyle = '#8fa3b5';
+  ctx.fillText(fmt(back(hiY, logY)), 2, padTop + 8);
+  ctx.fillText(fmt(back(loY, logY)), 2, padTop + plotH);
+  ctx.fillText(fmt(back(loX, logX)), padLeft, h - 17);
+  const hiXText = fmt(back(hiX, logX));
+  ctx.fillText(hiXText, w - ctx.measureText(hiXText).width - 2, h - 17);
+
+  ctx.fillStyle = '#9fb0c0';
+  ctx.font = '10.5px system-ui, sans-serif';
+  ctx.fillText(`${yLabel} \u2191   vs   ${xLabel} \u2192`, padLeft, padTop - 1);
+
+  // A strip saying which end of the colour map is early and which is late.
+  const barW = 90, barH = 7, barX = padLeft, barY = h - 12;
+  drawColormapStrip(ctx, barX, barY, barW, barH, colormap, reverse);
+  ctx.fillStyle = '#8fa3b5';
+  ctx.font = '9.5px system-ui, sans-serif';
+  ctx.fillText(`iter ${Math.round(loT).toLocaleString('en-US')}`, barX + barW + 6, barY + barH);
+  const endText = `\u2192 ${Math.round(hiT).toLocaleString('en-US')}`;
+  ctx.fillText(endText, barX + barW + 6 + ctx.measureText(`iter ${Math.round(loT).toLocaleString('en-US')}`).width + 6, barY + barH);
+  if (footer) {
+    ctx.fillStyle = '#6b7c8d';
+    ctx.fillText(footer, w - ctx.measureText(footer).width - 2, barY + barH);
+  }
+}

@@ -65,7 +65,11 @@ const Viewer = {
     distMetric: 'node:tokens',
     histDistX: 'log', histDistY: 'linear',
     heatX: 'node:degree', heatY: 'node:tokens',
-    histHeatX: 'linear', histHeatY: 'log', histHeatCount: 'log'
+    histHeatX: 'linear', histHeatY: 'log', histHeatCount: 'log',
+
+    // The trajectory plots two run statistics against each other over time.
+    trajX: 'nodes', trajY: 'tokens',
+    histTrajX: 'linear', histTrajY: 'linear'
   },
 
   init() {
@@ -157,6 +161,8 @@ const Viewer = {
     bind('distMetric', 'distMetric');
     bind('heatX', 'heatX');
     bind('heatY', 'heatY');
+    bind('trajX', 'trajX', v => v, false);
+    bind('trajY', 'trajY', v => v, false);
     bind('edgeWidthMin', 'edgeWidthMin', num, false);
     bind('edgeWidthMax', 'edgeWidthMax', num, false);
     bind('edgeAlpha', 'edgeAlpha', num, false);
@@ -186,6 +192,15 @@ const Viewer = {
     document.getElementById('btnFit').addEventListener('click', () => this.setAutoFit(!this.settings.autoFit));
     document.getElementById('btnFullscreen').addEventListener('click', () => this.toggleFullscreen());
     document.getElementById('btnClearFocus').addEventListener('click', () => this.setFocus(null));
+
+    document.getElementById('btnTrajLoad').addEventListener('click', async () => {
+      if (this._trajectoryLoading || !this.runId) return;
+      this._trajectoryLoading = true;
+      this.updateTrajectory();
+      try { await StatDetail.load(this.runId); }
+      catch (err) { /* the chart says so on the next draw */ }
+      finally { this._trajectoryLoading = false; this.updateTrajectory(); }
+    });
 
     const radius = document.getElementById('focusRadius');
     radius.addEventListener('change', () => {
@@ -237,6 +252,22 @@ const Viewer = {
                        { extras: [Metrics.CONSTANT, Metrics.INHERIT], selected: s.edgeColorBy });
     Metrics.fillSelect(document.getElementById('edgeWidthBy'), 'edge',
                        { extras: [Metrics.CONSTANT], selected: s.edgeWidthBy });
+
+    // The trajectory reads run statistics rather than per-node metrics, so its
+    // menus are built from the same groups the strip under the canvas uses.
+    const statOptions = this.STAT_GROUPS.map(group => {
+      const items = group.keys
+        .filter(k => this.STAT_LABELS[k])
+        .map(k => `<option value="${k}">${this.STAT_LABELS[k]}</option>`)
+        .join('');
+      return items ? `<optgroup label="${group.label}">${items}</optgroup>` : '';
+    }).join('');
+    for (const [id, key] of [['trajX', 'trajX'], ['trajY', 'trajY']]) {
+      const select = document.getElementById(id);
+      if (!select) continue;
+      select.innerHTML = statOptions;
+      select.value = s[key];
+    }
 
     Metrics.fillDomainSelect(document.getElementById('distMetric'), s.distMetric);
     Metrics.fillDomainSelect(document.getElementById('heatX'), s.heatX);
@@ -1057,6 +1088,70 @@ const Viewer = {
    * Reproduction section disappears on a game frame rather than showing a row
    * of dashes.
    */
+  /**
+   * What each statistic is called, in one place.
+   *
+   * The strip under the canvas and the trajectory chart's menus both read
+   * from here, so a statistic cannot end up with two different names
+   * depending on where you look at it.
+   */
+  STAT_LABELS: {
+    nodes: 'Nodes',
+    edges: 'Edges',
+    tokens: 'Tokens',
+    meanTokens: 'Mean tokens',
+    medianTokens: 'Median tokens',
+    maxTokens: 'Richest',
+    minTokens: 'Poorest',
+    gini: 'Gini',
+    topDecileShare: 'Top 10% hold',
+    tokenEntropy: 'Token entropy',
+    tokenEvenness: 'Token evenness',
+    maxTokenAdded: 'Max token added',
+    maxTokenLost: 'Max token lost',
+    gainers: 'Gained',
+    losers: 'Lost',
+    distinctBrains: 'Distinct brains',
+    brainDiversity: 'Brain diversity',
+    distinctLineages: 'Distinct lineages',
+    density: 'Density',
+    meanDegree: 'Mean degree',
+    medianDegree: 'Median degree',
+    maxDegree: 'Max degree',
+    minDegree: 'Min degree',
+    leaves: 'Leaves',
+    degreeEntropy: 'Degree entropy',
+    degreeEvenness: 'Degree evenness',
+    cycleRank: 'Loops',
+    loopDensity: 'Loop density',
+    bridges: 'Bridges',
+    triangles: 'Triangles',
+    transitivity: 'Clustering',
+    dimension: 'Dimension',
+    radius: 'Radius',
+    diameter: 'Diameter',
+    meanPathLength: 'Mean path',
+    components: 'Components',
+    births: 'Births',
+    reproTokenShare: 'Tokens to offspring',
+    meanInvestedShare: 'Mean investment',
+    meanChildLinks: 'Links per child',
+    handovers: 'Handovers',
+    rewires: 'Rewires',
+    totalFlow: 'Tokens moved',
+    meanEdgeFlow: 'Mean edge flow',
+    maxEdgeFlow: 'Max edge flow',
+    selfAllocationShare: 'Kept at home',
+    spreadShare: 'Spread doctrine',
+    revoltShare: 'Revolt tokens',
+    revolutions: 'Revolutions',
+    heldHomeShare: 'Held own node',
+    prunedEdges: 'Pruned edges',
+    starved: 'Starved',
+    orphaned: 'Culled',
+    redistributed: 'Redistributed'
+  },
+
   STAT_GROUPS: [
     { key: 'general', label: 'General', open: true, keys: [
       'nodes', 'edges', 'tokens', 'meanTokens', 'medianTokens', 'maxTokens', 'minTokens',
@@ -1105,75 +1200,75 @@ const Viewer = {
 
     // label and formatted value for every statistic that has one this frame
     const cells = {
-      nodes: ['Nodes', formatNumber(s.nodes)],
-      edges: ['Edges', formatNumber(s.edges)],
-      tokens: ['Tokens', formatNumber(s.tokens)],
-      meanTokens: ['Mean tokens', int(s.meanTokens)],
-      medianTokens: ['Median tokens', int(s.medianTokens)],
-      maxTokens: ['Richest', formatNumber(s.maxTokens)],
-      minTokens: ['Poorest', formatNumber(s.minTokens)],
-      gini: ['Gini', dec(s.gini, 3)],
-      topDecileShare: ['Top 10% hold', pct(s.topDecileShare)],
-      tokenEntropy: ['Token entropy', `${dec(s.tokenEntropy)} bits`],
-      tokenEvenness: ['Token evenness', pct(s.tokenEvenness)],
-      maxTokenAdded: ['Max token added', `+${formatNumber(s.maxTokenAdded)}`],
-      maxTokenLost: ['Max token lost', `-${formatNumber(s.maxTokenLost)}`],
-      gainers: ['Gained', withShare(s.gainers)],
-      losers: ['Lost', withShare(s.losers)],
-      distinctBrains: ['Distinct brains', formatNumber(s.distinctBrains)],
-      brainDiversity: ['Brain diversity', pct(s.brainDiversity)],
-      distinctLineages: ['Distinct lineages', formatNumber(s.distinctLineages)],
+      nodes: [this.STAT_LABELS.nodes, formatNumber(s.nodes)],
+      edges: [this.STAT_LABELS.edges, formatNumber(s.edges)],
+      tokens: [this.STAT_LABELS.tokens, formatNumber(s.tokens)],
+      meanTokens: [this.STAT_LABELS.meanTokens, int(s.meanTokens)],
+      medianTokens: [this.STAT_LABELS.medianTokens, int(s.medianTokens)],
+      maxTokens: [this.STAT_LABELS.maxTokens, formatNumber(s.maxTokens)],
+      minTokens: [this.STAT_LABELS.minTokens, formatNumber(s.minTokens)],
+      gini: [this.STAT_LABELS.gini, dec(s.gini, 3)],
+      topDecileShare: [this.STAT_LABELS.topDecileShare, pct(s.topDecileShare)],
+      tokenEntropy: [this.STAT_LABELS.tokenEntropy, `${dec(s.tokenEntropy)} bits`],
+      tokenEvenness: [this.STAT_LABELS.tokenEvenness, pct(s.tokenEvenness)],
+      maxTokenAdded: [this.STAT_LABELS.maxTokenAdded, `+${formatNumber(s.maxTokenAdded)}`],
+      maxTokenLost: [this.STAT_LABELS.maxTokenLost, `-${formatNumber(s.maxTokenLost)}`],
+      gainers: [this.STAT_LABELS.gainers, withShare(s.gainers)],
+      losers: [this.STAT_LABELS.losers, withShare(s.losers)],
+      distinctBrains: [this.STAT_LABELS.distinctBrains, formatNumber(s.distinctBrains)],
+      brainDiversity: [this.STAT_LABELS.brainDiversity, pct(s.brainDiversity)],
+      distinctLineages: [this.STAT_LABELS.distinctLineages, formatNumber(s.distinctLineages)],
 
-      density: ['Density', `${(s.density * 100).toFixed(2)}%`],
-      meanDegree: ['Mean degree', dec(s.meanDegree)],
-      medianDegree: ['Median degree', dec(s.medianDegree, 1)],
-      maxDegree: ['Max degree', formatNumber(s.maxDegree)],
-      minDegree: ['Min degree', formatNumber(s.minDegree)],
-      leaves: ['Leaves', withShare(s.leaves)],
-      degreeEntropy: ['Degree entropy', `${dec(s.degreeEntropy)} bits`],
-      degreeEvenness: ['Degree evenness', pct(s.degreeEvenness)]
+      density: [this.STAT_LABELS.density, `${(s.density * 100).toFixed(2)}%`],
+      meanDegree: [this.STAT_LABELS.meanDegree, dec(s.meanDegree)],
+      medianDegree: [this.STAT_LABELS.medianDegree, dec(s.medianDegree, 1)],
+      maxDegree: [this.STAT_LABELS.maxDegree, formatNumber(s.maxDegree)],
+      minDegree: [this.STAT_LABELS.minDegree, formatNumber(s.minDegree)],
+      leaves: [this.STAT_LABELS.leaves, withShare(s.leaves)],
+      degreeEntropy: [this.STAT_LABELS.degreeEntropy, `${dec(s.degreeEntropy)} bits`],
+      degreeEvenness: [this.STAT_LABELS.degreeEvenness, pct(s.degreeEvenness)]
     };
 
     // Only computed while the Structure group is open, since walking the whole
     // graph costs more than the rest of this strip together.
     if (structureOpen) {
-      cells.cycleRank = ['Loops', formatNumber(s.cycleRank)];
-      cells.loopDensity = ['Loop density', pct(s.loopDensity)];
-      cells.bridges = ['Bridges', formatNumber(s.bridges)];
-      cells.triangles = ['Triangles', formatNumber(s.triangles)];
-      cells.transitivity = ['Clustering', dec(s.transitivity, 3)];
-      cells.dimension = ['Dimension', dec(s.dimension)];
-      cells.radius = ['Radius', formatNumber(s.radius)];
-      cells.diameter = ['Diameter', formatNumber(s.diameter)];
-      cells.meanPathLength = ['Mean path', dec(s.meanPathLength)];
-      cells.components = ['Components', formatNumber(s.components)];
+      cells.cycleRank = [this.STAT_LABELS.cycleRank, formatNumber(s.cycleRank)];
+      cells.loopDensity = [this.STAT_LABELS.loopDensity, pct(s.loopDensity)];
+      cells.bridges = [this.STAT_LABELS.bridges, formatNumber(s.bridges)];
+      cells.triangles = [this.STAT_LABELS.triangles, formatNumber(s.triangles)];
+      cells.transitivity = [this.STAT_LABELS.transitivity, dec(s.transitivity, 3)];
+      cells.dimension = [this.STAT_LABELS.dimension, dec(s.dimension)];
+      cells.radius = [this.STAT_LABELS.radius, formatNumber(s.radius)];
+      cells.diameter = [this.STAT_LABELS.diameter, formatNumber(s.diameter)];
+      cells.meanPathLength = [this.STAT_LABELS.meanPathLength, dec(s.meanPathLength)];
+      cells.components = [this.STAT_LABELS.components, formatNumber(s.components)];
     }
 
     // Present only when the phase produced them.
     if (s.births !== null) {
-      cells.births = ['Births', withShare(s.births)];
-      cells.reproTokenShare = ['Tokens to offspring', pct(s.reproTokenShare)];
-      cells.meanInvestedShare = ['Mean investment', pct(s.meanInvestedShare)];
-      cells.meanChildLinks = ['Links per child', dec(s.meanChildLinks)];
-      if (s.handovers !== null) cells.handovers = ['Handovers', formatNumber(s.handovers)];
+      cells.births = [this.STAT_LABELS.births, withShare(s.births)];
+      cells.reproTokenShare = [this.STAT_LABELS.reproTokenShare, pct(s.reproTokenShare)];
+      cells.meanInvestedShare = [this.STAT_LABELS.meanInvestedShare, pct(s.meanInvestedShare)];
+      cells.meanChildLinks = [this.STAT_LABELS.meanChildLinks, dec(s.meanChildLinks)];
+      if (s.handovers !== null) cells.handovers = [this.STAT_LABELS.handovers, formatNumber(s.handovers)];
     }
-    if (s.rewires !== null) cells.rewires = ['Rewires', formatNumber(s.rewires)];
+    if (s.rewires !== null) cells.rewires = [this.STAT_LABELS.rewires, formatNumber(s.rewires)];
     if (s.totalFlow !== null) {
-      cells.totalFlow = ['Tokens moved', formatNumber(s.totalFlow)];
-      cells.meanEdgeFlow = ['Mean edge flow', dec(s.meanEdgeFlow, 1)];
-      cells.maxEdgeFlow = ['Max edge flow', formatNumber(s.maxEdgeFlow)];
-      cells.selfAllocationShare = ['Kept at home', pct(s.selfAllocationShare)];
-      cells.spreadShare = ['Spread doctrine', pct(s.spreadShare)];
+      cells.totalFlow = [this.STAT_LABELS.totalFlow, formatNumber(s.totalFlow)];
+      cells.meanEdgeFlow = [this.STAT_LABELS.meanEdgeFlow, dec(s.meanEdgeFlow, 1)];
+      cells.maxEdgeFlow = [this.STAT_LABELS.maxEdgeFlow, formatNumber(s.maxEdgeFlow)];
+      cells.selfAllocationShare = [this.STAT_LABELS.selfAllocationShare, pct(s.selfAllocationShare)];
+      cells.spreadShare = [this.STAT_LABELS.spreadShare, pct(s.spreadShare)];
       // Null when the run has revolutions off. Formatting that as 0% would
       // claim nobody revolted, when in fact nobody could.
-      if (s.revoltShare !== null) cells.revoltShare = ['Revolt tokens', pct(s.revoltShare)];
+      if (s.revoltShare !== null) cells.revoltShare = [this.STAT_LABELS.revoltShare, pct(s.revoltShare)];
     }
-    if (s.revolutions !== null) cells.revolutions = ['Revolutions', withShare(s.revolutions)];
-    if (s.heldHomeShare !== null) cells.heldHomeShare = ['Held own node', pct(s.heldHomeShare)];
-    if (s.prunedEdges !== null) cells.prunedEdges = ['Pruned edges', formatNumber(s.prunedEdges)];
-    if (s.starved !== null) cells.starved = ['Starved', withShare(s.starved)];
-    if (s.orphaned !== null) cells.orphaned = ['Culled', withShare(s.orphaned)];
-    if (s.redistributed !== null) cells.redistributed = ['Redistributed', formatNumber(s.redistributed)];
+    if (s.revolutions !== null) cells.revolutions = [this.STAT_LABELS.revolutions, withShare(s.revolutions)];
+    if (s.heldHomeShare !== null) cells.heldHomeShare = [this.STAT_LABELS.heldHomeShare, pct(s.heldHomeShare)];
+    if (s.prunedEdges !== null) cells.prunedEdges = [this.STAT_LABELS.prunedEdges, formatNumber(s.prunedEdges)];
+    if (s.starved !== null) cells.starved = [this.STAT_LABELS.starved, withShare(s.starved)];
+    if (s.orphaned !== null) cells.orphaned = [this.STAT_LABELS.orphaned, withShare(s.orphaned)];
+    if (s.redistributed !== null) cells.redistributed = [this.STAT_LABELS.redistributed, formatNumber(s.redistributed)];
 
     // Remember which sections were open, so redrawing a frame does not fold
     // everything back up under the reader.
@@ -1215,6 +1310,70 @@ const Viewer = {
     }
   },
 
+  /**
+   * Pair two run statistics into a path through time.
+   *
+   * The two are not always recorded together. Most are written on both phases,
+   * some only on the reproduction phase — births, what was invested, rewires —
+   * and some only on the game phase — what flowed, who revolted. Rather than
+   * keeping a table of which is which, the pairing is decided from the data:
+   *
+   *   Where both have a value on the same frame, that frame is one point. This
+   *   covers everything recorded on both phases, and any two that share a
+   *   phase, at the full resolution the series holds.
+   *
+   *   Where they never once appear together — one reproduction-only, the other
+   *   game-only — the iteration is the unit instead, taking each from whichever
+   *   of its two phases recorded it. One point per iteration, which is the
+   *   finest honest pairing available: the two really did happen at the same
+   *   time, just not in the same half of it.
+   *
+   * The chart says which of the two it used, since it changes what a point
+   * means.
+   */
+  trajectoryPoints(payload) {
+    if (!payload || !payload.series) return { message: 'history is still loading' };
+
+    const s = payload.series;
+    const xKey = this.settings.trajX, yKey = this.settings.trajY;
+    const xs = s[xKey], ys = s[yKey];
+    const phases = s.phase || [], iterations = s.iteration || [];
+    if (!xs || !ys) return { message: 'this run has no history for one of these' };
+
+    const usable = v => v !== null && v !== undefined && Number.isFinite(v);
+
+    const sameFrame = [];
+    for (let i = 0; i < xs.length; i++) {
+      if (!this.framePassesFilter(phases[i])) continue;
+      if (!usable(xs[i]) || !usable(ys[i])) continue;
+      sameFrame.push({ x: xs[i], y: ys[i], t: iterations[i] });
+    }
+    if (sameFrame.length >= 2) {
+      return { points: sameFrame, pairing: 'one point per frame' };
+    }
+
+    // Never together on a frame, so pair the phases of each iteration. The
+    // phase filter is ignored here on purpose: it would leave one of the two
+    // with nothing, and the whole reason to be in this branch is that they
+    // live on opposite halves of an iteration.
+    const byIteration = new Map();
+    for (let i = 0; i < xs.length; i++) {
+      const at = iterations[i];
+      let slot = byIteration.get(at);
+      if (!slot) { slot = { x: null, y: null, t: at }; byIteration.set(at, slot); }
+      if (slot.x === null && usable(xs[i])) slot.x = xs[i];
+      if (slot.y === null && usable(ys[i])) slot.y = ys[i];
+    }
+    const paired = [...byIteration.values()]
+      .filter(p => p.x !== null && p.y !== null)
+      .sort((a, b) => a.t - b.t);
+
+    if (paired.length >= 2) {
+      return { points: paired, pairing: 'one point per iteration, across its phases' };
+    }
+    return { message: 'these two are never recorded at the same time' };
+  },
+
   /** Raw values for a domain-qualified metric, whichever domain it names. */
   chartValues(parsed) {
     return parsed.domain === 'edge'
@@ -1247,6 +1406,8 @@ const Viewer = {
       return;
     }
 
+    this.updateTrajectory();
+
     drawHeatmap(heat, this.chartValues(x), this.chartValues(y), {
       colormap: s.nodeColormap, reverse: s.nodeColorReverse,
       logX: s.histHeatX === 'log', logY: s.histHeatY === 'log',
@@ -1272,6 +1433,43 @@ const Viewer = {
     const cls = v > 0 ? 'bad' : 'good';
     return `Curvature <span class="${cls}">${v > 0 ? '+' : ''}${formatNumber(v)}</span>` +
            ` <span class="hint">(${sense})</span>`;
+  },
+
+  /**
+   * Redraw the trajectory, fetching the run's history the first time it is
+   * needed rather than on every frame step.
+   */
+  updateTrajectory() {
+    const canvas = document.getElementById('trajectory');
+    if (!canvas || !this.runId) return;
+    const s = this.settings;
+    const button = document.getElementById('btnTrajLoad');
+    const payload = StatDetail.seriesCache.get(this.runId);
+
+    if (button) button.style.display = payload ? 'none' : '';
+
+    // Summarising a run means reading every frame it recorded, which on a
+    // long run of large graphs takes minutes. Doing that unasked, every time
+    // a run is opened, would be a poor trade for a chart the reader may not
+    // want, so it waits to be asked and is then kept for the session.
+    if (!payload) {
+      drawTrajectory(canvas, null, {
+        message: this._trajectoryLoading
+          ? 'reading every recorded frame\u2026'
+          : 'press Load history to summarise this run'
+      });
+      return;
+    }
+
+    const result = this.trajectoryPoints(payload);
+    drawTrajectory(canvas, result.points, {
+      colormap: s.nodeColormap, reverse: s.nodeColorReverse,
+      logX: s.histTrajX === 'log', logY: s.histTrajY === 'log',
+      xLabel: this.STAT_LABELS[s.trajX] || s.trajX,
+      yLabel: this.STAT_LABELS[s.trajY] || s.trajY,
+      footer: result.pairing || '',
+      message: result.message || null
+    });
   },
 
   showHover(i, x, y) {

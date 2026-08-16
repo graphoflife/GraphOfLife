@@ -250,6 +250,25 @@
           </figcaption>
           <canvas id="heatMap" height="150"></canvas>
         </figure>
+        <figure class="chart-wide">
+          <figcaption>
+            <span class="chart-pair">
+              <select id="trajX" class="chart-metric" title="Horizontal axis"></select>
+              <select id="trajY" class="chart-metric" title="Vertical axis"></select>
+            </span>
+            <span class="axis-toggles">
+              <span class="axis-group" data-axis="trajX">x
+                <button class="axis-btn active" data-scale="linear">lin</button><button class="axis-btn" data-scale="log">log</button>
+              </span>
+              <span class="axis-group" data-axis="trajY">y
+                <button class="axis-btn active" data-scale="linear">lin</button><button class="axis-btn" data-scale="log">log</button>
+              </span>
+              <button class="axis-btn" id="btnTrajLoad"
+                      title="Summarise every recorded frame of this run. Slow the first time; kept afterwards.">Load history</button>
+            </span>
+          </figcaption>
+          <canvas id="trajectory" height="240"></canvas>
+        </figure>
       </div>
     </div>
 
