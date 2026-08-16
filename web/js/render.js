@@ -291,7 +291,9 @@ class GraphRenderer {
 
       if (settings.edgeShow) this._edges(ctx, frame, metrics, settings);
       this._nodes(ctx, frame, metrics, settings);
-      if (settings.showLegend) this._legend(ctx, metrics, settings);
+      // _legend decides which keys it has to draw; the two toggles are
+      // independent, so gating the call on one of them would hide the other.
+      this._legend(ctx, metrics, settings);
     }
 
     ctx.restore();
@@ -727,27 +729,56 @@ class GraphRenderer {
     ctx.restore();
   }
 
-  _legend(ctx, metrics, s) {
+  /**
+   * One labelled colour strip: what the map means and the ends of its range.
+   */
+  _legendBlock(ctx, x, y, label, rangeText, colormap, reverse) {
     const w = 150, h = 10;
-    const x = 14, y = this.cssHeight - 40;
 
-    ctx.save();
     ctx.globalAlpha = 0.92;
     ctx.fillStyle = 'rgba(0,0,0,0.45)';
     ctx.fillRect(x - 8, y - 20, w + 16, h + 38);
 
-    drawColormapStrip(ctx, x, y, w, h, s.nodeColormap, s.nodeColorReverse);
+    drawColormapStrip(ctx, x, y, w, h, colormap, reverse);
 
     ctx.fillStyle = '#e6edf3';
     ctx.font = '11px system-ui, sans-serif';
-    ctx.fillText(metrics.colorLabel, x, y - 7);
+    ctx.fillText(label, x, y - 7);
 
     ctx.font = '10px system-ui, sans-serif';
     ctx.fillStyle = '#9fb0c0';
-    const [lo, hi] = metrics.colorRangeText;
+    const [lo, hi] = rangeText;
     ctx.fillText(lo, x, y + h + 11);
-    const hiWidth = ctx.measureText(hi).width;
-    ctx.fillText(hi, x + w - hiWidth, y + h + 11);
+    ctx.fillText(hi, x + w - ctx.measureText(hi).width, y + h + 11);
+  }
+
+  /**
+   * The colour keys, stacked up from the bottom left.
+   *
+   * The edge key is only worth drawing when edge colour is actually reading
+   * something: a flat colour has no range to show, and inheriting the node
+   * colour would just repeat the key already above it.
+   */
+  _legend(ctx, metrics, s) {
+    const blocks = [];
+    if (s.showLegend) {
+      blocks.push([metrics.colorLabel, metrics.colorRangeText,
+                   s.nodeColormap, s.nodeColorReverse]);
+    }
+    if (s.showEdgeLegend && s.edgeShow
+        && s.edgeColorBy !== 'constant' && s.edgeColorBy !== 'source') {
+      blocks.push([metrics.edgeColorLabel, metrics.edgeColorRangeText,
+                   s.edgeColormap, s.edgeColorReverse]);
+    }
+    if (!blocks.length) return;
+
+    ctx.save();
+    // Bottom-most first, each one 48px above the last.
+    let y = this.cssHeight - 40;
+    for (const [label, range, colormap, reverse] of blocks) {
+      this._legendBlock(ctx, 14, y, label, range, colormap, reverse);
+      y -= 48;
+    }
     ctx.restore();
   }
 

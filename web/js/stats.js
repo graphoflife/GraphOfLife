@@ -270,6 +270,26 @@ class FrameMetrics {
     return (i === undefined) ? 'rgba(120,120,120,1)' : this.nodeColorCssByIndex(i, alpha);
   }
 
+  /**
+   * What the edge colour map is showing, for the legend.
+   *
+   * Getters rather than fields: reading the range means walking every edge,
+   * and most views never show this legend at all.
+   */
+  get edgeColorLabel() {
+    const s = this.settings;
+    return Metrics.label('edge', s.edgeColorBy) + (s.edgeColorLog ? ' (log)' : '');
+  }
+
+  get edgeColorRangeText() {
+    const s = this.settings;
+    const range = this.edgeRange(s.edgeColorBy, s.edgeColorLog);
+    return [
+      Metrics.format('edge', s.edgeColorBy, range[0], s.edgeColorLog),
+      Metrics.format('edge', s.edgeColorBy, range[1], s.edgeColorLog)
+    ];
+  }
+
   // ---- edge-derived quantities ---------------------------------------
 
   _edgeRaw(kind, a, b) {

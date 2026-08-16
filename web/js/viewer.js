@@ -46,7 +46,7 @@ const Viewer = {
     edgeFlatColor: '#5f7d95', edgeWidthBy: 'constant', edgeWidthLog: false,
     edgeWidthMin: 0.3, edgeWidthMax: 1.6, edgeAlpha: 0.25,
     bgStyle: 'solid', bgColorA: '#0d1117', bgColorB: '#1d2530',
-    showLegend: true, layoutCarry: true,
+    showLegend: true, showEdgeLegend: true, layoutCarry: true,
 
     // Layout lives in the settings too, so a preset restores the whole look
     // including how the graph arranges itself, not just its colours.
@@ -165,6 +165,7 @@ const Viewer = {
     bind('bgColorA', 'bgColorA', v => v, false);
     bind('bgColorB', 'bgColorB', v => v, false);
     bind('showLegend', 'showLegend', v => v, false);
+    bind('showEdgeLegend', 'showEdgeLegend', v => v, false);
     bind('layoutCarry', 'layoutCarry', v => v, false);
 
     // Layout sliders are ordinary settings; applyLayoutSettings pushes them
