@@ -1152,13 +1152,18 @@ def _main() -> None:
     world = new_world(cfg)
     print(f"🌍 n={cfg.resolved_n()} k={cfg.resolved_k()} tokens={cfg.total_tokens}")
 
-    for t in range(cfg.max_steps):
-        world.step(record_decisions=False)
-        print(f"iteration {t}: nodes={world.G.number_of_nodes()} "
-              f"edges={world.G.number_of_edges()} tokens={sum(world.tokens.values())}")
-        if world.is_extinct():
-            print("⚠️ Extinction.")
-            break
+    t = 0
+    try:
+        while True:
+            world.step(record_decisions=False)
+            print(f"iteration {t}: nodes={world.G.number_of_nodes()} "
+                  f"edges={world.G.number_of_edges()} tokens={sum(world.tokens.values())}")
+            if world.is_extinct():
+                print("⚠️ Extinction.")
+                break
+            t += 1
+    except KeyboardInterrupt:
+        print(f"\nstopped at iteration {t}")
 
 
 if __name__ == "__main__":

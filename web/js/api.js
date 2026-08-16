@@ -30,7 +30,7 @@ const API = {
   getRun(id)            { return this._request('GET', `/api/runs/${encodeURIComponent(id)}`); },
   createRun(name, config) { return this._request('POST', '/api/runs', { name, config }); },
   deleteRun(id)         { return this._request('DELETE', `/api/runs/${encodeURIComponent(id)}`); },
-  startRun(id, steps)   { return this._request('POST', `/api/runs/${encodeURIComponent(id)}/start`, { steps }); },
+  startRun(id)          { return this._request('POST', `/api/runs/${encodeURIComponent(id)}/start`, {}); },
   stopRun(id)           { return this._request('POST', `/api/runs/${encodeURIComponent(id)}/stop`); },
   getFrame(id, index)   { return this._request('GET', `/api/runs/${encodeURIComponent(id)}/frames/${index}`); },
   getSeries(id)         { return this._request('GET', `/api/runs/${encodeURIComponent(id)}/series`); },

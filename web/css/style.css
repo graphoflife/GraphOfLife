@@ -180,7 +180,6 @@ button.small { padding: 4px 9px; font-size: 12px; }
 }
 
 .run-actions { display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap; align-items: center; }
-.steps-input { width: 78px; }
 
 /* ---- viewer layout ---- */
 .viewer-layout { display: grid; grid-template-columns: 1fr 268px; gap: 12px; align-items: start; }

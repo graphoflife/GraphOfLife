@@ -27,7 +27,6 @@ const RunsView = {
     ['mutation_noise_std', 'mut std'],
     ['mutation_sparsity', 'mut sparse'],
     ['tokens_created_per_phase', 'created/phase'],
-    ['max_steps', 'max iter'],
     ['extinction_threshold', 'extinct <'],
     ['checkpoint_every', 'ckpt every'],
     ['export_every', 'record every'],
@@ -212,25 +211,16 @@ const RunsView = {
       ${this.settingsHtml(cfg)}
       ${run.error ? `<pre class="run-error">${escapeHtml(run.error)}</pre>` : ''}
       <div class="run-actions">
-        <input type="number" class="steps-input" placeholder="steps" min="1"
-               title="How many iterations to run. Blank runs to the configured maximum."
-               ${running ? 'disabled' : ''}>
         <button class="${running ? 'warn' : 'primary'}" data-act="toggle">${actionLabel}</button>
         <button data-act="open">Inspect</button>
         <button class="danger" data-act="delete">Delete</button>
       </div>
     `;
 
-    const stepsInput = el.querySelector('.steps-input');
-
     el.querySelector('[data-act="toggle"]').addEventListener('click', async () => {
       try {
-        if (running) {
-          await API.stopRun(run.id);
-        } else {
-          const steps = parseInt(stepsInput.value, 10);
-          await API.startRun(run.id, Number.isFinite(steps) && steps > 0 ? steps : null);
-        }
+        if (running) await API.stopRun(run.id);
+        else await API.startRun(run.id);
         await this.refresh();
       } catch (err) { alert(err.message); }
     });

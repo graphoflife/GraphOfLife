@@ -72,7 +72,9 @@ class SimConfig:
     mutation_sparsity: float = 0.1
 
     # ---- Run control ----
-    max_steps: int = 10_000
+    # There is no iteration ceiling: a run goes until it is stopped or the
+    # population dies out. How long it is worth running is a judgement made
+    # while watching it, not one that can be guessed when it is created.
     # Below this node count the run is declared extinct and stops.
     extinction_threshold: int = 20
     # Write a resume checkpoint every N iterations. 0 disables checkpointing.
@@ -186,8 +188,6 @@ class SimConfig:
             raise ValueError("mutation_sparsity must be between 0 and 1")
         if self.mutation_noise_std < 0:
             raise ValueError("mutation_noise_std cannot be negative")
-        if self.max_steps < 1:
-            raise ValueError("max_steps must be at least 1")
         if self.export_every < 1:
             raise ValueError("export_every must be at least 1")
         if self.checkpoint_every < 0:

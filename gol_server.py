@@ -20,7 +20,7 @@ API
     POST   /api/runs                  create a run  {name, config}
     GET    /api/runs/<id>             one run's metadata
     DELETE /api/runs/<id>             delete a run and all its data
-    POST   /api/runs/<id>/start       start or resume  {steps?}
+    POST   /api/runs/<id>/start       start or resume
     POST   /api/runs/<id>/stop        ask a running worker to stop
     GET    /api/runs/<id>/frames/<n>  one recorded frame
     GET    /api/runs/<id>/series      per-frame statistics for the whole run
@@ -62,9 +62,8 @@ class Worker:
     reproduce.
     """
 
-    def __init__(self, run_id: str, steps: int | None) -> None:
+    def __init__(self, run_id: str) -> None:
         self.run_id = run_id
-        self.steps = steps
         self.stop_event = threading.Event()
         self.thread = threading.Thread(target=self._run, name=f"gol-{run_id}", daemon=True)
 
@@ -99,11 +98,11 @@ class Worker:
             store.update_meta(run_id, status="running", error=None,
                               iteration=world.iteration, frame_count=frame_cursor)
 
-            budget = self.steps if self.steps and self.steps > 0 else cfg.max_steps
-            completed = 0
             final_status = "idle"
 
-            while completed < budget and world.iteration < cfg.max_steps:
+            # No ceiling and no budget: the run ends when it is stopped or when
+            # the population dies out, and nothing else.
+            while True:
                 if self.stop_event.is_set():
                     final_status = "stopped"
                     break
@@ -115,8 +114,6 @@ class Worker:
                     for frame in frames:
                         store.write_frame(run_id, frame_cursor, frame)
                         frame_cursor += 1
-
-                completed += 1
 
                 if cfg.checkpoint_every and world.iteration % cfg.checkpoint_every == 0:
                     store.save_checkpoint(run_id, world)
@@ -149,12 +146,12 @@ class WorkerPool:
         self._workers: Dict[str, Worker] = {}
         self._lock = threading.Lock()
 
-    def start(self, run_id: str, steps: int | None) -> bool:
+    def start(self, run_id: str) -> bool:
         with self._lock:
             existing = self._workers.get(run_id)
             if existing and existing.alive:
                 return False
-            worker = Worker(run_id, steps)
+            worker = Worker(run_id)
             self._workers[run_id] = worker
         worker.start()
         return True
@@ -309,9 +306,7 @@ class Handler(BaseHTTPRequestHandler):
             run_id = parts[2]
             store.load_meta(run_id)  # 404s if the run is unknown
             body = self._read_json()
-            steps = body.get("steps")
-            steps = int(steps) if steps else None
-            if not POOL.start(run_id, steps):
+            if not POOL.start(run_id):
                 self._error("run is already in progress", 409)
                 return
             self._send_json({"ok": True})
