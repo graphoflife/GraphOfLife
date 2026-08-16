@@ -1,6 +1,9 @@
-Token Curvature still not quite correct, since i want it to correlate with token change, but then i need to calculate the curvature with the graph pre blotto phase for example.
 
 i want to click on a node and only see the approx environment of it
+
+Show Legend for edge colors
+
+Fullscreen mode.
 
 i want to see tokens flowing through the network
 but with differnet settings. maybe just winning token flow, or all token flow, or whatever
@@ -20,3 +23,10 @@ step by step, Obervation, calculating, shifting, rewiring, reproducing, etc. obs
 visualization
 
 k_core alpha steering of visual.
+
+Make neural nets faster by making binary inputs maybe? Teach weight just -1 0 or 1 or whatever. more layers more everything but less bits.
+maybe per token allocation possible again? (makes maybe sense, since many inputs dont need many bits anyway.)
+
+get rid of max iterations field. but replace it with start new simulation if 
+
+Third Diagram with correlating two time curves, One path from start to finish shows how they correlate, and changing color shows start to end of time

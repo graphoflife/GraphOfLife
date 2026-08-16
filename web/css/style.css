@@ -612,3 +612,59 @@ details.control-group > summary:hover h3 { color: var(--text); }
   color: var(--muted);
   font-variant-numeric: tabular-nums;
 }
+
+/* ==========================================================================
+   Fullscreen
+   ==========================================================================
+   The canvas is normally a fixed slab with the statistics and charts beneath
+   it. Filling the screen only helps if the canvas is what grows, so here the
+   column becomes a flex stack and the canvas takes whatever the playbar and
+   the toggles leave. The statistics and charts step aside: they are the two
+   things that would otherwise eat the height that was just gained, and they
+   are a click away again on the way out.
+
+   Both the :fullscreen selector and a class are used. The class is what makes
+   the layout react on browsers that report fullscreen differently, and it is
+   also what lets this be styled at all when the element entering fullscreen
+   is a descendant of the one being matched.
+*/
+.viewer-layout.is-fullscreen {
+  height: 100vh;
+  max-height: 100vh;
+  padding: 10px;
+  background: var(--bg);
+  box-sizing: border-box;
+  align-items: stretch;
+  /* Narrow screens drop this to a single column, which puts the settings
+     below the canvas and past the bottom of the screen. Scrolling beats
+     clipping them out of reach. */
+  overflow: auto;
+}
+
+.viewer-layout.is-fullscreen .canvas-column {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;          /* or the canvas refuses to shrink inside the grid */
+}
+
+.viewer-layout.is-fullscreen .canvas-wrap {
+  height: auto;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.viewer-layout.is-fullscreen .stats-groups,
+.viewer-layout.is-fullscreen .charts {
+  display: none;
+}
+
+.viewer-layout.is-fullscreen .controls {
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+/* Backdrop, for the gap around the padded layout. */
+.viewer-layout:fullscreen { background: var(--bg); }
+.viewer-layout:-webkit-full-screen { background: var(--bg); }
+
+#btnFullscreen[aria-pressed="true"] { background: var(--accent-dim); color: #fff; }

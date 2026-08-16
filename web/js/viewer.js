@@ -170,6 +170,14 @@ const Viewer = {
     document.getElementById('btnReheat').addEventListener('click', () => this.layout.reheat(1));
     document.getElementById('btnRelayout').addEventListener('click', () => this.layout.scatter());
     document.getElementById('btnFit').addEventListener('click', () => this.setAutoFit(!this.settings.autoFit));
+    document.getElementById('btnFullscreen').addEventListener('click', () => this.toggleFullscreen());
+
+    // The browser owns this state — Esc and the window chrome can change it
+    // without going through the button — so the button follows the event
+    // rather than the other way round.
+    for (const event of ['fullscreenchange', 'webkitfullscreenchange']) {
+      document.addEventListener(event, () => this.syncFullscreen());
+    }
     document.getElementById('btnReloadFrames').addEventListener('click', () => this.reload());
 
     document.getElementById('runPicker').addEventListener('change', e => {
@@ -304,10 +312,66 @@ const Viewer = {
         case 'Home':       this.goToPosition(0); break;
         case 'End':        this.goToPosition(this.visible.length - 1); break;
         case ' ':          this.togglePlay(); break;
+        case 'f': case 'F': this.toggleFullscreen(); break;
         default: return;
       }
       e.preventDefault();
     });
+  },
+
+  // ------------------------------------------------------------------
+  // Fullscreen
+  // ------------------------------------------------------------------
+
+  /** The element currently filling the screen, whatever the browser calls it. */
+  get fullscreenElement() {
+    return document.fullscreenElement || document.webkitFullscreenElement || null;
+  },
+
+  /**
+   * Fill the screen with the viewer, or give it back.
+   *
+   * The whole two-pane layout goes fullscreen rather than the canvas alone, so
+   * the settings and the playbar come with it — a graph you cannot recolour or
+   * step through is a screenshot, not a view.
+   */
+  toggleFullscreen() {
+    const target = document.getElementById('viewerLayout');
+    if (!target) return;
+
+    if (this.fullscreenElement) {
+      const exit = document.exitFullscreen || document.webkitExitFullscreen;
+      if (exit) exit.call(document);
+      return;
+    }
+
+    const request = target.requestFullscreen || target.webkitRequestFullscreen;
+    if (!request) {
+      this.emptyEl.textContent = 'This browser will not allow fullscreen here.';
+      return;
+    }
+    // Refused when not driven by a real click, and on some embedded views at
+    // any time; there is nothing to recover, so just leave the view as it was.
+    Promise.resolve(request.call(target)).catch(() => {});
+  },
+
+  /** Follow the browser's idea of fullscreen, however it was changed. */
+  syncFullscreen() {
+    const target = document.getElementById('viewerLayout');
+    const on = this.fullscreenElement === target;
+
+    target.classList.toggle('is-fullscreen', on);
+    const button = document.getElementById('btnFullscreen');
+    if (button) {
+      button.setAttribute('aria-pressed', String(on));
+      button.textContent = on ? 'Exit fullscreen' : 'Fullscreen';
+    }
+
+    // The canvas has just changed size by a lot. The ResizeObserver catches
+    // this on its own, but not before the next frame is drawn, and refitting
+    // here keeps the graph from being briefly framed for the old box.
+    this.resize();
+    if (this.settings.autoFit) this.renderer.fitToContent(this.layout, undefined, true);
   },
 
   /**
