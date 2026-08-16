@@ -34,6 +34,39 @@ const RunsView = {
     ['seed', 'seed']
   ],
 
+  /**
+   * Say where the simulation is running.
+   *
+   * With a server this is one quiet line. Without one the page has to fetch a
+   * Python runtime, numpy and networkx before anything can happen, which takes
+   * several seconds on a first visit and looks like a hung page if nothing
+   * says otherwise.
+   */
+  showBackend(progress) {
+    const el = document.getElementById('backendNotice');
+    if (!el) return;
+    el.classList.remove('hidden');
+
+    if (!API.runsInBrowser) {
+      el.innerHTML = 'Running against your local <b>gol_server.py</b>. '
+        + 'Runs are written to disk and survive a reload.';
+      return;
+    }
+
+    const stage = (progress && progress.stage) || 'loading';
+    if (stage === 'ready') {
+      el.innerHTML = '<b>Running in your browser.</b> The same Python engine, '
+        + 'through Pyodide \u2014 nothing is sent anywhere and no account is needed. '
+        + 'Runs live in this page: a reload starts you over. '
+        + 'Expect a few thousand agents before memory gets tight; '
+        + 'for larger work clone the repository and run it locally.';
+      return;
+    }
+    const detail = (progress && progress.detail) || 'starting';
+    el.innerHTML = `<span class="spin"></span>Setting up the engine in your browser \u2014 ${detail}. `
+      + 'This happens once, and the download is cached afterwards.';
+  },
+
   async init() {
     this.form = document.getElementById('newRunForm');
     this.listEl = document.getElementById('runList');
@@ -47,11 +80,20 @@ const RunsView = {
       input.addEventListener('input', () => this.updateDerived());
     }
 
+    // Settle on a backend before anything is asked of it, so the notice is
+    // truthful from the first paint rather than after the first failure.
+    await API.choose();
+    API.onProgress = (progress) => this.showBackend(progress);
+    this.showBackend(API.progress);
+
     try {
       this.defaults = await API.defaults();
       this.applyDefaults();
+      this.showBackend({ stage: 'ready' });
     } catch (err) {
-      this.errorEl.textContent = `Could not reach the server: ${err.message}`;
+      this.errorEl.textContent = API.runsInBrowser
+        ? `The in-browser engine could not start: ${err.message}`
+        : `Could not reach the server: ${err.message}`;
     }
     await this.refresh();
   },

@@ -703,3 +703,31 @@ details.control-group > summary:hover h3 { color: var(--text); }
   .charts .chart-wide canvas { height: 240px; }
 }
 .chart-wide .chart-metric { max-width: 240px; }
+
+/* Says where the simulation is running, and how far along it is getting
+   there. On a static host the first visit spends several seconds fetching a
+   Python runtime, and silence for that long reads as a broken page. */
+.backend-notice {
+  margin: 0 0 12px;
+  padding: 9px 12px;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
+  background: var(--panel);
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.55;
+}
+.backend-notice.hidden { display: none; }
+.backend-notice b { color: var(--text); font-weight: 600; }
+.backend-notice .spin {
+  display: inline-block;
+  width: 9px; height: 9px;
+  margin-right: 6px;
+  border: 2px solid var(--accent);
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: notice-spin 0.8s linear infinite;
+  vertical-align: -1px;
+}
+@keyframes notice-spin { to { transform: rotate(360deg); } }

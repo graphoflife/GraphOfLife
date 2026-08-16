@@ -4,3 +4,6 @@ GraphOfLifeRuns/
 __pycache__/
 *.pyc
 .venv/
+
+# Assembled by build_site.sh; rebuilt on every deploy.
+_site/

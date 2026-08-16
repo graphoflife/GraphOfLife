@@ -1,0 +1,54 @@
+name: Publish the site
+
+# The site is web/ with the Python engine copied in beside it. build_site.sh
+# does that assembly, and it is the same script used to check the site locally
+# before pushing, so what is served here cannot drift from what was tested.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deployment at a time. Queued rather than cancelled, so a push during a
+# deploy still ends up published rather than silently skipped.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Assemble the site
+        run: |
+          chmod +x build_site.sh
+          ./build_site.sh
+
+      - name: Check the engine actually made it
+        run: |
+          for f in py/GraphOfLifeSimple.py py/gol_config.py py/gol_series.py \
+                   py/gol_browser.py py/gol_store.py js/sim-worker.js index.html; do
+            test -s "_site/$f" || { echo "missing or empty: $f"; exit 1; }
+          done
+          echo "site contains $(find _site -type f | wc -l) files"
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
