@@ -188,7 +188,15 @@ const Viewer = {
 
     const radius = document.getElementById('focusRadius');
     radius.addEventListener('change', () => {
-      const value = Math.max(1, Math.min(12, Math.round(Number(radius.value) || 1)));
+      // 99 rather than a tighter number because these graphs are stringy: on a
+      // 31,567-node frame, twelve steps from a hub reached only 2,587 nodes,
+      // and from a median node six steps reached 54. Their diameter measures
+      // in the sixties to low hundreds, so a small ceiling cuts the view off
+      // long before the neighbourhood stops being worth looking at. Nothing is
+      // spent on a radius that overshoots: the search stops when it runs out
+      // of new nodes, so asking for more than the graph has costs the same as
+      // asking for exactly the graph.
+      const value = Math.max(1, Math.min(99, Math.round(Number(radius.value) || 1)));
       radius.value = value;
       this.settings.focusRadius = value;
       if (this.focusId !== null) this.refocus(true);
