@@ -57,14 +57,30 @@ const RunsView = {
     if (stage === 'ready') {
       el.innerHTML = '<b>Running in your browser.</b> The same Python engine, '
         + 'through Pyodide \u2014 nothing is sent anywhere and no account is needed. '
-        + 'Runs live in this page: a reload starts you over. '
-        + 'Expect a few thousand agents before memory gets tight; '
+        + 'Runs are saved in this browser and survive a reload'
+        + '<span id="storageUsage"></span>. '
+        + 'Expect a few thousand agents before things get slow; '
         + 'for larger work clone the repository and run it locally.';
+      this.showStorage();
       return;
     }
     const detail = (progress && progress.detail) || 'starting';
     el.innerHTML = `<span class="spin"></span>Setting up the engine in your browser \u2014 ${detail}. `
       + 'This happens once, and the download is cached afterwards.';
+  },
+
+  /** How much has been stored, once the browser will say. */
+  async showStorage() {
+    if (!API.runsInBrowser) return;
+    try {
+      const info = await API.storage();
+      const el = document.getElementById('storageUsage');
+      if (!el || !info || !info.usage) return;
+      el.textContent = ` \u2014 ${formatBytes(info.usage)} used so far`
+        + (info.persisted ? '' : ', though the browser may clear it if space runs short');
+    } catch (err) {
+      /* an unavailable estimate is not worth saying anything about */
+    }
   },
 
   async init() {

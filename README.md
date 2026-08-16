@@ -155,10 +155,16 @@ seed, the browser costs about **1.3×** at the default brain size.
 
 Two things are worth knowing about the browser version:
 
-**Runs live in the page.** Frames carry the whole topology, so a few thousand
-agents over a few thousand iterations is already hundreds of megabytes. Keeping
-them past a reload would mean deciding what to throw away, and being plainly
-temporary beats being quietly lossy.
+**Runs are saved in your browser.** Frames go into IndexedDB one at a time as
+they are produced, so a run that is still going is already saved and closing
+the tab loses only the iteration in flight. Reopening the page finds your runs
+where you left them, ready to inspect. If checkpointing is on — it is by
+default — a run can also be carried on from where it stopped, because the
+checkpoint restores the agents' brains and the random stream along with them.
+
+Nothing leaves your machine. Clearing your browser's site data removes it, and
+a browser short of disk space may evict it, so the page asks for persistent
+storage and tells you how much has been used.
 
 **A seed does not reproduce across machines.** The random number stream is
 bit-identical everywhere — verified. Matrix multiplication is not: native
@@ -212,7 +218,8 @@ gol_server.py          the local server (standard library only)
 build_site.sh          assembles the static site into _site/
 web/                   the interface: viewer, renderer, layout, charts
   js/sim-worker.js     the browser backend — Pyodide, running the engine above
-  py/gol_browser.py    run management without a disk
+  js/runstore.js       runs, frames and checkpoints in IndexedDB
+  py/gol_browser.py    live worlds, advanced a slice at a time
 ```
 
 The original four-year research codebase this grew out of is preserved on the

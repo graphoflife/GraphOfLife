@@ -111,7 +111,8 @@ const BrowserBackend = {
   stopRun(id)           { return this._send('stop', { runId: id }); },
   getFrame(id, index)   { return this._send('frame', { runId: id, index }); },
   getSeries(id)         { return this._send('series', { runId: id }); },
-  getSeriesProgress(id) { return this._send('seriesProgress', { runId: id }); }
+  getSeriesProgress(id) { return this._send('seriesProgress', { runId: id }); },
+  storage()             { return this._send('storage'); }
 };
 
 const API = {
@@ -153,7 +154,10 @@ const API = {
   stopRun(id)             { return this._call('stopRun', id); },
   getFrame(id, index)     { return this._call('getFrame', id, index); },
   getSeries(id)           { return this._call('getSeries', id); },
-  getSeriesProgress(id)   { return this._call('getSeriesProgress', id); }
+  getSeriesProgress(id)   { return this._call('getSeriesProgress', id); },
+  // Only the in-browser backend stores anything locally; with a server the
+  // question has no meaning and the notice does not ask it.
+  storage()               { return BrowserBackend.storage(); }
 };
 
 /** Human-readable byte size. */

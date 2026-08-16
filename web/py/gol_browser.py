@@ -1,190 +1,137 @@
 """
-gol_browser.py -- the run manager, for when there is no server.
+gol_browser.py -- the worlds, for when there is no server.
 
-The engine is the same file that runs locally; nothing about the simulation
-changes here. What changes is everything around it. There is no disk to write
-frames to and no worker thread to run them, so runs live in memory and are
-advanced a slice at a time by whoever calls `step`, which in the browser is a
-Web Worker between message deliveries. That is what keeps a long run
-interruptible: the loop belongs to the caller, not to this module.
+The engine is the same file the desktop version runs; nothing about the
+simulation changes here. What changes is what surrounds it. There is no disk
+and no worker thread, so this module holds live worlds and advances them a
+slice at a time, and the caller — a Web Worker — decides when to stop and where
+the results go.
 
-Runs last as long as the page does. Frames carry the whole topology, and a few
-thousand agents over a few thousand iterations is already hundreds of
-megabytes, so keeping them past a reload would mean deciding what to throw
-away. Better to be plainly temporary than quietly lossy.
+It deliberately does not keep frames. Frames are handed back the moment they
+are produced and stored in IndexedDB by the caller, which is what lets a run
+outlive the page and what stops the interpreter's memory growing without bound
+over a long run. The same goes for run metadata: this module knows about worlds
+that are currently in memory, and nothing about runs that merely exist.
 """
 
 from __future__ import annotations
 
-import time
+import io
 from typing import Any, Dict, List
+
+import numpy as np
 
 import gol_series
 from gol_config import SimConfig
-from GraphOfLifeSimple import new_world
+from GraphOfLifeSimple import GraphOfLife, new_world
 
 
-class Runs:
-    """Every run this page knows about."""
+class Worlds:
+    """Every world currently loaded, by run id."""
 
     def __init__(self) -> None:
-        self._runs: Dict[str, Dict[str, Any]] = {}
-        self._counter = 0
+        self._worlds: Dict[str, Dict[str, Any]] = {}
 
-    # ---- identity --------------------------------------------------------
-
-    def _next_id(self) -> str:
-        """Same shape the server uses, so a name reads the same either way."""
-        self._counter += 1
-        return f"GOL_{time.strftime('%y_%m_%d')}_n{self._counter:03d}"
-
-    # ---- the shape the interface expects ---------------------------------
-
-    def _meta(self, run: Dict[str, Any]) -> Dict[str, Any]:
-        frames = run["frames"]
-        return {
-            "id": run["id"],
-            "name": run["name"],
-            "created_at": run["created_at"],
-            "status": run["status"],
-            "iteration": run["world"].iteration,
-            "frame_count": len(frames),
-            # No checkpoint file exists, but a live run can always carry on
-            # from where it is, which is what the button is really asking.
-            "checkpoint_iteration": run["world"].iteration if frames else None,
-            "has_checkpoint": bool(frames),
-            "running": run["status"] == "running",
-            "error": run["error"],
-            "config": run["config"].to_dict(),
-            "size_bytes": run["bytes"],
-        }
-
-    # ---- managing runs ---------------------------------------------------
+    # ---- settings --------------------------------------------------------
 
     def defaults(self) -> Dict[str, Any]:
         return {"config": SimConfig().to_dict()}
 
-    def create(self, name: str, config: Dict[str, Any]) -> Dict[str, Any]:
+    def normalise(self, config: Dict[str, Any]) -> Dict[str, Any]:
+        """Validate a configuration and fill in what it left out."""
+        return SimConfig.from_dict(config or {}).to_dict()
+
+    # ---- getting a world ready -------------------------------------------
+
+    def create(self, run_id: str, config: Dict[str, Any]) -> Dict[str, Any]:
         cfg = SimConfig.from_dict(config or {})
-        run_id = self._next_id()
-        self._runs[run_id] = {
-            "id": run_id,
-            "name": (name or "").strip() or run_id,
-            "created_at": time.time(),
-            "status": "idle",
-            "error": None,
-            "config": cfg,
-            "world": new_world(cfg),
-            "frames": [],
-            "bytes": 0,
-            "series": None,
-        }
-        return self._meta(self._runs[run_id])
+        self._worlds[run_id] = {"cfg": cfg, "world": new_world(cfg)}
+        return {"config": cfg.to_dict(), "iteration": 0}
 
-    def list(self) -> List[Dict[str, Any]]:
-        return [self._meta(r) for r in
-                sorted(self._runs.values(), key=lambda r: r["created_at"], reverse=True)]
+    def restore(self, run_id: str, config: Dict[str, Any], path: str) -> Dict[str, Any]:
+        """
+        Rebuild a world from a checkpoint written earlier.
 
-    def get(self, run_id: str) -> Dict[str, Any]:
-        return self._meta(self._require(run_id))
+        The checkpoint carries the random number generator's state as well as
+        the agents, so a resumed run continues the same stream rather than
+        starting a new one that merely looks similar.
+        """
+        cfg = SimConfig.from_dict(config or {})
+        with np.load(path) as blob:
+            world = GraphOfLife.from_checkpoint(blob, cfg)
+        self._worlds[run_id] = {"cfg": cfg, "world": world}
+        return {"config": cfg.to_dict(), "iteration": world.iteration}
 
-    def delete(self, run_id: str) -> None:
-        self._runs.pop(run_id, None)
+    def has(self, run_id: str) -> bool:
+        return run_id in self._worlds
 
-    def set_status(self, run_id: str, status: str) -> Dict[str, Any]:
-        run = self._require(run_id)
-        run["status"] = status
-        return self._meta(run)
+    def drop(self, run_id: str) -> None:
+        self._worlds.pop(run_id, None)
 
     # ---- advancing -------------------------------------------------------
 
     def step(self, run_id: str, iterations: int = 1) -> Dict[str, Any]:
         """
-        Advance a few iterations and keep whatever they recorded.
+        Advance a few iterations and hand back whatever they recorded.
 
         Returns as soon as the slice is done so the caller can look at its
-        message queue. Extinction stops the run here rather than leaving the
-        caller to notice, since carrying on would only produce empty frames.
+        message queue; that is what makes a run interruptible. Frames are
+        returned rather than kept, because keeping them is the caller's job.
         """
-        run = self._require(run_id)
-        cfg = run["config"]
-        world = run["world"]
+        entry = self._require(run_id)
+        cfg, world = entry["cfg"], entry["world"]
+        produced: List[Dict[str, Any]] = []
 
         for _ in range(max(1, iterations)):
             record = (world.iteration % cfg.export_every == 0)
             frames = world.step(record_decisions=cfg.export_decisions and record)
-
             if record:
-                for frame in frames:
-                    run["frames"].append(frame)
-                    # Rough, and deliberately so: it is for showing the reader
-                    # how much of their memory a run is using, not accounting.
-                    run["bytes"] += 120 * len(frame.get("ids", ())) + 40 * len(frame.get("edges", ()))
-
+                produced.extend(frames)
             if world.is_extinct():
-                run["status"] = "extinct"
-                break
+                return {"iteration": world.iteration, "extinct": True, "frames": produced}
 
-        run["series"] = None   # the history grew; whatever was summarised is stale
-        return self._meta(run)
+        return {"iteration": world.iteration, "extinct": False, "frames": produced}
 
-    # ---- reading ---------------------------------------------------------
+    def checkpoint(self, run_id: str, path: str) -> int:
+        """Write a resume point, and say how large it turned out."""
+        world = self._require(run_id)["world"]
+        buffer = io.BytesIO()
+        np.savez_compressed(buffer, **world.to_checkpoint())
+        data = buffer.getvalue()
+        with open(path, "wb") as handle:
+            handle.write(data)
+        return len(data)
 
-    def frame(self, run_id: str, index: int) -> Dict[str, Any]:
-        frames = self._require(run_id)["frames"]
-        if not 0 <= index < len(frames):
-            raise KeyError(f"frame {index} does not exist")
-        return frames[index]
+    # ---- statistics ------------------------------------------------------
 
-    def series(self, run_id: str) -> Dict[str, Any]:
+    def stats(self, frames: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         """
-        Per-frame statistics, the same ones the server computes.
+        Reduce frames to the scalars the charts plot.
 
-        Sampled the same way too: a run of many thousand iterations is reduced
-        to at most gol_series.MAX_SAMPLED_ITERATIONS of them, since a chart a
-        few hundred pixels wide cannot show more and the structural statistics
-        are much too slow to compute for every frame.
+        The very same gol_series the server uses. Frames arrive from storage in
+        order, so each one can still be handed its predecessor for the runs
+        that need a delta reconstructed.
         """
-        run = self._require(run_id)
-        if run["series"] is not None:
-            return run["series"]
-
-        frames = run["frames"]
-        total_iterations = max(0, len(frames) // 2)
-        stride = gol_series._sample_stride(total_iterations)
-
         rows: List[Dict[str, Any]] = []
         previous = None
-        for index, frame in enumerate(frames):
-            if (index // 2) % stride:
-                continue
+        for frame in frames:
             rows.append(gol_series.frame_stats(frame, previous))
             previous = frame
+        return rows
 
-        if not rows:
-            payload = {"count": 0, "keys": [], "series": {}, "stride": stride,
-                       "sampled": False, "nodeCountKeys": list(gol_series.NODE_COUNT_KEYS)}
-        else:
-            keys = list(rows[0].keys())
-            payload = {
-                "count": len(rows),
-                "keys": keys,
-                "series": {k: [row.get(k) for row in rows] for k in keys},
-                "stride": stride,
-                "sampled": stride > 1,
-                "totalIterations": total_iterations,
-                "nodeCountKeys": list(gol_series.NODE_COUNT_KEYS),
-            }
-        run["series"] = payload
-        return payload
+    def sample_stride(self, total_iterations: int) -> int:
+        return gol_series._sample_stride(total_iterations)
+
+    def node_count_keys(self) -> List[str]:
+        return list(gol_series.NODE_COUNT_KEYS)
 
     # ---- helpers ---------------------------------------------------------
 
     def _require(self, run_id: str) -> Dict[str, Any]:
-        run = self._runs.get(run_id)
-        if run is None:
-            raise KeyError(f"no run called {run_id}")
-        return run
+        entry = self._worlds.get(run_id)
+        if entry is None:
+            raise KeyError(f"no world loaded for {run_id}")
+        return entry
 
 
-RUNS = Runs()
+WORLDS = Worlds()

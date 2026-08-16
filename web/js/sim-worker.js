@@ -18,6 +18,8 @@
  * reason gol_browser.step takes a count and returns.
  */
 
+importScripts('runstore.js');
+
 const PYODIDE = 'https://cdn.jsdelivr.net/pyodide/v0.26.4/full/';
 
 // Resolved against this worker's own location, which is js/, so the step up
@@ -42,8 +44,6 @@ let progress = { stage: 'idle', detail: '', done: 0, total: 0 };
 
 /** How many iterations to run before looking at the message queue again. */
 const SLICE = 1;
-
-const running = new Set();
 
 function report(stage, detail, done = 0, total = 0) {
   progress = { stage, detail, done, total };
@@ -125,69 +125,228 @@ _json.dumps(_finite(${target}(*_json.loads(_call_args))),
   return JSON.parse(json);
 }
 
-/** Advance one run by a slice, then hand control back. */
+/*
+ * Runs are metadata here and frames are in IndexedDB; Python only holds the
+ * live worlds. That split is what lets a run survive a reload: reopening the
+ * page reads the run list and its frames straight back out of storage, with
+ * the interpreter uninvolved until something needs to be advanced again.
+ */
+
+const running = new Set();
+
+/** Metadata as the interface expects it. */
+function meta(run) {
+  return {
+    id: run.id,
+    name: run.name,
+    created_at: run.created_at,
+    status: run.status,
+    iteration: run.iteration,
+    frame_count: run.frame_count,
+    checkpoint_iteration: run.checkpoint_iteration,
+    has_checkpoint: run.checkpoint_iteration !== null,
+    running: running.has(run.id),
+    error: run.error || null,
+    config: run.config,
+    size_bytes: run.size_bytes || 0
+  };
+}
+
+async function loadRun(runId) {
+  const run = await RunStore.getRun(runId);
+  if (!run) throw new Error(`no run called ${runId}`);
+  return run;
+}
+
+/**
+ * Make sure Python has a world for this run.
+ *
+ * After a reload there is metadata and there are frames, but no world — the
+ * interpreter started empty. A checkpoint is what bridges that, and without
+ * one the run can still be read, just not continued.
+ */
+async function ensureWorld(run) {
+  if (call('gol_browser.WORLDS.has', [run.id])) return;
+
+  const bytes = await RunStore.getCheckpoint(run.id);
+  if (!bytes) {
+    throw new Error(
+      'this run has no resume point, so it can be inspected but not continued'
+    );
+  }
+  const path = `/home/pyodide/${run.id}.npz`;
+  pyodide.FS.writeFile(path, new Uint8Array(bytes));
+  call('gol_browser.WORLDS.restore', [run.id, run.config, path]);
+  try { pyodide.FS.unlink(path); } catch (err) { /* already gone */ }
+}
+
+async function saveCheckpoint(run) {
+  const path = `/home/pyodide/${run.id}.npz`;
+  call('gol_browser.WORLDS.checkpoint', [run.id, path]);
+  const bytes = pyodide.FS.readFile(path);
+  try { pyodide.FS.unlink(path); } catch (err) { /* already gone */ }
+  await RunStore.putCheckpoint(run.id, bytes.buffer);
+  run.checkpoint_iteration = run.iteration;
+}
+
+/** Advance one run by a slice, store what it produced, then hand back. */
 async function pump(runId) {
   if (!running.has(runId)) return;
 
-  let meta;
+  let run;
   try {
-    meta = call('gol_browser.RUNS.step', [runId, SLICE]);
+    run = await loadRun(runId);
+    const slice = call('gol_browser.WORLDS.step', [runId, SLICE]);
+
+    if (slice.frames.length) {
+      await RunStore.putFrames(runId, run.frame_count, slice.frames);
+      run.frame_count += slice.frames.length;
+      for (const frame of slice.frames) {
+        // Rough, and deliberately so: it is for telling the reader how much of
+        // their disk a run is using, not for accounting.
+        run.size_bytes += 120 * frame.ids.length + 40 * frame.edges.length;
+      }
+    }
+    run.iteration = slice.iteration;
+
+    const every = run.config.checkpoint_every || 0;
+    if (every && run.iteration % every === 0) await saveCheckpoint(run);
+
+    if (slice.extinct) {
+      running.delete(runId);
+      run.status = 'extinct';
+      if (every) await saveCheckpoint(run);
+    }
+    await RunStore.putRun(run);
   } catch (err) {
     running.delete(runId);
+    if (run) {
+      run.status = 'error';
+      run.error = String(err && err.message ? err.message : err).slice(0, 400);
+      await RunStore.putRun(run).catch(() => {});
+    }
     self.postMessage({ type: 'runError', runId, message: String(err).slice(0, 400) });
     return;
   }
 
-  if (meta.status === 'extinct') {
-    running.delete(runId);
-    self.postMessage({ type: 'runStopped', runId, meta });
-    return;
-  }
-
+  if (!running.has(runId)) return;
   // Yielding to the queue between slices is what makes stopping possible.
   setTimeout(() => pump(runId), 0);
 }
 
+let counter = 0;
+
 const handlers = {
   async defaults() {
-    return call('gol_browser.RUNS.defaults');
+    return call('gol_browser.WORLDS.defaults');
   },
+
   async list() {
-    return { runs: call('gol_browser.RUNS.list') };
+    const runs = await RunStore.listRuns();
+    return { runs: runs.map(meta) };
   },
+
   async get({ runId }) {
-    return call('gol_browser.RUNS.get', [runId]);
+    return meta(await loadRun(runId));
   },
+
   async create({ name, config }) {
-    return call('gol_browser.RUNS.create', [name || '', config || {}]);
+    const stamp = new Date();
+    const pad = (n) => String(n).padStart(2, '0');
+    const day = `${String(stamp.getFullYear()).slice(2)}_${pad(stamp.getMonth() + 1)}_${pad(stamp.getDate())}`;
+
+    // Distinct within the day even across reloads, since the counter starts
+    // over but the stored runs do not.
+    const existing = await RunStore.listRuns();
+    const taken = new Set(existing.map(r => r.id));
+    let id;
+    do { id = `GOL_${day}_n${String(++counter).padStart(3, '0')}`; } while (taken.has(id));
+
+    const prepared = call('gol_browser.WORLDS.create', [id, config || {}]);
+    const run = {
+      id,
+      name: (name || '').trim() || id,
+      created_at: Date.now() / 1000,
+      status: 'idle',
+      iteration: 0,
+      frame_count: 0,
+      checkpoint_iteration: null,
+      error: null,
+      config: prepared.config,
+      size_bytes: 0
+    };
+    await RunStore.putRun(run);
+    return meta(run);
   },
+
   async remove({ runId }) {
     running.delete(runId);
-    call('gol_browser.RUNS.delete', [runId]);
+    call('gol_browser.WORLDS.drop', [runId]);
+    await RunStore.deleteRun(runId);
     return { ok: true };
   },
+
   async start({ runId }) {
-    call('gol_browser.RUNS.set_status', [runId, 'running']);
+    const run = await loadRun(runId);
+    await ensureWorld(run);
+    run.status = 'running';
+    run.error = null;
+    await RunStore.putRun(run);
     running.add(runId);
     pump(runId);
     return { ok: true };
   },
+
   async stop({ runId }) {
     running.delete(runId);
-    call('gol_browser.RUNS.set_status', [runId, 'stopped']);
+    const run = await loadRun(runId);
+    run.status = 'stopped';
+    // A stop is the likeliest moment for someone to close the tab, so this is
+    // where it is worth paying for a resume point.
+    if (run.config.checkpoint_every) {
+      try { await saveCheckpoint(run); } catch (err) { /* nothing to save yet */ }
+    }
+    await RunStore.putRun(run);
     return { ok: true };
   },
+
   async frame({ runId, index }) {
-    return call('gol_browser.RUNS.frame', [runId, Number(index)]);
+    return RunStore.getFrame(runId, Number(index));
   },
+
   async series({ runId }) {
-    report('series', 'summarising frames');
-    const payload = call('gol_browser.RUNS.series', [runId]);
+    const run = await loadRun(runId);
+    const totalIterations = Math.max(0, Math.floor(run.frame_count / 2));
+    const stride = call('gol_browser.WORLDS.sample_stride', [totalIterations]);
+
+    report('series', 'reading frames', 0, 0);
+    const frames = await RunStore.getFramesStrided(runId, stride);
+
+    report('series', 'summarising', 0, frames.length);
+    const rows = frames.length ? call('gol_browser.WORLDS.stats', [frames]) : [];
     report('ready', 'ready');
-    return payload;
+
+    if (!rows.length) {
+      return { count: 0, keys: [], series: {}, stride, sampled: false,
+               nodeCountKeys: call('gol_browser.WORLDS.node_count_keys') };
+    }
+    const keys = Object.keys(rows[0]);
+    const series = {};
+    for (const key of keys) series[key] = rows.map(row => row[key]);
+    return {
+      count: rows.length, keys, series, stride, sampled: stride > 1,
+      totalIterations,
+      nodeCountKeys: call('gol_browser.WORLDS.node_count_keys')
+    };
   },
+
   async seriesProgress() {
     return { building: progress.stage === 'series', done: progress.done, total: progress.total };
+  },
+
+  async storage() {
+    const usage = await RunStore.usage();
+    return { persisted: await RunStore.requestPersistence(), ...(usage || {}) };
   }
 };
 
