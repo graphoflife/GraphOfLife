@@ -788,6 +788,62 @@ function _prepareCanvas(canvas) {
   return { ctx, w: rect.width, h: rect.height };
 }
 
+/**
+ * Bin edges that no integer can fall between.
+ *
+ * A log axis spreads small numbers apart and squeezes large ones together.
+ * Tokens and degrees are whole numbers, so near the origin two neighbouring
+ * values can sit more than a bin apart — with thirty-four bins over 1 to 1200,
+ * the step from one token to two is 2.15 bins wide. The bin in between cannot
+ * receive anything, because there is no such thing as one and a half tokens,
+ * and it shows up as a blank column running through the plot.
+ *
+ * So: start from evenly spaced edges, then drop any edge that would leave a
+ * bin containing no whole number, merging it into the one after. Where values
+ * are dense the edges are untouched and the resolution is unchanged; near the
+ * origin a few bins come out wider, which is exactly the width the data
+ * actually has there.
+ *
+ * Only for whole numbers. Anything continuous can land anywhere, so every bin
+ * is reachable and the even spacing is left alone.
+ */
+function _binEdges(mapped, [lo, hi], bins, { integral, unmap }) {
+  const even = [];
+  for (let i = 0; i <= bins; i++) even.push(lo + (hi - lo) * (i / bins));
+  if (!integral) return even;
+
+  const holdsWholeNumber = (from, to) => {
+    const a = unmap(from), b = unmap(to);
+    // A whole number lies in [a, b) if rounding a up gets there before b does.
+    return Math.floor(b - 1e-9) >= Math.ceil(a - 1e-9);
+  };
+
+  const kept = [even[0]];
+  for (let i = 1; i < bins; i++) {
+    if (holdsWholeNumber(kept[kept.length - 1], even[i])) kept.push(even[i]);
+  }
+  kept.push(even[bins]);   // the axis has to end where the data does
+  return kept;
+}
+
+/** Whether every value is a whole number, so bins between them are impossible. */
+function _allWholeNumbers(values) {
+  for (const v of values) {
+    if (!Number.isFinite(v) || !Number.isInteger(v)) return false;
+  }
+  return true;
+}
+
+/** Which bin a value falls in, given edges that are not evenly spaced. */
+function _binOf(value, edges) {
+  let low = 0, high = edges.length - 1;
+  while (low < high - 1) {
+    const mid = (low + high) >> 1;
+    if (value < edges[mid]) high = mid; else low = mid;
+  }
+  return Math.min(low, edges.length - 2);
+}
+
 function _noData(ctx, w, h, message = 'no data') {
   ctx.fillStyle = '#5b6b7c';
   ctx.font = '11px system-ui, sans-serif';
@@ -825,15 +881,22 @@ function drawHistogram(canvas, values, options = {}) {
   if (!Number.isFinite(lo)) { _noData(ctx, w, h); return; }
   if (hi - lo < 1e-9) hi = lo + 1;
 
-  const counts = new Array(bins).fill(0);
-  for (const v of mapped) {
-    counts[Math.min(bins - 1, Math.floor((v - lo) / (hi - lo) * bins))]++;
-  }
+  // The same reason the heatmap needs them: on a log axis, whole numbers near
+  // the origin are further apart than one bin, and the bins between them can
+  // never be filled.
+  const edges = _binEdges(mapped, [lo, hi], bins, {
+    integral: _allWholeNumbers(values),
+    unmap: v => (logScale ? Metrics.undoLog(v, signed) : v)
+  });
+  const count = edges.length - 1;
+
+  const counts = new Array(count).fill(0);
+  for (const v of mapped) counts[_binOf(v, edges)]++;
   const peak = Math.max(...counts) || 1;
 
   const padBottom = 16, padTop = 6;
   const plotH = h - padBottom - padTop;
-  const barW = w / bins;
+  const at = v => (v - lo) / (hi - lo) * w;
 
   // A log count axis lets a long tail of rare values stay visible next to a
   // spike that would otherwise flatten everything else to nothing.
@@ -841,10 +904,15 @@ function drawHistogram(canvas, values, options = {}) {
     ? (c > 0 ? Math.log1p(c) / Math.log1p(peak) : 0)
     : c / peak;
 
-  for (let i = 0; i < bins; i++) {
+  for (let i = 0; i < count; i++) {
     const barH = barFraction(counts[i]) * plotH;
-    ctx.fillStyle = colormapCss(colormap, i / (bins - 1), 0.92, reverse);
-    ctx.fillRect(i * barW, padTop + plotH - barH, Math.max(1, barW - 1), barH);
+    // Coloured by where the bar sits on the axis rather than by its index, so
+    // a merged wider bin keeps the colour its position deserves.
+    const left = at(edges[i]), right = at(edges[i + 1]);
+    const shade = count > 1 ? (left / Math.max(1, w)) : 0.5;
+    ctx.fillStyle = colormapCss(colormap, Math.min(1, shade), 0.92, reverse);
+    ctx.fillRect(left, padTop + plotH - barH,
+                 Math.max(1, right - left - 1), barH);
   }
 
   const back = v => logScale ? Metrics.undoLog(v, signed) : v;
@@ -908,11 +976,20 @@ function drawHeatmap(canvas, xs, ys, options = {}) {
   const plotW = Math.max(1, w - padLeft - padRight);
   const plotH = Math.max(1, h - padBottom - padTop);
 
-  const counts = new Int32Array(binsX * binsY);
+  // Edges rather than a count, because on a log axis they are not evenly
+  // spaced: near the origin whole numbers are further apart than one bin, and
+  // the bins between them can never be filled.
+  const edgesX = _binEdges(mx, ex, binsX, {
+    integral: _allWholeNumbers(xs), unmap: v => (logX ? Metrics.undoLog(v, signedX) : v)
+  });
+  const edgesY = _binEdges(my, ey, binsY, {
+    integral: _allWholeNumbers(ys), unmap: v => (logY ? Metrics.undoLog(v, signedY) : v)
+  });
+  const nx = edgesX.length - 1, ny = edgesY.length - 1;
+
+  const counts = new Int32Array(nx * ny);
   for (let i = 0; i < mx.length; i++) {
-    const bx = Math.min(binsX - 1, Math.floor((mx[i] - ex[0]) / (ex[1] - ex[0]) * binsX));
-    const by = Math.min(binsY - 1, Math.floor((my[i] - ey[0]) / (ey[1] - ey[0]) * binsY));
-    counts[by * binsX + bx]++;
+    counts[_binOf(my[i], edgesY) * nx + _binOf(mx[i], edgesX)]++;
   }
   let peak = 0;
   for (const c of counts) if (c > peak) peak = c;
@@ -920,18 +997,23 @@ function drawHeatmap(canvas, xs, ys, options = {}) {
 
   const shade = c => logCount ? Math.log1p(c) / Math.log1p(peak) : c / peak;
 
+  // Each cell is drawn at the width its own bin covers, so a wider bin near
+  // the origin looks wider — the axis stays a true log axis rather than
+  // pretending every bin spans the same amount.
+  const atX = v => padLeft + (v - ex[0]) / (ex[1] - ex[0]) * plotW;
+  const atY = v => padTop + plotH - (v - ey[0]) / (ey[1] - ey[0]) * plotH;
+
   // Empty cells stay as background rather than taking the colour map's zero,
   // so "nothing here" reads differently from "the lowest value on the scale".
-  const cellW = plotW / binsX, cellH = plotH / binsY;
-  for (let by = 0; by < binsY; by++) {
-    for (let bx = 0; bx < binsX; bx++) {
-      const c = counts[by * binsX + bx];
+  for (let by = 0; by < ny; by++) {
+    const top = atY(edgesY[by + 1]), bottom = atY(edgesY[by]);
+    for (let bx = 0; bx < nx; bx++) {
+      const c = counts[by * nx + bx];
       if (!c) continue;
       ctx.fillStyle = colormapCss(colormap, shade(c), 1, reverse);
-      // y runs upward on screen, so the top row is the last bin.
-      const px = padLeft + bx * cellW;
-      const py = padTop + (binsY - 1 - by) * cellH;
-      ctx.fillRect(px, py, Math.ceil(cellW), Math.ceil(cellH));
+      const left = atX(edgesX[bx]), right = atX(edgesX[bx + 1]);
+      ctx.fillRect(left, top, Math.max(1, Math.ceil(right - left)),
+                   Math.max(1, Math.ceil(bottom - top)));
     }
   }
 
