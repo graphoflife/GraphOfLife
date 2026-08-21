@@ -388,6 +388,117 @@ const GraphStats = {
    * Three times the triangles over the number of connected triples: the chance
    * that two neighbours of a node are themselves neighbours.
    */
+  // ---- power laws ------------------------------------------------------
+  //
+  // A relationship y ~ x^a is a straight line on log-log, so the exponent is
+  // the slope of a least-squares fit through the logarithms and R² says how
+  // much of the spread that line accounts for.
+  //
+  // R² is reported because it is asked for, not because it settles anything.
+  // A high R² on log-log is famously weak evidence for a power law — plenty of
+  // other distributions look straight over two decades — so read it as "how
+  // tight is this relationship" rather than "is this scale free". The
+  // exponent is the interesting number; R² tells you whether to trust it.
+
+  /**
+   * Slope and R² of ln(y) against ln(x), over the pairs where both are
+   * positive. Logarithms need positive numbers, and a zero is a real
+   * observation rather than a small one, so those pairs are dropped rather
+   * than nudged.
+   */
+  powerFit(xs, ys, minimumPoints = 8) {
+    let n = 0, sx = 0, sy = 0;
+    for (let i = 0; i < xs.length; i++) {
+      if (xs[i] > 0 && ys[i] > 0) { n++; sx += Math.log(xs[i]); sy += Math.log(ys[i]); }
+    }
+    if (n < minimumPoints) return null;
+
+    const mx = sx / n, my = sy / n;
+    let sxx = 0, syy = 0, sxy = 0;
+    for (let i = 0; i < xs.length; i++) {
+      if (!(xs[i] > 0 && ys[i] > 0)) continue;
+      const dx = Math.log(xs[i]) - mx, dy = Math.log(ys[i]) - my;
+      sxx += dx * dx; syy += dy * dy; sxy += dx * dy;
+    }
+    // No spread on an axis means no line to fit: every x the same, or every y.
+    if (sxx <= 1e-12 || syy <= 1e-12) return null;
+
+    return { exponent: sxy / sxx, r2: (sxy * sxy) / (sxx * syy) };
+  },
+
+  /**
+   * The exponent of a distribution's tail, from its complementary CDF.
+   *
+   * Fitting a binned histogram of P(k) is badly behaved in the tail, where
+   * bins hold one or two nodes and the noise is as large as the signal. The
+   * fraction of nodes with at least k is smooth by construction, and for
+   * P(k) ~ k^-g it goes as k^-(g-1), so the exponent falls out of the slope.
+   */
+  tailExponent(values, minimumDistinct = 4) {
+    const positive = [];
+    for (const v of values) if (v > 0) positive.push(v);
+    if (positive.length < 8) return null;
+
+    positive.sort((a, b) => a - b);
+    const n = positive.length;
+
+    // Walking from the top, every distinct value knows how many are at least
+    // as large without counting again.
+    const xs = [], ys = [];
+    let i = n - 1;
+    while (i >= 0) {
+      const value = positive[i];
+      let j = i;
+      while (j >= 0 && positive[j] === value) j--;
+      const atLeast = n - 1 - j;
+      xs.push(value);
+      ys.push(atLeast / n);
+      i = j;
+    }
+    if (xs.length < minimumDistinct) return null;
+
+    const fit = this.powerFit(xs, ys, minimumDistinct);
+    if (!fit) return null;
+    return { exponent: 1 - fit.exponent, r2: fit.r2 };
+  },
+
+  /**
+   * Whether well-connected agents attach to other well-connected agents.
+   *
+   * Newman's degree correlation over the edges. Positive means like joins
+   * like; negative means hubs sit among the sparsely connected, which is what
+   * most grown networks do and what a scale-free one usually does.
+   */
+  assortativity(edges, degreeOf) {
+    let m = 0, s1 = 0, s2 = 0, s3 = 0;
+    for (const [a, b] of edges) {
+      const j = degreeOf(a), k = degreeOf(b);
+      if (j === undefined || k === undefined) continue;
+      m++;
+      s1 += j * k;
+      s2 += j + k;
+      s3 += j * j + k * k;
+    }
+    if (m < 2) return null;
+
+    const half = s2 / (2 * m);
+    const denominator = s3 / (2 * m) - half * half;
+    if (Math.abs(denominator) < 1e-12) return null;
+    return (s1 / m - half * half) / denominator;
+  },
+
+  /** Each node's clustering coefficient, for the nodes that can have one. */
+  clusteringPerNode(ids, adj, trianglesPerNode) {
+    const out = new Map();
+    for (const id of ids) {
+      const degree = (adj.get(id) || []).size || 0;
+      if (degree < 2) continue;   // no pair of neighbours, so no coefficient
+      const t = trianglesPerNode.get(id) || 0;
+      out.set(id, (2 * t) / (degree * (degree - 1)));
+    }
+    return out;
+  },
+
   transitivity(ids, adj, triangleTotal) {
     let triples = 0;
     for (const id of ids) {

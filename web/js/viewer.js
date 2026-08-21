@@ -89,6 +89,11 @@ const Viewer = {
   },
 
   init() {
+    // The starting look. Merged in rather than applied through applySettings,
+    // because that reaches for the layout and the controls, and neither exists
+    // yet — the pushes at the end of this function are what deliver it.
+    Object.assign(this.settings, Metrics.migrateSettings({ ...Presets.builtIn('default') }));
+
     this.canvas = document.getElementById('graphCanvas');
     this.renderer = new GraphRenderer(this.canvas);
     // The layout runs in a worker when one is available, so a slow tick on a

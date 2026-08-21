@@ -182,13 +182,25 @@ def _structure(ids: List[int], edges: List[List[int]]) -> Dict[str, Any]:
 
     # --- triangles ---
     triangle_total = 0
+    # Per node as well as in total, since the power-law section asks how a
+    # node's triangle count grows with its degree. A triangle is met once from
+    # each of its three edges, and each meeting names all three corners, so
+    # every node ends up counted three times over.
+    per_node_triangles = {i: 0 for i in ids}
     for a, b in edges:
         na, nb = adj.get(a), adj.get(b)
         if not na or not nb:
             continue
         small, large = (na, nb) if len(na) <= len(nb) else (nb, na)
-        triangle_total += sum(1 for w in small if w in large)
+        for w in small:
+            if w in large:
+                triangle_total += 1
+                per_node_triangles[a] = per_node_triangles.get(a, 0) + 1
+                per_node_triangles[b] = per_node_triangles.get(b, 0) + 1
+                per_node_triangles[w] = per_node_triangles.get(w, 0) + 1
     triangle_total = round(triangle_total / 3)
+    for node in per_node_triangles:
+        per_node_triangles[node] //= 3
 
     triples = sum(len(adj[i]) * (len(adj[i]) - 1) / 2 for i in ids)
     transitivity = (3 * triangle_total / triples) if triples > 0 else 0.0
@@ -326,7 +338,107 @@ def _structure(ids: List[int], edges: List[List[int]]) -> Dict[str, Any]:
         "radius": radius,
         "diameter": diameter,
         "meanPathLength": mean_path,
+        "_perNodeTriangles": per_node_triangles,
     }
+
+
+# ---------------------------------------------------------------------------
+# Power laws
+# ---------------------------------------------------------------------------
+#
+# Mirrors the same section in web/js/graphstats.js. The two are compared value
+# for value by tests/test_stats_parity.py, so they have to agree on the
+# arithmetic and not merely on the idea.
+
+
+def _power_fit(xs, ys, minimum_points: int = 8):
+    """
+    Slope and R-squared of ln(y) against ln(x), over the pairs where both are
+    positive. A zero is a real observation rather than a small one, so those
+    pairs are dropped rather than nudged into the logarithm.
+    """
+    n = 0
+    sx = sy = 0.0
+    for x, y in zip(xs, ys):
+        if x > 0 and y > 0:
+            n += 1
+            sx += math.log(x)
+            sy += math.log(y)
+    if n < minimum_points:
+        return None
+
+    mx, my = sx / n, sy / n
+    sxx = syy = sxy = 0.0
+    for x, y in zip(xs, ys):
+        if not (x > 0 and y > 0):
+            continue
+        dx = math.log(x) - mx
+        dy = math.log(y) - my
+        sxx += dx * dx
+        syy += dy * dy
+        sxy += dx * dy
+
+    # No spread on an axis means no line to fit.
+    if sxx <= 1e-12 or syy <= 1e-12:
+        return None
+    return {"exponent": sxy / sxx, "r2": (sxy * sxy) / (sxx * syy)}
+
+
+def _tail_exponent(values, minimum_distinct: int = 4):
+    """
+    The exponent of a distribution's tail, from its complementary CDF.
+
+    Binned histograms are badly behaved out in the tail, where a bin holds one
+    or two nodes. The fraction of nodes with at least k is smooth by
+    construction, and for P(k) ~ k**-g it goes as k**-(g-1).
+    """
+    positive = sorted(v for v in values if v > 0)
+    if len(positive) < 8:
+        return None
+    n = len(positive)
+
+    xs, ys = [], []
+    i = n - 1
+    while i >= 0:
+        value = positive[i]
+        j = i
+        while j >= 0 and positive[j] == value:
+            j -= 1
+        xs.append(value)
+        ys.append((n - 1 - j) / n)
+        i = j
+    if len(xs) < minimum_distinct:
+        return None
+
+    fit = _power_fit(xs, ys, minimum_distinct)
+    if fit is None:
+        return None
+    return {"exponent": 1 - fit["exponent"], "r2": fit["r2"]}
+
+
+def _assortativity(edges, degree):
+    """
+    Newman's degree correlation. Positive means like joins like; negative means
+    hubs sit among the sparsely connected, which is what most grown networks do.
+    """
+    m = 0
+    s1 = s2 = s3 = 0.0
+    for a, b in edges:
+        j, k = degree.get(a), degree.get(b)
+        if j is None or k is None:
+            continue
+        m += 1
+        s1 += j * k
+        s2 += j + k
+        s3 += j * j + k * k
+    if m < 2:
+        return None
+
+    half = s2 / (2 * m)
+    denominator = s3 / (2 * m) - half * half
+    if abs(denominator) < 1e-12:
+        return None
+    return (s1 / m - half * half) / denominator
 
 
 def _median(values: List[float]) -> float:
@@ -454,6 +566,53 @@ def frame_stats(frame: Dict[str, Any], previous: Dict[str, Any] | None = None) -
         losers = sum(1 for v in delta if v < 0)
 
     structure = _structure(ids, edges)
+    per_node_triangles = structure.pop("_perNodeTriangles", {})
+
+    # ---- power laws ----
+    #
+    # How one quantity scales with another, as an exponent and how tightly the
+    # points sit on that line. Everything here is over the nodes of this frame.
+    adjacency: Dict[Any, set] = {i: set() for i in ids}
+    for a, b in edges:
+        if a == b:
+            continue
+        if a in adjacency:
+            adjacency[a].add(b)
+        if b in adjacency:
+            adjacency[b].add(a)
+    degree_of = {i: len(adjacency[i]) for i in ids}
+
+    degree_list = [degree_of[i] for i in ids]
+    triangle_list = [per_node_triangles.get(i, 0) for i in ids]
+
+    # Clustering only means anything for a node with two neighbours to compare.
+    clustering_degrees, clustering_values = [], []
+    for i in ids:
+        k = degree_of[i]
+        if k < 2:
+            continue
+        clustering_degrees.append(k)
+        clustering_values.append((2 * per_node_triangles.get(i, 0)) / (k * (k - 1)))
+
+    delta_list = _reconstruct_delta(frame, previous) or frame.get("delta") or []
+    change_tokens, change_sizes = [], []
+    for idx in range(min(len(tokens), len(delta_list))):
+        change_tokens.append(tokens[idx])
+        change_sizes.append(abs(delta_list[idx]))
+
+    def _pair(fit, key):
+        return {key: fit["exponent"] if fit else None,
+                key + "R2": fit["r2"] if fit else None}
+
+    power_laws: Dict[str, Any] = {}
+    power_laws.update(_pair(_tail_exponent(degree_list), "degreeExponent"))
+    power_laws.update(_pair(_tail_exponent(list(tokens)), "tokenExponent"))
+    power_laws.update(_pair(_power_fit(degree_list, list(tokens)), "tokensVsDegree"))
+    power_laws.update(_pair(_power_fit(degree_list, triangle_list), "trianglesVsDegree"))
+    power_laws.update(_pair(_power_fit(clustering_degrees, clustering_values),
+                            "clusteringVsDegree"))
+    power_laws.update(_pair(_power_fit(change_tokens, change_sizes), "changeVsTokens"))
+    power_laws["assortativity"] = _assortativity(edges, degree_of)
 
     degree_hist: Dict[int, int] = {}
     for d in degrees:
@@ -497,6 +656,7 @@ def frame_stats(frame: Dict[str, Any], previous: Dict[str, Any] | None = None) -
         "tokenEntropy": token_entropy,
         "tokenEvenness": token_evenness,
         **structure,
+        **power_laws,
         "maxTokenAdded": max_added,
         "maxTokenLost": max_lost,
         "gainers": gainers,

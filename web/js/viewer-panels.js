@@ -87,6 +87,20 @@ Object.assign(Viewer, {
     diameter: 'Diameter',
     meanPathLength: 'Mean path',
     components: 'Components',
+
+    degreeExponent: 'Degree exponent \u03b3',
+    degreeExponentR2: 'Degree fit R\u00b2',
+    tokenExponent: 'Token exponent \u03b3',
+    tokenExponentR2: 'Token fit R\u00b2',
+    tokensVsDegree: 'Tokens vs degree',
+    tokensVsDegreeR2: 'Tokens vs degree R\u00b2',
+    trianglesVsDegree: 'Triangles vs degree',
+    trianglesVsDegreeR2: 'Triangles vs degree R\u00b2',
+    clusteringVsDegree: 'Clustering vs degree',
+    clusteringVsDegreeR2: 'Clustering vs degree R\u00b2',
+    changeVsTokens: 'Token change vs tokens',
+    changeVsTokensR2: 'Token change vs tokens R\u00b2',
+    assortativity: 'Assortativity',
     births: 'Births',
     reproTokenShare: 'Tokens to offspring',
     meanInvestedShare: 'Mean investment',
@@ -128,6 +142,15 @@ Object.assign(Viewer, {
       'radius', 'diameter', 'meanPathLength',
       'cycleRank', 'loopDensity', 'bridges', 'triangles', 'transitivity',
       'dimension', 'degreeEntropy', 'degreeEvenness', 'components'
+    ] },
+    { key: 'powerlaws', label: 'Power laws', open: false, keys: [
+      'degreeExponent', 'degreeExponentR2',
+      'tokenExponent', 'tokenExponentR2',
+      'tokensVsDegree', 'tokensVsDegreeR2',
+      'trianglesVsDegree', 'trianglesVsDegreeR2',
+      'clusteringVsDegree', 'clusteringVsDegreeR2',
+      'changeVsTokens', 'changeVsTokensR2',
+      'assortativity'
     ] }
   ],
 
@@ -138,9 +161,16 @@ Object.assign(Viewer, {
     // Whether the reader currently has the Structure group open decides
     // whether its statistics are worth computing at all: they cost more than
     // everything else on this strip put together.
-    const existing = container.querySelector('.stat-group[data-group="structure"]');
-    const structureGroup = this.STAT_GROUPS.find(g => g.key === 'structure');
-    const structureOpen = existing ? existing.open : Boolean(structureGroup && structureGroup.open);
+    // Structure and Power laws are both paid for by the same walk over the
+    // graph, so either being open buys both. Neither being open means the walk
+    // does not happen at all, which is most of what a frame step costs.
+    const heavyGroups = ['structure', 'powerlaws'];
+    const structureOpen = heavyGroups.some(key => {
+      const el = container.querySelector(`.stat-group[data-group="${key}"]`);
+      if (el) return el.open;
+      const declared = this.STAT_GROUPS.find(g => g.key === key);
+      return Boolean(declared && declared.open);
+    });
     const s = this.metrics.summary(structureOpen);
 
     // Node counts are also given as a share of the population that entered the
@@ -184,8 +214,25 @@ Object.assign(Viewer, {
       degreeEvenness: [this.STAT_LABELS.degreeEvenness, pct(s.degreeEvenness)]
     };
 
-    // Only computed while the Structure group is open, since walking the whole
-    // graph costs more than the rest of this strip together.
+    // Always listed, even before they are computed. A group with no cells is
+    // not rendered, and a group that is never rendered can never be opened to
+    // ask for the numbers it would hold — so these show a dash until the group
+    // is opened and the walk over the graph has been paid for.
+    //
+    // Exponents are slopes and carry a sign, so they keep it rather than being
+    // rounded into a bare magnitude. R² is a share of the spread accounted
+    // for, so it reads as a percentage.
+    const exponent = v => (v === null || v === undefined)
+      ? '\u2014' : (v > 0 ? '+' : '') + v.toFixed(2);
+    for (const key of ['degreeExponent', 'tokenExponent', 'tokensVsDegree',
+                       'trianglesVsDegree', 'clusteringVsDegree', 'changeVsTokens']) {
+      cells[key] = [this.STAT_LABELS[key], exponent(s[key])];
+      cells[key + 'R2'] = [this.STAT_LABELS[key + 'R2'], pct(s[key + 'R2'])];
+    }
+    cells.assortativity = [this.STAT_LABELS.assortativity, dec(s.assortativity, 3)];
+
+    // Only computed while one of the heavy groups is open, since walking the
+    // whole graph costs more than the rest of this strip together.
     if (structureOpen) {
       cells.cycleRank = [this.STAT_LABELS.cycleRank, formatNumber(s.cycleRank)];
       cells.loopDensity = [this.STAT_LABELS.loopDensity, pct(s.loopDensity)];
@@ -197,6 +244,7 @@ Object.assign(Viewer, {
       cells.diameter = [this.STAT_LABELS.diameter, formatNumber(s.diameter)];
       cells.meanPathLength = [this.STAT_LABELS.meanPathLength, dec(s.meanPathLength)];
       cells.components = [this.STAT_LABELS.components, formatNumber(s.components)];
+
     }
 
     // Present only when the phase produced them.
@@ -259,9 +307,14 @@ Object.assign(Viewer, {
 
     // Opening Structure is what asks for those statistics, so redraw the strip
     // once they can be computed. Closing it costs nothing and needs no redraw.
-    const group = container.querySelector('.stat-group[data-group="structure"]');
-    if (group && !structureOpen) {
-      group.addEventListener('toggle', () => { if (group.open) this.updateStats(); }, { once: true });
+    if (!structureOpen) {
+      for (const key of heavyGroups) {
+        const group = container.querySelector(`.stat-group[data-group="${key}"]`);
+        if (!group) continue;
+        group.addEventListener('toggle', () => {
+          if (group.open) this.updateStats();
+        }, { once: true });
+      }
     }
   },
 

@@ -106,10 +106,30 @@ can be replayed, stepped, and measured.
 - **Three charts**: the distribution of any quantity, a two-dimensional heatmap
   pairing any two, and a trajectory tracing how two statistics move together
   over the whole run, coloured by time.
-- **Statistics** grouped into general, reproduction, game and structure — 
+- **Statistics** grouped into general, reproduction, game, structure and power
+  laws — 
   including cycle rank, bridges, triangles, transitivity, entropy, an estimated
   dimension, and sampled radius, diameter and mean path length. Click any of
   them for an explanation and its history.
+
+**Power laws** get their own group, each relationship reported as an exponent
+and the R² of its log-log fit. The degree and token distributions are fitted
+from their complementary CDFs rather than from binned histograms, which are
+worthless out in the tail. Alongside them: how wealth scales with degree, how
+triangles scale with degree, how the size of a token change scales with
+wealth, and the degree assortativity.
+
+The one to watch is **clustering against degree**. A slope near −1 is the
+signature of a hierarchical, self-similar network — small dense neighbourhoods
+grouped into larger sparser ones, the same arrangement repeating at every
+scale. A flat slope means a hub's neighbourhood looks like a leaf's, and there
+is no hierarchy at all.
+
+R² is reported because it is worth knowing before trusting an exponent, not
+because it settles anything. A straight line on log-log is famously weak
+evidence for a power law — log-normal and stretched-exponential distributions
+look just as straight over two decades. Read it as "is this exponent
+meaningful", not as "is this network scale free".
 
 **Token curvature** deserves a note. For each agent it is the sum of its
 neighbours' tokens minus its own times its degree — the graph Laplacian applied

@@ -21,6 +21,59 @@ const Presets = {
   },
 
   BUILT_IN: {
+    // What the viewer opens with. Everything below is a place to go from here;
+    // this is the starting point, so it is the one preset that has to be a
+    // sensible view of a graph nobody has looked at yet rather than a way of
+    // answering a particular question.
+    //
+    // Applied on load by Viewer.init, which merges it into the settings before
+    // anything is pushed to the layout or the controls.
+    default: {
+      // Tuned on a large graph, where the default settings get slow and
+      // cluttered: small nodes, thin translucent edges and a stronger, looser,
+      // less exactly approximated repulsion, which is what keeps a few
+      // thousand agents legible and moving.
+      //
+      // Applied on load by Viewer.init, which merges it into the settings
+      // before anything is pushed to the layout or the controls.
+      nodeColorBy: 'tokens', nodeColorLog: true, nodeColormap: 'coolwarm',
+      nodeColorReverse: false,
+      nodeSizeBy: 'tokens', nodeSizeLog: true, nodeSizeMin: 0.5, nodeSizeMax: 5,
+      nodeAlpha: 1,
+      nodeOutline: false, nodeOutlineColor: '#ffffff',
+      nodeOutlineAlpha: 0.55, nodeOutlineWidth: 0.6,
+      nodeGlow: false, nodeGlowColorBy: 'node',
+      nodeGlowSize: 2.6, nodeGlowStrength: 0.35,
+
+      edgeShow: true, edgeColorBy: 'constant', edgeColorLog: false,
+      edgeColormap: 'cividis', edgeColorReverse: false,
+      edgeFlatColor: '#ffffff', edgeWidthBy: 'constant', edgeWidthLog: false,
+      edgeWidthMin: 0.3, edgeWidthMax: 0.3, edgeAlpha: 0.7,
+
+      bgStyle: 'solid', bgColorA: '#20252c', bgColorB: '#20252c',
+      showLegend: true, showEdgeLegend: true, layoutCarry: true,
+
+      // Strong repulsion against weak links spreads the graph out; the high
+      // theta trades exactness in the far field for speed, which is where the
+      // cost lives on a large graph.
+      forceCharge: 82, forceLink: 0.07, forceCenter: 0.012,
+      forceAngular: 0.15, forceDamping: 0.78, forceTheta: 1.7,
+      dimensions: 3,
+
+      // On, so the view keeps the whole graph framed as the population grows
+      // rather than letting it drift off the edge. Panning or zooming hands
+      // control back; orbiting does not, since turning a graph changes what
+      // "framed" means rather than saying you want a different view.
+      autoFit: true,
+
+      focusRadius: 2,
+
+      distMetric: 'node:tokens', histDistX: 'log', histDistY: 'log',
+      heatX: 'node:tokens', heatY: 'node:degree',
+      histHeatX: 'log', histHeatY: 'log', histHeatCount: 'log',
+      trajX: 'nodes', trajY: 'edges', histTrajX: 'log', histTrajY: 'log'
+    },
+
     wealth: {
       nodeColorBy: 'tokens', nodeColorLog: true, nodeColormap: 'inferno',
       nodeSizeBy: 'tokens', nodeSizeLog: false,

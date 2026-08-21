@@ -642,6 +642,13 @@ class FrameMetrics {
       losers: this.delta.filter(v => v < 0).length,
 
       // Structure
+      degreeExponent: null, degreeExponentR2: null,
+      tokenExponent: null, tokenExponentR2: null,
+      tokensVsDegree: null, tokensVsDegreeR2: null,
+      trianglesVsDegree: null, trianglesVsDegreeR2: null,
+      clusteringVsDegree: null, clusteringVsDegreeR2: null,
+      changeVsTokens: null, changeVsTokensR2: null,
+      assortativity: null,
       cycleRank: null, loopDensity: null, bridges: null, triangles: null,
       transitivity: null, degreeEntropy: null, degreeEvenness: null,
       radius: null, diameter: null, meanPathLength: null,
@@ -756,6 +763,48 @@ class FrameMetrics {
       out.radius = st.distances.radius;
       out.diameter = st.distances.diameter;
       out.meanPathLength = st.distances.meanPathLength;
+
+      // ---- power laws ----
+      //
+      // How one quantity scales with another, as an exponent and how tightly
+      // the points sit on that line. Mirrors the same block in gol_series.py,
+      // which tests/test_stats_parity.py compares value for value.
+      const ids = f.ids;
+      const degrees = [], tokensList = [], triangleList = [];
+      for (let i = 0; i < ids.length; i++) {
+        degrees.push(this.degree[i]);
+        tokensList.push(f.tokens[i]);
+        triangleList.push(st.triangles.perNode.get(ids[i]) || 0);
+      }
+
+      const clustering = GraphStats.clusteringPerNode(ids, st.adj, st.triangles.perNode);
+      const clusteringDegrees = [], clusteringValues = [];
+      for (const id of ids) {
+        if (!clustering.has(id)) continue;   // fewer than two neighbours
+        clusteringDegrees.push((st.adj.get(id) || []).size || 0);
+        clusteringValues.push(clustering.get(id));
+      }
+
+      const changeTokens = [], changeSizes = [];
+      for (let i = 0; i < Math.min(tokensList.length, this.delta.length); i++) {
+        changeTokens.push(tokensList[i]);
+        changeSizes.push(Math.abs(this.delta[i]));
+      }
+
+      const pair = (fit, key) => {
+        out[key] = fit ? fit.exponent : null;
+        out[key + 'R2'] = fit ? fit.r2 : null;
+      };
+      pair(GraphStats.tailExponent(degrees), 'degreeExponent');
+      pair(GraphStats.tailExponent(tokensList), 'tokenExponent');
+      pair(GraphStats.powerFit(degrees, tokensList), 'tokensVsDegree');
+      pair(GraphStats.powerFit(degrees, triangleList), 'trianglesVsDegree');
+      pair(GraphStats.powerFit(clusteringDegrees, clusteringValues), 'clusteringVsDegree');
+      pair(GraphStats.powerFit(changeTokens, changeSizes), 'changeVsTokens');
+
+      const degreeOf = new Map();
+      for (let i = 0; i < ids.length; i++) degreeOf.set(ids[i], this.degree[i]);
+      out.assortativity = GraphStats.assortativity(f.edges, id => degreeOf.get(id));
     }
 
     out.degreeEntropy = GraphStats.degreeEntropy(degrees);
