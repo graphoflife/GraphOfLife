@@ -1,11 +1,15 @@
 # Graph of Life
 
-**Exploring open-ended evolution with spatial evolutionary game theory, graph theory and neural networks.**
+**A new kind of Artificial Life Algorithm**
+
+**Exploring open-ended evolution with spatial evolutionary game theory,
+graph theory and neural networks.**
 
 Agents live on the nodes of a graph, each carrying a small neural network. They
 spend a conserved supply of tokens to reproduce, rewire the graph they live on,
-and fight each other for position. Nothing is optimised and nothing is
-selected for by hand — whatever survives, survives.
+and fight each other in a game of blotto for position, tokens and reproduction.
+Nothing is optimised and nothing is selected for by hand. Instead, Natural
+Selection decides what survives and mutations are how they can evolve.
 
 **▶ Try it in your browser: <https://graphoflife.github.io/GraphOfLife/>**
 
@@ -18,16 +22,12 @@ repository contains, compiled to WebAssembly, entirely on your own machine.
 
 - [What the simulation does](#what-the-simulation-does)
 - [The two phases](#the-two-phases)
-- [Three kinds of brain](#three-kinds-of-brain)
-- [Agents decide their own randomness](#agents-decide-their-own-randomness)
-- [Optional mechanics](#optional-mechanics)
+- [Different mechanics](#different-mechanics)
 - [Watching a run](#watching-a-run)
 - [Running it yourself](#running-it-yourself)
 - [Checking that it still works](#checking-that-it-still-works)
-- [Reproducibility](#reproducibility)
 - [How the website works](#how-the-website-works)
-- [What the numbers mean](#what-the-numbers-mean)
-- [Is this open-ended evolution?](#is-this-open-ended-evolution)
+- [Goal](#goal)
 - [Repository layout](#repository-layout)
 - [Licence](#licence)
 
@@ -58,79 +58,52 @@ parent pays the full cost.
 
 **2. The game.** Every agent distributes its tokens across itself and its
 neighbours — a Colonel Blotto game played on the graph. Whoever commits most to
-a node takes it. Tokens spent are not lost; they move. Losing every node you
-hold means starvation.
+a node takes it. Total Token Amount is conserved.
 
-Afterwards the world is cleaned up: starved agents are removed, anything
-detached from the largest connected component is culled, and the tokens freed
-are redistributed.
+Afterwards the world is cleaned up: starved agents and edges with no token flow
+are removed, anything detached from the largest connected component is culled,
+and the tokens freed are redistributed.
 
-## Three kinds of brain
+## Different mechanics
 
-`brain_kind` chooses what a weight is. The rules of the simulation do not
-change; only what the agents think with does, which makes the three
-comparable against the same seed.
+Messages, handover, revolutions and rewiring can each be switched off, and the
+brain comes in three kinds. All of them change what the brain has to decide,
+so they are fixed when a run is created rather than partway through. Deciding
+its own randomness is not optional — it is how every choice is read.
 
-| Kind | Weights | Per agent | |
-|---|---|---|---|
-| `float` | 64-bit | 33.8 KB | the original |
-| `float16` | 16-bit | 8.5 KB | the same arithmetic on a quarter of the memory |
-| `binary` | −1, 0, +1 | 27.1 KB | on-or-off hidden units, integer arithmetic throughout |
+**Brains.** Three kinds, chosen with `brain_kind`. `float` uses 64-bit weights,
+`float16` the same arithmetic on a quarter of the memory, and `binary` weights
+of only −1, 0 and +1 with hidden units that are simply on or off. The binary
+brain uses no floating point anywhere, so its runs come out identical on any
+machine. It needs a gentler mutation rate than the others — around 0.02 rather
+than 0.1 — because a whole-number weight cannot make a small move.
 
-The binary brain takes its inputs as a ladder of bits — bit *i* is set when the
-value clears the *i*-th threshold — so two nearby numbers differ in one bit
-and a distant one differs in many. Plain binary would not do: 127 and 128
-share no bits at all, and the network would have to learn every magnitude as
-an unrelated pattern rather than as a place on a scale. Its output layer does
-not fire; it hands back the integer count, because the decisions downstream
-divide tokens *in proportion* to their outputs and an on-or-off answer cannot
-say "twice as much".
+**Agents decide their own randomness.** Every choice comes as a pair of
+outputs: one says what to do, the other says how to read it. Take the best
+option, or sample among them in proportion to their scores. That second output
+is part of the genome, so whether a lineage decides sharply or gambles is
+itself something evolution settles — and it can differ from one decision to
+the next.
 
-Nothing in that forward pass is a float, which means a binary run comes out
-identical on any machine — the one thing the float brains cannot promise.
+**Exchange messages.** An agent writes a short list of numbers to each of its
+neighbours, and a separate one to itself. Next phase it reads what its
+neighbours wrote to it, and what it wrote to itself, which gives it a memory.
+Nothing forces a message to mean anything. Whatever they come to signal is
+whatever survives.
 
-**A binary brain needs a gentler `mutation_sparsity`**, and not by preference.
-Its smallest possible move is a whole step while the spread of its weights is
-about 0.58, so any mutation shifts a weight by roughly 1.7 times that spread,
-against 0.15 for the float brain. At the same sparsity every child is
-substantially damaged. Measured over nine runs at 0.1, the binary populations
-died out in five. Sweeping the rate against the ladder width, at 20,000
-tokens over three seeds:
+**Handover.** A parent can give one of its own edges to its newborn instead of
+copying it. The parent ends up with one connection fewer and the child with one
+more, so a lineage can pass on position and not only tokens.
 
-| bits | sparsity 0.1 | 0.02 | 0.005 |
-|---|---|---|---|
-| 16 | one died | all lived | one died |
-| 32 | one died | all lived | all lived |
+**Revolutions.** The winner of a node is not automatically whoever paid most.
+Part of each agent's stake is a revolt token, and a coalition can form against
+the leader — so the largest bid can be beaten by agreement among smaller ones.
 
-0.02 is the place to start. Too little mutation is its own failure, not just
-too much. A wider ladder does not rescue a high rate — the step size is fixed
-by the representation, so the rate is the lever — but it does help at a low
-one, where there is less churn and the encoding has to carry more of the
-work.
-
-## Agents decide their own randomness
-
-Every discrete choice comes in a pair. One output says *what* to do; a second,
-the **mode**, says whether to take the maximum or to sample in proportion to
-the scores. Determinism is therefore not a global setting — it is part of the
-genome, and evolvable. An agent can become reliably predictable in one decision
-and stay a gambler in another.
-
-## Optional mechanics
-
-Three rules can be switched on or off per run. They change the brain's output
-layout, so they are fixed when the run is created.
-
-| Mechanic | What it does |
-|---|---|
-| **Handover** | A parent gives one of its own edges to its newborn instead of copying it. The parent ends up with one fewer. |
-| **Revolutions** | The winner of a node is not automatically whoever paid most. A coalition can form against the leader, and a fraction of each agent's stake is a revolt token. |
-| **Rewire** | An agent hands one of its edges to another of its neighbours. The edge `(agent, other)` becomes `(recipient, other)` — the agent drops out of the middle and the two it stood between are joined directly. |
-
-Rewiring is applied against the graph as it stood before any rewire moved, so
-the outcome does not depend on the order agents are visited in. Both ends of an
-edge can ask to give the same edge away; the contest is settled by drawing one
-claim rather than by whichever agent sorts first.
+**Rewire.** An agent can hand one of its edges to another of its neighbours.
+The connection (agent, other) becomes (recipient, other): the agent drops out
+of the middle and the two it stood between are left joined directly. A rewire
+never creates an edge. The count stays the same, or falls by one where the two
+collapse into the single edge a simple graph can hold.
 
 ## Watching a run
 
@@ -151,37 +124,17 @@ can be replayed, stepped, and measured.
   pairing any two, and a trajectory tracing how two statistics move together
   over the whole run, coloured by time.
 - **Statistics** grouped into general, reproduction, game, structure and power
-  laws — 
-  including cycle rank, bridges, triangles, transitivity, entropy, an estimated
-  dimension, and sampled radius, diameter and mean path length. Click any of
-  them for an explanation and its history.
-
-**Power laws** get their own group, each relationship reported as an exponent
-and the R² of its log-log fit. The degree and token distributions are fitted
-from their complementary CDFs rather than from binned histograms, which are
-worthless out in the tail. Alongside them: how wealth scales with degree, how
-triangles scale with degree, how the size of a token change scales with
-wealth, and the degree assortativity.
-
-The one to watch is **clustering against degree**. A slope near −1 is the
-signature of a hierarchical, self-similar network — small dense neighbourhoods
-grouped into larger sparser ones, the same arrangement repeating at every
-scale. A flat slope means a hub's neighbourhood looks like a leaf's, and there
-is no hierarchy at all.
-
-R² is reported because it is worth knowing before trusting an exponent, not
-because it settles anything. A straight line on log-log is famously weak
-evidence for a power law — log-normal and stretched-exponential distributions
-look just as straight over two decades. Read it as "is this exponent
-meaningful", not as "is this network scale free".
-
-**Token curvature** deserves a note. For each agent it is the sum of its
-neighbours' tokens minus its own times its degree — the graph Laplacian applied
-to wealth. Positive means an agent sits in a valley poorer than its
-neighbourhood; negative means it is a peak its neighbours drain toward. It sums
-to exactly zero over the graph. Measured on the state *before* a phase and
-plotted against the change that phase produced, it behaves like a diffusion
-law: on one 1,949-node frame the correlation was 0.76.
+  laws — including cycle rank, bridges, triangles, transitivity, entropy, an
+  estimated dimension, and sampled radius, diameter and mean path length. Click
+  any of them for an explanation and its history.
+- **Analyses.** The same run can be read in several ways. The power-law group
+  fits an exponent and an R² to each relationship: how wealth scales with
+  degree, how triangles scale with degree, and the shape of the degree and
+  token distributions. Clustering against degree is the one that measures
+  self-similarity — a slope near −1 means dense small neighbourhoods nested
+  inside sparser larger ones, the same arrangement at every scale. Token
+  curvature, the neighbours' tokens less an agent's own times its degree, read
+  against the change that followed, behaves like a law of diffusion.
 
 ## Running it yourself
 
@@ -233,33 +186,6 @@ implementations on the two sides.
 
 Nothing is published until both pass; the deploy is gated on them.
 
-## Reproducibility
-
-A seed reproduces a run, and a checkpoint resumes one exactly. Neither was true
-until recently, and both failed for the same kind of reason.
-
-`numpy.random.seed` does not reach networkx, which draws the starting graph
-from the `random` module, so two runs with the same seed began from different
-graphs. The seed is passed through now.
-
-Resuming was worse, because nothing about the saved state looked wrong: the
-graph, the tokens, the brains and the random stream all came back correctly.
-What did not was the *order* of each node's neighbours. networkx keeps
-adjacency in insertion order, so a graph rebuilt from an edge list presents its
-neighbours differently from the one it was copied from — and the engine reads
-neighbours as the columns of a matrix, so a column meant a different agent and
-every decision naming a neighbour by column landed elsewhere. Neighbours and
-the agent loop are both sorted by id now, which makes the run independent of
-how the graph was arrived at.
-
-Two things still differ between machines. Matrix multiplication is not
-bit-identical across BLAS implementations, and this simulation is chaotic
-enough to turn a last-bit difference into a different history — so the same
-seed gives the same run on the same machine, not across machines or between
-native Python and the browser. And messages in flight are part of the world
-state; they are checkpointed now, but a checkpoint written before that is
-resumed without them.
-
 ## How the website works
 
 There is no backend. The page decides once, on load, where the simulation
@@ -288,46 +214,19 @@ Nothing leaves your machine. Clearing your browser's site data removes it, and
 a browser short of disk space may evict it, so the page asks for persistent
 storage and tells you how much has been used.
 
-**A seed does not reproduce across machines.** The random number stream is
-bit-identical everywhere — verified. Matrix multiplication is not: native
-OpenBLAS and the WebAssembly build round differently in the last bit. The
-simulation is chaotic and makes decisions by comparing floats, so a one-ulp
-difference eventually flips a comparison and the trajectories part. With a
-small brain a run matched for 20 iterations exactly; with the default brain it
-diverged after three. This is not a quirk of the browser — two machines with
-different BLAS libraries do the same thing.
+## Goal
 
-## What the numbers mean
+The goal is open-ended evolution: a system that keeps producing genuinely new
+behaviour instead of settling on one way of playing and staying there.
 
-Some statistics are estimates, and the viewer says so rather than implying a
-precision it does not have.
+That is why the game is built the way it is. There should be no best strategy —
+every way of playing ought to be beatable by some other, so there is always
+somewhere left to go. The rules are kept as simple as they can be while still
+leaving that room, since a complicated game can hide novelty that came from the
+rules rather than from the agents.
 
-- **Diameter and radius** come from sampled breadth-first sweeps plus a second
-  sweep from the furthest node found. The diameter can only under-report and
-  the radius can only over-report. Exact on paths, cycles, stars, grids and
-  trees; about one step short on small-world graphs.
-- **Dimension** measures how fast a ball grows with radius, in the spirit of
-  the Wolfram Physics Project. Calibrated against lattices it returns 1.00 for
-  a chain, 1.92 for a square grid and 2.56 for a cubic one — exact in one
-  dimension, increasingly conservative above it. Read it as an index, not a
-  measurement.
-- **Time series are sampled** to at most 1,000 iterations, since a chart a few
-  hundred pixels wide cannot show more and the structural statistics are far
-  too slow to compute for every frame.
-
-## Is this open-ended evolution?
-
-Measured over 27,366 iterations of one run: no, not yet. Every statistic was
-stationary, the strategy heads had saturated, and the median agent held three
-tokens across five targets. Conserved tokens against a growing population
-collapse the decision space; mutation is unconditional and cannot itself
-evolve; the genome is a fixed size, so novelty is exploratory rather than
-expansive.
-
-That is a result, not a failure — it says what would have to change. Evolvable
-mutation rates, a token supply that grows, and variable-size brains are the
-obvious candidates. The interface exists so that these questions can be asked
-of a run rather than guessed at.
+Whether this particular set of rules gets there is an open question, and the
+viewer and the statistics exist to answer it.
 
 ## Repository layout
 
