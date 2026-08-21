@@ -18,6 +18,7 @@ repository contains, compiled to WebAssembly, entirely on your own machine.
 
 - [What the simulation does](#what-the-simulation-does)
 - [The two phases](#the-two-phases)
+- [Three kinds of brain](#three-kinds-of-brain)
 - [Agents decide their own randomness](#agents-decide-their-own-randomness)
 - [Optional mechanics](#optional-mechanics)
 - [Watching a run](#watching-a-run)
@@ -63,6 +64,40 @@ hold means starvation.
 Afterwards the world is cleaned up: starved agents are removed, anything
 detached from the largest connected component is culled, and the tokens freed
 are redistributed.
+
+## Three kinds of brain
+
+`brain_kind` chooses what a weight is. The rules of the simulation do not
+change; only what the agents think with does, which makes the three
+comparable against the same seed.
+
+| Kind | Weights | Per agent | |
+|---|---|---|---|
+| `float` | 64-bit | 33.8 KB | the original |
+| `float16` | 16-bit | 8.5 KB | the same arithmetic on a quarter of the memory |
+| `binary` | −1, 0, +1 | 27.1 KB | on-or-off hidden units, integer arithmetic throughout |
+
+The binary brain takes its inputs as a ladder of bits — bit *i* is set when the
+value clears the *i*-th threshold — so two nearby numbers differ in one bit
+and a distant one differs in many. Plain binary would not do: 127 and 128
+share no bits at all, and the network would have to learn every magnitude as
+an unrelated pattern rather than as a place on a scale. Its output layer does
+not fire; it hands back the integer count, because the decisions downstream
+divide tokens *in proportion* to their outputs and an on-or-off answer cannot
+say "twice as much".
+
+Nothing in that forward pass is a float, which means a binary run comes out
+identical on any machine — the one thing the float brains cannot promise.
+
+**A binary brain needs a gentler `mutation_sparsity`**, and not by preference.
+Its smallest possible move is a whole step while the spread of its weights is
+about 0.58, so any mutation shifts a weight by roughly 1.7 times that spread,
+against 0.15 for the float brain. At the same sparsity every child is
+substantially damaged. Measured over nine runs at 0.1, the binary populations
+died out in five; at 0.02 they survived every time with populations two to
+four times larger. At 0.005 one died again — too little mutation is its own
+failure. The rate is the only lever, since the step size is fixed by the
+representation.
 
 ## Agents decide their own randomness
 

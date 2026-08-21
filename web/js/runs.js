@@ -16,6 +16,7 @@ const RunsView = {
     ['n_nodes', 'n'],
     ['k_neighbors', 'k'],
     ['rewire_p', 'p'],
+    ['brain_kind', 'brain'],
     ['hidden_layers', 'hidden'],
     ['message_amount', 'msg'],
     ['random_input_amount', 'noise'],
@@ -166,18 +167,24 @@ const RunsView = {
                       + (cfg.allow_handover ? 4 : 0)
                       + (cfg.allow_rewire ? 8 : 0) + messages;
 
+    // A binary brain spreads every input across a ladder of bits, so its first
+    // layer is far wider even though each weight costs a fraction as much.
+    const binary = cfg.brain_kind === 'binary';
+    const bits = binary ? (cfg.brain_bits || 16) : 1;
+    const bytesPerWeight = binary ? 1 : (cfg.brain_kind === 'float16' ? 2 : 8);
+
     const n = cfg.n_nodes > 0 ? cfg.n_nodes : Math.floor((cfg.total_tokens || 0) / 100);
     const k = cfg.k_neighbors > 0 ? cfg.k_neighbors : Math.max(Math.floor(n / 100), 5);
 
     const layers = (cfg.hidden_layers && cfg.hidden_layers.length) ? cfg.hidden_layers : [50, 45, 40, 35, 30];
-    const sizes = [inputs, ...layers, outputs];
+    const sizes = [inputs * bits, ...layers, outputs];
     let params = 0;
     for (let i = 0; i < sizes.length - 1; i++) params += sizes[i] * sizes[i + 1] + sizes[i + 1];
 
     el.textContent =
       `Brain ${sizes.join('→')} · ${formatNumber(params)} params · ` +
       `seed graph n=${formatNumber(n)}, k=${k} · ` +
-      `checkpoint ≈ ${formatBytes(params * 8 * Math.max(1, n))}`;
+      `checkpoint ≈ ${formatBytes(params * bytesPerWeight * Math.max(1, n))}`;
   },
 
   async onCreate(event) {

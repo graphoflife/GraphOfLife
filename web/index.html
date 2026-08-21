@@ -59,6 +59,22 @@
           <fieldset>
             <legend>Brain</legend>
             <div class="field">
+              <label for="cfg_brain_kind">Kind</label>
+              <select id="cfg_brain_kind" data-cfg="brain_kind">
+                <option value="float">Float — 64-bit weights</option>
+                <option value="float16">Float16 — quarter the memory</option>
+                <option value="binary">Binary — weights of -1, 0, +1</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="cfg_brain_bits">Bits per input <span class="hint">(binary only)</span></label>
+              <input type="number" id="cfg_brain_bits" data-cfg="brain_bits" min="2" max="64" step="1">
+            </div>
+            <small class="hint">A binary weight can only step by a whole unit, so any
+              mutation moves it far. Give a binary brain a mutation sparsity around
+              0.02 rather than 0.1, or most children are born damaged and the
+              population dies out.</small>
+            <div class="field">
               <label for="cfg_hidden_layers">Hidden layers</label>
               <input type="text" id="cfg_hidden_layers" data-cfg="hidden_layers" placeholder="50, 45, 40">
             </div>

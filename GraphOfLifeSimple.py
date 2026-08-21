@@ -198,6 +198,14 @@ def _choose_binary(yes: float, no: float, mode_yes: float, mode_no: float) -> bo
     """
     if mode_yes > mode_no:
         return bool(np.random.random() < _share_of_first(yes, no))
+    # An exact tie is not a "no", it is the absence of a preference, and
+    # answering no would be a decision the agent never made. Floats effectively
+    # never land here; integer outputs do it constantly, and a brain whose
+    # every tie fell the same way would carry a bias it could not evolve out
+    # of. Undetermined at the maximum falls back to the probabilistic reading,
+    # which for a tie is a coin.
+    if yes == no:
+        return bool(np.random.random() < 0.5)
     return bool(yes > no)
 
 
@@ -255,6 +263,11 @@ class Brain:
 
     __slots__ = ("weights", "biases", "brain_id", "parent_brain_id", "cfg")
 
+    #: What weights are stored as. Subclasses narrow it; the arithmetic below
+    #: still happens in double precision, so this is about what is kept rather
+    #: than what is computed with.
+    dtype = np.float64
+
     def __init__(self, cfg: SimConfig, brain_id: int, allocate: bool = True) -> None:
         self.cfg = cfg
         self.brain_id = brain_id
@@ -263,10 +276,19 @@ class Brain:
         self.biases: List[np.ndarray] = []
 
         if allocate:
-            sizes = [cfg.n_inputs()] + list(cfg.hidden_layers) + [cfg.n_outputs()]
-            for fan_in, fan_out in zip(sizes[:-1], sizes[1:]):
-                self.weights.append(np.random.normal(0.0, 1.0 / np.sqrt(fan_in), size=(fan_out, fan_in)))
-                self.biases.append(np.zeros((fan_out, 1)))
+            self._allocate()
+
+    def layer_sizes(self) -> List[int]:
+        cfg = self.cfg
+        return [cfg.n_inputs()] + list(cfg.hidden_layers) + [cfg.n_outputs()]
+
+    def _allocate(self) -> None:
+        sizes = self.layer_sizes()
+        for fan_in, fan_out in zip(sizes[:-1], sizes[1:]):
+            self.weights.append(
+                np.random.normal(0.0, 1.0 / np.sqrt(fan_in),
+                                 size=(fan_out, fan_in)).astype(self.dtype))
+            self.biases.append(np.zeros((fan_out, 1), dtype=self.dtype))
 
     def forward(self, x: np.ndarray) -> np.ndarray:
         """Always returns a 2-D array of shape (n_outputs, n_candidates)."""
@@ -274,12 +296,15 @@ class Brain:
         if a.ndim == 1:
             a = a.reshape(-1, 1)
         for i, (W, b) in enumerate(zip(self.weights, self.biases)):
-            z = W @ a + b
+            # Computed in double precision whatever the weights are stored as:
+            # the saving being tested is in what a population has to hold, not
+            # in how each sum is added up.
+            z = W.astype(np.float64) @ a + b.astype(np.float64)
             a = z if i == len(self.weights) - 1 else _sigmoid(z)
         return a
 
     def copy_into(self, brain_id: int) -> "Brain":
-        clone = Brain(self.cfg, brain_id, allocate=False)
+        clone = type(self)(self.cfg, brain_id, allocate=False)
         clone.weights = [w.copy() for w in self.weights]
         clone.biases = [b.copy() for b in self.biases]
         clone.parent_brain_id = self.brain_id
@@ -300,8 +325,10 @@ class Brain:
         for i, (W, b) in enumerate(zip(self.weights, self.biases)):
             base_scale = 1.0 / np.sqrt(W.shape[1])
             std = cfg.mutation_noise_std * base_scale
-            self.weights[i] = self._perturb(W, std, base_scale, reset_fraction, cfg)
-            self.biases[i] = self._perturb(b, std, std if std > 0 else 0.01, reset_fraction, cfg)
+            self.weights[i] = self._perturb(
+                W, std, base_scale, reset_fraction, cfg).astype(self.dtype)
+            self.biases[i] = self._perturb(
+                b, std, std if std > 0 else 0.01, reset_fraction, cfg).astype(self.dtype)
 
         self.parent_brain_id = self.brain_id
         self.brain_id = brain_id
@@ -329,6 +356,159 @@ class Brain:
 # ----------------------------------------------------------------------------
 # The Arena
 # ----------------------------------------------------------------------------
+
+class Float16Brain(Brain):
+    """
+    The same network on half-precision weights.
+
+    A quarter of the memory of the float brain, and about three decimal digits
+    of precision instead of sixteen. The arithmetic is unchanged — the question
+    it asks is whether evolution ever needed the digits that were thrown away,
+    and a population that behaves the same on three of them is a population
+    whose brains are mostly empty.
+    """
+
+    __slots__ = ()
+    dtype = np.float16
+
+
+class BinaryBrain(Brain):
+    """
+    Weights of -1, 0 or +1, and hidden units that are simply on or off.
+
+    Every input arrives as a ladder of bits: bit i is set when the value clears
+    the i-th threshold, so two nearby numbers differ in one bit and a distant
+    one differs in many. Plain binary would not do — 127 and 128 share no bits
+    at all, and the network would have to learn every magnitude as an unrelated
+    pattern rather than as a place on a scale.
+
+    A hidden unit fires when its weighted count of set inputs clears its
+    threshold. The output layer does not fire: it hands back the count itself,
+    because the decisions downstream do not only ask which output is larger,
+    they divide tokens in proportion to them, and an on-or-off answer cannot
+    say "twice as much".
+
+    Nothing here is a float. The whole forward pass is integer addition, so a
+    run comes out identical on any machine — the one thing the float brains
+    cannot promise, since matrix multiplication rounds differently on different
+    hardware and this simulation turns a last-bit difference into a different
+    history.
+    """
+
+    __slots__ = ()
+    dtype = np.int8
+
+    # The ladder every input is spread across. Log-scaled quantities live in
+    # roughly 0 to 12 — twelve being about 160,000 tokens — and the noise and
+    # message inputs run a little below zero, so the ladder starts under it.
+    INPUT_LOW = -2.0
+    INPUT_HIGH = 12.0
+
+    def thresholds(self) -> np.ndarray:
+        bits = self.cfg.brain_bits
+        return np.linspace(self.INPUT_LOW, self.INPUT_HIGH, bits, dtype=np.float64)
+
+    def layer_sizes(self) -> List[int]:
+        # Every input became `brain_bits` of them.
+        cfg = self.cfg
+        return ([cfg.n_inputs() * cfg.brain_bits]
+                + list(cfg.hidden_layers) + [cfg.n_outputs()])
+
+    def _allocate(self) -> None:
+        sizes = self.layer_sizes()
+        for fan_in, fan_out in zip(sizes[:-1], sizes[1:]):
+            # Two in three weights start at zero. A layer of mostly -1 and +1
+            # saturates: with hundreds of inputs the sum is far from its
+            # threshold whatever any single input does, and nothing the agent
+            # sees can move it.
+            draw = np.random.random(size=(fan_out, fan_in))
+            weights = np.zeros((fan_out, fan_in), dtype=np.int8)
+            weights[draw < 1.0 / 6.0] = -1
+            weights[draw > 5.0 / 6.0] = 1
+            self.weights.append(weights)
+            self.biases.append(np.zeros((fan_out, 1), dtype=np.int8))
+
+    def encode(self, x: np.ndarray) -> np.ndarray:
+        """Spread each input across its ladder of thresholds."""
+        a = np.asarray(x, dtype=np.float64)
+        if a.ndim == 1:
+            a = a.reshape(-1, 1)
+        # (inputs, candidates) -> (inputs, bits, candidates) -> stacked rows.
+        bits = (a[:, None, :] >= self.thresholds()[None, :, None])
+        return bits.reshape(a.shape[0] * self.cfg.brain_bits, a.shape[1]).astype(np.int32)
+
+    def forward(self, x: np.ndarray) -> np.ndarray:
+        a = self.encode(x)
+        last = len(self.weights) - 1
+        for i, (W, b) in enumerate(zip(self.weights, self.biases)):
+            z = W.astype(np.int32) @ a + b.astype(np.int32)
+            if i == last:
+                # The count itself, so proportions downstream mean something.
+                return z.astype(np.float64)
+            # On when the count clears zero. Exactly zero counts as off, so the
+            # rule is decided rather than left to whichever way a tie falls.
+            a = (z > 0).astype(np.int32)
+        return a.astype(np.float64)
+
+    def mutate(self, brain_id: int) -> bool:
+        """
+        A weight steps to a neighbouring value rather than being redrawn.
+
+        Redrawing from -1, 0, +1 outright looked like the obvious thing and was
+        far too violent: measured against the float brain's jitter, which moves
+        a weight about a sixth of the spread of its layer, a redraw moved it
+        twice the spread — thirteen times as far. At the same mutation_sparsity
+        every child was substantially brain-damaged, and populations died out
+        in five runs of nine.
+
+        Stepping by one keeps the same sparsity meaning roughly the same thing
+        in both representations: a small move in genotype space rather than a
+        teleport. A weight already at an end sometimes stays there, which makes
+        the extremes slightly stickier than the middle — the discrete analogue
+        of a jitter that cannot push a value past its range.
+        """
+        cfg = self.cfg
+        if np.random.random() > cfg.mutation_probability:
+            return False
+
+        fraction = float(np.clip(cfg.mutation_sparsity, 0.0, 1.0))
+        if fraction <= 0.0:
+            return False
+
+        for i, (W, b) in enumerate(zip(self.weights, self.biases)):
+            self.weights[i] = self._redraw(W, fraction)
+            # Thresholds move by one step at a time, and are held in a range
+            # where they can still be reached by a plausible count.
+            picked = np.random.random(b.shape) < fraction
+            step = np.random.choice(np.array([-1, 1], dtype=np.int8), size=b.shape)
+            limit = np.int8(min(127, max(1, W.shape[1] // 4)))
+            self.biases[i] = np.clip(b + picked * step, -limit, limit).astype(np.int8)
+
+        self.parent_brain_id = self.brain_id
+        self.brain_id = brain_id
+        return True
+
+    @staticmethod
+    def _redraw(M: np.ndarray, fraction: float) -> np.ndarray:
+        """Nudge a sparse subset one step along -1, 0, +1, and no further."""
+        picked = np.random.random(M.shape) < fraction
+        step = np.random.choice(np.array([-1, 1], dtype=np.int8), size=M.shape)
+        stepped = np.clip(M.astype(np.int16) + picked * step, -1, 1)
+        return stepped.astype(np.int8)
+
+
+#: Every kind a brain can be, by the name a configuration uses.
+BRAIN_KINDS = {
+    "float": Brain,
+    "float16": Float16Brain,
+    "binary": BinaryBrain,
+}
+
+
+def make_brain(cfg: SimConfig, brain_id: int, allocate: bool = True) -> Brain:
+    """The brain this configuration asks for."""
+    return BRAIN_KINDS[cfg.brain_kind](cfg, brain_id, allocate=allocate)
+
 
 class GraphOfLife:
     def __init__(self, G_init: nx.Graph | None, cfg: SimConfig, _empty: bool = False) -> None:
@@ -371,7 +551,7 @@ class GraphOfLife:
     # ------------------------------------------------------------------------
 
     def _new_brain(self) -> Brain:
-        brain = Brain(self.cfg, self.next_brain_id)
+        brain = make_brain(self.cfg, self.next_brain_id)
         self.next_brain_id += 1
         return brain
 
@@ -1137,7 +1317,7 @@ class GraphOfLife:
         biases = [blob[f"b{i}"] for i in range(n_layers)]
 
         for i, u in enumerate(ids):
-            brain = Brain(cfg, int(brain_ids[i]), allocate=False)
+            brain = make_brain(cfg, int(brain_ids[i]), allocate=False)
             brain.parent_brain_id = int(parent_brain_ids[i])
             brain.weights = [w[i].copy() for w in weights]
             brain.biases = [b[i].copy() for b in biases]

@@ -35,6 +35,7 @@ import networkx as nx
 import gol_series
 from gol_config import SimConfig
 from GraphOfLifeSimple import GraphOfLife, new_world
+from GraphOfLifeSimple import _choose_binary as G_choose_binary
 
 
 def small(**overrides) -> SimConfig:
@@ -274,6 +275,96 @@ def test_neighbour_order_does_not_depend_on_graph_history():
     # Insertion order genuinely differs; sorting is what removes the dependence.
     differs = any(list(grown[n]) != list(rebuilt[n]) for n in grown.nodes())
     assert differs, "this test is not exercising what it claims to"
+
+
+# ---------------------------------------------------------------------------
+# Brains
+# ---------------------------------------------------------------------------
+
+def test_every_brain_kind_runs_and_conserves_tokens():
+    """
+    The three kinds differ in what a weight is, not in the rules. Whatever a
+    brain decides, the economy is still closed.
+    """
+    for kind in ("float", "float16", "binary"):
+        cfg = small(brain_kind=kind, hidden_layers=[24, 20], seed=13)
+        world = new_world(cfg)
+        expected = sum(world.tokens.values())
+        for _ in range(6):
+            for frame in world.step(record_decisions=False):
+                assert frame["summary"]["tokens"] == expected, f"{kind} lost tokens"
+        assert world.G.number_of_nodes() > 0, f"{kind} died out immediately"
+
+
+def test_weights_stay_in_the_shape_their_kind_promises():
+    """A binary brain that quietly grew a 0.5 would not be a binary brain."""
+    import numpy as np
+
+    cfg = small(brain_kind="binary", hidden_layers=[24, 20])
+    world = new_world(cfg)
+    for _ in range(4):
+        world.step(record_decisions=False)
+    for node in list(world.G.nodes())[:20]:
+        for W in world.brains[node].weights:
+            assert W.dtype == np.int8
+            assert set(np.unique(W)).issubset({-1, 0, 1}), "a weight left -1, 0, 1"
+
+    cfg = small(brain_kind="float16", hidden_layers=[24, 20])
+    world = new_world(cfg)
+    for _ in range(4):
+        world.step(record_decisions=False)
+    for node in list(world.G.nodes())[:20]:
+        for W in world.brains[node].weights:
+            assert W.dtype == np.float16
+
+
+def test_a_checkpoint_keeps_the_brain_kind():
+    """
+    Weights come back as the type they were saved as, or a binary brain
+    resumes as something else entirely.
+    """
+    import numpy as np
+
+    for kind, dtype in (("float", np.float64), ("float16", np.float16),
+                        ("binary", np.int8)):
+        cfg = small(brain_kind=kind, hidden_layers=[24, 20], seed=7)
+        world = new_world(cfg)
+        for _ in range(4):
+            world.step(record_decisions=False)
+
+        blob = {k: v.copy() for k, v in world.to_checkpoint().items()}
+
+        # Run the original on before restoring. Restoring puts the random
+        # stream back to where the checkpoint was taken, so doing it first
+        # would leave the original consuming the stream the copy needs.
+        straight_on = [f["summary"]["nodes"]
+                       for _ in range(3) for f in world.step(record_decisions=False)]
+
+        restored = GraphOfLife.from_checkpoint(blob, cfg)
+        node = next(iter(restored.G.nodes()))
+        assert restored.brains[node].weights[0].dtype == dtype, f"{kind} came back wrong"
+
+        resumed = [f["summary"]["nodes"]
+                   for _ in range(3) for f in restored.step(record_decisions=False)]
+        assert straight_on == resumed, f"{kind} did not resume the same run"
+
+
+def test_a_tie_is_not_a_no():
+    """
+    Integer outputs tie constantly where floats never do. Answering no to every
+    tie would be a bias a lineage could not evolve out of, so an undetermined
+    maximum falls back to a coin.
+    """
+    import numpy as np
+
+    np.random.seed(3)
+    # mode says "take the maximum", and the two sides are equal.
+    outcomes = {G_choose_binary(5.0, 5.0, 0.0, 1.0) for _ in range(200)}
+    assert outcomes == {True, False}, "a tie always fell the same way"
+
+    # A clear preference is still obeyed exactly.
+    assert G_choose_binary(5.0, 1.0, 0.0, 1.0) is True
+    assert G_choose_binary(1.0, 5.0, 0.0, 1.0) is False
 
 
 # ---------------------------------------------------------------------------

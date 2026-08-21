@@ -27,6 +27,8 @@ class SimConfig:
     # run's own checkpoint unloadable. Configurations written by the interface
     # always carry both keys, so an absent one really does mean "older".
     LEGACY_WHEN_ABSENT: ClassVar[Dict[str, Any]] = {
+        # Every run recorded before there was a choice used the float brain.
+        "brain_kind": "float",
         "allow_handover": False,
         "allow_revolutions": True,
         "allow_rewire": False,
@@ -47,6 +49,32 @@ class SimConfig:
 
     # ---- Brain ----
     hidden_layers: List[int] = field(default_factory=lambda: [50, 45, 40, 35, 30])
+
+    # How a brain stores and computes.
+    #
+    #   float    64-bit weights, sigmoid hidden layers. The original.
+    #   float16  the same arithmetic on 16-bit weights: a quarter of the
+    #            memory, and about three decimal digits of precision, which
+    #            asks whether evolution needs the other thirteen.
+    #   binary   weights of -1, 0 or +1 and hidden units that are on or off.
+    #            Inputs arrive thermometer-coded, the output layer emits its
+    #            integer sum so magnitudes survive, and no float is involved
+    #            anywhere — which also makes a run bit-identical on any machine.
+    #
+    # A binary brain needs a gentler mutation_sparsity than the others, and
+    # not by preference. Its smallest possible move is a whole step, while the
+    # spread of its weights is about 0.58 — so any mutation at all shifts a
+    # weight by roughly 1.7 times that spread, against 0.15 for the float
+    # brain. At the same sparsity every child is substantially damaged: over
+    # nine runs the binary populations died out in five. Dropping sparsity from
+    # 0.1 to 0.02 turned one death and two small populations into three
+    # survivals two to four times larger. The rate is the only lever, since the
+    # step size is fixed by the representation.
+    brain_kind: str = "float"
+    # How many bits each input is spread over, for the binary kind. Every bit
+    # is a threshold on the log-scaled value, so this sets how finely an agent
+    # can tell one order of magnitude from another.
+    brain_bits: int = 16
     message_amount: int = 5
     random_input_amount: int = 5
     exchange_messages: bool = True
@@ -188,6 +216,10 @@ class SimConfig:
             raise ValueError("mutation_sparsity must be between 0 and 1")
         if self.mutation_noise_std < 0:
             raise ValueError("mutation_noise_std cannot be negative")
+        if self.brain_kind not in ("float", "float16", "binary"):
+            raise ValueError("brain_kind must be float, float16 or binary")
+        if not 2 <= self.brain_bits <= 64:
+            raise ValueError("brain_bits must be between 2 and 64")
         if self.export_every < 1:
             raise ValueError("export_every must be at least 1")
         if self.checkpoint_every < 0:
