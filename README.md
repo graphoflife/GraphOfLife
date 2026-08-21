@@ -22,6 +22,8 @@ repository contains, compiled to WebAssembly, entirely on your own machine.
 - [Optional mechanics](#optional-mechanics)
 - [Watching a run](#watching-a-run)
 - [Running it yourself](#running-it-yourself)
+- [Checking that it still works](#checking-that-it-still-works)
+- [Known limitation: resuming is not exact](#known-limitation-resuming-is-not-exact)
 - [How the website works](#how-the-website-works)
 - [What the numbers mean](#what-the-numbers-mean)
 - [Is this open-ended evolution?](#is-this-open-ended-evolution)
@@ -138,6 +140,50 @@ python3 GraphOfLifeSimple.py
 A run has no iteration ceiling. It goes until you stop it or the population
 dies out.
 
+## Checking that it still works
+
+```bash
+python3 tests/test_engine.py        # invariants: tokens, topology, resuming
+python3 tests/test_stats_parity.py  # the two statistics implementations agree
+```
+
+Neither needs pytest, though `python3 -m pytest tests/` works too. A research
+repository whose tests need a toolchain installed first is a repository whose
+tests do not get run.
+
+The invariants are properties rather than expected values — a simulation whose
+point is that nobody knows what it will do cannot be tested by writing down
+what it should do, but it can be held to what must be true regardless. Tokens
+are conserved. A rewire never invents an edge. Rewiring does not depend on the
+order agents are visited in. A seed reproduces a run.
+
+The parity test exists because forty-odd statistics are computed twice — in
+Python for the charts, in JavaScript for the panel under the graph — and two
+implementations of the same thing drift. They had: an optimisation to the
+JavaScript edge-flow map quietly began skipping agents culled during cleanup,
+so the panel and the chart disagreed about the same frame and neither looked
+wrong on its own. Both now run over identical frames and every shared value is
+compared, including the structural ones, which are genuinely independent
+implementations on the two sides.
+
+Nothing is published until both pass; the deploy is gated on them.
+
+## Known limitation: resuming is not exact
+
+A checkpoint restores the graph, the tokens, the brains, the messages in
+flight and the random stream — but not the *order* of each node's neighbours.
+networkx keeps adjacency in insertion order, and rebuilding a graph from an
+edge list produces a different insertion history. The engine hands an agent its
+neighbours as the columns of a matrix, so after a restore a column refers to a
+different agent, and every decision that names a neighbour by column lands
+somewhere else.
+
+A resumed run is therefore a plausible continuation rather than the same one.
+Sorting each agent's neighbours would fix it and make runs reproducible in
+general, at the cost of changing what every existing run does — a decision
+about the science rather than about the code, so it has not been made here.
+`tests/test_engine.py` asserts the limitation so it cannot quietly get worse.
+
 ## How the website works
 
 There is no backend. The page decides once, on load, where the simulation
@@ -220,6 +266,7 @@ web/                   the interface: viewer, renderer, layout, charts
   js/sim-worker.js     the browser backend — Pyodide, running the engine above
   js/runstore.js       runs, frames and checkpoints in IndexedDB
   py/gol_browser.py    live worlds, advanced a slice at a time
+tests/                 invariants, and parity between the two statistics
 ```
 
 The original four-year research codebase this grew out of is preserved on the

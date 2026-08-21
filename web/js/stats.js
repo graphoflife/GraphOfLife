@@ -56,6 +56,9 @@ class FrameMetrics {
     const decisions = this.frame.decisions;
     if (!decisions || !decisions.allocations) return flow;
 
+    // Keyed by position rather than by id, so the renderer can look an edge up
+    // without hashing a string per edge. That also means it only holds traffic
+    // between agents still present; the statistics use flowAmounts instead.
     const index = this.index;
     const stride = this.frame.ids.length + 1;
 
@@ -81,6 +84,38 @@ class FrameMetrics {
   get flow() {
     if (!this._flow) this._flow = this._edgeFlow();
     return this._flow;
+  }
+
+  /**
+   * Every amount that moved between two different agents this phase.
+   *
+   * Separate from `flow` on purpose. That map is keyed by position in this
+   * frame because the renderer looks edges up by position, which means it can
+   * only hold traffic between agents that are still here. An agent culled
+   * during cleanup was still alive when the tokens were sent, so leaving its
+   * traffic out understates what moved — and did, by three hundred tokens on
+   * a 462-node frame, which is where this and the server's own figure parted
+   * company.
+   */
+  get flowAmounts() {
+    if (this._flowAmounts) return this._flowAmounts;
+
+    const totals = new Map();
+    const decisions = this.frame.decisions;
+    if (decisions && decisions.allocations) {
+      for (const record of decisions.allocations) {
+        const source = record.agent;
+        for (let i = 0; i < record.targets.length; i++) {
+          const target = record.targets[i];
+          const amount = record.alloc[i];
+          if (!amount || target === source) continue;
+          const key = source < target ? `${source},${target}` : `${target},${source}`;
+          totals.set(key, (totals.get(key) || 0) + amount);
+        }
+      }
+    }
+    this._flowAmounts = Array.from(totals.values());
+    return this._flowAmounts;
   }
 
   get hasFlow() { return this.flow.size > 0; }
@@ -527,7 +562,7 @@ class FrameMetrics {
 
   /** Tokens carried by each edge this phase, as a plain array. */
   flowValues() {
-    return Array.from(this.flow.values());
+    return this.flowAmounts;
   }
 
   /**

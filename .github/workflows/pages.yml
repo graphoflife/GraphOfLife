@@ -21,7 +21,28 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # Nothing is published before the invariants pass. A site that deploys while
+  # the engine is broken is worse than one that fails to deploy.
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install what the engine needs
+        run: pip install --quiet -r requirements.txt
+      - name: Engine invariants
+        run: python3 tests/test_engine.py
+      - name: The two statistics implementations agree
+        run: python3 tests/test_stats_parity.py
+      - name: Every script parses
+        run: |
+          for f in web/js/*.js; do node --check "$f"; done
+          python3 -m compileall -q *.py web/py/*.py
+
   build:
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

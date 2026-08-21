@@ -1077,6 +1077,28 @@ class GraphOfLife:
             blob[f"W{layer}"] = np.stack([self.brains[u].weights[layer] for u in nodes])
             blob[f"b{layer}"] = np.stack([self.brains[u].biases[layer] for u in nodes])
 
+        # Messages in flight are world state like any other. Leaving them out
+        # meant a resumed run began deaf for one phase while the run it claimed
+        # to continue did not, which is enough to send the two apart.
+        #
+        # Stored as three flat arrays rather than a nested structure, since
+        # savez wants arrays and the shape is entirely regular: who it is for,
+        # who sent it, and the values themselves.
+        recipients: List[int] = []
+        senders: List[int] = []
+        payloads: List[List[float]] = []
+        for recipient in nodes:
+            for sender, values in self.messages.get(recipient, {}).items():
+                recipients.append(int(recipient))
+                senders.append(int(sender))
+                payloads.append([float(v) for v in values])
+
+        width = len(payloads[0]) if payloads else 0
+        blob["msg_to"] = np.array(recipients, dtype=np.int64)
+        blob["msg_from"] = np.array(senders, dtype=np.int64)
+        blob["msg_values"] = (np.array(payloads, dtype=np.float64)
+                              if payloads else np.zeros((0, width), dtype=np.float64))
+
         # Preserve the RNG stream so a resumed run is not merely similar.
         state = np.random.get_state()
         blob["rng_keys"] = state[1].astype(np.uint32)
@@ -1114,6 +1136,16 @@ class GraphOfLife:
             world.tokens[u] = int(tokens[i])
             world.messages[u] = {}
             world.parent_of[u] = int(parent_ids[i])
+
+        # Messages, if this checkpoint is new enough to carry them. An older one
+        # simply has none, which is the state it was restored with before.
+        if "msg_to" in blob:
+            msg_to = blob["msg_to"].tolist()
+            msg_from = blob["msg_from"].tolist()
+            values = blob["msg_values"]
+            for i, recipient in enumerate(msg_to):
+                if recipient in world.messages:
+                    world.messages[recipient][int(msg_from[i])] = values[i].tolist()
 
         counters = blob["counters"].tolist()
         world.next_agent_id, world.next_brain_id, world.iteration = (
