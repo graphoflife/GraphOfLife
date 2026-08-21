@@ -223,36 +223,57 @@ def test_a_checkpoint_restores_the_whole_world():
             assert (live == back).all(), "a brain came back different"
 
 
-def test_resuming_does_not_yet_reproduce_the_run_exactly():
+def test_resuming_continues_the_same_run():
     """
-    A known limitation, asserted so that it cannot quietly get worse.
+    A resumed run must be the same run, not a plausible one.
 
-    Everything the world is made of survives a checkpoint, but the *order* of
-    each node's neighbours does not: networkx keeps adjacency in insertion
-    order, and rebuilding a graph from an edge list produces a different
-    insertion history. The engine hands an agent its neighbours as the columns
-    of a matrix, so a column means a different agent after a restore, and every
-    decision that names a neighbour by column lands somewhere else.
+    It was not, for a long time, and nothing about the state was to blame:
+    the graph, the tokens, the brains and the random stream all came back
+    correctly. What did not was the *order* of each node's neighbours.
+    networkx keeps adjacency in insertion order, so a graph rebuilt from an
+    edge list presents its neighbours differently from the one it was copied
+    from — and the engine reads neighbours as the columns of a matrix, so a
+    column meant a different agent and every decision naming a neighbour by
+    column landed elsewhere.
 
-    A resumed run is therefore a plausible continuation rather than the same
-    one. Sorting each agent's neighbours would fix it and make runs
-    reproducible in general, at the cost of changing what every existing run
-    would do — which is a decision about the science, not about the code.
+    Sorting the neighbours fixed it. This checks the whole point of that.
     """
-    cfg = small(seed=31, message_amount=0)
+    cfg = small(seed=31)
     world = new_world(cfg)
     for _ in range(5):
         world.step(record_decisions=False)
 
     blob = {k: v.copy() for k, v in world.to_checkpoint().items()}
-    restored = GraphOfLife.from_checkpoint(blob, cfg)
+    straight_on = [(f["summary"]["nodes"], f["summary"]["edges"], f["summary"]["tokens"])
+                   for _ in range(6) for f in world.step(record_decisions=False)]
 
-    reordered = sum(1 for u in world.G.nodes()
-                    if list(world.G[u]) != list(restored.G[u]))
-    assert reordered > 0, (
-        "neighbour order now survives a checkpoint — if that was deliberate, "
-        "this test should be replaced by one asserting an exact resume"
-    )
+    restored = GraphOfLife.from_checkpoint(blob, cfg)
+    after_restore = [(f["summary"]["nodes"], f["summary"]["edges"], f["summary"]["tokens"])
+                     for _ in range(6) for f in restored.step(record_decisions=False)]
+
+    assert straight_on == after_restore, "the resumed run diverged from the original"
+
+
+def test_neighbour_order_does_not_depend_on_graph_history():
+    """
+    The same graph must present the same neighbours in the same order however
+    it was built, since that order is what the brain's columns refer to.
+    """
+    import networkx as nx_local
+
+    grown = nx_local.Graph()
+    grown.add_edges_from([(3, 1), (3, 7), (1, 7), (7, 2), (2, 3)])
+
+    # The same graph, assembled in a different order.
+    rebuilt = nx_local.Graph()
+    rebuilt.add_edges_from([(2, 3), (7, 2), (1, 7), (3, 7), (3, 1)])
+
+    for node in grown.nodes():
+        assert sorted(grown.neighbors(node)) == sorted(rebuilt.neighbors(node))
+
+    # Insertion order genuinely differs; sorting is what removes the dependence.
+    differs = any(list(grown[n]) != list(rebuilt[n]) for n in grown.nodes())
+    assert differs, "this test is not exercising what it claims to"
 
 
 # ---------------------------------------------------------------------------

@@ -410,7 +410,17 @@ class GraphOfLife:
         """
         log_tokens = {u: np.log1p(max(0, val)) for u, val in self.tokens.items()}
         log_degrees = {u: np.log1p(float(self.G.degree[u])) for u in self.G.nodes()}
-        neighs = {u: list(self.G.neighbors(u)) for u in self.G.nodes()}
+
+        # Sorted, and that matters more than it looks. These lists become the
+        # columns of the matrix an agent reads its neighbours from, so their
+        # order decides which output refers to whom. Taken straight from
+        # networkx they came back in insertion order — the order edges happened
+        # to be added over the run's history — which meant the same graph could
+        # present its neighbours differently depending on how it was arrived at.
+        # A checkpoint rebuilt from an edge list did exactly that, so resuming a
+        # run silently continued a different one. By node id it is the same
+        # ordering every time, however the graph was built.
+        neighs = {u: sorted(self.G.neighbors(u)) for u in self.G.nodes()}
 
         q_tok: Dict[int, List[float]] = {}
         q_deg: Dict[int, List[float]] = {}
@@ -484,7 +494,7 @@ class GraphOfLife:
         tokens_before = dict(self.tokens)
         log_deg, neighs, q_tok, q_deg, log_tok = self._precompute_features()
 
-        for u in list(self.G.nodes()):
+        for u in sorted(self.G.nodes()):
             tokens_u = int(self.tokens.get(u, 0))
             if tokens_u <= 0:
                 continue
@@ -726,7 +736,7 @@ class GraphOfLife:
         log_deg, neighs, q_tok, q_deg, log_tok = self._precompute_features()
 
         # --- 1. Message pass, so allocation decisions see fresh signals -------
-        for u in list(self.G.nodes()):
+        for u in sorted(self.G.nodes()):
             targets = [u] + list(neighs[u])
             Y = self._observe(u, targets, log_deg, q_tok, q_deg, log_tok)
             self._emit_messages(u, targets, Y)
@@ -738,7 +748,7 @@ class GraphOfLife:
         edge_flow: Dict[Tuple[int, int], int] = {tuple(sorted(e)): 0 for e in self.G.edges()}
         alloc_records: List[Dict[str, Any]] = []
 
-        for u in list(self.G.nodes()):
+        for u in sorted(self.G.nodes()):
             tokens_u = int(self.tokens.get(u, 0))
             if tokens_u <= 0:
                 continue

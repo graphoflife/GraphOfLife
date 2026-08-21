@@ -23,11 +23,12 @@ repository contains, compiled to WebAssembly, entirely on your own machine.
 - [Watching a run](#watching-a-run)
 - [Running it yourself](#running-it-yourself)
 - [Checking that it still works](#checking-that-it-still-works)
-- [Known limitation: resuming is not exact](#known-limitation-resuming-is-not-exact)
+- [Reproducibility](#reproducibility)
 - [How the website works](#how-the-website-works)
 - [What the numbers mean](#what-the-numbers-mean)
 - [Is this open-ended evolution?](#is-this-open-ended-evolution)
 - [Repository layout](#repository-layout)
+- [Licence](#licence)
 
 ---
 
@@ -168,21 +169,32 @@ implementations on the two sides.
 
 Nothing is published until both pass; the deploy is gated on them.
 
-## Known limitation: resuming is not exact
+## Reproducibility
 
-A checkpoint restores the graph, the tokens, the brains, the messages in
-flight and the random stream — but not the *order* of each node's neighbours.
-networkx keeps adjacency in insertion order, and rebuilding a graph from an
-edge list produces a different insertion history. The engine hands an agent its
-neighbours as the columns of a matrix, so after a restore a column refers to a
-different agent, and every decision that names a neighbour by column lands
-somewhere else.
+A seed reproduces a run, and a checkpoint resumes one exactly. Neither was true
+until recently, and both failed for the same kind of reason.
 
-A resumed run is therefore a plausible continuation rather than the same one.
-Sorting each agent's neighbours would fix it and make runs reproducible in
-general, at the cost of changing what every existing run does — a decision
-about the science rather than about the code, so it has not been made here.
-`tests/test_engine.py` asserts the limitation so it cannot quietly get worse.
+`numpy.random.seed` does not reach networkx, which draws the starting graph
+from the `random` module, so two runs with the same seed began from different
+graphs. The seed is passed through now.
+
+Resuming was worse, because nothing about the saved state looked wrong: the
+graph, the tokens, the brains and the random stream all came back correctly.
+What did not was the *order* of each node's neighbours. networkx keeps
+adjacency in insertion order, so a graph rebuilt from an edge list presents its
+neighbours differently from the one it was copied from — and the engine reads
+neighbours as the columns of a matrix, so a column meant a different agent and
+every decision naming a neighbour by column landed elsewhere. Neighbours and
+the agent loop are both sorted by id now, which makes the run independent of
+how the graph was arrived at.
+
+Two things still differ between machines. Matrix multiplication is not
+bit-identical across BLAS implementations, and this simulation is chaotic
+enough to turn a last-bit difference into a different history — so the same
+seed gives the same run on the same machine, not across machines or between
+native Python and the browser. And messages in flight are part of the world
+state; they are checkpointed now, but a checkpoint written before that is
+resumed without them.
 
 ## How the website works
 
@@ -256,19 +268,31 @@ of a run rather than guessed at.
 ## Repository layout
 
 ```
+LICENSE                MIT — use it for anything, including commercially
 GraphOfLifeSimple.py   the engine: agents, brains, both phases, cleanup
 gol_config.py          every setting, with validation
 gol_store.py           runs on disk — gzipped frames and a rolling checkpoint
 gol_series.py          per-frame statistics for the charts
 gol_server.py          the local server (standard library only)
 build_site.sh          assembles the static site into _site/
-web/                   the interface: viewer, renderer, layout, charts
+web/                   the interface: renderer, layout, charts
+  js/viewer.js         frames, camera, playback, the animation loop
+  js/viewer-controls.js  the settings panel, and keeping it in step
+  js/viewer-focus.js   cropping to a neighbourhood, and fullscreen
+  js/viewer-panels.js  statistics, charts and the hover card
   js/sim-worker.js     the browser backend — Pyodide, running the engine above
   js/runstore.js       runs, frames and checkpoints in IndexedDB
   py/gol_browser.py    live worlds, advanced a slice at a time
 tests/                 invariants, and parity between the two statistics
+docs/IDEAS.md          what might come next
 ```
 
-The original four-year research codebase this grew out of is preserved on the
-[`original-engine`](https://github.com/graphoflife/GraphOfLife/tree/original-engine)
-branch, including the `Old/` folder of earlier variants.
+## Licence
+
+MIT. Use it, change it, build on it, sell it — the only condition is that the
+notice travels with it. See [LICENSE](LICENSE).
+
+The original four-year research codebase this grew out of is preserved whole on
+the [`original-engine`](https://github.com/graphoflife/GraphOfLife/tree/original-engine)
+branch, including the `Old/` folder of earlier variants. It is not duplicated
+here; the branch is the copy.

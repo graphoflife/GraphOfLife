@@ -412,6 +412,12 @@
 <script src="js/presets.js"></script>
 <script src="js/runs.js"></script>
 <script src="js/viewer.js"></script>
+<!-- The viewer is assembled from four files. The core declares it; these three
+     attach the settings panel, the framing controls and the panels beneath the
+     canvas, so they must load after it. -->
+<script src="js/viewer-controls.js"></script>
+<script src="js/viewer-focus.js"></script>
+<script src="js/viewer-panels.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>
