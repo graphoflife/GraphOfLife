@@ -40,9 +40,11 @@
       <ellipse cx="6.7" cy="12.8" rx="1.15" ry="1.55"/>
     </g>
   </svg>
-  <h1>GraphOfLife</h1>
+  <button class="brand" data-view="home" title="Home">
+    <h1>GraphOfLife</h1>
+  </button>
   <nav class="tabs">
-    <button class="tab active" data-view="explain">Explanation</button>
+    <button class="tab" data-view="explain">Explanation</button>
     <button class="tab" data-view="runs">Simulations</button>
     <button class="tab" data-view="viewer">Viewer</button>
     <button class="tab" data-view="analysis">Analysis</button>
@@ -50,8 +52,30 @@
   <span class="run-label" id="activeRunLabel"></span>
 </header>
 
+<!-- ==================== HOME VIEW ==================== -->
+<main id="view-home" class="view active">
+  <div class="home-stage">
+    <!-- The background is a real run, recorded rather than computed here: the
+         page has to open at once, and it must not leave a stray simulation
+         behind on a machine that has a server. -->
+    <canvas id="homeCanvas"></canvas>
+    <div class="home-veil"></div>
+
+    <div class="home-hero">
+      <h2 class="home-title">Graph of Life</h2>
+      <p class="home-subtitle">A new Artificial Life Algorithm</p>
+    </div>
+
+    <aside class="home-note">
+      <p>An attempt at finding <b>Open Ended Evolution</b> with graph theory,
+        evolutionary game theory and neural networks. No optimization &mdash;
+        just mutation, evolution and natural selection.</p>
+    </aside>
+  </div>
+</main>
+
 <!-- ==================== EXPLANATION VIEW ==================== -->
-<main id="view-explain" class="view active">
+<main id="view-explain" class="view">
   <div class="explain-intro">
     <h2>How the Graph Of Life Algorithm works</h2>
     <p>Each step of one iteration, in the order the engine does it. On the
@@ -492,6 +516,7 @@
 <script src="js/statdetail.js"></script>
 <script src="js/presets.js"></script>
 <script src="js/explain.js"></script>
+<script src="js/home.js"></script>
 <script src="js/runs.js"></script>
 <script src="js/viewer.js"></script>
 <!-- The viewer is assembled from four files. The core declares it; these three

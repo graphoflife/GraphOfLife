@@ -851,3 +851,135 @@ details.control-group > summary:hover h3 { color: var(--text); }
 }
 
 .analysis-empty { max-width: 620px; }
+
+/* ==========================================================================
+   Home
+   ========================================================================== */
+
+/* The stage fills what is left under the top bar, edge to edge: the view's
+   usual padding would put a frame around something meant to be a backdrop. */
+#view-home { padding: 0; }
+
+.home-stage {
+  position: relative;
+  height: calc(100vh - 47px);
+  min-height: 420px;
+  overflow: hidden;
+  background: #0d1117;
+}
+
+/* Not interactive, and it says so: no pointer events at all, so a click or a
+   drag falls through to the page rather than half-working. */
+#homeCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+}
+
+/* Darkened towards the middle and the bottom left, which is where the words
+   are. White on a bright cluster of agents is otherwise unreadable. */
+.home-veil {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(120% 90% at 50% 45%, rgba(13, 17, 23, 0.72) 0%, rgba(13, 17, 23, 0.25) 45%, rgba(13, 17, 23, 0) 75%),
+    linear-gradient(to top, rgba(13, 17, 23, 0.85) 0%, rgba(13, 17, 23, 0) 42%);
+}
+
+.home-hero {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  text-align: center;
+  padding: 0 24px;
+}
+
+.home-title {
+  margin: 0;
+  font-size: clamp(38px, 8.2vw, 112px);
+  font-weight: 200;
+  line-height: 1.04;
+  color: #fff;
+  letter-spacing: 0.06em;
+  text-shadow: 0 2px 40px rgba(0, 0, 0, 0.75);
+}
+
+.home-subtitle {
+  margin: 18px 0 0;
+  font-size: clamp(13px, 1.7vw, 20px);
+  font-weight: 300;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.8);
+}
+
+/* Resolving out of a blur, with the letters drawing together as they land.
+   Restarted by re-adding the class whenever the tab is opened, so it plays
+   every time rather than only on the first load. */
+.home-stage.play .home-title {
+  animation: home-resolve 2600ms cubic-bezier(0.16, 0.84, 0.24, 1) both;
+}
+.home-stage.play .home-subtitle {
+  animation: home-resolve 2000ms cubic-bezier(0.16, 0.84, 0.24, 1) 900ms both;
+}
+.home-stage.play .home-note {
+  animation: home-fade 1600ms ease-out 1900ms both;
+}
+
+@keyframes home-resolve {
+  from { opacity: 0; filter: blur(18px); letter-spacing: 0.34em; transform: translateY(14px); }
+  60%  { opacity: 1; }
+  to   { opacity: 1; filter: blur(0);    letter-spacing: inherit; transform: none; }
+}
+
+@keyframes home-fade {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.home-note {
+  position: absolute;
+  left: 22px;
+  bottom: 22px;
+  max-width: 380px;
+  padding: 13px 15px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-left: 2px solid var(--accent);
+  border-radius: var(--radius);
+  background: rgba(13, 17, 23, 0.62);
+  backdrop-filter: blur(6px);
+}
+.home-note p {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: rgba(230, 237, 243, 0.82);
+}
+.home-note b { color: #fff; font-weight: 600; }
+
+/* The wordmark is the way back here, so it has to look pressable. */
+.brand {
+  background: none;
+  border: none;
+  padding: 0 2px;
+  margin: 0;
+  cursor: pointer;
+  color: var(--text);
+  border-radius: 6px;
+}
+.brand:hover:not(:disabled) { border-color: transparent; color: #fff; }
+.brand.active h1 { color: #fff; }
+.brand.active { box-shadow: inset 0 -2px 0 var(--accent); }
+
+@media (max-width: 640px) {
+  .home-note { left: 12px; right: 12px; bottom: 12px; max-width: none; }
+}

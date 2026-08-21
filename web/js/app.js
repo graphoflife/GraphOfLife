@@ -1,9 +1,11 @@
 /* Tab switching, panel resizing, and start-up. */
 const App = {
-  view: 'explain',
+  view: 'home',
 
   init() {
-    for (const tab of document.querySelectorAll('.tab')) {
+    // The wordmark carries data-view too, so it is a way back to the front
+    // page rather than decoration.
+    for (const tab of document.querySelectorAll('[data-view]')) {
       tab.addEventListener('click', () => this.showView(tab.dataset.view));
     }
 
@@ -11,11 +13,18 @@ const App = {
     StatDetail.init();
     RunsView.init();
     Explain.init();
+    Home.init();
 
     // Both layouts are two panes plus a drag handle; the handle sets the width
     // of the second column and the choice is remembered per layout.
     this.makeResizable('runsLayout', 'runsResizer', 'gol.width.runs', 320, 900, 420);
     this.makeResizable('viewerLayout', 'viewerResizer', 'gol.width.viewer', 200, 620, 268);
+
+    // Open on whichever view is the default, through the same path a click
+    // takes. Marking it in the markup instead would set the class and skip
+    // everything else showView does, which is how the wordmark came to be the
+    // selected tab without looking like it.
+    this.showView(this.view);
   },
 
   /**
@@ -67,12 +76,16 @@ const App = {
   showView(name) {
     this.view = name;
 
-    for (const tab of document.querySelectorAll('.tab')) {
+    for (const tab of document.querySelectorAll('.tab, .brand')) {
       tab.classList.toggle('active', tab.dataset.view === name);
     }
     for (const view of document.querySelectorAll('.view')) {
       view.classList.toggle('active', view.id === `view-${name}`);
     }
+
+    // The backdrop runs only while it is being looked at, and its canvas has
+    // no size until the view is shown, so it is told both ways round.
+    Home.setActive(name === 'home');
 
     // The canvas has no size while hidden, so it must be measured on reveal.
     // Done synchronously as well as on the next frame: the element already has

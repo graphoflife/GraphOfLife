@@ -94,7 +94,11 @@ class SimConfig:
     # Let an agent hand one of its own edges to another of its neighbours: the
     # edge (u, old) becomes (recipient, old), leaving the giver out of the
     # middle. Handover sideways rather than to a newborn.
-    allow_rewire: bool = True
+    #
+    # Off by default. It is the mechanic that changes the graph most drastically
+    # per iteration, so a run with it on is answering a different question from
+    # a run without it, and the plainer one is the better place to start.
+    allow_rewire: bool = False
 
     # ---- Mutation ----
     mutation_probability: float = 0.5

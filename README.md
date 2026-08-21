@@ -106,11 +106,23 @@ the leader — so the largest bid can be beaten by agreement among smaller ones.
 The connection (agent, other) becomes (recipient, other): the agent drops out
 of the middle and the two it stood between are left joined directly. A rewire
 never creates an edge. The count stays the same, or falls by one where the two
-collapse into the single edge a simple graph can hold.
+collapse into the single edge a simple graph can hold. This one is **off by
+default**: it changes the graph faster than anything else per iteration, so a
+run with it on is answering a different question from a run without it.
 
 ## Watching a run
 
-The site opens on **Explanation**: every step of an iteration as a pair of
+The site opens on a front page whose background is a real run: five thousand
+agents turning slowly, played back and forth from a recording made by
+`tools/record_home_run.py`. It is recorded rather than computed in the page
+because computing it would mean fetching a Python runtime and then waiting
+minutes for a hundred iterations, and because on a machine running
+`gol_server.py` it would leave a stray run on disk every time anyone opened the
+site. The recording keeps only what the renderer reads — who exists, what they
+hold, who their parent was, and who is joined to whom — packed as delta
+varints, which is about four times smaller than the same frames as JSON.
+
+**Explanation** is next: every step of an iteration as a pair of
 looping animations, one following a single agent and one showing the same rule
 running across a whole small world at once. They are drawn from the same code
 as you watch rather than recorded, so they cannot quietly fall out of step with
@@ -272,7 +284,12 @@ web/                   the interface: renderer, layout, charts
   js/viewer-panels.js  statistics, charts and the hover card
   js/sim-worker.js     the browser backend — Pyodide, running the engine above
   js/runstore.js       runs, frames and checkpoints in IndexedDB
+  js/home.js           the front page, and unpacking its recording
+  js/explain.js        the algorithm, one animated step at a time
   py/gol_browser.py    live worlds, advanced a slice at a time
+tools/
+  record_home_run.py   the run that plays behind the front page
+web/data/home-run.bin  that recording, packed
 tests/                 invariants, and parity between the two statistics
 docs/IDEAS.md          what might come next
 ```
