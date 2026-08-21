@@ -19,6 +19,8 @@ class LayoutClient {
     this.dimensions = 3;
     this.usingWorker = false;
     this.shared = null;
+    // Set by every setFrame; 1 until one has happened.
+    this.freshShare = 1;
 
     // Mirrors of the force parameters, so a value set before the worker is
     // ready is not lost, and so the fallback layout can be configured the
@@ -110,6 +112,21 @@ class LayoutClient {
   // ------------------------------------------------------------------
 
   setFrame(ids, edges, parents, carry) {
+    // How much of this frame the layout has never placed before.
+    //
+    // This is what decides how hard to shake it. Carrying positions from the
+    // last frame is only a head start if there were positions to carry: on the
+    // first frame of a run, or after jumping across a run to somewhere the
+    // agents have all been replaced, "carry" carries nothing and the layout is
+    // starting from scratch whatever the setting says.
+    this.freshShare = 1;
+    if (carry && this.ids.length && ids.length) {
+      const had = new Set(this.ids);
+      let carried = 0;
+      for (const id of ids) if (had.has(id)) carried++;
+      this.freshShare = 1 - carried / ids.length;
+    }
+
     this.ids = ids;
     this.count = ids.length;
     this._pending = { ids, edges, parents, carry };

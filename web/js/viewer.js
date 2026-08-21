@@ -476,7 +476,19 @@ const Viewer = {
     const carry = this.settings.layoutCarry && !this._dropPositions;
     this._dropPositions = false;
     this.layout.setFrame(this.frame.ids, this.frame.edges, this.frame.parent_ids, carry);
-    this.layout.reheat(this.settings.layoutCarry ? 0.35 : 1);
+    // Shaken in proportion to how much of the graph is new to the layout,
+    // rather than by whether carrying positions is switched on.
+    //
+    // The old rule read the setting and nothing else, so with carry on — the
+    // default — every frame got 0.35, including the first frame of a run,
+    // where nothing had been carried and every agent was starting from a
+    // random point. Measured on 3,793 agents: 0.35 from cold settles at a mean
+    // edge length of 0.366 of the graph's radius against 0.208 for a full
+    // shake, which is the tangle that had to be reheated by hand. A full shake
+    // on a single step is not the answer either — it is tidier still, but
+    // moves surviving agents half a radius, and watching structure persist is
+    // most of the point of carrying positions at all.
+    this.layout.reheat(carry ? Math.min(1, 0.3 + 0.7 * this.layout.freshShare) : 1);
 
     this.rebuildMetrics();
     this.updateSlider();
