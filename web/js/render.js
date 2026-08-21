@@ -29,6 +29,11 @@ class GraphRenderer {
 
     this.dpr = window.devicePixelRatio || 1;
 
+    // A ceiling on the pixel ratio. The Viewer wants every pixel the screen
+    // has; the front page's backdrop does not, and on a retina display the
+    // difference is four times the fill for something sitting behind a title.
+    this.maxDpr = Infinity;
+
     this.mode3D = false;
     this.yaw = 0.6;
     this.pitch = -0.35;
@@ -40,7 +45,7 @@ class GraphRenderer {
 
   resize() {
     const rect = this.canvas.getBoundingClientRect();
-    this.dpr = window.devicePixelRatio || 1;
+    this.dpr = Math.min(this.maxDpr, window.devicePixelRatio || 1);
     this.canvas.width = Math.max(1, Math.floor(rect.width * this.dpr));
     this.canvas.height = Math.max(1, Math.floor(rect.height * this.dpr));
     this.cssWidth = rect.width;

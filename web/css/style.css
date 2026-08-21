@@ -902,20 +902,35 @@ details.control-group > summary:hover h3 { color: var(--text); }
   padding: 0 24px;
 }
 
+/* Named faces before system-ui, and a weight that real fonts actually ship.
+   system-ui resolves to whatever the desktop happens to set, which on Linux is
+   often a face with no light weight at all — so the browser either fell back to
+   regular or faked a thin one by shaving the strokes, and a faked weight at a
+   hundred pixels looks exactly as bad as it sounds. font-synthesis stops it
+   inventing one; if a light weight is not there, a real regular is better than
+   a counterfeit light. */
 .home-title {
   margin: 0;
+  font-family: "Helvetica Neue", "Segoe UI", Roboto, Ubuntu, Cantarell,
+               system-ui, -apple-system, Arial, sans-serif;
   font-size: clamp(38px, 8.2vw, 112px);
-  font-weight: 200;
+  font-weight: 300;
+  font-synthesis: none;
   line-height: 1.04;
   color: #fff;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.055em;
   text-shadow: 0 2px 40px rgba(0, 0, 0, 0.75);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .home-subtitle {
   margin: 18px 0 0;
+  font-family: "Helvetica Neue", "Segoe UI", Roboto, Ubuntu, Cantarell,
+               system-ui, -apple-system, Arial, sans-serif;
   font-size: clamp(13px, 1.7vw, 20px);
-  font-weight: 300;
+  font-weight: 400;
+  font-synthesis: none;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.72);
@@ -926,20 +941,29 @@ details.control-group > summary:hover h3 { color: var(--text); }
    Restarted by re-adding the class whenever the tab is opened, so it plays
    every time rather than only on the first load. */
 .home-stage.play .home-title {
-  animation: home-resolve 2600ms cubic-bezier(0.16, 0.84, 0.24, 1) both;
+  animation: home-resolve 2600ms cubic-bezier(0.16, 0.84, 0.24, 1) both,
+             home-tighten-title 2600ms cubic-bezier(0.16, 0.84, 0.24, 1) both;
 }
 .home-stage.play .home-subtitle {
-  animation: home-resolve 2000ms cubic-bezier(0.16, 0.84, 0.24, 1) 900ms both;
+  animation: home-resolve 2000ms cubic-bezier(0.16, 0.84, 0.24, 1) 900ms both,
+             home-tighten-sub 2000ms cubic-bezier(0.16, 0.84, 0.24, 1) 900ms both;
 }
 .home-stage.play .home-note {
   animation: home-fade 1600ms ease-out 1900ms both;
 }
 
+/* Letter-spacing is animated separately, because the title and the subtitle
+   settle on different values and a shared keyframe would end both on the
+   title's — quietly overriding the subtitle's own rule, since the animation
+   holds its final state. */
 @keyframes home-resolve {
-  from { opacity: 0; filter: blur(18px); letter-spacing: 0.34em; transform: translateY(14px); }
+  from { opacity: 0; filter: blur(18px); transform: translateY(14px); }
   60%  { opacity: 1; }
-  to   { opacity: 1; filter: blur(0);    letter-spacing: inherit; transform: none; }
+  to   { opacity: 1; filter: blur(0);    transform: none; }
 }
+
+@keyframes home-tighten-title { from { letter-spacing: 0.3em; }  to { letter-spacing: 0.055em; } }
+@keyframes home-tighten-sub   { from { letter-spacing: 0.42em; } to { letter-spacing: 0.22em; } }
 
 @keyframes home-fade {
   from { opacity: 0; transform: translateY(10px); }

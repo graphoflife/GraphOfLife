@@ -34,7 +34,33 @@ const Home = {
    */
   ZOOM: -0.13,
 
+  /**
+   * Draws a second, at most.
+   *
+   * This is scenery behind a title, not something anyone is reading frame by
+   * frame, and at sixty it was asking a browser to redraw five thousand agents
+   * and seven thousand edges as fast as it possibly could. Thirty halves that
+   * for no visible difference to a graph turning this slowly, and leaves room
+   * for browsers that put their own work between us and the canvas.
+   */
+  MAX_FPS: 30,
+
+  /**
+   * The floor it will drop to on a browser that cannot keep up.
+   *
+   * How fast a canvas is varies more between browsers than it has any right
+   * to — the same page that is comfortable in one can stutter in another that
+   * puts its own work between the drawing and the screen. Rather than pick a
+   * rate that suits this machine and hope, the loop watches how long its own
+   * draws take and slows down if they are expensive. A backdrop turning at a
+   * sixteenth of a radian a second still reads perfectly at twelve.
+   */
+  MIN_FPS: 12,
+
+  fps: 30,
+
   frames: [],
+  buffer: null,
   index: 0,
   direction: 1,
   accumulator: 0,
@@ -70,20 +96,6 @@ const Home = {
       nodeAlpha: 0.9
     });
 
-    this.renderer = new GraphRenderer(this.canvas);
-    this.renderer.setMode3D(this.settings.dimensions === 3);
-
-    this.layout = new LayoutClient();
-    this.layout.setDimensions(this.settings.dimensions);
-    this.layout.setParams({
-      charge: this.settings.forceCharge,
-      linkStrength: this.settings.forceLink,
-      centerStrength: this.settings.forceCenter,
-      angularStrength: this.settings.forceAngular,
-      damping: this.settings.forceDamping,
-      theta: this.settings.forceTheta
-    });
-
     if (window.ResizeObserver) {
       this._observer = new ResizeObserver(() => this.resize());
       this._observer.observe(this.stage || this.canvas.parentElement);
@@ -106,7 +118,10 @@ const Home = {
    */
   setActive(active) {
     this.active = active;
-    if (!active) return;
+    if (!active) {
+      this.unload();
+      return;
+    }
 
     // Replay the titles by taking the class off and putting it back, which is
     // the only way to restart a CSS animation.
@@ -116,10 +131,65 @@ const Home = {
       this.stage.classList.add('play');
     }
 
+    this.build();
     this.resize();
-    // Retried on each visit rather than given up on for good: a backdrop that
-    // missed its fetch once should come back when the page is opened again.
     if (!this.loaded && !this._loading) this.load();
+  },
+
+  /** The renderer and the layout worker, made on demand. */
+  build() {
+    if (!this.renderer) {
+      this.renderer = new GraphRenderer(this.canvas);
+      this.renderer.setMode3D(this.settings.dimensions === 3);
+      // One device pixel per CSS pixel is plenty for scenery. On a retina
+      // screen the default would be four times the area to fill, every frame,
+      // for a picture nobody is inspecting — and it is fill rate that runs out
+      // first on a browser without much canvas headroom.
+      this.renderer.maxDpr = 1;
+    }
+    if (!this.layout) {
+      this.layout = new LayoutClient();
+      this.layout.setDimensions(this.settings.dimensions);
+      this.layout.setParams({
+        charge: this.settings.forceCharge,
+        linkStrength: this.settings.forceLink,
+        centerStrength: this.settings.forceCenter,
+        angularStrength: this.settings.forceAngular,
+        damping: this.settings.forceDamping,
+        theta: this.settings.forceTheta
+      });
+      this._needsFraming = true;
+    }
+  },
+
+  /**
+   * Give back everything the backdrop was holding.
+   *
+   * A worker thread running a force layout over five thousand agents does not
+   * stop being expensive because nobody is looking at it, so leaving one alive
+   * behind the Viewer would be a tax on the rest of the page. The frames go
+   * too — decoded they are the largest thing here by far.
+   *
+   * The packed buffer stays. It is a megabyte and a half, it is what the
+   * frames are decoded from, and keeping it is what makes coming back
+   * instant instead of another download.
+   */
+  unload() {
+    if (this.layout) {
+      this.layout.dispose();
+      this.layout = null;
+    }
+    this.frames = [];
+    this.frame = null;
+    this.metrics = null;
+    this.loaded = false;
+    this.index = 0;
+    this.direction = 1;
+    this.accumulator = 0;
+
+    if (this.renderer && this.renderer.ctx && this.renderer.cssWidth > 0) {
+      this.renderer.ctx.clearRect(0, 0, this.renderer.cssWidth, this.renderer.cssHeight);
+    }
   },
 
   async load() {
@@ -128,9 +198,12 @@ const Home = {
       // Not force-cache. That will happily reuse a cached failure, and a 404
       // from before the recording existed then sticks for the life of the
       // browser cache — which is exactly what happened the first time.
-      const response = await fetch(this.SOURCE);
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      this.frames = this.decode(await response.arrayBuffer());
+      if (!this.buffer) {
+        const response = await fetch(this.SOURCE);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        this.buffer = await response.arrayBuffer();
+      }
+      this.frames = this.decode(this.buffer);
       if (!this.frames.length) throw new Error('the recording has no frames');
 
       this.loaded = true;
@@ -252,7 +325,7 @@ const Home = {
     const dt = Math.min(0.1, (time - this.lastTime) / 1000) || 0;
     this.lastTime = time;
 
-    if (!this.active || !this.loaded) return;
+    if (!this.active || !this.loaded || !this.layout || !this.renderer) return;
 
     // Move to the next frame first, so the check below sees it.
     //
@@ -262,39 +335,65 @@ const Home = {
     // the worker a moment later, so that draw painted the new frame's edges
     // against the previous frame's positions: every edge joining whichever
     // agents happened to hold those slots. Measured at 4,879 nodes drawn
-    // against 4,777 nodes' worth of coordinates, once per iteration, which is
-    // exactly the flicker.
+    // against 4,777 nodes' worth of coordinates, once per iteration.
     this.accumulator += dt;
     if (this.accumulator >= 1 / this.SPEED) {
       this.accumulator = 0;
       this.advance();
     }
 
+    // Scenery does not need sixty frames a second.
+    this._sinceDraw = (this._sinceDraw || 0) + dt;
+    if (this._sinceDraw < 1 / this.fps) return;
+    const step = this._sinceDraw;
+    this._sinceDraw = 0;
+
     this.layout.tick();
 
     // The camera does not depend on which frame is showing, so it keeps
     // gliding through the wait rather than stalling for it.
-    this.renderer.rotate(this.ROTATION * dt, 0);
-    this.renderer.stepCamera();
+    this.renderer.rotate(this.ROTATION * step, 0);
 
     // Until the coordinates belong to the frame we are holding, the canvas
     // simply keeps what it already shows.
-    if (!this.readyToDraw || !(this.renderer.cssWidth > 0)) return;
+    if (!this.readyToDraw || !(this.renderer.cssWidth > 0)) {
+      this.renderer.stepCamera();
+      return;
+    }
 
-    // Hold the framing as the graph breathes, rather than chasing every
-    // change: a camera that re-fits on each frame reads as flinching.
-    if (this._needsFraming && this.layout.positions && this.layout.positions.length > 3) {
+    // Framed the way the Viewer's Fit View does it: the tight framing is
+    // recomputed every frame and the camera is a spring chasing it, so the
+    // view eases as the graph grows and shrinks. Refitting on a timer instead
+    // meant the camera sat still and then lurched.
+    if (this._needsFraming) {
       this.renderer.fitToContent(this.layout, this.ZOOM, true);
       this._needsFraming = false;
-      this._sinceFraming = 0;
-    }
-    this._sinceFraming = (this._sinceFraming || 0) + dt;
-    if (this._sinceFraming > 2) {
+    } else {
       this.renderer.fitToContent(this.layout, this.ZOOM);
-      this._sinceFraming = 0;
     }
+    this.renderer.stepCamera();
 
+    const began = performance.now();
     this.renderer.draw(this.frame, this.metrics, this.layout, this.settings);
+    this.measure(performance.now() - began);
+  },
+
+  /**
+   * Keep the frame rate to something this browser can actually deliver.
+   *
+   * A rolling average rather than the last draw, because one slow frame is
+   * usually the machine doing something else, and reacting to it would make
+   * the rate flap. The thresholds leave a gap between them for the same
+   * reason: it drops at twenty milliseconds and only climbs back below eight,
+   * so it settles instead of oscillating around one number.
+   */
+  measure(spent) {
+    this._cost = this._cost === undefined ? spent : this._cost * 0.9 + spent * 0.1;
+    if (this._cost > 20 && this.fps > this.MIN_FPS) {
+      this.fps = this.MIN_FPS;
+    } else if (this._cost < 8 && this.fps < this.MAX_FPS) {
+      this.fps = this.MAX_FPS;
+    }
   },
 
   /**

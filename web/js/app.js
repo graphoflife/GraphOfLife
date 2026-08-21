@@ -87,6 +87,10 @@ const App = {
     // no size until the view is shown, so it is told both ways round.
     Home.setActive(name === 'home');
 
+    // Choosing a backend means, on a static host, downloading a Python
+    // runtime. That waits until somebody actually wants to run something.
+    if (name === 'runs') RunsView.activate();
+
     // The canvas has no size while hidden, so it must be measured on reveal.
     // Done synchronously as well as on the next frame: the element already has
     // its box by now, and waiting on rAF alone can leave a blank canvas.

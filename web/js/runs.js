@@ -90,7 +90,7 @@ const RunsView = {
     }
   },
 
-  async init() {
+  init() {
     this.form = document.getElementById('newRunForm');
     this.listEl = document.getElementById('runList');
     this.errorEl = document.getElementById('createError');
@@ -102,6 +102,25 @@ const RunsView = {
     for (const input of this.form.querySelectorAll('[data-cfg]')) {
       input.addEventListener('input', () => this.updateDerived());
     }
+  },
+
+  /**
+   * Choose a backend and ask it for its defaults — the first time this tab is
+   * opened, and not before.
+   *
+   * This used to run at page load. On a static host there is no server to
+   * answer, so it fell through to the in-browser engine and started fetching a
+   * Python runtime — several megabytes and a WebAssembly compile — while the
+   * front page was trying to lay out five thousand agents and paint them sixty
+   * times a second. On a machine running gol_server.py none of that happened,
+   * which is why the front page was smooth locally and not when published.
+   *
+   * A visitor who only reads the front page or the explanation now downloads
+   * no Python at all.
+   */
+  async activate() {
+    if (this._activated) return;
+    this._activated = true;
 
     // Settle on a backend before anything is asked of it, so the notice is
     // truthful from the first paint rather than after the first failure.
