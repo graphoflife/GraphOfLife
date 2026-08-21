@@ -463,6 +463,150 @@ const GraphStats = {
   },
 
   /**
+   * A scale-free fit of P(k) ~ k^-gamma, done the way the literature does it
+   * rather than by drawing a line through a histogram.
+   *
+   * Two things separate this from tailExponent above. The exponent is a
+   * maximum-likelihood estimate rather than a least-squares slope, because
+   * log-log regression on a distribution is biased and the bias is worst
+   * exactly where the interesting nodes are. And the tail is found rather than
+   * assumed: real degree distributions are only straight above some k_min, so
+   * every candidate is tried and the one whose fitted curve sits closest to
+   * the data — smallest Kolmogorov-Smirnov distance — wins.
+   *
+   * Mirrors _scale_free() in gol_series.py.
+   */
+  scaleFree(values, maxCandidates = 24) {
+    const positive = [];
+    for (const v of values) if (v > 0) positive.push(v);
+    if (positive.length < 16) return null;
+    positive.sort((a, b) => a - b);
+    const nAll = positive.length;
+
+    const distinct = [];
+    for (const v of positive) if (!distinct.length || distinct[distinct.length - 1] !== v) distinct.push(v);
+    if (distinct.length < 4) return null;
+
+    // Trying every distinct degree is wasted work on a broad distribution, and
+    // a k_min out in the tail is fitted to a handful of nodes whatever it does
+    // to the KS distance. Both ends are cut.
+    let usable = distinct.filter(k => k < distinct[distinct.length - 1]);
+    if (usable.length > maxCandidates) {
+      const step = usable.length / maxCandidates;
+      const thinned = [];
+      for (let i = 0; i < maxCandidates; i++) thinned.push(usable[Math.floor(i * step)]);
+      usable = thinned;
+    }
+
+    let best = null;
+    for (const kMin of usable) {
+      const tail = positive.filter(v => v >= kMin);
+      const n = tail.length;
+      // Below this an exponent is arithmetic rather than evidence.
+      if (n < 25) continue;
+
+      // Continuous MLE with the half-integer correction, the usual estimator
+      // for integer data like a degree.
+      const shift = kMin - 0.5;
+      let total = 0;
+      for (const v of tail) total += Math.log(v / shift);
+      if (total <= 1e-12) continue;
+      const gamma = 1 + n / total;
+
+      let worst = 0;
+      for (let i = 0; i < n; i++) {
+        const model = 1 - Math.pow(tail[i] / shift, 1 - gamma);
+        worst = Math.max(worst, Math.abs(model - i / n), Math.abs(model - (i + 1) / n));
+      }
+      if (!best || worst < best.ks) best = { exponent: gamma, kMin, tailNodes: n, ks: worst };
+    }
+    if (!best) return null;
+
+    // R² of the CCDF over the fitted tail, for readers who want the familiar
+    // number beside the exponent. It describes the fit; it does not test it.
+    const tail = positive.filter(v => v >= best.kMin);
+    const xs = [], ys = [];
+    let i = tail.length - 1;
+    while (i >= 0) {
+      const value = tail[i];
+      let j = i;
+      while (j >= 0 && tail[j] === value) j--;
+      xs.push(value);
+      ys.push((tail.length - 1 - j) / tail.length);
+      i = j;
+    }
+    const fit = this.powerFit(xs, ys, 4);
+    best.r2 = fit ? fit.r2 : null;
+    best.coverage = best.tailNodes / nAll;
+    return best;
+  },
+
+  /**
+   * The fractal dimension of the graph by box covering: N_B(l_B) ~ l_B^-d_B.
+   *
+   * How many boxes of size l_B does it take to cover the whole graph? A
+   * self-similar network needs a number that falls as a power of the size, and
+   * that power is the dimension. Sizes climb geometrically so the fit spans as
+   * many decades as the graph allows.
+   *
+   * Exact covering is NP-hard, so boxes grow greedily around centres taken in
+   * descending order of degree: hubs make the best centres, and taking them
+   * first stops the covering fragmenting into boxes of three nodes each. Each
+   * box is a true ball — the search runs over the whole graph and merely
+   * declines to claim nodes another box already holds.
+   *
+   * Mirrors _box_dimension() in gol_series.py.
+   */
+  boxDimension(ids, adj, sizes = [1, 3, 5, 9, 17, 33]) {
+    if (ids.length < 16) return null;
+
+    const position = new Map();
+    ids.forEach((id, k) => position.set(id, k));
+    const centresFirst = ids.slice().sort((a, b) => {
+      const da = (adj.get(a) || []).size || 0, db = (adj.get(b) || []).size || 0;
+      return db - da || position.get(a) - position.get(b);
+    });
+
+    const xs = [], ys = [];
+    for (const size of sizes) {
+      const radius = (size - 1) >> 1;
+      const covered = new Set();
+      let boxes = 0;
+      for (const seed of centresFirst) {
+        if (covered.has(seed)) continue;
+        boxes++;
+        covered.add(seed);
+        // `seen` is this ball's own visit set, so the walk can pass through
+        // nodes belonging to another box on its way to nodes belonging to none.
+        const seen = new Set([seed]);
+        let frontier = [seed];
+        for (let step = 0; step < radius; step++) {
+          const next = [];
+          for (const node of frontier) {
+            for (const other of (adj.get(node) || [])) {
+              if (seen.has(other)) continue;
+              seen.add(other);
+              covered.add(other);
+              next.push(other);
+            }
+          }
+          if (!next.length) break;
+          frontier = next;
+        }
+      }
+      xs.push(size);
+      ys.push(boxes);
+      // Once the whole graph fits in one box, larger boxes say nothing.
+      if (boxes <= 1) break;
+    }
+
+    if (xs.length < 3) return null;
+    const fit = this.powerFit(xs, ys, 3);
+    if (!fit) return null;
+    return { exponent: -fit.exponent, r2: fit.r2 };
+  },
+
+  /**
    * Whether well-connected agents attach to other well-connected agents.
    *
    * Newman's degree correlation over the edges. Positive means like joins

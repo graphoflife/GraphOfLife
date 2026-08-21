@@ -110,6 +110,12 @@ collapse into the single edge a simple graph can hold.
 
 ## Watching a run
 
+The site opens on **Explanation**: every step of an iteration as a pair of
+looping animations, one following a single agent and one showing the same rule
+running across a whole small world at once. They are drawn from the same code
+as you watch rather than recorded, so they cannot quietly fall out of step with
+the algorithm.
+
 The viewer is the point of the project. A run is recorded frame by frame and
 can be replayed, stepped, and measured.
 
@@ -133,11 +139,29 @@ can be replayed, stepped, and measured.
 - **Analyses.** The same run can be read in several ways. The power-law group
   fits an exponent and an R² to each relationship: how wealth scales with
   degree, how triangles scale with degree, and the shape of the degree and
-  token distributions. Clustering against degree is the one that measures
-  self-similarity — a slope near −1 means dense small neighbourhoods nested
-  inside sparser larger ones, the same arrangement at every scale. Token
-  curvature, the neighbours' tokens less an agent's own times its degree, read
-  against the change that followed, behaves like a law of diffusion.
+  token distributions. Every fit is over the actual per-node values — none of
+  them go anywhere near a histogram, because binning throws away the tail,
+  which is the only part a power law is really a claim about.
+
+  Two of them are the standard measures rather than convenient
+  approximations. **Scale free** estimates γ in P(k) ~ k^−γ by
+  maximum likelihood, and finds where the tail starts instead of assuming it
+  starts at one: every candidate k is tried and the one leaving the smallest
+  Kolmogorov–Smirnov distance wins. It reports what share of agents that tail
+  actually covers, which is the honesty check — a beautiful fit to the top
+  half a percent is a fact about the hubs, not about the network.
+  **Fractality** comes from box covering, N_B(ℓ_B) ~ ℓ_B^−d_B: the graph is
+  covered with boxes of size ℓ_B and the number needed is counted, and d_B is
+  how fast that count falls. Exact covering is NP-hard, so boxes grow greedily
+  around the highest-degree agents. Read its R² first: small-world networks
+  shrink exponentially rather than fractally, and over a short range an
+  exponential still looks like a straight line on log-log axes.
+
+  Clustering against degree measures self-similarity a second way — a slope
+  near −1 means dense small neighbourhoods nested inside sparser larger ones,
+  the same arrangement at every scale. Token curvature, the neighbours' tokens
+  less an agent's own times its degree, read against the change that followed,
+  behaves like a law of diffusion.
 
 ## Running it yourself
 

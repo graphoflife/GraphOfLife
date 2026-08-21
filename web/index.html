@@ -4,21 +4,60 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GraphOfLife</title>
+<!-- SVG for browsers that take one, PNG for the rest. -->
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="favicon.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="favicon-180.png">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
 <header class="topbar">
+  <!-- Inline rather than a file: it is a dozen shapes, it inherits the page's
+       colours, and it costs no extra request. -->
+  <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+    <g stroke="currentColor" stroke-width="1.5" fill="none"
+       stroke-linecap="round" opacity="0.5">
+      <path d="M16 16 L7 7 M16 16 L26 9 M16 16 L6 24 M16 16 L25 25
+               M7 7 L26 9 M6 24 L25 25 M26 9 L25 25"/>
+    </g>
+    <g fill="currentColor">
+      <circle cx="7" cy="7" r="2.4"/>
+      <circle cx="26" cy="9" r="2.1"/>
+      <circle cx="6" cy="24" r="2.1"/>
+      <circle cx="25" cy="25" r="2.4"/>
+      <circle cx="16" cy="16" r="6.4"/>
+    </g>
+    <!-- One agent is looking back at you. -->
+    <ellipse cx="16.9" cy="16" rx="1.9" ry="2.7" fill="#05070a"/>
+  </svg>
   <h1>GraphOfLife</h1>
   <nav class="tabs">
-    <button class="tab active" data-view="runs">Runs</button>
+    <button class="tab active" data-view="explain">Explanation</button>
+    <button class="tab" data-view="runs">Simulations</button>
     <button class="tab" data-view="viewer">Viewer</button>
+    <button class="tab" data-view="analysis">Analysis</button>
   </nav>
   <span class="run-label" id="activeRunLabel"></span>
 </header>
 
+<!-- ==================== EXPLANATION VIEW ==================== -->
+<main id="view-explain" class="view active">
+  <div class="explain-intro">
+    <h2>What actually happens</h2>
+    <p>Each step of one iteration, in the order the engine does it. Every
+      picture is drawn from scratch as you watch rather than recorded, so none
+      of them can fall out of step with the code.</p>
+  </div>
+  <div class="explain-panels" id="explainPanels"></div>
+  <div class="explain-intro explain-close">
+    <p>That is one iteration. It repeats until you stop it or the population
+      dies out. Nothing in it optimises anything — whatever survives, survives.</p>
+  </div>
+</main>
+
 <!-- ==================== RUNS VIEW ==================== -->
-<main id="view-runs" class="view active">
+<main id="view-runs" class="view">
   <div id="backendNotice" class="backend-notice hidden"></div>
   <div class="runs-layout" id="runsLayout">
 
@@ -400,6 +439,17 @@
   </div>
 </main>
 
+<!-- ==================== ANALYSIS VIEW ==================== -->
+<main id="view-analysis" class="view">
+  <div class="explain-intro">
+    <h2>Analysis</h2>
+    <p class="analysis-empty">Nothing here yet. The Viewer already measures a
+      single frame and plots any statistic across one run; this is meant for
+      the questions that need more than that — comparing runs against each
+      other, or against the settings that produced them.</p>
+  </div>
+</main>
+
 <!-- Statistic detail: explanation plus history across the run -->
 <div id="statDetail" class="stat-detail hidden">
   <div class="stat-detail-head">
@@ -427,6 +477,7 @@
 <script src="js/stats.js"></script>
 <script src="js/statdetail.js"></script>
 <script src="js/presets.js"></script>
+<script src="js/explain.js"></script>
 <script src="js/runs.js"></script>
 <script src="js/viewer.js"></script>
 <!-- The viewer is assembled from four files. The core declares it; these three

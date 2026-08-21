@@ -88,6 +88,14 @@ Object.assign(Viewer, {
     meanPathLength: 'Mean path',
     components: 'Components',
 
+    degreeGamma: 'Scale-free \u03b3',
+    degreeGammaR2: 'Scale-free R\u00b2',
+    degreeKMin: 'Tail starts at k',
+    degreeTailShare: 'Tail share',
+    degreeGammaKS: 'Scale-free KS',
+    boxDimension: 'Box dimension d\u1d47',
+    boxDimensionR2: 'Box dimension R\u00b2',
+
     degreeExponent: 'Degree exponent \u03b3',
     degreeExponentR2: 'Degree fit R\u00b2',
     tokenExponent: 'Token exponent \u03b3',
@@ -144,6 +152,8 @@ Object.assign(Viewer, {
       'dimension', 'degreeEntropy', 'degreeEvenness', 'components'
     ] },
     { key: 'powerlaws', label: 'Power laws', open: false, keys: [
+      'degreeGamma', 'degreeGammaR2', 'degreeKMin', 'degreeTailShare', 'degreeGammaKS',
+      'boxDimension', 'boxDimensionR2',
       'degreeExponent', 'degreeExponentR2',
       'tokenExponent', 'tokenExponentR2',
       'tokensVsDegree', 'tokensVsDegreeR2',
@@ -230,6 +240,13 @@ Object.assign(Viewer, {
       cells[key + 'R2'] = [this.STAT_LABELS[key + 'R2'], pct(s[key + 'R2'])];
     }
     cells.assortativity = [this.STAT_LABELS.assortativity, dec(s.assortativity, 3)];
+    cells.degreeGamma = [this.STAT_LABELS.degreeGamma, dec(s.degreeGamma)];
+    cells.degreeGammaR2 = [this.STAT_LABELS.degreeGammaR2, pct(s.degreeGammaR2)];
+    cells.degreeKMin = [this.STAT_LABELS.degreeKMin, int(s.degreeKMin)];
+    cells.degreeTailShare = [this.STAT_LABELS.degreeTailShare, pct(s.degreeTailShare)];
+    cells.degreeGammaKS = [this.STAT_LABELS.degreeGammaKS, dec(s.degreeGammaKS, 3)];
+    cells.boxDimension = [this.STAT_LABELS.boxDimension, dec(s.boxDimension)];
+    cells.boxDimensionR2 = [this.STAT_LABELS.boxDimensionR2, pct(s.boxDimensionR2)];
 
     // Only computed while one of the heavy groups is open, since walking the
     // whole graph costs more than the rest of this strip together.

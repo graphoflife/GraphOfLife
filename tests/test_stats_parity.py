@@ -182,6 +182,32 @@ def test_the_two_sides_cover_the_same_ground():
     )
 
 
+def test_a_cache_written_across_a_code_change_keeps_its_new_statistics():
+    """
+    A run's cache can hold rows from two versions of gol_series at once: the
+    rows already stored when a statistic was added keep their old shape, and
+    only frames recorded afterwards carry the new key. The series has to expose
+    that key regardless.
+
+    This is a regression test. The keys used to be read off the first row, so a
+    statistic added partway through a run was computed, stored, and then
+    dropped on the way out — every power-law chart reported no data while the
+    numbers sat in the cache file.
+    """
+    old = {"_frame": 0, "nodes": 10, "edges": 20}
+    new = {"_frame": 2, "nodes": 12, "edges": 24, "degreeGamma": 2.4, "boxDimension": 1.8}
+    keys = gol_series._series_keys([old, old, new, new])
+
+    for key in ("degreeGamma", "boxDimension"):
+        assert key in keys, f"{key} was added partway through and then lost"
+    assert "_frame" not in keys, "the frame index is bookkeeping, not a statistic"
+    assert set(keys) == {"nodes", "edges", "degreeGamma", "boxDimension"}
+
+    # And the rows that predate it report nothing rather than a wrong number.
+    series = {k: [row.get(k) for row in [old, old, new, new]] for k in keys}
+    assert series["degreeGamma"] == [None, None, 2.4, 2.4]
+
+
 if __name__ == "__main__":
     import time
     import traceback

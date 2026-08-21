@@ -649,6 +649,9 @@ class FrameMetrics {
       clusteringVsDegree: null, clusteringVsDegreeR2: null,
       changeVsTokens: null, changeVsTokensR2: null,
       assortativity: null,
+      degreeGamma: null, degreeGammaR2: null, degreeKMin: null,
+      degreeTailShare: null, degreeGammaKS: null,
+      boxDimension: null, boxDimensionR2: null,
       cycleRank: null, loopDensity: null, bridges: null, triangles: null,
       transitivity: null, degreeEntropy: null, degreeEvenness: null,
       radius: null, diameter: null, meanPathLength: null,
@@ -805,6 +808,19 @@ class FrameMetrics {
       const degreeOf = new Map();
       for (let i = 0; i < ids.length; i++) degreeOf.set(ids[i], this.degree[i]);
       out.assortativity = GraphStats.assortativity(f.edges, id => degreeOf.get(id));
+
+      // Scale free: the degree distribution's tail, found rather than assumed.
+      const sf = GraphStats.scaleFree(degrees);
+      out.degreeGamma = sf ? sf.exponent : null;
+      out.degreeGammaR2 = sf ? sf.r2 : null;
+      out.degreeKMin = sf ? sf.kMin : null;
+      out.degreeTailShare = sf ? sf.coverage : null;
+      out.degreeGammaKS = sf ? sf.ks : null;
+
+      // Self-similar: how the number of boxes needed falls as boxes grow.
+      const boxes = GraphStats.boxDimension(ids, st.adj);
+      out.boxDimension = boxes ? boxes.exponent : null;
+      out.boxDimensionR2 = boxes ? boxes.r2 : null;
     }
 
     out.degreeEntropy = GraphStats.degreeEntropy(degrees);

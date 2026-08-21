@@ -53,7 +53,12 @@ def progress(run_id: str) -> Dict[str, Any]:
 
 
 # Bump when a formula below changes, so stale caches are discarded.
-SERIES_VERSION = 13
+# Bump this whenever frame_stats gains, loses or redefines a key. Caches
+# stamped with an older number are discarded and rebuilt. Forgetting to bump it
+# does not merely serve stale numbers: it leaves a cache holding two shapes of
+# row at once, which is how the power-law statistics came to be computed and
+# then dropped on the way out.
+SERIES_VERSION = 14
 
 # At most this many iterations are analysed for a run's history.
 #
@@ -416,6 +421,162 @@ def _tail_exponent(values, minimum_distinct: int = 4):
     return {"exponent": 1 - fit["exponent"], "r2": fit["r2"]}
 
 
+def _scale_free(values, max_candidates: int = 24):
+    """
+    A scale-free fit of P(k) ~ k**-gamma, done the way the literature does it
+    rather than by drawing a line through a histogram.
+
+    Two things separate this from _tail_exponent above. The exponent is a
+    maximum-likelihood estimate instead of a least-squares slope, because
+    log-log regression on a distribution is biased and the bias is worst
+    exactly where the interesting nodes are. And the tail is found rather than
+    assumed: real degree distributions are only straight above some k_min, so
+    every candidate k_min is tried and the one whose fitted curve sits closest
+    to the data — smallest Kolmogorov-Smirnov distance — wins.
+
+    Returns the exponent, where the tail was judged to start, how many nodes
+    are in it, the KS distance, and an R-squared over the tail alone so it can
+    be read beside the other fits. Mirrors scaleFree() in graphstats.js.
+    """
+    positive = sorted(v for v in values if v > 0)
+    if len(positive) < 16:
+        return None
+    n_all = len(positive)
+
+    distinct = sorted(set(positive))
+    if len(distinct) < 4:
+        return None
+
+    # Trying every distinct degree is wasted work on a broad distribution, and
+    # a k_min out in the tail is fitted to a handful of nodes whatever it does
+    # to the KS distance. Both ends are cut.
+    usable = [k for k in distinct if k < distinct[-1]]
+    if len(usable) > max_candidates:
+        step = len(usable) / max_candidates
+        usable = [usable[int(i * step)] for i in range(max_candidates)]
+
+    best = None
+    for k_min in usable:
+        tail = [v for v in positive if v >= k_min]
+        n = len(tail)
+        # Below this an exponent is arithmetic rather than evidence.
+        if n < 25:
+            continue
+
+        # Continuous MLE with the half-integer correction, which is the usual
+        # estimator for integer data like a degree.
+        shift = k_min - 0.5
+        total = 0.0
+        for v in tail:
+            total += math.log(v / shift)
+        if total <= 1e-12:
+            continue
+        gamma = 1.0 + n / total
+
+        # KS distance between the empirical tail and the fitted power law.
+        worst = 0.0
+        for i, v in enumerate(tail):
+            model = 1.0 - (v / shift) ** (1.0 - gamma)
+            empirical_low = i / n
+            empirical_high = (i + 1) / n
+            worst = max(worst, abs(model - empirical_low), abs(model - empirical_high))
+
+        if best is None or worst < best["ks"]:
+            best = {"exponent": gamma, "kMin": k_min, "tailNodes": n, "ks": worst}
+
+    if best is None:
+        return None
+
+    # R-squared of the CCDF over the fitted tail, for readers who want the
+    # familiar number next to the exponent. It is a description of the fit, not
+    # a test of it — see the note on degreeExponentR2.
+    tail = [v for v in positive if v >= best["kMin"]]
+    xs, ys = [], []
+    i = len(tail) - 1
+    while i >= 0:
+        value = tail[i]
+        j = i
+        while j >= 0 and tail[j] == value:
+            j -= 1
+        xs.append(value)
+        ys.append((len(tail) - 1 - j) / len(tail))
+        i = j
+    fit = _power_fit(xs, ys, 4)
+    best["r2"] = fit["r2"] if fit else None
+    best["coverage"] = best["tailNodes"] / n_all
+    return best
+
+
+def _box_dimension(ids, adj, sizes=(1, 3, 5, 9, 17, 33)):
+    """
+    The fractal dimension of the graph by box covering: N_B(l_B) ~ l_B**-d_B.
+
+    How many boxes of size l_B does it take to cover the whole graph? A
+    self-similar network needs a number that falls as a power of the size, and
+    that power is the dimension. Sizes climb geometrically so the fit spans as
+    many decades as the graph allows rather than crowding into the small end.
+
+    Exact covering is NP-hard, so boxes are grown greedily around centres, in
+    descending order of degree: hubs make the best centres, and taking them
+    first is what stops the covering fragmenting into hundreds of boxes holding
+    three nodes each. Each box is a true ball — the search runs over the whole
+    graph and merely declines to claim nodes another box already holds. An
+    earlier version searched only through unclaimed nodes, which is cheaper but
+    walls a box in behind its neighbours: it reported nearly an order of
+    magnitude too many boxes at the large sizes, and a dimension of 0.9 where
+    the honest answer was 1.6.
+
+    Mirrors boxDimension() in graphstats.js.
+    """
+    if len(ids) < 16:
+        return None
+
+    # Ties broken by position, which is stable and does not assume node ids
+    # are comparable to one another.
+    position = {node: k for k, node in enumerate(ids)}
+    centres_first = sorted(ids, key=lambda i: (-len(adj.get(i, ())), position[i]))
+
+    xs, ys = [], []
+    for size in sizes:
+        radius = (size - 1) // 2
+        covered = set()
+        boxes = 0
+        for seed in centres_first:
+            if seed in covered:
+                continue
+            boxes += 1
+            covered.add(seed)
+            # Breadth-first to the box radius. `seen` is this ball's own visit
+            # set, so the walk can pass through nodes that belong to another
+            # box on its way out to nodes that belong to none.
+            seen = {seed}
+            frontier = [seed]
+            for _ in range(radius):
+                nxt = []
+                for node in frontier:
+                    for other in adj.get(node, ()):  # noqa: E1133
+                        if other in seen:
+                            continue
+                        seen.add(other)
+                        covered.add(other)
+                        nxt.append(other)
+                if not nxt:
+                    break
+                frontier = nxt
+        xs.append(size)
+        ys.append(boxes)
+        # Once the whole graph fits in one box, larger boxes say nothing.
+        if boxes <= 1:
+            break
+
+    if len(xs) < 3:
+        return None
+    fit = _power_fit(xs, ys, 3)
+    if fit is None:
+        return None
+    return {"exponent": -fit["exponent"], "r2": fit["r2"]}
+
+
 def _assortativity(edges, degree):
     """
     Newman's degree correlation. Positive means like joins like; negative means
@@ -614,6 +775,19 @@ def frame_stats(frame: Dict[str, Any], previous: Dict[str, Any] | None = None) -
     power_laws.update(_pair(_power_fit(change_tokens, change_sizes), "changeVsTokens"))
     power_laws["assortativity"] = _assortativity(edges, degree_of)
 
+    # Scale free: the degree distribution's tail, found rather than assumed.
+    scale_free = _scale_free(degree_list)
+    power_laws["degreeGamma"] = scale_free["exponent"] if scale_free else None
+    power_laws["degreeGammaR2"] = scale_free["r2"] if scale_free else None
+    power_laws["degreeKMin"] = scale_free["kMin"] if scale_free else None
+    power_laws["degreeTailShare"] = scale_free["coverage"] if scale_free else None
+    power_laws["degreeGammaKS"] = scale_free["ks"] if scale_free else None
+
+    # Self-similar: how the number of boxes needed falls as boxes grow.
+    boxes = _box_dimension(ids, adjacency)
+    power_laws["boxDimension"] = boxes["exponent"] if boxes else None
+    power_laws["boxDimensionR2"] = boxes["r2"] if boxes else None
+
     degree_hist: Dict[int, int] = {}
     for d in degrees:
         degree_hist[d] = degree_hist.get(d, 0) + 1
@@ -738,6 +912,29 @@ def build_series(run_id: str) -> Dict[str, Any]:
             _set_progress(run_id, 0, 0, building=False)
 
 
+def _series_keys(rows: List[Dict[str, Any]]) -> List[str]:
+    """
+    Every key any row carries, not merely the ones the first row happens to
+    have.
+
+    A cache can hold rows from more than one version of this file. When a
+    statistic is added, the rows already stored keep their old shape and only
+    new frames arrive with the new key. Reading the shape off row zero dropped
+    every such statistic from the whole run — the values were computed, stored,
+    and then thrown away on the way out, so the chart for them reported no data
+    while the numbers sat in the cache. The newest row is the richest, so its
+    order leads and anything else is appended.
+    """
+    keys: List[str] = []
+    seen = set()
+    for row in reversed(rows):
+        for key in row:
+            if key != "_frame" and key not in seen:
+                seen.add(key)
+                keys.append(key)
+    return keys
+
+
 def _build_series_locked(run_id: str) -> Dict[str, Any]:
     total_frames = store.count_frames(run_id)
     # Frames come in pairs, one per phase, so an iteration is two of them.
@@ -807,7 +1004,7 @@ def _build_series_locked(run_id: str) -> Dict[str, Any]:
         return {"count": 0, "keys": [], "series": {}, "stride": stride,
                 "sampled": False, "nodeCountKeys": list(NODE_COUNT_KEYS)}
 
-    keys = [k for k in rows[0].keys() if k != "_frame"]
+    keys = _series_keys(rows)
     series = {k: [row.get(k) for row in rows] for k in keys}
 
     return {

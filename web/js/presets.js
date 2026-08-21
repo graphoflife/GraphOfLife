@@ -50,7 +50,7 @@ const Presets = {
       edgeFlatColor: '#ffffff', edgeWidthBy: 'constant', edgeWidthLog: false,
       edgeWidthMin: 0.3, edgeWidthMax: 0.3, edgeAlpha: 0.7,
 
-      bgStyle: 'solid', bgColorA: '#20252c', bgColorB: '#20252c',
+      bgStyle: 'solid', bgColorA: '#0d1117', bgColorB: '#0d1117',
       showLegend: true, showEdgeLegend: true, layoutCarry: true,
 
       // Strong repulsion against weak links spreads the graph out; the high

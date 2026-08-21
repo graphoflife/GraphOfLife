@@ -163,6 +163,22 @@ button.small { padding: 4px 9px; font-size: 12px; }
 .status-error { color: var(--danger); border-color: var(--danger); }
 .status-extinct { color: #d29922; border-color: #d29922; }
 .status-interrupted { color: #d29922; border-color: #6e5494; }
+.status-stopping { color: #d29922; border-color: #d29922; }
+
+/* A worker only notices a stop request between iterations, so the button and
+   the status chip both spin until it actually stops. Without this the click
+   looks as though it did nothing. */
+.spin {
+  display: inline-block;
+  width: 9px; height: 9px;
+  margin-right: 6px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: notice-spin 0.8s linear infinite;
+  vertical-align: -1px;
+}
+.run-actions button[disabled] { opacity: 0.7; cursor: default; }
 
 .run-meta { display: flex; flex-wrap: wrap; gap: 10px; margin: 9px 0; font-size: 11.5px; color: var(--muted); }
 .run-meta b { color: var(--text); font-weight: 600; }
@@ -731,3 +747,106 @@ details.control-group > summary:hover h3 { color: var(--text); }
   vertical-align: -1px;
 }
 @keyframes notice-spin { to { transform: rotate(360deg); } }
+
+/* ==========================================================================
+   Brand mark
+   ========================================================================== */
+
+.brand-mark {
+  width: 26px;
+  height: 26px;
+  flex: 0 0 auto;
+  color: var(--accent);
+  margin-right: -2px;
+}
+
+/* ==========================================================================
+   Explanation
+   ==========================================================================
+   One panel per step: a small looping animation beside the words for it. The
+   animations are drawn rather than recorded, so they cannot drift away from
+   what the engine does. */
+
+.explain-intro {
+  max-width: 1080px;
+  margin: 0 auto 18px;
+  padding: 0 4px;
+}
+.explain-intro h2 { margin: 0 0 6px; font-size: 20px; }
+.explain-intro p { margin: 0; color: var(--muted); line-height: 1.6; }
+.explain-close { margin-top: 22px; }
+
+.explain-panels {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Two pictures then the words: the same step happening to one agent, and to a
+   whole world at once. */
+.explain-panel {
+  display: grid;
+  grid-template-columns: 244px 244px 1fr;
+  gap: 14px;
+  align-items: center;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px;
+}
+
+.explain-art { position: relative; }
+.explain-art canvas {
+  width: 100%;
+  height: 190px;
+  display: block;
+  border-radius: calc(var(--radius) - 2px);
+  background: #0d1117;
+}
+
+/* Which of the two a picture is, said quietly so it does not compete with the
+   step number or the text. */
+.explain-cap {
+  position: absolute;
+  right: 8px;
+  bottom: 7px;
+  font-size: 10px;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+  opacity: 0.75;
+  pointer-events: none;
+}
+
+/* The step number sits on the art rather than in the text, so the column of
+   words stays a clean left edge to read down. */
+.explain-step {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 9px;
+  background: rgba(0, 0, 0, 0.45);
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 18px;
+  text-align: center;
+}
+
+.explain-words h3 { margin: 0 0 6px; font-size: 15px; }
+.explain-words p { margin: 0; color: var(--muted); line-height: 1.65; font-size: 13px; }
+
+/* The words drop below the pictures first, and the pictures only stack when
+   there is no room to stand them side by side. */
+@media (max-width: 1000px) {
+  .explain-panel { grid-template-columns: 1fr 1fr; }
+  .explain-words { grid-column: 1 / -1; }
+}
+@media (max-width: 560px) {
+  .explain-panel { grid-template-columns: 1fr; }
+}
+
+.analysis-empty { max-width: 620px; }

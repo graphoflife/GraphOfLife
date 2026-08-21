@@ -1,6 +1,6 @@
 /* Tab switching, panel resizing, and start-up. */
 const App = {
-  view: 'runs',
+  view: 'explain',
 
   init() {
     for (const tab of document.querySelectorAll('.tab')) {
@@ -10,6 +10,7 @@ const App = {
     Viewer.init();
     StatDetail.init();
     RunsView.init();
+    Explain.init();
 
     // Both layouts are two panes plus a drag handle; the handle sets the width
     // of the second column and the choice is remembered per layout.

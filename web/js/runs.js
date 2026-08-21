@@ -9,6 +9,12 @@ const RunsView = {
   runs: [],
   pollTimer: null,
 
+  // Runs we have asked to stop but which have not stopped yet. A worker only
+  // notices the request between iterations, so on a slow world the button can
+  // sit there for many seconds looking as though the click missed. Holding the
+  // request here lets the card say so straight away.
+  stopping: new Set(),
+
   // Which config keys to show on a run card, and how to label them. Kept
   // explicit so cards stay readable rather than dumping the whole dataclass.
   SETTING_LABELS: [
@@ -255,7 +261,12 @@ const RunsView = {
     // One button that flips between starting and stopping, rather than two
     // where only ever one of them applies.
     const running = Boolean(run.running);
-    const actionLabel = running ? 'Stop' : (run.has_checkpoint ? 'Resume' : 'Start');
+    // The run has stopped, so forget the request; anything still in the set is
+    // a request the worker has yet to act on.
+    if (!running) this.stopping.delete(run.id);
+    const stopping = running && this.stopping.has(run.id);
+    const actionLabel = stopping ? 'Stopping' : running ? 'Stop'
+                                 : (run.has_checkpoint ? 'Resume' : 'Start');
 
     el.innerHTML = `
       <div class="run-head">
@@ -263,7 +274,8 @@ const RunsView = {
           <h3>${escapeHtml(run.name)}</h3>
           ${run.name !== run.id ? `<span class="run-id">${escapeHtml(run.id)}</span>` : ''}
         </div>
-        <span class="status status-${run.status}">${run.status}</span>
+        <span class="status status-${stopping ? 'stopping' : run.status}">${
+          stopping ? '<span class="spin"></span>stopping' : escapeHtml(run.status)}</span>
       </div>
       <div class="run-meta">
         <span><b>${formatNumber(run.iteration)}</b> iter</span>
@@ -276,7 +288,9 @@ const RunsView = {
       ${this.settingsHtml(cfg)}
       ${run.error ? `<pre class="run-error">${escapeHtml(run.error)}</pre>` : ''}
       <div class="run-actions">
-        <button class="${running ? 'warn' : 'primary'}" data-act="toggle">${actionLabel}</button>
+        <button class="${running ? 'warn' : 'primary'}" data-act="toggle"${
+          stopping ? ' disabled' : ''}>${stopping
+            ? '<span class="spin"></span>Stopping\u2026' : actionLabel}</button>
         <button data-act="open">Inspect</button>
         <button class="danger" data-act="delete">Delete</button>
       </div>
@@ -284,10 +298,21 @@ const RunsView = {
 
     el.querySelector('[data-act="toggle"]').addEventListener('click', async () => {
       try {
-        if (running) await API.stopRun(run.id);
-        else await API.startRun(run.id);
+        if (running) {
+          // Mark it before the request goes out, and redraw immediately: the
+          // point of the cue is to cover the wait, so it cannot wait itself.
+          this.stopping.add(run.id);
+          this.render();
+          await API.stopRun(run.id);
+        } else {
+          await API.startRun(run.id);
+        }
         await this.refresh();
-      } catch (err) { alert(err.message); }
+      } catch (err) {
+        this.stopping.delete(run.id);
+        this.render();
+        alert(err.message);
+      }
     });
 
     el.querySelector('[data-act="open"]').addEventListener('click', () => {
