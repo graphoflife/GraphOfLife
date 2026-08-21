@@ -5,6 +5,9 @@
 **Exploring open-ended evolution with spatial evolutionary game theory,
 graph theory and neural networks.**
 
+![A run in progress: several thousand agents on the graph they built, coloured
+by how many tokens each holds](docs/images/graph.png)
+
 Agents live on the nodes of a graph, each carrying a small neural network. They
 spend a conserved supply of tokens to reproduce, rewire the graph they live on,
 and fight each other in a game of blotto for position, tokens and reproduction.
