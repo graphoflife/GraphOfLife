@@ -68,8 +68,10 @@ class SimConfig:
     # brain. At the same sparsity every child is substantially damaged: over
     # nine runs the binary populations died out in five. Dropping sparsity from
     # 0.1 to 0.02 turned one death and two small populations into three
-    # survivals two to four times larger. The rate is the only lever, since the
-    # step size is fixed by the representation.
+    # survivals two to four times larger, across both ladder widths tried.
+    # Too little is its own failure: at 0.005 a run died again. A wider ladder
+    # does not rescue a high rate — the step size is fixed by the
+    # representation, so the rate is the lever — but it does help at a low one.
     brain_kind: str = "float"
     # How many bits each input is spread over, for the binary kind. Every bit
     # is a threshold on the log-scaled value, so this sets how finely an agent

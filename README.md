@@ -94,10 +94,19 @@ Its smallest possible move is a whole step while the spread of its weights is
 about 0.58, so any mutation shifts a weight by roughly 1.7 times that spread,
 against 0.15 for the float brain. At the same sparsity every child is
 substantially damaged. Measured over nine runs at 0.1, the binary populations
-died out in five; at 0.02 they survived every time with populations two to
-four times larger. At 0.005 one died again — too little mutation is its own
-failure. The rate is the only lever, since the step size is fixed by the
-representation.
+died out in five. Sweeping the rate against the ladder width, at 20,000
+tokens over three seeds:
+
+| bits | sparsity 0.1 | 0.02 | 0.005 |
+|---|---|---|---|
+| 16 | one died | all lived | one died |
+| 32 | one died | all lived | all lived |
+
+0.02 is the place to start. Too little mutation is its own failure, not just
+too much. A wider ladder does not rescue a high rate — the step size is fixed
+by the representation, so the rate is the lever — but it does help at a low
+one, where there is less churn and the encoding has to carry more of the
+work.
 
 ## Agents decide their own randomness
 
