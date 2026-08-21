@@ -22,6 +22,11 @@ const layout = new ForceLayout();
 
 let running = false;
 let scheduled = false;
+let timer = null;
+// Whether the last batch moved anything. Positions are published while the
+// layout is moving and once more as it comes to rest, so the page always ends
+// up holding the final arrangement.
+let resting = false;
 let shared = null;        // Float32Array over a SharedArrayBuffer, when available
 let sharedGen = 0;        // which buffer generation `shared` refers to
 let frameGen = 0;         // which frame the published coordinates are ordered by
@@ -32,6 +37,17 @@ let ticksDone = 0;
 // than a few ticks in case each one is slow.
 const BUDGET_MS = 12;
 const MAX_TICKS_PER_BATCH = 8;
+
+// How long to wait between wake-ups once the layout has stopped moving.
+//
+// The loop used to reschedule itself at setTimeout(0) whatever happened, so a
+// settled graph still woke a few hundred times a second, and each wake copied
+// every coordinate into a fresh array and posted it to the page — for a
+// picture that was not changing. Without shared memory that is some tens of
+// kilobytes allocated, transferred and thrown away, hundreds of times a
+// second, to say nothing at all. Anything that actually changes calls start(),
+// which cuts the wait short, so this is not a delay anyone can see.
+const IDLE_MS = 120;
 
 /**
  * Copy the current positions out, in the same order as `ids`.
@@ -71,31 +87,54 @@ function report(positions) {
 
 function loop() {
   scheduled = false;
+  timer = null;
   if (!running) return;
 
-  const start = performance.now();
+  const began = performance.now();
   let ticks = 0;
+  let moved = false;
 
   // Run as many ticks as fit in the budget. A settled layout still yields, so
   // the worker stays responsive to messages rather than spinning.
   do {
     if (!layout.tick()) break;
+    moved = true;
     ticks++;
     ticksDone++;
-  } while (ticks < MAX_TICKS_PER_BATCH && performance.now() - start < BUDGET_MS);
+  } while (ticks < MAX_TICKS_PER_BATCH && performance.now() - began < BUDGET_MS);
 
-  report(publish());
+  // Publish while there is movement, and once as it stops. Republishing an
+  // arrangement the page already has is the whole of what the idle spin cost.
+  if (moved || !resting) report(publish());
+  resting = !moved;
 
   // setTimeout rather than a tight loop: it returns to the event loop, so
   // messages queued by the page are handled between batches.
-  scheduled = true;
-  setTimeout(loop, 0);
+  schedule(resting ? IDLE_MS : 0);
 }
 
+function schedule(delay) {
+  if (scheduled) return;
+  scheduled = true;
+  timer = setTimeout(loop, delay);
+}
+
+/**
+ * Wake up and get on with it.
+ *
+ * Anything that changes the layout comes through here, and it cancels a
+ * pending idle wait rather than waiting it out — otherwise a reheat could sit
+ * for a tenth of a second before the first tick, which is visible as a stall.
+ */
 function start() {
-  if (running) return;
   running = true;
-  if (!scheduled) { scheduled = true; setTimeout(loop, 0); }
+  resting = false;
+  if (timer !== null) {
+    clearTimeout(timer);
+    timer = null;
+    scheduled = false;
+  }
+  schedule(0);
 }
 
 self.onmessage = (e) => {

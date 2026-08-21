@@ -620,6 +620,19 @@ const Viewer = {
     const dt = Math.min(0.1, (time - this.lastTime) / 1000) || 0;
     this.lastTime = time;
 
+    // Nothing to do while the reader is looking at another tab.
+    //
+    // This loop used to run whatever was on screen. The canvas keeps its size
+    // when the view is hidden, so every check that guards against drawing into
+    // nothing still passed, and the Viewer went on projecting, sorting and
+    // painting a few thousand agents onto a canvas nobody could see — measured
+    // at sixty draws in sixty frames, 4.9ms each, while the front page was
+    // trying to animate. Playback stays where it is and picks up on return.
+    if (!App.isViewerActive()) {
+      requestAnimationFrame(t => this.animate(t));
+      return;
+    }
+
     // With a worker this returns immediately: the layout is advancing on its
     // own thread and the loop's only job is to draw what has arrived. Without
     // one it advances the layout here, as before.
