@@ -315,8 +315,8 @@ const Explain = {
 
     if (r < 9) {
       for (let i = 0; i < 3; i++) {
-        const lit = 0.4 + 0.6 * Math.max(0, Math.sin(t * 3 + seed - i * 0.7));
-        ctx.fillStyle = (changed === i) ? this.ink.rich : `rgba(255,255,255,${lit})`;
+        const lit = 0.45 + 0.55 * Math.max(0, Math.sin(t * 3 + seed - i * 0.7));
+        ctx.fillStyle = (changed === i) ? this.ink.rich : `rgba(5,7,10,${lit})`;
         ctx.beginPath();
         ctx.arc((i - 1) * r * 0.42, 0, r * 0.19, 0, Math.PI * 2);
         ctx.fill();
@@ -326,8 +326,8 @@ const Explain = {
     }
 
     const cols = [[-1, 2], [0, 3], [1, 2]];
-    ctx.strokeStyle = 'rgba(255,255,255,0.3)';
-    ctx.lineWidth = 0.5;
+    ctx.strokeStyle = 'rgba(5,7,10,0.4)';
+    ctx.lineWidth = 0.6;
     const layers = [];
     cols.forEach(([cx, count], ci) => {
       const layer = [];
@@ -343,7 +343,7 @@ const Explain = {
     });
     layers.flat().forEach((q, i) => {
       const lit = 0.45 + 0.55 * Math.max(0, Math.sin(t * 3 + seed - i * 0.5));
-      ctx.fillStyle = (changed === i) ? this.ink.rich : `rgba(255,255,255,${lit})`;
+      ctx.fillStyle = (changed === i) ? this.ink.rich : `rgba(5,7,10,${lit})`;
       ctx.beginPath();
       ctx.arc(q.x, q.y, r * 0.13, 0, Math.PI * 2);
       ctx.fill();
@@ -365,34 +365,83 @@ const Explain = {
   },
 
   /**
-   * Two eyes, looking towards a point. Flat black shapes on the body of the
-   * agent — an icon rather than a face — that shut and open again.
+   * One eye, on the body of the agent, looking towards a point.
+   *
+   * A lens of two arcs, a dark iris that slides towards whatever is being
+   * looked at, and a highlight — the shape of an eye icon, built from
+   * primitives so it scales and blinks rather than being an image. The iris is
+   * clipped to the lens, so at the edge of a look it is cut off by the lid
+   * exactly as a real one would be.
+   *
+   * A gaze aimed at the agent itself has nowhere to point, so the iris settles
+   * in the middle. That is what an agent observing itself looks like.
    */
-  eyes(ctx, p, r, towards, t, seed = 0) {
+  eye(ctx, p, r, towards, t, seed = 0) {
     const open = this.blink(t, seed);
-    const dx = towards.x - p.x, dy = towards.y - p.y;
-    const len = Math.hypot(dx, dy) || 1;
-    const gaze = { x: dx / len, y: dy / len };
-    const spread = r * 0.4;
-    const px = -gaze.y * spread, py = gaze.x * spread;
+    const halfW = r * 0.8, halfH = r * 0.44;
+    const line = Math.max(0.9, r * 0.11);
 
-    ctx.fillStyle = this.ink.eye;
-    for (const side of [-1, 1]) {
-      const ex = p.x + px * side + gaze.x * r * 0.12;
-      const ey = p.y + py * side + gaze.y * r * 0.12;
-      if (open < 0.18) {
-        // Shut: a lid, drawn across the direction the pair sits in.
-        ctx.save();
-        ctx.translate(ex, ey);
-        ctx.rotate(Math.atan2(py, px));
-        ctx.fillRect(-r * 0.2, -r * 0.06, r * 0.4, r * 0.12);
-        ctx.restore();
-        continue;
-      }
+    const lens = () => {
+      const lid = halfH * 2 * Math.max(open, 0.001);
       ctx.beginPath();
-      ctx.ellipse(ex, ey, r * 0.19, r * 0.27 * open, Math.atan2(gaze.y, gaze.x), 0, Math.PI * 2);
-      ctx.fill();
+      ctx.moveTo(p.x - halfW, p.y);
+      ctx.quadraticCurveTo(p.x, p.y - lid, p.x + halfW, p.y);
+      ctx.quadraticCurveTo(p.x, p.y + lid, p.x - halfW, p.y);
+      ctx.closePath();
+    };
+
+    if (open < 0.12) {
+      ctx.strokeStyle = this.ink.eye;
+      ctx.lineWidth = line;
+      ctx.beginPath();
+      ctx.moveTo(p.x - halfW, p.y);
+      ctx.lineTo(p.x + halfW, p.y);
+      ctx.stroke();
+      return;
     }
+
+    lens();
+    ctx.fillStyle = '#f4f7fb';
+    ctx.fill();
+
+    ctx.save();
+    lens();
+    ctx.clip();
+    const dx = towards.x - p.x, dy = towards.y - p.y;
+    const len = Math.hypot(dx, dy);
+    // Vertical travel is smaller than horizontal because the lens is wider
+    // than it is tall; an iris that moved equally would leave the white.
+    const gx = len > 0.5 ? (dx / len) * halfW * 0.4 : 0;
+    const gy = len > 0.5 ? (dy / len) * halfH * 0.5 : 0;
+    const iris = Math.min(halfH * 1.15, r * 0.4);
+    ctx.fillStyle = this.ink.eye;
+    ctx.beginPath();
+    ctx.arc(p.x + gx, p.y + gy, iris, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = 'rgba(255,255,255,0.92)';
+    ctx.beginPath();
+    ctx.arc(p.x + gx + iris * 0.36, p.y + gy - iris * 0.36, iris * 0.3, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+
+    lens();
+    ctx.strokeStyle = this.ink.eye;
+    ctx.lineWidth = line;
+    ctx.stroke();
+  },
+
+  /**
+   * What an agent is looking at right now: one of its neighbours, or itself.
+   *
+   * The gaze jumps from one to the next and holds, rather than sweeping
+   * between them. An agent does not swing its attention around the
+   * neighbourhood — it reads all of them in one step, and this is that step
+   * drawn one glance at a time.
+   */
+  gazeTarget(scene, id, t, seed = 0) {
+    const targets = [...(scene.adj.get(id) || []), id];   // itself, last
+    const step = Math.floor(t / 1.15 + seed * 0.6);
+    return scene.pos.get(targets[((step % targets.length) + targets.length) % targets.length]);
   },
 
   envelope(ctx, x, y, s, alpha = 1) {
@@ -412,7 +461,11 @@ const Explain = {
     ctx.restore();
   },
 
-  /** Dots orbiting an agent, one per token, capped so it stays readable. */
+  /**
+   * Tokens as dots held close around an agent, one per token, capped so it
+   * stays readable. Big enough to count at a glance and tight enough to the
+   * body that whose they are is never in question.
+   */
   tokens(ctx, p, count, r, t, colour, alpha = 1) {
     const shown = Math.min(count, 7);
     ctx.save();
@@ -421,8 +474,8 @@ const Explain = {
     for (let i = 0; i < shown; i++) {
       const a = t * 1.05 + (i / shown) * Math.PI * 2;
       ctx.beginPath();
-      ctx.arc(p.x + Math.cos(a) * r * 1.75, p.y + Math.sin(a) * r * 1.75,
-              Math.max(1.2, r * 0.14), 0, Math.PI * 2);
+      ctx.arc(p.x + Math.cos(a) * r * 1.3, p.y + Math.sin(a) * r * 1.3,
+              Math.max(2.4, r * 0.28), 0, Math.PI * 2);
       ctx.fill();
     }
     ctx.restore();
@@ -453,6 +506,99 @@ const Explain = {
     return Math.max(0, Math.min(1, (x - 0.12) / 0.72));
   },
 
+  /**
+   * One observation step, shared by both phases.
+   *
+   * Every agent opens its eye, reads its neighbours and itself, and writes a
+   * message to each of them. The two phases observe identically — the same
+   * code draws both, because the same code runs both.
+   */
+  observation(ctx, t, scene, glowing = new Set()) {
+    const r = scene.r * 1.15;
+    this.drawGraph(ctx, scene, {
+      nodeRadius: () => r,
+      nodeColour: id => (glowing.has(id) ? this.ink.good : this.ink.node),
+      glow: id => (glowing.has(id) ? 0.8 : 0)
+    });
+    scene.ids.forEach((id, i) => {
+      // Inset, so a rim of the agent still shows around the white.
+      this.eye(ctx, scene.pos.get(id), r * 0.82, this.gazeTarget(scene, id, t, i), t, i + 1);
+    });
+
+    // Messages cross in both directions at once: everyone writes to everyone
+    // they can reach, in the same step.
+    const send = this.ramp(this.cycle(t, 6), 0.15, 0.9);
+    const size = scene.crowd ? 3 : 4.5;
+    scene.edges.forEach(([a, b], i) => {
+      const p = scene.pos.get(a), q = scene.pos.get(b);
+      const at = (send + i * 0.13) % 1;
+      this.envelope(ctx, p.x + (q.x - p.x) * at, p.y + (q.y - p.y) * at, size, 0.9);
+      this.envelope(ctx, q.x + (p.x - q.x) * at, q.y + (p.y - q.y) * at, size, 0.55);
+    });
+  },
+
+  /**
+   * A cleanup panel, used for both of them — the one after reproduction and
+   * the one after the game, since the engine runs the identical step twice.
+   *
+   * The graph is built so the two rules are visibly connected rather than two
+   * unrelated removals. A side group hangs off the rest through a single
+   * agent, and that agent is one of the ones holding nothing. It starves
+   * first; the group it was carrying is then attached to nothing, and the
+   * largest-piece rule takes it however healthy it looks.
+   */
+  elimination({ title, text, seed }) {
+    return {
+      title,
+      text,
+      build(scale) {
+        const size = scale === 'crowd' ? 13 : 6;
+        const graph = scale === 'crowd' ? Explain.ringLattice(size, 4, 0.15, seed)
+                                        : Explain.ringLattice(size, 2, 0, seed);
+        const bridge = 'bridge';
+        const side = scale === 'crowd' ? ['s0', 's1', 's2', 's3'] : ['s0', 's1'];
+        graph.nodes.push(bridge, ...side);
+        graph.edges.push([0, bridge], [bridge, side[0]]);
+        for (let i = 0; i + 1 < side.length; i++) graph.edges.push([side[i], side[i + 1]]);
+        if (side.length > 2) graph.edges.push([side[0], side[side.length - 1]]);
+
+        // Node 0 is what the bridge hangs from, so it must not starve too —
+        // the group has to come adrift for one reason, not two.
+        const others = graph.nodes.filter(id => typeof id === 'number' && id !== 0);
+        const starved = new Set([bridge,
+          ...Explain.choose(others, scale === 'crowd' ? 3 : 1, seed + 5)]);
+        return { graph, roles: { starved, side: new Set(side) } };
+      },
+      draw(ctx, t, scene) {
+        const k = Explain.cycle(t, 9);
+        const { starved, side } = scene.roles;
+        const starvedGone = Explain.ramp(k, 0.3, 0.5);
+        const adrift = k > 0.5;
+        const sideGone = Explain.ramp(k, 0.56, 0.76);
+
+        Explain.drawGraph(ctx, scene, {
+          nodeAlpha: id => (starved.has(id) ? 1 - starvedGone
+                           : side.has(id) ? 1 - sideGone : 1),
+          nodeColour: id => (starved.has(id) ? Explain.ink.warn
+                            : side.has(id) && adrift ? Explain.ink.dim : Explain.ink.node),
+          glow: id => (starved.has(id) ? 0.6 * (1 - starvedGone) : 0)
+        });
+
+        if (k > 0.78) {
+          const share = Explain.ramp(k, 0.78, 0.95);
+          scene.ids.filter(id => !starved.has(id) && !side.has(id))
+            .forEach((id, i) => Explain.tokens(ctx, scene.pos.get(id), 2 + (i % 3),
+                                               scene.r, t, Explain.ink.good, share));
+        }
+        Explain.label(ctx,
+          k > 0.78 ? 'what the dead held goes to the living'
+          : k > 0.56 ? 'and the piece it carried is cut adrift'
+          : k > 0.3 ? 'the one holding them on starved too'
+          : 'these are holding nothing', scene.w, scene.h);
+      }
+    };
+  },
+
   /** Eased 0 at `from`, 1 at `to`. */
   ramp(x, from, to) {
     const s = Math.max(0, Math.min(1, (x - from) / (to - from)));
@@ -471,108 +617,82 @@ const Explain = {
 
 Explain.PANELS = [
   {
-    title: 'A world to start with',
-    text: 'A ring of agents wired to a few neighbours each, and a fixed pile of '
-        + 'tokens shared between them. Tokens are the only currency and the '
-        + 'total never changes — everything that follows moves them around.',
+    title: 'Initial Graph Generation',
+    text: 'A ring of agents wired to a few neighbours each, with some links '
+        + 'moved elsewhere — a small-world graph. A fixed pile of tokens is '
+        + 'shared between them, shown as the dots each one holds. Tokens are the '
+        + 'only currency and the total never changes; everything that follows '
+        + 'only moves them around. Every agent also carries a brain: a small '
+        + 'neural network, drawn here inside the body. It is never trained. It '
+        + 'is copied from a parent with mutation, and that is the only way '
+        + 'behaviour ever changes.',
     build(scale) {
-      return { graph: scale === 'crowd' ? Explain.ringLattice(20, 4, 0.2, 7)
-                                        : Explain.ringLattice(7, 2, 0, 3) };
+      return { graph: scale === 'crowd' ? Explain.ringLattice(18, 4, 0.2, 7)
+                                        : Explain.ringLattice(6, 2, 0, 3) };
     },
     draw(ctx, t, scene) {
       const k = Explain.cycle(t, 7);
-      const arrival = id => Explain.ramp(k, (scene.ids.indexOf(id) / scene.ids.length) * 0.4, 0.55);
-      Explain.drawGraph(ctx, scene, { nodeAlpha: arrival });
-      if (k > 0.6) {
-        scene.ids.forEach((id, i) => {
-          Explain.tokens(ctx, scene.pos.get(id), 1 + (i * 3) % 5, scene.r, t,
-                         Explain.ink.good, Explain.ramp(k, 0.6, 0.8));
-        });
-      }
-      Explain.label(ctx, k > 0.6 ? 'and a fixed pile of tokens' : 'agents, and who they can reach',
-                    scene.w, scene.h);
+      const r = scene.r * 1.15;
+      const arrival = id => Explain.ramp(k, (scene.ids.indexOf(id) / scene.ids.length) * 0.35, 0.5);
+      Explain.drawGraph(ctx, scene, { nodeAlpha: arrival, nodeRadius: () => r });
+
+      scene.ids.forEach((id, i) => {
+        const a = arrival(id);
+        if (a <= 0.01) return;
+        ctx.globalAlpha = a;
+        Explain.brain(ctx, scene.pos.get(id), r, t, i * 0.6);
+        ctx.globalAlpha = 1;
+        if (k > 0.55) {
+          Explain.tokens(ctx, scene.pos.get(id), 1 + (i * 3) % 4, r, t,
+                         Explain.ink.good, Explain.ramp(k, 0.55, 0.75));
+        }
+      });
+      Explain.label(ctx, k > 0.55 ? 'a brain each, and a fixed pile of tokens'
+                                  : 'agents, and who they can reach', scene.w, scene.h);
     }
   },
 
   {
-    title: 'Every agent carries a brain',
-    text: 'A small neural network, never trained. It is copied from a parent '
-        + 'with mutation, and that is the only way behaviour ever changes. '
-        + 'Every choice an agent makes is read off its outputs.',
+    title: 'Observation — Reproduction Phase',
+    text: 'Every agent opens its eye and reads its whole neighbourhood in one '
+        + 'step: each neighbour’s tokens and degree, and the messages it was '
+        + 'sent last time. It observes itself too — that is the glance where '
+        + 'the pupil settles in the middle — and its own message to itself is '
+        + 'the only memory it has. In the same breath it writes a fresh message '
+        + 'to every neighbour. Everything decided in this phase is read off '
+        + 'this one observation: what to say, whether to reproduce and for how '
+        + 'much, whether to hand over an edge, and whether to rewire. The '
+        + 'glowing agent is the one that decided to reproduce.',
     build(scale) {
-      return { graph: scale === 'crowd' ? Explain.ringLattice(20, 4, 0.2, 7)
-                                        : Explain.ringLattice(5, 2, 0, 11) };
+      const graph = scale === 'crowd' ? Explain.ringLattice(15, 4, 0.2, 5)
+                                      : Explain.neighbourhood();
+      const breeders = new Set(scale === 'crowd'
+        ? Explain.choose(graph.nodes, 4, 77) : [0]);
+      return { graph, roles: { breeders } };
     },
     draw(ctx, t, scene) {
-      const k = Explain.cycle(t, 6);
-      Explain.drawGraph(ctx, scene, { nodeRadius: () => scene.r * 1.12 });
-      ctx.globalAlpha = Explain.ramp(k, 0.05, 0.4);
-      scene.ids.forEach((id, i) => {
-        Explain.brain(ctx, scene.pos.get(id), scene.r * 1.12, t, i * 0.6);
-      });
-      ctx.globalAlpha = 1;
-      Explain.label(ctx, 'no two quite the same', scene.w, scene.h);
+      Explain.observation(ctx, t, scene, scene.roles.breeders);
+      Explain.label(ctx, 'reading everyone, and writing back', scene.w, scene.h);
     }
   },
 
   {
-    title: 'It looks, and it speaks',
-    text: 'Each agent observes itself and every neighbour at once: their '
-        + 'tokens, their degree, and the messages it was sent. In the same '
-        + 'breath it writes a short message back to each of them, and one to '
-        + 'itself — which is the only memory it has. Nothing forces a '
-        + 'message to mean anything.',
-    build(scale) {
-      return { graph: scale === 'crowd' ? Explain.ringLattice(15, 4, 0.2, 5)
-                                        : Explain.neighbourhood() };
-    },
-    draw(ctx, t, scene) {
-      const k = Explain.cycle(t, 6);
-      Explain.drawGraph(ctx, scene, { nodeRadius: () => scene.r * 1.1 });
-
-      // Each agent's gaze moves from one neighbour to the next, so over a loop
-      // it has looked at all of them — which is what observing every neighbour
-      // at once looks like when it has to be drawn one glance at a time.
-      scene.ids.forEach((id, i) => {
-        const near = scene.adj.get(id) || [];
-        if (!near.length) return;
-        const at = scene.pos.get(id);
-        const look = scene.pos.get(near[Math.floor(t * 0.7 + i) % near.length]);
-        Explain.eyes(ctx, at, scene.r * 1.1, look, t, i + 1);
-      });
-
-      // Envelopes cross in both directions at once: everyone writes to
-      // everyone they can reach, in the same step.
-      const send = Explain.ramp(k, 0.15, 0.9);
-      scene.edges.forEach(([a, b], i) => {
-        const p = scene.pos.get(a), q = scene.pos.get(b);
-        const at = (send + i * 0.13) % 1;
-        const size = scene.crowd ? 3 : 4.5;
-        Explain.envelope(ctx, p.x + (q.x - p.x) * at, p.y + (q.y - p.y) * at, size, 0.9);
-        Explain.envelope(ctx, q.x + (p.x - q.x) * at, q.y + (p.y - q.y) * at, size, 0.55);
-      });
-      Explain.label(ctx, 'a message to every neighbour, and one to itself', scene.w, scene.h);
-    }
-  },
-
-  {
-    title: 'Reproduction',
+    title: 'Reproduction + Handover',
     text: 'An agent decides what share of its tokens to spend on a child and '
-        + 'pays the full price. The child inherits a mutated copy of the brain '
-        + 'and is wired to whichever of the parent’s neighbours the parent '
-        + 'picks. The parent can also hand over one of its own edges — '
-        + 'giving away position rather than copying it.',
+        + 'pays the full price; the child starts with exactly what was spent. '
+        + 'It inherits a mutated copy of the parent’s brain and is wired to '
+        + 'whichever of the parent’s neighbours the parent picked. The parent '
+        + 'can also hand over one of its own edges instead of copying it — '
+        + 'dropping that connection itself and giving the child its place, so a '
+        + 'lineage passes on position and not only tokens. Handover is '
+        + 'optional: it can be switched off when a run is created, and then a '
+        + 'child only ever gains links.',
     build(scale) {
-      const graph = scale === 'crowd' ? Explain.ringLattice(16, 4, 0.2, 9)
+      const graph = scale === 'crowd' ? Explain.ringLattice(15, 4, 0.2, 9)
                                       : Explain.neighbourhood();
       const adj = Explain.adjacency(graph);
-      const parents = scale === 'crowd'
-        ? Explain.choose(graph.nodes, 5, 31)
-        : [0];
+      const parents = scale === 'crowd' ? Explain.choose(graph.nodes, 4, 31) : [0];
 
-      // The child, the edge to its parent, and the edge it is handed are all
-      // part of the graph that gets laid out, so the newborn already has
-      // somewhere sensible to be before it appears.
       const births = [];
       parents.forEach((parent, i) => {
         const near = adj.get(parent) || [];
@@ -589,6 +709,7 @@ Explain.PANELS = [
       const k = Explain.cycle(t, 6);
       const { births } = scene.roles;
       const isChild = new Set(births.map(b => b.child));
+      const parents = new Set(births.map(b => b.parent));
       const grown = Explain.ramp(k, 0.12, 0.8);
       const handedOver = new Map(births.map(b => [`${b.parent}|${b.handed}`, b]));
 
@@ -596,8 +717,7 @@ Explain.PANELS = [
         nodeAlpha: id => (isChild.has(id) ? grown : 1),
         nodeRadius: id => (isChild.has(id) ? scene.r * (0.35 + 0.65 * grown) : scene.r),
         nodeColour: id => (isChild.has(id) ? Explain.ink.good : Explain.ink.node),
-        // The handed edge leaves the parent as the child takes it up. Both are
-        // in the layout, so neither has to be invented mid-animation.
+        glow: id => (parents.has(id) ? 0.55 : 0),
         edgeAlpha: (a, b) => {
           if (handedOver.has(`${a}|${b}`) || handedOver.has(`${b}|${a}`)) return 1 - grown * 0.85;
           return 1;
@@ -609,13 +729,12 @@ Explain.PANELS = [
         }
       });
 
-      // Tokens leaving the parent, which is what the child is made of.
       for (const b of births) {
         const p = scene.pos.get(b.parent), c = scene.pos.get(b.child);
         for (let i = 0; i < 3; i++) {
-          const at = (k * 1.6 - i * 0.16);
+          const at = k * 1.6 - i * 0.16;
           if (at <= 0 || at >= 1) continue;
-          Explain.mote(ctx, p, c, at, Math.max(1.4, scene.r * 0.17), Explain.ink.good);
+          Explain.mote(ctx, p, c, at, Math.max(1.8, scene.r * 0.22), Explain.ink.good);
         }
         if (grown > 0.45) {
           ctx.globalAlpha = Explain.ramp(grown, 0.45, 0.9);
@@ -623,7 +742,7 @@ Explain.PANELS = [
           ctx.globalAlpha = 1;
         }
       }
-      Explain.label(ctx, k > 0.55 ? 'one edge copied, one given away'
+      Explain.label(ctx, k > 0.55 ? 'one link copied, one handed over'
                                   : 'the parent pays the full price', scene.w, scene.h);
     }
   },
@@ -631,14 +750,17 @@ Explain.PANELS = [
   {
     title: 'Rewire',
     text: 'An agent can hand one of its edges to another of its neighbours. '
-        + 'The link (agent, other) becomes (recipient, other): it drops out of '
-        + 'the middle and leaves the two it stood between joined directly. A '
-        + 'rewire never creates an edge.',
+        + 'The link (agent, other) becomes (recipient, other): the agent drops '
+        + 'out of the middle and leaves the two it stood between joined '
+        + 'directly. A rewire never creates an edge — the count stays the '
+        + 'same, or falls by one where the result collapses into an edge that '
+        + 'already existed. The agent doing the rewiring is the one glowing. '
+        + 'Like handover, this can be switched off.',
     build(scale) {
-      const graph = scale === 'crowd' ? Explain.ringLattice(18, 4, 0.15, 4)
+      const graph = scale === 'crowd' ? Explain.ringLattice(16, 4, 0.15, 4)
                                       : Explain.neighbourhood();
       const adj = Explain.adjacency(graph);
-      const actors = scale === 'crowd' ? Explain.choose(graph.nodes, 5, 17) : [0];
+      const actors = scale === 'crowd' ? Explain.choose(graph.nodes, 4, 17) : [0];
 
       const rewires = [];
       const used = new Set();
@@ -647,8 +769,6 @@ Explain.PANELS = [
         if (near.length < 2) continue;
         const other = near[0], recipient = near[1];
         used.add(`${a}|${other}`);
-        // The link the rewire creates is part of the laid-out graph, so it
-        // grows into a place that was already left for it.
         graph.edges.push([recipient, other]);
         rewires.push({ a, other, recipient });
       }
@@ -661,6 +781,7 @@ Explain.PANELS = [
       const key = (a, b) => (String(a) < String(b) ? `${a}|${b}` : `${b}|${a}`);
       const leaving = new Map(rewires.map(r => [key(r.a, r.other), r]));
       const arriving = new Map(rewires.map(r => [key(r.recipient, r.other), r]));
+      const actors = new Set(rewires.map(r => r.a));
 
       Explain.drawGraph(ctx, scene, {
         edgeAlpha: (a, b) => {
@@ -675,11 +796,9 @@ Explain.PANELS = [
         },
         edgeWidth: (a, b) => (leaving.has(key(a, b)) || arriving.has(key(a, b))
           ? (scene.crowd ? 1.6 : 2) : (scene.crowd ? 1 : 1.3)),
-        glow: id => (rewires.some(r => r.a === id) ? 0.5 * (1 - moved) : 0)
+        glow: id => (actors.has(id) ? 0.6 : 0)
       });
 
-      // The end of the link slides from the agent to the recipient, which is
-      // the whole of what a rewire is.
       for (const r of rewires) {
         const from = scene.pos.get(r.a), to = scene.pos.get(r.recipient);
         Explain.mote(ctx, from, to, moved, Math.max(1.8, scene.r * 0.24), Explain.ink.pale);
@@ -689,163 +808,147 @@ Explain.PANELS = [
     }
   },
 
-  {
-    title: 'Starve, cull, share out',
-    text: 'Agents at zero tokens are removed. Of what is left, only the largest '
-        + 'connected piece survives — a splinter group is culled however '
-        + 'healthy it looks. Everything the dead held is pooled and scattered '
-        + 'at random over the survivors, so the total still balances. This '
-        + 'happens after both phases, not once.',
-    build(scale) {
-      const size = scale === 'crowd' ? 18 : 6;
-      const graph = scale === 'crowd' ? Explain.ringLattice(size, 4, 0.18, 6)
-                                      : Explain.ringLattice(size, 2, 0, 2);
-      // A splinter group, joined to nothing: the cull is about connection, not
-      // about health, so it has to be genuinely detached to make the point.
-      const splinter = scale === 'crowd' ? ['s0', 's1', 's2', 's3'] : ['s0', 's1'];
-      graph.nodes.push(...splinter);
-      for (let i = 0; i + 1 < splinter.length; i++) graph.edges.push([splinter[i], splinter[i + 1]]);
-      if (splinter.length > 2) graph.edges.push([splinter[0], splinter[splinter.length - 1]]);
+  Explain.elimination({
+    title: 'Elimination',
+    text: 'Two removals, in this order. First every agent holding no tokens is '
+        + 'taken out. Then, of whatever is still standing, only the largest '
+        + 'connected piece survives — and that second rule bites because of '
+        + 'the first: the group on the side was joined to the rest through a '
+        + 'single agent, and when that one starved the group was left hanging '
+        + 'off nothing. It is culled however healthy it looks. Everything the '
+        + 'dead held is pooled and scattered at random over the survivors, so '
+        + 'the total still balances.',
+    seed: 6
+  }),
 
-      const starved = Explain.choose(graph.nodes.filter(n => typeof n === 'number'),
-                                     scale === 'crowd' ? 4 : 1, 23);
-      return { graph, roles: { splinter: new Set(splinter), starved: new Set(starved) } };
+  {
+    title: 'Observation — Game Phase',
+    text: 'The same observation again, before the second half of the '
+        + 'iteration. Every agent reads its neighbours and itself, and writes a '
+        + 'fresh message to each of them — messages are exchanged in both '
+        + 'phases, not once per iteration. The graph it is reading is not the '
+        + 'one it read last time: children have been born, edges have moved, '
+        + 'and the starved are gone. What it sees now decides how it plays the '
+        + 'game.',
+    build(scale) {
+      return { graph: scale === 'crowd' ? Explain.ringLattice(15, 4, 0.2, 23)
+                                        : Explain.neighbourhood(),
+               roles: { breeders: new Set() } };
     },
     draw(ctx, t, scene) {
-      const k = Explain.cycle(t, 7);
-      const { splinter, starved } = scene.roles;
-      const gone = Explain.ramp(k, 0.25, 0.6);
-
-      Explain.drawGraph(ctx, scene, {
-        // Both the starved and the splinter fade; drawGraph takes their edges
-        // with them, so nothing is left hanging in the air.
-        nodeAlpha: id => (starved.has(id) || splinter.has(id) ? 1 - gone : 1),
-        nodeColour: id => (starved.has(id) ? Explain.ink.warn
-                          : splinter.has(id) ? Explain.ink.dim : Explain.ink.node),
-        glow: id => (starved.has(id) ? 0.6 * (1 - gone) : 0)
-      });
-
-      const survivors = scene.ids.filter(id => !starved.has(id) && !splinter.has(id));
-      if (k > 0.6) {
-        const share = Explain.ramp(k, 0.6, 0.85);
-        survivors.forEach((id, i) => {
-          Explain.tokens(ctx, scene.pos.get(id), 2 + (i % 3), scene.r, t, Explain.ink.good, share);
-        });
-      }
-      Explain.label(ctx, k > 0.6 ? 'what the dead held goes to the living'
-                                 : 'broke, or cut adrift', scene.w, scene.h);
+      Explain.observation(ctx, t, scene, scene.roles.breeders);
+      Explain.label(ctx, 'the same reading, on a changed graph', scene.w, scene.h);
     }
   },
 
   {
-    title: 'The game',
-    text: 'Every agent spreads its tokens across itself and its neighbours '
-        + '— a Colonel Blotto game played on the graph. Whoever commits '
-        + 'most to a node takes it. Nothing is destroyed: the tokens move to '
-        + 'wherever they were sent.',
+    title: 'Colonel Blotto Game',
+    text: 'Every agent spreads its tokens across itself and its neighbours at '
+        + 'once, and whoever commits most to a node takes it. Nothing is '
+        + 'destroyed — the tokens move to wherever they were sent, so a node '
+        + '’s new balance is everything staked on it.\n\n'
+        + 'Revolutions, which are optional, decide it differently. Part of each '
+        + 'allocation is flagged as revolt. The biggest single allocator is the '
+        + 'hegemon; every other revolting allocator forms the mob, sorted '
+        + 'weakest first. Walking up that order, a lower class accumulates, and '
+        + 'at each rung the question is whether it now outweighs everyone still '
+        + 'above it plus the hegemon. At the first rung where it does, the '
+        + 'revolution carries — and the node goes to the strongest allocator '
+        + 'in that rung, not to a random member of the crowd. Ties at that '
+        + 'exact amount are split at random, and nothing else is. So a crowd of '
+        + 'small allocators can take a node from someone who outspent every one '
+        + 'of them, and the best-placed of them collects it.\n\n'
+        + 'An edge that carried no tokens in either direction is then cut, so '
+        + 'the graph keeps only the connections anyone actually used.',
     build(scale) {
-      return { graph: scale === 'crowd' ? Explain.ringLattice(18, 4, 0.2, 8)
-                                        : Explain.neighbourhood() };
-    },
-    draw(ctx, t, scene) {
-      const k = Explain.cycle(t, 6);
-      const sent = Explain.ramp(k, 0.1, 0.75);
-      Explain.drawGraph(ctx, scene, {
-        glow: id => (k > 0.8 ? 0.5 * ((scene.ids.indexOf(id) % 3 === 0) ? 1 : 0) : 0),
-        nodeColour: id => (k > 0.8 && scene.ids.indexOf(id) % 3 === 0
-          ? Explain.ink.rich : Explain.ink.node)
-      });
-
-      // Every agent stakes every neighbour, and itself. Drawn as dots leaving
-      // in all directions at once, because that is how it happens.
-      const size = Math.max(1.3, scene.r * 0.19);
-      for (const id of scene.ids) {
-        const from = scene.pos.get(id);
-        for (const near of scene.adj.get(id) || []) {
-          const to = scene.pos.get(near);
-          if (sent > 0 && sent < 1) Explain.mote(ctx, from, to, sent, size, Explain.ink.pale);
-        }
-        // Its own claim, held close rather than sent anywhere.
-        if (sent > 0.2) {
-          ctx.fillStyle = Explain.ink.pale;
-          ctx.globalAlpha = Math.min(1, sent * 1.5);
-          ctx.beginPath();
-          ctx.arc(from.x, from.y - scene.r * 1.6, size, 0, Math.PI * 2);
-          ctx.fill();
-          ctx.globalAlpha = 1;
-        }
-      }
-      Explain.label(ctx, k > 0.8 ? 'whoever committed most takes the node'
-                                 : 'everyone stakes everyone', scene.w, scene.h);
-    }
-  },
-
-  {
-    title: 'Revolutions',
-    text: 'The largest bid does not always win. Part of every allocation is '
-        + 'flagged as a revolt token, and the small allocators are counted up '
-        + 'from the weakest. The moment that lower group outweighs everyone '
-        + 'above it, the revolution carries and the winner is drawn from the '
-        + 'group that tipped it.',
-    build(scale) {
-      const graph = scale === 'crowd' ? Explain.ringLattice(16, 4, 0.15, 12)
+      const graph = scale === 'crowd' ? Explain.ringLattice(15, 4, 0.18, 8)
                                       : Explain.neighbourhood();
       const adj = Explain.adjacency(graph);
-      const prizes = scale === 'crowd' ? Explain.choose(graph.nodes, 3, 41) : [0];
+      const prizes = scale === 'crowd' ? Explain.choose(graph.nodes, 2, 41) : [0];
       const fights = prizes.map(prize => {
         const near = adj.get(prize) || [];
-        return { prize, leader: near[0], rebels: near.slice(1, 4) };
-      }).filter(f => f.leader !== undefined && f.rebels.length >= 2);
-      return { graph, roles: { fights } };
+        return { prize, hegemon: near[0], mob: near.slice(1, 4) };
+      }).filter(f => f.hegemon !== undefined && f.mob.length >= 2);
+
+      // A third of the links carry nothing and are cut at the end.
+      const quiet = new Set(Explain.choose([...graph.edges.keys()],
+                                           Math.max(1, Math.round(graph.edges.length * 0.28)), 61));
+      return { graph, roles: { fights, quiet } };
     },
     draw(ctx, t, scene) {
-      const k = Explain.cycle(t, 7);
-      const { fights } = scene.roles;
-      const carried = k > 0.62;
-      const rise = Explain.ramp(k, 0.3, 0.62);
+      const k = Explain.cycle(t, 9);
+      const { fights, quiet } = scene.roles;
+      const staked = Explain.ramp(k, 0.05, 0.4);
+      const bound = Explain.ramp(k, 0.42, 0.62);
+      const carried = k > 0.64;
+      const cut = Explain.ramp(k, 0.76, 0.95);
 
-      const leaders = new Set(fights.map(f => f.leader));
-      const rebels = new Set(fights.flatMap(f => f.rebels));
+      const hegemons = new Set(fights.map(f => f.hegemon));
+      const mob = new Set(fights.flatMap(f => f.mob));
       const prizes = new Set(fights.map(f => f.prize));
+      // The strongest of the rung that tipped it is the one that collects.
+      const takers = new Set(fights.map(f => f.mob[f.mob.length - 1]));
 
       Explain.drawGraph(ctx, scene, {
         nodeColour: id => {
-          // The node being fought over is pale until it falls, so it never
-          // wears the same colour as the leader bidding for it.
           if (prizes.has(id)) return carried ? Explain.ink.good : Explain.ink.pale;
-          if (leaders.has(id)) return Explain.ink.rich;
-          if (rebels.has(id)) return Explain.ink.good;
+          if (hegemons.has(id)) return Explain.ink.rich;
+          if (mob.has(id)) return Explain.ink.good;
           return Explain.ink.node;
         },
-        nodeRadius: id => (leaders.has(id) ? scene.r * 1.35 : scene.r),
-        glow: id => (prizes.has(id) ? 0.7 : leaders.has(id) ? 0.4 * (1 - rise) : 0)
+        nodeRadius: id => (hegemons.has(id) ? scene.r * 1.35
+                          : prizes.has(id) ? scene.r * 1.15
+                          : takers.has(id) && carried ? scene.r * 1.3 : scene.r),
+        // Only the contested node glows. Giving the taker one as well put two
+        // glowing green nodes side by side and it stopped being obvious which
+        // was the prize; the taker is marked by size instead.
+        glow: id => (prizes.has(id) ? 0.75
+                    : hegemons.has(id) ? 0.45 * (1 - bound) : 0),
+        edgeAlpha: (a, b, i) => (quiet.has(i) ? 1 - cut : 1),
+        edgeColour: (a, b, i) => (quiet.has(i) && k > 0.68 ? Explain.ink.warn : Explain.ink.edge)
       });
 
-      // The coalition: the weakest counted upward until together they outweigh
-      // the leader. Drawn as the rebels binding to one another.
+      // Everyone stakes every neighbour, and itself, in the same step.
+      const size = Math.max(1.6, scene.r * 0.22);
+      if (staked > 0 && staked < 1) {
+        scene.edges.forEach(([a, b], i) => {
+          if (quiet.has(i)) return;             // this one carried nothing, which is why it goes
+          const p = scene.pos.get(a), q = scene.pos.get(b);
+          Explain.mote(ctx, p, q, staked, size, Explain.ink.pale);
+          Explain.mote(ctx, q, p, staked, size, Explain.ink.pale);
+        });
+      }
+
+      // The mob binding together, weakest first.
       ctx.lineWidth = scene.crowd ? 1.2 : 1.6;
       for (const f of fights) {
-        for (let i = 0; i + 1 < f.rebels.length; i++) {
-          const p = scene.pos.get(f.rebels[i]), q = scene.pos.get(f.rebels[i + 1]);
-          ctx.strokeStyle = `rgba(127,212,160,${rise * 0.9})`;
+        for (let i = 0; i + 1 < f.mob.length; i++) {
+          const p = scene.pos.get(f.mob[i]), q = scene.pos.get(f.mob[i + 1]);
+          ctx.strokeStyle = `rgba(127,212,160,${bound * 0.9})`;
           ctx.setLineDash([3, 3]);
           ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke();
           ctx.setLineDash([]);
         }
       }
-      Explain.label(ctx, carried ? 'the coalition tipped it'
-                                 : 'the small allocators counted up', scene.w, scene.h);
+
+      Explain.label(ctx,
+        k > 0.76 ? 'links that carried nothing are cut'
+        : carried ? 'the strongest of the rung takes it'
+        : bound > 0.2 ? 'the mob counts up from the weakest'
+        : 'everyone stakes everyone', scene.w, scene.h);
     }
   },
 
   {
-    title: 'The winner moves in',
-    text: 'This is the selection step. The winner’s brain is copied into '
-        + 'the node it took, and the node’s new balance is everything that '
-        + 'was sent there. Phase one spreads brains around; phase two decides '
-        + 'which of them win.',
+    title: 'Winner conquers Nodes',
+    text: 'This is the selection step, and the only place a brain is ever '
+        + 'chosen. The winner’s brain is copied into the node it took, '
+        + 'overwriting whatever was thinking there — the node stays, its '
+        + 'occupant does not. The node’s new balance is everything that was '
+        + 'staked on it. The first phase spreads brains around by reproduction; '
+        + 'this one decides which of them get to keep playing.',
     build(scale) {
-      const graph = scale === 'crowd' ? Explain.ringLattice(16, 4, 0.15, 15)
+      const graph = scale === 'crowd' ? Explain.ringLattice(15, 4, 0.15, 15)
                                       : Explain.neighbourhood();
       const adj = Explain.adjacency(graph);
       const winners = scale === 'crowd' ? Explain.choose(graph.nodes, 4, 53) : [1];
@@ -866,33 +969,29 @@ Explain.PANELS = [
       const done = arrived > 0.92;
       const losers = new Map(conquests.map(c => [c.to, c]));
       const winners = new Set(conquests.map(c => c.from));
+      const r = scene.r * 1.2;
 
       Explain.drawGraph(ctx, scene, {
-        nodeColour: id => {
-          if (winners.has(id)) return Explain.ink.node;
-          if (losers.has(id)) return done ? Explain.ink.node : 'rgba(150,110,110,0.75)';
-          return Explain.ink.node;
-        },
-        nodeRadius: id => (winners.has(id) || losers.has(id) ? scene.r * 1.2 : scene.r),
+        nodeColour: id => (losers.has(id) && !done ? 'rgba(150,110,110,0.8)' : Explain.ink.node),
+        nodeRadius: id => (winners.has(id) || losers.has(id) ? r : scene.r),
+        glow: id => (winners.has(id) ? 0.45 : 0),
         edgeColour: (a, b) => ((winners.has(a) && losers.has(b)) || (winners.has(b) && losers.has(a))
           ? Explain.ink.pale : Explain.ink.edge)
       });
 
       for (const c of conquests) {
         const from = scene.pos.get(c.from), to = scene.pos.get(c.to);
-        Explain.brain(ctx, from, scene.r * 1.2, t, 0);
-        // The loser is overwritten rather than removed, which is what being
-        // conquered means here: the node stays, the brain in it does not.
+        Explain.brain(ctx, from, r, t, 0);
         if (done) {
-          Explain.brain(ctx, to, scene.r * 1.2, t, 0);
+          Explain.brain(ctx, to, r, t, 0);
         } else {
-          ctx.globalAlpha = 0.5;
-          Explain.brain(ctx, to, scene.r * 1.2, t * 0.3, 4);
+          ctx.globalAlpha = 0.45;
+          Explain.brain(ctx, to, r, t * 0.3, 4);
           ctx.globalAlpha = 1;
           const at = { x: from.x + (to.x - from.x) * arrived,
                        y: from.y + (to.y - from.y) * arrived - Math.sin(arrived * Math.PI) * scene.r };
-          Explain.node(ctx, at, scene.r * 0.75, Explain.ink.good, 0.8);
-          Explain.brain(ctx, at, scene.r * 0.75, t, 0);
+          Explain.node(ctx, at, scene.r * 0.8, Explain.ink.good, 0.8);
+          Explain.brain(ctx, at, scene.r * 0.8, t, 0);
         }
       }
       Explain.label(ctx, done ? 'the same brain now runs both'
@@ -901,27 +1000,28 @@ Explain.PANELS = [
   },
 
   {
-    title: 'Everyone mutates',
-    text: 'Not only the newborns. After the game every brain in the world is '
-        + 'mutated — a sparse jitter of its weights, with an occasional '
-        + 'larger redraw. This is the whole engine of variation, and it runs '
-        + 'every iteration whether an agent reproduced or not.',
+    title: 'Mutation',
+    text: 'Every brain in the world is mutated — not only the newborns, and '
+        + 'not only the winners. A sparse jitter of the weights, with an '
+        + 'occasional larger redraw, applied to everyone, every iteration, '
+        + 'whether they reproduced or fought or did nothing at all. This is the '
+        + 'whole engine of variation. Nothing else ever changes a brain.',
     build(scale) {
-      return { graph: scale === 'crowd' ? Explain.ringLattice(20, 4, 0.2, 7)
+      return { graph: scale === 'crowd' ? Explain.ringLattice(18, 4, 0.2, 7)
                                         : Explain.ringLattice(5, 2, 0, 11) };
     },
     draw(ctx, t, scene) {
       const k = Explain.cycle(t, 5);
-      Explain.drawGraph(ctx, scene, { nodeRadius: () => scene.r * 1.12 });
-      // A sweep across the world: sparse, and every agent caught by it.
+      const r = scene.r * 1.15;
+      Explain.drawGraph(ctx, scene, { nodeRadius: () => r });
       scene.ids.forEach((id, i) => {
         const p = scene.pos.get(id);
-        const reached = k > (i / scene.ids.length) * 0.6;
+        const reached = k > (i / scene.ids.length) * 0.55;
         const changed = reached ? Math.floor((i * 5 + Math.floor(t)) % 7) : -1;
-        Explain.brain(ctx, p, scene.r * 1.12, t, i * 0.6, changed);
+        Explain.brain(ctx, p, r, t, i * 0.6, changed);
         if (reached && k < 0.9) {
           ctx.globalAlpha = 0.5 * (1 - k);
-          Explain.node(ctx, p, scene.r * 1.5, Explain.ink.rich, 0.5);
+          Explain.node(ctx, p, r * 1.35, Explain.ink.rich, 0.5);
           ctx.globalAlpha = 1;
         }
       });
@@ -929,42 +1029,16 @@ Explain.PANELS = [
     }
   },
 
-  {
-    title: 'Quiet edges are cut',
-    text: 'An edge that carried no tokens at all this phase is removed, so the '
-        + 'graph keeps only the connections anyone actually used. Then the '
-        + 'world is cleaned up again — starve, cull, share out — and '
-        + 'the next iteration begins.',
-    build(scale) {
-      const graph = scale === 'crowd' ? Explain.ringLattice(18, 4, 0.2, 21)
-                                      : Explain.neighbourhood();
-      const cut = new Set(Explain.choose([...graph.edges.keys()],
-                                         Math.max(1, Math.round(graph.edges.length * 0.3)), 61));
-      return { graph, roles: { cut } };
-    },
-    draw(ctx, t, scene) {
-      const k = Explain.cycle(t, 6);
-      const { cut } = scene.roles;
-      const removed = Explain.ramp(k, 0.45, 0.85);
-
-      Explain.drawGraph(ctx, scene, {
-        edgeAlpha: (a, b, i) => (cut.has(i) ? 1 - removed : 1),
-        edgeColour: (a, b, i) => (cut.has(i) ? Explain.ink.warn : Explain.ink.edge),
-        edgeWidth: (a, b, i) => (cut.has(i) ? (scene.crowd ? 1 : 1.3) : (scene.crowd ? 1.3 : 1.7))
-      });
-
-      // The edges that did carry something show it; the quiet ones show
-      // nothing, which is exactly why they go.
-      const flow = Explain.ramp(k, 0.05, 0.45);
-      scene.edges.forEach(([a, b], i) => {
-        if (cut.has(i) || flow <= 0 || flow >= 1) return;
-        const p = scene.pos.get(a), q = scene.pos.get(b);
-        Explain.mote(ctx, p, q, (flow + i * 0.17) % 1, Math.max(1.2, scene.r * 0.17), Explain.ink.pale);
-      });
-      Explain.label(ctx, k > 0.6 ? 'unused links are gone' : 'which edges carried anything?',
-                    scene.w, scene.h);
-    }
-  }
+  Explain.elimination({
+    title: 'Elimination',
+    text: 'The same clearing-up as before, and it happens after this phase too '
+        + '— not once per iteration. Agents left holding nothing by the game '
+        + 'are removed, then anything no longer attached to the largest piece '
+        + 'goes with them, and what they held is shared out over the survivors. '
+        + 'That closes the iteration. The next one begins back at the '
+        + 'reproduction observation, on whatever graph is left standing.',
+    seed: 34
+  })
 ];
 
 // ---------------------------------------------------------------------------
@@ -993,7 +1067,7 @@ Object.assign(Explain, {
         </div>
         <div class="explain-words">
           <h3>${panel.title}</h3>
-          <p>${panel.text}</p>
+          ${panel.text.split('\n\n').map(para => `<p>${para}</p>`).join('')}
         </div>
       </section>`).join('');
 
@@ -1021,7 +1095,12 @@ Object.assign(Explain, {
     const built = panel.build(scale);
     const graph = built.graph;
     const crowd = scale === 'crowd';
-    const r = crowd ? Math.max(4.5, Math.min(w, h) * 0.035) : Math.max(9, Math.min(w, h) * 0.075);
+
+    // How big an agent is drawn falls with how many there are, so a panel
+    // needing nine nodes does not draw them at the size a panel needing five
+    // uses and leave them overlapping. One rule for both columns: the crowd is
+    // smaller because it is more numerous, not because it was told to be.
+    const r = Math.max(4, Math.min(20, Math.min(w, h) * 0.165 / Math.sqrt(graph.nodes.length)));
 
     const scene = {
       ids: graph.nodes,

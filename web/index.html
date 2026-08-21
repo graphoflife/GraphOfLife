@@ -53,15 +53,20 @@
 <!-- ==================== EXPLANATION VIEW ==================== -->
 <main id="view-explain" class="view active">
   <div class="explain-intro">
-    <h2>What actually happens</h2>
-    <p>Each step of one iteration, in the order the engine does it. Every
-      picture is drawn from scratch as you watch rather than recorded, so none
-      of them can fall out of step with the code.</p>
+    <h2>How the Graph Of Life Algorithm works</h2>
+    <p>Each step of one iteration, in the order the engine does it. On the
+      left it happens to a single agent; on the right the same rule runs across
+      a whole small world at once. Every picture is drawn from scratch as you
+      watch rather than recorded, so none of them can fall out of step with the
+      code.</p>
   </div>
   <div class="explain-panels" id="explainPanels"></div>
   <div class="explain-intro explain-close">
-    <p>That is one iteration. It repeats until you stop it or the population
-      dies out. Nothing in it optimises anything — whatever survives, survives.</p>
+    <p><b>&#8593; And round again.</b> That is one whole iteration: two
+      phases, each ending in an elimination. The next one starts back at
+      <b>step 2</b>, the reproduction observation, reading whatever graph is
+      left standing. It repeats until you stop it or the population dies out.
+      Nothing in it optimises anything &mdash; whatever survives, survives.</p>
   </div>
 </main>
 

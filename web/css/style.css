@@ -838,6 +838,7 @@ details.control-group > summary:hover h3 { color: var(--text); }
 
 .explain-words h3 { margin: 0 0 6px; font-size: 15px; }
 .explain-words p { margin: 0; color: var(--muted); line-height: 1.65; font-size: 13px; }
+.explain-words p + p { margin-top: 9px; }
 
 /* The words drop below the pictures first, and the pictures only stack when
    there is no room to stand them side by side. */
