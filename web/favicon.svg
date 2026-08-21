@@ -17,7 +17,8 @@
     <circle cx="7.1" cy="13.1" r="3.3"/>
   </g>
   <g fill="#05070a">
-    <ellipse cx="16.7" cy="16" rx="1.65" ry="2.2"/>
+    <!-- The one in the middle looks straight out. -->
+    <ellipse cx="16" cy="16" rx="1.65" ry="2.2"/>
     <ellipse cx="16" cy="7.1" rx="1.15" ry="1.5"/>
     <ellipse cx="24.4" cy="13.2" rx="1.15" ry="1.5"/>
     <ellipse cx="21.2" cy="23.3" rx="1.15" ry="1.5"/>

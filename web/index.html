@@ -12,12 +12,12 @@
 </head>
 <body>
 
-<header class="topbar">
-  <!-- Inline rather than a file: it is a dozen shapes, it inherits the page's
-       colours, and it costs no extra request. -->
-  <!-- Six agents, each one an eye, and only some of them joined: the middle
-       reaches three of the five, and the other two hang off their neighbours. -->
-  <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+<!-- The mark, defined once. Six agents, each one an eye, and only some of
+     them joined: the middle reaches three of the five and the other two hang
+     off their neighbours, so it reads as a graph that is not a complete one.
+     The nodes and links take the colour of whatever uses it. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="gol-mark" viewBox="0 0 32 32">
     <g stroke="currentColor" stroke-width="1.4" fill="none"
        stroke-linecap="round" opacity="0.5">
       <path d="M16 16 L16 5.7 M16 16 L22.05 24.33 M16 16 L6.2 12.82
@@ -32,14 +32,22 @@
       <circle cx="6.2" cy="12.82" r="3.4"/>
     </g>
     <g fill="#05070a">
-      <ellipse cx="16.7" cy="16" rx="1.7" ry="2.3"/>
+      <!-- The one in the middle looks straight out; the others look around. -->
+      <ellipse cx="16" cy="16" rx="1.7" ry="2.3"/>
       <ellipse cx="16" cy="6.2" rx="1.15" ry="1.55"/>
       <ellipse cx="25.3" cy="12.9" rx="1.15" ry="1.55"/>
       <ellipse cx="21.6" cy="23.9" rx="1.15" ry="1.55"/>
       <ellipse cx="10.4" cy="23.9" rx="1.15" ry="1.55"/>
       <ellipse cx="6.7" cy="12.8" rx="1.15" ry="1.55"/>
     </g>
-  </svg>
+  </symbol>
+</svg>
+
+
+<header class="topbar">
+  <!-- Inline rather than a file: it is a dozen shapes, it inherits the page's
+       colours, and it costs no extra request. -->
+<svg class="brand-mark" aria-hidden="true"><use href="#gol-mark"/></svg>
   <button class="brand" data-view="home" title="Home">
     <h1>GraphOfLife</h1>
   </button>
@@ -62,7 +70,10 @@
     <div class="home-veil"></div>
 
     <div class="home-hero">
-      <h2 class="home-title">Graph of Life</h2>
+      <div class="home-headline">
+        <h2 class="home-title">Graph of Life</h2>
+        <svg class="home-mark" aria-hidden="true"><use href="#gol-mark"/></svg>
+      </div>
       <p class="home-subtitle">A new Artificial Life Algorithm</p>
     </div>
 
