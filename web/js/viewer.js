@@ -70,6 +70,12 @@ const Viewer = {
     forceAngular: 0.15, forceDamping: 0.86, forceTheta: 1.2,
     dimensions: 3, autoFit: true,
 
+    // Turning the view steadily, in degrees a second. A still projection of a
+    // 3D graph is ambiguous — near and far look alike — and turning it is what
+    // resolves the depth. Off by default: it should be asked for, not sprung
+    // on someone trying to read one frame.
+    autoRotate: false, rotateSpeed: 10,
+
     // How far out from the focused node the view reaches. A setting rather
     // than plain state, so a preset carries it; which node is focused is not,
     // since node ids mean nothing across runs.
@@ -246,6 +252,17 @@ const Viewer = {
 
     for (const btn of document.querySelectorAll('#dimToggle .seg-btn')) {
       btn.classList.toggle('active', Number(btn.dataset.dim) === dims);
+    }
+
+    // A flat graph has no third axis to turn around, so the button says so by
+    // being unavailable rather than by doing nothing when pressed.
+    const rotateBtn = document.getElementById('btnAutoRotate');
+    if (rotateBtn) {
+      rotateBtn.disabled = dims !== 3;
+      rotateBtn.title = dims === 3
+        ? 'Turn the view steadily, so a 3D graph reads as one'
+        : 'Only in 3D — a flat graph has nothing to turn around';
+      if (dims !== 3 && this.settings.autoRotate) this.setAutoRotate(false);
     }
     document.getElementById('dimHint').textContent = dims === 3
       ? 'Drag to pan · alt-drag or middle-drag to orbit · scroll to zoom'
@@ -629,7 +646,10 @@ const Viewer = {
   },
 
   animate(time) {
-    const dt = Math.min(0.1, (time - this.lastTime) / 1000) || 0;
+    // Never negative. A timestamp that goes backwards — which happens when
+    // a tab is restored, and whenever the loop is driven by hand — would
+    // otherwise turn the camera the wrong way and rewind playback.
+    const dt = Math.max(0, Math.min(0.1, (time - this.lastTime) / 1000)) || 0;
     this.lastTime = time;
 
     // Nothing to do while the reader is looking at another tab.
@@ -657,6 +677,13 @@ const Viewer = {
     if (!this.readyToDraw) {
       requestAnimationFrame(t => this.animate(t));
       return;
+    }
+
+    // Turned before the framing is worked out, so that with Fit view on the
+    // camera is fitting the orientation about to be drawn rather than the one
+    // just gone.
+    if (this.settings.autoRotate && this.renderer.mode3D) {
+      this.renderer.rotate((this.settings.rotateSpeed * Math.PI / 180) * dt, 0);
     }
 
     if (this.settings.autoFit) this.renderer.fitToContent(this.layout);

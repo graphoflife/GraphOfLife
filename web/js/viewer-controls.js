@@ -93,6 +93,22 @@ Object.assign(Viewer, {
     document.getElementById('btnReheat').addEventListener('click', () => this.layout.reheat(1));
     document.getElementById('btnRelayout').addEventListener('click', () => this.layout.scatter());
     document.getElementById('btnFit').addEventListener('click', () => this.setAutoFit(!this.settings.autoFit));
+    document.getElementById('btnAutoRotate')
+      .addEventListener('click', () => this.setAutoRotate(!this.settings.autoRotate));
+
+    const speed = document.getElementById('rotateSpeed');
+    speed.addEventListener('input', () => {
+      // Clamped rather than trusted: a number field will hand over whatever is
+      // typed into it, including nothing at all.
+      // An empty field is somebody midway through typing, not a request for
+      // the slowest possible turn.
+      if (speed.value.trim() === '') return;
+      const asked = Number(speed.value);
+      if (!Number.isFinite(asked)) return;
+      this.settings.rotateSpeed = Math.max(1, Math.min(120, asked));
+      // Changing the speed is a way of saying you want it turning.
+      if (!this.settings.autoRotate) this.setAutoRotate(true);
+    });
     document.getElementById('btnFullscreen').addEventListener('click', () => this.toggleFullscreen());
     document.getElementById('btnClearFocus').addEventListener('click', () => this.setFocus(null));
 
@@ -263,6 +279,9 @@ Object.assign(Viewer, {
     this.applyLayoutSettings();
     if (preset.dimensions) this.setDimensions(preset.dimensions);
     this.setAutoFit(this.settings.autoFit);
+    // Through the setter, so the button shows what the preset asked for
+    // instead of the setting and the button disagreeing.
+    this.setAutoRotate(this.settings.autoRotate);
     this.layout.reheat(0.6);
 
     this.rebuildMetrics();
@@ -298,6 +317,26 @@ Object.assign(Viewer, {
    * settles and as frames change. Any pan, zoom or orbit is taken as "I want to
    * look at this myself" and switches it off.
    */
+  /**
+   * Turn the view steadily, or stop.
+   *
+   * Only means anything in 3D — in 2D there is no third axis to turn around,
+   * so the button says so by being unavailable rather than by doing nothing
+   * when pressed.
+   */
+  setAutoRotate(on) {
+    this.settings.autoRotate = Boolean(on) && this.settings.dimensions === 3;
+    const btn = document.getElementById('btnAutoRotate');
+    btn.classList.toggle('active', this.settings.autoRotate);
+    btn.setAttribute('aria-pressed', String(this.settings.autoRotate));
+
+    // Whatever the camera drifts to is where it stays when this is switched
+    // off, rather than springing back to where the turning began.
+    if (!this.settings.autoRotate && !this.settings.autoFit) {
+      this.renderer.holdCurrentView();
+    }
+  },
+
   setAutoFit(on) {
     this.settings.autoFit = Boolean(on);
     document.getElementById('btnFit').classList.toggle('active', this.settings.autoFit);

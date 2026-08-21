@@ -298,6 +298,12 @@
           <button class="seg-btn" id="btnReheat" title="Stir the layout without moving anything">Reheat</button>
           <button class="seg-btn" id="btnRelayout" title="Scatter and start the layout over">Fresh layout</button>
           <button class="seg-btn" id="btnFit" title="Keep the whole graph in view until you move the camera">Fit view</button>
+          <button class="seg-btn" id="btnAutoRotate" aria-pressed="false"
+                  title="Turn the view steadily, so a 3D graph reads as one">Auto-rotate</button>
+          <label class="seg-field" title="How fast it turns, in degrees a second">
+            <input type="number" id="rotateSpeed" min="1" max="120" step="1" value="10">
+            <span class="unit">&deg;/s</span>
+          </label>
         </div>
         <div class="seg" role="group" aria-label="Display">
           <button class="seg-btn" id="btnFullscreen" aria-pressed="false"

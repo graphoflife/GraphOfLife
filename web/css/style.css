@@ -699,6 +699,10 @@ details.control-group > summary:hover h3 { color: var(--text); }
   color: var(--muted);
   white-space: nowrap;
 }
+/* The unit sits against its field rather than being read as a separate
+   control, which is what the gap would otherwise make of it. */
+.seg-field .unit { margin-left: -2px; opacity: 0.75; }
+
 .seg-field input {
   width: 46px;
   padding: 2px 4px;

@@ -1,4 +1,3 @@
-Default prsets for layout and coloring should be nicer
 
 Show Legend for edge colors
 

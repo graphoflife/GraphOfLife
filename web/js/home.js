@@ -322,7 +322,10 @@ const Home = {
   },
 
   tick(time) {
-    const dt = Math.min(0.1, (time - this.lastTime) / 1000) || 0;
+    // Never negative. A timestamp that goes backwards — which happens when
+    // a tab is restored, and whenever the loop is driven by hand — would
+    // otherwise turn the camera the wrong way and rewind playback.
+    const dt = Math.max(0, Math.min(0.1, (time - this.lastTime) / 1000)) || 0;
     this.lastTime = time;
 
     if (!this.active || !this.loaded || !this.layout || !this.renderer) return;
