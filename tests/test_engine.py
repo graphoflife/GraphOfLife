@@ -374,6 +374,51 @@ def test_statistics_absent_rather_than_zero_when_a_rule_is_off():
 
 
 # ---------------------------------------------------------------------------
+# The teaching script
+# ---------------------------------------------------------------------------
+
+def test_the_teaching_script_runs_and_conserves_tokens():
+    """
+    explain_minimal.py is on the site for people to copy and run, and the
+    Explanation walks through it line by line. A version of it that crashes, or
+    that quietly leaks tokens, would be teaching something false — so it is
+    held to the same invariants as the engine it stands in for.
+    """
+    import random
+    import numpy as np
+    import explain_minimal as minimal
+
+    random.seed(11)
+    np.random.seed(11)
+    world = minimal.World()
+
+    for i in range(40):
+        world.step()
+        assert world.adj, f"the world emptied at iteration {i + 1}"
+        assert sum(world.tokens.values()) == minimal.TOKENS, (
+            f"tokens were not conserved at iteration {i + 1}")
+        assert len(minimal.components(world.adj)) == 1, (
+            f"cleanup left more than one piece at iteration {i + 1}")
+        for agent, neighbours in world.adj.items():
+            assert agent not in neighbours, f"agent {agent} is joined to itself"
+
+
+def test_the_teaching_script_gives_a_revolution_to_its_strongest_rebel():
+    """
+    The revolution goes to the strongest staker in the rung that tipped it, not
+    to a random member of the crowd. The full engine is held to this too; the
+    teaching script has its own copy of the rule, so it gets its own check.
+    """
+    import explain_minimal as minimal
+
+    # One big spender against four small ones and a larger rebel.
+    staked = {1: 20, 2: 1, 3: 2, 4: 3, 5: 4, 6: 14}
+    revolt = {2: 1, 3: 2, 4: 3, 5: 4, 6: 14}
+    winners = {minimal.resolve(dict(staked), dict(revolt)) for _ in range(200)}
+    assert winners == {6}, f"expected the strongest rebel to take it, got {winners}"
+
+
+# ---------------------------------------------------------------------------
 # Running without pytest
 # ---------------------------------------------------------------------------
 
