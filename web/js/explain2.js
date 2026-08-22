@@ -287,15 +287,116 @@ Object.assign(Explain2, {
    * class rather than by re-rendering the text.
    */
   renderCode() {
-    this.codeEl.innerHTML = this.lines.map((line, i) =>
+    const coloured = this.colour(this.lines);
+    this.codeEl.innerHTML = coloured.map((html, i) =>
       `<div class="explain2-line" data-line="${i}">` +
       `<span class="explain2-no">${i + 1}</span>` +
-      `<span class="explain2-src">${this.escape(line) || '&nbsp;'}</span></div>`).join('');
+      `<span class="explain2-src">${html || '&nbsp;'}</span></div>`).join('');
     this.lineEls = [...this.codeEl.querySelectorAll('.explain2-line')];
   },
 
   escape(text) {
     return text.replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+  },
+
+  /**
+   * Colour the script, one line at a time, carrying state between them.
+   *
+   * Written here rather than pulled in: a highlighter is a few dozen lines for
+   * the subset of Python this one file uses, and a dependency for the rest.
+   *
+   * It has to work line by line, because each line is its own row so that a
+   * region can be lit. That makes one thing essential — remembering which
+   * lines are inside a docstring. Most sections of the script open with one,
+   * and a highlighter that loses track starts colouring the prose as code and
+   * the code as prose and never recovers.
+   */
+  colour(lines) {
+    const KEYWORDS = new Set(['and', 'as', 'assert', 'async', 'await', 'break',
+      'class', 'continue', 'def', 'del', 'elif', 'else', 'except', 'finally',
+      'for', 'from', 'global', 'if', 'import', 'in', 'is', 'lambda', 'nonlocal',
+      'not', 'or', 'pass', 'raise', 'return', 'try', 'while', 'with', 'yield',
+      'True', 'False', 'None']);
+    const BUILTINS = new Set(['abs', 'all', 'any', 'bool', 'dict', 'enumerate',
+      'float', 'int', 'len', 'list', 'max', 'min', 'object', 'print', 'range',
+      'round', 'set', 'sorted', 'str', 'sum', 'tuple', 'zip', 'isinstance',
+      'super', 'type', 'open']);
+
+    const tag = (cls, text) => `<span class="${cls}">${this.escape(text)}</span>`;
+    const TRIPLES = ['"""', "'''"];
+    const out = [];
+    let triple = null;              // the delimiter we are inside, if any
+
+    for (const line of lines) {
+      let html = '';
+      let i = 0;
+
+      if (triple) {
+        const end = line.indexOf(triple);
+        if (end < 0) { out.push(tag('tok-str', line)); continue; }
+        html += tag('tok-str', line.slice(0, end + 3));
+        i = end + 3;
+        triple = null;
+      }
+
+      while (i < line.length) {
+        const ch = line[i];
+        const rest = line.slice(i);
+
+        if (ch === '#') { html += tag('tok-com', rest); break; }
+
+        const three = line.slice(i, i + 3);
+        if (TRIPLES.includes(three)) {
+          const end = line.indexOf(three, i + 3);
+          if (end < 0) { html += tag('tok-str', rest); triple = three; break; }
+          html += tag('tok-str', line.slice(i, end + 3));
+          i = end + 3;
+          continue;
+        }
+
+        if (ch === '"' || ch === "'") {
+          let j = i + 1;
+          while (j < line.length && line[j] !== ch) {
+            if (line[j] === '\\') j++;
+            j++;
+          }
+          html += tag('tok-str', line.slice(i, Math.min(j + 1, line.length)));
+          i = j + 1;
+          continue;
+        }
+
+        if (ch === '@' && /[A-Za-z_]/.test(line[i + 1] || '')) {
+          const word = /^@[\w.]+/.exec(rest)[0];
+          html += tag('tok-dec', word);
+          i += word.length;
+          continue;
+        }
+
+        if (/[0-9]/.test(ch) && !/\w/.test(line[i - 1] || '')) {
+          const num = /^[0-9][\w.]*/.exec(rest)[0];
+          html += tag('tok-num', num);
+          i += num.length;
+          continue;
+        }
+
+        if (/[A-Za-z_]/.test(ch)) {
+          const word = /^[A-Za-z_]\w*/.exec(rest)[0];
+          let cls = null;
+          if (KEYWORDS.has(word)) cls = 'tok-kw';
+          else if (word === 'self' || word === 'cls') cls = 'tok-self';
+          else if (/\b(def|class)\s+$/.test(line.slice(0, i))) cls = 'tok-def';
+          else if (BUILTINS.has(word)) cls = 'tok-bi';
+          html += cls ? tag(cls, word) : this.escape(word);
+          i += word.length;
+          continue;
+        }
+
+        html += this.escape(ch);
+        i++;
+      }
+      out.push(html);
+    }
+    return out;
   },
 
   /**

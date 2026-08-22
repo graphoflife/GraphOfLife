@@ -1124,10 +1124,25 @@ details.control-group > summary:hover h3 { color: var(--text); }
   color: #3d4a58;
   user-select: none;
 }
-.explain2-src { color: #4a5765; transition: color 120ms ease; }
-.explain2-line.lit { background: rgba(79, 179, 255, 0.07); }
-.explain2-line.lit .explain2-src { color: #d7e3ef; }
+.explain2-src { color: #8b98a8; }
+
+/* Lines away from the step are faded rather than recoloured, so the script
+   still reads as a syntax-highlighted file all the way down instead of turning
+   grey outside the part being discussed. */
+.explain2-line { transition: opacity 140ms ease; opacity: 0.42; }
+.explain2-line.lit { opacity: 1; background: rgba(79, 179, 255, 0.07); }
 .explain2-line.lit .explain2-no { color: var(--accent); }
+
+/* Token colours. The same family GitHub uses on this background, which is
+   where most people will have read Python last. */
+.tok-com  { color: #8b949e; font-style: italic; }
+.tok-str  { color: #a5d6ff; }
+.tok-kw   { color: #ff7b72; }
+.tok-num  { color: #79c0ff; }
+.tok-def  { color: #d2a8ff; }
+.tok-dec  { color: #d2a8ff; }
+.tok-bi   { color: #79c0ff; }
+.tok-self { color: #ffa657; }
 
 .ex2-foot { margin: 0; font-size: 11.5px; color: var(--muted); }
 .ex2-foot code {
