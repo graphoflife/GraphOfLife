@@ -42,7 +42,23 @@ from urllib.parse import urlparse
 import gol_store as store
 from gol_config import SimConfig
 
-WEB_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "web")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+WEB_DIR = os.path.join(BASE_DIR, "web")
+
+# The engine files the page fetches from /py/.
+#
+# build_site.sh copies these next to the page when it assembles the static
+# site; there is nowhere to copy them to when serving web/ straight off the
+# disk, so they are served from the repository root instead. Without this the
+# two disagree about what exists — the Explanation fetches the script it walks
+# through and gets a 404 locally while working perfectly once published, which
+# is the worst way round for a bug to sit.
+#
+# An explicit list, not a directory: /py/ must not become a way to read
+# arbitrary files out of the project. tests/test_engine.py checks it against
+# build_site.sh so the two cannot drift.
+SHIPPED_PY = ("GraphOfLifeSimple.py", "gol_config.py", "gol_series.py",
+              "explain_minimal.py")
 
 # Requests are capped so a malformed or hostile body cannot exhaust memory.
 MAX_BODY_BYTES = 1 << 20
@@ -366,6 +382,17 @@ class Handler(BaseHTTPRequestHandler):
 
     # ---- static files ----------------------------------------------------
 
+    @staticmethod
+    def _engine_file(rel: str):
+        """A file under /py/ that lives in the repository root, or None."""
+        if not rel.startswith("py/"):
+            return None
+        name = rel[len("py/"):]
+        if name not in SHIPPED_PY:
+            return None
+        candidate = os.path.join(BASE_DIR, name)
+        return candidate if os.path.isfile(candidate) else None
+
     def _serve_static(self, path: str) -> None:
         rel = "index.html" if path in ("/", "") else path.lstrip("/")
         target = os.path.abspath(os.path.join(WEB_DIR, rel))
@@ -375,8 +402,10 @@ class Handler(BaseHTTPRequestHandler):
             self._error("forbidden", 403)
             return
         if not os.path.isfile(target):
-            self._error("not found", 404)
-            return
+            target = self._engine_file(rel)
+            if target is None:
+                self._error("not found", 404)
+                return
 
         ctype, _ = mimetypes.guess_type(target)
         try:

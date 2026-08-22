@@ -30,6 +30,25 @@ done
 # web/py already holds the two modules that only make sense in a browser —
 # gol_browser.py and the gol_store stand-in — and cp -r brought them along.
 
+# Stamp every script and stylesheet with the commit they came from.
+#
+# Without this a browser holding an older copy of js/app.js keeps using it: the
+# page is new, the tabs are new, and the code behind them is last week's. That
+# is not hypothetical — a tab shipped, worked when fetched fresh, and showed
+# nothing at all to anyone who had visited before, because their app.js had no
+# idea the tab existed. A changed URL is the only thing a cache cannot ignore.
+stamp="$(git -C "${here}" rev-parse --short HEAD 2>/dev/null || date +%s)"
+sed -i -E \
+  -e "s#(<script src=\"js/[^\"?]+)\"#\1?v=${stamp}\"#g" \
+  -e "s#(<link rel=\"stylesheet\" href=\"css/[^\"?]+)\"#\1?v=${stamp}\"#g" \
+  "${out}/index.html"
+
+# The layout worker is fetched by name from layoutclient.js rather than from the
+# page, so it needs the same treatment where it is asked for.
+sed -i -E "s#(js/layout-worker\.js)#\1?v=${stamp}#" "${out}/js/layoutclient.js"
+
+echo "  stamped assets with ${stamp}"
+
 echo "built ${out}"
 echo "  $(find "${out}" -type f | wc -l) files, $(du -sh "${out}" | cut -f1)"
 

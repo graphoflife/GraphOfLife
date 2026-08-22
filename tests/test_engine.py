@@ -490,6 +490,40 @@ def test_the_teaching_script_gives_a_revolution_to_its_strongest_rebel():
 
 
 # ---------------------------------------------------------------------------
+# The two ways the site is served
+# ---------------------------------------------------------------------------
+
+def test_the_server_and_the_build_ship_the_same_python():
+    """
+    The page fetches engine files from /py/. build_site.sh copies them there
+    when it assembles the static site; gol_server.py serves them from the
+    repository root, because when it is serving web/ off the disk there is
+    nowhere to copy them to.
+
+    Two lists of the same thing, so they drift. They already did: the
+    Explanation fetches the script it walks through, which the build shipped
+    and the server did not, so the tab worked once published and reported that
+    it could not load on localhost.
+    """
+    import re
+    import gol_server
+
+    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    script = open(os.path.join(root, "build_site.sh")).read()
+    match = re.search(r"for f in ([^;]+); do", script)
+    assert match, "could not find the copy loop in build_site.sh"
+    copied = set(match.group(1).split())
+
+    served = set(gol_server.SHIPPED_PY)
+    assert copied == served, (
+        f"build_site.sh copies {sorted(copied)} but gol_server serves "
+        f"{sorted(served)}")
+
+    for name in served:
+        assert os.path.isfile(os.path.join(root, name)), f"{name} does not exist"
+
+
+# ---------------------------------------------------------------------------
 # Running without pytest
 # ---------------------------------------------------------------------------
 
