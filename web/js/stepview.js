@@ -37,7 +37,7 @@ const StepView = {
       ctx: canvas.getContext('2d'),
       layout: new ForceLayout(),
       stage: null,
-      effect: null,
+      effects: new Set(),
       // What is actually on screen, as opposed to where the layout says things
       // are. Everything in here chases the layout rather than jumping to it.
       shown: new Map(),          // id -> {x, y, alpha, r}
@@ -56,13 +56,16 @@ const StepView = {
   /**
    * Adopt a stage. Only targets change; nothing moves this instant.
    *
-   * `effect` names an animation the step wants on top of the graph — tokens
-   * arriving from outside, brains being replaced — so a step can ask for one
-   * without the drawing code knowing which step it is.
+   * `effect` is a space-separated list of what the step wants drawn over the
+   * graph — brains, eyes, the token arrival, envelopes, stakes, a conquest — so
+   * a step can ask for several without the drawing code knowing which step it
+   * is. A list rather than one name because these genuinely combine: the step
+   * introducing the network wants brains in every node *and* the tokens
+   * arriving.
    */
   show(view, stage, { effect = null, settle = 0 } = {}) {
     view.stage = stage;
-    view.effect = effect;
+    view.effects = new Set(String(effect || '').split(/\s+/).filter(Boolean));
     view.since = 0;
 
     const parents = new Array(stage.ids.length).fill(-1);
@@ -272,13 +275,9 @@ const StepView = {
 
       if (role.removed.has(id)) {
         this._cross(ctx, p);
-      } else if (view.effect === 'brain') {
-        // The step that introduces an agent shows both of the things it is:
-        // the network it decides with, and the eye it decides from.
+      } else if (view.effects.has('brains')) {
         this._brain(ctx, p, time, i);
-        this._eye(ctx, { x: p.x + p.r * 0.52, y: p.y - p.r * 0.56, r: p.r * 0.52 },
-                  time, i, view, id);
-      } else if (view.effect === 'eyes') {
+      } else if (view.effects.has('eyes')) {
         this._eye(ctx, p, time, i, view, id);
       }
       ctx.globalAlpha = 1;
@@ -379,8 +378,7 @@ const StepView = {
     // same orbit they hold from then on.
     this._tokens(ctx, view, place, time, w, h);
 
-    if (view.effect === 'tokens') return;
-    if (view.effect === 'messages') {
+    if (view.effects.has('messages')) {
       for (const [a, b] of view.stage.edges) {
         const p = place(a), q = place(b);
         if (!p || !q) continue;
@@ -391,7 +389,7 @@ const StepView = {
       ctx.globalAlpha = 1;
       return;
     }
-    if (view.effect === 'stakes') {
+    if (view.effects.has('stakes')) {
       // One dot per token, so the size of a stake is the thing you see.
       ctx.fillStyle = this.ink.pale;
       for (const [a, b] of view.stage.edges) {
@@ -411,7 +409,7 @@ const StepView = {
       ctx.globalAlpha = 1;
       return;
     }
-    if (view.effect === 'conquer') {
+    if (view.effects.has('conquer')) {
       // The winner's brain travelling into the node it took.
       const trip = Math.min(1, view.since / 2.2);
       for (const [node, winner] of role.pairs) {
@@ -441,7 +439,10 @@ const StepView = {
   _tokens(ctx, view, place, time, w, h) {
     const stage = view.stage;
     const most = Math.max(1, ...stage.tokens);
-    const arriving = view.effect === 'tokens';
+    // Only the step that introduces them flies them in. The step after holds
+    // the same orbit rather than replaying the arrival, so the dots simply stay
+    // where they are while everything else moves on.
+    const arriving = view.effects.has('arrive');
     const settled = arriving
       ? Math.min(1, Math.max(0, (view.since - 0.25) / 2.6))
       : 1;

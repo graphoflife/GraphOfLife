@@ -41,7 +41,7 @@ const Explain2 = {
   STEPS: [
     {
       title: 'An Individual Node with a Brain',
-      stage: 'repro.observe', solo: true, effect: 'brain',
+      stage: 'repro.observe', solo: true, effect: 'brains',
       code: ['class Brain:', 'w += mask * np.random.randn'],
       text: `A node is one agent. It holds tokens and a small neural network.
         <p>The network is never trained. It is made at random, copied when the
@@ -52,7 +52,7 @@ const Explain2 = {
     },
     {
       title: 'A Network of Individuals',
-      stage: 'repro.observe', effect: 'tokens',
+      stage: 'repro.observe', effect: 'brains arrive',
       code: ['# ---- the starting graph ----', 'self.next_id = AGENTS'],
       text: `Agents are joined in a ring to their nearest few, then a fifth of
         the links are redrawn at random. Short paths, still mostly local.
@@ -61,7 +61,7 @@ const Explain2 = {
     },
     {
       title: 'Start of Simulation Loop',
-      stage: 'repro.observe', effect: 'tokens',
+      stage: 'repro.observe', effect: 'brains',
       code: ['    def step(self) -> None:', '        self.game()'],
       text: `One iteration is two phases: reproduction, then the game. Each ends
         by removing the dead.
@@ -82,7 +82,7 @@ const Explain2 = {
     },
     {
       title: 'Message Exchange',
-      stage: 'repro.observe', effect: 'messages',
+      stage: 'repro.observe', effect: 'eyes messages',
       code: ['    def write_messages(self, u: int', "outbox.setdefault(v, {})[u] ="],
       text: `The same pass decides what to say. Each agent writes a short vector
         to every neighbour, and one to itself.
@@ -123,7 +123,7 @@ const Explain2 = {
     },
     {
       title: 'Message Exchange',
-      stage: 'game.observe', effect: 'messages',
+      stage: 'game.observe', effect: 'eyes messages',
       code: ['            self.write_messages(u, targets, y, outbox)',
              '            self.write_messages(u, targets, y, outbox)'],
       text: `Messages again, from that same pass, and delivered at the end of
