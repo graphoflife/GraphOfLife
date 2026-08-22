@@ -163,9 +163,10 @@ class ForceLayout {
       return found;
     };
 
-    const place = (anchor) => {
+    const place = (anchor, spread) => {
       const dir = this._randomDirection();
-      const radius = anchor ? spawnRadius : 200 * Math.sqrt(Math.random());
+      const radius = spread !== undefined ? spread
+        : anchor ? spawnRadius : 200 * Math.sqrt(Math.random());
       return {
         x: (anchor ? anchor.x : 0) + dir.x * radius,
         y: (anchor ? anchor.y : 0) + dir.y * radius,
@@ -188,21 +189,67 @@ class ForceLayout {
     // Whatever the lineage could not account for, the topology usually can.
     // Averaging the placed neighbours puts the node inside the neighbourhood
     // it is wired to rather than at the centre of the whole graph.
+    //
+    // Repeated while it keeps making progress, because one pass is not enough.
+    // Lineage runs one way through time: stepping backwards — scrubbing left,
+    // or the front page playing its recording in reverse — an agent that
+    // reappears has a parent who died even earlier, so the climb finds nobody
+    // and the whole group arrives unplaced together. Each one that gets placed
+    // is an anchor for the next, and a single pass left the rest at the
+    // origin: measured at 70 to 168 of about 400 arrivals per backward step,
+    // dropped into a ball of radius 200 while the graph reached out to 4,000,
+    // which the repulsion then blew apart. That is the explosion.
     if (unplaced.length) {
-      const still = [];
-      for (const id of unplaced) {
-        let x = 0, y = 0, z = 0, count = 0;
-        for (const other of (this.adjacency.get(id) || [])) {
-          const p = next.get(other);
-          if (!p) continue;
-          x += p.x; y += p.y; z += p.z; count++;
+      // Bounded so a long chain of arrivals cannot turn this into a walk over
+      // the frame once per node; whatever is left over after this is scattered
+      // through the graph instead, which is cheap and looks like nothing.
+      const MAX_PASSES = 12;
+      let remaining = unplaced;
+
+      for (let pass = 0; pass < MAX_PASSES && remaining.length; pass++) {
+        const still = [];
+        let placed = 0;
+        for (const id of remaining) {
+          let x = 0, y = 0, z = 0, count = 0;
+          for (const other of (this.adjacency.get(id) || [])) {
+            const p = next.get(other);
+            if (!p) continue;
+            x += p.x; y += p.y; z += p.z; count++;
+          }
+          if (count) {
+            next.set(id, place({ x: x / count, y: y / count, z: z / count }));
+            placed++;
+          } else {
+            still.push(id);
+          }
         }
-        if (count) next.set(id, place({ x: x / count, y: y / count, z: z / count }));
-        else still.push(id);
+        remaining = still;
+        if (!placed) break;      // nothing this pass, so no later pass can help
       }
+
       // Anything left knows nobody that has been placed — a genuinely new
-      // component, or the first frame of a run.
-      for (const id of still) next.set(id, place(null));
+      // component, or the first frame of a run. Spread through the graph
+      // rather than heaped at its middle: a hundred nodes in one small ball
+      // repel each other hard enough to look like an explosion, and the middle
+      // of the screen is the one place that draws the eye.
+      if (remaining.length) {
+        let cx = 0, cy = 0, cz = 0, n = 0;
+        for (const p of next.values()) { cx += p.x; cy += p.y; cz += p.z; n++; }
+        if (n) {
+          cx /= n; cy /= n; cz /= n;
+          let reach = 0;
+          for (const p of next.values()) reach += Math.hypot(p.x - cx, p.y - cy, p.z - cz);
+          reach /= n;
+          const centre = { x: cx, y: cy, z: cz };
+          for (const id of remaining) {
+            next.set(id, place(centre, reach * Math.cbrt(Math.random())));
+          }
+        } else {
+          // Nothing placed at all: a fresh layout, which is meant to start as
+          // a ball and expand.
+          for (const id of remaining) next.set(id, place(null));
+        }
+      }
     }
 
     this.pos = next;
