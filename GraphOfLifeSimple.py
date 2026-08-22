@@ -515,6 +515,9 @@ class GraphOfLife:
         self.tokens: Dict[int, int] = {}
         self.brains: Dict[int, Brain] = {}
         self.messages: Dict[int, Dict[int, List[float]]] = {}
+        # Set to a callable to be offered a snapshot at each step of a phase.
+        # Nothing in the engine sets it; see tools/record_explain_run.py.
+        self.on_step = None
         self.parent_of: Dict[int, int] = {}
 
         if _empty:
@@ -636,6 +639,33 @@ class GraphOfLife:
         ])
         return self.brains[u].forward(X)
 
+    def _note(self, step: str, **marks) -> None:
+        """
+        Offer a snapshot of the world partway through a phase.
+
+        Off unless something sets `on_step`, and then it costs one call per
+        step. A frame is only written at the end of a phase, which is the right
+        grain for a viewer replaying a run and far too coarse for anything
+        trying to explain the algorithm: reproduction, the cull, the staking
+        and the conquest all land in the same frame and cannot be told apart.
+
+        The shape handed over is deliberately the same one a frame uses — ids,
+        tokens, edges — plus a bag of marks naming who did what. Anything that
+        can produce that shape can drive the same picture, which is what keeps
+        this useful to more than the one page it was written for.
+        """
+        if self.on_step is None:
+            return
+        nodes = sorted(self.G.nodes())
+        self.on_step({
+            "step": step,
+            "iteration": int(self.iteration),
+            "ids": [int(u) for u in nodes],
+            "tokens": [int(self.tokens.get(u, 0)) for u in nodes],
+            "edges": [[int(a), int(b)] for a, b in self.G.edges()],
+            "marks": marks,
+        })
+
     def _emit_messages(self, u: int, targets: List[int], Y: np.ndarray,
                        outbox: Dict[int, Dict[int, List[float]]]) -> None:
         """
@@ -684,6 +714,7 @@ class GraphOfLife:
         nodes_before = self.G.number_of_nodes()
         tokens_before = dict(self.tokens)
         log_deg, neighs, q_tok, q_deg, log_tok = self._precompute_features()
+        self._note("repro.observe")
 
         for u in sorted(self.G.nodes()):
             tokens_u = int(self.tokens.get(u, 0))
@@ -733,8 +764,16 @@ class GraphOfLife:
             self.G.remove_edge(parent, v)
 
         self.G.remove_edges_from(list(nx.selfloop_edges(self.G)))
+        self._note("repro.born",
+                   born=[int(d["child"]) for d in decisions],
+                   parents=[[int(d["agent"]), int(d["child"])] for d in decisions],
+                   handed=[[int(p), int(v), int(c)] for p, v, c in handovers])
         self._deliver_messages(outbox)
+
+        alive_before = set(self.G.nodes())
         cleanup = self._cleanup_and_redistribute()
+        self._note("repro.cleanup",
+                   removed=[int(u) for u in sorted(alive_before - set(self.G.nodes()))])
 
         payload = None
         if record_decisions:
@@ -822,6 +861,7 @@ class GraphOfLife:
         # reproduction phase, which has only ever looked once. One look now, and
         # its output feeds both heads.
         outbox: Dict[int, Dict[int, List[float]]] = {}
+        self._note("game.observe")
 
         # --- 2. One-shot allocation ------------------------------------------
         allocations_to: Dict[int, Dict[int, int]] = {v: {} for v in self.G.nodes()}
@@ -923,16 +963,32 @@ class GraphOfLife:
                     entry["revolt"] = int(by_revolt)
                 winners.append(entry)
 
+        self._note("game.stake",
+                   flow=[[int(a), int(b), int(f)] for (a, b), f in edge_flow.items()],
+                   staked=[[int(v), int(who), int(amount)]
+                           for v, offers in allocations_to.items()
+                           for who, amount in offers.items()])
+        self._note("game.winner",
+                   won=[[int(x["node"]), int(x["winner"]), int(x["amount"])] for x in winners],
+                   revolts=[[int(x["node"]), int(x.get("revolt", 0))] for x in winners])
+
         self.tokens = new_tokens
         self.brains = new_brains
+        self._note("game.conquer",
+                   taken=[[int(x["node"]), int(x["winner"])] for x in winners
+                          if int(x["winner"]) != int(x["node"])])
 
         # --- 4. Aftermath -----------------------------------------------------
         dead_edges = [e for e, flow in edge_flow.items() if flow == 0]
         if dead_edges:
             self.G.remove_edges_from(dead_edges)
+        self._note("game.prune", cut=[[int(a), int(b)] for a, b in dead_edges])
 
         self._deliver_messages(outbox)
+        alive_before = set(self.G.nodes())
         cleanup = self._cleanup_and_redistribute()
+        self._note("game.cleanup",
+                   removed=[int(u) for u in sorted(alive_before - set(self.G.nodes()))])
 
         # Every brain mutates, and it happens after the clearing-up rather than
         # before it. Nothing between the two reads a brain — the pruning goes on
@@ -941,6 +997,7 @@ class GraphOfLife:
         # longer jittered on their way out the door.
         for brain in self.brains.values():
             self._mutate_brain(brain)
+        self._note("game.mutate")
 
         self._prune_stale_messages()
 
