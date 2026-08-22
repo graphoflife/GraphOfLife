@@ -344,6 +344,13 @@ class World:
                 if v != u:
                     flow[frozenset((u, v))] = flow.get(frozenset((u, v)), 0) + int(amounts[col])
 
+        # ---- links nobody used are cut ----
+        # Here, next to the staking that decided it, rather than further down:
+        # the flow it reads is complete the moment the loop above ends, and
+        # nothing between the two touches an edge.
+        for a, b in [tuple(e) for e in self.adj_edges() if flow.get(frozenset(e), 0) == 0]:
+            self.unlink(a, b)
+
         # ---- who takes each node ----
         winners = {}
         for v in sorted(self.adj):
@@ -357,10 +364,6 @@ class World:
         for v, winner in winners.items():
             if winner != v:
                 self.brains[v] = self.brains[winner].copy()
-
-        # ---- links nobody used are cut ----
-        for a, b in [tuple(e) for e in self.adj_edges() if flow.get(frozenset(e), 0) == 0]:
-            self.unlink(a, b)
 
         self.deliver(outbox)
         self.cleanup()

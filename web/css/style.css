@@ -1063,23 +1063,25 @@ details.control-group > summary:hover h3 { color: var(--text); }
 .ex2-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
 .ex2-head h2 { font-size: 19px; font-weight: 600; }
 .ex2-count { font-size: 11.5px; color: var(--muted); }
-.ex2-nav { display: flex; gap: 6px; }
-.ex2-nav .seg-btn { font-size: 15px; padding: 4px 14px; }
-
-/* One dot per step, so how far through it is stays visible and any step can
-   be jumped to. */
-.ex2-rail { display: flex; gap: 5px; align-items: center; }
-.ex2-dot {
-  flex: 1 1 0;
-  height: 3px;
+.ex2-nav { display: flex; gap: 8px; }
+.ex2-nav button {
+  width: 46px;
+  height: 34px;
+  display: grid;
+  place-items: center;
   padding: 0;
-  border: none;
-  border-radius: 2px;
-  background: var(--border);
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
   cursor: pointer;
 }
-.ex2-dot:hover { background: var(--accent-dim); }
-.ex2-dot.active { background: var(--accent); }
+.ex2-nav button:hover { border-color: var(--accent); background: #1f2a36; }
+.ex2-nav button:active { transform: translateY(1px); }
+.ex2-nav svg { width: 13px; height: 13px; fill: var(--text); }
+.ex2-nav button:hover svg { fill: #fff; }
+
+/* Nothing but the two arrows. A row of thirteen dots was a second thing to
+   read before the reader had read the first. */
 
 /* The three panes. The picture gets the most room, the script enough to read
    without wrapping, and the words the space between them. */
@@ -1101,8 +1103,17 @@ details.control-group > summary:hover h3 { color: var(--text); }
 .ex2-stage { position: relative; overflow: hidden; background: #0d1117; }
 #explain2Canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 
-.ex2-words { padding: 16px 18px; overflow-y: auto; }
-.ex2-words p { margin: 0 0 10px; color: var(--text); line-height: 1.65; font-size: 13.5px; }
+.ex2-words { padding: 20px 22px; overflow-y: auto; }
+.ex2-words p {
+  margin: 0 0 12px;
+  color: var(--text);
+  line-height: 1.7;
+  font-size: 15.5px;
+  /* Justified, with hyphenation on so the ragged gaps justification usually
+     opens up in a narrow column do not appear. */
+  text-align: justify;
+  hyphens: auto;
+}
 .ex2-words p:last-child { margin-bottom: 0; }
 .ex2-words b { color: #fff; }
 .ex2-words em { color: var(--accent); font-style: normal; }

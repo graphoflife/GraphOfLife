@@ -33,179 +33,148 @@ const Explain2 = {
   /**
    * The walk-through.
    *
-   * `stage` names which recorded snapshot to draw; the three intro steps have
-   * none of their own and borrow the first. `code` is a pair of strings found
-   * in the script, marking the first and last line to light up.
+   * `stage` names the recorded snapshot to draw and `effect` the animation laid
+   * over it. `code` is a pair of strings found in the script, marking the first
+   * and last line to light up — text and not line numbers, so editing
+   * explain_minimal.py cannot silently point a step at the wrong place.
    */
   STEPS: [
     {
-      title: 'A brain',
-      stage: 'repro.observe', intro: true,
+      title: 'An Individual Node with a Brain',
+      stage: 'repro.observe', solo: true, effect: 'brain',
       code: ['class Brain:', 'w += mask * np.random.randn'],
-      text: `Every agent is a node holding some tokens and a small neural
-        network. The network is never trained — there is no gradient anywhere
-        in the script. It is made once at random, copied when an agent
-        reproduces or conquers, and jittered a little each time it is copied.
-        That is the whole of how behaviour ever changes.
-        <p>One column of inputs goes in per thing being looked at, and one
-        column of outputs comes back, so an agent reads its entire
-        neighbourhood in a single pass.</p>`
+      text: `A node is one agent. It holds tokens and a small neural network.
+        <p>The network is never trained. It is made at random, copied when the
+        agent reproduces or conquers, and jittered slightly on every copy. That
+        is the only way behaviour changes.</p>
+        <p>Inputs go in one column per thing observed; outputs come back the
+        same way.</p>`
     },
     {
-      title: 'A world of them',
-      stage: 'repro.observe', intro: true,
+      title: 'A Network of Individuals',
+      stage: 'repro.observe', effect: 'tokens',
       code: ['# ---- the starting graph ----', 'self.next_id = AGENTS'],
-      text: `A ring where everyone is joined to their nearest few, then a fifth
-        of the links redrawn to somewhere random — short paths everywhere but
-        still mostly local, which is the shape most real networks have.
-        <p>Then the tokens: a fixed pile, split evenly. That total never
-        changes again. Every rule after this only moves tokens from one agent
-        to another, so the sum is the same on the last iteration as the
-        first.</p>`
+      text: `Agents are joined in a ring to their nearest few, then a fifth of
+        the links are redrawn at random. Short paths, still mostly local.
+        <p>A fixed pile of tokens is then shared out. That total never changes
+        again: every rule after this only moves tokens between agents.</p>`
     },
     {
-      title: 'And round it goes',
-      stage: 'repro.observe', intro: true,
+      title: 'Start of Simulation Loop',
+      stage: 'repro.observe', effect: 'tokens',
       code: ['    def step(self) -> None:', '        self.game()'],
-      text: `One iteration is two phases. Reproduction, then the game. Each
-        ends by clearing up the dead, and then it happens again.
-        <p>Everything from here on is inside that loop, and the number beside
-        each step says which iteration of the recorded run you are looking
-        at.</p>`
+      text: `One iteration is two phases: reproduction, then the game. Each ends
+        by removing the dead.
+        <p>Everything below repeats. The number beside each step is the
+        iteration of the recorded run being shown.</p>`
     },
 
     {
-      title: 'Observation — reproduction phase',
-      stage: 'repro.observe',
+      title: 'Observation — Reproduction Phase',
+      stage: 'repro.observe', effect: 'eyes',
       code: ['    def observe(self, u: int', 'return self.brains[u].forward(x)'],
-      text: `Each agent opens its eye and reads its whole neighbourhood at
-        once: its own tokens and degree, each neighbour's, and whatever was
-        written to it last phase. Tokens and degrees go in logged, because
-        what matters is the order of magnitude — the difference between 1 token
-        and 10 is everything, between 500 and 510 nothing.
-        <p>It observes itself too. That column is how it knows what it has.</p>`
+      text: `Each agent reads its whole neighbourhood in one pass: its own
+        tokens and degree, each neighbour's, and the messages sent to it last
+        phase.
+        <p>Tokens and degrees are logged, so what counts is the order of
+        magnitude. An agent observes itself as well — that is how it knows what
+        it holds.</p>`
     },
     {
-      title: 'Everyone writes',
-      stage: 'repro.observe',
+      title: 'Message Exchange',
+      stage: 'repro.observe', effect: 'messages',
       code: ['    def write_messages(self, u: int', "outbox.setdefault(v, {})[u] ="],
-      text: `The same look also decides what to say. An agent writes a short
-        note to every neighbour, and one to itself — and that note to itself is
-        the only memory it has. Nothing else survives from one phase to the
-        next.
-        <p>Both ends of a link write, so every link carries a note each way.
-        Nothing forces a message to mean anything; whatever they come to
-        signal is whatever survives.</p>
-        <p>The notes go into an outbox and are delivered when the phase ends,
-        so every agent in a phase reads the same generation of messages. Doing
-        it live meant an agent's inputs depended on where its id fell in the
-        loop.</p>`
+      text: `The same pass decides what to say. Each agent writes a short vector
+        to every neighbour, and one to itself.
+        <p>Both ends write, so each link carries one message each way. The
+        message to itself is its only memory.</p>
+        <p>Messages are delivered at the end of the phase, so every agent reads
+        the same generation.</p>`
     },
     {
-      title: 'Reproduction, and handover',
+      title: 'Reproduction and Handover',
       stage: 'repro.born',
       code: ['# ---- how much of me goes into a child ----', 'self.unlink(u, v)'],
-      text: `An agent decides what share of its tokens to spend on a child and
-        pays the full price out of its own pocket. The child starts with
-        exactly what was spent — no tokens are created.
-        <p>The child inherits a mutated copy of the brain, and is wired to
-        whichever of the parent's neighbours the parent picks. The parent can
-        also <b>hand over</b> a connection instead of copying it: it drops that
-        link and the child takes its place, so a lineage can pass on position
-        and not just tokens. Handed links are drawn orange, newborns green.</p>`
+      text: `An agent spends a share of its tokens on a child. The child starts
+        with exactly that; no tokens are created.
+        <p>The child inherits a mutated copy of the brain and is linked to
+        neighbours the parent chooses. The parent may instead <b>hand over</b> a
+        link: it drops that connection and the child takes its place.</p>
+        <p>Newborns green, new and handed links orange.</p>`
     },
     {
       title: 'Elimination',
       stage: 'repro.cleanup',
       code: ['    def cleanup(self) -> None:', 'self.tokens[random.choice(survivors)] += 1'],
-      text: `Two removals, in this order, and it runs after both phases.
-        <p>Anyone holding nothing is gone. Then, of what is left, only the
-        largest connected piece survives — and the second rule bites because of
-        the first: a group hanging off the rest through a single agent comes
-        adrift when that agent starves, however healthy the group itself is.
-        Both happen in this very iteration.</p>
-        <p>Everything the dead held is scattered over the survivors, so the
-        total still comes to 500.</p>`
+      text: `Two removals, in order, after every phase.
+        <p>First, agents holding no tokens. Then, of what remains, everything
+        outside the largest connected piece — a group linked through a single
+        agent comes adrift when that agent starves.</p>
+        <p>Tokens held by the dead are redistributed at random over the
+        survivors.</p>`
     },
     {
-      title: 'Observation — game phase',
-      stage: 'game.observe',
-      code: ['    def game(self) -> None:', 'self.write_messages(u, targets, y, outbox)'],
-      text: `The second phase begins the same way, and with one look, exactly
-        like the first. What comes back decides both what the agent says and
-        where it puts its tokens.
-        <p>It reads a different graph from the one phase one read: children
-        have been born, links have moved, and the starved are gone.</p>`
+      title: 'Observation — Game Phase',
+      stage: 'game.observe', effect: 'eyes',
+      code: ['    def game(self) -> None:', 'y = self.observe(u, targets)'],
+      text: `The second phase begins with the same single pass.
+        <p>The graph has changed since the first: children have been born,
+        links have moved, the starved are gone.</p>`
     },
     {
-      title: 'The Colonel Blotto game',
-      stage: 'game.stake',
-      code: ['scores = np.asarray(y[10, :]', 'flow.get(frozenset((u, v)), 0)'],
-      text: `Every agent stakes its <em>entire</em> pile across itself and its
-        neighbours. It can spread the pile by score or put all of it on one
-        node — which of those it does is the brain's own choice, not a rule.
-        <p>Nothing is destroyed. A node's new balance is simply everything
-        staked on it, which is why the total never moves.</p>`
+      title: 'Message Exchange',
+      stage: 'game.observe', effect: 'messages',
+      code: ['            self.write_messages(u, targets, y, outbox)',
+             '            self.write_messages(u, targets, y, outbox)'],
+      text: `Messages again, from that same pass, and delivered at the end of
+        the phase as before.
+        <p>What an agent writes now is what its neighbours will read in the next
+        reproduction phase.</p>`
     },
     {
-      title: 'Who takes a node',
-      stage: 'game.winner',
+      title: 'Colonel Blotto Game',
+      stage: 'game.stake', effect: 'stakes',
+      code: ['# ---- everyone stakes at once ----', 'self.unlink(a, b)'],
+      text: `Every agent stakes its entire pile across itself and its
+        neighbours, either spread by score or all on one node. Which of the two
+        is the brain's choice.
+        <p>Nothing is destroyed: a node's new balance is everything staked on
+        it. One dot here is one token.</p>
+        <p>Any link that carried no tokens is then cut.</p>`
+    },
+    {
+      title: 'Stronger Agents Conquer Nodes',
+      stage: 'game.conquer', effect: 'conquer',
       code: ['def resolve(staked: dict', '    return hegemon'],
-      text: `Usually the biggest stake wins. Sometimes the small ones combine
-        and take it instead.
-        <p>The largest single staker is the <b>hegemon</b>. Against it stands
-        the <b>mob</b>: every other agent that flagged part of its stake as a
-        revolt. The mob is sorted weakest first and walked upward, gathering a
-        lower class. At each rung the question is whether that lower class now
-        outweighs everyone still above it <em>plus</em> the hegemon.</p>
-        <p>At the first rung where it does, the revolution carries — and the
-        node goes to the <b>strongest staker in that rung</b>, not to a random
-        member of the crowd. Ties at that exact amount are split by drawing;
-        nothing else is. So a crowd can take a node from someone who outspent
-        every one of them individually, and the best-placed of them collects
-        it.</p>`
+      text: `The largest staker on a node is the <b>hegemon</b> and usually
+        takes it.
+        <p>Against it stands the <b>mob</b>: every other staker that flagged
+        part of its stake as revolt. The mob is sorted weakest first and walked
+        upward, accumulating a lower class. At each rung: does the lower class
+        outweigh everyone above it plus the hegemon?</p>
+        <p>At the first rung where it does, the revolution carries and the node
+        goes to the <b>strongest staker in that rung</b>. Ties there are drawn
+        at random; nothing else is.</p>
+        <p>The winner's brain is then copied into the node. This is the only
+        selection step in the algorithm.</p>`
     },
     {
-      title: 'The winner moves in',
-      stage: 'game.conquer',
-      code: ['# ---- the winner moves in ----', 'self.brains[winner].copy()'],
-      text: `The node stays; whatever was thinking in it does not. The winner's
-        brain is copied over the top.
-        <p>This is the only place in the whole algorithm where a brain is
-        selected. Phase one spreads brains around by reproduction; phase two
-        decides which of them carry on.</p>`
-    },
-    {
-      title: 'Quiet links are cut',
-      stage: 'game.prune',
-      code: ['# ---- links nobody used are cut ----', 'self.unlink(a, b)'],
-      text: `A link that carried no tokens in either direction this phase is
-        removed. The graph keeps only the connections somebody actually used,
-        so the shape of the world is decided by where the tokens went rather
-        than by anything structural.`
-    },
-    {
-      title: 'Elimination, again',
+      title: 'Elimination',
       stage: 'game.cleanup',
       code: ['    def cleanup(self) -> None:', 'self.tokens[random.choice(survivors)] += 1'],
-      text: `The same clearing-up as before, because it happens after both
-        phases and not once an iteration. Cutting the quiet links is what
-        usually strands somebody: an agent whose every connection went unused
-        is left attached to nothing.`
+      text: `The same two removals, because cleanup runs after both phases.
+        <p>Cutting the unused links is what usually strands an agent: one whose
+        every connection went unused is left attached to nothing.</p>`
     },
     {
-      title: 'Everyone mutates',
+      title: 'Mutation',
       stage: 'game.mutate',
       code: ['# ---- everyone mutates ----', 'brain.mutate()'],
-      text: `Every brain still standing is jittered — not only the newborns and
-        not only the winners. Every agent, every iteration, whether it
-        reproduced or fought or did nothing at all.
-        <p>It happens after the clearing-up, so brains belonging to agents
-        about to be removed are not jittered on their way out. This is the
-        whole engine of variation; nothing else in the script ever changes a
-        brain.</p>
-        <p><b>And then it starts again</b>, back at the reproduction
-        observation, on whatever world is left.</p>`
+      text: `Every surviving brain is jittered — not only newborns, not only
+        winners. Every agent, every iteration.
+        <p>It happens after the cleanup, so brains about to be removed are not
+        jittered first. This is the only source of variation.</p>
+        <p>The loop then returns to the reproduction observation.</p>`
     }
   ]
 };
@@ -218,7 +187,6 @@ Object.assign(Explain2, {
     this.textEl = document.getElementById('explain2Text');
     this.codeEl = document.getElementById('explain2Code');
     this.countEl = document.getElementById('explain2Count');
-    this.railEl = document.getElementById('explain2Rail');
 
     document.getElementById('explain2Prev').addEventListener('click', () => this.go(-1));
     document.getElementById('explain2Next').addEventListener('click', () => this.go(1));
@@ -228,13 +196,6 @@ Object.assign(Explain2, {
       if (tag === 'INPUT' || tag === 'SELECT' || tag === 'TEXTAREA') return;
       if (e.key === 'ArrowLeft') { this.go(-1); e.preventDefault(); }
       if (e.key === 'ArrowRight') { this.go(1); e.preventDefault(); }
-    });
-
-    this.railEl.innerHTML = this.STEPS.map((s, i) =>
-      `<button class="explain2-dot" data-step="${i}" title="${s.title}"></button>`).join('');
-    this.railEl.addEventListener('click', e => {
-      const dot = e.target.closest('[data-step]');
-      if (dot) this.showStep(Number(dot.dataset.step));
     });
 
     if (!this.started) {
@@ -429,6 +390,26 @@ Object.assign(Explain2, {
     this.showStep(next);
   },
 
+  /**
+   * One agent on its own, for the opening step.
+   *
+   * Cut from the real recording rather than invented: the busiest agent in the
+   * first stage, with its links dropped. What is being introduced is a node, so
+   * the picture is a node.
+   */
+  soloStage(stage) {
+    let best = 0;
+    stage.tokens.forEach((t, i) => { if (t > stage.tokens[best]) best = i; });
+    return {
+      step: stage.step,
+      iteration: stage.iteration,
+      ids: [stage.ids[best]],
+      tokens: [stage.tokens[best]],
+      edges: [],
+      marks: {}
+    };
+  },
+
   showStep(index, { carry = true } = {}) {
     if (!this.stages) return;
     this.at = Math.max(0, Math.min(this.STEPS.length - 1, index));
@@ -439,10 +420,6 @@ Object.assign(Explain2, {
     this.countEl.textContent =
       `${this.at + 1} / ${this.STEPS.length}` +
       (step.intro ? '' : `  ·  iteration ${this.iterations[this.cycle]}`);
-
-    for (const dot of this.railEl.children) {
-      dot.classList.toggle('active', Number(dot.dataset.step) === this.at);
-    }
 
     // ---- the code ----
     const region = this.region(step);
@@ -461,14 +438,18 @@ Object.assign(Explain2, {
 
     // ---- the picture ----
     const iteration = this.iterations[this.cycle];
-    const stage = (this.byIteration.get(iteration) || {})[step.stage];
-    if (stage) StepView.show(this.view, stage, { carry });
+    let stage = (this.byIteration.get(iteration) || {})[step.stage];
+    if (stage && step.solo) stage = this.soloStage(stage);
+    if (stage) StepView.show(this.view, stage, { effect: step.effect || null });
   },
 
   frame(now) {
+    const dt = Math.max(0, Math.min(0.05, (now - (this._last || now)) / 1000));
+    this._last = now;
     if (this.active && this.view && this.stages) {
-      StepView.tick(this.view);
-      StepView.draw(this.view, now / 1000);
+      StepView.tick(this.view, dt);
+      StepView.gaze(this.view, now / 1000);
+      StepView.draw(this.view, now / 1000, dt);
     }
     requestAnimationFrame(t => this.frame(t));
   }
