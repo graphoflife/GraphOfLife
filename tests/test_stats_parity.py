@@ -85,7 +85,7 @@ def _frames(count: int = 6):
     cfg = SimConfig(
         total_tokens=4000, n_nodes=70, k_neighbors=6,
         hidden_layers=[16, 12], message_amount=2, random_input_amount=2,
-        allow_rewire=True, allow_handover=True, allow_revolutions=True,
+        allow_handover=True, allow_revolutions=True,
         seed=21,
     )
     world = new_world(cfg)

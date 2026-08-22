@@ -7,7 +7,7 @@ but with differnet settings. maybe just winning token flow, or all token flow, o
 or just the max - min of an edge flow or whatever
 maybe optional
 
-maybe visualize handovers, rewires, deaths and so on.
+maybe visualize handovers, deaths and so on.
 
 Make filters, only show reproducing nodes, freshly born ones, 
 2 different filters for repro phase and blotto phase

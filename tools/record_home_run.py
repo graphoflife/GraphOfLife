@@ -155,7 +155,7 @@ def _unpack(blob: bytes):
 
 
 def record(tokens_total: int, warmup: int, keep: int, seed: int, out: str) -> None:
-    cfg = SimConfig(total_tokens=tokens_total, allow_rewire=False, seed=seed)
+    cfg = SimConfig(total_tokens=tokens_total, seed=seed)
     world = new_world(cfg)
 
     started = time.perf_counter()
@@ -233,11 +233,14 @@ def record(tokens_total: int, warmup: int, keep: int, seed: int, out: str) -> No
         handle.write(blob)
 
     # A companion the page never reads, so what was recorded is written down
-    # somewhere a person can look at it.
-    with open(os.path.splitext(out)[0] + ".json", "w") as handle:
+    # somewhere a person can look at it. Deliberately not <out>.json: this
+    # script used to emit a whole recording under that name, and a killed run
+    # of the old version finished in the background and dropped 33 MB of stale
+    # frames there, which was then committed and served to every visitor.
+    with open(os.path.splitext(out)[0] + ".meta.json", "w") as handle:
         json.dump({"recorded": time.strftime("%Y-%m-%d"), "format": "GOLH v1",
-                   "config": {"total_tokens": tokens_total, "allow_rewire": False,
-                              "seed": seed, "warmup": warmup, "frames": len(kept)}},
+                   "config": {"total_tokens": tokens_total, "seed": seed,
+                              "warmup": warmup, "frames": len(kept)}},
                   handle, indent=2)
 
     agents = [len(f[0]) for f in kept]

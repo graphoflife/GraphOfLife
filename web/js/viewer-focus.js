@@ -104,13 +104,12 @@ Object.assign(Viewer, {
     if (d) {
       sub.decisions = {};
       if (d.births) sub.decisions.births = d.births.filter(b => inBall.has(b.agent));
-      if (d.rewires) sub.decisions.rewires = d.rewires.filter(r => inBall.has(r.agent));
       if (d.allocations) sub.decisions.allocations = d.allocations.filter(a => inBall.has(a.agent));
       if (d.winners) sub.decisions.winners = d.winners.filter(w => inBall.has(w.node));
       if (d.pruned_edges) sub.decisions.pruned_edges = d.pruned_edges;
     }
 
-    // The frame-level rewire count is a whole-graph number; dropping it makes
+    // The frame-level counts are whole-graph numbers; dropping them makes
     // the stat fall back to counting the records that survived the crop.
     sub.summary = {
       nodes: sub.ids.length,

@@ -58,7 +58,7 @@ def progress(run_id: str) -> Dict[str, Any]:
 # does not merely serve stale numbers: it leaves a cache holding two shapes of
 # row at once, which is how the power-law statistics came to be computed and
 # then dropped on the way out.
-SERIES_VERSION = 14
+SERIES_VERSION = 15
 
 # At most this many iterations are analysed for a run's history.
 #
@@ -657,10 +657,6 @@ def frame_stats(frame: Dict[str, Any], previous: Dict[str, Any] | None = None) -
     held_home = (sum(1 for w in winners if w.get("winner") == w.get("node")) / len(winners)
                  if winners else None)
 
-    rewire_count = (frame.get("summary") or {}).get("rewires")
-    if rewire_count is None:
-        rewires = decisions.get("rewires")
-        rewire_count = len(rewires) if rewires is not None else None
 
     births = decisions.get("births")
     mean_invested = None
@@ -798,7 +794,13 @@ def frame_stats(frame: Dict[str, Any], previous: Dict[str, Any] | None = None) -
     token_entropy = _shannon(tokens)
     token_evenness = (token_entropy / math.log2(n)) if n > 1 else 0.0
 
-    top_count = max(1, round(n * 0.1))
+    # floor(x + 0.5) rather than round(), which is not the same function here.
+    # Python's round() breaks a tie towards the even number and JavaScript's
+    # Math.round() breaks it upwards, so at 45 agents this side took the top 4
+    # and stats.js took the top 5, and the same frame reported two different
+    # shares. Only populations landing exactly on a half were affected, which is
+    # why it sat here undetected until a run happened to pass through one.
+    top_count = max(1, int(math.floor(n * 0.1 + 0.5)))
     ordered_desc = sorted(tokens, reverse=True)
     total_tokens = sum(tokens)
     top_share = (sum(ordered_desc[:top_count]) / total_tokens) if total_tokens else 0.0
@@ -839,7 +841,6 @@ def frame_stats(frame: Dict[str, Any], previous: Dict[str, Any] | None = None) -
         "meanInvestedShare": mean_invested,
         "reproTokenShare": repro_token_share,
         "handovers": handovers,
-        "rewires": rewire_count,
         "meanChildLinks": mean_links,
         "revolutions": revolutions,
         "heldHomeShare": held_home,

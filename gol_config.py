@@ -31,7 +31,6 @@ class SimConfig:
         "brain_kind": "float",
         "allow_handover": False,
         "allow_revolutions": True,
-        "allow_rewire": False,
     }
 
     # ---- Economy ----
@@ -45,6 +44,9 @@ class SimConfig:
     n_nodes: int = 0
     # 0 means "derive from n": k = max(n / 100, 5).
     k_neighbors: int = 0
+    # Watts-Strogatz: the chance each lattice link is redrawn to a random node
+    # instead of a neighbour, which is what makes the starting graph small-world.
+    # Nothing to do with agents moving edges — that mechanic no longer exists.
     rewire_p: float = 0.2
 
     # ---- Brain ----
@@ -90,15 +92,6 @@ class SimConfig:
     # off, a node simply goes to whoever allocated the most, ties broken at
     # random, and the revolution fraction head disappears from the brain.
     allow_revolutions: bool = True
-
-    # Let an agent hand one of its own edges to another of its neighbours: the
-    # edge (u, old) becomes (recipient, old), leaving the giver out of the
-    # middle. Handover sideways rather than to a newborn.
-    #
-    # Off by default. It is the mechanic that changes the graph most drastically
-    # per iteration, so a run with it on is answering a different question from
-    # a run without it, and the plainer one is the better place to start.
-    allow_rewire: bool = False
 
     # ---- Mutation ----
     mutation_probability: float = 0.5
@@ -147,7 +140,6 @@ class SimConfig:
         return (9
                 + (2 if self.allow_revolutions else 0)
                 + (4 if self.allow_handover else 0)
-                + (8 if self.allow_rewire else 0)
                 + self.message_amount)
 
     def head_layout(self) -> Dict[str, Any]:
@@ -167,13 +159,6 @@ class SimConfig:
             layout["HANDOVER"] = [nxt, nxt + 2]
             layout["HANDOVER_MODE"] = [nxt + 2, nxt + 4]
             nxt += 4
-        if self.allow_rewire:
-            layout["REWIRE"] = [nxt, nxt + 2]
-            layout["REWIRE_MODE"] = [nxt + 2, nxt + 4]
-            layout["REWIRE_DROP"] = [nxt + 4, nxt + 5]
-            layout["REWIRE_TO"] = [nxt + 5, nxt + 6]
-            layout["REWIRE_PICK_MODE"] = [nxt + 6, nxt + 8]
-            nxt += 8
         layout["MESSAGE"] = [nxt, nxt + self.message_amount]
         return layout
 

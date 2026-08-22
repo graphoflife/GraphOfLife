@@ -21,7 +21,7 @@ const RunsView = {
     ['total_tokens', 'tokens'],
     ['n_nodes', 'n'],
     ['k_neighbors', 'k'],
-    ['rewire_p', 'p'],
+    ['rewire_p', 'shortcuts'],
     ['brain_kind', 'brain'],
     ['hidden_layers', 'hidden'],
     ['message_amount', 'msg'],
@@ -29,7 +29,6 @@ const RunsView = {
     ['exchange_messages', 'exchange'],
     ['allow_handover', 'handover'],
     ['allow_revolutions', 'revolutions'],
-    ['allow_rewire', 'rewire'],
     ['mutation_probability', 'mut p'],
     ['mutation_noise_std', 'mut std'],
     ['mutation_sparsity', 'mut sparse'],
@@ -190,7 +189,7 @@ const RunsView = {
     // mode pair. Both are absent from the brain when switched off.
     const outputs = 9 + (cfg.allow_revolutions ? 2 : 0)
                       + (cfg.allow_handover ? 4 : 0)
-                      + (cfg.allow_rewire ? 8 : 0) + messages;
+                      + messages;
 
     // A binary brain spreads every input across a ladder of bits, so its first
     // layer is far wider even though each weight costs a fraction as much.

@@ -114,7 +114,6 @@ Object.assign(Viewer, {
     meanInvestedShare: 'Mean investment',
     meanChildLinks: 'Links per child',
     handovers: 'Handovers',
-    rewires: 'Rewires',
     totalFlow: 'Tokens moved',
     meanEdgeFlow: 'Mean edge flow',
     maxEdgeFlow: 'Max edge flow',
@@ -139,7 +138,7 @@ Object.assign(Viewer, {
     ] },
     { key: 'reproduction', label: 'Reproduction', open: true, keys: [
       'births', 'reproTokenShare', 'meanInvestedShare', 'meanChildLinks',
-      'handovers', 'rewires'
+      'handovers'
     ] },
     { key: 'blotto', label: 'Game (Blotto)', open: true, keys: [
       'totalFlow', 'meanEdgeFlow', 'maxEdgeFlow', 'selfAllocationShare',
@@ -272,7 +271,6 @@ Object.assign(Viewer, {
       cells.meanChildLinks = [this.STAT_LABELS.meanChildLinks, dec(s.meanChildLinks)];
       if (s.handovers !== null) cells.handovers = [this.STAT_LABELS.handovers, formatNumber(s.handovers)];
     }
-    if (s.rewires !== null) cells.rewires = [this.STAT_LABELS.rewires, formatNumber(s.rewires)];
     if (s.totalFlow !== null) {
       cells.totalFlow = [this.STAT_LABELS.totalFlow, formatNumber(s.totalFlow)];
       cells.meanEdgeFlow = [this.STAT_LABELS.meanEdgeFlow, dec(s.meanEdgeFlow, 1)];
@@ -339,7 +337,7 @@ Object.assign(Viewer, {
    * Pair two run statistics into a path through time.
    *
    * The two are not always recorded together. Most are written on both phases,
-   * some only on the reproduction phase — births, what was invested, rewires —
+   * some only on the reproduction phase — births, and what was invested —
    * and some only on the game phase — what flowed, who revolted. Rather than
    * keeping a table of which is which, the pairing is decided from the data:
    *
@@ -519,9 +517,6 @@ Object.assign(Viewer, {
       rows.push('<hr>');
       if (d.newbornOf !== undefined) {
         rows.push(`<b class="good">Born this phase</b> from ${d.newbornOf}`);
-      }
-      if (d.rewire) {
-        rows.push(`Gave its edge to ${d.rewire.edge} over to ${d.rewire.to}`);
       }
       if (d.reproduced === null) {
         rows.push('<span class="hint">decisions not recorded</span>');

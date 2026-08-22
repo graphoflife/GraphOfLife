@@ -4,7 +4,7 @@ Invariants the simulation must not break.
 These are properties rather than fixed expected values. A simulation whose
 whole point is that nobody knows what it will do cannot be tested by writing
 down what it should do — but it can be held to the things that must be true
-whatever it does. Tokens are conserved. A rewire never invents an edge. The
+whatever it does. Tokens are conserved. The
 result does not depend on the order agents happen to be visited in.
 
 Every one of these was found by hand while chasing a bug. They are here so
@@ -95,76 +95,11 @@ def test_no_agent_is_ever_in_debt():
 # ---------------------------------------------------------------------------
 
 def test_no_self_loops_survive_a_phase():
-    cfg = small(allow_rewire=True, allow_handover=True)
+    cfg = small(allow_handover=True)
     world = new_world(cfg)
     for _ in range(10):
         world.step(record_decisions=False)
         assert not list(nx.selfloop_edges(world.G))
-
-
-def test_rewiring_never_raises_the_edge_count():
-    """
-    A rewire moves an edge; it does not make one.
-
-    One edge leaves for every one that arrives, so the count holds — except
-    where the recipient already knew the far node, when the two merge and the
-    count falls. It can never rise, and a version that let it would be quietly
-    manufacturing structure.
-    """
-    cfg = small(allow_rewire=True, allow_handover=False, seed=5)
-    world = new_world(cfg)
-
-    for _ in range(15):
-        before = world.G.number_of_edges()
-        repro = world.step(record_decisions=True)[0]
-        # Births add edges too, so compare against what reproduction reported
-        # rather than against the raw count.
-        rewires = repro["summary"].get("rewires")
-        assert rewires is not None, "a run with rewiring on must report the count"
-        assert rewires >= 0
-        assert before >= 0
-
-
-def test_rewiring_does_not_depend_on_agent_order():
-    """
-    Both ends of an edge can ask to give that same edge away. Applying the
-    moves one at a time made whoever was reached first win; the result now
-    comes from the graph as it stood, not from the iteration order.
-    """
-    graph = nx.watts_strogatz_graph(n=40, k=6, p=0.2, seed=3)
-    proposals = []
-    rng = random.Random(4)
-    for agent in list(graph.nodes()):
-        neighbours = list(graph.neighbors(agent))
-        if len(neighbours) >= 2:
-            edge, recipient = rng.sample(neighbours, 2)
-            proposals.append((agent, edge, recipient))
-
-    def apply(order):
-        working = graph.copy()
-        claims = {}
-        for agent, old_v, recipient in order:
-            if recipient == old_v or not working.has_edge(agent, old_v):
-                continue
-            claims.setdefault(frozenset((agent, old_v)), []).append(
-                (int(agent), int(old_v), int(recipient)))
-
-        removals, additions = [], []
-        for key in sorted(claims, key=lambda k: tuple(sorted(k))):
-            agent, old_v, recipient = sorted(claims[key])[0]
-            removals.append((agent, old_v))
-            additions.append((recipient, old_v))
-        working.remove_edges_from(removals)
-        working.add_edges_from(additions)
-        return frozenset(frozenset(e) for e in working.edges())
-
-    shuffler = random.Random(9)
-    outcomes = set()
-    for _ in range(8):
-        order = list(proposals)
-        shuffler.shuffle(order)
-        outcomes.add(apply(order))
-    assert len(outcomes) == 1, "the outcome changed with the order of the proposals"
 
 
 # ---------------------------------------------------------------------------
@@ -409,7 +344,7 @@ def test_edges_only_reference_present_nodes():
 
 def test_a_mechanic_can_be_switched_off():
     """Switching a rule off changes the brain, so the run must still start."""
-    for mechanic in ("allow_rewire", "allow_handover", "allow_revolutions"):
+    for mechanic in ("allow_handover", "allow_revolutions"):
         world = new_world(small(**{mechanic: False}))
         for _ in range(3):
             world.step(record_decisions=True)
@@ -417,15 +352,13 @@ def test_a_mechanic_can_be_switched_off():
 
 
 def test_output_layout_matches_the_configuration():
-    for rewire in (True, False):
-        for handover in (True, False):
-            for revolutions in (True, False):
-                cfg = small(allow_rewire=rewire, allow_handover=handover,
-                            allow_revolutions=revolutions)
-                world = new_world(cfg)
-                node = next(iter(world.G.nodes()))
-                rows = world.brains[node].weights[-1].shape[0]
-                assert rows == cfg.n_outputs()
+    for handover in (True, False):
+        for revolutions in (True, False):
+            cfg = small(allow_handover=handover, allow_revolutions=revolutions)
+            world = new_world(cfg)
+            node = next(iter(world.G.nodes()))
+            rows = world.brains[node].weights[-1].shape[0]
+            assert rows == cfg.n_outputs()
 
 
 def test_statistics_absent_rather_than_zero_when_a_rule_is_off():
@@ -433,12 +366,11 @@ def test_statistics_absent_rather_than_zero_when_a_rule_is_off():
     "Not part of these rules" and "allowed but nobody did it" are different
     findings, and a zero cannot tell them apart.
     """
-    world = new_world(small(allow_revolutions=False, allow_rewire=False))
+    world = new_world(small(allow_revolutions=False))
     _, game = world.step(record_decisions=True)
     stats = gol_series.frame_stats(game)
     assert stats["revolutions"] is None
     assert stats["revoltShare"] is None
-    assert stats["rewires"] is None
 
 
 # ---------------------------------------------------------------------------

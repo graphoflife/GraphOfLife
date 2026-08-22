@@ -41,7 +41,7 @@ PHASE 1 — REPRODUCTION
      probability or as a hard argmax.
   6. Apply the new edges, drop self-loops, then run cleanup (below).
 
-  Phase 1 does NOT move, rewire, or create any other edges. No walker, no edge
+  Phase 1 does NOT move or create any other edges. No walker, no edge
   shifting, no reconnection.
 
 PHASE 2 — BLOTTO (competition)
@@ -132,13 +132,6 @@ def build_heads(cfg: SimConfig):
         heads["HANDOVER"] = slice(nxt, nxt + 2)       # give this edge to the child?
         heads["HANDOVER_MODE"] = slice(nxt + 2, nxt + 4)
         nxt += 4
-    if cfg.allow_rewire:
-        heads["REWIRE"] = slice(nxt, nxt + 2)         # move one of my edges at all?
-        heads["REWIRE_MODE"] = slice(nxt + 2, nxt + 4)
-        heads["REWIRE_DROP"] = nxt + 4                # which of my edges to give away
-        heads["REWIRE_TO"] = nxt + 5                  # which neighbour receives it
-        heads["REWIRE_PICK_MODE"] = slice(nxt + 6, nxt + 8)
-        nxt += 8
     heads["MESSAGE_START"] = nxt
     return heads
 
@@ -664,9 +657,6 @@ class GraphOfLife:
         """
         decisions: List[Dict[str, Any]] = []
         handovers: List[Tuple[int, int, int]] = []
-        rewires: List[Tuple[int, int, int]] = []
-        rewire_records: List[Dict[str, int]] = []
-        applied_rewires = 0
         # Captured before anything changes, so the viewer can express births and
         # deaths as a share of the population that actually faced this phase,
         # and show how much each agent gained or lost across it.
@@ -687,12 +677,6 @@ class GraphOfLife:
             frac = np.mean(Y[self.heads["REPRO_FRACTION"], :], axis=1)
             child_tokens = int(np.floor(_share_of_first(frac[0], frac[1]) * tokens_u))
             child_tokens = max(0, min(tokens_u, child_tokens))
-
-            # Rewiring is the agent's own business and does not depend on
-            # whether it reproduced.
-            move = self._choose_rewire(u, candidates, Y)
-            if move is not None:
-                rewires.append((u, move[0], move[1]))
 
             if child_tokens < 1:
                 continue
@@ -715,57 +699,6 @@ class GraphOfLife:
                     "handed_over": [int(v) for v in given],
                 })
 
-        # Hand the rewired edges across, all against the graph as it stood
-        # before any of them moved.
-        #
-        # Applying them one at a time made the outcome depend on the order
-        # agents happened to be visited in, because both ends of an edge can
-        # choose to give that same edge away: whoever was reached first won,
-        # and the other found its edge gone and silently did nothing. That is
-        # not a rare collision. Over twenty-five phases every single one ended
-        # with a different graph depending on the order, from 570 edges claimed
-        # from both ends.
-        #
-        # So every claim is judged against the unchanged graph, and a contested
-        # edge is settled by drawing one claim rather than by whichever agent
-        # sorts first — an id-based rule would hand the edge to the older agent
-        # every time. Sorting before the draw keeps it reproducible from the
-        # seed without letting node order decide anything.
-        claims: Dict[frozenset, List[Tuple[int, int, int]]] = {}
-        for agent, old_v, recipient in rewires:
-            if recipient == old_v:
-                continue
-            if not self.G.has_edge(agent, old_v):
-                continue
-            if not (self.G.has_node(recipient) and self.G.has_node(old_v)):
-                continue
-            claims.setdefault(frozenset((agent, old_v)), []).append(
-                (int(agent), int(old_v), int(recipient)))
-
-        removals: List[Tuple[int, int]] = []
-        additions: List[Tuple[int, int]] = []
-        for key in sorted(claims, key=lambda k: tuple(sorted(k))):
-            proposals = sorted(claims[key])
-            chosen = (proposals[0] if len(proposals) == 1
-                      else proposals[int(np.random.randint(len(proposals)))])
-            agent, old_v, recipient = chosen
-            removals.append((agent, old_v))
-            additions.append((recipient, old_v))
-            applied_rewires += 1
-            if record_decisions:
-                rewire_records.append(
-                    {"agent": agent, "edge": old_v, "to": recipient})
-
-        # Every removal first, then every addition. An edge handed to a node
-        # that is itself giving one away therefore does not depend on which of
-        # the two was looked at first. An addition landing on a pair the graph
-        # already holds collapses into it, since a simple graph holds each pair
-        # once — which is why a rewire can lower the edge count but never raise
-        # it: one edge leaves for every one that arrives, and arrivals can
-        # merge.
-        self.G.remove_edges_from(removals)
-        self.G.add_edges_from(additions)
-
         # Hand the chosen edges over: the child gains the connection, the parent
         # loses it. If the newborn was already wired to that neighbour by the
         # link decision, adding it again is a no-op — the graph holds an edge
@@ -784,15 +717,9 @@ class GraphOfLife:
         payload = None
         if record_decisions:
             payload = {"births": decisions}
-            # Absent rather than empty when the rule is off, so the viewer can
-            # tell that apart from nobody choosing to move an edge.
-            if self.cfg.allow_rewire:
-                payload["rewires"] = rewire_records
 
-        extra = {"rewires": applied_rewires} if self.cfg.allow_rewire else None
         return self._frame(phase=1, cleanup=cleanup, nodes_before=nodes_before,
-                           tokens_before=tokens_before, decisions=payload,
-                           summary_extra=extra)
+                           tokens_before=tokens_before, decisions=payload)
 
     def _spawn_child(self, parent: int, parent_tokens: int, child_tokens: int,
                      candidates: List[int], Y: np.ndarray) -> Tuple[int, List[int]]:
@@ -849,58 +776,6 @@ class GraphOfLife:
             if _choose_binary(logits[0, col], logits[1, col], mode[0, col], mode[1, col]):
                 given.append(v)
         return given
-
-    def _choose_rewire(self, u: int, candidates: List[int], Y: np.ndarray):
-        """
-        Hand one of this agent's own edges to one of its other neighbours.
-
-        The same shape as handover, but sideways instead of downward: where a
-        parent gives a connection to its newborn, here an agent gives one to a
-        peer. The edge (u, old) becomes (recipient, old) — this agent drops out
-        of the middle and the two are left joined to each other.
-
-        Three choices, read the way every other decision is. Whether to do it at
-        all, from a yes/no pair with its own mode pair. Which edge to give away,
-        scored per neighbour. Which neighbour receives it, scored per neighbour
-        again. A second mode pair says whether those two picks are sampled from
-        the scores or taken at their maximum.
-
-        The original script scored exactly these two things and then applied
-        them the other way round, joining the agent to the target rather than
-        the target to the dropped edge. Since both were drawn from the agent's
-        own neighbours, the edge it "reconnected" to already existed and adding
-        it did nothing — the whole rule reduced to deleting an edge.
-
-        Returns (edge_to_give_away, recipient) or None.
-        """
-        if not self.cfg.allow_rewire:
-            return None
-
-        neighbours = candidates[1:]
-        # Nothing to do without two distinct neighbours: one to give, one to
-        # give to.
-        if len(neighbours) < 2:
-            return None
-
-        heads = self.heads
-        # Averaged over the neighbour columns: whether to rewire is one decision
-        # about the agent, not one per edge.
-        yn = np.mean(Y[heads["REWIRE"], 1:], axis=1)
-        mode = np.mean(Y[heads["REWIRE_MODE"], 1:], axis=1)
-        if not _choose_binary(yn[0], yn[1], mode[0], mode[1]):
-            return None
-
-        pick_mode = np.mean(Y[heads["REWIRE_PICK_MODE"], 1:], axis=1)
-        sample = bool(pick_mode[0] > pick_mode[1])
-
-        old_v = neighbours[_pick_index(np.asarray(Y[heads["REWIRE_DROP"], 1:], dtype=float), sample)]
-        recipient = neighbours[_pick_index(np.asarray(Y[heads["REWIRE_TO"], 1:], dtype=float), sample)]
-
-        # Giving an edge to the very node on the other end of it would leave a
-        # loop from that node to itself.
-        if recipient == old_v:
-            return None
-        return int(old_v), int(recipient)
 
     # ------------------------------------------------------------------------
     # Phase 2: Blotto

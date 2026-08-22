@@ -1,0 +1,10 @@
+{
+  "recorded": "2026-08-22",
+  "format": "GOLH v1",
+  "config": {
+    "total_tokens": 15000,
+    "seed": 11,
+    "warmup": 50,
+    "frames": 20
+  }
+}

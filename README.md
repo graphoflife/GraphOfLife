@@ -9,7 +9,7 @@ graph theory and neural networks.**
 by how many tokens each holds](docs/images/graph.png)
 
 Agents live on the nodes of a graph, each carrying a small neural network. They
-spend a conserved supply of tokens to reproduce, rewire the graph they live on,
+spend a conserved supply of tokens to reproduce, shape the graph they live on,
 and fight each other in a game of blotto for position, tokens and reproduction.
 Nothing is optimised and nothing is selected for by hand. Instead, Natural
 Selection decides what survives and mutations are how they can evolve.
@@ -69,8 +69,8 @@ and the tokens freed are redistributed.
 
 ## Different mechanics
 
-Messages, handover, revolutions and rewiring can each be switched off, and the
-brain comes in three kinds. All of them change what the brain has to decide,
+Messages, handover and revolutions can each be switched off, and the brain
+comes in three kinds. All of them change what the brain has to decide,
 so they are fixed when a run is created rather than partway through. Deciding
 its own randomness is not optional — it is how every choice is read.
 
@@ -101,14 +101,6 @@ more, so a lineage can pass on position and not only tokens.
 **Revolutions.** The winner of a node is not automatically whoever paid most.
 Part of each agent's stake is a revolt token, and a coalition can form against
 the leader — so the largest bid can be beaten by agreement among smaller ones.
-
-**Rewire.** An agent can hand one of its edges to another of its neighbours.
-The connection (agent, other) becomes (recipient, other): the agent drops out
-of the middle and the two it stood between are left joined directly. A rewire
-never creates an edge. The count stays the same, or falls by one where the two
-collapse into the single edge a simple graph can hold. This one is **off by
-default**: it changes the graph faster than anything else per iteration, so a
-run with it on is answering a different question from a run without it.
 
 ## Watching a run
 
@@ -211,8 +203,7 @@ tests do not get run.
 The invariants are properties rather than expected values — a simulation whose
 point is that nobody knows what it will do cannot be tested by writing down
 what it should do, but it can be held to what must be true regardless. Tokens
-are conserved. A rewire never invents an edge. Rewiring does not depend on the
-order agents are visited in. A seed reproduces a run.
+are conserved. A seed reproduces a run.
 
 The parity test exists because forty-odd statistics are computed twice — in
 Python for the charts, in JavaScript for the panel under the graph — and two

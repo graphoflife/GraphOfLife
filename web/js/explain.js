@@ -661,7 +661,7 @@ Explain.PANELS = [
         + 'the only memory it has. In the same breath it writes a fresh message '
         + 'to every neighbour. Everything decided in this phase is read off '
         + 'this one observation: what to say, whether to reproduce and for how '
-        + 'much, whether to hand over an edge, and whether to rewire. The '
+        + 'much, and whether to hand over an edge. The '
         + 'glowing agent is the one that decided to reproduce.',
     build(scale) {
       const graph = scale === 'crowd' ? Explain.ringLattice(15, 4, 0.2, 5)
@@ -744,67 +744,6 @@ Explain.PANELS = [
       }
       Explain.label(ctx, k > 0.55 ? 'one link copied, one handed over'
                                   : 'the parent pays the full price', scene.w, scene.h);
-    }
-  },
-
-  {
-    title: 'Rewire',
-    text: 'An agent can hand one of its edges to another of its neighbours. '
-        + 'The link (agent, other) becomes (recipient, other): the agent drops '
-        + 'out of the middle and leaves the two it stood between joined '
-        + 'directly. A rewire never creates an edge — the count stays the '
-        + 'same, or falls by one where the result collapses into an edge that '
-        + 'already existed. The agent doing the rewiring is the one glowing. '
-        + 'Like handover, this can be switched off.',
-    build(scale) {
-      const graph = scale === 'crowd' ? Explain.ringLattice(16, 4, 0.15, 4)
-                                      : Explain.neighbourhood();
-      const adj = Explain.adjacency(graph);
-      const actors = scale === 'crowd' ? Explain.choose(graph.nodes, 4, 17) : [0];
-
-      const rewires = [];
-      const used = new Set();
-      for (const a of actors) {
-        const near = (adj.get(a) || []).filter(x => !used.has(`${a}|${x}`));
-        if (near.length < 2) continue;
-        const other = near[0], recipient = near[1];
-        used.add(`${a}|${other}`);
-        graph.edges.push([recipient, other]);
-        rewires.push({ a, other, recipient });
-      }
-      return { graph, roles: { rewires } };
-    },
-    draw(ctx, t, scene) {
-      const k = Explain.cycle(t, 6);
-      const { rewires } = scene.roles;
-      const moved = Explain.ramp(k, 0.2, 0.85);
-      const key = (a, b) => (String(a) < String(b) ? `${a}|${b}` : `${b}|${a}`);
-      const leaving = new Map(rewires.map(r => [key(r.a, r.other), r]));
-      const arriving = new Map(rewires.map(r => [key(r.recipient, r.other), r]));
-      const actors = new Set(rewires.map(r => r.a));
-
-      Explain.drawGraph(ctx, scene, {
-        edgeAlpha: (a, b) => {
-          if (leaving.has(key(a, b))) return 1 - moved;
-          if (arriving.has(key(a, b))) return moved;
-          return 1;
-        },
-        edgeColour: (a, b) => {
-          if (leaving.has(key(a, b))) return Explain.ink.warn;
-          if (arriving.has(key(a, b))) return Explain.ink.good;
-          return Explain.ink.edge;
-        },
-        edgeWidth: (a, b) => (leaving.has(key(a, b)) || arriving.has(key(a, b))
-          ? (scene.crowd ? 1.6 : 2) : (scene.crowd ? 1 : 1.3)),
-        glow: id => (actors.has(id) ? 0.6 : 0)
-      });
-
-      for (const r of rewires) {
-        const from = scene.pos.get(r.a), to = scene.pos.get(r.recipient);
-        Explain.mote(ctx, from, to, moved, Math.max(1.8, scene.r * 0.24), Explain.ink.pale);
-      }
-      Explain.label(ctx, k > 0.55 ? 'the agent has dropped out of the middle'
-                                  : 'handing the link on', scene.w, scene.h);
     }
   },
 
