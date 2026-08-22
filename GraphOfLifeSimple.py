@@ -636,15 +636,35 @@ class GraphOfLife:
         ])
         return self.brains[u].forward(X)
 
-    def _emit_messages(self, u: int, targets: List[int], Y: np.ndarray) -> None:
-        """Broadcast `u`'s message head to each observed target."""
+    def _emit_messages(self, u: int, targets: List[int], Y: np.ndarray,
+                       outbox: Dict[int, Dict[int, List[float]]]) -> None:
+        """
+        Write `u`'s message head to each observed target, into an outbox.
+
+        Into an outbox and not straight into self.messages, because the loop
+        that calls this is also reading self.messages. Writing live meant an
+        agent observed partly with messages from last phase and partly with
+        ones written moments earlier in this one, and which it got depended on
+        where its id fell in the loop: 17% of all message reads in a phase were
+        of values written earlier in that same phase. Low ids read stale
+        signals, high ids read fresh ones, for no reason anybody chose. The
+        outbox is delivered once the phase is over, so every agent reads the
+        same generation of messages.
+        """
         cfg = self.cfg
         if not cfg.exchange_messages or cfg.message_amount <= 0:
             return
         start = self.heads["MESSAGE_START"]
         rows = np.tanh(Y[start:start + cfg.message_amount, :])
         for j, v in enumerate(targets):
-            self.messages.setdefault(u, {})[int(v)] = rows[:, j].astype(float).tolist()
+            outbox.setdefault(u, {})[int(v)] = rows[:, j].astype(float).tolist()
+
+    def _deliver_messages(self, outbox: Dict[int, Dict[int, List[float]]]) -> None:
+        """What was written this phase becomes what is read next."""
+        if not outbox:
+            return
+        for u, notes in outbox.items():
+            self.messages[u] = notes
 
     # ------------------------------------------------------------------------
     # Phase 1: Reproduction
@@ -657,6 +677,7 @@ class GraphOfLife:
         """
         decisions: List[Dict[str, Any]] = []
         handovers: List[Tuple[int, int, int]] = []
+        outbox: Dict[int, Dict[int, List[float]]] = {}
         # Captured before anything changes, so the viewer can express births and
         # deaths as a share of the population that actually faced this phase,
         # and show how much each agent gained or lost across it.
@@ -671,7 +692,7 @@ class GraphOfLife:
 
             candidates = [u] + list(neighs[u])
             Y = self._observe(u, candidates, log_deg, q_tok, q_deg, log_tok)
-            self._emit_messages(u, candidates, Y)
+            self._emit_messages(u, candidates, Y, outbox)
 
             # How much of myself do I give away? Averaged over the whole view.
             frac = np.mean(Y[self.heads["REPRO_FRACTION"], :], axis=1)
@@ -712,6 +733,7 @@ class GraphOfLife:
             self.G.remove_edge(parent, v)
 
         self.G.remove_edges_from(list(nx.selfloop_edges(self.G)))
+        self._deliver_messages(outbox)
         cleanup = self._cleanup_and_redistribute()
 
         payload = None
@@ -790,11 +812,16 @@ class GraphOfLife:
         tokens_before = dict(self.tokens)
         log_deg, neighs, q_tok, q_deg, log_tok = self._precompute_features()
 
-        # --- 1. Message pass, so allocation decisions see fresh signals -------
-        for u in sorted(self.G.nodes()):
-            targets = [u] + list(neighs[u])
-            Y = self._observe(u, targets, log_deg, q_tok, q_deg, log_tok)
-            self._emit_messages(u, targets, Y)
+        # --- 1. One look, which decides both what to say and where to stake ---
+        #
+        # This used to be two passes: everyone observed and wrote messages, then
+        # everyone observed again to place their stakes, so that the stakes read
+        # messages written in this phase rather than the last. It cost every
+        # agent a second forward pass through its brain for the same
+        # neighbourhood, and it made the game phase behave unlike the
+        # reproduction phase, which has only ever looked once. One look now, and
+        # its output feeds both heads.
+        outbox: Dict[int, Dict[int, List[float]]] = {}
 
         # --- 2. One-shot allocation ------------------------------------------
         allocations_to: Dict[int, Dict[int, int]] = {v: {} for v in self.G.nodes()}
@@ -804,12 +831,15 @@ class GraphOfLife:
         alloc_records: List[Dict[str, Any]] = []
 
         for u in sorted(self.G.nodes()):
+            targets = [u] + list(neighs[u])
+            Y = self._observe(u, targets, log_deg, q_tok, q_deg, log_tok)
+            # Written even by an agent with nothing to stake: it is still there,
+            # its neighbours can still see it, and it still has something to say.
+            self._emit_messages(u, targets, Y, outbox)
+
             tokens_u = int(self.tokens.get(u, 0))
             if tokens_u <= 0:
                 continue
-
-            targets = [u] + list(neighs[u])
-            Y = self._observe(u, targets, log_deg, q_tok, q_deg, log_tok)
 
             scores = np.asarray(Y[self.heads["BLOTTO"], :], dtype=float)
             mode = np.mean(Y[self.heads["BLOTTO_MODE"], :], axis=1)
@@ -897,14 +927,21 @@ class GraphOfLife:
         self.brains = new_brains
 
         # --- 4. Aftermath -----------------------------------------------------
-        for brain in self.brains.values():
-            self._mutate_brain(brain)
-
         dead_edges = [e for e, flow in edge_flow.items() if flow == 0]
         if dead_edges:
             self.G.remove_edges_from(dead_edges)
 
+        self._deliver_messages(outbox)
         cleanup = self._cleanup_and_redistribute()
+
+        # Every brain mutates, and it happens after the clearing-up rather than
+        # before it. Nothing between the two reads a brain — the pruning goes on
+        # token flow and the cleanup on tokens and connectivity — so the only
+        # difference is that the brains of agents about to be removed are no
+        # longer jittered on their way out the door.
+        for brain in self.brains.values():
+            self._mutate_brain(brain)
+
         self._prune_stale_messages()
 
         decisions = None

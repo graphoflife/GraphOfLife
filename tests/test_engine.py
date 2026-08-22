@@ -373,6 +373,77 @@ def test_statistics_absent_rather_than_zero_when_a_rule_is_off():
     assert stats["revoltShare"] is None
 
 
+def test_every_agent_in_a_phase_reads_the_same_messages():
+    """
+    A phase must not let its own writes change what it is reading.
+
+    Messages used to be written straight into the store the observation loop
+    was reading from, so an agent saw a mixture: some signals from last phase,
+    some written moments earlier in this one, and which it got depended on
+    where its id fell in the loop. Seventeen per cent of all reads in a phase
+    were of values written during that same phase — low ids systematically
+    reading stale signals and high ids fresh ones, for no reason anyone chose.
+
+    Writes now go to an outbox delivered once the phase is over.
+    """
+    import copy
+
+    world = new_world(small(seed=3))
+    for _ in range(3):
+        world.step()
+
+    for run in (world.reproduction_phase, world.blotto_phase):
+        at_start = copy.deepcopy(world.messages)
+        changed = []
+        original = world._input_vec
+
+        def watching(u, v, *args, **kwargs):
+            for src, dst in ((u, u), (u, v), (v, u), (v, v)):
+                if world.messages.get(src, {}).get(dst) != at_start.get(src, {}).get(dst):
+                    changed.append((src, dst))
+            return original(u, v, *args, **kwargs)
+
+        world._input_vec = watching
+        try:
+            run(record_decisions=False)
+        finally:
+            world._input_vec = original
+
+        assert not changed, (
+            f"{len(changed)} reads returned a message that had changed since the "
+            f"phase began, e.g. {changed[:3]}")
+
+
+def test_each_phase_looks_once_per_agent():
+    """
+    The game phase used to observe twice: once to write messages, once to place
+    stakes. That is a second forward pass through every brain for the same
+    neighbourhood, and it made the game behave unlike reproduction, which has
+    only ever looked once.
+    """
+    world = new_world(small(seed=3))
+    world.step()
+
+    for name, run in (("reproduction", world.reproduction_phase),
+                      ("game", world.blotto_phase)):
+        present = world.G.number_of_nodes()
+        calls = []
+        original = world._observe
+
+        def counting(*args, **kwargs):
+            calls.append(1)
+            return original(*args, **kwargs)
+
+        world._observe = counting
+        try:
+            run(record_decisions=False)
+        finally:
+            world._observe = original
+
+        assert len(calls) == present, (
+            f"the {name} phase made {len(calls)} forward passes for {present} agents")
+
+
 # ---------------------------------------------------------------------------
 # The teaching script
 # ---------------------------------------------------------------------------

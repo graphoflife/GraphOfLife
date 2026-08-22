@@ -303,26 +303,25 @@ class World:
         Everyone stakes their whole pile on themselves and their neighbours,
         and whoever commits most to a node takes it.
 
-        Two passes, unlike reproduction. Everyone observes and writes first, so
-        that when they observe again to place their stakes they are all reading
-        messages written this phase rather than a mixture.
+        One look each, exactly like reproduction. What comes back decides both
+        what the agent says to its neighbours and where it puts its tokens.
         """
         outbox: dict = {}
-        for u in sorted(self.adj):
-            targets = [u] + sorted(self.adj[u])
-            self.write_messages(u, targets, self.observe(u, targets), outbox)
-        self.deliver(outbox)
 
         # ---- everyone stakes at once ----
         staked = {v: {} for v in self.adj}      # node -> who staked what
         revolt = {v: {} for v in self.adj}      # node -> how much of it revolts
         flow = {}                               # edge -> tokens that crossed it
         for u in sorted(self.adj):
+            targets = [u] + sorted(self.adj[u])
+            y = self.observe(u, targets)
+            # Written even by an agent with nothing left to stake: it is still
+            # here, and it still has something to say.
+            self.write_messages(u, targets, y, outbox)
+
             pot = self.tokens.get(u, 0)
             if pot <= 0:
                 continue
-            targets = [u] + sorted(self.adj[u])
-            y = self.observe(u, targets)
 
             # Spread the pile by score, or put all of it on one node. Which of
             # those it does is the brain's own choice, not a rule.
@@ -359,17 +358,20 @@ class World:
             if winner != v:
                 self.brains[v] = self.brains[winner].copy()
 
-        # ---- everyone mutates ----
-        # Not only the newborns and not only the winners. Every brain in the
-        # world, every iteration. This is the whole engine of variation.
-        for brain in self.brains.values():
-            brain.mutate()
-
         # ---- links nobody used are cut ----
         for a, b in [tuple(e) for e in self.adj_edges() if flow.get(frozenset(e), 0) == 0]:
             self.unlink(a, b)
 
+        self.deliver(outbox)
         self.cleanup()
+
+        # ---- everyone mutates ----
+        # Not only the newborns and not only the winners. Every brain still
+        # standing, every iteration. This is the whole engine of variation, and
+        # it comes after the clearing-up so that brains about to be removed are
+        # not jittered on their way out.
+        for brain in self.brains.values():
+            brain.mutate()
 
     def adj_edges(self) -> list:
         seen = set()
@@ -380,10 +382,14 @@ class World:
         return list(seen)
 
     def deliver(self, outbox: dict) -> None:
-        """Messages written this phase become what is read next."""
-        for v, notes in outbox.items():
-            if v in self.inbox:
-                self.inbox[v] = notes
+        """
+        Messages written this phase become what is read next.
+
+        Every inbox is replaced, not just the ones written to, so an agent
+        nobody addressed reads nothing rather than reading something old.
+        """
+        for v in self.inbox:
+            self.inbox[v] = outbox.get(v, {})
 
     # -- after every phase ----------------------------------------------------
 
