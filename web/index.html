@@ -60,6 +60,7 @@
   </button>
   <nav class="tabs">
     <button class="tab" data-view="explain">Explanation</button>
+    <button class="tab" data-view="explain2">Explanation 2</button>
     <button class="tab" data-view="runs">Simulations</button>
     <button class="tab" data-view="viewer">Viewer</button>
     <button class="tab" data-view="analysis">Analysis</button>
@@ -109,6 +110,37 @@
       <b>step 2</b>, the reproduction observation, reading whatever graph is
       left standing. It repeats until you stop it or the population dies out.
       Nothing in it optimises anything &mdash; whatever survives, survives.</p>
+  </div>
+</main>
+
+<!-- ==================== EXPLANATION 2 ==================== -->
+<main id="view-explain2" class="view">
+  <div class="ex2">
+    <div class="ex2-head">
+      <div>
+        <h2 id="explain2Title">&nbsp;</h2>
+        <span class="ex2-count" id="explain2Count"></span>
+      </div>
+      <div class="ex2-nav">
+        <button id="explain2Prev" class="seg-btn" title="Previous step (left arrow)">&larr;</button>
+        <button id="explain2Next" class="seg-btn" title="Next step (right arrow)">&rarr;</button>
+      </div>
+    </div>
+    <div class="ex2-rail" id="explain2Rail"></div>
+
+    <div class="ex2-body">
+      <div class="ex2-stage">
+        <canvas id="explain2Canvas"></canvas>
+      </div>
+      <div class="ex2-words" id="explain2Text"></div>
+      <div class="ex2-code" id="explain2Code"></div>
+    </div>
+
+    <p class="ex2-foot">
+      The whole script is on the right and runs on its own &mdash;
+      <code>python3 explain_minimal.py</code>. The graph is a real run:
+      seed 5 from iteration 129, chosen because every mechanic fires in it.
+    </p>
   </div>
 </main>
 
@@ -539,6 +571,8 @@
 <script src="js/statdetail.js"></script>
 <script src="js/presets.js"></script>
 <script src="js/explain.js"></script>
+<script src="js/stepview.js"></script>
+<script src="js/explain2.js"></script>
 <script src="js/home.js"></script>
 <script src="js/runs.js"></script>
 <script src="js/viewer.js"></script>

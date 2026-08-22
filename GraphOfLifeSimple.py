@@ -656,15 +656,19 @@ class GraphOfLife:
         """
         if self.on_step is None:
             return
+        self.on_step({**(marks.pop("_over", None) or self._snapshot()),
+                      "step": step,
+                      "iteration": int(self.iteration),
+                      "marks": marks})
+
+    def _snapshot(self) -> Dict[str, Any]:
+        """The graph as it stands, in the shape a frame uses."""
         nodes = sorted(self.G.nodes())
-        self.on_step({
-            "step": step,
-            "iteration": int(self.iteration),
+        return {
             "ids": [int(u) for u in nodes],
             "tokens": [int(self.tokens.get(u, 0)) for u in nodes],
             "edges": [[int(a), int(b)] for a, b in self.G.edges()],
-            "marks": marks,
-        })
+        }
 
     def _emit_messages(self, u: int, targets: List[int], Y: np.ndarray,
                        outbox: Dict[int, Dict[int, List[float]]]) -> None:
@@ -770,9 +774,10 @@ class GraphOfLife:
                    handed=[[int(p), int(v), int(c)] for p, v, c in handovers])
         self._deliver_messages(outbox)
 
+        before = self._snapshot() if self.on_step else None
         alive_before = set(self.G.nodes())
         cleanup = self._cleanup_and_redistribute()
-        self._note("repro.cleanup",
+        self._note("repro.cleanup", _over=before,
                    removed=[int(u) for u in sorted(alive_before - set(self.G.nodes()))])
 
         payload = None
@@ -985,9 +990,10 @@ class GraphOfLife:
         self._note("game.prune", cut=[[int(a), int(b)] for a, b in dead_edges])
 
         self._deliver_messages(outbox)
+        before = self._snapshot() if self.on_step else None
         alive_before = set(self.G.nodes())
         cleanup = self._cleanup_and_redistribute()
-        self._note("game.cleanup",
+        self._note("game.cleanup", _over=before,
                    removed=[int(u) for u in sorted(alive_before - set(self.G.nodes()))])
 
         # Every brain mutates, and it happens after the clearing-up rather than

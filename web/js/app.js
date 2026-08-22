@@ -13,6 +13,7 @@ const App = {
     StatDetail.init();
     RunsView.init();
     Explain.init();
+    Explain2.init();
     Home.init();
 
     // Both layouts are two panes plus a drag handle; the handle sets the width
@@ -90,6 +91,7 @@ const App = {
     // Choosing a backend means, on a static host, downloading a Python
     // runtime. That waits until somebody actually wants to run something.
     if (name === 'runs') RunsView.activate();
+    Explain2.setActive(name === 'explain2');
 
     // The canvas has no size while hidden, so it must be measured on reveal.
     // Done synchronously as well as on the next frame: the element already has
