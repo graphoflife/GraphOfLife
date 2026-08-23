@@ -183,7 +183,6 @@ Object.assign(Explain2, {
   init() {
     this.canvas = document.getElementById('explain2Canvas');
     if (!this.canvas) return;
-    this.titleEl = document.getElementById('explain2Title');
     this.textEl = document.getElementById('explain2Text');
     this.codeEl = document.getElementById('explain2Code');
     this.countEl = document.getElementById('explain2Count');
@@ -252,8 +251,9 @@ Object.assign(Explain2, {
       this.view = StepView.create(this.canvas);
       this.showStep(0, { carry: false });
     } catch (err) {
-      this.titleEl.textContent = 'The walk-through could not be loaded';
-      this.textEl.innerHTML = `<p>${err.message}</p>`;
+      this.textEl.innerHTML =
+        `<h3 class="ex2-title">The walk-through could not be loaded</h3>` +
+        `<p>${err.message}</p>`;
       console.warn('explanation:', err.message);
     } finally {
       this._loading = false;
@@ -432,17 +432,19 @@ Object.assign(Explain2, {
     this.at = Math.max(0, Math.min(this.STEPS.length - 1, index));
     const step = this.STEPS[this.at];
 
-    this.titleEl.textContent = step.title;
-    this.textEl.innerHTML = `<p>${step.text}</p>`;
-    // Numbered against the loop, not against the list. The three opening steps
-    // are not part of the loop and so carry no number; the observation that
-    // begins the reproduction phase is the first of the ten that are. Which
-    // recorded iteration is on screen is not something a reader needs.
+    // The title and where you are sit at the top of the explanation itself,
+    // not in a bar above all three panes: they belong to the words.
     const first = this.STEPS.findIndex(s => !s.intro);
-    const inLoop = this.STEPS.length - first;
-    this.countEl.textContent = step.intro
+    const where = step.intro
       ? 'Before the loop'
-      : `Step ${this.at - first + 1} / ${inLoop}`;
+      : `Step ${this.at - first + 1} / ${this.STEPS.length - first}`;
+    this.textEl.innerHTML =
+      `<h3 class="ex2-title">${step.title}</h3>` +
+      `<p class="ex2-step">${where}</p>` +
+      `<p>${step.text}</p>`;
+    // The bar keeps only how far through the whole walk you are; the step's own
+    // number lives with its words.
+    this.countEl.textContent = `${this.at + 1} of ${this.STEPS.length}`;
 
     // ---- the code ----
     const region = this.region(step);
