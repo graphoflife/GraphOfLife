@@ -306,7 +306,11 @@ const StepView = {
       } else if (view.effects.has('brains')) {
         this._brain(ctx, p, time, i, view._mutating === id ? view._mutatingUnit : -1);
       } else if (view.effects.has('eyes')) {
-        this._eye(ctx, p, time, i, view, id);
+        // Resolved here, where screen positions exist. Passing the layout's
+        // own coordinates in meant every pupil was aimed at a point in a
+        // different space — which put all of them in the same corner.
+        const at = view._gaze && view._gaze.get(id);
+        this._eye(ctx, p, time, i, at === undefined ? null : place(at));
       }
       ctx.globalAlpha = 1;
     });
@@ -329,7 +333,7 @@ const StepView = {
    * No outline and no lens. At this size an outline is most of what you see,
    * and what should be read is where the pupil is pointing.
    */
-  _eye(ctx, p, time, seed, view, id) {
+  _eye(ctx, p, time, seed, look) {
     // Scanning, not staring: they blink often and the gaze moves briskly, so a
     // field of them reads as a neighbourhood being read rather than a crowd
     // looking at nothing.
@@ -338,8 +342,8 @@ const StepView = {
     const open = phase > 0.17 ? 1 : Math.abs(Math.cos((Math.PI * phase) / 0.17));
     const ball = p.r * 0.62;
 
-    // Where it is looking: a neighbour, changing every so often, or itself.
-    const look = view._gaze && view._gaze.get(id);
+    // Where it is looking: a neighbour, changing every so often, or itself —
+    // and looking at itself means the pupil sits in the middle.
     let gx = 0, gy = 0;
     if (look) {
       const d = Math.hypot(look.x - p.x, look.y - p.y);
@@ -588,9 +592,7 @@ const StepView = {
     for (const id of view.stage.ids) {
       const near = adj.get(id) || [];
       const targets = [...near, id];                 // itself, last
-      const pick = targets[Math.abs(turn + id) % targets.length];
-      const node = view.shown.get(pick);
-      if (node) view._gaze.set(id, node);
+      view._gaze.set(id, targets[Math.abs(turn + id) % targets.length]);
     }
   }
 };

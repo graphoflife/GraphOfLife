@@ -231,6 +231,23 @@ Object.assign(Explain2, {
       }
       this.iterations = [...this.byIteration.keys()].sort((a, b) => a - b);
 
+      // The pruning is shown as part of the Blotto step, because to a reader it
+      // is the same event: the links nobody put a token on are the links that
+      // go. The engine does it later, though, so the stages between the two
+      // still carry those links and they reappeared after being cut. Take them
+      // out of everything recorded after the staking.
+      for (const stages of this.byIteration.values()) {
+        const pruned = (stages['game.prune'] || {}).marks;
+        if (!pruned || !pruned.cut) continue;
+        const gone = new Set(pruned.cut.map(([a, b]) => (a < b ? `${a}|${b}` : `${b}|${a}`)));
+        for (const name of ['game.winner', 'game.conquer']) {
+          const stage = stages[name];
+          if (!stage) continue;
+          stage.edges = stage.edges.filter(([a, b]) =>
+            !gone.has(a < b ? `${a}|${b}` : `${b}|${a}`));
+        }
+      }
+
       this.renderCode();
       this.view = StepView.create(this.canvas);
       this.showStep(0, { carry: false });
@@ -417,9 +434,15 @@ Object.assign(Explain2, {
 
     this.titleEl.textContent = step.title;
     this.textEl.innerHTML = `<p>${step.text}</p>`;
-    this.countEl.textContent =
-      `${this.at + 1} / ${this.STEPS.length}` +
-      (step.intro ? '' : `  ·  iteration ${this.iterations[this.cycle]}`);
+    // Numbered against the loop, not against the list. The three opening steps
+    // are not part of the loop and so carry no number; the observation that
+    // begins the reproduction phase is the first of the ten that are. Which
+    // recorded iteration is on screen is not something a reader needs.
+    const first = this.STEPS.findIndex(s => !s.intro);
+    const inLoop = this.STEPS.length - first;
+    this.countEl.textContent = step.intro
+      ? 'Before the loop'
+      : `Step ${this.at - first + 1} / ${inLoop}`;
 
     // ---- the code ----
     const region = this.region(step);
