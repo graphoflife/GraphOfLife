@@ -285,7 +285,7 @@ const StepView = {
       let colour = this.ink.node;
       if (role.born.has(id)) colour = this.ink.good;
       else if (role.taken.has(id)) colour = this.ink.rich;
-      if (view._mutating === id) colour = '#f2cd5c';
+      if (view._mutated && view._mutated.has(id)) colour = '#f2cd5c';
 
       ctx.globalAlpha = p.alpha;
       if (role.winner.has(id) || role.parent.has(id)) {
@@ -304,7 +304,8 @@ const StepView = {
       if (role.removed.has(id)) {
         this._cross(ctx, p);
       } else if (view.effects.has('brains')) {
-        this._brain(ctx, p, time, i, view._mutating === id ? view._mutatingUnit : -1);
+        this._brain(ctx, p, time, i,
+                    view._mutated && view._mutated.has(id) ? view._mutated.get(id) : -1);
       } else if (view.effects.has('eyes')) {
         // Resolved here, where screen positions exist. Passing the layout's
         // own coordinates in meant every pupil was aimed at a point in a
@@ -559,19 +560,32 @@ const StepView = {
   },
 
   /**
-   * Whose turn it is to be mutated, one after another.
+   * The mutation sweeping across the graph, one agent at a time.
    *
-   * Every brain is jittered in the same instant; drawn that way it is a single
-   * flicker across the whole graph and reads as nothing. Taken one agent at a
-   * time it reads as what it is.
+   * Every brain is jittered in the same instant. Drawn that way it is a single
+   * flicker across the whole graph and reads as nothing, so it is dealt out
+   * one agent at a time instead — and each one stays marked once its turn has
+   * passed, so what builds up is the fact that every brain was touched, not
+   * just the one currently being touched.
+   *
+   * Timed from when the step was opened rather than from the clock, so it
+   * always starts at the first agent and does not begin halfway through.
    */
-  mutating(view, seconds) {
-    if (!view.stage || !view.effects.has('mutate')) { view._mutating = null; return; }
+  mutating(view) {
+    if (!view.stage || !view.effects.has('mutate')) {
+      view._mutated = null;
+      return;
+    }
     const ids = view.stage.ids;
-    if (!ids.length) return;
-    const at = Math.floor(seconds / 0.28) % ids.length;
-    view._mutating = ids[at];
-    view._mutatingUnit = Math.floor(seconds / 0.28 + at) % 7;
+    const done = Math.min(ids.length, Math.floor(view.since / 0.16));
+    if (view._mutated && view._mutated.size === done) return;
+
+    view._mutated = new Map();
+    for (let i = 0; i < done; i++) {
+      // Which unit of that brain took the hit. Fixed per agent so it does not
+      // flicker from frame to frame once it has been chosen.
+      view._mutated.set(ids[i], (ids[i] * 3 + i) % 7);
+    }
   },
 
   /**

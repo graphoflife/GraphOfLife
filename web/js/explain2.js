@@ -472,7 +472,7 @@ Object.assign(Explain2, {
     if (this.active && this.view && this.stages) {
       StepView.tick(this.view, dt);
       StepView.gaze(this.view, now / 1000);
-      StepView.mutating(this.view, now / 1000);
+      StepView.mutating(this.view);
       StepView.draw(this.view, now / 1000, dt);
     }
     requestAnimationFrame(t => this.frame(t));
