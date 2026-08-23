@@ -60,7 +60,6 @@
   </button>
   <nav class="tabs">
     <button class="tab" data-view="explain">Explanation</button>
-    <button class="tab" data-view="explain2">Explanation 2</button>
     <button class="tab" data-view="runs">Simulations</button>
     <button class="tab" data-view="viewer">Viewer</button>
     <button class="tab" data-view="analysis">Analysis</button>
@@ -95,48 +94,28 @@
 
 <!-- ==================== EXPLANATION VIEW ==================== -->
 <main id="view-explain" class="view">
-  <div class="explain-intro">
-    <h2>How the Graph Of Life Algorithm works</h2>
-    <p>Each step of one iteration, in the order the engine does it. On the
-      left it happens to a single agent; on the right the same rule runs across
-      a whole small world at once. Every picture is drawn from scratch as you
-      watch rather than recorded, so none of them can fall out of step with the
-      code.</p>
-  </div>
-  <div class="explain-panels" id="explainPanels"></div>
-  <div class="explain-intro explain-close">
-    <p><b>&#8593; And round again.</b> That is one whole iteration: two
-      phases, each ending in an elimination. The next one starts back at
-      <b>step 2</b>, the reproduction observation, reading whatever graph is
-      left standing. It repeats until you stop it or the population dies out.
-      Nothing in it optimises anything &mdash; whatever survives, survives.</p>
-  </div>
-</main>
-
-<!-- ==================== EXPLANATION 2 ==================== -->
-<main id="view-explain2" class="view">
-  <div class="ex2">
-    <div class="ex2-head">
-      <div class="ex2-where" id="explain2Count"></div>
-      <div class="ex2-nav">
-        <button id="explain2Prev" title="Previous step (left arrow)" aria-label="Previous step">
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-where" id="explainCount"></div>
+      <div class="ex-nav">
+        <button id="explainPrev" title="Previous step (left arrow)" aria-label="Previous step">
           <svg viewBox="0 0 10 12" aria-hidden="true"><path d="M9 0 L9 12 L0 6 Z"/></svg>
         </button>
-        <button id="explain2Next" title="Next step (right arrow)" aria-label="Next step">
+        <button id="explainNext" title="Next step (right arrow)" aria-label="Next step">
           <svg viewBox="0 0 10 12" aria-hidden="true"><path d="M1 0 L1 12 L10 6 Z"/></svg>
         </button>
       </div>
     </div>
 
-    <div class="ex2-body">
-      <div class="ex2-stage">
-        <canvas id="explain2Canvas"></canvas>
+    <div class="ex-body">
+      <div class="ex-stage">
+        <canvas id="explainCanvas"></canvas>
       </div>
-      <div class="ex2-words" id="explain2Text"></div>
-      <div class="ex2-code" id="explain2Code"></div>
+      <div class="ex-words" id="explainText"></div>
+      <div class="ex-code" id="explainCode"></div>
     </div>
 
-    <p class="ex2-foot">
+    <p class="ex-foot">
       The whole script is on the right and runs on its own &mdash;
       <code>python3 explain_minimal.py</code>. The graph is a real run:
       seed 5 from iteration 129, chosen because every mechanic fires in it.
@@ -570,9 +549,8 @@
 <script src="js/stats.js"></script>
 <script src="js/statdetail.js"></script>
 <script src="js/presets.js"></script>
-<script src="js/explain.js"></script>
 <script src="js/stepview.js"></script>
-<script src="js/explain2.js"></script>
+<script src="js/explain.js"></script>
 <script src="js/home.js"></script>
 <script src="js/runs.js"></script>
 <script src="js/viewer.js"></script>

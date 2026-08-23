@@ -765,11 +765,9 @@ details.control-group > summary:hover h3 { color: var(--text); }
 }
 
 /* ==========================================================================
-   Explanation
+   Page headings
    ==========================================================================
-   One panel per step: a small looping animation beside the words for it. The
-   animations are drawn rather than recorded, so they cannot drift away from
-   what the engine does. */
+   A title and a paragraph above a view. */
 
 .explain-intro {
   max-width: 1080px;
@@ -778,82 +776,6 @@ details.control-group > summary:hover h3 { color: var(--text); }
 }
 .explain-intro h2 { margin: 0 0 6px; font-size: 20px; }
 .explain-intro p { margin: 0; color: var(--muted); line-height: 1.6; }
-.explain-close { margin-top: 22px; }
-
-.explain-panels {
-  max-width: 1080px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-/* Two pictures then the words: the same step happening to one agent, and to a
-   whole world at once. */
-.explain-panel {
-  display: grid;
-  grid-template-columns: 244px 244px 1fr;
-  gap: 14px;
-  align-items: center;
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 12px;
-}
-
-.explain-art { position: relative; }
-.explain-art canvas {
-  width: 100%;
-  height: 190px;
-  display: block;
-  border-radius: calc(var(--radius) - 2px);
-  background: #0d1117;
-}
-
-/* Which of the two a picture is, said quietly so it does not compete with the
-   step number or the text. */
-.explain-cap {
-  position: absolute;
-  right: 8px;
-  bottom: 7px;
-  font-size: 10px;
-  letter-spacing: 0.02em;
-  color: var(--muted);
-  opacity: 0.75;
-  pointer-events: none;
-}
-
-/* The step number sits on the art rather than in the text, so the column of
-   words stays a clean left edge to read down. */
-.explain-step {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  min-width: 18px;
-  height: 18px;
-  padding: 0 5px;
-  border-radius: 9px;
-  background: rgba(0, 0, 0, 0.45);
-  color: var(--muted);
-  font-size: 11px;
-  line-height: 18px;
-  text-align: center;
-}
-
-.explain-words h3 { margin: 0 0 6px; font-size: 15px; }
-.explain-words p { margin: 0; color: var(--muted); line-height: 1.65; font-size: 13px; }
-.explain-words p + p { margin-top: 9px; }
-
-/* The words drop below the pictures first, and the pictures only stack when
-   there is no room to stand them side by side. */
-@media (max-width: 1000px) {
-  .explain-panel { grid-template-columns: 1fr 1fr; }
-  .explain-words { grid-column: 1 / -1; }
-}
-@media (max-width: 560px) {
-  .explain-panel { grid-template-columns: 1fr; }
-}
-
 .analysis-empty { max-width: 620px; }
 
 /* ==========================================================================
@@ -869,7 +791,7 @@ details.control-group > summary:hover h3 { color: var(--text); }
   height: calc(100vh - 47px);
   min-height: 420px;
   overflow: hidden;
-  background: #151d27;
+  background: #0d1117;
 }
 
 /* Not interactive, and it says so: no pointer events at all, so a click or a
@@ -884,14 +806,16 @@ details.control-group > summary:hover h3 { color: var(--text); }
 }
 
 /* Darkened towards the middle and the bottom left, which is where the words
-   are. White on a bright cluster of agents is otherwise unreadable. */
+   are. White on a bright cluster of agents is otherwise unreadable. Mixed in
+   the background's own colour, so an empty patch of canvas stays exactly
+   #0d1117 no matter how heavily the veil sits on it. */
 .home-veil {
   position: absolute;
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(120% 90% at 50% 45%, rgba(10, 14, 20, 0.58) 0%, rgba(10, 14, 20, 0.18) 45%, rgba(10, 14, 20, 0) 75%),
-    linear-gradient(to top, rgba(10, 14, 20, 0.72) 0%, rgba(10, 14, 20, 0) 42%);
+    radial-gradient(120% 90% at 50% 45%, rgba(13, 17, 23, 0.52) 0%, rgba(13, 17, 23, 0.16) 45%, rgba(13, 17, 23, 0) 75%),
+    linear-gradient(to top, rgba(13, 17, 23, 0.68) 0%, rgba(13, 17, 23, 0) 42%);
 }
 
 .home-hero {
@@ -1050,9 +974,9 @@ details.control-group > summary:hover h3 { color: var(--text); }
    Explanation 2 — the run, the words and the script, side by side
    ========================================================================== */
 
-#view-explain2 { padding: 0; }
+#view-explain { padding: 0; }
 
-.ex2 {
+.ex {
   height: calc(100vh - 47px);
   display: flex;
   flex-direction: column;
@@ -1060,12 +984,12 @@ details.control-group > summary:hover h3 { color: var(--text); }
   gap: 10px;
 }
 
-.ex2-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-.ex2-where { font-size: 11.5px; color: var(--muted); letter-spacing: 0.02em; }
+.ex-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.ex-where { font-size: 11.5px; color: var(--muted); letter-spacing: 0.02em; }
 
 /* The step's name and number head the explanation, because that is what they
    are naming — the words, not the row of three panes. */
-.ex2-title {
+.ex-title {
   margin: 0 0 2px;
   font-size: 20px;
   font-weight: 600;
@@ -1075,15 +999,15 @@ details.control-group > summary:hover h3 { color: var(--text); }
   letter-spacing: 0;
   text-align: left;
 }
-.ex2-words p.ex2-step {
+.ex-words p.ex-step {
   margin: 0 0 14px;
   font-size: 12px;
   color: var(--accent);
   letter-spacing: 0.04em;
   text-align: left;
 }
-.ex2-nav { display: flex; gap: 8px; }
-.ex2-nav button {
+.ex-nav { display: flex; gap: 8px; }
+.ex-nav button {
   width: 46px;
   height: 34px;
   display: grid;
@@ -1094,17 +1018,17 @@ details.control-group > summary:hover h3 { color: var(--text); }
   border-radius: 8px;
   cursor: pointer;
 }
-.ex2-nav button:hover { border-color: var(--accent); background: #1f2a36; }
-.ex2-nav button:active { transform: translateY(1px); }
-.ex2-nav svg { width: 13px; height: 13px; fill: var(--text); }
-.ex2-nav button:hover svg { fill: #fff; }
+.ex-nav button:hover { border-color: var(--accent); background: #1f2a36; }
+.ex-nav button:active { transform: translateY(1px); }
+.ex-nav svg { width: 13px; height: 13px; fill: var(--text); }
+.ex-nav button:hover svg { fill: #fff; }
 
 /* Nothing but the two arrows. A row of thirteen dots was a second thing to
    read before the reader had read the first. */
 
 /* The three panes. The picture gets the most room, the script enough to read
    without wrapping, and the words the space between them. */
-.ex2-body {
+.ex-body {
   flex: 1 1 auto;
   min-height: 0;
   display: grid;
@@ -1112,18 +1036,18 @@ details.control-group > summary:hover h3 { color: var(--text); }
   gap: 12px;
 }
 
-.ex2-stage, .ex2-words, .ex2-code {
+.ex-stage, .ex-words, .ex-code {
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   min-height: 0;
 }
 
-.ex2-stage { position: relative; overflow: hidden; background: #0d1117; }
-#explain2Canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.ex-stage { position: relative; overflow: hidden; background: #0d1117; }
+#explainCanvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 
-.ex2-words { padding: 20px 22px; overflow-y: auto; }
-.ex2-words p {
+.ex-words { padding: 20px 22px; overflow-y: auto; }
+.ex-words p {
   margin: 0 0 12px;
   color: var(--text);
   line-height: 1.7;
@@ -1133,35 +1057,35 @@ details.control-group > summary:hover h3 { color: var(--text); }
   text-align: justify;
   hyphens: auto;
 }
-.ex2-words p:last-child { margin-bottom: 0; }
-.ex2-words b { color: #fff; }
-.ex2-words em { color: var(--accent); font-style: normal; }
+.ex-words p:last-child { margin-bottom: 0; }
+.ex-words b { color: #fff; }
+.ex-words em { color: var(--accent); font-style: normal; }
 
 /* The script, whole, with the lines under discussion lit and the rest left
    dim — so the part being explained is read in the place it actually lives
    rather than as a detached snippet. */
-.ex2-code {
+.ex-code {
   overflow-y: auto;
   padding: 12px 0;
   font: 11.5px/1.55 ui-monospace, SFMono-Regular, Menlo, monospace;
   scroll-behavior: smooth;
 }
-.explain2-line { display: flex; gap: 10px; padding: 0 12px; white-space: pre; }
-.explain2-no {
+.explain-line { display: flex; gap: 10px; padding: 0 12px; white-space: pre; }
+.explain-no {
   flex: 0 0 auto;
   width: 26px;
   text-align: right;
   color: #3d4a58;
   user-select: none;
 }
-.explain2-src { color: #8b98a8; }
+.explain-src { color: #8b98a8; }
 
 /* Lines away from the step are faded rather than recoloured, so the script
    still reads as a syntax-highlighted file all the way down instead of turning
    grey outside the part being discussed. */
-.explain2-line { transition: opacity 140ms ease; opacity: 0.42; }
-.explain2-line.lit { opacity: 1; background: rgba(79, 179, 255, 0.07); }
-.explain2-line.lit .explain2-no { color: var(--accent); }
+.explain-line { transition: opacity 140ms ease; opacity: 0.42; }
+.explain-line.lit { opacity: 1; background: rgba(79, 179, 255, 0.07); }
+.explain-line.lit .explain-no { color: var(--accent); }
 
 /* Token colours. The same family GitHub uses on this background, which is
    where most people will have read Python last. */
@@ -1174,8 +1098,8 @@ details.control-group > summary:hover h3 { color: var(--text); }
 .tok-bi   { color: #79c0ff; }
 .tok-self { color: #ffa657; }
 
-.ex2-foot { margin: 0; font-size: 11.5px; color: var(--muted); }
-.ex2-foot code {
+.ex-foot { margin: 0; font-size: 11.5px; color: var(--muted); }
+.ex-foot code {
   background: var(--panel-2);
   border: 1px solid var(--border);
   border-radius: 4px;
@@ -1183,8 +1107,8 @@ details.control-group > summary:hover h3 { color: var(--text); }
 }
 
 @media (max-width: 1100px) {
-  .ex2 { height: auto; }
-  .ex2-body { grid-template-columns: 1fr 1fr; }
-  .ex2-stage { min-height: 320px; }
-  .ex2-code { grid-column: 1 / -1; max-height: 420px; }
+  .ex { height: auto; }
+  .ex-body { grid-template-columns: 1fr 1fr; }
+  .ex-stage { min-height: 320px; }
+  .ex-code { grid-column: 1 / -1; max-height: 420px; }
 }

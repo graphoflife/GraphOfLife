@@ -577,7 +577,7 @@ const StepView = {
       return;
     }
     const ids = view.stage.ids;
-    const done = Math.min(ids.length, Math.floor(view.since / 0.16));
+    const done = Math.min(ids.length, Math.floor(view.since / 0.055));
     if (view._mutated && view._mutated.size === done) return;
 
     view._mutated = new Map();

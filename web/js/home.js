@@ -92,13 +92,12 @@ const Home = {
       // Quieter than the Viewer's. At several thousand agents the default edge
       // opacity makes a bright mesh, and white text on a bright mesh is not
       // text. The agents stay as they are, so the structure still reads.
-      edgeAlpha: 0.36,
-      nodeAlpha: 0.95,
-      // A shade above the page behind it, so the backdrop reads as lit rather
-      // than as a hole. The veil over it does the work of keeping the title
-      // legible, so this does not have to be near black.
-      bgColorA: '#151d27',
-      bgColorB: '#151d27'
+      edgeAlpha: 0.52,
+      nodeAlpha: 1,
+      // The page's own colour. The veil above the canvas is mixed to match it
+      // exactly, so it darkens the graph without ever tinting the background.
+      bgColorA: '#0d1117',
+      bgColorB: '#0d1117'
     });
 
     if (window.ResizeObserver) {
