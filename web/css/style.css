@@ -869,7 +869,7 @@ details.control-group > summary:hover h3 { color: var(--text); }
   height: calc(100vh - 47px);
   min-height: 420px;
   overflow: hidden;
-  background: #0d1117;
+  background: #151d27;
 }
 
 /* Not interactive, and it says so: no pointer events at all, so a click or a
@@ -890,8 +890,8 @@ details.control-group > summary:hover h3 { color: var(--text); }
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(120% 90% at 50% 45%, rgba(13, 17, 23, 0.72) 0%, rgba(13, 17, 23, 0.25) 45%, rgba(13, 17, 23, 0) 75%),
-    linear-gradient(to top, rgba(13, 17, 23, 0.85) 0%, rgba(13, 17, 23, 0) 42%);
+    radial-gradient(120% 90% at 50% 45%, rgba(10, 14, 20, 0.58) 0%, rgba(10, 14, 20, 0.18) 45%, rgba(10, 14, 20, 0) 75%),
+    linear-gradient(to top, rgba(10, 14, 20, 0.72) 0%, rgba(10, 14, 20, 0) 42%);
 }
 
 .home-hero {

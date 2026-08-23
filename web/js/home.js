@@ -89,11 +89,16 @@ const Home = {
       showEdgeLegend: false,
       autoFit: false,        // framed here instead, so it can be held closer
       layoutCarry: true,
-      // Quieter than the Viewer's. At five thousand agents the default edge
+      // Quieter than the Viewer's. At several thousand agents the default edge
       // opacity makes a bright mesh, and white text on a bright mesh is not
       // text. The agents stay as they are, so the structure still reads.
-      edgeAlpha: 0.3,
-      nodeAlpha: 0.9
+      edgeAlpha: 0.36,
+      nodeAlpha: 0.95,
+      // A shade above the page behind it, so the backdrop reads as lit rather
+      // than as a hole. The veil over it does the work of keeping the title
+      // legible, so this does not have to be near black.
+      bgColorA: '#151d27',
+      bgColorB: '#151d27'
     });
 
     if (window.ResizeObserver) {
@@ -352,6 +357,13 @@ const Home = {
     this._sinceDraw = 0;
 
     this.layout.tick();
+
+    // Measure again if we have never had a size. resize() can run before the
+    // canvas has been laid out — during start-up, or while the view is still
+    // hidden — and the renderer then holds a width of zero, which the check
+    // below turns into "never draw anything". Nothing else would ever ask it
+    // to measure a second time, so the backdrop stayed blank for good.
+    if (!(this.renderer.cssWidth > 0)) this.resize();
 
     // The camera does not depend on which frame is showing, so it keeps
     // gliding through the wait rather than stalling for it.
