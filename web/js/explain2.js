@@ -40,7 +40,7 @@ const Explain2 = {
    */
   STEPS: [
     {
-      title: 'An Individual Node with a Brain',
+      title: 'An Individual Node with a Brain', intro: true,
       stage: 'repro.observe', solo: true, effect: 'brains',
       code: ['class Brain:', 'w += mask * np.random.randn'],
       text: `A node is one agent. It holds tokens and a small neural network.
@@ -51,7 +51,7 @@ const Explain2 = {
         same way.</p>`
     },
     {
-      title: 'A Network of Individuals',
+      title: 'A Network of Individuals', intro: true,
       stage: 'repro.observe', effect: 'brains arrive',
       code: ['# ---- the starting graph ----', 'self.next_id = AGENTS'],
       text: `Agents are joined in a ring to their nearest few, then a fifth of
@@ -60,7 +60,7 @@ const Explain2 = {
         again: every rule after this only moves tokens between agents.</p>`
     },
     {
-      title: 'Start of Simulation Loop',
+      title: 'Start of Simulation Loop', intro: true,
       stage: 'repro.observe', effect: 'brains',
       code: ['    def step(self) -> None:', '        self.game()'],
       text: `One iteration is two phases: reproduction, then the game. Each ends
@@ -82,7 +82,7 @@ const Explain2 = {
     },
     {
       title: 'Message Exchange',
-      stage: 'repro.observe', effect: 'eyes messages',
+      stage: 'repro.observe', effect: 'brains messages',
       code: ['    def write_messages(self, u: int', "outbox.setdefault(v, {})[u] ="],
       text: `The same pass decides what to say. Each agent writes a short vector
         to every neighbour, and one to itself.
@@ -93,7 +93,7 @@ const Explain2 = {
     },
     {
       title: 'Reproduction and Handover',
-      stage: 'repro.born',
+      stage: 'repro.born', effect: 'brains',
       code: ['# ---- how much of me goes into a child ----', 'self.unlink(u, v)'],
       text: `An agent spends a share of its tokens on a child. The child starts
         with exactly that; no tokens are created.
@@ -104,7 +104,7 @@ const Explain2 = {
     },
     {
       title: 'Elimination',
-      stage: 'repro.cleanup',
+      stage: 'repro.cleanup', effect: 'brains',
       code: ['    def cleanup(self) -> None:', 'self.tokens[random.choice(survivors)] += 1'],
       text: `Two removals, in order, after every phase.
         <p>First, agents holding no tokens. Then, of what remains, everything
@@ -123,7 +123,7 @@ const Explain2 = {
     },
     {
       title: 'Message Exchange',
-      stage: 'game.observe', effect: 'eyes messages',
+      stage: 'game.observe', effect: 'brains messages',
       code: ['            self.write_messages(u, targets, y, outbox)',
              '            self.write_messages(u, targets, y, outbox)'],
       text: `Messages again, from that same pass, and delivered at the end of
@@ -133,7 +133,7 @@ const Explain2 = {
     },
     {
       title: 'Colonel Blotto Game',
-      stage: 'game.stake', effect: 'stakes',
+      stage: 'game.stake', effect: 'brains stakes',
       code: ['# ---- everyone stakes at once ----', 'self.unlink(a, b)'],
       text: `Every agent stakes its entire pile across itself and its
         neighbours, either spread by score or all on one node. Which of the two
@@ -144,7 +144,7 @@ const Explain2 = {
     },
     {
       title: 'Stronger Agents Conquer Nodes',
-      stage: 'game.conquer', effect: 'conquer',
+      stage: 'game.conquer', effect: 'brains conquer',
       code: ['def resolve(staked: dict', '    return hegemon'],
       text: `The largest staker on a node is the <b>hegemon</b> and usually
         takes it.
@@ -160,7 +160,7 @@ const Explain2 = {
     },
     {
       title: 'Elimination',
-      stage: 'game.cleanup',
+      stage: 'game.cleanup', effect: 'brains',
       code: ['    def cleanup(self) -> None:', 'self.tokens[random.choice(survivors)] += 1'],
       text: `The same two removals, because cleanup runs after both phases.
         <p>Cutting the unused links is what usually strands an agent: one whose
@@ -168,7 +168,7 @@ const Explain2 = {
     },
     {
       title: 'Mutation',
-      stage: 'game.mutate',
+      stage: 'game.mutate', effect: 'brains mutate',
       code: ['# ---- everyone mutates ----', 'brain.mutate()'],
       text: `Every surviving brain is jittered — not only newborns, not only
         winners. Every agent, every iteration.
@@ -449,6 +449,7 @@ Object.assign(Explain2, {
     if (this.active && this.view && this.stages) {
       StepView.tick(this.view, dt);
       StepView.gaze(this.view, now / 1000);
+      StepView.mutating(this.view, now / 1000);
       StepView.draw(this.view, now / 1000, dt);
     }
     requestAnimationFrame(t => this.frame(t));

@@ -31,6 +31,10 @@ const StepView = {
   // read as motion, high enough not to feel like lag.
   EASE: { position: 6.5, alpha: 4.5, camera: 3.2 },
 
+  // How long a step holds its opening picture before the thing it is about
+  // happens: births appear, the dead depart. Long enough to see what changed.
+  LINGER: 2.0,
+
   create(canvas) {
     const view = {
       canvas,
@@ -89,6 +93,20 @@ const StepView = {
 
     const stage = view.stage;
     const present = new Set(stage.ids);
+
+    // The removed are drawn crossed out for a moment before they leave, so the
+    // rule can be read before its result. They are in the stage — cleanup
+    // snapshots the world it acted on — so taking them out is a matter of
+    // dropping them from `present` once the pause is over.
+    const dying = stage.marks && stage.marks.removed;
+    if (dying && dying.length && view.since > this.LINGER) {
+      for (const id of dying) present.delete(id);
+    }
+
+    // Newborns arrive a beat after the graph they are born into, so the step
+    // starts on the picture the previous one ended on.
+    const waiting = stage.step === 'repro.born' && view.since < this.LINGER
+      ? new Set(stage.marks.born || []) : null;
     const most = Math.max(1, ...stage.tokens);
     const size = new Map(stage.ids.map((id, i) =>
       [id, 9 + 15 * Math.sqrt(stage.tokens[i] / most)]));
@@ -96,6 +114,8 @@ const StepView = {
     const close = (was, want, rate) => was + (want - was) * Math.min(1, rate * dt);
 
     for (const id of stage.ids) {
+      if (waiting && waiting.has(id)) continue;
+      if (!present.has(id)) continue;
       const target = view.layout.pos.get(id);
       if (!target) continue;
       let node = view.shown.get(id);
@@ -205,6 +225,13 @@ const StepView = {
       winner: new Set((marks.taken || []).map(t => t[1])),
       pairs: marks.taken || [],
       flow: new Map((marks.flow || []).map(f => [key(f[0], f[1]), f[2]])),
+      // Who sent what to whom, which the undirected total cannot say. Both
+      // ends of a link stake on each other, and showing only the sum made it
+      // look like tokens travel one way.
+      sent: (marks.staked || []).reduce((m, [to, from, amount]) => {
+        if (from !== to) m.set(`${from}>${to}`, amount);
+        return m;
+      }, new Map()),
       key
     };
   },
@@ -258,6 +285,7 @@ const StepView = {
       let colour = this.ink.node;
       if (role.born.has(id)) colour = this.ink.good;
       else if (role.taken.has(id)) colour = this.ink.rich;
+      if (view._mutating === id) colour = '#f2cd5c';
 
       ctx.globalAlpha = p.alpha;
       if (role.winner.has(id) || role.parent.has(id)) {
@@ -276,7 +304,7 @@ const StepView = {
       if (role.removed.has(id)) {
         this._cross(ctx, p);
       } else if (view.effects.has('brains')) {
-        this._brain(ctx, p, time, i);
+        this._brain(ctx, p, time, i, view._mutating === id ? view._mutatingUnit : -1);
       } else if (view.effects.has('eyes')) {
         this._eye(ctx, p, time, i, view, id);
       }
@@ -302,9 +330,12 @@ const StepView = {
    * and what should be read is where the pupil is pointing.
    */
   _eye(ctx, p, time, seed, view, id) {
-    const period = 3.4 + (seed % 9) * 0.29;
+    // Scanning, not staring: they blink often and the gaze moves briskly, so a
+    // field of them reads as a neighbourhood being read rather than a crowd
+    // looking at nothing.
+    const period = 1.15 + (seed % 9) * 0.13;
     const phase = (time + seed * 1.37) % period;
-    const open = phase > 0.16 ? 1 : Math.abs(Math.cos((Math.PI * phase) / 0.16));
+    const open = phase > 0.17 ? 1 : Math.abs(Math.cos((Math.PI * phase) / 0.17));
     const ball = p.r * 0.62;
 
     // Where it is looking: a neighbour, changing every so often, or itself.
@@ -329,8 +360,14 @@ const StepView = {
     ctx.fill();
   },
 
-  /** A few layers of dots: the smallest thing that reads as a network. */
-  _brain(ctx, p, time, seed) {
+  /**
+   * The network inside an agent, drawn nearly to the edge of it.
+   *
+   * One size everywhere it appears, so it reads as the same object from the
+   * opening step to the last. `hot` lights one unit red, which is how mutation
+   * is shown.
+   */
+  _brain(ctx, p, time, seed, hot = -1) {
     const cols = [[-1, 2], [0, 3], [1, 2]];
     ctx.save();
     ctx.translate(p.x, p.y);
@@ -340,7 +377,7 @@ const StepView = {
     cols.forEach(([cx, count], ci) => {
       const layer = [];
       for (let i = 0; i < count; i++) {
-        layer.push({ x: cx * p.r * 0.46, y: (i - (count - 1) / 2) * p.r * 0.4 });
+        layer.push({ x: cx * p.r * 0.62, y: (i - (count - 1) / 2) * p.r * 0.52 });
       }
       layers.push(layer);
       if (ci > 0) {
@@ -351,8 +388,9 @@ const StepView = {
     });
     layers.flat().forEach((q, i) => {
       const lit = 0.5 + 0.5 * Math.max(0, Math.sin(time * 2.6 + seed - i * 0.5));
-      ctx.fillStyle = `rgba(10,14,20,${lit})`;
-      ctx.beginPath(); ctx.arc(q.x, q.y, p.r * 0.11, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = (i === hot) ? '#ff5b52' : `rgba(10,14,20,${lit})`;
+      ctx.beginPath(); ctx.arc(q.x, q.y, p.r * (i === hot ? 0.19 : 0.145), 0, Math.PI * 2);
+      ctx.fill();
     });
     ctx.restore();
   },
@@ -390,22 +428,37 @@ const StepView = {
       return;
     }
     if (view.effects.has('stakes')) {
-      // One dot per token, so the size of a stake is the thing you see.
-      ctx.fillStyle = this.ink.pale;
+      // These dots are the tokens themselves in transit, so they are the same
+      // green they are everywhere else, and each direction of a link is drawn
+      // separately — both ends stake on each other.
+      ctx.save();
+      ctx.fillStyle = this.ink.good;
+      ctx.shadowColor = 'rgba(127, 212, 160, 0.9)';
+      ctx.shadowBlur = 6;
       for (const [a, b] of view.stage.edges) {
-        const carried = role.flow.get(role.key(a, b)) || 0;
-        if (!carried) continue;
         const p = place(a), q = place(b);
         if (!p || !q) continue;
-        const dots = Math.min(9, carried);
-        ctx.globalAlpha = Math.min(p.alpha, q.alpha);
-        for (let k = 0; k < dots; k++) {
-          const at = (along + k / dots) % 1;
-          ctx.beginPath();
-          ctx.arc(p.x + (q.x - p.x) * at, p.y + (q.y - p.y) * at, 2.6, 0, Math.PI * 2);
-          ctx.fill();
+        const alpha = Math.min(p.alpha, q.alpha);
+        for (const [from, to, at, amount] of [
+          [p, q, along, role.sent.get(`${a}>${b}`) || 0],
+          [q, p, (along + 0.5) % 1, role.sent.get(`${b}>${a}`) || 0]
+        ]) {
+          if (!amount) continue;
+          const dots = Math.min(8, amount);
+          // Offset to one side, so the two directions do not sit on each other.
+          const dx = to.x - from.x, dy = to.y - from.y;
+          const len = Math.hypot(dx, dy) || 1;
+          const ox = (-dy / len) * 4, oy = (dx / len) * 4;
+          ctx.globalAlpha = alpha;
+          for (let k = 0; k < dots; k++) {
+            const t = (at + k / dots) % 1;
+            ctx.beginPath();
+            ctx.arc(from.x + dx * t + ox, from.y + dy * t + oy, 3, 0, Math.PI * 2);
+            ctx.fill();
+          }
         }
       }
+      ctx.restore();
       ctx.globalAlpha = 1;
       return;
     }
@@ -437,6 +490,8 @@ const StepView = {
    * afterwards.
    */
   _tokens(ctx, view, place, time, w, h) {
+    // Nothing is in orbit during the staking: every token is on a link.
+    if (view.effects.has('stakes')) return;
     const stage = view.stage;
     const most = Math.max(1, ...stage.tokens);
     // Only the step that introduces them flies them in. The step after holds
@@ -500,6 +555,22 @@ const StepView = {
   },
 
   /**
+   * Whose turn it is to be mutated, one after another.
+   *
+   * Every brain is jittered in the same instant; drawn that way it is a single
+   * flicker across the whole graph and reads as nothing. Taken one agent at a
+   * time it reads as what it is.
+   */
+  mutating(view, seconds) {
+    if (!view.stage || !view.effects.has('mutate')) { view._mutating = null; return; }
+    const ids = view.stage.ids;
+    if (!ids.length) return;
+    const at = Math.floor(seconds / 0.28) % ids.length;
+    view._mutating = ids[at];
+    view._mutatingUnit = Math.floor(seconds / 0.28 + at) % 7;
+  },
+
+  /**
    * Who each agent is looking at, changing every so often.
    *
    * Worked out once per stage rather than per frame, so a gaze holds still
@@ -513,7 +584,7 @@ const StepView = {
       if (adj.has(b)) adj.get(b).push(a);
     }
     view._gaze = new Map();
-    const turn = Math.floor(seconds / 1.6);
+    const turn = Math.floor(seconds / 0.62);
     for (const id of view.stage.ids) {
       const near = adj.get(id) || [];
       const targets = [...near, id];                 // itself, last
