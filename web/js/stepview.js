@@ -25,6 +25,7 @@ const StepView = {
     warn: '#e8896b',
     eye: '#05070a',
     iris: '#5ab6ef',
+    lost: '#ef5f52',
     white: '#f2f6fb'
   },
 
@@ -38,6 +39,11 @@ const StepView = {
 
   // How many dots the richest agent in the run is drawn with.
   TOKEN_DOTS: 15,
+
+  // A conquest: how long a brain takes to travel, and how far apart the
+  // journeys are started. Staggered because a hundred nodes changing colour on
+  // the same frame reads as a scene change rather than as a hundred arrivals.
+  CONQUEST: { travel: 1.7, stagger: 1.3, fade: 0.55 },
 
   // How long a step holds its opening picture before the thing it is about
   // happens: births appear, the dead depart. Long enough to see what changed.
@@ -169,6 +175,7 @@ const StepView = {
 
     this._edges(ctx, view, place, role);
     this._scan(ctx, view, place);
+    this._conquest(view, role);
     this._nodes(ctx, view, place, role, time);
     this._effect(ctx, view, place, role, time, w, h);
   },
@@ -293,7 +300,14 @@ const StepView = {
 
       let colour = this.ink.node;
       if (role.born.has(id)) colour = this.ink.good;
-      else if (role.taken.has(id)) colour = this.ink.rich;
+      else if (view._conquest) {
+        // Green the moment the step opens for anyone who gets to copy itself,
+        // and red only once somebody else's brain has actually arrived. An
+        // agent can be both: it wins a neighbour and loses its own node.
+        if (role.winner.has(id)) colour = this.ink.good;
+        const trip = view._conquest.get(id);
+        if (trip && trip.t >= 1) colour = this.ink.lost;
+      } else if (role.taken.has(id)) colour = this.ink.rich;
       if (view._mutated && view._mutated.has(id)) colour = '#f2cd5c';
 
       ctx.globalAlpha = p.alpha;
@@ -534,17 +548,6 @@ const StepView = {
     // same orbit they hold from then on.
     this._tokens(ctx, view, place, time, w, h);
 
-    if (view.effects.has('messages')) {
-      for (const [a, b] of view.stage.edges) {
-        const p = place(a), q = place(b);
-        if (!p || !q) continue;
-        ctx.globalAlpha = Math.min(p.alpha, q.alpha);
-        this._envelope(ctx, p.x + (q.x - p.x) * along, p.y + (q.y - p.y) * along, 5);
-        this._envelope(ctx, q.x + (p.x - q.x) * along, q.y + (p.y - q.y) * along, 5, 0.6);
-      }
-      ctx.globalAlpha = 1;
-      return;
-    }
     if (view.effects.has('stakes')) {
       // These dots are the tokens themselves in transit, so they are the same
       // green they are everywhere else, and each direction of a link is drawn
@@ -580,19 +583,61 @@ const StepView = {
       ctx.globalAlpha = 1;
       return;
     }
-    if (view.effects.has('conquer')) {
-      // The winner's brain travelling into the node it took.
-      const trip = Math.min(1, view.since / 2.2);
-      for (const [node, winner] of role.pairs) {
-        const from = place(winner), to = place(node);
+    if (view.effects.has('conquer') && view._conquest) {
+      // The winner's brain travelling into the node it took, lit from behind
+      // so it can be followed across a crowded graph. Without the backlight it
+      // is one more small dark network among forty of them.
+      for (const [node, trip] of view._conquest) {
+        const from = place(trip.winner), to = place(node);
         if (!from || !to) continue;
-        const x = from.x + (to.x - from.x) * trip;
-        const y = from.y + (to.y - from.y) * trip - Math.sin(trip * Math.PI) * 14;
-        ctx.globalAlpha = Math.min(from.alpha, to.alpha) * (trip < 1 ? 1 : 0.4);
-        this._brain(ctx, { x, y, r: Math.max(6, to.r * 0.7) }, time, node);
+        const t = trip.t;
+        const x = from.x + (to.x - from.x) * t;
+        const y = from.y + (to.y - from.y) * t - Math.sin(t * Math.PI) * 14;
+        const r = Math.max(6, to.r * 0.7);
+
+        // Gone shortly after it lands: from then on the node is drawing the
+        // brain itself, and two copies of it in one place is just a smudge.
+        const done = Math.max(0, 1 - trip.after / this.CONQUEST.fade);
+        if (done <= 0) continue;
+        const near = Math.min(from.alpha, to.alpha) * done;
+
+        const pulse = 0.55 + 0.45 * Math.sin(time * 4.4 + this._hash(node) * Math.PI * 2);
+        const halo = ctx.createRadialGradient(x, y, r * 0.5, x, y, r * 2.1);
+        halo.addColorStop(0, `rgba(255, 255, 255, ${(0.55 + 0.4 * pulse).toFixed(3)})`);
+        halo.addColorStop(0.55, `rgba(255, 255, 255, ${(0.22 * pulse).toFixed(3)})`);
+        halo.addColorStop(1, 'rgba(255, 255, 255, 0)');
+        ctx.globalAlpha = near;
+        ctx.fillStyle = halo;
+        ctx.beginPath(); ctx.arc(x, y, r * 2.1, 0, Math.PI * 2); ctx.fill();
+
+        this._brain(ctx, { x, y, r }, time, node);
       }
       ctx.globalAlpha = 1;
     }
+  },
+
+  /**
+   * How far each conquering brain has got, and whether it has landed.
+   *
+   * Kept apart from the drawing because the node colours depend on it: a node
+   * turns over when the brain reaches it, not when the step opens. Showing the
+   * result from the first frame gave away the answer before the journey that
+   * decides it — and the winners, which are green from the first frame, are
+   * exactly the ones the reader should be watching set out.
+   */
+  _conquest(view, role) {
+    if (!view.effects.has('conquer')) { view._conquest = null; return; }
+    const m = new Map();
+    for (const [node, winner] of role.pairs) {
+      const start = this._hash(node * 13 + 5) * this.CONQUEST.stagger;
+      const run = (view.since - start) / this.CONQUEST.travel;
+      m.set(node, {
+        winner,
+        t: Math.max(0, Math.min(1, run)),
+        after: Math.max(0, view.since - start - this.CONQUEST.travel)
+      });
+    }
+    view._conquest = m;
   },
 
   /**
@@ -674,23 +719,6 @@ const StepView = {
     });
     ctx.restore();
     ctx.globalAlpha = 1;
-  },
-
-  _envelope(ctx, x, y, s, alpha = 1) {
-    ctx.save();
-    ctx.globalAlpha *= alpha;
-    ctx.fillStyle = '#eef2f8';
-    ctx.strokeStyle = 'rgba(20,26,34,0.85)';
-    ctx.lineWidth = 0.8;
-    ctx.beginPath();
-    ctx.rect(x - s, y - s * 0.66, s * 2, s * 1.32);
-    ctx.fill(); ctx.stroke();
-    ctx.beginPath();
-    ctx.moveTo(x - s, y - s * 0.66);
-    ctx.lineTo(x, y + s * 0.14);
-    ctx.lineTo(x + s, y - s * 0.66);
-    ctx.stroke();
-    ctx.restore();
   },
 
   /**

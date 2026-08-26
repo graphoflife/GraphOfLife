@@ -38,6 +38,38 @@ const Explain = {
    * and last line to light up — text and not line numbers, so editing
    * explain_minimal.py cannot silently point a step at the wrong place.
    */
+  /**
+   * The emblem behind each step's words.
+   *
+   * One light grey on nothing — no second colour, no fill behind the strokes —
+   * so it reads as a watermark on the card rather than as an illustration
+   * competing with the graph. Drawn here rather than kept as files because
+   * they are six shapes and belong with the step that uses them.
+   */
+  MARK: '#c8cfd9',
+  EMBLEMS: {
+    eye: `<path d="M2.2 12C5.6 6.8 8.7 4.6 12 4.6s6.4 2.2 9.8 7.4c-3.4 5.2-6.5 7.4-9.8 7.4S5.6 17.2 2.2 12z"/>
+          <circle cx="12" cy="12" r="3.5" FILL/>`,
+    heart: `<path d="M12 21.2S2.6 14.9 2.6 8.9A5.4 5.4 0 0 1 12 5.6a5.4 5.4 0 0 1 9.4 3.3c0 6-9.4 12.3-9.4 12.3z" FILL/>`,
+    skull: `<path fill-rule="evenodd" d="M12 1.8c-5 0-8.7 3.6-8.7 8.2 0 2.6 1.2 4.5 2.7 5.6v2.2c0 .9.7 1.6 1.6 1.6h.7v2.8h2.1v-2.8h3.2v2.8h2.1v-2.8h.7c.9 0 1.6-.7 1.6-1.6v-2.2c1.5-1.1 2.7-3 2.7-5.6 0-4.6-3.7-8.2-8.7-8.2zM8.6 8.1a2.1 2.1 0 1 0 0 4.2 2.1 2.1 0 0 0 0-4.2zm6.8 0a2.1 2.1 0 1 0 0 4.2 2.1 2.1 0 0 0 0-4.2zM12 13.4l1.3 2.6h-2.6z" FILL/>`,
+    swords: `<path d="M4 3.5 18.5 19.5M20 3.5 5.5 19.5M16.9 14.5 13.7 17.5M7.1 14.5 10.3 17.5M15.3 16 18.5 19.5M8.7 16 5.5 19.5"/>`,
+    flag: `<path d="M5.5 2.6V21.4"/><path d="M5.5 3.9c4.1-2.1 7.2 2 11.3 0v8.2c-4.1 2.1-7.2-2-11.3 0z" FILL/>`,
+    dna: `<path d="M7 2.2C7 7 17 7 17 12s-10 5-10 9.8M17 2.2C17 7 7 7 7 12s10 5 10 9.8M8.6 5.6h6.8M7.2 8.8h9.6M7.2 15.2h9.6M8.6 18.4h6.8"/>`
+  },
+
+  /** One emblem, as a background-image the card can wear. */
+  emblem(name) {
+    const body = this.EMBLEMS[name];
+    if (!body) return 'none';
+    const svg =
+      `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" ` +
+      `fill="none" stroke="${this.MARK}" stroke-width="1.6" ` +
+      `stroke-linecap="round" stroke-linejoin="round" opacity="0.17">` +
+      body.replace(/FILL/g, `fill="${this.MARK}" stroke="none"`) +
+      `</svg>`;
+    return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
+  },
+
   STEPS: [
     {
       title: 'An Individual Node with a Brain', intro: true,
@@ -70,7 +102,7 @@ const Explain = {
     },
 
     {
-      title: 'Observation — Reproduction Phase',
+      title: 'Observation — Reproduction Phase', emblem: 'eye',
       stage: 'repro.observe', effect: 'eyes',
       code: ['    def observe(self, u: int', 'return self.brains[u].forward(x)'],
       text: `Each agent reads its whole neighbourhood in one pass: its own
@@ -78,21 +110,13 @@ const Explain = {
         phase.
         <p>Tokens and degrees are logged, so what counts is the order of
         magnitude. An agent observes itself as well — that is how it knows what
-        it holds.</p>`
+        it holds.</p>
+        <p>The same pass decides what to say. Each agent writes a short vector
+        to every neighbour and one to itself, delivered at the end of the phase
+        so everyone reads the same generation.</p>`
     },
     {
-      title: 'Message Exchange',
-      stage: 'repro.observe', effect: 'brains messages',
-      code: ['    def write_messages(self, u: int', "outbox.setdefault(v, {})[u] ="],
-      text: `The same pass decides what to say. Each agent writes a short vector
-        to every neighbour, and one to itself.
-        <p>Both ends write, so each link carries one message each way. The
-        message to itself is its only memory.</p>
-        <p>Messages are delivered at the end of the phase, so every agent reads
-        the same generation.</p>`
-    },
-    {
-      title: 'Reproduction and Handover',
+      title: 'Reproduction and Handover', emblem: 'heart',
       stage: 'repro.born', effect: 'brains',
       code: ['# ---- how much of me goes into a child ----', 'self.unlink(u, v)'],
       text: `An agent spends a share of its tokens on a child. The child starts
@@ -103,7 +127,7 @@ const Explain = {
         <p>Newborns green, new and handed links orange.</p>`
     },
     {
-      title: 'Elimination',
+      title: 'Elimination', emblem: 'skull',
       stage: 'repro.cleanup', effect: 'brains',
       code: ['    def cleanup(self) -> None:', 'self.tokens[random.choice(survivors)] += 1'],
       text: `Two removals, in order, after every phase.
@@ -114,26 +138,17 @@ const Explain = {
         survivors.</p>`
     },
     {
-      title: 'Observation — Game Phase',
+      title: 'Observation — Game Phase', emblem: 'eye',
       stage: 'game.observe', effect: 'eyes',
       code: ['    def game(self) -> None:', 'y = self.observe(u, targets)'],
-      text: `The second phase begins with the same single pass.
+      text: `The second phase begins with the same single pass, messages and
+        all.
         <p>The graph has changed since the first: children have been born,
-        links have moved, the starved are gone.</p>`
+        links have moved, the starved are gone. What an agent writes now is
+        what its neighbours read in the next reproduction phase.</p>`
     },
     {
-      title: 'Message Exchange',
-      stage: 'game.observe', effect: 'brains messages',
-      after: '    def game(self) -> None:',
-      code: ['            self.write_messages(u, targets, y, outbox)',
-             '            self.write_messages(u, targets, y, outbox)'],
-      text: `Messages again, from that same pass, and delivered at the end of
-        the phase as before.
-        <p>What an agent writes now is what its neighbours will read in the next
-        reproduction phase.</p>`
-    },
-    {
-      title: 'Colonel Blotto Game',
+      title: 'Colonel Blotto Game', emblem: 'swords',
       stage: 'game.stake', effect: 'brains stakes',
       code: ['# ---- everyone stakes at once ----', 'self.unlink(a, b)'],
       text: `Every agent stakes its entire pile across itself and its
@@ -144,7 +159,7 @@ const Explain = {
         <p>Any link that carried no tokens is then cut.</p>`
     },
     {
-      title: 'Stronger Agents Conquer Nodes',
+      title: 'Stronger Agents Conquer Nodes', emblem: 'flag',
       stage: 'game.conquer', effect: 'brains conquer',
       code: ['def resolve(staked: dict', '    return hegemon'],
       text: `The largest staker on a node is the <b>hegemon</b> and usually
@@ -160,7 +175,7 @@ const Explain = {
         selection step in the algorithm.</p>`
     },
     {
-      title: 'Elimination',
+      title: 'Elimination', emblem: 'skull',
       stage: 'game.cleanup', effect: 'brains',
       code: ['    def cleanup(self) -> None:', 'self.tokens[random.choice(survivors)] += 1'],
       text: `The same two removals, because cleanup runs after both phases.
@@ -168,7 +183,7 @@ const Explain = {
         every connection went unused is left attached to nothing.</p>`
     },
     {
-      title: 'Mutation',
+      title: 'Mutation', emblem: 'dna',
       stage: 'game.mutate', effect: 'brains mutate',
       code: ['# ---- everyone mutates ----', 'brain.mutate()'],
       text: `Every surviving brain is jittered — not only newborns, not only
@@ -399,22 +414,8 @@ Object.assign(Explain, {
    * live at those numbers now.
    */
   region(step) {
-    // A step may name a line it has to come after. Some of the script's calls
-    // read identically in both phases — the message write is the same line in
-    // reproduction as in the game — so without this the second one would land
-    // on the first one's copy.
-    let start = 0;
-    if (step.after) {
-      start = this.lines.findIndex(l => l.includes(step.after));
-      if (start < 0) return null;
-    }
-    const found = this.lines.slice(start).findIndex(l => l.includes(step.code[0]));
-    if (found < 0) return null;
-    const from = start + found;
-    // Naming the same line twice means a region of exactly that one line,
-    // rather than a search for a second copy of it further down.
-    if (step.code[0] === step.code[1]) return { from, to: from };
-
+    const from = this.lines.findIndex(l => l.includes(step.code[0]));
+    if (from < 0) return null;
     const rest = this.lines.slice(from);
     const offset = rest.findIndex((l, i) => i > 0 && l.includes(step.code[1]));
     if (offset < 0) return null;
@@ -469,6 +470,11 @@ Object.assign(Explain, {
       `<h3 class="ex-title">${step.title}</h3>` +
       `<p class="ex-step">${where}</p>` +
       `<p>${step.text}</p>`;
+    this.textEl.style.backgroundImage = this.emblem(step.emblem);
+    // Only the emblem needs the room it takes; a step without one gets its
+    // full width back.
+    this.textEl.style.paddingRight = step.emblem ? '' : '17px';
+    this.textEl.scrollTop = 0;
     // The bar keeps only how far through the whole walk you are; the step's own
     // number lives with its words.
     this.countEl.textContent = `${this.at + 1} of ${this.STEPS.length}`;

@@ -994,7 +994,7 @@ details.control-group > summary:hover h3 { color: var(--text); }
    are naming — the words, not the row of three panes. */
 .ex-title {
   margin: 0 0 2px;
-  font-size: 20px;
+  font-size: 17px;
   font-weight: 600;
   line-height: 1.25;
   color: var(--text);
@@ -1002,8 +1002,8 @@ details.control-group > summary:hover h3 { color: var(--text); }
   letter-spacing: 0;
   text-align: left;
 }
-.ex-words p.ex-step {
-  margin: 0 0 14px;
+.ex-note p.ex-step {
+  margin: 0 0 10px;
   font-size: 12px;
   color: var(--accent);
   letter-spacing: 0.04em;
@@ -1035,11 +1035,14 @@ details.control-group > summary:hover h3 { color: var(--text); }
   flex: 1 1 auto;
   min-height: 0;
   display: grid;
-  grid-template-columns: 1.25fr 0.85fr 1fr;
+  /* The picture takes the width the picture and the words used to share. The
+     words are on it now, so the graph is not squeezed into a third of the row
+     to leave room for a column of text beside it. */
+  grid-template-columns: 2.1fr 1fr;
   gap: 12px;
 }
 
-.ex-stage, .ex-words, .ex-code {
+.ex-stage, .ex-code {
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -1049,20 +1052,42 @@ details.control-group > summary:hover h3 { color: var(--text); }
 .ex-stage { position: relative; overflow: hidden; background: #0d1117; }
 #explainCanvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 
-.ex-words { padding: 20px 22px; overflow-y: auto; }
-.ex-words p {
-  margin: 0 0 12px;
+/* The step's words, laid on the picture the way the front page lays its note
+   on the backdrop: a translucent card in the corner rather than a pane of its
+   own. The step's emblem is the card's background — one light grey on nothing,
+   so it reads as a watermark and not as an illustration. */
+.ex-note {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  right: 20px;
+  max-width: 520px;
+  max-height: calc(100% - 40px);
+  overflow-y: auto;
+  padding: 15px 17px;
+  padding-right: 112px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-left: 2px solid var(--accent);
+  border-radius: var(--radius);
+  background-color: rgba(13, 17, 23, 0.72);
+  backdrop-filter: blur(7px);
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: auto 74px;
+}
+.ex-note p {
+  margin: 0 0 10px;
   color: var(--text);
-  line-height: 1.7;
-  font-size: 15.5px;
+  line-height: 1.62;
+  font-size: 13.5px;
   /* Justified, with hyphenation on so the ragged gaps justification usually
      opens up in a narrow column do not appear. */
   text-align: justify;
   hyphens: auto;
 }
-.ex-words p:last-child { margin-bottom: 0; }
-.ex-words b { color: #fff; }
-.ex-words em { color: var(--accent); font-style: normal; }
+.ex-note p:last-child { margin-bottom: 0; }
+.ex-note b { color: #fff; }
+.ex-note em { color: var(--accent); font-style: normal; }
 
 /* The script, whole, with the lines under discussion lit and the rest left
    dim — so the part being explained is read in the place it actually lives
