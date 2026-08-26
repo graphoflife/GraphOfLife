@@ -250,6 +250,18 @@ Object.assign(Explain, {
 
       this.renderCode();
       this.view = StepView.create(this.canvas);
+
+      // One scale for the green dots across the whole walk-through. The
+      // richest holding in each stage, at the 95th percentile of those: a
+      // single freak pile in one stage should not shrink every other step's
+      // ring, and a step where nobody is rich should not inflate it.
+      const peaks = this.stages
+        .map(stage => Math.max(0, ...stage.tokens))
+        .sort((a, b) => a - b);
+      this.view.tokenRef = peaks.length
+        ? peaks[Math.min(peaks.length - 1, Math.floor(peaks.length * 0.95))]
+        : 1;
+
       this.showStep(0, { carry: false });
     } catch (err) {
       this.textEl.innerHTML =

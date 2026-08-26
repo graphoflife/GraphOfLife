@@ -23,13 +23,21 @@ const StepView = {
     pale: '#e8eef8',
     good: '#7fd4a0',
     warn: '#e8896b',
-    eye: '#101720',
+    eye: '#05070a',
+    iris: '#5ab6ef',
     white: '#f2f6fb'
   },
 
   // How fast a value closes the gap to its target, per second. Low enough to
   // read as motion, high enough not to feel like lag.
   EASE: { position: 6.5, alpha: 4.5, camera: 3.2 },
+
+  // How long an eye holds one neighbour before moving to the next. The scan
+  // cone is sized to arrive exactly at the end of it.
+  GAZE: 0.9,
+
+  // How many dots the richest agent in the run is drawn with.
+  TOKEN_DOTS: 15,
 
   // How long a step holds its opening picture before the thing it is about
   // happens: births appear, the dead depart. Long enough to see what changed.
@@ -160,6 +168,7 @@ const StepView = {
     const role = this._roles(view.stage);
 
     this._edges(ctx, view, place, role);
+    this._scan(ctx, view, place);
     this._nodes(ctx, view, place, role, time);
     this._effect(ctx, view, place, role, time, w, h);
   },
@@ -310,8 +319,8 @@ const StepView = {
         // Resolved here, where screen positions exist. Passing the layout's
         // own coordinates in meant every pupil was aimed at a point in a
         // different space — which put all of them in the same corner.
-        const at = view._gaze && view._gaze.get(id);
-        this._eye(ctx, p, time, i, at === undefined ? null : place(at));
+        const look = view._gaze && view._gaze.get(id);
+        this._eye(ctx, p, time, id, look ? place(look.at) : null);
       }
       ctx.globalAlpha = 1;
     });
@@ -329,22 +338,32 @@ const StepView = {
   },
 
   /**
-   * An eye: a white ball with a dark pupil, and nothing else.
-   *
-   * No outline and no lens. At this size an outline is most of what you see,
-   * and what should be read is where the pupil is pointing.
+   * A number in [0, 1) from an id. Only has to look unrelated to its
+   * neighbours', which the golden ratio does about as well as anything.
    */
-  _eye(ctx, p, time, seed, look) {
-    // Scanning, not staring: they blink often and the gaze moves briskly, so a
-    // field of them reads as a neighbourhood being read rather than a crowd
-    // looking at nothing.
-    const period = 1.15 + (seed % 9) * 0.13;
-    const phase = (time + seed * 1.37) % period;
+  _hash(id) {
+    const x = (id + 1) * 0.6180339887498949;
+    return x - Math.floor(x);
+  },
+
+  /**
+   * An eye: a white ball, a light blue iris with spokes, a round black pupil.
+   *
+   * The same eye as the mark in the header and the tab, drawn in the same
+   * proportions, so the thing in the corner of the page and the thing in the
+   * picture are recognisably one object.
+   *
+   * Blinks are per-eye. They share one rhythm, but each starts wherever its own
+   * id puts it, so a field of them never blinks in chorus.
+   */
+  _eye(ctx, p, time, id, look) {
+    const period = 0.95 + this._hash(id * 7 + 3) * 0.85;
+    const phase = (time + this._hash(id) * period) % period;
     const open = phase > 0.17 ? 1 : Math.abs(Math.cos((Math.PI * phase) / 0.17));
     const ball = p.r * 0.62;
 
     // Where it is looking: a neighbour, changing every so often, or itself —
-    // and looking at itself means the pupil sits in the middle.
+    // and looking at itself means the iris sits in the middle.
     let gx = 0, gy = 0;
     if (look) {
       const d = Math.hypot(look.x - p.x, look.y - p.y);
@@ -357,12 +376,106 @@ const StepView = {
     ctx.fill();
     if (open < 0.2) return;
 
-    const pupil = ball * 0.46;
+    // The mark's proportions, against the ball rather than against the agent.
+    const cx = p.x + gx * ball * 0.24;
+    const cy = p.y + gy * ball * 0.24;
+    const iris = ball * 0.60;
+    const pupil = ball * 0.31;
+
+    ctx.fillStyle = this.ink.iris;
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, iris, iris * open, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Spokes, only once there are enough pixels for nine of them to be nine
+    // rather than a smudge.
+    if (iris > 3.6) {
+      ctx.save();
+      ctx.globalAlpha = ctx.globalAlpha * 0.30;
+      ctx.strokeStyle = this.ink.eye;
+      ctx.lineWidth = Math.max(0.5, ball * 0.075);
+      ctx.beginPath();
+      for (let k = 0; k < 9; k++) {
+        const a = (k / 9) * Math.PI * 2 + 0.2;
+        ctx.moveTo(cx + Math.cos(a) * pupil * 1.12, cy + Math.sin(a) * pupil * 1.12 * open);
+        ctx.lineTo(cx + Math.cos(a) * iris * 0.94, cy + Math.sin(a) * iris * 0.94 * open);
+      }
+      ctx.stroke();
+      ctx.restore();
+    }
+
     ctx.fillStyle = this.ink.eye;
     ctx.beginPath();
-    ctx.ellipse(p.x + gx * ball * 0.36, p.y + gy * ball * 0.36,
-                pupil, pupil * open, 0, 0, Math.PI * 2);
+    ctx.ellipse(cx, cy, pupil, pupil * open, 0, 0, Math.PI * 2);
     ctx.fill();
+  },
+
+  /**
+   * The cone an eye sweeps while it is reading a neighbour.
+   *
+   * An eye pointing somewhere is a small thing to see. The cone is the reading
+   * itself: it opens at the agent and runs out along the link, reaching the
+   * neighbour just as the look ends and the next one begins. Looking at itself
+   * has no direction to run along, so it gets a ring that widens instead.
+   *
+   * Drawn under the agents rather than over them, so nothing it sweeps across
+   * is hidden by it.
+   */
+  _scan(ctx, view, place) {
+    if (!view.effects.has('eyes') || !view._gaze) return;
+    ctx.save();
+    for (const [id, look] of view._gaze) {
+      const p = place(id);
+      if (!p) continue;
+
+      // Fast at the start and easing into the arrival, which is what a sweep
+      // looks like; then out of the way before the next one starts.
+      const t = look.through;
+      const reach = t * t * (3 - 2 * t);
+      const fade = p.alpha * Math.min(1, (1 - t) * 3.4) * Math.min(1, t * 6);
+
+      if (look.at === id) {
+        // Kept close to the agent. Grown to the size the cones reach it read
+        // as a bubble around the node rather than as the node reading itself,
+        // and a graph of them was mostly circles.
+        const r = p.r * (1.15 + 0.85 * reach);
+        ctx.globalAlpha = fade * 0.75;
+        ctx.strokeStyle = this.ink.iris;
+        ctx.lineWidth = Math.max(1, p.r * 0.07);
+        ctx.beginPath(); ctx.arc(p.x, p.y, r, 0, Math.PI * 2); ctx.stroke();
+        continue;
+      }
+
+      const q = place(look.at);
+      if (!q) continue;
+      const d = Math.hypot(q.x - p.x, q.y - p.y);
+      if (d < 1) continue;
+      const a = Math.atan2(q.y - p.y, q.x - p.x);
+      const far = Math.max(p.r, d * reach);
+      const half = 0.30;
+
+      const grad = ctx.createLinearGradient(
+        p.x, p.y, p.x + Math.cos(a) * far, p.y + Math.sin(a) * far);
+      grad.addColorStop(0, 'rgba(90, 182, 239, 0)');
+      grad.addColorStop(0.35, 'rgba(90, 182, 239, 0.40)');
+      grad.addColorStop(1, 'rgba(90, 182, 239, 0.10)');
+      ctx.globalAlpha = fade;
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.moveTo(p.x, p.y);
+      ctx.arc(p.x, p.y, far, a - half, a + half);
+      ctx.closePath();
+      ctx.fill();
+
+      // The front of the sweep, so the growth has an edge to follow.
+      ctx.globalAlpha = fade * 0.8;
+      ctx.strokeStyle = this.ink.iris;
+      ctx.lineWidth = 1.6;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, far, a - half, a + half);
+      ctx.stroke();
+    }
+    ctx.restore();
   },
 
   /**
@@ -486,8 +599,13 @@ const StepView = {
    * Tokens, held in orbit around whoever holds them.
    *
    * One dot is a share of that agent's pile rather than one token, since a rich
-   * agent can hold dozens; the count is capped so a node stays a node and does
-   * not become a ring of dots.
+   * agent can hold dozens. The count is the log of the pile against one fixed
+   * reference for the whole run — the 95th percentile of the richest holding in
+   * each recorded stage — so fifteen dots means the same amount of money in
+   * every step. Measuring against the richest agent in the current stage
+   * instead made the scale move under the reader: the same pile drew a
+   * different number of dots depending on who else happened to be holding
+   * something that step.
    *
    * On the opening steps they arrive instead: the supply comes from nowhere in
    * the world, so it comes from outside the picture, each dot on its own
@@ -498,7 +616,9 @@ const StepView = {
     // Nothing is in orbit during the staking: every token is on a link.
     if (view.effects.has('stakes')) return;
     const stage = view.stage;
-    const most = Math.max(1, ...stage.tokens);
+    // Falls back to the current stage only if nobody has set a run-wide scale.
+    const ref = Math.max(2, view.tokenRef || Math.max(1, ...stage.tokens));
+    const full = Math.log(ref);
     // Only the step that introduces them flies them in. The step after holds
     // the same orbit rather than replaying the arrival, so the dots simply stay
     // where they are while everything else moves on.
@@ -517,11 +637,25 @@ const StepView = {
     stage.ids.forEach((id, i) => {
       const p = place(id);
       if (!p) return;
-      const dots = Math.max(1, Math.min(8, Math.round((stage.tokens[i] / most) * 7)));
+      const held = stage.tokens[i];
+      if (held <= 0) return;                 // nothing to hold, nothing in orbit
+      // Anchored at both ends: one token is one dot, the reference is fifteen.
+      // Never more dots than tokens, which makes the small piles literally
+      // countable — the log only starts compressing once there are more than
+      // about six, which is also about where counting them stops working.
+      const dots = Math.max(1, Math.min(this.TOKEN_DOTS, held,
+        1 + Math.round((this.TOKEN_DOTS - 1) * Math.log(held) / full)));
+
+      // Spread evenly, so the ring says how many there are at a glance rather
+      // than needing to be counted through gaps and clumps. Each agent's ring
+      // starts at its own angle, or every ring in the graph would line up.
+      const orbit = p.r * 1.5;
+      const start = this._hash(id) * Math.PI * 2;
+      const size = Math.max(1.9, Math.min(3.1, (Math.PI * 2 * orbit / dots) * 0.42));
+
       for (let k = 0; k < dots; k++) {
         const seed = (i * 7 + k * 13) % 97;
-        const angle = (seed / 97) * Math.PI * 2 + time * 0.45;
-        const orbit = p.r * 1.5;
+        const angle = start + (k / dots) * Math.PI * 2 + time * 0.45;
         const toX = p.x + Math.cos(angle) * orbit;
         const toY = p.y + Math.sin(angle) * orbit;
 
@@ -534,7 +668,7 @@ const StepView = {
         }
         ctx.globalAlpha = p.alpha * (arriving ? Math.min(1, eased * 3) : 0.9);
         ctx.beginPath();
-        ctx.arc(x, y, 3.1, 0, Math.PI * 2);
+        ctx.arc(x, y, size, 0, Math.PI * 2);
         ctx.fill();
       }
     });
@@ -602,11 +736,20 @@ const StepView = {
       if (adj.has(b)) adj.get(b).push(a);
     }
     view._gaze = new Map();
-    const turn = Math.floor(seconds / 0.62);
     for (const id of view.stage.ids) {
       const near = adj.get(id) || [];
       const targets = [...near, id];                 // itself, last
-      view._gaze.set(id, targets[Math.abs(turn + id) % targets.length]);
+
+      // Every eye holds a look for the same length of time, and every eye
+      // starts its own somewhere else in that stretch. Switching them all on
+      // one clock made the whole graph flick at once, which reads as a cut
+      // rather than as forty agents each reading their own neighbourhood.
+      const when = seconds / this.GAZE + this._hash(id * 31 + 11);
+      const turn = Math.floor(when);
+      view._gaze.set(id, {
+        at: targets[Math.abs(turn + id) % targets.length],
+        through: when - turn                         // 0 to 1 across one look
+      });
     }
   }
 };

@@ -756,11 +756,14 @@ details.control-group > summary:hover h3 { color: var(--text); }
    Brand mark
    ========================================================================== */
 
+/* The same mark as the front page's, at the size the header has room for:
+   white agents, and the iris colour written into the symbol rather than
+   inherited, so it is blue here too. */
 .brand-mark {
   width: 26px;
   height: 26px;
   flex: 0 0 auto;
-  color: var(--accent);
+  color: #fff;
   margin-right: -2px;
 }
 

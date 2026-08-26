@@ -14,10 +14,12 @@ by editing both is a losing game. This writes both from the same numbers:
 
     python3 tools/make_mark.py
 
-The header copy takes its colour from the page, so one definition is accent
-blue in the top bar and white over the front page's backdrop. The favicon has
-no page to inherit from, so it carries its own colours and a dark rounded
-background to sit on either a light or a dark tab bar.
+One mark, everywhere: white agents, a light blue iris, a black pupil. The
+header copy takes its colour from the page and the page gives it white, the
+same as over the front page's backdrop. The favicon has no page to inherit
+from, so it carries the white itself, plus a dark rounded background to sit on
+either a light or a dark tab bar. The iris is written in, not inherited, so it
+stays blue wherever the mark is used.
 """
 
 from __future__ import annotations
@@ -31,6 +33,7 @@ INDEX = os.path.join(HERE, "web", "index.html")
 FAVICON = os.path.join(HERE, "web", "favicon.svg")
 
 PUPIL_INK = "#05070a"
+IRIS_INK = "#5ab6ef"
 
 # Where each agent sits, how big it is, and which way it is looking. The gaze
 # is a direction, scaled below — the iris and pupil travel together, because
@@ -73,7 +76,7 @@ def eye(x: float, y: float, r: float, gx: float, gy: float) -> list[str]:
     pupil = r * PUPIL_SHARE
 
     out = [f'<circle cx="{cx:.2f}" cy="{cy:.2f}" r="{iris:.2f}" '
-           f'fill="{PUPIL_INK}" opacity="0.34"/>']
+           f'fill="{IRIS_INK}"/>']
 
     # Spokes, so the iris has some structure to it rather than being a flat
     # disc. Started clear of the pupil and stopped short of the rim.
@@ -85,7 +88,7 @@ def eye(x: float, y: float, r: float, gx: float, gy: float) -> list[str]:
             f'M{cx + math.cos(angle) * inner:.2f} {cy + math.sin(angle) * inner:.2f}'
             f'L{cx + math.cos(angle) * outer:.2f} {cy + math.sin(angle) * outer:.2f}')
     out.append(f'<path d="{" ".join(spokes)}" stroke="{PUPIL_INK}" '
-               f'stroke-width="{r * 0.075:.2f}" opacity="0.42" fill="none"/>')
+               f'stroke-width="{r * 0.075:.2f}" opacity="0.30" fill="none"/>')
 
     out.append(f'<circle cx="{cx:.2f}" cy="{cy:.2f}" r="{pupil:.2f}" fill="{PUPIL_INK}"/>')
     return out
@@ -130,7 +133,7 @@ def main() -> None:
         '       colours from, and has to hold up against a light tab bar as well as\n'
         '       a dark one, so it brings its own background. -->\n'
         '  <rect width="32" height="32" rx="7" fill="#0d1117"/>\n'
-        '  ' + mark("#8fa8e8", "  ") + '\n'
+        '  ' + mark("#ffffff", "  ") + '\n'
         '</svg>\n'
     )
     open(FAVICON, "w").write(favicon)
