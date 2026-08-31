@@ -54,7 +54,7 @@ const Explain = {
     skull: `<path fill-rule="evenodd" d="M12 1.8c-5 0-8.7 3.6-8.7 8.2 0 2.6 1.2 4.5 2.7 5.6v2.2c0 .9.7 1.6 1.6 1.6h.7v2.8h2.1v-2.8h3.2v2.8h2.1v-2.8h.7c.9 0 1.6-.7 1.6-1.6v-2.2c1.5-1.1 2.7-3 2.7-5.6 0-4.6-3.7-8.2-8.7-8.2zM8.6 8.1a2.1 2.1 0 1 0 0 4.2 2.1 2.1 0 0 0 0-4.2zm6.8 0a2.1 2.1 0 1 0 0 4.2 2.1 2.1 0 0 0 0-4.2zM12 13.4l1.3 2.6h-2.6z" FILL/>`,
     swords: `<path d="M4 3.5 18.5 19.5M20 3.5 5.5 19.5M16.9 14.5 13.7 17.5M7.1 14.5 10.3 17.5M15.3 16 18.5 19.5M8.7 16 5.5 19.5"/>`,
     flag: `<path d="M5.5 2.6V21.4"/><path d="M5.5 3.9c4.1-2.1 7.2 2 11.3 0v8.2c-4.1 2.1-7.2-2-11.3 0z" FILL/>`,
-    dna: `<path d="M7 2.2C7 7 17 7 17 12s-10 5-10 9.8M17 2.2C17 7 7 7 7 12s10 5 10 9.8M8.6 5.6h6.8M7.2 8.8h9.6M7.2 15.2h9.6M8.6 18.4h6.8"/>`
+    dna: `<path d="M12.00 2.60C13.30 3.12 14.60 3.64 15.52 4.17C16.45 4.69 16.99 5.21 17.00 5.73C17.01 6.26 16.49 6.78 15.58 7.30C14.67 7.82 13.38 8.34 12.08 8.87C10.78 9.39 9.48 9.91 8.54 10.43C7.60 10.96 7.03 11.48 7.00 12.00C6.97 12.52 7.47 13.04 8.36 13.57C9.26 14.09 10.53 14.61 11.83 15.13C13.14 15.66 14.45 16.18 15.40 16.70C16.36 17.22 16.94 17.74 17.00 18.27C17.05 18.79 16.57 19.31 15.69 19.83C14.82 20.36 13.55 20.88 12.25 21.40"/><path d="M12.00 2.60C10.70 3.12 9.40 3.64 8.48 4.17C7.55 4.69 7.01 5.21 7.00 5.73C6.99 6.26 7.51 6.78 8.42 7.30C9.33 7.82 10.62 8.34 11.92 8.87C13.22 9.39 14.52 9.91 15.46 10.43C16.40 10.96 16.97 11.48 17.00 12.00C17.03 12.52 16.53 13.04 15.64 13.57C14.74 14.09 13.47 14.61 12.17 15.13C10.86 15.66 9.55 16.18 8.60 16.70C7.64 17.22 7.06 17.74 7.00 18.27C6.95 18.79 7.43 19.31 8.31 19.83C9.18 20.36 10.45 20.88 11.75 21.40"/><path d="M8.90 3.94H15.10M7.47 6.63H16.53M7.00 12.00H17.00M7.58 17.37H16.42M8.70 20.06H15.30"/>`
   },
 
   /** One emblem, as a background-image the card can wear. */
@@ -73,7 +73,7 @@ const Explain = {
   STEPS: [
     {
       title: 'An Individual Node with a Brain', intro: true,
-      stage: 'repro.observe', solo: true, effect: 'brains',
+      stage: 'repro.observe', solo: true, effect: 'brains bare',
       code: ['class Brain:', 'w += mask * np.random.randn'],
       text: `A node is one agent. It holds tokens and a small neural network.
         <p>The network is never trained. It is made at random, copied when the
@@ -106,18 +106,16 @@ const Explain = {
       stage: 'repro.observe', effect: 'eyes',
       code: ['    def observe(self, u: int', 'return self.brains[u].forward(x)'],
       text: `Each agent reads its whole neighbourhood in one pass: its own
-        tokens and degree, each neighbour's, and the messages sent to it last
-        phase.
-        <p>Tokens and degrees are logged, so what counts is the order of
-        magnitude. An agent observes itself as well — that is how it knows what
-        it holds.</p>
-        <p>The same pass decides what to say. Each agent writes a short vector
-        to every neighbour and one to itself, delivered at the end of the phase
-        so everyone reads the same generation.</p>`
+        tokens and degree, each neighbour's, and last phase's messages. Both
+        counts are logged, so what carries is the order of magnitude. It reads
+        itself too — that is how it knows what it holds.
+        <p>The same pass decides what to say: a short vector to every
+        neighbour and one to itself, delivered at the end of the phase so
+        everyone reads the same generation.</p>`
     },
     {
       title: 'Reproduction and Handover', emblem: 'heart',
-      stage: 'repro.born', effect: 'brains',
+      stage: 'repro.born', effect: 'brains inherit',
       code: ['# ---- how much of me goes into a child ----', 'self.unlink(u, v)'],
       text: `An agent spends a share of its tokens on a child. The child starts
         with exactly that; no tokens are created.
@@ -148,31 +146,20 @@ const Explain = {
         what its neighbours read in the next reproduction phase.</p>`
     },
     {
-      title: 'Colonel Blotto Game', emblem: 'swords',
-      stage: 'game.stake', effect: 'brains stakes',
-      code: ['# ---- everyone stakes at once ----', 'self.unlink(a, b)'],
-      text: `Every agent stakes its entire pile across itself and its
-        neighbours, either spread by score or all on one node. Which of the two
-        is the brain's choice.
-        <p>Nothing is destroyed: a node's new balance is everything staked on
-        it. One dot here is one token.</p>
-        <p>Any link that carried no tokens is then cut.</p>`
-    },
-    {
-      title: 'Stronger Agents Conquer Nodes', emblem: 'flag',
-      stage: 'game.conquer', effect: 'brains conquer',
-      code: ['def resolve(staked: dict', '    return hegemon'],
-      text: `The largest staker on a node is the <b>hegemon</b> and usually
-        takes it.
-        <p>Against it stands the <b>mob</b>: every other staker that flagged
-        part of its stake as revolt. The mob is sorted weakest first and walked
-        upward, accumulating a lower class. At each rung: does the lower class
-        outweigh everyone above it plus the hegemon?</p>
-        <p>At the first rung where it does, the revolution carries and the node
-        goes to the <b>strongest staker in that rung</b>. Ties there are drawn
-        at random; nothing else is.</p>
-        <p>The winner's brain is then copied into the node. This is the only
-        selection step in the algorithm.</p>`
+      title: 'Colonel Blotto Game', emblem: 'swords', emblemAfter: 'flag',
+      stage: 'game.stake', effect: 'brains stakes conquer',
+      code: [['# ---- everyone stakes at once ----', 'self.unlink(a, b)'],
+             ['def resolve(staked: dict', '    return hegemon']],
+      text: `Every agent stakes its whole pile across itself and its
+        neighbours, spread by score or all on one node. A node's new balance is
+        everything staked on it; nothing is destroyed.
+        <p>Its largest staker is the <b>hegemon</b>. Against it, every staker
+        that flagged part of its stake as revolt, sorted weakest first: at the
+        first rung where the class below outweighs everyone above it plus the
+        hegemon, the node goes to that rung's strongest staker instead. Ties
+        there are drawn at random; nothing else is.</p>
+        <p>The winner's brain is copied into the node — the only selection step
+        in the algorithm. Links that carried nothing are cut.</p>`
     },
     {
       title: 'Elimination', emblem: 'skull',
@@ -200,6 +187,7 @@ Object.assign(Explain, {
     this.canvas = document.getElementById('explainCanvas');
     if (!this.canvas) return;
     this.textEl = document.getElementById('explainText');
+    this.noteEl = document.querySelector('.ex-note');
     this.codeEl = document.getElementById('explainCode');
     this.countEl = document.getElementById('explainCount');
 
@@ -246,21 +234,13 @@ Object.assign(Explain, {
       }
       this.iterations = [...this.byIteration.keys()].sort((a, b) => a - b);
 
-      // The pruning is shown as part of the Blotto step, because to a reader it
-      // is the same event: the links nobody put a token on are the links that
-      // go. The engine does it later, though, so the stages between the two
-      // still carry those links and they reappeared after being cut. Take them
-      // out of everything recorded after the staking.
+      // The staking and the conquest are one step to a reader — the tokens
+      // move, and where they land is who won — but the engine notes them
+      // separately, and it is the staking's snapshot that still has the piles
+      // as they stood. Carry who took what back onto it.
       for (const stages of this.byIteration.values()) {
-        const pruned = (stages['game.prune'] || {}).marks;
-        if (!pruned || !pruned.cut) continue;
-        const gone = new Set(pruned.cut.map(([a, b]) => (a < b ? `${a}|${b}` : `${b}|${a}`)));
-        for (const name of ['game.winner', 'game.conquer']) {
-          const stage = stages[name];
-          if (!stage) continue;
-          stage.edges = stage.edges.filter(([a, b]) =>
-            !gone.has(a < b ? `${a}|${b}` : `${b}|${a}`));
-        }
+        const stake = stages['game.stake'], conquer = stages['game.conquer'];
+        if (stake && conquer) stake.marks.taken = conquer.marks.taken || [];
       }
 
       this.renderCode();
@@ -413,13 +393,26 @@ Object.assign(Explain, {
    * says so, which is a great deal better than lighting up whatever happens to
    * live at those numbers now.
    */
-  region(step) {
-    const from = this.lines.findIndex(l => l.includes(step.code[0]));
-    if (from < 0) return null;
-    const rest = this.lines.slice(from);
-    const offset = rest.findIndex((l, i) => i > 0 && l.includes(step.code[1]));
-    if (offset < 0) return null;
-    return { from, to: from + offset };
+  /**
+   * The lines a step is about.
+   *
+   * A step usually points at one run of the script, but not always: the game
+   * stakes in one place and works out who won in another, with the whole
+   * cleanup sitting between them. Naming both is better than lighting the
+   * hundred and forty lines from the first to the last.
+   */
+  regions(step) {
+    const pairs = Array.isArray(step.code[0]) ? step.code : [step.code];
+    const found = [];
+    for (const [head, tail] of pairs) {
+      const from = this.lines.findIndex(l => l.includes(head));
+      if (from < 0) continue;
+      const rest = this.lines.slice(from);
+      const offset = rest.findIndex((l, i) => i > 0 && l.includes(tail));
+      if (offset < 0) continue;
+      found.push({ from, to: from + offset });
+    }
+    return found;
   },
 
   go(by) {
@@ -470,22 +463,23 @@ Object.assign(Explain, {
       `<h3 class="ex-title">${step.title}</h3>` +
       `<p class="ex-step">${where}</p>` +
       `<p>${step.text}</p>`;
-    this.textEl.style.backgroundImage = this.emblem(step.emblem);
+    this.noteEl.style.backgroundImage = this.emblem(step.emblem);
+    this._shownEmblem = step.emblem;
     // Only the emblem needs the room it takes; a step without one gets its
     // full width back.
-    this.textEl.style.paddingRight = step.emblem ? '' : '17px';
-    this.textEl.scrollTop = 0;
+    this.noteEl.style.paddingRight = step.emblem ? '' : '17px';
+    this.noteEl.scrollTop = 0;
     // The bar keeps only how far through the whole walk you are; the step's own
     // number lives with its words.
     this.countEl.textContent = `${this.at + 1} of ${this.STEPS.length}`;
 
     // ---- the code ----
-    const region = this.region(step);
+    const regions = this.regions(step);
     this.lineEls.forEach((el, i) => {
-      el.classList.toggle('lit', region ? (i >= region.from && i <= region.to) : false);
+      el.classList.toggle('lit', regions.some(r => i >= r.from && i <= r.to));
     });
-    if (region) {
-      const target = this.lineEls[region.from];
+    if (regions.length) {
+      const target = this.lineEls[regions[0].from];
       const box = this.codeEl.getBoundingClientRect();
       this.codeEl.scrollTo({
         top: target.offsetTop - box.height * 0.28,
@@ -509,6 +503,17 @@ Object.assign(Explain, {
       StepView.gaze(this.view, now / 1000);
       StepView.mutating(this.view);
       StepView.draw(this.view, now / 1000, dt);
+
+      // A step with two halves wears the emblem of the half being shown: the
+      // game is swords while the tokens are crossing and a flag once the
+      // brains start moving.
+      const step = this.STEPS[this.at];
+      const want = (step.emblemAfter && this.view._conquest)
+        ? step.emblemAfter : step.emblem;
+      if (want !== this._shownEmblem) {
+        this._shownEmblem = want;
+        this.noteEl.style.backgroundImage = this.emblem(want);
+      }
     }
     requestAnimationFrame(t => this.frame(t));
   }

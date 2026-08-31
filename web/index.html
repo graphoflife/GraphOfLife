@@ -95,26 +95,30 @@
 <!-- ==================== EXPLANATION VIEW ==================== -->
 <main id="view-explain" class="view">
   <div class="ex">
-    <div class="ex-head">
-      <div class="ex-where" id="explainCount"></div>
-      <div class="ex-nav">
-        <button id="explainPrev" title="Previous step (left arrow)" aria-label="Previous step">
-          <svg viewBox="0 0 10 12" aria-hidden="true"><path d="M9 0 L9 12 L0 6 Z"/></svg>
-        </button>
-        <button id="explainNext" title="Next step (right arrow)" aria-label="Next step">
-          <svg viewBox="0 0 10 12" aria-hidden="true"><path d="M1 0 L1 12 L10 6 Z"/></svg>
-        </button>
-      </div>
-    </div>
-
     <div class="ex-body">
       <div class="ex-stage">
         <canvas id="explainCanvas"></canvas>
-        <!-- The words sit on the picture rather than beside it, the same way
-             the front page's note does, so the graph gets the whole pane. -->
-        <aside class="ex-note" id="explainText"></aside>
       </div>
-      <div class="ex-code" id="explainCode"></div>
+      <!-- The words and the script share one column: the explanation on top of
+           the place in the code it is explaining. Where you are and the way
+           through live in the explanation too, not in a bar over everything. -->
+      <div class="ex-side">
+        <aside class="ex-note">
+          <div id="explainText"></div>
+          <div class="ex-foot-row">
+            <span class="ex-where" id="explainCount"></span>
+            <div class="ex-nav">
+              <button id="explainPrev" title="Previous step (left arrow)" aria-label="Previous step">
+                <svg viewBox="0 0 10 12" aria-hidden="true"><path d="M9 0 L9 12 L0 6 Z"/></svg>
+              </button>
+              <button id="explainNext" title="Next step (right arrow)" aria-label="Next step">
+                <svg viewBox="0 0 10 12" aria-hidden="true"><path d="M1 0 L1 12 L10 6 Z"/></svg>
+              </button>
+            </div>
+          </div>
+        </aside>
+        <div class="ex-code" id="explainCode"></div>
+      </div>
     </div>
 
     <p class="ex-foot">

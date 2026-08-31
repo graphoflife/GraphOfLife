@@ -31,7 +31,7 @@ const StepView = {
 
   // How fast a value closes the gap to its target, per second. Low enough to
   // read as motion, high enough not to feel like lag.
-  EASE: { position: 6.5, alpha: 4.5, camera: 3.2 },
+  EASE: { position: 6.5, alpha: 4.5, camera: 3.2, pupil: 7.5 },
 
   // How long an eye holds one neighbour before moving to the next. The scan
   // cone is sized to arrive exactly at the end of it.
@@ -39,6 +39,14 @@ const StepView = {
 
   // How many dots the richest agent in the run is drawn with.
   TOKEN_DOTS: 15,
+
+  // The game, in the order it is read: the piles as they stand, then the
+  // staking, then the brains of whoever won. Each waits for the last.
+  GAME: { hold: 1.0, travel: 2.2 },
+
+  // A birth: how long the child stands there before what it was given starts
+  // crossing the link, and how long the crossing takes.
+  BIRTH: { hold: 0.7, travel: 1.7 },
 
   // A conquest: how long a brain takes to travel, and how far apart the
   // journeys are started. Staggered because a hundred nodes changing colour on
@@ -92,6 +100,18 @@ const StepView = {
       const slot = at.get(child);
       if (slot !== undefined) parents[slot] = parent;
     }
+    // A cleanup kills twice, in order, and the two reasons are different
+    // enough to be worth separating: first everyone holding nothing, then
+    // everyone the starving cut adrift from the main body. The recording keeps
+    // one list, but the snapshot it was taken over still has the tokens, and
+    // starvation runs first — so anyone removed while holding nothing starved,
+    // and anyone removed still holding something was stranded.
+    const doomed = new Set(stage.marks.removed || []);
+    view.waves = [[], []];
+    stage.ids.forEach((id, i) => {
+      if (doomed.has(id)) view.waves[stage.tokens[i] > 0 ? 1 : 0].push(id);
+    });
+
     view.layout.setFrame(stage.ids, stage.edges, parents, view.shown.size > 0);
     view.layout.reheat(view.shown.size ? 0.35 : 1);
     for (let i = 0; i < settle; i++) {
@@ -111,16 +131,13 @@ const StepView = {
     // The removed are drawn crossed out for a moment before they leave, so the
     // rule can be read before its result. They are in the stage — cleanup
     // snapshots the world it acted on — so taking them out is a matter of
-    // dropping them from `present` once the pause is over.
-    const dying = stage.marks && stage.marks.removed;
-    if (dying && dying.length && view.since > this.LINGER) {
-      for (const id of dying) present.delete(id);
+    // dropping them from `present` once their wave is over.
+    if (view.waves) {
+      view.waves.forEach((wave, w) => {
+        if (view.since > this.LINGER * (w + 1)) for (const id of wave) present.delete(id);
+      });
     }
 
-    // Newborns arrive a beat after the graph they are born into, so the step
-    // starts on the picture the previous one ended on.
-    const waiting = stage.step === 'repro.born' && view.since < this.LINGER
-      ? new Set(stage.marks.born || []) : null;
     const most = Math.max(1, ...stage.tokens);
     const size = new Map(stage.ids.map((id, i) =>
       [id, 9 + 15 * Math.sqrt(stage.tokens[i] / most)]));
@@ -128,7 +145,6 @@ const StepView = {
     const close = (was, want, rate) => was + (want - was) * Math.min(1, rate * dt);
 
     for (const id of stage.ids) {
-      if (waiting && waiting.has(id)) continue;
       if (!present.has(id)) continue;
       const target = view.layout.pos.get(id);
       if (!target) continue;
@@ -176,7 +192,7 @@ const StepView = {
     this._edges(ctx, view, place, role);
     this._scan(ctx, view, place);
     this._conquest(view, role);
-    this._nodes(ctx, view, place, role, time);
+    this._nodes(ctx, view, place, role, time, dt);
     this._effect(ctx, view, place, role, time, w, h);
   },
 
@@ -293,7 +309,7 @@ const StepView = {
     ctx.globalAlpha = 1;
   },
 
-  _nodes(ctx, view, place, role, time) {
+  _nodes(ctx, view, place, role, time, dt) {
     view.stage.ids.forEach((id, i) => {
       const p = place(id);
       if (!p) return;
@@ -307,7 +323,12 @@ const StepView = {
         if (role.winner.has(id)) colour = this.ink.good;
         const trip = view._conquest.get(id);
         if (trip && trip.t >= 1) colour = this.ink.lost;
-      } else if (role.taken.has(id)) colour = this.ink.rich;
+      } else if (role.taken.has(id) && !view.effects.has('conquer')) {
+        // Only where the outcome is not the thing being animated. On the game
+        // step it is, and colouring the taken nodes while their tokens are
+        // still crossing the graph answers the question the step is asking.
+        colour = this.ink.rich;
+      }
       if (view._mutated && view._mutated.has(id)) colour = '#f2cd5c';
 
       ctx.globalAlpha = p.alpha;
@@ -324,7 +345,8 @@ const StepView = {
       ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
       ctx.restore();
 
-      if (role.removed.has(id)) {
+      const wave = view.waves ? view.waves.findIndex(w => w.includes(id)) : -1;
+      if (wave >= 0 && view.since > this.LINGER * wave) {
         this._cross(ctx, p);
       } else if (view.effects.has('brains')) {
         this._brain(ctx, p, time, i,
@@ -334,7 +356,7 @@ const StepView = {
         // own coordinates in meant every pupil was aimed at a point in a
         // different space — which put all of them in the same corner.
         const look = view._gaze && view._gaze.get(id);
-        this._eye(ctx, p, time, id, look ? place(look.at) : null);
+        this._eye(ctx, view, p, time, id, look ? place(look.at) : null, dt);
       }
       ctx.globalAlpha = 1;
     });
@@ -370,7 +392,7 @@ const StepView = {
    * Blinks are per-eye. They share one rhythm, but each starts wherever its own
    * id puts it, so a field of them never blinks in chorus.
    */
-  _eye(ctx, p, time, id, look) {
+  _eye(ctx, view, p, time, id, look, dt = 1 / 60) {
     const period = 0.95 + this._hash(id * 7 + 3) * 0.85;
     const phase = (time + this._hash(id) * period) % period;
     const open = phase > 0.17 ? 1 : Math.abs(Math.cos((Math.PI * phase) / 0.17));
@@ -383,6 +405,17 @@ const StepView = {
       const d = Math.hypot(look.x - p.x, look.y - p.y);
       if (d > 1) { gx = (look.x - p.x) / d; gy = (look.y - p.y) / d; }
     }
+
+    // Swung rather than snapped. The choice of who to look at changes on the
+    // instant, and drawing it that way made every eye in the graph flick;
+    // an eye moving to the next neighbour is the part worth watching.
+    if (!view._pupil) view._pupil = new Map();
+    let dir = view._pupil.get(id);
+    if (!dir) view._pupil.set(id, dir = { x: gx, y: gy });
+    const swing = Math.min(1, this.EASE.pupil * dt);
+    dir.x += (gx - dir.x) * swing;
+    dir.y += (gy - dir.y) * swing;
+    gx = dir.x; gy = dir.y;
 
     ctx.fillStyle = this.ink.white;
     ctx.beginPath();
@@ -527,10 +560,12 @@ const StepView = {
     ctx.restore();
   },
 
+  // Three times the agent across, so it is a mark struck through the agent
+  // rather than a detail inside it.
   _cross(ctx, p) {
     ctx.strokeStyle = this.ink.warn;
-    ctx.lineWidth = Math.max(1.4, p.r * 0.24);
-    const s = p.r * 0.5;
+    ctx.lineWidth = Math.max(1.6, p.r * 0.22);
+    const s = p.r * 1.5;
     ctx.beginPath();
     ctx.moveTo(p.x - s, p.y - s); ctx.lineTo(p.x + s, p.y + s);
     ctx.moveTo(p.x + s, p.y - s); ctx.lineTo(p.x - s, p.y + s);
@@ -540,49 +575,82 @@ const StepView = {
   // ---- the per-step animations -------------------------------------------
 
   _effect(ctx, view, place, role, time, w, h) {
-    const along = (time * 0.5) % 1;
-
     // Tokens are drawn on every step, not only the one that introduces them.
     // They are the conserved thing the whole algorithm is about, so they should
     // never be off screen; on the opening steps they fly in and settle into the
     // same orbit they hold from then on.
     this._tokens(ctx, view, place, time, w, h);
 
-    if (view.effects.has('stakes')) {
-      // These dots are the tokens themselves in transit, so they are the same
-      // green they are everywhere else, and each direction of a link is drawn
-      // separately — both ends stake on each other.
-      ctx.save();
-      ctx.fillStyle = this.ink.good;
-      ctx.shadowColor = 'rgba(127, 212, 160, 0.9)';
-      ctx.shadowBlur = 6;
-      for (const [a, b] of view.stage.edges) {
-        const p = place(a), q = place(b);
-        if (!p || !q) continue;
-        const alpha = Math.min(p.alpha, q.alpha);
-        for (const [from, to, at, amount] of [
-          [p, q, along, role.sent.get(`${a}>${b}`) || 0],
-          [q, p, (along + 0.5) % 1, role.sent.get(`${b}>${a}`) || 0]
-        ]) {
-          if (!amount) continue;
+    if (view.effects.has('inherit')) {
+      // What a child was given, crossing the link it was given it down. Only
+      // one direction to draw, so the amount can sit on the link itself.
+      const share = this._inheritance(view);
+      if (share.at > 0 && share.at < 1) {
+        ctx.save();
+        ctx.fillStyle = this.ink.good;
+        ctx.shadowColor = 'rgba(127, 212, 160, 0.9)';
+        ctx.shadowBlur = 6;
+        for (const [parent, child] of (view.stage.marks.parents || [])) {
+          const from = place(parent), to = place(child);
+          if (!from || !to) continue;
+          const amount = share.given(child);
+          if (amount <= 0) continue;
           const dots = Math.min(8, amount);
-          // Offset to one side, so the two directions do not sit on each other.
-          const dx = to.x - from.x, dy = to.y - from.y;
-          const len = Math.hypot(dx, dy) || 1;
-          const ox = (-dy / len) * 4, oy = (dx / len) * 4;
-          ctx.globalAlpha = alpha;
+          ctx.globalAlpha = Math.min(from.alpha, to.alpha);
           for (let k = 0; k < dots; k++) {
-            const t = (at + k / dots) % 1;
+            const t = Math.max(0, Math.min(1, share.at * 1.25 - (k / dots) * 0.25));
             ctx.beginPath();
-            ctx.arc(from.x + dx * t + ox, from.y + dy * t + oy, 3, 0, Math.PI * 2);
+            ctx.arc(from.x + (to.x - from.x) * t, from.y + (to.y - from.y) * t,
+                    3, 0, Math.PI * 2);
             ctx.fill();
           }
         }
+        ctx.restore();
+        this._amounts(ctx, view, place, (view.stage.marks.parents || [])
+          .map(([parent, child]) => [parent, child, share.given(child)]));
       }
-      ctx.restore();
-      ctx.globalAlpha = 1;
-      return;
     }
+
+    if (view.effects.has('stakes')) {
+      // These dots are the tokens themselves in transit, so they are the same
+      // green they are everywhere else, and each direction of a link is drawn
+      // separately — both ends stake on each other. They leave when the piles
+      // start draining and land when the piles have finished filling, because
+      // they are the same tokens.
+      const moving = this._staking(view);
+      if (moving.raw > 0 && moving.raw < 1.12) {
+        ctx.save();
+        ctx.fillStyle = this.ink.good;
+        ctx.shadowColor = 'rgba(127, 212, 160, 0.9)';
+        ctx.shadowBlur = 6;
+        for (const [a, b] of view.stage.edges) {
+          const p = place(a), q = place(b);
+          if (!p || !q) continue;
+          const alpha = Math.min(p.alpha, q.alpha);
+          for (const [from, to, amount] of [
+            [p, q, role.sent.get(`${a}>${b}`) || 0],
+            [q, p, role.sent.get(`${b}>${a}`) || 0]
+          ]) {
+            if (!amount) continue;
+            const dots = Math.min(8, amount);
+            // Offset to one side, so the two directions do not sit on each other.
+            const dx = to.x - from.x, dy = to.y - from.y;
+            const len = Math.hypot(dx, dy) || 1;
+            const ox = (-dy / len) * 4, oy = (dx / len) * 4;
+            ctx.globalAlpha = alpha;
+            for (let k = 0; k < dots; k++) {
+              const t = Math.max(0, Math.min(1, moving.at * 1.3 - (k / dots) * 0.3));
+              ctx.beginPath();
+              ctx.arc(from.x + dx * t + ox, from.y + dy * t + oy, 3, 0, Math.PI * 2);
+              ctx.fill();
+            }
+          }
+        }
+        ctx.restore();
+        ctx.globalAlpha = 1;
+      }
+    }
+
     if (view.effects.has('conquer') && view._conquest) {
       // The winner's brain travelling into the node it took, lit from behind
       // so it can be followed across a crowded graph. Without the backlight it
@@ -617,6 +685,52 @@ const StepView = {
   },
 
   /**
+   * What each newborn was handed, and how far it has got.
+   *
+   * A child starts with exactly what it was given, so the snapshot's own count
+   * for it is the amount — nothing else has happened to it yet.
+   */
+  _inheritance(view) {
+    const stage = view.stage;
+    const held = new Map(stage.ids.map((id, i) => [id, stage.tokens[i]]));
+    const g = this.BIRTH;
+    const run = (view.since - g.hold) / g.travel;
+    const at = Math.max(0, Math.min(1, run));
+    return {
+      given: id => held.get(id) || 0,
+      at: at * at * (3 - 2 * at),
+      raw: run
+    };
+  },
+
+  /**
+   * A number written on a link, for a flow the reader would otherwise have to
+   * count. Only used where tokens go one way, so there is room in the middle.
+   */
+  _amounts(ctx, view, place, flows) {
+    ctx.save();
+    ctx.font = '600 12px ui-monospace, SFMono-Regular, Menlo, monospace';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    for (const [a, b, amount] of flows) {
+      const p = place(a), q = place(b);
+      if (!p || !q || amount <= 0) continue;
+      const x = (p.x + q.x) / 2, y = (p.y + q.y) / 2;
+      const label = String(amount);
+      const wide = ctx.measureText(label).width + 10;
+      ctx.globalAlpha = Math.min(p.alpha, q.alpha) * 0.92;
+      ctx.fillStyle = 'rgba(13, 17, 23, 0.82)';
+      ctx.beginPath();
+      ctx.roundRect(x - wide / 2, y - 9, wide, 18, 9);
+      ctx.fill();
+      ctx.fillStyle = this.ink.good;
+      ctx.fillText(label, x, y);
+    }
+    ctx.restore();
+    ctx.globalAlpha = 1;
+  },
+
+  /**
    * How far each conquering brain has got, and whether it has landed.
    *
    * Kept apart from the drawing because the node colours depend on it: a node
@@ -627,14 +741,21 @@ const StepView = {
    */
   _conquest(view, role) {
     if (!view.effects.has('conquer')) { view._conquest = null; return; }
+    // On the step that shows the staking too, nothing about the outcome exists
+    // until the tokens have landed: that is what decides it.
+    const opens = view.effects.has('stakes')
+      ? this.GAME.hold + this.GAME.travel + 0.3 : 0;
+    const since = view.since - opens;
+    if (since < 0) { view._conquest = null; return; }
+
     const m = new Map();
     for (const [node, winner] of role.pairs) {
       const start = this._hash(node * 13 + 5) * this.CONQUEST.stagger;
-      const run = (view.since - start) / this.CONQUEST.travel;
+      const run = (since - start) / this.CONQUEST.travel;
       m.set(node, {
         winner,
         t: Math.max(0, Math.min(1, run)),
-        after: Math.max(0, view.since - start - this.CONQUEST.travel)
+        after: Math.max(0, since - start - this.CONQUEST.travel)
       });
     }
     view._conquest = m;
@@ -657,22 +778,129 @@ const StepView = {
    * heading, and settles into exactly the orbit it will keep for every step
    * afterwards.
    */
+  // The opening supply: how long the ball takes to go round firing, and how
+  // long one token spends in the air.
+  // A short flight on purpose. Give a token a third of the sweep to reach its
+  // agent and a third of every shot is in the air at once, which draws the
+  // ring rather than the firing: it looked like a comet trailing the ball
+  // instead of tokens being put into agents.
+  SUPPLY: { sweep: 1.5, flight: 0.2, lead: 0.35 },
+
+  /**
+   * The token supply, fired in rather than drifting in from off screen.
+   *
+   * Every token in the world arrives in one pass: a ball circles the graph and
+   * shoots them into the agents as it comes round to each one, emptying — and
+   * shrinking — as it goes. Shots are ordered by the angle of the agent they
+   * are going to, so the ball is always firing at whatever it is pointing at,
+   * and the bunching that comes of agents not being spread evenly round the
+   * circle is what makes it read as a burst rather than a metronome.
+   */
+  _supply(view, place, count, w, h) {
+    const stage = view.stage;
+    let cx = 0, cy = 0, n = 0, reach = 0;
+    const at = [];
+    stage.ids.forEach((id, i) => {
+      const p = place(id);
+      if (!p || stage.tokens[i] <= 0) return;
+      cx += p.x; cy += p.y; n++;
+      at.push({ id, p, dots: count(stage.tokens[i]) });
+    });
+    if (!n) return null;
+    cx /= n; cy /= n;
+    for (const a of at) reach = Math.max(reach, Math.hypot(a.p.x - cx, a.p.y - cy));
+    // Outside the graph, but never outside the canvas: framed on the agents,
+    // a ring drawn past the widest of them is a ring drawn off screen, and the
+    // ball firing from beyond the edge is a ball nobody sees.
+    const ring = Math.min(reach * 1.12 + 24, Math.min(w, h) * 0.46);
+
+    // One entry per token, in the order the ball comes round to them.
+    for (const a of at) a.angle = Math.atan2(a.p.y - cy, a.p.x - cx);
+    at.sort((u, v) => u.angle - v.angle);
+    const shots = new Map();
+    let fired = 0, total = 0;
+    for (const a of at) total += a.dots;
+    for (const a of at) {
+      for (let k = 0; k < a.dots; k++) shots.set(`${a.id}:${k}`, fired++ / total);
+    }
+
+    const s = this.SUPPLY;
+    const run = Math.max(0, view.since - s.lead) / s.sweep;
+    const first = at[0].angle;
+
+    return {
+      shot: (id, k) => {
+        const when = shots.get(`${id}:${k}`);
+        if (when === undefined || run < when) return null;
+        const from = first + when * Math.PI * 2;
+        const flight = Math.min(1, (run - when) * s.sweep / s.flight);
+        return {
+          x: cx + Math.cos(from) * ring,
+          y: cy + Math.sin(from) * ring,
+          in: flight * flight * (3 - 2 * flight)
+        };
+      },
+      draw: (ctx) => {
+        const left = 1 - Math.min(1, Math.max(0, run));
+        if (left <= 0) return;
+        const bx = cx + Math.cos(first + Math.min(1, run) * Math.PI * 2) * ring;
+        const by = cy + Math.sin(first + Math.min(1, run) * Math.PI * 2) * ring;
+        const r = 3 + 26 * left;
+        ctx.globalAlpha = 1;
+        ctx.beginPath(); ctx.arc(bx, by, r, 0, Math.PI * 2); ctx.fill();
+      }
+    };
+  },
+
+  /**
+   * The staking, as it looks to an agent's own pile.
+   *
+   * Everyone stakes everything, so a pile empties as its tokens leave and
+   * fills with whatever was aimed at it. Both happen at once and the two are
+   * read off one number: where the agent's holding is on its way from what it
+   * had to what it will have.
+   */
+  _staking(view) {
+    const stage = view.stage;
+    const after = new Map(stage.ids.map(id => [id, 0]));
+    for (const [to, , amount] of (stage.marks.staked || [])) {
+      if (after.has(to)) after.set(to, after.get(to) + amount);
+    }
+    const g = this.GAME;
+    const run = (view.since - g.hold) / g.travel;
+    const at = Math.max(0, Math.min(1, run));
+    return { after: id => after.get(id) || 0, at: at * at * (3 - 2 * at), raw: run };
+  },
+
   _tokens(ctx, view, place, time, w, h) {
-    // Nothing is in orbit during the staking: every token is on a link.
-    if (view.effects.has('stakes')) return;
+    // The opening step is a single agent and what it is made of; the pile it
+    // happens to be holding is the next step's subject.
+    if (view.effects.has('bare')) return;
     const stage = view.stage;
     // Falls back to the current stage only if nobody has set a run-wide scale.
     const ref = Math.max(2, view.tokenRef || Math.max(1, ...stage.tokens));
     const full = Math.log(ref);
-    // Only the step that introduces them flies them in. The step after holds
-    // the same orbit rather than replaying the arrival, so the dots simply stay
-    // where they are while everything else moves on.
-    const arriving = view.effects.has('arrive');
-    const settled = arriving
-      ? Math.min(1, Math.max(0, (view.since - 0.25) / 2.6))
-      : 1;
-    const eased = settled * settled * (3 - 2 * settled);
-    const away = Math.max(w, h) * 1.15;
+
+    // How many dots an agent's pile is drawn with. Anchored at both ends: one
+    // token is one dot, the reference is fifteen. Never more dots than tokens,
+    // which makes the small piles literally countable — the log only starts
+    // compressing once there are more than about six, which is also about
+    // where counting them stops working.
+    const count = held => Math.max(1, Math.min(this.TOKEN_DOTS, held,
+      1 + Math.round((this.TOKEN_DOTS - 1) * Math.log(held) / full)));
+
+    // The supply arriving, on the step that introduces it. It comes from
+    // nowhere in the world, so it comes from a ball outside the graph that
+    // works its way round and fires as it goes, shrinking as it empties.
+    const supply = view.effects.has('arrive')
+      ? this._supply(view, place, count, w, h) : null;
+    // Everyone stakes everything, so during the game a pile drains as it
+    // leaves and fills with whatever was aimed at it.
+    const moving = view.effects.has('stakes') ? this._staking(view) : null;
+    // A child holds nothing until what it was given has crossed the link.
+    const given = view.effects.has('inherit') ? this._inheritance(view) : null;
+    const children = given
+      ? new Set((stage.marks.parents || []).map(pair => pair[1])) : null;
 
     ctx.save();
     ctx.fillStyle = this.ink.good;
@@ -682,14 +910,11 @@ const StepView = {
     stage.ids.forEach((id, i) => {
       const p = place(id);
       if (!p) return;
-      const held = stage.tokens[i];
+      let held = stage.tokens[i];
+      if (moving) held = Math.round(held + (moving.after(id) - held) * moving.at);
+      if (children && children.has(id)) held = Math.round(held * given.at);
       if (held <= 0) return;                 // nothing to hold, nothing in orbit
-      // Anchored at both ends: one token is one dot, the reference is fifteen.
-      // Never more dots than tokens, which makes the small piles literally
-      // countable — the log only starts compressing once there are more than
-      // about six, which is also about where counting them stops working.
-      const dots = Math.max(1, Math.min(this.TOKEN_DOTS, held,
-        1 + Math.round((this.TOKEN_DOTS - 1) * Math.log(held) / full)));
+      const dots = count(held);
 
       // Spread evenly, so the ring says how many there are at a glance rather
       // than needing to be counted through gaps and clumps. Each agent's ring
@@ -699,24 +924,26 @@ const StepView = {
       const size = Math.max(1.9, Math.min(3.1, (Math.PI * 2 * orbit / dots) * 0.42));
 
       for (let k = 0; k < dots; k++) {
-        const seed = (i * 7 + k * 13) % 97;
         const angle = start + (k / dots) * Math.PI * 2 + time * 0.45;
         const toX = p.x + Math.cos(angle) * orbit;
         const toY = p.y + Math.sin(angle) * orbit;
 
-        let x = toX, y = toY;
-        if (arriving && eased < 1) {
-          const fromX = p.x + Math.cos(seed) * away;
-          const fromY = p.y + Math.sin(seed * 1.7) * away;
-          x = fromX + (toX - fromX) * eased;
-          y = fromY + (toY - fromY) * eased;
+        let x = toX, y = toY, alpha = p.alpha * 0.9;
+        if (supply) {
+          const shot = supply.shot(id, k, dots);
+          if (!shot) continue;               // not fired yet
+          x = shot.x + (toX - shot.x) * shot.in;
+          y = shot.y + (toY - shot.y) * shot.in;
+          alpha = p.alpha * Math.min(1, shot.in * 4);
         }
-        ctx.globalAlpha = p.alpha * (arriving ? Math.min(1, eased * 3) : 0.9);
+        ctx.globalAlpha = alpha;
         ctx.beginPath();
         ctx.arc(x, y, size, 0, Math.PI * 2);
         ctx.fill();
       }
     });
+
+    if (supply) supply.draw(ctx);
     ctx.restore();
     ctx.globalAlpha = 1;
   },

@@ -987,7 +987,6 @@ details.control-group > summary:hover h3 { color: var(--text); }
   gap: 10px;
 }
 
-.ex-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .ex-where { font-size: 11.5px; color: var(--muted); letter-spacing: 0.02em; }
 
 /* The step's name and number head the explanation, because that is what they
@@ -1035,10 +1034,10 @@ details.control-group > summary:hover h3 { color: var(--text); }
   flex: 1 1 auto;
   min-height: 0;
   display: grid;
-  /* The picture takes the width the picture and the words used to share. The
-     words are on it now, so the graph is not squeezed into a third of the row
-     to leave room for a column of text beside it. */
-  grid-template-columns: 2.1fr 1fr;
+  /* The picture gets the wider share; the words and the script share the
+     other column, the explanation sitting directly above the place in the
+     script it is talking about. */
+  grid-template-columns: minmax(0, 1.6fr) minmax(340px, 1fr);
   gap: 12px;
 }
 
@@ -1052,29 +1051,57 @@ details.control-group > summary:hover h3 { color: var(--text); }
 .ex-stage { position: relative; overflow: hidden; background: #0d1117; }
 #explainCanvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 
-/* The step's words, laid on the picture the way the front page lays its note
-   on the backdrop: a translucent card in the corner rather than a pane of its
-   own. The step's emblem is the card's background — one light grey on nothing,
-   so it reads as a watermark and not as an illustration. */
+.ex-side {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 0;
+}
+
+/* The step's words, in the card the front page uses for its note. The step's
+   emblem is the card's background — one light grey on nothing, so it reads as
+   a watermark and not as an illustration. */
 .ex-note {
-  position: absolute;
-  left: 20px;
-  bottom: 20px;
-  right: 20px;
-  max-width: 520px;
-  max-height: calc(100% - 40px);
-  overflow-y: auto;
+  position: relative;
+  /* Its own height, up to a share of the column — not whatever is left after
+     the script has taken what it wants. As a grid row against the script's
+     1fr it was squeezed to half the words and scrolled on every step. */
+  flex: 0 0 auto;
+  max-height: 60%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   padding: 15px 17px;
-  padding-right: 112px;
+  padding-right: 94px;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-left: 2px solid var(--accent);
   border-radius: var(--radius);
-  background-color: rgba(13, 17, 23, 0.72);
-  backdrop-filter: blur(7px);
+  background-color: var(--panel);
   background-repeat: no-repeat;
-  background-position: right 16px center;
-  background-size: auto 74px;
+  background-position: right 14px top 15px;
+  background-size: auto 62px;
 }
+
+/* Where you are, and the way through: at the foot of the words they belong
+   to rather than in a bar across the top of all three panes. */
+.ex-foot-row {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 14px;
+  padding-top: 11px;
+  border-top: 1px solid var(--border);
+  margin-right: -77px;
+}
+/* Only the words scroll. The way through is pinned under them, or the one
+   step whose explanation runs long is the one step you cannot page off. */
+#explainText {
+  min-height: 0;
+  overflow-y: auto;
+}
+
 .ex-note p {
   margin: 0 0 10px;
   color: var(--text);
@@ -1093,6 +1120,8 @@ details.control-group > summary:hover h3 { color: var(--text); }
    dim — so the part being explained is read in the place it actually lives
    rather than as a detached snippet. */
 .ex-code {
+  flex: 1 1 auto;
+  min-height: 0;
   overflow-y: auto;
   padding: 12px 0;
   font: 11.5px/1.55 ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -1136,7 +1165,8 @@ details.control-group > summary:hover h3 { color: var(--text); }
 
 @media (max-width: 1100px) {
   .ex { height: auto; }
-  .ex-body { grid-template-columns: 1fr 1fr; }
-  .ex-stage { min-height: 320px; }
-  .ex-code { grid-column: 1 / -1; max-height: 420px; }
+  .ex-body { grid-template-columns: 1fr; }
+  .ex-stage { min-height: 340px; }
+  .ex-note { max-height: none; }
+  .ex-code { max-height: 420px; }
 }
