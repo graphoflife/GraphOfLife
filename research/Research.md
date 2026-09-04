@@ -133,33 +133,73 @@ between-agent, and the effective unit of selection drifts upward over time.
 
 ## 3. Can open-ended evolution happen here?
 
-### 3.1 The honest prior
+### 3.1 A retracted argument, and what survives it
 
-Probably **not without at least one addition**, and the reason is structural
-rather than a matter of parameters.
+An earlier draft of this document argued that strict token conservation
+**precludes** unbounded complexity, on the grounds that "complexity has a cost
+and no channel to pay for itself". That argument is wrong, in two separate
+ways, and the correction matters enough to record rather than quietly delete.
 
-Tokens are strictly conserved and every interaction is appropriative. There is
-**no positive-sum interaction available anywhere in the rule set**. Two agents
-that coordinate perfectly cannot produce more than two agents that ignore each
-other; they can only redistribute. Every major transition in biological
-evolution — chromosomes, eukaryotes, multicellularity, eusociality — rests on
-interactions where the whole exceeds the sum, usually through division of
-labour or metabolic complementarity.
+**It is wrong about this system.** Complexity here has no cost. Every brain has
+the same architecture — the layer sizes are a global constant — so a genome is
+a fixed-length vector of weights and there is nothing for an agent to spend on
+being more complicated. Whatever bounds this system, it is not the price of
+complexity.
 
-A strictly zero-sum world with a fixed resource can still show unbounded
-*strategic* churn (arms races, Red Queen dynamics) but is a poor candidate for
-unbounded *complexity growth*, because complexity has a cost and no channel to
-pay for itself.
+**It is wrong about zero-sum games generally.** Van Valen's Red Queen (1973) is
+a zero-sum formulation of evolution and is the standard account of *sustained*
+adaptation: in a world where one lineage's gain is another's loss, everything
+must keep evolving to stand still. Host–parasite arms races, Sims' (1994)
+competitive coevolution, and every deep two-player game are zero-sum and
+strategically unbounded. Zero-sum forbids nothing.
 
-This is the single most important design question, and it is stated as a
-hypothesis rather than a conclusion because it might be wrong: self-generated
-niches can appear in strictly competitive worlds (Chromaria; Soros & Stanley
-2014), and the graph topology is itself a resource that agents shape.
+**The specific counter-argument that defeats it.** Organisation does not need
+to *produce* surplus to pay for itself; it only needs to take a larger *share*.
+A structure of many agents that holds tokens better than the same agents
+separately is favoured, and nothing in conservation forbids that structure from
+being larger, or from there being more of them. Empires are zero-sum and scale
+anyway. Conservation bounds the *total*, not the *organisation of it* — and the
+total is a parameter.
 
-**Hypothesis H1 (zero-sum ceiling).** Under strict conservation and purely
-appropriative interaction, evolutionary activity is *bounded* (Bedau class 2):
-novelty continues but the diversity of persistently-used adaptations saturates.
-Adding an endogenous positive-sum channel moves it to unbounded (class 3).
+So the honest position is the weaker one: **conservation bounds the population
+at `T`, and therefore bounds how many lineages and how much structure can
+coexist. It bounds nothing else.** Raising `T` raises that ceiling
+proportionally, which makes "make the world big enough that it never settles"
+a real answer rather than an evasion.
+
+### 3.1a What still gives me pause, stated better
+
+Three arguments that are not the retracted one.
+
+**The genome cannot grow.** Layer sizes are fixed for a run, so a new adaptation
+must be a re-encoding of existing weights and never a new structure. Tierra and
+Avida both let genome length change, and unbounded growth in *encoded*
+complexity is normally what "class 3" ends up meaning. This is a real limit and
+it is a parameter away from being lifted — variable hidden layers, or a
+duplication operator.
+
+**The state space does not expand.** Banzhaf et al. (2016) separate novelty
+*within* a fixed space of possibilities from novelty that *enlarges* the space.
+Here the space is settled at configuration time: a graph, an integer per node,
+weights of a fixed shape. No rule can bring a new *kind* of thing into
+existence. Whether that is fatal is genuinely contested — it is close to the
+central open question of the field — but it is the strongest available argument
+against, and it has nothing to do with conservation.
+
+**Locality may cap coherent structure.** *New, and the most interesting of the
+three.* Information moves one hop per phase. A structure of diameter `D` needs
+`D` phases for one side to learn anything about the other, so a structure can
+only behave as a unit if it is smaller than the distance information travels in
+the time the world stays put. That predicts a **maximum coherent size set by the
+ratio of information speed to the rate of change** — which is a physical-feeling
+limit of the same kind as the one that stops organisms signalling across
+arbitrary distances, and it would bound structure even with `T` infinite.
+
+**Hypothesis H1 (revised).** Conservation is not the binding constraint. What
+bounds structure is the coherence limit: the largest lasting structure has a
+diameter comparable to the number of phases over which the neighbourhood it
+sits in stays recognisable. *Falsified if* the largest persistent clonal patch
+keeps growing with `T` at fixed churn.
 
 ### 3.2 The scale question
 
@@ -180,6 +220,49 @@ dimension already implemented is the right instrument for exactly this.
 **Prediction P3.** If `D` grows sub-logarithmically with `N`, larger worlds
 will *not* be qualitatively richer — they will be many copies of the same
 dynamics. If `D` grows as a power of `N`, they will be.
+
+---
+
+## 3.4 Castles: making the intuition measurable
+
+The criterion that prompted the retraction above was put plainly: *if many
+nodes together form a kind of castle, and the castle can get larger and there
+can be more of them, that is already open-ended evolution.* That is a
+structural criterion rather than a genetic one, it is a reasonable thing to
+mean by the term, and — unlike most definitions in this literature — it can be
+measured directly.
+
+**Definition.** A **castle** at iteration `t` is a connected set of agents `C`
+such that
+
+1. **it is one lineage** — every member's ancestor `w` iterations back is the
+   same agent (the clade test §5.2 already computes this);
+2. **it holds together** — the token flow along edges inside `C` exceeds the
+   flow across its boundary, by some ratio `ρ > 1`;
+3. **it persists** — a set overlapping `C` in at least half its members
+   satisfies 1 and 2 at `t + 1`.
+
+All three are computable from what a run already records: the clade from the
+lineage forest, the flows from `marks.flow`, the persistence by overlap between
+consecutive iterations.
+
+**The three numbers to watch**, each as a function of `T`:
+
+- **size** — members of the largest persistent castle;
+- **count** — how many exist at once;
+- **lifetime** — how long the longest-lived one survives.
+
+**Hypothesis H4 (castles).** Castle size and count grow without bound as `T`
+grows; castle *lifetime* does not, being capped by the coherence limit of
+§3.1a. If all three grow, the structural criterion for open-endedness is met
+and H1 is wrong as well. If size grows but lifetime saturates, castles are real
+but transient — an ecology of empires rather than a transition in
+individuality.
+
+The interesting case is the third: size and count growing with `T` while
+lifetime is flat would mean the world gets *wider* without getting *deeper*,
+which is the sharpest version of the disagreement this section is about and is
+worth settling before anything else in §6.
 
 ---
 
@@ -433,6 +516,12 @@ experiment in this document.*
 
 **E6 — Long run.** One run, as long as patience allows, `export_every = 1`, for
 the activity statistics. Everything else is a pilot for this.
+
+**E7 — Castles against scale.** `T` over as wide a range as memory allows, with
+the brain held fixed, measuring castle size, count and lifetime (§3.4) and the
+time for the founding lineages to collapse to one. *Tests H4, and settles
+whether "big enough that it never finishes" is a real answer.* This is the
+experiment the disagreement in §3.1 turns on, and it should come first.
 
 ---
 
