@@ -358,29 +358,35 @@ const RunsView = {
 
     const messages = cfg.message_amount ?? 5;
     const noise = cfg.random_input_amount ?? 5;
-    const inputs = 29 + 4 * messages + noise;
+    // 1 is-self flag + 28 magnitudes, then the messages and the noise.
+    const magnitudes = 28;
+    const inputs = 1 + magnitudes + 4 * messages + noise;
     // Revolutions add a fraction pair; handover adds a yes/no pair plus its
     // mode pair. Both are absent from the brain when switched off.
     const outputs = 9 + (cfg.allow_revolutions ? 2 : 0)
                       + (cfg.allow_handover ? 4 : 0)
                       + messages;
 
-    // A binary brain spreads every input across a ladder of bits, so its first
-    // layer is far wider even though each weight costs a fraction as much.
+    // A binary brain spreads its magnitudes across a ladder of bits, so its
+    // first layer is wider even though each weight costs a fraction as much.
+    // The flag, the messages and the noise are already bits and stay one row.
     const binary = cfg.brain_kind === 'binary';
     const bits = binary ? (cfg.brain_bits || 16) : 1;
+    const firstLayer = binary
+      ? magnitudes * bits + 1 + 4 * messages + noise
+      : inputs;
     const bytesPerWeight = binary ? 1 : (cfg.brain_kind === 'float16' ? 2 : 8);
 
     const n = cfg.n_nodes > 0 ? cfg.n_nodes : Math.floor((cfg.total_tokens || 0) / 100);
     const k = cfg.k_neighbors > 0 ? cfg.k_neighbors : Math.max(Math.floor(n / 100), 5);
 
     const layers = (cfg.hidden_layers && cfg.hidden_layers.length) ? cfg.hidden_layers : [50, 45, 40, 35, 30];
-    const sizes = [inputs * bits, ...layers, outputs];
+    const sizes = [firstLayer, ...layers, outputs];
     let params = 0;
     for (let i = 0; i < sizes.length - 1; i++) params += sizes[i] * sizes[i + 1] + sizes[i + 1];
 
     el.textContent =
-      `${formatNumber(inputs)} inputs × ${formatNumber(bits)} = ${formatNumber(inputs * bits)} first layer, `
+      `${formatNumber(inputs)} inputs, ${formatNumber(firstLayer)} first layer, `
       + `${formatNumber(outputs)} outputs, ${formatNumber(params)} weights per brain `
       + `(≈ ${formatBytes(params * bytesPerWeight)}). `
       + `Seed graph ${formatNumber(n)} agents, ${formatNumber(k)} neighbours each. `

@@ -402,10 +402,10 @@ class BinaryBrain(Brain):
         return np.linspace(self.INPUT_LOW, self.INPUT_HIGH, bits, dtype=np.float64)
 
     def layer_sizes(self) -> List[int]:
-        # Every input became `brain_bits` of them.
+        # Every magnitude became `brain_bits` of them. The rest were already
+        # bits and stay one row each.
         cfg = self.cfg
-        return ([cfg.n_inputs() * cfg.brain_bits]
-                + list(cfg.hidden_layers) + [cfg.n_outputs()])
+        return [cfg.binary_rows()] + list(cfg.hidden_layers) + [cfg.n_outputs()]
 
     def _allocate(self) -> None:
         sizes = self.layer_sizes()
@@ -422,13 +422,33 @@ class BinaryBrain(Brain):
             self.biases.append(np.zeros((fan_out, 1), dtype=np.int8))
 
     def encode(self, x: np.ndarray) -> np.ndarray:
-        """Spread each input across its ladder of thresholds."""
+        """
+        Spread each magnitude across its ladder, and pass the rest straight in.
+
+        Only the tokens, degrees and quantiles are magnitudes. The is-self
+        flag, the messages and the noise are already 0 or 1 in a binary world,
+        and laddering them spent sixteen rows apiece to say one thing — the
+        ladder covers roughly -2 to 12, so a value that never leaves 0 to 1
+        could only ever reach its bottom rung. Measured before this: three
+        hundred of the eight hundred and sixty-four rows in the first layer
+        were permanently zero, carrying weights that were mutated for the whole
+        of a run and could never affect anything.
+        """
+        cfg = self.cfg
         a = np.asarray(x, dtype=np.float64)
         if a.ndim == 1:
             a = a.reshape(-1, 1)
-        # (inputs, candidates) -> (inputs, bits, candidates) -> stacked rows.
-        bits = (a[:, None, :] >= self.thresholds()[None, :, None])
-        return bits.reshape(a.shape[0] * self.cfg.brain_bits, a.shape[1]).astype(np.int32)
+
+        flags = a[:cfg.FLAG_INPUTS]
+        span = cfg.FLAG_INPUTS + cfg.MAGNITUDE_INPUTS
+        scale = a[cfg.FLAG_INPUTS:span]
+        rest = a[span:]
+
+        # (magnitudes, candidates) -> (magnitudes, bits, candidates) -> rows.
+        bits = (scale[:, None, :] >= self.thresholds()[None, :, None])
+        ladder = bits.reshape(scale.shape[0] * cfg.brain_bits, a.shape[1])
+
+        return np.vstack([flags, ladder, rest]).astype(np.int32)
 
     def forward(self, x: np.ndarray) -> np.ndarray:
         a = self.encode(x)
@@ -628,7 +648,13 @@ class GraphOfLife:
             return out + [0.0] * (m - len(out))
 
         msg_feats = msg(u, u) + msg(u, v) + msg(v, u) + msg(v, v)
-        noise = np.random.uniform(-2.0, 2.0, size=cfg.random_input_amount).tolist()
+        # Coins in a binary world, a spread of magnitudes anywhere else. A
+        # binary brain cannot read a magnitude that is not on its ladder, so
+        # noise drawn as a float would arrive as a single bit anyway — this
+        # just makes it an honest one.
+        noise = (np.random.randint(0, 2, size=cfg.random_input_amount).astype(float)
+                 if cfg.brain_kind == "binary"
+                 else np.random.uniform(-2.0, 2.0, size=cfg.random_input_amount)).tolist()
 
         return np.array([int(u == v)] + base + msg_feats + noise, dtype=float)
 
@@ -689,7 +715,12 @@ class GraphOfLife:
         if not cfg.exchange_messages or cfg.message_amount <= 0:
             return
         start = self.heads["MESSAGE_START"]
-        rows = np.tanh(Y[start:start + cfg.message_amount, :])
+        block = Y[start:start + cfg.message_amount, :]
+        # A binary brain says bits. Its output layer hands back a count, and
+        # squashing that through tanh produced a value that was neither a bit
+        # nor a useful magnitude — eleven distinct values across a whole phase,
+        # then read back through a ladder that could only see the bottom of it.
+        rows = (block > 0).astype(float) if cfg.brain_kind == "binary" else np.tanh(block)
         for j, v in enumerate(targets):
             outbox.setdefault(u, {})[int(v)] = rows[:, j].astype(float).tolist()
 
@@ -1340,6 +1371,19 @@ class GraphOfLife:
         n_layers = int(blob["n_layers"][0])
         weights = [blob[f"W{i}"] for i in range(n_layers)]
         biases = [blob[f"b{i}"] for i in range(n_layers)]
+
+        # A checkpoint carries weights, not the shape they were for. If the
+        # architecture has moved since — a hidden layer resized, or a change in
+        # how inputs reach the first one — the arrays still load and the run
+        # then dies inside a matrix multiply several steps later, saying
+        # nothing about why. Checked here, where the answer is still obvious.
+        want = make_brain(cfg, 0, allocate=False).layer_sizes()
+        got = [int(weights[0].shape[2])] + [int(w.shape[1]) for w in weights]
+        if len(got) != len(want) or got != want:
+            raise ValueError(
+                f"this checkpoint was written for a brain of shape {got}, and "
+                f"these settings describe one of shape {want}. A run can only "
+                f"be resumed into the architecture it was saved from.")
 
         for i, u in enumerate(ids):
             brain = make_brain(cfg, int(brain_ids[i]), allocate=False)

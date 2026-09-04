@@ -930,6 +930,142 @@ def test_the_pre_pass_is_on_for_new_runs_and_off_for_old_ones():
         "reading a stored config must be what happens when nobody says otherwise"
 
 
+def test_a_binary_brain_spends_no_rows_on_things_that_are_already_bits():
+    """
+    The ladder is for magnitudes. Nothing else should be on it.
+
+    Every input used to be spread across `brain_bits` thresholds spanning
+    roughly -2 to 12, which is right for a logged token count and absurd for a
+    value that is only ever 0 or 1: fifteen of its sixteen rows could never
+    change. Three hundred of the first layer's eight hundred and sixty-four
+    rows were permanently zero, carrying weights that were mutated for the
+    whole of a run and could never affect anything.
+
+    Now the is-self flag, the message channels and the noise are one row each,
+    and every one of those rows does something.
+    """
+    import numpy as np
+
+    random.seed(4)
+    np.random.seed(4)
+    cfg = small(brain_kind="binary", brain_bits=16, hidden_layers=[24, 16],
+                message_amount=5, random_input_amount=5, seed=4)
+    world = new_world(cfg)
+    for _ in range(4):
+        world.step(record_decisions=False)
+
+    assert cfg.binary_rows() == cfg.MAGNITUDE_INPUTS * cfg.brain_bits + cfg.bit_inputs()
+    brain = next(iter(world.brains.values()))
+    assert brain.layer_sizes()[0] == cfg.binary_rows()
+
+    rows = []
+    original = world._observe
+
+    def spy(u, candidates, *rest):
+        x = np.column_stack([world._input_vec(u, v, *rest) for v in candidates])
+        rows.append(world.brains[u].encode(x))
+        return original(u, candidates, *rest)
+
+    world._observe = spy
+    try:
+        world.reproduction_phase(record_decisions=False)
+    finally:
+        world._observe = original
+
+    encoded = np.hstack(rows)
+    assert encoded.shape[0] == cfg.binary_rows()
+
+    # Everything after the ladder is a bit that stands for itself.
+    start = cfg.FLAG_INPUTS + cfg.MAGNITUDE_INPUTS * cfg.brain_bits
+    tail = encoded[start:]
+    assert tail.shape[0] == 4 * cfg.message_amount + cfg.random_input_amount
+    dead = int((tail.max(axis=1) == tail.min(axis=1)).sum())
+    assert dead == 0, f"{dead} message or noise rows can never change"
+    assert set(np.unique(tail).tolist()) <= {0, 1}
+
+
+def test_a_binary_world_says_bits_and_hears_bits():
+    """
+    Its output layer hands back a count, and squashing that through tanh gave
+    a value that was neither a bit nor a useful magnitude — eleven distinct
+    values across a whole phase, then read back through a ladder that could
+    only see the bottom of it. A binary world's messages are bits, and so is
+    its noise.
+    """
+    import numpy as np
+
+    random.seed(6)
+    np.random.seed(6)
+    cfg = small(brain_kind="binary", brain_bits=16, hidden_layers=[24, 16], seed=6)
+    world = new_world(cfg)
+    for _ in range(4):
+        world.step(record_decisions=False)
+
+    sent = [v for notes in world.messages.values() for vec in notes.values() for v in vec]
+    assert sent, "wanted some messages to look at"
+    assert set(sent) <= {0.0, 1.0}, f"a binary world sent non-bits: {sorted(set(sent))[:6]}"
+
+    log_deg, _neighs, q_tok, q_deg, log_tok = world._precompute_features()
+    u, v = sorted(world.G.nodes())[:2]
+    seen = set()
+    for _ in range(40):
+        vec = world._input_vec(u, v, log_deg, q_tok, q_deg, log_tok)
+        seen.update(vec[-cfg.random_input_amount:].tolist())
+    assert seen <= {0.0, 1.0}, f"a binary world's noise was not bits: {sorted(seen)[:6]}"
+
+
+def test_the_float_brains_do_not_ladder_anything():
+    """The ladder belongs to the binary brain; the others read values whole."""
+    import numpy as np
+
+    for kind in ("float", "float16"):
+        cfg = small(brain_kind=kind)
+        brain = new_world(cfg).brains[sorted(new_world(cfg).G.nodes())[0]]
+        assert brain.layer_sizes()[0] == cfg.n_inputs(), \
+            f"{kind} should take one row per input"
+
+    cfg = small(brain_kind="float", random_input_amount=6, seed=2)
+    world = new_world(cfg)
+    features = world._precompute_features()
+    u, v = sorted(world.G.nodes())[:2]
+    vec = world._input_vec(u, v, features[0], features[2], features[3], features[4])
+    noise = vec[-cfg.random_input_amount:]
+    assert not set(noise.tolist()) <= {0.0, 1.0}, \
+        "a float world's noise should be a spread of magnitudes, not coins"
+
+
+def test_a_checkpoint_refuses_a_brain_it_does_not_fit():
+    """
+    Weights are saved; the shape they were for is not. Loading them into a
+    different architecture used to succeed and then die inside a matrix
+    multiply several steps later, saying nothing about why.
+    """
+    import io
+    import numpy as np
+
+    cfg = small(brain_kind="binary", brain_bits=16, hidden_layers=[24, 16], seed=5)
+    world = new_world(cfg)
+    world.step(record_decisions=False)
+
+    buffer = io.BytesIO()
+    np.savez_compressed(buffer, **world.to_checkpoint())
+    buffer.seek(0)
+
+    wider = small(brain_kind="binary", brain_bits=16, hidden_layers=[40, 16], seed=5)
+    with np.load(buffer) as blob:
+        try:
+            GraphOfLife.from_checkpoint(blob, wider)
+        except ValueError as exc:
+            assert "shape" in str(exc), exc
+        else:
+            raise AssertionError("a checkpoint loaded into the wrong architecture")
+
+    buffer.seek(0)
+    with np.load(buffer) as blob:
+        again = GraphOfLife.from_checkpoint(blob, cfg)
+    assert sum(again.tokens.values()) == sum(world.tokens.values())
+
+
 def _main() -> int:
     """Find the tests in this file and run them, reporting like pytest would."""
     import time

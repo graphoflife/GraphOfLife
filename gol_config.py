@@ -183,10 +183,32 @@ class SimConfig:
             return self.k_neighbors
         return max(int(self.resolved_n() / 100), 5)
 
+    # How an observation is laid out, in the order _input_vec builds it. Named
+    # because the binary brain has to tell a magnitude from something that is
+    # already a single bit, and counting to 29 in three places was how the two
+    # would come to disagree.
+    FLAG_INPUTS: ClassVar[int] = 1        # is-self
+    MAGNITUDE_INPUTS: ClassVar[int] = 28  # own/target tokens and degrees, and quantiles
+
     def n_inputs(self) -> int:
-        # 1 (is-self) + 4 (own/target tokens and degrees) + 24 (quantiles)
-        base = 29
-        return base + 4 * self.message_amount + self.random_input_amount
+        return (self.FLAG_INPUTS + self.MAGNITUDE_INPUTS
+                + 4 * self.message_amount + self.random_input_amount)
+
+    def bit_inputs(self) -> int:
+        """
+        Inputs that are already a single bit: the is-self flag, and — in a
+        binary world — every message channel and every noise draw.
+
+        Only magnitudes need a ladder. Spreading a value that is only ever 0 or
+        1 across sixteen thresholds spends sixteen rows to say one thing, and
+        fifteen of them can never change.
+        """
+        return (self.FLAG_INPUTS
+                + 4 * self.message_amount + self.random_input_amount)
+
+    def binary_rows(self) -> int:
+        """The width of a binary brain's first layer."""
+        return self.MAGNITUDE_INPUTS * self.brain_bits + self.bit_inputs()
 
     def n_outputs(self) -> int:
         # 9 always-present heads, plus the optional ones, then the message
