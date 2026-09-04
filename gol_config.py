@@ -83,6 +83,26 @@ class SimConfig:
     random_input_amount: int = 5
     exchange_messages: bool = True
 
+    # An extra look at the start of each phase, for talking only.
+    #
+    # With this off, a phase is one pass: an agent observes, says what it has to
+    # say, and acts, all from the same look. Its neighbours' messages are
+    # therefore a phase old — written before the births, deaths and conquests
+    # that have happened since — so an agent acts on a description of a graph
+    # that no longer exists.
+    #
+    # With it on, everyone observes and writes messages first, those are
+    # delivered, and only then does the pass that acts happen. The messages it
+    # reads describe the graph as it stands right now. The acting pass still
+    # writes messages of its own, so nothing is lost; there is simply a fresher
+    # generation available to act on.
+    #
+    # It costs one extra forward pass per agent per phase, so a run is roughly
+    # twice the work. Nothing about the brain changes, which is why — unlike
+    # handover and revolutions — this one can be turned on or off for a run
+    # that already exists.
+    message_prepass: bool = False
+
     # ---- Rules ----
     # Let a parent hand one of its own connections to the newborn: the edge
     # moves from parent to child rather than being copied.
@@ -201,6 +221,9 @@ class SimConfig:
             raise ValueError("rewire_p must be between 0 and 1")
         if self.message_amount < 0 or self.random_input_amount < 0:
             raise ValueError("message_amount and random_input_amount cannot be negative")
+        if self.message_prepass and not self.exchange_messages:
+            raise ValueError("message_prepass needs exchange_messages: a pass that "
+                             "exists only to send messages has nothing to do without them")
         if not 0.0 <= self.mutation_probability <= 1.0:
             raise ValueError("mutation_probability must be between 0 and 1")
         if not 0.0 <= self.mutation_sparsity <= 1.0:

@@ -632,6 +632,165 @@ def test_a_truncated_resume_removes_frames_past_a_hundred_thousand():
             gol_store.BASE_DIR = original
 
 
+def test_the_message_prepass_gives_the_acting_pass_messages_from_this_graph():
+    """
+    The whole point of the option, stated as the thing it changes.
+
+    Without it a phase is one pass — observe, speak, act — so what an agent
+    acts on was written by its neighbours a phase ago, before the births,
+    deaths and conquests since. With it, everyone speaks first, that is
+    delivered, and the pass that acts reads a generation written from the graph
+    as it stands.
+
+    Checked by watching what is actually in front of the acting pass rather
+    than by counting deliveries, because a delivery that happened is not
+    evidence that anybody read it.
+    """
+    import copy
+    import numpy as np
+
+    def what_the_acting_pass_sees(prepass):
+        random.seed(3)
+        np.random.seed(3)
+        cfg = SimConfig(total_tokens=4000, message_prepass=prepass)
+        world = new_world(cfg)
+        for _ in range(6):
+            world.step(record_decisions=False)
+
+        before = copy.deepcopy(world.messages)
+        seen = {"in_prepass": False}
+
+        real_prepass = world._message_prepass
+        def prepass_wrap(step, features):
+            seen["in_prepass"] = True
+            real_prepass(step, features)
+            seen["in_prepass"] = False
+            seen["after_prepass"] = copy.deepcopy(world.messages)
+        world._message_prepass = prepass_wrap
+
+        real_observe = world._observe
+        def observe(u, candidates, *rest):
+            if "at_act" not in seen and not seen["in_prepass"]:
+                seen["at_act"] = copy.deepcopy(world.messages)
+            return real_observe(u, candidates, *rest)
+        world._observe = observe
+
+        world.reproduction_phase(False)
+        return before, seen, copy.deepcopy(world.messages)
+
+    before, seen, after = what_the_acting_pass_sees(False)
+    assert seen["at_act"] == before, \
+        "without the pre-pass the acting pass should be reading last phase's messages"
+    assert after != seen["at_act"], "the acting pass should still write messages"
+
+    before, seen, after = what_the_acting_pass_sees(True)
+    assert seen["at_act"] == seen["after_prepass"], \
+        "with the pre-pass the acting pass should be reading what the pre-pass just delivered"
+    assert seen["at_act"] != before, \
+        "with the pre-pass the acting pass should not be reading last phase's messages"
+    assert after != seen["at_act"], \
+        "the acting pass must keep writing its own messages, not only consume the pre-pass's"
+
+
+def test_the_message_prepass_speaks_for_everyone_including_the_broke():
+    """
+    An agent with nothing is still there and can still be seen.
+
+    The reproduction phase's acting pass skips anyone who cannot afford a
+    child, so leaving the pre-pass to follow that rule would silence exactly
+    the agents whose neighbours most need to know about them.
+    """
+    import numpy as np
+
+    random.seed(7)
+    np.random.seed(7)
+    cfg = SimConfig(total_tokens=4000, message_prepass=True)
+    world = new_world(cfg)
+    for _ in range(6):
+        world.step(record_decisions=False)
+
+    world.tokens[sorted(world.G.nodes())[0]] = 0
+    broke = [u for u in world.G.nodes() if world.tokens.get(u, 0) <= 0]
+    assert broke, "wanted at least one agent holding nothing"
+
+    spoke = []
+    real_emit = world._emit_messages
+    world._emit_messages = lambda u, t, Y, o: (spoke.append(u), real_emit(u, t, Y, o))[1]
+    world._message_prepass("repro.messages", world._precompute_features())
+
+    for u in broke:
+        assert u in spoke, f"agent {u} holds nothing and was not given a turn to speak"
+
+
+def test_the_message_prepass_changes_nothing_it_should_not():
+    """Tokens stay conserved and a seeded run stays reproducible with it on."""
+    import numpy as np
+
+    for prepass in (False, True):
+        random.seed(11)
+        np.random.seed(11)
+        cfg = SimConfig(total_tokens=3000, message_prepass=prepass, seed=11)
+        world = new_world(cfg)
+        for _ in range(8):
+            world.step(record_decisions=False)
+            assert sum(world.tokens.values()) == cfg.total_tokens, \
+                f"tokens leaked with message_prepass={prepass}"
+
+    def run():
+        random.seed(11)
+        np.random.seed(11)
+        world = new_world(SimConfig(total_tokens=3000, message_prepass=True, seed=11))
+        for _ in range(8):
+            world.step(record_decisions=False)
+        return sorted(world.tokens.items())
+
+    assert run() == run(), "a seeded run with the pre-pass is not reproducible"
+
+
+def test_a_prepass_without_messages_is_refused():
+    """
+    A pass that exists only to send messages has nothing to do without them.
+
+    Refused rather than quietly ignored: a setting that is accepted and then
+    does nothing is worse than one that says why it cannot be had.
+    """
+    try:
+        SimConfig.from_dict({"message_prepass": True, "exchange_messages": False})
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("a pre-pass without messages should not validate")
+
+    assert SimConfig.from_dict({"message_prepass": True}).message_prepass
+    assert SimConfig.from_dict({}).message_prepass is False, \
+        "a run recorded before the option existed must read as having run without it"
+
+
+def test_the_interface_offers_every_setting_the_engine_has():
+    """
+    A field nobody can set is a field nobody knows about.
+
+    Every knob on SimConfig should have somewhere in the form to set it, and
+    every checkbox should say what it does — the pre-pass and messages were
+    both added without one, and an unexplained checkbox is a checkbox nobody
+    touches.
+    """
+    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    page = open(os.path.join(root, "web", "index.html")).read()
+
+    # Not offered on purpose: the seed graph's rewire probability and the
+    # run-control knobs are set elsewhere or left at their defaults.
+    from dataclasses import fields as dataclass_fields
+    missing = [f.name for f in dataclass_fields(SimConfig)
+               if f'data-cfg="{f.name}"' not in page]
+    assert not missing, f"no form field for: {', '.join(missing)}"
+
+    for name in ("exchange_messages", "message_prepass", "allow_handover",
+                 "allow_revolutions"):
+        block = page.split(f'data-cfg="{name}"')[1].split("</div>")[0]
+        assert "<small>" in block, f"the {name} checkbox has no explanation under it"
+
+
 def _main() -> int:
     """Find the tests in this file and run them, reporting like pytest would."""
     import time

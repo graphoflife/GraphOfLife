@@ -79,6 +79,11 @@ h3 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.8px; color: v
 /* ---- forms ---- */
 .config-form { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 12px; }
 
+/* A setting that cannot currently be asked for. Dimmed rather than hidden, so
+   it is clear the option exists and something is holding it shut. */
+.field.disabled { opacity: 0.45; }
+.field.disabled label { cursor: not-allowed; }
+
 fieldset {
   border: 1px solid var(--border);
   border-radius: var(--radius);

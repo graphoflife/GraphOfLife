@@ -693,6 +693,40 @@ class GraphOfLife:
         for j, v in enumerate(targets):
             outbox.setdefault(u, {})[int(v)] = rows[:, j].astype(float).tolist()
 
+    def _message_prepass(self, step: str, features) -> None:
+        """
+        A look that only talks, before the look that acts.
+
+        Without it a phase is one pass — observe, speak, act — so the messages
+        an agent acts on were written by its neighbours a phase ago, before the
+        births, deaths and conquests since. It acts on a description of a graph
+        that no longer exists.
+
+        This runs the whole population through a forward pass whose only
+        product is messages, delivers them, and leaves the acting pass to read
+        a generation written from the graph as it stands. The acting pass still
+        writes messages of its own afterwards; this adds a fresher generation
+        rather than replacing the exchange.
+
+        Everyone speaks here, including agents holding nothing. They are still
+        present, their neighbours can still see them, and they still have
+        something to say — the same rule the game phase has always used, and
+        the reproduction phase's own acting pass does not, because that one
+        skips anyone who cannot afford a child.
+        """
+        cfg = self.cfg
+        if not (cfg.message_prepass and cfg.exchange_messages and cfg.message_amount > 0):
+            return
+
+        log_deg, neighs, q_tok, q_deg, log_tok = features
+        outbox: Dict[int, Dict[int, List[float]]] = {}
+        for u in sorted(self.G.nodes()):
+            targets = [u] + list(neighs[u])
+            Y = self._observe(u, targets, log_deg, q_tok, q_deg, log_tok)
+            self._emit_messages(u, targets, Y, outbox)
+        self._deliver_messages(outbox)
+        self._note(step)
+
     def _deliver_messages(self, outbox: Dict[int, Dict[int, List[float]]]) -> None:
         """What was written this phase becomes what is read next."""
         if not outbox:
@@ -717,7 +751,11 @@ class GraphOfLife:
         # and show how much each agent gained or lost across it.
         nodes_before = self.G.number_of_nodes()
         tokens_before = dict(self.tokens)
-        log_deg, neighs, q_tok, q_deg, log_tok = self._precompute_features()
+        features = self._precompute_features()
+        # Nothing here depends on what anyone said, so the features are
+        # measured once and both passes read the same ones.
+        self._message_prepass("repro.messages", features)
+        log_deg, neighs, q_tok, q_deg, log_tok = features
         self._note("repro.observe")
 
         for u in sorted(self.G.nodes()):
@@ -854,7 +892,9 @@ class GraphOfLife:
         """
         nodes_before = self.G.number_of_nodes()
         tokens_before = dict(self.tokens)
-        log_deg, neighs, q_tok, q_deg, log_tok = self._precompute_features()
+        features = self._precompute_features()
+        self._message_prepass("game.messages", features)
+        log_deg, neighs, q_tok, q_deg, log_tok = features
 
         # --- 1. One look, which decides both what to say and where to stake ---
         #

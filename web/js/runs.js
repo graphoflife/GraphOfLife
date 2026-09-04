@@ -99,8 +99,32 @@ const RunsView = {
     document.getElementById('refreshRuns').addEventListener('click', () => this.refresh());
 
     for (const input of this.form.querySelectorAll('[data-cfg]')) {
-      input.addEventListener('input', () => this.updateDerived());
+      input.addEventListener('input', () => {
+        this.syncDependentFields();
+        this.updateDerived();
+      });
     }
+    this.syncDependentFields();
+  },
+
+  /**
+   * Settings that only mean something alongside another one.
+   *
+   * The pre-pass is a pass that exists to send messages; with messages off it
+   * has nothing to do, and the engine rejects the combination outright. Better
+   * to make it unaskable than to let it be asked and refused — so the box is
+   * disabled and cleared, and the reason is on it.
+   */
+  syncDependentFields() {
+    const messages = document.getElementById('cfg_exchange_messages');
+    const prepass = document.getElementById('cfg_message_prepass');
+    if (!messages || !prepass) return;
+    prepass.disabled = !messages.checked;
+    if (prepass.disabled) prepass.checked = false;
+    prepass.closest('.field').classList.toggle('disabled', prepass.disabled);
+    prepass.title = prepass.disabled
+      ? 'Needs "Exchange messages": a pass that only sends messages has nothing to do without them.'
+      : '';
   },
 
   /**
@@ -152,6 +176,7 @@ const RunsView = {
       else input.value = (value === null || value === undefined) ? '' : value;
     }
     this.errorEl.textContent = '';
+    this.syncDependentFields();
     this.updateDerived();
   },
 

@@ -203,6 +203,11 @@
             </div>
             <div class="field checkbox">
               <label><input type="checkbox" id="cfg_exchange_messages" data-cfg="exchange_messages"> Exchange messages</label>
+              <small>Each agent writes a short vector to every neighbour and one to itself, delivered at the end of the phase so everyone reads the same generation. The message to itself is its only memory. Off, those inputs are always zero and an agent sees nothing but the graph.</small>
+            </div>
+            <div class="field checkbox">
+              <label><input type="checkbox" id="cfg_message_prepass" data-cfg="message_prepass"> Message pre-pass</label>
+              <small>An extra look at the start of each phase for talking only. Without it an agent acts on messages written a phase ago, before the births, deaths and conquests since — a description of a graph that no longer exists. With it, everyone speaks first and the pass that acts reads messages written from the graph as it stands. That pass still writes its own. Costs a second forward pass per agent, so a run is roughly twice the work. Needs messages to be on.</small>
             </div>
             <div class="field checkbox">
               <label><input type="checkbox" id="cfg_allow_handover" data-cfg="allow_handover"> Allow handover</label>
