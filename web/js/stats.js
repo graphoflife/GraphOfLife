@@ -602,7 +602,7 @@ class FrameMetrics {
       : 0;
 
     const distinctBrains = new Set(f.brain_ids).size;
-    const distinctLineages = new Set(f.parent_brain_ids).size;
+    const distinctParents = new Set(f.parent_brain_ids).size;
 
     const out = {
       iteration: f.iteration,
@@ -656,7 +656,7 @@ class FrameMetrics {
       // Genome
       distinctBrains,
       brainDiversity: n ? distinctBrains / n : 0,
-      distinctLineages,
+      distinctParents,
 
       // Cleanup, present on both phases
       starved: f.cleanup ? f.cleanup.starved : null,

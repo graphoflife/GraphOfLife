@@ -324,12 +324,28 @@ collapse to one within about seventeen iterations, so a stored founder label
 would read "1" forever, and the informative measure is a sliding window, which
 needs the forest anyway.
 
-One consequence has not been dealt with. `distinctLineages` still counts
-distinct *parents* among the living — one hop back. **Measured** at the end of
-a 25-iteration run: 176 agents, 146 genotypes, **105 distinct parents, and 1
-actual founder clade**. It is a real quantity now, where before it was noise,
-but it is not a clade count and should not be read as one. Either rename it or
-replace it with a windowed clade count computed the way `phylogeny.py` does.
+`distinctLineages` never counted lineages — it counts distinct *parents* among
+the living, one hop back. **Measured** at the end of a 25-iteration run: 176
+agents, 146 genotypes, **105 distinct parents, and 1 actual founder clade**. It
+is now called `distinctParents`, which is what it is.
+
+A real family count came with it. `cladesInWindow` counts how many separate
+families the living divide into, a family being everything descended from one
+agent alive `CLADE_WINDOW` iterations ago (8). It is computed in the series
+builder rather than in `frame_stats`, because it needs history and a frame
+statistic by definition does not — which also keeps the Python and JavaScript
+implementations in parity, since a single frame cannot produce it on either
+side.
+
+It uses a **rolling** window of ancestry, not the whole forest, so it stays
+bounded on a long run, and it is left **absent** rather than guessed whenever
+the chain is broken: `export_every > 1`, or a run long enough that the series
+had to be sampled down. Ancestry is a chain and a chain cannot be sampled.
+
+**Measured** over 30 iterations of a 40-founder world: agents ranged 56 → 205
+and genotypes 48 → 168 while families stayed between **20 and 28**. So it is
+not tracking the population, which is exactly what the statistic it replaces
+was doing.
 
 ### 5.3 Definitions to fix before measuring
 

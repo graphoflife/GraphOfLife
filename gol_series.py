@@ -19,9 +19,12 @@ import json
 import math
 import os
 import threading
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional, Tuple
 
 import gol_store as store
+
+#: What a brain with no recorded parent carries, matching the engine.
+NO_PARENT = -1
 
 # Progress of in-flight builds, so the browser can show how far along a rebuild
 # is instead of sitting on a blank wait. Reads happen on a different thread from
@@ -58,7 +61,7 @@ def progress(run_id: str) -> Dict[str, Any]:
 # does not merely serve stale numbers: it leaves a cache holding two shapes of
 # row at once, which is how the power-law statistics came to be computed and
 # then dropped on the way out.
-SERIES_VERSION = 16
+SERIES_VERSION = 17
 
 # At most this many iterations are analysed for a run's history.
 #
@@ -823,7 +826,7 @@ def frame_stats(frame: Dict[str, Any], previous: Dict[str, Any] | None = None) -
         # population size and neither of them a diversity measure.
         "distinctBrains": distinct_brains,
         "brainDiversity": (distinct_brains / n) if n else 0.0,
-        "distinctLineages": len(set(frame.get("parent_brain_ids", []))),
+        "distinctParents": len(set(frame.get("parent_brain_ids", []))),
         "density": (2 * len(edges)) / (n * (n - 1)) if n > 1 else 0.0,
         "medianDegree": _median(degrees),
         "minDegree": min(degrees) if degrees else 0,
@@ -873,6 +876,91 @@ def _sample_stride(total_iterations: int) -> int:
     while total_iterations // stride > MAX_SAMPLED_ITERATIONS:
         stride *= 2
     return stride
+
+
+# ----------------------------------------------------------------------------
+# Families
+# ----------------------------------------------------------------------------
+
+#: How far back a family is counted from. A clade is a choice of anchor and
+#: there is no single right one: anchored on the founders it collapses to a
+#: single family within about seventeen iterations of a typical run and reads
+#: one forever afterwards, which measures nothing. Anchored a few iterations
+#: back it keeps saying how finely the population is currently divided.
+CLADE_WINDOW = 8
+
+
+class _CladeWindow:
+    """
+    Who each living agent descends from, a few iterations ago.
+
+    Only the last `window` iterations of ancestry are held, which is all a
+    windowed count needs and is what keeps this bounded on a long run — the
+    whole forest of a five-thousand-iteration world is millions of nodes.
+
+    It has to be fed every iteration in order. Ancestry is a chain: sample it
+    and the links between the samples are gone, so a run recorded with
+    `export_every > 1`, or sampled down because it grew long, cannot have this
+    computed at all and the statistic is left absent rather than guessed at.
+    """
+
+    __slots__ = ("window", "parent", "born", "_seen")
+
+    def __init__(self, window: int = CLADE_WINDOW) -> None:
+        self.window = window
+        self.parent: Dict[int, int] = {}
+        self.born: Dict[int, int] = {}
+        self._seen: List[Tuple[int, List[int]]] = []      # (iteration, ids added)
+
+    def observe(self, iteration: int, brain_ids: Any, parent_brain_ids: Any) -> None:
+        added: List[int] = []
+        for brain, parent in zip(brain_ids, parent_brain_ids):
+            brain = int(brain)
+            if brain in self.born:
+                continue
+            self.born[brain] = iteration
+            self.parent[brain] = int(parent)
+            added.append(brain)
+        self._seen.append((iteration, added))
+        self._forget(iteration)
+
+    def _forget(self, now: int) -> None:
+        """Drop ancestry older than the window, so this stays bounded."""
+        keep = now - self.window * 2
+        while self._seen and self._seen[0][0] < keep:
+            _at, ids = self._seen.pop(0)
+            for brain in ids:
+                self.parent.pop(brain, None)
+                self.born.pop(brain, None)
+
+    def families(self, brain_ids: Any, iteration: int) -> int:
+        """How many distinct ancestors-of-`window`-ago the living share."""
+        anchor = iteration - self.window
+        memo: Dict[int, int] = {}
+        roots = set()
+        for brain in brain_ids:
+            node = int(brain)
+            path: List[int] = []
+            while True:
+                if node in memo:
+                    answer = memo[node]
+                    break
+                when = self.born.get(node)
+                # Off the end of what is held, or old enough: this is the one.
+                if when is None or when <= anchor:
+                    answer = node
+                    break
+                up = self.parent.get(node, NO_PARENT)
+                if up == NO_PARENT:
+                    answer = node
+                    break
+                path.append(node)
+                node = up
+            for step in path:
+                memo[step] = answer
+            memo[node] = answer
+            roots.add(answer)
+        return len(roots)
 
 
 def _cache_path(run_id: str) -> str:
@@ -983,6 +1071,23 @@ def _build_series_locked(run_id: str) -> Dict[str, Any]:
     if wanted:
         _set_progress(run_id, 0, len(wanted), building=True)
 
+    # How many families the living divide into needs ancestry, and ancestry is
+    # a chain: it cannot be read off one frame and it cannot be sampled. So it
+    # is computed here rather than in frame_stats, and only where the chain is
+    # whole — every iteration recorded, and none of them thinned away.
+    families = _CladeWindow() if (can_reconstruct and stride == 1) else None
+    if families is not None and wanted:
+        # Resuming mid-run leaves the window empty, so the frames just before
+        # the first new one are read to fill it. Their statistics are already
+        # cached; only their ancestry is wanted.
+        for index in range(max(0, wanted[0] - CLADE_WINDOW * 2), wanted[0]):
+            try:
+                warm = store.read_frame(run_id, index)
+            except (OSError, json.JSONDecodeError, KeyError):
+                break
+            families.observe(int(warm.get("iteration", index // 2)),
+                             warm.get("brain_ids", []), warm.get("parent_brain_ids", []))
+
     previous = None
     for step, index in enumerate(wanted):
         try:
@@ -993,6 +1098,11 @@ def _build_series_locked(run_id: str) -> Dict[str, Any]:
         prior = previous if (can_reconstruct and index % 2 == 1) else None
         row = frame_stats(frame, prior)
         row["_frame"] = index
+        if families is not None:
+            iteration = int(frame.get("iteration", index // 2))
+            families.observe(iteration, frame.get("brain_ids", []),
+                             frame.get("parent_brain_ids", []))
+            row["cladesInWindow"] = families.families(frame.get("brain_ids", []), iteration)
         rows.append(row)
         previous = frame
 

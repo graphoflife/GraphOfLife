@@ -68,7 +68,7 @@ Object.assign(Viewer, {
     losers: 'Lost',
     distinctBrains: 'Distinct brains',
     brainDiversity: 'Brain diversity',
-    distinctLineages: 'Distinct lineages',
+    distinctParents: 'Parent genomes',
     density: 'Density',
     meanDegree: 'Mean degree',
     medianDegree: 'Median degree',
@@ -134,7 +134,7 @@ Object.assign(Viewer, {
       'gini', 'topDecileShare', 'tokenEntropy', 'tokenEvenness',
       'maxTokenAdded', 'maxTokenLost', 'gainers', 'losers',
       'starved', 'orphaned', 'redistributed',
-      'distinctBrains', 'brainDiversity', 'distinctLineages'
+      'distinctBrains', 'brainDiversity', 'distinctParents'
     ] },
     { key: 'reproduction', label: 'Reproduction', open: true, keys: [
       'births', 'reproTokenShare', 'meanInvestedShare', 'meanChildLinks',
@@ -211,7 +211,7 @@ Object.assign(Viewer, {
       losers: [this.STAT_LABELS.losers, withShare(s.losers)],
       distinctBrains: [this.STAT_LABELS.distinctBrains, formatNumber(s.distinctBrains)],
       brainDiversity: [this.STAT_LABELS.brainDiversity, pct(s.brainDiversity)],
-      distinctLineages: [this.STAT_LABELS.distinctLineages, formatNumber(s.distinctLineages)],
+      distinctParents: [this.STAT_LABELS.distinctParents, formatNumber(s.distinctParents)],
 
       density: [this.STAT_LABELS.density, `${(s.density * 100).toFixed(2)}%`],
       meanDegree: [this.STAT_LABELS.meanDegree, dec(s.meanDegree)],

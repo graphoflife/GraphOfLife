@@ -1313,6 +1313,87 @@ def test_copies_of_one_genotype_are_counted_once():
         f"one, which is what the old allocation-per-copy behaviour looked like")
 
 
+def test_families_are_counted_from_ancestry_not_from_one_frame():
+    """
+    How many families the living divide into needs ancestry, and ancestry is a
+    chain: it cannot be read off a single frame and it cannot be sampled.
+
+    `distinctParents` — which was called `distinctLineages` and never counted
+    lineages — looks one step back and tracks the population. The windowed
+    count looks as far back as the window and does not.
+    """
+    import tempfile
+
+    import gol_series
+    import gol_store
+
+    window = gol_series._CladeWindow(window=2)
+
+    # A founder, then two children of it, then a grandchild of each. Anchored
+    # two iterations back from iteration 3, everything alive descends from the
+    # single agent that was alive at iteration 1.
+    window.observe(0, [1], [-1])
+    window.observe(1, [2], [1])
+    window.observe(2, [3, 4], [2, 2])
+    window.observe(3, [5, 6], [3, 4])
+    assert window.families([5, 6], 3) == 1, "both descend from brain 2, alive at 1"
+
+    # Anchored at the present, everything is its own family.
+    assert gol_series._CladeWindow(window=0).families([5, 6], 3) == 2
+
+    # Ancestry beyond the window is dropped rather than kept for ever.
+    long_window = gol_series._CladeWindow(window=1)
+    for i in range(1, 400):
+        long_window.observe(i, [i], [i - 1])
+    assert len(long_window.parent) < 40, \
+        f"the window is holding {len(long_window.parent)} links; it is not forgetting"
+
+
+def test_the_family_count_is_absent_when_the_chain_is_broken():
+    """
+    A run recorded every other iteration has holes where the links were, and a
+    family count computed over holes is a guess. Absent is the honest answer,
+    and it is the convention the rest of these statistics already follow.
+    """
+    import tempfile
+
+    import gol_series
+    import gol_store
+
+    def series_for(export_every):
+        with tempfile.TemporaryDirectory() as tmp:
+            original = gol_store.BASE_DIR
+            gol_store.BASE_DIR = tmp
+            try:
+                cfg = small(seed=7, export_every=export_every, export_decisions=False)
+                meta = gol_store.create_run("x", cfg)
+                run_id = meta["id"]
+                world = new_world(cfg)
+                written = 0
+                for iteration in range(14):
+                    frames = world.step(record_decisions=False)
+                    if iteration % export_every == 0:
+                        for frame in frames:
+                            gol_store.write_frame(run_id, written, frame)
+                            written += 1
+                gol_store.update_meta(run_id, frame_count=written,
+                                      iteration=world.iteration)
+                return gol_series.build_series(run_id)
+            finally:
+                gol_store.BASE_DIR = original
+
+    whole = series_for(1)
+    assert "cladesInWindow" in whole["keys"], \
+        "a fully recorded run should have a family count"
+    counts = whole["series"]["cladesInWindow"]
+    assert all(c >= 1 for c in counts)
+    assert max(counts) > 1, "everything in one family from the first frame is suspicious"
+
+    sampled = series_for(2)
+    assert "cladesInWindow" not in sampled["keys"], \
+        "a sampled run cannot have its ancestry rebuilt and must not pretend to"
+
+
 def _main() -> int:
     """Find the tests in this file and run them, reporting like pytest would."""
     import time
