@@ -40,6 +40,13 @@ const StepView = {
   // How many dots the richest agent in the run is drawn with.
   TOKEN_DOTS: 15,
 
+  // An agent's radius in layout units, poorest to richest, and how far its
+  // tokens orbit. Everything else drawn on an agent is a multiple of its
+  // radius, and the radius is a multiple of the camera's scale, so the picture
+  // is the same picture at every zoom rather than a graph whose furniture
+  // stays a fixed number of pixels while the graph itself grows.
+  NODE: { min: 8, range: 13, orbit: 1.4, dot: 0.24 },
+
   // The game, in the order it is read: the piles as they stand, then the
   // staking, then the brains of whoever won. Each waits for the last.
   // `spread` is how much of the crossing the dots are strung out over: they
@@ -74,7 +81,13 @@ const StepView = {
       motes: []
     };
     Object.assign(view.layout, {
-      charge: 46, linkStrength: 0.11, linkDistance: 34,
+      // An agent is not the size of its disc: it wears a ring of tokens out to
+      // about one and three quarter times its radius, and the layout knows
+      // nothing about that. At the old spacing the ring of a rich agent
+      // reached past its neighbours' centres, so the picture looked crowded
+      // wherever anyone was wealthy. The distance is set from the widest ring
+      // two neighbours can have between them.
+      charge: 128, linkStrength: 0.11, linkDistance: 58,
       centerStrength: 0.02, angularStrength: 0.2, damping: 0.84, theta: 1.2
     });
     view.layout.dimensions = 2;
@@ -150,7 +163,7 @@ const StepView = {
 
     const most = Math.max(1, ...stage.tokens);
     const size = new Map(stage.ids.map((id, i) =>
-      [id, 9 + 15 * Math.sqrt(stage.tokens[i] / most)]));
+      [id, this.NODE.min + this.NODE.range * Math.sqrt(stage.tokens[i] / most)]));
 
     const close = (was, want, rate) => was + (want - was) * Math.min(1, rate * dt);
 
@@ -215,15 +228,21 @@ const StepView = {
    * instead of flicking to a new one.
    */
   _camera(view, w, h, dt) {
+    // Each agent is framed by what is drawn on it, not by where its centre is:
+    // its ring of tokens reaches well past the disc, and framing the centres
+    // put the outermost agent's ring half off the edge. Reserving the largest
+    // possible ring as a flat margin instead was worse — on a graph of poor
+    // agents it threw away a third of the canvas.
     let loX = Infinity, hiX = -Infinity, loY = Infinity, hiY = -Infinity;
     for (const node of view.shown.values()) {
       if (node.alpha < 0.05) continue;
-      loX = Math.min(loX, node.x); hiX = Math.max(hiX, node.x);
-      loY = Math.min(loY, node.y); hiY = Math.max(hiY, node.y);
+      const reach = node.r * (this.NODE.orbit + this.NODE.dot);
+      loX = Math.min(loX, node.x - reach); hiX = Math.max(hiX, node.x + reach);
+      loY = Math.min(loY, node.y - reach); hiY = Math.max(hiY, node.y + reach);
     }
     if (!Number.isFinite(loX)) return () => null;
 
-    const pad = 54;
+    const pad = 22;
     // Spans are floored at something real and the scale is capped, because a
     // single agent has no extent at all: dividing the canvas by its width gave
     // a magnification of thousands, which put the one thing on screen somewhere
@@ -248,7 +267,11 @@ const StepView = {
       if (!node) return null;
       return { x: w / 2 + (node.x - cam.x) * cam.scale,
                y: h / 2 + (node.y - cam.y) * cam.scale,
-               r: Math.max(3, node.r * Math.min(1, cam.scale * 0.9)),
+               // Straight through the camera. It used to be held at its layout
+               // size once the view got close, so zooming in grew the
+               // distances between agents and left the agents themselves
+               // behind — the same graph looked like a different one.
+               r: Math.max(2, node.r * cam.scale),
                alpha: node.alpha };
     };
   },
@@ -280,6 +303,10 @@ const StepView = {
   },
 
   _edges(ctx, view, place, role) {
+    // Links thicken with the view like everything else on it. Held at a fixed
+    // number of pixels they turned into hairlines across a zoomed-out graph
+    // and into cables across a zoomed-in one.
+    const zoom = this.zoom(view);
     for (const [a, b] of view.stage.edges) {
       const p = place(a), q = place(b);
       if (!p || !q) continue;
@@ -311,7 +338,7 @@ const StepView = {
 
       ctx.globalAlpha = alpha;
       ctx.strokeStyle = colour;
-      ctx.lineWidth = width;
+      ctx.lineWidth = Math.max(0.6, width * zoom);
       ctx.beginPath();
       ctx.moveTo(p.x, p.y);
       ctx.lineTo(q.x, q.y);
@@ -387,6 +414,11 @@ const StepView = {
       ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
       ctx.globalAlpha = 1;
     }
+  },
+
+  /** How far the camera is in, for anything not already sized off an agent. */
+  zoom(view) {
+    return view.camera ? view.camera.scale : 1;
   },
 
   /**
@@ -533,7 +565,7 @@ const StepView = {
       // The front of the sweep, so the growth has an edge to follow.
       ctx.globalAlpha = fade * 0.8;
       ctx.strokeStyle = this.ink.iris;
-      ctx.lineWidth = 1.6;
+      ctx.lineWidth = Math.max(0.8, 1.6 * this.zoom(view));
       ctx.beginPath();
       ctx.arc(p.x, p.y, far, a - half, a + half);
       ctx.stroke();
@@ -615,6 +647,7 @@ const StepView = {
           const amount = share.given(child);
           if (amount <= 0) continue;
           const dots = Math.min(8, amount);
+          const flying = Math.max(1.4, Math.min(from.r, to.r) * this.NODE.dot);
           const spread = this.BIRTH.spread;
           ctx.globalAlpha = Math.min(from.alpha, to.alpha);
           for (let k = 0; k < dots; k++) {
@@ -622,7 +655,7 @@ const StepView = {
               (share.at - (k / dots) * spread) / (1 - spread)));
             ctx.beginPath();
             ctx.arc(from.x + (to.x - from.x) * t, from.y + (to.y - from.y) * t,
-                    3, 0, Math.PI * 2);
+                    flying, 0, Math.PI * 2);
             ctx.fill();
           }
         }
@@ -652,17 +685,18 @@ const StepView = {
           ]) {
             if (!amount) continue;
             const dots = Math.min(8, amount);
+            const flying = Math.max(1.4, Math.min(from.r, to.r) * this.NODE.dot);
             // Offset to one side, so the two directions do not sit on each other.
             const dx = to.x - from.x, dy = to.y - from.y;
             const len = Math.hypot(dx, dy) || 1;
-            const ox = (-dy / len) * 4, oy = (dx / len) * 4;
+            const ox = (-dy / len) * flying * 1.35, oy = (dx / len) * flying * 1.35;
             ctx.globalAlpha = alpha;
             for (let k = 0; k < dots; k++) {
               const spread = this.GAME.spread;
               const t = Math.max(0, Math.min(1,
                 (moving.at - (k / dots) * spread) / (1 - spread)));
               ctx.beginPath();
-              ctx.arc(from.x + dx * t + ox, from.y + dy * t + oy, 3, 0, Math.PI * 2);
+              ctx.arc(from.x + dx * t + ox, from.y + dy * t + oy, flying, 0, Math.PI * 2);
               ctx.fill();
             }
           }
@@ -957,9 +991,11 @@ const StepView = {
       // Spread evenly, so the ring says how many there are at a glance rather
       // than needing to be counted through gaps and clumps. Each agent's ring
       // starts at its own angle, or every ring in the graph would line up.
-      const orbit = p.r * 1.5;
+      const orbit = p.r * this.NODE.orbit;
       const start = this._hash(id) * Math.PI * 2;
-      const size = Math.max(1.9, Math.min(3.1, (Math.PI * 2 * orbit / dots) * 0.42));
+      // A share of the agent, not a number of pixels. Clamped only so a
+      // crowded ring's dots stop short of touching each other.
+      const size = Math.min(p.r * this.NODE.dot, (Math.PI * 2 * orbit / dots) * 0.44);
 
       for (let k = 0; k < dots; k++) {
         const angle = start + (k / dots) * Math.PI * 2 + time * 0.45;

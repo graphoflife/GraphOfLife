@@ -25,12 +25,50 @@ const RunsView = {
 
   // Which config keys a card shows. Kept short on purpose: a card is for
   // telling runs apart at a glance, and the whole dataclass on every card is
-  // not a glance. The rest is in the dialog that made it.
+  // not a glance. The rest is behind "Settings" in the menu.
   CARD_SETTINGS: [
     ['total_tokens', 'tokens'],
     ['brain_kind', 'brain'],
     ['hidden_layers', 'hidden'],
     ['seed', 'seed']
+  ],
+
+  // Everything, grouped the way the form groups it, for reading one run off
+  // against another. Short labels and no explanations — the explanations are
+  // in the form that sets them.
+  ALL_SETTINGS: [
+    ['Simulation', [
+      ['total_tokens', 'Total tokens'],
+      ['tokens_created_per_phase', 'New tokens each phase'],
+      ['exchange_messages', 'Exchange messages'],
+      ['message_amount', 'Message size'],
+      ['message_prepass', 'Message pre-pass'],
+      ['random_input_amount', 'Noise inputs'],
+      ['allow_handover', 'Handover'],
+      ['allow_revolutions', 'Revolutions']
+    ]],
+    ['Seed graph', [
+      ['n_nodes', 'Agents'],
+      ['k_neighbors', 'Neighbours k'],
+      ['rewire_p', 'Shortcuts'],
+      ['seed', 'Seed']
+    ]],
+    ['Brain', [
+      ['brain_kind', 'Kind'],
+      ['brain_bits', 'Bits per input'],
+      ['hidden_layers', 'Hidden layers']
+    ]],
+    ['Mutation', [
+      ['mutation_probability', 'Probability'],
+      ['mutation_noise_std', 'Noise std'],
+      ['mutation_sparsity', 'Sparsity']
+    ]],
+    ['Run control', [
+      ['extinction_threshold', 'Extinct below'],
+      ['checkpoint_every', 'Checkpoint every'],
+      ['export_every', 'Record every'],
+      ['export_decisions', 'Record decisions']
+    ]]
   ],
 
   init() {
@@ -45,6 +83,8 @@ const RunsView = {
     document.getElementById('refreshRuns').addEventListener('click', () => this.refresh());
     document.getElementById('simDialogClose').addEventListener('click', () => this.closeDialog());
     document.getElementById('simDialogCancel').addEventListener('click', () => this.closeDialog());
+    document.getElementById('settingsDialogClose')
+      .addEventListener('click', () => document.getElementById('settingsDialog').close());
 
     for (const input of this.form.querySelectorAll('[data-cfg]')) {
       input.addEventListener('input', () => {
@@ -182,6 +222,39 @@ const RunsView = {
 
   closeDialog() {
     if (this.dialog.open) this.dialog.close();
+  },
+
+  /**
+   * Every setting a run was made with, as a list.
+   *
+   * A card shows four; this shows all of them, in the order the form asks for
+   * them, so two runs can be read off against each other. The seed is always a
+   * number here — one is drawn and written down when a run is created, so
+   * "blank means random" no longer means "nobody will ever know which".
+   */
+  showSettings(run) {
+    const cfg = run.config || {};
+    const body = document.getElementById('settingsList');
+    document.getElementById('settingsDialogTitle').textContent = `Settings — ${run.name}`;
+
+    const groups = this.ALL_SETTINGS.map(([heading, rows]) => {
+      const group = document.createElement('section');
+      group.append(Object.assign(document.createElement('h3'), { textContent: heading }));
+      const list = document.createElement('dl');
+      for (const [key, label] of rows) {
+        let value = cfg[key];
+        if (value === null || value === undefined || value === '') value = 'auto';
+        else if (Array.isArray(value)) value = value.join(' / ');
+        else if (typeof value === 'boolean') value = value ? 'yes' : 'no';
+        else if (typeof value === 'number') value = formatNumber(value);
+        list.append(Object.assign(document.createElement('dt'), { textContent: label }),
+                    Object.assign(document.createElement('dd'), { textContent: String(value) }));
+      }
+      group.append(list);
+      return group;
+    });
+    body.replaceChildren(...groups);
+    document.getElementById('settingsDialog').showModal();
   },
 
   fillForm(cfg) {
@@ -527,6 +600,9 @@ const RunsView = {
       menu.append(button);
       return button;
     };
+
+    item('Settings', 'Everything this run was made with',
+         () => this.showSettings(run));
 
     item('Duplicate', 'A copy with all of its recorded data, ready to go its own way',
          async () => { await API.copyRun(run.id); await this.refresh(); });

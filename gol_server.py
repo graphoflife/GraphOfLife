@@ -329,7 +329,7 @@ class Handler(BaseHTTPRequestHandler):
 
         if parts == ["api", "runs"]:
             body = self._read_json()
-            cfg = SimConfig.from_dict(body.get("config", {}), stored=False)
+            cfg = SimConfig.from_dict(body.get("config", {}), stored=False).resolve_seed()
             meta = store.create_run(body.get("name", ""), cfg)
             self._send_json(self._decorate(meta), 201)
             return

@@ -9,6 +9,7 @@ started with, and old runs stay readable after the defaults change.
 """
 from __future__ import annotations
 
+import secrets
 from dataclasses import dataclass, asdict, field, fields
 from typing import Any, ClassVar, Dict, List
 
@@ -158,7 +159,9 @@ class SimConfig:
     extinction_threshold: int = 20
     # Write a resume checkpoint every N iterations. 0 disables checkpointing.
     checkpoint_every: int = 20
-    # Random seed for reproducibility. None means "seed from entropy".
+    # Random seed for reproducibility. Left blank on a new run, one is drawn and
+    # written down — see resolve_seed. It fixes the starting graph and every
+    # random choice the run goes on to make.
     seed: int | None = None
 
     # ---- Export ----
@@ -247,6 +250,24 @@ class SimConfig:
         cfg = cls(**clean)
         cfg.validate()
         return cfg
+
+    def resolve_seed(self) -> "SimConfig":
+        """
+        Pick a seed if none was given, and write it down.
+
+        "Blank means random" used to mean the run was seeded from entropy and
+        nobody ever learned from what — so a run that produced something
+        interesting could not be run again, and its settings could not honestly
+        be shown, because the number that decided everything was not among
+        them. Blank still means a different world every time; it just means a
+        recorded one.
+
+        Called when a run is created, not when a stored config is read, so an
+        existing run keeps whatever it was given.
+        """
+        if self.seed is None:
+            self.seed = secrets.randbits(32)
+        return self
 
     def validate(self) -> None:
         """Reject values that would produce a broken or unrunnable simulation."""
