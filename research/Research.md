@@ -266,12 +266,33 @@ measures, `distinctBrains` and `distinctLineages`, are therefore not measuring
 lineage diversity; they are close to population size. Any claim about lineage
 turnover computed from them today would be an artefact.
 
-The information needed is nonetheless recorded: each frame carries `brain_ids`
-and `parent_brain_ids`, so the full phylogenetic forest is reconstructible
-offline from a run with `export_every = 1`. **Building that reconstruction is
-prerequisite work for §6.** Deliverable: a `research/phylogeny.py` that reads a
-run's frames and emits, per iteration, the set of extant clades under a
-coalescence depth, with clade abundances.
+It looked as though the information was nonetheless recorded — each frame
+carries `brain_ids` and `parent_brain_ids`. **It is not.** Building
+`research/phylogeny.py` established that the frames are insufficient, and the
+reason is specific: winning a node copies the winner's brain, and the copy is
+then mutated at the end of the phase. Only the second of those two ids is ever
+written to a frame, so the copy — which is the *link in the chain* — is
+invisible.
+
+**Measured: 49% of the brain ids a run creates never appear in any frame.**
+Reconstructing from frames alone therefore breaks every chain within a step or
+two and hands back one clade per agent, which is the very artefact the tool
+exists to avoid. On a 50-iteration run it reported 524 clades in a population
+of 593, and a dominant-clade turnover rate of 0.68 — all noise.
+
+Two consequences:
+
+**For runs made in process**, `research/phylogeny.py --simulate` traces every
+link as the engine makes it, and the reconstruction is then exact (`unrooted:
+0`). The research in §6 can proceed today on traced runs.
+
+**For runs recorded to disk**, the engine has to write down a lineage of its
+own. The cleanest change is to make `brain_id` name a *genotype* rather than an
+allocation: a copy keeps its source's id, because it is the same genotype, and
+only mutation allocates a new one. Then a recorded brain's parent is always a
+genotype that was itself recorded, `distinctBrains` becomes a real diversity
+measure for the first time, and no reconstruction is needed. It changes what
+two existing statistics mean, so it needs a `SERIES_VERSION` bump.
 
 ### 5.3 Definitions to fix before measuring
 
@@ -395,12 +416,37 @@ All small, all pilots, none conclusive.
 
 | observation | measurement | status |
 |---|---|---|
+| **One founder sweep, then none** | 50 founding clades → 1 by iteration ~17; afterwards the coalescence lag grows at one per iteration | see below |
 | Mean degree declines | 3.9 → 3.2 over 45 iterations, 5 seeds, seed `k = 6` | the graph erodes; long-run unknown |
+| Frames cannot carry ancestry | 49% of brain ids never reach a frame | fixed by tracing in process; needs an engine change for stored runs |
 | No lineage identity | 502 agents, 502 distinct `brain_id`s | blocks all lineage statistics |
 | Extinction is common | 9/20 binary runs dead inside 25 iterations | affects every downstream design |
 | Encoding resolution | binary input ladder: 15 → 36 levels after the split | no measured survival effect at n = 20 |
 | Binary decisions are coarse | ~9% of paired heads exactly tied; 17 distinct staking scores vs 936 for float | output layer width, not input encoding |
 | Float input balance | noise is 35% of first-layer variance from 5 of 54 inputs | unnormalised inputs; nobody chose this |
+
+### 8.1 The first real lineage result
+
+From a traced 40-iteration run (seed 5, 2500 tokens, 50 founders), clades named
+by founder:
+
+- The 50 founding lineages collapse to **one** by about iteration 17. One
+  founder's descendants hold 100% of the population thereafter.
+- After that sweep the **coalescence lag grows by one per iteration** — 16, 18,
+  20, … 28 — which means the population's most recent common ancestor is a
+  *fixed* brain from around iteration 10 and **nothing has swept since**.
+- Dominant-clade turnover over the whole run: 3 changes in 80 frames.
+
+So the early dynamics are a hard selective sweep and the later dynamics are
+not. Under a sliding five-iteration window, recent ancestry is much livelier —
+62 clades, top share 6.7%, 50 turnovers — so sub-lineages do keep replacing one
+another locally without any of them fixing globally.
+
+That combination, a single early sweep followed by no fixation, is exactly the
+signature that needs a neutral shadow (§5.3) to interpret: it is equally
+consistent with strong frequency-dependent selection maintaining diversity and
+with selection having simply stopped mattering. Distinguishing those two is
+what §6's E2 is for. Forty iterations is also far too short to claim either.
 
 ---
 
