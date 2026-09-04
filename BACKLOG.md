@@ -186,6 +186,60 @@ before changing the preset.
 
 ---
 
+## 4c. A mantissa for the binary brain's ladder
+
+**Medium**, and it changes the shape of a binary brain, so it invalidates
+binary checkpoints again.
+
+The ladder resolves 15 levels across a range of e^12 in token count, which
+makes **one level a factor of 2.23x**. An agent cannot tell 100 tokens from
+180. That is coarse enough to matter for decisions that are about comparing
+yourself to a neighbour.
+
+The obvious fix — encode the number in the bits, the way a float does — was
+measured and does not work here, for a reason worth writing down. A binary
+unit computes `sum(w_i * bit_i)` with `w` in {-1, 0, +1} and then thresholds
+it. That sum is the *only* arithmetic available, and it cannot weight bit `k`
+by `2^k`. So place value is unreadable: over 4,000 values and 400 random
+ternary units,
+
+| encoding | distinct codes | mean rank corr with the value | units that read it |
+|---|---|---|---|
+| thermometer (today) | 15 | **0.530** | **73%** |
+| positional | 3878 | 0.189 | 26% |
+| Gray | 3878 | 0.125 | 28% |
+
+Positional holds far more information and puts essentially none of it where a
+ternary sum can reach. Gray is worse still, which rules out the usual
+explanation: the problem is not that neighbouring values share no bits, it is
+that a `±1` sum has to be monotone in the value and only a ladder makes it so.
+A ladder's bit count correlates 0.995 with the value; a positional code's
+correlates 0.408.
+
+What does work is keeping the ladder and giving it two fields — one for which
+band the value is in, one for where it sits inside that band. Both stay
+monotone, so both stay readable, and the resolutions multiply instead of
+adding. Same sixteen rows:
+
+| split | distinct codes | mean rank corr | units that read it |
+|---|---|---|---|
+| plain, 16 rungs | 15 | 0.530 | 73% |
+| 12 band + 4 within | 36 | 0.489 | 72% |
+| 8 band + 8 within | 56 | 0.412 | 63% |
+
+12 + 4 looks like the buy: 2.4x the resolution for no measurable loss of
+readability, taking one level from a factor of 2.23x down to about 1.4x.
+
+Worth noting that `log1p` is already the exponent — the ladder over it is a
+coarse exponent code, and this only adds the mantissa it never had.
+
+**Done looks like:** the split in `BinaryBrain.encode`, the field widths in
+`SimConfig`, and a survival comparison against the plain ladder before the
+default moves. The probe that produced these numbers is small enough to
+rewrite from this description.
+
+---
+
 ## 5. Structural, for the long term
 
 **No linter or formatter.** Style is held by discipline alone, which works
