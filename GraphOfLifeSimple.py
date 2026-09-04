@@ -401,9 +401,26 @@ class BinaryBrain(Brain):
     INPUT_LOW = 0.0
     INPUT_HIGH = 12.0
 
+    def band_width(self) -> float:
+        bands, _ = self.cfg.ladder_split()
+        return (self.INPUT_HIGH - self.INPUT_LOW) / bands
+
     def thresholds(self) -> np.ndarray:
-        bits = self.cfg.brain_bits
-        return np.linspace(self.INPUT_LOW, self.INPUT_HIGH, bits, dtype=np.float64)
+        """
+        The band ladder: the lower edge of each stretch of the range.
+
+        Edges, not points spread across the range — a band covers everything
+        from its own edge up to the next one, and the last one takes the top.
+        Reporting linspace here instead described a ladder the encoder was not
+        using, which is a fine way to debug the wrong thing.
+        """
+        bands, _ = self.cfg.ladder_split()
+        return self.INPUT_LOW + np.arange(bands, dtype=np.float64) * self.band_width()
+
+    def fine_thresholds(self) -> np.ndarray:
+        """The ladder inside one band, in units of that band's width."""
+        _, within = self.cfg.ladder_split()
+        return np.linspace(0.0, 1.0, within, dtype=np.float64)
 
     def layer_sizes(self) -> List[int]:
         # Every magnitude became `brain_bits` of them. The rest were already
@@ -448,9 +465,22 @@ class BinaryBrain(Brain):
         scale = a[cfg.FLAG_INPUTS:span]
         rest = a[span:]
 
-        # (magnitudes, candidates) -> (magnitudes, bits, candidates) -> rows.
-        bits = (scale[:, None, :] >= self.thresholds()[None, :, None])
-        ladder = bits.reshape(scale.shape[0] * cfg.brain_bits, a.shape[1])
+        bands, _within = cfg.ladder_split()
+        step = self.band_width()
+
+        # Which band, and where inside it. Clipped at the top so a value above
+        # the range lands in the last band, fully, rather than wrapping.
+        placed = (scale - self.INPUT_LOW) / step
+        band = np.clip(np.floor(placed), 0, bands - 1)
+        within = np.clip(placed - band, 0.0, 1.0)
+
+        coarse = (band[:, None, :] >= np.arange(bands)[None, :, None])
+        fine = (within[:, None, :] >= self.fine_thresholds()[None, :, None])
+
+        # Both fields of one magnitude sit together, so a unit reading a
+        # contiguous run of rows is reading one quantity.
+        pair = np.concatenate([coarse, fine], axis=1)
+        ladder = pair.reshape(scale.shape[0] * cfg.brain_bits, a.shape[1])
 
         return np.vstack([flags, ladder, rest]).astype(np.int32)
 
@@ -1321,6 +1351,14 @@ class GraphOfLife:
                                  dtype=np.int64),
         }
 
+        # How a magnitude was encoded. The shape check on the way back in
+        # cannot see this: splitting the ladder into a band and a place inside
+        # it keeps the row count identical and changes what every one of those
+        # rows means, so weights written under one split are nonsense under
+        # another and nothing about their shape says so.
+        if self.cfg.brain_kind == "binary":
+            blob["ladder"] = np.array(self.cfg.ladder_split(), dtype=np.int64)
+
         n_layers = len(self.brains[nodes[0]].weights) if nodes else 0
         blob["n_layers"] = np.array([n_layers], dtype=np.int64)
         for layer in range(n_layers):
@@ -1381,6 +1419,18 @@ class GraphOfLife:
         # how inputs reach the first one — the arrays still load and the run
         # then dies inside a matrix multiply several steps later, saying
         # nothing about why. Checked here, where the answer is still obvious.
+        if cfg.brain_kind == "binary":
+            # `in` rather than .files: a checkpoint arrives here as an npz or
+            # as a plain dict of arrays, and only one of those has a .files.
+            saved = tuple(int(v) for v in blob["ladder"]) if "ladder" in blob else None
+            if saved != cfg.ladder_split():
+                raise ValueError(
+                    f"this checkpoint's magnitudes were encoded as "
+                    f"{saved or 'a single ladder'} and these settings encode them "
+                    f"as {cfg.ladder_split()} (band rows, rows within a band). "
+                    f"The rows are the same in number and not the same in "
+                    f"meaning, so the weights cannot be carried across.")
+
         want = make_brain(cfg, 0, allocate=False).layer_sizes()
         got = [int(weights[0].shape[2])] + [int(w.shape[1]) for w in weights]
         if len(got) != len(want) or got != want:

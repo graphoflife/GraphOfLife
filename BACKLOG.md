@@ -186,57 +186,39 @@ before changing the preset.
 
 ---
 
-## 4c. A mantissa for the binary brain's ladder
+## 4c. Done — the ladder has a band and a place inside it
 
-**Medium**, and it changes the shape of a binary brain, so it invalidates
-binary checkpoints again.
+Kept here because the reasoning is worth having, and because it names the one
+thing it did **not** fix.
 
-The ladder resolves 15 levels across a range of e^12 in token count, which
-makes **one level a factor of 2.23x**. An agent cannot tell 100 tokens from
-180. That is coarse enough to matter for decisions that are about comparing
-yourself to a neighbour.
+One ladder resolved 15 levels across a range of e^12 in tokens, which made a
+level a factor of **2.23x** — an agent could not tell a hundred tokens from a
+hundred and eighty. The same sixteen rows are now twelve for the band and four
+for the place inside it: **36 levels, a factor of 1.40x**.
 
-The obvious fix — encode the number in the bits, the way a float does — was
-measured and does not work here, for a reason worth writing down. A binary
-unit computes `sum(w_i * bit_i)` with `w` in {-1, 0, +1} and then thresholds
-it. That sum is the *only* arithmetic available, and it cannot weight bit `k`
-by `2^k`. So place value is unreadable: over 4,000 values and 400 random
-ternary units,
+The obvious alternative — encode the number in the bits the way a float does —
+was measured and rejected. A binary unit computes `sum(w_i * bit_i)` with `w`
+in {-1, 0, +1} and thresholds it. That sum cannot weight a row by two to its
+position, so place value puts the magnitude where nothing can read it:
 
-| encoding | distinct codes | mean rank corr with the value | units that read it |
+| encoding | codes | mean rank corr | units that read it |
 |---|---|---|---|
-| thermometer (today) | 15 | **0.530** | **73%** |
+| one ladder | 15 | 0.530 | 73% |
+| **band + place (shipped)** | **36** | **0.491** | **71%** |
 | positional | 3878 | 0.189 | 26% |
 | Gray | 3878 | 0.125 | 28% |
 
-Positional holds far more information and puts essentially none of it where a
-ternary sum can reach. Gray is worse still, which rules out the usual
-explanation: the problem is not that neighbouring values share no bits, it is
-that a `±1` sum has to be monotone in the value and only a ladder makes it so.
-A ladder's bit count correlates 0.995 with the value; a positional code's
-correlates 0.408.
+Gray is the control that rules out the usual explanation: it fixes the
+"127 and 128 share no bits" adjacency problem and is *worse*. The constraint is
+not adjacency, it is that a `±1` sum has to be monotone in the value.
 
-What does work is keeping the ladder and giving it two fields — one for which
-band the value is in, one for where it sits inside that band. Both stay
-monotone, so both stay readable, and the resolutions multiply instead of
-adding. Same sixteen rows:
-
-| split | distinct codes | mean rank corr | units that read it |
-|---|---|---|---|
-| plain, 16 rungs | 15 | 0.530 | 73% |
-| 12 band + 4 within | 36 | 0.489 | 72% |
-| 8 band + 8 within | 56 | 0.412 | 63% |
-
-12 + 4 looks like the buy: 2.4x the resolution for no measurable loss of
-readability, taking one level from a factor of 2.23x down to about 1.4x.
-
-Worth noting that `log1p` is already the exponent — the ladder over it is a
-coarse exponent code, and this only adds the mantissa it never had.
-
-**Done looks like:** the split in `BinaryBrain.encode`, the field widths in
-`SimConfig`, and a survival comparison against the plain ladder before the
-default moves. The probe that produced these numbers is small enough to
-rewrite from this description.
+**What this did not fix.** The binary brain's decisions are still coarse:
+paired heads land exactly equal about 9% of the time and staking still has
+about 17 distinct scores. Those come from the *output* layer, whose range is
+set by the last hidden layer — 64 units of -1/0/+1 with two thirds zero sums to
+roughly ±8. Nothing about the input encoding touches it. Widening the last
+hidden layer is the lever, and it wants a survival comparison before the preset
+moves.
 
 ---
 

@@ -1096,6 +1096,137 @@ def test_a_checkpoint_refuses_a_brain_it_does_not_fit():
     assert sum(again.tokens.values()) == sum(world.tokens.values())
 
 
+def test_the_ladder_resolves_a_band_and_a_place_inside_it():
+    """
+    Two monotone fields beat one, because their resolutions multiply.
+
+    One ladder of sixteen rungs resolves fifteen levels across a range of e^12
+    in tokens, which makes a level a factor of 2.23 — an agent could not tell a
+    hundred tokens from a hundred and eighty. Splitting the same sixteen rows
+    into twelve for the band and four for the place inside it resolves
+    thirty-six, and a level becomes a factor of about 1.4.
+
+    The constraint the split has to respect is that a binary unit computes a
+    sum of weights in -1, 0 and +1 and thresholds it, and that sum cannot
+    weight a row by two to its position. Both fields stay monotone in the
+    value, so a plain sum can still find the magnitude — which a place-value
+    encoding would not allow, however much more it could in principle say.
+    """
+    import numpy as np
+
+    cfg = SimConfig(brain_kind="binary", brain_bits=16)
+    bands, within = cfg.ladder_split()
+    assert bands + within == cfg.brain_bits, "the split must not change the width"
+    assert within >= 1 and bands > within
+
+    brain = make_brain(cfg, 0, allocate=False)
+    edges = brain.thresholds()
+    assert len(edges) == bands
+    assert np.allclose(np.diff(edges), brain.band_width()), \
+        "the reported edges must be the ones the encoder uses"
+
+    def code(value):
+        x = np.zeros((cfg.n_inputs(), 1))
+        x[cfg.FLAG_INPUTS, 0] = value
+        rows = brain.encode(x)[cfg.FLAG_INPUTS:cfg.FLAG_INPUTS + cfg.brain_bits, 0]
+        return tuple(int(v) for v in rows)
+
+    seen = {code(v) for v in np.linspace(0.0, 12.0, 4000)}
+    assert len(seen) >= 30, f"only {len(seen)} distinct codes; the split bought nothing"
+
+    # The band field alone is still a ladder: monotone, and never skipping.
+    for value in np.linspace(0.0, 12.0, 400):
+        band = code(value)[:bands]
+        assert list(band) == sorted(band, reverse=True), \
+            f"the band field is not a ladder at {value}"
+
+    # Saturates rather than wrapping.
+    assert code(40.0) == code(12.0), "a value above the range must pin at the top"
+    assert sum(code(0.0)) < sum(code(11.0)), "the bottom must read lower than the top"
+
+
+def test_a_split_ladder_stays_readable_by_a_ternary_sum():
+    """
+    The measurement that decided the design, kept so it cannot quietly rot.
+
+    Random units, because that is what evolution starts from: if the magnitude
+    is not in reach of a random ternary sum, mutation has to find it with no
+    gradient and no head start. A plain ladder scores about 0.53 and a
+    place-value code about 0.19; the split has to stay near the ladder.
+    """
+    import numpy as np
+
+    rng = np.random.default_rng(7)
+    cfg = SimConfig(brain_kind="binary", brain_bits=16)
+    brain = make_brain(cfg, 0, allocate=False)
+
+    values = rng.uniform(0.0, 12.0, size=2000)
+    x = np.zeros((cfg.n_inputs(), values.size))
+    x[cfg.FLAG_INPUTS] = values
+    rows = brain.encode(x)[cfg.FLAG_INPUTS:cfg.FLAG_INPUTS + cfg.brain_bits].T.astype(float)
+
+    draw = rng.random((300, cfg.brain_bits))
+    weights = np.zeros_like(draw)
+    weights[draw < 1 / 6] = -1
+    weights[draw > 5 / 6] = 1
+
+    def rank_corr(a, b):
+        ra = np.argsort(np.argsort(a)).astype(float)
+        rb = np.argsort(np.argsort(b)).astype(float)
+        ra -= ra.mean()
+        rb -= rb.mean()
+        denom = np.sqrt((ra @ ra) * (rb @ rb))
+        return 0.0 if denom == 0 else float((ra @ rb) / denom)
+
+    sums = rows @ weights.T
+    readable = np.mean([abs(rank_corr(values, sums[:, u])) > 0.3
+                        for u in range(sums.shape[1])])
+    assert readable > 0.55, (
+        f"only {100*readable:.0f}% of random ternary units can read the magnitude; "
+        f"a plain ladder manages about 73% and place value about 26%")
+
+    assert abs(rank_corr(values, rows.sum(axis=1))) > 0.9, \
+        "the row count should still track the value"
+
+
+def test_a_checkpoint_knows_how_it_encoded_its_magnitudes():
+    """
+    The row count did not change when the ladder was split, and the meaning of
+    every row did. Weights written under one split are nonsense under another
+    and nothing about their shape says so, so the split is written down.
+    """
+    import io
+    import numpy as np
+
+    cfg = small(brain_kind="binary", brain_bits=16, hidden_layers=[24, 16], seed=5)
+    world = new_world(cfg)
+    world.step(record_decisions=False)
+
+    buffer = io.BytesIO()
+    np.savez_compressed(buffer, **world.to_checkpoint())
+
+    buffer.seek(0)
+    with np.load(buffer) as blob:
+        assert "ladder" in blob, "a binary checkpoint must record its split"
+        stale = {k: blob[k] for k in blob.files if k != "ladder"}
+
+    older = io.BytesIO()
+    np.savez_compressed(older, **stale)
+    older.seek(0)
+    with np.load(older) as blob:
+        try:
+            GraphOfLife.from_checkpoint(blob, cfg)
+        except ValueError as exc:
+            assert "ladder" in str(exc) or "encoded" in str(exc), exc
+        else:
+            raise AssertionError("a checkpoint from before the split loaded silently")
+
+    buffer.seek(0)
+    with np.load(buffer) as blob:
+        again = GraphOfLife.from_checkpoint(blob, cfg)
+    assert sum(again.tokens.values()) == sum(world.tokens.values())
+
+
 def _main() -> int:
     """Find the tests in this file and run them, reporting like pytest would."""
     import time
