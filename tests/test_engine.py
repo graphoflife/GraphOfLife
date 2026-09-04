@@ -36,7 +36,7 @@ import networkx as nx
 
 import gol_series
 from gol_config import SimConfig
-from GraphOfLifeSimple import GraphOfLife, new_world
+from GraphOfLifeSimple import GraphOfLife, make_brain, new_world
 from GraphOfLifeSimple import _choose_binary as G_choose_binary
 
 
@@ -982,6 +982,36 @@ def test_a_binary_brain_spends_no_rows_on_things_that_are_already_bits():
     dead = int((tail.max(axis=1) == tail.min(axis=1)).sum())
     assert dead == 0, f"{dead} message or noise rows can never change"
     assert set(np.unique(tail).tolist()) <= {0, 1}
+
+
+def test_the_ladder_starts_where_its_values_start():
+    """
+    Nothing on the ladder can be negative, so the ladder should not be.
+
+    It began at -2 because the noise and message inputs ran a little under
+    zero. They are not on it any more — everything left is log1p of a count or
+    a quantile of one — and three of its sixteen rungs sat under zero where
+    nothing could ever reach them.
+    """
+    import numpy as np
+
+    cfg = small(brain_kind="binary", brain_bits=16, hidden_layers=[24, 16], seed=8)
+    world = new_world(cfg)
+    for _ in range(3):
+        world.step(record_decisions=False)
+
+    log_deg, _neighs, q_tok, q_deg, log_tok = world._precompute_features()
+    lowest = np.inf
+    for u in sorted(world.G.nodes())[:20]:
+        for v in [u] + sorted(world.G.neighbors(u)):
+            vec = world._input_vec(u, v, log_deg, q_tok, q_deg, log_tok)
+            span = vec[cfg.FLAG_INPUTS:cfg.FLAG_INPUTS + cfg.MAGNITUDE_INPUTS]
+            lowest = min(lowest, float(span.min()))
+    assert lowest >= 0.0, f"a laddered input went to {lowest}"
+
+    thresholds = make_brain(cfg, 0).thresholds()
+    assert thresholds.min() >= 0.0, \
+        f"the ladder starts at {thresholds.min()}, below anything that can reach it"
 
 
 def test_a_binary_world_says_bits_and_hears_bits():

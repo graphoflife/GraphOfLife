@@ -391,10 +391,14 @@ class BinaryBrain(Brain):
     __slots__ = ()
     dtype = np.int8
 
-    # The ladder every input is spread across. Log-scaled quantities live in
-    # roughly 0 to 12 — twelve being about 160,000 tokens — and the noise and
-    # message inputs run a little below zero, so the ladder starts under it.
-    INPUT_LOW = -2.0
+    # The ladder the magnitudes are spread across. It used to start below zero
+    # because the noise and message inputs ran a little under it — they are not
+    # on the ladder any more, and everything that is left is log1p of a count
+    # or a quantile of one, so nothing can be negative. Three of sixteen rungs
+    # sat under zero where nothing could ever reach them.
+    #
+    # Twelve at the top is about 160,000 tokens held by one agent.
+    INPUT_LOW = 0.0
     INPUT_HIGH = 12.0
 
     def thresholds(self) -> np.ndarray:
