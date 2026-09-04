@@ -235,29 +235,60 @@ measured directly.
 **Definition.** A **castle** at iteration `t` is a connected set of agents `C`
 such that
 
-1. **it is one lineage** — every member's ancestor `w` iterations back is the
-   same agent (the clade test §5.2 already computes this);
-2. **it holds together** — the token flow along edges inside `C` exceeds the
+1. **it holds together** — the token flow along edges inside `C` exceeds the
    flow across its boundary, by some ratio `ρ > 1`;
-3. **it persists** — a set overlapping `C` in at least half its members
-   satisfies 1 and 2 at `t + 1`.
+2. **it persists** — a set overlapping `C` in at least half its members
+   satisfies (1) at `t + 1`.
 
-All three are computable from what a run already records: the clade from the
-lineage forest, the flows from `marks.flow`, the persistence by overlap between
-consecutive iterations.
+That is all. An earlier draft also required every member to share a lineage,
+and that was a mistake: it builds the answer into the question. A clonal
+requirement guarantees relatedness ≈ 1, which guarantees Hamilton's rule is
+satisfied, which is assuming the mechanism one is trying to detect — and it
+makes the more interesting object invisible by construction. Both kinds of
+transition occur in biology: multicellularity is clonal, eukaryogenesis was
+symbiotic.
 
-**The three numbers to watch**, each as a function of `T`:
+**Lineage composition is therefore a measured property of a castle, not a
+condition on it.** Every castle gets a *mixedness*: the number of distinct
+clades among its members, and the share held by the largest. `ρ ≈ 1` clonal
+patches and mixed mutualisms are then two findings rather than one definition
+and one blind spot.
+
+**Symbiosis is already available in the rules**, which is worth stating because
+it means this is not a hypothetical. **Demonstrated against `_resolve_winner`**:
+an agent defending its own node with a self-stake of 100, and a neighbour of
+any lineage staking `x` on it. At `x < 100` the neighbour's tokens arrive, the
+defender keeps its node *and its brain*, and the giver is poorer — a gift.
+Only at `x >` the self-stake does the stake become a conquest and overwrite the
+defender. (At exactly equal it is a coin toss, as ties are.) Flagging the gift
+as revolt changes nothing, because a revolution needs a coalition and one
+revolter is not one. So unrelated agents can already feed each other without
+taking each other over, and no new mechanic is needed for a symbiotic castle to
+be possible — only for it to be *worth* it.
+
+**The numbers to watch**, each as a function of `T`:
 
 - **size** — members of the largest persistent castle;
 - **count** — how many exist at once;
-- **lifetime** — how long the longest-lived one survives.
+- **lifetime** — how long the longest-lived one survives;
+- **mixedness** — clades inside it, and whether that rises or falls with size.
 
 **Hypothesis H4 (castles).** Castle size and count grow without bound as `T`
 grows; castle *lifetime* does not, being capped by the coherence limit of
-§3.1a. If all three grow, the structural criterion for open-endedness is met
-and H1 is wrong as well. If size grows but lifetime saturates, castles are real
-but transient — an ecology of empires rather than a transition in
-individuality.
+§3.1a. If all three grow, the structural criterion for open-endedness is met.
+If size grows but lifetime saturates, castles are real but transient — an
+ecology of empires rather than a transition in individuality.
+
+**Hypothesis H5 (symbiosis).** Mixed castles occur, and the lineages in them
+are interdependent rather than merely adjacent. The test is a perturbation: cut
+one clade out of a castle and compare what remains against the same cut made on
+a size-matched random subset. If the remainder loses more than the control, the
+castle was doing something the parts were not.
+
+Detecting mixed castles at all would be the more interesting result, because
+conquest is a homogenising force — winning a node overwrites its brain — so a
+mixed castle has to be actively maintained against a rule that is constantly
+trying to make it clonal.
 
 The interesting case is the third: size and count growing with `T` while
 lifetime is flat would mean the world gets *wider* without getting *deeper*,
@@ -518,8 +549,8 @@ experiment in this document.*
 the activity statistics. Everything else is a pilot for this.
 
 **E7 — Castles against scale.** `T` over as wide a range as memory allows, with
-the brain held fixed, measuring castle size, count and lifetime (§3.4) and the
-time for the founding lineages to collapse to one. *Tests H4, and settles
+the brain held fixed, measuring castle size, count, lifetime and mixedness
+(§3.4) and the time for the founding lineages to collapse to one. *Tests H4, and settles
 whether "big enough that it never finishes" is a real answer.* This is the
 experiment the disagreement in §3.1 turns on, and it should come first.
 
