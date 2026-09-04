@@ -1,13 +1,43 @@
 # Graph of Life — research notes
 
-Working notes towards a paper. Not a paper: this is the design, the
-definitions, the hypotheses, the protocols, and an honest account of what is
-and is not yet measurable. Written 2026-09-04.
+## The claim under test
+
+> **This algorithm shows open-ended evolution.**
+
+Everything in this document exists to support or break that one sentence. A
+measurement earns its place by changing how much the claim is believed;
+anything that cannot is decoration.
+
+Working notes towards a paper, not a paper. Written 2026-09-04, kept current.
 
 Everything labelled **measured** was run and the numbers are given. Everything
-else is conjecture, and marked as such. The distinction matters more than
+else is conjecture and is marked as such. The distinction matters more than
 usual here, because the interesting claims are exactly the ones that are easy
-to assert and hard to establish.
+to assert and hard to establish — and because the recurring failure in these
+notes has been a real number that meant nothing without the control beside it.
+
+---
+
+## 0. The state of knowledge
+
+**Nothing yet decides the claim either way.** What is known:
+
+| | evidence | bearing on the claim |
+|---|---|---|
+| Small worlds end | 3/3 dead at 6 founders, 0/3 at 100 | against, but only for small worlds |
+| Big worlds do not settle | founding lineages still coexist after 60 iterations in 2/3, 3/3, 2/3 of runs at 40, 100, 250 founders | **for** — scale is a real answer, not an evasion |
+| The strategy space has no order | revolutions make the winner depend on who else is present, not on pairwise strength; demonstrated on the engine's resolver | for — nothing to converge to |
+| Flow has group structure | modules compress a walk on the token flow by **41.5%**; some last 48 frames while replacing ~23% of their members per frame | **for, pending a null** |
+| Conquest cycles are not structure | thousands per run, 2-cycles at 0.87–0.91× chance | neither — a detector that found nothing |
+| The genome cannot grow | layer sizes are fixed for a run | against — bounds encoded complexity |
+| The state space cannot expand | no rule brings a new kind of thing into existence | against — the strongest argument on that side |
+
+Three things have been **retracted** rather than quietly dropped, and are kept
+because the reasoning is the useful part: that conservation precludes unbounded
+complexity (§3.1), that a castle must be one family (§3.4.1), and that a castle
+is a persistent set of agents (§3.4.2).
+
+The open questions are gathered in §10.
 
 ---
 
@@ -271,6 +301,30 @@ do not return to themselves every iteration but every **two, or three, or `p`**
 therefore a **spatiotemporal pattern in the flow field**, characterised by its
 period as well as its shape, and not a set of anything.
 
+### 3.4.2b Cycles are one shape of structure, not the shape
+
+Conquest cycles were the first thing looked for because they are cheap to
+detect, not because they are what a castle must be. Reading the search for
+them as the search for structure would be a mistake: a detector that finds
+nothing has ruled out **one shape**.
+
+Other shapes a stable structure could take here, each needing its own detector:
+
+| shape | what it looks like | detector | status |
+|---|---|---|---|
+| **conquest cycle** | agents take each other's nodes in a ring; membership stable, genotypes churn | cycles in the conquest map | **measured, at or below chance** |
+| **token cycle** | tokens circulate a loop without anyone being conquered | net circulation in the flow digraph — cycles that carry flow one way round | not yet measured |
+| **stable group** | agents that neither conquer nor circulate, and simply keep their trade among themselves | flow modules, L0 | **measured: 41.5% compression** |
+| **glider** | a group that keeps its shape while walking across the graph | flow modules matched across time by overlap, L1 | implemented; nothing identified yet |
+| **oscillator** | a configuration returning to itself every `p` iterations, not every one | recurrence of local configuration at lag `p`, L2 | **not implemented — a real gap** |
+| **mutualism** | several lineages depending on each other, in any of the above shapes | mixedness of a module, plus the removal test | not yet measured |
+
+The third row is the one that needs saying plainly, because it is the shape
+most easily overlooked: **a castle does not have to do anything dramatic.** A
+set of agents that quietly trades among itself, conquers nobody, moves nowhere
+and simply persists is as much a structure as a ring of mutual predation — and
+it is the one a cycle detector is guaranteed to miss.
+
 ### 3.4.3 What is actually there: measured
 
 Conquest gives every node exactly one winner, so the conquest map is a
@@ -294,7 +348,26 @@ and mostly **at or below chance**. Two-cycles, by far the commonest, are
 consistently *less* frequent than random rewiring produces, in every seed. The
 longer cycles are inconsistent between seeds on small counts.
 
-So the honest reading is: **no signal yet, and the abundance was the trap.**
+**Flow modules, on the other hand, find something.** L0 (§3.4.4) on a
+59-iteration run, 50 founders, decisions recorded:
+
+- describing a walk on the token flow as modules is **41.5% shorter** than
+  describing it with no grouping at all;
+- about **60 modules** exist at any moment, the largest holding 35 agents;
+- the longest-lived lasted **48 frames**, and across modules surviving three
+  frames or more, **23% of members are replaced per frame** — so a module of
+  that age has turned over its membership several times while keeping its
+  identity.
+
+That last pair is the interesting one: persistence with turnover is precisely
+the pattern-not-a-set case that motivated §3.4.2. **It is not yet evidence**,
+for the same reason the cycles were not: there is no null. A flow network with
+the same degrees and weights but shuffled endpoints would compress by *some*
+amount, and until that number exists 41.5% is uninterpretable. Building that
+control is the single most valuable next measurement in this document.
+
+So the honest reading of the cycles is: **no signal yet, and the abundance was
+the trap.**
 Counting cycles without a null would have produced a confident and completely
 wrong claim about self-sustaining structure. Two caveats keep this from being
 a negative result either: three seeds is nothing, and the null is crude — real
@@ -677,6 +750,7 @@ All small, all pilots, none conclusive.
 |---|---|---|
 | Bigger worlds are not swept | founders still coexist after 60 iterations in 2/3, 3/3, 2/3 of runs at 40, 100, 250 founders | supports scale as an answer |
 | Extinction collapses with size | 3/3 dead at 6 founders, 0/3 at 100 | any statistic conditioned on survival is conditioned on size |
+| Flow has group structure | modules compress a token-flow walk by 41.5%; longest lived 48 frames at 23% turnover per frame | needs a null before it is a result |
 | Conquest cycles are common but unremarkable | hundreds to thousands per run; 2-cycles at **0.87–0.91× chance** in every seed | no signal; the null is what makes it a result |
 | Symbiosis needs no new rule | a stake below a neighbour's self-stake transfers tokens without conquest | changes what §4.1 has to argue for |
 | **One founder sweep, then none** | 50 founding clades → 1 by iteration ~17; afterwards the coalescence lag grows at one per iteration | see below |
@@ -768,6 +842,37 @@ progress in coevolution.
 **Selection theory.** Price (1970), the covariance decomposition. Maynard Smith
 & Szathmáry (1995), the major transitions. Wilson & Sober on multilevel
 selection.
+
+---
+
+## 9b. Open questions
+
+Ordered by how much answering one would move the claim.
+
+1. **Is 41.5% compression more than chance?** Everything the flow modules say
+   rests on a null that does not exist yet: the same flow network with
+   endpoints shuffled, degrees and weights preserved. Until then the modules
+   are a picture, not a result.
+2. **Does a large world ever settle?** Founding lineages survive 60 iterations
+   at 100+ founders. Sixty is short. The question is whether the coalescence
+   time grows with `T` without bound or merely slowly.
+3. **Are there oscillators?** Nothing implemented detects a structure with a
+   period greater than one, and there is no reason to think period-1 is the
+   common case.
+4. **Do token cycles exist?** Circulation without conquest has not been looked
+   for at all.
+5. **Are any modules mixed-lineage?** The lineage forest and the flow modules
+   are both computed and have never been crossed with each other. This is a
+   cheap join and would answer whether symbiosis actually happens.
+6. **Does the graph erode to nothing?** Mean degree falls 3.9 → 3.2 over 45
+   iterations. Where does it go over 5,000?
+7. **Does non-transitivity actually produce cycling policies?** The order is
+   provably gone (§2.1); whether evolved strategies cycle is unmeasured.
+8. **What bounds coherent structure — is it the light-cone?** H1's revised
+   form predicts a maximum size set by information speed against churn. No
+   measurement addresses it.
+9. **Is the population the right unit at all?** If the answer to 5 is yes, the
+   whole measurement apparatus is aimed at the wrong level.
 
 ---
 

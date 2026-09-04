@@ -47,19 +47,14 @@ const Lineage = {
     this.canvas = document.getElementById('lineageCanvas');
     if (!this.canvas) return;
     this.ctx = this.canvas.getContext('2d');
-    this.picker = document.getElementById('lineageRun');
     this.noteEl = document.getElementById('lineageNote');
     this.minLifeEl = document.getElementById('lineageMinLife');
     this.readoutEl = document.getElementById('lineageReadout');
 
-    this.picker.addEventListener('change', () => this.load(this.picker.value));
     this.minLifeEl.addEventListener('input', () => {
       document.getElementById('lineageMinLifeValue').textContent = this.minLifeEl.value;
       this.draw();
     });
-    document.getElementById('lineageRefresh')
-      .addEventListener('click', () => this.listRuns());
-
     // Moving the window refetches, so it acts on release rather than on every
     // pixel of the drag.
     const scrub = document.getElementById('lineageWindow');
@@ -78,36 +73,9 @@ const Lineage = {
     }
   },
 
-  async setActive(active) {
-    this.active = active;
-    if (!active || this._loaded) return;
-    this._loaded = true;
-    await this.listRuns();
-  },
-
-  async listRuns() {
-    this.say('Looking for simulations…');
-    try {
-      await API.choose();
-      const data = await API.listRuns();
-      this.runs = (data.runs || []).filter(r => r.frame_count > 1);
-      this.picker.replaceChildren(...this.runs.map(run => {
-        const option = document.createElement('option');
-        option.value = run.id;
-        option.textContent = `${run.name} — ${formatNumber(run.frame_count)} frames`;
-        return option;
-      }));
-      if (!this.runs.length) {
-        this.say('No simulation has recorded enough frames yet. '
-               + 'Run one from the Simulations tab and come back.');
-        return;
-      }
-      const wanted = this.runs.some(r => r.id === this.runId) ? this.runId : this.runs[0].id;
-      this.picker.value = wanted;
-      await this.load(wanted);
-    } catch (err) {
-      this.say(`Could not reach the simulations: ${err.message}`);
-    }
+  /** The tab owns the list; this view just needs to know what is in it. */
+  setRuns(runs) {
+    this.runs = runs;
   },
 
   say(text) {

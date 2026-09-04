@@ -3,8 +3,9 @@
 Working material towards a paper on this system. Nothing here is part of the
 site or the engine; nothing in `web/` or the test suite depends on it.
 
-- `Research.md` — the design document: definitions, hypotheses, methods,
-  experiment protocols, and what is measurable today.
+- `Research.md` — the current state of knowledge. One claim under test —
+  *this algorithm shows open-ended evolution* — and everything measured,
+  retracted, or still open, arranged around it.
 - `phylogeny.py` — reconstructs the lineage forest of a run and measures what
   it does over time. `--selftest` checks it against a forest small enough to
   work out by hand; `--simulate` runs a world and traces every link as the
@@ -20,3 +21,8 @@ site or the engine; nothing in `web/` or the test suite depends on it.
 
 Everything is meant to be run locally. Disk is cheap; RAM is the binding
 constraint, because memory is population multiplied by policy size.
+
+The tools are on the site too, under **Analysis**: the lineage forest, and the
+flow modules with their compression and turnover. `tests/test_flowmodules.js`
+checks the map equation against graphs whose answer is known by hand — run it
+with `node tests/test_flowmodules.js`.

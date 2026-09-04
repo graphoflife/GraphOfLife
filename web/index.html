@@ -544,34 +544,84 @@
 
 <!-- ==================== ANALYSIS VIEW ==================== -->
 <main id="view-analysis" class="view">
-  <div class="explain-intro">
-    <h2>Lineage</h2>
-    <p>Every genotype a run ever held, as a line: from the frame it first
-      appeared in to the last one it was seen in, thickening with how many
-      agents carried it, joined to the genotype it mutated from. Clades sit
-      together, so a family is a band.</p>
-    <p>Colour is ancestry. A founder is given a colour at random and every
-      mutation nudges its parent&rsquo;s, so relatedness is visible directly
-      &mdash; and a run that ends one colour is a run where one founder&rsquo;s
-      descendants took the world.</p>
+  <div class="analysis-bar">
+    <div class="analysis-modes" id="analysisModes">
+      <button type="button" data-mode="lineage" class="active">Lineage</button>
+      <button type="button" data-mode="flow">Flow modules</button>
+    </div>
+    <label for="analysisRun">Simulation</label>
+    <select id="analysisRun"></select>
+    <button id="analysisRefresh" class="ghost small">Refresh</button>
   </div>
 
-  <div class="lineage-bar">
-    <label for="lineageRun">Simulation</label>
-    <select id="lineageRun"></select>
-    <button id="lineageRefresh" class="ghost small">Refresh</button>
-    <label for="lineageWindow" class="lineage-filter" hidden>From frame
-      <input type="range" id="lineageWindow" min="0" max="0" value="0" step="1"></label>
-    <label for="lineageMinLife" class="lineage-filter">Lasted at least
-      <input type="range" id="lineageMinLife" min="1" max="12" value="2" step="1">
-      <span id="lineageMinLifeValue">2</span> frames</label>
-  </div>
+  <!-- ---------------- lineage ---------------- -->
+  <section id="analysis-lineage" class="analysis-panel">
+    <div class="explain-intro">
+      <h2>Lineage</h2>
+      <p>Every genotype a run ever held, as a line: from the frame it first
+        appeared in to the last one it was seen in, thickening with how many
+        agents carried it, joined to the genotype it mutated from. Clades sit
+        together, so a family is a band.</p>
+      <p>Colour is ancestry. A founder is given a colour at random and every
+        mutation nudges its parent&rsquo;s, so relatedness is visible directly
+        &mdash; and a run that ends one colour is a run where one founder&rsquo;s
+        descendants took the world.</p>
+    </div>
+    <div class="lineage-bar">
+      <label for="lineageWindow" class="lineage-filter" hidden>From frame
+        <input type="range" id="lineageWindow" min="0" max="0" value="0" step="1"></label>
+      <label for="lineageMinLife" class="lineage-filter">Lasted at least
+        <input type="range" id="lineageMinLife" min="1" max="12" value="2" step="1">
+        <span id="lineageMinLifeValue">2</span> frames</label>
+    </div>
+    <div class="lineage-stage">
+      <canvas id="lineageCanvas"></canvas>
+    </div>
+    <p class="lineage-note" id="lineageNote"></p>
+    <p class="lineage-readout" id="lineageReadout"></p>
+  </section>
 
-  <div class="lineage-stage">
-    <canvas id="lineageCanvas"></canvas>
-  </div>
-  <p class="lineage-note" id="lineageNote"></p>
-  <p class="lineage-readout" id="lineageReadout"></p>
+  <!-- ---------------- flow modules ---------------- -->
+  <section id="analysis-flow" class="analysis-panel" hidden>
+    <div class="explain-intro">
+      <h2>Flow modules</h2>
+      <p><b>What a module is.</b> A group of agents found by asking where the
+        tokens actually go &mdash; not who is joined to whom, which is the
+        graph, and not who is related to whom, which is the lineage. Only who
+        sends tokens to whom. A module is a set of agents that a token
+        wandering the flow tends to stay inside.</p>
+      <p><b>How they are found.</b> By the map equation: describe a random walk
+        on the flow as compactly as you can. If naming the groups and then
+        naming positions inside them takes fewer bits than naming every
+        position outright, the groups are carrying real structure. How much
+        shorter is the <em>compression</em> below &mdash; 0% means the flow has
+        no group structure at all, and the method is built so that flow without
+        structure gives back one module rather than inventing several.</p>
+      <p><b>Following them.</b> A module here and a module next iteration are
+        the same one when enough of their members overlap. That lets a module
+        keep its name while its agents are replaced one at a time, and lets it
+        drift across the graph. Which makes <em>turnover</em> the number worth
+        watching: a module that lives a long time while its members keep
+        changing is a pattern being carried by different matter each iteration
+        &mdash; a thing no definition based on who belongs to it could see.</p>
+      <p>Needs a run recorded with decisions, since that is where what crossed
+        each link is written down.</p>
+    </div>
+    <div class="lineage-bar">
+      <label for="flowFloor" class="lineage-filter">Same module above
+        <input type="range" id="flowFloor" min="10" max="70" value="30" step="5">
+        <span id="flowFloorValue">30</span>% overlap</label>
+      <label for="flowMinLife" class="lineage-filter">Lasted at least
+        <input type="range" id="flowMinLife" min="1" max="12" value="2" step="1">
+        <span id="flowMinLifeValue">2</span> frames</label>
+    </div>
+    <div class="lineage-stage">
+      <canvas id="flowCanvas"></canvas>
+    </div>
+    <div class="flow-facts" id="flowFacts"></div>
+    <p class="lineage-note" id="flowNote"></p>
+    <p class="lineage-readout" id="flowReadout"></p>
+  </section>
 </main>
 
 <!-- Statistic detail: explanation plus history across the run -->
@@ -606,7 +656,10 @@
 <script src="js/explain.js"></script>
 <script src="js/home.js"></script>
 <script src="js/runs.js"></script>
+<script src="js/flowmodules.js"></script>
 <script src="js/lineage.js"></script>
+<script src="js/flowview.js"></script>
+<script src="js/analysis.js"></script>
 <script src="js/viewer.js"></script>
 <!-- The viewer is assembled from four files. The core declares it; these three
      attach the settings panel, the framing controls and the panels beneath the

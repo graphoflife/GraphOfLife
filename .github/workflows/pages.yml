@@ -42,6 +42,8 @@ jobs:
         run: python3 tests/test_engine.py
       - name: The two statistics implementations agree
         run: python3 tests/test_stats_parity.py
+      - name: The flow modules find what they should
+        run: node tests/test_flowmodules.js
       - name: Every script parses
         run: |
           for f in web/js/*.js; do node --check "$f"; done
