@@ -1120,6 +1120,7 @@ details.control-group > summary:hover h3 { color: var(--text); }
    dim — so the part being explained is read in the place it actually lives
    rather than as a detached snippet. */
 .ex-code {
+  position: relative;
   flex: 1 1 auto;
   min-height: 0;
   overflow-y: auto;

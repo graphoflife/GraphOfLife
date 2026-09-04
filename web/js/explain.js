@@ -122,7 +122,8 @@ const Explain = {
         <p>The child inherits a mutated copy of the brain and is linked to
         neighbours the parent chooses. The parent may instead <b>hand over</b> a
         link: it drops that connection and the child takes its place.</p>
-        <p>Newborns green, new and handed links orange.</p>`
+        <p>Newborns and the links they arrive on are green. What the child was
+        given crosses the link it came down.</p>`
     },
     {
       title: 'Elimination', emblem: 'skull',
@@ -479,10 +480,22 @@ Object.assign(Explain, {
       el.classList.toggle('lit', regions.some(r => i >= r.from && i <= r.to));
     });
     if (regions.length) {
-      const target = this.lineEls[regions[0].from];
+      // Measured against the scroller itself. offsetTop is counted from the
+      // nearest positioned ancestor, which is not this panel, so the lit lines
+      // were being scrolled to a position belonging to some other box — they
+      // landed wherever that box happened to put them.
       const box = this.codeEl.getBoundingClientRect();
+      const first = this.lineEls[regions[0].from].getBoundingClientRect();
+      const last = this.lineEls[regions[0].to].getBoundingClientRect();
+      const top = first.top - box.top + this.codeEl.scrollTop;
+      const tall = last.bottom - first.top;
+      // Centred when it fits, and started from the top when it does not:
+      // centring a region taller than the panel hides the beginning of it.
+      const want = tall < box.height
+        ? top - (box.height - tall) / 2
+        : top - 24;
       this.codeEl.scrollTo({
-        top: target.offsetTop - box.height * 0.28,
+        top: Math.max(0, want),
         behavior: this._firstScrollDone ? 'smooth' : 'auto'
       });
       this._firstScrollDone = true;
