@@ -136,16 +136,24 @@ const running = new Set();
 
 /** Metadata as the interface expects it. */
 function meta(run) {
+  // A run that was advancing when the tab closed is still marked as running in
+  // storage, and nothing is advancing it any more: the worker it belonged to
+  // died with the page. Reported as interrupted, the way the server reports a
+  // run whose worker did not survive a restart. Only the answer is corrected —
+  // what is stored is the run's own history and stays as it was written.
+  const live = running.has(run.id);
+  const status = (run.status === 'running' && !live) ? 'interrupted' : run.status;
+
   return {
     id: run.id,
     name: run.name,
     created_at: run.created_at,
-    status: run.status,
+    status,
     iteration: run.iteration,
     frame_count: run.frame_count,
     checkpoint_iteration: run.checkpoint_iteration,
     has_checkpoint: run.checkpoint_iteration !== null,
-    running: running.has(run.id),
+    running: live,
     error: run.error || null,
     config: run.config,
     size_bytes: run.size_bytes || 0
@@ -199,13 +207,14 @@ async function pump(runId) {
     const slice = call('gol_browser.WORLDS.step', [runId, SLICE]);
 
     if (slice.frames.length) {
-      await RunStore.putFrames(runId, run.frame_count, slice.frames);
+      // What the frames actually cost, reported by the store that wrote them.
+      // It used to be guessed from the agent and edge counts, which was a fair
+      // guess of uncompressed JSON and is about five times the truth now that
+      // frames are stored compressed.
+      const written = await RunStore.putFrames(runId, run.frame_count, slice.frames);
       run.frame_count += slice.frames.length;
-      for (const frame of slice.frames) {
-        // Rough, and deliberately so: it is for telling the reader how much of
-        // their disk a run is using, not for accounting.
-        run.size_bytes += 120 * frame.ids.length + 40 * frame.edges.length;
-      }
+      run.size_bytes += written || slice.frames.reduce(
+        (n, frame) => n + 120 * frame.ids.length + 40 * frame.edges.length, 0);
     }
     run.iteration = slice.iteration;
 

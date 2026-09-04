@@ -458,7 +458,16 @@ const RunsView = {
     // a request the worker has yet to act on.
     if (!running) this.stopping.delete(run.id);
     const stopping = running && this.stopping.has(run.id);
-    const state = stopping ? 'stopping' : running ? 'running' : (run.status || 'idle');
+
+    // `running` is the live fact and the status is a stored one, so where they
+    // disagree the live one wins. A backend that has restarted still has
+    // "running" written down for whatever was going when it went away, and the
+    // card used to believe it — a green pulsing dot over a button offering to
+    // resume the thing it claimed was already going.
+    let state = run.status || 'idle';
+    if (stopping) state = 'stopping';
+    else if (running) state = 'running';
+    else if (state === 'running') state = 'interrupted';
 
     // ---- name, id, and the menu ----
     const head = document.createElement('header');

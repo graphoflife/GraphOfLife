@@ -101,15 +101,30 @@ const RunStore = {
 
   // ---- frames ----------------------------------------------------------
 
-  /** Written as one transaction, so a slice either lands or does not. */
+  /**
+   * Written as one transaction, so a slice either lands or does not.
+   *
+   * Compressed on the way in. A frame is JSON of a few thousand ids, edges and
+   * per-agent decisions, and it stores about five times smaller gzipped — the
+   * same thing the server has always done to the frames it writes to disk.
+   * Uncompressed, a browser's few gigabytes of quota ran out after a few
+   * thousand iterations; this is most of the way to thirty.
+   *
+   * Returns the bytes actually written, so a run can report its size from what
+   * it cost rather than from a guess about what it ought to have cost.
+   */
   async putFrames(runId, startIndex, frames) {
-    if (!frames.length) return;
+    if (!frames.length) return 0;
+    const rows = await Promise.all(frames.map(async (frame, offset) => {
+      const index = startIndex + offset;
+      const packed = await deflate(frame);
+      return packed ? { runId, index, gz: packed } : { runId, index, frame };
+    }));
     await this._tx(['frames'], 'readwrite', tx => {
       const store = tx.objectStore('frames');
-      frames.forEach((frame, offset) => {
-        store.put({ runId, index: startIndex + offset, frame });
-      });
+      for (const row of rows) store.put(row);
     });
+    return rows.reduce((n, row) => n + (row.gz ? row.gz.byteLength : 0), 0);
   },
 
   async getFrame(runId, index) {
@@ -118,7 +133,7 @@ const RunStore = {
       db.transaction('frames').objectStore('frames').get([runId, index])
     );
     if (!row) throw new Error(`frame ${index} of ${runId} is not stored`);
-    return row.frame;
+    return unpack(row);
   },
 
   /** Frames at a fixed stride, for the charts. Read in one pass. */
@@ -134,13 +149,20 @@ const RunStore = {
         const at = cursor.result;
         if (!at) { resolve(); return; }
         // Both phases of a sampled iteration are kept, so a phase filter still
-        // has game frames to show.
-        if (Math.floor(at.value.index / 2) % stride === 0) wanted.push(at.value.frame);
+        // has game frames to show. Only the kept ones are unpacked — walking
+        // the range is cheap and inflating every frame to throw most of them
+        // away is not.
+        if (Math.floor(at.value.index / 2) % stride === 0) wanted.push(at.value);
         at.continue();
       };
       cursor.onerror = () => reject(cursor.error);
     });
-    return wanted;
+    return Promise.all(wanted.map(unpack));
+  },
+
+  /** Whether frames can be stored compressed at all. */
+  get compresses() {
+    return typeof CompressionStream === 'function';
   },
 
   /**
@@ -162,7 +184,7 @@ const RunStore = {
       batch = [];
       await this._tx(['frames'], 'readwrite', tx => {
         const store = tx.objectStore('frames');
-        for (const row of rows) store.put({ runId: toId, index: row.index, frame: row.frame });
+        for (const row of rows) store.put({ ...row, runId: toId });
       });
       copied += rows.length;
     };
@@ -173,7 +195,9 @@ const RunStore = {
       cursor.onsuccess = () => {
         const at = cursor.result;
         if (!at) { resolve(); return; }
-        batch.push({ index: at.value.index, frame: at.value.frame });
+        // Copied as stored: a compressed frame is copied compressed rather
+        // than inflated and squashed again for nothing.
+        batch.push(at.value);
         if (batch.length >= batchSize) pending.push(flush());
         at.continue();
       };
@@ -230,4 +254,26 @@ const RunStore = {
 
 if (typeof self !== 'undefined' && typeof window === 'undefined') {
   self.RunStore = RunStore;   // inside the worker
+}
+
+/**
+ * A frame, as bytes.
+ *
+ * Null when the browser has no CompressionStream, in which case the frame is
+ * stored as an object the way it always was — smaller is better but readable
+ * is required, and every read path takes either.
+ */
+async function deflate(frame) {
+  if (typeof CompressionStream !== 'function') return null;
+  const stream = new Blob([JSON.stringify(frame)]).stream()
+    .pipeThrough(new CompressionStream('gzip'));
+  return new Uint8Array(await new Response(stream).arrayBuffer());
+}
+
+/** A stored row back into a frame, however it happens to have been written. */
+async function unpack(row) {
+  if (!row.gz) return row.frame;
+  const stream = new Blob([row.gz]).stream()
+    .pipeThrough(new DecompressionStream('gzip'));
+  return JSON.parse(await new Response(stream).text());
 }
