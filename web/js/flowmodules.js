@@ -266,18 +266,30 @@ const FlowModules = {
   /**
    * Every module of every frame, given a lasting identity.
    *
-   * Returns one record per module-appearance, carrying the identity it keeps
-   * across iterations, its members, and how much of it is new since last time.
+   * Turnover is split into where the change came from, because two ways a
+   * module can keep going are not the same thing. A module whose new members
+   * were **born** and whose lost members **died** is regenerating: it is
+   * producing the agents it is made of, and the pattern outlives every one of
+   * them. A module whose members merely arrive from and leave for other
+   * modules is exchanging: the agents were already there and the boundary
+   * moved. Counting both as "turnover" hides exactly the difference that
+   * matters, which is what an earlier version of this did.
+   *
+   * Births and deaths are read off the agent ids themselves — an id that was
+   * not alive last frame was born, one that is gone has died — so this needs
+   * nothing beyond what a frame always carries.
    */
   follow(frames, { floor = 0.3 } = {}) {
     const history = [];
     let previous = new Map();
+    let alivePrev = null;
     let nextId = 0;
     let withoutFlow = 0;
 
     for (const frame of frames) {
       const { ids, edges, hasFlow } = this.flowOf(frame);
       if (!hasFlow) { withoutFlow++; continue; }
+      const alive = new Set(ids);
 
       const found = this.partition(ids.length, edges);
       const groups = new Map();
@@ -293,13 +305,35 @@ const FlowModules = {
       for (const [label, members] of groups) {
         const match = carried.get(label);
         const id = match ? match.id : nextId++;
-        const fresh = match ? members.size - match.shared : members.size;
+        const before = match ? previous.get(match.id) : null;
+
+        let born = 0, joined = 0, died = 0, left = 0;
+        if (before && alivePrev) {
+          for (const member of members) {
+            if (before.has(member)) continue;
+            // Not here last time: either it did not exist, or it was elsewhere.
+            if (alivePrev.has(member)) joined++; else born++;
+          }
+          for (const member of before) {
+            if (members.has(member)) continue;
+            if (alive.has(member)) left++; else died++;
+          }
+        }
+        const was = before ? before.size : 0;
+
         history.push({
           iteration: frame.iteration,
           phase: frame.phase,
           id,
           size: members.size,
-          turnover: members.size ? fresh / members.size : 0,
+          // Everything that was not here last time, however it got here.
+          turnover: members.size ? (born + joined) / members.size : (match ? 0 : 1),
+          // The part of it that is the module making and losing its own agents.
+          regeneration: members.size ? born / members.size : 0,
+          exchange: members.size ? joined / members.size : 0,
+          mortality: was ? died / was : 0,
+          emigration: was ? left / was : 0,
+          born, joined, died, left,
           isNew: !match,
           codeLength: found.codeLength,
           baseline: found.baseline,
@@ -308,6 +342,7 @@ const FlowModules = {
         now.set(id, members);
       }
       previous = now;
+      alivePrev = alive;
     }
     return { history, withoutFlow };
   },
@@ -332,6 +367,18 @@ const FlowModules = {
         / persistent.length
       : 0;
 
+    const mean = (key) => persistent.length
+      ? persistent.reduce((sum, l) =>
+          sum + l.slice(1).reduce((s, r) => s + r[key], 0) / Math.max(1, l.length - 1), 0)
+        / persistent.length
+      : 0;
+
+    // A module that keeps going by making and losing its own agents against
+    // one that keeps going by trading them with its neighbours. The first is a
+    // structure regenerating itself; the second is a boundary moving.
+    const regeneration = mean("regeneration");
+    const exchange = mean("exchange");
+
     return {
       appearances: history.length,
       distinct: byId.size,
@@ -340,7 +387,14 @@ const FlowModules = {
       meanModules: history.reduce((s, r) => s + r.modules, 0) / history.length,
       compression: saving,
       persistent: persistent.length,
-      meanTurnover: churn
+      meanTurnover: churn,
+      regeneration,
+      exchange,
+      mortality: mean("mortality"),
+      // 1 when every change is birth and death, 0 when every change is a swap
+      // with a neighbour. The number that separates the two ways of lasting.
+      regenerationShare: (regeneration + exchange) > 0
+        ? regeneration / (regeneration + exchange) : 0
     };
   }
 };

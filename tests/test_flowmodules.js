@@ -175,6 +175,62 @@ function test_turnover_is_reported_for_a_module_that_persists() {
   }
 }
 
+function test_regenerating_and_exchanging_modules_are_told_apart() {
+  // Two ways for a module to keep going, which an earlier version counted as
+  // one number and could not distinguish.
+  //
+  //   regenerating — its members die and it makes new ones. The pattern
+  //                  outlives every agent in it.
+  //   exchanging   — its members move to the module next door and are replaced
+  //                  from it. Nobody was born, nobody died, a boundary moved.
+  const ring = (group, weight = 10) => {
+    const out = [];
+    for (const a of group) for (const b of group) if (a !== b) {
+      out.push({ agent: a, targets: [b], alloc: [weight] });
+    }
+    return out;
+  };
+
+  // A: the left group loses one agent and gains a brand new one each time.
+  const regenerating = [];
+  for (let t = 0; t < 8; t++) {
+    const left = [10, 11, 12, 13].map((v, i) => (i === 0 ? 500 + t : v));
+    const right = [20, 21, 22, 23];
+    regenerating.push({
+      iteration: t, phase: 2, ids: [...left, ...right],
+      decisions: { allocations: [...ring(left), ...ring(right),
+                                 { agent: left[1], targets: [right[0]], alloc: [1] }] }
+    });
+  }
+
+  // B: the same churn, but the arriving agent came from the other group and
+  // the departing one went there. Everyone alive throughout.
+  const exchanging = [];
+  const pool = [30, 31, 32, 33, 34, 35, 36, 37];
+  for (let t = 0; t < 8; t++) {
+    const left = [pool[t % 4], pool[(t + 1) % 4], pool[4], pool[5]];
+    const right = pool.filter(v => !left.includes(v));
+    exchanging.push({
+      iteration: t, phase: 2, ids: [...pool],
+      decisions: { allocations: [...ring(left), ...ring(right),
+                                 { agent: left[0], targets: [right[0]], alloc: [1] }] }
+    });
+  }
+
+  const a = FlowModules.summarise(FlowModules.follow(regenerating).history);
+  const b = FlowModules.summarise(FlowModules.follow(exchanging).history);
+
+  if (!(a.regeneration > 0)) {
+    throw new Error('a module replacing its members with newborns showed no regeneration');
+  }
+  if (!(a.regenerationShare > b.regenerationShare)) {
+    throw new Error(`regeneration share came out ${a.regenerationShare.toFixed(2)} for a `
+                  + `module making its own members and ${b.regenerationShare.toFixed(2)} `
+                  + `for one swapping them; the first must be higher`);
+  }
+  if (!(a.mortality > 0)) throw new Error('members that stopped existing were not counted as dead');
+}
+
 function test_frames_without_decisions_are_counted_not_guessed() {
   const { history, withoutFlow } = FlowModules.follow([
     { iteration: 0, phase: 2, ids: [1, 2], edges: [[1, 2]] },
@@ -195,8 +251,18 @@ const tests = Object.entries({
   test_flow_comes_from_the_allocations_and_ignores_self_stakes,
   test_a_module_keeps_its_name_while_its_members_are_replaced,
   test_turnover_is_reported_for_a_module_that_persists,
-  test_frames_without_decisions_are_counted_not_guessed
+  test_frames_without_decisions_are_counted_not_guessed,
+  test_regenerating_and_exchanging_modules_are_told_apart
 }).sort(([a], [b]) => a.localeCompare(b));
+
+// A test that is written and never listed here is worse than no test: it
+// reads as coverage and runs never. This one was, until the count gave it
+// away, so the count is now checked.
+const written = (fs.readFileSync(__filename, 'utf8').match(/^function test_/gm) || []).length;
+if (written !== tests.length) {
+  console.error(`${written} tests are written and ${tests.length} are listed to run`);
+  process.exit(1);
+}
 
 const failures = [];
 const started = Date.now();
