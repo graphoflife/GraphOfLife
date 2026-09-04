@@ -286,13 +286,19 @@ Two consequences:
 link as the engine makes it, and the reconstruction is then exact (`unrooted:
 0`). The research in §6 can proceed today on traced runs.
 
-**For runs recorded to disk**, the engine has to write down a lineage of its
-own. The cleanest change is to make `brain_id` name a *genotype* rather than an
-allocation: a copy keeps its source's id, because it is the same genotype, and
-only mutation allocates a new one. Then a recorded brain's parent is always a
-genotype that was itself recorded, `distinctBrains` becomes a real diversity
-measure for the first time, and no reconstruction is needed. It changes what
-two existing statistics mean, so it needs a `SERIES_VERSION` bump.
+**For runs recorded to disk**, this has now been fixed in the engine.
+`brain_id` names a *genotype*: a copy keeps its source's id, because it is the
+same genotype, and only mutation allocates a new one. Ids that never reach a
+frame fell from **49% to 4.5%**, and reconstruction from frames alone now gives
+answers identical to the traced version — 1 clade, 100% top share, 4 turnovers,
+coalescence lag 18, against 5 unrooted stragglers instead of thousands.
+`distinctBrains` counts genotypes for the first time, so `SERIES_VERSION` went
+to 16.
+
+Runs recorded **before** that change cannot have their ancestry rebuilt, and
+nothing can recover it: the missing ids were never written down. The Lineage
+view detects them by their root share and says so rather than drawing a picture
+of nothing.
 
 ### 5.3 Definitions to fix before measuring
 
@@ -418,7 +424,7 @@ All small, all pilots, none conclusive.
 |---|---|---|
 | **One founder sweep, then none** | 50 founding clades → 1 by iteration ~17; afterwards the coalescence lag grows at one per iteration | see below |
 | Mean degree declines | 3.9 → 3.2 over 45 iterations, 5 seeds, seed `k = 6` | the graph erodes; long-run unknown |
-| Frames cannot carry ancestry | 49% of brain ids never reach a frame | fixed by tracing in process; needs an engine change for stored runs |
+| Frames cannot carry ancestry | 49% of brain ids never reached a frame | **fixed**: a copy keeps its genotype's id, now 4.5% |
 | No lineage identity | 502 agents, 502 distinct `brain_id`s | blocks all lineage statistics |
 | Extinction is common | 9/20 binary runs dead inside 25 iterations | affects every downstream design |
 | Encoding resolution | binary input ladder: 15 → 36 levels after the split | no measured survival effect at n = 20 |

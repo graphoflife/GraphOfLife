@@ -58,7 +58,7 @@ def progress(run_id: str) -> Dict[str, Any]:
 # does not merely serve stale numbers: it leaves a cache holding two shapes of
 # row at once, which is how the power-law statistics came to be computed and
 # then dropped on the way out.
-SERIES_VERSION = 15
+SERIES_VERSION = 16
 
 # At most this many iterations are analysed for a run's history.
 #
@@ -817,6 +817,10 @@ def frame_stats(frame: Dict[str, Any], previous: Dict[str, Any] | None = None) -
         "medianTokens": median,
         "maxTokens": max(tokens) if tokens else 0,
         "gini": _gini(tokens),
+        # A brain id names a genotype, so these count genotypes rather than
+        # agents. Before that change a copy was given a fresh id and every
+        # agent carried its own, which made both of these close to the
+        # population size and neither of them a diversity measure.
         "distinctBrains": distinct_brains,
         "brainDiversity": (distinct_brains / n) if n else 0.0,
         "distinctLineages": len(set(frame.get("parent_brain_ids", []))),

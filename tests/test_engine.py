@@ -1227,6 +1227,92 @@ def test_a_checkpoint_knows_how_it_encoded_its_magnitudes():
     assert sum(again.tokens.values()) == sum(world.tokens.values())
 
 
+def test_a_brain_id_names_a_genotype_not_an_allocation():
+    """
+    A copy is the same genotype, so it keeps the same name.
+
+    An id used to be handed out on every copy as well as every mutation, which
+    made it an allocation counter: two agents holding byte-identical weights
+    were recorded as unrelated, and the id linking one recorded brain to the
+    next was itself never recorded, because a copy was mutated immediately and
+    only the mutation reached a frame. Half the ids a run created never
+    appeared in any frame and the genealogy could not be rebuilt from what was
+    written down.
+
+    Now an id changes only where the weights change.
+    """
+    cfg = small(seed=4)
+    world = new_world(cfg)
+    source = next(iter(world.brains.values()))
+
+    clone = world._copy_brain(source)
+    assert clone.brain_id == source.brain_id, "a copy is the same genotype"
+    assert clone.parent_brain_id == source.parent_brain_id, "and the same ancestry"
+    assert clone is not source and clone.weights[0] is not source.weights[0]
+    assert all((a == b).all() for a, b in zip(clone.weights, source.weights))
+
+    before = world.next_brain_id
+    world._copy_brain(source)
+    assert world.next_brain_id == before, "copying must not allocate an id"
+
+    # Mutation is the only thing that makes a new genotype, and it records
+    # where it came from.
+    was = clone.brain_id
+    while clone.brain_id == was:
+        world._mutate_brain(clone)
+    assert clone.parent_brain_id == was
+    assert world.next_brain_id > before
+
+
+def test_a_frame_names_only_ancestors_that_were_themselves_recorded():
+    """
+    The genealogy has to be rebuildable from what is written down.
+
+    Every parent a frame names should be a genotype that appeared in an
+    earlier frame — otherwise the chain breaks there and the agent looks like
+    a founder. A few strays are expected: a genotype made and killed inside one
+    iteration never reaches a frame at all.
+    """
+    cfg = small(seed=6)
+    world = new_world(cfg)
+
+    seen = set()
+    dangling = 0
+    total = 0
+    for _ in range(12):
+        for frame in world.step(record_decisions=False):
+            for brain, parent in zip(frame["brain_ids"], frame["parent_brain_ids"]):
+                total += 1
+                if parent != -1 and parent not in seen:
+                    dangling += 1
+            seen.update(frame["brain_ids"])
+
+    share = dangling / max(1, total)
+    assert share < 0.05, (
+        f"{share:.0%} of the parents named in frames were never recorded "
+        f"themselves; the genealogy cannot be rebuilt from the frames")
+
+
+def test_copies_of_one_genotype_are_counted_once():
+    """
+    `distinctBrains` counts genotypes now, so it has to be able to fall.
+
+    While an id was handed out per copy it tracked the population almost
+    exactly and could not report diversity at all.
+    """
+    cfg = small(seed=8)
+    world = new_world(cfg)
+    for _ in range(8):
+        world.step(record_decisions=False)
+
+    agents = world.G.number_of_nodes()
+    genotypes = len({b.brain_id for b in world.brains.values()})
+    assert genotypes <= agents
+    assert genotypes < agents, (
+        f"{genotypes} genotypes among {agents} agents — no two agents share "
+        f"one, which is what the old allocation-per-copy behaviour looked like")
+
+
 def _main() -> int:
     """Find the tests in this file and run them, reporting like pytest would."""
     import time

@@ -296,11 +296,26 @@ class Brain:
             a = z if i == len(self.weights) - 1 else _sigmoid(z)
         return a
 
-    def copy_into(self, brain_id: int) -> "Brain":
-        clone = type(self)(self.cfg, brain_id, allocate=False)
+    def copy(self) -> "Brain":
+        """
+        An identical brain, carrying the same identity.
+
+        A copy is the same genotype, so it keeps the same `brain_id` and the
+        same ancestry. It used to be given a fresh id, which made `brain_id` an
+        allocation counter rather than a name for anything: two agents with
+        byte-identical weights were recorded as unrelated, and every id in the
+        chain between two recorded ones was invisible because a copy was
+        immediately mutated and only the mutation was ever written to a frame.
+        Half the ids a run created never reached a frame, and the genealogy
+        could not be reconstructed from what was recorded.
+
+        Now an id names a genotype. It changes only where the weights change,
+        which is in `mutate`.
+        """
+        clone = type(self)(self.cfg, self.brain_id, allocate=False)
         clone.weights = [w.copy() for w in self.weights]
         clone.biases = [b.copy() for b in self.biases]
-        clone.parent_brain_id = self.brain_id
+        clone.parent_brain_id = self.parent_brain_id
         return clone
 
     def mutate(self, brain_id: int) -> bool:
@@ -606,9 +621,8 @@ class GraphOfLife:
         return brain
 
     def _copy_brain(self, source: Brain) -> Brain:
-        clone = source.copy_into(self.next_brain_id)
-        self.next_brain_id += 1
-        return clone
+        # No id is allocated: copying does not make a new genotype.
+        return source.copy()
 
     def _mutate_brain(self, brain: Brain) -> None:
         if brain.mutate(self.next_brain_id):

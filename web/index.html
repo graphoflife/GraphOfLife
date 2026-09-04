@@ -545,12 +545,33 @@
 <!-- ==================== ANALYSIS VIEW ==================== -->
 <main id="view-analysis" class="view">
   <div class="explain-intro">
-    <h2>Analysis</h2>
-    <p class="analysis-empty">Nothing here yet. The Viewer already measures a
-      single frame and plots any statistic across one run; this is meant for
-      the questions that need more than that — comparing runs against each
-      other, or against the settings that produced them.</p>
+    <h2>Lineage</h2>
+    <p>Every genotype a run ever held, as a line: from the frame it first
+      appeared in to the last one it was seen in, thickening with how many
+      agents carried it, joined to the genotype it mutated from. Clades sit
+      together, so a family is a band.</p>
+    <p>Colour is ancestry. A founder is given a colour at random and every
+      mutation nudges its parent&rsquo;s, so relatedness is visible directly
+      &mdash; and a run that ends one colour is a run where one founder&rsquo;s
+      descendants took the world.</p>
   </div>
+
+  <div class="lineage-bar">
+    <label for="lineageRun">Simulation</label>
+    <select id="lineageRun"></select>
+    <button id="lineageRefresh" class="ghost small">Refresh</button>
+    <label for="lineageWindow" class="lineage-filter" hidden>From frame
+      <input type="range" id="lineageWindow" min="0" max="0" value="0" step="1"></label>
+    <label for="lineageMinLife" class="lineage-filter">Lasted at least
+      <input type="range" id="lineageMinLife" min="1" max="12" value="2" step="1">
+      <span id="lineageMinLifeValue">2</span> frames</label>
+  </div>
+
+  <div class="lineage-stage">
+    <canvas id="lineageCanvas"></canvas>
+  </div>
+  <p class="lineage-note" id="lineageNote"></p>
+  <p class="lineage-readout" id="lineageReadout"></p>
 </main>
 
 <!-- Statistic detail: explanation plus history across the run -->
@@ -585,6 +606,7 @@
 <script src="js/explain.js"></script>
 <script src="js/home.js"></script>
 <script src="js/runs.js"></script>
+<script src="js/lineage.js"></script>
 <script src="js/viewer.js"></script>
 <!-- The viewer is assembled from four files. The core declares it; these three
      attach the settings panel, the framing controls and the panels beneath the
