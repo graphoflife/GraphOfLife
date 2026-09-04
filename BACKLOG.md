@@ -156,6 +156,36 @@ clearing. `_prune_stale_messages` catches most of the consequences. **Small.**
 
 ---
 
+## 4b. Two things measured in the brains, not yet acted on
+
+Neither is a defect. Both are numbers nobody chose, and both would change how
+a population behaves if they were chosen deliberately.
+
+**A third of what a float brain responds to is noise.** The inputs are not
+normalised, so how loud an input is depends on the range it happens to live in.
+Measured across a phase, the first layer's variance splits: magnitudes 50% over
+28 inputs, noise **35% over 5**, messages 15% over 20. Per input, a noise draw
+is about four times louder than a magnitude and nine times louder than a
+message. That is an accident of `uniform(-2, 2)` against the spread of the
+others, not a decision that gambling should be a third of what an agent
+attends to. Sigmoid saturation is fine — 8.6% pinned in the first hidden layer
+and none after — so the network itself is healthy. **Small** to change, and it
+changes behaviour, so it wants an opinion before a patch.
+
+**A binary brain's output layer is coarse.** Its counts run about -12 to 12
+against the float brain's continuum, giving 18 distinct BLOTTO scores where
+float gives 936. The width comes from the last hidden layer: 64 units of
+-1/0/+1 with two thirds zero sums to roughly ±8. The consequences are visible
+in the decisions — paired heads land exactly equal 8.9% of the time, which
+`_choose_binary` answers with a coin, and both non-positive 35.7% of the time,
+which `_share_of_first` answers with an even split. The float brain never ties
+and falls back 28.8%.
+
+Widening the last hidden layer is the lever. Worth measuring against survival
+before changing the preset.
+
+---
+
 ## 5. Structural, for the long term
 
 **No linter or formatter.** Style is held by discipline alone, which works
