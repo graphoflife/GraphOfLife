@@ -35,16 +35,17 @@ class Worlds:
     # ---- settings --------------------------------------------------------
 
     def defaults(self) -> Dict[str, Any]:
-        return {"config": SimConfig().to_dict()}
+        return {"config": SimConfig().to_dict(),
+                "brain_presets": SimConfig.BRAIN_PRESETS}
 
     def normalise(self, config: Dict[str, Any]) -> Dict[str, Any]:
         """Validate a configuration and fill in what it left out."""
-        return SimConfig.from_dict(config or {}).to_dict()
+        return SimConfig.from_dict(config or {}, stored=False).to_dict()
 
     # ---- getting a world ready -------------------------------------------
 
     def create(self, run_id: str, config: Dict[str, Any]) -> Dict[str, Any]:
-        cfg = SimConfig.from_dict(config or {})
+        cfg = SimConfig.from_dict(config or {}, stored=False)
         self._worlds[run_id] = {"cfg": cfg, "world": new_world(cfg)}
         return {"config": cfg.to_dict(), "iteration": 0}
 

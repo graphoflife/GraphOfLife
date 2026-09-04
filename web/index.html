@@ -132,154 +132,157 @@
 <!-- ==================== RUNS VIEW ==================== -->
 <main id="view-runs" class="view">
   <div id="backendNotice" class="backend-notice hidden"></div>
-  <div class="runs-layout" id="runsLayout">
 
-    <section class="panel new-run-panel">
-      <h2>New simulation</h2>
-      <form id="newRunForm" class="config-form">
-        <div class="field name-field">
-          <label for="runName">Name <span class="hint">(blank = auto, e.g. GOL_26_08_07_n001)</span></label>
-          <input type="text" id="runName" placeholder="leave blank for the generated id">
-        </div>
-
-        <div class="config-columns">
-          <fieldset>
-            <legend>Economy</legend>
-            <div class="field">
-              <label for="cfg_total_tokens">Total tokens</label>
-              <input type="number" id="cfg_total_tokens" data-cfg="total_tokens" min="1" step="1">
-            </div>
-            <div class="field">
-              <label for="cfg_tokens_created_per_phase">Created per phase</label>
-              <input type="number" id="cfg_tokens_created_per_phase" data-cfg="tokens_created_per_phase" min="0" step="1">
-            </div>
-            <legend class="sub">Seed graph</legend>
-            <div class="field">
-              <label for="cfg_n_nodes">Nodes <span class="hint">(0 = auto)</span></label>
-              <input type="number" id="cfg_n_nodes" data-cfg="n_nodes" min="0" step="1">
-            </div>
-            <div class="field">
-              <label for="cfg_k_neighbors">Neighbors k <span class="hint">(0 = auto)</span></label>
-              <input type="number" id="cfg_k_neighbors" data-cfg="k_neighbors" min="0" step="1">
-            </div>
-            <div class="field">
-              <label for="cfg_rewire_p">Shortcuts <span class="hint">(0 = plain ring)</span></label>
-              <input type="number" id="cfg_rewire_p" data-cfg="rewire_p" min="0" max="1" step="0.01">
-              <small>Chance that a starting link reaches somewhere far off rather than
-                to a neighbour. This shapes the graph the run begins on and nothing
-                after that.</small>
-            </div>
-          </fieldset>
-
-          <fieldset>
-            <legend>Brain</legend>
-            <div class="field">
-              <label for="cfg_brain_kind">Kind</label>
-              <select id="cfg_brain_kind" data-cfg="brain_kind">
-                <option value="float">Float — 64-bit weights</option>
-                <option value="float16">Float16 — quarter the memory</option>
-                <option value="binary">Binary — weights of -1, 0, +1</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="cfg_brain_bits">Bits per input <span class="hint">(binary only)</span></label>
-              <input type="number" id="cfg_brain_bits" data-cfg="brain_bits" min="2" max="64" step="1">
-            </div>
-            <small class="hint">A binary weight can only step by a whole unit, so any
-              mutation moves it far. Give a binary brain a mutation sparsity around
-              0.02 rather than 0.1, or most children are born damaged and the
-              population dies out.</small>
-            <div class="field">
-              <label for="cfg_hidden_layers">Hidden layers</label>
-              <input type="text" id="cfg_hidden_layers" data-cfg="hidden_layers" placeholder="50, 45, 40">
-            </div>
-            <div class="field">
-              <label for="cfg_message_amount">Message size</label>
-              <input type="number" id="cfg_message_amount" data-cfg="message_amount" min="0" step="1">
-            </div>
-            <div class="field">
-              <label for="cfg_random_input_amount">Noise inputs</label>
-              <input type="number" id="cfg_random_input_amount" data-cfg="random_input_amount" min="0" step="1">
-            </div>
-            <div class="field checkbox">
-              <label><input type="checkbox" id="cfg_exchange_messages" data-cfg="exchange_messages"> Exchange messages</label>
-              <small>Each agent writes a short vector to every neighbour and one to itself, delivered at the end of the phase so everyone reads the same generation. The message to itself is its only memory. Off, those inputs are always zero and an agent sees nothing but the graph.</small>
-            </div>
-            <div class="field checkbox">
-              <label><input type="checkbox" id="cfg_message_prepass" data-cfg="message_prepass"> Message pre-pass</label>
-              <small>An extra look at the start of each phase for talking only. Without it an agent acts on messages written a phase ago, before the births, deaths and conquests since — a description of a graph that no longer exists. With it, everyone speaks first and the pass that acts reads messages written from the graph as it stands. That pass still writes its own. Costs a second forward pass per agent, so a run is roughly twice the work. Needs messages to be on.</small>
-            </div>
-            <div class="field checkbox">
-              <label><input type="checkbox" id="cfg_allow_handover" data-cfg="allow_handover"> Allow handover</label>
-              <small>A parent may give one of its own connections to the newborn.</small>
-            </div>
-            <div class="field checkbox">
-              <label><input type="checkbox" id="cfg_allow_revolutions" data-cfg="allow_revolutions"> Allow revolutions</label>
-              <small>Off, a node goes to whoever allocated the most, ties at random. Each option changes the brain's outputs, so neither can be altered on an existing run.</small>
-            </div>
-          </fieldset>
-
-          <fieldset>
-            <legend>Mutation</legend>
-            <div class="field">
-              <label for="cfg_mutation_probability">Probability</label>
-              <input type="number" id="cfg_mutation_probability" data-cfg="mutation_probability" min="0" max="1" step="0.01">
-            </div>
-            <div class="field">
-              <label for="cfg_mutation_noise_std">Noise std</label>
-              <input type="number" id="cfg_mutation_noise_std" data-cfg="mutation_noise_std" min="0" step="0.01">
-            </div>
-            <div class="field">
-              <label for="cfg_mutation_sparsity">Sparsity</label>
-              <input type="number" id="cfg_mutation_sparsity" data-cfg="mutation_sparsity" min="0" max="1" step="0.01">
-            </div>
-            <div class="field">
-              <label for="cfg_seed">Seed <span class="hint">(blank = random)</span></label>
-              <input type="number" id="cfg_seed" data-cfg="seed" step="1">
-            </div>
-          </fieldset>
-
-          <fieldset>
-            <legend>Run control</legend>
-            <div class="field">
-              <label for="cfg_extinction_threshold">Extinction below</label>
-              <input type="number" id="cfg_extinction_threshold" data-cfg="extinction_threshold" min="0" step="1">
-            </div>
-            <div class="field">
-              <label for="cfg_checkpoint_every">Checkpoint every</label>
-              <input type="number" id="cfg_checkpoint_every" data-cfg="checkpoint_every" min="0" step="1">
-            </div>
-            <div class="field">
-              <label for="cfg_export_every">Record every</label>
-              <input type="number" id="cfg_export_every" data-cfg="export_every" min="1" step="1">
-            </div>
-            <div class="field checkbox">
-              <label><input type="checkbox" id="cfg_export_decisions" data-cfg="export_decisions"> Record decisions</label>
-            </div>
-          </fieldset>
-        </div>
-
-        <p class="derived" id="derivedInfo"></p>
-
-        <div class="form-actions">
-          <button type="submit" class="primary">Create run</button>
-          <button type="button" id="resetDefaults">Reset to defaults</button>
-          <span class="form-error" id="createError"></span>
-        </div>
-      </form>
-    </section>
-
-    <div class="resizer" id="runsResizer" title="Drag to resize"></div>
-
-    <section class="panel runs-panel">
-      <div class="panel-head">
-        <h2>Simulations on this machine</h2>
-        <button id="refreshRuns" class="ghost small">Refresh</button>
-      </div>
-      <div id="runList" class="run-list"></div>
-    </section>
+  <!-- Simulations, and nothing else. Everything that acts on one lives on its
+       own card; everything that makes one lives behind the first cell. -->
+  <div class="sims-head">
+    <h2>Simulations</h2>
+    <button id="refreshRuns" class="ghost small">Refresh</button>
   </div>
+  <div id="simGrid" class="sim-grid"></div>
 </main>
+
+<!-- The settings, which are only ever wanted at the moment something is being
+     made. A native dialog, so Escape closes it and the page behind it is
+     properly inert while it is open. -->
+<dialog id="simDialog" class="sim-dialog">
+  <div class="sim-dialog-head">
+    <h2 id="simDialogTitle">New simulation</h2>
+    <button type="button" class="icon-button" id="simDialogClose" title="Close" aria-label="Close">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3 L13 13 M13 3 L3 13"/></svg>
+    </button>
+  </div>
+
+  <form id="newRunForm" class="config-form">
+    <div class="field name-field">
+      <label for="runName">Name <span class="hint">(blank = auto, e.g. GOL_26_08_07_n001)</span></label>
+      <input type="text" id="runName" placeholder="leave blank for the generated id">
+    </div>
+
+    <div class="config-columns">
+      <fieldset>
+        <legend>Simulation options</legend>
+        <div class="field">
+          <label for="cfg_total_tokens">Total tokens</label>
+          <input type="number" id="cfg_total_tokens" data-cfg="total_tokens" min="1" step="1">
+        </div>
+        <div class="field">
+          <label for="cfg_tokens_created_per_phase">Created per phase</label>
+          <input type="number" id="cfg_tokens_created_per_phase" data-cfg="tokens_created_per_phase" min="0" step="1">
+        </div>
+        <div class="field">
+          <label for="cfg_message_amount">Message size</label>
+          <input type="number" id="cfg_message_amount" data-cfg="message_amount" min="0" step="1">
+        </div>
+        <div class="field">
+          <label for="cfg_random_input_amount">Noise inputs</label>
+          <input type="number" id="cfg_random_input_amount" data-cfg="random_input_amount" min="0" step="1">
+        </div>
+        <div class="field checkbox">
+          <label><input type="checkbox" id="cfg_exchange_messages" data-cfg="exchange_messages"> Exchange messages</label>
+          <small>Each agent writes a short vector to every neighbour and one to itself, delivered at the end of the phase so everyone reads the same generation. The message to itself is its only memory. Off, those inputs are always zero and an agent sees nothing but the graph.</small>
+        </div>
+        <div class="field checkbox">
+          <label><input type="checkbox" id="cfg_message_prepass" data-cfg="message_prepass"> Message pre-pass</label>
+          <small>An extra look at the start of each phase for talking only. Without it an agent acts on messages written a phase ago, before the births, deaths and conquests since — a description of a graph that no longer exists. With it, everyone speaks first and the pass that acts reads messages written from the graph as it stands. That pass still writes its own. Costs a second forward pass per agent, so a run is roughly twice the work. Needs messages to be on.</small>
+        </div>
+        <div class="field checkbox">
+          <label><input type="checkbox" id="cfg_allow_handover" data-cfg="allow_handover"> Allow handover</label>
+          <small>A parent may give one of its own connections to the newborn.</small>
+        </div>
+        <div class="field checkbox">
+          <label><input type="checkbox" id="cfg_allow_revolutions" data-cfg="allow_revolutions"> Allow revolutions</label>
+          <small>Off, a node goes to whoever allocated the most, ties at random. Each option changes the brain's outputs, so neither can be altered on an existing run.</small>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Seed graph</legend>
+        <small>The world the run begins on, and the one number that decides everything after it. The seed fixes the starting graph <em>and</em> every random choice the run goes on to make — which brain is drawn, who reproduces, how a tie falls. Two runs with the same seed and the same settings are the same run. Blank means a different one every time.</small>
+        <div class="field">
+          <label for="cfg_n_nodes">Nodes <span class="hint">(0 = auto)</span></label>
+          <input type="number" id="cfg_n_nodes" data-cfg="n_nodes" min="0" step="1">
+        </div>
+        <div class="field">
+          <label for="cfg_k_neighbors">Neighbors k <span class="hint">(0 = auto)</span></label>
+          <input type="number" id="cfg_k_neighbors" data-cfg="k_neighbors" min="0" step="1">
+        </div>
+        <div class="field">
+          <label for="cfg_rewire_p">Shortcuts <span class="hint">(0 = plain ring)</span></label>
+          <input type="number" id="cfg_rewire_p" data-cfg="rewire_p" min="0" max="1" step="0.01">
+          <small>Chance that a starting link reaches somewhere far off rather than
+            to a neighbour. This shapes the graph the run begins on and nothing
+            after that.</small>
+        </div>
+        <div class="field">
+          <label for="cfg_seed">Seed <span class="hint">(blank = random)</span></label>
+          <input type="number" id="cfg_seed" data-cfg="seed" step="1">
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Brain</legend>
+        <small>Choosing a kind fills in the layer sizes and the mutation rate that kind wants. A binary brain carries one bit per unit where a float carries many, so it is given wider layers to hold comparable information — and a gentler mutation rate, because its smallest possible move is a whole step.</small>
+        <div class="field">
+          <label for="cfg_brain_kind">Kind</label>
+          <select id="cfg_brain_kind" data-cfg="brain_kind">
+            <option value="float">Float — 64-bit weights</option>
+            <option value="float16">Float16 — quarter the memory</option>
+            <option value="binary">Binary — weights of -1, 0, +1</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="cfg_brain_bits">Bits per input <span class="hint">(binary only)</span></label>
+          <input type="number" id="cfg_brain_bits" data-cfg="brain_bits" min="2" max="64" step="1">
+        </div>
+        <div class="field">
+          <label for="cfg_hidden_layers">Hidden layers</label>
+          <input type="text" id="cfg_hidden_layers" data-cfg="hidden_layers" placeholder="50, 45, 40">
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Mutation</legend>
+        <div class="field">
+          <label for="cfg_mutation_probability">Probability</label>
+          <input type="number" id="cfg_mutation_probability" data-cfg="mutation_probability" min="0" max="1" step="0.01">
+        </div>
+        <div class="field">
+          <label for="cfg_mutation_noise_std">Noise std</label>
+          <input type="number" id="cfg_mutation_noise_std" data-cfg="mutation_noise_std" min="0" step="0.01">
+        </div>
+        <div class="field">
+          <label for="cfg_mutation_sparsity">Sparsity</label>
+          <input type="number" id="cfg_mutation_sparsity" data-cfg="mutation_sparsity" min="0" max="1" step="0.01">
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Run control</legend>
+        <div class="field">
+          <label for="cfg_extinction_threshold">Extinction below</label>
+          <input type="number" id="cfg_extinction_threshold" data-cfg="extinction_threshold" min="0" step="1">
+        </div>
+        <div class="field">
+          <label for="cfg_checkpoint_every">Checkpoint every</label>
+          <input type="number" id="cfg_checkpoint_every" data-cfg="checkpoint_every" min="0" step="1">
+        </div>
+        <div class="field">
+          <label for="cfg_export_every">Record every</label>
+          <input type="number" id="cfg_export_every" data-cfg="export_every" min="1" step="1">
+        </div>
+        <div class="field checkbox">
+          <label><input type="checkbox" id="cfg_export_decisions" data-cfg="export_decisions"> Record decisions</label>
+        </div>
+      </fieldset>
+    </div>
+
+    <p class="derived" id="derivedInfo"></p>
+
+    <div class="form-actions">
+      <span class="form-error" id="createError"></span>
+      <button type="button" id="resetDefaults">Reset to defaults</button>
+      <button type="button" id="simDialogCancel">Cancel</button>
+      <button type="submit" class="primary" id="simDialogSubmit">Create simulation</button>
+    </div>
+  </form>
+</dialog>
 
 <!-- ==================== VIEWER VIEW ==================== -->
 <main id="view-viewer" class="view">
@@ -561,6 +564,7 @@
 <script src="js/statdetail.js"></script>
 <script src="js/presets.js"></script>
 <script src="js/stepview.js"></script>
+<script src="js/emblems.js"></script>
 <script src="js/explain.js"></script>
 <script src="js/home.js"></script>
 <script src="js/runs.js"></script>

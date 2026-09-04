@@ -141,34 +141,10 @@ button.ghost { background: transparent; }
 button.small { padding: 4px 9px; font-size: 12px; }
 
 /* ---- run list ---- */
-.run-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 12px; }
 .empty { color: var(--muted); }
 
-.run-card {
-  background: var(--panel-2);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 12px 14px;
-}
 
-.run-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
-.run-id { color: #62717f; font-size: 11px; font-family: ui-monospace, monospace; }
 
-.status {
-  font-size: 10.5px;
-  text-transform: uppercase;
-  letter-spacing: 0.6px;
-  padding: 2px 8px;
-  border-radius: 20px;
-  border: 1px solid var(--border);
-  color: var(--muted);
-  white-space: nowrap;
-}
-.status-running { color: var(--ok); border-color: var(--ok); }
-.status-error { color: var(--danger); border-color: var(--danger); }
-.status-extinct { color: #d29922; border-color: #d29922; }
-.status-interrupted { color: #d29922; border-color: #6e5494; }
-.status-stopping { color: #d29922; border-color: #d29922; }
 
 /* A worker only notices a stop request between iterations, so the button and
    the status chip both spin until it actually stops. Without this the click
@@ -183,24 +159,9 @@ button.small { padding: 4px 9px; font-size: 12px; }
   animation: notice-spin 0.8s linear infinite;
   vertical-align: -1px;
 }
-.run-actions button[disabled] { opacity: 0.7; cursor: default; }
 
-.run-meta { display: flex; flex-wrap: wrap; gap: 10px; margin: 9px 0; font-size: 11.5px; color: var(--muted); }
-.run-meta b { color: var(--text); font-weight: 600; }
 
-.run-error {
-  background: #2a1416;
-  border: 1px solid #5c2a2a;
-  color: #ffb4ab;
-  font-size: 10.5px;
-  padding: 6px 8px;
-  border-radius: 6px;
-  max-height: 90px;
-  overflow: auto;
-  white-space: pre-wrap;
-}
 
-.run-actions { display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap; align-items: center; }
 
 /* ---- viewer layout ---- */
 .viewer-layout { display: grid; grid-template-columns: 1fr 268px; gap: 12px; align-items: start; }
@@ -319,7 +280,6 @@ button.small { padding: 4px 9px; font-size: 12px; }
    Two-pane layouts with a drag handle
    ========================================================================== */
 
-.runs-layout,
 .viewer-layout {
   display: grid;
   grid-template-columns: 1fr 6px 420px;
@@ -350,10 +310,6 @@ body.resizing { user-select: none; cursor: col-resize; }
 body.resizing * { cursor: col-resize !important; }
 
 /* ---- runs view ---- */
-.runs-layout .panel { margin-bottom: 0; max-width: none; }
-.new-run-panel { min-width: 0; }
-.runs-panel { min-width: 0; position: sticky; top: 68px; max-height: calc(100vh - 90px); display: flex; flex-direction: column; }
-.runs-panel .run-list { overflow-y: auto; }
 
 /* Everything about a new run visible at once: four columns of settings. */
 .config-columns {
@@ -375,22 +331,8 @@ legend.sub {
   width: 100%;
 }
 
-.run-list { grid-template-columns: 1fr; }
 
 /* The full configuration of a run, small enough to scan but always present. */
-.run-settings {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 3px 9px;
-  margin: 7px 0;
-  padding: 7px 8px;
-  background: rgba(0, 0, 0, 0.22);
-  border-radius: 5px;
-  font-size: 10px;
-  line-height: 1.5;
-  color: #b7c6d4;
-}
-.run-settings i { color: #6b7c8d; font-style: normal; }
 
 button.warn { background: #7a4a12; border-color: #9a5d17; }
 button.warn:hover { background: #96591a; }
@@ -489,10 +431,9 @@ details.control-group > summary:hover h3 { color: var(--text); }
   .config-columns { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 1000px) {
-  .runs-layout, .viewer-layout { grid-template-columns: 1fr !important; }
+  .viewer-layout { grid-template-columns: 1fr !important; }
   .resizer { display: none; }
-  .runs-panel { position: static; max-height: none; }
-  .config-columns { grid-template-columns: 1fr; }
+    .config-columns { grid-template-columns: 1fr; }
 }
 
 /* Inline share next to a node-count statistic. */
@@ -785,6 +726,301 @@ details.control-group > summary:hover h3 { color: var(--text); }
 .explain-intro h2 { margin: 0 0 6px; font-size: 20px; }
 .explain-intro p { margin: 0; color: var(--muted); line-height: 1.6; }
 .analysis-empty { max-width: 620px; }
+
+/* ==========================================================================
+   Simulations
+   ==========================================================================
+   A grid of cards and nothing else. Everything that acts on a simulation is
+   on its card; everything that makes one is behind the first cell. */
+
+.sims-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  max-width: 1240px;
+  margin: 0 auto 14px;
+}
+.sims-head h2 { margin: 0; font-size: 20px; }
+
+.sim-grid {
+  max-width: 1240px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(272px, 1fr));
+  gap: 14px;
+  align-items: stretch;
+}
+
+.sim-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  padding: 15px 16px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+/* The one cell that is a button rather than a card. Dashed, because it is an
+   outline of a simulation rather than one. */
+.sim-card-new {
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 190px;
+  background: transparent;
+  border: 1px dashed var(--border);
+  color: var(--muted);
+  font: inherit;
+  font-size: 13.5px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+.sim-card-new:hover {
+  border-color: var(--accent);
+  color: var(--text);
+  background: rgba(79, 179, 255, 0.05);
+}
+.sim-new-mark {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+}
+.sim-new-mark svg { width: 17px; height: 17px; }
+
+/* ---- the head: what it is called, and the way to everything else ---- */
+
+.sim-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+.sim-title { min-width: 0; }
+.sim-title h3 {
+  margin: 0;
+  font-size: 14.5px;
+  font-weight: 600;
+  /* A name is what somebody typed. The page-wide h3 shouts it in capitals,
+     which is right for a section heading and wrong for a proper noun. */
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--text);
+  /* A long name shortens rather than reflowing the card. */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sim-id { font-size: 10.5px; color: #62717f; font-family: ui-monospace, SFMono-Regular, monospace; }
+
+.icon-button {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  color: var(--muted);
+  cursor: pointer;
+}
+.icon-button:hover { background: var(--panel-2, rgba(255,255,255,0.06)); color: var(--text); }
+.icon-button svg { width: 15px; height: 15px; }
+.sim-menu-button svg { width: 17px; height: 17px; }
+
+/* ---- what it is doing ---- */
+
+.sim-state {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11.5px;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+  text-transform: capitalize;
+}
+.sim-dot {
+  width: 7px;
+  height: 7px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: currentColor;
+}
+/* Running is the only state that moves, because it is the only one that is
+   still happening. Stopping keeps the pulse but goes amber: the request is in
+   and the worker has not reached the end of its iteration yet. */
+.sim-state-running { color: var(--ok); }
+.sim-state-running .sim-dot { animation: sim-pulse 1.6s ease-in-out infinite; }
+.sim-state-stopping { color: #d29922; }
+.sim-state-stopping .sim-dot { animation: sim-pulse 0.7s ease-in-out infinite; }
+.sim-state-error { color: var(--danger); }
+.sim-state-extinct { color: #d29922; }
+.sim-state-interrupted { color: #a371f7; }
+
+@keyframes sim-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.35; transform: scale(0.72); }
+}
+
+/* ---- what it has done ---- */
+
+.sim-facts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.sim-facts div { min-width: 0; }
+.sim-facts b {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sim-facts i { font-style: normal; font-size: 10.5px; color: #62717f; }
+
+.sim-settings {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  font-size: 11px;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  padding-top: 9px;
+}
+.sim-settings i { font-style: normal; color: #56626f; }
+
+.sim-error {
+  margin: 0;
+  padding: 7px 9px;
+  max-height: 74px;
+  overflow: auto;
+  font-size: 10.5px;
+  line-height: 1.45;
+  color: #ffb3a7;
+  background: rgba(248, 81, 73, 0.08);
+  border-radius: 6px;
+  white-space: pre-wrap;
+}
+
+/* ---- the two things you actually do with it ---- */
+
+.sim-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: auto;   /* pinned to the foot, so every card's buttons line up */
+  padding-top: 2px;
+}
+.sim-actions button {
+  flex: 1 1 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-width: 0;
+  padding: 8px 10px;
+  font-size: 12.5px;
+}
+.sim-icon { display: inline-grid; place-items: center; flex: 0 0 auto; }
+.sim-icon svg { width: 15px; height: 15px; display: block; }
+
+.sim-run { background: var(--accent-dim); border-color: var(--accent); color: #fff; }
+.sim-run:hover { background: var(--accent); }
+.sim-run.is-running { background: #7a4a12; border-color: #9a5d17; }
+.sim-run.is-running:hover { background: #96591a; }
+.sim-run[disabled] { opacity: 0.75; cursor: default; }
+.sim-inspect[disabled] { opacity: 0.45; cursor: not-allowed; }
+
+/* ---- the three-dot menu ---- */
+
+.sim-menu {
+  position: absolute;
+  top: 44px;
+  right: 12px;
+  z-index: 30;
+  min-width: 232px;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+}
+.sim-menu[hidden] { display: none; }
+.sim-menu button {
+  display: block;
+  width: 100%;
+  padding: 7px 9px;
+  text-align: left;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.sim-menu button:hover { background: rgba(255, 255, 255, 0.06); }
+.sim-menu b { display: block; font-size: 12.5px; font-weight: 600; color: var(--text); }
+.sim-menu i {
+  display: block;
+  margin-top: 1px;
+  font-style: normal;
+  font-size: 10.5px;
+  line-height: 1.4;
+  color: var(--muted);
+}
+.sim-menu button.danger b { color: #ff9c8f; }
+.sim-menu button.danger:hover { background: rgba(248, 81, 73, 0.1); }
+
+.sim-empty { grid-column: 1 / -1; color: var(--muted); margin: 8px 0 0; }
+
+/* ---- the settings, which only appear when something is being made ---- */
+
+.sim-dialog {
+  width: min(1180px, calc(100vw - 40px));
+  max-height: calc(100vh - 60px);
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--panel);
+  color: var(--text);
+  overflow: hidden;
+}
+.sim-dialog::backdrop { background: rgba(3, 6, 10, 0.66); backdrop-filter: blur(2px); }
+.sim-dialog form { display: flex; flex-direction: column; max-height: inherit; overflow: hidden; }
+
+.sim-dialog-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 15px 18px;
+  border-bottom: 1px solid var(--border);
+}
+.sim-dialog-head h2 { margin: 0; font-size: 17px; }
+
+.sim-dialog .config-form { margin: 0; padding: 16px 18px; overflow-y: auto; }
+/* The actions stay put while the settings scroll under them. */
+.sim-dialog .form-actions {
+  position: sticky;
+  bottom: 0;
+  margin: 0;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-top: 1px solid var(--border);
+  background: var(--panel);
+}
+.sim-dialog .form-error { flex: 1 1 auto; min-width: 0; }
+
+@media (max-width: 720px) {
+  .sim-grid { grid-template-columns: 1fr; }
+  .sim-dialog { width: 100vw; max-height: 100vh; border-radius: 0; }
+}
 
 /* ==========================================================================
    Home

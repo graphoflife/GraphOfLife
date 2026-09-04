@@ -143,6 +143,47 @@ const RunStore = {
     return wanted;
   },
 
+  /**
+   * Copy every frame of one run onto another id.
+   *
+   * Walked with a cursor and written in batches rather than read whole: a long
+   * run is thousands of frames and holding them all in memory to copy them is
+   * a way to fail at exactly the size where copying matters.
+   */
+  async copyFrames(fromId, toId, batchSize = 200) {
+    const db = await this.open();
+    const range = IDBKeyRange.bound([fromId, -Infinity], [fromId, Infinity]);
+    let batch = [];
+    let copied = 0;
+
+    const flush = async () => {
+      if (!batch.length) return;
+      const rows = batch;
+      batch = [];
+      await this._tx(['frames'], 'readwrite', tx => {
+        const store = tx.objectStore('frames');
+        for (const row of rows) store.put({ runId: toId, index: row.index, frame: row.frame });
+      });
+      copied += rows.length;
+    };
+
+    const pending = [];
+    await new Promise((resolve, reject) => {
+      const cursor = db.transaction('frames').objectStore('frames').openCursor(range);
+      cursor.onsuccess = () => {
+        const at = cursor.result;
+        if (!at) { resolve(); return; }
+        batch.push({ index: at.value.index, frame: at.value.frame });
+        if (batch.length >= batchSize) pending.push(flush());
+        at.continue();
+      };
+      cursor.onerror = () => reject(cursor.error);
+    });
+    await Promise.all(pending);
+    await flush();
+    return copied;
+  },
+
   // ---- checkpoints -----------------------------------------------------
 
   async putCheckpoint(runId, bytes) {

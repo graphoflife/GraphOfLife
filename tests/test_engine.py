@@ -387,63 +387,92 @@ def test_every_agent_in_a_phase_reads_the_same_messages():
     reading stale signals and high ids fresh ones, for no reason anyone chose.
 
     Writes now go to an outbox delivered once the phase is over.
+
+    The pre-pass adds a delivery partway through, on purpose — that is the
+    whole option — so with it on the rule is per pass rather than per phase:
+    within any one sweep of the population, nobody's read changes under them.
+    Checked both ways, because the property being protected is that a read
+    never depends on where an id fell in a loop, and that holds either way.
     """
     import copy
 
-    world = new_world(small(seed=3))
-    for _ in range(3):
+    for prepass in (False, True):
+        world = new_world(small(seed=3, message_prepass=prepass))
+        for _ in range(3):
+            world.step()
+
+        for run in (world.reproduction_phase, world.blotto_phase):
+            baseline = {"at": copy.deepcopy(world.messages)}
+            changed = []
+            original_input = world._input_vec
+            original_deliver = world._deliver_messages
+
+            def watching(u, v, *args, **kwargs):
+                for src, dst in ((u, u), (u, v), (v, u), (v, v)):
+                    if world.messages.get(src, {}).get(dst) != baseline["at"].get(src, {}).get(dst):
+                        changed.append((src, dst))
+                return original_input(u, v, *args, **kwargs)
+
+            # A delivery ends one sweep and begins the next, so that is where
+            # the comparison is allowed to move on.
+            def delivering(outbox):
+                original_deliver(outbox)
+                baseline["at"] = copy.deepcopy(world.messages)
+
+            world._input_vec = watching
+            world._deliver_messages = delivering
+            try:
+                run(record_decisions=False)
+            finally:
+                world._input_vec = original_input
+                world._deliver_messages = original_deliver
+
+            assert not changed, (
+                f"with message_prepass={prepass}, {len(changed)} reads returned a "
+                f"message that had changed mid-sweep, e.g. {changed[:3]}")
+
+
+def test_a_phase_looks_exactly_as_often_as_it_was_asked_to():
+    """
+    One pass per agent, or two if a pre-pass was asked for. Never a spare one.
+
+    The game phase used to observe twice unconditionally: once to write
+    messages, once to place stakes. That second look is now a choice, and the
+    cost of the choice is exactly one extra forward pass per agent per phase —
+    so the count is worth pinning down, in both directions.
+
+    Reproduction's acting pass skips agents who cannot afford a child, so it
+    looks no more than once each; the pre-pass gives everyone a turn, which is
+    why the counts are compared against a ceiling rather than an equality.
+    """
+    for prepass, passes in ((False, 1), (True, 2)):
+        world = new_world(small(seed=3, message_prepass=prepass))
         world.step()
 
-    for run in (world.reproduction_phase, world.blotto_phase):
-        at_start = copy.deepcopy(world.messages)
-        changed = []
-        original = world._input_vec
+        for name, run in (("reproduction", world.reproduction_phase),
+                          ("game", world.blotto_phase)):
+            present = world.G.number_of_nodes()
+            calls = []
+            original = world._observe
 
-        def watching(u, v, *args, **kwargs):
-            for src, dst in ((u, u), (u, v), (v, u), (v, v)):
-                if world.messages.get(src, {}).get(dst) != at_start.get(src, {}).get(dst):
-                    changed.append((src, dst))
-            return original(u, v, *args, **kwargs)
+            def counting(*args, **kwargs):
+                calls.append(1)
+                return original(*args, **kwargs)
 
-        world._input_vec = watching
-        try:
-            run(record_decisions=False)
-        finally:
-            world._input_vec = original
+            world._observe = counting
+            try:
+                run(record_decisions=False)
+            finally:
+                world._observe = original
 
-        assert not changed, (
-            f"{len(changed)} reads returned a message that had changed since the "
-            f"phase began, e.g. {changed[:3]}")
-
-
-def test_each_phase_looks_once_per_agent():
-    """
-    The game phase used to observe twice: once to write messages, once to place
-    stakes. That is a second forward pass through every brain for the same
-    neighbourhood, and it made the game behave unlike reproduction, which has
-    only ever looked once.
-    """
-    world = new_world(small(seed=3))
-    world.step()
-
-    for name, run in (("reproduction", world.reproduction_phase),
-                      ("game", world.blotto_phase)):
-        present = world.G.number_of_nodes()
-        calls = []
-        original = world._observe
-
-        def counting(*args, **kwargs):
-            calls.append(1)
-            return original(*args, **kwargs)
-
-        world._observe = counting
-        try:
-            run(record_decisions=False)
-        finally:
-            world._observe = original
-
-        assert len(calls) == present, (
-            f"the {name} phase made {len(calls)} forward passes for {present} agents")
+            assert len(calls) <= present * passes, (
+                f"the {name} phase made {len(calls)} forward passes for {present} "
+                f"agents with message_prepass={prepass}, wanted at most "
+                f"{present * passes}")
+            if prepass:
+                assert len(calls) > present, (
+                    f"the {name} phase made {len(calls)} forward passes for "
+                    f"{present} agents, which is not enough for a pre-pass")
 
 
 # ---------------------------------------------------------------------------
@@ -789,6 +818,116 @@ def test_the_interface_offers_every_setting_the_engine_has():
                  "allow_revolutions"):
         block = page.split(f'data-cfg="{name}"')[1].split("</div>")[0]
         assert "<small>" in block, f"the {name} checkbox has no explanation under it"
+
+
+def test_copying_a_run_forks_it_rather_than_backing_it_up():
+    """
+    A duplicate is a run in its own right, starting where the original is.
+
+    Its own id, its own directory, its own creation time — but every frame and
+    the checkpoint, so it can be resumed and taken somewhere else while the
+    original carries on. Whatever the original was doing, the copy is doing
+    nothing: nothing is advancing it.
+    """
+    import gol_store
+
+    with tempfile.TemporaryDirectory() as tmp:
+        original = gol_store.BASE_DIR
+        gol_store.BASE_DIR = tmp
+        try:
+            meta = gol_store.create_run("first world", SimConfig())
+            run_id = meta["id"]
+            for index in range(4):
+                gol_store.write_frame(run_id, index, {"ids": [1, 2], "at": index})
+            gol_store.update_meta(run_id, status="running", iteration=42,
+                                  frame_count=4, error="something went wrong")
+
+            copy = gol_store.copy_run(run_id)
+
+            assert copy["id"] != run_id, "a copy must not share the original's id"
+            assert copy["iteration"] == 42, "the copy should start where the original is"
+            assert copy["status"] == "idle" and copy["error"] is None, \
+                "nothing is advancing the copy, and it did not inherit the failure"
+            assert gol_store.count_frames(copy["id"]) == 4, "the frames did not come along"
+            assert gol_store.read_frame(copy["id"], 3) == gol_store.read_frame(run_id, 3)
+            assert gol_store.load_meta(run_id)["status"] == "running", \
+                "copying changed the original"
+
+            # Independent from here on.
+            gol_store.write_frame(copy["id"], 4, {"ids": [1], "at": 4})
+            assert gol_store.count_frames(run_id) == 4
+            assert gol_store.count_frames(copy["id"]) == 5
+        finally:
+            gol_store.BASE_DIR = original
+
+
+def test_every_brain_kind_has_a_preset_that_validates():
+    """
+    Choosing a brain should not also mean knowing what else to change.
+
+    A binary brain needs wider layers and a gentler mutation rate, and getting
+    the second one wrong kills runs rather than merely making them worse. The
+    presets live with the engine so the form cannot drift from them.
+    """
+    kinds = ("float", "float16", "binary")
+    assert set(SimConfig.BRAIN_PRESETS) == set(kinds), \
+        "every brain kind the engine accepts needs a preset"
+
+    for kind in kinds:
+        preset = SimConfig.BRAIN_PRESETS[kind]
+        cfg = SimConfig(brain_kind=kind, **preset)
+        cfg.validate()
+        world = new_world(cfg)
+        world.step(record_decisions=False)
+        assert sum(world.tokens.values()) == cfg.total_tokens
+
+    binary = SimConfig.BRAIN_PRESETS["binary"]
+    floaty = SimConfig.BRAIN_PRESETS["float"]
+    assert sum(binary["hidden_layers"]) > sum(floaty["hidden_layers"]), \
+        "a binary unit carries a bit where a float carries many; it needs the room"
+    assert binary["mutation_sparsity"] < floaty["mutation_sparsity"], \
+        "a binary brain's smallest move is a whole step, so its rate must be gentler"
+
+
+def test_the_defaults_endpoint_carries_the_brain_presets():
+    """The form fills itself in from the engine, so the engine has to say."""
+    import gol_server
+
+    payload = gol_server.Handler._defaults()
+    assert "brain_presets" in payload, "the form has nowhere to read the presets from"
+    assert set(payload["brain_presets"]) == set(SimConfig.BRAIN_PRESETS)
+
+
+def test_the_pre_pass_is_on_for_new_runs_and_off_for_old_ones():
+    """
+    Turning a default on must not reach backwards.
+
+    A run recorded before the option existed ran one pass per phase. Reading
+    its stored configuration as though it had used a pre-pass would change what
+    a resumed run does, which is the whole reason LEGACY_WHEN_ABSENT exists.
+    """
+    assert SimConfig().message_prepass is True, "new runs should get the pre-pass"
+
+    # Read back off disk: a key that is not there says what that run did.
+    assert SimConfig.from_dict({"total_tokens": 10000}).message_prepass is False, \
+        "a configuration written before the option existed must read as off"
+    assert SimConfig.from_dict({"total_tokens": 10000,
+                                "message_prepass": True}).message_prepass is True
+
+    # Arriving from outside: a key that is not there says nothing about the
+    # past, so it means today's default. Asking the API for a world without
+    # naming the pre-pass used to quietly get one without it.
+    assert SimConfig.from_dict({"total_tokens": 10000}, stored=False).message_prepass is True, \
+        "a fresh request that omits the option should get the current default"
+    assert SimConfig.from_dict({"total_tokens": 10000, "message_prepass": False},
+                               stored=False).message_prepass is False, \
+        "an explicit choice must survive either way"
+
+    # The dangerous direction is the one that is not the default: a stored
+    # config read as fresh would change what a resumed run does.
+    import inspect
+    assert inspect.signature(SimConfig.from_dict).parameters["stored"].default is True, \
+        "reading a stored config must be what happens when nobody says otherwise"
 
 
 def _main() -> int:

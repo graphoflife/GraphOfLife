@@ -17,7 +17,6 @@ const App = {
 
     // Both layouts are two panes plus a drag handle; the handle sets the width
     // of the second column and the choice is remembered per layout.
-    this.makeResizable('runsLayout', 'runsResizer', 'gol.width.runs', 320, 900, 420);
     this.makeResizable('viewerLayout', 'viewerResizer', 'gol.width.viewer', 200, 620, 268);
 
     // Open on whichever view is the default, through the same path a click

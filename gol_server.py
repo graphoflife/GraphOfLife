@@ -22,6 +22,7 @@ API
     DELETE /api/runs/<id>             delete a run and all its data
     POST   /api/runs/<id>/start       start or resume
     POST   /api/runs/<id>/stop        ask a running worker to stop
+    POST   /api/runs/<id>/copy        duplicate a run, data and all
     GET    /api/runs/<id>/frames/<n>  one recorded frame
     GET    /api/runs/<id>/series      per-frame statistics for the whole run
     GET    /api/runs/<id>/series/progress   how far a rebuild has got
@@ -328,7 +329,7 @@ class Handler(BaseHTTPRequestHandler):
 
         if parts == ["api", "runs"]:
             body = self._read_json()
-            cfg = SimConfig.from_dict(body.get("config", {}))
+            cfg = SimConfig.from_dict(body.get("config", {}), stored=False)
             meta = store.create_run(body.get("name", ""), cfg)
             self._send_json(self._decorate(meta), 201)
             return
@@ -341,6 +342,12 @@ class Handler(BaseHTTPRequestHandler):
                 self._error("run is already in progress", 409)
                 return
             self._send_json({"ok": True})
+            return
+
+        if len(parts) == 4 and parts[:2] == ["api", "runs"] and parts[3] == "copy":
+            body = self._read_json()
+            meta = store.copy_run(parts[2], body.get("name", ""))
+            self._send_json(self._decorate(meta), 201)
             return
 
         if len(parts) == 4 and parts[:2] == ["api", "runs"] and parts[3] == "stop":
@@ -359,6 +366,9 @@ class Handler(BaseHTTPRequestHandler):
         cfg = SimConfig()
         return {
             "config": cfg.to_dict(),
+            # What each brain kind wants, so the form can fill it in rather
+            # than leaving it to be known.
+            "brain_presets": SimConfig.BRAIN_PRESETS,
             "derived": {
                 "n_inputs": cfg.n_inputs(),
                 "n_outputs": cfg.n_outputs(),

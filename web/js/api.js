@@ -48,6 +48,7 @@ const ServerBackend = {
   deleteRun(id)         { return this._request('DELETE', `/api/runs/${encodeURIComponent(id)}`); },
   startRun(id)          { return this._request('POST', `/api/runs/${encodeURIComponent(id)}/start`, {}); },
   stopRun(id)           { return this._request('POST', `/api/runs/${encodeURIComponent(id)}/stop`); },
+  copyRun(id, name)     { return this._request('POST', `/api/runs/${encodeURIComponent(id)}/copy`, { name }); },
   getFrame(id, index)   { return this._request('GET', `/api/runs/${encodeURIComponent(id)}/frames/${index}`); },
   getSeries(id)         { return this._request('GET', `/api/runs/${encodeURIComponent(id)}/series`); },
   getSeriesProgress(id) { return this._request('GET', `/api/runs/${encodeURIComponent(id)}/series/progress`); }
@@ -109,6 +110,7 @@ const BrowserBackend = {
   deleteRun(id)         { return this._send('remove', { runId: id }); },
   startRun(id)          { return this._send('start', { runId: id }); },
   stopRun(id)           { return this._send('stop', { runId: id }); },
+  copyRun(id, name)     { return this._send('copy', { runId: id, name }); },
   getFrame(id, index)   { return this._send('frame', { runId: id, index }); },
   getSeries(id)         { return this._send('series', { runId: id }); },
   getSeriesProgress(id) { return this._send('seriesProgress', { runId: id }); },
@@ -152,6 +154,7 @@ const API = {
   deleteRun(id)           { return this._call('deleteRun', id); },
   startRun(id)            { return this._call('startRun', id); },
   stopRun(id)             { return this._call('stopRun', id); },
+  copyRun(id, name)       { return this._call('copyRun', id, name); },
   getFrame(id, index)     { return this._call('getFrame', id, index); },
   getSeries(id)           { return this._call('getSeries', id); },
   getSeriesProgress(id)   { return this._call('getSeriesProgress', id); },

@@ -212,6 +212,41 @@ def delete_run(run_id: str) -> None:
     shutil.rmtree(run_dir(run_id), ignore_errors=True)
 
 
+def copy_run(run_id: str, name: str = "") -> Dict[str, Any]:
+    """
+    Duplicate a run whole: metadata, every frame, and the checkpoint.
+
+    The copy is a run in its own right — new id, new directory, its own
+    creation time — but it starts from exactly the state the original is in, so
+    it can be resumed and taken somewhere else while the original carries on.
+    That is the point of it: a fork, not a backup.
+
+    A run that is mid-flight can be copied, and the copy is whatever was on
+    disk at the moment the files were read. It is never left marked as running,
+    because nothing is advancing it.
+    """
+    source = run_dir(run_id)
+    if not os.path.isdir(source):
+        raise FileNotFoundError(run_id)
+
+    meta = load_meta(run_id)
+
+    _ensure_base()
+    with _CREATE_LOCK:
+        new_id = next_run_id()
+        shutil.copytree(source, run_dir(new_id))
+
+    meta = dict(meta)
+    meta["id"] = new_id
+    meta["name"] = (name or "").strip() or f"{meta.get('name') or run_id} (copy)"
+    meta["created_at"] = time.time()
+    # Whatever the original was doing, this one is doing nothing yet.
+    meta["status"] = "idle"
+    meta["error"] = None
+    save_meta(new_id, meta)
+    return meta
+
+
 def run_size_bytes(run_id: str) -> int:
     total = 0
     for root, _, files in os.walk(run_dir(run_id)):

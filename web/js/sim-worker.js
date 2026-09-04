@@ -236,6 +236,22 @@ async function pump(runId) {
 
 let counter = 0;
 
+/**
+ * The next free run id.
+ *
+ * Distinct within the day even across reloads, since the counter starts over
+ * but the stored runs do not.
+ */
+async function nextRunId() {
+  const stamp = new Date();
+  const pad = (n) => String(n).padStart(2, '0');
+  const day = `${String(stamp.getFullYear()).slice(2)}_${pad(stamp.getMonth() + 1)}_${pad(stamp.getDate())}`;
+  const taken = new Set((await RunStore.listRuns()).map(r => r.id));
+  let id;
+  do { id = `GOL_${day}_n${String(++counter).padStart(3, '0')}`; } while (taken.has(id));
+  return id;
+}
+
 const handlers = {
   async defaults() {
     return call('gol_browser.WORLDS.defaults');
@@ -251,17 +267,7 @@ const handlers = {
   },
 
   async create({ name, config }) {
-    const stamp = new Date();
-    const pad = (n) => String(n).padStart(2, '0');
-    const day = `${String(stamp.getFullYear()).slice(2)}_${pad(stamp.getMonth() + 1)}_${pad(stamp.getDate())}`;
-
-    // Distinct within the day even across reloads, since the counter starts
-    // over but the stored runs do not.
-    const existing = await RunStore.listRuns();
-    const taken = new Set(existing.map(r => r.id));
-    let id;
-    do { id = `GOL_${day}_n${String(++counter).padStart(3, '0')}`; } while (taken.has(id));
-
+    const id = await nextRunId();
     const prepared = call('gol_browser.WORLDS.create', [id, config || {}]);
     const run = {
       id,
@@ -277,6 +283,34 @@ const handlers = {
     };
     await RunStore.putRun(run);
     return meta(run);
+  },
+
+  /**
+   * Duplicate a run whole: its metadata, every frame, and its checkpoint.
+   *
+   * A fork rather than a backup — the copy resumes from exactly where the
+   * original is and goes its own way. It is never marked as running, because
+   * nothing is advancing it.
+   */
+  async copy({ runId, name }) {
+    const source = await loadRun(runId);
+    const id = await nextRunId();
+
+    const copied = {
+      ...source,
+      id,
+      name: (name || '').trim() || `${source.name || runId} (copy)`,
+      created_at: Date.now() / 1000,
+      status: 'idle',
+      error: null
+    };
+    await RunStore.putRun(copied);
+    await RunStore.copyFrames(runId, id);
+
+    const checkpoint = await RunStore.getCheckpoint(runId);
+    if (checkpoint) await RunStore.putCheckpoint(id, checkpoint);
+
+    return meta(copied);
   },
 
   async remove({ runId }) {
