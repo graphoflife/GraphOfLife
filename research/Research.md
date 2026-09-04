@@ -675,6 +675,8 @@ All small, all pilots, none conclusive.
 
 | observation | measurement | status |
 |---|---|---|
+| Bigger worlds are not swept | founders still coexist after 60 iterations in 2/3, 3/3, 2/3 of runs at 40, 100, 250 founders | supports scale as an answer |
+| Extinction collapses with size | 3/3 dead at 6 founders, 0/3 at 100 | any statistic conditioned on survival is conditioned on size |
 | Conquest cycles are common but unremarkable | hundreds to thousands per run; 2-cycles at **0.87–0.91× chance** in every seed | no signal; the null is what makes it a result |
 | Symbiosis needs no new rule | a stake below a neighbour's self-stake transfers tokens without conquest | changes what §4.1 has to argue for |
 | **One founder sweep, then none** | 50 founding clades → 1 by iteration ~17; afterwards the coalescence lag grows at one per iteration | see below |
@@ -702,6 +704,30 @@ So the early dynamics are a hard selective sweep and the later dynamics are
 not. Under a sliding five-iteration window, recent ancestry is much livelier —
 62 clades, top share 6.7%, 50 turnovers — so sub-lineages do keep replacing one
 another locally without any of them fixing globally.
+
+**And that run is not representative.** It was one seed at one size, and
+running the same measurement across sizes shows the sweep is a small-world
+phenomenon. Founding families surviving after 60 iterations, three seeds each:
+
+| tokens | founders | died out | swept to one family | still many |
+|---|---|---|---|---|
+| 600 | 6 | **3/3** | – | – |
+| 1,500 | 15 | 2/3 | 1 (at iteration 25) | – |
+| 4,000 | 40 | 1/3 | – | **2/3** |
+| 10,000 | 100 | 0/3 | – | **3/3** |
+| 25,000 | 250 | 0/3 | 1 (at iteration 33) | **2/3** |
+
+Two things move together as the world grows: **extinction risk collapses**
+(3/3 → 2/3 → 1/3 → 0/3 → 0/3) and **the founding lineages stop being swept
+away**. Above about forty founders they usually still coexist after sixty
+iterations, in populations of two to four thousand agents.
+
+That is direct support for "make the world big enough and it does not settle",
+and it is evidence against reading §8.1's single sweep as the system's
+characteristic behaviour. It is not yet evidence that a large world *never*
+settles: sixty iterations is short, and a run that has not coalesced by then
+may simply be slower. What it does establish is that the sweep time is not a
+constant of the model, and that small worlds are the ones that end quickly.
 
 That combination, a single early sweep followed by no fixation, is exactly the
 signature that needs a neutral shadow (§5.3) to interpret: it is equally
