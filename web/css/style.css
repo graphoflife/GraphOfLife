@@ -16,6 +16,33 @@
 
 * { box-sizing: border-box; }
 
+/* Scrollbars, in the page's own colours.
+   ==========================================================================
+   The default one is a light grey trench with a light grey slider — drawn for
+   a white page, and on this one it is the brightest thing in view. The code
+   panel in the Explanation shows it worst, since it is nine thousand pixels
+   of script beside a picture that is mostly dark.
+
+   Both syntaxes, because Firefox has never implemented the WebKit one and
+   WebKit only recently implemented Firefox's. The thumb is drawn with a
+   transparent border and clipped to the padding box, which is how a
+   ::-webkit-scrollbar thumb is made narrower than the track it sits in
+   without also making the track a hit target that is hard to grab. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #2f3c4c transparent;
+}
+::-webkit-scrollbar { width: 11px; height: 11px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: #2f3c4c;
+  background-clip: padding-box;
+  border: 3px solid transparent;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover { background: #435367; background-clip: padding-box; }
+::-webkit-scrollbar-corner { background: transparent; }
+
 body {
   margin: 0;
   background: var(--bg);
@@ -852,7 +879,20 @@ details.control-group > summary:hover h3 { color: var(--text); }
   cursor: pointer;
 }
 .icon-button:hover { background: var(--panel-2, rgba(255,255,255,0.06)); color: var(--text); }
-.icon-button svg { width: 15px; height: 15px; }
+/* Stroked, not filled. The close crosses are two lines written as one path,
+   which with SVG's default fill:black and stroke:none is a shape of zero area
+   painted in a colour nobody can see — the button was there and worked, and
+   looked like an empty square. Shapes that mean to be filled carry their own
+   fill attribute and keep it, since an attribute on the element beats a value
+   inherited from its parent. */
+.icon-button svg {
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+}
 .sim-menu-button svg { width: 17px; height: 17px; }
 
 /* ---- what it is doing ---- */
