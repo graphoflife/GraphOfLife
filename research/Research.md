@@ -223,77 +223,149 @@ dynamics. If `D` grows as a power of `N`, they will be.
 
 ---
 
-## 3.4 Castles: making the intuition measurable
+## 3.4 Castles: the definition is the hard part
 
-The criterion that prompted the retraction above was put plainly: *if many
-nodes together form a kind of castle, and the castle can get larger and there
-can be more of them, that is already open-ended evolution.* That is a
-structural criterion rather than a genetic one, it is a reasonable thing to
-mean by the term, and — unlike most definitions in this literature — it can be
-measured directly.
+The criterion that started this: *if many nodes together form a kind of castle,
+and the castle can get larger and there can be more of them, that is already
+open-ended evolution.* A structural criterion rather than a genetic one, a
+reasonable thing to mean by the term, and — in principle — measurable.
 
-**Definition.** A **castle** at iteration `t` is a connected set of agents `C`
-such that
+In practice, defining the thing is most of the work, and two successive
+attempts here were both wrong for the same underlying reason: each smuggled in
+an assumption about what a castle is made of.
 
-1. **it holds together** — the token flow along edges inside `C` exceeds the
-   flow across its boundary, by some ratio `ρ > 1`;
-2. **it persists** — a set overlapping `C` in at least half its members
-   satisfies (1) at `t + 1`.
+### 3.4.1 Not a family
 
-That is all. An earlier draft also required every member to share a lineage,
-and that was a mistake: it builds the answer into the question. A clonal
-requirement guarantees relatedness ≈ 1, which guarantees Hamilton's rule is
-satisfied, which is assuming the mechanism one is trying to detect — and it
-makes the more interesting object invisible by construction. Both kinds of
-transition occur in biology: multicellularity is clonal, eukaryogenesis was
-symbiotic.
+The first attempt required every member to share a lineage. That builds the
+answer into the question. Clonality guarantees relatedness ≈ 1, which
+guarantees Hamilton's rule is satisfied, which is assuming the mechanism the
+measurement is meant to detect — and it makes the more interesting object
+invisible by construction. Biology has both kinds: multicellularity is clonal,
+eukaryogenesis was symbiotic.
 
-**Lineage composition is therefore a measured property of a castle, not a
-condition on it.** Every castle gets a *mixedness*: the number of distinct
-clades among its members, and the share held by the largest. `ρ ≈ 1` clonal
-patches and mixed mutualisms are then two findings rather than one definition
-and one blind spot.
+**Symbiosis is already available in the rules.** **Demonstrated against
+`_resolve_winner`**: an agent defending its node with a self-stake of 100, and
+a neighbour of any lineage staking `x` on the same node. Below the self-stake
+the tokens arrive, the defender keeps its node *and its brain*, and the giver
+is poorer — a gift. Only above it does the stake become a conquest. Flagging
+the gift as revolt changes nothing, because a revolution needs a coalition and
+one revolter is not one. So unrelated agents can already feed each other
+without taking each other over; no new mechanic is needed for a symbiotic
+castle to be *possible*, only for it to be *worth* it.
 
-**Symbiosis is already available in the rules**, which is worth stating because
-it means this is not a hypothetical. **Demonstrated against `_resolve_winner`**:
-an agent defending its own node with a self-stake of 100, and a neighbour of
-any lineage staking `x` on it. At `x < 100` the neighbour's tokens arrive, the
-defender keeps its node *and its brain*, and the giver is poorer — a gift.
-Only at `x >` the self-stake does the stake become a conquest and overwrite the
-defender. (At exactly equal it is a coin toss, as ties are.) Flagging the gift
-as revolt changes nothing, because a revolution needs a coalition and one
-revolter is not one. So unrelated agents can already feed each other without
-taking each other over, and no new mechanic is needed for a symbiotic castle to
-be possible — only for it to be *worth* it.
+### 3.4.2 Not a fixed set of agents either
 
-**The numbers to watch**, each as a function of `T`:
+The second attempt kept a membership requirement: a castle persists if a set
+overlapping it in half its members satisfies the flow condition next iteration.
+That is also too strong, and the counter-example is sharper.
 
-- **size** — members of the largest persistent castle;
+*Three nodes take each other's nodes in a cycle.* Conquest overwrites the
+loser's brain with the winner's, so every member is replaced every iteration —
+and the arrangement stands. **The matter turns over and the pattern persists.**
+That is a glider, not an organism, and no definition anchored on who the
+members are can see it.
+
+And if a triangle can do it, so can any cycle length, and so can patterns that
+do not return to themselves every iteration but every **two, or three, or `p`**
+— an oscillator rather than a still life. The object to be detected is
+therefore a **spatiotemporal pattern in the flow field**, characterised by its
+period as well as its shape, and not a set of anything.
+
+### 3.4.3 What is actually there: measured
+
+Conquest gives every node exactly one winner, so the conquest map is a
+functional graph and its cycles are cheap to find. Over 40 iterations, three
+seeds, ~2,500 tokens, against a null in which each conquered node is taken by a
+uniformly chosen neighbour instead of by whoever actually won it:
+
+| seed | cycle length | observed | null | ratio |
+|---|---|---|---|---|
+| 3 | 2 | 731 | 842 | **0.87×** |
+| 3 | 3 | 6 | 5 | 1.20× |
+| 3 | 4 | 8 | 8 | 1.00× |
+| 7 | 2 | 308 | 338 | **0.91×** |
+| 7 | 3 | 5 | 10 | 0.50× |
+| 11 | 2 | 1,618 | 1,823 | **0.89×** |
+| 11 | 3 | 130 | 77 | 1.69× |
+| 11 | 4 | 61 | 25 | 2.44× |
+
+Cycles are **abundant** — hundreds to thousands per run, triangles among them —
+and mostly **at or below chance**. Two-cycles, by far the commonest, are
+consistently *less* frequent than random rewiring produces, in every seed. The
+longer cycles are inconsistent between seeds on small counts.
+
+So the honest reading is: **no signal yet, and the abundance was the trap.**
+Counting cycles without a null would have produced a confident and completely
+wrong claim about self-sustaining structure. Two caveats keep this from being
+a negative result either: three seeds is nothing, and the null is crude — real
+conquests are weighted by stake, and a uniform-neighbour null does not preserve
+that, so it may not be the right chance to compare against. A better null
+shuffles outcomes while preserving each node's stake distribution.
+
+### 3.4.4 A ladder of definitions
+
+Rather than hold out for the right definition, work up from the cheapest one
+that is not obviously circular. Each rung is measurable with what a run already
+records.
+
+**L0 — flow modules.** Communities of the token-flow graph found by a
+flow-based method (the map equation, Rosvall & Bergstrom 2008, is the natural
+choice: it finds groups that flow persists inside, which is the property
+wanted, rather than groups that are merely densely connected). No lineage, no
+assumption about membership, purely what the agents did.
+
+**L1 — modules that persist while their members change.** Match modules across
+iterations by flow overlap rather than by shared membership, so a module whose
+agents are entirely replaced is still the same module. Dynamic community
+detection has standard machinery for this (Mucha et al. 2010).
+
+**L2 — patterns with a period.** For each candidate, test whether its
+configuration recurs at lag `p` for `p = 1, 2, 3, …`, by recurrence analysis
+over local configurations. This is the rung that catches the oscillators, and
+the one no measurement here currently reaches.
+
+**L3 — more than the sum.** Perturbation: cut a part out and compare what
+remains against the same cut made on a size-matched random subset. A castle is
+a thing whose removal costs more than its size.
+
+**L4 — the principled version.** Information-theoretic individuality (Krakauer,
+Bertschinger, Olbrich, Flack & Ay 2020): an individual is an aggregate whose
+own past predicts its future better than its environment's past does. This is
+the right definition and it is expensive; L0–L3 are the approximations worth
+having in the meantime.
+
+The relevant prior art for L1–L2 is **computational mechanics on cellular
+automata** (Crutchfield & Hanson 1993): identify the statistically regular
+background domains first, and then a structure is *whatever is not the
+background* — a defect between domains. That is exactly the right shape of
+answer for finding gliders without knowing in advance what a glider looks like,
+and it sidesteps the definitional problem by defining structure negatively.
+Beer's analysis of gliders in the Game of Life as autopoietic systems is the
+other worked example of taking a known pattern and asking rigorously what makes
+it an individual.
+
+### 3.4.5 What to measure once something is found
+
+Each as a function of `T`:
+
+- **size** — agents involved in the largest persistent pattern;
 - **count** — how many exist at once;
-- **lifetime** — how long the longest-lived one survives;
-- **mixedness** — clades inside it, and whether that rises or falls with size.
+- **lifetime** — how long the longest-lived survives;
+- **period** — whether it is a still life, or an oscillator, and of what period;
+- **mixedness** — how many clades take part, measured rather than required.
 
-**Hypothesis H4 (castles).** Castle size and count grow without bound as `T`
-grows; castle *lifetime* does not, being capped by the coherence limit of
-§3.1a. If all three grow, the structural criterion for open-endedness is met.
-If size grows but lifetime saturates, castles are real but transient — an
-ecology of empires rather than a transition in individuality.
+**Hypothesis H4 (castles).** Size and count grow without bound with `T`;
+lifetime does not, being capped by the coherence limit of §3.1a. If all of them
+grow, the structural criterion for open-endedness is met. If size grows but
+lifetime saturates, the world gets *wider without getting deeper* — an ecology
+of empires rather than a transition in individuality.
 
-**Hypothesis H5 (symbiosis).** Mixed castles occur, and the lineages in them
-are interdependent rather than merely adjacent. The test is a perturbation: cut
-one clade out of a castle and compare what remains against the same cut made on
-a size-matched random subset. If the remainder loses more than the control, the
-castle was doing something the parts were not.
+**Hypothesis H5 (symbiosis).** Mixed-lineage patterns occur, and their parts
+are interdependent rather than merely adjacent (the L3 test). Finding one would
+be the stronger result, because conquest is a homogenising force — winning a
+node overwrites its brain — so a mixed structure has to be actively maintained
+against a rule that is constantly trying to make it clonal.
 
-Detecting mixed castles at all would be the more interesting result, because
-conquest is a homogenising force — winning a node overwrites its brain — so a
-mixed castle has to be actively maintained against a rule that is constantly
-trying to make it clonal.
-
-The interesting case is the third: size and count growing with `T` while
-lifetime is flat would mean the world gets *wider* without getting *deeper*,
-which is the sharpest version of the disagreement this section is about and is
-worth settling before anything else in §6.
 
 ---
 
@@ -549,8 +621,10 @@ experiment in this document.*
 the activity statistics. Everything else is a pilot for this.
 
 **E7 — Castles against scale.** `T` over as wide a range as memory allows, with
-the brain held fixed, measuring castle size, count, lifetime and mixedness
-(§3.4) and the time for the founding lineages to collapse to one. *Tests H4, and settles
+the brain held fixed, measuring pattern size, count, lifetime, **period** and
+mixedness (§3.4.5) and the time for the founding lineages to collapse to one.
+Requires at least rung L1 of §3.4.4, and preferably L2 — nothing currently
+measured detects an oscillator. *Tests H4, and settles
 whether "big enough that it never finishes" is a real answer.* This is the
 experiment the disagreement in §3.1 turns on, and it should come first.
 
@@ -574,6 +648,18 @@ comparison showed 2 extinctions versus 0 and a 56% lift in median population;
 the same comparison at 20 seeds showed 9 versus 9 and no difference. Nothing
 below ~30 seeds should be reported as an effect.
 
+**Abundance is not evidence.** Conquest cycles number in the thousands, and are
+at or below what random rewiring produces. Any count of a pattern needs a null
+that produces the same pattern by chance, and the null has to be a good one —
+the uniform-neighbour null used in §3.4.3 does not preserve the fact that
+conquests are weighted by stake, so it is a first approximation and not the
+last word.
+
+**Measuring at one lag finds only one kind of thing.** A structure that returns
+to itself every second or third iteration is invisible to a test that asks
+whether it is there again next iteration. Everything measured so far tests
+period 1.
+
 **The pilot statistics are not what they appear.** See §5.2. Do not use
 `distinctBrains` or `distinctLineages` as diversity measures.
 
@@ -589,6 +675,8 @@ All small, all pilots, none conclusive.
 
 | observation | measurement | status |
 |---|---|---|
+| Conquest cycles are common but unremarkable | hundreds to thousands per run; 2-cycles at **0.87–0.91× chance** in every seed | no signal; the null is what makes it a result |
+| Symbiosis needs no new rule | a stake below a neighbour's self-stake transfers tokens without conquest | changes what §4.1 has to argue for |
 | **One founder sweep, then none** | 50 founding clades → 1 by iteration ~17; afterwards the coalescence lag grows at one per iteration | see below |
 | Mean degree declines | 3.9 → 3.2 over 45 iterations, 5 seeds, seed `k = 6` | the graph erodes; long-run unknown |
 | Frames cannot carry ancestry | 49% of brain ids never reached a frame | **fixed**: a copy keeps its genotype's id, now 4.5% |
