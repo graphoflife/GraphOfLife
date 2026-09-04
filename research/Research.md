@@ -79,11 +79,23 @@ Three features push this system further from equilibrium than textbook Blotto:
 1. **The budget is endogenous.** An agent's stake next round is whatever was
    staked *on* it this round. Budget and payoff are the same quantity, so the
    game is a dynamical system rather than a one-shot contest.
-2. **Revolutions are an explicit non-transitivity generator.** With them off,
-   a node goes to whoever staked most — a total order, and total orders admit
-   dominant strategies. With them on, a coalition of small stakers beats a
-   large one, which is precisely a rock-paper-scissors structure: *big beats
-   medium, medium beats small, coalition of small beats big.*
+2. **Revolutions break the total order.** With them off, a node goes to
+   whoever staked most. That is a total order on stake size, it holds in every
+   subset of the contestants, and total orders admit dominant strategies.
+
+   With them on, the winner is not a function of pairwise strength at all.
+   **Demonstrated against the engine's own `_resolve_winner`**: three stakers
+   H (100, none flagged as revolt), M (60, all flagged), S (50, all flagged).
+   Pairwise H beats M and H beats S; add S to the H-versus-M contest and **M
+   wins**, by revolution, while S itself wins nothing. A revolution cannot fire
+   in a two-way contest at all — it would need one agent's revolt to exceed the
+   leader's whole stake — so this is irreducibly a coalition effect.
+
+   In choice-theoretic terms this violates independence of irrelevant
+   alternatives: who wins depends on who else is present. That is what removes
+   the ordering, and it is the precondition for cyclic dominance among evolved
+   policies — but a cycle among *policies* is a stronger claim than this
+   demonstration supports, and establishing one is what E4 is for.
 3. **Conquest replicates the winner's policy into the loser's node.** Selection
    is not just differential survival, it is direct strategy transmission
    between neighbours — closer to cultural transmission than to inheritance.
@@ -93,6 +105,10 @@ non-transitive, and non-transitivity is a *necessary* condition for the
 strategic dynamics to be open-ended in this system. With
 `allow_revolutions = False` the population should converge to a narrow band of
 policies and stay there; with it on it should keep turning over.
+
+The demonstration above establishes the *mechanism* — the order is gone. It
+does not establish that evolved policies actually cycle, only that nothing in
+the rules forbids it.
 
 This is a clean, cheap ablation and it should be experiment number one.
 
@@ -299,6 +315,21 @@ Runs recorded **before** that change cannot have their ancestry rebuilt, and
 nothing can recover it: the missing ids were never written down. The Lineage
 view detects them by their root share and says so rather than drawing a picture
 of nothing.
+
+**What is still true.** `brain_id` remains a genotype version, not a clade
+label — it changes on every mutation, and every agent mutates every iteration.
+Clades are *derived* from the forest rather than stored on an agent, because a
+clade is a choice of anchor and there is no single right one: founder clades
+collapse to one within about seventeen iterations, so a stored founder label
+would read "1" forever, and the informative measure is a sliding window, which
+needs the forest anyway.
+
+One consequence has not been dealt with. `distinctLineages` still counts
+distinct *parents* among the living — one hop back. **Measured** at the end of
+a 25-iteration run: 176 agents, 146 genotypes, **105 distinct parents, and 1
+actual founder clade**. It is a real quantity now, where before it was noise,
+but it is not a clade count and should not be read as one. Either rename it or
+replace it with a windowed clade count computed the way `phylogeny.py` does.
 
 ### 5.3 Definitions to fix before measuring
 
