@@ -233,20 +233,35 @@ const RunsView = {
     try {
       const data = await API.listRuns();
       this.runs = data.runs || [];
+      this.failedPolls = 0;
       this.render();
       Viewer.syncRunPicker(this.runs);
-      this.schedulePoll();
     } catch (err) {
-      this.listEl.innerHTML = `<p class="empty">Could not load runs: ${err.message}</p>`;
+      // A poll that fails is not a poll that should stop. The server going
+      // away for a moment — a restart, a slow frame write — used to end the
+      // polling for good, so a run carried on in the background while its card
+      // sat frozen until the page was reloaded by hand.
+      this.failedPolls = (this.failedPolls || 0) + 1;
+      const p = document.createElement('p');
+      p.className = 'empty';
+      p.textContent = `Could not load runs: ${err.message}`;
+      this.listEl.replaceChildren(p);
     }
+    this.schedulePoll();
   },
 
-  /** Poll only while something is actually running. */
+  /**
+   * Poll while something is running, and keep trying after a failure.
+   *
+   * Backed off as failures pile up, so a server that is gone for good is not
+   * asked once a second forever, but never given up on entirely.
+   */
   schedulePoll() {
     clearTimeout(this.pollTimer);
-    if (this.runs.some(r => r.running)) {
-      this.pollTimer = setTimeout(() => this.refresh(), 1500);
-    }
+    const failed = this.failedPolls || 0;
+    if (!failed && !this.runs.some(r => r.running)) return;
+    const delay = failed ? Math.min(15000, 1500 * 2 ** (failed - 1)) : 1500;
+    this.pollTimer = setTimeout(() => this.refresh(), delay);
   },
 
   render() {

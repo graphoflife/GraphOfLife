@@ -467,8 +467,9 @@ Object.assign(Explain, {
     this.noteEl.style.backgroundImage = this.emblem(step.emblem);
     this._shownEmblem = step.emblem;
     // Only the emblem needs the room it takes; a step without one gets its
-    // full width back.
-    this.noteEl.style.paddingRight = step.emblem ? '' : '17px';
+    // full width back — padding and the footer's pull against it together,
+    // which is why it is a class and not a style set here.
+    this.noteEl.classList.toggle('bare', !step.emblem);
     this.noteEl.scrollTop = 0;
     // The bar keeps only how far through the whole walk you are; the step's own
     // number lives with its words.

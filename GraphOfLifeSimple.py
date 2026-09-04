@@ -944,6 +944,11 @@ class GraphOfLife:
         new_tokens = dict(self.tokens)
         new_brains = dict(self.brains)
         winners: List[Dict[str, int]] = []
+        # Who won what is needed by the frame's decision record and by the
+        # stage notes, which are switched on separately. Building it for
+        # whichever of the two is listening keeps the cost off a plain run and
+        # the dependency in one visible place.
+        wanted = record_decisions or self.on_step is not None
 
         for v in list(self.G.nodes()):
             offers = allocations_to[v]
@@ -958,7 +963,12 @@ class GraphOfLife:
             new_brains[v] = self._copy_brain(self.brains[winner])
             new_tokens[v] = int(incoming_totals[v])
 
-            if record_decisions:
+            # Kept whenever anything downstream reads it. This used to be built
+            # only under `record_decisions`, which also fed the stage notes
+            # below — so a recording of the stages taken without decisions got
+            # an empty list of winners and drew a game in which nobody won
+            # anything, with nothing to say why.
+            if wanted:
                 entry = {
                     "node": int(v),
                     "winner": int(winner),

@@ -7,6 +7,12 @@ name: Publish the site
 on:
   push:
     branches: [main]
+  # Checks run on the change, not on the consequence. Without this the first
+  # time anything is verified is after it is already on main and on its way to
+  # being published; the deploy is still gated, but by then the only options
+  # are revert or fix forward.
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -43,6 +49,7 @@ jobs:
 
   build:
     needs: test
+    # A pull request gets the tests and the assembly; only main is published.
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -55,10 +62,22 @@ jobs:
       - name: Check the engine actually made it
         run: |
           for f in py/GraphOfLifeSimple.py py/gol_config.py py/gol_series.py \
-                   py/gol_browser.py py/gol_store.py js/sim-worker.js index.html; do
+                   py/explain_minimal.py py/gol_browser.py py/gol_store.py \
+                   js/sim-worker.js index.html; do
             test -s "_site/$f" || { echo "missing or empty: $f"; exit 1; }
           done
           echo "site contains $(find _site -type f | wc -l) files"
+
+      # The stamping is what stops a returning visitor running new code against
+      # an old worker or an old recording. tests/test_engine.py checks nothing
+      # escapes the list; this checks the list was actually applied.
+      - name: Every asset carries the commit it came from
+        run: |
+          bare=$(grep -rn "importScripts('[^?]*')\|new Worker('[^?]*')" _site/js/*.js \
+                 | grep -v "PYODIDE" || true)
+          if [ -n "$bare" ]; then echo "unstamped:"; echo "$bare"; exit 1; fi
+          grep -q 'js/app\.js?v=' _site/index.html || { echo "index.html unstamped"; exit 1; }
+          echo "assets stamped"
 
       - uses: actions/upload-pages-artifact@v3
         with:
@@ -66,6 +85,7 @@ jobs:
 
   deploy:
     needs: build
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     environment:
       name: github-pages

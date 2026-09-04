@@ -30,6 +30,7 @@ import json
 import os
 import re
 import shutil
+import threading
 import time
 from typing import Any, Dict, List
 
@@ -38,6 +39,11 @@ import numpy as np
 from gol_config import SimConfig
 
 BASE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "GraphOfLifeRuns")
+
+# Allocating a run id means reading the directory and then creating one, and the
+# server answers on several threads at once. Two creations landing together
+# would pick the same name and the second would move into the first's directory.
+_CREATE_LOCK = threading.Lock()
 
 # Run ids are generated, but they end up in filesystem paths, so they are
 # validated on every lookup rather than trusted.
@@ -73,8 +79,30 @@ def frames_dir(run_id: str) -> str:
     return os.path.join(run_dir(run_id), "frames")
 
 
+FRAME_PREFIX = "frame_"
+FRAME_SUFFIX = ".json.gz"
+
+
 def frame_path(run_id: str, index: int) -> str:
-    return os.path.join(frames_dir(run_id), f"frame_{index:05d}.json.gz")
+    return os.path.join(frames_dir(run_id),
+                        f"{FRAME_PREFIX}{index:05d}{FRAME_SUFFIX}")
+
+
+def frame_index(name: str) -> int | None:
+    """
+    The index a frame file name carries, or None if it is not one.
+
+    Read between the fixed prefix and suffix rather than from a fixed slice.
+    The name is zero-padded to five digits, but padding is a minimum, not a
+    limit: at index 100000 the name grows a digit, and a five-character slice
+    read it as 10000. Frames past that point then looked like frames from far
+    earlier in the run, so a resume that truncated the discarded timeline
+    stepped straight over them and left them in place.
+    """
+    if not (name.startswith(FRAME_PREFIX) and name.endswith(FRAME_SUFFIX)):
+        return None
+    digits = name[len(FRAME_PREFIX):-len(FRAME_SUFFIX)]
+    return int(digits) if digits.isdigit() else None
 
 
 def checkpoint_path(run_id: str) -> str:
@@ -117,8 +145,9 @@ def create_run(name: str, cfg: SimConfig) -> Dict[str, Any]:
     """Allocate a new run directory and write its initial metadata."""
     _ensure_base()
 
-    run_id = next_run_id()
-    os.makedirs(frames_dir(run_id), exist_ok=True)
+    with _CREATE_LOCK:
+        run_id = next_run_id()
+        os.makedirs(frames_dir(run_id), exist_ok=False)
 
     meta = {
         "id": run_id,
@@ -201,6 +230,7 @@ def run_size_bytes(run_id: str) -> int:
 def write_frame(run_id: str, index: int, frame: Dict[str, Any]) -> int:
     """Persist one phase frame at a sequential index. Returns that index."""
     path = frame_path(run_id, index)
+    os.makedirs(os.path.dirname(path), exist_ok=True)
     tmp = path + ".tmp"
     with gzip.open(tmp, "wt", compresslevel=6) as f:
         json.dump(frame, f, separators=(",", ":"))
@@ -224,11 +254,9 @@ def count_frames(run_id: str) -> int:
         return 0
     indices = set()
     for name in os.listdir(directory):
-        if name.startswith("frame_") and name.endswith(".json.gz"):
-            try:
-                indices.add(int(name[6:11]))
-            except ValueError:
-                continue
+        index = frame_index(name)
+        if index is not None:
+            indices.add(index)
     count = 0
     while count in indices:
         count += 1
@@ -249,11 +277,8 @@ def truncate_frames_from(run_id: str, first_index: int) -> int:
 
     removed = 0
     for name in os.listdir(directory):
-        if not (name.startswith("frame_") and name.endswith(".json.gz")):
-            continue
-        try:
-            index = int(name[6:11])
-        except ValueError:
+        index = frame_index(name)
+        if index is None:
             continue
         if index >= first_index:
             try:

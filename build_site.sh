@@ -43,9 +43,29 @@ sed -i -E \
   -e "s#(<link rel=\"stylesheet\" href=\"css/[^\"?]+)\"#\1?v=${stamp}\"#g" \
   "${out}/index.html"
 
-# The layout worker is fetched by name from layoutclient.js rather than from the
-# page, so it needs the same treatment where it is asked for.
-sed -i -E "s#(js/layout-worker\.js)#\1?v=${stamp}#" "${out}/js/layoutclient.js"
+# Everything else the page fetches by name from inside a script, where the tags
+# in index.html cannot reach it: the two workers, what those workers import,
+# the teaching script the Explanation walks through, and the recordings the
+# pictures are drawn from. Each of these is a file a returning visitor can hold
+# an old copy of while running new code around it — the Explanation reading
+# last week's explain_minimal.py against this week's line anchors would light
+# the wrong lines, and there would be nothing on screen to say why.
+declare -A stamp_in=(
+  ["${out}/js/layoutclient.js"]="js/layout-worker.js"
+  ["${out}/js/layout-worker.js"]="force.js"
+  ["${out}/js/api.js"]="js/sim-worker.js"
+  ["${out}/js/sim-worker.js"]="runstore.js"
+  ["${out}/js/explain.js"]="py/explain_minimal.py|data/explain-run.json"
+  ["${out}/js/home.js"]="data/home-run.bin"
+)
+for file in "${!stamp_in[@]}"; do
+  IFS='|' read -ra names <<< "${stamp_in[$file]}"
+  for name in "${names[@]}"; do
+    escaped="${name//./\\.}"
+    grep -q "${name}" "${file}" || { echo "nothing to stamp: ${name} in ${file}"; exit 1; }
+    sed -i -E "s#(['\"])(${escaped})\1#\1\2?v=${stamp}\1#g" "${file}"
+  done
+done
 
 echo "  stamped assets with ${stamp}"
 

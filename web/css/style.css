@@ -1093,8 +1093,17 @@ details.control-group > summary:hover h3 { color: var(--text); }
   margin-top: 14px;
   padding-top: 11px;
   border-top: 1px solid var(--border);
+  /* Back out under the room the emblem is holding, so the rule and the arrows
+     run to the card's real edge instead of stopping short of it. */
   margin-right: -77px;
 }
+
+/* A step without an emblem is not holding that room, and the row must not
+   claw back space that was never taken: with the padding gone and the pull
+   left in, the arrows hung sixty pixels outside the card. The two belong
+   together, so they are set together rather than one of them from script. */
+.ex-note.bare { padding-right: 17px; }
+.ex-note.bare .ex-foot-row { margin-right: 0; }
 /* Only the words scroll. The way through is pinned under them, or the one
    step whose explanation runs long is the one step you cannot page off. */
 #explainText {

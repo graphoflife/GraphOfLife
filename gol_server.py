@@ -235,10 +235,20 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self) -> None:
         path = urlparse(self.path).path
-        if path.startswith("/api/"):
-            self._route_get(path)
-        else:
-            self._serve_static(path)
+        # Anything unforeseen becomes a 500 with a message rather than a
+        # dropped connection. A corrupt meta.json raising KeyError deep in a
+        # handler used to kill the request outright, which the page saw as a
+        # network failure and reported as the server being down.
+        try:
+            if path.startswith("/api/"):
+                self._route_get(path)
+            else:
+                self._serve_static(path)
+        except (BrokenPipeError, ConnectionResetError):
+            pass                      # the browser navigated away mid-response
+        except Exception as exc:      # noqa: BLE001 - surface failures to the UI
+            traceback.print_exc()
+            self._error(f"{type(exc).__name__}: {exc}", 500)
 
     def do_POST(self) -> None:
         path = urlparse(self.path).path
@@ -248,6 +258,8 @@ class Handler(BaseHTTPRequestHandler):
             self._error(str(exc))
         except FileNotFoundError:
             self._error("run not found", 404)
+        except (BrokenPipeError, ConnectionResetError):
+            pass                      # the browser navigated away mid-response
         except Exception as exc:  # noqa: BLE001 - surface failures to the UI
             traceback.print_exc()
             self._error(f"{type(exc).__name__}: {exc}", 500)
@@ -262,6 +274,9 @@ class Handler(BaseHTTPRequestHandler):
                 self._send_json({"ok": True})
             except ValueError as exc:
                 self._error(str(exc))
+            except Exception as exc:  # noqa: BLE001 - surface failures to the UI
+                traceback.print_exc()
+                self._error(f"{type(exc).__name__}: {exc}", 500)
             return
         self._error("not found", 404)
 

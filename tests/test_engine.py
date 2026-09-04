@@ -23,7 +23,9 @@ from __future__ import annotations
 
 import os
 import random
+import re
 import sys
+import tempfile
 
 # The modules under test sit in the repository root, one level up. Added here
 # rather than left to the caller so that running this file directly works from
@@ -526,6 +528,109 @@ def test_the_server_and_the_build_ship_the_same_python():
 # ---------------------------------------------------------------------------
 # Running without pytest
 # ---------------------------------------------------------------------------
+
+def test_every_asset_a_script_fetches_by_name_is_cache_stamped():
+    """
+    A returning visitor must never run new code against an old asset.
+
+    index.html's script and stylesheet tags are stamped wholesale, but anything
+    a script fetches by name — a worker, what a worker imports, the teaching
+    script, a recording — is invisible to that pass and has to be named in
+    build_site.sh. Nothing about adding a new one makes you remember, and the
+    failure is silent and only hits people who have been here before: the page
+    is new, the file behind it is last week's.
+
+    So the two are checked against each other. Any asset reference in web/js
+    that build_site.sh does not stamp fails here rather than in someone's
+    cache.
+    """
+    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    build = open(os.path.join(root, "build_site.sh")).read()
+
+    # A quoted path into one of the shipped directories, or a bare file next to
+    # the script — which is what importScripts() takes.
+    quoted = re.compile(r"""['"]((?:js|py|data|css)/[\w./-]+|[\w-]+\.js)['"]""")
+    interesting = (".js", ".py", ".json", ".bin", ".css")
+
+    def ours(line, at):
+        """
+        False for a name glued onto a base URL.
+
+        `importScripts(PYODIDE + 'pyodide.js')` is fetched from a CDN that
+        versions itself in its own path; there is nothing of ours in it to
+        stamp.
+        """
+        return not line[:at].rstrip().endswith("+")
+
+    unstamped = []
+    js_dir = os.path.join(root, "web", "js")
+    for name in sorted(os.listdir(js_dir)):
+        if not name.endswith(".js"):
+            continue
+        source = open(os.path.join(js_dir, name)).read()
+        for line in source.splitlines():
+            # Only where a file is actually being fetched.
+            if not re.search(r"importScripts\(|new Worker\(|fetch\(|SOURCE|SCRIPT|RUN:|workerUrl", line):
+                continue
+            for match in quoted.finditer(line):
+                ref = match.group(1)
+                if not ref.endswith(interesting) or not ours(line, match.start()):
+                    continue
+                if ref not in build:
+                    unstamped.append(f"{name}: {ref}")
+
+    assert not unstamped, (
+        "these are fetched by name but build_site.sh does not stamp them, so a "
+        "cached copy will survive a deploy:\n  " + "\n  ".join(unstamped))
+
+
+def test_a_frame_index_survives_growing_past_five_digits():
+    """
+    Frame names are zero-padded to five digits, but padding is a minimum.
+
+    At index 100000 the name grows a digit. Reading the index from a fixed
+    five-character slice turned that into 10000, which is not a harmless
+    misreading: truncating a resumed run walks the directory asking whether
+    each frame is at or after the cut, and a frame claiming to be 10000 when it
+    is really 100000 is stepped straight over. Frames from a timeline the
+    resumed world never lived through would stay on disk, which is the one
+    thing the store promises cannot happen.
+    """
+    import gol_store
+
+    for index in (0, 1, 99999, 100000, 123456, 9999999):
+        name = os.path.basename(gol_store.frame_path("GOL_00_00_00_n001", index))
+        assert gol_store.frame_index(name) == index, name
+
+    for other in ("checkpoint.npz", "meta.json", "frame_.json.gz",
+                  "frame_00001.json.gz.tmp", "frame_abc.json.gz"):
+        assert gol_store.frame_index(other) is None, other
+
+
+def test_a_truncated_resume_removes_frames_past_a_hundred_thousand():
+    """The same thing, exercised through the call that actually matters."""
+    import gol_store
+
+    with tempfile.TemporaryDirectory() as tmp:
+        original = gol_store.BASE_DIR
+        gol_store.BASE_DIR = tmp
+        try:
+            run_id = "GOL_00_00_00_n001"
+            os.makedirs(gol_store.frames_dir(run_id))
+            kept, cut = 99998, 100001
+            for index in (kept, cut):
+                with open(gol_store.frame_path(run_id, index), "w") as f:
+                    f.write("{}")
+
+            gol_store.truncate_frames_from(run_id, 100000)
+
+            assert os.path.exists(gol_store.frame_path(run_id, kept)), \
+                "a frame before the cut was deleted"
+            assert not os.path.exists(gol_store.frame_path(run_id, cut)), \
+                "a frame past the cut survived the truncation"
+        finally:
+            gol_store.BASE_DIR = original
+
 
 def _main() -> int:
     """Find the tests in this file and run them, reporting like pytest would."""
