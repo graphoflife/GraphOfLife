@@ -814,6 +814,76 @@ details.control-group > summary:hover h3 { color: var(--text); }
 }
 .analysis-panel[hidden] { display: none; }
 
+/* The run picker, hidden for a mode that is not about one run. */
+.analysis-run { display: inline-flex; align-items: center; gap: 8px; }
+.analysis-run[hidden] { display: none; }
+
+/* ==========================================================================
+   Literature
+   ==========================================================================
+   Long-form reading rather than an instrument, so it is set as a column at a
+   comfortable measure instead of filling the window. Class is `.litpage`:
+   `.lit` is already taken further down for a highlighted line in the code
+   walk-through, and two meanings for one name is a trap. */
+
+.litpage {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding-bottom: 48px;
+}
+.litpage .explain-intro { max-width: 760px; }
+.litpage .explain-intro p.lit-lead { color: var(--text); }
+/* Scoped, not !important: `.explain-intro p` already sets margin and colour,
+   and a bare `.lit-caution` would lose to it on specificity. */
+.litpage .explain-intro p.lit-caution {
+  margin: 10px 0 0;
+  font-size: 12px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.lit-group { display: flex; flex-direction: column; gap: 14px; }
+.lit-group > h3 {
+  margin: 0;
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.lit-group article {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  max-width: 860px;
+}
+.lit-group article h4 { margin: 0; font-size: 15px; }
+.lit-group article p { margin: 8px 0 0; line-height: 1.65; color: var(--text); }
+.lit-group article code { font-size: 12px; }
+
+/* Who said it, kept quiet so the idea reads first. */
+.lit-group article p.lit-cite {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 3px;
+}
+
+/* The part that earns the entry its place: what the idea means in this
+   system. Marked off so it is never mistaken for a summary of the paper. */
+.lit-group article p.lit-here {
+  border-left: 2px solid var(--accent);
+  padding-left: 12px;
+  margin-top: 12px;
+  color: var(--muted);
+}
+.lit-here b, .lit-here em, .lit-here code { color: var(--text); }
+
 /* The handful of numbers a module structure amounts to. */
 .flow-facts {
   max-width: 1080px;

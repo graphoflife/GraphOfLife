@@ -34,7 +34,11 @@ const Metrics = {
     { key: 'token_share',      label: 'Share of total tokens', format: 'share' },
     { key: 'brain_id',         label: 'Brain id' },
     { key: 'parent_brain_id',  label: 'Parent brain id' },
-    { key: 'age',              label: 'Node id (age)' }
+    // Iterations lived. The node id used to stand in for this, and an ordinal
+    // is not a duration — it says who is older, never by how much, and nothing
+    // at all across two runs.
+    { key: 'age',              label: 'Age (iterations lived)' },
+    { key: 'node_id',          label: 'Node id (birth order)' }
   ],
 
   EDGE: [

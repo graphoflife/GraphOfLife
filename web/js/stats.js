@@ -148,7 +148,11 @@ class FrameMetrics {
         case 'triangles':  out[i] = this.structure.triangles.perNode.get(f.ids[i]) || 0; break;
         case 'brain_id':         out[i] = f.brain_ids[i]; break;
         case 'parent_brain_id':  out[i] = f.parent_brain_ids[i]; break;
-        case 'age':              out[i] = f.ids[i]; break;
+        // NaN rather than a stand-in for a run recorded before ages were
+        // tracked: the charts drop NaN, and a plausible wrong number is worse
+        // than a gap.
+        case 'age':              out[i] = f.ages ? f.ages[i] : NaN; break;
+        case 'node_id':          out[i] = f.ids[i]; break;
         case 'token_share':      out[i] = this.totalTokens ? f.tokens[i] / this.totalTokens : 0; break;
         default:                 out[i] = 0.5;
       }

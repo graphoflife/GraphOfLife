@@ -1,5 +1,6 @@
 /*
- * The Analysis tab: pick a run, then look at it one of two ways.
+ * The Research tab: pick a run, then look at it one of two ways — or read the
+ * literature the whole project is measured against, which needs no run at all.
  *
  * The run list and the picker live here rather than in either view, so there
  * is one list, one fetch, and switching between the views does not reload
@@ -36,8 +37,13 @@ const Analysis = {
     for (const button of document.querySelectorAll('#analysisModes button')) {
       button.classList.toggle('active', button.dataset.mode === mode);
     }
-    document.getElementById('analysis-lineage').hidden = mode !== 'lineage';
-    document.getElementById('analysis-flow').hidden = mode !== 'flow';
+    for (const name of ['lineage', 'flow', 'literature']) {
+      document.getElementById(`analysis-${name}`).hidden = mode !== name;
+    }
+    // The run picker means nothing to the reading list.
+    document.getElementById('analysisRunField').hidden = mode === 'literature';
+    if (mode === 'literature') return;
+
     // A canvas sized while it was hidden has no size, so both views measure
     // themselves again on the way in.
     const view = mode === 'flow' ? FlowView : Lineage;

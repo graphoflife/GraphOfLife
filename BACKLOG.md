@@ -258,10 +258,13 @@ happens. The intent was for each to also carry a short note on *why* the
 algorithm does it that way — which is the part a reader cannot get from the
 code. Explicitly postponed during the build.
 
-**The Analysis tab is an empty placeholder.** `web/index.html:524` describes
-what it is for — comparing runs against each other and against the settings
-that produced them — and nothing implements it. It needs a specification before
-it needs code.
+**Nothing compares one run against another.** The tab that was going to do it
+is now **Research**, and it holds the lineage forest, the flow modules and the
+literature — all of which look at a single run, or at no run at all. The
+original intent, comparing runs against each other and against the settings
+that produced them, is still unimplemented and still needs a specification
+before it needs code. It is also what the ablation method in the Literature
+page calls for, which makes it the higher-value half.
 
 **README's opening line still says "A new kind of Artificial Life Algorithm".**
 The front page was deliberately changed to "An Artificial Life Algorithm". The

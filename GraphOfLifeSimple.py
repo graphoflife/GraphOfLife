@@ -588,6 +588,12 @@ class GraphOfLife:
         # Nothing in the engine sets it; see tools/record_explain_run.py.
         self.on_step = None
         self.parent_of: Dict[int, int] = {}
+        # The iteration each agent came into existence, so its age can be read
+        # off directly. The node id was standing in for this — ids are handed
+        # out in order, so a low one means old — but an ordinal is not a
+        # duration: it cannot say how many iterations an agent has lasted, and
+        # it cannot be compared between two runs.
+        self.born_at: Dict[int, int] = {}
 
         if _empty:
             return
@@ -607,6 +613,7 @@ class GraphOfLife:
             self.brains[aid] = self._new_brain()
             self.messages[aid] = {}
             self.parent_of[aid] = NO_PARENT
+            self.born_at[aid] = 0
 
         # Hand any rounding remainder to the founders so the count is exact.
         self._settle_remainder()
@@ -920,6 +927,7 @@ class GraphOfLife:
         self.tokens[parent] = parent_tokens - child_tokens
         self.messages[child_id] = {}
         self.parent_of[child_id] = int(parent)
+        self.born_at[child_id] = int(self.iteration)
 
         link_logits = Y[self.heads["LINK"], :]
         link_mode = Y[self.heads["LINK_MODE"], :]
@@ -1245,6 +1253,7 @@ class GraphOfLife:
                 self.brains.pop(u, None)
                 self.messages.pop(u, None)
                 self.parent_of.pop(u, None)
+                self.born_at.pop(u, None)
 
         survivors = list(self.G.nodes())
         if global_pool > 0 and survivors:
@@ -1262,6 +1271,7 @@ class GraphOfLife:
             self.brains = {aid: self._new_brain()}
             self.messages = {aid: {}}
             self.parent_of = {aid: NO_PARENT}
+            self.born_at = {aid: int(self.iteration)}
             report["resurrected"] = True
 
         return report
@@ -1318,6 +1328,10 @@ class GraphOfLife:
             "brain_ids": [int(brains[u].brain_id) for u in nodes],
             "parent_brain_ids": [int(brains[u].parent_brain_id) for u in nodes],
             "parent_ids": [int(self.parent_of.get(u, NO_PARENT)) for u in nodes],
+            # Iterations lived, not a birth stamp: a reader of one frame should
+            # not have to know when the run started to know how old anyone is.
+            "ages": [int(self.iteration) - int(self.born_at.get(u, self.iteration))
+                     for u in nodes],
             # What this phase did to each agent's pile, end to end: a parent
             # paying for a child, a newborn receiving its endowment, a node
             # conquered or defended, plus whatever cleanup redistributed. A
@@ -1359,6 +1373,7 @@ class GraphOfLife:
             "brain_ids": np.array([self.brains[u].brain_id for u in nodes], dtype=np.int64),
             "parent_brain_ids": np.array([self.brains[u].parent_brain_id for u in nodes], dtype=np.int64),
             "parent_ids": np.array([self.parent_of.get(u, NO_PARENT) for u in nodes], dtype=np.int64),
+            "born_at": np.array([self.born_at.get(u, 0) for u in nodes], dtype=np.int64),
             "edges": np.array([[index[u], index[v]] for u, v in self.G.edges()],
                               dtype=np.int64).reshape(-1, 2),
             "counters": np.array([self.next_agent_id, self.next_brain_id, self.iteration],
@@ -1419,6 +1434,11 @@ class GraphOfLife:
         brain_ids = blob["brain_ids"].tolist()
         parent_brain_ids = blob["parent_brain_ids"].tolist()
         parent_ids = blob["parent_ids"].tolist()
+        # Checkpoints written before ages were tracked have none; those agents
+        # are treated as having been there from the start, which is the least
+        # wrong answer available and is only ever wrong about a resumed run.
+        born_at = (blob["born_at"].tolist() if "born_at" in blob
+                   else [0] * len(parent_ids))
 
         world.G.add_nodes_from(ids)
         for a, b in blob["edges"].tolist():
@@ -1463,6 +1483,7 @@ class GraphOfLife:
             world.tokens[u] = int(tokens[i])
             world.messages[u] = {}
             world.parent_of[u] = int(parent_ids[i])
+            world.born_at[u] = int(born_at[i])
 
         # Messages, if this checkpoint is new enough to carry them. An older one
         # simply has none, which is the state it was restored with before.

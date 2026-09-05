@@ -22,7 +22,13 @@ site or the engine; nothing in `web/` or the test suite depends on it.
 Everything is meant to be run locally. Disk is cheap; RAM is the binding
 constraint, because memory is population multiplied by policy size.
 
-The tools are on the site too, under **Analysis**: the lineage forest, and the
+The tools are on the site too, under **Research**: the lineage forest, and the
 flow modules with their compression and turnover. `tests/test_flowmodules.js`
 checks the map equation against graphs whose answer is known by hand — run it
 with `node tests/test_flowmodules.js`.
+
+The same tab has a **Literature** page — the work this project is built on and
+measured against, one entry per idea, each with a note on what it means in this
+system. It covers the same ground as `Research.md` §9 but written for a reader
+rather than for a paper, so the two need keeping in step: a retraction here is
+a retraction there.
