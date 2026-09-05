@@ -882,7 +882,7 @@ details.control-group > summary:hover h3 { color: var(--text); }
   margin-top: 12px;
   color: var(--muted);
 }
-.lit-here b, .lit-here em, .lit-here code { color: var(--text); }
+.lit-group article p.lit-here em, .lit-group article p.lit-here code { color: var(--text); }
 
 /* The handful of numbers a module structure amounts to. */
 .flow-facts {

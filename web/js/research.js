@@ -5,20 +5,23 @@
  * The run list and the picker live here rather than in any one view, so there
  * is one list, one fetch, and switching between views reloads nothing.
  *
- * The modes are a table rather than a chain of comparisons. Lineage and
- * FlowView already implement the same five methods — init, setRuns, resize,
- * draw, load — and MODES is where that becomes an interface instead of a
- * coincidence: everything below iterates the table rather than naming a mode.
- * A mode with no `view` is a page rather than a way of looking at a run, which
- * is the one fact that decides whether it gets the picker, the run list and a
- * line to report trouble on. Adding a fourth mode is an entry here and a
- * section in index.html; it is not a new branch anywhere.
+ * The modes are a table rather than a chain of comparisons. A mode is one of
+ * two kinds, and the table says which by naming the module that implements it:
+ *
+ *   view  a way of looking at one run. Lineage and FlowView already share the
+ *         same six methods — init, setRuns, say, resize, draw, load — and this
+ *         is where that becomes an interface instead of a coincidence.
+ *   page  words on a screen. No run, so no picker, no run list, nothing to
+ *         resize; it is painted once, the first time it is asked for.
+ *
+ * Everything below iterates the table rather than naming a mode, so a fourth
+ * is an entry here and a section in index.html.
  */
 const Research = {
   MODES: {
-    lineage:    { view: Lineage,  note: 'lineageNote' },
-    flow:       { view: FlowView, note: 'flowNote' },
-    literature: { }
+    lineage:    { view: Lineage },
+    flow:       { view: FlowView },
+    literature: { page: Literature }
   },
 
   runs: [],
@@ -36,9 +39,6 @@ const Research = {
     this.picker = document.getElementById('researchRun');
     if (!this.picker) return;
     for (const { view } of this.runModes) view.init();
-    // Static, stateless and cheap. Nothing about it changes later, so there is
-    // no redraw to arrange and no reason to defer it.
-    Literature.render();
 
     this.picker.addEventListener('change', () => this.open(this.picker.value));
     document.getElementById('researchRefresh')
@@ -64,9 +64,13 @@ const Research = {
       document.getElementById(`research-${name}`).hidden = name !== mode;
     }
 
-    // A mode with no view has no run, so the picker has nothing to pick for.
-    const view = this.view;
+    const { view, page } = this.MODES[mode];
+    // Only a run has a run to pick.
     document.getElementById('researchRunField').hidden = !view;
+
+    // Painted on the way in rather than at startup: it is the same words every
+    // time, and a visitor who never opens this tab should not be building them.
+    page?.render();
     if (!view) return;
 
     // A canvas sized while it was hidden has no size, so a view measures
@@ -77,10 +81,10 @@ const Research = {
   },
 
   async listRuns() {
+    // Each view owns its own note element and already has the method for
+    // writing to it, so this asks rather than reaching past it into the DOM.
     const say = (text) => {
-      for (const { note } of this.runModes) {
-        document.getElementById(note).textContent = text;
-      }
+      for (const { view } of this.runModes) view.say(text);
     };
     say('Looking for simulations…');
     try {

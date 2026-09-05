@@ -179,6 +179,15 @@ const Metrics = {
     ['edgeWidthBy', 'edgeWidthLog']
   ],
 
+  // Every settings field that holds a metric key. The four visual ones take a
+  // bare key, since the domain is fixed by which setting it is; the three
+  // chart ones take a domain-qualified one, since they offer both. Not trajX
+  // or trajY: those name a series statistic, which is a different vocabulary.
+  METRIC_FIELDS: [
+    'nodeColorBy', 'nodeSizeBy', 'edgeColorBy', 'edgeWidthBy',
+    'distMetric', 'heatX', 'heatY'
+  ],
+
   migrateSettings(settings) {
     if (!settings) return settings;
 
@@ -197,6 +206,18 @@ const Metrics = {
       if (settings[byKey] === 'flow' && settings[logKey] === undefined) {
         settings[logKey] = true;
       }
+    }
+
+    // `age` used to be the node id wearing the wrong name, and now it is the
+    // duration it always claimed to be. A preset saved under the old meaning
+    // asked for birth order and would silently get something else, so it is
+    // pointed at the key that kept that meaning.
+    for (const field of this.METRIC_FIELDS) {
+      const { domain, key } = this.parse(settings[field]);
+      if (key !== 'age') continue;
+      settings[field] = String(settings[field]).includes(':')
+        ? this.qualify(domain, 'node_id')
+        : 'node_id';
     }
 
     return settings;

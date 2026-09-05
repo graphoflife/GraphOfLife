@@ -630,29 +630,34 @@ class GraphOfLife:
     def _books(self) -> Tuple[Dict[int, Any], ...]:
         """
         The per-agent dicts, which mean anything only while they agree on their
-        keys. Named once here so the three lifecycle helpers cannot drift apart,
-        and so a sixth book is one edit rather than a hunt.
+        keys. Every write to any of them goes through _register_agent and every
+        removal through _forget_agent, so a sixth book is this line, that one,
+        and nothing else.
         """
         return (self.tokens, self.brains, self.messages,
                 self.parent_of, self.born_at)
 
-    def _register_agent(self, aid: int, tokens: int, brain: Brain, parent: int) -> None:
+    def _register_agent(self, aid: int, tokens: int, brain: Brain, parent: int,
+                        born: int | None = None) -> None:
         """
         Everything an agent needs in order to exist, in one place.
 
-        An agent can appear in three ways — a founder, a newborn, a
-        resurrection — and each used to fill the books inline, so adding one
-        book meant finding all three, and missing one left an agent the rest of
-        the engine believes in and that book has never heard of.
+        An agent can appear in four ways — a founder, a newborn, a
+        resurrection, a restored checkpoint — and each used to fill the books
+        inline, so adding one book meant finding all four, and missing one left
+        an agent the rest of the engine believes in and that book has never
+        heard of. This is the only place any of them is written.
 
-        Birth time is read from the clock rather than passed in: a founder is
-        registered while `iteration` is still 0, so it needs no special case.
+        Birth time defaults to the clock, which is why a founder needs no
+        special case: it is registered while `iteration` still reads zero. A
+        restore passes the birth it read, since it runs before the clock is
+        set and would otherwise call every agent a founder.
         """
         self.tokens[aid] = tokens
         self.brains[aid] = brain
         self.messages[aid] = {}
         self.parent_of[aid] = parent
-        self.born_at[aid] = int(self.iteration)
+        self.born_at[aid] = self.iteration if born is None else born
 
     def _forget_agent(self, aid: int) -> None:
         """The other half of _register_agent: leave nothing behind."""
@@ -666,7 +671,7 @@ class GraphOfLife:
         invariant and should say so instead of reporting a newborn.
         """
         born = self.born_at[aid]
-        return UNKNOWN_BIRTH if born == UNKNOWN_BIRTH else int(self.iteration) - born
+        return UNKNOWN_BIRTH if born == UNKNOWN_BIRTH else self.iteration - born
 
     def _new_brain(self) -> Brain:
         brain = make_brain(self.cfg, self.next_brain_id)
@@ -1519,11 +1524,8 @@ class GraphOfLife:
             brain.weights = [w[i].copy() for w in weights]
             brain.biases = [b[i].copy() for b in biases]
 
-            world.brains[u] = brain
-            world.tokens[u] = int(tokens[i])
-            world.messages[u] = {}
-            world.parent_of[u] = int(parent_ids[i])
-            world.born_at[u] = int(born_at[i])
+            world._register_agent(u, int(tokens[i]), brain,
+                                  int(parent_ids[i]), born=int(born_at[i]))
 
         # Messages, if this checkpoint is new enough to carry them. An older one
         # simply has none, which is the state it was restored with before.

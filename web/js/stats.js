@@ -28,10 +28,21 @@ class FrameMetrics {
 
     this.colorLabel = Metrics.label('node', settings.nodeColorBy)
       + (settings.nodeColorLog ? ' (log)' : '');
-    this.colorRangeText = [
-      Metrics.format('node', settings.nodeColorBy, this.colorRange[0], settings.nodeColorLog),
-      Metrics.format('node', settings.nodeColorBy, this.colorRange[1], settings.nodeColorLog)
-    ];
+    // A metric with nothing behind it in this frame — a run recorded before
+    // the field existed, or a "before the phase" metric on the very first
+    // frame — is every node NaN. The range then falls back to [0, 1] and every
+    // node paints at mid-scale, which on screen is indistinguishable from real
+    // values that happen to sit in the middle. The key says so instead, in the
+    // same voice the hover card already uses for a missing token change.
+    this.colorRangeText = this.hasValues(settings.nodeColorBy)
+      ? [Metrics.format('node', settings.nodeColorBy, this.colorRange[0], settings.nodeColorLog),
+         Metrics.format('node', settings.nodeColorBy, this.colorRange[1], settings.nodeColorLog)]
+      : ['not recorded', ''];
+  }
+
+  /** Whether a node metric has any value at all in this frame. */
+  hasValues(key) {
+    return this.nodeValues(key).some(v => !Number.isNaN(v));
   }
 
   _degrees() {

@@ -494,12 +494,16 @@ const Literature = {
   ],
 
   /**
-   * Paint the whole page once. It never changes, takes no run, and has no
-   * state, so there is nothing to redraw and no reason to do it lazily.
+   * Paint the page, the first time anyone asks to see it.
+   *
+   * The words never change, so a second call would rebuild an identical thirty
+   * kilobytes of markup for nothing. Called on the way into the mode rather
+   * than at startup, since most visits never open it at all.
    */
   render() {
     const host = document.getElementById('research-literature');
-    if (!host) return;
+    if (!host || this.painted) return;
+    this.painted = true;
 
     const entry = e => `
         <article>

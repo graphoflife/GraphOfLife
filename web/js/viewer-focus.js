@@ -87,16 +87,22 @@ Object.assign(Viewer, {
       phase: full.phase,
       nodes_before: full.nodes_before,
       ids: keep.map(i => full.ids[i]),
-      tokens: take(full.tokens),
-      brain_ids: take(full.brain_ids),
-      parent_brain_ids: take(full.parent_brain_ids),
-      parent_ids: take(full.parent_ids),
       edges: full.edges.filter(([a, b]) => inBall.has(a) && inBall.has(b)),
       cleanup: full.cleanup,
       previous: full.previous,
       focusAnchor: anchor
     };
-    if (full.delta) sub.delta = take(full.delta);
+    // The per-node arrays, listed in one place rather than spelled out one
+    // assignment at a time. They are index-aligned with `ids` and so all crop
+    // the same way; the engine's _frame is what decides the list, and nothing
+    // links the two, so a field added there has to be added here as well. Kept
+    // together, that is one obvious line — spread through the object above, it
+    // was a field that silently read as absent in focus mode and nowhere else.
+    // Ones an older recording lacks are simply not copied.
+    for (const name of ['tokens', 'brain_ids', 'parent_brain_ids', 'parent_ids',
+                        'ages', 'delta']) {
+      if (full[name]) sub[name] = take(full[name]);
+    }
 
     // Decisions are filtered to the agents on screen, so the reproduction and
     // game statistics describe this neighbourhood too rather than the world.

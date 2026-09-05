@@ -90,7 +90,7 @@ const Presets = {
       nodeSizeBy: 'tokens', nodeSizeLog: true,
       edgeColorBy: 'source', edgeAlpha: 0.3, bgStyle: 'solid', nodeAlpha: 0.9,
       distMetric: 'node:brain_id', histDistX: 'linear', histDistY: 'log',
-      heatX: 'node:age', heatY: 'node:tokens',
+      heatX: 'node:node_id', heatY: 'node:tokens',
       histHeatX: 'linear', histHeatY: 'log', histHeatCount: 'log',
       // Looser and more open, so separate lineages drift apart visibly.
       forceCharge: 45, forceLink: 0.09, forceCenter: 0.009,
