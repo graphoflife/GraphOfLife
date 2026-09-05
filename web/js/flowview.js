@@ -16,8 +16,11 @@ const FlowView = {
   runId: null,
   result: null,
 
-  MAX_FRAMES: 220,
-  BATCH: 8,
+  // How much of a run is on screen at once, in recorded iterations. It used to
+  // read the first 220 frames of any run and offer no way to look further, so
+  // a long simulation could only ever be seen starting, and a large one could
+  // not be drawn at all.
+  MAX_ITERATIONS: 100,
 
   init() {
     this.canvas = document.getElementById('flowCanvas');
@@ -28,6 +31,11 @@ const FlowView = {
     this.factsEl = document.getElementById('flowFacts');
     this.floorEl = document.getElementById('flowFloor');
     this.minLifeEl = document.getElementById('flowMinLife');
+
+    // Moving the window refetches, so it acts on release rather than on every
+    // pixel of the drag.
+    const scrub = document.getElementById('flowWindow');
+    scrub.addEventListener('change', () => this.load(this.runId, Number(scrub.value)));
 
     // The overlap floor changes how modules are matched, so it re-follows the
     // frames it already has rather than fetching them again.
@@ -63,8 +71,15 @@ const FlowView = {
 
   // ---- reading a run ----------------------------------------------------
 
-  async load(runId) {
-    if (this.runId === runId && this.frames) { this.recompute(); return; }
+  async load(runId, from = null) {
+    // Re-entered from the mode switch with nothing new to say: the frames it
+    // already holds are the frames it wants, in the place it was left. Moving
+    // the window passes a `from`, and so always refetches.
+    if (from === null && this.runId === runId && this.frames) {
+      this.recompute();
+      return;
+    }
+    const at = from ?? (runId === this.runId ? this.windowStart : 0);
     this.runId = runId;
     this.result = null;
     this.frames = null;
@@ -73,22 +88,20 @@ const FlowView = {
     const run = this.runs.find(r => r.id === runId);
     if (!run) return;
 
-    // Modules are read one frame at a time and never compared across a gap, so
-    // unlike ancestry this can be sampled — but the matching between
-    // consecutive frames is what gives a module its identity, so a stride
-    // would break exactly that. Contiguous, from the start.
-    const total = run.frame_count;
-    const wanted = [];
-    for (let i = 0; i < Math.min(total, this.MAX_FRAMES); i++) wanted.push(i);
+    // A module's identity is its overlap with the frame before it, so the
+    // window is contiguous — a stride would break exactly the thing being
+    // measured. It is moved rather than widened.
+    const plan = FrameWindow.plan(run.frame_count, at, this.MAX_ITERATIONS);
+    this.windowStart = plan.start;
+    this.windowTotal = plan.total;
+    FrameWindow.bindScrubber(document.getElementById('flowWindow'), plan);
 
-    this.say(`Reading ${formatNumber(wanted.length)} of ${formatNumber(total)} frames…`);
     const frames = [];
     try {
-      for (let at = 0; at < wanted.length; at += this.BATCH) {
-        const slice = wanted.slice(at, at + this.BATCH);
-        frames.push(...await Promise.all(slice.map(i => API.getFrame(runId, i))));
+      for await (const batch of FrameWindow.read(runId, plan.indices)) {
         if (this.runId !== runId) return;
-        this.say(`Reading frames… ${frames.length} of ${wanted.length}`);
+        frames.push(...batch);
+        this.say(`Reading frames… ${frames.length} of ${plan.indices.length}`);
       }
     } catch (err) {
       this.say(`Could not read the frames: ${err.message}`);
@@ -138,8 +151,10 @@ const FlowView = {
       return cell;
     }));
 
+    const where = FrameWindow.describe(this.frames, this.windowTotal);
     this.say(`${formatNumber(history.length)} module appearances over `
       + `${formatNumber(new Set(history.map(r => r.iteration)).size)} iterations`
+      + (where ? ` — ${where}` : '')
       + (withoutFlow ? `; ${formatNumber(withoutFlow)} frames had no flow recorded.` : '.')
       + (f.compression < 0.01
           ? ' Compression near zero means the flow has no group structure worth'
