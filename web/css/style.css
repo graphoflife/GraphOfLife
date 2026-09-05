@@ -776,14 +776,14 @@ details.control-group > summary:hover h3 { color: var(--text); }
 }
 .explain-intro h2 { margin: 0 0 6px; font-size: 20px; }
 .explain-intro p { margin: 0; color: var(--muted); line-height: 1.6; }
-.analysis-empty { max-width: 620px; }
 
 /* ==========================================================================
-   Analysis
+   Research
    ==========================================================================
-   One run picker and a switch between the ways of looking at it. */
+   One run picker and a switch between the ways of looking at a run — plus the
+   reading list, which is a page rather than a view and so has neither. */
 
-.analysis-bar {
+.research-bar {
   max-width: 1080px;
   margin: 0 auto 16px;
   display: flex;
@@ -793,10 +793,10 @@ details.control-group > summary:hover h3 { color: var(--text); }
   font-size: 12px;
   color: var(--muted);
 }
-.analysis-bar select { width: auto; min-width: 240px; max-width: 400px; }
+.research-bar select { width: auto; min-width: 240px; max-width: 400px; }
 
-.analysis-modes { display: flex; gap: 4px; margin-right: auto; }
-.analysis-modes button {
+.research-modes { display: flex; gap: 4px; margin-right: auto; }
+.research-modes button {
   background: transparent;
   border: 1px solid transparent;
   color: var(--muted);
@@ -805,28 +805,28 @@ details.control-group > summary:hover h3 { color: var(--text); }
   font-size: 13px;
   cursor: pointer;
 }
-.analysis-modes button:hover { color: var(--text); border-color: var(--border); }
-.analysis-modes button.active {
+.research-modes button:hover { color: var(--text); border-color: var(--border); }
+.research-modes button.active {
   background: var(--panel-2);
   color: #fff;
   border-color: #fff;
   font-weight: 600;
 }
-.analysis-panel[hidden] { display: none; }
+.research-panel[hidden] { display: none; }
 
 /* The run picker, hidden for a mode that is not about one run. */
-.analysis-run { display: inline-flex; align-items: center; gap: 8px; }
-.analysis-run[hidden] { display: none; }
+.research-run { display: inline-flex; align-items: center; gap: 8px; }
+.research-run[hidden] { display: none; }
 
 /* ==========================================================================
    Literature
    ==========================================================================
    Long-form reading rather than an instrument, so it is set as a column at a
-   comfortable measure instead of filling the window. Class is `.litpage`:
+   comfortable measure instead of filling the window. Class is `.lit-page`:
    `.lit` is already taken further down for a highlighted line in the code
    walk-through, and two meanings for one name is a trap. */
 
-.litpage {
+.lit-page {
   max-width: 1080px;
   margin: 0 auto;
   display: flex;
@@ -834,11 +834,11 @@ details.control-group > summary:hover h3 { color: var(--text); }
   gap: 28px;
   padding-bottom: 48px;
 }
-.litpage .explain-intro { max-width: 760px; }
-.litpage .explain-intro p.lit-lead { color: var(--text); }
+.lit-page .explain-intro { max-width: 760px; }
+.lit-page .explain-intro p.lit-lead { color: var(--text); }
 /* Scoped, not !important: `.explain-intro p` already sets margin and colour,
    and a bare `.lit-caution` would lose to it on specificity. */
-.litpage .explain-intro p.lit-caution {
+.lit-page .explain-intro p.lit-caution {
   margin: 10px 0 0;
   font-size: 12px;
   color: var(--muted);

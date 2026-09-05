@@ -108,6 +108,14 @@ from gol_config import SimConfig
 # Node ids use -1 to mean "no parent" (founder or resurrected agent).
 NO_PARENT = -1
 
+# And -1 again for "nobody recorded when this agent was born", which happens
+# only when a checkpoint written before ages were tracked is resumed. It is
+# both the stored birth and the reported age, because a negative age is not an
+# age: readers test the sign rather than carrying two spellings of the same
+# gap. Inventing a plausible number here instead would be worse than the gap —
+# it cannot be told apart from a real one.
+UNKNOWN_BIRTH = -1
+
 def build_heads(cfg: SimConfig):
     """
     Which output rows mean what, for this configuration.
@@ -609,11 +617,7 @@ class GraphOfLife:
 
         share = cfg.total_tokens // self.G.number_of_nodes()
         for aid in self.G.nodes():
-            self.tokens[aid] = share
-            self.brains[aid] = self._new_brain()
-            self.messages[aid] = {}
-            self.parent_of[aid] = NO_PARENT
-            self.born_at[aid] = 0
+            self._register_agent(aid, share, self._new_brain(), NO_PARENT)
 
         # Hand any rounding remainder to the founders so the count is exact.
         self._settle_remainder()
@@ -621,6 +625,48 @@ class GraphOfLife:
     # ------------------------------------------------------------------------
     # Identity helpers
     # ------------------------------------------------------------------------
+
+    @property
+    def _books(self) -> Tuple[Dict[int, Any], ...]:
+        """
+        The per-agent dicts, which mean anything only while they agree on their
+        keys. Named once here so the three lifecycle helpers cannot drift apart,
+        and so a sixth book is one edit rather than a hunt.
+        """
+        return (self.tokens, self.brains, self.messages,
+                self.parent_of, self.born_at)
+
+    def _register_agent(self, aid: int, tokens: int, brain: Brain, parent: int) -> None:
+        """
+        Everything an agent needs in order to exist, in one place.
+
+        An agent can appear in three ways — a founder, a newborn, a
+        resurrection — and each used to fill the books inline, so adding one
+        book meant finding all three, and missing one left an agent the rest of
+        the engine believes in and that book has never heard of.
+
+        Birth time is read from the clock rather than passed in: a founder is
+        registered while `iteration` is still 0, so it needs no special case.
+        """
+        self.tokens[aid] = tokens
+        self.brains[aid] = brain
+        self.messages[aid] = {}
+        self.parent_of[aid] = parent
+        self.born_at[aid] = int(self.iteration)
+
+    def _forget_agent(self, aid: int) -> None:
+        """The other half of _register_agent: leave nothing behind."""
+        for book in self._books:
+            book.pop(aid, None)
+
+    def _age_of(self, aid: int) -> int:
+        """
+        Iterations lived. Indexed rather than fetched with a default, because
+        every living agent was registered: a missing birth is a broken
+        invariant and should say so instead of reporting a newborn.
+        """
+        born = self.born_at[aid]
+        return UNKNOWN_BIRTH if born == UNKNOWN_BIRTH else int(self.iteration) - born
 
     def _new_brain(self) -> Brain:
         brain = make_brain(self.cfg, self.next_brain_id)
@@ -921,13 +967,9 @@ class GraphOfLife:
         # The child inherits a mutated copy; the parent pays the full price.
         child_brain = self._copy_brain(self.brains[parent])
         self._mutate_brain(child_brain)
-        self.brains[child_id] = child_brain
 
-        self.tokens[child_id] = child_tokens
+        self._register_agent(child_id, child_tokens, child_brain, int(parent))
         self.tokens[parent] = parent_tokens - child_tokens
-        self.messages[child_id] = {}
-        self.parent_of[child_id] = int(parent)
-        self.born_at[child_id] = int(self.iteration)
 
         link_logits = Y[self.heads["LINK"], :]
         link_mode = Y[self.heads["LINK_MODE"], :]
@@ -1249,11 +1291,7 @@ class GraphOfLife:
         if doomed:
             self.G.remove_nodes_from(list(doomed))
             for u in doomed:
-                self.tokens.pop(u, None)
-                self.brains.pop(u, None)
-                self.messages.pop(u, None)
-                self.parent_of.pop(u, None)
-                self.born_at.pop(u, None)
+                self._forget_agent(u)
 
         survivors = list(self.G.nodes())
         if global_pool > 0 and survivors:
@@ -1267,11 +1305,12 @@ class GraphOfLife:
             aid = self.next_agent_id
             self.next_agent_id += 1
             self.G.add_node(aid)
-            self.tokens = {aid: self.cfg.total_tokens}
-            self.brains = {aid: self._new_brain()}
-            self.messages = {aid: {}}
-            self.parent_of = {aid: NO_PARENT}
-            self.born_at = {aid: int(self.iteration)}
+            # Emptied in place rather than rebound, so there is no instant at
+            # which some books describe the new world and the rest the old one.
+            for book in self._books:
+                book.clear()
+            self._register_agent(aid, self.cfg.total_tokens,
+                                 self._new_brain(), NO_PARENT)
             report["resurrected"] = True
 
         return report
@@ -1330,8 +1369,7 @@ class GraphOfLife:
             "parent_ids": [int(self.parent_of.get(u, NO_PARENT)) for u in nodes],
             # Iterations lived, not a birth stamp: a reader of one frame should
             # not have to know when the run started to know how old anyone is.
-            "ages": [int(self.iteration) - int(self.born_at.get(u, self.iteration))
-                     for u in nodes],
+            "ages": [self._age_of(u) for u in nodes],
             # What this phase did to each agent's pile, end to end: a parent
             # paying for a child, a newborn receiving its endowment, a node
             # conquered or defended, plus whatever cleanup redistributed. A
@@ -1373,7 +1411,7 @@ class GraphOfLife:
             "brain_ids": np.array([self.brains[u].brain_id for u in nodes], dtype=np.int64),
             "parent_brain_ids": np.array([self.brains[u].parent_brain_id for u in nodes], dtype=np.int64),
             "parent_ids": np.array([self.parent_of.get(u, NO_PARENT) for u in nodes], dtype=np.int64),
-            "born_at": np.array([self.born_at.get(u, 0) for u in nodes], dtype=np.int64),
+            "born_at": np.array([self.born_at[u] for u in nodes], dtype=np.int64),
             "edges": np.array([[index[u], index[v]] for u, v in self.G.edges()],
                               dtype=np.int64).reshape(-1, 2),
             "counters": np.array([self.next_agent_id, self.next_brain_id, self.iteration],
@@ -1434,11 +1472,13 @@ class GraphOfLife:
         brain_ids = blob["brain_ids"].tolist()
         parent_brain_ids = blob["parent_brain_ids"].tolist()
         parent_ids = blob["parent_ids"].tolist()
-        # Checkpoints written before ages were tracked have none; those agents
-        # are treated as having been there from the start, which is the least
-        # wrong answer available and is only ever wrong about a resumed run.
+        # Checkpoints written before ages were tracked have none. Guessing zero
+        # here would say every agent is exactly as old as the run, which for a
+        # world resumed at iteration 500 is a confident five-hundred-iteration
+        # lie about a newborn. UNKNOWN_BIRTH says nothing instead, and agents
+        # born after the resume get real ages.
         born_at = (blob["born_at"].tolist() if "born_at" in blob
-                   else [0] * len(parent_ids))
+                   else [UNKNOWN_BIRTH] * len(parent_ids))
 
         world.G.add_nodes_from(ids)
         for a, b in blob["edges"].tolist():
