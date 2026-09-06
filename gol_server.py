@@ -67,7 +67,10 @@ SHIPPED_PY = ("GraphOfLifeSimple.py", "gol_config.py", "gol_series.py",
 # is nowhere to copy them to when serving web/ straight off the disk, so they
 # are read from where they actually live. Also an explicit map rather than a
 # directory, for the same reason.
-SHIPPED_DOCS = {"data/Research.md": os.path.join("research", "Research.md")}
+SHIPPED_DOCS = {
+    "data/Research.md": os.path.join("research", "Research.md"),
+    "data/Literature.md": os.path.join("research", "Literature.md"),
+}
 
 # Requests are capped so a malformed or hostile body cannot exhaust memory.
 MAX_BODY_BYTES = 1 << 20

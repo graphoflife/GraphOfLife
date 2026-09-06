@@ -610,11 +610,22 @@ def test_the_server_and_the_build_ship_the_same_python():
     # The same arrangement for documents the page renders, which live outside
     # web/ for the same reason and would fail the same way: rendering on the
     # published site and reporting that it cannot be read on localhost.
+    #
+    # Checked by name rather than by the whole destination path, because the
+    # build copies them in a loop and the full string never appears. The
+    # stamping table is checked separately, and is the half that matters — a
+    # document that is copied and not stamped is a document a returning visitor
+    # keeps the old version of.
+    stamped = re.search(r"declare -A stamp_in=\((.*?)\n\)", script, re.S)
+    assert stamped, "could not find the stamp_in table in build_site.sh"
     for url, source in gol_server.SHIPPED_DOCS.items():
         assert os.path.isfile(os.path.join(root, source)), f"{source} does not exist"
-        assert f'"${{out}}/{url}"' in script, (
+        assert os.path.basename(source) in script, (
             f"gol_server serves {url} from {source}, and build_site.sh never "
             f"copies it into the site")
+        assert url in stamped.group(1), (
+            f"build_site.sh copies {url} but never stamps it, so a cached copy "
+            f"survives a deploy")
 
 
 # ---------------------------------------------------------------------------

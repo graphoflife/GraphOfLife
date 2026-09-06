@@ -42,7 +42,9 @@ done
 # a file that disagree. gol_server serves the same file from where it lives;
 # SHIPPED_DOCS there and this line are checked against each other by
 # tests/test_engine.py.
-cp "${here}/research/Research.md" "${out}/data/Research.md"
+for doc in Research.md Literature.md; do
+  cp "${here}/research/${doc}" "${out}/data/${doc}"
+done
 
 # Stamp every script and stylesheet with the commit they came from.
 #
@@ -71,7 +73,7 @@ declare -A stamp_in=(
   ["${out}/js/sim-worker.js"]="runstore.js"
   ["${out}/js/explain.js"]="py/explain_minimal.py|data/explain-run.json"
   ["${out}/js/home.js"]="data/home-run.bin"
-  ["${out}/js/notes.js"]="data/Research.md"
+  ["${out}/js/docpage.js"]="data/Research.md|data/Literature.md"
 )
 for file in "${!stamp_in[@]}"; do
   IFS='|' read -ra names <<< "${stamp_in[$file]}"
