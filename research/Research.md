@@ -873,6 +873,22 @@ Ordered by how much answering one would move the claim.
    measurement addresses it.
 9. **Is the population the right unit at all?** If the answer to 5 is yes, the
    whole measurement apparatus is aimed at the wrong level.
+10. **Why does a more expressive brain do no better?** Measured, thirty seeds
+    (`research/pilot_brain_inputs.py`): widening a binary brain's last hidden
+    layer from 10 to 128 takes it from 1 distinct staking score to 10 and cuts
+    exact ties — which a coin currently settles — from 27% to about 4%, and
+    changes survival not at all. Extinction is flat to slightly worse and the
+    median population drifts down. Removing the float brain's noise inputs
+    *entirely* is likewise indistinguishable from doubling them, though a noise
+    draw is about 4.4x as loud as a magnitude in the first layer.
+
+    Both are null results and both were expected to be effects, so the
+    interesting reading is that **how finely an agent can state a preference is
+    not what is being selected on**. That is either a fact about this game —
+    the Blotto resolution may be coarse enough that precision is wasted — or a
+    sign that the score carries less of the decision than assumed. It bears on
+    the claim directly: if policy precision is not under selection, the space
+    the agents are actually searching is smaller than the architecture suggests.
 
 ---
 

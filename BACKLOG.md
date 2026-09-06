@@ -204,10 +204,51 @@ delivery overwrites per key and never cleared anyone, guard or no guard.
 
 ---
 
-## 4b. Two things measured in the brains, not yet acted on
+## 4b. Two things measured in the brains — **now measured against survival, and neither change is supported**
 
-Neither is a defect. Both are numbers nobody chose, and both would change how
-a population behaves if they were chosen deliberately.
+Neither is a defect. Both are numbers nobody chose, and the argument below was
+that choosing them deliberately would change how a population behaves.
+
+**It does not.** `research/pilot_brain_inputs.py`, thirty seeds each, sixty
+iterations:
+
+```
+noise inputs      extinct   median n        last hidden   extinct   median n
+  0                 1/30        400           10            8/30        388
+  2                 0/30        363           32           10/30        322
+  5                 0/30        393           64           13/30        324
+ 10                 1/30        421          128            9/30        320
+```
+
+The noise column is a clean null: taking noise away **entirely** is
+indistinguishable from doubling it, and the medians wander without direction.
+The loudness is real — 38.5% of the first layer's variance over five inputs,
+one noise draw about 4.4x a magnitude, which reproduces what is claimed below —
+but nothing downstream cares. Leave it alone.
+
+The binary column is the more useful result, because it points the other way
+from the recommendation. Widening the last hidden layer **does** buy
+expressiveness: on identical observations, distinct staking scores go 1 → 7 →
+6 → 10 and exact ties fall from 26.9% to about 4%. It buys no survival.
+Extinction is flat to worse and the median population drifts *down*. At n=30
+the binomial standard deviation is about 2.6, so 8 against 13 does not
+separate — but there is no reading of this table in which widening helps, and
+"widening the last hidden layer is the lever" should not be acted on from
+memory later.
+
+What that leaves is a real question rather than a patch: a brain that can say
+more precisely what it wants does no better, which is either something about
+this game or something about how little of the decision the score actually
+carries. Worth a look before either preset moves.
+
+Two methodological notes from doing it, both of which changed the answer:
+measure on a **warmed** world, since at iteration 0 every founder holds an
+equal share and every magnitude is nearly constant, which made noise look like
+half of what a brain hears; and compare architectures on the **same**
+observations, since giving each its own world compares populations rather than
+brains — and two of them had died before the measurement was taken.
+
+The original entries follow, with the numbers they were written from.
 
 **A third of what a float brain responds to is noise.** The inputs are not
 normalised, so how loud an input is depends on the range it happens to live in.
@@ -230,7 +271,8 @@ which `_share_of_first` answers with an even split. The float brain never ties
 and falls back 28.8%.
 
 Widening the last hidden layer is the lever. Worth measuring against survival
-before changing the preset.
+before changing the preset. *(Measured. It is not the lever — see the table
+above.)*
 
 ---
 
