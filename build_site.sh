@@ -21,6 +21,12 @@ mkdir -p "${out}/py"
 
 cp -r "${here}/web/." "${out}/"
 
+# Byproducts of running Python here, which CI never has because it builds from
+# a clean checkout and .gitignore keeps them out of it. Copying them meant a
+# local _site held files the published one did not — which is the one thing
+# this script exists to rule out.
+find "${out}" -name '__pycache__' -type d -prune -exec rm -rf {} +
+
 # The engine, verbatim. Not a copy kept in step by hand: these are the files
 # the desktop version runs, and the browser imports exactly them.
 for f in GraphOfLifeSimple.py gol_config.py gol_series.py explain_minimal.py; do

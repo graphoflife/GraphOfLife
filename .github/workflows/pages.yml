@@ -19,6 +19,10 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  # deploy-pages reads the artifact back from the run that built it, and has
+  # required this since v4. Naming a permissions block at all sets everything
+  # unlisted to none, so it has to be granted explicitly.
+  actions: read
 
 # One deployment at a time. Queued rather than cancelled, so a push during a
 # deploy still ends up published rather than silently skipped.
@@ -32,8 +36,8 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
       - name: Install what the engine needs
@@ -50,6 +54,8 @@ jobs:
         run: node tests/test_explain_anchors.js
       - name: The Explanation's timing and accounting add up
         run: node tests/test_view.js
+      - name: The viewer reads its metrics off the frame correctly
+        run: node tests/test_stats.js
       - name: Every script parses
         run: |
           for f in web/js/*.js; do node --check "$f"; done
@@ -60,7 +66,7 @@ jobs:
     # A pull request gets the tests and the assembly; only main is published.
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Assemble the site
         run: |
@@ -87,7 +93,7 @@ jobs:
           grep -q 'js/app\.js?v=' _site/index.html || { echo "index.html unstamped"; exit 1; }
           echo "assets stamped"
 
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: _site
 
@@ -100,4 +106,4 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

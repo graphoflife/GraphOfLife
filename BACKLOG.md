@@ -372,18 +372,28 @@ The Python was read thoroughly: engine, store, server, series, tools. The
 JavaScript was read selectively — worker lifecycles, error paths, asset
 handling, and the files under active edit.
 
-**Not audited line by line:** `web/js/stats.js` (1,224 lines),
-`web/js/render.js` (804), `web/js/force.js` (870), `web/js/viewer.js` (725),
-`web/js/viewer-panels.js` (584), `web/js/graphstats.js` (759). Together that is
-roughly 4,900 lines, most of the browser codebase by volume. `graphstats.js` is
-partly protected by the parity test against `gol_series.py`; the rest is not
-covered by anything. `stats.js` is the only one over a thousand lines, and the
-only one of the six that has changed since this was written.
+**Not audited line by line:** `web/js/render.js` (804), `web/js/force.js`
+(870), `web/js/viewer.js` (725), `web/js/viewer-panels.js` (584),
+`web/js/graphstats.js` (759). `graphstats.js` is partly protected by the parity
+test against `gol_series.py`; the other four are not covered by anything.
 
-`stepview.js` was on this list and is off it: `tests/test_view.js` covers its
-timing and accounting, though not its drawing.
+Two are off this list since it was written. `stepview.js` has
+`tests/test_view.js` over its timing and accounting, though not its drawing.
+`stats.js` (1,224 lines, still the largest) has `tests/test_stats.js` over the
+half the parity test never reached — reading a metric off a frame, scaling it,
+ranging it, and looking up an edge, none of which Python computes so none of
+which was compared with anything.
 
-Absence of findings there is absence of looking.
+That suite was mutation-tested rather than trusted for passing: ten
+deliberate breakages, each one caught. It was worth doing — the first run
+found a real hole, because asserting that an endpoint metric is *symmetric*
+does not catch `min_tokens` quietly becoming `max_tokens`, since max is
+symmetric too. Values are asserted now, not just shape. Two of the ten
+"survivors" turned out to be equivalent mutants and two more were `sed`
+patterns that never matched, which is its own lesson: check that a mutant
+changed the file before believing the test missed it.
+
+Absence of findings in the remaining four is absence of looking.
 
 ---
 
