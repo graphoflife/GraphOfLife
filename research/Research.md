@@ -1,90 +1,559 @@
-# Graph of Life — research notes
+# Graph of Life — the road to open-ended evolution
 
-## The claim under test
+## The goal
 
-> **This algorithm shows open-ended evolution.**
+> **Build open-ended evolution in this substrate, and prove it.**
 
-Everything in this document exists to support or break that one sentence. A
-measurement earns its place by changing how much the claim is believed;
-anything that cannot is decoration.
+Not "find out whether it is there". The working assumption is that this
+substrate can carry open-ended evolution, that the gap between what it does now
+and what it needs to do is a list of mechanics, and that the list is short. This
+document is that list, the argument for why the substrate deserves the effort,
+the definition we are aiming at, and the measurements that will settle it.
 
-Working notes towards a paper, not a paper. Written 2026-09-04, kept current.
-
-Everything labelled **measured** was run and the numbers are given. Everything
-else is conjecture and is marked as such. The distinction matters more than
-usual here, because the interesting claims are exactly the ones that are easy
-to assert and hard to establish — and because the recurring failure in these
-notes has been a real number that meant nothing without the control beside it.
+Every mechanic proposed here is **optional and off by default**, so that every
+run ever made stays reproducible and comparable. §5 is how an experiment names
+the exact algorithm it was run on.
 
 ---
 
-## 0. The state of knowledge
+## 0. Stance, and the one thing it does not licence
 
-**There is no heredity, so there is no cumulative evolution to be open-ended.**
-That is measured, it is the first thing that should have been measured, and it
-subordinates everything else in this document. Details in §0b; the short form
-is that a genotype's median life is **one iteration**, a lineage is **45% of
-the way to a stranger after one iteration and 92% after ten**, and replacing
-the entire conquest rule with a coin flip — at thirty seeds — leaves the
-population **38% larger and 37% more diverse** rather than dead.
+The stance is a decision about where effort goes. We assume the target is
+reachable and spend our time on how to reach it, rather than on adjudicating
+the current build. When a mechanic fails to produce what it was supposed to,
+that is information about which mechanic to try next, not a verdict on the
+programme.
 
-Everything below was written before that was known. It is kept as written —
-the reasoning about non-transitivity, castles and flow modules is still good
-reasoning, and most of it becomes relevant again the moment heredity works.
-But no measurement of open-endedness taken on the current engine means what it
-appears to mean, because the system it was taken on is not evolving.
+The one thing this does not licence is misreporting a number. A programme built
+on a measurement that was massaged fails later, more expensively, and in a way
+that is hard to trace. So: **conjecture freely, label it as conjecture, and
+report what the runs actually did.** Everything below marked **measured** was
+run and the number is given; everything else is design.
 
-What was known before, all of it still true and now differently weighted:
+That is not caution, it is the only way the strategy pays. We are going to make
+a lot of changes and we need to know which one worked.
 
-| | evidence | bearing on the claim |
+---
+
+## 1. What we are trying to build
+
+"Open-ended evolution" names several different targets, and a system can hit
+one while missing another. Choosing which one we are aiming at is the most
+consequential decision in this document, because it determines what counts as
+success and therefore what we build.
+
+### 1.1 The definitions on offer
+
+| definition | the thing that must grow without bound | can this substrate satisfy it? |
 |---|---|---|
-| Small worlds end | 3/3 dead at 6 founders, 0/3 at 100 | against, but only for small worlds |
-| Big worlds do not settle | founding lineages still coexist after 60 iterations in 2/3, 3/3, 2/3 of runs at 40, 100, 250 founders | **for** — scale is a real answer, not an evasion |
-| The strategy space has no order | revolutions make the winner depend on who else is present, not on pairwise strength; demonstrated on the engine's resolver | for — nothing to converge to |
-| Flow has group structure | modules compress a walk on the token flow by **41.5%**; some last 48 frames while replacing ~23% of their members per frame | **for, pending a null** |
-| Conquest cycles are not structure | thousands per run, 2-cycles at 0.87–0.91× chance | neither — a detector that found nothing |
-| The genome cannot grow | layer sizes are fixed for a run | against — bounds encoded complexity |
-| The state space cannot expand | no rule brings a new kind of thing into existence | against — the strongest argument on that side |
+| **Bedau–Packard activity** (1992, 1998) — class 3: new components keep appearing *and* the stock of components keeps growing | cumulative adaptive activity, against a neutral shadow | Yes, once components persist |
+| **MODES** (Dolson et al. 2019) — change, novelty, complexity, ecology, each with a persistence filter | four separate curves | Yes for change/novelty/ecology; complexity needs §4.6 |
+| **Banzhaf et al. 2016 / Taylor et al. 2016** — variation vs innovation vs **transition**; novelty that *enlarges the space* | the dimensionality of the possibility space | Not with a fixed genome. This is the hard one |
+| **Standish 2003** — measurable growth in the complexity of evolved entities | entity description length | Needs a growable entity |
+| **Adams, Zenil, Davies, Walker 2017** — unbounded evolution requires the *transition rules* to depend on state | the rule set itself | Yes, via §4.7 |
+| **Sayama — cardinality leap** | the *number of components* a system is made of | Yes: population is unbounded, and structures are made of agents |
+| **Maynard Smith & Szathmáry 1995** — major transitions: new levels of individuality | levels in the hierarchy | This is the target |
+| **Kauffman — the adjacent possible** | the set of things reachable in one step from what exists | Yes, and this is the key to the conservation objection |
 
-Three things have been **retracted** rather than quietly dropped, and are kept
-because the reasoning is the useful part: that conservation precludes unbounded
-complexity (§3.1), that a castle must be one family (§3.4.1), and that a castle
-is a persistent set of agents (§3.4.2).
+### 1.2 The definition we adopt
 
-The open questions are gathered in §10.
+> **Open-ended evolution here means unbounded growth in the space of realised
+> multi-agent organisations — structures that persist, that are reproduced, and
+> whose description cannot be bounded in advance by the configuration.**
+
+The object of evolution is the **organisation**, not the genome.
+
+This is a deliberate choice and worth defending, because it is what makes the
+programme winnable.
+
+**The genome route is closed by construction.** Layer sizes are fixed for a
+run, so the genotype space is a fixed-dimensional box and every run is a walk
+inside it. Under Banzhaf's grading that is *variation*, permanently, and no
+amount of running changes it. If we define OOE as growth in genome complexity,
+this substrate is disqualified before the first experiment — unless §4.6 lands.
+
+**The organisation route is open.** The number of distinct labelled structures
+on *n* agents grows super-exponentially in *n*, and *n* is bounded only by the
+token supply, which is a parameter we control. Nothing in the rules caps how
+many agents can participate in one organisation, how many organisations can
+coexist, or how they can be arranged. The space is not fixed-dimensional; it
+grows with the population.
+
+**This also disposes of the conservation objection.** Tokens are conserved.
+Arrangements are not. A conserved currency bounds how many agents can be alive
+at once and *nothing else* — not how they are connected, not what they do to
+each other, not how many levels of organisation sit between one agent and the
+whole. Conservation is a carrying capacity, and carrying capacities do not
+prevent evolution; every real ecosystem has one. What conservation gives us for
+free is a **selection pressure with no fitness function**, which is exactly
+what an open-ended system needs and what most artificial systems have to fake.
+
+Kauffman's adjacent possible is the frame: each new organisation makes further
+organisations reachable that were not reachable before. That is growth in the
+reachable space driven by what has been reached, with a fixed currency.
+
+### 1.3 What would count as proof
+
+Four claims, in order of increasing strength. Each has a measurement in §6.
+
+- **P1 — There is evolution.** Lineages retain identity long enough for
+  selection to act, and selection changes the outcome. *(§6.1, §6.2)*
+- **P2 — There is cumulative adaptation.** A late population beats its own
+  ancestors under identical conditions. *(§6.3)*
+- **P3 — There are organisations.** Persistent multi-agent structures exist
+  above chance, survive the turnover of their members, and are reproduced.
+  *(§6.4, §6.5)*
+- **P4 — The space of organisations grows without bound.** New kinds keep
+  appearing, the stock keeps growing, and neither is levelling off within the
+  longest run we can afford. *(§6.6)*
+
+P4 is the claim. P1–P3 are the ladder to it, and each is worth publishing on
+its own.
 
 ---
 
-## 0b. Is there heredity?
+## 2. Why this substrate deserves the effort
 
-Lewontin's three conditions for evolution by natural selection are variation,
-differential fitness, and **heredity**. This project has spent its effort on
-the second — the game, the revolutions, the conquest rule — and assumed the
-third. The third is the one that was not there.
+Most artificial life systems have to bolt on the things this one has for free.
+Stated plainly, because it is the case for the programme.
 
-### Why to suspect it
+**The interaction topology is endogenous.** Agents build the graph. Avida runs
+on a fixed grid, Tierra on a linear memory soup, Polyworld on a plane. Here,
+who can reach whom is a product of what the agents did — reproduction wires a
+newborn into its parent's neighbourhood, and links that carry nothing are
+pruned. Evolutionary graph theory (Lieberman, Hauert & Nowak 2005) shows the
+graph determines selection strength; a system where the graph is itself
+evolving is a setting that literature does not have a result for.
 
-`blotto_phase` ends with
+**The game has no optimum to converge to.** Colonel Blotto has no pure-strategy
+equilibrium (Borel 1921; Roberson 2006), and the revolution rule destroys even
+the pairwise ordering: whether A beats B depends on who else is present.
+*(Measured: demonstrated on the engine's own resolver — §A.3.)* A system with a
+best strategy runs to it and stops. This one cannot, which is a precondition
+for open-endedness that most systems have to engineer around.
+
+**Selection has no fitness function.** Tokens are life, wealth and voting power
+at once. Nothing is optimised toward a goal; what survives, survives. Bedau's
+critique of artificial systems is largely that their fitness functions bound
+what can be discovered. There is no such bound here.
+
+**Randomness is evolvable.** Each discrete decision is paired with a MODE head,
+so an agent decides for itself whether that decision is read as a probability
+or a maximum. The degree of stochasticity is part of the genome. That is
+unusual, and it means exploration/exploitation balance is under selection
+rather than under a parameter.
+
+**There are already two inheritance channels.** Node lineage (who spawned whom)
+and brain lineage (whose genome won a node) are tracked separately and can
+diverge. A genome moving between unrelated agents by conquest is structurally
+horizontal transfer, which is the substrate for symbiosis and for the major
+transitions in §4.9.
+
+**Conserved tokens give an intrinsic carrying capacity.** Population size is
+self-regulating with no external cap, which means an ecology can find its own
+equilibrium rather than being held at one.
+
+---
+
+## 3. What blocks it now
+
+Three blockers, in the order they must be cleared. The first invalidates
+measurements of the other two, so the order is not negotiable.
+
+### 3.1 Heredity — *blocking everything*
+
+**Measured.** `blotto_phase` mutates every living brain every iteration at
+`mutation_probability` 0.5. Mutation is applied to the population rather than
+at replication.
+
+- A genotype's median life is **1 iteration**; 1% last more than five.
+- A lineage is **45% of the way to a stranger after one iteration, 92% after
+  ten** — in weights and in behaviour alike. Heredity half-life ≈ 3 iterations.
+- With mutation off entirely the median genotype life is still 3, because
+  conquest overwrites a node's brain. **Two independent shredders.**
+- Replacing the whole conquest rule with a coin among stakers leaves the
+  population 38% larger and 37% more diverse, at 30 seeds.
+
+Full numbers in §A.1. Fix in §4.1.
+
+Nothing measured before this is cleared means what it appears to mean. Every
+statistic this project built — diversity, lineage forests, flow-module
+compression, activity — looks *healthy* under zero heredity, because none of
+them measures retention.
+
+### 3.2 The possibility space cannot expand
+
+No rule brings a new kind of thing into existence. Layer sizes are fixed, token
+types are one, the set of decisions an agent can make is fixed at
+configuration. Under §1.2 this is survivable — organisations can grow even if
+genomes cannot — but it caps how far the programme can go, and §4.6/§4.7 lift
+it.
+
+### 3.3 Nothing is positive-sum
+
+There is no rule by which cooperation produces surplus.
+`tokens_created_per_phase` injects tokens globally and unconditionally, which is
+weather, not production. Without local surplus there is no reason for a
+multi-agent organisation to be worth more than its parts, and organisations are
+the object we have chosen to evolve. Fix in §4.4.
+
+---
+
+## 4. The mechanics
+
+Every one of these is **optional, off by default, and named** so an experiment
+can cite exactly which are on (§5). Ordered by expected leverage. Confidence is
+stated because most of these are conjecture.
+
+### 4.1 `mutate_on_replication` — tie mutation to copying
+*Confidence: high. This is the one that has to be first.*
+
+Delete the world-wide mutation loop at the end of `blotto_phase`; a child is
+already a mutated copy of its parent in `_spawn_child`. A genome then changes
+only when it is copied, which is what makes a lineage a lineage.
+
+**What it does not fix:** conquest still overwrites a node's brain, so a genome
+vanishes when its carrier loses. That is not a defect — it *is* how a
+successful genome spreads, and it is why brain lineage must be followed rather
+than node lineage.
+
+**Success:** heredity half-life bounded by how long a lineage survives rather
+than by the mutation rate, and the §6.2 ablation separating in the *right*
+direction.
+
+### 4.2 `germline` — separate the genome from the working copy
+*Confidence: medium. Only if 4.1 is not enough.*
+
+Give each agent an unmutated germline genome alongside the expressed one.
+Conquest copies the expressed genome; reproduction copies the germline. This
+is Weismann's barrier, and it makes lineage identity survive conquest, which
+4.1 alone does not.
+
+### 4.3 `token_colours` — conserve the count, not the kinds
+*Confidence: medium-high. This is the most interesting idea here.*
+
+Give each token a colour from a set of size *c*. Agents have a heritable
+affinity vector; a token of a colour an agent has no affinity for is worth
+less to it. Conversion between colours is possible at a loss, or only through
+particular agents.
+
+**Why this matters more than it looks.** It answers the conservation objection
+at the mechanical level rather than the philosophical one: the *number* of
+tokens stays fixed while the space of colour-distributions over the population
+is unbounded. It creates **niches** immediately — an agent specialised in a
+colour cannot be displaced by a generalist on that colour's terms — and niches
+are what MODES measures as ecology and what every open-ended system has.
+
+It also creates a reason for **trade**, which is the cheapest possible route to
+positive-sum interaction (§4.4) without minting anything.
+
+Allow `c` itself to grow — a mutation that splits a colour in two — and the
+possibility space expands, which is §3.2 addressed without touching the genome
+architecture.
+
+### 4.4 `mutual_flow_yield` — make cooperation produce something
+*Confidence: medium-high.*
+
+An edge carrying tokens in **both** directions in the same game phase yields a
+small number of new tokens, split between its ends. Nothing is created except
+by an interaction. This converts the game from constant-sum to variable-sum and
+creates an immediate defection problem, which is the substrate for everything
+in evolutionary game theory.
+
+The theory is developed: network reciprocity predicts cooperation is favoured
+when `b/c > k` (Ohtsuki, Hauert, Lieberman & Nowak 2006). This system has an
+evolving `k` — *measured*: mean degree falls ~3.9 → ~3.2 over 45 iterations —
+and the agents partly control it, which makes the threshold an evolvable target
+rather than a parameter. That is a genuinely novel setting for that result and
+is publishable on its own.
+
+### 4.5 `edge_proposal` — let the graph grow, not only erode
+*Confidence: medium.*
+
+Edges are currently created **only** at birth and destroyed **every** iteration
+by pruning. The topology erodes by default. Add a head by which two agents can
+both propose a link and have it form if both do, at a token cost.
+
+Without this, no organisation can *build* anything — it can only inherit
+whatever topology birth happened to give it.
+
+### 4.6 `growable_layers` — let the genome gain capacity
+*Confidence: low-medium, high value.*
+
+A mutation that adds a hidden unit, at a token cost proportional to the added
+capacity. This is the one mechanic that would satisfy Banzhaf's *transition*
+grade directly, and the only one that makes a complexity measure (§6.6) mean
+what Standish means by it.
+
+The cost is what stops it running away: capacity has to pay for itself.
+Currently complexity has no cost here, which is why it also has no reason to
+grow.
+
+### 4.7 `local_rules` — agents that change their own rules
+*Confidence: low, highest ceiling.*
+
+Adams, Zenil, Davies & Walker (2017) argue that unbounded evolution in a
+dynamical system requires the transition rules themselves to depend on state.
+Concretely here: let brain outputs set an agent's *own* mutation rate,
+reproduction threshold, or edge-forming permission. Evolvable evolvability.
+
+This is the mechanic most likely to produce something nobody predicted, and
+the most likely to produce degenerate runaway. Worth trying late, with the
+ablation ready.
+
+### 4.8 `contracts` — a second replicator
+*Confidence: low, speculative.*
+
+Let an agent carry a small heritable structure describing how it interacts with
+a specific neighbour, copied and mutated independently of the brain. A second
+replicator on a different timescale is how several natural major transitions
+worked, and it gives organisations something to inherit that is *theirs* rather
+than their members'.
+
+### 4.9 `structure_replication` — the major transition
+*Confidence: very low, this is the endgame.*
+
+If a group of agents satisfies a closure condition (§6.4 defines candidates),
+allow the group to seed a copy of itself elsewhere in the graph at a token
+cost. This is the explicit version of what we hope emerges on its own. Building
+it in is arguably cheating; having it available tells us what the measurements
+look like when the phenomenon is definitely present, which is the calibration
+every detector in §6 needs.
+
+---
+
+## 5. Strain labelling — how to name an algorithm
+
+An experiment must cite the exact algorithm it ran on, and that citation must
+still resolve in a year when six more mechanics exist.
+
+### 5.1 The three kinds of setting
+
+| kind | definition | examples | in the strain id? |
+|---|---|---|---|
+| **Mechanic** | changes *which code paths can execute* | `allow_revolutions`, `brain_kind`, every flag in §4 | **yes** |
+| **Parameter** | changes magnitudes only | `total_tokens`, `n_nodes`, `hidden_layers`, `mutation_probability`, `seed` | no — cited separately |
+| **Infrastructure** | no effect on the run | `checkpoint_every`, `export_every`, `export_decisions` | no |
+
+### 5.2 The strain identifier
 
 ```
-for brain in self.brains.values():
-    self._mutate_brain(brain)
+gol-<SPEC>[+<mechanic>[=<value>]]...
 ```
 
-Every living agent is mutated every iteration, at `mutation_probability` 0.5
-by default. **Mutation is applied to the population, not at replication.** An
-agent that just won every node it contested is jittered exactly as hard as one
-that lost everything, and again the next iteration, and the next. In biology,
-mutation happens when a genome is copied; here it happens continuously to
-everyone, which is closer to somatic damage than to genetic variation.
+- `SPEC` is an integer in `gol_config.py`, currently **1**. It is bumped
+  **only** when behaviour changes in a way that cannot be expressed as an
+  optional flag — a bug fix that changes results, or a change of default.
+- Every mechanic has a **frozen default**, chosen so the default reproduces
+  SPEC-1 behaviour. Defaults never change; that is the whole trick.
+- The identifier lists only mechanics whose value **differs from the frozen
+  default**, sorted alphabetically. Booleans that are on appear bare.
 
-### What was measured
+**The property that makes this work:** adding a new mechanic that defaults to
+off does not change the identifier of any existing strain. `gol-1` means the
+same thing forever.
 
-`research/pilot_heredity.py`.
+Examples:
 
-**A genotype's life.** A `brain_id` names an exact genome — a copy keeps its
-source's id and only a mutation makes a new one — so the lifetime of an id is
-the lifetime of a genome.
+```
+gol-1                                        the algorithm as it stands today
+gol-1+mutate_on_replication                  heredity fixed, nothing else
+gol-1+mutate_on_replication+token_colours=4  heredity plus four token colours
+gol-1+brain_kind=binary                      the binary brain, no new mechanics
+gol-2+mutate_on_replication                  same flags, after a spec bump
+```
+
+### 5.3 Citing an experiment
+
+A strain pins the mechanics. It does not pin magnitudes, and it does not pin
+bugs. So an experiment record carries four things:
+
+```
+strain:  gol-1+mutate_on_replication
+setup:   total_tokens=2500 n_nodes=50 k_neighbors=6 hidden_layers=[12,10]
+         mutation_probability=0.5
+seeds:   1..30
+commit:  a1b2c3d
+```
+
+`commit` is the backstop: it reproduces the code exactly, including anything
+the strain scheme failed to capture. `strain` is what makes two experiments
+*comparable* — the thing you group by and put on an axis.
+
+### 5.4 The registry
+
+`research/strains.md` records every strain an experiment has ever used: the
+identifier, the mechanics it turns on, the commit that introduced them, and a
+one-line note on what it was for. A strain is never removed and never
+redefined. If a mechanic's meaning has to change, it gets a new name.
+
+### 5.5 What to implement (before any experiment)
+
+1. `SPEC = 1` and a `MECHANICS` table in `gol_config.py` naming every mechanic
+   and its frozen default.
+2. `SimConfig.strain_id()` returning the string in §5.2.
+3. The strain written into every run's metadata, every checkpoint, and every
+   series cache, so a result can never be found without knowing what produced
+   it.
+4. `research/strains.md` seeded with `gol-1`.
+
+This is the only implementation work that should happen before experiments,
+and it is small.
+
+---
+
+## 6. The measurement battery
+
+Each measurement names the claim it serves (§1.3) and what would count as
+success. **Every one needs a control**; the recurring failure in this project
+has been a real number that meant nothing without one.
+
+### 6.1 Heredity half-life — *serves P1*
+Descendant-to-ancestor distance against a background of unrelated pairs, in
+weights and in behaviour, at increasing horizons. **Success:** the curve stops
+saturating within the run; retention is limited by lineage survival, not by the
+clock. *(Exists: `research/pilot_heredity.py`.)*
+
+### 6.2 Selection ablation — *serves P1*
+The same world with the conquest winner decided by a coin among stakers.
+**Success:** the two separate, and the real rule is the better one.
+*(Exists.)*
+
+### 6.3 Cross-time tournament (CIAO) — *serves P2, the decisive one*
+Replay a late population against its own ancestors under identical conditions
+(Cliff & Miller 1995). **Success:** a clean gradient — later beats earlier
+everywhere. Banded patterns mean cycling, which is *also* interesting and is
+what non-transitivity predicts.
+
+This is the measurement that cannot be fooled by a system that forgets: a
+population with no heredity cannot beat its own past. It is the highest-value
+thing to build, checkpoints already hold what it needs, and it answers P2 on
+its own.
+
+### 6.4 Organisation detection — *serves P3*
+An organisation is a set of agents whose joint behaviour persists while its
+membership turns over. Three candidate detectors, all partly built:
+
+- **Flow modules** (map equation, Rosvall & Bergstrom 2008) — groups a
+  token-walk tends to stay inside. *Measured:* 41.5% compression, longest-lived
+  48 frames, ~23% membership turnover per frame. **No null model yet, so this
+  number currently means nothing.**
+- **Token cycles** — circulation without conquest. Never looked for.
+- **Periodic birth/death patterns** — a structure that regenerates on a period.
+  Nothing detects period > 1.
+
+**Success:** any detector finding structure significantly above a
+degree-preserving rewired null.
+
+### 6.5 Information-theoretic individuality — *serves P3*
+Krakauer, Bertschinger, Olbrich, Flack & Ay (2020): an individual is a subset
+that propagates information about its own past into its own future in excess of
+what its environment supplies. The flow modules are a cheap proxy for this; the
+real quantity is computable on small groups. **Success:** groups with
+self-predictive information above the environmental baseline, persisting.
+
+### 6.6 Unbounded growth — *serves P4, the claim*
+Three curves, each against a neutral shadow:
+- **Activity** (Bedau) — cumulative presence of persistent components.
+- **Novelty and complexity** (MODES) — with a persistence filter, which matters
+  enormously here because everything mutates.
+- **Organisation count and size** — how many distinct organisations exist and
+  how large the largest is.
+
+**Success:** none of the three levelling off within the longest run affordable,
+and all three above their shadows. **Failure that is still informative:** a
+clean asymptote, which tells us which mechanic to add next.
+
+### 6.7 Ablation as standing method
+Soros & Stanley 2014: for each mechanic in §4, run with and without and show
+the effect disappears. A property that survives every ablation was never caused
+by the mechanism claimed. Every headline result gets this treatment before it
+is believed.
+
+---
+
+## 7. What the comparison class does
+
+Worth knowing what we are measured against, and where this substrate is
+genuinely different.
+
+| system | what made it open-ended (or not) | what this substrate has instead |
+|---|---|---|
+| **Tierra** (Ray 1991) | self-replicating machine code in shared memory; genome length can grow; got parasites and hyper-parasites within hours | fixed genome; but an evolving *topology*, which Tierra has no analogue of |
+| **Avida** (Ofria & Wilke 2004) | rewarded task hierarchy; showed complex functions need rewarded intermediate steps | no reward function at all — a strength for open-endedness, a weakness for measurement |
+| **Geb** (Channon 2001) | unbounded genome plus coevolution; passed Bedau class 3 by its author's measure | this is the bar for §6.6 |
+| **Polyworld** (Yaeger 1994) | embodiment and ecology in a 2D world | ecology is what §4.3 and §4.4 are for |
+| **Novelty search** (Lehman & Stanley 2011) | abandoning the objective entirely | we have no objective to abandon |
+| **Chemlambda / autopoietic sets** | new *kinds* of entity from combination | §4.9 is the analogue and is not built |
+
+The pattern: **every system that convincingly showed open-endedness let its
+entities grow.** That is the strongest argument against the current build and
+the reason §4.3 and §4.6 exist. Our bet is that letting the *organisation* grow
+is as good as letting the *genome* grow — and if that bet is wrong, §4.6 is the
+fallback.
+
+---
+
+## 8. The programme
+
+Ordered so each step's measurement is meaningful when it is taken.
+
+**Phase 0 — instrumentation.** §5.5, the strain scheme. Then §6.3, the
+cross-time tournament, because it is the decisive measurement and it is
+independent of every mechanic below.
+
+**Phase 1 — make it evolve.** `mutate_on_replication`. Measure §6.1, §6.2,
+§6.3 against `gol-1`. This is the paper "a graph-structured Blotto world
+evolves", and it is not open-endedness yet.
+
+**Phase 2 — give it an ecology.** `token_colours`, then `mutual_flow_yield`,
+then `edge_proposal`. Measure §6.4, §6.5. Expect organisations here or not at
+all.
+
+**Phase 3 — let it grow.** `growable_layers`, `local_rules`. Measure §6.6.
+
+**Phase 4 — the honest attempt to break it.** §6.7 across every mechanic, and
+the longest run affordable, looking for the asymptote.
+
+Rules for the whole programme, learned the hard way in this project:
+- **Nothing below ~30 seeds is an effect.** Two results here reversed between
+  6 seeds and 20.
+- **No number without its null.** Conquest cycles looked abundant in the
+  thousands and came out *below* chance against a random-neighbour null.
+- **Grep the callers before believing a mechanism matters.** A defect analysed
+  for two days turned out to be in a function with no callers.
+
+---
+
+## 9. Risks
+
+Stated so that hitting one is recognised rather than explained away.
+
+- **The organisation bet fails.** Organisations never appear above a null even
+  with ecology. Then §1.2's reframe was wrong and the genome route (§4.6) is
+  the only one left.
+- **Runaway.** `local_rules` produces agents that set their own mutation rate
+  to zero and freeze, or to one and dissolve. Expected; the ablation catches it.
+- **Detector-driven results.** We build a detector, it finds something, and the
+  something is the detector. This has already happened once here (conquest
+  cycles). Every detector gets a null and a positive control — §4.9 exists
+  partly to *be* that positive control.
+- **The measurement outruns the compute.** Bedau class 3 needs long runs.
+  Checkpointing and the frame window exist; the budget is the constraint.
+- **Definition drift.** Choosing §1.2 because it is winnable is legitimate;
+  quietly re-choosing it *after* seeing results is not. §1.2 is fixed now, in
+  writing, before the experiments.
+
+---
+
+## Appendix A — measured facts, carried over
+
+Everything here was run. These survive the change of goal because they are
+observations, not arguments.
+
+### A.1 Heredity *(`research/pilot_heredity.py`)*
+
+Genotype lifetime, by mutation rate:
 
 | `mutation_probability` | median life | 90th pct | ever > 5 iterations |
 |---|---|---|---|
@@ -93,17 +562,8 @@ the lifetime of a genome.
 | 0.05 | 2 | 7 | 15.0% |
 | 0.00 | 3 | 22 | 31.6% |
 
-The last row is the surprise and the important one: **with mutation switched
-off entirely**, the median genotype still lasts three iterations. So mutation
-is not the only thing destroying genomes — conquest overwrites a node's brain
-with the winner's, and death removes it. There are two independent shredders,
-and turning off the obvious one leaves the other running.
-
-**A lineage's memory.** Take an agent, record its weights and its behaviour on
-a fixed batch of observations, follow its descendants, and ask how far each has
-drifted from its own ancestor — as a fraction of how far two *unrelated* agents
-are from each other. 1.0 means a descendant is no more like its ancestor than a
-stranger is.
+Lineage memory — distance from an agent's own ancestor as a fraction of the
+distance between unrelated agents; 1.0 means nothing is left:
 
 | iterations later | weights | behaviour |
 |---|---|---|
@@ -113,985 +573,75 @@ stranger is.
 | 5 | 0.71 | 0.70 |
 | 10 | **0.92** | **0.89** |
 
-**The heredity half-life is about three iterations.** After ten, essentially
-nothing of the ancestor remains. Any adaptation that takes more than a handful
-of iterations to pay for itself cannot be selected for, because the genome that
-would have paid is gone.
+Selection ablation, 30 seeds:
 
-**Does the selection rule matter at all?** The ablation the method in §9 calls
-for and that nothing here had ever run: keep the world identical, and decide
-each node by a coin among everyone who staked instead of by the Blotto
-resolution.
-
-| winner chosen by | seeds | extinct | median agents | distinct brains | mean degree |
-|---|---|---|---|---|---|
-| stake (as shipped) | 30 | 0/30 | 430 | 373 | 3.10 |
-| **chance** | 30 | 0/30 | **594** | **511** | 3.24 |
-| stake (as shipped) | 5 | 0/5 | 424 | 365 | 3.48 |
-| chance | 5 | 0/5 | 585 | 509 | 3.49 |
-
-Removing the mechanism the algorithm is *about* does not kill the population,
-does not change the graph, and leaves **38% more agents carrying 37% more
-distinct genomes**. Thirty seeds, which is the bar this document sets, and the
-five-seed run is kept above it because the two agree to within a few percent on
-every column — this is not a number that needed more seeds to settle.
-
-The direction is worth stating plainly: it is not that selection makes no
-difference, it is that turning selection **off** makes the population do
-*better* by every measure recorded. A rule that costs diversity and headcount
-while returning nothing measurable is not functioning as selection at all —
-under no heredity it is just an extra way for genomes to be deleted.
-
-### What follows
-
-The population is doing something that looks like evolution — births, deaths,
-competition, a changing graph — and is better described as **drift under
-churn**. Variation without heredity is noise, and selection with a two-iteration
-memory is not selection.
-
-This also explains, retrospectively, two things filed elsewhere in this
-document as puzzles: that 502 agents carried 502 distinct `brain_id`s (§5.2),
-and that a binary brain able to express ten times as many distinct decisions
-does no better than one that can barely express any (§9b.10). Both are what a
-system with no heredity looks like from the outside.
-
-**Nothing about open-endedness can be settled on this engine as it stands.**
-The order of work is: make heredity real, re-measure, and only then return to
-castles, flow modules and activity statistics. §4b lists what to change.
-
----
-
-## 1. The system, stated precisely
-
-A paper needs this in one place, in a form somebody could reimplement.
-
-**State.** An undirected graph `G_t = (V_t, E_t)`. Each agent `u ∈ V_t` holds
-
-- an integer token count `τ(u) ≥ 0`,
-- a policy `π_u` — a feed-forward network, never trained, only copied and
-  perturbed,
-- an inbox of message vectors from its neighbours, one per neighbour and one
-  from itself.
-
-**Conservation.** `Σ_u τ(u) = T` for all `t`, unless
-`tokens_created_per_phase > 0`. Tokens are neither created nor destroyed by any
-rule except the global injection and the resurrection of an extinct world.
-This is the system's energy analogue.
-
-**Locality.** An agent observes and acts only on `N[u] = {u} ∪ N(u)`. Nothing
-in one iteration moves information further than one hop. This is the system's
-speed-of-light limit: a perturbation at `u` cannot influence an agent at graph
-distance `d` in fewer than `d` phases.
-
-**One iteration is two phases.**
-
-*Reproduction.* Every solvent agent observes `N[u]` in one pass, writes a
-message to each target, and decides a fraction of its pile to spend on a child.
-The child gets exactly those tokens, a mutated copy of the parent's policy, and
-a set of links chosen by the parent from `N[u]`. The parent may additionally
-*hand over* one of its own edges: the edge moves rather than being copied.
-Then cleanup.
-
-*The game.* Every agent observes once, writes messages, and stakes its **entire**
-pile across `N[u]` — either spread in proportion to a score or all on one
-target, its own choice. A node's new balance is everything staked on it.
-`resolve` decides who takes each node: the largest staker (the *hegemon*)
-unless a coalition of smaller stakers who flagged part of their stake as
-*revolt* outweighs everyone above them plus the hegemon, in which case the node
-goes to the strongest staker in the rung that tipped it. The winner's policy is
-**copied into the node**. Links that carried no tokens are cut. Then cleanup,
-then every surviving policy mutates.
-
-*Cleanup*, after both phases: agents holding nothing die; then everything
-outside the largest connected component dies; the dead's tokens are scattered
-uniformly over the survivors.
-
-**Selection.** There is no fitness function. A policy spreads by two channels
-only: reproduction (a child carries a mutated copy) and conquest (a winner's
-policy overwrites the loser's). Nothing optimises anything.
-
----
-
-## 2. Is there an optimal strategy?
-
-### 2.1 What theory already says
-
-The staking sub-game is a **Colonel Blotto game** on the neighbourhood: a fixed
-budget divided across several contested fronts, winner-take-all per front.
-Blotto games are the canonical example of a game with **no pure-strategy Nash
-equilibrium** — the equilibrium is a distribution over allocations (Borel 1921;
-Roberson 2006). If the local game inherits that property, then "the optimal
-strategy" does not exist as a pure policy, and a population cannot converge to
-one without becoming invadeable.
-
-Three features push this system further from equilibrium than textbook Blotto:
-
-1. **The budget is endogenous.** An agent's stake next round is whatever was
-   staked *on* it this round. Budget and payoff are the same quantity, so the
-   game is a dynamical system rather than a one-shot contest.
-2. **Revolutions break the total order.** With them off, a node goes to
-   whoever staked most. That is a total order on stake size, it holds in every
-   subset of the contestants, and total orders admit dominant strategies.
-
-   With them on, the winner is not a function of pairwise strength at all.
-   **Demonstrated against the engine's own `_resolve_winner`**: three stakers
-   H (100, none flagged as revolt), M (60, all flagged), S (50, all flagged).
-   Pairwise H beats M and H beats S; add S to the H-versus-M contest and **M
-   wins**, by revolution, while S itself wins nothing. A revolution cannot fire
-   in a two-way contest at all — it would need one agent's revolt to exceed the
-   leader's whole stake — so this is irreducibly a coalition effect.
-
-   In choice-theoretic terms this violates independence of irrelevant
-   alternatives: who wins depends on who else is present. That is what removes
-   the ordering, and it is the precondition for cyclic dominance among evolved
-   policies — but a cycle among *policies* is a stronger claim than this
-   demonstration supports, and establishing one is what E4 is for.
-3. **Conquest replicates the winner's policy into the loser's node.** Selection
-   is not just differential survival, it is direct strategy transmission
-   between neighbours — closer to cultural transmission than to inheritance.
-
-**Conjecture C1.** Revolutions are the mechanic that makes the strategy space
-non-transitive, and non-transitivity is a *necessary* condition for the
-strategic dynamics to be open-ended in this system. With
-`allow_revolutions = False` the population should converge to a narrow band of
-policies and stay there; with it on it should keep turning over.
-
-The demonstration above establishes the *mechanism* — the order is gone. It
-does not establish that evolved policies actually cycle, only that nothing in
-the rules forbids it.
-
-This is a clean, cheap ablation and it should be experiment number one.
-
-### 2.2 Groups
-
-Conquest makes a locally dominant policy overwrite its neighbours', so a winning
-lineage produces a **clonal patch**: a connected region of near-identical
-policies. Within a patch, relatedness is ≈ 1, which is the strongest possible
-condition for Hamilton's rule and for group-level adaptation. Between patches,
-competition happens at boundaries.
-
-This is the structure in which a **transition in individuality** (Maynard Smith
-& Szathmáry 1995) could occur: a patch that coordinates its staking — for
-example, its interior agents feeding tokens to its boundary agents — would
-behave as a single competitive unit. Whether that happens is an empirical
-question with a specific signature, and it is measurable (see §5.4).
-
-**Conjecture C2.** The system's long-run dynamics are between-patch, not
-between-agent, and the effective unit of selection drifts upward over time.
-
----
-
-## 3. Can open-ended evolution happen here?
-
-### 3.1 A retracted argument, and what survives it
-
-An earlier draft of this document argued that strict token conservation
-**precludes** unbounded complexity, on the grounds that "complexity has a cost
-and no channel to pay for itself". That argument is wrong, in two separate
-ways, and the correction matters enough to record rather than quietly delete.
-
-**It is wrong about this system.** Complexity here has no cost. Every brain has
-the same architecture — the layer sizes are a global constant — so a genome is
-a fixed-length vector of weights and there is nothing for an agent to spend on
-being more complicated. Whatever bounds this system, it is not the price of
-complexity.
-
-**It is wrong about zero-sum games generally.** Van Valen's Red Queen (1973) is
-a zero-sum formulation of evolution and is the standard account of *sustained*
-adaptation: in a world where one lineage's gain is another's loss, everything
-must keep evolving to stand still. Host–parasite arms races, Sims' (1994)
-competitive coevolution, and every deep two-player game are zero-sum and
-strategically unbounded. Zero-sum forbids nothing.
-
-**The specific counter-argument that defeats it.** Organisation does not need
-to *produce* surplus to pay for itself; it only needs to take a larger *share*.
-A structure of many agents that holds tokens better than the same agents
-separately is favoured, and nothing in conservation forbids that structure from
-being larger, or from there being more of them. Empires are zero-sum and scale
-anyway. Conservation bounds the *total*, not the *organisation of it* — and the
-total is a parameter.
-
-So the honest position is the weaker one: **conservation bounds the population
-at `T`, and therefore bounds how many lineages and how much structure can
-coexist. It bounds nothing else.** Raising `T` raises that ceiling
-proportionally, which makes "make the world big enough that it never settles"
-a real answer rather than an evasion.
-
-### 3.1a What still gives me pause, stated better
-
-Three arguments that are not the retracted one.
-
-**The genome cannot grow.** Layer sizes are fixed for a run, so a new adaptation
-must be a re-encoding of existing weights and never a new structure. Tierra and
-Avida both let genome length change, and unbounded growth in *encoded*
-complexity is normally what "class 3" ends up meaning. This is a real limit and
-it is a parameter away from being lifted — variable hidden layers, or a
-duplication operator.
-
-**The state space does not expand.** Banzhaf et al. (2016) separate novelty
-*within* a fixed space of possibilities from novelty that *enlarges* the space.
-Here the space is settled at configuration time: a graph, an integer per node,
-weights of a fixed shape. No rule can bring a new *kind* of thing into
-existence. Whether that is fatal is genuinely contested — it is close to the
-central open question of the field — but it is the strongest available argument
-against, and it has nothing to do with conservation.
-
-**Locality may cap coherent structure.** *New, and the most interesting of the
-three.* Information moves one hop per phase. A structure of diameter `D` needs
-`D` phases for one side to learn anything about the other, so a structure can
-only behave as a unit if it is smaller than the distance information travels in
-the time the world stays put. That predicts a **maximum coherent size set by the
-ratio of information speed to the rate of change** — which is a physical-feeling
-limit of the same kind as the one that stops organisms signalling across
-arbitrary distances, and it would bound structure even with `T` infinite.
-
-**Hypothesis H1 (revised).** Conservation is not the binding constraint. What
-bounds structure is the coherence limit: the largest lasting structure has a
-diameter comparable to the number of phases over which the neighbourhood it
-sits in stays recognisable. *Falsified if* the largest persistent clonal patch
-keeps growing with `T` at fixed churn.
-
-### 3.2 The scale question
-
-**Conjecture C3 (mixing length).** Open-endedness requires the world to be
-large compared to its mixing length. In a well-mixed population one strategy
-sweeps and the system is effectively one agent; in a spatially extended one,
-many strategies coexist and boundaries keep generating novelty (Nowak & May
-1992). The relevant ratio is diameter to the distance information travels in
-the time a sweep takes.
-
-At `T = 10^6` tokens the seed graph is 10,000 agents and the carrying capacity
-scales with `T`, since an agent needs at least one token to live. Whether that
-is *interestingly* bigger depends on whether the evolved graph stays
-small-world (`D ~ log N`, everything mixes, one strategy can sweep) or becomes
-lattice-like (`D ~ N^{1/d}`, many quasi-independent domains). The box-counting
-dimension already implemented is the right instrument for exactly this.
-
-**Prediction P3.** If `D` grows sub-logarithmically with `N`, larger worlds
-will *not* be qualitatively richer — they will be many copies of the same
-dynamics. If `D` grows as a power of `N`, they will be.
-
----
-
-## 3.4 Castles: the definition is the hard part
-
-The criterion that started this: *if many nodes together form a kind of castle,
-and the castle can get larger and there can be more of them, that is already
-open-ended evolution.* A structural criterion rather than a genetic one, a
-reasonable thing to mean by the term, and — in principle — measurable.
-
-In practice, defining the thing is most of the work, and two successive
-attempts here were both wrong for the same underlying reason: each smuggled in
-an assumption about what a castle is made of.
-
-### 3.4.1 Not a family
-
-The first attempt required every member to share a lineage. That builds the
-answer into the question. Clonality guarantees relatedness ≈ 1, which
-guarantees Hamilton's rule is satisfied, which is assuming the mechanism the
-measurement is meant to detect — and it makes the more interesting object
-invisible by construction. Biology has both kinds: multicellularity is clonal,
-eukaryogenesis was symbiotic.
-
-**Symbiosis is already available in the rules.** **Demonstrated against
-`_resolve_winner`**: an agent defending its node with a self-stake of 100, and
-a neighbour of any lineage staking `x` on the same node. Below the self-stake
-the tokens arrive, the defender keeps its node *and its brain*, and the giver
-is poorer — a gift. Only above it does the stake become a conquest. Flagging
-the gift as revolt changes nothing, because a revolution needs a coalition and
-one revolter is not one. So unrelated agents can already feed each other
-without taking each other over; no new mechanic is needed for a symbiotic
-castle to be *possible*, only for it to be *worth* it.
-
-### 3.4.2 Not a fixed set of agents either
-
-The second attempt kept a membership requirement: a castle persists if a set
-overlapping it in half its members satisfies the flow condition next iteration.
-That is also too strong, and the counter-example is sharper.
-
-*Three nodes take each other's nodes in a cycle.* Conquest overwrites the
-loser's brain with the winner's, so every member is replaced every iteration —
-and the arrangement stands. **The matter turns over and the pattern persists.**
-That is a glider, not an organism, and no definition anchored on who the
-members are can see it.
-
-And if a triangle can do it, so can any cycle length, and so can patterns that
-do not return to themselves every iteration but every **two, or three, or `p`**
-— an oscillator rather than a still life. The object to be detected is
-therefore a **spatiotemporal pattern in the flow field**, characterised by its
-period as well as its shape, and not a set of anything.
-
-### 3.4.2b Cycles are one shape of structure, not the shape
-
-Conquest cycles were the first thing looked for because they are cheap to
-detect, not because they are what a castle must be. Reading the search for
-them as the search for structure would be a mistake: a detector that finds
-nothing has ruled out **one shape**.
-
-Other shapes a stable structure could take here, each needing its own detector:
-
-| shape | what it looks like | detector | status |
-|---|---|---|---|
-| **conquest cycle** | agents take each other's nodes in a ring; membership stable, genotypes churn | cycles in the conquest map | **measured, at or below chance** |
-| **token cycle** | tokens circulate a loop without anyone being conquered | net circulation in the flow digraph — cycles that carry flow one way round | not yet measured |
-| **stable group** | agents that neither conquer nor circulate, and simply keep their trade among themselves | flow modules, L0 | **measured: 41.5% compression** |
-| **glider** | a group that keeps its shape while walking across the graph | flow modules matched across time by overlap, L1 | implemented; nothing identified yet |
-| **oscillator** | a configuration returning to itself every `p` iterations, not every one | recurrence of local configuration at lag `p`, L2 | **not implemented — a real gap** |
-| **mutualism** | several lineages depending on each other, in any of the above shapes | mixedness of a module, plus the removal test | not yet measured |
-
-The third row is the one that needs saying plainly, because it is the shape
-most easily overlooked: **a castle does not have to do anything dramatic.** A
-set of agents that quietly trades among itself, conquers nobody, moves nowhere
-and simply persists is as much a structure as a ring of mutual predation — and
-it is the one a cycle detector is guaranteed to miss.
-
-### 3.4.3 What is actually there: measured
-
-Conquest gives every node exactly one winner, so the conquest map is a
-functional graph and its cycles are cheap to find. Over 40 iterations, three
-seeds, ~2,500 tokens, against a null in which each conquered node is taken by a
-uniformly chosen neighbour instead of by whoever actually won it:
-
-| seed | cycle length | observed | null | ratio |
+| winner chosen by | extinct | median agents | distinct brains | mean degree |
 |---|---|---|---|---|
-| 3 | 2 | 731 | 842 | **0.87×** |
-| 3 | 3 | 6 | 5 | 1.20× |
-| 3 | 4 | 8 | 8 | 1.00× |
-| 7 | 2 | 308 | 338 | **0.91×** |
-| 7 | 3 | 5 | 10 | 0.50× |
-| 11 | 2 | 1,618 | 1,823 | **0.89×** |
-| 11 | 3 | 130 | 77 | 1.69× |
-| 11 | 4 | 61 | 25 | 2.44× |
+| stake (as shipped) | 0/30 | 430 | 373 | 3.10 |
+| **chance** | 0/30 | **594** | **511** | 3.24 |
 
-Cycles are **abundant** — hundreds to thousands per run, triangles among them —
-and mostly **at or below chance**. Two-cycles, by far the commonest, are
-consistently *less* frequent than random rewiring produces, in every seed. The
-longer cycles are inconsistent between seeds on small counts.
+### A.2 Scale
+Extinction falls with founder count: 3/3 dead at 6 founders, 0/3 at 100.
+Founding lineages still coexist after 60 iterations in 2/3, 3/3, 2/3 of runs at
+40, 100, 250 founders. **Scale is a real answer, not an evasion.**
 
-**Flow modules, on the other hand, find something.** L0 (§3.4.4) on a
-59-iteration run, 50 founders, decisions recorded:
+### A.3 The strategy space has no order
+Revolutions make the winner depend on who else is present rather than on
+pairwise strength. Demonstrated on the engine's own `_resolve_winner`: H beats
+M and H beats S pairwise, but adding S to the H-versus-M contest makes **M**
+win, while S itself wins nothing.
 
-- describing a walk on the token flow as modules is **41.5% shorter** than
-  describing it with no grouping at all;
-- about **60 modules** exist at any moment, the largest holding 35 agents;
-- the longest-lived lasted **48 frames**, and across modules surviving three
-  frames or more, **23% of members are replaced per frame** — so a module of
-  that age has turned over its membership several times while keeping its
-  identity.
+### A.4 Flow modules
+41.5% compression of a token-walk, longest-lived module 48 frames, ~23%
+membership turnover per frame. **No null model — this number does not yet
+count as evidence.**
 
-That last pair is the interesting one: persistence with turnover is precisely
-the pattern-not-a-set case that motivated §3.4.2. **It is not yet evidence**,
-for the same reason the cycles were not: there is no null. A flow network with
-the same degrees and weights but shuffled endpoints would compress by *some*
-amount, and until that number exists 41.5% is uninterpretable. Building that
-control is the single most valuable next measurement in this document.
+### A.5 Conquest cycles are not structure
+Thousands per run; 2-cycles at **0.87–0.91×** a random-neighbour null. Below
+chance. The abundance was the trap.
 
-So the honest reading of the cycles is: **no signal yet, and the abundance was
-the trap.**
-Counting cycles without a null would have produced a confident and completely
-wrong claim about self-sustaining structure. Two caveats keep this from being
-a negative result either: three seeds is nothing, and the null is crude — real
-conquests are weighted by stake, and a uniform-neighbour null does not preserve
-that, so it may not be the right chance to compare against. A better null
-shuffles outcomes while preserving each node's stake distribution.
+### A.6 Symbiosis is already expressible
+An agent defending its node with a self-stake while a neighbour adds a smaller
+stake is a gift the rules already allow. Demonstrated against `_resolve_winner`.
 
-### 3.4.4 A ladder of definitions
-
-Rather than hold out for the right definition, work up from the cheapest one
-that is not obviously circular. Each rung is measurable with what a run already
-records.
-
-**L0 — flow modules.** Communities of the token-flow graph found by a
-flow-based method (the map equation, Rosvall & Bergstrom 2008, is the natural
-choice: it finds groups that flow persists inside, which is the property
-wanted, rather than groups that are merely densely connected). No lineage, no
-assumption about membership, purely what the agents did.
-
-**L1 — modules that persist while their members change.** Match modules across
-iterations by flow overlap rather than by shared membership, so a module whose
-agents are entirely replaced is still the same module. Dynamic community
-detection has standard machinery for this (Mucha et al. 2010).
-
-**L2 — patterns with a period.** For each candidate, test whether its
-configuration recurs at lag `p` for `p = 1, 2, 3, …`, by recurrence analysis
-over local configurations. This is the rung that catches the oscillators, and
-the one no measurement here currently reaches.
-
-**L3 — more than the sum.** Perturbation: cut a part out and compare what
-remains against the same cut made on a size-matched random subset. A castle is
-a thing whose removal costs more than its size.
-
-**L4 — the principled version.** Information-theoretic individuality (Krakauer,
-Bertschinger, Olbrich, Flack & Ay 2020): an individual is an aggregate whose
-own past predicts its future better than its environment's past does. This is
-the right definition and it is expensive; L0–L3 are the approximations worth
-having in the meantime.
-
-The relevant prior art for L1–L2 is **computational mechanics on cellular
-automata** (Crutchfield & Hanson 1993): identify the statistically regular
-background domains first, and then a structure is *whatever is not the
-background* — a defect between domains. That is exactly the right shape of
-answer for finding gliders without knowing in advance what a glider looks like,
-and it sidesteps the definitional problem by defining structure negatively.
-Beer's analysis of gliders in the Game of Life as autopoietic systems is the
-other worked example of taking a known pattern and asking rigorously what makes
-it an individual.
-
-### 3.4.5 What to measure once something is found
-
-Each as a function of `T`:
-
-- **size** — agents involved in the largest persistent pattern;
-- **count** — how many exist at once;
-- **lifetime** — how long the longest-lived survives;
-- **period** — whether it is a still life, or an oscillator, and of what period;
-- **mixedness** — how many clades take part, measured rather than required.
-
-**Hypothesis H4 (castles).** Size and count grow without bound with `T`;
-lifetime does not, being capped by the coherence limit of §3.1a. If all of them
-grow, the structural criterion for open-endedness is met. If size grows but
-lifetime saturates, the world gets *wider without getting deeper* — an ecology
-of empires rather than a transition in individuality.
-
-**Hypothesis H5 (symbiosis).** Mixed-lineage patterns occur, and their parts
-are interdependent rather than merely adjacent (the L3 test). Finding one would
-be the stronger result, because conquest is a homogenising force — winning a
-node overwrites its brain — so a mixed structure has to be actively maintained
-against a rule that is constantly trying to make it clonal.
-
+### A.7 The brains
+A noise input is ~4.4× as loud as a magnitude in the first layer (38.5% of
+variance over 5 inputs), and removing noise entirely changes survival not at
+all over 30 seeds. Widening a binary brain's last hidden layer takes it from 1
+to 10 distinct staking scores and cuts coin-flip ties from 27% to ~4%, and
+changes survival not at all. **How finely an agent can state a preference is
+not currently what is being selected on** — consistent with §3.1.
 
 ---
 
-## 4. What is missing from the model
-
-Ordered by how much I expect each to matter. **§4.0 was added after §0b and
-displaces everything under it**: the rest are reasons this system might not
-reach open-ended evolution, and §4.0 is the reason it is not currently doing
-evolution at all. The others are worth nothing until it is fixed.
-
-### 4.0 Mutation is not tied to replication — *the one that has to be first*
-
-Measured in §0b: heredity half-life about three iterations, median genotype
-life one iteration, and the selection rule making no difference to any
-population statistic.
-
-**The change.** Move the mutation out of the per-iteration loop over all brains
-and into `_spawn_child`, where it already half is — a child is already a
-mutated copy of its parent. Deleting the world-wide loop is a two-line edit:
-
-```
-# blotto_phase, at the end
-for brain in self.brains.values():
-    self._mutate_brain(brain)          # <- delete
-```
-
-An agent's genome would then change only when it is copied, which is what
-makes a lineage a lineage.
-
-**What that alone does not fix.** The second shredder from §0b — conquest
-overwrites a node's brain with the winner's, so a genome vanishes when its
-carrier loses even with mutation off. That is not a defect: it *is* the
-selection mechanism, and it is how a successful genome spreads. But it means
-the unit that persists is the genome-as-copied, not the agent, and every
-measurement of lineage has to follow brains rather than nodes. The engine
-already tracks both ancestries separately (§1), which turns out to have been
-the right call for a reason nobody had stated.
-
-**The test that decides whether it worked.** Re-run
-`research/pilot_heredity.py`. Success is the heredity half-life going from
-three iterations to something bounded only by how long a lineage survives, and
-the §0b ablation table separating — a world where nodes are won by a coin
-should then be *worse*, not better. If the ablation still does not separate
-after heredity is real, the problem is deeper than mutation and this document
-needs rewriting from §2.
-
-**Why this was not noticed for so long.** Every statistic this project built
-looks healthy under no heredity. Diversity is maximal, lineage forests are
-lush, flow modules compress, activity accumulates. None of those measures
-*retention*, and a system that forgets everything scores well on all of them.
-The one measurement that would have caught it — comparing a descendant to its
-own ancestor against a background of strangers — takes about forty lines.
-
-### 4.1 No positive-sum interaction
-
-There is no rule by which cooperation produces surplus. `tokens_created_per_phase`
-injects tokens globally and unconditionally, which is weather, not production.
-
-**Proposed mechanic — mutual flow yields.** An edge that carries tokens in
-*both* directions in the same game phase yields a small number of new tokens,
-split between its ends. This is minimal, local, conserves the spirit of the
-design (nothing is created except by an interaction), and converts the game
-from zero-sum to variable-sum. It also creates an immediate defection problem
-— staking on a neighbour is a cost — which is the substrate for everything
-interesting in evolutionary game theory.
-
-The theory here is well developed: Nowak's five rules (2006), and specifically
-**network reciprocity**, which predicts cooperation is favoured when the
-benefit-to-cost ratio exceeds the mean degree, `b/c > k` (Ohtsuki, Hauert,
-Lieberman & Nowak 2006). This system has an evolving `k` (**measured**: mean
-degree falls from ~3.9 to ~3.2 over 45 iterations), so it could pass through
-that threshold from either side — and the agents partly control `k` themselves,
-which makes the threshold an evolvable target rather than a parameter. That is
-a genuinely novel setting for that result.
-
-### 4.2 The graph can only erode
-
-Edges are created **only** at birth, from the parent's existing neighbourhood,
-and destroyed **every iteration** by pruning every zero-flow edge. There is no
-mechanic by which an existing agent forms a new connection.
-
-**Measured**: mean degree falls from ~3.9 to ~3.2 over 45 iterations across
-five seeds (seed graph `k = 6`). The graph is thinning. Long-run behaviour is
-unmeasured and is a priority: a graph that tends to a tree has a diameter that
-grows, a fragile largest component, and mass extinction by disconnection.
-
-**Proposed mechanic — reach.** An agent may spend tokens to create an edge to
-a neighbour's neighbour (exactly two hops, preserving locality). Cost paid in
-tokens keeps conservation. This makes topology an evolvable trait with a price
-rather than a one-shot inheritance, and turns the system into a proper adaptive
-network (Gross & Blasius 2008).
-
-### 4.3 No persistent public signal
-
-Messages are private, per-edge, and last one phase. There is no stigmergy — no
-mark left on a node or edge that persists, decays, and is readable by whoever
-arrives later. Stigmergy is how most biological collectives coordinate without
-central control, and it is a very cheap addition: one decaying vector per node.
-
-### 4.4 No identity, no tags
-
-An agent cannot tell *who* it is dealing with beyond the content of a message.
-There is no heritable tag, so no tag-based assortment (Riolo, Cohen & Axelrod
-2001), no reputation, no partner choice. Adding a small heritable tag vector
-that agents can observe would open green-beard and reciprocity routes that are
-currently closed.
-
-### 4.5 No environmental heterogeneity
-
-Every node is identical. All niches must be self-generated. This is possible
-but hard; giving nodes intrinsic variation (a per-node yield, or a per-node
-cost of living) would supply exogenous niches to specialise into.
-
-### 4.6 Death has only two causes
-
-Starvation and disconnection. No ageing, no density dependence, no
-catastrophes. Periodic disturbance is a classic driver of diversity (the
-intermediate disturbance hypothesis) and is one line of code.
-
----
-
-## 5. Methods
-
-### 5.1 What already exists
-
-`gol_series.py` computes ~60 per-frame statistics, and they are parity-tested
-against a JavaScript reimplementation. Directly relevant: `gini`,
-`tokenEntropy`, `degreeEntropy`, `meanDegree`, `transitivity`, `diameter`,
-`meanPathLength`, `components`, `dimension` (box-counting, greedy true-ball
-covering), the scale-free exponent (MLE with KS-selected `k_min`),
-`revolutions`, `revoltShare`, `spreadShare`, `selfAllocationShare`,
-`prunedEdges`, `starved`, `orphaned`.
-
-This is a substantial measurement apparatus and most of the structural work is
-already done.
-
-### 5.2 What does not exist, and blocks everything in §6
-
-**There is no lineage identity.** `brain_id` is reassigned on *every successful
-mutation*, and mutation runs on every agent every iteration. So `brain_id` is a
-genotype *version* number, not a clade label.
-
-**Measured**: in a 502-agent population there were **502 distinct
-`brain_id`s** — one per agent. The two statistics that look like lineage
-measures, `distinctBrains` and `distinctLineages`, are therefore not measuring
-lineage diversity; they are close to population size. Any claim about lineage
-turnover computed from them today would be an artefact.
-
-It looked as though the information was nonetheless recorded — each frame
-carries `brain_ids` and `parent_brain_ids`. **It is not.** Building
-`research/phylogeny.py` established that the frames are insufficient, and the
-reason is specific: winning a node copies the winner's brain, and the copy is
-then mutated at the end of the phase. Only the second of those two ids is ever
-written to a frame, so the copy — which is the *link in the chain* — is
-invisible.
-
-**Measured: 49% of the brain ids a run creates never appear in any frame.**
-Reconstructing from frames alone therefore breaks every chain within a step or
-two and hands back one clade per agent, which is the very artefact the tool
-exists to avoid. On a 50-iteration run it reported 524 clades in a population
-of 593, and a dominant-clade turnover rate of 0.68 — all noise.
-
-Two consequences:
-
-**For runs made in process**, `research/phylogeny.py --simulate` traces every
-link as the engine makes it, and the reconstruction is then exact (`unrooted:
-0`). The research in §6 can proceed today on traced runs.
-
-**For runs recorded to disk**, this has now been fixed in the engine.
-`brain_id` names a *genotype*: a copy keeps its source's id, because it is the
-same genotype, and only mutation allocates a new one. Ids that never reach a
-frame fell from **49% to 4.5%**, and reconstruction from frames alone now gives
-answers identical to the traced version — 1 clade, 100% top share, 4 turnovers,
-coalescence lag 18, against 5 unrooted stragglers instead of thousands.
-`distinctBrains` counts genotypes for the first time, so `SERIES_VERSION` went
-to 16.
-
-Runs recorded **before** that change cannot have their ancestry rebuilt, and
-nothing can recover it: the missing ids were never written down. The Lineage
-view detects them by their root share and says so rather than drawing a picture
-of nothing.
-
-**What is still true.** `brain_id` remains a genotype version, not a clade
-label — it changes on every mutation, and every agent mutates every iteration.
-Clades are *derived* from the forest rather than stored on an agent, because a
-clade is a choice of anchor and there is no single right one: founder clades
-collapse to one within about seventeen iterations, so a stored founder label
-would read "1" forever, and the informative measure is a sliding window, which
-needs the forest anyway.
-
-`distinctLineages` never counted lineages — it counts distinct *parents* among
-the living, one hop back. **Measured** at the end of a 25-iteration run: 176
-agents, 146 genotypes, **105 distinct parents, and 1 actual founder clade**. It
-is now called `distinctParents`, which is what it is.
-
-A real family count came with it. `cladesInWindow` counts how many separate
-families the living divide into, a family being everything descended from one
-agent alive `CLADE_WINDOW` iterations ago (8). It is computed in the series
-builder rather than in `frame_stats`, because it needs history and a frame
-statistic by definition does not — which also keeps the Python and JavaScript
-implementations in parity, since a single frame cannot produce it on either
-side.
-
-It uses a **rolling** window of ancestry, not the whole forest, so it stays
-bounded on a long run, and it is left **absent** rather than guessed whenever
-the chain is broken: `export_every > 1`, or a run long enough that the series
-had to be sampled down. Ancestry is a chain and a chain cannot be sampled.
-
-**Measured** over 30 iterations of a 40-founder world: agents ranged 56 → 205
-and genotypes 48 → 168 while families stayed between **20 and 28**. So it is
-not tracking the population, which is exactly what the statistic it replaces
-was doing.
-
-### 5.3 Definitions to fix before measuring
-
-- **Clade.** The set of agents whose most recent common ancestor is at depth
-  ≤ `d` in the `parent_brain_id` forest. `d` is a free parameter and results
-  must be shown to be robust across it.
-- **Persistent adaptation.** Following the MODES convention (Dolson, Vostinar,
-  Wiser & Ofria 2019): a lineage is counted only if it still has descendants
-  after a filter interval, which removes the noise of transient mutants. This
-  is essential here, where every agent mutates every iteration.
-- **Evolutionary activity** (Bedau & Packard 1992; Bedau, Snyder & Packard
-  1998). Activity `A_i(t)` = cumulative presence of clade `i`. Report new
-  activity, mean activity, and diversity — each **normalised against a neutral
-  shadow**, without which none of the three means anything.
-- **Neutral shadow.** The same run with selection removed but demography intact:
-  replace the conquest winner with a uniformly random staker on that node.
-  Population dynamics, token flow and graph dynamics are preserved; only the
-  *direction* of selection is destroyed. This is the control every OEE claim
-  will be compared against.
-
-### 5.4 Metrics designed for the specific questions
-
-**Non-transitivity index (for C1).** Sample policies from iterations
-`t_1 < … < t_m` of one run. Build an arena: a fixed small graph, two policies
-seeded on opposite halves, run `k` iterations, record which holds more nodes.
-Fill a dominance matrix `W`, then count **intransitive triads** — triples where
-`A > B > C > A` — against the expectation under a random-tournament null. A
-population converging on an optimum gives a near-transitive matrix; a Red Queen
-gives an intransitive one. This is the CIAO methodology of Cliff & Miller
-(1995), and it is the sharpest available test of "is there an optimal
-strategy".
-
-**Communication use.** Mutual information between an agent's received messages
-and its subsequent allocation, against a control where inboxes are shuffled
-between agents. If the two are indistinguishable, communication has not
-evolved, whatever the message vectors contain. Also worth measuring across the
-`message_prepass` ablation, since that option exists precisely to change what
-an agent knows when it acts.
-
-**Multilevel selection (for C2).** Partition the graph into communities, then
-apply the Price equation to decompose the change in a trait's population mean
-into between-community and within-community covariance. A rising between-group
-share is the quantitative signature of the unit of selection moving upward.
-
-**Patch structure.** Assortativity of clade identity across edges; the
-distribution of clonal patch sizes; the fraction of edges that are
-within-clade. Whether the world becomes a mosaic of clones, and at what scale.
-
-**Mixing length (for C3).** Perturb one agent's tokens and measure how the
-divergence from an unperturbed twin run spreads with graph distance and time.
-Gives the actual information velocity, against the theoretical bound of one hop
-per phase.
-
----
-
-## 6. Experiments
-
-Each is stated as: question, design, response variables, and what would falsify
-the hypothesis. All are local runs; disk is cheap, RAM is the binding
-constraint (§7).
-
-**E1 — Mechanic ablation.** Full factorial over `allow_revolutions`,
-`allow_handover`, `exchange_messages`, `message_prepass`, with ≥ 30 seeds per
-cell (the null A/B in §8 is the reason for that number). Responses: survival to
-a fixed horizon, evolutionary activity class, non-transitivity index, mean
-degree trajectory. *Falsifies C1 if* the non-transitivity index is
-indistinguishable between revolutions on and off.
-
-**E2 — Neutral shadow.** Every E1 cell repeated with the random-winner control.
-Provides the normaliser for all activity statistics. Without this, E1 measures
-nothing.
-
-**E3 — Scale sweep.** `T ∈ {2·10³, 10⁴, 10⁵, 10⁶}` with a *fixed* small binary
-brain so that world size and agent complexity are not confounded. Responses:
-population, diameter, box dimension, number of coexisting clades, mixing
-length. *Tests P3.*
-
-**E4 — Cross-time tournament.** One long run, policies checkpointed every `n`
-iterations, all-pairs arena as in §5.4. *The direct test of "is there an
-optimal strategy".*
-
-**E5 — Positive-sum extension.** Implement mutual-flow yields (§4.1) as an
-option, then repeat E1/E2 with it on. *Tests H1 — the single most important
-experiment in this document.*
-
-**E6 — Long run.** One run, as long as patience allows, `export_every = 1`, for
-the activity statistics. Everything else is a pilot for this.
-
-**E7 — Castles against scale.** `T` over as wide a range as memory allows, with
-the brain held fixed, measuring pattern size, count, lifetime, **period** and
-mixedness (§3.4.5) and the time for the founding lineages to collapse to one.
-Requires at least rung L1 of §3.4.4, and preferably L2 — nothing currently
-measured detects an oscillator. *Tests H4, and settles
-whether "big enough that it never finishes" is a real answer.* This is the
-experiment the disagreement in §3.1 turns on, and it should come first.
-
----
-
-## 7. Constraints and threats to validity
-
-**RAM, not disk.** Memory is population × policy size. The default float brain
-is ~10,000 weights at 8 bytes = 80 KB per agent, so 10,000 agents is ~800 MB of
-weights alone. Reaching `T = 10⁶` therefore *requires* small binary brains
-(1 byte per weight). **This confounds world size with agent capacity**, and E3
-must hold the brain fixed and report that it did.
-
-**Extinction is common.** **Measured**: 9 of 20 binary runs died within 25
-iterations. Any statistic conditioned on survival is conditioned on a
-non-random subsample. Report extinction as a primary outcome, not as missing
-data.
-
-**Small samples lie.** **Measured, and learned the hard way**: a 6-seed
-comparison showed 2 extinctions versus 0 and a 56% lift in median population;
-the same comparison at 20 seeds showed 9 versus 9 and no difference. Nothing
-below ~30 seeds should be reported as an effect.
-
-**Abundance is not evidence.** Conquest cycles number in the thousands, and are
-at or below what random rewiring produces. Any count of a pattern needs a null
-that produces the same pattern by chance, and the null has to be a good one —
-the uniform-neighbour null used in §3.4.3 does not preserve the fact that
-conquests are weighted by stake, so it is a first approximation and not the
-last word.
-
-**Measuring at one lag finds only one kind of thing.** A structure that returns
-to itself every second or third iteration is invisible to a test that asks
-whether it is there again next iteration. Everything measured so far tests
-period 1.
-
-**The pilot statistics are not what they appear.** See §5.2. Do not use
-`distinctBrains` or `distinctLineages` as diversity measures.
-
-**No reference implementation.** Results here cannot be compared against Avida
-or Tierra directly. Comparisons must be structural (activity classes) rather
-than quantitative.
-
----
-
-## 8. Preliminary observations
-
-All small, all pilots, none conclusive.
-
-| observation | measurement | status |
-|---|---|---|
-| Bigger worlds are not swept | founders still coexist after 60 iterations in 2/3, 3/3, 2/3 of runs at 40, 100, 250 founders | supports scale as an answer |
-| Extinction collapses with size | 3/3 dead at 6 founders, 0/3 at 100 | any statistic conditioned on survival is conditioned on size |
-| Flow has group structure | modules compress a token-flow walk by 41.5%; longest lived 48 frames at 23% turnover per frame | needs a null before it is a result |
-| Conquest cycles are common but unremarkable | hundreds to thousands per run; 2-cycles at **0.87–0.91× chance** in every seed | no signal; the null is what makes it a result |
-| Symbiosis needs no new rule | a stake below a neighbour's self-stake transfers tokens without conquest | changes what §4.1 has to argue for |
-| **One founder sweep, then none** | 50 founding clades → 1 by iteration ~17; afterwards the coalescence lag grows at one per iteration | see below |
-| Mean degree declines | 3.9 → 3.2 over 45 iterations, 5 seeds, seed `k = 6` | the graph erodes; long-run unknown |
-| Frames cannot carry ancestry | 49% of brain ids never reached a frame | **fixed**: a copy keeps its genotype's id, now 4.5% |
-| No lineage identity | 502 agents, 502 distinct `brain_id`s | blocks all lineage statistics |
-| Extinction is common | 9/20 binary runs dead inside 25 iterations | affects every downstream design |
-| Encoding resolution | binary input ladder: 15 → 36 levels after the split | no measured survival effect at n = 20 |
-| Binary decisions are coarse | ~9% of paired heads exactly tied; 17 distinct staking scores vs 936 for float | output layer width, not input encoding |
-| Float input balance | noise is 35% of first-layer variance from 5 of 54 inputs | unnormalised inputs; nobody chose this |
-
-### 8.1 The first real lineage result
-
-From a traced 40-iteration run (seed 5, 2500 tokens, 50 founders), clades named
-by founder:
-
-- The 50 founding lineages collapse to **one** by about iteration 17. One
-  founder's descendants hold 100% of the population thereafter.
-- After that sweep the **coalescence lag grows by one per iteration** — 16, 18,
-  20, … 28 — which means the population's most recent common ancestor is a
-  *fixed* brain from around iteration 10 and **nothing has swept since**.
-- Dominant-clade turnover over the whole run: 3 changes in 80 frames.
-
-So the early dynamics are a hard selective sweep and the later dynamics are
-not. Under a sliding five-iteration window, recent ancestry is much livelier —
-62 clades, top share 6.7%, 50 turnovers — so sub-lineages do keep replacing one
-another locally without any of them fixing globally.
-
-**And that run is not representative.** It was one seed at one size, and
-running the same measurement across sizes shows the sweep is a small-world
-phenomenon. Founding families surviving after 60 iterations, three seeds each:
-
-| tokens | founders | died out | swept to one family | still many |
-|---|---|---|---|---|
-| 600 | 6 | **3/3** | – | – |
-| 1,500 | 15 | 2/3 | 1 (at iteration 25) | – |
-| 4,000 | 40 | 1/3 | – | **2/3** |
-| 10,000 | 100 | 0/3 | – | **3/3** |
-| 25,000 | 250 | 0/3 | 1 (at iteration 33) | **2/3** |
-
-Two things move together as the world grows: **extinction risk collapses**
-(3/3 → 2/3 → 1/3 → 0/3 → 0/3) and **the founding lineages stop being swept
-away**. Above about forty founders they usually still coexist after sixty
-iterations, in populations of two to four thousand agents.
-
-That is direct support for "make the world big enough and it does not settle",
-and it is evidence against reading §8.1's single sweep as the system's
-characteristic behaviour. It is not yet evidence that a large world *never*
-settles: sixty iterations is short, and a run that has not coalesced by then
-may simply be slower. What it does establish is that the sweep time is not a
-constant of the model, and that small worlds are the ones that end quickly.
-
-That combination, a single early sweep followed by no fixation, is exactly the
-signature that needs a neutral shadow (§5.3) to interpret: it is equally
-consistent with strong frequency-dependent selection maintaining diversity and
-with selection having simply stopped mattering. Distinguishing those two is
-what §6's E2 is for. Forty iterations is also far too short to claim either.
-
----
-
-## 9. Literature to engage with
-
-Listed from working knowledge; every one needs checking against the actual
-paper before it is cited.
-
-**Open-ended evolution.** Bedau & Packard (1992), measurement of evolutionary
-activity. Bedau, Snyder & Packard (1998), classification of long-term
-evolutionary dynamics — the class 1/2/3 scheme this document uses. Taylor et
-al. (2016), *Open-Ended Evolution: Perspectives from the OEE Workshop in York*.
-Packard et al. (2019), overview and editorial introduction. Banzhaf et al.
-(2016), defining and simulating open-ended novelty. Dolson, Vostinar, Wiser &
-Ofria (2019), the MODES toolbox — the most directly reusable methodology here.
-Soros & Stanley (2014), necessary conditions via Chromaria. Standish (2003), on
-what open-ended even means.
-
-**Artificial life systems.** Ray (1991), Tierra. Ofria & Wilke (2004), Avida.
-Channon, Geb. Yaeger, Polyworld. These are the comparison class.
-
-**Evolutionary graph theory.** Lieberman, Hauert & Nowak (2005), evolutionary
-dynamics on graphs — amplifiers and suppressors of selection. Ohtsuki, Hauert,
-Lieberman & Nowak (2006), `b/c > k`. Nowak & May (1992), spatial chaos. Nowak
-(2006), five rules. Gross & Blasius (2008), adaptive coevolutionary networks —
-the closest existing framing for a graph the agents rewire themselves.
-
-**Game theory.** Borel (1921) and Roberson (2006) on Colonel Blotto and the
-absence of pure equilibria. Cliff & Miller (1995) on CIAO plots and measuring
-progress in coevolution.
-
-**Selection theory.** Price (1970), the covariance decomposition. Maynard Smith
-& Szathmáry (1995), the major transitions. Wilson & Sober on multilevel
-selection.
-
----
-
-## 9b. Open questions
-
-Ordered by how much answering one would move the claim.
-
-1. **Is 41.5% compression more than chance?** Everything the flow modules say
-   rests on a null that does not exist yet: the same flow network with
-   endpoints shuffled, degrees and weights preserved. Until then the modules
-   are a picture, not a result.
-2. **Does a large world ever settle?** Founding lineages survive 60 iterations
-   at 100+ founders. Sixty is short. The question is whether the coalescence
-   time grows with `T` without bound or merely slowly.
-3. **Are there oscillators?** Nothing implemented detects a structure with a
-   period greater than one, and there is no reason to think period-1 is the
-   common case.
-4. **Do token cycles exist?** Circulation without conquest has not been looked
-   for at all.
-5. **Are any modules mixed-lineage?** The lineage forest and the flow modules
-   are both computed and have never been crossed with each other. This is a
-   cheap join and would answer whether symbiosis actually happens.
-6. **Does the graph erode to nothing?** Mean degree falls 3.9 → 3.2 over 45
-   iterations. Where does it go over 5,000?
-7. **Does non-transitivity actually produce cycling policies?** The order is
-   provably gone (§2.1); whether evolved strategies cycle is unmeasured.
-8. **What bounds coherent structure — is it the light-cone?** H1's revised
-   form predicts a maximum size set by information speed against churn. No
-   measurement addresses it.
-9. **Is the population the right unit at all?** If the answer to 5 is yes, the
-   whole measurement apparatus is aimed at the wrong level.
-10. **Why does a more expressive brain do no better?** Measured, thirty seeds
-    (`research/pilot_brain_inputs.py`): widening a binary brain's last hidden
-    layer from 10 to 128 takes it from 1 distinct staking score to 10 and cuts
-    exact ties — which a coin currently settles — from 27% to about 4%, and
-    changes survival not at all. Extinction is flat to slightly worse and the
-    median population drifts down. Removing the float brain's noise inputs
-    *entirely* is likewise indistinguishable from doubling them, though a noise
-    draw is about 4.4x as loud as a magnitude in the first layer.
-
-    Both are null results and both were expected to be effects, so the
-    interesting reading is that **how finely an agent can state a preference is
-    not what is being selected on**. That is either a fact about this game —
-    the Blotto resolution may be coarse enough that precision is wasted — or a
-    sign that the score carries less of the decision than assumed. It bears on
-    the claim directly: if policy precision is not under selection, the space
-    the agents are actually searching is smaller than the architecture suggests.
-
----
-
-## 10. Immediate next steps
-
-**Rewritten after §0b.** The old list is below it, unchanged, because most of
-it is still the right list — just not yet.
-
-1. **Tie mutation to replication** (§4.0). Two lines. Everything else waits on
-   it, because every measurement taken before it is a measurement of drift.
-2. **Re-run `research/pilot_heredity.py`.** Success is a heredity half-life
-   bounded by how long a lineage lives rather than by the mutation rate, and
-   the ablation table separating in the right direction.
-3. **The cross-time tournament** (§5.4, and CIAO in the Literature page). Play
-   a late population against its own ancestors under identical conditions. It
-   is the only measurement that cannot be fooled by a system that forgets: a
-   population with no heredity cannot beat its own past, and one that is
-   adapting must. Checkpoints already hold everything it needs.
-4. Only then the ecology work — mutual-flow yields (§4.1), an edge-forming
-   rule (§4.2) — and only then the open-endedness statistics.
-
-The ordering is the whole point. Activity statistics, MODES, castles and flow
-modules all assume something is being retained; run on a system with a
-three-iteration memory they measure the memory, not the world. **You cannot get
-open-ended evolution before you have evolution.**
-
-#### The list as it stood before §0b
-
-1. `research/phylogeny.py` — reconstruct the lineage forest from a run's
-   frames. Everything in §6 depends on it and nothing else does.
-2. The neutral-shadow control as a config option (random conquest winner).
-3. The arena for cross-time tournaments (§5.4). Small, self-contained, and it
-   answers the headline question on its own.
-4. Then E1 and E2, at ≥ 30 seeds.
-5. Mutual-flow yields as an option, then E5.
-
-Everything before step 4 is instrumentation. It is worth resisting the
-temptation to run big experiments first: the pilots in §8 already show that the
-obvious statistics measure the wrong thing, and a large run analysed with them
-would produce a confident, wrong answer.
+## Appendix B — literature
+
+Rendered for a reader in the site's **Literature** tab, with a note on what
+each means here. Summaries there are from working knowledge and need checking
+against the papers.
+
+**Open-endedness:** Bedau & Packard 1992; Bedau, Snyder & Packard 1998; Dolson,
+Vostinar, Wiser & Ofria 2019 (MODES); Banzhaf et al. 2016; Taylor et al. 2016;
+Packard et al. 2019; Standish 2003; Adams, Zenil, Davies & Walker 2017; Soros &
+Stanley 2014; Lehman & Stanley 2011.
+
+**Systems:** Ray 1991 (Tierra); Ofria & Wilke 2004 (Avida); Channon 2001 (Geb);
+Yaeger 1994 (Polyworld).
+
+**Evolutionary game theory on graphs:** Nowak & May 1992; Lieberman, Hauert &
+Nowak 2005; Ohtsuki, Hauert, Lieberman & Nowak 2006; Nowak 2006; Gross &
+Blasius 2008.
+
+**The game:** Borel 1921; Roberson 2006; Van Valen 1973; Cliff & Miller 1995.
+
+**Individuality and structure:** Maynard Smith & Szathmáry 1995; Price 1970;
+Krakauer, Bertschinger, Olbrich, Flack & Ay 2020; Crutchfield & Hanson 1993;
+Rosvall & Bergstrom 2008; Kauffman (adjacent possible); Sayama (cardinality
+leap).
+
+**Method:** Kimura 1968 and neutral models generally; Lenski's LTEE — the
+citrate innovation took ~31,000 generations and depended on potentiating
+mutations that were invisible when they happened. Our runs are hundreds of
+iterations. That is the timescale corrective, and it is why §6.6's failure mode
+is "we did not run long enough" and why that has to be distinguishable from "it
+levelled off".
