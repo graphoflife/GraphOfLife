@@ -49,9 +49,17 @@ const Research = {
     }
   },
 
+  /**
+   * Re-read the list of runs on the way into the tab, every time.
+   *
+   * It used to list once per page load. A simulation created afterwards — or
+   * one that had not yet recorded the two frames these views need, which is
+   * every simulation for its first moments — never appeared in the picker, and
+   * the only way to see it was to notice the Refresh button. Listing costs one
+   * request and does not start the engine.
+   */
   async setActive(active) {
-    if (!active || this._loaded) return;
-    this._loaded = true;
+    if (!active) return;
     await this.listRuns();
   },
 
@@ -86,10 +94,15 @@ const Research = {
     const say = (text) => {
       for (const { view } of this.runModes) view.say(text);
     };
-    say('Looking for simulations…');
+    // Only said while there is nothing on screen yet. Re-entering the tab
+    // relists, and overwriting a drawn view's note with "Looking for
+    // simulations…" every time reads as though it were about to reload.
+    if (!this.runId) say('Looking for simulations…');
     try {
       await API.choose();
       const data = await API.listRuns();
+      // Both views need at least two frames to compare anything, so a
+      // simulation that has just started is not offered until it has some.
       this.runs = (data.runs || []).filter(r => r.frame_count > 1);
       for (const { view } of this.runModes) view.setRuns(this.runs);
 
@@ -104,9 +117,14 @@ const Research = {
           + 'Run one from the Simulations tab and come back.');
         return;
       }
-      const wanted = this.runs.some(r => r.id === this.runId) ? this.runId : this.runs[0].id;
+      // Keep whatever was being looked at, if it is still there.
+      const had = this.runId;
+      const wanted = this.runs.some(r => r.id === had) ? had : this.runs[0].id;
       this.picker.value = wanted;
-      await this.open(wanted);
+      // Only load when the choice actually changed. Re-entering the tab should
+      // not refetch a window that is already drawn — the lineage keeps no
+      // frames, so that would be two hundred requests for the same picture.
+      if (wanted !== had) await this.open(wanted);
     } catch (err) {
       say(`Could not reach the simulations: ${err.message}`);
     }

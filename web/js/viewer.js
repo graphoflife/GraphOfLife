@@ -326,6 +326,14 @@ const Viewer = {
   // Loading
   // ------------------------------------------------------------------
 
+  /**
+   * Fill the run picker, so a run can be chosen from inside the Viewer.
+   *
+   * This existed and was never called, which left the picker beside Reload
+   * permanently empty: the only way into the Viewer was the Inspect button on
+   * a simulation card, and the control that looked like the way to switch runs
+   * did nothing at all.
+   */
   syncRunPicker(runs) {
     const picker = document.getElementById('runPicker');
     const current = this.runId;
@@ -337,6 +345,27 @@ const Viewer = {
       opt.textContent = `${run.name} (${formatNumber(run.frame_count)} frames)`;
       if (run.id === current) opt.selected = true;
       picker.appendChild(opt);
+    }
+  },
+
+  /**
+   * Re-read the list of runs on the way into the tab.
+   *
+   * Every time rather than once, because the list goes stale the moment a
+   * simulation is created or records its first frames — and the tab it is
+   * created from is one click away. Listing is IndexedDB or one request; it
+   * does not start the engine (see NO_ENGINE in sim-worker.js).
+   *
+   * A failure leaves whatever is already in the picker: a run that is loaded
+   * keeps playing, and the picker is a convenience rather than the view.
+   */
+  async setActive(active) {
+    if (!active) return;
+    try {
+      const data = await API.listRuns();
+      this.syncRunPicker(data.runs || []);
+    } catch (err) {
+      console.warn('viewer: could not list the simulations:', err.message);
     }
   },
 

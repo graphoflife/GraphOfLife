@@ -393,10 +393,22 @@ const handlers = {
   }
 };
 
+// What can be answered out of IndexedDB alone, without the Python runtime.
+//
+// Everything used to wait for boot, which meant that reading a list of runs —
+// pure storage, no engine — downloaded and started Pyodide first. On a static
+// host that is tens of megabytes to fill a dropdown, and it is why the Viewer
+// could not afford to populate its run picker on the way in.
+//
+// An allow-list rather than a deny-list: a handler that needs the engine and
+// is left off this by mistake still works, where one that does not need it and
+// is wrongly added would fail only in the browser, only on a cold start.
+const NO_ENGINE = new Set(['list', 'get', 'frame', 'seriesProgress', 'storage']);
+
 self.onmessage = async (event) => {
   const { id, type, ...rest } = event.data || {};
   try {
-    await ensureReady();
+    if (!NO_ENGINE.has(type)) await ensureReady();
     const handler = handlers[type];
     if (!handler) throw new Error(`the worker has no handler for "${type}"`);
     self.postMessage({ id, ok: true, result: await handler(rest) });

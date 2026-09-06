@@ -92,6 +92,7 @@ const App = {
     if (name === 'runs') RunsView.activate();
     Research.setActive(name === 'research');
     Explain.setActive(name === 'explain');
+    Viewer.setActive(name === 'viewer');
 
     // The canvas has no size while hidden, so it must be measured on reveal.
     // Done synchronously as well as on the next frame: the element already has
