@@ -826,6 +826,72 @@ details.control-group > summary:hover h3 { color: var(--text); }
    `.lit` is already taken further down for a highlighted line in the code
    walk-through, and two meanings for one name is a trap. */
 
+/* ==========================================================================
+   Rendered notes
+   ==========================================================================
+   research/Research.md, as a page. Long-form reading at a comfortable measure,
+   the same as the Literature list beside it — the tables are the exception and
+   scroll on their own rather than forcing the page sideways. */
+
+.md {
+  max-width: 860px;
+  margin: 0 auto;
+  padding-bottom: 64px;
+  line-height: 1.7;
+}
+.md h2 { font-size: 22px; margin: 0 0 18px; }
+.md h3 {
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+  margin: 34px 0 14px;
+}
+.md h4 { font-size: 16px; margin: 24px 0 8px; }
+.md h5, .md h6 { font-size: 14px; margin: 18px 0 6px; color: var(--muted); }
+.md p { margin: 0 0 14px; }
+.md ul, .md ol { margin: 0 0 14px; padding-left: 22px; }
+.md li { margin-bottom: 7px; }
+.md hr { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
+.md a { color: var(--accent); }
+.md b { color: #fff; }
+
+.md blockquote {
+  margin: 0 0 14px;
+  padding-left: 14px;
+  border-left: 2px solid var(--accent);
+  color: var(--muted);
+}
+.md code {
+  background: var(--panel-2);
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-size: 12.5px;
+}
+.md pre {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  overflow-x: auto;
+}
+.md pre code { background: none; padding: 0; font-size: 12.5px; }
+
+/* A wide table scrolls inside its own box. Letting it push the page sideways
+   makes every paragraph on the page scroll with it. */
+.md-scroll { overflow-x: auto; margin: 0 0 18px; }
+.md table { border-collapse: collapse; font-size: 13px; min-width: 100%; }
+.md th, .md td {
+  border: 1px solid var(--border);
+  padding: 6px 11px;
+  text-align: left;
+  vertical-align: top;
+}
+.md th { background: var(--panel-2); color: var(--text); white-space: nowrap; }
+.md-status { color: var(--muted); }
+
 .lit-page {
   max-width: 1080px;
   margin: 0 auto;

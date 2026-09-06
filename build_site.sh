@@ -36,6 +36,14 @@ done
 # web/py already holds the two modules that only make sense in a browser —
 # gol_browser.py and the gol_store stand-in — and cp -r brought them along.
 
+# The notes the Research tab renders. Kept in research/ rather than web/,
+# because they are written for a reader with a text editor first and the site
+# second, and copying them means there is one document rather than a page and
+# a file that disagree. gol_server serves the same file from where it lives;
+# SHIPPED_DOCS there and this line are checked against each other by
+# tests/test_engine.py.
+cp "${here}/research/Research.md" "${out}/data/Research.md"
+
 # Stamp every script and stylesheet with the commit they came from.
 #
 # Without this a browser holding an older copy of js/app.js keeps using it: the
@@ -63,6 +71,7 @@ declare -A stamp_in=(
   ["${out}/js/sim-worker.js"]="runstore.js"
   ["${out}/js/explain.js"]="py/explain_minimal.py|data/explain-run.json"
   ["${out}/js/home.js"]="data/home-run.bin"
+  ["${out}/js/notes.js"]="data/Research.md"
 )
 for file in "${!stamp_in[@]}"; do
   IFS='|' read -ra names <<< "${stamp_in[$file]}"

@@ -61,6 +61,14 @@ WEB_DIR = os.path.join(BASE_DIR, "web")
 SHIPPED_PY = ("GraphOfLifeSimple.py", "gol_config.py", "gol_series.py",
               "explain_minimal.py")
 
+# Documents the page renders, which live outside web/ because they are written
+# for a reader with a text editor first and the site second. Same problem and
+# same answer as SHIPPED_PY: the build copies them next to the page, and there
+# is nowhere to copy them to when serving web/ straight off the disk, so they
+# are read from where they actually live. Also an explicit map rather than a
+# directory, for the same reason.
+SHIPPED_DOCS = {"data/Research.md": os.path.join("research", "Research.md")}
+
 # Requests are capped so a malformed or hostile body cannot exhaust memory.
 MAX_BODY_BYTES = 1 << 20
 
@@ -409,13 +417,16 @@ class Handler(BaseHTTPRequestHandler):
 
     @staticmethod
     def _engine_file(rel: str):
-        """A file under /py/ that lives in the repository root, or None."""
-        if not rel.startswith("py/"):
+        """A file the build copies in, read from where it really lives, or None."""
+        if rel.startswith("py/"):
+            name = rel[len("py/"):]
+            if name not in SHIPPED_PY:
+                return None
+            candidate = os.path.join(BASE_DIR, name)
+        elif rel in SHIPPED_DOCS:
+            candidate = os.path.join(BASE_DIR, SHIPPED_DOCS[rel])
+        else:
             return None
-        name = rel[len("py/"):]
-        if name not in SHIPPED_PY:
-            return None
-        candidate = os.path.join(BASE_DIR, name)
         return candidate if os.path.isfile(candidate) else None
 
     def _serve_static(self, path: str) -> None:

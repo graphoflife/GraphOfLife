@@ -21,6 +21,7 @@ const Research = {
   MODES: {
     lineage:    { view: Lineage },
     flow:       { view: FlowView },
+    notes:      { page: Notes },
     literature: { page: Literature }
   },
 

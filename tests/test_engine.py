@@ -607,6 +607,15 @@ def test_the_server_and_the_build_ship_the_same_python():
     for name in served:
         assert os.path.isfile(os.path.join(root, name)), f"{name} does not exist"
 
+    # The same arrangement for documents the page renders, which live outside
+    # web/ for the same reason and would fail the same way: rendering on the
+    # published site and reporting that it cannot be read on localhost.
+    for url, source in gol_server.SHIPPED_DOCS.items():
+        assert os.path.isfile(os.path.join(root, source)), f"{source} does not exist"
+        assert f'"${{out}}/{url}"' in script, (
+            f"gol_server serves {url} from {source}, and build_site.sh never "
+            f"copies it into the site")
+
 
 # ---------------------------------------------------------------------------
 # Running without pytest
@@ -628,12 +637,21 @@ def test_every_asset_a_script_fetches_by_name_is_cache_stamped():
     cache.
     """
     root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    build = open(os.path.join(root, "build_site.sh")).read()
+    script = open(os.path.join(root, "build_site.sh")).read()
+
+    # Only the stamping table counts, not the whole script. Looking for the
+    # path anywhere in the file passed for a `cp` line that shipped a document
+    # and never stamped it — mentioning an asset is not the same as versioning
+    # it, and the whole failure this guards against is a file that is shipped
+    # and cached.
+    table = re.search(r"declare -A stamp_in=\((.*?)\n\)", script, re.S)
+    assert table, "could not find the stamp_in table in build_site.sh"
+    build = table.group(1)
 
     # A quoted path into one of the shipped directories, or a bare file next to
     # the script — which is what importScripts() takes.
     quoted = re.compile(r"""['"]((?:js|py|data|css)/[\w./-]+|[\w-]+\.js)['"]""")
-    interesting = (".js", ".py", ".json", ".bin", ".css")
+    interesting = (".js", ".py", ".json", ".bin", ".css", ".md")
 
     def ours(line, at):
         """

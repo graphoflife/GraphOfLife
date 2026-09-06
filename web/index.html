@@ -548,6 +548,7 @@
     <div class="research-modes" id="researchModes">
       <button type="button" data-mode="lineage" class="active">Lineage</button>
       <button type="button" data-mode="flow">Flow modules</button>
+      <button type="button" data-mode="notes">Findings</button>
       <button type="button" data-mode="literature">Literature</button>
     </div>
     <span class="research-run" id="researchRunField">
@@ -632,6 +633,11 @@
   <!-- Filled by Literature.render(). The words are in js/literature.js,
        where they can be read and checked as prose. -->
   <section id="research-literature" class="research-panel" hidden></section>
+
+  <!-- ---------------- findings ---------------- -->
+  <!-- Filled by Notes.render() from research/Research.md, which is the
+       document itself rather than a copy of it. -->
+  <section id="research-notes" class="research-panel" hidden></section>
 </main>
 
 <!-- Statistic detail: explanation plus history across the run -->
@@ -670,7 +676,9 @@
 <script src="js/framewindow.js"></script>
 <script src="js/lineage.js"></script>
 <script src="js/flowview.js"></script>
+<script src="js/markdown.js"></script>
 <script src="js/literature.js"></script>
+<script src="js/notes.js"></script>
 <script src="js/research.js"></script>
 <script src="js/viewer.js"></script>
 <!-- The viewer is assembled from four files. The core declares it; these three
