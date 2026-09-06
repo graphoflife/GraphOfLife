@@ -239,7 +239,10 @@ def selection_ablation():
               f"{np.mean(degs) if degs else 0:>13.2f}")
     G.GraphOfLife._resolve_winner = real_resolve
     print("\n   Columns that do not separate mean the rule is not what shapes")
-    print("   the run. This is five seeds — indicative, not an effect.")
+    # The count comes from SEEDS rather than the sentence, because the sentence
+    # went on saying "five" after the run was widened to thirty.
+    enough = "" if len(SEEDS) >= 30 else " — indicative, not an effect"
+    print(f"   the run. {len(SEEDS)} seeds{enough}.")
 
 
 if __name__ == "__main__":
