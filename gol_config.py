@@ -13,6 +13,69 @@ import secrets
 from dataclasses import dataclass, asdict, field, fields
 from typing import Any, ClassVar, Dict, List
 
+# ---------------------------------------------------------------------------
+# Naming an algorithm
+# ---------------------------------------------------------------------------
+#
+# An experiment has to cite the exact algorithm it ran on, and that citation
+# has to still resolve in a year when six more mechanics exist. See
+# research/Research.md §5 for the scheme and research/strains.md for the
+# registry of every strain an experiment has used.
+#
+#     gol-<SPEC>[+<mechanic>[=<value>]]...
+#
+# Only mechanics differing from their FROZEN default are named, so adding a new
+# mechanic that defaults to off never renames an existing strain. `gol-1` means
+# the same thing forever. That is the whole trick, and it only works if the
+# defaults below are never edited.
+
+# Bumped ONLY for a change that cannot be expressed as an optional mechanic:
+# a bug fix that alters results, or a change to a frozen default below.
+SPEC = 1
+
+# Mechanics — settings that change *which code paths can execute*. Part of the
+# strain id. The value is the frozen default: what this setting was when SPEC
+# was last bumped, so that omitting it reproduces that behaviour.
+#
+# Reserved but not yet implemented, so not fields and not settable:
+# mutate_on_replication, germline, token_colours, mutual_flow_yield,
+# edge_proposal, growable_layers, local_rules, contracts,
+# structure_replication. Their names and defaults are fixed in
+# research/strains.md so the first experiment to turn one on does not also get
+# to choose what it is called.
+MECHANICS: Dict[str, Any] = {
+    "brain_kind": "float",
+    "exchange_messages": True,
+    "message_prepass": True,
+    "allow_handover": True,
+    "allow_revolutions": True,
+    # A magnitude, but 0 against anything else is the difference between a
+    # closed economy and one that mints, which is a different algorithm rather
+    # than a different setting of one.
+    "tokens_created_per_phase": 0,
+}
+
+# Parameters — magnitudes. Cited alongside an experiment, but not part of the
+# strain: otherwise every seed would be its own algorithm.
+PARAMETERS = (
+    "total_tokens", "n_nodes", "k_neighbors", "rewire_p", "hidden_layers",
+    "brain_bits", "message_amount", "random_input_amount",
+    "mutation_probability", "mutation_noise_std", "mutation_sparsity",
+    "extinction_threshold", "seed",
+)
+
+# Infrastructure — affects only what is recorded, never what happens.
+INFRASTRUCTURE = ("checkpoint_every", "export_every", "export_decisions")
+
+
+def _spell(value: Any) -> str:
+    """One canonical spelling per value, so a strain id is comparable as text."""
+    if value is True:
+        return "true"
+    if value is False:
+        return "false"
+    return str(value)
+
 
 @dataclass
 class SimConfig:
@@ -264,6 +327,33 @@ class SimConfig:
             nxt += 4
         layout["MESSAGE"] = [nxt, nxt + self.message_amount]
         return layout
+
+    # --------------------------------------------------------------------
+    # Naming this algorithm
+    # --------------------------------------------------------------------
+
+    def strain_id(self) -> str:
+        """
+        Which algorithm this is, as a citable string.
+
+        `gol-1` is every mechanic at its frozen default. Anything else names
+        only what differs, alphabetically, so two strains are comparable as
+        text and a new mechanic never renames an old one.
+
+        A boolean that is on appears bare — `gol-1+mutate_on_replication` reads
+        as a thing that was switched on. One that is off is named with its
+        value, because the absence of a name already means "default".
+
+        This does not pin bugs. An experiment record carries the commit too;
+        see research/strains.md.
+        """
+        named = []
+        for name in sorted(MECHANICS):
+            value = getattr(self, name)
+            if value == MECHANICS[name]:
+                continue
+            named.append(name if value is True else f"{name}={_spell(value)}")
+        return f"gol-{SPEC}" + "".join(f"+{part}" for part in named)
 
     # --------------------------------------------------------------------
     # Serialization

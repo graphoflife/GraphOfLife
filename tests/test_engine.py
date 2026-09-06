@@ -21,6 +21,7 @@ do not get run.
 
 from __future__ import annotations
 
+import dataclasses
 import os
 import random
 import re
@@ -577,6 +578,85 @@ def test_the_teaching_script_gives_a_revolution_to_its_strongest_rebel():
 # ---------------------------------------------------------------------------
 # The two ways the site is served
 # ---------------------------------------------------------------------------
+
+def test_every_setting_is_classified_as_one_of_the_three_kinds():
+    """
+    A new setting has to be declared a mechanic, a parameter or infrastructure.
+
+    This is the guard that keeps the strain scheme honest. A mechanic left out
+    of the table changes what a run does without changing its name, so two runs
+    of different algorithms compare as the same one — and nothing anywhere else
+    would notice.
+    """
+    import gol_config
+
+    declared = (set(gol_config.MECHANICS)
+                | set(gol_config.PARAMETERS)
+                | set(gol_config.INFRASTRUCTURE))
+    actual = {f.name for f in dataclasses.fields(SimConfig)}
+
+    assert actual - declared == set(), (
+        f"settings that are not classified: {sorted(actual - declared)}. Add "
+        f"each to MECHANICS, PARAMETERS or INFRASTRUCTURE in gol_config.py — "
+        f"see research/Research.md §5.1 for which is which")
+    assert declared - actual == set(), (
+        f"classified but not a setting: {sorted(declared - actual)}")
+
+    overlap = set(gol_config.MECHANICS) & set(gol_config.PARAMETERS)
+    assert not overlap, f"classified twice: {sorted(overlap)}"
+
+
+def test_a_default_world_is_the_baseline_strain():
+    assert SimConfig().strain_id() == "gol-1"
+    # Parameters are not part of the algorithm's name; otherwise every seed
+    # would be its own strain and nothing could be grouped.
+    varied = SimConfig(total_tokens=2500, n_nodes=50, seed=7,
+                       hidden_layers=[12, 10], mutation_probability=0.1)
+    assert varied.strain_id() == "gol-1"
+
+
+def test_a_changed_mechanic_shows_up_in_the_name():
+    assert SimConfig(brain_kind="binary").strain_id() == "gol-1+brain_kind=binary"
+    assert SimConfig(exchange_messages=False).strain_id() == "gol-1+exchange_messages=false"
+    assert SimConfig(tokens_created_per_phase=5).strain_id() == "gol-1+tokens_created_per_phase=5"
+
+    # Alphabetical, so the same set of mechanics always spells the same strain
+    # whatever order they were passed in.
+    one = SimConfig(brain_kind="binary", allow_revolutions=False).strain_id()
+    other = SimConfig(allow_revolutions=False, brain_kind="binary").strain_id()
+    assert one == other == "gol-1+allow_revolutions=false+brain_kind=binary"
+
+
+def test_the_frozen_defaults_are_what_a_bare_config_does():
+    """
+    The scheme only works if a mechanic's frozen default is its actual default.
+
+    Otherwise `gol-1` would name a world nobody can build by asking for
+    nothing, and every run would carry a strain listing mechanics it never
+    changed.
+    """
+    import gol_config
+
+    bare = SimConfig()
+    for name, frozen in gol_config.MECHANICS.items():
+        assert getattr(bare, name) == frozen, (
+            f"{name} defaults to {getattr(bare, name)!r} but is frozen at "
+            f"{frozen!r}. Changing a frozen default renames every existing "
+            f"strain — bump SPEC instead")
+
+
+def test_a_run_and_its_checkpoint_both_say_which_algorithm_they_are():
+    cfg = small(brain_kind="binary")
+    world = new_world(cfg)
+    blob = world.to_checkpoint()
+
+    assert "strain" in blob, "a checkpoint travels alone and must name its algorithm"
+    assert str(blob["strain"]) == cfg.strain_id() == "gol-1+brain_kind=binary"
+
+    # And it does not disturb restoring, which reads the keys it knows.
+    restored = GraphOfLife.from_checkpoint(blob, cfg)
+    assert set(restored.G.nodes()) == set(world.G.nodes())
+
 
 def test_the_server_and_the_build_ship_the_same_python():
     """

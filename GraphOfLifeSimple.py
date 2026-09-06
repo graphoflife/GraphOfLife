@@ -1410,6 +1410,11 @@ class GraphOfLife:
                               dtype=np.int64).reshape(-1, 2),
             "counters": np.array([self.next_agent_id, self.next_brain_id, self.iteration],
                                  dtype=np.int64),
+            # Which algorithm made this. A checkpoint travels on its own — it
+            # gets copied, shared, resumed on another machine — and without
+            # this it is a world with no way to say what rules it lived under.
+            # Read back by nothing; it is here for whoever finds the file.
+            "strain": np.array(self.cfg.strain_id()),
         }
 
         # How a magnitude was encoded. The shape check on the way back in

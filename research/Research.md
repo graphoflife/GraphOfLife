@@ -387,18 +387,24 @@ identifier, the mechanics it turns on, the commit that introduced them, and a
 one-line note on what it was for. A strain is never removed and never
 redefined. If a mechanic's meaning has to change, it gets a new name.
 
-### 5.5 What to implement (before any experiment)
+### 5.5 Implemented
 
-1. `SPEC = 1` and a `MECHANICS` table in `gol_config.py` naming every mechanic
-   and its frozen default.
-2. `SimConfig.strain_id()` returning the string in §5.2.
-3. The strain written into every run's metadata, every checkpoint, and every
-   series cache, so a result can never be found without knowing what produced
-   it.
-4. `research/strains.md` seeded with `gol-1`.
+1. ✅ `SPEC = 1`, and `MECHANICS` / `PARAMETERS` / `INFRASTRUCTURE` in
+   `gol_config.py` classifying every setting.
+2. ✅ `SimConfig.strain_id()`.
+3. ✅ The strain written into run metadata (both backends), the checkpoint, and
+   the series cache — every store that can be found on its own.
+4. ✅ `research/strains.md`, with the nine unbuilt mechanics named and
+   defaulted in advance.
 
-This is the only implementation work that should happen before experiments,
-and it is small.
+Two guards keep it honest, both in `tests/test_engine.py`: every setting must
+be classified as exactly one of the three kinds, so a new one cannot be added
+without deciding; and every frozen default must equal the actual default, so
+`gol-1` always names a world you get by asking for nothing.
+
+The reserved mechanics are deliberately **not** config fields. Setting one
+raises rather than quietly producing a strain name for a run that ignored it —
+a label that lies is worse than no label.
 
 ---
 

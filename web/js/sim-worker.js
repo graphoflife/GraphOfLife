@@ -156,6 +156,7 @@ function meta(run) {
     running: live,
     error: run.error || null,
     config: run.config,
+    strain: run.strain || null,
     size_bytes: run.size_bytes || 0
   };
 }
@@ -288,6 +289,10 @@ const handlers = {
       checkpoint_iteration: null,
       error: null,
       config: prepared.config,
+      // Which algorithm this is, handed back by gol_browser.create. Stored on
+      // the run rather than derived on demand, so a result can never be found
+      // without it. See research/strains.md.
+      strain: prepared.strain || null,
       size_bytes: 0
     };
     await RunStore.putRun(run);

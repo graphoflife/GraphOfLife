@@ -1113,7 +1113,13 @@ def _build_series_locked(run_id: str) -> Dict[str, Any]:
     rows.sort(key=lambda r: r["_frame"])
 
     if changed:
-        _save_cache(run_id, {"version": SERIES_VERSION, "stride": stride, "rows": rows})
+        # The strain travels with the summary as well as with the run, because
+        # a series.json is the file most likely to be read on its own — it is
+        # the one an analysis loads, and a chart made from it should not have
+        # to go back to the run directory to find out which algorithm it is of.
+        _save_cache(run_id, {"version": SERIES_VERSION, "stride": stride,
+                             "strain": store.load_meta(run_id).get("strain"),
+                             "rows": rows})
 
     if not rows:
         return {"count": 0, "keys": [], "series": {}, "stride": stride,

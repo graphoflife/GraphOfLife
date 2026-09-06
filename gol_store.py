@@ -160,6 +160,12 @@ def create_run(name: str, cfg: SimConfig) -> Dict[str, Any]:
         "checkpoint_iteration": None,
         "error": None,
         "config": cfg.to_dict(),
+        # Which algorithm this run is of, so a result can never be found
+        # without knowing what produced it. Derivable from the config, and
+        # stored anyway: a strain read off a run is one string to group by,
+        # where deriving it means importing the config class and knowing the
+        # scheme. See research/strains.md.
+        "strain": cfg.strain_id(),
     }
     save_meta(run_id, meta)
     return meta

@@ -22,7 +22,13 @@ gol-<SPEC>[+<mechanic>[=<value>]]...
 
 ## SPEC 1
 
-The algorithm as of `9cee9fd`. Frozen defaults:
+The algorithm as of `9cee9fd`. Implemented in `gol_config.py` as `SPEC`,
+`MECHANICS`, `PARAMETERS` and `INFRASTRUCTURE`; `SimConfig.strain_id()` spells
+the name. `tests/test_engine.py` asserts that every setting is classified as
+exactly one of the three, so a new setting cannot be added without deciding
+which it is.
+
+### Mechanics — implemented, and settable
 
 | mechanic | frozen default | notes |
 |---|---|---|
@@ -31,28 +37,54 @@ The algorithm as of `9cee9fd`. Frozen defaults:
 | `message_prepass` | `true` | |
 | `allow_handover` | `true` | |
 | `allow_revolutions` | `true` | the non-transitivity generator |
-| `mutate_on_replication` | `false` | *not yet implemented* — §4.1 |
-| `germline` | `false` | *not yet implemented* — §4.2 |
-| `token_colours` | `1` | *not yet implemented* — §4.3 |
-| `mutual_flow_yield` | `0` | *not yet implemented* — §4.4 |
-| `edge_proposal` | `false` | *not yet implemented* — §4.5 |
-| `growable_layers` | `false` | *not yet implemented* — §4.6 |
-| `local_rules` | `false` | *not yet implemented* — §4.7 |
-| `contracts` | `false` | *not yet implemented* — §4.8 |
-| `structure_replication` | `false` | *not yet implemented* — §4.9 |
+| `tokens_created_per_phase` | `0` | a magnitude, but 0 against anything else is a closed economy against one that mints — a different algorithm, not a different setting |
 
-The unimplemented rows are listed now on purpose: they fix the names and the
-defaults before anything uses them, so the first experiment to turn one on does
-not also get to choose what it is called.
+### Mechanics — reserved, not yet implemented
+
+Named and defaulted now on purpose, so the first experiment to turn one on does
+not also get to choose what it is called. **They are not config fields**, so
+they cannot be set — asking for one raises rather than silently producing a
+strain name for a run that ignored it.
+
+| mechanic | frozen default | section |
+|---|---|---|
+| `mutate_on_replication` | `false` | Research.md §4.1 |
+| `germline` | `false` | §4.2 |
+| `token_colours` | `1` | §4.3 |
+| `mutual_flow_yield` | `0` | §4.4 |
+| `edge_proposal` | `false` | §4.5 |
+| `growable_layers` | `false` | §4.6 |
+| `local_rules` | `false` | §4.7 |
+| `contracts` | `false` | §4.8 |
+| `structure_replication` | `false` | §4.9 |
+
+Implementing one means adding the field with exactly the default above and
+adding it to `MECHANICS`. Nothing else — every existing strain keeps its name,
+because a mechanic at its default is never listed.
+
+### Parameters and infrastructure
 
 `total_tokens`, `n_nodes`, `k_neighbors`, `rewire_p`, `hidden_layers`,
 `brain_bits`, `message_amount`, `random_input_amount`, `mutation_probability`,
 `mutation_noise_std`, `mutation_sparsity`, `extinction_threshold` and `seed`
-are **parameters**, not mechanics. They are cited with an experiment but are
-not part of the strain — otherwise every seed would be its own algorithm.
+are **parameters**. Cited with an experiment, not part of the strain —
+otherwise every seed would be its own algorithm.
 
 `checkpoint_every`, `export_every` and `export_decisions` are
 **infrastructure** and affect only what is recorded.
+
+### Where the strain is written
+
+On every store that can be found on its own:
+
+- **run metadata** — `gol_store.create_run`, and `gol_browser.create` for the
+  browser backend, so both backends label a run the same way.
+- **the checkpoint** — a `strain` array in the `.npz`. A checkpoint gets
+  copied, shared and resumed elsewhere; without this it is a world with no way
+  to say what rules it lived under.
+- **the series cache** — `series.json` is the file an analysis actually loads,
+  and a chart made from it should not have to go back to the run directory to
+  learn which algorithm it is of.
 
 ---
 

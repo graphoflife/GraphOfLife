@@ -47,7 +47,10 @@ class Worlds:
     def create(self, run_id: str, config: Dict[str, Any]) -> Dict[str, Any]:
         cfg = SimConfig.from_dict(config or {}, stored=False).resolve_seed()
         self._worlds[run_id] = {"cfg": cfg, "world": new_world(cfg)}
-        return {"config": cfg.to_dict(), "iteration": 0}
+        # The strain goes back with the config so the browser can store it on
+        # the run, the same way gol_store does on a machine with a server.
+        # Two backends, one label.
+        return {"config": cfg.to_dict(), "strain": cfg.strain_id(), "iteration": 0}
 
     def restore(self, run_id: str, config: Dict[str, Any], path: str) -> Dict[str, Any]:
         """
