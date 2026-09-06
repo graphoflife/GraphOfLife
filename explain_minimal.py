@@ -99,14 +99,9 @@ def decide(yes: float, no: float, mode_a: float, mode_b: float) -> bool:
     return random.random() < (yes / total if total > 0 else 0.5)
 
 
-def pick(scores: np.ndarray, sample: bool) -> int:
-    """Which of several — the best, or drawn in proportion."""
-    if not sample:
-        return int(np.argmax(scores))
-    total = float(scores.sum())
-    if total <= 0:
-        return int(np.random.randint(len(scores)))
-    return int(np.random.choice(len(scores), p=scores / total))
+def pick(scores: np.ndarray) -> int:
+    """Which of several — the best one."""
+    return int(np.argmax(scores))
 
 
 def share_of(a: float, b: float) -> float:
@@ -331,7 +326,7 @@ class World:
                 amounts = apportion(scores, pot)
             else:
                 amounts = np.zeros(len(targets), dtype=int)
-                amounts[pick(scores, sample=False)] = pot
+                amounts[pick(scores)] = pot
 
             self.tokens[u] = 0
             for col, v in enumerate(targets):

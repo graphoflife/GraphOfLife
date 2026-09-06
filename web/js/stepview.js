@@ -945,6 +945,28 @@ const StepView = {
     };
   },
 
+  /**
+   * How many dots an agent's pile is drawn with.
+   *
+   * Anchored at both ends: one token is one dot, and the reference is fifteen.
+   * Never more dots than tokens, which makes the small piles literally
+   * countable — the log only starts compressing once there are more than about
+   * six, which is also about where counting them stops working.
+   *
+   * `ref` is one number for the whole run, so the same pile draws the same
+   * number of dots in every step. Measuring against the richest agent in the
+   * current stage instead made the scale move under the reader.
+   *
+   * Out here rather than inside the drawing, because it is arithmetic about
+   * what is true and not about what is on screen — and because a rule buried
+   * in a painter is a rule no test can reach.
+   */
+  dots(held, ref) {
+    const full = Math.log(Math.max(2, ref));
+    return Math.max(1, Math.min(this.TOKEN_DOTS, held,
+      1 + Math.round((this.TOKEN_DOTS - 1) * Math.log(held) / full)));
+  },
+
   _tokens(ctx, view, place, time, w, h) {
     // The opening step is a single agent and what it is made of; the pile it
     // happens to be holding is the next step's subject.
@@ -952,15 +974,7 @@ const StepView = {
     const stage = view.stage;
     // Falls back to the current stage only if nobody has set a run-wide scale.
     const ref = Math.max(2, view.tokenRef || Math.max(1, ...stage.tokens));
-    const full = Math.log(ref);
-
-    // How many dots an agent's pile is drawn with. Anchored at both ends: one
-    // token is one dot, the reference is fifteen. Never more dots than tokens,
-    // which makes the small piles literally countable — the log only starts
-    // compressing once there are more than about six, which is also about
-    // where counting them stops working.
-    const count = held => Math.max(1, Math.min(this.TOKEN_DOTS, held,
-      1 + Math.round((this.TOKEN_DOTS - 1) * Math.log(held) / full)));
+    const count = held => this.dots(held, ref);
 
     // The supply arriving, on the step that introduces it. It comes from
     // nowhere in the world, so it comes from a ball outside the graph that

@@ -1,6 +1,6 @@
 # Graph of Life
 
-**A new kind of Artificial Life Algorithm**
+**An Artificial Life Algorithm**
 
 **Exploring open-ended evolution with spatial evolutionary game theory,
 graph theory and neural networks.**

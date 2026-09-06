@@ -14,8 +14,11 @@
  *
  * The code regions are found by searching the script for anchor text rather
  * than by line number, so editing explain_minimal.py cannot silently point a
- * step at the wrong lines. If an anchor stops matching, that step says so
- * instead of highlighting something arbitrary.
+ * step at the wrong lines. An anchor that stops matching is dropped with a
+ * warning rather than lighting something arbitrary — but a warning nobody
+ * reads is not much of a guard, so the real one is
+ * tests/test_explain_anchors.js, which resolves every step against the actual
+ * script in CI.
  */
 const Explain = {
   RUN: 'data/explain-run.json',
@@ -30,19 +33,26 @@ const Explain = {
   started: false,
   active: false,
 
+  /** The emblem behind each step's words, faint enough to stay a watermark. */
+  emblem(name) {
+    return name ? Emblems.url(name, { opacity: 0.17 }) : 'none';
+  },
+
   /**
    * The walk-through.
    *
    * `stage` names the recorded snapshot to draw and `effect` the animation laid
    * over it. `code` is a pair of strings found in the script, marking the first
    * and last line to light up — text and not line numbers, so editing
-   * explain_minimal.py cannot silently point a step at the wrong place.
+   * explain_minimal.py cannot silently point a step at the wrong place. A step
+   * that needs two separate runs of the script gives an array of pairs.
+   *
+   * Write an anchor with its real leading whitespace: indentation is part of
+   * the match when it is there (see `carries`), which is what tells the end of
+   * a function from a `return` nested inside it. The end anchor is searched
+   * for only after the start one, so it has to be unique in that window rather
+   * than in the whole file.
    */
-  /** The emblem behind each step's words, faint enough to stay a watermark. */
-  emblem(name) {
-    return name ? Emblems.url(name, { opacity: 0.17 }) : 'none';
-  },
-
   STEPS: [
     {
       title: 'An Individual Node with a Brain', intro: true,
@@ -360,33 +370,54 @@ Object.assign(Explain, {
   },
 
   /**
-   * Which lines a step is about, found by searching for its anchors.
+   * Does this line carry this anchor?
+   *
+   * Indentation counts when the anchor has any. An anchor written with four
+   * leading spaces is naming a line at that depth, and a plain substring test
+   * throws that away — `'    return hegemon'` then matches a `return hegemon`
+   * eight columns in just as happily. It did: the Blotto step's second region
+   * ended at an early return inside `resolve` instead of at the end of it, and
+   * stopped short of the mob walk the step's own words describe. Anchors with
+   * no leading space are naming a fragment of a line and still match anywhere
+   * in one.
+   */
+  carries(line, anchor) {
+    return /^\s/.test(anchor) ? line.startsWith(anchor) : line.includes(anchor);
+  },
+
+  /**
+   * The lines a step is about, found by searching for its anchors.
    *
    * By text and not by line number, so editing the script cannot quietly point
-   * a step at the wrong place. A missing anchor returns nothing and the step
-   * says so, which is a great deal better than lighting up whatever happens to
-   * live at those numbers now.
-   */
-  /**
-   * The lines a step is about.
+   * a step at the wrong place. A step usually names one run of the script, but
+   * not always: the game stakes in one place and works out who won in another,
+   * with the whole cleanup sitting between them. Naming both is better than
+   * lighting the hundred and forty lines from the first to the last.
    *
-   * A step usually points at one run of the script, but not always: the game
-   * stakes in one place and works out who won in another, with the whole
-   * cleanup sitting between them. Naming both is better than lighting the
-   * hundred and forty lines from the first to the last.
+   * An anchor that finds nothing is dropped and reported to the console, and
+   * the step lights whatever else it named. Silence here is what let a wrong
+   * region ship: see tests/test_explain_anchors.js, which resolves every step
+   * against the real script and fails on an anchor that has drifted, gone
+   * ambiguous, or grown a region too long to read.
    */
   regions(step) {
     const pairs = Array.isArray(step.code[0]) ? step.code : [step.code];
     const found = [];
     for (const [head, tail] of pairs) {
-      const from = this.lines.findIndex(l => l.includes(head));
-      if (from < 0) continue;
+      const from = this.lines.findIndex(l => this.carries(l, head));
+      if (from < 0) { this.lost(step, 'start', head); continue; }
       const rest = this.lines.slice(from);
-      const offset = rest.findIndex((l, i) => i > 0 && l.includes(tail));
-      if (offset < 0) continue;
+      const offset = rest.findIndex((l, i) => i > 0 && this.carries(l, tail));
+      if (offset < 0) { this.lost(step, 'end', tail); continue; }
       found.push({ from, to: from + offset });
     }
     return found;
+  },
+
+  /** Say that an anchor stopped matching, rather than quietly lighting less. */
+  lost(step, which, anchor) {
+    console.warn(`explanation: "${step.title}" names a region whose ${which} `
+               + `anchor is no longer in explain_minimal.py: ${JSON.stringify(anchor)}`);
   },
 
   go(by) {

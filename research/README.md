@@ -18,6 +18,16 @@ site or the engine; nothing in `web/` or the test suite depends on it.
   the point: cycles are abundant and mostly at or below chance.
 - `pilot_sweep_scale.py` — how long a world takes before one founding lineage
   swallows it, against the size of the world.
+- `pilot_brain_inputs.py` — the two numbers in the brains that nobody chose
+  (`BACKLOG.md` §4b): how loud each kind of input is, and how finely a binary
+  brain can say what it wants. Measures only — neither preset moves without a
+  survival comparison, which is the `sweep` part and takes half an hour.
+  Two methodological notes worth keeping: measurements have to be taken on a
+  **warmed** world, since at iteration 0 every agent holds an equal share and
+  every magnitude is nearly constant, which made noise look like half of what a
+  brain hears; and architectures have to be compared on the **same**
+  observations, since giving each its own world compares populations rather
+  than brains.
 
 Everything is meant to be run locally. Disk is cheap; RAM is the binding
 constraint, because memory is population multiplied by policy size.

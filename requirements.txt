@@ -1,2 +1,19 @@
-numpy>=2.0
-networkx>=3.0
+# Bounded at both ends, so a green CI run means something specific.
+#
+# The floors were never derived from anything: the whole numpy surface this
+# code uses — random, savez_compressed, the usual arithmetic — has been stable
+# since 1.17, and networkx is asked for exactly three functions
+# (connected_components, watts_strogatz_graph, selfloop_edges), all stable
+# since 2.x. They are kept because there is no reason to run older, and the
+# ceilings are the half that was missing: without them CI installs whatever
+# was published this morning, and a passing build says nothing repeatable.
+#
+# Raise a ceiling deliberately, with the test suite as the evidence.
+numpy>=2.0,<3.0
+networkx>=3.0,<4.0
+
+# A third environment is not covered by this file, and it is the one that ships.
+# web/js/sim-worker.js runs the same engine in the browser under Pyodide: numpy
+# comes from Pyodide's own bundled build and networkx from an unconstrained
+# micropip.install(). Nothing checks either against these bounds. Worth knowing
+# before a version-shaped bug is blamed on the engine.

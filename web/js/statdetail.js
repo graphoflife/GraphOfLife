@@ -112,7 +112,7 @@ const StatDetail = {
     maxTokenLost: 'The largest loss any single agent took this phase, given as a positive number. In a reproduction phase that is a parent paying for a child; in a game phase it is an agent that spent its pile on neighbours and got little back. Summed across everyone, gains exceed losses by exactly what the agents who did not survive the phase were holding when it began. Those agents are gone from the frame, so their losses are never counted, while the tokens they let go of turn up as gains for the survivors — some spent on neighbours during the phase, the rest scattered by cleanup. Tokens are still conserved overall; it is the bookkeeping that is one-sided, because a frame can only describe agents that are still alive to be described.',
     gainers: 'Agents that ended the phase with more tokens than they started it with.',
     losers: 'Agents that ended the phase with fewer tokens than they started it with.',
-    redistributed: 'Tokens recovered from agents that died this phase and scattered uniformly over the survivors, keeping the global count conserved.'
+    redistributed: 'Tokens scattered uniformly over the survivors at the end of the phase, keeping the global count conserved. Mostly what the agents that died this phase were holding, plus whatever "Tokens created per phase" mints — that setting is zero by default, and while it is, this is the estate of the dead and nothing else. Zero when there were no survivors to scatter it over: the pool is dropped and a single fresh agent is given the whole world instead.'
   },
 
   // Statistics that count nodes, and so are also meaningful as a percentage

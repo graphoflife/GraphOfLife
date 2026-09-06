@@ -210,22 +210,6 @@ def _choose_binary(yes: float, no: float, mode_yes: float, mode_no: float) -> bo
     return bool(yes > no)
 
 
-def _pick_index(scores: np.ndarray, sample: bool) -> int:
-    """
-    Choose one entry from a row of scores.
-
-    Sampled in proportion to the scores, or simply the largest, depending on
-    what the agent's own mode head asked for.
-    """
-    if not sample:
-        return int(np.argmax(scores))
-
-    vals = np.maximum(0.0, scores)
-    total = float(vals.sum())
-    probs = (vals / total) if total > 0.0 else np.full(len(vals), 1.0 / len(vals))
-    return int(np.random.choice(len(scores), p=probs))
-
-
 def _apportion(weights: np.ndarray, total: int) -> np.ndarray:
     """
     Split `total` indivisible tokens across `weights` without losing any.
@@ -1304,7 +1288,12 @@ class GraphOfLife:
             draws = np.random.multinomial(global_pool, [1 / len(survivors)] * len(survivors))
             for u, extra in zip(survivors, draws):
                 self.tokens[u] = self.tokens.get(u, 0) + int(extra)
-        report["redistributed"] = int(global_pool)
+            # Counted here rather than beside the pool, because with nobody left
+            # to receive it the pool is not redistributed — it is dropped, and
+            # the resurrection below mints a whole world's worth instead. It was
+            # reported all the same, which put a number on a chart for tokens
+            # that went nowhere. The report already starts this at zero.
+            report["redistributed"] = int(global_pool)
 
         if self.G.number_of_nodes() == 0:
             aid = self.next_agent_id

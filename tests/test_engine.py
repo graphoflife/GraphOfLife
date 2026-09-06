@@ -92,6 +92,60 @@ def test_no_agent_is_ever_in_debt():
             assert min(frame["tokens"]) >= 0
 
 
+def test_a_pool_with_no_heirs_is_not_reported_as_redistributed():
+    """
+    The pool is only redistributed if somebody was left to receive it.
+
+    When the last agent dies the pool is dropped and a fresh world's worth is
+    minted for the resurrected one instead. Reporting it as redistributed put a
+    number on a chart — it is shown in the viewer's General panel and plotted
+    per run — for tokens that went nowhere.
+
+    Minting is what makes the pool non-empty here: agents that starve are by
+    definition holding nothing, so an emptied world's pool is whatever the
+    phase created and not one token more.
+    """
+    cfg = small(tokens_created_per_phase=5)
+    world = new_world(cfg)
+
+    # Everyone broke at once, which is the only route to an empty world.
+    for u in list(world.G.nodes()):
+        world.tokens[u] = 0
+    report = world._cleanup_and_redistribute()
+
+    assert report["resurrected"], "a world emptied of agents should resurrect one"
+    assert report["redistributed"] == 0, (
+        f"reported {report['redistributed']} tokens redistributed with nobody "
+        f"alive to receive them")
+    assert sum(world.tokens.values()) == cfg.total_tokens, (
+        "the resurrected agent should hold the whole world, minted fresh")
+
+
+def test_a_pool_with_heirs_is_reported_in_full():
+    """
+    The other half: what is actually shared out is still counted.
+
+    The estate comes from an agent cut off from the largest component rather
+    than a starved one, because only the disconnected die with anything left.
+    """
+    cfg = small()
+    world = new_world(cfg)
+
+    stranded = max(world.G.nodes(), key=lambda u: world.tokens[u])
+    world.G.remove_edges_from(list(world.G.edges(stranded)))
+    estate = world.tokens[stranded]
+    assert estate > 0, "the test needs an agent that dies holding something"
+
+    before = sum(world.tokens.values())
+    report = world._cleanup_and_redistribute()
+
+    assert not report["resurrected"], "the rest of the world is still standing"
+    assert stranded not in world.G, "an agent on its own island should be culled"
+    assert report["redistributed"] == estate, (
+        f"reported {report['redistributed']} redistributed, but {estate} was recovered")
+    assert sum(world.tokens.values()) == before, "tokens are conserved across cleanup"
+
+
 # ---------------------------------------------------------------------------
 # Topology
 # ---------------------------------------------------------------------------

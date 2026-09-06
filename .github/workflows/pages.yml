@@ -46,6 +46,10 @@ jobs:
         run: node tests/test_flowmodules.js
       - name: The frame window stays inside the run
         run: node tests/test_framewindow.js
+      - name: The walk-through still points at the code it describes
+        run: node tests/test_explain_anchors.js
+      - name: The Explanation's timing and accounting add up
+        run: node tests/test_view.js
       - name: Every script parses
         run: |
           for f in web/js/*.js; do node --check "$f"; done
