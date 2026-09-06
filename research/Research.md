@@ -20,7 +20,21 @@ notes has been a real number that meant nothing without the control beside it.
 
 ## 0. The state of knowledge
 
-**Nothing yet decides the claim either way.** What is known:
+**There is no heredity, so there is no cumulative evolution to be open-ended.**
+That is measured, it is the first thing that should have been measured, and it
+subordinates everything else in this document. Details in §0b; the short form
+is that a genotype's median life is **one iteration**, a lineage is **45% of
+the way to a stranger after one iteration and 92% after ten**, and replacing
+the entire conquest rule with a coin flip leaves the population *larger* and
+*more diverse* rather than dead.
+
+Everything below was written before that was known. It is kept as written —
+the reasoning about non-transitivity, castles and flow modules is still good
+reasoning, and most of it becomes relevant again the moment heredity works.
+But no measurement of open-endedness taken on the current engine means what it
+appears to mean, because the system it was taken on is not evolving.
+
+What was known before, all of it still true and now differently weighted:
 
 | | evidence | bearing on the claim |
 |---|---|---|
@@ -38,6 +52,104 @@ complexity (§3.1), that a castle must be one family (§3.4.1), and that a castl
 is a persistent set of agents (§3.4.2).
 
 The open questions are gathered in §10.
+
+---
+
+## 0b. Is there heredity?
+
+Lewontin's three conditions for evolution by natural selection are variation,
+differential fitness, and **heredity**. This project has spent its effort on
+the second — the game, the revolutions, the conquest rule — and assumed the
+third. The third is the one that was not there.
+
+### Why to suspect it
+
+`blotto_phase` ends with
+
+```
+for brain in self.brains.values():
+    self._mutate_brain(brain)
+```
+
+Every living agent is mutated every iteration, at `mutation_probability` 0.5
+by default. **Mutation is applied to the population, not at replication.** An
+agent that just won every node it contested is jittered exactly as hard as one
+that lost everything, and again the next iteration, and the next. In biology,
+mutation happens when a genome is copied; here it happens continuously to
+everyone, which is closer to somatic damage than to genetic variation.
+
+### What was measured
+
+`research/pilot_heredity.py`.
+
+**A genotype's life.** A `brain_id` names an exact genome — a copy keeps its
+source's id and only a mutation makes a new one — so the lifetime of an id is
+the lifetime of a genome.
+
+| `mutation_probability` | median life | 90th pct | ever > 5 iterations |
+|---|---|---|---|
+| 0.50 (default) | **1** | 3 | **1.0%** |
+| 0.20 | 1 | 5 | 7.4% |
+| 0.05 | 2 | 7 | 15.0% |
+| 0.00 | 3 | 22 | 31.6% |
+
+The last row is the surprise and the important one: **with mutation switched
+off entirely**, the median genotype still lasts three iterations. So mutation
+is not the only thing destroying genomes — conquest overwrites a node's brain
+with the winner's, and death removes it. There are two independent shredders,
+and turning off the obvious one leaves the other running.
+
+**A lineage's memory.** Take an agent, record its weights and its behaviour on
+a fixed batch of observations, follow its descendants, and ask how far each has
+drifted from its own ancestor — as a fraction of how far two *unrelated* agents
+are from each other. 1.0 means a descendant is no more like its ancestor than a
+stranger is.
+
+| iterations later | weights | behaviour |
+|---|---|---|
+| 1 | 0.45 | 0.45 |
+| 2 | 0.53 | 0.53 |
+| 3 | 0.58 | 0.56 |
+| 5 | 0.71 | 0.70 |
+| 10 | **0.92** | **0.89** |
+
+**The heredity half-life is about three iterations.** After ten, essentially
+nothing of the ancestor remains. Any adaptation that takes more than a handful
+of iterations to pay for itself cannot be selected for, because the genome that
+would have paid is gone.
+
+**Does the selection rule matter at all?** The ablation the method in §9 calls
+for and that nothing here had ever run: keep the world identical, and decide
+each node by a coin among everyone who staked instead of by the Blotto
+resolution.
+
+| winner chosen by | extinct | median agents | distinct brains | mean degree |
+|---|---|---|---|---|
+| stake (as shipped) | 0/5 | 424 | 365 | 3.48 |
+| **chance** | 0/5 | **585** | **509** | 3.49 |
+
+Removing the mechanism the algorithm is *about* does not kill the population,
+does not change the graph, and leaves more agents carrying more distinct
+genomes. Five seeds — indicative, not an effect, and being repeated at thirty.
+But the direction is the wrong one for the claim, and no reading of it says the
+conquest rule is what shapes a run.
+
+### What follows
+
+The population is doing something that looks like evolution — births, deaths,
+competition, a changing graph — and is better described as **drift under
+churn**. Variation without heredity is noise, and selection with a two-iteration
+memory is not selection.
+
+This also explains, retrospectively, two things filed elsewhere in this
+document as puzzles: that 502 agents carried 502 distinct `brain_id`s (§5.2),
+and that a binary brain able to express ten times as many distinct decisions
+does no better than one that can barely express any (§9b.10). Both are what a
+system with no heredity looks like from the outside.
+
+**Nothing about open-endedness can be settled on this engine as it stands.**
+The order of work is: make heredity real, re-measure, and only then return to
+castles, flow modules and activity statistics. §4b lists what to change.
 
 ---
 
@@ -444,9 +556,55 @@ against a rule that is constantly trying to make it clonal.
 
 ## 4. What is missing from the model
 
-Ordered by how much I expect each to matter.
+Ordered by how much I expect each to matter. **§4.0 was added after §0b and
+displaces everything under it**: the rest are reasons this system might not
+reach open-ended evolution, and §4.0 is the reason it is not currently doing
+evolution at all. The others are worth nothing until it is fixed.
 
-### 4.1 No positive-sum interaction — *the big one*
+### 4.0 Mutation is not tied to replication — *the one that has to be first*
+
+Measured in §0b: heredity half-life about three iterations, median genotype
+life one iteration, and the selection rule making no difference to any
+population statistic.
+
+**The change.** Move the mutation out of the per-iteration loop over all brains
+and into `_spawn_child`, where it already half is — a child is already a
+mutated copy of its parent. Deleting the world-wide loop is a two-line edit:
+
+```
+# blotto_phase, at the end
+for brain in self.brains.values():
+    self._mutate_brain(brain)          # <- delete
+```
+
+An agent's genome would then change only when it is copied, which is what
+makes a lineage a lineage.
+
+**What that alone does not fix.** The second shredder from §0b — conquest
+overwrites a node's brain with the winner's, so a genome vanishes when its
+carrier loses even with mutation off. That is not a defect: it *is* the
+selection mechanism, and it is how a successful genome spreads. But it means
+the unit that persists is the genome-as-copied, not the agent, and every
+measurement of lineage has to follow brains rather than nodes. The engine
+already tracks both ancestries separately (§1), which turns out to have been
+the right call for a reason nobody had stated.
+
+**The test that decides whether it worked.** Re-run
+`research/pilot_heredity.py`. Success is the heredity half-life going from
+three iterations to something bounded only by how long a lineage survives, and
+the §0b ablation table separating — a world where nodes are won by a coin
+should then be *worse*, not better. If the ablation still does not separate
+after heredity is real, the problem is deeper than mutation and this document
+needs rewriting from §2.
+
+**Why this was not noticed for so long.** Every statistic this project built
+looks healthy under no heredity. Diversity is maximal, lineage forests are
+lush, flow modules compress, activity accumulates. None of those measures
+*retention*, and a system that forgets everything scores well on all of them.
+The one measurement that would have caught it — comparing a descendant to its
+own ancestor against a background of strangers — takes about forty lines.
+
+### 4.1 No positive-sum interaction
 
 There is no rule by which cooperation produces surplus. `tokens_created_per_phase`
 injects tokens globally and unconditionally, which is weather, not production.
@@ -893,6 +1051,29 @@ Ordered by how much answering one would move the claim.
 ---
 
 ## 10. Immediate next steps
+
+**Rewritten after §0b.** The old list is below it, unchanged, because most of
+it is still the right list — just not yet.
+
+1. **Tie mutation to replication** (§4.0). Two lines. Everything else waits on
+   it, because every measurement taken before it is a measurement of drift.
+2. **Re-run `research/pilot_heredity.py`.** Success is a heredity half-life
+   bounded by how long a lineage lives rather than by the mutation rate, and
+   the ablation table separating in the right direction.
+3. **The cross-time tournament** (§5.4, and CIAO in the Literature page). Play
+   a late population against its own ancestors under identical conditions. It
+   is the only measurement that cannot be fooled by a system that forgets: a
+   population with no heredity cannot beat its own past, and one that is
+   adapting must. Checkpoints already hold everything it needs.
+4. Only then the ecology work — mutual-flow yields (§4.1), an edge-forming
+   rule (§4.2) — and only then the open-endedness statistics.
+
+The ordering is the whole point. Activity statistics, MODES, castles and flow
+modules all assume something is being retained; run on a system with a
+three-iteration memory they measure the memory, not the world. **You cannot get
+open-ended evolution before you have evolution.**
+
+#### The list as it stood before §0b
 
 1. `research/phylogeny.py` — reconstruct the lineage forest from a run's
    frames. Everything in §6 depends on it and nothing else does.

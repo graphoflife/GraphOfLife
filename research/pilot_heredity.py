@@ -34,7 +34,10 @@ sys.path.insert(0, ".")
 from gol_config import SimConfig
 import GraphOfLifeSimple as G
 
-SEEDS = (1, 2, 3, 4, 5)
+# Five is enough to see the shape of parts 1 and 2, where the effect is
+# enormous. Part 3 compares two populations and is held to Research.md's
+# standing rule of about thirty; pass a count to raise it.
+SEEDS = tuple(range(1, int(sys.argv[2]) + 1)) if len(sys.argv) > 2 else (1, 2, 3, 4, 5)
 ITERS = 40
 
 
