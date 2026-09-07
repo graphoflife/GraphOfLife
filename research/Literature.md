@@ -7,6 +7,12 @@ Every entry gives the citation, what the work actually says, and — the part
 that earns it a place — **what it means here**: what we should copy, what we
 should measure, or what it tells us is impossible.
 
+Graph structure has its own document, **`Graphs.md`** — how graphs are
+categorised, what sits between a tree and an expander, and what the Wolfram
+Physics Project does and does not offer for measuring emergent complexity. The
+two are meant to be read together; this one is about evolution, that one about
+the medium it happens in.
+
 Sources were checked against publication records in September 2026. Where a
 claim is from a summary rather than the full paper it is marked *(abstract
 only)*. Nothing here is a substitute for reading the paper before citing it in

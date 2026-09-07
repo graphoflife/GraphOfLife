@@ -70,6 +70,7 @@ SHIPPED_PY = ("GraphOfLifeSimple.py", "gol_config.py", "gol_series.py",
 SHIPPED_DOCS = {
     "data/Research.md": os.path.join("research", "Research.md"),
     "data/Literature.md": os.path.join("research", "Literature.md"),
+    "data/Graphs.md": os.path.join("research", "Graphs.md"),
 }
 
 # Requests are capped so a malformed or hostile body cannot exhaust memory.

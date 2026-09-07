@@ -52,3 +52,4 @@ const DocPage = {
 
 const Notes = DocPage.of('research-notes', 'data/Research.md');
 const Literature = DocPage.of('research-literature', 'data/Literature.md');
+const Graphs = DocPage.of('research-graphs', 'data/Graphs.md');

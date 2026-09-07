@@ -22,7 +22,8 @@ const Research = {
     lineage:    { view: Lineage },
     flow:       { view: FlowView },
     notes:      { page: Notes },
-    literature: { page: Literature }
+    literature: { page: Literature },
+    graphs:     { page: Graphs }
   },
 
   runs: [],

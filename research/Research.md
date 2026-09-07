@@ -470,7 +470,25 @@ Three curves, each against a neutral shadow:
 and all three above their shadows. **Failure that is still informative:** a
 clean asymptote, which tells us which mechanic to add next.
 
-### 6.7 Ablation as standing method
+### 6.7 Topology — the medium an organisation would have to live in
+An organisation is a subgraph, so whether organisations can exist is partly a
+question about the graph they would occupy. `Graphs.md` works this out: the
+shape that supports mesoscale structure is a well-connected core with structure
+attached to it, and it is identifiable three independent ways — bridge balance
+and whisker sizes, the spectral gap `λ₂`, and the distribution of per-edge
+effective resistance. We currently count bridges without recording what is on
+either side of them.
+
+Two things make this urgent rather than decorative. **No edge in this algorithm
+is ever created between nodes more than two hops apart**, so the small-world
+shortcuts the world starts with are a budget that is spent and never refilled —
+which is the sharpest argument yet for §4.5. And because cleanup keeps only the
+largest component, a bridge with a tenth of the population behind it *is* a
+tenth-of-the-population extinction, waiting for the zero-flow prune to reach it.
+**Control:** the Watts–Strogatz graph the run started from, and a
+degree-preserving rewire of each frame.
+
+### 6.8 Ablation as standing method
 Soros & Stanley 2014: for each mechanic in §4, run with and without and show
 the effect disappears. A property that survives every ablation was never caused
 by the mechanism claimed. Every headline result gets this treatment before it
@@ -518,7 +536,7 @@ all.
 
 **Phase 3 — let it grow.** `growable_layers`, `local_rules`. Measure §6.6.
 
-**Phase 4 — the honest attempt to break it.** §6.7 across every mechanic, and
+**Phase 4 — the honest attempt to break it.** §6.8 across every mechanic, and
 the longest run affordable, looking for the asymptote.
 
 Rules for the whole programme, learned the hard way in this project:
@@ -624,7 +642,10 @@ not currently what is being selected on** — consistent with §3.1.
 
 Rendered for a reader in the site's **Literature** tab, with a note on what
 each means here. Summaries there are from working knowledge and need checking
-against the papers.
+against the papers. Graph structure is a second document, in the **Graphs** tab:
+tree-likeness and expansion, the core-and-whiskers shape real networks take, the
+four ways graphs get categorised, and the Wolfram Physics Project's geometric
+estimators — one of which this project already uses.
 
 **Open-endedness:** Bedau & Packard 1992; Bedau, Snyder & Packard 1998; Dolson,
 Vostinar, Wiser & Ofria 2019 (MODES); Banzhaf et al. 2016; Taylor et al. 2016;
