@@ -476,8 +476,10 @@ question about the graph they would occupy. `Graphs.md` works this out: the
 shape that supports mesoscale structure is a well-connected core with structure
 attached to it, and it is identifiable three independent ways — bridge balance
 and whisker sizes, the spectral gap `λ₂`, and the distribution of per-edge
-effective resistance. We currently count bridges without recording what is on
-either side of them.
+effective resistance. ✅ The first of those three is built: `cutRisk`,
+`cutRiskBefore`, `coreShare` and `ricciCurvature` are recorded every frame, and
+each claim has a panel in the **Theses** tab stating in advance what would
+confirm and what would refute it. `λ₂` and effective resistance are not.
 
 Two things make this urgent rather than decorative. **No edge in this algorithm
 is ever created between nodes more than two hops apart**, so the small-world
@@ -487,6 +489,11 @@ largest component, a bridge with a tenth of the population behind it *is* a
 tenth-of-the-population extinction, waiting for the zero-flow prune to reach it.
 **Control:** the Watts–Strogatz graph the run started from, and a
 degree-preserving rewire of each frame.
+
+Measured once already (`research/pilot_topology.py`, and Appendix A.8): the
+first is confirmed against the control by a wide margin, the second is not
+supported and was not even askable until the engine began taking the reading
+before the cull rather than after it.
 
 ### 6.8 Ablation as standing method
 Soros & Stanley 2014: for each mechanic in §4, run with and without and show
@@ -637,6 +644,20 @@ changes survival not at all. **How finely an agent can state a preference is
 not currently what is being selected on** — consistent with §3.1.
 
 ---
+### A.8 Topology *(`research/pilot_topology.py`)*
+Two long runs, against a Watts–Strogatz graph rebuilt at the same size and mean
+degree. The graph ends with **22–30% of its edges being bridges where the
+control has 0.0%**, clustering at 0.02–0.06 against 0.24, and path length above
+the small-world ratio — it has left the shape it started as entirely. The
+departure happens **early**: by the first sampled window of a long run it is
+already at 19% bridges, so a long run's trend describes the aftermath, not the
+transition.
+
+Two things that cut against the easy reading. `orphaned` is non-zero in **every
+recorded frame** — the cull is continuous, not catastrophic, so the tree-like
+drift is being punished all along and happens regardless. And clustering
+*falls* rather than rising, so newborns are mostly not closing triangles: the
+graph grows by adding thin pendant structure, which is whisker growth.
 
 ## Appendix B — literature
 

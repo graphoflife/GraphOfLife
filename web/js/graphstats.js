@@ -47,19 +47,36 @@ const GraphStats = {
    * exact and costs nothing.
    *
    * Bridges are also reported: an edge on no loop at all, whose removal splits
-   * the graph. Per-node and per-edge loop counts come from
-   * `cycleParticipation` rather than from here.
+   * the graph. Alongside the count, `cutRisk` says how much of the population
+   * the worst single bridge could cut off and `coreShare` how much survives
+   * peeling the hanging trees away — the count says the graph is fragile,
+   * those two say how badly it would break and how much of it is fringe.
+   * Per-node and per-edge loop counts come from `cycleParticipation` rather
+   * than from here.
    */
   loops(ids, edges, adj) {
-    const bridgeSet = this._bridges(ids, edges, adj);
+    const splits = this._bridgeSplits(ids, adj);
     const whole = this.components(ids, adj);
     const cycleRank = Math.max(0, edges.length - ids.length + whole.count);
 
     const participation = this.cycleParticipation(ids, edges, adj);
 
+    // How much of the population one edge could cut off, and how much of the
+    // graph is left once the hanging trees are peeled away. Mirrors
+    // bridge_splits()/two_core_size() in GraphOfLifeSimple.py.
+    const n = ids.length;
+    let cutRisk = 0;
+    if (n > 1) {
+      for (const [, , below] of splits) {
+        cutRisk = Math.max(cutRisk, Math.min(below, n - below) / n);
+      }
+    }
+
     return {
       cycleRank,
-      bridges: bridgeSet.size,
+      bridges: splits.length,
+      cutRisk,
+      coreShare: n ? this._twoCoreSize(ids, adj) / n : 0,
       componentCount: whole.count,
       nodeLoops: participation.perNode,
       edgeLoops: participation.perEdge,
@@ -172,24 +189,26 @@ const GraphStats = {
   },
 
   /**
-   * Bridges, by iterative depth-first search.
+   * Every bridge, with how many nodes sit behind it.
    *
-   * An edge is a bridge when nothing below it in the search tree can reach back
-   * above it. Written as a loop with an explicit stack rather than recursion,
-   * since a few thousand nodes is enough to overflow the call stack.
-   * Returns the set of bridge indices into `edges`.
+   * A bridge is an edge on no cycle: cut it and the graph falls in two.
+   * Counting them says the graph is fragile; it does not say how badly it
+   * would break, and that is the number this project needs — cleanup keeps
+   * only the largest connected component, so a bridge with a tenth of the
+   * population behind it is a tenth-of-the-population extinction waiting for
+   * the zero-flow prune to reach that edge.
+   *
+   * Tarjan's low-link, iterative because these graphs get deep, with subtree
+   * sizes accumulated on the way back up: the walk that finds a bridge has
+   * already visited exactly the nodes behind it, so the split is free.
+   *
+   * Mirrors bridge_splits() in GraphOfLifeSimple.py.
    */
-  _bridges(ids, edges, adj) {
-    // Index edges by endpoint pair so a traversal can name the edge it used.
-    const edgeIndex = new Map();
-    for (let i = 0; i < edges.length; i++) {
-      const [a, b] = edges[i];
-      edgeIndex.set(a < b ? `${a},${b}` : `${b},${a}`, i);
-    }
-
+  _bridgeSplits(ids, adj) {
     const disc = new Map();
     const low = new Map();
-    const bridges = new Set();
+    const size = new Map();
+    const found = [];
     let timer = 0;
 
     for (const root of ids) {
@@ -198,7 +217,7 @@ const GraphStats = {
       // Each stack entry carries its own iterator, so the walk can pause and
       // resume exactly where it left off.
       const stack = [{ node: root, parent: null, iter: (adj.get(root) || new Set()).values() }];
-      disc.set(root, timer); low.set(root, timer); timer++;
+      disc.set(root, timer); low.set(root, timer); size.set(root, 1); timer++;
 
       while (stack.length) {
         const top = stack[stack.length - 1];
@@ -210,11 +229,8 @@ const GraphStats = {
           if (parentEntry) {
             const u = parentEntry.node, v = top.node;
             low.set(u, Math.min(low.get(u), low.get(v)));
-            if (low.get(v) > disc.get(u)) {
-              const key = u < v ? `${u},${v}` : `${v},${u}`;
-              const idx = edgeIndex.get(key);
-              if (idx !== undefined) bridges.add(idx);
-            }
+            size.set(u, size.get(u) + size.get(v));
+            if (low.get(v) > disc.get(u)) found.push([u, v, size.get(v)]);
           }
           continue;
         }
@@ -230,11 +246,39 @@ const GraphStats = {
           low.set(top.node, Math.min(low.get(top.node), disc.get(next)));
           continue;
         }
-        disc.set(next, timer); low.set(next, timer); timer++;
+        disc.set(next, timer); low.set(next, timer); size.set(next, 1); timer++;
         stack.push({ node: next, parent: top.node, iter: (adj.get(next) || new Set()).values() });
       }
     }
-    return bridges;
+    return found;
+  },
+
+  /**
+   * How many nodes survive peeling degree-1 nodes until there are none left.
+   *
+   * What is left is the 2-core: the graph with every hanging tree stripped
+   * off. The peeled nodes are the whiskers of Graphs.md §3, so the ratio says
+   * how much of the population is periphery rather than core.
+   *
+   * Mirrors two_core_size() in GraphOfLifeSimple.py.
+   */
+  _twoCoreSize(ids, adj) {
+    const degree = new Map();
+    for (const u of ids) degree.set(u, (adj.get(u) || new Set()).size);
+
+    const peeled = new Set();
+    const queue = ids.filter(u => degree.get(u) <= 1);
+    while (queue.length) {
+      const u = queue.pop();
+      if (peeled.has(u)) continue;
+      peeled.add(u);
+      for (const v of adj.get(u) || []) {
+        if (peeled.has(v)) continue;
+        degree.set(v, degree.get(v) - 1);
+        if (degree.get(v) === 1) queue.push(v);
+      }
+    }
+    return ids.length - peeled.size;
   },
 
   /**
@@ -736,15 +780,17 @@ const GraphStats = {
 
     // Least-squares slope of log shell against log radius, over radii that
     // have not yet swallowed half the graph.
-    const xs = [], ys = [];
+    const rs = [], xs = [], ys = [];
     for (let r = 1; r <= maxRadius; r++) {
       if (volumes[r] > n * 0.5) continue;
       const shellSize = volumes[r] - volumes[r - 1];
       if (shellSize <= 0) continue;
+      rs.push(r);
       xs.push(Math.log(r));
       ys.push(Math.log(shellSize));
     }
-    if (xs.length < 2) return { estimate: null, volumes };
+    const ricciCurvature = this.ballCurvature(rs, xs, ys);
+    if (xs.length < 2) return { estimate: null, ricciCurvature, volumes };
 
     const meanX = xs.reduce((a, b) => a + b, 0) / xs.length;
     const meanY = ys.reduce((a, b) => a + b, 0) / ys.length;
@@ -754,6 +800,65 @@ const GraphStats = {
       den += (xs[i] - meanX) ** 2;
     }
     // The shell exponent is d - 1.
-    return { estimate: den > 0 ? num / den + 1 : null, volumes, radiiUsed: xs.length };
+    return {
+      estimate: den > 0 ? num / den + 1 : null,
+      ricciCurvature,
+      volumes,
+      radiiUsed: xs.length
+    };
+  },
+
+  /**
+   * The Ricci scalar, from the ball growth already being measured.
+   *
+   * The dimension estimate fits log(shell) against log(r) and keeps the slope.
+   * In a curved space that line is not straight, and the bend is not noise —
+   * it is the curvature. For a ball of radius r in d dimensions with Ricci
+   * scalar R,
+   *
+   *     V(r) = w_d r^d [ 1 - R r^2 / (6(d+2)) + ... ]
+   *
+   * and differentiating for the shell this code actually walks,
+   *
+   *     S(r) = d w_d r^(d-1) [ 1 - R r^2 / (6d) + ... ]
+   *
+   * so regressing log(shell) on both log(r) and r^2 gives d - 1 as the first
+   * coefficient and -R/(6d) as the second. Balls smaller than flat space
+   * predicts mean positive curvature; larger means negative, which is what a
+   * graph that keeps branching gives. Sparse expanders are negatively curved
+   * as a theorem (Salez 2021), so this doubles as a reading on how
+   * expander-like the graph is. See Graphs.md §5.
+   *
+   * `dimension` stays the plain one-slope fit rather than being taken from
+   * here: redefining an existing series key is a worse trade than the two fits
+   * disagreeing slightly.
+   *
+   * Four radii minimum — three points fit three parameters exactly and would
+   * return a curvature with no evidence in it.
+   *
+   * Mirrors _ball_curvature() in gol_series.py.
+   */
+  ballCurvature(rs, logR, logShell) {
+    if (rs.length < 4) return null;
+    const sq = rs.map(r => r * r);
+    const n = rs.length;
+    const mean = a => a.reduce((x, y) => x + y, 0) / n;
+    const m1 = mean(logR), m2 = mean(sq), my = mean(logShell);
+    const a1 = logR.map(x => x - m1);
+    const a2 = sq.map(x => x - m2);
+    const b = logShell.map(y => y - my);
+
+    const dot = (p, q) => p.reduce((acc, x, i) => acc + x * q[i], 0);
+    const s11 = dot(a1, a1), s22 = dot(a2, a2), s12 = dot(a1, a2);
+    const s1y = dot(a1, b), s2y = dot(a2, b);
+
+    const det = s11 * s22 - s12 * s12;
+    if (det === 0) return null;
+    const slope = (s22 * s1y - s12 * s2y) / det;
+    const bend = (s11 * s2y - s12 * s1y) / det;
+
+    const d = slope + 1;
+    if (d <= 0) return null;
+    return -6 * d * bend;
   }
 };

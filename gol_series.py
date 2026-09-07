@@ -22,6 +22,11 @@ import threading
 from typing import Any, Dict, List, Optional, Tuple
 
 import gol_store as store
+# The bridge walk lives in the engine because the engine needs it too, on the
+# live graph before a cull. One Python implementation, mirrored once in
+# graphstats.js and compared key by key by tests/test_stats_parity.py — the
+# same arrangement every other structural measure here already has.
+from GraphOfLifeSimple import bridge_splits, two_core_size
 
 #: What a brain with no recorded parent carries, matching the engine.
 NO_PARENT = -1
@@ -61,7 +66,13 @@ def progress(run_id: str) -> Dict[str, Any]:
 # does not merely serve stale numbers: it leaves a cache holding two shapes of
 # row at once, which is how the power-law statistics came to be computed and
 # then dropped on the way out.
-SERIES_VERSION = 17
+#
+# 18: `redistributed` changed meaning in cbfc457 — it now reports what was
+# actually shared out rather than what was pooled, which differ whenever the
+# pool was dropped in favour of a resurrection. That commit did not bump this,
+# so every cache built before it has been serving the old number ever since,
+# which is the exact failure the paragraph above describes.
+SERIES_VERSION = 18
 
 # At most this many iterations are analysed for a run's history.
 #
@@ -113,6 +124,64 @@ def _shannon(counts) -> float:
     return h
 
 
+def _ball_curvature(rs, log_r, log_shell) -> Optional[float]:
+    """
+    The Ricci scalar, from the ball growth already being measured.
+
+    The dimension estimate fits log(shell) against log(r) and keeps the slope.
+    In a curved space that line is not straight, and the bend is not noise —
+    it is the curvature. For a ball of radius r in d dimensions with Ricci
+    scalar R,
+
+        V(r) = w_d r^d [ 1 - R r^2 / (6(d+2)) + ... ]
+
+    and differentiating for the shell this code actually walks,
+
+        S(r) = d w_d r^(d-1) [ 1 - R r^2 / (6d) + ... ]
+
+    so regressing log(shell) on both log(r) and r^2 gives d - 1 as the first
+    coefficient and -R/(6d) as the second. Balls smaller than flat space
+    predicts mean positive curvature; larger means negative, which is what a
+    graph that keeps branching gives. Sparse expanders are negatively curved as
+    a theorem (Salez 2021), so this is also a reading on how expander-like the
+    graph is. See Graphs.md §5.
+
+    `dimension` is deliberately left as the plain one-slope fit rather than
+    taken from here, because changing what an existing series key means is a
+    worse trade than the two fits disagreeing slightly.
+
+    Four radii minimum: three points would fit three parameters exactly and
+    return a curvature with no evidence in it at all.
+    """
+    if len(rs) < 4:
+        return None
+    sq = [r * r for r in rs]
+    n = len(rs)
+    mx1 = sum(log_r) / n
+    mx2 = sum(sq) / n
+    my = sum(log_shell) / n
+    a1 = [x - mx1 for x in log_r]
+    a2 = [x - mx2 for x in sq]
+    b = [y - my for y in log_shell]
+
+    s11 = sum(x * x for x in a1)
+    s22 = sum(x * x for x in a2)
+    s12 = sum(x * y for x, y in zip(a1, a2))
+    s1y = sum(x * y for x, y in zip(a1, b))
+    s2y = sum(x * y for x, y in zip(a2, b))
+
+    det = s11 * s22 - s12 * s12
+    if det == 0:
+        return None
+    slope = (s22 * s1y - s12 * s2y) / det
+    bend = (s11 * s2y - s12 * s1y) / det
+
+    d = slope + 1.0
+    if d <= 0:
+        return None
+    return -6.0 * d * bend
+
+
 def _structure(ids: List[int], edges: List[List[int]]) -> Dict[str, Any]:
     """
     Loops, triangles and dimension, mirroring web/js/graphstats.js.
@@ -142,48 +211,18 @@ def _structure(ids: List[int], edges: List[List[int]]) -> Dict[str, Any]:
             count += 1
         return label, count
 
-    # --- bridges, by iterative depth-first search ---
-    edge_index = {}
-    for i, (a, b) in enumerate(edges):
-        edge_index[(a, b) if a < b else (b, a)] = i
-
-    disc: Dict[int, int] = {}
-    low: Dict[int, int] = {}
-    bridges: set = set()
-    timer = 0
-
-    for root in ids:
-        if root in disc:
-            continue
-        stack = [[root, None, iter(adj[root])]]
-        disc[root] = low[root] = timer
-        timer += 1
-
-        while stack:
-            top = stack[-1]
-            node, parent, it = top[0], top[1], top[2]
-            nxt = next(it, None)
-
-            if nxt is None:
-                stack.pop()
-                if stack:
-                    u, v = stack[-1][0], node
-                    low[u] = min(low[u], low[v])
-                    if low[v] > disc[u]:
-                        idx = edge_index.get((u, v) if u < v else (v, u))
-                        if idx is not None:
-                            bridges.add(idx)
-                continue
-
-            if nxt == parent:
-                top[1] = None      # skip the edge we arrived on, once
-                continue
-            if nxt in disc:
-                low[node] = min(low[node], disc[nxt])
-                continue
-            disc[nxt] = low[nxt] = timer
-            timer += 1
-            stack.append([nxt, node, iter(adj[nxt])])
+    # --- bridges, and how much of the graph each one could sever ---
+    #
+    # The count alone says the graph is fragile; it does not say how badly it
+    # would break. `cutRisk` is the largest share of the population a single
+    # edge can cut off, which is the form Graphs.md §3 gives the "no bridge
+    # with more than a tenth on one side" rule. `coreShare` is what is left
+    # after peeling the hanging trees away — the rest is whiskers.
+    splits = bridge_splits(ids, adj)
+    node_count = len(ids)
+    cut_risk = max((min(b, node_count - b) / node_count for _, _, b in splits),
+                   default=0.0) if node_count > 1 else 0.0
+    core_share = (two_core_size(ids, adj) / node_count) if node_count else 0.0
 
     _, component_count = component_labels(adj)
     cycle_rank = max(0, len(edges) - len(ids) + component_count)
@@ -290,8 +329,8 @@ def _structure(ids: List[int], edges: List[List[int]]) -> Dict[str, Any]:
         radius = radius or 0
         mean_path = (reached_sum / reached_count) if reached_count > 0 else 0.0
 
-    # --- ball-growth dimension ---
-    dimension = None
+    # --- ball-growth dimension, and the curvature the same fit was discarding ---
+    dimension = ricci = None
     if n >= 8:
         seeds, max_radius = 24, 5
         step = max(1, n // min(seeds, n))
@@ -318,13 +357,14 @@ def _structure(ids: List[int], edges: List[List[int]]) -> Dict[str, Any]:
 
         if sampled:
             volumes = [v / sampled for v in volume]
-            xs, ys = [], []
+            rs, xs, ys = [], [], []
             for r in range(1, max_radius + 1):
                 if volumes[r] > n * 0.5:
                     continue
                 shell_size = volumes[r] - volumes[r - 1]
                 if shell_size <= 0:
                     continue
+                rs.append(float(r))
                 xs.append(math.log(r))
                 ys.append(math.log(shell_size))
             if len(xs) >= 2:
@@ -334,15 +374,19 @@ def _structure(ids: List[int], edges: List[List[int]]) -> Dict[str, Any]:
                 den = sum((x - mx) ** 2 for x in xs)
                 # The shell exponent is d - 1.
                 dimension = (num / den + 1) if den > 0 else None
+            ricci = _ball_curvature(rs, xs, ys)
 
     return {
         "cycleRank": cycle_rank,
         "loopDensity": (cycle_rank / len(edges)) if edges else 0.0,
-        "bridges": len(bridges),
+        "bridges": len(splits),
+        "cutRisk": cut_risk,
+        "coreShare": core_share,
         "components": component_count,
         "triangles": triangle_total,
         "transitivity": transitivity,
         "dimension": dimension,
+        "ricciCurvature": ricci,
         "radius": radius,
         "diameter": diameter,
         "meanPathLength": mean_path,
@@ -860,6 +904,11 @@ def frame_stats(frame: Dict[str, Any], previous: Dict[str, Any] | None = None) -
         "prunedEdges": len(decisions["pruned_edges"]) if "pruned_edges" in decisions else None,
         "starved": cleanup.get("starved"),
         "orphaned": cleanup.get("orphaned"),
+        # Measured on the graph as it stood before this phase's cull, which is
+        # the only version of this number that can be read as a cause of the
+        # cull rather than a consequence of it. Absent from runs made before
+        # the engine started recording it.
+        "cutRiskBefore": cleanup.get("cutRiskBefore"),
         "redistributed": cleanup.get("redistributed"),
     }
 
@@ -1121,9 +1170,16 @@ def _build_series_locked(run_id: str) -> Dict[str, Any]:
                              "strain": store.load_meta(run_id).get("strain"),
                              "rows": rows})
 
+    # The strain travels in the reply too, and not only in the cache file. The
+    # whole reason for stamping it on the summary is that a chart should be
+    # able to say which algorithm it is of; leaving it out of the response
+    # meant the file knew and the page did not, which is the half that matters.
+    strain = store.load_meta(run_id).get("strain")
+
     if not rows:
         return {"count": 0, "keys": [], "series": {}, "stride": stride,
-                "sampled": False, "nodeCountKeys": list(NODE_COUNT_KEYS)}
+                "sampled": False, "strain": strain,
+                "nodeCountKeys": list(NODE_COUNT_KEYS)}
 
     keys = _series_keys(rows)
     series = {k: [row.get(k) for row in rows] for k in keys}
@@ -1134,6 +1190,7 @@ def _build_series_locked(run_id: str) -> Dict[str, Any]:
         "series": series,
         "stride": stride,
         "sampled": stride > 1,
+        "strain": strain,
         "totalIterations": total_iterations,
         "nodeCountKeys": list(NODE_COUNT_KEYS),
     }

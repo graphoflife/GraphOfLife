@@ -23,7 +23,8 @@ const Research = {
     flow:       { view: FlowView },
     notes:      { page: Notes },
     literature: { page: Literature },
-    graphs:     { page: Graphs }
+    graphs:     { page: Graphs },
+    theses:     { view: Theses }
   },
 
   runs: [],

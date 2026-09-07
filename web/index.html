@@ -551,6 +551,7 @@
       <button type="button" data-mode="notes">Findings</button>
       <button type="button" data-mode="literature">Literature</button>
       <button type="button" data-mode="graphs">Graphs</button>
+      <button type="button" data-mode="theses">Theses</button>
     </div>
     <span class="research-run" id="researchRunField">
       <label for="researchRun">Simulation</label>
@@ -638,6 +639,24 @@
   <!-- Filled by Graphs.render() from research/Graphs.md. -->
   <section id="research-graphs" class="research-panel" hidden></section>
 
+  <!-- ---------------- theses ---------------- -->
+  <!-- One claim about the graph per entry, with the series that decide it.
+       The list and the prose are built by theses.js from the THESES table
+       there, so a new claim is one entry in that table and nothing here. -->
+  <section id="research-theses" class="research-panel" hidden>
+    <div class="theses-layout">
+      <nav class="theses-list" id="thesesList"></nav>
+      <div class="theses-main">
+        <div class="theses-prose" id="thesesProse"></div>
+        <div class="theses-stage">
+          <canvas id="thesesCanvas"></canvas>
+        </div>
+        <div class="theses-legend" id="thesesLegend"></div>
+        <p class="lineage-note" id="thesesNote"></p>
+      </div>
+    </div>
+  </section>
+
   <!-- ---------------- findings ---------------- -->
   <!-- Filled by Notes.render() from research/Research.md, which is the
        document itself rather than a copy of it. -->
@@ -682,6 +701,7 @@
 <script src="js/flowview.js"></script>
 <script src="js/markdown.js"></script>
 <script src="js/docpage.js"></script>
+<script src="js/theses.js"></script>
 <script src="js/research.js"></script>
 <script src="js/viewer.js"></script>
 <!-- The viewer is assembled from four files. The core declares it; these three

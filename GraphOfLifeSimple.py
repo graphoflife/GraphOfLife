@@ -230,6 +230,121 @@ def _apportion(weights: np.ndarray, total: int) -> np.ndarray:
     return alloc
 
 
+def bridge_splits(ids, adj) -> List[Tuple[int, int, int]]:
+    """
+    Every bridge, and how much of the graph sits behind it.
+
+    A bridge is an edge on no cycle: cut it and the graph falls in two. Counting
+    them says how fragile the graph is; it does not say how *badly* it would
+    break, and here that is the number that matters. Cleanup keeps only the
+    largest connected component, so a bridge with a tenth of the population
+    behind it is a tenth-of-the-population extinction waiting for the zero-flow
+    prune to reach that one edge.
+
+    Returns `(u, v, below)` per bridge, where `below` counts the nodes reachable
+    through `v` without recrossing the edge. The other side is the rest of that
+    component, so the caller has both.
+
+    Tarjan's low-link, iterative because these graphs get deep enough to blow
+    the recursion limit, with subtree sizes accumulated on the way back up —
+    the walk that discovers a bridge has already visited exactly the nodes
+    behind it, so the split costs nothing extra.
+
+    `adj` is anything where `adj[u]` yields neighbours: a dict of sets, or a
+    networkx `G.adj`. Kept general so the engine can pass its live graph and
+    gol_series can pass the lists a recorded frame carries, without either one
+    building a copy or growing a second implementation of this.
+    """
+    disc: Dict[int, int] = {}
+    low: Dict[int, int] = {}
+    size: Dict[int, int] = {}
+    found: List[Tuple[int, int, int]] = []
+    timer = 0
+
+    for root in ids:
+        if root in disc:
+            continue
+        stack = [[root, None, iter(adj[root])]]
+        disc[root] = low[root] = timer
+        size[root] = 1
+        timer += 1
+
+        while stack:
+            top = stack[-1]
+            node, parent, it = top[0], top[1], top[2]
+            nxt = next(it, None)
+
+            if nxt is None:
+                stack.pop()
+                if stack:
+                    u, v = stack[-1][0], node
+                    low[u] = min(low[u], low[v])
+                    size[u] += size[v]
+                    if low[v] > disc[u]:
+                        found.append((u, v, size[v]))
+                continue
+
+            if nxt == parent:
+                # Skip the edge we arrived on, but only once: a genuine second
+                # edge between the same pair would make neither a bridge.
+                top[1] = None
+                continue
+            if nxt in disc:
+                low[node] = min(low[node], disc[nxt])
+                continue
+            disc[nxt] = low[nxt] = timer
+            size[nxt] = 1
+            timer += 1
+            stack.append([nxt, node, iter(adj[nxt])])
+
+    return found
+
+
+def worst_cut_share(ids, adj) -> float:
+    """
+    The largest share of the graph a single edge can sever.
+
+    0 when there are no bridges, or when every bridge only lops off a leaf;
+    0.5 when some bridge splits the population down the middle. This is the
+    number `Graphs.md` §3 turns the "no bridge with more than a tenth on one
+    side" rule into: the rule is `worst_cut_share < 0.10`.
+
+    Measured against the whole node count rather than the containing component,
+    because what is at stake is a share of the *population*, and after cleanup
+    the graph is connected anyway.
+    """
+    n = len(ids)
+    if n < 2:
+        return 0.0
+    return max((min(below, n - below) / n for _, _, below in bridge_splits(ids, adj)),
+               default=0.0)
+
+
+def two_core_size(ids, adj) -> int:
+    """
+    How many nodes survive peeling degree-1 nodes until there are none left.
+
+    What is left is the 2-core: the graph with every hanging tree stripped off.
+    The nodes that were peeled are the whiskers of `Graphs.md` §3, so the ratio
+    of the two says how much of the population is periphery rather than core.
+    """
+    degree = {u: sum(1 for _ in adj[u]) for u in ids}
+    peeled = set()
+    queue = [u for u in ids if degree[u] <= 1]
+    while queue:
+        u = queue.pop()
+        if u in peeled:
+            continue
+        peeled.add(u)
+        for v in adj[u]:
+            if v in peeled:
+                continue
+            degree[v] -= 1
+            if degree[v] == 1:
+                queue.append(v)
+    return len(ids) - len(peeled)
+
+
 # ----------------------------------------------------------------------------
 # The Brain (neural substrate)
 # ----------------------------------------------------------------------------
@@ -1257,6 +1372,18 @@ class GraphOfLife:
             "orphaned": 0,
             "redistributed": 0,
         }
+
+        # How fragile the graph was *before* anything was removed.
+        #
+        # The recorded frame is the graph after the cull, so `bridges` and
+        # `orphaned` land in the same row and a cull that severs a whole side
+        # of a bridge moves both at once. That makes the two indistinguishable
+        # after the fact, which is exactly why the first pass at the thesis in
+        # `Graphs.md` §6 could not be settled either way. Taken here, before the
+        # removals, it is a state the cull has not touched yet — so it can be
+        # read as a predictor of the cull rather than a consequence of it.
+        ids_before = list(self.G.nodes())
+        report["cutRiskBefore"] = worst_cut_share(ids_before, self.G.adj)
 
         starved = [u for u in self.G.nodes() if self.tokens.get(u, 0) <= 0]
 

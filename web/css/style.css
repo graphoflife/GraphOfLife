@@ -1007,6 +1007,73 @@ details.control-group > summary:hover h3 { color: var(--text); }
 #lineageCanvas,
 #flowCanvas { width: 100%; height: 100%; display: block; }
 
+/* --- Theses: a claim, its reasoning, and the series that decide it ------- */
+
+.theses-layout {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(160px, 220px) 1fr;
+  gap: 20px;
+  align-items: start;
+}
+/* One column on a narrow screen: the list becomes a row above the panel
+   rather than a 160px column squeezing the chart to nothing. */
+@media (max-width: 760px) {
+  .theses-layout { grid-template-columns: 1fr; }
+  .theses-list { flex-direction: row; flex-wrap: wrap; }
+}
+
+.theses-list { display: flex; flex-direction: column; gap: 4px; }
+.theses-list button {
+  background: transparent;
+  border: 1px solid transparent;
+  border-left: 2px solid var(--border);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  color: var(--muted);
+  padding: 8px 12px;
+  font-size: 12.5px;
+  text-align: left;
+  cursor: pointer;
+}
+.theses-list button:hover { color: var(--text); }
+.theses-list button.active {
+  background: var(--panel-2);
+  border-left-color: #fff;
+  color: #fff;
+  font-weight: 600;
+}
+
+.theses-prose { margin-bottom: 16px; font-size: 13px; line-height: 1.62; }
+.theses-prose h3 { font-size: 17px; margin: 0 0 12px; color: #fff; }
+.theses-prose p { margin: 0 0 10px; color: var(--muted); }
+.theses-prose b { color: var(--text); }
+.theses-prose .theses-note {
+  border-left: 2px solid var(--border);
+  padding-left: 11px;
+  font-size: 12.5px;
+}
+
+.theses-stage {
+  height: clamp(220px, 34vh, 380px);
+  background: #0d1117;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.theses-stage canvas { display: block; }
+
+.theses-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  margin-top: 9px;
+  font-size: 11.5px;
+  color: var(--muted);
+}
+.theses-key { display: inline-flex; align-items: center; gap: 6px; }
+.theses-key i { width: 10px; height: 2px; border-radius: 1px; }
+
 .lineage-note,
 .lineage-readout {
   max-width: 1080px;

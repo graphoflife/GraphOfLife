@@ -80,9 +80,13 @@ Object.assign(Viewer, {
     cycleRank: 'Loops',
     loopDensity: 'Loop density',
     bridges: 'Bridges',
+    cutRisk: 'Worst cut',
+    cutRiskBefore: 'Worst cut, pre-cull',
+    coreShare: 'Core share',
     triangles: 'Triangles',
     transitivity: 'Clustering',
     dimension: 'Dimension',
+    ricciCurvature: 'Curvature',
     radius: 'Radius',
     diameter: 'Diameter',
     meanPathLength: 'Mean path',
@@ -133,7 +137,7 @@ Object.assign(Viewer, {
       'nodes', 'edges', 'tokens', 'meanTokens', 'medianTokens', 'maxTokens', 'minTokens',
       'gini', 'topDecileShare', 'tokenEntropy', 'tokenEvenness',
       'maxTokenAdded', 'maxTokenLost', 'gainers', 'losers',
-      'starved', 'orphaned', 'redistributed',
+      'starved', 'orphaned', 'redistributed', 'cutRiskBefore',
       'distinctBrains', 'brainDiversity', 'distinctParents'
     ] },
     { key: 'reproduction', label: 'Reproduction', open: true, keys: [
@@ -147,8 +151,9 @@ Object.assign(Viewer, {
     { key: 'structure', label: 'Structure', open: false, keys: [
       'density', 'meanDegree', 'medianDegree', 'maxDegree', 'minDegree', 'leaves',
       'radius', 'diameter', 'meanPathLength',
-      'cycleRank', 'loopDensity', 'bridges', 'triangles', 'transitivity',
-      'dimension', 'degreeEntropy', 'degreeEvenness', 'components'
+      'cycleRank', 'loopDensity', 'bridges', 'cutRisk', 'coreShare',
+      'triangles', 'transitivity', 'dimension', 'ricciCurvature',
+      'degreeEntropy', 'degreeEvenness', 'components'
     ] },
     { key: 'powerlaws', label: 'Power laws', open: false, keys: [
       'degreeGamma', 'degreeGammaR2', 'degreeKMin', 'degreeTailShare', 'degreeGammaKS',
@@ -253,9 +258,12 @@ Object.assign(Viewer, {
       cells.cycleRank = [this.STAT_LABELS.cycleRank, formatNumber(s.cycleRank)];
       cells.loopDensity = [this.STAT_LABELS.loopDensity, pct(s.loopDensity)];
       cells.bridges = [this.STAT_LABELS.bridges, formatNumber(s.bridges)];
+      cells.cutRisk = [this.STAT_LABELS.cutRisk, pct(s.cutRisk)];
+      cells.coreShare = [this.STAT_LABELS.coreShare, pct(s.coreShare)];
       cells.triangles = [this.STAT_LABELS.triangles, formatNumber(s.triangles)];
       cells.transitivity = [this.STAT_LABELS.transitivity, dec(s.transitivity, 3)];
       cells.dimension = [this.STAT_LABELS.dimension, dec(s.dimension)];
+      cells.ricciCurvature = [this.STAT_LABELS.ricciCurvature, dec(s.ricciCurvature, 3)];
       cells.radius = [this.STAT_LABELS.radius, formatNumber(s.radius)];
       cells.diameter = [this.STAT_LABELS.diameter, formatNumber(s.diameter)];
       cells.meanPathLength = [this.STAT_LABELS.meanPathLength, dec(s.meanPathLength)];
@@ -286,6 +294,9 @@ Object.assign(Viewer, {
     if (s.prunedEdges !== null) cells.prunedEdges = [this.STAT_LABELS.prunedEdges, formatNumber(s.prunedEdges)];
     if (s.starved !== null) cells.starved = [this.STAT_LABELS.starved, withShare(s.starved)];
     if (s.orphaned !== null) cells.orphaned = [this.STAT_LABELS.orphaned, withShare(s.orphaned)];
+    if (s.cutRiskBefore !== null && s.cutRiskBefore !== undefined) {
+      cells.cutRiskBefore = [this.STAT_LABELS.cutRiskBefore, pct(s.cutRiskBefore)];
+    }
     if (s.redistributed !== null) cells.redistributed = [this.STAT_LABELS.redistributed, formatNumber(s.redistributed)];
 
     // Remember which sections were open, so redrawing a frame does not fold

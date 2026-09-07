@@ -576,6 +576,179 @@ def test_the_teaching_script_gives_a_revolution_to_its_strongest_rebel():
 
 
 # ---------------------------------------------------------------------------
+# Topology: what a cut would cost
+# ---------------------------------------------------------------------------
+
+def _adj(edges):
+    """Adjacency as the bridge walk wants it, from a list of pairs."""
+    out = {}
+    for a, b in edges:
+        out.setdefault(a, set()).add(b)
+        out.setdefault(b, set()).add(a)
+    return out
+
+
+def test_a_path_is_all_bridges_and_the_middle_one_is_the_worst():
+    """
+    Every edge of a path splits it, and the worst split is the middle.
+
+    0-1-2-3: cutting the outer edges strands one node, cutting the middle one
+    strands two of four. So the worst single cut costs half the population,
+    which is the largest a cut can ever cost.
+    """
+    import GraphOfLifeSimple as G
+
+    edges = [(0, 1), (1, 2), (2, 3)]
+    ids, adj = [0, 1, 2, 3], _adj(edges)
+
+    splits = G.bridge_splits(ids, adj)
+    assert len(splits) == 3, f"a path of four has three bridges, got {len(splits)}"
+    sides = sorted(min(b, 4 - b) for _, _, b in splits)
+    assert sides == [1, 1, 2], f"expected splits of 1, 1 and 2, got {sides}"
+    assert G.worst_cut_share(ids, adj) == 0.5
+
+
+def test_a_cycle_has_no_bridges_at_all():
+    """Every edge of a cycle lies on a loop, so nothing can be cut in two."""
+    import GraphOfLifeSimple as G
+
+    edges = [(0, 1), (1, 2), (2, 3), (3, 0)]
+    ids, adj = [0, 1, 2, 3], _adj(edges)
+
+    assert G.bridge_splits(ids, adj) == []
+    assert G.worst_cut_share(ids, adj) == 0.0
+    # And nothing peels: a cycle is its own 2-core.
+    assert G.two_core_size(ids, adj) == 4
+
+
+def test_two_blobs_on_one_edge_is_the_worst_case_the_thesis_is_about():
+    """
+    Two triangles joined by a single edge: one bridge, half the world behind it.
+
+    This is the shape `Graphs.md` §6 says is a mass extinction waiting to
+    happen — cleanup keeps only the largest component, so cutting that edge
+    kills three of six. A bridge *count* cannot tell this apart from a triangle
+    with three leaves stuck on it, which also has three bridges and costs one
+    node each. That is the whole reason for measuring the split.
+    """
+    import GraphOfLifeSimple as G
+
+    dumbbell = [(0, 1), (1, 2), (2, 0), (3, 4), (4, 5), (5, 3), (0, 3)]
+    ids, adj = list(range(6)), _adj(dumbbell)
+    assert len(G.bridge_splits(ids, adj)) == 1
+    assert G.worst_cut_share(ids, adj) == 0.5
+
+    fringed = [(0, 1), (1, 2), (2, 0), (0, 3), (1, 4), (2, 5)]
+    ids, adj = list(range(6)), _adj(fringed)
+    assert len(G.bridge_splits(ids, adj)) == 3, "same bridge count as the dumbbell"
+    assert abs(G.worst_cut_share(ids, adj) - 1 / 6) < 1e-12, (
+        "three leaves cost one node each, and the count alone cannot say so")
+
+
+def test_peeling_leaves_leaves_the_core():
+    """
+    The 2-core is what survives stripping hanging trees, however deep.
+
+    A triangle with a two-node tail loses both tail nodes, not just the leaf —
+    peeling the leaf makes its neighbour a leaf in turn.
+    """
+    import GraphOfLifeSimple as G
+
+    edges = [(0, 1), (1, 2), (2, 0), (0, 3), (3, 4)]
+    ids, adj = list(range(5)), _adj(edges)
+    assert G.two_core_size(ids, adj) == 3
+
+    # A tree has no core at all: peeling never stops until nothing is left.
+    edges = [(0, 1), (1, 2), (1, 3), (3, 4)]
+    ids, adj = list(range(5)), _adj(edges)
+    assert G.two_core_size(ids, adj) == 0
+
+
+def test_the_cut_risk_is_recorded_before_the_cull_not_after():
+    """
+    The engine's own reading has to come from the graph the cull has not touched.
+
+    Measured afterwards it is a consequence of the cull, and the thesis it
+    exists to test — that fragility predicts the cull — becomes untestable,
+    which is exactly how the first attempt at it stalled.
+    """
+    world = new_world(SimConfig(total_tokens=600, n_nodes=40, k_neighbors=4,
+                                seed=5, hidden_layers=[6]))
+    seen = 0
+    for _ in range(6):
+        for frame in world.step(record_decisions=False):
+            risk = frame["cleanup"]["cutRiskBefore"]
+            assert risk is not None, "the engine did not record it"
+            assert 0.0 <= risk <= 0.5, f"a share of the population, got {risk}"
+            seen += 1
+    assert seen >= 12, f"both phases of six iterations, got {seen}"
+
+
+# ---------------------------------------------------------------------------
+# Curvature: the term the dimension fit was throwing away
+# ---------------------------------------------------------------------------
+
+def test_curvature_recovers_the_ricci_scalar_it_was_given():
+    """
+    Feed the model in, get the parameter back.
+
+    The shell of a ball of radius r in d dimensions with Ricci scalar R goes as
+    r^(d-1) (1 - R r^2 / 6d), so log shell is linear in log r and in r^2. Build
+    exactly that and the fit has to return the R that built it, or the algebra
+    converting the second coefficient is wrong.
+    """
+    import math
+    import gol_series
+
+    d, R = 3.0, 0.6
+    rs = [1.0, 2.0, 3.0, 4.0, 5.0]
+    log_r = [math.log(r) for r in rs]
+    shell = [2.5 + (d - 1) * math.log(r) - R * r * r / (6 * d) for r in rs]
+
+    got = gol_series._ball_curvature(rs, log_r, shell)
+    assert abs(got - R) < 1e-9, f"expected {R}, got {got}"
+
+
+def test_a_ring_is_flat_and_a_tree_is_negatively_curved():
+    """
+    The two cases with an answer known in advance.
+
+    A ring's shells never change size, so it has no bend at all and reads flat.
+    A branching tree's shells grow exponentially — far more room than flat
+    space allows — which is negative curvature, and is the same statement as a
+    tree being hyperbolic. Sparse expanders are negatively curved as a theorem
+    (Salez 2021), so the sign here is also a reading on expansion.
+    """
+    import gol_series
+
+    ring = [[i, (i + 1) % 60] for i in range(60)]
+    flat = gol_series._structure(list(range(60)), ring)["ricciCurvature"]
+    assert flat is not None, "a ring gives enough radii to fit"
+    assert abs(flat) < 1e-6, f"a ring should read flat, got {flat}"
+
+    # Balanced binary tree, deep enough for the ball to keep growing.
+    tree = [[(i - 1) // 2, i] for i in range(1, 255)]
+    curved = gol_series._structure(list(range(255)), tree)["ricciCurvature"]
+    assert curved is not None and curved < 0, (
+        f"a branching tree should read negatively curved, got {curved}")
+
+
+def test_curvature_refuses_a_fit_with_no_evidence_in_it():
+    """
+    Three points fit three parameters exactly, which is not a measurement.
+
+    The residual would be zero whatever the data said, so the curvature would
+    be a restatement of the input rather than a reading of it.
+    """
+    import math
+    import gol_series
+
+    rs = [1.0, 2.0, 3.0]
+    assert gol_series._ball_curvature(rs, [math.log(r) for r in rs],
+                                      [1.0, 2.0, 2.5]) is None
+
+
+# ---------------------------------------------------------------------------
 # The two ways the site is served
 # ---------------------------------------------------------------------------
 

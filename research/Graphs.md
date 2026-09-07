@@ -417,36 +417,88 @@ Bridge balance is therefore not a descriptive statistic here. It is a leading
 indicator of population collapse, and both halves of the test are already
 recorded per frame: `bridges` and `orphaned`.
 
-### Testable now, with data that already exists
-No new code. Plot, across existing runs:
+### What was measured — `research/pilot_topology.py`
 
-1. `transitivity`, `meanPathLength`, `diameter`, `bridges`, `loopDensity` against
-   iteration. The prediction from the local-rewiring argument: clustering up,
-   paths longer, bridges up, loop density down — a drift away from small-world.
-   Against two nulls: the Watts–Strogatz graph the run started from, and a
-   degree-preserving rewire of each frame.
-2. `orphaned` against `bridges` in the *preceding* frame. If the mass-extinction
-   story is right there is a lag correlation; if there is not, the cull is
-   killing singletons and the story is wrong.
+Run against the recorded series, with a Watts–Strogatz graph rebuilt at the
+same size and degree as the control. **No conclusions drawn here**; these are
+the numbers, and the Theses tab states in advance what would confirm or refute
+each claim.
 
-### Worth adding, in order of value per line of code
-1. **Bridge balance and whisker sizes.** One extra pass on a DFS that already
-   runs. Gives the user's 10% criterion directly, gives the whisker distribution,
-   and gives the extinction predictor above. Cheapest and most useful.
-2. **`λ₂` of the normalised Laplacian.** The decentralisation number, and the
-   axis the Flow modules view currently lacks. A partition of an expander is an
-   artefact and we cannot presently tell whether ours is one.
-3. **Effective resistance per edge**, summarised by Gini and maximum — Foster
+**T1, the shortcut budget.** Confirmed, and by a wide margin. Two long runs
+(4,985 and 2,773 iterations, populations growing to 31k and 13.6k) end with
+**22–30% of edges being bridges, against 0.0% for the control**; clustering at
+0.02–0.06 against 0.24; path length above the small-world ratio. A short run
+measured from its beginning moves every one of the six metrics in the predicted
+direction, path length included, `rho` between +0.5 and +0.8.
+
+The refinement worth keeping: **the departure happens early.** By the first
+sampled window of a long run the graph is already at 19% bridges while the
+control is at 0, so a long run's *trend* is a second-order story on top of a
+transition that has already finished. Two of the six metrics move the wrong way
+across a long run for exactly that reason. Measure the first few hundred
+iterations, not the last few thousand.
+
+**T2, fragility leading the cull.** Not supported, and initially not testable.
+Correlations sit near zero at every lag with no peak, and the scattered |z| > 3
+cells are what 36 tests produce by chance. Two reasons, both now fixed or named:
+the series is stored every 4–8 frames so short lags were invisible; and
+`bridges` was counted *after* cleanup, in the same frame as `orphaned`, so a
+cull that severs a side of a bridge moved both at once and cause could not be
+told from effect. The engine now takes the reading **before** the cull, which
+makes the question askable — but only for runs recorded since.
+
+One caveat found on the way and not yet fixed: differencing an autocorrelated
+series induces negative correlation at lag 1, which shows up as a column
+alternating `+,-,+,-` of roughly equal size. That is an artefact, not a signal.
+Pre-whitening both sides before correlating is the fix. **Until it is done, an
+alternating column is no result.**
+
+### Now measured every frame
+
+| metric | what it is | where |
+|---|---|---|
+| `cutRisk` | largest share of the population one edge can sever — the 10% rule, as a number | post-cleanup graph |
+| `cutRiskBefore` | the same, on the graph before the cull, so it can be read as a cause | engine, per phase |
+| `coreShare` | fraction left after peeling degree-1 nodes until none remain: the 2-core against the whiskers | post-cleanup graph |
+| `ricciCurvature` | the `r²` term the ball-growth fit was discarding | post-cleanup graph |
+
+`bridge_splits()` and `two_core_size()` live in `GraphOfLifeSimple.py` because
+the engine needs them on the live graph, and `gol_series` imports them rather
+than growing a third copy. The browser mirror is `graphstats.js`, compared
+value for value by `tests/test_stats_parity.py`.
+
+### Still worth adding, in order of value per line of code
+1. **`λ₂` of the normalised Laplacian.** The decentralisation number, and the
+   axis the Flow modules view still lacks. A partition of an expander is an
+   artefact and we cannot yet tell whether ours is one.
+2. **Effective resistance per edge**, summarised by Gini and maximum — Foster
    fixes the total at `n - 1`, so only the spread carries information. Reuses
-   `_gini`.
-4. **The curvature term** in the existing ball-growth fit. One more coefficient
-   in a regression that already runs.
-5. **δ-hyperbolicity** on sampled quadruples, and a greedy **treewidth** upper
-   bound. Most expensive, and the two whose literature support is the shakiest.
+   `_gini`. Exact computation is too slow per frame at 30k nodes and would need
+   the sampled form.
+3. **δ-hyperbolicity** on sampled quadruples, and a greedy **treewidth** upper
+   bound. Most expensive, and the two whose literature support is shakiest.
+4. **Whisker size distribution**, not only the worst one. `bridge_splits`
+   already returns every split; only the maximum is currently kept.
 
-Anything added here has to be mirrored in `web/js/graphstats.js` and will be
-compared value for value by `tests/test_stats_parity.py` — that is the standing
-cost of a new structural metric, and it is the right cost.
+### On `edge_proposal`, revised
+
+The first version of this section read the local-rewiring finding as a missing
+mechanic. That is probably wrong, and the data is why.
+
+Culls do not arrive as rare catastrophes. `orphaned` is **non-zero in every
+single recorded frame** of both long runs. So the punishment for going
+tree-like is not waiting to happen — it is already continuous, and the graph
+goes tree-like anyway. What is missing is not the pressure but a **response**:
+no agent has any action whose effect is "make my neighbourhood harder to
+sever". Reproduction is the only structural verb, it is local, and it is cheap.
+
+Which argues for keeping the mechanic local and *costly* rather than adding a
+free one: an agent offers a link to a node it can already reach in two hops,
+both ends must agree, and it costs tokens. Redundancy becomes something bought
+out of the same conserved supply everything else comes out of, and the
+question — is resilience worth paying for — becomes one the agents answer
+rather than one the rules answer for them. Whether it is needed at all is what
+§6.7's measurements are for, so it waits on them.
 
 ### And the tie back to the goal
 `Research.md` §1.2 adopts *unbounded growth in the space of realised multi-agent

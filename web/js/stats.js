@@ -666,6 +666,7 @@ class FrameMetrics {
       degreeTailShare: null, degreeGammaKS: null,
       boxDimension: null, boxDimensionR2: null,
       cycleRank: null, loopDensity: null, bridges: null, triangles: null,
+      cutRisk: null, coreShare: null, ricciCurvature: null,
       transitivity: null, degreeEntropy: null, degreeEvenness: null,
       radius: null, diameter: null, meanPathLength: null,
       tokenEntropy: null, tokenEvenness: null, dimension: null, components: null,
@@ -679,6 +680,11 @@ class FrameMetrics {
       starved: f.cleanup ? f.cleanup.starved : null,
       orphaned: f.cleanup ? f.cleanup.orphaned : null,
       redistributed: f.cleanup ? f.cleanup.redistributed : null,
+      // Taken by the engine before the cull, so it can be read as a cause of
+      // the cull rather than a consequence. Runs made before the engine
+      // recorded it simply do not have it.
+      cutRiskBefore: f.cleanup && f.cleanup.cutRiskBefore !== undefined
+        ? f.cleanup.cutRiskBefore : null,
 
       births: null, meanInvestedShare: null, meanChildLinks: null,
       reproTokenShare: null, handovers: null,
@@ -769,10 +775,13 @@ class FrameMetrics {
       out.cycleRank = st.loops.cycleRank;
       out.loopDensity = f.edges.length ? st.loops.cycleRank / f.edges.length : 0;
       out.bridges = st.loops.bridges;
+      out.cutRisk = st.loops.cutRisk;
+      out.coreShare = st.loops.coreShare;
       out.components = st.loops.componentCount;
       out.triangles = st.triangles.total;
       out.transitivity = GraphStats.transitivity(f.ids, st.adj, st.triangles.total);
       out.dimension = st.dimension.estimate;
+      out.ricciCurvature = st.dimension.ricciCurvature;
       out.radius = st.distances.radius;
       out.diameter = st.distances.diameter;
       out.meanPathLength = st.distances.meanPathLength;
