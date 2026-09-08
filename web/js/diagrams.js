@@ -176,7 +176,7 @@ const Diagrams = {
         el.append(option);
       }
       el.value = value;
-      el.addEventListener('change', () => { onChange(el.value); });
+      Metrics.onPick(el, onChange);
       return el;
     };
     const number = (value, min, onChange) => {
@@ -203,14 +203,14 @@ const Diagrams = {
       if (this.active === 'histogram') {
         const el = field('Metric', metricSelect());
         el.value = s.metric;
-        el.addEventListener('change', () => { s.metric = el.value; this.draw(); });
+        Metrics.onPick(el, v => { s.metric = v; this.draw(); });
       } else {
         const x = field('x', metricSelect());
         x.value = s.x;
-        x.addEventListener('change', () => { s.x = x.value; this.draw(); });
+        Metrics.onPick(x, v => { s.x = v; this.draw(); });
         const y = field('y', metricSelect());
         y.value = s.y;
-        y.addEventListener('change', () => { s.y = y.value; this.draw(); });
+        Metrics.onPick(y, v => { s.y = v; this.draw(); });
       }
 
       // Which moment. Blank means the last recorded one, which is the useful
@@ -390,7 +390,7 @@ const Diagrams = {
       swatch.style.background = this.LINE_INK[i % this.LINE_INK.length];
       row.append(swatch);
 
-      const pick = (options, value, onChange, title) => {
+      const pick = (options, value, onChange, title, live = true) => {
         const el = document.createElement('select');
         for (const [v, text] of options) {
           const option = document.createElement('option');
@@ -399,13 +399,18 @@ const Diagrams = {
         }
         el.value = value;
         if (title) el.title = title;
-        el.addEventListener('change', () => { onChange(el.value); });
+        // Redrawing as the reader moves through a menu is right for a
+        // statistic, which is already in hand, and wrong for a simulation,
+        // which is a fresh summary each time — arrowing past four runs would
+        // start four of them.
+        if (live) Metrics.onPick(el, onChange);
+        else el.addEventListener('change', () => onChange(el.value));
         row.append(el);
         return el;
       };
 
       pick(this.runs.map(r => [r.id, r.name]), line.run,
-           v => { line.run = v; this.refresh(); }, 'Which simulation');
+           v => { line.run = v; this.refresh(); }, 'Which simulation', false);
       pick(this.statOptions(line.run), line.stat,
            v => { line.stat = v; this.draw(); }, 'Which statistic');
       pick([['all', 'Both phases'], ['1', 'Reproduction'], ['2', 'Game']], line.phase,

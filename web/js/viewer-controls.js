@@ -21,12 +21,15 @@ Object.assign(Viewer, {
     const bind = (id, key, transform = v => v, needsMetrics = true) => {
       const el = document.getElementById(id);
       if (!el) return;
-      const event = (el.type === 'checkbox' || el.tagName === 'SELECT') ? 'change' : 'input';
-      el.addEventListener(event, () => {
+      const apply = () => {
         this.settings[key] = transform(el.type === 'checkbox' ? el.checked : el.value);
         if (needsMetrics) this.rebuildMetrics();
         this.updateCharts();
-      });
+      };
+      // A menu redraws as you move through it rather than when you commit, so
+      // picking a metric is browsing rather than guessing.
+      if (el.tagName === 'SELECT') Metrics.onPick(el, apply);
+      else el.addEventListener(el.type === 'checkbox' ? 'change' : 'input', apply);
     };
 
     const num = v => Number(v);

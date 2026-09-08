@@ -49,6 +49,7 @@ const ServerBackend = {
   startRun(id)          { return this._request('POST', `/api/runs/${encodeURIComponent(id)}/start`, {}); },
   stopRun(id)           { return this._request('POST', `/api/runs/${encodeURIComponent(id)}/stop`); },
   copyRun(id, name)     { return this._request('POST', `/api/runs/${encodeURIComponent(id)}/copy`, { name }); },
+  renameRun(id, name)   { return this._request('POST', `/api/runs/${encodeURIComponent(id)}/rename`, { name }); },
   getFrame(id, index)   { return this._request('GET', `/api/runs/${encodeURIComponent(id)}/frames/${index}`); },
   // A contiguous run of frames, cut down to the fields the caller reads.
   // `fields` is the difference between two arrays and the whole topology of
@@ -134,6 +135,7 @@ const BrowserBackend = {
   startRun(id)          { return this._send('start', { runId: id }); },
   stopRun(id)           { return this._send('stop', { runId: id }); },
   copyRun(id, name)     { return this._send('copy', { runId: id, name }); },
+  renameRun(id, name)   { return this._send('rename', { runId: id, name }); },
   getFrame(id, index)   { return this._send('frame', { runId: id, index }); },
   getFrames(id, from, count, fields, sightings) {
     return this._send('frames', { runId: id, from, count, fields, sightings });
@@ -186,6 +188,7 @@ const API = {
   startRun(id)            { return this._call('startRun', id); },
   stopRun(id)             { return this._call('stopRun', id); },
   copyRun(id, name)       { return this._call('copyRun', id, name); },
+  renameRun(id, name)     { return this._call('renameRun', id, name); },
   getFrame(id, index)     { return this._call('getFrame', id, index); },
   getFrames(id, from, count, fields, sightings) {
     return this._call('getFrames', id, from, count, fields, sightings);

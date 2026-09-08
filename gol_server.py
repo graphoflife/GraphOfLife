@@ -23,6 +23,7 @@ API
     POST   /api/runs/<id>/start       start or resume
     POST   /api/runs/<id>/stop        ask a running worker to stop
     POST   /api/runs/<id>/copy        duplicate a run, data and all
+    POST   /api/runs/<id>/rename      give it a different name  {name}
     GET    /api/runs/<id>/frames/<n>  one recorded frame
     GET    /api/runs/<id>/frames      ?from=&count=&fields= a run of them
     GET    /api/runs/<id>/lineage     ?from=&count=&limit= the genotype forest
@@ -459,6 +460,19 @@ class Handler(BaseHTTPRequestHandler):
                 self._error("run is already in progress", 409)
                 return
             self._send_json({"ok": True})
+            return
+
+        # A run's name is the only thing about it that is safe to change after
+        # the fact: it names nothing the engine reads, and a run called
+        # "test 3" a month later is a run nobody can identify.
+        if len(parts) == 4 and parts[:2] == ["api", "runs"] and parts[3] == "rename":
+            body = self._read_json()
+            name = str(body.get("name", "")).strip()
+            if not name:
+                self._error("a run needs a name")
+                return
+            store.load_meta(parts[2])  # 404s if the run is unknown
+            self._send_json(self._decorate(store.update_meta(parts[2], name=name)))
             return
 
         if len(parts) == 4 and parts[:2] == ["api", "runs"] and parts[3] == "copy":

@@ -1105,6 +1105,11 @@ details.control-group > summary:hover h3 { color: var(--text); }
 .diagram-line-row select { max-width: 190px; }
 .diagram-cap,
 .diagram-guide { width: 84px; }
+
+/* The one editable thing in a settings dialog otherwise made of facts. */
+.settings-rename-row { display: flex; align-items: center; gap: 8px; }
+.settings-rename-row input { flex: 1; min-width: 0; }
+.settings-rename-note { font-size: 11.5px; color: var(--muted); }
 .diagram-title { width: 260px; }
 .diagram-drop {
   background: transparent;

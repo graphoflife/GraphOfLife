@@ -140,6 +140,47 @@ const Metrics = {
   // ---- building the menus ----------------------------------------------
 
   /**
+   * React to a menu the moment its value moves, not when it is committed.
+   *
+   * A `<select>` on its own only reports a `change`, and arrowing through the
+   * options is a change per step in some browsers and nothing at all until
+   * Enter in others. Chart menus are for browsing — you move down the list to
+   * see what each one looks like — so all three signals are taken: `input` and
+   * `change` for the browsers that send them, and the arrow keys directly,
+   * read on the next frame once the element has settled on its new value.
+   *
+   * Duplicate events for one move are harmless: the handler is given the
+   * value, and redrawing a chart with the value it already has is a no-op the
+   * reader cannot see.
+   *
+   * The deferral is a timer rather than an animation frame. A frame callback
+   * does not run at all while the tab is not compositing — backgrounded, or
+   * simply not on screen — so the menu would move and the chart would not
+   * follow until something else woke the page up.
+   *
+   * The one case no page can reach is a *popped-open* native menu in Chrome,
+   * where the list is drawn by the operating system and the keystrokes never
+   * arrive. Arrowing through a focused, closed menu works everywhere.
+   */
+  onPick(select, handler) {
+    if (!select) return;
+    let last = select.value;
+    const fire = () => {
+      if (select.value === last) return;
+      last = select.value;
+      handler(select.value);
+    };
+    select.addEventListener('change', fire);
+    select.addEventListener('input', fire);
+    select.addEventListener('keydown', event => {
+      if (!['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End'].includes(event.key)) {
+        return;
+      }
+      setTimeout(fire, 0);
+    });
+  },
+
+  /**
    * Fill a <select> with one domain's metrics.
    * `extras` appends the non-measurement choices a visual setting allows.
    */

@@ -237,6 +237,52 @@ const RunsView = {
     const body = document.getElementById('settingsList');
     document.getElementById('settingsDialogTitle').textContent = `Settings — ${run.name}`;
 
+    // The name is the one thing here that can be changed after the fact — it
+    // names nothing the engine reads, and a run called "test 3" is a run
+    // nobody can identify a month later. Everything below it is what the run
+    // was made with and is fixed for the life of the run.
+    const rename = document.createElement('section');
+    rename.className = 'settings-rename';
+    rename.append(Object.assign(document.createElement('h3'), { textContent: 'Name' }));
+
+    const field = document.createElement('div');
+    field.className = 'settings-rename-row';
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.value = run.name;
+    input.setAttribute('aria-label', 'Simulation name');
+    const save = document.createElement('button');
+    save.type = 'button';
+    save.className = 'ghost small';
+    save.textContent = 'Rename';
+    const said = document.createElement('span');
+    said.className = 'settings-rename-note';
+
+    const commit = async () => {
+      const name = input.value.trim();
+      if (!name || name === run.name) return;
+      save.disabled = true;
+      said.textContent = 'Saving…';
+      try {
+        await API.renameRun(run.id, name);
+        run.name = name;
+        said.textContent = 'Renamed.';
+        document.getElementById('settingsDialogTitle').textContent = `Settings — ${name}`;
+        // The card behind the dialog still shows the old name, so the list is
+        // read again rather than left disagreeing with the dialog on top of it.
+        await this.refresh();
+      } catch (err) {
+        said.textContent = `Could not rename: ${err.message}`;
+      } finally {
+        save.disabled = false;
+      }
+    };
+    save.addEventListener('click', commit);
+    input.addEventListener('keydown', e => { if (e.key === 'Enter') commit(); });
+
+    field.append(input, save, said);
+    rename.append(field);
+
     const groups = this.ALL_SETTINGS.map(([heading, rows]) => {
       const group = document.createElement('section');
       group.append(Object.assign(document.createElement('h3'), { textContent: heading }));
@@ -253,7 +299,7 @@ const RunsView = {
       group.append(list);
       return group;
     });
-    body.replaceChildren(...groups);
+    body.replaceChildren(rename, ...groups);
     document.getElementById('settingsDialog').showModal();
   },
 

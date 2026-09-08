@@ -307,6 +307,13 @@ const handlers = {
    * original is and goes its own way. It is never marked as running, because
    * nothing is advancing it.
    */
+  async rename({ runId, name }) {
+    const run = await loadRun(runId);
+    run.name = String(name || '').trim() || run.name;
+    await RunStore.putRun(run);
+    return meta(run);
+  },
+
   async copy({ runId, name }) {
     const source = await loadRun(runId);
     const id = await nextRunId();
@@ -466,7 +473,8 @@ const handlers = {
 // An allow-list rather than a deny-list: a handler that needs the engine and
 // is left off this by mistake still works, where one that does not need it and
 // is wrongly added would fail only in the browser, only on a cold start.
-const NO_ENGINE = new Set(['list', 'get', 'frame', 'frames', 'seriesProgress', 'storage']);
+const NO_ENGINE = new Set(['list', 'get', 'frame', 'frames', 'rename',
+                           'seriesProgress', 'storage']);
 
 self.onmessage = async (event) => {
   const { id, type, ...rest } = event.data || {};
