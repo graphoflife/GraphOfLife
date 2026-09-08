@@ -45,13 +45,20 @@ const Diagrams = {
   // Per tab, because the whole point is that each is configured on its own.
   settings: {
     histogram: { metric: 'node:tokens', logX: false, logY: false,
-                 iteration: null, span: 1, colormap: 'viridis', reverse: false },
+                 iteration: null, span: 1, colormap: 'viridis', reverse: false,
+                 title: '', grid: true, guides: [] },
     heatmap:   { x: 'node:tokens', y: 'node:degree', logX: false, logY: false,
                  logCount: true, iteration: null, span: 1,
-                 colormap: 'viridis', reverse: false },
+                 colormap: 'viridis', reverse: false,
+                 title: '', grid: true, guides: [] },
     correlate: { x: 'nodes', y: 'tokens', phase: 'all',
-                 logX: false, logY: false, colormap: 'viridis', reverse: false },
-    timeline:  { lines: [], align: 'absolute', colormap: 'viridis', reverse: false }
+                 logX: false, logY: false, colormap: 'viridis', reverse: false,
+                 title: '', grid: true, guides: [] },
+    // A line is a whole row of choices, so it carries them itself rather than
+    // borrowing chart-wide ones: which run, which statistic, which phase, how
+    // much of it, and whether it is stretched to the full width.
+    timeline:  { lines: [], colormap: 'viridis', reverse: false,
+                 title: '', grid: true, guides: [] }
   },
 
   // One cached series per run, so adding a second line from a run already on
@@ -92,6 +99,39 @@ const Diagrams = {
   },
 
   say(text) { if (this.noteEl) this.noteEl.textContent = text; },
+
+  /** A statistic's name, however it is spelled in that tab's menus. */
+  nameOf(key, domain = false) {
+    if (domain) {
+      const parsed = Metrics.parse(key);
+      return Metrics.label(parsed.domain, parsed.key);
+    }
+    return (Viewer.STAT_LABELS || {})[key] || key;
+  },
+
+  /**
+   * What this chart would be called if nobody named it.
+   *
+   * Used for the title, for the suggested filename and for the suggested name
+   * of a saved setting — one description, three places, so they agree.
+   */
+  defaultTitle() {
+    const s = this.now;
+    const run = this.runs.find(r => r.id === this.runId);
+    const of = run ? ` — ${run.name}` : '';
+    if (this.active === 'histogram') return `${this.nameOf(s.metric, true)}${of}`;
+    if (this.active === 'heatmap') {
+      return `${this.nameOf(s.y, true)} vs ${this.nameOf(s.x, true)}${of}`;
+    }
+    if (this.active === 'correlate') {
+      return `${this.nameOf(s.y)} vs ${this.nameOf(s.x)} over time${of}`;
+    }
+    if (!s.lines.length) return 'Time series';
+    const names = [...new Set(s.lines.map(l => this.nameOf(l.stat)))];
+    return `${names.join(', ')} over time`;
+  },
+
+  get title() { return this.now.title || this.defaultTitle(); },
 
   get tab() { return this.TABS.find(t => t.id === this.active); },
   get now() { return this.settings[this.active]; },
@@ -209,36 +249,70 @@ const Diagrams = {
     }
 
     if (this.active === 'timeline') {
-      const runOptions = this.runs.map(r => [r.id, r.name]);
-      const pick = { run: this.runId || (this.runs[0] && this.runs[0].id) || '',
-                     stat: 'nodes', phase: 'all' };
-      const runEl = field('Add', select(runOptions, pick.run, v => { pick.run = v; }));
-      runEl.title = 'Which simulation the line comes from';
-      const statEl = field('', select(this.statOptions(), pick.stat, v => { pick.stat = v; }));
-      const phaseEl = field('', select([['all', 'Both phases'], ['1', 'Reproduction'],
-                                        ['2', 'Game']], pick.phase, v => { pick.phase = v; }));
       const add = document.createElement('button');
       add.type = 'button';
       add.className = 'ghost small';
       add.textContent = 'Add line';
       add.addEventListener('click', () => {
-        if (!runEl.value) return;
-        s.lines.push({ run: runEl.value, stat: statEl.value, phase: phaseEl.value });
-        // Rebuild the controls, not just the chart: the list of lines lives in
-        // the control bar, so a line added without this is drawn but cannot be
-        // seen in the legend or taken off again.
+        const previous = s.lines[s.lines.length - 1];
+        s.lines.push(previous
+          ? { ...previous }
+          : { run: this.runId || (this.runs[0] && this.runs[0].id) || '',
+              stat: 'nodes', phase: 'all', stretch: false, maxFrames: null });
         this.controls();
         this.refresh();
       });
       bar.append(add);
-
-      field('Align', select([['absolute', 'Absolute — a shorter run stops early'],
-                             ['stretch', 'Stretched — every run fills the width']],
-                            s.align, v => { s.align = v; this.draw(); }));
     }
 
-    // Shared by every tab: how it is coloured, and getting a picture out.
+    // Shared by every tab: what it is called, what it is compared against,
+    // how it is coloured, and getting a picture out.
+    const name = document.createElement('input');
+    name.type = 'text';
+    name.className = 'diagram-title';
+    name.value = s.title;
+    name.placeholder = this.defaultTitle();
+    name.title = 'Chart title. Left blank it describes itself.';
+    name.addEventListener('change', () => { s.title = name.value.trim(); this.draw(); });
+    field('Title', name);
+
+    const guideAxis = document.createElement('select');
+    for (const [v, text] of [['x', 'x'], ['y', 'y']]) {
+      const option = document.createElement('option');
+      option.value = v; option.textContent = text;
+      guideAxis.append(option);
+    }
+    const guideAt = document.createElement('input');
+    guideAt.type = 'number';
+    guideAt.step = 'any';
+    // Its own class, not the per-line cap's: they are different fields that
+              // happen to be the same size, and sharing a name makes each one
+              // findable only by counting.
+    guideAt.className = 'diagram-guide';
+    guideAt.placeholder = 'value';
+    const guideAdd = document.createElement('button');
+    guideAdd.type = 'button';
+    guideAdd.className = 'ghost small';
+    guideAdd.textContent = 'Add line at';
+    guideAdd.title = 'A constant line to compare against — a threshold, a target';
+    guideAdd.addEventListener('click', () => {
+      const at = Number(guideAt.value);
+      if (!Number.isFinite(at) || guideAt.value === '') return;
+      s.guides.push({ axis: guideAxis.value, at });
+      guideAt.value = '';
+      this.controls();
+      this.draw();
+    });
+    bar.append(guideAdd);
+    field('', guideAxis);
+    field('=', guideAt);
+
+    const gridToggle = toggle('grid', s.grid, v => {
+      s.grid = v; this.controls(); this.draw();
+    });
+
     const style = document.createElement('span');
+    style.append(gridToggle);
     style.className = 'axis-toggles';
     const maps = Object.keys(COLORMAPS).map(k => [k, k]);
     const mapEl = select(maps, s.colormap, v => { s.colormap = v; this.draw(); });
@@ -261,36 +335,113 @@ const Diagrams = {
     style.append(keep);
     bar.append(style);
 
+    // The constant lines already added, each with a way to take it off.
+    if (s.guides.length) {
+      const guides = document.createElement('div');
+      guides.className = 'diagram-lines';
+      s.guides.forEach((guide, i) => {
+        const chip = document.createElement('span');
+        chip.className = 'diagram-preset';
+        const text = document.createElement('span');
+        text.textContent = `${guide.axis} = ${guide.at}`;
+        const drop = document.createElement('button');
+        drop.type = 'button';
+        drop.textContent = '×';
+        drop.title = 'Remove this line';
+        drop.addEventListener('click', () => {
+          s.guides.splice(i, 1); this.controls(); this.draw();
+        });
+        chip.append(text, drop);
+        guides.append(chip);
+      });
+      this.controlsEl.append(guides);
+    }
+
     if (this.active === 'timeline') this.listLines();
   },
 
   /** The series statistics on offer, labelled the way the Viewer labels them. */
-  statOptions() {
-    const payload = this.series.get(this.runId);
+  statOptions(runId = this.runId) {
+    const payload = this.series.get(runId) || this.series.get(this.runId);
     const keys = payload && payload.keys && payload.keys.length
       ? payload.keys.filter(k => k !== '_frame')
       : Object.keys(Viewer.STAT_LABELS || {});
     return keys.map(k => [k, (Viewer.STAT_LABELS || {})[k] || k]);
   },
 
-  /** The lines on the time chart, with a way to take one off again. */
+  /**
+   * One editable row per line.
+   *
+   * A line is not a label with a delete button — it is the whole set of
+   * choices that produced it, still changeable. Which simulation, which
+   * statistic, which phase, how many frames of it, and whether it is stretched
+   * to the full width so a short run can be compared with a long one by shape.
+   */
   listLines() {
     const s = this.now;
     const list = document.createElement('div');
     list.className = 'diagram-lines';
+
     s.lines.forEach((line, i) => {
-      const run = this.runs.find(r => r.id === line.run);
-      const chip = document.createElement('span');
-      chip.className = 'diagram-line';
+      const row = document.createElement('div');
+      row.className = 'diagram-line-row';
+
       const swatch = document.createElement('i');
       swatch.style.background = this.LINE_INK[i % this.LINE_INK.length];
-      const phase = line.phase === 'all' ? '' :
-                    line.phase === '1' ? ' · reproduction' : ' · game';
-      chip.append(swatch, document.createTextNode(
-        `${(Viewer.STAT_LABELS || {})[line.stat] || line.stat} — `
-        + `${run ? run.name : line.run}${phase}`));
+      row.append(swatch);
+
+      const pick = (options, value, onChange, title) => {
+        const el = document.createElement('select');
+        for (const [v, text] of options) {
+          const option = document.createElement('option');
+          option.value = v; option.textContent = text;
+          el.append(option);
+        }
+        el.value = value;
+        if (title) el.title = title;
+        el.addEventListener('change', () => { onChange(el.value); });
+        row.append(el);
+        return el;
+      };
+
+      pick(this.runs.map(r => [r.id, r.name]), line.run,
+           v => { line.run = v; this.refresh(); }, 'Which simulation');
+      pick(this.statOptions(line.run), line.stat,
+           v => { line.stat = v; this.draw(); }, 'Which statistic');
+      pick([['all', 'Both phases'], ['1', 'Reproduction'], ['2', 'Game']], line.phase,
+           v => { line.phase = v; this.draw(); }, 'Which phase');
+
+      // Blank is every frame there is, which is what the number shows when it
+      // is left alone rather than an empty box that gives no idea of the scale.
+      const cap = document.createElement('input');
+      cap.type = 'number';
+      cap.min = '2';
+      cap.className = 'diagram-cap';
+      cap.value = line.maxFrames === null ? '' : String(line.maxFrames);
+      cap.placeholder = String(this.availableFrames(line));
+      cap.title = 'How many frames of this line to show. Blank is all of them.';
+      cap.addEventListener('change', () => {
+        line.maxFrames = cap.value === '' ? null : Math.max(2, Number(cap.value));
+        this.draw();
+      });
+      row.append(cap);
+
+      const stretch = document.createElement('button');
+      stretch.type = 'button';
+      stretch.className = 'axis-btn' + (line.stretch ? ' active' : '');
+      stretch.textContent = 'stretch';
+      stretch.title = 'Give this line the full width, whatever its length, so runs '
+        + 'of different lengths can be compared by shape';
+      stretch.addEventListener('click', () => {
+        line.stretch = !line.stretch;
+        this.controls();
+        this.draw();
+      });
+      row.append(stretch);
+
       const drop = document.createElement('button');
       drop.type = 'button';
+      drop.className = 'diagram-drop';
       drop.textContent = '×';
       drop.title = 'Remove this line';
       drop.addEventListener('click', () => {
@@ -298,10 +449,19 @@ const Diagrams = {
         this.controls();
         this.refresh();
       });
-      chip.append(drop);
-      list.append(chip);
+      row.append(drop);
+      list.append(row);
     });
     this.controlsEl.append(list);
+  },
+
+  /** How many frames a line could show, which is what its cap defaults to. */
+  availableFrames(line) {
+    const payload = this.series.get(line.run);
+    if (!payload) return 0;
+    const phases = (payload.series || {}).phase || [];
+    if (line.phase === 'all') return phases.length;
+    return phases.filter(p => String(p) === line.phase).length;
   },
 
   // ---- saved settings ---------------------------------------------------
@@ -312,7 +472,9 @@ const Diagrams = {
   },
 
   savePreset() {
-    const name = prompt('Name for these settings');
+    // Prefilled with what the chart already calls itself, so keeping a setting
+    // is one keystroke rather than an invitation to invent a name.
+    const name = prompt('Name for these settings', this.title);
     if (!name) return;
     const all = this.allPresets();
     (all[this.active] = all[this.active] || []).push({
@@ -389,10 +551,10 @@ const Diagrams = {
     ctx.fillRect(0, 0, out.width, out.height);
     ctx.drawImage(source, 0, 0);
 
+    const suggested = prompt('Save the picture as', `${this.title}.png`);
+    if (!suggested) return;
     const link = document.createElement('a');
-    const run = this.runs.find(r => r.id === this.runId);
-    link.download = `${(run ? run.name : 'graphoflife').replace(/\W+/g, '-')}`
-      + `-${this.active}.png`;
+    link.download = suggested.endsWith('.png') ? suggested : `${suggested}.png`;
     link.href = out.toDataURL('image/png');
     link.click();
   },
@@ -426,11 +588,19 @@ const Diagrams = {
       const from = Math.max(0, (at - span + 1)) * 2;
       const count = Math.min(span * 2, run.frame_count - from);
 
+      // One frame further back than the window needs, and each frame is given
+      // the one before it. "Before phase" metrics — token curvature above all
+      // — are computed against the previous graph, so without this they are
+      // every node NaN and the chart reports no values at all.
+      const lead = from > 0 ? 1 : 0;
+
       this.say('Reading frames…');
       try {
-        const reply = await API.getFrames(this.runId, from, count, null);
+        const reply = await API.getFrames(this.runId, from - lead, count + lead, null);
         if (this.token !== token) return;
-        this.frames = reply.frames || [];
+        const read = reply.frames || [];
+        for (let i = 1; i < read.length; i++) read[i].previous = read[i - 1];
+        this.frames = read.slice(lead);
       } catch (err) {
         if (this.token !== token) return;
         this.say(`Could not read the frames: ${err.message}`);
@@ -472,6 +642,13 @@ const Diagrams = {
 
   // ---- drawing ----------------------------------------------------------
 
+  /** Title, axis names, grid, constant lines and legend, in one place. */
+  chromeFor(xLabel, yLabel, legend = []) {
+    const s = this.now;
+    return { title: this.title, xLabel, yLabel, legend,
+             ticks: true, grid: s.grid !== false, guides: s.guides || [] };
+  },
+
   draw() {
     if (!this.canvas) return;
     const s = this.now;
@@ -502,7 +679,8 @@ const Diagrams = {
         drawHistogram(this.canvas, pool(s.metric), {
           ...ink, bins: 30, logScale: s.logX, logCount: s.logY,
           signed: Metrics.isSigned(parsed.domain, parsed.key),
-          format: v => Metrics.format(parsed.domain, parsed.key, v)
+          format: v => Metrics.format(parsed.domain, parsed.key, v),
+          chrome: this.chromeFor(this.nameOf(s.metric, true), 'how many')
         });
         this.say(this.frameNote());
         return;
@@ -520,7 +698,8 @@ const Diagrams = {
         signedX: Metrics.isSigned(x.domain, x.key),
         signedY: Metrics.isSigned(y.domain, y.key),
         formatX: v => Metrics.format(x.domain, x.key, v),
-        formatY: v => Metrics.format(y.domain, y.key, v)
+        formatY: v => Metrics.format(y.domain, y.key, v),
+        chrome: this.chromeFor(this.nameOf(s.x, true), this.nameOf(s.y, true))
       });
       this.say(this.frameNote());
       return;
@@ -545,9 +724,9 @@ const Diagrams = {
       }
       drawTrajectory(this.canvas, points, {
         ...ink, logX: s.logX, logY: s.logY,
-        xLabel: (Viewer.STAT_LABELS || {})[s.x] || s.x,
-        yLabel: (Viewer.STAT_LABELS || {})[s.y] || s.y,
-        footer: `${formatNumber(points.length)} frames · colour is time`
+        xLabel: this.nameOf(s.x), yLabel: this.nameOf(s.y),
+        footer: `${formatNumber(points.length)} frames · colour is time`,
+        chrome: this.chromeFor(this.nameOf(s.x), this.nameOf(s.y))
       });
       this.say(`${formatNumber(points.length)} points`
         + (payload.complete ? '' : ' — still refining'));
@@ -584,25 +763,6 @@ const Diagrams = {
   drawTimeline(ink) {
     const s = this.now;
     const canvas = this.canvas;
-    const ctx = canvas.getContext('2d');
-    const dpr = window.devicePixelRatio || 1;
-    const box = canvas.getBoundingClientRect();
-    if (box.width < 1 || box.height < 1) return;
-    canvas.width = Math.round(box.width * dpr);
-    canvas.height = Math.round(box.height * dpr);
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    ctx.clearRect(0, 0, box.width, box.height);
-
-    if (!s.lines.length) {
-      ctx.fillStyle = 'rgba(255,255,255,0.45)';
-      ctx.font = '13px system-ui, sans-serif';
-      ctx.textAlign = 'center';
-      ctx.fillText('Add a line: pick a simulation, a statistic, and a phase.',
-                   box.width / 2, box.height / 2);
-      ctx.textAlign = 'left';
-      this.say('');
-      return;
-    }
 
     const tracks = [];
     for (const [i, line] of s.lines.entries()) {
@@ -612,45 +772,78 @@ const Diagrams = {
       const values = series[line.stat];
       if (!values) continue;
       const phases = series.phase || [], iterations = series.iteration || [];
-      const points = [];
+      let points = [];
       for (let k = 0; k < values.length; k++) {
         if (line.phase !== 'all' && String(phases[k]) !== line.phase) continue;
         const v = values[k];
         if (v === null || v === undefined || !Number.isFinite(v)) continue;
         points.push({ t: iterations[k], v });
       }
+      // A cap takes the *first* frames rather than thinning them, so the line
+      // is the run's opening at full detail rather than the whole run at
+      // lower. Thinning is what the sampled series already did once.
+      if (line.maxFrames && points.length > line.maxFrames) {
+        points = points.slice(0, line.maxFrames);
+      }
       if (points.length < 2) continue;
       const vs = points.map(p => p.v);
+      const run = this.runs.find(r => r.id === line.run);
       tracks.push({
         line, points, colour: this.LINE_INK[i % this.LINE_INK.length],
         lo: Math.min(...vs), hi: Math.max(...vs),
-        lastT: points[points.length - 1].t
+        firstT: points[0].t, lastT: points[points.length - 1].t,
+        label: `${this.nameOf(line.stat)} — ${run ? run.name : line.run}`
+          + (line.phase === 'all' ? '' :
+             line.phase === '1' ? ' · reproduction' : ' · game')
       });
     }
 
-    if (!tracks.length) {
+    const chrome = this.chromeFor('iterations', 'per line, see legend',
+                                  tracks.map(t => ({ label: t.label, colour: t.colour })));
+    const pad = _chromePad(chrome);
+    const { ctx, w, h, outer } = _prepareCanvas(canvas, pad);
+
+    if (!s.lines.length || !tracks.length) {
       ctx.fillStyle = 'rgba(255,255,255,0.45)';
       ctx.font = '13px system-ui, sans-serif';
       ctx.textAlign = 'center';
-      ctx.fillText('Reading…', box.width / 2, box.height / 2);
+      ctx.fillText(s.lines.length ? 'Reading…'
+                   : 'Add a line: pick a simulation, a statistic, and a phase.',
+                   w / 2, h / 2);
       ctx.textAlign = 'left';
+      if (!s.lines.length) this.say('');
       return;
     }
 
-    const pad = { left: 44, right: 14, top: 12, bottom: 26 };
-    const plotW = Math.max(1, box.width - pad.left - pad.right);
-    const plotH = Math.max(1, box.height - pad.top - pad.bottom);
+    // Absolute lines share one iteration axis, so a run half as long stops
+    // halfway across. A stretched line gets the whole width whatever its
+    // length, which is what lets two runs be compared by shape.
     const longest = Math.max(...tracks.map(t => t.lastT), 1);
-
-    ctx.strokeStyle = 'rgba(255,255,255,0.12)';
-    ctx.lineWidth = 1;
-    ctx.strokeRect(pad.left + 0.5, pad.top + 0.5, plotW, plotH);
+    _axes(ctx, w, h, {
+      x: { lo: 0, hi: longest, format: v => formatNumber(Math.round(v)) },
+      grid: chrome.grid, guides: (s.guides || []).filter(g => g.axis === 'x')
+    });
 
     for (const track of tracks) {
       if (track.hi === track.lo) track.hi = track.lo + 1;
-      const span = s.align === 'stretch' ? track.lastT : longest;
-      const xAt = t => pad.left + (span > 0 ? t / span : 0.5) * plotW;
-      const yAt = v => pad.top + (1 - (v - track.lo) / (track.hi - track.lo)) * plotH;
+      const span = track.line.stretch ? (track.lastT - track.firstT) || 1 : longest;
+      const base = track.line.stretch ? track.firstT : 0;
+      const xAt = t => ((t - base) / span) * w;
+      const yAt = v => (1 - (v - track.lo) / (track.hi - track.lo)) * h;
+
+      // Each line keeps its own vertical scale: these are different quantities
+      // in different units, and one shared axis flattens whichever has the
+      // smaller spread. The legend carries every range.
+      for (const guide of (s.guides || []).filter(g => g.axis === 'y')) {
+        if (guide.at < track.lo || guide.at > track.hi) continue;
+        ctx.save();
+        ctx.setLineDash([5, 4]);
+        ctx.strokeStyle = track.colour;
+        ctx.globalAlpha = 0.5;
+        const at = Math.round(yAt(guide.at)) + 0.5;
+        ctx.beginPath(); ctx.moveTo(0, at); ctx.lineTo(w, at); ctx.stroke();
+        ctx.restore();
+      }
 
       ctx.strokeStyle = track.colour;
       ctx.lineWidth = 1.4;
@@ -662,22 +855,16 @@ const Diagrams = {
       ctx.stroke();
     }
 
-    ctx.fillStyle = 'rgba(255,255,255,0.5)';
-    ctx.font = '11px system-ui, sans-serif';
-    ctx.fillText('0', pad.left, box.height - 9);
-    const right = s.align === 'stretch'
-      ? 'each run, whole' : `${formatNumber(longest)} iterations`;
-    ctx.textAlign = 'right';
-    ctx.fillText(right, pad.left + plotW, box.height - 9);
-    ctx.textAlign = 'left';
-
     const round = v => (Math.abs(v) >= 100 ? v.toFixed(0)
                       : Math.abs(v) >= 1 ? v.toFixed(2) : v.toFixed(4));
-    this.say(tracks.map(t => {
-      const run = this.runs.find(r => r.id === t.line.run);
-      return `${(Viewer.STAT_LABELS || {})[t.line.stat] || t.line.stat}`
-        + ` (${run ? run.name : t.line.run}) ${round(t.lo)}–${round(t.hi)}`;
-    }).join('   ·   '));
+    chrome.legend = tracks.map(t => ({
+      colour: t.colour,
+      label: `${t.label}   ${round(t.lo)}–${round(t.hi)}`
+        + (t.line.stretch ? '   (stretched)' : '')
+        + (t.line.maxFrames ? `   first ${formatNumber(t.points.length)}` : '')
+    }));
+    _chrome(ctx, pad, outer, chrome);
+    this.say(`${tracks.length} line${tracks.length === 1 ? '' : 's'}`);
   },
 
   // The Research tab asks every view for these; a chart has no layout of its

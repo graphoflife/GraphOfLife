@@ -109,7 +109,8 @@ class Worlds:
 
     # ---- statistics ------------------------------------------------------
 
-    def stats(self, frames: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    def stats(self, frames: List[Dict[str, Any]],
+              heavy: bool = True) -> List[Dict[str, Any]]:
         """
         Reduce frames to the scalars the charts plot.
 
@@ -120,7 +121,7 @@ class Worlds:
         rows: List[Dict[str, Any]] = []
         previous = None
         for frame in frames:
-            rows.append(gol_series.frame_stats(frame, previous))
+            rows.append(gol_series.frame_stats(frame, previous, heavy))
             previous = frame
         return rows
 

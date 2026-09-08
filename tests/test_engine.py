@@ -662,6 +662,83 @@ def test_a_coarse_request_spans_the_whole_run_and_a_finer_one_refines_it():
             gol_store.BASE_DIR = original
 
 
+def test_a_light_pass_leaves_the_costly_statistics_empty_and_the_rest_filled():
+    """
+    A chart of the node count should not wait on a box-covering dimension.
+
+    Five sixths of what summarising a frame costs goes on statistics that walk
+    the graph — bridges, triangles, distance sweeps, two dimension estimates —
+    and most charts plot none of them. A light row has to hold the cheap ones
+    and carry the rest as explicit nulls: *present and empty*, because a row
+    that simply lacked them would be indistinguishable from a run recorded
+    before those statistics existed.
+    """
+    import gol_series
+
+    world = new_world(SimConfig(total_tokens=600, n_nodes=40, k_neighbors=4,
+                                seed=9, hidden_layers=[6]))
+    frame = world.step(record_decisions=False)[0]
+
+    light = gol_series.frame_stats(frame, None, heavy=False)
+    heavy = gol_series.frame_stats(frame, None, heavy=True)
+
+    assert set(light) == set(heavy), "the two passes must produce the same row shape"
+    for key in gol_series.HEAVY_KEYS:
+        assert key in light, f"{key} must be present in a light row, as a null"
+        assert light[key] is None, f"{key} was computed on a light pass"
+    assert heavy["bridges"] is not None, "a heavy pass must actually count bridges"
+    assert light["nodes"] == heavy["nodes"], "the cheap statistics must agree"
+    assert light["gini"] == heavy["gini"]
+
+
+def test_a_heavy_pass_upgrades_the_rows_a_light_one_left_behind():
+    """
+    The two passes share one cache, so the second has to fill in the first.
+
+    The failure this guards against is the cache counting a light row as
+    already done: the expensive statistics would then never be computed for any
+    frame the cheap pass reached first, and the chart would be permanently
+    empty with no sign that anything was missing.
+    """
+    import gol_store, gol_series
+
+    with tempfile.TemporaryDirectory() as tmp:
+        original = gol_store.BASE_DIR
+        gol_store.BASE_DIR = tmp
+        try:
+            cfg = SimConfig(total_tokens=400, n_nodes=30, k_neighbors=4,
+                            seed=4, hidden_layers=[6], export_decisions=False)
+            run_id = gol_store.create_run("x", cfg)["id"]
+            world = new_world(cfg)
+            written = 0
+            for _ in range(20):
+                for frame in world.step(record_decisions=False):
+                    gol_store.write_frame(run_id, written, frame)
+                    written += 1
+            gol_store.update_meta(run_id, frame_count=written,
+                                  iteration=world.iteration)
+
+            light = gol_series.build_series(run_id, heavy=False)
+            assert light["heavy"] is False
+            assert all(v is None for v in light["series"]["bridges"])
+
+            heavy = gol_series.build_series(run_id, heavy=True)
+            assert heavy["heavy"] is True
+            assert all(v is not None for v in heavy["series"]["bridges"]), (
+                "the heavy pass did not upgrade the rows the light pass stored")
+            assert heavy["count"] == light["count"], "the upgrade duplicated points"
+
+            # And going back to a light request keeps what the heavy pass found,
+            # rather than throwing the expensive work away again.
+            back = gol_series.build_series(run_id, heavy=False)
+            assert all(v is not None for v in back["series"]["bridges"])
+
+            assert not [k for k in heavy["keys"] if k.startswith("_")], (
+                "bookkeeping fields must not travel with the statistics")
+        finally:
+            gol_store.BASE_DIR = original
+
+
 def test_a_run_is_never_summarised_at_more_than_the_cap():
     """
     However long a run is, the chart is capped.

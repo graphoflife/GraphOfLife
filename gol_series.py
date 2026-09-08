@@ -675,8 +675,45 @@ def _reconstruct_delta(frame: Dict[str, Any], previous: Dict[str, Any] | None) -
     return [t - before.get(i, 0) for i, t in zip(frame.get("ids", []), frame.get("tokens", []))]
 
 
-def frame_stats(frame: Dict[str, Any], previous: Dict[str, Any] | None = None) -> Dict[str, Any]:
-    """Reduce one frame to the scalars the viewer plots."""
+#: Keys that only a heavy pass fills in. Everything a light pass leaves out.
+#:
+#: Kept as a list rather than inferred, because a light row has to carry these
+#: as explicit nulls: a reader that saw them simply absent would treat a run
+#: half-summarised as a run that never recorded them.
+HEAVY_KEYS = (
+    "cycleRank", "loopDensity", "bridges", "cutRisk", "coreShare", "components",
+    "triangles", "transitivity", "dimension", "ricciCurvature",
+    "radius", "diameter", "meanPathLength",
+    "degreeExponent", "degreeExponentR2", "tokenExponent", "tokenExponentR2",
+    "tokensVsDegree", "tokensVsDegreeR2",
+    "trianglesVsDegree", "trianglesVsDegreeR2",
+    "clusteringVsDegree", "clusteringVsDegreeR2",
+    "changeVsTokens", "changeVsTokensR2", "assortativity",
+    "degreeGamma", "degreeGammaR2", "degreeKMin", "degreeTailShare", "degreeGammaKS",
+    "boxDimension", "boxDimensionR2",
+)
+
+
+def frame_stats(frame: Dict[str, Any], previous: Dict[str, Any] | None = None,
+                heavy: bool = True) -> Dict[str, Any]:
+    """
+    Reduce one frame to the scalars the viewer plots.
+
+    `heavy` is the whole reason a chart of the node count no longer waits on a
+    box-covering dimension. Measured on a 35,000-node frame, the split is:
+
+        frame_stats whole       512 ms
+          _structure            237 ms   bridges, triangles, distance sweeps,
+                                         dimension, curvature
+          _box_dimension        187 ms   greedy box covering
+          the rest               88 ms
+
+    So a light pass costs a sixth of a full one, and it already holds every
+    quantity most charts plot. The heavy keys come back as None, which is why
+    HEAVY_KEYS is written out: they have to be present and empty rather than
+    missing, or a light row would be indistinguishable from a run recorded
+    before those statistics existed.
+    """
     tokens = frame.get("tokens", [])
     ids = frame.get("ids", [])
     edges = frame.get("edges", [])
@@ -772,7 +809,7 @@ def frame_stats(frame: Dict[str, Any], previous: Dict[str, Any] | None = None) -
         gainers = sum(1 for v in delta if v > 0)
         losers = sum(1 for v in delta if v < 0)
 
-    structure = _structure(ids, edges)
+    structure = _structure(ids, edges) if heavy else {}
     per_node_triangles = structure.pop("_perNodeTriangles", {})
 
     # ---- power laws ----
@@ -811,28 +848,40 @@ def frame_stats(frame: Dict[str, Any], previous: Dict[str, Any] | None = None) -
         return {key: fit["exponent"] if fit else None,
                 key + "R2": fit["r2"] if fit else None}
 
+    # Every fit below walks the graph, and together with _structure above they
+    # are five sixths of what summarising a frame costs. A light pass leaves
+    # them as explicit nulls: present and empty, so a half-summarised run is
+    # not mistaken for one recorded before these statistics existed.
+    # `structure` carries the nulls for a light pass, all of them, because it
+    # is merged first — pre-nulling them here as well would overwrite the real
+    # structural values with None on a heavy pass.
     power_laws: Dict[str, Any] = {}
-    power_laws.update(_pair(_tail_exponent(degree_list), "degreeExponent"))
-    power_laws.update(_pair(_tail_exponent(list(tokens)), "tokenExponent"))
-    power_laws.update(_pair(_power_fit(degree_list, list(tokens)), "tokensVsDegree"))
-    power_laws.update(_pair(_power_fit(degree_list, triangle_list), "trianglesVsDegree"))
-    power_laws.update(_pair(_power_fit(clustering_degrees, clustering_values),
-                            "clusteringVsDegree"))
-    power_laws.update(_pair(_power_fit(change_tokens, change_sizes), "changeVsTokens"))
-    power_laws["assortativity"] = _assortativity(edges, degree_of)
+    if not heavy:
+        structure = {key: None for key in HEAVY_KEYS}
+    else:
+        power_laws.update(_pair(_tail_exponent(degree_list), "degreeExponent"))
+        power_laws.update(_pair(_tail_exponent(list(tokens)), "tokenExponent"))
+        power_laws.update(_pair(_power_fit(degree_list, list(tokens)), "tokensVsDegree"))
+        power_laws.update(_pair(_power_fit(degree_list, triangle_list),
+                                "trianglesVsDegree"))
+        power_laws.update(_pair(_power_fit(clustering_degrees, clustering_values),
+                                "clusteringVsDegree"))
+        power_laws.update(_pair(_power_fit(change_tokens, change_sizes),
+                                "changeVsTokens"))
+        power_laws["assortativity"] = _assortativity(edges, degree_of)
 
-    # Scale free: the degree distribution's tail, found rather than assumed.
-    scale_free = _scale_free(degree_list)
-    power_laws["degreeGamma"] = scale_free["exponent"] if scale_free else None
-    power_laws["degreeGammaR2"] = scale_free["r2"] if scale_free else None
-    power_laws["degreeKMin"] = scale_free["kMin"] if scale_free else None
-    power_laws["degreeTailShare"] = scale_free["coverage"] if scale_free else None
-    power_laws["degreeGammaKS"] = scale_free["ks"] if scale_free else None
+        # Scale free: the degree distribution's tail, found rather than assumed.
+        scale_free = _scale_free(degree_list)
+        power_laws["degreeGamma"] = scale_free["exponent"] if scale_free else None
+        power_laws["degreeGammaR2"] = scale_free["r2"] if scale_free else None
+        power_laws["degreeKMin"] = scale_free["kMin"] if scale_free else None
+        power_laws["degreeTailShare"] = scale_free["coverage"] if scale_free else None
+        power_laws["degreeGammaKS"] = scale_free["ks"] if scale_free else None
 
-    # Self-similar: how the number of boxes needed falls as boxes grow.
-    boxes = _box_dimension(ids, adjacency)
-    power_laws["boxDimension"] = boxes["exponent"] if boxes else None
-    power_laws["boxDimensionR2"] = boxes["r2"] if boxes else None
+        # Self-similar: how the number of boxes needed falls as boxes grow.
+        boxes = _box_dimension(ids, adjacency)
+        power_laws["boxDimension"] = boxes["exponent"] if boxes else None
+        power_laws["boxDimensionR2"] = boxes["r2"] if boxes else None
 
     degree_hist: Dict[int, int] = {}
     for d in degrees:
@@ -1076,7 +1125,8 @@ def _save_cache(run_id: str, cache: Dict[str, Any]) -> None:
         pass  # a missing cache only costs time, never correctness
 
 
-def build_series(run_id: str, points: Optional[int] = None) -> Dict[str, Any]:
+def build_series(run_id: str, points: Optional[int] = None,
+                 heavy: bool = True) -> Dict[str, Any]:
     """
     Statistics for a run's history, as parallel arrays.
 
@@ -1091,12 +1141,23 @@ def build_series(run_id: str, points: Optional[int] = None) -> Dict[str, Any]:
     caller that climbs — two points, three, five, nine — has a chart of the
     entire run within a second and refines it, and pays no more in total,
     because each request only computes what the last one did not.
+
+    `heavy` is the other axis of the same idea. Five sixths of what a frame
+    costs to summarise goes on statistics that walk the graph, and most charts
+    plot none of them — so a caller can ask for the cheap ones first and get a
+    complete chart of the run in a sixth of the time, then ask again for the
+    rest. A row already stored light is recomputed when the heavy pass reaches
+    it; one already heavy is never recomputed.
     """
     with _build_lock(run_id):
         try:
-            return _build_series_locked(run_id, points)
+            return _build_series_locked(run_id, points, heavy)
         finally:
             _set_progress(run_id, 0, 0, building=False)
+
+
+#: Row fields that are bookkeeping rather than statistics, and never travel.
+_INTERNAL = frozenset({"_frame", "_heavy"})
 
 
 def _series_keys(rows: List[Dict[str, Any]]) -> List[str]:
@@ -1116,13 +1177,14 @@ def _series_keys(rows: List[Dict[str, Any]]) -> List[str]:
     seen = set()
     for row in reversed(rows):
         for key in row:
-            if key != "_frame" and key not in seen:
+            if key not in _INTERNAL and key not in seen:
                 seen.add(key)
                 keys.append(key)
     return keys
 
 
-def _build_series_locked(run_id: str, points: Optional[int] = None) -> Dict[str, Any]:
+def _build_series_locked(run_id: str, points: Optional[int] = None,
+                         heavy: bool = True) -> Dict[str, Any]:
     total_frames = store.count_frames(run_id)
     # Frames come in pairs, one per phase, so an iteration is two of them.
     total_iterations = max(0, total_frames // 2)
@@ -1140,7 +1202,12 @@ def _build_series_locked(run_id: str, points: Optional[int] = None) -> Dict[str,
     if cached_stride < stride:
         rows = [r for r in rows if (r["_frame"] // 2) % stride == 0]
 
-    done_iterations = {r["_frame"] // 2 for r in rows}
+    # A row summarised without the graph statistics counts as present for a
+    # light request and absent for a heavy one, which is what lets the cheap
+    # pass and the expensive pass share one cache.
+    done_iterations = {r["_frame"] // 2 for r in rows
+                       if r.get("_heavy") or not heavy}
+    have = {r["_frame"]: r for r in rows}
 
     # The evenly spaced iterations this run is summarised at, and which of them
     # this particular request wants. Asking for a prefix of the bisection order
@@ -1205,14 +1272,21 @@ def _build_series_locked(run_id: str, points: Optional[int] = None) -> Dict[str,
             break
 
         prior = previous if (can_reconstruct and index % 2 == 1) else None
-        row = frame_stats(frame, prior)
+        row = frame_stats(frame, prior, heavy)
         row["_frame"] = index
+        row["_heavy"] = heavy
         if families is not None:
             iteration = int(frame.get("iteration", index // 2))
             families.observe(iteration, frame.get("brain_ids", []),
                              frame.get("parent_brain_ids", []))
             row["cladesInWindow"] = families.families(frame.get("brain_ids", []), iteration)
-        rows.append(row)
+        # Upgrading a light row rather than adding a second one for the same
+        # frame, which would leave the series with duplicate points.
+        if index in have:
+            rows[rows.index(have[index])] = row
+        else:
+            rows.append(row)
+        have[index] = row
         previous = frame
 
         # Often enough to feel live, rarely enough to thrash the lock.
@@ -1263,6 +1337,9 @@ def _build_series_locked(run_id: str, points: Optional[int] = None) -> Dict[str,
         "points": len(asked),
         "totalPoints": len(grid),
         "complete": complete,
+        # Whether these rows carry the statistics that walk the graph. A caller
+        # climbing light-then-heavy watches this rather than guessing.
+        "heavy": all(r.get("_heavy") for r in shown),
         "totalIterations": total_iterations,
         "nodeCountKeys": list(NODE_COUNT_KEYS),
     }

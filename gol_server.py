@@ -27,7 +27,7 @@ API
     GET    /api/runs/<id>/frames      ?from=&count=&fields= a run of them
     GET    /api/runs/<id>/lineage     ?from=&count=&limit= the genotype forest
     GET    /api/runs/<id>/series      per-frame statistics for the whole run
-                                      ?points=N for a coarse pass over all of it
+                                      ?points=N coarse, ?heavy=0 cheap keys only
     GET    /api/runs/<id>/series/progress   how far a rebuild has got
 """
 from __future__ import annotations
@@ -342,7 +342,10 @@ class Handler(BaseHTTPRequestHandler):
                 # run, so a caller can draw something immediately and climb.
                 asked = parse_qs(urlparse(self.path).query).get("points", [None])[0]
                 points = int(asked) if asked and asked.isdigit() else None
-                self._send_json(gol_series.build_series(parts[2], points))
+                # heavy=0 asks for the cheap statistics only, which is five
+                # sixths less work and everything most charts plot.
+                heavy = parse_qs(urlparse(self.path).query).get("heavy", ["1"])[0] != "0"
+                self._send_json(gol_series.build_series(parts[2], points, heavy))
                 return
 
             if (len(parts) == 5 and parts[:2] == ["api", "runs"]

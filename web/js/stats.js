@@ -860,7 +860,7 @@ class FrameMetrics {
 // --------------------------------------------------------------------------
 
 /** Shared canvas setup: size to the element's box in device pixels. */
-function _prepareCanvas(canvas) {
+function _prepareCanvas(canvas, pad = null) {
   const ctx = canvas.getContext('2d');
   const dpr = window.devicePixelRatio || 1;
   const rect = canvas.getBoundingClientRect();
@@ -869,7 +869,173 @@ function _prepareCanvas(canvas) {
   canvas.height = Math.max(1, Math.floor(rect.height * dpr));
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   ctx.clearRect(0, 0, rect.width, rect.height);
-  return { ctx, w: rect.width, h: rect.height };
+  if (!pad) return { ctx, w: rect.width, h: rect.height, dpr, outer: rect };
+
+  // Translating rather than threading an offset through every coordinate: the
+  // plotting arithmetic in each chart then works unchanged inside the smaller
+  // rectangle, and the furniture around it is drawn by resetting the transform.
+  ctx.translate(pad.left, pad.top);
+  return {
+    ctx, dpr, pad, outer: rect,
+    w: Math.max(1, rect.width - pad.left - pad.right),
+    h: Math.max(1, rect.height - pad.top - pad.bottom)
+  };
+}
+
+/**
+ * How much room the furniture round a chart needs.
+ *
+ * Nothing is reserved for a part that was not asked for, so a chart with no
+ * title loses no height to one — which is what keeps the Viewer's compact
+ * strip exactly as it was while the Diagrams tab gets a full-dress chart.
+ */
+function _chromePad(chrome) {
+  if (!chrome) return null;
+  const rows = chrome.legend ? chrome.legend.length : 0;
+  return {
+    left: chrome.yLabel || chrome.ticks ? 56 : 8,
+    right: 14,
+    top: chrome.title ? 26 : 8,
+    bottom: (chrome.ticks ? 30 : 10) + (chrome.xLabel ? 14 : 0) + rows * 14
+  };
+}
+
+/** A number short enough to sit under a tick without colliding with the next. */
+function _short(v) {
+  const a = Math.abs(v);
+  if (a >= 1000) return Math.round(v).toLocaleString('en-US');
+  if (a >= 10) return v.toFixed(1);
+  if (a >= 0.01) return v.toFixed(3);
+  if (a === 0) return '0';
+  return v.toExponential(1);
+}
+
+
+/** Round numbers to rule an axis at — the same stepping the history chart uses. */
+function _axisTicks(lo, hi, target = 5) {
+  if (!(hi > lo)) return [lo];
+  const rough = (hi - lo) / Math.max(1, target);
+  const magnitude = Math.pow(10, Math.floor(Math.log10(rough)));
+  const scaled = rough / magnitude;
+  const step = magnitude *
+    (scaled <= 1 ? 1 : scaled <= 2 ? 2 : scaled <= 2.5 ? 2.5 : scaled <= 5 ? 5 : 10);
+  const out = [];
+  for (let v = Math.ceil(lo / step) * step; v <= hi + step * 1e-6; v += step) {
+    out.push(Math.abs(v) < step * 1e-9 ? 0 : v);
+  }
+  return out;
+}
+
+/**
+ * Grid, ticks and any constant lines, in the chart's own coordinates.
+ *
+ * Called once a chart knows its domain and before it draws its data, so the
+ * grid sits behind rather than over — a heatmap with gridlines on top of the
+ * cells is harder to read, not easier.
+ */
+function _axes(ctx, w, h, spec) {
+  const { x, y, grid = true, guides = [] } = spec;
+  ctx.save();
+  ctx.font = '10px system-ui, sans-serif';
+  ctx.lineWidth = 1;
+
+  const place = (axis, v) => axis.lo === axis.hi ? 0.5 : (v - axis.lo) / (axis.hi - axis.lo);
+
+  if (x) {
+    for (const tick of _axisTicks(x.lo, x.hi)) {
+      const at = Math.round(place(x, tick) * w) + 0.5;
+      if (grid) {
+        ctx.strokeStyle = 'rgba(255,255,255,0.07)';
+        ctx.beginPath(); ctx.moveTo(at, 0); ctx.lineTo(at, h); ctx.stroke();
+      }
+      ctx.fillStyle = '#8fa3b5';
+      const text = x.format ? x.format(tick) : String(tick);
+      ctx.fillText(text, at - ctx.measureText(text).width / 2, h + 13);
+    }
+  }
+  if (y) {
+    for (const tick of _axisTicks(y.lo, y.hi)) {
+      const at = Math.round(h - place(y, tick) * h) + 0.5;
+      if (grid) {
+        ctx.strokeStyle = 'rgba(255,255,255,0.07)';
+        ctx.beginPath(); ctx.moveTo(0, at); ctx.lineTo(w, at); ctx.stroke();
+      }
+      ctx.fillStyle = '#8fa3b5';
+      const text = y.format ? y.format(tick) : String(tick);
+      ctx.fillText(text, -ctx.measureText(text).width - 6, at + 3);
+    }
+  }
+
+  // A line the reader put there: a threshold, a target, a value worth
+  // comparing against. Dashed, so it cannot be mistaken for data.
+  for (const guide of guides) {
+    const axis = guide.axis === 'y' ? y : x;
+    if (!axis || !Number.isFinite(guide.at)) continue;
+    const t = place(axis, guide.at);
+    if (t < -0.02 || t > 1.02) continue;
+    ctx.save();
+    ctx.setLineDash([5, 4]);
+    ctx.strokeStyle = guide.colour || 'rgba(255,255,255,0.5)';
+    ctx.beginPath();
+    if (guide.axis === 'y') {
+      const at = Math.round(h - t * h) + 0.5;
+      ctx.moveTo(0, at); ctx.lineTo(w, at);
+    } else {
+      const at = Math.round(t * w) + 0.5;
+      ctx.moveTo(at, 0); ctx.lineTo(at, h);
+    }
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  ctx.strokeStyle = 'rgba(255,255,255,0.18)';
+  ctx.strokeRect(0.5, 0.5, w - 1, h - 1);
+  ctx.restore();
+}
+
+/**
+ * Title, axis names and legend, outside the plotting area.
+ *
+ * Drawn into the canvas rather than laid beside it in HTML, because a saved
+ * image has to carry them: a legend that lives in the page is not in the PNG,
+ * and a chart of eight unnamed lines is not worth saving.
+ */
+function _chrome(ctx, pad, outer, chrome) {
+  if (!chrome) return;
+  ctx.save();
+  ctx.setTransform(ctx.getTransform().a, 0, 0, ctx.getTransform().d, 0, 0);
+  const w = outer.width, h = outer.height;
+
+  if (chrome.title) {
+    ctx.fillStyle = '#e6edf3';
+    ctx.font = '600 13px system-ui, sans-serif';
+    ctx.fillText(chrome.title, pad.left, 17);
+  }
+  ctx.font = '11px system-ui, sans-serif';
+  ctx.fillStyle = '#8fa3b5';
+
+  if (chrome.xLabel) {
+    const width = ctx.measureText(chrome.xLabel).width;
+    const rows = chrome.legend ? chrome.legend.length : 0;
+    ctx.fillText(chrome.xLabel, pad.left + (w - pad.left - pad.right - width) / 2,
+                 h - 6 - rows * 14);
+  }
+  if (chrome.yLabel) {
+    ctx.save();
+    ctx.translate(12, pad.top + (h - pad.top - pad.bottom) / 2);
+    ctx.rotate(-Math.PI / 2);
+    const width = ctx.measureText(chrome.yLabel).width;
+    ctx.fillText(chrome.yLabel, -width / 2, 0);
+    ctx.restore();
+  }
+  for (const [i, entry] of (chrome.legend || []).entries()) {
+    const y = h - 6 - (chrome.legend.length - 1 - i) * 14;
+    ctx.fillStyle = entry.colour;
+    ctx.fillRect(pad.left, y - 7, 14, 3);
+    ctx.fillStyle = '#8fa3b5';
+    ctx.fillText(entry.label, pad.left + 20, y);
+  }
+  ctx.restore();
 }
 
 /**
@@ -944,10 +1110,11 @@ function _noData(ctx, w, h, message = 'no data') {
  */
 function drawHistogram(canvas, values, options = {}) {
   const { bins = 32, colormap = 'viridis', reverse = false,
-          logScale = false, logCount = false, signed = false,
+          logScale = false, logCount = false, signed = false, chrome = null,
           format = v => Math.round(v).toLocaleString('en-US') } = options;
 
-  const { ctx, w, h } = _prepareCanvas(canvas);
+  const pad = _chromePad(chrome);
+  const { ctx, w, h, outer } = _prepareCanvas(canvas, pad);
   if (!values || !values.length) { _noData(ctx, w, h); return; }
 
   // Values can be missing — a "before the phase" quantity has none for a node
@@ -978,9 +1145,21 @@ function drawHistogram(canvas, values, options = {}) {
   for (const v of mapped) counts[_binOf(v, edges)]++;
   const peak = Math.max(...counts) || 1;
 
-  const padBottom = 16, padTop = 6;
+  // With furniture the axes carry the numbers, so the chart keeps no room for
+  // its own footer line.
+  const padBottom = chrome ? 0 : 16, padTop = chrome ? 0 : 6;
   const plotH = h - padBottom - padTop;
   const at = v => (v - lo) / (hi - lo) * w;
+
+  if (chrome) {
+    const back = v => logScale ? Metrics.undoLog(v, signed) : v;
+    _axes(ctx, w, h, {
+      x: { lo, hi, format: v => format(back(v)) },
+      y: { lo: 0, hi: Math.max(...counts) || 1,
+           format: v => Math.round(v).toLocaleString('en-US') },
+      grid: chrome.grid !== false, guides: chrome.guides || []
+    });
+  }
 
   // A log count axis lets a long tail of rare values stay visible next to a
   // spike that would otherwise flatten everything else to nothing.
@@ -998,6 +1177,8 @@ function drawHistogram(canvas, values, options = {}) {
     ctx.fillRect(left, padTop + plotH - barH,
                  Math.max(1, right - left - 1), barH);
   }
+
+  if (chrome) { _chrome(ctx, pad, outer, chrome); return; }
 
   const back = v => logScale ? Metrics.undoLog(v, signed) : v;
   ctx.fillStyle = '#8fa3b5';
@@ -1026,11 +1207,13 @@ function drawHeatmap(canvas, xs, ys, options = {}) {
   const { binsX = 34, binsY = 22, colormap = 'viridis', reverse = false,
           logX = false, logY = false, logCount = true,
           signedX = false, signedY = false,
+          chrome = null,
           formatX = v => Math.round(v).toLocaleString('en-US'),
           formatY = v => Math.round(v).toLocaleString('en-US'),
           message = null } = options;
 
-  const { ctx, w, h } = _prepareCanvas(canvas);
+  const pad = _chromePad(chrome);
+  const { ctx, w, h, outer } = _prepareCanvas(canvas, pad);
   if (message) { _noData(ctx, w, h, message); return; }
   if (!xs || !ys || !xs.length || xs.length !== ys.length) { _noData(ctx, w, h); return; }
 
@@ -1056,9 +1239,22 @@ function drawHeatmap(canvas, xs, ys, options = {}) {
   const ex = extent(mx), ey = extent(my);
   if (!ex || !ey) { _noData(ctx, w, h); return; }
 
-  const padLeft = 38, padBottom = 15, padTop = 4, padRight = 2;
+  // With furniture the axes carry the numbers, so the chart keeps no room for
+  // its own edge labels.
+  const padLeft = chrome ? 0 : 38, padBottom = chrome ? 0 : 15;
+  const padTop = chrome ? 0 : 4, padRight = chrome ? 0 : 2;
   const plotW = Math.max(1, w - padLeft - padRight);
   const plotH = Math.max(1, h - padBottom - padTop);
+
+  if (chrome) {
+    _axes(ctx, w, h, {
+      x: { lo: ex[0], hi: ex[1],
+           format: v => formatX(logX ? Metrics.undoLog(v, signedX) : v) },
+      y: { lo: ey[0], hi: ey[1],
+           format: v => formatY(logY ? Metrics.undoLog(v, signedY) : v) },
+      grid: chrome.grid !== false, guides: chrome.guides || []
+    });
+  }
 
   // Edges rather than a count, because on a log axis they are not evenly
   // spaced: near the origin whole numbers are further apart than one bin, and
@@ -1101,6 +1297,8 @@ function drawHeatmap(canvas, xs, ys, options = {}) {
     }
   }
 
+  if (chrome) { _chrome(ctx, pad, outer, chrome); return; }
+
   const backX = v => logX ? Metrics.undoLog(v, signedX) : v;
   const backY = v => logY ? Metrics.undoLog(v, signedY) : v;
 
@@ -1136,10 +1334,11 @@ function drawHeatmap(canvas, xs, ys, options = {}) {
 function drawTrajectory(canvas, points, options = {}) {
   const { colormap = 'viridis', reverse = false,
           logX = false, logY = false,
-          xLabel = '', yLabel = '', footer = '',
+          xLabel = '', yLabel = '', footer = '', chrome = null,
           message = null } = options;
 
-  const { ctx, w, h } = _prepareCanvas(canvas);
+  const pad = _chromePad(chrome);
+  const { ctx, w, h, outer } = _prepareCanvas(canvas, pad);
   if (message) { _noData(ctx, w, h, message); return; }
   if (!points || points.length < 2) {
     _noData(ctx, w, h, 'not enough of the run has both of these yet');
@@ -1162,11 +1361,24 @@ function drawTrajectory(canvas, points, options = {}) {
   if (hiY - loY < 1e-12) hiY = loY + 1;
   const spanT = (hiT - loT) || 1;
 
-  const padLeft = 54, padBottom = 30, padTop = 10, padRight = 10;
+  // With furniture the axes carry the numbers, so the chart keeps no room for
+  // its own.
+  const padLeft = chrome ? 0 : 54, padBottom = chrome ? 0 : 30;
+  const padTop = chrome ? 0 : 10, padRight = chrome ? 0 : 10;
   const plotW = Math.max(1, w - padLeft - padRight);
   const plotH = Math.max(1, h - padBottom - padTop);
   const px = v => padLeft + (mapX(v) - loX) / (hiX - loX) * plotW;
   const py = v => padTop + plotH - (mapY(v) - loY) / (hiY - loY) * plotH;
+
+  if (chrome) {
+    const backX = v => logX ? Metrics.undoLog(v, v < 0) : v;
+    const backY = v => logY ? Metrics.undoLog(v, v < 0) : v;
+    _axes(ctx, w, h, {
+      x: { lo: loX, hi: hiX, format: v => _short(backX(v)) },
+      y: { lo: loY, hi: hiY, format: v => _short(backY(v)) },
+      grid: chrome.grid !== false, guides: chrome.guides || []
+    });
+  }
 
   // Frame, so the path is read against something rather than floating.
   ctx.strokeStyle = 'rgba(143,163,181,0.25)';
@@ -1214,9 +1426,11 @@ function drawTrajectory(canvas, points, options = {}) {
   const hiXText = fmt(back(hiX, logX));
   ctx.fillText(hiXText, w - ctx.measureText(hiXText).width - 2, h - 17);
 
-  ctx.fillStyle = '#9fb0c0';
-  ctx.font = '10.5px system-ui, sans-serif';
-  ctx.fillText(`${yLabel} \u2191   vs   ${xLabel} \u2192`, padLeft, padTop - 1);
+  if (!chrome) {
+    ctx.fillStyle = '#9fb0c0';
+    ctx.font = '10.5px system-ui, sans-serif';
+    ctx.fillText(`${yLabel} \u2191   vs   ${xLabel} \u2192`, padLeft, padTop - 1);
+  }
 
   // A strip saying which end of the colour map is early and which is late.
   const barW = 90, barH = 7, barX = padLeft, barY = h - 12;
@@ -1230,4 +1444,5 @@ function drawTrajectory(canvas, points, options = {}) {
     ctx.fillStyle = '#6b7c8d';
     ctx.fillText(footer, w - ctx.measureText(footer).width - 2, barY + barH);
   }
+  if (chrome) _chrome(ctx, pad, outer, chrome);
 }

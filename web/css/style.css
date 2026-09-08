@@ -1091,7 +1091,29 @@ details.control-group > summary:hover h3 { color: var(--text); }
   font-size: 11.5px;
   color: var(--muted);
 }
-.diagram-lines { width: 100%; margin-bottom: 0; }
+.diagram-lines { width: 100%; margin-bottom: 0; flex-direction: column;
+                 align-items: stretch; }
+
+/* One row per line: every choice that produced it, still changeable. */
+.diagram-line-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.diagram-line-row i { width: 12px; height: 3px; border-radius: 2px; flex: none; }
+.diagram-line-row select { max-width: 190px; }
+.diagram-cap,
+.diagram-guide { width: 84px; }
+.diagram-title { width: 260px; }
+.diagram-drop {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 1px 5px;
+}
+.diagram-drop:hover { color: #fff; }
 .diagram-preset-title { color: var(--muted); }
 
 .diagram-preset,

@@ -407,7 +407,7 @@ const handlers = {
     }) };
   },
 
-  async series({ runId, points }) {
+  async series({ runId, points, heavy = true }) {
     const run = await loadRun(runId);
     const totalIterations = Math.max(0, Math.floor(run.frame_count / 2));
     const stride = call('gol_browser.WORLDS.sample_stride', [totalIterations]);
@@ -427,12 +427,12 @@ const handlers = {
     const frames = await RunStore.getFramesStrided(runId, stride, asked);
 
     report('series', 'summarising', 0, frames.length);
-    const rows = frames.length ? call('gol_browser.WORLDS.stats', [frames]) : [];
+    const rows = frames.length ? call('gol_browser.WORLDS.stats', [frames, heavy]) : [];
     report('ready', 'ready');
 
     if (!rows.length) {
       return { count: 0, keys: [], series: {}, stride, sampled: false,
-               points: 0, totalPoints: grid.length, complete: true,
+               points: 0, totalPoints: grid.length, complete: true, heavy,
                nodeCountKeys: call('gol_browser.WORLDS.node_count_keys') };
     }
     const keys = Object.keys(rows[0]);
@@ -440,7 +440,7 @@ const handlers = {
     for (const key of keys) series[key] = rows.map(row => row[key]);
     return {
       count: rows.length, keys, series, stride, sampled: stride > 1,
-      points: asked.size, totalPoints: grid.length, complete,
+      points: asked.size, totalPoints: grid.length, complete, heavy,
       totalIterations,
       nodeCountKeys: call('gol_browser.WORLDS.node_count_keys')
     };

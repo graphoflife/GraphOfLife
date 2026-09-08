@@ -67,8 +67,13 @@ const ServerBackend = {
   },
   // `points` asks for a coarse pass over the whole run rather than every
   // sample of it, so a chart can be drawn before the full build finishes.
-  getSeries(id, points) { return this._request('GET', `/api/runs/${encodeURIComponent(id)}/series`
-                            + (points ? `?points=${points}` : '')); },
+  getSeries(id, points, heavy = true) {
+    const query = [];
+    if (points) query.push(`points=${points}`);
+    if (!heavy) query.push('heavy=0');
+    return this._request('GET', `/api/runs/${encodeURIComponent(id)}/series`
+      + (query.length ? `?${query.join('&')}` : ''));
+  },
   getSeriesProgress(id) { return this._request('GET', `/api/runs/${encodeURIComponent(id)}/series/progress`); }
 };
 
@@ -136,7 +141,9 @@ const BrowserBackend = {
   getLineage(id, from, count, limit, sightings, phase) {
     return this._send('lineage', { runId: id, from, count, limit, sightings, phase });
   },
-  getSeries(id, points) { return this._send('series', { runId: id, points }); },
+  getSeries(id, points, heavy = true) {
+    return this._send('series', { runId: id, points, heavy });
+  },
   getSeriesProgress(id) { return this._send('seriesProgress', { runId: id }); },
   storage()             { return this._send('storage'); }
 };
@@ -186,7 +193,7 @@ const API = {
   getLineage(id, from, count, limit, sightings, phase) {
     return this._call('getLineage', id, from, count, limit, sightings, phase);
   },
-  getSeries(id, points)   { return this._call('getSeries', id, points); },
+  getSeries(id, points, heavy) { return this._call('getSeries', id, points, heavy); },
   getSeriesProgress(id)   { return this._call('getSeriesProgress', id); },
   // Only the in-browser backend stores anything locally; with a server the
   // question has no meaning and the notice does not ask it.
