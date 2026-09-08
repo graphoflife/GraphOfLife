@@ -172,6 +172,39 @@ function test_a_parent_pays_for_its_child_as_the_tokens_cross() {
   }
 }
 
+function test_a_disc_is_sized_by_what_is_held_now_not_at_the_end_of_the_step() {
+  // The ring of dots has always animated: a pile loses what it sends when the
+  // dots set off and gains what it is sent when they land. The disc under it
+  // was sized from the end-of-step snapshot instead, so an agent's size
+  // snapped to its new value while its tokens were still visibly crossing the
+  // link — the same fact, drawn two different ways at once.
+  const stage = stageWhere(s => s.step === 'repro.born' && s.marks.parents.length);
+  const b = StepView.BIRTH;
+  const [parent, child] = stage.marks.parents[0];
+  const had = heldMap(stage);
+  const paid = had.get(child) || 0;
+  if (paid <= 0) throw new Error('picked a birth with no endowment to follow');
+
+  const at = t => StepView._holding(viewOf(stage, 'inherit', t)).now;
+
+  const opening = at(b.hold);
+  const closing = at(b.hold + b.travel + 1);
+
+  if (Math.abs(opening.get(parent) - (had.get(parent) + paid)) > 1e-6) {
+    throw new Error(`the parent's disc opens sized for ${opening.get(parent)}, `
+                  + `wanted ${had.get(parent) + paid} — its own ${had.get(parent)} `
+                  + `plus the ${paid} it has not handed over yet`);
+  }
+  if (Math.abs(opening.get(child)) > 1e-6) {
+    throw new Error(`the child's disc opens sized for ${opening.get(child)}, before `
+                  + `anything has reached it`);
+  }
+  if (Math.abs(closing.get(parent) - had.get(parent)) > 1e-6 ||
+      Math.abs(closing.get(child) - paid) > 1e-6) {
+    throw new Error('the discs do not settle on the end-of-step amounts');
+  }
+}
+
 function test_the_handover_never_creates_or_strands_a_token() {
   // At every moment the world holds its supply less exactly what is in the
   // air, so it may dip by as much as the endowments being carried and not one
@@ -439,6 +472,7 @@ const tests = Object.entries({
   test_a_pile_never_fills_before_anything_reaches_it,
   test_a_stake_lands_where_the_engine_says_it_lands,
   test_a_parent_pays_for_its_child_as_the_tokens_cross,
+  test_a_disc_is_sized_by_what_is_held_now_not_at_the_end_of_the_step,
   test_the_handover_never_creates_or_strands_a_token,
   test_one_token_is_one_dot_and_the_reference_is_fifteen,
   test_no_pile_draws_more_dots_than_it_holds_tokens,

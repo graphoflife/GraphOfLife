@@ -137,6 +137,34 @@ const StepView = {
   },
 
   /** Advance the layout, then let everything drawn move towards it. */
+  /**
+   * What each agent is holding at this instant, not at the end of the step.
+   *
+   * The snapshot in a stage is taken after the phase, so a pile that spent
+   * tokens is already short of them and one that received them already has
+   * them. The animation puts the tokens in flight: a pile loses what it sends
+   * when the dots set off and gains what it is sent when they land.
+   *
+   * The ring of dots has always used this. The disc underneath it did not — it
+   * was sized from the end-of-step snapshot — so an agent's size jumped to its
+   * new value while its tokens were still visibly crossing the link, and the
+   * two halves of the same fact disagreed for the length of the journey.
+   * Computed once per tick here so they cannot drift apart again.
+   */
+  _holding(view) {
+    const stage = view.stage;
+    const moving = view.effects.has('stakes') ? this._staking(view) : null;
+    const given = view.effects.has('inherit') ? this._inheritance(view) : null;
+    const now = new Map();
+    stage.ids.forEach((id, i) => {
+      let held = stage.tokens[i];
+      if (moving) held = moving.held(id, held);
+      if (given) held = given.held(id, held);
+      now.set(id, held);
+    });
+    return { now, moving, given };
+  },
+
   tick(view, dt) {
     if (!view.layout || !view.stage) return;
     view.since += dt;
@@ -161,9 +189,16 @@ const StepView = {
     const waiting = stage.step === 'repro.born' && view.since < this.BIRTH.wait
       ? new Set(stage.marks.born || []) : null;
 
+    // Sized by what is being held at this instant, so the disc grows and
+    // shrinks in step with the dots crossing the links rather than snapping to
+    // the end-of-step value while they are still in the air. The scale stays
+    // the end-of-step maximum, or every pile would swell whenever the largest
+    // one happened to be mid-payment.
+    view._holds = this._holding(view);
     const most = Math.max(1, ...stage.tokens);
-    const size = new Map(stage.ids.map((id, i) =>
-      [id, this.NODE.min + this.NODE.range * Math.sqrt(stage.tokens[i] / most)]));
+    const size = new Map(stage.ids.map(id =>
+      [id, this.NODE.min + this.NODE.range
+           * Math.sqrt(Math.max(0, view._holds.now.get(id) || 0) / most)]));
 
     const close = (was, want, rate) => was + (want - was) * Math.min(1, rate * dt);
 
@@ -981,12 +1016,11 @@ const StepView = {
     // works its way round and fires as it goes, shrinking as it empties.
     const supply = view.effects.has('arrive')
       ? this._supply(view, place, count, w, h) : null;
-    // Everyone stakes everything, so during the game a pile drains as it
-    // leaves and fills with whatever was aimed at it.
-    const moving = view.effects.has('stakes') ? this._staking(view) : null;
-    // A child holds nothing until what it was given has crossed the link, and
-    // its parent is still holding it until then.
-    const given = view.effects.has('inherit') ? this._inheritance(view) : null;
+    // Worked out by the tick, which needed the same numbers to size the discs.
+    // Recomputing them here would be the same arithmetic twice a frame and one
+    // more way for the ring and the disc to disagree.
+    const holds = view._holds || this._holding(view);
+    const { moving, given } = holds;
 
     ctx.save();
     ctx.fillStyle = this.ink.good;
@@ -996,9 +1030,7 @@ const StepView = {
     stage.ids.forEach((id, i) => {
       const p = place(id);
       if (!p) return;
-      let held = stage.tokens[i];
-      if (moving) held = Math.round(moving.held(id, held));
-      if (given) held = Math.round(given.held(id, held));
+      const held = Math.round(holds.now.get(id) ?? stage.tokens[i]);
       if (held <= 0) return;                 // nothing to hold, nothing in orbit
       const dots = count(held);
 
