@@ -362,6 +362,24 @@ const handlers = {
     return RunStore.getFrame(runId, Number(index));
   },
 
+  /**
+   * A contiguous run of frames, cut down to the fields the caller reads.
+   *
+   * The projection matters here too, even with no network in the way: every
+   * frame is copied across the worker boundary, and a window of two hundred
+   * whole frames of a large world is tens of megabytes of structured clone
+   * so that two arrays can be read out of each.
+   */
+  async frames({ runId, from, count, fields }) {
+    const frames = await RunStore.getFrameRange(runId, Number(from), Number(count));
+    if (!fields || !fields.length) return { frames };
+    return { frames: frames.map(frame => {
+      const cut = {};
+      for (const key of fields) cut[key] = frame[key];
+      return cut;
+    }) };
+  },
+
   async series({ runId, points }) {
     const run = await loadRun(runId);
     const totalIterations = Math.max(0, Math.floor(run.frame_count / 2));
@@ -421,7 +439,7 @@ const handlers = {
 // An allow-list rather than a deny-list: a handler that needs the engine and
 // is left off this by mistake still works, where one that does not need it and
 // is wrongly added would fail only in the browser, only on a cold start.
-const NO_ENGINE = new Set(['list', 'get', 'frame', 'seriesProgress', 'storage']);
+const NO_ENGINE = new Set(['list', 'get', 'frame', 'frames', 'seriesProgress', 'storage']);
 
 self.onmessage = async (event) => {
   const { id, type, ...rest } = event.data || {};

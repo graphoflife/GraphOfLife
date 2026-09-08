@@ -573,8 +573,17 @@
         descendants took the world.</p>
     </div>
     <div class="lineage-bar">
-      <label for="lineageWindow" class="lineage-filter" hidden>Window starts at
-        <input type="range" id="lineageWindow" min="0" max="0" value="0" step="2"></label>
+      <label for="lineageSpan" class="lineage-filter">Show
+        <input type="number" id="lineageSpan" min="5" max="2000" step="5" value="100">
+        iterations</label>
+      <label for="lineageWindow" class="lineage-filter lineage-scrub" hidden>from
+        <input type="range" id="lineageWindow" min="0" max="0" value="0" step="2">
+        <span id="lineageWindowValue"></span></label>
+      <span class="seg" id="lineagePhase" role="group" aria-label="Phase filter">
+        <button type="button" class="seg-btn active" data-phase="all">Both phases</button>
+        <button type="button" class="seg-btn" data-phase="1">Reproduction</button>
+        <button type="button" class="seg-btn" data-phase="2">Game</button>
+      </span>
       <label for="lineageMinLife" class="lineage-filter">Lasted at least
         <input type="range" id="lineageMinLife" min="1" max="12" value="2" step="1">
         <span id="lineageMinLifeValue">2</span> frames</label>
@@ -613,8 +622,17 @@
         each link is written down.</p>
     </div>
     <div class="lineage-bar">
-      <label for="flowWindow" class="lineage-filter" hidden>Window starts at
-        <input type="range" id="flowWindow" min="0" max="0" value="0" step="2"></label>
+      <label for="flowSpan" class="lineage-filter">Show
+        <input type="number" id="flowSpan" min="5" max="2000" step="5" value="100">
+        iterations</label>
+      <label for="flowWindow" class="lineage-filter lineage-scrub" hidden>from
+        <input type="range" id="flowWindow" min="0" max="0" value="0" step="2">
+        <span id="flowWindowValue"></span></label>
+      <span class="seg" id="flowPhase" role="group" aria-label="Phase filter">
+        <button type="button" class="seg-btn active" data-phase="all">Both phases</button>
+        <button type="button" class="seg-btn" data-phase="1">Reproduction</button>
+        <button type="button" class="seg-btn" data-phase="2">Game</button>
+      </span>
       <label for="flowFloor" class="lineage-filter">Same module above
         <input type="range" id="flowFloor" min="10" max="70" value="30" step="5">
         <span id="flowFloorValue">30</span>% overlap</label>

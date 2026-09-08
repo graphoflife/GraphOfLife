@@ -24,10 +24,23 @@ const Lineage = {
   forest: null,
   active: false,
 
-  // How much of a run is on screen at once. The window is contiguous and you
-  // move it with the slider; see framewindow.js for why it cannot simply be
-  // sampled instead.
+  // How much of a run is on screen at once, as a starting value — the reader
+  // sets it, since how far you want to see at once depends on what you are
+  // looking for. The window is contiguous and you move it with the slider; see
+  // framewindow.js for why it cannot simply be sampled instead.
   MAX_ITERATIONS: 100,
+
+  // The columns a lineage actually reads. A frame of a large run is mostly its
+  // edge list and this draws none of it, so asking for whole frames was tens of
+  // megabytes parsed per window to get at two arrays.
+  FIELDS: ['iteration', 'phase', 'brain_ids', 'parent_brain_ids'],
+
+  // Redrawn at most this often while frames are still arriving. Rebuilding the
+  // forest on every batch is wasted work at this size; rebuilding it never
+  // until the last frame lands is an empty box for the whole read.
+  DRAW_EVERY_MS: 250,
+
+  phase: 'all',
   // Frames times agents, roughly. A big world is tens of thousands of agents a
   // frame, and a hundred iterations of those is millions of genotypes to lay
   // out and a picture nobody can read — so the window shortens itself once the
@@ -54,6 +67,24 @@ const Lineage = {
     const scrub = document.getElementById('lineageWindow');
     scrub.addEventListener('change', () => this.load(this.runId, Number(scrub.value)));
 
+    // How many iterations are on screen at once. Changing it refetches, so it
+    // acts on commit rather than on every keystroke.
+    this.spanEl = document.getElementById('lineageSpan');
+    this.spanEl.value = String(this.MAX_ITERATIONS);
+    this.spanEl.addEventListener('change', () => this.load(this.runId, this.windowStart));
+
+    for (const button of document.querySelectorAll('#lineagePhase .seg-btn')) {
+      button.addEventListener('click', () => {
+        this.phase = button.dataset.phase;
+        for (const other of document.querySelectorAll('#lineagePhase .seg-btn')) {
+          other.classList.toggle('active', other === button);
+        }
+        // A phase filter is a filter on frames already in hand, so it redraws
+        // from them rather than reading the window again.
+        this.rebuild();
+      });
+    }
+
     this.canvas.addEventListener('mousemove', e => this.hover(e));
     this.canvas.addEventListener('mouseleave', () => {
       this.hovered = null;
@@ -72,56 +103,39 @@ const Lineage = {
     this.runs = runs;
   },
 
-  say(text) {
-    this.noteEl.textContent = text;
-  },
-
-  // ---- reading a run ----------------------------------------------------
-
-  async load(runId, from = null) {
-    // Coming back to the same run — a mode switch, a refresh — reopens where
-    // it was left rather than snapping to the beginning. A different run has
-    // no remembered place, so it starts at its own.
-    const at = from ?? (runId === this.runId ? this.windowStart : 0);
-    this.runId = runId;
-    this.forest = null;
-    this.draw();
-
-    const run = this.runs.find(r => r.id === runId);
-    if (!run) return;
-
-    const plan = FrameWindow.plan(run.frame_count, at, this.MAX_ITERATIONS);
-    this.windowStart = plan.start;
-    FrameWindow.bindScrubber(document.getElementById('lineageWindow'), plan);
-
-    const frames = [];
-    let budget = plan.indices.length;
-    try {
-      for await (const batch of FrameWindow.read(runId, plan.indices)) {
-        if (this.runId !== runId) return;          // a different run was picked
-        frames.push(...batch);
-
-        // Now that the size of the world is known, take only as many frames as
-        // will make a picture rather than a wall.
-        if (frames.length === batch.length) {
-          const agents = frames[0].brain_ids.length || 1;
-          budget = Math.max(batch.length,
-                            Math.min(budget, Math.ceil(this.MAX_SIGHTINGS / agents)));
-        }
-        this.say(`Reading frames… ${frames.length} of ${budget}`);
-        if (frames.length >= budget) break;
-      }
-    } catch (err) {
-      this.say(`Could not read the frames: ${err.message}`);
-      return;
-    }
-
-    frames.sort((a, b) => (a.iteration - b.iteration) || (a.phase - b.phase));
-    this.forest = this.build(frames);
+  /**
+   * Rebuild the forest from the frames in hand and draw it.
+   *
+   * Separate from `load` because two things call it: each batch as it arrives,
+   * and the phase toggle, which changes which of the frames already read are
+   * counted rather than which frames are read.
+   */
+  rebuild(reading = false) {
+    if (!this.frames) return;
+    const kept = this.phase === 'all'
+      ? this.frames
+      : this.frames.filter(f => String(f.phase) === this.phase);
+    kept.sort((a, b) => (a.iteration - b.iteration) || (a.phase - b.phase));
+    this.forest = kept.length ? this.build(kept) : null;
     this.resize();
     this.draw();
+    if (!reading) this.describe(kept);
+  },
 
+  /**
+   * Say what is on screen.
+   *
+   * Written here rather than at the end of the read, because the phase filter
+   * changes the picture without reading anything — and a note left over from
+   * the unfiltered forest described a drawing that was no longer there.
+   */
+  describe(frames) {
     const f = this.forest;
+    if (!f) {
+      this.say('No frames of that phase in this window.');
+      return;
+    }
+    const plan = this.plan || { total: frames.length, start: 0 };
     const where = FrameWindow.describe(frames, plan.total);
     const rootShare = f.roots.length / Math.max(1, f.order.length);
 
@@ -143,6 +157,68 @@ const Lineage = {
         + ` to see a real one.`;
     }
     this.say(note);
+  },
+
+  say(text) {
+    this.noteEl.textContent = text;
+  },
+
+  // ---- reading a run ----------------------------------------------------
+
+  async load(runId, from = null) {
+    // Coming back to the same run — a mode switch, a refresh — reopens where
+    // it was left rather than snapping to the beginning. A different run has
+    // no remembered place, so it starts at its own.
+    const at = from ?? (runId === this.runId ? this.windowStart : 0);
+    this.runId = runId;
+    this.forest = null;
+    this.frames = null;
+    this.draw();
+
+    const run = this.runs.find(r => r.id === runId);
+    if (!run) return;
+
+    const span = Math.max(5, Number(this.spanEl?.value) || this.MAX_ITERATIONS);
+    const plan = FrameWindow.plan(run.frame_count, at, span);
+    this.plan = plan;
+    this.windowStart = plan.start;
+    FrameWindow.bindScrubber(document.getElementById('lineageWindow'), plan);
+
+    const frames = [];
+    let budget = plan.indices.length;
+    let painted = 0;
+    try {
+      for await (const batch of FrameWindow.read(runId, plan.indices, this.FIELDS)) {
+        if (this.runId !== runId) return;          // a different run was picked
+        frames.push(...batch);
+
+        // Now that the size of the world is known, take only as many frames as
+        // will make a picture rather than a wall.
+        if (frames.length === batch.length) {
+          const agents = frames[0].brain_ids.length || 1;
+          budget = Math.max(batch.length,
+                            Math.min(budget, Math.ceil(this.MAX_SIGHTINGS / agents)));
+        }
+        this.say(`Reading frames… ${frames.length} of ${budget}`);
+
+        // Draw what has arrived. A window of a large run takes seconds to read,
+        // and an empty box for all of it reads as broken rather than as busy.
+        const now = Date.now();
+        if (now - painted > this.DRAW_EVERY_MS) {
+          painted = now;
+          this.frames = frames.slice();
+          this.rebuild(true);
+          this.say(`Reading frames… ${frames.length} of ${budget}`);
+        }
+        if (frames.length >= budget) break;
+      }
+    } catch (err) {
+      this.say(`Could not read the frames: ${err.message}`);
+      return;
+    }
+
+    this.frames = frames;
+    this.rebuild();
   },
 
   /**

@@ -21,9 +21,11 @@
 const FrameWindow = {
   // A recorded iteration is a reproduction frame and a game frame.
   PHASES: 2,
-  // Fetched a handful at a time: one at a time is slow over a few hundred, and
-  // all at once is a few hundred simultaneous requests.
-  BATCH: 8,
+  // Frames per request. One request per frame meant two hundred round trips
+  // for a window, each carrying the whole topology of the world so that two
+  // columns could be read out of it; the backends take a range and a field
+  // list, so this is now the size of a batch rather than a concurrency limit.
+  BATCH: 32,
 
   /**
    * Which frames to read, given where the reader wants the window to start.
@@ -54,19 +56,37 @@ const FrameWindow = {
     el.step = String(this.PHASES);
     el.value = String(plan.start);
     el.closest('label').hidden = plan.indices.length >= plan.total;
+
+    // Say which stretch is on screen. A slider with no numbers on it tells you
+    // that there is more run than window and nothing else — not where you are
+    // in it, and not how much of it you are looking at.
+    const readout = el.parentElement.querySelector('span');
+    if (readout) {
+      const first = Math.floor(plan.start / this.PHASES);
+      const last = first + Math.ceil(plan.indices.length / this.PHASES) - 1;
+      readout.textContent =
+        `iterations ${formatNumber(first)}–${formatNumber(last)} `
+        + `of ${formatNumber(Math.ceil(plan.total / this.PHASES))}`;
+    }
   },
 
   /**
    * The planned frames, a batch at a time.
    *
-   * Yielded rather than returned whole so a caller can report progress and
-   * stop early — the lineage does, once the first frame has told it how big
-   * this world is.
+   * Yielded rather than returned whole so a caller can draw what it has and
+   * stop early — both views draw every batch, and the lineage also shortens
+   * the window once the first frame has said how big this world is.
+   *
+   * `fields` is the columns the caller actually reads. A frame of a large run
+   * is mostly its edge list, and neither view looks at it: the lineage wants
+   * two arrays of brain ids, the flow view wants ids and allocations. Asking
+   * for the whole thing was tens of megabytes to parse per window.
    */
-  async *read(runId, indices) {
+  async *read(runId, indices, fields = null) {
     for (let at = 0; at < indices.length; at += this.BATCH) {
-      yield await Promise.all(
-        indices.slice(at, at + this.BATCH).map(i => API.getFrame(runId, i)));
+      const slice = indices.slice(at, at + this.BATCH);
+      const reply = await API.getFrames(runId, slice[0], slice.length, fields);
+      yield reply.frames || [];
     }
   },
 

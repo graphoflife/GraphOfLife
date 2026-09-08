@@ -24,6 +24,7 @@ API
     POST   /api/runs/<id>/stop        ask a running worker to stop
     POST   /api/runs/<id>/copy        duplicate a run, data and all
     GET    /api/runs/<id>/frames/<n>  one recorded frame
+    GET    /api/runs/<id>/frames      ?from=&count=&fields= a run of them
     GET    /api/runs/<id>/series      per-frame statistics for the whole run
                                       ?points=N for a coarse pass over all of it
     GET    /api/runs/<id>/series/progress   how far a rebuild has got
@@ -76,6 +77,11 @@ SHIPPED_DOCS = {
 
 # Requests are capped so a malformed or hostile body cannot exhaust memory.
 MAX_BODY_BYTES = 1 << 20
+
+# Frames per batched request. High enough that a two-hundred-frame window is a
+# handful of round trips, low enough that one request cannot be asked to read a
+# whole run into memory at once.
+MAX_FRAME_BATCH = 64
 
 
 # ----------------------------------------------------------------------------
@@ -330,6 +336,31 @@ class Handler(BaseHTTPRequestHandler):
                     self._error("frame not found", 404)
                     return
                 self._send_json(store.read_frame(run_id, index))
+                return
+
+            # A contiguous run of frames, optionally cut down to the fields the
+            # caller actually reads.
+            #
+            # Both Research views want a couple of hundred consecutive frames
+            # and a few columns of each. Asked for one at a time and whole,
+            # that was two hundred round trips carrying the entire topology of
+            # a forty-thousand-node world — tens of megabytes to parse in the
+            # browser so that two arrays could be read out of it.
+            if len(parts) == 4 and parts[:2] == ["api", "runs"] and parts[3] == "frames":
+                query = parse_qs(urlparse(self.path).query)
+                run_id = parts[2]
+                start = max(0, int((query.get("from", ["0"])[0] or 0)))
+                count = max(1, min(MAX_FRAME_BATCH,
+                                   int(query.get("count", ["1"])[0] or 1)))
+                wanted = [f for f in (query.get("fields", [""])[0] or "").split(",") if f]
+
+                frames = []
+                for index in range(start, start + count):
+                    if not store.has_frame(run_id, index):
+                        break
+                    frame = store.read_frame(run_id, index)
+                    frames.append({k: frame.get(k) for k in wanted} if wanted else frame)
+                self._send_json({"frames": frames})
                 return
 
         except FileNotFoundError:

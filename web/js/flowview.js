@@ -16,11 +16,21 @@ const FlowView = {
   runId: null,
   result: null,
 
-  // How much of a run is on screen at once, in recorded iterations. It used to
-  // read the first 220 frames of any run and offer no way to look further, so
-  // a long simulation could only ever be seen starting, and a large one could
-  // not be drawn at all.
+  // How much of a run is on screen at once, in recorded iterations, as a
+  // starting value — the reader sets it. It used to read the first 220 frames
+  // of any run and offer no way to look further, so a long simulation could
+  // only ever be seen starting, and a large one could not be drawn at all.
   MAX_ITERATIONS: 100,
+
+  // The columns the flow arithmetic reads. Everything else in a frame — the
+  // edge list above all — is untouched here, and on a large run that is most
+  // of what a frame weighs.
+  FIELDS: ['iteration', 'phase', 'ids', 'decisions'],
+
+  // Redrawn at most this often while frames are still arriving.
+  DRAW_EVERY_MS: 400,
+
+  phase: 'all',
 
   init() {
     this.canvas = document.getElementById('flowCanvas');
@@ -36,6 +46,20 @@ const FlowView = {
     // pixel of the drag.
     const scrub = document.getElementById('flowWindow');
     scrub.addEventListener('change', () => this.load(this.runId, Number(scrub.value)));
+
+    this.spanEl = document.getElementById('flowSpan');
+    this.spanEl.value = String(this.MAX_ITERATIONS);
+    this.spanEl.addEventListener('change', () => this.load(this.runId, this.windowStart));
+
+    for (const button of document.querySelectorAll('#flowPhase .seg-btn')) {
+      button.addEventListener('click', () => {
+        this.phase = button.dataset.phase;
+        for (const other of document.querySelectorAll('#flowPhase .seg-btn')) {
+          other.classList.toggle('active', other === button);
+        }
+        this.recompute();
+      });
+    }
 
     // The overlap floor changes how modules are matched, so it re-follows the
     // frames it already has rather than fetching them again.
@@ -91,23 +115,34 @@ const FlowView = {
     // A module's identity is its overlap with the frame before it, so the
     // window is contiguous — a stride would break exactly the thing being
     // measured. It is moved rather than widened.
-    const plan = FrameWindow.plan(run.frame_count, at, this.MAX_ITERATIONS);
+    const span = Math.max(5, Number(this.spanEl?.value) || this.MAX_ITERATIONS);
+    const plan = FrameWindow.plan(run.frame_count, at, span);
     this.windowStart = plan.start;
     this.windowTotal = plan.total;
     FrameWindow.bindScrubber(document.getElementById('flowWindow'), plan);
 
     const frames = [];
+    let painted = 0;
     try {
-      for await (const batch of FrameWindow.read(runId, plan.indices)) {
+      for await (const batch of FrameWindow.read(runId, plan.indices, this.FIELDS)) {
         if (this.runId !== runId) return;
         frames.push(...batch);
         this.say(`Reading frames… ${frames.length} of ${plan.indices.length}`);
+
+        // Follow and draw what has arrived rather than waiting out the whole
+        // window on a blank canvas.
+        const now = Date.now();
+        if (now - painted > this.DRAW_EVERY_MS) {
+          painted = now;
+          this.frames = frames.slice();
+          this.recompute();
+          this.say(`Reading frames… ${frames.length} of ${plan.indices.length}`);
+        }
       }
     } catch (err) {
       this.say(`Could not read the frames: ${err.message}`);
       return;
     }
-    frames.sort((a, b) => (a.iteration - b.iteration) || (a.phase - b.phase));
     this.frames = frames;
     this.recompute();
   },
@@ -115,7 +150,16 @@ const FlowView = {
   recompute() {
     if (!this.frames) return;
     const floor = Number(this.floorEl.value) / 100;
-    this.result = FlowModules.follow(this.frames, { floor });
+    // A phase filter selects among frames already read rather than changing
+    // which are read. Module identity is overlap with the frame before, so
+    // filtering to one phase compares each iteration with the last one of the
+    // same kind — which is the comparison the reader asked for.
+    const kept = this.phase === 'all'
+      ? this.frames
+      : this.frames.filter(f => String(f.phase) === this.phase);
+    if (!kept.length) { this.result = null; this.draw(); return; }
+    kept.sort((a, b) => (a.iteration - b.iteration) || (a.phase - b.phase));
+    this.result = FlowModules.follow(kept, { floor });
     this.facts = FlowModules.summarise(this.result.history);
     this.resize();
     this.draw();
@@ -126,7 +170,14 @@ const FlowView = {
     const { history, withoutFlow } = this.result;
     if (!history.length) {
       this.factsEl.replaceChildren();
-      this.say(withoutFlow
+      // Tokens are only allocated across links in the game phase, so a
+      // reproduction-only filter has nothing to group by construction. Saying
+      // "record a run with decisions on" there would be advice that cannot
+      // help, about a run that is already recorded correctly.
+      this.say(this.phase === '1'
+        ? 'Nothing crosses a link during reproduction — tokens are allocated in '
+          + 'the game phase, so this view has nothing to group under that filter.'
+        : withoutFlow
         ? `None of the ${formatNumber(withoutFlow)} frames read carry what crossed `
           + `each link. Record a run with decisions on and this will have something `
           + `to work from.`

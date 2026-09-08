@@ -20,7 +20,13 @@ const FrameWindow = new Function(
 /** A stand-in for a range input and the label that hides with it. */
 function scrubber() {
   const label = { hidden: false };
-  return { min: '', max: '', step: '', value: '', closest: () => label, label };
+  const readout = { textContent: '' };
+  return {
+    min: '', max: '', step: '', value: '',
+    closest: () => label,
+    parentElement: { querySelector: () => readout },
+    label, readout
+  };
 }
 
 /** Frames as a run records them: two per iteration, in order. */
@@ -47,6 +53,18 @@ function test_a_short_run_is_shown_whole() {
   const el = scrubber();
   FrameWindow.bindScrubber(el, plan);
   if (!el.label.hidden) throw new Error('the slider was offered with nothing to move');
+}
+
+function test_the_scrubber_says_which_stretch_is_on_screen() {
+  // A slider with no numbers on it says there is more run than window and
+  // nothing else: not where you are in it, and not how much you are seeing.
+  const el = scrubber();
+  FrameWindow.bindScrubber(el, FrameWindow.plan(2000, 400, 50));
+  // formatNumber is stubbed to String() up top, so no thousands separators.
+  const said = el.readout.textContent;
+  if (said !== 'iterations 200–249 of 1000') {
+    throw new Error(`the readout said "${said}", wanted iterations 200–249 of 1000`);
+  }
 }
 
 function test_a_long_run_is_capped_at_the_asked_for_iterations() {
@@ -108,7 +126,12 @@ function test_the_slider_steps_by_whole_iterations() {
 
 function test_frames_are_read_in_batches_and_all_of_them_arrive() {
   const asked = [];
-  const API = { getFrame: (_run, i) => { asked.push(i); return Promise.resolve({ i }); } };
+  const API = {
+    getFrames: (_run, from, count) => {
+      for (let i = from; i < from + count; i++) asked.push(i);
+      return Promise.resolve({ frames: Array.from({ length: count }, (_, k) => ({ i: from + k })) });
+    }
+  };
   const scoped = new Function('API', `const formatNumber = n => String(n); ${source}; return FrameWindow;`)(API);
 
   const { indices } = scoped.plan(50, 0, 100);
@@ -124,11 +147,37 @@ function test_frames_are_read_in_batches_and_all_of_them_arrive() {
   })();
 }
 
+function test_only_the_fields_a_caller_reads_are_asked_for() {
+  // A frame of a large run is mostly its edge list, and neither view looks at
+  // it. Asking for whole frames was tens of megabytes parsed per window so
+  // that two columns could be read out of each one.
+  let sawFields = null;
+  const API = {
+    getFrames: (_run, from, count, fields) => {
+      sawFields = fields;
+      return Promise.resolve({ frames: [] });
+    }
+  };
+  const scoped = new Function('API', `const formatNumber = n => String(n); ${source}; return FrameWindow;`)(API);
+  const wanted = ['iteration', 'phase', 'brain_ids'];
+  return (async () => {
+    for await (const _b of scoped.read('r', scoped.plan(10, 0, 100).indices, wanted)) break;
+    if (String(sawFields) !== String(wanted)) {
+      throw new Error(`the projection was ${sawFields}, wanted ${wanted}`);
+    }
+  })();
+}
+
 function test_reading_can_stop_early() {
   // The lineage stops once the first frame says how big the world is. Frames
   // past that must never be fetched at all, which is the point of yielding.
   const asked = [];
-  const API = { getFrame: (_run, i) => { asked.push(i); return Promise.resolve({ i }); } };
+  const API = {
+    getFrames: (_run, from, count) => {
+      for (let i = from; i < from + count; i++) asked.push(i);
+      return Promise.resolve({ frames: Array.from({ length: count }, (_, k) => ({ i: from + k })) });
+    }
+  };
   const scoped = new Function('API', `const formatNumber = n => String(n); ${source}; return FrameWindow;`)(API);
 
   return (async () => {
@@ -172,11 +221,13 @@ function test_one_iteration_is_the_smallest_window() {
 
 const tests = Object.entries({
   test_a_short_run_is_shown_whole,
+  test_the_scrubber_says_which_stretch_is_on_screen,
   test_a_long_run_is_capped_at_the_asked_for_iterations,
   test_the_window_is_contiguous,
   test_the_window_cannot_hang_off_the_end,
   test_the_slider_steps_by_whole_iterations,
   test_frames_are_read_in_batches_and_all_of_them_arrive,
+  test_only_the_fields_a_caller_reads_are_asked_for,
   test_reading_can_stop_early,
   test_where_the_window_sits_is_read_off_the_frames,
   test_one_iteration_is_the_smallest_window

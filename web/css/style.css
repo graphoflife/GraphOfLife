@@ -43,6 +43,12 @@
 ::-webkit-scrollbar-thumb:hover { background: #435367; background-clip: padding-box; }
 ::-webkit-scrollbar-corner { background: transparent; }
 
+/* Always leave room for the scrollbar, whether or not there is one to show.
+   Panels differ in height — a short thesis, a long document — so without this
+   the bar appears and disappears as you move between them and the whole page
+   jumps sideways by its width every time. */
+html { scrollbar-gutter: stable; }
+
 body {
   margin: 0;
   background: var(--bg);
@@ -1006,11 +1012,25 @@ details.control-group > summary:hover h3 { color: var(--text); }
 .lineage-bar select { width: auto; min-width: 240px; max-width: 420px; }
 .lineage-filter { display: flex; align-items: center; gap: 7px; margin-left: auto; }
 .lineage-filter input[type="range"] { width: 120px; }
+.lineage-filter input[type="number"] { width: 68px; }
 .lineage-filter span {
   min-width: 14px;
   text-align: right;
   color: var(--text);
   font-family: ui-monospace, SFMono-Regular, monospace;
+}
+
+/* The window control is the leftmost thing in the bar, since it says what you
+   are looking at rather than filtering what is drawn. Its readout is a
+   sentence rather than a number, so it is not squeezed into 14px. */
+.lineage-bar > .lineage-filter:first-child { margin-left: 0; }
+.lineage-scrub { margin-left: 0; }
+.lineage-scrub span {
+  min-width: 0;
+  text-align: left;
+  font-family: inherit;
+  color: var(--muted);
+  white-space: nowrap;
 }
 
 .lineage-stage {

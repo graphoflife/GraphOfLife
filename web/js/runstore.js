@@ -136,6 +136,25 @@ const RunStore = {
     return unpack(row);
   },
 
+  /** A contiguous run of frames, read in one cursor pass. */
+  async getFrameRange(runId, from, count) {
+    const db = await this.open();
+    const store = db.transaction('frames').objectStore('frames');
+    const range = IDBKeyRange.bound([runId, from], [runId, from + count - 1]);
+    const rows = [];
+    await new Promise((resolve, reject) => {
+      const cursor = store.openCursor(range);
+      cursor.onsuccess = () => {
+        const at = cursor.result;
+        if (!at) { resolve(); return; }
+        rows.push(at.value);
+        at.continue();
+      };
+      cursor.onerror = () => reject(cursor.error);
+    });
+    return Promise.all(rows.map(unpack));
+  },
+
   /**
    * Frames at a fixed stride, for the charts. Read in one pass.
    *
