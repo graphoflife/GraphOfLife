@@ -656,6 +656,20 @@
   <!-- Filled by Graphs.render() from research/Graphs.md. -->
   <section id="research-graphs" class="research-panel" hidden></section>
 
+  <!-- ---------------- diagrams ---------------- -->
+  <!-- The Viewer's four charts, off the Viewer: pick the iterations and the
+       statistics rather than being tied to the frame on screen. Tabs, controls
+       and the saved-settings list are all built by diagrams.js. -->
+  <section id="research-diagrams" class="research-panel" hidden>
+    <div class="diagram-tabs" id="diagramTabs"></div>
+    <div class="lineage-bar diagram-controls" id="diagramControls"></div>
+    <div class="diagram-presets" id="diagramPresets"></div>
+    <div class="lineage-stage diagram-stage">
+      <canvas id="diagramCanvas"></canvas>
+    </div>
+    <p class="lineage-note" id="diagramNote"></p>
+  </section>
+
   <!-- ---------------- theses ---------------- -->
   <!-- One claim about the graph per entry, with the series that decide it.
        The list and the prose are built by theses.js from the THESES table
@@ -719,6 +733,7 @@
 <script src="js/flowview.js"></script>
 <script src="js/markdown.js"></script>
 <script src="js/docpage.js"></script>
+<script src="js/diagrams.js"></script>
 <script src="js/theses.js"></script>
 <script src="js/research.js"></script>
 <script src="js/viewer.js"></script>

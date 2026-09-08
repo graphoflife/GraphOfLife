@@ -36,6 +36,7 @@ const Research = {
     // summary of whatever happened to be first in the list, which is a slow
     // answer to a question nobody asked.
     theses:     { group: 'analysis', label: 'Theses',       view: Theses, choose: true },
+    diagrams:   { group: 'analysis', label: 'Diagrams',     view: Diagrams, choose: true },
     notes:      { group: 'reading',  label: 'Findings',     page: Notes },
     literature: { group: 'reading',  label: 'Literature',   page: Literature },
     graphs:     { group: 'reading',  label: 'Graphs',       page: Graphs }
