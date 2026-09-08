@@ -266,6 +266,12 @@ zero-sum relation is the **engine** of sustained change, not an obstacle to it.
 
 ## 3. Structure: evolutionary graph theory
 
+This section is about what a graph does *to* selection. What kinds of graph
+there are, and which kind ours is, is the separate question `Graphs.md`
+answers — kept apart because it ends in a battery of measurements rather than
+in a reading list, and because half of it is about the medium rather than about
+evolution at all.
+
 ### Spatial structure rescues cooperation
 **Nowak & May 1992.** *Nature* 359:826–829.
 

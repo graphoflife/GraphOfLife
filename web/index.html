@@ -544,21 +544,20 @@
 
 <!-- ==================== RESEARCH VIEW ==================== -->
 <main id="view-research" class="view">
+  <!-- Two levels, because the tab holds two different kinds of thing: an
+       instrument you point at a run, and a document you read. Mixing them in
+       one row of six buttons said they were the same kind of thing. Buttons
+       are built by research.js from its MODES table, so a new mode is an entry
+       there and nothing here. -->
   <div class="research-bar">
-    <div class="research-modes" id="researchModes">
-      <button type="button" data-mode="lineage" class="active">Lineage</button>
-      <button type="button" data-mode="flow">Flow modules</button>
-      <button type="button" data-mode="notes">Findings</button>
-      <button type="button" data-mode="literature">Literature</button>
-      <button type="button" data-mode="graphs">Graphs</button>
-      <button type="button" data-mode="theses">Theses</button>
-    </div>
+    <div class="research-modes" id="researchGroups"></div>
     <span class="research-run" id="researchRunField">
       <label for="researchRun">Simulation</label>
       <select id="researchRun"></select>
       <button id="researchRefresh" class="ghost small">Refresh</button>
     </span>
   </div>
+  <div class="research-bar research-modes research-submodes" id="researchModes"></div>
 
   <!-- ---------------- lineage ---------------- -->
   <section id="research-lineage" class="research-panel">
@@ -684,6 +683,7 @@
 <script src="js/metrics.js"></script>
 <script src="js/graphstats.js"></script>
 <script src="js/api.js"></script>
+<script src="js/seriesload.js"></script>
 <script src="js/force.js"></script>
 <script src="js/layoutclient.js"></script>
 <script src="js/render.js"></script>

@@ -25,6 +25,7 @@ API
     POST   /api/runs/<id>/copy        duplicate a run, data and all
     GET    /api/runs/<id>/frames/<n>  one recorded frame
     GET    /api/runs/<id>/series      per-frame statistics for the whole run
+                                      ?points=N for a coarse pass over all of it
     GET    /api/runs/<id>/series/progress   how far a rebuild has got
 """
 from __future__ import annotations
@@ -38,7 +39,7 @@ import traceback
 import webbrowser
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Any, Dict
-from urllib.parse import urlparse
+from urllib.parse import parse_qs, urlparse
 
 import gol_store as store
 from gol_config import SimConfig
@@ -310,7 +311,11 @@ class Handler(BaseHTTPRequestHandler):
 
             if len(parts) == 4 and parts[:2] == ["api", "runs"] and parts[3] == "series":
                 import gol_series
-                self._send_json(gol_series.build_series(parts[2]))
+                # ?points=N asks for a coarse answer that covers the whole
+                # run, so a caller can draw something immediately and climb.
+                asked = parse_qs(urlparse(self.path).query).get("points", [None])[0]
+                points = int(asked) if asked and asked.isdigit() else None
+                self._send_json(gol_series.build_series(parts[2], points))
                 return
 
             if (len(parts) == 5 and parts[:2] == ["api", "runs"]

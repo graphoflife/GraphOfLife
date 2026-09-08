@@ -216,36 +216,57 @@ const Theses = {
     this.proseEl.replaceChildren(...parts);
   },
 
+  /** Columns to rows — a claim can be about a quantity that is not stored. */
+  absorb(data) {
+    const columns = data.series || {};
+    const length = (columns.iteration || []).length;
+    this.rows = Array.from({ length }, (_, i) => {
+      const row = {};
+      for (const key of data.keys || []) row[key] = columns[key][i];
+      return row;
+    });
+    this.strain = data.strain || null;
+    this.resize();
+    this.draw();
+  },
+
   async load(runId) {
+    // Each load supersedes the one before it, so a climb that is still going
+    // when the run changes stops drawing into the new one's chart.
+    const token = (this.token = (this.token || 0) + 1);
     this.runId = runId;
     this.rows = null;
     this.strain = null;
-    this.say('Reading the series…');
+
+    if (!runId) {
+      this.say('Choose a simulation above to plot this against.');
+      this.draw();
+      return;
+    }
+
+    this.say('Reading the run…');
     this.draw();
     try {
-      const data = await API.getSeries(runId);
-      // The series arrives as one array per statistic. Turned back into rows
-      // here because a claim can be about a quantity that is not stored — a
-      // culled *share*, say — and deriving that needs the whole row.
-      const columns = data.series || {};
-      const length = (columns.iteration || []).length;
-      this.rows = Array.from({ length }, (_, i) => {
-        const row = {};
-        for (const key of data.keys || []) row[key] = columns[key][i];
-        return row;
+      await SeriesLoad.climb(runId, {
+        cancelled: () => this.token !== token,
+        onStep: (data, done) => {
+          this.absorb(data);
+          const at = SeriesLoad.fraction(data);
+          this.say(done || data.complete
+            ? `${formatNumber(data.points || this.rows.length)} points`
+              + (data.sampled ? `, every ${data.stride} iterations` : '')
+              + (this.strain ? ` — algorithm ${this.strain}` : '')
+            : `Refining… ${formatNumber(data.points || 0)} of `
+              + `${formatNumber(data.totalPoints || 0)} points`
+              + (at !== null ? ` (${Math.round(at * 100)}%)` : ''));
+        }
       });
-      this.strain = data.strain || null;
-      this.say(this.rows.length
-        ? `${formatNumber(this.rows.length)} recorded frames`
-          + (data.sampled ? `, sampled every ${data.stride}` : '')
-          + (this.strain ? ` — algorithm ${this.strain}` : '')
-        : 'This simulation has no series yet.');
     } catch (err) {
+      if (this.token !== token) return;
       this.rows = null;
       this.say(`Could not read the series: ${err.message}`);
+      this.draw();
     }
-    this.resize();
-    this.draw();
   },
 
   resize() {
@@ -299,6 +320,12 @@ const Theses = {
 
     if (!this.rows || !this.rows.length) {
       this.legendEl.replaceChildren();
+      ctx.fillStyle = 'rgba(255,255,255,0.4)';
+      ctx.font = '13px system-ui, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(this.runId ? 'Reading the run…' : 'No simulation chosen.',
+                   w / 2, h / 2);
+      ctx.textAlign = 'left';
       return;
     }
 

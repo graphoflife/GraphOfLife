@@ -814,6 +814,24 @@ details.control-group > summary:hover h3 { color: var(--text); }
 }
 .research-panel[hidden] { display: none; }
 
+/* The second level. Quieter than the group above it, and underlined rather
+   than boxed, so the two rows read as an outline and not as ten equal tabs. */
+.research-submodes { margin: -8px auto 16px; }
+.research-submodes button {
+  padding: 3px 10px;
+  font-size: 12.5px;
+  border-radius: 0;
+  border: none;
+  border-bottom: 2px solid transparent;
+}
+.research-submodes button:hover { border-color: transparent; color: var(--text); }
+.research-submodes button.active {
+  background: transparent;
+  border-bottom-color: #fff;
+  color: #fff;
+}
+.research-submodes button[hidden] { display: none; }
+
 /* The run picker, hidden for a mode that is not about one run. */
 .research-run { display: inline-flex; align-items: center; gap: 8px; }
 .research-run[hidden] { display: none; }

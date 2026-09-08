@@ -77,12 +77,15 @@ SERIES_VERSION = 18
 # At most this many iterations are analysed for a run's history.
 #
 # The cost is not in reading the frames — decompressing and parsing one takes
-# about 2ms, against 16ms to work out its loops, triangles and dimension. A run
-# of fifty thousand frames would therefore take a quarter of an hour to
-# summarise in full, for a chart a few hundred pixels wide that cannot show
-# that detail anyway. Sampling evenly across the run keeps the shape of every
-# curve while bounding the work.
-MAX_SAMPLED_ITERATIONS = 1000
+# about 60ms on a large frame, against 1.4 *seconds* to work out its loops,
+# triangles, bridges and dimension. At a thousand samples a forty-thousand-node
+# run took half an hour to summarise, for a chart a few hundred pixels wide
+# that cannot show that detail anyway. Three hundred is more points than most
+# charts have pixels for, and it is the difference between a wait and a stall.
+MAX_SAMPLED_ITERATIONS = 300
+
+# The smallest useful answer: both ends of the run.
+MIN_SAMPLED_POINTS = 2
 
 # Keys that count nodes, and are therefore also meaningful as a share of the
 # population that entered the phase.
@@ -927,6 +930,40 @@ def _sample_stride(total_iterations: int) -> int:
     return stride
 
 
+def bisection_order(count: int) -> List[int]:
+    """
+    The indices 0..count-1, in the order a bisection would visit them.
+
+    Both ends first, then the middle, then the middles of the two halves, and
+    so on. Any prefix is therefore evenly spread across the whole range, and
+    each prefix contains the one before it.
+
+    That nesting is what makes progressive loading cheap rather than wasteful.
+    A caller can ask for two points, then three, then five, and every request
+    only pays for what the previous one did not already compute — while the
+    picture it draws is a real chart of the whole run at every stage, gaining
+    resolution rather than growing sideways.
+    """
+    if count <= 0:
+        return []
+    if count == 1:
+        return [0]
+
+    order = [0, count - 1]
+    seen = {0, count - 1}
+    queue = [(0, count - 1)]
+    while queue:
+        lo, hi = queue.pop(0)
+        mid = (lo + hi) // 2
+        if mid <= lo or mid >= hi or mid in seen:
+            continue
+        seen.add(mid)
+        order.append(mid)
+        queue.append((lo, mid))
+        queue.append((mid, hi))
+    return order
+
+
 # ----------------------------------------------------------------------------
 # Families
 # ----------------------------------------------------------------------------
@@ -1039,17 +1076,25 @@ def _save_cache(run_id: str, cache: Dict[str, Any]) -> None:
         pass  # a missing cache only costs time, never correctness
 
 
-def build_series(run_id: str) -> Dict[str, Any]:
+def build_series(run_id: str, points: Optional[int] = None) -> Dict[str, Any]:
     """
-    Statistics for every recorded frame, as parallel arrays.
+    Statistics for a run's history, as parallel arrays.
 
     Frames already summarised are reused; only new ones are read. If the run was
     resumed and its history truncated, the cache is trimmed to match rather than
     describing frames that no longer exist.
+
+    `points` asks for a coarser answer: the first `points` samples in bisection
+    order, spread across the whole run. None means all of them. Summarising one
+    large frame costs well over a second, so a full history is minutes of work,
+    and a caller that waits for it has nothing to show for that whole time. A
+    caller that climbs — two points, three, five, nine — has a chart of the
+    entire run within a second and refines it, and pays no more in total,
+    because each request only computes what the last one did not.
     """
     with _build_lock(run_id):
         try:
-            return _build_series_locked(run_id)
+            return _build_series_locked(run_id, points)
         finally:
             _set_progress(run_id, 0, 0, building=False)
 
@@ -1077,7 +1122,7 @@ def _series_keys(rows: List[Dict[str, Any]]) -> List[str]:
     return keys
 
 
-def _build_series_locked(run_id: str) -> Dict[str, Any]:
+def _build_series_locked(run_id: str, points: Optional[int] = None) -> Dict[str, Any]:
     total_frames = store.count_frames(run_id)
     # Frames come in pairs, one per phase, so an iteration is two of them.
     total_iterations = max(0, total_frames // 2)
@@ -1097,10 +1142,21 @@ def _build_series_locked(run_id: str) -> Dict[str, Any]:
 
     done_iterations = {r["_frame"] // 2 for r in rows}
 
+    # The evenly spaced iterations this run is summarised at, and which of them
+    # this particular request wants. Asking for a prefix of the bisection order
+    # gives a chart of the whole run at lower resolution rather than a chart of
+    # the first part of it, which is what makes a partial answer worth drawing.
+    grid = list(range(0, total_iterations, stride))
+    order = bisection_order(len(grid))
+    if points is not None:
+        order = order[:max(MIN_SAMPLED_POINTS, int(points))]
+    asked = sorted(grid[i] for i in order)
+    complete = len(order) >= len(grid)
+
     # Both phases of an iteration are kept, so the phase filter still has game
     # frames to show; sampling only the even indices would drop them entirely.
     wanted: List[int] = []
-    for it in range(0, total_iterations, stride):
+    for it in asked:
         if it in done_iterations:
             continue
         wanted.extend([2 * it, 2 * it + 1])
@@ -1124,7 +1180,11 @@ def _build_series_locked(run_id: str) -> Dict[str, Any]:
     # a chain: it cannot be read off one frame and it cannot be sampled. So it
     # is computed here rather than in frame_stats, and only where the chain is
     # whole — every iteration recorded, and none of them thinned away.
-    families = _CladeWindow() if (can_reconstruct and stride == 1) else None
+    # Ancestry is a chain, so it needs every iteration in order — which a
+    # partial request does not have. It is therefore only rebuilt on a request
+    # for the whole grid, and a coarse request simply leaves the key off rather
+    # than filling it from a broken chain.
+    families = _CladeWindow() if (can_reconstruct and stride == 1 and complete) else None
     if families is not None and wanted:
         # Resuming mid-run leaves the window empty, so the frames just before
         # the first new one are read to fill it. Their statistics are already
@@ -1161,6 +1221,9 @@ def _build_series_locked(run_id: str) -> Dict[str, Any]:
 
     rows.sort(key=lambda r: r["_frame"])
 
+    # Everything computed so far is kept — a later, finer request builds on it.
+    # Only what was asked for is returned, so a coarse request draws a coarse
+    # chart rather than an accidentally detailed one.
     if changed:
         # The strain travels with the summary as well as with the run, because
         # a series.json is the file most likely to be read on its own — it is
@@ -1176,21 +1239,30 @@ def _build_series_locked(run_id: str) -> Dict[str, Any]:
     # meant the file knew and the page did not, which is the half that matters.
     strain = store.load_meta(run_id).get("strain")
 
-    if not rows:
+    wanted_iterations = set(asked)
+    shown = [r for r in rows if (r["_frame"] // 2) in wanted_iterations]
+
+    if not shown:
         return {"count": 0, "keys": [], "series": {}, "stride": stride,
-                "sampled": False, "strain": strain,
+                "sampled": False, "strain": strain, "complete": True,
+                "points": 0, "totalPoints": len(grid),
                 "nodeCountKeys": list(NODE_COUNT_KEYS)}
 
-    keys = _series_keys(rows)
-    series = {k: [row.get(k) for row in rows] for k in keys}
+    keys = _series_keys(shown)
+    series = {k: [row.get(k) for row in shown] for k in keys}
 
     return {
-        "count": len(rows),
+        "count": len(shown),
         "keys": keys,
         "series": series,
         "stride": stride,
         "sampled": stride > 1,
         "strain": strain,
+        # How much of the run's grid this answer covers, so a caller climbing
+        # toward the full picture knows when to stop asking.
+        "points": len(asked),
+        "totalPoints": len(grid),
+        "complete": complete,
         "totalIterations": total_iterations,
         "nodeCountKeys": list(NODE_COUNT_KEYS),
     }

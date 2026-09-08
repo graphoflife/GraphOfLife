@@ -126,6 +126,17 @@ class Worlds:
     def sample_stride(self, total_iterations: int) -> int:
         return gol_series._sample_stride(total_iterations)
 
+    def bisection_order(self, count: int) -> List[int]:
+        """
+        Which samples to take first, so a partial chart still spans the run.
+
+        Borrowed from gol_series rather than reimplemented in the worker: the
+        two backends should choose the same points in the same order, or the
+        same run summarised on a server and in a browser would refine along
+        two different paths.
+        """
+        return list(gol_series.bisection_order(count))
+
     def node_count_keys(self) -> List[str]:
         return list(gol_series.NODE_COUNT_KEYS)
 

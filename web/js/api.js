@@ -50,7 +50,10 @@ const ServerBackend = {
   stopRun(id)           { return this._request('POST', `/api/runs/${encodeURIComponent(id)}/stop`); },
   copyRun(id, name)     { return this._request('POST', `/api/runs/${encodeURIComponent(id)}/copy`, { name }); },
   getFrame(id, index)   { return this._request('GET', `/api/runs/${encodeURIComponent(id)}/frames/${index}`); },
-  getSeries(id)         { return this._request('GET', `/api/runs/${encodeURIComponent(id)}/series`); },
+  // `points` asks for a coarse pass over the whole run rather than every
+  // sample of it, so a chart can be drawn before the full build finishes.
+  getSeries(id, points) { return this._request('GET', `/api/runs/${encodeURIComponent(id)}/series`
+                            + (points ? `?points=${points}` : '')); },
   getSeriesProgress(id) { return this._request('GET', `/api/runs/${encodeURIComponent(id)}/series/progress`); }
 };
 
@@ -112,7 +115,7 @@ const BrowserBackend = {
   stopRun(id)           { return this._send('stop', { runId: id }); },
   copyRun(id, name)     { return this._send('copy', { runId: id, name }); },
   getFrame(id, index)   { return this._send('frame', { runId: id, index }); },
-  getSeries(id)         { return this._send('series', { runId: id }); },
+  getSeries(id, points) { return this._send('series', { runId: id, points }); },
   getSeriesProgress(id) { return this._send('seriesProgress', { runId: id }); },
   storage()             { return this._send('storage'); }
 };
@@ -156,7 +159,7 @@ const API = {
   stopRun(id)             { return this._call('stopRun', id); },
   copyRun(id, name)       { return this._call('copyRun', id, name); },
   getFrame(id, index)     { return this._call('getFrame', id, index); },
-  getSeries(id)           { return this._call('getSeries', id); },
+  getSeries(id, points)   { return this._call('getSeries', id, points); },
   getSeriesProgress(id)   { return this._call('getSeriesProgress', id); },
   // Only the in-browser backend stores anything locally; with a server the
   // question has no meaning and the notice does not ask it.

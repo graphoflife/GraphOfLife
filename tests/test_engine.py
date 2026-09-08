@@ -576,6 +576,108 @@ def test_the_teaching_script_gives_a_revolution_to_its_strongest_rebel():
 
 
 # ---------------------------------------------------------------------------
+# Loading a run's history at increasing resolution
+# ---------------------------------------------------------------------------
+
+def test_bisection_visits_the_ends_first_and_then_keeps_halving():
+    """
+    Both ends, then the middle, then the middles of the halves.
+
+    The order has to be a permutation — every sample reached exactly once —
+    and it has to *start* wide, because the whole point is that a partial
+    answer spans the entire run rather than describing its first few percent.
+    """
+    import gol_series
+
+    order = gol_series.bisection_order(9)
+    assert sorted(order) == list(range(9)), f"not a permutation: {order}"
+    assert order[:3] == [0, 8, 4], f"ends then middle, got {order[:3]}"
+    assert sorted(order[:5]) == [0, 2, 4, 6, 8], (
+        f"five points should be evenly spread, got {sorted(order[:5])}")
+
+    for count in (0, 1, 2, 3, 300):
+        got = gol_series.bisection_order(count)
+        assert sorted(got) == list(range(count)), f"{count} gave {got}"
+
+
+def test_every_prefix_of_the_order_contains_the_one_before_it():
+    """
+    Nesting is what makes the climb free.
+
+    Each pass must only pay for samples the previous pass did not take. If the
+    prefixes were not nested, asking for five points after three would recompute
+    work already done, and a progressive load would cost more than a single one
+    rather than the same.
+    """
+    import gol_series
+
+    order = gol_series.bisection_order(64)
+    for size in range(2, len(order)):
+        assert set(order[:size - 1]) < set(order[:size]), (
+            f"prefix of {size} does not contain the prefix of {size - 1}")
+
+
+def test_a_coarse_request_spans_the_whole_run_and_a_finer_one_refines_it():
+    """
+    Asking for fewer points must not mean asking for less of the run.
+
+    The failure this guards against is the obvious implementation — take the
+    first N samples — which draws a chart of the beginning of the run and calls
+    it a chart of the run. A coarse pass has to reach the last iteration, and
+    every later pass has to be a superset of the earlier one.
+    """
+    import gol_store
+
+    with tempfile.TemporaryDirectory() as tmp:
+        original = gol_store.BASE_DIR
+        gol_store.BASE_DIR = tmp
+        try:
+            cfg = SimConfig(total_tokens=400, n_nodes=30, k_neighbors=4,
+                            seed=3, hidden_layers=[6], export_decisions=False)
+            run_id = gol_store.create_run("x", cfg)["id"]
+            world = new_world(cfg)
+            written = 0
+            for _ in range(40):
+                for frame in world.step(record_decisions=False):
+                    gol_store.write_frame(run_id, written, frame)
+                    written += 1
+            gol_store.update_meta(run_id, frame_count=written,
+                                  iteration=world.iteration)
+
+            coarse = gol_series.build_series(run_id, points=3)
+            finer = gol_series.build_series(run_id, points=5)
+            whole = gol_series.build_series(run_id)
+
+            last = whole["series"]["iteration"][-1]
+            assert coarse["series"]["iteration"][0] == 0
+            assert coarse["series"]["iteration"][-1] == last, (
+                "a coarse pass must still reach the end of the run")
+            assert not coarse["complete"] and whole["complete"]
+            assert coarse["points"] < finer["points"] <= whole["points"]
+
+            of = lambda r: set(r["series"]["iteration"])
+            assert of(coarse) < of(finer) <= of(whole), (
+                "each pass must contain the one before it")
+        finally:
+            gol_store.BASE_DIR = original
+
+
+def test_a_run_is_never_summarised_at_more_than_the_cap():
+    """
+    However long a run is, the chart is capped.
+
+    Summarising one large frame costs over a second, so an uncapped history is
+    hours of work for a chart a few hundred pixels wide.
+    """
+    import gol_series
+
+    for iterations in (299, 300, 301, 5000, 100000):
+        stride = gol_series._sample_stride(iterations)
+        assert len(range(0, iterations, stride)) <= gol_series.MAX_SAMPLED_ITERATIONS, (
+            f"{iterations} iterations at stride {stride} exceeds the cap")
+
+
+# ---------------------------------------------------------------------------
 # Topology: what a cut would cost
 # ---------------------------------------------------------------------------
 

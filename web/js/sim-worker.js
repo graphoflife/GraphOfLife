@@ -362,13 +362,24 @@ const handlers = {
     return RunStore.getFrame(runId, Number(index));
   },
 
-  async series({ runId }) {
+  async series({ runId, points }) {
     const run = await loadRun(runId);
     const totalIterations = Math.max(0, Math.floor(run.frame_count / 2));
     const stride = call('gol_browser.WORLDS.sample_stride', [totalIterations]);
 
+    // Which of the sampled iterations this request wants. Summarising a large
+    // frame costs over a second, so a caller climbing 2, 3, 5, 9… gets a chart
+    // of the whole run almost at once and refines it, instead of watching
+    // nothing happen until every sample is done.
+    const grid = [];
+    for (let it = 0; it < totalIterations; it += stride) grid.push(it);
+    const order = call('gol_browser.WORLDS.bisection_order', [grid.length]);
+    const take = points ? order.slice(0, Math.max(2, points)) : order;
+    const complete = take.length >= grid.length;
+    const asked = new Set(take.map(i => grid[i]));
+
     report('series', 'reading frames', 0, 0);
-    const frames = await RunStore.getFramesStrided(runId, stride);
+    const frames = await RunStore.getFramesStrided(runId, stride, asked);
 
     report('series', 'summarising', 0, frames.length);
     const rows = frames.length ? call('gol_browser.WORLDS.stats', [frames]) : [];
@@ -376,6 +387,7 @@ const handlers = {
 
     if (!rows.length) {
       return { count: 0, keys: [], series: {}, stride, sampled: false,
+               points: 0, totalPoints: grid.length, complete: true,
                nodeCountKeys: call('gol_browser.WORLDS.node_count_keys') };
     }
     const keys = Object.keys(rows[0]);
@@ -383,6 +395,7 @@ const handlers = {
     for (const key of keys) series[key] = rows.map(row => row[key]);
     return {
       count: rows.length, keys, series, stride, sampled: stride > 1,
+      points: asked.size, totalPoints: grid.length, complete,
       totalIterations,
       nodeCountKeys: call('gol_browser.WORLDS.node_count_keys')
     };

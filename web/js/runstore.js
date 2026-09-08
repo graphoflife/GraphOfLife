@@ -136,8 +136,15 @@ const RunStore = {
     return unpack(row);
   },
 
-  /** Frames at a fixed stride, for the charts. Read in one pass. */
-  async getFramesStrided(runId, stride) {
+  /**
+   * Frames at a fixed stride, for the charts. Read in one pass.
+   *
+   * `only`, when given, is the set of iterations wanted — a caller drawing a
+   * chart at increasing resolution asks for a handful at a time, and
+   * decompressing the other few hundred on every pass would cost more than the
+   * statistics it is trying to avoid recomputing.
+   */
+  async getFramesStrided(runId, stride, only = null) {
     const db = await this.open();
     const store = db.transaction('frames').objectStore('frames');
     const range = IDBKeyRange.bound([runId, -Infinity], [runId, Infinity]);
@@ -152,7 +159,10 @@ const RunStore = {
         // has game frames to show. Only the kept ones are unpacked — walking
         // the range is cheap and inflating every frame to throw most of them
         // away is not.
-        if (Math.floor(at.value.index / 2) % stride === 0) wanted.push(at.value);
+        const iteration = Math.floor(at.value.index / 2);
+        if (iteration % stride === 0 && (!only || only.has(iteration))) {
+          wanted.push(at.value);
+        }
         at.continue();
       };
       cursor.onerror = () => reject(cursor.error);

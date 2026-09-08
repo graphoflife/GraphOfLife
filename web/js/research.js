@@ -1,6 +1,5 @@
 /*
- * The Research tab: pick a run and look at it, or read the literature the
- * whole project is measured against.
+ * The Research tab: point an instrument at a run, or read a document.
  *
  * The run list and the picker live here rather than in any one view, so there
  * is one list, one fetch, and switching between views reloads nothing.
@@ -8,23 +7,38 @@
  * The modes are a table rather than a chain of comparisons. A mode is one of
  * two kinds, and the table says which by naming the module that implements it:
  *
- *   view  a way of looking at one run. Lineage and FlowView already share the
+ *   view  a way of looking at one run. Lineage, FlowView and Theses share the
  *         same six methods — init, setRuns, say, resize, draw, load — and this
  *         is where that becomes an interface instead of a coincidence.
  *   page  words on a screen. No run, so no picker, no run list, nothing to
  *         resize; it is painted once, the first time it is asked for.
  *
- * Everything below iterates the table rather than naming a mode, so a fourth
- * is an entry here and a section in index.html.
+ * They are also grouped, and the grouping is the same distinction one level
+ * up: **analysis** is the instruments, **reading** is the documents. Six
+ * buttons in one row said those were the same kind of thing, which made the
+ * tab read as a list of features rather than as two places.
+ *
+ * Everything below iterates the table rather than naming a mode, so another
+ * one is an entry here and a section in index.html — including its buttons,
+ * which are built from this rather than written out twice.
  */
 const Research = {
+  GROUPS: [
+    { id: 'analysis', label: 'Analysis' },
+    { id: 'reading',  label: 'Reading' }
+  ],
+
   MODES: {
-    lineage:    { view: Lineage },
-    flow:       { view: FlowView },
-    notes:      { page: Notes },
-    literature: { page: Literature },
-    graphs:     { page: Graphs },
-    theses:     { view: Theses }
+    lineage:    { group: 'analysis', label: 'Lineage',      view: Lineage },
+    flow:       { group: 'analysis', label: 'Flow modules', view: FlowView },
+    // `choose` means no run is opened until one is picked. The others show
+    // something the moment they have a run; this one starts a minutes-long
+    // summary of whatever happened to be first in the list, which is a slow
+    // answer to a question nobody asked.
+    theses:     { group: 'analysis', label: 'Theses',       view: Theses, choose: true },
+    notes:      { group: 'reading',  label: 'Findings',     page: Notes },
+    literature: { group: 'reading',  label: 'Literature',   page: Literature },
+    graphs:     { group: 'reading',  label: 'Graphs',       page: Graphs }
   },
 
   runs: [],
@@ -37,19 +51,52 @@ const Research = {
   },
 
   get view() { return this.MODES[this.mode].view; },
+  get group() { return this.MODES[this.mode].group; },
 
   init() {
     this.picker = document.getElementById('researchRun');
     if (!this.picker) return;
     for (const { view } of this.runModes) view.init();
 
-    this.picker.addEventListener('change', () => this.open(this.picker.value));
+    this.groupBar = document.getElementById('researchGroups');
+    this.modeBar = document.getElementById('researchModes');
+
+    this.groupBar.replaceChildren(...this.GROUPS.map(group => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.textContent = group.label;
+      button.dataset.group = group.id;
+      // Picking a group lands on its first mode, so a group is never selected
+      // with nothing shown under it.
+      button.addEventListener('click', () => this.show(this.firstIn(group.id)));
+      return button;
+    }));
+
+    this.modeBar.replaceChildren(...Object.entries(this.MODES).map(([name, mode]) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.textContent = mode.label;
+      button.dataset.mode = name;
+      button.dataset.group = mode.group;
+      button.addEventListener('click', () => this.show(name));
+      return button;
+    }));
+
+    // An explicit choice sticks. `choose` means "do not pick one for them",
+    // not "throw away the one they picked" — clearing it on every visit back
+    // to the tab would be its own kind of rude.
+    this.picker.addEventListener('change', () => {
+      this.userPicked = !!this.picker.value;
+      this.open(this.picker.value);
+    });
     document.getElementById('researchRefresh')
       .addEventListener('click', () => this.listRuns());
 
-    for (const button of document.querySelectorAll('#researchModes button')) {
-      button.addEventListener('click', () => this.show(button.dataset.mode));
-    }
+    this.show(this.mode);
+  },
+
+  firstIn(group) {
+    return Object.keys(this.MODES).find(name => this.MODES[name].group === group);
   },
 
   /**
@@ -68,14 +115,20 @@ const Research = {
 
   show(mode) {
     this.mode = mode;
-    for (const button of document.querySelectorAll('#researchModes button')) {
+    const group = this.group;
+
+    for (const button of this.groupBar.querySelectorAll('button')) {
+      button.classList.toggle('active', button.dataset.group === group);
+    }
+    for (const button of this.modeBar.querySelectorAll('button')) {
       button.classList.toggle('active', button.dataset.mode === mode);
+      button.hidden = button.dataset.group !== group;
     }
     for (const name of Object.keys(this.MODES)) {
       document.getElementById(`research-${name}`).hidden = name !== mode;
     }
 
-    const { view, page } = this.MODES[mode];
+    const { view, page, choose } = this.MODES[mode];
     // Only a run has a run to pick.
     document.getElementById('researchRunField').hidden = !view;
 
@@ -88,7 +141,13 @@ const Research = {
     // itself again on the way in.
     view.resize();
     view.draw();
-    if (this.runId) view.load(this.runId);
+
+    // The picker shows nothing chosen for a mode that waits to be asked, so
+    // entering it does not silently begin summarising a run that takes minutes
+    // and that nobody asked about.
+    const waiting = choose && !this.userPicked;
+    this.picker.value = waiting ? '' : (this.runId || '');
+    view.load(waiting ? null : (this.runId || null));
   },
 
   async listRuns() {
@@ -109,7 +168,10 @@ const Research = {
       this.runs = (data.runs || []).filter(r => r.frame_count > 1);
       for (const { view } of this.runModes) view.setRuns(this.runs);
 
-      this.picker.replaceChildren(...this.runs.map(run => {
+      const blank = document.createElement('option');
+      blank.value = '';
+      blank.textContent = 'Choose a simulation…';
+      this.picker.replaceChildren(blank, ...this.runs.map(run => {
         const option = document.createElement('option');
         option.value = run.id;
         option.textContent = `${run.name} — ${formatNumber(run.frame_count)} frames`;
@@ -120,9 +182,12 @@ const Research = {
           + 'Run one from the Simulations tab and come back.');
         return;
       }
+
+      const waiting = this.MODES[this.mode].choose && !this.userPicked;
       // Keep whatever was being looked at, if it is still there.
       const had = this.runId;
-      const wanted = this.runs.some(r => r.id === had) ? had : this.runs[0].id;
+      const wanted = this.runs.some(r => r.id === had) ? had
+                   : (waiting ? '' : this.runs[0].id);
       this.picker.value = wanted;
       // Only load when the choice actually changed. Re-entering the tab should
       // not refetch a window that is already drawn — the lineage keeps no
@@ -134,7 +199,7 @@ const Research = {
   },
 
   async open(runId) {
-    this.runId = runId;
-    await this.view?.load(runId);
+    this.runId = runId || null;
+    await this.view?.load(this.runId);
   }
 };

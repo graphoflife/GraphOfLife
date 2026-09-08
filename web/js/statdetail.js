@@ -162,11 +162,20 @@ const StatDetail = {
     this.el.classList.remove('hidden');
 
     const runId = Viewer.runId;
-    const cached = this.seriesCache.has(runId);
-    if (!cached) this.showProgress();
+    const cached = this.seriesCache.get(runId);
+    if (cached) {
+      this.series = cached;
+      this.hideProgress();
+      this.redraw();
+      // A cached payload can still be a coarse one, so keep climbing from
+      // where the last visit left off rather than settling for it.
+      if (cached.complete) return;
+    } else {
+      this.showProgress();
+    }
 
     try {
-      this.series = await this.load(runId);
+      await this.load(runId);
     } catch (err) {
       this.hideProgress();
       this.footEl.textContent = `Could not load history: ${err.message}`;
@@ -176,20 +185,29 @@ const StatDetail = {
     this.redraw();
   },
 
+  /**
+   * Climb to full resolution, drawing at every step.
+   *
+   * A long run is minutes of work to summarise, and waiting for all of it
+   * before drawing anything shows an empty chart for that whole time, which
+   * reads as broken rather than busy. Each pass covers the whole run and is
+   * finer than the last, so the chart gains resolution as it loads.
+   */
   async load(runId) {
-    if (this.seriesCache.has(runId)) return this.seriesCache.get(runId);
-
-    // Watch the build while it runs. Changing a statistic invalidates the
-    // cache, and re-reading every frame of a long run takes long enough that a
-    // blank wait is worse than useless.
-    const watching = this.watchProgress(runId);
-    try {
-      const payload = await API.getSeries(runId);
-      this.seriesCache.set(runId, payload);
-      return payload;
-    } finally {
-      watching.stop();
-    }
+    const token = (this.loadToken = (this.loadToken || 0) + 1);
+    await SeriesLoad.climb(runId, {
+      cancelled: () => this.loadToken !== token || Viewer.runId !== runId,
+      onStep: (payload) => {
+        this.seriesCache.set(runId, payload);
+        this.series = payload;
+        const at = SeriesLoad.fraction(payload);
+        if (payload.complete) this.hideProgress();
+        else if (at !== null) {
+          this.setProgress(at, payload.points || 0, payload.totalPoints || 0);
+        }
+        this.redraw();
+      }
+    });
   },
 
   // ---- progress ------------------------------------------------------
@@ -220,27 +238,7 @@ const StatDetail = {
     this.progressFill.classList.remove('indeterminate');
     this.progressFill.style.width = `${Math.round(fraction * 100)}%`;
     this.progressLabel.textContent =
-      `Analysing frames… ${formatNumber(done)} of ${formatNumber(total)} (${Math.round(fraction * 100)}%)`;
-  },
-
-  /** Poll the server for build progress until told to stop. */
-  watchProgress(runId) {
-    let stopped = false;
-    const tick = async () => {
-      if (stopped) return;
-      try {
-        const p = await API.getSeriesProgress(runId);
-        if (!stopped) {
-          if (p.building && p.total > 0) this.setProgress(p.done / p.total, p.done, p.total);
-          else this.setProgress(null, 0, 0);
-        }
-      } catch (err) {
-        // A failed poll only costs the bar its accuracy, never the load.
-      }
-      if (!stopped) setTimeout(tick, 250);
-    };
-    setTimeout(tick, 120);
-    return { stop() { stopped = true; } };
+      `Refining… ${formatNumber(done)} of ${formatNumber(total)} points (${Math.round(fraction * 100)}%)`;
   },
 
   /**
