@@ -28,8 +28,14 @@ Object.assign(Viewer, {
       };
       // A menu redraws as you move through it rather than when you commit, so
       // picking a metric is browsing rather than guessing.
-      if (el.tagName === 'SELECT') Metrics.onPick(el, apply);
-      else el.addEventListener(el.type === 'checkbox' ? 'change' : 'input', apply);
+      if (el.tagName === 'SELECT') {
+        Metrics.onPick(el, apply);
+        // A popped-open menu swallows the arrow keys, so every menu gets a
+        // pair of buttons to step through it with.
+        Metrics.addSteppers(el);
+      } else {
+        el.addEventListener(el.type === 'checkbox' ? 'change' : 'input', apply);
+      }
     };
 
     const num = v => Number(v);

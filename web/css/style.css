@@ -547,6 +547,23 @@ details.control-group > summary:hover h3 { color: var(--text); }
   gap: 10px;
   flex-wrap: wrap;
 }
+/* Step a menu one option at a time. A popped-open native menu belongs to the
+   operating system and never passes the arrow keys on, so these are the only
+   way to walk a list and watch each option redraw. */
+.step-btn {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1;
+  padding: 2px 5px;
+  cursor: pointer;
+  flex: none;
+}
+.step-btn:hover:not(:disabled) { color: #fff; border-color: #fff; }
+.step-btn:disabled { opacity: 0.3; cursor: default; }
+
 .chart-pair { display: inline-flex; gap: 4px; align-items: center; min-width: 0; }
 .chart-metric {
   width: auto;

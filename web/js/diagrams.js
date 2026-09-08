@@ -204,13 +204,16 @@ const Diagrams = {
         const el = field('Metric', metricSelect());
         el.value = s.metric;
         Metrics.onPick(el, v => { s.metric = v; this.draw(); });
+        Metrics.addSteppers(el);
       } else {
         const x = field('x', metricSelect());
         x.value = s.x;
         Metrics.onPick(x, v => { s.x = v; this.draw(); });
+        Metrics.addSteppers(x);
         const y = field('y', metricSelect());
         y.value = s.y;
         Metrics.onPick(y, v => { s.y = v; this.draw(); });
+        Metrics.addSteppers(y);
       }
 
       // Which moment. Blank means the last recorded one, which is the useful
@@ -358,6 +361,11 @@ const Diagrams = {
     }
 
     if (this.active === 'timeline') this.listLines();
+
+    // Every menu in this bar gets a pair of buttons to step through it with,
+    // done here rather than as each is built: they are built detached, and
+    // buttons cannot be put either side of an element that has no sides yet.
+    for (const menu of bar.querySelectorAll('select')) Metrics.addSteppers(menu);
   },
 
   /** The series statistics on offer, labelled the way the Viewer labels them. */
@@ -658,6 +666,12 @@ const Diagrams = {
     if (!this.canvas) return;
     const s = this.now;
     const ink = { colormap: s.colormap, reverse: s.reverse };
+
+    // The suggested title describes what is being drawn, so it has to follow
+    // the drawing. Set when the controls are built, it went stale the moment a
+    // metric changed and offered the name of the chart before this one.
+    const name = this.controlsEl && this.controlsEl.querySelector('.diagram-title');
+    if (name) name.placeholder = this.defaultTitle();
 
     if (this.active === 'histogram' || this.active === 'heatmap') {
       if (!this.frames || !this.frames.length) {

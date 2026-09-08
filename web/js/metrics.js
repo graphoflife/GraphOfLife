@@ -181,6 +181,79 @@ const Metrics = {
   },
 
   /**
+   * Put a back and a forward button either side of a menu.
+   *
+   * Because the keyboard cannot finish the job. A native menu that has been
+   * popped open belongs to the operating system, and in Chrome the arrow keys
+   * never reach the page at all — so moving through the list to see what each
+   * option looks like is impossible with the mouse and unreliable with the
+   * keyboard. Two buttons make it a click either way.
+   *
+   * They dispatch `input` and `change` rather than calling any handler
+   * directly, so a menu gains this without knowing about it and whatever was
+   * already listening keeps working — including code written before this
+   * existed.
+   *
+   * Inserted as siblings rather than wrapped in a new element: several of
+   * these menus sit inside flex rows whose styling reaches them through the
+   * parent, and a wrapper would quietly break that.
+   */
+  addSteppers(select) {
+    if (!select || select.dataset.stepped) return;
+    // The buttons go either side of the menu, and a node with no parent has no
+    // sides — `before` and `after` on a detached element do nothing at all,
+    // silently. Callers that build their controls before attaching them ask
+    // again once the controls are in the page, so the flag is only set once
+    // the buttons are really there.
+    if (!select.parentNode) return;
+    select.dataset.stepped = '1';
+
+    const step = (by) => {
+      const options = [...select.options].filter(o => !o.disabled);
+      if (options.length < 2) return;
+      const at = options.indexOf(select.selectedOptions[0]);
+      const next = options[Math.min(options.length - 1, Math.max(0, at + by))];
+      if (!next || next === select.selectedOptions[0]) return;
+      select.value = next.value;
+      select.dispatchEvent(new Event('input', { bubbles: true }));
+      select.dispatchEvent(new Event('change', { bubbles: true }));
+      sync();
+    };
+
+    const make = (by, glyph, title) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'step-btn';
+      button.textContent = glyph;
+      button.title = title;
+      button.tabIndex = -1;            // the menu itself is the tab stop
+      button.addEventListener('click', () => step(by));
+      return button;
+    };
+    const back = make(-1, '\u2039', 'Previous');
+    const forward = make(1, '\u203a', 'Next');
+
+    // Greyed at the ends, so the list has a visible beginning and end rather
+    // than a button that silently does nothing.
+    const sync = () => {
+      const options = [...select.options].filter(o => !o.disabled);
+      const at = options.indexOf(select.selectedOptions[0]);
+      back.disabled = at <= 0;
+      forward.disabled = at < 0 || at >= options.length - 1;
+    };
+    select.addEventListener('change', sync);
+    select.addEventListener('input', sync);
+    // Most of these menus are filled after they are built, so whoever fills
+    // one asks the buttons to look again — otherwise they would be greyed on
+    // the strength of an empty list.
+    select._syncSteppers = sync;
+    sync();
+
+    select.before(back);
+    select.after(forward);
+  },
+
+  /**
    * Fill a <select> with one domain's metrics.
    * `extras` appends the non-measurement choices a visual setting allows.
    */
@@ -189,6 +262,7 @@ const Metrics = {
     const option = m => `<option value="${m.key}">${m.label}</option>`;
     select.innerHTML = extras.map(option).join('') + this.list(domain).map(option).join('');
     if (selected !== null) select.value = selected;
+    select._syncSteppers?.();
   },
 
   /** Fill a <select> with both domains, grouped and domain-qualified. */
@@ -202,6 +276,7 @@ const Metrics = {
 
     select.innerHTML = group('node', 'Nodes') + group('edge', 'Edges');
     if (selected !== null) select.value = selected;
+    select._syncSteppers?.();
   },
 
   // ---- migrating the old settings --------------------------------------
