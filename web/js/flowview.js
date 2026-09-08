@@ -23,9 +23,18 @@ const FlowView = {
   MAX_ITERATIONS: 100,
 
   // The columns the flow arithmetic reads. Everything else in a frame — the
-  // edge list above all — is untouched here, and on a large run that is most
-  // of what a frame weighs.
-  FIELDS: ['iteration', 'phase', 'ids', 'decisions'],
+  // edge list above all, and the winners and pruned edges beside the
+  // allocations — is untouched here, and on a large run that is most of what a
+  // frame weighs: 129 MB for 24 frames whole, against a fraction of that for
+  // these four.
+  FIELDS: ['iteration', 'phase', 'ids', 'decisions.allocations'],
+
+  // Stop reading once this many agent-sightings have arrived. A window
+  // measured in iterations is a very different amount of work in a world of
+  // sixty agents and one of forty thousand, and clustering a frame is
+  // superlinear in the world — so the window has to be bounded by the world,
+  // not only by the reader's patience.
+  MAX_SIGHTINGS: 120000,
 
   // Redrawn at most this often while frames are still arriving.
   DRAW_EVERY_MS: 400,
@@ -123,10 +132,13 @@ const FlowView = {
 
     const frames = [];
     let painted = 0;
+    let seen = 0;
     try {
-      for await (const batch of FrameWindow.read(runId, plan.indices, this.FIELDS)) {
+      for await (const batch of FrameWindow.read(runId, plan.indices, this.FIELDS,
+                                                 this.MAX_SIGHTINGS)) {
         if (this.runId !== runId) return;
         frames.push(...batch);
+        seen += batch.reduce((n, f) => n + (f.ids || []).length, 0);
         this.say(`Reading frames… ${frames.length} of ${plan.indices.length}`);
 
         // Follow and draw what has arrived rather than waiting out the whole
@@ -138,6 +150,9 @@ const FlowView = {
           this.recompute();
           this.say(`Reading frames… ${frames.length} of ${plan.indices.length}`);
         }
+        // Enough of this world seen. Reading further would add minutes of
+        // clustering for a picture already at the limit of what can be read.
+        if (seen >= this.MAX_SIGHTINGS) break;
       }
     } catch (err) {
       this.say(`Could not read the frames: ${err.message}`);

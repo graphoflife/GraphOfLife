@@ -35,6 +35,7 @@ const PY_FILES = [
   'GraphOfLifeSimple.py',
   'gol_store.py',
   'gol_series.py',
+  'gol_lineage.py',
   'gol_browser.py'
 ];
 
@@ -370,6 +371,32 @@ const handlers = {
    * whole frames of a large world is tens of megabytes of structured clone
    * so that two arrays can be read out of each.
    */
+  /**
+   * The genotype forest of a window, aggregated in here.
+   *
+   * Same reason as the server's: a real window holds more than a million
+   * genotypes and the page can draw a couple of thousand. Doing it here also
+   * keeps the work off the main thread, which is what was freezing the tab.
+   */
+  async lineage({ runId, from, count, limit, sightings, phase }) {
+    const read = [];
+    let seen = 0;
+    for (let at = from; at < from + count; at += 16) {
+      const batch = await RunStore.getFrameRange(runId, at, Math.min(16, from + count - at));
+      if (!batch.length) break;
+      for (const frame of batch) {
+        if (phase && phase !== 'all' && String(frame.phase) !== phase) continue;
+        read.push(frame);
+        seen += (frame.brain_ids || []).length;
+      }
+      if (seen >= sightings) break;
+    }
+    const answer = call('gol_browser.WORLDS.lineage', [read, limit]);
+    answer.frames = read.length;
+    answer.asked = count;
+    return answer;
+  },
+
   async frames({ runId, from, count, fields }) {
     const frames = await RunStore.getFrameRange(runId, Number(from), Number(count));
     if (!fields || !fields.length) return { frames };

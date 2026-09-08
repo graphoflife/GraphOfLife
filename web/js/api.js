@@ -53,10 +53,17 @@ const ServerBackend = {
   // A contiguous run of frames, cut down to the fields the caller reads.
   // `fields` is the difference between two arrays and the whole topology of
   // a forty-thousand-node world.
-  getFrames(id, from, count, fields) {
+  getFrames(id, from, count, fields, sightings) {
     const query = `?from=${from}&count=${count}`
-      + (fields && fields.length ? `&fields=${fields.join(',')}` : '');
+      + (fields && fields.length ? `&fields=${fields.join(',')}` : '')
+      + (sightings ? `&sightings=${sightings}` : '');
     return this._request('GET', `/api/runs/${encodeURIComponent(id)}/frames${query}`);
+  },
+  // The genotype forest of a window, already reduced to what can be drawn.
+  getLineage(id, from, count, limit, sightings, phase) {
+    return this._request('GET', `/api/runs/${encodeURIComponent(id)}/lineage`
+      + `?from=${from}&count=${count}&limit=${limit}&sightings=${sightings}`
+      + `&phase=${phase || 'all'}`);
   },
   // `points` asks for a coarse pass over the whole run rather than every
   // sample of it, so a chart can be drawn before the full build finishes.
@@ -123,8 +130,11 @@ const BrowserBackend = {
   stopRun(id)           { return this._send('stop', { runId: id }); },
   copyRun(id, name)     { return this._send('copy', { runId: id, name }); },
   getFrame(id, index)   { return this._send('frame', { runId: id, index }); },
-  getFrames(id, from, count, fields) {
-    return this._send('frames', { runId: id, from, count, fields });
+  getFrames(id, from, count, fields, sightings) {
+    return this._send('frames', { runId: id, from, count, fields, sightings });
+  },
+  getLineage(id, from, count, limit, sightings, phase) {
+    return this._send('lineage', { runId: id, from, count, limit, sightings, phase });
   },
   getSeries(id, points) { return this._send('series', { runId: id, points }); },
   getSeriesProgress(id) { return this._send('seriesProgress', { runId: id }); },
@@ -170,8 +180,11 @@ const API = {
   stopRun(id)             { return this._call('stopRun', id); },
   copyRun(id, name)       { return this._call('copyRun', id, name); },
   getFrame(id, index)     { return this._call('getFrame', id, index); },
-  getFrames(id, from, count, fields) {
-    return this._call('getFrames', id, from, count, fields);
+  getFrames(id, from, count, fields, sightings) {
+    return this._call('getFrames', id, from, count, fields, sightings);
+  },
+  getLineage(id, from, count, limit, sightings, phase) {
+    return this._call('getLineage', id, from, count, limit, sightings, phase);
   },
   getSeries(id, points)   { return this._call('getSeries', id, points); },
   getSeriesProgress(id)   { return this._call('getSeriesProgress', id); },

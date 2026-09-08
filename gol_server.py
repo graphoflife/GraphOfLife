@@ -25,6 +25,7 @@ API
     POST   /api/runs/<id>/copy        duplicate a run, data and all
     GET    /api/runs/<id>/frames/<n>  one recorded frame
     GET    /api/runs/<id>/frames      ?from=&count=&fields= a run of them
+    GET    /api/runs/<id>/lineage     ?from=&count=&limit= the genotype forest
     GET    /api/runs/<id>/series      per-frame statistics for the whole run
                                       ?points=N for a coarse pass over all of it
     GET    /api/runs/<id>/series/progress   how far a rebuild has got
@@ -61,7 +62,7 @@ WEB_DIR = os.path.join(BASE_DIR, "web")
 # arbitrary files out of the project. tests/test_engine.py checks it against
 # build_site.sh so the two cannot drift.
 SHIPPED_PY = ("GraphOfLifeSimple.py", "gol_config.py", "gol_series.py",
-              "explain_minimal.py")
+              "gol_lineage.py", "explain_minimal.py")
 
 # Documents the page renders, which live outside web/ because they are written
 # for a reader with a text editor first and the site second. Same problem and
@@ -77,6 +78,26 @@ SHIPPED_DOCS = {
 
 # Requests are capped so a malformed or hostile body cannot exhaust memory.
 MAX_BODY_BYTES = 1 << 20
+
+def _project(frame: Dict[str, Any], fields) -> Dict[str, Any]:
+    """
+    Keep only the named fields, `a.b` reaching one level in.
+
+    The flow view reads `decisions.allocations` and nothing else under
+    `decisions`; the winners and the pruned edges beside it are most of what a
+    frame of a large run weighs, and it draws neither.
+    """
+    out: Dict[str, Any] = {}
+    for name in fields:
+        if "." in name:
+            head, tail = name.split(".", 1)
+            branch = frame.get(head)
+            if isinstance(branch, dict):
+                out.setdefault(head, {})[tail] = branch.get(tail)
+        else:
+            out[name] = frame.get(name)
+    return out
+
 
 # Frames per batched request. High enough that a two-hundred-frame window is a
 # handful of round trips, low enough that one request cannot be asked to read a
@@ -346,6 +367,41 @@ class Handler(BaseHTTPRequestHandler):
             # that was two hundred round trips carrying the entire topology of
             # a forty-thousand-node world — tens of megabytes to parse in the
             # browser so that two arrays could be read out of it.
+            # The genotype forest of a window, aggregated here rather than in
+            # the page. See gol_lineage for the numbers that forced it.
+            if len(parts) == 4 and parts[:2] == ["api", "runs"] and parts[3] == "lineage":
+                import gol_lineage
+                query = parse_qs(urlparse(self.path).query)
+                run_id = parts[2]
+                start = max(0, int(query.get("from", ["0"])[0] or 0))
+                count = max(1, int(query.get("count", ["200"])[0] or 200))
+                limit = max(1, int(query.get("limit", [str(gol_lineage.DEFAULT_LIMIT)])[0]
+                                   or gol_lineage.DEFAULT_LIMIT))
+                budget = max(1, int(query.get("sightings", ["400000"])[0] or 400000))
+                phase = (query.get("phase", ["all"])[0] or "all")
+
+                # Stop once enough agents have been seen. A window measured in
+                # iterations means something very different in a world of sixty
+                # agents and one of forty thousand, and reading the same number
+                # of frames of each is how this got slow in the first place.
+                read, seen = [], 0
+                for index in range(start, start + count):
+                    if not store.has_frame(run_id, index):
+                        break
+                    frame = store.read_frame(run_id, index)
+                    if phase != "all" and str(frame.get("phase")) != phase:
+                        continue
+                    read.append(frame)
+                    seen += len(frame.get("brain_ids") or [])
+                    if seen >= budget:
+                        break
+
+                answer = gol_lineage.forest(read, limit)
+                answer["frames"] = len(read)
+                answer["asked"] = count
+                self._send_json(answer)
+                return
+
             if len(parts) == 4 and parts[:2] == ["api", "runs"] and parts[3] == "frames":
                 query = parse_qs(urlparse(self.path).query)
                 run_id = parts[2]
@@ -353,14 +409,24 @@ class Handler(BaseHTTPRequestHandler):
                 count = max(1, min(MAX_FRAME_BATCH,
                                    int(query.get("count", ["1"])[0] or 1)))
                 wanted = [f for f in (query.get("fields", [""])[0] or "").split(",") if f]
+                # A window measured in iterations means very different amounts
+                # of work in a world of sixty agents and one of forty thousand.
+                # Stop once enough have been seen, and say how many frames that
+                # turned out to be.
+                budget = max(1, int(query.get("sightings", ["0"])[0] or 0)) \
+                    if query.get("sightings") else 0
 
                 frames = []
+                seen = 0
                 for index in range(start, start + count):
                     if not store.has_frame(run_id, index):
                         break
                     frame = store.read_frame(run_id, index)
-                    frames.append({k: frame.get(k) for k in wanted} if wanted else frame)
-                self._send_json({"frames": frames})
+                    seen += len(frame.get("ids") or frame.get("brain_ids") or [])
+                    frames.append(_project(frame, wanted) if wanted else frame)
+                    if budget and seen >= budget:
+                        break
+                self._send_json({"frames": frames, "asked": count})
                 return
 
         except FileNotFoundError:

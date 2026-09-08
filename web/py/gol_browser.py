@@ -21,6 +21,7 @@ from typing import Any, Dict, List
 
 import numpy as np
 
+import gol_lineage
 import gol_series
 from gol_config import SimConfig
 from GraphOfLifeSimple import GraphOfLife, new_world
@@ -125,6 +126,10 @@ class Worlds:
 
     def sample_stride(self, total_iterations: int) -> int:
         return gol_series._sample_stride(total_iterations)
+
+    def lineage(self, frames: List[Dict[str, Any]], limit: int) -> Dict[str, Any]:
+        """The genotype forest of a window, same code the server runs."""
+        return gol_lineage.forest(frames, limit)
 
     def bisection_order(self, count: int) -> List[int]:
         """

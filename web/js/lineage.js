@@ -30,15 +30,10 @@ const Lineage = {
   // framewindow.js for why it cannot simply be sampled instead.
   MAX_ITERATIONS: 100,
 
-  // The columns a lineage actually reads. A frame of a large run is mostly its
-  // edge list and this draws none of it, so asking for whole frames was tens of
-  // megabytes parsed per window to get at two arrays.
-  FIELDS: ['iteration', 'phase', 'brain_ids', 'parent_brain_ids'],
-
-  // Redrawn at most this often while frames are still arriving. Rebuilding the
-  // forest on every batch is wasted work at this size; rebuilding it never
-  // until the last frame lands is an empty box for the whole read.
-  DRAW_EVERY_MS: 250,
+  // The most genotypes the page will hold. A real window has over a million,
+  // and a canvas a thousand pixels tall can show a couple of thousand rows —
+  // the rest were being fetched, aggregated and drawn on top of each other.
+  LIMIT: 2000,
 
   phase: 'all',
   // Frames times agents, roughly. A big world is tens of thousands of agents a
@@ -79,9 +74,9 @@ const Lineage = {
         for (const other of document.querySelectorAll('#lineagePhase .seg-btn')) {
           other.classList.toggle('active', other === button);
         }
-        // A phase filter is a filter on frames already in hand, so it redraws
-        // from them rather than reading the window again.
-        this.rebuild();
+        // The counting is server-side now, so a phase filter changes what is
+        // counted and has to ask again. It is one small request.
+        this.load(this.runId, this.windowStart);
       });
     }
 
@@ -103,62 +98,6 @@ const Lineage = {
     this.runs = runs;
   },
 
-  /**
-   * Rebuild the forest from the frames in hand and draw it.
-   *
-   * Separate from `load` because two things call it: each batch as it arrives,
-   * and the phase toggle, which changes which of the frames already read are
-   * counted rather than which frames are read.
-   */
-  rebuild(reading = false) {
-    if (!this.frames) return;
-    const kept = this.phase === 'all'
-      ? this.frames
-      : this.frames.filter(f => String(f.phase) === this.phase);
-    kept.sort((a, b) => (a.iteration - b.iteration) || (a.phase - b.phase));
-    this.forest = kept.length ? this.build(kept) : null;
-    this.resize();
-    this.draw();
-    if (!reading) this.describe(kept);
-  },
-
-  /**
-   * Say what is on screen.
-   *
-   * Written here rather than at the end of the read, because the phase filter
-   * changes the picture without reading anything — and a note left over from
-   * the unfiltered forest described a drawing that was no longer there.
-   */
-  describe(frames) {
-    const f = this.forest;
-    if (!f) {
-      this.say('No frames of that phase in this window.');
-      return;
-    }
-    const plan = this.plan || { total: frames.length, start: 0 };
-    const where = FrameWindow.describe(frames, plan.total);
-    const rootShare = f.roots.length / Math.max(1, f.order.length);
-
-    let note = `${formatNumber(f.order.length)} genotypes over `
-      + `${formatNumber(f.lastIteration - f.firstIteration + 1)} iterations, `
-      + `${formatNumber(f.roots.length)} without a parent inside the window`
-      + (where
-          ? ` — ${where}, so those are ancestors from before it.`
-          : `, which are its founders.`);
-
-    // A run recorded before a brain id named a genotype hands out a fresh id
-    // on every copy and mutates it away in the same phase, so the id linking
-    // one recorded brain to the next was never itself recorded. Half of every
-    // chain is missing and no picture drawn from it means anything.
-    if (rootShare > this.ROOTS_SUSPECT && plan.start === 0) {
-      note += ` That is ${(rootShare * 100).toFixed(0)}% of them, which is too`
-        + ` many to be founders: this run was recorded before a brain id named`
-        + ` a genotype, so its ancestry cannot be rebuilt. Run a new simulation`
-        + ` to see a real one.`;
-    }
-    this.say(note);
-  },
-
   say(text) {
     this.noteEl.textContent = text;
   },
@@ -170,9 +109,9 @@ const Lineage = {
     // it was left rather than snapping to the beginning. A different run has
     // no remembered place, so it starts at its own.
     const at = from ?? (runId === this.runId ? this.windowStart : 0);
+    const token = (this.token = (this.token || 0) + 1);
     this.runId = runId;
     this.forest = null;
-    this.frames = null;
     this.draw();
 
     const run = this.runs.find(r => r.id === runId);
@@ -184,41 +123,88 @@ const Lineage = {
     this.windowStart = plan.start;
     FrameWindow.bindScrubber(document.getElementById('lineageWindow'), plan);
 
-    const frames = [];
-    let budget = plan.indices.length;
-    let painted = 0;
+    this.say('Reading the window…');
     try {
-      for await (const batch of FrameWindow.read(runId, plan.indices, this.FIELDS)) {
-        if (this.runId !== runId) return;          // a different run was picked
-        frames.push(...batch);
-
-        // Now that the size of the world is known, take only as many frames as
-        // will make a picture rather than a wall.
-        if (frames.length === batch.length) {
-          const agents = frames[0].brain_ids.length || 1;
-          budget = Math.max(batch.length,
-                            Math.min(budget, Math.ceil(this.MAX_SIGHTINGS / agents)));
-        }
-        this.say(`Reading frames… ${frames.length} of ${budget}`);
-
-        // Draw what has arrived. A window of a large run takes seconds to read,
-        // and an empty box for all of it reads as broken rather than as busy.
-        const now = Date.now();
-        if (now - painted > this.DRAW_EVERY_MS) {
-          painted = now;
-          this.frames = frames.slice();
-          this.rebuild(true);
-          this.say(`Reading frames… ${frames.length} of ${budget}`);
-        }
-        if (frames.length >= budget) break;
-      }
+      // One request. The counting happens where the frames are, and only the
+      // genotypes that can be drawn come back — see gol_lineage.py for the
+      // numbers that made that necessary.
+      const reply = await API.getLineage(runId, plan.start, plan.indices.length,
+                                         this.LIMIT, this.MAX_SIGHTINGS, this.phase);
+      if (this.token !== token) return;            // a different run was picked
+      this.reply = reply;
+      this.rebuild();
     } catch (err) {
-      this.say(`Could not read the frames: ${err.message}`);
+      if (this.token !== token) return;
+      this.say(`Could not read the window: ${err.message}`);
+    }
+  },
+
+  /**
+   * Lay out what arrived and draw it.
+   *
+   * Separate from `load` so the phase toggle can redraw without fetching.
+   */
+  rebuild() {
+    if (!this.reply) return;
+    this.forest = this.reply.nodes.length ? this.arrange(this.reply) : null;
+    this.resize();
+    this.draw();
+    this.describe();
+  },
+
+  /** Say what is on screen, including what was left off it. */
+  describe() {
+    const f = this.forest;
+    if (!f) {
+      this.say('Nothing recorded in this window.');
       return;
     }
+    const plan = this.plan || { total: 0, start: 0 };
+    const rootShare = f.roots.length / Math.max(1, f.order.length);
+    const iterations = f.lastIteration - f.firstIteration + 1;
 
-    this.frames = frames;
-    this.rebuild();
+    let note = `${formatNumber(f.total)} genotypes over `
+      + `${formatNumber(iterations)} iterations`;
+
+    // A view that quietly draws the largest two thousand of a million is
+    // lying by omission, so the count that was left out is part of the note
+    // rather than a footnote nobody reads.
+    if (f.shown < f.total) {
+      note += `, showing the ${formatNumber(f.shown)} longest-lived`;
+    }
+    note += `. ${formatNumber(f.roots.length)} of those have no parent here`;
+
+    if (plan.total > f.frames * FrameWindow.PHASES) {
+      const first = Math.floor(plan.start / FrameWindow.PHASES);
+      note += ` — the window is iterations ${formatNumber(first)}–`
+        + `${formatNumber(first + Math.ceil(f.frames / FrameWindow.PHASES) - 1)}`
+        + ` of ${formatNumber(Math.ceil(plan.total / FrameWindow.PHASES))}, `
+        + `so those are ancestors from before it.`;
+    } else {
+      note += `, which are its founders.`;
+    }
+
+    // The one thing worth saying outright about this substrate: if nothing
+    // lasts more than a single iteration there is no ancestry to look at, and
+    // a reader staring at a wall of one-iteration stubs should be told why
+    // rather than left to work it out.
+    if (f.longestSpan <= FrameWindow.PHASES && f.total > 1000) {
+      note += ` Nothing lasted longer than one iteration, so there is no`
+        + ` descent to see here — every agent's genotype is new each iteration.`;
+    } else if (f.shown < f.total) {
+      // The old-run warning below counts parentless genotypes, and keeping only
+      // the longest-lived leaves most parents behind — which orphans their
+      // children and sends that count straight past the threshold. It would
+      // then accuse a run recorded this morning of predating a change from
+      // months ago. The heuristic only means anything on a complete forest.
+      note += ` Most of the missing parents are simply the ones not shown.`;
+    } else if (rootShare > this.ROOTS_SUSPECT && plan.start === 0) {
+      note += ` That is ${(rootShare * 100).toFixed(0)}% of them, which is too`
+        + ` many to be founders: this run was recorded before a brain id named`
+        + ` a genotype, so its ancestry cannot be rebuilt. Run a new simulation`
+        + ` to see a real one.`;
+    }
+    this.say(note);
   },
 
   /**
@@ -229,37 +215,19 @@ const Lineage = {
    * a root: reading a whole run those are its founders, and reading a window
    * they are the ancestors it inherited from before the window began.
    */
-  build(frames) {
+  /**
+   * Arrange the genotypes that arrived: who sits under whom, and in what colour.
+   *
+   * The counting that used to happen here — walking every agent of every frame
+   * to find each genotype's span and peak — now happens where the frames are.
+   * It had to: a real window holds over a million genotypes, which was twenty-
+   * seven megabytes to fetch and six hundred milliseconds to aggregate on the
+   * main thread, for a picture with more lines in it than the canvas has
+   * pixels. What arrives here is the couple of thousand that can be drawn.
+   */
+  arrange(reply) {
     const nodes = new Map();
-    let firstIteration = Infinity;
-    let lastIteration = -Infinity;
-
-    for (const frame of frames) {
-      const t = frame.iteration;
-      firstIteration = Math.min(firstIteration, t);
-      lastIteration = Math.max(lastIteration, t);
-      const ids = frame.brain_ids || [];
-      const parents = frame.parent_brain_ids || [];
-
-      const here = new Map();
-      for (let i = 0; i < ids.length; i++) {
-        here.set(ids[i], (here.get(ids[i]) || 0) + 1);
-      }
-      for (let i = 0; i < ids.length; i++) {
-        const id = ids[i];
-        let node = nodes.get(id);
-        if (!node) {
-          node = { id, parent: parents[i], born: t, died: t, peak: 0, span: 0 };
-          nodes.set(id, node);
-        }
-        node.died = t;
-      }
-      for (const [id, count] of here) {
-        const node = nodes.get(id);
-        node.peak = Math.max(node.peak, count);
-        node.span += 1;
-      }
-    }
+    for (const node of reply.nodes) nodes.set(node.id, { ...node });
 
     // Children, in the order they appeared, so a clade reads left to right.
     const children = new Map();
@@ -295,7 +263,15 @@ const Lineage = {
       }
     }
 
-    return { nodes, order, roots, children, firstIteration, lastIteration };
+    return {
+      nodes, order, roots, children,
+      firstIteration: reply.firstIteration,
+      lastIteration: reply.lastIteration,
+      total: reply.total,
+      shown: reply.shown,
+      longestSpan: reply.longestSpan,
+      frames: reply.frames
+    };
   },
 
   // ---- colour -----------------------------------------------------------

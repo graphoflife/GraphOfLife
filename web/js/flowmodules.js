@@ -118,7 +118,48 @@ const FlowModules = {
       [order[i], order[j]] = [order[j], order[i]];
     }
 
-    const cost = () => this.codeLength(p, exit, inside);
+    // The code length, maintained rather than recomputed.
+    //
+    // This is the whole reason this view was unusable on a real run. The
+    // objective is a sum over every module and every node, and it used to be
+    // evaluated in full for every candidate module of every node of every
+    // pass: twelve passes over forty thousand agents, a handful of candidates
+    // apiece, each costing another forty thousand steps. That is on the order
+    // of 10^11 operations to cluster a single frame, and it simply never came
+    // back — the tab froze rather than finished.
+    //
+    // Moving one agent only changes the terms belonging to the module it left
+    // and the one it joined. So those two terms are subtracted and re-added,
+    // and the rest of the sum is left where it is. The same objective, the
+    // same moves, the same answer — O(1) per candidate instead of O(n).
+    let sumNodes = 0;
+    for (const share of p) sumNodes += this.plogp(share);
+
+    let q = 0, sumExit = 0, sumBoth = 0;
+    const recount = () => {
+      q = 0; sumExit = 0; sumBoth = 0;
+      for (let i = 0; i < n; i++) {
+        if (inside[i] <= 0 && exit[i] <= 0) continue;
+        q += exit[i];
+        sumExit += this.plogp(exit[i]);
+        sumBoth += this.plogp(exit[i] + inside[i]);
+      }
+    };
+    recount();
+
+    /** Move weight in or out of one module, keeping the running sums in step. */
+    const adjust = (m, dInside, dExit) => {
+      q -= exit[m];
+      sumExit -= this.plogp(exit[m]);
+      sumBoth -= this.plogp(exit[m] + inside[m]);
+      inside[m] += dInside;
+      exit[m] += dExit;
+      q += exit[m];
+      sumExit += this.plogp(exit[m]);
+      sumBoth += this.plogp(exit[m] + inside[m]);
+    };
+    const cost = () => this.plogp(q) - 2 * sumExit - sumNodes + sumBoth;
+
     let best = cost();
 
     for (let pass = 0; pass < passes; pass++) {
@@ -136,34 +177,33 @@ const FlowModules = {
         const linkedHome = (toModule.get(from) || 0) / totalWeight;
 
         // Take it out of its module first.
-        inside[from] -= p[a];
-        exit[from] -= own - linkedHome;
+        adjust(from, -p[a], -(own - linkedHome));
 
         let bestModule = from, bestCost = Infinity;
         for (const [candidate, weight] of toModule) {
           const linked = weight / totalWeight;
-          inside[candidate] += p[a];
-          exit[candidate] += own - linked;
+          adjust(candidate, p[a], own - linked);
           const here = cost();
           if (here < bestCost) { bestCost = here; bestModule = candidate; }
-          inside[candidate] -= p[a];
-          exit[candidate] -= own - linked;
+          adjust(candidate, -p[a], -(own - linked));
         }
         // Staying put is always on the table.
-        inside[from] += p[a];
-        exit[from] += own - linkedHome;
-        if (cost() <= bestCost + 1e-12) { bestModule = from; bestCost = cost(); }
+        adjust(from, p[a], own - linkedHome);
+        const staying = cost();
+        if (staying <= bestCost + 1e-12) { bestModule = from; bestCost = staying; }
 
         if (bestModule !== from) {
-          inside[from] -= p[a];
-          exit[from] -= own - linkedHome;
+          adjust(from, -p[a], -(own - linkedHome));
           const linked = (toModule.get(bestModule) || 0) / totalWeight;
-          inside[bestModule] += p[a];
-          exit[bestModule] += own - linked;
+          adjust(bestModule, p[a], own - linked);
           module[a] = bestModule;
           moved++;
         }
       }
+      // Rounding drifts over tens of thousands of incremental updates, so the
+      // sums are rebuilt exactly once a pass — O(n) per pass, which is what
+      // the whole loop used to cost per candidate.
+      recount();
       const now = cost();
       if (!moved || best - now < 1e-10) { best = now; break; }
       best = now;
