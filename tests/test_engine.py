@@ -22,6 +22,7 @@ do not get run.
 from __future__ import annotations
 
 import dataclasses
+import math
 import os
 import random
 import re
@@ -861,6 +862,97 @@ def test_the_cut_risk_is_recorded_before_the_cull_not_after():
             assert 0.0 <= risk <= 0.5, f"a share of the population, got {risk}"
             seen += 1
     assert seen >= 12, f"both phases of six iterations, got {seen}"
+
+
+# ---------------------------------------------------------------------------
+# The spectral gap: how hard the graph is to cut in half
+# ---------------------------------------------------------------------------
+
+def test_the_spectral_gap_is_exact_on_a_complete_graph():
+    """
+    The one family with an answer in closed form.
+
+    Every complete graph has normalised-Laplacian eigenvalues 0 and n/(n-1),
+    repeated. Anything that is not that is not a spectral gap, and since this
+    is found by iteration rather than by solving, it is worth pinning against
+    a case where the true value is known to every digit.
+    """
+    import gol_spectral
+
+    for n in (4, 6, 10, 20):
+        edges = [(i, j) for i in range(n) for j in range(i + 1, n)]
+        got = gol_spectral.spectral_gap(list(range(n)), _adj(edges))
+        exact = n / (n - 1)
+        assert abs(got - exact) < 1e-12, f"K{n} gave {got}, wanted {exact}"
+
+
+def test_a_ring_matches_its_closed_form_too():
+    """
+    A cycle of n has λ₂ = 1 - cos(2π/n), which is small and gets smaller.
+
+    Worth having beside the complete graph because it is the opposite end: a
+    ring is about as easy to cut as a connected graph gets, so the two together
+    pin both ends of the range rather than one point in it.
+
+    A ring is also the case that decided the algorithm. Its eigenvalues crowd
+    together as it grows, and power iteration separates them at a rate set by
+    the space between — so an 80-ring defeated it entirely while Lanczos is
+    exact here to the last bit. That is the same crowding real graphs in this
+    substrate have, which is why the slow ones are in this test.
+    """
+    import gol_spectral
+
+    for n in (12, 20, 40, 80):
+        ring = [(i, (i + 1) % n) for i in range(n)]
+        got = gol_spectral.spectral_gap(list(range(n)), _adj(ring))
+        exact = 1 - math.cos(2 * math.pi / n)
+        assert abs(got - exact) < 1e-12, f"a {n}-cycle gave {got}, wanted {exact}"
+
+
+def test_a_cheap_cut_shows_up_as_a_small_gap():
+    """
+    Two cliques joined by one edge against one clique of the same size.
+
+    This is the whole point of the measure: both graphs are dense, both are
+    connected, and only one of them can be split without cost. A count of
+    bridges says "one" for the dumbbell and nothing about how much that bridge
+    is holding together.
+    """
+    import gol_spectral
+
+    half = [(i, j) for i in range(6) for j in range(i + 1, 6)]
+    other = [(i + 6, j + 6) for i, j in half]
+    dumbbell = half + other + [(0, 6)]
+    whole = [(i, j) for i in range(12) for j in range(i + 1, 12)]
+
+    weak = gol_spectral.spectral_gap(list(range(12)), _adj(dumbbell))
+    strong = gol_spectral.spectral_gap(list(range(12)), _adj(whole))
+
+    assert weak < 0.2, f"a dumbbell should cut cheaply, got {weak}"
+    assert strong > 1.0, f"a complete graph should not cut at all, got {strong}"
+    assert weak < strong / 5, "the two should not be anywhere near each other"
+
+
+def test_the_gap_ignores_a_stray_component_rather_than_reporting_zero():
+    """
+    Read on the largest component, deliberately.
+
+    The textbook definition gives exactly zero for a disconnected graph, which
+    is true and useless here: one pair of agents adrift would answer for the
+    whole population and the number would be zero forever. Cleanup keeps only
+    the largest component anyway, so this is the reading that means something.
+    """
+    import gol_spectral
+
+    core = [(i, j) for i in range(8) for j in range(i + 1, 8)]
+    ids = list(range(10))
+    adrift = _adj(core + [(8, 9)])
+    adrift.setdefault(8, set()).add(9)
+
+    got = gol_spectral.spectral_gap(ids, adrift)
+    alone = gol_spectral.spectral_gap(list(range(8)), _adj(core))
+    assert abs(got - alone) < 1e-9, (
+        f"the stray pair changed the answer: {got} against {alone}")
 
 
 # ---------------------------------------------------------------------------

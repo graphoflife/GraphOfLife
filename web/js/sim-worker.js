@@ -34,6 +34,7 @@ const PY_FILES = [
   'gol_config.py',
   'GraphOfLifeSimple.py',
   'gol_store.py',
+  'gol_spectral.py',
   'gol_series.py',
   'gol_lineage.py',
   'gol_browser.py'

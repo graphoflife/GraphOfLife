@@ -52,6 +52,12 @@ JS_ONLY: set = set()
 # to being close rather than equal; everything else must match exactly.
 TOLERANCES = {
     "radius": 0.35, "diameter": 0.35, "meanPathLength": 0.35, "dimension": 0.35,
+    # The spectral gap is a power iteration, and the two sides agree exactly
+    # here — the start vector is built from integers precisely so they can. The
+    # tolerance is insurance against a JavaScript engine whose square root or
+    # division rounds a hair differently, not licence for the two to drift:
+    # anything larger than this is a real disagreement.
+    "spectralGap": 1e-9,
 }
 
 # The bridge into node. Kept here rather than in a file of its own so the test

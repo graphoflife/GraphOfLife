@@ -666,7 +666,7 @@ class FrameMetrics {
       degreeTailShare: null, degreeGammaKS: null,
       boxDimension: null, boxDimensionR2: null,
       cycleRank: null, loopDensity: null, bridges: null, triangles: null,
-      cutRisk: null, coreShare: null, ricciCurvature: null,
+      cutRisk: null, coreShare: null, spectralGap: null, ricciCurvature: null,
       transitivity: null, degreeEntropy: null, degreeEvenness: null,
       radius: null, diameter: null, meanPathLength: null,
       tokenEntropy: null, tokenEvenness: null, dimension: null, components: null,
@@ -777,6 +777,7 @@ class FrameMetrics {
       out.bridges = st.loops.bridges;
       out.cutRisk = st.loops.cutRisk;
       out.coreShare = st.loops.coreShare;
+      out.spectralGap = st.loops.spectralGap;
       out.components = st.loops.componentCount;
       out.triangles = st.triangles.total;
       out.transitivity = GraphStats.transitivity(f.ids, st.adj, st.triangles.total);

@@ -83,6 +83,7 @@ Object.assign(Viewer, {
     cutRisk: 'Worst cut',
     cutRiskBefore: 'Worst cut, pre-cull',
     coreShare: 'Core share',
+    spectralGap: 'Spectral gap \u03bb\u2082',
     triangles: 'Triangles',
     transitivity: 'Clustering',
     dimension: 'Dimension',
@@ -151,7 +152,7 @@ Object.assign(Viewer, {
     { key: 'structure', label: 'Structure', open: false, keys: [
       'density', 'meanDegree', 'medianDegree', 'maxDegree', 'minDegree', 'leaves',
       'radius', 'diameter', 'meanPathLength',
-      'cycleRank', 'loopDensity', 'bridges', 'cutRisk', 'coreShare',
+      'cycleRank', 'loopDensity', 'bridges', 'cutRisk', 'coreShare', 'spectralGap',
       'triangles', 'transitivity', 'dimension', 'ricciCurvature',
       'degreeEntropy', 'degreeEvenness', 'components'
     ] },
@@ -260,6 +261,7 @@ Object.assign(Viewer, {
       cells.bridges = [this.STAT_LABELS.bridges, formatNumber(s.bridges)];
       cells.cutRisk = [this.STAT_LABELS.cutRisk, pct(s.cutRisk)];
       cells.coreShare = [this.STAT_LABELS.coreShare, pct(s.coreShare)];
+      cells.spectralGap = [this.STAT_LABELS.spectralGap, dec(s.spectralGap, 4)];
       cells.triangles = [this.STAT_LABELS.triangles, formatNumber(s.triangles)];
       cells.transitivity = [this.STAT_LABELS.transitivity, dec(s.transitivity, 3)];
       cells.dimension = [this.STAT_LABELS.dimension, dec(s.dimension)];

@@ -45,10 +45,11 @@ Cheeger's inequality ties `h` to the second-smallest eigenvalue `λ₂` of the
 normalised Laplacian — the **spectral gap** — which is why `λ₂` is usually used
 as the working definition: it is the one you can actually compute.
 
-> **Here.** "Decentralised" is not a vibe, it is `λ₂`. We do not compute it. The
-> whole of §6 turns on this: the thing the algorithm is doing to its own
-> topology is currently invisible because the single number that would show it
-> is missing.
+> **Here.** "Decentralised" is not a vibe, it is `λ₂`. ✅ Now measured, and the
+> answer is **0.00086** — near enough to zero that this graph is very nearly in
+> two pieces. See §6, which also records how the first algorithm tried gave a
+> number forty times larger that turned out to be a reading of its own
+> iteration count.
 
 ---
 
@@ -70,7 +71,7 @@ Everything below is a number, on one graph, in polynomial time. Marked ✅ where
 | **degeneracy / arboricity** — min forests covering `G` (Nash-Williams) | 1 | `> 1` | ✗ |
 | **treewidth** — width of the best tree decomposition | 1 | `Θ(n)` | ✗ |
 | **δ-hyperbolicity** — Gromov's 4-point condition | 0 | `O(log n)`, and *not* small | ✗ |
-| **spectral gap** `λ₂` / **conductance** | `→ 0` | bounded below | ✗ |
+| **spectral gap** `λ₂` / **conductance** | `→ 0` | bounded below | ✅ `spectralGap` |
 | **effective resistance** per edge | 1 on every edge | `≈ (n-1)/m` on every edge | ✗ |
 
 Three of the missing four deserve their own note.
@@ -461,23 +462,47 @@ alternating column is no result.**
 | `cutRiskBefore` | the same, on the graph before the cull, so it can be read as a cause | engine, per phase |
 | `coreShare` | fraction left after peeling degree-1 nodes until none remain: the 2-core against the whiskers | post-cleanup graph |
 | `ricciCurvature` | the `r²` term the ball-growth fit was discarding | post-cleanup graph |
+| `spectralGap` | λ₂ of the normalised Laplacian — one number for how hard the population is to cut in two | largest component |
 
 `bridge_splits()` and `two_core_size()` live in `GraphOfLifeSimple.py` because
 the engine needs them on the live graph, and `gol_series` imports them rather
 than growing a third copy. The browser mirror is `graphstats.js`, compared
 value for value by `tests/test_stats_parity.py`.
 
+### λ₂, and what it settled
+
+**Measured: 0.00086** on a 35,000-node frame of `GOL_26_08_31_n001`. Essentially
+zero, and that answers the question it was added for.
+
+The worry was that a Flow-modules partition might be an artefact — the map
+equation always returns *something*, and a division drawn through an expander
+means nothing. λ₂ near zero says the opposite: this graph has a cheap cut, so
+divisions in it are real. Cheeger's inequality makes that formal — `h(G)² / 2 ≤
+λ₂ ≤ 2 h(G)` — so a small λ₂ is a *promise* that a good cut exists. It also
+corroborates everything else measured here: a fifth to a third of edges are
+bridges, `cutRisk` is high, and the graph is core-plus-whiskers. Those are four
+readings of one fact.
+
+**The algorithm had to be replaced, and how it failed is worth recording.**
+Power iteration separates the top two eigenvalues at a rate set by the space
+between them, and this graph has none — the spectrum is a cluster. Its estimate
+*halved every time the iteration count doubled*: 0.038, 0.019, 0.010, 0.0045,
+0.0021 at 25, 50, 100, 200, 400 passes. Any of those would have been a reading
+of the iteration count, and the first one would have been reported as
+"moderately connected". Lanczos on the same graphs is exact to the last bit
+wherever a closed form exists to check it — complete graphs, rings up to 80 —
+and resolves the real frame in 312ms. This is the same trap as the conquest
+cycles and the flow modules: a number that looks like a measurement until it is
+asked what it would be if the method were run differently.
+
 ### Still worth adding, in order of value per line of code
-1. **`λ₂` of the normalised Laplacian.** The decentralisation number, and the
-   axis the Flow modules view still lacks. A partition of an expander is an
-   artefact and we cannot yet tell whether ours is one.
-2. **Effective resistance per edge**, summarised by Gini and maximum — Foster
+1. **Effective resistance per edge**, summarised by Gini and maximum — Foster
    fixes the total at `n - 1`, so only the spread carries information. Reuses
    `_gini`. Exact computation is too slow per frame at 30k nodes and would need
    the sampled form.
-3. **δ-hyperbolicity** on sampled quadruples, and a greedy **treewidth** upper
+2. **δ-hyperbolicity** on sampled quadruples, and a greedy **treewidth** upper
    bound. Most expensive, and the two whose literature support is shakiest.
-4. **Whisker size distribution**, not only the worst one. `bridge_splits`
+3. **Whisker size distribution**, not only the worst one. `bridge_splits`
    already returns every split; only the maximum is currently kept.
 
 ### On `edge_proposal`, revised

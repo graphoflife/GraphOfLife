@@ -479,7 +479,9 @@ and whisker sizes, the spectral gap `λ₂`, and the distribution of per-edge
 effective resistance. ✅ The first of those three is built: `cutRisk`,
 `cutRiskBefore`, `coreShare` and `ricciCurvature` are recorded every frame, and
 each claim has a panel in the **Theses** tab stating in advance what would
-confirm and what would refute it. `λ₂` and effective resistance are not.
+confirm and what would refute it. ✅ `λ₂` too, and it came back at **0.00086** —
+essentially zero, meaning the graph has a cheap cut and a community partition
+of it is therefore not an artefact. Effective resistance is still missing.
 
 Two things make this urgent rather than decorative. **No edge in this algorithm
 is ever created between nodes more than two hops apart**, so the small-world

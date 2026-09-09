@@ -27,6 +27,7 @@ import gol_store as store
 # graphstats.js and compared key by key by tests/test_stats_parity.py — the
 # same arrangement every other structural measure here already has.
 from GraphOfLifeSimple import bridge_splits, two_core_size
+from gol_spectral import spectral_gap
 
 #: What a brain with no recorded parent carries, matching the engine.
 NO_PARENT = -1
@@ -67,12 +68,13 @@ def progress(run_id: str) -> Dict[str, Any]:
 # row at once, which is how the power-law statistics came to be computed and
 # then dropped on the way out.
 #
+# 19: `spectralGap` — lambda2 of the normalised Laplacian.
 # 18: `redistributed` changed meaning in cbfc457 — it now reports what was
 # actually shared out rather than what was pooled, which differ whenever the
 # pool was dropped in favour of a resurrection. That commit did not bump this,
 # so every cache built before it has been serving the old number ever since,
 # which is the exact failure the paragraph above describes.
-SERIES_VERSION = 18
+SERIES_VERSION = 19
 
 # At most this many iterations are analysed for a run's history.
 #
@@ -226,6 +228,10 @@ def _structure(ids: List[int], edges: List[List[int]]) -> Dict[str, Any]:
     cut_risk = max((min(b, node_count - b) / node_count for _, _, b in splits),
                    default=0.0) if node_count > 1 else 0.0
     core_share = (two_core_size(ids, adj) / node_count) if node_count else 0.0
+
+    # How hard the population is to cut in two. See gol_spectral for why this
+    # is the number that says whether a Flow-modules partition means anything.
+    gap = spectral_gap(ids, adj)
 
     _, component_count = component_labels(adj)
     cycle_rank = max(0, len(edges) - len(ids) + component_count)
@@ -385,6 +391,7 @@ def _structure(ids: List[int], edges: List[List[int]]) -> Dict[str, Any]:
         "bridges": len(splits),
         "cutRisk": cut_risk,
         "coreShare": core_share,
+        "spectralGap": gap,
         "components": component_count,
         "triangles": triangle_total,
         "transitivity": transitivity,
@@ -682,6 +689,7 @@ def _reconstruct_delta(frame: Dict[str, Any], previous: Dict[str, Any] | None) -
 #: half-summarised as a run that never recorded them.
 HEAVY_KEYS = (
     "cycleRank", "loopDensity", "bridges", "cutRisk", "coreShare", "components",
+    "spectralGap",
     "triangles", "transitivity", "dimension", "ricciCurvature",
     "radius", "diameter", "meanPathLength",
     "degreeExponent", "degreeExponentR2", "tokenExponent", "tokenExponentR2",
