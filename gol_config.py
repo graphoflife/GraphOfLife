@@ -49,6 +49,7 @@ MECHANICS: Dict[str, Any] = {
     "message_prepass": True,
     "allow_handover": True,
     "allow_revolutions": True,
+    "random_decisions": False,
     # A magnitude, but 0 against anything else is the difference between a
     # closed economy and one that mints, which is a different algorithm rather
     # than a different setting of one.
@@ -100,6 +101,7 @@ class SimConfig:
         "brain_kind": "float",
         "allow_handover": False,
         "allow_revolutions": True,
+        "random_decisions": False,
         # On by default now, but every run recorded before the option existed
         # ran with one pass per phase. Reading those as having used a pre-pass
         # would change what a resumed run does.
@@ -208,6 +210,15 @@ class SimConfig:
     # off, a node simply goes to whoever allocated the most, ties broken at
     # random, and the revolution fraction head disappears from the brain.
     allow_revolutions: bool = True
+
+    # The control. With this on, an agent never reads its inputs: the numbers
+    # its brain would have produced are replaced with noise, and every decision
+    # downstream follows from that instead. Nothing else changes — the same
+    # heads, the same reproduction rule, the same Blotto, the same mutation of
+    # brains that no longer matter — so a run of this against a run without it
+    # isolates exactly one thing: whether processing the inputs is doing
+    # anything at all.
+    random_decisions: bool = False
 
     # ---- Mutation ----
     mutation_probability: float = 0.5

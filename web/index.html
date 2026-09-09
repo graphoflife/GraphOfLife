@@ -194,6 +194,14 @@
           <label><input type="checkbox" id="cfg_allow_revolutions" data-cfg="allow_revolutions"> Allow revolutions</label>
           <small>Off, a node goes to whoever staked most, ties at random. This and handover change the brain's outputs, so neither can be altered later.</small>
         </div>
+        <div class="field checkbox">
+          <label><input type="checkbox" id="cfg_random_decisions" data-cfg="random_decisions"> Random decisions</label>
+          <small>The control. Agents never read their inputs: every decision is
+            taken from noise instead. Everything else is unchanged, so running
+            this beside an ordinary simulation isolates one question &mdash;
+            whether attending to the world is doing anything at all. Any
+            measurement that looks the same here is not measuring evolution.</small>
+        </div>
         </fieldset>
       </div>
       <div class="config-column">

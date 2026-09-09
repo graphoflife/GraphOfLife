@@ -38,6 +38,7 @@ which it is.
 | `allow_handover` | `true` | |
 | `allow_revolutions` | `true` | the non-transitivity generator |
 | `tokens_created_per_phase` | `0` | a magnitude, but 0 against anything else is a closed economy against one that mints — a different algorithm, not a different setting |
+| `random_decisions` | `false` | the control: agents never read their inputs and every decision is taken from noise instead |
 
 ### Mechanics — reserved, not yet implemented
 
@@ -93,6 +94,7 @@ On every store that can be found on its own:
 | strain | mechanics on | first used | what for |
 |---|---|---|---|
 | `gol-1` | — (all defaults) | `9cee9fd` | The baseline. Everything in `Research.md` Appendix A. |
+| `gol-1+random_decisions` | `random_decisions` | this commit | The control. Every other mechanic identical, so a difference between this and `gol-1` is attributable to the agents reading their inputs and to nothing else. |
 
 ---
 

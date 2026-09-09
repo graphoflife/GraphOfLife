@@ -646,6 +646,27 @@ changes survival not at all. **How finely an agent can state a preference is
 not currently what is being selected on** — consistent with §3.1.
 
 ---
+### A.10 The control: decisions from noise *(`random_decisions`)*
+`gol-1+random_decisions` runs every mechanic unchanged and replaces what the
+brain would have said with noise of the same shape. Eight seeds, 40 agents to
+start, 60 iterations:
+
+| | agents at the end | collapsed to one |
+|---|---|---|
+| `gol-1` | 123 – 524 (median 205) | 0 / 8 |
+| `gol-1+random_decisions` | 1 – 2 (median 1) | **7 / 8** |
+
+**Attending to the inputs is load-bearing for survival.** This is the first
+hard evidence in this project that the brains do anything, and it sits beside
+§A.1's finding that inheritance does *not* — those are different ablations and
+both can be true. Randomising *what agents do* kills the world; randomising
+*who wins a node* (§A.2) does not, and in fact leaves more agents alive.
+
+One caveat to carry: the noise is standard normal, and a trained brain's
+outputs need not be on that scale. Some of the collapse may be scale rather
+than structure. The measurement to settle it is the same run with noise matched
+to the observed output distribution, which has not been done.
+
 ### A.9 Lightning — circulating token flow *(`gol_lightning.py`)*
 On a 34,000-agent Blotto frame of `GOL_26_08_31_n001`:
 

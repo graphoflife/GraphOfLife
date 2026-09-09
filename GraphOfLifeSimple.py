@@ -864,7 +864,18 @@ class GraphOfLife:
         return np.array([int(u == v)] + base + msg_feats + noise, dtype=float)
 
     def _observe(self, u: int, candidates: List[int], log_deg, q_tok, q_deg, log_tok) -> np.ndarray:
-        """One forward pass scoring every candidate."""
+        """
+        One forward pass scoring every candidate.
+
+        Unless the world is running as a control, in which case the pass does
+        not happen: the outputs are noise of the same shape and every decision
+        downstream is taken from that. This is the one place a brain speaks, so
+        it is the only place the control needs to touch — reproduction, linking,
+        handover, messages and staking all read this array and none of them can
+        tell the difference.
+        """
+        if self.cfg.random_decisions:
+            return np.random.standard_normal((self.cfg.n_outputs(), len(candidates)))
         X = np.column_stack([
             self._input_vec(u, v, log_deg, q_tok, q_deg, log_tok) for v in candidates
         ])

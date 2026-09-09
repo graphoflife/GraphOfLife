@@ -865,6 +865,70 @@ def test_the_cut_risk_is_recorded_before_the_cull_not_after():
 
 
 # ---------------------------------------------------------------------------
+# The control: decisions taken from noise
+# ---------------------------------------------------------------------------
+
+def test_a_random_world_never_asks_its_brains_anything():
+    """
+    The control has to actually bypass the brain, not merely disturb it.
+
+    Checked by making the brain unusable: if anything still calls it, this
+    raises. That is a stronger guarantee than comparing trajectories, which
+    could match by luck or diverge for reasons that have nothing to do with
+    whether the forward pass happened.
+    """
+    import GraphOfLifeSimple as G
+
+    world = new_world(SimConfig(total_tokens=600, n_nodes=30, k_neighbors=4,
+                                seed=3, hidden_layers=[6], random_decisions=True))
+
+    def refuse(self, X):
+        raise AssertionError("a control world consulted a brain")
+
+    # Patched on the class: Brain has __slots__, so an instance cannot be given
+    # a different method, and newborns would arrive with working ones anyway.
+    original = G.Brain.forward
+    G.Brain.forward = refuse
+    try:
+        for _ in range(8):
+            world.step(record_decisions=False)
+    finally:
+        G.Brain.forward = original
+
+
+def test_the_control_is_a_mechanic_and_says_so_in_the_name():
+    """A run taken from noise must not be filed under the same algorithm."""
+    assert SimConfig().strain_id() == "gol-1"
+    assert SimConfig(random_decisions=True).strain_id() == "gol-1+random_decisions"
+    # And it is off unless asked for, or every run ever made would be a control.
+    assert SimConfig().random_decisions is False
+
+
+def test_an_ordinary_world_still_reads_its_inputs():
+    """
+    The other half of the guarantee, or the test above would pass on a world
+    that had stopped using its brains entirely.
+    """
+    import GraphOfLifeSimple as G
+
+    world = new_world(SimConfig(total_tokens=600, n_nodes=30, k_neighbors=4,
+                                seed=3, hidden_layers=[6]))
+    asked = []
+    original = G.Brain.forward
+
+    def counted(self, X):
+        asked.append(1)
+        return original(self, X)
+
+    G.Brain.forward = counted
+    try:
+        world.step(record_decisions=False)
+    finally:
+        G.Brain.forward = original
+    assert asked, "an ordinary world went a whole iteration without a forward pass"
+
+
+# ---------------------------------------------------------------------------
 # Lightning: circulating token flow
 # ---------------------------------------------------------------------------
 
