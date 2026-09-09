@@ -159,6 +159,7 @@ const FlowView = {
       return;
     }
     this.frames = frames;
+    this.asked = plan.indices.length;
     this.recompute();
   },
 
@@ -218,9 +219,18 @@ const FlowView = {
     }));
 
     const where = FrameWindow.describe(this.frames, this.windowTotal);
+    // Clustering a frame costs the better part of a second on a large world, so
+    // this view is bounded by the world rather than by the number in the box.
+    // Said outright: a control that is overruled in silence is worse than none.
+    const short = this.asked && this.frames.length < this.asked
+      ? ` — ${formatNumber(this.frames.length)} frames of the `
+        + `${formatNumber(this.asked)} asked for, which is as much of a world `
+        + `this size as can be clustered in reasonable time`
+      : '';
     this.say(`${formatNumber(history.length)} module appearances over `
       + `${formatNumber(new Set(history.map(r => r.iteration)).size)} iterations`
-      + (where ? ` — ${where}` : '')
+      + short
+      + (where && !short ? ` — ${where}` : '')
       + (withoutFlow ? `; ${formatNumber(withoutFlow)} frames had no flow recorded.` : '.')
       + (f.compression < 0.01
           ? ' Compression near zero means the flow has no group structure worth'
@@ -241,38 +251,99 @@ const FlowView = {
     this.h = box.height;
   },
 
+  /**
+   * The columns, the blocks in each, and the ribbons between them.
+   *
+   * An alluvial diagram, which is what Rosvall & Bergstrom built to show how
+   * the map equation's modules change over time — the same method this view
+   * runs. It replaces one horizontal band per module, which needed a long run
+   * of iterations to read as anything and could not have one: clustering a
+   * frame of a large world costs the better part of a second, so this view
+   * gets a dozen iterations, not a hundred. A dozen columns of blocks joined by
+   * ribbons says more about splitting and merging than a hundred hairlines
+   * would.
+   *
+   * The ribbons are not estimated. A history row already carries `born` and
+   * `joined` — everyone who was not in that module last time — so the agents
+   * carried over from its predecessor are `size - born - joined`, exactly.
+   */
   layout() {
     if (!this.result || !this.w) return null;
     const minLife = Number(this.minLifeEl.value) || 1;
 
-    const byId = new Map();
+    const lives = new Map();
     for (const row of this.result.history) {
-      if (!byId.has(row.id)) byId.set(row.id, []);
-      byId.get(row.id).push(row);
+      if (!lives.has(row.id)) lives.set(row.id, 0);
+      lives.set(row.id, lives.get(row.id) + 1);
     }
-    const kept = [...byId.entries()].filter(([, rows]) => rows.length >= minLife);
-    if (!kept.length) return null;
-    kept.sort((a, b) => a[1][0].iteration - b[1][0].iteration || a[0] - b[0]);
 
-    const iterations = this.result.history.map(r => r.iteration);
-    const lo = Math.min(...iterations), hi = Math.max(...iterations);
-    const pad = { left: 8, right: 8, top: 10, bottom: 22 };
+    // One column per recorded frame, in order.
+    const columns = [];
+    const seen = new Map();
+    for (const row of this.result.history) {
+      const at = `${row.iteration}:${row.phase}`;
+      let column = seen.get(at);
+      if (!column) {
+        column = { iteration: row.iteration, phase: row.phase, blocks: [], total: 0 };
+        seen.set(at, column);
+        columns.push(column);
+      }
+      if (lives.get(row.id) < minLife) continue;
+      column.blocks.push(row);
+      column.total += row.size;
+    }
+    columns.sort((a, b) => (a.iteration - b.iteration) || (a.phase - b.phase));
+    if (columns.length < 2 || !columns.some(c => c.total > 0)) return null;
+
+    // Ordered so ribbons cross as little as possible: the first column by size,
+    // and every column after it by where its predecessor sat. A module with no
+    // predecessor is new and goes to the end.
+    let rank = new Map();
+    columns.forEach((column, index) => {
+      if (index === 0) {
+        column.blocks.sort((a, b) => b.size - a.size);
+      } else {
+        const previous = rank;
+        column.blocks.sort((a, b) =>
+          (previous.has(a.id) ? previous.get(a.id) : Infinity)
+          - (previous.has(b.id) ? previous.get(b.id) : Infinity)
+          || b.size - a.size);
+      }
+      rank = new Map(column.blocks.map((block, i) => [block.id, i]));
+    });
+
+    const pad = { left: 10, right: 10, top: 12, bottom: 24 };
     const width = this.w - pad.left - pad.right;
     const height = this.h - pad.top - pad.bottom;
-    const x = (t) => pad.left + ((t - lo) / Math.max(1, hi - lo)) * width;
-    const row = new Map(kept.map(([id], i) => [id, i]));
-    const y = (i) => pad.top + ((i + 0.5) / kept.length) * height;
-    const thickness = Math.max(1.2, Math.min(9, height / kept.length * 0.72));
-    return { kept, row, x, y, pad, width, height, thickness, lo, hi };
+    const columnWidth = Math.max(6, Math.min(26, width / (columns.length * 2.6)));
+    const at = (i) => pad.left + (columns.length < 2 ? 0.5 : i / (columns.length - 1))
+      * (width - columnWidth);
+
+    // A gap between blocks, so a column reads as several modules rather than
+    // one bar — but never so much that the blocks vanish.
+    for (const column of columns) {
+      const gaps = Math.max(0, column.blocks.length - 1);
+      const gap = Math.min(2, (height * 0.25) / Math.max(1, gaps));
+      const usable = Math.max(1, height - gap * gaps);
+      const scale = column.total > 0 ? usable / column.total : 0;
+      let y = pad.top;
+      for (const block of column.blocks) {
+        block.top = y;
+        block.height = block.size * scale;
+        y += block.height + gap;
+      }
+    }
+
+    return { columns, at, columnWidth, pad, width, height };
   },
 
-  /** Dark when a module keeps its members, bright when it swaps them. */
+  /** A module's colour, from its identity, so it keeps it across columns. */
   colourFor(id, turnover) {
-    let h = (id * 2654435761) >>> 0;
-    h ^= h >>> 15;
-    const hue = (h % 360);
-    const light = 34 + Math.min(1, turnover) * 34;
-    return `hsl(${hue}, ${48 + Math.min(1, turnover) * 34}%, ${light}%)`;
+    const hue = (Math.imul(id ^ 0x9e3779b9, 2654435761) >>> 0) % 360;
+    // Brightness is turnover: a band that stays dark is the same agents, a
+    // bright one is a pattern being carried by different matter each time.
+    const light = 38 + Math.min(1, turnover || 0) * 34;
+    return `hsl(${hue}, 62%, ${light}%)`;
   },
 
   draw() {
@@ -286,65 +357,94 @@ const FlowView = {
       ctx.textAlign = 'center';
       ctx.fillText(this.result ? 'Nothing lasted that long.' : 'No run loaded.',
                    this.w / 2, this.h / 2);
+      ctx.textAlign = 'left';
       return;
     }
 
-    const { kept, row, x, y, thickness } = plan;
-    ctx.lineCap = 'butt';
-    for (const [id, rows] of kept) {
-      const at = y(row.get(id));
-      for (const record of rows) {
-        const wide = thickness * (0.4 + Math.min(1.6, Math.log2(1 + record.size) / 3));
-        ctx.strokeStyle = this.colourFor(id, record.turnover);
-        ctx.lineWidth = id === this.hoveredId ? wide + 2 : wide;
+    const { columns, at, columnWidth } = plan;
+
+    // The ribbons first, underneath the blocks, so a block's edge stays crisp.
+    for (let c = 0; c + 1 < columns.length; c++) {
+      const here = new Map(columns[c].blocks.map(b => [b.id, b]));
+      const leftX = at(c) + columnWidth;
+      const rightX = at(c + 1);
+
+      // Stacked at each end in the same order the blocks are, so several
+      // ribbons leaving one module do not overlap each other.
+      const usedFrom = new Map(), usedTo = new Map();
+      for (const block of columns[c + 1].blocks) {
+        const from = here.get(block.id);
+        if (!from) continue;
+        const carried = Math.max(0, block.size - block.born - block.joined);
+        if (carried <= 0) continue;
+        const scaleFrom = from.height / Math.max(1, from.size);
+        const scaleTo = block.height / Math.max(1, block.size);
+        const a0 = from.top + (usedFrom.get(from.id) || 0);
+        const a1 = a0 + carried * scaleFrom;
+        const b0 = block.top + (usedTo.get(block.id) || 0);
+        const b1 = b0 + carried * scaleTo;
+        usedFrom.set(from.id, (usedFrom.get(from.id) || 0) + carried * scaleFrom);
+        usedTo.set(block.id, (usedTo.get(block.id) || 0) + carried * scaleTo);
+
+        const mid = (leftX + rightX) / 2;
         ctx.beginPath();
-        ctx.moveTo(x(record.iteration) - 1, at);
-        ctx.lineTo(x(record.iteration) + Math.max(1.5, plan.width / 120), at);
-        ctx.stroke();
+        ctx.moveTo(leftX, a0);
+        ctx.bezierCurveTo(mid, a0, mid, b0, rightX, b0);
+        ctx.lineTo(rightX, b1);
+        ctx.bezierCurveTo(mid, b1, mid, a1, leftX, a1);
+        ctx.closePath();
+        ctx.fillStyle = this.colourFor(block.id, block.turnover);
+        ctx.globalAlpha = block.id === this.hoveredId ? 0.55 : 0.22;
+        ctx.fill();
+        ctx.globalAlpha = 1;
       }
     }
 
-    ctx.strokeStyle = 'rgba(190, 200, 215, 0.16)';
-    ctx.lineWidth = 1;
-    ctx.fillStyle = '#6b7c8d';
+    for (let c = 0; c < columns.length; c++) {
+      for (const block of columns[c].blocks) {
+        ctx.fillStyle = this.colourFor(block.id, block.turnover);
+        ctx.globalAlpha = block.id === this.hoveredId ? 1 : 0.92;
+        ctx.fillRect(at(c), block.top, columnWidth, Math.max(1, block.height));
+        ctx.globalAlpha = 1;
+      }
+    }
+
+    ctx.fillStyle = '#8fa3b5';
     ctx.font = '10px ui-monospace, monospace';
     ctx.textAlign = 'center';
-    for (let i = 0; i <= 6; i++) {
-      const t = plan.lo + (plan.hi - plan.lo) * (i / 6);
-      const at = x(t);
-      ctx.beginPath();
-      ctx.moveTo(at, plan.pad.top);
-      ctx.lineTo(at, plan.pad.top + plan.height);
-      ctx.stroke();
-      ctx.fillText(String(Math.round(t)), at, this.h - 7);
+    const step = Math.max(1, Math.round(columns.length / 8));
+    for (let c = 0; c < columns.length; c += step) {
+      ctx.fillText(String(columns[c].iteration), at(c) + columnWidth / 2, this.h - 7);
     }
+    ctx.textAlign = 'left';
   },
 
   hover(event) {
     const plan = this.layout();
     if (!plan) return;
     const box = this.canvas.getBoundingClientRect();
-    const my = event.clientY - box.top;
-    let found = null, gap = Infinity;
-    for (const [id] of plan.kept) {
-      const at = plan.y(plan.row.get(id));
-      if (Math.abs(at - my) < gap) { gap = Math.abs(at - my); found = id; }
+    const mx = event.clientX - box.left, my = event.clientY - box.top;
+
+    // Which block the pointer is inside. A hit test, since a block has an area.
+    let found = null, row = null;
+    for (let c = 0; c < plan.columns.length; c++) {
+      const left = plan.at(c);
+      if (mx < left - 3 || mx > left + plan.columnWidth + 3) continue;
+      for (const block of plan.columns[c].blocks) {
+        if (my >= block.top && my <= block.top + Math.max(2, block.height)) {
+          found = block.id; row = block; break;
+        }
+      }
+      break;
     }
-    if (gap > 8) found = null;
     if (found === this.hoveredId) return;
     this.hoveredId = found;
-
-    if (found === null) {
-      this.readoutEl.textContent = '';
-    } else {
-      const rows = plan.kept.find(([id]) => id === found)[1];
-      const churn = rows.slice(1).reduce((s, r) => s + r.turnover, 0) / Math.max(1, rows.length - 1);
-      const sizes = rows.map(r => r.size);
-      this.readoutEl.textContent =
-        `module ${found} — ${rows.length} frames, from iteration ${rows[0].iteration} `
-        + `to ${rows[rows.length - 1].iteration}, ${Math.min(...sizes)}–${Math.max(...sizes)} `
-        + `agents, ${(churn * 100).toFixed(0)}% of its members replaced per frame`;
-    }
+    this.readoutEl.textContent = row
+      ? `module ${row.id} at iteration ${row.iteration} — ${formatNumber(row.size)} agents, `
+        + `${Math.round(row.turnover * 100)}% of them new since the frame before `
+        + `(${formatNumber(row.born)} born, ${formatNumber(row.joined)} moved in, `
+        + `${formatNumber(row.left)} moved out, ${formatNumber(row.died)} gone)`
+      : '';
     this.draw();
   }
 };
