@@ -53,13 +53,21 @@ def forest(frames: Iterable[Dict[str, Any]], limit: int = DEFAULT_LIMIT) -> Dict
     nodes: Dict[int, Dict[str, Any]] = {}
     first = last = None
 
-    for frame in frames:
+    # One column per frame, in the order they were read. A Muller plot needs
+    # each genotype's abundance *over time*, not just its peak — the whole
+    # picture is bands whose thickness is a share of the population at that
+    # moment, so the counts have to travel with the tree.
+    columns: List[Dict[str, int]] = []
+
+    for column, frame in enumerate(frames):
         when = int(frame.get("iteration", 0))
         first = when if first is None else min(first, when)
         last = when if last is None else max(last, when)
 
         ids = frame.get("brain_ids") or []
         parents = frame.get("parent_brain_ids") or []
+        columns.append({"iteration": when, "phase": int(frame.get("phase", 0)),
+                        "population": len(ids)})
 
         here: Dict[int, int] = {}
         for position, raw in enumerate(ids):
@@ -71,6 +79,11 @@ def forest(frames: Iterable[Dict[str, Any]], limit: int = DEFAULT_LIMIT) -> Dict
                 node = nodes[genotype] = {
                     "id": genotype, "parent": parent,
                     "born": when, "died": when, "peak": 0, "span": 0,
+                    # Where its run of counts starts, and the run itself. Stored
+                    # as a run rather than a full-width row because a genotype
+                    # here lives one or two frames out of hundreds, and a dense
+                    # matrix would be almost entirely zeros.
+                    "at": column, "counts": [],
                 }
             node["died"] = when
 
@@ -79,6 +92,12 @@ def forest(frames: Iterable[Dict[str, Any]], limit: int = DEFAULT_LIMIT) -> Dict
             if count > node["peak"]:
                 node["peak"] = count
             node["span"] += 1
+            # Zero-filled across any column it was absent for, so `at` plus the
+            # position in `counts` is always the column a number belongs to.
+            gap = column - (node["at"] + len(node["counts"]))
+            if gap > 0:
+                node["counts"].extend([0] * gap)
+            node["counts"].append(count)
 
     total = len(nodes)
     ranked = sorted(nodes.values(), key=lambda n: (n["span"], n["peak"]), reverse=True)
@@ -86,6 +105,7 @@ def forest(frames: Iterable[Dict[str, Any]], limit: int = DEFAULT_LIMIT) -> Dict
 
     return {
         "nodes": kept,
+        "columns": columns,
         "total": total,
         "shown": len(kept),
         "longestSpan": max((n["span"] for n in ranked), default=0),

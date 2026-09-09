@@ -172,9 +172,18 @@ const Lineage = {
 
     // A view that quietly draws the largest two thousand of a million is
     // lying by omission, so the count that was left out is part of the note
-    // rather than a footnote nobody reads.
+    // rather than a footnote nobody reads. The bands are normalised to fill
+    // the height, so the share of the population they actually account for
+    // has to be said too — otherwise a full-height picture of 4% of the world
+    // would read as a picture of the world.
     if (f.shown < f.total) {
-      note += `, showing the ${formatNumber(f.shown)} longest-lived`;
+      const plan = this.layout();
+      const covered = plan && plan.covered.length
+        ? plan.covered.reduce((a, b) => a + b, 0)
+          / Math.max(1, f.columns.reduce((a, c) => a + c.population, 0))
+        : null;
+      note += `, showing the ${formatNumber(f.shown)} longest-lived`
+        + (covered !== null ? ` — ${(covered * 100).toFixed(0)}% of the agents alive` : '');
     }
     note += `. ${formatNumber(f.roots.length)} of those have no parent here`;
 
@@ -269,6 +278,7 @@ const Lineage = {
 
     return {
       nodes, order, roots, children,
+      columns: reply.columns || [],
       firstIteration: reply.firstIteration,
       lastIteration: reply.lastIteration,
       total: reply.total,
@@ -330,10 +340,24 @@ const Lineage = {
     this.h = box.height;
   },
 
-  /** The genotypes worth drawing, and where each one sits. */
+  /**
+   * The bands, stacked, filling the height at every column.
+   *
+   * A Muller plot: each genotype is a ribbon whose thickness at a moment is its
+   * share of the population then, and the ribbons are stacked in depth-first
+   * order so a lineage and its descendants stay together and a clade reads as
+   * one widening or narrowing region. Ribbons tilt because their neighbours
+   * below them grow and shrink, which is what makes descent visible as
+   * movement rather than as a drawn arrow.
+   *
+   * It replaces a chart of one thin line per genotype. That was legible at
+   * twenty genotypes and a wall of hair at two thousand, and it gave no sense
+   * at all of who was actually winning — a line said a genotype existed, not
+   * that it held nine tenths of the world.
+   */
   layout() {
     const f = this.forest;
-    if (!f || !this.w) return null;
+    if (!f || !this.w || !f.columns.length) return null;
 
     const minLife = Number(this.minLifeEl.value) || 1;
     const shown = f.order.filter(n => n.span >= minLife);
@@ -342,16 +366,37 @@ const Lineage = {
     const pad = { left: 8, right: 8, top: 10, bottom: 22 };
     const width = this.w - pad.left - pad.right;
     const height = this.h - pad.top - pad.bottom;
-    const span = Math.max(1, f.lastIteration - f.firstIteration);
-    const x = (t) => pad.left + ((t - f.firstIteration) / span) * width;
-    const rows = shown.length;
-    const y = (row) => pad.top + ((row + 0.5) / rows) * height;
+    const columns = f.columns;
+    const at = (i) => pad.left + (columns.length < 2 ? 0.5 : i / (columns.length - 1)) * width;
 
-    // Rows are renumbered over what is actually shown, so a filter closes the
-    // gaps rather than leaving the picture full of holes.
-    const row = new Map(shown.map((n, i) => [n.id, i]));
-    const thickness = Math.max(0.6, Math.min(3.2, height / rows * 0.8));
-    return { shown, x, y, row, pad, width, height, thickness, rows };
+    // What each shown genotype held in each column.
+    const held = (node, column) => {
+      const k = column - node.at;
+      return (k >= 0 && k < node.counts.length) ? node.counts[k] : 0;
+    };
+
+    // Stacked bottom to top in the order the depth-first walk produced, so
+    // children sit directly against their parent.
+    const bands = shown.map(node => ({ node, lower: [], upper: [] }));
+    const covered = [];
+    for (let c = 0; c < columns.length; c++) {
+      let running = 0;
+      for (const band of bands) running += held(band.node, c);
+      covered.push(running);
+      // Normalised against what is drawn rather than the true population, so
+      // the picture fills the height; how much of the population that is gets
+      // its own line in the note rather than a silently short column.
+      const scale = running > 0 ? height / running : 0;
+      let y = pad.top + height;
+      for (const band of bands) {
+        const size = held(band.node, c) * scale;
+        band.lower.push(y);
+        y -= size;
+        band.upper.push(y);
+      }
+    }
+
+    return { shown, bands, columns, at, pad, width, height, covered };
   },
 
   draw() {
@@ -366,55 +411,59 @@ const Lineage = {
       ctx.textAlign = 'center';
       ctx.fillText(this.forest ? 'Nothing lasted that long.' : 'No run loaded.',
                    this.w / 2, this.h / 2);
+      ctx.textAlign = 'left';
       return;
     }
 
-    const f = this.forest;
-    const { x, y, row, thickness } = plan;
+    const { bands, columns, at, pad, height } = plan;
 
-    // The joins first, underneath, so a dense band reads as lines rather than
-    // as a mesh.
-    ctx.lineWidth = 0.7;
-    for (const node of plan.shown) {
-      const parent = f.nodes.get(node.parent);
-      if (!parent || !row.has(parent.id)) continue;
-      ctx.strokeStyle = this.css(node.colour, 0.38);
+    // Each genotype is one filled ribbon: along its upper edge and back along
+    // its lower one. Drawn as a polygon rather than a stack of rectangles so
+    // the edges tilt, which is what shows a lineage taking over or being
+    // squeezed out.
+    for (const band of bands) {
+      let first = -1, last = -1;
+      for (let c = 0; c < columns.length; c++) {
+        if (band.lower[c] - band.upper[c] > 0.02) { if (first < 0) first = c; last = c; }
+      }
+      if (first < 0) continue;
+
+      // One column either side, so a genotype that appears and vanishes is a
+      // lens rather than a rectangle with vertical walls.
+      const from = Math.max(0, first - 1), to = Math.min(columns.length - 1, last + 1);
+
       ctx.beginPath();
-      ctx.moveTo(x(node.born), y(row.get(parent.id)));
-      ctx.lineTo(x(node.born), y(row.get(node.id)));
+      ctx.moveTo(at(from), band.upper[from]);
+      for (let c = from + 1; c <= to; c++) ctx.lineTo(at(c), band.upper[c]);
+      for (let c = to; c >= from; c--) ctx.lineTo(at(c), band.lower[c]);
+      ctx.closePath();
+      ctx.fillStyle = this.css(band.node.colour,
+                               band.node === this.hovered ? 1 : 0.95);
+      ctx.fill();
+      // A hairline of the same hue, so neighbouring bands of a family are told
+      // apart without a black grid cutting the picture up.
+      ctx.strokeStyle = this.css(band.node.colour, 0.55);
+      ctx.lineWidth = 0.5;
       ctx.stroke();
     }
 
-    // Then each genotype, from the frame it appeared in to the last one it was
-    // seen in, thickening with how many agents were carrying it.
-    ctx.lineCap = 'round';
-    for (const node of plan.shown) {
-      const at = y(row.get(node.id));
-      const wide = thickness * (1 + Math.min(2.2, Math.log2(1 + node.peak)));
-      ctx.strokeStyle = this.css(node.colour, node === this.hovered ? 1 : 0.92);
-      ctx.lineWidth = node === this.hovered ? wide + 2 : wide;
-      ctx.beginPath();
-      ctx.moveTo(x(node.born), at);
-      ctx.lineTo(Math.max(x(node.died), x(node.born) + 1), at);
-      ctx.stroke();
-    }
-
-    // The time axis.
-    ctx.strokeStyle = 'rgba(190, 200, 215, 0.18)';
+    // The time axis, over the top.
+    ctx.strokeStyle = 'rgba(190, 200, 215, 0.16)';
     ctx.lineWidth = 1;
-    ctx.fillStyle = '#6b7c8d';
+    ctx.fillStyle = '#8fa3b5';
     ctx.font = '10px ui-monospace, monospace';
     ctx.textAlign = 'center';
-    const ticks = 6;
+    const ticks = Math.min(8, columns.length - 1);
     for (let i = 0; i <= ticks; i++) {
-      const t = f.firstIteration + (f.lastIteration - f.firstIteration) * (i / ticks);
-      const at = x(t);
+      const c = Math.round((i / Math.max(1, ticks)) * (columns.length - 1));
+      const x = at(c);
       ctx.beginPath();
-      ctx.moveTo(at, plan.pad.top);
-      ctx.lineTo(at, plan.pad.top + plan.height);
+      ctx.moveTo(x, pad.top);
+      ctx.lineTo(x, pad.top + height);
       ctx.stroke();
-      ctx.fillText(String(Math.round(t)), at, this.h - 7);
+      ctx.fillText(String(columns[c].iteration), x, this.h - 7);
     }
+    ctx.textAlign = 'left';
   },
 
   hover(event) {
@@ -424,21 +473,28 @@ const Lineage = {
     const my = event.clientY - box.top;
     const mx = event.clientX - box.left;
 
-    let best = null, bestGap = Infinity;
-    for (const node of plan.shown) {
-      const at = plan.y(plan.row.get(node.id));
-      const gap = Math.abs(at - my);
-      if (gap < bestGap && mx >= plan.x(node.born) - 2 && mx <= plan.x(node.died) + 2) {
-        best = node;
-        bestGap = gap;
+    // Which band the pointer is inside, at the column it is over. A hit test
+    // rather than a nearest-line search, because a band has an area now.
+    const span = plan.width || 1;
+    const c = Math.max(0, Math.min(plan.columns.length - 1,
+      Math.round(((mx - plan.pad.left) / span) * (plan.columns.length - 1))));
+
+    let found = null;
+    for (const band of plan.bands) {
+      if (my <= band.lower[c] && my >= band.upper[c] && band.lower[c] - band.upper[c] > 0.5) {
+        found = band.node;
+        break;
       }
     }
-    const found = bestGap < 6 ? best : null;
     if (found === this.hovered) return;
     this.hovered = found;
+    const at = found ? plan.columns[c] : null;
+    const share = found
+      ? (found.counts[c - found.at] || 0) / Math.max(1, plan.covered[c]) : 0;
     this.readoutEl.textContent = found
       ? `genotype ${found.id} — from iteration ${found.born} to ${found.died}, `
-        + `held by up to ${formatNumber(found.peak)} agents, `
+        + `${(share * 100).toFixed(1)}% of what is drawn at iteration ${at.iteration}, `
+        + `peak ${formatNumber(found.peak)} agents, `
         + `${found.depth} mutation${found.depth === 1 ? '' : 's'} from its founder`
       : '';
     this.draw();
