@@ -601,6 +601,9 @@ const Diagrams = {
   async refresh() {
     if (!this.canvas) return;
     const token = (this.token = (this.token || 0) + 1);
+    // What the tab was showing when this started. Checked between requests, so
+    // walking away stops the work rather than leaving it running unseen.
+    const epoch = Research.epoch;
 
     if (this.tab.kind === 'frame') {
       if (!this.runId) { this.frames = null; this.say('Choose a simulation above.'); this.draw(); return; }
@@ -664,7 +667,7 @@ const Diagrams = {
       this.say('Reading the run…');
       try {
         await SeriesLoad.climb(id, {
-          cancelled: () => this.token !== token,
+          cancelled: () => this.token !== token || Research.stale(epoch),
           onStep: payload => {
             this.series.set(id, payload);
             this.draw();

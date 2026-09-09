@@ -36,11 +36,15 @@ const Lineage = {
   LIMIT: 2000,
 
   phase: 'all',
-  // Frames times agents, roughly. A big world is tens of thousands of agents a
-  // frame, and a hundred iterations of those is millions of genotypes to lay
-  // out and a picture nobody can read — so the window shortens itself once the
-  // first batch has said how big this world is.
-  MAX_SIGHTINGS: 400000,
+
+  // No sighting budget: the reply is already bounded by LIMIT above, so a wide
+  // window costs reading time on the server and nothing on the wire. It used to
+  // be capped at 400,000 agent-sightings, which on a 35,000-agent world is
+  // eleven frames — so "Show 100 iterations" quietly drew five of them and said
+  // nothing. A control that is overruled without a word is worse than no
+  // control. Reading two hundred frames takes a few seconds; the note says how
+  // far it has got while it does.
+  MAX_SIGHTINGS: 0,
   // Above this share of parentless genotypes the run predates brain ids naming
   // a genotype, and its genealogy cannot be rebuilt from what it recorded.
   ROOTS_SUSPECT: 0.25,

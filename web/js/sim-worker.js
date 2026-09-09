@@ -397,7 +397,7 @@ const handlers = {
         read.push(frame);
         seen += (frame.brain_ids || []).length;
       }
-      if (seen >= sightings) break;
+      if (sightings && seen >= sightings) break;
     }
     const answer = call('gol_browser.WORLDS.lineage', [read, limit]);
     answer.frames = read.length;

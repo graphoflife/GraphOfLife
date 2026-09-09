@@ -234,6 +234,9 @@ const Theses = {
     // Each load supersedes the one before it, so a climb that is still going
     // when the run changes stops drawing into the new one's chart.
     const token = (this.token = (this.token || 0) + 1);
+    // What the tab was showing when this started. Checked between requests, so
+    // walking away stops the work rather than leaving it running unseen.
+    const epoch = Research.epoch;
     this.runId = runId;
     this.rows = null;
     this.strain = null;
@@ -248,7 +251,7 @@ const Theses = {
     this.draw();
     try {
       await SeriesLoad.climb(runId, {
-        cancelled: () => this.token !== token,
+        cancelled: () => this.token !== token || Research.stale(epoch),
         onStep: (data, done) => {
           this.absorb(data);
           const at = SeriesLoad.fraction(data);

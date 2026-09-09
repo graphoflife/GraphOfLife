@@ -46,6 +46,15 @@ const Research = {
   runId: null,
   mode: 'lineage',
 
+  // Bumped whenever the visible mode or the chosen run changes. A view checks
+  // it between requests and stops asking for more the moment it is no longer
+  // the thing on screen — otherwise leaving a tab left a summary of a large run
+  // grinding away behind it, and the page felt stuck because it was.
+  epoch: 0,
+
+  /** True once whatever a caller started is no longer what is being looked at. */
+  stale(at) { return at !== this.epoch; },
+
   /** The modes that are about a run, which is every mode that has a view. */
   get runModes() {
     return Object.values(this.MODES).filter(m => m.view);
@@ -116,6 +125,7 @@ const Research = {
 
   show(mode) {
     this.mode = mode;
+    this.epoch++;
     const group = this.group;
 
     for (const button of this.groupBar.querySelectorAll('button')) {
@@ -201,6 +211,7 @@ const Research = {
 
   async open(runId) {
     this.runId = runId || null;
+    this.epoch++;
     await this.view?.load(this.runId);
   }
 };

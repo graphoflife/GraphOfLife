@@ -381,7 +381,8 @@ class Handler(BaseHTTPRequestHandler):
                 count = max(1, int(query.get("count", ["200"])[0] or 200))
                 limit = max(1, int(query.get("limit", [str(gol_lineage.DEFAULT_LIMIT)])[0]
                                    or gol_lineage.DEFAULT_LIMIT))
-                budget = max(1, int(query.get("sightings", ["400000"])[0] or 400000))
+                # Zero means no budget: read the whole window.
+                budget = int(query.get("sightings", ["0"])[0] or 0)
                 phase = (query.get("phase", ["all"])[0] or "all")
 
                 # Stop once enough agents have been seen. A window measured in
@@ -397,7 +398,7 @@ class Handler(BaseHTTPRequestHandler):
                         continue
                     read.append(frame)
                     seen += len(frame.get("brain_ids") or [])
-                    if seen >= budget:
+                    if budget and seen >= budget:
                         break
 
                 answer = gol_lineage.forest(read, limit)
