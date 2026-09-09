@@ -66,6 +66,22 @@ const Diagrams = {
   series: new Map(),
   frames: null,
 
+  // The fields a per-node or per-edge metric is computed from. A frame also
+  // carries the cleanup report and the winners and pruned edges beside the
+  // allocations, and none of those is plotted here.
+  FRAME_FIELDS: ['iteration', 'phase', 'ids', 'tokens', 'edges', 'delta',
+                 'ages', 'brain_ids', 'parent_brain_ids', 'decisions.allocations'],
+
+  // Stop pooling once this many values have been gathered. A span measured in
+  // iterations is a very different amount of data at sixty agents and at forty
+  // thousand — twenty iterations of the larger is tens of megabytes fetched to
+  // draw a histogram that thirty bins could not tell apart from two.
+  MAX_POOLED: 400000,
+
+  // Frames per request. The backends cap a batch, so a long span is several
+  // requests rather than one silently truncated one.
+  BATCH: 64,
+
   // ---- setup ------------------------------------------------------------
 
   init() {
@@ -609,11 +625,29 @@ const Diagrams = {
 
       this.say('Reading frames…');
       try {
-        const reply = await API.getFrames(this.runId, from - lead, count + lead, null);
-        if (this.token !== token) return;
-        const read = reply.frames || [];
+        // A batch is capped server-side, so a long span is several requests
+        // rather than one truncated one. Reading them in order also means each
+        // frame can be handed the one before it, which is what the
+        // "before phase" metrics are computed against.
+        const wanted = count + lead;
+        const read = [];
+        let pooled = 0;
+        for (let at = 0; at < wanted; at += this.BATCH) {
+          const size = Math.min(this.BATCH, wanted - at);
+          const reply = await API.getFrames(this.runId, from - lead + at, size,
+                                            this.FRAME_FIELDS, this.MAX_POOLED - pooled);
+          if (this.token !== token) return;
+          const batch = reply.frames || [];
+          read.push(...batch);
+          pooled += batch.reduce((n, f) => n + (f.ids || []).length, 0);
+          this.say(`Reading frames… ${formatNumber(read.length)} of `
+                   + `${formatNumber(wanted)}`);
+          // Either the run ran out or the value budget did; both mean stop.
+          if (batch.length < size || pooled >= this.MAX_POOLED) break;
+        }
         for (let i = 1; i < read.length; i++) read[i].previous = read[i - 1];
         this.frames = read.slice(lead);
+        this.asked = count;
       } catch (err) {
         if (this.token !== token) return;
         this.say(`Could not read the frames: ${err.message}`);
@@ -735,19 +769,48 @@ const Diagrams = {
       }
       const phases = series.phase || [], iterations = series.iteration || [];
       const usable = v => v !== null && v !== undefined && Number.isFinite(v);
-      const points = [];
+      let points = [];
       for (let i = 0; i < xs.length; i++) {
         if (s.phase !== 'all' && String(phases[i]) !== s.phase) continue;
         if (!usable(xs[i]) || !usable(ys[i])) continue;
         points.push({ x: xs[i], y: ys[i], t: iterations[i] });
       }
+
+      // Some pairs are never recorded on the same frame — births belong to the
+      // reproduction phase and revolutions to the game — so on a frame either
+      // one or the other is missing and pairing them frame by frame gives
+      // nothing at all. Falling back to one point per *iteration* pairs the two
+      // halves of it, which is the only pairing those two have.
+      //
+      // The phase filter is deliberately ignored in that branch: keeping it
+      // would leave one of the two with nothing, and being here at all means
+      // they live on opposite halves of an iteration.
+      let pairing = 'one point per frame';
+      if (points.length < 2) {
+        const byIteration = new Map();
+        for (let i = 0; i < xs.length; i++) {
+          const at = iterations[i];
+          let slot = byIteration.get(at);
+          if (!slot) { slot = { x: null, y: null, t: at }; byIteration.set(at, slot); }
+          if (slot.x === null && usable(xs[i])) slot.x = xs[i];
+          if (slot.y === null && usable(ys[i])) slot.y = ys[i];
+        }
+        const paired = [...byIteration.values()]
+          .filter(p => p.x !== null && p.y !== null)
+          .sort((a, b) => a.t - b.t);
+        if (paired.length >= 2) {
+          points = paired;
+          pairing = 'one point per iteration, across its phases';
+        }
+      }
+
       drawTrajectory(this.canvas, points, {
         ...ink, logX: s.logX, logY: s.logY,
         xLabel: this.nameOf(s.x), yLabel: this.nameOf(s.y),
-        footer: `${formatNumber(points.length)} frames · colour is time`,
+        footer: `${formatNumber(points.length)} points · colour is time`,
         chrome: this.chromeFor(this.nameOf(s.x), this.nameOf(s.y))
       });
-      this.say(`${formatNumber(points.length)} points`
+      this.say(`${formatNumber(points.length)} points, ${pairing}`
         + (payload.complete ? '' : ' — still refining'));
       return;
     }
@@ -762,8 +825,16 @@ const Diagrams = {
       ? `${formatNumber(this.frames[0].iteration)}–`
         + `${formatNumber(this.frames[this.frames.length - 1].iteration)}`
       : '—';
+    // Say when the span was cut short, rather than quietly drawing less than
+    // was asked for and letting the reader believe otherwise. Two things can
+    // cut it: the value budget, or simply running out of run.
+    const short = this.asked && this.frames.length < this.asked
+      ? (seen >= this.MAX_POOLED * 0.95
+         ? ` — stopped at ${formatNumber(this.MAX_POOLED)} values`
+         : ` of ${formatNumber(this.asked)} asked for`)
+      : '';
     return `iterations ${at}, ${formatNumber(this.frames.length)} frames, `
-      + `${formatNumber(seen)} values pooled`;
+      + `${formatNumber(seen)} values pooled${short}`;
   },
 
   /**
