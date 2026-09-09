@@ -865,6 +865,132 @@ def test_the_cut_risk_is_recorded_before_the_cull_not_after():
 
 
 # ---------------------------------------------------------------------------
+# Lightning: circulating token flow
+# ---------------------------------------------------------------------------
+
+def _flow(triples):
+    """A frame carrying just the allocations, from (source, target, tokens)."""
+    by = {}
+    for source, target, tokens in triples:
+        by.setdefault(source, {"agent": source, "targets": [], "alloc": []})
+        by[source]["targets"].append(target)
+        by[source]["alloc"].append(tokens)
+    return {"decisions": {"allocations": list(by.values())}}
+
+
+def test_a_long_loop_is_worth_far_more_than_short_ones():
+    """
+    The whole point of squaring the hops, checked against the same tokens.
+
+    Ten tokens round one ten-hop ring and ten tokens round three triangles are
+    the same amount of flow. If the score did not distinguish them it would be
+    measuring volume rather than structure, which is what `cyclingShare`
+    already does.
+    """
+    import gol_lightning
+
+    ring = gol_lightning.lightning(_flow([(i, (i + 1) % 10, 1) for i in range(10)]))
+    triangles = []
+    for base in (0, 3, 6):
+        triangles += [(base, base + 1, 1), (base + 1, base + 2, 1), (base + 2, base, 1)]
+    tri = gol_lightning.lightning(_flow(triangles))
+
+    assert ring["lightningScore"] == 100, f"one ten-hop loop is 10², got {ring['lightningScore']}"
+    assert tri["lightningScore"] == 27, f"three three-hop loops is 3x3², got {tri['lightningScore']}"
+    assert ring["lightningLongest"] == 10 and tri["lightningLongest"] == 3
+    # Both are entirely circulating: the difference is shape, not volume.
+    assert ring["cyclingShare"] == 1.0 and tri["cyclingShare"] == 1.0
+
+
+def test_more_tokens_round_the_same_ring_is_more_lightnings():
+    """Two tokens on every edge of a ten-ring is two loops, not one heavier."""
+    import gol_lightning
+
+    got = gol_lightning.lightning(_flow([(i, (i + 1) % 10, 2) for i in range(10)]))
+    assert got["lightningScore"] == 200, got["lightningScore"]
+    assert got["lightningLongest"] == 10
+
+
+def test_one_way_transport_has_no_lightning_and_shows_as_imbalance():
+    """
+    A line has nothing to find, and says so twice over.
+
+    The score is zero because there is no loop, and the imbalance is above zero
+    because conservation forbids one — which is the half of the answer that
+    needs no heuristic and is what makes the zero trustworthy.
+    """
+    import gol_lightning
+
+    got = gol_lightning.lightning(_flow([(i, i + 1, 5) for i in range(6)]))
+    assert got["lightningScore"] == 0
+    assert got["cyclingShare"] == 0
+    assert got["flowImbalance"] > 0, "a line strands flow at both ends"
+
+
+def test_netting_removes_sloshing_and_keeps_real_circuits():
+    """
+    The distinction the net measure exists to make.
+
+    Two neighbours trading tokens both ways is a two-hop loop under the gross
+    reading and nothing at all once reciprocity is cancelled — which is the
+    honest answer, since nothing went anywhere. A genuine ring is untouched.
+    And a ring buried in reciprocal noise keeps exactly the ring.
+    """
+    import gol_lightning
+
+    sloshing = gol_lightning.lightning(_flow([(0, 1, 5), (1, 0, 3)]))
+    assert sloshing["lightningScore"] == 12, "three tokens go round and back"
+    assert sloshing["netLightningScore"] == 0, "but none of it went anywhere"
+    assert sloshing["netFlowShare"] == 0.25, "two of eight tokens survive"
+
+    ring = gol_lightning.lightning(_flow([(i, (i + 1) % 10, 1) for i in range(10)]))
+    assert ring["netLightningScore"] == ring["lightningScore"] == 100
+    assert ring["netFlowShare"] == 1.0, "nothing to cancel in a one-way ring"
+
+    noisy = _flow([(i, (i + 1) % 10, 3) for i in range(10)]
+                  + [((i + 1) % 10, i, 2) for i in range(10)])
+    buried = gol_lightning.lightning(noisy)
+    assert buried["lightningScore"] == 500, buried["lightningScore"]
+    assert buried["netLightningScore"] == 100, (
+        "netting should leave the ring and nothing else, got "
+        f"{buried['netLightningScore']}")
+    assert buried["netLightningLongest"] == 10
+
+
+def test_the_bracket_never_closes_the_wrong_way_round():
+    """
+    Circulation cannot exceed what conservation permits.
+
+    `cyclingShare` is a lower bound found by searching and `flowImbalance` an
+    exact upper bound found by counting, so the first can never be larger than
+    one minus the second. If it were, one of the two would be wrong, and there
+    would be no telling which.
+    """
+    import gol_lightning
+
+    world = new_world(SimConfig(total_tokens=800, n_nodes=40, k_neighbors=4,
+                                seed=6, hidden_layers=[6]))
+    seen = 0
+    for _ in range(12):
+        for frame in world.step(record_decisions=True):
+            got = gol_lightning.lightning(frame)
+            if got["lightningScore"] is None:
+                continue          # a reproduction phase moves nothing on links
+            seen += 1
+            assert got["cyclingShare"] <= 1 - got["flowImbalance"] + 1e-9, (
+                f"circulating {got['cyclingShare']} but only "
+                f"{1 - got['flowImbalance']} is permitted")
+            assert 0 <= got["cyclingShare"] <= 1
+            assert got["lightningScore"] >= 0
+            # Netting cannot invent circulation, and cannot change a balance,
+            # so the same ceiling holds and the net score is never the larger.
+            assert got["netCyclingShare"] <= 1 - got["flowImbalance"] + 1e-9
+            assert got["netLightningScore"] <= got["lightningScore"]
+            assert got["netLightningLongest"] <= got["lightningLongest"]
+    assert seen >= 6, f"only {seen} game phases carried any flow"
+
+
+# ---------------------------------------------------------------------------
 # The spectral gap: how hard the graph is to cut in half
 # ---------------------------------------------------------------------------
 

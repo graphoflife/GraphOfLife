@@ -66,7 +66,7 @@ DRIVER = r"""
 const fs = require('fs');
 const [framesPath, root] = process.argv.slice(2);
 
-const sources = ['colormaps.js', 'metrics.js', 'graphstats.js', 'stats.js']
+const sources = ['colormaps.js', 'metrics.js', 'graphstats.js', 'lightning.js', 'stats.js']
   .map(name => fs.readFileSync(`${root}/web/js/${name}`, 'utf8')).join('\n');
 const FrameMetrics = new Function('window', sources + '; return FrameMetrics;')(
   { devicePixelRatio: 1 }

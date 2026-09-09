@@ -463,6 +463,9 @@ alternating column is no result.**
 | `coreShare` | fraction left after peeling degree-1 nodes until none remain: the 2-core against the whiskers | post-cleanup graph |
 | `ricciCurvature` | the `r²` term the ball-growth fit was discarding | post-cleanup graph |
 | `spectralGap` | λ₂ of the normalised Laplacian — one number for how hard the population is to cut in two | largest component |
+| `lightningScore`, `cyclingShare`, `lightningLongest` | how much of a Blotto phase's token flow goes round in closed loops, Σ hops² and the share of tokens in them | game-phase allocations |
+| `netLightningScore`, `netCyclingShare`, `netLightningLongest` | the same on flow with reciprocal amounts cancelled, so no two-hop loop can exist and every circuit is real | game-phase allocations |
+| `flowImbalance`, `netFlowShare` | the exact ceiling circulation lives under, and how much flow survives cancellation | game-phase allocations |
 
 `bridge_splits()` and `two_core_size()` live in `GraphOfLifeSimple.py` because
 the engine needs them on the live graph, and `gol_series` imports them rather

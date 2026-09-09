@@ -84,6 +84,14 @@ Object.assign(Viewer, {
     cutRiskBefore: 'Worst cut, pre-cull',
     coreShare: 'Core share',
     spectralGap: 'Spectral gap \u03bb\u2082',
+    lightningScore: 'Lightning score',
+    cyclingShare: 'Tokens circulating',
+    lightningLongest: 'Longest lightning',
+    flowImbalance: 'Flow imbalance',
+    netLightningScore: 'Net lightning score',
+    netCyclingShare: 'Net tokens circulating',
+    netLightningLongest: 'Longest net lightning',
+    netFlowShare: 'Flow surviving cancellation',
     triangles: 'Triangles',
     transitivity: 'Clustering',
     dimension: 'Dimension',
@@ -139,6 +147,8 @@ Object.assign(Viewer, {
       'gini', 'topDecileShare', 'tokenEntropy', 'tokenEvenness',
       'maxTokenAdded', 'maxTokenLost', 'gainers', 'losers',
       'starved', 'orphaned', 'redistributed', 'cutRiskBefore',
+      'lightningScore', 'cyclingShare', 'lightningLongest', 'flowImbalance',
+      'netLightningScore', 'netCyclingShare', 'netLightningLongest', 'netFlowShare',
       'distinctBrains', 'brainDiversity', 'distinctParents'
     ] },
     { key: 'reproduction', label: 'Reproduction', open: true, keys: [
@@ -298,6 +308,22 @@ Object.assign(Viewer, {
     if (s.orphaned !== null) cells.orphaned = [this.STAT_LABELS.orphaned, withShare(s.orphaned)];
     if (s.cutRiskBefore !== null && s.cutRiskBefore !== undefined) {
       cells.cutRiskBefore = [this.STAT_LABELS.cutRiskBefore, pct(s.cutRiskBefore)];
+    }
+    // Only a game phase moves tokens across links, so these are absent on a
+    // reproduction frame rather than zero.
+    if (s.lightningScore !== null && s.lightningScore !== undefined) {
+      cells.lightningScore = [this.STAT_LABELS.lightningScore,
+                              formatNumber(s.lightningScore)];
+      cells.cyclingShare = [this.STAT_LABELS.cyclingShare, pct(s.cyclingShare)];
+      cells.lightningLongest = [this.STAT_LABELS.lightningLongest,
+                                formatNumber(s.lightningLongest)];
+      cells.flowImbalance = [this.STAT_LABELS.flowImbalance, pct(s.flowImbalance)];
+      cells.netLightningScore = [this.STAT_LABELS.netLightningScore,
+                                 formatNumber(s.netLightningScore)];
+      cells.netCyclingShare = [this.STAT_LABELS.netCyclingShare, pct(s.netCyclingShare)];
+      cells.netLightningLongest = [this.STAT_LABELS.netLightningLongest,
+                                   formatNumber(s.netLightningLongest)];
+      cells.netFlowShare = [this.STAT_LABELS.netFlowShare, pct(s.netFlowShare)];
     }
     if (s.redistributed !== null) cells.redistributed = [this.STAT_LABELS.redistributed, formatNumber(s.redistributed)];
 

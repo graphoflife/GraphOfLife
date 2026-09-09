@@ -667,6 +667,10 @@ class FrameMetrics {
       boxDimension: null, boxDimensionR2: null,
       cycleRank: null, loopDensity: null, bridges: null, triangles: null,
       cutRisk: null, coreShare: null, spectralGap: null, ricciCurvature: null,
+      lightningScore: null, cyclingShare: null,
+      lightningLongest: null, flowImbalance: null,
+      netLightningScore: null, netCyclingShare: null,
+      netLightningLongest: null, netFlowShare: null,
       transitivity: null, degreeEntropy: null, degreeEvenness: null,
       radius: null, diameter: null, meanPathLength: null,
       tokenEntropy: null, tokenEvenness: null, dimension: null, components: null,
@@ -783,6 +787,10 @@ class FrameMetrics {
       out.transitivity = GraphStats.transitivity(f.ids, st.adj, st.triangles.total);
       out.dimension = st.dimension.estimate;
       out.ricciCurvature = st.dimension.ricciCurvature;
+
+      // Circulating token flow. Only a game phase allocates across links,
+      // so a reproduction frame has no lightning and says so with nulls.
+      Object.assign(out, Lightning.of(f));
       out.radius = st.distances.radius;
       out.diameter = st.distances.diameter;
       out.meanPathLength = st.distances.meanPathLength;

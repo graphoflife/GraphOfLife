@@ -63,7 +63,8 @@ WEB_DIR = os.path.join(BASE_DIR, "web")
 # arbitrary files out of the project. tests/test_engine.py checks it against
 # build_site.sh so the two cannot drift.
 SHIPPED_PY = ("GraphOfLifeSimple.py", "gol_config.py", "gol_series.py",
-              "gol_lineage.py", "gol_spectral.py", "explain_minimal.py")
+              "gol_lineage.py", "gol_spectral.py", "gol_lightning.py",
+              "explain_minimal.py")
 
 # Documents the page renders, which live outside web/ because they are written
 # for a reader with a text editor first and the site second. Same problem and

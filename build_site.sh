@@ -29,7 +29,7 @@ find "${out}" -name '__pycache__' -type d -prune -exec rm -rf {} +
 
 # The engine, verbatim. Not a copy kept in step by hand: these are the files
 # the desktop version runs, and the browser imports exactly them.
-for f in GraphOfLifeSimple.py gol_config.py gol_series.py gol_lineage.py gol_spectral.py explain_minimal.py; do
+for f in GraphOfLifeSimple.py gol_config.py gol_series.py gol_lineage.py gol_spectral.py gol_lightning.py explain_minimal.py; do
   cp "${here}/${f}" "${out}/py/${f}"
 done
 

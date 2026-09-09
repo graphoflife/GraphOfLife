@@ -646,6 +646,31 @@ changes survival not at all. **How finely an agent can state a preference is
 not currently what is being selected on** — consistent with §3.1.
 
 ---
+### A.9 Lightning — circulating token flow *(`gol_lightning.py`)*
+On a 34,000-agent Blotto frame of `GOL_26_08_31_n001`:
+
+| | gross flow | net flow |
+|---|---|---|
+| lightning score, Σ hops² | 57,438 | **770** |
+| tokens circulating | 11.3% | **0.4%** |
+| longest circuit | 41 hops | **10 hops** |
+
+Only **34% of the flow survives cancelling reciprocal amounts**, and once it is
+cancelled almost all the apparent circulation goes with it. The gross reading
+says tokens travel 41 hops and return; the net reading says that what actually
+goes anywhere circulates in loops of at most ten, and only four tokens in a
+thousand do even that.
+
+So the honest summary is that this substrate's token flow is **overwhelmingly
+reciprocal exchange between neighbours**, not circulation. That is a finding
+about the Blotto phase rather than about the measure: mutual staking between
+two adjacent agents is easy and everywhere, and a circuit that survives
+cancellation is rare.
+
+`flowImbalance` (27.6%) is the exact ceiling both readings live under, and the
+gap between the 0.4% floor and that ceiling is wide — the greedy peel is a weak
+lower bound here and should be read as one.
+
 ### A.8 Topology *(`research/pilot_topology.py`)*
 Two long runs, against a Watts–Strogatz graph rebuilt at the same size and mean
 degree. The graph ends with **22–30% of its edges being bridges where the

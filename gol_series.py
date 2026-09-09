@@ -27,6 +27,7 @@ import gol_store as store
 # graphstats.js and compared key by key by tests/test_stats_parity.py — the
 # same arrangement every other structural measure here already has.
 from GraphOfLifeSimple import bridge_splits, two_core_size
+from gol_lightning import lightning
 from gol_spectral import spectral_gap
 
 #: What a brain with no recorded parent carries, matching the engine.
@@ -68,13 +69,15 @@ def progress(run_id: str) -> Dict[str, Any]:
 # row at once, which is how the power-law statistics came to be computed and
 # then dropped on the way out.
 #
+# 21: net lightning — the same, on flow with reciprocity cancelled.
+# 20: lightning — how much of the Blotto flow circulates.
 # 19: `spectralGap` — lambda2 of the normalised Laplacian.
 # 18: `redistributed` changed meaning in cbfc457 — it now reports what was
 # actually shared out rather than what was pooled, which differ whenever the
 # pool was dropped in favour of a resurrection. That commit did not bump this,
 # so every cache built before it has been serving the old number ever since,
 # which is the exact failure the paragraph above describes.
-SERIES_VERSION = 19
+SERIES_VERSION = 21
 
 # At most this many iterations are analysed for a run's history.
 #
@@ -690,6 +693,8 @@ def _reconstruct_delta(frame: Dict[str, Any], previous: Dict[str, Any] | None) -
 HEAVY_KEYS = (
     "cycleRank", "loopDensity", "bridges", "cutRisk", "coreShare", "components",
     "spectralGap",
+    "lightningScore", "cyclingShare", "lightningLongest", "flowImbalance",
+    "netLightningScore", "netCyclingShare", "netLightningLongest", "netFlowShare",
     "triangles", "transitivity", "dimension", "ricciCurvature",
     "radius", "diameter", "meanPathLength",
     "degreeExponent", "degreeExponentR2", "tokenExponent", "tokenExponentR2",
@@ -818,6 +823,10 @@ def frame_stats(frame: Dict[str, Any], previous: Dict[str, Any] | None = None,
         losers = sum(1 for v in delta if v < 0)
 
     structure = _structure(ids, edges) if heavy else {}
+    # Circulating token flow. Only a game phase allocates anything across
+    # links, so a reproduction frame has no lightning and says so with nulls.
+    if heavy:
+        structure.update(lightning(frame))
     per_node_triangles = structure.pop("_perNodeTriangles", {})
 
     # ---- power laws ----
