@@ -730,7 +730,10 @@ const Viewer = {
     this.renderer.stepCamera();
 
     if (this.playing && this.visible.length) {
-      const fps = Number(document.getElementById('playSpeed').value) || 6;
+      // Falls back to the slider's own minimum rather than to a second
+        // number of its own, which is how the two came to disagree about
+        // what the default was.
+        const fps = Number(document.getElementById('playSpeed').value) || 1;
       this.playAccumulator += dt;
 
       if (this.playAccumulator >= 1 / fps) {

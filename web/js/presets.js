@@ -55,9 +55,19 @@ const Presets = {
 
       // Strong repulsion against weak links spreads the graph out; the high
       // theta trades exactness in the far field for speed, which is where the
-      // cost lives on a large graph.
-      forceCharge: 82, forceLink: 0.07, forceCenter: 0.012,
-      forceAngular: 0.15, forceDamping: 0.78, forceTheta: 1.7,
+      // cost lives on a large graph. The angular term is turned up well past
+      // the base, which fans each agent's edges apart instead of letting them
+      // bundle, and the lower damping lets the arrangement keep moving toward
+      // that rather than freezing early.
+      //
+      // Centring is off entirely. Nothing then pulls the drawing toward the
+      // origin, so it settles at whatever width the repulsion and the springs
+      // agree on and the shape is the graph's rather than the origin's. That
+      // makes the drawing much wider, which used to run into the camera's
+      // fixed zoom floor — see GraphRenderer.clampScale, where the floor now
+      // follows the content instead.
+      forceCharge: 97, forceLink: 0.07, forceCenter: 0,
+      forceAngular: 0.32, forceDamping: 0.72, forceTheta: 1.9,
       dimensions: 3,
 
       // On, so the view keeps the whole graph framed as the population grows

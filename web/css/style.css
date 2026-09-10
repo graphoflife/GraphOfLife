@@ -1562,6 +1562,14 @@ details.control-group > summary:hover h3 { color: var(--text); }
   min-height: 0;
   display: flex;
   flex-direction: column;
+  /* Not inherited from .config-form, which wraps because it lays fieldsets out
+     in a row. Turned to a column here and left wrapping, the settings and the
+     buttons are two items in one column — so the moment the settings grow
+     taller than the dialog, the buttons wrap into a *second column*, placed
+     off the right-hand edge and clipped away by the overflow above. The dialog
+     then looks exactly as though it has no Create button. Adding four fields
+     to the form was enough to cross that line. */
+  flex-wrap: nowrap;
 }
 /* The settings scroll if they have to; the buttons never do. They used to be
    the same element, so a form tall enough to scroll pushed its own submit
