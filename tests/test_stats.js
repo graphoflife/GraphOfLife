@@ -25,7 +25,7 @@ const fs = require('fs');
 const path = require('path');
 
 const root = path.join(__dirname, '..');
-const source = ['colormaps.js', 'metrics.js', 'graphstats.js', 'stats.js']
+const source = ['colormaps.js', 'metrics.js', 'spectral.js', 'graphstats.js', 'stats.js']
   .map(name => fs.readFileSync(path.join(root, 'web', 'js', name), 'utf8'))
   .join('\n');
 // The same bridge tests/test_stats_parity.py uses: one `window` for the pixel

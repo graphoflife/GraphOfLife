@@ -676,6 +676,10 @@
       <canvas id="diagramCanvas"></canvas>
     </div>
     <p class="lineage-note" id="diagramNote"></p>
+    <!-- What each plotted statistic actually measures. Filled by diagrams.js
+         from the same text the Viewer's stat dialog shows, so a chart read on
+         its own does not need the reader to go and look them up. -->
+    <div class="diagram-legend-notes" id="diagramMeanings"></div>
   </section>
 
   <!-- ---------------- theses ---------------- -->
@@ -721,6 +725,7 @@
 
 <script src="js/colormaps.js"></script>
 <script src="js/metrics.js"></script>
+<script src="js/spectral.js"></script>
 <script src="js/graphstats.js"></script>
 <script src="js/api.js"></script>
 <script src="js/seriesload.js"></script>
@@ -743,6 +748,7 @@
 <script src="js/markdown.js"></script>
 <script src="js/docpage.js"></script>
 <script src="js/diagrams.js"></script>
+<script src="js/diagram-controls.js"></script>
 <script src="js/theses.js"></script>
 <script src="js/research.js"></script>
 <script src="js/viewer.js"></script>

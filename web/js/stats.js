@@ -584,7 +584,9 @@ class FrameMetrics {
    * `includeStructure` gates the handful that need the whole graph walked;
    * without it they stay null and the strip simply omits them.
    */
-  summary(includeStructure = true) {
+  // `includeFlow` defaults to whatever `includeStructure` is, so a caller that
+  // wants everything still says so with one argument.
+  summary(includeStructure = true, includeFlow = includeStructure) {
     const f = this.frame;
     const n = f.ids.length;
     const degrees = Array.from(this.degree);
@@ -765,6 +767,16 @@ class FrameMetrics {
 
     if (d.pruned_edges) out.prunedEdges = d.pruned_edges.length;
 
+    // ---- circulating token flow ----
+    //
+    // Gated separately from the structure block below. The lightning search
+    // reads this phase's allocations and nothing else — it never touches the
+    // graph walk — so tying it to the structure group would have made it wait
+    // on a walk it does not use, and would leave it blank on a strip where the
+    // group holding it is open. Only a game phase allocates across links, so a
+    // reproduction frame has no lightning and says so with nulls.
+    if (includeFlow) Object.assign(out, Lightning.of(f));
+
     // ---- structure ----
     //
     // Loops, bridges, triangles, dimension and the distance sweeps are by far
@@ -788,9 +800,6 @@ class FrameMetrics {
       out.dimension = st.dimension.estimate;
       out.ricciCurvature = st.dimension.ricciCurvature;
 
-      // Circulating token flow. Only a game phase allocates across links,
-      // so a reproduction frame has no lightning and says so with nulls.
-      Object.assign(out, Lightning.of(f));
       out.radius = st.distances.radius;
       out.diameter = st.distances.diameter;
       out.meanPathLength = st.distances.meanPathLength;
@@ -943,35 +952,62 @@ function _axisTicks(lo, hi, target = 5) {
  * cells is harder to read, not easier.
  */
 function _axes(ctx, w, h, spec) {
-  const { x, y, grid = true, guides = [] } = spec;
+  // `pad` is the margin the chrome reserved outside the plot. Tick labels are
+  // allowed to use it, and are clamped to it, so an edge tick stays legible
+  // instead of being painted off the canvas.
+  const { x, y, grid = true, guides = [],
+          pad = { left: 0, right: 0 } } = spec;
   ctx.save();
   ctx.font = '10px system-ui, sans-serif';
   ctx.lineWidth = 1;
 
   const place = (axis, v) => axis.lo === axis.hi ? 0.5 : (v - axis.lo) / (axis.hi - axis.lo);
 
+  // How many ticks the axis has room for, rather than a fixed five. The same
+  // chart is drawn at 300px in the Research pane and at 1600px in a saved
+  // image; five is crowded at one end and sparse at the other. A label needs
+  // roughly 90px across and a row 48px down before they start touching.
+  const across = Math.max(2, Math.min(8, Math.round(w / 90)));
+  const down = Math.max(2, Math.min(6, Math.round(h / 48)));
+
   if (x) {
-    for (const tick of _axisTicks(x.lo, x.hi)) {
+    for (const tick of _axisTicks(x.lo, x.hi, across)) {
       const at = Math.round(place(x, tick) * w) + 0.5;
       if (grid) {
         ctx.strokeStyle = 'rgba(255,255,255,0.07)';
         ctx.beginPath(); ctx.moveTo(at, 0); ctx.lineTo(at, h); ctx.stroke();
       }
+      // A mark on the axis itself, so a tick is still located when the grid is
+      // switched off and the number below it has nothing pointing at it.
+      ctx.strokeStyle = 'rgba(255,255,255,0.35)';
+      ctx.beginPath(); ctx.moveTo(at, h); ctx.lineTo(at, h + 4); ctx.stroke();
       ctx.fillStyle = '#8fa3b5';
       const text = x.format ? x.format(tick) : String(tick);
-      ctx.fillText(text, at - ctx.measureText(text).width / 2, h + 13);
+      // Held inside the canvas rather than centred and allowed to run off it.
+      // The last tick sits on the right edge, so a centred label is half
+      // outside and the browser simply does not paint it — the axis then ends
+      // without saying what it ends at.
+      const width = ctx.measureText(text).width;
+      const left = Math.min(Math.max(at - width / 2, -pad.left + 1),
+                            w + pad.right - width - 1);
+      ctx.fillText(text, left, h + 14);
     }
   }
   if (y) {
-    for (const tick of _axisTicks(y.lo, y.hi)) {
+    for (const tick of _axisTicks(y.lo, y.hi, down)) {
       const at = Math.round(h - place(y, tick) * h) + 0.5;
       if (grid) {
         ctx.strokeStyle = 'rgba(255,255,255,0.07)';
         ctx.beginPath(); ctx.moveTo(0, at); ctx.lineTo(w, at); ctx.stroke();
       }
+      ctx.strokeStyle = 'rgba(255,255,255,0.35)';
+      ctx.beginPath(); ctx.moveTo(-4, at); ctx.lineTo(0, at); ctx.stroke();
       ctx.fillStyle = '#8fa3b5';
       const text = y.format ? y.format(tick) : String(tick);
-      ctx.fillText(text, -ctx.measureText(text).width - 6, at + 3);
+      // Nudged in from the edges for the same reason, so the top and bottom
+      // labels are not clipped by the plot's own boundary.
+      const top = Math.min(Math.max(at + 3, 8), h - 1);
+      ctx.fillText(text, -ctx.measureText(text).width - 7, top);
     }
   }
 
@@ -1166,7 +1202,7 @@ function drawHistogram(canvas, values, options = {}) {
       x: { lo, hi, format: v => format(back(v)) },
       y: { lo: 0, hi: Math.max(...counts) || 1,
            format: v => Math.round(v).toLocaleString('en-US') },
-      grid: chrome.grid !== false, guides: chrome.guides || []
+      grid: chrome.grid !== false, guides: chrome.guides || [], pad
     });
   }
 
@@ -1261,7 +1297,7 @@ function drawHeatmap(canvas, xs, ys, options = {}) {
            format: v => formatX(logX ? Metrics.undoLog(v, signedX) : v) },
       y: { lo: ey[0], hi: ey[1],
            format: v => formatY(logY ? Metrics.undoLog(v, signedY) : v) },
-      grid: chrome.grid !== false, guides: chrome.guides || []
+      grid: chrome.grid !== false, guides: chrome.guides || [], pad
     });
   }
 
@@ -1385,7 +1421,7 @@ function drawTrajectory(canvas, points, options = {}) {
     _axes(ctx, w, h, {
       x: { lo: loX, hi: hiX, format: v => _short(backX(v)) },
       y: { lo: loY, hi: hiY, format: v => _short(backY(v)) },
-      grid: chrome.grid !== false, guides: chrome.guides || []
+      grid: chrome.grid !== false, guides: chrome.guides || [], pad
     });
   }
 

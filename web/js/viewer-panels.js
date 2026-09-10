@@ -147,17 +147,21 @@ Object.assign(Viewer, {
       'gini', 'topDecileShare', 'tokenEntropy', 'tokenEvenness',
       'maxTokenAdded', 'maxTokenLost', 'gainers', 'losers',
       'starved', 'orphaned', 'redistributed', 'cutRiskBefore',
-      'lightningScore', 'cyclingShare', 'lightningLongest', 'flowImbalance',
-      'netLightningScore', 'netCyclingShare', 'netLightningLongest', 'netFlowShare',
       'distinctBrains', 'brainDiversity', 'distinctParents'
     ] },
     { key: 'reproduction', label: 'Reproduction', open: true, keys: [
       'births', 'reproTokenShare', 'meanInvestedShare', 'meanChildLinks',
       'handovers'
     ] },
+    // The lightning readings belong here rather than under General: they are
+    // measured on the token flow a Blotto phase allocates, they are blank on a
+    // reproduction frame, and they are read against the traffic figures they
+    // sit beside.
     { key: 'blotto', label: 'Game (Blotto)', open: true, keys: [
       'totalFlow', 'meanEdgeFlow', 'maxEdgeFlow', 'selfAllocationShare',
-      'revoltShare', 'spreadShare', 'revolutions', 'heldHomeShare', 'prunedEdges'
+      'revoltShare', 'spreadShare', 'revolutions', 'heldHomeShare', 'prunedEdges',
+      'lightningScore', 'cyclingShare', 'lightningLongest', 'flowImbalance',
+      'netLightningScore', 'netCyclingShare', 'netLightningLongest', 'netFlowShare'
     ] },
     { key: 'structure', label: 'Structure', open: false, keys: [
       'density', 'meanDegree', 'medianDegree', 'maxDegree', 'minDegree', 'leaves',
@@ -189,14 +193,19 @@ Object.assign(Viewer, {
     // Structure and Power laws are both paid for by the same walk over the
     // graph, so either being open buys both. Neither being open means the walk
     // does not happen at all, which is most of what a frame step costs.
-    const heavyGroups = ['structure', 'powerlaws'];
-    const structureOpen = heavyGroups.some(key => {
+    const isOpen = (key) => {
       const el = container.querySelector(`.stat-group[data-group="${key}"]`);
       if (el) return el.open;
       const declared = this.STAT_GROUPS.find(g => g.key === key);
       return Boolean(declared && declared.open);
-    });
-    const s = this.metrics.summary(structureOpen);
+    };
+    const heavyGroups = ['structure', 'powerlaws'];
+    const structureOpen = heavyGroups.some(isOpen);
+    // The lightning search is its own cost and its own group. It walks this
+    // phase's allocations rather than the graph, so it is asked for on its own
+    // terms — otherwise the group holding it would sit open and empty while
+    // Structure was closed.
+    const s = this.metrics.summary(structureOpen, isOpen('blotto'));
 
     // Node counts are also given as a share of the population that entered the
     // phase — "40 births" reads very differently at 100 agents than at 4,000.

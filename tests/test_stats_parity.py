@@ -52,11 +52,13 @@ JS_ONLY: set = set()
 # to being close rather than equal; everything else must match exactly.
 TOLERANCES = {
     "radius": 0.35, "diameter": 0.35, "meanPathLength": 0.35, "dimension": 0.35,
-    # The spectral gap is a power iteration, and the two sides agree exactly
-    # here — the start vector is built from integers precisely so they can. The
-    # tolerance is insurance against a JavaScript engine whose square root or
-    # division rounds a hair differently, not licence for the two to drift:
-    # anything larger than this is a real disagreement.
+    # The spectral gap is Lanczos followed by bisection on Sturm's count, and
+    # the two sides agree exactly here — the start vector is built from integers
+    # over a power of two precisely so they can, and bisection is used instead
+    # of a library eigensolver for the same reason. The tolerance is insurance
+    # against a JavaScript engine whose square root or division rounds a hair
+    # differently, not licence for the two to drift: anything larger than this
+    # is a real disagreement.
     "spectralGap": 1e-9,
 }
 
@@ -66,7 +68,7 @@ DRIVER = r"""
 const fs = require('fs');
 const [framesPath, root] = process.argv.slice(2);
 
-const sources = ['colormaps.js', 'metrics.js', 'graphstats.js', 'lightning.js', 'stats.js']
+const sources = ['colormaps.js', 'metrics.js', 'spectral.js', 'graphstats.js', 'lightning.js', 'stats.js']
   .map(name => fs.readFileSync(`${root}/web/js/${name}`, 'utf8')).join('\n');
 const FrameMetrics = new Function('window', sources + '; return FrameMetrics;')(
   { devicePixelRatio: 1 }
@@ -185,6 +187,16 @@ def test_the_two_sides_cover_the_same_ground():
     missing_in_js = py_keys - js_keys
     assert not missing_in_js, (
         f"the charts compute these but the panel does not: {sorted(missing_in_js)}"
+    )
+
+    # And the other way round, because the comparison above walks the JavaScript
+    # keys and skips anything it cannot find in Python — so a statistic added to
+    # the panel and forgotten in gol_series is never compared to anything and
+    # passes in silence. JS_ONLY is empty on purpose; if a genuinely
+    # panel-only statistic ever arrives, name it there rather than widening this.
+    missing_in_py = js_keys - py_keys - JS_ONLY
+    assert not missing_in_py, (
+        f"the panel computes these but the charts do not: {sorted(missing_in_py)}"
     )
 
 

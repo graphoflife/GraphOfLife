@@ -1123,6 +1123,31 @@ details.control-group > summary:hover h3 { color: var(--text); }
 .diagram-cap,
 .diagram-guide { width: 84px; }
 
+/* What each plotted statistic means, under the time series. Set narrow and
+   quiet: it is reference material read once, not part of the chart. */
+.diagram-legend-notes { margin: 4px 0 0; display: grid; gap: 8px; }
+.diagram-legend-notes p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--muted);
+  max-width: 78ch;
+}
+.diagram-legend-notes b { color: var(--text); font-weight: 600; }
+.diagram-legend-notes i {
+  display: inline-block;
+  width: 12px; height: 3px;
+  border-radius: 2px;
+  vertical-align: middle;
+  margin-right: 7px;
+}
+
+/* The phase toggle sits in a row beside several other controls, so it is
+   tightened from the Viewer's full-width version rather than pushing the rest
+   of the row onto a second line. */
+.diagram-phase { flex: none; }
+.diagram-phase .seg-btn { padding: 4px 8px; font-size: 11.5px; }
+
 /* The one editable thing in a settings dialog otherwise made of facts. */
 .settings-rename-row { display: flex; align-items: center; gap: 8px; }
 .settings-rename-row input { flex: 1; min-width: 0; }
