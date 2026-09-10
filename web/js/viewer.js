@@ -721,6 +721,12 @@ const Viewer = {
     }
 
     if (this.settings.autoFit) this.renderer.fitToContent(this.layout);
+    // Fitting measures the drawing, and measuring is what tells the camera
+    // how far out it is allowed to go. With Fit view off nothing measured
+    // it, so a graph laid out wide — which is what turning the centring
+    // down produces — hit the default zoom floor and stopped, with no
+    // sign it had been stopped rather than finished.
+    else this.renderer.noteContentSize(this.layout);
     this.renderer.stepCamera();
 
     if (this.playing && this.visible.length) {

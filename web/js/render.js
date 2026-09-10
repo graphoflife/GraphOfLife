@@ -19,6 +19,8 @@ class GraphRenderer {
     // the target; the view chases it under stepCamera, so the framing glides
     // rather than jumping every time the graph shifts.
     this.view = { scale: 1, offsetX: 0, offsetY: 0 };
+    // Loosened by allowScale() whenever the drawing turns out to need it.
+    this.scaleFloor = GraphRenderer.SCALE_FLOOR;
     this.targetView = { scale: 1, offsetX: 0, offsetY: 0 };
     this.cameraVelocity = { logScale: 0, x: 0, y: 0 };
     // Critically damped: the camera reaches its target in about 27 frames
@@ -108,7 +110,13 @@ class GraphRenderer {
       const factor = Math.min(availableW / box.width, availableH / box.height);
       if (!Number.isFinite(factor) || factor <= 0) { restore(); return null; }
 
-      this.view.scale = GraphRenderer.clampScale(this.view.scale * factor);
+      // Measured the drawing, so this is the moment the camera learns how far
+      // out it needs to be able to go. Without it the clamp below silently
+      // stops short of framing a wide graph and reports a target that does
+      // not fit it — the fixed floor deciding the answer instead of the
+      // content.
+      this.allowScale(this.view.scale * factor);
+      this.view.scale = this.clamp(this.view.scale * factor);
 
       // Scaling moves everything, so recentre against the new projection.
       const after = this._projectedBounds(layout);
@@ -122,8 +130,73 @@ class GraphRenderer {
     return target;
   }
 
-  static clampScale(s) {
-    return Math.max(0.02, Math.min(60, s));
+  /**
+   * How far out the camera may be pulled.
+   *
+   * A fixed floor cannot be right, because it is a claim about how large the
+   * drawing is and the code that set it did not know. At the default centring
+   * a graph settles a few thousand units across and 0.02 is far below anything
+   * needed. Turn the centring down and nothing pulls the drawing inward, so it
+   * settles very much wider — past about 36,000 units the floor sits *above*
+   * the scale that would frame it, and both zooming out and Fit view stop with
+   * the graph still overflowing the viewport, giving no sign that they were
+   * prevented rather than finished.
+   *
+   * So the floor follows the content. `scaleFloor` is lowered by
+   * computeFitTarget, which is the one place that measures the drawing.
+   */
+  static clampScale(s, floor = GraphRenderer.SCALE_FLOOR) {
+    return Math.max(floor, Math.min(GraphRenderer.SCALE_CEILING, s));
+  }
+
+  /** Scale limits for a drawing small enough to need no special allowance. */
+  static get SCALE_FLOOR() { return 0.02; }
+  static get SCALE_CEILING() { return 60; }
+
+  /** This renderer's floor, given the drawing it is currently looking at. */
+  clamp(s) {
+    return GraphRenderer.clampScale(s, this.scaleFloor);
+  }
+
+  /**
+   * Let the camera reach a scale that frames content this size.
+   *
+   * Halved, so pulling back past a tight framing stays possible — a floor
+   * exactly at the fitting scale would make Fit view the furthest out anyone
+   * could ever get.
+   */
+  allowScale(s) {
+    if (!Number.isFinite(s) || s <= 0) return;
+    this.scaleFloor = Math.min(GraphRenderer.SCALE_FLOOR, s * 0.5);
+  }
+
+  /**
+   * Note how large the drawing is, without moving the camera.
+   *
+   * Fitting already measures the graph as a side effect of framing it, but
+   * with Fit view off nothing did — so a graph laid out wide, which is what
+   * turning the centring down produces, met the default floor and stopped
+   * there. Reading the bounds is a pass over the positions and no projection,
+   * which is cheap enough to do on every tick.
+   */
+  noteContentSize(layout) {
+    if (!layout || !layout.positions || !layout.positions.length) return;
+    if (!this.cssWidth || !this.cssHeight) return;
+
+    const pos = layout.positions;
+    const stop = Math.min(pos.length, layout.count * 3 || pos.length);
+    let lo = Infinity, hi = -Infinity;
+    for (let i = 0; i < stop; i++) {
+      const v = pos[i];
+      if (v < lo) lo = v;
+      if (v > hi) hi = v;
+    }
+    const extent = hi - lo;
+    if (!(extent > 0)) return;
+
+    // The axis-aligned span over every coordinate is an upper bound on what a
+    // projection can occupy, so the floor it implies is never too tight.
+    this.allowScale(Math.min(this.cssWidth, this.cssHeight) / extent);
   }
 
   /** Put the camera on its target immediately, for a first framing. */
@@ -173,7 +246,7 @@ class GraphRenderer {
     v.x = (v.x + dx * k) * d;
     v.y = (v.y + dy * k) * d;
 
-    this.view.scale = GraphRenderer.clampScale(Math.exp(logNow + v.logScale));
+    this.view.scale = this.clamp(Math.exp(logNow + v.logScale));
     this.view.offsetX += v.x;
     this.view.offsetY += v.y;
   }
@@ -265,7 +338,7 @@ class GraphRenderer {
 
   zoomAt(sx, sy, factor) {
     const before = this.toWorld(sx, sy);
-    this.view.scale = GraphRenderer.clampScale(this.view.scale * factor);
+    this.view.scale = this.clamp(this.view.scale * factor);
     const after = this.toWorld(sx, sy);
     this.view.offsetX += (after.x - before.x) * this.view.scale;
     this.view.offsetY += (after.y - before.y) * this.view.scale;

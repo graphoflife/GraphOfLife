@@ -303,6 +303,15 @@ Object.assign(Viewer, {
       cells.meanChildLinks = [this.STAT_LABELS.meanChildLinks, dec(s.meanChildLinks)];
       if (s.handovers !== null) cells.handovers = [this.STAT_LABELS.handovers, formatNumber(s.handovers)];
     }
+    // Gifts, on their own condition rather than on `births`: an agent with
+    // nothing to spare for a child may still give a neighbour a token, so a
+    // phase can have gifts and no births at all. Absent on a run without the
+    // mechanic, which is why this asks rather than assuming.
+    if (s.gifts !== null && s.gifts !== undefined) {
+      cells.gifts = [this.STAT_LABELS.gifts, formatNumber(s.gifts)];
+      cells.giftTokens = [this.STAT_LABELS.giftTokens, formatNumber(s.giftTokens)];
+      cells.giftShare = [this.STAT_LABELS.giftShare, pct(s.giftShare)];
+    }
     if (s.totalFlow !== null) {
       cells.totalFlow = [this.STAT_LABELS.totalFlow, formatNumber(s.totalFlow)];
       cells.meanEdgeFlow = [this.STAT_LABELS.meanEdgeFlow, dec(s.meanEdgeFlow, 1)];
