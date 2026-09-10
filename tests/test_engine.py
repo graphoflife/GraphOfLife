@@ -2449,6 +2449,94 @@ def test_the_head_layout_is_the_only_statement_of_where_the_rows_are():
 
 
 
+
+def test_the_seed_graph_survives_its_first_accounting():
+    """
+    A connection cannot be cut before anybody has had a chance to use it.
+
+    The seed graph is built before any phase has run. Stamped with the phase
+    counter as it stands, every one of those connections arrives already a
+    phase stale, and a run that settles up after reproduction against a
+    single-phase window cut *the entire seed graph* at the end of its first
+    reproduction phase — before one token had ever crossed it. The population
+    then continued on newborn links alone.
+
+    The same applies to a checkpoint written before upkeep was recorded: its
+    connections have no history and must not be cut for lacking one.
+    """
+    for when in ("reproduction", "blotto", "both"):
+        for window in ("phase", "iteration"):
+            for gifting in (False, True):
+                world = new_world(small(allow_gifting=gifting, prune_after=when,
+                                        inactive_window=window))
+                seeded = world.G.number_of_edges()
+                assert seeded > 0
+
+                # The very first accounting, whenever it falls due.
+                world.phase_count += 1
+                stale = world._stale_edges()
+                assert not stale, (
+                    f"{len(stale)} of {seeded} seed connections were stale at the "
+                    f"first accounting under prune_after={when}, "
+                    f"inactive_window={window}, allow_gifting={gifting}")
+
+
+def test_a_resumed_run_does_not_cut_a_graph_it_has_no_history_for():
+    """
+    A checkpoint from before upkeep was tracked carries no activity record.
+
+    Read as "never used", the first accounting after the resume would cut every
+    connection in it at once.
+    """
+    world = new_world(small(prune_after="reproduction", inactive_window="phase"))
+    for _ in range(2):
+        world.step(record_decisions=False)
+
+    blob = dict(world.to_checkpoint())
+    del blob["edge_active_at"]          # as an older checkpoint would arrive
+
+    resumed = GraphOfLife.from_checkpoint(blob, world.cfg)
+    assert resumed.G.number_of_edges() > 0
+    resumed.phase_count += 1
+    assert not resumed._stale_edges(), (
+        "a resumed run cut connections it simply had no history for")
+
+
+
+
+def test_a_resumed_run_remembers_which_connections_were_used():
+    """
+    Which connections carried tokens, and when, is world state like any other.
+
+    A resumed run has to know what the game phase before the checkpoint did,
+    or its first accounting judges connections on a history it does not have —
+    sparing everything, or cutting a graph that was busy moments earlier.
+    Messages in flight are checkpointed for exactly this reason; this is the
+    same argument about a different book.
+    """
+    world = new_world(small(allow_gifting=True, prune_after="reproduction",
+                            inactive_window="iteration"))
+    for _ in range(3):
+        world.step(record_decisions=False)
+
+    live = {e: at for e, at in world.edge_active_at.items() if world.G.has_edge(*e)}
+    busy = {e for e, at in live.items() if at == world.phase_count}
+    assert busy, "the game phase before the checkpoint moved nothing"
+
+    resumed = GraphOfLife.from_checkpoint(dict(world.to_checkpoint()), world.cfg)
+
+    assert resumed.phase_count == world.phase_count
+    assert {e: at for e, at in resumed.edge_active_at.items()
+            if resumed.G.has_edge(*e)} == live, "the activity record did not survive"
+    assert busy == {e for e, at in resumed.edge_active_at.items()
+                    if at == resumed.phase_count}, (
+        "a resumed run forgot which connections the last game phase used")
+
+    # And so the next accounting falls exactly as it would have.
+    assert sorted(resumed._stale_edges()) == sorted(world._stale_edges())
+
+
+
 def _main() -> int:
     """Find the tests in this file and run them, reporting like pytest would."""
     import time

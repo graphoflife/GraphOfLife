@@ -727,8 +727,14 @@ class GraphOfLife:
             old2new[n] = self.next_agent_id
             self.G.add_node(self.next_agent_id)
             self.next_agent_id += 1
+        # The seed graph is built before any phase has run, so it is stamped
+        # with the first phase that will — not with the count as it stands.
+        # Stamped with the count, every one of these arrives already a phase
+        # stale, and a run whose accounting falls due after reproduction and
+        # judges a single phase cut the entire seed graph at the end of its
+        # first reproduction, before one token had ever been sent across it.
         for u, v in G_init.edges():
-            self._add_edge(old2new[u], old2new[v])
+            self._add_edge(old2new[u], old2new[v], when=self._first_unrun_phase())
 
         share = cfg.total_tokens // self.G.number_of_nodes()
         for aid in self.G.nodes():
@@ -788,7 +794,7 @@ class GraphOfLife:
         """One key per connection, whichever end is named first."""
         return (int(u), int(v)) if u < v else (int(v), int(u))
 
-    def _add_edge(self, u: int, v: int) -> None:
+    def _add_edge(self, u: int, v: int, when: Optional[int] = None) -> None:
         """
         Create a connection and mark it used.
 
@@ -796,11 +802,31 @@ class GraphOfLife:
         active by default. Judged on flow alone a newborn's links carry nothing
         in the phase they are made and would be pruned at the first accounting
         — reproduction would build a graph that the very next step tore down.
+
+        `when` overrides that for connections which are not made *during* a
+        phase. A connection built before the world starts running has not lived
+        through any phase at all, and stamping it with the count as it stands
+        would have it arrive already a phase stale.
         """
         if u == v:
             return
         self.G.add_edge(int(u), int(v))
-        self.edge_active_at[self._edge_key(u, v)] = self.phase_count
+        self.edge_active_at[self._edge_key(u, v)] = (
+            self.phase_count if when is None else int(when))
+
+    def _first_unrun_phase(self) -> int:
+        """
+        The phase that will run next, which is the earliest one a connection
+        existing right now could possibly be used in.
+
+        A connection stamped with this survives its first accounting under
+        every window and every schedule, and is judged from the second
+        onwards. That is the whole of what "a connection cannot be cut before
+        anybody has had a chance to use it" means, and it is needed wherever
+        connections appear outside a running phase: the seed graph, and a
+        checkpoint written before this was recorded.
+        """
+        return self.phase_count + 1
 
     def _drop_edges(self, edges) -> None:
         """Remove connections and forget their history in the same breath."""
@@ -1844,11 +1870,12 @@ class GraphOfLife:
         world.G.add_nodes_from(ids)
         edge_list = blob["edges"].tolist()
         # A checkpoint written before upkeep was tracked has no history. Every
-        # connection in it is treated as active as of the resume, which spares
-        # them all one accounting rather than cutting the whole graph on its
-        # first step — the same choice `born_at` makes for ages.
+        # connection in it is treated as active for the first phase the resumed
+        # run will execute, which spares them all one accounting rather than
+        # cutting the whole graph on its first step — the same choice `born_at`
+        # makes for ages, and the same one the seed graph gets.
         stamps = (blob["edge_active_at"].tolist() if "edge_active_at" in blob
-                  else [world.phase_count] * len(edge_list))
+                  else [world._first_unrun_phase()] * len(edge_list))
         for (a, b), when in zip(edge_list, stamps):
             world._add_edge(ids[a], ids[b])
             world.edge_active_at[world._edge_key(ids[a], ids[b])] = int(when)
