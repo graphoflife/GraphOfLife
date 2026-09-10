@@ -1797,11 +1797,11 @@ def test_the_ladder_starts_where_its_values_start():
     for _ in range(3):
         world.step(record_decisions=False)
 
-    log_deg, _neighs, q_tok, q_deg, log_tok = world._precompute_features()
+    log_deg, _neighs, q_tok, q_deg, log_tok, _risk = world._precompute_features()
     lowest = np.inf
     for u in sorted(world.G.nodes())[:20]:
         for v in [u] + sorted(world.G.neighbors(u)):
-            vec = world._input_vec(u, v, log_deg, q_tok, q_deg, log_tok)
+            vec = world._input_vec(u, v, log_deg, q_tok, q_deg, log_tok, _risk)
             span = vec[cfg.FLAG_INPUTS:cfg.FLAG_INPUTS + cfg.MAGNITUDE_INPUTS]
             lowest = min(lowest, float(span.min()))
     assert lowest >= 0.0, f"a laddered input went to {lowest}"
@@ -1832,11 +1832,11 @@ def test_a_binary_world_says_bits_and_hears_bits():
     assert sent, "wanted some messages to look at"
     assert set(sent) <= {0.0, 1.0}, f"a binary world sent non-bits: {sorted(set(sent))[:6]}"
 
-    log_deg, _neighs, q_tok, q_deg, log_tok = world._precompute_features()
+    log_deg, _neighs, q_tok, q_deg, log_tok, _risk = world._precompute_features()
     u, v = sorted(world.G.nodes())[:2]
     seen = set()
     for _ in range(40):
-        vec = world._input_vec(u, v, log_deg, q_tok, q_deg, log_tok)
+        vec = world._input_vec(u, v, log_deg, q_tok, q_deg, log_tok, _risk)
         seen.update(vec[-cfg.random_input_amount:].tolist())
     assert seen <= {0.0, 1.0}, f"a binary world's noise was not bits: {sorted(seen)[:6]}"
 
@@ -1855,7 +1855,8 @@ def test_the_float_brains_do_not_ladder_anything():
     world = new_world(cfg)
     features = world._precompute_features()
     u, v = sorted(world.G.nodes())[:2]
-    vec = world._input_vec(u, v, features[0], features[2], features[3], features[4])
+    vec = world._input_vec(u, v, features[0], features[2], features[3], features[4],
+                             features[5])
     noise = vec[-cfg.random_input_amount:]
     assert not set(noise.tolist()) <= {0.0, 1.0}, \
         "a float world's noise should be a spread of magnitudes, not coins"
@@ -2189,6 +2190,263 @@ def test_the_family_count_is_absent_when_the_chain_is_broken():
     sampled = series_for(2)
     assert "cladesInWindow" not in sampled["keys"], \
         "a sampled run cannot have its ancestry rebuilt and must not pretend to"
+
+
+
+# ---------------------------------------------------------------------------
+# Edge upkeep
+# ---------------------------------------------------------------------------
+
+
+def test_a_newborns_links_survive_the_first_accounting():
+    """
+    A connection counts as used for the phase it was made in.
+
+    Judged on token flow alone a newborn's links carry nothing in the phase
+    they are created, so the very next prune would cut them and reproduction
+    would build a graph that the next step tears straight back down. Every
+    schedule and both windows have to agree about this, since the phase a link
+    is born in is a different one under each.
+    """
+    for when in ("reproduction", "blotto", "both"):
+        for window in ("phase", "iteration"):
+            world = new_world(small(allow_gifting=True, prune_after=when,
+                                    inactive_window=window))
+            world.phase_count = 7
+            parent = sorted(world.G.nodes())[0]
+            child = world.next_agent_id
+            world.G.add_node(child)
+            world._register_agent(child, 5, world._new_brain(), parent)
+            world._add_edge(parent, child)
+
+            stale = world._stale_edges()
+            assert world._edge_key(parent, child) not in stale, (
+                f"a link made this phase was already stale under "
+                f"prune_after={when}, inactive_window={window}")
+
+
+def test_the_window_decides_how_long_an_unused_link_survives():
+    """
+    `phase` judges the phase just ended; `iteration` gives it the last two.
+
+    The difference is exactly one phase of grace, and it is what lets a
+    connection that carried a game-phase bid still be in credit when the
+    reproduction phase settles up.
+    """
+    for window, still_there in (("phase", False), ("iteration", True)):
+        world = new_world(small(inactive_window=window))
+        u, v = sorted(world.G.edges())[0]
+        world.phase_count = 10
+        world.edge_active_at[world._edge_key(u, v)] = 9   # used one phase ago
+
+        stale = set(world._stale_edges())
+        assert (world._edge_key(u, v) not in stale) == still_there, (
+            f"a link last used one phase ago should "
+            f"{'survive' if still_there else 'lapse'} under {window}")
+
+
+def test_the_schedule_decides_which_phase_settles_up():
+    world_repro = new_world(small(prune_after="reproduction"))
+    world_game = new_world(small(prune_after="blotto"))
+    world_both = new_world(small(prune_after="both"))
+
+    assert world_repro._prunes_after(1) and not world_repro._prunes_after(2)
+    assert world_game._prunes_after(2) and not world_game._prunes_after(1)
+    assert world_both._prunes_after(1) and world_both._prunes_after(2)
+
+
+def test_a_gift_keeps_a_link_that_would_otherwise_lapse():
+    """
+    The whole point of gifting: tokens crossing a connection are use of it.
+
+    Built rather than waited for, because whether an evolved agent chooses to
+    give is not something a test can arrange. Two agents, one connection, no
+    flow across it for long enough that it is due to be cut — then a gift, and
+    it is not.
+    """
+    world = new_world(small(allow_gifting=True, prune_after="reproduction",
+                            inactive_window="iteration"))
+    u, v = sorted(world.G.edges())[0]
+    key = world._edge_key(u, v)
+    world.phase_count = 20
+    world.edge_active_at[key] = 5           # idle for fifteen phases
+
+    assert key in set(world._stale_edges()), "the link should be due to be cut"
+
+    world._mark_flow(u, v)                   # a gift crosses it
+    assert key not in set(world._stale_edges()), (
+        "tokens crossed this link; it should no longer be stale")
+
+
+def test_gifts_are_paid_from_what_reproduction_left():
+    """
+    An agent cannot promise the same tokens to a child and to a neighbour.
+
+    The gift budget is a share of the purse *after* reproduction has taken its
+    cut, so however generous both heads are the two together can never exceed
+    what the agent held.
+    """
+    import numpy as np
+
+    world = new_world(small(allow_gifting=True))
+    u = sorted(world.G.nodes())[0]
+    candidates = [u] + sorted(world.G.neighbors(u))
+
+    # Every gift head maximally in favour, so the split is as large as the rule
+    # allows rather than as large as this agent happens to want.
+    Y = np.zeros((world.cfg.n_outputs(), len(candidates)))
+    Y[world.heads["GIFT_FRACTION"], :] = [[10.0], [-10.0]]
+    Y[world.heads["GIFT"], :] = [[10.0], [-10.0]]
+    Y[world.heads["GIFT_MODE"], :] = [[-10.0], [10.0]]
+
+    purse = 40
+    gifts = world._choose_gifts(u, purse, candidates, Y)
+    assert gifts, "maximal gift heads should produce at least one gift"
+    assert sum(amount for _, _, amount in gifts) <= purse, (
+        "gifts together exceeded the purse they were paid from")
+    assert all(taker != u for _, taker, _ in gifts), (
+        "a gift to oneself crosses no connection and is not a gift")
+
+
+def test_gifting_off_means_no_gift_heads_and_no_risk_input():
+    """
+    A mechanic that is off costs the brain nothing.
+
+    Gifting adds three output heads and an input flag, so leaving them in place
+    when it is off would change the architecture of every run that does not use
+    it — and a checkpoint saved under one shape cannot be resumed under another.
+    """
+    off, on = small(allow_gifting=False), small(allow_gifting=True)
+
+    assert not [k for k in off.head_layout() if k.startswith("GIFT")]
+    assert len([k for k in on.head_layout() if k.startswith("GIFT")]) == 3
+    assert on.n_outputs() == off.n_outputs() + 6
+    assert on.n_inputs() == off.n_inputs() + 1
+    assert off.flag_inputs() == 1 and on.flag_inputs() == 2
+
+
+def test_the_risk_flag_says_which_links_are_about_to_lapse():
+    """
+    The input that makes a gift a decision rather than a guess.
+
+    It is the second flag row, and it is set for exactly the neighbours whose
+    connection would be cut if nothing more crossed it.
+    """
+    world = new_world(small(allow_gifting=True, inactive_window="phase"))
+    world.phase_count = 12
+    u = max(world.G.nodes(), key=lambda n: world.G.degree[n])
+    neighbours = sorted(world.G.neighbors(u))
+
+    # Everything idle, then one neighbour's link freshly used.
+    for a, b in world.G.edges():
+        world.edge_active_at[world._edge_key(a, b)] = 0
+    safe = neighbours[0]
+    world.edge_active_at[world._edge_key(u, safe)] = 12
+
+    at_risk = set(world._stale_edges())
+    features = world._precompute_features()
+    log_deg, _n, q_tok, q_deg, log_tok, _ = features
+
+    for v in neighbours:
+        vec = world._input_vec(u, v, log_deg, q_tok, q_deg, log_tok, at_risk)
+        expected = 0.0 if v == safe else 1.0
+        assert vec[1] == expected, f"risk flag wrong for the link {u}-{v}"
+
+    # And an agent looking at itself has no connection to be told about.
+    assert world._input_vec(u, u, log_deg, q_tok, q_deg, log_tok, at_risk)[1] == 0.0
+
+
+def test_weighted_redistribution_conserves_tokens_and_favours_the_rich():
+    """
+    `by_tokens` changes who the estate goes to, not how much of it there is.
+
+    Conservation is the part that must hold exactly; the tilt is the part that
+    makes it a different mechanic, and over many culls it is what turns the
+    cleanup from a leveller into an engine of concentration.
+    """
+    import numpy as np
+
+    for mode in ("uniform", "by_tokens"):
+        np.random.seed(11)
+        world = new_world(small(redistribution=mode))
+        for _ in range(6):
+            world.step(record_decisions=False)
+        assert sum(world.tokens.values()) == world.cfg.total_tokens, (
+            f"{mode} redistribution did not conserve tokens")
+
+    # The tilt itself, on one cleanup with a pool to share and a clear favourite.
+    np.random.seed(3)
+    world = new_world(small(redistribution="by_tokens"))
+    rich = sorted(world.G.nodes())[0]
+    for u in world.G.nodes():
+        world.tokens[u] = 1
+    world.tokens[rich] = 10_000
+    world.cfg.total_tokens = sum(world.tokens.values())
+
+    before = world.tokens[rich]
+    world._cleanup_and_redistribute()
+    # Nothing died, so nothing was shared; give it something to share.
+    world.cfg.tokens_created_per_phase = 5000
+    world._cleanup_and_redistribute()
+    assert world.tokens[rich] > before, (
+        "weighting by holdings should send most of the pool to the largest holder")
+
+
+def test_the_frozen_upkeep_settings_reproduce_the_old_engine():
+    """
+    `gol-1` has to keep meaning what it meant.
+
+    These four mechanics change the engine's core loop — when edges are cut,
+    what counts as use, an extra transfer step, an extra input row — so the
+    frozen path through all of it has to be byte-identical to the path that
+    existed before them. Anything else silently rewrites every result already
+    recorded.
+    """
+    frozen = small(allow_gifting=False, prune_after="blotto",
+                   inactive_window="phase", redistribution="uniform")
+    assert frozen.strain_id() == "gol-1", "the frozen settings are not gol-1"
+    assert frozen.n_inputs() == SimConfig(**{**dataclasses.asdict(frozen)}).n_inputs()
+
+    # The engine takes the same route: no gift step, no risk flag, and the cut
+    # falling after the game phase on the phase just ended.
+    world = new_world(frozen)
+    assert not world.cfg.allow_gifting
+    assert world._window_phases() == 1
+    assert world._prunes_after(2) and not world._prunes_after(1)
+    assert "GIFT" not in world.heads
+
+
+def test_the_head_layout_is_the_only_statement_of_where_the_rows_are():
+    """
+    build_heads reads cfg.head_layout() rather than counting the offsets again.
+
+    It used to count them again, and the two drifted the moment a head was
+    added: the layout gained the gift rows, this did not, and the run died
+    reaching for a head that had no slice. One statement, checked here against
+    every combination that changes the shape.
+    """
+    from GraphOfLifeSimple import build_heads
+
+    for gifting in (False, True):
+        for handover in (False, True):
+            for revolutions in (False, True):
+                cfg = small(allow_gifting=gifting, allow_handover=handover,
+                            allow_revolutions=revolutions)
+                layout = cfg.head_layout()
+                heads = build_heads(cfg)
+
+                assert set(heads) == (set(layout) - {"MESSAGE"}) | {"MESSAGE_START"}
+                for name, (start, end) in layout.items():
+                    if name == "MESSAGE":
+                        assert heads["MESSAGE_START"] == start
+                    elif name == "BLOTTO":
+                        assert heads[name] == start
+                    else:
+                        assert heads[name] == slice(start, end), name
+
+                # And the layout covers exactly the rows the brain has.
+                assert max(end for _, end in layout.values()) == cfg.n_outputs()
+
 
 
 def _main() -> int:

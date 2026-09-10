@@ -127,6 +127,9 @@ Object.assign(Viewer, {
     meanInvestedShare: 'Mean investment',
     meanChildLinks: 'Links per child',
     handovers: 'Handovers',
+    gifts: 'Gifts',
+    giftTokens: 'Gifted tokens',
+    giftShare: 'Gifted share',
     totalFlow: 'Tokens moved',
     meanEdgeFlow: 'Mean edge flow',
     maxEdgeFlow: 'Max edge flow',
@@ -151,7 +154,7 @@ Object.assign(Viewer, {
     ] },
     { key: 'reproduction', label: 'Reproduction', open: true, keys: [
       'births', 'reproTokenShare', 'meanInvestedShare', 'meanChildLinks',
-      'handovers'
+      'handovers', 'gifts', 'giftTokens', 'giftShare'
     ] },
     // The lightning readings belong here rather than under General: they are
     // measured on the token flow a Blotto phase allocates, they are blank on a

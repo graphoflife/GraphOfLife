@@ -80,6 +80,11 @@ const Viewer = {
     // than plain state, so a preset carries it; which node is focused is not,
     // since node ids mean nothing across runs.
     focusRadius: 2,
+    // The k-core filter, off until asked for. Off by default because it hides
+    // agents, and a view that silently omits part of the population is worse
+    // than one that shows all of it.
+    kCoreOn: false,
+    kCore: 1,
 
     // Which quantity each chart plots, and the scale of each axis. Chart
     // metrics are domain-qualified, since `loops` means one thing for a node
@@ -517,7 +522,7 @@ const Viewer = {
     // the layout holds change together or not at all.
     this.fullFrame = frame;
     this.focusNote = '';
-    this.frame = this.focusFrame(frame);
+    this.frame = this.viewFrame(frame);
     this.emptyEl.style.display = 'none';
     const carry = this.settings.layoutCarry && !this._dropPositions;
     this._dropPositions = false;

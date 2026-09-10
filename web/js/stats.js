@@ -694,6 +694,7 @@ class FrameMetrics {
 
       births: null, meanInvestedShare: null, meanChildLinks: null,
       reproTokenShare: null, handovers: null,
+      gifts: null, giftTokens: null, giftShare: null,
       revolutions: null, totalFlow: null, meanEdgeFlow: null, maxEdgeFlow: null,
       selfAllocationShare: null, revoltShare: null, spreadShare: null,
       heldHomeShare: null, prunedEdges: null
@@ -726,6 +727,14 @@ class FrameMetrics {
       if (births.some(b => b.handed_over !== undefined)) {
         out.handovers = sum(births.map(b => (b.handed_over || []).length));
       }
+    }
+
+    // Gifts. Absent rather than zero on a run without the mechanic, so a world
+    // where nobody chose to give reads differently from one where nobody could.
+    if (d.gifts) {
+      out.gifts = d.gifts.length;
+      out.giftTokens = sum(d.gifts.map(g => g[2]));
+      out.giftShare = this.totalTokens ? out.giftTokens / this.totalTokens : 0;
     }
 
     // ---- game phase ----

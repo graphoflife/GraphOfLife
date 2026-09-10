@@ -120,27 +120,32 @@ def build_heads(cfg: SimConfig):
     """
     Which output rows mean what, for this configuration.
 
+    Read straight off `cfg.head_layout()`, which the settings card already
+    displays, so there is one statement of where the rows are rather than two.
+    It used to be two — the same offsets counted out again here — and they had
+    to be edited together every time a head was added. They were not: adding
+    the gift heads to the layout and not to this list produced a brain with
+    rows nobody could name, and the run died reaching for one.
+
     The optional rows exist only when their option is on. Always reserving them
     would change the brain's shape for every run, and a checkpoint saved under
     one shape cannot be resumed under another — so a run keeps exactly the
     architecture it started with.
+
+    Two rows are named differently from the way they are laid out, because of
+    how they are read rather than where they live:
+
+      BLOTTO         one row, wanted as a plain vector. As a slice it would
+                     arrive as a 1-by-n matrix and every use would have to
+                     unwrap it.
+      MESSAGE_START  an offset the message vector is counted from, rather than
+                     a span taken whole.
     """
-    heads = {
-        "REPRO_FRACTION": slice(0, 2),   # fraction of my tokens to invest in a child
-        "LINK": slice(2, 4),             # link the newborn to this candidate?
-        "LINK_MODE": slice(4, 6),        # read LINK as probability, or as maximum?
-        "BLOTTO": 6,                     # desirability of allocating tokens here
-        "BLOTTO_MODE": slice(7, 9),      # spread proportionally, or go all-in?
-    }
-    nxt = 9
-    if cfg.allow_revolutions:
-        heads["REV_FRACTION"] = slice(nxt, nxt + 2)   # portion of this allocation that revolts
-        nxt += 2
-    if cfg.allow_handover:
-        heads["HANDOVER"] = slice(nxt, nxt + 2)       # give this edge to the child?
-        heads["HANDOVER_MODE"] = slice(nxt + 2, nxt + 4)
-        nxt += 4
-    heads["MESSAGE_START"] = nxt
+    layout = cfg.head_layout()
+    heads = {name: slice(start, end) for name, (start, end) in layout.items()
+             if name not in ("BLOTTO", "MESSAGE")}
+    heads["BLOTTO"] = layout["BLOTTO"][0]
+    heads["MESSAGE_START"] = layout["MESSAGE"][0]
     return heads
 
 
@@ -702,6 +707,17 @@ class GraphOfLife:
         # it cannot be compared between two runs.
         self.born_at: Dict[int, int] = {}
 
+        # Phases run, counted straight through rather than per iteration, so
+        # "the last two phases" is arithmetic rather than a special case at the
+        # boundary between one iteration and the next.
+        self.phase_count = 0
+        # For each connection, the phase in which tokens last crossed it —
+        # keyed by the edge with its ends sorted, the same key the prune uses.
+        # Creating a connection stamps it with the current phase, so a
+        # newborn's links count as active and cannot be pruned before anyone
+        # has had a chance to use them.
+        self.edge_active_at: Dict[Tuple[int, int], int] = {}
+
         if _empty:
             return
 
@@ -712,7 +728,7 @@ class GraphOfLife:
             self.G.add_node(self.next_agent_id)
             self.next_agent_id += 1
         for u, v in G_init.edges():
-            self.G.add_edge(old2new[u], old2new[v])
+            self._add_edge(old2new[u], old2new[v])
 
         share = cfg.total_tokens // self.G.number_of_nodes()
         for aid in self.G.nodes():
@@ -763,6 +779,65 @@ class GraphOfLife:
         for book in self._books:
             book.pop(aid, None)
 
+    # ------------------------------------------------------------------------
+    # Edge upkeep
+    # ------------------------------------------------------------------------
+
+    @staticmethod
+    def _edge_key(u: int, v: int) -> Tuple[int, int]:
+        """One key per connection, whichever end is named first."""
+        return (int(u), int(v)) if u < v else (int(v), int(u))
+
+    def _add_edge(self, u: int, v: int) -> None:
+        """
+        Create a connection and mark it used.
+
+        Stamping it with the current phase is what makes a new connection
+        active by default. Judged on flow alone a newborn's links carry nothing
+        in the phase they are made and would be pruned at the first accounting
+        — reproduction would build a graph that the very next step tore down.
+        """
+        if u == v:
+            return
+        self.G.add_edge(int(u), int(v))
+        self.edge_active_at[self._edge_key(u, v)] = self.phase_count
+
+    def _drop_edges(self, edges) -> None:
+        """Remove connections and forget their history in the same breath."""
+        edges = list(edges)
+        if not edges:
+            return
+        self.G.remove_edges_from(edges)
+        for u, v in edges:
+            self.edge_active_at.pop(self._edge_key(u, v), None)
+
+    def _mark_flow(self, u: int, v: int) -> None:
+        """Tokens crossed this connection in the current phase."""
+        key = self._edge_key(u, v)
+        if key in self.edge_active_at or self.G.has_edge(*key):
+            self.edge_active_at[key] = self.phase_count
+
+    def _window_phases(self) -> int:
+        """How many phases back the accounting looks."""
+        return 2 if self.cfg.inactive_window == "iteration" else 1
+
+    def _stale_edges(self) -> List[Tuple[int, int]]:
+        """
+        Connections that have carried nothing inside the window.
+
+        The window ends at the current phase and reaches back one phase, or two
+        when a whole iteration counts. An edge whose last activity — a crossing
+        or its own creation — falls before that has lapsed.
+        """
+        oldest = self.phase_count - self._window_phases() + 1
+        return [self._edge_key(u, v) for u, v in self.G.edges()
+                if self.edge_active_at.get(self._edge_key(u, v), -1) < oldest]
+
+    def _prunes_after(self, phase: int) -> bool:
+        """Whether the accounting falls due at the end of this phase."""
+        when = self.cfg.prune_after
+        return when == "both" or when == ("reproduction" if phase == 1 else "blotto")
+
     def _age_of(self, aid: int) -> int:
         """
         Iterations lived. Indexed rather than fetched with a default, because
@@ -800,7 +875,7 @@ class GraphOfLife:
 
     def _precompute_features(self) -> Tuple[
         Dict[int, float], Dict[int, List[int]], Dict[int, List[float]],
-        Dict[int, List[float]], Dict[int, float]
+        Dict[int, List[float]], Dict[int, float], set
     ]:
         """
         Build every node-level feature once per phase, in O(N).
@@ -833,9 +908,16 @@ class GraphOfLife:
             q_tok[u] = _six_quantiles(sorted(log_tokens[n] for n in N))
             q_deg[u] = _six_quantiles(sorted(log_degrees[n] for n in N))
 
-        return log_degrees, neighs, q_tok, q_deg, log_tokens
+        # Which connections would lapse if nothing more crossed them. Taken
+        # once, here, before anything this phase has moved a token, so every
+        # agent reads the same answer whatever order the loop reaches them in —
+        # the same reason messages are delivered from an outbox.
+        at_risk = set(self._stale_edges()) if self.cfg.allow_gifting else set()
 
-    def _input_vec(self, u: int, v: int, log_deg, q_tok, q_deg, log_tok) -> np.ndarray:
+        return log_degrees, neighs, q_tok, q_deg, log_tokens, at_risk
+
+    def _input_vec(self, u: int, v: int, log_deg, q_tok, q_deg, log_tok,
+                   at_risk) -> np.ndarray:
         """Assemble the sensory vector for observer `u` looking at candidate `v`."""
         cfg = self.cfg
         base = (
@@ -861,9 +943,18 @@ class GraphOfLife:
                  if cfg.brain_kind == "binary"
                  else np.random.uniform(-2.0, 2.0, size=cfg.random_input_amount)).tolist()
 
-        return np.array([int(u == v)] + base + msg_feats + noise, dtype=float)
+        # Whether the connection to this candidate lapses unless something
+        # crosses it. Only present when gifting is, because it is the fact that
+        # turns a gift into a decision — and because a run keeps the input
+        # width it was checkpointed with.
+        flags = [int(u == v)]
+        if self.cfg.allow_gifting:
+            flags.append(int(u != v and self._edge_key(u, v) in at_risk))
 
-    def _observe(self, u: int, candidates: List[int], log_deg, q_tok, q_deg, log_tok) -> np.ndarray:
+        return np.array(flags + base + msg_feats + noise, dtype=float)
+
+    def _observe(self, u: int, candidates: List[int], log_deg, q_tok, q_deg,
+                 log_tok, at_risk) -> np.ndarray:
         """
         One forward pass scoring every candidate.
 
@@ -877,7 +968,8 @@ class GraphOfLife:
         if self.cfg.random_decisions:
             return np.random.standard_normal((self.cfg.n_outputs(), len(candidates)))
         X = np.column_stack([
-            self._input_vec(u, v, log_deg, q_tok, q_deg, log_tok) for v in candidates
+            self._input_vec(u, v, log_deg, q_tok, q_deg, log_tok, at_risk)
+            for v in candidates
         ])
         return self.brains[u].forward(X)
 
@@ -965,11 +1057,11 @@ class GraphOfLife:
         if not (cfg.message_prepass and cfg.exchange_messages and cfg.message_amount > 0):
             return
 
-        log_deg, neighs, q_tok, q_deg, log_tok = features
+        log_deg, neighs, q_tok, q_deg, log_tok, at_risk = features
         outbox: Dict[int, Dict[int, List[float]]] = {}
         for u in sorted(self.G.nodes()):
             targets = [u] + list(neighs[u])
-            Y = self._observe(u, targets, log_deg, q_tok, q_deg, log_tok)
+            Y = self._observe(u, targets, log_deg, q_tok, q_deg, log_tok, at_risk)
             self._emit_messages(u, targets, Y, outbox)
         self._deliver_messages(outbox)
         self._note(step)
@@ -992,7 +1084,9 @@ class GraphOfLife:
         """
         decisions: List[Dict[str, Any]] = []
         handovers: List[Tuple[int, int, int]] = []
+        gifts: List[Tuple[int, int, int]] = []
         outbox: Dict[int, Dict[int, List[float]]] = {}
+        self.phase_count += 1
         # Captured before anything changes, so the viewer can express births and
         # deaths as a share of the population that actually faced this phase,
         # and show how much each agent gained or lost across it.
@@ -1002,7 +1096,7 @@ class GraphOfLife:
         # Nothing here depends on what anyone said, so the features are
         # measured once and both passes read the same ones.
         self._message_prepass("repro.messages", features)
-        log_deg, neighs, q_tok, q_deg, log_tok = features
+        log_deg, neighs, q_tok, q_deg, log_tok, at_risk = features
         self._note("repro.observe")
 
         for u in sorted(self.G.nodes()):
@@ -1011,7 +1105,7 @@ class GraphOfLife:
                 continue
 
             candidates = [u] + list(neighs[u])
-            Y = self._observe(u, candidates, log_deg, q_tok, q_deg, log_tok)
+            Y = self._observe(u, candidates, log_deg, q_tok, q_deg, log_tok, at_risk)
             self._emit_messages(u, candidates, Y, outbox)
 
             # How much of myself do I give away? Averaged over the whole view.
@@ -1019,26 +1113,36 @@ class GraphOfLife:
             child_tokens = int(np.floor(_share_of_first(frac[0], frac[1]) * tokens_u))
             child_tokens = max(0, min(tokens_u, child_tokens))
 
-            if child_tokens < 1:
-                continue
+            if child_tokens >= 1:
+                child_id, links = self._spawn_child(u, tokens_u, child_tokens,
+                                                    candidates, Y)
 
-            child_id, links = self._spawn_child(u, tokens_u, child_tokens, candidates, Y)
+                # Which of the parent's own connections move to the newborn.
+                # Applied after every birth, so nobody's neighbour list changes
+                # underfoot.
+                given = self._choose_handovers(u, child_id, candidates, Y)
+                for v in given:
+                    handovers.append((u, int(v), child_id))
 
-            # Which of the parent's own connections move to the newborn. Applied
-            # after every birth, so nobody's neighbour list changes underfoot.
-            given = self._choose_handovers(u, child_id, candidates, Y)
-            for v in given:
-                handovers.append((u, int(v), child_id))
+                if record_decisions:
+                    decisions.append({
+                        "agent": int(u),
+                        "tokens_before": tokens_u,
+                        "invested": child_tokens,
+                        "child": int(child_id),
+                        "links": [int(v) for v in links],
+                        "handed_over": [int(v) for v in given],
+                    })
 
-            if record_decisions:
-                decisions.append({
-                    "agent": int(u),
-                    "tokens_before": tokens_u,
-                    "invested": child_tokens,
-                    "child": int(child_id),
-                    "links": [int(v) for v in links],
-                    "handed_over": [int(v) for v in given],
-                })
+            # Gifts come out of whatever reproduction left, and are offered
+            # whether or not there was a birth — an agent with nothing to spare
+            # for a child may still have a connection worth keeping. Collected
+            # rather than paid here, for the reason the handovers are: a
+            # transfer that landed immediately would change what every agent
+            # after this one sees, and which agents those are is an accident of
+            # their ids.
+            gifts.extend(self._choose_gifts(u, tokens_u - child_tokens,
+                                            candidates, Y))
 
         # Hand the chosen edges over: the child gains the connection, the parent
         # loses it. If the newborn was already wired to that neighbour by the
@@ -1049,14 +1153,39 @@ class GraphOfLife:
             if not (self.G.has_node(child) and self.G.has_edge(parent, v)):
                 continue
             if child != v:
-                self.G.add_edge(child, v)
-            self.G.remove_edge(parent, v)
+                self._add_edge(child, v)
+            self._drop_edges([(parent, v)])
 
-        self.G.remove_edges_from(list(nx.selfloop_edges(self.G)))
+        self._drop_edges(list(nx.selfloop_edges(self.G)))
         self._note("repro.born",
                    born=[int(d["child"]) for d in decisions],
                    parents=[[int(d["agent"]), int(d["child"])] for d in decisions],
                    handed=[[int(p), int(v), int(c)] for p, v, c in handovers])
+
+        # Pay the gifts. A giver may have handed a connection to its newborn
+        # since deciding, so the edge is checked rather than assumed — and a
+        # gift that no longer has a connection to cross is not paid, because
+        # what it was for was keeping that connection.
+        paid: List[Tuple[int, int, int]] = []
+        for giver, taker, amount in gifts:
+            if not self.G.has_edge(giver, taker):
+                continue
+            amount = min(amount, int(self.tokens.get(giver, 0)))
+            if amount < 1:
+                continue
+            self.tokens[giver] = int(self.tokens.get(giver, 0)) - amount
+            self.tokens[taker] = int(self.tokens.get(taker, 0)) + amount
+            self._mark_flow(giver, taker)
+            paid.append((int(giver), int(taker), amount))
+        self._note("repro.gifts",
+                   gifts=[[g, t, a] for g, t, a in paid])
+
+        # The accounting may fall due here rather than after the game. When it
+        # does, a gift paid moments ago is what keeps a connection standing.
+        dead_edges = self._stale_edges() if self._prunes_after(1) else []
+        self._drop_edges(dead_edges)
+        self._note("repro.prune", cut=[[int(a), int(b)] for a, b in dead_edges])
+
         self._deliver_messages(outbox)
 
         before = self._snapshot() if self.on_step else None
@@ -1067,7 +1196,14 @@ class GraphOfLife:
 
         payload = None
         if record_decisions:
-            payload = {"births": decisions}
+            payload = {
+                "births": decisions,
+                "gifts": [[g, t, a] for g, t, a in paid],
+                # The prune can run here now, so a reproduction frame has to be
+                # able to say what it cut. Absent on a run that settles up after
+                # the game, which is not the same as having cut nothing.
+                "pruned_edges": [[int(a), int(b)] for a, b in dead_edges],
+            }
 
         return self._frame(phase=1, cleanup=cleanup, nodes_before=nodes_before,
                            tokens_before=tokens_before, decisions=payload)
@@ -1094,10 +1230,56 @@ class GraphOfLife:
             if _choose_binary(link_logits[0, col], link_logits[1, col],
                               link_mode[0, col], link_mode[1, col]):
                 if v != child_id and self.G.has_node(v):
-                    self.G.add_edge(child_id, v)
+                    self._add_edge(child_id, v)
                     linked.append(v)
 
         return child_id, linked
+
+    def _choose_gifts(self, u: int, purse: int, candidates: List[int],
+                      Y: np.ndarray) -> List[Tuple[int, int, int]]:
+        """
+        Which neighbours `u` hands tokens to, and how many each receives.
+
+        Read in the same three moves every other decision here uses: a fraction
+        head says how much of the purse to give away at all, a pair of logits
+        says yes or no to each neighbour, and a mode pair decides whether that
+        pair is a probability or a plain maximum. The budget is then split
+        across whoever was chosen in proportion to how strongly they were, by
+        the same largest-remainder apportionment the Blotto stake uses, so no
+        token is lost to rounding.
+
+        Column zero is the agent looking at itself. There is no connection
+        there and nothing to keep alive, so a gift to oneself is not a gift and
+        is not offered.
+
+        The purse is what reproduction left behind, which is what stops an
+        agent promising the same tokens twice.
+        """
+        if not self.cfg.allow_gifting or purse < 1 or len(candidates) < 2:
+            return []
+
+        frac = np.mean(Y[self.heads["GIFT_FRACTION"], :], axis=1)
+        budget = int(np.floor(_share_of_first(frac[0], frac[1]) * purse))
+        budget = max(0, min(purse, budget))
+        if budget < 1:
+            return []
+
+        logits = Y[self.heads["GIFT"], :]
+        mode = Y[self.heads["GIFT_MODE"], :]
+
+        cols: List[int] = []
+        for col in range(1, len(candidates)):
+            if _choose_binary(logits[0, col], logits[1, col],
+                              mode[0, col], mode[1, col]):
+                cols.append(col)
+        if not cols:
+            return []
+
+        weights = np.array([max(0.0, float(logits[0, col] - logits[1, col]))
+                            for col in cols])
+        shares = _apportion(weights, budget)
+        return [(int(u), int(candidates[col]), int(amount))
+                for col, amount in zip(cols, shares) if amount > 0]
 
     def _choose_handovers(self, parent: int, child: int,
                           candidates: List[int], Y: np.ndarray) -> List[int]:
@@ -1136,9 +1318,10 @@ class GraphOfLife:
         """
         nodes_before = self.G.number_of_nodes()
         tokens_before = dict(self.tokens)
+        self.phase_count += 1
         features = self._precompute_features()
         self._message_prepass("game.messages", features)
-        log_deg, neighs, q_tok, q_deg, log_tok = features
+        log_deg, neighs, q_tok, q_deg, log_tok, at_risk = features
 
         # --- 1. One look, which decides both what to say and where to stake ---
         #
@@ -1161,7 +1344,7 @@ class GraphOfLife:
 
         for u in sorted(self.G.nodes()):
             targets = [u] + list(neighs[u])
-            Y = self._observe(u, targets, log_deg, q_tok, q_deg, log_tok)
+            Y = self._observe(u, targets, log_deg, q_tok, q_deg, log_tok, at_risk)
             # Written even by an agent with nothing to stake: it is still there,
             # its neighbours can still see it, and it still has something to say.
             self._emit_messages(u, targets, Y, outbox)
@@ -1204,10 +1387,11 @@ class GraphOfLife:
                 else:
                     rev_amounts.append(0)
 
-                if u != v:
+                if u != v and amount > 0:
                     edge = tuple(sorted((u, v)))
                     if edge in edge_flow:
                         edge_flow[edge] += amount
+                        self._mark_flow(u, v)
 
             if record_decisions:
                 record = {
@@ -1278,9 +1462,13 @@ class GraphOfLife:
                           if int(x["winner"]) != int(x["node"])])
 
         # --- 4. Aftermath -----------------------------------------------------
-        dead_edges = [e for e, flow in edge_flow.items() if flow == 0]
-        if dead_edges:
-            self.G.remove_edges_from(dead_edges)
+        #
+        # Which connections lapse is no longer "carried nothing this phase": it
+        # is whatever falls outside the window, and the accounting may not even
+        # fall due here. A run that settles up after reproduction instead
+        # leaves every connection standing at this point.
+        dead_edges = self._stale_edges() if self._prunes_after(2) else []
+        self._drop_edges(dead_edges)
         self._note("game.prune", cut=[[int(a), int(b)] for a, b in dead_edges])
 
         self._deliver_messages(outbox)
@@ -1416,14 +1604,33 @@ class GraphOfLife:
             global_pool += max(0, self.tokens.get(u, 0))
 
         if doomed:
+            # Their connections go first, so the upkeep record loses them with
+            # them. Removing the nodes alone would leave entries naming agents
+            # that no longer exist — harmless, since ids are never reused, but
+            # it grows for the length of the run and never shrinks.
+            self._drop_edges([(u, v) for u in doomed for v in self.G.neighbors(u)])
             self.G.remove_nodes_from(list(doomed))
             for u in doomed:
                 self._forget_agent(u)
 
         survivors = list(self.G.nodes())
         if global_pool > 0 and survivors:
+            # Who the estate goes to. Uniform gives every survivor the same
+            # chance at each token, which makes the cull a leveller. Weighting
+            # by what a survivor already holds makes it the opposite — the
+            # largest holders take most of what the dead leave, and every cull
+            # concentrates rather than spreads. Anyone at zero was starved out
+            # already, so the weights are never all zero.
+            if self.cfg.redistribution == "by_tokens":
+                held = np.array([max(0, int(self.tokens.get(u, 0)))
+                                 for u in survivors], dtype=float)
+                total_held = float(held.sum())
+                probs = ((held / total_held) if total_held > 0
+                         else np.full(len(survivors), 1 / len(survivors)))
+            else:
+                probs = np.full(len(survivors), 1 / len(survivors))
             # Multinomial keeps the token count exactly conserved.
-            draws = np.random.multinomial(global_pool, [1 / len(survivors)] * len(survivors))
+            draws = np.random.multinomial(global_pool, probs)
             for u, extra in zip(survivors, draws):
                 self.tokens[u] = self.tokens.get(u, 0) + int(extra)
             # Counted here rather than beside the pool, because with nobody left
@@ -1441,6 +1648,9 @@ class GraphOfLife:
             # which some books describe the new world and the rest the old one.
             for book in self._books:
                 book.clear()
+            # Not a per-agent book — it is keyed by pairs — but it names agents
+            # that no longer exist, and ids are handed out fresh from here.
+            self.edge_active_at.clear()
             self._register_agent(aid, self.cfg.total_tokens,
                                  self._new_brain(), NO_PARENT)
             report["resurrected"] = True
@@ -1548,6 +1758,16 @@ class GraphOfLife:
                               dtype=np.int64).reshape(-1, 2),
             "counters": np.array([self.next_agent_id, self.next_brain_id, self.iteration],
                                  dtype=np.int64),
+            # When each connection last carried tokens, in the same order the
+            # edges are written, and the phase counter those numbers are
+            # against. This is world state for the same reason messages in
+            # flight are: without it a resumed run cannot tell a connection
+            # that has been idle for a phase from one that has just been made,
+            # and the next accounting either spares everything or cuts it.
+            "edge_active_at": np.array(
+                [self.edge_active_at.get(self._edge_key(u, v), self.phase_count)
+                 for u, v in self.G.edges()], dtype=np.int64),
+            "phase_count": np.array([self.phase_count], dtype=np.int64),
             # Which algorithm made this. A checkpoint travels on its own — it
             # gets copied, shared, resumed on another machine — and without
             # this it is a world with no way to say what rules it lived under.
@@ -1617,9 +1837,21 @@ class GraphOfLife:
         born_at = (blob["born_at"].tolist() if "born_at" in blob
                    else [UNKNOWN_BIRTH] * len(parent_ids))
 
+        # Before the edges, because adding one stamps it with this number.
+        world.phase_count = (int(blob["phase_count"][0]) if "phase_count" in blob
+                             else 0)
+
         world.G.add_nodes_from(ids)
-        for a, b in blob["edges"].tolist():
-            world.G.add_edge(ids[a], ids[b])
+        edge_list = blob["edges"].tolist()
+        # A checkpoint written before upkeep was tracked has no history. Every
+        # connection in it is treated as active as of the resume, which spares
+        # them all one accounting rather than cutting the whole graph on its
+        # first step — the same choice `born_at` makes for ages.
+        stamps = (blob["edge_active_at"].tolist() if "edge_active_at" in blob
+                  else [world.phase_count] * len(edge_list))
+        for (a, b), when in zip(edge_list, stamps):
+            world._add_edge(ids[a], ids[b])
+            world.edge_active_at[world._edge_key(ids[a], ids[b])] = int(when)
 
         n_layers = int(blob["n_layers"][0])
         weights = [blob[f"W{i}"] for i in range(n_layers)]

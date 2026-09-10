@@ -146,6 +146,23 @@ Object.assign(Viewer, {
       if (this.focusId !== null) this.refocus(true);
     });
 
+    // The k-core control. Its two halves change the same view, so both go
+    // through one handler rather than each having its own idea of what the
+    // other is set to.
+    const coreOn = document.getElementById('kCoreOn');
+    const coreK = document.getElementById('kCoreK');
+    if (coreOn && coreK) {
+      const applyCore = () => {
+        const k = Math.max(1, Math.min(99, Math.round(Number(coreK.value) || 1)));
+        coreK.value = k;
+        this.settings.kCore = k;
+        this.settings.kCoreOn = coreOn.checked && this.focusId === null;
+        this.refocus(true);
+      };
+      coreOn.addEventListener('change', applyCore);
+      coreK.addEventListener('change', () => { if (coreOn.checked) applyCore(); });
+    }
+
     // The browser owns this state — Esc and the window chrome can change it
     // without going through the button — so the button follows the event
     // rather than the other way round.

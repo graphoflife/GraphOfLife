@@ -195,6 +195,47 @@
           <small>Off, a node goes to whoever staked most, ties at random. This and handover change the brain's outputs, so neither can be altered later.</small>
         </div>
         <div class="field checkbox">
+          <label><input type="checkbox" id="cfg_allow_gifting" data-cfg="allow_gifting"> Allow gifting</label>
+          <small>An agent may hand tokens to a neighbour during reproduction, asking
+            nothing back, out of whatever reproduction left it. Tokens crossing a
+            connection also count as use of it, so a gift is the one way to
+            deliberately keep a link that would otherwise lapse — and an agent is
+            shown, for each neighbour, whether the link between them is about to.
+            Adds outputs and an input, so it cannot be altered later.</small>
+        </div>
+        <div class="field">
+          <label for="cfg_prune_after">Unused links die</label>
+          <select id="cfg_prune_after" data-cfg="prune_after">
+            <option value="reproduction">After the reproduction phase</option>
+            <option value="blotto">After the game phase</option>
+            <option value="both">After both phases</option>
+          </select>
+          <small>When the accounting falls due. Settling up after reproduction is
+            what gives a gift somewhere to land: an agent sees a connection about
+            to lapse and can spend to save it in the same phase.</small>
+        </div>
+        <div class="field">
+          <label for="cfg_inactive_window">A link counts as used within</label>
+          <select id="cfg_inactive_window" data-cfg="inactive_window">
+            <option value="iteration">The last whole iteration — both phases</option>
+            <option value="phase">The last phase only</option>
+          </select>
+          <small>How far back the accounting looks. Over a whole iteration a
+            connection that carried a game-phase bid is still in credit when
+            reproduction settles up. A newly made connection counts as used either
+            way, so a newborn's links are never cut before anyone can use them.</small>
+        </div>
+        <div class="field">
+          <label for="cfg_redistribution">The estate of the dead goes</label>
+          <select id="cfg_redistribution" data-cfg="redistribution">
+            <option value="uniform">Evenly over the survivors</option>
+            <option value="by_tokens">Weighted by what each already holds</option>
+          </select>
+          <small>Evenly makes each cull a leveller. Weighted makes it the opposite —
+            the largest holders take most of what the dead leave, and every cull
+            concentrates rather than spreads.</small>
+        </div>
+        <div class="field checkbox">
           <label><input type="checkbox" id="cfg_random_decisions" data-cfg="random_decisions"> Random decisions</label>
           <small>The control. Agents never read their inputs: every decision is
             taken from noise instead. Everything else is unchanged, so running
@@ -371,6 +412,14 @@
             <input type="number" id="focusRadius" min="1" max="99" step="1" value="2">
           </label>
           <button class="seg-btn" id="btnClearFocus" title="Show the whole graph again" disabled>Show all</button>
+        </div>
+        <div class="seg" role="group" aria-label="k-core">
+          <label class="seg-field" id="kCoreField"
+                 title="Show only the k-core: what is left after repeatedly removing everyone with fewer than k connections, until nobody has fewer. Every statistic below is then measured on that alone. Unavailable while a single node is focused.">
+            <input type="checkbox" id="kCoreOn">
+            k-core
+            <input type="number" id="kCoreK" min="1" max="99" step="1" value="1">
+          </label>
         </div>
         <span class="focus-note" id="focusNote"></span>
         <div class="run-inline">

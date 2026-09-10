@@ -39,6 +39,27 @@ which it is.
 | `allow_revolutions` | `true` | the non-transitivity generator |
 | `tokens_created_per_phase` | `0` | a magnitude, but 0 against anything else is a closed economy against one that mints — a different algorithm, not a different setting |
 | `random_decisions` | `false` | the control: agents never read their inputs and every decision is taken from noise instead |
+| `allow_gifting` | `false` | an agent may hand tokens to a neighbour during reproduction; the transfer is also flow, so it is the one way to deliberately keep a link that would otherwise lapse. Adds three output heads and the input flag saying whether a link is about to |
+| `prune_after` | `blotto` | when unused links are cut: `blotto`, `reproduction` or `both`. Cutting after reproduction is what gives a gift somewhere to land |
+| `inactive_window` | `phase` | how far back "used" looks: the phase just ended, or the last whole `iteration`. A newly made link counts as used either way |
+| `redistribution` | `uniform` | how the estate of the dead is shared out. `by_tokens` weights it by what each survivor already holds, making every cull a concentration event |
+
+### What a new run is offered
+
+The frozen defaults above say what `gol-1` means and never move. What the
+new-simulation form arrives filled in with is a separate thing —
+`NEW_RUN_DEFAULTS` in `gol_config.py` — and it is free to move as the evidence
+does. It currently offers:
+
+```
+gol-1+allow_gifting+inactive_window=iteration+prune_after=reproduction
+```
+
+So a run started today announces itself as a different algorithm rather than
+quietly borrowing the old name, and every run already on disk keeps the name it
+was given. Verified by hashing three seeds over fifteen iterations against the
+engine as it stood before these mechanics existed: with all four at their frozen
+values the frames are identical.
 
 ### Mechanics — reserved, not yet implemented
 

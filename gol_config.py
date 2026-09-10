@@ -54,6 +54,38 @@ MECHANICS: Dict[str, Any] = {
     # closed economy and one that mints, which is a different algorithm rather
     # than a different setting of one.
     "tokens_created_per_phase": 0,
+
+    # ---- edge upkeep -------------------------------------------------------
+    #
+    # Frozen at what the engine did before they existed, like everything else
+    # here. What a *new* run is offered is a different question, and it is
+    # answered by NEW_RUN_DEFAULTS rather than by editing these.
+    "allow_gifting": False,
+    "prune_after": "blotto",
+    "inactive_window": "phase",
+    "redistribution": "uniform",
+}
+
+# What the new-simulation form arrives filled in with.
+#
+# Deliberately not the same thing as the frozen defaults above, and the
+# distinction is the whole point. A frozen default is a promise about what
+# `gol-1` names, and it can never move. This is a recommendation about what is
+# worth running next, and it is free to move whenever the evidence does.
+#
+# A run started from these is named for every way it differs, so it announces
+# itself as a different algorithm rather than quietly borrowing the old name:
+#
+#     gol-1+allow_gifting+inactive_window=iteration+prune_after=reproduction
+#
+# Anything omitted here is offered at its frozen value. Redistribution stays
+# uniform: weighting the estate of the dead by what a survivor already holds
+# turns every cull into a concentration event, and that is an experiment rather
+# than a default.
+NEW_RUN_DEFAULTS: Dict[str, Any] = {
+    "allow_gifting": True,
+    "prune_after": "reproduction",
+    "inactive_window": "iteration",
 }
 
 # Parameters — magnitudes. Cited alongside an experiment, but not part of the
@@ -106,6 +138,15 @@ class SimConfig:
         # ran with one pass per phase. Reading those as having used a pre-pass
         # would change what a resumed run does.
         "message_prepass": False,
+        # Edge upkeep, all four defaulting *on* for a new run and all four
+        # absent from anything already on disk. Gifting in particular adds an
+        # output head and an input flag, so reading an old run as having had it
+        # would change the brain's shape and make its own checkpoint
+        # unloadable — the exact failure the note above warns about.
+        "allow_gifting": False,
+        "prune_after": "blotto",
+        "inactive_window": "phase",
+        "redistribution": "uniform",
     }
 
     # What each kind of brain wants, so that choosing one does not also mean
@@ -220,6 +261,46 @@ class SimConfig:
     # anything at all.
     random_decisions: bool = False
 
+    # ---- Edge upkeep ----
+    #
+    # A connection has always had to be used or die. What was missing was any
+    # way to *choose* to keep one: the only act that could put tokens on an
+    # edge was a Blotto bid, so an edge nobody happened to bid across died
+    # whether or not anyone wanted it. These four settings turn upkeep into a
+    # decision — what counts as use, when the accounting falls due, and whether
+    # an agent may pay to keep a connection it values.
+
+    # Let an agent hand tokens to a neighbour during reproduction, as a gift
+    # rather than a bid. The tokens are a real transfer and the act is real
+    # flow, so a gift keeps the connection it crosses alive. This adds three
+    # output heads and the input flag that makes them worth having, so it
+    # cannot be switched on for a run that already exists.
+    #
+    # Frozen off, like every mechanic here, so that `gol-1` keeps naming one
+    # fixed algorithm. What a *new* run is offered is a separate question and
+    # is answered by NEW_RUN_DEFAULTS below.
+    allow_gifting: bool = False
+
+    # When the accounting falls due: after the reproduction phase, after the
+    # Blotto phase, or after both. Pruning after reproduction is what gives a
+    # gift somewhere to land — an agent sees a connection about to lapse and
+    # can spend to save it in the same phase.
+    prune_after: str = "blotto"
+
+    # What "unused" means. `phase` judges an edge on the phase just ended;
+    # `iteration` gives it the last two, so a connection that carried a Blotto
+    # bid is still in credit when the reproduction phase settles up. A newly
+    # created edge counts as active for the phase it was born in, whichever
+    # window is in force — a newborn's connections are never killed before
+    # anyone has had a chance to use them.
+    inactive_window: str = "phase"
+
+    # How the estate of the dead is shared out. `uniform` scatters it evenly
+    # over the survivors; `by_tokens` weights each survivor's share by what it
+    # already holds, which makes the cull an engine of concentration rather
+    # than a leveller.
+    redistribution: str = "uniform"
+
     # ---- Mutation ----
     mutation_probability: float = 0.5
     mutation_noise_std: float = 0.2
@@ -264,8 +345,21 @@ class SimConfig:
     FLAG_INPUTS: ClassVar[int] = 1        # is-self
     MAGNITUDE_INPUTS: ClassVar[int] = 28  # own/target tokens and degrees, and quantiles
 
+    def flag_inputs(self) -> int:
+        """
+        Single-bit inputs, which is one plus whatever the mechanics add.
+
+        Gifting brings a second: whether the connection to this target would
+        lapse if nothing more crossed it. Without that flag an agent can see a
+        neighbour's tokens and degree but not the one fact the decision turns
+        on, and paying to save an edge becomes a guess. Conditional rather than
+        always present for the same reason the output heads are — a run keeps
+        exactly the architecture it was checkpointed with.
+        """
+        return self.FLAG_INPUTS + (1 if self.allow_gifting else 0)
+
     def n_inputs(self) -> int:
-        return (self.FLAG_INPUTS + self.MAGNITUDE_INPUTS
+        return (self.flag_inputs() + self.MAGNITUDE_INPUTS
                 + 4 * self.message_amount + self.random_input_amount)
 
     def ladder_split(self) -> tuple[int, int]:
@@ -303,7 +397,7 @@ class SimConfig:
         1 across sixteen thresholds spends sixteen rows to say one thing, and
         fifteen of them can never change.
         """
-        return (self.FLAG_INPUTS
+        return (self.flag_inputs()
                 + 4 * self.message_amount + self.random_input_amount)
 
     def binary_rows(self) -> int:
@@ -317,6 +411,7 @@ class SimConfig:
         return (9
                 + (2 if self.allow_revolutions else 0)
                 + (4 if self.allow_handover else 0)
+                + (6 if self.allow_gifting else 0)
                 + self.message_amount)
 
     def head_layout(self) -> Dict[str, Any]:
@@ -336,12 +431,32 @@ class SimConfig:
             layout["HANDOVER"] = [nxt, nxt + 2]
             layout["HANDOVER_MODE"] = [nxt + 2, nxt + 4]
             nxt += 4
+        if self.allow_gifting:
+            # How much of what reproduction left me do I give away at all,
+            # then which neighbours receive a share of it. Read exactly like
+            # reproduction's fraction and like the link decision, so a gift is
+            # not a new kind of choice — only a new thing to choose about.
+            layout["GIFT_FRACTION"] = [nxt, nxt + 2]
+            layout["GIFT"] = [nxt + 2, nxt + 4]
+            layout["GIFT_MODE"] = [nxt + 4, nxt + 6]
+            nxt += 6
         layout["MESSAGE"] = [nxt, nxt + self.message_amount]
         return layout
 
     # --------------------------------------------------------------------
     # Naming this algorithm
     # --------------------------------------------------------------------
+
+    @classmethod
+    def for_new_run(cls, **overrides: Any) -> "SimConfig":
+        """
+        The configuration the new-simulation form is offered.
+
+        Not `SimConfig()`, which is frozen at whatever `gol-1` means and has to
+        stay there. This is what the project currently thinks is worth running,
+        and it names itself accordingly.
+        """
+        return cls(**{**NEW_RUN_DEFAULTS, **overrides})
 
     def strain_id(self) -> str:
         """
@@ -443,6 +558,12 @@ class SimConfig:
             raise ValueError("mutation_noise_std cannot be negative")
         if self.brain_kind not in ("float", "float16", "binary"):
             raise ValueError("brain_kind must be float, float16 or binary")
+        if self.prune_after not in ("blotto", "reproduction", "both"):
+            raise ValueError("prune_after must be blotto, reproduction or both")
+        if self.inactive_window not in ("phase", "iteration"):
+            raise ValueError("inactive_window must be phase or iteration")
+        if self.redistribution not in ("uniform", "by_tokens"):
+            raise ValueError("redistribution must be uniform or by_tokens")
         if not 2 <= self.brain_bits <= 64:
             raise ValueError("brain_bits must be between 2 and 64")
         if self.export_every < 1:

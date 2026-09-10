@@ -496,7 +496,7 @@ class Handler(BaseHTTPRequestHandler):
 
     @staticmethod
     def _defaults() -> Dict[str, Any]:
-        cfg = SimConfig()
+        cfg = SimConfig.for_new_run()
         return {
             "config": cfg.to_dict(),
             # What each brain kind wants, so the form can fill it in rather

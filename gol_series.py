@@ -77,7 +77,7 @@ def progress(run_id: str) -> Dict[str, Any]:
 # pool was dropped in favour of a resurrection. That commit did not bump this,
 # so every cache built before it has been serving the old number ever since,
 # which is the exact failure the paragraph above describes.
-SERIES_VERSION = 21
+SERIES_VERSION = 22
 
 # At most this many iterations are analysed for a run's history.
 #
@@ -776,6 +776,15 @@ def frame_stats(frame: Dict[str, Any], previous: Dict[str, Any] | None = None,
             mean_invested = 0.0
             mean_links = 0.0
 
+    # Gifts. Absent rather than zero on a run without the mechanic, so a world
+    # where nobody chose to give can be told from one where nobody could.
+    gifts_made = gift_tokens = gift_share = None
+    given = decisions.get("gifts")
+    if given is not None:
+        gifts_made = len(given)
+        gift_tokens = sum(int(g[2]) for g in given)
+        gift_share = (gift_tokens / sum(tokens)) if sum(tokens) else 0.0
+
     # Edge traffic, rebuilt from the allocations rather than stored per edge.
     total_flow = mean_flow = max_flow = None
     self_share = revolt_share = spread_share = None
@@ -962,6 +971,9 @@ def frame_stats(frame: Dict[str, Any], previous: Dict[str, Any] | None = None,
         "reproTokenShare": repro_token_share,
         "handovers": handovers,
         "meanChildLinks": mean_links,
+        "gifts": gifts_made,
+        "giftTokens": gift_tokens,
+        "giftShare": gift_share,
         "revolutions": revolutions,
         "heldHomeShare": held_home,
         "totalFlow": total_flow,

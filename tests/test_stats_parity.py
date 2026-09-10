@@ -94,6 +94,11 @@ def _frames(count: int = 6):
         total_tokens=4000, n_nodes=70, k_neighbors=6,
         hidden_layers=[16, 12], message_amount=2, random_input_amount=2,
         allow_handover=True, allow_revolutions=True,
+        # Every optional mechanic on, so the keys each one adds are actually
+        # compared. With gifting off the gift statistics are absent on both
+        # sides and agree by not existing, which is not agreement.
+        allow_gifting=True, prune_after="reproduction",
+        inactive_window="iteration",
         seed=21,
     )
     world = new_world(cfg)

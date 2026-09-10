@@ -45,7 +45,11 @@ const RunsView = {
       ['message_prepass', 'Message pre-pass'],
       ['random_input_amount', 'Noise inputs'],
       ['allow_handover', 'Handover'],
-      ['allow_revolutions', 'Revolutions']
+      ['allow_revolutions', 'Revolutions'],
+      ['allow_gifting', 'Gifting'],
+      ['prune_after', 'Unused links die'],
+      ['inactive_window', 'Used within'],
+      ['redistribution', 'Estate of the dead']
     ]],
     ['Seed graph', [
       ['n_nodes', 'Agents'],

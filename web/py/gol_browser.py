@@ -36,7 +36,7 @@ class Worlds:
     # ---- settings --------------------------------------------------------
 
     def defaults(self) -> Dict[str, Any]:
-        return {"config": SimConfig().to_dict(),
+        return {"config": SimConfig.for_new_run().to_dict(),
                 "brain_presets": SimConfig.BRAIN_PRESETS}
 
     def normalise(self, config: Dict[str, Any]) -> Dict[str, Any]:
