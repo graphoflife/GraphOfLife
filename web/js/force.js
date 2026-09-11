@@ -16,6 +16,13 @@
  *                distance and happily leaves two edges bunched on one side.
  *   centering  — a weak pull toward the origin so the drawing cannot drift off.
  *
+ * And one thing that is deliberately *not* a force: after the forces have run,
+ * the whole drawing is translated so its centre of mass sits at the origin. See
+ * _recentre. A force pulling every node toward the origin is proportional to
+ * how far out the node is, so it squeezes the rim harder than the middle and
+ * changes the shape; a translation moves every node by the same vector and
+ * changes nothing but where the drawing sits.
+ *
  * Positions persist across frames: a node keeps its coordinates as long as it
  * is alive, and a newborn is seeded next to its parent. That is what stops the
  * graph from scrambling every time you step forward.
@@ -40,6 +47,11 @@ class ForceLayout {
     this.angularStrength = 0.15;
     this.damping = 0.86;
 
+    // Where the drawing's centre of mass was last carried toward the origin.
+    // See _recentre: this is a rigid translation rather than a force, and it is
+    // what keeps the graph on screen once the centring force is turned off.
+    this._recentredAt = 0;
+
     // Barnes-Hut opening angle: how distant a clump must be before it is
     // treated as one body, and by far the strongest lever on cost — the number
     // of cells each node visits falls roughly with the cube of it.
@@ -59,6 +71,14 @@ class ForceLayout {
     // angular force is skipped rather than paid for.
     this.maxAngularDegree = 24;
   }
+
+  /**
+   * How long the drawing takes to slide back to the origin, as a time
+   * constant in seconds. Three of these is effectively all the way, so the
+   * glide reads as about three quarters of a second — brisk enough not to
+   * feel like lag, slow enough to read as movement rather than a jump.
+   */
+  static get RECENTRE_TAU() { return 0.25; }
 
   get is3D() { return this.dimensions === 3; }
 
@@ -297,16 +317,25 @@ class ForceLayout {
     this.alpha = 1;
   }
 
-  /** Advance the simulation one tick. Returns false once it has settled. */
+  /**
+   * Advance the simulation one tick. Returns false once nothing is changing.
+   *
+   * The forces stop once alpha has decayed, but the recentring does not: a
+   * drawing can be settled and still off centre, and a caller that stops
+   * publishing the moment the forces rest would leave it there. So the two are
+   * asked separately, and the tick reports movement if either of them moved
+   * anything. Recentring reaches its own threshold and stops returning true,
+   * which is what keeps an idle layout idle rather than spinning.
+   */
   tick() {
-    if (this.alpha < 0.005) return false;
-
     const nodes = [];
     for (const id of this.ids) {
       const p = this.pos.get(id);
       if (p) nodes.push(p);
     }
     if (!nodes.length) return false;
+
+    if (this.alpha < 0.005) return this._recentre(nodes, this.is3D);
 
     this._repel(nodes);
     this._springs();
@@ -349,7 +378,68 @@ class ForceLayout {
       if (use3D) p.z += p.vz;
     }
 
+    this._recentre(nodes, use3D);
+
     this.alpha *= 0.985;
+    return true;
+  }
+
+  /**
+   * Slide the whole drawing so its centre of mass sits at the origin.
+   *
+   * Not a force. Every node moves by the same vector, so no distance between
+   * any two nodes changes and no velocity changes — the arrangement is
+   * identical, it is merely somewhere else. That is the difference that
+   * matters: the centring *force* pulls each node toward the origin in
+   * proportion to how far out it already is, which squeezes the rim harder
+   * than the middle and flattens the shape. Turning that force off is what
+   * lets the graph take the shape the repulsion and the springs agree on, and
+   * this is what stops it wandering out of view once nothing is holding it.
+   *
+   * Eased against the clock rather than per tick, because the number of ticks
+   * per drawn frame is a property of the machine: the worker runs as many as
+   * fit in its budget, so a per-tick fraction would glide on a slow computer
+   * and snap on a fast one. Against elapsed time the drawing takes the same
+   * three quarters of a second to settle into place wherever it runs, which is
+   * the same easing the camera uses when it follows a graph under Fit view.
+   *
+   * In the steady state the correction each tick is the drift each tick, which
+   * is far too small to see. The easing is for the one moment it is not: a
+   * drawing that is already well off-centre when this starts glides in rather
+   * than jumping.
+   */
+  _recentre(nodes, use3D) {
+    let cx = 0, cy = 0, cz = 0;
+    for (const p of nodes) {
+      cx += p.x;
+      cy += p.y;
+      if (use3D) cz += p.z;
+    }
+    const n = nodes.length;
+    cx /= n; cy /= n; cz /= n;
+
+    const now = (typeof performance !== 'undefined' ? performance.now() : Date.now());
+    // Clamped, so a tab that was in the background does not come back and
+    // apply a second's worth of correction in one step.
+    const dt = Math.min(0.05, Math.max(0, (now - this._recentredAt) / 1000));
+    this._recentredAt = now;
+
+    const ease = 1 - Math.exp(-dt / ForceLayout.RECENTRE_TAU);
+    const dx = -cx * ease, dy = -cy * ease, dz = use3D ? -cz * ease : 0;
+
+    // Below a thousandth of a link length there is nothing worth correcting,
+    // and moving every node by it is a pass over the whole graph for nothing.
+    // Reporting no movement here is also what lets an idle layout stay idle:
+    // the caller stops publishing once nothing moves, and without a threshold
+    // the last vanishing fraction of an offset would keep it awake forever.
+    const tiny = this.linkDistance * 1e-3;
+    if (Math.abs(dx) < tiny && Math.abs(dy) < tiny && Math.abs(dz) < tiny) return false;
+
+    for (const p of nodes) {
+      p.x += dx;
+      p.y += dy;
+      if (use3D) p.z += dz;
+    }
     return true;
   }
 
