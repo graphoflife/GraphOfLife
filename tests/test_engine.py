@@ -2099,6 +2099,41 @@ def test_a_binary_brain_spends_no_rows_on_things_that_are_already_bits():
     assert set(np.unique(tail).tolist()) <= {0, 1}
 
 
+def test_a_binary_checkpoint_refuses_a_ladder_it_was_not_written_for():
+    """
+    Splitting a magnitude's rows into a band and a place inside it keeps their
+    number and changes what each means, so the shape check cannot see it: the
+    binary brain writes its split into the checkpoint and checks it on the way
+    back. Weights read under the wrong split would be nonsense that loads.
+    """
+    import numpy as np
+    from GraphOfLifeSimple import GraphOfLife
+
+    cfg = small(brain_kind="binary", seed=5)
+    world = new_world(cfg)
+    world.step(record_decisions=False)
+    blob = world.to_checkpoint()
+    assert tuple(int(v) for v in blob["ladder"]) == cfg.ladder_split()
+    GraphOfLife.from_checkpoint(dict(blob), cfg)             # its own split loads
+
+    for other in ({k: v for k, v in blob.items() if k != "ladder"},        # before the split
+                  {**blob, "ladder": np.array([13, 3], dtype=np.int64)}):  # another split
+        try:
+            GraphOfLife.from_checkpoint(other, cfg)
+        except ValueError as err:
+            assert "cannot be carried across" in str(err)
+        else:
+            raise AssertionError("weights written under another ladder were loaded")
+
+    # A float brain has no ladder, and its checkpoint carries none.
+    floaty = small(seed=5)
+    float_world = new_world(floaty)
+    float_world.step(record_decisions=False)
+    float_blob = float_world.to_checkpoint()
+    assert "ladder" not in float_blob
+    GraphOfLife.from_checkpoint(dict(float_blob), floaty)
+
+
 def test_the_ladder_starts_where_its_values_start():
     """
     Nothing on the ladder can be negative, so the ladder should not be.

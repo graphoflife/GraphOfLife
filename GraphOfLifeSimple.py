@@ -400,6 +400,31 @@ class Brain:
                                  size=(fan_out, fan_in)).astype(self.dtype))
             self.biases.append(np.zeros((fan_out, 1), dtype=self.dtype))
 
+    # ---- what the world around a brain depends on its kind ------------------
+    #
+    # A few things about a world follow from what kind of brain lives in it,
+    # and the World used to ask `brain_kind == "binary"` at each of them. They
+    # are the brain's to answer, so a new kind brings its answers with it.
+
+    @staticmethod
+    def draw_noise(shape: Tuple[int, int]) -> np.ndarray:
+        """The random inputs, one row per candidate: a spread of magnitudes."""
+        return np.random.uniform(-2.0, 2.0, size=shape)
+
+    @staticmethod
+    def speak(heads: np.ndarray) -> np.ndarray:
+        """What the message heads' raw outputs say: squashed into (-1, 1)."""
+        return np.tanh(heads)
+
+    @staticmethod
+    def checkpoint_extras(cfg: SimConfig) -> Dict[str, np.ndarray]:
+        """What a checkpoint must carry for its weights to mean what they meant."""
+        return {}
+
+    @staticmethod
+    def check_checkpoint(cfg: SimConfig, blob: Any) -> None:
+        """Refuse a checkpoint whose weights these settings would read otherwise."""
+
     def forward(self, x: np.ndarray) -> np.ndarray:
         """Always returns a 2-D array of shape (n_outputs, n_candidates)."""
         a = np.asarray(x, dtype=float)
@@ -522,6 +547,49 @@ class BinaryBrain(Brain):
 
     __slots__ = ()
     dtype = np.int8
+
+    @staticmethod
+    def draw_noise(shape: Tuple[int, int]) -> np.ndarray:
+        """
+        Coins. A binary brain cannot read a magnitude that is not on its ladder,
+        so noise drawn as a float would arrive as a single bit anyway — this
+        just makes it an honest one.
+        """
+        return np.random.randint(0, 2, size=shape)
+
+    @staticmethod
+    def speak(heads: np.ndarray) -> np.ndarray:
+        """
+        Bits. The output layer hands back a count, and squashing that through
+        tanh produced a value that was neither a bit nor a useful magnitude —
+        eleven distinct values across a whole phase, then read back through a
+        ladder that could only see the bottom of it.
+        """
+        return (heads > 0).astype(float)
+
+    @staticmethod
+    def checkpoint_extras(cfg: SimConfig) -> Dict[str, np.ndarray]:
+        """
+        How a magnitude was encoded. The shape check on the way back in cannot
+        see this: splitting the ladder into a band and a place inside it keeps
+        the row count identical and changes what every one of those rows
+        means, so weights written under one split are nonsense under another
+        and nothing about their shape says so.
+        """
+        return {"ladder": np.array(cfg.ladder_split(), dtype=np.int64)}
+
+    @staticmethod
+    def check_checkpoint(cfg: SimConfig, blob: Any) -> None:
+        # `in` rather than .files: a checkpoint arrives here as an npz or as a
+        # plain dict of arrays, and only one of those has a .files.
+        saved = tuple(int(v) for v in blob["ladder"]) if "ladder" in blob else None
+        if saved != cfg.ladder_split():
+            raise ValueError(
+                f"this checkpoint's magnitudes were encoded as "
+                f"{saved or 'a single ladder'} and these settings encode them "
+                f"as {cfg.ladder_split()} (band rows, rows within a band). "
+                f"The rows are the same in number and not the same in "
+                f"meaning, so the weights cannot be carried across.")
 
     # The ladder the magnitudes are spread across. It used to start below zero
     # because the noise and message inputs ran a little under it — they are not
@@ -714,6 +782,7 @@ def brain_shape(cfg: SimConfig) -> Dict[str, Any]:
 class GraphOfLife:
     def __init__(self, G_init: nx.Graph | None, cfg: SimConfig, _empty: bool = False) -> None:
         self.cfg = cfg
+        self.kind = BRAIN_KINDS[cfg.brain_kind]
         self.heads = build_heads(cfg)
         self.G = nx.Graph()
         self.next_agent_id = 0
@@ -1021,14 +1090,10 @@ class GraphOfLife:
         X[row + 3 * m:row + 4 * m] = np.array([msg(v, v) for v in candidates]).T
         row += 4 * m
 
-        # Coins in a binary world, a spread of magnitudes anywhere else. A
-        # binary brain cannot read a magnitude that is not on its ladder, so
-        # noise drawn as a float would arrive as a single bit anyway — this
-        # just makes it an honest one. Drawn candidate after candidate, so a
-        # seed gives the same run it gave when each column drew its own.
-        shape = (len(candidates), cfg.random_input_amount)
-        X[row:] = (np.random.randint(0, 2, size=shape) if cfg.brain_kind == "binary"
-                   else np.random.uniform(-2.0, 2.0, size=shape)).T
+        # Noise of whatever kind this world's brains can read. Drawn candidate
+        # after candidate, so a seed gives the same run it gave when each
+        # column drew its own.
+        X[row:] = self.kind.draw_noise((len(candidates), cfg.random_input_amount)).T
         return X
 
     def _observe(self, u: int, candidates: List[int], log_deg, q_tok, q_deg,
@@ -1098,12 +1163,7 @@ class GraphOfLife:
         if not cfg.exchange_messages or cfg.message_amount <= 0:
             return
         start = self.heads["MESSAGE_START"]
-        block = Y[start:start + cfg.message_amount, :]
-        # A binary brain says bits. Its output layer hands back a count, and
-        # squashing that through tanh produced a value that was neither a bit
-        # nor a useful magnitude — eleven distinct values across a whole phase,
-        # then read back through a ladder that could only see the bottom of it.
-        rows = (block > 0).astype(float) if cfg.brain_kind == "binary" else np.tanh(block)
+        rows = self.kind.speak(Y[start:start + cfg.message_amount, :])
         for j, v in enumerate(targets):
             outbox.setdefault(u, {})[int(v)] = rows[:, j].astype(float).tolist()
 
@@ -1847,13 +1907,7 @@ class GraphOfLife:
             "strain": np.array(self.cfg.strain_id()),
         }
 
-        # How a magnitude was encoded. The shape check on the way back in
-        # cannot see this: splitting the ladder into a band and a place inside
-        # it keeps the row count identical and changes what every one of those
-        # rows means, so weights written under one split are nonsense under
-        # another and nothing about their shape says so.
-        if self.cfg.brain_kind == "binary":
-            blob["ladder"] = np.array(self.cfg.ladder_split(), dtype=np.int64)
+        blob.update(self.kind.checkpoint_extras(self.cfg))
 
         n_layers = len(self.brains[nodes[0]].weights) if nodes else 0
         blob["n_layers"] = np.array([n_layers], dtype=np.int64)
@@ -1935,17 +1989,7 @@ class GraphOfLife:
         # how inputs reach the first one — the arrays still load and the run
         # then dies inside a matrix multiply several steps later, saying
         # nothing about why. Checked here, where the answer is still obvious.
-        if cfg.brain_kind == "binary":
-            # `in` rather than .files: a checkpoint arrives here as an npz or
-            # as a plain dict of arrays, and only one of those has a .files.
-            saved = tuple(int(v) for v in blob["ladder"]) if "ladder" in blob else None
-            if saved != cfg.ladder_split():
-                raise ValueError(
-                    f"this checkpoint's magnitudes were encoded as "
-                    f"{saved or 'a single ladder'} and these settings encode them "
-                    f"as {cfg.ladder_split()} (band rows, rows within a band). "
-                    f"The rows are the same in number and not the same in "
-                    f"meaning, so the weights cannot be carried across.")
+        world.kind.check_checkpoint(cfg, blob)
 
         want = make_brain(cfg, 0, allocate=False).layer_sizes()
         got = [int(weights[0].shape[2])] + [int(w.shape[1]) for w in weights]
