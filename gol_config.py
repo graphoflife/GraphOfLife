@@ -348,7 +348,7 @@ class SimConfig:
             return self.k_neighbors
         return max(int(self.resolved_n() / 100), 5)
 
-    # How an observation is laid out, in the order _input_vec builds it. Named
+    # How an observation is laid out, in the order _inputs builds it. Named
     # because the binary brain has to tell a magnitude from something that is
     # already a single bit, and counting to 29 in three places was how the two
     # would come to disagree.

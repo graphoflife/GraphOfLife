@@ -170,14 +170,15 @@ def _six_quantiles(sorted_vals: List[float]) -> List[float]:
 
 
 def _sigmoid(x: np.ndarray) -> np.ndarray:
-    """Numerically stable sigmoid."""
-    pos = x >= 0
-    neg = ~pos
-    z = np.empty_like(x, dtype=float)
-    z[pos] = 1.0 / (1.0 + np.exp(-x[pos]))
-    ex = np.exp(x[neg])
-    z[neg] = ex / (1.0 + ex)
-    return z
+    """
+    Numerically stable sigmoid.
+
+    exp(-|x|) is exp(-x) where x is positive and exp(x) where it is not, so
+    both branches come out of one exponential that can never overflow, with
+    the same arithmetic as splitting the array by sign and at half the cost.
+    """
+    e = np.exp(-np.abs(x))
+    return np.where(x >= 0, 1.0 / (1.0 + e), e / (1.0 + e))
 
 
 def _share_of_first(a: float, b: float) -> float:
@@ -968,16 +969,43 @@ class GraphOfLife:
 
         return log_degrees, neighs, q_tok, q_deg, log_tokens, at_risk
 
-    def _input_vec(self, u: int, v: int, log_deg, q_tok, q_deg, log_tok,
-                   at_risk) -> np.ndarray:
-        """Assemble the sensory vector for observer `u` looking at candidate `v`."""
-        cfg = self.cfg
-        base = (
-            [log_tok.get(u, 0.0), log_tok.get(v, 0.0), log_deg[u], log_deg[v]]
-            + q_tok[u] + q_tok[v] + q_deg[u] + q_deg[v]
-        )
+    def _inputs(self, u: int, candidates: List[int], log_deg, q_tok, q_deg,
+                log_tok, at_risk) -> np.ndarray:
+        """
+        What observer `u` senses of each candidate: one column per candidate,
+        one row per input.
 
+        Filled a row at a time across every candidate. Built a column at a
+        time, each candidate copied the observer's own features again and
+        made its own call for noise and its own array, and building the input
+        was most of what an agent's look at its neighbours cost.
+        """
+        cfg = self.cfg
         m = cfg.message_amount
+        X = np.empty((cfg.n_inputs(), len(candidates)))
+
+        # Whether the candidate is the observer itself, and, with gifting,
+        # whether the connection to it lapses unless something crosses it.
+        # That second flag is only present when gifting is, because it is the
+        # fact that turns a gift into a decision — and because a run keeps
+        # the input width it was checkpointed with.
+        X[0] = [u == v for v in candidates]
+        row = 1
+        if cfg.allow_gifting:
+            X[1] = [u != v and self._edge_key(u, v) in at_risk for v in candidates]
+            row = 2
+
+        # Tokens and degree, the observer's then the candidate's, then the six
+        # quantiles of each over their neighbourhoods.
+        X[row] = log_tok.get(u, 0.0)
+        X[row + 1] = [log_tok.get(v, 0.0) for v in candidates]
+        X[row + 2] = log_deg[u]
+        X[row + 3] = [log_deg[v] for v in candidates]
+        X[row + 4:row + 10] = np.array(q_tok[u])[:, None]
+        X[row + 10:row + 16] = np.array([q_tok[v] for v in candidates]).T
+        X[row + 16:row + 22] = np.array(q_deg[u])[:, None]
+        X[row + 22:row + 28] = np.array([q_deg[v] for v in candidates]).T
+        row += cfg.MAGNITUDE_INPUTS
 
         def msg(src: int, dst: int) -> List[float]:
             vec = self.messages.get(src, {}).get(dst)
@@ -986,24 +1014,22 @@ class GraphOfLife:
             out = list(vec[:m])
             return out + [0.0] * (m - len(out))
 
-        msg_feats = msg(u, u) + msg(u, v) + msg(v, u) + msg(v, v)
+        # What each of the two wrote to itself and to the other.
+        X[row:row + m] = np.array(msg(u, u))[:, None]
+        X[row + m:row + 2 * m] = np.array([msg(u, v) for v in candidates]).T
+        X[row + 2 * m:row + 3 * m] = np.array([msg(v, u) for v in candidates]).T
+        X[row + 3 * m:row + 4 * m] = np.array([msg(v, v) for v in candidates]).T
+        row += 4 * m
+
         # Coins in a binary world, a spread of magnitudes anywhere else. A
         # binary brain cannot read a magnitude that is not on its ladder, so
         # noise drawn as a float would arrive as a single bit anyway — this
-        # just makes it an honest one.
-        noise = (np.random.randint(0, 2, size=cfg.random_input_amount).astype(float)
-                 if cfg.brain_kind == "binary"
-                 else np.random.uniform(-2.0, 2.0, size=cfg.random_input_amount)).tolist()
-
-        # Whether the connection to this candidate lapses unless something
-        # crosses it. Only present when gifting is, because it is the fact that
-        # turns a gift into a decision — and because a run keeps the input
-        # width it was checkpointed with.
-        flags = [int(u == v)]
-        if self.cfg.allow_gifting:
-            flags.append(int(u != v and self._edge_key(u, v) in at_risk))
-
-        return np.array(flags + base + msg_feats + noise, dtype=float)
+        # just makes it an honest one. Drawn candidate after candidate, so a
+        # seed gives the same run it gave when each column drew its own.
+        shape = (len(candidates), cfg.random_input_amount)
+        X[row:] = (np.random.randint(0, 2, size=shape) if cfg.brain_kind == "binary"
+                   else np.random.uniform(-2.0, 2.0, size=shape)).T
+        return X
 
     def _observe(self, u: int, candidates: List[int], log_deg, q_tok, q_deg,
                  log_tok, at_risk) -> np.ndarray:
@@ -1019,10 +1045,7 @@ class GraphOfLife:
         """
         if self.cfg.random_decisions:
             return np.random.standard_normal((self.cfg.n_outputs(), len(candidates)))
-        X = np.column_stack([
-            self._input_vec(u, v, log_deg, q_tok, q_deg, log_tok, at_risk)
-            for v in candidates
-        ])
+        X = self._inputs(u, candidates, log_deg, q_tok, q_deg, log_tok, at_risk)
         return self.brains[u].forward(X)
 
     def _note(self, step: str, **marks) -> None:

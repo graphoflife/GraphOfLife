@@ -460,14 +460,15 @@ def test_every_agent_in_a_phase_reads_the_same_messages():
         for run in (world.reproduction_phase, world.blotto_phase):
             baseline = {"at": copy.deepcopy(world.messages)}
             changed = []
-            original_input = world._input_vec
+            original_input = world._inputs
             original_deliver = world._deliver_messages
 
-            def watching(u, v, *args, **kwargs):
-                for src, dst in ((u, u), (u, v), (v, u), (v, v)):
-                    if world.messages.get(src, {}).get(dst) != baseline["at"].get(src, {}).get(dst):
-                        changed.append((src, dst))
-                return original_input(u, v, *args, **kwargs)
+            def watching(u, candidates, *args, **kwargs):
+                for v in candidates:
+                    for src, dst in ((u, u), (u, v), (v, u), (v, v)):
+                        if world.messages.get(src, {}).get(dst) != baseline["at"].get(src, {}).get(dst):
+                            changed.append((src, dst))
+                return original_input(u, candidates, *args, **kwargs)
 
             # A delivery ends one sweep and begins the next, so that is where
             # the comparison is allowed to move on.
@@ -475,12 +476,12 @@ def test_every_agent_in_a_phase_reads_the_same_messages():
                 original_deliver(outbox)
                 baseline["at"] = copy.deepcopy(world.messages)
 
-            world._input_vec = watching
+            world._inputs = watching
             world._deliver_messages = delivering
             try:
                 run(record_decisions=False)
             finally:
-                world._input_vec = original_input
+                world._inputs = original_input
                 world._deliver_messages = original_deliver
 
             assert not changed, (
@@ -1994,7 +1995,7 @@ def test_a_binary_brain_spends_no_rows_on_things_that_are_already_bits():
     original = world._observe
 
     def spy(u, candidates, *rest):
-        x = np.column_stack([world._input_vec(u, v, *rest) for v in candidates])
+        x = world._inputs(u, candidates, *rest)
         rows.append(world.brains[u].encode(x))
         return original(u, candidates, *rest)
 
@@ -2035,15 +2036,41 @@ def test_the_ladder_starts_where_its_values_start():
     log_deg, _neighs, q_tok, q_deg, log_tok, _risk = world._precompute_features()
     lowest = np.inf
     for u in sorted(world.G.nodes())[:20]:
-        for v in [u] + sorted(world.G.neighbors(u)):
-            vec = world._input_vec(u, v, log_deg, q_tok, q_deg, log_tok, _risk)
-            span = vec[cfg.FLAG_INPUTS:cfg.FLAG_INPUTS + cfg.MAGNITUDE_INPUTS]
-            lowest = min(lowest, float(span.min()))
+        seen = world._inputs(u, [u] + sorted(world.G.neighbors(u)),
+                             log_deg, q_tok, q_deg, log_tok, _risk)
+        span = seen[cfg.FLAG_INPUTS:cfg.FLAG_INPUTS + cfg.MAGNITUDE_INPUTS]
+        lowest = min(lowest, float(span.min()))
     assert lowest >= 0.0, f"a laddered input went to {lowest}"
 
     thresholds = make_brain(cfg, 0).thresholds()
     assert thresholds.min() >= 0.0, \
         f"the ladder starts at {thresholds.min()}, below anything that can reach it"
+
+
+def test_looking_at_many_candidates_is_looking_at_each_in_turn():
+    """
+    An agent's inputs are filled a row at a time across all its candidates,
+    which is faster than building them one candidate at a time. It must still
+    sense exactly what a look at each candidate in turn would, down to the
+    noise: that is what keeps a seed giving the run it always gave.
+    """
+    import numpy as np
+
+    for kind in ("float", "binary"):
+        world = new_world(small(brain_kind=kind, allow_gifting=True, seed=4))
+        for _ in range(3):
+            world.step(record_decisions=False)
+        log_deg, _neighs, q_tok, q_deg, log_tok, at_risk = world._precompute_features()
+        rest = (log_deg, q_tok, q_deg, log_tok, at_risk)
+        u = max(world.G.nodes(), key=lambda n: world.G.degree[n])
+        candidates = [u] + sorted(world.G.neighbors(u))
+
+        np.random.seed(1)
+        together = world._inputs(u, candidates, *rest)
+        np.random.seed(1)
+        in_turn = np.column_stack([world._inputs(u, [v], *rest)[:, 0] for v in candidates])
+        assert np.array_equal(together, in_turn), \
+            f"{kind}: looking at every candidate at once sensed something different"
 
 
 def test_a_binary_world_says_bits_and_hears_bits():
@@ -2069,10 +2096,8 @@ def test_a_binary_world_says_bits_and_hears_bits():
 
     log_deg, _neighs, q_tok, q_deg, log_tok, _risk = world._precompute_features()
     u, v = sorted(world.G.nodes())[:2]
-    seen = set()
-    for _ in range(40):
-        vec = world._input_vec(u, v, log_deg, q_tok, q_deg, log_tok, _risk)
-        seen.update(vec[-cfg.random_input_amount:].tolist())
+    looks = world._inputs(u, [v] * 40, log_deg, q_tok, q_deg, log_tok, _risk)
+    seen = set(looks[-cfg.random_input_amount:].ravel().tolist())
     assert seen <= {0.0, 1.0}, f"a binary world's noise was not bits: {sorted(seen)[:6]}"
 
 
@@ -2090,8 +2115,8 @@ def test_the_float_brains_do_not_ladder_anything():
     world = new_world(cfg)
     features = world._precompute_features()
     u, v = sorted(world.G.nodes())[:2]
-    vec = world._input_vec(u, v, features[0], features[2], features[3], features[4],
-                             features[5])
+    vec = world._inputs(u, [v], features[0], features[2], features[3], features[4],
+                        features[5])[:, 0]
     noise = vec[-cfg.random_input_amount:]
     assert not set(noise.tolist()) <= {0.0, 1.0}, \
         "a float world's noise should be a spread of magnitudes, not coins"
@@ -2582,13 +2607,13 @@ def test_the_risk_flag_says_which_links_are_about_to_lapse():
     features = world._precompute_features()
     log_deg, _n, q_tok, q_deg, log_tok, _ = features
 
-    for v in neighbours:
-        vec = world._input_vec(u, v, log_deg, q_tok, q_deg, log_tok, at_risk)
+    seen = world._inputs(u, neighbours + [u], log_deg, q_tok, q_deg, log_tok, at_risk)
+    for i, v in enumerate(neighbours):
         expected = 0.0 if v == safe else 1.0
-        assert vec[1] == expected, f"risk flag wrong for the link {u}-{v}"
+        assert seen[1, i] == expected, f"risk flag wrong for the link {u}-{v}"
 
     # And an agent looking at itself has no connection to be told about.
-    assert world._input_vec(u, u, log_deg, q_tok, q_deg, log_tok, at_risk)[1] == 0.0
+    assert seen[1, -1] == 0.0
 
 
 def test_weighted_redistribution_conserves_tokens_and_favours_the_rich():
