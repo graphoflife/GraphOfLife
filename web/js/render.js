@@ -30,6 +30,9 @@ class GraphRenderer {
     this.cameraDamping = 0.5;
 
     this.dpr = window.devicePixelRatio || 1;
+    // Sizing a canvas clears it, even to the size it already was, so a host
+    // deciding whether to draw again has to know this happened.
+    this.resizes = 0;
 
     // A ceiling on the pixel ratio. The Viewer wants every pixel the screen
     // has; the front page's backdrop does not, and on a retina display the
@@ -52,6 +55,7 @@ class GraphRenderer {
     this.canvas.height = Math.max(1, Math.floor(rect.height * this.dpr));
     this.cssWidth = rect.width;
     this.cssHeight = rect.height;
+    this.resizes++;
   }
 
   setMode3D(on) {
@@ -192,6 +196,12 @@ class GraphRenderer {
     // The axis-aligned span over every coordinate is an upper bound on what a
     // projection can occupy, so the floor it implies is never too tight.
     this.allowScale(Math.min(this.cssWidth, this.cssHeight) / extent);
+  }
+
+  /** Whether the camera has arrived where it was heading: nothing left to glide. */
+  get settled() {
+    const v = this.view, t = this.targetView;
+    return v.scale === t.scale && v.offsetX === t.offsetX && v.offsetY === t.offsetY;
   }
 
   /** Put the camera on its target immediately, for a first framing. */

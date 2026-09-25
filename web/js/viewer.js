@@ -646,6 +646,16 @@ const Viewer = {
     if (this.settings.autoRotate && this.renderer.mode3D) {
       this.renderer.rotate((this.settings.rotateSpeed * Math.PI / 180) * dt, 0);
     }
+    this.advancePlayback(dt);
+
+    // Nothing on screen has changed since the last draw — the layout has come
+    // to rest, the camera has arrived, nothing was turned, touched or chosen
+    // — so the canvas already shows what drawing again would. The loop used
+    // to fit and draw regardless, sixty times a second: on a large world left
+    // open and paused, 35ms of every frame spent painting the same picture.
+    const scene = this.scene();
+    if (this.renderer.settled && this._drawn
+        && scene.every((part, i) => Object.is(part, this._drawn[i]))) return;
 
     if (this.settings.autoFit) this.renderer.fitToContent(this.layout);
     // Fitting measures the drawing, and measuring is what tells the camera
@@ -656,11 +666,29 @@ const Viewer = {
     else this.renderer.noteContentSize(this.layout);
     this.renderer.stepCamera();
 
+    this.renderer.draw(this.frame, this.metrics, this.layout, this.settings);
+    this._drawn = this.scene();
+  },
+
+  /**
+   * Everything the picture is drawn from, cheaply enough to compare every
+   * frame. The positions are counted rather than compared, since with shared
+   * memory they change in place; the settings are written out, since every
+   * control changes them in place.
+   */
+  scene() {
+    const r = this.renderer, v = r.view;
+    return [this.frame, this.metrics, this.layout.moves, r.resizes, r.mode3D, r.yaw, r.pitch,
+            v.scale, v.offsetX, v.offsetY, JSON.stringify(this.settings)];
+  },
+
+  /** Step to the next frame when playing and it is time to. */
+  advancePlayback(dt) {
     if (this.playing && this.visible.length) {
       // Falls back to the slider's own minimum rather than to a second
-        // number of its own, which is how the two came to disagree about
-        // what the default was.
-        const fps = Number(document.getElementById('playSpeed').value) || 1;
+      // number of its own, which is how the two came to disagree about
+      // what the default was.
+      const fps = Number(document.getElementById('playSpeed').value) || 1;
       this.playAccumulator += dt;
 
       if (this.playAccumulator >= 1 / fps) {
@@ -688,7 +716,5 @@ const Viewer = {
         }
       }
     }
-
-    this.renderer.draw(this.frame, this.metrics, this.layout, this.settings);
   }
 };

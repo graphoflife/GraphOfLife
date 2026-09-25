@@ -14,6 +14,9 @@ class LayoutClient {
   constructor(workerUrl = 'js/layout-worker.js') {
     this.ids = [];
     this.positions = new Float32Array(0);
+    // How many times new positions have arrived. With shared memory they are
+    // written in place, so this, not the array, is what says they changed.
+    this.moves = 0;
     this.count = 0;
     this.alpha = 1;
     this.dimensions = 3;
@@ -104,6 +107,7 @@ class LayoutClient {
     this.count = msg.count;
     if (msg.positions) this.positions = msg.positions;
     else if (this.shared) this.positions = this.shared;
+    this.moves++;
   }
 
   // ------------------------------------------------------------------
@@ -203,6 +207,7 @@ class LayoutClient {
   }
 
   _syncLocal() {
+    this.moves++;
     this._positionsGen = this._frameGen;
     this.positions = this._local.syncPositions();
     this.ids = this._local.ids;
