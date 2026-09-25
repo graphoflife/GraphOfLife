@@ -182,6 +182,24 @@ const SeriesLoad = {
   },
 
   /**
+   * Whether a load of `loading` brings in what charts of `keys` read.
+   *
+   * A history row holds every statistic at the depth it was built to, so a
+   * load that reaches the graph statistics brings every cheap one as well,
+   * and a cheap load brings every cheap one. Which are which is only known
+   * once a reply has said; until then, only a statistic named in the load
+   * counts as coming.
+   */
+  covers(runId, loading, keys) {
+    const got = this.columns(loading), wanted = this.columns(keys);
+    if (wanted.every(key => got.includes(key))) return true;
+    const have = this.cache.get(runId);
+    if (!have) return false;
+    const deep = key => have.heavyKeys.includes(key);
+    return got.some(deep) || !wanted.some(deep);
+  },
+
+  /**
    * Hear a run's size from whoever has just read it.
    *
    * A history longer than the run describes frames that are gone: the run was

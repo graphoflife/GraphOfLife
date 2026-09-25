@@ -471,6 +471,47 @@ Object.assign(Viewer, {
   },
 
   /**
+   * Bring the run's history up to what these statistics need, redrawing the
+   * trajectory and the open statistic as it climbs and once more when it
+   * ends, however it ends.
+   *
+   * One load, the Viewer's, for both of them. It was the stat popup's, and
+   * the trajectory borrowed it, so each could cancel the other: opening a
+   * statistic partway through the trajectory's load of bridge counts stopped
+   * it, and the Load history button came back. Now what is already there is
+   * not asked for, what is already being loaded is left to arrive, and
+   * anything else widens the load in flight to cover both.
+   *
+   * Only as deep as they need, so a population curve does not wait on bridge
+   * counts. Never rejects: a failure is said under the open statistic, and
+   * the trajectory offers its button again.
+   */
+  loadHistory(keys) {
+    const runId = this.runId;
+    if (!runId || SeriesLoad.ready(runId, keys, this.frameCount)) return Promise.resolve();
+    const loading = Jobs.busy(this) ? this._history.keys : [];
+    if (loading.length && SeriesLoad.covers(runId, loading, keys)) return this._history.done;
+
+    const wanted = [...new Set([...loading, ...keys])];
+    const drawn = () => {
+      if (this.runId !== runId) return;
+      StatDetail.refresh();
+      this.updateTrajectory();
+    };
+    let failure = null;
+    const done = Jobs.run(this, 'Summarising the run',
+      job => SeriesLoad.climb(runId, wanted, { job, onStep: drawn }),
+      err => { failure = err; })
+      .then(() => {
+        drawn();
+        // After the last draw, which would otherwise write over it.
+        if (failure) StatDetail.failed(failure);
+      });
+    this._history = { keys: wanted, done };
+    return done;
+  },
+
+  /**
    * Redraw the trajectory, fetching the run's history the first time it is
    * needed rather than on every frame step.
    */
@@ -480,7 +521,7 @@ Object.assign(Viewer, {
     const s = this.settings;
     const button = document.getElementById('btnTrajLoad');
     const payload = SeriesLoad.cache.get(this.runId);
-    const loading = Jobs.busy(StatDetail);
+    const loading = Jobs.busy(this);
 
     // Offered whenever the history does not yet answer these two axes — never
     // loaded, cut short, or loaded without the graph statistics one of them

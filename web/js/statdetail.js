@@ -142,7 +142,7 @@ const StatDetail = {
     // Whatever is known of the run draws at once, and the load adds only what
     // this statistic is missing. It is started first so that an empty chart
     // can say it is loading rather than that there is nothing to show.
-    const loading = this.load(Viewer.runId, [key]);
+    const loading = Viewer.loadHistory([key]);
     this.redraw();
     await loading;
   },
@@ -153,43 +153,17 @@ const StatDetail = {
    * history button comes back.
    */
   resume() {
-    if (this.currentKey && Viewer.runId && Jobs.due(this)) {
-      this.load(Viewer.runId, [this.currentKey]);
-    }
+    if (this.currentKey) Viewer.loadHistory([this.currentKey]);
   },
 
-  /**
-   * Bring a run's history up to what these statistics need, drawing as it
-   * climbs.
-   *
-   * Only to the depth they need, so a population curve does not wait on bridge
-   * counts. And only when something is missing: a history that already answers
-   * them returns at once without starting a job, so opening a second statistic
-   * does not cancel a load that is still filling the first.
-   *
-   * Never rejects. A load that fails says so under the chart, whoever started
-   * it. Picked up again on the way back to the Viewer, one used to fail with
-   * nothing waiting on it: the error went to the console as uncaught and the
-   * chart went on describing itself as fine.
-   */
-  load(runId, keys) {
-    if (SeriesLoad.ready(runId, keys, Viewer.frameCount)) return Promise.resolve();
-    const drawn = () => {
-      if (Viewer.runId !== runId) return;
-      if (!this.el.classList.contains('hidden')) this.redraw();
-      Viewer.updateTrajectory();
-    };
-    // Drawn once more when the load ends, however it ends: a stopped load
-    // otherwise left the chart saying it was loading and the trajectory
-    // without its button to carry on.
-    let failure = null;
-    return Jobs.run(this, 'Summarising the run', (job) => SeriesLoad.climb(runId, keys, {
-      job, onStep: drawn
-    }), err => { failure = err; }).then(() => {
-      drawn();
-      // After the last draw, which would otherwise write over it.
-      if (failure) this.footEl.textContent = `Could not load history: ${failure.message}`;
-    });
+  /** Redraw, if the popup is open. */
+  refresh() {
+    if (!this.el.classList.contains('hidden')) this.redraw();
+  },
+
+  /** Say under the chart that its history could not be read. */
+  failed(err) {
+    this.footEl.textContent = `Could not load history: ${err.message}`;
   },
 
   /**
@@ -240,7 +214,7 @@ const StatDetail = {
     if (!ys.length) {
       ctx.fillStyle = Ink.of('dim');
       ctx.font = '12px system-ui, sans-serif';
-      ctx.fillText(Jobs.busy(this)
+      ctx.fillText(Jobs.busy(Viewer)
         ? 'Summarising the run\u2026'
         : 'No data for this statistic under the current phase filter.', 10, h / 2);
       this.footEl.textContent = '';

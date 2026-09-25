@@ -788,25 +788,70 @@ function test_a_derived_statistic_reads_like_a_stored_one() {
     'a ratio of columns this run does not have came back as something');
 }
 
+/**
+ * The Viewer's history load, reading through the real API facade from
+ * `backend`, with the trajectory and the stat popup it draws into counted
+ * rather than drawn.
+ */
+function viewerHistoryWith(backend) {
+  const API = new Function(
+    `${fs.readFileSync(path.join(root, 'web', 'js', 'api.js'), 'utf8')}; return API;`)();
+  API.backend = backend;
+  const loader = loaderFor(API);
+  const detail = { said: '', refresh() {}, failed(err) { this.said = `Could not load history: ${err.message}`; } };
+  const viewer = { runId: 'run', frameCount: 40 };
+  new Function('Viewer', 'Jobs', 'SeriesLoad', 'StatDetail', 'Metrics',
+    fs.readFileSync(path.join(root, 'web', 'js', 'viewer-panels.js'), 'utf8'))(
+    viewer, Jobs, loader, detail, Metrics);
+  viewer.updateTrajectory = () => {};
+  return { viewer, detail, loader };
+}
+
 async function test_a_history_that_fails_says_so_and_never_rejects() {
   // What resume() does on the way back to the Viewer: start a load and keep
   // nothing of it. When the server was gone, the rejection went to the
   // console as uncaught and the popup went on saying "24 points".
-  const failing = {
+  Jobs.cancelAll();
+  const { viewer, detail } = viewerHistoryWith({
     async getSeries() { throw new Error('Failed to fetch'); },
     async getSeriesProgress() { return {}; }
-  };
-  const viewer = { runId: 'run', frameCount: 40, updateTrajectory() {} };
-  const detail = new Function('Jobs', 'SeriesLoad', 'Viewer',
-    `${fs.readFileSync(path.join(root, 'web', 'js', 'statdetail.js'), 'utf8')}; return StatDetail;`)(
-    Jobs, loaderFor(failing), viewer);
-  detail.el = { classList: { contains: () => true } };     // the popup is closed
-  detail.footEl = { textContent: '' };
-
-  const settled = await detail.load('run', ['nodes']).then(() => 'resolved', () => 'rejected');
+  });
+  const settled = await viewer.loadHistory(['nodes']).then(() => 'resolved', () => 'rejected');
   assert(settled === 'resolved', 'a failed history load rejected, with nothing waiting on it');
-  assert(/Could not load history: Failed to fetch/.test(detail.footEl.textContent),
-    `the popup said "${detail.footEl.textContent}" about a load that failed`);
+  assert(/Could not load history: Failed to fetch/.test(detail.said),
+    `the popup said "${detail.said}" about a load that failed`);
+}
+
+async function test_the_trajectory_and_the_popup_share_one_history_load() {
+  // They used to share the popup's job, so whichever asked second cancelled
+  // the other: opening a statistic partway through the trajectory's bridge
+  // counts stopped them, and the Load history button came back.
+  Jobs.cancelAll();
+  const calls = [];
+  const { viewer, loader } = viewerHistoryWith(pretendRun(20, calls, { delay: 1 }));
+
+  // A load of the graph statistics brings the cheap ones too.
+  const trajectory = viewer.loadHistory(['bridges']);
+  while (!loader.cache.has('run')) await sleep(1);
+  assert(viewer.loadHistory(['nodes']) === trajectory,
+    'asking for a cheap statistic during a load of the graph statistics started another');
+  await trajectory;
+  assert(loader.ready('run', ['bridges', 'nodes'], 40), 'the load did not finish');
+
+  // A cheap load does not bring the graph statistics: asking for one widens it.
+  Jobs.cancelAll();
+  const asked = [];
+  const fresh = viewerHistoryWith(pretendRun(20, asked, { delay: 1 }));
+  const cheap = fresh.viewer.loadHistory(['nodes']);
+  while (!fresh.loader.cache.has('run')) await sleep(1);
+  const wider = fresh.viewer.loadHistory(['bridges']);
+  assert(wider !== cheap, 'a statistic the load in flight does not bring was left waiting');
+  await Promise.all([cheap, wider]);
+  assert(fresh.loader.ready('run', ['nodes', 'bridges'], 40) && !Jobs.busy(fresh.viewer),
+    'widening the load did not bring both');
+  const last = asked[asked.length - 1].keys;
+  assert(last.includes('nodes') && last.includes('bridges'),
+    `the widened load asked for ${last}`);
 }
 
 function test_two_statistics_pair_by_frame_or_else_by_iteration() {
@@ -1066,6 +1111,7 @@ const tests = Object.entries({
   test_a_derived_statistic_reads_like_a_stored_one,
   test_two_statistics_pair_by_frame_or_else_by_iteration,
   test_a_history_that_fails_says_so_and_never_rejects,
+  test_the_trajectory_and_the_popup_share_one_history_load,
   test_the_bar_counts_samples_and_only_moves_forward,
   test_switching_a_line_to_a_graph_statistic_loads_it,
   test_a_change_that_needs_nothing_new_draws_without_loading,

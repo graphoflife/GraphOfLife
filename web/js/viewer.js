@@ -266,7 +266,7 @@ const Viewer = {
 
     this.updateSlider();
     if (this.visible.length) this.goToPosition(Math.max(0, position), true);
-    if (!StatDetail.el.classList.contains('hidden')) StatDetail.redraw();
+    StatDetail.refresh();
   },
 
   rebuildVisible() {
@@ -343,6 +343,8 @@ const Viewer = {
     const switching = runId !== this.runId;
     this.runId = runId;
     if (switching) {
+      // The history being read is the last run's.
+      Jobs.cancel(this);
       this.cache.clear();
       this.inflight.clear();
       // Node ids from the previous run mean nothing here.
@@ -513,7 +515,7 @@ const Viewer = {
     this.updateStats();
     this.updateCharts();
     this.updateFocusUi();
-    if (!StatDetail.el.classList.contains('hidden')) StatDetail.redraw();
+    StatDetail.refresh();
   },
 
   rebuildMetrics() {

@@ -99,12 +99,7 @@ Object.assign(Viewer, {
     document.getElementById('btnClearFocus').addEventListener('click', () => this.setFocus(null));
 
     document.getElementById('btnTrajLoad').addEventListener('click', () => {
-      // The history is the stat detail's job, and it loads only as deep as the
-      // two axes need: a scatter of population against tokens does not wait
-      // for bridge counts. It redraws the trajectory as it climbs and once
-      // more when it ends, however it ends.
-      if (!this.runId) return;
-      StatDetail.load(this.runId, [this.settings.trajX, this.settings.trajY]);
+      this.loadHistory([this.settings.trajX, this.settings.trajY]);
       this.updateTrajectory();
     });
 
