@@ -727,6 +727,27 @@ function test_a_derived_statistic_reads_like_a_stored_one() {
     'a ratio of columns this run does not have came back as something');
 }
 
+async function test_a_history_that_fails_says_so_and_never_rejects() {
+  // What resume() does on the way back to the Viewer: start a load and keep
+  // nothing of it. When the server was gone, the rejection went to the
+  // console as uncaught and the popup went on saying "24 points".
+  const failing = {
+    async getSeries() { throw new Error('Failed to fetch'); },
+    async getSeriesProgress() { return {}; }
+  };
+  const viewer = { runId: 'run', frameCount: 40, updateTrajectory() {} };
+  const detail = new Function('Jobs', 'SeriesLoad', 'Viewer',
+    `${fs.readFileSync(path.join(root, 'web', 'js', 'statdetail.js'), 'utf8')}; return StatDetail;`)(
+    Jobs, loaderFor(failing), viewer);
+  detail.el = { classList: { contains: () => true } };     // the popup is closed
+  detail.footEl = { textContent: '' };
+
+  const settled = await detail.load('run', ['nodes']).then(() => 'resolved', () => 'rejected');
+  assert(settled === 'resolved', 'a failed history load rejected, with nothing waiting on it');
+  assert(/Could not load history: Failed to fetch/.test(detail.footEl.textContent),
+    `the popup said "${detail.footEl.textContent}" about a load that failed`);
+}
+
 async function test_the_bar_counts_samples_and_only_moves_forward() {
   // The server counts frames, two to a sample, and counts only the frames of
   // the step in flight. Passing that straight to the bar made it run 4%, 6%,
@@ -915,6 +936,7 @@ const tests = Object.entries({
   test_a_history_of_a_smaller_run_is_not_ready,
   test_a_history_longer_than_its_run_is_dropped,
   test_a_derived_statistic_reads_like_a_stored_one,
+  test_a_history_that_fails_says_so_and_never_rejects,
   test_the_bar_counts_samples_and_only_moves_forward,
   test_switching_a_line_to_a_graph_statistic_loads_it,
   test_a_change_that_needs_nothing_new_draws_without_loading,

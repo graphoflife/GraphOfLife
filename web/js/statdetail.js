@@ -168,20 +168,12 @@ const StatDetail = {
     this.textEl.textContent = this.EXPLANATIONS[key] || 'No description for this value.';
     this.el.classList.remove('hidden');
 
-    // Whatever is known of the run draws at once; the load then adds only what
-    // this statistic is missing, if anything.
-    // Whatever is known of the run draws at once. The load is started first so
-    // that an empty chart can say it is loading rather than that there is
-    // nothing to show.
+    // Whatever is known of the run draws at once, and the load adds only what
+    // this statistic is missing. It is started first so that an empty chart
+    // can say it is loading rather than that there is nothing to show.
     const loading = this.load(Viewer.runId, [key]);
     this.redraw();
-    try {
-      await loading;
-    } catch (err) {
-      this.footEl.textContent = `Could not load history: ${err.message}`;
-      return;
-    }
-    this.redraw();
+    await loading;
   },
 
   /**
@@ -203,6 +195,11 @@ const StatDetail = {
    * counts. And only when something is missing: a history that already answers
    * them returns at once without starting a job, so opening a second statistic
    * does not cancel a load that is still filling the first.
+   *
+   * Never rejects. A load that fails says so under the chart, whoever started
+   * it. Picked up again on the way back to the Viewer, one used to fail with
+   * nothing waiting on it: the error went to the console as uncaught and the
+   * chart went on describing itself as fine.
    */
   load(runId, keys) {
     if (SeriesLoad.ready(runId, keys, Viewer.frameCount)) return Promise.resolve();
@@ -216,7 +213,10 @@ const StatDetail = {
     // without its button to carry on.
     return Jobs.run('stat-detail', 'Summarising the run', (job) => SeriesLoad.climb(runId, keys, {
       job, onStep: drawn
-    })).finally(drawn);
+    })).finally(drawn).catch(err => {
+      // After the last draw, which would otherwise write over it.
+      this.footEl.textContent = `Could not load history: ${err.message}`;
+    });
   },
 
   /**
