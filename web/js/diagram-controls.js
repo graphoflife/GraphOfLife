@@ -38,17 +38,6 @@ const DiagramControls = {
       bar.append(wrap);
       return node;
     };
-    const select = (options, value, onChange) => {
-      const el = document.createElement('select');
-      for (const [v, text] of options) {
-        const option = document.createElement('option');
-        option.value = v; option.textContent = text;
-        el.append(option);
-      }
-      el.value = value;
-      Metrics.onPick(el, onChange);
-      return el;
-    };
     const number = (value, min, onChange) => {
       const el = document.createElement('input');
       el.type = 'number'; el.min = String(min); el.value = value === null ? '' : String(value);
@@ -74,16 +63,13 @@ const DiagramControls = {
         const el = field('Metric', metricSelect());
         el.value = s.metric;
         Metrics.onPick(el, v => { s.metric = v; this.refresh(); });
-        Metrics.addSteppers(el);
       } else {
         const x = field('x', metricSelect());
         x.value = s.x;
         Metrics.onPick(x, v => { s.x = v; this.refresh(); });
-        Metrics.addSteppers(x);
         const y = field('y', metricSelect());
         y.value = s.y;
         Metrics.onPick(y, v => { s.y = v; this.refresh(); });
-        Metrics.addSteppers(y);
       }
 
       // Which moment. Blank means the last recorded one, which is the useful
@@ -95,30 +81,14 @@ const DiagramControls = {
         s.span = Math.max(1, v || 1); this.refresh();
       })).title = 'How many consecutive iterations to pool into one distribution';
       bar.lastChild.append(document.createTextNode(' iterations'));
-
-      const axes = document.createElement('span');
-      axes.className = 'axis-toggles';
-      axes.append(toggle('log x', s.logX, v => { s.logX = v; this.controls(); this.refresh(); }));
-      axes.append(toggle('log y', s.logY, v => { s.logY = v; this.controls(); this.refresh(); }));
-      if (this.active === 'heatmap') {
-        axes.append(toggle('log n', s.logCount,
-                           v => { s.logCount = v; this.controls(); this.refresh(); }));
-      }
-      bar.append(axes);
     }
 
     if (this.active === 'correlate') {
       const keys = this.statOptions();
-      const x = field('x', select(keys, s.x, v => { s.x = v; this.refresh(); }));
-      const y = field('y', select(keys, s.y, v => { s.y = v; this.refresh(); }));
-      x.title = 'Horizontal axis'; y.title = 'Vertical axis';
-      field('Phase', select([['all', 'Both phases'], ['1', 'Reproduction'], ['2', 'Game']],
-                            s.phase, v => { s.phase = v; this.refresh(); }));
-      const axes = document.createElement('span');
-      axes.className = 'axis-toggles';
-      axes.append(toggle('log x', s.logX, v => { s.logX = v; this.controls(); this.refresh(); }));
-      axes.append(toggle('log y', s.logY, v => { s.logY = v; this.controls(); this.refresh(); }));
-      bar.append(axes);
+      field('x', this._menu(keys, s.x, v => { s.x = v; this.refresh(); }, { title: 'Horizontal axis' }));
+      field('y', this._menu(keys, s.y, v => { s.y = v; this.refresh(); }, { title: 'Vertical axis' }));
+      field('Phase', this._menu([['all', 'Both phases'], ['1', 'Reproduction'], ['2', 'Game']],
+                                s.phase, v => { s.phase = v; this.refresh(); }));
     }
 
     if (this.active === 'timeline') {
@@ -158,13 +128,19 @@ const DiagramControls = {
       })).title = 'Drop the opening iterations. A run begins by shaking out the '
                 + 'graph it was seeded with, and that first swing is larger than '
                 + 'anything after it, so on a shared scale it flattens the rest.';
-
-      const axes = document.createElement('span');
-      axes.className = 'axis-toggles';
-      axes.append(toggle('log x', s.logX, v => { s.logX = v; this.controls(); this.refresh(); }));
-      axes.append(toggle('log y', s.logY, v => { s.logY = v; this.controls(); this.refresh(); }));
-      bar.append(axes);
     }
+
+    // Every tab has log axes, last among its own controls; the heatmap also
+    // has a log count. This was built three times, once per branch above.
+    const axes = document.createElement('span');
+    axes.className = 'axis-toggles';
+    axes.append(toggle('log x', s.logX, v => { s.logX = v; this.controls(); this.refresh(); }));
+    axes.append(toggle('log y', s.logY, v => { s.logY = v; this.controls(); this.refresh(); }));
+    if (this.active === 'heatmap') {
+      axes.append(toggle('log n', s.logCount,
+                         v => { s.logCount = v; this.controls(); this.refresh(); }));
+    }
+    bar.append(axes);
 
     // Shared by every tab: what it is called, what it is compared against,
     // how it is coloured, and getting a picture out.
@@ -177,18 +153,13 @@ const DiagramControls = {
     name.addEventListener('change', () => { s.title = name.value.trim(); this.refresh(); });
     field('Title', name);
 
-    const guideAxis = document.createElement('select');
-    for (const [v, text] of [['x', 'x'], ['y', 'y']]) {
-      const option = document.createElement('option');
-      option.value = v; option.textContent = text;
-      guideAxis.append(option);
-    }
+    const guideAxis = this._menu([['x', 'x'], ['y', 'y']], 'x');
     const guideAt = document.createElement('input');
     guideAt.type = 'number';
     guideAt.step = 'any';
     // Its own class, not the per-line cap's: they are different fields that
-              // happen to be the same size, and sharing a name makes each one
-              // findable only by counting.
+    // happen to be the same size, and sharing a name makes each one findable
+    // only by counting.
     guideAt.className = 'diagram-guide';
     guideAt.placeholder = 'value';
     const guideAdd = document.createElement('button');
@@ -216,7 +187,7 @@ const DiagramControls = {
     style.append(gridToggle);
     style.className = 'axis-toggles';
     const maps = Object.keys(COLORMAPS).map(k => [k, k]);
-    const mapEl = select(maps, s.colormap, v => { s.colormap = v; this.refresh(); });
+    const mapEl = this._menu(maps, s.colormap, v => { s.colormap = v; this.refresh(); });
     mapEl.title = 'Colour style';
     style.append(mapEl);
     style.append(toggle('flip', s.reverse, v => { s.reverse = v; this.controls(); this.refresh(); }));
@@ -266,11 +237,30 @@ const DiagramControls = {
     for (const menu of bar.querySelectorAll('select')) Metrics.addSteppers(menu);
   },
 
+  /**
+   * A menu of `[value, text]` pairs. `live` redraws as the reader moves
+   * through it, which is right for anything already in hand; otherwise it
+   * waits for a choice. The bar built menus three different ways before.
+   */
+  _menu(options, value, onChange, { title, live = true } = {}) {
+    const el = document.createElement('select');
+    for (const [v, text] of options) {
+      const option = document.createElement('option');
+      option.value = v; option.textContent = text;
+      el.append(option);
+    }
+    el.value = value;
+    if (title) el.title = title;
+    if (onChange && live) Metrics.onPick(el, onChange);
+    else if (onChange) el.addEventListener('change', () => onChange(el.value));
+    return el;
+  },
+
   /** The series statistics on offer, labelled the way the Viewer labels them. */
   statOptions(runId = this.runId) {
     const payload = SeriesLoad.cache.get(runId) || SeriesLoad.cache.get(this.runId);
     const keys = payload && payload.keys && payload.keys.length
-      ? payload.keys.filter(k => k !== '_frame')
+      ? payload.keys
       : Object.keys(Viewer.STAT_LABELS || {});
     // The derived ratios come last and only when the run holds what they are
     // made from, so the menu never offers a line that would come out empty.
@@ -302,29 +292,14 @@ const DiagramControls = {
       swatch.style.background = this.LINE_INK[i % this.LINE_INK.length];
       row.append(swatch);
 
-      const pick = (options, value, onChange, title, live = true) => {
-        const el = document.createElement('select');
-        for (const [v, text] of options) {
-          const option = document.createElement('option');
-          option.value = v; option.textContent = text;
-          el.append(option);
-        }
-        el.value = value;
-        if (title) el.title = title;
-        // Redrawing as the reader moves through a menu is right for a
-        // statistic, which is already in hand, and wrong for a simulation,
-        // which is a fresh summary each time — arrowing past four runs would
-        // start four of them.
-        if (live) Metrics.onPick(el, onChange);
-        else el.addEventListener('change', () => onChange(el.value));
-        row.append(el);
-        return el;
-      };
-
-      pick(this.runs.map(r => [r.id, r.name]), line.run,
-           v => { line.run = v; this.refresh(); }, 'Which simulation', false);
-      pick(this.statOptions(line.run), line.stat,
-           v => { line.stat = v; this.refresh(); }, 'Which statistic');
+      // A simulation is picked on commit rather than as the menu is browsed:
+      // each is a fresh summary, and arrowing past four runs would start four.
+      row.append(this._menu(this.runs.map(r => [r.id, r.name]), line.run,
+                            v => { line.run = v; this.refresh(); },
+                            { title: 'Which simulation', live: false }));
+      row.append(this._menu(this.statOptions(line.run), line.stat,
+                            v => { line.stat = v; this.refresh(); },
+                            { title: 'Which statistic' }));
       // Three buttons rather than a menu, matching the phase control under the
       // Viewer's graph. Three options that are always the same three are worth
       // showing all at once: which one is active is then visible without

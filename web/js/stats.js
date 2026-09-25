@@ -129,8 +129,6 @@ class FrameMetrics {
     return this._flowAmounts;
   }
 
-  get hasFlow() { return this.flow.size > 0; }
-
   /**
    * Raw per-node values for one metric, in frame order.
    *
@@ -308,19 +306,6 @@ class FrameMetrics {
 
   nodeColorNorm(i)  { return FrameMetrics._norm(this.colorValues[i], this.colorRange); }
   nodeSizeNorm(i)   { return FrameMetrics._norm(this.sizeValues[i], this.sizeRange); }
-
-  nodeColorCssByIndex(i, alpha) {
-    const s = this.settings;
-    if (s.nodeColorBy === 'constant') {
-      return colormapCss(s.nodeColormap, 0.6, alpha, s.nodeColorReverse);
-    }
-    return colormapCss(s.nodeColormap, this.nodeColorNorm(i), alpha, s.nodeColorReverse);
-  }
-
-  nodeColorCss(id, alpha) {
-    const i = this.index.get(id);
-    return (i === undefined) ? 'rgba(120,120,120,1)' : this.nodeColorCssByIndex(i, alpha);
-  }
 
   /**
    * What the edge colour map is showing, for the legend.
@@ -573,11 +558,6 @@ class FrameMetrics {
 
   // ---- summary --------------------------------------------------------
 
-  /** Tokens carried by each edge this phase, as a plain array. */
-  flowValues() {
-    return this.flowAmounts;
-  }
-
   /**
    * The numbers under the canvas.
    *
@@ -759,7 +739,7 @@ class FrameMetrics {
         out.revoltShare = allocatedTotal ? revolted / allocatedTotal : 0;
       }
 
-      const flows = this.flowValues();
+      const flows = this.flowAmounts;
       out.totalFlow = sum(flows);
       out.meanEdgeFlow = mean(flows);
       out.maxEdgeFlow = flows.length ? Math.max(...flows) : 0;
@@ -1111,7 +1091,7 @@ function _chrome(ctx, pad, outer, chrome) {
  * Only for whole numbers. Anything continuous can land anywhere, so every bin
  * is reachable and the even spacing is left alone.
  */
-function _binEdges(mapped, [lo, hi], bins, { integral, unmap }) {
+function _binEdges([lo, hi], bins, { integral, unmap }) {
   const even = [];
   for (let i = 0; i <= bins; i++) even.push(lo + (hi - lo) * (i / bins));
   if (!integral) return even;
@@ -1189,7 +1169,7 @@ function drawHistogram(canvas, values, options = {}) {
   // The same reason the heatmap needs them: on a log axis, whole numbers near
   // the origin are further apart than one bin, and the bins between them can
   // never be filled.
-  const edges = _binEdges(mapped, [lo, hi], bins, {
+  const edges = _binEdges([lo, hi], bins, {
     integral: _allWholeNumbers(values),
     unmap: v => (logScale ? Metrics.undoLog(v, signed) : v)
   });
@@ -1313,10 +1293,10 @@ function drawHeatmap(canvas, xs, ys, options = {}) {
   // Edges rather than a count, because on a log axis they are not evenly
   // spaced: near the origin whole numbers are further apart than one bin, and
   // the bins between them can never be filled.
-  const edgesX = _binEdges(mx, ex, binsX, {
+  const edgesX = _binEdges(ex, binsX, {
     integral: _allWholeNumbers(xs), unmap: v => (logX ? Metrics.undoLog(v, signedX) : v)
   });
-  const edgesY = _binEdges(my, ey, binsY, {
+  const edgesY = _binEdges(ey, binsY, {
     integral: _allWholeNumbers(ys), unmap: v => (logY ? Metrics.undoLog(v, signedY) : v)
   });
   const nx = edgesX.length - 1, ny = edgesY.length - 1;
@@ -1434,10 +1414,14 @@ function drawTrajectory(canvas, points, options = {}) {
     });
   }
 
-  // Frame, so the path is read against something rather than floating.
-  ctx.strokeStyle = 'rgba(143,163,181,0.25)';
-  ctx.lineWidth = 1;
-  ctx.strokeRect(padLeft + 0.5, padTop + 0.5, plotW - 1, plotH - 1);
+  // Frame, so the path is read against something rather than floating. With
+  // chrome, _axes has drawn it already; this used to draw it a second time in
+  // a grey of its own.
+  if (!chrome) {
+    ctx.strokeStyle = Ink.of('axis');
+    ctx.lineWidth = 1;
+    ctx.strokeRect(padLeft + 0.5, padTop + 0.5, plotW - 1, plotH - 1);
+  }
 
   // One stroke per segment: the colour has to change along the path, and that
   // is the whole point of drawing it this way.
@@ -1463,21 +1447,14 @@ function drawTrajectory(canvas, points, options = {}) {
   ctx.beginPath(); ctx.arc(px(last.x), py(last.y), 3.5, 0, Math.PI * 2); ctx.fill();
   ctx.stroke();
 
-  const fmt = v => {
-    const a = Math.abs(v);
-    if (a >= 1000) return Math.round(v).toLocaleString('en-US');
-    if (a >= 10) return v.toFixed(1);
-    if (a >= 0.01) return v.toFixed(3);
-    return v.toExponential(1);
-  };
   const back = (v, log) => (log ? Metrics.undoLog(v, v < 0) : v);
 
   ctx.font = '10px system-ui, sans-serif';
   ctx.fillStyle = Ink.of('label');
-  ctx.fillText(fmt(back(hiY, logY)), 2, padTop + 8);
-  ctx.fillText(fmt(back(loY, logY)), 2, padTop + plotH);
-  ctx.fillText(fmt(back(loX, logX)), padLeft, h - 17);
-  const hiXText = fmt(back(hiX, logX));
+  ctx.fillText(_short(back(hiY, logY)), 2, padTop + 8);
+  ctx.fillText(_short(back(loY, logY)), 2, padTop + plotH);
+  ctx.fillText(_short(back(loX, logX)), padLeft, h - 17);
+  const hiXText = _short(back(hiX, logX));
   ctx.fillText(hiXText, w - ctx.measureText(hiXText).width - 2, h - 17);
 
   if (!chrome) {

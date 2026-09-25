@@ -136,7 +136,6 @@ const StepView = {
     }
   },
 
-  /** Advance the layout, then let everything drawn move towards it. */
   /**
    * What each agent is holding at this instant, not at the end of the step.
    *
@@ -165,6 +164,7 @@ const StepView = {
     return { now, moving, given };
   },
 
+  /** Advance the layout, then let everything drawn move towards it. */
   tick(view, dt) {
     if (!view.layout || !view.stage) return;
     view.since += dt;

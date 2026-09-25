@@ -191,11 +191,6 @@ const RunStore = {
     return Promise.all(wanted.map(async row => ({ index: row.index, frame: await unpack(row) })));
   },
 
-  /** Whether frames can be stored compressed at all. */
-  get compresses() {
-    return typeof CompressionStream === 'function';
-  },
-
   /**
    * Copy every frame of one run onto another id.
    *

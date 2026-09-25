@@ -92,7 +92,7 @@ const Viewer = {
 
     // The declared defaults are only values until something applies them, so
     // push them into the layout, the renderer and the controls up front.
-    this.applyLayoutSettings();
+    this.layout.applySettings(this.settings);
     this.syncControlsFromSettings();
     this.setDimensions(this.settings.dimensions);
     this.setAutoFit(this.settings.autoFit);
@@ -195,7 +195,7 @@ const Viewer = {
     this.canvas.addEventListener('click', e => {
       if (moved > 4 || !this.frame) return;
       const rect = this.canvas.getBoundingClientRect();
-      const i = this.renderer.pick(this.frame, this.layout,
+      const i = this.renderer.pick(this.frame,
                                    e.clientX - rect.left, e.clientY - rect.top);
       if (i >= 0) this.setFocus(this.frame.ids[i]);
       else if (this.focusId !== null) this.setFocus(null);
@@ -204,7 +204,7 @@ const Viewer = {
     this.canvas.addEventListener('mousemove', e => {
       if (!this.frame || dragging || rotating) return;
       const rect = this.canvas.getBoundingClientRect();
-      const i = this.renderer.pick(this.frame, this.layout,
+      const i = this.renderer.pick(this.frame,
                                    e.clientX - rect.left, e.clientY - rect.top);
       this.showHover(i, e.clientX - rect.left, e.clientY - rect.top);
     });
@@ -542,7 +542,6 @@ const Viewer = {
     previous.ids.forEach((id, i) => before.set(id, previous.tokens[i]));
 
     frame.delta = frame.ids.map((id, i) => frame.tokens[i] - (before.get(id) ?? 0));
-    frame.delta_reconstructed = true;
   },
 
   rebuildMetrics() {

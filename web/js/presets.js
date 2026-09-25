@@ -67,7 +67,7 @@ const Presets = {
       // origin, so it settles at whatever width the repulsion and the springs
       // agree on and the shape is the graph's rather than the origin's. That
       // makes the drawing much wider, which used to run into the camera's
-      // fixed zoom floor — see GraphRenderer.clampScale, where the floor now
+      // fixed zoom floor — see GraphRenderer.clamp, where the floor now
       // follows the content instead.
       forceCharge: 97, forceLink: 0.07, forceCenter: 0,
       forceAngular: 0.32, forceDamping: 0.72, forceTheta: 1.9,

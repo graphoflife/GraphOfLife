@@ -30,7 +30,6 @@ let resting = false;
 let shared = null;        // Float32Array over a SharedArrayBuffer, when available
 let sharedGen = 0;        // which buffer generation `shared` refers to
 let frameGen = 0;         // which frame the published coordinates are ordered by
-let ticksDone = 0;
 
 // How long to spend ticking before handing positions back. A little under a
 // frame, so the page never waits long for fresh coordinates, and never more
@@ -75,7 +74,6 @@ function report(positions) {
     type: 'positions',
     alpha: layout.alpha,
     count: layout.ids.length,
-    ticks: ticksDone,
     // Which buffer these coordinates were written into, and which frame's id
     // order they follow. The page waits for both before reading them.
     gen: sharedGen,
@@ -100,7 +98,6 @@ function loop() {
     if (!layout.tick()) break;
     moved = true;
     ticks++;
-    ticksDone++;
   } while (ticks < MAX_TICKS_PER_BATCH && performance.now() - began < BUDGET_MS);
 
   // Publish while there is movement, and once as it stops. Republishing an
@@ -141,11 +138,6 @@ self.onmessage = (e) => {
   const msg = e.data;
 
   switch (msg.type) {
-    case 'init':
-      if (msg.buffer) shared = new Float32Array(msg.buffer);
-      postMessage({ type: 'ready', shared: Boolean(shared) });
-      break;
-
     case 'buffer':
       // The page grew the shared buffer because the graph did. Fill it at once
       // and say so, rather than leaving the page waiting on the next batch

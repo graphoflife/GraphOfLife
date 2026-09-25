@@ -14,7 +14,6 @@
 
 /** Talks to gol_server.py. */
 const ServerBackend = {
-  name: 'server',
 
   async _request(method, path, body, signal) {
     const options = { method, headers: {} };
@@ -86,7 +85,6 @@ const ServerBackend = {
 
 /** Runs the same Python in a worker, through Pyodide. */
 const BrowserBackend = {
-  name: 'browser',
   _worker: null,
   _pending: new Map(),
   _nextId: 1,
@@ -105,10 +103,6 @@ const BrowserBackend = {
         if (this.onProgress) this.onProgress(msg.progress);
         return;
       }
-      // A run that ended on its own, or died. Nothing is waiting on these;
-      // the interface finds out when it next asks for the list.
-      if (msg.type === 'runStopped' || msg.type === 'runError') return;
-
       const waiting = this._pending.get(msg.id);
       if (!waiting) return;
       this._pending.delete(msg.id);
@@ -243,9 +237,4 @@ function formatBytes(bytes) {
 
 function formatNumber(n) {
   return (n ?? 0).toLocaleString('en-US');
-}
-
-function formatTime(seconds) {
-  if (!seconds) return '—';
-  return new Date(seconds * 1000).toLocaleString();
 }

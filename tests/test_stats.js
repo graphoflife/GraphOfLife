@@ -349,7 +349,7 @@ function test_what_crossed_each_link_is_read_from_the_decisions() {
     }
   });
   const m = metricsOf(f);
-  if (!m.hasFlow) throw new Error('a frame with allocations reported no flow');
+  if (!m.flow.size) throw new Error('a frame with allocations reported no flow');
 
   if (m._edgeRaw('flow', 1, 2) !== 7) {
     throw new Error(`1—2 carried ${m._edgeRaw('flow', 1, 2)}, wanted the 7 that was staked`);
@@ -368,20 +368,10 @@ function test_what_crossed_each_link_is_read_from_the_decisions() {
 
 function test_a_frame_without_decisions_has_no_flow_rather_than_zero_flow() {
   const m = metricsOf();
-  if (m.hasFlow) throw new Error('a frame with no decisions claimed to know what crossed');
+  if (m.flow.size) throw new Error('a frame with no decisions claimed to know what crossed');
   if (Array.from(m.edgeValues('flow')).some(v => v !== 0)) {
     throw new Error('flow was invented for a frame that never recorded any');
   }
-}
-
-function test_a_colour_comes_out_of_the_map_for_every_agent() {
-  const m = metricsOf();
-  m.frame.ids.forEach((id, i) => {
-    const css = m.nodeColorCssByIndex(i, 1);
-    if (!/^rgba?\(/.test(css)) throw new Error(`agent ${id} was given "${css}"`);
-    const byId = m.nodeColorCss(id, 1);
-    if (byId !== css) throw new Error(`agent ${id} is one colour by index and another by id`);
-  });
 }
 
 function test_the_key_reads_in_the_units_that_were_chosen() {
@@ -418,7 +408,6 @@ const tests = Object.entries({
   test_the_hover_card_describes_the_agent_it_was_asked_about,
   test_what_crossed_each_link_is_read_from_the_decisions,
   test_a_frame_without_decisions_has_no_flow_rather_than_zero_flow,
-  test_a_colour_comes_out_of_the_map_for_every_agent,
   test_the_key_reads_in_the_units_that_were_chosen
 }).sort(([a], [b]) => a.localeCompare(b));
 

@@ -204,7 +204,6 @@ Object.assign(Explain, {
         fetch(this.SCRIPT).then(r => r.ok ? r.text() : Promise.reject(new Error(`HTTP ${r.status}`)))
       ]);
 
-      this.meta = run;
       this.script = script;
       this.lines = script.split('\n');
       this.stages = run.stages;

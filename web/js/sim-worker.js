@@ -90,19 +90,6 @@ function ensureReady() {
 }
 
 /**
- * Call into gol_browser and bring the answer back as plain data.
- *
- * Arguments are handed over as a JSON string and parsed on the Python side
- * rather than pasted into the expression. Pasting looked simpler and was
- * wrong: JSON writes true, false and null, none of which Python knows, so a
- * configuration with a switch in it failed as soon as it crossed over. It also
- * means nothing a caller supplies is ever evaluated as code.
- *
- * The answer comes back as JSON too. Converting a frame member by member
- * through Pyodide's own bridge costs several times what encoding and parsing
- * it does, and a frame is a deep tree of lists.
- */
-/**
  * Keep only the named fields of a frame, `a.b` reaching one level in.
  *
  * gol_server._project, for the same callers. Taking each name literally made
@@ -130,6 +117,19 @@ function lineageFields() {
   return (lineageFieldsRead ||= call('gol_browser.WORLDS.lineage_fields'));
 }
 
+/**
+ * Call into gol_browser and bring the answer back as plain data.
+ *
+ * Arguments are handed over as a JSON string and parsed on the Python side
+ * rather than pasted into the expression. Pasting looked simpler and was
+ * wrong: JSON writes true, false and null, none of which Python knows, so a
+ * configuration with a switch in it failed as soon as it crossed over. It also
+ * means nothing a caller supplies is ever evaluated as code.
+ *
+ * The answer comes back as JSON too. Converting a frame member by member
+ * through Pyodide's own bridge costs several times what encoding and parsing
+ * it does, and a frame is a deep tree of lists.
+ */
 function call(target, args = []) {
   pyodide.globals.set('_call_args', JSON.stringify(args));
   const json = pyodide.runPython(`
@@ -266,7 +266,6 @@ async function pump(runId) {
       run.error = String(err && err.message ? err.message : err).slice(0, 400);
       await RunStore.putRun(run).catch(() => {});
     }
-    self.postMessage({ type: 'runError', runId, message: String(err).slice(0, 400) });
     return;
   }
 

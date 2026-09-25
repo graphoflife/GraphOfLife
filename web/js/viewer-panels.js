@@ -37,13 +37,6 @@ Object.assign(Viewer, {
   },
 
   /**
-   * Which category each statistic belongs to, and the order within it.
-   *
-   * Phase-specific groups simply come out empty on the other phase, so the
-   * Reproduction section disappears on a game frame rather than showing a row
-   * of dashes.
-   */
-  /**
    * What each statistic is called, in one place.
    *
    * The strip under the canvas and the trajectory chart's menus both read
@@ -144,6 +137,13 @@ Object.assign(Viewer, {
     redistributed: 'Redistributed'
   },
 
+  /**
+   * Which category each statistic belongs to, and the order within it.
+   *
+   * Phase-specific groups simply come out empty on the other phase, so the
+   * Reproduction section disappears on a game frame rather than showing a row
+   * of dashes.
+   */
   STAT_GROUPS: [
     { key: 'general', label: 'General', open: true, keys: [
       'nodes', 'edges', 'tokens', 'meanTokens', 'medianTokens', 'maxTokens', 'minTokens',
@@ -391,68 +391,14 @@ Object.assign(Viewer, {
     }
   },
 
-  /**
-   * Pair two run statistics into a path through time.
-   *
-   * The two are not always recorded together. Most are written on both phases,
-   * some only on the reproduction phase — births, and what was invested —
-   * and some only on the game phase — what flowed, who revolted. Rather than
-   * keeping a table of which is which, the pairing is decided from the data:
-   *
-   *   Where both have a value on the same frame, that frame is one point. This
-   *   covers everything recorded on both phases, and any two that share a
-   *   phase, at the full resolution the series holds.
-   *
-   *   Where they never once appear together — one reproduction-only, the other
-   *   game-only — the iteration is the unit instead, taking each from whichever
-   *   of its two phases recorded it. One point per iteration, which is the
-   *   finest honest pairing available: the two really did happen at the same
-   *   time, just not in the same half of it.
-   *
-   * The chart says which of the two it used, since it changes what a point
-   * means.
-   */
+  /** The trajectory's two statistics as a path through time: see SeriesLoad.pairs. */
   trajectoryPoints(payload) {
     if (!payload || !payload.series) return { message: 'history is still loading' };
-
-    const s = payload.series;
-    const xKey = this.settings.trajX, yKey = this.settings.trajY;
-    const xs = s[xKey], ys = s[yKey];
-    const phases = s.phase || [], iterations = s.iteration || [];
-    if (!xs || !ys) return { message: 'this run has no history for one of these' };
-
-    const usable = v => v !== null && v !== undefined && Number.isFinite(v);
-
-    const sameFrame = [];
-    for (let i = 0; i < xs.length; i++) {
-      if (!this.framePassesFilter(phases[i])) continue;
-      if (!usable(xs[i]) || !usable(ys[i])) continue;
-      sameFrame.push({ x: xs[i], y: ys[i], t: iterations[i] });
-    }
-    if (sameFrame.length >= 2) {
-      return { points: sameFrame, pairing: 'one point per frame' };
-    }
-
-    // Never together on a frame, so pair the phases of each iteration. The
-    // phase filter is ignored here on purpose: it would leave one of the two
-    // with nothing, and the whole reason to be in this branch is that they
-    // live on opposite halves of an iteration.
-    const byIteration = new Map();
-    for (let i = 0; i < xs.length; i++) {
-      const at = iterations[i];
-      let slot = byIteration.get(at);
-      if (!slot) { slot = { x: null, y: null, t: at }; byIteration.set(at, slot); }
-      if (slot.x === null && usable(xs[i])) slot.x = xs[i];
-      if (slot.y === null && usable(ys[i])) slot.y = ys[i];
-    }
-    const paired = [...byIteration.values()]
-      .filter(p => p.x !== null && p.y !== null)
-      .sort((a, b) => a.t - b.t);
-
-    if (paired.length >= 2) {
-      return { points: paired, pairing: 'one point per iteration, across its phases' };
-    }
-    return { message: 'these two are never recorded at the same time' };
+    const found = SeriesLoad.pairs(payload.series, this.settings.trajX, this.settings.trajY,
+                                   phase => this.framePassesFilter(phase));
+    if (!found) return { message: 'this run has no history for one of these' };
+    if (!found.pairing) return { message: 'these two are never recorded at the same time' };
+    return found;
   },
 
   /** Raw values for a domain-qualified metric, whichever domain it names. */

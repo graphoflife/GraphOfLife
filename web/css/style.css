@@ -258,8 +258,6 @@ h3 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.8px; color: v
   max-width: 1400px;
 }
 
-.panel-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-
 /* ---- forms ---- */
 .config-form { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 12px; }
 
@@ -351,7 +349,6 @@ button.small { padding: 4px 9px; font-size: 12px; }
 
 
 /* ---- viewer layout ---- */
-.viewer-layout { display: grid; grid-template-columns: 1fr 268px; gap: 12px; align-items: start; }
 
 .canvas-column { min-width: 0; }
 
@@ -406,24 +403,10 @@ button.small { padding: 4px 9px; font-size: 12px; }
 }
 .playbar button { padding: 4px 10px; min-width: 34px; }
 #frameSlider { flex: 1; min-width: 80px; }
-.frame-label { color: var(--muted); font-size: 11.5px; white-space: nowrap; }
 .speed { display: flex; align-items: center; gap: 6px; color: var(--muted); font-size: 11.5px; white-space: nowrap; }
 .speed input { width: 76px; }
 
 /* ---- stats ---- */
-.stats-strip {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 10px;
-}
-.stat {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 6px 10px;
-  min-width: 88px;
-}
 .stat-key { display: block; font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
 .stat-val { display: block; font-size: 15px; font-variant-numeric: tabular-nums; }
 
@@ -465,7 +448,6 @@ button.small { padding: 4px 9px; font-size: 12px; }
 .control-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; }
 
 @media (max-width: 1000px) {
-  .viewer-layout { grid-template-columns: 1fr; }
   .controls { position: static; max-height: none; }
   .charts { grid-template-columns: 1fr; }
 }
@@ -524,7 +506,6 @@ body.resizing * { cursor: col-resize !important; }
   font-size: 10.5px;
   line-height: 1.45;
 }
-.name-field { max-width: 520px; }
 legend.sub {
   display: block;
   color: var(--muted);
@@ -667,13 +648,6 @@ details.control-group > summary:hover h3 { color: var(--text); }
 .hover-card .good { color: var(--ok); }
 .hover-card .bad { color: var(--danger-text); }
 .hover-card .warnText { color: var(--warn); }
-
-/* Many more statistics now, so give the strip a ceiling and let it scroll. */
-.stats-strip {
-  max-height: 190px;
-  overflow-y: auto;
-  align-content: flex-start;
-}
 
 /* Run picker sits with the view controls rather than in the settings list. */
 .run-inline { display: inline-flex; align-items: stretch; gap: 6px; }
@@ -978,14 +952,6 @@ details.control-group > summary:hover h3 { color: var(--text); }
 .research-run[hidden] { display: none; }
 
 /* ==========================================================================
-   Literature
-   ==========================================================================
-   Long-form reading rather than an instrument, so it is set as a column at a
-   comfortable measure instead of filling the window. Class is `.lit-page`:
-   `.lit` is already taken further down for a highlighted line in the code
-   walk-through, and two meanings for one name is a trap. */
-
-/* ==========================================================================
    Rendered notes
    ==========================================================================
    research/Research.md, as a page. Long-form reading at a comfortable measure,
@@ -1051,63 +1017,6 @@ details.control-group > summary:hover h3 { color: var(--text); }
 .md th { background: var(--panel-2); color: var(--text); white-space: nowrap; }
 .md-status { color: var(--muted); }
 
-.lit-page {
-  max-width: 1080px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
-  padding-bottom: 48px;
-}
-.lit-page .explain-intro { max-width: 760px; }
-.lit-page .explain-intro p.lit-lead { color: var(--text); }
-/* Scoped, not !important: `.explain-intro p` already sets margin and colour,
-   and a bare `.lit-caution` would lose to it on specificity. */
-.lit-page .explain-intro p.lit-caution {
-  margin: 10px 0 0;
-  font-size: 12px;
-  color: var(--muted);
-  font-style: italic;
-}
-
-.lit-group { display: flex; flex-direction: column; gap: 14px; }
-.lit-group > h3 {
-  margin: 0;
-  font-size: 15px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--muted);
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 8px;
-}
-
-.lit-group article {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 16px 18px;
-  max-width: 860px;
-}
-.lit-group article h4 { margin: 0; font-size: 15px; }
-.lit-group article p { margin: 8px 0 0; line-height: 1.65; color: var(--text); }
-.lit-group article code { font-size: 12px; }
-
-/* Who said it, kept quiet so the idea reads first. */
-.lit-group article p.lit-cite {
-  font-size: 12px;
-  color: var(--muted);
-  margin-top: 3px;
-}
-
-/* The part that earns the entry its place: what the idea means in this
-   system. Marked off so it is never mistaken for a summary of the paper. */
-.lit-group article p.lit-here {
-  border-left: 2px solid var(--accent);
-  padding-left: 12px;
-  margin-top: 12px;
-  color: var(--muted);
-}
-.lit-group article p.lit-here em, .lit-group article p.lit-here code { color: var(--text); }
 
 /* The handful of numbers a module structure amounts to. */
 .flow-facts {
@@ -1286,8 +1195,7 @@ details.control-group > summary:hover h3 { color: var(--text); }
 .diagram-drop:hover { color: #fff; }
 .diagram-preset-title { color: var(--muted); }
 
-.diagram-preset,
-.diagram-line {
+.diagram-preset {
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -1296,9 +1204,7 @@ details.control-group > summary:hover h3 { color: var(--text); }
   border-radius: var(--radius);
   padding: 2px 4px 2px 8px;
 }
-.diagram-line i { width: 10px; height: 2px; border-radius: 1px; }
-.diagram-preset button,
-.diagram-line button {
+.diagram-preset button {
   background: transparent;
   border: none;
   color: var(--muted);
@@ -1307,8 +1213,7 @@ details.control-group > summary:hover h3 { color: var(--text); }
   padding: 1px 4px;
 }
 .diagram-preset button:first-child { color: var(--text); }
-.diagram-preset button:hover,
-.diagram-line button:hover { color: #fff; }
+.diagram-preset button:hover { color: #fff; }
 
 /* --- Theses, as the time series they are --------------------------------
    The claim sits above the evidence for it. Set as reading text, because it

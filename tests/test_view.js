@@ -752,6 +752,33 @@ async function test_a_history_that_fails_says_so_and_never_rejects() {
     `the popup said "${detail.footEl.textContent}" about a load that failed`);
 }
 
+function test_two_statistics_pair_by_frame_or_else_by_iteration() {
+  const loader = loaderFor({});
+  const every = () => true;
+
+  // Recorded together: one point per frame, under the phase filter.
+  const together = { iteration: [0, 0, 1, 1], phase: [1, 2, 1, 2],
+                     nodes: [5, 6, 7, 8], edges: [9, 10, 11, 12] };
+  const framed = loader.pairs(together, 'nodes', 'edges', phase => phase === 2);
+  assert(framed.pairing === 'one point per frame' && framed.points.map(p => p.x).join() === '6,8',
+    `two statistics recorded together paired as ${JSON.stringify(framed)}`);
+
+  // Never on the same frame, births on reproduction and revolutions on the
+  // game, so each iteration's two halves make its point.
+  const apart = { iteration: [0, 0, 1, 1], phase: [1, 2, 1, 2],
+                  births: [3, null, 4, null], revolutions: [null, 1, null, 2] };
+  const joined = loader.pairs(apart, 'births', 'revolutions', every);
+  assert(joined.pairing === 'one point per iteration, across its phases'
+         && JSON.stringify(joined.points.map(p => [p.x, p.y])) === '[[3,1],[4,2]]',
+    `births against revolutions paired as ${JSON.stringify(joined)}`);
+
+  assert(loader.pairs(apart, 'births', 'missing', every) === null,
+    'a statistic the history lacks was paired anyway');
+  const lone = { iteration: [0], phase: [1], births: [3], revolutions: [null] };
+  assert(loader.pairs(lone, 'births', 'revolutions', every).pairing === null,
+    'one point was offered as a path');
+}
+
 async function test_the_bar_counts_samples_and_only_moves_forward() {
   // The server counts frames, two to a sample, and counts only the frames of
   // the step in flight. Passing that straight to the bar made it run 4%, 6%,
@@ -975,6 +1002,7 @@ const tests = Object.entries({
   test_a_history_of_a_smaller_run_is_not_ready,
   test_a_history_longer_than_its_run_is_dropped,
   test_a_derived_statistic_reads_like_a_stored_one,
+  test_two_statistics_pair_by_frame_or_else_by_iteration,
   test_a_history_that_fails_says_so_and_never_rejects,
   test_the_bar_counts_samples_and_only_moves_forward,
   test_switching_a_line_to_a_graph_statistic_loads_it,

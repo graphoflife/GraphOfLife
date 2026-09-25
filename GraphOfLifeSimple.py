@@ -1718,8 +1718,7 @@ class GraphOfLife:
 
     def _frame(self, phase: int, cleanup: Dict[str, Any], nodes_before: int,
                tokens_before: Dict[int, int],
-               decisions: Dict[str, Any] | None,
-               summary_extra: Dict[str, Any] | None = None) -> Dict[str, Any]:
+               decisions: Dict[str, Any] | None) -> Dict[str, Any]:
         """
         Snapshot the world for the viewer.
 
@@ -1756,8 +1755,6 @@ class GraphOfLife:
                 "tokens": int(sum(self.tokens.values())),
             },
         }
-        if summary_extra:
-            frame["summary"].update(summary_extra)
         if decisions is not None:
             frame["decisions"] = decisions
         return frame

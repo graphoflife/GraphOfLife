@@ -78,7 +78,7 @@ Object.assign(Viewer, {
       layer = next;
     }
 
-    return this.cropFrame(full, inBall, { focusAnchor: anchor });
+    return this.cropFrame(full, inBall);
   },
 
   /**
@@ -89,7 +89,7 @@ Object.assign(Viewer, {
    * index-aligned with `ids` without quietly dropping a field. Written twice,
    * the second copy is where a field goes missing.
    */
-  cropFrame(full, keepSet, extra = {}) {
+  cropFrame(full, keepSet) {
     const keep = [];
     for (let i = 0; i < full.ids.length; i++) if (keepSet.has(full.ids[i])) keep.push(i);
     const take = arr => (arr ? keep.map(i => arr[i]) : undefined);
@@ -101,8 +101,7 @@ Object.assign(Viewer, {
       ids: keep.map(i => full.ids[i]),
       edges: full.edges.filter(([a, b]) => keepSet.has(a) && keepSet.has(b)),
       cleanup: full.cleanup,
-      previous: full.previous,
-      ...extra
+      previous: full.previous
     };
     // The per-node arrays, listed in one place rather than spelled out one
     // assignment at a time. They are index-aligned with `ids` and so all crop
@@ -127,14 +126,6 @@ Object.assign(Viewer, {
       if (d.gifts) sub.decisions.gifts = d.gifts.filter(g => keepSet.has(g[0]));
       if (d.pruned_edges) sub.decisions.pruned_edges = d.pruned_edges;
     }
-
-    // The frame-level counts are whole-graph numbers; dropping them makes
-    // the stat fall back to counting the records that survived the crop.
-    sub.summary = {
-      nodes: sub.ids.length,
-      edges: sub.edges.length,
-      tokens: (sub.tokens || []).reduce((a, b) => a + b, 0)
-    };
     return sub;
   },
 
@@ -190,7 +181,7 @@ Object.assign(Viewer, {
     }
 
     const core = new Set(full.ids.filter(id => !gone.has(id)));
-    return this.cropFrame(full, core, { coreK: k });
+    return this.cropFrame(full, core);
   },
 
   /**

@@ -10,30 +10,6 @@
  * phases alone gives a curve of game phases alone rather than a sawtooth
  * alternating between two different kinds of moment.
  */
-/**
- * Round numbers to rule a grid at.
- *
- * A grid drawn at whatever the data happens to span gives labels like 0.0473,
- * which are noise to read. This steps up to the nearest 1, 2, 2.5 or 5 times a
- * power of ten, so the lines land on values worth putting a number against.
- */
-function niceTicks(lo, hi, target = 5) {
-  if (!(hi > lo)) return { ticks: [lo], step: 1 };
-
-  const rough = (hi - lo) / Math.max(1, target);
-  const magnitude = Math.pow(10, Math.floor(Math.log10(rough)));
-  const scaled = rough / magnitude;
-  const step = magnitude *
-    (scaled <= 1 ? 1 : scaled <= 2 ? 2 : scaled <= 2.5 ? 2.5 : scaled <= 5 ? 5 : 10);
-
-  const ticks = [];
-  for (let v = Math.ceil(lo / step) * step; v <= hi + step * 1e-6; v += step) {
-    // Repeated addition drifts; snap a near-zero tick to exactly zero.
-    ticks.push(Math.abs(v) < step * 1e-9 ? 0 : v);
-  }
-  return { ticks, step };
-}
-
 const StatDetail = {
   currentKey: null,
 
@@ -262,17 +238,7 @@ const StatDetail = {
 
   redraw() {
     const { xs, ys, asShare } = this.points();
-    const canvas = this.canvas;
-    const ctx = canvas.getContext('2d');
-    const dpr = window.devicePixelRatio || 1;
-    const rect = canvas.getBoundingClientRect();
-
-    canvas.width = Math.max(1, Math.floor(rect.width * dpr));
-    canvas.height = Math.max(1, Math.floor(rect.height * dpr));
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-    const w = rect.width, h = rect.height;
-    ctx.clearRect(0, 0, w, h);
+    const { ctx, w, h } = _prepareCanvas(this.canvas);
 
     if (!ys.length) {
       ctx.fillStyle = Ink.of('dim');
@@ -292,14 +258,14 @@ const StatDetail = {
 
     // Widen to the round numbers, so the top and bottom lines are labelled
     // values rather than wherever the data happened to stop.
-    const yGrid = niceTicks(lo, hi, 5);
-    if (yGrid.ticks.length > 1) {
-      lo = Math.min(lo, yGrid.ticks[0]);
-      hi = Math.max(hi, yGrid.ticks[yGrid.ticks.length - 1]);
+    const yTicks = _axisTicks(lo, hi, 5);
+    if (yTicks.length > 1) {
+      lo = Math.min(lo, yTicks[0]);
+      hi = Math.max(hi, yTicks[yTicks.length - 1]);
     }
 
     const xLo = xs[0], xHi = xs[xs.length - 1];
-    const xGrid = niceTicks(xLo, xHi, 5);
+    const xTicks = _axisTicks(xLo, xHi, 5);
 
     const xAt = v => padL + (xHi === xLo ? plotW / 2 : ((v - xLo) / (xHi - xLo)) * plotW);
     const yAt = v => padT + plotH - ((v - lo) / (hi - lo)) * plotH;
@@ -313,7 +279,7 @@ const StatDetail = {
     ctx.lineWidth = 1;
 
     // Horizontal grid
-    for (const v of yGrid.ticks) {
+    for (const v of yTicks) {
       const y = Math.round(yAt(v)) + 0.5;
       if (y < padT - 1 || y > padT + plotH + 1) continue;
       ctx.strokeStyle = Ink.of('grid');
@@ -328,7 +294,7 @@ const StatDetail = {
     }
 
     // Vertical grid
-    for (const v of xGrid.ticks) {
+    for (const v of xTicks) {
       const x = Math.round(xAt(v)) + 0.5;
       if (x < padL - 1 || x > padL + plotW + 1) continue;
       ctx.strokeStyle = Ink.of('grid');

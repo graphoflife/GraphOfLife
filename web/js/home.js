@@ -154,14 +154,7 @@ const Home = {
     if (!this.layout) {
       this.layout = new LayoutClient();
       this.layout.setDimensions(this.settings.dimensions);
-      this.layout.setParams({
-        charge: this.settings.forceCharge,
-        linkStrength: this.settings.forceLink,
-        centerStrength: this.settings.forceCenter,
-        angularStrength: this.settings.forceAngular,
-        damping: this.settings.forceDamping,
-        theta: this.settings.forceTheta
-      });
+      this.layout.applySettings(this.settings);
       this._needsFraming = true;
     }
   },

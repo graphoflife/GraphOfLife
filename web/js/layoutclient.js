@@ -17,19 +17,15 @@ class LayoutClient {
     this.count = 0;
     this.alpha = 1;
     this.dimensions = 3;
-    this.usingWorker = false;
     this.shared = null;
     // Set by every setFrame; 1 until one has happened.
     this.freshShare = 1;
 
-    // Mirrors of the force parameters, so a value set before the worker is
-    // ready is not lost, and so the fallback layout can be configured the
-    // same way.
-    this.params = {
-      charge: 20, linkStrength: 0.12, linkDistance: 24,
-      centerStrength: 0.012, angularStrength: 0.15,
-      damping: 0.86, theta: 1.2
-    };
+    // Every force parameter set so far, so a layout that falls back to this
+    // thread starts configured the way the worker was. Empty until the first
+    // setParams, which every owner makes at once; ForceLayout's own defaults
+    // cover the moment before.
+    this.params = {};
 
     this._local = null;
     this._pending = null;
@@ -54,8 +50,6 @@ class LayoutClient {
       this.worker = new Worker(workerUrl);
       this.worker.onmessage = (e) => this._onMessage(e.data);
       this.worker.onerror = () => this._fallBack('the layout worker failed to start');
-      this.usingWorker = true;
-      this.worker.postMessage({ type: 'init', buffer: null });
     } catch (err) {
       this._fallBack('workers are unavailable here');
     }
@@ -67,7 +61,6 @@ class LayoutClient {
     console.warn(`GraphOfLife: ${reason}; running the layout on the main thread.`);
     if (this.worker) { try { this.worker.terminate(); } catch (e) { /* already gone */ } }
     this.worker = null;
-    this.usingWorker = false;
 
     this._local = new ForceLayout();
     Object.assign(this._local, this.params);
@@ -86,10 +79,6 @@ class LayoutClient {
   }
 
   _onMessage(msg) {
-    if (msg.type === 'ready') {
-      this.shared = msg.shared ? this.shared : null;
-      return;
-    }
     if (msg.type !== 'positions') return;
 
     // The worker has now written into the buffer it reports, so it is safe to
@@ -152,6 +141,18 @@ class LayoutClient {
     this.worker.postMessage({ type: 'dimensions', dimensions: dims });
   }
 
+  /**
+   * The force parameters a look's settings name. The Viewer and the home
+   * page's backdrop both drive a layout from a preset, and each used to spell
+   * this mapping out for itself.
+   */
+  applySettings(s) {
+    this.setParams({
+      charge: s.forceCharge, linkStrength: s.forceLink, centerStrength: s.forceCenter,
+      angularStrength: s.forceAngular, damping: s.forceDamping, theta: s.forceTheta
+    });
+  }
+
   setParams(params) {
     Object.assign(this.params, params);
     if (this._local) { Object.assign(this._local, params); return; }
@@ -208,29 +209,6 @@ class LayoutClient {
     this._pendingShared = new Float32Array(buffer);
     this._bufferGen++;
     this.worker.postMessage({ type: 'buffer', buffer, gen: this._bufferGen });
-  }
-
-  /** Bounding box of the current positions, padded slightly. */
-  bounds() {
-    const n = Math.min(this.count, Math.floor(this.positions.length / 3));
-    let minX = Infinity, minY = Infinity, minZ = Infinity;
-    let maxX = -Infinity, maxY = -Infinity, maxZ = -Infinity;
-
-    for (let i = 0; i < n; i++) {
-      const o = i * 3;
-      const x = this.positions[o], y = this.positions[o + 1], z = this.positions[o + 2];
-      if (x < minX) minX = x; if (x > maxX) maxX = x;
-      if (y < minY) minY = y; if (y > maxY) maxY = y;
-      if (z < minZ) minZ = z; if (z > maxZ) maxZ = z;
-    }
-    if (!Number.isFinite(minX)) {
-      return { minX: -100, minY: -100, minZ: 0, maxX: 100, maxY: 100, maxZ: 0 };
-    }
-
-    const padX = (maxX - minX) * 0.06 + 20;
-    const padY = (maxY - minY) * 0.06 + 20;
-    return { minX: minX - padX, minY: minY - padY, minZ,
-             maxX: maxX + padX, maxY: maxY + padY, maxZ };
   }
 
   dispose() {

@@ -52,8 +52,6 @@ const Jobs = {
 
     const controller = new AbortController();
     const job = {
-      owner,
-      label,
       signal: controller.signal,
       get cancelled() { return controller.signal.aborted; },
       report: (done, total, text) => {

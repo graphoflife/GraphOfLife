@@ -105,6 +105,62 @@ const SeriesLoad = {
     return out;
   },
 
+  /**
+   * Two statistics of a history paired into a path through time.
+   *
+   * The two are not always recorded together. Most are written on both phases,
+   * some only on the reproduction phase — births, and what was invested —
+   * and some only on the game phase — what flowed, who revolted. Rather than
+   * keeping a table of which is which, the pairing is decided from the data:
+   *
+   *   Where both have a value on the same frame, that frame is one point.
+   *   `keep(phase)` says which frames count. This covers everything recorded
+   *   on both phases, and any two that share a phase, at the full resolution
+   *   the history holds.
+   *
+   *   Where they never once appear together — one reproduction-only, the other
+   *   game-only — the iteration is the unit instead, taking each from whichever
+   *   of its two phases recorded it, and ignoring `keep`: it would leave one of
+   *   the two with nothing. One point per iteration is the finest honest
+   *   pairing: the two really did happen at the same time, just not in the
+   *   same half of it.
+   *
+   * Returns the points and which pairing made them, a caller's chart saying
+   * which since it changes what a point means. `pairing` is null when neither
+   * finds two points, and the whole answer null when the history has no
+   * column for one of the two. The Viewer's trajectory and the Diagrams
+   * correlation each carried their own copy of this.
+   */
+  pairs(series, xKey, yKey, keep) {
+    const xs = this.column(series, xKey), ys = this.column(series, yKey);
+    if (!xs || !ys) return null;
+    const phases = series.phase || [], iterations = series.iteration || [];
+    const usable = v => v !== null && v !== undefined && Number.isFinite(v);
+
+    const sameFrame = [];
+    for (let i = 0; i < xs.length; i++) {
+      if (!keep(phases[i]) || !usable(xs[i]) || !usable(ys[i])) continue;
+      sameFrame.push({ x: xs[i], y: ys[i], t: iterations[i] });
+    }
+    if (sameFrame.length >= 2) return { points: sameFrame, pairing: 'one point per frame' };
+
+    const byIteration = new Map();
+    for (let i = 0; i < xs.length; i++) {
+      const at = iterations[i];
+      let slot = byIteration.get(at);
+      if (!slot) { slot = { x: null, y: null, t: at }; byIteration.set(at, slot); }
+      if (slot.x === null && usable(xs[i])) slot.x = xs[i];
+      if (slot.y === null && usable(ys[i])) slot.y = ys[i];
+    }
+    const paired = [...byIteration.values()]
+      .filter(p => p.x !== null && p.y !== null)
+      .sort((a, b) => a.t - b.t);
+    if (paired.length >= 2) {
+      return { points: paired, pairing: 'one point per iteration, across its phases' };
+    }
+    return { points: sameFrame, pairing: null };
+  },
+
   /** The stored statistics charts of `keys` read: a derived one by what it is made of. */
   columns(keys) {
     return [...new Set(keys.flatMap(key =>

@@ -145,18 +145,13 @@ class GraphRenderer {
    * So the floor follows the content. `scaleFloor` is lowered by
    * computeFitTarget, which is the one place that measures the drawing.
    */
-  static clampScale(s, floor = GraphRenderer.SCALE_FLOOR) {
-    return Math.max(floor, Math.min(GraphRenderer.SCALE_CEILING, s));
+  clamp(s) {
+    return Math.max(this.scaleFloor, Math.min(GraphRenderer.SCALE_CEILING, s));
   }
 
   /** Scale limits for a drawing small enough to need no special allowance. */
   static get SCALE_FLOOR() { return 0.02; }
   static get SCALE_CEILING() { return 60; }
-
-  /** This renderer's floor, given the drawing it is currently looking at. */
-  clamp(s) {
-    return GraphRenderer.clampScale(s, this.scaleFloor);
-  }
 
   /**
    * Let the camera reach a scale that frames content this size.
@@ -277,19 +272,6 @@ class GraphRenderer {
     return { width, height, centerX: (minX + maxX) / 2, centerY: (minY + maxY) / 2 };
   }
 
-  /** Fit the given world-space bounds into the canvas. */
-  fit(bounds) {
-    const w = bounds.maxX - bounds.minX;
-    const h = bounds.maxY - bounds.minY;
-    if (w <= 0 || h <= 0) return;
-
-    const scale = Math.min(this.cssWidth / w, this.cssHeight / h);
-    this.view.scale = scale;
-    this.view.offsetX = this.cssWidth / 2 - (bounds.minX + w / 2) * scale;
-    this.view.offsetY = this.cssHeight / 2 - (bounds.minY + h / 2) * scale;
-    this.holdCurrentView();
-  }
-
   /**
    * World point to screen point.
    *
@@ -326,8 +308,6 @@ class GraphRenderer {
       k
     };
   }
-
-  toScreen(p) { return this.project(p); }
 
   toWorld(sx, sy) {
     return {
@@ -861,7 +841,7 @@ class GraphRenderer {
   }
 
   /** Nearest node to a screen point, for hover. Returns an index or -1. */
-  pick(frame, layout, px, py, maxPixels = 12) {
+  pick(frame, px, py, maxPixels = 12) {
     if (!frame || !this._sOk) return -1;
     let best = -1, bestDist = maxPixels * maxPixels;
     const sx = this._sx, sy = this._sy, ok = this._sOk;

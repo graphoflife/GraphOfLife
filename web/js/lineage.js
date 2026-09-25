@@ -218,14 +218,6 @@ const Lineage = {
   },
 
   /**
-   * Frames in, forest out.
-   *
-   * A genotype is a node; its parent is whatever the frame said the first time
-   * it was seen. Anything whose parent is not itself inside the window becomes
-   * a root: reading a whole run those are its founders, and reading a window
-   * they are the ancestors it inherited from before the window began.
-   */
-  /**
    * Arrange the genotypes that arrived: who sits under whom, and in what colour.
    *
    * The counting that used to happen here — walking every agent of every frame

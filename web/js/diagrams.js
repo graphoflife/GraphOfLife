@@ -612,48 +612,14 @@ const Diagrams = {
     if (this.active === 'correlate') {
       const payload = SeriesLoad.cache.get(this.runId);
       if (!payload) { drawTrajectory(this.canvas, null, { ...ink, message: 'Choose a simulation above.' }); return; }
-      const series = payload.series || {};
-      const xs = SeriesLoad.column(series, s.x), ys = SeriesLoad.column(series, s.y);
-      if (!xs || !ys) {
+      const found = SeriesLoad.pairs(payload.series || {}, s.x, s.y,
+                                     phase => s.phase === 'all' || String(phase) === s.phase);
+      if (!found) {
         drawTrajectory(this.canvas, null, { ...ink, message: 'This run has no history for one of these.' });
         return;
       }
-      const phases = series.phase || [], iterations = series.iteration || [];
-      const usable = v => v !== null && v !== undefined && Number.isFinite(v);
-      let points = [];
-      for (let i = 0; i < xs.length; i++) {
-        if (s.phase !== 'all' && String(phases[i]) !== s.phase) continue;
-        if (!usable(xs[i]) || !usable(ys[i])) continue;
-        points.push({ x: xs[i], y: ys[i], t: iterations[i] });
-      }
-
-      // Some pairs are never recorded on the same frame — births belong to the
-      // reproduction phase and revolutions to the game — so on a frame either
-      // one or the other is missing and pairing them frame by frame gives
-      // nothing at all. Falling back to one point per *iteration* pairs the two
-      // halves of it, which is the only pairing those two have.
-      //
-      // The phase filter is deliberately ignored in that branch: keeping it
-      // would leave one of the two with nothing, and being here at all means
-      // they live on opposite halves of an iteration.
-      let pairing = 'one point per frame';
-      if (points.length < 2) {
-        const byIteration = new Map();
-        for (let i = 0; i < xs.length; i++) {
-          const at = iterations[i];
-          let slot = byIteration.get(at);
-          if (!slot) { slot = { x: null, y: null, t: at }; byIteration.set(at, slot); }
-          if (slot.x === null && usable(xs[i])) slot.x = xs[i];
-          if (slot.y === null && usable(ys[i])) slot.y = ys[i];
-        }
-        const paired = [...byIteration.values()]
-          .filter(p => p.x !== null && p.y !== null)
-          .sort((a, b) => a.t - b.t);
-        if (paired.length >= 2) {
-          points = paired;
-          pairing = 'one point per iteration, across its phases';
-        }
-      }
+      const points = found.points;
+      const pairing = found.pairing || 'one point per frame';
 
       drawTrajectory(this.canvas, points, {
         ...ink, logX: s.logX, logY: s.logY,

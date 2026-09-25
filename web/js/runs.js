@@ -209,16 +209,28 @@ const RunsView = {
   // ---- the settings dialog ---------------------------------------------
 
   /**
+   * A setting as a reader wants it: blank as "auto", a list joined, a flag as
+   * yes or no. The run's details and its card each wrote this out.
+   */
+  settingText(value, separator = ' / ') {
+    if (value === null || value === undefined || value === '') return 'auto';
+    if (Array.isArray(value)) return value.join(separator);
+    if (typeof value === 'boolean') return value ? 'yes' : 'no';
+    if (typeof value === 'number') return formatNumber(value);
+    return value;
+  },
+
+  /**
    * Open the settings.
    *
    * `config` pre-fills the form, which is what "new simulation with the same
    * settings" is: the same dialog, opened on somebody else's numbers.
    */
-  openDialog({ config = null, title = 'New simulation', name = '' } = {}) {
+  openDialog({ config = null } = {}) {
     if (!this.defaults) return;
-    document.getElementById('simDialogTitle').textContent = title;
+    document.getElementById('simDialogTitle').textContent = 'New simulation';
     this.fillForm(config || this.defaults.config);
-    document.getElementById('runName').value = name;
+    document.getElementById('runName').value = '';
     this.errorEl.textContent = '';
     this.errorEl.classList.remove('ok');
     this.dialog.showModal();
@@ -292,13 +304,9 @@ const RunsView = {
       group.append(Object.assign(document.createElement('h3'), { textContent: heading }));
       const list = document.createElement('dl');
       for (const [key, label] of rows) {
-        let value = cfg[key];
-        if (value === null || value === undefined || value === '') value = 'auto';
-        else if (Array.isArray(value)) value = value.join(' / ');
-        else if (typeof value === 'boolean') value = value ? 'yes' : 'no';
-        else if (typeof value === 'number') value = formatNumber(value);
         list.append(Object.assign(document.createElement('dt'), { textContent: label }),
-                    Object.assign(document.createElement('dd'), { textContent: String(value) }));
+                    Object.assign(document.createElement('dd'),
+                                  { textContent: String(this.settingText(cfg[key])) }));
       }
       group.append(list);
       return group;
@@ -579,11 +587,7 @@ const RunsView = {
     const settings = document.createElement('div');
     settings.className = 'sim-settings';
     for (const [key, label] of this.CARD_SETTINGS) {
-      let value = (run.config || {})[key];
-      if (value === null || value === undefined || value === '') value = 'auto';
-      else if (Array.isArray(value)) value = value.join('/');
-      else if (typeof value === 'boolean') value = value ? 'yes' : 'no';
-      else if (typeof value === 'number') value = formatNumber(value);
+      const value = this.settingText((run.config || {})[key], '/');
       const span = document.createElement('span');
       span.append(
         Object.assign(document.createElement('i'), { textContent: label }),
@@ -673,11 +677,7 @@ const RunsView = {
          async () => { await API.copyRun(run.id); await this.refresh(); });
 
     item('New from these settings', 'Opens the settings filled in from this one',
-         () => this.openDialog({
-           config: run.config,
-           title: 'New simulation',
-           name: ''
-         }));
+         () => this.openDialog({ config: run.config }));
 
     item('Delete', 'This and everything it recorded', async () => {
       if (!confirm(`Delete "${run.name}" and all of its recorded data? This cannot be undone.`)) return;

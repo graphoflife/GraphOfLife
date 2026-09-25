@@ -80,9 +80,7 @@ const GraphStats = {
       spectralGap: Spectral.gap(ids, adj),
       componentCount: whole.count,
       nodeLoops: participation.perNode,
-      edgeLoops: participation.perEdge,
-      basisSize: participation.basisSize,
-      meanCycleLength: participation.meanLength
+      edgeLoops: participation.perEdge
     };
   },
 
@@ -143,8 +141,6 @@ const GraphStats = {
       if (i !== undefined) perEdge[i]++;
     };
 
-    let basisSize = 0, totalLength = 0;
-
     for (let i = 0; i < edges.length; i++) {
       const [a, b] = edges[i];
       const key = a < b ? `${a},${b}` : `${b},${a}`;
@@ -167,8 +163,6 @@ const GraphStats = {
       if (x !== y) continue;                     // different trees; no cycle
 
       const meeting = x;
-      basisSize++;
-      totalLength += left.length + right.length + 1;
 
       // Nodes on the cycle: both climbs plus the ancestor they met at.
       for (const n of left) perNode.set(n, perNode.get(n) + 1);
@@ -185,8 +179,7 @@ const GraphStats = {
       bump(prev, meeting);
     }
 
-    return { perNode, perEdge, basisSize,
-             meanLength: basisSize ? totalLength / basisSize : 0 };
+    return { perNode, perEdge };
   },
 
   /**
@@ -734,7 +727,7 @@ const GraphStats = {
    */
   dimension(ids, adj, { seeds = 24, maxRadius = 5 } = {}) {
     const n = ids.length;
-    if (n < 8) return { estimate: null, volumes: [] };
+    if (n < 8) return { estimate: null };
 
     const sampleCount = Math.min(seeds, n);
     const step = Math.max(1, Math.floor(n / sampleCount));
@@ -764,7 +757,7 @@ const GraphStats = {
       }
       sampled++;
     }
-    if (!sampled) return { estimate: null, volumes: [] };
+    if (!sampled) return { estimate: null };
 
     const volumes = volumeAt.map(v => v / sampled);
 
@@ -780,7 +773,7 @@ const GraphStats = {
       ys.push(Math.log(shellSize));
     }
     const ricciCurvature = this.ballCurvature(rs, xs, ys);
-    if (xs.length < 2) return { estimate: null, ricciCurvature, volumes };
+    if (xs.length < 2) return { estimate: null, ricciCurvature };
 
     const meanX = xs.reduce((a, b) => a + b, 0) / xs.length;
     const meanY = ys.reduce((a, b) => a + b, 0) / ys.length;
@@ -790,12 +783,7 @@ const GraphStats = {
       den += (xs[i] - meanX) ** 2;
     }
     // The shell exponent is d - 1.
-    return {
-      estimate: den > 0 ? num / den + 1 : null,
-      ricciCurvature,
-      volumes,
-      radiiUsed: xs.length
-    };
+    return { estimate: den > 0 ? num / den + 1 : null, ricciCurvature };
   },
 
   /**

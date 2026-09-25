@@ -77,16 +77,16 @@ const Metrics = {
   },
 
   /**
-   * Metrics that describe the state before the phase rather than after it.
+   * Whether a node metric describes the state before the phase rather than
+   * after it, as its entry above says with `needsPrevious`.
    *
    * These need the preceding frame, and they have no value at all for a node
    * that did not exist yet — which is the point: a newborn has no "before" to
    * have changed from. Those come back as NaN and are dropped by the charts.
+   * The list of them used to be written out again here, beside the flag.
    */
-  NEEDS_PREVIOUS: new Set(['token_curvature_pre']),
-
   needsPrevious(key) {
-    return this.NEEDS_PREVIOUS.has(key);
+    return this.NODE.some(m => m.key === key && m.needsPrevious);
   },
 
   /** Whether this quantity is centred on zero rather than running upward. */

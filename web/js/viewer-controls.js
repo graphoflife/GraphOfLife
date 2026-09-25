@@ -63,7 +63,7 @@ Object.assign(Viewer, {
       bind(id, false);
     }
 
-    // Layout sliders are ordinary settings; applyLayoutSettings pushes them
+    // Layout sliders are ordinary settings; layout.applySettings pushes them
     // into the simulation so presets and the controls stay in step.
     for (const id of ['forceCharge', 'forceLink', 'forceCenter', 'forceAngular',
                       'forceDamping', 'forceTheta']) {
@@ -71,7 +71,7 @@ Object.assign(Viewer, {
       if (!el) continue;
       el.addEventListener('input', () => {
         this.settings[id] = Number(el.value);
-        this.applyLayoutSettings();
+        this.layout.applySettings(this.settings);
         this.layout.reheat(0.6);
       });
     }
@@ -279,7 +279,7 @@ Object.assign(Viewer, {
 
     this.syncControlsFromSettings();
     this.syncAxisToggles();
-    this.applyLayoutSettings();
+    this.layout.applySettings(this.settings);
     if (preset.dimensions) this.setDimensions(preset.dimensions);
     this.setAutoFit(this.settings.autoFit);
     // Through the setter, so the button shows what the preset asked for
@@ -301,25 +301,6 @@ Object.assign(Viewer, {
     }
   },
 
-  applyLayoutSettings() {
-    const s = this.settings;
-    this.layout.setParams({
-      charge: s.forceCharge,
-      linkStrength: s.forceLink,
-      centerStrength: s.forceCenter,
-      angularStrength: s.forceAngular,
-      damping: s.forceDamping,
-      theta: s.forceTheta
-    });
-  },
-
-  /**
-   * Keep the whole graph framed until the camera is touched.
-   *
-   * Pressing Fit view turns this on and it stays on, refitting as the layout
-   * settles and as frames change. Any pan, zoom or orbit is taken as "I want to
-   * look at this myself" and switches it off.
-   */
   /**
    * Turn the view steadily, or stop.
    *
@@ -340,6 +321,13 @@ Object.assign(Viewer, {
     }
   },
 
+  /**
+   * Keep the whole graph framed until the camera is touched.
+   *
+   * Pressing Fit view turns this on and it stays on, refitting as the layout
+   * settles and as frames change. Any pan, zoom or orbit is taken as "I want to
+   * look at this myself" and switches it off.
+   */
   setAutoFit(on) {
     this.settings.autoFit = Boolean(on);
     document.getElementById('btnFit').classList.toggle('active', this.settings.autoFit);
