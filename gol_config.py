@@ -114,14 +114,22 @@ def _spell(value: Any) -> str:
 class SimConfig:
     """All parameters of a single simulation run."""
 
-    # What a run did before a setting existed.
+    # What a run did before a setting existed, where that differs from the
+    # frozen default.
     #
     # A stored configuration that predates one of these fields has to resolve
-    # to the behaviour it actually had, not to whatever the default is today.
-    # Handover did not exist, so an old run ran without it; revolutions were
-    # unconditional, so an old run ran with them. Getting this wrong would not
-    # merely mislabel a card — it would change the brain's shape and make the
-    # run's own checkpoint unloadable.
+    # to the behaviour it actually had. Getting this wrong would not merely
+    # mislabel a card — it would change the brain's shape and make the run's
+    # own checkpoint unloadable.
+    #
+    # Only mechanics whose pre-existing behaviour differs from their frozen
+    # default belong here, which is why the list is two entries and not eleven.
+    # An absent key already resolves to the frozen default, so naming a
+    # mechanic whose legacy behaviour *is* that default writes a line that
+    # changes nothing — and buries the two that do. This list had seven such
+    # lines, four of them added with a comment claiming they averted a broken
+    # checkpoint; the frozen defaults were what averted it, and the entries
+    # were never consulted. test_engine.py fails on a redundant entry now.
     #
     # Applied only when reading something off disk. A configuration arriving
     # from outside is a request for a new run, and a key it left out means
@@ -129,24 +137,11 @@ class SimConfig:
     # asking the API for a world without naming the pre-pass used to quietly
     # get one without it, which is the opposite of the documented default.
     LEGACY_WHEN_ABSENT: ClassVar[Dict[str, Any]] = {
-        # Every run recorded before there was a choice used the float brain.
-        "brain_kind": "float",
+        # Handover did not exist, so a run recorded before it ran without it.
         "allow_handover": False,
-        "allow_revolutions": True,
-        "random_decisions": False,
-        # On by default now, but every run recorded before the option existed
-        # ran with one pass per phase. Reading those as having used a pre-pass
-        # would change what a resumed run does.
+        # A pre-pass is the default now, and every run recorded before the
+        # option existed ran with one pass per phase.
         "message_prepass": False,
-        # Edge upkeep, all four defaulting *on* for a new run and all four
-        # absent from anything already on disk. Gifting in particular adds an
-        # output head and an input flag, so reading an old run as having had it
-        # would change the brain's shape and make its own checkpoint
-        # unloadable — the exact failure the note above warns about.
-        "allow_gifting": False,
-        "prune_after": "blotto",
-        "inactive_window": "phase",
-        "redistribution": "uniform",
     }
 
     # What each kind of brain wants, so that choosing one does not also mean

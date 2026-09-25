@@ -558,14 +558,14 @@
       <details class="control-group">
         <summary><h3>Layout</h3></summary>
         <div class="group-body">
-          <label>Repulsion <input type="range" id="forceCharge" min="0" max="200" step="1" value="20"></label>
+          <label>Repulsion <input type="range" id="forceCharge" min="0" max="200" step="1"></label>
           <small class="hint">All-pairs, so the graph spreads globally. At 0 only the springs act and it clumps tightly.</small>
-          <label>Link strength <input type="range" id="forceLink" min="0.01" max="0.6" step="0.01" value="0.12"></label>
-          <label>Centering <input type="range" id="forceCenter" min="0" max="0.1" step="0.002" value="0.012"></label>
-          <label>Angular spread <input type="range" id="forceAngular" min="0" max="1" step="0.01" value="0.15"></label>
+          <label>Link strength <input type="range" id="forceLink" min="0.01" max="0.6" step="0.01"></label>
+          <label>Centering <input type="range" id="forceCenter" min="0" max="0.1" step="0.002"></label>
+          <label>Angular spread <input type="range" id="forceAngular" min="0" max="1" step="0.01"></label>
           <small class="hint">Spreads each node's edges evenly — 180° at degree 2, 120° at degree 3.</small>
-          <label>Damping <input type="range" id="forceDamping" min="0.5" max="0.98" step="0.01" value="0.86"></label>
-          <label>Repulsion detail <input type="range" id="forceTheta" min="0.6" max="2.5" step="0.05" value="1.2"></label>
+          <label>Damping <input type="range" id="forceDamping" min="0.5" max="0.98" step="0.01"></label>
+          <label>Repulsion detail <input type="range" id="forceTheta" min="0.6" max="2.5" step="0.05"></label>
           <small class="hint">How closely all-pairs repulsion is approximated. Lower is more exact and much slower; the cost falls with the cube of this. Raise it on very large graphs.</small>
           <label class="check"><input type="checkbox" id="layoutCarry" checked> Carry positions between frames</label>
         </div>

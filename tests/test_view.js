@@ -24,6 +24,10 @@ const path = require('path');
 const root = path.join(__dirname, '..');
 const StepView = new Function(
   `${fs.readFileSync(path.join(root, 'web', 'js', 'stepview.js'), 'utf8')}; return StepView;`)();
+
+// presets.js needs nothing from the page, so it loads the same bare way.
+const Presets = new Function(
+  `${fs.readFileSync(path.join(root, 'web', 'js', 'presets.js'), 'utf8')}; return Presets;`)();
 const RUN = JSON.parse(
   fs.readFileSync(path.join(root, 'web', 'data', 'explain-run.json'), 'utf8'));
 
@@ -56,6 +60,42 @@ function worldAt(stage, move) {
 }
 
 // ---------------------------------------------------------------------------
+
+
+function test_the_layout_default_is_stated_once() {
+  // viewer.js used to carry its own copy of these six and index.html a third,
+  // and both were overwritten during init before anything read them — so both
+  // sat there stating a default the application had stopped using. They are
+  // gone now, which leaves presets.js as the only statement of what the layout
+  // starts as, and leaves the Viewer depending on finding them there.
+  const keys = ['forceCharge', 'forceLink', 'forceCenter',
+                'forceAngular', 'forceDamping', 'forceTheta'];
+  const opening = Presets.builtIn('default');
+
+  for (const key of keys) {
+    if (typeof opening[key] !== 'number') {
+      throw new Error(`${key} is missing from the default preset, and nothing else `
+                    + `declares it — the Viewer would start with it undefined`);
+    }
+    // The other built-in looks inherit whatever they do not override, so the
+    // base has to carry all six as well.
+    if (typeof Presets.BASE_LAYOUT[key] !== 'number') {
+      throw new Error(`${key} is missing from BASE_LAYOUT, so every preset that `
+                    + `does not name it would start with it undefined`);
+    }
+  }
+
+  // And nothing in the page markup restates them, which is what let the old
+  // copies rot unnoticed.
+  const markup = fs.readFileSync(path.join(root, 'web', 'index.html'), 'utf8');
+  for (const key of keys) {
+    if (new RegExp(`id="${key}"[^>]*value="`).test(markup)) {
+      throw new Error(`index.html gives ${key} a value= attribute again; `
+                    + `syncControlsFromSettings overwrites it during init, so it `
+                    + `can only ever be right by coincidence`);
+    }
+  }
+}
 
 function test_the_world_holds_its_whole_supply_at_both_ends_of_the_game() {
   // The invariant that makes the animation honest: tokens are conserved, so
@@ -483,7 +523,8 @@ const tests = Object.entries({
   test_tokens_are_fired_in_the_order_the_ball_comes_round,
   test_a_brain_stays_marked_once_its_turn_has_passed,
   test_a_conquest_does_not_show_its_answer_before_the_brain_arrives,
-  test_the_conquest_waits_for_the_stakes_on_the_step_that_shows_both
+  test_the_conquest_waits_for_the_stakes_on_the_step_that_shows_both,
+  test_the_layout_default_is_stated_once
 }).sort(([a], [b]) => a.localeCompare(b));
 
 // A test that is written and never listed here is worse than no test: it reads

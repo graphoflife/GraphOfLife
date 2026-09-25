@@ -65,9 +65,12 @@ const Viewer = {
     showLegend: true, showEdgeLegend: true, layoutCarry: true,
 
     // Layout lives in the settings too, so a preset restores the whole look
-    // including how the graph arranges itself, not just its colours.
-    forceCharge: 20, forceLink: 0.12, forceCenter: 0.012,
-    forceAngular: 0.15, forceDamping: 0.86, forceTheta: 1.2,
+    // including how the graph arranges itself, not just its colours. The
+    // values are not written here: init() merges Presets.builtIn('default')
+    // into this object before anything reads it, so a number written here
+    // would be overwritten unread — and for a long time six of them were,
+    // stating a default the application had not used since the day it changed.
+    // Presets.BASE_LAYOUT is where the layout defaults live.
     dimensions: 3, autoFit: true,
 
     // Turning the view steadily, in degrees a second. A still projection of a

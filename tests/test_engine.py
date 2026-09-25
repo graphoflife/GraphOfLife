@@ -688,6 +688,17 @@ def test_a_light_pass_leaves_the_costly_statistics_empty_and_the_rest_filled():
         assert key in light, f"{key} must be present in a light row, as a null"
         assert light[key] is None, f"{key} was computed on a light pass"
     assert heavy["bridges"] is not None, "a heavy pass must actually count bridges"
+
+    # HEAVY_KEYS is what the light pass fills with nulls, and it has to name
+    # exactly what the heavy pass produces. Since that pass is one function,
+    # the list can be checked against it directly rather than inferred from
+    # two rows having the same shape.
+    produced = set(gol_series._heavy_stats(
+        frame, frame["ids"], frame["edges"], frame["tokens"], None))
+    assert produced == set(gol_series.HEAVY_KEYS), (
+        f"_heavy_stats and HEAVY_KEYS disagree. "
+        f"returned but unlisted: {sorted(produced - set(gol_series.HEAVY_KEYS))}; "
+        f"listed but not returned: {sorted(set(gol_series.HEAVY_KEYS) - produced)}")
     assert light["nodes"] == heavy["nodes"], "the cheap statistics must agree"
     assert light["gini"] == heavy["gini"]
 
@@ -2534,6 +2545,39 @@ def test_a_resumed_run_remembers_which_connections_were_used():
 
     # And so the next accounting falls exactly as it would have.
     assert sorted(resumed._stale_edges()) == sorted(world._stale_edges())
+
+
+
+
+def test_no_legacy_entry_restates_the_frozen_default():
+    """
+    A legacy entry that matches the frozen default is a line that does nothing.
+
+    An absent key already resolves to the frozen default, so naming a mechanic
+    whose pre-existing behaviour *is* that default changes no reading of any
+    stored configuration. It is not merely noise: it buries the entries that do
+    matter. The list reached seven such lines against two real ones, four of
+    them added under a comment claiming they kept an old checkpoint loadable —
+    the frozen defaults were what kept it loadable, and those entries were
+    never consulted.
+
+    So the rule is the assertion: an entry belongs here only if it differs.
+    """
+    import gol_config
+
+    pointless = {
+        name: value for name, value in SimConfig.LEGACY_WHEN_ABSENT.items()
+        if name in gol_config.MECHANICS and gol_config.MECHANICS[name] == value
+    }
+    assert not pointless, (
+        f"these legacy entries restate the frozen default and so do nothing: "
+        f"{sorted(pointless)}. Delete them, or the two that matter cannot be "
+        f"picked out from the ones that do not.")
+
+    # And every entry has to name something that exists, or it is a typo that
+    # silently never applies.
+    unknown = set(SimConfig.LEGACY_WHEN_ABSENT) - {f.name for f in dataclasses.fields(SimConfig)}
+    assert not unknown, f"legacy entries for fields that do not exist: {sorted(unknown)}"
 
 
 

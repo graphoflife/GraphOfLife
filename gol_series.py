@@ -707,6 +707,93 @@ HEAVY_KEYS = (
 )
 
 
+def _heavy_stats(frame: Dict[str, Any], ids, edges, tokens,
+                 previous: Optional[Dict[str, Any]]) -> Dict[str, Any]:
+    """
+    The statistics that cost something: everything that walks the graph.
+
+    Together these are about five sixths of what summarising a frame takes,
+    which is why the caller is allowed to skip them and fill HEAVY_KEYS with
+    nulls instead. Keeping them here rather than behind three conditionals in
+    the middle of frame_stats is not tidiness. Those conditionals had a merge
+    order between them, and getting it wrong once already overwrote real
+    bridge counts with None on a heavy pass — the comment explaining which
+    dictionary had to be merged first outlived the bug and is gone with it.
+
+    Everything this returns is a heavy key, and nothing else is, so
+    HEAVY_KEYS is exactly the key set of this function's result.
+    """
+    structure = _structure(ids, edges)
+    # Circulating token flow. Only a game phase allocates anything across
+    # links, so a reproduction frame has no lightning and says so with nulls.
+    structure.update(lightning(frame))
+    per_node_triangles = structure.pop("_perNodeTriangles", {})
+
+    # ---- power laws ----
+    #
+    # How one quantity scales with another, as an exponent and how tightly the
+    # points sit on that line. Everything here is over the nodes of this frame.
+    adjacency: Dict[Any, set] = {i: set() for i in ids}
+    for a, b in edges:
+        if a == b:
+            continue
+        if a in adjacency:
+            adjacency[a].add(b)
+        if b in adjacency:
+            adjacency[b].add(a)
+    degree_of = {i: len(adjacency[i]) for i in ids}
+
+    degree_list = [degree_of[i] for i in ids]
+    triangle_list = [per_node_triangles.get(i, 0) for i in ids]
+
+    # Clustering only means anything for a node with two neighbours to compare.
+    clustering_degrees, clustering_values = [], []
+    for i in ids:
+        k = degree_of[i]
+        if k < 2:
+            continue
+        clustering_degrees.append(k)
+        clustering_values.append((2 * per_node_triangles.get(i, 0)) / (k * (k - 1)))
+
+    delta_list = _reconstruct_delta(frame, previous) or frame.get("delta") or []
+    change_tokens, change_sizes = [], []
+    for idx in range(min(len(tokens), len(delta_list))):
+        change_tokens.append(tokens[idx])
+        change_sizes.append(abs(delta_list[idx]))
+
+    def _pair(fit, key):
+        return {key: fit["exponent"] if fit else None,
+                key + "R2": fit["r2"] if fit else None}
+
+    power_laws: Dict[str, Any] = {}
+    power_laws.update(_pair(_tail_exponent(degree_list), "degreeExponent"))
+    power_laws.update(_pair(_tail_exponent(list(tokens)), "tokenExponent"))
+    power_laws.update(_pair(_power_fit(degree_list, list(tokens)), "tokensVsDegree"))
+    power_laws.update(_pair(_power_fit(degree_list, triangle_list),
+                            "trianglesVsDegree"))
+    power_laws.update(_pair(_power_fit(clustering_degrees, clustering_values),
+                            "clusteringVsDegree"))
+    power_laws.update(_pair(_power_fit(change_tokens, change_sizes),
+                            "changeVsTokens"))
+    power_laws["assortativity"] = _assortativity(edges, degree_of)
+
+    # Scale free: the degree distribution's tail, found rather than assumed.
+    scale_free = _scale_free(degree_list)
+    power_laws["degreeGamma"] = scale_free["exponent"] if scale_free else None
+    power_laws["degreeGammaR2"] = scale_free["r2"] if scale_free else None
+    power_laws["degreeKMin"] = scale_free["kMin"] if scale_free else None
+    power_laws["degreeTailShare"] = scale_free["coverage"] if scale_free else None
+    power_laws["degreeGammaKS"] = scale_free["ks"] if scale_free else None
+
+    # Self-similar: how the number of boxes needed falls as boxes grow.
+    boxes = _box_dimension(ids, adjacency)
+    power_laws["boxDimension"] = boxes["exponent"] if boxes else None
+    power_laws["boxDimensionR2"] = boxes["r2"] if boxes else None
+
+    structure.pop("_perNodeTriangles", None)
+    return {**structure, **power_laws}
+
+
 def frame_stats(frame: Dict[str, Any], previous: Dict[str, Any] | None = None,
                 heavy: bool = True) -> Dict[str, Any]:
     """
@@ -831,83 +918,12 @@ def frame_stats(frame: Dict[str, Any], previous: Dict[str, Any] | None = None,
         gainers = sum(1 for v in delta if v > 0)
         losers = sum(1 for v in delta if v < 0)
 
-    structure = _structure(ids, edges) if heavy else {}
-    # Circulating token flow. Only a game phase allocates anything across
-    # links, so a reproduction frame has no lightning and says so with nulls.
-    if heavy:
-        structure.update(lightning(frame))
-    per_node_triangles = structure.pop("_perNodeTriangles", {})
-
-    # ---- power laws ----
-    #
-    # How one quantity scales with another, as an exponent and how tightly the
-    # points sit on that line. Everything here is over the nodes of this frame.
-    adjacency: Dict[Any, set] = {i: set() for i in ids}
-    for a, b in edges:
-        if a == b:
-            continue
-        if a in adjacency:
-            adjacency[a].add(b)
-        if b in adjacency:
-            adjacency[b].add(a)
-    degree_of = {i: len(adjacency[i]) for i in ids}
-
-    degree_list = [degree_of[i] for i in ids]
-    triangle_list = [per_node_triangles.get(i, 0) for i in ids]
-
-    # Clustering only means anything for a node with two neighbours to compare.
-    clustering_degrees, clustering_values = [], []
-    for i in ids:
-        k = degree_of[i]
-        if k < 2:
-            continue
-        clustering_degrees.append(k)
-        clustering_values.append((2 * per_node_triangles.get(i, 0)) / (k * (k - 1)))
-
-    delta_list = _reconstruct_delta(frame, previous) or frame.get("delta") or []
-    change_tokens, change_sizes = [], []
-    for idx in range(min(len(tokens), len(delta_list))):
-        change_tokens.append(tokens[idx])
-        change_sizes.append(abs(delta_list[idx]))
-
-    def _pair(fit, key):
-        return {key: fit["exponent"] if fit else None,
-                key + "R2": fit["r2"] if fit else None}
-
-    # Every fit below walks the graph, and together with _structure above they
-    # are five sixths of what summarising a frame costs. A light pass leaves
-    # them as explicit nulls: present and empty, so a half-summarised run is
-    # not mistaken for one recorded before these statistics existed.
-    # `structure` carries the nulls for a light pass, all of them, because it
-    # is merged first — pre-nulling them here as well would overwrite the real
-    # structural values with None on a heavy pass.
-    power_laws: Dict[str, Any] = {}
-    if not heavy:
-        structure = {key: None for key in HEAVY_KEYS}
-    else:
-        power_laws.update(_pair(_tail_exponent(degree_list), "degreeExponent"))
-        power_laws.update(_pair(_tail_exponent(list(tokens)), "tokenExponent"))
-        power_laws.update(_pair(_power_fit(degree_list, list(tokens)), "tokensVsDegree"))
-        power_laws.update(_pair(_power_fit(degree_list, triangle_list),
-                                "trianglesVsDegree"))
-        power_laws.update(_pair(_power_fit(clustering_degrees, clustering_values),
-                                "clusteringVsDegree"))
-        power_laws.update(_pair(_power_fit(change_tokens, change_sizes),
-                                "changeVsTokens"))
-        power_laws["assortativity"] = _assortativity(edges, degree_of)
-
-        # Scale free: the degree distribution's tail, found rather than assumed.
-        scale_free = _scale_free(degree_list)
-        power_laws["degreeGamma"] = scale_free["exponent"] if scale_free else None
-        power_laws["degreeGammaR2"] = scale_free["r2"] if scale_free else None
-        power_laws["degreeKMin"] = scale_free["kMin"] if scale_free else None
-        power_laws["degreeTailShare"] = scale_free["coverage"] if scale_free else None
-        power_laws["degreeGammaKS"] = scale_free["ks"] if scale_free else None
-
-        # Self-similar: how the number of boxes needed falls as boxes grow.
-        boxes = _box_dimension(ids, adjacency)
-        power_laws["boxDimension"] = boxes["exponent"] if boxes else None
-        power_laws["boxDimensionR2"] = boxes["r2"] if boxes else None
+    # Everything that walks the graph, and the one place `heavy` is decided.
+    # It used to be asked three times in this function with a merge order
+    # between the answers, which is how the structural values came to be
+    # overwritten with None on a pass that had just computed them.
+    heavy_values = (_heavy_stats(frame, ids, edges, tokens, previous) if heavy
+                    else dict.fromkeys(HEAVY_KEYS))
 
     degree_hist: Dict[int, int] = {}
     for d in degrees:
@@ -960,8 +976,7 @@ def frame_stats(frame: Dict[str, Any], previous: Dict[str, Any] | None = None,
         "degreeEvenness": degree_evenness,
         "tokenEntropy": token_entropy,
         "tokenEvenness": token_evenness,
-        **structure,
-        **power_laws,
+        **heavy_values,
         "maxTokenAdded": max_added,
         "maxTokenLost": max_lost,
         "gainers": gainers,
