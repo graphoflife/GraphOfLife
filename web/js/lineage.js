@@ -19,6 +19,7 @@
  * never reached a frame at all.
  */
 const Lineage = {
+  ...WindowView,
   runs: [],
   runId: null,
   forest: null,
@@ -37,60 +38,9 @@ const Lineage = {
   ROOTS_SUSPECT: 0.25,
 
   init() {
-    this.canvas = document.getElementById('lineageCanvas');
-    if (!this.canvas) return;
-    this.ctx = this.canvas.getContext('2d');
-    this.noteEl = document.getElementById('lineageNote');
-    this.minLifeEl = document.getElementById('lineageMinLife');
-    this.readoutEl = document.getElementById('lineageReadout');
-
-    this.minLifeEl.addEventListener('input', () => {
-      document.getElementById('lineageMinLifeValue').textContent = this.minLifeEl.value;
-      this.draw();
-    });
-    // Moving the window refetches, so it acts on release rather than on every
-    // pixel of the drag.
-    const scrub = document.getElementById('lineageWindow');
-    scrub.addEventListener('change', () => this.load(this.runId, Number(scrub.value)));
-
-    // How many iterations are on screen at once. Changing it refetches, so it
-    // acts on commit rather than on every keystroke.
-    this.spanEl = document.getElementById('lineageSpan');
-    this.spanEl.value = String(this.MAX_ITERATIONS);
-    this.spanEl.addEventListener('change', () => this.load(this.runId, this.windowStart));
-
-    for (const button of document.querySelectorAll('#lineagePhase .seg-btn')) {
-      button.addEventListener('click', () => {
-        this.phase = button.dataset.phase;
-        for (const other of document.querySelectorAll('#lineagePhase .seg-btn')) {
-          other.classList.toggle('active', other === button);
-        }
-        // The counting is server-side now, so a phase filter changes what is
-        // counted and has to ask again. It is one small request.
-        this.load(this.runId, this.windowStart);
-      });
-    }
-
-    this.canvas.addEventListener('mousemove', e => this.hover(e));
-    this.canvas.addEventListener('mouseleave', () => {
-      this.hovered = null;
-      this.readoutEl.textContent = '';
-      this.draw();
-    });
-
-    if (window.ResizeObserver) {
-      new ResizeObserver(() => { this.resize(); this.draw(); })
-        .observe(this.canvas.parentElement);
-    }
-  },
-
-  /** The tab owns the list; this view just needs to know what is in it. */
-  setRuns(runs) {
-    this.runs = runs;
-  },
-
-  say(text) {
-    this.noteEl.textContent = text;
+    // A phase filter changes what the server counts, so it asks again. It is
+    // one small request.
+    FrameWindow.wire(this, 'lineage', () => this.load(this.runId, this.windowStart));
   },
 
   // ---- reading a run ----------------------------------------------------
@@ -311,17 +261,6 @@ const Lineage = {
 
   // ---- drawing ----------------------------------------------------------
 
-  resize() {
-    const box = this.canvas.getBoundingClientRect();
-    const dpr = window.devicePixelRatio || 1;
-    if (!box.width || !box.height) return;
-    this.canvas.width = Math.round(box.width * dpr);
-    this.canvas.height = Math.round(box.height * dpr);
-    this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    this.w = box.width;
-    this.h = box.height;
-  },
-
   /**
    * The bands, stacked, filling the height at every column.
    *
@@ -387,15 +326,7 @@ const Lineage = {
     ctx.clearRect(0, 0, this.w, this.h);
 
     const plan = this.layout();
-    if (!plan) {
-      ctx.fillStyle = Ink.of('dim');
-      ctx.font = '12px system-ui, sans-serif';
-      ctx.textAlign = 'center';
-      ctx.fillText(this.forest ? 'Nothing lasted that long.' : 'No run loaded.',
-                   this.w / 2, this.h / 2);
-      ctx.textAlign = 'left';
-      return;
-    }
+    if (!plan) { this.drawNothing(Boolean(this.forest)); return; }
 
     const { bands, columns, at, pad, height } = plan;
 
@@ -430,7 +361,7 @@ const Lineage = {
     }
 
     // The time axis, over the top.
-    ctx.strokeStyle = 'rgba(190, 200, 215, 0.16)';
+    ctx.strokeStyle = Ink.of('axis');
     ctx.lineWidth = 1;
     ctx.fillStyle = Ink.of('label');
     ctx.font = '10px ui-monospace, monospace';

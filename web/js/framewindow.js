@@ -117,5 +117,94 @@ const FrameWindow = {
     return `iterations ${formatNumber(frames[0].iteration)}–`
          + `${formatNumber(frames[frames.length - 1].iteration)} of the `
          + `${formatNumber(Math.ceil(total / this.PHASES))} recorded`;
+  },
+
+  /**
+   * The window bar and the canvas of a view over a window of frames, wired to
+   * `view`, whose elements are named from `prefix`: the scrubber and the span
+   * that move and size the window (both read it again), the phase buttons
+   * (then `onPhase()`), the shortest-lifetime slider (a redraw), hovering,
+   * and resizing. Lineage and Flow modules each wired all of it, the same
+   * way, element by element. False when the page has no such view.
+   */
+  wire(view, prefix, onPhase) {
+    const el = name => document.getElementById(prefix + name);
+    view.canvas = el('Canvas');
+    if (!view.canvas) return false;
+    view.ctx = view.canvas.getContext('2d');
+    view.noteEl = el('Note');
+    view.readoutEl = el('Readout');
+    view.minLifeEl = el('MinLife');
+    view.spanEl = el('Span');
+
+    // Moving the window reads it again, so it acts on release rather than on
+    // every pixel of the drag, and a new span on commit rather than on every
+    // keystroke.
+    const scrub = el('Window');
+    scrub.addEventListener('change', () => view.load(view.runId, Number(scrub.value)));
+    view.spanEl.value = String(view.MAX_ITERATIONS);
+    view.spanEl.addEventListener('change', () => view.load(view.runId, view.windowStart));
+
+    view.minLifeEl.addEventListener('input', () => {
+      el('MinLifeValue').textContent = view.minLifeEl.value;
+      view.draw();
+    });
+
+    const buttons = document.querySelectorAll(`#${prefix}Phase .seg-btn`);
+    for (const button of buttons) {
+      button.addEventListener('click', () => {
+        view.phase = button.dataset.phase;
+        for (const other of buttons) other.classList.toggle('active', other === button);
+        onPhase();
+      });
+    }
+
+    view.canvas.addEventListener('mousemove', e => view.hover(e));
+    view.canvas.addEventListener('mouseleave', () => {
+      view.hovered = null;
+      view.readoutEl.textContent = '';
+      view.draw();
+    });
+    if (window.ResizeObserver) {
+      new ResizeObserver(() => { view.resize(); view.draw(); }).observe(view.canvas.parentElement);
+    }
+    return true;
+  }
+};
+
+/**
+ * What a view over a window of frames is besides its picture, for Lineage and
+ * Flow modules to take on, each of which had its own identical copy.
+ */
+const WindowView = {
+  /** The tab owns the list; a view only needs to know what is in it. */
+  setRuns(runs) {
+    this.runs = runs;
+  },
+
+  say(text) {
+    this.noteEl.textContent = text;
+  },
+
+  /** Size the canvas to its box, at the screen's pixel density. */
+  resize() {
+    const box = this.canvas.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+    if (!box.width || !box.height) return;
+    this.canvas.width = Math.round(box.width * dpr);
+    this.canvas.height = Math.round(box.height * dpr);
+    this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    this.w = box.width;
+    this.h = box.height;
+  },
+
+  /** Why there is nothing to draw, in the middle of the canvas. */
+  drawNothing(loaded) {
+    const ctx = this.ctx;
+    ctx.fillStyle = Ink.of('dim');
+    ctx.font = '12px system-ui, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(loaded ? 'Nothing lasted that long.' : 'No run loaded.', this.w / 2, this.h / 2);
+    ctx.textAlign = 'left';
   }
 };

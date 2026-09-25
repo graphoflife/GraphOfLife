@@ -12,6 +12,7 @@
  * only the fetching and the picture.
  */
 const FlowView = {
+  ...WindowView,
   runs: [],
   runId: null,
   result: null,
@@ -42,33 +43,10 @@ const FlowView = {
   phase: 'all',
 
   init() {
-    this.canvas = document.getElementById('flowCanvas');
-    if (!this.canvas) return;
-    this.ctx = this.canvas.getContext('2d');
-    this.noteEl = document.getElementById('flowNote');
-    this.readoutEl = document.getElementById('flowReadout');
+    // A phase filter picks among the frames already read.
+    if (!FrameWindow.wire(this, 'flow', () => this.recompute())) return;
     this.factsEl = document.getElementById('flowFacts');
     this.floorEl = document.getElementById('flowFloor');
-    this.minLifeEl = document.getElementById('flowMinLife');
-
-    // Moving the window refetches, so it acts on release rather than on every
-    // pixel of the drag.
-    const scrub = document.getElementById('flowWindow');
-    scrub.addEventListener('change', () => this.load(this.runId, Number(scrub.value)));
-
-    this.spanEl = document.getElementById('flowSpan');
-    this.spanEl.value = String(this.MAX_ITERATIONS);
-    this.spanEl.addEventListener('change', () => this.load(this.runId, this.windowStart));
-
-    for (const button of document.querySelectorAll('#flowPhase .seg-btn')) {
-      button.addEventListener('click', () => {
-        this.phase = button.dataset.phase;
-        for (const other of document.querySelectorAll('#flowPhase .seg-btn')) {
-          other.classList.toggle('active', other === button);
-        }
-        this.recompute();
-      });
-    }
 
     // The overlap floor changes how modules are matched, so it re-follows the
     // frames it already has rather than fetching them again.
@@ -76,30 +54,6 @@ const FlowView = {
       document.getElementById('flowFloorValue').textContent = this.floorEl.value;
     });
     this.floorEl.addEventListener('change', () => this.recompute());
-    this.minLifeEl.addEventListener('input', () => {
-      document.getElementById('flowMinLifeValue').textContent = this.minLifeEl.value;
-      this.draw();
-    });
-
-    this.canvas.addEventListener('mousemove', e => this.hover(e));
-    this.canvas.addEventListener('mouseleave', () => {
-      this.hovered = null;
-      this.readoutEl.textContent = '';
-      this.draw();
-    });
-
-    if (window.ResizeObserver) {
-      new ResizeObserver(() => { this.resize(); this.draw(); })
-        .observe(this.canvas.parentElement);
-    }
-  },
-
-  setRuns(runs) {
-    this.runs = runs;
-  },
-
-  say(text) {
-    this.noteEl.textContent = text;
   },
 
   // ---- reading a run ----------------------------------------------------
@@ -226,17 +180,6 @@ const FlowView = {
 
   // ---- drawing ----------------------------------------------------------
 
-  resize() {
-    const box = this.canvas.getBoundingClientRect();
-    const dpr = window.devicePixelRatio || 1;
-    if (!box.width || !box.height) return;
-    this.canvas.width = Math.round(box.width * dpr);
-    this.canvas.height = Math.round(box.height * dpr);
-    this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    this.w = box.width;
-    this.h = box.height;
-  },
-
   /**
    * The columns, the blocks in each, and the ribbons between them.
    *
@@ -337,15 +280,7 @@ const FlowView = {
     const ctx = this.ctx;
     ctx.clearRect(0, 0, this.w, this.h);
     const plan = this.layout();
-    if (!plan) {
-      ctx.fillStyle = Ink.of('dim');
-      ctx.font = '12px system-ui, sans-serif';
-      ctx.textAlign = 'center';
-      ctx.fillText(this.result ? 'Nothing lasted that long.' : 'No run loaded.',
-                   this.w / 2, this.h / 2);
-      ctx.textAlign = 'left';
-      return;
-    }
+    if (!plan) { this.drawNothing(Boolean(this.result)); return; }
 
     const { columns, at, columnWidth } = plan;
 
