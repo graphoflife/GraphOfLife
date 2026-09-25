@@ -236,8 +236,8 @@ Object.assign(Viewer, {
       tokenEvenness: pct(s.tokenEvenness),
       maxTokenAdded: `+${formatNumber(s.maxTokenAdded)}`,
       maxTokenLost: `-${formatNumber(s.maxTokenLost)}`,
-      gainers: withShare(s.gainers),
-      losers: withShare(s.losers),
+      gainers: formatNumber(s.gainers),
+      losers: formatNumber(s.losers),
       distinctBrains: formatNumber(s.distinctBrains),
       brainDiversity: pct(s.brainDiversity),
       distinctParents: formatNumber(s.distinctParents),
@@ -247,7 +247,7 @@ Object.assign(Viewer, {
       medianDegree: dec(s.medianDegree, 1),
       maxDegree: formatNumber(s.maxDegree),
       minDegree: formatNumber(s.minDegree),
-      leaves: withShare(s.leaves),
+      leaves: formatNumber(s.leaves),
       degreeEntropy: `${dec(s.degreeEntropy)} bits`,
       degreeEvenness: pct(s.degreeEvenness)
     };
@@ -298,7 +298,7 @@ Object.assign(Viewer, {
 
     // Present only when the phase produced them.
     if (s.births !== null) {
-      cells.births = withShare(s.births);
+      cells.births = formatNumber(s.births);
       cells.reproTokenShare = pct(s.reproTokenShare);
       cells.meanInvestedShare = pct(s.meanInvestedShare);
       cells.meanChildLinks = dec(s.meanChildLinks);
@@ -323,11 +323,11 @@ Object.assign(Viewer, {
       // claim nobody revolted, when in fact nobody could.
       if (s.revoltShare !== null) cells.revoltShare = pct(s.revoltShare);
     }
-    if (s.revolutions !== null) cells.revolutions = withShare(s.revolutions);
+    if (s.revolutions !== null) cells.revolutions = formatNumber(s.revolutions);
     if (s.heldHomeShare !== null) cells.heldHomeShare = pct(s.heldHomeShare);
     if (s.prunedEdges !== null) cells.prunedEdges = formatNumber(s.prunedEdges);
-    if (s.starved !== null) cells.starved = withShare(s.starved);
-    if (s.orphaned !== null) cells.orphaned = withShare(s.orphaned);
+    if (s.starved !== null) cells.starved = formatNumber(s.starved);
+    if (s.orphaned !== null) cells.orphaned = formatNumber(s.orphaned);
     if (s.cutRiskBefore !== null && s.cutRiskBefore !== undefined) {
       cells.cutRiskBefore = pct(s.cutRiskBefore);
     }
@@ -344,6 +344,11 @@ Object.assign(Viewer, {
       cells.netFlowShare = pct(s.netFlowShare);
     }
     if (s.redistributed !== null) cells.redistributed = formatNumber(s.redistributed);
+
+    // Counts of agents also read as a share of those who entered the phase.
+    for (const key of Metrics.POPULATION_COUNTS) {
+      if (key in cells) cells[key] = withShare(s[key]);
+    }
 
     // Remember which sections were open, so redrawing a frame does not fold
     // everything back up under the reader.

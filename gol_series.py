@@ -92,10 +92,6 @@ MAX_SAMPLED_ITERATIONS = 300
 # The smallest useful answer: both ends of the run.
 MIN_SAMPLED_POINTS = 2
 
-# Keys that count nodes, and are therefore also meaningful as a share of the
-# population that entered the phase.
-NODE_COUNT_KEYS = ("births", "revolutions", "starved", "orphaned", "leaves",
-                   "gainers", "losers")
 
 
 def _gini(values: List[int]) -> float:
@@ -1334,7 +1330,7 @@ class History:
         self._rows[row["_frame"]] = row
         self.changed = True
 
-    def reply(self, heavy: bool, **meta: Any) -> Dict[str, Any]:
+    def reply(self, heavy: bool) -> Dict[str, Any]:
         """
         Everything known, whatever a request happened to ask for.
 
@@ -1356,7 +1352,6 @@ class History:
             # The run as this history saw it, so a caller can tell a history of
             # a run that has since grown from one that is up to date.
             "frames": self.frames,
-            "totalIterations": self.frames // 2,
             "totalPoints": len(self.grid),
             # Samples finished at the depth this request needed: what a caller
             # climbing toward the whole run counts up to, and stops at.
@@ -1366,8 +1361,6 @@ class History:
             # Sent as data, so the page can tell whether a history answers a
             # chart without keeping its own copy of the list.
             "heavyKeys": list(HEAVY_KEYS),
-            "nodeCountKeys": list(NODE_COUNT_KEYS),
-            **meta,
         }
 
     def _done(self, heavy: bool) -> Set[int]:
@@ -1456,10 +1449,9 @@ def _build_series_locked(run_id: str, points: Optional[int] = None,
     # The strain travels with the summary as well as with the run, because a
     # series.json is the file most likely to be read on its own — it is the one
     # an analysis loads, and a chart made from it should not have to go back to
-    # the run directory to find out which algorithm it is of. And it travels in
-    # the reply, because the page is the half that has to say so.
-    strain = store.load_meta(run_id).get("strain")
+    # the run directory to find out which algorithm it is of.
     if history.changed:
         _save_cache(run_id, {"version": SERIES_VERSION, "stride": history.stride,
-                             "strain": strain, "rows": history.rows})
-    return history.reply(heavy, strain=strain)
+                             "strain": store.load_meta(run_id).get("strain"),
+                             "rows": history.rows})
+    return history.reply(heavy)

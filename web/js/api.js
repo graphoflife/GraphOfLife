@@ -45,6 +45,7 @@ const ServerBackend = {
   },
 
   defaults()            { return this._request('GET', '/api/defaults'); },
+  describe(config)      { return this._request('POST', '/api/describe', { config }); },
   listRuns()            { return this._request('GET', '/api/runs'); },
   getRun(id)            { return this._request('GET', `/api/runs/${encodeURIComponent(id)}`); },
   createRun(name, config) { return this._request('POST', '/api/runs', { name, config }); },
@@ -148,6 +149,7 @@ const BrowserBackend = {
   },
 
   defaults()            { return this._send('defaults'); },
+  describe(config)      { return this._send('describe', { config }); },
   listRuns()            { return this._send('list'); },
   getRun(id)            { return this._send('get', { runId: id }); },
   createRun(name, config) { return this._send('create', { name, config }); },
@@ -202,6 +204,7 @@ const API = {
   },
 
   defaults()              { return this._call('defaults'); },
+  describe(config)        { return this._call('describe', config); },
   listRuns()              { return this._call('listRuns'); },
   getRun(id)              { return this._call('getRun', id); },
   createRun(name, config) { return this._call('createRun', name, config); },

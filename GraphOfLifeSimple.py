@@ -688,6 +688,28 @@ def make_brain(cfg: SimConfig, brain_id: int, allocate: bool = True) -> Brain:
     return BRAIN_KINDS[cfg.brain_kind](cfg, brain_id, allocate=allocate)
 
 
+def brain_shape(cfg: SimConfig) -> Dict[str, Any]:
+    """
+    What a brain of this configuration is, before one is built: its layers,
+    what its weights cost, and the seed graph it starts on.
+
+    Read off an unallocated brain rather than worked out again. The new-run
+    form did work it out again, in JavaScript, and fell behind the engine as
+    soon as gifting added an input and six outputs.
+    """
+    brain = make_brain(cfg, 0, allocate=False)
+    sizes = brain.layer_sizes()
+    return {
+        "inputs": cfg.n_inputs(),
+        "firstLayer": sizes[0],
+        "outputs": sizes[-1],
+        "weights": sum(a * b + b for a, b in zip(sizes[:-1], sizes[1:])),
+        "bytesPerWeight": np.dtype(brain.dtype).itemsize,
+        "agents": cfg.resolved_n(),
+        "neighbours": cfg.resolved_k(),
+    }
+
+
 class GraphOfLife:
     def __init__(self, G_init: nx.Graph | None, cfg: SimConfig, _empty: bool = False) -> None:
         self.cfg = cfg

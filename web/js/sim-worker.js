@@ -306,6 +306,10 @@ const handlers = {
     return call('gol_browser.WORLDS.defaults');
   },
 
+  async describe({ config }) {
+    return call('gol_browser.WORLDS.describe', [config]);
+  },
+
   async list() {
     const runs = await RunStore.listRuns();
     return { runs: runs.map(meta) };
@@ -468,8 +472,7 @@ const handlers = {
 
     report('series', 'summarising', 0, frames.length);
     const reply = call('gol_browser.WORLDS.series_absorb',
-                       [runId, frames, plan.heavy, (run.config || {}).export_every || 1,
-                        run.strain || null]);
+                       [runId, frames, plan.heavy, (run.config || {}).export_every || 1]);
     report('ready', 'ready');
     return reply;
   },

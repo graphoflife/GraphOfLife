@@ -77,6 +77,16 @@ const Metrics = {
   },
 
   /**
+   * The run statistics that count agents, and so also read as a share of the
+   * population that entered the phase: "40 births" means something different
+   * at a hundred agents than at four thousand. The stat popup and the strip
+   * under the canvas each kept this list; the history replies carried a third
+   * copy that nothing read.
+   */
+  POPULATION_COUNTS: new Set(['births', 'revolutions', 'starved', 'orphaned', 'leaves',
+                              'gainers', 'losers']),
+
+  /**
    * Whether a node metric describes the state before the phase rather than
    * after it, as its entry above says with `needsPrevious`.
    *

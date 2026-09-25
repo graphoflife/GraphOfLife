@@ -941,6 +941,26 @@ def test_a_checkpoint_timeline_ends_where_its_frames_do():
     assert sparse.frames_before(7) == 6 and sparse.frames_before(6) == 4
 
 
+def test_the_form_is_told_the_shape_of_the_brain_it_would_build():
+    """
+    brain_shape reads an unallocated brain, so a built one has to agree with
+    it. The new-run form used to do this arithmetic itself, and missed the
+    input and six outputs gifting adds.
+    """
+    from GraphOfLifeSimple import brain_shape, make_brain
+    for overrides in ({}, {"brain_kind": "float16"}, {"brain_kind": "binary"},
+                      {"allow_gifting": False, "allow_revolutions": False,
+                       "allow_handover": False}):
+        cfg = SimConfig.for_new_run(**overrides)
+        shape = brain_shape(cfg)
+        brain = make_brain(cfg, 1)
+        built = sum(W.size for W in brain.weights) + sum(b.size for b in brain.biases)
+        assert shape["weights"] == built, (overrides, shape["weights"], built)
+        assert shape["firstLayer"] == brain.weights[0].shape[1], overrides
+        assert shape["outputs"] == brain.weights[-1].shape[0], overrides
+        assert shape["bytesPerWeight"] == brain.weights[0].dtype.itemsize, overrides
+
+
 def test_the_forest_keeps_only_the_phase_asked_for():
     """
     The phase filter lives in gol_lineage.forest now. Both backends used to

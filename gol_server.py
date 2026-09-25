@@ -497,6 +497,13 @@ class Handler(BaseHTTPRequestHandler):
     def _route_post(self, path: str) -> None:
         parts = [p for p in path.split("/") if p]
 
+        # What a configuration being filled in would build, for the form.
+        if parts == ["api", "describe"]:
+            from GraphOfLifeSimple import brain_shape
+            config = self._read_json().get("config") or {}
+            self._send_json(brain_shape(SimConfig.from_dict(config, stored=False)))
+            return
+
         if parts == ["api", "runs"]:
             body = self._read_json()
             cfg = SimConfig.from_dict(body.get("config", {}), stored=False).resolve_seed()
@@ -552,13 +559,6 @@ class Handler(BaseHTTPRequestHandler):
             # What each brain kind wants, so the form can fill it in rather
             # than leaving it to be known.
             "brain_presets": SimConfig.BRAIN_PRESETS,
-            "derived": {
-                "n_inputs": cfg.n_inputs(),
-                "n_outputs": cfg.n_outputs(),
-                "resolved_n": cfg.resolved_n(),
-                "resolved_k": cfg.resolved_k(),
-                "heads": cfg.head_layout(),
-            },
         }
 
     @staticmethod

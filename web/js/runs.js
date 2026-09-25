@@ -409,45 +409,31 @@ const RunsView = {
     }
   },
 
-  updateDerived() {
+  /**
+   * What the configuration being filled in would build, asked of the engine.
+   *
+   * This used to be worked out here, in a copy of the engine's arithmetic that
+   * fell behind it: with gifting on, which new runs are, it reported 54 inputs
+   * and 20 outputs for a brain that has 55 and 26. Answers are drawn only if
+   * they are for the latest state of the form, so typing quickly cannot leave
+   * an older one on screen.
+   */
+  async updateDerived() {
     const el = document.getElementById('derivedInfo');
     if (!el) return;
-    const cfg = this.readConfig();
-
-    const messages = cfg.message_amount ?? 5;
-    const noise = cfg.random_input_amount ?? 5;
-    // 1 is-self flag + 28 magnitudes, then the messages and the noise.
-    const magnitudes = 28;
-    const inputs = 1 + magnitudes + 4 * messages + noise;
-    // Revolutions add a fraction pair; handover adds a yes/no pair plus its
-    // mode pair. Both are absent from the brain when switched off.
-    const outputs = 9 + (cfg.allow_revolutions ? 2 : 0)
-                      + (cfg.allow_handover ? 4 : 0)
-                      + messages;
-
-    // A binary brain spreads its magnitudes across a ladder of bits, so its
-    // first layer is wider even though each weight costs a fraction as much.
-    // The flag, the messages and the noise are already bits and stay one row.
-    const binary = cfg.brain_kind === 'binary';
-    const bits = binary ? (cfg.brain_bits || 16) : 1;
-    const firstLayer = binary
-      ? magnitudes * bits + 1 + 4 * messages + noise
-      : inputs;
-    const bytesPerWeight = binary ? 1 : (cfg.brain_kind === 'float16' ? 2 : 8);
-
-    const n = cfg.n_nodes > 0 ? cfg.n_nodes : Math.floor((cfg.total_tokens || 0) / 100);
-    const k = cfg.k_neighbors > 0 ? cfg.k_neighbors : Math.max(Math.floor(n / 100), 5);
-
-    const layers = (cfg.hidden_layers && cfg.hidden_layers.length) ? cfg.hidden_layers : [50, 45, 40, 35, 30];
-    const sizes = [firstLayer, ...layers, outputs];
-    let params = 0;
-    for (let i = 0; i < sizes.length - 1; i++) params += sizes[i] * sizes[i + 1] + sizes[i + 1];
-
+    const asked = (this._described = (this._described || 0) + 1);
+    let shape;
+    try {
+      shape = await API.describe(this.readConfig());
+    } catch (err) {
+      return;   // a half-typed value; the next keystroke asks again
+    }
+    if (asked !== this._described) return;
     el.textContent =
-      `${formatNumber(inputs)} inputs, ${formatNumber(firstLayer)} first layer, `
-      + `${formatNumber(outputs)} outputs, ${formatNumber(params)} weights per brain `
-      + `(≈ ${formatBytes(params * bytesPerWeight)}). `
-      + `Seed graph ${formatNumber(n)} agents, ${formatNumber(k)} neighbours each. `
+      `${formatNumber(shape.inputs)} inputs, ${formatNumber(shape.firstLayer)} first layer, `
+      + `${formatNumber(shape.outputs)} outputs, ${formatNumber(shape.weights)} weights per brain `
+      + `(≈ ${formatBytes(shape.weights * shape.bytesPerWeight)}). `
+      + `Seed graph ${formatNumber(shape.agents)} agents, ${formatNumber(shape.neighbours)} neighbours each. `
       + `The pre-pass, if on, doubles the forward passes per iteration.`;
   },
 

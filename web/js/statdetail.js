@@ -110,11 +110,6 @@ const StatDetail = {
     redistributed: 'How many tokens were scattered evenly over the survivors at the end of the phase, which is what keeps the global count conserved. Mostly this is what the agents who died this phase were holding, plus anything the run was configured to mint each phase; that setting is zero by default, and while it is, this is the estate of the dead and nothing else. It reads zero when there were no survivors to scatter it over \u2014 the pool is then dropped, and a single fresh agent is given the whole world instead.'
   },
 
-  // Statistics that count nodes, and so are also meaningful as a percentage
-  // of the population that entered the phase.
-  SHARE_KEYS: new Set(['births', 'revolutions', 'starved', 'orphaned', 'leaves',
-                       'gainers', 'losers']),
-
   init() {
     this.el = document.getElementById('statDetail');
     this.titleEl = document.getElementById('statDetailTitle');
@@ -214,7 +209,7 @@ const StatDetail = {
     const before = s.nodes_before || [];
     const nodes = s.nodes || [];
 
-    const asShare = this.SHARE_KEYS.has(key);
+    const asShare = Metrics.POPULATION_COUNTS.has(key);
     const xs = [], ys = [];
 
     for (let i = 0; i < values.length; i++) {

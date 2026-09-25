@@ -24,7 +24,7 @@ import numpy as np
 import gol_lineage
 import gol_series
 from gol_config import SimConfig
-from GraphOfLifeSimple import GraphOfLife, new_world
+from GraphOfLifeSimple import GraphOfLife, brain_shape, new_world
 
 
 class Worlds:
@@ -43,9 +43,9 @@ class Worlds:
         return {"config": SimConfig.for_new_run().to_dict(),
                 "brain_presets": SimConfig.BRAIN_PRESETS}
 
-    def normalise(self, config: Dict[str, Any]) -> Dict[str, Any]:
-        """Validate a configuration and fill in what it left out."""
-        return SimConfig.from_dict(config or {}, stored=False).to_dict()
+    def describe(self, config: Dict[str, Any]) -> Dict[str, Any]:
+        """What a configuration being filled in would build, for the form."""
+        return brain_shape(SimConfig.from_dict(config or {}, stored=False))
 
     # ---- getting a world ready -------------------------------------------
 
@@ -131,12 +131,12 @@ class Worlds:
                 "stride": history.stride, "heavy": heavy}
 
     def series_absorb(self, run_id: str, frames: List[Dict[str, Any]], heavy: bool,
-                      export_every: int = 1, strain: Optional[str] = None) -> Dict[str, Any]:
+                      export_every: int = 1) -> Dict[str, Any]:
         """Summarise the frames series_plan asked for, and hand back everything known."""
         history = self._histories[run_id]
         indexed = sorted(((int(f["index"]), f["frame"]) for f in frames), key=lambda p: p[0])
         history.summarise(indexed, heavy, can_reconstruct=int(export_every or 1) == 1)
-        return history.reply(heavy, strain=strain)
+        return history.reply(heavy)
 
     def lineage(self, frames: List[Dict[str, Any]], phase: str = "all") -> Dict[str, Any]:
         """The genotype forest of a window, same code the server runs."""
