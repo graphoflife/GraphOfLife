@@ -43,9 +43,40 @@
   /* Deepened a shade from the accent so white sits on it at 4.6:1 — it is a
      button fill before it is a hue. */
   --accent-dim: #2b7cad;
+  /* State, as ink and as fill.
+   *
+   * A state has two jobs and they want different colours: a word coloured on
+   * a panel has to carry against that panel, and a button filled with the
+   * same idea has to carry white. The amber fill is dark for exactly that
+   * reason — white reads on it at 7.5:1, where the amber used for *text*
+   * would give 1.9:1 — so they are named apart rather than one being a
+   * shade of the other. */
   --danger: #ff6b61;
   --ok: #4ccb60;
   --warn: #e6a532;
+  --info: #ab77f4;
+
+  /* Red as text. The second is for the one place it sits on a red tint
+     rather than on a panel, where it has to be lighter to clear it. */
+  --danger-text: #ff9c8f;
+  --danger-on-tint: #ffb3a7;
+
+  /* Amber as a fill, with the edge and hover that go with it. Deliberately
+     much darker than --warn: this one carries white ink. */
+  --warn-fill: #7a4a12;
+  --warn-fill-hover: #96591a;
+  --warn-edge: #9a5d17;
+
+  /* Body text one step softer than --text, for prose inside a dialog. */
+  --text-soft: #c2d0dc;
+
+  /* The code viewer. Its syntax colours are a self-contained scheme — the
+     family GitHub uses, which is where most people last read Python — and are
+     left where they are used. These two are not part of that scheme: they are
+     the script's own body text and its line-number gutter, and both are tuned
+     against --panel, so they are the pair to revisit if that surface moves. */
+  --code-text: #96a3b3;
+  --code-gutter: #637488;
 
   /* Depth, in two steps. A dark interface cannot lean on shadow the way a
      light one does — there is little left to darken — so these are shallow and
@@ -73,7 +104,7 @@
    without also making the track a hit target that is hard to grab. */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #2f3c4c transparent;
+  scrollbar-color: var(--border) transparent;
 }
 ::-webkit-scrollbar { width: 11px; height: 11px; }
 ::-webkit-scrollbar-track { background: transparent; }
@@ -440,8 +471,8 @@ legend.sub {
 
 /* The full configuration of a run, small enough to scan but always present. */
 
-button.warn { background: #7a4a12; border-color: #9a5d17; }
-button.warn:hover { background: #96591a; }
+button.warn { background: var(--warn-fill); border-color: var(--warn-edge); }
+button.warn:hover { background: var(--warn-fill-hover); }
 
 /* ==========================================================================
    Viewer: collapsible groups, toggles, playbar, stat detail
@@ -499,7 +530,7 @@ details.control-group > summary:hover h3 { color: var(--text); }
   white-space: nowrap;
 }
 .fl-iter { min-width: 96px; }
-.fl-phase { min-width: 82px; color: #7d8fa0; }
+.fl-phase { min-width: 82px; color: var(--muted-2); }
 .fl-pos { min-width: 62px; text-align: right; }
 
 /* Statistics are buttons now, since each opens its own explanation. */
@@ -530,7 +561,7 @@ details.control-group > summary:hover h3 { color: var(--text); }
 }
 .stat-detail.hidden { display: none; }
 .stat-detail-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-.stat-detail-text { font-size: 12px; color: #c2d0dc; line-height: 1.55; margin: 8px 0 10px; }
+.stat-detail-text { font-size: 12px; color: var(--text-soft); line-height: 1.55; margin: 8px 0 10px; }
 #statDetailChart { width: 100%; display: block; }
 
 /* The form is three columns in a dialog now, not four in a side panel, so it
@@ -566,8 +597,8 @@ details.control-group > summary:hover h3 { color: var(--text); }
   margin: 6px 0;
 }
 .hover-card .good { color: var(--ok); }
-.hover-card .bad { color: #ff8f7a; }
-.hover-card .warnText { color: #d29922; }
+.hover-card .bad { color: var(--danger-text); }
+.hover-card .warnText { color: var(--warn); }
 
 /* Many more statistics now, so give the strip a ceiling and let it scroll. */
 .stats-strip {
@@ -668,7 +699,7 @@ details.control-group > summary:hover h3 { color: var(--text); }
 .stat-group > summary::before { content: '▸'; font-size: 9px; transition: transform 0.15s; }
 .stat-group[open] > summary::before { transform: rotate(90deg); }
 .stat-group > summary:hover { color: var(--text); }
-.stat-group-count { margin-left: auto; color: #5b6b7c; font-size: 10px; letter-spacing: 0; }
+.stat-group-count { margin-left: auto; color: var(--muted-2); font-size: 10px; letter-spacing: 0; }
 .stat-group-body { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 10px 10px; }
 .stat-group .stat { background: var(--panel-2); }
 
@@ -1476,11 +1507,11 @@ details.control-group > summary:hover h3 { color: var(--text); }
    and the worker has not reached the end of its iteration yet. */
 .sim-state-running { color: var(--ok); }
 .sim-state-running .sim-dot { animation: sim-pulse 1.6s ease-in-out infinite; }
-.sim-state-stopping { color: #d29922; }
+.sim-state-stopping { color: var(--warn); }
 .sim-state-stopping .sim-dot { animation: sim-pulse 0.7s ease-in-out infinite; }
 .sim-state-error { color: var(--danger); }
-.sim-state-extinct { color: #d29922; }
-.sim-state-interrupted { color: #ab77f4; }
+.sim-state-extinct { color: var(--warn); }
+.sim-state-interrupted { color: var(--info); }
 
 @keyframes sim-pulse {
   0%, 100% { opacity: 1; transform: scale(1); }
@@ -1523,7 +1554,7 @@ details.control-group > summary:hover h3 { color: var(--text); }
   overflow: auto;
   font-size: 10.5px;
   line-height: 1.45;
-  color: #ffb3a7;
+  color: var(--danger-on-tint);
   background: rgba(248, 81, 73, 0.08);
   border-radius: 6px;
   white-space: pre-wrap;
@@ -1551,9 +1582,10 @@ details.control-group > summary:hover h3 { color: var(--text); }
 .sim-icon svg { width: 15px; height: 15px; display: block; }
 
 .sim-run { background: var(--accent-dim); border-color: var(--accent); color: #fff; }
-.sim-run:hover { background: var(--accent); }
-.sim-run.is-running { background: #7a4a12; border-color: #9a5d17; }
-.sim-run.is-running:hover { background: #96591a; }
+/* Dark ink on the bright fill, for the reason button.primary takes it. */
+.sim-run:hover { background: var(--accent); color: var(--stage); }
+.sim-run.is-running { background: var(--warn-fill); border-color: var(--warn-edge); }
+.sim-run.is-running:hover { background: var(--warn-fill-hover); }
 .sim-run[disabled] { opacity: 0.75; cursor: default; }
 .sim-inspect[disabled] { opacity: 0.45; cursor: not-allowed; }
 
@@ -1594,7 +1626,7 @@ details.control-group > summary:hover h3 { color: var(--text); }
   line-height: 1.4;
   color: var(--muted);
 }
-.sim-menu button.danger b { color: #ff9c8f; }
+.sim-menu button.danger b { color: var(--danger-text); }
 .sim-menu button.danger:hover { background: rgba(248, 81, 73, 0.1); }
 
 .sim-empty { grid-column: 1 / -1; color: var(--muted); margin: 8px 0 0; }
@@ -2079,10 +2111,10 @@ details.control-group > summary:hover h3 { color: var(--text); }
   flex: 0 0 auto;
   width: 26px;
   text-align: right;
-  color: #637488;
+  color: var(--code-gutter);
   user-select: none;
 }
-.explain-src { color: #96a3b3; }
+.explain-src { color: var(--code-text); }
 
 /* Lines away from the step are faded rather than recoloured, so the script
    still reads as a syntax-highlighted file all the way down instead of turning
