@@ -158,7 +158,10 @@ const BrowserBackend = {
   stopRun(id)           { return this._send('stop', { runId: id }); },
   copyRun(id, name)     { return this._send('copy', { runId: id, name }); },
   renameRun(id, name)   { return this._send('rename', { runId: id, name }); },
-  getFrame(id, index, opts)   { return this._send('frame', { runId: id, index }, opts && opts.signal); },
+  // Handed over as text and parsed here, as a server's reply is.
+  getFrame(id, index, opts)   {
+    return this._send('frame', { runId: id, index }, opts && opts.signal).then(text => JSON.parse(text));
+  },
   getFrames(id, from, count, fields, sightings, opts) {
     return this._send('frames', { runId: id, from, count, fields, sightings },
                       opts && opts.signal);

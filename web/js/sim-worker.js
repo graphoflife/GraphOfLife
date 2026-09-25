@@ -135,7 +135,12 @@ function lineageFields() {
  * The answer comes back as JSON too; gol_browser.answer says why.
  */
 function call(target, args = []) {
-  pyodide.globals.set('_call_args', JSON.stringify(args));
+  return callWritten(target, JSON.stringify(args));
+}
+
+/** The same, with the arguments already written as JSON. */
+function callWritten(target, argsJson) {
+  pyodide.globals.set('_call_args', argsJson);
   return JSON.parse(pyodide.runPython(`gol_browser.answer(${target}, _call_args)`));
 }
 
@@ -232,14 +237,11 @@ async function pump(runId) {
     const slice = call('gol_browser.WORLDS.step', [runId, SLICE]);
 
     if (slice.frames.length) {
-      // What the frames actually cost, reported by the store that wrote them.
-      // It used to be guessed from the agent and edge counts, which was a fair
-      // guess of uncompressed JSON and is about five times the truth now that
-      // frames are stored compressed.
-      const written = await RunStore.putFrames(runId, run.frame_count, slice.frames);
+      // Each frame arrives as the JSON the engine wrote, and is stored from it.
+      // What they cost is reported by the store that wrote them; it used to be
+      // guessed from the agent and edge counts.
+      run.size_bytes += await RunStore.putFrames(runId, run.frame_count, slice.frames);
       run.frame_count += slice.frames.length;
-      run.size_bytes += written || slice.frames.reduce(
-        (n, frame) => n + 120 * frame.ids.length + 40 * frame.edges.length, 0);
     }
     run.iteration = slice.iteration;
 
@@ -393,7 +395,7 @@ const handlers = {
   },
 
   async frame({ runId, index }) {
-    return RunStore.getFrame(runId, Number(index));
+    return RunStore.getFrameText(runId, Number(index));
   },
 
   /**
@@ -450,10 +452,14 @@ const handlers = {
     const plan = call('gol_browser.WORLDS.series_plan',
                       [runId, run.frame_count, points ?? null, keys ?? null]);
     report('series', 'reading frames', 0, 0);
-    const frames = await RunStore.getIterations(runId, plan.iterations);
+    const read = await RunStore.getIterations(runId, plan.iterations);
 
-    report('series', 'summarising', 0, frames.length);
-    const reply = call('gol_browser.WORLDS.series_absorb', [runId, frames, plan.heavy]);
+    // Written around each frame's own stored text rather than parsed here
+    // only to be written out again on the way over.
+    report('series', 'summarising', 0, read.length);
+    const frames = read.map(({ index, text }) => `{"index":${index},"frame":${text}}`).join(',');
+    const reply = callWritten('gol_browser.WORLDS.series_absorb',
+                              `[${JSON.stringify(runId)},[${frames}],${plan.heavy}]`);
     report('ready', 'ready');
     return reply;
   },

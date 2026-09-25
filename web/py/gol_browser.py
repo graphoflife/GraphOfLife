@@ -89,16 +89,20 @@ class Worlds:
         Returns as soon as the slice is done so the caller can look at its
         message queue; that is what makes a run interruptible. Frames are
         returned rather than kept, because keeping them is the caller's job.
+
+        Each frame comes back already written as JSON, which is what the
+        caller stores. As objects they were written out once here, parsed
+        into a tree on the other side, and written out again to be stored.
         """
         entry = self._require(run_id)
         cfg, world = entry["cfg"], entry["world"]
-        produced: List[Dict[str, Any]] = []
+        produced: List[str] = []
 
         for _ in range(max(1, iterations)):
             record = cfg.records(world.iteration)
             frames = world.step(record_decisions=cfg.export_decisions and record)
             if record:
-                produced.extend(frames)
+                produced.extend(to_json(frame) for frame in frames)
             if world.is_extinct():
                 return {"iteration": world.iteration, "extinct": True, "frames": produced}
 
@@ -166,19 +170,25 @@ def answer(method: Callable[..., Any], arguments: str) -> str:
     Text rather than Pyodide's own conversion, which goes member by member
     and costs several times what encoding and parsing does: a frame is a deep
     tree of lists.
+    """
+    return to_json(method(*json.loads(arguments)))
+
+
+def to_json(value: Any) -> str:
+    """
+    `value` as compact JSON.
 
     Statistics are occasionally not numbers — a ratio with nothing underneath
     it, a range that never got a value. JSON has no way to write those, so
     they travel as null and the interface treats them as missing, which is
-    what they are. Most answers hold none and are written as they are: going
+    what they are. Most values hold none and are written as they are: going
     through every list of a frame to look for them first cost five times what
     writing the frame did.
     """
-    result = method(*json.loads(arguments))
     try:
-        return json.dumps(result, separators=(",", ":"), allow_nan=False)
+        return json.dumps(value, separators=(",", ":"), allow_nan=False)
     except ValueError:
-        return json.dumps(_finite(result), separators=(",", ":"), allow_nan=False)
+        return json.dumps(_finite(value), separators=(",", ":"), allow_nan=False)
 
 
 def _finite(value: Any) -> Any:

@@ -117,30 +117,39 @@ const RunStore = {
    * Uncompressed, a browser's few gigabytes of quota ran out after a few
    * thousand iterations; this is most of the way to thirty.
    *
+   * The frames arrive as the JSON the engine wrote them as, and are stored
+   * from that: parsing them only to write them out again cost more than
+   * compressing them.
+   *
    * Returns the bytes actually written, so a run can report its size from what
    * it cost rather than from a guess about what it ought to have cost.
    */
-  async putFrames(runId, startIndex, frames) {
-    if (!frames.length) return 0;
-    const rows = await Promise.all(frames.map(async (frame, offset) => {
+  async putFrames(runId, startIndex, texts) {
+    if (!texts.length) return 0;
+    const rows = await Promise.all(texts.map(async (text, offset) => {
       const index = startIndex + offset;
-      const packed = await deflate(frame);
-      return packed ? { runId, index, gz: packed } : { runId, index, frame };
+      const packed = await deflate(text);
+      return packed ? { runId, index, gz: packed } : { runId, index, text };
     }));
     await this._tx(['frames'], 'readwrite', tx => {
       const store = tx.objectStore('frames');
       for (const row of rows) store.put(row);
     });
-    return rows.reduce((n, row) => n + (row.gz ? row.gz.byteLength : 0), 0);
+    return rows.reduce((n, row) => n + (row.gz ? row.gz.byteLength : row.text.length), 0);
   },
 
-  async getFrame(runId, index) {
+  /**
+   * One frame, as the JSON text it is stored as. The page parses it, as it
+   * parses a server's reply: parsed here, the whole tree had to be copied
+   * across to the page object by object, which cost more than the parsing.
+   */
+  async getFrameText(runId, index) {
     const db = await this.open();
     const row = await this._await(
       db.transaction('frames').objectStore('frames').get([runId, index])
     );
     if (!row) throw new Error(`frame ${index} of ${runId} is not stored`);
-    return unpack(row);
+    return frameText(row);
   },
 
   /** A contiguous run of frames, read in one cursor pass. */
@@ -171,6 +180,9 @@ const RunStore = {
    * Asked for by key, all in one transaction. A chart climbing to a finer
    * resolution asks for a handful of iterations at a time, and walking a
    * cursor over the whole run to find them read every stored frame there was.
+   *
+   * As text, for Python to read: parsed here, each would only be written out
+   * again to cross over.
    */
   async getIterations(runId, iterations) {
     const db = await this.open();
@@ -180,7 +192,7 @@ const RunStore = {
       this._await(store.get([runId, 2 * it + 1]))
     ]));
     return Promise.all(rows.filter(Boolean)
-      .map(async row => ({ index: row.index, frame: await unpack(row) })));
+      .map(async row => ({ index: row.index, text: await frameText(row) })));
   },
 
   /**
@@ -275,23 +287,32 @@ if (typeof self !== 'undefined' && typeof window === 'undefined') {
 }
 
 /**
- * A frame, as bytes.
+ * A frame's JSON, as gzipped bytes.
  *
- * Null when the browser has no CompressionStream, in which case the frame is
- * stored as an object the way it always was — smaller is better but readable
- * is required, and every read path takes either.
+ * Null when the browser has no CompressionStream, in which case the text is
+ * stored as it is — smaller is better but readable is required, and every
+ * read path takes either.
  */
-async function deflate(frame) {
+async function deflate(text) {
   if (typeof CompressionStream !== 'function') return null;
-  const stream = new Blob([JSON.stringify(frame)]).stream()
+  const stream = new Blob([text]).stream()
     .pipeThrough(new CompressionStream('gzip'));
   return new Uint8Array(await new Response(stream).arrayBuffer());
 }
 
-/** A stored row back into a frame, however it happens to have been written. */
+/**
+ * A stored row's frame as JSON text, however it was written: gzipped, as
+ * text, or, in a run stored before either, as an object.
+ */
+async function frameText(row) {
+  if (row.gz) {
+    const stream = new Blob([row.gz]).stream().pipeThrough(new DecompressionStream('gzip'));
+    return new Response(stream).text();
+  }
+  return row.text ?? JSON.stringify(row.frame);
+}
+
+/** A stored row back into a frame. */
 async function unpack(row) {
-  if (!row.gz) return row.frame;
-  const stream = new Blob([row.gz]).stream()
-    .pipeThrough(new DecompressionStream('gzip'));
-  return JSON.parse(await new Response(stream).text());
+  return row.frame || JSON.parse(await frameText(row));
 }
