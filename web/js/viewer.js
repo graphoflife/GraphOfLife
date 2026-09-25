@@ -394,7 +394,6 @@ const Viewer = {
       this.position = 0;
       this.frameIndex = 0;
     }
-    SeriesLoad.forget(runId);
 
     try {
       this.meta = await API.getRun(runId);
@@ -405,6 +404,7 @@ const Viewer = {
     }
 
     this.frameCount = this.meta.frame_count || 0;
+    SeriesLoad.noteSize(runId, this.frameCount);
     this.rebuildVisible();
 
     document.getElementById('activeRunLabel').textContent = this.meta.name;
@@ -429,7 +429,6 @@ const Viewer = {
     if (!this.runId) return;
     this.cache.clear();
     this.inflight.clear();
-    SeriesLoad.forget(this.runId);
     await this.load(this.runId);
   },
 

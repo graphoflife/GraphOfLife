@@ -623,89 +623,96 @@ const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 const assert = (ok, message) => { if (!ok) throw new Error(message); };
 
 /**
- * A run of `total` samples, summarised the way the server does it: `nodes` is
- * cheap, `bridges` walks the graph and is null in a cheap reply, and `families`
- * only exists in a reply that covers the whole run. Every sample is two rows,
- * one per phase. `calls` records what was asked for.
+ * A backend for a run of `total` samples that keeps its history the way
+ * gol_series.History does, in miniature: a request summarises the samples of
+ * its bisection prefix it has not got at that depth, and the reply is
+ * everything known. `nodes` is cheap; `bridges` walks the graph and is null
+ * on a sample only summarised cheaply. `calls` records what was asked for.
  */
-function pretendRun(total, calls = []) {
+function pretendRun(total, calls = [], { delay = 0 } = {}) {
+  const cheap = new Set(), deep = new Set();
+  const state = { building: false, done: 0, total: 0 };
   return {
-    async getSeries(runId, points, heavy) {
-      calls.push({ points, heavy });
+    state,
+    async getSeries(runId, points, keys) {
+      calls.push({ points, keys });
+      const heavy = (keys || []).includes('bridges');
       const take = points === null ? total : Math.min(total, Math.max(2, points));
-      const whole = take >= total;
-      const keys = ['iteration', 'phase', 'nodes', 'bridges', ...(whole ? ['families'] : [])];
-      const rows = [];
-      for (let it = 0; it < take; it++) {
-        for (const phase of [1, 2]) {
-          rows.push({ iteration: it, phase, nodes: 100 + it,
-                      bridges: heavy ? it : null, families: 3 });
-        }
+      const missing = [];
+      for (let it = 0; it < take; it++) if (!(heavy ? deep : cheap).has(it)) missing.push(it);
+      Object.assign(state, { building: missing.length > 0, done: 0, total: 2 * missing.length });
+      for (const it of missing) {
+        if (delay) { await sleep(delay); state.done += 1; await sleep(delay); state.done += 1; }
+        cheap.add(it);
+        if (heavy) deep.add(it);
       }
+      state.building = false;
+      const known = [...cheap].sort((x, y) => x - y);
+      const rows = known.flatMap(it => [1, 2].map(phase =>
+        ({ iteration: it, phase, nodes: 100 + it, bridges: deep.has(it) ? it : null })));
       const series = {};
-      for (const key of keys) series[key] = rows.map(row => row[key]);
-      return { keys, series, points: take, totalPoints: total, complete: whole, heavy };
+      for (const key of ['iteration', 'phase', 'nodes', 'bridges']) series[key] = rows.map(r => r[key]);
+      return {
+        keys: ['iteration', 'phase', 'nodes', 'bridges'], series, count: rows.length,
+        frames: 2 * total, totalPoints: total, heavyKeys: ['bridges'],
+        done: (heavy ? deep : cheap).size, complete: cheap.size === total, heavy: deep.size === total
+      };
     },
-    async getSeriesProgress() { return { building: false, done: 0, total: 0 }; }
+    async getSeriesProgress() { return { ...state }; }
   };
 }
 
-async function test_a_history_is_fetched_only_as_deep_as_its_statistics_need() {
+async function test_a_history_is_asked_for_by_what_is_plotted() {
   const calls = [];
   const loader = loaderFor(pretendRun(20, calls));
 
   await loader.climb('run', ['nodes']);
-  assert(calls.length && calls.every(c => c.heavy === false),
-    'a population chart asked for the graph statistics it does not plot');
-  assert(loader.ready('run', ['nodes']), 'the cheap history is not counted as ready');
-  assert(!loader.ready('run', ['bridges']), 'a cheap history is passed off as a structural one');
+  assert(calls.length && calls.every(c => c.keys.join() === 'nodes'),
+    `a population chart asked for ${JSON.stringify(calls[0] && calls[0].keys)}`);
 
-  // A derived statistic is as deep as what it is made of.
+  // A derived statistic is asked for by what it is made of.
   calls.length = 0;
   await loader.climb('run', ['bridgeShare']);
-  assert(calls.length && calls.every(c => c.heavy === true),
-    'bridges / edges was loaded without the bridge counts it divides');
-  assert(loader.ready('run', ['bridges']), 'a finished structural history is not ready');
+  assert(calls.length && calls.every(c => c.keys.join() === 'bridges,edges'),
+    `bridges / edges asked for ${JSON.stringify(calls[0] && calls[0].keys)}`);
 }
 
-async function test_a_second_load_adds_to_the_first_rather_than_starting_over() {
-  const loader = loaderFor(pretendRun(20));
+async function test_a_summarised_run_is_one_request() {
+  // Every reply is the whole history, so on a run already summarised the
+  // first step of a climb is also its last. It used to be ten requests.
+  const calls = [];
+  const loader = loaderFor(pretendRun(20, calls));
   await loader.climb('run', ['nodes']);
 
+  calls.length = 0;
   const steps = [];
-  await loader.climb('run', ['bridges'], { onStep: payload => steps.push(payload) });
-  assert(steps.length > 1, 'the structural load arrived in one piece; nothing was climbed');
-  for (const payload of steps) {
-    assert(payload.count === 40,
-      `a step held ${payload.count} rows of 40: the chart fell back to a sketch of itself`);
-    assert(payload.series.nodes.every(v => v !== null), 'a cheap value already in hand was lost');
-    // Only a reply covering the whole run carries `families`; the structural
-    // load's early steps do not, and must not take it off the chart.
-    assert(payload.series.families && payload.series.families.every(v => v === 3),
-      'a statistic only a whole run gives was dropped by a coarse step');
-  }
-  const filled = p => p.series.bridges.filter(v => v !== null).length;
-  assert(filled(steps[0]) < 40, 'the first structural step was not coarse');
-  assert(filled(steps[steps.length - 1]) === 40, 'the structural load did not finish');
-  assert(steps[steps.length - 1].heavy && steps[steps.length - 1].complete,
-    'a finished structural history does not say so');
+  await loader.climb('run', ['nodes'], { onStep: reply => steps.push(reply) });
+  assert(calls.length === 1, `a summarised run took ${calls.length} requests`);
+  assert(steps.length === 1 && steps[0].count === 40, 'the one reply was not the whole history');
 }
 
-async function test_a_cheap_load_never_blanks_an_expensive_value() {
-  const loader = loaderFor(pretendRun(20));
-  // A structural load cut short after its second step.
-  let seen = 0;
-  const job = { signal: null, report() {}, get cancelled() { return seen >= 2; } };
-  await loader.climb('run', ['bridges'], { job, onStep: () => { seen += 1; } });
-  const before = loader.cache.get('run').series.bridges.filter(v => v !== null).length;
-  assert(before > 0 && before < 40, `the cut-short load kept ${before} structural values`);
+function test_a_history_of_a_smaller_run_is_not_ready() {
+  // A history finished at one size used to count as finished until something
+  // said to forget it, and only the Viewer ever did.
+  const loader = loaderFor({});
+  loader.cache.set('run', { frames: 40, complete: true, heavy: false, heavyKeys: ['bridges'] });
+  assert(loader.ready('run', ['nodes'], 40), 'a finished history of the run as it is was not ready');
+  assert(!loader.ready('run', ['nodes'], 42), 'a history of the run before it grew counts as finished');
+  assert(!loader.ready('run', ['bridges'], 40), 'a cheap history passes for one with the graph statistics');
+  assert(!loader.ready('other', ['nodes'], 0), 'a run never asked about counts as ready');
+}
 
-  await loader.climb('run', ['nodes']);
-  const after = loader.cache.get('run');
-  assert(after.series.bridges.filter(v => v !== null).length === before,
-    'the cheap rows overwrote bridge counts an earlier load had already found');
-  assert(after.complete && !after.heavy,
-    'a history with only some bridge counts claims to have them all');
+function test_a_history_longer_than_its_run_is_dropped() {
+  // Resuming a run from an earlier checkpoint cuts it back, and its history
+  // then describes frames that are gone. A history merely behind stays: that
+  // is ready()'s to judge, and it is still worth drawing while the rest loads.
+  const loader = loaderFor({});
+  loader.cache.set('cut', { frames: 40 });
+  loader.cache.set('behind', { frames: 40 });
+  loader.noteSize('cut', 30);
+  loader.noteSize('behind', 50);
+  assert(!loader.cache.has('cut'), 'the history of frames that are gone was kept');
+  assert(loader.cache.has('behind'), 'a history only behind the run was thrown away');
 }
 
 async function test_the_bar_counts_samples_and_only_moves_forward() {
@@ -713,22 +720,7 @@ async function test_the_bar_counts_samples_and_only_moves_forward() {
   // the step in flight. Passing that straight to the bar made it run 4%, 6%,
   // 8%, 3%, 34%, 66%, 15% — two different measures taking turns.
   const total = 20;
-  const inner = pretendRun(total);
-  let state = { building: false, done: 0, total: 0 };
-  let had = 0;
-  const api = {
-    async getSeries(runId, points, heavy) {
-      const take = points === null ? total : Math.min(total, Math.max(2, points));
-      const frames = 2 * Math.max(0, take - had);
-      state = { building: frames > 0, done: 0, total: frames };
-      for (let i = 0; i < frames; i++) { await sleep(2); state.done = i + 1; }
-      state = { building: false, done: 0, total: 0 };
-      had = Math.max(had, take);
-      return inner.getSeries(runId, points, heavy);
-    },
-    async getSeriesProgress() { return { ...state }; }
-  };
-  const loader = loaderFor(api);
+  const loader = loaderFor(pretendRun(total, [], { delay: 1 }));
   loader.POLL_MS = 3;
 
   const reports = [];
@@ -776,14 +768,14 @@ async function test_switching_a_line_to_a_graph_statistic_loads_it() {
   diagrams.active = 'timeline';
   diagrams.settings.timeline.lines = [lineOf('nodes')];
   await diagrams.refresh();
-  assert(calls.length && calls.every(c => !c.heavy),
+  assert(calls.length && calls.every(c => !c.keys.includes('bridges')),
     'a population line asked for graph statistics');
 
   // What the statistic menu does: change the line, then refresh.
   calls.length = 0;
   diagrams.settings.timeline.lines[0].stat = 'bridges';
   await diagrams.refresh();
-  assert(calls.some(c => c.heavy),
+  assert(calls.some(c => c.keys.includes('bridges')),
     'switching the line to bridges never asked for them, and the chart would say '
     + '"Reading…" with nothing reading');
 }
@@ -808,9 +800,7 @@ async function test_a_change_that_needs_nothing_new_draws_without_loading() {
 
 async function test_a_redraw_during_a_load_leaves_the_load_running() {
   const calls = [];
-  const quick = pretendRun(40, calls);
-  const slow = { ...quick, async getSeries(...args) { await sleep(5); return quick.getSeries(...args); } };
-  const diagrams = diagramsWith(loaderFor(slow));
+  const diagrams = diagramsWith(loaderFor(pretendRun(40, calls, { delay: 1 })));
   diagrams.active = 'timeline';
   diagrams.settings.timeline.lines = [lineOf('bridges')];
 
@@ -908,9 +898,10 @@ const tests = Object.entries({
   test_only_cancels_everything_else,
   test_a_cancelled_job_neither_reports_nor_counts_as_finished,
   test_an_abort_is_not_an_error,
-  test_a_history_is_fetched_only_as_deep_as_its_statistics_need,
-  test_a_second_load_adds_to_the_first_rather_than_starting_over,
-  test_a_cheap_load_never_blanks_an_expensive_value,
+  test_a_history_is_asked_for_by_what_is_plotted,
+  test_a_summarised_run_is_one_request,
+  test_a_history_of_a_smaller_run_is_not_ready,
+  test_a_history_longer_than_its_run_is_dropped,
   test_the_bar_counts_samples_and_only_moves_forward,
   test_switching_a_line_to_a_graph_statistic_loads_it,
   test_a_change_that_needs_nothing_new_draws_without_loading,

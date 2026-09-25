@@ -205,36 +205,6 @@ def test_the_two_sides_cover_the_same_ground():
     )
 
 
-def test_the_page_knows_which_statistics_are_expensive():
-    """
-    The page decides from its own list whether a chart needs the expensive
-    summary, so that a history of the population does not wait minutes for
-    bridge counts it will never draw. A statistic added to HEAVY_KEYS and not
-    to Metrics.HEAVY would be fetched cheaply and arrive as nulls — an empty
-    line, which reads as a statistic this run never recorded.
-    """
-    if shutil.which("node") is None:
-        print("node is not installed; skipping")
-        return
-
-    script = (
-        "const fs = require('fs');"
-        "const src = ['colormaps.js', 'metrics.js']"
-        "  .map(n => fs.readFileSync(`${process.argv[1]}/web/js/${n}`, 'utf8')).join('\\n');"
-        "const Metrics = new Function('window', src + '; return Metrics;')({ devicePixelRatio: 1 });"
-        "process.stdout.write(JSON.stringify([...Metrics.HEAVY]));"
-    )
-    result = subprocess.run(["node", "-e", script, ROOT],
-                            capture_output=True, text=True, timeout=60)
-    if result.returncode != 0:
-        raise AssertionError(f"the JavaScript side failed:\n{result.stderr[:2000]}")
-    page = set(json.loads(result.stdout))
-    server = set(gol_series.HEAVY_KEYS)
-    assert page == server, (
-        f"only the server calls these expensive: {sorted(server - page)}; "
-        f"only the page does: {sorted(page - server)}"
-    )
-
 def test_a_cache_written_across_a_code_change_keeps_its_new_statistics():
     """
     A run's cache can hold rows from two versions of gol_series at once: the

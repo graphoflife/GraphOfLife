@@ -28,7 +28,7 @@ API
     GET    /api/runs/<id>/frames      ?from=&count=&fields= a run of them
     GET    /api/runs/<id>/lineage     ?from=&count=&limit= the genotype forest
     GET    /api/runs/<id>/series      per-frame statistics for the whole run
-                                      ?points=N coarse, ?heavy=0 cheap keys only
+                                      ?points=N coarse, ?keys=a,b what is plotted
     GET    /api/runs/<id>/series/progress   how far a rebuild has got
 """
 from __future__ import annotations
@@ -371,13 +371,18 @@ class Handler(BaseHTTPRequestHandler):
 
             if len(parts) == 4 and parts[:2] == ["api", "runs"] and parts[3] == "series":
                 import gol_series
+                query = parse_qs(urlparse(self.path).query)
                 # ?points=N asks for a coarse answer that covers the whole
                 # run, so a caller can draw something immediately and climb.
-                asked = parse_qs(urlparse(self.path).query).get("points", [None])[0]
+                asked = query.get("points", [None])[0]
                 points = int(asked) if asked and asked.isdigit() else None
-                # heavy=0 asks for the cheap statistics only, which is five
-                # sixths less work and everything most charts plot.
-                heavy = parse_qs(urlparse(self.path).query).get("heavy", ["1"])[0] != "0"
+                # ?keys= names the statistics a chart plots, and the depth
+                # follows from them: most charts plot nothing that walks the
+                # graph, which is five sixths of what a frame costs. No keys
+                # means everything.
+                keys = query.get("keys")
+                heavy = (gol_series.needs_graph(k for k in keys[0].split(",") if k)
+                         if keys else True)
                 answer = gol_series.build_series(parts[2], points, heavy,
                                                  cancelled=self._client_gone)
                 if self._client_gone():

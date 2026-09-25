@@ -416,43 +416,27 @@ const handlers = {
     }) };
   },
 
-  async series({ runId, points, heavy = true }) {
+  async series({ runId, points, keys }) {
     const run = await loadRun(runId);
-    const totalIterations = Math.max(0, Math.floor(run.frame_count / 2));
-    const stride = call('gol_browser.WORLDS.sample_stride', [totalIterations]);
 
-    // Which of the sampled iterations this request wants. Summarising a large
-    // frame costs over a second, so a caller climbing 2, 3, 5, 9… gets a chart
-    // of the whole run almost at once and refines it, instead of watching
-    // nothing happen until every sample is done.
-    const grid = [];
-    for (let it = 0; it < totalIterations; it += stride) grid.push(it);
-    const order = call('gol_browser.WORLDS.bisection_order', [grid.length]);
-    const take = points ? order.slice(0, Math.max(2, points)) : order;
-    const complete = take.length >= grid.length;
-    const asked = new Set(take.map(i => grid[i]));
-
+    // Python keeps the run's history and says what this request still needs;
+    // the frames are in IndexedDB, out of its reach, so they are read here and
+    // handed over. The same gol_series.History the server keeps, so a run
+    // summarised in the browser is summarised by the same rules, and each step
+    // of a climb summarises only what the one before did not.
+    const plan = call('gol_browser.WORLDS.series_plan',
+                      [runId, run.frame_count, points ?? null, keys ?? null]);
     report('series', 'reading frames', 0, 0);
-    const frames = await RunStore.getFramesStrided(runId, stride, asked);
+    const frames = plan.iterations.length
+      ? await RunStore.getFramesStrided(runId, plan.stride, new Set(plan.iterations))
+      : [];
 
     report('series', 'summarising', 0, frames.length);
-    const rows = frames.length ? call('gol_browser.WORLDS.stats', [frames, heavy]) : [];
+    const reply = call('gol_browser.WORLDS.series_absorb',
+                       [runId, frames, plan.heavy, (run.config || {}).export_every || 1,
+                        run.strain || null]);
     report('ready', 'ready');
-
-    if (!rows.length) {
-      return { count: 0, keys: [], series: {}, stride, sampled: false,
-               points: 0, totalPoints: grid.length, complete: true, heavy,
-               nodeCountKeys: call('gol_browser.WORLDS.node_count_keys') };
-    }
-    const keys = Object.keys(rows[0]);
-    const series = {};
-    for (const key of keys) series[key] = rows.map(row => row[key]);
-    return {
-      count: rows.length, keys, series, stride, sampled: stride > 1,
-      points: asked.size, totalPoints: grid.length, complete, heavy,
-      totalIterations,
-      nodeCountKeys: call('gol_browser.WORLDS.node_count_keys')
-    };
+    return reply;
   },
 
   async seriesProgress() {

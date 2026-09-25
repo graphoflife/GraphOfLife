@@ -654,7 +654,7 @@ def test_a_coarse_request_spans_the_whole_run_and_a_finer_one_refines_it():
             assert coarse["series"]["iteration"][-1] == last, (
                 "a coarse pass must still reach the end of the run")
             assert not coarse["complete"] and whole["complete"]
-            assert coarse["points"] < finer["points"] <= whole["points"]
+            assert coarse["done"] < finer["done"] <= whole["done"]
 
             of = lambda r: set(r["series"]["iteration"])
             assert of(coarse) < of(finer) <= of(whole), (
@@ -747,6 +747,161 @@ def test_a_heavy_pass_upgrades_the_rows_a_light_one_left_behind():
 
             assert not [k for k in heavy["keys"] if k.startswith("_")], (
                 "bookkeeping fields must not travel with the statistics")
+        finally:
+            gol_store.BASE_DIR = original
+
+
+def _recorded_run(iterations: int, seed: int = 4):
+    """A small run with `iterations` recorded, in whatever BASE_DIR is current."""
+    import gol_store
+    cfg = SimConfig(total_tokens=400, n_nodes=30, k_neighbors=4,
+                    seed=seed, hidden_layers=[6], export_decisions=False)
+    run_id = gol_store.create_run("x", cfg)["id"]
+    world = new_world(cfg)
+    return run_id, world, _record(run_id, world, 0, iterations)
+
+
+def _record(run_id: str, world, written: int, iterations: int) -> int:
+    """Run `world` on and record what it does, returning the new frame count."""
+    import gol_store
+    for _ in range(iterations):
+        for frame in world.step(record_decisions=False):
+            gol_store.write_frame(run_id, written, frame)
+            written += 1
+    gol_store.update_meta(run_id, frame_count=written, iteration=world.iteration)
+    return written
+
+
+def test_a_reply_is_everything_the_history_knows():
+    """
+    A coarse request on a summarised run hands back all of it.
+
+    Only the samples asked for used to go back, so the page merged replies
+    into what it held — and a page with the whole run drawn cheaply that then
+    asked for bridges got two points back. The reply is the history now, and
+    the page keeps the latest one.
+    """
+    import gol_store
+
+    with tempfile.TemporaryDirectory() as tmp:
+        original = gol_store.BASE_DIR
+        gol_store.BASE_DIR = tmp
+        try:
+            run_id, _, _ = _recorded_run(20)
+            whole = gol_series.build_series(run_id, heavy=False)
+            coarse = gol_series.build_series(run_id, points=2, heavy=False)
+            assert coarse["count"] == whole["count"], (
+                f"a coarse request returned {coarse['count']} of {whole['count']} known rows")
+            assert coarse["done"] == coarse["totalPoints"] and coarse["complete"], (
+                "a summarised run does not say it is finished, so a climb would not stop")
+
+            # The first deep step summarises two samples and hands back the rest.
+            deep = gol_series.build_series(run_id, points=2, heavy=True)
+            assert deep["count"] == whole["count"], "a deep step dropped the cheap rows"
+            filled = sum(v is not None for v in deep["series"]["bridges"])
+            assert 0 < filled < deep["count"], f"{filled} bridge counts after one deep step"
+            assert all(v is not None for v in deep["series"]["nodes"]), (
+                "a deep step blanked the cheap statistics")
+            assert deep["done"] == 2 and deep["complete"] and not deep["heavy"]
+        finally:
+            gol_store.BASE_DIR = original
+
+
+def test_a_cheap_row_never_blanks_what_a_deep_one_found():
+    """
+    The page used to guard this itself, when it merged replies. The history
+    does it now: a cheap row for a frame whose graph statistics are already
+    known keeps them, and keeps whatever only the cheap row carried.
+    """
+    history = gol_series.History()
+    history.add({"_frame": 0, "_heavy": True, "nodes": 10, "bridges": 3})
+    history.add({"_frame": 0, "_heavy": False, "nodes": 10, "bridges": None,
+                 "cladesInWindow": 2})
+    row = history.rows[0]
+    assert row["bridges"] == 3 and row["_heavy"], "a cheap row blanked a bridge count"
+    assert row["cladesInWindow"] == 2, "what only the cheap row carried was lost"
+
+
+def test_the_depth_follows_the_statistics_named():
+    """
+    The page names what it plots, and the one list of what walks the graph
+    decides how deep to summarise.
+    """
+    assert not gol_series.needs_graph(["nodes", "edges", "tokens"])
+    assert gol_series.needs_graph(["nodes", "bridges"])
+    assert not gol_series.needs_graph([])
+
+
+def test_the_browser_and_the_server_summarise_a_run_alike():
+    """
+    Two backends, one history.
+
+    The worker used to assemble its replies itself and keep nothing, so the
+    two backends had their own rules for what a reply holds. Both go through
+    gol_series.History now; this holds them to answering the same request with
+    the same numbers. The family count is the one difference, and it is on
+    purpose: it needs every iteration in order, which only the server reads.
+    """
+    import importlib.util
+    import gol_store
+
+    here = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    spec = importlib.util.spec_from_file_location(
+        "gol_browser", os.path.join(here, "web", "py", "gol_browser.py"))
+    gol_browser = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(gol_browser)
+    browser = gol_browser.Worlds()
+
+    same = lambda a, b: a == b or (isinstance(a, float) and isinstance(b, float)
+                                   and math.isnan(a) and math.isnan(b))
+
+    with tempfile.TemporaryDirectory() as tmp:
+        original = gol_store.BASE_DIR
+        gol_store.BASE_DIR = tmp
+        try:
+            run_id, _, written = _recorded_run(24)
+            for points in (2, 5, None):
+                server = gol_series.build_series(run_id, points=points, heavy=False)
+                plan = browser.series_plan(run_id, written, points, ["nodes"])
+                frames = [{"index": f, "frame": gol_store.read_frame(run_id, f)}
+                          for it in plan["iterations"] for f in (2 * it, 2 * it + 1)
+                          if f < written]
+                reply = browser.series_absorb(run_id, frames, plan["heavy"])
+                for key in ("done", "complete", "heavy", "totalPoints", "frames", "stride"):
+                    assert reply[key] == server[key], (points, key, reply[key], server[key])
+                for key in server["keys"]:
+                    if key == "cladesInWindow":
+                        continue
+                    ours, theirs = reply["series"].get(key), server["series"][key]
+                    assert ours is not None and all(map(same, ours, theirs)), (points, key)
+        finally:
+            gol_store.BASE_DIR = original
+
+
+def test_a_history_says_how_big_the_run_was():
+    """
+    A history finished at one size is not finished at the next.
+
+    The page used to trust a finished history until someone told it to forget
+    one, and only the Viewer ever did — Diagrams on a run still going kept
+    drawing it as it once was. The reply says which run size it describes, so
+    a page that knows the run is bigger now can ask again.
+    """
+    import gol_store
+
+    with tempfile.TemporaryDirectory() as tmp:
+        original = gol_store.BASE_DIR
+        gol_store.BASE_DIR = tmp
+        try:
+            run_id, world, written = _recorded_run(10)
+            first = gol_series.build_series(run_id, heavy=False)
+            assert first["frames"] == written and first["complete"]
+
+            written = _record(run_id, world, written, 10)
+            grown = gol_series.build_series(run_id, heavy=False)
+            assert grown["frames"] == written and grown["complete"]
+            assert max(grown["series"]["iteration"]) > max(first["series"]["iteration"]), (
+                "the history of a run that grew did not grow with it")
         finally:
             gol_store.BASE_DIR = original
 

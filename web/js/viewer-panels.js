@@ -537,7 +537,7 @@ Object.assign(Viewer, {
     // loaded, cut short, or loaded without the graph statistics one of them
     // plots. Hiding it as soon as anything was loaded left a history cut short
     // with no way to finish it.
-    const ready = SeriesLoad.ready(this.runId, [s.trajX, s.trajY]);
+    const ready = SeriesLoad.ready(this.runId, [s.trajX, s.trajY], this.frameCount);
     if (button) button.style.display = ready || loading ? 'none' : '';
 
     // Summarising a run means reading every frame it recorded, which on a

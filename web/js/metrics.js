@@ -69,38 +69,6 @@ const Metrics = {
     return out;
   },
 
-  /**
-   * The statistics that walk the graph.
-   *
-   * About five sixths of what summarising a frame costs goes on these, so a
-   * run is summarised without them unless a chart on screen plots one — a
-   * history of the population should not wait minutes for bridge counts it
-   * will never draw. The list is gol_series.HEAVY_KEYS, and
-   * tests/test_stats_parity.py holds the two to each other. A name missing
-   * here would be fetched cheaply and come back null, which draws as a
-   * statistic the run never recorded rather than as an error.
-   */
-  HEAVY: new Set([
-    'cycleRank', 'loopDensity', 'bridges', 'cutRisk', 'coreShare', 'components',
-    'spectralGap', 'lightningScore', 'cyclingShare', 'lightningLongest',
-    'flowImbalance', 'netLightningScore', 'netCyclingShare', 'netLightningLongest',
-    'netFlowShare', 'triangles', 'transitivity', 'dimension', 'ricciCurvature',
-    'radius', 'diameter', 'meanPathLength', 'degreeExponent', 'degreeExponentR2',
-    'tokenExponent', 'tokenExponentR2', 'tokensVsDegree', 'tokensVsDegreeR2',
-    'trianglesVsDegree', 'trianglesVsDegreeR2', 'clusteringVsDegree',
-    'clusteringVsDegreeR2', 'changeVsTokens', 'changeVsTokensR2', 'assortativity',
-    'degreeGamma', 'degreeGammaR2', 'degreeKMin', 'degreeTailShare',
-    'degreeGammaKS', 'boxDimension', 'boxDimensionR2'
-  ]),
-
-  /** Whether charting these needs the expensive pass. Derived ones by what they are made of. */
-  needsHeavy(keys) {
-    return keys.some(key => {
-      const derived = this.DERIVED[key];
-      return derived ? derived.needs.some(name => this.HEAVY.has(name)) : this.HEAVY.has(key);
-    });
-  },
-
   // `signed` marks quantities that read as up-or-down rather than more-or-less.
   // They get a range centred on zero, so the middle of a colour map means "no
   // change" and a log scale keeps the sign instead of discarding it.

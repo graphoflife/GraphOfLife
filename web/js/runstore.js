@@ -186,7 +186,9 @@ const RunStore = {
       };
       cursor.onerror = () => reject(cursor.error);
     });
-    return Promise.all(wanted.map(unpack));
+    // With its index: the history keys rows by frame, and a frame does not
+    // carry the position it was stored at.
+    return Promise.all(wanted.map(async row => ({ index: row.index, frame: await unpack(row) })));
   },
 
   /** Whether frames can be stored compressed at all. */

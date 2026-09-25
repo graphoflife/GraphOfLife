@@ -180,6 +180,7 @@ const Diagrams = {
 
   setRuns(runs) {
     this.runs = runs;
+    for (const run of runs) SeriesLoad.noteSize(run.id, run.frame_count);
     if (this.controlsEl && this.controlsEl.childElementCount) this.controls();
   },
 
@@ -475,7 +476,7 @@ const Diagrams = {
       return span && !(this.frames && this.framesFor === span.key) ? span.key : null;
     }
     const needs = [...this.needsSeries()];
-    if (needs.every(([id, stats]) => SeriesLoad.ready(id, stats))) return null;
+    if (needs.every(([id, stats]) => SeriesLoad.ready(id, stats, this.frameCount(id)))) return null;
     return needs.map(([id, stats]) => `${id}:${[...new Set(stats)].sort().join('+')}`)
       .sort().join(' ');
   },
@@ -552,7 +553,7 @@ const Diagrams = {
     if (!wanted.size) { this.draw(); return; }
     for (const [id, stats] of wanted) {
       if (job.cancelled) return;
-      if (SeriesLoad.ready(id, stats)) continue;
+      if (SeriesLoad.ready(id, stats, this.frameCount(id))) continue;
       if (!SeriesLoad.cache.has(id)) this.say('Reading the run…');
       try {
         await SeriesLoad.climb(id, stats, {
@@ -567,6 +568,17 @@ const Diagrams = {
     }
     if (job.cancelled) return;
     this.draw();
+  },
+
+  /**
+   * How many frames a run has, as Research last listed it — which it does on
+   * every entry to the tab, so a run that has grown since is asked for again.
+   * A run missing from the list has been deleted or is too young to chart,
+   * and has nothing newer to ask for.
+   */
+  frameCount(runId) {
+    const run = this.runs.find(r => r.id === runId);
+    return run ? run.frame_count : 0;
   },
 
   /**
@@ -719,7 +731,8 @@ const Diagrams = {
         chrome: this.chromeFor(this.nameOf(s.x), this.nameOf(s.y))
       });
       this.say(`${formatNumber(points.length)} points, ${pairing}`
-        + (payload.complete ? '' : ' — still refining'));
+        + (SeriesLoad.ready(this.runId, [s.x, s.y], this.frameCount(this.runId))
+           ? '' : ' — still refining'));
       return;
     }
 

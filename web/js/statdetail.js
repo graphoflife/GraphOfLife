@@ -205,7 +205,7 @@ const StatDetail = {
    * does not cancel a load that is still filling the first.
    */
   load(runId, keys) {
-    if (SeriesLoad.ready(runId, keys)) return Promise.resolve();
+    if (SeriesLoad.ready(runId, keys, Viewer.frameCount)) return Promise.resolve();
     const drawn = () => {
       if (Viewer.runId !== runId) return;
       if (!this.el.classList.contains('hidden')) this.redraw();

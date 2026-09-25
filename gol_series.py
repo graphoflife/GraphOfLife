@@ -19,7 +19,7 @@ import json
 import math
 import os
 import threading
-from typing import Any, Callable, Dict, List, Optional, Tuple
+from typing import Any, Callable, Dict, Iterable, List, Optional, Set, Tuple
 
 import gol_store as store
 # The bridge walk lives in the engine because the engine needs it too, on the
@@ -707,6 +707,18 @@ HEAVY_KEYS = (
 )
 
 
+def needs_graph(keys: Iterable[str]) -> bool:
+    """
+    Whether charting these statistics needs the ones that walk the graph.
+
+    The page names what it plots and this decides how deep to summarise, so
+    the list of what is expensive lives here and nowhere else. The page used
+    to keep a copy of it to make the decision itself, held to this one by a
+    test.
+    """
+    return any(key in HEAVY_KEYS for key in keys)
+
+
 def _heavy_stats(frame: Dict[str, Any], ids, edges, tokens,
                  previous: Optional[Dict[str, Any]]) -> Dict[str, Any]:
     """
@@ -1189,10 +1201,12 @@ def build_series(run_id: str, points: Optional[int] = None,
 
     `heavy` is the other axis of the same idea. Five sixths of what a frame
     costs to summarise goes on statistics that walk the graph, and most charts
-    plot none of them — so a caller can ask for the cheap ones first and get a
-    complete chart of the run in a sixth of the time, then ask again for the
-    rest. A row already stored light is recomputed when the heavy pass reaches
-    it; one already heavy is never recomputed.
+    plot none of them — so a caller that plots none gets a complete chart of
+    the run in a sixth of the time. A row already stored light is recomputed
+    when a heavy request reaches it; one already heavy is never recomputed.
+
+    Whatever was asked, the reply is everything known of the run — see
+    History.reply.
     """
     with _build_lock(run_id):
         try:
@@ -1228,62 +1242,174 @@ def _series_keys(rows: List[Dict[str, Any]]) -> List[str]:
     return keys
 
 
+class History:
+    """
+    What is known of one run's history, and the rules for adding to it.
+
+    Two places keep one. The server keeps it in series.json, next to the run;
+    the browser, which has no server, keeps it in the worker's memory. Both go
+    through this class, so what counts as done, what a request still has to
+    summarise and what a reply holds are decided once. They used to be decided
+    three times over: the page merged replies back together because each held
+    only the samples asked for, and the worker kept nothing and summarised
+    every sample again at every step.
+
+    Rows are keyed by frame. `plan` fits them to the run as it is now and says
+    which frames a request still needs; `summarise` adds rows; `reply` hands
+    back everything known, however it came to be known.
+    """
+
+    def __init__(self, rows: Iterable[Dict[str, Any]] = (), stride: int = 1) -> None:
+        self._rows: Dict[int, Dict[str, Any]] = {int(r["_frame"]): r for r in rows}
+        self.stride = max(1, int(stride or 1))
+        self.frames = 0
+        self.grid: List[int] = []
+        self.whole = False
+        self.changed = False
+
+    @property
+    def rows(self) -> List[Dict[str, Any]]:
+        """Every row, in frame order, which is the shape series.json stores."""
+        return [self._rows[f] for f in sorted(self._rows)]
+
+    def plan(self, total_frames: int, points: Optional[int], heavy: bool) -> List[int]:
+        """
+        Fit the history to the run as it is now, and list the frames this
+        request still has to summarise.
+
+        `points` asks for the first `points` samples in bisection order, spread
+        across the whole run; None means all of them. A row summarised without
+        the graph statistics counts as present for a cheap request and absent
+        for a heavy one, which is what lets the two share one history.
+        """
+        # Frames come in pairs, one per phase, so an iteration is two of them.
+        total_iterations = max(0, total_frames // 2)
+        stride = _sample_stride(total_iterations)
+        before = len(self._rows)
+
+        # A resumed run can be shorter than what we last saw.
+        self._rows = {f: r for f, r in self._rows.items() if f < total_frames}
+        # The run has grown past the cap since last time: thin what we have
+        # rather than starting over.
+        if self.stride < stride:
+            self._rows = {f: r for f, r in self._rows.items() if (f // 2) % stride == 0}
+        self.changed = self.changed or len(self._rows) != before or stride != self.stride
+        self.stride, self.frames = stride, total_frames
+
+        # The evenly spaced iterations the run is summarised at, and which of
+        # them this request wants. A prefix of the bisection order is a chart
+        # of the whole run at lower resolution rather than of its first part,
+        # which is what makes a partial answer worth drawing.
+        self.grid = list(range(0, total_iterations, stride))
+        order = bisection_order(len(self.grid))
+        if points is not None:
+            order = order[:max(MIN_SAMPLED_POINTS, int(points))]
+        self.whole = len(order) >= len(self.grid)
+        done = self._done(heavy)
+
+        # Both phases of an iteration are kept, so the phase filter still has
+        # game frames to show; sampling only the even indices would drop them.
+        wanted = [f for it in sorted(self.grid[i] for i in order) if it not in done
+                  for f in (2 * it, 2 * it + 1)]
+        return [f for f in wanted if f < total_frames]
+
+    def summarise(self, frames: Iterable[Tuple[int, Dict[str, Any]]], heavy: bool,
+                  can_reconstruct: bool,
+                  each: Optional[Callable[[int, Dict[str, Any], Dict[str, Any]], None]] = None
+                  ) -> None:
+        """
+        Summarise `(index, frame)` pairs, in frame order, into the history.
+
+        Frames written before deltas were tracked need their predecessor to
+        reconstruct the change. That is only sound for genuinely consecutive
+        frames, which within a sampled iteration means its second phase with
+        the first just before it. `each` sees every row before it is kept:
+        where the server counts progress and the families only a whole run can
+        give.
+        """
+        previous: Optional[Tuple[int, Dict[str, Any]]] = None
+        for index, frame in frames:
+            consecutive = previous is not None and previous[0] == index - 1
+            prior = previous[1] if (can_reconstruct and index % 2 == 1 and consecutive) else None
+            row = frame_stats(frame, prior, heavy)
+            row["_frame"] = index
+            row["_heavy"] = heavy
+            if each is not None:
+                each(index, frame, row)
+            self.add(row)
+            previous = (index, frame)
+
+    def add(self, row: Dict[str, Any]) -> None:
+        """
+        Keep a newly summarised row in place of any older one for its frame.
+
+        Never a downgrade: a cheap row arriving for a frame whose graph
+        statistics were already found keeps them. That rule used to live in
+        the page, which merged replies itself.
+        """
+        old = self._rows.get(row["_frame"])
+        if old is not None and old.get("_heavy") and not row.get("_heavy"):
+            row = {**row, **{k: v for k, v in old.items() if v is not None}}
+        self._rows[row["_frame"]] = row
+        self.changed = True
+
+    def reply(self, heavy: bool, **meta: Any) -> Dict[str, Any]:
+        """
+        Everything known, whatever a request happened to ask for.
+
+        Only the samples asked for used to go back, so a page that had drawn
+        the whole run cheaply and then asked for a graph statistic received two
+        points and had to merge them into what it held. Handing back everything
+        makes each reply the whole picture, and the page keeps the latest and
+        nothing else. On a run already summarised, the first request of a climb
+        is also its last.
+        """
+        rows = self.rows
+        keys = _series_keys(rows)
+        return {
+            "count": len(rows),
+            "keys": keys,
+            "series": {k: [row.get(k) for row in rows] for k in keys},
+            "stride": self.stride,
+            "sampled": self.stride > 1,
+            # The run as this history saw it, so a caller can tell a history of
+            # a run that has since grown from one that is up to date.
+            "frames": self.frames,
+            "totalIterations": self.frames // 2,
+            "totalPoints": len(self.grid),
+            # Samples finished at the depth this request needed: what a caller
+            # climbing toward the whole run counts up to, and stops at.
+            "done": len(self._done(heavy)),
+            "complete": len(self._done(False)) == len(self.grid),
+            "heavy": len(self._done(True)) == len(self.grid),
+            # Sent as data, so the page can tell whether a history answers a
+            # chart without keeping its own copy of the list.
+            "heavyKeys": list(HEAVY_KEYS),
+            "nodeCountKeys": list(NODE_COUNT_KEYS),
+            **meta,
+        }
+
+    def _done(self, heavy: bool) -> Set[int]:
+        """
+        The iterations on the grid that are finished at this depth.
+
+        An iteration is done only when every frame of it is. A build that
+        stopped between an iteration's two phases — the browser hung up, or a
+        frame would not read — kept the first and not the second, and counting
+        that iteration as done left its second phase missing for good.
+        """
+        present = {f for f, r in self._rows.items() if r.get("_heavy") or not heavy}
+        return {it for it in self.grid
+                if all(f in present for f in (2 * it, 2 * it + 1) if f < self.frames)}
+
+
 def _build_series_locked(run_id: str, points: Optional[int] = None,
                          heavy: bool = True,
                          cancelled: Optional[Callable[[], bool]] = None) -> Dict[str, Any]:
-    total_frames = store.count_frames(run_id)
-    # Frames come in pairs, one per phase, so an iteration is two of them.
-    total_iterations = max(0, total_frames // 2)
-    stride = _sample_stride(total_iterations)
-
     cache = _load_cache(run_id)
-    rows: List[Dict[str, Any]] = cache.get("rows", [])
-    cached_stride = int(cache.get("stride", 1) or 1)
+    history = History(cache.get("rows", []), cache.get("stride", 1))
+    wanted = history.plan(store.count_frames(run_id), points, heavy)
 
-    # A resumed run can be shorter than what we last saw.
-    rows = [r for r in rows if r.get("_frame", 0) < total_frames]
-
-    # The run has grown past the limit since last time: thin what we have
-    # rather than starting over.
-    if cached_stride < stride:
-        rows = [r for r in rows if (r["_frame"] // 2) % stride == 0]
-
-    # A row summarised without the graph statistics counts as present for a
-    # light request and absent for a heavy one, which is what lets the cheap
-    # pass and the expensive pass share one cache.
-    #
-    # And an iteration is done only when every frame of it is. A build that
-    # stopped between an iteration's two phases — the browser hung up, or a
-    # frame would not read — kept the first and not the second, and counting
-    # that iteration as done left its second phase missing for good.
-    present = {r["_frame"] for r in rows if r.get("_heavy") or not heavy}
-    done_iterations = {it for it in {f // 2 for f in present}
-                       if all(f in present for f in (2 * it, 2 * it + 1) if f < total_frames)}
-    have = {r["_frame"]: r for r in rows}
-
-    # The evenly spaced iterations this run is summarised at, and which of them
-    # this particular request wants. Asking for a prefix of the bisection order
-    # gives a chart of the whole run at lower resolution rather than a chart of
-    # the first part of it, which is what makes a partial answer worth drawing.
-    grid = list(range(0, total_iterations, stride))
-    order = bisection_order(len(grid))
-    if points is not None:
-        order = order[:max(MIN_SAMPLED_POINTS, int(points))]
-    asked = sorted(grid[i] for i in order)
-    complete = len(order) >= len(grid)
-
-    # Both phases of an iteration are kept, so the phase filter still has game
-    # frames to show; sampling only the even indices would drop them entirely.
-    wanted: List[int] = []
-    for it in asked:
-        if it in done_iterations:
-            continue
-        wanted.extend([2 * it, 2 * it + 1])
-    wanted = [i for i in wanted if i < total_frames]
-
-    # Frames written before deltas were tracked need their predecessor to
-    # reconstruct the change. That is only sound for genuinely consecutive
-    # frames, which within a sampled iteration means its second phase.
     every = 1
     try:
         every = max(1, int(store.load_meta(run_id).get("config", {}).get("export_every", 1)))
@@ -1291,19 +1417,16 @@ def _build_series_locked(run_id: str, points: Optional[int] = None,
         pass
     can_reconstruct = (every == 1)
 
-    changed = bool(wanted) or cached_stride != stride or len(rows) != len(cache.get("rows", []))
     if wanted:
         _set_progress(run_id, 0, len(wanted), building=True)
 
     # How many families the living divide into needs ancestry, and ancestry is
     # a chain: it cannot be read off one frame and it cannot be sampled. So it
     # is computed here rather than in frame_stats, and only where the chain is
-    # whole — every iteration recorded, and none of them thinned away.
-    # Ancestry is a chain, so it needs every iteration in order — which a
-    # partial request does not have. It is therefore only rebuilt on a request
-    # for the whole grid, and a coarse request simply leaves the key off rather
-    # than filling it from a broken chain.
-    families = _CladeWindow() if (can_reconstruct and stride == 1 and complete) else None
+    # whole — every iteration recorded, none of them thinned away, and a
+    # request for the whole grid. A coarse request simply leaves the key off
+    # rather than filling it from a broken chain.
+    families = _CladeWindow() if (can_reconstruct and history.stride == 1 and history.whole) else None
     if families is not None and wanted:
         # Resuming mid-run leaves the window empty, so the frames just before
         # the first new one are read to fill it. Their statistics are already
@@ -1316,93 +1439,46 @@ def _build_series_locked(run_id: str, points: Optional[int] = None,
             families.observe(int(warm.get("iteration", index // 2)),
                              warm.get("brain_ids", []), warm.get("parent_brain_ids", []))
 
-    previous = None
-    for step, index in enumerate(wanted):
-        # A build nobody is waiting for any more stops here — and *breaks*
-        # rather than returning, so the rows already computed fall through to
-        # the save below. A summary is incremental: the next request builds on
-        # whatever this one finished, so stopping loses nothing but the frame
-        # in hand. Stopping by raising would throw the finished ones away too,
-        # and navigating back and forth would then never get anywhere.
-        # Asked before every frame: the question is a peek at a socket, and a
-        # frame of a large run costs seconds once the graph statistics are on.
-        if cancelled is not None and cancelled():
-            break
-        try:
-            frame = store.read_frame(run_id, index)
-        except (OSError, json.JSONDecodeError, KeyError):
-            break
+    def frames():
+        for index in wanted:
+            # A build nobody is waiting for any more stops here, and the rows
+            # already computed are still saved below. A summary is incremental:
+            # the next request builds on whatever this one finished, so
+            # stopping loses nothing but the frame in hand. Asked before every
+            # frame: the question is a peek at a socket, and a frame of a large
+            # run costs seconds once the graph statistics are on.
+            if cancelled is not None and cancelled():
+                return
+            try:
+                frame = store.read_frame(run_id, index)
+            except (OSError, json.JSONDecodeError, KeyError):
+                return
+            yield index, frame
 
-        prior = previous if (can_reconstruct and index % 2 == 1) else None
-        row = frame_stats(frame, prior, heavy)
-        row["_frame"] = index
-        row["_heavy"] = heavy
+    summarised = 0
+
+    def each(index: int, frame: Dict[str, Any], row: Dict[str, Any]) -> None:
+        nonlocal summarised
         if families is not None:
             iteration = int(frame.get("iteration", index // 2))
             families.observe(iteration, frame.get("brain_ids", []),
                              frame.get("parent_brain_ids", []))
             row["cladesInWindow"] = families.families(frame.get("brain_ids", []), iteration)
-        # Upgrading a light row rather than adding a second one for the same
-        # frame, which would leave the series with duplicate points.
-        if index in have:
-            rows[rows.index(have[index])] = row
-        else:
-            rows.append(row)
-        have[index] = row
-        previous = frame
-
         # Every frame. Throttling this to every tenth was sized for the cheap
         # statistics; with the graph statistics a frame of a large run takes
         # two seconds, and a step of sixteen frames then reported twice.
-        _set_progress(run_id, step + 1, len(wanted), building=True)
+        summarised += 1
+        _set_progress(run_id, summarised, len(wanted), building=True)
 
-    rows.sort(key=lambda r: r["_frame"])
+    history.summarise(frames(), heavy, can_reconstruct, each)
 
-    # Everything computed so far is kept — a later, finer request builds on it.
-    # Only what was asked for is returned, so a coarse request draws a coarse
-    # chart rather than an accidentally detailed one.
-    if changed:
-        # The strain travels with the summary as well as with the run, because
-        # a series.json is the file most likely to be read on its own — it is
-        # the one an analysis loads, and a chart made from it should not have
-        # to go back to the run directory to find out which algorithm it is of.
-        _save_cache(run_id, {"version": SERIES_VERSION, "stride": stride,
-                             "strain": store.load_meta(run_id).get("strain"),
-                             "rows": rows})
-
-    # The strain travels in the reply too, and not only in the cache file. The
-    # whole reason for stamping it on the summary is that a chart should be
-    # able to say which algorithm it is of; leaving it out of the response
-    # meant the file knew and the page did not, which is the half that matters.
+    # The strain travels with the summary as well as with the run, because a
+    # series.json is the file most likely to be read on its own — it is the one
+    # an analysis loads, and a chart made from it should not have to go back to
+    # the run directory to find out which algorithm it is of. And it travels in
+    # the reply, because the page is the half that has to say so.
     strain = store.load_meta(run_id).get("strain")
-
-    wanted_iterations = set(asked)
-    shown = [r for r in rows if (r["_frame"] // 2) in wanted_iterations]
-
-    if not shown:
-        return {"count": 0, "keys": [], "series": {}, "stride": stride,
-                "sampled": False, "strain": strain, "complete": True,
-                "points": 0, "totalPoints": len(grid),
-                "nodeCountKeys": list(NODE_COUNT_KEYS)}
-
-    keys = _series_keys(shown)
-    series = {k: [row.get(k) for row in shown] for k in keys}
-
-    return {
-        "count": len(shown),
-        "keys": keys,
-        "series": series,
-        "stride": stride,
-        "sampled": stride > 1,
-        "strain": strain,
-        # How much of the run's grid this answer covers, so a caller climbing
-        # toward the full picture knows when to stop asking.
-        "points": len(asked),
-        "totalPoints": len(grid),
-        "complete": complete,
-        # Whether these rows carry the statistics that walk the graph. A caller
-        # climbing light-then-heavy watches this rather than guessing.
-        "heavy": all(r.get("_heavy") for r in shown),
-        "totalIterations": total_iterations,
-        "nodeCountKeys": list(NODE_COUNT_KEYS),
-    }
+    if history.changed:
+        _save_cache(run_id, {"version": SERIES_VERSION, "stride": history.stride,
+                             "strain": strain, "rows": history.rows})
+    return history.reply(heavy, strain=strain)

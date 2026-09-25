@@ -17,7 +17,7 @@ that are currently in memory, and nothing about runs that merely exist.
 from __future__ import annotations
 
 import io
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
 import numpy as np
 
@@ -32,6 +32,10 @@ class Worlds:
 
     def __init__(self) -> None:
         self._worlds: Dict[str, Dict[str, Any]] = {}
+        # Each run's history, for as long as the page is open. The server keeps
+        # its in series.json; here there is no disk, and keeping nothing meant
+        # summarising every sample again at every step of a climb.
+        self._histories: Dict[str, gol_series.History] = {}
 
     # ---- settings --------------------------------------------------------
 
@@ -109,42 +113,33 @@ class Worlds:
 
     # ---- statistics ------------------------------------------------------
 
-    def stats(self, frames: List[Dict[str, Any]],
-              heavy: bool = True) -> List[Dict[str, Any]]:
+    def series_plan(self, run_id: str, total_frames: int, points: Optional[int],
+                    keys: Optional[List[str]]) -> Dict[str, Any]:
         """
-        Reduce frames to the scalars the charts plot.
+        Which iterations a history request still needs, and how deep.
 
-        The very same gol_series the server uses. Frames arrive from storage in
-        order, so each one can still be handed its predecessor for the runs
-        that need a delta reconstructed.
+        The same gol_series.History the server keeps, so the two backends agree
+        on what is done and what a reply holds. The frames themselves live in
+        IndexedDB, out of reach from here, so the worker reads the ones this
+        names and hands them to series_absorb.
         """
-        rows: List[Dict[str, Any]] = []
-        previous = None
-        for frame in frames:
-            rows.append(gol_series.frame_stats(frame, previous, heavy))
-            previous = frame
-        return rows
+        history = self._histories.setdefault(run_id, gol_series.History())
+        heavy = gol_series.needs_graph(keys) if keys is not None else True
+        wanted = history.plan(int(total_frames), points, heavy)
+        return {"iterations": sorted({f // 2 for f in wanted}),
+                "stride": history.stride, "heavy": heavy}
 
-    def sample_stride(self, total_iterations: int) -> int:
-        return gol_series._sample_stride(total_iterations)
+    def series_absorb(self, run_id: str, frames: List[Dict[str, Any]], heavy: bool,
+                      export_every: int = 1, strain: Optional[str] = None) -> Dict[str, Any]:
+        """Summarise the frames series_plan asked for, and hand back everything known."""
+        history = self._histories[run_id]
+        indexed = sorted(((int(f["index"]), f["frame"]) for f in frames), key=lambda p: p[0])
+        history.summarise(indexed, heavy, can_reconstruct=int(export_every or 1) == 1)
+        return history.reply(heavy, strain=strain)
 
     def lineage(self, frames: List[Dict[str, Any]], limit: int) -> Dict[str, Any]:
         """The genotype forest of a window, same code the server runs."""
         return gol_lineage.forest(frames, limit)
-
-    def bisection_order(self, count: int) -> List[int]:
-        """
-        Which samples to take first, so a partial chart still spans the run.
-
-        Borrowed from gol_series rather than reimplemented in the worker: the
-        two backends should choose the same points in the same order, or the
-        same run summarised on a server and in a browser would refine along
-        two different paths.
-        """
-        return list(gol_series.bisection_order(count))
-
-    def node_count_keys(self) -> List[str]:
-        return list(gol_series.NODE_COUNT_KEYS)
 
     # ---- helpers ---------------------------------------------------------
 
