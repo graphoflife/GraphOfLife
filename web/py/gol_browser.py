@@ -131,12 +131,12 @@ class Worlds:
         wanted = history.plan(int(total_frames), points, heavy)
         return {"iterations": sorted({f // 2 for f in wanted}), "heavy": heavy}
 
-    def series_absorb(self, run_id: str, frames: List[Dict[str, Any]], heavy: bool,
-                      export_every: int = 1) -> Dict[str, Any]:
+    def series_absorb(self, run_id: str, frames: List[Dict[str, Any]],
+                      heavy: bool) -> Dict[str, Any]:
         """Summarise the frames series_plan asked for, and hand back everything known."""
         history = self._histories[run_id]
         indexed = sorted(((int(f["index"]), f["frame"]) for f in frames), key=lambda p: p[0])
-        history.summarise(indexed, heavy, can_reconstruct=int(export_every or 1) == 1)
+        history.summarise(indexed, heavy)
         return history.reply(heavy)
 
     def lineage(self, frames: List[Dict[str, Any]], phase: str = "all") -> Dict[str, Any]:

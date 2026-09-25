@@ -478,8 +478,11 @@ const Viewer = {
     // would paint the new frame's edges against the previous frame's
     // positions — every edge joining whichever nodes happened to occupy those
     // slots, which is the burst of clutter that lasted a frame.
-    await this.ensureDelta(frame, index);
-    if (this.needsPreviousFrame()) await this.ensurePrevious(frame, index);
+    //
+    // The frame before is wanted when something on screen is measured against
+    // the state the phase began in, and when this frame is too old to carry
+    // its own token change, which is then worked out from it.
+    if (!frame.delta || this.needsPreviousFrame()) await this.ensurePrevious(frame, index);
     if (this.position !== target) return;
 
     // From here to setFrame there is no await, so what the page draws and what
@@ -511,37 +514,6 @@ const Viewer = {
     this.updateCharts();
     this.updateFocusUi();
     if (!StatDetail.el.classList.contains('hidden')) StatDetail.redraw();
-  },
-
-  /**
-   * Fill in per-node token change for frames recorded before the engine
-   * tracked it.
-   *
-   * A node's balance when a phase began is simply its balance at the end of
-   * the previous phase, which is the previous frame — so the same number the
-   * engine writes can be recovered without re-running anything. A node absent
-   * from the previous frame did not exist yet, and counts its whole balance as
-   * gained, matching how the engine treats a newborn.
-   *
-   * Only valid when every phase was recorded: with `export_every` above one,
-   * consecutive frames are further apart than a single phase and the
-   * difference would span more than the phase being shown.
-   */
-  async ensureDelta(frame, index) {
-    if (frame.delta || index <= 0) return;
-    if (this.meta && this.meta.config && (this.meta.config.export_every || 1) !== 1) return;
-
-    let previous;
-    try {
-      previous = await this.fetchFrame(index - 1);
-    } catch (err) {
-      return;   // no earlier frame to compare against; leave it unrecorded
-    }
-
-    const before = new Map();
-    previous.ids.forEach((id, i) => before.set(id, previous.tokens[i]));
-
-    frame.delta = frame.ids.map((id, i) => frame.tokens[i] - (before.get(id) ?? 0));
   },
 
   rebuildMetrics() {
@@ -578,29 +550,27 @@ const Viewer = {
   },
 
   /**
-   * Attach the frame this one followed, which is the state the phase started
-   * from.
+   * Attach the frame recorded before this one. FrameMetrics compares against
+   * it when it is the state this phase started from, and says when it is not
+   * (FrameMetrics.startOf): on a run recording every Nth iteration, the frame
+   * before a reproduction frame is N iterations back.
    *
-   * Set to null rather than left undefined when there is nothing usable, so
-   * the lookup is not retried on every rebuild. With export_every above one
-   * the previous recorded frame is several iterations back rather than the
-   * state this phase began in, and comparing against it would be wrong rather
-   * than merely approximate, so that case is refused outright.
+   * Set to null rather than left undefined when there is nothing, so the
+   * lookup is not retried on every rebuild.
    */
   async ensurePrevious(frame, index) {
     if (!frame || frame.previous !== undefined) return;
     if (index <= 0) { frame.previous = null; return; }
-    if (this.meta && this.meta.config && (this.meta.config.export_every || 1) !== 1) {
-      frame.previous = null;
-      return;
-    }
     try {
-      // Only what the before-phase metrics read. The whole cached frame came
-      // with its own `previous`, so stepping forward chained every visited
-      // frame to the one before it, and the cache's limit stopped freeing any
-      // of them — forty megabytes a frame on a seventy-thousand-node world.
+      // Only what the comparison reads. The whole cached frame came with its
+      // own `previous`, so stepping forward chained every visited frame to the
+      // one before it, and the cache's limit stopped freeing any of them —
+      // forty megabytes a frame on a seventy-thousand-node world.
       const before = await this.fetchFrame(index - 1);
-      frame.previous = before ? { ids: before.ids, tokens: before.tokens, edges: before.edges } : null;
+      frame.previous = before ? {
+        iteration: before.iteration, phase: before.phase,
+        ids: before.ids, tokens: before.tokens, edges: before.edges
+      } : null;
     } catch (err) {
       frame.previous = null;
     }

@@ -868,6 +868,38 @@ def test_the_worker_answers_in_json_with_what_is_not_a_number_as_null():
     assert browser.answer(lambda a, b: {"sum": a + b}, "[2, 3]") == '{"sum":5}'
 
 
+def test_a_frame_is_compared_only_with_the_phase_it_started_from():
+    """
+    A frame recorded before deltas were tracked has its change worked out
+    from the frame before, as long as that frame is the state its phase began
+    in: (it, 1) before (it, 2), and (it - 1, 2) before (it, 1). On a run that
+    records every Nth iteration the frame before a reproduction frame is N
+    iterations back. Every caller used to settle this from the run's
+    configuration and the frame indices, and the page's Diagrams never did.
+    """
+    import gol_series
+
+    world = new_world(small(seed=12))
+    frames = []
+    for _ in range(4):
+        frames.extend(world.step(record_decisions=False))
+    older = [{k: v for k, v in f.items() if k != "delta"} for f in frames]
+
+    game, its_start = older[5], older[4]          # (2, 2) and (2, 1)
+    reproduction, last_game = older[4], older[3]  # (2, 1) and (1, 2)
+    for frame, start in ((game, its_start), (reproduction, last_game)):
+        assert gol_series.starts(start, frame)
+        worked_out = gol_series.frame_stats(frame, start, heavy=False)
+        recorded = gol_series.frame_stats(frames[older.index(frame)], None, heavy=False)
+        for key in ("gainers", "losers", "maxTokenAdded", "maxTokenLost"):
+            assert worked_out[key] == recorded[key] is not None, (frame["phase"], key)
+
+    # Two iterations back is not where anything started.
+    assert not gol_series.starts(older[1], game)
+    assert gol_series.frame_stats(game, older[1], heavy=False)["gainers"] is None
+    assert gol_series.frame_stats(reproduction, older[1], heavy=False)["gainers"] is None
+
+
 def test_the_browser_and_the_server_summarise_a_run_alike():
     """
     Two backends, one history.

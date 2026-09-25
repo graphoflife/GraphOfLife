@@ -655,16 +655,38 @@ def _median(values: List[float]) -> float:
     return float(ordered[mid]) if len(ordered) % 2 else (ordered[mid - 1] + ordered[mid]) / 2
 
 
+def starts(previous: Dict[str, Any] | None, frame: Dict[str, Any]) -> bool:
+    """
+    Whether `previous` is the state `frame`'s phase started from.
+
+    That is the phase just before it: the frame before (it, 2) is (it, 1), and
+    the one before (it, 1) is (it - 1, 2). Every frame says which it is, so the
+    frames themselves answer this. It used to be settled from the run's
+    configuration and the frame indices, separately by each caller, and a
+    caller that forgot compared a frame on a run recording every Nth
+    iteration with one N iterations back.
+    """
+    if previous is None or frame.get("iteration") is None:
+        return False
+    iteration, phase = frame["iteration"], frame.get("phase")
+    if phase == 2:
+        return previous.get("iteration") == iteration and previous.get("phase") == 1
+    if phase == 1:
+        return previous.get("iteration") == iteration - 1 and previous.get("phase") == 2
+    return False
+
+
 def _reconstruct_delta(frame: Dict[str, Any], previous: Dict[str, Any] | None) -> List[int] | None:
     """
     Per-node token change for frames recorded before the engine tracked it.
 
     A node's balance entering a phase is its balance at the end of the previous
     one, so the previous frame supplies exactly what the engine would have
-    stored. A node missing from it did not exist yet and counts its whole
-    balance as gained, matching how a newborn is treated.
+    stored, as long as it is that phase (see `starts`). A node missing from it
+    did not exist yet and counts its whole balance as gained, matching how a
+    newborn is treated.
     """
-    if previous is None:
+    if not starts(previous, frame):
         return None
     before = dict(zip(previous.get("ids", []), previous.get("tokens", [])))
     return [t - before.get(i, 0) for i, t in zip(frame.get("ids", []), frame.get("tokens", []))]
@@ -707,7 +729,7 @@ def needs_graph(keys: Iterable[str]) -> bool:
 
 
 def _heavy_stats(frame: Dict[str, Any], ids, edges, tokens,
-                 previous: Optional[Dict[str, Any]]) -> Dict[str, Any]:
+                 delta: Optional[List[int]]) -> Dict[str, Any]:
     """
     The statistics that cost something: everything that walks the graph.
 
@@ -750,7 +772,7 @@ def _heavy_stats(frame: Dict[str, Any], ids, edges, tokens,
         clustering_degrees.append(k)
         clustering_values.append((2 * per_node_triangles.get(i, 0)) / (k * (k - 1)))
 
-    delta_list = _reconstruct_delta(frame, previous) or frame.get("delta") or []
+    delta_list = delta or []
     change_tokens, change_sizes = [], []
     for idx in range(min(len(tokens), len(delta_list))):
         change_tokens.append(tokens[idx])
@@ -897,9 +919,10 @@ def frame_stats(frame: Dict[str, Any], previous: Dict[str, Any] | None = None,
         if any("revolt" in r for r in allocations):
             revolt_share = (revolted / allocated) if allocated else 0.0
 
-    # Per-node token change across the phase. Absent on runs recorded before
-    # deltas were tracked, in which case the metrics stay None rather than
-    # claiming everyone broke even.
+    # Per-node token change across the phase, worked out once for everything
+    # below. Absent on runs recorded before deltas were tracked unless the
+    # frame the phase started from is on hand, in which case the metrics stay
+    # None rather than claiming everyone broke even.
     delta = frame.get("delta") or _reconstruct_delta(frame, previous)
     max_added = max_lost = gainers = losers = None
     if delta:
@@ -912,7 +935,7 @@ def frame_stats(frame: Dict[str, Any], previous: Dict[str, Any] | None = None,
     # It used to be asked three times in this function with a merge order
     # between the answers, which is how the structural values came to be
     # overwritten with None on a pass that had just computed them.
-    heavy_values = (_heavy_stats(frame, ids, edges, tokens, previous) if heavy
+    heavy_values = (_heavy_stats(frame, ids, edges, tokens, delta) if heavy
                     else dict.fromkeys(HEAVY_KEYS))
 
     degree_hist: Dict[int, int] = {}
@@ -1291,30 +1314,26 @@ class History:
         return [f for f in wanted if f < total_frames]
 
     def summarise(self, frames: Iterable[Tuple[int, Dict[str, Any]]], heavy: bool,
-                  can_reconstruct: bool,
                   each: Optional[Callable[[int, Dict[str, Any], Dict[str, Any]], None]] = None
                   ) -> None:
         """
         Summarise `(index, frame)` pairs, in frame order, into the history.
 
-        Frames written before deltas were tracked need their predecessor to
-        reconstruct the change. That is only sound for genuinely consecutive
-        frames, which within a sampled iteration means its second phase with
-        the first just before it. `each` sees every row before it is kept:
-        where the server counts progress and the families only a whole run can
-        give.
+        Each frame is handed the one read before it, which a frame written
+        before deltas were tracked needs to have its change worked out; whether
+        that one is the phase it started from is decided where it is used.
+        `each` sees every row before it is kept: where the server counts
+        progress and the families only a whole run can give.
         """
-        previous: Optional[Tuple[int, Dict[str, Any]]] = None
+        previous: Optional[Dict[str, Any]] = None
         for index, frame in frames:
-            consecutive = previous is not None and previous[0] == index - 1
-            prior = previous[1] if (can_reconstruct and index % 2 == 1 and consecutive) else None
-            row = frame_stats(frame, prior, heavy)
+            row = frame_stats(frame, previous, heavy)
             row["_frame"] = index
             row["_heavy"] = heavy
             if each is not None:
                 each(index, frame, row)
             self.add(row)
-            previous = (index, frame)
+            previous = frame
 
     def add(self, row: Dict[str, Any]) -> None:
         """
@@ -1389,7 +1408,6 @@ def _build_series_locked(run_id: str, points: Optional[int] = None,
         every = max(1, int(store.load_meta(run_id).get("config", {}).get("export_every", 1)))
     except (OSError, ValueError, json.JSONDecodeError):
         pass
-    can_reconstruct = (every == 1)
 
     if wanted:
         _set_progress(run_id, 0, len(wanted), building=True)
@@ -1400,7 +1418,7 @@ def _build_series_locked(run_id: str, points: Optional[int] = None,
     # whole — every iteration recorded, none of them thinned away, and a
     # request for the whole grid. A coarse request simply leaves the key off
     # rather than filling it from a broken chain.
-    families = _CladeWindow() if (can_reconstruct and history.stride == 1 and history.whole) else None
+    families = _CladeWindow() if (every == 1 and history.stride == 1 and history.whole) else None
     if families is not None and wanted:
         # Resuming mid-run leaves the window empty, so the frames just before
         # the first new one are read to fill it. Their statistics are already
@@ -1444,7 +1462,7 @@ def _build_series_locked(run_id: str, points: Optional[int] = None,
         summarised += 1
         _set_progress(run_id, summarised, len(wanted), building=True)
 
-    history.summarise(frames(), heavy, can_reconstruct, each)
+    history.summarise(frames(), heavy, each)
 
     # The strain travels with the summary as well as with the run, because a
     # series.json is the file most likely to be read on its own — it is the one

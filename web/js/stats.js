@@ -21,10 +21,13 @@ class FrameMetrics {
     frame.ids.forEach((id, i) => this.index.set(id, i));
 
     this.degree = this._degrees();
-    // Runs recorded before deltas existed simply have none; treat that as no
-    // change rather than letting undefined leak into the colour maths.
-    this.delta = frame.delta || new Array(frame.ids.length).fill(0);
-    this.hasDelta = Boolean(frame.delta);
+    // Runs recorded before deltas existed have none. The change is worked out
+    // from the frame the phase started from when that is on hand, as the
+    // history does; otherwise it reads as no change rather than letting
+    // undefined leak into the colour maths.
+    const delta = frame.delta || FrameMetrics._changeSince(frame, FrameMetrics.startOf(frame));
+    this.delta = delta || new Array(frame.ids.length).fill(0);
+    this.hasDelta = Boolean(delta);
     this.totalTokens = frame.tokens.reduce((a, b) => a + b, 0);
     this.curvature = this._curvature();
     if (settings) this.restyle();
@@ -58,6 +61,37 @@ class FrameMetrics {
       ? [Metrics.format('node', settings.nodeColorBy, this.colorRange[0], settings.nodeColorLog),
          Metrics.format('node', settings.nodeColorBy, this.colorRange[1], settings.nodeColorLog)]
       : ['not recorded', ''];
+  }
+
+  /**
+   * The frame this one's phase started from, when `frame.previous` is it, or
+   * null. That is the phase just before: (it, 1) for (it, 2), and (it − 1, 2)
+   * for (it, 1). gol_series.starts is the same test.
+   *
+   * A frame is handed the one read before it, and on a run recording every
+   * Nth iteration the frame before a reproduction frame is N iterations back:
+   * comparing with it would be wrong rather than merely approximate. Each
+   * reader used to settle that for itself from the run's configuration, and
+   * Diagrams never did.
+   */
+  static startOf(frame) {
+    const p = frame.previous;
+    if (!p || frame.iteration == null) return null;
+    if (frame.phase === 2) return p.iteration === frame.iteration && p.phase === 1 ? p : null;
+    if (frame.phase === 1) return p.iteration === frame.iteration - 1 && p.phase === 2 ? p : null;
+    return null;
+  }
+
+  /**
+   * Each node's change over the phase, from the balances it started with. A
+   * node the start does not know was born during it, and counts its whole
+   * balance as gained, as the engine counts a newborn's.
+   */
+  static _changeSince(frame, start) {
+    if (!start) return null;
+    const before = new Map();
+    start.ids.forEach((id, i) => before.set(id, start.tokens[i]));
+    return frame.ids.map((id, i) => frame.tokens[i] - (before.get(id) ?? 0));
   }
 
   /** Whether a node metric has any value at all in this frame. */
@@ -237,7 +271,7 @@ class FrameMetrics {
     const f = this.frame;
     const n = f.ids.length;
     const out = new Float64Array(n);
-    const previous = f.previous;
+    const previous = FrameMetrics.startOf(f);
 
     if (!previous) {
       out.fill(NaN);

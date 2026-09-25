@@ -374,6 +374,40 @@ function test_a_frame_without_decisions_has_no_flow_rather_than_zero_flow() {
   }
 }
 
+function test_a_frame_is_compared_only_with_the_phase_it_started_from() {
+  // The frame before a game frame is the reproduction frame of the same
+  // iteration, and the one before a reproduction frame is the last game
+  // frame. On a run recording every Nth iteration that one is N iterations
+  // back, and comparing with it is wrong. The rule lived in the Viewer, from
+  // the run's configuration, and Diagrams compared with it regardless.
+  const start = {
+    iteration: 7, phase: 1, ids: [1, 2, 3, 4], tokens: [9, 22, 27, 44],
+    edges: [[1, 2], [2, 3], [3, 4]]
+  };
+  const older = frame({ delta: undefined, previous: start });   // (7, 2)
+  const m = metricsOf(older);
+  if (!m.hasDelta) throw new Error('a frame with no stored change did not work it out from its start');
+  // 10-9, 20-22, 30-27, 40-44, and agent 5 was born in the phase: all 50 gained.
+  const change = Array.from(m.delta).join();
+  if (change !== '1,-2,3,-4,50') throw new Error(`the change came out as ${change}`);
+  if (Number.isNaN(m.curvatureBefore[0])) {
+    throw new Error('the curvature before the phase was not read off its start');
+  }
+
+  const farBack = { ...start, iteration: 5, phase: 2 };
+  const skipped = metricsOf(frame({ delta: undefined, previous: farBack }));
+  if (skipped.hasDelta) throw new Error('a change was worked out against a frame two iterations back');
+  if (!Array.from(skipped.curvatureBefore).every(Number.isNaN)) {
+    throw new Error('a before-phase metric was read off a frame that is not the phase\'s start');
+  }
+
+  // A reproduction frame starts from the game frame of the iteration before.
+  const reproduction = metricsOf(frame({
+    phase: 1, delta: undefined, previous: { ...start, iteration: 6, phase: 2 }
+  }));
+  if (!reproduction.hasDelta) throw new Error('a reproduction frame did not start from the last game frame');
+}
+
 function test_the_key_reads_in_the_units_that_were_chosen() {
   const linear = metricsOf(frame(), { nodeColorBy: 'tokens', nodeColorLog: false });
   if (linear.colorRangeText.join('–') !== '10–50') {
@@ -408,7 +442,8 @@ const tests = Object.entries({
   test_the_hover_card_describes_the_agent_it_was_asked_about,
   test_what_crossed_each_link_is_read_from_the_decisions,
   test_a_frame_without_decisions_has_no_flow_rather_than_zero_flow,
-  test_the_key_reads_in_the_units_that_were_chosen
+  test_the_key_reads_in_the_units_that_were_chosen,
+  test_a_frame_is_compared_only_with_the_phase_it_started_from
 }).sort(([a], [b]) => a.localeCompare(b));
 
 // A test that is written and never listed here is worse than no test: it reads

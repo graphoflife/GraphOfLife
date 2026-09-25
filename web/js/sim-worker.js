@@ -453,8 +453,7 @@ const handlers = {
     const frames = await RunStore.getIterations(runId, plan.iterations);
 
     report('series', 'summarising', 0, frames.length);
-    const reply = call('gol_browser.WORLDS.series_absorb',
-                       [runId, frames, plan.heavy, (run.config || {}).export_every || 1]);
+    const reply = call('gol_browser.WORLDS.series_absorb', [runId, frames, plan.heavy]);
     report('ready', 'ready');
     return reply;
   },
