@@ -1,16 +1,59 @@
 /* GraphOfLife — local viewer styling. Dark by default; the canvas is the star. */
 
+/*
+ * One ramp of surfaces, each a fixed step above the last.
+ *
+ * The four surfaces used to sit between 0.004 and 0.030 relative luminance —
+ * the whole interface inside three percent of the scale, with 1.11:1 between
+ * the page and a card and 1.10:1 between a card and the thing nested in it.
+ * At those ratios a panel has no edge you can see: everything reads as one
+ * flat sheet of the same darkness, and the borders that were meant to rescue
+ * it were themselves 1.20:1 against what they bounded.
+ *
+ * So the steps are geometric now — each surface about 1.3 times the last on
+ * (L + 0.05), which is the term contrast is actually measured in — and they
+ * carry a blue cast rather than going grey, so the lift reads as depth rather
+ * than as fog. Text was never the problem and has not moved much: it stays
+ * above 7:1 on every surface, and the muted grey is lifted just enough to
+ * clear 4.5:1 on the lightest surface it is ever set on.
+ */
 :root {
+  /* Behind the graph itself, and deliberately the darkest thing here: the
+     visualisation is the picture, and everything else is the frame. */
+  --stage: #090c11;
+
   --bg: #0b0e13;
-  --panel: #141a22;
-  --panel-2: #1b232e;
-  --border: #26313e;
-  --text: #e6edf3;
-  --muted: #8fa3b5;
-  --accent: #4fb3ff;
-  --accent-dim: #2b6f9e;
-  --danger: #e5534b;
-  --ok: #3fb950;
+  --panel: #202b38;
+  --panel-2: #2d3d50;
+  /* Raised: hover and active states, where the text on top is --text rather
+     than --muted, which is what lets it go this light. */
+  --panel-3: #384c64;
+
+  --border: #435468;
+  --border-strong: #5a6e86;
+
+  --text: #eef4fa;
+  --muted: #9ab0c3;
+  /* The dimmest tier: unit names, ids, field hints, axis labels. It was three
+     hard-coded greys that differed by less than one contrast step, so nothing
+     ever told them apart, and all three read below 4.5:1 even against the old
+     darker panels. One tier, light enough to clear it. */
+  --muted-2: #7e94a5;
+  --accent: #64bdff;
+  /* Deepened a shade from the accent so white sits on it at 4.6:1 — it is a
+     button fill before it is a hue. */
+  --accent-dim: #2b7cad;
+  --danger: #ff6b61;
+  --ok: #4ccb60;
+  --warn: #e6a532;
+
+  /* Depth, in two steps. A dark interface cannot lean on shadow the way a
+     light one does — there is little left to darken — so these are shallow and
+     wide, enough to detach a card from the page without looking dropped. */
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.42);
+  --shadow-2: 0 3px 10px rgba(0, 0, 0, 0.46);
+  --shadow-3: 0 12px 34px rgba(0, 0, 0, 0.55);
+
   --radius: 8px;
 }
 
@@ -35,12 +78,12 @@
 ::-webkit-scrollbar { width: 11px; height: 11px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
-  background: #2f3c4c;
+  background: var(--border);
   background-clip: padding-box;
   border: 3px solid transparent;
   border-radius: 999px;
 }
-::-webkit-scrollbar-thumb:hover { background: #435367; background-clip: padding-box; }
+::-webkit-scrollbar-thumb:hover { background: var(--border-strong); background-clip: padding-box; }
 ::-webkit-scrollbar-corner { background: transparent; }
 
 /* Always leave room for the scrollbar, whether or not there is one to show.
@@ -71,6 +114,7 @@ h3 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.8px; color: v
   padding: 10px 18px;
   background: var(--panel);
   border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow-1);
   position: sticky;
   top: 0;
   z-index: 20;
@@ -87,7 +131,7 @@ h3 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.8px; color: v
   cursor: pointer;
   font-size: 13px;
 }
-.tab:hover { color: var(--text); border-color: var(--border); }
+.tab:hover { color: var(--text); border-color: var(--border); background: var(--panel-2); }
 /* The tab you are on, said plainly. A border the same grey as every other
    panel edge was doing the job in principle and not in practice — at a glance
    the row read as five tabs of equal weight. */
@@ -139,7 +183,7 @@ legend { color: var(--accent); font-size: 11px; text-transform: uppercase; lette
 .field { margin-bottom: 10px; }
 .field.wide { flex: 1 1 100%; }
 .field label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 3px; }
-.field small { display: block; color: #6b7c8d; font-size: 10.5px; margin-top: 2px; }
+.field small { display: block; color: var(--muted-2); font-size: 10.5px; margin-top: 2px; }
 .field.checkbox label { display: flex; align-items: center; gap: 6px; color: var(--text); }
 
 input[type="text"], input[type="number"], select {
@@ -173,10 +217,13 @@ button {
   font-size: 13px;
   font-family: inherit;
 }
-button:hover:not(:disabled) { border-color: var(--accent-dim); }
+button:hover:not(:disabled) { border-color: var(--accent-dim); background: var(--panel-3); }
 button:disabled { opacity: 0.4; cursor: not-allowed; }
-button.primary { background: var(--accent-dim); border-color: var(--accent-dim); }
-button.primary:hover { background: var(--accent); }
+/* The fill decides the ink. On the deep accent white reads at 4.6:1; on the
+   bright one it reads at 2.1:1, which is why the hover state takes dark text
+   instead of keeping white and becoming the least legible thing on the page. */
+button.primary { background: var(--accent-dim); border-color: var(--accent-dim); color: #fff; }
+button.primary:hover { background: var(--accent); border-color: var(--accent); color: var(--stage); }
 button.danger:hover { border-color: var(--danger); color: var(--danger); }
 button.ghost { background: transparent; }
 button.small { padding: 4px 9px; font-size: 12px; }
@@ -211,7 +258,7 @@ button.small { padding: 4px 9px; font-size: 12px; }
 
 .canvas-wrap {
   position: relative;
-  background: #0d1117;
+  background: var(--stage);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
@@ -282,7 +329,14 @@ button.small { padding: 4px 9px; font-size: 12px; }
 .stat-val { display: block; font-size: 15px; font-variant-numeric: tabular-nums; }
 
 .charts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 12px; }
-.charts figure { margin: 0; background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 10px; }
+.charts figure {
+  margin: 0;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-1);
+  padding: 10px;
+}
 .charts figcaption { font-size: 11.5px; color: var(--muted); margin-bottom: 6px; }
 /* Height pinned in CSS rather than left to the element's aspect ratio.
    Sizing the backing store rewrites the width and height attributes, and those
@@ -367,7 +421,7 @@ body.resizing * { cursor: col-resize !important; }
 .fieldset-note {
   display: block;
   margin: -2px 0 9px;
-  color: #6b7c8d;
+  color: var(--muted-2);
   font-size: 10.5px;
   line-height: 1.45;
 }
@@ -431,7 +485,7 @@ details.control-group > summary:hover h3 { color: var(--text); }
   color: var(--muted);
 }
 .seg-btn + .seg-btn { border-left: 1px solid var(--border); }
-.seg-btn:hover { color: var(--text); }
+.seg-btn:hover { color: var(--text); background: var(--panel-3); }
 .seg-btn.active { background: var(--accent-dim); color: #fff; }
 
 /* Fixed-width slots so the bar cannot reflow while playing. */
@@ -459,7 +513,7 @@ details.control-group > summary:hover h3 { color: var(--text); }
   cursor: pointer;
   font-family: inherit;
 }
-.stat:hover { border-color: var(--accent-dim); background: var(--panel-2); }
+.stat:hover { border-color: var(--accent-dim); background: var(--panel-3); }
 
 /* Statistic detail popover */
 .stat-detail {
@@ -471,7 +525,7 @@ details.control-group > summary:hover h3 { color: var(--text); }
   border: 1px solid var(--accent-dim);
   border-radius: var(--radius);
   padding: 14px;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55);
+  box-shadow: var(--shadow-3);
   z-index: 40;
 }
 .stat-detail.hidden { display: none; }
@@ -579,7 +633,7 @@ details.control-group > summary:hover h3 { color: var(--text); }
 }
 .chart-pair .chart-metric { max-width: 130px; }
 .axis-toggles { display: inline-flex; gap: 10px; align-items: center; }
-.axis-group { display: inline-flex; align-items: center; gap: 3px; color: #6b7c8d; font-size: 10px; }
+.axis-group { display: inline-flex; align-items: center; gap: 3px; color: var(--muted-2); font-size: 10px; }
 .axis-btn {
   background: var(--bg);
   border: 1px solid var(--border);
@@ -1008,7 +1062,7 @@ details.control-group > summary:hover h3 { color: var(--text); }
 }
 .flow-facts b { display: block; font-size: 17px; font-weight: 600; color: var(--text); }
 .flow-facts i { display: block; font-style: normal; font-size: 11px; color: var(--muted); }
-.flow-facts small { display: block; font-size: 10px; color: #56626f; margin-top: 2px; }
+.flow-facts small { display: block; font-size: 10px; color: var(--muted-2); margin-top: 2px; }
 
 /* ==========================================================================
    Lineage
@@ -1054,7 +1108,7 @@ details.control-group > summary:hover h3 { color: var(--text); }
   max-width: 1080px;
   margin: 0 auto;
   height: clamp(320px, calc(100vh - 340px), 720px);
-  background: #0d1117;
+  background: var(--stage);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
@@ -1241,7 +1295,7 @@ details.control-group > summary:hover h3 { color: var(--text); }
 
 .theses-stage {
   height: clamp(220px, 34vh, 380px);
-  background: #0d1117;
+  background: var(--stage);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
@@ -1311,6 +1365,12 @@ details.control-group > summary:hover h3 { color: var(--text); }
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: var(--radius);
+  box-shadow: var(--shadow-1);
+  transition: box-shadow 0.15s, border-color 0.15s, background 0.15s;
+}
+.sim-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-2);
 }
 
 /* The one cell that is a button rather than a card. Dashed, because it is an
@@ -1361,7 +1421,7 @@ details.control-group > summary:hover h3 { color: var(--text); }
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.sim-id { font-size: 10.5px; color: #62717f; font-family: ui-monospace, SFMono-Regular, monospace; }
+.sim-id { font-size: 10.5px; color: var(--muted-2); font-family: ui-monospace, SFMono-Regular, monospace; }
 
 .icon-button {
   flex: 0 0 auto;
@@ -1420,7 +1480,7 @@ details.control-group > summary:hover h3 { color: var(--text); }
 .sim-state-stopping .sim-dot { animation: sim-pulse 0.7s ease-in-out infinite; }
 .sim-state-error { color: var(--danger); }
 .sim-state-extinct { color: #d29922; }
-.sim-state-interrupted { color: #a371f7; }
+.sim-state-interrupted { color: #ab77f4; }
 
 @keyframes sim-pulse {
   0%, 100% { opacity: 1; transform: scale(1); }
@@ -1443,7 +1503,7 @@ details.control-group > summary:hover h3 { color: var(--text); }
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.sim-facts i { font-style: normal; font-size: 10.5px; color: #62717f; }
+.sim-facts i { font-style: normal; font-size: 10.5px; color: var(--muted-2); }
 
 .sim-settings {
   display: flex;
@@ -1454,7 +1514,7 @@ details.control-group > summary:hover h3 { color: var(--text); }
   border-top: 1px solid var(--border);
   padding-top: 9px;
 }
-.sim-settings i { font-style: normal; color: #56626f; }
+.sim-settings i { font-style: normal; color: var(--muted-2); }
 
 .sim-error {
   margin: 0;
@@ -1511,7 +1571,7 @@ details.control-group > summary:hover h3 { color: var(--text); }
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: 9px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+  box-shadow: var(--shadow-3);
 }
 .sim-menu[hidden] { display: none; }
 .sim-menu button {
@@ -1671,7 +1731,7 @@ details.control-group > summary:hover h3 { color: var(--text); }
   height: calc(100vh - 47px);
   min-height: 420px;
   overflow: hidden;
-  background: #0d1117;
+  background: var(--stage);
 }
 
 /* Not interactive, and it says so: no pointer events at all, so a click or a
@@ -1688,7 +1748,7 @@ details.control-group > summary:hover h3 { color: var(--text); }
 /* Darkened towards the middle and the bottom left, which is where the words
    are. White on a bright cluster of agents is otherwise unreadable. Mixed in
    the background's own colour, so an empty patch of canvas stays exactly
-   #0d1117 no matter how heavily the veil sits on it. */
+   the stage colour no matter how heavily the veil sits on it. */
 .home-veil {
   position: absolute;
   inset: 0;
@@ -1897,7 +1957,7 @@ details.control-group > summary:hover h3 { color: var(--text); }
   border-radius: 8px;
   cursor: pointer;
 }
-.ex-nav button:hover { border-color: var(--accent); background: #1f2a36; }
+.ex-nav button:hover { border-color: var(--accent); background: var(--panel-3); }
 .ex-nav button:active { transform: translateY(1px); }
 .ex-nav svg { width: 13px; height: 13px; fill: var(--text); }
 .ex-nav button:hover svg { fill: #fff; }
@@ -1925,7 +1985,7 @@ details.control-group > summary:hover h3 { color: var(--text); }
   min-height: 0;
 }
 
-.ex-stage { position: relative; overflow: hidden; background: #0d1117; }
+.ex-stage { position: relative; overflow: hidden; background: var(--stage); }
 #explainCanvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 
 .ex-side {
@@ -2019,10 +2079,10 @@ details.control-group > summary:hover h3 { color: var(--text); }
   flex: 0 0 auto;
   width: 26px;
   text-align: right;
-  color: #3d4a58;
+  color: #637488;
   user-select: none;
 }
-.explain-src { color: #8b98a8; }
+.explain-src { color: #96a3b3; }
 
 /* Lines away from the step are faded rather than recoloured, so the script
    still reads as a syntax-highlighted file all the way down instead of turning
