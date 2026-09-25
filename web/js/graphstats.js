@@ -569,18 +569,7 @@ const GraphStats = {
 
     // R² of the CCDF over the fitted tail, for readers who want the familiar
     // number beside the exponent. It describes the fit; it does not test it.
-    const tail = positive.filter(v => v >= best.kMin);
-    const xs = [], ys = [];
-    let i = tail.length - 1;
-    while (i >= 0) {
-      const value = tail[i];
-      let j = i;
-      while (j >= 0 && tail[j] === value) j--;
-      xs.push(value);
-      ys.push((tail.length - 1 - j) / tail.length);
-      i = j;
-    }
-    const fit = this.powerFit(xs, ys, 4);
+    const fit = this.tailExponent(positive.filter(v => v >= best.kMin));
     best.r2 = fit ? fit.r2 : null;
     best.coverage = best.tailNodes / nAll;
     return best;

@@ -26,7 +26,7 @@ import gol_store as store
 # live graph before a cull. One Python implementation, mirrored once in
 # graphstats.js and compared key by key by tests/test_stats_parity.py — the
 # same arrangement every other structural measure here already has.
-from GraphOfLifeSimple import bridge_splits, two_core_size
+from GraphOfLifeSimple import bridge_splits, two_core_size, worst_cut_share
 from gol_lightning import lightning
 from gol_spectral import spectral_gap
 
@@ -228,8 +228,7 @@ def _structure(ids: List[int], edges: List[List[int]]) -> Dict[str, Any]:
     # after peeling the hanging trees away — the rest is whiskers.
     splits = bridge_splits(ids, adj)
     node_count = len(ids)
-    cut_risk = max((min(b, node_count - b) / node_count for _, _, b in splits),
-                   default=0.0) if node_count > 1 else 0.0
+    cut_risk = worst_cut_share(ids, adj, splits)
     core_share = (two_core_size(ids, adj) / node_count) if node_count else 0.0
 
     # How hard the population is to cut in two. See gol_spectral for why this
@@ -404,6 +403,7 @@ def _structure(ids: List[int], edges: List[List[int]]) -> Dict[str, Any]:
         "diameter": diameter,
         "meanPathLength": mean_path,
         "_perNodeTriangles": per_node_triangles,
+        "_adj": adj,
     }
 
 
@@ -550,18 +550,7 @@ def _scale_free(values, max_candidates: int = 24):
     # R-squared of the CCDF over the fitted tail, for readers who want the
     # familiar number next to the exponent. It is a description of the fit, not
     # a test of it — see the note on degreeExponentR2.
-    tail = [v for v in positive if v >= best["kMin"]]
-    xs, ys = [], []
-    i = len(tail) - 1
-    while i >= 0:
-        value = tail[i]
-        j = i
-        while j >= 0 and tail[j] == value:
-            j -= 1
-        xs.append(value)
-        ys.append((len(tail) - 1 - j) / len(tail))
-        i = j
-    fit = _power_fit(xs, ys, 4)
+    fit = _tail_exponent([v for v in positive if v >= best["kMin"]])
     best["r2"] = fit["r2"] if fit else None
     best["coverage"] = best["tailNodes"] / n_all
     return best
@@ -742,19 +731,15 @@ def _heavy_stats(frame: Dict[str, Any], ids, edges, tokens,
     # links, so a reproduction frame has no lightning and says so with nulls.
     structure.update(lightning(frame))
     per_node_triangles = structure.pop("_perNodeTriangles", {})
+    # The adjacency _structure built. This used to build a second one, which
+    # also counted a neighbour outside the frame's ids; the engine never
+    # records such an edge, and the browser has only ever used the one.
+    adjacency = structure.pop("_adj")
 
     # ---- power laws ----
     #
     # How one quantity scales with another, as an exponent and how tightly the
     # points sit on that line. Everything here is over the nodes of this frame.
-    adjacency: Dict[Any, set] = {i: set() for i in ids}
-    for a, b in edges:
-        if a == b:
-            continue
-        if a in adjacency:
-            adjacency[a].add(b)
-        if b in adjacency:
-            adjacency[b].add(a)
     degree_of = {i: len(adjacency[i]) for i in ids}
 
     degree_list = [degree_of[i] for i in ids]
@@ -804,7 +789,6 @@ def _heavy_stats(frame: Dict[str, Any], ids, edges, tokens,
     power_laws["boxDimension"] = boxes["exponent"] if boxes else None
     power_laws["boxDimensionR2"] = boxes["r2"] if boxes else None
 
-    structure.pop("_perNodeTriangles", None)
     return {**structure, **power_laws}
 
 
@@ -832,6 +816,7 @@ def frame_stats(frame: Dict[str, Any], previous: Dict[str, Any] | None = None,
     ids = frame.get("ids", [])
     edges = frame.get("edges", [])
     n = len(ids)
+    total_tokens = sum(tokens)
 
     degree = {}
     for a, b in edges:
@@ -839,12 +824,7 @@ def frame_stats(frame: Dict[str, Any], previous: Dict[str, Any] | None = None,
         degree[b] = degree.get(b, 0) + 1
     degrees = [degree.get(i, 0) for i in ids]
 
-    ordered_tokens = sorted(tokens)
-    median = 0.0
-    if ordered_tokens:
-        mid = len(ordered_tokens) // 2
-        median = (float(ordered_tokens[mid]) if len(ordered_tokens) % 2
-                  else (ordered_tokens[mid - 1] + ordered_tokens[mid]) / 2)
+    median = _median(tokens)
 
     distinct_brains = len(set(frame.get("brain_ids", [])))
     decisions = frame.get("decisions") or {}
@@ -865,7 +845,7 @@ def frame_stats(frame: Dict[str, Any], previous: Dict[str, Any] | None = None,
     repro_token_share = None
     handovers = None
     if births is not None:
-        repro_token_share = (sum(b["invested"] for b in births) / sum(tokens)) if sum(tokens) else 0.0
+        repro_token_share = (sum(b["invested"] for b in births) / total_tokens) if total_tokens else 0.0
         if any("handed_over" in b for b in births):
             handovers = sum(len(b.get("handed_over") or []) for b in births)
         if births:
@@ -884,7 +864,7 @@ def frame_stats(frame: Dict[str, Any], previous: Dict[str, Any] | None = None,
     if given is not None:
         gifts_made = len(given)
         gift_tokens = sum(int(g[2]) for g in given)
-        gift_share = (gift_tokens / sum(tokens)) if sum(tokens) else 0.0
+        gift_share = (gift_tokens / total_tokens) if total_tokens else 0.0
 
     # Edge traffic, rebuilt from the allocations rather than stored per edge.
     total_flow = mean_flow = max_flow = None
@@ -957,7 +937,6 @@ def frame_stats(frame: Dict[str, Any], previous: Dict[str, Any] | None = None,
     # why it sat here undetected until a run happened to pass through one.
     top_count = max(1, int(math.floor(n * 0.1 + 0.5)))
     ordered_desc = sorted(tokens, reverse=True)
-    total_tokens = sum(tokens)
     top_share = (sum(ordered_desc[:top_count]) / total_tokens) if total_tokens else 0.0
 
     return {
@@ -966,7 +945,7 @@ def frame_stats(frame: Dict[str, Any], previous: Dict[str, Any] | None = None,
         "nodes_before": frame.get("nodes_before"),
         "nodes": n,
         "edges": len(edges),
-        "tokens": sum(tokens),
+        "tokens": total_tokens,
         "meanDegree": (sum(degrees) / n) if n else 0.0,
         "maxDegree": max(degrees) if degrees else 0,
         "medianTokens": median,

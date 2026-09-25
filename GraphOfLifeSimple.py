@@ -305,7 +305,7 @@ def bridge_splits(ids, adj) -> List[Tuple[int, int, int]]:
     return found
 
 
-def worst_cut_share(ids, adj) -> float:
+def worst_cut_share(ids, adj, splits=None) -> float:
     """
     The largest share of the graph a single edge can sever.
 
@@ -317,12 +317,16 @@ def worst_cut_share(ids, adj) -> float:
     Measured against the whole node count rather than the containing component,
     because what is at stake is a share of the *population*, and after cleanup
     the graph is connected anyway.
+
+    `splits` is bridge_splits(ids, adj) when the caller has already walked it,
+    as the series statistics have for their bridge count.
     """
     n = len(ids)
     if n < 2:
         return 0.0
-    return max((min(below, n - below) / n for _, _, below in bridge_splits(ids, adj)),
-               default=0.0)
+    if splits is None:
+        splits = bridge_splits(ids, adj)
+    return max((min(below, n - below) / n for _, _, below in splits), default=0.0)
 
 
 def two_core_size(ids, adj) -> int:
