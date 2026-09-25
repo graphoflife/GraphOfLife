@@ -36,10 +36,21 @@ NO_PARENT = -1
 #: how large the world got.
 DEFAULT_LIMIT = 2000
 
+#: All forest() reads of a frame, and so all a caller need hand it. A parsed
+#: frame of a large run holds around a hundred megabytes, nearly all of it
+#: topology; a window of two hundred of them kept whole while the forest was
+#: built came to twenty gigabytes.
+FIELDS = ("iteration", "phase", "brain_ids", "parent_brain_ids")
 
-def forest(frames: Iterable[Dict[str, Any]], limit: int = DEFAULT_LIMIT) -> Dict[str, Any]:
+
+def forest(frames: Iterable[Dict[str, Any]], phase: str = "all",
+           limit: int = DEFAULT_LIMIT) -> Dict[str, Any]:
     """
     Aggregate frames into genotypes, and keep the most prominent `limit`.
+
+    `phase` keeps only the frames of that phase, "1" or "2"; "all" keeps both.
+    Both backends used to filter before calling this and count what was left
+    after it, each in its own words.
 
     A genotype is kept by how long it lasted first and how many agents carried
     it second — longevity is the scarcer thing here, and the one a lineage is
@@ -59,6 +70,7 @@ def forest(frames: Iterable[Dict[str, Any]], limit: int = DEFAULT_LIMIT) -> Dict
     # moment, so the counts have to travel with the tree.
     columns: List[Dict[str, int]] = []
 
+    frames = [f for f in frames if phase == "all" or str(f.get("phase")) == str(phase)]
     for column, frame in enumerate(frames):
         when = int(frame.get("iteration", 0))
         first = when if first is None else min(first, when)
@@ -111,4 +123,5 @@ def forest(frames: Iterable[Dict[str, Any]], limit: int = DEFAULT_LIMIT) -> Dict
         "longestSpan": max((n["span"] for n in ranked), default=0),
         "firstIteration": first if first is not None else 0,
         "lastIteration": last if last is not None else 0,
+        "frames": len(frames),
     }

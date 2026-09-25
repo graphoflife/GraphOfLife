@@ -30,21 +30,8 @@ const Lineage = {
   // framewindow.js for why it cannot simply be sampled instead.
   MAX_ITERATIONS: 100,
 
-  // The most genotypes the page will hold. A real window has over a million,
-  // and a canvas a thousand pixels tall can show a couple of thousand rows —
-  // the rest were being fetched, aggregated and drawn on top of each other.
-  LIMIT: 2000,
-
   phase: 'all',
 
-  // No sighting budget: the reply is already bounded by LIMIT above, so a wide
-  // window costs reading time on the server and nothing on the wire. It used to
-  // be capped at 400,000 agent-sightings, which on a 35,000-agent world is
-  // eleven frames — so "Show 100 iterations" quietly drew five of them and said
-  // nothing. A control that is overruled without a word is worse than no
-  // control. Reading two hundred frames takes a few seconds; the note says how
-  // far it has got while it does.
-  MAX_SIGHTINGS: 0,
   // Above this share of parentless genotypes the run predates brain ids naming
   // a genotype, and its genealogy cannot be rebuilt from what it recorded.
   ROOTS_SUSPECT: 0.25,
@@ -134,11 +121,15 @@ const Lineage = {
       this.say('Reading the window…');
       try {
         // One request. The counting happens where the frames are, and only the
-        // genotypes that can be drawn come back — see gol_lineage.py for the
-        // numbers that made that necessary.
+        // genotypes that can be drawn come back — gol_lineage.DEFAULT_LIMIT, a
+        // couple of thousand, which is what a canvas this tall can show as rows.
+        //
+        // The whole window is read. It used to be cut off at 400,000
+        // agent-sightings, which on a 35,000-agent world is eleven frames — so
+        // "Show 100 iterations" quietly drew five of them and said nothing. A
+        // control overruled without a word is worse than no control.
         const reply = await API.getLineage(runId, plan.start, plan.indices.length,
-                                           this.LIMIT, this.MAX_SIGHTINGS, this.phase,
-                                           { signal: job.signal });
+                                           this.phase, { signal: job.signal });
         if (job.cancelled) return;
         this.reply = reply;
         this.rebuild();

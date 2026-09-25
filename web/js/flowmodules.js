@@ -280,18 +280,35 @@ const FlowModules = {
    * a pattern being carried by different matter each iteration.
    */
   track(previous, current, { floor = 0.3 } = {}) {
-    const pairs = [];
-    for (const [oldId, oldSet] of previous) {
-      for (const [newKey, newSet] of current) {
-        let shared = 0;
-        const [small, large] = oldSet.size < newSet.size ? [oldSet, newSet] : [newSet, oldSet];
-        for (const member of small) if (large.has(member)) shared++;
-        if (!shared) continue;
-        const overlap = shared / (oldSet.size + newSet.size - shared);
-        if (overlap >= floor) pairs.push({ oldId, newKey, overlap, shared });
-      }
+    // The modules of one frame are disjoint, so what each new module shares
+    // with the old ones is counted by walking its members once and asking
+    // whose each was. Intersecting every old module with every new one was
+    // 114 million intersections on two real frames of ten thousand modules,
+    // six to eight seconds a frame; this is tens of milliseconds.
+    const ownerOf = new Map(), oldRank = new Map();
+    for (const [oldId, members] of previous) {
+      oldRank.set(oldId, oldRank.size);
+      for (const member of members) ownerOf.set(member, oldId);
     }
-    pairs.sort((a, b) => b.overlap - a.overlap);
+    const pairs = [];
+    let newRank = 0;
+    for (const [newKey, newSet] of current) {
+      const sharedWith = new Map();
+      for (const member of newSet) {
+        const oldId = ownerOf.get(member);
+        if (oldId !== undefined) sharedWith.set(oldId, (sharedWith.get(oldId) || 0) + 1);
+      }
+      for (const [oldId, shared] of sharedWith) {
+        const overlap = shared / (previous.get(oldId).size + newSet.size - shared);
+        if (overlap >= floor) {
+          pairs.push({ oldId, newKey, overlap, shared, oldAt: oldRank.get(oldId), newAt: newRank });
+        }
+      }
+      newRank++;
+    }
+    // Best pair first. Among equals, old module before new, which is the order
+    // the pairs used to be found in, so the matching is exactly what it was.
+    pairs.sort((a, b) => (b.overlap - a.overlap) || (a.oldAt - b.oldAt) || (a.newAt - b.newAt));
 
     const takenOld = new Set(), takenNew = new Set(), assigned = new Map();
     for (const pair of pairs) {
@@ -301,6 +318,36 @@ const FlowModules = {
       assigned.set(pair.newKey, { id: pair.oldId, shared: pair.shared });
     }
     return assigned;
+  },
+
+  //: frame -> its flow and its modules. Neither depends on the floor, and the
+  //: partition is seeded, so a frame's answer never changes.
+  _modules: new WeakMap(),
+
+  /**
+   * A frame's flow and the modules it falls into, worked out once.
+   *
+   * The view follows its frames again on every change of floor or phase, and
+   * every few hundred milliseconds while a window arrives, and each time used
+   * to partition every frame read so far — half a second a frame on a large
+   * world — to get the same answer it got the time before.
+   */
+  modulesOf(frame) {
+    let known = this._modules.get(frame);
+    if (!known) {
+      const { ids, edges, hasFlow } = this.flowOf(frame);
+      const found = hasFlow ? this.partition(ids.length, edges) : null;
+      const groups = new Map();
+      for (let i = 0; found && i < ids.length; i++) {
+        const label = found.module[i];
+        if (label < 0) continue;
+        if (!groups.has(label)) groups.set(label, new Set());
+        groups.get(label).add(ids[i]);
+      }
+      known = { ids, hasFlow, found, groups };
+      this._modules.set(frame, known);
+    }
+    return known;
   },
 
   /**
@@ -327,18 +374,9 @@ const FlowModules = {
     let withoutFlow = 0;
 
     for (const frame of frames) {
-      const { ids, edges, hasFlow } = this.flowOf(frame);
+      const { ids, hasFlow, found, groups } = this.modulesOf(frame);
       if (!hasFlow) { withoutFlow++; continue; }
       const alive = new Set(ids);
-
-      const found = this.partition(ids.length, edges);
-      const groups = new Map();
-      for (let i = 0; i < ids.length; i++) {
-        const label = found.module[i];
-        if (label < 0) continue;
-        if (!groups.has(label)) groups.set(label, new Set());
-        groups.get(label).add(ids[i]);
-      }
 
       const carried = this.track(previous, groups, { floor });
       const now = new Map();

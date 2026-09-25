@@ -906,6 +906,43 @@ def test_a_history_says_how_big_the_run_was():
             gol_store.BASE_DIR = original
 
 
+def test_a_run_size_is_kept_until_the_run_changes():
+    """
+    The size is cached against the run's folders, so it has to notice a write.
+    A stale size would say a run takes less room than it does.
+    """
+    import gol_store
+
+    with tempfile.TemporaryDirectory() as tmp:
+        original = gol_store.BASE_DIR
+        gol_store.BASE_DIR = tmp
+        try:
+            run_id, world, written = _recorded_run(3)
+            before = gol_store.run_size_bytes(run_id)
+            assert gol_store.run_size_bytes(run_id) == before
+            _record(run_id, world, written, 2)
+            after = gol_store.run_size_bytes(run_id)
+            walked = sum(os.path.getsize(os.path.join(r, f))
+                         for r, _, fs in os.walk(gol_store.run_dir(run_id)) for f in fs)
+            assert after == walked > before, (before, after, walked)
+        finally:
+            gol_store.BASE_DIR = original
+
+
+def test_the_forest_keeps_only_the_phase_asked_for():
+    """
+    The phase filter lives in gol_lineage.forest now. Both backends used to
+    filter before calling it and count what was left after, each its own way.
+    """
+    import gol_lineage
+    frames = [{"iteration": i // 2, "phase": 1 + i % 2,
+               "brain_ids": [1, 1, 2], "parent_brain_ids": [-1, -1, 1]} for i in range(6)]
+    game = gol_lineage.forest(frames, "2")
+    assert game["frames"] == 3, f"{game['frames']} frames kept of the three game frames"
+    assert [c["phase"] for c in game["columns"]] == [2, 2, 2]
+    assert gol_lineage.forest(frames)["frames"] == 6
+
+
 def test_a_run_is_never_summarised_at_more_than_the_cap():
     """
     However long a run is, the chart is capped.

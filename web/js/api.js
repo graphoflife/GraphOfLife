@@ -66,10 +66,9 @@ const ServerBackend = {
                          undefined, opts && opts.signal);
   },
   // The genotype forest of a window, already reduced to what can be drawn.
-  getLineage(id, from, count, limit, sightings, phase, opts) {
+  getLineage(id, from, count, phase, opts) {
     return this._request('GET', `/api/runs/${encodeURIComponent(id)}/lineage`
-      + `?from=${from}&count=${count}&limit=${limit}&sightings=${sightings}`
-      + `&phase=${phase || 'all'}`, undefined, opts && opts.signal);
+      + `?from=${from}&count=${count}&phase=${phase || 'all'}`, undefined, opts && opts.signal);
   },
   // `points` asks for a coarse pass over the whole run rather than every
   // sample of it, so a chart can be drawn before the full build finishes.
@@ -168,9 +167,8 @@ const BrowserBackend = {
     return this._send('frames', { runId: id, from, count, fields, sightings },
                       opts && opts.signal);
   },
-  getLineage(id, from, count, limit, sightings, phase, opts) {
-    return this._send('lineage', { runId: id, from, count, limit, sightings, phase },
-                      opts && opts.signal);
+  getLineage(id, from, count, phase, opts) {
+    return this._send('lineage', { runId: id, from, count, phase }, opts && opts.signal);
   },
   getSeries(id, points, keys, opts) {
     return this._send('series', { runId: id, points, keys }, opts && opts.signal);
@@ -225,8 +223,8 @@ const API = {
   getFrames(id, from, count, fields, sightings, opts) {
     return this._call('getFrames', id, from, count, fields, sightings, opts);
   },
-  getLineage(id, from, count, limit, sightings, phase, opts) {
-    return this._call('getLineage', id, from, count, limit, sightings, phase, opts);
+  getLineage(id, from, count, phase, opts) {
+    return this._call('getLineage', id, from, count, phase, opts);
   },
   getSeries(id, points, keys, opts) { return this._call('getSeries', id, points, keys, opts); },
   getSeriesProgress(id, opts)   { return this._call('getSeriesProgress', id, opts); },

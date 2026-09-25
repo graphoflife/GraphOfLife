@@ -254,10 +254,18 @@ class Handler(BaseHTTPRequestHandler):
         print(f"  {self.command} {self.path} -> {args[1] if len(args) > 1 else ''}")
 
     def _send_json(self, payload: Any, status: int = 200) -> None:
-        body = json.dumps(payload).encode("utf-8")
+        self._send_body(json.dumps(payload).encode("utf-8"), status)
+
+    def _send_body(self, body: bytes, status: int = 200, gzipped: bool = False) -> None:
+        """
+        JSON bytes to the browser. `gzipped` says they are compressed already,
+        which a stored frame is; the browser inflates them itself.
+        """
         try:
             self.send_response(status)
             self.send_header("Content-Type", "application/json")
+            if gzipped:
+                self.send_header("Content-Encoding", "gzip")
             self.send_header("Content-Length", str(len(body)))
             self.send_header("Cache-Control", "no-store")
             self.end_headers()
@@ -402,17 +410,13 @@ class Handler(BaseHTTPRequestHandler):
                 if not store.has_frame(run_id, index):
                     self._error("frame not found", 404)
                     return
-                self._send_json(store.read_frame(run_id, index))
+                # The stored file as it is. Parsing a frame of a large run only
+                # to serialise it again took a third to half a second a step,
+                # under the interpreter lock a running simulation needs, and
+                # sent five times the bytes.
+                self._send_body(store.read_frame_bytes(run_id, index), gzipped=True)
                 return
 
-            # A contiguous run of frames, optionally cut down to the fields the
-            # caller actually reads.
-            #
-            # Both Research views want a couple of hundred consecutive frames
-            # and a few columns of each. Asked for one at a time and whole,
-            # that was two hundred round trips carrying the entire topology of
-            # a forty-thousand-node world — tens of megabytes to parse in the
-            # browser so that two arrays could be read out of it.
             # The genotype forest of a window, aggregated here rather than in
             # the page. See gol_lineage for the numbers that forced it.
             if len(parts) == 4 and parts[:2] == ["api", "runs"] and parts[3] == "lineage":
@@ -421,17 +425,9 @@ class Handler(BaseHTTPRequestHandler):
                 run_id = parts[2]
                 start = max(0, int(query.get("from", ["0"])[0] or 0))
                 count = max(1, int(query.get("count", ["200"])[0] or 200))
-                limit = max(1, int(query.get("limit", [str(gol_lineage.DEFAULT_LIMIT)])[0]
-                                   or gol_lineage.DEFAULT_LIMIT))
-                # Zero means no budget: read the whole window.
-                budget = int(query.get("sightings", ["0"])[0] or 0)
                 phase = (query.get("phase", ["all"])[0] or "all")
 
-                # Stop once enough agents have been seen. A window measured in
-                # iterations means something very different in a world of sixty
-                # agents and one of forty thousand, and reading the same number
-                # of frames of each is how this got slow in the first place.
-                read, seen = [], 0
+                read = []
                 for step, index in enumerate(range(start, start + count)):
                     # Every few frames, ask whether anyone is still waiting. A
                     # frame of a large run takes tens of milliseconds to read,
@@ -444,24 +440,24 @@ class Handler(BaseHTTPRequestHandler):
                     if not store.has_frame(run_id, index):
                         break
                     frame = store.read_frame(run_id, index)
-                    if phase != "all" and str(frame.get("phase")) != phase:
-                        continue
-                    read.append(frame)
-                    seen += len(frame.get("brain_ids") or [])
-                    if budget and seen >= budget:
-                        break
+                    read.append({k: frame[k] for k in gol_lineage.FIELDS if k in frame})
 
                 # The forest is the other half of the cost; nobody left to draw
                 # it means it is not built.
                 if self._client_gone():
                     self.close_connection = True
                     return
-                answer = gol_lineage.forest(read, limit)
-                answer["frames"] = len(read)
-                answer["asked"] = count
-                self._send_json(answer)
+                self._send_json(gol_lineage.forest(read, phase))
                 return
 
+            # A contiguous run of frames, optionally cut down to the fields the
+            # caller actually reads.
+            #
+            # Both Research views want a couple of hundred consecutive frames
+            # and a few columns of each. Asked for one at a time and whole,
+            # that was two hundred round trips carrying the entire topology of
+            # a forty-thousand-node world — tens of megabytes to parse in the
+            # browser so that two arrays could be read out of it.
             if len(parts) == 4 and parts[:2] == ["api", "runs"] and parts[3] == "frames":
                 query = parse_qs(urlparse(self.path).query)
                 run_id = parts[2]
@@ -486,7 +482,7 @@ class Handler(BaseHTTPRequestHandler):
                     frames.append(_project(frame, wanted) if wanted else frame)
                     if budget and seen >= budget:
                         break
-                self._send_json({"frames": frames, "asked": count})
+                self._send_json({"frames": frames})
                 return
 
         except FileNotFoundError:

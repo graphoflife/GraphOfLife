@@ -102,6 +102,34 @@ function ensureReady() {
  * through Pyodide's own bridge costs several times what encoding and parsing
  * it does, and a frame is a deep tree of lists.
  */
+/**
+ * Keep only the named fields of a frame, `a.b` reaching one level in.
+ *
+ * gol_server._project, for the same callers. Taking each name literally made
+ * `decisions.allocations` come back as a key of that name holding nothing, so
+ * on the static site Flow modules said the run had recorded no decisions and
+ * the edge flow metric read zero everywhere.
+ */
+function project(frame, fields) {
+  const out = {};
+  for (const name of fields) {
+    const dot = name.indexOf('.');
+    if (dot < 0) { out[name] = frame[name]; continue; }
+    const head = name.slice(0, dot);
+    const branch = frame[head];
+    if (branch && typeof branch === 'object' && !Array.isArray(branch)) {
+      (out[head] ||= {})[name.slice(dot + 1)] = branch[name.slice(dot + 1)];
+    }
+  }
+  return out;
+}
+
+let lineageFieldsRead = null;
+/** What gol_lineage.forest reads of a frame, asked of Python once. */
+function lineageFields() {
+  return (lineageFieldsRead ||= call('gol_browser.WORLDS.lineage_fields'));
+}
+
 function call(target, args = []) {
   pyodide.globals.set('_call_args', JSON.stringify(args));
   const json = pyodide.runPython(`
@@ -373,6 +401,26 @@ const handlers = {
   },
 
   /**
+   * The genotype forest of a window, aggregated in here.
+   *
+   * Same reason as the server's: a real window holds more than a million
+   * genotypes and the page can draw a couple of thousand. Doing it here also
+   * keeps the work off the main thread, which is what was freezing the tab.
+   * Each frame is cut to what the forest reads before the window crosses into
+   * Python, which it does as one JSON string.
+   */
+  async lineage({ runId, from, count, phase }) {
+    const fields = lineageFields();
+    const read = [];
+    for (let at = from; at < from + count; at += 16) {
+      const batch = await RunStore.getFrameRange(runId, at, Math.min(16, from + count - at));
+      if (!batch.length) break;
+      for (const frame of batch) read.push(project(frame, fields));
+    }
+    return call('gol_browser.WORLDS.lineage', [read, phase || 'all']);
+  },
+
+  /**
    * A contiguous run of frames, cut down to the fields the caller reads.
    *
    * The projection matters here too, even with no network in the way: every
@@ -380,40 +428,19 @@ const handlers = {
    * whole frames of a large world is tens of megabytes of structured clone
    * so that two arrays can be read out of each.
    */
-  /**
-   * The genotype forest of a window, aggregated in here.
-   *
-   * Same reason as the server's: a real window holds more than a million
-   * genotypes and the page can draw a couple of thousand. Doing it here also
-   * keeps the work off the main thread, which is what was freezing the tab.
-   */
-  async lineage({ runId, from, count, limit, sightings, phase }) {
-    const read = [];
+  async frames({ runId, from, count, fields, sightings }) {
+    const frames = await RunStore.getFrameRange(runId, Number(from), Number(count));
+    // Stopping once enough agents have been seen, as the server does: a
+    // window measured in iterations is very different work in a world of sixty
+    // and one of forty thousand.
+    const kept = [];
     let seen = 0;
-    for (let at = from; at < from + count; at += 16) {
-      const batch = await RunStore.getFrameRange(runId, at, Math.min(16, from + count - at));
-      if (!batch.length) break;
-      for (const frame of batch) {
-        if (phase && phase !== 'all' && String(frame.phase) !== phase) continue;
-        read.push(frame);
-        seen += (frame.brain_ids || []).length;
-      }
+    for (const frame of frames) {
+      kept.push(fields && fields.length ? project(frame, fields) : frame);
+      seen += (frame.ids || frame.brain_ids || []).length;
       if (sightings && seen >= sightings) break;
     }
-    const answer = call('gol_browser.WORLDS.lineage', [read, limit]);
-    answer.frames = read.length;
-    answer.asked = count;
-    return answer;
-  },
-
-  async frames({ runId, from, count, fields }) {
-    const frames = await RunStore.getFrameRange(runId, Number(from), Number(count));
-    if (!fields || !fields.length) return { frames };
-    return { frames: frames.map(frame => {
-      const cut = {};
-      for (const key of fields) cut[key] = frame[key];
-      return cut;
-    }) };
+    return { frames: kept };
   },
 
   async series({ runId, points, keys }) {

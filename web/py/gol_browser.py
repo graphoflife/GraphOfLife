@@ -137,9 +137,13 @@ class Worlds:
         history.summarise(indexed, heavy, can_reconstruct=int(export_every or 1) == 1)
         return history.reply(heavy, strain=strain)
 
-    def lineage(self, frames: List[Dict[str, Any]], limit: int) -> Dict[str, Any]:
+    def lineage(self, frames: List[Dict[str, Any]], phase: str = "all") -> Dict[str, Any]:
         """The genotype forest of a window, same code the server runs."""
-        return gol_lineage.forest(frames, limit)
+        return gol_lineage.forest(frames, phase)
+
+    def lineage_fields(self) -> List[str]:
+        """What the forest reads of a frame, so the worker can hand it no more."""
+        return list(gol_lineage.FIELDS)
 
     # ---- helpers ---------------------------------------------------------
 

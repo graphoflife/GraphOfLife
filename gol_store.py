@@ -32,7 +32,7 @@ import re
 import shutil
 import threading
 import time
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Tuple
 
 import numpy as np
 
@@ -253,7 +253,34 @@ def copy_run(run_id: str, name: str = "") -> Dict[str, Any]:
     return meta
 
 
+#: run id -> (the modification times of its two folders, its size in bytes).
+_SIZES: Dict[str, Tuple[Tuple[int, int], int]] = {}
+
+
+def _mtime(path: str) -> int:
+    try:
+        return os.stat(path).st_mtime_ns
+    except OSError:
+        return 0
+
+
 def run_size_bytes(run_id: str) -> int:
+    """
+    What a run takes on disk.
+
+    Walking every file of every run on each listing took seventy milliseconds
+    with a few runs recorded, grew with every frame written, and the listing is
+    asked for every second and a half while a run is going. So the answer is
+    kept, keyed by the modification times of the run's folder and its frames
+    folder. Every write here makes a temporary file and renames it into place,
+    or removes one, and either changes the folder's time — so an unchanged key
+    is an unchanged size. The times are read before walking, so a write that
+    lands during the walk only makes the next call walk again.
+    """
+    key = (_mtime(run_dir(run_id)), _mtime(frames_dir(run_id)))
+    cached = _SIZES.get(run_id)
+    if cached is not None and cached[0] == key:
+        return cached[1]
     total = 0
     for root, _, files in os.walk(run_dir(run_id)):
         for fname in files:
@@ -261,6 +288,7 @@ def run_size_bytes(run_id: str) -> int:
                 total += os.path.getsize(os.path.join(root, fname))
             except OSError:
                 pass
+    _SIZES[run_id] = (key, total)
     return total
 
 
@@ -282,6 +310,12 @@ def write_frame(run_id: str, index: int, frame: Dict[str, Any]) -> int:
 def read_frame(run_id: str, index: int) -> Dict[str, Any]:
     with gzip.open(frame_path(run_id, index), "rt") as f:
         return json.load(f)
+
+
+def read_frame_bytes(run_id: str, index: int) -> bytes:
+    """A stored frame exactly as written: compact JSON, gzip-compressed."""
+    with open(frame_path(run_id, index), "rb") as f:
+        return f.read()
 
 
 def has_frame(run_id: str, index: int) -> bool:

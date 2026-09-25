@@ -922,6 +922,28 @@ function test_no_canvas_writes_a_colour_out() {
   assert(!found.length, `colours written out on a canvas, where a retheme cannot reach them: ${found.join(', ')}`);
 }
 
+// ---- the browser worker ------------------------------------------------------
+
+function test_the_worker_cuts_frames_the_way_the_server_does() {
+  // gol_server._project: a dotted name reaches one level in. The worker took
+  // every name literally, so on the static site `decisions.allocations` came
+  // back as a key of that name holding nothing, and Flow modules and the edge
+  // flow metric found no decisions at all.
+  const source = fs.readFileSync(path.join(root, 'web', 'js', 'sim-worker.js'), 'utf8');
+  const body = source.match(/function project\(frame, fields\) \{[\s\S]*?\n\}\n/);
+  assert(body, 'sim-worker.js no longer has project()');
+  const project = new Function(`${body[0]}; return project;`)();
+
+  const frame = { iteration: 3, ids: [1, 2], tokens: [5, 6],
+                  decisions: { allocations: [{ agent: 1 }], winners: [9] } };
+  const cut = project(frame, ['iteration', 'decisions.allocations', 'missing.inner']);
+  assert(cut.iteration === 3, 'a plain field did not come through');
+  assert(cut.decisions && cut.decisions.allocations === frame.decisions.allocations,
+    'decisions.allocations did not arrive where the page reads it');
+  assert(!('winners' in cut.decisions), 'the rest of decisions came along too');
+  assert(!('tokens' in cut) && !('missing' in cut), 'fields nobody asked for came along');
+}
+
 const tests = Object.entries({
   test_the_world_holds_its_whole_supply_at_both_ends_of_the_game,
   test_a_pile_never_fills_before_anything_reaches_it,
@@ -958,7 +980,8 @@ const tests = Object.entries({
   test_no_diagram_control_draws_without_asking_what_it_needs,
   test_the_chart_says_which_thesis_it_is_making,
   test_every_colour_a_chart_asks_for_is_in_the_stylesheet,
-  test_no_canvas_writes_a_colour_out
+  test_no_canvas_writes_a_colour_out,
+  test_the_worker_cuts_frames_the_way_the_server_does
 }).sort(([a], [b]) => a.localeCompare(b));
 
 // A test that is written and never listed here is worse than no test: it reads

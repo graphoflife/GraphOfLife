@@ -647,7 +647,12 @@ const Viewer = {
       return;
     }
     try {
-      frame.previous = await this.fetchFrame(index - 1);
+      // Only what the before-phase metrics read. The whole cached frame came
+      // with its own `previous`, so stepping forward chained every visited
+      // frame to the one before it, and the cache's limit stopped freeing any
+      // of them — forty megabytes a frame on a seventy-thousand-node world.
+      const before = await this.fetchFrame(index - 1);
+      frame.previous = before ? { ids: before.ids, tokens: before.tokens, edges: before.edges } : null;
     } catch (err) {
       frame.previous = null;
     }
