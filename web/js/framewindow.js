@@ -12,7 +12,7 @@
  *
  * It is measured in *recorded iterations*, which is the unit a reader counts
  * in. One is two frames, one per phase — the same relation
- * `SimConfig.frames_before` is built on and `getFramesStrided`
+ * `SimConfig.frames_before` is built on and `RunStore.getIterations`
  * already assumes. A run recorded with `export_every` above 1 has its recorded
  * iterations further apart than one apiece, which is why `describe` reports
  * the iteration numbers written in the frames rather than arithmetic on the

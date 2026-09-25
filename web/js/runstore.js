@@ -163,39 +163,24 @@ const RunStore = {
   },
 
   /**
-   * Frames at a fixed stride, for the charts. Read in one pass.
+   * Both phases of each of the given iterations, for the charts, with the
+   * index each was stored at: the history keys its rows by frame, and a frame
+   * does not carry its own position. A phase that was never stored is simply
+   * not there.
    *
-   * `only`, when given, is the set of iterations wanted — a caller drawing a
-   * chart at increasing resolution asks for a handful at a time, and
-   * decompressing the other few hundred on every pass would cost more than the
-   * statistics it is trying to avoid recomputing.
+   * Asked for by key, all in one transaction. A chart climbing to a finer
+   * resolution asks for a handful of iterations at a time, and walking a
+   * cursor over the whole run to find them read every stored frame there was.
    */
-  async getFramesStrided(runId, stride, only = null) {
+  async getIterations(runId, iterations) {
     const db = await this.open();
     const store = db.transaction('frames').objectStore('frames');
-    const range = IDBKeyRange.bound([runId, -Infinity], [runId, Infinity]);
-    const wanted = [];
-
-    await new Promise((resolve, reject) => {
-      const cursor = store.openCursor(range);
-      cursor.onsuccess = () => {
-        const at = cursor.result;
-        if (!at) { resolve(); return; }
-        // Both phases of a sampled iteration are kept, so a phase filter still
-        // has game frames to show. Only the kept ones are unpacked — walking
-        // the range is cheap and inflating every frame to throw most of them
-        // away is not.
-        const iteration = Math.floor(at.value.index / 2);
-        if (iteration % stride === 0 && (!only || only.has(iteration))) {
-          wanted.push(at.value);
-        }
-        at.continue();
-      };
-      cursor.onerror = () => reject(cursor.error);
-    });
-    // With its index: the history keys rows by frame, and a frame does not
-    // carry the position it was stored at.
-    return Promise.all(wanted.map(async row => ({ index: row.index, frame: await unpack(row) })));
+    const rows = await Promise.all(iterations.flatMap(it => [
+      this._await(store.get([runId, 2 * it])),
+      this._await(store.get([runId, 2 * it + 1]))
+    ]));
+    return Promise.all(rows.filter(Boolean)
+      .map(async row => ({ index: row.index, frame: await unpack(row) })));
   },
 
   /**

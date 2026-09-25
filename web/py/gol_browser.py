@@ -17,7 +17,9 @@ that are currently in memory, and nothing about runs that merely exist.
 from __future__ import annotations
 
 import io
-from typing import Any, Dict, List, Optional
+import json
+import math
+from typing import Any, Callable, Dict, List, Optional
 
 import numpy as np
 
@@ -127,8 +129,7 @@ class Worlds:
         history = self._histories.setdefault(run_id, gol_series.History())
         heavy = gol_series.needs_graph(keys) if keys is not None else True
         wanted = history.plan(int(total_frames), points, heavy)
-        return {"iterations": sorted({f // 2 for f in wanted}),
-                "stride": history.stride, "heavy": heavy}
+        return {"iterations": sorted({f // 2 for f in wanted}), "heavy": heavy}
 
     def series_absorb(self, run_id: str, frames: List[Dict[str, Any]], heavy: bool,
                       export_every: int = 1) -> Dict[str, Any]:
@@ -156,3 +157,36 @@ class Worlds:
 
 
 WORLDS = Worlds()
+
+
+def answer(method: Callable[..., Any], arguments: str) -> str:
+    """
+    Call `method` for the worker, arguments and answer both as JSON text.
+
+    Text rather than Pyodide's own conversion, which goes member by member
+    and costs several times what encoding and parsing does: a frame is a deep
+    tree of lists.
+
+    Statistics are occasionally not numbers — a ratio with nothing underneath
+    it, a range that never got a value. JSON has no way to write those, so
+    they travel as null and the interface treats them as missing, which is
+    what they are. Most answers hold none and are written as they are: going
+    through every list of a frame to look for them first cost five times what
+    writing the frame did.
+    """
+    result = method(*json.loads(arguments))
+    try:
+        return json.dumps(result, separators=(",", ":"), allow_nan=False)
+    except ValueError:
+        return json.dumps(_finite(result), separators=(",", ":"), allow_nan=False)
+
+
+def _finite(value: Any) -> Any:
+    """`value` with every float that is not a number replaced by None."""
+    if isinstance(value, float) and not math.isfinite(value):
+        return None
+    if isinstance(value, dict):
+        return {k: _finite(v) for k, v in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [_finite(v) for v in value]
+    return value

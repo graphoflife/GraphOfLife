@@ -833,6 +833,41 @@ def test_the_depth_follows_the_statistics_named():
     assert not gol_series.needs_graph([])
 
 
+def _browser_module():
+    """gol_browser, which lives with the page rather than beside the engine."""
+    import importlib.util
+
+    here = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    spec = importlib.util.spec_from_file_location(
+        "gol_browser", os.path.join(here, "web", "py", "gol_browser.py"))
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def test_the_worker_answers_in_json_with_what_is_not_a_number_as_null():
+    """
+    An answer crosses from Python to the page as JSON, which cannot write a
+    NaN or an infinity, so those arrive as null and read as missing. Answers
+    holding none are written straight out rather than rebuilt first, and must
+    come out exactly as the rebuilt ones did.
+    """
+    import json
+
+    browser = _browser_module()
+    write = lambda value: json.dumps(value, separators=(",", ":"), allow_nan=False)
+
+    clean = {"frames": [{"ids": [3, 4], "tokens": [0.5, 2.0]}], "pair": (1, 2.5), "extinct": False}
+    assert browser.answer(lambda: clean, "[]") == write(browser._finite(clean))
+
+    odd = {"ratio": float("nan"), "range": [1.0, float("inf"), -float("inf")],
+           "pair": (float("nan"), 3)}
+    assert json.loads(browser.answer(lambda: odd, "[]")) == \
+        {"ratio": None, "range": [1.0, None, None], "pair": [None, 3]}
+
+    assert browser.answer(lambda a, b: {"sum": a + b}, "[2, 3]") == '{"sum":5}'
+
+
 def test_the_browser_and_the_server_summarise_a_run_alike():
     """
     Two backends, one history.
@@ -843,15 +878,9 @@ def test_the_browser_and_the_server_summarise_a_run_alike():
     the same numbers. The family count is the one difference, and it is on
     purpose: it needs every iteration in order, which only the server reads.
     """
-    import importlib.util
     import gol_store
 
-    here = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    spec = importlib.util.spec_from_file_location(
-        "gol_browser", os.path.join(here, "web", "py", "gol_browser.py"))
-    gol_browser = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(gol_browser)
-    browser = gol_browser.Worlds()
+    browser = _browser_module().Worlds()
 
     same = lambda a, b: a == b or (isinstance(a, float) and isinstance(b, float)
                                    and math.isnan(a) and math.isnan(b))

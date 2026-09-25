@@ -28,8 +28,8 @@ const PYODIDE = 'https://cdn.jsdelivr.net/pyodide/v0.26.4/full/';
 // exactly how GitHub Pages serves a project site.
 const PY_DIR = new URL('../py/', self.location.href).href;
 
-// Order matters only in that the engine must arrive before anything that
-// imports it.
+// All written into the interpreter's files before anything is imported, so
+// the order does not matter.
 const PY_FILES = [
   'gol_config.py',
   'GraphOfLifeSimple.py',
@@ -54,6 +54,16 @@ function report(stage, detail, done = 0, total = 0) {
 }
 
 async function boot() {
+  // The engine's files, asked for all at once and while the runtime and its
+  // packages download, rather than one after another once they are in.
+  const sources = Promise.all(PY_FILES.map(async name => {
+    const response = await fetch(PY_DIR + name);
+    if (!response.ok) throw new Error(`could not read ${PY_DIR}${name} (${response.status})`);
+    return response.text();
+  }));
+  // Awaited below; until then a failure must not be reported as unhandled.
+  sources.catch(() => {});
+
   report('loading', 'fetching the Python runtime');
   importScripts(PYODIDE + 'pyodide.js');
   pyodide = await self.loadPyodide({ indexURL: PYODIDE });
@@ -70,11 +80,7 @@ async function boot() {
   );
 
   report('loading', 'loading the engine');
-  for (const name of PY_FILES) {
-    const response = await fetch(PY_DIR + name);
-    if (!response.ok) throw new Error(`could not read ${PY_DIR}${name} (${response.status})`);
-    pyodide.FS.writeFile(`/home/pyodide/${name}`, await response.text());
-  }
+  (await sources).forEach((text, i) => pyodide.FS.writeFile(`/home/pyodide/${PY_FILES[i]}`, text));
 
   await pyodide.runPythonAsync(`
 import sys
@@ -126,34 +132,11 @@ function lineageFields() {
  * configuration with a switch in it failed as soon as it crossed over. It also
  * means nothing a caller supplies is ever evaluated as code.
  *
- * The answer comes back as JSON too. Converting a frame member by member
- * through Pyodide's own bridge costs several times what encoding and parsing
- * it does, and a frame is a deep tree of lists.
+ * The answer comes back as JSON too; gol_browser.answer says why.
  */
 function call(target, args = []) {
   pyodide.globals.set('_call_args', JSON.stringify(args));
-  const json = pyodide.runPython(`
-import json as _json, math as _math
-
-def _finite(value):
-    """
-    Statistics are occasionally not numbers — a ratio with nothing underneath
-    it, a range that never got a value. JSON has no way to write those, so
-    they travel as null and the interface treats them as missing, which is
-    what they are.
-    """
-    if isinstance(value, float) and not _math.isfinite(value):
-        return None
-    if isinstance(value, dict):
-        return {k: _finite(v) for k, v in value.items()}
-    if isinstance(value, (list, tuple)):
-        return [_finite(v) for v in value]
-    return value
-
-_json.dumps(_finite(${target}(*_json.loads(_call_args))),
-            separators=(',', ':'), allow_nan=False)
-`);
-  return JSON.parse(json);
+  return JSON.parse(pyodide.runPython(`gol_browser.answer(${target}, _call_args)`));
 }
 
 /*
@@ -466,9 +449,7 @@ const handlers = {
     const plan = call('gol_browser.WORLDS.series_plan',
                       [runId, run.frame_count, points ?? null, keys ?? null]);
     report('series', 'reading frames', 0, 0);
-    const frames = plan.iterations.length
-      ? await RunStore.getFramesStrided(runId, plan.stride, new Set(plan.iterations))
-      : [];
+    const frames = await RunStore.getIterations(runId, plan.iterations);
 
     report('series', 'summarising', 0, frames.length);
     const reply = call('gol_browser.WORLDS.series_absorb',
