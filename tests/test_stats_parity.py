@@ -225,6 +225,52 @@ def test_a_cache_written_across_a_code_change_keeps_its_new_statistics():
     assert series["degreeGamma"] == [None, None, 2.4, 2.4]
 
 
+
+# What a frame is, rather than what was measured on it. Every row carries
+# these, and none of them is a statistic anyone plots, names or explains.
+COORDINATES = {"iteration", "phase", "nodes_before"}
+
+
+def _registry():
+    """RunStats: the page's one list of what each run statistic is called and means."""
+    script = (
+        "const fs = require('fs');"
+        "const RunStats = new Function(fs.readFileSync(process.argv[1] + '/web/js/runstats.js', 'utf8')"
+        " + '; return RunStats;')();"
+        "const keys = RunStats.keys();"
+        "console.log(JSON.stringify({ keys, explained: keys.filter(k => RunStats.explain(k)),"
+        " shares: [...RunStats.POPULATION_COUNTS],"
+        " derived: Object.values(RunStats.DERIVED).flatMap(d => d.needs) }));"
+    )
+    result = subprocess.run(["node", "-e", script, ROOT], capture_output=True, text=True, timeout=60)
+    if result.returncode != 0:
+        raise AssertionError(f"could not read the registry:\n{result.stderr[:2000]}")
+    return json.loads(result.stdout)
+
+
+def test_every_statistic_has_a_name_a_section_and_a_meaning():
+    """
+    The page names, places and explains each run statistic in one registry,
+    web/js/runstats.js. A statistic added to the two sides above and not to it
+    turns up in a chart menu under its raw key and with nothing to say about
+    it; one left there after the two sides dropped it is a menu entry that
+    plots nothing.
+    """
+    if shutil.which("node") is None:
+        print("node is not installed; skipping")
+        return
+
+    registry = _registry()
+    measured = set(gol_series.frame_stats(_frames(2)[-1])) - COORDINATES
+    named = set(registry["keys"])
+    assert named == measured, (
+        f"measured but not in the registry: {sorted(measured - named)}; "
+        f"in the registry but not measured: {sorted(named - measured)}")
+    unexplained = named - set(registry["explained"])
+    assert not unexplained, f"named but never explained: {sorted(unexplained)}"
+    assert set(registry["shares"]) <= named, "a share of the population that is not a statistic"
+    assert set(registry["derived"]) <= named | COORDINATES, "a ratio of something not measured"
+
 if __name__ == "__main__":
     import time
     import traceback

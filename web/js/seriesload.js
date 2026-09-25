@@ -51,38 +51,6 @@ const SeriesLoad = {
   cache: new Map(),
 
   /**
-   * Statistics read as a ratio of two stored ones.
-   *
-   * These were written inside the Theses view, one arrow function per claim,
-   * which meant a thesis could plot a share that no chart anywhere else could.
-   * Here they are one table, and every chart that plots a run's history
-   * offers them beside the stored ones. They sat in Metrics for a while, but
-   * that is the vocabulary of a single frame; a ratio of two columns of a
-   * run's history belongs with the history.
-   *
-   * Absent inputs give null rather than zero, for the reason the series does:
-   * a run recorded before a statistic existed has no value for it, which is
-   * not the same thing as having measured nothing.
-   */
-  DERIVED: {
-    bridgeShare: {
-      label: 'Bridges / edges',
-      needs: ['bridges', 'edges'],
-      of: r => (r.edges && r.bridges != null ? r.bridges / r.edges : null)
-    },
-    culledShare: {
-      label: 'Culled share',
-      needs: ['orphaned', 'nodes_before'],
-      of: r => (r.nodes_before && r.orphaned != null ? r.orphaned / r.nodes_before : null)
-    },
-    leafShare: {
-      label: 'Leaf share',
-      needs: ['leaves', 'nodes'],
-      of: r => (r.nodes && r.leaves != null ? r.leaves / r.nodes : null)
-    }
-  },
-
-  /**
    * A column of a run's history, stored or derived.
    *
    * The one place a chart asks for a statistic by name, so a derived one is
@@ -92,7 +60,7 @@ const SeriesLoad = {
   column(series, key) {
     if (!series) return null;
     if (series[key]) return series[key];
-    const derived = this.DERIVED[key];
+    const derived = RunStats.DERIVED[key];
     if (!derived) return null;
     const inputs = derived.needs.map(name => series[name]);
     if (inputs.some(col => !col)) return null;
@@ -164,7 +132,7 @@ const SeriesLoad = {
   /** The stored statistics charts of `keys` read: a derived one by what it is made of. */
   columns(keys) {
     return [...new Set(keys.flatMap(key =>
-      (this.DERIVED[key] ? this.DERIVED[key].needs : [key])))];
+      (RunStats.DERIVED[key] ? RunStats.DERIVED[key].needs : [key])))];
   },
 
   /**

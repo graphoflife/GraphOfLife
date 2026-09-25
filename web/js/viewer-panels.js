@@ -36,156 +36,6 @@ Object.assign(Viewer, {
     }
   },
 
-  /**
-   * What each statistic is called, in one place.
-   *
-   * The strip under the canvas and the trajectory chart's menus both read
-   * from here, so a statistic cannot end up with two different names
-   * depending on where you look at it.
-   */
-  STAT_LABELS: {
-    nodes: 'Nodes',
-    edges: 'Edges',
-    tokens: 'Tokens',
-    meanTokens: 'Mean tokens',
-    medianTokens: 'Median tokens',
-    maxTokens: 'Richest',
-    minTokens: 'Poorest',
-    gini: 'Gini',
-    topDecileShare: 'Top 10% hold',
-    tokenEntropy: 'Token entropy',
-    tokenEvenness: 'Token evenness',
-    maxTokenAdded: 'Max token added',
-    maxTokenLost: 'Max token lost',
-    gainers: 'Gained',
-    losers: 'Lost',
-    distinctBrains: 'Distinct brains',
-    brainDiversity: 'Brain diversity',
-    distinctParents: 'Parent genomes',
-    density: 'Density',
-    meanDegree: 'Mean degree',
-    medianDegree: 'Median degree',
-    maxDegree: 'Max degree',
-    minDegree: 'Min degree',
-    leaves: 'Leaves',
-    degreeEntropy: 'Degree entropy',
-    degreeEvenness: 'Degree evenness',
-    cycleRank: 'Loops',
-    loopDensity: 'Loop density',
-    bridges: 'Bridges',
-    cutRisk: 'Worst cut',
-    cutRiskBefore: 'Worst cut, pre-cull',
-    coreShare: 'Core share',
-    spectralGap: 'Spectral gap \u03bb\u2082',
-    lightningScore: 'Lightning score',
-    cyclingShare: 'Tokens circulating',
-    lightningLongest: 'Longest lightning',
-    flowImbalance: 'Flow imbalance',
-    netLightningScore: 'Net lightning score',
-    netCyclingShare: 'Net tokens circulating',
-    netLightningLongest: 'Longest net lightning',
-    netFlowShare: 'Flow surviving cancellation',
-    triangles: 'Triangles',
-    transitivity: 'Clustering',
-    dimension: 'Dimension',
-    ricciCurvature: 'Curvature',
-    radius: 'Radius',
-    diameter: 'Diameter',
-    meanPathLength: 'Mean path',
-    components: 'Components',
-
-    degreeGamma: 'Scale-free \u03b3',
-    degreeGammaR2: 'Scale-free R\u00b2',
-    degreeKMin: 'Tail starts at k',
-    degreeTailShare: 'Tail share',
-    degreeGammaKS: 'Scale-free KS',
-    boxDimension: 'Box dimension d\u1d47',
-    boxDimensionR2: 'Box dimension R\u00b2',
-
-    degreeExponent: 'Degree exponent \u03b3',
-    degreeExponentR2: 'Degree fit R\u00b2',
-    tokenExponent: 'Token exponent \u03b3',
-    tokenExponentR2: 'Token fit R\u00b2',
-    tokensVsDegree: 'Tokens vs degree',
-    tokensVsDegreeR2: 'Tokens vs degree R\u00b2',
-    trianglesVsDegree: 'Triangles vs degree',
-    trianglesVsDegreeR2: 'Triangles vs degree R\u00b2',
-    clusteringVsDegree: 'Clustering vs degree',
-    clusteringVsDegreeR2: 'Clustering vs degree R\u00b2',
-    changeVsTokens: 'Token change vs tokens',
-    changeVsTokensR2: 'Token change vs tokens R\u00b2',
-    assortativity: 'Assortativity',
-    births: 'Births',
-    reproTokenShare: 'Tokens to offspring',
-    meanInvestedShare: 'Mean investment',
-    meanChildLinks: 'Links per child',
-    handovers: 'Handovers',
-    gifts: 'Gifts',
-    giftTokens: 'Gifted tokens',
-    giftShare: 'Gifted share',
-    totalFlow: 'Tokens moved',
-    meanEdgeFlow: 'Mean edge flow',
-    maxEdgeFlow: 'Max edge flow',
-    selfAllocationShare: 'Kept at home',
-    spreadShare: 'Spread doctrine',
-    revoltShare: 'Revolt tokens',
-    revolutions: 'Revolutions',
-    heldHomeShare: 'Held own node',
-    prunedEdges: 'Pruned edges',
-    starved: 'Starved',
-    orphaned: 'Culled',
-    redistributed: 'Redistributed'
-  },
-
-  /**
-   * Which category each statistic belongs to, and the order within it.
-   *
-   * Phase-specific groups simply come out empty on the other phase, so the
-   * Reproduction section disappears on a game frame rather than showing a row
-   * of dashes.
-   */
-  STAT_GROUPS: [
-    { key: 'general', label: 'General', open: true, keys: [
-      'nodes', 'edges', 'tokens', 'meanTokens', 'medianTokens', 'maxTokens', 'minTokens',
-      'gini', 'topDecileShare', 'tokenEntropy', 'tokenEvenness',
-      'maxTokenAdded', 'maxTokenLost', 'gainers', 'losers',
-      'starved', 'orphaned', 'redistributed', 'cutRiskBefore',
-      'distinctBrains', 'brainDiversity', 'distinctParents'
-    ] },
-    { key: 'reproduction', label: 'Reproduction', open: true, keys: [
-      'births', 'reproTokenShare', 'meanInvestedShare', 'meanChildLinks',
-      'handovers', 'gifts', 'giftTokens', 'giftShare'
-    ] },
-    // The lightning readings belong here rather than under General: they are
-    // measured on the token flow a Blotto phase allocates, they are blank on a
-    // reproduction frame, and they are read against the traffic figures they
-    // sit beside.
-    { key: 'blotto', label: 'Game (Blotto)', open: true, keys: [
-      'totalFlow', 'meanEdgeFlow', 'maxEdgeFlow', 'selfAllocationShare',
-      'revoltShare', 'spreadShare', 'revolutions', 'heldHomeShare', 'prunedEdges',
-      'lightningScore', 'cyclingShare', 'lightningLongest', 'flowImbalance',
-      'netLightningScore', 'netCyclingShare', 'netLightningLongest', 'netFlowShare'
-    ] },
-    { key: 'structure', label: 'Structure', open: false, keys: [
-      'density', 'meanDegree', 'medianDegree', 'maxDegree', 'minDegree', 'leaves',
-      'radius', 'diameter', 'meanPathLength',
-      'cycleRank', 'loopDensity', 'bridges', 'cutRisk', 'coreShare', 'spectralGap',
-      'triangles', 'transitivity', 'dimension', 'ricciCurvature',
-      'degreeEntropy', 'degreeEvenness', 'components'
-    ] },
-    { key: 'powerlaws', label: 'Power laws', open: false, keys: [
-      'degreeGamma', 'degreeGammaR2', 'degreeKMin', 'degreeTailShare', 'degreeGammaKS',
-      'boxDimension', 'boxDimensionR2',
-      'degreeExponent', 'degreeExponentR2',
-      'tokenExponent', 'tokenExponentR2',
-      'tokensVsDegree', 'tokensVsDegreeR2',
-      'trianglesVsDegree', 'trianglesVsDegreeR2',
-      'clusteringVsDegree', 'clusteringVsDegreeR2',
-      'changeVsTokens', 'changeVsTokensR2',
-      'assortativity'
-    ] }
-  ],
-
   updateStats() {
     const container = document.getElementById('statsStrip');
     if (!this.metrics) { container.innerHTML = ''; return; }
@@ -199,7 +49,7 @@ Object.assign(Viewer, {
     const isOpen = (key) => {
       const el = container.querySelector(`.stat-group[data-group="${key}"]`);
       if (el) return el.open;
-      const declared = this.STAT_GROUPS.find(g => g.key === key);
+      const declared = RunStats.GROUPS.find(g => g.key === key);
       return Boolean(declared && declared.open);
     };
     const heavyGroups = ['structure', 'powerlaws'];
@@ -346,7 +196,7 @@ Object.assign(Viewer, {
     if (s.redistributed !== null) cells.redistributed = formatNumber(s.redistributed);
 
     // Counts of agents also read as a share of those who entered the phase.
-    for (const key of Metrics.POPULATION_COUNTS) {
+    for (const key of RunStats.POPULATION_COUNTS) {
       if (key in cells) cells[key] = withShare(s[key]);
     }
 
@@ -358,13 +208,13 @@ Object.assign(Viewer, {
     }
 
     const html = [];
-    for (const group of this.STAT_GROUPS) {
-      const present = group.keys.filter(k => k in cells);
+    for (const group of RunStats.GROUPS) {
+      const present = Object.keys(group.stats).filter(k => k in cells);
       if (!present.length) continue;
 
       const open = wasOpen.has(group.key) ? wasOpen.get(group.key) : group.open;
       const body = present.map(k => {
-        const label = this.STAT_LABELS[k];
+        const label = group.stats[k];
         const value = cells[k];
         return `<button class="stat" data-stat="${k}" data-label="${label}"
                   title="Click for an explanation and its history">
@@ -547,8 +397,8 @@ Object.assign(Viewer, {
     drawTrajectory(canvas, result.points, {
       colormap: s.nodeColormap, reverse: s.nodeColorReverse,
       logX: s.histTrajX === 'log', logY: s.histTrajY === 'log',
-      xLabel: this.STAT_LABELS[s.trajX] || s.trajX,
-      yLabel: this.STAT_LABELS[s.trajY] || s.trajY,
+      xLabel: RunStats.label(s.trajX),
+      yLabel: RunStats.label(s.trajY),
       footer: result.pairing || '',
       message: result.message || null
     });

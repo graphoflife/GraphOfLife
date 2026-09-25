@@ -194,7 +194,7 @@ const Diagrams = {
       const key = track.line.stat;
       if (seen.has(key)) continue;
       seen.add(key);
-      const text = (StatDetail.EXPLANATIONS || {})[key];
+      const text = RunStats.explain(key);
       if (!text) continue;
 
       const entry = document.createElement('p');
@@ -213,8 +213,7 @@ const Diagrams = {
       const parsed = Metrics.parse(key);
       return Metrics.label(parsed.domain, parsed.key);
     }
-    return (Viewer.STAT_LABELS || {})[key]
-      || (SeriesLoad.DERIVED[key] && SeriesLoad.DERIVED[key].label) || key;
+    return RunStats.label(key);
   },
 
   /**

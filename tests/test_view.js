@@ -34,9 +34,14 @@ const Jobs = new Function(
 const Metrics = new Function('window', ['colormaps.js', 'metrics.js']
   .map(name => fs.readFileSync(path.join(root, 'web', 'js', name), 'utf8')).join('\n')
   + '; return Metrics;')({ devicePixelRatio: 1 });
+// What the run statistics are called, what they mean, and the ratios among
+// them: data only, so it loads bare.
+const RunStats = new Function(
+  `${fs.readFileSync(path.join(root, 'web', 'js', 'runstats.js'), 'utf8')}; return RunStats;`)();
 const SERIES_SOURCE = fs.readFileSync(path.join(root, 'web', 'js', 'seriesload.js'), 'utf8');
 /** A fresh loader, with a cache of its own, talking to `api`. */
-const loaderFor = api => new Function('API', `${SERIES_SOURCE}; return SeriesLoad;`)(api);
+const loaderFor = api => new Function('API', 'RunStats',
+  `${SERIES_SOURCE}; return SeriesLoad;`)(api, RunStats);
 
 // presets.js needs nothing from the page, so it loads the same bare way.
 const Presets = new Function(
@@ -800,9 +805,9 @@ function viewerHistoryWith(backend) {
   const loader = loaderFor(API);
   const detail = { said: '', refresh() {}, failed(err) { this.said = `Could not load history: ${err.message}`; } };
   const viewer = { runId: 'run', frameCount: 40 };
-  new Function('Viewer', 'Jobs', 'SeriesLoad', 'StatDetail', 'Metrics',
+  new Function('Viewer', 'Jobs', 'SeriesLoad', 'StatDetail', 'Metrics', 'RunStats',
     fs.readFileSync(path.join(root, 'web', 'js', 'viewer-panels.js'), 'utf8'))(
-    viewer, Jobs, loader, detail, Metrics);
+    viewer, Jobs, loader, detail, Metrics, RunStats);
   viewer.updateTrajectory = () => {};
   return { viewer, detail, loader };
 }
@@ -919,8 +924,8 @@ const DIAGRAMS_SOURCE = ['theses.js', 'diagrams.js', 'diagram-controls.js']
 function diagramsWith(loader, api = {}) {
   const FrameWindow = new Function('API', `const formatNumber = n => String(n); ${
     fs.readFileSync(path.join(root, 'web', 'js', 'framewindow.js'), 'utf8')}; return FrameWindow;`)(api);
-  const diagrams = new Function('SeriesLoad', 'Metrics', 'Jobs', 'API', 'FrameWindow',
-    `${DIAGRAMS_SOURCE}; return Diagrams;`)(loader, Metrics, Jobs, api, FrameWindow);
+  const diagrams = new Function('SeriesLoad', 'Metrics', 'Jobs', 'API', 'FrameWindow', 'RunStats',
+    `${DIAGRAMS_SOURCE}; return Diagrams;`)(loader, Metrics, Jobs, api, FrameWindow, RunStats);
   diagrams.canvas = {};
   diagrams.drawn = 0;
   diagrams.draw = function () { this.drawn += 1; };

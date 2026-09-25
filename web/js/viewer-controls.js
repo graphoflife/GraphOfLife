@@ -172,10 +172,10 @@ Object.assign(Viewer, {
                        { extras: [Metrics.CONSTANT], selected: s.edgeWidthBy });
 
     // The trajectory reads run statistics rather than per-node metrics, so its
-    // menus are built from the same groups the strip under the canvas uses.
-    const statOptions = this.STAT_GROUPS.map(group => {
-      const items = group.keys
-        .map(k => `<option value="${k}">${this.STAT_LABELS[k]}</option>`)
+    // menus are built from the same sections the strip under the canvas uses.
+    const statOptions = RunStats.GROUPS.map(group => {
+      const items = Object.entries(group.stats)
+        .map(([k, label]) => `<option value="${k}">${label}</option>`)
         .join('');
       return items ? `<optgroup label="${group.label}">${items}</optgroup>` : '';
     }).join('');
