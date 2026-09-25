@@ -108,15 +108,20 @@ class Worlds:
 
         return {"iteration": world.iteration, "extinct": False, "frames": produced}
 
-    def checkpoint(self, run_id: str, path: str) -> int:
-        """Write a resume point, and say how large it turned out."""
+    def checkpoint(self, run_id: str, path: str) -> Dict[str, int]:
+        """
+        Write a resume point, and say which iteration it holds and how large
+        it turned out. The iteration is the world's own: the caller used to
+        take it from the run's stored record, which a slice in flight could
+        have left behind the world.
+        """
         world = self._require(run_id)["world"]
         buffer = io.BytesIO()
         np.savez_compressed(buffer, **world.to_checkpoint())
         data = buffer.getvalue()
         with open(path, "wb") as handle:
             handle.write(data)
-        return len(data)
+        return {"iteration": world.iteration, "bytes": len(data)}
 
     # ---- statistics ------------------------------------------------------
 

@@ -151,7 +151,35 @@ function callWritten(target, argsJson) {
  * the interpreter uninvolved until something needs to be advanced again.
  */
 
-const running = new Set();
+// runId -> the pump advancing it. A pump carries on only while it is still
+// the one on record, so a stop followed at once by a start cannot leave the
+// old pump going beside the new one: between two slices it only checked that
+// the run was running, which after a restart it was again.
+const running = new Map();
+
+/**
+ * One thing at a time for each run.
+ *
+ * Advancing a run is a slice of awaits: the step, storing what it recorded,
+ * saving the record. A stop, a rename, a copy or a delete arriving between
+ * two of them acted on a record the slice was about to write over, or
+ * checkpointed a world the slice had advanced and not yet stored. A stop
+ * landed mid-slice nearly every time, since its message waits out the step
+ * and is taken at the first await after it: the slice then wrote the run
+ * back as running, the checkpoint held a later iteration than the record
+ * said, and a tab closed just then never stored that iteration's frames,
+ * leaving a hole in the run once it was resumed. Everything that touches a
+ * run's world or its record takes its turn here, so a stop waits for the
+ * slice in flight.
+ */
+const turns = new Map();
+function inTurn(runId, work) {
+  const turn = (turns.get(runId) || Promise.resolve()).then(work);
+  const settled = turn.catch(() => {});
+  turns.set(runId, settled);
+  settled.then(() => { if (turns.get(runId) === settled) turns.delete(runId); });
+  return turn;
+}
 
 /** Metadata as the interface expects it. */
 function meta(run) {
@@ -220,16 +248,31 @@ async function ensureWorld(run) {
 
 async function saveCheckpoint(run) {
   const path = `/home/pyodide/${run.id}.npz`;
-  call('gol_browser.WORLDS.checkpoint', [run.id, path]);
+  const saved = call('gol_browser.WORLDS.checkpoint', [run.id, path]);
   const bytes = pyodide.FS.readFile(path);
   try { pyodide.FS.unlink(path); } catch (err) { /* already gone */ }
   await RunStore.putCheckpoint(run.id, bytes.buffer);
-  run.checkpoint_iteration = run.iteration;
+  run.checkpoint_iteration = saved.iteration;
 }
 
-/** Advance one run by a slice, store what it produced, then hand back. */
+/**
+ * Advance a run a slice at a time for as long as it is running, each slice
+ * taking its turn with whatever else is done to the run.
+ */
 async function pump(runId) {
-  if (!running.has(runId)) return;
+  const token = {};
+  running.set(runId, token);
+  while (running.get(runId) === token) {
+    await inTurn(runId, () => advance(runId, token));
+    // Yielding to the queue between slices is what makes stopping possible.
+    await new Promise(resolve => setTimeout(resolve, 0));
+  }
+}
+
+/** One slice: advance, store what it produced, and record where the run is. */
+async function advance(runId, token) {
+  // Stopped, or started again by another pump, while this waited its turn.
+  if (running.get(runId) !== token) return;
 
   let run;
   try {
@@ -261,12 +304,7 @@ async function pump(runId) {
       run.error = String(err && err.message ? err.message : err).slice(0, 400);
       await RunStore.putRun(run).catch(() => {});
     }
-    return;
   }
-
-  if (!running.has(runId)) return;
-  // Yielding to the queue between slices is what makes stopping possible.
-  setTimeout(() => pump(runId), 0);
 }
 
 let counter = 0;
@@ -328,70 +366,88 @@ const handlers = {
     return meta(run);
   },
 
+  async rename({ runId, name }) {
+    return inTurn(runId, async () => {
+      const run = await loadRun(runId);
+      run.name = String(name || '').trim() || run.name;
+      await RunStore.putRun(run);
+      return meta(run);
+    });
+  },
+
   /**
    * Duplicate a run whole: its metadata, every frame, and its checkpoint.
    *
    * A fork rather than a backup — the copy resumes from exactly where the
    * original is and goes its own way. It is never marked as running, because
-   * nothing is advancing it.
+   * nothing is advancing it. Taken in the source's turn, so a slice in flight
+   * cannot leave it with frames its record does not count.
    */
-  async rename({ runId, name }) {
-    const run = await loadRun(runId);
-    run.name = String(name || '').trim() || run.name;
-    await RunStore.putRun(run);
-    return meta(run);
-  },
-
   async copy({ runId, name }) {
-    const source = await loadRun(runId);
-    const id = await nextRunId();
+    return inTurn(runId, async () => {
+      const source = await loadRun(runId);
+      const id = await nextRunId();
 
-    const copied = {
-      ...source,
-      id,
-      name: (name || '').trim() || `${source.name || runId} (copy)`,
-      created_at: Date.now() / 1000,
-      status: 'idle',
-      error: null
-    };
-    await RunStore.putRun(copied);
-    await RunStore.copyFrames(runId, id);
+      const copied = {
+        ...source,
+        id,
+        name: (name || '').trim() || `${source.name || runId} (copy)`,
+        created_at: Date.now() / 1000,
+        status: 'idle',
+        error: null
+      };
+      await RunStore.putRun(copied);
+      await RunStore.copyFrames(runId, id);
 
-    const checkpoint = await RunStore.getCheckpoint(runId);
-    if (checkpoint) await RunStore.putCheckpoint(id, checkpoint);
+      const checkpoint = await RunStore.getCheckpoint(runId);
+      if (checkpoint) await RunStore.putCheckpoint(id, checkpoint);
 
-    return meta(copied);
+      return meta(copied);
+    });
   },
 
   async remove({ runId }) {
     running.delete(runId);
-    call('gol_browser.WORLDS.drop', [runId]);
-    await RunStore.deleteRun(runId);
-    return { ok: true };
+    // After the slice in flight, which would otherwise write the run back
+    // into existence once it had been deleted.
+    return inTurn(runId, async () => {
+      call('gol_browser.WORLDS.drop', [runId]);
+      await RunStore.deleteRun(runId);
+      return { ok: true };
+    });
   },
 
   async start({ runId }) {
-    const run = await loadRun(runId);
-    await ensureWorld(run);
-    run.status = 'running';
-    run.error = null;
-    await RunStore.putRun(run);
-    running.add(runId);
-    pump(runId);
-    return { ok: true };
+    return inTurn(runId, async () => {
+      // Started twice, a run advanced twice over, each slice writing frames
+      // where the other had just written its own.
+      if (running.has(runId)) return { ok: true };
+      const run = await loadRun(runId);
+      await ensureWorld(run);
+      run.status = 'running';
+      run.error = null;
+      await RunStore.putRun(run);
+      pump(runId);
+      return { ok: true };
+    });
   },
 
   async stop({ runId }) {
+    // No slice starts after this, and the one in flight finishes before the
+    // stop takes its turn, so the checkpoint below is of a world whose frames
+    // are all stored and whose record is up to date.
     running.delete(runId);
-    const run = await loadRun(runId);
-    run.status = 'stopped';
-    // A stop is the likeliest moment for someone to close the tab, so this is
-    // where it is worth paying for a resume point.
-    if (run.config.checkpoint_every) {
-      try { await saveCheckpoint(run); } catch (err) { /* nothing to save yet */ }
-    }
-    await RunStore.putRun(run);
-    return { ok: true };
+    return inTurn(runId, async () => {
+      const run = await loadRun(runId);
+      run.status = 'stopped';
+      // A stop is the likeliest moment for someone to close the tab, so this
+      // is where it is worth paying for a resume point.
+      if (run.config.checkpoint_every) {
+        try { await saveCheckpoint(run); } catch (err) { /* nothing to save yet */ }
+      }
+      await RunStore.putRun(run);
+      return { ok: true };
+    });
   },
 
   async frame({ runId, index }) {

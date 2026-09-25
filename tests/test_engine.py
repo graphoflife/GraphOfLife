@@ -845,6 +845,32 @@ def _browser_module():
     return module
 
 
+def test_a_browser_checkpoint_says_which_iteration_it_holds():
+    """
+    The worker recorded a checkpoint under the iteration in the run's stored
+    record, which a slice in flight could have left behind the world. The
+    checkpoint says for itself now, from the world it was written from, and a
+    world restored from it is at that iteration.
+    """
+    import json
+
+    browser = _browser_module().Worlds()
+    config = {"total_tokens": 2000, "n_nodes": 40, "k_neighbors": 4,
+              "hidden_layers": [6], "seed": 3}
+    # The run keeps the configuration create settles on, as the worker does.
+    stored = browser.create("a", config)["config"]
+    browser.step("a", 3)
+    with tempfile.TemporaryDirectory() as tmp:
+        path = os.path.join(tmp, "a.npz")
+        saved = browser.checkpoint("a", path)
+        assert saved["iteration"] == 3 and saved["bytes"] == os.path.getsize(path), saved
+        assert json.loads(_browser_module().to_json(saved)) == saved
+
+        again = _browser_module().Worlds()
+        restored = again.restore("a", stored, path)
+        assert restored["iteration"] == saved["iteration"], restored
+
+
 def test_the_worker_answers_in_json_with_what_is_not_a_number_as_null():
     """
     An answer crosses from Python to the page as JSON, which cannot write a

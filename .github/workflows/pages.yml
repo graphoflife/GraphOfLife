@@ -56,6 +56,8 @@ jobs:
         run: node tests/test_view.js
       - name: The viewer reads its metrics off the frame correctly
         run: node tests/test_stats.js
+      - name: A run in the browser keeps its frames, record and checkpoint in step
+        run: node tests/test_worker.js
       - name: Every script parses
         run: |
           for f in web/js/*.js; do node --check "$f"; done
