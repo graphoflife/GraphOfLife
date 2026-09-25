@@ -117,33 +117,11 @@ class FrameMetrics {
    * zero and the UI says so.
    */
   _edgeFlow() {
-    const flow = new Map();
+    // Only between agents still present, which is what the renderer draws;
+    // the statistics use flowAmounts instead.
     const decisions = this.frame.decisions;
-    if (!decisions || !decisions.allocations) return flow;
-
-    // Keyed by position rather than by id, so the renderer can look an edge up
-    // without hashing a string per edge. That also means it only holds traffic
-    // between agents still present; the statistics use flowAmounts instead.
-    const index = this.index;
-    const stride = this.frame.ids.length + 1;
-
-    for (const record of decisions.allocations) {
-      const source = record.agent;
-      const is = index.get(source);
-      if (is === undefined) continue;
-
-      for (let i = 0; i < record.targets.length; i++) {
-        const target = record.targets[i];
-        const amount = record.alloc[i];
-        if (!amount || target === source) continue;
-        const it = index.get(target);
-        if (it === undefined) continue;
-
-        const key = is < it ? is * stride + it : it * stride + is;
-        flow.set(key, (flow.get(key) || 0) + amount);
-      }
-    }
-    return flow;
+    if (!decisions || !decisions.allocations) return new Map();
+    return GraphStats.flowByPair(this.frame.ids, decisions.allocations, this.index);
   }
 
   get flow() {

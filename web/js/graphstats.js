@@ -37,6 +37,42 @@ const GraphStats = {
     return { label, count };
   },
 
+  /** One key for an undirected edge, whichever end it is named from. */
+  pairKey(a, b) {
+    return a < b ? `${a},${b}` : `${b},${a}`;
+  },
+
+  /**
+   * What crossed each link during a game phase, read from its allocations: a
+   * map from a pair of positions in `ids`, as lower × (n + 1) + higher, to the
+   * tokens staked across that pair either way.
+   *
+   * A token an agent keeps is not flow, and a stake on an agent gone from the
+   * frame had no link left to cross. Numbers rather than strings for keys, so
+   * the renderer can look an edge up without building one per edge. The
+   * statistics under the canvas and Flow modules each read allocations this
+   * way, in code of their own.
+   */
+  flowByPair(ids, allocations, index = null) {
+    const at = index || new Map(ids.map((id, i) => [id, i]));
+    const stride = ids.length + 1;
+    const flow = new Map();
+    for (const record of allocations) {
+      const from = at.get(record.agent);
+      if (from === undefined) continue;
+      const targets = record.targets || [], alloc = record.alloc || [];
+      for (let i = 0; i < targets.length; i++) {
+        const amount = alloc[i];
+        if (!(amount > 0)) continue;
+        const to = at.get(targets[i]);
+        if (to === undefined || to === from) continue;
+        const key = from < to ? from * stride + to : to * stride + from;
+        flow.set(key, (flow.get(key) || 0) + amount);
+      }
+    }
+    return flow;
+  },
+
   /**
    * Loop structure.
    *
@@ -54,11 +90,6 @@ const GraphStats = {
    * Per-node and per-edge loop counts come from `cycleParticipation` rather
    * than from here.
    */
-  /** One key for an undirected edge, whichever end it is named from. */
-  pairKey(a, b) {
-    return a < b ? `${a},${b}` : `${b},${a}`;
-  },
-
   loops(ids, edges, adj) {
     const splits = this._bridgeSplits(ids, adj);
     const whole = this.components(ids, adj);

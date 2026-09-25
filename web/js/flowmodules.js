@@ -236,32 +236,14 @@ const FlowModules = {
    * about who it is grouped with.
    */
   flowOf(frame) {
-    const index = new Map();
-    (frame.ids || []).forEach((id, i) => index.set(id, i));
-    const weight = new Map();
+    const ids = frame.ids || [];
     const allocations = ((frame.decisions || {}).allocations) || [];
-
-    for (const record of allocations) {
-      const from = index.get(record.agent);
-      if (from === undefined) continue;
-      const targets = record.targets || [];
-      const alloc = record.alloc || [];
-      for (let i = 0; i < targets.length; i++) {
-        const amount = alloc[i] || 0;
-        if (amount <= 0) continue;
-        const to = index.get(targets[i]);
-        if (to === undefined || to === from) continue;
-        const key = from < to ? `${from},${to}` : `${to},${from}`;
-        weight.set(key, (weight.get(key) || 0) + amount);
-      }
-    }
-
+    const stride = ids.length + 1;
     const edges = [];
-    for (const [key, w] of weight) {
-      const [a, b] = key.split(",");
-      edges.push([Number(a), Number(b), w]);
+    for (const [key, w] of GraphStats.flowByPair(ids, allocations)) {
+      edges.push([Math.floor(key / stride), key % stride, w]);
     }
-    return { ids: frame.ids || [], edges, hasFlow: allocations.length > 0 };
+    return { ids, edges, hasFlow: allocations.length > 0 };
   },
 
   // ---- L1: the same module, one iteration later --------------------------

@@ -9,9 +9,11 @@
 const fs = require('fs');
 const path = require('path');
 
-const source = fs.readFileSync(
-  path.join(__dirname, '..', 'web', 'js', 'flowmodules.js'), 'utf8');
-const FlowModules = new Function(`${source}; return FlowModules;`)();
+const read = name => fs.readFileSync(path.join(__dirname, '..', 'web', 'js', name), 'utf8');
+// graphstats.js for the one reading of allocations both it and the panel use.
+const GraphStats = new Function(`${read('graphstats.js')}; return GraphStats;`)();
+const source = read('flowmodules.js');
+const FlowModules = new Function('GraphStats', `${source}; return FlowModules;`)(GraphStats);
 
 // ---------------------------------------------------------------------------
 
