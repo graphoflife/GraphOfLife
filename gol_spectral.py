@@ -164,11 +164,14 @@ def spectral_gap(ids, adj) -> Optional[float]:
     if any(d == 0 for d in degree):
         return None                      # not actually one component
 
-    counts = np.array(degree, dtype=np.int64)
+    # Indices as the platform's own index type. Fixed at 64 bits, repeat and
+    # bincount refused them in the browser, whose Python is a 32-bit build,
+    # and every graph statistic on the static site failed with them.
+    counts = np.array(degree, dtype=np.intp)
     weights = np.array(degree, dtype=np.float64)
     inverse_root = 1.0 / np.sqrt(weights)
-    source = np.repeat(np.arange(n, dtype=np.int64), counts)
-    target = np.array([j for row in neighbours for j in row], dtype=np.int64)
+    source = np.repeat(np.arange(n, dtype=np.intp), counts)
+    target = np.array([j for row in neighbours for j in row], dtype=np.intp)
 
     # The eigenvector of the eigenvalue that is always zero.
     trivial = np.sqrt(weights)
