@@ -217,6 +217,41 @@ function test_a_window_stopped_between_batches_ends_as_stopped() {
   })();
 }
 
+function test_the_budget_is_the_windows_not_each_batchs() {
+  // Every batch used to be handed the whole budget, so each caller kept its
+  // own tally, and a window read up to nearly twice what it was capped at.
+  const budgets = [];
+  const API = {
+    // A backend that stops once it has seen what it was allowed, as both do.
+    getFrames: (_run, from, count, _fields, sightings) => {
+      budgets.push(sightings);
+      const frames = [];
+      let seen = 0;
+      for (let i = from; i < from + count; i++) {
+        frames.push({ i, ids: new Array(100).fill(0) });
+        seen += 100;
+        if (sightings && seen >= sightings) break;
+      }
+      return Promise.resolve({ frames });
+    }
+  };
+  const scoped = new Function('API', `const formatNumber = n => String(n); ${source}; return FrameWindow;`)(API);
+
+  return (async () => {
+    let agents = 0;
+    const budget = scoped.BATCH * 100 * 2 + 250;       // two batches and a bit
+    for await (const batch of scoped.read('r', scoped.plan(1000, 0, 500).indices, null, budget)) {
+      agents += batch.length * 100;
+    }
+    if (agents < budget || agents >= budget + 100) {
+      throw new Error(`read ${agents} agents on a budget of ${budget}`);
+    }
+    if (budgets.length !== 3 || budgets[2] !== 250) {
+      throw new Error(`the batches were asked for ${budgets.join(', ')}`);
+    }
+  })();
+}
+
 function test_where_the_window_sits_is_read_off_the_frames() {
   // Not computed from the frame index: a run recorded with export_every above
   // one has its iterations further apart than one apiece, and arithmetic on
@@ -258,6 +293,7 @@ const tests = Object.entries({
   test_only_the_fields_a_caller_reads_are_asked_for,
   test_reading_can_stop_early,
   test_a_window_stopped_between_batches_ends_as_stopped,
+  test_the_budget_is_the_windows_not_each_batchs,
   test_where_the_window_sits_is_read_off_the_frames,
   test_one_iteration_is_the_smallest_window
 }).sort(([a], [b]) => a.localeCompare(b));

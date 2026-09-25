@@ -211,6 +211,24 @@ async function test_an_answer_after_a_stop_is_a_stop() {
   assert(after === 'AbortError' && sent === 1, 'a read already stopped was sent anyway');
 }
 
+function test_a_saved_preset_is_read_in_todays_vocabulary() {
+  // Translating an old preset used to happen wherever one was applied, so
+  // every place that applied one had to remember to. It happens where saved
+  // presets are read now, once.
+  const stored = { old: { nodeColorBy: 'log_tokens', edgeColorBy: 'flow', distMetric: 'node:age' } };
+  const storage = { getItem: () => JSON.stringify(stored), setItem() {} };
+  const Saved = new Function('Metrics', 'localStorage',
+    `${fs.readFileSync(path.join(root, 'web', 'js', 'presets.js'), 'utf8')}; return Presets;`)(
+    Metrics, storage);
+
+  const preset = Saved.get('old');
+  assert(preset.nodeColorBy === 'tokens' && preset.nodeColorLog === true,
+    `a log_ spelling came back as ${preset.nodeColorBy}, log ${preset.nodeColorLog}`);
+  assert(preset.edgeColorLog === true, 'flow lost the log scale it was always drawn on');
+  assert(preset.distMetric === Metrics.qualify('node', 'node_id'),
+    `age kept its old meaning: ${preset.distMetric}`);
+}
+
 function test_the_default_look_is_stated_once() {
   // The default preset is the only statement of how the Viewer starts. It
   // used to be stated three times: viewer.js and index.html each carried a
@@ -854,8 +872,10 @@ const DIAGRAMS_SOURCE = ['theses.js', 'diagrams.js', 'diagram-controls.js']
  * `loader` and frames through `api`.
  */
 function diagramsWith(loader, api = {}) {
-  const diagrams = new Function('SeriesLoad', 'Metrics', 'Jobs', 'API',
-    `${DIAGRAMS_SOURCE}; return Diagrams;`)(loader, Metrics, Jobs, api);
+  const FrameWindow = new Function('API', `const formatNumber = n => String(n); ${
+    fs.readFileSync(path.join(root, 'web', 'js', 'framewindow.js'), 'utf8')}; return FrameWindow;`)(api);
+  const diagrams = new Function('SeriesLoad', 'Metrics', 'Jobs', 'API', 'FrameWindow',
+    `${DIAGRAMS_SOURCE}; return Diagrams;`)(loader, Metrics, Jobs, api, FrameWindow);
   diagrams.canvas = {};
   diagrams.drawn = 0;
   diagrams.draw = function () { this.drawn += 1; };
@@ -1032,6 +1052,7 @@ const tests = Object.entries({
   test_a_conquest_does_not_show_its_answer_before_the_brain_arrives,
   test_the_conquest_waits_for_the_stakes_on_the_step_that_shows_both,
   test_the_default_look_is_stated_once,
+  test_a_saved_preset_is_read_in_todays_vocabulary,
   test_a_second_job_for_an_owner_cancels_the_first,
   test_only_cancels_everything_else,
   test_a_cancelled_job_neither_reports_nor_counts_as_finished,

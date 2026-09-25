@@ -126,12 +126,12 @@ const FlowView = {
     return Jobs.run(this, 'Reading frames', async (job) => {
       const frames = [];
       let painted = 0;
-      let seen = 0;
+      // Up to MAX_SIGHTINGS agents in all. Reading further would add minutes
+      // of clustering for a picture already at the limit of what can be read.
       for await (const batch of FrameWindow.read(runId, plan.indices, this.FIELDS,
                                                  this.MAX_SIGHTINGS,
                                                  { signal: job.signal })) {
         frames.push(...batch);
-        seen += batch.reduce((n, f) => n + (f.ids || []).length, 0);
         job.report(frames.length, plan.indices.length);
 
         // Follow and draw what has arrived rather than waiting out the whole
@@ -142,9 +142,6 @@ const FlowView = {
           this.frames = frames.slice();
           this.recompute();
         }
-        // Enough of this world seen. Reading further would add minutes of
-        // clustering for a picture already at the limit of what can be read.
-        if (seen >= this.MAX_SIGHTINGS) break;
       }
       this.frames = frames;
       this.asked = plan.indices.length;

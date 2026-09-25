@@ -157,12 +157,23 @@ const Presets = {
     return preset ? { ...this.BASE_LAYOUT, ...preset } : null;
   },
 
+  /**
+   * Every saved preset, in today's vocabulary.
+   *
+   * One saved before a metric was renamed, or before log became a toggle, is
+   * read as what it meant here, as it comes out of storage. The Viewer, its
+   * preset controls and the front page each used to translate for
+   * themselves, the built-ins included, which never needed it.
+   */
   load() {
+    let all;
     try {
-      return JSON.parse(localStorage.getItem(this.STORAGE_KEY)) || {};
+      all = JSON.parse(localStorage.getItem(this.STORAGE_KEY)) || {};
     } catch (err) {
       return {};
     }
+    for (const settings of Object.values(all)) Metrics.migrateSettings(settings);
+    return all;
   },
 
   save(all) {

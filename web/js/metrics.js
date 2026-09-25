@@ -294,9 +294,10 @@ const Metrics = {
   /**
    * Rewrite a settings object written before log became a toggle.
    *
-   * Saved presets and the built-ins both stored `log_tokens` in the same field
-   * that now holds `tokens`, so without this an old preset would silently
-   * select nothing and the view would fall back to a flat colour.
+   * Saved presets stored `log_tokens` in the same field that now holds
+   * `tokens`, so without this an old preset would silently select nothing and
+   * the view would fall back to a flat colour. Presets.load runs it on every
+   * saved preset as it is read.
    */
   LEGACY_PAIRS: [
     ['nodeColorBy', 'nodeColorLog'],

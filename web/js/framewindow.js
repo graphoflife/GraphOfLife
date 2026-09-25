@@ -74,15 +74,21 @@ const FrameWindow = {
    * The planned frames, a batch at a time.
    *
    * Yielded rather than returned whole so a caller can draw what it has and
-   * stop early — both views draw every batch, and the lineage also shortens
-   * the window once the first frame has said how big this world is.
+   * stop early.
    *
    * `fields` is the columns the caller actually reads. A frame of a large run
-   * is mostly its edge list, and neither view looks at it: the lineage wants
-   * two arrays of brain ids, the flow view wants ids and allocations. Asking
-   * for the whole thing was tens of megabytes to parse per window.
+   * is mostly its edge list, and Flow modules never looks at it. Asking for
+   * the whole thing was tens of megabytes to parse per window.
+   *
+   * `sightings`, when given, caps how many agents are read over the whole
+   * window: one measured in iterations is very different work in a world of
+   * sixty and in one of forty thousand. Each batch is asked for what is left
+   * of it, and the read ends once it is spent. Every batch used to be handed
+   * all of it, so each caller kept a running total of its own to know when to
+   * stop, and read up to nearly twice the cap before it did.
    */
   async *read(runId, indices, fields = null, sightings = 0, opts = {}) {
+    let seen = 0;
     for (let at = 0; at < indices.length; at += this.BATCH) {
       // Checked between batches as well as passed down, so a long window stops
       // at the next boundary even if the request in flight has already been
@@ -90,13 +96,15 @@ const FrameWindow = {
       // look to its reader like a window that ended.
       opts.signal?.throwIfAborted();
       const slice = indices.slice(at, at + this.BATCH);
-      const reply = await API.getFrames(runId, slice[0], slice.length,
-                                        fields, sightings, opts);
+      const reply = await API.getFrames(runId, slice[0], slice.length, fields,
+                                        sightings ? sightings - seen : 0, opts);
       const got = reply.frames || [];
       yield got;
-      // The backend stopped early on its own budget, so there is
-      // nothing more coming for this window.
-      if (sightings && got.length < slice.length) return;
+      // Counted as the backends count it.
+      seen += got.reduce((n, f) => n + (f.ids || f.brain_ids || []).length, 0);
+      // Short of what was asked for means the run ran out, or the backend
+      // stopped on what was left of the budget: nothing more is coming.
+      if (got.length < slice.length || (sightings && seen >= sightings)) return;
     }
   },
 

@@ -80,10 +80,6 @@ const Diagrams = {
   // draw a histogram that thirty bins could not tell apart from two.
   MAX_POOLED: 400000,
 
-  // Frames per request. The backends cap a batch, so a long span is several
-  // requests rather than one silently truncated one.
-  BATCH: 64,
-
   // ---- setup ------------------------------------------------------------
 
   init() {
@@ -445,24 +441,15 @@ const Diagrams = {
     if (this.tab.kind === 'frame') {
       const { from, count, lead, key } = this.frameSpan();
       this.say('Reading frames…');
-      // A batch is capped server-side, so a long span is several requests
-      // rather than one truncated one. Reading them in order also means each
-      // frame can be handed the one before it, which is what the
-      // "before phase" metrics are computed against.
-      const wanted = count + lead;
+      // In order, so each frame can be handed the one before it, which is
+      // what the "before phase" metrics are computed against; and only until
+      // MAX_POOLED values have been gathered.
+      const indices = Array.from({ length: count + lead }, (_, k) => from - lead + k);
       const read = [];
-      let pooled = 0;
-      for (let at = 0; at < wanted; at += this.BATCH) {
-        const size = Math.min(this.BATCH, wanted - at);
-        const reply = await API.getFrames(this.runId, from - lead + at, size,
-                                          this.FRAME_FIELDS, this.MAX_POOLED - pooled,
-                                          { signal: job.signal });
-        const batch = reply.frames || [];
+      for await (const batch of FrameWindow.read(this.runId, indices, this.FRAME_FIELDS,
+                                                 this.MAX_POOLED, { signal: job.signal })) {
         read.push(...batch);
-        pooled += batch.reduce((n, f) => n + (f.ids || []).length, 0);
-        job.report(read.length, wanted, 'Reading frames');
-        // Either the run ran out or the value budget did; both mean stop.
-        if (batch.length < size || pooled >= this.MAX_POOLED) break;
+        job.report(read.length, indices.length, 'Reading frames');
       }
       for (let i = 1; i < read.length; i++) read[i].previous = read[i - 1];
       this.frames = read.slice(lead);

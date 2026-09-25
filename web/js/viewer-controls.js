@@ -275,7 +275,7 @@ Object.assign(Viewer, {
 
   applySettings(preset) {
     if (!preset) return;
-    Object.assign(this.settings, Metrics.migrateSettings({ ...preset }));
+    Object.assign(this.settings, preset);
 
     this.syncControlsFromSettings();
     this.syncAxisToggles();

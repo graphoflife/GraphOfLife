@@ -83,7 +83,7 @@ const Home = {
 
     // The Viewer's default look, minus the furniture. A legend on a backdrop
     // is a label for something nobody is reading.
-    this.settings = Metrics.migrateSettings({ ...Presets.builtIn('default') });
+    this.settings = Presets.builtIn('default');
     Object.assign(this.settings, {
       showLegend: false,
       showEdgeLegend: false,
