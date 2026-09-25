@@ -43,7 +43,7 @@ import threading
 import traceback
 import webbrowser
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
-from typing import Any, Dict
+from typing import Any, Callable, Dict
 from urllib.parse import parse_qs, urlparse
 
 import gol_store as store
@@ -315,181 +315,170 @@ class Handler(BaseHTTPRequestHandler):
 
     # ---- routing ---------------------------------------------------------
 
-    def do_GET(self) -> None:
-        path = urlparse(self.path).path
-        # Anything unforeseen becomes a 500 with a message rather than a
-        # dropped connection. A corrupt meta.json raising KeyError deep in a
-        # handler used to kill the request outright, which the page saw as a
-        # network failure and reported as the server being down.
+    def _dispatch(self, route: Callable[[str], None]) -> None:
+        """
+        Run a route, and turn whatever it raises into an answer.
+
+        A request that makes no sense is a 400 with its reason, a run that is
+        not there a 404, and anything unforeseen a 500 with a message rather
+        than a dropped connection: a corrupt meta.json raising KeyError deep in
+        a handler used to kill the request outright, which the page saw as a
+        network failure and reported as the server being down. GET, POST and
+        DELETE each had their own version of this, and no two agreed.
+        """
         try:
-            if path.startswith("/api/"):
-                self._route_get(path)
-            else:
-                self._serve_static(path)
+            route(urlparse(self.path).path)
         except (BrokenPipeError, ConnectionResetError):
             pass                      # the browser navigated away mid-response
+        except FileNotFoundError:
+            self._error("run not found", 404)
+        except ValueError as exc:
+            self._error(str(exc))
         except Exception as exc:      # noqa: BLE001 - surface failures to the UI
             traceback.print_exc()
             self._error(f"{type(exc).__name__}: {exc}", 500)
 
+    def do_GET(self) -> None:
+        self._dispatch(self._route_get)
+
     def do_POST(self) -> None:
-        path = urlparse(self.path).path
-        try:
-            self._route_post(path)
-        except ValueError as exc:
-            self._error(str(exc))
-        except FileNotFoundError:
-            self._error("run not found", 404)
-        except (BrokenPipeError, ConnectionResetError):
-            pass                      # the browser navigated away mid-response
-        except Exception as exc:  # noqa: BLE001 - surface failures to the UI
-            traceback.print_exc()
-            self._error(f"{type(exc).__name__}: {exc}", 500)
+        self._dispatch(self._route_post)
 
     def do_DELETE(self) -> None:
-        path = urlparse(self.path).path
+        self._dispatch(self._route_delete)
+
+    def _route_delete(self, path: str) -> None:
         parts = [p for p in path.split("/") if p]
         if len(parts) == 3 and parts[:2] == ["api", "runs"]:
-            try:
-                POOL.stop(parts[2])
-                store.delete_run(parts[2])
-                self._send_json({"ok": True})
-            except ValueError as exc:
-                self._error(str(exc))
-            except Exception as exc:  # noqa: BLE001 - surface failures to the UI
-                traceback.print_exc()
-                self._error(f"{type(exc).__name__}: {exc}", 500)
+            POOL.stop(parts[2])
+            store.delete_run(parts[2])
+            self._send_json({"ok": True})
             return
         self._error("not found", 404)
 
     def _route_get(self, path: str) -> None:
-        parts = [p for p in path.split("/") if p]
-        try:
-            if parts == ["api", "defaults"]:
-                self._send_json(self._defaults())
-                return
-
-            if parts == ["api", "runs"]:
-                self._send_json({"runs": [self._decorate(m) for m in store.list_runs()]})
-                return
-
-            if len(parts) == 3 and parts[:2] == ["api", "runs"]:
-                self._send_json(self._decorate(store.load_meta(parts[2])))
-                return
-
-            if len(parts) == 4 and parts[:2] == ["api", "runs"] and parts[3] == "series":
-                import gol_series
-                query = parse_qs(urlparse(self.path).query)
-                # ?points=N asks for a coarse answer that covers the whole
-                # run, so a caller can draw something immediately and climb.
-                asked = query.get("points", [None])[0]
-                points = int(asked) if asked and asked.isdigit() else None
-                # ?keys= names the statistics a chart plots, and the depth
-                # follows from them: most charts plot nothing that walks the
-                # graph, which is five sixths of what a frame costs. No keys
-                # means everything.
-                keys = query.get("keys")
-                heavy = (gol_series.needs_graph(k for k in keys[0].split(",") if k)
-                         if keys else True)
-                answer = gol_series.build_series(parts[2], points, heavy,
-                                                 cancelled=self._client_gone)
-                if self._client_gone():
-                    self.close_connection = True
-                    return
-                self._send_json(answer)
-                return
-
-            if (len(parts) == 5 and parts[:2] == ["api", "runs"]
-                    and parts[3] == "series" and parts[4] == "progress"):
-                import gol_series
-                self._send_json(gol_series.progress(parts[2]))
-                return
-
-            if len(parts) == 5 and parts[:2] == ["api", "runs"] and parts[3] == "frames":
-                run_id, index = parts[2], int(parts[4])
-                if not store.has_frame(run_id, index):
-                    self._error("frame not found", 404)
-                    return
-                # The stored file as it is. Parsing a frame of a large run only
-                # to serialise it again took a third to half a second a step,
-                # under the interpreter lock a running simulation needs, and
-                # sent five times the bytes.
-                self._send_body(store.read_frame_bytes(run_id, index), gzipped=True)
-                return
-
-            # The genotype forest of a window, aggregated here rather than in
-            # the page. See gol_lineage for the numbers that forced it.
-            if len(parts) == 4 and parts[:2] == ["api", "runs"] and parts[3] == "lineage":
-                import gol_lineage
-                query = parse_qs(urlparse(self.path).query)
-                run_id = parts[2]
-                start = max(0, int(query.get("from", ["0"])[0] or 0))
-                count = max(1, int(query.get("count", ["200"])[0] or 200))
-                phase = (query.get("phase", ["all"])[0] or "all")
-
-                read = []
-                for step, index in enumerate(range(start, start + count)):
-                    # Every few frames, ask whether anyone is still waiting. A
-                    # frame of a large run takes tens of milliseconds to read,
-                    # so this costs nothing next to the reading, and it is the
-                    # difference between an abandoned window stopping and it
-                    # running for another minute.
-                    if step % 8 == 0 and self._client_gone():
-                        self.close_connection = True
-                        return
-                    if not store.has_frame(run_id, index):
-                        break
-                    frame = store.read_frame(run_id, index)
-                    read.append({k: frame[k] for k in gol_lineage.FIELDS if k in frame})
-
-                # The forest is the other half of the cost; nobody left to draw
-                # it means it is not built.
-                if self._client_gone():
-                    self.close_connection = True
-                    return
-                self._send_json(gol_lineage.forest(read, phase))
-                return
-
-            # A contiguous run of frames, optionally cut down to the fields the
-            # caller actually reads.
-            #
-            # Both Research views want a couple of hundred consecutive frames
-            # and a few columns of each. Asked for one at a time and whole,
-            # that was two hundred round trips carrying the entire topology of
-            # a forty-thousand-node world — tens of megabytes to parse in the
-            # browser so that two arrays could be read out of it.
-            if len(parts) == 4 and parts[:2] == ["api", "runs"] and parts[3] == "frames":
-                query = parse_qs(urlparse(self.path).query)
-                run_id = parts[2]
-                start = max(0, int((query.get("from", ["0"])[0] or 0)))
-                count = max(1, min(MAX_FRAME_BATCH,
-                                   int(query.get("count", ["1"])[0] or 1)))
-                wanted = [f for f in (query.get("fields", [""])[0] or "").split(",") if f]
-                # A window measured in iterations means very different amounts
-                # of work in a world of sixty agents and one of forty thousand.
-                # Stop once enough have been seen, and say how many frames that
-                # turned out to be.
-                budget = max(1, int(query.get("sightings", ["0"])[0] or 0)) \
-                    if query.get("sightings") else 0
-
-                frames = []
-                seen = 0
-                for index in range(start, start + count):
-                    if not store.has_frame(run_id, index):
-                        break
-                    frame = store.read_frame(run_id, index)
-                    seen += len(frame.get("ids") or frame.get("brain_ids") or [])
-                    frames.append(_project(frame, wanted) if wanted else frame)
-                    if budget and seen >= budget:
-                        break
-                self._send_json({"frames": frames})
-                return
-
-        except FileNotFoundError:
-            self._error("run not found", 404)
+        if not path.startswith("/api/"):
+            self._serve_static(path)
             return
-        except ValueError as exc:
-            self._error(str(exc))
+        parts = [p for p in path.split("/") if p]
+        if parts == ["api", "defaults"]:
+            self._send_json(self._defaults())
+            return
+
+        if parts == ["api", "runs"]:
+            self._send_json({"runs": [self._decorate(m) for m in store.list_runs()]})
+            return
+
+        if len(parts) == 3 and parts[:2] == ["api", "runs"]:
+            self._send_json(self._decorate(store.load_meta(parts[2])))
+            return
+
+        if len(parts) == 4 and parts[:2] == ["api", "runs"] and parts[3] == "series":
+            import gol_series
+            query = parse_qs(urlparse(self.path).query)
+            # ?points=N asks for a coarse answer that covers the whole
+            # run, so a caller can draw something immediately and climb.
+            asked = query.get("points", [None])[0]
+            points = int(asked) if asked and asked.isdigit() else None
+            # ?keys= names the statistics a chart plots, and the depth
+            # follows from them: most charts plot nothing that walks the
+            # graph, which is five sixths of what a frame costs. No keys
+            # means everything.
+            keys = query.get("keys")
+            heavy = (gol_series.needs_graph(k for k in keys[0].split(",") if k)
+                     if keys else True)
+            answer = gol_series.build_series(parts[2], points, heavy,
+                                             cancelled=self._client_gone)
+            if self._client_gone():
+                self.close_connection = True
+                return
+            self._send_json(answer)
+            return
+
+        if (len(parts) == 5 and parts[:2] == ["api", "runs"]
+                and parts[3] == "series" and parts[4] == "progress"):
+            import gol_series
+            self._send_json(gol_series.progress(parts[2]))
+            return
+
+        if len(parts) == 5 and parts[:2] == ["api", "runs"] and parts[3] == "frames":
+            run_id, index = parts[2], int(parts[4])
+            if not store.has_frame(run_id, index):
+                self._error("frame not found", 404)
+                return
+            # The stored file as it is. Parsing a frame of a large run only
+            # to serialise it again took a third to half a second a step,
+            # under the interpreter lock a running simulation needs, and
+            # sent five times the bytes.
+            self._send_body(store.read_frame_bytes(run_id, index), gzipped=True)
+            return
+
+        # The genotype forest of a window, aggregated here rather than in
+        # the page. See gol_lineage for the numbers that forced it.
+        if len(parts) == 4 and parts[:2] == ["api", "runs"] and parts[3] == "lineage":
+            import gol_lineage
+            query = parse_qs(urlparse(self.path).query)
+            run_id = parts[2]
+            start = max(0, int(query.get("from", ["0"])[0] or 0))
+            count = max(1, int(query.get("count", ["200"])[0] or 200))
+            phase = (query.get("phase", ["all"])[0] or "all")
+
+            read = []
+            for step, index in enumerate(range(start, start + count)):
+                # Every few frames, ask whether anyone is still waiting. A
+                # frame of a large run takes tens of milliseconds to read,
+                # so this costs nothing next to the reading, and it is the
+                # difference between an abandoned window stopping and it
+                # running for another minute.
+                if step % 8 == 0 and self._client_gone():
+                    self.close_connection = True
+                    return
+                if not store.has_frame(run_id, index):
+                    break
+                frame = store.read_frame(run_id, index)
+                read.append({k: frame[k] for k in gol_lineage.FIELDS if k in frame})
+
+            # The forest is the other half of the cost; nobody left to draw
+            # it means it is not built.
+            if self._client_gone():
+                self.close_connection = True
+                return
+            self._send_json(gol_lineage.forest(read, phase))
+            return
+
+        # A contiguous run of frames, optionally cut down to the fields the
+        # caller actually reads.
+        #
+        # Both Research views want a couple of hundred consecutive frames
+        # and a few columns of each. Asked for one at a time and whole,
+        # that was two hundred round trips carrying the entire topology of
+        # a forty-thousand-node world — tens of megabytes to parse in the
+        # browser so that two arrays could be read out of it.
+        if len(parts) == 4 and parts[:2] == ["api", "runs"] and parts[3] == "frames":
+            query = parse_qs(urlparse(self.path).query)
+            run_id = parts[2]
+            start = max(0, int((query.get("from", ["0"])[0] or 0)))
+            count = max(1, min(MAX_FRAME_BATCH,
+                               int(query.get("count", ["1"])[0] or 1)))
+            wanted = [f for f in (query.get("fields", [""])[0] or "").split(",") if f]
+            # A window measured in iterations means very different amounts
+            # of work in a world of sixty agents and one of forty thousand.
+            # Stop once enough have been seen, and say how many frames that
+            # turned out to be.
+            budget = max(1, int(query.get("sightings", ["0"])[0] or 0)) \
+                if query.get("sightings") else 0
+
+            frames = []
+            seen = 0
+            for index in range(start, start + count):
+                if not store.has_frame(run_id, index):
+                    break
+                frame = store.read_frame(run_id, index)
+                seen += len(frame.get("ids") or frame.get("brain_ids") or [])
+                frames.append(_project(frame, wanted) if wanted else frame)
+                if budget and seen >= budget:
+                    break
+            self._send_json({"frames": frames})
             return
 
         self._error("not found", 404)

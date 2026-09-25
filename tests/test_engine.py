@@ -2004,6 +2004,42 @@ def test_a_run_is_reported_as_it_is_not_as_it_was_written():
         del gol_server.POOL.is_running
 
 
+def test_every_request_turns_what_goes_wrong_into_an_answer():
+    """
+    GET, POST and DELETE each turned exceptions into answers their own way,
+    and no two agreed. One dispatcher does it now: a request that makes no
+    sense is a 400, a missing run a 404, a browser that hung up is left alone,
+    and anything else is a 500 with a message rather than a dropped connection.
+    """
+    import contextlib
+    import io
+    import gol_server
+
+    class Request:
+        path = "/api/runs/x?from=1"
+
+        def __init__(self):
+            self.answered = []
+
+        def _error(self, message, status=400):
+            self.answered.append((status, message))
+
+    for raised, answer in ((ValueError("bad count"), (400, "bad count")),
+                           (FileNotFoundError(), (404, "run not found")),
+                           (KeyError("config"), (500, "KeyError: 'config'")),
+                           (BrokenPipeError(), None)):
+        request, seen = Request(), []
+
+        def route(path, raised=raised):
+            seen.append(path)
+            raise raised
+
+        with contextlib.redirect_stderr(io.StringIO()):
+            gol_server.Handler._dispatch(request, route)
+        assert seen == ["/api/runs/x"], seen
+        assert request.answered == ([answer] if answer else []), (raised, request.answered)
+
+
 def test_the_defaults_endpoint_carries_the_brain_presets():
     """The form fills itself in from the engine, so the engine has to say."""
     import gol_server

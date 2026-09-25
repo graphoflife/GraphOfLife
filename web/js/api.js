@@ -127,23 +127,14 @@ const BrowserBackend = {
       // Pyodide runs to completion — there is no interrupting it mid-frame.
       // What can be done is refuse the answer, so a superseded read never
       // paints over what is on screen now. The work is wasted either way;
-      // the picture is not.
-      if (signal) {
-        if (signal.aborted) {
-          this._pending.delete(id);
-          const stop = new Error('aborted');
-          stop.name = 'AbortError';
-          reject(stop);
-          return;
-        }
-        signal.addEventListener('abort', () => {
-          if (!this._pending.has(id)) return;
-          this._pending.delete(id);
-          const stop = new Error('aborted');
-          stop.name = 'AbortError';
-          reject(stop);
-        }, { once: true });
-      }
+      // the picture is not. A read already stopped never gets this far:
+      // API._call does not send it.
+      signal?.addEventListener('abort', () => {
+        if (!this._pending.delete(id)) return;
+        const stop = new Error('aborted');
+        stop.name = 'AbortError';
+        reject(stop);
+      }, { once: true });
       worker.postMessage({ id, type, ...payload });
     });
   },
@@ -214,32 +205,20 @@ const API = {
     return answer;
   },
 
-  defaults()              { return this._call('defaults'); },
-  describe(config)        { return this._call('describe', config); },
-  listRuns()              { return this._call('listRuns'); },
-  getRun(id)              { return this._call('getRun', id); },
-  createRun(name, config) { return this._call('createRun', name, config); },
-  deleteRun(id)           { return this._call('deleteRun', id); },
-  startRun(id)            { return this._call('startRun', id); },
-  stopRun(id)             { return this._call('stopRun', id); },
-  copyRun(id, name)       { return this._call('copyRun', id, name); },
-  renameRun(id, name)     { return this._call('renameRun', id, name); },
-  // The reads take a trailing { signal }. The writes do not: cancelling a
-  // create or a rename halfway is not a thing anyone wants, and pretending
-  // otherwise would put a signal on twenty methods to serve five.
-  getFrame(id, index, opts)     { return this._call('getFrame', id, index, opts); },
-  getFrames(id, from, count, fields, sightings, opts) {
-    return this._call('getFrames', id, from, count, fields, sightings, opts);
-  },
-  getLineage(id, from, count, phase, opts) {
-    return this._call('getLineage', id, from, count, phase, opts);
-  },
-  getSeries(id, points, keys, opts) { return this._call('getSeries', id, points, keys, opts); },
-  getSeriesProgress(id, opts)   { return this._call('getSeriesProgress', id, opts); },
   // Only the in-browser backend stores anything locally; with a server the
   // question has no meaning and the notice does not ask it.
   storage()               { return BrowserBackend.storage(); }
 };
+
+// Every question the backends answer is passed straight through by its name.
+// Written out one by one, a new question was an edit in three places, one of
+// them fifteen near-identical lines here. The reads take a trailing
+// { signal }; the writes do not, since cancelling a create or a rename
+// halfway is not a thing anyone wants.
+for (const name of Object.keys(ServerBackend)) {
+  if (name.startsWith('_') || typeof ServerBackend[name] !== 'function') continue;
+  API[name] = function (...args) { return this._call(name, ...args); };
+}
 
 /** Human-readable byte size. */
 function formatBytes(bytes) {
