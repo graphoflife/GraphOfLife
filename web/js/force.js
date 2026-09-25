@@ -343,6 +343,38 @@ class ForceLayout {
     this.alpha = alpha;
   }
 
+  /**
+   * Carry out one command from the page, and say whether it moved anything.
+   *
+   * The worker drives its layout through this, and so does the page when it
+   * has to run the layout itself. Each used to spell out a switch of its own,
+   * and the two had drifted: the page's copied a force parameter even when a
+   * look left it undefined, which then turned every coordinate to NaN.
+   */
+  apply(command) {
+    switch (command.type) {
+      case 'frame':
+        this.setFrame(command.ids, command.ends, command.parents, command.carry);
+        return true;
+      case 'dimensions':
+        this.setDimensions(command.dimensions);
+        return true;
+      case 'params':
+        for (const [key, value] of Object.entries(command.params)) {
+          if (typeof value === 'number') this[key] = value;
+        }
+        return false;
+      case 'reheat':
+        this.reheat(command.alpha);
+        return false;
+      case 'scatter':
+        this.scatter();
+        return true;
+      default:
+        return false;
+    }
+  }
+
   scatter() {
     for (const p of this.pos.values()) {
       const radius = 250 * Math.sqrt(Math.random());

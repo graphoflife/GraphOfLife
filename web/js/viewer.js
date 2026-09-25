@@ -565,22 +565,6 @@ const Viewer = {
     }
   },
 
-  /**
-   * Whether the positions on hand really describe the frame about to be drawn.
-   *
-   * Two things have to hold. The layout's coordinates must belong to the frame
-   * the layout was last given — that is the generation check — and that frame
-   * must be the one the page is showing. The second half is the one that bit:
-   * the layout can be perfectly self-consistent on a frame the viewer has
-   * already moved past, and drawing then indexes one frame's edges into
-   * another frame's coordinates.
-   */
-  get readyToDraw() {
-    if (!this.layout.positionsMatchFrame) return false;
-    if (!this.frame) return true;
-    return this.layout.ids === this.frame.ids;
-  },
-
   /** Whether anything currently on screen is measured before the phase. */
   needsPreviousFrame() {
     const s = this.settings;
@@ -644,7 +628,6 @@ const Viewer = {
 
   /** Paint one frame immediately, without waiting for the animation loop. */
   redraw() {
-    if (this.layout && !this.layout.positionsMatchFrame) return;
     if (this.renderer.cssWidth > 0) {
       this.renderer.draw(this.frame, this.metrics, this.layout, this.settings);
     }
@@ -678,8 +661,9 @@ const Viewer = {
     // A frame change reaches the worker before its coordinates come back. Until
     // they do, the positions we hold are ordered by the previous frame's ids,
     // and drawing the new ids against them paints one frame of nonsense. The
-    // canvas simply keeps what it already shows for that moment.
-    if (!this.readyToDraw) {
+    // canvas simply keeps what it already shows for that moment, and nothing
+    // is framed against coordinates that are about to be replaced.
+    if (!this.layout.readyFor(this.frame)) {
       requestAnimationFrame(t => this.animate(t));
       return;
     }

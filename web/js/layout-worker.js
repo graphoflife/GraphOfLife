@@ -142,43 +142,20 @@ self.onmessage = (e) => {
       report(publish());
       break;
 
-    case 'frame':
-      frameGen = msg.gen || 0;
-      layout.setFrame(msg.ids, msg.ends, msg.parents, msg.carry);
-      // Answer immediately: the page has a new frame to draw and should not
-      // wait a whole batch for coordinates.
-      report(publish());
-      start();
-      break;
-
-    case 'params':
-      for (const [key, value] of Object.entries(msg.params)) {
-        if (typeof value === 'number') layout[key] = value;
-      }
-      break;
-
-    case 'dimensions':
-      layout.setDimensions(msg.dimensions);
-      report(publish());
-      start();
-      break;
-
-    case 'reheat':
-      layout.reheat(msg.alpha);
-      start();
-      break;
-
-    case 'scatter':
-      layout.scatter();
-      report(publish());
-      start();
-      break;
-
     case 'stop':
       running = false;
       break;
 
     default:
+      if (msg.type === 'frame') frameGen = msg.gen || 0;
+      // The layout's own commands, carried out the same way the page carries
+      // them out when it runs the layout itself. Whatever moved the drawing is
+      // answered at once: the page has something new to show and should not
+      // wait a whole batch for coordinates.
+      if (layout.apply(msg)) report(publish());
+      // A change of force strength is felt on the next tick like anything
+      // else; everything else wakes the loop.
+      if (msg.type !== 'params') start();
       break;
   }
 };

@@ -296,13 +296,6 @@ const Home = {
     this.renderer.resize();
   },
 
-  /** True once the layout's coordinates belong to the frame we are drawing. */
-  get readyToDraw() {
-    if (!this.frame || !this.layout) return false;
-    if (!this.layout.positionsMatchFrame) return false;
-    return this.layout.ids === this.frame.ids;
-  },
-
   animate(time) {
     // Everything is wrapped so the next frame is always asked for. The loop
     // re-arms itself at the end of its own body, which means one thrown error
@@ -363,7 +356,7 @@ const Home = {
 
     // Until the coordinates belong to the frame we are holding, the canvas
     // simply keeps what it already shows.
-    if (!this.readyToDraw || !(this.renderer.cssWidth > 0)) {
+    if (!this.frame || !this.layout.readyFor(this.frame) || !(this.renderer.cssWidth > 0)) {
       this.renderer.stepCamera();
       return;
     }

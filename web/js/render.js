@@ -363,6 +363,9 @@ class GraphRenderer {
   // ------------------------------------------------------------------
 
   draw(frame, metrics, layout, settings) {
+    // Until the coordinates belong to this frame, the canvas keeps what it
+    // already shows rather than painting one frame against another's.
+    if (frame && !layout.readyFor(frame)) return;
     const ctx = this.ctx;
     ctx.save();
     ctx.scale(this.dpr, this.dpr);

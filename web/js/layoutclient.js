@@ -63,19 +63,29 @@ class LayoutClient {
     this.worker = null;
 
     this._local = new ForceLayout();
-    Object.assign(this._local, this.params);
+    this._local.apply({ type: 'params', params: this.params });
     this._local.dimensions = this.dimensions;
 
     if (this._pending) {
-      const f = this._pending;
-      this._local.setFrame(f.ids, f.ends, f.parents, f.carry);
+      this._local.apply(this._pending);
       this._syncLocal();
     }
   }
 
-  /** True when the positions we hold belong to the frame we are drawing. */
-  get positionsMatchFrame() {
-    return this._positionsGen === this._frameGen;
+  /**
+   * Whether the positions on hand really describe `frame`, so that drawing it
+   * now puts each node where the layout says it is.
+   *
+   * Two things have to hold. The coordinates must belong to the frame the
+   * layout was last given — that is the generation check — and that frame
+   * must be this one. The second half is the one that bit: the layout can be
+   * perfectly self-consistent on a frame the page has already moved past, and
+   * drawing then indexes one frame's edges into another frame's coordinates.
+   * The Viewer and the front page each asked this themselves, and the
+   * Viewer's redraw on a resize only asked the first half.
+   */
+  readyFor(frame) {
+    return this._positionsGen === this._frameGen && (!frame || this.ids === frame.ids);
   }
 
   _onMessage(msg) {
@@ -127,27 +137,21 @@ class LayoutClient {
 
     this.ids = ids;
     this.count = ids.length;
-    this._pending = { ids, ends, parents, carry };
-
-    if (this._local) {
-      this._frameGen++;
-      this._local.setFrame(ids, ends, parents, carry);
-      this._syncLocal();
-      return;
-    }
+    this._frameGen++;
 
     // Grow the shared buffer to fit, if we are using one. Any growth is
     // pending until the worker fills it, so nothing here changes what is
     // currently being drawn.
-    this._ensureShared(ids.length);
-    this._frameGen++;
-    this.worker.postMessage({ type: 'frame', ids, ends, parents, carry, gen: this._frameGen });
+    if (!this._local) this._ensureShared(ids.length);
+
+    // Kept, so a layout that falls back to this thread starts on it.
+    this._pending = { type: 'frame', ids, ends, parents, carry, gen: this._frameGen };
+    this._send(this._pending);
   }
 
   setDimensions(dims) {
     this.dimensions = dims;
-    if (this._local) { this._local.setDimensions(dims); this._syncLocal(); return; }
-    this.worker.postMessage({ type: 'dimensions', dimensions: dims });
+    this._send({ type: 'dimensions', dimensions: dims });
   }
 
   /**
@@ -164,19 +168,25 @@ class LayoutClient {
 
   setParams(params) {
     Object.assign(this.params, params);
-    if (this._local) { Object.assign(this._local, params); return; }
-    this.worker.postMessage({ type: 'params', params });
+    this._send({ type: 'params', params });
   }
 
   reheat(alpha = 1) {
     this.alpha = alpha;
-    if (this._local) { this._local.reheat(alpha); return; }
-    this.worker.postMessage({ type: 'reheat', alpha });
+    this._send({ type: 'reheat', alpha });
   }
 
   scatter() {
-    if (this._local) { this._local.scatter(); this._syncLocal(); return; }
-    this.worker.postMessage({ type: 'scatter' });
+    this._send({ type: 'scatter' });
+  }
+
+  /**
+   * Hand a command to wherever the layout is running. On this thread the
+   * layout carries it out at once, and anything it moved is read back.
+   */
+  _send(command) {
+    if (!this._local) { this.worker.postMessage(command); return; }
+    if (this._local.apply(command)) this._syncLocal();
   }
 
   /**
