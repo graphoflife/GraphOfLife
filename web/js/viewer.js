@@ -546,7 +546,10 @@ const Viewer = {
 
   rebuildMetrics() {
     if (!this.frame) return;
-    this.metrics = new FrameMetrics(this.frame, this.settings);
+    // The same frame keeps everything it has worked out; only how it is
+    // coloured and sized changes.
+    if (this.metrics && this.metrics.frame === this.frame) this.metrics.restyle();
+    else this.metrics = new FrameMetrics(this.frame, this.settings);
 
     // A "before the phase" metric reads the frame that came before this one.
     // Fetch it once, then rebuild on top of it — the view stays usable in the

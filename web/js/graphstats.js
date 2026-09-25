@@ -54,12 +54,23 @@ const GraphStats = {
    * Per-node and per-edge loop counts come from `cycleParticipation` rather
    * than from here.
    */
+  /** One key for an undirected edge, whichever end it is named from. */
+  pairKey(a, b) {
+    return a < b ? `${a},${b}` : `${b},${a}`;
+  },
+
   loops(ids, edges, adj) {
     const splits = this._bridgeSplits(ids, adj);
     const whole = this.components(ids, adj);
     const cycleRank = Math.max(0, edges.length - ids.length + whole.count);
 
-    const participation = this.cycleParticipation(ids, edges, adj);
+    // Per-node and per-edge loop counts are the costly part — a climb up the
+    // spanning forest for every edge that closes a loop, most of a second on a
+    // world of seventy thousand — and only the loop and bridge colourings read
+    // them, never the numbers under the canvas. So they are walked the first
+    // time one of those asks, rather than on every frame step.
+    let participation = null;
+    const walked = () => (participation ||= this.cycleParticipation(ids, edges, adj));
 
     // How much of the population one edge could cut off, and how much of the
     // graph is left once the hanging trees are peeled away. Mirrors
@@ -79,8 +90,8 @@ const GraphStats = {
       coreShare: n ? this._twoCoreSize(ids, adj) / n : 0,
       spectralGap: Spectral.gap(ids, adj),
       componentCount: whole.count,
-      nodeLoops: participation.perNode,
-      edgeLoops: participation.perEdge
+      get nodeLoops() { return walked().perNode; },
+      get edgeLoops() { return walked().perEdge; }
     };
   },
 
@@ -110,7 +121,7 @@ const GraphStats = {
     const edgeIndex = new Map();
     for (let i = 0; i < edges.length; i++) {
       const [a, b] = edges[i];
-      edgeIndex.set(a < b ? `${a},${b}` : `${b},${a}`, i);
+      edgeIndex.set(this.pairKey(a, b), i);
     }
 
     // Breadth-first spanning forest.
@@ -137,13 +148,13 @@ const GraphStats = {
     }
 
     const bump = (a, b) => {
-      const i = edgeIndex.get(a < b ? `${a},${b}` : `${b},${a}`);
+      const i = edgeIndex.get(this.pairKey(a, b));
       if (i !== undefined) perEdge[i]++;
     };
 
     for (let i = 0; i < edges.length; i++) {
       const [a, b] = edges[i];
-      const key = a < b ? `${a},${b}` : `${b},${a}`;
+      const key = this.pairKey(a, b);
       if (treeEdges.has(key)) continue;          // tree edges close no new loop
       if (!depth.has(a) || !depth.has(b)) continue;
 

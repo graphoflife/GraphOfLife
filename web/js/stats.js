@@ -2,8 +2,8 @@
  * Turning a frame into numbers: what drives colour, what drives size, and the
  * summary statistics and histograms shown under the canvas.
  *
- * FrameMetrics is rebuilt whenever the frame or the relevant settings change,
- * so the renderer can stay a dumb value-to-pixel mapper.
+ * FrameMetrics is built once per frame, and restyle() follows a change of
+ * colouring, so the renderer can stay a dumb value-to-pixel mapper.
  */
 class FrameMetrics {
   constructor(frame, settings) {
@@ -20,7 +20,20 @@ class FrameMetrics {
     this.hasDelta = Boolean(frame.delta);
     this.totalTokens = frame.tokens.reduce((a, b) => a + b, 0);
     this.curvature = this._curvature();
+    this.restyle();
+  }
 
+  /**
+   * What colours and sizes the nodes, from the settings as they are now.
+   *
+   * Everything else here depends on the frame alone, so a change of colouring
+   * recomputes these and keeps the rest: the structure, the loop counts,
+   * every metric already worked out. The Viewer used to build the whole object
+   * again for any such change, a colour map included, which on a large world
+   * coloured by loops was two seconds a click.
+   */
+  restyle() {
+    const settings = this.settings;
     this.colorValues = this.scaledNodeValues(settings.nodeColorBy, settings.nodeColorLog);
     this.colorRange = this.nodeRange(settings.nodeColorBy, settings.nodeColorLog);
     this.sizeValues = this.scaledNodeValues(settings.nodeSizeBy, settings.nodeSizeLog);
@@ -175,10 +188,25 @@ class FrameMetrics {
   /** The same values under the reader's choice of scale. */
   scaledNodeValues(key, log) {
     const raw = this.nodeValues(key);
-    if (!log) return raw;
-    const signed = Metrics.isSigned('node', key);
-    const out = new Float64Array(raw.length);
-    for (let i = 0; i < raw.length; i++) out[i] = Metrics.applyLog(raw[i], signed);
+    return log ? this._logged('node', key, raw) : raw;
+  }
+
+  /**
+   * A metric's values on a log scale, worked out once per frame. The renderer
+   * asks for the edge ones on every draw, three megabytes of fresh array a
+   * frame at 190,000 edges, and the node ones were computed twice each time
+   * the colouring was set: once for the values, again for their range.
+   */
+  _logged(domain, key, raw) {
+    if (!this._loggedCache) this._loggedCache = new Map();
+    const cacheKey = `${domain}|${key}`;
+    let out = this._loggedCache.get(cacheKey);
+    if (!out) {
+      const signed = Metrics.isSigned(domain, key);
+      out = new Float64Array(raw.length);
+      for (let i = 0; i < raw.length; i++) out[i] = Metrics.applyLog(raw[i], signed);
+      this._loggedCache.set(cacheKey, out);
+    }
     return out;
   }
 
@@ -382,11 +410,7 @@ class FrameMetrics {
 
   scaledEdgeValues(key, log) {
     const raw = this.edgeValues(key);
-    if (!log) return raw;
-    const signed = Metrics.isSigned('edge', key);
-    const out = new Float64Array(raw.length);
-    for (let i = 0; i < raw.length; i++) out[i] = Metrics.applyLog(raw[i], signed);
-    return out;
+    return log ? this._logged('edge', key, raw) : raw;
   }
 
   edgeRange(key, log) {
@@ -435,20 +459,22 @@ class FrameMetrics {
     const dimension = GraphStats.dimension(f.ids, adj);
     const distances = GraphStats.distances(f.ids, adj);
 
-    // Edge lookups are by endpoint pair, since the renderer walks edges by id.
-    const edgeKey = new Map();
-    for (let i = 0; i < f.edges.length; i++) {
-      const [a, b] = f.edges[i];
-      edgeKey.set(a < b ? `${a},${b}` : `${b},${a}`, i);
-    }
-
-    this._structure = { adj, loops, triangles, dimension, distances, edgeKey };
+    this._structure = { adj, loops, triangles, dimension, distances };
     return this._structure;
   }
 
+  /**
+   * Where an edge sits in the frame's list, by its two ends, since the
+   * renderer walks edges by id. The map is built the first time: only the
+   * per-edge loop, triangle and bridge metrics look edges up this way, and
+   * the structure used to build it on every frame whether one did or not.
+   */
   edgeSlot(a, b) {
-    const key = a < b ? `${a},${b}` : `${b},${a}`;
-    const i = this.structure.edgeKey.get(key);
+    if (!this._edgeSlots) {
+      this._edgeSlots = new Map();
+      this.frame.edges.forEach(([x, y], i) => this._edgeSlots.set(GraphStats.pairKey(x, y), i));
+    }
+    const i = this._edgeSlots.get(GraphStats.pairKey(a, b));
     return i === undefined ? -1 : i;
   }
 
@@ -575,12 +601,16 @@ class FrameMetrics {
 
     const sum = arr => arr.reduce((a, b) => a + b, 0);
     const mean = arr => arr.length ? sum(arr) / arr.length : 0;
-    const median = arr => {
-      if (!arr.length) return 0;
-      const s = [...arr].sort((a, b) => a - b);
+    const middle = s => {
+      if (!s.length) return 0;
       const m = Math.floor(s.length / 2);
       return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
     };
+    const median = arr => middle([...arr].sort((a, b) => a - b));
+    // One pass rather than Math.max(...arr): a spread hands every value over
+    // as an argument, and past about 125,000 of them the engine throws.
+    const largest = arr => { let m = -Infinity; for (const v of arr) if (v > m) m = v; return m; };
+    const smallest = arr => { let m = Infinity; for (const v of arr) if (v < m) m = v; return m; };
 
     // How concentrated is wealth? 0 = perfectly equal, 1 = one agent holds all.
     const sorted = [...tokens].sort((a, b) => a - b);
@@ -616,23 +646,24 @@ class FrameMetrics {
       density: n > 1 ? (2 * f.edges.length) / (n * (n - 1)) : 0,
       meanDegree: mean(degrees),
       medianDegree: median(degrees),
-      maxDegree: degrees.length ? Math.max(...degrees) : 0,
-      minDegree: degrees.length ? Math.min(...degrees) : 0,
+      maxDegree: degrees.length ? largest(degrees) : 0,
+      minDegree: degrees.length ? smallest(degrees) : 0,
       leaves: degrees.filter(x => x === 1).length,
 
       // Wealth
       tokens: this.totalTokens,
       meanTokens: mean(Array.from(tokens)),
-      medianTokens: median(tokens),
-      maxTokens: tokens.length ? Math.max(...tokens) : 0,
-      minTokens: tokens.length ? Math.min(...tokens) : 0,
+      // The sorted copy the Gini coefficient needed anyway, not a second sort.
+      medianTokens: middle(sorted),
+      maxTokens: tokens.length ? largest(tokens) : 0,
+      minTokens: tokens.length ? smallest(tokens) : 0,
       gini,
       topDecileShare: topShare,
 
       // Biggest single swing either way this phase. Losses are reported as a
       // positive magnitude so the two read side by side.
-      maxTokenAdded: this.delta.length ? Math.max(0, ...this.delta) : 0,
-      maxTokenLost: this.delta.length ? Math.max(0, ...this.delta.map(v => -v)) : 0,
+      maxTokenAdded: this.delta.length ? Math.max(0, largest(this.delta)) : 0,
+      maxTokenLost: this.delta.length ? Math.max(0, -smallest(this.delta)) : 0,
       gainers: this.delta.filter(v => v > 0).length,
       losers: this.delta.filter(v => v < 0).length,
 
@@ -742,7 +773,7 @@ class FrameMetrics {
       const flows = this.flowAmounts;
       out.totalFlow = sum(flows);
       out.meanEdgeFlow = mean(flows);
-      out.maxEdgeFlow = flows.length ? Math.max(...flows) : 0;
+      out.maxEdgeFlow = flows.length ? largest(flows) : 0;
     }
 
     if (d.winners) {
@@ -764,7 +795,9 @@ class FrameMetrics {
     // on a walk it does not use, and would leave it blank on a strip where the
     // group holding it is open. Only a game phase allocates across links, so a
     // reproduction frame has no lightning and says so with nulls.
-    if (includeFlow) Object.assign(out, Lightning.of(f));
+    // Kept with the frame's other results: the strip asks again every time a
+    // group is opened or closed, and it is the same frame each time.
+    if (includeFlow) Object.assign(out, (this._lightning ||= Lightning.of(f)));
 
     // ---- structure ----
     //

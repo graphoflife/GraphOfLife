@@ -534,6 +534,21 @@ const Diagrams = {
 
   // ---- drawing ----------------------------------------------------------
 
+  //: frame -> its FrameMetrics. The pooled values depend on the frame alone,
+  //: and the chart is drawn again on every resize and every keystroke in its
+  //: title, twice over for a heatmap; it used to build every frame's metrics
+  //: afresh each time.
+  _metrics: new WeakMap(),
+
+  metricsOf(frame) {
+    let metrics = this._metrics.get(frame);
+    if (!metrics) {
+      metrics = new FrameMetrics(frame, Viewer.settings || {});
+      this._metrics.set(frame, metrics);
+    }
+    return metrics;
+  },
+
   /** Title, axis names, grid, constant lines and legend, in one place. */
   chromeFor(xLabel, yLabel, legend = []) {
     const s = this.now;
@@ -570,7 +585,7 @@ const Diagrams = {
         const parsed = Metrics.parse(key);
         const out = [];
         for (const frame of this.frames) {
-          const metrics = new FrameMetrics(frame, Viewer.settings || {});
+          const metrics = this.metricsOf(frame);
           const values = parsed.domain === 'edge'
             ? metrics.edgeValues(parsed.key) : metrics.nodeValues(parsed.key);
           for (const v of values) out.push(v);
