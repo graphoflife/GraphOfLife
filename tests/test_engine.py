@@ -2581,6 +2581,58 @@ def test_no_legacy_entry_restates_the_frozen_default():
 
 
 
+
+def test_a_cancelled_series_build_keeps_what_it_finished():
+    """
+    Stopping a summary nobody is waiting for must not throw its work away.
+
+    The server now stops a build when the browser hangs up, which is what keeps
+    abandoned requests from piling up behind the one that is wanted. But the
+    build is incremental — each request finishes what the last did not — so a
+    build that discarded its partial rows on the way out would make navigating
+    back and forth start from nothing every time, and a large run would never
+    finish summarising at all. The rows computed before the stop have to reach
+    the cache, and the next build has to begin after them.
+    """
+    import gol_store, gol_series
+
+    with tempfile.TemporaryDirectory() as tmp:
+        original = gol_store.BASE_DIR
+        gol_store.BASE_DIR = tmp
+        try:
+            cfg = SimConfig(total_tokens=400, n_nodes=30, k_neighbors=4,
+                            seed=4, hidden_layers=[6], export_decisions=False)
+            run_id = gol_store.create_run("x", cfg)["id"]
+            world = new_world(cfg)
+            written = 0
+            for _ in range(24):
+                for frame in world.step(record_decisions=False):
+                    gol_store.write_frame(run_id, written, frame)
+                    written += 1
+            gol_store.update_meta(run_id, frame_count=written, iteration=world.iteration)
+
+            # Hang up after three frames: part-way through the second iteration,
+            # whose other phase must not be forgotten.
+            calls = {"n": 0}
+            def hung_up():
+                calls["n"] += 1
+                return calls["n"] > 3          # asked before every frame
+
+            gol_series.build_series(run_id, heavy=False, cancelled=hung_up)
+            kept = len(gol_series._load_cache(run_id).get("rows", []))
+            assert 0 < kept < written, (
+                f"a cancelled build kept {kept} of {written} rows; it should keep "
+                f"what it finished and nothing it did not")
+
+            # The next build carries on from there and completes.
+            done = gol_series.build_series(run_id, heavy=False)
+            assert done["complete"], "the build after a cancelled one did not finish"
+            assert len(gol_series._load_cache(run_id)["rows"]) == written
+        finally:
+            gol_store.BASE_DIR = original
+
+
+
 def _main() -> int:
     """Find the tests in this file and run them, reporting like pytest would."""
     import time

@@ -35,7 +35,6 @@ function niceTicks(lo, hi, target = 5) {
 }
 
 const StatDetail = {
-  seriesCache: new Map(),   // runId -> series payload
   currentKey: null,
 
   EXPLANATIONS: {
@@ -113,6 +112,9 @@ const StatDetail = {
     reproTokenShare: 'What share of every token in the world was committed to newborns this phase, adding up what all the parents handed over. This is how much of the entire economy the population spent on reproducing, which is a different question from how much any individual parent gave away: a world where a handful of poor agents each hand over everything they have spends very little of the whole while costing each of those parents everything.',
     meanInvestedShare: 'The average share of its own tokens that a reproducing agent handed to its child. Reproduction is paid for out of the parent\u2019s own pile, so this is how much of itself the typical parent gave away \u2014 a per-parent figure, which says nothing on its own about how many parents there were or how large a bite this took out of the world.',
     handovers: 'How many connections a parent gave to its newborn this phase. The connection moves from parent to child rather than being copied, so the parent ends up with one fewer. Only recorded on runs created with handover enabled; an absent value means the mechanic was switched off, which is not the same as it being on and never used. This can never add a connection to the graph: normally only one end changes and the total holds, but where the newborn was already wired to that neighbour the moved connection merges into the one a simple graph can hold, and the total falls by one.',
+    bridgeShare: 'What share of all connections are bridges — connections that lie on no loop, so that removing one splits the graph into two pieces. It is the number of such connections divided by the number of connections. A rising share means the graph is thinning toward a tree: fewer of its links have an alternative route beside them, and more of them are the only thing holding one region to another.',
+    culledShare: 'What share of the population entering the phase was culled for being cut off. Cleanup keeps only the largest connected group and removes everyone outside it, however wealthy, so this is the part of the world that was lost to disconnection rather than to starvation — the number culled divided by the number of agents alive when the phase began.',
+    leafShare: 'What share of agents have exactly one connection. Such an agent depends on a single neighbour: if that link carries no tokens it is pruned and the agent is cut off and culled. A high share means much of the population hangs off the rest by one thread — the tree-shaped fringe around whatever core the graph has.',
     gifts: 'How many token transfers were made as gifts this phase. A gift is an agent handing tokens to a neighbour during reproduction, asking nothing back. Beyond the transfer itself it does one other thing: tokens crossing a connection count as use of that connection, and a connection that goes unused is pruned. So a gift is also the one way an agent can deliberately keep a link it values, and an agent can see, for each neighbour, whether the link between them would lapse if nothing crossed it. Absent on a run without the mechanic, which is not the same as a run where nobody chose to give.',
     giftTokens: 'How many tokens were handed to neighbours as gifts this phase. A gift is an agent giving tokens to a neighbour during reproduction, asking nothing back, paid out of whatever reproduction left it. Tokens crossing a connection also count as use of it, and an unused connection is pruned, so this is both charity and upkeep — the total spent on keeping other agents alive and on keeping the links to them open. Absent on a run without the mechanic, rather than zero.',
     giftShare: 'What share of every token in the world was handed to a neighbour as a gift this phase. A gift is an agent giving tokens away during reproduction, asking nothing back, and it doubles as upkeep because tokens crossing a connection count as use of it and an unused connection is pruned. Given as a share of the whole economy rather than as a count, so it can be compared between frames as the population and the pile move. Absent on a run without the mechanic, rather than zero.',
@@ -143,9 +145,6 @@ const StatDetail = {
     this.textEl = document.getElementById('statDetailText');
     this.footEl = document.getElementById('statDetailFoot');
     this.canvas = document.getElementById('statDetailChart');
-    this.progressEl = document.getElementById('statDetailProgress');
-    this.progressFill = document.getElementById('statDetailProgressFill');
-    this.progressLabel = document.getElementById('statDetailProgressLabel');
 
     document.getElementById('statDetailClose').addEventListener('click', () => this.close());
     document.addEventListener('keydown', e => {
@@ -161,11 +160,6 @@ const StatDetail = {
     this.currentKey = null;
   },
 
-  /** Drop a run's cached series, e.g. after it has advanced. */
-  invalidate(runId) {
-    this.seriesCache.delete(runId);
-  },
-
   async open(key, label) {
     if (!Viewer.runId) return;
 
@@ -174,84 +168,55 @@ const StatDetail = {
     this.textEl.textContent = this.EXPLANATIONS[key] || 'No description for this value.';
     this.el.classList.remove('hidden');
 
-    const runId = Viewer.runId;
-    const cached = this.seriesCache.get(runId);
-    if (cached) {
-      this.series = cached;
-      this.hideProgress();
-      this.redraw();
-      // A cached payload can still be a coarse one, so keep climbing from
-      // where the last visit left off rather than settling for it.
-      if (cached.complete) return;
-    } else {
-      this.showProgress();
-    }
-
+    // Whatever is known of the run draws at once; the load then adds only what
+    // this statistic is missing, if anything.
+    // Whatever is known of the run draws at once. The load is started first so
+    // that an empty chart can say it is loading rather than that there is
+    // nothing to show.
+    const loading = this.load(Viewer.runId, [key]);
+    this.redraw();
     try {
-      await this.load(runId);
+      await loading;
     } catch (err) {
-      this.hideProgress();
       this.footEl.textContent = `Could not load history: ${err.message}`;
       return;
     }
-    this.hideProgress();
     this.redraw();
   },
 
   /**
-   * Climb to full resolution, drawing at every step.
-   *
-   * A long run is minutes of work to summarise, and waiting for all of it
-   * before drawing anything shows an empty chart for that whole time, which
-   * reads as broken rather than busy. Each pass covers the whole run and is
-   * finer than the last, so the chart gains resolution as it loads.
+   * Pick up the open statistic's history if leaving the Viewer or hiding the
+   * tab cut it short. A trajectory cut short needs nothing here: its Load
+   * history button comes back.
    */
-  async load(runId) {
-    const token = (this.loadToken = (this.loadToken || 0) + 1);
-    await SeriesLoad.climb(runId, {
-      cancelled: () => this.loadToken !== token || Viewer.runId !== runId,
-      onStep: (payload) => {
-        this.seriesCache.set(runId, payload);
-        this.series = payload;
-        const at = SeriesLoad.fraction(payload);
-        if (payload.complete) this.hideProgress();
-        else if (at !== null) {
-          this.setProgress(at, payload.points || 0, payload.totalPoints || 0);
-        }
-        this.redraw();
-      }
-    });
-  },
-
-  // ---- progress ------------------------------------------------------
-
-  showProgress() {
-    this.footEl.textContent = '';
-    this.progressEl.classList.remove('hidden');
-    this.setProgress(null, 0, 0);
-  },
-
-  hideProgress() {
-    this.progressEl.classList.add('hidden');
+  resume() {
+    if (this.currentKey && Viewer.runId && Jobs.interrupted('stat-detail')) {
+      this.load(Viewer.runId, [this.currentKey]);
+    }
   },
 
   /**
-   * Move the bar.
+   * Bring a run's history up to what these statistics need, drawing as it
+   * climbs.
    *
-   * A null fraction means the server has not said how much there is to do yet,
-   * so the bar sweeps rather than claiming a position it cannot know.
+   * Only to the depth they need, so a population curve does not wait on bridge
+   * counts. And only when something is missing: a history that already answers
+   * them returns at once without starting a job, so opening a second statistic
+   * does not cancel a load that is still filling the first.
    */
-  setProgress(fraction, done, total) {
-    if (fraction === null) {
-      this.progressFill.classList.add('indeterminate');
-      this.progressFill.style.width = '';
-      this.progressLabel.textContent = 'Analysing frames…';
-      return;
-    }
-    this.progressFill.classList.remove('indeterminate');
-    this.progressFill.style.width = `${Math.round(fraction * 100)}%`;
-    this.progressLabel.textContent =
-      `Refining… ${formatNumber(done)} of ${formatNumber(total)} points (${Math.round(fraction * 100)}%)`;
+  load(runId, keys) {
+    if (SeriesLoad.ready(runId, keys)) return Promise.resolve();
+    const drawn = () => {
+      if (Viewer.runId !== runId) return;
+      if (!this.el.classList.contains('hidden')) this.redraw();
+      Viewer.updateTrajectory();
+    };
+    // Drawn once more when the load ends, however it ends: a stopped load
+    // otherwise left the chart saying it was loading and the trajectory
+    // without its button to carry on.
+    return Jobs.run('stat-detail', 'Summarising the run', (job) => SeriesLoad.climb(runId, keys, {
+      job, onStep: drawn
+    })).finally(drawn);
   },
 
   /**
@@ -263,9 +228,10 @@ const StatDetail = {
    */
   points() {
     const key = this.currentKey;
-    if (!this.series || !key) return { xs: [], ys: [], asShare: false };
+    const payload = SeriesLoad.cache.get(Viewer.runId);
+    if (!payload || !key) return { xs: [], ys: [], asShare: false };
 
-    const s = this.series.series;
+    const s = payload.series;
     const values = s[key] || [];
     const phases = s.phase || [];
     const iterations = s.iteration || [];
@@ -311,7 +277,9 @@ const StatDetail = {
     if (!ys.length) {
       ctx.fillStyle = '#5b6b7c';
       ctx.font = '12px system-ui, sans-serif';
-      ctx.fillText('No data for this statistic under the current phase filter.', 10, h / 2);
+      ctx.fillText(Jobs.busy('stat-detail')
+        ? 'Summarising the run\u2026'
+        : 'No data for this statistic under the current phase filter.', 10, h / 2);
       this.footEl.textContent = '';
       return;
     }
@@ -409,10 +377,11 @@ const StatDetail = {
     const axisLabel = 'iteration';
     ctx.fillText(axisLabel, padL + plotW - ctx.measureText(axisLabel).width, h - 1);
 
-    const sampled = this.series && this.series.sampled;
+    const payload = SeriesLoad.cache.get(Viewer.runId);
+    const sampled = payload && payload.sampled;
     this.footEl.textContent =
       `${formatNumber(ys.length)} point${ys.length === 1 ? '' : 's'} · ${Viewer.phaseFilterLabel()}` +
       (asShare ? ' · shown as a share of the nodes that entered the phase' : '') +
-      (sampled ? ` · sampled every ${formatNumber(this.series.stride)} iterations` : '');
+      (sampled ? ` · sampled every ${formatNumber(payload.stride)} iterations` : '');
   }
 };

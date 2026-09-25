@@ -530,9 +530,15 @@ Object.assign(Viewer, {
     if (!canvas || !this.runId) return;
     const s = this.settings;
     const button = document.getElementById('btnTrajLoad');
-    const payload = StatDetail.seriesCache.get(this.runId);
+    const payload = SeriesLoad.cache.get(this.runId);
+    const loading = Jobs.busy('stat-detail');
 
-    if (button) button.style.display = payload ? 'none' : '';
+    // Offered whenever the history does not yet answer these two axes — never
+    // loaded, cut short, or loaded without the graph statistics one of them
+    // plots. Hiding it as soon as anything was loaded left a history cut short
+    // with no way to finish it.
+    const ready = SeriesLoad.ready(this.runId, [s.trajX, s.trajY]);
+    if (button) button.style.display = ready || loading ? 'none' : '';
 
     // Summarising a run means reading every frame it recorded, which on a
     // long run of large graphs takes minutes. Doing that unasked, every time
@@ -540,7 +546,7 @@ Object.assign(Viewer, {
     // want, so it waits to be asked and is then kept for the session.
     if (!payload) {
       drawTrajectory(canvas, null, {
-        message: this._trajectoryLoading
+        message: loading
           ? 'reading every recorded frame\u2026'
           : 'press Load history to summarise this run'
       });

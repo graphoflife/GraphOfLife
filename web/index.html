@@ -64,6 +64,10 @@
     <button class="tab" data-view="viewer">Viewer</button>
     <button class="tab" data-view="research">Research</button>
   </nav>
+  <!-- What is loading, how far, and how to stop it. One bar, up here, because
+       the question "is anything still working?" is asked from whichever tab
+       you are on and used to be answerable only from the one that started it. -->
+  <div class="job-bar" id="jobBar" hidden></div>
   <span class="run-label" id="activeRunLabel"></span>
 </header>
 
@@ -731,23 +735,6 @@
     <div class="diagram-legend-notes" id="diagramMeanings"></div>
   </section>
 
-  <!-- ---------------- theses ---------------- -->
-  <!-- One claim about the graph per entry, with the series that decide it.
-       The list and the prose are built by theses.js from the THESES table
-       there, so a new claim is one entry in that table and nothing here. -->
-  <section id="research-theses" class="research-panel" hidden>
-    <div class="theses-layout">
-      <nav class="theses-list" id="thesesList"></nav>
-      <div class="theses-main">
-        <div class="theses-prose" id="thesesProse"></div>
-        <div class="theses-stage">
-          <canvas id="thesesCanvas"></canvas>
-        </div>
-        <div class="theses-legend" id="thesesLegend"></div>
-        <p class="lineage-note" id="thesesNote"></p>
-      </div>
-    </div>
-  </section>
 
   <!-- ---------------- findings ---------------- -->
   <!-- Filled by Notes.render() from research/Research.md, which is the
@@ -762,12 +749,6 @@
     <button id="statDetailClose" class="ghost small">✕</button>
   </div>
   <p id="statDetailText" class="stat-detail-text"></p>
-
-  <div id="statDetailProgress" class="progress hidden">
-    <div class="progress-track"><div class="progress-fill" id="statDetailProgressFill"></div></div>
-    <span class="progress-label" id="statDetailProgressLabel">Reading frames…</span>
-  </div>
-
   <canvas id="statDetailChart" height="170"></canvas>
   <p id="statDetailFoot" class="hint"></p>
 </div>
@@ -776,6 +757,7 @@
 <script src="js/metrics.js"></script>
 <script src="js/spectral.js"></script>
 <script src="js/graphstats.js"></script>
+<script src="js/jobs.js"></script>
 <script src="js/api.js"></script>
 <script src="js/seriesload.js"></script>
 <script src="js/force.js"></script>
@@ -798,7 +780,6 @@
 <script src="js/docpage.js"></script>
 <script src="js/diagrams.js"></script>
 <script src="js/diagram-controls.js"></script>
-<script src="js/theses.js"></script>
 <script src="js/research.js"></script>
 <script src="js/viewer.js"></script>
 <!-- The viewer is assembled from four files. The core declares it; these three

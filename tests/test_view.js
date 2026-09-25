@@ -25,6 +25,19 @@ const root = path.join(__dirname, '..');
 const StepView = new Function(
   `${fs.readFileSync(path.join(root, 'web', 'js', 'stepview.js'), 'utf8')}; return StepView;`)();
 
+// jobs.js needs nothing from the page until it is attached to one.
+const Jobs = new Function(
+  `${fs.readFileSync(path.join(root, 'web', 'js', 'jobs.js'), 'utf8')}; return Jobs;`)();
+
+// seriesload.js reaches for API and Metrics only when a climb runs, so each
+// test hands it a pretend backend and the real list of expensive statistics.
+const Metrics = new Function('window', ['colormaps.js', 'metrics.js']
+  .map(name => fs.readFileSync(path.join(root, 'web', 'js', name), 'utf8')).join('\n')
+  + '; return Metrics;')({ devicePixelRatio: 1 });
+const SERIES_SOURCE = fs.readFileSync(path.join(root, 'web', 'js', 'seriesload.js'), 'utf8');
+/** A fresh loader, with a cache of its own, talking to `api`. */
+const loaderFor = api => new Function('API', 'Metrics', `${SERIES_SOURCE}; return SeriesLoad;`)(api, Metrics);
+
 // presets.js needs nothing from the page, so it loads the same bare way.
 const Presets = new Function(
   `${fs.readFileSync(path.join(root, 'web', 'js', 'presets.js'), 'utf8')}; return Presets;`)();
@@ -61,6 +74,103 @@ function worldAt(stage, move) {
 
 // ---------------------------------------------------------------------------
 
+
+
+async function test_a_second_job_for_an_owner_cancels_the_first() {
+  // Asking a second question of the same thing means the first answer is no
+  // longer wanted. Before this, each view kept its own token, two of the four
+  // forgot to check theirs, and Lineage could not be stopped at all.
+  Jobs.cancelAll();
+  let firstSignal = null;
+  const first = Jobs.run('lineage', 'first', job => {
+    firstSignal = job.signal;
+    return new Promise(resolve => setTimeout(resolve, 50));
+  });
+  const second = Jobs.run('lineage', 'second', async () => 'done');
+
+  if (!firstSignal.aborted) {
+    throw new Error('starting a second job for the same owner did not abort the first');
+  }
+  if (await second !== 'done') throw new Error('the second job did not run');
+  await first;
+  if (Jobs.busy('lineage')) throw new Error('the owner is still busy after both settled');
+}
+
+async function test_only_cancels_everything_else() {
+  // Switching view is exactly this: whatever is not what you are looking at
+  // stops, and what you are looking at carries on.
+  Jobs.cancelAll();
+  const signals = {};
+  const hold = () => new Promise(resolve => setTimeout(resolve, 30));
+  for (const owner of ['lineage', 'flow', 'diagrams']) {
+    Jobs.run(owner, owner, job => { signals[owner] = job.signal; return hold(); });
+  }
+  Jobs.only('diagrams');
+
+  if (!signals.lineage.aborted || !signals.flow.aborted) {
+    throw new Error('Jobs.only left another owner running');
+  }
+  if (signals.diagrams.aborted) {
+    throw new Error('Jobs.only cancelled the owner it was asked to keep');
+  }
+  Jobs.cancelAll();
+}
+
+async function test_a_cancelled_job_neither_reports_nor_counts_as_finished() {
+  // Two halves of being in control. A job that was stopped must not keep
+  // moving the progress bar, and must not be mistaken for one that finished —
+  // that mistake is what left a view blank when you came back to it, because
+  // it believed it had already loaded.
+  Jobs.cancelAll();
+  const reports = [];
+  const realShow = Jobs._show;
+  Jobs._show = (owner, text, done, total) => reports.push([owner, done, total]);
+  try {
+
+  let job = null;
+  const running = Jobs.run('flow', 'reading', j => {
+    job = j;
+    return new Promise(resolve => setTimeout(resolve, 20));
+  });
+  job.report(1, 10);
+  Jobs.cancel('flow');
+  const before = reports.length;
+  job.report(5, 10);
+  await running;
+
+  if (reports.length !== before) {
+    throw new Error('a cancelled job went on reporting progress');
+  }
+  if (Jobs.finished('flow')) {
+    throw new Error('a cancelled job was recorded as finished');
+  }
+  if (!Jobs.interrupted('flow')) {
+    throw new Error('a cancelled job was not recorded as interrupted, so nothing would resume it');
+  }
+
+  await Jobs.run('flow', 'reading', async () => 'ok');
+  if (!Jobs.finished('flow') || Jobs.interrupted('flow')) {
+    throw new Error('a job that ran to the end was not recorded as finished');
+  }
+  } finally {
+    Jobs._show = realShow;
+  }
+}
+
+async function test_an_abort_is_not_an_error() {
+  // The caller asked for it. A view that treated its own cancellation as a
+  // failure would print "Could not read the window" every time you switched
+  // away — the opposite of the calm this is for.
+  Jobs.cancelAll();
+  const running = Jobs.run('lineage', 'x', job => new Promise((resolve, reject) => {
+    job.signal.addEventListener('abort', () => {
+      const stop = new Error('aborted'); stop.name = 'AbortError'; reject(stop);
+    });
+  }));
+  Jobs.cancel('lineage');
+  const result = await running;           // must resolve, not throw
+  if (result !== null) throw new Error('an aborted job did not resolve to null');
+}
 
 function test_the_layout_default_is_stated_once() {
   // viewer.js used to carry its own copy of these six and index.html a third,
@@ -507,6 +617,137 @@ function test_the_conquest_waits_for_the_stakes_on_the_step_that_shows_both() {
 
 // ---------------------------------------------------------------------------
 
+// ---- the run's history ----------------------------------------------------
+
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+const assert = (ok, message) => { if (!ok) throw new Error(message); };
+
+/**
+ * A run of `total` samples, summarised the way the server does it: `nodes` is
+ * cheap, `bridges` walks the graph and is null in a cheap reply, and `families`
+ * only exists in a reply that covers the whole run. Every sample is two rows,
+ * one per phase. `calls` records what was asked for.
+ */
+function pretendRun(total, calls = []) {
+  return {
+    async getSeries(runId, points, heavy) {
+      calls.push({ points, heavy });
+      const take = points === null ? total : Math.min(total, Math.max(2, points));
+      const whole = take >= total;
+      const keys = ['iteration', 'phase', 'nodes', 'bridges', ...(whole ? ['families'] : [])];
+      const rows = [];
+      for (let it = 0; it < take; it++) {
+        for (const phase of [1, 2]) {
+          rows.push({ iteration: it, phase, nodes: 100 + it,
+                      bridges: heavy ? it : null, families: 3 });
+        }
+      }
+      const series = {};
+      for (const key of keys) series[key] = rows.map(row => row[key]);
+      return { keys, series, points: take, totalPoints: total, complete: whole, heavy };
+    },
+    async getSeriesProgress() { return { building: false, done: 0, total: 0 }; }
+  };
+}
+
+async function test_a_history_is_fetched_only_as_deep_as_its_statistics_need() {
+  const calls = [];
+  const loader = loaderFor(pretendRun(20, calls));
+
+  await loader.climb('run', ['nodes']);
+  assert(calls.length && calls.every(c => c.heavy === false),
+    'a population chart asked for the graph statistics it does not plot');
+  assert(loader.ready('run', ['nodes']), 'the cheap history is not counted as ready');
+  assert(!loader.ready('run', ['bridges']), 'a cheap history is passed off as a structural one');
+
+  // A derived statistic is as deep as what it is made of.
+  calls.length = 0;
+  await loader.climb('run', ['bridgeShare']);
+  assert(calls.length && calls.every(c => c.heavy === true),
+    'bridges / edges was loaded without the bridge counts it divides');
+  assert(loader.ready('run', ['bridges']), 'a finished structural history is not ready');
+}
+
+async function test_a_second_load_adds_to_the_first_rather_than_starting_over() {
+  const loader = loaderFor(pretendRun(20));
+  await loader.climb('run', ['nodes']);
+
+  const steps = [];
+  await loader.climb('run', ['bridges'], { onStep: payload => steps.push(payload) });
+  assert(steps.length > 1, 'the structural load arrived in one piece; nothing was climbed');
+  for (const payload of steps) {
+    assert(payload.count === 40,
+      `a step held ${payload.count} rows of 40: the chart fell back to a sketch of itself`);
+    assert(payload.series.nodes.every(v => v !== null), 'a cheap value already in hand was lost');
+    // Only a reply covering the whole run carries `families`; the structural
+    // load's early steps do not, and must not take it off the chart.
+    assert(payload.series.families && payload.series.families.every(v => v === 3),
+      'a statistic only a whole run gives was dropped by a coarse step');
+  }
+  const filled = p => p.series.bridges.filter(v => v !== null).length;
+  assert(filled(steps[0]) < 40, 'the first structural step was not coarse');
+  assert(filled(steps[steps.length - 1]) === 40, 'the structural load did not finish');
+  assert(steps[steps.length - 1].heavy && steps[steps.length - 1].complete,
+    'a finished structural history does not say so');
+}
+
+async function test_a_cheap_load_never_blanks_an_expensive_value() {
+  const loader = loaderFor(pretendRun(20));
+  // A structural load cut short after its second step.
+  let seen = 0;
+  const job = { signal: null, report() {}, get cancelled() { return seen >= 2; } };
+  await loader.climb('run', ['bridges'], { job, onStep: () => { seen += 1; } });
+  const before = loader.cache.get('run').series.bridges.filter(v => v !== null).length;
+  assert(before > 0 && before < 40, `the cut-short load kept ${before} structural values`);
+
+  await loader.climb('run', ['nodes']);
+  const after = loader.cache.get('run');
+  assert(after.series.bridges.filter(v => v !== null).length === before,
+    'the cheap rows overwrote bridge counts an earlier load had already found');
+  assert(after.complete && !after.heavy,
+    'a history with only some bridge counts claims to have them all');
+}
+
+async function test_the_bar_counts_samples_and_only_moves_forward() {
+  // The server counts frames, two to a sample, and counts only the frames of
+  // the step in flight. Passing that straight to the bar made it run 4%, 6%,
+  // 8%, 3%, 34%, 66%, 15% — two different measures taking turns.
+  const total = 20;
+  const inner = pretendRun(total);
+  let state = { building: false, done: 0, total: 0 };
+  let had = 0;
+  const api = {
+    async getSeries(runId, points, heavy) {
+      const take = points === null ? total : Math.min(total, Math.max(2, points));
+      const frames = 2 * Math.max(0, take - had);
+      state = { building: frames > 0, done: 0, total: frames };
+      for (let i = 0; i < frames; i++) { await sleep(2); state.done = i + 1; }
+      state = { building: false, done: 0, total: 0 };
+      had = Math.max(had, take);
+      return inner.getSeries(runId, points, heavy);
+    },
+    async getSeriesProgress() { return { ...state }; }
+  };
+  const loader = loaderFor(api);
+  loader.POLL_MS = 3;
+
+  const reports = [];
+  const job = { signal: null, cancelled: false, report: (done, of) => reports.push([done, of]) };
+  await loader.climb('run', ['bridges'], { job });
+
+  assert(reports.length, 'the bar was never told anything');
+  assert(reports.every(([, of]) => of === total),
+    `the bar was given totals other than the ${total} samples: ${JSON.stringify(reports)}`);
+  for (let i = 1; i < reports.length; i++) {
+    assert(reports[i][0] > reports[i - 1][0],
+      `the bar went from ${reports[i - 1][0]} to ${reports[i][0]}`);
+  }
+  assert(reports[reports.length - 1][0] === total, 'the bar did not reach the end');
+  const boundaries = new Set([2, 3, 5, 9, 17, total]);
+  assert(reports.some(([done]) => !boundaries.has(done)),
+    'the bar only moved between steps; the server\'s own count was never used');
+}
+
 const tests = Object.entries({
   test_the_world_holds_its_whole_supply_at_both_ends_of_the_game,
   test_a_pile_never_fills_before_anything_reaches_it,
@@ -524,30 +765,45 @@ const tests = Object.entries({
   test_a_brain_stays_marked_once_its_turn_has_passed,
   test_a_conquest_does_not_show_its_answer_before_the_brain_arrives,
   test_the_conquest_waits_for_the_stakes_on_the_step_that_shows_both,
-  test_the_layout_default_is_stated_once
+  test_the_layout_default_is_stated_once,
+  test_a_second_job_for_an_owner_cancels_the_first,
+  test_only_cancels_everything_else,
+  test_a_cancelled_job_neither_reports_nor_counts_as_finished,
+  test_an_abort_is_not_an_error,
+  test_a_history_is_fetched_only_as_deep_as_its_statistics_need,
+  test_a_second_load_adds_to_the_first_rather_than_starting_over,
+  test_a_cheap_load_never_blanks_an_expensive_value,
+  test_the_bar_counts_samples_and_only_moves_forward
 }).sort(([a], [b]) => a.localeCompare(b));
 
 // A test that is written and never listed here is worse than no test: it reads
 // as coverage and runs never.
-const written = (fs.readFileSync(__filename, 'utf8').match(/^function test_/gm) || []).length;
+// Async tests count too: a guard that only saw `function test_` would let an
+// `async function test_` be written, listed nowhere, and never run.
+const written = (fs.readFileSync(__filename, 'utf8')
+  .match(/^(async )?function test_/gm) || []).length;
 if (written !== tests.length) {
   console.error(`${written} tests are written and ${tests.length} are listed to run`);
   process.exit(1);
 }
 
-const failures = [];
-const started = Date.now();
-for (const [name, fn] of tests) {
-  try {
-    fn();
-    process.stdout.write('.');
-  } catch (err) {
-    failures.push([name, err]);
-    process.stdout.write('F');
+(async () => {
+  const failures = [];
+  const started = Date.now();
+  for (const [name, fn] of tests) {
+    try {
+      // Awaited, so an async test that rejects is a failure rather than a
+      // pass with an unhandled rejection printed somewhere after the summary.
+      await fn();
+      process.stdout.write('.');
+    } catch (err) {
+      failures.push([name, err]);
+      process.stdout.write('F');
+    }
   }
-}
-const elapsed = ((Date.now() - started) / 1000).toFixed(1);
-console.log(`\n\n${tests.length - failures.length} passed, ${failures.length} failed `
-          + `in ${elapsed}s`);
-for (const [name, err] of failures) console.log(`\n--- ${name} ---\n${err.stack}`);
-process.exit(failures.length ? 1 : 0);
+  const elapsed = ((Date.now() - started) / 1000).toFixed(1);
+  console.log(`\n\n${tests.length - failures.length} passed, ${failures.length} failed `
+            + `in ${elapsed}s`);
+  for (const [name, err] of failures) console.log(`\n--- ${name} ---\n${err.stack}`);
+  process.exit(failures.length ? 1 : 0);
+})();

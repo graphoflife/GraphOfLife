@@ -422,8 +422,8 @@ recorded per frame: `bridges` and `orphaned`.
 
 Run against the recorded series, with a Watts–Strogatz graph rebuilt at the
 same size and degree as the control. **No conclusions drawn here**; these are
-the numbers, and the Theses tab states in advance what would confirm or refute
-each claim.
+the numbers, and each thesis (one button apiece above Research → Diagrams → Time
+series) states in advance what would confirm or refute it.
 
 **T1, the shortcut budget.** Confirmed, and by a wide margin. Two long runs
 (4,985 and 2,773 iterations, populations growing to 31k and 13.6k) end with

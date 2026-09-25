@@ -122,12 +122,15 @@ Object.assign(Viewer, {
     document.getElementById('btnClearFocus').addEventListener('click', () => this.setFocus(null));
 
     document.getElementById('btnTrajLoad').addEventListener('click', async () => {
-      if (this._trajectoryLoading || !this.runId) return;
-      this._trajectoryLoading = true;
+      // The history is the stat detail's job, and it loads only as deep as the
+      // two axes need: a scatter of population against tokens does not wait
+      // for bridge counts.
+      if (!this.runId) return;
+      const loading = StatDetail.load(this.runId, [this.settings.trajX, this.settings.trajY]);
       this.updateTrajectory();
-      try { await StatDetail.load(this.runId); }
+      try { await loading; }
       catch (err) { /* the chart says so on the next draw */ }
-      finally { this._trajectoryLoading = false; this.updateTrajectory(); }
+      finally { this.updateTrajectory(); }
     });
 
     const radius = document.getElementById('focusRadius');

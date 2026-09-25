@@ -394,7 +394,7 @@ const Viewer = {
       this.position = 0;
       this.frameIndex = 0;
     }
-    StatDetail.invalidate(runId);
+    SeriesLoad.forget(runId);
 
     try {
       this.meta = await API.getRun(runId);
@@ -429,7 +429,7 @@ const Viewer = {
     if (!this.runId) return;
     this.cache.clear();
     this.inflight.clear();
-    StatDetail.invalidate(this.runId);
+    SeriesLoad.forget(this.runId);
     await this.load(this.runId);
   },
 

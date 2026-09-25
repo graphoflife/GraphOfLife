@@ -16,12 +16,16 @@
 const ServerBackend = {
   name: 'server',
 
-  async _request(method, path, body) {
+  async _request(method, path, body, signal) {
     const options = { method, headers: {} };
     if (body !== undefined) {
       options.headers['Content-Type'] = 'application/json';
       options.body = JSON.stringify(body);
     }
+    // The whole point of the signal: this ends the request rather than
+    // leaving it to finish and be ignored. A long read of a large run is the
+    // case that matters — it used to run to the end whatever you did next.
+    if (signal) options.signal = signal;
 
     const response = await fetch(path, options);
     const text = await response.text();
@@ -50,32 +54,33 @@ const ServerBackend = {
   stopRun(id)           { return this._request('POST', `/api/runs/${encodeURIComponent(id)}/stop`); },
   copyRun(id, name)     { return this._request('POST', `/api/runs/${encodeURIComponent(id)}/copy`, { name }); },
   renameRun(id, name)   { return this._request('POST', `/api/runs/${encodeURIComponent(id)}/rename`, { name }); },
-  getFrame(id, index)   { return this._request('GET', `/api/runs/${encodeURIComponent(id)}/frames/${index}`); },
+  getFrame(id, index, opts)   { return this._request('GET', `/api/runs/${encodeURIComponent(id)}/frames/${index}`, undefined, opts && opts.signal); },
   // A contiguous run of frames, cut down to the fields the caller reads.
   // `fields` is the difference between two arrays and the whole topology of
   // a forty-thousand-node world.
-  getFrames(id, from, count, fields, sightings) {
+  getFrames(id, from, count, fields, sightings, opts) {
     const query = `?from=${from}&count=${count}`
       + (fields && fields.length ? `&fields=${fields.join(',')}` : '')
       + (sightings ? `&sightings=${sightings}` : '');
-    return this._request('GET', `/api/runs/${encodeURIComponent(id)}/frames${query}`);
+    return this._request('GET', `/api/runs/${encodeURIComponent(id)}/frames${query}`,
+                         undefined, opts && opts.signal);
   },
   // The genotype forest of a window, already reduced to what can be drawn.
-  getLineage(id, from, count, limit, sightings, phase) {
+  getLineage(id, from, count, limit, sightings, phase, opts) {
     return this._request('GET', `/api/runs/${encodeURIComponent(id)}/lineage`
       + `?from=${from}&count=${count}&limit=${limit}&sightings=${sightings}`
-      + `&phase=${phase || 'all'}`);
+      + `&phase=${phase || 'all'}`, undefined, opts && opts.signal);
   },
   // `points` asks for a coarse pass over the whole run rather than every
   // sample of it, so a chart can be drawn before the full build finishes.
-  getSeries(id, points, heavy = true) {
+  getSeries(id, points, heavy = true, opts) {
     const query = [];
     if (points) query.push(`points=${points}`);
     if (!heavy) query.push('heavy=0');
     return this._request('GET', `/api/runs/${encodeURIComponent(id)}/series`
-      + (query.length ? `?${query.join('&')}` : ''));
+      + (query.length ? `?${query.join('&')}` : ''), undefined, opts && opts.signal);
   },
-  getSeriesProgress(id) { return this._request('GET', `/api/runs/${encodeURIComponent(id)}/series/progress`); }
+  getSeriesProgress(id, opts) { return this._request('GET', `/api/runs/${encodeURIComponent(id)}/series/progress`, undefined, opts && opts.signal); }
 };
 
 /** Runs the same Python in a worker, through Pyodide. */
@@ -118,11 +123,31 @@ const BrowserBackend = {
     return this._worker;
   },
 
-  _send(type, payload = {}) {
+  _send(type, payload = {}, signal = null) {
     const worker = this._ensure();
     const id = this._nextId++;
     return new Promise((resolve, reject) => {
       this._pending.set(id, { resolve, reject });
+      // Pyodide runs to completion — there is no interrupting it mid-frame.
+      // What can be done is refuse the answer, so a superseded read never
+      // paints over what is on screen now. The work is wasted either way;
+      // the picture is not.
+      if (signal) {
+        if (signal.aborted) {
+          this._pending.delete(id);
+          const stop = new Error('aborted');
+          stop.name = 'AbortError';
+          reject(stop);
+          return;
+        }
+        signal.addEventListener('abort', () => {
+          if (!this._pending.has(id)) return;
+          this._pending.delete(id);
+          const stop = new Error('aborted');
+          stop.name = 'AbortError';
+          reject(stop);
+        }, { once: true });
+      }
       worker.postMessage({ id, type, ...payload });
     });
   },
@@ -136,17 +161,19 @@ const BrowserBackend = {
   stopRun(id)           { return this._send('stop', { runId: id }); },
   copyRun(id, name)     { return this._send('copy', { runId: id, name }); },
   renameRun(id, name)   { return this._send('rename', { runId: id, name }); },
-  getFrame(id, index)   { return this._send('frame', { runId: id, index }); },
-  getFrames(id, from, count, fields, sightings) {
-    return this._send('frames', { runId: id, from, count, fields, sightings });
+  getFrame(id, index, opts)   { return this._send('frame', { runId: id, index }, opts && opts.signal); },
+  getFrames(id, from, count, fields, sightings, opts) {
+    return this._send('frames', { runId: id, from, count, fields, sightings },
+                      opts && opts.signal);
   },
-  getLineage(id, from, count, limit, sightings, phase) {
-    return this._send('lineage', { runId: id, from, count, limit, sightings, phase });
+  getLineage(id, from, count, limit, sightings, phase, opts) {
+    return this._send('lineage', { runId: id, from, count, limit, sightings, phase },
+                      opts && opts.signal);
   },
-  getSeries(id, points, heavy = true) {
-    return this._send('series', { runId: id, points, heavy });
+  getSeries(id, points, heavy = true, opts) {
+    return this._send('series', { runId: id, points, heavy }, opts && opts.signal);
   },
-  getSeriesProgress(id) { return this._send('seriesProgress', { runId: id }); },
+  getSeriesProgress(id, opts) { return this._send('seriesProgress', { runId: id }, opts && opts.signal); },
   storage()             { return this._send('storage'); }
 };
 
@@ -189,15 +216,18 @@ const API = {
   stopRun(id)             { return this._call('stopRun', id); },
   copyRun(id, name)       { return this._call('copyRun', id, name); },
   renameRun(id, name)     { return this._call('renameRun', id, name); },
-  getFrame(id, index)     { return this._call('getFrame', id, index); },
-  getFrames(id, from, count, fields, sightings) {
-    return this._call('getFrames', id, from, count, fields, sightings);
+  // The reads take a trailing { signal }. The writes do not: cancelling a
+  // create or a rename halfway is not a thing anyone wants, and pretending
+  // otherwise would put a signal on twenty methods to serve five.
+  getFrame(id, index, opts)     { return this._call('getFrame', id, index, opts); },
+  getFrames(id, from, count, fields, sightings, opts) {
+    return this._call('getFrames', id, from, count, fields, sightings, opts);
   },
-  getLineage(id, from, count, limit, sightings, phase) {
-    return this._call('getLineage', id, from, count, limit, sightings, phase);
+  getLineage(id, from, count, limit, sightings, phase, opts) {
+    return this._call('getLineage', id, from, count, limit, sightings, phase, opts);
   },
-  getSeries(id, points, heavy) { return this._call('getSeries', id, points, heavy); },
-  getSeriesProgress(id)   { return this._call('getSeriesProgress', id); },
+  getSeries(id, points, heavy, opts) { return this._call('getSeries', id, points, heavy, opts); },
+  getSeriesProgress(id, opts)   { return this._call('getSeriesProgress', id, opts); },
   // Only the in-browser backend stores anything locally; with a server the
   // question has no meaning and the notice does not ask it.
   storage()               { return BrowserBackend.storage(); }

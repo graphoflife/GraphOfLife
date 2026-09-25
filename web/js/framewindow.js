@@ -82,11 +82,15 @@ const FrameWindow = {
    * two arrays of brain ids, the flow view wants ids and allocations. Asking
    * for the whole thing was tens of megabytes to parse per window.
    */
-  async *read(runId, indices, fields = null, sightings = 0) {
+  async *read(runId, indices, fields = null, sightings = 0, opts = {}) {
     for (let at = 0; at < indices.length; at += this.BATCH) {
+      // Checked between batches as well as passed down, so a long window stops
+      // at the next boundary even if the request in flight has already been
+      // answered.
+      if (opts.signal && opts.signal.aborted) return;
       const slice = indices.slice(at, at + this.BATCH);
       const reply = await API.getFrames(runId, slice[0], slice.length,
-                                        fields, sightings);
+                                        fields, sightings, opts);
       const got = reply.frames || [];
       yield got;
       // The backend stopped early on its own budget, so there is

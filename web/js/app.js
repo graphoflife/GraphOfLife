@@ -9,6 +9,16 @@ const App = {
       tab.addEventListener('click', () => this.showView(tab.dataset.view));
     }
 
+    Jobs.attach(document.getElementById('jobBar'));
+
+    // A hidden tab is not a tab anyone is reading. Work started in it kept
+    // fetching and kept the layout worker spinning, which is most of what
+    // "something in another window is still loading" was.
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) Jobs.cancelAll();
+      else this.reloadActive();
+    });
+
     Viewer.init();
     StatDetail.init();
     RunsView.init();
@@ -73,7 +83,23 @@ const App = {
     });
   },
 
+  /**
+   * Back from a hidden window: pick up whatever was cut short.
+   *
+   * Hiding cancels everything, which is right while nobody is looking and
+   * wrong the moment somebody is again. Each view knows whether its own last
+   * load finished, so this asks rather than reloading what is already drawn.
+   */
+  reloadActive() {
+    if (this.view === 'research') Research.resume();
+    if (this.view === 'viewer') StatDetail.resume();
+  },
+
   showView(name) {
+    // Leaving a tab stops what it was loading. Only on an actual change: a
+    // second click on the tab you are already on is not a request to throw
+    // away the load it is in the middle of.
+    if (name !== this.view) Jobs.cancelAll();
     this.view = name;
 
     for (const tab of document.querySelectorAll('.tab, .brand')) {
@@ -98,6 +124,7 @@ const App = {
     // Done synchronously as well as on the next frame: the element already has
     // its box by now, and waiting on rAF alone can leave a blank canvas.
     if (name === 'viewer') {
+      StatDetail.resume();
       Viewer.resize();
       if (Viewer.frame) Viewer.updateCharts();
       requestAnimationFrame(() => Viewer.resize());

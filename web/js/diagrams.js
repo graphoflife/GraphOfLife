@@ -29,6 +29,72 @@ const Diagrams = {
     { id: 'timeline',  label: 'Time series', kind: 'series' }
   ],
 
+  /**
+   * The claims this project makes about its graphs, each as a chart you can
+   * open in one click.
+   *
+   * These were a view of their own — a list, a canvas, a legend, a loader —
+   * that drew exactly what the Time series tab draws: a few statistics of one
+   * run over time, with a line at a value the claim is stated in. So they are
+   * that tab, pre-filled. A thesis is its prose and the statistics that decide
+   * it; choosing one fills in the lines and the rule, and its prose appears
+   * under the chart for as long as the chart is still the one it describes.
+   */
+  THESES: [
+    {
+      id: "shortcut",
+      title: "The shortcut budget is spent",
+      claim: "The graph starts as a small world and cannot stay one. Its long-range edges are a one-time endowment that can only be lost.",
+      why: "Every edge the engine creates joins nodes at most two hops apart: a newborn links into its parent’s neighbourhood, and a handover moves an edge within it. Nothing anywhere creates a link between distant parts of the graph. Meanwhile edges are destroyed freely — every edge carrying no tokens is cut at the end of each Blotto phase. The Watts–Strogatz rewiring the world is built with is therefore a budget that is spent and never refilled.",
+      confirm: "Bridges rise as a share of edges, loop density falls, and the graph sits far from where a Watts–Strogatz graph of the same size and degree would be.",
+      refute: "The measures hold near their starting values, or return toward them after an early excursion — which would mean something is replacing long-range structure that this reading of the code says cannot be replaced.",
+      stats: ["loopDensity","transitivity","bridgeShare"],
+      guides: []
+    },
+    {
+      id: "fragility",
+      title: "Fragility leads the cull",
+      claim: "How lopsided the graph is predicts how many agents the next cleanup removes.",
+      why: "Cleanup keeps only the largest connected component and kills everything else. So a bridge with a tenth of the population behind it is not a curiosity — it is a tenth-of-the-population extinction, waiting for the zero-flow prune to happen to cut that one edge. If that is what is going on, the worst cut available *before* a phase should say something about the cull that phase produces.",
+      confirm: "Worst cut, taken before the cull, moves ahead of the culled share — and keeps doing so against a control that shifts one series in time and destroys only the alignment between them.",
+      refute: "No relationship beyond the shifted control, which would mean the culls are removing stragglers rather than severed regions, and the bridge structure is not what kills anyone.",
+      note: "The pre-cull reading is what makes this answerable at all. The ordinary bridge count is taken after cleanup, in the same frame as the cull, so a cut that severs a whole side moves both numbers at once and cause cannot be told from effect. Runs recorded before the engine started taking the pre-cull reading cannot test this.",
+      stats: ["cutRiskBefore","culledShare"],
+      guides: []
+    },
+    {
+      id: "lopsided",
+      title: "No cut costs more than a tenth",
+      claim: "Squash every redundant blob to a point and what is left is a tree whose edges are exactly the bridges. The claim is about how lopsided that tree is: no single bridge has more than a tenth of the population on one side of it.",
+      why: "That is the shape of a decentralised network — plenty of small tree-like fringes hanging off local points, but no chokepoint whose loss splits the world in half. It is also what real social and information networks look like: a well-connected core that no cut divides cheaply, with small pieces attached by single edges. If this population is organising rather than merely growing, this is the shape it would organise into.",
+      confirm: "Worst cut stays under the line and does not trend toward it. The population is a core with fringes, and no one edge holds it together.",
+      refute: "Worst cut climbs toward 50%, meaning the graph is a dumbbell held by one edge and every measurement of “organisation” is really a measurement of which half survived.",
+      stats: ["cutRisk"],
+      guides: [{"axis":"y","at":0.1,"label":"the tenth"}]
+    },
+    {
+      id: "curvature",
+      title: "The graph is negatively curved",
+      claim: "Neighbourhoods hold more than flat space allows, and keep doing so.",
+      why: "The dimension estimate walks outward from a node and fits how fast the frontier grows. In curved space that line bends, and the bend is the Ricci scalar rather than noise — the same fit gives both, and until now the second half was being discarded as residual. The sign is the interesting part: a branching, tree-like graph is strongly negative, and bounded-degree expanders are negatively curved as a theorem, so this doubles as a reading on how expander-like the graph is.",
+      confirm: "Curvature is negative and stable, or drifts steadily — either is a geometry rather than an artefact.",
+      refute: "It swings wildly frame to frame, in which case there are too few usable radii for the fit and the number is measuring the sampling, not the graph.",
+      stats: ["ricciCurvature","dimension"],
+      guides: []
+    },
+    {
+      id: "core",
+      title: "A core with whiskers",
+      claim: "The population splits into a well-connected core and a tree-shaped fringe hanging off it, rather than being uniform.",
+      why: "Peel away everyone with a single connection, and keep peeling until nobody has one. What survives is the part where every agent sits on some loop; what is peeled is fringe. Real networks are overwhelmingly this shape, and no standard random-graph model reproduces it, so finding it here would not be a property inherited from the starting graph.",
+      confirm: "Core share settles well below 1 and stays there — a stable division of labour between core and fringe rather than a transient.",
+      refute: "Core share sits near 1 (no fringe, the graph is uniformly interwoven) or falls toward 0 (no core, the graph is becoming a tree).",
+      stats: ["coreShare","leafShare"],
+      guides: []
+    }
+  ],
+
+
   /** Where saved settings live, so they survive a reload. */
   STORE: 'gol.diagrams.presets',
 
@@ -61,14 +127,11 @@ const Diagrams = {
     // moments are the seeded graph shaking itself out — a swing far larger than
     // anything that follows — and on a shared axis that opening transient sets
     // the scale for the whole chart, flattening the part worth looking at.
-    timeline:  { lines: [], cutoff: 50, logX: false, logY: false,
+    timeline:  { lines: [], cutoff: 50, logX: false, logY: false, thesis: null,
                  colormap: 'viridis', reverse: false,
                  title: '', grid: true, guides: [] }
   },
 
-  // One cached series per run, so adding a second line from a run already on
-  // the chart costs nothing.
-  series: new Map(),
   frames: null,
 
   // The fields a per-node or per-edge metric is computed from. A frame also
@@ -123,6 +186,43 @@ const Diagrams = {
   say(text) { if (this.noteEl) this.noteEl.textContent = text; },
 
   /**
+   * Fill the time series in from a thesis: its statistics, of one run, and
+   * the value its claim is stated in.
+   */
+  applyThesis(id) {
+    const thesis = this.THESES.find(t => t.id === id);
+    if (!thesis) return;
+    const run = this.runId || (this.runs[0] && this.runs[0].id) || '';
+    const s = this.settings.timeline;
+    s.thesis = id;
+    s.lines = thesis.stats.map(stat => ({ run, stat, phase: 'all',
+                                          stretch: false, maxFrames: null }));
+    s.guides = thesis.guides.map(g => ({ ...g }));
+    s.title = thesis.title;
+    if (this.active !== 'timeline') this.show('timeline');
+    else { this.controls(); this.refresh(); }
+  },
+
+  /**
+   * The thesis the chart still describes, if any.
+   *
+   * Its prose stays only while the lines plot exactly its statistics — the
+   * run is free to change, which is how one claim is compared across runs,
+   * but add or swap a statistic and the chart is no longer the argument the
+   * prose is making, so the prose goes.
+   */
+  activeThesis() {
+    const s = this.settings.timeline;
+    const thesis = s.thesis && this.THESES.find(t => t.id === s.thesis);
+    if (!thesis || !s.lines.length) return null;
+    const plotted = new Set(s.lines.map(l => l.stat));
+    const wanted = new Set(thesis.stats);
+    if (plotted.size !== wanted.size) return null;
+    for (const stat of wanted) if (!plotted.has(stat)) return null;
+    return thesis;
+  },
+
+  /**
    * What each statistic on the chart measures, printed under it.
    *
    * A chart of four lines named "Bridges" and "Cheeger" is unreadable to
@@ -138,6 +238,28 @@ const Diagrams = {
     if (!this.meaningsEl) return;
     this.meaningsEl.replaceChildren();
     if (!tracks || !tracks.length) return;
+
+    // A thesis argues something, and the statistics below are its evidence,
+    // so the argument comes first.
+    const thesis = this.active === 'timeline' ? this.activeThesis() : null;
+    if (thesis) {
+      const box = document.createElement('div');
+      box.className = 'diagram-thesis';
+      const head = document.createElement('h4');
+      head.textContent = thesis.title;
+      box.append(head);
+      for (const [key, label] of [['claim', 'The claim'], ['why', 'Why it would be so'],
+                                  ['confirm', 'It holds if'], ['refute', 'It fails if'],
+                                  ['note', 'Note']]) {
+        if (!thesis[key]) continue;
+        const para = document.createElement('p');
+        const tag = document.createElement('b');
+        tag.textContent = label;
+        para.append(tag, document.createTextNode(' ' + thesis[key]));
+        box.append(para);
+      }
+      this.meaningsEl.append(box);
+    }
 
     const seen = new Set();
     for (const track of tracks) {
@@ -163,7 +285,8 @@ const Diagrams = {
       const parsed = Metrics.parse(key);
       return Metrics.label(parsed.domain, parsed.key);
     }
-    return (Viewer.STAT_LABELS || {})[key] || key;
+    return (Viewer.STAT_LABELS || {})[key]
+      || (Metrics.DERIVED[key] && Metrics.DERIVED[key].label) || key;
   },
 
   /**
@@ -310,14 +433,20 @@ const Diagrams = {
     await this.refresh();
   },
 
-  /** Fetch whatever this tab needs, then draw. */
+  /**
+   * Fetch whatever this tab needs, then draw.
+   *
+   * One job for the whole tab, whichever kind it is. Starting a second read
+   * cancels the first, which is what switching tab or run means, and the
+   * requests themselves stop rather than finishing into a chart nobody is
+   * looking at any more.
+   */
   async refresh() {
     if (!this.canvas) return;
-    const token = (this.token = (this.token || 0) + 1);
-    // What the tab was showing when this started. Checked between requests, so
-    // walking away stops the work rather than leaving it running unseen.
-    const epoch = Research.epoch;
+    return Jobs.run('diagrams', 'Reading', (job) => this._refresh(job));
+  },
 
+  async _refresh(job) {
     if (this.tab.kind === 'frame') {
       if (!this.runId) { this.frames = null; this.say('Choose a simulation above.'); this.draw(); return; }
       const run = this.runs.find(r => r.id === this.runId);
@@ -351,13 +480,13 @@ const Diagrams = {
         for (let at = 0; at < wanted; at += this.BATCH) {
           const size = Math.min(this.BATCH, wanted - at);
           const reply = await API.getFrames(this.runId, from - lead + at, size,
-                                            this.FRAME_FIELDS, this.MAX_POOLED - pooled);
-          if (this.token !== token) return;
+                                            this.FRAME_FIELDS, this.MAX_POOLED - pooled,
+                                            { signal: job.signal });
+          if (job.cancelled) return;
           const batch = reply.frames || [];
           read.push(...batch);
           pooled += batch.reduce((n, f) => n + (f.ids || []).length, 0);
-          this.say(`Reading frames… ${formatNumber(read.length)} of `
-                   + `${formatNumber(wanted)}`);
+          job.report(read.length, wanted, 'Reading frames');
           // Either the run ran out or the value budget did; both mean stop.
           if (batch.length < size || pooled >= this.MAX_POOLED) break;
         }
@@ -365,7 +494,7 @@ const Diagrams = {
         this.frames = read.slice(lead);
         this.asked = count;
       } catch (err) {
-        if (this.token !== token) return;
+        if (job.cancelled || err.name === 'AbortError') return;
         this.say(`Could not read the frames: ${err.message}`);
         this.frames = null;
       }
@@ -373,34 +502,49 @@ const Diagrams = {
       return;
     }
 
-    // A series tab. Cached per run, and climbed so a long run draws early.
-    if (!this.needsSeries().length) { this.draw(); return; }
-    for (const id of this.needsSeries()) {
-      if (this.series.has(id)) continue;
-      this.say('Reading the run…');
+    // A series tab. Climbed so a long run draws early, and only as deep as the
+    // statistics plotted from it need. A run whose history is already enough
+    // costs nothing, which is what makes adding a second line from it free; a
+    // run cut short last time carries on from where it stopped.
+    const wanted = this.needsSeries();
+    if (!wanted.size) { this.draw(); return; }
+    for (const [id, stats] of wanted) {
+      if (job.cancelled) return;
+      if (SeriesLoad.ready(id, stats)) continue;
+      if (!SeriesLoad.cache.has(id)) this.say('Reading the run…');
       try {
-        await SeriesLoad.climb(id, {
-          cancelled: () => this.token !== token || Research.stale(epoch),
-          onStep: payload => {
-            this.series.set(id, payload);
-            this.draw();
-          }
+        await SeriesLoad.climb(id, stats, {
+          job,
+          text: wanted.size > 1 ? `Summarising ${id}` : 'Summarising the run',
+          onStep: () => this.draw()
         });
       } catch (err) {
-        if (this.token !== token) return;
+        if (job.cancelled || err.name === 'AbortError') return;
         this.say(`Could not read ${id}: ${err.message}`);
       }
     }
-    if (this.token !== token) return;
+    if (job.cancelled) return;
     this.draw();
   },
 
-  /** Which runs this tab needs summarised — several, on the time chart. */
+  /**
+   * Which runs this tab needs summarised, and which statistics of each —
+   * several runs on the time chart, one on the correlation.
+   */
   needsSeries() {
+    const wanted = new Map();
+    const want = (run, stat) => {
+      if (!run) return;
+      if (!wanted.has(run)) wanted.set(run, []);
+      wanted.get(run).push(stat);
+    };
     if (this.active === 'timeline') {
-      return [...new Set(this.now.lines.map(l => l.run))];
+      for (const line of this.now.lines) want(line.run, line.stat);
+    } else {
+      want(this.runId, this.now.x);
+      want(this.runId, this.now.y);
     }
-    return this.runId ? [this.runId] : [];
+    return wanted;
   },
 
   // ---- drawing ----------------------------------------------------------
@@ -480,10 +624,10 @@ const Diagrams = {
     }
 
     if (this.active === 'correlate') {
-      const payload = this.series.get(this.runId);
+      const payload = SeriesLoad.cache.get(this.runId);
       if (!payload) { drawTrajectory(this.canvas, null, { ...ink, message: 'Choose a simulation above.' }); return; }
       const series = payload.series || {};
-      const xs = series[s.x], ys = series[s.y];
+      const xs = Metrics.column(series, s.x), ys = Metrics.column(series, s.y);
       if (!xs || !ys) {
         drawTrajectory(this.canvas, null, { ...ink, message: 'This run has no history for one of these.' });
         return;
@@ -582,10 +726,10 @@ const Diagrams = {
     // arrive.
     let cutAway = false;
     for (const [i, line] of s.lines.entries()) {
-      const payload = this.series.get(line.run);
+      const payload = SeriesLoad.cache.get(line.run);
       if (!payload) continue;
       const series = payload.series || {};
-      const values = series[line.stat];
+      const values = Metrics.column(series, line.stat);
       if (!values) continue;
       const phases = series.phase || [], iterations = series.iteration || [];
       // The opening iterations, dropped before anything else looks at the
@@ -671,6 +815,21 @@ const Diagrams = {
     // each normalised to its own range — so it carries that normalisation
     // honestly, as a percentage, and the legend gives every line its range.
     const single = tracks.length === 1 ? tracks[0] : null;
+
+    // A lone line's scale takes in its constant lines, with a little room
+    // beyond. A threshold is most worth seeing when the data stays clear of
+    // it: "no cut costs more than a tenth" is confirmed exactly when the line
+    // never reaches 0.1, and a range fitted to the data alone left the
+    // threshold off the chart in precisely that case.
+    const yGuides = (s.guides || []).filter(g => g.axis === 'y');
+    const mapY = v => (s.logY ? Metrics.applyLog(v, v < 0) : v);
+    if (single) {
+      for (const guide of yGuides) {
+        const v = mapY(guide.at);
+        if (v > single.hi) single.hi = v + 0.05 * (v - single.lo);
+        if (v < single.lo) single.lo = v - 0.05 * (single.hi - v);
+      }
+    }
     if (single && single.hi === single.lo) single.hi = single.lo + 1;
     _axes(ctx, w, h, {
       x: { lo: loT, hi: hiT,
@@ -696,15 +855,22 @@ const Diagrams = {
       // smaller spread. The legend carries every range. A constant line is
       // given in real units, so it is mapped the same way the values were
       // before it is compared against them.
-      for (const guide of (s.guides || []).filter(g => g.axis === 'y')) {
-        if (guide.at < track.rawLo || guide.at > track.rawHi) continue;
+      for (const guide of yGuides) {
+        const value = mapY(guide.at);
+        if (value < track.lo || value > track.hi) continue;
         ctx.save();
         ctx.setLineDash([5, 4]);
         ctx.strokeStyle = track.colour;
         ctx.globalAlpha = 0.5;
-        const value = s.logY ? Metrics.applyLog(guide.at, guide.at < 0) : guide.at;
         const at = Math.round(yAt(value)) + 0.5;
         ctx.beginPath(); ctx.moveTo(0, at); ctx.lineTo(w, at); ctx.stroke();
+        // A thesis names its threshold; a line added by hand has no name.
+        if (guide.label) {
+          ctx.globalAlpha = 0.85;
+          ctx.fillStyle = track.colour;
+          ctx.font = '11px system-ui, sans-serif';
+          ctx.fillText(guide.label, 6, at - 5);
+        }
         ctx.restore();
       }
 

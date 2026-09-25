@@ -37,6 +37,8 @@ import argparse
 import json
 import mimetypes
 import os
+import select
+import socket
 import threading
 import traceback
 import webbrowser
@@ -253,12 +255,41 @@ class Handler(BaseHTTPRequestHandler):
 
     def _send_json(self, payload: Any, status: int = 200) -> None:
         body = json.dumps(payload).encode("utf-8")
-        self.send_response(status)
-        self.send_header("Content-Type", "application/json")
-        self.send_header("Content-Length", str(len(body)))
-        self.send_header("Cache-Control", "no-store")
-        self.end_headers()
-        self.wfile.write(body)
+        try:
+            self.send_response(status)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Content-Length", str(len(body)))
+            self.send_header("Cache-Control", "no-store")
+            self.end_headers()
+            self.wfile.write(body)
+        except (BrokenPipeError, ConnectionResetError):
+            # The page stopped waiting — it moved on, or the tab was hidden —
+            # and there is nobody to hand this to. Not an error: a reply the
+            # browser cancelled is a reply it no longer wanted.
+            self.close_connection = True
+
+    def _client_gone(self) -> bool:
+        """
+        Whether the browser has hung up on this request.
+
+        A fetch the page aborts closes its connection, and nothing else tells a
+        threaded handler so. Without asking, every read the browser abandoned
+        ran to the end regardless: leaving Lineage on a large run and trying
+        something else left a dozen handler threads building windows nobody
+        would ever see, all fighting the one request that was wanted for the
+        interpreter. Measured before this: thirteen threads at 83% CPU after a
+        minute of switching views.
+
+        A closed socket reads as ready with nothing in it. Peeking rather than
+        reading leaves anything that *is* there for whatever reads it next.
+        """
+        try:
+            ready, _, _ = select.select([self.connection], [], [], 0)
+            if not ready:
+                return False
+            return self.connection.recv(1, socket.MSG_PEEK) == b""
+        except (OSError, ValueError):
+            return True
 
     def _error(self, message: str, status: int = 400) -> None:
         self._send_json({"error": message}, status)
@@ -347,7 +378,12 @@ class Handler(BaseHTTPRequestHandler):
                 # heavy=0 asks for the cheap statistics only, which is five
                 # sixths less work and everything most charts plot.
                 heavy = parse_qs(urlparse(self.path).query).get("heavy", ["1"])[0] != "0"
-                self._send_json(gol_series.build_series(parts[2], points, heavy))
+                answer = gol_series.build_series(parts[2], points, heavy,
+                                                 cancelled=self._client_gone)
+                if self._client_gone():
+                    self.close_connection = True
+                    return
+                self._send_json(answer)
                 return
 
             if (len(parts) == 5 and parts[:2] == ["api", "runs"]
@@ -391,7 +427,15 @@ class Handler(BaseHTTPRequestHandler):
                 # agents and one of forty thousand, and reading the same number
                 # of frames of each is how this got slow in the first place.
                 read, seen = [], 0
-                for index in range(start, start + count):
+                for step, index in enumerate(range(start, start + count)):
+                    # Every few frames, ask whether anyone is still waiting. A
+                    # frame of a large run takes tens of milliseconds to read,
+                    # so this costs nothing next to the reading, and it is the
+                    # difference between an abandoned window stopping and it
+                    # running for another minute.
+                    if step % 8 == 0 and self._client_gone():
+                        self.close_connection = True
+                        return
                     if not store.has_frame(run_id, index):
                         break
                     frame = store.read_frame(run_id, index)
@@ -402,6 +446,11 @@ class Handler(BaseHTTPRequestHandler):
                     if budget and seen >= budget:
                         break
 
+                # The forest is the other half of the cost; nobody left to draw
+                # it means it is not built.
+                if self._client_gone():
+                    self.close_connection = True
+                    return
                 answer = gol_lineage.forest(read, limit)
                 answer["frames"] = len(read)
                 answer["asked"] = count

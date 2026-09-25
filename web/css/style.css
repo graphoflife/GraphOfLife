@@ -153,6 +153,68 @@ h3 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.8px; color: v
 
 .tabs { display: flex; gap: 4px; }
 
+/* ---- What is loading ----------------------------------------------------
+   One bar for the whole site, in the top bar. It says what is being read, how
+   far along it is, and offers Stop — because work you cannot see is work you
+   cannot tell apart from a page that has hung, and work you cannot stop is
+   work you do not control. */
+.job-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+  padding: 4px 6px 4px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--panel-2);
+  font-size: 12px;
+  color: var(--muted);
+  max-width: 46ch;
+}
+.job-bar[hidden] { display: none; }
+.job-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-variant-numeric: tabular-nums;
+}
+.job-track {
+  position: relative;
+  flex: 0 0 90px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--panel-3);
+  overflow: hidden;
+}
+.job-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0;
+  background: var(--accent);
+  border-radius: inherit;
+  transition: width 0.25s ease;
+}
+/* No total to measure against: say it is working rather than invent a
+   fraction. A band travelling across is the honest version of that. */
+.job-bar.is-indeterminate .job-fill {
+  width: 35% !important;
+  animation: job-sweep 1.1s ease-in-out infinite;
+}
+@keyframes job-sweep {
+  from { left: -35%; }
+  to   { left: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .job-bar.is-indeterminate .job-fill { animation: none; width: 100% !important; opacity: 0.5; }
+}
+.job-stop {
+  padding: 2px 10px;
+  font-size: 11.5px;
+  border-radius: 999px;
+}
+/* The label beside the bar is pushed across by the bar now, not by itself. */
+.job-bar:not([hidden]) + .run-label { margin-left: 12px; }
+
 .tab {
   background: transparent;
   border: 1px solid transparent;
@@ -703,41 +765,6 @@ details.control-group > summary:hover h3 { color: var(--text); }
 .stat-group-body { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 10px 10px; }
 .stat-group .stat { background: var(--panel-2); }
 
-/* Progress bar for a statistics rebuild */
-.progress { margin: 4px 0 10px; }
-.progress.hidden { display: none; }
-.progress-track {
-  height: 6px;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  overflow: hidden;
-}
-.progress-fill {
-  height: 100%;
-  width: 0;
-  background: var(--accent);
-  border-radius: 3px;
-  transition: width 0.2s ease-out;
-}
-/* Before the server reports a total there is nothing honest to show as a
-   fraction, so the bar sweeps instead of claiming a position. */
-.progress-fill.indeterminate {
-  width: 35%;
-  animation: progress-sweep 1.1s ease-in-out infinite;
-}
-@keyframes progress-sweep {
-  0%   { margin-left: -35%; }
-  100% { margin-left: 100%; }
-}
-.progress-label {
-  display: block;
-  margin-top: 5px;
-  font-size: 11px;
-  color: var(--muted);
-  font-variant-numeric: tabular-nums;
-}
-
 /* ==========================================================================
    Fullscreen
    ==========================================================================
@@ -1277,72 +1304,30 @@ details.control-group > summary:hover h3 { color: var(--text); }
 .diagram-preset button:hover,
 .diagram-line button:hover { color: #fff; }
 
-/* --- Theses: a claim, its reasoning, and the series that decide it ------- */
-
-.theses-layout {
-  max-width: 1080px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: minmax(160px, 220px) 1fr;
-  gap: 20px;
-  align-items: start;
-}
-/* One column on a narrow screen: the list becomes a row above the panel
-   rather than a 160px column squeezing the chart to nothing. */
-@media (max-width: 760px) {
-  .theses-layout { grid-template-columns: 1fr; }
-  .theses-list { flex-direction: row; flex-wrap: wrap; }
-}
-
-.theses-list { display: flex; flex-direction: column; gap: 4px; }
-.theses-list button {
-  background: transparent;
-  border: 1px solid transparent;
-  border-left: 2px solid var(--border);
-  border-radius: 0 var(--radius) var(--radius) 0;
-  color: var(--muted);
-  padding: 8px 12px;
-  font-size: 12.5px;
-  text-align: left;
-  cursor: pointer;
-}
-.theses-list button:hover { color: var(--text); }
-.theses-list button.active {
-  background: var(--panel-2);
-  border-left-color: #fff;
-  color: #fff;
-  font-weight: 600;
-}
-
-.theses-prose { margin-bottom: 16px; font-size: 13px; line-height: 1.62; }
-.theses-prose h3 { font-size: 17px; margin: 0 0 12px; color: #fff; }
-.theses-prose p { margin: 0 0 10px; color: var(--muted); }
-.theses-prose b { color: var(--text); }
-.theses-prose .theses-note {
-  border-left: 2px solid var(--border);
-  padding-left: 11px;
-  font-size: 12.5px;
-}
-
-.theses-stage {
-  height: clamp(220px, 34vh, 380px);
-  background: var(--stage);
+/* --- Theses, as the time series they are --------------------------------
+   The claim sits above the evidence for it. Set as reading text, because it
+   is: a paragraph of argument, not a label. */
+.diagram-thesis {
+  padding: 12px 14px;
   border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
   border-radius: var(--radius);
-  overflow: hidden;
+  background: var(--panel);
+  max-width: 78ch;
 }
-.theses-stage canvas { display: block; }
+.diagram-thesis h4 { margin: 0 0 8px; font-size: 14px; color: var(--text); }
+.diagram-thesis p { margin: 0 0 7px; font-size: 12.5px; line-height: 1.6; color: var(--text-soft); }
+.diagram-thesis p:last-child { margin-bottom: 0; }
+.diagram-thesis b { color: var(--text); font-weight: 600; margin-right: 4px; }
 
-.theses-legend {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 18px;
-  margin-top: 9px;
-  font-size: 11.5px;
-  color: var(--muted);
-}
-.theses-key { display: inline-flex; align-items: center; gap: 6px; }
-.theses-key i { width: 10px; height: 2px; border-radius: 1px; }
+/* Five claims in one control. Wraps rather than scrolls, so each stays
+   readable in full. */
+.diagram-theses { flex-wrap: wrap; }
+.diagram-theses .seg-btn { padding: 4px 9px; font-size: 11.5px; }
+
+
+
+
 
 .lineage-note,
 .lineage-readout {

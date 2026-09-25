@@ -118,6 +118,22 @@ const DiagramControls = {
     }
 
     if (this.active === 'timeline') {
+      // The theses, as the charts they are. One click fills the lines in; the
+      // one whose argument the chart is still making is marked.
+      const theses = document.createElement('span');
+      theses.className = 'seg diagram-theses';
+      theses.title = 'The claims this project makes, each as a ready-made chart';
+      const current = this.activeThesis();
+      for (const thesis of this.THESES) {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'seg-btn' + (current && current.id === thesis.id ? ' active' : '');
+        button.textContent = thesis.title;
+        button.addEventListener('click', () => this.applyThesis(thesis.id));
+        theses.append(button);
+      }
+      bar.append(theses);
+
       const add = document.createElement('button');
       add.type = 'button';
       add.className = 'ghost small';
@@ -248,11 +264,17 @@ const DiagramControls = {
 
   /** The series statistics on offer, labelled the way the Viewer labels them. */
   statOptions(runId = this.runId) {
-    const payload = this.series.get(runId) || this.series.get(this.runId);
+    const payload = SeriesLoad.cache.get(runId) || SeriesLoad.cache.get(this.runId);
     const keys = payload && payload.keys && payload.keys.length
       ? payload.keys.filter(k => k !== '_frame')
       : Object.keys(Viewer.STAT_LABELS || {});
-    return keys.map(k => [k, (Viewer.STAT_LABELS || {})[k] || k]);
+    // The derived ratios come last and only when the run holds what they are
+    // made from, so the menu never offers a line that would come out empty.
+    const have = new Set(keys);
+    const derived = Object.entries(Metrics.DERIVED)
+      .filter(([, d]) => !payload || d.needs.every(n => have.has(n)))
+      .map(([k, d]) => [k, d.label]);
+    return keys.map(k => [k, (Viewer.STAT_LABELS || {})[k] || k]).concat(derived);
   },
 
   /**
@@ -373,7 +395,7 @@ const DiagramControls = {
 
   /** How many frames a line could show, which is what its cap defaults to. */
   availableFrames(line) {
-    const payload = this.series.get(line.run);
+    const payload = SeriesLoad.cache.get(line.run);
     if (!payload) return 0;
     const phases = (payload.series || {}).phase || [];
     if (line.phase === 'all') return phases.length;

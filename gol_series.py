@@ -19,7 +19,7 @@ import json
 import math
 import os
 import threading
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Callable, Dict, List, Optional, Tuple
 
 import gol_store as store
 # The bridge walk lives in the engine because the engine needs it too, on the
@@ -1170,7 +1170,8 @@ def _save_cache(run_id: str, cache: Dict[str, Any]) -> None:
 
 
 def build_series(run_id: str, points: Optional[int] = None,
-                 heavy: bool = True) -> Dict[str, Any]:
+                 heavy: bool = True,
+                 cancelled: Optional[Callable[[], bool]] = None) -> Dict[str, Any]:
     """
     Statistics for a run's history, as parallel arrays.
 
@@ -1195,7 +1196,7 @@ def build_series(run_id: str, points: Optional[int] = None,
     """
     with _build_lock(run_id):
         try:
-            return _build_series_locked(run_id, points, heavy)
+            return _build_series_locked(run_id, points, heavy, cancelled)
         finally:
             _set_progress(run_id, 0, 0, building=False)
 
@@ -1228,7 +1229,8 @@ def _series_keys(rows: List[Dict[str, Any]]) -> List[str]:
 
 
 def _build_series_locked(run_id: str, points: Optional[int] = None,
-                         heavy: bool = True) -> Dict[str, Any]:
+                         heavy: bool = True,
+                         cancelled: Optional[Callable[[], bool]] = None) -> Dict[str, Any]:
     total_frames = store.count_frames(run_id)
     # Frames come in pairs, one per phase, so an iteration is two of them.
     total_iterations = max(0, total_frames // 2)
@@ -1249,8 +1251,14 @@ def _build_series_locked(run_id: str, points: Optional[int] = None,
     # A row summarised without the graph statistics counts as present for a
     # light request and absent for a heavy one, which is what lets the cheap
     # pass and the expensive pass share one cache.
-    done_iterations = {r["_frame"] // 2 for r in rows
-                       if r.get("_heavy") or not heavy}
+    #
+    # And an iteration is done only when every frame of it is. A build that
+    # stopped between an iteration's two phases — the browser hung up, or a
+    # frame would not read — kept the first and not the second, and counting
+    # that iteration as done left its second phase missing for good.
+    present = {r["_frame"] for r in rows if r.get("_heavy") or not heavy}
+    done_iterations = {it for it in {f // 2 for f in present}
+                       if all(f in present for f in (2 * it, 2 * it + 1) if f < total_frames)}
     have = {r["_frame"]: r for r in rows}
 
     # The evenly spaced iterations this run is summarised at, and which of them
@@ -1310,6 +1318,16 @@ def _build_series_locked(run_id: str, points: Optional[int] = None,
 
     previous = None
     for step, index in enumerate(wanted):
+        # A build nobody is waiting for any more stops here — and *breaks*
+        # rather than returning, so the rows already computed fall through to
+        # the save below. A summary is incremental: the next request builds on
+        # whatever this one finished, so stopping loses nothing but the frame
+        # in hand. Stopping by raising would throw the finished ones away too,
+        # and navigating back and forth would then never get anywhere.
+        # Asked before every frame: the question is a peek at a socket, and a
+        # frame of a large run costs seconds once the graph statistics are on.
+        if cancelled is not None and cancelled():
+            break
         try:
             frame = store.read_frame(run_id, index)
         except (OSError, json.JSONDecodeError, KeyError):
@@ -1333,9 +1351,10 @@ def _build_series_locked(run_id: str, points: Optional[int] = None,
         have[index] = row
         previous = frame
 
-        # Often enough to feel live, rarely enough to thrash the lock.
-        if step % 10 == 0:
-            _set_progress(run_id, step + 1, len(wanted), building=True)
+        # Every frame. Throttling this to every tenth was sized for the cheap
+        # statistics; with the graph statistics a frame of a large run takes
+        # two seconds, and a step of sixteen frames then reported twice.
+        _set_progress(run_id, step + 1, len(wanted), building=True)
 
     rows.sort(key=lambda r: r["_frame"])
 

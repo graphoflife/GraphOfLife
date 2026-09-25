@@ -7,7 +7,7 @@
  * The modes are a table rather than a chain of comparisons. A mode is one of
  * two kinds, and the table says which by naming the module that implements it:
  *
- *   view  a way of looking at one run. Lineage, FlowView and Theses share the
+ *   view  a way of looking at one run. Lineage, FlowView and Diagrams share the
  *         same six methods — init, setRuns, say, resize, draw, load — and this
  *         is where that becomes an interface instead of a coincidence.
  *   page  words on a screen. No run, so no picker, no run list, nothing to
@@ -34,8 +34,8 @@ const Research = {
     // `choose` means no run is opened until one is picked. The others show
     // something the moment they have a run; this one starts a minutes-long
     // summary of whatever happened to be first in the list, which is a slow
-    // answer to a question nobody asked.
-    theses:     { group: 'analysis', label: 'Theses',       view: Theses, choose: true },
+    // answer to a question nobody asked. The theses live here now, as
+    // ready-made time series.
     diagrams:   { group: 'analysis', label: 'Diagrams',     view: Diagrams, choose: true },
     notes:      { group: 'reading',  label: 'Findings',     page: Notes },
     literature: { group: 'reading',  label: 'Literature',   page: Literature },
@@ -45,15 +45,6 @@ const Research = {
   runs: [],
   runId: null,
   mode: 'lineage',
-
-  // Bumped whenever the visible mode or the chosen run changes. A view checks
-  // it between requests and stops asking for more the moment it is no longer
-  // the thing on screen — otherwise leaving a tab left a summary of a large run
-  // grinding away behind it, and the page felt stuck because it was.
-  epoch: 0,
-
-  /** True once whatever a caller started is no longer what is being looked at. */
-  stale(at) { return at !== this.epoch; },
 
   /** The modes that are about a run, which is every mode that has a view. */
   get runModes() {
@@ -117,15 +108,39 @@ const Research = {
    * every simulation for its first moments — never appeared in the picker, and
    * the only way to see it was to notice the Refresh button. Listing costs one
    * request and does not start the engine.
+   *
+   * Listing takes a moment, and the tab may have been left by the time it
+   * answers. Starting a load then — which cancels everything else — took the
+   * Viewer's load away from someone who had already gone back to it.
    */
   async setActive(active) {
+    this.active = active;
     if (!active) return;
     await this.listRuns();
+    if (this.active) this.resume();
+  },
+
+  /**
+   * Pick up a load that was cut short.
+   *
+   * Leaving the tab — or hiding the browser window — cancels whatever this
+   * view was reading, which is what keeps the rest of the site responsive. But
+   * listRuns only reloads when the chosen run *changed*, so without this a
+   * view cancelled halfway through came back blank and stayed that way — the
+   * exact "lineage does not load" this was meant to fix, made worse.
+   */
+  resume() {
+    if (this.MODES[this.mode].view && Jobs.interrupted(this.mode)) this.show(this.mode);
   },
 
   show(mode) {
     this.mode = mode;
-    this.epoch++;
+    // Whatever the mode you just left was reading, it is not what you are
+    // looking at now. This is the whole of the fix: one line, in the one place
+    // that knows the view changed, rather than each view checking an epoch it
+    // might forget to check — and two of the four did forget. A view loads
+    // under its mode's name, so the mode is the owner to keep.
+    Jobs.only(mode);
     const group = this.group;
 
     for (const button of this.groupBar.querySelectorAll('button')) {
@@ -203,7 +218,7 @@ const Research = {
       // Only load when the choice actually changed. Re-entering the tab should
       // not refetch a window that is already drawn — the lineage keeps no
       // frames, so that would be two hundred requests for the same picture.
-      if (wanted !== had) await this.open(wanted);
+      if (wanted !== had && this.active) await this.open(wanted);
     } catch (err) {
       say(`Could not reach the simulations: ${err.message}`);
     }
@@ -211,7 +226,7 @@ const Research = {
 
   async open(runId) {
     this.runId = runId || null;
-    this.epoch++;
+    Jobs.only(this.mode);
     await this.view?.load(this.runId);
   }
 };

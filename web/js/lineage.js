@@ -113,7 +113,6 @@ const Lineage = {
     // it was left rather than snapping to the beginning. A different run has
     // no remembered place, so it starts at its own.
     const at = from ?? (runId === this.runId ? this.windowStart : 0);
-    const token = (this.token = (this.token || 0) + 1);
     this.runId = runId;
     this.forest = null;
     this.draw();
@@ -127,20 +126,27 @@ const Lineage = {
     this.windowStart = plan.start;
     FrameWindow.bindScrubber(document.getElementById('lineageWindow'), plan);
 
-    this.say('Reading the window…');
-    try {
-      // One request. The counting happens where the frames are, and only the
-      // genotypes that can be drawn come back — see gol_lineage.py for the
-      // numbers that made that necessary.
-      const reply = await API.getLineage(runId, plan.start, plan.indices.length,
-                                         this.LIMIT, this.MAX_SIGHTINGS, this.phase);
-      if (this.token !== token) return;            // a different run was picked
-      this.reply = reply;
-      this.rebuild();
-    } catch (err) {
-      if (this.token !== token) return;
-      this.say(`Could not read the window: ${err.message}`);
-    }
+    // This view is one long request rather than a series of batches, so until
+    // it became abortable there was nothing to check *between* — leaving it
+    // meant waiting for it anyway, and the answer arrived and painted over
+    // whatever had replaced it. The signal is the whole fix.
+    return Jobs.run('lineage', 'Reading the lineage window', async (job) => {
+      this.say('Reading the window…');
+      try {
+        // One request. The counting happens where the frames are, and only the
+        // genotypes that can be drawn come back — see gol_lineage.py for the
+        // numbers that made that necessary.
+        const reply = await API.getLineage(runId, plan.start, plan.indices.length,
+                                           this.LIMIT, this.MAX_SIGHTINGS, this.phase,
+                                           { signal: job.signal });
+        if (job.cancelled) return;
+        this.reply = reply;
+        this.rebuild();
+      } catch (err) {
+        if (job.cancelled || err.name === 'AbortError') return;
+        this.say(`Could not read the window: ${err.message}`);
+      }
+    });
   },
 
   /**
