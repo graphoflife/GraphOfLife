@@ -526,7 +526,7 @@ const Diagrams = {
   metricsOf(frame) {
     let metrics = this._metrics.get(frame);
     if (!metrics) {
-      metrics = new FrameMetrics(frame, Viewer.settings || {});
+      metrics = new FrameMetrics(frame);
       this._metrics.set(frame, metrics);
     }
     return metrics;

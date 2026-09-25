@@ -74,16 +74,10 @@ const FrameMetrics = new Function('window', sources + '; return FrameMetrics;')(
   { devicePixelRatio: 1 }
 );
 
-const settings = {
-  nodeColorBy: 'tokens', nodeSizeBy: 'tokens',
-  nodeColorLog: false, nodeSizeLog: false,
-  edgeColorBy: 'constant', edgeWidthBy: 'constant'
-};
-
 const frames = JSON.parse(fs.readFileSync(framesPath, 'utf8'));
 // includeStructure so the panel's own expensive statistics are exercised too,
 // even though only the shared ones are compared.
-const out = frames.map(frame => new FrameMetrics(frame, settings).summary(true));
+const out = frames.map(frame => new FrameMetrics(frame).summary(true));
 process.stdout.write(JSON.stringify(out));
 """
 

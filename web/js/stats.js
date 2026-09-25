@@ -6,7 +6,14 @@
  * colouring, so the renderer can stay a dumb value-to-pixel mapper.
  */
 class FrameMetrics {
-  constructor(frame, settings) {
+  /**
+   * `settings` are the renderer's: what colours and sizes the nodes and the
+   * edges. Without them this holds values only, which is all a chart or a
+   * summary reads. Diagrams used to lend it the Viewer's settings to have
+   * something to pass, and so worked out, for every frame it pooled, whatever
+   * the Viewer happened to be colouring by.
+   */
+  constructor(frame, settings = null) {
     this.frame = frame;
     this.settings = settings;
 
@@ -20,7 +27,7 @@ class FrameMetrics {
     this.hasDelta = Boolean(frame.delta);
     this.totalTokens = frame.tokens.reduce((a, b) => a + b, 0);
     this.curvature = this._curvature();
-    this.restyle();
+    if (settings) this.restyle();
   }
 
   /**
