@@ -582,9 +582,14 @@ class Handler(BaseHTTPRequestHandler):
             meta["size_bytes"] = store.run_size_bytes(run_id)
         except (OSError, ValueError):
             meta["size_bytes"] = 0
-        # A stale "running" status survives a server restart; correct it here so
-        # the UI never shows a run as live when no worker exists.
-        if meta.get("status") == "running" and not meta["running"]:
+        # Whether it is going is a live fact; the status on disk is only what
+        # was last written, and a server that restarted still has "running"
+        # written down for whatever was going when it went away. Where the two
+        # disagree the live one wins, both ways, so the page shows the status
+        # as it is rather than settling it again itself.
+        if meta["running"]:
+            meta["status"] = "running"
+        elif meta.get("status") == "running":
             meta["status"] = "interrupted"
         return meta
 

@@ -1951,6 +1951,27 @@ def test_every_brain_kind_has_a_preset_that_validates():
         "a binary brain's smallest move is a whole step, so its rate must be gentler"
 
 
+def test_a_run_is_reported_as_it_is_not_as_it_was_written():
+    """
+    Whether a run is going is a live fact; its status on disk is what was last
+    written. The server settles the two, both ways, so the page shows the
+    status it is given: written down as running with nothing advancing it is
+    interrupted, and advancing is running whatever was last written.
+    """
+    import gol_server
+
+    meta = {"id": "no-such-run", "status": "running", "config": {}}
+    try:
+        gol_server.POOL.is_running = lambda run_id: False
+        assert gol_server.Handler._decorate(meta)["status"] == "interrupted"
+        assert gol_server.Handler._decorate({**meta, "status": "stopped"})["status"] == "stopped"
+
+        gol_server.POOL.is_running = lambda run_id: True
+        assert gol_server.Handler._decorate({**meta, "status": "idle"})["status"] == "running"
+    finally:
+        del gol_server.POOL.is_running
+
+
 def test_the_defaults_endpoint_carries_the_brain_presets():
     """The form fills itself in from the engine, so the engine has to say."""
     import gol_server

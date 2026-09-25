@@ -150,13 +150,14 @@ const running = new Set();
 
 /** Metadata as the interface expects it. */
 function meta(run) {
-  // A run that was advancing when the tab closed is still marked as running in
-  // storage, and nothing is advancing it any more: the worker it belonged to
-  // died with the page. Reported as interrupted, the way the server reports a
-  // run whose worker did not survive a restart. Only the answer is corrected —
-  // what is stored is the run's own history and stays as it was written.
+  // Whether it is going is a live fact, and the stored status only what was
+  // last written. A run that was advancing when the tab closed is still marked
+  // as running, and nothing is advancing it any more: the worker it belonged
+  // to died with the page. Where the two disagree the live one wins, both
+  // ways, the way the server settles it. Only the answer is corrected — what
+  // is stored is the run's own history and stays as it was written.
   const live = running.has(run.id);
-  const status = (run.status === 'running' && !live) ? 'interrupted' : run.status;
+  const status = live ? 'running' : (run.status === 'running' ? 'interrupted' : run.status);
 
   return {
     id: run.id,
