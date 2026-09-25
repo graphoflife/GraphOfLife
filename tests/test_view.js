@@ -921,11 +921,15 @@ const DIAGRAMS_SOURCE = ['theses.js', 'diagrams.js', 'diagram-controls.js']
  * a count of how often it would have been, reading run histories through
  * `loader` and frames through `api`.
  */
+const COLORMAPS = new Function(
+  `${fs.readFileSync(path.join(root, 'web', 'js', 'colormaps.js'), 'utf8')}; return COLORMAPS;`)();
+
 function diagramsWith(loader, api = {}) {
   const FrameWindow = new Function('API', `const formatNumber = n => String(n); ${
     fs.readFileSync(path.join(root, 'web', 'js', 'framewindow.js'), 'utf8')}; return FrameWindow;`)(api);
   const diagrams = new Function('SeriesLoad', 'Metrics', 'Jobs', 'API', 'FrameWindow', 'RunStats',
-    `${DIAGRAMS_SOURCE}; return Diagrams;`)(loader, Metrics, Jobs, api, FrameWindow, RunStats);
+    'COLORMAPS', `${DIAGRAMS_SOURCE}; return Diagrams;`)(
+    loader, Metrics, Jobs, api, FrameWindow, RunStats, COLORMAPS);
   diagrams.canvas = {};
   diagrams.drawn = 0;
   diagrams.draw = function () { this.drawn += 1; };
@@ -1009,6 +1013,138 @@ async function test_a_frame_chart_reads_its_frames_once() {
   diagrams.settings.histogram.iteration = 3;        // a different window
   await diagrams.refresh();
   assert(reads > first, 'moving to another iteration did not read it');
+}
+
+/**
+ * Just enough of a document to build the Diagrams bar in: elements that hold
+ * children, attributes and listeners, menus whose options can be written as
+ * markup, text, and the before/after the menus' step buttons are put with.
+ */
+function fakeDocument() {
+  class Element {
+    constructor(tag) {
+      this.tagName = tag.toUpperCase();
+      this.children = [];
+      this.parentNode = null;
+      this.dataset = {};
+      this.style = {};
+      this.listeners = {};
+      this.textContent = '';
+      this.value = '';
+      // A view of className, as a document's is, so either way of marking an
+      // element reads the same.
+      this.className = '';
+      const names = () => this.className.split(/\s+/).filter(Boolean);
+      this.classList = {
+        contains: name => names().includes(name),
+        add: name => { if (!names().includes(name)) this.className = [...names(), name].join(' '); },
+        remove: name => { this.className = names().filter(n => n !== name).join(' '); },
+        toggle: (name, on = !names().includes(name)) =>
+          (on ? this.classList.add(name) : this.classList.remove(name))
+      };
+    }
+    append(...nodes) {
+      for (const node of nodes) { node.parentNode = this; this.children.push(node); }
+    }
+    replaceChildren(...nodes) { this.children = []; this.append(...nodes); }
+    get lastChild() { return this.children[this.children.length - 1] || null; }
+    before(node) { this._beside(node, 0); }
+    after(node) { this._beside(node, 1); }
+    _beside(node, offset) {
+      const siblings = this.parentNode.children;
+      node.parentNode = this.parentNode;
+      siblings.splice(siblings.indexOf(this) + offset, 0, node);
+    }
+    addEventListener(type, listener) { (this.listeners[type] ||= []).push(listener); }
+    dispatchEvent(event) { for (const listener of this.listeners[event.type] || []) listener(event); return true; }
+    click() { this.dispatchEvent(new Event('click')); }
+    querySelectorAll(tag) {
+      const found = [];
+      const walk = node => node.children.forEach(child => {
+        if (child.tagName === tag.toUpperCase()) found.push(child);
+        walk(child);
+      });
+      walk(this);
+      return found;
+    }
+    get options() { return this.querySelectorAll('option'); }
+    get selectedOptions() { return this.options.filter(option => option.value === this.value); }
+    set innerHTML(markup) {
+      this.children = [];
+      for (const [, value, text] of markup.matchAll(/<option value="([^"]*)">([^<]*)<\/option>/g)) {
+        const option = new Element('option');
+        option.value = value;
+        option.textContent = text;
+        this.append(option);
+      }
+    }
+  }
+  return {
+    createElement: tag => new Element(tag),
+    createTextNode: text => Object.assign(new Element('#text'), { textContent: text })
+  };
+}
+
+async function test_every_diagram_control_builds_and_asks_for_what_it_changes() {
+  // The bar is built by code that nothing ran outside a browser: renaming a
+  // helper it called once left the whole Research tab dead at start-up, and
+  // no test noticed. Here each tab's bar is built, and every control on it is
+  // used, in a document just big enough to hold them.
+  const saved = globalThis.document;
+  globalThis.document = fakeDocument();
+  try {
+    const diagrams = diagramsWith(loaderFor(pretendRun(20)));
+    diagrams.runs = [{ id: 'run', name: 'A run', frame_count: 40 }];
+    diagrams.runId = 'run';
+    diagrams.controlsEl = document.createElement('div');
+    diagrams.settings.timeline.lines = [lineOf('nodes')];
+    let asked = 0;
+    diagrams.refresh = () => { asked += 1; };
+
+    // Not a way of changing the chart: a picture out, the settings kept, and
+    // the two fields that only say where the next constant line goes.
+    const aside = el => ['Save image', 'Save settings'].includes(el.textContent)
+      || el.className === 'diagram-guide'
+      || (el.tagName === 'SELECT' && !el.title && el.options.length === 2
+          && el.options[0].value === 'x');
+
+    for (const tab of Object.keys(diagrams.settings)) {
+      diagrams.active = tab;
+      diagrams.controls();
+      // Taken as built: some controls build the bar again, and each keeps to
+      // the elements it was built with.
+      const built = ['input', 'select', 'button']
+        .flatMap(tag => diagrams.controlsEl.querySelectorAll(tag));
+      // Choosing the phase a line already has is choosing nothing.
+      const controls = built.filter(el => !aside(el) && el.className !== 'step-btn'
+        && !(el.className.includes('seg-btn') && el.classList.contains('active')));
+      assert(controls.length >= 8, `the ${tab} bar was built with ${controls.length} controls`);
+
+      for (const el of controls) {
+        const before = asked;
+        if (el.tagName === 'BUTTON') {
+          // A constant line needs a value first.
+          if (el.textContent === 'Add line at') {
+            built.find(i => i.className === 'diagram-guide').value = '3';
+          }
+          el.click();
+        } else if (el.tagName === 'SELECT') {
+          const other = el.options.find(o => o.value !== el.value);
+          if (!other) continue;
+          el.value = other.value;
+          el.dispatchEvent(new Event('change'));
+        } else {
+          el.value = el.type === 'number' ? '4' : 'a title';
+          el.dispatchEvent(new Event('change'));
+        }
+        assert(asked > before,
+          `on the ${tab} bar, "${el.textContent || el.title || el.placeholder || el.tagName}" `
+          + 'changed nothing the chart was asked to show');
+      }
+    }
+  } finally {
+    globalThis.document = saved;
+  }
 }
 
 function test_the_chart_says_which_thesis_it_is_making() {
@@ -1124,6 +1260,7 @@ const tests = Object.entries({
   test_a_frame_chart_reads_its_frames_once,
   test_no_diagram_control_draws_without_asking_what_it_needs,
   test_the_chart_says_which_thesis_it_is_making,
+  test_every_diagram_control_builds_and_asks_for_what_it_changes,
   test_every_colour_a_chart_asks_for_is_in_the_stylesheet,
   test_no_canvas_writes_a_colour_out,
   test_the_worker_cuts_frames_the_way_the_server_does
