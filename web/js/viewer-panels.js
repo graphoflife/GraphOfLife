@@ -220,35 +220,36 @@ Object.assign(Viewer, {
     const pct = v => (v === null || v === undefined) ? '\u2014' : `${(v * 100).toFixed(1)}%`;
     const dec = (v, n = 2) => (v === null || v === undefined) ? '\u2014' : v.toFixed(n);
 
-    // label and formatted value for every statistic that has one this frame
+    // The formatted value of every statistic this frame has. Its label is
+    // looked up where it is drawn rather than carried beside it in every row.
     const cells = {
-      nodes: [this.STAT_LABELS.nodes, formatNumber(s.nodes)],
-      edges: [this.STAT_LABELS.edges, formatNumber(s.edges)],
-      tokens: [this.STAT_LABELS.tokens, formatNumber(s.tokens)],
-      meanTokens: [this.STAT_LABELS.meanTokens, int(s.meanTokens)],
-      medianTokens: [this.STAT_LABELS.medianTokens, int(s.medianTokens)],
-      maxTokens: [this.STAT_LABELS.maxTokens, formatNumber(s.maxTokens)],
-      minTokens: [this.STAT_LABELS.minTokens, formatNumber(s.minTokens)],
-      gini: [this.STAT_LABELS.gini, dec(s.gini, 3)],
-      topDecileShare: [this.STAT_LABELS.topDecileShare, pct(s.topDecileShare)],
-      tokenEntropy: [this.STAT_LABELS.tokenEntropy, `${dec(s.tokenEntropy)} bits`],
-      tokenEvenness: [this.STAT_LABELS.tokenEvenness, pct(s.tokenEvenness)],
-      maxTokenAdded: [this.STAT_LABELS.maxTokenAdded, `+${formatNumber(s.maxTokenAdded)}`],
-      maxTokenLost: [this.STAT_LABELS.maxTokenLost, `-${formatNumber(s.maxTokenLost)}`],
-      gainers: [this.STAT_LABELS.gainers, withShare(s.gainers)],
-      losers: [this.STAT_LABELS.losers, withShare(s.losers)],
-      distinctBrains: [this.STAT_LABELS.distinctBrains, formatNumber(s.distinctBrains)],
-      brainDiversity: [this.STAT_LABELS.brainDiversity, pct(s.brainDiversity)],
-      distinctParents: [this.STAT_LABELS.distinctParents, formatNumber(s.distinctParents)],
+      nodes: formatNumber(s.nodes),
+      edges: formatNumber(s.edges),
+      tokens: formatNumber(s.tokens),
+      meanTokens: int(s.meanTokens),
+      medianTokens: int(s.medianTokens),
+      maxTokens: formatNumber(s.maxTokens),
+      minTokens: formatNumber(s.minTokens),
+      gini: dec(s.gini, 3),
+      topDecileShare: pct(s.topDecileShare),
+      tokenEntropy: `${dec(s.tokenEntropy)} bits`,
+      tokenEvenness: pct(s.tokenEvenness),
+      maxTokenAdded: `+${formatNumber(s.maxTokenAdded)}`,
+      maxTokenLost: `-${formatNumber(s.maxTokenLost)}`,
+      gainers: withShare(s.gainers),
+      losers: withShare(s.losers),
+      distinctBrains: formatNumber(s.distinctBrains),
+      brainDiversity: pct(s.brainDiversity),
+      distinctParents: formatNumber(s.distinctParents),
 
-      density: [this.STAT_LABELS.density, `${(s.density * 100).toFixed(2)}%`],
-      meanDegree: [this.STAT_LABELS.meanDegree, dec(s.meanDegree)],
-      medianDegree: [this.STAT_LABELS.medianDegree, dec(s.medianDegree, 1)],
-      maxDegree: [this.STAT_LABELS.maxDegree, formatNumber(s.maxDegree)],
-      minDegree: [this.STAT_LABELS.minDegree, formatNumber(s.minDegree)],
-      leaves: [this.STAT_LABELS.leaves, withShare(s.leaves)],
-      degreeEntropy: [this.STAT_LABELS.degreeEntropy, `${dec(s.degreeEntropy)} bits`],
-      degreeEvenness: [this.STAT_LABELS.degreeEvenness, pct(s.degreeEvenness)]
+      density: `${(s.density * 100).toFixed(2)}%`,
+      meanDegree: dec(s.meanDegree),
+      medianDegree: dec(s.medianDegree, 1),
+      maxDegree: formatNumber(s.maxDegree),
+      minDegree: formatNumber(s.minDegree),
+      leaves: withShare(s.leaves),
+      degreeEntropy: `${dec(s.degreeEntropy)} bits`,
+      degreeEvenness: pct(s.degreeEvenness)
     };
 
     // Always listed, even before they are computed. A group with no cells is
@@ -263,90 +264,86 @@ Object.assign(Viewer, {
       ? '\u2014' : (v > 0 ? '+' : '') + v.toFixed(2);
     for (const key of ['degreeExponent', 'tokenExponent', 'tokensVsDegree',
                        'trianglesVsDegree', 'clusteringVsDegree', 'changeVsTokens']) {
-      cells[key] = [this.STAT_LABELS[key], exponent(s[key])];
-      cells[key + 'R2'] = [this.STAT_LABELS[key + 'R2'], pct(s[key + 'R2'])];
+      cells[key] = exponent(s[key]);
+      cells[key + 'R2'] = pct(s[key + 'R2']);
     }
-    cells.assortativity = [this.STAT_LABELS.assortativity, dec(s.assortativity, 3)];
-    cells.degreeGamma = [this.STAT_LABELS.degreeGamma, dec(s.degreeGamma)];
-    cells.degreeGammaR2 = [this.STAT_LABELS.degreeGammaR2, pct(s.degreeGammaR2)];
-    cells.degreeKMin = [this.STAT_LABELS.degreeKMin, int(s.degreeKMin)];
-    cells.degreeTailShare = [this.STAT_LABELS.degreeTailShare, pct(s.degreeTailShare)];
-    cells.degreeGammaKS = [this.STAT_LABELS.degreeGammaKS, dec(s.degreeGammaKS, 3)];
-    cells.boxDimension = [this.STAT_LABELS.boxDimension, dec(s.boxDimension)];
-    cells.boxDimensionR2 = [this.STAT_LABELS.boxDimensionR2, pct(s.boxDimensionR2)];
+    cells.assortativity = dec(s.assortativity, 3);
+    cells.degreeGamma = dec(s.degreeGamma);
+    cells.degreeGammaR2 = pct(s.degreeGammaR2);
+    cells.degreeKMin = int(s.degreeKMin);
+    cells.degreeTailShare = pct(s.degreeTailShare);
+    cells.degreeGammaKS = dec(s.degreeGammaKS, 3);
+    cells.boxDimension = dec(s.boxDimension);
+    cells.boxDimensionR2 = pct(s.boxDimensionR2);
 
     // Only computed while one of the heavy groups is open, since walking the
     // whole graph costs more than the rest of this strip together.
     if (structureOpen) {
-      cells.cycleRank = [this.STAT_LABELS.cycleRank, formatNumber(s.cycleRank)];
-      cells.loopDensity = [this.STAT_LABELS.loopDensity, pct(s.loopDensity)];
-      cells.bridges = [this.STAT_LABELS.bridges, formatNumber(s.bridges)];
-      cells.cutRisk = [this.STAT_LABELS.cutRisk, pct(s.cutRisk)];
-      cells.coreShare = [this.STAT_LABELS.coreShare, pct(s.coreShare)];
-      cells.spectralGap = [this.STAT_LABELS.spectralGap, dec(s.spectralGap, 4)];
-      cells.triangles = [this.STAT_LABELS.triangles, formatNumber(s.triangles)];
-      cells.transitivity = [this.STAT_LABELS.transitivity, dec(s.transitivity, 3)];
-      cells.dimension = [this.STAT_LABELS.dimension, dec(s.dimension)];
-      cells.ricciCurvature = [this.STAT_LABELS.ricciCurvature, dec(s.ricciCurvature, 3)];
-      cells.radius = [this.STAT_LABELS.radius, formatNumber(s.radius)];
-      cells.diameter = [this.STAT_LABELS.diameter, formatNumber(s.diameter)];
-      cells.meanPathLength = [this.STAT_LABELS.meanPathLength, dec(s.meanPathLength)];
-      cells.components = [this.STAT_LABELS.components, formatNumber(s.components)];
+      cells.cycleRank = formatNumber(s.cycleRank);
+      cells.loopDensity = pct(s.loopDensity);
+      cells.bridges = formatNumber(s.bridges);
+      cells.cutRisk = pct(s.cutRisk);
+      cells.coreShare = pct(s.coreShare);
+      cells.spectralGap = dec(s.spectralGap, 4);
+      cells.triangles = formatNumber(s.triangles);
+      cells.transitivity = dec(s.transitivity, 3);
+      cells.dimension = dec(s.dimension);
+      cells.ricciCurvature = dec(s.ricciCurvature, 3);
+      cells.radius = formatNumber(s.radius);
+      cells.diameter = formatNumber(s.diameter);
+      cells.meanPathLength = dec(s.meanPathLength);
+      cells.components = formatNumber(s.components);
 
     }
 
     // Present only when the phase produced them.
     if (s.births !== null) {
-      cells.births = [this.STAT_LABELS.births, withShare(s.births)];
-      cells.reproTokenShare = [this.STAT_LABELS.reproTokenShare, pct(s.reproTokenShare)];
-      cells.meanInvestedShare = [this.STAT_LABELS.meanInvestedShare, pct(s.meanInvestedShare)];
-      cells.meanChildLinks = [this.STAT_LABELS.meanChildLinks, dec(s.meanChildLinks)];
-      if (s.handovers !== null) cells.handovers = [this.STAT_LABELS.handovers, formatNumber(s.handovers)];
+      cells.births = withShare(s.births);
+      cells.reproTokenShare = pct(s.reproTokenShare);
+      cells.meanInvestedShare = pct(s.meanInvestedShare);
+      cells.meanChildLinks = dec(s.meanChildLinks);
+      if (s.handovers !== null) cells.handovers = formatNumber(s.handovers);
     }
     // Gifts, on their own condition rather than on `births`: an agent with
     // nothing to spare for a child may still give a neighbour a token, so a
     // phase can have gifts and no births at all. Absent on a run without the
     // mechanic, which is why this asks rather than assuming.
     if (s.gifts !== null && s.gifts !== undefined) {
-      cells.gifts = [this.STAT_LABELS.gifts, formatNumber(s.gifts)];
-      cells.giftTokens = [this.STAT_LABELS.giftTokens, formatNumber(s.giftTokens)];
-      cells.giftShare = [this.STAT_LABELS.giftShare, pct(s.giftShare)];
+      cells.gifts = formatNumber(s.gifts);
+      cells.giftTokens = formatNumber(s.giftTokens);
+      cells.giftShare = pct(s.giftShare);
     }
     if (s.totalFlow !== null) {
-      cells.totalFlow = [this.STAT_LABELS.totalFlow, formatNumber(s.totalFlow)];
-      cells.meanEdgeFlow = [this.STAT_LABELS.meanEdgeFlow, dec(s.meanEdgeFlow, 1)];
-      cells.maxEdgeFlow = [this.STAT_LABELS.maxEdgeFlow, formatNumber(s.maxEdgeFlow)];
-      cells.selfAllocationShare = [this.STAT_LABELS.selfAllocationShare, pct(s.selfAllocationShare)];
-      cells.spreadShare = [this.STAT_LABELS.spreadShare, pct(s.spreadShare)];
+      cells.totalFlow = formatNumber(s.totalFlow);
+      cells.meanEdgeFlow = dec(s.meanEdgeFlow, 1);
+      cells.maxEdgeFlow = formatNumber(s.maxEdgeFlow);
+      cells.selfAllocationShare = pct(s.selfAllocationShare);
+      cells.spreadShare = pct(s.spreadShare);
       // Null when the run has revolutions off. Formatting that as 0% would
       // claim nobody revolted, when in fact nobody could.
-      if (s.revoltShare !== null) cells.revoltShare = [this.STAT_LABELS.revoltShare, pct(s.revoltShare)];
+      if (s.revoltShare !== null) cells.revoltShare = pct(s.revoltShare);
     }
-    if (s.revolutions !== null) cells.revolutions = [this.STAT_LABELS.revolutions, withShare(s.revolutions)];
-    if (s.heldHomeShare !== null) cells.heldHomeShare = [this.STAT_LABELS.heldHomeShare, pct(s.heldHomeShare)];
-    if (s.prunedEdges !== null) cells.prunedEdges = [this.STAT_LABELS.prunedEdges, formatNumber(s.prunedEdges)];
-    if (s.starved !== null) cells.starved = [this.STAT_LABELS.starved, withShare(s.starved)];
-    if (s.orphaned !== null) cells.orphaned = [this.STAT_LABELS.orphaned, withShare(s.orphaned)];
+    if (s.revolutions !== null) cells.revolutions = withShare(s.revolutions);
+    if (s.heldHomeShare !== null) cells.heldHomeShare = pct(s.heldHomeShare);
+    if (s.prunedEdges !== null) cells.prunedEdges = formatNumber(s.prunedEdges);
+    if (s.starved !== null) cells.starved = withShare(s.starved);
+    if (s.orphaned !== null) cells.orphaned = withShare(s.orphaned);
     if (s.cutRiskBefore !== null && s.cutRiskBefore !== undefined) {
-      cells.cutRiskBefore = [this.STAT_LABELS.cutRiskBefore, pct(s.cutRiskBefore)];
+      cells.cutRiskBefore = pct(s.cutRiskBefore);
     }
     // Only a game phase moves tokens across links, so these are absent on a
     // reproduction frame rather than zero.
     if (s.lightningScore !== null && s.lightningScore !== undefined) {
-      cells.lightningScore = [this.STAT_LABELS.lightningScore,
-                              formatNumber(s.lightningScore)];
-      cells.cyclingShare = [this.STAT_LABELS.cyclingShare, pct(s.cyclingShare)];
-      cells.lightningLongest = [this.STAT_LABELS.lightningLongest,
-                                formatNumber(s.lightningLongest)];
-      cells.flowImbalance = [this.STAT_LABELS.flowImbalance, pct(s.flowImbalance)];
-      cells.netLightningScore = [this.STAT_LABELS.netLightningScore,
-                                 formatNumber(s.netLightningScore)];
-      cells.netCyclingShare = [this.STAT_LABELS.netCyclingShare, pct(s.netCyclingShare)];
-      cells.netLightningLongest = [this.STAT_LABELS.netLightningLongest,
-                                   formatNumber(s.netLightningLongest)];
-      cells.netFlowShare = [this.STAT_LABELS.netFlowShare, pct(s.netFlowShare)];
+      cells.lightningScore = formatNumber(s.lightningScore);
+      cells.cyclingShare = pct(s.cyclingShare);
+      cells.lightningLongest = formatNumber(s.lightningLongest);
+      cells.flowImbalance = pct(s.flowImbalance);
+      cells.netLightningScore = formatNumber(s.netLightningScore);
+      cells.netCyclingShare = pct(s.netCyclingShare);
+      cells.netLightningLongest = formatNumber(s.netLightningLongest);
+      cells.netFlowShare = pct(s.netFlowShare);
     }
-    if (s.redistributed !== null) cells.redistributed = [this.STAT_LABELS.redistributed, formatNumber(s.redistributed)];
+    if (s.redistributed !== null) cells.redistributed = formatNumber(s.redistributed);
 
     // Remember which sections were open, so redrawing a frame does not fold
     // everything back up under the reader.
@@ -357,12 +354,13 @@ Object.assign(Viewer, {
 
     const html = [];
     for (const group of this.STAT_GROUPS) {
-      const present = group.keys.filter(k => cells[k]);
+      const present = group.keys.filter(k => k in cells);
       if (!present.length) continue;
 
       const open = wasOpen.has(group.key) ? wasOpen.get(group.key) : group.open;
       const body = present.map(k => {
-        const [label, value] = cells[k];
+        const label = this.STAT_LABELS[k];
+        const value = cells[k];
         return `<button class="stat" data-stat="${k}" data-label="${label}"
                   title="Click for an explanation and its history">
                   <span class="stat-key">${label}</span><span class="stat-val">${value}</span>

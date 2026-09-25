@@ -42,6 +42,9 @@ const Presets = {
       nodeAlpha: 1,
       nodeOutline: false, nodeOutlineColor: '#ffffff',
       nodeOutlineAlpha: 0.55, nodeOutlineWidth: 0.6,
+      // Glow takes the node's own colour rather than the outline's. The effect
+      // is additive, and a glow in the outline's single colour would light
+      // every node the same.
       nodeGlow: false, nodeGlowColorBy: 'node',
       nodeGlowSize: 2.6, nodeGlowStrength: 0.35,
 
@@ -76,8 +79,15 @@ const Presets = {
       // "framed" means rather than saying you want a different view.
       autoFit: true,
 
+      // How far out from the focused node the view reaches. A setting rather
+      // than plain state, so a preset carries it; which node is focused is
+      // not, since node ids mean nothing across runs.
       focusRadius: 2,
 
+      // Which quantity each chart plots, and the scale of each axis. Chart
+      // metrics are domain-qualified, since `loops` means one thing for a node
+      // and another for an edge. The trajectory plots two run statistics
+      // against each other over time.
       distMetric: 'node:tokens', histDistX: 'log', histDistY: 'log',
       heatX: 'node:tokens', heatY: 'node:degree',
       histHeatX: 'log', histHeatY: 'log', histHeatCount: 'log',
@@ -92,8 +102,7 @@ const Presets = {
       distMetric: 'node:tokens', histDistX: 'log', histDistY: 'linear',
       heatX: 'node:degree', heatY: 'node:tokens',
       histHeatX: 'linear', histHeatY: 'log', histHeatCount: 'log',
-      forceCharge: 24, forceLink: 0.12, forceCenter: 0.012,
-      forceAngular: 0.15, forceDamping: 0.86, dimensions: 3
+      forceCharge: 24
     },
     lineage: {
       nodeColorBy: 'brain_id', nodeColorLog: false, nodeColormap: 'turbo',
@@ -104,7 +113,7 @@ const Presets = {
       histHeatX: 'linear', histHeatY: 'log', histHeatCount: 'log',
       // Looser and more open, so separate lineages drift apart visibly.
       forceCharge: 45, forceLink: 0.09, forceCenter: 0.009,
-      forceAngular: 0.2, forceDamping: 0.88, dimensions: 3
+      forceAngular: 0.2, forceDamping: 0.88
     },
     structure: {
       nodeColorBy: 'degree', nodeColorLog: true, nodeColormap: 'cividis',
@@ -117,8 +126,7 @@ const Presets = {
       histHeatX: 'linear', histHeatY: 'log', histHeatCount: 'log',
       // Strong angular spread and tight links, which is what makes the
       // branching shape of the graph legible.
-      forceCharge: 12, forceLink: 0.2, forceCenter: 0.014,
-      forceAngular: 0.5, forceDamping: 0.86, dimensions: 3
+      forceCharge: 12, forceLink: 0.2, forceCenter: 0.014, forceAngular: 0.5
     },
     flow: {
       // Where wealth is running uphill: curvature says which nodes sit in a
@@ -130,9 +138,7 @@ const Presets = {
       bgStyle: 'solid', nodeAlpha: 0.9,
       distMetric: 'node:token_curvature', histDistX: 'log', histDistY: 'log',
       heatX: 'node:tokens', heatY: 'node:token_curvature',
-      histHeatX: 'log', histHeatY: 'log', histHeatCount: 'log',
-      forceCharge: 20, forceLink: 0.12, forceCenter: 0.012,
-      forceAngular: 0.15, forceDamping: 0.86, dimensions: 3
+      histHeatX: 'log', histHeatY: 'log', histHeatCount: 'log'
     },
     minimal: {
       nodeColorBy: 'constant', nodeColormap: 'grayscale', nodeSizeBy: 'constant',
@@ -141,8 +147,7 @@ const Presets = {
       distMetric: 'node:degree', histDistX: 'linear', histDistY: 'linear',
       heatX: 'node:degree', heatY: 'node:tokens',
       histHeatX: 'linear', histHeatY: 'log', histHeatCount: 'log',
-      forceCharge: 18, forceLink: 0.12, forceCenter: 0.012,
-      forceAngular: 0.08, forceDamping: 0.86, dimensions: 3
+      forceCharge: 18, forceAngular: 0.08
     }
   },
 

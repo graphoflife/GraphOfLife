@@ -18,12 +18,17 @@ Object.assign(Viewer, {
   // ------------------------------------------------------------------
 
   bindControls() {
-    const bind = (id, key, transform = v => v, needsMetrics = true) => {
+    // A control's id is the setting it drives, and what it holds follows from
+    // what kind of control it is: a checkbox a boolean, a slider a number,
+    // anything else text. Every one of thirty-nine calls used to pass its id
+    // twice and a transform that said the same thing its type already did.
+    const bind = (id, rebuild) => {
       const el = document.getElementById(id);
       if (!el) return;
       const apply = () => {
-        this.settings[key] = transform(el.type === 'checkbox' ? el.checked : el.value);
-        if (needsMetrics) this.rebuildMetrics();
+        this.settings[id] = el.type === 'checkbox' ? el.checked
+          : el.type === 'range' ? Number(el.value) : el.value;
+        if (rebuild) this.rebuildMetrics();
         this.updateCharts();
       };
       // A menu redraws as you move through it rather than when you commit, so
@@ -38,53 +43,25 @@ Object.assign(Viewer, {
       }
     };
 
-    const num = v => Number(v);
-
-    bind('nodeColorBy', 'nodeColorBy');
-    bind('nodeColorLog', 'nodeColorLog');
-    bind('nodeColormap', 'nodeColormap');
-    bind('nodeColorReverse', 'nodeColorReverse');
-    bind('nodeSizeBy', 'nodeSizeBy');
-    bind('nodeSizeLog', 'nodeSizeLog');
-    bind('nodeSizeMin', 'nodeSizeMin', num, false);
-    bind('nodeSizeMax', 'nodeSizeMax', num, false);
-    bind('nodeAlpha', 'nodeAlpha', num, false);
-    bind('nodeOutline', 'nodeOutline', v => v, false);
-    bind('nodeOutlineColor', 'nodeOutlineColor', v => v, false);
-    bind('nodeOutlineAlpha', 'nodeOutlineAlpha', num, false);
-    bind('nodeOutlineWidth', 'nodeOutlineWidth', num, false);
-    bind('nodeGlow', 'nodeGlow', v => v, false);
-    bind('nodeGlowColorBy', 'nodeGlowColorBy', v => v, false);
-    bind('nodeGlowSize', 'nodeGlowSize', num, false);
-    bind('nodeGlowStrength', 'nodeGlowStrength', num, false);
-
-    bind('edgeShow', 'edgeShow', v => v, false);
-    bind('edgeColorBy', 'edgeColorBy');
-    bind('edgeColorLog', 'edgeColorLog');
-    bind('edgeColormap', 'edgeColormap', v => v, false);
-    bind('edgeColorReverse', 'edgeColorReverse', v => v, false);
-    bind('edgeFlatColor', 'edgeFlatColor', v => v, false);
-    bind('edgeWidthBy', 'edgeWidthBy');
-    bind('edgeWidthLog', 'edgeWidthLog');
-
-    // These rebuild rather than merely redraw, because a chart may name a
-    // quantity measured before the phase, and it is the rebuild that goes and
-    // fetches the frame such a quantity is read from.
-    bind('distMetric', 'distMetric');
-    bind('heatX', 'heatX');
-    bind('heatY', 'heatY');
-    bind('trajX', 'trajX', v => v, false);
-    bind('trajY', 'trajY', v => v, false);
-    bind('edgeWidthMin', 'edgeWidthMin', num, false);
-    bind('edgeWidthMax', 'edgeWidthMax', num, false);
-    bind('edgeAlpha', 'edgeAlpha', num, false);
-
-    bind('bgStyle', 'bgStyle', v => v, false);
-    bind('bgColorA', 'bgColorA', v => v, false);
-    bind('bgColorB', 'bgColorB', v => v, false);
-    bind('showLegend', 'showLegend', v => v, false);
-    bind('showEdgeLegend', 'showEdgeLegend', v => v, false);
-    bind('layoutCarry', 'layoutCarry', v => v, false);
+    // These change what is measured, so the frame's metrics are rebuilt. The
+    // three chart menus are among them because a chart may name a quantity
+    // measured before the phase, and it is the rebuild that goes and fetches
+    // the frame such a quantity is read from.
+    for (const id of ['nodeColorBy', 'nodeColorLog', 'nodeColormap', 'nodeColorReverse',
+                      'nodeSizeBy', 'nodeSizeLog', 'edgeColorBy', 'edgeColorLog',
+                      'edgeWidthBy', 'edgeWidthLog', 'distMetric', 'heatX', 'heatY']) {
+      bind(id, true);
+    }
+    // These only change how it is drawn.
+    for (const id of ['nodeSizeMin', 'nodeSizeMax', 'nodeAlpha', 'nodeOutline',
+                      'nodeOutlineColor', 'nodeOutlineAlpha', 'nodeOutlineWidth',
+                      'nodeGlow', 'nodeGlowColorBy', 'nodeGlowSize', 'nodeGlowStrength',
+                      'edgeShow', 'edgeColormap', 'edgeColorReverse', 'edgeFlatColor',
+                      'edgeWidthMin', 'edgeWidthMax', 'edgeAlpha', 'trajX', 'trajY',
+                      'bgStyle', 'bgColorA', 'bgColorB', 'showLegend', 'showEdgeLegend',
+                      'layoutCarry']) {
+      bind(id, false);
+    }
 
     // Layout sliders are ordinary settings; applyLayoutSettings pushes them
     // into the simulation so presets and the controls stay in step.
@@ -203,16 +180,15 @@ Object.assign(Viewer, {
     // menus are built from the same groups the strip under the canvas uses.
     const statOptions = this.STAT_GROUPS.map(group => {
       const items = group.keys
-        .filter(k => this.STAT_LABELS[k])
         .map(k => `<option value="${k}">${this.STAT_LABELS[k]}</option>`)
         .join('');
       return items ? `<optgroup label="${group.label}">${items}</optgroup>` : '';
     }).join('');
-    for (const [id, key] of [['trajX', 'trajX'], ['trajY', 'trajY']]) {
+    for (const id of ['trajX', 'trajY']) {
       const select = document.getElementById(id);
       if (!select) continue;
       select.innerHTML = statOptions;
-      select.value = s[key];
+      select.value = s[id];
     }
 
     Metrics.fillDomainSelect(document.getElementById('distMetric'), s.distMetric);

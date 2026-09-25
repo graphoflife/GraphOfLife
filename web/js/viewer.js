@@ -45,61 +45,23 @@ const Viewer = {
 
   phaseFilter: 'all',
 
+  // The starting look is the default preset, Presets.builtIn('default'),
+  // which init() merges in before anything reads these. Only what no preset
+  // carries is written here. The rest used to be written here too, and
+  // forty-nine values were overwritten unread — eighteen of them describing a
+  // look the page had stopped using when the preset changed.
   settings: {
-    nodeColorBy: 'tokens', nodeColorLog: false,
-    nodeColormap: 'viridis', nodeColorReverse: false,
-    nodeSizeBy: 'tokens', nodeSizeLog: false, nodeSizeMin: 1.5, nodeSizeMax: 9,
-    nodeAlpha: 0.9,
-    nodeOutline: false, nodeOutlineColor: '#000000',
-    nodeOutlineAlpha: 0.55, nodeOutlineWidth: 0.6,
-    // Glow defaults to the node's own colour rather than the outline's. The
-    // effect is additive, and the default outline is black, which adds
-    // nothing — switching it on would look broken rather than subtle.
-    nodeGlow: false, nodeGlowColorBy: 'node',
-    nodeGlowSize: 2.6, nodeGlowStrength: 0.35,
-    edgeShow: true, edgeColorBy: 'constant', edgeColorLog: false,
-    edgeColormap: 'cividis', edgeColorReverse: false,
-    edgeFlatColor: '#5f7d95', edgeWidthBy: 'constant', edgeWidthLog: false,
-    edgeWidthMin: 0.3, edgeWidthMax: 1.6, edgeAlpha: 0.25,
-    bgStyle: 'solid', bgColorA: '#0d1117', bgColorB: '#1d2530',
-    showLegend: true, showEdgeLegend: true, layoutCarry: true,
-
-    // Layout lives in the settings too, so a preset restores the whole look
-    // including how the graph arranges itself, not just its colours. The
-    // values are not written here: init() merges Presets.builtIn('default')
-    // into this object before anything reads it, so a number written here
-    // would be overwritten unread — and for a long time six of them were,
-    // stating a default the application had not used since the day it changed.
-    // Presets.BASE_LAYOUT is where the layout defaults live.
-    dimensions: 3, autoFit: true,
-
     // Turning the view steadily, in degrees a second. A still projection of a
     // 3D graph is ambiguous — near and far look alike — and turning it is what
     // resolves the depth. Off by default: it should be asked for, not sprung
     // on someone trying to read one frame.
     autoRotate: false, rotateSpeed: 10,
 
-    // How far out from the focused node the view reaches. A setting rather
-    // than plain state, so a preset carries it; which node is focused is not,
-    // since node ids mean nothing across runs.
-    focusRadius: 2,
     // The k-core filter, off until asked for. Off by default because it hides
     // agents, and a view that silently omits part of the population is worse
     // than one that shows all of it.
     kCoreOn: false,
-    kCore: 1,
-
-    // Which quantity each chart plots, and the scale of each axis. Chart
-    // metrics are domain-qualified, since `loops` means one thing for a node
-    // and another for an edge.
-    distMetric: 'node:tokens',
-    histDistX: 'log', histDistY: 'linear',
-    heatX: 'node:degree', heatY: 'node:tokens',
-    histHeatX: 'linear', histHeatY: 'log', histHeatCount: 'log',
-
-    // The trajectory plots two run statistics against each other over time.
-    trajX: 'nodes', trajY: 'tokens',
-    histTrajX: 'linear', histTrajY: 'linear'
+    kCore: 1
   },
 
   init() {
