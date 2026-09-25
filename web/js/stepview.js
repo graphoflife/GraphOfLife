@@ -129,7 +129,7 @@ const StepView = {
 
     view._plan = null;
 
-    view.layout.setFrame(stage.ids, stage.edges, parents, view.shown.size > 0);
+    view.layout.setFrame(stage.ids, stage.edges.flat(), parents, view.shown.size > 0);
     view.layout.reheat(view.shown.size ? 0.35 : 1);
     for (let i = 0; i < settle; i++) {
       if (!view.layout.tick()) break;

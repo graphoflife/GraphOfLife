@@ -144,7 +144,7 @@ self.onmessage = (e) => {
 
     case 'frame':
       frameGen = msg.gen || 0;
-      layout.setFrame(msg.ids, msg.edges, msg.parents, msg.carry);
+      layout.setFrame(msg.ids, msg.ends, msg.parents, msg.carry);
       // Answer immediately: the page has a new frame to draw and should not
       // wait a whole batch for coordinates.
       report(publish());

@@ -68,7 +68,7 @@ class LayoutClient {
 
     if (this._pending) {
       const f = this._pending;
-      this._local.setFrame(f.ids, f.edges, f.parents, f.carry);
+      this._local.setFrame(f.ids, f.ends, f.parents, f.carry);
       this._syncLocal();
     }
   }
@@ -116,13 +116,22 @@ class LayoutClient {
       this.freshShare = 1 - carried / ids.length;
     }
 
+    // The edges as one flat run of endpoint ids. As pairs they crossed to the
+    // worker as a hundred and eighty thousand small arrays, each cloned on its
+    // own: 71ms of the page's time on every frame step of a large run.
+    const ends = new Float64Array(edges.length * 2);
+    for (let e = 0; e < edges.length; e++) {
+      ends[2 * e] = edges[e][0];
+      ends[2 * e + 1] = edges[e][1];
+    }
+
     this.ids = ids;
     this.count = ids.length;
-    this._pending = { ids, edges, parents, carry };
+    this._pending = { ids, ends, parents, carry };
 
     if (this._local) {
       this._frameGen++;
-      this._local.setFrame(ids, edges, parents, carry);
+      this._local.setFrame(ids, ends, parents, carry);
       this._syncLocal();
       return;
     }
@@ -132,7 +141,7 @@ class LayoutClient {
     // currently being drawn.
     this._ensureShared(ids.length);
     this._frameGen++;
-    this.worker.postMessage({ type: 'frame', ids, edges, parents, carry, gen: this._frameGen });
+    this.worker.postMessage({ type: 'frame', ids, ends, parents, carry, gen: this._frameGen });
   }
 
   setDimensions(dims) {

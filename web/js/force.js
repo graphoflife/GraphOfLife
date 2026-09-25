@@ -33,10 +33,16 @@
  */
 class ForceLayout {
   constructor() {
-    this.pos = new Map();       // id -> {x, y, z, vx, vy, vz}
+    this.pos = new Map();       // id -> {x, y, z, vx, vy, vz}, kept across frames
     this.ids = [];
-    this.edges = [];
-    this.adjacency = new Map(); // id -> [neighbour ids], for the angular force
+    // This frame by position in `ids`: each node's entry in `pos`, each edge
+    // as its two ends, and each node's neighbours as the run of `_adjList`
+    // from `_adjStart[i]` to `_adjStart[i + 1]`. An end outside the frame is
+    // -1. Built once by setFrame, so a tick never looks anything up by id.
+    this.nodes = [];
+    this.pairs = new Int32Array(0);
+    this._adjStart = new Int32Array(1);
+    this._adjList = new Int32Array(0);
     this.alpha = 1;
 
     this.dimensions = 2;
@@ -106,7 +112,8 @@ class ForceLayout {
 
   /**
    * Adopt a new frame, keeping the positions of nodes that still exist.
-   * `parents` maps a node id to the id that spawned it.
+   * `ends` lists the edges' endpoint ids, two to an edge, and `parents[i]` is
+   * the id that spawned `ids[i]`.
    *
    * Seeding a newborn beside its parent is what keeps lineages together. The
    * parent is not always there to be found, though: consecutive shown frames
@@ -124,32 +131,25 @@ class ForceLayout {
    * node with no placed ancestor and no placed neighbour falls back to the
    * middle, which in practice means the very first frame.
    */
-  setFrame(ids, edges, parents, carryPositions) {
+  setFrame(ids, ends, parents, carryPositions) {
     if (!carryPositions) this.pos.clear();
+
+    // Where each id sits in this frame. The edges need it to become pairs of
+    // positions, and the climb below needs it to follow an ancestor that is
+    // itself newly born and has no coordinates of its own yet.
+    const slot = new Map();
+    for (let i = 0; i < ids.length; i++) slot.set(ids[i], i);
 
     // Adopted before seeding rather than after, so the neighbour lists the
     // layout needs anyway are already built when the fallback below wants
     // them. Otherwise finding a newborn's neighbours meant a second pass over
     // every edge in the graph.
     this.ids = ids;
-    this.edges = edges;
-    this._buildAdjacency();
+    this._index(slot, ends);
+    const start = this._adjStart, list = this._adjList;
 
     const next = new Map();
     const spawnRadius = this.linkDistance * 0.6;
-
-    // Where each id sits in this frame, so an ancestor can be followed even
-    // when it is itself newly born and has no position of its own yet. Built
-    // only if the climb ever needs a second hop: when frames arrive in order
-    // every parent is already placed and this is never touched.
-    let slot = null;
-    const slotOf = (id) => {
-      if (!slot) {
-        slot = new Map();
-        for (let k = 0; k < ids.length; k++) slot.set(ids[k], k);
-      }
-      return slot.get(id);
-    };
 
     // Long chains are walked once and the answer shared by everything along
     // them, so a deep lineage costs one climb rather than one per descendant.
@@ -173,7 +173,7 @@ class ForceLayout {
         if (climbed.has(current)) { found = climbed.get(current); break; }
 
         chain.push(current);
-        const i = slotOf(current);
+        const i = slot.get(current);
         if (i === undefined) break;   // this ancestor is gone from the frame
         current = parents ? parents[i] : -1;
         hops++;
@@ -203,7 +203,7 @@ class ForceLayout {
 
       const anchor = ancestorAnchor(parents ? parents[i] : -1);
       if (anchor) next.set(id, place(anchor));
-      else unplaced.push(id);
+      else unplaced.push(i);
     }
 
     // Whatever the lineage could not account for, the topology usually can.
@@ -229,18 +229,18 @@ class ForceLayout {
       for (let pass = 0; pass < MAX_PASSES && remaining.length; pass++) {
         const still = [];
         let placed = 0;
-        for (const id of remaining) {
+        for (const i of remaining) {
           let x = 0, y = 0, z = 0, count = 0;
-          for (const other of (this.adjacency.get(id) || [])) {
-            const p = next.get(other);
+          for (let a = start[i]; a < start[i + 1]; a++) {
+            const p = list[a] < 0 ? undefined : next.get(ids[list[a]]);
             if (!p) continue;
             x += p.x; y += p.y; z += p.z; count++;
           }
           if (count) {
-            next.set(id, place({ x: x / count, y: y / count, z: z / count }));
+            next.set(ids[i], place({ x: x / count, y: y / count, z: z / count }));
             placed++;
           } else {
-            still.push(id);
+            still.push(i);
           }
         }
         remaining = still;
@@ -261,18 +261,19 @@ class ForceLayout {
           for (const p of next.values()) reach += Math.hypot(p.x - cx, p.y - cy, p.z - cz);
           reach /= n;
           const centre = { x: cx, y: cy, z: cz };
-          for (const id of remaining) {
-            next.set(id, place(centre, reach * Math.cbrt(Math.random())));
+          for (const i of remaining) {
+            next.set(ids[i], place(centre, reach * Math.cbrt(Math.random())));
           }
         } else {
           // Nothing placed at all: a fresh layout, which is meant to start as
           // a ball and expand.
-          for (const id of remaining) next.set(id, place(null));
+          for (const i of remaining) next.set(ids[i], place(null));
         }
       }
     }
 
     this.pos = next;
+    this.nodes = ids.map(id => next.get(id));
   }
 
   _randomDirection() {
@@ -287,18 +288,55 @@ class ForceLayout {
     return { x: sinPolar * Math.cos(angle), y: sinPolar * Math.sin(angle), z: cosPolar };
   }
 
-  /** Neighbour lists, rebuilt once per frame for the angular force. */
-  _buildAdjacency() {
-    const adjacency = new Map();
-    for (const id of this.ids) adjacency.set(id, []);
-
-    for (const [a, b] of this.edges) {
-      const listA = adjacency.get(a);
-      const listB = adjacency.get(b);
-      if (listA) listA.push(b);
-      if (listB) listB.push(a);
+  /**
+   * The frame's edges as pairs of positions in `ids`, and every node's
+   * neighbours in edge order, rebuilt once per frame.
+   *
+   * By position rather than by id because a tick visits every edge for the
+   * springs and every spoke for the angular force. Looked up by id, that was
+   * two map lookups per edge per tick, and an object for every spoke: at
+   * seventy thousand nodes, 9.6ms of the springs and a fifth of the angular
+   * force, every tick.
+   */
+  _index(slot, ends) {
+    const n = this.ids.length;
+    const pairs = new Int32Array(ends.length & ~1);
+    for (let e = 0; e < pairs.length; e++) {
+      const at = slot.get(ends[e]);
+      pairs[e] = at === undefined ? -1 : at;
     }
-    this.adjacency = adjacency;
+
+    // Counted, then filled, so every neighbour list is one run of one array.
+    // A node keeps an edge whose other end is outside the frame, as -1: it
+    // still counts toward the degree the angular force is capped by.
+    const start = new Int32Array(n + 1);
+    for (let e = 0; e < pairs.length; e++) if (pairs[e] >= 0) start[pairs[e] + 1]++;
+    let most = 0;
+    for (let i = 0; i < n; i++) {
+      most = Math.max(most, start[i + 1]);
+      start[i + 1] += start[i];
+    }
+    const list = new Int32Array(start[n]);
+    const fill = start.slice(0, n);
+    for (let e = 0; e < pairs.length; e += 2) {
+      const a = pairs[e], b = pairs[e + 1];
+      if (a >= 0) list[fill[a]++] = b;
+      if (b >= 0) list[fill[b]++] = a;
+    }
+
+    this.pairs = pairs;
+    this._adjStart = start;
+    this._adjList = list;
+    // One node's spokes at a time, for the angular force: nothing is
+    // allocated per spoke.
+    if (!this._spokes || this._spokes.to.length < most) {
+      const f64 = () => new Float64Array(most);
+      this._spokes = {
+        to: new Int32Array(most), order: [],
+        dx: f64(), dy: f64(), angle: f64(),
+        dist: f64(), ux: f64(), uy: f64(), uz: f64()
+      };
+    }
   }
 
   reheat(alpha = 1) {
@@ -328,11 +366,7 @@ class ForceLayout {
    * which is what keeps an idle layout idle rather than spinning.
    */
   tick() {
-    const nodes = [];
-    for (const id of this.ids) {
-      const p = this.pos.get(id);
-      if (p) nodes.push(p);
-    }
+    const nodes = this.nodes;
     if (!nodes.length) return false;
 
     if (this.alpha < 0.005) return this._recentre(nodes, this.is3D);
@@ -700,11 +734,12 @@ class ForceLayout {
   _springs() {
     const strength = this.linkStrength * this.alpha;
     const use3D = this.is3D;
+    const nodes = this.nodes, pairs = this.pairs;
 
-    for (const [a, b] of this.edges) {
-      const pa = this.pos.get(a);
-      const pb = this.pos.get(b);
-      if (!pa || !pb) continue;
+    for (let e = 0; e < pairs.length; e += 2) {
+      if (pairs[e] < 0 || pairs[e + 1] < 0) continue;
+      const pa = nodes[pairs[e]];
+      const pb = nodes[pairs[e + 1]];
 
       const dx = pb.x - pa.x;
       const dy = pb.y - pa.y;
@@ -755,33 +790,39 @@ class ForceLayout {
   _angularSpread2D() {
     const strength = this.angularStrength * this.alpha;
     const TWO_PI = Math.PI * 2;
+    const nodes = this.nodes, start = this._adjStart, list = this._adjList;
+    const { to, dx, dy, angle, order } = this._spokes;
+    const byAngle = (a, b) => angle[a] - angle[b];
 
-    for (const [id, neighbours] of this.adjacency) {
-      if (neighbours.length < 2) continue;
-      const centre = this.pos.get(id);
-      if (!centre) continue;
+    for (let c = 0; c < nodes.length; c++) {
+      if (start[c + 1] - start[c] < 2) continue;
+      const centre = nodes[c];
 
-      const spokes = [];
-      for (const nid of neighbours) {
-        const q = this.pos.get(nid);
-        if (!q) continue;
-        const dx = q.x - centre.x;
-        const dy = q.y - centre.y;
-        if (dx * dx + dy * dy < 1e-6) continue;
-        spokes.push({ q, dx, dy, angle: Math.atan2(dy, dx) });
+      let spokes = 0;
+      for (let at = start[c]; at < start[c + 1]; at++) {
+        if (list[at] < 0) continue;
+        const q = nodes[list[at]];
+        const x = q.x - centre.x;
+        const y = q.y - centre.y;
+        if (x * x + y * y < 1e-6) continue;
+        to[spokes] = list[at]; dx[spokes] = x; dy[spokes] = y;
+        angle[spokes] = Math.atan2(y, x);
+        spokes++;
       }
-      if (spokes.length < 2) continue;
+      if (spokes < 2) continue;
 
-      spokes.sort((a, b) => a.angle - b.angle);
-      const ideal = TWO_PI / spokes.length;
+      order.length = spokes;
+      for (let s = 0; s < spokes; s++) order[s] = s;
+      order.sort(byAngle);
+      const ideal = TWO_PI / spokes;
 
       let reactionX = 0, reactionY = 0;
 
-      for (let i = 0; i < spokes.length; i++) {
-        const a = spokes[i];
-        const b = spokes[(i + 1) % spokes.length];
+      for (let i = 0; i < spokes; i++) {
+        const a = order[i];
+        const b = order[(i + 1) % spokes];
 
-        let gap = b.angle - a.angle;
+        let gap = angle[b] - angle[a];
         if (gap < 0) gap += TWO_PI;      // the pair that wraps past -pi
         if (gap >= ideal) continue;      // already roomy enough
 
@@ -789,11 +830,12 @@ class ForceLayout {
         // tick; the layout should ease into shape, not snap.
         const step = Math.min(ideal - gap, 0.3) * strength * 0.5;
 
-        const bx = -b.dy * step, by = b.dx * step;
-        const ax = a.dy * step, ay = -a.dx * step;
+        const bx = -dy[b] * step, by = dx[b] * step;
+        const ax = dy[a] * step, ay = -dx[a] * step;
 
-        b.q.vx += bx; b.q.vy += by;
-        a.q.vx += ax; a.q.vy += ay;
+        const qb = nodes[to[b]], qa = nodes[to[a]];
+        qb.vx += bx; qb.vy += by;
+        qa.vx += ax; qa.vy += ay;
 
         reactionX -= bx + ax;
         reactionY -= by + ay;
@@ -821,41 +863,45 @@ class ForceLayout {
    */
   _angularSpread3D() {
     const strength = this.angularStrength * this.alpha;
+    const nodes = this.nodes, start = this._adjStart, list = this._adjList;
+    const { to, dist, ux, uy, uz } = this._spokes;
+    const aT = this._aT || (this._aT = new Float64Array(3));
+    const bT = this._bT || (this._bT = new Float64Array(3));
 
-    for (const [id, neighbours] of this.adjacency) {
-      const degree = neighbours.length;
+    for (let c = 0; c < nodes.length; c++) {
+      const degree = start[c + 1] - start[c];
       if (degree < 2 || degree > this.maxAngularDegree) continue;
-      const centre = this.pos.get(id);
-      if (!centre) continue;
+      const centre = nodes[c];
 
-      const spokes = [];
-      for (const nid of neighbours) {
-        const q = this.pos.get(nid);
-        if (!q) continue;
+      let spokes = 0;
+      for (let at = start[c]; at < start[c + 1]; at++) {
+        if (list[at] < 0) continue;
+        const q = nodes[list[at]];
         const dx = q.x - centre.x, dy = q.y - centre.y, dz = q.z - centre.z;
-        const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
-        if (dist < 1e-3) continue;
-        spokes.push({ q, dist, ux: dx / dist, uy: dy / dist, uz: dz / dist });
+        const d = Math.sqrt(dx * dx + dy * dy + dz * dz);
+        if (d < 1e-3) continue;
+        to[spokes] = list[at]; dist[spokes] = d;
+        ux[spokes] = dx / d; uy[spokes] = dy / d; uz[spokes] = dz / d;
+        spokes++;
       }
-      if (spokes.length < 2) continue;
+      if (spokes < 2) continue;
 
       // Even spacing of d directions on a sphere; exact for 2 and 3, and a
       // reasonable target beyond that.
-      const idealCos = Math.cos(Math.min(Math.PI, (Math.PI * 2) / spokes.length));
+      const idealCos = Math.cos(Math.min(Math.PI, (Math.PI * 2) / spokes));
       let rx = 0, ry = 0, rz = 0;
 
-      for (let i = 0; i < spokes.length; i++) {
-        for (let j = i + 1; j < spokes.length; j++) {
-          const a = spokes[i], b = spokes[j];
-          const dot = a.ux * b.ux + a.uy * b.uy + a.uz * b.uz;
+      for (let a = 0; a < spokes; a++) {
+        for (let b = a + 1; b < spokes; b++) {
+          const dot = ux[a] * ux[b] + uy[a] * uy[b] + uz[a] * uz[b];
           if (dot <= idealCos) continue;   // already far enough apart
 
           // Direction that separates the two spokes.
-          let sx = b.ux - a.ux, sy = b.uy - a.uy, sz = b.uz - a.uz;
+          let sx = ux[b] - ux[a], sy = uy[b] - uy[a], sz = uz[b] - uz[a];
           const sLen = Math.sqrt(sx * sx + sy * sy + sz * sz);
           if (sLen < 1e-6) {
             // Perfectly coincident spokes: pick any perpendicular to break the tie.
-            sx = -a.uy; sy = a.ux; sz = 0;
+            sx = -uy[a]; sy = ux[a]; sz = 0;
             const fallback = Math.sqrt(sx * sx + sy * sy) || 1;
             sx /= fallback; sy /= fallback;
           } else {
@@ -868,18 +914,18 @@ class ForceLayout {
           // the radial component the separation direction also lengthens the
           // spoke, and because the step scales with distance that feeds back on
           // itself — the drawing inflates without bound instead of settling.
-          const bT = ForceLayout._tangent(sx, sy, sz, b);
-          const aT = ForceLayout._tangent(-sx, -sy, -sz, a);
-          if (!bT || !aT) continue;
+          if (!ForceLayout._tangent(sx, sy, sz, ux[b], uy[b], uz[b], bT)) continue;
+          if (!ForceLayout._tangent(-sx, -sy, -sz, ux[a], uy[a], uz[a], aT)) continue;
 
-          const bStep = step * b.dist;
-          const aStep = step * a.dist;
+          const bStep = step * dist[b];
+          const aStep = step * dist[a];
 
-          const bvx = bT.x * bStep, bvy = bT.y * bStep, bvz = bT.z * bStep;
-          const avx = aT.x * aStep, avy = aT.y * aStep, avz = aT.z * aStep;
+          const bvx = bT[0] * bStep, bvy = bT[1] * bStep, bvz = bT[2] * bStep;
+          const avx = aT[0] * aStep, avy = aT[1] * aStep, avz = aT[2] * aStep;
 
-          b.q.vx += bvx; b.q.vy += bvy; b.q.vz += bvz;
-          a.q.vx += avx; a.q.vy += avy; a.q.vz += avz;
+          const qb = nodes[to[b]], qa = nodes[to[a]];
+          qb.vx += bvx; qb.vy += bvy; qb.vz += bvz;
+          qa.vx += avx; qa.vy += avy; qa.vz += avz;
 
           rx -= bvx + avx;
           ry -= bvy + avy;
@@ -892,22 +938,24 @@ class ForceLayout {
   }
 
   /**
-   * Unit vector along (x, y, z) with the part parallel to `spoke` removed.
+   * Unit vector along (x, y, z) with the part parallel to the spoke's
+   * direction (ux, uy, uz) removed, written into `out`.
    *
    * Moving a neighbour along this direction turns the spoke without changing
    * its length, which is what keeps the angular force from inflating the
-   * drawing. Returns null when the input is purely radial and there is no
+   * drawing. Returns false when the input is purely radial and there is no
    * tangent to speak of.
    */
-  static _tangent(x, y, z, spoke) {
-    const radial = x * spoke.ux + y * spoke.uy + z * spoke.uz;
-    const tx = x - radial * spoke.ux;
-    const ty = y - radial * spoke.uy;
-    const tz = z - radial * spoke.uz;
+  static _tangent(x, y, z, ux, uy, uz, out) {
+    const radial = x * ux + y * uy + z * uz;
+    const tx = x - radial * ux;
+    const ty = y - radial * uy;
+    const tz = z - radial * uz;
 
     const len = Math.sqrt(tx * tx + ty * ty + tz * tz);
-    if (len < 1e-9) return null;
-    return { x: tx / len, y: ty / len, z: tz / len };
+    if (len < 1e-9) return false;
+    out[0] = tx / len; out[1] = ty / len; out[2] = tz / len;
+    return true;
   }
 
   /**
@@ -929,7 +977,7 @@ class ForceLayout {
       out = this.positions;
     }
     for (let i = 0; i < n; i++) {
-      const p = this.pos.get(this.ids[i]);
+      const p = this.nodes[i];
       const o = i * 3;
       if (p) { out[o] = p.x; out[o + 1] = p.y; out[o + 2] = p.z; }
     }

@@ -248,21 +248,22 @@ class GraphRenderer {
 
   /** Screen-space extent of every node under the current camera. */
   _projectedBounds(layout) {
-    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
-
     const pos = layout.positions;
     const n = Math.min(layout.ids.length, Math.floor(pos.length / 3));
-    const point = this._boundsScratch || (this._boundsScratch = { x: 0, y: 0, z: 0 });
+    // Its own arrays rather than the drawing's: fitting borrows a view the
+    // camera is not at, and hovering between now and the next draw would
+    // otherwise pick against it.
+    const probe = this._probe = GraphRenderer._screenFor(this._probe, n);
+    this._projectAll(pos, n, probe);
 
+    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
     for (let i = 0; i < n; i++) {
-      const o = i * 3;
-      point.x = pos[o]; point.y = pos[o + 1]; point.z = pos[o + 2];
-      const s = this.project(point);
-      if (!Number.isFinite(s.x) || !Number.isFinite(s.y)) continue;
-      if (s.x < minX) minX = s.x;
-      if (s.y < minY) minY = s.y;
-      if (s.x > maxX) maxX = s.x;
-      if (s.y > maxY) maxY = s.y;
+      const x = probe.x[i], y = probe.y[i];
+      if (!Number.isFinite(x) || !Number.isFinite(y)) continue;
+      if (x < minX) minX = x;
+      if (y < minY) minY = y;
+      if (x > maxX) maxX = x;
+      if (y > maxY) maxY = y;
     }
     if (!Number.isFinite(minX)) return null;
 
@@ -273,39 +274,64 @@ class GraphRenderer {
   }
 
   /**
-   * World point to screen point.
+   * World points to screen points: the first n nodes of a flat [x, y, z, ...]
+   * array, into `out`'s parallel arrays.
    *
-   * Returns a depth alongside the coordinates: larger means nearer the eye.
-   * In 2D the depth is constant and the perspective divide is skipped.
+   * Alongside the coordinates come the perspective factor k and a depth that
+   * is larger nearer the eye. In 2D the depth is constant and the perspective
+   * divide is skipped.
+   *
+   * The rotation's sines and cosines are taken once per call. Taking them per
+   * node, and handing each point back as a new object, was most of what a
+   * frame cost with Fit view on, which projects the whole graph four times:
+   * 11.6ms at seventy thousand nodes.
    */
-  project(p) {
+  _projectAll(pos, n, out) {
+    const { x: sx, y: sy, k: sk, depth } = out;
+    const { scale, offsetX, offsetY } = this.view;
+
     if (!this.mode3D) {
-      return {
-        x: p.x * this.view.scale + this.view.offsetX,
-        y: p.y * this.view.scale + this.view.offsetY,
-        depth: 0,
-        k: 1
-      };
+      for (let i = 0; i < n; i++) {
+        const o = i * 3;
+        sx[i] = pos[o] * scale + offsetX;
+        sy[i] = pos[o + 1] * scale + offsetY;
+        sk[i] = 1;
+        depth[i] = 0;
+      }
+      return;
     }
 
     const cosYaw = Math.cos(this.yaw), sinYaw = Math.sin(this.yaw);
     const cosPitch = Math.cos(this.pitch), sinPitch = Math.sin(this.pitch);
+    const distance = this.cameraDistance;
 
-    // Yaw about the vertical axis, then pitch about the horizontal one.
-    const x1 = p.x * cosYaw + p.z * sinYaw;
-    const z1 = -p.x * sinYaw + p.z * cosYaw;
-    const y2 = p.y * cosPitch - z1 * sinPitch;
-    const z2 = p.y * sinPitch + z1 * cosPitch;
+    for (let i = 0; i < n; i++) {
+      const o = i * 3;
+      const x = pos[o], y = pos[o + 1], z = pos[o + 2];
 
-    // Perspective divide, clamped so a node level with the eye cannot explode.
-    const denominator = Math.max(0.25, 1 + (z2 * this.view.scale) / this.cameraDistance);
-    const k = 1 / denominator;
+      // Yaw about the vertical axis, then pitch about the horizontal one.
+      const x1 = x * cosYaw + z * sinYaw;
+      const z1 = -x * sinYaw + z * cosYaw;
+      const y2 = y * cosPitch - z1 * sinPitch;
+      const z2 = y * sinPitch + z1 * cosPitch;
 
+      // Perspective divide, clamped so a node level with the eye cannot explode.
+      const k = 1 / Math.max(0.25, 1 + (z2 * scale) / distance);
+
+      sx[i] = x1 * scale * k + offsetX;
+      sy[i] = y2 * scale * k + offsetY;
+      sk[i] = k;
+      depth[i] = -z2;
+    }
+  }
+
+  /** Arrays for n projected nodes, reusing `have` when it is large enough. */
+  static _screenFor(have, n) {
+    if (have && have.x.length >= n) return have;
     return {
-      x: x1 * this.view.scale * k + this.view.offsetX,
-      y: y2 * this.view.scale * k + this.view.offsetY,
-      depth: -z2,
-      k
+      x: new Float64Array(n), y: new Float64Array(n),
+      k: new Float64Array(n), depth: new Float64Array(n),
+      ok: new Uint8Array(n)
     };
   }
 
@@ -368,32 +394,15 @@ class GraphRenderer {
    */
   _projectFrame(frame, layout) {
     const n = frame.ids.length;
-    if (!this._sx || this._sx.length < n) {
-      this._sx = new Float64Array(n);
-      this._sy = new Float64Array(n);
-      this._sk = new Float64Array(n);
-      this._sDepth = new Float64Array(n);
-      this._sOk = new Uint8Array(n);
-      this._order = new Int32Array(n);
-    }
+    const screen = this._screen = GraphRenderer._screenFor(this._screen, n);
 
     // Positions arrive as three floats per node, in the same order as
     // frame.ids, whether the layout ran here or in a worker.
     const pos = layout.positions;
     const have = Math.min(n, Math.floor(pos.length / 3));
-    const point = this._scratch || (this._scratch = { x: 0, y: 0, z: 0 });
-
-    for (let i = 0; i < n; i++) {
-      if (i >= have) { this._sOk[i] = 0; continue; }
-      const o = i * 3;
-      point.x = pos[o]; point.y = pos[o + 1]; point.z = pos[o + 2];
-
-      const s = this.project(point);
-      this._sx[i] = s.x; this._sy[i] = s.y;
-      this._sk[i] = s.k; this._sDepth[i] = s.depth;
-      this._sOk[i] = 1;
-    }
-    this._sCount = n;
+    this._projectAll(pos, have, screen);
+    screen.ok.fill(1, 0, have);
+    screen.ok.fill(0, have, n);
 
     // Edge endpoints as indices, so drawing them needs no id lookups either.
     if (this._edgeFrame !== frame) {
@@ -451,7 +460,7 @@ class GraphRenderer {
   _edges(ctx, frame, metrics, s) {
     const edges = frame.edges;
     const pairs = this._edgePairs;
-    const sx = this._sx, sy = this._sy, sk = this._sk, ok = this._sOk;
+    const { x: sx, y: sy, k: sk, ok } = this._screen;
     const flat = s.edgeColorBy === 'constant';
     const uniformWidth = s.edgeWidthBy === 'constant';
     const m = edges.length;
@@ -597,7 +606,7 @@ class GraphRenderer {
    */
   _nodes(ctx, frame, metrics, s) {
     const n = frame.ids.length;
-    const sx = this._sx, sy = this._sy, sk = this._sk, depth = this._sDepth, ok = this._sOk;
+    const { x: sx, y: sy, k: sk, depth, ok } = this._screen;
 
     const BUCKETS = 48;
     if (!this._bucket || this._bucket.length < n) {
@@ -736,7 +745,7 @@ class GraphRenderer {
    * caller already sorted, costing one fill per bucket rather than per node.
    */
   _glow(ctx, s, table, counts, grouped, radii, visible) {
-    const sx = this._sx, sy = this._sy;
+    const { x: sx, y: sy } = this._screen;
     const BUCKETS = table.length;
     const byNode = s.nodeGlowColorBy === 'node';
     const size = Math.max(1.05, s.nodeGlowSize);
@@ -842,9 +851,9 @@ class GraphRenderer {
 
   /** Nearest node to a screen point, for hover. Returns an index or -1. */
   pick(frame, px, py, maxPixels = 12) {
-    if (!frame || !this._sOk) return -1;
+    if (!frame || !this._screen) return -1;
     let best = -1, bestDist = maxPixels * maxPixels;
-    const sx = this._sx, sy = this._sy, ok = this._sOk;
+    const { x: sx, y: sy, ok } = this._screen;
 
     for (let i = 0; i < frame.ids.length; i++) {
       if (!ok[i]) continue;
