@@ -1171,12 +1171,8 @@ def _load_cache(run_id: str) -> Dict[str, Any]:
 
 
 def _save_cache(run_id: str, cache: Dict[str, Any]) -> None:
-    path = _cache_path(run_id)
-    tmp = path + ".tmp"
     try:
-        with open(tmp, "w") as f:
-            json.dump(cache, f, separators=(",", ":"))
-        os.replace(tmp, path)
+        store.write_json(_cache_path(run_id), cache)
     except OSError:
         pass  # a missing cache only costs time, never correctness
 

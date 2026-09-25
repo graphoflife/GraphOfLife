@@ -36,3 +36,7 @@ def read_frame(run_id: str, index: int) -> Dict[str, Any]:
 
 def load_meta(run_id: str) -> Dict[str, Any]:
     _unavailable("load_meta")
+
+
+def write_json(path: str, value: Any, indent: Any = None) -> None:
+    _unavailable("write_json")

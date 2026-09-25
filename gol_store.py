@@ -32,7 +32,7 @@ import re
 import shutil
 import threading
 import time
-from typing import Any, Dict, List, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 import numpy as np
 
@@ -182,13 +182,22 @@ def load_meta(run_id: str) -> Dict[str, Any]:
         return json.load(f)
 
 
-def save_meta(run_id: str, meta: Dict[str, Any]) -> None:
-    """Write metadata atomically, so a crash mid-write cannot corrupt a run."""
-    path = meta_path(run_id)
+def write_json(path: str, value: Any, indent: Optional[int] = None) -> None:
+    """
+    Write `value` as JSON so that a crash mid-write cannot leave half a file:
+    to a temporary name first, then renamed over the old one, which the
+    filesystem does in one step. Compact unless indented. The run's metadata
+    and its summarised history each spelled this out.
+    """
     tmp = path + ".tmp"
     with open(tmp, "w") as f:
-        json.dump(meta, f, indent=2)
+        json.dump(value, f, indent=indent, separators=None if indent else (",", ":"))
     os.replace(tmp, path)
+
+
+def save_meta(run_id: str, meta: Dict[str, Any]) -> None:
+    """Write metadata atomically, so a crash mid-write cannot corrupt a run."""
+    write_json(meta_path(run_id), meta, indent=2)
 
 
 def update_meta(run_id: str, **changes: Any) -> Dict[str, Any]:

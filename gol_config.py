@@ -415,14 +415,12 @@ class SimConfig:
         return self.MAGNITUDE_INPUTS * self.brain_bits + self.bit_inputs()
 
     def n_outputs(self) -> int:
-        # 9 always-present heads, plus the optional ones, then the message
-        # vector. Conditional rather than always present so that a run keeps
-        # exactly the architecture it was checkpointed with.
-        return (9
-                + (2 if self.allow_revolutions else 0)
-                + (4 if self.allow_handover else 0)
-                + (6 if self.allow_gifting else 0)
-                + self.message_amount)
+        """
+        The rows of the output layer: up to where the last head, the message
+        vector, ends. Read off the layout rather than added up again beside
+        it, which is how the two came to need a test to hold them together.
+        """
+        return self.head_layout()["MESSAGE"][1]
 
     def head_layout(self) -> Dict[str, Any]:
         """Output row layout. Mirrors the engine's heads, for the UI to display."""

@@ -784,6 +784,9 @@ class GraphOfLife:
         self.cfg = cfg
         self.kind = BRAIN_KINDS[cfg.brain_kind]
         self.heads = build_heads(cfg)
+        # Asked for on every look a control run takes; the layout is worked
+        # out once rather than each time.
+        self.output_rows = cfg.n_outputs()
         self.G = nx.Graph()
         self.next_agent_id = 0
         self.next_brain_id = 1
@@ -1109,7 +1112,7 @@ class GraphOfLife:
         tell the difference.
         """
         if self.cfg.random_decisions:
-            return np.random.standard_normal((self.cfg.n_outputs(), len(candidates)))
+            return np.random.standard_normal((self.output_rows, len(candidates)))
         X = self._inputs(u, candidates, log_deg, q_tok, q_deg, log_tok, at_risk)
         return self.brains[u].forward(X)
 

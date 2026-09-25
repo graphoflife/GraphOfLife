@@ -2821,8 +2821,12 @@ def test_the_head_layout_is_the_only_statement_of_where_the_rows_are():
                     else:
                         assert heads[name] == slice(start, end), name
 
-                # And the layout covers exactly the rows the brain has.
-                assert max(end for _, end in layout.values()) == cfg.n_outputs()
+                # And the heads tile the output rows, each starting where the
+                # one before it ends: a head laid over another, or past a gap,
+                # would read rows that mean something else or nothing.
+                spans = sorted(tuple(span) for span in layout.values())
+                assert spans[0][0] == 0, spans
+                assert all(a[1] == b[0] for a, b in zip(spans, spans[1:])), spans
 
 
 
