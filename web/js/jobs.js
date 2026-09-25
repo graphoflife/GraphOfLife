@@ -43,17 +43,26 @@ const Jobs = {
    * Start work for an owner, cancelling whatever that owner was doing.
    *
    * `fn` is handed a job with `signal` for the request layer and `report` for
-   * the progress bar. Returning normally finishes the job; throwing an abort
-   * is not an error and is swallowed, because the caller asked for it.
+   * the progress bar. How it ends is decided here, once, for every view:
+   *
+   *   returns   the job finished, and finished(owner) says so;
+   *   aborted   the caller asked for that, so it is not an error; the owner is
+   *             left due another go;
+   *   throws    `failed(err)` is told, so the owner can say what went wrong,
+   *             and the owner is left due another go as well.
+   *
+   * Each view used to catch its own errors inside `fn`, which made a failed
+   * load look finished: nothing tried it again on the way back to the view.
+   * With `failed` the returned promise never rejects; without it, the error
+   * is passed on.
    */
-  run(owner, label, fn) {
+  run(owner, label, fn, failed = null) {
     this.cancel(owner);
     this._done.delete(owner);
 
     const controller = new AbortController();
     const job = {
       signal: controller.signal,
-      get cancelled() { return controller.signal.aborted; },
       report: (done, total, text) => {
         if (controller.signal.aborted) return;
         this._show(text || label, done, total);
@@ -70,7 +79,9 @@ const Jobs = {
       } catch (err) {
         // An abort is the caller getting what it asked for, not a failure.
         if (err && (err.name === 'AbortError' || controller.signal.aborted)) return null;
-        throw err;
+        if (!failed) throw err;
+        failed(err);
+        return null;
       } finally {
         if (this._live.get(owner) && this._live.get(owner).job === job) {
           this._live.delete(owner);

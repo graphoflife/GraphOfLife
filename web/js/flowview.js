@@ -105,17 +105,6 @@ const FlowView = {
   // ---- reading a run ----------------------------------------------------
 
   async load(runId, from = null) {
-    // Re-entered from the mode switch with nothing new to say: the frames it
-    // already holds are the frames it wants, in the place it was left. Moving
-    // the window passes a `from`, and so always refetches.
-    // A window that was cancelled halfway still leaves the frames it had
-    // painted so far in `this.frames`, which is why this also asks whether the
-    // last read *finished*. Without that, leaving the view mid-read and coming
-    // back redrew the partial window as though it were the whole one.
-    if (from === null && this.runId === runId && this.frames && Jobs.finished(this)) {
-      this.recompute();
-      return;
-    }
     const at = from ?? (runId === this.runId ? this.windowStart : 0);
     this.runId = runId;
     this.result = null;
@@ -138,37 +127,29 @@ const FlowView = {
       const frames = [];
       let painted = 0;
       let seen = 0;
-      try {
-        for await (const batch of FrameWindow.read(runId, plan.indices, this.FIELDS,
-                                                   this.MAX_SIGHTINGS,
-                                                   { signal: job.signal })) {
-          if (job.cancelled) return;
-          frames.push(...batch);
-          seen += batch.reduce((n, f) => n + (f.ids || []).length, 0);
-          job.report(frames.length, plan.indices.length);
+      for await (const batch of FrameWindow.read(runId, plan.indices, this.FIELDS,
+                                                 this.MAX_SIGHTINGS,
+                                                 { signal: job.signal })) {
+        frames.push(...batch);
+        seen += batch.reduce((n, f) => n + (f.ids || []).length, 0);
+        job.report(frames.length, plan.indices.length);
 
-          // Follow and draw what has arrived rather than waiting out the whole
-          // window on a blank canvas.
-          const now = Date.now();
-          if (now - painted > this.DRAW_EVERY_MS) {
-            painted = now;
-            this.frames = frames.slice();
-            this.recompute();
-          }
-          // Enough of this world seen. Reading further would add minutes of
-          // clustering for a picture already at the limit of what can be read.
-          if (seen >= this.MAX_SIGHTINGS) break;
+        // Follow and draw what has arrived rather than waiting out the whole
+        // window on a blank canvas.
+        const now = Date.now();
+        if (now - painted > this.DRAW_EVERY_MS) {
+          painted = now;
+          this.frames = frames.slice();
+          this.recompute();
         }
-      } catch (err) {
-        if (job.cancelled || err.name === 'AbortError') return;
-        this.say(`Could not read the frames: ${err.message}`);
-        return;
+        // Enough of this world seen. Reading further would add minutes of
+        // clustering for a picture already at the limit of what can be read.
+        if (seen >= this.MAX_SIGHTINGS) break;
       }
-      if (job.cancelled) return;
       this.frames = frames;
       this.asked = plan.indices.length;
       this.recompute();
-    });
+    }, err => this.say(`Could not read the frames: ${err.message}`));
   },
 
   recompute() {

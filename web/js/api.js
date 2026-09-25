@@ -200,7 +200,15 @@ const API = {
 
   async _call(method, ...args) {
     const backend = await this.choose();
-    return backend[method](...args);
+    // A read already stopped is not sent, and an answer that lands after its
+    // read was stopped answers nothing: both end as the abort they are, so no
+    // caller has to check for itself after every await. The in-browser
+    // backend only hears of an abort that happens while it is waiting.
+    const signal = args[args.length - 1]?.signal;
+    signal?.throwIfAborted();
+    const answer = await backend[method](...args);
+    signal?.throwIfAborted();
+    return answer;
   },
 
   defaults()              { return this._call('defaults'); },

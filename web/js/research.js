@@ -174,7 +174,15 @@ const Research = {
     // and that nobody asked about.
     const waiting = choose && !this.userPicked;
     this.picker.value = waiting ? '' : (this.runId || '');
-    view.load(waiting ? null : (this.runId || null));
+
+    // Coming back to a view that has read this run, or is still reading it,
+    // is coming back to a picture it has or is about to have, and the draw
+    // above was all it needed. Every mode switch used to read again: the
+    // lineage window's whole server build for the same picture, Diagrams'
+    // frames, and Flow modules kept a special case of its own to dodge it.
+    // Another run, or a read that was cut short or failed, is read.
+    const target = waiting ? null : (this.runId || null);
+    if (view.runId !== target || Jobs.due(view)) view.load(target);
   },
 
   async listRuns() {
@@ -230,5 +238,12 @@ const Research = {
     this.runId = runId || null;
     Jobs.only(this.view);
     await this.view?.load(this.runId);
+  },
+
+  /** Choose a run for the reader, as though they had picked it themselves. */
+  pick(runId) {
+    this.picker.value = runId;
+    this.userPicked = true;
+    return this.open(runId);
   }
 };

@@ -172,6 +172,45 @@ async function test_an_abort_is_not_an_error() {
   if (result !== null) throw new Error('an aborted job did not resolve to null');
 }
 
+async function test_a_failed_job_says_so_and_is_tried_again() {
+  // Each view used to catch its own errors inside the job, so a load that
+  // failed was recorded as finished, and coming back to the view never tried
+  // it again. Jobs decides now: the owner hears about the failure, and is
+  // left due another go.
+  Jobs.cancelAll();
+  let heard = null;
+  const result = await Jobs.run('lineage', 'x', async () => { throw new Error('gone'); },
+                                err => { heard = err.message; });
+  assert(result === null, 'a failed job with someone to tell still rejected');
+  assert(heard === 'gone', 'the owner was not told why its load failed');
+  assert(!Jobs.finished('lineage') && Jobs.due('lineage'),
+    'a failed load was recorded as finished, so nothing would try it again');
+
+  // With nobody to tell, the error is passed on rather than swallowed.
+  const passed = await Jobs.run('lineage', 'x', async () => { throw new Error('gone'); })
+    .then(() => 'swallowed', err => err.message);
+  assert(passed === 'gone', 'a failure with nobody to hear it was swallowed');
+}
+
+async function test_an_answer_after_a_stop_is_a_stop() {
+  // Every view used to ask, after each await, whether it had been stopped in
+  // the meantime; one that forgot would paint an answer to a question nobody
+  // was asking any more. The facade asks now, once, for all of them.
+  const API = new Function(
+    `${fs.readFileSync(path.join(root, 'web', 'js', 'api.js'), 'utf8')}; return API;`)();
+  const controller = new AbortController();
+  let sent = 0;
+  API.backend = {
+    getLineage: async () => { sent++; controller.abort(); return { nodes: [] }; }
+  };
+  const ending = promise => promise.then(() => 'answered', err => err.name);
+
+  const late = await ending(API.getLineage('run', 0, 10, 'all', { signal: controller.signal }));
+  assert(late === 'AbortError', `an answer that landed after the stop came back ${late}`);
+  const after = await ending(API.getLineage('run', 0, 10, 'all', { signal: controller.signal }));
+  assert(after === 'AbortError' && sent === 1, 'a read already stopped was sent anyway');
+}
+
 function test_the_default_look_is_stated_once() {
   // The default preset is the only statement of how the Viewer starts. It
   // used to be stated three times: viewer.js and index.html each carried a
@@ -788,7 +827,7 @@ async function test_the_bar_counts_samples_and_only_moves_forward() {
   loader.POLL_MS = 3;
 
   const reports = [];
-  const job = { signal: null, cancelled: false, report: (done, of) => reports.push([done, of]) };
+  const job = { signal: null, report: (done, of) => reports.push([done, of]) };
   await loader.climb('run', ['bridges'], { job });
 
   assert(reports.length, 'the bar was never told anything');
@@ -997,6 +1036,8 @@ const tests = Object.entries({
   test_only_cancels_everything_else,
   test_a_cancelled_job_neither_reports_nor_counts_as_finished,
   test_an_abort_is_not_an_error,
+  test_a_failed_job_says_so_and_is_tried_again,
+  test_an_answer_after_a_stop_is_a_stop,
   test_a_history_is_asked_for_by_what_is_plotted,
   test_a_summarised_run_is_one_request,
   test_a_history_of_a_smaller_run_is_not_ready,

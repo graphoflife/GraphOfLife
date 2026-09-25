@@ -209,7 +209,6 @@ const SeriesLoad = {
   async climb(runId, keys, { onStep, job, text = 'Summarising the run' } = {}) {
     const columns = this.columns(keys);
     const opts = job ? { signal: job.signal } : undefined;
-    const cancelled = () => Boolean(job && job.cancelled);
 
     let shown = 0;
     let total = (this.cache.get(runId) || {}).totalPoints || 0;
@@ -238,10 +237,10 @@ const SeriesLoad = {
       }
     };
 
+    // Stopping the job ends the climb by rejecting the step in flight, or the
+    // next one before it is sent.
     for (const points of this.STEPS) {
-      if (cancelled()) break;
       const reply = await step(points);
-      if (cancelled()) break;
       this.cache.set(runId, reply);
       total = reply.totalPoints || 0;
       advance(reply.done);

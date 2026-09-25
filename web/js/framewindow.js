@@ -86,8 +86,9 @@ const FrameWindow = {
     for (let at = 0; at < indices.length; at += this.BATCH) {
       // Checked between batches as well as passed down, so a long window stops
       // at the next boundary even if the request in flight has already been
-      // answered.
-      if (opts.signal && opts.signal.aborted) return;
+      // answered. Thrown rather than returned: a window cut short must not
+      // look to its reader like a window that ended.
+      opts.signal?.throwIfAborted();
       const slice = indices.slice(at, at + this.BATCH);
       const reply = await API.getFrames(runId, slice[0], slice.length,
                                         fields, sightings, opts);

@@ -182,11 +182,13 @@ const StatDetail = {
     // Drawn once more when the load ends, however it ends: a stopped load
     // otherwise left the chart saying it was loading and the trajectory
     // without its button to carry on.
+    let failure = null;
     return Jobs.run(this, 'Summarising the run', (job) => SeriesLoad.climb(runId, keys, {
       job, onStep: drawn
-    })).finally(drawn).catch(err => {
+    }), err => { failure = err; }).then(() => {
+      drawn();
       // After the last draw, which would otherwise write over it.
-      this.footEl.textContent = `Could not load history: ${err.message}`;
+      if (failure) this.footEl.textContent = `Could not load history: ${failure.message}`;
     });
   },
 

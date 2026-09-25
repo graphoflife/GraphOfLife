@@ -189,6 +189,34 @@ function test_reading_can_stop_early() {
   })();
 }
 
+function test_a_window_stopped_between_batches_ends_as_stopped() {
+  // Stopped once a batch has arrived, a read that simply ended would hand its
+  // reader part of a window to treat as the whole of it.
+  const controller = new AbortController();
+  const API = {
+    getFrames: (_run, from, count) =>
+      Promise.resolve({ frames: Array.from({ length: count }, (_, k) => ({ i: from + k })) })
+  };
+  const scoped = new Function('API', `const formatNumber = n => String(n); ${source}; return FrameWindow;`)(API);
+
+  return (async () => {
+    let batches = 0;
+    let ended = 'as though finished';
+    try {
+      for await (const _batch of scoped.read('r', scoped.plan(1000, 0, 100).indices, null, 0,
+                                             { signal: controller.signal })) {
+        batches++;
+        controller.abort();
+      }
+    } catch (err) {
+      ended = err.name;
+    }
+    if (batches !== 1 || ended !== 'AbortError') {
+      throw new Error(`stopped after its first batch, a read took ${batches} and ended ${ended}`);
+    }
+  })();
+}
+
 function test_where_the_window_sits_is_read_off_the_frames() {
   // Not computed from the frame index: a run recorded with export_every above
   // one has its iterations further apart than one apiece, and arithmetic on
@@ -229,6 +257,7 @@ const tests = Object.entries({
   test_frames_are_read_in_batches_and_all_of_them_arrive,
   test_only_the_fields_a_caller_reads_are_asked_for,
   test_reading_can_stop_early,
+  test_a_window_stopped_between_batches_ends_as_stopped,
   test_where_the_window_sits_is_read_off_the_frames,
   test_one_iteration_is_the_smallest_window
 }).sort(([a], [b]) => a.localeCompare(b));

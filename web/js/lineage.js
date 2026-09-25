@@ -119,25 +119,18 @@ const Lineage = {
     // whatever had replaced it. The signal is the whole fix.
     return Jobs.run(this, 'Reading the lineage window', async (job) => {
       this.say('Reading the window…');
-      try {
-        // One request. The counting happens where the frames are, and only the
-        // genotypes that can be drawn come back — gol_lineage.DEFAULT_LIMIT, a
-        // couple of thousand, which is what a canvas this tall can show as rows.
-        //
-        // The whole window is read. It used to be cut off at 400,000
-        // agent-sightings, which on a 35,000-agent world is eleven frames — so
-        // "Show 100 iterations" quietly drew five of them and said nothing. A
-        // control overruled without a word is worse than no control.
-        const reply = await API.getLineage(runId, plan.start, plan.indices.length,
-                                           this.phase, { signal: job.signal });
-        if (job.cancelled) return;
-        this.reply = reply;
-        this.rebuild();
-      } catch (err) {
-        if (job.cancelled || err.name === 'AbortError') return;
-        this.say(`Could not read the window: ${err.message}`);
-      }
-    });
+      // One request. The counting happens where the frames are, and only the
+      // genotypes that can be drawn come back — gol_lineage.DEFAULT_LIMIT, a
+      // couple of thousand, which is what a canvas this tall can show as rows.
+      //
+      // The whole window is read. It used to be cut off at 400,000
+      // agent-sightings, which on a 35,000-agent world is eleven frames — so
+      // "Show 100 iterations" quietly drew five of them and said nothing. A
+      // control overruled without a word is worse than no control.
+      this.reply = await API.getLineage(runId, plan.start, plan.indices.length,
+                                        this.phase, { signal: job.signal });
+      this.rebuild();
+    }, err => this.say(`Could not read the window: ${err.message}`));
   },
 
   /**

@@ -306,9 +306,7 @@ const Diagrams = {
         // with it — restoring the settings and leaving the run behind would
         // draw something the reader never saved.
         if (preset.runId && this.runs.some(r => r.id === preset.runId)) {
-          Research.picker.value = preset.runId;
-          Research.userPicked = true;
-          Research.open(preset.runId);
+          Research.pick(preset.runId);
         }
         this.controls();
         this.refresh();
@@ -394,7 +392,12 @@ const Diagrams = {
       return;
     }
     this.wanted = wants;
-    return Jobs.run(this, 'Reading', (job) => this._refresh(job));
+    return Jobs.run(this, 'Reading', (job) => this._refresh(job), err => {
+      const frames = this.tab.kind === 'frame';
+      if (frames) this.frames = null;
+      this.say(`Could not read the ${frames ? 'frames' : 'run'}: ${err.message}`);
+      this.draw();
+    });
   },
 
   /**
@@ -442,36 +445,29 @@ const Diagrams = {
     if (this.tab.kind === 'frame') {
       const { from, count, lead, key } = this.frameSpan();
       this.say('Reading frames…');
-      try {
-        // A batch is capped server-side, so a long span is several requests
-        // rather than one truncated one. Reading them in order also means each
-        // frame can be handed the one before it, which is what the
-        // "before phase" metrics are computed against.
-        const wanted = count + lead;
-        const read = [];
-        let pooled = 0;
-        for (let at = 0; at < wanted; at += this.BATCH) {
-          const size = Math.min(this.BATCH, wanted - at);
-          const reply = await API.getFrames(this.runId, from - lead + at, size,
-                                            this.FRAME_FIELDS, this.MAX_POOLED - pooled,
-                                            { signal: job.signal });
-          if (job.cancelled) return;
-          const batch = reply.frames || [];
-          read.push(...batch);
-          pooled += batch.reduce((n, f) => n + (f.ids || []).length, 0);
-          job.report(read.length, wanted, 'Reading frames');
-          // Either the run ran out or the value budget did; both mean stop.
-          if (batch.length < size || pooled >= this.MAX_POOLED) break;
-        }
-        for (let i = 1; i < read.length; i++) read[i].previous = read[i - 1];
-        this.frames = read.slice(lead);
-        this.framesFor = key;
-        this.asked = count;
-      } catch (err) {
-        if (job.cancelled || err.name === 'AbortError') return;
-        this.say(`Could not read the frames: ${err.message}`);
-        this.frames = null;
+      // A batch is capped server-side, so a long span is several requests
+      // rather than one truncated one. Reading them in order also means each
+      // frame can be handed the one before it, which is what the
+      // "before phase" metrics are computed against.
+      const wanted = count + lead;
+      const read = [];
+      let pooled = 0;
+      for (let at = 0; at < wanted; at += this.BATCH) {
+        const size = Math.min(this.BATCH, wanted - at);
+        const reply = await API.getFrames(this.runId, from - lead + at, size,
+                                          this.FRAME_FIELDS, this.MAX_POOLED - pooled,
+                                          { signal: job.signal });
+        const batch = reply.frames || [];
+        read.push(...batch);
+        pooled += batch.reduce((n, f) => n + (f.ids || []).length, 0);
+        job.report(read.length, wanted, 'Reading frames');
+        // Either the run ran out or the value budget did; both mean stop.
+        if (batch.length < size || pooled >= this.MAX_POOLED) break;
       }
+      for (let i = 1; i < read.length; i++) read[i].previous = read[i - 1];
+      this.frames = read.slice(lead);
+      this.framesFor = key;
+      this.asked = count;
       this.draw();
       return;
     }
@@ -483,7 +479,6 @@ const Diagrams = {
     const wanted = this.needsSeries();
     if (!wanted.size) { this.draw(); return; }
     for (const [id, stats] of wanted) {
-      if (job.cancelled) return;
       if (SeriesLoad.ready(id, stats, this.frameCount(id))) continue;
       if (!SeriesLoad.cache.has(id)) this.say('Reading the run…');
       try {
@@ -493,11 +488,12 @@ const Diagrams = {
           onStep: () => this.draw()
         });
       } catch (err) {
-        if (job.cancelled || err.name === 'AbortError') return;
+        // One run that cannot be read does not keep the others off the
+        // chart. Being stopped does.
+        if (err.name === 'AbortError') throw err;
         this.say(`Could not read ${id}: ${err.message}`);
       }
     }
-    if (job.cancelled) return;
     this.draw();
   },
 
