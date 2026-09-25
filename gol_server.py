@@ -153,7 +153,7 @@ class Worker:
                 frame_cursor = 0
             else:
                 # Resume: drop the future the checkpoint never lived through.
-                frame_cursor = store.frames_recorded_before(world.iteration, cfg.export_every)
+                frame_cursor = cfg.frames_before(world.iteration)
                 store.truncate_frames_from(run_id, frame_cursor)
 
             store.update_meta(run_id, status="running", error=None,
@@ -168,7 +168,7 @@ class Worker:
                     final_status = "stopped"
                     break
 
-                record = (world.iteration % cfg.export_every == 0)
+                record = cfg.records(world.iteration)
                 frames = world.step(record_decisions=cfg.export_decisions and record)
 
                 if record:

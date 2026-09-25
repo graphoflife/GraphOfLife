@@ -325,6 +325,21 @@ class SimConfig:
     # Derived values
     # --------------------------------------------------------------------
 
+    def records(self, iteration: int) -> bool:
+        """Whether an iteration's two frames are recorded: every export_every-th, from 0."""
+        return iteration % self.export_every == 0
+
+    def frames_before(self, iteration: int) -> int:
+        """
+        How many frames the iterations below `iteration` recorded, two apiece.
+
+        On resume this is where the checkpoint's timeline ends: frames past it
+        belong to a future the checkpoint never lived through, and are dropped.
+        Both backends resume, and the browser's used to keep them.
+        """
+        recorded = -(-max(0, iteration) // max(1, self.export_every))  # ceil
+        return recorded * 2
+
     def resolved_n(self) -> int:
         return self.n_nodes if self.n_nodes > 0 else int(self.total_tokens / 100)
 

@@ -929,6 +929,18 @@ def test_a_run_size_is_kept_until_the_run_changes():
             gol_store.BASE_DIR = original
 
 
+def test_a_checkpoint_timeline_ends_where_its_frames_do():
+    """
+    Both backends drop the frames a resume abandons, from the same rule: two
+    frames for every recorded iteration below the checkpoint's.
+    """
+    every = SimConfig(export_every=1)
+    assert [every.frames_before(i) for i in (0, 1, 5)] == [0, 2, 10]
+    sparse = SimConfig(export_every=3)
+    assert [i for i in range(10) if sparse.records(i)] == [0, 3, 6, 9]
+    assert sparse.frames_before(7) == 6 and sparse.frames_before(6) == 4
+
+
 def test_the_forest_keeps_only_the_phase_asked_for():
     """
     The phase filter lives in gol_lineage.forest now. Both backends used to

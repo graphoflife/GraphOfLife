@@ -216,8 +216,17 @@ async function ensureWorld(run) {
   }
   const path = `/home/pyodide/${run.id}.npz`;
   pyodide.FS.writeFile(path, new Uint8Array(bytes));
-  call('gol_browser.WORLDS.restore', [run.id, run.config, path]);
+  const restored = call('gol_browser.WORLDS.restore', [run.id, run.config, path]);
   try { pyodide.FS.unlink(path); } catch (err) { /* already gone */ }
+
+  // Resuming drops the future the checkpoint never lived through, as the
+  // server does. A tab closed after the last checkpoint left frames past it,
+  // and new ones written after those put every later frame at the wrong
+  // iteration: a frame's index is what says which iteration it is.
+  if (run.frame_count > restored.frames) await RunStore.deleteFramesFrom(run.id, restored.frames);
+  run.frame_count = restored.frames;
+  run.iteration = restored.iteration;
+  await RunStore.putRun(run);
 }
 
 async function saveCheckpoint(run) {

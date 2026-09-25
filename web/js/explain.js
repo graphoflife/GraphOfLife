@@ -264,10 +264,6 @@ Object.assign(Explain, {
     this.lineEls = [...this.codeEl.querySelectorAll('.explain-line')];
   },
 
-  escape(text) {
-    return text.replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
-  },
-
   /**
    * Colour the script, one line at a time, carrying state between them.
    *
@@ -291,7 +287,7 @@ Object.assign(Explain, {
       'round', 'set', 'sorted', 'str', 'sum', 'tuple', 'zip', 'isinstance',
       'super', 'type', 'open']);
 
-    const tag = (cls, text) => `<span class="${cls}">${this.escape(text)}</span>`;
+    const tag = (cls, text) => `<span class="${cls}">${Markdown.escape(text)}</span>`;
     const TRIPLES = ['"""', "'''"];
     const out = [];
     let triple = null;              // the delimiter we are inside, if any
@@ -355,12 +351,12 @@ Object.assign(Explain, {
           else if (word === 'self' || word === 'cls') cls = 'tok-self';
           else if (/\b(def|class)\s+$/.test(line.slice(0, i))) cls = 'tok-def';
           else if (BUILTINS.has(word)) cls = 'tok-bi';
-          html += cls ? tag(cls, word) : this.escape(word);
+          html += cls ? tag(cls, word) : Markdown.escape(word);
           i += word.length;
           continue;
         }
 
-        html += this.escape(ch);
+        html += Markdown.escape(ch);
         i++;
       }
       out.push(html);

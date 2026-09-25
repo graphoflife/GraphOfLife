@@ -69,7 +69,8 @@ class Worlds:
         with np.load(path) as blob:
             world = GraphOfLife.from_checkpoint(blob, cfg)
         self._worlds[run_id] = {"cfg": cfg, "world": world}
-        return {"config": cfg.to_dict(), "iteration": world.iteration}
+        return {"config": cfg.to_dict(), "iteration": world.iteration,
+                "frames": cfg.frames_before(world.iteration)}
 
     def has(self, run_id: str) -> bool:
         return run_id in self._worlds
@@ -92,7 +93,7 @@ class Worlds:
         produced: List[Dict[str, Any]] = []
 
         for _ in range(max(1, iterations)):
-            record = (world.iteration % cfg.export_every == 0)
+            record = cfg.records(world.iteration)
             frames = world.step(record_decisions=cfg.export_decisions and record)
             if record:
                 produced.extend(frames)

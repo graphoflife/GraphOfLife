@@ -101,6 +101,13 @@ const RunStore = {
 
   // ---- frames ----------------------------------------------------------
 
+  /** A run's frames from `first` on: the timeline a resume abandons. */
+  async deleteFramesFrom(runId, first) {
+    await this._tx(['frames'], 'readwrite', tx => {
+      tx.objectStore('frames').delete(IDBKeyRange.bound([runId, first], [runId, Infinity]));
+    });
+  },
+
   /**
    * Written as one transaction, so a slice either lands or does not.
    *

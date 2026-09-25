@@ -58,12 +58,7 @@ function publish() {
   const n = layout.ids.length;
 
   if (shared && shared.length >= n * 3) {
-    const ids = layout.ids;
-    for (let i = 0; i < n; i++) {
-      const p = layout.pos.get(ids[i]);
-      const o = i * 3;
-      if (p) { shared[o] = p.x; shared[o + 1] = p.y; shared[o + 2] = p.z; }
-    }
+    layout.syncPositions(shared);
     return null;
   }
   return layout.syncPositions().slice(0, n * 3);

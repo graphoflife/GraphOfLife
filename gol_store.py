@@ -54,17 +54,6 @@ def _ensure_base() -> None:
     os.makedirs(BASE_DIR, exist_ok=True)
 
 
-def frames_recorded_before(iteration: int, export_every: int) -> int:
-    """
-    How many frames exist for iterations strictly below `iteration`.
-
-    Recording happens on iterations where `t % export_every == 0`, two frames
-    each. Used on resume to find where the checkpoint's timeline ends.
-    """
-    exported_iterations = -(-max(0, iteration) // max(1, export_every))  # ceil
-    return exported_iterations * 2
-
-
 def run_dir(run_id: str) -> str:
     """Resolve a run directory, refusing anything that could escape BASE_DIR."""
     if not RUN_ID_RE.match(run_id or ""):

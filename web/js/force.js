@@ -917,12 +917,17 @@ class ForceLayout {
    * the layout ran on this thread or arrived from a worker — both present the
    * same three floats per node in the same order.
    */
-  syncPositions() {
+  syncPositions(target = null) {
     const n = this.ids.length;
-    if (!this.positions || this.positions.length < n * 3) {
-      this.positions = new Float32Array(n * 3);
+    // Into `target` when given: the worker writes straight into the memory it
+    // shares with the page, and used to spell this loop out again to do it.
+    let out = target;
+    if (!out) {
+      if (!this.positions || this.positions.length < n * 3) {
+        this.positions = new Float32Array(n * 3);
+      }
+      out = this.positions;
     }
-    const out = this.positions;
     for (let i = 0; i < n; i++) {
       const p = this.pos.get(this.ids[i]);
       const o = i * 3;
@@ -931,30 +936,4 @@ class ForceLayout {
     return out;
   }
 
-  /** Bounding box of the current layout, padded slightly. */
-  bounds() {
-    let minX = Infinity, minY = Infinity, minZ = Infinity;
-    let maxX = -Infinity, maxY = -Infinity, maxZ = -Infinity;
-
-    for (const id of this.ids) {
-      const p = this.pos.get(id);
-      if (!p) continue;
-      if (p.x < minX) minX = p.x;
-      if (p.y < minY) minY = p.y;
-      if (p.z < minZ) minZ = p.z;
-      if (p.x > maxX) maxX = p.x;
-      if (p.y > maxY) maxY = p.y;
-      if (p.z > maxZ) maxZ = p.z;
-    }
-    if (!Number.isFinite(minX)) {
-      return { minX: -100, minY: -100, minZ: 0, maxX: 100, maxY: 100, maxZ: 0 };
-    }
-
-    const padX = (maxX - minX) * 0.06 + 20;
-    const padY = (maxY - minY) * 0.06 + 20;
-    return {
-      minX: minX - padX, minY: minY - padY, minZ,
-      maxX: maxX + padX, maxY: maxY + padY, maxZ
-    };
-  }
 }
