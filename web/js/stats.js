@@ -992,6 +992,19 @@ function _axisTicks(lo, hi, target = 5) {
  * grid sits behind rather than over — a heatmap with gridlines on top of the
  * cells is harder to read, not easier.
  */
+/**
+ * How many ticks a plot's axes have room for, rather than a fixed five. The
+ * same chart is drawn at 300px in the Research pane and at 1600px in a saved
+ * image; five is crowded at one end and sparse at the other. A label needs
+ * roughly 90px across and a row 48px down before they start touching.
+ */
+function _tickCounts(w, h) {
+  return {
+    across: Math.max(2, Math.min(8, Math.round(w / 90))),
+    down: Math.max(2, Math.min(6, Math.round(h / 48)))
+  };
+}
+
 function _axes(ctx, w, h, spec) {
   // `pad` is the margin the chrome reserved outside the plot. Tick labels are
   // allowed to use it, and are clamped to it, so an edge tick stays legible
@@ -1003,13 +1016,7 @@ function _axes(ctx, w, h, spec) {
   ctx.lineWidth = 1;
 
   const place = (axis, v) => axis.lo === axis.hi ? 0.5 : (v - axis.lo) / (axis.hi - axis.lo);
-
-  // How many ticks the axis has room for, rather than a fixed five. The same
-  // chart is drawn at 300px in the Research pane and at 1600px in a saved
-  // image; five is crowded at one end and sparse at the other. A label needs
-  // roughly 90px across and a row 48px down before they start touching.
-  const across = Math.max(2, Math.min(8, Math.round(w / 90)));
-  const down = Math.max(2, Math.min(6, Math.round(h / 48)));
+  const { across, down } = _tickCounts(w, h);
 
   if (x) {
     for (const tick of _axisTicks(x.lo, x.hi, across)) {

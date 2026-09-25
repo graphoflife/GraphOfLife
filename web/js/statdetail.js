@@ -112,9 +112,9 @@ const StatDetail = {
 
   redraw() {
     const { xs, ys, asShare } = this.points();
-    const { ctx, w, h } = _prepareCanvas(this.canvas);
 
     if (!ys.length) {
+      const { ctx, h } = _prepareCanvas(this.canvas);
       ctx.fillStyle = Ink.of('dim');
       ctx.font = '12px system-ui, sans-serif';
       ctx.fillText(Jobs.busy(Viewer)
@@ -124,85 +124,42 @@ const StatDetail = {
       return;
     }
 
-    const padL = 62, padR = 12, padT = 10, padB = 30;
-    const plotW = w - padL - padR, plotH = h - padT - padB;
+    // Drawn on the axes every other chart uses. This popup drew its own grid,
+    // labels and axes beside them, and so looked like none of the others.
+    const pad = { left: 62, right: 12, top: 10, bottom: 30 };
+    const { ctx, w, h } = _prepareCanvas(this.canvas, pad);
 
     let lo = Math.min(...ys), hi = Math.max(...ys);
     if (hi - lo < 1e-12) { lo -= 0.5; hi += 0.5; }
 
-    // Widen to the round numbers, so the top and bottom lines are labelled
-    // values rather than wherever the data happened to stop.
-    const yTicks = _axisTicks(lo, hi, 5);
+    // Widen to the round numbers the axis labels, so the top and bottom lines
+    // are labelled values rather than wherever the data happened to stop.
+    const yTicks = _axisTicks(lo, hi, _tickCounts(w, h).down);
     if (yTicks.length > 1) {
       lo = Math.min(lo, yTicks[0]);
       hi = Math.max(hi, yTicks[yTicks.length - 1]);
     }
-
     const xLo = xs[0], xHi = xs[xs.length - 1];
-    const xTicks = _axisTicks(xLo, xHi, 5);
 
-    const xAt = v => padL + (xHi === xLo ? plotW / 2 : ((v - xLo) / (xHi - xLo)) * plotW);
-    const yAt = v => padT + plotH - ((v - lo) / (hi - lo)) * plotH;
-
-    const fmtY = v => asShare
-      ? `${+v.toFixed(2)}%`
-      : (Math.abs(v) >= 1000 ? Math.round(v).toLocaleString('en-US')
-                             : String(+v.toFixed(Math.abs(v) < 1 ? 3 : 2)));
-
-    ctx.font = '10px system-ui, sans-serif';
-    ctx.lineWidth = 1;
-
-    // Horizontal grid
-    for (const v of yTicks) {
-      const y = Math.round(yAt(v)) + 0.5;
-      if (y < padT - 1 || y > padT + plotH + 1) continue;
-      ctx.strokeStyle = Ink.of('grid');
-      ctx.beginPath();
-      ctx.moveTo(padL, y);
-      ctx.lineTo(padL + plotW, y);
-      ctx.stroke();
-
-      ctx.fillStyle = Ink.of('label');
-      const label = fmtY(v);
-      ctx.fillText(label, padL - 6 - ctx.measureText(label).width, y + 3);
-    }
-
-    // Vertical grid
-    for (const v of xTicks) {
-      const x = Math.round(xAt(v)) + 0.5;
-      if (x < padL - 1 || x > padL + plotW + 1) continue;
-      ctx.strokeStyle = Ink.of('grid');
-      ctx.beginPath();
-      ctx.moveTo(x, padT);
-      ctx.lineTo(x, padT + plotH);
-      ctx.stroke();
-
-      ctx.fillStyle = Ink.of('label');
-      const label = Math.round(v).toLocaleString('en-US');
-      ctx.fillText(label, x - ctx.measureText(label).width / 2, h - 12);
-    }
-
-    // Axes, a shade brighter than the grid
-    ctx.strokeStyle = Ink.of('axis');
-    ctx.beginPath();
-    ctx.moveTo(padL + 0.5, padT);
-    ctx.lineTo(padL + 0.5, padT + plotH + 0.5);
-    ctx.lineTo(padL + plotW, padT + plotH + 0.5);
-    ctx.stroke();
-
-    // Where the frame on screen sits, so the number in the strip has a home
-    const currentIteration = Viewer.frame ? Viewer.frame.iteration : null;
-    if (currentIteration !== null && currentIteration >= xLo && currentIteration <= xHi) {
-      ctx.strokeStyle = Ink.of('accent');
-      ctx.globalAlpha = 0.45;
-      ctx.beginPath();
-      ctx.moveTo(xAt(currentIteration), padT);
-      ctx.lineTo(xAt(currentIteration), padT + plotH);
-      ctx.stroke();
-      ctx.globalAlpha = 1;
-    }
+    // Where the frame on screen sits, so the number in the strip has a home.
+    const current = Viewer.frame ? Viewer.frame.iteration : null;
+    _axes(ctx, w, h, {
+      x: { lo: xLo, hi: xHi, format: v => Math.round(v).toLocaleString('en-US') },
+      y: {
+        lo, hi,
+        format: v => asShare
+          ? `${+v.toFixed(2)}%`
+          : (Math.abs(v) >= 1000 ? Math.round(v).toLocaleString('en-US')
+                                 : String(+v.toFixed(Math.abs(v) < 1 ? 3 : 2)))
+      },
+      guides: current !== null && current >= xLo && current <= xHi
+        ? [{ axis: 'x', at: current, colour: Ink.of('accent') }] : [],
+      pad
+    });
 
     // The curve
+    const xAt = v => (xHi === xLo ? w / 2 : ((v - xLo) / (xHi - xLo)) * w);
+    const yAt = v => h - ((v - lo) / (hi - lo)) * h;
     ctx.strokeStyle = Ink.of('accent');
     ctx.lineWidth = 1.6;
     ctx.beginPath();
@@ -215,7 +172,7 @@ const StatDetail = {
     ctx.fillStyle = Ink.of('dim');
     ctx.font = '9px system-ui, sans-serif';
     const axisLabel = 'iteration';
-    ctx.fillText(axisLabel, padL + plotW - ctx.measureText(axisLabel).width, h - 1);
+    ctx.fillText(axisLabel, w - ctx.measureText(axisLabel).width, h + pad.bottom - 1);
 
     const payload = SeriesLoad.cache.get(Viewer.runId);
     const sampled = payload && payload.sampled;
