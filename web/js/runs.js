@@ -186,8 +186,8 @@ const RunsView = {
    * times a second. A visitor who only reads the front page or the explanation
    * now downloads no Python at all.
    */
-  async activate() {
-    if (this._activated) return;
+  async setActive(active) {
+    if (!active || this._activated) return;
     this._activated = true;
 
     await API.choose();

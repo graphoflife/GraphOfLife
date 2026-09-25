@@ -64,14 +64,12 @@ const Home = {
   index: 0,
   direction: 1,
   accumulator: 0,
-  lastTime: 0,
 
   renderer: null,
   layout: null,
   metrics: null,
   settings: null,
 
-  started: false,
   active: false,
   loaded: false,
   failed: false,
@@ -106,11 +104,6 @@ const Home = {
     }
     window.addEventListener('resize', () => this.resize());
 
-    this.setActive(App.view === 'home');
-    if (!this.started) {
-      this.started = true;
-      requestAnimationFrame(t => this.animate(t));
-    }
   },
 
   /**
@@ -296,29 +289,9 @@ const Home = {
     this.renderer.resize();
   },
 
-  animate(time) {
-    // Everything is wrapped so the next frame is always asked for. The loop
-    // re-arms itself at the end of its own body, which means one thrown error
-    // would otherwise stop the backdrop for good rather than for a frame.
-    try {
-      this.tick(time);
-    } catch (err) {
-      if (!this._complained) {
-        this._complained = true;
-        console.warn('home backdrop:', err.message);
-      }
-    }
-    requestAnimationFrame(t => this.animate(t));
-  },
-
-  tick(time) {
-    // Never negative. A timestamp that goes backwards — which happens when
-    // a tab is restored, and whenever the loop is driven by hand — would
-    // otherwise turn the camera the wrong way and rewind playback.
-    const dt = Math.max(0, Math.min(0.1, (time - this.lastTime) / 1000)) || 0;
-    this.lastTime = time;
-
-    if (!this.active || !this.loaded || !this.layout || !this.renderer) return;
+  /** One animation frame, handed over by App while the front page is shown. */
+  tick(dt) {
+    if (!this.loaded || !this.layout || !this.renderer) return;
 
     // Move to the next frame first, so the check below sees it.
     //

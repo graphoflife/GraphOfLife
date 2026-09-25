@@ -30,7 +30,6 @@ const Explain = {
   script: null,
   lines: [],
   view: null,
-  started: false,
   active: false,
 
   /** The emblem behind each step's words, faint enough to stay a watermark. */
@@ -178,17 +177,12 @@ Object.assign(Explain, {
     document.getElementById('explainPrev').addEventListener('click', () => this.go(-1));
     document.getElementById('explainNext').addEventListener('click', () => this.go(1));
     document.addEventListener('keydown', e => {
-      if (App.view !== 'explain') return;
+      if (!this.active) return;
       const tag = document.activeElement && document.activeElement.tagName;
       if (tag === 'INPUT' || tag === 'SELECT' || tag === 'TEXTAREA') return;
       if (e.key === 'ArrowLeft') { this.go(-1); e.preventDefault(); }
       if (e.key === 'ArrowRight') { this.go(1); e.preventDefault(); }
     });
-
-    if (!this.started) {
-      this.started = true;
-      requestAnimationFrame(t => this.frame(t));
-    }
   },
 
   setActive(active) {
@@ -508,10 +502,14 @@ Object.assign(Explain, {
     if (stage) StepView.show(this.view, stage, { effect: step.effect || null });
   },
 
-  frame(now) {
-    const dt = Math.max(0, Math.min(0.05, (now - (this._last || now)) / 1000));
-    this._last = now;
-    if (this.active && this.view && this.stages) {
+  /**
+   * One animation frame, handed over by App while the explanation is shown.
+   * Stepped at most a twentieth of a second at a time, so a slow frame slows
+   * the picture rather than making it jump.
+   */
+  tick(elapsed, now) {
+    const dt = Math.min(0.05, elapsed);
+    if (this.view && this.stages) {
       StepView.tick(this.view, dt);
       StepView.gaze(this.view, now / 1000);
       StepView.mutating(this.view);
@@ -528,6 +526,5 @@ Object.assign(Explain, {
         this.noteEl.style.backgroundImage = this.emblem(want);
       }
     }
-    requestAnimationFrame(t => this.frame(t));
   }
 });

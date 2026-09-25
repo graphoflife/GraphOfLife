@@ -1,6 +1,16 @@
-/* Tab switching, panel resizing, and start-up. */
+/* Tab switching, panel resizing, the animation loop, and start-up. */
 const App = {
   view: 'home',
+
+  /**
+   * The views, by the name their tab carries. Each is told when it is shown
+   * and when it is left (setActive), may be asked to pick up what hiding the
+   * window cut short (resume), and, if it moves, is handed every animation
+   * frame while it is on screen (tick). Opening, leaving and animating a view
+   * were written out by name here, a branch at a time, and a view whose
+   * branch was missing was how Research came back blank.
+   */
+  views: null,
 
   init() {
     // The wordmark carries data-view too, so it is a way back to the front
@@ -25,6 +35,7 @@ const App = {
     Explain.init();
     Research.init();
     Home.init();
+    this.views = { home: Home, explain: Explain, runs: RunsView, viewer: Viewer, research: Research };
 
     // Both layouts are two panes plus a drag handle; the handle sets the width
     // of the second column and the choice is remembered per layout.
@@ -35,6 +46,33 @@ const App = {
     // everything else showView does, which is how the wordmark came to be the
     // selected tab without looking like it.
     this.showView(this.view);
+    requestAnimationFrame(time => this.frame(time));
+  },
+
+  /**
+   * One animation loop for the page, handing each frame to the view on
+   * screen, with the time since the last one.
+   *
+   * The front page, the Viewer and the Explanation each ran a loop of their
+   * own, all the time, and each asked on every frame whether it was showing.
+   * Only the front page caught an error, so one throw in the Viewer or the
+   * Explanation stopped its loop for good.
+   */
+  frame(time) {
+    // Never negative, and never a leap: a timestamp can go backwards when a
+    // tab is restored, and a long gap would otherwise turn the camera and
+    // advance playback by all of it at once.
+    const dt = Math.max(0, Math.min(0.1, (time - (this._lastTime ?? time)) / 1000)) || 0;
+    this._lastTime = time;
+    try {
+      this.views[this.view].tick?.(dt, time);
+    } catch (err) {
+      if (!this._complained) {
+        this._complained = true;
+        console.warn(`${this.view}:`, err);
+      }
+    }
+    requestAnimationFrame(t => this.frame(t));
   },
 
   /**
@@ -91,8 +129,7 @@ const App = {
    * load finished, so this asks rather than reloading what is already drawn.
    */
   reloadActive() {
-    if (this.view === 'research') Research.resume();
-    if (this.view === 'viewer') StatDetail.resume();
+    this.views[this.view].resume?.();
   },
 
   showView(name) {
@@ -109,30 +146,9 @@ const App = {
       view.classList.toggle('active', view.id === `view-${name}`);
     }
 
-    // The backdrop runs only while it is being looked at, and its canvas has
-    // no size until the view is shown, so it is told both ways round.
-    Home.setActive(name === 'home');
-
-    // Choosing a backend means, on a static host, downloading a Python
-    // runtime. That waits until somebody actually wants to run something.
-    if (name === 'runs') RunsView.activate();
-    Research.setActive(name === 'research');
-    Explain.setActive(name === 'explain');
-    Viewer.setActive(name === 'viewer');
-
-    // The canvas has no size while hidden, so it must be measured on reveal.
-    // Done synchronously as well as on the next frame: the element already has
-    // its box by now, and waiting on rAF alone can leave a blank canvas.
-    if (name === 'viewer') {
-      StatDetail.resume();
-      Viewer.resize();
-      if (Viewer.frame) Viewer.updateCharts();
-      requestAnimationFrame(() => Viewer.resize());
-    }
-  },
-
-  isViewerActive() {
-    return this.view === 'viewer';
+    // Every view is told, both ways round: what a view does on the way in and
+    // on the way out is its own business.
+    for (const [key, view] of Object.entries(this.views)) view.setActive(key === name);
   }
 };
 

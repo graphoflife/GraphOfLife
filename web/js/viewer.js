@@ -41,8 +41,6 @@ const Viewer = {
 
   playAccumulator: 0,
 
-  lastTime: 0,
-
   phaseFilter: 'all',
 
   // The starting look is the default preset, Presets.builtIn('default'),
@@ -104,7 +102,6 @@ const Viewer = {
     window.addEventListener('resize', () => this.resize());
 
     this.resize();
-    requestAnimationFrame(t => this.animate(t));
   },
 
   bindPlayback() {
@@ -118,7 +115,7 @@ const Viewer = {
     slider.addEventListener('input', () => this.goToPosition(Number(slider.value)));
 
     document.addEventListener('keydown', e => {
-      if (!App.isViewerActive()) return;
+      if (!this.active) return;
       const tag = document.activeElement && document.activeElement.tagName;
       if (tag === 'INPUT' || tag === 'SELECT' || tag === 'TEXTAREA') return;
 
@@ -319,7 +316,12 @@ const Viewer = {
   },
 
   /**
-   * Re-read the list of runs on the way into the tab.
+   * Shown or left.
+   *
+   * On the way in the canvas is measured, since it has no size while hidden:
+   * at once, because the element already has its box, and again on the next
+   * frame, because waiting on that alone could leave it blank. Then whatever
+   * was cut short is picked up, and the list of runs is read again.
    *
    * Every time rather than once, because the list goes stale the moment a
    * simulation is created or records its first frames — and the tab it is
@@ -330,13 +332,23 @@ const Viewer = {
    * keeps playing, and the picker is a convenience rather than the view.
    */
   async setActive(active) {
+    this.active = active;
     if (!active) return;
+    this.resize();
+    if (this.frame) this.updateCharts();
+    requestAnimationFrame(() => this.resize());
+    this.resume();
     try {
       const data = await API.listRuns();
       this.syncRunPicker(data.runs || []);
     } catch (err) {
       console.warn('viewer: could not list the simulations:', err.message);
     }
+  },
+
+  /** Back from a hidden window: the open statistic's history, if cut short. */
+  resume() {
+    StatDetail.resume();
   },
 
   async load(runId) {
@@ -605,26 +617,17 @@ const Viewer = {
     }
   },
 
-  animate(time) {
-    // Never negative. A timestamp that goes backwards — which happens when
-    // a tab is restored, and whenever the loop is driven by hand — would
-    // otherwise turn the camera the wrong way and rewind playback.
-    const dt = Math.max(0, Math.min(0.1, (time - this.lastTime) / 1000)) || 0;
-    this.lastTime = time;
-
-    // Nothing to do while the reader is looking at another tab.
-    //
-    // This loop used to run whatever was on screen. The canvas keeps its size
-    // when the view is hidden, so every check that guards against drawing into
-    // nothing still passed, and the Viewer went on projecting, sorting and
-    // painting a few thousand agents onto a canvas nobody could see — measured
-    // at sixty draws in sixty frames, 4.9ms each, while the front page was
-    // trying to animate. Playback stays where it is and picks up on return.
-    if (!App.isViewerActive()) {
-      requestAnimationFrame(t => this.animate(t));
-      return;
-    }
-
+  /**
+   * One animation frame, handed over by App while the Viewer is on screen.
+   *
+   * Only then: this used to run whatever was showing. The canvas keeps its
+   * size when the view is hidden, so every check that guards against drawing
+   * into nothing still passed, and the Viewer went on projecting, sorting and
+   * painting a few thousand agents onto a canvas nobody could see — measured
+   * at sixty draws in sixty frames, 4.9ms each, while the front page was
+   * trying to animate. Playback stays where it is and picks up on return.
+   */
+  tick(dt) {
     // With a worker this returns immediately: the layout is advancing on its
     // own thread and the loop's only job is to draw what has arrived. Without
     // one it advances the layout here, as before.
@@ -635,10 +638,7 @@ const Viewer = {
     // and drawing the new ids against them paints one frame of nonsense. The
     // canvas simply keeps what it already shows for that moment, and nothing
     // is framed against coordinates that are about to be replaced.
-    if (!this.layout.readyFor(this.frame)) {
-      requestAnimationFrame(t => this.animate(t));
-      return;
-    }
+    if (!this.layout.readyFor(this.frame)) return;
 
     // Turned before the framing is worked out, so that with Fit view on the
     // camera is fitting the orientation about to be drawn rather than the one
@@ -690,6 +690,5 @@ const Viewer = {
     }
 
     this.renderer.draw(this.frame, this.metrics, this.layout, this.settings);
-    requestAnimationFrame(t => this.animate(t));
   }
 };
