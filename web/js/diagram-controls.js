@@ -128,7 +128,7 @@ const DiagramControls = {
       theses.className = 'seg diagram-theses';
       theses.title = 'The claims this project makes, each as a ready-made chart';
       const current = this.activeThesis();
-      for (const thesis of this.THESES) {
+      for (const thesis of THESES) {
         const button = document.createElement('button');
         button.type = 'button';
         button.className = 'seg-btn' + (current && current.id === thesis.id ? ' active' : '');

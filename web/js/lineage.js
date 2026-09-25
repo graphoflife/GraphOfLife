@@ -130,7 +130,7 @@ const Lineage = {
     // it became abortable there was nothing to check *between* — leaving it
     // meant waiting for it anyway, and the answer arrived and painted over
     // whatever had replaced it. The signal is the whole fix.
-    return Jobs.run('lineage', 'Reading the lineage window', async (job) => {
+    return Jobs.run(this, 'Reading the lineage window', async (job) => {
       this.say('Reading the window…');
       try {
         // One request. The counting happens where the frames are, and only the

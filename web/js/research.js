@@ -130,7 +130,8 @@ const Research = {
    * exact "lineage does not load" this was meant to fix, made worse.
    */
   resume() {
-    if (this.MODES[this.mode].view && Jobs.interrupted(this.mode)) this.show(this.mode);
+    const { view } = this.MODES[this.mode];
+    if (view && Jobs.due(view)) this.show(this.mode);
   },
 
   show(mode) {
@@ -138,9 +139,9 @@ const Research = {
     // Whatever the mode you just left was reading, it is not what you are
     // looking at now. This is the whole of the fix: one line, in the one place
     // that knows the view changed, rather than each view checking an epoch it
-    // might forget to check — and two of the four did forget. A view loads
-    // under its mode's name, so the mode is the owner to keep.
-    Jobs.only(mode);
+    // might forget to check — and two of the four did forget. A view owns its
+    // own loads, so the view is what to keep; a page of words owns none.
+    Jobs.only(this.MODES[mode].view);
     const group = this.group;
 
     for (const button of this.groupBar.querySelectorAll('button')) {
@@ -216,8 +217,9 @@ const Research = {
                    : (waiting ? '' : this.runs[0].id);
       this.picker.value = wanted;
       // Only load when the choice actually changed. Re-entering the tab should
-      // not refetch a window that is already drawn — the lineage keeps no
-      // frames, so that would be two hundred requests for the same picture.
+      // not refetch a window that is already drawn — the lineage window is one
+      // long build on the server, and that would be the whole of it again for
+      // the same picture.
       if (wanted !== had && this.active) await this.open(wanted);
     } catch (err) {
       say(`Could not reach the simulations: ${err.message}`);
@@ -226,7 +228,7 @@ const Research = {
 
   async open(runId) {
     this.runId = runId || null;
-    Jobs.only(this.mode);
+    Jobs.only(this.view);
     await this.view?.load(this.runId);
   }
 };

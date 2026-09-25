@@ -182,7 +182,7 @@ const StatDetail = {
    * history button comes back.
    */
   resume() {
-    if (this.currentKey && Viewer.runId && Jobs.interrupted('stat-detail')) {
+    if (this.currentKey && Viewer.runId && Jobs.due(this)) {
       this.load(Viewer.runId, [this.currentKey]);
     }
   },
@@ -211,7 +211,7 @@ const StatDetail = {
     // Drawn once more when the load ends, however it ends: a stopped load
     // otherwise left the chart saying it was loading and the trajectory
     // without its button to carry on.
-    return Jobs.run('stat-detail', 'Summarising the run', (job) => SeriesLoad.climb(runId, keys, {
+    return Jobs.run(this, 'Summarising the run', (job) => SeriesLoad.climb(runId, keys, {
       job, onStep: drawn
     })).finally(drawn).catch(err => {
       // After the last draw, which would otherwise write over it.
@@ -277,7 +277,7 @@ const StatDetail = {
     if (!ys.length) {
       ctx.fillStyle = Ink.of('dim');
       ctx.font = '12px system-ui, sans-serif';
-      ctx.fillText(Jobs.busy('stat-detail')
+      ctx.fillText(Jobs.busy(this)
         ? 'Summarising the run\u2026'
         : 'No data for this statistic under the current phase filter.', 10, h / 2);
       this.footEl.textContent = '';

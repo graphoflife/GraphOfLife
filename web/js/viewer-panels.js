@@ -531,7 +531,7 @@ Object.assign(Viewer, {
     const s = this.settings;
     const button = document.getElementById('btnTrajLoad');
     const payload = SeriesLoad.cache.get(this.runId);
-    const loading = Jobs.busy('stat-detail');
+    const loading = Jobs.busy(StatDetail);
 
     // Offered whenever the history does not yet answer these two axes — never
     // loaded, cut short, or loaded without the graph statistics one of them

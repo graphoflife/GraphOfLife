@@ -124,7 +124,7 @@ async function test_a_cancelled_job_neither_reports_nor_counts_as_finished() {
   Jobs.cancelAll();
   const reports = [];
   const realShow = Jobs._show;
-  Jobs._show = (owner, text, done, total) => reports.push([owner, done, total]);
+  Jobs._show = (text, done, total) => reports.push([text, done, total]);
   try {
 
   let job = null;
@@ -144,12 +144,12 @@ async function test_a_cancelled_job_neither_reports_nor_counts_as_finished() {
   if (Jobs.finished('flow')) {
     throw new Error('a cancelled job was recorded as finished');
   }
-  if (!Jobs.interrupted('flow')) {
-    throw new Error('a cancelled job was not recorded as interrupted, so nothing would resume it');
+  if (!Jobs.due('flow')) {
+    throw new Error('a cancelled job was not left due a load, so nothing would resume it');
   }
 
   await Jobs.run('flow', 'reading', async () => 'ok');
-  if (!Jobs.finished('flow') || Jobs.interrupted('flow')) {
+  if (!Jobs.finished('flow') || Jobs.due('flow')) {
     throw new Error('a job that ran to the end was not recorded as finished');
   }
   } finally {
@@ -775,7 +775,7 @@ async function test_the_bar_counts_samples_and_only_moves_forward() {
 
 // ---- Diagrams: a control that changes what is plotted loads it -------------
 
-const DIAGRAMS_SOURCE = ['diagrams.js', 'diagram-controls.js']
+const DIAGRAMS_SOURCE = ['theses.js', 'diagrams.js', 'diagram-controls.js']
   .map(name => fs.readFileSync(path.join(root, 'web', 'js', name), 'utf8')).join('\n');
 
 /**
@@ -824,7 +824,7 @@ async function test_a_change_that_needs_nothing_new_draws_without_loading() {
   const drawn = diagrams.drawn;
   diagrams.settings.timeline.logY = true;          // what the log y toggle does
   const pending = diagrams.refresh();
-  assert(!Jobs.busy('diagrams'),
+  assert(!Jobs.busy(diagrams),
     'a redraw started a job, so the bar would flash on every keystroke in the title');
   await pending;
   assert(!calls.length, 'a change of scale asked the server for the run again');
@@ -869,6 +869,19 @@ async function test_a_frame_chart_reads_its_frames_once() {
   diagrams.settings.histogram.iteration = 3;        // a different window
   await diagrams.refresh();
   assert(reads > first, 'moving to another iteration did not read it');
+}
+
+function test_the_chart_says_which_thesis_it_is_making() {
+  // Worked out from what is plotted, not remembered from a button: a chart
+  // put together by hand makes the argument as much as one filled in by it,
+  // and a chart with another statistic added no longer makes it.
+  const diagrams = diagramsWith(loaderFor(pretendRun(20)));
+  diagrams.settings.timeline.lines = ['ricciCurvature', 'dimension'].map(lineOf);
+  const found = diagrams.activeThesis();
+  assert(found && found.id === 'curvature',
+    `a chart of curvature and dimension is making ${found ? found.id : 'no argument'}`);
+  diagrams.settings.timeline.lines.push(lineOf('nodes'));
+  assert(diagrams.activeThesis() === null, 'a chart with another statistic added still claims a thesis');
 }
 
 function test_no_diagram_control_draws_without_asking_what_it_needs() {
@@ -943,6 +956,7 @@ const tests = Object.entries({
   test_a_redraw_during_a_load_leaves_the_load_running,
   test_a_frame_chart_reads_its_frames_once,
   test_no_diagram_control_draws_without_asking_what_it_needs,
+  test_the_chart_says_which_thesis_it_is_making,
   test_every_colour_a_chart_asks_for_is_in_the_stylesheet,
   test_no_canvas_writes_a_colour_out
 }).sort(([a], [b]) => a.localeCompare(b));

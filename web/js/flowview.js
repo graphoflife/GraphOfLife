@@ -112,7 +112,7 @@ const FlowView = {
     // painted so far in `this.frames`, which is why this also asks whether the
     // last read *finished*. Without that, leaving the view mid-read and coming
     // back redrew the partial window as though it were the whole one.
-    if (from === null && this.runId === runId && this.frames && Jobs.finished('flow')) {
+    if (from === null && this.runId === runId && this.frames && Jobs.finished(this)) {
       this.recompute();
       return;
     }
@@ -134,7 +134,7 @@ const FlowView = {
     this.windowTotal = plan.total;
     FrameWindow.bindScrubber(document.getElementById('flowWindow'), plan);
 
-    return Jobs.run('flow', 'Reading frames', async (job) => {
+    return Jobs.run(this, 'Reading frames', async (job) => {
       const frames = [];
       let painted = 0;
       let seen = 0;

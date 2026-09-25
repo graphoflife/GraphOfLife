@@ -12,10 +12,13 @@
  *
  * So there is one mechanism, and it hangs on two words:
  *
- *   owner   what the work is for — a view, a panel. Starting a job for an
- *           owner cancels that owner's previous job, because asking a second
- *           question of the same thing means you no longer want the first
- *           answer.
+ *   owner   the view or panel the work is for — the object itself rather
+ *           than a name for it, so there is nothing to keep in step. Owners
+ *           were strings once, and Research's cancelling depended on each
+ *           view spelling its own the way its mode was spelled. Starting a
+ *           job for an owner cancels that owner's previous job, because asking
+ *           a second question of the same thing means you no longer want the
+ *           first answer.
  *   signal  an AbortSignal that reaches the actual fetch. Cancelling ends the
  *           request rather than merely ignoring it.
  *
@@ -55,11 +58,11 @@ const Jobs = {
       get cancelled() { return controller.signal.aborted; },
       report: (done, total, text) => {
         if (controller.signal.aborted) return;
-        this._show(owner, text || label, done, total);
+        this._show(text || label, done, total);
       }
     };
     this._live.set(owner, { job, controller });
-    this._show(owner, label, 0, 0);
+    this._show(label, 0, 0);
 
     return (async () => {
       try {
@@ -73,7 +76,7 @@ const Jobs = {
       } finally {
         if (this._live.get(owner) && this._live.get(owner).job === job) {
           this._live.delete(owner);
-          this._clear(owner);
+          this._clear();
         }
       }
     })();
@@ -85,7 +88,7 @@ const Jobs = {
     if (!live) return;
     this._live.delete(owner);
     live.controller.abort();
-    this._clear(owner);
+    this._clear();
   },
 
   /** Stop everything that is not this owner. The whole point of the file. */
@@ -100,27 +103,24 @@ const Jobs = {
     for (const owner of [...this._live.keys()]) this.cancel(owner);
   },
 
-  /**
-   * Whether this owner's last job ran to the end.
-   *
-   * False both for work that was interrupted and for work never started, and
-   * the caller wants the same thing in either case: to load.
-   */
+  /** Whether this owner's last job ran to the end. */
   finished(owner) {
     return this._done.has(owner);
   },
 
   /**
-   * Whether this owner has work that was begun and did not finish — cut short
-   * by leaving the view or hiding the tab — and is not running now.
+   * Whether this owner is due a load: nothing is running for it, and nothing
+   * it started ran to the end — cut short by leaving the view or hiding the
+   * tab, or never begun. A caller coming back wants the same in both cases.
+   * This was called interrupted(), which it also said of work never started.
    */
-  interrupted(owner) {
+  due(owner) {
     return !this._live.has(owner) && !this._done.has(owner);
   },
 
-  /** Whether anything is running, for a caller that wants to avoid piling on. */
+  /** Whether this owner has a job running. */
   busy(owner) {
-    return owner === undefined ? this._live.size > 0 : this._live.has(owner);
+    return this._live.has(owner);
   },
 
   // ---- the bar ----------------------------------------------------------
@@ -144,7 +144,7 @@ const Jobs = {
     this._clear();
   },
 
-  _show(owner, text, done, total) {
+  _show(text, done, total) {
     const el = this._bar;
     if (!el) return;
     el.hidden = false;

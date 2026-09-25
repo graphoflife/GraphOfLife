@@ -689,7 +689,9 @@ def _reconstruct_delta(frame: Dict[str, Any], previous: Dict[str, Any] | None) -
 #:
 #: Kept as a list rather than inferred, because a light row has to carry these
 #: as explicit nulls: a reader that saw them simply absent would treat a run
-#: half-summarised as a run that never recorded them.
+#: half-summarised as a run that never recorded them. It is also the one list
+#: the depth of a request is decided from (needs_graph), and a reply carries
+#: it to the page, which used to keep a copy of its own.
 HEAVY_KEYS = (
     "cycleRank", "loopDensity", "bridges", "cutRisk", "coreShare", "components",
     "spectralGap",
