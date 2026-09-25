@@ -69,6 +69,12 @@
 
   /* Body text one step softer than --text, for prose inside a dialog. */
   --text-soft: #c2d0dc;
+  /* The lines of a chart's frame, for canvases, which read them through
+     ink.js. Translucent, so they sit the same step above whichever surface the
+     chart is drawn on rather than being tuned to one. */
+  --chart-grid: rgba(255, 255, 255, 0.07);
+  --chart-tick: rgba(255, 255, 255, 0.35);
+  --chart-axis: rgba(255, 255, 255, 0.18);
 
   /* The code viewer. Its syntax colours are a self-contained scheme — the
      family GitHub uses, which is where most people last read Python — and are

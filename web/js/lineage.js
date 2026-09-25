@@ -412,7 +412,7 @@ const Lineage = {
 
     const plan = this.layout();
     if (!plan) {
-      ctx.fillStyle = '#6b7c8d';
+      ctx.fillStyle = Ink.of('dim');
       ctx.font = '12px system-ui, sans-serif';
       ctx.textAlign = 'center';
       ctx.fillText(this.forest ? 'Nothing lasted that long.' : 'No run loaded.',
@@ -456,7 +456,7 @@ const Lineage = {
     // The time axis, over the top.
     ctx.strokeStyle = 'rgba(190, 200, 215, 0.16)';
     ctx.lineWidth = 1;
-    ctx.fillStyle = '#8fa3b5';
+    ctx.fillStyle = Ink.of('label');
     ctx.font = '10px ui-monospace, monospace';
     ctx.textAlign = 'center';
     const ticks = Math.min(8, columns.length - 1);

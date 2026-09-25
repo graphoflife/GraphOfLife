@@ -983,14 +983,14 @@ function _axes(ctx, w, h, spec) {
     for (const tick of _axisTicks(x.lo, x.hi, across)) {
       const at = Math.round(place(x, tick) * w) + 0.5;
       if (grid) {
-        ctx.strokeStyle = 'rgba(255,255,255,0.07)';
+        ctx.strokeStyle = Ink.of('grid');
         ctx.beginPath(); ctx.moveTo(at, 0); ctx.lineTo(at, h); ctx.stroke();
       }
       // A mark on the axis itself, so a tick is still located when the grid is
       // switched off and the number below it has nothing pointing at it.
-      ctx.strokeStyle = 'rgba(255,255,255,0.35)';
+      ctx.strokeStyle = Ink.of('tick');
       ctx.beginPath(); ctx.moveTo(at, h); ctx.lineTo(at, h + 4); ctx.stroke();
-      ctx.fillStyle = '#8fa3b5';
+      ctx.fillStyle = Ink.of('label');
       const text = x.format ? x.format(tick) : String(tick);
       // Held inside the canvas rather than centred and allowed to run off it.
       // The last tick sits on the right edge, so a centred label is half
@@ -1006,12 +1006,12 @@ function _axes(ctx, w, h, spec) {
     for (const tick of _axisTicks(y.lo, y.hi, down)) {
       const at = Math.round(h - place(y, tick) * h) + 0.5;
       if (grid) {
-        ctx.strokeStyle = 'rgba(255,255,255,0.07)';
+        ctx.strokeStyle = Ink.of('grid');
         ctx.beginPath(); ctx.moveTo(0, at); ctx.lineTo(w, at); ctx.stroke();
       }
-      ctx.strokeStyle = 'rgba(255,255,255,0.35)';
+      ctx.strokeStyle = Ink.of('tick');
       ctx.beginPath(); ctx.moveTo(-4, at); ctx.lineTo(0, at); ctx.stroke();
-      ctx.fillStyle = '#8fa3b5';
+      ctx.fillStyle = Ink.of('label');
       const text = y.format ? y.format(tick) : String(tick);
       // Nudged in from the edges for the same reason, so the top and bottom
       // labels are not clipped by the plot's own boundary.
@@ -1029,7 +1029,7 @@ function _axes(ctx, w, h, spec) {
     if (t < -0.02 || t > 1.02) continue;
     ctx.save();
     ctx.setLineDash([5, 4]);
-    ctx.strokeStyle = guide.colour || 'rgba(255,255,255,0.5)';
+    ctx.strokeStyle = guide.colour || Ink.of('label');
     ctx.beginPath();
     if (guide.axis === 'y') {
       const at = Math.round(h - t * h) + 0.5;
@@ -1042,7 +1042,7 @@ function _axes(ctx, w, h, spec) {
     ctx.restore();
   }
 
-  ctx.strokeStyle = 'rgba(255,255,255,0.18)';
+  ctx.strokeStyle = Ink.of('axis');
   ctx.strokeRect(0.5, 0.5, w - 1, h - 1);
   ctx.restore();
 }
@@ -1061,12 +1061,12 @@ function _chrome(ctx, pad, outer, chrome) {
   const w = outer.width, h = outer.height;
 
   if (chrome.title) {
-    ctx.fillStyle = '#e6edf3';
+    ctx.fillStyle = Ink.of('text');
     ctx.font = '600 13px system-ui, sans-serif';
     ctx.fillText(chrome.title, pad.left, 17);
   }
   ctx.font = '11px system-ui, sans-serif';
-  ctx.fillStyle = '#8fa3b5';
+  ctx.fillStyle = Ink.of('label');
 
   if (chrome.xLabel) {
     const width = ctx.measureText(chrome.xLabel).width;
@@ -1086,7 +1086,7 @@ function _chrome(ctx, pad, outer, chrome) {
     const y = h - 6 - (chrome.legend.length - 1 - i) * 14;
     ctx.fillStyle = entry.colour;
     ctx.fillRect(pad.left, y - 7, 14, 3);
-    ctx.fillStyle = '#8fa3b5';
+    ctx.fillStyle = Ink.of('label');
     ctx.fillText(entry.label, pad.left + 20, y);
   }
   ctx.restore();
@@ -1149,7 +1149,7 @@ function _binOf(value, edges) {
 }
 
 function _noData(ctx, w, h, message = 'no data') {
-  ctx.fillStyle = '#5b6b7c';
+  ctx.fillStyle = Ink.of('dim');
   ctx.font = '11px system-ui, sans-serif';
   ctx.fillText(message, 8, h / 2);
 }
@@ -1235,7 +1235,7 @@ function drawHistogram(canvas, values, options = {}) {
   if (chrome) { _chrome(ctx, pad, outer, chrome); return; }
 
   const back = v => logScale ? Metrics.undoLog(v, signed) : v;
-  ctx.fillStyle = '#8fa3b5';
+  ctx.fillStyle = Ink.of('label');
   ctx.font = '10px system-ui, sans-serif';
   ctx.fillText(format(back(lo)), 2, h - 4);
   const hiText = format(back(hi));
@@ -1356,7 +1356,7 @@ function drawHeatmap(canvas, xs, ys, options = {}) {
   const backX = v => logX ? Metrics.undoLog(v, signedX) : v;
   const backY = v => logY ? Metrics.undoLog(v, signedY) : v;
 
-  ctx.fillStyle = '#8fa3b5';
+  ctx.fillStyle = Ink.of('label');
   ctx.font = '10px system-ui, sans-serif';
 
   // y axis: high at the top, low at the bottom of the plot.
@@ -1458,7 +1458,7 @@ function drawTrajectory(canvas, points, options = {}) {
   const first = points[0], last = points[points.length - 1];
   ctx.fillStyle = colormapCss(colormap, 0, 1, reverse);
   ctx.beginPath(); ctx.arc(px(first.x), py(first.y), 3.5, 0, Math.PI * 2); ctx.fill();
-  ctx.strokeStyle = '#e6edf3'; ctx.lineWidth = 1; ctx.stroke();
+  ctx.strokeStyle = Ink.of('text'); ctx.lineWidth = 1; ctx.stroke();
   ctx.fillStyle = colormapCss(colormap, 1, 1, reverse);
   ctx.beginPath(); ctx.arc(px(last.x), py(last.y), 3.5, 0, Math.PI * 2); ctx.fill();
   ctx.stroke();
@@ -1473,7 +1473,7 @@ function drawTrajectory(canvas, points, options = {}) {
   const back = (v, log) => (log ? Metrics.undoLog(v, v < 0) : v);
 
   ctx.font = '10px system-ui, sans-serif';
-  ctx.fillStyle = '#8fa3b5';
+  ctx.fillStyle = Ink.of('label');
   ctx.fillText(fmt(back(hiY, logY)), 2, padTop + 8);
   ctx.fillText(fmt(back(loY, logY)), 2, padTop + plotH);
   ctx.fillText(fmt(back(loX, logX)), padLeft, h - 17);
@@ -1481,7 +1481,7 @@ function drawTrajectory(canvas, points, options = {}) {
   ctx.fillText(hiXText, w - ctx.measureText(hiXText).width - 2, h - 17);
 
   if (!chrome) {
-    ctx.fillStyle = '#9fb0c0';
+    ctx.fillStyle = Ink.of('label');
     ctx.font = '10.5px system-ui, sans-serif';
     ctx.fillText(`${yLabel} \u2191   vs   ${xLabel} \u2192`, padLeft, padTop - 1);
   }
@@ -1489,13 +1489,13 @@ function drawTrajectory(canvas, points, options = {}) {
   // A strip saying which end of the colour map is early and which is late.
   const barW = 90, barH = 7, barX = padLeft, barY = h - 12;
   drawColormapStrip(ctx, barX, barY, barW, barH, colormap, reverse);
-  ctx.fillStyle = '#8fa3b5';
+  ctx.fillStyle = Ink.of('label');
   ctx.font = '9.5px system-ui, sans-serif';
   ctx.fillText(`iter ${Math.round(loT).toLocaleString('en-US')}`, barX + barW + 6, barY + barH);
   const endText = `\u2192 ${Math.round(hiT).toLocaleString('en-US')}`;
   ctx.fillText(endText, barX + barW + 6 + ctx.measureText(`iter ${Math.round(loT).toLocaleString('en-US')}`).width + 6, barY + barH);
   if (footer) {
-    ctx.fillStyle = '#6b7c8d';
+    ctx.fillStyle = Ink.of('dim');
     ctx.fillText(footer, w - ctx.measureText(footer).width - 2, barY + barH);
   }
   if (chrome) _chrome(ctx, pad, outer, chrome);

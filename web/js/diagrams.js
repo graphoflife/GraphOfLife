@@ -434,40 +434,81 @@ const Diagrams = {
   },
 
   /**
-   * Fetch whatever this tab needs, then draw.
+   * Bring the chart up to date: load whatever it lacks, then draw.
    *
-   * One job for the whole tab, whichever kind it is. Starting a second read
-   * cancels the first, which is what switching tab or run means, and the
-   * requests themselves stop rather than finishing into a chart nobody is
-   * looking at any more.
+   * Every control ends here, so none of them has to know whether what it
+   * changed needs data. They used to choose between this and draw() one by
+   * one, and once the depth a run is loaded to depended on which statistics
+   * are plotted, the two that change a statistic were still choosing draw():
+   * switching a line to bridges left it empty, the chart saying "Reading…"
+   * with nothing reading.
+   *
+   * Nothing missing draws at once and starts no job, so the bar does not
+   * flash on every keystroke in the title — and whatever is still loading is
+   * for a chart no longer on screen, so it stops. A load already under way for
+   * exactly what is missing is left to finish. Anything else is one job for
+   * the whole tab, and starting it cancels the one before.
    */
   async refresh() {
     if (!this.canvas) return;
+    const wants = this.wants();
+    if (!wants) {
+      Jobs.cancel('diagrams');
+      this.draw();
+      return;
+    }
+    if (wants === this.wanted && Jobs.busy('diagrams')) {
+      this.draw();
+      return;
+    }
+    this.wanted = wants;
     return Jobs.run('diagrams', 'Reading', (job) => this._refresh(job));
+  },
+
+  /**
+   * What the chart needs and does not have yet, named so that two asks for
+   * the same thing compare equal — or null when it has everything.
+   */
+  wants() {
+    if (this.tab.kind === 'frame') {
+      const span = this.frameSpan();
+      return span && !(this.frames && this.framesFor === span.key) ? span.key : null;
+    }
+    const needs = [...this.needsSeries()];
+    if (needs.every(([id, stats]) => SeriesLoad.ready(id, stats))) return null;
+    return needs.map(([id, stats]) => `${id}:${[...new Set(stats)].sort().join('+')}`)
+      .sort().join(' ');
+  },
+
+  /**
+   * The frames a frame tab reads — where they start, how many, and a key
+   * naming exactly that read. Null without a run to read them from.
+   */
+  frameSpan() {
+    const run = this.runs.find(r => r.id === this.runId);
+    if (!run) return null;
+    const s = this.now;
+
+    // Frames come in pairs, one per phase. A blank iteration means the last
+    // one recorded.
+    const iterations = Math.max(1, Math.floor(run.frame_count / 2));
+    const last = iterations - 1;
+    const at = s.iteration === null ? last : Math.max(0, Math.min(last, s.iteration));
+    const span = Math.max(1, s.span || 1);
+    const from = Math.max(0, (at - span + 1)) * 2;
+    const count = Math.min(span * 2, run.frame_count - from);
+
+    // One frame further back than the window needs, and each frame is given
+    // the one before it. "Before phase" metrics — token curvature above all
+    // — are computed against the previous graph, so without this they are
+    // every node NaN and the chart reports no values at all.
+    const lead = from > 0 ? 1 : 0;
+    return { from, count, lead, key: `${run.id}:${from}:${count}` };
   },
 
   async _refresh(job) {
     if (this.tab.kind === 'frame') {
-      if (!this.runId) { this.frames = null; this.say('Choose a simulation above.'); this.draw(); return; }
-      const run = this.runs.find(r => r.id === this.runId);
-      if (!run) return;
-      const s = this.now;
-
-      // Frames come in pairs, one per phase. A blank iteration means the last
-      // one recorded.
-      const iterations = Math.max(1, Math.floor(run.frame_count / 2));
-      const last = iterations - 1;
-      const at = s.iteration === null ? last : Math.max(0, Math.min(last, s.iteration));
-      const span = Math.max(1, s.span || 1);
-      const from = Math.max(0, (at - span + 1)) * 2;
-      const count = Math.min(span * 2, run.frame_count - from);
-
-      // One frame further back than the window needs, and each frame is given
-      // the one before it. "Before phase" metrics — token curvature above all
-      // — are computed against the previous graph, so without this they are
-      // every node NaN and the chart reports no values at all.
-      const lead = from > 0 ? 1 : 0;
-
+      const { from, count, lead, key } = this.frameSpan();
       this.say('Reading frames…');
       try {
         // A batch is capped server-side, so a long span is several requests
@@ -492,6 +533,7 @@ const Diagrams = {
         }
         for (let i = 1; i < read.length; i++) read[i].previous = read[i - 1];
         this.frames = read.slice(lead);
+        this.framesFor = key;
         this.asked = count;
       } catch (err) {
         if (job.cancelled || err.name === 'AbortError') return;
@@ -575,6 +617,7 @@ const Diagrams = {
     if (this.active === 'histogram' || this.active === 'heatmap') {
       if (!this.frames || !this.frames.length) {
         drawHistogram(this.canvas, null, ink);
+        if (!this.runId) this.say('Choose a simulation above.');
         return;
       }
       // Every frame in the window contributes its nodes, so a span of several
@@ -784,7 +827,7 @@ const Diagrams = {
     const { ctx, w, h, outer } = _prepareCanvas(canvas, pad);
 
     if (!s.lines.length || !tracks.length) {
-      ctx.fillStyle = 'rgba(255,255,255,0.45)';
+      ctx.fillStyle = Ink.of('dim');
       ctx.font = '13px system-ui, sans-serif';
       ctx.textAlign = 'center';
       ctx.fillText(cutAway

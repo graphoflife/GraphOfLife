@@ -748,6 +748,144 @@ async function test_the_bar_counts_samples_and_only_moves_forward() {
     'the bar only moved between steps; the server\'s own count was never used');
 }
 
+// ---- Diagrams: a control that changes what is plotted loads it -------------
+
+const DIAGRAMS_SOURCE = ['diagrams.js', 'diagram-controls.js']
+  .map(name => fs.readFileSync(path.join(root, 'web', 'js', name), 'utf8')).join('\n');
+
+/**
+ * The Diagrams tab with nothing on screen: a canvas that is never painted and
+ * a count of how often it would have been, reading run histories through
+ * `loader` and frames through `api`.
+ */
+function diagramsWith(loader, api = {}) {
+  const diagrams = new Function('SeriesLoad', 'Metrics', 'Jobs', 'API',
+    `${DIAGRAMS_SOURCE}; return Diagrams;`)(loader, Metrics, Jobs, api);
+  diagrams.canvas = {};
+  diagrams.drawn = 0;
+  diagrams.draw = function () { this.drawn += 1; };
+  diagrams.say = () => {};
+  return diagrams;
+}
+
+const lineOf = stat => ({ run: 'run', stat, phase: 'all', stretch: false, maxFrames: null });
+
+async function test_switching_a_line_to_a_graph_statistic_loads_it() {
+  const calls = [];
+  const diagrams = diagramsWith(loaderFor(pretendRun(20, calls)));
+  diagrams.active = 'timeline';
+  diagrams.settings.timeline.lines = [lineOf('nodes')];
+  await diagrams.refresh();
+  assert(calls.length && calls.every(c => !c.heavy),
+    'a population line asked for graph statistics');
+
+  // What the statistic menu does: change the line, then refresh.
+  calls.length = 0;
+  diagrams.settings.timeline.lines[0].stat = 'bridges';
+  await diagrams.refresh();
+  assert(calls.some(c => c.heavy),
+    'switching the line to bridges never asked for them, and the chart would say '
+    + '"Reading…" with nothing reading');
+}
+
+async function test_a_change_that_needs_nothing_new_draws_without_loading() {
+  const calls = [];
+  const diagrams = diagramsWith(loaderFor(pretendRun(20, calls)));
+  diagrams.active = 'timeline';
+  diagrams.settings.timeline.lines = [lineOf('nodes')];
+  await diagrams.refresh();
+
+  calls.length = 0;
+  const drawn = diagrams.drawn;
+  diagrams.settings.timeline.logY = true;          // what the log y toggle does
+  const pending = diagrams.refresh();
+  assert(!Jobs.busy('diagrams'),
+    'a redraw started a job, so the bar would flash on every keystroke in the title');
+  await pending;
+  assert(!calls.length, 'a change of scale asked the server for the run again');
+  assert(diagrams.drawn > drawn, 'the change was never drawn');
+}
+
+async function test_a_redraw_during_a_load_leaves_the_load_running() {
+  const calls = [];
+  const quick = pretendRun(40, calls);
+  const slow = { ...quick, async getSeries(...args) { await sleep(5); return quick.getSeries(...args); } };
+  const diagrams = diagramsWith(loaderFor(slow));
+  diagrams.active = 'timeline';
+  diagrams.settings.timeline.lines = [lineOf('bridges')];
+
+  const first = diagrams.refresh();
+  await sleep(12);
+  diagrams.settings.timeline.logY = true;
+  await diagrams.refresh();
+  await first;
+  assert(calls.filter(c => c.points === 2).length === 1,
+    'a redraw threw the load away and started it again from its first step');
+}
+
+async function test_a_frame_chart_reads_its_frames_once() {
+  let reads = 0;
+  const api = {
+    async getFrames(id, from, count) {
+      reads += 1;
+      return { frames: Array.from({ length: count }, (_, i) => ({ iteration: from + i, ids: [1, 2] })) };
+    }
+  };
+  const diagrams = diagramsWith(loaderFor(pretendRun(20)), api);
+  diagrams.runs = [{ id: 'run', frame_count: 40 }];
+  diagrams.runId = 'run';
+  diagrams.active = 'histogram';
+  await diagrams.refresh();
+  const first = reads;
+  assert(first > 0, 'the histogram never read its frames');
+
+  diagrams.settings.histogram.colormap = 'magma';   // what the colour map menu does
+  await diagrams.refresh();
+  assert(reads === first, 'changing the colour map read the same frames again');
+
+  diagrams.settings.histogram.iteration = 3;        // a different window
+  await diagrams.refresh();
+  assert(reads > first, 'moving to another iteration did not read it');
+}
+
+function test_no_diagram_control_draws_without_asking_what_it_needs() {
+  // The rule the four tests above hold refresh() to is only worth anything if
+  // the controls go through it. Two of them once called draw() directly, which
+  // was harmless until what a run loads came to depend on what is plotted.
+  const source = fs.readFileSync(path.join(root, 'web', 'js', 'diagram-controls.js'), 'utf8');
+  const direct = (source.match(/this\.draw\(\)/g) || []).length;
+  assert(!direct, `${direct} control${direct === 1 ? '' : 's'} call draw() directly, `
+    + 'and so never load what they change');
+}
+
+// ---- the canvas palette ------------------------------------------------------
+
+function test_every_colour_a_chart_asks_for_is_in_the_stylesheet() {
+  const Ink = new Function(
+    `${fs.readFileSync(path.join(root, 'web', 'js', 'ink.js'), 'utf8')}; return Ink;`)();
+  const css = fs.readFileSync(path.join(root, 'web', 'css', 'style.css'), 'utf8');
+  const start = css.indexOf(':root');
+  const palette = css.slice(start, css.indexOf('}', start));
+  const missing = Object.values(Ink.ROLES)
+    .filter(token => !new RegExp(`${token}\\s*:`).test(palette));
+  assert(!missing.length,
+    `ink.js asks the stylesheet for ${missing.join(', ')}, which :root does not define`);
+}
+
+function test_no_canvas_writes_a_colour_out() {
+  // A colour written into a canvas call is one the stylesheet cannot reach.
+  // Twenty-eight of them were, and when the panels were lightened they stayed
+  // tuned to the old ones: the stat popup's grid went darker than its panel.
+  const dir = path.join(root, 'web', 'js');
+  const found = [];
+  for (const name of fs.readdirSync(dir).filter(n => n.endsWith('.js'))) {
+    fs.readFileSync(path.join(dir, name), 'utf8').split('\n').forEach((line, i) => {
+      if (/(fillStyle|strokeStyle)\s*=\s*['"]#[0-9a-fA-F]{3,8}['"]/.test(line)) found.push(`${name}:${i + 1}`);
+    });
+  }
+  assert(!found.length, `colours written out on a canvas, where a retheme cannot reach them: ${found.join(', ')}`);
+}
+
 const tests = Object.entries({
   test_the_world_holds_its_whole_supply_at_both_ends_of_the_game,
   test_a_pile_never_fills_before_anything_reaches_it,
@@ -773,7 +911,14 @@ const tests = Object.entries({
   test_a_history_is_fetched_only_as_deep_as_its_statistics_need,
   test_a_second_load_adds_to_the_first_rather_than_starting_over,
   test_a_cheap_load_never_blanks_an_expensive_value,
-  test_the_bar_counts_samples_and_only_moves_forward
+  test_the_bar_counts_samples_and_only_moves_forward,
+  test_switching_a_line_to_a_graph_statistic_loads_it,
+  test_a_change_that_needs_nothing_new_draws_without_loading,
+  test_a_redraw_during_a_load_leaves_the_load_running,
+  test_a_frame_chart_reads_its_frames_once,
+  test_no_diagram_control_draws_without_asking_what_it_needs,
+  test_every_colour_a_chart_asks_for_is_in_the_stylesheet,
+  test_no_canvas_writes_a_colour_out
 }).sort(([a], [b]) => a.localeCompare(b));
 
 // A test that is written and never listed here is worse than no test: it reads

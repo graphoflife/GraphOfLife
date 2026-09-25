@@ -11,6 +11,10 @@
  * into it to redraw. Mixed in at the bottom of this file, so `this` means what
  * it means everywhere else in that object and the split costs the reader
  * nothing but a second file to open.
+ *
+ * Every control calls refresh() and none calls draw(). Whether a change needs
+ * data is refresh()'s question, not each control's — see there for the chart
+ * that stayed empty when two controls answered it wrong.
  */
 const DiagramControls = {
 
@@ -69,16 +73,16 @@ const DiagramControls = {
       if (this.active === 'histogram') {
         const el = field('Metric', metricSelect());
         el.value = s.metric;
-        Metrics.onPick(el, v => { s.metric = v; this.draw(); });
+        Metrics.onPick(el, v => { s.metric = v; this.refresh(); });
         Metrics.addSteppers(el);
       } else {
         const x = field('x', metricSelect());
         x.value = s.x;
-        Metrics.onPick(x, v => { s.x = v; this.draw(); });
+        Metrics.onPick(x, v => { s.x = v; this.refresh(); });
         Metrics.addSteppers(x);
         const y = field('y', metricSelect());
         y.value = s.y;
-        Metrics.onPick(y, v => { s.y = v; this.draw(); });
+        Metrics.onPick(y, v => { s.y = v; this.refresh(); });
         Metrics.addSteppers(y);
       }
 
@@ -94,26 +98,26 @@ const DiagramControls = {
 
       const axes = document.createElement('span');
       axes.className = 'axis-toggles';
-      axes.append(toggle('log x', s.logX, v => { s.logX = v; this.controls(); this.draw(); }));
-      axes.append(toggle('log y', s.logY, v => { s.logY = v; this.controls(); this.draw(); }));
+      axes.append(toggle('log x', s.logX, v => { s.logX = v; this.controls(); this.refresh(); }));
+      axes.append(toggle('log y', s.logY, v => { s.logY = v; this.controls(); this.refresh(); }));
       if (this.active === 'heatmap') {
         axes.append(toggle('log n', s.logCount,
-                           v => { s.logCount = v; this.controls(); this.draw(); }));
+                           v => { s.logCount = v; this.controls(); this.refresh(); }));
       }
       bar.append(axes);
     }
 
     if (this.active === 'correlate') {
       const keys = this.statOptions();
-      const x = field('x', select(keys, s.x, v => { s.x = v; this.draw(); }));
-      const y = field('y', select(keys, s.y, v => { s.y = v; this.draw(); }));
+      const x = field('x', select(keys, s.x, v => { s.x = v; this.refresh(); }));
+      const y = field('y', select(keys, s.y, v => { s.y = v; this.refresh(); }));
       x.title = 'Horizontal axis'; y.title = 'Vertical axis';
       field('Phase', select([['all', 'Both phases'], ['1', 'Reproduction'], ['2', 'Game']],
-                            s.phase, v => { s.phase = v; this.draw(); }));
+                            s.phase, v => { s.phase = v; this.refresh(); }));
       const axes = document.createElement('span');
       axes.className = 'axis-toggles';
-      axes.append(toggle('log x', s.logX, v => { s.logX = v; this.controls(); this.draw(); }));
-      axes.append(toggle('log y', s.logY, v => { s.logY = v; this.controls(); this.draw(); }));
+      axes.append(toggle('log x', s.logX, v => { s.logX = v; this.controls(); this.refresh(); }));
+      axes.append(toggle('log y', s.logY, v => { s.logY = v; this.controls(); this.refresh(); }));
       bar.append(axes);
     }
 
@@ -150,15 +154,15 @@ const DiagramControls = {
       bar.append(add);
 
       field('from iteration', number(s.cutoff, 0, v => {
-        s.cutoff = Math.max(0, v || 0); this.controls(); this.draw();
+        s.cutoff = Math.max(0, v || 0); this.controls(); this.refresh();
       })).title = 'Drop the opening iterations. A run begins by shaking out the '
                 + 'graph it was seeded with, and that first swing is larger than '
                 + 'anything after it, so on a shared scale it flattens the rest.';
 
       const axes = document.createElement('span');
       axes.className = 'axis-toggles';
-      axes.append(toggle('log x', s.logX, v => { s.logX = v; this.controls(); this.draw(); }));
-      axes.append(toggle('log y', s.logY, v => { s.logY = v; this.controls(); this.draw(); }));
+      axes.append(toggle('log x', s.logX, v => { s.logX = v; this.controls(); this.refresh(); }));
+      axes.append(toggle('log y', s.logY, v => { s.logY = v; this.controls(); this.refresh(); }));
       bar.append(axes);
     }
 
@@ -170,7 +174,7 @@ const DiagramControls = {
     name.value = s.title;
     name.placeholder = this.defaultTitle();
     name.title = 'Chart title. Left blank it describes itself.';
-    name.addEventListener('change', () => { s.title = name.value.trim(); this.draw(); });
+    name.addEventListener('change', () => { s.title = name.value.trim(); this.refresh(); });
     field('Title', name);
 
     const guideAxis = document.createElement('select');
@@ -198,24 +202,24 @@ const DiagramControls = {
       s.guides.push({ axis: guideAxis.value, at });
       guideAt.value = '';
       this.controls();
-      this.draw();
+      this.refresh();
     });
     bar.append(guideAdd);
     field('', guideAxis);
     field('=', guideAt);
 
     const gridToggle = toggle('grid', s.grid, v => {
-      s.grid = v; this.controls(); this.draw();
+      s.grid = v; this.controls(); this.refresh();
     });
 
     const style = document.createElement('span');
     style.append(gridToggle);
     style.className = 'axis-toggles';
     const maps = Object.keys(COLORMAPS).map(k => [k, k]);
-    const mapEl = select(maps, s.colormap, v => { s.colormap = v; this.draw(); });
+    const mapEl = select(maps, s.colormap, v => { s.colormap = v; this.refresh(); });
     mapEl.title = 'Colour style';
     style.append(mapEl);
-    style.append(toggle('flip', s.reverse, v => { s.reverse = v; this.controls(); this.draw(); }));
+    style.append(toggle('flip', s.reverse, v => { s.reverse = v; this.controls(); this.refresh(); }));
 
     const save = document.createElement('button');
     save.type = 'button';
@@ -246,7 +250,7 @@ const DiagramControls = {
         drop.textContent = '×';
         drop.title = 'Remove this line';
         drop.addEventListener('click', () => {
-          s.guides.splice(i, 1); this.controls(); this.draw();
+          s.guides.splice(i, 1); this.controls(); this.refresh();
         });
         chip.append(text, drop);
         guides.append(chip);
@@ -320,7 +324,7 @@ const DiagramControls = {
       pick(this.runs.map(r => [r.id, r.name]), line.run,
            v => { line.run = v; this.refresh(); }, 'Which simulation', false);
       pick(this.statOptions(line.run), line.stat,
-           v => { line.stat = v; this.draw(); }, 'Which statistic');
+           v => { line.stat = v; this.refresh(); }, 'Which statistic');
       // Three buttons rather than a menu, matching the phase control under the
       // Viewer's graph. Three options that are always the same three are worth
       // showing all at once: which one is active is then visible without
@@ -343,7 +347,7 @@ const DiagramControls = {
           // The frame cap's placeholder counts the frames this phase has, so it
           // is stale the moment the phase changes.
           cap.placeholder = String(this.availableFrames(line));
-          this.draw();
+          this.refresh();
         });
         phases.append(button);
       }
@@ -360,7 +364,7 @@ const DiagramControls = {
       cap.title = 'How many frames of this line to show. Blank is all of them.';
       cap.addEventListener('change', () => {
         line.maxFrames = cap.value === '' ? null : Math.max(2, Number(cap.value));
-        this.draw();
+        this.refresh();
       });
       row.append(cap);
 
@@ -373,7 +377,7 @@ const DiagramControls = {
       stretch.addEventListener('click', () => {
         line.stretch = !line.stretch;
         this.controls();
-        this.draw();
+        this.refresh();
       });
       row.append(stretch);
 

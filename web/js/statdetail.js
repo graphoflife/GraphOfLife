@@ -275,7 +275,7 @@ const StatDetail = {
     ctx.clearRect(0, 0, w, h);
 
     if (!ys.length) {
-      ctx.fillStyle = '#5b6b7c';
+      ctx.fillStyle = Ink.of('dim');
       ctx.font = '12px system-ui, sans-serif';
       ctx.fillText(Jobs.busy('stat-detail')
         ? 'Summarising the run\u2026'
@@ -316,13 +316,13 @@ const StatDetail = {
     for (const v of yGrid.ticks) {
       const y = Math.round(yAt(v)) + 0.5;
       if (y < padT - 1 || y > padT + plotH + 1) continue;
-      ctx.strokeStyle = '#1e2733';
+      ctx.strokeStyle = Ink.of('grid');
       ctx.beginPath();
       ctx.moveTo(padL, y);
       ctx.lineTo(padL + plotW, y);
       ctx.stroke();
 
-      ctx.fillStyle = '#8fa3b5';
+      ctx.fillStyle = Ink.of('label');
       const label = fmtY(v);
       ctx.fillText(label, padL - 6 - ctx.measureText(label).width, y + 3);
     }
@@ -331,19 +331,19 @@ const StatDetail = {
     for (const v of xGrid.ticks) {
       const x = Math.round(xAt(v)) + 0.5;
       if (x < padL - 1 || x > padL + plotW + 1) continue;
-      ctx.strokeStyle = '#1e2733';
+      ctx.strokeStyle = Ink.of('grid');
       ctx.beginPath();
       ctx.moveTo(x, padT);
       ctx.lineTo(x, padT + plotH);
       ctx.stroke();
 
-      ctx.fillStyle = '#8fa3b5';
+      ctx.fillStyle = Ink.of('label');
       const label = Math.round(v).toLocaleString('en-US');
       ctx.fillText(label, x - ctx.measureText(label).width / 2, h - 12);
     }
 
     // Axes, a shade brighter than the grid
-    ctx.strokeStyle = '#33404f';
+    ctx.strokeStyle = Ink.of('axis');
     ctx.beginPath();
     ctx.moveTo(padL + 0.5, padT);
     ctx.lineTo(padL + 0.5, padT + plotH + 0.5);
@@ -353,7 +353,7 @@ const StatDetail = {
     // Where the frame on screen sits, so the number in the strip has a home
     const currentIteration = Viewer.frame ? Viewer.frame.iteration : null;
     if (currentIteration !== null && currentIteration >= xLo && currentIteration <= xHi) {
-      ctx.strokeStyle = '#4fb3ff';
+      ctx.strokeStyle = Ink.of('accent');
       ctx.globalAlpha = 0.45;
       ctx.beginPath();
       ctx.moveTo(xAt(currentIteration), padT);
@@ -363,7 +363,7 @@ const StatDetail = {
     }
 
     // The curve
-    ctx.strokeStyle = '#4fb3ff';
+    ctx.strokeStyle = Ink.of('accent');
     ctx.lineWidth = 1.6;
     ctx.beginPath();
     for (let i = 0; i < ys.length; i++) {
@@ -372,7 +372,7 @@ const StatDetail = {
     }
     ctx.stroke();
 
-    ctx.fillStyle = '#5b6b7c';
+    ctx.fillStyle = Ink.of('dim');
     ctx.font = '9px system-ui, sans-serif';
     const axisLabel = 'iteration';
     ctx.fillText(axisLabel, padL + plotW - ctx.measureText(axisLabel).width, h - 1);

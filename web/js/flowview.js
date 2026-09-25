@@ -360,7 +360,7 @@ const FlowView = {
     ctx.clearRect(0, 0, this.w, this.h);
     const plan = this.layout();
     if (!plan) {
-      ctx.fillStyle = '#6b7c8d';
+      ctx.fillStyle = Ink.of('dim');
       ctx.font = '12px system-ui, sans-serif';
       ctx.textAlign = 'center';
       ctx.fillText(this.result ? 'Nothing lasted that long.' : 'No run loaded.',
@@ -417,7 +417,7 @@ const FlowView = {
       }
     }
 
-    ctx.fillStyle = '#8fa3b5';
+    ctx.fillStyle = Ink.of('label');
     ctx.font = '10px ui-monospace, monospace';
     ctx.textAlign = 'center';
     const step = Math.max(1, Math.round(columns.length / 8));
