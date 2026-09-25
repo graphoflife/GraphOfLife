@@ -16,59 +16,6 @@
  * nodeColorBy is always a node metric.
  */
 const Metrics = {
-  /**
-   * Quantities read as a ratio of two stored statistics.
-   *
-   * These were written inside the Theses view, one arrow function per claim,
-   * which meant a thesis could plot a share that no chart anywhere else could.
-   * Here they are one table, and every chart that plots a run's statistics
-   * offers them beside the stored ones.
-   *
-   * Absent inputs give null rather than zero, for the reason the series does:
-   * a run recorded before a statistic existed has no value for it, which is
-   * not the same thing as having measured nothing.
-   */
-  DERIVED: {
-    bridgeShare: {
-      label: 'Bridges / edges',
-      needs: ['bridges', 'edges'],
-      of: r => (r.edges && r.bridges != null ? r.bridges / r.edges : null)
-    },
-    culledShare: {
-      label: 'Culled share',
-      needs: ['orphaned', 'nodes_before'],
-      of: r => (r.nodes_before && r.orphaned != null ? r.orphaned / r.nodes_before : null)
-    },
-    leafShare: {
-      label: 'Leaf share',
-      needs: ['leaves', 'nodes'],
-      of: r => (r.nodes && r.leaves != null ? r.leaves / r.nodes : null)
-    }
-  },
-
-  /**
-   * A column of a run's series, stored or derived.
-   *
-   * The one place a chart asks for a statistic by name, so a derived one is
-   * indistinguishable from a stored one to everything downstream. Null when
-   * the run lacks what it needs.
-   */
-  column(series, key) {
-    if (!series) return null;
-    if (series[key]) return series[key];
-    const derived = this.DERIVED[key];
-    if (!derived) return null;
-    const inputs = derived.needs.map(name => series[name]);
-    if (inputs.some(col => !col)) return null;
-    const out = new Array(inputs[0].length);
-    for (let i = 0; i < out.length; i++) {
-      const row = {};
-      derived.needs.forEach((name, j) => { row[name] = inputs[j][i]; });
-      out[i] = derived.of(row);
-    }
-    return out;
-  },
-
   // `signed` marks quantities that read as up-or-down rather than more-or-less.
   // They get a range centred on zero, so the middle of a colour map means "no
   // change" and a log scale keeps the sign instead of discarding it.

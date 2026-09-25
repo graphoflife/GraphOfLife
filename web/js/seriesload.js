@@ -23,6 +23,10 @@
  * and a cheap row blanking a bridge count. Those are the history's business
  * now, and cannot happen here.
  *
+ * It is also where a history is read. A chart asks for a column by name, and
+ * a derived one, a ratio of two stored statistics, is worked out here from
+ * what it is made of, so to every chart it looks stored.
+ *
  * The server caps a run at 300 samples however long it ran, which is more
  * points than these charts have pixels for.
  */
@@ -46,10 +50,65 @@ const SeriesLoad = {
   //: there for Diagrams, and the other way round.
   cache: new Map(),
 
+  /**
+   * Statistics read as a ratio of two stored ones.
+   *
+   * These were written inside the Theses view, one arrow function per claim,
+   * which meant a thesis could plot a share that no chart anywhere else could.
+   * Here they are one table, and every chart that plots a run's history
+   * offers them beside the stored ones. They sat in Metrics for a while, but
+   * that is the vocabulary of a single frame; a ratio of two columns of a
+   * run's history belongs with the history.
+   *
+   * Absent inputs give null rather than zero, for the reason the series does:
+   * a run recorded before a statistic existed has no value for it, which is
+   * not the same thing as having measured nothing.
+   */
+  DERIVED: {
+    bridgeShare: {
+      label: 'Bridges / edges',
+      needs: ['bridges', 'edges'],
+      of: r => (r.edges && r.bridges != null ? r.bridges / r.edges : null)
+    },
+    culledShare: {
+      label: 'Culled share',
+      needs: ['orphaned', 'nodes_before'],
+      of: r => (r.nodes_before && r.orphaned != null ? r.orphaned / r.nodes_before : null)
+    },
+    leafShare: {
+      label: 'Leaf share',
+      needs: ['leaves', 'nodes'],
+      of: r => (r.nodes && r.leaves != null ? r.leaves / r.nodes : null)
+    }
+  },
+
+  /**
+   * A column of a run's history, stored or derived.
+   *
+   * The one place a chart asks for a statistic by name, so a derived one is
+   * indistinguishable from a stored one to everything downstream. Null when
+   * the run lacks what it needs.
+   */
+  column(series, key) {
+    if (!series) return null;
+    if (series[key]) return series[key];
+    const derived = this.DERIVED[key];
+    if (!derived) return null;
+    const inputs = derived.needs.map(name => series[name]);
+    if (inputs.some(col => !col)) return null;
+    const out = new Array(inputs[0].length);
+    for (let i = 0; i < out.length; i++) {
+      const row = {};
+      derived.needs.forEach((name, j) => { row[name] = inputs[j][i]; });
+      out[i] = derived.of(row);
+    }
+    return out;
+  },
+
   /** The stored statistics charts of `keys` read: a derived one by what it is made of. */
   columns(keys) {
     return [...new Set(keys.flatMap(key =>
-      (Metrics.DERIVED[key] ? Metrics.DERIVED[key].needs : [key])))];
+      (this.DERIVED[key] ? this.DERIVED[key].needs : [key])))];
   },
 
   /**

@@ -275,7 +275,7 @@ const DiagramControls = {
     // The derived ratios come last and only when the run holds what they are
     // made from, so the menu never offers a line that would come out empty.
     const have = new Set(keys);
-    const derived = Object.entries(Metrics.DERIVED)
+    const derived = Object.entries(SeriesLoad.DERIVED)
       .filter(([, d]) => !payload || d.needs.every(n => have.has(n)))
       .map(([k, d]) => [k, d.label]);
     return keys.map(k => [k, (Viewer.STAT_LABELS || {})[k] || k]).concat(derived);

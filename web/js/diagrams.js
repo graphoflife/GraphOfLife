@@ -287,7 +287,7 @@ const Diagrams = {
       return Metrics.label(parsed.domain, parsed.key);
     }
     return (Viewer.STAT_LABELS || {})[key]
-      || (Metrics.DERIVED[key] && Metrics.DERIVED[key].label) || key;
+      || (SeriesLoad.DERIVED[key] && SeriesLoad.DERIVED[key].label) || key;
   },
 
   /**
@@ -682,7 +682,7 @@ const Diagrams = {
       const payload = SeriesLoad.cache.get(this.runId);
       if (!payload) { drawTrajectory(this.canvas, null, { ...ink, message: 'Choose a simulation above.' }); return; }
       const series = payload.series || {};
-      const xs = Metrics.column(series, s.x), ys = Metrics.column(series, s.y);
+      const xs = SeriesLoad.column(series, s.x), ys = SeriesLoad.column(series, s.y);
       if (!xs || !ys) {
         drawTrajectory(this.canvas, null, { ...ink, message: 'This run has no history for one of these.' });
         return;
@@ -785,7 +785,7 @@ const Diagrams = {
       const payload = SeriesLoad.cache.get(line.run);
       if (!payload) continue;
       const series = payload.series || {};
-      const values = Metrics.column(series, line.stat);
+      const values = SeriesLoad.column(series, line.stat);
       if (!values) continue;
       const phases = series.phase || [], iterations = series.iteration || [];
       // The opening iterations, dropped before anything else looks at the

@@ -29,14 +29,14 @@ const StepView = new Function(
 const Jobs = new Function(
   `${fs.readFileSync(path.join(root, 'web', 'js', 'jobs.js'), 'utf8')}; return Jobs;`)();
 
-// seriesload.js reaches for API and Metrics only when a climb runs, so each
-// test hands it a pretend backend and the real list of expensive statistics.
+// seriesload.js reaches for API only when a climb runs, so each test hands it
+// a pretend backend. Metrics is for the Diagrams tests further down.
 const Metrics = new Function('window', ['colormaps.js', 'metrics.js']
   .map(name => fs.readFileSync(path.join(root, 'web', 'js', name), 'utf8')).join('\n')
   + '; return Metrics;')({ devicePixelRatio: 1 });
 const SERIES_SOURCE = fs.readFileSync(path.join(root, 'web', 'js', 'seriesload.js'), 'utf8');
 /** A fresh loader, with a cache of its own, talking to `api`. */
-const loaderFor = api => new Function('API', 'Metrics', `${SERIES_SOURCE}; return SeriesLoad;`)(api, Metrics);
+const loaderFor = api => new Function('API', `${SERIES_SOURCE}; return SeriesLoad;`)(api);
 
 // presets.js needs nothing from the page, so it loads the same bare way.
 const Presets = new Function(
@@ -715,6 +715,18 @@ function test_a_history_longer_than_its_run_is_dropped() {
   assert(loader.cache.has('behind'), 'a history only behind the run was thrown away');
 }
 
+function test_a_derived_statistic_reads_like_a_stored_one() {
+  const loader = loaderFor({});
+  const series = { bridges: [2, null, 3], edges: [10, 10, 0], nodes: [5, 6, 7] };
+  const share = loader.column(series, 'bridgeShare');
+  assert(share[0] === 0.2, `bridges / edges read ${share[0]} where 2 of 10 is 0.2`);
+  assert(share[1] === null && share[2] === null,
+    'a missing count, or no edges to divide by, read as a number rather than as nothing measured');
+  assert(loader.column(series, 'nodes') === series.nodes, 'a stored column did not come back as itself');
+  assert(loader.column(series, 'leafShare') === null,
+    'a ratio of columns this run does not have came back as something');
+}
+
 async function test_the_bar_counts_samples_and_only_moves_forward() {
   // The server counts frames, two to a sample, and counts only the frames of
   // the step in flight. Passing that straight to the bar made it run 4%, 6%,
@@ -902,6 +914,7 @@ const tests = Object.entries({
   test_a_summarised_run_is_one_request,
   test_a_history_of_a_smaller_run_is_not_ready,
   test_a_history_longer_than_its_run_is_dropped,
+  test_a_derived_statistic_reads_like_a_stored_one,
   test_the_bar_counts_samples_and_only_moves_forward,
   test_switching_a_line_to_a_graph_statistic_loads_it,
   test_a_change_that_needs_nothing_new_draws_without_loading,
