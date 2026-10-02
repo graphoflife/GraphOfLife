@@ -2,16 +2,22 @@
 
 ## In short
 
-Almost — and the one exception now has a rule. Stopped and reloaded in a new
-process, or cut off without warning and resumed, a run comes out exactly as
-it would have gone straight through: every frame, every statistic, the whole
-final state. But the number of threads the matrix library uses matters. On
-all of the computer's threads, two of three runs ended with the same history
-and yet with different last digits in the messages their agents were about
-to read. Each thread count reproduces itself exactly, so every run is now made
-on one thread, in the lab and in the server alike. And before this chapter,
-two simulations running side by side in the server disturbed each other from
-their very first frame; that was fixed first.
+Yes. Every run the lab or the server makes is reproducible, exactly. Made
+again from its settings and its seed — in one go, stopped and reloaded in a
+new process, or cut off without warning and resumed — it records the same
+frames and the same statistics and ends in the same state, down to every
+brain weight and the random number generator. All twelve runs of this chapter
+were also made again from nothing, each in a fresh process, and came out the
+same.
+
+The experiment found the one condition this rests on: the matrix library has
+to use the same number of threads. On all of the computer's threads instead
+of one, two of three runs kept the same history but ended with different last
+digits in the messages their agents were about to read. So every run is made
+on one thread: the lab always did this, and since this chapter so does the
+server. Before this chapter, two simulations running side by side in the
+server also disturbed each other from their very first frame; that was fixed
+first.
 
 ## Thesis
 
@@ -94,6 +100,14 @@ Over 150 iterations, seeds 2 and 3 on one thread and on all threads still
 never recorded a different frame: a last-bit difference in a message had not
 yet changed a single decision. Nothing promises it never will.
 
+**Made again from nothing.** Some hours after the experiment, all twelve runs
+were made again from their settings and seeds, each in a fresh process and
+an empty folder, and compared frame by frame and row by row over all 30
+iterations with what had been recorded: every one was identical. They were
+made a second time on the copy of the engine the next experiments use — taken
+after the new-simulation form's defaults were changed — and were identical
+again, so that change did not touch what a run does.
+
 This did not show on the first baseline, whose messages had five numbers
 instead of thirty: run the same way that morning, all nine variants were
 identical (those runs are archived). The bigger brains of the baseline B1 do
@@ -113,14 +127,20 @@ what it records alone.
 
 ## Conclusion
 
-A run is a function of its settings, its seed, and the number of threads the
-matrix library uses. Stopping it or crashing it changes nothing, so the lab
-can pause, resume and recover runs freely. The thread count is now fixed at
-one everywhere: the lab always used one, and since this chapter the server
-asks for one too, at a cost of about 3% of speed for a run on its own. Every
-run in this book is therefore the same run wherever it is made on this
-machine, and every later chapter can compare runs knowing that a difference
-between them comes from what was changed, not from how they were run.
+A run is reproducible: it is decided by its settings and its seed, given one
+thread for the matrix library — which every run in this project now gets.
+Stopping it or crashing it changes nothing, so the lab can pause, resume and
+recover runs freely, and every later chapter can compare runs knowing that a
+difference between them comes from what was changed, not from how they were
+run.
+
+The thesis as it was written fails in one clause, the one about threads, and
+that is the most useful thing this chapter found. The lab always kept the
+matrix library to one thread; the server did not, so a run started from the
+Simulations tab was, in its last digits, not the run the lab would make. Since
+this chapter the server keeps to one thread as well, at a cost of about 3% of
+speed for a run on its own, and every run is the same run wherever on this
+machine it is made.
 
 The limits that remain:
 
@@ -142,6 +162,7 @@ The limits that remain:
 | Runs | 12: `B1-10000-s001-straight` … `-s003-straight`, each also as `-stopped-at-10`, `-cut-off-at-15`, `-all-blas-threads` |
 | Strain | `gol-1+brain_kind=float16`, with `message_amount=30` and `mutation_probability=0.2` |
 | Engine | snapshot `f39288e90b003df0`, commit `ccba58f` |
+| Made again | all 12 runs, from nothing in fresh processes (`python3 gol_lab.py verify E01 --runs 12 --iterations 30`), on `f39288e90b003df0` and on `f820369a1583af53`: identical in every frame and row |
 | Environment | Python 3.12.3, numpy 2.5.1, networkx 3.6.1, OpenBLAS (scipy-openblas 0.3.33), Intel Core Ultra 7 258V, numpy dispatch AVX2 |
 | Results | `book/results/E01.json`, with every run's seed, sessions, time and memory |
 | Fingerprints | the six worlds of `tools/trajectory_digest.py`: `0f89434c…`, `1afc5884…`, `ad0d4552…`, `b5aeb19b…`, `ed3539b3…`, `8fd127e6…`, the same before and after the fix |
