@@ -27,9 +27,14 @@ What is measured, and how each figure is estimated:
 ```costs
 ```
 
-Until something has been measured, a figure is the calibration of 2 October
-2026: about 1 ms per agent per iteration, 0.4 agents per token, 100 bytes per
-agent per iteration.
+Each kind of run — the same settings apart from the size of the world and
+the seed — is fitted on its own, because kinds differ in more than the size
+of their brains: the baseline's brains are half as big again as the ones
+before it, and cost an agent hardly any more, since its agents have fewer
+neighbours to look at. Until a kind has been measured, it borrows from all
+runs; until anything has, the calibration of 2 October 2026 on the baseline
+stands: about 1.3 ms per agent per iteration in the lab, 0.18 agents per
+token once a world has settled, and 70 bytes per agent per iteration.
 
 ```figure costs/time
 ```
@@ -40,8 +45,8 @@ agent per iteration.
   two days. The lab estimates the time on its workers before ▶ and says how
   much is left while it runs; the estimate is what fits the plan to this.
 - A run's time grows with its world: at the baseline, a world of *T* tokens
-  holds about 0.4 × *T* agents, so at the fitted speed 5,000 tokens cost
-  about 2.5 seconds per iteration and 200,000 tokens about 100.
+  settles at about 0.18 × *T* agents, so at the speed measured so far 10,000
+  tokens cost about 2.4 seconds per iteration and 200,000 tokens about 50.
 - Memory limits big worlds before time does: the lab starts a run only when
   its estimated peak fits next to the runs already going, in three quarters
   of the machine's memory.

@@ -35,10 +35,21 @@ API
 """
 from __future__ import annotations
 
+import os
+
+# One thread for the matrix library, set before numpy is first imported. A
+# brain's matrix products are added up in a different order when the library
+# splits them across threads, the last bit of a result moves, and this
+# simulation turns a last bit into a different history: a run made here on
+# eight threads was not the run the lab makes on one (Chapter 2 of the book).
+# With one, every run is the same run wherever it is made, for about 3% of
+# speed. An explicit setting in the environment still wins.
+for _name in ("OPENBLAS_NUM_THREADS", "OMP_NUM_THREADS", "MKL_NUM_THREADS"):
+    os.environ.setdefault(_name, "1")
+
 import argparse
 import json
 import mimetypes
-import os
 import select
 import socket
 import threading

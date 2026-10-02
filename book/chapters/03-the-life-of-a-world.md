@@ -19,8 +19,9 @@ which phase it is about.
 ```experiment E02
 ```
 
-Thirty worlds of the baseline B1, each with 5,000 tokens — so fifty founders
-with a hundred tokens each — and each with its own seed, from 1 to 30. Each
+Thirty worlds of the baseline B1, each with 10,000 tokens — so a hundred
+founders with a hundred tokens each — and each with its own seed, from 1 to
+30. In its first iterations a world of this size grows to a few thousand agents. Each
 runs for 3,000 iterations. Every frame is kept, and every statistic is
 recorded for every frame; the statistics that describe the shape of the
 graph, which take longer to compute, every 25 iterations.

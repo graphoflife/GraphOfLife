@@ -2608,6 +2608,28 @@ def test_a_lab_run_shows_running_and_refuses_start():
         assert request.answered[0][0] == 409, "an experiment's run was started outside the lab"
 
 
+def test_the_server_keeps_the_matrix_library_to_one_thread():
+    """
+    A brain's matrix products are added up in another order when the library
+    splits them across threads, and the last bit of a message moves: a run made
+    on all threads is not the run the lab makes on one (Chapter 2). The server
+    asks for one before numpy is loaded, unless the environment says otherwise.
+    """
+    import subprocess
+
+    here = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    ask = ("import gol_server, os; "
+           "print(os.environ['OPENBLAS_NUM_THREADS'], os.environ['OMP_NUM_THREADS'])")
+    bare = {k: v for k, v in os.environ.items() if not k.endswith("_NUM_THREADS")}
+    said = subprocess.run([sys.executable, "-B", "-c", ask], cwd=here, env=bare,
+                          capture_output=True, text=True, check=True).stdout.split()
+    assert said == ["1", "1"], said
+    chosen = subprocess.run([sys.executable, "-B", "-c", ask], cwd=here,
+                            env={**bare, "OPENBLAS_NUM_THREADS": "4"},
+                            capture_output=True, text=True, check=True).stdout.split()
+    assert chosen[0] == "4", "the server overrode a thread count it was given"
+
+
 def test_the_defaults_endpoint_carries_the_brain_presets():
     """The form fills itself in from the engine, so the engine has to say."""
     import gol_server

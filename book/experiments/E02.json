@@ -2,7 +2,7 @@
   "id": "E02",
   "title": "The life of a world",
   "thesis": {
-    "claim": "A world has a short youth and a long, steady middle age. From its fifty founders it grows within the first hundred iterations to a population it then keeps, rising and falling around the same level, for the rest of its three thousand iterations. Births, deaths and connections settle the same way.",
+    "claim": "A world has a short youth and a long, steady middle age. From its hundred founders it grows within the first hundred iterations to a population it then keeps, rising and falling around the same level, for the rest of its three thousand iterations. Births, deaths and connections settle the same way.",
     "why": "The token supply is fixed, and every agent needs at least one token, so the population has a ceiling it reaches quickly: a founder holds a hundred tokens and can afford many children. After that, every birth has to be paid for with tokens someone else loses, and starvation, pruning and conquest remove agents as fast as they arrive.",
     "confirm": "Across the thirty runs, the median population over iterations 100 to 200 is within 20% of its median over iterations 2,800 to 3,000, and the same holds for connections and births. No run dies out.",
     "refute": "The population still trends up or down after iteration 200 by more than 20%, or swings between very different levels for long stretches, or some runs die out. Then a world has more than one phase of life, and the chapters after this one must say which phase they describe."
@@ -10,7 +10,7 @@
   "runs": {
     "baseline": "B1",
     "world": {
-      "total_tokens": 5000
+      "total_tokens": 10000
     },
     "seeds": "1..30",
     "iterations": 3000,

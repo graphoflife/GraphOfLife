@@ -118,11 +118,18 @@ def bands(runs: List[Tuple[np.ndarray, np.ndarray]], points: int = FIGURE_POINTS
     finer than that would leave most of them empty and the line in pieces.
     """
     measured = [its[np.isfinite(values)] for its, values in runs]
-    measured = np.unique(np.concatenate(measured)) if measured else np.array([])
-    if not measured.size:
+    measured = [m for m in measured if m.size]
+    if not measured:
         return {"x": [], "y": [], "lo": [], "hi": [], "outerLo": [], "outerHi": [], "alive": []}
-    edges = np.linspace(measured.min(), measured.max() + 1.0,
-                        min(points, measured.size) + 1)
+    # Stretches no shorter than the sparsest run's spacing between
+    # measurements, so a run measured more often than the rest cannot leave
+    # stretches only it reaches, with a band drawn over one run. A run that
+    # ends early still leaves the rest at full detail.
+    every = np.unique(np.concatenate(measured))
+    spacing = max(float(np.median(np.diff(m))) if m.size > 1 else 1.0 for m in measured)
+    span = every.max() + 1.0 - every.min()
+    edges = np.linspace(every.min(), every.max() + 1.0,
+                        int(max(1, min(points, round(span / spacing)))) + 1)
     middle = (edges[:-1] + edges[1:]) / 2
     means = np.full((len(runs), len(middle)), np.nan)
     for k, (its, values) in enumerate(runs):

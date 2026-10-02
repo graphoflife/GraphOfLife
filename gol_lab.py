@@ -76,11 +76,13 @@ DISK_MARGIN = 10 * 2**30          # never fill the disk closer than this
 MEMORY_SHARE = 0.75               # of the machine's memory, for all workers together
 
 #: What a simulation costs before anything has been measured: the calibration
-#: of 2026-10-02 on the new-run defaults (Core Ultra 7 258V, numpy 2.5.1).
+#: of 2026-10-02 on the baseline B1 (Core Ultra 7 258V, numpy 2.5.1) — about
+#: 0.95 ms an agent in memory with 15,795 weights, and more in the lab, which
+#: also writes every frame and its statistics.
 CALIBRATION = {
-    "secondsPerAgentIteration": 1.0e-3,     # per 10,000 weights in a brain
-    "agentsPerToken": 0.4,
-    "bytesPerAgentIteration": 100.0,
+    "secondsPerAgentIteration": 0.85e-3,    # per 10,000 weights in a brain
+    "agentsPerToken": 0.18,
+    "bytesPerAgentIteration": 70.0,
     "peakBytesPerWeightByte": 3.0,          # the Blotto copy and the checkpoint stack
     "baseMB": 300.0,
 }
@@ -216,7 +218,7 @@ def experiment_runs(name: str) -> List[RunSpec]:
     for condition in runs["conditions"]:
         label = condition.get("name")
         _check_keys(f"{name} condition {label!r}", condition,
-                    ("name", "set", "stops", "fault_at", "threads"))
+                    ("name", "set", "stops", "fault_at", "threads", "replicate"))
         changed = dict(condition.get("set", {}))
         forbidden = sorted(set(changed) & ({"seed"} | set(INFRASTRUCTURE)))
         if forbidden:
@@ -224,8 +226,11 @@ def experiment_runs(name: str) -> List[RunSpec]:
                            f"condition cannot: the seed belongs to the seeds, and what is "
                            f"recorded to the lab")
         _check_keys(f"{name} condition {label!r} set", changed, SETTABLE - set(WORLD))
-        replicate = (label if any(k in condition for k in ("stops", "fault_at", "threads"))
-                     else None)
+        # A run made again on purpose — to be stopped, cut off, run on other
+        # threads, or simply kept apart from anyone else's — has a run of its
+        # own, named for its condition, rather than sharing one.
+        replicate = (label if condition.get("replicate")
+                     or any(k in condition for k in ("stops", "fault_at", "threads")) else None)
 
         for seed in parse_seeds(runs["seeds"]):
             config = {**base, **world, **changed, "seed": seed, "export_every": 1,
@@ -447,13 +452,27 @@ def _median(values: List[float]) -> Optional[float]:
     return values[len(values) // 2] if values else None
 
 
+def kind_of(config: Dict[str, Any]) -> str:
+    """
+    Which kind of run a configuration makes, for what it costs: everything but
+    the size of the world, the seed and what is recorded. Kinds differ in
+    more than the size of their brains — B1's brains are half as big again as
+    the ones before it and cost an agent hardly any more, because its agents
+    have fewer neighbours to look at — so each is fitted on its own.
+    """
+    what = {k: v for k, v in _what_it_is(config).items() if k not in WORLD and k != "seed"}
+    return hashlib.sha1(json.dumps(what, sort_keys=True).encode()).hexdigest()[:10]
+
+
 def fit_costs() -> Dict[str, Any]:
     """
     Fit what a simulation costs to every run the lab has recorded, and keep it
-    in .lab/costs.json. Each measure falls back to the calibration until
-    something has measured it.
+    in .lab/costs.json: overall, and for each kind of run. Each measure falls
+    back from the kind to all runs to the calibration, until something has
+    measured it.
     """
     seconds, agent_iterations, per_token, disk, peak = 0.0, 0.0, [], [], []
+    kinds: Dict[str, Dict[str, Any]] = {}
     runs = 0
     for meta in store.list_runs():
         if "lab" not in meta:
@@ -468,13 +487,24 @@ def fit_costs() -> Dict[str, Any]:
         # Total time over total work, not the typical iteration: a run spends
         # most of its time when it is biggest, and that is what an estimate of
         # its length has to get right.
-        seconds += sum(r["_seconds"] for r in timed)
+        spent = sum(r["_seconds"] for r in timed)
+        seconds += spent
         agent_iterations += sum(r["nodes"] * weights / 1e4 for r in timed)
         # Only after the founding boom: a world's first iterations are
         # nothing like the population it settles at, and short runs would
         # otherwise teach the estimates that worlds stay small.
         tokens = meta["config"]["total_tokens"]
-        per_token += [r["nodes"] / tokens for r in rows if r.get("iteration", 0) >= SETTLED]
+        settled = [r["nodes"] / tokens for r in rows if r.get("iteration", 0) >= SETTLED]
+        per_token += settled
+        config = meta["config"]
+        kind = kinds.setdefault(kind_of(config), {
+            "seconds": 0.0, "agentIterations": 0, "perToken": [], "runs": 0,
+            "label": (f"{meta.get('strain')}, {config['message_amount']}-number messages, "
+                      f"mutation {config['mutation_probability']}, {weights:,} weights")})
+        kind["seconds"] += spent
+        kind["agentIterations"] += sum(r["nodes"] for r in timed)
+        kind["perToken"] += settled
+        kind["runs"] += 1
         biggest = max(r["nodes"] for r in timed)
         top = max((r.get("_peakMB") or 0) for r in timed)
         if top and biggest:
@@ -493,6 +523,12 @@ def fit_costs() -> Dict[str, Any]:
     }
     costs = {**CALIBRATION, **{k: v for k, v in fitted.items() if v is not None},
              "measured": {k: v is not None for k, v in fitted.items()},
+             # Seconds per agent as each kind of run measured them, unscaled,
+             # and the population it settles at, where it has been seen to.
+             "kinds": {key: {"label": k["label"],
+                             "secondsPerAgent": k["seconds"] / k["agentIterations"],
+                             "agentsPerToken": _median(k["perToken"]), "runs": k["runs"]}
+                       for key, k in kinds.items() if k["agentIterations"]},
              "runs": runs, "fitted": time.strftime("%Y-%m-%dT%H:%M:%S%z")}
     store.write_json(os.path.join(_made(lab_dir()), "costs.json"), costs, indent=1)
     return costs
@@ -508,13 +544,19 @@ def costs() -> Dict[str, Any]:
 
 def predict(config: Dict[str, Any], iterations: int,
             known: Optional[Dict[str, Any]] = None) -> Dict[str, float]:
-    """What `iterations` more of a run with this configuration will cost."""
+    """
+    What `iterations` more of a run with this configuration will cost: from
+    runs of its own kind where some have been measured, otherwise from all
+    runs scaled by the size of its brains, otherwise from the calibration.
+    """
     known = known or costs()
     weights, width = _weights(config)
-    agents = known["agentsPerToken"] * config["total_tokens"]
+    kind = known.get("kinds", {}).get(kind_of(config), {})
+    agents = (kind.get("agentsPerToken") or known["agentsPerToken"]) * config["total_tokens"]
+    per_agent = kind.get("secondsPerAgent") or known["secondsPerAgentIteration"] * weights / 1e4
     return {
         "agents": agents,
-        "seconds": iterations * agents * known["secondsPerAgentIteration"] * weights / 1e4,
+        "seconds": iterations * agents * per_agent,
         "diskBytes": iterations * agents * known["bytesPerAgentIteration"],
         "peakMB": known["baseMB"] + agents * weights * width
                   * known["peakBytesPerWeightByte"] / 2**20,

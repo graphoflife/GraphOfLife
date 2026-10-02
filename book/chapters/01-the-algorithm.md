@@ -18,8 +18,8 @@ Every node is one **agent**. An agent can only see, and only act on, itself
 and the agents it is joined to — its *neighbours*.
 
 Every agent holds a whole number of **tokens**. Tokens are the only thing of
-value, and the world has a fixed supply of them: the baseline used in this
-book has 5,000 or 10,000, depending on the experiment. Tokens move between
+value, and the world has a fixed supply of them: most experiments in Part I
+use 10,000. Tokens move between
 agents but are never created or destroyed. An agent with no tokens left
 dies.
 

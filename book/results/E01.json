@@ -4,7 +4,7 @@
  "kind": "identity",
  "engines": {
   "engines": [
-   "04f533dd0bf4b7c1"
+   "f39288e90b003df0"
   ],
   "agree": true,
   "checked": []
@@ -14,7 +14,7 @@
   {
    "condition": "stopped at 10",
    "seed": 1,
-   "reference": "B1-10000-s001",
+   "reference": "B1-10000-s001-straight",
    "run": "B1-10000-s001-stopped-at-10",
    "frames": 60,
    "rows": 60,
@@ -23,7 +23,7 @@
   {
    "condition": "stopped at 10",
    "seed": 2,
-   "reference": "B1-10000-s002",
+   "reference": "B1-10000-s002-straight",
    "run": "B1-10000-s002-stopped-at-10",
    "frames": 60,
    "rows": 60,
@@ -32,7 +32,7 @@
   {
    "condition": "stopped at 10",
    "seed": 3,
-   "reference": "B1-10000-s003",
+   "reference": "B1-10000-s003-straight",
    "run": "B1-10000-s003-stopped-at-10",
    "frames": 60,
    "rows": 60,
@@ -41,7 +41,7 @@
   {
    "condition": "cut off at 15",
    "seed": 1,
-   "reference": "B1-10000-s001",
+   "reference": "B1-10000-s001-straight",
    "run": "B1-10000-s001-cut-off-at-15",
    "frames": 60,
    "rows": 60,
@@ -50,7 +50,7 @@
   {
    "condition": "cut off at 15",
    "seed": 2,
-   "reference": "B1-10000-s002",
+   "reference": "B1-10000-s002-straight",
    "run": "B1-10000-s002-cut-off-at-15",
    "frames": 60,
    "rows": 60,
@@ -59,7 +59,7 @@
   {
    "condition": "cut off at 15",
    "seed": 3,
-   "reference": "B1-10000-s003",
+   "reference": "B1-10000-s003-straight",
    "run": "B1-10000-s003-cut-off-at-15",
    "frames": 60,
    "rows": 60,
@@ -68,7 +68,7 @@
   {
    "condition": "all BLAS threads",
    "seed": 1,
-   "reference": "B1-10000-s001",
+   "reference": "B1-10000-s001-straight",
    "run": "B1-10000-s001-all-blas-threads",
    "frames": 60,
    "rows": 60,
@@ -77,32 +77,38 @@
   {
    "condition": "all BLAS threads",
    "seed": 2,
-   "reference": "B1-10000-s002",
+   "reference": "B1-10000-s002-straight",
    "run": "B1-10000-s002-all-blas-threads",
    "frames": 60,
    "rows": 60,
-   "same": true
+   "same": false,
+   "checkpointArrays": [
+    "msg_values"
+   ]
   },
   {
    "condition": "all BLAS threads",
    "seed": 3,
-   "reference": "B1-10000-s003",
+   "reference": "B1-10000-s003-straight",
    "run": "B1-10000-s003-all-blas-threads",
    "frames": 60,
    "rows": 60,
-   "same": true
+   "same": false,
+   "checkpointArrays": [
+    "msg_values"
+   ]
   }
  ],
- "allSame": true,
+ "allSame": false,
  "citation": {
   "strains": [
-   "gol-1+allow_gifting+brain_kind=float16+inactive_window=iteration+prune_after=reproduction"
+   "gol-1+brain_kind=float16"
   ],
   "commits": [
-   "f936c96ce5a12af429f621d6e4d955f1ff57d839"
+   "ccba58f9a173237b02962bf3ec1ef70adb49accb"
   ],
   "engines": [
-   "04f533dd0bf4b7c1"
+   "f39288e90b003df0"
   ],
   "environments": [
    {
@@ -127,7 +133,8 @@
    },
    "conditions": [
     {
-     "name": "straight"
+     "name": "straight",
+     "replicate": true
     },
     {
      "name": "stopped at 10",
@@ -147,16 +154,16 @@
   },
   "runs": [
    {
-    "id": "B1-10000-s001",
+    "id": "B1-10000-s001-straight",
     "condition": "straight",
     "seed": 1,
     "iterations": 30,
     "status": "stopped",
-    "strain": "gol-1+allow_gifting+brain_kind=float16+inactive_window=iteration+prune_after=reproduction",
-    "engine": "04f533dd0bf4b7c1",
-    "commit": "f936c96ce5a12af429f621d6e4d955f1ff57d839",
-    "seconds": 88.9,
-    "peakMB": 412.2,
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f39288e90b003df0",
+    "commit": "ccba58f9a173237b02962bf3ec1ef70adb49accb",
+    "seconds": 32.8,
+    "peakMB": 322.9,
     "sessions": 1,
     "environment": {
      "python": "3.12.3",
@@ -168,16 +175,16 @@
     }
    },
    {
-    "id": "B1-10000-s002",
+    "id": "B1-10000-s002-straight",
     "condition": "straight",
     "seed": 2,
     "iterations": 30,
     "status": "stopped",
-    "strain": "gol-1+allow_gifting+brain_kind=float16+inactive_window=iteration+prune_after=reproduction",
-    "engine": "04f533dd0bf4b7c1",
-    "commit": "f936c96ce5a12af429f621d6e4d955f1ff57d839",
-    "seconds": 102.7,
-    "peakMB": 333.1,
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f39288e90b003df0",
+    "commit": "ccba58f9a173237b02962bf3ec1ef70adb49accb",
+    "seconds": 79.4,
+    "peakMB": 582.5,
     "sessions": 1,
     "environment": {
      "python": "3.12.3",
@@ -189,16 +196,16 @@
     }
    },
    {
-    "id": "B1-10000-s003",
+    "id": "B1-10000-s003-straight",
     "condition": "straight",
     "seed": 3,
     "iterations": 30,
     "status": "stopped",
-    "strain": "gol-1+allow_gifting+brain_kind=float16+inactive_window=iteration+prune_after=reproduction",
-    "engine": "04f533dd0bf4b7c1",
-    "commit": "f936c96ce5a12af429f621d6e4d955f1ff57d839",
-    "seconds": 47.3,
-    "peakMB": 258.7,
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f39288e90b003df0",
+    "commit": "ccba58f9a173237b02962bf3ec1ef70adb49accb",
+    "seconds": 65.9,
+    "peakMB": 453.1,
     "sessions": 1,
     "environment": {
      "python": "3.12.3",
@@ -215,11 +222,11 @@
     "seed": 1,
     "iterations": 30,
     "status": "stopped",
-    "strain": "gol-1+allow_gifting+brain_kind=float16+inactive_window=iteration+prune_after=reproduction",
-    "engine": "04f533dd0bf4b7c1",
-    "commit": "f936c96ce5a12af429f621d6e4d955f1ff57d839",
-    "seconds": 87.6,
-    "peakMB": 414.9,
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f39288e90b003df0",
+    "commit": "ccba58f9a173237b02962bf3ec1ef70adb49accb",
+    "seconds": 32.4,
+    "peakMB": 313.8,
     "sessions": 2,
     "environment": {
      "python": "3.12.3",
@@ -236,11 +243,11 @@
     "seed": 2,
     "iterations": 30,
     "status": "stopped",
-    "strain": "gol-1+allow_gifting+brain_kind=float16+inactive_window=iteration+prune_after=reproduction",
-    "engine": "04f533dd0bf4b7c1",
-    "commit": "f936c96ce5a12af429f621d6e4d955f1ff57d839",
-    "seconds": 68.4,
-    "peakMB": 333.1,
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f39288e90b003df0",
+    "commit": "ccba58f9a173237b02962bf3ec1ef70adb49accb",
+    "seconds": 64.0,
+    "peakMB": 579.3,
     "sessions": 2,
     "environment": {
      "python": "3.12.3",
@@ -257,11 +264,11 @@
     "seed": 3,
     "iterations": 30,
     "status": "stopped",
-    "strain": "gol-1+allow_gifting+brain_kind=float16+inactive_window=iteration+prune_after=reproduction",
-    "engine": "04f533dd0bf4b7c1",
-    "commit": "f936c96ce5a12af429f621d6e4d955f1ff57d839",
-    "seconds": 46.0,
-    "peakMB": 258.1,
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f39288e90b003df0",
+    "commit": "ccba58f9a173237b02962bf3ec1ef70adb49accb",
+    "seconds": 42.2,
+    "peakMB": 454.5,
     "sessions": 2,
     "environment": {
      "python": "3.12.3",
@@ -278,11 +285,11 @@
     "seed": 1,
     "iterations": 30,
     "status": "stopped",
-    "strain": "gol-1+allow_gifting+brain_kind=float16+inactive_window=iteration+prune_after=reproduction",
-    "engine": "04f533dd0bf4b7c1",
-    "commit": "f936c96ce5a12af429f621d6e4d955f1ff57d839",
-    "seconds": 127.5,
-    "peakMB": 415.2,
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f39288e90b003df0",
+    "commit": "ccba58f9a173237b02962bf3ec1ef70adb49accb",
+    "seconds": 31.7,
+    "peakMB": 329.8,
     "sessions": 2,
     "environment": {
      "python": "3.12.3",
@@ -299,11 +306,11 @@
     "seed": 2,
     "iterations": 30,
     "status": "stopped",
-    "strain": "gol-1+allow_gifting+brain_kind=float16+inactive_window=iteration+prune_after=reproduction",
-    "engine": "04f533dd0bf4b7c1",
-    "commit": "f936c96ce5a12af429f621d6e4d955f1ff57d839",
-    "seconds": 67.6,
-    "peakMB": 333.1,
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f39288e90b003df0",
+    "commit": "ccba58f9a173237b02962bf3ec1ef70adb49accb",
+    "seconds": 84.6,
+    "peakMB": 579.4,
     "sessions": 2,
     "environment": {
      "python": "3.12.3",
@@ -320,11 +327,11 @@
     "seed": 3,
     "iterations": 30,
     "status": "stopped",
-    "strain": "gol-1+allow_gifting+brain_kind=float16+inactive_window=iteration+prune_after=reproduction",
-    "engine": "04f533dd0bf4b7c1",
-    "commit": "f936c96ce5a12af429f621d6e4d955f1ff57d839",
-    "seconds": 46.4,
-    "peakMB": 258.6,
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f39288e90b003df0",
+    "commit": "ccba58f9a173237b02962bf3ec1ef70adb49accb",
+    "seconds": 49.4,
+    "peakMB": 454.3,
     "sessions": 2,
     "environment": {
      "python": "3.12.3",
@@ -341,11 +348,11 @@
     "seed": 1,
     "iterations": 30,
     "status": "stopped",
-    "strain": "gol-1+allow_gifting+brain_kind=float16+inactive_window=iteration+prune_after=reproduction",
-    "engine": "04f533dd0bf4b7c1",
-    "commit": "f936c96ce5a12af429f621d6e4d955f1ff57d839",
-    "seconds": 89.0,
-    "peakMB": 412.9,
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f39288e90b003df0",
+    "commit": "ccba58f9a173237b02962bf3ec1ef70adb49accb",
+    "seconds": 34.7,
+    "peakMB": 323.2,
     "sessions": 1,
     "environment": {
      "python": "3.12.3",
@@ -362,11 +369,11 @@
     "seed": 2,
     "iterations": 30,
     "status": "stopped",
-    "strain": "gol-1+allow_gifting+brain_kind=float16+inactive_window=iteration+prune_after=reproduction",
-    "engine": "04f533dd0bf4b7c1",
-    "commit": "f936c96ce5a12af429f621d6e4d955f1ff57d839",
-    "seconds": 70.4,
-    "peakMB": 332.7,
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f39288e90b003df0",
+    "commit": "ccba58f9a173237b02962bf3ec1ef70adb49accb",
+    "seconds": 88.6,
+    "peakMB": 579.5,
     "sessions": 1,
     "environment": {
      "python": "3.12.3",
@@ -383,11 +390,11 @@
     "seed": 3,
     "iterations": 30,
     "status": "stopped",
-    "strain": "gol-1+allow_gifting+brain_kind=float16+inactive_window=iteration+prune_after=reproduction",
-    "engine": "04f533dd0bf4b7c1",
-    "commit": "f936c96ce5a12af429f621d6e4d955f1ff57d839",
-    "seconds": 46.9,
-    "peakMB": 258.2,
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f39288e90b003df0",
+    "commit": "ccba58f9a173237b02962bf3ec1ef70adb49accb",
+    "seconds": 50.5,
+    "peakMB": 453.3,
     "sessions": 1,
     "environment": {
      "python": "3.12.3",

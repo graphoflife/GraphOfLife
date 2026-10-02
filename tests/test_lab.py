@@ -148,14 +148,17 @@ def test_two_experiments_asking_for_the_same_run_share_it():
     """
     with lab(plan("E91", iterations=4),
              plan("E92", [{"name": "straight"}, {"name": "cut", "fault_at": 2},
-                          {"name": "fast", "set": {"mutation_probability": 0.9}}],
+                          {"name": "fast", "set": {"mutation_probability": 0.9}},
+                          {"name": "apart", "replicate": True}],
                   iterations=6),
              {"id": "E93", "runs": "same as E91"}):
         runs = gol_lab.wanted(["E91", "E92", "E93"])
         fast = [gol_lab.run_id_for("B9", {"total_tokens": 400},
                                    {"mutation_probability": 0.9}, seed) for seed in (1, 2)]
         assert sorted(runs) == sorted(fast + ["B9-400-s001", "B9-400-s001-cut",
-                                              "B9-400-s002", "B9-400-s002-cut"]), sorted(runs)
+                                              "B9-400-s002", "B9-400-s002-cut",
+                                              "B9-400-s001-apart", "B9-400-s002-apart"]), \
+            sorted(runs)
         assert all(run_id.startswith("B9-400-") and run_id != "B9-400-s001" for run_id in fast)
         shared = runs["B9-400-s001"]
         assert shared.targets == [4, 6] and shared.experiments == ["E91", "E92", "E93"]
@@ -364,6 +367,20 @@ def test_what_a_simulation_costs_is_fitted_to_what_runs_recorded():
         assert costs["agentsPerToken"] == gol_lab.CALIBRATION["agentsPerToken"]
         assert gol_lab.costs() == costs, "the fit was not kept for the estimates"
 
+        # A run of the kind measured is estimated from that kind's own speed,
+        # not from all runs scaled by the size of their brains.
+        spec = gol_lab.experiment_runs("E91")[0]
+        kind = costs["kinds"][gol_lab.kind_of(spec.config)]
+        nodes = sum(r["nodes"] for s in gol_lab.experiment_runs("E91")
+                    for r in gol_record.read_stats(s.run_id) if r.get("_seconds"))
+        assert abs(kind["secondsPerAgent"] - seconds / nodes) < 1e-12, kind
+        guess = gol_lab.predict(spec.config, 10, costs)
+        assert abs(guess["seconds"] - 10 * guess["agents"] * kind["secondsPerAgent"]) < 1e-9
+        other = {**spec.config, "message_amount": 7}
+        assert gol_lab.kind_of(other) != gol_lab.kind_of(spec.config)
+        assert gol_lab.kind_of({**spec.config, "total_tokens": 999, "seed": 4}) \
+            == gol_lab.kind_of(spec.config), "world size and seed made another kind"
+
 
 def test_a_disk_that_would_fill_pauses_the_lab_and_says_why():
     """
@@ -402,6 +419,13 @@ def test_bands_count_who_is_left():
     assert band["alive"] == [2] * 5 + [1] * 5, band["alive"]
     assert band["y"][0] == 50.0 and band["y"][9] == 9.0, band["y"]
     assert band["lo"][9] == band["hi"][9] == 9.0
+
+    # One run measured every iteration and two every fifth: every stretch
+    # holds all three, rather than most of them holding the first alone.
+    often = (np.arange(50.0), np.arange(50.0))
+    seldom = [(np.arange(0.0, 50.0, 5), np.arange(0.0, 50.0, 5)) for _ in range(2)]
+    band = gol_analysis.bands([often] + seldom)
+    assert band["alive"] == [3] * 10, band["alive"]
 
 
 @contextlib.contextmanager

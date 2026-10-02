@@ -20,7 +20,8 @@
     },
     "conditions": [
       {
-        "name": "straight"
+        "name": "straight",
+        "replicate": true
       },
       {
         "name": "stopped at 10",

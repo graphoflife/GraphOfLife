@@ -305,7 +305,9 @@ const Book = {
         Markdown.escape(JSON.stringify(v))}</code>`).join(', ') || 'as the baseline';
       const how = [c.stops && c.stops.length ? `stopped at ${c.stops.join(', ')} and continued in a new process` : '',
                    c.fault_at !== undefined ? `cut off at ${c.fault_at} with no checkpoint, then resumed` : '',
-                   c.threads === 'default' ? 'matrix library on all its threads' : '']
+                   c.threads === 'default' ? 'matrix library on all its threads' : '',
+                   c.replicate && !c.stops && c.fault_at === undefined && !c.threads
+                     ? 'runs of its own, shared with no other experiment' : '']
         .filter(Boolean).join('; ');
       return `<tr><td>${Markdown.escape(c.name)}</td><td>${set}</td><td>${how || '—'}</td></tr>`;
     }).join('');
@@ -398,10 +400,17 @@ const Book = {
       ['Memory', `${Math.round(fitted.baseMB)} MB, plus ${fitted.peakBytesPerWeightByte.toFixed(1)} `
         + 'times every byte of every brain', measured('peakBytesPerWeightByte')]
     ];
+    const kinds = Object.values(fitted.kinds || {}).map(k => `<tr><td>${Markdown.escape(k.label || '—')}</td>`
+      + `<td>${(1000 * k.secondsPerAgent).toFixed(2)} ms per agent per iteration</td>`
+      + `<td>${k.agentsPerToken ? `${k.agentsPerToken.toFixed(2)} agents per token` : 'not settled yet'}</td>`
+      + `<td>${k.runs}</td></tr>`).join('');
     el.className = 'md-scroll';
     el.innerHTML = '<table><thead><tr><th>What</th><th>Now</th><th>From</th></tr></thead><tbody>'
       + rows.map(([what, now, from]) => `<tr><td>${what}</td><td>${now}</td><td>${from}</td></tr>`).join('')
-      + `</tbody></table><p class="book-note">Fitted to ${runs.length} recorded runs on ${
+      + '</tbody></table>'
+      + (kinds ? '<table><thead><tr><th>Kind of run</th><th>Time</th><th>Agents</th><th>Runs</th></tr>'
+        + `</thead><tbody>${kinds}</tbody></table>` : '')
+      + `<p class="book-note">Fitted to ${runs.length} recorded runs on ${
         Markdown.escape(updated || '—')}.</p>`;
   },
 
