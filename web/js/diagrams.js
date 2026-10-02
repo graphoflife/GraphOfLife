@@ -32,12 +32,6 @@ const Diagrams = {
   /** Where saved settings live, so they survive a reload. */
   STORE: 'gol.diagrams.presets',
 
-  // Colours a line gets when several share one chart, in order. Taken from the
-  // page's own palette rather than a colormap, because a colormap is a
-  // gradient and these have to be told apart, not ordered.
-  LINE_INK: ['#5ac8fa', '#ffd166', '#ff6b6b', '#7ee787', '#c792ea',
-             '#f78c6c', '#89ddff', '#e5e5e5'],
-
   active: 'histogram',
   runs: [],
   runId: null,
@@ -710,7 +704,7 @@ const Diagrams = {
       const vs = points.map(p => (s.logY ? Metrics.applyLog(p.v, p.v < 0) : p.v));
       const run = this.runs.find(r => r.id === line.run);
       tracks.push({
-        line, points, colour: this.LINE_INK[i % this.LINE_INK.length],
+        line, points, colour: Ink.line(i),
         mapped: vs,
         lo: Math.min(...vs), hi: Math.max(...vs),
         rawLo: Math.min(...points.map(p => p.v)),

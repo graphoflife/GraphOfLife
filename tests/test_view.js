@@ -924,12 +924,16 @@ const DIAGRAMS_SOURCE = ['theses.js', 'diagrams.js', 'diagram-controls.js']
 const COLORMAPS = new Function(
   `${fs.readFileSync(path.join(root, 'web', 'js', 'colormaps.js'), 'utf8')}; return COLORMAPS;`)();
 
+// The page's colours; only asking one by its role needs a stylesheet.
+const INK = new Function(
+  `${fs.readFileSync(path.join(root, 'web', 'js', 'ink.js'), 'utf8')}; return Ink;`)();
+
 function diagramsWith(loader, api = {}) {
   const FrameWindow = new Function('API', `const formatNumber = n => String(n); ${
     fs.readFileSync(path.join(root, 'web', 'js', 'framewindow.js'), 'utf8')}; return FrameWindow;`)(api);
   const diagrams = new Function('SeriesLoad', 'Metrics', 'Jobs', 'API', 'FrameWindow', 'RunStats',
-    'COLORMAPS', `${DIAGRAMS_SOURCE}; return Diagrams;`)(
-    loader, Metrics, Jobs, api, FrameWindow, RunStats, COLORMAPS);
+    'COLORMAPS', 'Ink', `${DIAGRAMS_SOURCE}; return Diagrams;`)(
+    loader, Metrics, Jobs, api, FrameWindow, RunStats, COLORMAPS, INK);
   diagrams.canvas = {};
   diagrams.drawn = 0;
   diagrams.draw = function () { this.drawn += 1; };
@@ -1198,6 +1202,97 @@ function test_no_canvas_writes_a_colour_out() {
   assert(!found.length, `colours written out on a canvas, where a retheme cannot reach them: ${found.join(', ')}`);
 }
 
+// ---- the book ----------------------------------------------------------------
+
+const Markdown = new Function(
+  `${fs.readFileSync(path.join(root, 'web', 'js', 'markdown.js'), 'utf8')}; return Markdown;`)();
+
+/** The Book view with nothing on screen, talking to `api`. */
+function bookWith(api = {}) {
+  return new Function('Markdown', 'API', 'formatNumber', 'formatBytes',
+    `${fs.readFileSync(path.join(root, 'web', 'js', 'book.js'), 'utf8')}; return Book;`)(
+    Markdown, api, n => String(n), n => `${n} B`);
+}
+
+function test_markdown_headings_get_ids() {
+  // A chapter points at its own sections, so its headings need names, each
+  // one unique on the page, and a link to one must stay on the page.
+  const html = Markdown.render('# The goal\n\n## The goal\n\n### What *P1* asks\n\n'
+    + 'See [above](#the-goal) or [a paper](https://example.org).');
+  assert(html.includes('<h2 id="the-goal">The goal</h2>'), html);
+  assert(html.includes('<h3 id="the-goal-2">The goal</h3>'), 'a second heading of the same name kept the first one\'s id');
+  assert(html.includes('<h4 id="what-p1-asks">'), html);
+  assert(html.includes('<a href="#the-goal">above</a>'), 'a link within the page opened a new tab');
+  assert(html.includes('<a href="https://example.org" target="_blank" rel="noopener">'), html);
+}
+
+function test_markdown_hands_info_fences_to_the_caller() {
+  // A fenced block whose first word the caller names is a place for something
+  // drawn, carrying the rest of its line; any other fence is still code.
+  const source = '```figure E02/nodes\n```\n\n```thesis E"02\n```\n\n```python\nx = 1 < 2\n```';
+  const html = Markdown.render(source, ['figure', 'thesis']);
+  assert(html.includes('<div class="md-embed" data-kind="figure" data-arg="E02/nodes"></div>'), html);
+  assert(html.includes('data-kind="thesis" data-arg="E&quot;02"'), 'a quote in the argument broke out of it');
+  assert(html.includes('<pre><code>x = 1 &lt; 2</code></pre>'), 'ordinary code stopped being code');
+  assert(!Markdown.render(source).includes('md-embed'), 'a fence became a place nobody asked for');
+}
+
+function test_book_progress_of_an_experiment() {
+  // What a chapter's chip says: where the lab says its experiment is, except
+  // that an analysed chapter stays analysed, and without a lab, what the book
+  // itself says.
+  const Book = bookWith();
+  const chapter = { id: '3', title: 'x', file: 'x.md', experiment: 'E02', status: 'ready' };
+  const lab = { experiments: { E02: { state: 'running', done: 61, total: 360 } } };
+  assert(Book.describe(chapter, lab).label === 'running · 16%', Book.describe(chapter, lab).label);
+  lab.experiments.E02.state = 'paused';
+  assert(Book.describe(chapter, lab).label === 'paused · 16%');
+  lab.experiments.E02.state = 'finished';
+  assert(Book.describe(chapter, lab).label === 'finished · to analyse');
+  assert(Book.describe({ ...chapter, status: 'analysed' }, lab).label === 'analysed');
+  assert(Book.describe(chapter, null).label === 'ready to run');
+  assert(Book.describe({ id: '9', title: 'y' }, null).state === 'planned');
+  assert(Book.describe({ id: '9', title: 'y' }, null).label === '', 'a chapter not written yet got a chip');
+
+  assert(Book.eta(30) === 'under 2 min left');
+  assert(Book.eta(600) === 'about 10 min left');
+  assert(Book.eta(7200) === 'about 2.0 h left', Book.eta(7200));
+  assert(Book.eta(3 * 86400) === 'about 3.0 days left');
+  assert(Book.eta(7200, '') === 'about 2.0 h');
+}
+
+async function test_the_static_book_never_asks_the_lab() {
+  // The published site has no lab. Asking would be a request to a server
+  // that is not there, every five seconds, for as long as the book is open.
+  let asked = 0;
+  const api = { choose: async () => {}, runsInBrowser: true,
+                labStatus: async () => { asked += 1; return { experiments: {} }; } };
+  const Book = bookWith(api);
+  Book.page = { querySelectorAll: () => [] };
+  await Book.refreshLab();
+  assert(asked === 0 && Book.lab === null, 'the static book asked for a lab');
+
+  api.runsInBrowser = false;
+  await Book.refreshLab();
+  assert(asked === 1 && Book.lab, 'with a server the book did not ask');
+}
+
+function test_every_tab_names_a_view() {
+  // A tab whose view is missing from App's table, or a view with no tab and
+  // no section, is a click that does nothing or a page nobody can reach.
+  const html = fs.readFileSync(path.join(root, 'web', 'index.html'), 'utf8');
+  const app = fs.readFileSync(path.join(root, 'web', 'js', 'app.js'), 'utf8');
+  const tabs = new Set([...html.matchAll(/data-view="([^"]+)"/g)].map(m => m[1]));
+  const table = app.match(/this\.views = \{([^}]*)\}/);
+  assert(table, 'could not find the views table in app.js');
+  const views = new Set([...table[1].matchAll(/(\w+):/g)].map(m => m[1]));
+  assert([...tabs].sort().join() === [...views].sort().join(),
+         `tabs ${[...tabs].sort()} and views ${[...views].sort()} differ`);
+  for (const name of views) {
+    assert(html.includes(`<main id="view-${name}"`), `no section for the ${name} view`);
+  }
+}
+
 // ---- the browser worker ------------------------------------------------------
 
 function test_the_worker_cuts_frames_the_way_the_server_does() {
@@ -1263,7 +1358,12 @@ const tests = Object.entries({
   test_every_diagram_control_builds_and_asks_for_what_it_changes,
   test_every_colour_a_chart_asks_for_is_in_the_stylesheet,
   test_no_canvas_writes_a_colour_out,
-  test_the_worker_cuts_frames_the_way_the_server_does
+  test_the_worker_cuts_frames_the_way_the_server_does,
+  test_markdown_headings_get_ids,
+  test_markdown_hands_info_fences_to_the_caller,
+  test_book_progress_of_an_experiment,
+  test_the_static_book_never_asks_the_lab,
+  test_every_tab_names_a_view
 }).sort(([a], [b]) => a.localeCompare(b));
 
 // A test that is written and never listed here is worse than no test: it reads

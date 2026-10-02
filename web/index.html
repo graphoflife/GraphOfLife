@@ -63,6 +63,7 @@
     <button class="tab" data-view="runs">Simulations</button>
     <button class="tab" data-view="viewer">Viewer</button>
     <button class="tab" data-view="research">Research</button>
+    <button class="tab" data-view="book">Book</button>
   </nav>
   <!-- What is loading, how far, and how to stop it. One bar, up here, because
        the question "is anything still working?" is asked from whichever tab
@@ -742,6 +743,17 @@
   <section id="research-notes" class="research-panel" hidden></section>
 </main>
 
+<!-- ==================== BOOK VIEW ==================== -->
+<!-- The research programme, written down as it is carried out. Everything in
+     it is read from book/ by book.js: the chapter list on the left, the
+     chapter on the right. -->
+<main id="view-book" class="view">
+  <div class="book-layout">
+    <nav class="book-toc" id="bookToc" aria-label="Chapters"></nav>
+    <article class="book-page md" id="bookPage"><p class="md-status">Reading…</p></article>
+  </div>
+</main>
+
 <!-- Statistic detail: explanation plus history across the run -->
 <div id="statDetail" class="stat-detail hidden">
   <div class="stat-detail-head">
@@ -784,6 +796,7 @@
 <script src="js/diagrams.js"></script>
 <script src="js/diagram-controls.js"></script>
 <script src="js/research.js"></script>
+<script src="js/book.js"></script>
 <script src="js/viewer.js"></script>
 <!-- The viewer is assembled from four files. The core declares it; these three
      attach the settings panel, the framing controls and the panels beneath the

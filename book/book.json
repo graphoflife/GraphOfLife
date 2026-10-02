@@ -1,0 +1,105 @@
+{
+  "title": "Graph of Life \u2014 the research book",
+  "parts": [
+    {
+      "title": "Front matter",
+      "chapters": [
+        {
+          "id": "about",
+          "title": "About this book",
+          "file": "README.md"
+        }
+      ]
+    },
+    {
+      "title": "Part I \u00b7 How the algorithm works",
+      "chapters": [
+        {
+          "id": "1",
+          "title": "The algorithm and the question"
+        },
+        {
+          "id": "2",
+          "title": "Is a run reproducible?",
+          "experiment": "E01",
+          "file": "chapters/02-reproducibility.md",
+          "status": "ready"
+        },
+        {
+          "id": "3",
+          "title": "The life of a world",
+          "experiment": "E02"
+        },
+        {
+          "id": "4",
+          "title": "How much does the seed decide?",
+          "experiment": "E03"
+        },
+        {
+          "id": "5",
+          "title": "Where do the tokens go?",
+          "experiment": "E04"
+        },
+        {
+          "id": "6",
+          "title": "What shape does the graph take?",
+          "experiment": "E05"
+        },
+        {
+          "id": "7",
+          "title": "Meta I \u00b7 What the first five experiments say",
+          "note": "Written once Chapters 2 to 6 are analysed."
+        },
+        {
+          "id": "8",
+          "title": "Who wins, and for how long?",
+          "experiment": "E06"
+        },
+        {
+          "id": "9",
+          "title": "Does size change the dynamics?",
+          "note": "Planned after Chapter 4, which says how many runs a size needs."
+        },
+        {
+          "id": "10",
+          "title": "How fast should brains change?",
+          "note": "The mutation probability, against the baseline runs of Chapter 3."
+        },
+        {
+          "id": "11",
+          "title": "How big should a brain be?",
+          "note": "The hidden layers, against the baseline runs of Chapter 3."
+        },
+        {
+          "id": "12",
+          "title": "Do the brains matter at all?",
+          "note": "Decisions taken from noise instead of from the brains."
+        },
+        {
+          "id": "13",
+          "title": "Meta II",
+          "note": "Written once Chapters 8 to 12 are analysed."
+        }
+      ]
+    },
+    {
+      "title": "Part II \u00b7 Towards open-ended evolution",
+      "chapters": [
+        {
+          "id": "14",
+          "title": "Mutation at replication, and nowhere else",
+          "note": "The first of the mechanics in research/Research.md \u00a74, once Part I is done."
+        }
+      ]
+    },
+    {
+      "title": "Appendices",
+      "chapters": [
+        {
+          "id": "A",
+          "title": "What a simulation costs"
+        }
+      ]
+    }
+  ]
+}

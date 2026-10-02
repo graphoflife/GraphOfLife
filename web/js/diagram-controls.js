@@ -289,7 +289,7 @@ const DiagramControls = {
       row.className = 'diagram-line-row';
 
       const swatch = document.createElement('i');
-      swatch.style.background = this.LINE_INK[i % this.LINE_INK.length];
+      swatch.style.background = Ink.line(i);
       row.append(swatch);
 
       // A simulation is picked on commit rather than as the menu is browsed:

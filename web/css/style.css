@@ -1016,6 +1016,157 @@ details.control-group > summary:hover h3 { color: var(--text); }
 }
 .md th { background: var(--panel-2); color: var(--text); white-space: nowrap; }
 .md-status { color: var(--muted); }
+/* A heading someone links to lands below the sticky top bar, not under it. */
+.md h2, .md h3, .md h4 { scroll-margin-top: 72px; }
+
+
+/* ==========================================================================
+   The book
+   ==========================================================================
+   The chapter list beside the chapter, the way a book is read on a screen:
+   the list stays where it is while the chapter scrolls. Below the width at
+   which both fit, the list sits above. */
+
+.book-layout {
+  display: grid;
+  grid-template-columns: 250px minmax(0, 1fr);
+  gap: 32px;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+.book-toc {
+  position: sticky;
+  top: 68px;
+  align-self: start;
+  max-height: calc(100vh - 90px);
+  overflow-y: auto;
+  font-size: 13px;
+  padding-right: 4px;
+}
+.book-title { font-weight: 600; font-size: 14px; color: var(--text); margin: 4px 0 14px; }
+.book-part { margin-bottom: 18px; }
+.book-part h3 { margin: 0 0 6px; }
+.book-toc-item {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  column-gap: 6px;
+  padding: 5px 8px;
+  border-radius: 6px;
+  color: var(--text-soft);
+  text-decoration: none;
+  line-height: 1.4;
+}
+.book-toc-item:hover { background: var(--panel); }
+.book-toc-item.active { background: var(--panel-2); color: var(--text); }
+.book-toc-item.unwritten { color: var(--muted-2); }
+.book-toc-num { color: var(--muted); text-align: right; }
+.book-toc-item .book-chip { grid-column: 2; justify-self: start; margin-top: 3px; }
+
+.book-chip {
+  display: inline-block;
+  font-size: 10.5px;
+  letter-spacing: 0.02em;
+  padding: 0 7px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.book-chip-running { color: var(--ok); }
+.book-chip-queued, .book-chip-ready { color: var(--accent); }
+.book-chip-paused, .book-chip-stopped { color: var(--warn); }
+.book-chip-finished { color: var(--info); }
+.book-chip-blocked, .book-chip-invalid { color: var(--danger); }
+.book-chip-planned { color: var(--muted-2); }
+
+.book-kicker {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 4px 0 6px !important;
+}
+.book-note { color: var(--muted); font-size: 12.5px; }
+.book-reason { color: var(--warn); font-size: 12.5px; }
+
+/* The claim, from the plan. */
+.book-thesis {
+  margin: 0 0 18px;
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
+  background: var(--panel);
+}
+.book-thesis p { margin: 0 0 8px; }
+.book-thesis p:last-child { margin-bottom: 0; }
+
+/* What an experiment runs, and how far it has got. */
+.book-experiment {
+  margin: 0 0 18px;
+  padding: 12px 16px 4px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--panel);
+}
+.book-exp-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  margin-bottom: 10px;
+}
+.book-progress {
+  display: inline-block;
+  width: 180px;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--panel-3);
+  overflow: hidden;
+}
+.book-progress span { display: block; height: 100%; background: var(--accent); }
+.book-left { color: var(--text-soft); font-size: 12.5px; }
+.book-workers { color: var(--muted); font-size: 12px; margin-left: auto; }
+.book-runs { display: flex; flex-wrap: wrap; gap: 3px; margin: 8px 0 12px; }
+.book-run {
+  width: 22px;
+  height: 9px;
+  border-radius: 2px;
+  background: var(--panel-3);
+  overflow: hidden;
+  cursor: default;
+}
+.book-run[data-started="yes"] { cursor: pointer; }
+.book-run span { display: block; height: 100%; background: var(--accent-dim); }
+.book-run-running span { background: var(--ok); }
+.book-run-done span { background: var(--accent); }
+.book-run-blocked { outline: 1px solid var(--danger); }
+.book-plan th { white-space: nowrap; }
+
+.book-figure { margin: 6px 0 20px; }
+.book-figure canvas {
+  display: block;
+  width: 100%;
+  height: 340px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--panel);
+}
+.book-caption { color: var(--muted); font-size: 12.5px; margin: 6px 2px 0 !important; }
+
+.book-turns {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 44px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
+@media (max-width: 900px) {
+  .book-layout { grid-template-columns: 1fr; gap: 12px; }
+  .book-toc { position: static; max-height: none; }
+}
 
 
 /* The handful of numbers a module structure amounts to. */

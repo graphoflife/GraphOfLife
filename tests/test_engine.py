@@ -2157,7 +2157,7 @@ def test_every_asset_a_script_fetches_by_name_is_cache_stamped():
 
     # A quoted path into one of the shipped directories, or a bare file next to
     # the script — which is what importScripts() takes.
-    quoted = re.compile(r"""['"]((?:js|py|data|css)/[\w./-]+|[\w-]+\.js)['"]""")
+    quoted = re.compile(r"""['"]((?:js|py|data|css|book)/[\w./-]+|[\w-]+\.js)['"]""")
     interesting = (".js", ".py", ".json", ".bin", ".css", ".md")
 
     def ours(line, at):
@@ -2178,7 +2178,8 @@ def test_every_asset_a_script_fetches_by_name_is_cache_stamped():
         source = open(os.path.join(js_dir, name)).read()
         for line in source.splitlines():
             # Only where a file is actually being fetched.
-            if not re.search(r"importScripts\(|new Worker\(|fetch\(|SOURCE|SCRIPT|RUN:|workerUrl", line):
+            if not re.search(r"importScripts\(|new Worker\(|fetch\(|SOURCE|SCRIPT|RUN:|INDEX:|workerUrl",
+                             line):
                 continue
             for match in quoted.finditer(line):
                 ref = match.group(1)

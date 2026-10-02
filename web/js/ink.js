@@ -22,6 +22,20 @@ const Ink = {
     axis: '--chart-axis'
   },
 
+  /**
+   * Colours a line gets when several share one chart, in order: the Diagrams
+   * tab's and the book's figures alike. Taken from the page's own palette
+   * rather than a colormap, because a colormap is a gradient and these have
+   * to be told apart, not ordered.
+   */
+  LINES: ['#5ac8fa', '#ffd166', '#ff6b6b', '#7ee787', '#c792ea',
+          '#f78c6c', '#89ddff', '#e5e5e5'],
+
+  /** The colour of the `i`th line on a chart. */
+  line(i) {
+    return this.LINES[i % this.LINES.length];
+  },
+
   _read: null,
 
   /**

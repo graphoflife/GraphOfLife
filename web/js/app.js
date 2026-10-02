@@ -34,8 +34,10 @@ const App = {
     RunsView.init();
     Explain.init();
     Research.init();
+    Book.init();
     Home.init();
-    this.views = { home: Home, explain: Explain, runs: RunsView, viewer: Viewer, research: Research };
+    this.views = { home: Home, explain: Explain, runs: RunsView, viewer: Viewer,
+                   research: Research, book: Book };
 
     // Both layouts are two panes plus a drag handle; the handle sets the width
     // of the second column and the choice is remembered per layout.
