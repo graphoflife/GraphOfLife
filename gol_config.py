@@ -75,11 +75,13 @@ MECHANICS: Dict[str, Any] = {
 #
 # A run started from these is named for every mechanic it differs in, so a
 # different algorithm announces itself rather than quietly borrowing the old
-# name. Today none differs: a new run is offered `gol-1` itself — no gifts,
-# unused links cut after the game, judged on that phase alone — with longer
-# messages and a slower rate of mutation than the frozen values. Those two are
-# parameters, which a run cites beside its strain rather than in it. Until
-# 2026-10-02 the form offered gifting, cutting after reproduction and a
+# name. Today one differs: a new run is offered `gol-1+brain_kind=float16` —
+# brains on half-precision weights, a quarter of the memory, and otherwise the
+# frozen mechanics: no gifts, unused links cut after the game, judged on that
+# phase alone — with longer messages and a slower rate of mutation than the
+# frozen values. Those two are parameters, which a run cites beside its strain
+# rather than in it. This is also the book's baseline B1. Until 2026-10-02 the
+# form offered float brains with gifting, cutting after reproduction and a
 # whole-iteration window instead,
 #
 #     gol-1+allow_gifting+inactive_window=iteration+prune_after=reproduction
@@ -89,6 +91,7 @@ MECHANICS: Dict[str, Any] = {
 # dead by what a survivor already holds turns every cull into a concentration
 # event, and that is an experiment rather than a default.
 NEW_RUN_DEFAULTS: Dict[str, Any] = {
+    "brain_kind": "float16",
     "message_amount": 30,
     "mutation_probability": 0.2,
 }

@@ -138,10 +138,10 @@ they are larger?
 ## The baseline
 
 Every experiment changes one thing, and the thing it changes is measured
-against a **baseline**, B1 (`book/experiments/B1.json`). It is the algorithm
-as a new run is offered it, with one difference: brains store their weights
-at half precision (`float16`), as every run made by hand so far has. That
-keeps a brain in a quarter of the memory, which is what makes worlds of
+against a **baseline**, B1 (`book/experiments/B1.json`). It is exactly the
+algorithm a new simulation is offered. Among other things, brains store their
+weights at half precision (`float16`), as every run made by hand so far has:
+that keeps a brain in a quarter of the memory, which is what makes worlds of
 100,000 tokens and more possible several at a time.
 
 | Setting | B1 | What it means |

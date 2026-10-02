@@ -75,7 +75,8 @@ comes in three kinds. All of them change what the brain has to decide,
 so they are fixed when a run is created rather than partway through. Deciding
 its own randomness is not optional — it is how every choice is read.
 
-**Brains.** Three kinds, chosen with `brain_kind`. `float` uses 64-bit weights,
+**Brains.** Three kinds, chosen with `brain_kind`; a new run starts with
+`float16`. `float` uses 64-bit weights,
 `float16` the same arithmetic on a quarter of the memory, and `binary` weights
 of only −1, 0 and +1 with hidden units that are simply on or off. The binary
 brain uses no floating point anywhere, so its runs come out identical on any

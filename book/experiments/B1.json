@@ -1,6 +1,6 @@
 {
   "id": "B1",
-  "title": "The algorithm as a new run is offered it, on half-precision brains",
+  "title": "The algorithm exactly as a new run is offered it",
   "strain": "gol-1+brain_kind=float16",
   "settings": {
     "brain_kind": "float16",
@@ -34,10 +34,10 @@
     "extinction_threshold": 20
   },
   "why": {
-    "mechanics": "As the new-simulation form offers them since 2026-10-02 (gol_config.NEW_RUN_DEFAULTS), chosen by the author: every mechanic at its frozen gol-1 value. No gifts; a link that carried no tokens during a phase is cut at the end of the game; the tokens of the dead are shared out evenly.",
+    "mechanics": "As the new-simulation form offers them since 2026-10-02 (gol_config.NEW_RUN_DEFAULTS), chosen by the author: every mechanic at its frozen gol-1 value but the brain's precision. No gifts; a link that carried no tokens during a phase is cut at the end of the game; the tokens of the dead are shared out evenly.",
     "message_amount": "30 numbers in every message, as the author's longest run used: room for more to be said than the five of the frozen default.",
     "mutation_probability": "0.2: a brain has one chance in five of changing at each birth and at the end of each game, slower than the frozen 0.5, at which a genotype lasted a single iteration in the pilots.",
-    "brain_kind": "float16 rather than the form's float. Every run made by hand so far used it, and it stores a brain in a quarter of the memory, which is what lets worlds of 100,000 tokens and more run several at a time. Whether three decimal digits of weight are enough is an experiment on the roadmap.",
+    "brain_kind": "float16, as the form also offers since 2026-10-02 at the author's request. Every run made by hand so far used it, and it stores a brain in a quarter of the memory, which is what lets worlds of 100,000 tokens and more run several at a time. Whether three decimal digits of weight are enough is an experiment on the roadmap.",
     "total_tokens": "Only what a plan inherits if it says nothing. Every experiment chooses its own world size, for its question and its time.",
     "n_nodes": "0: one founder per hundred tokens.",
     "k_neighbors": "0: max(n/100, 5) neighbours in the starting ring, which networkx wires as 4 when the number is odd.",
