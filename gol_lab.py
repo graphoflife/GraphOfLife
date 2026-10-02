@@ -15,7 +15,8 @@ start it again at any point, from the Book tab or from here:
     python3 gol_lab.py pause          ask a running lab to pause
     python3 gol_lab.py status         where everything stands
     python3 gol_lab.py verify E02     re-run a few of its runs and compare
-    python3 gol_lab.py costs          refit what a simulation costs
+    python3 gol_lab.py analyse E02    write its results and figures into the book
+    python3 gol_lab.py costs          refit what a simulation costs, for the book too
 
 Three things about it are deliberate.
 
@@ -954,7 +955,9 @@ def main() -> int:
     verify.add_argument("experiment")
     verify.add_argument("--runs", type=int, default=3)
     verify.add_argument("--iterations", type=int, default=20)
-    commands.add_parser("costs", help="refit what a simulation costs")
+    analyse = commands.add_parser("analyse", help="write an experiment's results into the book")
+    analyse.add_argument("experiment")
+    commands.add_parser("costs", help="refit what a simulation costs, and write it for the book")
     args = parser.parse_args()
 
     if args.command == "plan":
@@ -993,8 +996,16 @@ def main() -> int:
                 print(f"  {'':<{len(spec.run_id)}}  {'reproduced' if same['same'] else 'DIFFERS'}"
                       f" on the engine now, {engine}")
         return 0
+    if args.command == "analyse":
+        import gol_analysis
+        results = gol_analysis.analyse(args.experiment)
+        print(f"wrote book/results/{args.experiment}.json"
+              + "".join(f" and book/figures/{args.experiment}/{f}.json"
+                        for f in results.get("figures", [])))
+        return 0
     if args.command == "costs":
-        print(json.dumps(fit_costs(), indent=1))
+        import gol_analysis
+        print(json.dumps(gol_analysis.costs_report()["fitted"], indent=1))
         return 0
     return 2
 

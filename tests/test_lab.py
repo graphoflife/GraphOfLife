@@ -356,6 +356,109 @@ def test_a_disk_that_would_fill_pauses_the_lab_and_says_why():
         assert not os.path.exists(gol_store.run_dir("B9-400-s001"))
 
 
+# ---------------------------------------------------------------------------
+# Analysis
+# ---------------------------------------------------------------------------
+
+def test_bands_count_who_is_left():
+    """
+    A band over runs that do not all last is a band over fewer runs at the end,
+    and says so: the median of two is between them, of one is that one, and
+    the count of runs behind each point falls when one stops.
+    """
+    import numpy as np
+    import gol_analysis
+    longer = (np.arange(10.0), np.arange(10.0))
+    shorter = (np.arange(5.0), np.arange(5.0) + 100)
+    band = gol_analysis.bands([longer, shorter], points=10)
+    assert band["alive"] == [2] * 5 + [1] * 5, band["alive"]
+    assert band["y"][0] == 50.0 and band["y"][9] == 9.0, band["y"]
+    assert band["lo"][9] == band["hi"][9] == 9.0
+
+
+@contextlib.contextmanager
+def _book(tmp):
+    """Results and figures written somewhere other than the real book."""
+    import gol_analysis
+    saved = gol_analysis.BOOK
+    gol_analysis.BOOK = os.path.join(tmp, "book")
+    try:
+        yield gol_analysis.BOOK
+    finally:
+        gol_analysis.BOOK = saved
+
+
+def _strict(path):
+    """Read JSON that a browser can read: no NaN, no infinity."""
+    def refuse(token):
+        raise AssertionError(f"{path} holds {token}")
+    with open(path) as f:
+        return json.load(f, parse_constant=refuse)
+
+
+def test_figures_hold_no_nan():
+    """
+    The analysis of a sweep writes a figure per statistic it was asked for and
+    a results file with each condition's ending compared with the reference,
+    paired by seed, interval and all — and nothing in either is a NaN, which
+    the page could not read. Graph statistics are absent on most iterations,
+    so there are plenty to turn up.
+    """
+    import gol_analysis
+    sweep = plan("E91", [{"name": "baseline"}, {"name": "fast",
+                                                "set": {"mutation_probability": 0.9}}],
+                 seeds="1..3", iterations=6)
+    sweep["analyse"] = {"kind": "series", "reference": "baseline", "seedsNeeded": True,
+                        "figures": [{"name": "nodes", "stat": "nodes"},
+                                    {"name": "bridges", "stat": "bridges"}],
+                        "endpoints": ["nodes", "edges"]}
+    with lab(sweep) as tmp, _book(tmp) as book:
+        gol_lab.request(run="E91", workers=3)
+        with contextlib.redirect_stdout(io.StringIO()):
+            assert gol_lab.run_lab() == 0
+        results = gol_analysis.analyse("E91")
+        assert results["figures"] == ["nodes", "bridges"]
+        for name in ("nodes", "bridges"):
+            figure = _strict(os.path.join(book, "figures", "E91", f"{name}.json"))
+            assert figure["series"][0]["alive"][-1] == 3, figure["series"][0]["alive"]
+        stored = _strict(os.path.join(book, "results", "E91.json"))
+        fast = stored["comparisons"]["nodes"]["fast"]
+        assert fast["paired"] and fast["n"] == 3 and fast["indicative"], fast
+        assert fast["interval"][0] <= fast["difference"] <= fast["interval"][1], fast
+        assert set(stored["seedsNeeded"]["nodes"]) == {"baseline", "fast"}
+        assert len(stored["citation"]["runs"]) == 6
+        assert stored["citation"]["runs"][0]["environment"]["numpy"]
+        assert stored == _strict(os.path.join(book, "results", "E91.json"))
+        again = gol_analysis.analyse("E91")
+        assert again["comparisons"] == results["comparisons"], "the same runs gave other numbers"
+
+        # A statistic undefined in some runs — a spectral gap of a graph in
+        # pieces, a ratio over nothing — reaches the writer as NaN or infinity.
+        import numpy as np
+        odd = os.path.join(book, "odd.json")
+        gol_analysis._write(odd, {"gap": float("nan"), "ratio": [np.float64("inf"), 1.0]})
+        assert _strict(odd) == {"gap": None, "ratio": [None, 1.0]}
+
+
+def test_an_identity_experiment_reports_every_variant():
+    """
+    The reproducibility experiment's analysis compares every variant with the
+    reference run of its seed, and says so per run, with how much it compared.
+    """
+    import gol_analysis
+    identity = plan("E91", [{"name": "straight"}, {"name": "stopped", "stops": [3]},
+                            {"name": "cut", "fault_at": 4}], seeds="1..2", iterations=6)
+    identity["analyse"] = {"kind": "identity", "reference": "straight"}
+    with lab(identity) as tmp, _book(tmp):
+        gol_lab.request(run="E91", workers=3)
+        with contextlib.redirect_stdout(io.StringIO()):
+            assert gol_lab.run_lab() == 0
+        results = gol_analysis.analyse("E91")
+        assert results["allSame"], results["comparisons"]
+        assert len(results["comparisons"]) == 4
+        assert all(c["frames"] == 12 and c["rows"] == 12 for c in results["comparisons"])
+
+
 def _main() -> int:
     tests = sorted((name, fn) for name, fn in globals().items()
                    if name.startswith("test_") and callable(fn))

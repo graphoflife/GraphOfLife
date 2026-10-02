@@ -459,6 +459,17 @@ const Book = {
       band(s, 'lo', 'hi', 0.22, Ink.line(i));
     });
     series.forEach((s, i) => {
+      if (s.points) {
+        // A cloud of measurements rather than a path through them.
+        ctx.fillStyle = Ink.line(i);
+        ctx.globalAlpha = 0.55;
+        s.x.forEach((t, k) => {
+          const v = s.y[k];
+          if (v !== null && Number.isFinite(sy(v))) ctx.fillRect(px(t) - 1.5, py(v) - 1.5, 3, 3);
+        });
+        ctx.globalAlpha = 1;
+        return;
+      }
       ctx.strokeStyle = Ink.line(i);
       ctx.lineWidth = s.width || 1.6;
       ctx.beginPath();
