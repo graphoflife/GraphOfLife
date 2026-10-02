@@ -850,9 +850,16 @@ def _recent_rate(run_id: str) -> Optional[float]:
     return _median(rows[-20:])
 
 
-def experiment_status(name: str, workers: int, known: Dict[str, Any],
-                      queue: List[str], alive: bool) -> Dict[str, Any]:
-    """One experiment: its runs, how far each is, what is left, and how long that will take."""
+def experiment_status(name: str, control: Dict[str, Any], known: Dict[str, Any],
+                      alive: bool) -> Dict[str, Any]:
+    """
+    One experiment: its runs, how far each is, what is left, and how long that
+    will take. Its state is one of ready (not asked for), queued (asked for,
+    waiting its turn), running, paused (by you, or by the lab with a reason),
+    stopped (asked for, but no lab is running — after a restart, say),
+    finished, blocked or invalid.
+    """
+    workers = control["workers"]
     try:
         specs = experiment_runs(name)
     except LabError as exc:
@@ -895,8 +902,8 @@ def experiment_status(name: str, workers: int, known: Dict[str, Any],
         overall = "finished"
     elif "running" in states:
         overall = "running"
-    elif name in queue:
-        overall = "queued" if alive else "paused"
+    elif name in control["queue"]:
+        overall = "paused" if control["paused"] else "queued" if alive else "stopped"
     else:
         overall = "ready"
     return {
@@ -921,8 +928,7 @@ def status() -> Dict[str, Any]:
         "disk": {"free": disk.free, "total": disk.total},
         "memory": {"total": _memory_bytes()},
         "costs": known,
-        "experiments": {name: experiment_status(name, control["workers"], known,
-                                                control["queue"], alive)
+        "experiments": {name: experiment_status(name, control, known, alive)
                         for name in experiments()},
     }
 
@@ -953,8 +959,7 @@ def main() -> int:
 
     if args.command == "plan":
         control = read_control()
-        state = experiment_status(args.experiment, control["workers"], costs(),
-                                  control["queue"], lab_alive())
+        state = experiment_status(args.experiment, control, costs(), lab_alive())
         for r in state["runs"]:
             shared = f"  (also {', '.join(r['sharedWith'])})" if r["sharedWith"] else ""
             print(f"  {r['id']:<32} {r['state']:<8} {r['iteration']:>6} / {r['until']:<6}{shared}")

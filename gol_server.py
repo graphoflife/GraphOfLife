@@ -30,6 +30,8 @@ API
     GET    /api/runs/<id>/series      per-frame statistics for the whole run
                                       ?points=N coarse, ?keys=a,b what is plotted
     GET    /api/runs/<id>/series/progress   how far a rebuild has got
+    GET    /api/lab                   the book's experiments and the lab running them
+    POST   /api/lab                   {run: E} queue one, {pause: bool}, {workers: n}
 """
 from __future__ import annotations
 
@@ -46,6 +48,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Any, Callable, Dict
 from urllib.parse import parse_qs, urlparse
 
+import gol_lab
 import gol_run
 import gol_store as store
 from gol_config import SimConfig
@@ -80,6 +83,14 @@ SHIPPED_DOCS = {
     "data/Literature.md": os.path.join("research", "Literature.md"),
     "data/Graphs.md": os.path.join("research", "Graphs.md"),
 }
+
+# The book: chapters, experiment plans and figures, which live in book/ for the
+# same reason the notes live in research/ — written for a reader first, and on
+# GitHub as much as on the page. Served as a folder rather than a list, since
+# it grows with every chapter, but only the kinds of file a book is made of,
+# and only from inside it.
+BOOK_DIR = os.path.join(BASE_DIR, "book")
+BOOK_TYPES = (".md", ".json")
 
 # Requests are capped so a malformed or hostile body cannot exhaust memory.
 MAX_BODY_BYTES = 1 << 20
@@ -312,7 +323,7 @@ class Handler(BaseHTTPRequestHandler):
             # worker's next write used to recreate the folder it was in, and a
             # run deleted while going came back as a stray folder of frames.
             if not POOL.stop_and_wait(parts[2], wait=120):
-                self._error("the run is still being advanced; stop it first", 409)
+                self._error(self._held_elsewhere(parts[2]), 409)
                 return
             store.delete_run(parts[2])
             self._send_json({"ok": True})
@@ -330,6 +341,10 @@ class Handler(BaseHTTPRequestHandler):
 
         if parts == ["api", "runs"]:
             self._send_json({"runs": [self._decorate(m) for m in store.list_runs()]})
+            return
+
+        if parts == ["api", "lab"]:
+            self._send_json(gol_lab.status())
             return
 
         if len(parts) == 3 and parts[:2] == ["api", "runs"]:
@@ -463,10 +478,32 @@ class Handler(BaseHTTPRequestHandler):
             self._send_json(self._decorate(meta), 201)
             return
 
+        if parts == ["api", "lab"]:
+            # Starts processes, so it has to be asked for the way only this
+            # page asks: a form on some other site can post to localhost, but
+            # not with a JSON body, which a browser will not send across sites
+            # without a permission this server never gives.
+            if self.headers.get("Content-Type", "").split(";")[0].strip() != "application/json":
+                self._error("the lab only takes JSON", 415)
+                return
+            body = self._read_json()
+            control = gol_lab.request(run=body.get("run"), pause=body.get("pause"),
+                                      workers=body.get("workers"))
+            if not control["paused"]:
+                gol_lab.spawn_lab()
+            self._send_json(gol_lab.status())
+            return
+
         if len(parts) == 4 and parts[:2] == ["api", "runs"] and parts[3] == "start":
             run_id = parts[2]
-            store.load_meta(run_id)  # 404s if the run is unknown
+            meta = store.load_meta(run_id)  # 404s if the run is unknown
             body = self._read_json()
+            # Advanced here it would run on today's engine, which is not the
+            # one it was made with, and without the lab's record of it.
+            if meta.get("lab"):
+                self._error("this run belongs to an experiment, which runs it on the engine "
+                            "it was made with: start it from the Book", 409)
+                return
             if not POOL.start(run_id):
                 self._error("run is already in progress", 409)
                 return
@@ -496,7 +533,7 @@ class Handler(BaseHTTPRequestHandler):
             run_id = parts[2]
             store.load_meta(run_id)
             if not POOL.stop(run_id) and store.held(run_id):
-                self._error("the run is being advanced by another process", 409)
+                self._error(self._held_elsewhere(run_id), 409)
                 return
             self._send_json({"ok": True})
             return
@@ -514,6 +551,13 @@ class Handler(BaseHTTPRequestHandler):
             # than leaving it to be known.
             "brain_presets": SimConfig.BRAIN_PRESETS,
         }
+
+    @staticmethod
+    def _held_elsewhere(run_id: str) -> str:
+        """Why a run something else is advancing cannot be touched from here."""
+        if store.load_meta(run_id).get("lab"):
+            return "an experiment is advancing this run: pause the lab from the Book first"
+        return "the run is being advanced by another process"
 
     @staticmethod
     def _decorate(meta: Dict[str, Any]) -> Dict[str, Any]:
@@ -562,6 +606,11 @@ class Handler(BaseHTTPRequestHandler):
             candidate = os.path.join(BASE_DIR, name)
         elif rel in SHIPPED_DOCS:
             candidate = os.path.join(BASE_DIR, SHIPPED_DOCS[rel])
+        elif rel.startswith("book/"):
+            candidate = os.path.realpath(os.path.join(BASE_DIR, rel))
+            inside = candidate.startswith(os.path.realpath(BOOK_DIR) + os.sep)
+            if not inside or not candidate.endswith(BOOK_TYPES):
+                return None
         else:
             return None
         return candidate if os.path.isfile(candidate) else None

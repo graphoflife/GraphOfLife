@@ -54,6 +54,11 @@ const ServerBackend = {
   stopRun(id)           { return this._request('POST', `/api/runs/${encodeURIComponent(id)}/stop`); },
   copyRun(id, name)     { return this._request('POST', `/api/runs/${encodeURIComponent(id)}/copy`, { name }); },
   renameRun(id, name)   { return this._request('POST', `/api/runs/${encodeURIComponent(id)}/rename`, { name }); },
+  // The book's experiments and the lab that runs them. Only a machine with
+  // its own server has a lab: the simulations take hours, and a browser tab
+  // is not where hours of work should live.
+  labStatus(opts)       { return this._request('GET', '/api/lab', undefined, opts && opts.signal); },
+  labRequest(body)      { return this._request('POST', '/api/lab', body); },
   getFrame(id, index, opts)   { return this._request('GET', `/api/runs/${encodeURIComponent(id)}/frames/${index}`, undefined, opts && opts.signal); },
   // A contiguous run of frames, cut down to the fields the caller reads.
   // `fields` is the difference between two arrays and the whole topology of
@@ -164,7 +169,10 @@ const BrowserBackend = {
     return this._send('series', { runId: id, points, keys }, opts && opts.signal);
   },
   getSeriesProgress(id, opts) { return this._send('seriesProgress', { runId: id }, opts && opts.signal); },
-  storage()             { return this._send('storage'); }
+  storage()             { return this._send('storage'); },
+  // No lab here: an experiment runs on a machine with gol_server.py.
+  labStatus()           { return Promise.resolve(null); },
+  labRequest()          { return Promise.reject(new Error('experiments run with gol_server.py')); }
 };
 
 const API = {

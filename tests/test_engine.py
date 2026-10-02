@@ -2514,6 +2514,99 @@ def test_every_request_turns_what_goes_wrong_into_an_answer():
         assert request.answered == ([answer] if answer else []), (raised, request.answered)
 
 
+def test_the_book_route_serves_only_the_book():
+    """
+    The book is served as a folder, since it grows with every chapter — and a
+    folder served off the disk is a way to read anything beside it unless the
+    path is held inside it after every link is followed, and only the kinds of
+    file a book is made of are given out.
+    """
+    import gol_server
+
+    found = gol_server.Handler._engine_file("book/experiments/E01.json")
+    assert found and found.endswith(os.path.join("book", "experiments", "E01.json")), found
+    for asked in ("book/../gol_server.py", "book/../research/Research.md",
+                  "book/experiments/../../gol_lab.py", "book/missing.json",
+                  "book/experiments/E01.json.py", "bookish/E01.json"):
+        assert gol_server.Handler._engine_file(asked) is None, asked
+
+    with tempfile.TemporaryDirectory() as tmp:
+        os.makedirs(os.path.join(tmp, "book"))
+        with open(os.path.join(tmp, "secret.json"), "w") as f:
+            f.write("{}")
+        os.symlink(os.path.join(tmp, "secret.json"), os.path.join(tmp, "book", "link.json"))
+        with open(os.path.join(tmp, "book", "tool.py"), "w") as f:
+            f.write("")
+        saved = gol_server.BASE_DIR, gol_server.BOOK_DIR
+        gol_server.BASE_DIR, gol_server.BOOK_DIR = tmp, os.path.join(tmp, "book")
+        try:
+            assert gol_server.Handler._engine_file("book/link.json") is None, \
+                "a link inside the book reached a file outside it"
+            assert gol_server.Handler._engine_file("book/tool.py") is None, \
+                "the book gave out a file a book is not made of"
+        finally:
+            gol_server.BASE_DIR, gol_server.BOOK_DIR = saved
+
+
+def test_the_server_and_the_build_ship_the_same_book():
+    """The published book and the one served locally are the same kinds of file from the same folder."""
+    import gol_server
+
+    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    script = open(os.path.join(root, "build_site.sh")).read()
+    copy = re.search(r'cd "\$\{here\}/book" && find \. -type f (.+?)\)', script)
+    assert copy, "could not find where build_site.sh copies the book"
+    built = tuple(sorted(re.findall(r"-name '\*(\.\w+)'", copy.group(1))))
+    assert built == tuple(sorted(gol_server.BOOK_TYPES)), (built, gol_server.BOOK_TYPES)
+
+
+def test_a_lab_run_shows_running_and_refuses_start():
+    """
+    A run that belongs to an experiment is advanced by the lab, on the engine
+    it was made with. Held by the lab it shows as running; and the server will
+    not start it, stop it or delete it, which would run it on today's engine or
+    pull it out from under the lab, and says where to go instead.
+    """
+    import gol_server
+    import gol_store
+
+    class Request:
+        headers = {}
+        _held_elsewhere = staticmethod(gol_server.Handler._held_elsewhere)
+
+        def __init__(self, path):
+            self.path = path
+            self.answered = []
+
+        def _read_json(self):
+            return {}
+
+        def _error(self, message, status=400):
+            self.answered.append((status, message))
+
+        def _send_json(self, payload, status=200):
+            self.answered.append((status, payload))
+
+    with _scratch_runs():
+        run_id = gol_store.create_run("lab run", small(seed=91), run_id="E9-s001",
+                                      lab={"baseline": "B1", "engine": "x"})["id"]
+        with gol_store.hold(run_id):
+            assert gol_server.Handler._decorate(gol_store.load_meta(run_id))["running"]
+            for action, route in (("start", gol_server.Handler._route_post),
+                                  ("stop", gol_server.Handler._route_post),
+                                  (None, gol_server.Handler._route_delete)):
+                path = f"/api/runs/{run_id}" + (f"/{action}" if action else "")
+                request = Request(path)
+                route(request, path)
+                status, message = request.answered[0]
+                assert status == 409 and "Book" in message, (action, request.answered)
+        assert os.path.isdir(gol_store.run_dir(run_id)), "a run held by the lab was deleted"
+
+        request = Request(f"/api/runs/{run_id}/start")
+        gol_server.Handler._route_post(request, f"/api/runs/{run_id}/start")
+        assert request.answered[0][0] == 409, "an experiment's run was started outside the lab"
+
+
 def test_the_defaults_endpoint_carries_the_brain_presets():
     """The form fills itself in from the engine, so the engine has to say."""
     import gol_server

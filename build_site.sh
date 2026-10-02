@@ -46,6 +46,15 @@ for doc in Research.md Literature.md Graphs.md; do
   cp "${here}/research/${doc}" "${out}/data/${doc}"
 done
 
+# The book: its chapters, the plans of its experiments, and the figures and
+# results their analysis writes. In book/ for the same reason the notes are in
+# research/, and gol_server.py serves the same folder, the same two kinds of
+# file; tests/test_engine.py holds the two to that.
+(cd "${here}/book" && find . -type f \( -name '*.md' -o -name '*.json' \)) | while read -r f; do
+  mkdir -p "${out}/book/$(dirname "${f}")"
+  cp "${here}/book/${f}" "${out}/book/${f}"
+done
+
 # Stamp every script and stylesheet with the commit they came from.
 #
 # Without this a browser holding an older copy of js/app.js keeps using it: the
