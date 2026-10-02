@@ -116,6 +116,7 @@ On every store that can be found on its own:
 |---|---|---|---|
 | `gol-1` | — (all defaults) | `9cee9fd` | The baseline. Everything in `Research.md` Appendix A. |
 | `gol-1+random_decisions` | `random_decisions` | this commit | The control. Every other mechanic identical, so a difference between this and `gol-1` is attributable to the agents reading their inputs and to nothing else. |
+| `gol-1+allow_gifting+brain_kind=float16+inactive_window=iteration+prune_after=reproduction` | `allow_gifting`, `brain_kind=float16`, `inactive_window=iteration`, `prune_after=reproduction` | the book's lab | The book's baseline B1 (`book/experiments/B1.json`): what a new run is offered, on half-precision brains. |
 
 ---
 

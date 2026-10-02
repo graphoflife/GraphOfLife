@@ -1,0 +1,44 @@
+{
+  "id": "B1",
+  "title": "The algorithm as a new run is offered it, on half-precision brains",
+  "strain": "gol-1+allow_gifting+brain_kind=float16+inactive_window=iteration+prune_after=reproduction",
+  "settings": {
+    "brain_kind": "float16",
+    "exchange_messages": true,
+    "message_prepass": true,
+    "allow_handover": true,
+    "allow_revolutions": true,
+    "random_decisions": false,
+    "tokens_created_per_phase": 0,
+    "allow_gifting": true,
+    "prune_after": "reproduction",
+    "inactive_window": "iteration",
+    "redistribution": "uniform",
+    "total_tokens": 10000,
+    "n_nodes": 0,
+    "k_neighbors": 0,
+    "rewire_p": 0.2,
+    "hidden_layers": [
+      50,
+      45,
+      40,
+      35,
+      30
+    ],
+    "brain_bits": 16,
+    "message_amount": 5,
+    "random_input_amount": 5,
+    "mutation_probability": 0.5,
+    "mutation_noise_std": 0.2,
+    "mutation_sparsity": 0.1,
+    "extinction_threshold": 20
+  },
+  "why": {
+    "mechanics": "As the new-simulation form offered them on 2026-10-02 (gol_config.NEW_RUN_DEFAULTS): a parent may gift tokens to a neighbour, and links that carried nothing over a whole iteration are cut at the end of reproduction. Everything else at its frozen default.",
+    "brain_kind": "float16 rather than the form's float. Every run made by hand so far used it, and it halves what a brain costs in memory and on disk, which is what lets worlds of 100,000 tokens and more run several at a time. Whether three decimal digits of weight are enough is an experiment on the roadmap.",
+    "total_tokens": "Only what a plan inherits if it says nothing. Every experiment chooses its own world size, for its question and its time.",
+    "n_nodes": "0: one founder per hundred tokens.",
+    "k_neighbors": "0: max(n/100, 5) neighbours in the starting ring, which networkx wires as 4 when the number is odd.",
+    "hidden_layers": "The preset for float and float16 brains: five layers, 10,256 weights in all."
+  }
+}

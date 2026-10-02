@@ -44,6 +44,8 @@ jobs:
         run: pip install --quiet -r requirements.txt
       - name: Engine invariants
         run: python3 tests/test_engine.py
+      - name: The lab runs what the book plans, and stopping it changes nothing
+        run: python3 tests/test_lab.py
       - name: The two statistics implementations agree
         run: python3 tests/test_stats_parity.py
       - name: The flow modules find what they should

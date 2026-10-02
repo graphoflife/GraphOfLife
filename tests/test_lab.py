@@ -1,0 +1,379 @@
+"""
+The lab: plans read strictly, runs shared, workers on their frozen engine, and
+a queue worked through to the end however often it is stopped or cut off.
+
+    python3 tests/test_lab.py
+
+Everything happens in a scratch runs folder with plans of its own, on worlds
+small enough that a worker process spends most of its life importing numpy.
+"""
+
+from __future__ import annotations
+
+import contextlib
+import io
+import json
+import os
+import shutil
+import signal
+import subprocess
+import sys
+import tempfile
+import time
+import traceback
+
+HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, HERE)
+
+import gol_lab        # noqa: E402
+import gol_store      # noqa: E402
+from gol_config import SimConfig   # noqa: E402
+
+with open(os.path.join(HERE, "book", "experiments", "B1.json")) as _f:
+    B1 = json.load(_f)
+
+#: The real baseline, shrunk to a world a test can run in a second, and never
+#: declared extinct, so a world that dwindles still goes on as long as asked.
+TINY = {**B1["settings"], "total_tokens": 400, "n_nodes": 30, "k_neighbors": 4,
+        "hidden_layers": [6], "message_amount": 2, "random_input_amount": 2,
+        "extinction_threshold": 0}
+
+
+def plan(name, conditions=({"name": "straight"},), seeds="1..2", iterations=6, **runs):
+    """A plan on the tiny baseline B9."""
+    return {"id": name, "title": name, "thesis": {},
+            "runs": {"baseline": "B9", "world": {"total_tokens": 400}, "seeds": seeds,
+                     "iterations": iterations, "record": {"checkpoint_every": 2,
+                                                          "heavy_every": 2},
+                     "conditions": list(conditions), **runs}}
+
+
+@contextlib.contextmanager
+def lab(*plans, baseline=TINY):
+    """A runs folder and a plans folder of their own, and an engine that counts as committed."""
+    with tempfile.TemporaryDirectory() as tmp:
+        runs, plans_dir = os.path.join(tmp, "runs"), os.path.join(tmp, "plans")
+        os.makedirs(runs)
+        os.makedirs(plans_dir)
+        with open(os.path.join(plans_dir, "B9.json"), "w") as f:
+            json.dump({"id": "B9", "settings": baseline}, f)
+        for p in plans:
+            with open(os.path.join(plans_dir, f"{p['id']}.json"), "w") as f:
+                json.dump(p, f)
+        saved = gol_store.BASE_DIR, gol_lab.PLANS, gol_lab._git
+        gol_store.BASE_DIR, gol_lab.PLANS = runs, plans_dir
+        # The tests run on whatever is in the working tree, committed or not.
+        gol_lab._git = lambda *args: "" if args[0] == "status" else "test-commit"
+        try:
+            yield tmp
+        finally:
+            gol_store.BASE_DIR, gol_lab.PLANS, gol_lab._git = saved
+
+
+def work(spec, until, *extra, engine=None):
+    """Run one worker for one spec, as the lab would, and return its exit code."""
+    engine = engine or gol_lab.snapshot()
+    job = gol_lab.Job(spec, until, engine,
+                      os.path.exists(os.path.join(gol_store.run_dir(spec.run_id), "meta.json")),
+                      None, 0)
+    proc = gol_lab._start(job)
+    return proc.wait(timeout=120)
+
+
+def refused(fn, *words):
+    try:
+        fn()
+    except gol_lab.LabError as exc:
+        for word in words:
+            assert word in str(exc), (word, str(exc))
+        return
+    raise AssertionError(f"accepted what it should have refused: {words}")
+
+
+# ---------------------------------------------------------------------------
+# Plans
+# ---------------------------------------------------------------------------
+
+def test_a_plan_with_an_unknown_setting_is_refused():
+    """
+    SimConfig.from_dict drops keys it does not know, which is right for a stored
+    run and wrong for a plan: a misspelt setting would run the baseline under
+    the name of an experiment. The lab refuses it, and anything else a plan
+    cannot say.
+    """
+    with lab(plan("E91", [{"name": "a", "set": {"mutation_rate": 0.1}}]),
+             plan("E92", [{"name": "a", "sets": {"mutation_probability": 0.1}}]),
+             plan("E93", seed_list=[1])):
+        refused(lambda: gol_lab.experiment_runs("E91"), "mutation_rate")
+        refused(lambda: gol_lab.experiment_runs("E92"), "sets")
+        refused(lambda: gol_lab.experiment_runs("E93"), "seed_list")
+
+
+def test_a_condition_may_not_set_seed_or_infrastructure():
+    """The seed belongs to the seeds and what is recorded to the lab, not to a condition."""
+    with lab(plan("E91", [{"name": "a", "set": {"seed": 3}}]),
+             plan("E92", [{"name": "a", "set": {"checkpoint_every": 5}}]),
+             plan("E93", [{"name": "a", "set": {"total_tokens": 900}}])):
+        refused(lambda: gol_lab.experiment_runs("E91"), "seed")
+        refused(lambda: gol_lab.experiment_runs("E92"), "checkpoint_every")
+        refused(lambda: gol_lab.experiment_runs("E93"), "total_tokens")
+
+
+def test_a_baseline_names_every_mechanic_and_parameter():
+    """
+    A baseline that left a setting out would inherit whatever the code's
+    default is on the day, and a default that moved would move the baseline
+    with it. B1 names them all, and its strain is the one its settings give.
+    """
+    settings = gol_lab.baseline("B1")
+    assert SimConfig.from_dict({**settings, "seed": 1}).strain_id() == B1["strain"]
+    with lab(baseline={k: v for k, v in TINY.items() if k != "rewire_p"}):
+        refused(lambda: gol_lab.baseline("B9"), "rewire_p")
+
+
+def test_every_strain_an_experiment_uses_is_registered():
+    """Every algorithm an experiment runs is named in research/strains.md, as the scheme asks."""
+    registered = set(gol_lab.registered_strains())
+    for name in gol_lab.experiments():
+        for spec in gol_lab.experiment_runs(name):
+            strain = SimConfig.from_dict(spec.config).strain_id()
+            assert strain in registered, f"{name} runs {strain}, which strains.md does not list"
+
+
+def test_two_experiments_asking_for_the_same_run_share_it():
+    """
+    A run is named for what it is, so two experiments that need the same run
+    get one, taken as far as the further of them asks — and a condition that
+    is a run made again on purpose gets one of its own.
+    """
+    with lab(plan("E91", iterations=4),
+             plan("E92", [{"name": "straight"}, {"name": "cut", "fault_at": 2},
+                          {"name": "fast", "set": {"mutation_probability": 0.9}}],
+                  iterations=6),
+             {"id": "E93", "runs": "same as E91"}):
+        runs = gol_lab.wanted(["E91", "E92", "E93"])
+        fast = [gol_lab.run_id_for("B9", {"total_tokens": 400},
+                                   {"mutation_probability": 0.9}, seed) for seed in (1, 2)]
+        assert sorted(runs) == sorted(fast + ["B9-400-s001", "B9-400-s001-cut",
+                                              "B9-400-s002", "B9-400-s002-cut"]), sorted(runs)
+        assert all(run_id.startswith("B9-400-") and run_id != "B9-400-s001" for run_id in fast)
+        shared = runs["B9-400-s001"]
+        assert shared.targets == [4, 6] and shared.experiments == ["E91", "E92", "E93"]
+        assert runs["B9-400-s001-cut"].fault_at == 2
+
+
+def test_a_plan_can_grow_but_not_change():
+    """
+    More seeds or longer runs only add to what exists. A baseline edited after
+    its runs were made would put new settings on old runs, and those runs are
+    stopped and named rather than carried on as something they are not.
+    """
+    with lab(plan("E91", seeds="1", iterations=2)) as tmp:
+        spec = gol_lab.experiment_runs("E91")[0]
+        assert work(spec, 2) == 0
+        assert gol_lab.run_state(spec, None)["state"] == "done"
+
+        grown = plan("E91", seeds="1..2", iterations=3)
+        with open(os.path.join(tmp, "plans", "E91.json"), "w") as f:
+            json.dump(grown, f)
+        states = [gol_lab.run_state(s, None)["state"] for s in gol_lab.experiment_runs("E91")]
+        assert states == ["waiting", "waiting"], states
+
+        with open(os.path.join(tmp, "plans", "B9.json"), "w") as f:
+            json.dump({"id": "B9", "settings": {**TINY, "mutation_probability": 0.3}}, f)
+        state = gol_lab.run_state(gol_lab.experiment_runs("E91")[0], None)
+        assert state["state"] == "blocked" and "other settings" in state["reason"], state
+
+
+# ---------------------------------------------------------------------------
+# Workers
+# ---------------------------------------------------------------------------
+
+def test_a_worker_imports_only_its_snapshot():
+    """
+    A worker that found its engine somewhere other than beside it would run
+    today's code under a snapshot's name. It refuses — and one where it should
+    be records the snapshot's hash and commit in the run's provenance.
+    """
+    with lab(plan("E91", seeds="1", iterations=1)) as tmp:
+        spec = gol_lab.experiment_runs("E91")[0]
+        assert work(spec, 1) == 0
+        with open(os.path.join(gol_store.run_dir(spec.run_id), "provenance.json")) as f:
+            session = json.load(f)["sessions"][0]
+        assert session["engine"]["hash"] == gol_lab.engine_hash()
+        assert session["engine"]["commit"] == "test-commit"
+        assert session["exit"] == "target" and session["to"] == 1
+        assert session["environment"]["threads"]["OPENBLAS_NUM_THREADS"] == "1", \
+            "a worker has to keep the matrix library to one thread"
+
+        alone = os.path.join(tmp, "alone")
+        os.makedirs(alone)
+        shutil.copy(os.path.join(HERE, "gol_worker.py"), alone)
+        done = subprocess.run([sys.executable, "-B", os.path.join(alone, "gol_worker.py"),
+                               spec.run_id, "--until", "2"],
+                              env={**os.environ, "PYTHONPATH": HERE,
+                                   "GOL_RUNS_DIR": gol_store.BASE_DIR},
+                              capture_output=True, text=True, timeout=120)
+        assert done.returncode == gol_lab.EXIT_REFUSED, done.stderr
+        assert "refusing" in done.stderr
+
+
+def test_a_changed_environment_is_refused():
+    """
+    A run started on one numpy does not go on under another: a last-bit
+    difference in a sum is a different history. The worker refuses and says
+    which library moved, and the lab treats the run as blocked.
+    """
+    with lab(plan("E91", seeds="1", iterations=4)):
+        spec = gol_lab.experiment_runs("E91")[0]
+        assert work(spec, 2) == 0
+        path = os.path.join(gol_store.run_dir(spec.run_id), "provenance.json")
+        with open(path) as f:
+            provenance = json.load(f)
+        provenance["sessions"][0]["environment"]["numpy"] = "0.0.1"
+        with open(path, "w") as f:
+            json.dump(provenance, f)
+
+        assert work(spec, 4) == gol_lab.EXIT_REFUSED
+        state = gol_lab.run_state(spec, None)
+        assert state["state"] == "blocked" and "numpy 0.0.1" in state["reason"], state
+
+
+def test_a_terminated_worker_resumes_to_the_same_run():
+    """
+    Pausing the lab sends its workers SIGTERM. A worker finishes the iteration
+    in hand, saves, and says it was paused; the next one picks up from there,
+    and the run is the run a worker left alone would have made.
+    """
+    with lab(plan("E91", [{"name": "straight"}, {"name": "paused", "stops": []}],
+                  seeds="1", iterations=40)):
+        straight, paused = gol_lab.experiment_runs("E91")
+        assert work(straight, 40) == 0
+
+        engine = gol_lab.snapshot()
+        proc = gol_lab._start(gol_lab.Job(paused, 40, engine, False, None, 0))
+        meta = os.path.join(gol_store.run_dir(paused.run_id), "meta.json")
+        deadline = time.time() + 60
+        while time.time() < deadline:
+            if os.path.exists(meta) and gol_store.load_meta(paused.run_id).get("iteration", 0) >= 3:
+                break
+            time.sleep(0.05)
+        proc.send_signal(signal.SIGTERM)
+        assert proc.wait(timeout=60) == 0
+        stopped_at = gol_store.load_meta(paused.run_id)
+        assert 3 <= stopped_at["iteration"] < 40, stopped_at["iteration"]
+        assert stopped_at["checkpoint_iteration"] == stopped_at["iteration"]
+
+        assert work(paused, 40) == 0
+        with open(os.path.join(gol_store.run_dir(paused.run_id), "provenance.json")) as f:
+            exits = [s["exit"] for s in json.load(f)["sessions"]]
+        assert exits == ["paused", "target"], exits
+        folder = gol_store.BASE_DIR
+        same = gol_lab.compare((folder, straight.run_id), (folder, paused.run_id))
+        assert same["same"], same
+
+
+def test_an_engine_that_does_not_remake_a_run_is_caught():
+    """
+    Before runs made by different snapshots are compared with each other, the
+    newer snapshot has to make the older one's runs again, exactly. An engine
+    whose agents hear their noise a hundred times louder is caught.
+    """
+    with lab(plan("E91", seeds="1", iterations=3)):
+        spec = gol_lab.experiment_runs("E91")[0]
+        assert work(spec, 3) == 0
+        engine = gol_lab.snapshot()
+        assert gol_lab.reproduce(spec.run_id, engine, 3)["same"]
+
+        other = gol_lab.engine_dir("0123456789abcdef")
+        shutil.copytree(gol_lab.engine_dir(engine), other)
+        source = os.path.join(other, "GraphOfLifeSimple.py")
+        with open(source) as f:
+            text = f.read()
+        with open(source, "w") as f:
+            f.write(text.replace("rng.uniform(-2.0, 2.0,", "rng.uniform(-200.0, 200.0,"))
+        answer = gol_lab.reproduce(spec.run_id, "0123456789abcdef", 3)
+        assert not answer["same"] and "firstFrame" in answer, answer
+
+
+# ---------------------------------------------------------------------------
+# The lab
+# ---------------------------------------------------------------------------
+
+def test_the_lab_works_through_a_queue():
+    """
+    Queued, run, and left alone: every run reaches what its plan asks, a run
+    stopped on the way is continued in a new process, a run cut off without a
+    checkpoint is resumed from the last one, and every one of them records
+    exactly what the run left alone records.
+    """
+    conditions = [{"name": "straight"}, {"name": "stopped", "stops": [3]},
+                  {"name": "cut", "fault_at": 5}, {"name": "threads", "threads": "default"}]
+    with lab(plan("E91", conditions, seeds="1..2", iterations=8)):
+        gol_lab.request(run="E91", workers=3)
+        with contextlib.redirect_stdout(io.StringIO()):
+            assert gol_lab.run_lab() == 0
+
+        status = gol_lab.status()["experiments"]["E91"]
+        assert status["state"] == "finished", status
+        assert status["done"] == status["total"] == 8 * 8
+
+        folder = gol_store.BASE_DIR
+        for seed in (1, 2):
+            reference = f"B9-400-s{seed:03d}"
+            for variant in ("stopped", "cut", "threads"):
+                same = gol_lab.compare((folder, reference), (folder, f"{reference}-{variant}"))
+                assert same["same"], (variant, same)
+
+            def exits(run_id):
+                with open(os.path.join(gol_store.run_dir(run_id), "provenance.json")) as f:
+                    return [(s["from"], s["exit"]) for s in json.load(f)["sessions"]]
+            assert exits(f"{reference}-stopped") == [(0, "target"), (3, "target")]
+            with open(os.path.join(gol_store.run_dir(f"{reference}-threads"),
+                                   "provenance.json")) as f:
+                threads = json.load(f)["sessions"][0]["environment"]["threads"]
+            assert threads["OPENBLAS_NUM_THREADS"] is None, threads
+            assert exits(f"{reference}-cut") == [(0, "fault"), (5, "target")]
+            assert gol_store.load_meta(f"{reference}-cut")["checkpoint_iteration"] == 8
+
+
+def test_a_disk_that_would_fill_pauses_the_lab_and_says_why():
+    """
+    A run that would not fit on the disk is not started, to fail halfway. The
+    lab pauses before it begins and the control file says what it needed.
+    """
+    with lab(plan("E91", seeds="1", iterations=4)):
+        real = gol_lab.shutil.disk_usage
+        gol_lab.shutil.disk_usage = lambda path: real(path)._replace(free=gol_lab.DISK_MARGIN)
+        try:
+            gol_lab.request(run="E91")
+            with contextlib.redirect_stdout(io.StringIO()):
+                assert gol_lab.run_lab() == 0
+        finally:
+            gol_lab.shutil.disk_usage = real
+        control = gol_lab.read_control()
+        assert control["paused"] and "disk" in control["reason"], control
+        assert not os.path.exists(gol_store.run_dir("B9-400-s001"))
+
+
+def _main() -> int:
+    tests = sorted((name, fn) for name, fn in globals().items()
+                   if name.startswith("test_") and callable(fn))
+    failures = []
+    started = time.perf_counter()
+    for name, fn in tests:
+        try:
+            fn()
+            print(".", end="", flush=True)
+        except Exception:
+            failures.append((name, traceback.format_exc()))
+            print("F", end="", flush=True)
+    print(f"\n\n{len(tests) - len(failures)} passed, {len(failures)} failed "
+          f"in {time.perf_counter() - started:.1f}s")
+    for name, trace in failures:
+        print(f"\n--- {name} ---\n{trace}")
+    return 1 if failures else 0
+
+
+if __name__ == "__main__":
+    sys.exit(_main())

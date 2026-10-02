@@ -1,0 +1,45 @@
+{
+  "id": "E01",
+  "title": "Is a run reproducible?",
+  "thesis": {
+    "claim": "A run is decided by its settings and its seed, and by nothing else. Run it again, stop it and load it again in a new process, cut it off without warning and resume it, or let the matrix library use as many threads as it likes: every frame and the final state come out the same, bit for bit.",
+    "why": "Every random draw a world makes comes from its own stream, seeded from the seed, and a checkpoint stores that stream with everything else the world is. A resumed run deletes whatever was recorded after its checkpoint and lives those iterations again.",
+    "confirm": "Every frame of every variant is identical to the reference run with the same seed, and so are the statistics recorded from them and the final checkpoints, array for array, the random stream included.",
+    "refute": "Anything differs anywhere. Then a result cannot be reproduced from its seed, and nothing later in this book can be trusted until that is fixed."
+  },
+  "runs": {
+    "baseline": "B1",
+    "world": {
+      "total_tokens": 10000
+    },
+    "seeds": "1..3",
+    "iterations": 30,
+    "record": {
+      "checkpoint_every": 10,
+      "heavy_every": 5
+    },
+    "conditions": [
+      {
+        "name": "straight"
+      },
+      {
+        "name": "stopped at 10",
+        "stops": [
+          10
+        ]
+      },
+      {
+        "name": "cut off at 15",
+        "fault_at": 15
+      },
+      {
+        "name": "all BLAS threads",
+        "threads": "default"
+      }
+    ]
+  },
+  "analyse": {
+    "kind": "identity",
+    "reference": "straight"
+  }
+}
