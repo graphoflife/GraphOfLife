@@ -194,8 +194,9 @@ class SimConfig:
     #            asks whether evolution needs the other thirteen.
     #   binary   weights of -1, 0 or +1 and hidden units that are on or off.
     #            Inputs arrive thermometer-coded, the output layer emits its
-    #            integer sum so magnitudes survive, and no float is involved
-    #            anywhere — which also makes a run bit-identical on any machine.
+    #            integer sum so magnitudes survive, and no weight is a float —
+    #            which takes the matrix arithmetic, the largest difference between
+    #            machines, out of a run. Its inputs are still floats until laddered.
     #
     # A binary brain needs a gentler mutation_sparsity than the others, and
     # not by preference. Its smallest possible move is a whole step, while the

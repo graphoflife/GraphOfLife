@@ -248,6 +248,132 @@ def test_resuming_continues_the_same_run():
     assert straight_on == after_restore, "the resumed run diverged from the original"
 
 
+def _recorded(world, iterations):
+    """Every frame a world records over some iterations, as canonical JSON."""
+    import json
+    return [json.dumps(frame, sort_keys=True)
+            for _ in range(iterations) for frame in world.step(record_decisions=True)]
+
+
+def test_two_worlds_stepped_in_turn_record_what_each_records_alone():
+    """
+    The server runs simulations as threads of one process, and the browser
+    runs them in one interpreter. Their worlds drew from numpy's one global
+    stream, so a run going beside another could not be reproduced from its
+    seed — and starting a run reseeded that stream for every run already
+    going. Each world draws from a stream of its own now.
+    """
+    def binary(seed):
+        return small(seed=seed, brain_kind="binary", hidden_layers=[24, 16])
+
+    alone_a = _recorded(new_world(small(seed=41)), 5)
+    alone_b = _recorded(new_world(binary(42)), 5)
+
+    a, b = new_world(small(seed=41)), new_world(binary(42))
+    together_a, together_b = [], []
+    for _ in range(5):
+        together_a += _recorded(a, 1)
+        together_b += _recorded(b, 1)
+        new_world(small(seed=43))            # a third run starting meanwhile
+
+    assert together_a == alone_a, "a float world was moved by the worlds beside it"
+    assert together_b == alone_b, "a binary world was moved by the worlds beside it"
+
+
+def test_two_browser_worlds_stepped_in_turn_record_what_each_records_alone():
+    """The same for the page's worker, which holds every run in one interpreter."""
+    config = {"total_tokens": 2000, "n_nodes": 40, "k_neighbors": 4,
+              "hidden_layers": [6], "message_amount": 2, "random_input_amount": 2}
+
+    def alone(seed):
+        worlds = _browser_module().Worlds()
+        worlds.create("x", {**config, "seed": seed})
+        return [worlds.step("x")["frames"] for _ in range(4)]
+
+    worlds = _browser_module().Worlds()
+    worlds.create("a", {**config, "seed": 5})
+    worlds.create("b", {**config, "seed": 6})
+    together = {"a": [], "b": []}
+    for _ in range(4):
+        for run in ("a", "b"):
+            together[run].append(worlds.step(run)["frames"])
+
+    assert together["a"] == alone(5) and together["b"] == alone(6), \
+        "two runs in one worker moved each other"
+
+
+def test_the_own_generator_draws_the_global_stream():
+    """
+    A world's stream is a RandomState seeded the way np.random.seed seeded the
+    global one, so a run made before each world owned its stream is the same
+    run now, and a checkpoint holding the global stream's state resumes into
+    the world's. Checked for every kind of draw the engine makes, ending on an
+    odd count of normals, whose spare the state has to carry.
+    """
+    import numpy as np
+
+    def draws(source):
+        return [source.random(), source.random((2, 3)),
+                source.normal(0.0, 0.5, size=(3, 2)), source.uniform(-2.0, 2.0, size=(2, 2)),
+                source.randint(0, 2, size=5),
+                source.choice(np.array([-1, 1], dtype=np.int8), size=4),
+                source.choice([5, 9, 13]), source.multinomial(10, [0.25] * 4),
+                source.standard_normal((3,))]
+
+    np.random.seed(2024)
+    global_draws = draws(np.random)
+    global_state = np.random.get_state()
+    own = np.random.RandomState(2024)
+    own_draws = draws(own)
+    own_state = own.get_state()
+
+    for theirs, ours in zip(global_draws, own_draws):
+        assert np.array_equal(theirs, ours), (theirs, ours)
+    assert np.array_equal(global_state[1], own_state[1])
+    assert global_state[2:] == own_state[2:], "the half-drawn normal was not carried"
+
+
+def test_the_engine_calls_no_module_level_random():
+    """
+    One call to numpy's module-level random functions would put the global
+    stream back into every run, and the coupling between runs sharing a
+    process with it. Nothing else would say so: a run with nobody beside it
+    is unchanged either way.
+    """
+    here = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    for name in ("GraphOfLifeSimple.py", "gol_config.py", "gol_series.py",
+                 "gol_lineage.py", "gol_spectral.py", "gol_lightning.py"):
+        with open(os.path.join(here, name)) as f:
+            found = re.findall(r"np\.random\.(?!RandomState\b)\w+", f.read())
+        assert not found, f"{name} draws from the global stream: {found}"
+
+
+def test_a_checkpoint_carries_the_worlds_own_stream():
+    """
+    A checkpoint holds the world's stream and a restore puts it back into
+    that world alone: neither touches numpy's global stream, and nothing drawn
+    by anyone else in between reaches the resumed world.
+    """
+    import numpy as np
+
+    cfg = small(seed=51)
+    world = new_world(cfg)
+    _recorded(world, 3)
+    blob = {k: v.copy() for k, v in world.to_checkpoint().items()}
+    straight_on = _recorded(world, 3)
+
+    np.random.seed(1)
+    untouched = np.random.get_state()[1].copy()
+    restored = GraphOfLife.from_checkpoint(blob, cfg)
+    assert np.array_equal(np.random.get_state()[1], untouched), \
+        "restoring a world reseeded the global stream"
+
+    new_world(small(seed=52)).step(record_decisions=False)
+    np.random.random(1000)
+    assert _recorded(restored, 3) == straight_on, \
+        "the resumed world drew from something other than its own stream"
+
+
 def test_neighbour_order_does_not_depend_on_graph_history():
     """
     The same graph must present the same neighbours in the same order however
@@ -350,14 +476,14 @@ def test_a_tie_is_not_a_no():
     """
     import numpy as np
 
-    np.random.seed(3)
+    rng = np.random.RandomState(3)
     # mode says "take the maximum", and the two sides are equal.
-    outcomes = {G_choose_binary(5.0, 5.0, 0.0, 1.0) for _ in range(200)}
+    outcomes = {G_choose_binary(5.0, 5.0, 0.0, 1.0, rng) for _ in range(200)}
     assert outcomes == {True, False}, "a tie always fell the same way"
 
     # A clear preference is still obeyed exactly.
-    assert G_choose_binary(5.0, 1.0, 0.0, 1.0) is True
-    assert G_choose_binary(1.0, 5.0, 0.0, 1.0) is False
+    assert G_choose_binary(5.0, 1.0, 0.0, 1.0, rng) is True
+    assert G_choose_binary(1.0, 5.0, 0.0, 1.0, rng) is False
 
 
 # ---------------------------------------------------------------------------
@@ -1035,13 +1161,14 @@ def test_the_form_is_told_the_shape_of_the_brain_it_would_build():
     it. The new-run form used to do this arithmetic itself, and missed the
     input and six outputs gifting adds.
     """
+    import numpy as np
     from GraphOfLifeSimple import brain_shape, make_brain
     for overrides in ({}, {"brain_kind": "float16"}, {"brain_kind": "binary"},
                       {"allow_gifting": False, "allow_revolutions": False,
                        "allow_handover": False}):
         cfg = SimConfig.for_new_run(**overrides)
         shape = brain_shape(cfg)
-        brain = make_brain(cfg, 1)
+        brain = make_brain(cfg, 1, np.random.RandomState(1))
         built = sum(W.size for W in brain.weights) + sum(b.size for b in brain.biases)
         assert shape["weights"] == built, (overrides, shape["weights"], built)
         assert shape["firstLayer"] == brain.weights[0].shape[1], overrides
@@ -1796,12 +1923,9 @@ def test_the_message_prepass_gives_the_acting_pass_messages_from_this_graph():
     evidence that anybody read it.
     """
     import copy
-    import numpy as np
 
     def what_the_acting_pass_sees(prepass):
-        random.seed(3)
-        np.random.seed(3)
-        cfg = SimConfig(total_tokens=4000, message_prepass=prepass)
+        cfg = SimConfig(total_tokens=4000, message_prepass=prepass, seed=3)
         world = new_world(cfg)
         for _ in range(6):
             world.step(record_decisions=False)
@@ -1849,11 +1973,8 @@ def test_the_message_prepass_speaks_for_everyone_including_the_broke():
     child, so leaving the pre-pass to follow that rule would silence exactly
     the agents whose neighbours most need to know about them.
     """
-    import numpy as np
 
-    random.seed(7)
-    np.random.seed(7)
-    cfg = SimConfig(total_tokens=4000, message_prepass=True)
+    cfg = SimConfig(total_tokens=4000, message_prepass=True, seed=7)
     world = new_world(cfg)
     for _ in range(6):
         world.step(record_decisions=False)
@@ -1873,11 +1994,8 @@ def test_the_message_prepass_speaks_for_everyone_including_the_broke():
 
 def test_the_message_prepass_changes_nothing_it_should_not():
     """Tokens stay conserved and a seeded run stays reproducible with it on."""
-    import numpy as np
 
     for prepass in (False, True):
-        random.seed(11)
-        np.random.seed(11)
         cfg = SimConfig(total_tokens=3000, message_prepass=prepass, seed=11)
         world = new_world(cfg)
         for _ in range(8):
@@ -1886,8 +2004,6 @@ def test_the_message_prepass_changes_nothing_it_should_not():
                 f"tokens leaked with message_prepass={prepass}"
 
     def run():
-        random.seed(11)
-        np.random.seed(11)
         world = new_world(SimConfig(total_tokens=3000, message_prepass=True, seed=11))
         for _ in range(8):
             world.step(record_decisions=False)
@@ -2123,8 +2239,6 @@ def test_a_binary_brain_spends_no_rows_on_things_that_are_already_bits():
     """
     import numpy as np
 
-    random.seed(4)
-    np.random.seed(4)
     cfg = small(brain_kind="binary", brain_bits=16, hidden_layers=[24, 16],
                 message_amount=5, random_input_amount=5, seed=4)
     world = new_world(cfg)
@@ -2244,9 +2358,9 @@ def test_looking_at_many_candidates_is_looking_at_each_in_turn():
         u = max(world.G.nodes(), key=lambda n: world.G.degree[n])
         candidates = [u] + sorted(world.G.neighbors(u))
 
-        np.random.seed(1)
+        stream = world.rng.get_state()
         together = world._inputs(u, candidates, *rest)
-        np.random.seed(1)
+        world.rng.set_state(stream)
         in_turn = np.column_stack([world._inputs(u, [v], *rest)[:, 0] for v in candidates])
         assert np.array_equal(together, in_turn), \
             f"{kind}: looking at every candidate at once sensed something different"
@@ -2260,10 +2374,7 @@ def test_a_binary_world_says_bits_and_hears_bits():
     only see the bottom of it. A binary world's messages are bits, and so is
     its noise.
     """
-    import numpy as np
 
-    random.seed(6)
-    np.random.seed(6)
     cfg = small(brain_kind="binary", brain_bits=16, hidden_layers=[24, 16], seed=6)
     world = new_world(cfg)
     for _ in range(4):
@@ -2356,7 +2467,7 @@ def test_the_ladder_resolves_a_band_and_a_place_inside_it():
     assert bands + within == cfg.brain_bits, "the split must not change the width"
     assert within >= 1 and bands > within
 
-    brain = make_brain(cfg, 0, allocate=False)
+    brain = make_brain(cfg, 0)
     edges = brain.thresholds()
     assert len(edges) == bands
     assert np.allclose(np.diff(edges), brain.band_width()), \
@@ -2395,7 +2506,7 @@ def test_a_split_ladder_stays_readable_by_a_ternary_sum():
 
     rng = np.random.default_rng(7)
     cfg = SimConfig(brain_kind="binary", brain_bits=16)
-    brain = make_brain(cfg, 0, allocate=False)
+    brain = make_brain(cfg, 0)
 
     values = rng.uniform(0.0, 12.0, size=2000)
     x = np.zeros((cfg.n_inputs(), values.size))
@@ -2803,10 +2914,8 @@ def test_weighted_redistribution_conserves_tokens_and_favours_the_rich():
     makes it a different mechanic, and over many culls it is what turns the
     cleanup from a leveller into an engine of concentration.
     """
-    import numpy as np
 
     for mode in ("uniform", "by_tokens"):
-        np.random.seed(11)
         world = new_world(small(redistribution=mode))
         for _ in range(6):
             world.step(record_decisions=False)
@@ -2814,7 +2923,6 @@ def test_weighted_redistribution_conserves_tokens_and_favours_the_rich():
             f"{mode} redistribution did not conserve tokens")
 
     # The tilt itself, on one cleanup with a pool to share and a clear favourite.
-    np.random.seed(3)
     world = new_world(small(redistribution="by_tokens"))
     rich = sorted(world.G.nodes())[0]
     for u in world.G.nodes():

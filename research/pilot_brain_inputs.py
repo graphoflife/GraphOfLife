@@ -206,8 +206,7 @@ def blotto_spread():
                         hidden_layers=[12, 10], seed=7)
         settings.update(over)
         vcfg = SimConfig(**settings)
-        np.random.seed(7)                    # the same weights every time
-        brain = G.make_brain(vcfg, 1)
+        brain = G.make_brain(vcfg, 1, np.random.RandomState(7))   # the same weights every time
         heads = G.build_heads(vcfg)
 
         Y = brain.forward(X)

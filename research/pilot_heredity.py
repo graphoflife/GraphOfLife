@@ -212,7 +212,7 @@ def selection_ablation():
     # argument and it dies on the arity.
     real_resolve = G.GraphOfLife.__dict__["_resolve_winner"]
 
-    def by_chance(offers, revolutionaries):
+    def by_chance(offers, revolutionaries, rng):
         """Same signature and same return shape; only the choice is different."""
         who = random.choice(list(offers))
         return int(who), int(offers[who]), False

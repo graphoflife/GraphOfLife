@@ -98,7 +98,7 @@ Two independent ancestries are tracked, and they are not the same thing:
 """
 from __future__ import annotations
 
-from typing import Any, Dict, List, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 import networkx as nx
 import numpy as np
@@ -194,7 +194,8 @@ def _share_of_first(a: float, b: float) -> float:
     return (va / total) if total > 0.0 else 0.5
 
 
-def _choose_binary(yes: float, no: float, mode_yes: float, mode_no: float) -> bool:
+def _choose_binary(yes: float, no: float, mode_yes: float, mode_no: float,
+                   rng: np.random.RandomState) -> bool:
     """
     A yes/no decision whose *interpretation* the agent picks for itself.
 
@@ -204,7 +205,7 @@ def _choose_binary(yes: float, no: float, mode_yes: float, mode_no: float) -> bo
     subject to selection.
     """
     if mode_yes > mode_no:
-        return bool(np.random.random() < _share_of_first(yes, no))
+        return bool(rng.random() < _share_of_first(yes, no))
     # An exact tie is not a "no", it is the absence of a preference, and
     # answering no would be a decision the agent never made. Floats effectively
     # never land here; integer outputs do it constantly, and a brain whose
@@ -212,7 +213,7 @@ def _choose_binary(yes: float, no: float, mode_yes: float, mode_no: float) -> bo
     # of. Undetermined at the maximum falls back to the probabilistic reading,
     # which for a tie is a coin.
     if yes == no:
-        return bool(np.random.random() < 0.5)
+        return bool(rng.random() < 0.5)
     return bool(yes > no)
 
 
@@ -378,25 +379,29 @@ class Brain:
     #: than what is computed with.
     dtype = np.float64
 
-    def __init__(self, cfg: SimConfig, brain_id: int, allocate: bool = True) -> None:
+    def __init__(self, cfg: SimConfig, brain_id: int,
+                 rng: Optional[np.random.RandomState] = None) -> None:
         self.cfg = cfg
         self.brain_id = brain_id
         self.parent_brain_id: int = -1
         self.weights: List[np.ndarray] = []
         self.biases: List[np.ndarray] = []
 
-        if allocate:
-            self._allocate()
+        # Weights are drawn only when there is something to draw them from. A
+        # copy, a restore and a question about shape all fill in or need no
+        # weights, and none of them should spend a draw of the world's chance.
+        if rng is not None:
+            self._allocate(rng)
 
     def layer_sizes(self) -> List[int]:
         cfg = self.cfg
         return [cfg.n_inputs()] + list(cfg.hidden_layers) + [cfg.n_outputs()]
 
-    def _allocate(self) -> None:
+    def _allocate(self, rng: np.random.RandomState) -> None:
         sizes = self.layer_sizes()
         for fan_in, fan_out in zip(sizes[:-1], sizes[1:]):
             self.weights.append(
-                np.random.normal(0.0, 1.0 / np.sqrt(fan_in),
+                rng.normal(0.0, 1.0 / np.sqrt(fan_in),
                                  size=(fan_out, fan_in)).astype(self.dtype))
             self.biases.append(np.zeros((fan_out, 1), dtype=self.dtype))
 
@@ -407,9 +412,9 @@ class Brain:
     # are the brain's to answer, so a new kind brings its answers with it.
 
     @staticmethod
-    def draw_noise(shape: Tuple[int, int]) -> np.ndarray:
+    def draw_noise(shape: Tuple[int, int], rng: np.random.RandomState) -> np.ndarray:
         """The random inputs, one row per candidate: a spread of magnitudes."""
-        return np.random.uniform(-2.0, 2.0, size=shape)
+        return rng.uniform(-2.0, 2.0, size=shape)
 
     @staticmethod
     def speak(heads: np.ndarray) -> np.ndarray:
@@ -454,13 +459,13 @@ class Brain:
         Now an id names a genotype. It changes only where the weights change,
         which is in `mutate`.
         """
-        clone = type(self)(self.cfg, self.brain_id, allocate=False)
+        clone = type(self)(self.cfg, self.brain_id)
         clone.weights = [w.copy() for w in self.weights]
         clone.biases = [b.copy() for b in self.biases]
         clone.parent_brain_id = self.parent_brain_id
         return clone
 
-    def mutate(self, brain_id: int) -> bool:
+    def mutate(self, brain_id: int, rng: np.random.RandomState) -> bool:
         """
         Sparse Gaussian perturbation, plus an occasional structural reset.
 
@@ -468,7 +473,7 @@ class Brain:
         on `brain_id` as a new identity.
         """
         cfg = self.cfg
-        if np.random.random() > cfg.mutation_probability:
+        if rng.random() > cfg.mutation_probability:
             return False
 
         reset_fraction = float(np.clip(cfg.mutation_sparsity, 0.0, 1.0))
@@ -476,9 +481,9 @@ class Brain:
             base_scale = 1.0 / np.sqrt(W.shape[1])
             std = cfg.mutation_noise_std * base_scale
             self.weights[i] = self._perturb(
-                W, std, base_scale, reset_fraction, cfg).astype(self.dtype)
+                W, std, base_scale, reset_fraction, cfg, rng).astype(self.dtype)
             self.biases[i] = self._perturb(
-                b, std, std if std > 0 else 0.01, reset_fraction, cfg).astype(self.dtype)
+                b, std, std if std > 0 else 0.01, reset_fraction, cfg, rng).astype(self.dtype)
 
         self.parent_brain_id = self.brain_id
         self.brain_id = brain_id
@@ -486,19 +491,20 @@ class Brain:
 
     @staticmethod
     def _perturb(M: np.ndarray, noise_std: float, reset_std: float,
-                 reset_fraction: float, cfg: SimConfig) -> np.ndarray:
+                 reset_fraction: float, cfg: SimConfig,
+                 rng: np.random.RandomState) -> np.ndarray:
         """Jitter a sparse subset of entries, then rarely re-draw some outright."""
         if cfg.mutation_sparsity <= 0.0:
             return M
 
         if noise_std > 0.0:
-            jitter = np.random.random(M.shape) < cfg.mutation_sparsity
-            M = M + np.random.normal(0.0, noise_std, size=M.shape) * jitter
+            jitter = rng.random(M.shape) < cfg.mutation_sparsity
+            M = M + rng.normal(0.0, noise_std, size=M.shape) * jitter
 
-        if reset_fraction > 0.0 and np.random.random() < cfg.mutation_sparsity:
-            reset_mask = np.random.random(M.shape) < reset_fraction
+        if reset_fraction > 0.0 and rng.random() < cfg.mutation_sparsity:
+            reset_mask = rng.random(M.shape) < reset_fraction
             if np.any(reset_mask):
-                M = np.where(reset_mask, np.random.normal(0.0, reset_std, size=M.shape), M)
+                M = np.where(reset_mask, rng.normal(0.0, reset_std, size=M.shape), M)
 
         return M.astype(float, copy=False)
 
@@ -538,24 +544,27 @@ class BinaryBrain(Brain):
     they divide tokens in proportion to them, and an on-or-off answer cannot
     say "twice as much".
 
-    Nothing here is a float. The whole forward pass is integer addition, so a
-    run comes out identical on any machine — the one thing the float brains
-    cannot promise, since matrix multiplication rounds differently on different
-    hardware and this simulation turns a last-bit difference into a different
-    history.
+    No weight here is a float. The whole forward pass is integer addition,
+    which takes away the largest difference between machines: matrix
+    multiplication on floats rounds differently on different hardware, and
+    this simulation turns a last-bit difference into a different history.
+    Not every difference, though. What the brain sees is still worked out in
+    floating point — the log of a count, the quantiles of a neighbourhood —
+    before it becomes bits, and a value sitting on a threshold can land on
+    either side of it.
     """
 
     __slots__ = ()
     dtype = np.int8
 
     @staticmethod
-    def draw_noise(shape: Tuple[int, int]) -> np.ndarray:
+    def draw_noise(shape: Tuple[int, int], rng: np.random.RandomState) -> np.ndarray:
         """
         Coins. A binary brain cannot read a magnitude that is not on its ladder,
         so noise drawn as a float would arrive as a single bit anyway — this
         just makes it an honest one.
         """
-        return np.random.randint(0, 2, size=shape)
+        return rng.randint(0, 2, size=shape)
 
     @staticmethod
     def speak(heads: np.ndarray) -> np.ndarray:
@@ -628,14 +637,14 @@ class BinaryBrain(Brain):
         cfg = self.cfg
         return [cfg.binary_rows()] + list(cfg.hidden_layers) + [cfg.n_outputs()]
 
-    def _allocate(self) -> None:
+    def _allocate(self, rng: np.random.RandomState) -> None:
         sizes = self.layer_sizes()
         for fan_in, fan_out in zip(sizes[:-1], sizes[1:]):
             # Two in three weights start at zero. A layer of mostly -1 and +1
             # saturates: with hundreds of inputs the sum is far from its
             # threshold whatever any single input does, and nothing the agent
             # sees can move it.
-            draw = np.random.random(size=(fan_out, fan_in))
+            draw = rng.random(size=(fan_out, fan_in))
             weights = np.zeros((fan_out, fan_in), dtype=np.int8)
             weights[draw < 1.0 / 6.0] = -1
             weights[draw > 5.0 / 6.0] = 1
@@ -697,7 +706,7 @@ class BinaryBrain(Brain):
             a = (z > 0).astype(np.int32)
         return a.astype(np.float64)
 
-    def mutate(self, brain_id: int) -> bool:
+    def mutate(self, brain_id: int, rng: np.random.RandomState) -> bool:
         """
         A weight steps to a neighbouring value rather than being redrawn.
 
@@ -715,7 +724,7 @@ class BinaryBrain(Brain):
         of a jitter that cannot push a value past its range.
         """
         cfg = self.cfg
-        if np.random.random() > cfg.mutation_probability:
+        if rng.random() > cfg.mutation_probability:
             return False
 
         fraction = float(np.clip(cfg.mutation_sparsity, 0.0, 1.0))
@@ -723,11 +732,11 @@ class BinaryBrain(Brain):
             return False
 
         for i, (W, b) in enumerate(zip(self.weights, self.biases)):
-            self.weights[i] = self._redraw(W, fraction)
+            self.weights[i] = self._redraw(W, fraction, rng)
             # Thresholds move by one step at a time, and are held in a range
             # where they can still be reached by a plausible count.
-            picked = np.random.random(b.shape) < fraction
-            step = np.random.choice(np.array([-1, 1], dtype=np.int8), size=b.shape)
+            picked = rng.random(b.shape) < fraction
+            step = rng.choice(np.array([-1, 1], dtype=np.int8), size=b.shape)
             limit = np.int8(min(127, max(1, W.shape[1] // 4)))
             self.biases[i] = np.clip(b + picked * step, -limit, limit).astype(np.int8)
 
@@ -736,10 +745,10 @@ class BinaryBrain(Brain):
         return True
 
     @staticmethod
-    def _redraw(M: np.ndarray, fraction: float) -> np.ndarray:
+    def _redraw(M: np.ndarray, fraction: float, rng: np.random.RandomState) -> np.ndarray:
         """Nudge a sparse subset one step along -1, 0, +1, and no further."""
-        picked = np.random.random(M.shape) < fraction
-        step = np.random.choice(np.array([-1, 1], dtype=np.int8), size=M.shape)
+        picked = rng.random(M.shape) < fraction
+        step = rng.choice(np.array([-1, 1], dtype=np.int8), size=M.shape)
         stepped = np.clip(M.astype(np.int16) + picked * step, -1, 1)
         return stepped.astype(np.int8)
 
@@ -752,9 +761,10 @@ BRAIN_KINDS = {
 }
 
 
-def make_brain(cfg: SimConfig, brain_id: int, allocate: bool = True) -> Brain:
-    """The brain this configuration asks for."""
-    return BRAIN_KINDS[cfg.brain_kind](cfg, brain_id, allocate=allocate)
+def make_brain(cfg: SimConfig, brain_id: int,
+               rng: Optional[np.random.RandomState] = None) -> Brain:
+    """The brain this configuration asks for, with weights drawn from `rng` if given."""
+    return BRAIN_KINDS[cfg.brain_kind](cfg, brain_id, rng)
 
 
 def brain_shape(cfg: SimConfig) -> Dict[str, Any]:
@@ -766,7 +776,7 @@ def brain_shape(cfg: SimConfig) -> Dict[str, Any]:
     form did work it out again, in JavaScript, and fell behind the engine as
     soon as gifting added an input and six outputs.
     """
-    brain = make_brain(cfg, 0, allocate=False)
+    brain = make_brain(cfg, 0)
     sizes = brain.layer_sizes()
     return {
         "inputs": cfg.n_inputs(),
@@ -779,9 +789,22 @@ def brain_shape(cfg: SimConfig) -> Dict[str, Any]:
     }
 
 
+def stream_seed(cfg: SimConfig) -> Optional[int]:
+    """The run's seed as a random stream takes it: any integer, folded to 32 bits."""
+    return None if cfg.seed is None else int(cfg.seed) % (2 ** 32)
+
+
 class GraphOfLife:
     def __init__(self, G_init: nx.Graph | None, cfg: SimConfig, _empty: bool = False) -> None:
         self.cfg = cfg
+        # Every draw this world makes comes from here and from nowhere else.
+        # It used to be numpy's one global stream, which every world in a
+        # process shares: the server runs simulations as threads of one
+        # process, so two of them running at once drew from, and reseeded,
+        # the same stream, and neither could be reproduced from its seed. A
+        # RandomState seeded the same way is the same stream the global one
+        # was, so a run on its own is exactly the run it always was.
+        self.rng = np.random.RandomState(stream_seed(cfg))
         self.kind = BRAIN_KINDS[cfg.brain_kind]
         self.heads = build_heads(cfg)
         # Asked for on every look a control run takes; the layout is worked
@@ -973,7 +996,7 @@ class GraphOfLife:
         return UNKNOWN_BIRTH if born == UNKNOWN_BIRTH else self.iteration - born
 
     def _new_brain(self) -> Brain:
-        brain = make_brain(self.cfg, self.next_brain_id)
+        brain = make_brain(self.cfg, self.next_brain_id, self.rng)
         self.next_brain_id += 1
         return brain
 
@@ -982,7 +1005,7 @@ class GraphOfLife:
         return source.copy()
 
     def _mutate_brain(self, brain: Brain) -> None:
-        if brain.mutate(self.next_brain_id):
+        if brain.mutate(self.next_brain_id, self.rng):
             self.next_brain_id += 1
 
     def _settle_remainder(self) -> None:
@@ -990,7 +1013,7 @@ class GraphOfLife:
         deficit = self.cfg.total_tokens - sum(self.tokens.values())
         survivors = list(self.G.nodes())
         if deficit > 0 and survivors:
-            draws = np.random.multinomial(deficit, [1 / len(survivors)] * len(survivors))
+            draws = self.rng.multinomial(deficit, [1 / len(survivors)] * len(survivors))
             for u, extra in zip(survivors, draws):
                 self.tokens[u] += int(extra)
 
@@ -1096,7 +1119,8 @@ class GraphOfLife:
         # Noise of whatever kind this world's brains can read. Drawn candidate
         # after candidate, so a seed gives the same run it gave when each
         # column drew its own.
-        X[row:] = self.kind.draw_noise((len(candidates), cfg.random_input_amount)).T
+        X[row:] = self.kind.draw_noise((len(candidates), cfg.random_input_amount),
+                                       self.rng).T
         return X
 
     def _observe(self, u: int, candidates: List[int], log_deg, q_tok, q_deg,
@@ -1112,7 +1136,7 @@ class GraphOfLife:
         tell the difference.
         """
         if self.cfg.random_decisions:
-            return np.random.standard_normal((self.output_rows, len(candidates)))
+            return self.rng.standard_normal((self.output_rows, len(candidates)))
         X = self._inputs(u, candidates, log_deg, q_tok, q_deg, log_tok, at_risk)
         return self.brains[u].forward(X)
 
@@ -1366,7 +1390,7 @@ class GraphOfLife:
         linked: List[int] = []
         for col, v in enumerate(candidates):
             if _choose_binary(link_logits[0, col], link_logits[1, col],
-                              link_mode[0, col], link_mode[1, col]):
+                              link_mode[0, col], link_mode[1, col], self.rng):
                 if v != child_id and self.G.has_node(v):
                     self._add_edge(child_id, v)
                     linked.append(v)
@@ -1408,7 +1432,7 @@ class GraphOfLife:
         cols: List[int] = []
         for col in range(1, len(candidates)):
             if _choose_binary(logits[0, col], logits[1, col],
-                              mode[0, col], mode[1, col]):
+                              mode[0, col], mode[1, col], self.rng):
                 cols.append(col)
         if not cols:
             return []
@@ -1441,7 +1465,8 @@ class GraphOfLife:
             v = candidates[col]
             if v == child:
                 continue
-            if _choose_binary(logits[0, col], logits[1, col], mode[0, col], mode[1, col]):
+            if _choose_binary(logits[0, col], logits[1, col], mode[0, col], mode[1, col],
+                              self.rng):
                 given.append(v)
         return given
 
@@ -1565,7 +1590,8 @@ class GraphOfLife:
                 new_brains[v] = self._copy_brain(self.brains[v])
                 continue
 
-            winner, max_amount, by_revolt = self._resolve_winner(offers, revolution_to[v])
+            winner, max_amount, by_revolt = self._resolve_winner(offers, revolution_to[v],
+                                                                 self.rng)
             new_brains[v] = self._copy_brain(self.brains[winner])
             new_tokens[v] = int(incoming_totals[v])
 
@@ -1638,8 +1664,8 @@ class GraphOfLife:
                            tokens_before=tokens_before, decisions=decisions)
 
     @staticmethod
-    def _resolve_winner(offers: Dict[int, int],
-                        revolutionaries: Dict[int, int]) -> Tuple[int, int, bool]:
+    def _resolve_winner(offers: Dict[int, int], revolutionaries: Dict[int, int],
+                        rng: np.random.RandomState) -> Tuple[int, int, bool]:
         """
         Decide who takes a node, given every offer made on it.
 
@@ -1662,7 +1688,7 @@ class GraphOfLife:
         Returns (winner_id, hegemon's allocation, whether a revolution won).
         """
         max_amount = max(offers.values())
-        hegemon = int(np.random.choice([a for a, amt in offers.items() if amt == max_amount]))
+        hegemon = int(rng.choice([a for a, amt in offers.items() if amt == max_amount]))
 
         mob = [(agent, tokens) for agent, tokens in revolutionaries.items() if agent != hegemon]
         if not mob:
@@ -1684,7 +1710,7 @@ class GraphOfLife:
 
             upper_class = total_mob_tokens - lower_class
             if lower_class > upper_class + max_amount:
-                return int(np.random.choice(rung)), max_amount, True
+                return int(rng.choice(rung)), max_amount, True
 
         # The mutiny never reached critical mass.
         return hegemon, max_amount, False
@@ -1768,7 +1794,7 @@ class GraphOfLife:
             else:
                 probs = np.full(len(survivors), 1 / len(survivors))
             # Multinomial keeps the token count exactly conserved.
-            draws = np.random.multinomial(global_pool, probs)
+            draws = self.rng.multinomial(global_pool, probs)
             for u, extra in zip(survivors, draws):
                 self.tokens[u] = self.tokens.get(u, 0) + int(extra)
             # Counted here rather than beside the pool, because with nobody left
@@ -1940,8 +1966,8 @@ class GraphOfLife:
         blob["msg_values"] = (np.array(payloads, dtype=np.float64)
                               if payloads else np.zeros((0, width), dtype=np.float64))
 
-        # Preserve the RNG stream so a resumed run is not merely similar.
-        state = np.random.get_state()
+        # Preserve the world's stream so a resumed run is not merely similar.
+        state = self.rng.get_state()
         blob["rng_keys"] = state[1].astype(np.uint32)
         blob["rng_scalars"] = np.array([state[2], state[3], state[4]], dtype=np.float64)
 
@@ -1994,7 +2020,7 @@ class GraphOfLife:
         # nothing about why. Checked here, where the answer is still obvious.
         world.kind.check_checkpoint(cfg, blob)
 
-        want = make_brain(cfg, 0, allocate=False).layer_sizes()
+        want = make_brain(cfg, 0).layer_sizes()
         got = [int(weights[0].shape[2])] + [int(w.shape[1]) for w in weights]
         if len(got) != len(want) or got != want:
             raise ValueError(
@@ -2003,7 +2029,7 @@ class GraphOfLife:
                 f"be resumed into the architecture it was saved from.")
 
         for i, u in enumerate(ids):
-            brain = make_brain(cfg, int(brain_ids[i]), allocate=False)
+            brain = make_brain(cfg, int(brain_ids[i]))
             brain.parent_brain_id = int(parent_brain_ids[i])
             brain.weights = [w[i].copy() for w in weights]
             brain.biases = [b[i].copy() for b in biases]
@@ -2027,7 +2053,7 @@ class GraphOfLife:
         )
 
         scalars = blob["rng_scalars"].tolist()
-        np.random.set_state((
+        world.rng.set_state((
             "MT19937", blob["rng_keys"].astype(np.uint32),
             int(scalars[0]), int(scalars[1]), float(scalars[2]),
         ))
@@ -2041,14 +2067,11 @@ class GraphOfLife:
 
 def new_world(cfg: SimConfig) -> GraphOfLife:
     """Create a fresh world from a Watts-Strogatz seed graph."""
-    # networkx draws from the `random` module, which np.random.seed does not
+    # networkx draws from a stream of its own, which the world's does not
     # touch, so without passing the seed through the starting graph came out
     # different every time and a seeded run was not reproducible at all.
-    seed = None if cfg.seed is None else int(cfg.seed) % (2 ** 32)
-    if seed is not None:
-        np.random.seed(seed)
     G0 = nx.watts_strogatz_graph(n=cfg.resolved_n(), k=cfg.resolved_k(),
-                                 p=cfg.rewire_p, seed=seed)
+                                 p=cfg.rewire_p, seed=stream_seed(cfg))
     return GraphOfLife(G0, cfg)
 
 
