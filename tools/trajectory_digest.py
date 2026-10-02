@@ -33,14 +33,19 @@ from typing import Any, Callable, Dict, List, Tuple
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 #: Small worlds, one per thing a change could quietly break: each brain kind,
-#: the frozen defaults and the ones a new run is offered, the other way of
-#: sharing out the dead, and the control that never reads its inputs.
+#: every mechanic switched on, the book's baseline, the frozen defaults, the
+#: other way of sharing out the dead, and the control that never reads its
+#: inputs. Every setting is written out rather than taken from what the form
+#: offers, which moves: a fingerprint has to change only when the engine does.
+EVERY_MECHANIC = dict(allow_gifting=True, prune_after="reproduction", inactive_window="iteration")
 CASES: List[Tuple[str, Callable[[Any], Any]]] = [
-    ("new-run float", lambda C: C.for_new_run(total_tokens=2000, seed=101)),
-    ("new-run float16", lambda C: C.for_new_run(total_tokens=2000, brain_kind="float16",
-                                                 seed=102)),
-    ("new-run binary", lambda C: C.for_new_run(total_tokens=2000, brain_kind="binary",
-                                               **C.BRAIN_PRESETS["binary"], seed=103)),
+    ("float, every mechanic", lambda C: C(total_tokens=2000, **EVERY_MECHANIC, seed=101)),
+    ("float16, baseline B1", lambda C: C(total_tokens=2000, brain_kind="float16",
+                                         message_amount=30, mutation_probability=0.2,
+                                         seed=102)),
+    ("binary, every mechanic", lambda C: C(total_tokens=2000, brain_kind="binary",
+                                           **C.BRAIN_PRESETS["binary"], **EVERY_MECHANIC,
+                                           seed=103)),
     ("gol-1", lambda C: C(total_tokens=2000, seed=104)),
     ("gol-1 by_tokens, no prepass", lambda C: C(total_tokens=2000, redistribution="by_tokens",
                                                 message_prepass=False, seed=105)),

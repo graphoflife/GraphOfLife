@@ -73,19 +73,24 @@ MECHANICS: Dict[str, Any] = {
 # `gol-1` names, and it can never move. This is a recommendation about what is
 # worth running next, and it is free to move whenever the evidence does.
 #
-# A run started from these is named for every way it differs, so it announces
-# itself as a different algorithm rather than quietly borrowing the old name:
+# A run started from these is named for every mechanic it differs in, so a
+# different algorithm announces itself rather than quietly borrowing the old
+# name. Today none differs: a new run is offered `gol-1` itself — no gifts,
+# unused links cut after the game, judged on that phase alone — with longer
+# messages and a slower rate of mutation than the frozen values. Those two are
+# parameters, which a run cites beside its strain rather than in it. Until
+# 2026-10-02 the form offered gifting, cutting after reproduction and a
+# whole-iteration window instead,
 #
 #     gol-1+allow_gifting+inactive_window=iteration+prune_after=reproduction
 #
-# Anything omitted here is offered at its frozen value. Redistribution stays
-# uniform: weighting the estate of the dead by what a survivor already holds
-# turns every cull into a concentration event, and that is an experiment rather
-# than a default.
+# and the runs made then keep that name. Anything omitted here is offered at
+# its frozen value. Redistribution stays uniform: weighting the estate of the
+# dead by what a survivor already holds turns every cull into a concentration
+# event, and that is an experiment rather than a default.
 NEW_RUN_DEFAULTS: Dict[str, Any] = {
-    "allow_gifting": True,
-    "prune_after": "reproduction",
-    "inactive_window": "iteration",
+    "message_amount": 30,
+    "mutation_probability": 0.2,
 }
 
 # Parameters — magnitudes. Cited alongside an experiment, but not part of the

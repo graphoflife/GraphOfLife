@@ -25,8 +25,7 @@ The thirty runs of Chapter 3, read for what happens to wealth:
 - **the share held by the richest tenth** of agents — 10% if wealth were even;
 - in the game, **the share of staked tokens an agent puts on its own node**,
   rather than on a neighbour's;
-- in reproduction, **the share of all tokens spent on children**, and **the
-  share given away as gifts**.
+- in reproduction, **the share of all tokens spent on children**.
 
 As in Chapter 3, every figure shows the median of the thirty runs with the
 middle half and nine in ten as bands, and the thesis is checked from

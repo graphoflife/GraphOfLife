@@ -42,14 +42,6 @@
         "title": "Share of tokens spent on children",
         "y": "share",
         "min": 0
-      },
-      {
-        "name": "gifts",
-        "stat": "giftShare",
-        "phase": 1,
-        "title": "Share of tokens given as gifts",
-        "y": "share",
-        "min": 0
       }
     ],
     "endpoints": [
@@ -61,10 +53,6 @@
       "heldHomeShare",
       {
         "stat": "reproTokenShare",
-        "phase": 1
-      },
-      {
-        "stat": "giftShare",
         "phase": 1
       },
       "redistributed"

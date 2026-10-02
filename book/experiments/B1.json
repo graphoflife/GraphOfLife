@@ -1,7 +1,7 @@
 {
   "id": "B1",
   "title": "The algorithm as a new run is offered it, on half-precision brains",
-  "strain": "gol-1+allow_gifting+brain_kind=float16+inactive_window=iteration+prune_after=reproduction",
+  "strain": "gol-1+brain_kind=float16",
   "settings": {
     "brain_kind": "float16",
     "exchange_messages": true,
@@ -10,9 +10,9 @@
     "allow_revolutions": true,
     "random_decisions": false,
     "tokens_created_per_phase": 0,
-    "allow_gifting": true,
-    "prune_after": "reproduction",
-    "inactive_window": "iteration",
+    "allow_gifting": false,
+    "prune_after": "blotto",
+    "inactive_window": "phase",
     "redistribution": "uniform",
     "total_tokens": 10000,
     "n_nodes": 0,
@@ -26,19 +26,22 @@
       30
     ],
     "brain_bits": 16,
-    "message_amount": 5,
+    "message_amount": 30,
     "random_input_amount": 5,
-    "mutation_probability": 0.5,
+    "mutation_probability": 0.2,
     "mutation_noise_std": 0.2,
     "mutation_sparsity": 0.1,
     "extinction_threshold": 20
   },
   "why": {
-    "mechanics": "As the new-simulation form offered them on 2026-10-02 (gol_config.NEW_RUN_DEFAULTS): a parent may gift tokens to a neighbour, and links that carried nothing over a whole iteration are cut at the end of reproduction. Everything else at its frozen default.",
-    "brain_kind": "float16 rather than the form's float. Every run made by hand so far used it, and it halves what a brain costs in memory and on disk, which is what lets worlds of 100,000 tokens and more run several at a time. Whether three decimal digits of weight are enough is an experiment on the roadmap.",
+    "mechanics": "As the new-simulation form offers them since 2026-10-02 (gol_config.NEW_RUN_DEFAULTS), chosen by the author: every mechanic at its frozen gol-1 value. No gifts; a link that carried no tokens during a phase is cut at the end of the game; the tokens of the dead are shared out evenly.",
+    "message_amount": "30 numbers in every message, as the author's longest run used: room for more to be said than the five of the frozen default.",
+    "mutation_probability": "0.2: a brain has one chance in five of changing at each birth and at the end of each game, slower than the frozen 0.5, at which a genotype lasted a single iteration in the pilots.",
+    "brain_kind": "float16 rather than the form's float. Every run made by hand so far used it, and it stores a brain in a quarter of the memory, which is what lets worlds of 100,000 tokens and more run several at a time. Whether three decimal digits of weight are enough is an experiment on the roadmap.",
     "total_tokens": "Only what a plan inherits if it says nothing. Every experiment chooses its own world size, for its question and its time.",
     "n_nodes": "0: one founder per hundred tokens.",
     "k_neighbors": "0: max(n/100, 5) neighbours in the starting ring, which networkx wires as 4 when the number is odd.",
-    "hidden_layers": "The preset for float and float16 brains: five layers, 10,256 weights in all."
-  }
+    "hidden_layers": "The preset for float and float16 brains: five layers, 15,795 weights in all with these inputs and outputs."
+  },
+  "history": "The first B1 (2026-10-02, morning) took the mechanics the form offered then \u2014 gifts, links cut after reproduction when unused for a whole iteration \u2014 with five numbers per message and mutation 0.5. It was replaced the same day at the author's request, before any experiment but the first had run. That first run of Experiment 1 is kept, not used, in GraphOfLifeRuns/.archive/."
 }
