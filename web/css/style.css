@@ -1500,6 +1500,15 @@ details.control-group > summary:hover h3 { color: var(--text); }
   white-space: nowrap;
 }
 .sim-id { font-size: 10.5px; color: var(--muted-2); font-family: ui-monospace, SFMono-Regular, monospace; }
+.sim-lab {
+  align-self: flex-start;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  padding: 0 6px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  color: var(--accent);
+}
 
 .icon-button {
   flex: 0 0 auto;

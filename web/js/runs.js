@@ -525,6 +525,13 @@ const RunsView = {
       id.textContent = run.id;
       title.append(id);
     }
+    // A run an experiment made belongs to the lab, which runs it on the engine
+    // it was made with and keeps its record. It is still opened and read from
+    // here; it is started and paused from its chapter in the Book.
+    if (run.lab) {
+      title.append(Object.assign(document.createElement('span'),
+                                 { className: 'sim-lab', textContent: 'experiment' }));
+    }
 
     const menuButton = document.createElement('button');
     menuButton.type = 'button';
@@ -595,7 +602,11 @@ const RunsView = {
     toggle.type = 'button';
     toggle.className = `sim-run${running ? ' is-running' : ''}`;
     toggle.disabled = stopping;
-    if (stopping) {
+    if (run.lab) {
+      toggle.append(icon('<path d="M5 4h10a4 4 0 0 1 4 4v12H9a4 4 0 0 1-4-4Z"/>'),
+                    document.createTextNode('Book'));
+      toggle.title = 'This run belongs to an experiment: start or pause it from its chapter in the Book';
+    } else if (stopping) {
       toggle.append(Object.assign(document.createElement('span'), { className: 'spin' }),
                     document.createTextNode('Stopping'));
       toggle.title = 'Waiting for the worker to notice, which it does between iterations';
@@ -612,7 +623,8 @@ const RunsView = {
         ? `Continue from iteration ${formatNumber(run.checkpoint_iteration || 0)}`
         : 'Start this simulation';
     }
-    toggle.addEventListener('click', () => this.toggleRun(run, running));
+    toggle.addEventListener('click', () => (run.lab ? App.showView('book')
+                                                     : this.toggleRun(run, running)));
 
     const inspect = document.createElement('button');
     inspect.type = 'button';
@@ -661,11 +673,13 @@ const RunsView = {
     item('New from these settings', 'Opens the settings filled in from this one',
          () => this.openDialog({ config: run.config }));
 
-    item('Delete', 'This and everything it recorded', async () => {
+    const remove = item('Delete', 'This and everything it recorded', async () => {
       if (!confirm(`Delete "${run.name}" and all of its recorded data? This cannot be undone.`)) return;
       await API.deleteRun(run.id);
       await this.refresh();
     }, 'danger');
+    // Not while the lab is advancing it: pause the lab from the Book first.
+    remove.disabled = Boolean(run.lab && run.running);
 
     return menu;
   },
