@@ -69,6 +69,7 @@ SETTABLE = (set(MECHANICS) | set(PARAMETERS)) - {"seed"}
 WORLD = ("total_tokens", "n_nodes", "k_neighbors")
 
 DEFAULT_WORKERS = 4
+SETTLED = 100                     # iterations before a world's size says anything
 HEAVY_EVERY = 25
 CHECKPOINT_SECONDS = 600          # about how often a run saves itself
 DISK_MARGIN = 10 * 2**30          # never fill the disk closer than this
@@ -452,7 +453,7 @@ def fit_costs() -> Dict[str, Any]:
     in .lab/costs.json. Each measure falls back to the calibration until
     something has measured it.
     """
-    per_agent, per_token, disk, peak = [], [], [], []
+    seconds, agent_iterations, per_token, disk, peak = 0.0, 0.0, [], [], []
     runs = 0
     for meta in store.list_runs():
         if "lab" not in meta:
@@ -464,21 +465,28 @@ def fit_costs() -> Dict[str, Any]:
             continue
         runs += 1
         weights, width = _weights(meta["config"])
-        per_agent += [r["_seconds"] / r["nodes"] / (weights / 1e4) for r in timed]
+        # Total time over total work, not the typical iteration: a run spends
+        # most of its time when it is biggest, and that is what an estimate of
+        # its length has to get right.
+        seconds += sum(r["_seconds"] for r in timed)
+        agent_iterations += sum(r["nodes"] * weights / 1e4 for r in timed)
+        # Only after the founding boom: a world's first iterations are
+        # nothing like the population it settles at, and short runs would
+        # otherwise teach the estimates that worlds stay small.
         tokens = meta["config"]["total_tokens"]
-        per_token += [r["nodes"] / tokens for r in rows if r.get("iteration", 0) >= 20]
+        per_token += [r["nodes"] / tokens for r in rows if r.get("iteration", 0) >= SETTLED]
         biggest = max(r["nodes"] for r in timed)
         top = max((r.get("_peakMB") or 0) for r in timed)
         if top and biggest:
             peak.append((top - CALIBRATION["baseMB"]) * 2**20 / (biggest * weights * width))
         frames = os.path.join(store.run_dir(meta["id"]), "frames")
         stored = sum(os.path.getsize(os.path.join(frames, n)) for n in os.listdir(frames))
-        agent_iterations = (meta.get("iteration") or 0) * (_median([r["nodes"] for r in rows]) or 0)
-        if agent_iterations:
-            disk.append(stored / agent_iterations)
+        recorded = (meta.get("iteration") or 0) * (_median([r["nodes"] for r in rows]) or 0)
+        if recorded:
+            disk.append(stored / recorded)
 
     fitted = {
-        "secondsPerAgentIteration": _median(per_agent),
+        "secondsPerAgentIteration": seconds / agent_iterations if agent_iterations else None,
         "agentsPerToken": _median(per_token),
         "bytesPerAgentIteration": _median(disk),
         "peakBytesPerWeightByte": max(peak) if peak else None,

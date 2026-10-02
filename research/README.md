@@ -1,7 +1,12 @@
 # research/
 
 Working material towards a paper on this system. Nothing here is part of the
-site or the engine; nothing in `web/` or the test suite depends on it.
+engine; the site renders the three notes below, and nothing else in `web/` or
+the test suite depends on it.
+
+The experiments themselves are now run and written up in the research book,
+`book/` (the **Book** tab), which follows the programme `Research.md` sets out
+and cites its strains from `strains.md`.
 
 - `Research.md` — the current state of knowledge. One claim under test —
   *this algorithm shows open-ended evolution* — and everything measured,

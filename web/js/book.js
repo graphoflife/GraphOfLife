@@ -11,6 +11,7 @@
  *     ```experiment E02     what it runs, and on a machine with gol_server.py,
  *                           how far it has got, with ▶ and ⏸
  *     ```figure E02/nodes   a chart from book/figures/E02/nodes.json
+ *     ```costs              what a simulation costs, as last fitted
  *
  * The claim is drawn from the plan rather than written into the chapter, so
  * it cannot quietly be reworded after the results are in.
@@ -24,7 +25,7 @@ const Book = {
   // fetches carries the same stamp, so a published chapter is never read from
   // a stale cache next to a fresh one.
   INDEX: 'book/book.json',
-  EMBEDS: ['thesis', 'experiment', 'figure'],
+  EMBEDS: ['thesis', 'experiment', 'figure', 'costs'],
   POLL_MS: 5000,
   STORE: 'gol.book.chapter',
 
@@ -264,6 +265,7 @@ const Book = {
       if (kind === 'thesis') await this.thesis(el, arg);
       else if (kind === 'experiment') await this.experiment(el, arg);
       else if (kind === 'figure') await this.figure(el, arg);
+      else if (kind === 'costs') await this.costs(el);
     } catch (err) {
       el.innerHTML = `<p class="md-status">Could not draw ${Markdown.escape(kind)} ${
         Markdown.escape(arg)}: ${Markdown.escape(String(err.message))}</p>`;
@@ -382,6 +384,27 @@ const Book = {
     return `about ${(seconds / 86400).toFixed(1)} days${suffix}`;
   },
 
+  /** The fitted cost of a simulation, from book/results/costs.json, which `gol_lab.py costs` writes. */
+  async costs(el) {
+    const { fitted, runs = [], updated } = await this.json('results/costs.json');
+    const measured = key => (fitted.measured || {})[key] ? 'measured' : 'calibration';
+    const rows = [
+      ['Time', `${(1000 * fitted.secondsPerAgentIteration).toFixed(2)} ms per agent per iteration, `
+        + 'for every 10,000 weights in a brain', measured('secondsPerAgentIteration')],
+      ['Agents', `${fitted.agentsPerToken.toFixed(2)} alive per token of the supply, once settled`,
+       measured('agentsPerToken')],
+      ['Disk', `${Math.round(fitted.bytesPerAgentIteration)} bytes per agent per iteration`,
+       measured('bytesPerAgentIteration')],
+      ['Memory', `${Math.round(fitted.baseMB)} MB, plus ${fitted.peakBytesPerWeightByte.toFixed(1)} `
+        + 'times every byte of every brain', measured('peakBytesPerWeightByte')]
+    ];
+    el.className = 'md-scroll';
+    el.innerHTML = '<table><thead><tr><th>What</th><th>Now</th><th>From</th></tr></thead><tbody>'
+      + rows.map(([what, now, from]) => `<tr><td>${what}</td><td>${now}</td><td>${from}</td></tr>`).join('')
+      + `</tbody></table><p class="book-note">Fitted to ${runs.length} recorded runs on ${
+        Markdown.escape(updated || '—')}.</p>`;
+  },
+
   // ---- figures ----------------------------------------------------------
 
   async figure(el, arg) {
@@ -424,9 +447,17 @@ const Book = {
     };
     const [x0, x1] = span(xs);
     const [y0, y1] = span(ys, fig.y.min !== undefined ? sy(fig.y.min) : undefined);
-    const back = axis => (axis.log ? v => _short(10 ** v) : v => _short(v));
-    const x = { lo: x0, hi: x1, format: back(fig.x) };
-    const y = { lo: y0, hi: y1 === y0 ? y0 + 1 : y1, format: back(fig.y) };
+    // As many decimals as the ticks need and no more: 0.2 apart wants one,
+    // 2 apart none. Three on every tick read 2.000 as two thousand.
+    const back = (axis, lo, hi) => {
+      if (axis.log) return v => _short(10 ** v);
+      const digits = Math.max(0, Math.min(3, Math.ceil(-Math.log10((hi - lo) / 5 || 1))));
+      return v => Number(v).toLocaleString('en-US', { minimumFractionDigits: digits,
+                                                      maximumFractionDigits: digits });
+    };
+    const x = { lo: x0, hi: x1, format: back(fig.x, x0, x1) };
+    const y = { lo: y0, hi: y1 === y0 ? y0 + 1 : y1 };
+    y.format = back(fig.y, y.lo, y.hi);
     const px = v => (sx(v) - x.lo) / (x.hi - x.lo || 1) * w;
     const py = v => h - (sy(v) - y.lo) / (y.hi - y.lo || 1) * h;
 

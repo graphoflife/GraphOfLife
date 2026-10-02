@@ -1,0 +1,104 @@
+{
+ "fitted": {
+  "secondsPerAgentIteration": 0.0014203600999047141,
+  "agentsPerToken": 0.4,
+  "bytesPerAgentIteration": 84.9294481236203,
+  "peakBytesPerWeightByte": 1.2866590293937297,
+  "baseMB": 300.0,
+  "measured": {
+   "secondsPerAgentIteration": true,
+   "agentsPerToken": false,
+   "bytesPerAgentIteration": true,
+   "peakBytesPerWeightByte": true
+  },
+  "runs": 12,
+  "fitted": "2026-10-02T12:45:21+0200"
+ },
+ "runs": [
+  {
+   "id": "B1-10000-s003-stopped-at-10",
+   "tokens": 10000,
+   "weights": 10256,
+   "iterations": 30,
+   "peakMB": 258.1
+  },
+  {
+   "id": "B1-10000-s002-stopped-at-10",
+   "tokens": 10000,
+   "weights": 10256,
+   "iterations": 30,
+   "peakMB": 333.1
+  },
+  {
+   "id": "B1-10000-s001-stopped-at-10",
+   "tokens": 10000,
+   "weights": 10256,
+   "iterations": 30,
+   "peakMB": 414.9
+  },
+  {
+   "id": "B1-10000-s003-all-blas-threads",
+   "tokens": 10000,
+   "weights": 10256,
+   "iterations": 30,
+   "peakMB": 258.2
+  },
+  {
+   "id": "B1-10000-s002-all-blas-threads",
+   "tokens": 10000,
+   "weights": 10256,
+   "iterations": 30,
+   "peakMB": 332.7
+  },
+  {
+   "id": "B1-10000-s001-all-blas-threads",
+   "tokens": 10000,
+   "weights": 10256,
+   "iterations": 30,
+   "peakMB": 412.9
+  },
+  {
+   "id": "B1-10000-s003-cut-off-at-15",
+   "tokens": 10000,
+   "weights": 10256,
+   "iterations": 30,
+   "peakMB": 258.6
+  },
+  {
+   "id": "B1-10000-s002-cut-off-at-15",
+   "tokens": 10000,
+   "weights": 10256,
+   "iterations": 30,
+   "peakMB": 333.1
+  },
+  {
+   "id": "B1-10000-s002",
+   "tokens": 10000,
+   "weights": 10256,
+   "iterations": 30,
+   "peakMB": 333.1
+  },
+  {
+   "id": "B1-10000-s001-cut-off-at-15",
+   "tokens": 10000,
+   "weights": 10256,
+   "iterations": 30,
+   "peakMB": 415.2
+  },
+  {
+   "id": "B1-10000-s003",
+   "tokens": 10000,
+   "weights": 10256,
+   "iterations": 30,
+   "peakMB": 258.7
+  },
+  {
+   "id": "B1-10000-s001",
+   "tokens": 10000,
+   "weights": 10256,
+   "iterations": 30,
+   "peakMB": 412.2
+  }
+ ],
+ "updated": "2026-10-02"
+}

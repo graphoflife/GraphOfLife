@@ -1,0 +1,55 @@
+{
+  "id": "E06",
+  "title": "Who wins, and for how long?",
+  "thesis": {
+    "claim": "No brain wins for long. At any moment the population carries hundreds of different genotypes, the living descend from many different ancestors of eight iterations before, and the most common genotype holds only a small part of the world — none takes over.",
+    "why": "Every brain has an even chance of changing at the end of every game and again when it is copied to a child, and a conquered node takes on its conqueror's brain. A genotype is therefore renamed long before it could spread far, and earlier pilots found a typical genotype lasts a single iteration.",
+    "confirm": "From iteration 100 on, the median number of distinct genotypes across the thirty runs is above a fifth of the population, the number of families stays above ten, and no single genotype ever holds more than a tenth of the agents in more than one run in ten.",
+    "refute": "One lineage takes over: the families fall to a handful, or a single genotype holds a large share of the world for hundreds of iterations. Then selection has something to work on even at this rate of change, which would change what Part II has to fix first."
+  },
+  "runs": "same as E02",
+  "analyse": {
+    "kind": "series",
+    "figures": [
+      {
+        "name": "genotypes",
+        "stat": "distinctBrains/nodes",
+        "phase": 2,
+        "title": "Distinct genotypes, per agent",
+        "y": "share",
+        "min": 0
+      },
+      {
+        "name": "families",
+        "stat": "cladesInWindow",
+        "phase": 2,
+        "title": "Families: distinct ancestors eight iterations back",
+        "y": "families"
+      },
+      {
+        "name": "home",
+        "stat": "heldHomeShare",
+        "phase": 2,
+        "title": "Share of agents that kept their own node in the game",
+        "y": "share",
+        "min": 0
+      },
+      {
+        "name": "revolutions",
+        "stat": "revolutions",
+        "phase": 2,
+        "title": "Nodes taken by a coalition",
+        "y": "nodes"
+      }
+    ],
+    "endpoints": [
+      "distinctBrains/nodes",
+      "distinctBrains",
+      "brainDiversity",
+      "cladesInWindow",
+      "heldHomeShare",
+      "revolutions",
+      "distinctParents"
+    ]
+  }
+}

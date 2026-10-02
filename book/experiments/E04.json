@@ -1,0 +1,73 @@
+{
+  "id": "E04",
+  "title": "Where do the tokens go?",
+  "thesis": {
+    "claim": "Tokens pool. The founders start exactly equal, and within a hundred iterations the richest tenth of agents hold more than 40% of all tokens, with a Gini coefficient above 0.5 — and it stays that way. Most of what an agent stakes in the game it stakes on its own node.",
+    "why": "A node goes to whoever stakes most on it, and the winner takes everything staked there, so being big makes it easier to become bigger. Staking on your own node is the one stake that is never lost to someone else's brain. The shared-out tokens of the dead pull the other way, but only a little.",
+    "confirm": "From iteration 100 on, the median Gini across the thirty runs is above 0.5 and the richest tenth hold more than 40% of the tokens, and the median share of tokens staked at home is above one half.",
+    "refute": "Wealth stays close to even (Gini below 0.3), or concentrates and then evens out again, or agents stake most of their tokens on their neighbours. Then the game is not a winner-takes-all contest, and what keeps wealth spread out is worth its own chapter."
+  },
+  "runs": "same as E02",
+  "analyse": {
+    "kind": "series",
+    "figures": [
+      {
+        "name": "gini",
+        "stat": "gini",
+        "phase": 2,
+        "title": "Inequality of wealth (Gini)",
+        "y": "Gini",
+        "min": 0
+      },
+      {
+        "name": "top",
+        "stat": "topDecileShare",
+        "phase": 2,
+        "title": "Share of all tokens held by the richest tenth",
+        "y": "share",
+        "min": 0
+      },
+      {
+        "name": "home",
+        "stat": "selfAllocationShare",
+        "phase": 2,
+        "title": "Share of staked tokens put on the staker's own node",
+        "y": "share",
+        "min": 0
+      },
+      {
+        "name": "children",
+        "stat": "reproTokenShare",
+        "phase": 1,
+        "title": "Share of tokens spent on children",
+        "y": "share",
+        "min": 0
+      },
+      {
+        "name": "gifts",
+        "stat": "giftShare",
+        "phase": 1,
+        "title": "Share of tokens given as gifts",
+        "y": "share",
+        "min": 0
+      }
+    ],
+    "endpoints": [
+      "gini",
+      "topDecileShare",
+      "maxTokens",
+      "medianTokens",
+      "selfAllocationShare",
+      "heldHomeShare",
+      {
+        "stat": "reproTokenShare",
+        "phase": 1
+      },
+      {
+        "stat": "giftShare",
+        "phase": 1
+      },
+      "redistributed"
+    ]
+  }
+}

@@ -337,6 +337,34 @@ def test_the_lab_works_through_a_queue():
             assert gol_store.load_meta(f"{reference}-cut")["checkpoint_iteration"] == 8
 
 
+def test_what_a_simulation_costs_is_fitted_to_what_runs_recorded():
+    """
+    The estimates are fitted, not guessed: time is every recorded second over
+    every agent-iteration it bought, so the biggest stretches of a run count
+    for most, and each measure says whether it was measured. Agents per token
+    waits until a world has settled, which a short run never does.
+    """
+    from GraphOfLifeSimple import brain_shape
+    import gol_record
+    with lab(plan("E91", seeds="1..2", iterations=5)):
+        gol_lab.request(run="E91", workers=2)
+        with contextlib.redirect_stdout(io.StringIO()):
+            assert gol_lab.run_lab() == 0
+        costs = gol_lab.fit_costs()
+        seconds = work = 0.0
+        for spec in gol_lab.experiment_runs("E91"):
+            weights = brain_shape(SimConfig.from_dict(spec.config))["weights"]
+            for row in gol_record.read_stats(spec.run_id):
+                if row.get("_seconds"):
+                    seconds += row["_seconds"]
+                    work += row["nodes"] * weights / 1e4
+        assert abs(costs["secondsPerAgentIteration"] - seconds / work) < 1e-12, costs
+        assert costs["measured"]["secondsPerAgentIteration"] and costs["runs"] == 2
+        assert not costs["measured"]["agentsPerToken"], "a five-iteration run taught the size of a world"
+        assert costs["agentsPerToken"] == gol_lab.CALIBRATION["agentsPerToken"]
+        assert gol_lab.costs() == costs, "the fit was not kept for the estimates"
+
+
 def test_a_disk_that_would_fill_pauses_the_lab_and_says_why():
     """
     A run that would not fit on the disk is not started, to fail halfway. The

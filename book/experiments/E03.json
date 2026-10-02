@@ -1,0 +1,62 @@
+{
+  "id": "E03",
+  "title": "How much does the seed decide?",
+  "thesis": {
+    "claim": "Thirty seeds give thirty different histories, but the same kind of world. Where a world ends up — how many agents, how many connections, how unequal — differs from seed to seed by less than a fifth of its typical value. Thirty seeds per condition are enough to see a change of a tenth in those.",
+    "why": "A seed decides the starting ring and every coin the world throws, so no two runs share a single event. But each run is made of thousands of agents and thousands of iterations, and a world with that much going on averages its own accidents away, the way two different shuffles of a large deck still hold the same number of each suit.",
+    "confirm": "For the population, the connections and the Gini coefficient of wealth at the end of the runs, the standard deviation across the thirty seeds is below a fifth of the mean, and the number of seeds needed to see a 10% change is at most thirty.",
+    "refute": "One of these varies across seeds by more than a fifth of its mean, or the endings fall into separate groups — some seeds settling at one level, others at another. Then the seed is part of the story, and every later experiment needs more seeds than planned, or must look at the seeds one by one."
+  },
+  "runs": "same as E02",
+  "analyse": {
+    "kind": "series",
+    "seedsNeeded": true,
+    "figures": [
+      {
+        "name": "agents",
+        "stat": "nodes",
+        "phase": 2,
+        "title": "Agents alive, five seeds",
+        "y": "agents",
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "name": "gini",
+        "stat": "gini",
+        "phase": 2,
+        "title": "Inequality of wealth (Gini)",
+        "y": "Gini",
+        "seeds": [
+          1,
+          2,
+          3
+        ]
+      }
+    ],
+    "endpoints": [
+      "nodes",
+      "edges",
+      "meanDegree",
+      "gini",
+      "topDecileShare",
+      "leaves",
+      "distinctBrains",
+      "cladesInWindow",
+      {
+        "stat": "births",
+        "phase": 1
+      },
+      "starved",
+      "orphaned",
+      "bridges",
+      "transitivity",
+      "coreShare"
+    ]
+  }
+}

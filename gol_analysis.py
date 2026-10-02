@@ -86,8 +86,21 @@ def _provenance(run_id: str) -> Dict[str, Any]:
 
 
 def series(rows: List[Dict[str, Any]], stat: str, phase: int) -> Tuple[np.ndarray, np.ndarray]:
-    """One statistic of one run, by iteration, from the frames of one phase."""
-    picked = [(r["iteration"], r.get(stat)) for r in rows if r.get("phase") == phase]
+    """
+    One statistic of one run, by iteration, from the frames of one phase.
+    `a/b` is one statistic over another, frame by frame: bridges as a share of
+    edges, leaves as a share of agents.
+    """
+    top, _, bottom = stat.partition("/")
+
+    def value(row):
+        a = row.get(top)
+        if not bottom:
+            return a
+        b = row.get(bottom)
+        return None if a is None or not b else a / b
+
+    picked = [(r["iteration"], value(r)) for r in rows if r.get("phase") == phase]
     its = np.array([i for i, _ in picked], dtype=float)
     values = np.array([np.nan if v is None else float(v) for _, v in picked], dtype=float)
     return its, values

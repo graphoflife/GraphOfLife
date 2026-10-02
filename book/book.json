@@ -16,34 +16,43 @@
       "chapters": [
         {
           "id": "1",
-          "title": "The algorithm and the question"
+          "title": "The algorithm and the question",
+          "file": "chapters/01-the-algorithm.md"
         },
         {
           "id": "2",
           "title": "Is a run reproducible?",
           "experiment": "E01",
           "file": "chapters/02-reproducibility.md",
-          "status": "ready"
+          "status": "analysed"
         },
         {
           "id": "3",
           "title": "The life of a world",
-          "experiment": "E02"
+          "experiment": "E02",
+          "file": "chapters/03-the-life-of-a-world.md",
+          "status": "ready"
         },
         {
           "id": "4",
           "title": "How much does the seed decide?",
-          "experiment": "E03"
+          "experiment": "E03",
+          "file": "chapters/04-how-much-does-the-seed-decide.md",
+          "status": "ready"
         },
         {
           "id": "5",
           "title": "Where do the tokens go?",
-          "experiment": "E04"
+          "experiment": "E04",
+          "file": "chapters/05-where-do-the-tokens-go.md",
+          "status": "ready"
         },
         {
           "id": "6",
           "title": "What shape does the graph take?",
-          "experiment": "E05"
+          "experiment": "E05",
+          "file": "chapters/06-what-shape-does-the-graph-take.md",
+          "status": "ready"
         },
         {
           "id": "7",
@@ -53,7 +62,9 @@
         {
           "id": "8",
           "title": "Who wins, and for how long?",
-          "experiment": "E06"
+          "experiment": "E06",
+          "file": "chapters/08-who-wins-and-for-how-long.md",
+          "status": "ready"
         },
         {
           "id": "9",
@@ -97,7 +108,8 @@
       "chapters": [
         {
           "id": "A",
-          "title": "What a simulation costs"
+          "title": "What a simulation costs",
+          "file": "chapters/A-costs.md"
         }
       ]
     }

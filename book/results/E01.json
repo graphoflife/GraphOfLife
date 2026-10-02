@@ -1,0 +1,403 @@
+{
+ "experiment": "E01",
+ "analysed": "2026-10-02",
+ "kind": "identity",
+ "engines": {
+  "engines": [
+   "04f533dd0bf4b7c1"
+  ],
+  "agree": true,
+  "checked": []
+ },
+ "reference": "straight",
+ "comparisons": [
+  {
+   "condition": "stopped at 10",
+   "seed": 1,
+   "reference": "B1-10000-s001",
+   "run": "B1-10000-s001-stopped-at-10",
+   "frames": 60,
+   "rows": 60,
+   "same": true
+  },
+  {
+   "condition": "stopped at 10",
+   "seed": 2,
+   "reference": "B1-10000-s002",
+   "run": "B1-10000-s002-stopped-at-10",
+   "frames": 60,
+   "rows": 60,
+   "same": true
+  },
+  {
+   "condition": "stopped at 10",
+   "seed": 3,
+   "reference": "B1-10000-s003",
+   "run": "B1-10000-s003-stopped-at-10",
+   "frames": 60,
+   "rows": 60,
+   "same": true
+  },
+  {
+   "condition": "cut off at 15",
+   "seed": 1,
+   "reference": "B1-10000-s001",
+   "run": "B1-10000-s001-cut-off-at-15",
+   "frames": 60,
+   "rows": 60,
+   "same": true
+  },
+  {
+   "condition": "cut off at 15",
+   "seed": 2,
+   "reference": "B1-10000-s002",
+   "run": "B1-10000-s002-cut-off-at-15",
+   "frames": 60,
+   "rows": 60,
+   "same": true
+  },
+  {
+   "condition": "cut off at 15",
+   "seed": 3,
+   "reference": "B1-10000-s003",
+   "run": "B1-10000-s003-cut-off-at-15",
+   "frames": 60,
+   "rows": 60,
+   "same": true
+  },
+  {
+   "condition": "all BLAS threads",
+   "seed": 1,
+   "reference": "B1-10000-s001",
+   "run": "B1-10000-s001-all-blas-threads",
+   "frames": 60,
+   "rows": 60,
+   "same": true
+  },
+  {
+   "condition": "all BLAS threads",
+   "seed": 2,
+   "reference": "B1-10000-s002",
+   "run": "B1-10000-s002-all-blas-threads",
+   "frames": 60,
+   "rows": 60,
+   "same": true
+  },
+  {
+   "condition": "all BLAS threads",
+   "seed": 3,
+   "reference": "B1-10000-s003",
+   "run": "B1-10000-s003-all-blas-threads",
+   "frames": 60,
+   "rows": 60,
+   "same": true
+  }
+ ],
+ "allSame": true,
+ "citation": {
+  "strains": [
+   "gol-1+allow_gifting+brain_kind=float16+inactive_window=iteration+prune_after=reproduction"
+  ],
+  "commits": [
+   "f936c96ce5a12af429f621d6e4d955f1ff57d839"
+  ],
+  "engines": [
+   "04f533dd0bf4b7c1"
+  ],
+  "environments": [
+   {
+    "python": "3.12.3",
+    "numpy": "2.5.1",
+    "networkx": "3.6.1",
+    "blas": "scipy-openblas 0.3.33.112.0",
+    "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+    "dispatch": "AVX2"
+   }
+  ],
+  "setup": {
+   "baseline": "B1",
+   "world": {
+    "total_tokens": 10000
+   },
+   "seeds": "1..3",
+   "iterations": 30,
+   "record": {
+    "checkpoint_every": 10,
+    "heavy_every": 5
+   },
+   "conditions": [
+    {
+     "name": "straight"
+    },
+    {
+     "name": "stopped at 10",
+     "stops": [
+      10
+     ]
+    },
+    {
+     "name": "cut off at 15",
+     "fault_at": 15
+    },
+    {
+     "name": "all BLAS threads",
+     "threads": "default"
+    }
+   ]
+  },
+  "runs": [
+   {
+    "id": "B1-10000-s001",
+    "condition": "straight",
+    "seed": 1,
+    "iterations": 30,
+    "status": "stopped",
+    "strain": "gol-1+allow_gifting+brain_kind=float16+inactive_window=iteration+prune_after=reproduction",
+    "engine": "04f533dd0bf4b7c1",
+    "commit": "f936c96ce5a12af429f621d6e4d955f1ff57d839",
+    "seconds": 88.9,
+    "peakMB": 412.2,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-10000-s002",
+    "condition": "straight",
+    "seed": 2,
+    "iterations": 30,
+    "status": "stopped",
+    "strain": "gol-1+allow_gifting+brain_kind=float16+inactive_window=iteration+prune_after=reproduction",
+    "engine": "04f533dd0bf4b7c1",
+    "commit": "f936c96ce5a12af429f621d6e4d955f1ff57d839",
+    "seconds": 102.7,
+    "peakMB": 333.1,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-10000-s003",
+    "condition": "straight",
+    "seed": 3,
+    "iterations": 30,
+    "status": "stopped",
+    "strain": "gol-1+allow_gifting+brain_kind=float16+inactive_window=iteration+prune_after=reproduction",
+    "engine": "04f533dd0bf4b7c1",
+    "commit": "f936c96ce5a12af429f621d6e4d955f1ff57d839",
+    "seconds": 47.3,
+    "peakMB": 258.7,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-10000-s001-stopped-at-10",
+    "condition": "stopped at 10",
+    "seed": 1,
+    "iterations": 30,
+    "status": "stopped",
+    "strain": "gol-1+allow_gifting+brain_kind=float16+inactive_window=iteration+prune_after=reproduction",
+    "engine": "04f533dd0bf4b7c1",
+    "commit": "f936c96ce5a12af429f621d6e4d955f1ff57d839",
+    "seconds": 87.6,
+    "peakMB": 414.9,
+    "sessions": 2,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-10000-s002-stopped-at-10",
+    "condition": "stopped at 10",
+    "seed": 2,
+    "iterations": 30,
+    "status": "stopped",
+    "strain": "gol-1+allow_gifting+brain_kind=float16+inactive_window=iteration+prune_after=reproduction",
+    "engine": "04f533dd0bf4b7c1",
+    "commit": "f936c96ce5a12af429f621d6e4d955f1ff57d839",
+    "seconds": 68.4,
+    "peakMB": 333.1,
+    "sessions": 2,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-10000-s003-stopped-at-10",
+    "condition": "stopped at 10",
+    "seed": 3,
+    "iterations": 30,
+    "status": "stopped",
+    "strain": "gol-1+allow_gifting+brain_kind=float16+inactive_window=iteration+prune_after=reproduction",
+    "engine": "04f533dd0bf4b7c1",
+    "commit": "f936c96ce5a12af429f621d6e4d955f1ff57d839",
+    "seconds": 46.0,
+    "peakMB": 258.1,
+    "sessions": 2,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-10000-s001-cut-off-at-15",
+    "condition": "cut off at 15",
+    "seed": 1,
+    "iterations": 30,
+    "status": "stopped",
+    "strain": "gol-1+allow_gifting+brain_kind=float16+inactive_window=iteration+prune_after=reproduction",
+    "engine": "04f533dd0bf4b7c1",
+    "commit": "f936c96ce5a12af429f621d6e4d955f1ff57d839",
+    "seconds": 127.5,
+    "peakMB": 415.2,
+    "sessions": 2,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-10000-s002-cut-off-at-15",
+    "condition": "cut off at 15",
+    "seed": 2,
+    "iterations": 30,
+    "status": "stopped",
+    "strain": "gol-1+allow_gifting+brain_kind=float16+inactive_window=iteration+prune_after=reproduction",
+    "engine": "04f533dd0bf4b7c1",
+    "commit": "f936c96ce5a12af429f621d6e4d955f1ff57d839",
+    "seconds": 67.6,
+    "peakMB": 333.1,
+    "sessions": 2,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-10000-s003-cut-off-at-15",
+    "condition": "cut off at 15",
+    "seed": 3,
+    "iterations": 30,
+    "status": "stopped",
+    "strain": "gol-1+allow_gifting+brain_kind=float16+inactive_window=iteration+prune_after=reproduction",
+    "engine": "04f533dd0bf4b7c1",
+    "commit": "f936c96ce5a12af429f621d6e4d955f1ff57d839",
+    "seconds": 46.4,
+    "peakMB": 258.6,
+    "sessions": 2,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-10000-s001-all-blas-threads",
+    "condition": "all BLAS threads",
+    "seed": 1,
+    "iterations": 30,
+    "status": "stopped",
+    "strain": "gol-1+allow_gifting+brain_kind=float16+inactive_window=iteration+prune_after=reproduction",
+    "engine": "04f533dd0bf4b7c1",
+    "commit": "f936c96ce5a12af429f621d6e4d955f1ff57d839",
+    "seconds": 89.0,
+    "peakMB": 412.9,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-10000-s002-all-blas-threads",
+    "condition": "all BLAS threads",
+    "seed": 2,
+    "iterations": 30,
+    "status": "stopped",
+    "strain": "gol-1+allow_gifting+brain_kind=float16+inactive_window=iteration+prune_after=reproduction",
+    "engine": "04f533dd0bf4b7c1",
+    "commit": "f936c96ce5a12af429f621d6e4d955f1ff57d839",
+    "seconds": 70.4,
+    "peakMB": 332.7,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-10000-s003-all-blas-threads",
+    "condition": "all BLAS threads",
+    "seed": 3,
+    "iterations": 30,
+    "status": "stopped",
+    "strain": "gol-1+allow_gifting+brain_kind=float16+inactive_window=iteration+prune_after=reproduction",
+    "engine": "04f533dd0bf4b7c1",
+    "commit": "f936c96ce5a12af429f621d6e4d955f1ff57d839",
+    "seconds": 46.9,
+    "peakMB": 258.2,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   }
+  ]
+ }
+}

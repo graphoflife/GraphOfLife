@@ -28,6 +28,7 @@ repository contains, compiled to WebAssembly, entirely on your own machine.
 - [Different mechanics](#different-mechanics)
 - [Watching a run](#watching-a-run)
 - [Running it yourself](#running-it-yourself)
+- [The research book](#the-research-book)
 - [Checking that it still works](#checking-that-it-still-works)
 - [How the website works](#how-the-website-works)
 - [Goal](#goal)
@@ -189,6 +190,22 @@ python3 GraphOfLifeSimple.py
 A run has no iteration ceiling. It goes until you stop it or the population
 dies out.
 
+## The research book
+
+The **Book** tab is a research programme written down as it is carried out:
+one experiment per chapter, each with its thesis stated before the runs, and
+a meta chapter after every five. Its source is `book/`. On a machine running
+`gol_server.py`, an experiment's chapter has a ▶ button: the lab
+(`gol_lab.py`) runs its simulations in the background, several at once, each
+on a frozen copy of the engine, records where every run came from, and can be
+paused and continued at any time. The same from a terminal:
+
+```bash
+python3 gol_lab.py plan E02      # what it needs, and how long it will take
+python3 gol_lab.py run E02       # run it here; Ctrl-C pauses
+python3 gol_lab.py analyse E02   # its results and figures, into book/
+```
+
 ## Checking that it still works
 
 ```bash
@@ -265,8 +282,14 @@ LICENSE                MIT — use it for anything, including commercially
 GraphOfLifeSimple.py   the engine: agents, brains, both phases, cleanup
 gol_config.py          every setting, with validation
 gol_store.py           runs on disk — gzipped frames and a rolling checkpoint
+gol_run.py             the one loop that advances a stored run
+gol_record.py          a run's statistics, one line per frame, as it goes
 gol_series.py          per-frame statistics for the charts
 gol_server.py          the local server (standard library only)
+gol_lab.py             runs the book's experiments: plans, workers, costs
+gol_worker.py          one run, in a process of its own, on a frozen engine
+gol_analysis.py        what an experiment's runs say, written into the book
+book/                  the research book: chapters, plans, results
 build_site.sh          assembles the static site into _site/
 web/                   the interface: renderer, layout, charts
   js/viewer.js         frames, camera, playback, the animation loop
@@ -280,6 +303,7 @@ web/                   the interface: renderer, layout, charts
   py/gol_browser.py    live worlds, advanced a slice at a time
 tools/
   record_home_run.py   the run that plays behind the front page
+  trajectory_digest.py a fingerprint of what an engine records
 web/data/home-run.bin  that recording, packed
 tests/                 invariants, and parity between the two statistics
 docs/IDEAS.md          what might come next
