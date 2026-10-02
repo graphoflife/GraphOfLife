@@ -22,23 +22,35 @@ when `export_every > 1` records only some iterations.
 Only ONE checkpoint is kept per run. Resuming from it truncates every frame
 recorded after that point, so a run's history always matches its saved state
 rather than describing a future the resumed world never lived through.
+
+GOL_RUNS_DIR moves the whole folder elsewhere. The lab's workers run from a
+frozen copy of the engine kept beside the runs, so where the runs are cannot be
+worked out from where this file is.
 """
 from __future__ import annotations
 
+import contextlib
 import gzip
 import json
 import os
 import re
 import shutil
+import tempfile
 import threading
 import time
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, Iterator, List, Optional, Tuple
 
 import numpy as np
 
 from gol_config import SimConfig
 
-BASE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "GraphOfLifeRuns")
+try:
+    import fcntl
+except ImportError:          # not POSIX: runs still work, they just cannot be locked
+    fcntl = None
+
+BASE_DIR = (os.environ.get("GOL_RUNS_DIR")
+            or os.path.join(os.path.dirname(os.path.abspath(__file__)), "GraphOfLifeRuns"))
 
 # Allocating a run id means reading the directory and then creating one, and the
 # server answers on several threads at once. Two creations landing together
@@ -130,12 +142,19 @@ def next_run_id() -> str:
     return run_id
 
 
-def create_run(name: str, cfg: SimConfig) -> Dict[str, Any]:
-    """Allocate a new run directory and write its initial metadata."""
+def create_run(name: str, cfg: SimConfig, run_id: Optional[str] = None,
+               **extra: Any) -> Dict[str, Any]:
+    """
+    Allocate a new run directory and write its initial metadata.
+
+    A run is numbered by the day unless it is given an id, which is how the lab
+    names a run after what it is rather than when it was made. `extra` is kept
+    in the metadata beside everything else.
+    """
     _ensure_base()
 
     with _CREATE_LOCK:
-        run_id = next_run_id()
+        run_id = run_id or next_run_id()
         os.makedirs(frames_dir(run_id), exist_ok=False)
 
     meta = {
@@ -155,6 +174,7 @@ def create_run(name: str, cfg: SimConfig) -> Dict[str, Any]:
         # where deriving it means importing the config class and knowing the
         # scheme. See research/strains.md.
         "strain": cfg.strain_id(),
+        **extra,
     }
     save_meta(run_id, meta)
     return meta
@@ -182,17 +202,42 @@ def load_meta(run_id: str) -> Dict[str, Any]:
         return json.load(f)
 
 
+@contextlib.contextmanager
+def _replacing(path: str, mode: str = "w", durable: bool = False) -> Iterator[Any]:
+    """
+    A file to write that takes `path`'s place only once it is complete.
+
+    Written under a name of its own and renamed over the old file, which the
+    filesystem does in one step, so a crash mid-write never leaves half a file.
+    The name is unique: a fixed `path + ".tmp"` let two writers of the same
+    file — a rename landing while a run wrote its progress — share one
+    temporary, and the second rename found it gone. A write that fails leaves
+    nothing behind. `durable` puts the bytes on the disk before the rename, for
+    a file that later writes are measured against.
+    """
+    folder, name = os.path.split(path)
+    fd, tmp = tempfile.mkstemp(prefix=name + ".", suffix=".tmp", dir=folder)
+    try:
+        with os.fdopen(fd, mode) as f:
+            yield f
+            if durable:
+                f.flush()
+                os.fsync(f.fileno())
+        os.replace(tmp, path)
+    except BaseException:
+        with contextlib.suppress(OSError):
+            os.remove(tmp)
+        raise
+
+
 def write_json(path: str, value: Any, indent: Optional[int] = None) -> None:
     """
-    Write `value` as JSON so that a crash mid-write cannot leave half a file:
-    to a temporary name first, then renamed over the old one, which the
-    filesystem does in one step. Compact unless indented. The run's metadata
-    and its summarised history each spelled this out.
+    Write `value` as JSON so that a crash mid-write cannot leave half a file.
+    Compact unless indented. The run's metadata and its summarised history
+    each spelled this out.
     """
-    tmp = path + ".tmp"
-    with open(tmp, "w") as f:
+    with _replacing(path) as f:
         json.dump(value, f, indent=indent, separators=None if indent else (",", ":"))
-    os.replace(tmp, path)
 
 
 def save_meta(run_id: str, meta: Dict[str, Any]) -> None:
@@ -201,10 +246,69 @@ def save_meta(run_id: str, meta: Dict[str, Any]) -> None:
 
 
 def update_meta(run_id: str, **changes: Any) -> Dict[str, Any]:
-    meta = load_meta(run_id)
-    meta.update(changes)
-    save_meta(run_id, meta)
+    """
+    Change some fields and keep the rest. Read, changed and written under a
+    lock, because a running run rewrites its metadata every iteration and a
+    rename landing in between used to be written over and lost.
+    """
+    with _locked(os.path.join(run_dir(run_id), ".meta.lock"), wait=True):
+        meta = load_meta(run_id)
+        meta.update(changes)
+        save_meta(run_id, meta)
     return meta
+
+
+# ----------------------------------------------------------------------------
+# Who is advancing a run
+# ----------------------------------------------------------------------------
+
+class RunBusy(RuntimeError):
+    """The run is being advanced by someone else."""
+
+
+@contextlib.contextmanager
+def _locked(path: str, wait: bool) -> Iterator[None]:
+    """An exclusive lock on `path`, which the system lets go if the holder dies."""
+    if fcntl is None:
+        yield
+        return
+    fd = os.open(path, os.O_RDWR | os.O_CREAT, 0o644)
+    try:
+        try:
+            fcntl.flock(fd, fcntl.LOCK_EX | (0 if wait else fcntl.LOCK_NB))
+        except BlockingIOError:
+            raise RunBusy(path) from None
+        yield
+    finally:
+        os.close(fd)                  # closing it is what lets the lock go
+
+
+def _run_lock(run_id: str) -> str:
+    return os.path.join(run_dir(run_id), ".lock")
+
+
+def hold(run_id: str):
+    """
+    Advance this run and nobody else: a lock held for as long as the run is
+    being stepped, by a thread of the server or a process of the lab alike.
+
+    The system releases it the moment its holder dies, so a run whose holder
+    was killed is free again without anyone tidying up, and a stale "running"
+    on disk can be told from a live one by asking. Raises RunBusy if someone
+    else has it.
+    """
+    return _locked(_run_lock(run_id), wait=False)
+
+
+def held(run_id: str) -> bool:
+    """Whether someone is advancing this run right now."""
+    if fcntl is None or not os.path.exists(_run_lock(run_id)):
+        return False
+    try:
+        with _locked(_run_lock(run_id), wait=False):
+            return False
+    except RunBusy:
+        return True
 
 
 def load_config(run_id: str) -> SimConfig:
@@ -297,11 +401,8 @@ def run_size_bytes(run_id: str) -> int:
 def write_frame(run_id: str, index: int, frame: Dict[str, Any]) -> int:
     """Persist one phase frame at a sequential index. Returns that index."""
     path = frame_path(run_id, index)
-    os.makedirs(os.path.dirname(path), exist_ok=True)
-    tmp = path + ".tmp"
-    with gzip.open(tmp, "wt", compresslevel=6) as f:
+    with _replacing(path, "wb") as raw, gzip.open(raw, "wt", compresslevel=6) as f:
         json.dump(frame, f, separators=(",", ":"))
-    os.replace(tmp, path)
     return index
 
 
@@ -370,14 +471,36 @@ def save_checkpoint(run_id: str, world: Any) -> None:
     """
     Overwrite the run's single checkpoint with the current world.
 
-    Written to a temp file and renamed, so an interrupted save never leaves a
-    half-written checkpoint that would fail to resume.
+    Everything recorded before it reaches the disk first, and the checkpoint
+    itself before it replaces the old one. A resume trusts every frame older
+    than its checkpoint and recomputes the rest, so a checkpoint that survived
+    a power cut while the frames it accounts for did not would resume into a
+    history with holes in it. An interrupted save leaves the old checkpoint
+    standing.
     """
-    path = checkpoint_path(run_id)
-    tmp = path + ".tmp.npz"
-    np.savez_compressed(tmp, **world.to_checkpoint())
-    os.replace(tmp, path)
+    if hasattr(os, "sync"):
+        os.sync()
+    with _replacing(checkpoint_path(run_id), "wb", durable=True) as f:
+        np.savez_compressed(f, **world.to_checkpoint())
     update_meta(run_id, checkpoint_iteration=world.iteration)
+
+
+def clear_leftovers(run_id: str) -> int:
+    """
+    Remove what a writer killed mid-write left behind: temporary files, and
+    the checkpoint temporary of the store before it named them uniquely, which
+    can be gigabytes. Only ever called by whoever holds the run.
+    """
+    removed = 0
+    for folder in (run_dir(run_id), frames_dir(run_id)):
+        if not os.path.isdir(folder):
+            continue
+        for name in os.listdir(folder):
+            if name.endswith(".tmp") or name == "checkpoint.npz.tmp.npz":
+                with contextlib.suppress(OSError):
+                    os.remove(os.path.join(folder, name))
+                    removed += 1
+    return removed
 
 
 def load_checkpoint(run_id: str, cfg: SimConfig):

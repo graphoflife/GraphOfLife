@@ -46,6 +46,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Any, Callable, Dict
 from urllib.parse import parse_qs, urlparse
 
+import gol_run
 import gol_store as store
 from gol_config import SimConfig
 
@@ -115,12 +116,10 @@ MAX_FRAME_BATCH = 64
 
 class Worker:
     """
-    Advances a single run in the background.
-
-    A worker either starts a brand new world or resumes from the run's
-    checkpoint. On resume it first truncates any frames recorded past the
-    checkpoint, because those describe a timeline the resumed world will not
-    reproduce.
+    Advances a single run in the background, through the loop the lab uses
+    too (gol_run.advance): a new world or a resume from the checkpoint, frames
+    past the checkpoint dropped first, a checkpoint left behind however it
+    ends.
     """
 
     def __init__(self, run_id: str) -> None:
@@ -139,65 +138,12 @@ class Worker:
         return self.thread.is_alive()
 
     def _run(self) -> None:
-        run_id = self.run_id
         try:
-            from GraphOfLifeSimple import new_world
-
-            cfg = store.load_config(run_id)
-
-            world = store.load_checkpoint(run_id, cfg)
-            if world is None:
-                # Fresh start: nothing from a previous attempt survives.
-                store.truncate_frames_from(run_id, 0)
-                world = new_world(cfg)
-                frame_cursor = 0
-            else:
-                # Resume: drop the future the checkpoint never lived through.
-                frame_cursor = cfg.frames_before(world.iteration)
-                store.truncate_frames_from(run_id, frame_cursor)
-
-            store.update_meta(run_id, status="running", error=None,
-                              iteration=world.iteration, frame_count=frame_cursor)
-
-            final_status = "idle"
-
-            # No ceiling and no budget: the run ends when it is stopped or when
-            # the population dies out, and nothing else.
-            while True:
-                if self.stop_event.is_set():
-                    final_status = "stopped"
-                    break
-
-                record = cfg.records(world.iteration)
-                frames = world.step(record_decisions=cfg.export_decisions and record)
-
-                if record:
-                    for frame in frames:
-                        store.write_frame(run_id, frame_cursor, frame)
-                        frame_cursor += 1
-
-                if cfg.checkpoint_every and world.iteration % cfg.checkpoint_every == 0:
-                    store.save_checkpoint(run_id, world)
-
-                store.update_meta(run_id, iteration=world.iteration, frame_count=frame_cursor)
-
-                if world.is_extinct():
-                    final_status = "extinct"
-                    break
-
-            # However the loop ended, leave behind a checkpoint so the run can
-            # always be picked up again from exactly where it stopped.
-            if cfg.checkpoint_every:
-                store.save_checkpoint(run_id, world)
-            store.update_meta(run_id, status=final_status,
-                              iteration=world.iteration, frame_count=frame_cursor)
-
+            gol_run.advance(self.run_id, lambda world: self.stop_event.is_set())
+        except store.RunBusy:
+            pass          # something else took it between asking and starting
         except Exception:
             traceback.print_exc()
-            try:
-                store.update_meta(run_id, status="error", error=traceback.format_exc(limit=4))
-            except OSError:
-                pass
 
 
 class WorkerPool:
@@ -210,7 +156,7 @@ class WorkerPool:
     def start(self, run_id: str) -> bool:
         with self._lock:
             existing = self._workers.get(run_id)
-            if existing and existing.alive:
+            if (existing and existing.alive) or store.held(run_id):
                 return False
             worker = Worker(run_id)
             self._workers[run_id] = worker
@@ -230,11 +176,23 @@ class WorkerPool:
             worker = self._workers.get(run_id)
         return bool(worker and worker.alive)
 
-    def stop_all(self) -> None:
+    def stop_all(self, wait: float = 0.0) -> None:
+        """Ask every run to stop, and give them up to `wait` seconds to save."""
         with self._lock:
             workers = list(self._workers.values())
         for worker in workers:
             worker.stop()
+        for worker in workers:
+            worker.thread.join(timeout=wait)
+
+    def stop_and_wait(self, run_id: str, wait: float) -> bool:
+        """Stop a run of ours and wait for it; True once nothing is advancing it."""
+        with self._lock:
+            worker = self._workers.get(run_id)
+        if worker and worker.alive:
+            worker.stop()
+            worker.thread.join(timeout=wait)
+        return not store.held(run_id)
 
 
 POOL = WorkerPool()
@@ -350,7 +308,12 @@ class Handler(BaseHTTPRequestHandler):
     def _route_delete(self, path: str) -> None:
         parts = [p for p in path.split("/") if p]
         if len(parts) == 3 and parts[:2] == ["api", "runs"]:
-            POOL.stop(parts[2])
+            # Stopped and waited for, not stopped and deleted at once: the
+            # worker's next write used to recreate the folder it was in, and a
+            # run deleted while going came back as a stray folder of frames.
+            if not POOL.stop_and_wait(parts[2], wait=120):
+                self._error("the run is still being advanced; stop it first", 409)
+                return
             store.delete_run(parts[2])
             self._send_json({"ok": True})
             return
@@ -532,7 +495,9 @@ class Handler(BaseHTTPRequestHandler):
         if len(parts) == 4 and parts[:2] == ["api", "runs"] and parts[3] == "stop":
             run_id = parts[2]
             store.load_meta(run_id)
-            POOL.stop(run_id)
+            if not POOL.stop(run_id) and store.held(run_id):
+                self._error("the run is being advanced by another process", 409)
+                return
             self._send_json({"ok": True})
             return
 
@@ -565,7 +530,10 @@ class Handler(BaseHTTPRequestHandler):
             meta["config"] = SimConfig.from_dict(meta.get("config", {})).to_dict()
         except (TypeError, ValueError):
             pass  # an unreadable config is still better shown as it was stored
-        meta["running"] = POOL.is_running(run_id)
+        # Asked of the run's lock as well as of our own threads: a run can be
+        # advanced by something other than this server, and a lock is let go
+        # the moment its holder dies, which a status written to disk is not.
+        meta["running"] = POOL.is_running(run_id) or store.held(run_id)
         meta["has_checkpoint"] = store.has_checkpoint(run_id)
         try:
             meta["size_bytes"] = store.run_size_bytes(run_id)
@@ -655,8 +623,13 @@ def main() -> None:
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:
-        print("\nstopping workers…")
-        POOL.stop_all()
+        # Waited for, so each run writes its final checkpoint rather than being
+        # cut off inside it. A second Ctrl-C stops waiting.
+        print("\nstopping runs and saving their checkpoints… (Ctrl-C again to skip)")
+        try:
+            POOL.stop_all(wait=120)
+        except KeyboardInterrupt:
+            pass
         httpd.shutdown()
 
 

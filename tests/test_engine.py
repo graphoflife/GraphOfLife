@@ -21,6 +21,7 @@ do not get run.
 
 from __future__ import annotations
 
+import contextlib
 import dataclasses
 import math
 import os
@@ -372,6 +373,202 @@ def test_a_checkpoint_carries_the_worlds_own_stream():
     np.random.random(1000)
     assert _recorded(restored, 3) == straight_on, \
         "the resumed world drew from something other than its own stream"
+
+
+@contextlib.contextmanager
+def _scratch_runs():
+    """A runs folder of its own for the length of a test."""
+    import gol_store
+    with tempfile.TemporaryDirectory() as tmp:
+        original = gol_store.BASE_DIR
+        gol_store.BASE_DIR = tmp
+        try:
+            yield tmp
+        finally:
+            gol_store.BASE_DIR = original
+
+
+def _what_was_recorded(run_id):
+    """A run's frames as canonical JSON, and the bytes of every checkpoint array."""
+    import json
+    import numpy as np
+    import gol_store
+    frames = [json.dumps(gol_store.read_frame(run_id, i), sort_keys=True)
+              for i in range(gol_store.count_frames(run_id))]
+    with np.load(gol_store.checkpoint_path(run_id)) as blob:
+        arrays = {key: blob[key].tobytes() for key in blob.files}
+    return frames, arrays
+
+
+def test_a_stopped_and_resumed_run_is_the_run_that_never_stopped():
+    """
+    A run stopped part-way and taken up again from its checkpoint on disk —
+    through the store, the truncation and the loop the server and the lab
+    share — records exactly what a run left alone records: every frame, and a
+    final checkpoint whose every array, the random stream included, is the
+    same. This was only ever checked on a few totals, in memory.
+    """
+    import gol_run
+    import gol_store
+
+    cfg = small(seed=61, checkpoint_every=4)
+    with _scratch_runs():
+        straight = gol_store.create_run("straight", cfg)["id"]
+        assert gol_run.advance(straight, until=10) == "stopped"
+
+        paused = gol_store.create_run("paused", cfg)["id"]
+        gol_run.advance(paused, until=6)
+        assert gol_store.load_meta(paused)["checkpoint_iteration"] == 6
+        gol_run.advance(paused, until=10)
+
+        assert _what_was_recorded(paused) == _what_was_recorded(straight)
+
+
+def test_a_run_cut_between_checkpoints_resumes_to_the_same_run():
+    """
+    A run that dies between checkpoints — the machine switched off, the
+    process killed — leaves frames its checkpoint does not account for. Taken
+    up again it drops them, goes back to the checkpoint, lives those
+    iterations again, and ends exactly where a run never cut off ends.
+    """
+    import gol_run
+    import gol_store
+
+    class PowerCut(Exception):
+        pass
+
+    def at_seven(world):
+        if world.iteration == 7:
+            raise PowerCut
+        return False
+
+    cfg = small(seed=62, checkpoint_every=4)
+    with _scratch_runs():
+        straight = gol_store.create_run("straight", cfg)["id"]
+        gol_run.advance(straight, until=10)
+
+        cut = gol_store.create_run("cut", cfg)["id"]
+        try:
+            gol_run.advance(cut, at_seven)
+        except PowerCut:
+            pass
+        meta = gol_store.load_meta(cut)
+        assert (meta["iteration"], meta["checkpoint_iteration"]) == (7, 4), meta
+        assert gol_store.count_frames(cut) == 14, "the frames past the checkpoint were not there"
+
+        gol_run.advance(cut, until=10)
+        assert _what_was_recorded(cut) == _what_was_recorded(straight)
+
+
+def test_two_runs_in_two_threads_match_each_alone():
+    """
+    The server advances every run it is asked to from a thread of one process.
+    Two going at once record exactly what each records alone.
+    """
+    import threading
+    import gol_run
+    import gol_store
+
+    with _scratch_runs():
+        made = {seed: [gol_store.create_run(f"{seed}", small(seed=seed))["id"]
+                       for _ in range(2)] for seed in (71, 72)}
+        for seed, (alone, _) in made.items():
+            gol_run.advance(alone, until=6)
+
+        threads = [threading.Thread(target=gol_run.advance, args=(together,),
+                                    kwargs={"until": 6})
+                   for _, together in made.values()]
+        for thread in threads:
+            thread.start()
+        for thread in threads:
+            thread.join()
+
+        for seed, (alone, together) in made.items():
+            assert _what_was_recorded(together) == _what_was_recorded(alone), \
+                f"seed {seed} recorded something else beside another run"
+
+
+def test_a_held_run_cannot_be_advanced_twice():
+    """
+    One run, one advancer. A second — Start pressed twice, or the server and
+    the lab reaching for the same run — is refused rather than let loose on
+    the same frames, and anyone asking sees the run is going.
+    """
+    import gol_run
+    import gol_server
+    import gol_store
+
+    with _scratch_runs():
+        run_id = gol_store.create_run("x", small(seed=73))["id"]
+        assert not gol_store.held(run_id)
+        with gol_store.hold(run_id):
+            assert gol_store.held(run_id)
+            try:
+                gol_run.advance(run_id, until=2)
+                raise AssertionError("a held run was advanced a second time")
+            except gol_store.RunBusy:
+                pass
+            assert not gol_server.POOL.start(run_id), "the server started a held run"
+            assert gol_server.Handler._decorate(gol_store.load_meta(run_id))["running"]
+        assert not gol_store.held(run_id)
+
+
+def test_a_lock_dies_with_its_process():
+    """
+    A run whose advancer was killed must not stay locked, since nobody is left
+    to let go. The system releases the lock when its holder dies, so the run
+    is free at once — and the runs folder is wherever GOL_RUNS_DIR says.
+    """
+    import signal
+    import subprocess
+    import gol_store
+
+    here = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    with _scratch_runs() as tmp:
+        run_id = gol_store.create_run("x", small(seed=74))["id"]
+        script = ("import gol_store, time\n"
+                  f"with gol_store.hold({run_id!r}):\n"
+                  "    print('held', flush=True)\n"
+                  "    time.sleep(60)\n")
+        holder = subprocess.Popen([sys.executable, "-B", "-c", script], cwd=here,
+                                  env={**os.environ, "GOL_RUNS_DIR": tmp},
+                                  stdout=subprocess.PIPE, text=True)
+        try:
+            assert holder.stdout.readline().strip() == "held"
+            assert gol_store.held(run_id), "another process's hold was not seen"
+            holder.send_signal(signal.SIGKILL)
+            holder.wait(timeout=10)
+            assert not gol_store.held(run_id), "a dead holder still held the run"
+        finally:
+            if holder.poll() is None:
+                holder.kill()
+            holder.stdout.close()
+
+
+def test_meta_written_from_two_threads_is_never_torn():
+    """
+    A running run rewrites its metadata every iteration while the page may
+    rename it, both by reading the file, changing it and writing it back.
+    Unlocked, the later write carried the earlier read and the rename was
+    lost; with one temporary name for both, a write could fail outright.
+    """
+    import threading
+    import gol_store
+
+    with _scratch_runs():
+        run_id = gol_store.create_run("x", small(seed=75))["id"]
+
+        def write(key):
+            for i in range(150):
+                gol_store.update_meta(run_id, **{key: i})
+
+        threads = [threading.Thread(target=write, args=(key,)) for key in ("iteration", "name")]
+        for thread in threads:
+            thread.start()
+        for thread in threads:
+            thread.join()
+        meta = gol_store.load_meta(run_id)
+        assert (meta["iteration"], meta["name"]) == (149, 149), meta
 
 
 def test_neighbour_order_does_not_depend_on_graph_history():
