@@ -571,6 +571,141 @@ def test_meta_written_from_two_threads_is_never_torn():
         assert (meta["iteration"], meta["name"]) == (149, 149), meta
 
 
+def _recorded_run_of(cfg, until, record=None, name="x"):
+    """A run made in the current runs folder and advanced to `until`."""
+    import gol_run
+    import gol_store
+    extra = {} if record is None else {"record": record}
+    run_id = gol_store.create_run(name, cfg, **extra)["id"]
+    gol_run.advance(run_id, until=until)
+    return run_id
+
+
+def _rows_without_costs(run_id):
+    """A run's recorded rows, without what the iteration cost, which differs every time."""
+    import gol_record
+    return [{k: v for k, v in row.items() if k not in ("_seconds", "_cpu", "_peakMB")}
+            for row in gol_record.read_stats(run_id)]
+
+
+def test_the_recorder_summarises_a_frame_as_the_series_does():
+    """
+    A row recorded as the run goes is the row the charts would make of that
+    frame from disk — every statistic, the graph ones on the iterations they
+    are due, and the families — so a chapter and a chart never disagree.
+    """
+    import gol_record
+
+    with _scratch_runs():
+        run_id = _recorded_run_of(small(seed=81), 6, {"heavy_every": 2})
+        rows = gol_record.read_stats(run_id)
+        assert [row["_frame"] for row in rows] == list(range(12))
+        assert [row["_heavy"] for row in rows] == [row["iteration"] % 2 == 0 for row in rows]
+        assert all("_seconds" in row for row in rows if row["phase"] == 2)
+
+        series = gol_series.build_series(run_id)["series"]
+        for row in rows:
+            frame = row["_frame"]
+            for key, value in row.items():
+                if key.startswith("_") or (key in gol_series.HEAVY_KEYS and not row["_heavy"]):
+                    continue
+                assert series[key][frame] == value, (frame, key, series[key][frame], value)
+
+
+def test_the_recorder_reads_stored_frames_as_it_reads_live_ones():
+    """
+    A run recorded afterwards from its stored frames — any run made before
+    runs recorded themselves — gets the rows it would have got live, apart
+    from what the iterations cost, which only a live run can know.
+    """
+    import gol_record
+    import gol_store
+
+    with _scratch_runs():
+        live = _recorded_run_of(small(seed=82), 6, {"heavy_every": 3}, "live")
+        later = _recorded_run_of(small(seed=82), 6, None, "later")
+        assert gol_record.read_stats(later) == []
+
+        assert gol_record.record_stored(later, heavy_every=3) == 12
+        assert _rows_without_costs(later) == _rows_without_costs(live)
+        assert not any("_seconds" in row for row in gol_record.read_stats(later))
+        assert gol_record.record_stored(later, heavy_every=3) == 12, "a second pass added rows"
+
+        # A run from before deltas were kept works its token changes out from
+        # the frame before, so one summarised in two sittings has to pick that
+        # frame up again where the first sitting stopped.
+        old = [_recorded_run_of(small(seed=85), 5, None, name) for name in ("once", "twice")]
+        for run_id in old:
+            for index in range(gol_store.count_frames(run_id)):
+                frame = gol_store.read_frame(run_id, index)
+                frame.pop("delta")
+                gol_store.write_frame(run_id, index, frame)
+        gol_record.record_stored(old[0])
+        sitting = iter(range(100))
+        gol_record.record_stored(old[1], cancelled=lambda: next(sitting) >= 5)
+        assert len(gol_record.read_stats(old[1])) == 5
+        gol_record.record_stored(old[1])
+        assert gol_record.read_stats(old[1]) == gol_record.read_stats(old[0])
+
+
+def test_resuming_drops_frames_and_stats_rows_past_the_checkpoint():
+    """
+    A run cut off between checkpoints has recorded rows for iterations it is
+    about to live again, and maybe half of one more line. Taken up again, its
+    record is cut back with its frames and continues exactly as an uncut run's
+    does — families included, which need the iterations before the cut.
+    """
+    import gol_record
+    import gol_run
+    import gol_store
+
+    class PowerCut(Exception):
+        pass
+
+    def cut_at(iteration):
+        def cut(world):
+            if world.iteration == iteration:
+                raise PowerCut
+            return False
+        return cut
+
+    cfg = small(seed=83, checkpoint_every=7)
+    with _scratch_runs():
+        straight = _recorded_run_of(cfg, 24, {"heavy_every": 5}, "straight")
+
+        # Cut between checkpoints, and cut just after one: the second leaves no
+        # whole row to drop, only the line being written when it died.
+        for when, rows in ((19, 38), (14, 28)):
+            cut = gol_store.create_run(f"cut at {when}", cfg, record={"heavy_every": 5})["id"]
+            try:
+                gol_run.advance(cut, cut_at(when))
+            except PowerCut:
+                pass
+            assert len(gol_record.read_stats(cut)) == rows
+            with open(gol_record.stats_path(cut), "a") as f:
+                f.write(f'{{"_frame": {rows}, "nodes"')
+
+            gol_run.advance(cut, until=24)
+            assert _rows_without_costs(cut) == _rows_without_costs(straight), when
+            assert _what_was_recorded(cut) == _what_was_recorded(straight), when
+
+
+def test_recording_decisions_does_not_change_the_run():
+    """
+    What the agents decided is recorded or not as a run is configured, and
+    recording it must not change what they decide: the lab keeps it for every
+    run, and a run without it has to be the same run.
+    """
+    import json
+
+    def recorded(keep):
+        world = new_world(small(seed=84))
+        return [json.dumps({k: v for k, v in frame.items() if k != "decisions"}, sort_keys=True)
+                for _ in range(5) for frame in world.step(record_decisions=keep)]
+
+    assert recorded(True) == recorded(False)
+
+
 def test_neighbour_order_does_not_depend_on_graph_history():
     """
     The same graph must present the same neighbours in the same order however

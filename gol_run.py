@@ -19,6 +19,7 @@ import traceback
 from typing import Any, Callable, Optional
 
 import gol_store as store
+from gol_record import Recorder
 
 
 def advance(run_id: str, should_stop: Callable[[Any], bool] = lambda world: False,
@@ -62,29 +63,47 @@ def _advance(run_id: str, should_stop: Callable[[Any], bool], until: Optional[in
         cursor = cfg.frames_before(world.iteration)
         store.truncate_frames_from(run_id, cursor)
 
+    # A run made with a recording policy keeps a line of statistics per frame
+    # as it goes (gol_record). Families need every iteration in order, so such
+    # a run has to store every one.
+    policy = store.load_meta(run_id).get("record")
+    recorder = None
+    if policy is not None:
+        if cfg.export_every != 1:
+            raise ValueError("a run recorded as it goes has to keep every iteration")
+        recorder = Recorder(run_id, **policy)
+        recorder.start(cursor)
+
     store.update_meta(run_id, status="running", error=None,
                       iteration=world.iteration, frame_count=cursor)
 
     status = "stopped"
-    # No ceiling of its own: a run ends when it is stopped, reaches what it
-    # was asked to, or dies out, and nothing else.
-    while not should_stop(world) and (until is None or world.iteration < until):
-        record = cfg.records(world.iteration)
-        frames = world.step(record_decisions=cfg.export_decisions and record)
+    try:
+        # No ceiling of its own: a run ends when it is stopped, reaches what
+        # it was asked to, or dies out, and nothing else.
+        while not should_stop(world) and (until is None or world.iteration < until):
+            record = cfg.records(world.iteration)
+            frames = world.step(record_decisions=cfg.export_decisions and record)
 
-        if record:
-            for frame in frames:
-                store.write_frame(run_id, cursor, frame)
-                cursor += 1
+            if record:
+                first = cursor
+                for frame in frames:
+                    store.write_frame(run_id, cursor, frame)
+                    cursor += 1
+                if recorder is not None:
+                    recorder.observe(enumerate(frames, first))
 
-        if cfg.checkpoint_every and world.iteration % cfg.checkpoint_every == 0:
-            store.save_checkpoint(run_id, world)
+            if cfg.checkpoint_every and world.iteration % cfg.checkpoint_every == 0:
+                store.save_checkpoint(run_id, world)
 
-        store.update_meta(run_id, iteration=world.iteration, frame_count=cursor)
+            store.update_meta(run_id, iteration=world.iteration, frame_count=cursor)
 
-        if world.is_extinct():
-            status = "extinct"
-            break
+            if world.is_extinct():
+                status = "extinct"
+                break
+    finally:
+        if recorder is not None:
+            recorder.close()
 
     if cfg.checkpoint_every and store.load_meta(run_id).get("checkpoint_iteration") != world.iteration:
         store.save_checkpoint(run_id, world)

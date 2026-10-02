@@ -19,7 +19,7 @@ import json
 import math
 import os
 import threading
-from typing import Any, Callable, Dict, Iterable, List, Optional, Set, Tuple
+from typing import Any, Callable, Dict, Iterable, Iterator, List, Optional, Set, Tuple
 
 import gol_store as store
 # The bridge walk lives in the engine because the engine needs it too, on the
@@ -1124,6 +1124,22 @@ class _CladeWindow:
                 self.parent.pop(brain, None)
                 self.born.pop(brain, None)
 
+    def count(self, frame: Dict[str, Any], index: int) -> int:
+        """Take in one frame, in order, and say how many families its living form."""
+        iteration = int(frame.get("iteration", index // 2))
+        self.observe(iteration, frame.get("brain_ids", []), frame.get("parent_brain_ids", []))
+        return self.families(frame.get("brain_ids", []), iteration)
+
+    def warm(self, frames: Iterable[Tuple[int, Dict[str, Any]]]) -> None:
+        """
+        Take in the frames just before where a count resumes. Only their
+        ancestry is wanted, and the last `window` iterations of it are all a
+        count ever walks back through.
+        """
+        for index, frame in frames:
+            self.observe(int(frame.get("iteration", index // 2)),
+                         frame.get("brain_ids", []), frame.get("parent_brain_ids", []))
+
     def families(self, brain_ids: Any, iteration: int) -> int:
         """How many distinct ancestors-of-`window`-ago the living share."""
         anchor = iteration - self.window
@@ -1152,6 +1168,15 @@ class _CladeWindow:
             memo[node] = answer
             roots.add(answer)
         return len(roots)
+
+
+def stored_frames(run_id: str, start: int, stop: int) -> Iterator[Tuple[int, Dict[str, Any]]]:
+    """Stored frames `start` to `stop` with their indices, ending at the first that will not read."""
+    for index in range(start, stop):
+        try:
+            yield index, store.read_frame(run_id, index)
+        except (OSError, json.JSONDecodeError, KeyError):
+            return
 
 
 def _cache_path(run_id: str) -> str:
@@ -1419,13 +1444,7 @@ def _build_series_locked(run_id: str, points: Optional[int] = None,
         # Resuming mid-run leaves the window empty, so the frames just before
         # the first new one are read to fill it. Their statistics are already
         # cached; only their ancestry is wanted.
-        for index in range(max(0, wanted[0] - CLADE_WINDOW * 2), wanted[0]):
-            try:
-                warm = store.read_frame(run_id, index)
-            except (OSError, json.JSONDecodeError, KeyError):
-                break
-            families.observe(int(warm.get("iteration", index // 2)),
-                             warm.get("brain_ids", []), warm.get("parent_brain_ids", []))
+        families.warm(stored_frames(run_id, max(0, wanted[0] - CLADE_WINDOW * 2), wanted[0]))
 
     def frames():
         for index in wanted:
@@ -1448,10 +1467,7 @@ def _build_series_locked(run_id: str, points: Optional[int] = None,
     def each(index: int, frame: Dict[str, Any], row: Dict[str, Any]) -> None:
         nonlocal summarised
         if families is not None:
-            iteration = int(frame.get("iteration", index // 2))
-            families.observe(iteration, frame.get("brain_ids", []),
-                             frame.get("parent_brain_ids", []))
-            row["cladesInWindow"] = families.families(frame.get("brain_ids", []), iteration)
+            row["cladesInWindow"] = families.count(frame, index)
         # Every frame. Throttling this to every tenth was sized for the cheap
         # statistics; with the graph statistics a frame of a large run takes
         # two seconds, and a step of sixteen frames then reported twice.
