@@ -364,9 +364,11 @@ const Book = {
     const shared = [...new Set(status.runs.flatMap(r => r.sharedWith))].sort();
     const runs = status.runs.map(r => {
       const done = r.until ? Math.min(1, r.iteration / r.until) : 0;
-      return `<span class="book-run book-run-${r.state}" data-run="${r.id}" data-started="${
-        r.iteration > 0 ? 'yes' : 'no'}" title="${Markdown.escape(r.name)} — ${
-        formatNumber(r.iteration)} of ${formatNumber(r.until)}${r.iteration > 0 ? ' · click to open' : ''}">`
+      const where = r.diedAt != null ? `died out at iteration ${formatNumber(r.diedAt)}`
+        : `${formatNumber(r.iteration)} of ${formatNumber(r.until)}`;
+      return `<span class="book-run book-run-${r.diedAt != null ? 'extinct' : r.state}" data-run="${r.id}" data-started="${
+        r.iteration > 0 ? 'yes' : 'no'}" title="${Markdown.escape(r.name)} — ${where}${
+        r.iteration > 0 ? ' · click to open' : ''}">`
         + `<span style="width:${(100 * done).toFixed(1)}%"></span></span>`;
     }).join('');
     return `<div class="book-exp-head"><span class="book-chip book-chip-${state.state}">${state.label}</span>`

@@ -1,0 +1,111 @@
+{
+  "id": "E07",
+  "title": "Do the brains matter at all?",
+  "thesis": {
+    "claim": "Evolution is what makes the worlds alike. A world whose brains never change is stuck with the brain of whichever founder's line takes it over, and worlds of different seeds, stuck with different founders, end up far more different from each other than worlds that keep evolving: some still, some teeming.",
+    "why": "In the baseline the seed hardly matters (Chapter 4): every world wanders through the same range. Two pilots of a world without change, run to plan this chapter, ended up nothing alike. In one, the descendants of a single founder filled the world by iteration 50, and from about iteration 100 no one was born and no one died: the same 1,420 agents, game after game. In the other, a different founder's descendants kept the world in boom and bust, between about 1,000 and 3,200 agents, with hundreds of births in every iteration. With no new brains, nothing can move a world off the policy it was dealt.",
+    "confirm": "Over the settled life of the runs, from iteration 500 on: the number of agents varies across the surviving worlds without change by at least twice as much as across the baseline's (a spread, sd ÷ mean, of at least 0.34 against 0.17); births vary across them at least twice as much as well; and more than half of all the variation in a world's number of agents lies between the worlds rather than within each of them over time (against 0.17 in the baseline).",
+    "refute": "The worlds without change are about as alike as the baseline's, and wander as much. Then evolution is not what keeps the seed from mattering, and the brain a world starts with does not decide its fate."
+  },
+  "runs": {
+    "baseline": "B1",
+    "world": {
+      "total_tokens": 10000
+    },
+    "seeds": "1..30",
+    "iterations": 3000,
+    "record": {
+      "heavy_every": 25
+    },
+    "conditions": [
+      {
+        "name": "baseline"
+      },
+      {
+        "name": "brains never change",
+        "set": {
+          "mutation_sparsity": 0
+        }
+      },
+      {
+        "name": "decisions by chance",
+        "set": {
+          "random_decisions": true
+        }
+      }
+    ]
+  },
+  "analyse": {
+    "kind": "series",
+    "reference": "baseline",
+    "settledFrom": 500,
+    "wandering": {
+      "from": 100,
+      "stretch": 100
+    },
+    "lineage": true,
+    "figures": [
+      {
+        "name": "agents",
+        "stat": "nodes",
+        "phase": 2,
+        "title": "Agents alive",
+        "y": "agents",
+        "seeds": [
+          1,
+          2
+        ]
+      },
+      {
+        "name": "births",
+        "stat": "births",
+        "phase": 1,
+        "title": "Births per iteration",
+        "y": "births"
+      },
+      {
+        "name": "home",
+        "stat": "heldHomeShare",
+        "phase": 2,
+        "title": "Share of agents that kept their own node in the game",
+        "y": "share",
+        "min": 0
+      },
+      {
+        "name": "gini",
+        "stat": "gini",
+        "phase": 2,
+        "title": "Inequality of wealth (Gini)",
+        "y": "Gini",
+        "min": 0
+      },
+      {
+        "name": "families",
+        "stat": "cladesInWindow",
+        "phase": 2,
+        "title": "Families: distinct ancestors eight iterations back",
+        "y": "families"
+      }
+    ],
+    "endpoints": [
+      "nodes",
+      "edges",
+      {
+        "stat": "births",
+        "phase": 1
+      },
+      "starved",
+      "orphaned",
+      "gini",
+      "topDecileShare",
+      "selfAllocationShare",
+      "heldHomeShare",
+      "revolutions/nodes_before",
+      "bridges/edges",
+      "transitivity",
+      "coreShare",
+      "distinctBrains/nodes",
+      "cladesInWindow"
+    ]
+  }
+}

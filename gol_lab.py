@@ -944,6 +944,7 @@ def experiment_status(name: str, control: Dict[str, Any], known: Dict[str, Any],
         runs.append({"id": spec.run_id, "name": spec.name, "condition": spec.condition,
                      "seed": spec.lab["seed"], "iteration": iteration, "until": spec.until,
                      "state": state["state"], "reason": state.get("reason"),
+                     "diedAt": state["iteration"] if state.get("status") == "extinct" else None,
                      "secondsPerIteration": rate, "sharedWith": shared.get(spec.run_id, [])})
 
     states = {r["state"] for r in runs}
@@ -1015,7 +1016,9 @@ def main() -> int:
         state = experiment_status(args.experiment, control, costs(), lab_alive())
         for r in state["runs"]:
             shared = f"  (also {', '.join(r['sharedWith'])})" if r["sharedWith"] else ""
-            print(f"  {r['id']:<32} {r['state']:<8} {r['iteration']:>6} / {r['until']:<6}{shared}")
+            where = (f"died out at {r['diedAt']}" if r["diedAt"] is not None
+                     else f"{r['iteration']:>6} / {r['until']:<6}")
+            print(f"  {r['id']:<32} {r['state']:<8} {where}{shared}")
         e = state["estimate"]
         print(f"\n{len(state['runs'])} runs. On {control['workers']} workers: about "
               f"{_hours(e['seconds'])} from nothing, {_hours(state['secondsLeft'])} from here; "

@@ -1140,6 +1140,7 @@ details.control-group > summary:hover h3 { color: var(--text); }
 .book-run span { display: block; height: 100%; background: var(--accent-dim); }
 .book-run-running span { background: var(--ok); }
 .book-run-done span { background: var(--accent); }
+.book-run-extinct span { background: var(--muted-2); }
 .book-run-blocked { outline: 1px solid var(--danger); }
 .book-plan th { white-space: nowrap; }
 

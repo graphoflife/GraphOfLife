@@ -1261,6 +1261,20 @@ function test_book_progress_of_an_experiment() {
   assert(Book.eta(7200, '') === 'about 2.0 h');
 }
 
+function test_a_run_that_died_out_says_so() {
+  // A world that died out is done, but it did not reach its target: its cell
+  // says when it died rather than claiming the whole run.
+  const Book = bookWith();
+  Book.chapters = () => [];
+  const status = { state: 'running', done: 3001, total: 6000, secondsLeft: 60, estimate: { seconds: 60, diskBytes: 1, peakMB: 1 },
+    runs: [{ id: 'B1-10000-s014', name: 'baseline · seed 14', iteration: 3000, until: 3000, state: 'done', diedAt: 313, sharedWith: [] },
+           { id: 'B1-10000-s015', name: 'baseline · seed 15', iteration: 1, until: 3000, state: 'running', diedAt: null, sharedWith: [] }] };
+  const lab = { lab: { workers: 4, cores: 8 }, disk: { free: 1 }, costs: { runs: 1 }, experiments: {} };
+  const html = Book.liveHtml('E02', status, lab);
+  assert(html.includes('book-run-extinct') && html.includes('died out at iteration 313'), html);
+  assert(html.includes('book-run-running') && html.includes('1 of 3000'), 'a living run lost its progress');
+}
+
 async function test_the_static_book_never_asks_the_lab() {
   // The published site has no lab. Asking would be a request to a server
   // that is not there, every five seconds, for as long as the book is open.
@@ -1362,6 +1376,7 @@ const tests = Object.entries({
   test_markdown_headings_get_ids,
   test_markdown_hands_info_fences_to_the_caller,
   test_book_progress_of_an_experiment,
+  test_a_run_that_died_out_says_so,
   test_the_static_book_never_asks_the_lab,
   test_every_tab_names_a_view
 }).sort(([a], [b]) => a.localeCompare(b));

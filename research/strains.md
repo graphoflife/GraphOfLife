@@ -122,6 +122,7 @@ On every store that can be found on its own:
 | `gol-1+random_decisions` | `random_decisions` | this commit | The control. Every other mechanic identical, so a difference between this and `gol-1` is attributable to the agents reading their inputs and to nothing else. |
 | `gol-1+allow_gifting+brain_kind=float16+inactive_window=iteration+prune_after=reproduction` | `allow_gifting`, `brain_kind=float16`, `inactive_window=iteration`, `prune_after=reproduction` | the book's lab | The book's first baseline B1, on the morning of 2026-10-02: what a new run was offered then, on half-precision brains. Replaced the same day; its only runs, a first Experiment 1, are archived. |
 | `gol-1+brain_kind=float16` | `brain_kind=float16` | the book's lab | The book's baseline B1 (`book/experiments/B1.json`) since 2026-10-02, and exactly what a new run is offered: half-precision brains, every other mechanic at its frozen value, with `message_amount=30` and `mutation_probability=0.2`. |
+| `gol-1+brain_kind=float16+random_decisions` | `brain_kind=float16`, `random_decisions` | the book's lab | The control of the book's Chapter 9: the baseline B1 with every decision taken from noise instead of from the brains. |
 
 ---
 
