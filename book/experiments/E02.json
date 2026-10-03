@@ -79,6 +79,18 @@
       "orphaned",
       "distinctBrains",
       "cladesInWindow"
+    ],
+    "windows": [
+      {
+        "name": "100 to 200",
+        "from": 100,
+        "to": 200
+      },
+      {
+        "name": "2,800 to 3,000",
+        "from": 2800,
+        "to": 3000
+      }
     ]
   }
 }

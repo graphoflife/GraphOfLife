@@ -31,45 +31,45 @@
           "title": "The life of a world",
           "experiment": "E02",
           "file": "chapters/03-the-life-of-a-world.md",
-          "status": "ready"
+          "status": "analysed"
         },
         {
           "id": "4",
           "title": "How much does the seed decide?",
           "experiment": "E03",
           "file": "chapters/04-how-much-does-the-seed-decide.md",
-          "status": "ready"
+          "status": "analysed"
         },
         {
           "id": "5",
           "title": "Where do the tokens go?",
           "experiment": "E04",
           "file": "chapters/05-where-do-the-tokens-go.md",
-          "status": "ready"
+          "status": "analysed"
         },
         {
           "id": "6",
           "title": "What shape does the graph take?",
           "experiment": "E05",
           "file": "chapters/06-what-shape-does-the-graph-take.md",
-          "status": "ready"
+          "status": "analysed"
         },
         {
           "id": "7",
           "title": "Meta I \u00b7 What the first five experiments say",
-          "note": "Written once Chapters 2 to 6 are analysed."
+          "file": "chapters/07-meta-1.md"
         },
         {
           "id": "8",
           "title": "Who wins, and for how long?",
           "experiment": "E06",
           "file": "chapters/08-who-wins-and-for-how-long.md",
-          "status": "ready"
+          "status": "analysed"
         },
         {
           "id": "9",
-          "title": "Does size change the dynamics?",
-          "note": "Planned after Chapter 4, which says how many runs a size needs."
+          "title": "Do the brains matter at all?",
+          "note": "Against brains that never change after the founders, and decisions drawn at random."
         },
         {
           "id": "10",
@@ -78,18 +78,23 @@
         },
         {
           "id": "11",
-          "title": "How big should a brain be?",
-          "note": "The hidden layers, against the baseline runs of Chapter 3."
+          "title": "What keeps wealth spread?",
+          "note": "No coalitions: allow_revolutions off, against the baseline runs of Chapter 3."
         },
         {
           "id": "12",
-          "title": "Do the brains matter at all?",
-          "note": "Decisions taken from noise instead of from the brains."
+          "title": "How big should a brain be?",
+          "note": "The hidden layers, against the baseline runs of Chapter 3."
         },
         {
           "id": "13",
           "title": "Meta II",
           "note": "Written once Chapters 8 to 12 are analysed."
+        },
+        {
+          "id": "14",
+          "title": "Does size change the dynamics?",
+          "note": "The number of tokens, from 5,000 to 100,000 and more."
         }
       ]
     },
@@ -97,7 +102,7 @@
       "title": "Part II \u00b7 Towards open-ended evolution",
       "chapters": [
         {
-          "id": "14",
+          "id": "15",
           "title": "Mutation at replication, and nowhere else",
           "note": "The first of the mechanics in research/Research.md \u00a74, once Part I is done."
         }

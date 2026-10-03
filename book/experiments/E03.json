@@ -57,6 +57,16 @@
       "bridges",
       "transitivity",
       "coreShare"
+    ],
+    "wandering": {
+      "from": 100,
+      "stretch": 100
+    },
+    "windows": [
+      {
+        "name": "500 to 3,000",
+        "from": 500
+      }
     ]
   }
 }

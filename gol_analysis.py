@@ -21,8 +21,17 @@ An experiment's plan says what to look at under "analyse":
       "reference": "baseline",              the condition the others are compared with
       "figures": [{"name": "nodes", "stat": "nodes", "phase": 2,
                    "title": "Agents", "y": "agents", "log": false}],
-      "endpoints": ["nodes", "gini"],       compared at the end of the runs
-      "seedsNeeded": true                   how many seeds an effect needs
+      "endpoints": ["nodes", "gini"],       compared where the runs ended up
+      "settledFrom": 500,                   ... their mean from here to the end,
+                                            rather than over their last fifth
+      "windows": [{"name": "from 100", "from": 100},
+                  {"name": "lowest", "from": 100, "of": "min"}],
+                                            the endpoints over other stretches
+      "seedsNeeded": true,                  how many seeds an effect needs, at
+                                            the end and over every window
+      "wandering": {"from": 100, "stretch": 100},
+                                            how much is the seed, how much is time
+      "lineage": true                       genotypes and lifetimes, from the frames
     }
 
 Numpy only, and every resampling is seeded, so the same runs always give the
@@ -42,12 +51,13 @@ import numpy as np
 import gol_lab
 import gol_record
 import gol_store as store
+from gol_series import NO_PARENT
 
 BOOK = os.path.join(gol_lab.HERE, "book")
 
 #: The most points a figure's line holds; longer runs are averaged into bins.
 FIGURE_POINTS = 600
-#: The share of a run's end that stands for where it ended up.
+#: Where a run ended up is its level over this last share of its iterations.
 ENDING = 0.2
 RESAMPLES = 10_000
 EFFECT_SEEDS = 30           # below this a comparison is indicative
@@ -66,10 +76,16 @@ def _finite(value: Any) -> Any:
     return value
 
 
-def _write(path: str, value: Any) -> None:
+def _write(path: str, value: Any, compact: bool = False) -> None:
+    """
+    Write JSON the page can read: no NaN anywhere. Results are indented for
+    people to read; figures, which are thousands of points for the page to
+    draw, are written compactly.
+    """
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w") as f:
-        json.dump(_finite(value), f, indent=1, allow_nan=False)
+        json.dump(_finite(value), f, allow_nan=False,
+                  **({"separators": (",", ":")} if compact else {"indent": 1}))
         f.write("\n")
 
 
@@ -152,13 +168,14 @@ def bands(runs: List[Tuple[np.ndarray, np.ndarray]], points: int = FIGURE_POINTS
             "alive": alive.tolist()}
 
 
-def ending(its: np.ndarray, values: np.ndarray, share: float = ENDING) -> Optional[float]:
-    """Where a run ended up: its mean over the last `share` of its iterations."""
-    keep = np.isfinite(values)
-    its, values = its[keep], values[keep]
-    if not its.size:
-        return None
-    return float(values[its >= its.max() - share * (its.max() - its.min())].mean())
+WINDOW_OF = {"mean": np.mean, "median": np.median, "min": np.min, "max": np.max}
+
+
+def window(its: np.ndarray, values: np.ndarray, start: float, stop: float,
+           of: str = "mean") -> Optional[float]:
+    """A run's level over iterations `start` to `stop`: its mean, median, lowest or highest."""
+    inside = values[(its >= start) & (its <= stop) & np.isfinite(values)]
+    return float(WINDOW_OF[of](inside)) if inside.size else None
 
 
 # ----------------------------------------------------------------------------
@@ -213,20 +230,60 @@ def compare_conditions(reference: Dict[int, float], other: Dict[int, float],
             "indicative": min(len(a), len(b)) < EFFECT_SEEDS}
 
 
-def seeds_needed(values: List[float], shares=(0.05, 0.1, 0.2)) -> Dict[str, Any]:
+def seeds_needed(values: List[float], shares=(0.05, 0.1, 0.2)) -> Optional[Dict[str, int]]:
     """
     How many seeds a condition would need for a change of 5, 10 or 20% of the
     mean to be found four times in five, given the spread these runs show
-    (two groups, normal approximation, 5% two-sided).
+    (two groups, normal approximation, 5% two-sided). None below three runs.
     """
     v = np.array([x for x in values if x is not None and math.isfinite(x)])
     if len(v) < 3 or v.mean() == 0:
-        return {"n": len(v)}
-    sd, mean = float(v.std(ddof=1)), float(v.mean())
-    return {"n": len(v), "mean": mean, "sd": sd, "cv": sd / abs(mean),
-            "seeds": {f"{int(100 * s)}%": math.ceil(2 * ((Z_ALPHA + Z_POWER) * sd
-                                                         / (s * abs(mean))) ** 2)
-                      for s in shares}}
+        return None
+    cv = float(v.std(ddof=1)) / abs(float(v.mean()))
+    return {f"{int(100 * s)}%": math.ceil(2 * ((Z_ALPHA + Z_POWER) * cv / s) ** 2)
+            for s in shares}
+
+
+def wandering(runs: Dict[int, Tuple[np.ndarray, np.ndarray]], start: int, stop: int,
+              stretch: int, seed: int = 0) -> Dict[str, Any]:
+    """
+    How much of a statistic's variation is between seeds and how much is each
+    world wandering over time. Every run's level in stretches of `stretch`
+    iterations from `start` to `stop`; the share of all the variance that
+    lies between the runs' own averages; how much a run's highest stretch
+    exceeds its lowest; how alike two stretches of one run are, 1, 2, 3, 5
+    and 10 stretches apart — how long a world remembers its level; and
+    whether a run's first half says anything about its second, across runs,
+    against the null that it does not (halves paired at random). `runs` is
+    keyed by seed.
+    """
+    rows = {k: [window(its, values, a, a + stretch - 1) for a in range(start, stop, stretch)]
+            for k, (its, values) in runs.items()}
+    rows = {k: row for k, row in rows.items() if None not in row}
+    levels = np.array(list(rows.values()), dtype=float)
+    if len(levels) < 3 or levels.shape[1] < 3:
+        return {"runs": len(levels)}
+    between = float(levels.mean(axis=1).var(ddof=1))
+    within = float(levels.var(axis=1, ddof=1).mean())
+    centred = levels - levels.mean(axis=1, keepdims=True)
+    memory = {}
+    for lag in (1, 2, 3, 5, 10):
+        if lag < levels.shape[1] - 1:
+            a, b = centred[:, :-lag].ravel(), centred[:, lag:].ravel()
+            memory[str(lag * stretch)] = float(np.corrcoef(a, b)[0, 1])
+    low, high = levels.min(axis=1), levels.max(axis=1)
+    spread = dict(zip(rows, (high / low).tolist())) if (low > 0).all() else {}
+    half = levels.shape[1] // 2
+    first, second = levels[:, :half].mean(axis=1), levels[:, half:].mean(axis=1)
+    r = float(np.corrcoef(first, second)[0, 1])
+    rng = np.random.default_rng(seed)
+    null = np.array([np.corrcoef(first, rng.permutation(second))[0, 1] for _ in range(RESAMPLES)])
+    return {"runs": len(levels), "stretches": levels.shape[1], "stretch": stretch,
+            "between": between, "within": within,
+            "betweenShare": between / (between + within) if between + within else None,
+            "highOverLow": float(np.median(list(spread.values()))) if spread else None,
+            "highOverLowBySeed": spread, "memory": memory,
+            "halves": {"r": r, "p": float((np.sum(null >= r - 1e-12) + 1) / (RESAMPLES + 1))}}
 
 
 # ----------------------------------------------------------------------------
@@ -322,74 +379,346 @@ def analyse_identity(name: str, plan: Dict[str, Any],
             "allSame": bool(comparisons) and all(c["same"] for c in comparisons)}
 
 
-def analyse_series(name: str, plan: Dict[str, Any],
-                   by_condition: Dict[str, List[gol_lab.RunSpec]]) -> Dict[str, Any]:
-    """Bands, endings, comparisons with the reference condition, and seeds needed."""
-    spec = plan["analyse"]
-    reference = spec.get("reference")
-    rows = {s.run_id: gol_record.read_stats(s.run_id)
-            for specs in by_condition.values() for s in specs}
+class _Runs:
+    """
+    An experiment's runs by condition, each statistic read from their
+    recorded rows once, and how far each run lived.
+    """
 
-    figures = []
-    for figure in spec.get("figures", []):
-        drawn = []
-        for condition, specs in by_condition.items():
-            runs = [series(rows[s.run_id], figure["stat"], figure.get("phase", 2)) for s in specs]
-            band = bands(runs)
-            band["label"] = (f"{condition} — median, middle half, nine in ten of {len(specs)} runs"
-                             if len(by_condition) > 1 else
-                             f"median, middle half, nine in ten of {len(specs)} runs")
-            drawn.append(band)
-        for k, seed_spec in enumerate(figure.get("seeds", [])):
-            for specs in by_condition.values():
+    def __init__(self, by_condition: Dict[str, List[gol_lab.RunSpec]]) -> None:
+        self.by_condition = by_condition
+        everyone = [s for specs in by_condition.values() for s in specs]
+        self.rows = {s.run_id: gol_record.read_stats(s.run_id) for s in everyone}
+        self.lived = {s.run_id: store.load_meta(s.run_id).get("iteration", 0) for s in everyone}
+        self._measured: Dict[Tuple[str, str, int], Tuple[np.ndarray, np.ndarray]] = {}
+
+    def measure(self, run_id: str, stat: str, phase: int) -> Tuple[np.ndarray, np.ndarray]:
+        if (run_id, stat, phase) not in self._measured:
+            self._measured[run_id, stat, phase] = series(self.rows[run_id], stat, phase)
+        return self._measured[run_id, stat, phase]
+
+    def reached_end(self, spec: gol_lab.RunSpec) -> bool:
+        return self.lived[spec.run_id] >= spec.until
+
+    def levels(self, endpoints: List[Tuple[str, int]], start, stop,
+               of: str = "mean") -> Dict[str, Dict[str, Dict[int, float]]]:
+        """
+        Each endpoint's level over iterations `start(run)` to `stop(run)`, by
+        condition and seed, in every run that lived through them.
+        """
+        table: Dict[str, Dict[str, Dict[int, float]]] = {}
+        for stat, phase in endpoints:
+            table[stat] = {}
+            for condition, specs in self.by_condition.items():
+                values = {}
                 for s in specs:
-                    if s.lab["seed"] == seed_spec:
-                        its, values = series(rows[s.run_id], figure["stat"], figure.get("phase", 2))
-                        drawn.append({"label": f"seed {seed_spec}", "x": its.tolist(),
-                                      "y": values.tolist(), "width": 1.0})
+                    if self.lived[s.run_id] >= stop(s):
+                        value = window(*self.measure(s.run_id, stat, phase), start(s), stop(s), of)
+                        if value is not None:
+                            values[s.lab["seed"]] = value
+                table[stat][condition] = values
+        return table
+
+    def figure(self, name: str, figure: Dict[str, Any]) -> None:
+        """One figure the plan asks for: a band per condition, and any single seeds as lines."""
+        stat, phase, several = figure["stat"], figure.get("phase", 2), len(self.by_condition) > 1
+        drawn = []
+        for condition, specs in self.by_condition.items():
+            band = bands([self.measure(s.run_id, stat, phase) for s in specs])
+            band["label"] = ((f"{condition} — " if several else "")
+                             + f"median, middle half, nine in ten of {len(specs)} runs")
+            drawn.append(band)
+        for seed in figure.get("seeds", []):
+            for condition, specs in self.by_condition.items():
+                for s in specs:
+                    if s.lab["seed"] == seed:
+                        its, values = self.measure(s.run_id, stat, phase)
+                        drawn.append({"label": f"{condition}, seed {seed}" if several else f"seed {seed}",
+                                      "x": its.tolist(), "y": values.tolist(), "width": 1.0})
         _write(os.path.join(BOOK, "figures", name, f"{figure['name']}.json"), {
             "title": figure.get("title"), "caption": figure.get("caption"),
             "x": {"label": "iteration"},
-            "y": {"label": figure.get("y", figure["stat"]), "log": bool(figure.get("log")),
+            "y": {"label": figure.get("y", stat), "log": bool(figure.get("log")),
                   **({"min": figure["min"]} if "min" in figure else {})},
-            "guides": figure.get("guides", []), "series": drawn})
-        figures.append(figure["name"])
+            "guides": figure.get("guides", []), "series": drawn}, compact=True)
 
-    endings: Dict[str, Dict[str, Dict[int, float]]] = {}
-    for stat in spec.get("endpoints", []):
-        phase = 2
-        if isinstance(stat, dict):
-            stat, phase = stat["stat"], stat.get("phase", 2)
-        endings[stat] = {}
+
+def _compared(name: str, label: str, reference: str,
+              by_condition: Dict[str, Dict[int, float]]) -> Dict[str, Any]:
+    """Every condition against the reference, on values keyed by seed."""
+    return {condition: compare_conditions(by_condition[reference], values,
+                                          seed=hash_seed(name, label, condition))
+            for condition, values in by_condition.items() if condition != reference}
+
+
+def analyse_series(name: str, plan: Dict[str, Any],
+                   by_condition: Dict[str, List[gol_lab.RunSpec]]) -> Dict[str, Any]:
+    """
+    Figures; where the runs ended up, and the endpoints over any other
+    stretches the plan names; each condition against the reference; how
+    much is the seed and how much is time; dying out; and lineages.
+
+    Where a run ended up is measured over the runs that reached the end. A
+    world that died out did not end up anywhere: its last fifth is the
+    record of its dying, and averaging it in with the living made the seeds
+    look several times more different than the living worlds are. Dying out
+    is an outcome of its own, counted separately, and a condition is compared
+    on both.
+    """
+    spec = plan["analyse"]
+    reference = spec.get("reference")
+    runs = _Runs(by_condition)
+    for figure in spec.get("figures", []):
+        runs.figure(name, figure)
+
+    endpoints = [(e["stat"], e.get("phase", 2)) if isinstance(e, dict) else (e, 2)
+                 for e in spec.get("endpoints", [])]
+
+    def described(table):
+        return {stat: {condition: {**_describe(list(values.values())), "bySeed": values,
+                                   **({"seedsNeeded": seeds_needed(list(values.values()))}
+                                      if spec.get("seedsNeeded") else {})}
+                       for condition, values in by_condition_values.items()}
+                for stat, by_condition_values in table.items()}
+
+    settled = spec.get("settledFrom")
+    endings = runs.levels(endpoints,
+                          lambda s: (1 - ENDING) * s.until if settled is None else settled,
+                          lambda s: s.until)
+    body = {"reference": reference, "figures": [f["name"] for f in spec.get("figures", [])],
+            "endingsFrom": settled if settled is not None else f"the last {ENDING:.0%}",
+            "endings": described(endings),
+            "windows": {w["name"]: described(runs.levels(endpoints,
+                                                         lambda s, w=w: w.get("from", 0),
+                                                         lambda s, w=w: w.get("to", s.until),
+                                                         w.get("of", "mean")))
+                        for w in spec.get("windows", [])},
+            "comparisons": ({stat: _compared(name, stat, reference, values)
+                             for stat, values in endings.items()} if reference else {}),
+            "extinct": {condition: [{"seed": s.lab["seed"], "at": runs.lived[s.run_id]}
+                                    for s in specs
+                                    if store.load_meta(s.run_id).get("status") == "extinct"]
+                        for condition, specs in by_condition.items()},
+            "reached": {condition: sum(map(runs.reached_end, specs))
+                        for condition, specs in by_condition.items()}}
+
+    wander = spec.get("wandering")
+    if wander:
+        body["wandering"] = wanders = {
+            stat: {condition: wandering({s.lab["seed"]: runs.measure(s.run_id, stat, phase)
+                                         for s in specs if runs.reached_end(s)},
+                                        wander.get("from", 0), max(s.until for s in specs),
+                                        wander["stretch"], seed=hash_seed(name, stat, condition))
+                   for condition, specs in by_condition.items()}
+            for stat, phase in endpoints}
+        if reference:
+            body["wanderingComparisons"] = {
+                stat: _compared(name, f"wandering {stat}", reference,
+                                {condition: w.get("highOverLowBySeed", {})
+                                 for condition, w in by_condition_values.items()})
+                for stat, by_condition_values in wanders.items()}
+
+    if spec.get("lineage"):
+        reached = {s.run_id for specs in by_condition.values() for s in specs
+                   if runs.reached_end(s)}
+        body["lineage"] = lineages = analyse_lineage(name, by_condition, reached)
+        if reference:
+            def per_seed(condition, part, key):
+                found = lineages[condition]["runs"]
+                return {s.lab["seed"]: found[s.run_id][part][key] for s in by_condition[condition]
+                        if s.run_id in reached and found[s.run_id][part][key] is not None}
+            body["lineageComparisons"] = {
+                f"{part}.{key}": _compared(name, f"{part}.{key}", reference,
+                                           {condition: per_seed(condition, part, key)
+                                            for condition in by_condition})
+                for part, key in LINEAGE_COMPARED}
+    return body
+
+
+# ----------------------------------------------------------------------------
+# Lineages, read from the frames
+# ----------------------------------------------------------------------------
+
+#: How often, in iterations, the living are traced back to their common ancestors.
+ANCESTRY_EVERY = 25
+#: What a condition's lineages are compared with the reference condition's on.
+LINEAGE_COMPARED = (("ancestor", "moves"), ("ancestor", "allFrom500"),
+                    ("ancestor", "ninetyFrom500"), ("ancestor", "halfFrom500"),
+                    ("ancestor", "oneFounder"), ("topShare", "maxFrom100"))
+
+
+def shared_ancestors(parent: Dict[int, int], counts: Dict[int, int],
+                     shares: Tuple[float, ...] = (1.0, 0.9, 0.5)) -> List[Optional[int]]:
+    """
+    The newest genotype that each share of the living agents descends from,
+    or None while they still descend from more than one founder. `counts` is
+    how many agents carry each living genotype. The tree is climbed from the
+    living, newest genotype first: ids are handed out in order and a parent
+    is always older than its child, so a genotype is reached only after all
+    of its descendants have been counted into it, and the first to hold a
+    share is the newest that does.
+    """
+    import heapq
+    total = sum(counts.values())
+    below = dict(counts)
+    waiting = [-g for g in below]
+    heapq.heapify(waiting)
+    found: Dict[float, int] = {}
+    while waiting and len(found) < len(shares):
+        g = -heapq.heappop(waiting)
+        for share in shares:
+            if share not in found and below[g] >= share * total:
+                found[share] = g
+        up = parent.get(g, NO_PARENT)
+        if up == NO_PARENT:
+            continue
+        if up not in below:
+            below[up] = 0
+            heapq.heappush(waiting, -up)
+        below[up] += below[g]
+    return [found.get(share) for share in shares]
+
+
+def lineage(run_id: str) -> Dict[str, Any]:
+    """
+    Genotypes and agents through a run, from its frames: after every game,
+    how much of the world the most common genotype holds and how old the
+    living are; how long genotypes and agents last, from the first game
+    frame they are in to the last (a life still going at the run's end is
+    not counted, so the lengths are of lives that ended); and every
+    ANCESTRY_EVERY iterations, how many iterations back all, nine in ten and
+    half of the living share a single ancestor — None while they still
+    descend from more than one founder, and counted as the age of the world
+    when summed up. Needs every frame.
+    """
+    from collections import Counter
+
+    first_g: Dict[int, int] = {}
+    last_g: Dict[int, int] = {}
+    first_a: Dict[int, int] = {}
+    last_a: Dict[int, int] = {}
+    born: Dict[int, int] = {}
+    parent: Dict[int, int] = {}
+    top, ages, ancestry, end = [], [], [], None
+    for index in range(store.count_frames(run_id)):
+        frame = store.read_frame(run_id, index)
+        it = frame["iteration"]
+        for b, p in zip(frame["brain_ids"], frame["parent_brain_ids"]):
+            if b not in born:
+                born[b], parent[b] = it, p
+        ids = frame["ids"]
+        if frame.get("phase") != 2 or not ids:
+            continue
+        counts = Counter(frame["brain_ids"])
+        top.append((it, max(counts.values()) / len(ids)))
+        known = [a for a in frame["ages"] if a >= 0]
+        if known:
+            ages.append((it, float(np.median(known)), max(known)))
+        if it % ANCESTRY_EVERY == 0:
+            ancestry.append((it, *(None if g is None else it - born[g]
+                                   for g in shared_ancestors(parent, counts))))
+        for b in counts:
+            first_g.setdefault(b, it)
+            last_g[b] = it
+        for a in ids:
+            first_a.setdefault(a, it)
+            last_a[a] = it
+        end = it
+
+    def lives(first, last):
+        span = np.array([last[k] - first[k] + 1 for k in first if last[k] < end], dtype=float)
+        if not span.size:
+            return {"n": 0}
+        return {"n": int(span.size), "median": float(np.median(span)),
+                "p90": float(np.quantile(span, 0.9)), "longest": float(span.max()),
+                "over5": float((span > 5).mean()), "over50": float((span > 50).mean())}
+
+    shares = np.array([share for _, share in top])
+    later = np.array([share for it, share in top if it >= 100])
+    # How long one genotype held more than a tenth of the world at a stretch.
+    longest = stretch = 0
+    for share in shares:
+        stretch = stretch + 1 if share > 0.1 else 0
+        longest = max(longest, stretch)
+    # Back to the founders, while there is no common ancestor yet.
+    depths = [(it, *(it if d is None else d for d in rest)) for it, *rest in ancestry]
+    settled = [row for row in depths if row[0] >= 500]
+    # The common ancestor of everyone moves forward each time one branch of
+    # the family tree has outlived all the others: one lineage replacing the rest.
+    moves = sum(1 for before, after in zip(depths, depths[1:])
+                if after[0] >= 100 and after[1] < before[1] + (after[0] - before[0]))
+    return {"end": end,
+            "topShare": {"max": float(shares.max()), "maxFrom100": float(later.max()) if later.size else None,
+                         "medianFrom100": float(np.median(later)) if later.size else None,
+                         "longestOverATenth": longest},
+            "genotypeLife": lives(first_g, last_g), "agentLife": lives(first_a, last_a),
+            "ancestor": {"allFrom500": float(np.median([r[1] for r in settled])) if settled else None,
+                         "ninetyFrom500": float(np.median([r[2] for r in settled])) if settled else None,
+                         "halfFrom500": float(np.median([r[3] for r in settled])) if settled else None,
+                         "moves": moves,
+                         "oneFounder": next((it for it, d, *_ in ancestry if d is not None), None)},
+            "top": top, "ages": ages, "ancestry": depths}
+
+
+def _lineage_job(job: Tuple[str, str]) -> Tuple[str, Dict[str, Any]]:
+    folder, run_id = job
+    store.BASE_DIR = folder
+    return run_id, lineage(run_id)
+
+
+def analyse_lineage(name: str, by_condition: Dict[str, List[gol_lab.RunSpec]],
+                    reached: set) -> Dict[str, Any]:
+    """
+    Every run's lineage, read in parallel; figures of the largest genotype's
+    share, of the age of the living and of how far back they share one
+    ancestor; and, over the runs that reached the end, how many a single
+    genotype ever held a tenth, a fifth, a third or half of after iteration
+    100, how long genotypes and agents typically last, and how far back the
+    living typically share an ancestor once a world has settled.
+    """
+    from multiprocessing import Pool
+
+    jobs = [(store.BASE_DIR, s.run_id) for specs in by_condition.values() for s in specs]
+    with Pool(min(4, len(jobs))) as pool:
+        found = dict(pool.map(_lineage_job, jobs))
+    for key, label, title, y in (
+            ("top", "share", "Share of agents carrying the most common genotype", "share"),
+            ("ages", "age", "Median age of the living, in iterations", "iterations"),
+            ("ancestry", "ancestor",
+             "How many iterations back all the living share one ancestor", "iterations")):
+        drawn = []
         for condition, specs in by_condition.items():
-            values = {}
-            for s in specs:
-                value = ending(*series(rows[s.run_id], stat, phase))
-                if value is not None:
-                    values[s.lab["seed"]] = value
-            endings[stat][condition] = values
+            band = bands([(np.array([p[0] for p in found[s.run_id][key]], dtype=float),
+                           np.array([p[1] for p in found[s.run_id][key]], dtype=float))
+                          for s in specs])
+            band["label"] = (f"{condition} — " if len(by_condition) > 1 else "") + \
+                f"median, middle half, nine in ten of {len(specs)} runs"
+            drawn.append(band)
+        _write(os.path.join(BOOK, "figures", name, f"{label}.json"), {
+            "title": title, "x": {"label": "iteration"},
+            "y": {"label": y, "log": False, "min": 0}, "series": drawn}, compact=True)
+    summaries = {}
+    for condition, specs in by_condition.items():
+        lived = [found[s.run_id] for s in specs if s.run_id in reached]
 
-    summary = {stat: {condition: _describe(list(values.values()))
-                      for condition, values in by_condition_values.items()}
-               for stat, by_condition_values in endings.items()}
-    comparisons = {}
-    if reference:
-        for stat, by_condition_values in endings.items():
-            comparisons[stat] = {
-                condition: compare_conditions(by_condition_values[reference], values,
-                                              seed=hash_seed(name, stat, condition))
-                for condition, values in by_condition_values.items() if condition != reference}
-    needed = ({stat: {condition: seeds_needed(list(values.values()))
-                      for condition, values in by_condition_values.items()}
-               for stat, by_condition_values in endings.items()}
-              if spec.get("seedsNeeded") else {})
+        def median(values):
+            values = [v for v in values if v is not None]
+            return float(np.median(values)) if values else None
 
-    extinct = {condition: [{"seed": s.lab["seed"],
-                            "at": store.load_meta(s.run_id).get("iteration")}
-                           for s in specs if store.load_meta(s.run_id).get("status") == "extinct"]
-               for condition, specs in by_condition.items()}
-    return {"reference": reference, "figures": figures, "endings": summary,
-            "comparisons": comparisons, "seedsNeeded": needed, "extinct": extinct}
+        summaries[condition] = {
+            "runs": {s.run_id: {k: v for k, v in found[s.run_id].items()
+                                if k not in ("top", "ages", "ancestry")} for s in specs},
+            "reached": len(lived),
+            "largestFrom100": {str(share): sum((r["topShare"]["maxFrom100"] or 0) > share
+                                               for r in lived) for share in (0.1, 0.2, 0.33, 0.5)},
+            "genotypeLife": {k: median([r["genotypeLife"].get(k) for r in lived])
+                             for k in ("median", "p90", "longest", "over5")},
+            "agentLife": {k: median([r["agentLife"].get(k) for r in lived])
+                          for k in ("median", "p90", "longest", "over5", "over50")},
+            "ancestor": {k: median([r["ancestor"][k] for r in lived])
+                         for k in ("allFrom500", "ninetyFrom500", "halfFrom500", "moves",
+                                   "oneFounder")}}
+    return summaries
 
 
 def hash_seed(*parts: str) -> int:
@@ -402,8 +731,9 @@ def _describe(values: List[float]) -> Dict[str, Any]:
     v = np.array(values, dtype=float)
     if not v.size:
         return {"n": 0}
+    sd = float(v.std(ddof=1)) if v.size > 1 else None
     return {"n": int(v.size), "mean": float(v.mean()), "median": float(np.median(v)),
-            "sd": float(v.std(ddof=1)) if v.size > 1 else None,
+            "sd": sd, "cv": sd / abs(float(v.mean())) if sd is not None and v.mean() else None,
             "min": float(v.min()), "max": float(v.max()),
             "q25": float(np.quantile(v, 0.25)), "q75": float(np.quantile(v, 0.75))}
 
@@ -453,7 +783,7 @@ def costs_report() -> Dict[str, Any]:
         if not rows:
             continue
         weights = brain_shape(SimConfig.from_dict(meta["config"]))["weights"]
-        step = max(1, len(rows) // 200)
+        step = max(1, len(rows) // 100)
         points += [(r["nodes"], r["_seconds"] / (weights / 1e4)) for r in rows[::step]]
         runs.append({"id": meta["id"], "tokens": meta["config"]["total_tokens"],
                      "weights": weights, "iterations": meta.get("iteration"),
@@ -467,7 +797,7 @@ def costs_report() -> Dict[str, Any]:
             {"label": f"{len(points):,} recorded iterations of {len(runs)} runs",
              "x": [p[0] for p in points], "y": [p[1] for p in points], "points": True},
             {"label": "what the estimates assume", "x": [0, top],
-             "y": [0, top * known["secondsPerAgentIteration"]]}]})
+             "y": [0, top * known["secondsPerAgentIteration"]]}]}, compact=True)
     report = {"fitted": known, "runs": runs, "updated": time.strftime("%Y-%m-%d")}
     _write(os.path.join(BOOK, "results", "costs.json"), report)
     return report

@@ -39,18 +39,28 @@ token once a world has settled, and 70 bytes per agent per iteration.
 ```figure costs/time
 ```
 
+## What the baseline set cost
+
+The thirty runs of Chapter 3 — 10,000 tokens, 3,000 iterations each — took
+26 hours of computing, done in 7.2 hours on four workers, and fill 7.8 GB.
+No run needed more than 651 MB of memory. That is the unit the experiments
+of Part I are sized in: one condition of thirty seeds at 10,000 tokens is
+about seven hours.
+
 ## The rules for sizing an experiment
 
 - An experiment takes **about 12 hours** of the computer, and never more than
   two days. The lab estimates the time on its workers before ▶ and says how
   much is left while it runs; the estimate is what fits the plan to this.
 - A run's time grows with its world: at the baseline, a world of *T* tokens
-  settles at about 0.18 × *T* agents, so at the speed measured so far 10,000
-  tokens cost about 2.4 seconds per iteration and 200,000 tokens about 50.
+  settles at about 0.12 × *T* agents (measured on worlds of 10,000 tokens),
+  and an agent costs about 0.87 ms per iteration, so 10,000 tokens cost about
+  1.1 seconds per iteration. If the number of agents grows in step with the
+  tokens, 200,000 tokens cost about 22 — Chapter 14 will say whether it does.
 - Memory limits big worlds before time does: the lab starts a run only when
   its estimated peak fits next to the runs already going, in three quarters
   of the machine's memory.
-- Disk is about 100 bytes per agent per iteration with every frame kept. The
+- Disk is about 65 bytes per agent per iteration with every frame kept. The
   lab will not start a run the disk cannot hold.
 - The workers default to four, the machine's fast cores. More are possible
   from the Book tab; the slower cores add less than a fast one each.

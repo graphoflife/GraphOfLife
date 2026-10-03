@@ -1,28 +1,238 @@
 {
  "fitted": {
-  "secondsPerAgentIteration": 0.0008368451258368142,
-  "agentsPerToken": 0.18,
+  "secondsPerAgentIteration": 0.000550725409173802,
+  "agentsPerToken": 0.1245,
   "bytesPerAgentIteration": 64.23652932871262,
-  "peakBytesPerWeightByte": 3.0445143334032223,
+  "peakBytesPerWeightByte": 8.160917476092669,
   "baseMB": 300.0,
   "measured": {
    "secondsPerAgentIteration": true,
-   "agentsPerToken": false,
+   "agentsPerToken": true,
    "bytesPerAgentIteration": true,
    "peakBytesPerWeightByte": true
   },
   "kinds": {
    "e7db2d953b": {
     "label": "gol-1+brain_kind=float16, 30-number messages, mutation 0.2, 15,795 weights",
-    "secondsPerAgent": 0.001321796876259248,
-    "agentsPerToken": null,
-    "runs": 12
+    "secondsPerAgent": 0.0008698707837900202,
+    "agentsPerToken": 0.1245,
+    "runs": 42
    }
   },
-  "runs": 12,
-  "fitted": "2026-10-02T19:16:33+0200"
+  "runs": 42,
+  "fitted": "2026-10-03T19:54:03+0200"
  },
  "runs": [
+  {
+   "id": "B1-10000-s030",
+   "tokens": 10000,
+   "weights": 15795,
+   "iterations": 3000,
+   "peakMB": 578.5
+  },
+  {
+   "id": "B1-10000-s029",
+   "tokens": 10000,
+   "weights": 15795,
+   "iterations": 3000,
+   "peakMB": 513.6
+  },
+  {
+   "id": "B1-10000-s028",
+   "tokens": 10000,
+   "weights": 15795,
+   "iterations": 3000,
+   "peakMB": 224.9
+  },
+  {
+   "id": "B1-10000-s027",
+   "tokens": 10000,
+   "weights": 15795,
+   "iterations": 3000,
+   "peakMB": 343.6
+  },
+  {
+   "id": "B1-10000-s026",
+   "tokens": 10000,
+   "weights": 15795,
+   "iterations": 3000,
+   "peakMB": 382.3
+  },
+  {
+   "id": "B1-10000-s025",
+   "tokens": 10000,
+   "weights": 15795,
+   "iterations": 3000,
+   "peakMB": 365.9
+  },
+  {
+   "id": "B1-10000-s024",
+   "tokens": 10000,
+   "weights": 15795,
+   "iterations": 1547,
+   "peakMB": 396.8
+  },
+  {
+   "id": "B1-10000-s023",
+   "tokens": 10000,
+   "weights": 15795,
+   "iterations": 4,
+   "peakMB": 60.7
+  },
+  {
+   "id": "B1-10000-s022",
+   "tokens": 10000,
+   "weights": 15795,
+   "iterations": 3000,
+   "peakMB": 325.7
+  },
+  {
+   "id": "B1-10000-s021",
+   "tokens": 10000,
+   "weights": 15795,
+   "iterations": 3000,
+   "peakMB": 350.8
+  },
+  {
+   "id": "B1-10000-s020",
+   "tokens": 10000,
+   "weights": 15795,
+   "iterations": 2184,
+   "peakMB": 300.8
+  },
+  {
+   "id": "B1-10000-s019",
+   "tokens": 10000,
+   "weights": 15795,
+   "iterations": 3000,
+   "peakMB": 305.3
+  },
+  {
+   "id": "B1-10000-s018",
+   "tokens": 10000,
+   "weights": 15795,
+   "iterations": 3000,
+   "peakMB": 358.2
+  },
+  {
+   "id": "B1-10000-s017",
+   "tokens": 10000,
+   "weights": 15795,
+   "iterations": 3000,
+   "peakMB": 650.8
+  },
+  {
+   "id": "B1-10000-s016",
+   "tokens": 10000,
+   "weights": 15795,
+   "iterations": 3000,
+   "peakMB": 356.7
+  },
+  {
+   "id": "B1-10000-s015",
+   "tokens": 10000,
+   "weights": 15795,
+   "iterations": 3000,
+   "peakMB": 333.5
+  },
+  {
+   "id": "B1-10000-s014",
+   "tokens": 10000,
+   "weights": 15795,
+   "iterations": 313,
+   "peakMB": 344.2
+  },
+  {
+   "id": "B1-10000-s013",
+   "tokens": 10000,
+   "weights": 15795,
+   "iterations": 3000,
+   "peakMB": 464.8
+  },
+  {
+   "id": "B1-10000-s012",
+   "tokens": 10000,
+   "weights": 15795,
+   "iterations": 3000,
+   "peakMB": 501.5
+  },
+  {
+   "id": "B1-10000-s010",
+   "tokens": 10000,
+   "weights": 15795,
+   "iterations": 3000,
+   "peakMB": 329.6
+  },
+  {
+   "id": "B1-10000-s009",
+   "tokens": 10000,
+   "weights": 15795,
+   "iterations": 3000,
+   "peakMB": 494.8
+  },
+  {
+   "id": "B1-10000-s011",
+   "tokens": 10000,
+   "weights": 15795,
+   "iterations": 3000,
+   "peakMB": 388.1
+  },
+  {
+   "id": "B1-10000-s008",
+   "tokens": 10000,
+   "weights": 15795,
+   "iterations": 3000,
+   "peakMB": 350.4
+  },
+  {
+   "id": "B1-10000-s007",
+   "tokens": 10000,
+   "weights": 15795,
+   "iterations": 3000,
+   "peakMB": 374.1
+  },
+  {
+   "id": "B1-10000-s006",
+   "tokens": 10000,
+   "weights": 15795,
+   "iterations": 3000,
+   "peakMB": 289.8
+  },
+  {
+   "id": "B1-10000-s005",
+   "tokens": 10000,
+   "weights": 15795,
+   "iterations": 3000,
+   "peakMB": 380.8
+  },
+  {
+   "id": "B1-10000-s001",
+   "tokens": 10000,
+   "weights": 15795,
+   "iterations": 3000,
+   "peakMB": 346.9
+  },
+  {
+   "id": "B1-10000-s003",
+   "tokens": 10000,
+   "weights": 15795,
+   "iterations": 3000,
+   "peakMB": 455.3
+  },
+  {
+   "id": "B1-10000-s002",
+   "tokens": 10000,
+   "weights": 15795,
+   "iterations": 3000,
+   "peakMB": 514.5
+  },
+  {
+   "id": "B1-10000-s004",
+   "tokens": 10000,
+   "weights": 15795,
+   "iterations": 3000,
+   "peakMB": 564.3
+  },
   {
    "id": "B1-10000-s003-stopped-at-10",
    "tokens": 10000,
@@ -108,5 +318,5 @@
    "peakMB": 582.5
   }
  ],
- "updated": "2026-10-02"
+ "updated": "2026-10-03"
 }

@@ -56,6 +56,12 @@
         "phase": 1
       },
       "redistributed"
+    ],
+    "windows": [
+      {
+        "name": "from 100",
+        "from": 100
+      }
     ]
   }
 }

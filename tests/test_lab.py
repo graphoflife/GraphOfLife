@@ -477,7 +477,7 @@ def test_figures_hold_no_nan():
         fast = stored["comparisons"]["nodes"]["fast"]
         assert fast["paired"] and fast["n"] == 3 and fast["indicative"], fast
         assert fast["interval"][0] <= fast["difference"] <= fast["interval"][1], fast
-        assert set(stored["seedsNeeded"]["nodes"]) == {"baseline", "fast"}
+        assert all(stored["endings"]["nodes"][c]["seedsNeeded"]["10%"] > 0 for c in ("baseline", "fast"))
         assert len(stored["citation"]["runs"]) == 6
         assert stored["citation"]["runs"][0]["environment"]["numpy"]
         assert stored == _strict(os.path.join(book, "results", "E91.json"))
@@ -490,6 +490,73 @@ def test_figures_hold_no_nan():
         odd = os.path.join(book, "odd.json")
         gol_analysis._write(odd, {"gap": float("nan"), "ratio": [np.float64("inf"), 1.0]})
         assert _strict(odd) == {"gap": None, "ratio": [None, 1.0]}
+
+
+def test_a_world_that_died_is_counted_apart():
+    """
+    A world that dies out did not end up anywhere: the last fifth of its life
+    is its dying. Where runs ended up is measured over the runs that reached
+    the end, over the stretch the plan names, and the dead are counted as an
+    outcome of their own; so is any other stretch, over the runs that lived
+    through it. Lineages read off the frames say how big the biggest
+    genotype got, how long genotypes and agents last and how far back the
+    living share an ancestor, and are compared between conditions.
+    """
+    import gol_analysis
+    sweep = plan("E91", [{"name": "baseline"},
+                         {"name": "doomed", "set": {"extinction_threshold": 10_000}}],
+                 seeds="1..3", iterations=6)
+    sweep["analyse"] = {"kind": "series", "reference": "baseline", "endpoints": ["nodes"],
+                        "settledFrom": 2, "seedsNeeded": True, "lineage": True,
+                        "windows": [{"name": "start", "from": 0, "to": 2},
+                                    {"name": "lowest", "from": 1, "of": "min"}]}
+    with lab(sweep) as tmp, _book(tmp):
+        gol_lab.request(run="E91", workers=3)
+        with contextlib.redirect_stdout(io.StringIO()):
+            assert gol_lab.run_lab() == 0
+        results = gol_analysis.analyse("E91")
+        assert results["reached"] == {"baseline": 3, "doomed": 0}, results["reached"]
+        assert [x["seed"] for x in results["extinct"]["doomed"]] == [1, 2, 3]
+        assert results["endings"]["nodes"]["doomed"]["n"] == 0, "a dead world's dying was averaged in"
+        assert results["endingsFrom"] == 2
+        ended = results["endings"]["nodes"]["baseline"]
+        assert ended["n"] == 3 and sorted(ended["bySeed"]) == [1, 2, 3], ended
+        assert set(ended["seedsNeeded"]) == {"5%", "10%", "20%"}
+        start = results["windows"]["start"]["nodes"]
+        assert start["baseline"]["n"] == 3 and start["doomed"]["n"] == 0, start
+        lowest = results["windows"]["lowest"]["nodes"]["baseline"]
+        assert lowest["max"] <= ended["max"] + 1e-9, "the lowest of a stretch above its mean"
+
+        lineage = results["lineage"]["baseline"]
+        assert lineage["reached"] == 3
+        for run in lineage["runs"].values():
+            assert 0 < run["topShare"]["max"] <= 1 and run["end"] == 5
+            assert run["genotypeLife"]["n"] > 0 and run["genotypeLife"]["median"] >= 1
+            assert run["topShare"]["longestOverATenth"] <= 6
+            assert set(run["ancestor"]) >= {"allFrom500", "moves", "oneFounder"}
+        assert 0 <= lineage["largestFrom100"]["0.1"] <= 3
+        assert results["lineageComparisons"]["ancestor.moves"]["doomed"]["n"] == 0
+
+
+def test_the_common_ancestor_is_the_newest_that_holds_the_share():
+    """
+    Climbing the tree of genotypes from the living finds, for each share of
+    the living agents, the newest genotype they all descend from — and none
+    while they descend from more than one founder.
+    """
+    from gol_analysis import shared_ancestors
+    #        1       2        founders
+    #        |       |
+    #        3       6
+    #       / \
+    #      4   5
+    parent = {1: -1, 2: -1, 3: 1, 4: 3, 5: 3, 6: 2}
+    assert shared_ancestors(parent, {4: 2, 5: 1}) == [3, 3, 4]
+    assert shared_ancestors(parent, {4: 1, 5: 1}) == [3, 3, 5]
+    assert shared_ancestors(parent, {4: 9, 6: 1}) == [None, 4, 4]
+    assert shared_ancestors(parent, {4: 3, 6: 1}) == [None, None, 4]
+    assert shared_ancestors(parent, {4: 1, 6: 1}) == [None, None, 6]
+    assert shared_ancestors(parent, {3: 2}) == [3, 3, 3]
 
 
 def test_an_identity_experiment_reports_every_variant():

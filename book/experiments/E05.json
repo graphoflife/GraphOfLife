@@ -68,6 +68,12 @@
       "cutRisk",
       "spectralGap",
       "diameter"
+    ],
+    "windows": [
+      {
+        "name": "from 100",
+        "from": 100
+      }
     ]
   }
 }

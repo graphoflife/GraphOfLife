@@ -36,10 +36,11 @@
       },
       {
         "name": "revolutions",
-        "stat": "revolutions",
+        "stat": "revolutions/nodes_before",
         "phase": 2,
-        "title": "Nodes taken by a coalition",
-        "y": "nodes"
+        "title": "Share of nodes taken by a coalition",
+        "y": "share",
+        "min": 0
       }
     ],
     "endpoints": [
@@ -48,8 +49,20 @@
       "brainDiversity",
       "cladesInWindow",
       "heldHomeShare",
-      "revolutions",
+      "revolutions/nodes_before",
       "distinctParents"
+    ],
+    "lineage": true,
+    "windows": [
+      {
+        "name": "from 100",
+        "from": 100
+      },
+      {
+        "name": "lowest from 100",
+        "from": 100,
+        "of": "min"
+      }
     ]
   }
 }

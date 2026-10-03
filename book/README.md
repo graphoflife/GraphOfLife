@@ -49,6 +49,15 @@ Three steps, over and over.
   frozen copy of the engine it ran on and the commit it came from, and the
   versions of Python, numpy and networkx, beside it in `provenance.json` and,
   once analysed, in the chapter's results.
+- **The dead are counted apart.** A world that dies out did not end up
+  anywhere, so where the worlds of a condition end up is measured over the
+  worlds that lived to the end, and the dead are reported beside them as an
+  outcome of their own.
+- **A run is measured over its settled life.** A world spends its first few
+  hundred iterations in a youth unlike the rest of its life (Chapter 3) and
+  then wanders (Chapter 4), so where it ends up is its average from
+  iteration 500 to its end. Chapters 3 to 8 used the last fifth of a run,
+  which was the rule before Meta I.
 - **Runs are shared.** A run is named for what it is — baseline, world size,
   what differs, seed — so an experiment that needs runs which already exist
   uses them. Several chapters of Part I read the same thirty runs.
