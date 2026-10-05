@@ -1261,6 +1261,22 @@ function test_book_progress_of_an_experiment() {
   assert(Book.eta(7200, '') === 'about 2.0 h');
 }
 
+function test_a_plan_of_several_sizes_is_written_out() {
+  // Sizes are thousands, so a list of them joined by bare commas reads as one
+  // long number; each is written out, and so are a condition's own sizes and
+  // a plan's limit on workers.
+  const Book = bookWith();
+  Book.chapters = () => [];
+  const html = Book.planHtml({ runs: { baseline: 'B1', world: { total_tokens: [800, 1600, 409600] },
+    seeds: '1..3', iterations: 600, workers: 1, conditions: [{ name: 'baseline' },
+      { name: 'small', set: { extinction_threshold: 0 }, sizes: [800, 1600] }] } });
+  assert(html.includes('800, 1600 and 409600 tokens'), html);
+  assert(html.includes('at 800 and 1600 tokens only'), html);
+  assert(html.includes('one run at a time'), html);
+  assert(Book.planHtml({ runs: { baseline: 'B1', world: { total_tokens: 10000 }, seeds: '1..30',
+    iterations: 3000, conditions: [{ name: 'baseline' }] } }).includes('10000 tokens'));
+}
+
 function test_a_run_that_died_out_says_so() {
   // A world that died out is done, but it did not reach its target: its cell
   // says when it died rather than claiming the whole run.
@@ -1272,6 +1288,9 @@ function test_a_run_that_died_out_says_so() {
   const lab = { lab: { workers: 4, cores: 8 }, disk: { free: 1 }, costs: { runs: 1 }, experiments: {} };
   const html = Book.liveHtml('E02', status, lab);
   assert(html.includes('book-run-extinct') && html.includes('died out at iteration 313'), html);
+  assert(html.includes('on 4 workers'), 'an experiment without a cap lost the lab\'s workers');
+  assert(Book.liveHtml('E02', { ...status, workers: 1 }, lab).includes('on 1 worker from'),
+    'a one-worker experiment was estimated on the lab\'s workers');
   assert(html.includes('book-run-running') && html.includes('1 of 3000'), 'a living run lost its progress');
 }
 
@@ -1377,6 +1396,7 @@ const tests = Object.entries({
   test_markdown_hands_info_fences_to_the_caller,
   test_book_progress_of_an_experiment,
   test_a_run_that_died_out_says_so,
+  test_a_plan_of_several_sizes_is_written_out,
   test_the_static_book_never_asks_the_lab,
   test_every_tab_names_a_view
 }).sort(([a], [b]) => a.localeCompare(b));

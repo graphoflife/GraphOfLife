@@ -26,6 +26,7 @@ HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, HERE)
 
 import gol_lab        # noqa: E402
+import gol_record     # noqa: E402
 import gol_store      # noqa: E402
 from gol_config import SimConfig   # noqa: E402
 
@@ -138,6 +139,116 @@ def test_every_strain_an_experiment_uses_is_registered():
         for spec in gol_lab.experiment_runs(name):
             strain = SimConfig.from_dict(spec.config).strain_id()
             assert strain in registered, f"{name} runs {strain}, which strains.md does not list"
+
+
+def test_a_plan_can_list_world_sizes_and_a_condition_its_own():
+    """
+    A plan may run its conditions at several sizes of world, and a condition
+    at sizes of its own. Every run is still named for what it is, size
+    included, and a size the engine cannot build is refused before anything
+    runs, saying which.
+    """
+    sizes = plan("E91", [{"name": "a"},
+                         {"name": "b", "set": {"mutation_probability": 0.5}, "sizes": [400]}],
+                 seeds="1..2")
+    sizes["runs"]["world"] = {"total_tokens": [300, 400]}
+    broken = plan("E92")
+    broken["runs"]["world"] = {"total_tokens": [400, 20]}
+    odd = plan("E93", [{"name": "a", "sizes": [400.5]}])
+    with lab(sizes, broken, odd):
+        specs = gol_lab.experiment_runs("E91")
+        ids = [s.run_id for s in specs]
+        assert ids[:4] == ["B9-300-s001", "B9-300-s002", "B9-400-s001", "B9-400-s002"], ids
+        assert len(ids) == 6 and all(i.startswith("B9-400-") for i in ids[4:]), ids
+        assert specs[0].config["total_tokens"] == 300 and "300 tokens" in specs[0].name
+        assert specs[0].lab["world"] == {"total_tokens": 300}
+        refused(lambda: gol_lab.experiment_runs("E92"), "20 tokens")
+        refused(lambda: gol_lab.experiment_runs("E93"), "whole numbers")
+
+
+def test_a_plan_can_keep_its_runs_to_one_worker():
+    """
+    A plan may say how many of its runs run at once, whatever the lab's
+    workers: its runs then go one after another while another experiment's
+    use the rest. The estimate is made for the workers it will really have.
+    """
+    alone = plan("E91", seeds="1..3", workers=1)
+    beside = plan("E92", [{"name": "other", "set": {"mutation_probability": 0.5}}], seeds="1..2")
+    with lab(alone, beside, plan("E93", workers=0)):
+        refused(lambda: gol_lab.experiment_runs("E93"), "workers")
+        assert gol_lab.experiment_status("E91", gol_lab.read_control() | {"workers": 3},
+                                         gol_lab.costs(), False)["workers"] == 1
+        gol_lab.request(run="E91", workers=3)
+        gol_lab.request(run="E92")
+        log = io.StringIO()
+        with contextlib.redirect_stdout(log):
+            assert gol_lab.run_lab() == 0
+
+        # The lab's own record of what it started and saw end, in order.
+        mine = {f"B9-400-s{seed:03d}" for seed in (1, 2, 3)}
+        going, most, others = set(), 0, 0
+        for line in log.getvalue().splitlines():
+            words = line.split()
+            if "started" in words:
+                run_id = words[words.index("started") + 1]
+                going.add(run_id)
+                others += run_id not in mine
+            elif "ended" in words:
+                going.discard(words[words.index("ended") - 1])
+            most = max(most, len(going & mine))
+        assert most == 1, f"{most} of a one-worker plan's runs ran at once"
+        assert others == 2, "the other experiment's runs did not get the lab"
+        assert gol_lab.status()["experiments"]["E92"]["state"] == "finished"
+
+    # On one worker the order cannot change the time, so the quickest go first;
+    # the experiment still gets the first place in the queue its longest run had.
+    sweep = plan("E91", seeds="1", workers=1)
+    sweep["runs"]["world"] = {"total_tokens": [100, 400, 200]}
+    with lab(sweep, plan("E92", [{"name": "big"}], seeds="7")):
+        order = [j.spec.run_id for j in gol_lab.jobs(["E91", "E92"], "e")]
+        assert order[0] == "B9-100-s001", order
+        assert [i for i in order if i.endswith("s001")] == ["B9-100-s001", "B9-200-s001",
+                                                            "B9-400-s001"], order
+
+
+def test_how_a_world_grows_with_its_tokens_is_fitted():
+    """
+    A power law is a straight line on logarithmic axes: its slope is found,
+    with an interval that holds the true one, and points that bend away from
+    a line are told from points on one. A size sweep in the lab reads every
+    run's mean over the plan's window against its world's tokens.
+    """
+    import numpy as np
+    import gol_analysis
+    rng = np.random.default_rng(1)
+    x = np.repeat([1e3, 2e3, 4e3, 8e3, 16e3, 32e3], 3)
+    straight = 2 * x ** 0.8 * np.exp(rng.normal(0, 0.05, x.size))
+    fit = gol_analysis.power_fit(x, straight, x)
+    assert abs(fit["exponent"] - 0.8) < 0.05 and fit["interval"][0] < 0.8 < fit["interval"][1], fit
+    assert fit["bendInterval"][0] < 0 < fit["bendInterval"][1], "a straight line was called bent"
+    bent = x * np.exp(-0.2 * (np.log10(x) - 3.5) ** 2) * np.exp(rng.normal(0, 0.02, x.size))
+    assert gol_analysis.power_fit(x, bent, x)["bendInterval"][1] < 0, "a bend went unseen"
+
+    sweep = plan("E91", [{"name": "baseline"}], seeds="1..2", iterations=6)
+    sweep["runs"]["world"] = {"total_tokens": [200, 400, 800]}
+    sweep["analyse"] = {"kind": "scaling", "reference": "baseline",
+                        "window": {"from": 3, "to": 5}, "check": {"from": 1, "to": 2},
+                        "stats": [{"stat": "nodes", "name": "agents", "y": "agents"}]}
+    with lab(sweep) as tmp, _book(tmp) as book:
+        gol_lab.request(run="E91", workers=3)
+        with contextlib.redirect_stdout(io.StringIO()):
+            assert gol_lab.run_lab() == 0
+        results = gol_analysis.analyse("E91")
+        agents = results["scaling"]["agents"]["baseline"]
+        assert sorted(agents["bySize"]) == ["200", "400", "800"], agents["bySize"]
+        assert len(agents["points"]) == 6 and agents["fit"]["sizes"] == 3
+        assert [step["from"] for step in agents["local"]] == [200, 400]
+        rows = gol_record.read_stats("B9-800-s001")
+        mean = np.mean([r["nodes"] for r in rows if r["phase"] == 2 and 3 <= r["iteration"] <= 5])
+        point = next(p for p in agents["points"] if p["tokens"] == 800 and p["seed"] == 1)
+        assert abs(point["value"] - mean) < 1e-9, (point, mean)
+        figure = _strict(os.path.join(book, "figures", "E91", "agents.json"))
+        assert figure["x"]["log"] and figure["y"]["log"] and figure["series"][0]["points"]
 
 
 def test_two_experiments_asking_for_the_same_run_share_it():

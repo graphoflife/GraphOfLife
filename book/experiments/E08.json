@@ -1,0 +1,83 @@
+{
+  "id": "E08",
+  "title": "How does a world's size follow its tokens?",
+  "thesis": {
+    "claim": "A world's size follows its tokens in proportion. From a few thousand tokens up to 409,600, a settled world holds about 0.13 agents and 0.2 connections for every token, whatever its size: agents and connections are each a power law of the tokens with exponent 1. A world of twice the tokens is two worlds of the same kind.",
+    "why": "Everything an agent does is local. It plays the game with its neighbours, has its children beside itself, and dies when its own tokens run out; nothing in the rules reaches across the world except the sharing out of the tokens of the dead, which gives every survivor the same chance whatever the size of the world. So a bigger world should be more of the same, with as many agents per token and as many connections per agent. At 10,000 tokens the settled worlds of Chapter 3 held 0.13 agents and 0.20 connections per token, from iteration 500 on.",
+    "confirm": "For the baseline worlds of 3,200 to 409,600 tokens that live to iteration 600, each measured by its mean over iterations 500 to 599: the exponent fitted to agents against tokens lies between 0.9 and 1.1 and its 95% interval contains 1; the same holds for connections; and neither set of points bends away from a straight line on logarithmic axes — the interval of the bend contains 0.",
+    "refute": "The exponent's interval leaves out 1, so that bigger worlds hold clearly fewer or more agents (or connections) per token than smaller ones, or the points bend on logarithmic axes. Then a world's size is more than its tokens, something in the dynamics reaches across the whole world, and every result in this book belongs to the size it was found at."
+  },
+  "runs": {
+    "baseline": "B1",
+    "world": {
+      "total_tokens": [
+        800,
+        1600,
+        3200,
+        6400,
+        12800,
+        25600,
+        51200,
+        102400,
+        204800,
+        409600
+      ]
+    },
+    "seeds": "1..3",
+    "iterations": 600,
+    "workers": 1,
+    "record": {
+      "heavy_every": 25
+    },
+    "conditions": [
+      {
+        "name": "baseline"
+      },
+      {
+        "name": "stopped only when empty",
+        "set": {
+          "extinction_threshold": 0
+        },
+        "sizes": [
+          800,
+          1600,
+          3200,
+          6400
+        ]
+      }
+    ]
+  },
+  "analyse": {
+    "kind": "scaling",
+    "reference": "baseline",
+    "window": {
+      "from": 500,
+      "to": 599
+    },
+    "check": {
+      "from": 400,
+      "to": 499
+    },
+    "fitFrom": 3200,
+    "stats": [
+      {
+        "stat": "nodes",
+        "name": "agents",
+        "title": "Agents alive against the tokens of the world",
+        "y": "agents, mean over iterations 500–599"
+      },
+      {
+        "stat": "edges",
+        "name": "connections",
+        "title": "Connections against the tokens of the world",
+        "y": "connections, mean over iterations 500–599"
+      },
+      {
+        "stat": "meanDegree",
+        "name": "degree",
+        "title": "Connections per agent against the tokens",
+        "y": "connections per agent"
+      }
+    ]
+  }
+}

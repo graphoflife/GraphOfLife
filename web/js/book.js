@@ -300,6 +300,11 @@ const Book = {
         Number(other.slice(1))}</a>` : other}: nothing new is run for it.</p>`;
     }
     const seeds = String(runs.seeds);
+    // One size, or several, each written out in full: "800, 1,600 and 3,200".
+    const tokens = sizes => {
+      const all = [].concat(sizes).map(formatNumber);
+      return `${all.length > 1 ? `${all.slice(0, -1).join(', ')} and ${all[all.length - 1]}` : all[0]} tokens`;
+    };
     const rows = runs.conditions.map(c => {
       const set = Object.entries(c.set || {}).map(([k, v]) => `<code>${k} = ${
         Markdown.escape(JSON.stringify(v))}</code>`).join(', ') || 'as the baseline';
@@ -307,16 +312,19 @@ const Book = {
                    c.fault_at !== undefined ? `cut off at ${c.fault_at} with no checkpoint, then resumed` : '',
                    c.threads === 'default' ? 'matrix library on all its threads' : '',
                    c.replicate && !c.stops && c.fault_at === undefined && !c.threads
-                     ? 'runs of its own, shared with no other experiment' : '']
+                     ? 'runs of its own, shared with no other experiment' : '',
+                   c.sizes ? `at ${tokens(c.sizes)} only` : '']
         .filter(Boolean).join('; ');
       return `<tr><td>${Markdown.escape(c.name)}</td><td>${set}</td><td>${how || '—'}</td></tr>`;
     }).join('');
     const record = runs.record || {};
     return `<div class="md-scroll"><table class="book-plan">`
       + `<tr><th>Baseline</th><td colspan="2"><code>${Markdown.escape(runs.baseline)}</code></td></tr>`
-      + `<tr><th>World</th><td colspan="2">${formatNumber(runs.world.total_tokens)} tokens</td></tr>`
+      + `<tr><th>World</th><td colspan="2">${tokens(runs.world.total_tokens)}</td></tr>`
       + `<tr><th>Seeds</th><td colspan="2">${Markdown.escape(seeds)}</td></tr>`
       + `<tr><th>Iterations</th><td colspan="2">${formatNumber(runs.iterations)}</td></tr>`
+      + (runs.workers ? `<tr><th>Workers</th><td colspan="2">${runs.workers === 1 ? 'one run at a time'
+        : `at most ${runs.workers} runs at a time`}, whatever the lab's other work</td></tr>` : '')
       + `<tr><th>Recorded</th><td colspan="2">every frame with its decisions; every statistic `
       + `every iteration, the graph ones every ${record.heavy_every || 25}</td></tr>`
       + `<tr><th>Condition</th><th>Differs from the baseline</th><th>How it is run</th></tr>`
@@ -349,8 +357,9 @@ const Book = {
       ? `<span class="book-left">${this.eta(status.secondsLeft)}</span>` : '';
     const workers = Array.from({ length: lab.lab.cores || 8 }, (_, i) => i + 1)
       .map(n => `<option value="${n}"${n === lab.lab.workers ? ' selected' : ''}>${n}</option>`).join('');
+    const own = status.workers ?? lab.lab.workers;
     const estimate = status.state === 'finished' ? '' : `<p class="book-note">Estimated: ${
-      this.eta(status.estimate.seconds, '')} on ${lab.lab.workers} workers from the start, `
+      this.eta(status.estimate.seconds, '')} on ${own} worker${own === 1 ? '' : 's'} from the start, `
       + `${formatBytes(status.estimate.diskBytes)} of disk (${formatBytes(lab.disk.free)} free), `
       + `up to ${formatNumber(Math.round(status.estimate.peakMB))} MB of memory a run. `
       + `Fitted to ${lab.costs.runs || 'no'} recorded runs so far.</p>`;
@@ -461,14 +470,29 @@ const Book = {
     // As many decimals as the ticks need and no more: 0.2 apart wants one,
     // 2 apart none. Three on every tick read 2.000 as two thousand.
     const back = (axis, lo, hi) => {
-      if (axis.log) return v => _short(10 ** v);
+      if (axis.log) {
+        return v => {
+          const n = 10 ** v;
+          return n >= 1 && Math.abs(n - Math.round(n)) < 1e-6 * n
+            ? Math.round(n).toLocaleString('en-US') : _short(n);
+        };
+      }
       const digits = Math.max(0, Math.min(3, Math.ceil(-Math.log10((hi - lo) / 5 || 1))));
       return v => Number(v).toLocaleString('en-US', { minimumFractionDigits: digits,
                                                       maximumFractionDigits: digits });
     };
-    const x = { lo: x0, hi: x1, format: back(fig.x, x0, x1) };
+    // A logarithmic axis is ruled at the powers of ten it spans, when it spans
+    // two or more; the round numbers between them say nothing on such an axis.
+    const decades = (axis, lo, hi) => {
+      if (!axis.log) return undefined;
+      const ticks = [];
+      for (let p = Math.ceil(lo - 1e-9); p <= hi + 1e-9; p++) ticks.push(p);
+      return ticks.length >= 2 ? ticks : undefined;
+    };
+    const x = { lo: x0, hi: x1, format: back(fig.x, x0, x1), ticks: decades(fig.x, x0, x1) };
     const y = { lo: y0, hi: y1 === y0 ? y0 + 1 : y1 };
     y.format = back(fig.y, y.lo, y.hi);
+    y.ticks = decades(fig.y, y.lo, y.hi);
     const px = v => (sx(v) - x.lo) / (x.hi - x.lo || 1) * w;
     const py = v => h - (sy(v) - y.lo) / (y.hi - y.lo || 1) * h;
 

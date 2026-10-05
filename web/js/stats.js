@@ -1006,7 +1006,8 @@ function _tickCounts(w, h) {
 }
 
 function _axes(ctx, w, h, spec) {
-  // `pad` is the margin the chrome reserved outside the plot. Tick labels are
+  // An axis may bring its own `ticks`, in its own units; otherwise round ones
+  // are chosen. `pad` is the margin the chrome reserved outside the plot. Tick labels are
   // allowed to use it, and are clamped to it, so an edge tick stays legible
   // instead of being painted off the canvas.
   const { x, y, grid = true, guides = [],
@@ -1019,7 +1020,7 @@ function _axes(ctx, w, h, spec) {
   const { across, down } = _tickCounts(w, h);
 
   if (x) {
-    for (const tick of _axisTicks(x.lo, x.hi, across)) {
+    for (const tick of x.ticks || _axisTicks(x.lo, x.hi, across)) {
       const at = Math.round(place(x, tick) * w) + 0.5;
       if (grid) {
         ctx.strokeStyle = Ink.of('grid');
@@ -1042,7 +1043,7 @@ function _axes(ctx, w, h, spec) {
     }
   }
   if (y) {
-    for (const tick of _axisTicks(y.lo, y.hi, down)) {
+    for (const tick of y.ticks || _axisTicks(y.lo, y.hi, down)) {
       const at = Math.round(h - place(y, tick) * h) + 0.5;
       if (grid) {
         ctx.strokeStyle = Ink.of('grid');

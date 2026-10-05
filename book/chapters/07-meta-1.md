@@ -121,6 +121,10 @@ what the brains do at all:
 | 13 | Meta II | |
 | 14 | Does size change the dynamics? | the number of tokens |
 
+Since this was written, the order has moved once: at the author's request,
+Chapter 10 asks how a world's size follows its tokens, and the chapters after
+it moved one place on (the book's contents list is kept up to date).
+
 Each of Chapters 9 to 12 is measured against the thirty baseline runs of
 Chapter 3, which it reuses, with thirty seeds of its own and the settled life
 of a run as its measure. Size needs worlds of 100,000 tokens and more, and

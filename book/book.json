@@ -75,18 +75,20 @@
         },
         {
           "id": "10",
+          "title": "How does a world's size follow its tokens?",
+          "experiment": "E08",
+          "file": "chapters/10-how-does-a-world-s-size-follow-its-tokens.md",
+          "status": "ready"
+        },
+        {
+          "id": "11",
           "title": "How fast should brains change?",
           "note": "The mutation probability, against the baseline runs of Chapter 3."
         },
         {
-          "id": "11",
+          "id": "12",
           "title": "What keeps wealth spread?",
           "note": "No coalitions: allow_revolutions off, against the baseline runs of Chapter 3."
-        },
-        {
-          "id": "12",
-          "title": "How big should a brain be?",
-          "note": "The hidden layers, against the baseline runs of Chapter 3."
         },
         {
           "id": "13",
@@ -95,8 +97,13 @@
         },
         {
           "id": "14",
+          "title": "How big should a brain be?",
+          "note": "The hidden layers, against the baseline runs of Chapter 3."
+        },
+        {
+          "id": "15",
           "title": "Does size change the dynamics?",
-          "note": "The number of tokens, from 5,000 to 100,000 and more."
+          "note": "Builds on Chapter 10: the wander, the sweeps and dying out, against the size of a world."
         }
       ]
     },
@@ -104,7 +111,7 @@
       "title": "Part II \u00b7 Towards open-ended evolution",
       "chapters": [
         {
-          "id": "15",
+          "id": "16",
           "title": "Mutation at replication, and nowhere else",
           "note": "The first of the mechanics in research/Research.md \u00a74, once Part I is done."
         }

@@ -17,7 +17,9 @@ provenance.json), and writes two things into the book:
 An experiment's plan says what to look at under "analyse":
 
     "analyse": {
-      "kind": "series",                     or "identity" (Experiment 1)
+      "kind": "series",                     or "identity" (Experiment 1), or
+                                            "scaling" (a world's size against its
+                                            tokens; see analyse_scaling)
       "reference": "baseline",              the condition the others are compared with
       "figures": [{"name": "nodes", "stat": "nodes", "phase": 2,
                    "title": "Agents", "y": "agents", "log": false}],
@@ -752,12 +754,156 @@ def analyse(name: str) -> Dict[str, Any]:
         raise gol_lab.LabError(f"{name}'s runs come from engines that do not make each other's "
                                f"runs again: {engines['checked']}")
     kind = plan["analyse"].get("kind", "series")
-    body = (analyse_identity(name, plan, by_condition) if kind == "identity"
-            else analyse_series(name, plan, by_condition))
+    body = {"identity": analyse_identity, "scaling": analyse_scaling,
+            "series": analyse_series}[kind](name, plan, by_condition)
     results = {"experiment": name, "analysed": time.strftime("%Y-%m-%d"), "kind": kind,
                "engines": engines, **body, "citation": citation}
     _write(os.path.join(BOOK, "results", f"{name}.json"), results)
     return results
+
+
+# ----------------------------------------------------------------------------
+# How a world's size follows its tokens
+# ----------------------------------------------------------------------------
+
+def power_fit(x: np.ndarray, y: np.ndarray, groups: np.ndarray, seed: int = 0) -> Dict[str, Any]:
+    """
+    A straight line through log10(y) against log10(x): the exponent b and the
+    prefactor a of y = a · x^b, with a 95% interval for b from resampling the
+    points within each group (a group is one world size, so every resample
+    keeps every size), how much of the scatter the line explains, and how far
+    the points bend away from it — the coefficient of a squared term in
+    log10(x), with its own interval. A power law is a straight line on these
+    axes; a bend whose interval stays clear of 0 says the points are not one.
+    """
+    keep = (x > 0) & (y > 0)
+    u, v, groups = np.log10(x[keep]), np.log10(y[keep]), groups[keep]
+    sizes = np.unique(groups)
+    if len(sizes) < 3:
+        return {"n": int(keep.sum()), "sizes": len(sizes)}
+    centre = u.mean()
+
+    def fitted(u_, v_):
+        slope, intercept = np.polyfit(u_, v_, 1)
+        bend = np.polyfit(u_ - centre, v_, 2)[0]
+        return slope, intercept, bend
+
+    slope, intercept, bend = fitted(u, v)
+    residual = v - (intercept + slope * u)
+    r2 = 1 - residual.var() / v.var() if v.var() else None
+    rng = np.random.default_rng(seed)
+    members = [np.nonzero(groups == g)[0] for g in sizes]
+    slopes, bends = np.empty(RESAMPLES), np.empty(RESAMPLES)
+    for k in range(RESAMPLES):
+        pick = np.concatenate([rng.choice(m, size=len(m)) for m in members])
+        slopes[k], _, bends[k] = fitted(u[pick], v[pick])
+    return {"n": int(keep.sum()), "sizes": len(sizes),
+            "exponent": float(slope), "interval": [float(np.quantile(slopes, 0.025)),
+                                                   float(np.quantile(slopes, 0.975))],
+            "prefactor": float(10 ** intercept), "r2": float(r2) if r2 is not None else None,
+            "bend": float(bend), "bendInterval": [float(np.quantile(bends, 0.025)),
+                                                  float(np.quantile(bends, 0.975))]}
+
+
+def analyse_scaling(name: str, plan: Dict[str, Any],
+                    by_condition: Dict[str, List[gol_lab.RunSpec]]) -> Dict[str, Any]:
+    """
+    How a world's size follows its token supply. Every run's mean of each
+    statistic over the plan's window of iterations, against the tokens of its
+    world, on logarithmic axes; a power law fitted to them for each condition
+    — over the sizes from `fitFrom` on, and over every size with a world
+    alive — and the exponent between each size and the next, which a power
+    law keeps constant. Each run's mean over an earlier window says whether
+    it had settled. A world that did not live through the window is counted
+    apart, as dying out always is.
+    """
+    spec = plan["analyse"]
+    window, check = spec["window"], spec.get("check")
+    fit_from = spec.get("fitFrom", 0)
+    runs = _Runs(by_condition)
+
+    def tokens(s: gol_lab.RunSpec) -> int:
+        return int(s.lab["world"]["total_tokens"])
+
+    results: Dict[str, Any] = {}
+    figures = []
+    for item in spec["stats"]:
+        stat, phase = item["stat"], item.get("phase", 2)
+        per_condition = {}
+        drawn = []
+        for condition, specs in by_condition.items():
+            points = []
+            for s in sorted(specs, key=lambda s: (tokens(s), s.lab["seed"])):
+                if runs.lived[s.run_id] < window["to"]:
+                    continue
+                its, values = runs.measure(s.run_id, stat, phase)
+                value = window_of(its, values, window)
+                earlier = window_of(its, values, check) if check else None
+                if value is not None:
+                    points.append({"tokens": tokens(s), "seed": s.lab["seed"], "value": value,
+                                   "settling": value / earlier if earlier else None})
+            x = np.array([p["tokens"] for p in points], dtype=float)
+            y = np.array([p["value"] for p in points], dtype=float)
+            by_size = {}
+            for size in sorted(set(int(t) for t in x)):
+                here = y[x == size]
+                settling = [p["settling"] for p in points
+                            if p["tokens"] == size and p["settling"] is not None]
+                by_size[str(size)] = {"n": int(here.size), "mean": float(here.mean()),
+                                      "perToken": float(here.mean() / size),
+                                      "cv": float(here.std(ddof=1) / here.mean())
+                                      if here.size > 1 and here.mean() else None,
+                                      "settling": float(np.median(settling)) if settling else None}
+            ordered = sorted(by_size.items(), key=lambda kv: int(kv[0]))
+            local = [{"from": int(a), "to": int(b),
+                      "exponent": float(np.log10(vb["mean"] / va["mean"]) / np.log10(int(b) / int(a)))}
+                     for (a, va), (b, vb) in zip(ordered, ordered[1:]) if va["mean"] > 0 and vb["mean"] > 0]
+            inside = x >= fit_from
+            fit = power_fit(x[inside], y[inside], x[inside], seed=hash_seed(name, stat, condition))
+            per_condition[condition] = {
+                "points": points, "bySize": by_size, "local": local, "fit": fit,
+                "fitAll": power_fit(x, y, x, seed=hash_seed(name, stat, condition, "all"))}
+            prefix = f"{condition} — " if len(by_condition) > 1 else ""
+            drawn.append({"label": f"{prefix}each run, mean over iterations "
+                                   f"{window['from']}–{window['to']}",
+                          "x": x.tolist(), "y": y.tolist(), "points": True})
+            if fit.get("exponent") is not None:
+                ends = np.array([x[inside].min(), x[inside].max()])
+                drawn.append({"label": f"{prefix}power law, exponent {fit['exponent']:.2f}",
+                              "x": ends.tolist(),
+                              "y": (fit["prefactor"] * ends ** fit["exponent"]).tolist()})
+        results[item.get("name", stat)] = per_condition
+        reference = per_condition.get(spec.get("reference")) or next(iter(per_condition.values()))
+        if reference["points"]:
+            # What exact proportion would look like: a line of exponent 1
+            # through the middle of the reference condition's points.
+            x = np.array([p["tokens"] for p in reference["points"]], dtype=float)
+            y = np.array([p["value"] for p in reference["points"]], dtype=float)
+            keep = y > 0
+            middle = 10 ** np.mean(np.log10(y[keep]) - np.log10(x[keep]))
+            ends = np.array([x.min(), x.max()])
+            drawn.append({"label": "in proportion to the tokens (exponent 1)",
+                          "x": ends.tolist(), "y": (middle * ends).tolist(), "width": 1.0})
+        _write(os.path.join(BOOK, "figures", name, f"{item.get('name', stat)}.json"), {
+            "title": item.get("title"), "caption": item.get("caption"),
+            "x": {"label": "tokens in the world", "log": True},
+            "y": {"label": item.get("y", stat), "log": True}, "series": drawn}, compact=True)
+        figures.append(item.get("name", stat))
+
+    return {"reference": spec.get("reference"), "figures": figures, "window": window,
+            "check": check, "fitFrom": fit_from, "scaling": results,
+            "extinct": {condition: [{"tokens": tokens(s), "seed": s.lab["seed"],
+                                     "at": runs.lived[s.run_id]}
+                                    for s in specs
+                                    if store.load_meta(s.run_id).get("status") == "extinct"]
+                        for condition, specs in by_condition.items()},
+            "reached": {condition: sum(runs.lived[s.run_id] >= window["to"] for s in specs)
+                        for condition, specs in by_condition.items()}}
+
+
+def window_of(its: np.ndarray, values: np.ndarray, stretch: Dict[str, Any]) -> Optional[float]:
+    """A run's mean over a stretch a plan names as {"from": …, "to": …}, both included."""
+    return window(its, values, stretch["from"], stretch["to"])
 
 
 # ----------------------------------------------------------------------------

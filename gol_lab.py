@@ -205,7 +205,7 @@ def experiment_runs(name: str) -> List[RunSpec]:
         return specs
 
     _check_keys(f"{name} runs", runs,
-                ("baseline", "world", "seeds", "iterations", "conditions", "record"))
+                ("baseline", "world", "seeds", "iterations", "conditions", "record", "workers"))
     base_name = runs["baseline"]
     base = baseline(base_name)
     world = dict(runs["world"])
@@ -213,12 +213,13 @@ def experiment_runs(name: str) -> List[RunSpec]:
     record = dict(runs.get("record", {}))
     _check_keys(f"{name} record", record, ("heavy_every", "checkpoint_every"))
     iterations = int(runs["iterations"])
+    workers_cap(name)                                       # refuses one that is not a count
 
     specs: List[RunSpec] = []
     for condition in runs["conditions"]:
         label = condition.get("name")
         _check_keys(f"{name} condition {label!r}", condition,
-                    ("name", "set", "stops", "fault_at", "threads", "replicate"))
+                    ("name", "set", "sizes", "stops", "fault_at", "threads", "replicate"))
         changed = dict(condition.get("set", {}))
         forbidden = sorted(set(changed) & ({"seed"} | set(INFRASTRUCTURE)))
         if forbidden:
@@ -232,20 +233,26 @@ def experiment_runs(name: str) -> List[RunSpec]:
         replicate = (label if condition.get("replicate")
                      or any(k in condition for k in ("stops", "fault_at", "threads")) else None)
 
-        for seed in parse_seeds(runs["seeds"]):
-            config = {**base, **world, **changed, "seed": seed, "export_every": 1,
+        for size, seed in ((size, seed) for size in _sizes(name, label, condition, world)
+                           for seed in parse_seeds(runs["seeds"])):
+            here = {**world, "total_tokens": size}
+            config = {**base, **here, **changed, "seed": seed, "export_every": 1,
                       "export_decisions": True,
                       "checkpoint_every": int(record.get("checkpoint_every", 0))}
-            SimConfig.from_dict(config, stored=False)            # refuses what it cannot run
-            run_id = run_id_for(base_name, world, changed, seed, replicate)
-            differs = "".join(f" · {k}={v}" for k, v in {**world, **changed}.items()
+            try:
+                SimConfig.from_dict(config, stored=False)        # refuses what it cannot run
+            except ValueError as exc:
+                raise LabError(f"{name} condition {label!r} at {size:,} tokens cannot be run: "
+                               f"{exc}") from None
+            run_id = run_id_for(base_name, here, changed, seed, replicate)
+            differs = "".join(f" · {k}={v}" for k, v in {**here, **changed}.items()
                               if k != "total_tokens")
             specs.append(RunSpec(
                 run_id=run_id,
-                name=(f"{base_name} · {int(world['total_tokens']):,} tokens{differs}"
+                name=(f"{base_name} · {size:,} tokens{differs}"
                       f" · seed {seed}" + (f" · {replicate}" if replicate else "")),
                 config=config,
-                lab={"baseline": base_name, "world": world, "set": changed, "seed": seed,
+                lab={"baseline": base_name, "world": here, "set": changed, "seed": seed,
                      "replicate": replicate},
                 record={"heavy_every": int(record.get("heavy_every", HEAVY_EVERY))},
                 targets=sorted(set(int(s) for s in condition.get("stops", [])) | {iterations}),
@@ -254,6 +261,29 @@ def experiment_runs(name: str) -> List[RunSpec]:
                 fault_at=condition.get("fault_at"),
                 experiments=[name]))
     return specs
+
+
+def _sizes(name: str, label: str, condition: Dict[str, Any], world: Dict[str, Any]) -> List[int]:
+    """
+    The token supplies a condition runs at: the plan's world, which may list
+    several, unless the condition names its own.
+    """
+    sizes = condition.get("sizes", world["total_tokens"])
+    sizes = sizes if isinstance(sizes, list) else [sizes]
+    if not sizes or not all(isinstance(t, int) and not isinstance(t, bool) and t > 0
+                            for t in sizes):
+        raise LabError(f"{name} condition {label!r}: a world's tokens are whole numbers above "
+                       f"nothing, not {sizes!r}")
+    return sizes
+
+
+def workers_cap(name: str) -> Optional[int]:
+    """The most of an experiment's runs its plan lets run at once, if it says."""
+    runs = read_plan(name).get("runs")
+    cap = runs.get("workers") if isinstance(runs, dict) else None
+    if cap is not None and (not isinstance(cap, int) or isinstance(cap, bool) or cap < 1):
+        raise LabError(f"{name}: workers is how many of its runs may run at once, not {cap!r}")
+    return cap
 
 
 def _what_it_is(config: Dict[str, Any]) -> Dict[str, Any]:
@@ -699,15 +729,31 @@ def run_state(spec: RunSpec, engine: Optional[str]) -> Dict[str, Any]:
 
 
 def jobs(queue: Iterable[str], engine: Optional[str]) -> List[Job]:
-    """What is waiting to be done for the queued experiments, longest first."""
+    """
+    What is waiting to be done for the queued experiments, longest first, so
+    that the workers finish together. An experiment kept to one worker takes
+    its turns in the same places but starts with its quickest runs: on one
+    worker the order cannot change how long it takes, and the quick runs
+    answer first.
+    """
+    queue = list(queue)
     known = costs()
     found = []
     for spec in wanted(queue).values():
         state = run_state(spec, engine)
         if state.get("job"):
             found.append(state["job"])
-    return sorted(found, key=lambda j: -predict(j.spec.config, j.until - j.progress,
-                                                 known)["seconds"])
+
+    def seconds(job: Job) -> float:
+        return predict(job.spec.config, job.until - job.progress, known)["seconds"]
+
+    ordered = sorted(found, key=lambda j: -seconds(j))
+    for name, cap in _caps(queue).items():
+        if cap == 1:
+            places = [i for i, job in enumerate(ordered) if name in job.spec.experiments]
+            for i, job in zip(places, sorted((ordered[i] for i in places), key=seconds)):
+                ordered[i] = job
+    return ordered
 
 
 # ----------------------------------------------------------------------------
@@ -792,9 +838,12 @@ def run_lab() -> int:
                     _log(f"paused: {held_back}")
                 waiting = startable
                 used = sum(info["peakMB"] for _, _, info in running.values())
+                caps = _caps(control["queue"])
                 for job in waiting:
                     if len(running) >= control["workers"]:
                         break
+                    if _at_cap(job, [j for _, j, _ in running.values()], caps):
+                        continue
                     cost = predict(job.spec.config, job.until - job.progress, known)
                     if running and used + cost["peakMB"] > budget:
                         continue
@@ -833,6 +882,25 @@ def run_lab() -> int:
         lock.__exit__(None, None, None)
         _log("lab stopped")
     return 0
+
+
+def _caps(queue: List[str]) -> Dict[str, int]:
+    """The worker caps the queued experiments' plans set."""
+    caps = {}
+    for name in queue:
+        try:
+            cap = workers_cap(name)
+        except LabError:
+            continue
+        if cap:
+            caps[name] = cap
+    return caps
+
+
+def _at_cap(job: Job, running: List[Job], caps: Dict[str, int]) -> bool:
+    """Whether starting this job would run more of some experiment's runs than its plan allows."""
+    return any(sum(name in other.spec.experiments for other in running) >= caps[name]
+               for name in job.spec.experiments if name in caps)
 
 
 def _set_reason(reason: str) -> None:
@@ -910,9 +978,9 @@ def experiment_status(name: str, control: Dict[str, Any], known: Dict[str, Any],
     stopped (asked for, but no lab is running — after a restart, say),
     finished, blocked or invalid.
     """
-    workers = control["workers"]
     try:
         specs = experiment_runs(name)
+        workers = min(control["workers"], workers_cap(name) or control["workers"])
     except LabError as exc:
         return {"state": "invalid", "reason": str(exc), "runs": []}
     shared = {}
@@ -959,7 +1027,7 @@ def experiment_status(name: str, control: Dict[str, Any], known: Dict[str, Any],
     else:
         overall = "ready"
     return {
-        "state": overall, "runs": runs, "engines": engines,
+        "state": overall, "runs": runs, "engines": engines, "workers": workers,
         "done": done_iterations, "total": total_iterations,
         "secondsLeft": schedule([s for s in left if s], workers),
         "estimate": {"seconds": schedule([w["seconds"] for w in whole], workers),
@@ -1020,7 +1088,8 @@ def main() -> int:
                      else f"{r['iteration']:>6} / {r['until']:<6}")
             print(f"  {r['id']:<32} {r['state']:<8} {where}{shared}")
         e = state["estimate"]
-        print(f"\n{len(state['runs'])} runs. On {control['workers']} workers: about "
+        print(f"\n{len(state['runs'])} runs. On {state['workers']} "
+              f"worker{'s' if state['workers'] != 1 else ''}: about "
               f"{_hours(e['seconds'])} from nothing, {_hours(state['secondsLeft'])} from here; "
               f"{e['diskBytes'] / 2**30:.1f} GB of disk; up to {e['peakMB']:,.0f} MB a run.")
         return 0
