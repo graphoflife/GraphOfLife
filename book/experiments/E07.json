@@ -52,16 +52,23 @@
         "title": "Agents alive",
         "y": "agents",
         "seeds": [
-          1,
-          2
-        ]
+          2,
+          25
+        ],
+        "seedsOf": "brains never change"
       },
       {
         "name": "births",
         "stat": "births",
         "phase": 1,
         "title": "Births per iteration",
-        "y": "births"
+        "y": "births",
+        "seeds": [
+          2,
+          1,
+          25
+        ],
+        "seedsOf": "brains never change"
       },
       {
         "name": "home",

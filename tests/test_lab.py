@@ -618,10 +618,12 @@ def test_a_world_that_died_is_counted_apart():
                          {"name": "doomed", "set": {"extinction_threshold": 10_000}}],
                  seeds="1..3", iterations=6)
     sweep["analyse"] = {"kind": "series", "reference": "baseline", "endpoints": ["nodes"],
+                        "figures": [{"name": "nodes", "stat": "nodes", "seeds": [1],
+                                     "seedsOf": "baseline"}],
                         "settledFrom": 2, "seedsNeeded": True, "lineage": True,
                         "windows": [{"name": "start", "from": 0, "to": 2},
                                     {"name": "lowest", "from": 1, "of": "min"}]}
-    with lab(sweep) as tmp, _book(tmp):
+    with lab(sweep) as tmp, _book(tmp) as book:
         gol_lab.request(run="E91", workers=3)
         with contextlib.redirect_stdout(io.StringIO()):
             assert gol_lab.run_lab() == 0
@@ -630,6 +632,9 @@ def test_a_world_that_died_is_counted_apart():
         assert [x["seed"] for x in results["extinct"]["doomed"]] == [1, 2, 3]
         assert results["endings"]["nodes"]["doomed"]["n"] == 0, "a dead world's dying was averaged in"
         assert results["endingsFrom"] == 2
+        drawn = [series["label"] for series in
+                 _strict(os.path.join(book, "figures", "E91", "nodes.json"))["series"]]
+        assert drawn[2:] == ["baseline, seed 1"], drawn
         ended = results["endings"]["nodes"]["baseline"]
         assert ended["n"] == 3 and sorted(ended["bySeed"]) == [1, 2, 3], ended
         assert set(ended["seedsNeeded"]) == {"5%", "10%", "20%"}

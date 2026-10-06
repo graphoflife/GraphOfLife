@@ -22,7 +22,10 @@ An experiment's plan says what to look at under "analyse":
                                             tokens; see analyse_scaling)
       "reference": "baseline",              the condition the others are compared with
       "figures": [{"name": "nodes", "stat": "nodes", "phase": 2,
-                   "title": "Agents", "y": "agents", "log": false}],
+                   "title": "Agents", "y": "agents", "log": false,
+                   "seeds": [1, 2], "seedsOf": "baseline"}],
+                                            single worlds drawn as lines, of
+                                            one condition or of every one
       "endpoints": ["nodes", "gini"],       compared where the runs ended up
       "settledFrom": 500,                   ... their mean from here to the end,
                                             rather than over their last fifth
@@ -432,6 +435,8 @@ class _Runs:
             drawn.append(band)
         for seed in figure.get("seeds", []):
             for condition, specs in self.by_condition.items():
+                if figure.get("seedsOf", condition) != condition:
+                    continue
                 for s in specs:
                     if s.lab["seed"] == seed:
                         its, values = self.measure(s.run_id, stat, phase)
