@@ -1,0 +1,196 @@
+{
+ "chapter": "cooperation",
+ "numbers": {
+  "related": {
+   "neighbour_same": {
+    "n": 26,
+    "mean": 0.10929418200283458,
+    "median": 0.10616927822920808,
+    "sd": 0.017625949030135982,
+    "min": 0.0674626342830453,
+    "max": 0.15247913598429064,
+    "q25": 0.09785175434580251,
+    "q75": 0.12134105848865451
+   },
+   "random_same": {
+    "n": 26,
+    "mean": 0.0033315384615384617,
+    "median": 0.0027600000000000003,
+    "sd": 0.0017895623874180913,
+    "min": 0.00102,
+    "max": 0.00778,
+    "q25": 0.00219,
+    "q75": 0.004505
+   },
+   "neighbour_close": {
+    "n": 26,
+    "mean": 0.2328602920836888,
+    "median": 0.22960929280238565,
+    "sd": 0.036248785559506655,
+    "min": 0.1510830219523587,
+    "max": 0.32662412043855343,
+    "q25": 0.2078368620919603,
+    "q75": 0.2593423647361432
+   },
+   "random_close": {
+    "n": 26,
+    "mean": 0.009066153846153847,
+    "median": 0.00806,
+    "sd": 0.004319239819156216,
+    "min": 0.00338,
+    "max": 0.01964,
+    "q25": 0.006205,
+    "q75": 0.0119
+   }
+  },
+  "kin_stakes": {
+   "kin": {
+    "n": 26,
+    "mean": 0.20557555031516878,
+    "median": 0.20479658641568502,
+    "sd": 0.015539436942452137,
+    "min": 0.17874736414397002,
+    "max": 0.2509216037362261,
+    "q25": 0.19704645304739427,
+    "q75": 0.21211822173168346
+   },
+   "other": {
+    "n": 26,
+    "mean": 0.20360027691812993,
+    "median": 0.201509178561941,
+    "sd": 0.014043008648267265,
+    "min": 0.18080896025474852,
+    "max": 0.23922708786765734,
+    "q25": 0.19452990053562866,
+    "q75": 0.20836997107030153
+   },
+   "agents": 182109,
+   "share_kin_more": 0.3090951023837372,
+   "kin_revolt": {
+    "n": 26,
+    "mean": 0.9961098280854823,
+    "median": 0.9965303079314154,
+    "sd": 0.001858077827615829,
+    "min": 0.9886064692882874,
+    "max": 0.9982085274095306,
+    "q25": 0.9960865199083471,
+    "q75": 0.9970696606520731
+   },
+   "other_revolt": {
+    "n": 26,
+    "mean": 0.9959524025836365,
+    "median": 0.9963795849715669,
+    "sd": 0.001987812116820071,
+    "min": 0.9876540510433791,
+    "max": 0.9976999482463474,
+    "q25": 0.9957970888831493,
+    "q75": 0.997015545449611
+   }
+  },
+  "succession": {
+   "observed": {
+    "n": 26,
+    "mean": 0.14504698850090264,
+    "median": 0.14227151163959445,
+    "sd": 0.02122202060787933,
+    "min": 0.09896206156048676,
+    "max": 0.1924536040192761,
+    "q25": 0.13287199858032042,
+    "q75": 0.15655407048685427
+   },
+   "expected": {
+    "n": 26,
+    "mean": 0.13862414600190331,
+    "median": 0.13486884395428678,
+    "sd": 0.019555292096256532,
+    "min": 0.09511129983980114,
+    "max": 0.17739127022460122,
+    "q25": 0.12675320835689746,
+    "q75": 0.14982233128300804
+   },
+   "taken": 456477.0
+  },
+  "returned": {
+   "equal": {
+    "n": 26,
+    "mean": 0.7919242055353345,
+    "median": 0.793981621406999,
+    "sd": 0.05600661745734407,
+    "min": 0.6697132284921369,
+    "max": 0.9076727034019384,
+    "q25": 0.7655308484055573,
+    "q75": 0.8343218579250169
+   },
+   "log_corr": {
+    "n": 26,
+    "mean": 0.6394392200842265,
+    "median": 0.6306841438601103,
+    "sd": 0.07016184293159976,
+    "min": 0.5115910757063946,
+    "max": 0.8035650413639832,
+    "q25": 0.5984664981270293,
+    "q75": 0.6699459072682051
+   },
+   "pairs_drawn": 10400,
+   "one_for_one": 0.5783653846153847
+  },
+  "partners": {
+   "lags": [
+    1,
+    2,
+    4,
+    8,
+    16
+   ],
+   "connection": [
+    0.9106291974637002,
+    0.8767828333449464,
+    0.8307279802327264,
+    0.7633059264301526,
+    0.6634042804079948
+   ],
+   "brains": [
+    0.0503615245670549,
+    0.01039684624084129,
+    0.0029506193352664667,
+    0.0012193749296514464,
+    0.0004864099994104121
+   ],
+   "genotypes": [
+    0.06470994956343698,
+    0.04205101543112274,
+    0.011420585192768437,
+    0.0020970568845104544,
+    0.00023047526142862504
+   ],
+   "connections": 746284
+  }
+ },
+ "figures": {
+  "related": {
+   "title": "Are neighbours related?",
+   "caption": "One dot per world that lived to the end. For the pairs of agents joined by a connection (\"neighbours\"), and for pairs of agents drawn at random from the whole world (2,000 per look), the share that carry the same genotype, and the share that are close kin: the same genotype, or one's genotype the parent of the other's, or both with the same parent genotype. At the start of the games of every 100th iteration from 500 on.",
+   "recipe": "**Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` \u2026 `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in Chapter 8). They are made with `python3 gol_lab.py run E02`.\n\n**Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2\u00b7t` is iteration *t* after reproduction and frame `2\u00b7t + 1` after the game.\n\n1. For every 100th iteration t from 500 on, read frame `2\u00b7t`: each agent's genotype (`brain_ids`) and its parent genotype (`parent_brain_ids`).\n2. For every connection of `edges`, test the two relations; also for 2,000 pairs of agents drawn at random (generator seeded with 11).\n3. Divide the counts by the pairs, per run.\n\n**To make it again:** `python3 book_figures.py cooperation`."
+  },
+  "kin-stakes": {
+   "title": "Does an agent treat its own kind differently?",
+   "caption": "Only agents that had at least one neighbour of their own genotype and at least one of another, in the games of every 100th iteration from 500 on; one dot per world that lived to the end. Left: the share of its tokens an agent staked on each neighbour, averaged over the neighbours of its own genotype (green) and over the others (grey), then over the agents. Right: of what it staked on a neighbour, the share it marked revolutionary.",
+   "recipe": "**Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` \u2026 `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in Chapter 8). They are made with `python3 gol_lab.py run E02`.\n\n**Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2\u00b7t` is iteration *t* after reproduction and frame `2\u00b7t + 1` after the game.\n\n1. For every 100th iteration t from 500 on, take the genotypes from frame `2\u00b7t` and the stakes from `decisions.allocations` of frame `2\u00b7t + 1`.\n2. For each agent with neighbours of both kinds: the mean of `alloc` / `tokens` over each kind, and the mean of `revolt` / `alloc` over the neighbours it staked on.\n3. Average over the agents of a run; one dot per run.\n\n**To make it again:** `python3 book_figures.py cooperation`."
+  },
+  "succession": {
+   "title": "When a neighbour takes a node, is it the same kind?",
+   "caption": "Nodes won by a neighbour in the games of every 100th iteration from 500 on; one dot per world that lived to the end. Left: the share in which the winner carried the same genotype as the agent whose node it took \u2014 a takeover that changes nothing in the brain. Right: the same share if the winner had been drawn at random from the neighbours that staked on the node.",
+   "recipe": "**Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` \u2026 `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in Chapter 8). They are made with `python3 gol_lab.py run E02`.\n\n**Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2\u00b7t` is iteration *t* after reproduction and frame `2\u00b7t + 1` after the game.\n\n1. For every 100th iteration t from 500 on, read the genotypes in frame `2\u00b7t` and `decisions.winners` and `decisions.allocations` in frame `2\u00b7t + 1`.\n2. For each node whose `winner` is not the node: is the winner's genotype the node's? And: of the agents other than the node that staked on it, the share with the node's genotype.\n3. Per run: the first count, and the sum of the second, over the nodes taken.\n\n**To make it again:** `python3 book_figures.py cooperation`."
+  },
+  "returned": {
+   "title": "What comes back for what is given",
+   "caption": "Pairs of neighbours that both staked on each other in a game: how many tokens each staked on the other (10,400 pairs, up to 400 drawn at random per world that lived to the end, from the games of every 100th iteration from 500 on). A cell's colour is how many pairs fall in it; the diagonal is an even exchange. In the median world 79% of the pairs staked exactly the same on each other.",
+   "recipe": "**Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` \u2026 `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in Chapter 8). They are made with `python3 gol_lab.py run E02`.\n\n**Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2\u00b7t` is iteration *t* after reproduction and frame `2\u00b7t + 1` after the game.\n\n1. From `decisions.allocations` of frame `2\u00b7t + 1`, for every 100th iteration t from 500 on, collect every pair (A, B) with a stake of A on B and of B on A.\n2. Draw up to 400 pairs per run (generator seeded with 11) and count them in cells.\n\n**To make it again:** `python3 book_figures.py cooperation`."
+  },
+  "partners": {
+   "title": "How long partners last",
+   "caption": "Of the connections at the start of a game, the share still there k games later (blue); still there with neither of its two nodes won by a neighbour in any of the k games in between, so that the same two brains face each other, changed at most by the small changes offered after every game (green); and still there with exactly the same two genotypes (yellow). Pooled over the 746,284 connections at the start of the games of every 200th iteration from 500 on, in the 26 worlds that lived to the end. Both axes are logarithmic.",
+   "recipe": "**Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` \u2026 `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in Chapter 8). They are made with `python3 gol_lab.py run E02`.\n\n**Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2\u00b7t` is iteration *t* after reproduction and frame `2\u00b7t + 1` after the game.\n\n1. For every 200th iteration t from 500 on, take the connections of frame `2\u00b7t` and the genotypes of their ends.\n2. For k = 1, 2, 4, 8, 16: read frame `2\u00b7(t + k)` \u2014 is the connection still in `edges`, and are the ends' genotypes the same? \u2014 and the `decisions.winners` of every game frame `2\u00b7(t + j) + 1`, j < k: was either end won by a neighbour?\n3. Pool the counts over the runs and divide by the connections.\n\n**To make it again:** `python3 book_figures.py cooperation`."
+  }
+ }
+}

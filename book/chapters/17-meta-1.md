@@ -80,7 +80,7 @@ sweep replaces the brains of a whole world, and with them how it plays.
 > [!question] An open question
 > Is the wander the sweeps? Two tests would tell: whether a world's level
 > moves faster around a sweep than between sweeps, and whether a world whose
-> brains never change still wanders. [Chapter 18](18-do-the-brains-matter.md)
+> brains never change still wanders. [Chapter 30](30-do-the-brains-matter.md)
 > did the second: a world without change hardly wanders at all.
 
 ### A world of attack
@@ -127,13 +127,19 @@ accumulates.
 
 ## What came next
 
+Part III then measured the same thirty worlds through every statistic the
+viewer offers — entropy, gains and losses, the flow of tokens, children, power
+laws, scaling, geometry, how worlds break, pictures, cooperation — and closed
+with a chapter questioning the rules themselves and a second meta chapter,
+[Meta II](29-meta-2.md), on what all of it means for open-ended evolution.
+
 Every number of Part II is a number about the baseline, with nothing to hold
 it against. The rules of this book ask for a null beside every number, and
 the most important one was missing: a world in which the brains make no
-difference. So the control came first in Part III:
-[Chapter 18](18-do-the-brains-matter.md) runs worlds whose brains never
+difference. So the control came first in Part IV:
+[Chapter 30](30-do-the-brains-matter.md) runs worlds whose brains never
 change, and worlds in which every decision is drawn at random.
-[Chapter 19](19-how-does-a-worlds-size-follow-its-tokens.md) then asks, at
+[Chapter 31](31-how-does-a-worlds-size-follow-its-tokens.md) then asks, at
 the author's request, how a world's size follows its tokens. The chapters
 planned after them — the rate of mutation, coalitions switched off, the size
 of a brain — are listed in [the contents](../README.md).
@@ -141,5 +147,5 @@ of a brain — are listed in [the contents](../README.md).
 <!-- turns -->
 ---
 
-← [Chapter 16 · Genotypes and lineages](16-genotypes-and-lineages.md) · [Contents](../README.md) · [Chapter 18 · Do the brains matter?](18-do-the-brains-matter.md) →
+← [Chapter 16 · Genotypes and lineages](16-genotypes-and-lineages.md) · [Contents](../README.md) · [Chapter 18 · How even is a world?](18-how-even-is-a-world.md) →
 <!-- /turns -->

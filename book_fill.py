@@ -82,7 +82,7 @@ def figure(md: str, name: str) -> str:
     if made is None:
         raise KeyError(f"no figure {name}: run `python3 book_figures.py {chapter}`")
     return (f"![{made['title']}]({link(md, f'figures/{chapter}/{fig}.svg')})\n\n"
-            f"**{made['title']}.** {linked(md, made['caption'])}\n\n"
+            f"**{made['title']}{'' if made['title'][-1:] in '.?!' else '.'}** {linked(md, made['caption'])}\n\n"
             + quote(linked(md, made["recipe"]), "[!example]- How to make this figure"))
 
 

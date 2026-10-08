@@ -3,7 +3,7 @@
 Part II looks at one kind of world, the baseline B1, from every side. It does
 so with thirty worlds that differ only in their seed. This chapter introduces
 them: every chapter up to [Chapter 17](17-meta-1.md) reads these same thirty
-runs, and [Chapter 18](18-do-the-brains-matter.md) compares them with worlds
+runs, and [Chapter 30](30-do-the-brains-matter.md) compares them with worlds
 made under other rules.
 
 ## The runs

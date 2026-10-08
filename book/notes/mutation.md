@@ -64,7 +64,7 @@ A brain that changed gets a **new genotype number**, and records the
 genotype it came from as its parent ([Genotypes and the family tree](genotype.md)).
 A brain that was offered a change and did not change keeps its number.
 
-One special case matters in [Chapter 18](../chapters/18-do-the-brains-matter.md):
+One special case matters in [Chapter 30](../chapters/30-do-the-brains-matter.md):
 with *s* = 0, step 1 and step 2 change nothing — but a brain drawn to change
 (with probability *p*) still gets a new genotype number. Its weights are
 those of its parent exactly.

@@ -1275,6 +1275,15 @@ function test_markdown_reads_obsidian() {
   assert(html.includes('<a href="https://x.org" target="_blank" rel="noopener">x</a>'), html);
 }
 
+function test_markdown_table_cells_hold_escaped_pipes() {
+  // GitHub and Obsidian read \| in a table as a pipe inside a cell, which is
+  // how a cell holds |x|; it is neither a cell's edge nor shown with its slash.
+  const html = Markdown.render('| a | b |\n|---|---|\n| \\|Δ\\| | `x|y` |\n');
+  assert(html.includes('<td>|Δ|</td>'), html);
+  assert(html.includes('<td><code>x|y</code></td>'), 'a pipe in code split its cell');
+  assert(!html.includes('\\|'), 'the escaping slash was shown');
+}
+
 function test_book_inlines_only_plain_drawings() {
   // A figure is set into the page, so that it takes the page's font — which
   // also lets it run anything it carries. Only a drawing is let in.
@@ -1442,6 +1451,7 @@ const tests = Object.entries({
   test_markdown_headings_get_ids,
   test_markdown_hands_comments_to_the_caller,
   test_markdown_reads_obsidian,
+  test_markdown_table_cells_hold_escaped_pipes,
   test_book_resolves_paths_as_obsidian_does,
   test_book_inlines_only_plain_drawings,
   test_no_canvas_writes_a_font_out,

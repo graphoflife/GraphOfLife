@@ -90,7 +90,7 @@ typical world is the median one.)
 
 The rates are steady from about iteration 500 on, after falling from the
 youth, and they differ little between worlds: the middle half of the worlds
-have between 2.7 and 3.3 births per hundred agents. [Chapter 18](18-do-the-brains-matter.md) shows how
+have between 2.7 and 3.3 births per hundred agents. [Chapter 30](30-do-the-brains-matter.md) shows how
 remarkable that is.
 
 ## How long agents live

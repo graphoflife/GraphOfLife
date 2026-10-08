@@ -36,9 +36,11 @@ the number of connections, `bridges/edges`: the share of all connections
 that are bridges. In a settled baseline world about 31% of connections are
 bridges ([Chapter 15](../chapters/15-what-shape-does-the-network-take.md)).
 
-The program also knows, for every bridge, how many agents lie behind it
-(`cutRisk` is the largest share of the world a single cut can sever), which
-the book does not use yet.
+A count of bridges does not say how much hangs on each. The program also
+works out, for every bridge, how many agents lie behind it; `cutRisk` is the
+largest share of the world a single cut can sever ([Cut risk](cut-risk.md)).
+[Chapter 25](../chapters/25-how-a-world-breaks.md) asks whether that risk
+foretells how many agents a game cuts off.
 
 <!-- turns -->
 [Contents](../README.md)

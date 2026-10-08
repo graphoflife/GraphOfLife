@@ -18,7 +18,7 @@ recovers in the game is not extinct.
 
 A world of a handful of agents is not a population any more, and its
 statistics — inequality, clustering, families — mean little. Stopping at 20
-also saves running a dying world to its end. [Chapter 19](../chapters/19-how-does-a-worlds-size-follow-its-tokens.md)
+also saves running a dying world to its end. [Chapter 31](../chapters/31-how-does-a-worlds-size-follow-its-tokens.md)
 runs small worlds with the threshold at 0 to see what happens below it.
 
 ## An empty world

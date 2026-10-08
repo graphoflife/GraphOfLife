@@ -114,7 +114,7 @@ When the question is not *when* but *where*, the book draws a **dot plot**:
 one dot per world, at its mean over a stretch, with a short bar at the
 median. The dots are spread sideways at random only so that they do not hide
 each other; their sideways position means nothing. [Chapter 12](12-how-much-does-the-seed-decide.md)
-and [Chapter 18](18-do-the-brains-matter.md) are full of them.
+and [Chapter 30](30-do-the-brains-matter.md) are full of them.
 
 ## Step 4 · How different are worlds?
 

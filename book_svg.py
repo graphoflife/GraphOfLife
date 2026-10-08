@@ -24,9 +24,17 @@ and a series is one of
     bars            {kind: "bars", x0, x1, y}: one bar from x0 to x1 each,
                     rising from 0 — or from y0, for bars stacked on others
     an area         {kind: "area", x, lo, hi}: filled between lo and hi
+    cells           {kind: "cells", x0, x1, y0, y1, value}: rectangles coloured
+                    by value on the chart's colour bar — a two-dimensional
+                    histogram, say
 
-A picture of a network is {kind: "network", title, nodes: {x, y, group},
-edges: [[i, j], …], colour: {labels: […]}}.
+and a chart with cells (or a network coloured by value) carries a colour bar,
+{map, min, max, label, log}, drawn under it.
+
+A picture of a network is {kind: "network", title, nodes: {x, y, group or
+value}, edges: [[i, j], …], colour: {labels: […]} or {by: "value", map, min,
+max, log, label}}; `edgeGroup` (one number per edge) and `edgeLabels` draw
+groups of edges in colours of their own over the faint rest.
 
 The colours are the page's own (web/js/ink.js, web/css/style.css), on the
 page's dark card, so a figure looks the same inside the app and outside it.
@@ -50,6 +58,38 @@ FONT = "'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu
 
 WIDTH = 780              # of a whole figure, in pixels
 LEGEND_ROW = 16
+
+
+#: Colour maps, as a few colours to interpolate between. "viridis" runs from
+#: dark to light, so a value reads as brightness; "signed" runs from blue
+#: through the card's own dark grey to red, so that zero recedes and the two
+#: signs stand out against it.
+MAPS = {
+    "viridis": ("#440154", "#46327e", "#365c8d", "#277f8e", "#1fa187", "#4ac16d", "#a0da39", "#fde725"),
+    "signed": ("#5ac8fa", "#3a6f8f", "#2a3442", "#8f4a4a", "#ff6b6b"),
+}
+
+
+def cmap(name: str, t: float) -> str:
+    """The colour at t (0 to 1) of a colour map."""
+    stops = MAPS[name]
+    t = min(1.0, max(0.0, t)) * (len(stops) - 1)
+    i = min(int(t), len(stops) - 2)
+    a, b = stops[i], stops[i + 1]
+    mix = [round(int(a[k:k + 2], 16) + (t - i) * (int(b[k:k + 2], 16) - int(a[k:k + 2], 16)))
+           for k in (1, 3, 5)]
+    return "#" + "".join(f"{v:02x}" for v in mix)
+
+
+def scaled(value: float, bar: Dict[str, Any]) -> float:
+    """Where a value falls on a colour bar, from 0 to 1."""
+    lo, hi = bar["min"], bar["max"]
+    if bar.get("log"):
+        value, lo, hi = (math.log10(max(v, 1e-12)) for v in (value, lo, hi))
+    if bar.get("map") == "signed" and bar.get("symlog"):
+        f = lambda v: math.copysign(math.log10(1 + abs(v)), v)
+        value, lo, hi = f(value), f(lo), f(hi)
+    return (value - lo) / ((hi - lo) or 1)
 
 
 def esc(text: Any) -> str:
@@ -171,8 +211,11 @@ def legend_entries(fig: Dict[str, Any]) -> List[Tuple[str, str, str]]:
     if fig.get("legend") is False:
         return []
     if fig.get("kind") == "network":
-        return [(label, PALETTE[i % len(PALETTE)], "dot")
-                for i, label in enumerate((fig.get("colour") or {}).get("labels") or [])]
+        nodes = [(label, PALETTE[i % len(PALETTE)], "dot")
+                 for i, label in enumerate((fig.get("colour") or {}).get("labels") or [])]
+        edges = [(label, PALETTE[(i + 1) % len(PALETTE)], "line")
+                 for i, label in enumerate(fig.get("edgeLabels") or [])]
+        return nodes + edges
     out = []
     for i, s in enumerate(fig.get("series") or []):
         if not s.get("label"):
@@ -194,6 +237,12 @@ def legend_rows(fig: Dict[str, Any], width: float) -> List[List[Tuple[str, str, 
         rows[-1].append(entry)
         used += need
     return rows
+
+
+def bar_rows(fig: Dict[str, Any]) -> int:
+    """The legend rows a colour bar takes: its strip and its labels."""
+    bar = fig.get("colourbar") or ((fig.get("colour") or {}) if (fig.get("colour") or {}).get("by") == "value" else None)
+    return 3 if bar else 0
 
 
 def wrap(text: str, room: float, size: float) -> List[str]:
@@ -220,7 +269,7 @@ class Chart:
         bottom = 12 if fig.get("kind") == "network" else 54 if fig["x"].get("label") else 36
         if fig.get("kind") != "network" and fig["x"].get("categories"):
             bottom += 12
-        return top + plot + bottom + LEGEND_ROW * len(legend_rows(fig, w - 70))
+        return top + plot + bottom + LEGEND_ROW * (len(legend_rows(fig, w - 70)) + bar_rows(fig))
 
     def svg(self) -> List[str]:
         if self.fig.get("kind") == "network":
@@ -254,6 +303,28 @@ class Chart:
                            f'{esc(label)}</text>')
                 lx += 26 + width_of(label, 11.5) + 14
 
+    def colourbar(self, out: List[str], left: float, bar: Dict[str, Any]) -> None:
+        """The strip that says what a colour means, under the chart: its name, the strip, its ends."""
+        x, y, w, h = self.box
+        top = y + h - 8 - LEGEND_ROW * (len(legend_rows(self.fig, w - 70)) + 3) + 4
+        width = min(280.0, w - 60)
+        label = bar.get("label", "")
+        if label:
+            out.append(f'<text x="{f1(left)}" y="{f1(top + 9)}" fill="{DIM}" font-size="11">'
+                       f'{esc(label)}{" (logarithmic)" if bar.get("log") else ""}</text>')
+        top += 15
+        steps = 48
+        for k in range(steps):
+            out.append(f'<rect x="{f1(left + width * k / steps)}" y="{f1(top)}" width="{f1(width / steps + 0.6)}" '
+                       f'height="9" fill="{cmap(bar.get("map", "viridis"), k / (steps - 1))}"/>')
+        fmt = lambda v: f"{v:,.0f}" if abs(v) >= 10 or float(v).is_integer() else f"{v:.2g}"
+        out.append(f'<text x="{f1(left)}" y="{f1(top + 22)}" fill="{LABEL}" font-size="11">{esc(fmt(bar["min"]))}</text>')
+        out.append(f'<text x="{f1(left + width)}" y="{f1(top + 22)}" fill="{LABEL}" font-size="11" '
+                   f'text-anchor="end">{esc(fmt(bar["max"]))}</text>')
+        if bar.get("map") == "signed":
+            out.append(f'<text x="{f1(left + width / 2)}" y="{f1(top + 22)}" fill="{LABEL}" font-size="11" '
+                       'text-anchor="middle">0</text>')
+
     # -- a chart of lines, bands, points and bars --------------------------------
 
     def chart(self) -> List[str]:
@@ -269,13 +340,17 @@ class Chart:
                 if not fig["y"].get("log"):
                     ys.append(0)
                 continue
+            if s.get("kind") == "cells":
+                xs += list(s["x0"]) + list(s["x1"])
+                ys += list(s["y0"]) + list(s["y1"])
+                continue
             xs += [v for v in s.get("x") or [] if v is not None]
             for key in ("y", "lo", "hi", "outerLo", "outerHi"):
                 ys += [v for v in s.get(key) or [] if v is not None]
 
         rows = legend_rows(fig, bw - 70)
         top = by + (30 if fig.get("title") else 12)
-        bottom = by + bh - LEGEND_ROW * len(rows) - (54 if fig["x"].get("label") else 36) \
+        bottom = by + bh - LEGEND_ROW * (len(rows) + bar_rows(fig)) - (54 if fig["x"].get("label") else 36) \
             - (12 if fig["x"].get("categories") else 0)
         yaxis = Axis(fig["y"], ys, max(3.0, (bottom - top) / 48), pad=True)
         ylabels = [yaxis.label(t) for t in yaxis.ticks]
@@ -327,8 +402,10 @@ class Chart:
                        f'text-anchor="middle">{esc(fig["x"]["label"])}</text>')
         if fig["y"].get("label"):
             cy = top + h / 2
+            # A long name on a short axis is set smaller, so that it stays beside its axis.
+            size = min(11.5, max(8.0, 11.5 * h / max(1.0, width_of(fig["y"]["label"], 11.5))))
             out.append(f'<text transform="translate({f1(bx + 14)} {f1(cy)}) rotate(-90)" fill="{DIM}" '
-                       f'font-size="11.5" text-anchor="middle">{esc(fig["y"]["label"])}</text>')
+                       f'font-size="{size:.1f}" text-anchor="middle">{esc(fig["y"]["label"])}</text>')
 
         clip = f"{self.uid}-clip"
         out.append(f'<clipPath id="{clip}"><rect x="{f1(left)}" y="{f1(top - 1)}" width="{f1(w)}" '
@@ -355,7 +432,15 @@ class Chart:
 
         for i, s in enumerate(series):
             c = colour(s, i)
-            if s.get("kind") == "area":
+            if s.get("kind") == "cells":
+                bar = fig["colourbar"]
+                for a, b, lo_, hi_, v in zip(s["x0"], s["x1"], s["y0"], s["y1"], s["value"]):
+                    A, B, C, D = px(a), px(b), py(lo_), py(hi_)
+                    if None in (A, B, C, D) or v is None:
+                        continue
+                    out.append(f'<rect x="{f1(min(A, B))}" y="{f1(min(C, D))}" width="{f1(abs(B - A) + 0.4)}" '
+                               f'height="{f1(abs(D - C) + 0.4)}" fill="{cmap(bar.get("map", "viridis"), scaled(v, bar))}"/>')
+            elif s.get("kind") == "area":
                 band(s, "lo", "hi", s.get("alpha", 0.85), c)
             elif s.get("kind") == "bars":
                 floor = bottom if fig["y"].get("log") else py(0)
@@ -372,7 +457,7 @@ class Chart:
                 band(s, "outerLo", "outerHi", 0.10, c)
                 band(s, "lo", "hi", 0.22, c)
         for i, s in enumerate(series):
-            if s.get("kind") in ("area", "bars") or not s.get("y"):
+            if s.get("kind") in ("area", "bars", "cells") or not s.get("y"):
                 continue
             c = colour(s, i)
             if s.get("points"):
@@ -417,6 +502,8 @@ class Chart:
                     out.append(f'<text x="{f1(at + 5)}" y="{f1(top + 12)}" fill="{LABEL}" '
                                f'font-size="11">{esc(g["label"])}</text>')
         self.legend(out, left, bw - 70)
+        if fig.get("colourbar"):
+            self.colourbar(out, left, fig["colourbar"])
         return out
 
     # -- a picture of a network --------------------------------------------------
@@ -426,7 +513,7 @@ class Chart:
         bx, by, bw, bh = self.box
         rows = legend_rows(fig, bw - 70)
         top = by + (30 if fig.get("title") else 12)
-        bottom = by + bh - 12 - LEGEND_ROW * len(rows)
+        bottom = by + bh - 12 - LEGEND_ROW * (len(rows) + bar_rows(fig))
         left, right = bx + 14, bx + bw - 14
         w, h = right - left, bottom - top
         xs, ys = fig["nodes"]["x"], fig["nodes"]["y"]
@@ -438,16 +525,33 @@ class Chart:
         Y = [oy + (v - y0) * scale for v in ys]
         out: List[str] = []
         self.title(out)
-        path = "".join(f"M{f1(X[a])} {f1(Y[a])}L{f1(X[b])} {f1(Y[b])}" for a, b in fig["edges"])
-        out.append(f'<path d="{path}" fill="none" stroke="{LABEL}" stroke-opacity="{fig.get("edgeAlpha", 0.35)}" '
-                   'stroke-width="0.6"/>')
-        groups = fig["nodes"].get("group") or [0] * len(xs)
+        edge_group = fig.get("edgeGroup") or [0] * len(fig["edges"])
+        for g in sorted(set(edge_group)):
+            path = "".join(f"M{f1(X[a])} {f1(Y[a])}L{f1(X[b])} {f1(Y[b])}"
+                           for (a, b), k in zip(fig["edges"], edge_group) if k == g)
+            if g == 0:
+                out.append(f'<path d="{path}" fill="none" stroke="{LABEL}" '
+                           f'stroke-opacity="{fig.get("edgeAlpha", 0.35)}" stroke-width="0.6"/>')
+            else:
+                out.append(f'<path d="{path}" fill="none" stroke="{PALETTE[g % len(PALETTE)]}" '
+                           f'stroke-opacity="0.9" stroke-width="{0.6 + 0.5 * g}"/>')
         r = fig.get("nodeSize", 2.4)
-        for g in sorted(set(groups)):
-            dots = "".join(f'<circle cx="{f1(X[i])}" cy="{f1(Y[i])}" r="{r}"/>'
-                           for i in range(len(xs)) if groups[i] == g)
-            out.append(f'<g fill="{PALETTE[g % len(PALETTE)]}">{dots}</g>')
+        c = fig.get("colour") or {}
+        if c.get("by") == "value":
+            values = fig["nodes"]["value"]
+            # The extreme values are drawn last, on top, where they can be seen.
+            order = sorted(range(len(xs)), key=lambda i: abs(scaled(values[i], c) - (0.5 if c.get("map") == "signed" else 0)))
+            out.append("".join(f'<circle cx="{f1(X[i])}" cy="{f1(Y[i])}" r="{r}" '
+                               f'fill="{cmap(c.get("map", "viridis"), scaled(values[i], c))}"/>' for i in order))
+        else:
+            groups = fig["nodes"].get("group") or [0] * len(xs)
+            for g in sorted(set(groups)):
+                dots = "".join(f'<circle cx="{f1(X[i])}" cy="{f1(Y[i])}" r="{r}"/>'
+                               for i in range(len(xs)) if groups[i] == g)
+                out.append(f'<g fill="{PALETTE[g % len(PALETTE)]}">{dots}</g>')
         self.legend(out, left, bw - 70)
+        if c.get("by") == "value":
+            self.colourbar(out, left, c)
         return out
 
 

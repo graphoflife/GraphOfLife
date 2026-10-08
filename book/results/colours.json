@@ -1,0 +1,40 @@
+{
+ "chapter": "colours",
+ "numbers": {
+  "six_views": {
+   "agents": 1336,
+   "families": {
+    "7": 296,
+    "1": 167,
+    "5": 96,
+    "0": 339,
+    "6": 77,
+    "2": 135,
+    "3": 123,
+    "4": 103
+   },
+   "max_tokens": 618.0,
+   "max_age": 700.0
+  },
+  "flows": {
+   "classes": {
+    "2": 292,
+    "1": 2145,
+    "4": 6,
+    "3": 4
+   }
+  }
+ },
+ "figures": {
+  "six-views": {
+   "title": "The world of seed 1 after its last game, six ways",
+   "caption": "Every agent alive after the game of iteration 2,999 of the world with seed 1 is a dot, every connection a faint line, and the dots sit in the same places in all six pictures (a ForceAtlas2 layout, seed 1, which pulls joined agents together). Each picture colours the dots by one of the quantities the viewer offers ([What the viewer can colour by](../notes/viewer-colours.md)): tokens and age on logarithmic scales; the change of tokens in the last game and the token curvature at its start on a signed scale, blue below zero, red above, dark at zero (both stretched logarithmically, the curvature cut at its 1st and 99th percentile); the family \u2014 which of the genotypes alive 100 iterations earlier each agent's genotype descends from, the seven largest in colour; and how many loops of a breadth-first cycle basis pass through each agent.",
+   "recipe": "**Runs.** `B1-10000-s001`.\n\n**Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2\u00b7t` is iteration *t* after reproduction and frame `2\u00b7t + 1` after the game.\n\n1. Read frames `5998` (start of the last game) and `5999` (after it): `ids`, `tokens`, `ages`, `delta`, `brain_ids`, `edges`.\n2. Curvature: in frame 5998, \u03a3 over neighbours of (their tokens \u2212 own tokens).\n3. Families: read frames 5799 to 5999, note each genotype's parent, and climb from each living genotype to one alive after the game of iteration 2,899.\n4. Loops: as in [Chapter 24](24-the-geometry-of-a-world.md).\n5. Lay out with `networkx.forceatlas2_layout(G, max_iter=200, seed=1)` and colour.\n\n**To make it again:** `python3 book_figures.py colours`."
+  },
+  "flows": {
+   "title": "Where the tokens went in the last game",
+   "caption": "The same world and layout; every connection is coloured by how many tokens crossed it in the last game, in both directions together, and drawn the wider the more crossed. Every connection that is left carried at least one token \u2014 the others were cut at the end of the game. Agents are small dots.",
+   "recipe": "**Runs.** `B1-10000-s001`.\n\n**Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2\u00b7t` is iteration *t* after reproduction and frame `2\u00b7t + 1` after the game.\n\n1. In frame `5999`, read `decisions.allocations`: for every agent and target \u2260 itself, add the `alloc` to the connection between them.\n2. Colour each connection of `edges` by its class.\n\n**To make it again:** `python3 book_figures.py colours`."
+  }
+ }
+}

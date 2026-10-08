@@ -10,4 +10,4 @@ Each function reads the runs, draws its figures with their captions and
 recipes, and records the numbers its chapter quotes. The captions say what
 is drawn; the recipes say how to draw it again from the runs by hand.
 """
-from book_chapters import brains, life, part1, society  # noqa: F401  (registers the chapters)
+from book_chapters import brains, cooperation, life, measures, part1, society, structure  # noqa: F401  (registers the chapters)

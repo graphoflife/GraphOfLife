@@ -1,0 +1,76 @@
+{
+ "chapter": "mechanics",
+ "numbers": {
+  "where_brains_go": {
+   "births": {
+    "n": 26,
+    "mean": 39.845,
+    "median": 39.295,
+    "sd": 6.774861326994081,
+    "min": 25.59,
+    "max": 55.37,
+    "q25": 35.5425,
+    "q75": 44.355000000000004
+   },
+   "takeovers": {
+    "n": 26,
+    "mean": 699.6338461538461,
+    "median": 721.9549999999999,
+    "sd": 117.96637619514885,
+    "min": 464.25,
+    "max": 864.8,
+    "q25": 647.1025,
+    "q75": 788.255
+   },
+   "new_repro": {
+    "n": 26,
+    "mean": 7.345384615384617,
+    "median": 7.3149999999999995,
+    "sd": 1.2603086313097462,
+    "min": 4.95,
+    "max": 10.0,
+    "q25": 6.555,
+    "q75": 8.075
+   },
+   "new_game": {
+    "n": 26,
+    "mean": 253.35269230769228,
+    "median": 263.45500000000004,
+    "sd": 43.07313144480603,
+    "min": 163.25,
+    "max": 323.9,
+    "q25": 236.1425,
+    "q75": 283.6075
+   },
+   "share_new_in_game": {
+    "n": 26,
+    "mean": 0.9714030855539717,
+    "median": 0.9733078442488245,
+    "sd": 0.005107807374692966,
+    "min": 0.9582057389134626,
+    "max": 0.9769605671245015,
+    "q25": 0.9696369053654685,
+    "q75": 0.9746079247864287
+   }
+  },
+  "child_shares": {
+   "first_exactly_half": 0.3315484158857653,
+   "first_exactly_all": 0.32663989290495316,
+   "first_births": 2241,
+   "later_exactly_half": 0.29736237277005584,
+   "later_exactly_all": 0.04501842326073474
+  }
+ },
+ "figures": {
+  "where-brains-go": {
+   "title": "How brains spread, and where new ones come from",
+   "caption": "One dot per world that lived to the end: means over the iterations sampled every 25 from 500 on. From the left: children born in a reproduction phase; nodes won in a game by a neighbour, each of which takes on a copy of the winner's brain; genotypes that appear for the first time in the frame after a reproduction phase (a newborn's brain that changed); and genotypes that appear for the first time after a game (every brain is offered a change at its end). On a logarithmic axis.",
+   "recipe": "**Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` \u2026 `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in Chapter 8). They are made with `python3 gol_lab.py run E02`.\n\n**Data.** From each run's frames, read every 25 iterations by `book_figures.sample_pass` (frame `2\u00b7t` after the reproduction phase of iteration *t*, frame `2\u00b7t + 1` after its game; `gol_store.read_frame(run, index)`).\n\n1. For every 25th iteration t from 500 on: births = the length of `decisions.births` in frame `2\u00b7t`; takeovers = the entries of `decisions.winners` in frame `2\u00b7t + 1` with `winner` \u2260 `node`.\n2. New genotypes: the `brain_ids` of frame `2\u00b7t` not in frame `2\u00b7t \u2212 1`, and those of frame `2\u00b7t + 1` not in frame `2\u00b7t`.\n3. Average per run.\n\n**To make it again:** `python3 book_figures.py mechanics`."
+  },
+  "child-shares": {
+   "title": "Where the share function jumps",
+   "caption": "The share of its tokens a parent gave its child, in 50 classes of width 0.02. Left: the 2,241 founders that had a child in the first reproduction phase of the 30 worlds, each holding 100 tokens, so the share is exact to a hundredth. Right: the births in the reproduction phases of every 100th iteration from 500 on, in the 26 worlds that lived to the end \u2014 parents with few tokens, whose shares can only be simple fractions.",
+   "recipe": "**Runs.** The 30 baseline runs (left) and the 26 that lived to the end (right).\n\n**Data.** From each run's frames, read every 25 iterations by `book_figures.sample_pass` (frame `2\u00b7t` after the reproduction phase of iteration *t*, frame `2\u00b7t + 1` after its game; `gol_store.read_frame(run, index)`).\n\n1. Read `decisions.births` of frame 0 (left) and of frame `2\u00b7t` for every 100th iteration t from 500 on (right): `invested` / `tokens_before` for every birth.\n2. Count in classes of 0.02 and divide by the births.\n\n**To make it again:** `python3 book_figures.py mechanics`."
+  }
+ }
+}

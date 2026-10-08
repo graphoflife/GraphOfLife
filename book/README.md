@@ -51,19 +51,39 @@ everything can be checked with it.
 - [Chapter 16 · Genotypes and lineages](chapters/16-genotypes-and-lineages.md)
 - [Chapter 17 · Meta I · What the baseline world is](chapters/17-meta-1.md)
 
-**Part III · One change at a time**
+**Part III · The baseline world, measured every way**
 
-- [Chapter 18 · Do the brains matter?](chapters/18-do-the-brains-matter.md)
-- [Chapter 19 · How does a world's size follow its tokens?](chapters/19-how-does-a-worlds-size-follow-its-tokens.md)
-- Chapter 20 · How fast should brains change? — *not written yet*
-- Chapter 21 · What keeps wealth spread? — *not written yet*
-- Chapter 22 · Meta II — *not written yet*
-- Chapter 23 · How big should a brain be? — *not written yet*
-- Chapter 24 · Does size change the dynamics? — *not written yet*
+- [Chapter 18 · How even is a world?](chapters/18-how-even-is-a-world.md)
+- [Chapter 19 · Gains and losses](chapters/19-gains-and-losses.md)
+- [Chapter 20 · Where the tokens flow](chapters/20-where-the-tokens-flow.md)
+- [Chapter 21 · How agents have children](chapters/21-how-agents-have-children.md)
+- [Chapter 22 · Power laws, real and apparent](chapters/22-power-laws-real-and-apparent.md)
+- [Chapter 23 · How properties scale together](chapters/23-how-properties-scale-together.md)
+- [Chapter 24 · The geometry of a world](chapters/24-the-geometry-of-a-world.md)
+- [Chapter 25 · How a world breaks](chapters/25-how-a-world-breaks.md)
+- [Chapter 26 · One world, many colours](chapters/26-one-world-many-colours.md)
+- [Chapter 27 · Do agents cooperate?](chapters/27-do-agents-cooperate.md)
+- [Chapter 28 · Questioning the mechanics](chapters/28-questioning-the-mechanics.md)
+- [Chapter 29 · Meta II · What the measurements say about open-ended evolution](chapters/29-meta-2.md)
 
-**Part IV · Towards open-ended evolution**
+**Part IV · One change at a time**
 
-- Chapter 25 · Mutation at replication, and nowhere else — *not written yet*
+- [Chapter 30 · Do the brains matter?](chapters/30-do-the-brains-matter.md)
+- [Chapter 31 · How does a world's size follow its tokens?](chapters/31-how-does-a-worlds-size-follow-its-tokens.md)
+- Chapter 32 · How fast should brains change? — *not written yet*
+- Chapter 33 · What keeps wealth spread? — *not written yet*
+- Chapter 34 · Meta III — *not written yet*
+- Chapter 35 · How big should a brain be? — *not written yet*
+- Chapter 36 · Does size change the dynamics? — *not written yet*
+
+**Part V · Towards open-ended evolution**
+
+- Chapter 37 · Mutation at replication, and nowhere else — *not written yet*
+- Chapter 38 · Can a brain hold its place? — *not written yet*
+- Chapter 39 · Kin that know each other — *not written yet*
+- Chapter 40 · When cooperation produces — *not written yet*
+- Chapter 41 · An open world — *not written yet*
+- Chapter 42 · Meta IV — *not written yet*
 
 **Notes · the rules**
 
@@ -96,6 +116,23 @@ everything can be checked with it.
 - [Staking at home, and keeping one's node](notes/home-stake.md)
 - [Families](notes/families.md)
 - [The common ancestor of the living](notes/common-ancestor.md)
+- [Tokens per agent: mean, median, extremes](notes/tokens-per-agent.md)
+- [Entropy and evenness](notes/entropy-and-evenness.md)
+- [Gains, losses and the share-out](notes/gains-and-losses.md)
+- [Brain diversity](notes/brain-diversity.md)
+- [Reproduction statistics](notes/reproduction-statistics.md)
+- [Token flow](notes/token-flow.md)
+- [Lightning: tokens that go round](notes/lightning.md)
+- [Token curvature](notes/token-curvature.md)
+- [Loops](notes/loops.md)
+- [Cut risk](notes/cut-risk.md)
+- [Radius and diameter](notes/radius-and-diameter.md)
+- [The spectral gap](notes/spectral-gap.md)
+- [Dimension and curvature from ball growth](notes/ball-dimension-and-curvature.md)
+- [Box dimension](notes/box-dimension.md)
+- [Scaling relations between agents' properties](notes/scaling-relations.md)
+- [Assortativity](notes/assortativity.md)
+- [What the viewer can colour by](notes/viewer-colours.md)
 
 **Notes · statistics**
 
@@ -113,6 +150,9 @@ everything can be checked with it.
 - [The Wilson interval](notes/wilson-interval.md)
 - [Logarithmic axes and power laws](notes/logarithmic-axes.md)
 - [Muller plots](notes/muller-plot.md)
+- [Fitting a straight line, and R²](notes/least-squares.md)
+- [Fitting a power law properly](notes/power-law-fit.md)
+- [The power spectrum of a time series](notes/power-spectrum.md)
 
 **Appendices**
 

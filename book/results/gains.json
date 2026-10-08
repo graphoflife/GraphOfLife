@@ -1,0 +1,255 @@
+{
+ "chapter": "gains",
+ "numbers": {
+  "outcome": {
+   "first": {
+    "starved": 0.03822441430332922,
+    "cut off": 0.040443896424167694,
+    "lost tokens": 0.47916152897657216,
+    "kept exactly what it had": 0.008631319358816275,
+    "gained tokens": 0.4335388409371147
+   },
+   "settled": {
+    "starved": 0.0062237189652797915,
+    "cut off": 0.018636830404425948,
+    "lost tokens": 0.23997800733116628,
+    "kept exactly what it had": 0.48428976088189796,
+    "gained tokens": 0.25087168241723
+   }
+  },
+  "by_tokens": {
+   "1": {
+    "died": 0.3099208056068618,
+    "lost": 0.0,
+    "same": 0.09424891835133972,
+    "gained": 0.5958302760417985,
+    "mean_relative_change": 4.164515655936056
+   },
+   "2": {
+    "died": 0.03402180796155414,
+    "lost": 0.11467830220595251,
+    "same": 0.6142142107408982,
+    "gained": 0.23708567909159517,
+    "mean_relative_change": 0.4627594134181057
+   },
+   "3\u20134": {
+    "died": 0.01139864869480861,
+    "lost": 0.18872842044856775,
+    "same": 0.5960909159225835,
+    "gained": 0.2037820149340402,
+    "mean_relative_change": 0.18771645526466424
+   },
+   "5\u20139": {
+    "died": 0.007647158210227064,
+    "lost": 0.30474770254684896,
+    "same": 0.4527396807440002,
+    "gained": 0.23486545849892382,
+    "mean_relative_change": 0.13176807352150463
+   },
+   "10\u201319": {
+    "died": 0.009142075640418705,
+    "lost": 0.3783283362263952,
+    "same": 0.3264531060964705,
+    "gained": 0.2860764820367156,
+    "mean_relative_change": 0.12570277627076468
+   },
+   "20\u201349": {
+    "died": 0.014235014235014234,
+    "lost": 0.43395343395343394,
+    "same": 0.20954720954720954,
+    "gained": 0.34226434226434227,
+    "mean_relative_change": 0.06326120146856856
+   },
+   "50\u201399": {
+    "died": 0.029978064830611748,
+    "lost": 0.5023153789909822,
+    "same": 0.0658055081647575,
+    "gained": 0.40190104801364857,
+    "mean_relative_change": -0.12895589957351147
+   },
+   "100+": {
+    "died": 0.04393478861563968,
+    "lost": 0.6032053053329649,
+    "same": 0.012434374136501796,
+    "gained": 0.3404255319148936,
+    "mean_relative_change": -0.4366873248332449
+   }
+  },
+  "rich_deaths": {
+   "1\u20132": {
+    "agents": 1242,
+    "died": 0.09903381642512077
+   },
+   "3\u20139": {
+    "agents": 1251,
+    "died": 0.02158273381294964
+   },
+   "10+": {
+    "agents": 1126,
+    "died": 0.007992895204262877
+   }
+  },
+  "downhill": {
+   "all": {
+    "below \u221250": -0.06645047368516113,
+    "\u221250 to \u221210": -0.04224644631071728,
+    "\u221210 to \u22123": -0.060771048275196096,
+    "\u22123 to 3": 0.020592621207111143,
+    "3 to 10": 0.12102296504229283,
+    "10 to 50": 0.22779054011594488,
+    "above 50": 1.130539151265938
+   },
+   "tokens_3_9": {
+    "below \u221250": null,
+    "\u221250 to \u221210": -0.045614446276360736,
+    "\u221210 to \u22123": -0.07305135030700799,
+    "\u22123 to 3": -0.014929863003078404,
+    "3 to 10": 0.0354740038386593,
+    "10 to 50": 0.08011356090639186,
+    "above 50": 0.626890446801354
+   }
+  },
+  "lottery_per_agent": {
+   "n": 26,
+   "mean": 0.11265386535642462,
+   "median": 0.10564377947270408,
+   "sd": 0.031713609429597715,
+   "min": 0.07145573877449933,
+   "max": 0.22137460943357354,
+   "q25": 0.0942351113115437,
+   "q75": 0.1254915170276077
+  },
+  "redistributed_settled": {
+   "game": {
+    "n": 26,
+    "mean": 109.97869230769233,
+    "median": 110.5342,
+    "sd": 17.40801798401927,
+    "min": 77.4416,
+    "max": 156.672,
+    "q25": 100.8186,
+    "q75": 118.0948
+   },
+   "repro": {
+    "n": 26,
+    "mean": 21.537215384615383,
+    "median": 19.8598,
+    "sd": 7.603224913663533,
+    "min": 5.1968,
+    "max": 36.7608,
+    "q25": 16.8383,
+    "q75": 26.523
+   }
+  },
+  "maxTokenAdded_settled": {
+   "1": {
+    "n": 26,
+    "mean": 26.227200000000003,
+    "median": 22.1536,
+    "sd": 11.718339604432021,
+    "min": 14.2984,
+    "max": 64.7472,
+    "q25": 19.843,
+    "q75": 28.5468
+   },
+   "2": {
+    "n": 26,
+    "mean": 615.3805538461539,
+    "median": 642.473,
+    "sd": 160.7872776616887,
+    "min": 327.7116,
+    "max": 930.5788,
+    "q25": 518.3558,
+    "q75": 693.1739
+   }
+  },
+  "maxTokenLost_settled": {
+   "1": {
+    "n": 26,
+    "mean": 19.463276923076926,
+    "median": 17.8232,
+    "sd": 5.449445525725176,
+    "min": 12.4356,
+    "max": 30.1608,
+    "q25": 15.2758,
+    "q75": 22.661099999999998
+   },
+   "2": {
+    "n": 26,
+    "mean": 595.8902307692307,
+    "median": 617.1806,
+    "sd": 157.20238509519572,
+    "min": 311.5212,
+    "max": 904.5824,
+    "q25": 497.909,
+    "q75": 669.8061
+   }
+  },
+  "gainers_settled": {
+   "1": {
+    "n": 26,
+    "mean": 53.49190769230769,
+    "median": 53.9972,
+    "sd": 7.9203602587217246,
+    "min": 41.186,
+    "max": 66.6116,
+    "q25": 46.111799999999995,
+    "q75": 60.1943
+   },
+   "2": {
+    "n": 26,
+    "mean": 325.50483076923075,
+    "median": 327.8974,
+    "sd": 51.12622632666541,
+    "min": 221.662,
+    "max": 407.5332,
+    "q25": 312.2125,
+    "q75": 367.14419999999996
+   }
+  },
+  "losers_settled": {
+   "1": {
+    "n": 26,
+    "mean": 36.014769230769225,
+    "median": 36.660399999999996,
+    "sd": 7.577310247773639,
+    "min": 21.3708,
+    "max": 54.0216,
+    "q25": 30.3103,
+    "q75": 40.7905
+   },
+   "2": {
+    "n": 26,
+    "mean": 311.3703384615385,
+    "median": 316.44759999999997,
+    "sd": 45.60300302247716,
+    "min": 217.7352,
+    "max": 382.9512,
+    "q25": 291.4081,
+    "q75": 349.3375
+   }
+  }
+ },
+ "figures": {
+  "outcome": {
+   "title": "What one game does to the agents",
+   "caption": "Every agent alive at the start of a game ends it in one of five ways: it starved (no one staked on its node), it was cut off from the largest piece of the network, or it survived holding fewer tokens, exactly as many, or more than before. Left: the game of iteration 0 in all 30 worlds. Right: every game from iteration 500 on in the 26 worlds that lived to the end, pooled.",
+   "recipe": "**Runs.** The 30 baseline runs `B1-10000-s001` \u2026 `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in Chapter 8). They are made with `python3 gol_lab.py run E02`.\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).\n\n1. Take the rows with `phase` = 2 (iteration 0, or 500 to 2,999).\n2. Sum over them: `nodes_before` (agents at the start), `starved`, `orphaned`, `gainers`, `losers`, and `nodes` \u2212 `gainers` \u2212 `losers` (survivors whose tokens did not change).\n3. Divide each sum by the sum of `nodes_before` and stack the shares.\n\n**To make it again:** `python3 book_figures.py gains`."
+  },
+  "by-tokens": {
+   "title": "What a game does, by how rich an agent was",
+   "caption": "Agents alive at the start of a game, sorted by the tokens they held then; for each class, the share that died in the game (starved or cut off), and of the rest the shares that lost tokens, kept exactly as many, or gained. From the games of every 100th iteration from 500 on, in the 26 worlds that lived to the end (848,232 agents in all).",
+   "recipe": "**Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` \u2026 `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in Chapter 8). They are made with `python3 gol_lab.py run E02`.\n\n**Data.** From each run's frames, read every 25 iterations by `book_figures.sample_pass` (frame `2\u00b7t` after the reproduction phase of iteration *t*, frame `2\u00b7t + 1` after its game; `gol_store.read_frame(run, index)`).\n\n1. For every 100th iteration t from 500 on, take each agent in frame `2\u00b7t` (the start of the game) with its `tokens`.\n2. Find it in frame `2\u00b7t + 1`: if it is not there, it died in the game; if it is, its `delta` there is its change over the game.\n3. Sort the agents by their tokens at the start into the classes shown, and count the four outcomes in each class.\n\n**To make it again:** `python3 book_figures.py gains`."
+  },
+  "downhill": {
+   "title": "Tokens run downhill",
+   "caption": "The token curvature of an agent is the sum, over its neighbours, of how many more tokens the neighbour holds than it does ([Token curvature](../notes/token-curvature.md)): negative for an agent richer than its neighbourhood, positive for one poorer. For each class of curvature, the mean change of an agent's tokens over the game divided by the tokens it held at the start, over the agents that survived the game. Yellow: all agents; cyan: only agents that held 3 to 9 tokens, so that wealth itself cannot explain the pattern. A class with fewer than 1,000 agents is left out (drawn at 0).",
+   "recipe": "**Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` \u2026 `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in Chapter 8). They are made with `python3 gol_lab.py run E02`.\n\n**Data.** From each run's frames, read every 25 iterations by `book_figures.sample_pass` (frame `2\u00b7t` after the reproduction phase of iteration *t*, frame `2\u00b7t + 1` after its game; `gol_store.read_frame(run, index)`).\n\n1. For every 100th iteration t from 500 on, read frame `2\u00b7t`: for every agent u, \u03ba(u) = \u03a3 over its neighbours v of (\u03c4(v) \u2212 \u03c4(u)).\n2. Find each agent in frame `2\u00b7t + 1` and take its `delta` (agents not there died and are left out).\n3. Sort by \u03ba into the classes shown and average `delta` / \u03c4(u) in each.\n\n**To make it again:** `python3 book_figures.py gains`."
+  },
+  "lottery": {
+   "title": "Tokens shared out among the survivors",
+   "caption": "How many tokens the cleanup dealt out at random among the survivors \u2014 the tokens of the agents that were cut off \u2014 after each game (green) and after each reproduction phase (cyan), on a logarithmic axis. For each, the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).",
+   "recipe": "**Runs.** The 30 baseline runs `B1-10000-s001` \u2026 `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in Chapter 8). They are made with `python3 gol_lab.py run E02`.\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).\n\n1. Take `redistributed` of the rows with `phase` = 2 and of those with `phase` = 1.\n2. Cut the iterations into stretches of 5 (600 stretches over 3,000 iterations) and take each world's mean in each stretch.\n3. In each stretch, take the median, the 25th and 75th and the 5th and 95th percentiles of those means over the worlds that still have a value there (a world that died has none after its death).\n\n**To make it again:** `python3 book_figures.py gains`."
+  }
+ }
+}

@@ -56,7 +56,7 @@ every brain changes with the same probability after every game
 question, not a given: brains that keep their tokens and take over
 neighbouring nodes spread, and the others vanish — but is that because of
 *how they differ*, or by chance? Nothing in the rules says which brains are
-good. [Chapter 18](18-do-the-brains-matter.md) asks it directly.
+good. [Chapter 30](30-do-the-brains-matter.md) asks it directly.
 
 ## What would count as open-ended
 
@@ -73,8 +73,9 @@ before the next:
 4. **P4 — the space of organisations keeps growing:** new kinds keep
    appearing, without a ceiling.
 
-Parts II and III answer questions that lie underneath P1. Part IV, not yet
-written, will climb the ladder.
+Parts II to IV answer questions that lie underneath P1. Part V, not yet
+written, will climb the ladder, by the changes to the rules that
+[Meta II](29-meta-2.md) proposes.
 
 ## How the book is organised
 
@@ -89,18 +90,26 @@ written, will climb the ladder.
   iterations, their first hundred iterations, births and deaths, chance,
   wealth, the game, the shape of the network, and lineages
   ([Chapters 8 to 17](08-thirty-worlds.md)).
-- **Part III · One change at a time.** One setting changed against the
+- **Part III · The baseline world, measured every way.** The same thirty
+  worlds again, through every statistic the Graph of Life viewer offers and
+  some it does not: entropy, gains and losses, the flow of tokens, how agents
+  have children, power laws, scaling, the geometry of the network, how it
+  breaks, pictures of one world in many colours, whether agents cooperate —
+  then a chapter that questions the rules themselves, and a meta chapter on
+  what it all means for open-ended evolution, with proposals for changing the
+  rules ([Chapters 18 to 29](18-how-even-is-a-world.md)).
+- **Part IV · One change at a time.** One setting changed against the
   baseline: worlds whose brains never change or are never asked
-  ([Chapter 18](18-do-the-brains-matter.md)), worlds of other sizes
-  ([Chapter 19](19-how-does-a-worlds-size-follow-its-tokens.md)), and more.
-- **Part IV · Towards open-ended evolution.** Changed rules, aimed at the
-  ladder above.
+  ([Chapter 30](30-do-the-brains-matter.md)), worlds of other sizes
+  ([Chapter 31](31-how-does-a-worlds-size-follow-its-tokens.md)), and more.
+- **Part V · Towards open-ended evolution.** Changed rules, aimed at the
+  ladder above, in the order [Meta II](29-meta-2.md) sets out.
 - **Notes.** Short notes, one per idea, that define every rule, every
   measurement and every statistical method the chapters use, with worked
   examples: [Every setting](../notes/settings.md),
   [The share function](../notes/share-function.md),
   [The Gini coefficient](../notes/gini-coefficient.md),
-  [Survival curves](../notes/kaplan-meier.md) and some forty more. The
+  [Survival curves](../notes/kaplan-meier.md) and some sixty more. The
   chapters link to them wherever they are needed;
   [the contents](../README.md) lists them all.
 

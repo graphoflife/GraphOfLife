@@ -1,0 +1,208 @@
+{
+ "chapter": "scaling",
+ "numbers": {
+  "tokens_degree": {
+   "slope": 0.584391263626698,
+   "r2": 0.3626992382413235,
+   "agents": 35554
+  },
+  "tokens_per_candidate": {
+   "resting": 1.723429359281993,
+   "slope_if_resting": 0.7269517719682745,
+   "classes": {
+    "1": {
+     "median": 1.5,
+     "mean": 2.346183032326605
+    },
+    "2": {
+     "median": 1.3333333333333333,
+     "mean": 1.8189616619912998
+    },
+    "3\u20134": {
+     "median": 1.2,
+     "mean": 1.5483362966725933
+    },
+    "5\u20139": {
+     "median": 1.0,
+     "mean": 1.5010300245874217
+    },
+    "10\u201349": {
+     "median": 1.0,
+     "mean": 1.4981327020413555
+    },
+    "50+": {
+     "median": 1.019730463447741,
+     "mean": 2.3592937421728246
+    }
+   }
+  },
+  "clustering_slope": -1.320476999823163,
+  "triangles_slope": 0.9525890725735982,
+  "assortativity_settled": {
+   "n": 26,
+   "mean": -0.11322055889190731,
+   "median": -0.10786408629294314,
+   "sd": 0.05780521366792308,
+   "min": -0.23878498879701693,
+   "max": 0.0013383063860994378,
+   "q25": -0.13574841304698246,
+   "q75": -0.07881834303912089
+  },
+  "neighbours": [
+   {
+    "k": 1.0,
+    "mean": 163.35635149491577
+   },
+   {
+    "k": 2.0,
+    "mean": 25.682217343578486
+   },
+   {
+    "k": 3.0,
+    "mean": 13.975576195390438
+   },
+   {
+    "k": 4.47213595499958,
+    "mean": 11.350785233530491
+   },
+   {
+    "k": 6.928203230275509,
+    "mean": 9.420311676750059
+   },
+   {
+    "k": 10.392304845413264,
+    "mean": 9.59547676767677
+   },
+   {
+    "k": 15.716233645501712,
+    "mean": 10.049408055550677
+   },
+   {
+    "k": 24.08318915758459,
+    "mean": 8.88521512832966
+   },
+   {
+    "k": 38.34057902536163,
+    "mean": 7.327718451306933
+   },
+   {
+    "k": 70.35623639735144,
+    "mean": 4.712612809914864
+   },
+   {
+    "k": 141.06735979665885,
+    "mean": 4.211848449400263
+   }
+  ],
+  "tokensVsDegree_settled": {
+   "slope": {
+    "n": 26,
+    "mean": 0.6050688023427234,
+    "median": 0.6068562220419187,
+    "sd": 0.019690733952405955,
+    "min": 0.5670890730285838,
+    "max": 0.6425228831527333,
+    "q25": 0.5909528854922814,
+    "q75": 0.6179067799065452
+   },
+   "r2": {
+    "n": 26,
+    "mean": 0.41877483625280626,
+    "median": 0.4194042794290297,
+    "sd": 0.054261180536629636,
+    "min": 0.3019021703651419,
+    "max": 0.5386718924747886,
+    "q25": 0.3897706718639523,
+    "q75": 0.45398139016479566
+   }
+  },
+  "trianglesVsDegree_settled": {
+   "slope": {
+    "n": 26,
+    "mean": 0.8655213588832247,
+    "median": 0.8561477013189165,
+    "sd": 0.07462081553110705,
+    "min": 0.6926807376584634,
+    "max": 1.0487651415574164,
+    "q25": 0.817883328119885,
+    "q75": 0.9091353599356806
+   },
+   "r2": {
+    "n": 26,
+    "mean": 0.46509902129326747,
+    "median": 0.4536349908597945,
+    "sd": 0.04652449711282405,
+    "min": 0.3740764807081458,
+    "max": 0.5422135182191263,
+    "q25": 0.4328186923929034,
+    "q75": 0.5014514689925001
+   }
+  },
+  "clusteringVsDegree_settled": {
+   "slope": {
+    "n": 26,
+    "mean": -1.4137877075712202,
+    "median": -1.421945170855392,
+    "sd": 0.07223743610697789,
+    "min": -1.5821717332354723,
+    "max": -1.2489097299586747,
+    "q25": -1.4549289511492052,
+    "q75": -1.373279693607653
+   },
+   "r2": {
+    "n": 26,
+    "mean": 0.6871771265521781,
+    "median": 0.6828409049796584,
+    "sd": 0.046629853164779335,
+    "min": 0.6019192755234952,
+    "max": 0.7659574499532882,
+    "q25": 0.6554612359974148,
+    "q75": 0.7227020392915429
+   }
+  },
+  "changeVsTokens_settled": {
+   "slope": {
+    "n": 26,
+    "mean": 0.3736176602843769,
+    "median": 0.3731487769630699,
+    "sd": 0.031876083159109864,
+    "min": 0.3132975445712136,
+    "max": 0.43295593157223566,
+    "q25": 0.3600746227162887,
+    "q75": 0.38872807631795847
+   },
+   "r2": {
+    "n": 26,
+    "mean": 0.15149123190293623,
+    "median": 0.1512773265108181,
+    "sd": 0.022056792811318844,
+    "min": 0.1156066259299301,
+    "max": 0.21368889070855043,
+    "q25": 0.13896291377791875,
+    "q75": 0.163752773614963
+   }
+  }
+ },
+ "figures": {
+  "tokens-degree": {
+   "title": "Tokens against connections",
+   "caption": "Every agent alive after the last game of the 26 worlds that lived to the end (35,554 agents), counted in cells of connections k and tokens, both in classes of growing width; a cell's colour is how many agents it holds, on a logarithmic scale. White: the median tokens in each class of k. Red: the straight line least squares fits through ln(tokens) against ln(k) over all agents ([Scaling relations](../notes/scaling-relations.md)). Cyan: tokens proportional to k + 1, through the median at k = 1 \u2014 where an even split of every stake would leave the tokens on a network that held still ([Chapter 20](20-where-the-tokens-flow.md)).",
+   "recipe": "**Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` \u2026 `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in Chapter 8). They are made with `python3 gol_lab.py run E02`.\n\n**Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2\u00b7t` is iteration *t* after reproduction and frame `2\u00b7t + 1` after the game.\n\n1. Read frame `5999` of every run: each agent's tokens and its connections in `edges`.\n2. Count the agents in each cell of the classes shown; colour by the count.\n3. Fit ln(tokens) = a + b\u00b7ln(k) by least squares over all agents (the viewer's `tokensVsDegree` does this for one frame).\n\n**To make it again:** `python3 book_figures.py scaling`."
+  },
+  "clustering-triangles": {
+   "title": "How an agent's neighbourhood closes, by its connections",
+   "caption": "Agents alive after the last game of the 26 worlds that lived to the end, in classes of their connections k. Left: the geometric mean (the mean of the logarithms, turned back) of the clustering coefficient \u2014 the share of pairs of an agent's neighbours that are joined to each other \u2014 of the agents with k \u2265 2 and clustering above 0. Right: the geometric mean of the number of triangles an agent is a corner of, over the agents in at least one. Red: least squares on the logarithms of all those agents (not of the class means); grey: the slopes \u22121 and 2 for comparison.",
+   "recipe": "**Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` \u2026 `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in Chapter 8). They are made with `python3 gol_lab.py run E02`.\n\n**Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2\u00b7t` is iteration *t* after reproduction and frame `2\u00b7t + 1` after the game.\n\n1. Read frame `5999` of every run; for every agent count its triangles: pairs of its neighbours that are joined.\n2. Clustering of an agent with k \u2265 2 neighbours = triangles / (k(k \u2212 1)/2).\n3. Average ln(y) by class of k and turn it back for the dots; fit ln(y) on ln(k) over the agents with y > 0 for the red lines (`clusteringVsDegree`, `trianglesVsDegree` in the viewer).\n\n**To make it again:** `python3 book_figures.py scaling`."
+  },
+  "neighbours": {
+   "title": "Whom the well-connected are joined to",
+   "caption": "For the agents alive after the last game of the 26 worlds that lived to the end, in classes of their connections k: the mean, over the class, of the average number of connections of an agent's neighbours. A falling line means the well-connected are joined mostly to the poorly connected ([Assortativity](../notes/assortativity.md)).",
+   "recipe": "**Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` \u2026 `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in Chapter 8). They are made with `python3 gol_lab.py run E02`.\n\n**Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2\u00b7t` is iteration *t* after reproduction and frame `2\u00b7t + 1` after the game.\n\n1. Read frame `5999` of every run; for every agent, the mean degree of its neighbours.\n2. Average by class of the agent's own degree.\n\n**To make it again:** `python3 book_figures.py scaling`."
+  },
+  "exponents": {
+   "title": "Four scaling relations in the 26 worlds",
+   "caption": "One dot per world that lived to the end: its mean, over the measurements every 25 iterations from 500 on, of four slopes fitted by least squares on the logarithms of the agents of a frame, and of their R\u00b2. Tokens and triangles against connections, clustering against connections, and the size of an agent's change in tokens over the game against the tokens it holds ([Scaling relations](../notes/scaling-relations.md)).",
+   "recipe": "**Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` \u2026 `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in Chapter 8). They are made with `python3 gol_lab.py run E02`.\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).\n\n1. Average `tokensVsDegree`, `trianglesVsDegree`, `clusteringVsDegree` and `changeVsTokens`, and the same with `R2` appended, over the rows with `phase` = 2 and 500 \u2264 `iteration` \u2264 2,999.\n2. One dot per run, a bar at the median.\n\n**To make it again:** `python3 book_figures.py scaling`."
+  }
+ }
+}

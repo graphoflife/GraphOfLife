@@ -183,7 +183,7 @@ choices depends on which of two random outputs is the larger. From iteration
 Nobody chose these numbers. Are they the work of selection — brains that did
 otherwise losing their tokens and their nodes — or only of the churn of
 copying and changing brains? Parts II and III come back to this question
-([Chapter 14](14-how-the-game-is-played.md), [Chapter 18](18-do-the-brains-matter.md)).
+([Chapter 14](14-how-the-game-is-played.md), [Chapter 30](30-do-the-brains-matter.md)).
 
 ## The control: decisions by chance
 
@@ -191,7 +191,7 @@ One setting replaces the brain by noise: with
 [`random_decisions`](../notes/settings.md#random_decisions) on, every one of
 the 45 outputs of every column is drawn from a standard normal distribution
 instead of being computed, and every decision is read from that noise exactly
-as above. Nothing else changes. [Chapter 18](18-do-the-brains-matter.md) shows
+as above. Nothing else changes. [Chapter 30](30-do-the-brains-matter.md) shows
 what becomes of a world run that way.
 
 > [!summary] In short

@@ -1,0 +1,189 @@
+{
+ "chapter": "breaking",
+ "numbers": {
+  "risk": {
+   "corr": 0.05968907926678933,
+   "games": 65000,
+   "mean_risk": 0.13214683328824495,
+   "mean_culled": 0.017509934343612532,
+   "share_culled_over_10pc": 0.012523076923076923,
+   "share_risk_over_10pc": 0.40978461538461536
+  },
+  "deaths_by_size": {
+   "half_in_games_of_at_least": 42.0,
+   "total": 1571778.0,
+   "games": 65000,
+   "largest": 1037.0
+  },
+  "anatomy": {
+   "games": 1614,
+   "kinds": {
+    "1\u20132": {
+     "games": 32,
+     "agents": 8527,
+     "top_genotype": 0.04492100044777074,
+     "home": 0.35416666666666663
+    },
+    "3\u20139": {
+     "games": 161,
+     "agents": 42631,
+     "top_genotype": 0.0425531914893617,
+     "home": 0.3333333333333333
+    },
+    "10+": {
+     "games": 1421,
+     "agents": 268904,
+     "top_genotype": 0.05384615384615385,
+     "home": 0.5
+    }
+   },
+   "seed1_largest": [
+    {
+     "run": "B1-10000-s001",
+     "iteration": 722,
+     "cut": 644,
+     "attachments": 20,
+     "top_genotype": 0.013975155279503106,
+     "home": 0.17028985507246375
+    },
+    {
+     "run": "B1-10000-s001",
+     "iteration": 999,
+     "cut": 503,
+     "attachments": 1,
+     "top_genotype": 0.02385685884691849,
+     "home": 0.2857142857142857
+    },
+    {
+     "run": "B1-10000-s001",
+     "iteration": 963,
+     "cut": 479,
+     "attachments": 6,
+     "top_genotype": 0.04592901878914405,
+     "home": 0.2857142857142857
+    },
+    {
+     "run": "B1-10000-s001",
+     "iteration": 1984,
+     "cut": 394,
+     "attachments": 2,
+     "top_genotype": 0.027918781725888325,
+     "home": 0.4
+    },
+    {
+     "run": "B1-10000-s001",
+     "iteration": 1234,
+     "cut": 343,
+     "attachments": 15,
+     "top_genotype": 0.029154518950437316,
+     "home": 0.3333333333333333
+    },
+    {
+     "run": "B1-10000-s001",
+     "iteration": 541,
+     "cut": 319,
+     "attachments": 529,
+     "top_genotype": 0.5987460815047022,
+     "home": 1.0
+    }
+   ],
+   "border": {
+    "lost_side": {
+     "agents": 91383,
+     "median_tokens": 1.0,
+     "median_degree": 2.0,
+     "fewer_tokens_than_links": 0.6352603875994441
+    },
+    "kept_side": {
+     "agents": 92008,
+     "median_tokens": 3.0,
+     "median_degree": 5.0,
+     "fewer_tokens_than_links": 0.7761499000086949
+    },
+    "everyone": {
+     "agents": 2520266,
+     "median_tokens": 3.0,
+     "median_degree": 2.0,
+     "fewer_tokens_than_links": 0.19983128764979569
+    }
+   }
+  },
+  "bridges_settled": {
+   "n": 26,
+   "mean": 623.8615384615384,
+   "median": 625.48,
+   "sd": 135.11794962009475,
+   "min": 368.59,
+   "max": 1112.69,
+   "q25": 563.2725,
+   "q75": 664.8175
+  },
+  "prunedEdges_settled": {
+   "n": 26,
+   "mean": 127.89412307692307,
+   "median": 116.8688,
+   "sd": 49.90558692760808,
+   "min": 25.9184,
+   "max": 257.5056,
+   "q25": 100.3316,
+   "q75": 156.4502
+  },
+  "cutRisk_settled": {
+   "n": 26,
+   "mean": 0.13027626011266202,
+   "median": 0.11969040873325376,
+   "sd": 0.05409394319720652,
+   "min": 0.059561257816928004,
+   "max": 0.2705895767524346,
+   "q25": 0.0977986140854687,
+   "q75": 0.16450660018650598
+  },
+  "cutRiskBefore_settled": {
+   "n": 26,
+   "mean": 0.13214683328824492,
+   "median": 0.12357763112902735,
+   "sd": 0.05304152069305411,
+   "min": 0.06222890605055158,
+   "max": 0.26459808496832377,
+   "q25": 0.09692916509229231,
+   "q75": 0.16299055714481672
+  },
+  "orphaned_settled": {
+   "n": 26,
+   "mean": 24.181199999999997,
+   "median": 23.8248,
+   "sd": 5.4108053492987525,
+   "min": 14.5112,
+   "max": 37.752,
+   "q25": 21.790300000000002,
+   "q75": 26.6717
+  },
+  "starved_settled": {
+   "n": 26,
+   "mean": 8.075246153846154,
+   "median": 7.8584,
+   "sd": 2.788511214713797,
+   "min": 3.9184,
+   "max": 16.504,
+   "q25": 6.0263,
+   "q75": 9.4251
+  }
+ },
+ "figures": {
+  "risk": {
+   "title": "Does a fragile world lose more?",
+   "caption": "Every game from iteration 500 on of the 26 worlds that lived to the end. x: before the game, the largest share of the world that one bridge held to the rest \u2014 if that one connection were cut, that many would be cut off ([Cut risk](../notes/cut-risk.md)). y: the share of agents the game really cut off. White: the mean of y in classes of x 0.05 wide; dashed: y = x.",
+   "recipe": "**Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` \u2026 `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in Chapter 8). They are made with `python3 gol_lab.py run E02`.\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).\n\n1. Take the rows with `phase` = 2 and 500 \u2264 `iteration` \u2264 2,999: `cutRiskBefore`, and `orphaned` / `nodes_before`.\n2. Plot one against the other; average y in classes of x.\n\n**To make it again:** `python3 book_figures.py breaking`."
+  },
+  "deaths-by-size": {
+   "title": "Where the cut-off deaths happen",
+   "caption": "Of all agents cut off in games from iteration 500 on of the 26 worlds that lived to the end, the share that died in games which cut off at least n agents, for every n. Where the line is at 0.5, half of all such deaths happened in games at least that large.",
+   "recipe": "**Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` \u2026 `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in Chapter 8). They are made with `python3 gol_lab.py run E02`.\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).\n\n1. Take `orphaned` of the rows with `phase` = 2 and 500 \u2264 `iteration` \u2264 2,999.\n2. For every n, add up `orphaned` over the rows with `orphaned` \u2265 n and divide by the total.\n\n**To make it again:** `python3 book_figures.py breaking`."
+  },
+  "one-world": {
+   "title": "Six hundred iterations of one world",
+   "caption": "The world with seed 1, iterations 1,000 to 1,600. Top: its number of agents after every game. Middle: how many agents each game cut off. Bottom: before each game, the largest share of the world held to the rest by a single bridge, measured on the network as it stood before the cleanup.",
+   "recipe": "**Runs.** `B1-10000-s001`.\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).\n\n1. Take `nodes`, `orphaned` and `cutRiskBefore` of the rows with `phase` = 2 and 1,000 \u2264 `iteration` \u2264 1,600.\n\n**To make it again:** `python3 book_figures.py breaking`."
+  }
+ }
+}

@@ -75,9 +75,11 @@ const Markdown = {
 
   /** One table, from the rows that make it up. Header, divider, body. */
   table(rows) {
-    // A pipe inside a code span or a formula is not a cell's edge.
+    // A pipe inside a code span or a formula is not a cell's edge, nor is an
+    // escaped one, `\|`, which then stands for the pipe itself — as in GitHub
+    // and Obsidian, so a cell can hold |x|.
     const cells = row => row.replace(/^\||\|$/g, '').split(/(?<!\\)\|(?=(?:[^`]*`[^`]*`)*[^`]*$)/)
-      .map(c => c.trim());
+      .map(c => c.trim().replace(/\\\|/g, '|'));
     const head = cells(rows[0]);
     const body = rows.slice(2).map(cells);      // rows[1] is the --- divider
     return '<div class="md-scroll"><table>'

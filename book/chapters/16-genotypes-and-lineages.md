@@ -261,7 +261,7 @@ importantly, whole lines take the world over again and again.
   [coalescent](06-the-ideas-this-builds-on.md)). Whether lines take over
   here *faster than chance would make them*, because some brains do better,
   needs a world in which no brain is better than another.
-  [Chapter 18](18-do-the-brains-matter.md) builds one, and finds that how
+  [Chapter 30](30-do-the-brains-matter.md) builds one, and finds that how
   often chance alone sweeps a world depends on how often agents are born and
   die.
 

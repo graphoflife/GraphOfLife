@@ -38,7 +38,7 @@ a line with **slope** *b*. So a power law is recognised by a straight line on
 log–log axes, and its exponent read off as the slope. Examples:
 
 - *b* = 1: *y* grows in proportion to *x* (twice the tokens, twice the
-  agents) — the question of [Chapter 19](../chapters/19-how-does-a-worlds-size-follow-its-tokens.md).
+  agents) — the question of [Chapter 31](../chapters/31-how-does-a-worlds-size-follow-its-tokens.md).
 - *b* = −1: *y* halves when *x* doubles.
 - A curve that **bends** downward on log–log axes is not a power law: it falls
   faster and faster, as an exponential tail does.

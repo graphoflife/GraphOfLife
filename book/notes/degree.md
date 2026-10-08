@@ -25,6 +25,20 @@ $$
 recorded as `meanDegree`. A settled baseline world has about 1.6
 connections per agent, so a mean degree of about 3.3.
 
+Three more numbers describe the degrees of a frame: `medianDegree`, the
+[median](median-and-quantiles.md); `minDegree`, which is 1 in a connected
+world of more than one agent; and `maxDegree`, the largest hub. And the
+**density** is the share of all possible pairs of agents that are joined:
+
+$$
+\texttt{density} = \frac{|E|}{|V|(|V| - 1)/2} = \frac{\bar k}{|V| - 1} .
+$$
+
+A world of 1,300 agents with mean degree 3.3 has a density of 0.0025: of
+every 400 pairs of agents, one is joined. Density falls as a world grows even
+when every agent keeps the same number of connections, which is why the book
+mostly uses the mean degree.
+
 ## The degree distribution
 
 How many agents have degree 1, 2, 3, …? Two ways of drawing it:

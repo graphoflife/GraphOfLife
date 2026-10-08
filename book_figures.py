@@ -392,6 +392,126 @@ def world_pass(run_id: str, muller: Optional[Tuple[int, int]] = None) -> Dict[st
     return out
 
 
+#: Iterations between two looks of sample_pass, and between two looks at single agents.
+SAMPLE_EVERY = 25
+AGENT_EVERY = 100
+
+
+def sample_pass(run_id: str) -> Dict[str, Any]:
+    """
+    What Part III needs from a world's frames, read every SAMPLE_EVERY
+    iterations and kept beside the runs (`<runs>/.book/<run>.sample.npz`).
+
+      frames   one row per look, after the game of iteration t (t = 0, 25, …):
+               t, agents, genotypes, genotype entropy (bits), new genotypes in
+               the reproduction phase and in the game, births, tokens staked
+               (at home, on others), the share of directed flows that are
+               returned, and for nodes of degree 1, 2, 3–4, 5–9, 10–49 and 50+
+               how many were staked on and how many kept by their own agent
+      agents   one row per agent alive at the start of the game, for every
+               AGENT_EVERY iterations from SETTLED on: t, tokens and degree at
+               the start of the game, its token curvature then, its change over
+               the game (NaN if it did not survive it), whether it kept its node,
+               the share it staked at home, its candidates and how many it
+               staked on, and its age
+      parents  one row per agent alive at the start of a reproduction phase, at
+               iteration 0 and every AGENT_EVERY iterations from SETTLED on: t,
+               tokens, degree, the tokens it gave a child (0 for none), the
+               child's links and the connections handed over
+    """
+    path = os.path.join(store.BASE_DIR, ".book", f"{run_id}.sample.npz")
+    stamp = store.load_meta(run_id).get("iteration")
+    if os.path.exists(path):
+        cached = np.load(path)
+        if int(cached["stamp"]) == stamp:
+            return {k: cached[k] for k in cached.files}
+    bins = [(1, 1), (2, 2), (3, 4), (5, 9), (10, 49), (50, 10 ** 9)]
+    frames, agents, parents = [], [], []
+    last = (store.count_frames(run_id) - 1) // 2
+    previous_game = None
+    for t in range(0, last + 1, SAMPLE_EVERY):
+        repro = store.read_frame(run_id, 2 * t)
+        game = store.read_frame(run_id, 2 * t + 1)
+        before = store.read_frame(run_id, 2 * t - 1) if t > 0 else None
+        if not game["ids"]:
+            break
+        counts = Counter(game["brain_ids"])
+        p = np.array(list(counts.values()), float) / len(game["ids"])
+        entropy = float(-(p * np.log2(p)).sum())
+        new_repro = len(set(repro["brain_ids"]) - set(before["brain_ids"])) if before else 0
+        new_game = len(set(game["brain_ids"]) - set(repro["brain_ids"]))
+        degree = Counter()
+        for a, b in repro["edges"]:
+            degree[a] += 1
+            degree[b] += 1
+        tokens0 = dict(zip(repro["ids"], repro["tokens"]))
+        flows: Dict[Tuple[int, int], int] = {}
+        home = others = 0
+        allocs = {}
+        for r in (game.get("decisions") or {}).get("allocations") or []:
+            allocs[r["agent"]] = r
+            home += r["alloc"][0]
+            for target, amount in zip(r["targets"][1:], r["alloc"][1:]):
+                if amount > 0:
+                    flows[(r["agent"], target)] = amount
+                    others += amount
+        mutual = (sum(1 for a, b in flows if (b, a) in flows) / len(flows)) if flows else np.nan
+        won = {w["node"]: w["winner"] for w in (game.get("decisions") or {}).get("winners") or []}
+        kept_by = []
+        for lo, hi in bins:
+            nodes = [v for v in won if lo <= degree.get(v, 0) <= hi]
+            kept_by += [len(nodes), sum(1 for v in nodes if won[v] == v)]
+        births = (repro.get("decisions") or {}).get("births") or []
+        frames.append([t, len(game["ids"]), len(counts), entropy, new_repro, new_game, len(births),
+                       home, others, mutual, *kept_by])
+
+        if t >= SETTLED and t % AGENT_EVERY == 0:
+            curvature = Counter()
+            for a, b in repro["edges"]:
+                curvature[a] += tokens0[b] - tokens0[a]
+                curvature[b] += tokens0[a] - tokens0[b]
+            after = dict(zip(game["ids"], game["delta"]))
+            ages = dict(zip(repro["ids"], repro["ages"]))
+            for a in repro["ids"]:
+                r = allocs.get(a)
+                agents.append([t, tokens0[a], degree.get(a, 0), curvature.get(a, 0),
+                               after.get(a, np.nan), won.get(a) == a,
+                               (r["alloc"][0] / r["tokens"]) if r and r["tokens"] else np.nan,
+                               len(r["targets"]) if r else 0,
+                               sum(1 for x in r["alloc"] if x > 0) if r else 0, ages.get(a, -1)])
+        if (t == 0 or (t >= SETTLED and t % AGENT_EVERY == 0)) and (before is not None or t == 0):
+            start = before if before is not None else None
+            if start is None:
+                # The founders, all of them — also those that gave everything and starved, and so are
+                # missing from the frame. Ids are handed out in order, so they are every id below the
+                # first child's; each held an equal share of the tokens.
+                founders = min((d["child"] for d in births), default=len(repro["ids"]))
+                ids0 = list(range(founders))
+                share = store.load_meta(run_id)["config"]["total_tokens"] // max(1, founders)
+                start_tokens = {a: share for a in ids0}
+                start_degree = Counter()
+            else:
+                ids0 = start["ids"]
+                start_tokens = dict(zip(start["ids"], start["tokens"]))
+                start_degree = Counter()
+                for a, b in start["edges"]:
+                    start_degree[a] += 1
+                    start_degree[b] += 1
+            by_parent = {d["agent"]: d for d in births}
+            for a in ids0:
+                d = by_parent.get(a)
+                tokens = d["tokens_before"] if d else start_tokens.get(a, 0)
+                parents.append([t, tokens, start_degree.get(a, 0) if start is not None else 4,
+                                d["invested"] if d else 0, len(d["links"]) if d else 0,
+                                len(d.get("handed_over") or []) if d else 0])
+        previous_game = game
+    out = {"stamp": np.array(stamp), "frames": np.array(frames, float),
+           "agents": np.array(agents, float), "parents": np.array(parents, float)}
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    np.savez_compressed(path, **out)
+    return out
+
+
 def kaplan_meier(lives: List[List[Any]]) -> Tuple[np.ndarray, np.ndarray]:
     """
     The share of lives that last at least L iterations, for every L, from

@@ -333,5 +333,5 @@ change (it asked for more than half).
 <!-- turns -->
 ---
 
-← [Chapter 17 · Meta I · What the baseline world is](17-meta-1.md) · [Contents](../README.md) · [Chapter 19 · How does a world's size follow its tokens?](19-how-does-a-worlds-size-follow-its-tokens.md) →
+← [Chapter 29 · Meta II · What the measurements say about open-ended evolution](29-meta-2.md) · [Contents](../README.md) · [Chapter 31 · How does a world's size follow its tokens?](31-how-does-a-worlds-size-follow-its-tokens.md) →
 <!-- /turns -->

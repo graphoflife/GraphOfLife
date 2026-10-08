@@ -36,7 +36,11 @@ belongs to the size it was found at.
 > **It fails if:** The exponent's interval leaves out 1, so that bigger worlds hold clearly fewer or more agents (or connections) per token than smaller ones, or the points bend on logarithmic axes. Then a world's size is more than its tokens, something in the dynamics reaches across the whole world, and every result in this book belongs to the size it was found at.
 <!-- /thesis -->
 
-("Chapter 3" in the thesis is today's [Chapter 9](09-a-worlds-life.md).)
+("Chapter 3" in the thesis is today's [Chapter 9](09-a-worlds-life.md). And its
+reasoning missed a rule: besides the sharing out, the cleanup also reaches
+across the world, since it keeps only the largest connected piece —
+[Chapter 28](28-questioning-the-mechanics.md) — which is one way the thesis
+could fail.)
 
 ## Method
 
@@ -143,5 +147,5 @@ tests, that a world's size grows in proportion to its tokens.
 <!-- turns -->
 ---
 
-← [Chapter 18 · Do the brains matter?](18-do-the-brains-matter.md) · [Contents](../README.md) · [Appendix A · What a simulation costs](A-costs.md) →
+← [Chapter 30 · Do the brains matter?](30-do-the-brains-matter.md) · [Contents](../README.md) · [Appendix A · What a simulation costs](A-costs.md) →
 <!-- /turns -->

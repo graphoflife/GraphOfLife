@@ -40,39 +40,57 @@ Frames are read with `gol_store.read_frame(run, index)`.
 From every frame, a row of statistics is computed and appended to
 `GraphOfLifeRuns/<run>/stats.jsonl`, one JSON object per line. Every row
 carries `iteration` and `phase` — so "the rows with `phase` = 2" are the
-world after each game — and about seventy statistics. The ones this book
-uses:
+world after each game — and about ninety statistics. They are the numbers
+the viewer charts, and every one has a note that says how it is computed.
+
+**On every row:**
 
 | field | what it is | note |
 |---|---|---|
-| `nodes` | agents alive | |
+| `nodes`, `edges` | agents alive, connections | |
 | `nodes_before` | agents alive when the phase began | |
-| `edges` | connections | |
-| `meanDegree` | connections per agent, 2·`edges`/`nodes` | [Degree](degree.md) |
-| `leaves` | agents with exactly one connection | [Core, trees and leaves](core-trees-leaves.md) |
-| `meanTokens`, `medianTokens`, `maxTokens` | tokens per agent: mean, median, largest | |
+| `tokens` | all tokens in the world (the same on every row) | |
+| `meanTokens`, `medianTokens`, `minTokens`, `maxTokens` | tokens per agent | [Tokens per agent](tokens-per-agent.md) |
 | `gini` | inequality of tokens | [Gini coefficient](gini-coefficient.md) |
 | `topDecileShare` | share of all tokens held by the richest tenth | [The richest tenth](richest-tenth.md) |
-| `distinctBrains` | genotypes among the living | [Genotypes](genotype.md) |
+| `tokenEntropy`, `tokenEvenness`, `degreeEntropy`, `degreeEvenness` | how evenly tokens and connections are spread, in bits and as a share of the most even | [Entropy and evenness](entropy-and-evenness.md) |
+| `meanDegree`, `medianDegree`, `minDegree`, `maxDegree`, `density` | connections per agent; `density` is the share of all possible pairs that are joined | [Degree](degree.md) |
+| `leaves` | agents with exactly one connection | [Core, trees and leaves](core-trees-leaves.md) |
+| `distinctBrains`, `distinctParents`, `brainDiversity` | genotypes among the living, their parent genotypes, genotypes per agent | [Brain diversity](brain-diversity.md) |
 | `cladesInWindow` | families: ancestors eight iterations back | [Families](families.md) |
 | `births` | children born (phase 1 rows) | [Births and deaths](births-and-deaths.md) |
 | `starved`, `orphaned` | agents the cleanup removed for having no tokens, or for being cut off | [Births and deaths](births-and-deaths.md) |
-| `meanInvestedShare` | mean share of its tokens a parent gave its child (phase 1) | |
-| `reproTokenShare` | all tokens given to children, as a share of all tokens (phase 1) | |
-| `selfAllocationShare` | share of all staked tokens staked on the staker's own node (phase 2) | [Staking at home](home-stake.md) |
-| `heldHomeShare` | share of nodes won by their own agent (phase 2) | [Staking at home](home-stake.md) |
-| `spreadShare` | share of stakers who spread rather than went all in (phase 2) | |
+| `gainers`, `losers`, `maxTokenAdded`, `maxTokenLost`, `redistributed` | who gained and who lost in the phase, the extremes, and the tokens of the dead dealt out | [Gains and losses](gains-and-losses.md) |
+| `meanInvestedShare`, `reproTokenShare`, `meanChildLinks`, `handovers` | how parents gave (phase 1) | [Reproduction statistics](reproduction-statistics.md) |
+| `selfAllocationShare`, `heldHomeShare` | staking on one's own node, and keeping it (phase 2) | [Staking at home](home-stake.md) |
+| `spreadShare`, `revoltShare`, `totalFlow`, `meanEdgeFlow`, `maxEdgeFlow`, `prunedEdges` | the stakes on neighbours, and the connections they keep alive (phase 2) | [Token flow](token-flow.md) |
 | `revolutions` | nodes won by a coalition (phase 2) | [Revolution](revolution.md) |
+| `cutRiskBefore` | the largest share of the world one cut could sever, before the cleanup | [Cut risk](cut-risk.md) |
+| `gifts`, `giftTokens`, `giftShare` | gifts of tokens — `null` in every run of this book, which has no gifts ([`allow_gifting`](settings.md#allow_gifting)) | |
 
-**Graph statistics** cost far more to compute, and are filled in only on the
-rows of every 25th iteration (0, 25, 50, …); on other rows they are `null`:
+**Graph statistics** cost far more to compute: they walk the whole network.
+They are filled in only on the rows of every 25th iteration (0, 25, 50, …);
+on other rows they are `null`:
 
 | field | what it is | note |
 |---|---|---|
-| `transitivity` | clustering | [Clustering](clustering.md) |
+| `transitivity`, `triangles` | clustering, and the number of triangles | [Clustering](clustering.md) |
 | `meanPathLength` | average distance between agents | [Path length](path-length.md) |
+| `radius`, `diameter` | the smallest and largest eccentricity | [Radius and diameter](radius-and-diameter.md) |
 | `coreShare` | share of agents in the 2-core | [Core, trees and leaves](core-trees-leaves.md) |
 | `bridges` | connections whose removal would split the network | [Bridges](bridges.md) |
+| `cutRisk` | the largest share of the world one cut could sever | [Cut risk](cut-risk.md) |
+| `cycleRank`, `loopDensity`, `components` | independent loops, loops per connection, separate pieces | [Loops](loops.md) |
+| `spectralGap` | how hard the network is to cut in two; how fast a random walk forgets | [The spectral gap](spectral-gap.md) |
+| `dimension`, `ricciCurvature` | dimension and curvature from how balls grow | [Dimension and curvature](ball-dimension-and-curvature.md) |
+| `boxDimension`, `boxDimensionR2` | dimension from covering the network with boxes | [Box dimension](box-dimension.md) |
+| `lightningScore`, `cyclingShare`, `lightningLongest`, `flowImbalance`, and the `net…` versions, `netFlowShare` | tokens that go round in loops (phase 2) | [Lightning](lightning.md) |
+| `degreeExponent`, `tokenExponent`, `degreeGamma`, `degreeKMin`, `degreeTailShare`, `degreeGammaKS`, and their `…R2` | power-law tails of the degrees and tokens | [Fitting a power law](power-law-fit.md) |
+| `tokensVsDegree`, `trianglesVsDegree`, `clusteringVsDegree`, `changeVsTokens`, and their `…R2` | how one property of agents grows with another | [Scaling relations](scaling-relations.md) |
+| `assortativity` | whether hubs join hubs | [Assortativity](assortativity.md) |
+
+Fields beginning with `_` (`_seconds`, `_cpu`, `_peakMB`, …) are the costs of
+the run, not of the world ([Appendix A](../chapters/A-costs.md)).
 
 The file is read with `gol_record.read_stats(run)`, which returns the rows
 as a list of dictionaries, in frame order.

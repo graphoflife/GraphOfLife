@@ -231,6 +231,15 @@ direction of this: an agent gets every token staked on its node, and an agent
 with more neighbours can be staked on by more of them. Whether connections
 make agents rich, or rich agents attract connections, this figure cannot say.
 
+Part III found the law behind it. Agents spread their stakes nearly evenly
+over their own node and their neighbours' ([Chapter 20](20-where-the-tokens-flow.md)),
+and stakes spread that way move tokens like a random walk, which comes to rest
+when every agent holds tokens in proportion to its connections **plus one**.
+The median agent of every class of connections holds close to that resting
+share ([Chapter 23](23-how-properties-scale-together.md)). So, in the main,
+connections make agents rich — and a rich agent with few connections drains
+back to its share within a few games ([Chapter 19](19-gains-and-losses.md)).
+
 ## The tokens of the dead
 
 <!-- figure tokens/shared-out -->
