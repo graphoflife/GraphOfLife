@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 380" width="760" height="380" role="img" aria-label="The Lorenz curve and the Gini coefficient"><title>The Lorenz curve and the Gini coefficient</title><style>
+.dg-t{fill:#eef4fa;font:13px system-ui,sans-serif}
+.dg-b{fill:#eef4fa;font:600 13px system-ui,sans-serif}
+.dg-h{fill:#eef4fa;font:600 15px system-ui,sans-serif}
+.dg-m{fill:#9ab0c3;font:12px system-ui,sans-serif}
+.dg-s{fill:#9ab0c3;font:11px system-ui,sans-serif}
+.dg-box{fill:#2d3d50;stroke:#5a6e86;stroke-width:1}
+.dg-box2{fill:#384c64;stroke:#5a6e86;stroke-width:1}
+.dg-frame{fill:none;stroke:#435468;stroke-width:1;stroke-dasharray:4 3}
+.dg-line{stroke:#9ab0c3;stroke-width:1.4;fill:none}
+.dg-faint{stroke:#7e94a5;stroke-width:1;fill:none;opacity:.6}
+.dg-acc{stroke:#64bdff;stroke-width:2;fill:none}
+.dg-warn{stroke:#ffd166;stroke-width:2;fill:none}
+.dg-bad{stroke:#ff6b6b;stroke-width:2;fill:none}
+.dg-good{stroke:#7ee787;stroke-width:2;fill:none}
+.dg-node{fill:#64bdff}
+.dg-node2{fill:#ffd166}
+.dg-node3{fill:#7ee787}
+.dg-node4{fill:#c792ea}
+.dg-dead{fill:#ff6b6b}
+.dg-grey{fill:#7e94a5}
+.dg-fill{fill:#64bdff;opacity:.85}
+.dg-fill2{fill:#ffd166;opacity:.85}
+.dg-fill3{fill:#c792ea;opacity:.85}
+</style>
+<defs><marker id="dg-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9ab0c3"/></marker></defs><rect width="760" height="380" rx="10" fill="#18202b"/><text x="20.0" y="26.0" class="dg-h" text-anchor="start">Four agents, their Lorenz curve, and their Gini coefficient</text><line x1="60.0" y1="330.0" x2="320.0" y2="330.0" class="dg-line"/><line x1="60.0" y1="330.0" x2="60.0" y2="70.0" class="dg-line"/><line x1="60.0" y1="330.0" x2="320.0" y2="70.0" class="dg-faint"/><polygon points="60,330 60.0,330.0 125.0,313.8 190.0,281.2 255.0,232.5 320.0,70.0 320,330" style="fill:var(--accent,#64bdff);opacity:.18"/><polyline points="60.0,330.0 125.0,313.8 190.0,281.2 255.0,232.5 320.0,70.0" class="dg-acc"/><circle cx="60.0" cy="330.0" r="3.5" class="dg-node"/><circle cx="125.0" cy="313.8" r="3.5" class="dg-node"/><circle cx="190.0" cy="281.2" r="3.5" class="dg-node"/><circle cx="255.0" cy="232.5" r="3.5" class="dg-node"/><circle cx="320.0" cy="70.0" r="3.5" class="dg-node"/><text x="60.0" y="348.0" class="dg-s" text-anchor="middle">0/4</text><text x="125.0" y="348.0" class="dg-s" text-anchor="middle">1/4</text><text x="190.0" y="348.0" class="dg-s" text-anchor="middle">2/4</text><text x="255.0" y="348.0" class="dg-s" text-anchor="middle">3/4</text><text x="320.0" y="348.0" class="dg-s" text-anchor="middle">4/4</text><text x="52.0" y="334.0" class="dg-s" text-anchor="end">0/16</text><text x="52.0" y="317.8" class="dg-s" text-anchor="end">1/16</text><text x="52.0" y="285.2" class="dg-s" text-anchor="end">3/16</text><text x="52.0" y="236.5" class="dg-s" text-anchor="end">6/16</text><text x="52.0" y="74.0" class="dg-s" text-anchor="end">16/16</text><text x="190.0" y="368.0" class="dg-m" text-anchor="middle">share of agents, poorest first</text><text x="310.0" y="100.0" class="dg-s" text-anchor="end">perfect equality</text><text x="380.0" y="70.0" class="dg-t" text-anchor="start">Tokens: 1, 2, 3 and 10 (16 in all).</text><text x="380.0" y="91.0" class="dg-t" text-anchor="start">Lorenz curve: the share of all tokens held</text><text x="380.0" y="112.0" class="dg-t" text-anchor="start">by the poorest share of agents.</text><text x="380.0" y="133.0" class="dg-t" text-anchor="start"></text><text x="380.0" y="154.0" class="dg-t" text-anchor="start">Gini = (Σ (2i − n − 1) · xᵢ) / (n · Σ xᵢ),</text><text x="380.0" y="175.0" class="dg-t" text-anchor="start">with the xᵢ sorted from smallest (i = 1):</text><text x="380.0" y="196.0" class="dg-t" text-anchor="start">(−3·1 − 1·2 + 1·3 + 3·10) / (4 · 16)</text><text x="380.0" y="217.0" class="dg-t" text-anchor="start">= 28 / 64 = 0.4375.</text><text x="380.0" y="238.0" class="dg-t" text-anchor="start"></text><text x="380.0" y="259.0" class="dg-t" text-anchor="start">The same number is 1 − 2 × (the area under</text><text x="380.0" y="280.0" class="dg-t" text-anchor="start">the Lorenz curve) = 1 − 2 × 0.28125.</text><text x="380.0" y="301.0" class="dg-t" text-anchor="start">0 means everyone holds the same; (n − 1)/n,</text><text x="380.0" y="322.0" class="dg-t" text-anchor="start">here 0.75, that one agent holds everything.</text></svg>

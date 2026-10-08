@@ -1122,7 +1122,7 @@ def main() -> int:
         import gol_analysis
         results = gol_analysis.analyse(args.experiment)
         print(f"wrote book/results/{args.experiment}.json"
-              + "".join(f" and book/figures/{args.experiment}/{f}.json"
+              + "".join(f" and book/figures/{args.experiment}/{f}.svg"
                         for f in results.get("figures", [])))
         return 0
     if args.command == "costs":

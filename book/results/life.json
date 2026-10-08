@@ -1,0 +1,201 @@
+{
+ "chapter": "life",
+ "numbers": {
+  "early_late": {
+   "worlds": 26,
+   "median_early": 1284.0742574257424,
+   "median_late": 1235.4975,
+   "median_early_all_alive_at_200": 1366.7425742574258,
+   "within_20pc": 8,
+   "up_more_than_20pc": 12,
+   "down_more_than_20pc": 6,
+   "ratio_min": 0.38349437234762285,
+   "ratio_max": 4.638083313291647
+  },
+  "dead_s14": {
+   "died": 313,
+   "below_100_for_good_from": 178,
+   "last_five": [
+    23.0,
+    23.0,
+    22.0,
+    22.0,
+    20.0
+   ]
+  },
+  "dead_s20": {
+   "died": 2184,
+   "below_100_for_good_from": 1986,
+   "last_five": [
+    21.0,
+    21.0,
+    21.0,
+    21.0,
+    19.0
+   ]
+  },
+  "dead_s23": {
+   "died": 4,
+   "below_100_for_good_from": 0,
+   "last_five": [
+    92.0,
+    81.0,
+    35.0,
+    7.0
+   ]
+  },
+  "dead_s24": {
+   "died": 1547,
+   "below_100_for_good_from": 1490,
+   "last_five": [
+    34.0,
+    24.0,
+    26.0,
+    28.0,
+    16.0
+   ]
+  },
+  "window_nodes": {
+   "early": {
+    "n": 29,
+    "mean": 1242.572550358484,
+    "median": 1366.7425742574258,
+    "sd": 588.3561650535529,
+    "min": 168.15841584158414,
+    "max": 2275.5148514851485,
+    "q25": 803.5346534653465,
+    "q75": 1722.5841584158416
+   },
+   "late": {
+    "n": 26,
+    "mean": 1383.676923076923,
+    "median": 1235.4975,
+    "sd": 456.86031104939923,
+    "min": 571.685,
+    "max": 2291.305,
+    "q25": 1072.3512500000002,
+    "q75": 1806.3249999999998
+   }
+  },
+  "window_edges": {
+   "early": {
+    "n": 29,
+    "mean": 1990.3304882212358,
+    "median": 2036.6930693069307,
+    "sd": 1009.8142697305384,
+    "min": 326.6732673267327,
+    "max": 3634.5742574257424,
+    "q25": 1256.3465346534654,
+    "q75": 2974.227722772277
+   },
+   "late": {
+    "n": 26,
+    "mean": 2244.4876923076927,
+    "median": 2161.13,
+    "sd": 669.858522843788,
+    "min": 645.68,
+    "max": 3534.05,
+    "q25": 1822.815,
+    "q75": 2803.91875
+   }
+  },
+  "window_births": {
+   "early": {
+    "n": 29,
+    "mean": 170.2328439740526,
+    "median": 68.34653465346534,
+    "sd": 378.3292855409568,
+    "min": 3.128712871287129,
+    "max": 2054.2475247524753,
+    "q25": 38.31683168316832,
+    "q75": 129.32673267326732
+   },
+   "late": {
+    "n": 26,
+    "mean": 44.175000000000004,
+    "median": 40.3775,
+    "sd": 24.752291045476984,
+    "min": 11.24,
+    "max": 100.23,
+    "q25": 24.3,
+    "q75": 59.1375
+   }
+  },
+  "window_starved": {
+   "early": {
+    "n": 29,
+    "mean": 44.47080914988051,
+    "median": 9.950495049504951,
+    "sd": 111.83891018127933,
+    "min": 0.37623762376237624,
+    "max": 607.7326732673267,
+    "q25": 6.801980198019802,
+    "q75": 32.35643564356435
+   },
+   "late": {
+    "n": 26,
+    "mean": 7.8888461538461545,
+    "median": 5.574999999999999,
+    "sd": 6.584138411013593,
+    "min": 0.63,
+    "max": 30.7,
+    "q25": 3.6149999999999998,
+    "q75": 10.541250000000002
+   }
+  },
+  "window_orphaned": {
+   "early": {
+    "n": 29,
+    "mean": 106.96346876066917,
+    "median": 41.198019801980195,
+    "sd": 245.2388193913071,
+    "min": 1.4059405940594059,
+    "max": 1324.2376237623762,
+    "q25": 21.366336633663366,
+    "q75": 76.81188118811882
+   },
+   "late": {
+    "n": 26,
+    "mean": 27.504807692307693,
+    "median": 23.335,
+    "sd": 15.53738166363749,
+    "min": 8.065,
+    "max": 66.61,
+    "q25": 16.3675,
+    "q75": 36.96125
+   }
+  }
+ },
+ "figures": {
+  "worlds": {
+   "title": "Six worlds, one at a time",
+   "caption": "The number of agents alive after every game in the worlds with seeds 1 to 6, each in a chart of its own and all on the same scale (0 to 4,000 agents, iterations 0 to 3,000). Each line has one point per iteration.",
+   "recipe": "**Runs.** `B1-10000-s001` \u2026 `B1-10000-s006`, six of the 30 baseline runs (their settings are listed in [Chapter 8](08-thirty-worlds.md)).\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).\n\n1. Take the rows with `phase` = 2.\n2. Plot `nodes` against `iteration`, one point per iteration, joined.\n\n**To make it again:** `python3 book_figures.py life`."
+  },
+  "agents": {
+   "title": "Agents alive, 30 worlds",
+   "caption": "The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th). Four worlds die out; after a world's death it is no longer counted, so the bands of the last thousand iterations are those of 26 worlds.",
+   "recipe": "**Runs.** The 30 baseline runs `B1-10000-s001` \u2026 `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in Chapter 8). They are made with `python3 gol_lab.py run E02`.\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).\n\n1. Take every run's rows with `phase` = 2 and the statistic `nodes`.\n2. Cut the iterations into stretches of 5 (600 stretches over 3,000 iterations) and take each world's mean in each stretch.\n3. In each stretch, take the median, the 25th and 75th and the 5th and 95th percentiles of those means over the worlds that still have a value there (a world that died has none after its death).\n\n**To make it again:** `python3 book_figures.py life`."
+  },
+  "alive": {
+   "title": "Worlds still alive",
+   "caption": "How many of the 30 worlds are still alive. A world dies when an iteration ends with 20 agents or fewer; four did, after 4, 313, 1,547 and 2,184 iterations.",
+   "recipe": "**Runs.** The 30 baseline runs `B1-10000-s001` \u2026 `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in Chapter 8). They are made with `python3 gol_lab.py run E02`.\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).\n\n1. For every stretch of 5 iterations, count the worlds that have a row with `phase` = 2 in it.\n\n**To make it again:** `python3 book_figures.py life`."
+  },
+  "early-late": {
+   "title": "Each world early and late",
+   "caption": "One line per surviving world, from its mean number of agents over iterations 100\u2013200 (left) to its mean over iterations 2,800\u20132,999 (right). Green: the late mean is more than 1.2 times the early one; red: less than 0.8 times; grey: in between. The thick blue line joins the medians of the 26 worlds.",
+   "recipe": "**Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` \u2026 `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in Chapter 8). They are made with `python3 gol_lab.py run E02`.\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).\n\n1. For each run that reached iteration 3,000, take the rows with `phase` = 2.\n2. Average `nodes` over the rows with 100 \u2264 `iteration` \u2264 200, and again over 2,800 \u2264 `iteration` \u2264 2,999.\n3. Draw one line from the first mean to the second; colour it by their ratio.\n4. Join the two medians over the 26 runs.\n\n**To make it again:** `python3 book_figures.py life`."
+  },
+  "connections": {
+   "title": "Connections, 30 worlds",
+   "caption": "The number of connections after every game. The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).",
+   "recipe": "**Runs.** The 30 baseline runs `B1-10000-s001` \u2026 `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in Chapter 8). They are made with `python3 gol_lab.py run E02`.\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).\n\n1. Take every run's rows with `phase` = 2 and the statistic `edges`.\n2. Cut the iterations into stretches of 5 (600 stretches over 3,000 iterations) and take each world's mean in each stretch.\n3. In each stretch, take the median, the 25th and 75th and the 5th and 95th percentiles of those means over the worlds that still have a value there (a world that died has none after its death).\n\n**To make it again:** `python3 book_figures.py life`."
+  },
+  "dead": {
+   "title": "The four worlds that died",
+   "caption": "The number of agents after every game in the four worlds that died, on a logarithmic axis, so that a fall from 1,000 to 100 looks as long as one from 100 to 10. A world stops when an iteration ends with 20 agents or fewer.",
+   "recipe": "**Runs.** `B1-10000-s014`, `-s020`, `-s023` and `-s024`, the four of the 30 baseline runs that died out.\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).\n\n1. Take the rows with `phase` = 2 and plot `nodes` against `iteration` on a logarithmic axis.\n\n**To make it again:** `python3 book_figures.py life`."
+  }
+ }
+}

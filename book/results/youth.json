@@ -1,0 +1,85 @@
+{
+ "chapter": "youth",
+ "numbers": {
+  "median_peak": {
+   "agents": 1982.0,
+   "at": 23
+  },
+  "median_agents_0": 126.5,
+  "median_agents_5": 254.0,
+  "median_agents_10": 904.0,
+  "median_agents_20": 1508.0,
+  "median_agents_50": 1463.0,
+  "median_agents_100": 1544.0,
+  "median_agents_150": 1241.0,
+  "flow_births_1_peak": {
+   "median": 971.0,
+   "at": 14.5
+  },
+  "flow_orphaned_1_peak": {
+   "median": 62.0,
+   "at": 13.5
+  },
+  "flow_starved_2_peak": {
+   "median": 104.0,
+   "at": 18.5
+  },
+  "flow_orphaned_2_peak": {
+   "median": 545.0,
+   "at": 14.5
+  },
+  "children_share_0": 0.49745,
+  "children_share_10": 0.3823,
+  "children_share_20": 0.2561,
+  "children_share_50": 0.0474,
+  "children_share_100": 0.0214,
+  "families_low": {
+   "median": 19.0,
+   "at": 8.5
+  },
+  "one_founder": {
+   "n": 29,
+   "mean": 213.79310344827587,
+   "median": 175.0,
+   "sd": 202.17414334294384,
+   "min": 25.0,
+   "max": 750.0,
+   "q25": 50.0,
+   "q75": 350.0
+  },
+  "one_founder_by_100": 13,
+  "seed1_one_founder_from": null
+ },
+ "figures": {
+  "boom": {
+   "title": "Agents in the first 150 iterations",
+   "caption": "Each thin blue line is one of the 30 worlds: the number of agents alive after every game. The yellow line is their median. The axis is logarithmic, so equal heights are equal factors: the step from 100 to 1,000 is as tall as the one from 1,000 to 10,000.",
+   "recipe": "**Runs.** The 30 baseline runs `B1-10000-s001` \u2026 `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in Chapter 8). They are made with `python3 gol_lab.py run E02`.\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).\n\n1. Take every run's rows with `phase` = 2 and 0 \u2264 `iteration` \u2264 150.\n2. Draw `nodes` against `iteration` for each run.\n3. At each iteration, take the median of `nodes` over the runs that have a row there.\n\n**To make it again:** `python3 book_figures.py youth`."
+  },
+  "flows": {
+   "title": "Births and deaths in the first 150 iterations",
+   "caption": "For each iteration, the median over the worlds of: the children born in the reproduction phase (yellow); the agents removed by the cleanup of that phase because they were joined to no one or to a piece smaller than the largest (orange \u2014 mostly newborns joined to no one); the agents removed by the cleanup of the game because nobody, not even themselves, staked a token on their node (red); and those removed in the game's cleanup because they were cut off (violet).",
+   "recipe": "**Runs.** The 30 baseline runs `B1-10000-s001` \u2026 `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in Chapter 8). They are made with `python3 gol_lab.py run E02`.\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).\n\n1. For iterations 0 to 150, take `births` and `orphaned` from the rows with `phase` = 1, and `starved` and `orphaned` from the rows with `phase` = 2.\n2. At each iteration, take the median of each over the runs that have a row there.\n\n**To make it again:** `python3 book_figures.py youth`."
+  },
+  "children-share": {
+   "title": "Share of all tokens given to children",
+   "caption": "In each reproduction phase, the tokens all parents together gave their children, as a share of all 10,000 tokens. The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th), here at every single iteration.",
+   "recipe": "**Runs.** The 30 baseline runs `B1-10000-s001` \u2026 `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in Chapter 8). They are made with `python3 gol_lab.py run E02`.\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).\n\n1. Take the rows with `phase` = 1 and 0 \u2264 `iteration` \u2264 150, and the statistic `reproTokenShare` \u2014 the sum of `invested` over the births of that phase, divided by the 10,000 tokens.\n2. At each iteration take the median, quartiles and 5th and 95th percentiles over the runs.\n\n**To make it again:** `python3 book_figures.py youth`."
+  },
+  "families": {
+   "title": "Families: distinct ancestors eight iterations back",
+   "caption": "After every game, how many different genotypes of eight iterations earlier the living descend from (before iteration 8: how many founders). The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th), at every iteration.",
+   "recipe": "**Runs.** The 30 baseline runs `B1-10000-s001` \u2026 `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in Chapter 8). They are made with `python3 gol_lab.py run E02`.\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).\n\n1. Take the rows with `phase` = 2 and 0 \u2264 `iteration` \u2264 150, and the statistic `cladesInWindow` ([Families](../notes/families.md): for every living agent, follow its genotype's parents back to the newest one born at or before iteration t \u2212 8, or to a founder's; count the distinct ones).\n2. At each iteration take the median, quartiles and 5th and 95th percentiles over the runs.\n\n**To make it again:** `python3 book_figures.py youth`."
+  },
+  "one-founder": {
+   "title": "When everyone descends from one founder",
+   "caption": "For each world, the first of the checks \u2014 made every 25 iterations \u2014 at which every living agent descends from one and the same founder. 29 of the 30 worlds got there; the world with seed 23 died after 4 iterations, first.",
+   "recipe": "**Runs.** The 30 baseline runs `B1-10000-s001` \u2026 `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in Chapter 8). They are made with `python3 gol_lab.py run E02`.\n\n**Data.** From the runs' frames, through the lineage analysis of Experiment 6 (`python3 gol_lab.py analyse E06`), whose results file `book/results/E06.json` holds every run's `oneFounder`.\n\n1. Read every frame of a run in order and remember, for every genotype (brain id), the genotype it was copied from (`parent_brain_ids`).\n2. After the game of every 25th iteration, follow every living agent's genotype back through its parents to a founder's genotype (one with no parent).\n3. The first iteration at which they all lead to the same founder is the world's value.\n4. Count the worlds at each value.\n\n**To make it again:** `python3 book_figures.py youth`."
+  },
+  "founder-lines": {
+   "title": "Whose descendants? World of seed 1, first 300 iterations",
+   "caption": "After every game, the share of the living agents that descend from each of the 100 founders, stacked. Each coloured layer is the line of one founder; the seven founders whose lines ever held the most are drawn in colour, the other 93 together in grey. Where a layer reaches the full height, everyone alive descends from that founder.",
+   "recipe": "**Runs.** `B1-10000-s001`, one of the 30 baseline runs.\n\n**Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2\u00b7t` is iteration *t* after reproduction and frame `2\u00b7t + 1` after the game.\n\n1. Read every frame in order and remember each genotype's parent genotype (`brain_ids`, `parent_brain_ids`).\n2. After each game up to iteration 300, follow every living agent's genotype back to its founder and count the agents per founder; divide by the number of agents.\n3. Stack the shares, the founders with the largest share ever at the bottom.\n\n**To make it again:** `python3 book_figures.py youth`."
+  }
+ }
+}

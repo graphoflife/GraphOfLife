@@ -1,0 +1,148 @@
+{
+ "chapter": "shape",
+ "numbers": {
+  "picture_0": {
+   "agents": 125,
+   "edges": 172,
+   "core": 0.76,
+   "tree": 0.056,
+   "leaves": 0.184
+  },
+  "picture_100": {
+   "agents": 1800,
+   "edges": 2574,
+   "core": 0.5188888888888888,
+   "tree": 0.10277777777777777,
+   "leaves": 0.37833333333333335
+  },
+  "picture_1000": {
+   "agents": 917,
+   "edges": 1266,
+   "core": 0.5070883315158125,
+   "tree": 0.13086150490730644,
+   "leaves": 0.36205016357688113
+  },
+  "picture_2999": {
+   "agents": 1336,
+   "edges": 2447,
+   "core": 0.5890718562874252,
+   "tree": 0.05464071856287425,
+   "leaves": 0.3562874251497006
+  },
+  "degree_end": {
+   "agents": 35554,
+   "mean": 3.243179389098273,
+   "share_1": 0.37064746582662994,
+   "share_2": 0.2306069640546774,
+   "share_ge_10": 0.039826742419980875,
+   "max": 1399
+  },
+  "coreShare_settled": {
+   "n": 26,
+   "mean": 0.5239183867619629,
+   "median": 0.536815222958529,
+   "sd": 0.06660199036363466,
+   "min": 0.30735481464447095,
+   "max": 0.5909524009338796,
+   "q25": 0.500806327327318,
+   "q75": 0.569011385275201
+  },
+  "coreShare_first": 0.7105258901604382,
+  "leaves/nodes_settled": {
+   "n": 26,
+   "mean": 0.3714245523743727,
+   "median": 0.3564647134704636,
+   "sd": 0.04467615691950056,
+   "min": 0.31591450611111893,
+   "max": 0.4674154256276722,
+   "q25": 0.33695533474718925,
+   "q75": 0.39120124695722086
+  },
+  "leaves/nodes_first": 0.16420009103256772,
+  "bridges/edges_settled": {
+   "n": 26,
+   "mean": 0.3279367030011456,
+   "median": 0.30706467626557205,
+   "sd": 0.07748540680981103,
+   "min": 0.25559916775439295,
+   "max": 0.5896166326812992,
+   "q25": 0.281400212225676,
+   "q75": 0.33295902961133084
+  },
+  "bridges/edges_first": 0.21215727467622236,
+  "transitivity_settled": {
+   "n": 26,
+   "mean": 0.07630546376921621,
+   "median": 0.07527366823198198,
+   "sd": 0.02611120116293067,
+   "min": 0.03327756403147814,
+   "max": 0.12880141978968151,
+   "q25": 0.05693503394836842,
+   "q75": 0.08992345597964616
+  },
+  "distance": {
+   "measured": {
+    "n": 26,
+    "mean": 9.644158869601998,
+    "median": 9.787111143958299,
+    "sd": 1.530960293999185,
+    "min": 6.465174526711016,
+    "max": 13.033057833444182,
+    "q25": 8.7437705370972,
+    "q75": 10.24254602176379
+   },
+   "random": {
+    "n": 26,
+    "mean": 6.0628442497014055,
+    "median": 6.007125627254237,
+    "sd": 0.45222495188609035,
+    "min": 5.35064984171468,
+    "max": 7.372557368738165,
+    "q25": 5.856060941380384,
+    "q75": 6.185735468814993
+   },
+   "ratio": {
+    "n": 26,
+    "mean": 1.5974392176022765,
+    "median": 1.6128524659215917,
+    "sd": 0.2648779146261172,
+    "min": 0.9579733166888825,
+    "max": 2.141428910765617,
+    "q25": 1.4613978034878872,
+    "q75": 1.741057610631202
+   }
+  }
+ },
+ "figures": {
+  "worlds": {
+   "title": "One world at four moments",
+   "caption": "The world with seed 1 after the games of iterations 0, 100, 1,000 and 2,999. Every agent alive is a dot, every connection a line. Blue: agents in the core, which is what is left when agents with one connection or none are removed again and again until none remains ([Core, trees and leaves](../notes/core-trees-leaves.md)); yellow: the rest of the hanging trees; red: leaves, agents with a single connection. Where a dot is drawn means nothing in itself: a layout (networkx's ForceAtlas2, seed 1) pulls joined agents together and pushes the rest apart.",
+   "recipe": "**Runs.** `B1-10000-s001`, one of the 30 baseline runs.\n\n**Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2\u00b7t` is iteration *t* after reproduction and frame `2\u00b7t + 1` after the game.\n\n1. Read frames `1`, `201`, `2001` and `5999` (iterations 0, 100, 1,000 and 2,999, after the game): `ids` and `edges`.\n2. Peel: remove every agent with one connection or none, again and again, until none is left; the agents never removed are the core. Leaves are agents with exactly one connection.\n3. Lay the graph out with `networkx.forceatlas2_layout(G, max_iter=200, seed=1)`.\n\n**To make it again:** `python3 book_figures.py shape`."
+  },
+  "world-2999": {
+   "title": "World of seed 1 after the game of iteration 2,999",
+   "caption": "Every agent alive after the game of iteration 2,999 is a dot, every connection a line. Blue: agents in the core, which is what is left when agents with one connection or none are removed again and again until none remains ([Core, trees and leaves](../notes/core-trees-leaves.md)); yellow: the rest of the hanging trees; red: leaves, agents with a single connection. Where a dot is drawn means nothing in itself: a layout (networkx's ForceAtlas2, seed 1) pulls joined agents together and pushes the rest apart.",
+   "recipe": "**Runs.** `B1-10000-s001`.\n\n**Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2\u00b7t` is iteration *t* after reproduction and frame `2\u00b7t + 1` after the game.\n\n1. Read frame `5999` (iteration 2,999, after the game): `ids` and `edges`.\n2. Peel: remove every agent with one connection or none, again and again, until none is left; the agents never removed are the core. Leaves are agents with exactly one connection.\n3. Lay the graph out with `networkx.forceatlas2_layout(G, max_iter=200, seed=1)`.\n\n**To make it again:** `python3 book_figures.py shape`."
+  },
+  "degree": {
+   "title": "How many connections agents have",
+   "caption": "Of all agents alive after the last game of the 26 surviving worlds, the share that have at least d connections, for every d. At the start every founder had exactly four (the grey line).",
+   "recipe": "**Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` \u2026 `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in Chapter 8). They are made with `python3 gol_lab.py run E02`.\n\n**Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2\u00b7t` is iteration *t* after reproduction and frame `2\u00b7t + 1` after the game.\n\n1. Count every agent's connections in the last frame's `edges`; pool the 26 runs.\n2. For d = 1, 2, \u2026, the share of agents with at least d.\n\n**To make it again:** `python3 book_figures.py shape`."
+  },
+  "structure": {
+   "title": "Core, leaves and bridges",
+   "caption": "Three shares, after every game of the 30 baseline worlds. Left: the share of agents in the core ([Core, trees and leaves](../notes/core-trees-leaves.md)), measured every 25 iterations. Middle: the share of agents with exactly one connection, after every game. Right: the share of connections that are bridges ([Bridges](../notes/bridges.md)), every 25 iterations. In each, the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).",
+   "recipe": "**Runs.** The 30 baseline runs `B1-10000-s001` \u2026 `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in Chapter 8). They are made with `python3 gol_lab.py run E02`.\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).\n\n1. Take the rows with `phase` = 2 and the statistics `coreShare`, `leaves/nodes` and `bridges/edges` (`a/b` is the row's `a` divided by its `b`).\n2. For `leaves/nodes`, make the band as for every other band ([Bands](../notes/bands.md)): stretches of 5 iterations.\n3. For `coreShare` and `bridges/edges`, which are measured every 25 iterations, use stretches of 25.\n\n**To make it again:** `python3 book_figures.py shape`."
+  },
+  "clustering": {
+   "title": "Clustering",
+   "caption": "Three times the number of triangles divided by the number of connected triples ([Clustering](../notes/clustering.md)), every 25 iterations. The founders' ring starts near 0.24. The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).",
+   "recipe": "**Runs.** The 30 baseline runs `B1-10000-s001` \u2026 `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in Chapter 8). They are made with `python3 gol_lab.py run E02`.\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).\n\n1. Take the rows with `phase` = 2 and the statistic `transitivity`.\n2. Bands as above, in stretches of 25.\n\n**To make it again:** `python3 book_figures.py shape`."
+  },
+  "distance": {
+   "title": "Steps between two agents",
+   "caption": "For each surviving world (blue): its mean number of agents and the mean number of steps along connections from one agent to another, both averaged over iterations 500\u20132,999. Grey: the rough distance in a random network with the same number of agents N and connections per agent k, ln N / ln k.",
+   "recipe": "**Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` \u2026 `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in Chapter 8). They are made with `python3 gol_lab.py run E02`.\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).\n\n1. Average `nodes`, `meanDegree` and `meanPathLength` over the rows with `phase` = 2 and 500 \u2264 `iteration` \u2264 2,999 (`meanPathLength` is measured every 25 iterations, from breadth-first searches out of 8 to 16 evenly spread agents; [Path length](../notes/path-length.md)).\n2. Plot one dot per run, and ln N / ln k for the same run.\n\n**To make it again:** `python3 book_figures.py shape`."
+  }
+ }
+}

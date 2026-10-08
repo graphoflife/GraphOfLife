@@ -1089,18 +1089,6 @@ details.control-group > summary:hover h3 { color: var(--text); }
 .book-note { color: var(--muted); font-size: 12.5px; }
 .book-reason { color: var(--warn); font-size: 12.5px; }
 
-/* The claim, from the plan. */
-.book-thesis {
-  margin: 0 0 18px;
-  padding: 12px 16px;
-  border: 1px solid var(--border);
-  border-left: 3px solid var(--accent);
-  border-radius: var(--radius);
-  background: var(--panel);
-}
-.book-thesis p { margin: 0 0 8px; }
-.book-thesis p:last-child { margin-bottom: 0; }
-
 /* What an experiment runs, and how far it has got. */
 .book-experiment {
   margin: 0 0 18px;
@@ -1142,27 +1130,50 @@ details.control-group > summary:hover h3 { color: var(--text); }
 .book-run-done span { background: var(--accent); }
 .book-run-extinct span { background: var(--muted-2); }
 .book-run-blocked { outline: 1px solid var(--danger); }
-.book-plan th { white-space: nowrap; }
 
-.book-figure { margin: 6px 0 20px; }
-.book-figure canvas {
-  display: block;
-  width: 100%;
-  height: 340px;
+/* A figure or diagram: an SVG drawn on its own dark card, as wide as the text. */
+.md img { display: block; max-width: 100%; height: auto; margin: 6px auto 10px; border-radius: var(--radius); }
+
+/* Obsidian's callouts: a box with a coloured edge and a title, folded away
+   when it is a <details>. */
+.md-callout {
+  margin: 0 0 16px;
+  padding: 10px 16px 2px;
   border: 1px solid var(--border);
+  border-left: 3px solid var(--accent-dim);
   border-radius: var(--radius);
   background: var(--panel);
 }
-.book-caption { color: var(--muted); font-size: 12.5px; margin: 6px 2px 0 !important; }
-
-.book-turns {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  margin-top: 44px;
-  padding-top: 14px;
-  border-top: 1px solid var(--border);
+.md-callout > summary, .md-callout-title {
+  margin: 0 0 8px !important;
+  font-weight: 600;
+  color: var(--text);
 }
+.md-callout > summary { cursor: pointer; }
+details.md-callout:not([open]) { padding-bottom: 10px; }
+details.md-callout:not([open]) > summary { margin: 0 !important; }
+.md-callout-quote { border-left-color: var(--accent); }
+.md-callout-example { border-left-color: var(--muted-2); }
+.md-callout-example, .md-callout-example li, .md-callout-example p { font-size: 13.5px; }
+.md-callout-question { border-left-color: var(--warn); }
+.md-callout-info { border-left-color: var(--info); }
+.md-callout-summary, .md-callout-success { border-left-color: var(--ok); }
+.md-callout-warning { border-left-color: var(--danger); }
+
+/* A formula: typeset by KaTeX, or its TeX while that has not loaded. */
+.md-math {
+  overflow-x: auto;
+  overflow-y: hidden;
+  margin: 6px 0 16px;
+  padding: 4px 0;
+  color: var(--text);
+  white-space: pre-wrap;
+}
+.md-math:not([data-typeset]), .md-math-inline:not([data-typeset]) {
+  font-family: var(--mono, monospace);
+  font-size: 13px;
+}
+.md-math .katex-display { margin: 0; }
 
 @media (max-width: 900px) {
   .book-layout { grid-template-columns: 1fr; gap: 12px; }

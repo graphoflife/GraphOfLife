@@ -11,8 +11,8 @@ provenance.json), and writes two things into the book:
     book/results/E02.json        every number the chapter quotes, the
                                  comparisons with their intervals, and where
                                  every run came from
-    book/figures/E02/<name>.json one per figure the plan asks for, drawn by
-                                 the Book tab
+    book/figures/E02/<name>.svg  one per figure the plan asks for, drawn by
+                                 book_svg.py, for a chapter to show
 
 An experiment's plan says what to look at under "analyse":
 
@@ -79,6 +79,14 @@ def _finite(value: Any) -> Any:
     if isinstance(value, (list, tuple)):
         return [_finite(v) for v in value]
     return value
+
+
+def _draw(path: str, chart: Dict[str, Any]) -> None:
+    """A chart for the book, as an SVG image (book_svg.py) at `path`, minus its extension."""
+    import book_svg
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(f"{path}.svg", "w", encoding="utf-8") as f:
+        f.write(book_svg.render([_finite(chart)]))
 
 
 def _write(path: str, value: Any, compact: bool = False) -> None:
@@ -442,12 +450,12 @@ class _Runs:
                         its, values = self.measure(s.run_id, stat, phase)
                         drawn.append({"label": f"{condition}, seed {seed}" if several else f"seed {seed}",
                                       "x": its.tolist(), "y": values.tolist(), "width": 1.0})
-        _write(os.path.join(BOOK, "figures", name, f"{figure['name']}.json"), {
+        _draw(os.path.join(BOOK, "figures", name, figure["name"]), {
             "title": figure.get("title"), "caption": figure.get("caption"),
             "x": {"label": "iteration"},
             "y": {"label": figure.get("y", stat), "log": bool(figure.get("log")),
                   **({"min": figure["min"]} if "min" in figure else {})},
-            "guides": figure.get("guides", []), "series": drawn}, compact=True)
+            "guides": figure.get("guides", []), "series": drawn})
 
 
 def _compared(name: str, label: str, reference: str,
@@ -701,9 +709,9 @@ def analyse_lineage(name: str, by_condition: Dict[str, List[gol_lab.RunSpec]],
             band["label"] = (f"{condition} — " if len(by_condition) > 1 else "") + \
                 f"median, middle half, nine in ten of {len(specs)} runs"
             drawn.append(band)
-        _write(os.path.join(BOOK, "figures", name, f"{label}.json"), {
+        _draw(os.path.join(BOOK, "figures", name, label), {
             "title": title, "x": {"label": "iteration"},
-            "y": {"label": y, "log": False, "min": 0}, "series": drawn}, compact=True)
+            "y": {"label": y, "log": False, "min": 0}, "series": drawn})
     summaries = {}
     for condition, specs in by_condition.items():
         lived = [found[s.run_id] for s in specs if s.run_id in reached]
@@ -889,10 +897,10 @@ def analyse_scaling(name: str, plan: Dict[str, Any],
             ends = np.array([x.min(), x.max()])
             drawn.append({"label": "in proportion to the tokens (exponent 1)",
                           "x": ends.tolist(), "y": (middle * ends).tolist(), "width": 1.0})
-        _write(os.path.join(BOOK, "figures", name, f"{item.get('name', stat)}.json"), {
+        _draw(os.path.join(BOOK, "figures", name, item.get("name", stat)), {
             "title": item.get("title"), "caption": item.get("caption"),
             "x": {"label": "tokens in the world", "log": True},
-            "y": {"label": item.get("y", stat), "log": True}, "series": drawn}, compact=True)
+            "y": {"label": item.get("y", stat), "log": True}, "series": drawn})
         figures.append(item.get("name", stat))
 
     return {"reference": spec.get("reference"), "figures": figures, "window": window,
@@ -941,14 +949,14 @@ def costs_report() -> Dict[str, Any]:
                      "peakMB": max((r.get("_peakMB") or 0) for r in rows)})
     points.sort()
     top = points[-1][0] if points else 1
-    _write(os.path.join(BOOK, "figures", "costs", "time.json"), {
+    _draw(os.path.join(BOOK, "figures", "costs", "time"), {
         "title": "Seconds per iteration, against the agents alive",
         "x": {"label": "agents"}, "y": {"label": "seconds per iteration, per 10,000 weights"},
         "series": [
             {"label": f"{len(points):,} recorded iterations of {len(runs)} runs",
              "x": [p[0] for p in points], "y": [p[1] for p in points], "points": True},
             {"label": "what the estimates assume", "x": [0, top],
-             "y": [0, top * known["secondsPerAgentIteration"]]}]}, compact=True)
+             "y": [0, top * known["secondsPerAgentIteration"]]}]})
     report = {"fitted": known, "runs": runs, "updated": time.strftime("%Y-%m-%d")}
     _write(os.path.join(BOOK, "results", "costs.json"), report)
     return report

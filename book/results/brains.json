@@ -1,0 +1,273 @@
+{
+ "chapter": "brains",
+ "numbers": {
+  "kinds": {
+   "1": "breeding",
+   "2": "frozen",
+   "3": "frozen",
+   "4": "frozen",
+   "5": "frozen",
+   "6": "teeming",
+   "7": "breeding",
+   "8": "frozen",
+   "9": "frozen",
+   "10": "nearly frozen",
+   "11": "frozen",
+   "12": "teeming",
+   "13": "frozen",
+   "14": "frozen",
+   "15": "teeming",
+   "16": "teeming",
+   "17": "teeming",
+   "18": "frozen",
+   "19": "nearly frozen",
+   "20": "frozen",
+   "21": "teeming",
+   "22": "breeding",
+   "23": "frozen",
+   "24": "frozen",
+   "25": "teeming",
+   "26": "frozen",
+   "27": "teeming",
+   "28": "frozen",
+   "29": "teeming",
+   "30": "teeming"
+  },
+  "births_per_100": {
+   "baseline": {
+    "n": 26,
+    "mean": 3.069432539669772,
+    "median": 3.117648371478146,
+    "sd": 0.46298833768434206,
+    "min": 2.2907588326430623,
+    "max": 4.305186256265668,
+    "q25": 2.697081394894557,
+    "q75": 3.273567315284785
+   },
+   "fixed": {
+    "n": 30,
+    "mean": 32.86477338844598,
+    "median": 0.0032090963742910476,
+    "sd": 43.780940174978895,
+    "min": 0.0,
+    "max": 99.99229384573374,
+    "q25": 0.0,
+    "q75": 87.6392409572058
+   }
+  },
+  "dots_agents": {
+   "brains change (baseline)": {
+    "n": 26,
+    "mean": 1265.2388615384614,
+    "median": 1308.74,
+    "sd": 214.46714995450668,
+    "min": 818.7432,
+    "max": 1626.1468,
+    "q25": 1179.8049999999998,
+    "q75": 1409.8826
+   },
+   "brains never change": {
+    "n": 30,
+    "mean": 1514.7623200000003,
+    "median": 1574.4492,
+    "sd": 678.7413867652222,
+    "min": 183.0,
+    "max": 2927.85,
+    "q25": 1273.0544,
+    "q75": 1991.3519000000001
+   }
+  },
+  "dots_births": {
+   "brains change (baseline)": {
+    "n": 26,
+    "mean": 3.069432539669772,
+    "median": 3.117648371478146,
+    "sd": 0.46298833768434206,
+    "min": 2.2907588326430623,
+    "max": 4.305186256265668,
+    "q25": 2.697081394894557,
+    "q75": 3.273567315284785
+   },
+   "brains never change": {
+    "n": 30,
+    "mean": 32.86527338844598,
+    "median": 0.0037090963742910476,
+    "sd": 43.780551901755025,
+    "min": 0.001,
+    "max": 99.99229384573374,
+    "q25": 0.001,
+    "q75": 87.6392409572058
+   }
+  },
+  "dots_gini": {
+   "brains change (baseline)": {
+    "n": 26,
+    "mean": 0.49550012614271927,
+    "median": 0.4943538148690273,
+    "sd": 0.03396932679746896,
+    "min": 0.42174010331415945,
+    "max": 0.5506886035450862,
+    "q25": 0.47071777931557224,
+    "q75": 0.5189435709670752
+   },
+   "brains never change": {
+    "n": 30,
+    "mean": 0.34062954670779055,
+    "median": 0.31684688868449096,
+    "sd": 0.1428280142334196,
+    "min": 0.1526914170719337,
+    "max": 0.7862337688572942,
+    "q25": 0.24994161492027767,
+    "q75": 0.3961664633477799
+   }
+  },
+  "dots_kept": {
+   "brains change (baseline)": {
+    "n": 26,
+    "mean": 0.45450798806891124,
+    "median": 0.4518270276018592,
+    "sd": 0.03338380202569195,
+    "min": 0.39454774030870277,
+    "max": 0.5194646701060216,
+    "q25": 0.4316405341718986,
+    "q75": 0.47418410774406755
+   },
+   "brains never change": {
+    "n": 30,
+    "mean": 0.4569589774029715,
+    "median": 0.4458625306918875,
+    "sd": 0.15454567057649138,
+    "min": 0.1455582977724661,
+    "max": 0.7738997992834424,
+    "q25": 0.3758196556567937,
+    "q75": 0.5557317366755812
+   }
+  },
+  "chance_died_at": {
+   "2": 25,
+   "3": 5
+  },
+  "chance_last_game": {
+   "cut_off_median": 0.6238095238095238,
+   "starved_median": 0.150997150997151
+  },
+  "wander": {
+   "brains change (baseline)": {
+    "n": 26,
+    "mean": 4.78129883284382,
+    "median": 4.647955581613345,
+    "sd": 1.8226264798030845,
+    "min": 2.126041809711938,
+    "max": 8.416651788371125,
+    "q25": 3.214290634499719,
+    "q75": 6.017539819089011
+   },
+   "brains never change": {
+    "n": 30,
+    "mean": 3.170586657868702,
+    "median": 1.1130358899385873,
+    "sd": 9.685394292743137,
+    "min": 1.0,
+    "max": 54.34434782608696,
+    "q25": 1.0184816394372256,
+    "q75": 1.6205766131196313
+   }
+  },
+  "moves": {
+   "brains change (baseline)": {
+    "n": 26,
+    "mean": 8.346153846153847,
+    "median": 8.0,
+    "sd": 3.856862016637958,
+    "min": 3.0,
+    "max": 21.0,
+    "q25": 6.0,
+    "q75": 10.0
+   },
+   "brains never change": {
+    "n": 30,
+    "mean": 28.233333333333334,
+    "median": 1.5,
+    "sd": 42.52519199278221,
+    "min": 0.0,
+    "max": 108.0,
+    "q25": 0.0,
+    "q75": 66.0
+   }
+  },
+  "moves_by_kind": {
+   "breeding": {
+    "n": 3,
+    "mean": 28.0,
+    "median": 16.0,
+    "sd": 35.552777669262355,
+    "min": 0.0,
+    "max": 68.0,
+    "q25": 8.0,
+    "q75": 42.0
+   },
+   "frozen": {
+    "n": 15,
+    "mean": 0.8666666666666667,
+    "median": 0.0,
+    "sd": 1.3020130933435712,
+    "min": 0.0,
+    "max": 4.0,
+    "q25": 0.0,
+    "q75": 1.5
+   },
+   "teeming": {
+    "n": 10,
+    "mean": 74.9,
+    "median": 94.0,
+    "sd": 41.286128959305984,
+    "min": 0.0,
+    "max": 108.0,
+    "q25": 65.0,
+    "q75": 103.75
+   },
+   "nearly frozen": {
+    "n": 2,
+    "mean": 0.5,
+    "median": 0.5,
+    "sd": 0.7071067811865476,
+    "min": 0.0,
+    "max": 1.0,
+    "q25": 0.25,
+    "q75": 0.75
+   }
+  }
+ },
+ "figures": {
+  "settled": {
+   "title": "Where the worlds settle, with and without change",
+   "caption": "One dot per world that lived to iteration 3,000, at its mean over iterations 500 to 2,999. In each panel, the left column holds the 26 baseline worlds, whose brains change (blue); the right column the 30 worlds whose brains never change, coloured by the kind of world each became (see the figure of the four kinds below): violet frozen, green nearly frozen, yellow breeding, red teeming. The bars are the medians. The panel of births has a logarithmic axis; the 15 frozen worlds, which had no births at all, are drawn at its bottom, 0.001. No world deciding by chance lived more than 3 iterations, so that condition has no dots. The dots are spread sideways only so that they do not hide each other.",
+   "recipe": "**Runs.** The 90 runs of Experiment 7 \u2014 B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations \u2014 in three conditions: the 30 baseline runs `B1-10000-s001` \u2026 `-s030`; *brains never change*, `B1-10000-a8525d-s001` \u2026 `-s030` (`mutation_sparsity` 0); and *decisions by chance*, `B1-10000-e7f450-s001` \u2026 `-s030` (`random_decisions` on). They are made with `python3 gol_lab.py run E07`; every setting is listed in the box at the top of the chapter.\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).\n\n1. For agents, the Gini coefficient and nodes kept: average `nodes`, `gini` and `heldHomeShare` over the rows with `phase` = 2 and 500 \u2264 `iteration` \u2264 2,999.\n2. For births: divide `births` in each row with `phase` = 1 by the row's `nodes_before`, multiply by 100, and average from iteration 500 to 2,999.\n3. Sort the worlds whose brains never change into the four kinds by their births (frozen: none; nearly frozen: below 0.5; teeming: above 50; breeding: between).\n4. Plot one dot per run that reached iteration 3,000, one column per condition.\n\n**To make it again:** `python3 book_figures.py brains`."
+  },
+  "kinds": {
+   "title": "Four kinds of world",
+   "caption": "Every world that lived to iteration 3,000, sorted by its mean births per 100 agents per iteration from iteration 500 on: frozen \u2014 none at all; nearly frozen \u2014 fewer than 0.5; breeding \u2014 0.5 to 50; teeming \u2014 more than 50, about one child per agent per iteration.",
+   "recipe": "**Runs.** The 90 runs of Experiment 7 \u2014 B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations \u2014 in three conditions: the 30 baseline runs `B1-10000-s001` \u2026 `-s030`; *brains never change*, `B1-10000-a8525d-s001` \u2026 `-s030` (`mutation_sparsity` 0); and *decisions by chance*, `B1-10000-e7f450-s001` \u2026 `-s030` (`random_decisions` on). They are made with `python3 gol_lab.py run E07`; every setting is listed in the box at the top of the chapter.\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).\n\n1. Compute each run's births per 100 agents as for the figure of births above.\n2. Sort the runs into the four kinds by that number and count them.\n\n**To make it again:** `python3 book_figures.py brains`."
+  },
+  "traces": {
+   "title": "Five single worlds",
+   "caption": "Each panel is one world: the number of agents alive after every game (blue) and of children born in every reproduction phase (yellow), on the same scale in every panel. Top left: a baseline world, whose brains change (seed 1). The others are worlds whose brains never change: seed 2, frozen \u2014 no child born after iteration 95, the same agents game after game; seed 1, breeding; seeds 25 and 12, teeming \u2014 about one child for every agent in every iteration. In seed 12 every child is lost again at once, so the yellow line lies above the blue.",
+   "recipe": "**Runs.** `B1-10000-s001` (baseline), and `B1-10000-a8525d-s002`, `-s001`, `-s025` and `-s012` (brains never change), all from Experiment 7.\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).\n\n1. Plot `nodes` of the rows with `phase` = 2 and `births` of the rows with `phase` = 1 against `iteration`.\n\n**To make it again:** `python3 book_figures.py brains`."
+  },
+  "chance": {
+   "title": "The first iterations, with and without the brains",
+   "caption": "Each line is one world: the agents alive after the game of iterations 0 to 4. Blue: the baseline, whose agents decide with their brains; red: the same 30 seeds with every decision drawn at random. A red line ends where its world died.",
+   "recipe": "**Runs.** The 90 runs of Experiment 7 \u2014 B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations \u2014 in three conditions: the 30 baseline runs `B1-10000-s001` \u2026 `-s030`; *brains never change*, `B1-10000-a8525d-s001` \u2026 `-s030` (`mutation_sparsity` 0); and *decisions by chance*, `B1-10000-e7f450-s001` \u2026 `-s030` (`random_decisions` on). They are made with `python3 gol_lab.py run E07`; every setting is listed in the box at the top of the chapter.\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).\n\n1. Plot `nodes` of the rows with `phase` = 2 and `iteration` \u2264 4, one line per run.\n\n**To make it again:** `python3 book_figures.py brains`."
+  },
+  "wander-dots": {
+   "title": "How far a world wanders",
+   "caption": "For each world that lived to the end, coloured as in the figure above: cut its life from iteration 100 to 2,999 into 29 stretches of 100 iterations, take its mean number of agents in each, and divide the largest of the 29 by the smallest. 1 means a world that never moved; 4 that its most crowded stretch held four times as many agents as its emptiest.",
+   "recipe": "**Runs.** The 90 runs of Experiment 7 \u2014 B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations \u2014 in three conditions: the 30 baseline runs `B1-10000-s001` \u2026 `-s030`; *brains never change*, `B1-10000-a8525d-s001` \u2026 `-s030` (`mutation_sparsity` 0); and *decisions by chance*, `B1-10000-e7f450-s001` \u2026 `-s030` (`random_decisions` on). They are made with `python3 gol_lab.py run E07`; every setting is listed in the box at the top of the chapter.\n\n**Data.** From the analysis of Experiment 7 (`python3 gol_lab.py analyse E07`), whose results file holds every run's ratio under `wandering.nodes`; or from each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).\n\n1. Cut iterations 100\u20132,999 into 29 stretches of 100 and average `nodes` in each.\n2. Divide the largest of the 29 by the smallest.\n\n**To make it again:** `python3 book_figures.py brains`."
+  },
+  "moves-dots": {
+   "title": "How often one branch replaces all others",
+   "caption": "For each world that lived to the end, coloured as above: how many times after iteration 100 the newest common ancestor of all the living moved forward to a younger genotype ([The common ancestor](../notes/common-ancestor.md)). In a world whose brains never change, every genotype is a renamed copy of one founder's brain once that founder's line fills the world, so which branch wins is chance.",
+   "recipe": "**Runs.** The 90 runs of Experiment 7 \u2014 B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations \u2014 in three conditions: the 30 baseline runs `B1-10000-s001` \u2026 `-s030`; *brains never change*, `B1-10000-a8525d-s001` \u2026 `-s030` (`mutation_sparsity` 0); and *decisions by chance*, `B1-10000-e7f450-s001` \u2026 `-s030` (`random_decisions` on). They are made with `python3 gol_lab.py run E07`; every setting is listed in the box at the top of the chapter.\n\n**Data.** From the lineage analysis of Experiment 7, `book/results/E07.json` (`lineage.<condition>.runs.<run>.ancestor.moves`).\n\n1. As in Chapter 16, for every run.\n\n**To make it again:** `python3 book_figures.py brains`."
+  }
+ }
+}

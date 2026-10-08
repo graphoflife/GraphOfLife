@@ -247,8 +247,10 @@ def test_how_a_world_grows_with_its_tokens_is_fitted():
         mean = np.mean([r["nodes"] for r in rows if r["phase"] == 2 and 3 <= r["iteration"] <= 5])
         point = next(p for p in agents["points"] if p["tokens"] == 800 and p["seed"] == 1)
         assert abs(point["value"] - mean) < 1e-9, (point, mean)
-        figure = _strict(os.path.join(book, "figures", "E91", "agents.json"))
-        assert figure["x"]["log"] and figure["y"]["log"] and figure["series"][0]["points"]
+        figure = _svg(os.path.join(book, "figures", "E91", "agents.svg"))
+        # 200 to 800 tokens on a log axis is ruled at 200 and 500; a linear one would have 300.
+        assert "<circle" in figure and ">500<" in figure and ">300<" not in figure, \
+            "the runs were not drawn on log axes"
 
 
 def test_two_experiments_asking_for_the_same_run_share_it():
@@ -559,6 +561,14 @@ def _strict(path):
         return json.load(f, parse_constant=refuse)
 
 
+def _svg(path):
+    """An SVG figure, which no undefined number may have reached."""
+    with open(path, encoding="utf-8") as f:
+        text = f.read()
+    assert text.startswith("<svg") and "nan" not in text.lower() and "inf" not in text.lower(), path
+    return text
+
+
 def test_figures_hold_no_nan():
     """
     The analysis of a sweep writes a figure per statistic it was asked for and
@@ -582,8 +592,8 @@ def test_figures_hold_no_nan():
         results = gol_analysis.analyse("E91")
         assert results["figures"] == ["nodes", "bridges"]
         for name in ("nodes", "bridges"):
-            figure = _strict(os.path.join(book, "figures", "E91", f"{name}.json"))
-            assert figure["series"][0]["alive"][-1] == 3, figure["series"][0]["alive"]
+            figure = _svg(os.path.join(book, "figures", "E91", f"{name}.svg"))
+            assert "of 3 runs" in figure, "the band was not drawn over all three runs"
         stored = _strict(os.path.join(book, "results", "E91.json"))
         fast = stored["comparisons"]["nodes"]["fast"]
         assert fast["paired"] and fast["n"] == 3 and fast["indicative"], fast
@@ -632,9 +642,8 @@ def test_a_world_that_died_is_counted_apart():
         assert [x["seed"] for x in results["extinct"]["doomed"]] == [1, 2, 3]
         assert results["endings"]["nodes"]["doomed"]["n"] == 0, "a dead world's dying was averaged in"
         assert results["endingsFrom"] == 2
-        drawn = [series["label"] for series in
-                 _strict(os.path.join(book, "figures", "E91", "nodes.json"))["series"]]
-        assert drawn[2:] == ["baseline, seed 1"], drawn
+        drawn = _svg(os.path.join(book, "figures", "E91", "nodes.svg"))
+        assert "baseline, seed 1" in drawn and "doomed, seed" not in drawn, drawn
         ended = results["endings"]["nodes"]["baseline"]
         assert ended["n"] == 3 and sorted(ended["bySeed"]) == [1, 2, 3], ended
         assert set(ended["seedsNeeded"]) == {"5%", "10%", "20%"}

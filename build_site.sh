@@ -50,7 +50,7 @@ done
 # results their analysis writes. In book/ for the same reason the notes are in
 # research/, and gol_server.py serves the same folder, the same two kinds of
 # file; tests/test_engine.py holds the two to that.
-(cd "${here}/book" && find . -type f \( -name '*.md' -o -name '*.json' \)) | while read -r f; do
+(cd "${here}/book" && find . -type f \( -name '*.md' -o -name '*.json' -o -name '*.svg' \)) | while read -r f; do
   mkdir -p "${out}/book/$(dirname "${f}")"
   cp "${here}/book/${f}" "${out}/book/${f}"
 done

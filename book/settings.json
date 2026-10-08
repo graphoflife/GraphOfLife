@@ -1,0 +1,99 @@
+{
+ "about": "What every setting of a run means, in a line. The book's runs blocks show each run's value beside these words; the note book/notes/settings.md explains each at length.",
+ "order": [
+  "total_tokens",
+  "n_nodes",
+  "k_neighbors",
+  "rewire_p",
+  "hidden_layers",
+  "brain_kind",
+  "brain_bits",
+  "message_amount",
+  "random_input_amount",
+  "exchange_messages",
+  "message_prepass",
+  "allow_handover",
+  "allow_revolutions",
+  "allow_gifting",
+  "random_decisions",
+  "prune_after",
+  "inactive_window",
+  "redistribution",
+  "tokens_created_per_phase",
+  "mutation_probability",
+  "mutation_noise_std",
+  "mutation_sparsity",
+  "extinction_threshold"
+ ],
+ "settings": {
+  "total_tokens": {
+   "meaning": "The number of tokens in the world, *T*. It never changes during a run."
+  },
+  "n_nodes": {
+   "meaning": "How many founders the world starts with. 0 means one founder per hundred tokens: *n* = ⌊*T* / 100⌋."
+  },
+  "k_neighbors": {
+   "meaning": "How many neighbours each founder starts with in the ring. 0 means *k* = max(⌊*n* / 100⌋, 5); an odd *k* is wired as *k* − 1."
+  },
+  "rewire_p": {
+   "meaning": "In the starting ring, the probability that a connection is moved to a founder chosen at random (Watts–Strogatz)."
+  },
+  "hidden_layers": {
+   "meaning": "The widths of the brain's hidden layers, in order from input to output."
+  },
+  "brain_kind": {
+   "meaning": "How weights are stored: `float` (64-bit), `float16` (16-bit, computed in 64-bit) or `binary` (−1, 0, +1)."
+  },
+  "brain_bits": {
+   "meaning": "Only for binary brains: how many input rows encode one number. Unused by float and float16 brains."
+  },
+  "message_amount": {
+   "meaning": "How many numbers one message holds. Each agent sends one message to itself and one to each neighbour, every phase."
+  },
+  "random_input_amount": {
+   "meaning": "How many random numbers, drawn uniformly from −2 to 2, a brain reads per neighbour, every time it looks."
+  },
+  "exchange_messages": {
+   "meaning": "Whether agents send and read messages at all."
+  },
+  "message_prepass": {
+   "meaning": "Whether every phase begins with an extra look in which agents only write messages, so the look that acts reads messages written this phase."
+  },
+  "allow_handover": {
+   "meaning": "Whether a parent may move some of its own connections to its newborn child."
+  },
+  "allow_revolutions": {
+   "meaning": "Whether a coalition of smaller stakers can take a node from its largest staker (see the note *How a coalition takes a node*)."
+  },
+  "allow_gifting": {
+   "meaning": "Whether agents may give tokens to neighbours during reproduction. Off in every run of this book."
+  },
+  "random_decisions": {
+   "meaning": "The control: every number a brain would produce is replaced by a random draw from the standard normal distribution."
+  },
+  "prune_after": {
+   "meaning": "After which phase connections that carried no tokens are cut: `blotto` (the game), `reproduction`, or `both`."
+  },
+  "inactive_window": {
+   "meaning": "How long a connection may go unused: `phase` means it must carry tokens in the phase being judged; `iteration` allows the two last phases."
+  },
+  "redistribution": {
+   "meaning": "How the tokens of removed agents are shared: `uniform` gives every survivor the same chance at each token; `by_tokens` weights by what a survivor holds."
+  },
+  "tokens_created_per_phase": {
+   "meaning": "Tokens added to the world at every cleanup. 0 keeps the supply fixed."
+  },
+  "mutation_probability": {
+   "meaning": "The probability that a brain changes when it is copied to a child, and again, for every brain, after every game."
+  },
+  "mutation_noise_std": {
+   "meaning": "How large a change to one weight is: a normal draw with standard deviation this times 1/√(fan-in) of its layer."
+  },
+  "mutation_sparsity": {
+   "meaning": "The share of a brain's numbers a change touches; also the probability, for each weight matrix and bias vector, of a rarer reset that redraws that share of it."
+  },
+  "extinction_threshold": {
+   "meaning": "A run stops, as extinct, when an iteration ends (after its game) with this many agents or fewer."
+  }
+ }
+}

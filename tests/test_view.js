@@ -1226,15 +1226,44 @@ function test_markdown_headings_get_ids() {
   assert(html.includes('<a href="https://example.org" target="_blank" rel="noopener">'), html);
 }
 
-function test_markdown_hands_info_fences_to_the_caller() {
-  // A fenced block whose first word the caller names is a place for something
-  // drawn, carrying the rest of its line; any other fence is still code.
-  const source = '```figure E02/nodes\n```\n\n```thesis E"02\n```\n\n```python\nx = 1 < 2\n```';
-  const html = Markdown.render(source, ['figure', 'thesis']);
-  assert(html.includes('<div class="md-embed" data-kind="figure" data-arg="E02/nodes"></div>'), html);
-  assert(html.includes('data-kind="thesis" data-arg="E&quot;02"'), 'a quote in the argument broke out of it');
+function test_markdown_hands_comments_to_the_caller() {
+  // A comment whose first word the caller names is a place for something
+  // drawn, carrying the rest of its line; any other comment is nothing, and a
+  // fence is always code — the book's files read in Obsidian and on GitHub,
+  // where neither a comment nor a code block can draw anything.
+  const source = '<!-- experiment E"08 -->\n\n<!-- figure tokens/lorenz -->\n\n```python\nx = 1 < 2\n```';
+  const html = Markdown.render(source, ['experiment']);
+  assert(html.includes('<div class="md-embed" data-kind="experiment" data-arg="E&quot;08"></div>'), html);
+  assert(!html.includes('tokens/lorenz'), 'a comment nobody asked for was shown');
   assert(html.includes('<pre><code>x = 1 &lt; 2</code></pre>'), 'ordinary code stopped being code');
-  assert(!Markdown.render(source).includes('md-embed'), 'a fence became a place nobody asked for');
+  assert(!Markdown.render(source).includes('md-embed'), 'a comment became a place nobody asked for');
+}
+
+function test_markdown_reads_obsidian() {
+  // Callouts hold whole Markdown — a list, a formula — and fold when asked;
+  // a formula is kept for KaTeX exactly as written, underscores and stars
+  // and all; links to other files of the book are marked for the caller.
+  const html = Markdown.render('> [!example]- How to make it\n> 1. take `x_1`\n> 2. add $a_i * b_i$\n'
+    + '>\n> $$\n> G = \\frac{1}{n}\n> $$\n\n> [!question] Why?\n> Because.\n\n'
+    + 'See [the Gini](../notes/gini.md#the-gini-coefficient), ![a ring](../diagrams/ring.svg) and [x](https://x.org).');
+  assert(html.includes('<details class="md-callout md-callout-example"><summary>How to make it</summary>'), html);
+  assert(html.includes('<ol>') && html.includes('<code>x_1</code>'), 'a list inside a callout was lost');
+  assert(html.includes('<span class="md-math-inline">a_i * b_i</span>'), 'an inline formula was mangled');
+  assert(html.includes('<div class="md-math">G = \\frac{1}{n}</div>'), 'a formula set apart was lost');
+  assert(html.includes('<div class="md-callout md-callout-question"><p class="md-callout-title">Why?</p>'), html);
+  assert(html.includes('<a href="../notes/gini.md#the-gini-coefficient" data-md="../notes/gini.md#the-gini-coefficient">the Gini</a>'), html);
+  assert(html.includes('<img src="../diagrams/ring.svg" alt="a ring" loading="lazy">'), html);
+  assert(html.includes('<a href="https://x.org" target="_blank" rel="noopener">x</a>'), html);
+}
+
+function test_book_resolves_paths_as_obsidian_does() {
+  // A link or an image is relative to the file it is written in.
+  const Book = bookWith();
+  assert(Book.resolve('chapters/13-x.md', '../notes/gini.md') === 'notes/gini.md');
+  assert(Book.resolve('chapters/13-x.md', '12-y.md') === 'chapters/12-y.md');
+  assert(Book.resolve('README.md', 'chapters/01-a.md') === 'chapters/01-a.md');
+  assert(Book.resolve('chapters/13-x.md', '../figures/tokens/lorenz.svg') === 'figures/tokens/lorenz.svg');
+  assert(Book.resolve('README.md', '../outside.md') === null, 'a link out of the book was followed');
 }
 
 function test_book_progress_of_an_experiment() {
@@ -1259,22 +1288,6 @@ function test_book_progress_of_an_experiment() {
   assert(Book.eta(7200) === 'about 2.0 h left', Book.eta(7200));
   assert(Book.eta(3 * 86400) === 'about 3.0 days left');
   assert(Book.eta(7200, '') === 'about 2.0 h');
-}
-
-function test_a_plan_of_several_sizes_is_written_out() {
-  // Sizes are thousands, so a list of them joined by bare commas reads as one
-  // long number; each is written out, and so are a condition's own sizes and
-  // a plan's limit on workers.
-  const Book = bookWith();
-  Book.chapters = () => [];
-  const html = Book.planHtml({ runs: { baseline: 'B1', world: { total_tokens: [800, 1600, 409600] },
-    seeds: '1..3', iterations: 600, workers: 1, conditions: [{ name: 'baseline' },
-      { name: 'small', set: { extinction_threshold: 0 }, sizes: [800, 1600] }] } });
-  assert(html.includes('800, 1600 and 409600 tokens'), html);
-  assert(html.includes('at 800 and 1600 tokens only'), html);
-  assert(html.includes('one run at a time'), html);
-  assert(Book.planHtml({ runs: { baseline: 'B1', world: { total_tokens: 10000 }, seeds: '1..30',
-    iterations: 3000, conditions: [{ name: 'baseline' }] } }).includes('10000 tokens'));
 }
 
 function test_a_run_that_died_out_says_so() {
@@ -1393,10 +1406,11 @@ const tests = Object.entries({
   test_no_canvas_writes_a_colour_out,
   test_the_worker_cuts_frames_the_way_the_server_does,
   test_markdown_headings_get_ids,
-  test_markdown_hands_info_fences_to_the_caller,
+  test_markdown_hands_comments_to_the_caller,
+  test_markdown_reads_obsidian,
+  test_book_resolves_paths_as_obsidian_does,
   test_book_progress_of_an_experiment,
   test_a_run_that_died_out_says_so,
-  test_a_plan_of_several_sizes_is_written_out,
   test_the_static_book_never_asks_the_lab,
   test_every_tab_names_a_view
 }).sort(([a], [b]) => a.localeCompare(b));

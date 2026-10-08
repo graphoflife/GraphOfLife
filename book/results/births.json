@@ -1,0 +1,91 @@
+{
+ "chapter": "births",
+ "numbers": {
+  "rate_births_1": {
+   "n": 26,
+   "mean": 3.069432539669772,
+   "median": 3.117648371478146,
+   "sd": 0.46298833768434206,
+   "min": 2.2907588326430623,
+   "max": 4.305186256265668,
+   "q25": 2.697081394894557,
+   "q75": 3.273567315284785
+  },
+  "rate_orphaned_1": {
+   "n": 26,
+   "mean": 0.4584391529032338,
+   "median": 0.42187656523922723,
+   "sd": 0.18308084970866084,
+   "min": 0.12351330849346011,
+   "max": 0.8344090765756093,
+   "q25": 0.34823680330719436,
+   "q75": 0.521231181937905
+  },
+  "rate_starved_2": {
+   "n": 26,
+   "mean": 0.5803094125698126,
+   "median": 0.5138030731484157,
+   "sd": 0.17591838319840686,
+   "min": 0.3559538662032704,
+   "max": 0.9735323945895338,
+   "q25": 0.4422516245764689,
+   "q75": 0.708516723320421
+  },
+  "rate_orphaned_2": {
+   "n": 26,
+   "mean": 1.750993434361253,
+   "median": 1.7372311537062597,
+   "sd": 0.2557356975289234,
+   "min": 1.1470452819938093,
+   "max": 2.4389952659798633,
+   "q25": 1.5898619190449748,
+   "q75": 1.925875530962987
+  },
+  "lives": {
+   "agents": 1763225,
+   "censored": 35554,
+   "at_least_2": 0.7944680911398149,
+   "at_least_5": 0.5845609386916069,
+   "at_least_10": 0.4800114632038815,
+   "at_least_50": 0.25540477480448814,
+   "at_least_100": 0.1501075277076416,
+   "at_least_500": 0.005676813148940325,
+   "at_least_1000": 0.00021395867235407575
+  },
+  "median_life": 8.0,
+  "ages_end": {
+   "n": 35554,
+   "median": 72.0,
+   "share_0": 0.02548236485346234,
+   "share_ge_100": 0.3943578781571694,
+   "share_ge_1000": 0.00028126230522585366
+  },
+  "median_age_100": 26.0,
+  "median_age_500": 45.65,
+  "median_age_1000": 70.05,
+  "median_age_2000": 74.6,
+  "median_age_2999": 79.6
+ },
+ "figures": {
+  "rates": {
+   "title": "Births and deaths per 100 agents",
+   "caption": "Each line is the median over the worlds, in stretches of 25 iterations, of a count divided by the agents present when the phase began, times 100. The first iterations run far above the top of the axis (Chapter 10).",
+   "recipe": "**Runs.** The 30 baseline runs `B1-10000-s001` \u2026 `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in Chapter 8). They are made with `python3 gol_lab.py run E02`.\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).\n\n1. For every row, divide the count (`births` or `orphaned` in rows with `phase` = 1; `starved` or `orphaned` in rows with `phase` = 2) by the row's `nodes_before`, the agents present when that phase began, and multiply by 100.\n2. Cut the 3,000 iterations into 120 stretches of 25; take each run's mean in each.\n3. Draw the median over the runs that have a value in the stretch.\n\n**To make it again:** `python3 book_figures.py births`."
+  },
+  "lifetimes": {
+   "title": "How long agents live",
+   "caption": "Of all agents born at iteration 500 or later in the 26 worlds that lived to the end and that took part in at least one game, the share that lived at least L iterations, for every L. A life is counted from the iteration of birth to the last iteration after whose game the agent was alive, both included. Lives still going when a run ended are counted as far as they went (Kaplan\u2013Meier). Both axes are logarithmic.",
+   "recipe": "**Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` \u2026 `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in Chapter 8). They are made with `python3 gol_lab.py run E02`.\n\n**Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2\u00b7t` is iteration *t* after reproduction and frame `2\u00b7t + 1` after the game.\n\n1. Read every frame with `phase` = 2. For every agent id note its birth iteration (the frame's `iteration` minus its `ages` entry) and the last iteration it appears.\n2. Keep agents born at iteration 500 or later. An agent still present in the last frame is censored: its life is known to be at least that long.\n3. Compute the Kaplan\u2013Meier estimate S(L) = \u03a0 over lifetimes \u2113 < L of (1 \u2212 d(\u2113) / n(\u2113)), with d(\u2113) the lives that ended at \u2113 and n(\u2113) those still at risk.\n\n**To make it again:** `python3 book_figures.py births`."
+  },
+  "ages": {
+   "title": "Ages of the living at the end",
+   "caption": "The ages of all 35,554 agents alive after the last game of the 26 worlds that lived to the end, in bins that double in width: age 0 is born in this iteration, age 1 in the one before, and so on.",
+   "recipe": "**Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` \u2026 `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in Chapter 8). They are made with `python3 gol_lab.py run E02`.\n\n**Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2\u00b7t` is iteration *t* after reproduction and frame `2\u00b7t + 1` after the game.\n\n1. Read each run's last frame (iteration 2,999, `phase` 2) and its `ages`.\n2. Count the ages in the bins 0, 1, 2\u20133, 4\u20137, \u2026, and divide by the number of agents.\n\n**To make it again:** `python3 book_figures.py births`."
+  },
+  "median-age": {
+   "title": "Median age of the living",
+   "caption": "After every game, the median age of the agents alive. The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).",
+   "recipe": "**Runs.** The 30 baseline runs `B1-10000-s001` \u2026 `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in Chapter 8). They are made with `python3 gol_lab.py run E02`.\n\n**Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2\u00b7t` is iteration *t* after reproduction and frame `2\u00b7t + 1` after the game.\n\n1. After every game (frames with `phase` = 2) take the median of `ages`.\n2. Cut the iterations into stretches of 5 (600 stretches over 3,000 iterations) and take each world's mean in each stretch.\n3. In each stretch, take the median, the 25th and 75th and the 5th and 95th percentiles of those means over the worlds that still have a value there (a world that died has none after its death).\n\n**To make it again:** `python3 book_figures.py births`."
+  }
+ }
+}

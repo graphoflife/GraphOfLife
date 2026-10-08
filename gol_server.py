@@ -101,7 +101,7 @@ SHIPPED_DOCS = {
 # it grows with every chapter, but only the kinds of file a book is made of,
 # and only from inside it.
 BOOK_DIR = os.path.join(BASE_DIR, "book")
-BOOK_TYPES = (".md", ".json")
+BOOK_TYPES = (".md", ".json", ".svg")
 
 # Requests are capped so a malformed or hostile body cannot exhaust memory.
 MAX_BODY_BYTES = 1 << 20

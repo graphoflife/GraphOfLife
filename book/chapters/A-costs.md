@@ -24,8 +24,14 @@ What is measured, and how each figure is estimated:
 - **memory** — the most a run holds: a base, plus a multiple of every byte of
   every brain, since the game copies them and a checkpoint stacks them.
 
-```costs
-```
+<!-- costs -->
+- **Time:** 0.57 ms per agent per iteration, for every 10,000 weights in a brain.
+- **Agents:** 0.14 alive per token of the world, once settled.
+- **Disk:** 72 bytes per agent per iteration.
+- **Memory:** 300 MB, plus 68.6 times every byte of every brain.
+
+Fitted to 144 recorded runs on 2026-10-08 by `python3 gol_lab.py costs`.
+<!-- /costs -->
 
 Each kind of run — the same settings apart from the size of the world and
 the seed — is fitted on its own, because kinds differ in more than the size
@@ -36,15 +42,19 @@ runs; until anything has, the calibration of 2 October 2026 on the baseline
 stands: about 1.3 ms per agent per iteration in the lab, 0.18 agents per
 token once a world has settled, and 70 bytes per agent per iteration.
 
-```figure costs/time
-```
+![Seconds per iteration, against the agents alive](../figures/costs/time.svg)
+
+**Seconds per iteration, against the agents alive.** Every dot is one
+recorded iteration of one run of the lab: the agents alive (x) against the
+seconds the iteration took, per 10,000 weights in a brain (y). The line is
+what the estimates assume. The figure is redrawn by `python3 gol_lab.py costs`.
 
 ## What the baseline set cost
 
-The thirty runs of Chapter 3 — 10,000 tokens, 3,000 iterations each — took
+The thirty runs of [Chapter 8](08-thirty-worlds.md) — 10,000 tokens, 3,000 iterations each — took
 26 hours of computing, done in 7.2 hours on four workers, and fill 7.8 GB.
 No run needed more than 651 MB of memory. That is the unit the experiments
-of Part I are sized in: one condition of thirty seeds at 10,000 tokens is
+of Parts II and III are sized in: one condition of thirty seeds at 10,000 tokens is
 about seven hours.
 
 ## The rules for sizing an experiment
@@ -56,7 +66,8 @@ about seven hours.
   settles at about 0.12 × *T* agents (measured on worlds of 10,000 tokens),
   and an agent costs about 0.87 ms per iteration, so 10,000 tokens cost about
   1.1 seconds per iteration. If the number of agents grows in step with the
-  tokens, 200,000 tokens cost about 22 — Chapter 14 will say whether it does.
+  tokens, 200,000 tokens cost about 22 —
+  [Chapter 19](19-how-does-a-worlds-size-follow-its-tokens.md) will say whether it does.
 - Memory limits big worlds before time does: the lab starts a run only when
   its estimated peak fits next to the runs already going, in three quarters
   of the machine's memory.
@@ -64,3 +75,9 @@ about seven hours.
   lab will not start a run the disk cannot hold.
 - The workers default to four, the machine's fast cores. More are possible
   from the Book tab; the slower cores add less than a fast one each.
+
+<!-- turns -->
+---
+
+← [Chapter 19 · How does a world's size follow its tokens?](19-how-does-a-worlds-size-follow-its-tokens.md) · [Contents](../README.md)
+<!-- /turns -->

@@ -1,119 +1,389 @@
 {
-  "title": "Graph of Life \u2014 the research book",
+  "title": "Graph of Life — the research book",
   "parts": [
     {
-      "title": "Front matter",
+      "title": "Start here",
       "chapters": [
         {
           "id": "about",
-          "title": "About this book",
+          "title": "How to read this book",
           "file": "README.md"
         }
       ]
     },
     {
-      "title": "Part I \u00b7 How the algorithm works",
+      "title": "Part I · How the algorithm works",
       "chapters": [
         {
           "id": "1",
-          "title": "The algorithm and the question",
-          "file": "chapters/01-the-algorithm.md"
+          "title": "What this book is about",
+          "file": "chapters/01-what-this-book-is-about.md"
         },
         {
           "id": "2",
-          "title": "Is a run reproducible?",
-          "experiment": "E01",
-          "file": "chapters/02-reproducibility.md",
-          "status": "analysed"
+          "title": "The world: tokens, agents and a network",
+          "file": "chapters/02-the-world.md"
         },
         {
           "id": "3",
-          "title": "The life of a world",
-          "experiment": "E02",
-          "file": "chapters/03-the-life-of-a-world.md",
-          "status": "analysed"
+          "title": "One iteration, step by step",
+          "file": "chapters/03-one-iteration.md"
         },
         {
           "id": "4",
-          "title": "How much does the seed decide?",
-          "experiment": "E03",
-          "file": "chapters/04-how-much-does-the-seed-decide.md",
-          "status": "analysed"
+          "title": "The brain",
+          "file": "chapters/04-the-brain.md"
         },
         {
           "id": "5",
-          "title": "Where do the tokens go?",
-          "experiment": "E04",
-          "file": "chapters/05-where-do-the-tokens-go.md",
-          "status": "analysed"
+          "title": "How worlds are measured",
+          "file": "chapters/05-how-worlds-are-measured.md"
         },
         {
           "id": "6",
-          "title": "What shape does the graph take?",
-          "experiment": "E05",
-          "file": "chapters/06-what-shape-does-the-graph-take.md",
-          "status": "analysed"
+          "title": "The ideas this builds on",
+          "file": "chapters/06-the-ideas-this-builds-on.md"
         },
         {
           "id": "7",
-          "title": "Meta I \u00b7 What the first five experiments say",
-          "file": "chapters/07-meta-1.md"
-        },
-        {
-          "id": "8",
-          "title": "Who wins, and for how long?",
-          "experiment": "E06",
-          "file": "chapters/08-who-wins-and-for-how-long.md",
+          "title": "Is a run reproducible?",
+          "file": "chapters/07-is-a-run-reproducible.md",
+          "experiment": "E01",
           "status": "analysed"
-        },
-        {
-          "id": "9",
-          "title": "Do the brains matter at all?",
-          "experiment": "E07",
-          "file": "chapters/09-do-the-brains-matter.md",
-          "status": "analysed"
-        },
-        {
-          "id": "10",
-          "title": "How does a world's size follow its tokens?",
-          "experiment": "E08",
-          "file": "chapters/10-how-does-a-world-s-size-follow-its-tokens.md",
-          "status": "ready"
-        },
-        {
-          "id": "11",
-          "title": "How fast should brains change?",
-          "note": "The mutation probability, against the baseline runs of Chapter 3."
-        },
-        {
-          "id": "12",
-          "title": "What keeps wealth spread?",
-          "note": "No coalitions: allow_revolutions off, against the baseline runs of Chapter 3."
-        },
-        {
-          "id": "13",
-          "title": "Meta II",
-          "note": "Written once Chapters 8 to 12 are analysed."
-        },
-        {
-          "id": "14",
-          "title": "How big should a brain be?",
-          "note": "The hidden layers, against the baseline runs of Chapter 3."
-        },
-        {
-          "id": "15",
-          "title": "Does size change the dynamics?",
-          "note": "Builds on Chapter 10: the wander, the sweeps and dying out, against the size of a world."
         }
       ]
     },
     {
-      "title": "Part II \u00b7 Towards open-ended evolution",
+      "title": "Part II · The baseline world",
       "chapters": [
         {
+          "id": "8",
+          "title": "Thirty worlds",
+          "file": "chapters/08-thirty-worlds.md"
+        },
+        {
+          "id": "9",
+          "title": "A world's life",
+          "file": "chapters/09-a-worlds-life.md",
+          "experiment": "E02",
+          "status": "analysed"
+        },
+        {
+          "id": "10",
+          "title": "The first hundred iterations",
+          "file": "chapters/10-the-first-hundred-iterations.md"
+        },
+        {
+          "id": "11",
+          "title": "Births, deaths and ages",
+          "file": "chapters/11-births-deaths-and-ages.md"
+        },
+        {
+          "id": "12",
+          "title": "How much does the seed decide?",
+          "file": "chapters/12-how-much-does-the-seed-decide.md",
+          "experiment": "E03",
+          "status": "analysed"
+        },
+        {
+          "id": "13",
+          "title": "Where do the tokens go?",
+          "file": "chapters/13-where-do-the-tokens-go.md",
+          "experiment": "E04",
+          "status": "analysed"
+        },
+        {
+          "id": "14",
+          "title": "How the game is played",
+          "file": "chapters/14-how-the-game-is-played.md"
+        },
+        {
+          "id": "15",
+          "title": "What shape does the network take?",
+          "file": "chapters/15-what-shape-does-the-network-take.md",
+          "experiment": "E05",
+          "status": "analysed"
+        },
+        {
           "id": "16",
+          "title": "Genotypes and lineages",
+          "file": "chapters/16-genotypes-and-lineages.md",
+          "experiment": "E06",
+          "status": "analysed"
+        },
+        {
+          "id": "17",
+          "title": "Meta I · What the baseline world is",
+          "file": "chapters/17-meta-1.md"
+        }
+      ]
+    },
+    {
+      "title": "Part III · One change at a time",
+      "chapters": [
+        {
+          "id": "18",
+          "title": "Do the brains matter?",
+          "file": "chapters/18-do-the-brains-matter.md",
+          "experiment": "E07",
+          "status": "analysed"
+        },
+        {
+          "id": "19",
+          "title": "How does a world's size follow its tokens?",
+          "file": "chapters/19-how-does-a-worlds-size-follow-its-tokens.md",
+          "experiment": "E08",
+          "status": "ready"
+        },
+        {
+          "id": "20",
+          "title": "How fast should brains change?",
+          "note": "The mutation probability, against the baseline runs of Chapter 9."
+        },
+        {
+          "id": "21",
+          "title": "What keeps wealth spread?",
+          "note": "No coalitions: allow_revolutions off, against the baseline runs of Chapter 9."
+        },
+        {
+          "id": "22",
+          "title": "Meta II",
+          "note": "Written once Chapters 18 to 21 are analysed."
+        },
+        {
+          "id": "23",
+          "title": "How big should a brain be?",
+          "note": "The hidden layers, against the baseline runs of Chapter 9."
+        },
+        {
+          "id": "24",
+          "title": "Does size change the dynamics?",
+          "note": "Builds on Chapter 19: the wander, the sweeps and dying out, against the size of a world."
+        }
+      ]
+    },
+    {
+      "title": "Part IV · Towards open-ended evolution",
+      "chapters": [
+        {
+          "id": "25",
           "title": "Mutation at replication, and nowhere else",
-          "note": "The first of the mechanics in research/Research.md \u00a74, once Part I is done."
+          "note": "The first of the mechanics in research/Research.md §4, once Part III is done."
+        }
+      ]
+    },
+    {
+      "title": "Notes · the rules",
+      "chapters": [
+        {
+          "id": "n-settings",
+          "title": "Every setting",
+          "file": "notes/settings.md"
+        },
+        {
+          "id": "n-starting-ring",
+          "title": "The starting ring",
+          "file": "notes/starting-ring.md"
+        },
+        {
+          "id": "n-random-numbers",
+          "title": "Seeds and the random stream",
+          "file": "notes/random-numbers.md"
+        },
+        {
+          "id": "n-share-function",
+          "title": "The share function f(a, b)",
+          "file": "notes/share-function.md"
+        },
+        {
+          "id": "n-binary-decision",
+          "title": "A yes-or-no decision",
+          "file": "notes/binary-decision.md"
+        },
+        {
+          "id": "n-largest-remainder",
+          "title": "Splitting tokens into whole numbers",
+          "file": "notes/largest-remainder.md"
+        },
+        {
+          "id": "n-brain-inputs",
+          "title": "What a brain sees",
+          "file": "notes/brain-inputs.md"
+        },
+        {
+          "id": "n-brain-outputs",
+          "title": "What a brain says",
+          "file": "notes/brain-outputs.md"
+        },
+        {
+          "id": "n-messages",
+          "title": "Messages",
+          "file": "notes/messages.md"
+        },
+        {
+          "id": "n-revolution",
+          "title": "How a coalition takes a node",
+          "file": "notes/revolution.md"
+        },
+        {
+          "id": "n-mutation",
+          "title": "How a brain changes",
+          "file": "notes/mutation.md"
+        },
+        {
+          "id": "n-genotype",
+          "title": "Genotypes and the family tree",
+          "file": "notes/genotype.md"
+        },
+        {
+          "id": "n-extinction",
+          "title": "When a world ends",
+          "file": "notes/extinction.md"
+        }
+      ]
+    },
+    {
+      "title": "Notes · what is measured",
+      "chapters": [
+        {
+          "id": "n-frames-and-stats",
+          "title": "What a run records",
+          "file": "notes/frames-and-stats.md"
+        },
+        {
+          "id": "n-births-and-deaths",
+          "title": "Births and the four ways to die",
+          "file": "notes/births-and-deaths.md"
+        },
+        {
+          "id": "n-age-and-lifetime",
+          "title": "Age and lifetime",
+          "file": "notes/age-and-lifetime.md"
+        },
+        {
+          "id": "n-degree",
+          "title": "Degree",
+          "file": "notes/degree.md"
+        },
+        {
+          "id": "n-clustering",
+          "title": "Clustering",
+          "file": "notes/clustering.md"
+        },
+        {
+          "id": "n-path-length",
+          "title": "Path length",
+          "file": "notes/path-length.md"
+        },
+        {
+          "id": "n-core-trees-leaves",
+          "title": "Core, trees and leaves",
+          "file": "notes/core-trees-leaves.md"
+        },
+        {
+          "id": "n-bridges",
+          "title": "Bridges",
+          "file": "notes/bridges.md"
+        },
+        {
+          "id": "n-gini-coefficient",
+          "title": "The Gini coefficient and the Lorenz curve",
+          "file": "notes/gini-coefficient.md"
+        },
+        {
+          "id": "n-richest-tenth",
+          "title": "The richest tenth's share",
+          "file": "notes/richest-tenth.md"
+        },
+        {
+          "id": "n-home-stake",
+          "title": "Staking at home, and keeping one's node",
+          "file": "notes/home-stake.md"
+        },
+        {
+          "id": "n-families",
+          "title": "Families",
+          "file": "notes/families.md"
+        },
+        {
+          "id": "n-common-ancestor",
+          "title": "The common ancestor of the living",
+          "file": "notes/common-ancestor.md"
+        }
+      ]
+    },
+    {
+      "title": "Notes · statistics",
+      "chapters": [
+        {
+          "id": "n-median-and-quantiles",
+          "title": "Median and quantiles",
+          "file": "notes/median-and-quantiles.md"
+        },
+        {
+          "id": "n-bands",
+          "title": "Bands: many worlds in one figure",
+          "file": "notes/bands.md"
+        },
+        {
+          "id": "n-settled-life",
+          "title": "The settled life of a world",
+          "file": "notes/settled-life.md"
+        },
+        {
+          "id": "n-spread-between-worlds",
+          "title": "Spread between worlds",
+          "file": "notes/spread-between-worlds.md"
+        },
+        {
+          "id": "n-correlation",
+          "title": "Correlation",
+          "file": "notes/correlation.md"
+        },
+        {
+          "id": "n-autocorrelation",
+          "title": "Autocorrelation: how long a world remembers",
+          "file": "notes/autocorrelation.md"
+        },
+        {
+          "id": "n-between-and-within",
+          "title": "Between worlds and within them",
+          "file": "notes/between-and-within.md"
+        },
+        {
+          "id": "n-kaplan-meier",
+          "title": "Survival curves (Kaplan–Meier)",
+          "file": "notes/kaplan-meier.md"
+        },
+        {
+          "id": "n-bootstrap",
+          "title": "The bootstrap",
+          "file": "notes/bootstrap.md"
+        },
+        {
+          "id": "n-permutation-test",
+          "title": "Permutation tests",
+          "file": "notes/permutation-test.md"
+        },
+        {
+          "id": "n-seeds-needed",
+          "title": "How many seeds an experiment needs",
+          "file": "notes/seeds-needed.md"
+        },
+        {
+          "id": "n-wilson-interval",
+          "title": "The Wilson interval",
+          "file": "notes/wilson-interval.md"
+        },
+        {
+          "id": "n-logarithmic-axes",
+          "title": "Logarithmic axes and power laws",
+          "file": "notes/logarithmic-axes.md"
+        },
+        {
+          "id": "n-muller-plot",
+          "title": "Muller plots",
+          "file": "notes/muller-plot.md"
         }
       ]
     },

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 410" width="760" height="410" role="img" aria-label="Cleanup, worked through"><title>Cleanup, worked through</title><style>
+.dg-t{fill:#eef4fa;font:13px system-ui,sans-serif}
+.dg-b{fill:#eef4fa;font:600 13px system-ui,sans-serif}
+.dg-h{fill:#eef4fa;font:600 15px system-ui,sans-serif}
+.dg-m{fill:#9ab0c3;font:12px system-ui,sans-serif}
+.dg-s{fill:#9ab0c3;font:11px system-ui,sans-serif}
+.dg-box{fill:#2d3d50;stroke:#5a6e86;stroke-width:1}
+.dg-box2{fill:#384c64;stroke:#5a6e86;stroke-width:1}
+.dg-frame{fill:none;stroke:#435468;stroke-width:1;stroke-dasharray:4 3}
+.dg-line{stroke:#9ab0c3;stroke-width:1.4;fill:none}
+.dg-faint{stroke:#7e94a5;stroke-width:1;fill:none;opacity:.6}
+.dg-acc{stroke:#64bdff;stroke-width:2;fill:none}
+.dg-warn{stroke:#ffd166;stroke-width:2;fill:none}
+.dg-bad{stroke:#ff6b6b;stroke-width:2;fill:none}
+.dg-good{stroke:#7ee787;stroke-width:2;fill:none}
+.dg-node{fill:#64bdff}
+.dg-node2{fill:#ffd166}
+.dg-node3{fill:#7ee787}
+.dg-node4{fill:#c792ea}
+.dg-dead{fill:#ff6b6b}
+.dg-grey{fill:#7e94a5}
+.dg-fill{fill:#64bdff;opacity:.85}
+.dg-fill2{fill:#ffd166;opacity:.85}
+.dg-fill3{fill:#c792ea;opacity:.85}
+</style>
+<defs><marker id="dg-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9ab0c3"/></marker></defs><rect width="760" height="410" rx="10" fill="#18202b"/><text x="20.0" y="26.0" class="dg-h" text-anchor="start">Cleanup, worked through</text><line x1="90.0" y1="130.0" x2="190.0" y2="90.0" class="dg-line"/><line x1="90.0" y1="130.0" x2="190.0" y2="180.0" class="dg-line"/><line x1="190.0" y1="90.0" x2="190.0" y2="180.0" class="dg-line"/><line x1="190.0" y1="90.0" x2="290.0" y2="130.0" class="dg-line"/><line x1="190.0" y1="180.0" x2="290.0" y2="130.0" class="dg-line"/><line x1="290.0" y1="130.0" x2="390.0" y2="90.0" class="dg-line"/><line x1="390.0" y1="90.0" x2="490.0" y2="140.0" class="dg-line"/><line x1="590.0" y1="110.0" x2="590.0" y2="200.0" class="dg-line"/><line x1="490.0" y1="140.0" x2="590.0" y2="110.0" class="dg-line"/><circle cx="90.0" cy="130.0" r="15" class="dg-node"/><text x="90.0" y="135.0" class="dg-b" text-anchor="middle">a</text><text x="108.0" y="116.0" class="dg-m" text-anchor="start">4</text><circle cx="190.0" cy="90.0" r="15" class="dg-node"/><text x="190.0" y="95.0" class="dg-b" text-anchor="middle">b</text><text x="208.0" y="76.0" class="dg-m" text-anchor="start">9</text><circle cx="190.0" cy="180.0" r="15" class="dg-node"/><text x="190.0" y="185.0" class="dg-b" text-anchor="middle">c</text><text x="208.0" y="166.0" class="dg-m" text-anchor="start">2</text><circle cx="290.0" cy="130.0" r="15" class="dg-node"/><text x="290.0" y="135.0" class="dg-b" text-anchor="middle">d</text><text x="308.0" y="116.0" class="dg-m" text-anchor="start">6</text><circle cx="390.0" cy="90.0" r="15" class="dg-dead"/><text x="390.0" y="95.0" class="dg-b" text-anchor="middle">e</text><text x="408.0" y="76.0" class="dg-m" text-anchor="start">0</text><circle cx="490.0" cy="140.0" r="15" class="dg-dead"/><text x="490.0" y="145.0" class="dg-b" text-anchor="middle">f</text><text x="508.0" y="126.0" class="dg-m" text-anchor="start">3</text><circle cx="590.0" cy="110.0" r="15" class="dg-dead"/><text x="590.0" y="115.0" class="dg-b" text-anchor="middle">g</text><text x="608.0" y="96.0" class="dg-m" text-anchor="start">5</text><circle cx="590.0" cy="200.0" r="15" class="dg-dead"/><text x="590.0" y="205.0" class="dg-b" text-anchor="middle">h</text><text x="608.0" y="186.0" class="dg-m" text-anchor="start">1</text><rect x="465" y="70" width="160" height="160" rx="10" class="dg-frame"/><text x="20.0" y="260.0" class="dg-t" text-anchor="start">e holds 0 tokens: it starves.</text><text x="20.0" y="280.0" class="dg-t" text-anchor="start">Without e, the world is in two pieces: {a, b, c, d} and {f, g, h}.</text><text x="20.0" y="300.0" class="dg-t" text-anchor="start">Only the largest piece lives on, so f, g and h are cut off.</text><text x="20.0" y="320.0" class="dg-t" text-anchor="start">Their 3 + 5 + 1 = 9 tokens are shared out among a, b, c and d:</text><text x="20.0" y="340.0" class="dg-t" text-anchor="start">each of the 9 goes to one of the 4 survivors, each equally likely</text><text x="20.0" y="360.0" class="dg-t" text-anchor="start">(a multinomial draw). The 4 survivors held 21; now they hold 30 — all</text><text x="20.0" y="380.0" class="dg-t" text-anchor="start">the tokens there are.</text></svg>

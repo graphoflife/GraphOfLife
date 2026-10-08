@@ -1,0 +1,19 @@
+{
+ "chapter": "world",
+ "numbers": {
+  "ring": {
+   "founders": 100,
+   "connections": 200,
+   "shortcuts": 37,
+   "clustering": 0.26582278481012656,
+   "mean_distance": 4.432323232323232
+  }
+ },
+ "figures": {
+  "ring": {
+   "title": "The 100 founders of the world with seed 1",
+   "caption": "The starting graph of `B1-10000-s001`: 100 founders placed around a circle in the order of the ring, each joined to its two nearest neighbours on either side; 37 of the 200 connections were moved to a founder chosen at random, and cross the circle.",
+   "recipe": "**Runs.** `B1-10000-s001`.\n\n**Data.** From its settings.\n\n1. Build the graph exactly as the engine does: `networkx.watts_strogatz_graph(n=100, k=5, p=0.2, seed=1)` \u2014 with k = 5 networkx joins every node to \u230a5/2\u230b = 2 neighbours on either side.\n2. Place node i at angle 2\u03c0i / 100 on a circle and draw every connection.\n\n**To make it again:** `python3 book_figures.py world`."
+  }
+ }
+}

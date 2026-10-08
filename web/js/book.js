@@ -1,20 +1,22 @@
 /*
  * The book: a research programme, written down as it is carried out.
  *
- * Its source is book/ — book.json for the order of the chapters, one Markdown
- * file per chapter, a plan per experiment, and the figures and results an
- * analysis writes — read here and on GitHub alike. This file only lays it out:
- * a list of chapters, the chapter, and three things a chapter can ask to have
- * drawn in its text with a fenced block:
+ * Its source is book/ — book.json for the order of the chapters and notes,
+ * Markdown files, an SVG file per figure and diagram, a plan per experiment
+ * and the results an analysis writes. The same files read as a vault in
+ * Obsidian and as pages on GitHub; this file only lays them out here: a list
+ * of chapters, the page, and on a computer running gol_server.py, the lab.
  *
- *     ```thesis E02         the experiment's claim, as its plan states it
- *     ```experiment E02     what it runs, and on a machine with gol_server.py,
- *                           how far it has got, with ▶ and ⏸
- *     ```figure E02/nodes   a chart from book/figures/E02/nodes.json
- *     ```costs              what a simulation costs, as last fitted
+ * A page is rendered by markdown.js. A link to another file of the book
+ * (`[…](08-thirty-worlds.md#the-runs)`) opens it in place; an image's path
+ * is taken from the file it is written in, as Obsidian takes it. One thing
+ * a page can ask to have drawn, with a comment no other reader shows:
  *
- * The claim is drawn from the plan rather than written into the chapter, so
- * it cannot quietly be reworded after the results are in.
+ *     <!-- experiment E08 -->   how far an experiment has got, with ▶ and ⏸
+ *
+ * Everything else in a chapter — its figures, the thesis of its experiment,
+ * the settings of its runs — is written into the Markdown by book_fill.py,
+ * so that the file is complete wherever it is read.
  *
  * Experiments are run by the lab (gol_lab.py) through the server. On the
  * published site there is no server and no lab: the book is the same, minus
@@ -25,17 +27,16 @@ const Book = {
   // fetches carries the same stamp, so a published chapter is never read from
   // a stale cache next to a fresh one.
   INDEX: 'book/book.json',
-  EMBEDS: ['thesis', 'experiment', 'figure', 'costs'],
+  EMBEDS: ['experiment'],
   POLL_MS: 5000,
   STORE: 'gol.book.chapter',
 
   index: null,
-  plans: new Map(),
-  figures: [],
   lab: null,
   // What the lab last refused, said in the panel rather than in a dialog.
   refusal: null,
   current: null,
+  file: null,
   active: false,
   timer: null,
 
@@ -50,7 +51,6 @@ const Book = {
     });
     this.page.addEventListener('click', event => this.onClick(event));
     this.page.addEventListener('change', event => this.onChange(event));
-    window.addEventListener('resize', () => { if (this.active) this.drawFigures(); });
   },
 
   async setActive(active) {
@@ -85,9 +85,18 @@ const Book = {
     return JSON.parse(await this.text(path));
   },
 
-  async plan(name) {
-    if (!this.plans.has(name)) this.plans.set(name, this.json(`experiments/${name}.json`));
-    return this.plans.get(name);
+  /** `href`, written in the file `from`, as a path under book/ — or null if it leaves the book. */
+  resolve(from, href) {
+    const parts = from.split('/').slice(0, -1);
+    for (const step of decodeURI(href).split('/')) {
+      if (step === '..') {
+        if (!parts.length) return null;
+        parts.pop();
+      } else if (step && step !== '.') {
+        parts.push(step);
+      }
+    }
+    return parts.join('/');
   },
 
   chapters() {
@@ -113,33 +122,52 @@ const Book = {
     await this.open(this.chapter(remembered)?.file ? remembered : first.id);
   },
 
-  async open(id) {
+  /** A chapter or note of book.json, by its id. */
+  async open(id, part = '') {
     const chapter = this.chapter(id);
     if (!chapter) return;
-    this.current = id;
-    try { localStorage.setItem(this.STORE, id); } catch (err) { /* private window */ }
-    this.renderToc();
-
     if (!chapter.file) {
+      this.current = id;
+      this.file = null;
+      this.renderToc();
       this.page.innerHTML = `${this.kicker(chapter)}<h2>${Markdown.inline(chapter.title)}</h2>`
         + `<p class="md-status">Not written yet. ${Markdown.inline(chapter.note || '')}</p>`;
       return;
     }
+    await this.show(chapter.file, part);
+  },
+
+  /** Any Markdown file of the book, by its path under book/, scrolled to `part` if given. */
+  async show(file, part = '') {
+    const chapter = this.chapters().find(c => c.file === file) || null;
+    this.current = chapter ? chapter.id : null;
+    this.file = file;
+    if (chapter) {
+      try { localStorage.setItem(this.STORE, chapter.id); } catch (err) { /* private window */ }
+    }
+    this.renderToc();
     let source;
     try {
-      source = await this.text(chapter.file);
+      source = await this.text(file);
     } catch (err) {
-      this.page.innerHTML = `<p class="md-status">Could not read this chapter: ${
+      this.page.innerHTML = `<p class="md-status">Could not read ${Markdown.escape(file)}: ${
         Markdown.escape(String(err.message))}</p>`;
       return;
     }
-    if (this.current !== id) return;           // another chapter was opened meanwhile
-    this.page.innerHTML = this.kicker(chapter) + Markdown.render(source, this.EMBEDS)
-      + this.turns(chapter);
-    window.scrollTo(0, 0);
-    this.figures = [];
+    if (this.file !== file) return;            // another page was opened meanwhile
+    this.page.innerHTML = (chapter ? this.kicker(chapter) : '') + Markdown.render(source, this.EMBEDS);
+    // An image's path is relative to the file it is written in.
+    for (const img of this.page.querySelectorAll('img[src]')) {
+      const src = img.getAttribute('src');
+      if (/^[a-z]+:|^\//i.test(src)) continue;
+      const path = this.resolve(file, src);
+      if (path !== null) img.src = this.url(path);
+    }
+    const target = part && this.page.querySelector(`#${CSS.escape(Markdown.slug(decodeURIComponent(part)))}`);
+    if (target) target.scrollIntoView();
+    else window.scrollTo(0, 0);
     await Promise.all([...this.page.querySelectorAll('.md-embed')].map(el => this.embed(el)));
-    this.drawFigures();
+    Markdown.typeset(this.page);
   },
 
   /** Which chapter this is, above its title: a number, an appendix letter, or nothing. */
@@ -148,15 +176,6 @@ const Book = {
     const number = /^\d+$/.test(chapter.id) ? `Chapter ${chapter.id}`
       : /^[A-Z]$/.test(chapter.id) ? `Appendix ${chapter.id}` : '';
     return number ? `<p class="book-kicker">${number}${what}</p>` : '';
-  },
-
-  /** Links to the chapters before and after, at the foot of one. */
-  turns(chapter) {
-    const written = this.chapters().filter(c => c.file);
-    const at = written.indexOf(chapter);
-    const link = (c, rel) => c ? `<a href="#" data-chapter="${c.id}" class="book-turn-${rel}">${
-      rel === 'prev' ? '←' : ''} ${Markdown.inline(c.title)} ${rel === 'next' ? '→' : ''}</a>` : '<span></span>';
-    return `<nav class="book-turns">${link(written[at - 1], 'prev')}${link(written[at + 1], 'next')}</nav>`;
   },
 
   // ---- the chapter list -------------------------------------------------
@@ -240,6 +259,20 @@ const Book = {
       this.open(chapter.dataset.chapter);
       return;
     }
+    const link = event.target.closest('a[data-md]');
+    if (link && this.file) {
+      const [href, part = ''] = link.dataset.md.split('#');
+      const path = href ? this.resolve(this.file, href) : this.file;
+      if (path && path.endsWith('.md')) {
+        event.preventDefault();
+        if (path === this.file && part) {
+          this.page.querySelector(`#${CSS.escape(Markdown.slug(decodeURIComponent(part)))}`)?.scrollIntoView();
+        } else {
+          this.show(path, part);
+        }
+        return;
+      }
+    }
     const action = event.target.closest('[data-lab]');
     if (action) {
       const [what, name] = action.dataset.lab.split(':');
@@ -257,78 +290,24 @@ const Book = {
     if (event.target.matches('[data-workers]')) this.act({ workers: Number(event.target.value) });
   },
 
-  // ---- what a chapter asks to have drawn ----------------------------------
+  // ---- what a page asks to have drawn ----------------------------------
 
   async embed(el) {
     const { kind, arg } = el.dataset;
     try {
-      if (kind === 'thesis') await this.thesis(el, arg);
-      else if (kind === 'experiment') await this.experiment(el, arg);
-      else if (kind === 'figure') await this.figure(el, arg);
-      else if (kind === 'costs') await this.costs(el);
+      if (kind === 'experiment') this.experiment(el, arg);
     } catch (err) {
       el.innerHTML = `<p class="md-status">Could not draw ${Markdown.escape(kind)} ${
         Markdown.escape(arg)}: ${Markdown.escape(String(err.message))}</p>`;
     }
   },
 
-  async thesis(el, name) {
-    const { thesis = {} } = await this.plan(name);
-    const parts = [['claim', 'The claim'], ['why', 'Why it would be so'],
-                   ['confirm', 'It holds if'], ['refute', 'It fails if']];
-    el.className = 'book-thesis';
-    el.innerHTML = parts.filter(([key]) => thesis[key])
-      .map(([key, label]) => `<p><b>${label}.</b> ${Markdown.inline(thesis[key])}</p>`).join('')
-      + '<p class="book-note">Written down before the runs, in the experiment\'s plan.</p>';
-  },
-
-  async experiment(el, name) {
-    const plan = await this.plan(name);
+  /** How far an experiment has got: drawn only where there is a lab, updated as it runs. */
+  experiment(el, name) {
     el.className = 'book-experiment';
     el.dataset.experiment = name;
-    el.innerHTML = `<div class="book-live"></div>${this.planHtml(plan)}`;
+    el.innerHTML = '<div class="book-live"></div>';
     this.updatePanel(el);
-  },
-
-  /** What an experiment runs, from its plan: the same on every host. */
-  planHtml(plan) {
-    const runs = plan.runs;
-    if (typeof runs === 'string') {
-      const other = runs.replace('same as ', '');
-      const chapter = this.chapters().find(c => c.experiment === other);
-      return `<p>Uses the runs of ${chapter ? `<a href="#" data-chapter="${chapter.id}">Experiment ${
-        Number(other.slice(1))}</a>` : other}: nothing new is run for it.</p>`;
-    }
-    const seeds = String(runs.seeds);
-    // One size, or several, each written out in full: "800, 1,600 and 3,200".
-    const tokens = sizes => {
-      const all = [].concat(sizes).map(formatNumber);
-      return `${all.length > 1 ? `${all.slice(0, -1).join(', ')} and ${all[all.length - 1]}` : all[0]} tokens`;
-    };
-    const rows = runs.conditions.map(c => {
-      const set = Object.entries(c.set || {}).map(([k, v]) => `<code>${k} = ${
-        Markdown.escape(JSON.stringify(v))}</code>`).join(', ') || 'as the baseline';
-      const how = [c.stops && c.stops.length ? `stopped at ${c.stops.join(', ')} and continued in a new process` : '',
-                   c.fault_at !== undefined ? `cut off at ${c.fault_at} with no checkpoint, then resumed` : '',
-                   c.threads === 'default' ? 'matrix library on all its threads' : '',
-                   c.replicate && !c.stops && c.fault_at === undefined && !c.threads
-                     ? 'runs of its own, shared with no other experiment' : '',
-                   c.sizes ? `at ${tokens(c.sizes)} only` : '']
-        .filter(Boolean).join('; ');
-      return `<tr><td>${Markdown.escape(c.name)}</td><td>${set}</td><td>${how || '—'}</td></tr>`;
-    }).join('');
-    const record = runs.record || {};
-    return `<div class="md-scroll"><table class="book-plan">`
-      + `<tr><th>Baseline</th><td colspan="2"><code>${Markdown.escape(runs.baseline)}</code></td></tr>`
-      + `<tr><th>World</th><td colspan="2">${tokens(runs.world.total_tokens)}</td></tr>`
-      + `<tr><th>Seeds</th><td colspan="2">${Markdown.escape(seeds)}</td></tr>`
-      + `<tr><th>Iterations</th><td colspan="2">${formatNumber(runs.iterations)}</td></tr>`
-      + (runs.workers ? `<tr><th>Workers</th><td colspan="2">${runs.workers === 1 ? 'one run at a time'
-        : `at most ${runs.workers} runs at a time`}, whatever the lab's other work</td></tr>` : '')
-      + `<tr><th>Recorded</th><td colspan="2">every frame with its decisions; every statistic `
-      + `every iteration, the graph ones every ${record.heavy_every || 25}</td></tr>`
-      + `<tr><th>Condition</th><th>Differs from the baseline</th><th>How it is run</th></tr>`
-      + rows + '</table></div>';
   },
 
   updatePanel(el) {
@@ -395,159 +374,5 @@ const Book = {
     if (seconds < 5400) return `about ${Math.round(seconds / 60)} min${suffix}`;
     if (seconds < 172800) return `about ${(seconds / 3600).toFixed(1)} h${suffix}`;
     return `about ${(seconds / 86400).toFixed(1)} days${suffix}`;
-  },
-
-  /** The fitted cost of a simulation, from book/results/costs.json, which `gol_lab.py costs` writes. */
-  async costs(el) {
-    const { fitted, runs = [], updated } = await this.json('results/costs.json');
-    const measured = key => (fitted.measured || {})[key] ? 'measured' : 'calibration';
-    const rows = [
-      ['Time', `${(1000 * fitted.secondsPerAgentIteration).toFixed(2)} ms per agent per iteration, `
-        + 'for every 10,000 weights in a brain', measured('secondsPerAgentIteration')],
-      ['Agents', `${fitted.agentsPerToken.toFixed(2)} alive per token of the supply, once settled`,
-       measured('agentsPerToken')],
-      ['Disk', `${Math.round(fitted.bytesPerAgentIteration)} bytes per agent per iteration`,
-       measured('bytesPerAgentIteration')],
-      ['Memory', `${Math.round(fitted.baseMB)} MB, plus ${fitted.peakBytesPerWeightByte.toFixed(1)} `
-        + 'times every byte of every brain', measured('peakBytesPerWeightByte')]
-    ];
-    const kinds = Object.values(fitted.kinds || {}).map(k => `<tr><td>${Markdown.escape(k.label || '—')}</td>`
-      + `<td>${(1000 * k.secondsPerAgent).toFixed(2)} ms per agent per iteration</td>`
-      + `<td>${k.agentsPerToken ? `${k.agentsPerToken.toFixed(2)} agents per token` : 'not settled yet'}</td>`
-      + `<td>${k.runs}</td></tr>`).join('');
-    el.className = 'md-scroll';
-    el.innerHTML = '<table><thead><tr><th>What</th><th>Now</th><th>From</th></tr></thead><tbody>'
-      + rows.map(([what, now, from]) => `<tr><td>${what}</td><td>${now}</td><td>${from}</td></tr>`).join('')
-      + '</tbody></table>'
-      + (kinds ? '<table><thead><tr><th>Kind of run</th><th>Time</th><th>Agents</th><th>Runs</th></tr>'
-        + `</thead><tbody>${kinds}</tbody></table>` : '')
-      + `<p class="book-note">Fitted to ${runs.length} recorded runs on ${
-        Markdown.escape(updated || '—')}.</p>`;
-  },
-
-  // ---- figures ----------------------------------------------------------
-
-  async figure(el, arg) {
-    const data = await this.json(`figures/${arg}.json`);
-    el.className = 'book-figure';
-    el.innerHTML = '<canvas></canvas>'
-      + (data.caption ? `<p class="book-caption">${Markdown.inline(data.caption)}</p>` : '');
-    this.figures.push({ canvas: el.querySelector('canvas'), data });
-  },
-
-  drawFigures() {
-    for (const { canvas, data } of this.figures) this.draw(canvas, data);
-  },
-
-  /**
-   * Lines over a shared axis, each with the band of the runs behind it: the
-   * middle half of them, and a fainter band for nine in ten. Drawn with the
-   * chart helpers every other chart on the page uses.
-   */
-  draw(canvas, fig) {
-    const series = fig.series || [];
-    const chrome = { title: fig.title, xLabel: fig.x.label, yLabel: fig.y.label, ticks: true,
-                     legend: series.map((s, i) => ({ label: s.label, colour: Ink.line(i) })) };
-    const pad = _chromePad(chrome);
-    const { ctx, w, h, outer } = _prepareCanvas(canvas, pad);
-    const scale = axis => (axis.log ? v => (v > 0 ? Math.log10(v) : NaN) : v => v);
-    const sx = scale(fig.x), sy = scale(fig.y);
-
-    const xs = [], ys = [];
-    for (const s of series) {
-      xs.push(...s.x.map(sx));
-      for (const key of ['y', 'lo', 'hi', 'outerLo', 'outerHi']) {
-        if (s[key]) ys.push(...s[key].filter(v => v !== null).map(sy));
-      }
-    }
-    const finite = values => values.filter(Number.isFinite);
-    const span = (values, lo, hi) => {
-      const f = finite(values);
-      return f.length ? [lo ?? Math.min(...f), hi ?? Math.max(...f)] : [0, 1];
-    };
-    const [x0, x1] = span(xs);
-    const [y0, y1] = span(ys, fig.y.min !== undefined ? sy(fig.y.min) : undefined);
-    // As many decimals as the ticks need and no more: 0.2 apart wants one,
-    // 2 apart none. Three on every tick read 2.000 as two thousand.
-    const back = (axis, lo, hi) => {
-      if (axis.log) {
-        return v => {
-          const n = 10 ** v;
-          return n >= 1 && Math.abs(n - Math.round(n)) < 1e-6 * n
-            ? Math.round(n).toLocaleString('en-US') : _short(n);
-        };
-      }
-      const digits = Math.max(0, Math.min(3, Math.ceil(-Math.log10((hi - lo) / 5 || 1))));
-      return v => Number(v).toLocaleString('en-US', { minimumFractionDigits: digits,
-                                                      maximumFractionDigits: digits });
-    };
-    // A logarithmic axis is ruled at the powers of ten it spans, when it spans
-    // two or more; the round numbers between them say nothing on such an axis.
-    const decades = (axis, lo, hi) => {
-      if (!axis.log) return undefined;
-      const ticks = [];
-      for (let p = Math.ceil(lo - 1e-9); p <= hi + 1e-9; p++) ticks.push(p);
-      return ticks.length >= 2 ? ticks : undefined;
-    };
-    const x = { lo: x0, hi: x1, format: back(fig.x, x0, x1), ticks: decades(fig.x, x0, x1) };
-    const y = { lo: y0, hi: y1 === y0 ? y0 + 1 : y1 };
-    y.format = back(fig.y, y.lo, y.hi);
-    y.ticks = decades(fig.y, y.lo, y.hi);
-    const px = v => (sx(v) - x.lo) / (x.hi - x.lo || 1) * w;
-    const py = v => h - (sy(v) - y.lo) / (y.hi - y.lo || 1) * h;
-
-    _axes(ctx, w, h, { x, y, pad,
-      guides: (fig.guides || []).map(g => ({ ...g, at: g.axis === 'y' ? sy(g.at) : sx(g.at) })) });
-
-    const band = (s, lo, hi, alpha, colour) => {
-      if (!s[lo] || !s[hi]) return;
-      ctx.save();
-      ctx.globalAlpha = alpha;
-      ctx.fillStyle = colour;
-      let open = [];
-      const flush = () => {
-        if (open.length > 1) {
-          ctx.beginPath();
-          open.forEach(([t, a], k) => (k ? ctx.lineTo(px(t), py(a)) : ctx.moveTo(px(t), py(a))));
-          [...open].reverse().forEach(([t, , b]) => ctx.lineTo(px(t), py(b)));
-          ctx.closePath();
-          ctx.fill();
-        }
-        open = [];
-      };
-      s.x.forEach((t, k) => (s[lo][k] === null || s[hi][k] === null
-        ? flush() : open.push([t, s[lo][k], s[hi][k]])));
-      flush();
-      ctx.restore();
-    };
-    series.forEach((s, i) => {
-      band(s, 'outerLo', 'outerHi', 0.10, Ink.line(i));
-      band(s, 'lo', 'hi', 0.22, Ink.line(i));
-    });
-    series.forEach((s, i) => {
-      if (s.points) {
-        // A cloud of measurements rather than a path through them.
-        ctx.fillStyle = Ink.line(i);
-        ctx.globalAlpha = 0.55;
-        s.x.forEach((t, k) => {
-          const v = s.y[k];
-          if (v !== null && Number.isFinite(sy(v))) ctx.fillRect(px(t) - 1.5, py(v) - 1.5, 3, 3);
-        });
-        ctx.globalAlpha = 1;
-        return;
-      }
-      ctx.strokeStyle = Ink.line(i);
-      ctx.lineWidth = s.width || 1.6;
-      ctx.beginPath();
-      let pen = false;
-      s.x.forEach((t, k) => {
-        const v = s.y[k];
-        if (v === null || !Number.isFinite(sy(v))) { pen = false; return; }
-        if (pen) ctx.lineTo(px(t), py(v)); else ctx.moveTo(px(t), py(v));
-        pen = true;
-      });
-      ctx.stroke();
-    });
-    _chrome(ctx, pad, outer, chrome);
   }
 };

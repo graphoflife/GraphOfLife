@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 970 440" width="970" height="440" role="img" aria-label="One iteration: reproduction, then the game"><title>One iteration: reproduction, then the game</title><style>
+.dg-t{fill:#eef4fa;font:13px system-ui,sans-serif}
+.dg-b{fill:#eef4fa;font:600 13px system-ui,sans-serif}
+.dg-h{fill:#eef4fa;font:600 15px system-ui,sans-serif}
+.dg-m{fill:#9ab0c3;font:12px system-ui,sans-serif}
+.dg-s{fill:#9ab0c3;font:11px system-ui,sans-serif}
+.dg-box{fill:#2d3d50;stroke:#5a6e86;stroke-width:1}
+.dg-box2{fill:#384c64;stroke:#5a6e86;stroke-width:1}
+.dg-frame{fill:none;stroke:#435468;stroke-width:1;stroke-dasharray:4 3}
+.dg-line{stroke:#9ab0c3;stroke-width:1.4;fill:none}
+.dg-faint{stroke:#7e94a5;stroke-width:1;fill:none;opacity:.6}
+.dg-acc{stroke:#64bdff;stroke-width:2;fill:none}
+.dg-warn{stroke:#ffd166;stroke-width:2;fill:none}
+.dg-bad{stroke:#ff6b6b;stroke-width:2;fill:none}
+.dg-good{stroke:#7ee787;stroke-width:2;fill:none}
+.dg-node{fill:#64bdff}
+.dg-node2{fill:#ffd166}
+.dg-node3{fill:#7ee787}
+.dg-node4{fill:#c792ea}
+.dg-dead{fill:#ff6b6b}
+.dg-grey{fill:#7e94a5}
+.dg-fill{fill:#64bdff;opacity:.85}
+.dg-fill2{fill:#ffd166;opacity:.85}
+.dg-fill3{fill:#c792ea;opacity:.85}
+</style>
+<defs><marker id="dg-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9ab0c3"/></marker></defs><rect width="970" height="440" rx="10" fill="#18202b"/><rect x="20.0" y="40.0" width="440.0" height="330.0" rx="6" class="dg-box"/><text x="34.0" y="64.0" class="dg-h" text-anchor="start">Phase 1 · Reproduction</text><text x="34.0" y="92.0" class="dg-t" text-anchor="start">1. Messages: every agent looks at itself and its neighbours</text><text x="34.0" y="111.0" class="dg-t" text-anchor="start">   and writes a message to each (the pre-pass).</text><text x="34.0" y="130.0" class="dg-t" text-anchor="start">2. Every agent with at least one token looks again and decides:</text><text x="34.0" y="149.0" class="dg-t" text-anchor="start">   • the share of its tokens to give a child,</text><text x="34.0" y="168.0" class="dg-t" text-anchor="start">   • which of itself and its neighbours the child joins,</text><text x="34.0" y="187.0" class="dg-t" text-anchor="start">   • which of its own connections it hands to the child.</text><text x="34.0" y="206.0" class="dg-t" text-anchor="start">3. Children are born: a copy of the parent's brain,</text><text x="34.0" y="225.0" class="dg-t" text-anchor="start">   changed with probability 0.2, and the tokens given.</text><text x="34.0" y="244.0" class="dg-t" text-anchor="start">4. Handed-over connections move from parent to child.</text><text x="34.0" y="263.0" class="dg-t" text-anchor="start">5. Messages written in step 2 are delivered.</text><text x="34.0" y="282.0" class="dg-t" text-anchor="start">6. Cleanup: agents with 0 tokens die; everything not joined</text><text x="34.0" y="301.0" class="dg-t" text-anchor="start">   to the largest connected piece dies; their tokens are</text><text x="34.0" y="320.0" class="dg-t" text-anchor="start">   shared out at random among the survivors.</text><text x="34.0" y="339.0" class="dg-t" text-anchor="start">→ frame 2t is recorded</text><rect x="500.0" y="40.0" width="440.0" height="330.0" rx="6" class="dg-box"/><text x="514.0" y="64.0" class="dg-h" text-anchor="start">Phase 2 · The game</text><text x="514.0" y="92.0" class="dg-t" text-anchor="start">1. Messages: the pre-pass again.</text><text x="514.0" y="111.0" class="dg-t" text-anchor="start">2. Every agent looks once more, writes its messages, and</text><text x="514.0" y="130.0" class="dg-t" text-anchor="start">   stakes all of its tokens on itself and its neighbours,</text><text x="514.0" y="149.0" class="dg-t" text-anchor="start">   marking part of each stake as revolutionary.</text><text x="514.0" y="168.0" class="dg-t" text-anchor="start">3. Every node goes to its largest staker — or to a</text><text x="514.0" y="187.0" class="dg-t" text-anchor="start">   coalition of smaller revolutionary stakers that</text><text x="514.0" y="206.0" class="dg-t" text-anchor="start">   outweighs it. The node takes on the winner's brain</text><text x="514.0" y="225.0" class="dg-t" text-anchor="start">   and holds every token staked on it.</text><text x="514.0" y="244.0" class="dg-t" text-anchor="start">4. Connections that carried no tokens in this game are cut.</text><text x="514.0" y="263.0" class="dg-t" text-anchor="start">5. Messages are delivered.</text><text x="514.0" y="282.0" class="dg-t" text-anchor="start">6. Cleanup, as in phase 1.</text><text x="514.0" y="301.0" class="dg-t" text-anchor="start">7. Every brain changes, each with probability 0.2.</text><text x="514.0" y="320.0" class="dg-t" text-anchor="start">→ frame 2t + 1 is recorded</text><line x1="470.0" y1="205.0" x2="498.0" y2="205.0" class="dg-acc" marker-end="url(#dg-arrow)"/><path d="M720,372 C720,412 250,412 250,374" class="dg-acc" marker-end="url(#dg-arrow)"/><text x="485.0" y="428.0" class="dg-m" text-anchor="middle">iteration t + 1 begins</text><text x="485.0" y="24.0" class="dg-h" text-anchor="middle">One iteration t</text></svg>
