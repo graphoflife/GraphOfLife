@@ -26,11 +26,11 @@ from book_svg import CARD
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "book", "diagrams")
 
 STYLE = """<style>
-.dg-t{fill:var(--text,#eef4fa);font:13px system-ui,sans-serif}
-.dg-b{fill:var(--text,#eef4fa);font:600 13px system-ui,sans-serif}
-.dg-h{fill:var(--text,#eef4fa);font:600 15px system-ui,sans-serif}
-.dg-m{fill:var(--muted,#9ab0c3);font:12px system-ui,sans-serif}
-.dg-s{fill:var(--muted,#9ab0c3);font:11px system-ui,sans-serif}
+.dg-t{fill:var(--text,#eef4fa);font:11.5px 'JetBrains Mono',ui-monospace,Menlo,Consolas,'DejaVu Sans Mono',monospace}
+.dg-b{fill:var(--text,#eef4fa);font:600 11.5px 'JetBrains Mono',ui-monospace,Menlo,Consolas,'DejaVu Sans Mono',monospace}
+.dg-h{fill:var(--text,#eef4fa);font:600 13.5px 'JetBrains Mono',ui-monospace,Menlo,Consolas,'DejaVu Sans Mono',monospace}
+.dg-m{fill:var(--muted,#9ab0c3);font:10.5px 'JetBrains Mono',ui-monospace,Menlo,Consolas,'DejaVu Sans Mono',monospace}
+.dg-s{fill:var(--muted,#9ab0c3);font:9.5px 'JetBrains Mono',ui-monospace,Menlo,Consolas,'DejaVu Sans Mono',monospace}
 .dg-box{fill:var(--panel-2,#2d3d50);stroke:var(--border-strong,#5a6e86);stroke-width:1}
 .dg-box2{fill:var(--panel-3,#384c64);stroke:var(--border-strong,#5a6e86);stroke-width:1}
 .dg-frame{fill:none;stroke:var(--border,#435468);stroke-width:1;stroke-dasharray:4 3}
@@ -112,9 +112,10 @@ def ring() -> str:
         body.append(text(cx, 34, title, "dg-h", "middle"))
         body.append(text(cx, 52, sub, "dg-m", "middle"))
     moved = sum(1 for a, b in rewired.edges() if min((a - b) % n, (b - a) % n) > k // 2)
-    body.append(text(380, 372, f"Yellow: the {moved} connections that were moved to a founder chosen at random — "
-                               "the shortcuts that make the ring a small world.", "dg-m", "middle"))
-    return svg(760, 390, "".join(body), "The founders' starting ring")
+    body.append(text(380, 366, f"Yellow: the {moved} connections that were moved to a founder chosen at random —",
+                     "dg-m", "middle"))
+    body.append(text(380, 382, "the shortcuts that make the ring a small world.", "dg-m", "middle"))
+    return svg(760, 396, "".join(body), "The founders' starting ring")
 
 
 def one_iteration() -> str:
@@ -220,8 +221,9 @@ def game() -> str:
         body.append(dot(*q, 17, "dg-node" if name != "W" else "dg-node2"))
         body.append(text(q[0], q[1] + 5, name, "dg-b", "middle"))
         dx = {"U": -170, "W": 30, "X": 30, "V": 30}[name]
-        body.append(text(q[0] + dx, q[1] - 28, s1, "dg-t"))
-        body.append(text(q[0] + dx, q[1] - 12, s2, "dg-m"))
+        dy = 52 if name == "V" else 0       # below V, clear of its line to W
+        body.append(text(q[0] + dx, q[1] - 28 + dy, s1, "dg-t"))
+        body.append(text(q[0] + dx, q[1] - 12 + dy, s2, "dg-m"))
     rows = [
         "Who takes node V?",
         "The largest single stake is U's: H = 7. U is the hegemon.",
@@ -302,7 +304,7 @@ def brain() -> str:
               ("4", "log(1 + tokens) and log(1 + degree),"),
               ("", "   of the agent and of the candidate"),
               ("24", "6 quantiles of log tokens and of log degree"),
-              ("", "   over the agent's and the candidate's neighbours"),
+              ("", "   over the two neighbourhoods"),
               ("120", "4 messages of 30 numbers: agent→agent,"),
               ("", "   agent→candidate, candidate→agent,"),
               ("", "   candidate→candidate"),
@@ -327,12 +329,12 @@ def brain() -> str:
     body.append(arrow(x - 14, 162, x + 6, 162))
     outputs = [("2", "the child's share of the agent's tokens"),
                ("2", "join the child to this candidate? (yes, no)"),
-               ("2", "… read that as a probability, or take the larger?"),
+               ("2", "… read as a probability, or take the larger?"),
                ("1", "stake score for this candidate"),
                ("2", "spread the stake by score, or all on the best?"),
                ("2", "revolutionary share of this stake"),
                ("2", "hand this connection to the child? (yes, no)"),
-               ("2", "… read that as a probability, or take the larger?"),
+               ("2", "… read as a probability, or take the larger?"),
                ("30", "the message to this candidate (through tanh)")]
     bx = x + 10
     body.append(box(bx, 44, 980 - bx - 10, 236, "dg-box"))
@@ -370,7 +372,7 @@ def gini() -> str:
     for c in cum:
         body.append(text(x0 - 8, y0 - size * c / total + 4, f"{c}/16", "dg-s", "end"))
     body.append(text(x0 + size / 2, y0 + 38, "share of agents, poorest first", "dg-m", "middle"))
-    body.append(text(x0 + size - 10, y0 - size + 30, "perfect equality", "dg-s", "end"))
+    body.append(text(x0 + 0.72 * size - 12, y0 - 0.72 * size, "perfect equality", "dg-s", "end"))
     rows = ["Tokens: 1, 2, 3 and 10 (16 in all).",
             "Lorenz curve: the share of all tokens held",
             "by the poorest share of agents.",

@@ -116,7 +116,7 @@ const StatDetail = {
     if (!ys.length) {
       const { ctx, h } = _prepareCanvas(this.canvas);
       ctx.fillStyle = Ink.of('dim');
-      ctx.font = '12px system-ui, sans-serif';
+      ctx.font = Ink.font(12);
       ctx.fillText(Jobs.busy(Viewer)
         ? 'Summarising the run\u2026'
         : 'No data for this statistic under the current phase filter.', 10, h / 2);
@@ -170,7 +170,7 @@ const StatDetail = {
     ctx.stroke();
 
     ctx.fillStyle = Ink.of('dim');
-    ctx.font = '9px system-ui, sans-serif';
+    ctx.font = Ink.font(9);
     const axisLabel = 'iteration';
     ctx.fillText(axisLabel, w - ctx.measureText(axisLabel).width, h + pad.bottom - 1);
 

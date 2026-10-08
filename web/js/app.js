@@ -43,6 +43,11 @@ const App = {
     // of the second column and the choice is remembered per layout.
     this.makeResizable('viewerLayout', 'viewerResizer', 'gol.width.viewer', 200, 620, 268);
 
+    // Canvas labels are set in the site's web font, which can arrive after the
+    // first frame was drawn in the fallback; whatever redraws on a resize
+    // redraws once it is here.
+    if (document.fonts) document.fonts.ready.then(() => window.dispatchEvent(new Event('resize')));
+
     // Open on whichever view is the default, through the same path a click
     // takes. Marking it in the markup instead would set the class and skip
     // everything else showView does, which is how the wordmark came to be the

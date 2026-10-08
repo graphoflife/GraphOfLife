@@ -86,7 +86,7 @@ def _draw(path: str, chart: Dict[str, Any]) -> None:
     import book_svg
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(f"{path}.svg", "w", encoding="utf-8") as f:
-        f.write(book_svg.render([_finite(chart)]))
+        f.write(book_svg.render([_finite(chart)], name=os.path.relpath(path, BOOK)))
 
 
 def _write(path: str, value: Any, compact: bool = False) -> None:

@@ -331,7 +331,7 @@ const FlowView = {
     }
 
     ctx.fillStyle = Ink.of('label');
-    ctx.font = '10px ui-monospace, monospace';
+    ctx.font = Ink.font(10);
     ctx.textAlign = 'center';
     const step = Math.max(1, Math.round(columns.length / 8));
     for (let c = 0; c < columns.length; c += step) {

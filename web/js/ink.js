@@ -37,6 +37,20 @@ const Ink = {
   },
 
   _read: null,
+  _family: null,
+
+  /**
+   * The canvas font for a size in pixels and a weight, in the site's one
+   * typeface — the stylesheet's --font, read once, so that a chart's labels
+   * are set in what the page around them is.
+   */
+  font(px, weight = 400) {
+    if (!this._family) {
+      this._family = getComputedStyle(document.documentElement).getPropertyValue('--font').trim();
+      if (!this._family) throw new Error('the stylesheet does not define --font');
+    }
+    return `${weight} ${px}px ${this._family}`;
+  },
 
   /**
    * The colour for a role, read from the stylesheet once.

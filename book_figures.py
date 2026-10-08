@@ -79,7 +79,7 @@ class Chapter:
         path = os.path.join(BOOK, "figures", self.name, f"{name}.svg")
         os.makedirs(os.path.dirname(path), exist_ok=True)
         with open(path, "w", encoding="utf-8") as f:
-            f.write(book_svg.render(charts, columns))
+            f.write(book_svg.render(charts, columns, f"{self.name}-{name}"))
         self.figures[name] = {"title": title, "caption": caption,
                               "recipe": recipe + f"\n\n**To make it again:** `{COMMAND} {self.name}`."}
 

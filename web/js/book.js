@@ -9,7 +9,8 @@
  *
  * A page is rendered by markdown.js. A link to another file of the book
  * (`[…](08-thirty-worlds.md#the-runs)`) opens it in place; an image's path
- * is taken from the file it is written in, as Obsidian takes it. One thing
+ * is taken from the file it is written in, as Obsidian takes it, and a
+ * figure or diagram is set into the page, so it is drawn in the site's font. One thing
  * a page can ask to have drawn, with a comment no other reader shows:
  *
  *     <!-- experiment E08 -->   how far an experiment has got, with ▶ and ⏸
@@ -157,17 +158,50 @@ const Book = {
     if (this.file !== file) return;            // another page was opened meanwhile
     this.page.innerHTML = (chapter ? this.kicker(chapter) : '') + Markdown.render(source, this.EMBEDS);
     // An image's path is relative to the file it is written in.
+    const drawings = [];
     for (const img of this.page.querySelectorAll('img[src]')) {
       const src = img.getAttribute('src');
       if (/^[a-z]+:|^\//i.test(src)) continue;
       const path = this.resolve(file, src);
-      if (path !== null) img.src = this.url(path);
+      if (path === null) continue;
+      img.src = this.url(path);
+      if (path.endsWith('.svg')) drawings.push(this.inline(img, path));
     }
-    const target = part && this.page.querySelector(`#${CSS.escape(Markdown.slug(decodeURIComponent(part)))}`);
-    if (target) target.scrollIntoView();
-    else window.scrollTo(0, 0);
+    if (part) {
+      await Promise.all(drawings);          // the page has its height before it is scrolled
+      this.page.querySelector(`#${CSS.escape(Markdown.slug(decodeURIComponent(part)))}`)?.scrollIntoView();
+    } else {
+      window.scrollTo(0, 0);
+    }
     await Promise.all([...this.page.querySelectorAll('.md-embed')].map(el => this.embed(el)));
     Markdown.typeset(this.page);
+  },
+
+  /**
+   * A figure or diagram of the book, set into the page in place of its image,
+   * so that its text is in the page's typeface: a picture shown as an image
+   * sees only the fonts installed on the computer, never the site's web font.
+   * The image stays if the drawing cannot be read or is not a plain one.
+   */
+  async inline(img, path) {
+    try {
+      const svg = this.safeSvg(await this.text(path));
+      if (!img.isConnected) return;               // another page was opened meanwhile
+      const box = document.createElement('div');
+      box.className = 'md-svg';
+      box.setAttribute('role', 'img');
+      box.setAttribute('aria-label', img.alt);
+      box.innerHTML = svg;
+      img.replaceWith(box);
+    } catch (err) { /* the image it was */ }
+  },
+
+  /** An SVG drawing that only draws: no script, no handlers, no embedded page. */
+  safeSvg(text) {
+    if (!/^\s*<svg[\s>]/.test(text) || /<script|<foreignObject|\son[a-z]+\s*=|javascript:/i.test(text)) {
+      throw new Error('not a plain SVG drawing');
+    }
+    return text;
   },
 
   /** Which chapter this is, above its title: a number, an appendix letter, or nothing. */

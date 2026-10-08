@@ -1202,6 +1202,25 @@ function test_no_canvas_writes_a_colour_out() {
   assert(!found.length, `colours written out on a canvas, where a retheme cannot reach them: ${found.join(', ')}`);
 }
 
+function test_no_canvas_writes_a_font_out() {
+  // The site has one typeface, set once in the stylesheet as --font. A family
+  // written into a canvas call is one the stylesheet cannot reach: eighteen
+  // were, and they kept drawing labels in system-ui after the page had moved
+  // to JetBrains Mono.
+  const css = fs.readFileSync(path.join(root, 'web', 'css', 'style.css'), 'utf8');
+  const start = css.indexOf(':root');
+  assert(/--font\s*:[^;]*JetBrains Mono/.test(css.slice(start, css.indexOf('}', start))),
+    ':root does not set the site\'s typeface');
+  const dir = path.join(root, 'web', 'js');
+  const found = [];
+  for (const name of fs.readdirSync(dir).filter(n => n.endsWith('.js'))) {
+    fs.readFileSync(path.join(dir, name), 'utf8').split('\n').forEach((line, i) => {
+      if (/\.font\s*=\s*['"`]/.test(line)) found.push(`${name}:${i + 1}`);
+    });
+  }
+  assert(!found.length, `fonts written out on a canvas, where the stylesheet cannot reach them: ${found.join(', ')}`);
+}
+
 // ---- the book ----------------------------------------------------------------
 
 const Markdown = new Function(
@@ -1254,6 +1273,21 @@ function test_markdown_reads_obsidian() {
   assert(html.includes('<a href="../notes/gini.md#the-gini-coefficient" data-md="../notes/gini.md#the-gini-coefficient">the Gini</a>'), html);
   assert(html.includes('<img src="../diagrams/ring.svg" alt="a ring" loading="lazy">'), html);
   assert(html.includes('<a href="https://x.org" target="_blank" rel="noopener">x</a>'), html);
+}
+
+function test_book_inlines_only_plain_drawings() {
+  // A figure is set into the page, so that it takes the page's font — which
+  // also lets it run anything it carries. Only a drawing is let in.
+  const Book = bookWith();
+  const plain = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><style>.a{fill:red}</style><path d="M0 0"/></svg>';
+  assert(Book.safeSvg(plain) === plain);
+  for (const bad of ['<svg><script>alert(1)</script></svg>', '<svg onload="alert(1)"></svg>',
+                     '<svg><foreignObject><div></div></foreignObject></svg>',
+                     '<svg><a href="javascript:alert(1)"><path/></a></svg>', '<div><svg></svg></div>']) {
+    let refused = false;
+    try { Book.safeSvg(bad); } catch (err) { refused = true; }
+    assert(refused, `let in: ${bad}`);
+  }
 }
 
 function test_book_resolves_paths_as_obsidian_does() {
@@ -1409,6 +1443,8 @@ const tests = Object.entries({
   test_markdown_hands_comments_to_the_caller,
   test_markdown_reads_obsidian,
   test_book_resolves_paths_as_obsidian_does,
+  test_book_inlines_only_plain_drawings,
+  test_no_canvas_writes_a_font_out,
   test_book_progress_of_an_experiment,
   test_a_run_that_died_out_says_so,
   test_the_static_book_never_asks_the_lab,

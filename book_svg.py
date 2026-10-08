@@ -34,6 +34,7 @@ page's dark card, so a figure looks the same inside the app and outside it.
 from __future__ import annotations
 
 import math
+import re
 from typing import Any, Dict, List, Optional, Sequence, Tuple
 
 #: The line colours, in order — the same as Ink.LINES in web/js/ink.js.
@@ -42,7 +43,10 @@ CARD = "#18202b"
 TEXT = "#eef4fa"
 LABEL = "#9ab0c3"
 DIM = "#7e94a5"
-FONT = "system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif"
+#: The site's one typeface (--font in web/css/style.css). Shown as an image, an SVG
+#: sees only the fonts installed where it is read; the Book tab inlines its
+#: figures, so there it is the web font itself.
+FONT = "'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace"
 
 WIDTH = 780              # of a whole figure, in pixels
 LEGEND_ROW = 16
@@ -53,8 +57,8 @@ def esc(text: Any) -> str:
 
 
 def width_of(text: str, size: float) -> float:
-    """Roughly how wide a text is drawn: there is no font to measure here."""
-    return len(text) * size * 0.56
+    """How wide a text is drawn: every character of a monospaced face is 0.6 em."""
+    return len(text) * size * 0.6
 
 
 def colour(series: Dict[str, Any], i: int) -> str:
@@ -326,7 +330,7 @@ class Chart:
             out.append(f'<text transform="translate({f1(bx + 14)} {f1(cy)}) rotate(-90)" fill="{DIM}" '
                        f'font-size="11.5" text-anchor="middle">{esc(fig["y"]["label"])}</text>')
 
-        clip = f"clip{self.uid}"
+        clip = f"{self.uid}-clip"
         out.append(f'<clipPath id="{clip}"><rect x="{f1(left)}" y="{f1(top - 1)}" width="{f1(w)}" '
                    f'height="{f1(h + 2)}"/></clipPath><g clip-path="url(#{clip})">')
 
@@ -451,8 +455,13 @@ class Chart:
 # A figure
 # ---------------------------------------------------------------------------
 
-def render(charts: List[Dict[str, Any]], columns: int = 1) -> str:
-    """One figure: its charts in a grid of `columns`, row by row, on one card."""
+def render(charts: List[Dict[str, Any]], columns: int = 1, name: str = "figure") -> str:
+    """
+    One figure: its charts in a grid of `columns`, row by row, on one card.
+    `name` makes its ids its own, so that several figures inlined in one page
+    do not clip each other's charts.
+    """
+    prefix = re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-") or "figure"
     columns = max(1, min(columns, len(charts)))
     w = WIDTH / columns
     small = columns > 1
@@ -462,7 +471,7 @@ def render(charts: List[Dict[str, Any]], columns: int = 1) -> str:
         row = charts[r:r + columns]
         h = max(Chart.height(fig, w, small) for fig in row)
         for c, fig in enumerate(row):
-            body += Chart(fig, c * w, y, w, h, f"{r + c}").svg()
+            body += Chart(fig, c * w, y, w, h, f"{prefix}-{r + c}").svg()
         y += h
     height = y + 4
     return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {WIDTH} {f1(height)}" '

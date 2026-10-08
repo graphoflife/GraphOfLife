@@ -364,7 +364,7 @@ const Lineage = {
     ctx.strokeStyle = Ink.of('axis');
     ctx.lineWidth = 1;
     ctx.fillStyle = Ink.of('label');
-    ctx.font = '10px ui-monospace, monospace';
+    ctx.font = Ink.font(10);
     ctx.textAlign = 'center';
     const ticks = Math.min(8, columns.length - 1);
     for (let i = 0; i <= ticks; i++) {

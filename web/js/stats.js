@@ -1013,7 +1013,7 @@ function _axes(ctx, w, h, spec) {
   const { x, y, grid = true, guides = [],
           pad = { left: 0, right: 0 } } = spec;
   ctx.save();
-  ctx.font = '10px system-ui, sans-serif';
+  ctx.font = Ink.font(10);
   ctx.lineWidth = 1;
 
   const place = (axis, v) => axis.lo === axis.hi ? 0.5 : (v - axis.lo) / (axis.hi - axis.lo);
@@ -1102,10 +1102,10 @@ function _chrome(ctx, pad, outer, chrome) {
 
   if (chrome.title) {
     ctx.fillStyle = Ink.of('text');
-    ctx.font = '600 13px system-ui, sans-serif';
+    ctx.font = Ink.font(13, 600);
     ctx.fillText(chrome.title, pad.left, 17);
   }
-  ctx.font = '11px system-ui, sans-serif';
+  ctx.font = Ink.font(11);
   ctx.fillStyle = Ink.of('label');
 
   if (chrome.xLabel) {
@@ -1190,7 +1190,7 @@ function _binOf(value, edges) {
 
 function _noData(ctx, w, h, message = 'no data') {
   ctx.fillStyle = Ink.of('dim');
-  ctx.font = '11px system-ui, sans-serif';
+  ctx.font = Ink.font(11);
   ctx.fillText(message, 8, h / 2);
 }
 
@@ -1276,7 +1276,7 @@ function drawHistogram(canvas, values, options = {}) {
 
   const back = v => logScale ? Metrics.undoLog(v, signed) : v;
   ctx.fillStyle = Ink.of('label');
-  ctx.font = '10px system-ui, sans-serif';
+  ctx.font = Ink.font(10);
   ctx.fillText(format(back(lo)), 2, h - 4);
   const hiText = format(back(hi));
   ctx.fillText(hiText, w - ctx.measureText(hiText).width - 2, h - 4);
@@ -1397,7 +1397,7 @@ function drawHeatmap(canvas, xs, ys, options = {}) {
   const backY = v => logY ? Metrics.undoLog(v, signedY) : v;
 
   ctx.fillStyle = Ink.of('label');
-  ctx.font = '10px system-ui, sans-serif';
+  ctx.font = Ink.font(10);
 
   // y axis: high at the top, low at the bottom of the plot.
   ctx.fillText(formatY(backY(ey[1])), 2, padTop + 8);
@@ -1509,7 +1509,7 @@ function drawTrajectory(canvas, points, options = {}) {
 
   const back = (v, log) => (log ? Metrics.undoLog(v, v < 0) : v);
 
-  ctx.font = '10px system-ui, sans-serif';
+  ctx.font = Ink.font(10);
   ctx.fillStyle = Ink.of('label');
   ctx.fillText(_short(back(hiY, logY)), 2, padTop + 8);
   ctx.fillText(_short(back(loY, logY)), 2, padTop + plotH);
@@ -1519,7 +1519,7 @@ function drawTrajectory(canvas, points, options = {}) {
 
   if (!chrome) {
     ctx.fillStyle = Ink.of('label');
-    ctx.font = '10.5px system-ui, sans-serif';
+    ctx.font = Ink.font(10.5);
     ctx.fillText(`${yLabel} \u2191   vs   ${xLabel} \u2192`, padLeft, padTop - 1);
   }
 
@@ -1527,7 +1527,7 @@ function drawTrajectory(canvas, points, options = {}) {
   const barW = 90, barH = 7, barX = padLeft, barY = h - 12;
   drawColormapStrip(ctx, barX, barY, barW, barH, colormap, reverse);
   ctx.fillStyle = Ink.of('label');
-  ctx.font = '9.5px system-ui, sans-serif';
+  ctx.font = Ink.font(9.5);
   ctx.fillText(`iter ${Math.round(loT).toLocaleString('en-US')}`, barX + barW + 6, barY + barH);
   const endText = `\u2192 ${Math.round(hiT).toLocaleString('en-US')}`;
   ctx.fillText(endText, barX + barW + 6 + ctx.measureText(`iter ${Math.round(loT).toLocaleString('en-US')}`).width + 6, barY + barH);

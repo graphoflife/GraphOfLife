@@ -202,7 +202,7 @@ const WindowView = {
   drawNothing(loaded) {
     const ctx = this.ctx;
     ctx.fillStyle = Ink.of('dim');
-    ctx.font = '12px system-ui, sans-serif';
+    ctx.font = Ink.font(12);
     ctx.textAlign = 'center';
     ctx.fillText(loaded ? 'Nothing lasted that long.' : 'No run loaded.', this.w / 2, this.h / 2);
     ctx.textAlign = 'left';

@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 320" width="760" height="320" role="img" aria-label="The coalition rule"><title>The coalition rule</title><style>
-.dg-t{fill:#eef4fa;font:13px system-ui,sans-serif}
-.dg-b{fill:#eef4fa;font:600 13px system-ui,sans-serif}
-.dg-h{fill:#eef4fa;font:600 15px system-ui,sans-serif}
-.dg-m{fill:#9ab0c3;font:12px system-ui,sans-serif}
-.dg-s{fill:#9ab0c3;font:11px system-ui,sans-serif}
+.dg-t{fill:#eef4fa;font:11.5px 'JetBrains Mono',ui-monospace,Menlo,Consolas,'DejaVu Sans Mono',monospace}
+.dg-b{fill:#eef4fa;font:600 11.5px 'JetBrains Mono',ui-monospace,Menlo,Consolas,'DejaVu Sans Mono',monospace}
+.dg-h{fill:#eef4fa;font:600 13.5px 'JetBrains Mono',ui-monospace,Menlo,Consolas,'DejaVu Sans Mono',monospace}
+.dg-m{fill:#9ab0c3;font:10.5px 'JetBrains Mono',ui-monospace,Menlo,Consolas,'DejaVu Sans Mono',monospace}
+.dg-s{fill:#9ab0c3;font:9.5px 'JetBrains Mono',ui-monospace,Menlo,Consolas,'DejaVu Sans Mono',monospace}
 .dg-box{fill:#2d3d50;stroke:#5a6e86;stroke-width:1}
 .dg-box2{fill:#384c64;stroke:#5a6e86;stroke-width:1}
 .dg-frame{fill:none;stroke:#435468;stroke-width:1;stroke-dasharray:4 3}

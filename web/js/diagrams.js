@@ -729,7 +729,7 @@ const Diagrams = {
 
     if (!s.lines.length || !tracks.length) {
       ctx.fillStyle = Ink.of('dim');
-      ctx.font = '13px system-ui, sans-serif';
+      ctx.font = Ink.font(13);
       ctx.textAlign = 'center';
       ctx.fillText(cutAway
                    ? `Nothing left after iteration ${formatNumber(s.cutoff)} — lower the cutoff.`
@@ -812,7 +812,7 @@ const Diagrams = {
         if (guide.label) {
           ctx.globalAlpha = 0.85;
           ctx.fillStyle = track.colour;
-          ctx.font = '11px system-ui, sans-serif';
+          ctx.font = Ink.font(11);
           ctx.fillText(guide.label, 6, at - 5);
         }
         ctx.restore();

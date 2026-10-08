@@ -822,10 +822,10 @@ class GraphRenderer {
     drawColormapStrip(ctx, x, y, w, h, colormap, reverse);
 
     ctx.fillStyle = Ink.of('text');
-    ctx.font = '11px system-ui, sans-serif';
+    ctx.font = Ink.font(11);
     ctx.fillText(label, x, y - 7);
 
-    ctx.font = '10px system-ui, sans-serif';
+    ctx.font = Ink.font(10);
     ctx.fillStyle = Ink.of('label');
     const [lo, hi] = rangeText;
     ctx.fillText(lo, x, y + h + 11);

@@ -18,6 +18,11 @@
  * clear 4.5:1 on the lightest surface it is ever set on.
  */
 :root {
+  /* The one typeface of the whole site — text, code, numbers, and every label a
+     canvas draws (ink.js reads it from here). JetBrains Mono comes from Google
+     Fonts (index.html); offline, the system's own monospace stands in. */
+  --font: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, "DejaVu Sans Mono", monospace;
+
   /* Behind the graph itself, and deliberately the darkest thing here: the
      visualisation is the picture, and everything else is the frame. */
   --stage: #090c11;
@@ -133,8 +138,11 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font: 14px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+  font: 14px/1.5 var(--font);
 }
+
+/* Code and its kin would otherwise take the browser's own monospace. */
+code, pre, kbd, samp { font-family: var(--font); }
 
 h1, h2, h3 { margin: 0; font-weight: 600; }
 h1 { font-size: 17px; letter-spacing: 0.3px; }
@@ -1133,6 +1141,8 @@ details.control-group > summary:hover h3 { color: var(--text); }
 
 /* A figure or diagram: an SVG drawn on its own dark card, as wide as the text. */
 .md img { display: block; max-width: 100%; height: auto; margin: 6px auto 10px; border-radius: var(--radius); }
+.md-svg { margin: 6px 0 10px; }
+.md-svg svg { display: block; max-width: 100%; height: auto; margin: 0 auto; border-radius: var(--radius); }
 
 /* Obsidian's callouts: a box with a coloured edge and a title, folded away
    when it is a <details>. */
@@ -1170,7 +1180,7 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   white-space: pre-wrap;
 }
 .md-math:not([data-typeset]), .md-math-inline:not([data-typeset]) {
-  font-family: var(--mono, monospace);
+  font-family: var(--font);
   font-size: 13px;
 }
 .md-math .katex-display { margin: 0; }
@@ -1224,7 +1234,7 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   min-width: 14px;
   text-align: right;
   color: var(--text);
-  font-family: ui-monospace, SFMono-Regular, monospace;
+  font-family: var(--font);
 }
 
 /* The window control is the leftmost thing in the bar, since it says what you
@@ -1416,7 +1426,7 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   min-height: 1.4em;
   margin-top: 2px;
   color: var(--text);
-  font-family: ui-monospace, SFMono-Regular, monospace;
+  font-family: var(--font);
   font-size: 11px;
 }
 
@@ -1511,7 +1521,7 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.sim-id { font-size: 10.5px; color: var(--muted-2); font-family: ui-monospace, SFMono-Regular, monospace; }
+.sim-id { font-size: 10.5px; color: var(--muted-2); font-family: var(--font); }
 .sim-lab {
   align-self: flex-start;
   font-size: 10px;
@@ -1807,7 +1817,7 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
 .settings-body dd {
   margin: 0;
   color: var(--text);
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-family: var(--font);
   font-size: 11px;
   text-align: right;
   overflow-wrap: anywhere;
@@ -1889,17 +1899,13 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   filter: drop-shadow(0 2px 30px rgba(0, 0, 0, 0.7));
 }
 
-/* Named faces before system-ui, and a weight that real fonts actually ship.
-   system-ui resolves to whatever the desktop happens to set, which on Linux is
-   often a face with no light weight at all — so the browser either fell back to
-   regular or faked a thin one by shaving the strokes, and a faked weight at a
-   hundred pixels looks exactly as bad as it sounds. font-synthesis stops it
-   inventing one; if a light weight is not there, a real regular is better than
-   a counterfeit light. */
+/* The site's typeface at a light weight it really has: JetBrains Mono ships
+   every weight from 100 to 800. font-synthesis stops the browser faking a thin
+   one by shaving the strokes where a fallback face lacks it; a real regular is
+   better than a counterfeit light. */
 .home-title {
   margin: 0;
-  font-family: "Helvetica Neue", "Segoe UI", Roboto, Ubuntu, Cantarell,
-               system-ui, -apple-system, Arial, sans-serif;
+  font-family: var(--font);
   font-size: clamp(38px, 8.2vw, 112px);
   font-weight: 300;
   font-synthesis: none;
@@ -1913,8 +1919,7 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
 
 .home-subtitle {
   margin: 18px 0 0;
-  font-family: "Helvetica Neue", "Segoe UI", Roboto, Ubuntu, Cantarell,
-               system-ui, -apple-system, Arial, sans-serif;
+  font-family: var(--font);
   font-size: clamp(13px, 1.7vw, 20px);
   font-weight: 400;
   font-synthesis: none;
@@ -2171,7 +2176,7 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   min-height: 0;
   overflow-y: auto;
   padding: 12px 0;
-  font: 11.5px/1.55 ui-monospace, SFMono-Regular, Menlo, monospace;
+  font: 11.5px/1.55 var(--font);
   scroll-behavior: smooth;
 }
 .explain-line { display: flex; gap: 10px; padding: 0 12px; white-space: pre; }
