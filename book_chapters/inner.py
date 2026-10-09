@@ -11,12 +11,11 @@ responds to is measured on the states it actually meets.
 """
 from __future__ import annotations
 
-import json
-import os
 from typing import Any, Dict, List, Tuple
 
 import numpy as np
 
+import book_data as D
 import book_figures as F
 from book_figures import chapter, describe, dots, line, lived, recipe, runs_of, survivors
 from book_chapters.common import BLUE, CYAN, GREEN, GREY, ORANGE, RED, VIOLET, YELLOW, baseline
@@ -51,25 +50,14 @@ CHANGELESS = ("the 30 worlds *brains never change* of Experiment 7 (`B1-10000-a8
               "Chapter 37), whose brains are copies of their founders'")
 
 
+#: Pairs of brains compared per world, and agents whose gain is measured.
+PAIRS = 3000
+GAIN_AGENTS = 300
+
+
 def world_at_end(run_id: str):
     import gol_store as store
     return store.load_checkpoint(run_id, store.load_config(run_id))
-
-
-def _cached(run_id: str, kind: str, make) -> Dict[str, Any]:
-    """A per-run result kept beside the runs, keyed by the run's last iteration."""
-    path = os.path.join(F.store.BASE_DIR, ".book", f"{run_id}.{kind}.json")
-    stamp = F.store.load_meta(run_id).get("iteration")
-    if os.path.exists(path):
-        with open(path) as f:
-            cached = json.load(f)
-        if cached.get("stamp") == stamp:
-            return cached
-    out = {"stamp": stamp, **make(run_id)}
-    os.makedirs(os.path.dirname(path), exist_ok=True)
-    with open(path, "w") as f:
-        json.dump(out, f)
-    return out
 
 
 def _decide(brain, heads, X: np.ndarray, tokens: int) -> Tuple[int, bool, np.ndarray, float, np.ndarray]:
@@ -94,84 +82,85 @@ def _decide(brain, heads, X: np.ndarray, tokens: int) -> Tuple[int, bool, np.nda
             Y[:heads["MESSAGE_START"]].mean(axis=1))
 
 
+@D.measure("probe3")
 def probe(run_id: str) -> Dict[str, Any]:
     """
     Every living agent's decisions at the end of a world, as its brain makes them,
     with one input changed at a time, and as a fresh founder's brain would make them
     on the same inputs.
     """
-    def make(run_id_: str) -> Dict[str, Any]:
-        from GraphOfLifeSimple import make_brain
-        w = world_at_end(run_id_)
-        log_deg, neighs, q_tok, q_deg, log_tok, at_risk = w._precompute_features()
-        rng = np.random.default_rng(18)
-        founders = np.random.RandomState(1800)
-        rows: Dict[str, List[float]] = {}
+    from GraphOfLifeSimple import make_brain
+    w = world_at_end(run_id)
+    log_deg, neighs, q_tok, q_deg, log_tok, at_risk = w._precompute_features()
+    rng = np.random.default_rng(18)
+    founders = np.random.RandomState(1800)
+    rows: Dict[str, List[float]] = {}
 
-        def note(key, value):
-            rows.setdefault(key, []).append(float(value))
-        for u in sorted(w.G.nodes()):
-            tokens = int(w.tokens.get(u, 0))
-            if tokens <= 0:
-                continue
-            targets = [u] + list(neighs[u])
-            X = w._inputs(u, targets, log_deg, q_tok, q_deg, log_tok, at_risk)
-            founder = make_brain(w.cfg, 0, founders)
-            note("tokens", tokens)
-            note("degree", len(targets) - 1)
-            note("even", 1 / len(targets))
-            for who, brain in (("", w.brains[u]), ("founder_", founder)):
-                positive, spread, alloc, share, means = _decide(brain, w.heads, X, tokens)
-                for r, m in enumerate(means):
-                    note(f"{who}out{r}", m)
-                note(who + "positive", positive)
-                note(who + "spread", spread)
-                note(who + "home", alloc[0])
-                note(who + "share", share)
-                for name in ("messages", "noise", "richer"):
-                    Z = X.copy()
-                    if name == "messages":
-                        Z[rows_of(w.cfg, MESSAGE_BLOCKS)] = 0.0
-                    elif name == "noise":
-                        noise = rows_of(w.cfg, ("noise",))
-                        Z[noise] = rng.uniform(-2.0, 2.0, Z[noise].shape)
-                    else:
-                        its = rows_of(w.cfg, ("its_tokens",)).start
-                        Z[its, 1:] = np.log1p(2.0 * np.expm1(Z[its, 1:]))
-                    _, _, a2, s2, _ = _decide(brain, w.heads, Z, tokens)
-                    note(f"{who}tv_{name}", 0.5 * float(np.abs(alloc - a2).sum()))
-                    note(f"{who}share_{name}", s2)
-        return rows
-    return _cached(run_id, "probe3", make)
+    def note(key, value):
+        rows.setdefault(key, []).append(float(value))
+    for u in sorted(w.G.nodes()):
+        tokens = int(w.tokens.get(u, 0))
+        if tokens <= 0:
+            continue
+        targets = [u] + list(neighs[u])
+        X = w._inputs(u, targets, log_deg, q_tok, q_deg, log_tok, at_risk)
+        founder = make_brain(w.cfg, 0, founders)
+        note("tokens", tokens)
+        note("degree", len(targets) - 1)
+        note("even", 1 / len(targets))
+        for who, brain in (("", w.brains[u]), ("founder_", founder)):
+            positive, spread, alloc, share, means = _decide(brain, w.heads, X, tokens)
+            for r, m in enumerate(means):
+                note(f"{who}out{r}", m)
+            note(who + "positive", positive)
+            note(who + "spread", spread)
+            note(who + "home", alloc[0])
+            note(who + "share", share)
+            for name in ("messages", "noise", "richer"):
+                Z = X.copy()
+                if name == "messages":
+                    Z[rows_of(w.cfg, MESSAGE_BLOCKS)] = 0.0
+                elif name == "noise":
+                    noise = rows_of(w.cfg, ("noise",))
+                    Z[noise] = rng.uniform(-2.0, 2.0, Z[noise].shape)
+                else:
+                    its = rows_of(w.cfg, ("its_tokens",)).start
+                    Z[its, 1:] = np.log1p(2.0 * np.expm1(Z[its, 1:]))
+                _, _, a2, s2, _ = _decide(brain, w.heads, Z, tokens)
+                note(f"{who}tv_{name}", 0.5 * float(np.abs(alloc - a2).sum()))
+                note(f"{who}share_{name}", s2)
+    return rows
 
 
-def weights(run_id: str, pairs: int = 3000) -> Dict[str, Any]:
-    """Input-weight norms by group, and distances between brains, at the end of a world."""
-    def make(run_id_: str) -> Dict[str, Any]:
-        from gol_config import SimConfig
-        cfg = SimConfig.from_dict(F.store.load_meta(run_id_)["config"])
-        z = np.load(F.store.checkpoint_path(run_id_), allow_pickle=False)
-        W0 = z["W0"].astype(np.float64)                                   # agents × 50 × 154
-        norms = np.sqrt((W0 ** 2).sum(axis=1))                            # agents × 154
-        group = {name: float(norms[:, rows_of(cfg, blocks)].mean()) for name, blocks in GROUPS}
-        flat = np.concatenate([z[k].astype(np.float32).reshape(len(z["ids"]), -1)
-                               for k in z.files if k[0] in "Wb" and k[1:].isdigit()], axis=1)
-        geno, parent = z["brain_ids"], z["parent_brain_ids"]
-        first = {}
-        for i, g in enumerate(geno):
-            first.setdefault(int(g), i)
-        rng = np.random.default_rng(19)
+@D.measure("weights")
+def weights(run_id: str) -> Dict[str, Any]:
+    """
+    Input-weight norms by group, and distances between brains — of PAIRS pairs
+    drawn at random, and of genotypes and their parents — at the end of a world.
+    """
+    from gol_config import SimConfig
+    cfg = SimConfig.from_dict(F.store.load_meta(run_id)["config"])
+    z = np.load(F.store.checkpoint_path(run_id), allow_pickle=False)
+    W0 = z["W0"].astype(np.float64)                                   # agents × 50 × 154
+    norms = np.sqrt((W0 ** 2).sum(axis=1))                            # agents × 154
+    group = {name: float(norms[:, rows_of(cfg, blocks)].mean()) for name, blocks in GROUPS}
+    flat = np.concatenate([z[k].astype(np.float32).reshape(len(z["ids"]), -1)
+                           for k in z.files if k[0] in "Wb" and k[1:].isdigit()], axis=1)
+    geno, parent = z["brain_ids"], z["parent_brain_ids"]
+    first = {}
+    for i, g in enumerate(geno):
+        first.setdefault(int(g), i)
+    rng = np.random.default_rng(19)
 
-        def rms(i, j):
-            return float(np.sqrt(np.mean((flat[i] - flat[j]) ** 2)))
-        n = len(geno)
-        random_pairs = [rms(*rng.choice(n, 2, replace=False)) for _ in range(pairs)]
-        # A genotype and its parent, where both are alive: one change apart.
-        lineage = [rms(i, first[int(parent[i])]) for i in range(n) if int(parent[i]) in first
-                   and parent[i] != geno[i]]
-        return {"groups": group, "random": random_pairs, "parent": lineage[:pairs],
-                "agents": n, "genotypes": len(first)}
-    return _cached(run_id, "weights", make)
+    def rms(i, j):
+        return float(np.sqrt(np.mean((flat[i] - flat[j]) ** 2)))
+    n = len(geno)
+    random_pairs = [rms(*rng.choice(n, 2, replace=False)) for _ in range(PAIRS)]
+    # A genotype and its parent, where both are alive: one change apart.
+    lineage = [rms(i, first[int(parent[i])]) for i in range(n) if int(parent[i]) in first
+               and parent[i] != geno[i]]
+    return {"groups": group, "random": random_pairs, "parent": lineage[:PAIRS],
+            "agents": n, "genotypes": len(first)}
 
 
 def founder_weights(cfg, count: int = 400, seed: int = 1801) -> Tuple[Dict[str, float], List[float]]:
@@ -186,23 +175,6 @@ def founder_weights(cfg, count: int = 400, seed: int = 1801) -> Tuple[Dict[str, 
                            [x.astype(np.float32).ravel() for x in b.biases]) for b in brains]
     dist = [float(np.sqrt(np.mean((flat[i] - flat[i + 1]) ** 2))) for i in range(0, count - 1, 2)]
     return groups, dist
-
-
-def message_table(run_id: str) -> Dict[str, Any]:
-    """Every message in flight at the end of a world, with who wrote it, to whom, and their states."""
-    def make(run_id_: str) -> Dict[str, Any]:
-        z = np.load(F.store.checkpoint_path(run_id_), allow_pickle=False)
-        ids = list(z["ids"])
-        at = {int(a): k for k, a in enumerate(ids)}
-        degree = np.zeros(len(ids))
-        for a, b in z["edges"]:
-            degree[at[int(a)]] += 1
-            degree[at[int(b)]] += 1
-        src = np.array([at[int(a)] for a in z["msg_from"]])
-        dst = np.array([at[int(a)] for a in z["msg_to"]])
-        return {"values": z["msg_values"].round(5).tolist(), "src": src.tolist(), "dst": dst.tolist(),
-                "tokens": z["tokens"].tolist(), "degree": degree.tolist(), "genotype": z["brain_ids"].tolist()}
-    return _cached(run_id, "messages", make)
 
 
 def _message_summary(M: np.ndarray, sender: np.ndarray, genotype: np.ndarray, features: np.ndarray,
@@ -258,84 +230,82 @@ def _message_summary(M: np.ndarray, sender: np.ndarray, genotype: np.ndarray, fe
             "values": np.histogram(M, bins=40, range=(-1, 1))[0].tolist()}
 
 
+@D.measure("msgstats2")
 def message_stats(run_id: str) -> Dict[str, Any]:
     """The messages every agent would write to each of its candidates at the end of a world,
     by its own brain and by a fresh founder's brain on the same inputs, summarised."""
-    def make(run_id_: str) -> Dict[str, Any]:
-        from GraphOfLifeSimple import make_brain
-        w = world_at_end(run_id_)
-        log_deg, neighs, q_tok, q_deg, log_tok, at_risk = w._precompute_features()
-        founders = np.random.RandomState(1900)
-        start = w.heads["MESSAGE_START"]
-        out = {"evolved": [], "founder": []}
-        sender, features, geno = [], [], {}
-        for u in sorted(w.G.nodes()):
-            targets = [u] + list(neighs[u])
-            X = w._inputs(u, targets, log_deg, q_tok, q_deg, log_tok, at_risk)
-            founder = make_brain(w.cfg, 0, founders)
-            for who, brain in (("evolved", w.brains[u]), ("founder", founder)):
-                out[who].append(np.tanh(brain.forward(X)[start:start + w.cfg.message_amount]).T)
-            for v in targets:
-                sender.append(u)
-                features.append([log_tok[u], log_deg[u], log_tok.get(v, 0.0), log_deg[v], float(u == v)])
-            geno[u] = w.brains[u].brain_id
-        sender = np.array(sender)
-        features = np.array(features)
-        genotype = {u: g for u, g in geno.items()}
-        labels = np.array([genotype[s] for s in sender])
-        rng = np.random.default_rng(1901)
-        index = {u: k for k, u in enumerate(sorted(geno))}
-        sender_idx = np.array([index[s] for s in sender])
-        geno_by_idx = np.array([genotype[u] for u in sorted(geno)])
-        return {who: _message_summary(np.concatenate(out[who]), sender_idx, geno_by_idx, features, rng)
-                for who in out} | {"genotypes": int(len(set(labels.tolist())))}
-    return _cached(run_id, "msgstats2", make)
+    from GraphOfLifeSimple import make_brain
+    w = world_at_end(run_id)
+    log_deg, neighs, q_tok, q_deg, log_tok, at_risk = w._precompute_features()
+    founders = np.random.RandomState(1900)
+    start = w.heads["MESSAGE_START"]
+    out = {"evolved": [], "founder": []}
+    sender, features, geno = [], [], {}
+    for u in sorted(w.G.nodes()):
+        targets = [u] + list(neighs[u])
+        X = w._inputs(u, targets, log_deg, q_tok, q_deg, log_tok, at_risk)
+        founder = make_brain(w.cfg, 0, founders)
+        for who, brain in (("evolved", w.brains[u]), ("founder", founder)):
+            out[who].append(np.tanh(brain.forward(X)[start:start + w.cfg.message_amount]).T)
+        for v in targets:
+            sender.append(u)
+            features.append([log_tok[u], log_deg[u], log_tok.get(v, 0.0), log_deg[v], float(u == v)])
+        geno[u] = w.brains[u].brain_id
+    sender = np.array(sender)
+    features = np.array(features)
+    genotype = {u: g for u, g in geno.items()}
+    labels = np.array([genotype[s] for s in sender])
+    rng = np.random.default_rng(1901)
+    index = {u: k for k, u in enumerate(sorted(geno))}
+    sender_idx = np.array([index[s] for s in sender])
+    geno_by_idx = np.array([genotype[u] for u in sorted(geno)])
+    return {who: _message_summary(np.concatenate(out[who]), sender_idx, geno_by_idx, features, rng)
+            for who in out} | {"genotypes": int(len(set(labels.tolist())))}
 
 
-def gain(run_id: str, agents: int = 300) -> Dict[str, Any]:
+@D.measure("gain")
+def gain(run_id: str) -> Dict[str, Any]:
     """
     How strongly a brain's outputs follow its inputs: every input moved by a small random
     amount, and the outputs' change divided by the inputs' — for the evolved brains of a
     world at its end and for fresh founders' brains, on the same inputs. Also each output's
     spread across one agent's candidates against its spread across agents.
     """
-    def make(run_id_: str) -> Dict[str, Any]:
-        from GraphOfLifeSimple import make_brain
-        w = world_at_end(run_id_)
-        log_deg, neighs, q_tok, q_deg, log_tok, at_risk = w._precompute_features()
-        rng = np.random.default_rng(2000)
-        founders = np.random.RandomState(2001)
-        nodes = sorted(w.G.nodes())
-        picked = [nodes[i] for i in rng.choice(len(nodes), min(agents, len(nodes)), replace=False)]
-        out = {"evolved": [], "founder": [], "within": [], "between": [], "layers": []}
-        firsts = []
-        for u in picked:
-            targets = [u] + list(neighs[u])
-            X = w._inputs(u, targets, log_deg, q_tok, q_deg, log_tok, at_risk)
-            eps = rng.normal(0.0, 0.1, X.shape)
-            for who, brain in (("evolved", w.brains[u]), ("founder", make_brain(w.cfg, 0, founders))):
-                d = brain.forward(X + eps) - brain.forward(X)
-                out[who].append(float(np.sqrt((d ** 2).mean()) / np.sqrt((eps ** 2).mean())))
-            Y = w.brains[u].forward(X)
-            if Y.shape[1] > 1:
-                out["within"].append(float(Y.std(axis=1).mean()))
-            firsts.append(Y[:, 0])
-            # How the spread of a small change shrinks from layer to layer, for this brain.
-            a, b = X.astype(float), (X + eps).astype(float)
-            ratios = []
-            for i, (Wm, bm) in enumerate(zip(w.brains[u].weights, w.brains[u].biases)):
-                za = Wm.astype(float) @ a + bm.astype(float)
-                zb = Wm.astype(float) @ b + bm.astype(float)
-                last = i == len(w.brains[u].weights) - 1
-                a2 = za if last else 1 / (1 + np.exp(-za))
-                b2 = zb if last else 1 / (1 + np.exp(-zb))
-                ratios.append(float(np.sqrt(((b2 - a2) ** 2).mean()) / max(1e-300, np.sqrt(((b - a) ** 2).mean()))))
-                a, b = a2, b2
-            out["layers"].append(ratios)
-        out["between"] = float(np.stack(firsts).std(axis=0).mean())
-        out["layers"] = np.median(np.array(out["layers"]), axis=0).tolist()
-        return out
-    return _cached(run_id, "gain", make)
+    from GraphOfLifeSimple import make_brain
+    w = world_at_end(run_id)
+    log_deg, neighs, q_tok, q_deg, log_tok, at_risk = w._precompute_features()
+    rng = np.random.default_rng(2000)
+    founders = np.random.RandomState(2001)
+    nodes = sorted(w.G.nodes())
+    picked = [nodes[i] for i in rng.choice(len(nodes), min(GAIN_AGENTS, len(nodes)), replace=False)]
+    out = {"evolved": [], "founder": [], "within": [], "between": [], "layers": []}
+    firsts = []
+    for u in picked:
+        targets = [u] + list(neighs[u])
+        X = w._inputs(u, targets, log_deg, q_tok, q_deg, log_tok, at_risk)
+        eps = rng.normal(0.0, 0.1, X.shape)
+        for who, brain in (("evolved", w.brains[u]), ("founder", make_brain(w.cfg, 0, founders))):
+            d = brain.forward(X + eps) - brain.forward(X)
+            out[who].append(float(np.sqrt((d ** 2).mean()) / np.sqrt((eps ** 2).mean())))
+        Y = w.brains[u].forward(X)
+        if Y.shape[1] > 1:
+            out["within"].append(float(Y.std(axis=1).mean()))
+        firsts.append(Y[:, 0])
+        # How the spread of a small change shrinks from layer to layer, for this brain.
+        a, b = X.astype(float), (X + eps).astype(float)
+        ratios = []
+        for i, (Wm, bm) in enumerate(zip(w.brains[u].weights, w.brains[u].biases)):
+            za = Wm.astype(float) @ a + bm.astype(float)
+            zb = Wm.astype(float) @ b + bm.astype(float)
+            last = i == len(w.brains[u].weights) - 1
+            a2 = za if last else 1 / (1 + np.exp(-za))
+            b2 = zb if last else 1 / (1 + np.exp(-zb))
+            ratios.append(float(np.sqrt(((b2 - a2) ** 2).mean()) / max(1e-300, np.sqrt(((b - a) ** 2).mean()))))
+            a, b = a2, b2
+        out["layers"].append(ratios)
+    out["between"] = float(np.stack(firsts).std(axis=0).mean())
+    out["layers"] = np.median(np.array(out["layers"]), axis=0).tolist()
+    return out
 
 
 # ---------------------------------------------------------------------------

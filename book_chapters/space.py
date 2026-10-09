@@ -15,10 +15,10 @@ from typing import Any, Dict, List, Tuple
 
 import numpy as np
 
+import book_data as D
 import book_figures as F
 from book_figures import FRAMES, chapter, describe, dots, line, recipe, runs_of, survivors
 from book_chapters.common import BLUE, GREEN, GREY, ORANGE, RED, VIOLET, YELLOW, baseline
-from book_chapters.inner import _cached
 from book_chapters.structure import graph
 
 SURVIVORS = ("The 26 baseline worlds that lived to the end (`B1-10000-s001` … `-s030`, Chapter 9; "
@@ -51,79 +51,85 @@ HELD = ("tokens", "age")
 DEGREE_CUTS = [2, 3, 5, 10, 50]          # classes of connections: 1, 2, 3–4, 5–9, 10–49, 50 and more
 
 
-def likeness(run_id: str, sources: int = 150) -> Dict[str, Any]:
-    """How alike agents are at each distance, at five moments of a world's settled life."""
-    def make(run_id_: str) -> Dict[str, Any]:
-        rng = np.random.default_rng(22)
-        width = MAX_R + 1
-        names = (*VALUES, *(f"{n}|k" for n in HELD))
-        sums = {name: np.zeros((6, width)) for name in names}
-        kin = np.zeros((2, width))
-        neighbour = {name: [] for name in names}
-        shuffled = {name: [] for name in VALUES}
-        random_kin = []
-        for t in MOMENTS:
-            frame = F.store.read_frame(run_id_, 2 * t + 1)
-            adj = graph(frame)
-            ids = list(frame["ids"])
-            index = {u: i for i, u in enumerate(ids)}
-            k = np.array([len(adj[u]) for u in ids])
-            values = {"tokens": np.log1p(np.asarray(frame["tokens"], float)),
-                      "age": np.log1p(np.asarray(frame["ages"], float)),
-                      "degree": np.log(np.maximum(k, 1))}
-            # Standardised within the moment, so that pooling five moments adds no likeness of its own.
-            values = {name: (v - v.mean()) / v.std() for name, v in values.items()}
-            classes = np.digitize(k, DEGREE_CUTS)
-            for name in HELD:
-                held = values[name].copy()
-                for c in np.unique(classes):
-                    members = np.flatnonzero(classes == c)
-                    held[members] = rng.permutation(held[members])
-                values[f"{name}|k"] = held
-            geno = np.asarray(frame["brain_ids"])
-            counts = np.unique(geno, return_counts=True)[1].astype(float)
-            n = len(ids)
-            random_kin.append(float((counts * (counts - 1)).sum() / (n * (n - 1))))
-            pairs = np.array([(index[a], index[b]) for a, b in frame["edges"]
-                              if a != b and a in index and b in index])
-            src, dst = np.concatenate([pairs[:, 0], pairs[:, 1]]), np.concatenate([pairs[:, 1], pairs[:, 0]])
+#: Agents a likeness is measured out from, at each moment.
+LIKENESS_SOURCES = 150
+
+
+@D.measure("alike3")
+def likeness(run_id: str) -> Dict[str, Any]:
+    """
+    How alike agents are at each distance, at five moments of a world's settled
+    life, from LIKENESS_SOURCES agents drawn at random at each moment.
+    """
+    rng = np.random.default_rng(22)
+    width = MAX_R + 1
+    names = (*VALUES, *(f"{n}|k" for n in HELD))
+    sums = {name: np.zeros((6, width)) for name in names}
+    kin = np.zeros((2, width))
+    neighbour = {name: [] for name in names}
+    shuffled = {name: [] for name in VALUES}
+    random_kin = []
+    for t in MOMENTS:
+        frame = F.store.read_frame(run_id, 2 * t + 1)
+        adj = graph(frame)
+        ids = list(frame["ids"])
+        index = {u: i for i, u in enumerate(ids)}
+        k = np.array([len(adj[u]) for u in ids])
+        values = {"tokens": np.log1p(np.asarray(frame["tokens"], float)),
+                  "age": np.log1p(np.asarray(frame["ages"], float)),
+                  "degree": np.log(np.maximum(k, 1))}
+        # Standardised within the moment, so that pooling five moments adds no likeness of its own.
+        values = {name: (v - v.mean()) / v.std() for name, v in values.items()}
+        classes = np.digitize(k, DEGREE_CUTS)
+        for name in HELD:
+            held = values[name].copy()
+            for c in np.unique(classes):
+                members = np.flatnonzero(classes == c)
+                held[members] = rng.permutation(held[members])
+            values[f"{name}|k"] = held
+        geno = np.asarray(frame["brain_ids"])
+        counts = np.unique(geno, return_counts=True)[1].astype(float)
+        n = len(ids)
+        random_kin.append(float((counts * (counts - 1)).sum() / (n * (n - 1))))
+        pairs = np.array([(index[a], index[b]) for a, b in frame["edges"]
+                          if a != b and a in index and b in index])
+        src, dst = np.concatenate([pairs[:, 0], pairs[:, 1]]), np.concatenate([pairs[:, 1], pairs[:, 0]])
+        for name, v in values.items():
+            neighbour[name].append(float(np.corrcoef(v[src], v[dst])[0, 1]))
+        for name in VALUES:
+            v = rng.permutation(values[name])
+            shuffled[name].append(float(np.corrcoef(v[src], v[dst])[0, 1]))
+        for s in rng.choice(n, min(LIKENESS_SOURCES, n), replace=False):
+            dist = bfs(adj, ids[s], MAX_R)
+            reached = np.fromiter((index[u] for u in dist), int, len(dist))
+            r = np.fromiter(dist.values(), int, len(dist))
+            reached, r = reached[r > 0], r[r > 0]
+            count = np.bincount(r, minlength=width)
+            kin[0] += count
+            kin[1] += np.bincount(r, weights=(geno[reached] == geno[s]).astype(float), minlength=width)
             for name, v in values.items():
-                neighbour[name].append(float(np.corrcoef(v[src], v[dst])[0, 1]))
-            for name in VALUES:
-                v = rng.permutation(values[name])
-                shuffled[name].append(float(np.corrcoef(v[src], v[dst])[0, 1]))
-            for s in rng.choice(n, min(sources, n), replace=False):
-                dist = bfs(adj, ids[s], MAX_R)
-                reached = np.fromiter((index[u] for u in dist), int, len(dist))
-                r = np.fromiter(dist.values(), int, len(dist))
-                reached, r = reached[r > 0], r[r > 0]
-                count = np.bincount(r, minlength=width)
-                kin[0] += count
-                kin[1] += np.bincount(r, weights=(geno[reached] == geno[s]).astype(float), minlength=width)
-                for name, v in values.items():
-                    x, y = v[s], v[reached]
-                    by_r = np.bincount(r, weights=y, minlength=width)
-                    acc = sums[name]
-                    acc[0] += count
-                    acc[1] += count * x
-                    acc[2] += by_r
-                    acc[3] += count * x * x
-                    acc[4] += np.bincount(r, weights=y * y, minlength=width)
-                    acc[5] += x * by_r
-        corr = {}
-        for name, (m, sx, sy, sxx, syy, sxy) in sums.items():
-            corr[name] = {}
-            for r in range(1, width):
-                if m[r] < 50:
-                    continue
-                cov = sxy[r] / m[r] - sx[r] / m[r] * sy[r] / m[r]
-                vx, vy = sxx[r] / m[r] - (sx[r] / m[r]) ** 2, syy[r] / m[r] - (sy[r] / m[r]) ** 2
-                corr[name][str(r)] = float(cov / np.sqrt(vx * vy)) if vx > 0 and vy > 0 else None
-        return {"neighbour": neighbour, "shuffled": shuffled, "corr": corr,
-                "kin": {str(r): (float(kin[1, r] / kin[0, r]) if kin[0, r] else None) for r in range(1, width)},
-                "kin_pairs": {str(r): int(kin[0, r]) for r in range(1, width)},
-                "random_kin": float(np.mean(random_kin))}
-    return _cached(run_id, "alike3", make)
+                x, y = v[s], v[reached]
+                by_r = np.bincount(r, weights=y, minlength=width)
+                acc = sums[name]
+                acc[0] += count
+                acc[1] += count * x
+                acc[2] += by_r
+                acc[3] += count * x * x
+                acc[4] += np.bincount(r, weights=y * y, minlength=width)
+                acc[5] += x * by_r
+    corr = {}
+    for name, (m, sx, sy, sxx, syy, sxy) in sums.items():
+        corr[name] = {}
+        for r in range(1, width):
+            if m[r] < 50:
+                continue
+            cov = sxy[r] / m[r] - sx[r] / m[r] * sy[r] / m[r]
+            vx, vy = sxx[r] / m[r] - (sx[r] / m[r]) ** 2, syy[r] / m[r] - (sy[r] / m[r]) ** 2
+            corr[name][str(r)] = float(cov / np.sqrt(vx * vy)) if vx > 0 and vy > 0 else None
+    return {"neighbour": neighbour, "shuffled": shuffled, "corr": corr,
+            "kin": {str(r): (float(kin[1, r] / kin[0, r]) if kin[0, r] else None) for r in range(1, width)},
+            "kin_pairs": {str(r): int(kin[0, r]) for r in range(1, width)},
+            "random_kin": float(np.mean(random_kin))}
 
 
 @chapter
@@ -358,15 +364,23 @@ def measure(adj: Dict[int, set], seed: int, steps: int = 512, balls: int = 40, w
     return {"n": n, "balls": volumes.tolist(), "ball_r": bx, "ball_d": bd, "spec_t": sx, "spec_d": sd}
 
 
-def world_dimensions(run_id: str, big: bool = False) -> Dict[str, Any]:
-    """Both rulers on a world after its last game, on its random twin and on its core."""
-    def make(run_id_: str) -> Dict[str, Any]:
-        from book_chapters.structure import degree_preserving
-        adj = last_world(run_id_)
-        size = dict(steps=1024, balls=100, walks=48) if big else {}
-        return {"world": measure(adj, 23, **size), "twin": measure(degree_preserving(adj, 23), 23, **size),
-                "core": measure(core(adj), 23, **size)}
-    return _cached(run_id, "dims2", make)
+#: Agents above which a world's dimensions are read with more balls and longer walks:
+#: the worlds of 409,600 tokens (52,000 to 70,000), and none smaller (at most 30,000).
+BIG = 40_000
+
+
+@D.measure("dims2")
+def world_dimensions(run_id: str) -> Dict[str, Any]:
+    """
+    Both rulers on a world after its last game, on its random twin and on its
+    core. A world of more than BIG agents is read with more balls and longer
+    walks, which its size allows and its wider range of scales needs.
+    """
+    from book_chapters.structure import degree_preserving
+    adj = last_world(run_id)
+    size = dict(steps=1024, balls=100, walks=48) if len(adj) > BIG else {}
+    return {"world": measure(adj, 23, **size), "twin": measure(degree_preserving(adj, 23), 23, **size),
+            "core": measure(core(adj), 23, **size)}
 
 
 LIFE = (10, 25, 50, 100, 200, 300, 500, 750, 1000, 1500, 2000, 2500, 2999)
@@ -380,18 +394,17 @@ def at(xs: List[float], ds: List[float], x: float) -> float:
     return float(ds[k]) if abs(np.log(xs[k] / x)) < 0.2 else float("nan")
 
 
+@D.measure("lifedims2")
 def life_dimensions(run_id: str) -> Dict[str, Any]:
     """Both rulers, read at one scale each, after the games of a few iterations of a world's life."""
-    def make(run_id_: str) -> Dict[str, Any]:
-        out = {"t": [], "agents": [], "ball": [], "spectral": []}
-        for t in LIFE:
-            m = measure(graph(F.store.read_frame(run_id_, 2 * t + 1)), 23, 128)
-            out["t"].append(t)
-            out["agents"].append(m["n"])
-            out["ball"].append(at(m["ball_r"], m["ball_d"], np.sqrt(6)))
-            out["spectral"].append(at(m["spec_t"], m["spec_d"], np.sqrt(32)))
-        return out
-    return _cached(run_id, "lifedims2", make)
+    out = {"t": [], "agents": [], "ball": [], "spectral": []}
+    for t in LIFE:
+        m = measure(graph(F.store.read_frame(run_id, 2 * t + 1)), 23, 128)
+        out["t"].append(t)
+        out["agents"].append(m["n"])
+        out["ball"].append(at(m["ball_r"], m["ball_d"], np.sqrt(6)))
+        out["spectral"].append(at(m["spec_t"], m["spec_d"], np.sqrt(32)))
+    return out
 
 
 def plateau(xs: List[float], ds: List[float], lo: float, hi: float) -> float:
@@ -458,7 +471,7 @@ def dimensions(ch: F.Chapter) -> None:
     dims = [world_dimensions(s.run_id) for s in alive]
     big = [s for s in runs_of("E08", "baseline") if int(s.lab["world"]["total_tokens"]) == 409600
            and F.lived(s) >= s.until]
-    bigs = [world_dimensions(s.run_id, big=True) for s in big]
+    bigs = [world_dimensions(s.run_id) for s in big]
     panels = []
     for xk, yk, title, xl in RULERS:
         series_ = [{**band([d["world"] for d in dims], xk, yk), "label": "the 26 worlds", "colour": BLUE},

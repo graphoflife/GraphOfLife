@@ -14,10 +14,10 @@ from typing import Any, Dict, List
 
 import numpy as np
 
+import book_data as D
 import book_figures as F
 from book_figures import FRAMES, band_series, chapter, describe, dots, line, recipe, survivors
 from book_chapters.common import BLUE, CYAN, GREEN, GREY, ORANGE, RED, VIOLET, YELLOW, baseline
-from book_chapters.inner import _cached
 
 LAGS = (1, 2, 5, 10, 20, 50, 100, 200)
 STARTS = range(500, 2800, 100)
@@ -46,79 +46,77 @@ def spearman(a: np.ndarray, b: np.ndarray) -> float:
     return float(np.corrcoef(ra, rb)[0, 1]) if len(a) > 2 else float("nan")
 
 
+@D.measure("mobility")
 def mobility(run_id: str) -> Dict[str, Any]:
     """Tokens of every agent after the game of each start iteration, and of the same agents later."""
-    def make(run_id_: str) -> Dict[str, Any]:
-        rho = {k: [] for k in LAGS}
-        alive = {k: [] for k in LAGS}
-        moves = np.zeros((QUINTILES, QUINTILES + 1))
-        top = {k: {"dead": 0, "top10": 0, "ratio": []} for k in LAGS}
-        tops = 0
-        for t0 in STARTS:
-            a = F.store.read_frame(run_id_, 2 * t0 + 1)
-            tok0 = dict(zip(a["ids"], a["tokens"]))
-            ids0 = np.array(a["ids"])
-            values0 = np.array(a["tokens"], float)
-            rank0 = _ranks(values0) / len(values0)
-            richest = set(ids0[values0 >= np.quantile(values0, 0.99)].tolist())
-            tops += len(richest)
-            for k in LAGS:
-                b = F.store.read_frame(run_id_, 2 * (t0 + k) + 1)
-                tok1 = dict(zip(b["ids"], b["tokens"]))
-                both = [i for i in a["ids"] if i in tok1]
-                alive[k].append(len(both) / len(a["ids"]))
-                x = np.array([tok0[i] for i in both], float)
-                y = np.array([tok1[i] for i in both], float)
-                rho[k].append(spearman(x, y))
-                v1 = np.array(b["tokens"], float)
-                cut10 = np.quantile(v1, 0.9)
-                for i in richest:
-                    if i not in tok1:
-                        top[k]["dead"] += 1
+    rho = {k: [] for k in LAGS}
+    alive = {k: [] for k in LAGS}
+    moves = np.zeros((QUINTILES, QUINTILES + 1))
+    top = {k: {"dead": 0, "top10": 0, "ratio": []} for k in LAGS}
+    tops = 0
+    for t0 in STARTS:
+        a = F.store.read_frame(run_id, 2 * t0 + 1)
+        tok0 = dict(zip(a["ids"], a["tokens"]))
+        ids0 = np.array(a["ids"])
+        values0 = np.array(a["tokens"], float)
+        rank0 = _ranks(values0) / len(values0)
+        richest = set(ids0[values0 >= np.quantile(values0, 0.99)].tolist())
+        tops += len(richest)
+        for k in LAGS:
+            b = F.store.read_frame(run_id, 2 * (t0 + k) + 1)
+            tok1 = dict(zip(b["ids"], b["tokens"]))
+            both = [i for i in a["ids"] if i in tok1]
+            alive[k].append(len(both) / len(a["ids"]))
+            x = np.array([tok0[i] for i in both], float)
+            y = np.array([tok1[i] for i in both], float)
+            rho[k].append(spearman(x, y))
+            v1 = np.array(b["tokens"], float)
+            cut10 = np.quantile(v1, 0.9)
+            for i in richest:
+                if i not in tok1:
+                    top[k]["dead"] += 1
+                else:
+                    top[k]["top10"] += tok1[i] >= cut10
+                    top[k]["ratio"].append(tok1[i] / tok0[i])
+            if k == 10:
+                rank1 = dict(zip(b["ids"], _ranks(v1) / len(v1)))
+                for i, r in zip(a["ids"], rank0):
+                    q0 = min(QUINTILES - 1, int(r * QUINTILES - 1e-9))
+                    if i in rank1:
+                        q1 = min(QUINTILES - 1, int(rank1[i] * QUINTILES - 1e-9))
+                        moves[q0, q1] += 1
                     else:
-                        top[k]["top10"] += tok1[i] >= cut10
-                        top[k]["ratio"].append(tok1[i] / tok0[i])
-                if k == 10:
-                    rank1 = dict(zip(b["ids"], _ranks(v1) / len(v1)))
-                    for i, r in zip(a["ids"], rank0):
-                        q0 = min(QUINTILES - 1, int(r * QUINTILES - 1e-9))
-                        if i in rank1:
-                            q1 = min(QUINTILES - 1, int(rank1[i] * QUINTILES - 1e-9))
-                            moves[q0, q1] += 1
-                        else:
-                            moves[q0, QUINTILES] += 1
-        return {"rho": {str(k): v for k, v in rho.items()}, "alive": {str(k): v for k, v in alive.items()},
-                "moves": moves.tolist(), "tops": tops,
-                "top": {str(k): {"dead": v["dead"], "top10": int(v["top10"]),
-                                 "ratio": float(np.median(v["ratio"])) if v["ratio"] else None}
-                        for k, v in top.items()}}
-    return _cached(run_id, "mobility", make)
+                        moves[q0, QUINTILES] += 1
+    return {"rho": {str(k): v for k, v in rho.items()}, "alive": {str(k): v for k, v in alive.items()},
+            "moves": moves.tolist(), "tops": tops,
+            "top": {str(k): {"dead": v["dead"], "top10": int(v["top10"]),
+                             "ratio": float(np.median(v["ratio"])) if v["ratio"] else None}
+                    for k, v in top.items()}}
 
 
 DEGREE_CLASSES = ((1, 1, "1"), (2, 2, "2"), (3, 9, "3–9"), (10, 49, "10–49"), (50, 10 ** 9, "50+"))
 
 
+@D.measure("fragile")
 def fragile(run_id: str) -> Dict[str, Any]:
     """Who dies within ten games, by connections: the richest hundredth, and every agent."""
-    def make(run_id_: str) -> Dict[str, Any]:
-        from book_chapters.structure import graph
-        out = {label: {"richest": [0, 0], "all": [0, 0]} for _, _, label in DEGREE_CLASSES}
-        for t0 in STARTS:
-            a = F.store.read_frame(run_id_, 2 * t0 + 1)
-            later = set(F.store.read_frame(run_id_, 2 * (t0 + 10) + 1)["ids"])
-            adj = graph(a)
-            tokens = np.array(a["tokens"], float)
-            cut = np.quantile(tokens, 0.99)
-            for u, tok in zip(a["ids"], tokens):
-                k = len(adj[u])
-                label = next(lab for lo, hi, lab in DEGREE_CLASSES if lo <= k <= hi) if k else None
-                if label is None:
-                    continue
-                for group in ("all", "richest") if tok >= cut else ("all",):
-                    out[label][group][0] += 1
-                    out[label][group][1] += u not in later
-        return out
-    return _cached(run_id, "fragile", make)
+    from book_chapters.structure import graph
+    out = {label: {"richest": [0, 0], "all": [0, 0]} for _, _, label in DEGREE_CLASSES}
+    for t0 in STARTS:
+        a = F.store.read_frame(run_id, 2 * t0 + 1)
+        later = set(F.store.read_frame(run_id, 2 * (t0 + 10) + 1)["ids"])
+        adj = graph(a)
+        tokens = np.array(a["tokens"], float)
+        cut = np.quantile(tokens, 0.99)
+        for u, tok in zip(a["ids"], tokens):
+            k = len(adj[u])
+            label = next(lab for lo, hi, lab in DEGREE_CLASSES if lo <= k <= hi) if k else None
+            if label is None:
+                continue
+            for group in ("all", "richest") if tok >= cut else ("all",):
+                out[label][group][0] += 1
+                out[label][group][1] += u not in later
+    return out
 
 
 @chapter
@@ -252,60 +250,59 @@ GROWTH_STARTS = range(500, 3000, 25)
 CLASSES = [(1, 1), (2, 2), (3, 4), (5, 9), (10, 19), (20, 49), (50, 99), (100, 10 ** 6)]
 
 
+@D.measure("growth")
 def growth(run_id: str) -> Dict[str, Any]:
     """Connections gained in a reproduction phase and lost in the game after it, agent by agent."""
-    def make(run_id_: str) -> Dict[str, Any]:
-        gained = defaultdict(lambda: [0, 0])     # class -> [agents, connections gained]
-        lost = defaultdict(lambda: [0, 0])
-        links = Counter()
-        births = parent_linked = 0
-        for t in GROWTH_STARTS:
-            a = F.store.read_frame(run_id_, 2 * t - 1)       # after the game of t − 1
-            b = F.store.read_frame(run_id_, 2 * t)           # after the reproduction phase of t
-            c = F.store.read_frame(run_id_, 2 * t + 1)       # after the game of t
-            ea = {tuple(sorted(e)) for e in a["edges"]}
-            eb = {tuple(sorted(e)) for e in b["edges"]}
-            ec = {tuple(sorted(e)) for e in c["edges"]}
-            deg_a, deg_b = Counter(), Counter()
-            for u, v in ea:
-                deg_a[u] += 1
-                deg_a[v] += 1
-            for u, v in eb:
-                deg_b[u] += 1
-                deg_b[v] += 1
-            new_b = Counter()
-            for u, v in eb - ea:
-                new_b[u] += 1
-                new_b[v] += 1
-            gone_c = Counter()
-            for u, v in eb - ec:
-                gone_c[u] += 1
-                gone_c[v] += 1
-            alive_b = set(b["ids"])
-            for u in a["ids"]:
-                if u not in alive_b:
-                    continue
-                k = deg_a[u]
-                cls = next(i for i, (lo, hi) in enumerate(CLASSES) if lo <= k <= hi) if k else None
-                if cls is not None:
-                    gained[cls][0] += 1
-                    gained[cls][1] += new_b[u]
-            alive_c = set(c["ids"])
-            for u in b["ids"]:
-                k = deg_b[u]
-                if not k:
-                    continue
-                cls = next(i for i, (lo, hi) in enumerate(CLASSES) if lo <= k <= hi)
-                lost[cls][0] += 1
-                lost[cls][1] += k if u not in alive_c else gone_c[u]
-            for birth in (b.get("decisions") or {}).get("births") or []:
-                births += 1
-                joined = birth.get("links") or []
-                parent_linked += birth.get("agent") in joined
-                links[min(len(joined), 6)] += 1
-        return {"gained": {str(c): v for c, v in gained.items()}, "lost": {str(c): v for c, v in lost.items()},
-                "births": births, "parent_linked": parent_linked, "links": {str(k): v for k, v in links.items()}}
-    return _cached(run_id, "growth", make)
+    gained = defaultdict(lambda: [0, 0])     # class -> [agents, connections gained]
+    lost = defaultdict(lambda: [0, 0])
+    links = Counter()
+    births = parent_linked = 0
+    for t in GROWTH_STARTS:
+        a = F.store.read_frame(run_id, 2 * t - 1)       # after the game of t − 1
+        b = F.store.read_frame(run_id, 2 * t)           # after the reproduction phase of t
+        c = F.store.read_frame(run_id, 2 * t + 1)       # after the game of t
+        ea = {tuple(sorted(e)) for e in a["edges"]}
+        eb = {tuple(sorted(e)) for e in b["edges"]}
+        ec = {tuple(sorted(e)) for e in c["edges"]}
+        deg_a, deg_b = Counter(), Counter()
+        for u, v in ea:
+            deg_a[u] += 1
+            deg_a[v] += 1
+        for u, v in eb:
+            deg_b[u] += 1
+            deg_b[v] += 1
+        new_b = Counter()
+        for u, v in eb - ea:
+            new_b[u] += 1
+            new_b[v] += 1
+        gone_c = Counter()
+        for u, v in eb - ec:
+            gone_c[u] += 1
+            gone_c[v] += 1
+        alive_b = set(b["ids"])
+        for u in a["ids"]:
+            if u not in alive_b:
+                continue
+            k = deg_a[u]
+            cls = next(i for i, (lo, hi) in enumerate(CLASSES) if lo <= k <= hi) if k else None
+            if cls is not None:
+                gained[cls][0] += 1
+                gained[cls][1] += new_b[u]
+        alive_c = set(c["ids"])
+        for u in b["ids"]:
+            k = deg_b[u]
+            if not k:
+                continue
+            cls = next(i for i, (lo, hi) in enumerate(CLASSES) if lo <= k <= hi)
+            lost[cls][0] += 1
+            lost[cls][1] += k if u not in alive_c else gone_c[u]
+        for birth in (b.get("decisions") or {}).get("births") or []:
+            births += 1
+            joined = birth.get("links") or []
+            parent_linked += birth.get("agent") in joined
+            links[min(len(joined), 6)] += 1
+    return {"gained": {str(c): v for c, v in gained.items()}, "lost": {str(c): v for c, v in lost.items()},
+            "births": births, "parent_linked": parent_linked, "links": {str(k): v for k, v in links.items()}}
 
 
 @chapter
