@@ -10,6 +10,7 @@ from typing import Any, Dict, List, Tuple
 
 import numpy as np
 
+import book_data as D
 import book_figures as F
 from book_figures import (BASELINE_RUNS, FRAMES, STATS_FILE, band_series, chapter, describe, dots,
                           line, mean_over, recipe, series, survivors)
@@ -195,7 +196,7 @@ def game(ch: F.Chapter) -> None:
     def winners(run_ids, iteration):
         counts = Counter()
         for run_id in run_ids:
-            frame = F.store.read_frame(run_id, 2 * iteration + 1)
+            frame = D.frame_at(run_id, iteration, 2)
             for w in (frame.get("decisions") or {}).get("winners") or []:
                 counts[(w["winner"] != w["node"]) * 2 + bool(w.get("revolt"))] += 1
         total = sum(counts.values())
@@ -325,7 +326,7 @@ ROLE_STEPS = ("Peel: remove every agent with one connection or none, again and a
 def picture(run_id: str, iteration: int) -> Tuple[Dict[str, Any], Dict[str, float]]:
     """A world after the game of `iteration`, as a network chart, and the shares of its roles."""
     import networkx as nx
-    frame = F.store.read_frame(run_id, 2 * iteration + 1)
+    frame = D.frame_at(run_id, iteration, 2)
     ids, edges = frame["ids"], frame["edges"]
     G = nx.Graph()
     G.add_nodes_from(ids)

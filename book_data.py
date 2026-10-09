@@ -113,6 +113,40 @@ def get(m: Measure, run_id: str, *args: Any, **params: Any) -> Dict[str, Any]:
     return made
 
 
+# ---------------------------------------------------------------------------
+# Where an iteration's frames are
+# ---------------------------------------------------------------------------
+
+@functools.lru_cache(maxsize=None)
+def _config(base: str, run_id: str):
+    return store.load_config(run_id)
+
+
+def frame_at(run_id: str, t: int, phase: int) -> Dict[str, Any]:
+    """
+    The frame of iteration t just after its reproduction (phase 1) or just after
+    its game (phase 2). Where it is follows from how the run was recorded
+    (SimConfig.frames_before), and the frame is checked to be the one asked
+    for, so a run recorded some other way is refused rather than read in the
+    wrong place.
+    """
+    cfg = _config(store.BASE_DIR, run_id)
+    if not cfg.records(t):
+        raise KeyError(f"{run_id} did not record the frames of iteration {t}")
+    index = cfg.frames_before(t) + phase - 1
+    frame = store.read_frame(run_id, index)
+    if (frame.get("iteration"), frame.get("phase")) != (t, phase):
+        raise ValueError(f"frame {index} of {run_id} is iteration {frame.get('iteration')}, phase "
+                         f"{frame.get('phase')}, where iteration {t}, phase {phase} was expected")
+    return frame
+
+
+def last_iteration(run_id: str) -> int:
+    """The last iteration of which the run holds a frame."""
+    cfg = _config(store.BASE_DIR, run_id)
+    return (store.count_frames(run_id) - 1) // 2 * cfg.export_every
+
+
 def needs_decisions(run_id: str, what: str) -> None:
     """
     Refuse a run that did not record its agents' decisions: a measure of what

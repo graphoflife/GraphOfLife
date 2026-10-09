@@ -11,6 +11,7 @@ from typing import Any, Dict, List, Sequence, Tuple
 
 import numpy as np
 
+import book_data as D
 import book_figures as F
 from book_figures import (BASELINE_RUNS, DEGREE_CLASSES, FRAMES, STATS_FILE, band_series, chapter,
                           describe, dots, line, mean_over, recipe, series, survivors)
@@ -59,7 +60,7 @@ DEGREE_EDGES = [1, 2, 3, 4, 6, 9, 13, 20, 30, 50, 100, 200, 10 ** 5]
 
 
 def last_frames() -> List[Tuple[Any, Dict[str, Any]]]:
-    return [(s, F.store.read_frame(s.run_id, 2 * LAST + 1)) for s in survivors(baseline())]
+    return [(s, D.frame_at(s.run_id, LAST, 2)) for s in survivors(baseline())]
 
 
 # ---------------------------------------------------------------------------
@@ -362,7 +363,7 @@ def fundamental_cycles(adj: Dict[int, set]) -> Dict[int, int]:
 def geometry(ch: F.Chapter) -> None:
     specs = baseline()
     alive = survivors(specs)
-    frame = F.store.read_frame("B1-10000-s001", 2 * LAST + 1)
+    frame = D.frame_at("B1-10000-s001", LAST, 2)
     adj = graph(frame)
     v = balls(adj)
     r = np.arange(len(v))
@@ -501,7 +502,7 @@ def cut_anatomy(run_id: str, t: int) -> Dict[str, float]:
     to pruning (nothing crossed it), since otherwise it would still be joined to
     them; so the "attachments" are exactly the pruned connections across the cut.
     """
-    a, b = F.store.read_frame(run_id, 2 * t), F.store.read_frame(run_id, 2 * t + 1)
+    a, b = D.frame_at(run_id, t, 1), D.frame_at(run_id, t, 2)
     after = set(b["ids"])
     staked, home = Counter(), {}
     for r in b["decisions"]["allocations"]:
@@ -641,8 +642,8 @@ def breaking(ch: F.Chapter) -> None:
 def colours(ch: F.Chapter) -> None:
     import networkx as nx
     run = "B1-10000-s001"
-    game = F.store.read_frame(run, 2 * LAST + 1)
-    start = F.store.read_frame(run, 2 * LAST)
+    game = D.frame_at(run, LAST, 2)
+    start = D.frame_at(run, LAST, 1)
     ids, edges = game["ids"], game["edges"]
     G = nx.Graph()
     G.add_nodes_from(ids)
@@ -664,11 +665,12 @@ def colours(ch: F.Chapter) -> None:
 
     # Families: the genotypes alive 100 iterations before, followed down to the living.
     parent = {}
-    for index_ in range(2 * (LAST - 100), 2 * LAST + 2):
-        f = F.store.read_frame(run, index_)
-        for b, p in zip(f["brain_ids"], f["parent_brain_ids"]):
-            parent.setdefault(b, p)
-    anchor = set(F.store.read_frame(run, 2 * (LAST - 100) + 1)["brain_ids"])
+    for t in range(LAST - 100, LAST + 1):
+        for phase in (1, 2):
+            f = D.frame_at(run, t, phase)
+            for b, p in zip(f["brain_ids"], f["parent_brain_ids"]):
+                parent.setdefault(b, p)
+    anchor = set(D.frame_at(run, LAST - 100, 2)["brain_ids"])
 
     def family(g):
         seen = 0

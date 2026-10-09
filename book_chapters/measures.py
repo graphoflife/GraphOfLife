@@ -14,6 +14,7 @@ from typing import Any, Dict, List, Sequence, Tuple
 
 import numpy as np
 
+import book_data as D
 import book_figures as F
 from book_figures import (AG, BASELINE_RUNS, DEGREE_CLASSES, FR, FRAMES, KEPT_BY, PA, STATS_FILE,
                           band_series, chapter, describe, dots, line, mean_over, recipe, series,
@@ -322,8 +323,8 @@ def even_split(run_id: str, iterations) -> Tuple[np.ndarray, np.ndarray]:
     """
     predicted, real = [], []
     for t in iterations:
-        repro = F.store.read_frame(run_id, 2 * t)
-        game = F.store.read_frame(run_id, 2 * t + 1)
+        repro = D.frame_at(run_id, t, 1)
+        game = D.frame_at(run_id, t, 2)
         tokens = dict(zip(repro["ids"], repro["tokens"]))
         neighbours = defaultdict(list)
         for a, b in repro["edges"]:

@@ -70,7 +70,7 @@ def likeness(run_id: str) -> Dict[str, Any]:
     shuffled = {name: [] for name in VALUES}
     random_kin = []
     for t in MOMENTS:
-        frame = F.store.read_frame(run_id, 2 * t + 1)
+        frame = D.frame_at(run_id, t, 2)
         adj = graph(frame)
         ids = list(frame["ids"])
         index = {u: i for i, u in enumerate(ids)}
@@ -350,7 +350,7 @@ def largest_piece(adj: Dict[int, set]) -> Dict[int, set]:
 
 
 def last_world(run_id: str) -> Dict[int, set]:
-    return graph(F.store.read_frame(run_id, F.store.count_frames(run_id) - 1))
+    return graph(D.frame_at(run_id, D.last_iteration(run_id), 2))
 
 
 def measure(adj: Dict[int, set], seed: int, steps: int = 512, balls: int = 40, walks: int = 24) -> Dict[str, Any]:
@@ -399,7 +399,7 @@ def life_dimensions(run_id: str) -> Dict[str, Any]:
     """Both rulers, read at one scale each, after the games of a few iterations of a world's life."""
     out = {"t": [], "agents": [], "ball": [], "spectral": []}
     for t in LIFE:
-        m = measure(graph(F.store.read_frame(run_id, 2 * t + 1)), 23, 128)
+        m = measure(graph(D.frame_at(run_id, t, 2)), 23, 128)
         out["t"].append(t)
         out["agents"].append(m["n"])
         out["ball"].append(at(m["ball_r"], m["ball_d"], np.sqrt(6)))

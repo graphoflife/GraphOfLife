@@ -55,7 +55,7 @@ def mobility(run_id: str) -> Dict[str, Any]:
     top = {k: {"dead": 0, "top10": 0, "ratio": []} for k in LAGS}
     tops = 0
     for t0 in STARTS:
-        a = F.store.read_frame(run_id, 2 * t0 + 1)
+        a = D.frame_at(run_id, t0, 2)
         tok0 = dict(zip(a["ids"], a["tokens"]))
         ids0 = np.array(a["ids"])
         values0 = np.array(a["tokens"], float)
@@ -63,7 +63,7 @@ def mobility(run_id: str) -> Dict[str, Any]:
         richest = set(ids0[values0 >= np.quantile(values0, 0.99)].tolist())
         tops += len(richest)
         for k in LAGS:
-            b = F.store.read_frame(run_id, 2 * (t0 + k) + 1)
+            b = D.frame_at(run_id, t0 + k, 2)
             tok1 = dict(zip(b["ids"], b["tokens"]))
             both = [i for i in a["ids"] if i in tok1]
             alive[k].append(len(both) / len(a["ids"]))
@@ -103,8 +103,8 @@ def fragile(run_id: str) -> Dict[str, Any]:
     from book_chapters.structure import graph
     out = {label: {"richest": [0, 0], "all": [0, 0]} for _, _, label in DEGREE_CLASSES}
     for t0 in STARTS:
-        a = F.store.read_frame(run_id, 2 * t0 + 1)
-        later = set(F.store.read_frame(run_id, 2 * (t0 + 10) + 1)["ids"])
+        a = D.frame_at(run_id, t0, 2)
+        later = set(D.frame_at(run_id, t0 + 10, 2)["ids"])
         adj = graph(a)
         tokens = np.array(a["tokens"], float)
         cut = np.quantile(tokens, 0.99)
@@ -258,9 +258,9 @@ def growth(run_id: str) -> Dict[str, Any]:
     links = Counter()
     births = parent_linked = 0
     for t in GROWTH_STARTS:
-        a = F.store.read_frame(run_id, 2 * t - 1)       # after the game of t − 1
-        b = F.store.read_frame(run_id, 2 * t)           # after the reproduction phase of t
-        c = F.store.read_frame(run_id, 2 * t + 1)       # after the game of t
+        a = D.frame_at(run_id, t - 1, 2)       # after the game of t − 1
+        b = D.frame_at(run_id, t, 1)           # after the reproduction phase of t
+        c = D.frame_at(run_id, t, 2)           # after the game of t
         ea = {tuple(sorted(e)) for e in a["edges"]}
         eb = {tuple(sorted(e)) for e in b["edges"]}
         ec = {tuple(sorted(e)) for e in c["edges"]}

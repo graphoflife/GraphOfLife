@@ -35,10 +35,10 @@ def kinship(run_id: str) -> Dict[str, Any]:
     taken_same, taken_all, expect_same = 0, 0, 0.0
     returned = []
     by_degree = defaultdict(lambda: [0.0, 0.0, 0])
-    last = (F.store.count_frames(run_id) - 1) // 2
+    last = D.last_iteration(run_id)
     for t in range(F.SETTLED, last + 1, EVERY):
-        start = F.store.read_frame(run_id, 2 * t)
-        game = F.store.read_frame(run_id, 2 * t + 1)
+        start = D.frame_at(run_id, t, 1)
+        game = D.frame_at(run_id, t, 2)
         g = dict(zip(start["ids"], start["brain_ids"]))
         p = dict(zip(start["ids"], start["parent_brain_ids"]))
 
@@ -136,22 +136,22 @@ def partners(run_id: str) -> Dict[str, Any]:
     still there with exactly the same two genotypes.
     """
     D.needs_decisions(run_id, "which nodes were taken")
-    last = (F.store.count_frames(run_id) - 1) // 2
+    last = D.last_iteration(run_id)
     there = {k: [0, 0, 0] for k in LAGS}
     total = 0
     for t in range(F.SETTLED, last - max(LAGS) + 1, 2 * EVERY):
-        start = F.store.read_frame(run_id, 2 * t)
+        start = D.frame_at(run_id, t, 1)
         g = dict(zip(start["ids"], start["brain_ids"]))
         pairs = {(min(a, b), max(a, b)) for a, b in start["edges"] if a != b}
         total += len(pairs)
         taken: set = set()
         for j in range(max(LAGS)):
-            game = F.store.read_frame(run_id, 2 * (t + j) + 1)
+            game = D.frame_at(run_id, t + j, 2)
             taken |= {w["node"] for w in game["decisions"]["winners"] if w["winner"] != w["node"]}
             k = j + 1
             if k not in there:
                 continue
-            later = F.store.read_frame(run_id, 2 * (t + k))
+            later = D.frame_at(run_id, t + k, 1)
             g2 = dict(zip(later["ids"], later["brain_ids"]))
             now = {(min(a, b), max(a, b)) for a, b in later["edges"]}
             for a, b in pairs & now:

@@ -292,7 +292,7 @@ def world_pass(run_id: str, muller: Optional[Tuple[int, int]] = None) -> Dict[st
     end = None
     last_frame = None
     count = store.count_frames(run_id)
-    last_iteration = (count - 1) // 2
+    last_iteration = D.last_iteration(run_id)
 
     def climb(g: int, memo: Dict[int, int], stop) -> int:
         path, node = [], g
@@ -434,11 +434,11 @@ def sample_pass(run_id: str) -> Dict[str, Any]:
                child's links and the connections handed over
     """
     frames, agents, parents = [], [], []
-    last = (store.count_frames(run_id) - 1) // 2
+    last = D.last_iteration(run_id)
     for t in range(0, last + 1, SAMPLE_EVERY):
-        repro = store.read_frame(run_id, 2 * t)
-        game = store.read_frame(run_id, 2 * t + 1)
-        before = store.read_frame(run_id, 2 * t - 1) if t > 0 else None
+        repro = D.frame_at(run_id, t, 1)
+        game = D.frame_at(run_id, t, 2)
+        before = D.frame_at(run_id, t - 1, 2) if t > 0 else None
         if not game["ids"]:
             break
         counts = Counter(game["brain_ids"])
