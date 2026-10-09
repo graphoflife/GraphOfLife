@@ -324,25 +324,36 @@ async function nextRunId() {
   return id;
 }
 
+/**
+ * An answer already written as JSON — a stored frame — handed over as text and
+ * parsed by the page, as a server's reply is, rather than cloned across.
+ */
+class JsonText {
+  constructor(text) { this.text = text; }
+}
+
+// Every question, by the name and with the arguments ServerBackend in api.js
+// asks it of a server, so the page's BrowserBackend is made from that list
+// rather than written out as a second vocabulary to keep in step.
 const handlers = {
   async defaults() {
     return call('gol_browser.WORLDS.defaults');
   },
 
-  async describe({ config }) {
+  async describe(config) {
     return call('gol_browser.WORLDS.describe', [config]);
   },
 
-  async list() {
+  async listRuns() {
     const runs = await RunStore.listRuns();
     return { runs: runs.map(meta) };
   },
 
-  async get({ runId }) {
+  async getRun(runId) {
     return meta(await loadRun(runId));
   },
 
-  async create({ name, config }) {
+  async createRun(name, config) {
     const id = await nextRunId();
     const prepared = call('gol_browser.WORLDS.create', [id, config || {}]);
     const run = {
@@ -365,7 +376,7 @@ const handlers = {
     return meta(run);
   },
 
-  async rename({ runId, name }) {
+  async renameRun(runId, name) {
     return inTurn(runId, async () => {
       const run = await loadRun(runId);
       run.name = String(name || '').trim() || run.name;
@@ -382,7 +393,7 @@ const handlers = {
    * nothing is advancing it. Taken in the source's turn, so a slice in flight
    * cannot leave it with frames its record does not count.
    */
-  async copy({ runId, name }) {
+  async copyRun(runId, name) {
     return inTurn(runId, async () => {
       const source = await loadRun(runId);
       const id = await nextRunId();
@@ -405,7 +416,7 @@ const handlers = {
     });
   },
 
-  async remove({ runId }) {
+  async deleteRun(runId) {
     running.delete(runId);
     // After the slice in flight, which would otherwise write the run back
     // into existence once it had been deleted.
@@ -416,7 +427,7 @@ const handlers = {
     });
   },
 
-  async start({ runId }) {
+  async startRun(runId) {
     return inTurn(runId, async () => {
       // Started twice, a run advanced twice over, each slice writing frames
       // where the other had just written its own.
@@ -431,7 +442,7 @@ const handlers = {
     });
   },
 
-  async stop({ runId }) {
+  async stopRun(runId) {
     // No slice starts after this, and the one in flight finishes before the
     // stop takes its turn, so the checkpoint below is of a world whose frames
     // are all stored and whose record is up to date.
@@ -449,8 +460,8 @@ const handlers = {
     });
   },
 
-  async frame({ runId, index }) {
-    return RunStore.getFrameText(runId, Number(index));
+  async getFrame(runId, index) {
+    return new JsonText(await RunStore.getFrameText(runId, Number(index)));
   },
 
   /**
@@ -462,7 +473,7 @@ const handlers = {
    * Each frame is cut to what the forest reads before the window crosses into
    * Python, which it does as one JSON string.
    */
-  async lineage({ runId, from, count, phase }) {
+  async getLineage(runId, from, count, phase) {
     const fields = lineageFields();
     const read = [];
     for (let at = from; at < from + count; at += 16) {
@@ -481,7 +492,7 @@ const handlers = {
    * whole frames of a large world is tens of megabytes of structured clone
    * so that two arrays can be read out of each.
    */
-  async frames({ runId, from, count, fields, sightings }) {
+  async getFrames(runId, from, count, fields, sightings) {
     const frames = await RunStore.getFrameRange(runId, Number(from), Number(count));
     // Stopping once enough agents have been seen, as the server does: a
     // window measured in iterations is very different work in a world of sixty
@@ -496,7 +507,7 @@ const handlers = {
     return { frames: kept };
   },
 
-  async series({ runId, points, keys }) {
+  async getSeries(runId, points, keys) {
     const run = await loadRun(runId);
 
     // Python keeps the run's history and says what this request still needs;
@@ -519,7 +530,7 @@ const handlers = {
     return reply;
   },
 
-  async seriesProgress() {
+  async getSeriesProgress() {
     return { building: progress.stage === 'series', done: progress.done, total: progress.total };
   },
 
@@ -539,16 +550,18 @@ const handlers = {
 // An allow-list rather than a deny-list: a handler that needs the engine and
 // is left off this by mistake still works, where one that does not need it and
 // is wrongly added would fail only in the browser, only on a cold start.
-const NO_ENGINE = new Set(['list', 'get', 'frame', 'frames', 'rename',
-                           'seriesProgress', 'storage']);
+const NO_ENGINE = new Set(['listRuns', 'getRun', 'getFrame', 'getFrames', 'renameRun',
+                           'getSeriesProgress', 'storage']);
 
 self.onmessage = async (event) => {
-  const { id, type, ...rest } = event.data || {};
+  const { id, method, args = [] } = event.data || {};
   try {
-    if (!NO_ENGINE.has(type)) await ensureReady();
-    const handler = handlers[type];
-    if (!handler) throw new Error(`the worker has no handler for "${type}"`);
-    self.postMessage({ id, ok: true, result: await handler(rest) });
+    if (!NO_ENGINE.has(method)) await ensureReady();
+    const handler = handlers[method];
+    if (!handler) throw new Error(`the worker has no handler for "${method}"`);
+    const result = await handler(...args);
+    self.postMessage(result instanceof JsonText ? { id, ok: true, json: result.text }
+                                                : { id, ok: true, result });
   } catch (err) {
     self.postMessage({ id, ok: false, error: String(err && err.message ? err.message : err).slice(0, 500) });
   }

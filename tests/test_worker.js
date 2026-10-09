@@ -64,7 +64,8 @@ function pretendStore() {
     async deleteFramesFrom(id, from) { await tick(); (frames.get(id) || []).length = from; },
     async getCheckpoint(id) { await tick(); return checkpoints.get(id) || null; },
     async putCheckpoint(id, bytes) { await tick(); checkpoints.set(id, bytes.slice(0)); },
-    async copyFrames(from, to) { await tick(); frames.set(to, [...(frames.get(from) || [])]); }
+    async copyFrames(from, to) { await tick(); frames.set(to, [...(frames.get(from) || [])]); },
+    async getFrameText(id, index) { await tick(); return (frames.get(id) || [])[index]; }
   };
   return store;
 }
@@ -144,20 +145,22 @@ function worker(store) {
     }
   };
   const fetch = async () => ({ ok: true, text: async () => '' });
-  new Function('importScripts', 'self', 'RunStore', 'fetch', SOURCE)(() => {}, self, store, fetch);
+  const handlers = new Function('importScripts', 'self', 'RunStore', 'fetch', `${SOURCE}\nreturn handlers;`)(
+    () => {}, self, store, fetch);
 
   let next = 0;
-  const send = (type, payload = {}) => new Promise((resolve, reject) => {
+  const send = (method, ...args) => new Promise((resolve, reject) => {
     const id = ++next;
-    waiting.set(id, message => (message.ok ? resolve(message.result) : reject(new Error(message.error))));
-    self.onmessage({ data: { id, type, ...payload } });
+    waiting.set(id, message => (message.ok ? resolve('json' in message ? JSON.parse(message.json) : message.result)
+                                           : reject(new Error(message.error))));
+    self.onmessage({ data: { id, method, args } });
   });
-  return { send, python };
+  return { send, python, handlers };
 }
 
 /** Start a run, and wait until it has stored at least `frames` frames. */
 async function runUntil(store, send, runId, frames) {
-  await send('start', { runId });
+  await send('startRun', runId);
   while ((store.frames.get(runId) || []).length < frames) await tick(2);
 }
 
@@ -209,9 +212,9 @@ async function test_a_stop_in_the_middle_of_a_slice_waits_for_it() {
   // record's iteration, and the slice then wrote the run back as running.
   const store = pretendStore();
   const { send, python } = worker(store);
-  const run = await send('create', { name: 'r', config: { checkpoint_every: 5 } });
+  const run = await send('createRun', 'r', { checkpoint_every: 5 });
   await runUntil(store, send, run.id, 6);
-  await midSlice(store, () => send('stop', { runId: run.id }));
+  await midSlice(store, () => send('stopRun', run.id));
   assertWhole(store, run.id, 'stopped mid-slice');
   assert(python.worlds.get(run.id).iteration === store.runs.get(run.id).iteration,
     'the world went on past the iteration the stop recorded');
@@ -224,10 +227,10 @@ async function test_a_run_stopped_as_its_tab_closes_resumes_without_a_hole() {
   // never written: a hole where they should have been.
   const store = pretendStore();
   let { send } = worker(store);
-  const run = await send('create', { name: 'r', config: { checkpoint_every: 2 } });
+  const run = await send('createRun', 'r', { checkpoint_every: 2 });
   await runUntil(store, send, run.id, 8);
   store.during = () => {
-    send('stop', { runId: run.id });
+    send('stopRun', run.id);
     return new Promise(() => {});           // the tab closes: this slice never ends
   };
   while (store.during) await tick(1);
@@ -236,7 +239,7 @@ async function test_a_run_stopped_as_its_tab_closes_resumes_without_a_hole() {
   ({ send } = worker(store));               // the page, opened again
   const at = store.runs.get(run.id).frame_count;
   await runUntil(store, send, run.id, at + 6);
-  await send('stop', { runId: run.id });
+  await send('stopRun', run.id);
   assertWhole(store, run.id, 'resumed after the tab closed');
 }
 
@@ -246,22 +249,22 @@ async function test_a_stop_and_a_start_at_once_leave_one_run() {
   // by side.
   const store = pretendStore();
   const { send } = worker(store);
-  const run = await send('create', { name: 'r', config: { checkpoint_every: 5 } });
+  const run = await send('createRun', 'r', { checkpoint_every: 5 });
   await runUntil(store, send, run.id, 4);
-  await Promise.all([send('stop', { runId: run.id }), send('start', { runId: run.id })]);
+  await Promise.all([send('stopRun', run.id), send('startRun', run.id)]);
   const at = store.frames.get(run.id).length;
   while (store.frames.get(run.id).length < at + 6) await tick(2);
-  await send('stop', { runId: run.id });
+  await send('stopRun', run.id);
   assertWhole(store, run.id, 'stopped and started at once');
 }
 
 async function test_a_rename_during_a_slice_is_kept() {
   const store = pretendStore();
   const { send } = worker(store);
-  const run = await send('create', { name: 'before', config: {} });
+  const run = await send('createRun', 'before', {});
   await runUntil(store, send, run.id, 4);
-  await midSlice(store, () => send('rename', { runId: run.id, name: 'after' }));
-  await send('stop', { runId: run.id });
+  await midSlice(store, () => send('renameRun', run.id, 'after'));
+  await send('stopRun', run.id);
   assert(store.runs.get(run.id).name === 'after',
     `a slice in flight wrote the old name back: "${store.runs.get(run.id).name}"`);
 }
@@ -269,11 +272,40 @@ async function test_a_rename_during_a_slice_is_kept() {
 async function test_a_run_deleted_during_a_slice_stays_deleted() {
   const store = pretendStore();
   const { send } = worker(store);
-  const run = await send('create', { name: 'r', config: {} });
+  const run = await send('createRun', 'r', {});
   await runUntil(store, send, run.id, 4);
-  await midSlice(store, () => send('remove', { runId: run.id }));
+  await midSlice(store, () => send('deleteRun', run.id));
   assert(!store.runs.has(run.id), 'a slice in flight wrote a deleted run back into existence');
   assert(!store.frames.has(run.id), 'a slice in flight stored frames for a deleted run');
+}
+
+async function test_the_worker_answers_what_the_server_does_by_the_same_names() {
+  // The page asks both backends the same questions; BrowserBackend is made
+  // from ServerBackend's list. A handler named otherwise — the worker once
+  // called them list, get, create and remove — is a question the page cannot ask.
+  const api = new Function(`${fs.readFileSync(path.join(root, 'web', 'js', 'api.js'), 'utf8')}
+    return { ServerBackend, BrowserBackend };`)();
+  const asked = Object.keys(api.ServerBackend)
+    .filter(name => !name.startsWith('_') && typeof api.ServerBackend[name] === 'function')
+    .filter(name => !['labStatus', 'labRequest'].includes(name));          // a lab needs a server
+  const { handlers } = worker(pretendStore());
+  const answered = Object.keys(handlers).sort();
+  const expected = [...asked, 'storage'].sort();
+  assert(JSON.stringify(answered) === JSON.stringify(expected),
+    `the worker answers ${answered.join(', ')}; the page asks ${expected.join(', ')}`);
+  for (const name of asked) {
+    assert(typeof api.BrowserBackend[name] === 'function', `the page cannot ask the worker ${name}`);
+  }
+}
+
+async function test_a_stored_frame_reaches_the_page_as_a_frame() {
+  const store = pretendStore();
+  const { send } = worker(store);
+  const run = await send('createRun', 'r', { checkpoint_every: 5 });
+  await runUntil(store, send, run.id, 4);
+  await send('stopRun', run.id);
+  const frame = await send('getFrame', run.id, 3);
+  assert(frame.iteration === 1 && frame.phase === 2, `frame 3 came back as ${JSON.stringify(frame)}`);
 }
 
 // ---------------------------------------------------------------------------
@@ -283,7 +315,9 @@ const tests = Object.entries({
   test_a_run_stopped_as_its_tab_closes_resumes_without_a_hole,
   test_a_stop_and_a_start_at_once_leave_one_run,
   test_a_rename_during_a_slice_is_kept,
-  test_a_run_deleted_during_a_slice_stays_deleted
+  test_a_run_deleted_during_a_slice_stays_deleted,
+  test_the_worker_answers_what_the_server_does_by_the_same_names,
+  test_a_stored_frame_reaches_the_page_as_a_frame
 }).sort(([a], [b]) => a.localeCompare(b));
 
 // A test that is written and never listed here is worse than no test: it reads

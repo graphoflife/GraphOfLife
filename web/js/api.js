@@ -112,7 +112,8 @@ const BrowserBackend = {
       const waiting = this._pending.get(msg.id);
       if (!waiting) return;
       this._pending.delete(msg.id);
-      msg.ok ? waiting.resolve(msg.result) : waiting.reject(new Error(msg.error));
+      if (!msg.ok) waiting.reject(new Error(msg.error));
+      else waiting.resolve('json' in msg ? JSON.parse(msg.json) : msg.result);
     };
 
     this._worker.onerror = (err) => {
@@ -124,7 +125,7 @@ const BrowserBackend = {
     return this._worker;
   },
 
-  _send(type, payload = {}, signal = null) {
+  _send(method, args = [], signal = null) {
     const worker = this._ensure();
     const id = this._nextId++;
     return new Promise((resolve, reject) => {
@@ -140,40 +141,28 @@ const BrowserBackend = {
         stop.name = 'AbortError';
         reject(stop);
       }, { once: true });
-      worker.postMessage({ id, type, ...payload });
+      worker.postMessage({ id, method, args });
     });
   },
 
-  defaults()            { return this._send('defaults'); },
-  describe(config)      { return this._send('describe', { config }); },
-  listRuns()            { return this._send('list'); },
-  getRun(id)            { return this._send('get', { runId: id }); },
-  createRun(name, config) { return this._send('create', { name, config }); },
-  deleteRun(id)         { return this._send('remove', { runId: id }); },
-  startRun(id)          { return this._send('start', { runId: id }); },
-  stopRun(id)           { return this._send('stop', { runId: id }); },
-  copyRun(id, name)     { return this._send('copy', { runId: id, name }); },
-  renameRun(id, name)   { return this._send('rename', { runId: id, name }); },
-  // Handed over as text and parsed here, as a server's reply is.
-  getFrame(id, index, opts)   {
-    return this._send('frame', { runId: id, index }, opts && opts.signal).then(text => JSON.parse(text));
-  },
-  getFrames(id, from, count, fields, sightings, opts) {
-    return this._send('frames', { runId: id, from, count, fields, sightings },
-                      opts && opts.signal);
-  },
-  getLineage(id, from, count, phase, opts) {
-    return this._send('lineage', { runId: id, from, count, phase }, opts && opts.signal);
-  },
-  getSeries(id, points, keys, opts) {
-    return this._send('series', { runId: id, points, keys }, opts && opts.signal);
-  },
-  getSeriesProgress(id, opts) { return this._send('seriesProgress', { runId: id }, opts && opts.signal); },
   storage()             { return this._send('storage'); },
   // No lab here: an experiment runs on a machine with gol_server.py.
   labStatus()           { return Promise.resolve(null); },
   labRequest()          { return Promise.reject(new Error('experiments run with gol_server.py')); }
 };
+
+// Every other question the server answers is asked of the worker by the same
+// name and with the same arguments (sim-worker.js names its handlers after
+// ServerBackend). A read's trailing { signal } stays on this side: a signal
+// cannot cross into a worker, and only this side can refuse a late answer.
+for (const name of Object.keys(ServerBackend)) {
+  if (name.startsWith('_') || typeof ServerBackend[name] !== 'function' || name in BrowserBackend) continue;
+  BrowserBackend[name] = function (...args) {
+    const last = args[args.length - 1];
+    const signal = last && typeof last === 'object' && 'signal' in last ? args.pop().signal : null;
+    return this._send(name, args, signal);
+  };
+}
 
 const API = {
   backend: null,
