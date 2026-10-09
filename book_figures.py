@@ -25,7 +25,6 @@ the same figures.
 """
 from __future__ import annotations
 
-import json
 import math
 import os
 import sys
@@ -238,12 +237,23 @@ SETTLED = 500
 ANCESTRY_EVERY = 25
 
 
+def _world_key(run_id: str, muller: Optional[Tuple[int, int]] = None) -> Dict[str, Any]:
+    return {"iteration": store.load_meta(run_id).get("iteration"),
+            "muller": list(muller) if muller else None, "version": 3}
+
+
+def _world_fits(kept: Dict[str, Any], wanted: Dict[str, Any]) -> bool:
+    # A pass made with a Muller window answers a question asked without one.
+    return ((kept.get("iteration"), kept.get("version")) == (wanted["iteration"], wanted["version"])
+            and (wanted["muller"] is None or kept.get("muller") == wanted["muller"]))
+
+
+@D.measure("world", file="{run}.json", field="key", want=_world_key, fits=_world_fits)
 def world_pass(run_id: str, muller: Optional[Tuple[int, int]] = None) -> Dict[str, Any]:
     """
     Everything the frame-based figures need from one world, in one reading of
-    its frames, kept in a cache beside the runs (`<runs>/.book/<run>.json`) so
-    that it is read once. The cache is keyed by the run's last iteration and
-    the Muller window asked for; anything else asked of it is recomputed.
+    its frames. It is kept for the run's last iteration and the Muller window
+    asked for: asked with another window, it is made again.
 
       agents     every agent born in a reproduction phase at iteration
                  b ≥ SETTLED that took part in at least one game: (b, d,
@@ -267,20 +277,6 @@ def world_pass(run_id: str, muller: Optional[Tuple[int, int]] = None) -> Dict[st
       shares     in reproduction phases at iteration 0 and in the last 50
                  iterations, the share of its tokens each parent gave its child
     """
-    cache_dir = os.path.join(store.BASE_DIR, ".book")
-    os.makedirs(cache_dir, exist_ok=True)
-    path = os.path.join(cache_dir, f"{run_id}.json")
-    key = {"iteration": store.load_meta(run_id).get("iteration"), "muller": list(muller) if muller else None,
-           "version": 3}
-    if os.path.exists(path):
-        with open(path) as f:
-            cached = json.load(f)
-        have = cached.get("key", {})
-        # A pass made with a Muller window answers a question asked without one.
-        if (have.get("iteration"), have.get("version")) == (key["iteration"], key["version"]) \
-                and (muller is None or have.get("muller") == key["muller"]):
-            return cached
-
     parent: Dict[int, int] = {}
     born_g: Dict[int, int] = {}
     first_g: Dict[int, int] = {}
@@ -381,16 +377,13 @@ def world_pass(run_id: str, muller: Optional[Tuple[int, int]] = None) -> Dict[st
     for a, b in last_frame["edges"]:
         degree[a] += 1
         degree[b] += 1
-    out = {"key": key, "end": end, "agents": agents, "genotypes": genotypes, "top": top,
-           "age": age, "ancestry": ancestry, "founders": keep_big(founders_t),
-           "muller": keep_big(muller_t),
-           "last": {"tokens": last_frame["tokens"],
-                    "degrees": [degree.get(a, 0) for a in last_frame["ids"]],
-                    "ages": last_frame["ages"]},
-           "stakes": stakes, "shares": shares}
-    with open(path, "w") as f:
-        json.dump(out, f)
-    return out
+    return {"end": end, "agents": agents, "genotypes": genotypes, "top": top,
+            "age": age, "ancestry": ancestry, "founders": keep_big(founders_t),
+            "muller": keep_big(muller_t),
+            "last": {"tokens": last_frame["tokens"],
+                     "degrees": [degree.get(a, 0) for a in last_frame["ids"]],
+                     "ages": last_frame["ages"]},
+            "stakes": stakes, "shares": shares}
 
 
 #: Iterations between two looks of sample_pass, and between two looks at single agents.

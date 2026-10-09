@@ -51,10 +51,11 @@ def _same(kept: Any, wanted: Any) -> bool:
 class Measure:
     """
     One thing measured from a run and kept beside it. A kept copy holds, under
-    `field`, what it was made from — `want(run_id, **params)` — and is used
-    again when `fits(kept, wanted)`. Anything that changes what `make` returns
-    has to be in what `want` returns, or a kept copy made from something else
-    would be handed out.
+    `field`, what it was made from — `want`, called with the run and whatever
+    else the measure is asked with — and is used again when `fits(kept,
+    wanted)`. Anything that changes what `make` returns has to be in what
+    `want` returns, or a kept copy made from something else would be handed
+    out.
     """
     name: str
     make: Callable[..., Dict[str, Any]]
@@ -85,8 +86,8 @@ def measure(name: str, file: Optional[str] = None, **how: Any) -> Callable:
         m = MEASURES[name] = Measure(name, make, file or f"{{run}}.{name}.json", **how)
 
         @functools.wraps(make)
-        def kept(run_id: str, **params: Any) -> Dict[str, Any]:
-            return get(m, run_id, **params)
+        def kept(run_id: str, *args: Any, **params: Any) -> Dict[str, Any]:
+            return get(m, run_id, *args, **params)
         kept.measure = m
         return kept
     return register
@@ -96,9 +97,9 @@ def _where(fn: Callable) -> tuple:
     return fn.__code__.co_filename, fn.__code__.co_firstlineno, fn.__qualname__
 
 
-def get(m: Measure, run_id: str, **params: Any) -> Dict[str, Any]:
+def get(m: Measure, run_id: str, *args: Any, **params: Any) -> Dict[str, Any]:
     """A run's measure: the kept copy if one fits, otherwise made and kept."""
-    wanted = m.want(run_id, **params)
+    wanted = m.want(run_id, *args, **params)
     path = m.path(run_id)
     kept = _read(path)
     if kept is not None and m.field in kept and m.fits(_plain(kept[m.field]), wanted):
@@ -107,7 +108,7 @@ def get(m: Measure, run_id: str, **params: Any) -> Dict[str, Any]:
         raise NotKept(f"the {m.name} of {run_id} is not kept, and GOL_BOOK_CACHE=strict "
                       f"makes nothing")
     made = {m.field: np.array(wanted) if path.endswith(".npz") else wanted,
-            **m.make(run_id, **params)}
+            **m.make(run_id, *args, **params)}
     _write(path, made)
     return made
 
