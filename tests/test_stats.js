@@ -3,15 +3,11 @@
  *
  *     node tests/test_stats.js
  *
- * stats.js is the largest file in the browser and the least covered. What
- * cover it had is tests/test_stats_parity.py, which runs `summary()` against
- * gol_series.py — forty-odd scalars, and a real guard, but only the half that
- * Python also computes.
- *
- * The other half is everything the viewer draws with: reading a metric off a
+ * FrameMetrics is everything the viewer draws with: reading a metric off a
  * frame, scaling it, turning it into a position in a colour map, and looking
- * up an edge. None of it is shared with Python, so none of it was compared
- * with anything. It is also the half where being wrong is quiet — a metric
+ * up an edge. None of it is shared with Python — the statistics of a frame as
+ * a whole are gol_series', asked for by the strip — so none of it can be
+ * compared with anything. It is also where being wrong is quiet — a metric
  * that falls through its switch returns a flat 0.5 for every node, and a flat
  * colour is what a legitimately uniform quantity looks like too.
  *
@@ -25,11 +21,10 @@ const fs = require('fs');
 const path = require('path');
 
 const root = path.join(__dirname, '..');
-const source = ['colormaps.js', 'metrics.js', 'spectral.js', 'graphstats.js', 'stats.js']
+const source = ['colormaps.js', 'metrics.js', 'graphstats.js', 'stats.js']
   .map(name => fs.readFileSync(path.join(root, 'web', 'js', name), 'utf8'))
   .join('\n');
-// The same bridge tests/test_stats_parity.py uses: one `window` for the pixel
-// ratio, and nothing else.
+// One `window`, for the pixel ratio, and nothing else.
 const load = what => new Function('window', `${source}; return ${what};`)({ devicePixelRatio: 1 });
 const FrameMetrics = load('FrameMetrics');
 const Metrics = load('Metrics');

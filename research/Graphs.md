@@ -469,8 +469,9 @@ alternating column is no result.**
 
 `bridge_splits()` and `two_core_size()` live in `GraphOfLifeSimple.py` because
 the engine needs them on the live graph, and `gol_series` imports them rather
-than growing a third copy. The browser mirror is `graphstats.js`, compared
-value for value by `tests/test_stats_parity.py`.
+than growing a third copy. The browser once kept a mirror of all of these in
+`graphstats.js`, compared value for value by a parity test; since 2026-10-09
+it asks the server or its worker for them instead (`gol_framestats.py`).
 
 ### λ₂, and what it settled
 

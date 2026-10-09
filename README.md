@@ -211,7 +211,8 @@ python3 gol_lab.py analyse E02   # its results and figures, into book/
 
 ```bash
 python3 tests/test_engine.py        # invariants: tokens, topology, resuming
-python3 tests/test_stats_parity.py  # the two statistics implementations agree
+python3 tests/test_series.py        # the series, and the page's registry of statistics
+node tests/run.js                   # the page's own tests
 ```
 
 Neither needs pytest, though `python3 -m pytest tests/` works too. A research

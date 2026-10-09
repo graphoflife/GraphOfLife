@@ -1,6 +1,8 @@
 /*
- * Turning a frame into numbers: what drives colour, what drives size, and the
- * summary statistics and histograms shown under the canvas.
+ * Turning a frame into numbers: what drives colour and size, what the hover
+ * card says of an agent, and the values the per-agent charts are drawn from.
+ * The statistics of the frame as a whole are worked out in Python and asked
+ * for (gol_framestats, ViewerPanels.updateStats).
  *
  * FrameMetrics is built once per frame, and restyle() follows a change of
  * colouring, so the renderer can stay a dumb value-to-pixel mapper.
@@ -8,8 +10,8 @@
 class FrameMetrics {
   /**
    * `settings` are the renderer's: what colours and sizes the nodes and the
-   * edges. Without them this holds values only, which is all a chart or a
-   * summary reads. Diagrams used to lend it the Viewer's settings to have
+   * edges. Without them this holds values only, which is all a chart reads.
+   * Diagrams used to lend it the Viewer's settings to have
    * something to pass, and so worked out, for every frame it pooled, whatever
    * the Viewer happened to be colouring by.
    */
@@ -117,8 +119,7 @@ class FrameMetrics {
    * zero and the UI says so.
    */
   _edgeFlow() {
-    // Only between agents still present, which is what the renderer draws;
-    // the statistics use flowAmounts instead.
+    // Only between agents still present, which is what the renderer draws.
     const decisions = this.frame.decisions;
     if (!decisions || !decisions.allocations) return new Map();
     return GraphStats.flowByPair(this.frame.ids, decisions.allocations, this.index);
@@ -127,38 +128,6 @@ class FrameMetrics {
   get flow() {
     if (!this._flow) this._flow = this._edgeFlow();
     return this._flow;
-  }
-
-  /**
-   * Every amount that moved between two different agents this phase.
-   *
-   * Separate from `flow` on purpose. That map is keyed by position in this
-   * frame because the renderer looks edges up by position, which means it can
-   * only hold traffic between agents that are still here. An agent culled
-   * during cleanup was still alive when the tokens were sent, so leaving its
-   * traffic out understates what moved — and did, by three hundred tokens on
-   * a 462-node frame, which is where this and the server's own figure parted
-   * company.
-   */
-  get flowAmounts() {
-    if (this._flowAmounts) return this._flowAmounts;
-
-    const totals = new Map();
-    const decisions = this.frame.decisions;
-    if (decisions && decisions.allocations) {
-      for (const record of decisions.allocations) {
-        const source = record.agent;
-        for (let i = 0; i < record.targets.length; i++) {
-          const target = record.targets[i];
-          const amount = record.alloc[i];
-          if (!amount || target === source) continue;
-          const key = source < target ? `${source},${target}` : `${target},${source}`;
-          totals.set(key, (totals.get(key) || 0) + amount);
-        }
-      }
-    }
-    this._flowAmounts = Array.from(totals.values());
-    return this._flowAmounts;
   }
 
   /**
@@ -460,10 +429,10 @@ class FrameMetrics {
     return this._edgeNorm(kind, this.settings.edgeWidthLog, a, b);
   }
 
-  // ---- structure: loops, triangles, dimension -------------------------
+  // ---- structure: loops and triangles -----------------------------------
 
   /**
-   * Adjacency, loops, triangles and dimension for this frame.
+   * Adjacency, loops and triangles for this frame, which colouring by them reads.
    *
    * Built on first use and kept, since these cost real work and most frames
    * are drawn without anyone asking for them.
@@ -473,12 +442,16 @@ class FrameMetrics {
 
     const f = this.frame;
     const adj = GraphStats.adjacency(f.ids, f.edges);
-    const loops = GraphStats.loops(f.ids, f.edges, adj);
+    // The loops each agent and link lies on are the costly part — most of a
+    // second at seventy thousand agents — so they are walked the first time a
+    // loop colouring asks.
+    let walked = null;
+    const participation = () => (walked ||= GraphStats.cycleParticipation(f.ids, f.edges, adj));
+    const loops = { get nodeLoops() { return participation().perNode; },
+                    get edgeLoops() { return participation().perEdge; } };
     const triangles = GraphStats.triangles(f.ids, f.edges, adj);
-    const dimension = GraphStats.dimension(f.ids, adj);
-    const distances = GraphStats.distances(f.ids, adj);
 
-    this._structure = { adj, loops, triangles, dimension, distances };
+    this._structure = { adj, loops, triangles };
     return this._structure;
   }
 
@@ -599,317 +572,5 @@ class FrameMetrics {
       this._wealthRank = rank;
     }
     return this._wealthRank[i];
-  }
-
-  // ---- summary --------------------------------------------------------
-
-  /**
-   * The numbers under the canvas.
-   *
-   * `includeStructure` gates the handful that need the whole graph walked;
-   * without it they stay null and the strip simply omits them.
-   */
-  // `includeFlow` defaults to whatever `includeStructure` is, so a caller that
-  // wants everything still says so with one argument.
-  summary(includeStructure = true, includeFlow = includeStructure) {
-    const f = this.frame;
-    const n = f.ids.length;
-    const degrees = Array.from(this.degree);
-    const tokens = f.tokens;
-    const d = f.decisions || {};
-
-    const sum = arr => arr.reduce((a, b) => a + b, 0);
-    const mean = arr => arr.length ? sum(arr) / arr.length : 0;
-    const middle = s => {
-      if (!s.length) return 0;
-      const m = Math.floor(s.length / 2);
-      return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
-    };
-    const median = arr => middle([...arr].sort((a, b) => a - b));
-    // One pass rather than Math.max(...arr): a spread hands every value over
-    // as an argument, and past about 125,000 of them the engine throws.
-    const largest = arr => { let m = -Infinity; for (const v of arr) if (v > m) m = v; return m; };
-    const smallest = arr => { let m = Infinity; for (const v of arr) if (v < m) m = v; return m; };
-
-    // How concentrated is wealth? 0 = perfectly equal, 1 = one agent holds all.
-    const sorted = [...tokens].sort((a, b) => a - b);
-    let cumulative = 0, weighted = 0;
-    for (let i = 0; i < sorted.length; i++) {
-      cumulative += sorted[i];
-      weighted += cumulative;
-    }
-    const gini = cumulative > 0
-      ? (sorted.length + 1 - 2 * weighted / cumulative) / sorted.length
-      : 0;
-
-    // Share held by the richest tenth — a blunter, more readable companion to
-    // the Gini coefficient.
-    const topCount = Math.max(1, Math.round(n * 0.1));
-    const topShare = cumulative > 0
-      ? sum(sorted.slice(-topCount)) / cumulative
-      : 0;
-
-    const distinctBrains = new Set(f.brain_ids).size;
-    const distinctParents = new Set(f.parent_brain_ids).size;
-
-    const out = {
-      iteration: f.iteration,
-      phase: f.phase,
-      // How many nodes entered this phase. Older runs predate the field, in
-      // which case the caller falls back to the previous frame's node count.
-      nodesBefore: (typeof f.nodes_before === 'number') ? f.nodes_before : null,
-
-      // Topology
-      nodes: n,
-      edges: f.edges.length,
-      density: n > 1 ? (2 * f.edges.length) / (n * (n - 1)) : 0,
-      meanDegree: mean(degrees),
-      medianDegree: median(degrees),
-      maxDegree: degrees.length ? largest(degrees) : 0,
-      minDegree: degrees.length ? smallest(degrees) : 0,
-      leaves: degrees.filter(x => x === 1).length,
-
-      // Wealth
-      tokens: this.totalTokens,
-      meanTokens: mean(Array.from(tokens)),
-      // The sorted copy the Gini coefficient needed anyway, not a second sort.
-      medianTokens: middle(sorted),
-      maxTokens: tokens.length ? largest(tokens) : 0,
-      minTokens: tokens.length ? smallest(tokens) : 0,
-      gini,
-      topDecileShare: topShare,
-
-      // Biggest single swing either way this phase. Losses are reported as a
-      // positive magnitude so the two read side by side.
-      maxTokenAdded: this.delta.length ? Math.max(0, largest(this.delta)) : 0,
-      maxTokenLost: this.delta.length ? Math.max(0, -smallest(this.delta)) : 0,
-      gainers: this.delta.filter(v => v > 0).length,
-      losers: this.delta.filter(v => v < 0).length,
-
-      // Structure
-      degreeExponent: null, degreeExponentR2: null,
-      tokenExponent: null, tokenExponentR2: null,
-      tokensVsDegree: null, tokensVsDegreeR2: null,
-      trianglesVsDegree: null, trianglesVsDegreeR2: null,
-      clusteringVsDegree: null, clusteringVsDegreeR2: null,
-      changeVsTokens: null, changeVsTokensR2: null,
-      assortativity: null,
-      degreeGamma: null, degreeGammaR2: null, degreeKMin: null,
-      degreeTailShare: null, degreeGammaKS: null,
-      boxDimension: null, boxDimensionR2: null,
-      cycleRank: null, loopDensity: null, bridges: null, triangles: null,
-      cutRisk: null, coreShare: null, spectralGap: null, ricciCurvature: null,
-      lightningScore: null, cyclingShare: null,
-      lightningLongest: null, flowImbalance: null,
-      netLightningScore: null, netCyclingShare: null,
-      netLightningLongest: null, netFlowShare: null,
-      transitivity: null, degreeEntropy: null, degreeEvenness: null,
-      radius: null, diameter: null, meanPathLength: null,
-      tokenEntropy: null, tokenEvenness: null, dimension: null, components: null,
-
-      // Genome
-      distinctBrains,
-      brainDiversity: n ? distinctBrains / n : 0,
-      distinctParents,
-
-      // Cleanup, present on both phases
-      starved: f.cleanup ? f.cleanup.starved : null,
-      orphaned: f.cleanup ? f.cleanup.orphaned : null,
-      redistributed: f.cleanup ? f.cleanup.redistributed : null,
-      // Taken by the engine before the cull, so it can be read as a cause of
-      // the cull rather than a consequence. Runs made before the engine
-      // recorded it simply do not have it.
-      cutRiskBefore: f.cleanup && f.cleanup.cutRiskBefore !== undefined
-        ? f.cleanup.cutRiskBefore : null,
-
-      births: null, meanInvestedShare: null, meanChildLinks: null,
-      reproTokenShare: null, handovers: null,
-      gifts: null, giftTokens: null, giftShare: null,
-      revolutions: null, totalFlow: null, meanEdgeFlow: null, maxEdgeFlow: null,
-      selfAllocationShare: null, revoltShare: null, spreadShare: null,
-      heldHomeShare: null, prunedEdges: null
-    };
-
-    // Rewiring happens during the reproduction phase but is nobody's child:
-    // absent when the rule is off, rather than a zero that reads as "nobody
-    // chose to".
-
-    // ---- reproduction phase ----
-    if (d.births) {
-      const births = d.births;
-      out.births = births.length;
-      out.meanInvestedShare = births.length
-        ? mean(births.map(b => b.tokens_before ? b.invested / b.tokens_before : 0))
-        : 0;
-      out.meanChildLinks = births.length
-        ? mean(births.map(b => (b.links || []).length))
-        : 0;
-
-      // What share of the entire economy was committed to newborns this
-      // phase. Distinct from meanInvestedShare, which averages each parent's
-      // share of its own pile and so says nothing about how much of the world
-      // that amounted to.
-      const invested = sum(births.map(b => b.invested));
-      out.reproTokenShare = this.totalTokens ? invested / this.totalTokens : 0;
-
-      // Only present on runs with handover enabled; absent means the mechanic
-      // was off, which is not the same as it being on and never used.
-      if (births.some(b => b.handed_over !== undefined)) {
-        out.handovers = sum(births.map(b => (b.handed_over || []).length));
-      }
-    }
-
-    // Gifts. Absent rather than zero on a run without the mechanic, so a world
-    // where nobody chose to give reads differently from one where nobody could.
-    if (d.gifts) {
-      out.gifts = d.gifts.length;
-      out.giftTokens = sum(d.gifts.map(g => g[2]));
-      out.giftShare = this.totalTokens ? out.giftTokens / this.totalTokens : 0;
-    }
-
-    // ---- game phase ----
-    if (d.allocations) {
-      const allocations = d.allocations;
-      let allocatedTotal = 0, keptAtHome = 0, revolted = 0, spreadCount = 0;
-
-      for (const a of allocations) {
-        const total = sum(a.alloc);
-        allocatedTotal += total;
-        const selfIndex = a.targets.indexOf(a.agent);
-        if (selfIndex >= 0) keptAtHome += a.alloc[selfIndex];
-        if (a.revolt) revolted += sum(a.revolt);
-        if (a.spread) spreadCount++;
-      }
-
-      out.selfAllocationShare = allocatedTotal ? keptAtHome / allocatedTotal : 0;
-      out.spreadShare = allocations.length ? spreadCount / allocations.length : 0;
-      // Left null when the run has revolutions switched off, so the reader can
-      // tell that apart from a phase where nobody revolted.
-      if (allocations.some(a => a.revolt !== undefined)) {
-        out.revoltShare = allocatedTotal ? revolted / allocatedTotal : 0;
-      }
-
-      const flows = this.flowAmounts;
-      out.totalFlow = sum(flows);
-      out.meanEdgeFlow = mean(flows);
-      out.maxEdgeFlow = flows.length ? largest(flows) : 0;
-    }
-
-    if (d.winners) {
-      if (d.winners.some(w => w.revolt !== undefined)) {
-        out.revolutions = d.winners.filter(w => w.revolt).length;
-      }
-      out.heldHomeShare = d.winners.length
-        ? d.winners.filter(w => w.winner === w.node).length / d.winners.length
-        : 0;
-    }
-
-    if (d.pruned_edges) out.prunedEdges = d.pruned_edges.length;
-
-    // ---- circulating token flow ----
-    //
-    // Gated separately from the structure block below. The lightning search
-    // reads this phase's allocations and nothing else — it never touches the
-    // graph walk — so tying it to the structure group would have made it wait
-    // on a walk it does not use, and would leave it blank on a strip where the
-    // group holding it is open. Only a game phase allocates across links, so a
-    // reproduction frame has no lightning and says so with nulls.
-    // Kept with the frame's other results: the strip asks again every time a
-    // group is opened or closed, and it is the same frame each time.
-    if (includeFlow) Object.assign(out, (this._lightning ||= Lightning.of(f)));
-
-    // ---- structure ----
-    //
-    // Loops, bridges, triangles, dimension and the distance sweeps are by far
-    // the most expensive thing here — around 250ms of a 280ms summary at
-    // twenty thousand nodes, which is what made stepping between frames feel
-    // heavy. The group they feed is collapsed by default, so the reader was
-    // usually paying for numbers nobody was looking at. The caller asks for
-    // them when the group is open, and the rest of the summary no longer
-    // waits on them.
-    if (includeStructure) {
-      const st = this.structure;
-      out.cycleRank = st.loops.cycleRank;
-      out.loopDensity = f.edges.length ? st.loops.cycleRank / f.edges.length : 0;
-      out.bridges = st.loops.bridges;
-      out.cutRisk = st.loops.cutRisk;
-      out.coreShare = st.loops.coreShare;
-      out.spectralGap = st.loops.spectralGap;
-      out.components = st.loops.componentCount;
-      out.triangles = st.triangles.total;
-      out.transitivity = GraphStats.transitivity(f.ids, st.adj, st.triangles.total);
-      out.dimension = st.dimension.estimate;
-      out.ricciCurvature = st.dimension.ricciCurvature;
-
-      out.radius = st.distances.radius;
-      out.diameter = st.distances.diameter;
-      out.meanPathLength = st.distances.meanPathLength;
-
-      // ---- power laws ----
-      //
-      // How one quantity scales with another, as an exponent and how tightly
-      // the points sit on that line. Mirrors the same block in gol_series.py,
-      // which tests/test_stats_parity.py compares value for value.
-      const ids = f.ids;
-      const degrees = [], tokensList = [], triangleList = [];
-      for (let i = 0; i < ids.length; i++) {
-        degrees.push(this.degree[i]);
-        tokensList.push(f.tokens[i]);
-        triangleList.push(st.triangles.perNode.get(ids[i]) || 0);
-      }
-
-      const clustering = GraphStats.clusteringPerNode(ids, st.adj, st.triangles.perNode);
-      const clusteringDegrees = [], clusteringValues = [];
-      for (const id of ids) {
-        if (!clustering.has(id)) continue;   // fewer than two neighbours
-        clusteringDegrees.push((st.adj.get(id) || []).size || 0);
-        clusteringValues.push(clustering.get(id));
-      }
-
-      const changeTokens = [], changeSizes = [];
-      for (let i = 0; i < Math.min(tokensList.length, this.delta.length); i++) {
-        changeTokens.push(tokensList[i]);
-        changeSizes.push(Math.abs(this.delta[i]));
-      }
-
-      const pair = (fit, key) => {
-        out[key] = fit ? fit.exponent : null;
-        out[key + 'R2'] = fit ? fit.r2 : null;
-      };
-      pair(GraphStats.tailExponent(degrees), 'degreeExponent');
-      pair(GraphStats.tailExponent(tokensList), 'tokenExponent');
-      pair(GraphStats.powerFit(degrees, tokensList), 'tokensVsDegree');
-      pair(GraphStats.powerFit(degrees, triangleList), 'trianglesVsDegree');
-      pair(GraphStats.powerFit(clusteringDegrees, clusteringValues), 'clusteringVsDegree');
-      pair(GraphStats.powerFit(changeTokens, changeSizes), 'changeVsTokens');
-
-      const degreeOf = new Map();
-      for (let i = 0; i < ids.length; i++) degreeOf.set(ids[i], this.degree[i]);
-      out.assortativity = GraphStats.assortativity(f.edges, id => degreeOf.get(id));
-
-      // Scale free: the degree distribution's tail, found rather than assumed.
-      const sf = GraphStats.scaleFree(degrees);
-      out.degreeGamma = sf ? sf.exponent : null;
-      out.degreeGammaR2 = sf ? sf.r2 : null;
-      out.degreeKMin = sf ? sf.kMin : null;
-      out.degreeTailShare = sf ? sf.coverage : null;
-      out.degreeGammaKS = sf ? sf.ks : null;
-
-      // Self-similar: how the number of boxes needed falls as boxes grow.
-      const boxes = GraphStats.boxDimension(ids, st.adj);
-      out.boxDimension = boxes ? boxes.exponent : null;
-      out.boxDimensionR2 = boxes ? boxes.r2 : null;
-    }
-
-    out.degreeEntropy = GraphStats.degreeEntropy(degrees);
-    // Against the most even the same number of classes could be, so 1 means
-    // every degree is equally common.
-    const degreeClasses = new Set(degrees).size;
-    out.degreeEvenness = degreeClasses > 1 ? out.degreeEntropy / Math.log2(degreeClasses) : 0;
-
-    out.tokenEntropy = GraphStats.entropyOfCounts(Array.from(tokens));
-    out.tokenEvenness = n > 1 ? out.tokenEntropy / Math.log2(n) : 0;
-
-    return out;
   }
 }

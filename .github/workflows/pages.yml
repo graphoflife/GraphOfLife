@@ -46,8 +46,8 @@ jobs:
         run: python3 tests/test_engine.py
       - name: The lab runs what the book plans, and stopping it changes nothing
         run: python3 tests/test_lab.py
-      - name: The two statistics implementations agree
-        run: python3 tests/test_stats_parity.py
+      - name: The series and the page's registry of statistics agree
+        run: python3 tests/test_series.py
       - name: The book keeps what it measures, and draws only what it can
         run: python3 tests/test_book.py
       - name: The page's tests, every file of them
