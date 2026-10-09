@@ -911,32 +911,18 @@ def test_edges_only_reference_present_nodes():
                 assert a in present and b in present
 
 
-def _decision_keys(cfg: SimConfig) -> dict:
-    """
-    Which keys a frame's decisions hold today, record by record. Pinned here
-    because the statistics and the viewer read some of them by whether they
-    are there at all: a key that appears or vanishes changes what they say.
-    """
-    revolt = {"revolt"} if cfg.allow_revolutions else set()
-    return {
-        "reproduction": {"births", "gifts", "pruned_edges"},
-        "birth": {"agent", "tokens_before", "invested", "child", "links", "handed_over"},
-        "game": {"allocations", "winners", "pruned_edges"},
-        "allocation": {"agent", "tokens", "spread", "targets", "alloc"} | revolt,
-        "winner": {"node", "winner", "amount"} | revolt,
-    }
-
-
 def test_a_frame_records_the_decisions_its_mechanics_say_it_does():
     """
     Every combination of the mechanics that add or take away a decision, a
-    few iterations each: every record holds exactly the keys the table says.
+    few iterations each: every record holds exactly the keys the engine's own
+    statement of the contract, decision_keys, says it does.
     """
+    from GraphOfLifeSimple import decision_keys
     for gifting, handover, revolutions, prune in itertools.product(
             (False, True), (False, True), (False, True), ("blotto", "reproduction", "both")):
         cfg = small(allow_gifting=gifting, allow_handover=handover,
                     allow_revolutions=revolutions, prune_after=prune, seed=5)
-        expected = _decision_keys(cfg)
+        expected = decision_keys(cfg)
         world = new_world(cfg)
         seen = set()
         for _ in range(4):

@@ -181,6 +181,31 @@ def _sigmoid(x: np.ndarray) -> np.ndarray:
     return np.where(x >= 0, 1.0 / (1.0 + e), e / (1.0 + e))
 
 
+def decision_keys(cfg: SimConfig) -> Dict[str, frozenset]:
+    """
+    Which keys each decision record of a frame holds for a run of these
+    settings: the reproduction phase's record and each birth in it, the
+    game's record and each stake and each conquest in it.
+
+    The statistics and the viewer read these records, and some of them read a
+    key by whether it is there, so this is the contract they read against and
+    a test holds every frame to it. Every key is always written — an empty
+    list when its mechanic is off, so whether a mechanic was on is the run's
+    settings to say, not the frame's — with one exception: a stake's and a
+    conquest's `revolt` is left out when revolutions are off, so that "not
+    part of these rules" can be told from "allowed and unused".
+    """
+    revolt = frozenset({"revolt"}) if cfg.allow_revolutions else frozenset()
+    return {
+        "reproduction": frozenset({"births", "gifts", "pruned_edges"}),
+        "birth": frozenset({"agent", "tokens_before", "invested", "child", "links",
+                            "handed_over"}),
+        "game": frozenset({"allocations", "winners", "pruned_edges"}),
+        "allocation": frozenset({"agent", "tokens", "spread", "targets", "alloc"}) | revolt,
+        "winner": frozenset({"node", "winner", "amount"}) | revolt,
+    }
+
+
 def _share_of_first(a: float, b: float) -> float:
     """
     Turn a pair of raw logits into the share belonging to `a`.
@@ -1373,9 +1398,10 @@ class GraphOfLife:
             payload = {
                 "births": decisions,
                 "gifts": [[g, t, a] for g, t, a in paid],
-                # The prune can run here now, so a reproduction frame has to be
-                # able to say what it cut. Absent on a run that settles up after
-                # the game, which is not the same as having cut nothing.
+                # The prune can run here now, so a reproduction frame says what
+                # it cut — an empty list on a run that settles up only after the
+                # game. Whether this phase prunes at all is the run's
+                # prune_after, not this field (decision_keys).
                 "pruned_edges": [[int(a), int(b)] for a, b in dead_edges],
             }
 
