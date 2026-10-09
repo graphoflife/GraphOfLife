@@ -28,7 +28,7 @@ by half the world and the rest by one agent each. The **effective number of
 genotypes**, 2^H with *H* the entropy of the genotypes' shares, weighs the
 common ones more ([Entropy and evenness](entropy-and-evenness.md)). In a
 settled baseline world it is about 0.49 per agent, against 0.63 distinct
-genotypes per agent ([Chapter 19](../chapters/19-how-even-is-a-world.md)).
+genotypes per agent ([Chapter 25](../chapters/25-how-even-is-a-world.md)).
 
 ## A caution about names
 
@@ -36,7 +36,7 @@ A genotype number changes whenever a brain is offered a change and takes it
 ([How a brain changes](mutation.md)). With `mutation_sparsity` = 0 the change
 changes nothing, yet the number still changes. Counting genotypes counts
 names; whether different names are different brains has to be checked
-separately ([Chapter 31](../chapters/31-do-the-brains-matter.md)).
+separately ([Chapter 37](../chapters/37-do-the-brains-matter.md)).
 
 <!-- turns -->
 [Contents](../README.md)

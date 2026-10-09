@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Part III, the first half: Chapters 19 to 23 — entropy, gains and losses, the
+Part III, the first half: Chapters 25 to 29 — entropy, gains and losses, the
 flow of tokens, how agents have children, and power laws.
 
 Most of what these chapters show is read from the statistics every run
@@ -81,7 +81,7 @@ def settled_rows(run_id: str, phase: int = 2) -> List[Dict[str, Any]]:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 19 · How even is a world?
+# Chapter 25 · How even is a world?
 # ---------------------------------------------------------------------------
 
 @chapter
@@ -176,7 +176,7 @@ def entropy(ch: F.Chapter) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 20 · Gains and losses
+# Chapter 26 · Gains and losses
 # ---------------------------------------------------------------------------
 
 @chapter
@@ -318,7 +318,7 @@ def gains(ch: F.Chapter) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 21 · Where the tokens flow
+# Chapter 27 · Where the tokens flow
 # ---------------------------------------------------------------------------
 
 def even_split(run_id: str, iterations) -> Tuple[np.ndarray, np.ndarray]:
@@ -409,34 +409,47 @@ def flow(ch: F.Chapter) -> None:
     ag = pooled("agents")
     degree = ag[:, AG["degree"]]
     labels = [c[2] for c in DEGREE_CLASSES]
-    staked_share, home_share, even = [], [], []
+    from GraphOfLifeSimple import _apportion
+    staked_share, home_share, even, rounded = [], [], [], []
     for m in in_class(degree, DEGREE_CLASSES):
         ok = m & (ag[:, AG["candidates"]] > 0)
         staked_share.append(float(np.mean(ag[ok, AG["staked"]] / ag[ok, AG["candidates"]])))
         home_share.append(float(np.nanmean(ag[ok, AG["home"]])))
         even.append(float(np.mean(1 / (degree[ok] + 1))))
+        # The same even split, in whole tokens as the rules deal them: the leftover tokens go
+        # to the largest remainders, and in an even split every remainder ties, so home is first.
+        held = ok & (ag[:, AG["tokens"]] >= 1)
+        rounded.append(float(np.mean([_apportion(np.ones(int(c)), int(t))[0] / int(t) for t, c in
+                                      zip(ag[held, AG["tokens"]], ag[held, AG["candidates"]])])))
     k = np.arange(len(labels))
     ch.figure(
         "breadth", title="How widely agents stake",
         x={"label": "connections of the agent", "categories": labels}, y={"label": "share", "min": 0, "max": 1},
         series=[bars(labels, staked_share, BLUE, "share of its candidates it staked on", (-0.38, 0)),
                 bars(labels, home_share, YELLOW, "share of its tokens it staked at home", (0, 0.38)),
-                {"label": "1 / (connections + 1): its home share if it split evenly", "x": (k + 0.19).tolist(),
-                 "y": even, "points": True, "size": 9, "colour": "#eef4fa"}],
+                {"label": "1 / (connections + 1): its home share if it split evenly", "x": (k + 0.11).tolist(),
+                 "y": even, "points": True, "size": 9, "colour": "#eef4fa"},
+                {"label": "the same, in whole tokens as the rules deal them", "x": (k + 0.27).tolist(),
+                 "y": rounded, "points": True, "size": 9, "colour": RED}],
         caption="Agents at the start of a game, sorted by their number of connections. Blue: the share of "
                 "their candidates (themselves and their neighbours) on which they staked at least one token. "
                 "Yellow: the share of their tokens they staked on their own node. White dots: the home share "
                 "an agent would have if it split its tokens evenly over all its candidates, 1/(d + 1), "
-                "averaged over the class. From the games of every 100th iteration from 500 on, in the 26 "
-                "worlds that lived to the end.",
+                "averaged over the class. Red dots: the same even split dealt out in whole tokens by the "
+                "rules' own rounding ([Splitting tokens into whole numbers](../notes/largest-remainder.md)), "
+                "which gives the tokens left over to the largest remainders, and, when all remainders tie, "
+                "to the agent's own node first. From the games of every 100th iteration from 500 on, in the "
+                "26 worlds that lived to the end.",
         recipe=recipe(SURVIVORS, SAMPLE,
                       ["For every 100th iteration t from 500 on, take each agent's degree d in frame `2·t`.",
                        "In frame `2·t + 1`, read its entry of `decisions.allocations`: the number of `targets` "
                        "(its candidates), how many of them got `alloc` > 0, and `alloc[0]` / `tokens` (its "
                        "home share; its first target is itself).",
-                       "Average by class of d; the white dots are the mean of 1/(d + 1) in each class."]))
-    ch.number("breadth", {lab: {"staked": a, "home": b, "even": c} for lab, a, b, c in
-                          zip(labels, staked_share, home_share, even)})
+                       "Average by class of d; the white dots are the mean of 1/(d + 1) in each class.",
+                       "Red dots: for every agent, `GraphOfLifeSimple._apportion` of equal scores over its "
+                       "candidates and its tokens; the share that lands on its own node, averaged by class."]))
+    ch.number("breadth", {lab: {"staked": a, "home": b, "even": c, "rounded": d} for lab, a, b, c, d in
+                          zip(labels, staked_share, home_share, even, rounded)})
 
     predicted, real = [], []
     for s in alive:
@@ -529,7 +542,7 @@ def flow(ch: F.Chapter) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 22 · How agents have children
+# Chapter 28 · How agents have children
 # ---------------------------------------------------------------------------
 
 @chapter
@@ -651,7 +664,7 @@ def children(ch: F.Chapter) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 23 · Power laws, real and apparent
+# Chapter 29 · Power laws, real and apparent
 # ---------------------------------------------------------------------------
 
 def ccdf(values: Sequence[float]) -> Tuple[np.ndarray, np.ndarray]:

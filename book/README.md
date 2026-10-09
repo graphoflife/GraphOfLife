@@ -50,54 +50,60 @@ everything can be checked with it.
 - [Chapter 15 · How the game is played](chapters/15-how-the-game-is-played.md)
 - [Chapter 16 · What shape does the network take?](chapters/16-what-shape-does-the-network-take.md)
 - [Chapter 17 · Genotypes and lineages](chapters/17-genotypes-and-lineages.md)
-- [Chapter 18 · Meta I · What the baseline world is](chapters/18-meta-1.md)
+- [Chapter 18 · What the brains are like](chapters/18-what-the-brains-are-like.md)
+- [Chapter 19 · What agents say to each other](chapters/19-what-agents-say-to-each-other.md)
+- [Chapter 20 · Do the rich stay rich?](chapters/20-do-the-rich-stay-rich.md)
+- [Chapter 21 · How the network grows](chapters/21-how-the-network-grows.md)
+- [Chapter 22 · Like next to like](chapters/22-like-next-to-like.md)
+- [Chapter 23 · How many dimensions does a world have?](chapters/23-how-many-dimensions-does-a-world-have.md)
+- [Chapter 24 · Meta I · What the baseline world is](chapters/24-meta-1.md)
 
 **Part III · The baseline world, measured every way**
 
-- [Chapter 19 · How even is a world?](chapters/19-how-even-is-a-world.md)
-- [Chapter 20 · Gains and losses](chapters/20-gains-and-losses.md)
-- [Chapter 21 · Where the tokens flow](chapters/21-where-the-tokens-flow.md)
-- [Chapter 22 · How agents have children](chapters/22-how-agents-have-children.md)
-- [Chapter 23 · Power laws, real and apparent](chapters/23-power-laws-real-and-apparent.md)
-- [Chapter 24 · How properties scale together](chapters/24-how-properties-scale-together.md)
-- [Chapter 25 · The geometry of a world](chapters/25-the-geometry-of-a-world.md)
-- [Chapter 26 · How a world breaks](chapters/26-how-a-world-breaks.md)
-- [Chapter 27 · One world, many colours](chapters/27-one-world-many-colours.md)
-- [Chapter 28 · Do agents cooperate?](chapters/28-do-agents-cooperate.md)
-- [Chapter 29 · Questioning the mechanics](chapters/29-questioning-the-mechanics.md)
-- [Chapter 30 · Meta II · What the measurements say about open-ended evolution](chapters/30-meta-2.md)
+- [Chapter 25 · How even is a world?](chapters/25-how-even-is-a-world.md)
+- [Chapter 26 · Gains and losses](chapters/26-gains-and-losses.md)
+- [Chapter 27 · Where the tokens flow](chapters/27-where-the-tokens-flow.md)
+- [Chapter 28 · How agents have children](chapters/28-how-agents-have-children.md)
+- [Chapter 29 · Power laws, real and apparent](chapters/29-power-laws-real-and-apparent.md)
+- [Chapter 30 · How properties scale together](chapters/30-how-properties-scale-together.md)
+- [Chapter 31 · The geometry of a world](chapters/31-the-geometry-of-a-world.md)
+- [Chapter 32 · How a world breaks](chapters/32-how-a-world-breaks.md)
+- [Chapter 33 · One world, many colours](chapters/33-one-world-many-colours.md)
+- [Chapter 34 · Do agents cooperate?](chapters/34-do-agents-cooperate.md)
+- [Chapter 35 · Questioning the mechanics](chapters/35-questioning-the-mechanics.md)
+- [Chapter 36 · Meta II · What the measurements say about open-ended evolution](chapters/36-meta-2.md)
 
 **Part IV · One change at a time**
 
-- [Chapter 31 · Do the brains matter?](chapters/31-do-the-brains-matter.md)
-- [Chapter 32 · How does a world's size follow its tokens?](chapters/32-how-does-a-worlds-size-follow-its-tokens.md)
-- [Chapter 33 · How fast should brains change?](chapters/33-how-fast-should-brains-change.md)
-- Chapter 34 · Brains replaced by their average — *not written yet*
-- Chapter 35 · What keeps wealth spread? — *not written yet*
-- Chapter 36 · Meta III — *not written yet*
-- Chapter 37 · How big should a brain be? — *not written yet*
-- Chapter 38 · Does size change the dynamics? — *not written yet*
+- [Chapter 37 · Do the brains matter?](chapters/37-do-the-brains-matter.md)
+- [Chapter 38 · How does a world's size follow its tokens?](chapters/38-how-does-a-worlds-size-follow-its-tokens.md)
+- [Chapter 39 · How fast should brains change?](chapters/39-how-fast-should-brains-change.md)
+- Chapter 40 · Brains replaced by their average — *not written yet*
+- Chapter 41 · What keeps wealth spread? — *not written yet*
+- Chapter 42 · Meta III — *not written yet*
+- Chapter 43 · How big should a brain be? — *not written yet*
+- Chapter 44 · Does size change the dynamics? — *not written yet*
 
 **Part V · Towards open-ended evolution**
 
-- Chapter 39 · Mutation at replication, and nowhere else — *not written yet*
-- Chapter 40 · Can a brain hold its place? — *not written yet*
-- Chapter 41 · Kin that know each other — *not written yet*
-- Chapter 42 · When cooperation produces — *not written yet*
-- Chapter 43 · An open world — *not written yet*
-- Chapter 44 · Meta IV — *not written yet*
+- Chapter 45 · Mutation at replication, and nowhere else — *not written yet*
+- Chapter 46 · Can a brain hold its place? — *not written yet*
+- Chapter 47 · Kin that know each other — *not written yet*
+- Chapter 48 · When cooperation produces — *not written yet*
+- Chapter 49 · An open world — *not written yet*
+- Chapter 50 · Meta IV — *not written yet*
 
 **Part VI · Towards a physics: space, scale and locality**
 
-- Chapter 45 · Worlds of 100,000 tokens — *not written yet*
-- Chapter 46 · How many dimensions does a world have? — *not written yet*
-- Chapter 47 · Which properties have no scale? — *not written yet*
-- Chapter 48 · Local rules only — *not written yet*
-- Chapter 49 · How far does a difference travel? — *not written yet*
-- Chapter 50 · A source and a sink — *not written yet*
-- Chapter 51 · Particles — *not written yet*
-- Chapter 52 · One agent in a sea of average agents — *not written yet*
-- Chapter 53 · Meta V — *not written yet*
+- [Chapter 51 · Worlds of 100,000 tokens](chapters/51-worlds-of-100000-tokens.md)
+- Chapter 52 · Dimensions at scale — *not written yet*
+- Chapter 53 · Which properties have no scale? — *not written yet*
+- Chapter 54 · Local rules only — *not written yet*
+- Chapter 55 · How far does a difference travel? — *not written yet*
+- Chapter 56 · A source and a sink — *not written yet*
+- Chapter 57 · Particles — *not written yet*
+- Chapter 58 · One agent in a sea of average agents — *not written yet*
+- Chapter 59 · Meta V — *not written yet*
 
 **Notes · the rules**
 
@@ -109,6 +115,7 @@ everything can be checked with it.
 - [Splitting tokens into whole numbers](notes/largest-remainder.md)
 - [What a brain sees](notes/brain-inputs.md)
 - [What a brain says](notes/brain-outputs.md)
+- [How a signal fades through layers](notes/vanishing-signal.md)
 - [Messages](notes/messages.md)
 - [How a coalition takes a node](notes/revolution.md)
 - [How a brain changes](notes/mutation.md)
@@ -121,6 +128,7 @@ everything can be checked with it.
 - [Births and the four ways to die](notes/births-and-deaths.md)
 - [Age and lifetime](notes/age-and-lifetime.md)
 - [Degree](notes/degree.md)
+- [Preferential attachment and its kernel](notes/preferential-attachment.md)
 - [Clustering](notes/clustering.md)
 - [Path length](notes/path-length.md)
 - [Core, trees and leaves](notes/core-trees-leaves.md)
@@ -143,9 +151,11 @@ everything can be checked with it.
 - [Radius and diameter](notes/radius-and-diameter.md)
 - [The spectral gap](notes/spectral-gap.md)
 - [Dimension and curvature from ball growth](notes/ball-dimension-and-curvature.md)
+- [The spectral dimension](notes/spectral-dimension.md)
 - [Box dimension](notes/box-dimension.md)
 - [Scaling relations between agents' properties](notes/scaling-relations.md)
 - [Assortativity](notes/assortativity.md)
+- [How alike at a distance](notes/correlation-function.md)
 - [What the viewer can colour by](notes/viewer-colours.md)
 
 **Notes · statistics**
@@ -156,7 +166,9 @@ everything can be checked with it.
 - [Spread between worlds](notes/spread-between-worlds.md)
 - [Correlation](notes/correlation.md)
 - [Autocorrelation: how long a world remembers](notes/autocorrelation.md)
+- [Mobility](notes/mobility.md)
 - [Between worlds and within them](notes/between-and-within.md)
+- [How many directions a cloud of points uses](notes/participation-ratio.md)
 - [Survival curves (Kaplan–Meier)](notes/kaplan-meier.md)
 - [The bootstrap](notes/bootstrap.md)
 - [Permutation tests](notes/permutation-test.md)

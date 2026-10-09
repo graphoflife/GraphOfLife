@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Part IV: Chapter 31 — do the brains matter?
+Part IV: Chapter 37 — do the brains matter?
 """
 from __future__ import annotations
 
@@ -14,7 +14,7 @@ from book_figures import (STATS_FILE, chapter, describe, line, lived, mean_over,
 from book_chapters.common import BLUE, GREEN, GREY, ORANGE, RED, VIOLET, YELLOW
 
 # ---------------------------------------------------------------------------
-# Chapter 31 · Do the brains matter at all?
+# Chapter 37 · Do the brains matter at all?
 # ---------------------------------------------------------------------------
 
 E07_RUNS = ("The 90 runs of Experiment 7 — B1 at 10,000 tokens, seeds 1 to 30, 3,000 "

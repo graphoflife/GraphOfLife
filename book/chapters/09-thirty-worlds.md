@@ -2,8 +2,8 @@
 
 Part II looks at one kind of world, the baseline B1, from every side. It does
 so with thirty worlds that differ only in their seed. This chapter introduces
-them: every chapter up to [Chapter 18](18-meta-1.md) reads these same thirty
-runs, and [Chapter 31](31-do-the-brains-matter.md) compares them with worlds
+them: every chapter up to [Chapter 24](24-meta-1.md) reads these same thirty
+runs, and [Chapter 37](37-do-the-brains-matter.md) compares them with worlds
 made under other rules.
 
 ## The runs
@@ -113,7 +113,7 @@ which replays a run frame by frame.
   network take?
 - [Chapter 17](17-genotypes-and-lineages.md) — How long do genotypes last, and
   do lineages take over?
-- [Chapter 18](18-meta-1.md) — What the baseline world is, in sum.
+- [Chapter 24](24-meta-1.md) — What the baseline world is, in sum.
 
 Five of these chapters (9, 12, 13, 15 and 16) were planned as experiments,
 with a thesis written down before the runs; they quote it and say whether it

@@ -43,7 +43,7 @@ length), then once more from the furthest agent any of them reached — the
   been tried.
 
 In a settled baseline world the diameter is about 29 steps, the radius about
-17 and the mean path length about 10 ([Chapter 25](../chapters/25-the-geometry-of-a-world.md)).
+17 and the mean path length about 10 ([Chapter 31](../chapters/31-the-geometry-of-a-world.md)).
 
 <!-- turns -->
 [Contents](../README.md)

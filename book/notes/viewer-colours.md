@@ -3,7 +3,7 @@
 The viewer draws every agent as a dot and every connection as a line, and can
 colour and size both by a measured quantity. This note says what each
 quantity is, and how a number becomes a colour — so that a picture can be
-read as precisely as a chart. [Chapter 27](../chapters/27-one-world-many-colours.md)
+read as precisely as a chart. [Chapter 33](../chapters/33-one-world-many-colours.md)
 shows one world coloured six ways.
 
 ## From a number to a colour
@@ -51,7 +51,7 @@ rainbow; *grayscale* is black to white.
 A word on **brain id**: a genotype is a number, and the colour map turns
 numbers that are close into colours that are close. Close genotype numbers
 were *born* at about the same time — they need not be related. To see kinship,
-colour by family instead, as Chapter 27 does.
+colour by family instead, as Chapter 33 does.
 
 ## Connections
 

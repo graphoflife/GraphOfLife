@@ -19,7 +19,7 @@ will eventually have to face:
   three classes: no adaptive activity; unbounded new activity but bounded
   diversity; and both unbounded, which is what the fossil record shows. The
   lasting lesson is the **neutral shadow**: activity counts only above what an
-  identical system without adaptation produces. [Chapter 31](31-do-the-brains-matter.md) builds a shadow of
+  identical system without adaptation produces. [Chapter 37](37-do-the-brains-matter.md) builds a shadow of
   this kind for lineages, and finds it hard.
 - **MODES** (Dolson, Vostinar, Wiser and Ofria 2019) splits open-endedness
   into four measurable kinds of growth — change, novelty, complexity and
@@ -116,7 +116,7 @@ fought over by neighbours is such a setting.
   living merge, two by two, until all meet in one **common ancestor**. In a
   population of fixed size *N* replaced by chance alone, that ancestor lived
   a number of generations back proportional to *N*. [Chapter 17](17-genotypes-and-lineages.md) finds the
-  common ancestor of each world's living agents, and [Chapter 31](31-do-the-brains-matter.md) compares its
+  common ancestor of each world's living agents, and [Chapter 37](37-do-the-brains-matter.md) compares its
   movements with those of a world in which no brain is better than another.
 - **Muller plots** (after Muller 1932) draw the share of a population
   descending from each of several ancestors, stacked over time, so that a

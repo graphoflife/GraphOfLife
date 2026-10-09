@@ -1,0 +1,328 @@
+{
+ "chapter": "rich",
+ "numbers": {
+  "memory": {
+   "lags": [
+    1,
+    2,
+    5,
+    10,
+    20,
+    50,
+    100,
+    200
+   ],
+   "rho": [
+    {
+     "n": 26,
+     "mean": 0.8749392001615456,
+     "median": 0.8771411450847946,
+     "sd": 0.022685384444181986,
+     "min": 0.8202296312267631,
+     "max": 0.9163715587826632,
+     "q25": 0.863553714300248,
+     "q75": 0.8898409211396267
+    },
+    {
+     "n": 26,
+     "mean": 0.8890479199238277,
+     "median": 0.8916245572401836,
+     "sd": 0.01769802572392198,
+     "min": 0.8560848665594238,
+     "max": 0.9148436792630253,
+     "q25": 0.8804770308861212,
+     "q75": 0.9032062493242528
+    },
+    {
+     "n": 26,
+     "mean": 0.8255518004571143,
+     "median": 0.8259216282457297,
+     "sd": 0.02425544692135515,
+     "min": 0.7731152258511627,
+     "max": 0.8733796780196066,
+     "q25": 0.8134377859742211,
+     "q75": 0.8390183361388255
+    },
+    {
+     "n": 26,
+     "mean": 0.7759905879832047,
+     "median": 0.777981473686521,
+     "sd": 0.03071348117164241,
+     "min": 0.7025452413031917,
+     "max": 0.8332860246685135,
+     "q25": 0.7593382549319204,
+     "q75": 0.7927918428348458
+    },
+    {
+     "n": 26,
+     "mean": 0.6961660967579415,
+     "median": 0.6926473559135057,
+     "sd": 0.036558754890628105,
+     "min": 0.6217146077562031,
+     "max": 0.7638015469854362,
+     "q25": 0.6803838147111584,
+     "q75": 0.7222264985300091
+    },
+    {
+     "n": 26,
+     "mean": 0.5652198728731841,
+     "median": 0.5667314207212384,
+     "sd": 0.03662424998932634,
+     "min": 0.48966753334181057,
+     "max": 0.634884097189393,
+     "q25": 0.5474617839448758,
+     "q75": 0.5879235797267816
+    },
+    {
+     "n": 26,
+     "mean": 0.45050394381239384,
+     "median": 0.44764500877442204,
+     "sd": 0.03708636952831393,
+     "min": 0.38651375674945837,
+     "max": 0.5542875283813887,
+     "q25": 0.4212423902549821,
+     "q75": 0.46808714305030424
+    },
+    {
+     "n": 26,
+     "mean": 0.33321218236914346,
+     "median": 0.32353025322346823,
+     "sd": 0.046280563448618105,
+     "min": 0.24318807446522084,
+     "max": 0.44370130220297493,
+     "q25": 0.30260103286732304,
+     "q75": 0.3730567714560762
+    }
+   ],
+   "alive": [
+    {
+     "n": 26,
+     "mean": 0.9792097802236531,
+     "median": 0.9811194502485793,
+     "sd": 0.00660476715525058,
+     "min": 0.9620994130627452,
+     "max": 0.9879842279615297,
+     "q25": 0.9773044254739692,
+     "q75": 0.9834397696848435
+    },
+    {
+     "n": 26,
+     "mean": 0.9629410814503351,
+     "median": 0.9659568746770125,
+     "sd": 0.010211559349852344,
+     "min": 0.9340417482542823,
+     "max": 0.977741352597623,
+     "q25": 0.9570431713453278,
+     "q75": 0.9697170975518067
+    },
+    {
+     "n": 26,
+     "mean": 0.9238522703339384,
+     "median": 0.9267883531889414,
+     "sd": 0.01309339378410103,
+     "min": 0.8915621313337844,
+     "max": 0.9499689236172008,
+     "q25": 0.9151483340172939,
+     "q75": 0.9326565854265934
+    },
+    {
+     "n": 26,
+     "mean": 0.8711441145160506,
+     "median": 0.8735271659423548,
+     "sd": 0.020061253106775725,
+     "min": 0.8060484296943605,
+     "max": 0.9012350634294277,
+     "q25": 0.8603526471571601,
+     "q75": 0.8849260992043813
+    },
+    {
+     "n": 26,
+     "mean": 0.7780708152169018,
+     "median": 0.7804973406242548,
+     "sd": 0.0370657417920823,
+     "min": 0.6787556909566758,
+     "max": 0.8421502978983849,
+     "q25": 0.7561938710843216,
+     "q75": 0.7980137170765473
+    },
+    {
+     "n": 26,
+     "mean": 0.5773056327310793,
+     "median": 0.5802737036393442,
+     "sd": 0.05016515745411771,
+     "min": 0.4568982230790386,
+     "max": 0.6888881855990299,
+     "q25": 0.5512763200067223,
+     "q75": 0.5960207093243675
+    },
+    {
+     "n": 26,
+     "mean": 0.36808423378272614,
+     "median": 0.3638485892462495,
+     "sd": 0.05417823180113358,
+     "min": 0.25444918240921943,
+     "max": 0.49703403483820446,
+     "q25": 0.34696918874293586,
+     "q75": 0.38533933208506926
+    },
+    {
+     "n": 26,
+     "mean": 0.16069846743644228,
+     "median": 0.15511624237076743,
+     "sd": 0.04645406277650477,
+     "min": 0.09183216813721141,
+     "max": 0.30176338642109873,
+     "q25": 0.13816934685365453,
+     "q75": 0.1716062217825239
+    }
+   ]
+  },
+  "moves": {
+   "shares": [
+    [
+     0.3957299434728378,
+     0.22038295162017993,
+     0.09172394575515512,
+     0.02246490273612696,
+     0.008512247551816565,
+     0.26118600886388366
+    ],
+    [
+     0.17247741111125597,
+     0.3826942383665593,
+     0.23536774580492067,
+     0.06509381070967574,
+     0.013488141648304367,
+     0.13087865235928395
+    ],
+    [
+     0.0891974444306955,
+     0.1683067725191635,
+     0.3944199495919816,
+     0.22074674203989658,
+     0.031169609305294145,
+     0.09615948211296867
+    ],
+    [
+     0.03710182412197114,
+     0.06504900626191125,
+     0.157507487067792,
+     0.4934726381704329,
+     0.16261911244214539,
+     0.08424993193574734
+    ],
+    [
+     0.02025587782168933,
+     0.018956393596356085,
+     0.03200482282805278,
+     0.126847076160493,
+     0.7152588920892223,
+     0.08667693750418648
+    ]
+   ],
+   "shorrocks": 0.5664135922528032
+  },
+  "richest": {
+   "lags": [
+    1,
+    2,
+    5,
+    10,
+    20,
+    50,
+    100,
+    200
+   ],
+   "dead": [
+    0.03638175928233242,
+    0.07076999750809868,
+    0.1411662098180912,
+    0.21106404186394218,
+    0.30637926738101173,
+    0.4781958634438076,
+    0.6383005232992773,
+    0.8205831049090456
+   ],
+   "top10": [
+    0.7212808372788437,
+    0.76052828307999,
+    0.637552952903065,
+    0.5794916521305756,
+    0.48616994767007227,
+    0.3482432095689011,
+    0.23398953401445302,
+    0.10939446797906803
+   ],
+   "ratio": [
+    0.9624355304683173,
+    1.0,
+    0.9327303561334087,
+    0.8894423542861043,
+    0.7455436107071263,
+    0.4862012987012987,
+    0.36014411607186325,
+    0.26418895509977824
+   ],
+   "count": 8026
+  },
+  "fragile": {
+   "classes": [
+    "1",
+    "2",
+    "3\u20139",
+    "10\u201349",
+    "50+"
+   ],
+   "richest": [
+    0.5334261838440112,
+    0.4303448275862069,
+    0.21534063839923773,
+    0.04823269513991164,
+    0.03142857142857143
+   ],
+   "all": [
+    0.16078647233918722,
+    0.14120076592523323,
+    0.10395228776732117,
+    0.049972346032469014,
+    0.03518821603927987
+   ],
+   "richest_n": [
+    1436.0,
+    725.0,
+    2099.0,
+    2716.0,
+    1050.0
+   ],
+   "all_n": [
+    285223.0,
+    179652.0,
+    257041.0,
+    30737.0,
+    1222.0
+   ]
+  }
+ },
+ "figures": {
+  "memory": {
+   "title": "How long wealth lasts",
+   "caption": "Left: the agents alive after the game of an iteration t, and the same agents k games later, if they are still alive: Spearman's rank correlation of their tokens then and later ([Correlation](../notes/correlation.md)) \u2014 1 if every agent kept its place in the order of wealth, 0 if the later order has nothing to do with the earlier. Right: the share of the agents still alive k games later. For each world, the mean over 23 moments t = 500, 600, \u2026, 2,700 (leaving out, for the correlation, the few moments after which fewer than three of the agents were alive); the line is the median of the 26 worlds, the darker band the middle half of them and the paler band nine in ten.",
+   "recipe": "**Runs.** The 26 baseline worlds that lived to the end (`B1-10000-s001` \u2026 `-s030`, Chapter 9; `python3 gol_lab.py run E02`).\n\n**Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2\u00b7t` is iteration *t* after reproduction and frame `2\u00b7t + 1` after the game.\n\n1. For t = 500, 600, \u2026, 2,700 and k = 1, 2, 5, 10, 20, 50, 100, 200: read frames 2\u00b7t + 1 and 2\u00b7(t + k) + 1; the agents (`ids`) in both, and their `tokens` in each.\n2. Spearman's \u03c1: the correlation of the ranks of the two token counts (ties share their mean rank); alive: agents in both over agents in the first.\n3. Mean over t for each world; median and quantiles over worlds.\n\n**To make it again:** `python3 book_figures.py rich`."
+  },
+  "moves": {
+   "title": "From one fifth to another, ten games later",
+   "caption": "All agents alive after the game of t = 500, 600, \u2026, 2,700 in the 26 worlds that lived to the end, sorted into fifths of the world by their tokens (ranks, ties shared), and where each one was ten games later: in which fifth, or dead. Each row adds up to 1; a cell's colour is the share of its row.",
+   "recipe": "**Runs.** The 26 baseline worlds that lived to the end (`B1-10000-s001` \u2026 `-s030`, Chapter 9; `python3 gol_lab.py run E02`).\n\n**Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2\u00b7t` is iteration *t* after reproduction and frame `2\u00b7t + 1` after the game.\n\n1. As in the figure above, with k = 10: each agent's fifth is \u2308rank / n \u00b7 5\u2309 among the n agents of its frame.\n2. Count the agents in every pair of fifths, and those not in the later frame as dead; divide each row by its total.\n\n**To make it again:** `python3 book_figures.py rich`."
+  },
+  "richest": {
+   "title": "The fate of the richest",
+   "caption": "The agents in the richest hundredth of their world after the game of t = 500, 600, \u2026, 2,700 (8,026 in all, pooled over the 26 worlds that lived to the end), followed k games on. Left: the share of them still in the richest tenth of their world, and the share dead. Right: for those alive, their tokens then divided by their tokens at t \u2014 the median in each world, and the median of the worlds.",
+   "recipe": "**Runs.** The 26 baseline worlds that lived to the end (`B1-10000-s001` \u2026 `-s030`, Chapter 9; `python3 gol_lab.py run E02`).\n\n**Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2\u00b7t` is iteration *t* after reproduction and frame `2\u00b7t + 1` after the game.\n\n1. As in the first figure: the richest hundredth are the agents with tokens at or above the 99th percentile of their frame; the richest tenth later, at or above the 90th.\n\n**To make it again:** `python3 book_figures.py rich`."
+  },
+  "fragile": {
+   "title": "Which of the richest die",
+   "caption": "The agents alive after the game of t = 500, 600, \u2026, 2,700 in the 26 worlds that lived to the end, in classes of their connections at t: the share no longer alive ten games later, for the richest hundredth of their world (red) and for every agent (grey). Pooled over moments and worlds: 1,436 of the richest and 285,223 in all with 1, 725 of the richest and 179,652 in all with 2, 2,099 of the richest and 257,041 in all with 3\u20139, 2,716 of the richest and 30,737 in all with 10\u201349, 1,050 of the richest and 1,222 in all with 50+ connections.",
+   "recipe": "**Runs.** The 26 baseline worlds that lived to the end (`B1-10000-s001` \u2026 `-s030`, Chapter 9; `python3 gol_lab.py run E02`).\n\n**Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2\u00b7t` is iteration *t* after reproduction and frame `2\u00b7t + 1` after the game.\n\n1. For t = 500, 600, \u2026, 2,700: read frames 2\u00b7t + 1 and 2\u00b7(t + 10) + 1; each agent's connections at t from `edges`; the richest hundredth as above.\n2. Per class of connections, the agents of the first frame missing from the second, over all agents of the class (`book_chapters.dynamics.fragile`).\n\n**To make it again:** `python3 book_figures.py rich`."
+  }
+ }
+}

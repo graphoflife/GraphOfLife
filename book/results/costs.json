@@ -3,13 +3,14 @@
   "secondsPerAgentIteration": 0.0005688022426912186,
   "agentsPerToken": 0.1383,
   "bytesPerAgentIteration": 72.27011494252874,
-  "peakBytesPerWeightByte": 68.55135774942538,
-  "baseMB": 300.0,
+  "peakBytesPerWeightByte": 5.216073989940237,
+  "baseMB": 1594.7420285743174,
   "measured": {
    "secondsPerAgentIteration": true,
    "agentsPerToken": true,
    "bytesPerAgentIteration": true,
-   "peakBytesPerWeightByte": true
+   "peakBytesPerWeightByte": true,
+   "baseMB": true
   },
   "kinds": {
    "e7db2d953b": {
@@ -38,7 +39,7 @@
    }
   },
   "runs": 144,
-  "fitted": "2026-10-09T06:59:50+0200"
+  "fitted": "2026-10-09T09:59:14+0200"
  },
  "runs": [
   {

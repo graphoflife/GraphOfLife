@@ -538,18 +538,20 @@ def fit_costs() -> Dict[str, Any]:
         biggest = max(r["nodes"] for r in timed)
         top = max((r.get("_peakMB") or 0) for r in timed)
         if top and biggest:
-            peak.append((top - CALIBRATION["baseMB"]) * 2**20 / (biggest * weights * width))
+            peak.append((biggest * weights * width / 2**20, top))
         frames = os.path.join(store.run_dir(meta["id"]), "frames")
         stored = sum(os.path.getsize(os.path.join(frames, n)) for n in os.listdir(frames))
         recorded = (meta.get("iteration") or 0) * (_median([r["nodes"] for r in rows]) or 0)
         if recorded:
             disk.append(stored / recorded)
 
+    slope, base = _memory_line(peak)
     fitted = {
         "secondsPerAgentIteration": seconds / agent_iterations if agent_iterations else None,
         "agentsPerToken": _median(per_token),
         "bytesPerAgentIteration": _median(disk),
-        "peakBytesPerWeightByte": max(peak) if peak else None,
+        "peakBytesPerWeightByte": slope,
+        "baseMB": base,
     }
     costs = {**CALIBRATION, **{k: v for k, v in fitted.items() if v is not None},
              "measured": {k: v is not None for k, v in fitted.items()},
@@ -562,6 +564,27 @@ def fit_costs() -> Dict[str, Any]:
              "runs": runs, "fitted": time.strftime("%Y-%m-%dT%H:%M:%S%z")}
     store.write_json(os.path.join(_made(lab_dir()), "costs.json"), costs, indent=1)
     return costs
+
+
+def _memory_line(points: List[Tuple[float, float]]) -> Tuple[Optional[float], Optional[float]]:
+    """
+    A run's peak memory as a base plus a multiple of its brains' bytes, from
+    (brain MB, peak MB) of the recorded runs: the multiple by least squares, the
+    base then raised until no run lies above the line, so that an estimate
+    bounds a run rather than averaging it. Small runs are nearly all base and
+    big ones nearly all brains; until runs of very different sizes have been
+    measured the two cannot be told apart, and the calibration's multiple stands.
+    """
+    if not points:
+        return None, None
+    xs, ys = [p[0] for p in points], [p[1] for p in points]
+    slope = CALIBRATION["peakBytesPerWeightByte"]
+    if len(points) >= 3 and max(xs) >= 10 * max(min(xs), 1e-9):
+        mx, my = sum(xs) / len(xs), sum(ys) / len(ys)
+        sxx = sum((x - mx) ** 2 for x in xs)
+        if sxx > 0:
+            slope = max(1.0, sum((x - mx) * (y - my) for x, y in zip(xs, ys)) / sxx)
+    return slope, max(y - slope * x for x, y in points)
 
 
 def costs() -> Dict[str, Any]:
@@ -587,7 +610,8 @@ def predict(config: Dict[str, Any], iterations: int,
     return {
         "agents": agents,
         "seconds": iterations * agents * per_agent,
-        "diskBytes": iterations * agents * known["bytesPerAgentIteration"],
+        # The frames, and the checkpoint beside them, which holds every brain.
+        "diskBytes": iterations * agents * known["bytesPerAgentIteration"] + agents * weights * width,
         "peakMB": known["baseMB"] + agents * weights * width
                   * known["peakBytesPerWeightByte"] / 2**20,
     }

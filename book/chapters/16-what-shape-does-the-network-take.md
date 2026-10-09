@@ -245,12 +245,12 @@ world grows only locally, by copying: that gives hubs whose connections grow
 with their connections, a triangle for nearly every connection a hub gains,
 and clustering that falls as one over the number of connections — a
 **hierarchy of stars**, with leaves hanging on hubs
-([Chapter 23](23-power-laws-real-and-apparent.md),
-[Chapter 24](24-how-properties-scale-together.md)). Against a random network
+([Chapter 29](29-power-laws-real-and-apparent.md),
+[Chapter 30](30-how-properties-scale-together.md)). Against a random network
 with exactly the same number of connections at every agent, the world is twice
 as long and thirty times easier to cut in two
-([Chapter 25](25-the-geometry-of-a-world.md)) — and it breaks, when it breaks,
-along its poorest regions ([Chapter 26](26-how-a-world-breaks.md)).
+([Chapter 31](31-the-geometry-of-a-world.md)) — and it breaks, when it breaks,
+along its poorest regions ([Chapter 32](32-how-a-world-breaks.md)).
 
 To make every figure of this chapter: `python3 book_figures.py shape`.
 

@@ -44,7 +44,7 @@ Each is reported with its R² (`tokensVsDegreeR2`, …).
   the spread does this line account for", not as proof of a law.
 - **The fit is over agents, and most agents are small.** Thousands of agents
   with one or two connections dominate the least-squares sum; a handful of
-  hubs barely moves it. [Chapter 24](../chapters/24-how-properties-scale-together.md)
+  hubs barely moves it. [Chapter 30](../chapters/30-how-properties-scale-together.md)
   shows the agents behind each fit.
 
 <!-- turns -->

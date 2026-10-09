@@ -261,7 +261,7 @@ importantly, whole lines take the world over again and again.
   [coalescent](06-the-ideas-this-builds-on.md)). Whether lines take over
   here *faster than chance would make them*, because some brains do better,
   needs a world in which no brain is better than another.
-  [Chapter 31](31-do-the-brains-matter.md) builds one, and finds that how
+  [Chapter 37](37-do-the-brains-matter.md) builds one, and finds that how
   often chance alone sweeps a world depends on how often agents are born and
   die.
 
@@ -270,5 +270,5 @@ To make every figure of this chapter: `python3 book_figures.py lineage`.
 <!-- turns -->
 ---
 
-← [Chapter 16 · What shape does the network take?](16-what-shape-does-the-network-take.md) · [Contents](../README.md) · [Chapter 18 · Meta I · What the baseline world is](18-meta-1.md) →
+← [Chapter 16 · What shape does the network take?](16-what-shape-does-the-network-take.md) · [Contents](../README.md) · [Chapter 18 · What the brains are like](18-what-the-brains-are-like.md) →
 <!-- /turns -->

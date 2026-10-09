@@ -39,7 +39,7 @@ $$
 |---|---|---|---|
 | tokens over agents | τᵢ / *T*, one per agent | `tokenEntropy` | log₂ *n* (*n* agents) |
 | agents over degrees | share of agents with exactly *d* connections, one per *d* that occurs | `degreeEntropy` | log₂ (number of distinct degrees) |
-| agents over genotypes | share of agents carrying genotype *g*, one per genotype | (computed for [Chapter 19](../chapters/19-how-even-is-a-world.md)) | log₂ *n* |
+| agents over genotypes | share of agents carrying genotype *g*, one per genotype | (computed for [Chapter 25](../chapters/25-how-even-is-a-world.md)) | log₂ *n* |
 
 For tokens the question is: *if you pick one token at random, whose is it?*
 
@@ -76,7 +76,7 @@ Both measure how unequally tokens are held, but they weigh differently. The
 [Gini coefficient](gini-coefficient.md) is about differences between agents;
 entropy is about the logarithms of shares, so it is more sensitive to the many
 small holdings and less to the few large ones. Two worlds with the same Gini
-can have different evenness ([Chapter 19](../chapters/19-how-even-is-a-world.md)).
+can have different evenness ([Chapter 25](../chapters/25-how-even-is-a-world.md)).
 
 ## In the code
 

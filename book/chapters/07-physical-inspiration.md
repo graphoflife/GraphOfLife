@@ -70,15 +70,22 @@ within *r* steps grows faster than any power of *r*.
 The baseline worlds measure as about **three-dimensional** by the first two:
 their balls grow as *r*^3 over the first few steps, at every size from a few
 hundred agents to sixty thousand
-([Chapter 25](25-the-geometry-of-a-world.md),
-[Chapter 32](32-how-does-a-worlds-size-follow-its-tokens.md)), and their width
+([Chapter 31](31-the-geometry-of-a-world.md),
+[Chapter 38](38-how-does-a-worlds-size-follow-its-tokens.md)), and their width
 grows as *N*^0.30 — as a body of 3.3 dimensions would. That is a surprise
 worth taking seriously, and also with care: by box covering they measure
 about 1.85; they are full of stars and trees; and a third of their connections
 are **bridges**, some of which hold half a world to the rest
-([Chapter 26](26-how-a-world-breaks.md)). A three-dimensional lattice has no
+([Chapter 32](32-how-a-world-breaks.md)). A three-dimensional lattice has no
 bridges at all: to cut a cube of *N* points in two, you must cut about
 *N*^(2/3) connections — a whole cross-section.
+[Chapter 23](23-how-many-dimensions-does-a-world-have.md) measured the
+dimension with two rulers calibrated on known spaces. By the room within *r*
+steps, worlds of 60,000 agents read 3.3, steady from 3 steps to 14; by how a
+random walker spreads, they read about 2. Random networks with the same
+connections read neither. The worlds are spaces, with room like a
+three-dimensional body, but full of dead ends that slow anything spreading
+through them — a fractal more than a solid.
 
 So the aim can be put precisely. Find rules under which a world grows into a
 network that is three-dimensional by every measure at large scales and **well
@@ -88,7 +95,7 @@ world. The tools are ready — the dimensions above, the cut risk
 *d*-dimensional body shrinks as *N*^(−2/*d*) and for a network with cheap cuts
 is tiny ([The spectral gap](../notes/spectral-gap.md)). One hint is already in:
 bigger worlds have more loops per connection and fewer leaves
-([Chapter 32](32-how-does-a-worlds-size-follow-its-tokens.md)).
+([Chapter 38](38-how-does-a-worlds-size-follow-its-tokens.md)).
 
 ## A speed limit
 
@@ -118,8 +125,8 @@ Three rules reach across the whole world at once.
 1. **The cull.** After every phase only the largest connected piece survives
    ([Chapter 3](03-one-iteration.md)). Whether a region lives depends on the
    connectivity of the entire world, at that instant: action at a distance.
-   [Chapter 26](26-how-a-world-breaks.md) found that most big losses happen
-   this way, and [Chapter 32](32-how-does-a-worlds-size-follow-its-tokens.md)
+   [Chapter 32](32-how-a-world-breaks.md) found that most big losses happen
+   this way, and [Chapter 38](38-how-does-a-worlds-size-follow-its-tokens.md)
    that the regions lost grow with the world.
 2. **The share-out.** The tokens of agents cut off are dealt out to survivors
    chosen at random from the whole world. They are conserved, but they jump:
@@ -138,12 +145,12 @@ agent could draw its random numbers from a stream of its own, fixed by the
 seed, its id and the iteration — "counter-based" generators do exactly this
 (Salmon, Moraes, Dror and Shaw 2011), and keep a run exactly repeatable. The
 first two changes were proposed for quite another reason in
-[Meta II](30-meta-2.md): they stand in the way of open-ended evolution.
+[Meta II](36-meta-2.md): they stand in the way of open-ended evolution.
 Physics and evolution, asked separately, point at the same rules.
 
 ### A word of care about long-range connections
 
-[Meta II](30-meta-2.md) also proposed letting distant agents connect, to renew
+[Meta II](36-meta-2.md) also proposed letting distant agents connect, to renew
 the world's shortcuts. Locality argues for care: a connection between two
 agents that were a hundred steps apart is a message that travelled a hundred
 steps in an instant. Births already respect the speed limit — a child joins
@@ -192,7 +199,7 @@ Graph of Life's agents are such calculators, with one difference: their
 calculator — the brain — is not given by any equation; it evolves. And yet
 the evolved brains have arrived at something an equation would give. They
 spread their stakes almost evenly over themselves and their neighbours
-([Chapter 21](21-where-the-tokens-flow.md)), and an even split is exactly one
+([Chapter 27](27-where-the-tokens-flow.md)), and an even split is exactly one
 step of the **heat equation**:
 
 ![The even split as a step of the heat equation](../diagrams/finite-difference.svg)
@@ -200,9 +207,14 @@ step of the **heat equation**:
 On a network the same holds with the discrete Laplacian — the
 [token curvature](../notes/token-curvature.md): for agents with *d* neighbours
 each, an even split changes an agent's tokens by its curvature divided by
-*d* + 1 ([Chapter 20](20-gains-and-losses.md)). A settled world, in its
+*d* + 1 ([Chapter 26](26-gains-and-losses.md)). A settled world, in its
 tokens, behaves almost like a computer solving the heat equation on its own
-network.
+network — down to a numerical artefact. An explicit step of the heat
+equation that moves more than half of a cell's content to its neighbours
+overshoots, and the solution flips about its resting value every step. A hub
+keeps only 1/(*d* + 1) of its tokens, and [Chapter 20](20-do-the-rich-stay-rich.md)
+found exactly that flip: wealth swings between hubs and leaves with a period
+of two games.
 
 That is also a limitation. The heat equation **forgets**: it smooths every
 difference away, and its world ends uniform — "heat death" in miniature. The
@@ -214,7 +226,10 @@ forth with a characteristic frequency — rather than spread like heat? A
 frequency would show as a peak in a power spectrum
 ([The power spectrum](../notes/power-spectrum.md)); the spectrum of the number
 of agents shows none, only the smooth slope of a random walk
-([Chapter 23](23-power-laws-real-and-apparent.md)). In physics a frequency is
+([Chapter 29](29-power-laws-real-and-apparent.md)). The two-game swing of
+[Chapter 20](20-do-the-rich-stay-rich.md) is no such wave: it is the
+overshoot of a step that is too large, damped in every game, and it carries
+nothing from place to place. In physics a frequency is
 an energy (*E* = *hν*); whether the rate of an exchange could play that part
 here is an open, speculative question.
 
@@ -251,11 +266,15 @@ when very many are taken together.
 Graph of Life's agents are its elementary particles: every one follows the
 same rules and differs only in its state — its tokens, its connections, its
 brain. And its worlds are statistically homogeneous:
-[Chapter 32](32-how-does-a-worlds-size-follow-its-tokens.md) found that
+[Chapter 38](38-how-does-a-worlds-size-follow-its-tokens.md) found that
 inequality, home stakes, births and genotype diversity are the same in worlds
 of three hundred agents and of sixty thousand. Structure, where there is any,
-shows only in collective patterns: families that occupy regions
-([Chapter 27](27-one-world-many-colours.md)), hubs with their stars.
+shows only in collective patterns: families side by side
+([Chapter 33](33-one-world-many-colours.md)), hubs with their stars. And it
+does not reach far. [Chapter 22](22-like-next-to-like.md) measured how alike
+agents are at a distance: tokens, ages, connections and kin are alike only
+within one or two steps, and beyond three every part of a world is like
+every other.
 
 ### No scale at all
 
@@ -270,16 +289,20 @@ have argued that complex structure and computation live best near such a
 point, "at the edge of chaos" (Langton 1990).
 
 What the book has found so far is mixed
-([Chapter 23](23-power-laws-real-and-apparent.md)): the richest agents' tokens
+([Chapter 29](29-power-laws-real-and-apparent.md)): the richest agents' tokens
 follow a clean power law; the best-connected agents' connections plausibly
 do; deaths do not come in avalanches of every size; and the wander of a world
 has the spectrum of a random walk, not the 1/*f* of a critical system. But
-[Chapter 32](32-how-does-a-worlds-size-follow-its-tokens.md) found one
+[Chapter 38](38-how-does-a-worlds-size-follow-its-tokens.md) found one
 property with no scale: the share of a world that one game can cut off has
 the same distribution in a world of five hundred agents and one of sixty
 thousand. Finding such scaleless properties systematically — by measuring the
 same thing at many sizes and asking whether, rescaled, it is the same — is now
-an aim of the book.
+an aim of the book. Two measurements since sharpen the picture. What agents
+hold is correlated over one or two steps only, a short correlation length,
+far from critical ([Chapter 22](22-like-next-to-like.md)). But the space
+itself has no scale: within *r* steps lie about *r*^3.3 agents, the same
+law from 3 steps to 14 ([Chapter 23](23-how-many-dimensions-does-a-world-have.md)).
 
 ## Why life is possible: a flow of low entropy
 
@@ -300,7 +323,7 @@ Graph of Life has the conservation, and not the gradient. A token is a token,
 wherever it came from: there are no fresh tokens to feed on and no spent
 tokens to shed. And the even split drives a world towards its resting state,
 in which every agent holds tokens in proportion to its connections plus one
-([Chapter 21](21-where-the-tokens-flow.md)) — towards the miniature heat death
+([Chapter 27](27-where-the-tokens-flow.md)) — towards the miniature heat death
 above. Two ways a gradient could be built in:
 
 - **Tokens with a quality.** Fresh tokens that become spent when used, and
@@ -330,7 +353,7 @@ humble as an electron, emerging here, would already be a win for both aims.
 What to look for:
 
 - **Bound tokens**: tokens that keep going round a closed loop of agents
-  instead of spreading. [Chapter 21](21-where-the-tokens-flow.md) looked, and
+  instead of spreading. [Chapter 27](27-where-the-tokens-flow.md) looked, and
   found almost no circulation once exchanges were cancelled.
 - **Groups that outlast their members**: a set of agents whose membership
   turns over while the set persists.
@@ -380,7 +403,7 @@ is not fixed but shaped by what is in it. Wheeler put it in one line:
 (Wheeler and Ford 1998). In Graph of Life, the network tells the
 tokens where they can flow — only along connections — and the tokens tell the
 network which connections remain: a connection that no token crosses is cut
-([Chapter 26](26-how-a-world-breaks.md)).
+([Chapter 32](32-how-a-world-breaks.md)).
 
 ## Where the analogy stops
 
@@ -420,7 +443,8 @@ part of the book (see [the contents](../README.md)):
   evolution asked for independently.
 - **The baseline already looks three-dimensional in some ways** — in how its
   balls grow and how its width grows — and in others like a tree held
-  together by bridges.
+  together by bridges: a walker reads only two dimensions in it
+  ([Chapter 23](23-how-many-dimensions-does-a-world-have.md)).
 - **The evolved brains compute, in effect, the heat equation.** A world that
   only diffuses ends uniform; a world in which something lasting forms will
   need more — a flow, a gradient, something that holds tokens together.

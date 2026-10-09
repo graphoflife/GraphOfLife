@@ -33,7 +33,7 @@ connection.
 The cleanup keeps only the largest piece of the network
 ([Chapter 3](../chapters/03-one-iteration.md)). A bridge with a tenth of the
 world behind it is a tenth of the world that dies the moment no token crosses
-that one connection in a game. [Chapter 26](../chapters/26-how-a-world-breaks.md)
+that one connection in a game. [Chapter 32](../chapters/32-how-a-world-breaks.md)
 asks how often that happens.
 
 ## How it is computed

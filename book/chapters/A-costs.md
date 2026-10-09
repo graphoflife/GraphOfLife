@@ -22,13 +22,18 @@ What is measured, and how each figure is estimated:
 - **disk** — bytes per agent per iteration, with every frame and its
   decisions kept;
 - **memory** — the most a run holds: a base, plus a multiple of every byte of
-  every brain, since the game copies them and a checkpoint stacks them.
+  every brain, since the game copies them and a checkpoint stacks them. The
+  multiple is fitted by least squares over runs of every size, and the base
+  is then raised until no recorded run lies above the line, so that the
+  estimate bounds a run's peak rather than averaging it. (Read off small runs
+  alone, whose memory is nearly all fixed overhead, the multiple came out
+  ten times too large, and a world of 100,000 tokens looked like 28 GB.)
 
 <!-- costs -->
 - **Time:** 0.57 ms per agent per iteration, for every 10,000 weights in a brain.
 - **Agents:** 0.14 alive per token of the world, once settled.
 - **Disk:** 72 bytes per agent per iteration.
-- **Memory:** 300 MB, plus 68.6 times every byte of every brain.
+- **Memory:** 1595 MB, plus 5.2 times every byte of every brain.
 
 Fitted to 144 recorded runs on 2026-10-09 by `python3 gol_lab.py costs`.
 <!-- /costs -->
@@ -67,7 +72,7 @@ about seven hours.
   and an agent costs about 0.87 ms per iteration, so 10,000 tokens cost about
   1.1 seconds per iteration. If the number of agents grows in step with the
   tokens, 200,000 tokens cost about 22 —
-  [Chapter 32](32-how-does-a-worlds-size-follow-its-tokens.md) will say whether it does.
+  [Chapter 38](38-how-does-a-worlds-size-follow-its-tokens.md) will say whether it does.
 - Memory limits big worlds before time does: the lab starts a run only when
   its estimated peak fits next to the runs already going, in three quarters
   of the machine's memory.
@@ -79,5 +84,5 @@ about seven hours.
 <!-- turns -->
 ---
 
-← [Chapter 33 · How fast should brains change?](33-how-fast-should-brains-change.md) · [Contents](../README.md)
+← [Chapter 51 · Worlds of 100,000 tokens](51-worlds-of-100000-tokens.md) · [Contents](../README.md)
 <!-- /turns -->

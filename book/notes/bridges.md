@@ -39,7 +39,7 @@ bridges ([Chapter 16](../chapters/16-what-shape-does-the-network-take.md)).
 A count of bridges does not say how much hangs on each. The program also
 works out, for every bridge, how many agents lie behind it; `cutRisk` is the
 largest share of the world a single cut can sever ([Cut risk](cut-risk.md)).
-[Chapter 26](../chapters/26-how-a-world-breaks.md) asks whether that risk
+[Chapter 32](../chapters/32-how-a-world-breaks.md) asks whether that risk
 foretells how many agents a game cuts off.
 
 <!-- turns -->

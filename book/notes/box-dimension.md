@@ -41,7 +41,7 @@ $$
 **Example.** In the world of seed 1 after its last game: 1,336 boxes of size 1
 (every agent alone), 460 of size 3, 122 of size 5, 41 of size 9, 5 of size 17,
 2 of size 33 — a slope of about −2, a box dimension of about 2
-([Chapter 25](../chapters/25-the-geometry-of-a-world.md)).
+([Chapter 31](../chapters/31-the-geometry-of-a-world.md)).
 
 ## Reading the R²
 

@@ -1,0 +1,270 @@
+{
+ "chapter": "grows",
+ "numbers": {
+  "kernel": {
+   "classes": [
+    "1",
+    "2",
+    "3\u20134",
+    "5\u20139",
+    "10\u201319",
+    "20\u201349",
+    "50\u201399",
+    "100+"
+   ],
+   "gained": [
+    0.04928904425128536,
+    0.1028528710808963,
+    0.16680159977839557,
+    0.28904992712927313,
+    0.5422976744186047,
+    1.059023403199328,
+    2.371359223300971,
+    7.518455423055082
+   ],
+   "lost": [
+    0.02495290272496675,
+    0.11169081807486915,
+    0.26039833443382876,
+    0.516334244469121,
+    1.0307696053763615,
+    2.0545023696682465,
+    4.498798654493032,
+    10.585236325013277
+   ],
+   "gain_slope": 0.939952873680227,
+   "loss_slope": 1.1074277737863243,
+   "gained_by_world": [
+    {
+     "n": 26,
+     "mean": 0.049954301161015846,
+     "median": 0.04880438102251775,
+     "sd": 0.011453864957423829,
+     "min": 0.03547698149027053,
+     "max": 0.08425284055949793,
+     "q25": 0.04075763977534952,
+     "q75": 0.055764324308734375
+    },
+    {
+     "n": 26,
+     "mean": 0.103386048918077,
+     "median": 0.10129260457282036,
+     "sd": 0.0172031783690675,
+     "min": 0.07363053906276207,
+     "max": 0.14040482856749437,
+     "q25": 0.09090322549033718,
+     "q75": 0.1092993619769852
+    },
+    {
+     "n": 26,
+     "mean": 0.1670375837166622,
+     "median": 0.16413522518015947,
+     "sd": 0.029387552342735178,
+     "min": 0.11362072201714321,
+     "max": 0.23168813006235067,
+     "q25": 0.14982498279846648,
+     "q75": 0.18536786977485173
+    },
+    {
+     "n": 26,
+     "mean": 0.28531391773574855,
+     "median": 0.28266526520796786,
+     "sd": 0.04857920944140947,
+     "min": 0.16305916305916307,
+     "max": 0.4071719343182546,
+     "q25": 0.26196729463721513,
+     "q75": 0.315259517479915
+    },
+    {
+     "n": 26,
+     "mean": 0.526528728822075,
+     "median": 0.5252081007809666,
+     "sd": 0.10749463657237779,
+     "min": 0.25236363636363635,
+     "max": 0.7840644583706357,
+     "q25": 0.45496782347631376,
+     "q75": 0.5853820440777937
+    },
+    {
+     "n": 26,
+     "mean": 1.0251060521753232,
+     "median": 1.0449620833786977,
+     "sd": 0.24503394011156943,
+     "min": 0.47876447876447875,
+     "max": 1.5785288270377733,
+     "q25": 0.8151393697275359,
+     "q75": 1.173998505231689
+    },
+    {
+     "n": 26,
+     "mean": 2.363618403926176,
+     "median": 2.064295485636115,
+     "sd": 0.9490498706550019,
+     "min": 1.3304347826086957,
+     "max": 5.296296296296297,
+     "q25": 1.941677348470976,
+     "q75": 2.4044630047140805
+    },
+    {
+     "n": 23,
+     "mean": 7.603858570217821,
+     "median": 5.631578947368421,
+     "sd": 4.996179283284178,
+     "min": 2.6666666666666665,
+     "max": 22.964285714285715,
+     "q25": 4.373835920177384,
+     "q75": 7.930803571428571
+    }
+   ],
+   "lost_by_world": [
+    {
+     "n": 26,
+     "mean": 0.025691285372782487,
+     "median": 0.024389566212158594,
+     "sd": 0.004804508863376928,
+     "min": 0.01682499913004141,
+     "max": 0.03388096714197148,
+     "q25": 0.022958039987086058,
+     "q75": 0.028706990308944563
+    },
+    {
+     "n": 26,
+     "mean": 0.11205730729460567,
+     "median": 0.10880161982434511,
+     "sd": 0.02186875844439264,
+     "min": 0.07791129996016466,
+     "max": 0.16270260747004933,
+     "q25": 0.0952321392642925,
+     "q75": 0.12347754606210255
+    },
+    {
+     "n": 26,
+     "mean": 0.2610345854163378,
+     "median": 0.25847132915050597,
+     "sd": 0.05784487659718087,
+     "min": 0.14751672290297757,
+     "max": 0.36754551161330823,
+     "q25": 0.21898445241088732,
+     "q75": 0.3021599747501592
+    },
+    {
+     "n": 26,
+     "mean": 0.5047439389768053,
+     "median": 0.5096418519092509,
+     "sd": 0.11032143936329686,
+     "min": 0.16868840030326004,
+     "max": 0.7308189908652527,
+     "q25": 0.4529058678269643,
+     "q75": 0.5712705783027884
+    },
+    {
+     "n": 26,
+     "mean": 0.9839613479825441,
+     "median": 0.9807045388629029,
+     "sd": 0.2533574837437787,
+     "min": 0.31448275862068964,
+     "max": 1.6046814044213265,
+     "q25": 0.810458369879677,
+     "q75": 1.1619310425199951
+    },
+    {
+     "n": 26,
+     "mean": 1.8984099582628815,
+     "median": 1.936271674899925,
+     "sd": 0.6102956195649576,
+     "min": 0.5485074626865671,
+     "max": 2.9882498453927027,
+     "q25": 1.5820494261193259,
+     "q75": 2.336947412477227
+    },
+    {
+     "n": 26,
+     "mean": 4.226097823902266,
+     "median": 4.230688413047829,
+     "sd": 1.7012115845567597,
+     "min": 1.509090909090909,
+     "max": 7.180327868852459,
+     "q25": 2.9204639602319804,
+     "q75": 5.457049008910712
+    },
+    {
+     "n": 23,
+     "mean": 10.822520134860671,
+     "median": 10.51048951048951,
+     "sd": 5.975024487666675,
+     "min": 2.3043478260869565,
+     "max": 24.21818181818182,
+     "q25": 5.917487684729064,
+     "q75": 14.874378109452735
+    }
+   ]
+  },
+  "births": {
+   "births": 103597,
+   "parent_linked": 0.776605500159271,
+   "links": {
+    "0": 0.12000347500410244,
+    "1": 0.060696738322538295,
+    "2": 0.2016660714113343,
+    "3": 0.1758062492157109,
+    "4": 0.12267729760514301,
+    "5": 0.08423023832736469,
+    "6+": 0.23491993011380638
+   }
+  },
+  "age": {
+   "mids": [
+    0.7071067811865476,
+    1.4142135623730951,
+    2.8284271247461903,
+    5.656854249492381,
+    11.313708498984761,
+    22.627416997969522,
+    45.254833995939045,
+    90.50966799187809,
+    181.01933598375618,
+    362.03867196751236,
+    724.0773439350247
+   ],
+   "median": [
+    3.0,
+    3.0,
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    2.0
+   ],
+   "top": [
+    14.0,
+    17.0,
+    16.36999999999989,
+    16.0,
+    15.539999999999964,
+    14.949999999999818,
+    14.0,
+    14.0,
+    20.0,
+    36.00999999999976,
+    60.8599999999999
+   ],
+   "corr_log": -0.03843007956590935
+  }
+ },
+ "figures": {
+  "kernel": {
+   "title": "Who gains and who loses connections",
+   "caption": "Agents sorted by their number of connections k at the start of a phase, in classes of growing width (dots at the middle of each class). Green: the new connections an agent alive before and after a reproduction phase gained in it, per agent \u2014 to its own newborn child, to a neighbour's child, or handed over. Red: the connections an agent had after the reproduction phase and no longer had after the game that followed \u2014 cut for carrying nothing, or gone with it if it died \u2014 per agent. Pooled over the reproduction phases and games of every 25th iteration from 500 on, in the 26 worlds that lived to the end. Dashed: straight lines fitted on these logarithmic axes; dotted: a line of slope 1, in proportion to k.",
+   "recipe": "**Runs.** The 26 baseline worlds that lived to the end (`B1-10000-s001` \u2026 `-s030`, Chapter 9; `python3 gol_lab.py run E02`).\n\n**Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2\u00b7t` is iteration *t* after reproduction and frame `2\u00b7t + 1` after the game.\n\n1. For t = 500, 525, \u2026, 2,975 read frames 2\u00b7t \u2212 1 (before the reproduction phase of t), 2\u00b7t (after it) and 2\u00b7t + 1 (after the game).\n2. Gained: the edges in 2\u00b7t not in 2\u00b7t \u2212 1, counted at both ends, for agents in both frames, by their degree in 2\u00b7t \u2212 1. Lost: the edges in 2\u00b7t not in 2\u00b7t + 1, counted for agents of 2\u00b7t by their degree there (all of them if the agent is gone).\n3. Sum over t and worlds per class, divide by the agents; least squares of ln(rate) on ln(class middle).\n\n**To make it again:** `python3 book_figures.py grows`."
+  },
+  "age": {
+   "title": "Connections and age",
+   "caption": "The agents alive after the last game of the 26 worlds that lived to the end, sorted by age \u2014 the iterations since their node was born \u2014 in classes doubling in width: the median number of connections of each class, with the band from its 25th to its 75th percentile, and the 99th percentile (dashed).",
+   "recipe": "**Runs.** The 26 baseline worlds that lived to the end (`B1-10000-s001` \u2026 `-s030`, Chapter 9; `python3 gol_lab.py run E02`).\n\n**Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2\u00b7t` is iteration *t* after reproduction and frame `2\u00b7t + 1` after the game.\n\n1. Read frame 5,999 of each run: `ages`, and each agent's connections in `edges`.\n2. Classes of age [0, 1), [1, 2), [2, 4), \u2026, [1,024, 3,000); in each class with at least 30 agents, the median, quartiles and 99th percentile of the connections.\n\n**To make it again:** `python3 book_figures.py grows`."
+  }
+ }
+}

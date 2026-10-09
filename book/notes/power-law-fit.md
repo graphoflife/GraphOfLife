@@ -69,7 +69,7 @@ further checks would be needed:
   often fits as well over the range one has.
 
 And a tail of 5% of a world is a small part of it: a power law there says
-nothing about the other 95%. [Chapter 23](../chapters/23-power-laws-real-and-apparent.md)
+nothing about the other 95%. [Chapter 29](../chapters/29-power-laws-real-and-apparent.md)
 fits both methods to the baseline worlds.
 
 <!-- turns -->

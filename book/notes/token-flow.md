@@ -46,7 +46,7 @@ Two rules make flow the life of a connection:
 - a node's tokens after the game are **exactly** the tokens staked on it.
 
 So the flow decides which connections survive and how the tokens are
-reshuffled. [Chapter 21](../chapters/21-where-the-tokens-flow.md) shows where
+reshuffled. [Chapter 27](../chapters/27-where-the-tokens-flow.md) shows where
 it goes.
 
 <!-- turns -->

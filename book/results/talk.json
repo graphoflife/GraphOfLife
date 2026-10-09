@@ -1,0 +1,196 @@
+{
+ "chapter": "talk",
+ "numbers": {
+  "names": {
+   "readers": {
+    "n": 26,
+    "mean": 0.0005641854193470744,
+    "median": 0.0005321780539230069,
+    "sd": 0.00016756874010266136,
+    "min": 0.0003926951003461883,
+    "max": 0.0013050774932499985,
+    "q25": 0.000489573419279898,
+    "q75": 0.0005737808133527871
+   },
+   "writers": {
+    "n": 26,
+    "mean": 0.5201972542908705,
+    "median": 0.5539612885113856,
+    "sd": 0.09249552075101407,
+    "min": 0.292105544872449,
+    "max": 0.6268764747146345,
+    "q25": 0.484279564150911,
+    "q75": 0.5929706293753354
+   },
+   "founder_readers": {
+    "n": 26,
+    "mean": 0.00024228683106472922,
+    "median": 0.0002248902571917955,
+    "sd": 7.586932586431175e-05,
+    "min": 0.0001812120135949533,
+    "max": 0.0005755186853110267,
+    "q25": 0.0002035083764693132,
+    "q75": 0.0002628892402065593
+   },
+   "founder_writers": {
+    "n": 26,
+    "mean": 0.59941266019009,
+    "median": 0.5994098976273734,
+    "sd": 0.0008099343574068591,
+    "min": 0.5983405715505031,
+    "max": 0.6023500412486534,
+    "q25": 0.5988348379357333,
+    "q75": 0.5997258185401911
+   }
+  },
+  "kin": {
+   "evolved": {
+    "n": 26,
+    "mean": 0.9999997329911825,
+    "median": 0.9999997404388574,
+    "sd": 8.391988841994998e-08,
+    "min": 0.9999993703700862,
+    "max": 0.9999998237687071,
+    "q25": 0.9999997241369919,
+    "q75": 0.9999997745980846
+   },
+   "founder": {
+    "n": 26,
+    "mean": 0.6336737861708238,
+    "median": 0.6374459549951181,
+    "sd": 0.04142234308202853,
+    "min": 0.5202899017848424,
+    "max": 0.7156060938205205,
+    "q25": 0.6138089761292047,
+    "q75": 0.6652309300620691
+   }
+  },
+  "kin_null": {
+   "evolved": {
+    "n": 26,
+    "mean": 0.632638138440067,
+    "median": 0.6336104884608642,
+    "sd": 0.041528053107935656,
+    "min": 0.5184107325606633,
+    "max": 0.7157722060447159,
+    "q25": 0.6102453044147111,
+    "q75": 0.6616922074231161
+   },
+   "founder": {
+    "n": 26,
+    "mean": 0.6325705057803509,
+    "median": 0.63355906359792,
+    "sd": 0.04223400228574454,
+    "min": 0.5167833782636743,
+    "max": 0.7168298844305059,
+    "q25": 0.6103596604205236,
+    "q75": 0.662094184199082
+   }
+  },
+  "effective": {
+   "evolved": {
+    "n": 26,
+    "mean": 8.12261854748708,
+    "median": 8.840516492770455,
+    "sd": 3.2136475445311126,
+    "min": 2.175144978919245,
+    "max": 13.049102085563261,
+    "q25": 5.259827753464952,
+    "q75": 11.026025277557562
+   },
+   "founder": {
+    "n": 26,
+    "mean": 27.380212069406177,
+    "median": 28.50715650826377,
+    "sd": 3.8070507800129336,
+    "min": 10.35029411414188,
+    "max": 29.39498974905944,
+    "q25": 27.920750677743357,
+    "q75": 29.06405953457032
+   }
+  },
+  "explained": {
+   "evolved": {
+    "n": 26,
+    "mean": 0.05535250676716637,
+    "median": 0.03484312592148564,
+    "sd": 0.07665140799333128,
+    "min": 0.0065269163633051575,
+    "max": 0.3994655573428858,
+    "q25": 0.020779267017389136,
+    "q75": 0.04858319225530339
+   },
+   "founder": {
+    "n": 26,
+    "mean": 0.022721327465622734,
+    "median": 0.008753772727296827,
+    "sd": 0.049627273959390185,
+    "min": 0.0024251557902177368,
+    "max": 0.25536691401040046,
+    "q25": 0.004080270585337997,
+    "q75": 0.013835315154736377
+   }
+  },
+  "saturated": {
+   "evolved": {
+    "n": 26,
+    "mean": 0.02526933708366752,
+    "median": 0.025169057580272013,
+    "sd": 0.010604105203493489,
+    "min": 0.0054113265417899,
+    "max": 0.047301935012778386,
+    "q25": 0.017202633171208025,
+    "q75": 0.03133789570166079
+   },
+   "founder": {
+    "n": 26,
+    "mean": 0.0038787109864374257,
+    "median": 0.0039244344279358205,
+    "sd": 0.00037486714441454795,
+    "min": 0.0027309236947791163,
+    "max": 0.004471606824548001,
+    "q25": 0.003704485804871902,
+    "q75": 0.00413692817546257
+   }
+  },
+  "by_writer": {
+   "evolved": {
+    "n": 26,
+    "mean": 0.9999989471811594,
+    "median": 0.9999991126956433,
+    "sd": 9.31555568507385e-07,
+    "min": 0.9999945150957958,
+    "max": 0.99999940257051,
+    "q25": 0.9999990212519982,
+    "q75": 0.9999992709739981
+   },
+   "founder": {
+    "n": 26,
+    "mean": 0.9999998575645469,
+    "median": 0.9999998715105558,
+    "sd": 6.592308671826987e-08,
+    "min": 0.9999995662191278,
+    "max": 0.9999999081821386,
+    "q25": 0.9999998481409073,
+    "q75": 0.9999998917266122
+   }
+  }
+ },
+ "figures": {
+  "names": {
+   "title": "A name, not news",
+   "caption": "For every agent of a world at its end, the message its brain writes to each of its candidates (the 30 message outputs, squashed by tanh into \u22121 to 1). Left: how different the messages one agent writes to two of its readers are; right: how different the messages of two agents are. One dot per world, each the median over its agents.",
+   "recipe": "**Runs.** The 26 baseline worlds that lived to the end.\n\n**Data.** From the final checkpoint of each run, `GraphOfLifeRuns/<run>/checkpoint.npz`, read with `gol_store.load_checkpoint(run, config)`: the world after its last iteration, every living agent's brain and every message in flight.\n\n1. For every agent, its inputs as the engine builds them and tanh of output rows 15\u201344 of its brain: one message per candidate.\n2. Left: the root-mean-square difference between its messages to its first two candidates; right: between its first message and the previous agent's (`book_chapters.inner.message_stats`).\n\n**To make it again:** `python3 book_figures.py talk`."
+  },
+  "what": {
+   "title": "What the messages carry",
+   "caption": "One dot per world. Left: of how much the agents' messages differ from one agent to the next, the share that lies between genotypes \u2014 1 if agents of one genotype write exactly alike \u2014 against the same share with the genotypes shuffled among the agents (the median of 50 shuffles). Middle: the effective number of independent numbers the messages use, of their 30 (the participation ratio of the eigenvalues of their covariance). Right: the share of the messages' variety that a straight-line fit on the writer's and reader's tokens and connections (their logarithms) and whether the message is to itself accounts for. Blue: the agents' own brains; grey: a fresh founder's brain \u2014 weights drawn as for the founders of a world, normal with standard deviation 1/\u221a(fan-in), biases 0 \u2014 given exactly the same inputs.",
+   "recipe": "**Runs.** The 26 baseline worlds that lived to the end.\n\n**Data.** From the final checkpoint of each run, `GraphOfLifeRuns/<run>/checkpoint.npz`, read with `gol_store.load_checkpoint(run, config)`: the world after its last iteration, every living agent's brain and every message in flight.\n\n1. As in the figure above, every message an agent's brain writes to each candidate.\n2. Kin: each writer's mean message; between-genotype sum of squares of those means over their total; the null shuffles the genotypes among writers.\n3. Numbers used: (\u03a3\u03bb)\u00b2 / \u03a3\u03bb\u00b2 of the covariance eigenvalues \u03bb of the 30 components.\n4. Explained: least squares of all 30 components on [1, ln(1+\u03c4_writer), ln(1+k_writer), ln(1+\u03c4_reader), ln(1+k_reader), self]; 1 \u2212 residual sum of squares / total.\n\n**To make it again:** `python3 book_figures.py talk`."
+  },
+  "values": {
+   "title": "The numbers in a message",
+   "caption": "Every one of the 30 numbers of every message written at the end of the 26 worlds, in bins 0.05 wide: by the agents' own brains (blue) and by a fresh founder's brain \u2014 weights drawn as for the founders of a world, normal with standard deviation 1/\u221a(fan-in), biases 0 \u2014 given exactly the same inputs (grey, dashed).",
+   "recipe": "**Runs.** The 26 baseline worlds that lived to the end.\n\n**Data.** From the final checkpoint of each run, `GraphOfLifeRuns/<run>/checkpoint.npz`, read with `gol_store.load_checkpoint(run, config)`: the world after its last iteration, every living agent's brain and every message in flight.\n\n1. As above; count the numbers in 40 bins from \u22121 to 1 and divide by all numbers.\n\n**To make it again:** `python3 book_figures.py talk`."
+  }
+ }
+}

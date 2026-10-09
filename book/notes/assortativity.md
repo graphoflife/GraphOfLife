@@ -51,7 +51,7 @@ disassortative even if it is wired at random given its degrees. A negative
 *r* is only interesting beyond that pull.
 
 The viewer's `assortativity` is *r* over the frame's connections. A settled
-baseline world has about −0.11 ([Chapter 24](../chapters/24-how-properties-scale-together.md)).
+baseline world has about −0.11 ([Chapter 30](../chapters/30-how-properties-scale-together.md)).
 
 <!-- turns -->
 [Contents](../README.md)

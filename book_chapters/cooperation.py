@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Part III, the end: Chapter 28 — do agents cooperate? — and Chapter 29 —
+Part III, the end: Chapter 34 — do agents cooperate? — and Chapter 35 —
 questioning the mechanics.
 """
 from __future__ import annotations
@@ -130,7 +130,7 @@ def kinship(run_id: str) -> Dict[str, Any]:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 28 · Do agents cooperate?
+# Chapter 34 · Do agents cooperate?
 # ---------------------------------------------------------------------------
 
 LAGS = (1, 2, 4, 8, 16)
@@ -334,7 +334,7 @@ def cooperation(ch: F.Chapter) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 29 · Questioning the mechanics
+# Chapter 35 · Questioning the mechanics
 # ---------------------------------------------------------------------------
 
 @chapter

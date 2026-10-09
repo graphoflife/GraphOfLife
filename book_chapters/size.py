@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Part IV: Chapter 32 — how does a world's size follow its tokens?
+Part IV: Chapter 38 — how does a world's size follow its tokens?
 """
 from __future__ import annotations
 
@@ -16,7 +16,7 @@ from book_figures import STATS_FILE, chapter, describe, line, lived, mean_over, 
 from book_chapters.common import BLUE, CYAN, GREEN, GREY, ORANGE, RED, VIOLET, YELLOW
 
 # ---------------------------------------------------------------------------
-# Chapter 32 · How does a world's size follow its tokens?
+# Chapter 38 · How does a world's size follow its tokens?
 # ---------------------------------------------------------------------------
 
 E08_RUNS = ("The 42 runs of Experiment 8 — B1 at 800 to 409,600 tokens, each size double the one before, "

@@ -495,6 +495,25 @@ def test_what_a_simulation_costs_is_fitted_to_what_runs_recorded():
             == gol_lab.kind_of(spec.config), "world size and seed made another kind"
 
 
+def test_the_memory_estimate_bounds_every_run_and_is_not_inflated_by_small_ones():
+    """
+    Small runs are nearly all fixed overhead; read as a multiple of their tiny
+    brains, they once made a world of 100,000 tokens look like 28 GB, and the
+    lab would have run it alone. The multiple comes from runs of many sizes,
+    and the base is raised until no recorded run lies above the line.
+    """
+    # (MB of brains, MB at the peak): an overhead of about 100 MB, then five times the brains.
+    runs = [(0.3, 62.0), (3.0, 220.0), (30.0, 260.0), (300.0, 1600.0), (2000.0, 10100.0)]
+    slope, base = gol_lab._memory_line(runs)
+    assert 4.5 < slope < 5.5, slope
+    assert all(peak <= base + slope * brains + 1e-9 for brains, peak in runs), (slope, base)
+    assert any(abs(peak - (base + slope * brains)) < 1e-9 for brains, peak in runs), "the bound is loose"
+    # Runs of one size cannot tell base from brains: the calibration's multiple stands.
+    slope, base = gol_lab._memory_line([(3.0, 220.0), (3.1, 230.0), (3.2, 210.0)])
+    assert slope == gol_lab.CALIBRATION["peakBytesPerWeightByte"], slope
+    assert gol_lab._memory_line([]) == (None, None)
+
+
 def test_a_disk_that_would_fill_pauses_the_lab_and_says_why():
     """
     A run that would not fit on the disk is not started, to fail halfway. The
