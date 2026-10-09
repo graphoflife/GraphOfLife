@@ -967,7 +967,7 @@ class GraphOfLife:
 
     def _window_phases(self) -> int:
         """How many phases back the accounting looks."""
-        return 2 if self.cfg.inactive_window == "iteration" else 1
+        return self.cfg.INACTIVE_WINDOW[self.cfg.inactive_window]
 
     def _stale_edges(self) -> List[Tuple[int, int]]:
         """
@@ -983,8 +983,7 @@ class GraphOfLife:
 
     def _prunes_after(self, phase: int) -> bool:
         """Whether the accounting falls due at the end of this phase."""
-        when = self.cfg.prune_after
-        return when == "both" or when == ("reproduction" if phase == 1 else "blotto")
+        return phase in self.cfg.PRUNE_AFTER[self.cfg.prune_after]
 
     def _age_of(self, aid: int) -> int:
         """
@@ -1785,14 +1784,17 @@ class GraphOfLife:
             # largest holders take most of what the dead leave, and every cull
             # concentrates rather than spreads. Anyone at zero was starved out
             # already, so the weights are never all zero.
-            if self.cfg.redistribution == "by_tokens":
+            rule = self.cfg.redistribution
+            if rule == "by_tokens":
                 held = np.array([max(0, int(self.tokens.get(u, 0)))
                                  for u in survivors], dtype=float)
                 total_held = float(held.sum())
                 probs = ((held / total_held) if total_held > 0
                          else np.full(len(survivors), 1 / len(survivors)))
-            else:
+            elif rule == "uniform":
                 probs = np.full(len(survivors), 1 / len(survivors))
+            else:
+                raise ValueError(f"no rule for sharing out the dead: {rule!r}")
             # Multinomial keeps the token count exactly conserved.
             draws = self.rng.multinomial(global_pool, probs)
             for u, extra in zip(survivors, draws):

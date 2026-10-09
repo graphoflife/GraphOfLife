@@ -2492,6 +2492,43 @@ def test_the_interface_offers_every_setting_the_engine_has():
         assert "<small>" in block, f"the {name} checkbox has no explanation under it"
 
 
+def test_every_mode_is_one_table_the_form_and_the_engine_share():
+    """
+    A setting that names a rule — which brain, when to prune, how long a
+    connection may idle, how the dead are shared out — has one table in
+    gol_config. validate() refuses anything outside it, the engine looks its
+    rule up in it, and the form offers exactly what it holds. The engine used
+    to fall back onto some other rule for a value it did not know.
+    """
+    import GraphOfLifeSimple as engine
+
+    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    page = open(os.path.join(root, "web", "index.html")).read()
+    assert set(engine.BRAIN_KINDS) == set(SimConfig.MODES["brain_kind"])
+    for setting, allowed in SimConfig.MODES.items():
+        select = re.search(rf'<select[^>]*data-cfg="{setting}"[^>]*>(.*?)</select>', page, re.S)
+        assert select, f"the form offers no choice of {setting}"
+        offered = re.findall(r'<option value="([^"]+)"', select.group(1))
+        assert sorted(offered) == sorted(allowed), (
+            f"the form offers {setting} = {offered}, the engine knows {list(allowed)}")
+        try:
+            SimConfig(**{setting: "no-such-rule"}).validate()
+        except ValueError as exc:
+            assert setting in str(exc), str(exc)
+        else:
+            raise AssertionError(f"an unknown {setting} was accepted")
+
+    # Past validation — a config built by hand — the engine refuses it too.
+    world = new_world(small())
+    world.cfg.prune_after = "no-such-rule"
+    try:
+        world._prunes_after(1)
+    except KeyError:
+        pass
+    else:
+        raise AssertionError("the engine fell back onto some rule for an unknown prune_after")
+
+
 def test_copying_a_run_forks_it_rather_than_backing_it_up():
     """
     A duplicate is a run in its own right, starting where the original is.
@@ -2541,7 +2578,7 @@ def test_every_brain_kind_has_a_preset_that_validates():
     the second one wrong kills runs rather than merely making them worse. The
     presets live with the engine so the form cannot drift from them.
     """
-    kinds = ("float", "float16", "binary")
+    kinds = SimConfig.MODES["brain_kind"]
     assert set(SimConfig.BRAIN_PRESETS) == set(kinds), \
         "every brain kind the engine accepts needs a preset"
 

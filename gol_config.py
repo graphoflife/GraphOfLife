@@ -11,7 +11,7 @@ from __future__ import annotations
 
 import secrets
 from dataclasses import dataclass, asdict, field, fields
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Tuple
 
 # ---------------------------------------------------------------------------
 # Naming an algorithm
@@ -173,6 +173,26 @@ class SimConfig:
         "float":   {"hidden_layers": [50, 45, 40, 35, 30], "mutation_sparsity": 0.1},
         "float16": {"hidden_layers": [50, 45, 40, 35, 30], "mutation_sparsity": 0.1},
         "binary":  {"hidden_layers": [160, 128, 96, 80, 64], "mutation_sparsity": 0.02},
+    }
+
+    # ---- Modes ----
+    # Settings that name one of a few rules, and what each rule is. validate()
+    # refuses anything else and the engine looks its rule up here, so a mode
+    # the engine does not know is an error rather than a silent fall back onto
+    # some other rule under a strain that names this one.
+    #
+    # After which phases unused connections are cut, by phase number.
+    PRUNE_AFTER: ClassVar[Dict[str, Tuple[int, ...]]] = {
+        "blotto": (2,), "reproduction": (1,), "both": (1, 2)}
+    # How many phases a connection may go without carrying anything.
+    INACTIVE_WINDOW: ClassVar[Dict[str, int]] = {"phase": 1, "iteration": 2}
+    # How the tokens of removed agents are shared among the survivors.
+    REDISTRIBUTIONS: ClassVar[Tuple[str, ...]] = ("uniform", "by_tokens")
+    MODES: ClassVar[Dict[str, Tuple[str, ...]]] = {
+        "brain_kind": tuple(BRAIN_PRESETS),
+        "prune_after": tuple(PRUNE_AFTER),
+        "inactive_window": tuple(INACTIVE_WINDOW),
+        "redistribution": REDISTRIBUTIONS,
     }
 
     # ---- Economy ----
@@ -573,14 +593,9 @@ class SimConfig:
             raise ValueError("mutation_sparsity must be between 0 and 1")
         if self.mutation_noise_std < 0:
             raise ValueError("mutation_noise_std cannot be negative")
-        if self.brain_kind not in ("float", "float16", "binary"):
-            raise ValueError("brain_kind must be float, float16 or binary")
-        if self.prune_after not in ("blotto", "reproduction", "both"):
-            raise ValueError("prune_after must be blotto, reproduction or both")
-        if self.inactive_window not in ("phase", "iteration"):
-            raise ValueError("inactive_window must be phase or iteration")
-        if self.redistribution not in ("uniform", "by_tokens"):
-            raise ValueError("redistribution must be uniform or by_tokens")
+        for setting, allowed in self.MODES.items():
+            if getattr(self, setting) not in allowed:
+                raise ValueError(f"{setting} must be {', '.join(allowed[:-1])} or {allowed[-1]}")
         if not 2 <= self.brain_bits <= 64:
             raise ValueError("brain_bits must be between 2 and 64")
         if self.export_every < 1:
