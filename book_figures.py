@@ -221,6 +221,23 @@ def band_series(runs: List[Tuple[np.ndarray, np.ndarray]], label: str, colour: i
     return band
 
 
+def quantile_band(table: Any, x: Iterable[float], *, skip_nan: bool = True,
+                  min_count: Optional[int] = None) -> Dict[str, Any]:
+    """
+    A band over many worlds, one column of `table` per point of `x`: the median,
+    the middle half and nine in ten of each column. `skip_nan` reads past the
+    gaps where a world had nothing; `min_count` drops the points fewer worlds
+    than that reached. For a statistic through time there is band_series.
+    """
+    table, x = np.asarray(table, float), np.asarray(x)
+    if min_count is not None:
+        ok = np.sum(np.isfinite(table), axis=0) >= min_count
+        table, x = table[:, ok], x[ok]
+    q = (np.nanquantile if skip_nan else np.quantile)(table, [0.05, 0.25, 0.5, 0.75, 0.95], axis=0)
+    return {"x": x.tolist(), "y": q[2].tolist(), "lo": q[1].tolist(), "hi": q[3].tolist(),
+            "outerLo": q[0].tolist(), "outerHi": q[4].tolist()}
+
+
 def line(x: Iterable[float], y: Iterable[float], label: Optional[str], colour: int,
          **extra: Any) -> Dict[str, Any]:
     return {"label": label, "x": [float(v) for v in x],

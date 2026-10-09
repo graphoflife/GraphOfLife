@@ -17,7 +17,8 @@ import numpy as np
 import book_data as D
 import book_figures as F
 from book_graph import bfs, core, degree_preserving, graph
-from book_figures import FRAMES, chapter, describe, dots, line, lived_text, recipe, runs_of, survivors
+from book_figures import (FRAMES, chapter, describe, dots, line, lived_text, quantile_band, recipe,
+                          runs_of, survivors)
 from book_chapters.common import BLUE, GREEN, GREY, ORANGE, RED, VIOLET, YELLOW, baseline
 
 MOMENTS = (1000, 1500, 2000, 2500, 2999)
@@ -150,9 +151,7 @@ def alike(ch: F.Chapter) -> None:
                           for r in rs] for d in data.values()], float)
     panels = []
     for n, label, colour in names:
-        q = np.nanquantile(table(n), [0.05, 0.25, 0.5, 0.75, 0.95], axis=0)
-        series_ = [{"label": "the worlds", "x": rs.tolist(), "y": q[2].tolist(), "lo": q[1].tolist(),
-                    "hi": q[3].tolist(), "outerLo": q[0].tolist(), "outerHi": q[4].tolist(), "colour": colour}]
+        series_ = [{"label": "the worlds", **quantile_band(table(n), rs), "colour": colour}]
         if n in HELD:
             series_.append(line(rs, np.nanmedian(table(f"{n}|k"), axis=0),
                                 "shuffled among agents with as many connections", GREY, width=2, dash=[5, 4]))
@@ -187,13 +186,11 @@ def alike(ch: F.Chapter) -> None:
     enrich = kin / base[:, None]
     near = rs <= 8
     shown = np.where(enrich > 0, enrich, np.nan)[:, near]
-    q = np.nanquantile(shown, [0.05, 0.25, 0.5, 0.75, 0.95], axis=0)
     ch.figure(
         "kin", title="Kin, near and far",
         x={"label": "steps apart", "min": 0, "max": 8},
         y={"label": "same genotype, times as often as for any two (logarithmic)", "log": True, "min": 0.01, "max": 200},
-        series=[{"label": None, "x": rs[near].tolist(), "y": q[2].tolist(), "lo": q[1].tolist(), "hi": q[3].tolist(),
-                 "outerLo": q[0].tolist(), "outerHi": q[4].tolist(), "colour": VIOLET}],
+        series=[{"label": None, **quantile_band(shown, rs[near]), "colour": VIOLET}],
         guides=[{"axis": "y", "at": 1.0, "label": "as for any two agents"}], legend=False,
         caption="For pairs of agents r steps apart (as in the figure above), the share that carry the same "
                 "genotype, divided by the share among all pairs of agents of the world, on a logarithmic axis: "
@@ -395,10 +392,7 @@ def band(rows: List[Dict[str, Any]], xkey: str, ykey: str) -> Dict[str, Any]:
     for i, d in enumerate(rows):
         for x, y in zip(d[xkey], d[ykey]):
             table[i, grid.index(round(x, 6))] = y
-    ok = np.sum(np.isfinite(table), axis=0) >= max(3, len(rows) // 2)
-    q = np.nanquantile(table[:, ok], [0.05, 0.25, 0.5, 0.75, 0.95], axis=0)
-    return {"x": np.array(grid)[ok].tolist(), "y": q[2].tolist(), "lo": q[1].tolist(), "hi": q[3].tolist(),
-            "outerLo": q[0].tolist(), "outerHi": q[4].tolist()}
+    return quantile_band(table, grid, min_count=max(3, len(rows) // 2))
 
 
 RULERS = (("ball_r", "ball_d", "From balls", "radius r, steps (logarithmic)"),
@@ -515,12 +509,9 @@ def dimensions(ch: F.Chapter) -> None:
     for key, title, colour in (("ball", "From balls, at r = 2 to 3", BLUE),
                                ("spectral", "From a walk, at t = 4 to 8", VIOLET)):
         table = np.array([d[key] for d in lives.values()], float)
-        q = np.nanquantile(table, [0.05, 0.25, 0.5, 0.75, 0.95], axis=0)
         panels.append(dict(title=title, x={"label": "iteration (logarithmic)", "log": True},
                            y={"label": "dimension", "min": 0, "max": 6},
-                           series=[{"label": None, "x": list(LIFE), "y": q[2].tolist(), "lo": q[1].tolist(),
-                                    "hi": q[3].tolist(), "outerLo": q[0].tolist(), "outerHi": q[4].tolist(),
-                                    "colour": colour}],
+                           series=[{"label": None, **quantile_band(table, LIFE), "colour": colour}],
                            guides=[{"axis": "y", "at": d, "label": ""} for d in (1, 2, 3)], legend=False))
         ch.number(f"life_{key}", {str(t): describe(table[:, i]) for i, t in enumerate(LIFE)})
     ch.grid(

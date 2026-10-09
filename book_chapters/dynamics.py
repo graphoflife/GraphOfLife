@@ -18,7 +18,7 @@ import book_data as D
 import book_figures as F
 from book_graph import graph
 from book_figures import (Classes, FRAMES, band_series, chapter, describe, dots, line, lived_text,
-                          recipe, survivors)
+                          quantile_band, recipe, survivors)
 from book_chapters.common import BLUE, CYAN, GREEN, GREY, ORANGE, RED, VIOLET, YELLOW, baseline
 
 LAGS = (1, 2, 5, 10, 20, 50, 100, 200)
@@ -130,9 +130,7 @@ def rich(ch: F.Chapter) -> None:
     live = np.array([[np.mean(m["alive"][str(k)]) for k in LAGS] for m in mob.values()])
 
     def bands(table):
-        q = np.quantile(table, [0.05, 0.25, 0.5, 0.75, 0.95], axis=0)
-        return {"x": lags.tolist(), "y": q[2].tolist(), "lo": q[1].tolist(), "hi": q[3].tolist(),
-                "outerLo": q[0].tolist(), "outerHi": q[4].tolist()}
+        return quantile_band(table, lags, skip_nan=False)
     ch.grid(
         "memory", [
             dict(title="Rank of wealth, then and later", x={"label": "games later (logarithmic)", "log": True},
