@@ -693,7 +693,9 @@ CHAPTERS: Dict[str, Callable[[], None]] = {}
 
 
 def chapter(fn: Callable[[Chapter], None]) -> Callable[[Chapter], None]:
-    """Register a chapter's figures under its function's name."""
+    """Register a chapter's figures under its function's name, which no other chapter may have."""
+    if fn.__name__ in CHAPTERS:
+        raise ValueError(f"two chapters are called {fn.__name__}: their figures would share a folder")
     CHAPTERS[fn.__name__] = lambda: _run(fn)
     return fn
 

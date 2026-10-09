@@ -36,11 +36,6 @@ from typing import Any, Dict, List, Optional
 
 BOOK = os.path.join(os.path.dirname(os.path.abspath(__file__)), "book")
 
-KINDS = ("figure", "thesis", "runs", "contents", "turns", "costs")
-BLOCK = re.compile(r"^<!-- (%s)((?: [^\n]*?)?) -->\n(?:(?:(?!<!-- ).)*?^<!-- /\1 -->\n?)?"
-                   % "|".join(KINDS), re.S | re.M)
-
-
 def read_json(path: str) -> Any:
     with open(os.path.join(BOOK, path), encoding="utf-8") as f:
         return json.load(f)
@@ -252,6 +247,10 @@ def costs(md: str, _: str) -> str:
 
 MAKERS = {"figure": figure, "thesis": thesis, "runs": runs, "contents": contents, "turns": turns,
           "costs": costs}
+#: The blocks a page can ask for, and how they are found in it.
+KINDS = tuple(MAKERS)
+BLOCK = re.compile(r"^<!-- (%s)((?: [^\n]*?)?) -->\n(?:(?:(?!<!-- ).)*?^<!-- /\1 -->\n?)?"
+                   % "|".join(KINDS), re.S | re.M)
 
 
 # ---------------------------------------------------------------------------
@@ -276,18 +275,39 @@ def markdown_files() -> List[str]:
 
 
 def fill(only: Optional[List[str]] = None) -> int:
-    """Fill every Markdown file of the book, or those named; the number changed."""
+    """
+    Fill every Markdown file of the book, or those named; the number changed.
+    Filling them all also checks that every figure a chapter drew is shown
+    somewhere: one that is not was drawn for nothing, or forgotten.
+    """
     changed = 0
+    placed = set()
     for md in only or markdown_files():
         path = os.path.join(BOOK, md)
         with open(path, encoding="utf-8") as f:
             before = f.read()
         after = fill_text(md, before)
+        placed |= {arg.strip() for kind, arg in re.findall(r"^<!-- (\w+)((?: [^\n]*?)?) -->$", after, re.M)
+                   if kind == "figure"}
         if after != before:
             with open(path, "w", encoding="utf-8") as f:
                 f.write(after)
             changed += 1
+    if only is None:
+        unplaced = sorted(set(drawn()) - placed)
+        if unplaced:
+            raise ValueError(f"drawn but shown nowhere: {', '.join(unplaced)}")
     return changed
+
+
+def drawn() -> List[str]:
+    """Every figure the chapters' results say was drawn, as chapter/name."""
+    out = []
+    for name in sorted(os.listdir(os.path.join(BOOK, "results"))):
+        figures = read_json(f"results/{name}").get("figures")
+        if name.endswith(".json") and isinstance(figures, dict):
+            out += [f"{name[:-5]}/{figure}" for figure in figures]
+    return out
 
 
 if __name__ == "__main__":

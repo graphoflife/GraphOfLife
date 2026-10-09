@@ -10,4 +10,9 @@ Each function reads the runs, draws its figures with their captions and
 recipes, and records the numbers its chapter quotes. The captions say what
 is drawn; the recipes say how to draw it again from the runs by hand.
 """
-from book_chapters import brains, cooperation, dynamics, inner, life, measures, part1, size, society, space, structure  # noqa: F401  (registers the chapters)
+import importlib
+import pkgutil
+
+# Every module of the package, so a new one is registered without being listed.
+for _module in pkgutil.iter_modules(__path__):
+    importlib.import_module(f"{__name__}.{_module.name}")
