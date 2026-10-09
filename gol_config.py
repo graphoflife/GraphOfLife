@@ -377,13 +377,6 @@ class SimConfig:
             return self.k_neighbors
         return max(int(self.resolved_n() / 100), 5)
 
-    # How an observation is laid out, in the order _inputs builds it. Named
-    # because the binary brain has to tell a magnitude from something that is
-    # already a single bit, and counting to 29 in three places was how the two
-    # would come to disagree.
-    FLAG_INPUTS: ClassVar[int] = 1        # is-self
-    MAGNITUDE_INPUTS: ClassVar[int] = 28  # own/target tokens and degrees, and quantiles
-
     def input_layout(self) -> Dict[str, Tuple[int, int, str]]:
         """
         Every block of rows in an observation, by name and in the order
@@ -428,6 +421,28 @@ class SimConfig:
     def _input_rows(self, *kinds: str) -> int:
         return sum(stop - start for start, stop, kind in self.input_layout().values()
                    if kind in kinds)
+
+    def input_kinds(self) -> Dict[str, slice]:
+        """
+        The rows of each kind of input — flags, then magnitudes, then bits —
+        which is how a binary brain cuts an observation up before it ladders
+        the magnitudes. Each kind is one unbroken run of rows, and they come in
+        that order; a layout that broke this would be refused here rather than
+        encoded wrongly.
+        """
+        spans: Dict[str, List[int]] = {}
+        for start, stop, kind in self.input_layout().values():
+            if stop > start:
+                spans.setdefault(kind, []).append(start)
+                spans[kind].append(stop)
+        out, row = {}, 0
+        for kind in ("flag", "magnitude", "bit"):
+            edges = spans.get(kind, [row, row])
+            if edges[0] != row or any(a != b for a, b in zip(edges[1::2], edges[2::2])):
+                raise ValueError(f"the {kind} inputs are not one run of rows after the others")
+            out[kind] = slice(edges[0], edges[-1])
+            row = edges[-1]
+        return out
 
     def flag_inputs(self) -> int:
         """Single-bit inputs: is-self, and with gifting whether the link is at risk."""

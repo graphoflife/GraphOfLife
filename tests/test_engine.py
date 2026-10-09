@@ -827,6 +827,54 @@ def test_a_tie_is_not_a_no():
     assert G_choose_binary(1.0, 5.0, 0.0, 1.0, rng) is False
 
 
+def test_a_binary_brain_with_gifting_reads_the_at_risk_flag_as_a_flag():
+    """
+    The binary encoder cuts an observation where the input layout says. It
+    used to cut one flag in, always; with gifting there are two, so the
+    at-risk flag was laddered as a magnitude and the last magnitude went in as
+    a raw number — the same count of rows, so no shape check noticed.
+    """
+    import numpy as np
+    cfg = small(brain_kind="binary", allow_gifting=True)
+    brain = make_brain(cfg, 0, np.random.RandomState(0))
+    kinds = cfg.input_kinds()
+    x = np.zeros((cfg.n_inputs(), 1))
+    x[kinds["flag"].stop - 1, 0] = 1.0              # the at-risk flag
+    x[kinds["magnitude"].stop - 1, 0] = 5.0         # the last magnitude
+    encoded = brain.encode(x)[:, 0]
+    assert len(encoded) == cfg.binary_rows()
+    assert encoded[:kinds["flag"].stop].tolist() == [0, 1], "the flags pass straight through"
+    assert encoded.max() <= 1, "something reached the brain that is not a bit"
+    magnitudes = kinds["magnitude"].stop - kinds["magnitude"].start
+    last = encoded[kinds["flag"].stop + (magnitudes - 1) * cfg.brain_bits:
+                   kinds["flag"].stop + magnitudes * cfg.brain_bits]
+    assert last.sum() > 1, "the last magnitude is spread over its ladder"
+
+
+def test_a_binary_checkpoint_says_how_many_flags_its_brains_read():
+    """
+    A binary+gifting checkpoint written before the encoder read the layout
+    holds weights trained on the old cut, and nothing about their shape says
+    so: it is refused. A binary checkpoint without gifting was never wrong,
+    and still loads.
+    """
+    with_gifts = small(brain_kind="binary", allow_gifting=True)
+    blob = dict(new_world(with_gifts).to_checkpoint())
+    assert int(blob["flags"]) == 2
+    del blob["flags"]
+    try:
+        GraphOfLife.from_checkpoint(blob, with_gifts)
+    except ValueError as exc:
+        assert "flag" in str(exc), str(exc)
+    else:
+        raise AssertionError("an old binary+gifting checkpoint was resumed")
+
+    plain = small(brain_kind="binary")
+    old = dict(new_world(plain).to_checkpoint())
+    del old["flags"]
+    GraphOfLife.from_checkpoint(old, plain)
+
+
 # ---------------------------------------------------------------------------
 # Frames
 # ---------------------------------------------------------------------------
@@ -2833,7 +2881,9 @@ def test_a_binary_brain_spends_no_rows_on_things_that_are_already_bits():
     for _ in range(4):
         world.step(record_decisions=False)
 
-    assert cfg.binary_rows() == cfg.MAGNITUDE_INPUTS * cfg.brain_bits + cfg.bit_inputs()
+    magnitudes = cfg.input_kinds()["magnitude"]
+    assert cfg.binary_rows() == ((magnitudes.stop - magnitudes.start) * cfg.brain_bits
+                                 + cfg.bit_inputs())
     brain = next(iter(world.brains.values()))
     assert brain.layer_sizes()[0] == cfg.binary_rows()
 
@@ -2855,7 +2905,8 @@ def test_a_binary_brain_spends_no_rows_on_things_that_are_already_bits():
     assert encoded.shape[0] == cfg.binary_rows()
 
     # Everything after the ladder is a bit that stands for itself.
-    start = cfg.FLAG_INPUTS + cfg.MAGNITUDE_INPUTS * cfg.brain_bits
+    kinds = cfg.input_kinds()
+    start = kinds["flag"].stop + (kinds["magnitude"].stop - kinds["magnitude"].start) * cfg.brain_bits
     tail = encoded[start:]
     assert tail.shape[0] == 4 * cfg.message_amount + cfg.random_input_amount
     dead = int((tail.max(axis=1) == tail.min(axis=1)).sum())
@@ -2919,7 +2970,7 @@ def test_the_ladder_starts_where_its_values_start():
     for u in sorted(world.G.nodes())[:20]:
         seen = world._inputs(u, [u] + sorted(world.G.neighbors(u)),
                              log_deg, q_tok, q_deg, log_tok, _risk)
-        span = seen[cfg.FLAG_INPUTS:cfg.FLAG_INPUTS + cfg.MAGNITUDE_INPUTS]
+        span = seen[cfg.input_kinds()["magnitude"]]
         lowest = min(lowest, float(span.min()))
     assert lowest >= 0.0, f"a laddered input went to {lowest}"
 
@@ -3063,8 +3114,9 @@ def test_the_ladder_resolves_a_band_and_a_place_inside_it():
 
     def code(value):
         x = np.zeros((cfg.n_inputs(), 1))
-        x[cfg.FLAG_INPUTS, 0] = value
-        rows = brain.encode(x)[cfg.FLAG_INPUTS:cfg.FLAG_INPUTS + cfg.brain_bits, 0]
+        first = cfg.input_kinds()["magnitude"].start
+        x[first, 0] = value
+        rows = brain.encode(x)[first:first + cfg.brain_bits, 0]
         return tuple(int(v) for v in rows)
 
     seen = {code(v) for v in np.linspace(0.0, 12.0, 4000)}
@@ -3098,8 +3150,9 @@ def test_a_split_ladder_stays_readable_by_a_ternary_sum():
 
     values = rng.uniform(0.0, 12.0, size=2000)
     x = np.zeros((cfg.n_inputs(), values.size))
-    x[cfg.FLAG_INPUTS] = values
-    rows = brain.encode(x)[cfg.FLAG_INPUTS:cfg.FLAG_INPUTS + cfg.brain_bits].T.astype(float)
+    first = cfg.input_kinds()["magnitude"].start
+    x[first] = values
+    rows = brain.encode(x)[first:first + cfg.brain_bits].T.astype(float)
 
     draw = rng.random((300, cfg.brain_bits))
     weights = np.zeros_like(draw)

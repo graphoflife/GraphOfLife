@@ -126,6 +126,23 @@ On every store that can be found on its own:
 
 ---
 
+## Errata
+
+Bugs fixed without a new SPEC, because no recorded run used the strains they
+touched. The commit that fixed each is what separates the two meanings.
+
+- **Binary brains with gifting** (`brain_kind=binary` with `allow_gifting`),
+  fixed on 2026-10-09 in the commit that made `BinaryBrain.encode` read
+  `SimConfig.input_kinds()`. The encoder cut every observation after one flag,
+  but gifting puts two there: the at-risk flag was laddered as if it were a
+  magnitude, and the last magnitude reached the brain as a raw number. The row
+  count was unchanged, so no shape check saw it. No run of a binary brain with
+  gifting had been made by the lab or the book. A checkpoint now records how
+  many flags its brains read, and a binary+gifting checkpoint written before
+  the fix is refused on resume, saying why.
+
+---
+
 ## Recording an experiment
 
 Four fields. The strain makes results comparable; the commit makes them

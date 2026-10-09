@@ -579,13 +579,16 @@ class BinaryBrain(Brain):
     @staticmethod
     def checkpoint_extras(cfg: SimConfig) -> Dict[str, np.ndarray]:
         """
-        How a magnitude was encoded. The shape check on the way back in cannot
-        see this: splitting the ladder into a band and a place inside it keeps
-        the row count identical and changes what every one of those rows
-        means, so weights written under one split are nonsense under another
-        and nothing about their shape says so.
+        How a magnitude was encoded, and how many rows came before the
+        magnitudes. The shape check on the way back in cannot see either:
+        splitting the ladder into a band and a place inside it keeps the row
+        count identical and changes what every one of those rows means, and
+        so did the encoder that cut an observation one flag in when gifting
+        had put two there. Weights written under one are nonsense under the
+        other, and nothing about their shape says so.
         """
-        return {"ladder": np.array(cfg.ladder_split(), dtype=np.int64)}
+        return {"ladder": np.array(cfg.ladder_split(), dtype=np.int64),
+                "flags": np.array(cfg.flag_inputs(), dtype=np.int64)}
 
     @staticmethod
     def check_checkpoint(cfg: SimConfig, blob: Any) -> None:
@@ -599,6 +602,15 @@ class BinaryBrain(Brain):
                 f"as {cfg.ladder_split()} (band rows, rows within a band). "
                 f"The rows are the same in number and not the same in "
                 f"meaning, so the weights cannot be carried across.")
+        # Written since the encoder reads the layout. Before that it always cut
+        # after one flag, which only gifting made wrong.
+        flags = int(blob["flags"]) if "flags" in blob else 1
+        if flags != cfg.flag_inputs():
+            raise ValueError(
+                f"this checkpoint's brains read {flags} flag row(s) before the "
+                f"magnitudes and these settings have {cfg.flag_inputs()}: it was "
+                f"written before binary brains with gifting encoded the at-risk "
+                f"flag as a flag, so its weights mean something else now.")
 
     # The ladder the magnitudes are spread across. It used to start below zero
     # because the noise and message inputs ran a little under it — they are not
@@ -669,10 +681,14 @@ class BinaryBrain(Brain):
         if a.ndim == 1:
             a = a.reshape(-1, 1)
 
-        flags = a[:cfg.FLAG_INPUTS]
-        span = cfg.FLAG_INPUTS + cfg.MAGNITUDE_INPUTS
-        scale = a[cfg.FLAG_INPUTS:span]
-        rest = a[span:]
+        # Cut where the layout says. It used to be cut at a constant one flag,
+        # which was right until gifting added a second: the at-risk flag was
+        # then laddered as if it were a magnitude, and the last magnitude went
+        # in unladdered — the same number of rows, so nothing noticed.
+        kinds = cfg.input_kinds()
+        flags = a[kinds["flag"]]
+        scale = a[kinds["magnitude"]]
+        rest = a[kinds["bit"]]
 
         bands, _within = cfg.ladder_split()
         step = self.band_width()
