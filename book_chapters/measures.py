@@ -15,8 +15,9 @@ from typing import Any, Dict, List, Sequence, Tuple
 import numpy as np
 
 import book_figures as F
-from book_figures import (BASELINE_RUNS, FRAMES, STATS_FILE, band_series, chapter, describe, dots,
-                          line, mean_over, recipe, series, survivors)
+from book_figures import (AG, BASELINE_RUNS, DEGREE_CLASSES, FR, FRAMES, KEPT_BY, PA, STATS_FILE,
+                          band_series, chapter, describe, dots, line, mean_over, recipe, series,
+                          survivors)
 from book_chapters.common import (BAND_STEPS, BAND_WORDS, BLUE, CYAN, GREEN, GREY, ORANGE, RED,
                                   VIOLET, YELLOW, baseline)
 
@@ -25,16 +26,8 @@ SAMPLE = ("each run's frames, read every 25 iterations by `book_figures.sample_p
           "`2·t` after the reproduction phase of iteration *t*, frame `2·t + 1` after its game; "
           "`gol_store.read_frame(run, index)`)")
 
-# The columns of sample_pass's tables.
-FR = dict(t=0, agents=1, genotypes=2, entropy=3, new_repro=4, new_game=5, births=6, home=7, others=8,
-          mutual=9)
-AG = dict(t=0, tokens=1, degree=2, curvature=3, change=4, kept=5, home=6, candidates=7, staked=8, age=9)
-PA = dict(t=0, tokens=1, degree=2, invested=3, links=4, handed=5)
-
 TOKEN_CLASSES = [(1, 1, "1"), (2, 2, "2"), (3, 4, "3–4"), (5, 9, "5–9"), (10, 19, "10–19"),
                  (20, 49, "20–49"), (50, 99, "50–99"), (100, 10 ** 9, "100+")]
-DEGREE_CLASSES = [(1, 1, "1"), (2, 2, "2"), (3, 4, "3–4"), (5, 9, "5–9"), (10, 49, "10–49"),
-                  (50, 10 ** 9, "50+")]
 
 
 def sampled(which: str, settled: bool = True) -> List[Tuple[Any, np.ndarray]]:
@@ -495,7 +488,7 @@ def flow(ch: F.Chapter) -> None:
 
     kept_nodes, kept = np.zeros(6), np.zeros(6)
     for _, fr in sampled("frames"):
-        pairs = fr[:, 10:22].reshape(len(fr), 6, 2).sum(axis=0)
+        pairs = fr[:, KEPT_BY].reshape(len(fr), len(DEGREE_CLASSES), 2).sum(axis=0)
         kept_nodes += pairs[:, 0]
         kept += pairs[:, 1]
     share_kept = kept / kept_nodes

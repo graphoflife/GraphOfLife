@@ -34,6 +34,7 @@ from typing import Any, Callable, Dict, Iterable, List, Optional, Tuple
 
 import numpy as np
 
+import book_data as D
 import book_svg
 import gol_analysis as A
 import gol_lab
@@ -396,11 +397,31 @@ def world_pass(run_id: str, muller: Optional[Tuple[int, int]] = None) -> Dict[st
 SAMPLE_EVERY = 25
 AGENT_EVERY = 100
 
+#: Nodes by how many connections they have, as Part III groups them.
+DEGREE_CLASSES = [(1, 1, "1"), (2, 2, "2"), (3, 4, "3–4"), (5, 9, "5–9"), (10, 49, "10–49"),
+                  (50, 10 ** 9, "50+")]
 
+#: The columns of sample_pass's three tables, in order, and where each is.
+FRAME_COLUMNS = ("t", "agents", "genotypes", "entropy", "new_repro", "new_game", "births", "home",
+                 "others", "mutual",
+                 *(f"{what}_{label}" for _, _, label in DEGREE_CLASSES for what in ("staked", "kept")))
+AGENT_COLUMNS = ("t", "tokens", "degree", "curvature", "change", "kept", "home", "candidates",
+                 "staked", "age")
+PARENT_COLUMNS = ("t", "tokens", "degree", "invested", "links", "handed")
+FR = {name: i for i, name in enumerate(FRAME_COLUMNS)}
+AG = {name: i for i, name in enumerate(AGENT_COLUMNS)}
+PA = {name: i for i, name in enumerate(PARENT_COLUMNS)}
+#: The frames columns that count, for each class of DEGREE_CLASSES in turn, the
+#: nodes staked on and the nodes kept: reshaped to (looks, classes, 2).
+KEPT_BY = slice(FR["staked_1"], FR["kept_50+"] + 1)
+
+
+@D.measure("sample", file="{run}.sample.npz")
 def sample_pass(run_id: str) -> Dict[str, Any]:
     """
     What Part III needs from a world's frames, read every SAMPLE_EVERY
-    iterations and kept beside the runs (`<runs>/.book/<run>.sample.npz`).
+    iterations. Its tables' columns are FRAME_COLUMNS, AGENT_COLUMNS and
+    PARENT_COLUMNS.
 
       frames   one row per look, after the game of iteration t (t = 0, 25, …):
                t, agents, genotypes, genotype entropy (bits), new genotypes in
@@ -419,16 +440,8 @@ def sample_pass(run_id: str) -> Dict[str, Any]:
                tokens, degree, the tokens it gave a child (0 for none), the
                child's links and the connections handed over
     """
-    path = os.path.join(store.BASE_DIR, ".book", f"{run_id}.sample.npz")
-    stamp = store.load_meta(run_id).get("iteration")
-    if os.path.exists(path):
-        cached = np.load(path)
-        if int(cached["stamp"]) == stamp:
-            return {k: cached[k] for k in cached.files}
-    bins = [(1, 1), (2, 2), (3, 4), (5, 9), (10, 49), (50, 10 ** 9)]
     frames, agents, parents = [], [], []
     last = (store.count_frames(run_id) - 1) // 2
-    previous_game = None
     for t in range(0, last + 1, SAMPLE_EVERY):
         repro = store.read_frame(run_id, 2 * t)
         game = store.read_frame(run_id, 2 * t + 1)
@@ -458,7 +471,7 @@ def sample_pass(run_id: str) -> Dict[str, Any]:
         mutual = (sum(1 for a, b in flows if (b, a) in flows) / len(flows)) if flows else np.nan
         won = {w["node"]: w["winner"] for w in (game.get("decisions") or {}).get("winners") or []}
         kept_by = []
-        for lo, hi in bins:
+        for lo, hi, _ in DEGREE_CLASSES:
             nodes = [v for v in won if lo <= degree.get(v, 0) <= hi]
             kept_by += [len(nodes), sum(1 for v in nodes if won[v] == v)]
         births = (repro.get("decisions") or {}).get("births") or []
@@ -504,12 +517,8 @@ def sample_pass(run_id: str) -> Dict[str, Any]:
                 parents.append([t, tokens, start_degree.get(a, 0) if start is not None else 4,
                                 d["invested"] if d else 0, len(d["links"]) if d else 0,
                                 len(d.get("handed_over") or []) if d else 0])
-        previous_game = game
-    out = {"stamp": np.array(stamp), "frames": np.array(frames, float),
-           "agents": np.array(agents, float), "parents": np.array(parents, float)}
-    os.makedirs(os.path.dirname(path), exist_ok=True)
-    np.savez_compressed(path, **out)
-    return out
+    return {"frames": np.array(frames, float), "agents": np.array(agents, float),
+            "parents": np.array(parents, float)}
 
 
 def kaplan_meier(lives: List[List[Any]]) -> Tuple[np.ndarray, np.ndarray]:

@@ -12,10 +12,10 @@ import numpy as np
 
 import book_data as D
 import book_figures as F
-from book_figures import FRAMES, chapter, describe, dots, line, recipe, survivors
+from book_figures import (DEGREE_CLASSES, FR, FRAMES, KEPT_BY, PA, chapter, describe, dots, line,
+                          recipe, survivors)
 from book_chapters.common import BLUE, CYAN, GREEN, GREY, ORANGE, RED, VIOLET, YELLOW, baseline
-from book_chapters.measures import (DEGREE_CLASSES, FR, PA, SAMPLE, SURVIVORS, bars, in_class, sampled,
-                                    stacked)
+from book_chapters.measures import SAMPLE, SURVIVORS, bars, in_class, sampled, stacked
 
 EVERY = 100
 
@@ -321,7 +321,7 @@ def mechanics(ch: F.Chapter) -> None:
     births, takeovers, new_repro, new_game = [], [], [], []
     for _, fr in rows:
         births.append(float(np.mean(fr[:, FR["births"]])))
-        pairs = fr[:, 10:22].reshape(len(fr), 6, 2)
+        pairs = fr[:, KEPT_BY].reshape(len(fr), len(DEGREE_CLASSES), 2)
         takeovers.append(float(np.mean(pairs[:, :, 0].sum(axis=1) - pairs[:, :, 1].sum(axis=1))))
         new_repro.append(float(np.mean(fr[:, FR["new_repro"]])))
         new_game.append(float(np.mean(fr[:, FR["new_game"]])))

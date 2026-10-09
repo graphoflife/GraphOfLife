@@ -78,7 +78,9 @@ def measure(name: str, file: Optional[str] = None, **how: Any) -> Callable:
     copy, and makes and keeps it only when there is none that fits.
     """
     def register(make: Callable[..., Dict[str, Any]]) -> Callable[..., Dict[str, Any]]:
-        if name in MEASURES:
+        # The same function seen twice is book_figures run as a script: it is
+        # imported once as __main__ and again by the chapters, as book_figures.
+        if name in MEASURES and _where(MEASURES[name].make) != _where(make):
             raise ValueError(f"two measures are called {name!r}")
         m = MEASURES[name] = Measure(name, make, file or f"{{run}}.{name}.json", **how)
 
@@ -88,6 +90,10 @@ def measure(name: str, file: Optional[str] = None, **how: Any) -> Callable:
         kept.measure = m
         return kept
     return register
+
+
+def _where(fn: Callable) -> tuple:
+    return fn.__code__.co_filename, fn.__code__.co_firstlineno, fn.__qualname__
 
 
 def get(m: Measure, run_id: str, **params: Any) -> Dict[str, Any]:

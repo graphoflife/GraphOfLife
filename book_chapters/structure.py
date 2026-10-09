@@ -12,11 +12,11 @@ from typing import Any, Dict, List, Sequence, Tuple
 import numpy as np
 
 import book_figures as F
-from book_figures import (BASELINE_RUNS, FRAMES, STATS_FILE, band_series, chapter, describe, dots,
-                          line, mean_over, recipe, series, survivors)
+from book_figures import (BASELINE_RUNS, DEGREE_CLASSES, FRAMES, STATS_FILE, band_series, chapter,
+                          describe, dots, line, mean_over, recipe, series, survivors)
 from book_chapters.common import (BAND_STEPS, BAND_WORDS, BLUE, CYAN, GREEN, GREY, ORANGE, RED,
                                   VIOLET, YELLOW, baseline)
-from book_chapters.measures import DEGREE_CLASSES, SURVIVORS, bars, in_class, settled_rows
+from book_chapters.measures import SURVIVORS, bars, in_class, settled_rows
 
 LAST = 2999
 
