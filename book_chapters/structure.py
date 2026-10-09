@@ -13,11 +13,11 @@ import numpy as np
 
 import book_data as D
 import book_figures as F
-from book_figures import (BASELINE_RUNS, DEGREE_CLASSES, FRAMES, STATS_FILE, band_series, chapter,
-                          describe, dots, line, mean_over, recipe, series, survivors)
+from book_figures import (DEGREE_CLASSES, FRAMES, STATS_FILE, band_series, chapter, describe, dots, line,
+                          mean_over, recipe, runs_text, series, surviving_text, survivors)
 from book_chapters.common import (BAND_STEPS, BAND_WORDS, BLUE, CYAN, GREEN, GREY, ORANGE, RED,
                                   VIOLET, YELLOW, baseline)
-from book_chapters.measures import SURVIVORS, bars, in_class, settled_rows
+from book_chapters.measures import bars, in_class, settled_rows
 
 LAST = 2999
 
@@ -123,7 +123,7 @@ def scaling(ch: F.Chapter) -> None:
                 "tokens proportional to k + 1, through the median at k = 1 — where an even split of every "
                 "stake would leave the tokens on a network that held still "
                 "([Chapter 27](27-where-the-tokens-flow.md)).",
-        recipe=recipe(SURVIVORS, FRAMES,
+        recipe=recipe(surviving_text(), FRAMES,
                       ["Read frame `5999` of every run: each agent's tokens and its connections in `edges`.",
                        "Count the agents in each cell of the classes shown; colour by the count.",
                        "Fit ln(tokens) = a + b·ln(k) by least squares over all agents (the viewer's "
@@ -179,7 +179,7 @@ def scaling(ch: F.Chapter) -> None:
                 "in at least one. "
                 "Red: least squares on the logarithms of all those agents (not of the class means); grey: the "
                 "slopes −1 and 2 for comparison.",
-        recipe=recipe(SURVIVORS, FRAMES,
+        recipe=recipe(surviving_text(), FRAMES,
                       ["Read frame `5999` of every run; for every agent count its triangles: pairs of its "
                        "neighbours that are joined.",
                        "Clustering of an agent with k ≥ 2 neighbours = triangles / (k(k − 1)/2).",
@@ -201,7 +201,7 @@ def scaling(ch: F.Chapter) -> None:
                 "their connections k: the mean, over the class, of the average number of connections of an "
                 "agent's neighbours. A falling line means the well-connected are joined mostly to the poorly "
                 "connected ([Assortativity](../notes/assortativity.md)).",
-        recipe=recipe(SURVIVORS, FRAMES,
+        recipe=recipe(surviving_text(), FRAMES,
                       ["Read frame `5999` of every run; for every agent, the mean degree of its neighbours.",
                        "Average by class of the agent's own degree."]))
     ch.number("assortativity_settled", describe(assort))
@@ -225,7 +225,7 @@ def scaling(ch: F.Chapter) -> None:
                 "and of their R². Tokens and triangles against connections, clustering against connections, and "
                 "the size of an agent's change in tokens over the game against the tokens it holds "
                 "([Scaling relations](../notes/scaling-relations.md)).",
-        recipe=recipe(SURVIVORS, STATS_FILE,
+        recipe=recipe(surviving_text(), STATS_FILE,
                       ["Average `tokensVsDegree`, `trianglesVsDegree`, `clusteringVsDegree` and "
                        "`changeVsTokens`, and the same with `R2` appended, over the rows with `phase` = 2 and "
                        "500 ≤ `iteration` ≤ 2,999.", "One dot per run, a bar at the median."]))
@@ -419,7 +419,7 @@ def geometry(ch: F.Chapter) -> None:
                 "dimension ([Box dimension](../notes/box-dimension.md)), and the spectral gap, on a logarithmic "
                 f"axis ([The spectral gap](../notes/spectral-gap.md)). In each, {BAND_WORDS[0].lower()}"
                 f"{BAND_WORDS[1:]}.",
-        recipe=recipe(BASELINE_RUNS, STATS_FILE,
+        recipe=recipe(runs_text(), STATS_FILE,
                       ["Take `dimension`, `ricciCurvature`, `boxDimension` and `spectralGap` of the rows with "
                        "`phase` = 2 (measured every 25 iterations).", *BAND_STEPS[1:]]))
     for stat in ("boxDimensionR2", "radius", "diameter", "meanPathLength", "cycleRank", "loopDensity"):
@@ -459,7 +459,7 @@ def geometry(ch: F.Chapter) -> None:
                 "length, all estimated from breadth-first searches out of 8 to 16 spread agents "
                 f"([Radius and diameter](../notes/radius-and-diameter.md)). For each, {BAND_WORDS[0].lower()}"
                 f"{BAND_WORDS[1:]}.",
-        recipe=recipe(BASELINE_RUNS, STATS_FILE,
+        recipe=recipe(runs_text(), STATS_FILE,
                       ["Take `diameter`, `radius` and `meanPathLength` of the rows with `phase` = 2.",
                        *BAND_STEPS[1:]]))
 
@@ -560,7 +560,7 @@ def breaking(ch: F.Chapter) -> None:
                 "the largest share of the world that one bridge held to the rest — if that one connection were "
                 "cut, that many would be cut off ([Cut risk](../notes/cut-risk.md)). y: the share of agents the "
                 "game really cut off. White: the mean of y in classes of x 0.05 wide; dashed: y = x.",
-        recipe=recipe(SURVIVORS, STATS_FILE,
+        recipe=recipe(surviving_text(), STATS_FILE,
                       ["Take the rows with `phase` = 2 and 500 ≤ `iteration` ≤ 2,999: `cutRiskBefore`, and "
                        "`orphaned` / `nodes_before`.", "Plot one against the other; average y in classes of x."]))
     ch.number("risk", {"corr": float(np.corrcoef(risk, culled)[0, 1]), "games": int(len(risk)),
@@ -580,7 +580,7 @@ def breaking(ch: F.Chapter) -> None:
         caption="Of all agents cut off in games from iteration 500 on of the 26 worlds that lived to the end, the "
                 "share that died in games which cut off at least n agents, for every n. Where the line is at "
                 "0.5, half of all such deaths happened in games at least that large.",
-        recipe=recipe(SURVIVORS, STATS_FILE,
+        recipe=recipe(surviving_text(), STATS_FILE,
                       ["Take `orphaned` of the rows with `phase` = 2 and 500 ≤ `iteration` ≤ 2,999.",
                        "For every n, add up `orphaned` over the rows with `orphaned` ≥ n and divide by the total."]))
     half = float(xs[np.searchsorted(-np.array(weighted), -0.5)]) if len(xs) else None

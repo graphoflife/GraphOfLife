@@ -12,8 +12,8 @@ import numpy as np
 
 import book_data as D
 import book_figures as F
-from book_figures import (BASELINE_RUNS, FRAMES, STATS_FILE, band_series, chapter, describe, dots,
-                          line, mean_over, recipe, series, survivors)
+from book_figures import (FRAMES, STATS_FILE, band_series, chapter, describe, dots, line, mean_over, recipe,
+                          runs_text, series, surviving_text, survivors)
 from book_chapters.common import (BAND_STEPS, BAND_WORDS, BLUE, CYAN, GREEN, GREY, ORANGE, RED,
                                   VIOLET, YELLOW, baseline)
 
@@ -51,7 +51,7 @@ def tokens(ch: F.Chapter) -> None:
                 "is the median over the worlds at each x; the dashed diagonal is a world where "
                 "everyone holds the same. The further a curve sags below the diagonal, the more "
                 "unequal the world (Chapter 5, and the diagram there).",
-        recipe=recipe(BASELINE_RUNS.replace("The 30", "The 26 surviving ones of the 30"), FRAMES,
+        recipe=recipe(surviving_text(), FRAMES,
                       ["Read each run's last frame (iteration 2,999, `phase` 2) and its `tokens`.",
                        "Sort the tokens from smallest to largest; the curve passes through the "
                        "points (i / n, (t₁ + … + tᵢ) / T) for i = 0 … n.",
@@ -70,7 +70,7 @@ def tokens(ch: F.Chapter) -> None:
         caption="Of all agents alive after the last game of the 26 surviving worlds, the share that "
                 "hold at least x tokens, for every x. Both axes are logarithmic: a straight falling "
                 "line here would be a power law.",
-        recipe=recipe(BASELINE_RUNS.replace("The 30", "The 26 surviving ones of the 30"), FRAMES,
+        recipe=recipe(surviving_text(), FRAMES,
                       ["Pool the `tokens` of the last frame of every run.",
                        "For every value x that occurs, the share of agents with at least x tokens."]))
     ch.number("tokens_end", {"agents": int(len(pooled)), "median": float(np.median(pooled)),
@@ -85,7 +85,7 @@ def tokens(ch: F.Chapter) -> None:
         ch.figure(name, title=title, x={"label": "iteration"}, y={"label": ylabel, "min": 0},
                   series=[b],
                   caption=f"After every game. {BAND_WORDS}.",
-                  recipe=recipe(BASELINE_RUNS, STATS_FILE,
+                  recipe=recipe(runs_text(), STATS_FILE,
                                 [f"Take every run's rows with `phase` = 2 and the statistic `{stat}` ([What a run records](../notes/frames-and-stats.md)).",
                                  *BAND_STEPS]))
         ch.number(f"{name}_settled", describe([mean_over(s.run_id, stat, 500, 2999) for s in alive]))
@@ -96,7 +96,7 @@ def tokens(ch: F.Chapter) -> None:
     ch.figure("richest", title="The richest agent's share of all tokens", x={"label": "iteration"},
               y={"label": "share of all tokens", "min": 0}, series=[richest],
               caption=f"After every game, the tokens of the richest agent divided by all 10,000. {BAND_WORDS}.",
-              recipe=recipe(BASELINE_RUNS, STATS_FILE,
+              recipe=recipe(runs_text(), STATS_FILE,
                             ["Take the rows with `phase` = 2; divide `maxTokens` by 10,000.", *BAND_STEPS]))
     ch.number("richest_settled", describe([mean_over(s.run_id, "maxTokens", 500, 2999) / 10000 for s in alive]))
 
@@ -107,7 +107,7 @@ def tokens(ch: F.Chapter) -> None:
               caption="After every game: the mean number of tokens per agent, which is 10,000 divided "
                       "by the number of agents (blue), and the median agent's tokens (green). The "
                       f"median lies below the mean because a few agents hold a lot. {BAND_WORDS}.",
-              recipe=recipe(BASELINE_RUNS, STATS_FILE,
+              recipe=recipe(runs_text(), STATS_FILE,
                             ["Take the rows with `phase` = 2 and the statistics `meanTokens` and `medianTokens`.",
                              *BAND_STEPS]))
     ch.number("median_tokens_settled", describe([mean_over(s.run_id, "medianTokens", 500, 2999) for s in alive]))
@@ -137,7 +137,7 @@ def tokens(ch: F.Chapter) -> None:
               caption="In the cleanup of every game, the tokens of the agents removed — those cut off "
                       "from the largest piece; agents that starved hold none — which are shared out at "
                       f"random among the survivors. {BAND_WORDS}.",
-              recipe=recipe(BASELINE_RUNS, STATS_FILE,
+              recipe=recipe(runs_text(), STATS_FILE,
                             ["Take the rows with `phase` = 2 and the statistic `redistributed`.", *BAND_STEPS]))
     ch.number("shared_out_settled", describe([mean_over(s.run_id, "redistributed", 500, 2999) for s in alive]))
 
@@ -178,7 +178,7 @@ def game(ch: F.Chapter) -> None:
                 "node. '0' and '1' are exact: nothing at home, everything at home. Grey: the "
                 "game of iteration 0, played by the founders and their first children, whose "
                 "brains no selection has touched yet. Blue: the game of iteration 2,999.",
-        recipe=recipe(BASELINE_RUNS, FRAMES,
+        recipe=recipe(runs_text(), FRAMES,
                       ["In the frames of iteration 0 and 2,999 with `phase` 2, read "
                        "`decisions.allocations`: for each agent, `alloc[0]` is what it staked on its own "
                        "node (its first target is itself) and `tokens` all it staked.",
@@ -223,7 +223,7 @@ def game(ch: F.Chapter) -> None:
                 "that outweighed the largest staker (cyan, violet; see [How a coalition takes a "
                 "node](../notes/revolution.md)). Each column adds up to 1. Left: the game of "
                 "iteration 0; right: the game of iteration 2,999.",
-        recipe=recipe(BASELINE_RUNS, FRAMES,
+        recipe=recipe(runs_text(), FRAMES,
                       ["Read frame 1 of each of the 30 runs (the game of iteration 0) and frame 5,999 of "
                        "the 26 that reached it (the game of iteration 2,999).",
                        "For every entry of `decisions.winners`, note whether `winner` is the `node` itself, "
@@ -259,7 +259,7 @@ def game(ch: F.Chapter) -> None:
                   series=out,
                   caption=f"After every game of the 30 baseline worlds. {words} For each, {BAND_WORDS[0].lower()}"
                           f"{BAND_WORDS[1:]} ([Bands](../notes/bands.md)).",
-                  recipe=recipe(BASELINE_RUNS, STATS_FILE,
+                  recipe=recipe(runs_text(), STATS_FILE,
                                 ["Take the rows with `phase` = 2 and the statistics "
                                  + ", ".join(f"`{s}`" for s, _ in stats)
                                  + " (`a/b` is the row's `a` divided by its `b`; "
@@ -281,7 +281,7 @@ def game(ch: F.Chapter) -> None:
                 "revolutionary, the share of nodes kept by their own agent, nodes won by a coalition "
                 "per agent, and the share of staked tokens put at home. The dots are spread "
                 "sideways only so that they do not hide each other.",
-        recipe=recipe(BASELINE_RUNS.replace("The 30", "The 26 surviving ones of the 30"), STATS_FILE,
+        recipe=recipe(surviving_text(), STATS_FILE,
                       ["For each run, average each statistic over the rows with `phase` = 2 and "
                        "500 ≤ `iteration` ≤ 2,999.",
                        "Draw one dot per run and statistic, and a bar at the median."]))
@@ -383,7 +383,7 @@ def shape(ch: F.Chapter) -> None:
         caption="Of all agents alive after the last game of the 26 surviving worlds, the share "
                 "that have at least d connections, for every d. At the start every founder had "
                 "exactly four (the grey line).",
-        recipe=recipe(BASELINE_RUNS.replace("The 30", "The 26 surviving ones of the 30"), FRAMES,
+        recipe=recipe(surviving_text(), FRAMES,
                       ["Count every agent's connections in the last frame's `edges`; pool the 26 runs.",
                        "For d = 1, 2, …, the share of agents with at least d."]))
     ch.number("degree_end", {"agents": int(len(pooled)), "mean": float(pooled.mean()),
@@ -406,7 +406,7 @@ def shape(ch: F.Chapter) -> None:
                 "25 iterations. Middle: the share of agents with exactly one connection, after every "
                 "game. Right: the share of connections that are bridges ([Bridges](../notes/bridges.md)), "
                 f"every 25 iterations. In each, {BAND_WORDS[0].lower()}{BAND_WORDS[1:]}.",
-        recipe=recipe(BASELINE_RUNS, STATS_FILE,
+        recipe=recipe(runs_text(), STATS_FILE,
                       ["Take the rows with `phase` = 2 and the statistics `coreShare`, `leaves/nodes` and "
                        "`bridges/edges` (`a/b` is the row's `a` divided by its `b`).",
                        "For `leaves/nodes`, make the band as for every other band "
@@ -419,7 +419,7 @@ def shape(ch: F.Chapter) -> None:
               caption="Three times the number of triangles divided by the number of connected triples "
                       "([Clustering](../notes/clustering.md)), every 25 iterations. The founders' ring starts near 0.24. "
                       f"{BAND_WORDS}.",
-              recipe=recipe(BASELINE_RUNS, STATS_FILE,
+              recipe=recipe(runs_text(), STATS_FILE,
                             ["Take the rows with `phase` = 2 and the statistic `transitivity`.",
                              "Bands as above, in stretches of 25."]))
     ch.number("transitivity_settled", describe([mean_over(s.run_id, "transitivity", 500, 2999) for s in alive]))
@@ -439,7 +439,7 @@ def shape(ch: F.Chapter) -> None:
                 "of steps along connections from one agent to another, both averaged over "
                 "iterations 500–2,999. Grey: the rough distance in a random network with the "
                 "same number of agents N and connections per agent k, ln N / ln k.",
-        recipe=recipe(BASELINE_RUNS.replace("The 30", "The 26 surviving ones of the 30"), STATS_FILE,
+        recipe=recipe(surviving_text(), STATS_FILE,
                       ["Average `nodes`, `meanDegree` and `meanPathLength` over the rows with "
                        "`phase` = 2 and 500 ≤ `iteration` ≤ 2,999 (`meanPathLength` is measured every "
                        "25 iterations, from breadth-first searches out of 8 to 16 evenly spread agents; [Path length](../notes/path-length.md)).",
@@ -478,7 +478,7 @@ def lineage(ch: F.Chapter) -> None:
                 "A genotype lasts from the first game after which some agent carries it to the last; "
                 "an agent from its birth to the last game it is alive after. Lives still going at the "
                 "end are counted as far as they went (Kaplan–Meier).",
-        recipe=recipe(BASELINE_RUNS.replace("The 30", "The 26 surviving ones of the 30"), FRAMES,
+        recipe=recipe(surviving_text(), FRAMES,
                       ["Read every frame with `phase` = 2; for every genotype (brain id in `brain_ids`) "
                        "and every agent (id in `ids`) note the first and last iteration it appears.",
                        "Keep those first seen at iteration 500 or later; one still present in the "
@@ -495,7 +495,7 @@ def lineage(ch: F.Chapter) -> None:
               y={"label": "share of agents", "min": 0, "max": 0.7}, series=[top, single],
               caption="After every game, the share of the living that carry the most common genotype. "
                       f"{BAND_WORDS}. The yellow line is the single world with seed 12.",
-              recipe=recipe(BASELINE_RUNS, FRAMES,
+              recipe=recipe(runs_text(), FRAMES,
                             ["After every game, count the agents per genotype in `brain_ids`; the "
                              "largest count divided by the number of agents.", *BAND_STEPS]))
 
@@ -569,7 +569,7 @@ def lineage(ch: F.Chapter) -> None:
               caption="One dot per surviving world: how many times, between iteration 100 and the "
                       "end, the newest common ancestor of all the living moved forward to a younger "
                       "genotype (one of the drops in the figure above). The bar is the median.",
-              recipe=recipe(BASELINE_RUNS.replace("The 30", "The 26 surviving ones of the 30"),
+              recipe=recipe(surviving_text(),
                             "the lineage analysis of Experiment 6 (`python3 gol_lab.py analyse E06`), "
                             "in `book/results/E06.json` (`ancestor.moves` of every run)",
                             ["Take the common-ancestor depth every 25 iterations as above.",

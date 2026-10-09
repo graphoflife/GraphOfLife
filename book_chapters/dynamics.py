@@ -16,14 +16,12 @@ import numpy as np
 
 import book_data as D
 import book_figures as F
-from book_figures import FRAMES, band_series, chapter, describe, dots, line, recipe, survivors
+from book_figures import FRAMES, band_series, chapter, describe, dots, line, lived_text, recipe, survivors
 from book_chapters.common import BLUE, CYAN, GREEN, GREY, ORANGE, RED, VIOLET, YELLOW, baseline
 
 LAGS = (1, 2, 5, 10, 20, 50, 100, 200)
 STARTS = range(500, 2800, 100)
 QUINTILES = 5
-SURVIVORS = ("The 26 baseline worlds that lived to the end (`B1-10000-s001` … `-s030`, Chapter 9; "
-             "`python3 gol_lab.py run E02`).")
 
 
 def _ranks(values: np.ndarray) -> np.ndarray:
@@ -149,7 +147,7 @@ def rich(ch: F.Chapter) -> None:
                 "2,700 (leaving out, for the correlation, the few moments after which fewer than three of the "
                 "agents were alive); the line is the median of the 26 worlds, the darker band the middle half "
                 "of them and the paler band nine in ten.",
-        recipe=recipe(SURVIVORS, FRAMES,
+        recipe=recipe(lived_text(), FRAMES,
                       ["For t = 500, 600, …, 2,700 and k = 1, 2, 5, 10, 20, 50, 100, 200: read frames 2·t + 1 and "
                        "2·(t + k) + 1; the agents (`ids`) in both, and their `tokens` in each.",
                        "Spearman's ρ: the correlation of the ranks of the two token counts (ties share their "
@@ -181,7 +179,7 @@ def rich(ch: F.Chapter) -> None:
                 "end, sorted into fifths of the world by their tokens (ranks, ties shared), and where each one "
                 "was ten games later: in which fifth, or dead. Each row adds up to 1; a cell's colour is the "
                 "share of its row.",
-        recipe=recipe(SURVIVORS, FRAMES,
+        recipe=recipe(lived_text(), FRAMES,
                       ["As in the figure above, with k = 10: each agent's fifth is ⌈rank / n · 5⌉ among the n "
                        "agents of its frame.",
                        "Count the agents in every pair of fifths, and those not in the later frame as dead; divide "
@@ -210,7 +208,7 @@ def rich(ch: F.Chapter) -> None:
                 "the share of them still in the richest tenth of their world, and the share dead. Right: for "
                 "those alive, their tokens then divided by their tokens at t — the median in each world, and the "
                 "median of the worlds.",
-        recipe=recipe(SURVIVORS, FRAMES,
+        recipe=recipe(lived_text(), FRAMES,
                       ["As in the first figure: the richest hundredth are the agents with tokens at or above the "
                        "99th percentile of their frame; the richest tenth later, at or above the 90th."]))
     ch.number("richest", {"lags": list(LAGS), "dead": dead.tolist(), "top10": top10.tolist(),
@@ -233,7 +231,7 @@ def rich(ch: F.Chapter) -> None:
                 "hundredth of their world (red) and for every agent (grey). Pooled over moments and worlds: "
                 + ", ".join(f"{int(counts['richest'][0][i]):,} of the richest and {int(counts['all'][0][i]):,} in "
                             f"all with {lab}" for i, lab in enumerate(labels)) + " connections.",
-        recipe=recipe(SURVIVORS, FRAMES,
+        recipe=recipe(lived_text(), FRAMES,
                       ["For t = 500, 600, …, 2,700: read frames 2·t + 1 and 2·(t + 10) + 1; each agent's "
                        "connections at t from `edges`; the richest hundredth as above.",
                        "Per class of connections, the agents of the first frame missing from the second, over all "
@@ -351,7 +349,7 @@ def grows(ch: F.Chapter) -> None:
                 "— per agent. Pooled over the reproduction phases and games of every 25th iteration from 500 on, "
                 "in the 26 worlds that lived to the end. Dashed: straight lines fitted on these logarithmic axes; "
                 "dotted: a line of slope 1, in proportion to k.",
-        recipe=recipe(SURVIVORS, FRAMES,
+        recipe=recipe(lived_text(), FRAMES,
                       ["For t = 500, 525, …, 2,975 read frames 2·t − 1 (before the reproduction phase of t), 2·t "
                        "(after it) and 2·t + 1 (after the game).",
                        "Gained: the edges in 2·t not in 2·t − 1, counted at both ends, for agents in both frames, "
@@ -405,7 +403,7 @@ def _age_degree(ch: F.Chapter, alive) -> None:
                 "the iterations since their node was born — in classes doubling in width: the median number "
                 "of connections of each class, with the band from its 25th to its 75th percentile, and the 99th "
                 "percentile (dashed).",
-        recipe=recipe(SURVIVORS, FRAMES,
+        recipe=recipe(lived_text(), FRAMES,
                       ["Read frame 5,999 of each run: `ages`, and each agent's connections in `edges`.",
                        "Classes of age [0, 1), [1, 2), [2, 4), …, [1,024, 3,000); in each class with at least 30 "
                        "agents, the median, quartiles and 99th percentile of the connections."]))

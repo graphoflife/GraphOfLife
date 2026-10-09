@@ -12,10 +12,10 @@ import numpy as np
 
 import book_data as D
 import book_figures as F
-from book_figures import (DEGREE_CLASSES, FR, FRAMES, KEPT_BY, PA, chapter, describe, dots, line,
-                          recipe, survivors)
+from book_figures import (DEGREE_CLASSES, FR, FRAMES, KEPT_BY, PA, chapter, describe, dots, line, recipe,
+                          surviving_text, survivors)
 from book_chapters.common import BLUE, CYAN, GREEN, GREY, ORANGE, RED, VIOLET, YELLOW, baseline
-from book_chapters.measures import SAMPLE, SURVIVORS, bars, in_class, sampled, stacked
+from book_chapters.measures import SAMPLE, bars, in_class, sampled, stacked
 
 EVERY = 100
 
@@ -185,7 +185,7 @@ def cooperation(ch: F.Chapter) -> None:
                 "the share that carry the same genotype, and the share that are close kin: the same genotype, "
                 "or one's genotype the parent of the other's, or both with the same parent genotype. At the start "
                 "of the games of every 100th iteration from 500 on.",
-        recipe=recipe(SURVIVORS, FRAMES,
+        recipe=recipe(surviving_text(), FRAMES,
                       ["For every 100th iteration t from 500 on, read frame `2·t`: each agent's genotype "
                        "(`brain_ids`) and its parent genotype (`parent_brain_ids`).",
                        "For every connection of `edges`, test the two relations; also for 2,000 pairs of agents "
@@ -214,7 +214,7 @@ def cooperation(ch: F.Chapter) -> None:
                 "Left: the share of its tokens an agent staked on each neighbour, averaged over the neighbours "
                 "of its own genotype (green) and over the others (grey), then over the agents. Right: of what it "
                 "staked on a neighbour, the share it marked revolutionary.",
-        recipe=recipe(SURVIVORS, FRAMES,
+        recipe=recipe(surviving_text(), FRAMES,
                       ["For every 100th iteration t from 500 on, take the genotypes from frame `2·t` and the "
                        "stakes from `decisions.allocations` of frame `2·t + 1`.",
                        "For each agent with neighbours of both kinds: the mean of `alloc` / `tokens` over each "
@@ -240,7 +240,7 @@ def cooperation(ch: F.Chapter) -> None:
                 "that lived to the end. Left: the share in which the winner carried the same genotype as the "
                 "agent whose node it took — a takeover that changes nothing in the brain. Right: the same share "
                 "if the winner had been drawn at random from the neighbours that staked on the node.",
-        recipe=recipe(SURVIVORS, FRAMES,
+        recipe=recipe(surviving_text(), FRAMES,
                       ["For every 100th iteration t from 500 on, read the genotypes in frame `2·t` and "
                        "`decisions.winners` and `decisions.allocations` in frame `2·t + 1`.",
                        "For each node whose `winner` is not the node: is the winner's genotype the node's? "
@@ -275,7 +275,7 @@ def cooperation(ch: F.Chapter) -> None:
                 "the games of every 100th iteration from 500 on). A cell's colour is how many pairs fall in it; "
                 f"the diagonal is an even exchange. In the median world {100 * float(np.median(equal)):.0f}% of "
                 "the pairs staked exactly the same on each other.",
-        recipe=recipe(SURVIVORS, FRAMES,
+        recipe=recipe(surviving_text(), FRAMES,
                       ["From `decisions.allocations` of frame `2·t + 1`, for every 100th iteration t from 500 on, "
                        "collect every pair (A, B) with a stake of A on B and of B on A.",
                        "Draw up to 400 pairs per run (generator seeded with 11) and count them in cells."]))
@@ -301,7 +301,7 @@ def cooperation(ch: F.Chapter) -> None:
                 "game (green); and still there with exactly the same two genotypes (yellow). Pooled over the "
                 f"{total:,} connections at the start of the games of every 200th iteration from 500 on, in the 26 "
                 "worlds that lived to the end. Both axes are logarithmic.",
-        recipe=recipe(SURVIVORS, FRAMES,
+        recipe=recipe(surviving_text(), FRAMES,
                       ["For every 200th iteration t from 500 on, take the connections of frame `2·t` and the "
                        "genotypes of their ends.",
                        "For k = 1, 2, 4, 8, 16: read frame `2·(t + k)` — is the connection still in `edges`, and are "
@@ -336,7 +336,7 @@ def mechanics(ch: F.Chapter) -> None:
                 "of which takes on a copy of the winner's brain; genotypes that appear for the first time in the "
                 "frame after a reproduction phase (a newborn's brain that changed); and genotypes that appear for "
                 "the first time after a game (every brain is offered a change at its end). On a logarithmic axis.",
-        recipe=recipe(SURVIVORS, SAMPLE,
+        recipe=recipe(surviving_text(), SAMPLE,
                       ["For every 25th iteration t from 500 on: births = the length of `decisions.births` in frame "
                        "`2·t`; takeovers = the entries of `decisions.winners` in frame `2·t + 1` with `winner` ≠ "
                        "`node`.",

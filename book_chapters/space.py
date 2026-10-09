@@ -17,12 +17,10 @@ import numpy as np
 
 import book_data as D
 import book_figures as F
-from book_figures import FRAMES, chapter, describe, dots, line, recipe, runs_of, survivors
+from book_figures import FRAMES, chapter, describe, dots, line, lived_text, recipe, runs_of, survivors
 from book_chapters.common import BLUE, GREEN, GREY, ORANGE, RED, VIOLET, YELLOW, baseline
 from book_chapters.structure import graph
 
-SURVIVORS = ("The 26 baseline worlds that lived to the end (`B1-10000-s001` … `-s030`, Chapter 9; "
-             "`python3 gol_lab.py run E02`).")
 MOMENTS = (1000, 1500, 2000, 2500, 2999)
 MAX_R = 15
 
@@ -150,7 +148,7 @@ def alike(ch: F.Chapter) -> None:
                 "mean over five moments (after the games of iterations 1,000, 1,500, 2,000, 2,500 and 2,999); the "
                 "bar is the median. The same values shuffled among a world's agents give correlations within "
                 "0.01 of zero; the last column is the assortativity of Chapter 30, taken of ln k instead of k.",
-        recipe=recipe(SURVIVORS, FRAMES,
+        recipe=recipe(lived_text(), FRAMES,
                       ["Read frames 2·t + 1 for t = 1,000, 1,500, 2,000, 2,500, 2,999: `ids`, `tokens`, `ages`, "
                        "`brain_ids` and `edges`.",
                        "Pearson's correlation of the value at one end of a connection with the value at the other, "
@@ -188,7 +186,7 @@ def alike(ch: F.Chapter) -> None:
                 "median when each agent's tokens (or age) are first shuffled among the agents with about as many "
                 "connections (1, 2, 3–4, 5–9, 10–49, 50 and more) — what an agent's place in the network explains "
                 "without any closeness of its own.",
-        recipe=recipe(SURVIVORS, FRAMES,
+        recipe=recipe(lived_text(), FRAMES,
                       ["At each moment, a breadth-first search out of 150 agents drawn at random (generator seeded "
                        "with 22), to 15 steps; every agent reached at r steps gives the pair (source, agent).",
                        "Standardise each value within its moment (subtract the mean, divide by the standard "
@@ -218,7 +216,7 @@ def alike(ch: F.Chapter) -> None:
                 "line is the median of the 26 worlds, the darker band the middle half of them and the paler band "
                 "nine in ten. From 9 steps on, most worlds have no such pair at all, and none has a twentieth of what "
                 "chance would give.",
-        recipe=recipe(SURVIVORS, FRAMES,
+        recipe=recipe(lived_text(), FRAMES,
                       ["As above; for every pair, whether the two `brain_ids` are equal.",
                        "Any two agents: Σ c(c − 1) / (n(n − 1)) over the genotypes' counts c among the n agents."]))
     ch.number("kin", {"enrichment": [describe(enrich[:, i]) for i in range(len(rs))],
@@ -492,7 +490,7 @@ def dimensions(ch: F.Chapter) -> None:
                 "but wired at random. Yellow: the three worlds of 409,600 tokens of Chapter 38 (about 60,000 "
                 "agents each), measured from 100 balls and 48 walks of up to 1,024 steps; dashed orange, their "
                 "random twins.",
-        recipe=recipe(SURVIVORS + " " + BIG, FRAMES,
+        recipe=recipe(lived_text() + " " + BIG, FRAMES,
                       ["Read each run's last frame; build its network from `edges` and keep its largest piece.",
                        "The rulers as in the figure above (`book_chapters.space.measure`); the twin by "
                        "`book_chapters.structure.degree_preserving` (seed 23)."]))
@@ -556,7 +554,7 @@ def dimensions(ch: F.Chapter) -> None:
                 "the spectral dimension from walks of 4 to 8 steps. The line is the median of the worlds, the "
                 "darker band the middle half of them and the paler band nine in ten. The viewer's own dimensions, "
                 "every 25 iterations, are drawn in Chapter 31.",
-        recipe=recipe(SURVIVORS, FRAMES,
+        recipe=recipe(lived_text(), FRAMES,
                       ["Read frame 2·t + 1 for each t; take the largest piece of its network.",
                        "The rulers as in the first figure, the walk run for 128 steps "
                        "(`book_chapters.space.life_dimensions`); read the ball ruler at r = √6 and the walk at "

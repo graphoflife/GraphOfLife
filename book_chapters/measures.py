@@ -16,13 +16,12 @@ import numpy as np
 
 import book_data as D
 import book_figures as F
-from book_figures import (AG, BASELINE_RUNS, DEGREE_CLASSES, FR, FRAMES, KEPT_BY, PA, STATS_FILE,
-                          band_series, chapter, describe, dots, line, mean_over, recipe, series,
+from book_figures import (AG, DEGREE_CLASSES, FR, FRAMES, KEPT_BY, PA, STATS_FILE, band_series, chapter,
+                          describe, dots, line, mean_over, recipe, runs_text, series, surviving_text,
                           survivors)
 from book_chapters.common import (BAND_STEPS, BAND_WORDS, BLUE, CYAN, GREEN, GREY, ORANGE, RED,
                                   VIOLET, YELLOW, baseline)
 
-SURVIVORS = BASELINE_RUNS.replace("The 30", "The 26 surviving ones of the 30")
 SAMPLE = ("each run's frames, read every 25 iterations by `book_figures.sample_pass` (frame "
           "`2·t` after the reproduction phase of iteration *t*, frame `2·t + 1` after its game; "
           "`gol_store.read_frame(run, index)`)")
@@ -105,7 +104,7 @@ def entropy(ch: F.Chapter) -> None:
                 "genotypes they carry — the entropy of the genotypes' shares divided by log₂ of the "
                 f"number of agents, measured every 25 iterations. In each, {BAND_WORDS[0].lower()}"
                 f"{BAND_WORDS[1:]}.",
-        recipe=recipe(BASELINE_RUNS, STATS_FILE + "; for genotypes, " + SAMPLE,
+        recipe=recipe(runs_text(), STATS_FILE + "; for genotypes, " + SAMPLE,
                       ["Take `tokenEvenness` and `degreeEvenness` of the rows with `phase` = 2.",
                        "For genotypes: in the frame after the game of every 25th iteration, count the "
                        "agents per genotype (`brain_ids`), turn the counts into shares pᵢ, and compute "
@@ -135,7 +134,7 @@ def entropy(ch: F.Chapter) -> None:
                 "among the living, per agent. Right: 2^H of the genotypes — how many equally common "
                 "genotypes would be as diverse as the ones there are — per agent. The dots are spread "
                 "sideways only so that they do not hide each other.",
-        recipe=recipe(SURVIVORS, STATS_FILE + "; for genotypes, " + SAMPLE,
+        recipe=recipe(surviving_text(), STATS_FILE + "; for genotypes, " + SAMPLE,
                       ["Tokens: for each row with `phase` = 2 and 500 ≤ `iteration` ≤ 2,999, compute "
                        "2^`tokenEntropy` / `nodes`, and average over the rows.",
                        "Genotypes: in the frames after the game of every 25th iteration from 500 on, the "
@@ -163,7 +162,7 @@ def entropy(ch: F.Chapter) -> None:
                 f"other — the correlation is {np.corrcoef(g, e)[0, 1]:.2f} — but not along one curve: the "
                 "same Gini comes with different evenness, because the two weigh the poor and the rich "
                 "differently.",
-        recipe=recipe(SURVIVORS, STATS_FILE,
+        recipe=recipe(surviving_text(), STATS_FILE,
                       ["Take the rows with `phase` = 2 and `iteration` a multiple of 25 from 500 on.",
                        "Plot `tokenEvenness` against `gini`, one dot per row."]))
     ch.number("gini_evenness_corr", float(np.corrcoef(g, e)[0, 1]))
@@ -202,7 +201,7 @@ def gains(ch: F.Chapter) -> None:
                 "survived holding fewer tokens, exactly as many, or more than before. Left: the game of "
                 "iteration 0 in all 30 worlds. Right: every game from iteration 500 on in the 26 worlds "
                 "that lived to the end, pooled.",
-        recipe=recipe(BASELINE_RUNS, STATS_FILE,
+        recipe=recipe(runs_text(), STATS_FILE,
                       ["Take the rows with `phase` = 2 (iteration 0, or 500 to 2,999).",
                        "Sum over them: `nodes_before` (agents at the start), `starved`, `orphaned`, `gainers`, "
                        "`losers`, and `nodes` − `gainers` − `losers` (survivors whose tokens did not change).",
@@ -231,7 +230,7 @@ def gains(ch: F.Chapter) -> None:
                 "the share that died in the game (starved or cut off), and of the rest the shares that "
                 "lost tokens, kept exactly as many, or gained. From the games of every 100th iteration "
                 f"from 500 on, in the 26 worlds that lived to the end ({len(tokens):,} agents in all).",
-        recipe=recipe(SURVIVORS, SAMPLE,
+        recipe=recipe(surviving_text(), SAMPLE,
                       ["For every 100th iteration t from 500 on, take each agent in frame `2·t` (the start "
                        "of the game) with its `tokens`.",
                        "Find it in frame `2·t + 1`: if it is not there, it died in the game; if it is, its "
@@ -276,7 +275,7 @@ def gains(ch: F.Chapter) -> None:
                 "tokens it held at the start, over the agents that survived the game. Yellow: all agents; "
                 "cyan: only agents that held 3 to 9 tokens, so that wealth itself cannot explain the "
                 "pattern. A class with fewer than 1,000 agents is left out (drawn at 0).",
-        recipe=recipe(SURVIVORS, SAMPLE,
+        recipe=recipe(surviving_text(), SAMPLE,
                       ["For every 100th iteration t from 500 on, read frame `2·t`: for every agent u, "
                        "κ(u) = Σ over its neighbours v of (τ(v) − τ(u)).",
                        "Find each agent in frame `2·t + 1` and take its `delta` (agents not there died and "
@@ -295,7 +294,7 @@ def gains(ch: F.Chapter) -> None:
         caption="How many tokens the cleanup dealt out at random among the survivors — the tokens of the "
                 "agents that were cut off — after each game (green) and after each reproduction phase "
                 f"(cyan), on a logarithmic axis. For each, {BAND_WORDS[0].lower()}{BAND_WORDS[1:]}.",
-        recipe=recipe(BASELINE_RUNS, STATS_FILE,
+        recipe=recipe(runs_text(), STATS_FILE,
                       ["Take `redistributed` of the rows with `phase` = 2 and of those with `phase` = 1.",
                        *BAND_STEPS]))
     lot = []
@@ -373,7 +372,7 @@ def flow(ch: F.Chapter) -> None:
                 "cancelling, flow with a direction ([Token flow](../notes/token-flow.md)). Left: the game of "
                 "iteration 0, pooled over the 30 worlds; right: every game from iteration 500 on of the 26 "
                 "worlds that lived to the end, pooled. Exactly 10,000 tokens are staked in each game.",
-        recipe=recipe(BASELINE_RUNS, STATS_FILE,
+        recipe=recipe(runs_text(), STATS_FILE,
                       ["Take the rows with `phase` = 2: `tokens` (all staked), `totalFlow` (staked on "
                        "others) and `netFlowShare` (the share of that flow left after cancelling).",
                        "Sum over the rows: at home = Σ `tokens` − Σ `totalFlow`; cancelled = Σ `totalFlow` × "
@@ -392,7 +391,7 @@ def flow(ch: F.Chapter) -> None:
         caption="Of all pairs (A, B) in a game where agent A staked at least one token on neighbour B's node, "
                 "the share in which B also staked at least one token on A's — every 25 iterations, in the 30 "
                 f"baseline worlds. {BAND_WORDS}.",
-        recipe=recipe(BASELINE_RUNS, SAMPLE,
+        recipe=recipe(runs_text(), SAMPLE,
                       ["In the frame after the game of every 25th iteration, read `decisions.allocations`: "
                        "for every agent A and every target B ≠ A with a stake > 0, note the pair (A, B).",
                        "Count the pairs whose reverse (B, A) is also there, divided by all pairs.",
@@ -434,7 +433,7 @@ def flow(ch: F.Chapter) -> None:
                 "which gives the tokens left over to the largest remainders, and, when all remainders tie, "
                 "to the agent's own node first. From the games of every 100th iteration from 500 on, in the "
                 "26 worlds that lived to the end.",
-        recipe=recipe(SURVIVORS, SAMPLE,
+        recipe=recipe(surviving_text(), SAMPLE,
                       ["For every 100th iteration t from 500 on, take each agent's degree d in frame `2·t`.",
                        "In frame `2·t + 1`, read its entry of `decisions.allocations`: the number of `targets` "
                        "(its candidates), how many of them got `alloc` > 0, and `alloc[0]` / `tokens` (its "
@@ -477,7 +476,7 @@ def flow(ch: F.Chapter) -> None:
                 f"{len(predicted):,} agents (the games of every 250th iteration from 500 on, 26 worlds), "
                 f"the straight line fitted to the points has slope {slope:.2f}, and the even split accounts "
                 f"for {100 * r2:.0f}% of the variance (R², [Fitting a straight line](../notes/least-squares.md)).",
-        recipe=recipe(SURVIVORS, SAMPLE.replace("every 25 iterations by `book_figures.sample_pass` ", ""),
+        recipe=recipe(surviving_text(), SAMPLE.replace("every 25 iterations by `book_figures.sample_pass` ", ""),
                       ["For every 250th iteration t from 500 on, read frame `2·t` (the start of the game): each "
                        "agent's tokens τ and neighbours.",
                        "Even split: every agent u gives τ(u)/(d(u) + 1) to itself and to each neighbour; x(u) is "
@@ -502,7 +501,7 @@ def flow(ch: F.Chapter) -> None:
                 "of the game; the share that was won by the agent living on it — whether as the largest "
                 "staker or through a coalition. From the games of every 25th iteration from 500 on, in the "
                 "26 worlds that lived to the end.",
-        recipe=recipe(SURVIVORS, SAMPLE,
+        recipe=recipe(surviving_text(), SAMPLE,
                       ["For every 25th iteration t from 500 on, count each node's connections in frame `2·t`.",
                        "In frame `2·t + 1`, read `decisions.winners`: for each node, whether `winner` = `node`.",
                        "Pool over runs and frames, and divide kept by all, per class."]))
@@ -527,7 +526,7 @@ def flow(ch: F.Chapter) -> None:
                 "(red) — so at most 1 − red can circulate. Right, after cancelling every stake against the one "
                 "coming back: the share of the flow left (cyan), and of that, the share found in loops "
                 f"(green). Every 25 iterations, 30 worlds; {BAND_WORDS[0].lower()}{BAND_WORDS[1:]}.",
-        recipe=recipe(BASELINE_RUNS, STATS_FILE,
+        recipe=recipe(runs_text(), STATS_FILE,
                       ["Take `cyclingShare`, `flowImbalance`, `netFlowShare` and `netCyclingShare` of the rows "
                        "with `phase` = 2 (measured every 25 iterations).", *BAND_STEPS[1:]]))
     for stat in ("totalFlow", "meanEdgeFlow", "maxEdgeFlow", "prunedEdges", "lightningLongest",
@@ -579,7 +578,7 @@ def children(ch: F.Chapter) -> None:
                 "the 26 worlds that lived to the end, sorted by the tokens they held. Left: the share of them "
                 "that had a child. Right: for those that did, the share of their tokens they gave it — the "
                 "white dot is the median, the cyan bar runs from the 25th to the 75th percentile.",
-        recipe=recipe(SURVIVORS, SAMPLE,
+        recipe=recipe(surviving_text(), SAMPLE,
                       ["For every 100th iteration t from 500 on, take the agents of frame `2·t − 1` (after the "
                        "game before) with their `tokens`.",
                        "In frame `2·t`, `decisions.births` lists every parent (`agent`) with `tokens_before` and "
@@ -608,7 +607,7 @@ def children(ch: F.Chapter) -> None:
                 "that lived to the end. Left: how many of its parent's candidates — the parent itself and its "
                 "neighbours — the child was joined to at birth. Right: how many of its own connections the "
                 "parent handed to the child. A child with no connection at all is cut off at once.",
-        recipe=recipe(SURVIVORS, SAMPLE,
+        recipe=recipe(surviving_text(), SAMPLE,
                       ["In frame `2·t` of every 100th iteration t from 500 on, read `decisions.births`: the "
                        "length of `links` and of `handed_over` for every birth.",
                        "Count the births by these lengths and divide by all births."]))
@@ -623,7 +622,7 @@ def children(ch: F.Chapter) -> None:
         series=[bars(dl, p_by_degree, GREEN)], legend=False,
         caption="As the left panel of the figure above, with the agents sorted by their number of connections "
                 "at the start of the reproduction phase instead of their tokens.",
-        recipe=recipe(SURVIVORS, SAMPLE,
+        recipe=recipe(surviving_text(), SAMPLE,
                       ["As for the figure above, counting each agent's connections in frame `2·t − 1`."]))
     ch.number("by_degree", dict(zip(dl, p_by_degree)))
 
@@ -650,7 +649,7 @@ def children(ch: F.Chapter) -> None:
                 "(`meanInvestedShare`); the tokens given to all children as a share of all tokens "
                 "(`reproTokenShare`); the mean number of connections a child was born with (`meanChildLinks`); "
                 f"and the connections handed over per birth (`handovers` / `births`). {BAND_WORDS}.",
-        recipe=recipe(BASELINE_RUNS, STATS_FILE,
+        recipe=recipe(runs_text(), STATS_FILE,
                       ["Take the rows with `phase` = 1: `meanInvestedShare`, `reproTokenShare`, "
                        "`meanChildLinks`, and `handovers` divided by `births`.", *BAND_STEPS]))
     for stat in ("meanInvestedShare", "reproTokenShare", "meanChildLinks"):
@@ -763,7 +762,7 @@ def powerlaws(ch: F.Chapter) -> None:
                 "(`tokenExponent`). Right: the share of agents in the tail the maximum-likelihood fit chose "
                 "(`degreeTailShare`) and the largest gap between that tail and the fitted law "
                 "(`degreeGammaKS`).",
-        recipe=recipe(SURVIVORS, STATS_FILE,
+        recipe=recipe(surviving_text(), STATS_FILE,
                       ["Average `degreeGamma`, `degreeExponent`, `tokenExponent`, `degreeTailShare` and "
                        "`degreeGammaKS` over the rows with `phase` = 2 and 500 ≤ `iteration` ≤ 2,999.",
                        "One dot per run, a bar at the median."]))
@@ -795,7 +794,7 @@ def powerlaws(ch: F.Chapter) -> None:
                 "likelihood to the tail, from the x that fits it best. Cyan: a log-normal distribution with the "
                 "mean and standard deviation of ln x over all agents — a distribution whose logarithm is "
                 "normal. Both on logarithmic axes.",
-        recipe=recipe(SURVIVORS, FRAMES,
+        recipe=recipe(surviving_text(), FRAMES,
                       ["Pool the `tokens` of the last frame of every run.",
                        "Dots: for each distinct x, the share of agents with at least x.",
                        "Red: `gol_series._scale_free(tokens)`, as for the degrees.",
@@ -824,7 +823,7 @@ def powerlaws(ch: F.Chapter) -> None:
                 f"({len(cut):,} games), the share that cut off at least n agents (orange) and the share in "
                 "which at least n agents starved (red), for every n, on logarithmic axes. Games in which no "
                 "one was removed count in the denominator, which is why the curves start below 1.",
-        recipe=recipe(SURVIVORS, STATS_FILE,
+        recipe=recipe(surviving_text(), STATS_FILE,
                       ["Take `orphaned` and `starved` of every row with `phase` = 2 and 500 ≤ `iteration` ≤ 2,999.",
                        "For each n that occurs, the share of rows with at least n."]))
     ch.number("avalanches", {"games": int(len(cut)), "share_with_cut": float(np.mean(cut > 0)),
@@ -869,7 +868,7 @@ def powerlaws(ch: F.Chapter) -> None:
                 "normalised to total power 1 and averaged over the 26 worlds; then averaged in 39 bands of equal "
                 "width on the logarithmic axis. Red: the straight line least squares fits between periods of "
                 "500 and 4 iterations.",
-        recipe=recipe(SURVIVORS, STATS_FILE,
+        recipe=recipe(surviving_text(), STATS_FILE,
                       ["For each run, take `nodes` of the rows with `phase` = 2 and 500 ≤ `iteration` ≤ 2,999 "
                        "(2,500 values); subtract the least-squares straight line.",
                        "Multiply by a Hann window and take |FFT|², the power at frequencies k/2,500, "

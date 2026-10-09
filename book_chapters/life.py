@@ -10,8 +10,8 @@ from typing import List
 import numpy as np
 
 import book_figures as F
-from book_figures import (BASELINE_RUNS, FRAMES, STATS_FILE, band_series, chapter, describe, dots,
-                          line, lived, mean_over, per_agent, recipe, series, survivors)
+from book_figures import (FRAMES, STATS_FILE, band_series, chapter, describe, dots, line, lived, mean_over,
+                          per_agent, recipe, runs_text, series, surviving_text, survivors)
 from book_chapters.common import (BAND_STEPS, BAND_WORDS, BLUE, CYAN, GREEN, GREY, ORANGE, RED,
                                   VIOLET, YELLOW, baseline)
 
@@ -52,7 +52,7 @@ def life(ch: F.Chapter) -> None:
         series=[band_series(agents, "30 worlds: median, middle half, nine in ten", BLUE)],
         caption=f"{BAND_WORDS}. Four worlds die out; after a world's death it is no longer "
                 "counted, so the bands of the last thousand iterations are those of 26 worlds.",
-        recipe=recipe(BASELINE_RUNS, STATS_FILE,
+        recipe=recipe(runs_text(), STATS_FILE,
                       ["Take every run's rows with `phase` = 2 and the statistic `nodes`.",
                        *BAND_STEPS]))
 
@@ -63,7 +63,7 @@ def life(ch: F.Chapter) -> None:
         series=[line(alive["x"], alive["alive"], None, GREY, width=2)], legend=False,
         caption="How many of the 30 worlds are still alive. A world dies when an iteration ends "
                 "with 20 agents or fewer; four did, after 4, 313, 1,547 and 2,184 iterations.",
-        recipe=recipe(BASELINE_RUNS, STATS_FILE,
+        recipe=recipe(runs_text(), STATS_FILE,
                       ["For every stretch of 5 iterations, count the worlds that have a row "
                        "with `phase` = 2 in it."]))
 
@@ -87,7 +87,7 @@ def life(ch: F.Chapter) -> None:
                 "100–200 (left) to its mean over iterations 2,800–2,999 (right). Green: the "
                 "late mean is more than 1.2 times the early one; red: less than 0.8 times; grey: "
                 "in between. The thick blue line joins the medians of the 26 worlds.",
-        recipe=recipe(BASELINE_RUNS.replace("The 30", "The 26 surviving ones of the 30"), STATS_FILE,
+        recipe=recipe(surviving_text(), STATS_FILE,
                       ["For each run that reached iteration 3,000, take the rows with `phase` = 2.",
                        "Average `nodes` over the rows with 100 ≤ `iteration` ≤ 200, and again "
                        "over 2,800 ≤ `iteration` ≤ 2,999.",
@@ -111,7 +111,7 @@ def life(ch: F.Chapter) -> None:
         series=[band_series([series(s.run_id, "edges") for s in specs],
                             "30 worlds: median, middle half, nine in ten", ORANGE)],
         caption=f"The number of connections after every game. {BAND_WORDS}.",
-        recipe=recipe(BASELINE_RUNS, STATS_FILE,
+        recipe=recipe(runs_text(), STATS_FILE,
                       ["Take every run's rows with `phase` = 2 and the statistic `edges`.",
                        *BAND_STEPS]))
 
@@ -170,7 +170,7 @@ def youth(ch: F.Chapter) -> None:
                 "every game. The yellow line is their median. The axis is logarithmic, so equal "
                 "heights are equal factors: the step from 100 to 1,000 is as tall as the one from "
                 "1,000 to 10,000.",
-        recipe=recipe(BASELINE_RUNS, STATS_FILE,
+        recipe=recipe(runs_text(), STATS_FILE,
                       ["Take every run's rows with `phase` = 2 and 0 ≤ `iteration` ≤ 150.",
                        "Draw `nodes` against `iteration` for each run.",
                        "At each iteration, take the median of `nodes` over the runs that have a row there."]))
@@ -198,7 +198,7 @@ def youth(ch: F.Chapter) -> None:
                 "(orange — mostly newborns joined to no one); the agents removed by the cleanup "
                 "of the game because nobody, not even themselves, staked a token on their node "
                 "(red); and those removed in the game's cleanup because they were cut off (violet).",
-        recipe=recipe(BASELINE_RUNS, STATS_FILE,
+        recipe=recipe(runs_text(), STATS_FILE,
                       ["For iterations 0 to 150, take `births` and `orphaned` from the rows with "
                        "`phase` = 1, and `starved` and `orphaned` from the rows with `phase` = 2.",
                        "At each iteration, take the median of each over the runs that have a row there."]))
@@ -211,7 +211,7 @@ def youth(ch: F.Chapter) -> None:
         series=[share],
         caption="In each reproduction phase, the tokens all parents together gave their children, "
                 f"as a share of all 10,000 tokens. {BAND_WORDS}, here at every single iteration.",
-        recipe=recipe(BASELINE_RUNS, STATS_FILE,
+        recipe=recipe(runs_text(), STATS_FILE,
                       ["Take the rows with `phase` = 1 and 0 ≤ `iteration` ≤ 150, and the "
                        "statistic `reproTokenShare` — the sum of `invested` over the births of "
                        "that phase, divided by the 10,000 tokens.",
@@ -229,7 +229,7 @@ def youth(ch: F.Chapter) -> None:
         caption="After every game, how many different genotypes of eight iterations earlier the "
                 "living descend from (before iteration 8: how many founders). "
                 f"{BAND_WORDS}, at every iteration.",
-        recipe=recipe(BASELINE_RUNS, STATS_FILE,
+        recipe=recipe(runs_text(), STATS_FILE,
                       ["Take the rows with `phase` = 2 and 0 ≤ `iteration` ≤ 150, and the statistic "
                        "`cladesInWindow` ([Families](../notes/families.md): for every living agent, follow its genotype's "
                        "parents back to the newest one born at or before iteration t − 8, or to a "
@@ -253,7 +253,7 @@ def youth(ch: F.Chapter) -> None:
         caption="For each world, the first of the checks — made every 25 iterations — at which "
                 f"every living agent descends from one and the same founder. {len(when)} of the "
                 "30 worlds got there; the world with seed 23 died after 4 iterations, first.",
-        recipe=recipe(BASELINE_RUNS, "the runs' frames, through the lineage analysis of "
+        recipe=recipe(runs_text(), "the runs' frames, through the lineage analysis of "
                       "Experiment 6 (`python3 gol_lab.py analyse E06`), whose results file "
                       "`book/results/E06.json` holds every run's `oneFounder`",
                       ["Read every frame of a run in order and remember, for every genotype "
@@ -325,7 +325,7 @@ def births(ch: F.Chapter) -> None:
         caption="Each line is the median over the worlds, in stretches of 25 iterations, of a "
                 "count divided by the agents present when the phase began, times 100. The first "
                 "iterations run far above the top of the axis (Chapter 11).",
-        recipe=recipe(BASELINE_RUNS, STATS_FILE,
+        recipe=recipe(runs_text(), STATS_FILE,
                       ["For every row, divide the count (`births` or `orphaned` in rows with "
                        "`phase` = 1; `starved` or `orphaned` in rows with `phase` = 2) by the "
                        "row's `nodes_before`, the agents present when that phase began, and multiply by 100.",
@@ -348,7 +348,7 @@ def births(ch: F.Chapter) -> None:
                 "iteration after whose game the agent was alive, both included. Lives still going "
                 "when a run ended are counted as far as they went (Kaplan–Meier). Both axes are "
                 "logarithmic.",
-        recipe=recipe(BASELINE_RUNS.replace("The 30", "The 26 surviving ones of the 30"), FRAMES,
+        recipe=recipe(surviving_text(), FRAMES,
                       ["Read every frame with `phase` = 2. For every agent id note its birth "
                        "iteration (the frame's `iteration` minus its `ages` entry) and the last "
                        "iteration it appears.",
@@ -380,7 +380,7 @@ def births(ch: F.Chapter) -> None:
         caption=f"The ages of all {len(ages):,} agents alive after the last game of the 26 worlds "
                 "that lived to the end, in bins that double in width: age 0 is born in this "
                 "iteration, age 1 in the one before, and so on.",
-        recipe=recipe(BASELINE_RUNS.replace("The 30", "The 26 surviving ones of the 30"), FRAMES,
+        recipe=recipe(surviving_text(), FRAMES,
                       ["Read each run's last frame (iteration 2,999, `phase` 2) and its `ages`.",
                        "Count the ages in the bins 0, 1, 2–3, 4–7, …, and divide by the number of agents."]))
     ch.number("ages_end", {"n": int(len(ages)), "median": float(np.median(ages)),
@@ -397,7 +397,7 @@ def births(ch: F.Chapter) -> None:
         x={"label": "iteration"}, y={"label": "iterations", "min": 0},
         series=[band],
         caption=f"After every game, the median age of the agents alive. {BAND_WORDS}.",
-        recipe=recipe(BASELINE_RUNS, FRAMES,
+        recipe=recipe(runs_text(), FRAMES,
                       ["After every game (frames with `phase` = 2) take the median of `ages`.",
                        *BAND_STEPS]))
     for t in (100, 500, 1000, 2000, 2999):
@@ -444,7 +444,7 @@ def seed(ch: F.Chapter) -> None:
                     "scale and 1 is the average world. The bar is the median. A column of dots "
                     "close to 1 means the worlds settle alike; a tall column, that they do not. "
                     "The dots are spread sideways only so they do not hide one another.",
-            recipe=recipe(BASELINE_RUNS.replace("The 30", "The 26 surviving ones of the 30"), STATS_FILE,
+            recipe=recipe(surviving_text(), STATS_FILE,
                           ["For each run and statistic, average the statistic over the rows with "
                            "500 ≤ `iteration` ≤ 2,999 (rows with `phase` 1 for births, 2 for the rest; "
                            "`a/b` means the row's `a` divided by its `b`).",
@@ -470,7 +470,7 @@ def seed(ch: F.Chapter) -> None:
                 "100 iterations and its level a given number of iterations later, over all pairs "
                 "of stretches in the 26 worlds. 1 would mean a world stays exactly where it was; "
                 "0 that where it was says nothing about where it will be.",
-        recipe=recipe(BASELINE_RUNS.replace("The 30", "The 26 surviving ones of the 30"), STATS_FILE,
+        recipe=recipe(surviving_text(), STATS_FILE,
                       ["For each run, cut iterations 100 to 2,999 into 29 stretches of 100 and take "
                        "the mean of the statistic in each.",
                        "Subtract from each run's 29 values their own mean, so that only the run's "
@@ -490,7 +490,7 @@ def seed(ch: F.Chapter) -> None:
                 "of 26 worlds — split into the part that lies between the worlds' own averages "
                 "(blue) and the part that is each world moving around its own average (the rest "
                 "of the column, grey).",
-        recipe=recipe(BASELINE_RUNS.replace("The 30", "The 26 surviving ones of the 30"), STATS_FILE,
+        recipe=recipe(surviving_text(), STATS_FILE,
                       ["Take each run's 29 stretch means as for the figure above.",
                        "Between: the variance (n − 1 in the denominator) of the 26 runs' own averages.",
                        "Within: the mean over runs of the variance of each run's 29 values.",
@@ -517,7 +517,7 @@ def seed(ch: F.Chapter) -> None:
                 "100–1,499 (x) against its mean over iterations 1,500–2,999 (y). Right: the same "
                 "for connections. A dot on the dashed diagonal had the same mean in both halves. "
                 "r is the correlation over the 26 dots.",
-        recipe=recipe(BASELINE_RUNS.replace("The 30", "The 26 surviving ones of the 30"), STATS_FILE,
+        recipe=recipe(surviving_text(), STATS_FILE,
                       [f"For {' and '.join(said)}, average over the rows with `phase` = 2 and "
                        "100 ≤ `iteration` ≤ 1,499, and over 1,500 ≤ `iteration` ≤ 2,999.",
                        "Plot the second against the first, one dot per run; r is their Pearson "
@@ -540,7 +540,7 @@ def seed(ch: F.Chapter) -> None:
         caption="For each statistic, how much the 26 worlds differ — the standard deviation of "
                 "their averages divided by the mean — when each world is measured by its average "
                 "over its last L iterations, for L from 100 to 2,900.",
-        recipe=recipe(BASELINE_RUNS.replace("The 30", "The 26 surviving ones of the 30"), STATS_FILE,
+        recipe=recipe(surviving_text(), STATS_FILE,
                       ["For each length L, average the statistic over the rows with "
                        "3,000 − L ≤ `iteration` ≤ 2,999 in each run.",
                        "Divide the standard deviation of the 26 averages (n − 1 in the denominator) by their mean."]))
@@ -564,7 +564,7 @@ def seed(ch: F.Chapter) -> None:
                 "the average to be found four times in five at the 5% level, if worlds vary as "
                 "much as these do. Dashed: worlds measured over their last fifth (iterations "
                 "2,400–2,999); solid: over iterations 500–2,999. The grey line is 30 seeds.",
-        recipe=recipe(BASELINE_RUNS.replace("The 30", "The 26 surviving ones of the 30"), STATS_FILE,
+        recipe=recipe(surviving_text(), STATS_FILE,
                       ["Measure each run by its average over the stretch, and compute the spread "
                        "c = sd ÷ mean of the 26 averages.",
                        "For a change Δ (as a share of the mean), n = 2 (z₁ + z₂)² c² / Δ², with "

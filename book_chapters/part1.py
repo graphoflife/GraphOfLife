@@ -8,8 +8,8 @@ from __future__ import annotations
 import numpy as np
 
 import book_figures as F
-from book_figures import (BASELINE_RUNS, FRAMES, STATS_FILE, band_series, chapter, describe, line,
-                          recipe, rows, runs_of, series, survivors)
+from book_figures import (FRAMES, STATS_FILE, band_series, chapter, describe, line, recipe, rows, runs_of,
+                          runs_text, series, surviving_text, survivors)
 from book_chapters.common import BAND_STEPS, BAND_WORDS, BLUE, GREY, YELLOW, baseline
 
 
@@ -82,7 +82,7 @@ def iteration(ch: F.Chapter) -> None:
                 f"to the end, pooled: every iteration of every world counts once. The bars add up to "
                 f"{abs(sum(vals)):.2f}: the population hardly changes from one iteration to the next, "
                 "while about three in a hundred agents are replaced.",
-        recipe=recipe(BASELINE_RUNS.replace("The 30", "The 26 surviving ones of the 30"), STATS_FILE,
+        recipe=recipe(surviving_text(), STATS_FILE,
                       ["For every iteration 500 ≤ t ≤ 2,999 of every run, take from the row with "
                        "`phase` = 1: `nodes_before`, `births`, `orphaned`, `starved`; from the row "
                        "with `phase` = 2: `starved`, `orphaned`.",
@@ -118,7 +118,7 @@ def brain(ch: F.Chapter) -> None:
                 "last 50 iterations, decided by brains descended from them through 2,950 "
                 "iterations of copying, changing and conquering. Only parents that gave at least "
                 "one whole token had a child and are counted.",
-        recipe=recipe(BASELINE_RUNS, FRAMES,
+        recipe=recipe(runs_text(), FRAMES,
                       ["In the frames with `phase` 1 of iteration 0, and of iterations 2,950 to 2,999, "
                        "read `decisions.births`: each entry has the parent's `tokens_before` and the "
                        "child's `invested`.",
@@ -140,14 +140,14 @@ def measure(ch: F.Chapter) -> None:
         series=thin_lines, legend=False,
         caption="The number of agents of each of the 30 baseline worlds, every line one world, "
                 "averaged over stretches of 25 iterations so that the lines stay legible.",
-        recipe=recipe(BASELINE_RUNS, STATS_FILE,
+        recipe=recipe(runs_text(), STATS_FILE,
                       ["Take every run's rows with `phase` = 2 and `nodes`; average them in stretches "
                        "of 25 iterations; draw one line per run."]))
     ch.figure(
         "bands", title="The same 30 worlds, as a band", x={"label": "iteration"}, y={"label": "agents", "min": 0},
         series=[band_series([series(s.run_id, "nodes") for s in specs], "median, middle half, nine in ten", BLUE)],
         caption=f"{BAND_WORDS}.",
-        recipe=recipe(BASELINE_RUNS, STATS_FILE, ["Take every run's rows with `phase` = 2 and `nodes`.",
+        recipe=recipe(runs_text(), STATS_FILE, ["Take every run's rows with `phase` = 2 and `nodes`.",
                                                   *BAND_STEPS]))
     s = specs[0]
     its, n = series(s.run_id, "nodes")

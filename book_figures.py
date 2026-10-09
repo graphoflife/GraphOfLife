@@ -25,6 +25,7 @@ the same figures.
 """
 from __future__ import annotations
 
+import functools
 import math
 import os
 import sys
@@ -44,10 +45,6 @@ from gol_series import NO_PARENT
 BOOK = os.path.join(os.path.dirname(os.path.abspath(__file__)), "book")
 COMMAND = "python3 book_figures.py"
 
-#: The runs most of Part II reads, and how the recipes name them.
-BASELINE_RUNS = ("The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at "
-                 "10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in "
-                 "Chapter 9). They are made with `python3 gol_lab.py run E02`.")
 STATS_FILE = ("each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per "
               "recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just "
               "after the game, and every statistic is a field of the row (see [What a run records]"
@@ -110,6 +107,60 @@ def recipe(runs: str, data: str, steps: Iterable[str]) -> str:
     """How a figure is made, in the same three parts every time."""
     return (f"**Runs.** {runs}\n\n**Data.** From {data}.\n\n"
             + "\n".join(f"{i}. {step}" for i, step in enumerate(steps, 1)))
+
+
+# How a recipe names the runs it reads. Made from the experiment's plan and
+# from how far each run got, so a recipe cannot say thirty runs where the plan
+# says forty, or 26 survivors where 25 lived. Most of Parts II and III read the
+# baseline runs of Experiment 2, which is what they default to.
+
+@functools.lru_cache(maxsize=None)
+def _listed_in(experiment: str) -> str:
+    """The first chapter, in the book's order, that lists the experiment's runs and settings."""
+    import book_fill
+    for c in book_fill.chapters():
+        path = os.path.join(BOOK, c.get("file") or "")
+        if c.get("file") and f"<!-- runs {experiment} -->" in open(path, encoding="utf-8").read():
+            return f"Chapter {c['id']}"
+    raise LookupError(f"no chapter lists the runs of {experiment}")
+
+
+def _runs_of(experiment: str, condition: str) -> str:
+    """'30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at …', to the end."""
+    import book_fill
+    specs = runs_of(experiment, condition)
+    plan = gol_lab.read_plan(experiment)["runs"]
+    seeds, _ = book_fill.seeds_text(plan["seeds"])
+    return (f"{len(specs)} {condition} runs `{specs[0].run_id}` … `{specs[-1].run_id}`: the "
+            f"baseline {plan['baseline']} at {book_fill.number(specs[0].config['total_tokens'])} "
+            f"tokens, seeds {seeds}, {book_fill.number(specs[0].until)} iterations each (every "
+            f"setting is listed in {_listed_in(experiment)}). They are made with "
+            f"`python3 gol_lab.py run {experiment}`.")
+
+
+def runs_text(experiment: str = "E02", condition: str = "baseline") -> str:
+    """'The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at …'"""
+    return "The " + _runs_of(experiment, condition)
+
+
+def surviving_text(experiment: str = "E02", condition: str = "baseline") -> str:
+    """'The 26 surviving ones of the 30 baseline runs …': only the runs that lived to their end."""
+    alive = survivors(runs_of(experiment, condition))
+    return f"The {len(alive)} surviving ones of the " + _runs_of(experiment, condition)
+
+
+def lived_text(experiment: str = "E02", condition: str = "baseline", short: bool = False) -> str:
+    """
+    'The 26 baseline worlds that lived to the end (`B1-10000-s001` … `-s030`,
+    Chapter 9; `python3 gol_lab.py run E02`).', or without the brackets.
+    """
+    specs = runs_of(experiment, condition)
+    head = f"The {len(survivors(specs))} {condition} worlds that lived to the end"
+    if short:
+        return head + "."
+    last = "-" + specs[-1].run_id.rsplit("-", 1)[1]
+    return (f"{head} (`{specs[0].run_id}` … `{last}`, {_listed_in(experiment)}; "
+            f"`python3 gol_lab.py run {experiment}`).")
 
 
 # ---------------------------------------------------------------------------
