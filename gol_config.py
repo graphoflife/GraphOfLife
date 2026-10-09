@@ -384,22 +384,57 @@ class SimConfig:
     FLAG_INPUTS: ClassVar[int] = 1        # is-self
     MAGNITUDE_INPUTS: ClassVar[int] = 28  # own/target tokens and degrees, and quantiles
 
-    def flag_inputs(self) -> int:
+    def input_layout(self) -> Dict[str, Tuple[int, int, str]]:
         """
-        Single-bit inputs, which is one plus whatever the mechanics add.
+        Every block of rows in an observation, by name and in the order
+        _inputs fills them: where it starts, where it stops, and what kind of
+        value it holds — a flag, already a single bit; a magnitude (tokens,
+        connections and their neighbourhood quantiles), which a binary brain
+        spreads over a ladder; or a bit (a message channel or a noise draw,
+        single bits in a binary world).
 
-        Gifting brings a second: whether the connection to this target would
-        lapse if nothing more crossed it. Without that flag an agent can see a
+        The one statement of the input, as head_layout() is of the output:
+        every count of input rows is read off it.
+
+        Gifting brings a second flag: whether the connection to this candidate
+        would lapse if nothing more crossed it. Without it an agent can see a
         neighbour's tokens and degree but not the one fact the decision turns
         on, and paying to save an edge becomes a guess. Conditional rather than
         always present for the same reason the output heads are — a run keeps
         exactly the architecture it was checkpointed with.
         """
-        return self.FLAG_INPUTS + (1 if self.allow_gifting else 0)
+        m, noise = self.message_amount, self.random_input_amount
+        blocks = [("self", 1, "flag")]
+        if self.allow_gifting:
+            blocks.append(("at_risk", 1, "flag"))
+        blocks += [
+            ("own_tokens", 1, "magnitude"), ("its_tokens", 1, "magnitude"),
+            ("own_degree", 1, "magnitude"), ("its_degree", 1, "magnitude"),
+            ("own_token_quantiles", 6, "magnitude"), ("its_token_quantiles", 6, "magnitude"),
+            ("own_degree_quantiles", 6, "magnitude"), ("its_degree_quantiles", 6, "magnitude"),
+            # What each of the two wrote: the observer to itself, the observer
+            # to the candidate, the candidate to the observer, the candidate to
+            # itself.
+            ("message_to_self", m, "bit"), ("message_to_it", m, "bit"),
+            ("message_from_it", m, "bit"), ("message_its_own", m, "bit"),
+            ("noise", noise, "bit"),
+        ]
+        layout, row = {}, 0
+        for name, width, kind in blocks:
+            layout[name] = (row, row + width, kind)
+            row += width
+        return layout
+
+    def _input_rows(self, *kinds: str) -> int:
+        return sum(stop - start for start, stop, kind in self.input_layout().values()
+                   if kind in kinds)
+
+    def flag_inputs(self) -> int:
+        """Single-bit inputs: is-self, and with gifting whether the link is at risk."""
+        return self._input_rows("flag")
 
     def n_inputs(self) -> int:
-        return (self.flag_inputs() + self.MAGNITUDE_INPUTS
-                + 4 * self.message_amount + self.random_input_amount)
+        return self._input_rows("flag", "magnitude", "bit")
 
     def ladder_split(self) -> tuple[int, int]:
         """
@@ -436,12 +471,11 @@ class SimConfig:
         1 across sixteen thresholds spends sixteen rows to say one thing, and
         fifteen of them can never change.
         """
-        return (self.flag_inputs()
-                + 4 * self.message_amount + self.random_input_amount)
+        return self._input_rows("flag", "bit")
 
     def binary_rows(self) -> int:
         """The width of a binary brain's first layer."""
-        return self.MAGNITUDE_INPUTS * self.brain_bits + self.bit_inputs()
+        return self._input_rows("magnitude") * self.brain_bits + self.bit_inputs()
 
     def n_outputs(self) -> int:
         """

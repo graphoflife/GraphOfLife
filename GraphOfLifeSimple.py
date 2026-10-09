@@ -1076,30 +1076,28 @@ class GraphOfLife:
         """
         cfg = self.cfg
         m = cfg.message_amount
-        X = np.empty((cfg.n_inputs(), len(candidates)))
+        rows = {name: slice(start, stop) for name, (start, stop, _) in cfg.input_layout().items()}
+        X = np.empty((rows["noise"].stop, len(candidates)))
 
         # Whether the candidate is the observer itself, and, with gifting,
         # whether the connection to it lapses unless something crosses it.
         # That second flag is only present when gifting is, because it is the
         # fact that turns a gift into a decision — and because a run keeps
         # the input width it was checkpointed with.
-        X[0] = [u == v for v in candidates]
-        row = 1
+        X[rows["self"]] = [u == v for v in candidates]
         if cfg.allow_gifting:
-            X[1] = [u != v and self._edge_key(u, v) in at_risk for v in candidates]
-            row = 2
+            X[rows["at_risk"]] = [u != v and self._edge_key(u, v) in at_risk for v in candidates]
 
         # Tokens and degree, the observer's then the candidate's, then the six
         # quantiles of each over their neighbourhoods.
-        X[row] = log_tok.get(u, 0.0)
-        X[row + 1] = [log_tok.get(v, 0.0) for v in candidates]
-        X[row + 2] = log_deg[u]
-        X[row + 3] = [log_deg[v] for v in candidates]
-        X[row + 4:row + 10] = np.array(q_tok[u])[:, None]
-        X[row + 10:row + 16] = np.array([q_tok[v] for v in candidates]).T
-        X[row + 16:row + 22] = np.array(q_deg[u])[:, None]
-        X[row + 22:row + 28] = np.array([q_deg[v] for v in candidates]).T
-        row += cfg.MAGNITUDE_INPUTS
+        X[rows["own_tokens"]] = log_tok.get(u, 0.0)
+        X[rows["its_tokens"]] = [log_tok.get(v, 0.0) for v in candidates]
+        X[rows["own_degree"]] = log_deg[u]
+        X[rows["its_degree"]] = [log_deg[v] for v in candidates]
+        X[rows["own_token_quantiles"]] = np.array(q_tok[u])[:, None]
+        X[rows["its_token_quantiles"]] = np.array([q_tok[v] for v in candidates]).T
+        X[rows["own_degree_quantiles"]] = np.array(q_deg[u])[:, None]
+        X[rows["its_degree_quantiles"]] = np.array([q_deg[v] for v in candidates]).T
 
         def msg(src: int, dst: int) -> List[float]:
             vec = self.messages.get(src, {}).get(dst)
@@ -1109,17 +1107,16 @@ class GraphOfLife:
             return out + [0.0] * (m - len(out))
 
         # What each of the two wrote to itself and to the other.
-        X[row:row + m] = np.array(msg(u, u))[:, None]
-        X[row + m:row + 2 * m] = np.array([msg(u, v) for v in candidates]).T
-        X[row + 2 * m:row + 3 * m] = np.array([msg(v, u) for v in candidates]).T
-        X[row + 3 * m:row + 4 * m] = np.array([msg(v, v) for v in candidates]).T
-        row += 4 * m
+        X[rows["message_to_self"]] = np.array(msg(u, u))[:, None]
+        X[rows["message_to_it"]] = np.array([msg(u, v) for v in candidates]).T
+        X[rows["message_from_it"]] = np.array([msg(v, u) for v in candidates]).T
+        X[rows["message_its_own"]] = np.array([msg(v, v) for v in candidates]).T
 
         # Noise of whatever kind this world's brains can read. Drawn candidate
         # after candidate, so a seed gives the same run it gave when each
         # column drew its own.
-        X[row:] = self.kind.draw_noise((len(candidates), cfg.random_input_amount),
-                                       self.rng).T
+        X[rows["noise"]] = self.kind.draw_noise((len(candidates), cfg.random_input_amount),
+                                                self.rng).T
         return X
 
     def _observe(self, u: int, candidates: List[int], log_deg, q_tok, q_deg,

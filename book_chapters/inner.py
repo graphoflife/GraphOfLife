@@ -21,14 +21,29 @@ import book_figures as F
 from book_figures import chapter, describe, dots, line, lived, recipe, runs_of, survivors
 from book_chapters.common import BLUE, CYAN, GREEN, GREY, ORANGE, RED, VIOLET, YELLOW, baseline
 
-#: Rows of a brain's input column (no gifting): what each group of rows reads.
-GROUPS = [("me?", slice(0, 1)), ("my tokens", slice(1, 2)), ("its tokens", slice(2, 3)),
-          ("my links", slice(3, 4)), ("its links", slice(4, 5)),
-          ("around", slice(5, 29)), ("I→me", slice(29, 59)),
-          ("I→it", slice(59, 89)), ("it→me", slice(89, 119)),
-          ("it→it", slice(119, 149)), ("random", slice(149, 154))]
-MESSAGES = slice(29, 149)
-NOISE = slice(149, 154)
+#: What each group of a brain's input rows reads, by the blocks of
+#: SimConfig.input_layout() it is made of.
+GROUPS = [("me?", ("self",)), ("my tokens", ("own_tokens",)), ("its tokens", ("its_tokens",)),
+          ("my links", ("own_degree",)), ("its links", ("its_degree",)),
+          ("around", ("own_token_quantiles", "its_token_quantiles",
+                      "own_degree_quantiles", "its_degree_quantiles")),
+          ("I→me", ("message_to_self",)), ("I→it", ("message_to_it",)),
+          ("it→me", ("message_from_it",)), ("it→it", ("message_its_own",)),
+          ("random", ("noise",))]
+MESSAGE_BLOCKS = ("message_to_self", "message_to_it", "message_from_it", "message_its_own")
+
+
+def rows_of(cfg, blocks) -> slice:
+    """
+    The input rows a run of neighbouring blocks occupies, in this configuration's
+    layout — as a slice, so that a measure over them sums exactly as it did when
+    the rows were written out by hand.
+    """
+    layout = cfg.input_layout()
+    spans = [layout[name][:2] for name in blocks]
+    for (_, stop), (start, _) in zip(spans, spans[1:]):
+        assert stop == start, f"{blocks} are not next to each other in the input"
+    return slice(spans[0][0], spans[-1][1])
 FINAL = ("the final checkpoint of each run, `GraphOfLifeRuns/<run>/checkpoint.npz`, read with "
          "`gol_store.load_checkpoint(run, config)`: the world after its last iteration, every living "
          "agent's brain and every message in flight")
@@ -116,11 +131,13 @@ def probe(run_id: str) -> Dict[str, Any]:
                 for name in ("messages", "noise", "richer"):
                     Z = X.copy()
                     if name == "messages":
-                        Z[MESSAGES] = 0.0
+                        Z[rows_of(w.cfg, MESSAGE_BLOCKS)] = 0.0
                     elif name == "noise":
-                        Z[NOISE] = rng.uniform(-2.0, 2.0, Z[NOISE].shape)
+                        noise = rows_of(w.cfg, ("noise",))
+                        Z[noise] = rng.uniform(-2.0, 2.0, Z[noise].shape)
                     else:
-                        Z[2, 1:] = np.log1p(2.0 * np.expm1(Z[2, 1:]))
+                        its = rows_of(w.cfg, ("its_tokens",)).start
+                        Z[its, 1:] = np.log1p(2.0 * np.expm1(Z[its, 1:]))
                     _, _, a2, s2, _ = _decide(brain, w.heads, Z, tokens)
                     note(f"{who}tv_{name}", 0.5 * float(np.abs(alloc - a2).sum()))
                     note(f"{who}share_{name}", s2)
@@ -131,10 +148,12 @@ def probe(run_id: str) -> Dict[str, Any]:
 def weights(run_id: str, pairs: int = 3000) -> Dict[str, Any]:
     """Input-weight norms by group, and distances between brains, at the end of a world."""
     def make(run_id_: str) -> Dict[str, Any]:
+        from gol_config import SimConfig
+        cfg = SimConfig.from_dict(F.store.load_meta(run_id_)["config"])
         z = np.load(F.store.checkpoint_path(run_id_), allow_pickle=False)
         W0 = z["W0"].astype(np.float64)                                   # agents × 50 × 154
         norms = np.sqrt((W0 ** 2).sum(axis=1))                            # agents × 154
-        group = {name: float(norms[:, rows].mean()) for name, rows in GROUPS}
+        group = {name: float(norms[:, rows_of(cfg, blocks)].mean()) for name, blocks in GROUPS}
         flat = np.concatenate([z[k].astype(np.float32).reshape(len(z["ids"]), -1)
                                for k in z.files if k[0] in "Wb" and k[1:].isdigit()], axis=1)
         geno, parent = z["brain_ids"], z["parent_brain_ids"]
@@ -162,7 +181,7 @@ def founder_weights(cfg, count: int = 400, seed: int = 1801) -> Tuple[Dict[str, 
     brains = [make_brain(cfg, 0, rs) for _ in range(count)]
     W0 = np.stack([b.weights[0].astype(np.float64) for b in brains])
     norms = np.sqrt((W0 ** 2).sum(axis=1))
-    groups = {name: float(norms[:, rows].mean()) for name, rows in GROUPS}
+    groups = {name: float(norms[:, rows_of(cfg, blocks)].mean()) for name, blocks in GROUPS}
     flat = [np.concatenate([w.astype(np.float32).ravel() for w in b.weights] +
                            [x.astype(np.float32).ravel() for x in b.biases]) for b in brains]
     dist = [float(np.sqrt(np.mean((flat[i] - flat[i + 1]) ** 2))) for i in range(0, count - 1, 2)]

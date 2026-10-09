@@ -50,15 +50,17 @@ def world(seed, **over):
 
 
 def groups(cfg):
-    """Where each kind of input sits in the vector _input_vec builds."""
-    at = 0
-    out = {}
-    out["flag"] = (at, at + cfg.FLAG_INPUTS); at += cfg.FLAG_INPUTS
-    out["magnitude"] = (at, at + cfg.MAGNITUDE_INPUTS); at += cfg.MAGNITUDE_INPUTS
-    out["message"] = (at, at + 4 * cfg.message_amount); at += 4 * cfg.message_amount
-    out["noise"] = (at, at + cfg.random_input_amount); at += cfg.random_input_amount
-    assert at == cfg.n_inputs(), f"{at} != {cfg.n_inputs()}"
-    return out
+    """Where each kind of input sits in an observation, read off the engine's own layout."""
+    layout = cfg.input_layout()
+
+    def span(names):
+        return (min(layout[n][0] for n in names), max(layout[n][1] for n in names))
+    return {
+        "flag": span([n for n, (_, _, kind) in layout.items() if kind == "flag"]),
+        "magnitude": span([n for n, (_, _, kind) in layout.items() if kind == "magnitude"]),
+        "message": span([n for n in layout if n.startswith("message_")]),
+        "noise": span(["noise"]),
+    }
 
 
 def observations(w, cfg, phases=2, warm=15):
