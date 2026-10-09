@@ -367,6 +367,112 @@ combine with Part V's.
 
 ---
 
+## Part VII · The long run
+
+### 60 · A hundred thousand iterations (Experiment 11, planned, not runnable yet)
+
+**Question.** The user's, 2026-10-09: what if there simply was not enough time
+to learn cooperation? One world of B1 at 204,800 tokens (seed 1; its first 600
+iterations are E08's `B1-204800-s001`), run for up to 100,000 iterations while
+healthy. Every 500 iterations: does it behave as expected, stay within the
+range of the known, and does anything stand out? Thesis (draft, pinned in
+`book/experiments/drafts/E11.json`): time is not what is missing — the wander
+levels off, cooperation does not appear, the gain stays below 0.005.
+
+**Numbers behind the plan** (measured 2026-10-09, scratchpad scripts; redo
+when building):
+- Cost model: 27,312 agents, 24.7 s/iteration, 5.9 GB peak → 29 days for
+  100k on one worker. E08's three 204,800-token worlds measured 22–28 s/it
+  with four workers busy, peak 5.3–6.5 GB.
+- Disk: frames 0.65 MB (phase 1) + 1.58 MB (phase 2, decisions) per
+  iteration → 223 GB for 100k; stats 2 KB/row → 400 MB; checkpoint 0.83 GB.
+  With windows of 17 iterations per 500-block: ~8 GB of frames.
+- The wander (E02, 26 worlds, phase-2 rows from 500 on): sd of block means
+  / sd of single iterations at B = 500 is 0.35–0.63; Hurst exponent 0.78–0.89
+  over B = 10…500 (nodes, gini, heldHomeShare, maxDegree, distinctBrains,
+  cladesInWindow ≈ 0.88; revoltShare, starved, totalFlow ≈ 0.78).
+- Naive sentinel (100-iteration blocks, robust z against the blocks of
+  500–1,499 of the same world): 5.2% of blocks beyond |z| = 6, 1.9% beyond
+  10; three-in-a-row runs common (maxDegree 17×, medianDegree 10×, leaves
+  10×). So "stands out" must be judged against the wander — hence the
+  variogram in the thesis and the "beyond the whole earlier range by half that
+  range, five blocks running" rule, to be calibrated on E02 before launch.
+- Cooperation ranges in the 26 baseline worlds: kin ratio 0.89–1.10
+  (median 1.01); same two brains one game later 3.3–8.6% (median 5.0%); gain
+  0.0011–0.0017 (founders 0.0006).
+- E02 settled deaths at 313, 1,547 and 2,184 (plus one at 4): hazard
+  ≈ 3.7·10⁻⁵ per iteration at 10,000 tokens → a 10,000-token world reaching
+  100k iterations has a few percent chance. That is why there is no cheap
+  small-world companion arm; whether a 204,800-token world can die at all is
+  itself a finding.
+
+**Build first (only after E10 has finished — item 1 is engine).**
+1. *Frames in windows, statistics always* (gol_config, gol_run, gol_record,
+   gol_store). `SimConfig.records(i)` and `frames_before(i)` generalised to
+   windows (`every`, `last`); INFRASTRUCTURE, so no strain change. The
+   recorder observes every iteration's frames in memory; only window frames
+   are written. Rows ≠ frames from then on: `_cut_back` by iteration (rows
+   carry `iteration`), `_frame` only on rows whose frame was kept. Resume:
+   checkpoints only at window ends (`checkpoint_every == every`), and a window
+   at least CLADE_WINDOW (8) iterations long, so the families can be warmed
+   from it; `previous` = its last frame. Lift the refusal in gol_run for runs
+   recorded this way only. Every reader that assumes row *i* ↔ frame *i*:
+   build_series (chart from stats.jsonl for such runs), `frame_at` (Phase 2.2
+   of the review plan), the viewer's timeline. Tests: windowed run == whole
+   run, row for row except `_frame`; its frames are the whole run's frames;
+   a run resumed at every block end == one never stopped (the lab will resume
+   it 200 times if it advances block by block). Prove B1 unchanged with
+   `tools/trajectory_digest.py --stats`.
+2. *Blocks and a sentinel* (gol_lab, new non-engine `gol_sentinel.py`).
+   Prefer a worker that runs on to 100k, with the lab reading each finished
+   block's rows and stopping the worker when unhealthy, over 200 restarts
+   (each loads 0.8 GB). Health: extinct; tokens ≠ 204,800 or a statistic
+   newly missing/NaN; s/it > 2× the median of the last 10 blocks, twice
+   running; memory or disk short within 10 blocks. Stands out (never stops):
+   outside E10's band (scale-free stats) 3 blocks running; new level as
+   above; cooperation outside the baseline range in a window; gain > 0.005
+   at a kept checkpoint. Writes `<run>/blocks.jsonl` and a lab log line per
+   block; the Book tab shows the latest. Ring buffer of the last two
+   block-end checkpoints; on a flag, pin the one before the flagged block.
+3. *Kept checkpoints*: `<run>/checkpoints/<iteration>.npz`, every 10,000
+   and pinned ones; listed by the lab; openable by the analysis.
+4. *Analysis kind `longrun`*: variograms of the eight statistics (near
+   2,000–5,000, far 20,000–50,000, ratio ≤ 2 for ≥ 7); Chapter 34's kinship
+   and partners on each window (parameterise `cooperation.kinship` and
+   `partners` by iteration range — the Phase 2 Measure registry is the place);
+   Chapter 18's gain on 300 agents from each kept checkpoint; block-mean bands
+   for everything of Chapter 9.
+5. Then move the draft to `book/experiments/E11.json` unchanged and switch the
+   chapter's thesis and runs blocks to the generated markers.
+
+**Check first (once it runs).** Frames at iterations 483–499 identical to E08's
+`B1-204800-s001` frames 966–999 (cladesInWindow rows will differ: E08 was
+recorded before the family-count fix, 5db3860). Throughput and `_peakMB` flat
+across blocks (a leak over four weeks shows here first). Two rows per
+iteration, no gaps at block boundaries.
+
+**Find out.** The thesis's three numbers. Beyond them: does a world this size
+ever die or split for good; how often one line takes over (needs ancestry
+across the gaps — either a genealogy file of (genotype, parent, born), about
+5,400 new genotypes an iteration, ~10 GB raw, or a live statistic in the
+recorder; decide when building); whether the births' decline of youth
+(Chapter 12) continues; the gain and the probes of Chapter 18 at each kept
+checkpoint; the cross-time tournament (P2) from the kept checkpoints, which
+needs a tool of its own (seed a world with brains from two checkpoints).
+
+**Observe.** The variogram curves themselves (levelling, rising, a step); the
+block-mean bands over 100k iterations beside E02/E10 bands; every flag the
+sentinel raises, with the replay of the stretch around it from the pinned
+checkpoint.
+
+**Pitfalls.** A flag is not a finding until the stretch is replayed and looked
+at. One world: anything found must be checked on seeds 2 and 3, run to the
+same point. Thresholds of the sentinel are tuned before the run, never during
+it. Heavy statistics every 25 iterations at 27k agents are part of the 25 s;
+check that spectral and box dimension do not dominate.
+
+---
+
 ## Analyses that need no new runs (candidates for later chapters)
 
 - How the statistics move together: cross-correlations and lead–lag between

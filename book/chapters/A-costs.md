@@ -84,5 +84,5 @@ about seven hours.
 <!-- turns -->
 ---
 
-← [Chapter 51 · Worlds of 100,000 tokens](51-worlds-of-100000-tokens.md) · [Contents](../README.md)
+← [Chapter 60 · A hundred thousand iterations](60-a-hundred-thousand-iterations.md) · [Contents](../README.md)
 <!-- /turns -->

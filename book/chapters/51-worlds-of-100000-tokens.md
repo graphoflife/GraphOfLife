@@ -157,5 +157,5 @@ five hours. Together with Experiment 9 (48 GB), it fits on the disk as it is now
 <!-- turns -->
 ---
 
-← [Chapter 39 · How fast should brains change?](39-how-fast-should-brains-change.md) · [Contents](../README.md) · [Appendix A · What a simulation costs](A-costs.md) →
+← [Chapter 39 · How fast should brains change?](39-how-fast-should-brains-change.md) · [Contents](../README.md) · [Chapter 60 · A hundred thousand iterations](60-a-hundred-thousand-iterations.md) →
 <!-- /turns -->

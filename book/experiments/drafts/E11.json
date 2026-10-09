@@ -1,0 +1,70 @@
+{
+  "id": "E11",
+  "title": "A hundred thousand iterations",
+  "draft": "Not runnable yet: the lab cannot advance a run in blocks, keep frames only in windows, or keep checkpoints (Chapter 60, What has to be built first). When it can, this file moves to book/experiments/E11.json with its thesis unchanged.",
+  "thesis": {
+    "claim": "Time is not what is missing. A world of 204,800 tokens left for 100,000 iterations, thirty times longer than any world of this book has lived, goes on wandering, but within bounds it reaches in its first few thousand iterations, and nothing appears late that was not there early. Its agents do not learn to cooperate: they stake on kin as they stake on strangers, the same two brains still rarely face each other twice, and the brains stay nearly blind.",
+    "why": "Part III found what stands in the way of cooperation in the rules, not in a lack of time (Chapter 36): a node's brain is replaced almost every game, so nobody meets anybody twice (Chapter 34); brains cannot see who is kin; and nothing an agent does creates anything. Chapter 18 found the brains nearly blind, with a gain of 0.0015 and their first-layer weights already, by iteration 3,000, at the balance between the jitters of mutation and its resets, so that selection can only set constants, and it has set them alike in every world. A hundred thousand iterations are a great deal of evolution: some 27,000 agents, each brain changed with probability 0.2 after every game, try some 500 million changed brains, and the living come to descend from a single founder every few hundred iterations (Chapter 17), so one line takes the world over again and again, dozens of times at the least. What is one step away will be found; what needs the rules changed will not. Against this: evolution raised the gain 2.5 times in 3,000 iterations (Chapter 18), and the baseline worlds are still moving at the longest scale yet measured: a mean over 500 iterations keeps between a third and two thirds of the spread of single iterations (a Hurst exponent of 0.8 to 0.9, in the 26 worlds of Experiment 2), so no world has yet been seen at rest.",
+    "confirm": "From iteration 2,000 on, over at least 50,000 iterations, all three hold. (1) The wander levels off: for at least seven of the eight statistics (agents; connections per agent; Gini; births per agent; the share of stakes placed at home; the share of nodes kept; genotypes per agent; families), the median difference between the means of 500-iteration blocks 20,000 to 50,000 iterations apart is at most twice the median difference between blocks 2,000 to 5,000 iterations apart. (2) In no three successive windows from iteration 5,000 on does the ratio of stakes on kin to stakes on others leave 0.85 to 1.15 (in the baseline worlds 0.89 to 1.10), or the share of connections whose two brains face each other again one game later rise above 10% (in the baseline worlds 3% to 9%). (3) At every kept checkpoint the median gain of the brains stays below 0.005 (in the baseline worlds 0.0011 to 0.0017).",
+    "refute": "Any one of: for two or more of the eight statistics, the difference at 20,000 to 50,000 iterations is more than twice that at 2,000 to 5,000, so the world goes on moving on scales the shorter runs could not see; or the kin ratio or the share of lasting partners crosses its line in three successive windows, so cooperation has appeared; or the median gain passes 0.005, so the brains have begun to see. A world that dies, or is stopped, before iteration 52,000 decides nothing."
+  },
+  "runs": {
+    "baseline": "B1",
+    "world": {
+      "total_tokens": 204800
+    },
+    "seeds": "1",
+    "iterations": 100000,
+    "workers": 1,
+    "record": {
+      "heavy_every": 25,
+      "checkpoint_every": 500,
+      "frames": {
+        "every": 500,
+        "last": 17
+      },
+      "keep_checkpoints": 10000
+    },
+    "blocks": {
+      "length": 500,
+      "sentinel": "longrun"
+    },
+    "conditions": [
+      {
+        "name": "long",
+        "replicate": true
+      }
+    ]
+  },
+  "analyse": {
+    "kind": "longrun",
+    "from": 2000,
+    "block": 500,
+    "wander": {
+      "stats": [
+        {"stat": "nodes", "phase": 2},
+        {"stat": "edges/nodes", "phase": 2},
+        {"stat": "gini", "phase": 2},
+        {"stat": "births/nodes_before", "phase": 1},
+        {"stat": "selfAllocationShare", "phase": 2},
+        {"stat": "heldHomeShare", "phase": 2},
+        {"stat": "distinctBrains/nodes", "phase": 2},
+        {"stat": "cladesInWindow", "phase": 2}
+      ],
+      "near": [2000, 5000],
+      "far": [20000, 50000],
+      "ratio": 2,
+      "atLeast": 7
+    },
+    "cooperation": {
+      "from": 5000,
+      "kinRatio": [0.85, 1.15],
+      "sameBrains": 0.1,
+      "successive": 3
+    },
+    "gain": {
+      "below": 0.005
+    },
+    "replay": "B1-204800-s001 (Experiment 8) is this world's first 600 iterations: its frames at iterations 483 to 499 must be the long run's, frame for frame."
+  }
+}

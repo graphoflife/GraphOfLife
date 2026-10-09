@@ -105,6 +105,10 @@ everything can be checked with it.
 - Chapter 58 · One agent in a sea of average agents — *not written yet*
 - Chapter 59 · Meta V — *not written yet*
 
+**Part VII · The long run**
+
+- [Chapter 60 · A hundred thousand iterations](chapters/60-a-hundred-thousand-iterations.md)
+
 **Notes · the rules**
 
 - [Every setting](notes/settings.md)

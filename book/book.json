@@ -357,6 +357,18 @@
       ]
     },
     {
+      "title": "Part VII · The long run",
+      "chapters": [
+        {
+          "id": "60",
+          "title": "A hundred thousand iterations",
+          "file": "chapters/60-a-hundred-thousand-iterations.md",
+          "experiment": "E11",
+          "status": "draft"
+        }
+      ]
+    },
+    {
       "title": "Notes · the rules",
       "chapters": [
         {
