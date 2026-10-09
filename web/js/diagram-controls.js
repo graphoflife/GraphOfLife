@@ -268,7 +268,10 @@ const DiagramControls = {
     const derived = Object.entries(RunStats.DERIVED)
       .filter(([, d]) => !payload || d.needs.every(n => have.has(n)))
       .map(([k, d]) => [k, d.label]);
-    return keys.map(k => [k, RunStats.label(k)]).concat(derived);
+    // Nor a statistic of a mechanic the run had off.
+    const run = (this.runs || []).find(r => r.id === runId);
+    return keys.filter(k => RunStats.applies(k, run && run.config))
+      .map(k => [k, RunStats.label(k)]).concat(derived);
   },
 
   /**

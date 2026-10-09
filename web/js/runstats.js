@@ -129,6 +129,28 @@ const RunStats = {
     } }
   ],
 
+  /**
+   * Statistics of a mechanic, by the setting that switches it on. A run with
+   * the mechanic off still records them — as nothing given, nothing handed
+   * over, no coalition — which reads as a world that chose not to, where it
+   * could not. So the strip and the history menus leave them out of such a
+   * run, and the frame and the series stay as the engine wrote them.
+   */
+  NEEDS: {
+    gifts: 'allow_gifting',
+    giftTokens: 'allow_gifting',
+    giftShare: 'allow_gifting',
+    handovers: 'allow_handover',
+    revolutions: 'allow_revolutions',
+    revoltShare: 'allow_revolutions'
+  },
+
+  /** Whether a run of these settings can have measured a statistic. Unknown settings count as on. */
+  applies(key, config) {
+    const setting = this.NEEDS[key];
+    return !setting || !config || !(setting in config) || Boolean(config[setting]);
+  },
+
   /** What each statistic means, as the stat popup and Diagrams explain it. */
   EXPLANATIONS: {
     nodes: 'How many agents are alive right now. Agents appear by reproduction and vanish by starving, or by being cut off from the largest connected group and culled with it.',

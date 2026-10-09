@@ -1375,6 +1375,22 @@ async function test_the_static_book_never_asks_the_lab() {
   assert(asked === 1 && Book.lab, 'with a server the book did not ask');
 }
 
+function test_a_statistic_of_a_mechanic_that_is_off_is_not_offered() {
+  // A run without gifting records nobody giving: zero, which reads as a world
+  // that chose not to. Every statistic that needs a mechanic names it, by a
+  // setting the form really has, and is left out of a run that had it off.
+  const page = fs.readFileSync(path.join(root, 'web', 'index.html'), 'utf8');
+  const shown = new Set(RunStats.keys());
+  for (const [key, setting] of Object.entries(RunStats.NEEDS)) {
+    assert(shown.has(key), `${key} needs ${setting} but is no statistic the strip shows`);
+    assert(page.includes(`data-cfg="${setting}"`), `${key} needs ${setting}, which is no setting`);
+  }
+  assert(!RunStats.applies('gifts', { allow_gifting: false }), 'gifts offered in a run without gifting');
+  assert(RunStats.applies('gifts', { allow_gifting: true }), 'gifts hidden in a run with gifting');
+  assert(RunStats.applies('gifts', {}), 'a run that predates the setting lost its gifts');
+  assert(RunStats.applies('nodes', { allow_gifting: false }), 'a statistic of no mechanic was hidden');
+}
+
 function test_every_tab_names_a_view() {
   // A tab whose view is missing from App's table, or a view with no tab and
   // no section, is a click that does nothing or a page nobody can reach.

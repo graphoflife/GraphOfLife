@@ -208,8 +208,9 @@ Object.assign(Viewer, {
     }
 
     const html = [];
+    const config = this.meta && this.meta.config;
     for (const group of RunStats.GROUPS) {
-      const present = Object.keys(group.stats).filter(k => k in cells);
+      const present = Object.keys(group.stats).filter(k => k in cells && RunStats.applies(k, config));
       if (!present.length) continue;
 
       const open = wasOpen.has(group.key) ? wasOpen.get(group.key) : group.open;
