@@ -10,6 +10,7 @@ small enough that a worker process spends most of its life importing numpy.
 
 from __future__ import annotations
 
+import atexit
 import contextlib
 import io
 import json
@@ -24,6 +25,11 @@ import traceback
 
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, HERE)
+
+# A runs folder of the tests' own. Tests point the store at scratch folders as
+# they go, but one that forgot would otherwise write into the live runs folder.
+os.environ["GOL_RUNS_DIR"] = tempfile.mkdtemp(prefix="gol-tests-")
+atexit.register(shutil.rmtree, os.environ["GOL_RUNS_DIR"], True)
 
 import gol_lab        # noqa: E402
 import gol_record     # noqa: E402
@@ -139,6 +145,25 @@ def test_every_strain_an_experiment_uses_is_registered():
         for spec in gol_lab.experiment_runs(name):
             strain = SimConfig.from_dict(spec.config).strain_id()
             assert strain in registered, f"{name} runs {strain}, which strains.md does not list"
+
+
+def test_the_engine_a_lab_freezes_is_exactly_what_its_worker_imports():
+    """
+    ENGINE_FILES decides an engine's hash, the check for uncommitted changes
+    and what is copied into a snapshot, so it has to be the worker's whole
+    import closure. A module the list left out is not frozen: a worker started
+    from its snapshot fails to import it — or, with the repository on its path,
+    quietly imports today's copy under a hash that does not cover it. A module
+    the list has and the worker never reaches makes every edit to it look like
+    a new engine.
+    """
+    from closure import closure
+    reached = closure(os.path.join(HERE, "gol_worker.py"), [HERE])
+    needed = {os.path.basename(path) for path in reached.values()} | {"gol_worker.py"}
+    listed = set(gol_lab.ENGINE_FILES)
+    assert needed == listed, (
+        f"the worker imports {sorted(needed - listed)} that ENGINE_FILES leaves out, "
+        f"and ENGINE_FILES lists {sorted(listed - needed)} that the worker never imports")
 
 
 def test_a_plan_can_list_world_sizes_and_a_condition_its_own():

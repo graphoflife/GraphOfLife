@@ -21,12 +21,16 @@ do not get run.
 
 from __future__ import annotations
 
+import atexit
 import contextlib
 import dataclasses
+import hashlib
+import itertools
 import math
 import os
 import random
 import re
+import shutil
 import sys
 import tempfile
 
@@ -34,6 +38,11 @@ import tempfile
 # rather than left to the caller so that running this file directly works from
 # anywhere, which is the whole point of it being runnable directly.
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+# A runs folder of the tests' own. Tests point the store at scratch folders as
+# they go, but one that forgot would otherwise write into the live runs folder.
+os.environ["GOL_RUNS_DIR"] = tempfile.mkdtemp(prefix="gol-tests-")
+atexit.register(shutil.rmtree, os.environ["GOL_RUNS_DIR"], True)
 
 import networkx as nx
 
@@ -854,6 +863,52 @@ def test_edges_only_reference_present_nodes():
                 assert a in present and b in present
 
 
+def _decision_keys(cfg: SimConfig) -> dict:
+    """
+    Which keys a frame's decisions hold today, record by record. Pinned here
+    because the statistics and the viewer read some of them by whether they
+    are there at all: a key that appears or vanishes changes what they say.
+    """
+    revolt = {"revolt"} if cfg.allow_revolutions else set()
+    return {
+        "reproduction": {"births", "gifts", "pruned_edges"},
+        "birth": {"agent", "tokens_before", "invested", "child", "links", "handed_over"},
+        "game": {"allocations", "winners", "pruned_edges"},
+        "allocation": {"agent", "tokens", "spread", "targets", "alloc"} | revolt,
+        "winner": {"node", "winner", "amount"} | revolt,
+    }
+
+
+def test_a_frame_records_the_decisions_its_mechanics_say_it_does():
+    """
+    Every combination of the mechanics that add or take away a decision, a
+    few iterations each: every record holds exactly the keys the table says.
+    """
+    for gifting, handover, revolutions, prune in itertools.product(
+            (False, True), (False, True), (False, True), ("blotto", "reproduction", "both")):
+        cfg = small(allow_gifting=gifting, allow_handover=handover,
+                    allow_revolutions=revolutions, prune_after=prune, seed=5)
+        expected = _decision_keys(cfg)
+        world = new_world(cfg)
+        seen = set()
+        for _ in range(4):
+            for frame in world.step(record_decisions=True):
+                decisions = frame["decisions"]
+                if frame["phase"] == 1:
+                    records = [("reproduction", decisions)]
+                    records += [("birth", b) for b in decisions["births"]]
+                else:
+                    records = [("game", decisions)]
+                    records += [("allocation", a) for a in decisions["allocations"]]
+                    records += [("winner", w) for w in decisions["winners"]]
+                for kind, record in records:
+                    assert set(record) == expected[kind], (
+                        f"{cfg.strain_id()}, prune after {prune}: a {kind} record holds "
+                        f"{sorted(record)}, not {sorted(expected[kind])}")
+                    seen.add(kind)
+        assert seen == set(expected), f"{cfg.strain_id()}: never saw {set(expected) - seen}"
+
+
 # ---------------------------------------------------------------------------
 # Optional mechanics
 # ---------------------------------------------------------------------------
@@ -1038,6 +1093,26 @@ def test_the_teaching_script_gives_a_revolution_to_its_strongest_rebel():
 # ---------------------------------------------------------------------------
 # Loading a run's history at increasing resolution
 # ---------------------------------------------------------------------------
+
+#: What a row of statistics holds under the current SERIES_VERSION: every key
+#: of a heavy row, and which of them are heavy, as a digest. Caches of rows are
+#: kept under the version, and the version is bumped by hand — its own comment
+#: records a time it was not. Change what a row holds and this digest moves;
+#: the test then asks for the version to move with it.
+SERIES_ROW_PIN = (22, "cb770dabf276")
+
+
+def test_the_series_version_moves_with_what_a_row_holds():
+    world = new_world(small(seed=3))
+    frames = [frame for _ in range(2) for frame in world.step(record_decisions=True)]
+    keys = sorted(gol_series.frame_stats(frames[-1], frames[-2], True))
+    text = "\n".join(keys) + "\n--heavy--\n" + "\n".join(sorted(gol_series.HEAVY_KEYS))
+    digest = hashlib.sha256(text.encode()).hexdigest()[:12]
+    assert (gol_series.SERIES_VERSION, digest) == SERIES_ROW_PIN, (
+        f"a row now holds {len(keys)} statistics, {len(gol_series.HEAVY_KEYS)} of them heavy "
+        f"(digest {digest}), under SERIES_VERSION {gol_series.SERIES_VERSION}. If what a row "
+        f"holds changed, bump SERIES_VERSION and pin both here.")
+
 
 def test_bisection_visits_the_ends_first_and_then_keeps_halving():
     """
@@ -2122,6 +2197,34 @@ def test_the_server_and_the_build_ship_the_same_python():
         assert url in stamped.group(1), (
             f"build_site.sh copies {url} but never stamps it, so a cached copy "
             f"survives a deploy")
+
+
+def test_the_browser_is_sent_every_module_its_python_imports():
+    """
+    The worker writes PY_FILES into the interpreter before it imports
+    gol_browser, and the site has to hold every one of them. A module that
+    gol_browser reaches and nobody sends fails only in a browser, as an import
+    error on someone else's machine — so the list is checked against what the
+    imports actually reach, and every file on it against what the build ships.
+    """
+    from closure import closure
+    import gol_server
+
+    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    web_py = os.path.join(root, "web", "py")
+    reached = closure(os.path.join(web_py, "gol_browser.py"), [web_py, root])
+    needed = {os.path.basename(path) for path in reached.values()} | {"gol_browser.py"}
+
+    worker = open(os.path.join(root, "web", "js", "sim-worker.js")).read()
+    listed = re.search(r"const PY_FILES = \[(.*?)\];", worker, re.S)
+    assert listed, "could not find PY_FILES in sim-worker.js"
+    sent = set(re.findall(r"'([^']+\.py)'", listed.group(1)))
+    assert needed <= sent, (
+        f"gol_browser.py reaches {sorted(needed - sent)}, which the worker never sends")
+
+    shipped = set(gol_server.SHIPPED_PY) | set(os.listdir(web_py))
+    assert sent <= shipped, (
+        f"the worker fetches {sorted(sent - shipped)}, which the site does not hold")
 
 
 # ---------------------------------------------------------------------------

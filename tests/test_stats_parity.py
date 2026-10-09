@@ -21,6 +21,7 @@ a failing test.
 
 from __future__ import annotations
 
+import atexit
 import json
 import os
 import shutil
@@ -29,6 +30,11 @@ import sys
 import tempfile
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+# A runs folder of the tests' own. Tests point the store at scratch folders as
+# they go, but one that forgot would otherwise write into the live runs folder.
+os.environ["GOL_RUNS_DIR"] = tempfile.mkdtemp(prefix="gol-tests-")
+atexit.register(shutil.rmtree, os.environ["GOL_RUNS_DIR"], True)
 
 import gol_series
 from gol_config import SimConfig
