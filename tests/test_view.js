@@ -1189,17 +1189,26 @@ function test_every_colour_a_chart_asks_for_is_in_the_stylesheet() {
 }
 
 function test_no_canvas_writes_a_colour_out() {
-  // A colour written into a canvas call is one the stylesheet cannot reach.
-  // Twenty-eight of them were, and when the panels were lightened they stayed
-  // tuned to the old ones: the stat popup's grid went darker than its panel.
+  // A colour written into a script is one the stylesheet cannot reach.
+  // Twenty-eight canvas calls were, and when the panels were lightened they
+  // stayed tuned to the old ones: the stat popup's grid went darker than its
+  // panel. Looking only at canvas calls missed the palette the explanation
+  // kept in an object of its own, whose stage was painted a different dark
+  // from the panel around it — so every colour string counts, wherever it is.
+  //
+  // Where colours may be written: the palette itself (ink.js) and the colour
+  // maps; the values a colour setting starts at (presets.js, home.js), which a
+  // colour input needs as hex; and an SVG drawn as an image (emblems.js),
+  // which cannot read the stylesheet.
+  const allowed = new Set(['ink.js', 'colormaps.js', 'presets.js', 'home.js', 'emblems.js']);
   const dir = path.join(root, 'web', 'js');
   const found = [];
-  for (const name of fs.readdirSync(dir).filter(n => n.endsWith('.js'))) {
+  for (const name of fs.readdirSync(dir).filter(n => n.endsWith('.js') && !allowed.has(n))) {
     fs.readFileSync(path.join(dir, name), 'utf8').split('\n').forEach((line, i) => {
-      if (/(fillStyle|strokeStyle)\s*=\s*['"]#[0-9a-fA-F]{3,8}['"]/.test(line)) found.push(`${name}:${i + 1}`);
+      if (/['"`](#[0-9a-fA-F]{3,8}\b|rgba?\(\s*\d)/.test(line)) found.push(`${name}:${i + 1}`);
     });
   }
-  assert(!found.length, `colours written out on a canvas, where a retheme cannot reach them: ${found.join(', ')}`);
+  assert(!found.length, `colours written out where a retheme cannot reach them: ${found.join(', ')}`);
 }
 
 function test_no_canvas_writes_a_font_out() {

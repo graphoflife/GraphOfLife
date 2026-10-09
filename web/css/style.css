@@ -27,6 +27,25 @@
      visualisation is the picture, and everything else is the frame. */
   --stage: #090c11;
 
+  /* The explanation's own marks, drawn on that stage (stepview.js reads them
+     through ink.js): an agent, a rich one, a newborn or a winner, a warning,
+     one removed, the eye that looks and its iris, a mutation, the struck tooth
+     of a gear, the shade between its teeth, and a halo's white. */
+  --ex-edge: rgba(190, 200, 215, 0.34);
+  --ex-node: #8fa8e8;
+  --ex-rich: #f0a878;
+  --ex-pale: #e8eef8;
+  --ex-good: #7fd4a0;
+  --ex-warn: #e8896b;
+  --ex-lost: #ef5f52;
+  --ex-eye: #05070a;
+  --ex-iris: #5ab6ef;
+  --ex-white: #f2f6fb;
+  --ex-mutated: #f2cd5c;
+  --ex-hot: #ff5b52;
+  --ex-shade: #0a0e14;
+  --ex-halo: #ffffff;
+
   --bg: #0b0e13;
   --panel: #202b38;
   --panel-2: #2d3d50;
@@ -80,6 +99,8 @@
   --chart-grid: rgba(255, 255, 255, 0.07);
   --chart-tick: rgba(255, 255, 255, 0.35);
   --chart-axis: rgba(255, 255, 255, 0.18);
+  /* Under a legend drawn over a picture, so it reads whatever is beneath. */
+  --chart-veil: rgba(0, 0, 0, 0.45);
 
   /* The code viewer. Its syntax colours are a self-contained scheme — the
      family GitHub uses, which is where most people last read Python — and are

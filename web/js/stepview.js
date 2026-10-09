@@ -15,19 +15,23 @@
  * the thing being explained is a process.
  */
 const StepView = {
-  ink: {
-    bg: '#0d1117',
-    edge: 'rgba(190, 200, 215, 0.34)',
-    node: '#8fa8e8',
-    rich: '#f0a878',
-    pale: '#e8eef8',
-    good: '#7fd4a0',
-    warn: '#e8896b',
-    eye: '#05070a',
-    iris: '#5ab6ef',
-    lost: '#ef5f52',
-    white: '#f2f6fb'
+  /**
+   * The colours of the explanation, by what each marks. They are the
+   * stylesheet's (--stage and --ex-* in style.css), read once through Ink, so a
+   * change of palette reaches them; written out here they had drifted — the
+   * stage was painted a different dark from the panel around it.
+   */
+  get ink() {
+    if (!this._ink) {
+      this._ink = { bg: Ink.of('stage') };
+      for (const name of ['edge', 'node', 'rich', 'pale', 'good', 'warn', 'lost', 'eye', 'iris',
+                          'white', 'mutated', 'hot', 'shade', 'halo']) {
+        this._ink[name] = Ink.of(`ex${name[0].toUpperCase()}${name.slice(1)}`);
+      }
+    }
+    return this._ink;
   },
+  _ink: null,
 
   // How fast a value closes the gap to its target, per second. Low enough to
   // read as motion, high enough not to feel like lag.
@@ -360,7 +364,7 @@ const StepView = {
         // matters to a reader is that the two are the same event.
         const carried = role.flow.get(k) || 0;
         if (carried > 0) {
-          colour = 'rgba(127, 212, 160, 0.85)';
+          colour = Ink.alpha(this.ink.good, 0.85);
           width = 2 + Math.min(3, Math.log2(1 + carried));
         } else {
           colour = this.ink.warn;
@@ -402,7 +406,7 @@ const StepView = {
         // still crossing the graph answers the question the step is asking.
         colour = this.ink.rich;
       }
-      if (view._mutated && view._mutated.has(id)) colour = '#f2cd5c';
+      if (view._mutated && view._mutated.has(id)) colour = this.ink.mutated;
 
       // Struck out, and coloured to match: the mark and the fact should not be
       // two separate things to notice.
@@ -586,9 +590,9 @@ const StepView = {
 
       const grad = ctx.createLinearGradient(
         p.x, p.y, p.x + Math.cos(a) * far, p.y + Math.sin(a) * far);
-      grad.addColorStop(0, 'rgba(90, 182, 239, 0)');
-      grad.addColorStop(0.35, 'rgba(90, 182, 239, 0.40)');
-      grad.addColorStop(1, 'rgba(90, 182, 239, 0.10)');
+      grad.addColorStop(0, Ink.alpha(this.ink.iris, 0));
+      grad.addColorStop(0.35, Ink.alpha(this.ink.iris, 0.40));
+      grad.addColorStop(1, Ink.alpha(this.ink.iris, 0.10));
       ctx.globalAlpha = fade;
       ctx.fillStyle = grad;
       ctx.beginPath();
@@ -619,7 +623,7 @@ const StepView = {
     const cols = [[-1, 2], [0, 3], [1, 2]];
     ctx.save();
     ctx.translate(p.x, p.y);
-    ctx.strokeStyle = 'rgba(10,14,20,0.45)';
+    ctx.strokeStyle = Ink.alpha(this.ink.shade, 0.45);
     ctx.lineWidth = Math.max(0.6, p.r * 0.045);
     const layers = [];
     cols.forEach(([cx, count], ci) => {
@@ -636,7 +640,7 @@ const StepView = {
     });
     layers.flat().forEach((q, i) => {
       const lit = 0.5 + 0.5 * Math.max(0, Math.sin(time * 2.6 + seed - i * 0.5));
-      ctx.fillStyle = (i === hot) ? '#ff5b52' : `rgba(10,14,20,${lit})`;
+      ctx.fillStyle = (i === hot) ? this.ink.hot : Ink.alpha(this.ink.shade, lit);
       ctx.beginPath(); ctx.arc(q.x, q.y, p.r * (i === hot ? 0.19 : 0.145), 0, Math.PI * 2);
       ctx.fill();
     });
@@ -674,7 +678,7 @@ const StepView = {
       if (share.at > 0 && share.at < 1) {
         ctx.save();
         ctx.fillStyle = this.ink.good;
-        ctx.shadowColor = 'rgba(127, 212, 160, 0.9)';
+        ctx.shadowColor = Ink.alpha(this.ink.good, 0.9);
         ctx.shadowBlur = 6;
         for (const [parent, child] of (view.stage.marks.parents || [])) {
           const from = place(parent), to = place(child);
@@ -708,7 +712,7 @@ const StepView = {
       if (moving.raw > 0 && moving.raw < 1.12) {
         ctx.save();
         ctx.fillStyle = this.ink.good;
-        ctx.shadowColor = 'rgba(127, 212, 160, 0.9)';
+        ctx.shadowColor = Ink.alpha(this.ink.good, 0.9);
         ctx.shadowBlur = 6;
         for (const [a, b] of view.stage.edges) {
           const p = place(a), q = place(b);
@@ -761,9 +765,9 @@ const StepView = {
 
         const pulse = 0.55 + 0.45 * Math.sin(time * 4.4 + this._hash(node) * Math.PI * 2);
         const halo = ctx.createRadialGradient(x, y, r * 0.5, x, y, r * 2.1);
-        halo.addColorStop(0, `rgba(255, 255, 255, ${(0.55 + 0.4 * pulse).toFixed(3)})`);
-        halo.addColorStop(0.55, `rgba(255, 255, 255, ${(0.22 * pulse).toFixed(3)})`);
-        halo.addColorStop(1, 'rgba(255, 255, 255, 0)');
+        halo.addColorStop(0, Ink.alpha(this.ink.halo, (0.55 + 0.4 * pulse).toFixed(3)));
+        halo.addColorStop(0.55, Ink.alpha(this.ink.halo, (0.22 * pulse).toFixed(3)));
+        halo.addColorStop(1, Ink.alpha(this.ink.halo, 0));
         ctx.globalAlpha = near;
         ctx.fillStyle = halo;
         ctx.beginPath(); ctx.arc(x, y, r * 2.1, 0, Math.PI * 2); ctx.fill();
@@ -1024,7 +1028,7 @@ const StepView = {
 
     ctx.save();
     ctx.fillStyle = this.ink.good;
-    ctx.shadowColor = 'rgba(127, 212, 160, 0.85)';
+    ctx.shadowColor = Ink.alpha(this.ink.good, 0.85);
     ctx.shadowBlur = 7;
 
     stage.ids.forEach((id, i) => {

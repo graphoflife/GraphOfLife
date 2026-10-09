@@ -331,7 +331,7 @@ const Diagrams = {
     out.width = source.width;
     out.height = source.height;
     const ctx = out.getContext('2d');
-    ctx.fillStyle = getComputedStyle(document.body).backgroundColor || '#0d1117';
+    ctx.fillStyle = getComputedStyle(document.body).backgroundColor || Ink.of('stage');
     ctx.fillRect(0, 0, out.width, out.height);
     ctx.drawImage(source, 0, 0);
 

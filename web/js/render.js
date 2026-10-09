@@ -816,7 +816,7 @@ class GraphRenderer {
     const w = 150, h = 10;
 
     ctx.globalAlpha = 0.92;
-    ctx.fillStyle = 'rgba(0,0,0,0.45)';
+    ctx.fillStyle = Ink.of('veil');
     ctx.fillRect(x - 8, y - 20, w + 16, h + 38);
 
     drawColormapStrip(ctx, x, y, w, h, colormap, reverse);

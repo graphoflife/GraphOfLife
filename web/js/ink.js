@@ -19,7 +19,14 @@ const Ink = {
     accent: '--accent',      // a lone series with no colour of its own
     grid: '--chart-grid',
     tick: '--chart-tick',
-    axis: '--chart-axis'
+    axis: '--chart-axis',
+    veil: '--chart-veil',    // under a legend drawn over a picture
+    stage: '--stage',        // behind a picture of the world: the darkest thing on the page
+    // The explanation's marks (stepview.js), by what each stands for.
+    exEdge: '--ex-edge', exNode: '--ex-node', exRich: '--ex-rich', exPale: '--ex-pale',
+    exGood: '--ex-good', exWarn: '--ex-warn', exLost: '--ex-lost', exEye: '--ex-eye',
+    exIris: '--ex-iris', exWhite: '--ex-white', exMutated: '--ex-mutated', exHot: '--ex-hot',
+    exShade: '--ex-shade', exHalo: '--ex-halo'
   },
 
   /**
@@ -30,6 +37,18 @@ const Ink = {
    */
   LINES: ['#5ac8fa', '#ffd166', '#ff6b6b', '#7ee787', '#c792ea',
           '#f78c6c', '#89ddff', '#e5e5e5'],
+
+  /**
+   * A colour of the palette at an opacity, for a glow or a fade: written as
+   * rgba, since a canvas cannot apply an opacity to var(--ex-good).
+   */
+  alpha(colour, opacity) {
+    const hex = colour.trim().replace(/^#/, '');
+    const full = hex.length === 3 ? [...hex].map(c => c + c).join('') : hex;
+    const [r, g, b] = [0, 2, 4].map(i => parseInt(full.slice(i, i + 2), 16));
+    if (full.length !== 6 || [r, g, b].some(Number.isNaN)) throw new Error(`Ink cannot fade ${colour}`);
+    return `rgba(${r}, ${g}, ${b}, ${opacity})`;
+  },
 
   /** The colour of the `i`th line on a chart. */
   line(i) {
