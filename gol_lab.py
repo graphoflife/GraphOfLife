@@ -53,6 +53,10 @@ import time
 from typing import Any, Dict, Iterable, List, Optional, Tuple
 
 import gol_store as store
+import gol_worker
+# How a worker's session can end: the worker owns these, and the command line
+# that starts it, because every snapshot of it ever taken answers to them.
+from gol_worker import EXIT_FAULT, EXIT_REFUSED
 from gol_config import INFRASTRUCTURE, MECHANICS, PARAMETERS, SPEC, SimConfig
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -87,7 +91,6 @@ CALIBRATION = {
     "baseMB": 300.0,
 }
 
-EXIT_FAULT, EXIT_REFUSED = 3, 4
 
 
 class LabError(ValueError):
@@ -439,8 +442,7 @@ def reproduce(run_id: str, engine: str, iterations: int) -> Dict[str, Any]:
             "lab": meta.get("lab")}
     with tempfile.TemporaryDirectory(prefix="gol-reproduce-") as folder:
         env = {**os.environ, "GOL_RUNS_DIR": folder, **_thread_settings(None)}
-        subprocess.run([sys.executable, "-B", os.path.join(engine_dir(engine), "gol_worker.py"),
-                        run_id, "--until", str(iterations), "--spec", json.dumps(spec)],
+        subprocess.run(gol_worker.command(engine_dir(engine), run_id, iterations, spec=spec),
                        cwd=engine_dir(engine), env=env, check=True,
                        stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
         return compare((store.BASE_DIR, run_id), (folder, run_id),
@@ -636,13 +638,31 @@ def schedule(durations: List[float], workers: int) -> float:
 # The control file and the lab's own state
 # ----------------------------------------------------------------------------
 
+def _control_defaults() -> Dict[str, Any]:
+    return {"queue": [], "paused": False, "workers": DEFAULT_WORKERS, "reason": None}
+
+
 def read_control() -> Dict[str, Any]:
     try:
         with open(os.path.join(lab_dir(), "control.json")) as f:
             control = json.load(f)
     except FileNotFoundError:
         control = {}
-    return {"queue": [], "paused": False, "workers": DEFAULT_WORKERS, "reason": None, **control}
+    return {**_control_defaults(), **control}
+
+
+def _update_control(change) -> Dict[str, Any]:
+    """
+    Change the control file under its lock. The server writes it when someone
+    presses a button and the lab when it pauses itself, from two processes, and
+    a read-modify-write of one could otherwise land in the middle of the
+    other's and undo it.
+    """
+    def merged(control: Dict[str, Any]) -> None:
+        for key, value in _control_defaults().items():
+            control.setdefault(key, value)
+        change(control)
+    return store.update_json(os.path.join(_made(lab_dir()), "control.json"), merged, indent=1)
 
 
 def request(run: Optional[str] = None, pause: Optional[bool] = None,
@@ -652,29 +672,29 @@ def request(run: Optional[str] = None, pause: Optional[bool] = None,
     use so many workers. Written to the control file, which the lab reads
     every few seconds; nothing signals it.
     """
-    control = read_control()
     if run is not None:
         experiment_runs(run)                       # refuses a plan it cannot carry out
-        if run not in control["queue"]:
-            control["queue"].append(run)
-        control["paused"], control["reason"] = False, None
-    if pause is not None:
-        control["paused"], control["reason"] = bool(pause), None
-    if workers is not None:
-        control["workers"] = max(1, min(int(workers), os.cpu_count() or 1))
-    store.write_json(os.path.join(_made(lab_dir()), "control.json"), control, indent=1)
-    return control
+
+    def change(control: Dict[str, Any]) -> None:
+        if run is not None:
+            if run not in control["queue"]:
+                control["queue"].append(run)
+            control["paused"], control["reason"] = False, None
+        if pause is not None:
+            control["paused"], control["reason"] = bool(pause), None
+        if workers is not None:
+            control["workers"] = max(1, min(int(workers), os.cpu_count() or 1))
+    return _update_control(change)
+
+
+def _pause(reason: Optional[str]) -> None:
+    """Pause, and say why, in one write: a reader never sees the one without the other."""
+    _update_control(lambda control: control.update(paused=True, reason=reason))
+    _log(f"paused: {reason}")
 
 
 def lab_alive() -> bool:
-    lock = os.path.join(lab_dir(), "lab.lock")
-    if not os.path.exists(lock):
-        return False
-    try:
-        with store._locked(lock, wait=False):
-            return False
-    except store.RunBusy:
-        return True
+    return store.is_locked(os.path.join(lab_dir(), "lab.lock"))
 
 
 def spawn_lab() -> bool:
@@ -711,11 +731,7 @@ class Job:
 
 
 def _faulted(run_id: str) -> bool:
-    try:
-        with open(os.path.join(store.run_dir(run_id), "provenance.json")) as f:
-            return any(s.get("exit") == "fault" for s in json.load(f)["sessions"])
-    except FileNotFoundError:
-        return False
+    return any(s.get("exit") == "fault" for s in gol_worker.read_provenance(run_id)["sessions"])
 
 
 def run_state(spec: RunSpec, engine: Optional[str]) -> Dict[str, Any]:
@@ -814,7 +830,7 @@ def run_lab() -> int:
     """
     os.makedirs(lab_dir(), exist_ok=True)
     try:
-        lock = store._locked(os.path.join(lab_dir(), "lab.lock"), wait=False)
+        lock = store.locked(os.path.join(lab_dir(), "lab.lock"), wait=False)
         lock.__enter__()
     except store.RunBusy:
         print("a lab is already running", file=sys.stderr)
@@ -849,17 +865,13 @@ def run_lab() -> int:
                     waiting = [j for j in jobs(control["queue"], engine)
                                if j.spec.run_id not in running]
                 except LabError as exc:
-                    request(pause=True)
-                    _set_reason(str(exc))
-                    _log(f"paused: {exc}")
+                    _pause(str(exc))
                     waiting = []
                 # Runs that exist go on, on their own engines. Runs still to
                 # be made wait for a snapshot to be made with.
                 startable = [j for j in waiting if j.engine is not None]
                 if waiting and not startable and not running:
-                    request(pause=True)
-                    _set_reason(held_back)
-                    _log(f"paused: {held_back}")
+                    _pause(held_back)
                 waiting = startable
                 used = sum(info["peakMB"] for _, _, info in running.values())
                 caps = _caps(control["queue"])
@@ -873,11 +885,9 @@ def run_lab() -> int:
                         continue
                     free = shutil.disk_usage(_made(store.BASE_DIR)).free
                     if cost["diskBytes"] > free - DISK_MARGIN:
-                        request(pause=True)
-                        _set_reason(f"{job.spec.run_id} needs about "
-                                    f"{cost['diskBytes'] / 2**30:.1f} GB and the disk has "
-                                    f"{(free - DISK_MARGIN) / 2**30:.1f} GB to spare")
-                        _log("paused: the disk would fill")
+                        _pause(f"{job.spec.run_id} needs about "
+                               f"{cost['diskBytes'] / 2**30:.1f} GB and the disk has "
+                               f"{(free - DISK_MARGIN) / 2**30:.1f} GB to spare")
                         break
                     running[job.spec.run_id] = (_start(job), job, cost)
                     used += cost["peakMB"]
@@ -927,12 +937,6 @@ def _at_cap(job: Job, running: List[Job], caps: Dict[str, int]) -> bool:
                for name in job.spec.experiments if name in caps)
 
 
-def _set_reason(reason: str) -> None:
-    control = read_control()
-    control["reason"] = reason
-    store.write_json(os.path.join(lab_dir(), "control.json"), control, indent=1)
-
-
 def _anything_left(queue: List[str]) -> bool:
     try:
         return any(run_state(spec, None)["state"] in ("waiting", "running")
@@ -944,18 +948,15 @@ def _anything_left(queue: List[str]) -> bool:
 def _start(job: Job) -> subprocess.Popen:
     """One worker for one job, on the run's own engine, logging beside the run."""
     spec = job.spec
-    command = [sys.executable, "-B", os.path.join(engine_dir(job.engine), "gol_worker.py"),
-               spec.run_id, "--until", str(job.until)]
+    made = None
     if not job.exists:
         config = dict(spec.config)
         if not config["checkpoint_every"]:
             config["checkpoint_every"] = _planned_checkpoints(config, costs())
-        command += ["--spec", json.dumps({
-            "name": spec.name, "config": config, "record": spec.record,
-            "lab": {**spec.lab, "engine": job.engine,
-                    "commit": _engine_commit(job.engine)}})]
-    if job.fault_at is not None:
-        command += ["--fault-at", str(job.fault_at)]
+        made = {"name": spec.name, "config": config, "record": spec.record,
+                "lab": {**spec.lab, "engine": job.engine, "commit": _engine_commit(job.engine)}}
+    command = gol_worker.command(engine_dir(job.engine), spec.run_id, job.until,
+                                 spec=made, fault_at=job.fault_at)
     env = {k: v for k, v in os.environ.items()
            if k not in ("OPENBLAS_NUM_THREADS", "OMP_NUM_THREADS", "MKL_NUM_THREADS")}
     env.update(GOL_RUNS_DIR=store.BASE_DIR, **_thread_settings(spec.threads))

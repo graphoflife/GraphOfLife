@@ -56,6 +56,7 @@ import numpy as np
 import gol_lab
 import gol_record
 import gol_store as store
+import gol_worker
 from gol_series import NO_PARENT
 
 BOOK = os.path.join(gol_lab.HERE, "book")
@@ -106,12 +107,6 @@ def _write(path: str, value: Any, compact: bool = False) -> None:
 # Reading the runs
 # ----------------------------------------------------------------------------
 
-def _provenance(run_id: str) -> Dict[str, Any]:
-    try:
-        with open(os.path.join(store.run_dir(run_id), "provenance.json")) as f:
-            return json.load(f)
-    except FileNotFoundError:
-        return {"sessions": []}
 
 
 def series(rows: List[Dict[str, Any]], stat: str, phase: int) -> Tuple[np.ndarray, np.ndarray]:
@@ -318,7 +313,7 @@ def _citation(name: str, by_condition: Dict[str, List[gol_lab.RunSpec]]) -> Dict
     for condition, specs in by_condition.items():
         for spec in specs:
             meta = store.load_meta(spec.run_id)
-            sessions = _provenance(spec.run_id)["sessions"]
+            sessions = gol_worker.read_provenance(spec.run_id)["sessions"]
             first = sessions[0]["environment"] if sessions else {}
             rows = gol_record.read_stats(spec.run_id)
             seconds = sum(r.get("_seconds") or 0 for r in rows)
@@ -328,22 +323,18 @@ def _citation(name: str, by_condition: Dict[str, List[gol_lab.RunSpec]]) -> Dict
             lab = meta.get("lab") or {}
             commits.add(lab.get("commit"))
             engines.add(lab.get("engine"))
-            environments.add(tuple(first.get(k) for k in ("python", "numpy", "networkx",
-                                                         "blas", "cpu", "dispatch")))
+            environments.add(tuple(first.get(k) for k in gol_worker.FINGERPRINT))
             runs.append({"id": spec.run_id, "condition": condition, "seed": spec.lab["seed"],
                          "iterations": meta.get("iteration"), "status": meta.get("status"),
                          "strain": strain, "engine": lab.get("engine"),
                          "commit": lab.get("commit"), "seconds": round(seconds, 1),
                          "peakMB": peak, "sessions": len(sessions),
-                         "environment": {k: first.get(k) for k in
-                                         ("python", "numpy", "networkx", "blas", "cpu",
-                                          "dispatch")}})
+                         "environment": {k: first.get(k) for k in gol_worker.FINGERPRINT}})
     plan = gol_lab.read_plan(name)
     return {"strains": sorted(s for s in strains if s), "commits": sorted(c for c in commits if c),
             "engines": sorted(e for e in engines if e),
-            "environments": [dict(zip(("python", "numpy", "networkx", "blas", "cpu",
-                                       "dispatch"), e)) for e in sorted(environments,
-                                                                       key=str)],
+            "environments": [dict(zip(gol_worker.FINGERPRINT, e))
+                             for e in sorted(environments, key=str)],
             "setup": plan.get("runs"), "runs": runs}
 
 

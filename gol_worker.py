@@ -33,7 +33,7 @@ import signal
 import socket
 import sys
 import time
-from typing import Any, Dict
+from typing import Any, Dict, List, Optional
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 
@@ -111,6 +111,22 @@ def read_provenance(run_id: str) -> Dict[str, Any]:
             return json.load(f)
     except FileNotFoundError:
         return {"run": run_id, "sessions": []}
+
+
+def command(worker_dir: str, run_id: str, until: int, spec: Optional[Dict[str, Any]] = None,
+            fault_at: Optional[int] = None) -> List[str]:
+    """
+    The command that starts the worker of the snapshot in `worker_dir` on one
+    run: the command line at the top of this file, which every snapshot ever
+    taken answers to, written down once for everyone who starts a worker.
+    """
+    argv = [sys.executable, "-B", os.path.join(worker_dir, "gol_worker.py"),
+            run_id, "--until", str(until)]
+    if spec is not None:
+        argv += ["--spec", json.dumps(spec)]
+    if fault_at is not None:
+        argv += ["--fault-at", str(fault_at)]
+    return argv
 
 
 def _engine() -> Dict[str, Any]:

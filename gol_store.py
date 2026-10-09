@@ -38,7 +38,7 @@ import shutil
 import tempfile
 import threading
 import time
-from typing import Any, Dict, Iterator, List, Optional, Tuple
+from typing import Any, Callable, Dict, Iterator, List, Optional, Tuple
 
 import numpy as np
 
@@ -245,17 +245,33 @@ def save_meta(run_id: str, meta: Dict[str, Any]) -> None:
     write_json(meta_path(run_id), meta, indent=2)
 
 
+def update_json(path: str, change: Callable[[Dict[str, Any]], None],
+                indent: Optional[int] = None, lock: Optional[str] = None) -> Dict[str, Any]:
+    """
+    Read a JSON object, change it, and write it back, all under a lock: the
+    read-modify-write two processes can both be doing to one file, where the
+    second would otherwise write over what the first had just changed. A file
+    that does not exist yet reads as an empty object. Returns what was written.
+    """
+    with locked(lock or f"{path}.lock", wait=True):
+        try:
+            with open(path, "r") as f:
+                value = json.load(f)
+        except FileNotFoundError:
+            value = {}
+        change(value)
+        write_json(path, value, indent=indent)
+    return value
+
+
 def update_meta(run_id: str, **changes: Any) -> Dict[str, Any]:
     """
     Change some fields and keep the rest. Read, changed and written under a
     lock, because a running run rewrites its metadata every iteration and a
     rename landing in between used to be written over and lost.
     """
-    with _locked(os.path.join(run_dir(run_id), ".meta.lock"), wait=True):
-        meta = load_meta(run_id)
-        meta.update(changes)
-        save_meta(run_id, meta)
-    return meta
+    return update_json(meta_path(run_id), lambda meta: meta.update(changes), indent=2,
+                       lock=os.path.join(run_dir(run_id), ".meta.lock"))
 
 
 # ----------------------------------------------------------------------------
@@ -267,7 +283,7 @@ class RunBusy(RuntimeError):
 
 
 @contextlib.contextmanager
-def _locked(path: str, wait: bool) -> Iterator[None]:
+def locked(path: str, wait: bool) -> Iterator[None]:
     """An exclusive lock on `path`, which the system lets go if the holder dies."""
     if fcntl is None:
         yield
@@ -297,18 +313,23 @@ def hold(run_id: str):
     on disk can be told from a live one by asking. Raises RunBusy if someone
     else has it.
     """
-    return _locked(_run_lock(run_id), wait=False)
+    return locked(_run_lock(run_id), wait=False)
+
+
+def is_locked(path: str) -> bool:
+    """Whether some live process holds the lock on `path` right now."""
+    if fcntl is None or not os.path.exists(path):
+        return False
+    try:
+        with locked(path, wait=False):
+            return False
+    except RunBusy:
+        return True
 
 
 def held(run_id: str) -> bool:
     """Whether someone is advancing this run right now."""
-    if fcntl is None or not os.path.exists(_run_lock(run_id)):
-        return False
-    try:
-        with _locked(_run_lock(run_id), wait=False):
-            return False
-    except RunBusy:
-        return True
+    return is_locked(_run_lock(run_id))
 
 
 def load_config(run_id: str) -> SimConfig:

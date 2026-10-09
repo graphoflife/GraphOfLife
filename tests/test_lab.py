@@ -166,6 +166,29 @@ def test_the_engine_a_lab_freezes_is_exactly_what_its_worker_imports():
         f"and ENGINE_FILES lists {sorted(listed - needed)} that the worker never imports")
 
 
+def test_a_file_two_processes_change_loses_neither_change():
+    """
+    The control file is changed by the server when a button is pressed and by
+    the lab when it pauses itself, each reading it, changing a field and
+    writing it back. Without a lock, the second write can undo the first.
+    Here many writers append to one list at once, and every append survives.
+    """
+    import threading
+    with tempfile.TemporaryDirectory() as tmp:
+        path = os.path.join(tmp, "control.json")
+
+        def writer(name):
+            for i in range(25):
+                gol_store.update_json(path, lambda c: c.setdefault("seen", []).append(f"{name}{i}"))
+        threads = [threading.Thread(target=writer, args=(n,)) for n in "abcdefgh"]
+        for t in threads:
+            t.start()
+        for t in threads:
+            t.join()
+        with open(path) as f:
+            assert len(json.load(f)["seen"]) == 8 * 25
+
+
 def test_a_plan_can_list_world_sizes_and_a_condition_its_own():
     """
     A plan may run its conditions at several sizes of world, and a condition
