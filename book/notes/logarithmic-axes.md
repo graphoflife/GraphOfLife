@@ -16,7 +16,7 @@ Two consequences:
 
 - A quantity that grows by the same **factor** every step — doubling every
   three iterations, say — is a **straight line** against time on a
-  logarithmic value axis ([Chapter 10](../chapters/10-the-first-hundred-iterations.md)).
+  logarithmic value axis ([Chapter 11](../chapters/11-the-first-hundred-iterations.md)).
 - Zero and negative numbers cannot be drawn: log 0 does not exist. Figures
   with log axes leave such values out, and say so.
 
@@ -38,7 +38,7 @@ a line with **slope** *b*. So a power law is recognised by a straight line on
 log–log axes, and its exponent read off as the slope. Examples:
 
 - *b* = 1: *y* grows in proportion to *x* (twice the tokens, twice the
-  agents) — the question of [Chapter 31](../chapters/31-how-does-a-worlds-size-follow-its-tokens.md).
+  agents) — the question of [Chapter 32](../chapters/32-how-does-a-worlds-size-follow-its-tokens.md).
 - *b* = −1: *y* halves when *x* doubles.
 - A curve that **bends** downward on log–log axes is not a power law: it falls
   faster and faster, as an exponential tail does.

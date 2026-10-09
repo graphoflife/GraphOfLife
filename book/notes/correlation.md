@@ -35,14 +35,14 @@ Three worlds: (*x*, *y*) = (1, 2), (2, 2), (3, 5). Means 2 and 3. Deviations
 With few pairs, a sizeable *r* can come about by chance. The book checks
 this with a [permutation test](permutation-test.md): shuffle the *y* values
 against the *x* values many times, and see how often the shuffled pairs give
-an *r* at least as large. In [Chapter 12](../chapters/12-how-much-does-the-seed-decide.md),
+an *r* at least as large. In [Chapter 13](../chapters/13-how-much-does-the-seed-decide.md),
 for 26 worlds, the correlation 0.12 between the number of agents in the first
 and second half of the run is reached by shuffled pairings 28 times in 100 —
 nothing; 0.41 for connections only 2 times in 100.
 
 ## Correlation is not cause
 
-[Chapter 13](../chapters/13-where-do-the-tokens-go.md) finds that agents with
+[Chapter 14](../chapters/14-where-do-the-tokens-go.md) finds that agents with
 more connections hold more tokens (*r* = 0.50 between the number of
 connections and the logarithm of the tokens). That alone cannot say whether
 connections make an agent rich, riches bring connections, or something else

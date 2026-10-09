@@ -20,6 +20,13 @@ until the world itself is understood: what happens in it from one iteration
 to the next, what its numbers mean, how much they depend on chance. Most of
 this book is that groundwork.
 
+There is a second aim, which shaped the rules from the start: that a world of
+very simple, local, conserving rules might grow by itself the kinds of thing
+physics describes — a space of a few dimensions, stable things that persist in
+it, places where something can live. [Chapter 7](07-physical-inspiration.md)
+explains the physical ideas behind the rules, and why the two aims keep
+meeting.
+
 ## The world in one paragraph
 
 A Graph of Life world is a **network**: dots, called *nodes*, joined by
@@ -56,7 +63,7 @@ every brain changes with the same probability after every game
 question, not a given: brains that keep their tokens and take over
 neighbouring nodes spread, and the others vanish — but is that because of
 *how they differ*, or by chance? Nothing in the rules says which brains are
-good. [Chapter 30](30-do-the-brains-matter.md) asks it directly.
+good. [Chapter 31](31-do-the-brains-matter.md) asks it directly.
 
 ## What would count as open-ended
 
@@ -75,7 +82,7 @@ before the next:
 
 Parts II to IV answer questions that lie underneath P1. Part V, not yet
 written, will climb the ladder, by the changes to the rules that
-[Meta II](29-meta-2.md) proposes.
+[Meta II](30-meta-2.md) proposes.
 
 ## How the book is organised
 
@@ -83,13 +90,14 @@ written, will climb the ladder, by the changes to the rules that
   ([Chapter 2](02-the-world.md)), one iteration step by step
   ([Chapter 3](03-one-iteration.md)), the brain ([Chapter 4](04-the-brain.md)),
   how worlds are measured ([Chapter 5](05-how-worlds-are-measured.md)), the
-  ideas this builds on ([Chapter 6](06-the-ideas-this-builds-on.md)), and
-  whether a run can be made again exactly ([Chapter 7](07-is-a-run-reproducible.md)).
+  ideas this builds on ([Chapter 6](06-the-ideas-this-builds-on.md)), the
+  physical ideas behind the rules ([Chapter 7](07-physical-inspiration.md)), and
+  whether a run can be made again exactly ([Chapter 8](08-is-a-run-reproducible.md)).
 - **Part II · The baseline world.** Thirty worlds of one fixed setting — the
   *baseline*, called B1 — looked at from every side: their life over 3,000
   iterations, their first hundred iterations, births and deaths, chance,
   wealth, the game, the shape of the network, and lineages
-  ([Chapters 8 to 17](08-thirty-worlds.md)).
+  ([Chapters 9 to 18](09-thirty-worlds.md)).
 - **Part III · The baseline world, measured every way.** The same thirty
   worlds again, through every statistic the Graph of Life viewer offers and
   some it does not: entropy, gains and losses, the flow of tokens, how agents
@@ -97,13 +105,18 @@ written, will climb the ladder, by the changes to the rules that
   breaks, pictures of one world in many colours, whether agents cooperate —
   then a chapter that questions the rules themselves, and a meta chapter on
   what it all means for open-ended evolution, with proposals for changing the
-  rules ([Chapters 18 to 29](18-how-even-is-a-world.md)).
+  rules ([Chapters 19 to 30](19-how-even-is-a-world.md)).
 - **Part IV · One change at a time.** One setting changed against the
   baseline: worlds whose brains never change or are never asked
-  ([Chapter 30](30-do-the-brains-matter.md)), worlds of other sizes
-  ([Chapter 31](31-how-does-a-worlds-size-follow-its-tokens.md)), and more.
+  ([Chapter 31](31-do-the-brains-matter.md)), worlds of other sizes
+  ([Chapter 32](32-how-does-a-worlds-size-follow-its-tokens.md)), and more.
 - **Part V · Towards open-ended evolution.** Changed rules, aimed at the
-  ladder above, in the order [Meta II](29-meta-2.md) sets out.
+  ladder above, in the order [Meta II](30-meta-2.md) sets out.
+- **Part VI · Towards a physics.** The second aim: how many dimensions a world
+  has, which of its properties have no scale, what changes when every rule is
+  local, how far a difference travels, what forms when a flow runs through a
+  world, and whether anything like a particle appears
+  ([Chapter 7](07-physical-inspiration.md) sets out the questions).
 - **Notes.** Short notes, one per idea, that define every rule, every
   measurement and every statistical method the chapters use, with worked
   examples: [Every setting](../notes/settings.md),
@@ -136,9 +149,9 @@ Three commands do all of it. `python3 gol_lab.py run E02` makes the runs of an
 experiment — here Experiment 2, the thirty baseline worlds — into the folder
 `GraphOfLifeRuns/`. `python3 gol_lab.py analyse E02` computes an experiment's
 results. And `python3 book_figures.py life` draws the figures of one chapter
-— here [A world's life](09-a-worlds-life.md) — from the runs, and writes them
+— here [A world's life](10-a-worlds-life.md) — from the runs, and writes them
 into the chapters. On the same kind of computer, with the same versions of
-the libraries, every run, figure and number comes out identical; [Chapter 7](07-is-a-run-reproducible.md)
+the libraries, every run, figure and number comes out identical; [Chapter 8](08-is-a-run-reproducible.md)
 shows why.
 
 The book is plain Markdown and SVG pictures. It reads the same in the Book

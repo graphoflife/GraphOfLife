@@ -4,7 +4,7 @@ At the end of every phase the cleanup keeps only the **largest connected
 piece** of the network; every agent outside it dies, however many tokens it
 holds, and its tokens are dealt out among the survivors
 ([Chapter 3](03-one-iteration.md)). Three deaths in four are of this kind
-([Chapter 11](11-births-deaths-and-ages.md)), and [Chapter 22](22-power-laws-real-and-apparent.md)
+([Chapter 12](12-births-deaths-and-ages.md)), and [Chapter 23](23-power-laws-real-and-apparent.md)
 found that they come in lumps: half of them in games that cut off dozens of
 agents at once. This chapter asks how fragile a world is, whether its breaks
 can be foreseen, and what actually severs a region from the rest.
@@ -59,7 +59,7 @@ can be foreseen, and what actually severs a region from the rest.
 
 A **bridge** is a connection on no loop: cut it, and the network falls in two
 ([Bridges](../notes/bridges.md)). A settled world has about 625 of them — 31%
-of its connections ([Chapter 15](15-what-shape-does-the-network-take.md)). Most
+of its connections ([Chapter 16](16-what-shape-does-the-network-take.md)). Most
 hold a single leaf. The **cut risk** asks about the worst one: the largest
 share of the world that one bridge holds to the rest ([Cut risk](../notes/cut-risk.md)).
 In the median world it is **12%**: somewhere, a single connection is all that
@@ -75,7 +75,7 @@ If the worst bridge failed, the game would cut off that eighth. Does it?
 **Does a fragile world lose more?** Every game from iteration 500 on of the 26 worlds that lived to the end. x: before the game, the largest share of the world that one bridge held to the rest — if that one connection were cut, that many would be cut off ([Cut risk](../notes/cut-risk.md)). y: the share of agents the game really cut off. White: the mean of y in classes of x 0.05 wide; dashed: y = x.
 
 > [!example]- How to make this figure
-> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 8](08-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
 >
@@ -131,7 +131,7 @@ connection for about twenty iterations, and was not lost through it.
 **Where the cut-off deaths happen.** Of all agents cut off in games from iteration 500 on of the 26 worlds that lived to the end, the share that died in games which cut off at least n agents, for every n. Where the line is at 0.5, half of all such deaths happened in games at least that large.
 
 > [!example]- How to make this figure
-> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 8](08-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
 >
@@ -204,18 +204,18 @@ tokens handed out by lottery to the survivors.
 - **Connections have a price.** One token of flow per game, per connection,
   paid by one side or the other. That caps how many connections a world of
   *T* tokens can hold, which may be part of why a world's size follows its
-  tokens ([Chapter 31](31-how-does-a-worlds-size-follow-its-tokens.md)).
+  tokens ([Chapter 32](32-how-does-a-worlds-size-follow-its-tokens.md)).
 - **The cull is global, and blind.** A region that is cut off dies whatever its
   brains did, even if it was doing well inside. Selection here acts on regions
   through their borders, not on agents through what they do — and a world can
   never split into two populations that go their own ways, which in nature is
-  how new species begin. [Chapter 28](28-questioning-the-mechanics.md)
-  questions this rule, and [Meta II](29-meta-2.md) what changing it might do.
+  how new species begin. [Chapter 29](29-questioning-the-mechanics.md)
+  questions this rule, and [Meta II](30-meta-2.md) what changing it might do.
 
 To make every figure of this chapter: `python3 book_figures.py breaking`.
 
 <!-- turns -->
 ---
 
-← [Chapter 24 · The geometry of a world](24-the-geometry-of-a-world.md) · [Contents](../README.md) · [Chapter 26 · One world, many colours](26-one-world-many-colours.md) →
+← [Chapter 25 · The geometry of a world](25-the-geometry-of-a-world.md) · [Contents](../README.md) · [Chapter 27 · One world, many colours](27-one-world-many-colours.md) →
 <!-- /turns -->

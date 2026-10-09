@@ -67,7 +67,7 @@ def number(n: int) -> str:
 # ---------------------------------------------------------------------------
 
 def linked(md: str, text: str) -> str:
-    """Every "Chapter 12" in a text made by code, as a link to that chapter."""
+    """Every "Chapter 13" in a text made by code, as a link to that chapter."""
     files = {c["id"]: c["file"] for c in chapters() if c.get("file")}
 
     def to(match: "re.Match[str]") -> str:

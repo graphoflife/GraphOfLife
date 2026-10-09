@@ -70,7 +70,7 @@ statistics). A **hub** is an agent of very high degree. A settled baseline world
 both. After the last game of the 26 baseline worlds that lived to the end,
 37% of all agents had exactly one connection and 23% two; 4% had ten or more;
 and the largest hub had 1,399
-([Chapter 15](../chapters/15-what-shape-does-the-network-take.md)).
+([Chapter 16](../chapters/16-what-shape-does-the-network-take.md)).
 
 <!-- turns -->
 [Contents](../README.md)

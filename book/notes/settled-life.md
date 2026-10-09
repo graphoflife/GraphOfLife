@@ -18,19 +18,19 @@ statistic measured every 25 iterations, over 100.
 
 Because a world's first few hundred iterations are unlike the rest of its
 life. It starts with a boom and a crash
-([Chapter 10](../chapters/10-the-first-hundred-iterations.md)), and its
+([Chapter 11](../chapters/11-the-first-hundred-iterations.md)), and its
 births, deaths and structure take hundreds of iterations to settle into the
-ranges they keep ([Chapter 11](../chapters/11-births-deaths-and-ages.md)).
+ranges they keep ([Chapter 12](../chapters/12-births-deaths-and-ages.md)).
 Averaging the youth in would mix two different things.
 
 ## Why a long mean, and not the end?
 
 Because a single world does not settle at one level: it **wanders**, up and
-down over hundreds of iterations ([Chapter 9](../chapters/09-a-worlds-life.md)).
+down over hundreds of iterations ([Chapter 10](../chapters/10-a-worlds-life.md)).
 Where it stands at iteration 2,999, or over its last few hundred iterations,
 is wherever the wander happens to have taken it. A mean over 2,500
 iterations averages much of the wander away, so it says more about the world
-and less about the moment. [Chapter 12](../chapters/12-how-much-does-the-seed-decide.md)
+and less about the moment. [Chapter 13](../chapters/13-how-much-does-the-seed-decide.md)
 measures how much: the worlds' sizes differ by a third of the mean when each
 is measured over its last 100 iterations, and by a sixth when measured over
 its settled life.

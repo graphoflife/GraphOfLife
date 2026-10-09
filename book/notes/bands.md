@@ -38,7 +38,7 @@ In the code: `bands` in `gol_analysis.py`.
 - A band says nothing about how a single world moves through time. A world
   near the top of the band at one moment can be near the bottom later. To see
   single worlds, the book draws them separately, as in
-  [Chapter 9](../chapters/09-a-worlds-life.md).
+  [Chapter 10](../chapters/10-a-worlds-life.md).
 - After a world dies, the band is made of fewer worlds. In the baseline,
   four of thirty died; the last thousand iterations are bands of 26.
 

@@ -1,12 +1,12 @@
 # How even is a world?
 
-[Chapter 13](13-where-do-the-tokens-go.md) measured how unequally tokens are
+[Chapter 14](14-where-do-the-tokens-go.md) measured how unequally tokens are
 held with the Gini coefficient. This chapter measures the same thing with a
 second tool, **entropy** — and then uses that tool on two things a Gini cannot
 measure at all, because they are not amounts: how the agents are spread over
 the numbers of connections, and over the genotypes. Part III begins here: a
 chapter for every statistic the viewer shows, read on the thirty baseline
-worlds of [Chapter 8](08-thirty-worlds.md).
+worlds of [Chapter 9](09-thirty-worlds.md).
 
 > [!question] Questions of this chapter
 > - How evenly are tokens, connections and genotypes spread over the agents?
@@ -96,7 +96,7 @@ many connections does it have? which genotype does it carry?*
 **How even a world is, in three respects.** Evenness after every game of the 30 baseline worlds, from 0 (everything in one hand) to 1 (as even as it can be; [Entropy and evenness](../notes/entropy-and-evenness.md)). Left: of the tokens over the agents (`tokenEvenness`). Middle: of the agents over the numbers of connections that occur (`degreeEvenness`). Right: of the agents over the genotypes they carry — the entropy of the genotypes' shares divided by log₂ of the number of agents, measured every 25 iterations. In each, the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 8](08-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)); for genotypes, each run's frames, read every 25 iterations by `book_figures.sample_pass` (frame `2·t` after the reproduction phase of iteration *t*, frame `2·t + 1` after its game; `gol_store.read_frame(run, index)`).
 >
@@ -118,7 +118,7 @@ where perfect equality would need 10.3.
 
 The **degree evenness** is far lower, 0.59 (0.50 to 0.63): agents are piled
 onto a few numbers of connections — 37% have exactly one, 23% exactly two
-([Chapter 15](15-what-shape-does-the-network-take.md)) — while the hubs make
+([Chapter 16](16-what-shape-does-the-network-take.md)) — while the hubs make
 the list of numbers that occur long. Read this one with care: its ceiling is
 log₂ of the number of *distinct* degrees in the world, so a single new hub of
 an unusual size raises the ceiling and lowers the evenness, without anything
@@ -135,7 +135,7 @@ spread over many genotypes, none of which holds much of the world for long.
 **Effective numbers, as a share of the agents.** One dot per world that lived to the end; the bar is the median. Left: 2^H of the tokens — the number of agents that, holding equal shares, would make the tokens as even as they are — divided by the number of agents. Middle: the number of different genotypes among the living, per agent. Right: 2^H of the genotypes — how many equally common genotypes would be as diverse as the ones there are — per agent. The dots are spread sideways only so that they do not hide each other.
 
 > [!example]- How to make this figure
-> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 8](08-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)); for genotypes, each run's frames, read every 25 iterations by `book_figures.sample_pass` (frame `2·t` after the reproduction phase of iteration *t*, frame `2·t + 1` after its game; `gol_store.read_frame(run, index)`).
 >
@@ -169,10 +169,10 @@ Why is the distinct count so tight? Something in the rules must set it. Every
 brain may change after every game (with probability 0.2,
 [How a brain changes](../notes/mutation.md)), which makes a new genotype; and
 every game, about half the nodes take a copy of a winner's brain
-([Chapter 14](14-how-the-game-is-played.md)), which makes genotypes common
+([Chapter 15](15-how-the-game-is-played.md)), which makes genotypes common
 again. A balance between a fixed rate of making and a fixed rate of copying
 gives a fixed ratio, whatever the brains do.
-[Chapter 28](28-questioning-the-mechanics.md) comes back to where the new
+[Chapter 29](29-questioning-the-mechanics.md) comes back to where the new
 genotypes are made.
 
 ## Two measures of the same inequality
@@ -183,7 +183,7 @@ genotypes are made.
 **Two measures of the same inequality.** One dot per world and look: every 25th iteration from 500 on of the 26 worlds that lived to the end (2,600 dots). Across the dots the two measures move against each other — the correlation is -0.90 — but not along one curve: the same Gini comes with different evenness, because the two weigh the poor and the rich differently.
 
 > [!example]- How to make this figure
-> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 8](08-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
 >
@@ -218,12 +218,12 @@ have the same Gini and different evenness.
   equally among half the agents; genotypes as if each were carried by two.
   Neither drifts over the settled life.
 - **High diversity is not the same as novelty.** A genotype evenness of 0.9
-  sounds like a world full of variety. But [Chapter 16](16-genotypes-and-lineages.md)
+  sounds like a world full of variety. But [Chapter 17](17-genotypes-and-lineages.md)
   found that a genotype lasts about two iterations: the variety is churn — new
   numbers made by small changes, lost as fast as they are made. Entropy counts
   how many kinds there are *now*; it cannot say whether any of them is new in a
   way that matters. Measures of open-ended evolution have to look across time
-  ([Meta II](29-meta-2.md)).
+  ([Meta II](30-meta-2.md)).
 - **One number is set by the rules.** Two genotypes for every three agents, in
   every world: a balance of making and copying. If a change of the rules moves
   it, that will be a sign the change reached the brains.
@@ -233,5 +233,5 @@ To make every figure of this chapter: `python3 book_figures.py entropy`.
 <!-- turns -->
 ---
 
-← [Chapter 17 · Meta I · What the baseline world is](17-meta-1.md) · [Contents](../README.md) · [Chapter 19 · Gains and losses](19-gains-and-losses.md) →
+← [Chapter 18 · Meta I · What the baseline world is](18-meta-1.md) · [Contents](../README.md) · [Chapter 20 · Gains and losses](20-gains-and-losses.md) →
 <!-- /turns -->

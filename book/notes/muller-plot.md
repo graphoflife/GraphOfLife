@@ -29,14 +29,14 @@ pictures in 1932 — shows it as stacked layers.
 
 A line spreads in two ways in Graph of Life: by births, and — far more often
 — by winning nodes in the game, which copies its brain onto the conquered
-node ([Chapter 14](../chapters/14-how-the-game-is-played.md)). A Muller plot
+node ([Chapter 15](../chapters/15-how-the-game-is-played.md)). A Muller plot
 does not tell them apart.
 
 ## In this book
 
-- [Chapter 10](../chapters/10-the-first-hundred-iterations.md): the lines of
+- [Chapter 11](../chapters/11-the-first-hundred-iterations.md): the lines of
   the 100 founders in the first 300 iterations of the world with seed 1.
-- [Chapter 16](../chapters/16-genotypes-and-lineages.md): the families of
+- [Chapter 17](../chapters/17-genotypes-and-lineages.md): the families of
   the genotypes alive at a later moment, in two worlds.
 
 <!-- turns -->

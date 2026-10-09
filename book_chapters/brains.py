@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Part IV: Chapter 30 — do the brains matter?
+Part IV: Chapter 31 — do the brains matter?
 """
 from __future__ import annotations
 
@@ -14,7 +14,7 @@ from book_figures import (STATS_FILE, chapter, describe, line, lived, mean_over,
 from book_chapters.common import BLUE, GREEN, GREY, ORANGE, RED, VIOLET, YELLOW
 
 # ---------------------------------------------------------------------------
-# Chapter 30 · Do the brains matter at all?
+# Chapter 31 · Do the brains matter at all?
 # ---------------------------------------------------------------------------
 
 E07_RUNS = ("The 90 runs of Experiment 7 — B1 at 10,000 tokens, seeds 1 to 30, 3,000 "
@@ -223,7 +223,7 @@ def brains(ch: F.Chapter) -> None:
                 "that founder's line fills the world, so which branch wins is chance.",
         recipe=recipe(E07_RUNS, "the lineage analysis of Experiment 7, `book/results/E07.json` "
                       "(`lineage.<condition>.runs.<run>.ancestor.moves`)",
-                      ["As in Chapter 16, for every run."]))
+                      ["As in Chapter 17, for every run."]))
     ch.number("moves", {c: describe(g) for c, g in zip(conds, groups)})
     by_kind = {}
     for run_id, v in lin["brains never change"]["runs"].items():

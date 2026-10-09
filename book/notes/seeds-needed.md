@@ -62,7 +62,7 @@ found four times in five is Δ = (*z*₁ + *z*₂)·*c*·√(2/30) ≈ 0.12: 12%
 ## In the code
 
 `seeds_needed` in `gol_analysis.py`;
-[Chapter 12](../chapters/12-how-much-does-the-seed-decide.md) draws *n* against Δ.
+[Chapter 13](../chapters/13-how-much-does-the-seed-decide.md) draws *n* against Δ.
 
 <!-- turns -->
 [Contents](../README.md)

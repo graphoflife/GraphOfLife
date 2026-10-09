@@ -46,8 +46,13 @@
         },
         {
           "id": "7",
+          "title": "Physical inspiration",
+          "file": "chapters/07-physical-inspiration.md"
+        },
+        {
+          "id": "8",
           "title": "Is a run reproducible?",
-          "file": "chapters/07-is-a-run-reproducible.md",
+          "file": "chapters/08-is-a-run-reproducible.md",
           "experiment": "E01",
           "status": "analysed"
         }
@@ -57,64 +62,64 @@
       "title": "Part II · The baseline world",
       "chapters": [
         {
-          "id": "8",
+          "id": "9",
           "title": "Thirty worlds",
-          "file": "chapters/08-thirty-worlds.md"
+          "file": "chapters/09-thirty-worlds.md"
         },
         {
-          "id": "9",
+          "id": "10",
           "title": "A world's life",
-          "file": "chapters/09-a-worlds-life.md",
+          "file": "chapters/10-a-worlds-life.md",
           "experiment": "E02",
           "status": "analysed"
         },
         {
-          "id": "10",
-          "title": "The first hundred iterations",
-          "file": "chapters/10-the-first-hundred-iterations.md"
-        },
-        {
           "id": "11",
-          "title": "Births, deaths and ages",
-          "file": "chapters/11-births-deaths-and-ages.md"
+          "title": "The first hundred iterations",
+          "file": "chapters/11-the-first-hundred-iterations.md"
         },
         {
           "id": "12",
+          "title": "Births, deaths and ages",
+          "file": "chapters/12-births-deaths-and-ages.md"
+        },
+        {
+          "id": "13",
           "title": "How much does the seed decide?",
-          "file": "chapters/12-how-much-does-the-seed-decide.md",
+          "file": "chapters/13-how-much-does-the-seed-decide.md",
           "experiment": "E03",
           "status": "analysed"
         },
         {
-          "id": "13",
+          "id": "14",
           "title": "Where do the tokens go?",
-          "file": "chapters/13-where-do-the-tokens-go.md",
+          "file": "chapters/14-where-do-the-tokens-go.md",
           "experiment": "E04",
           "status": "analysed"
         },
         {
-          "id": "14",
+          "id": "15",
           "title": "How the game is played",
-          "file": "chapters/14-how-the-game-is-played.md"
+          "file": "chapters/15-how-the-game-is-played.md"
         },
         {
-          "id": "15",
+          "id": "16",
           "title": "What shape does the network take?",
-          "file": "chapters/15-what-shape-does-the-network-take.md",
+          "file": "chapters/16-what-shape-does-the-network-take.md",
           "experiment": "E05",
           "status": "analysed"
         },
         {
-          "id": "16",
+          "id": "17",
           "title": "Genotypes and lineages",
-          "file": "chapters/16-genotypes-and-lineages.md",
+          "file": "chapters/17-genotypes-and-lineages.md",
           "experiment": "E06",
           "status": "analysed"
         },
         {
-          "id": "17",
+          "id": "18",
           "title": "Meta I · What the baseline world is",
-          "file": "chapters/17-meta-1.md"
+          "file": "chapters/18-meta-1.md"
         }
       ]
     },
@@ -122,64 +127,64 @@
       "title": "Part III · The baseline world, measured every way",
       "chapters": [
         {
-          "id": "18",
-          "title": "How even is a world?",
-          "file": "chapters/18-how-even-is-a-world.md"
-        },
-        {
           "id": "19",
-          "title": "Gains and losses",
-          "file": "chapters/19-gains-and-losses.md"
+          "title": "How even is a world?",
+          "file": "chapters/19-how-even-is-a-world.md"
         },
         {
           "id": "20",
-          "title": "Where the tokens flow",
-          "file": "chapters/20-where-the-tokens-flow.md"
+          "title": "Gains and losses",
+          "file": "chapters/20-gains-and-losses.md"
         },
         {
           "id": "21",
-          "title": "How agents have children",
-          "file": "chapters/21-how-agents-have-children.md"
+          "title": "Where the tokens flow",
+          "file": "chapters/21-where-the-tokens-flow.md"
         },
         {
           "id": "22",
-          "title": "Power laws, real and apparent",
-          "file": "chapters/22-power-laws-real-and-apparent.md"
+          "title": "How agents have children",
+          "file": "chapters/22-how-agents-have-children.md"
         },
         {
           "id": "23",
-          "title": "How properties scale together",
-          "file": "chapters/23-how-properties-scale-together.md"
+          "title": "Power laws, real and apparent",
+          "file": "chapters/23-power-laws-real-and-apparent.md"
         },
         {
           "id": "24",
-          "title": "The geometry of a world",
-          "file": "chapters/24-the-geometry-of-a-world.md"
+          "title": "How properties scale together",
+          "file": "chapters/24-how-properties-scale-together.md"
         },
         {
           "id": "25",
-          "title": "How a world breaks",
-          "file": "chapters/25-how-a-world-breaks.md"
+          "title": "The geometry of a world",
+          "file": "chapters/25-the-geometry-of-a-world.md"
         },
         {
           "id": "26",
-          "title": "One world, many colours",
-          "file": "chapters/26-one-world-many-colours.md"
+          "title": "How a world breaks",
+          "file": "chapters/26-how-a-world-breaks.md"
         },
         {
           "id": "27",
-          "title": "Do agents cooperate?",
-          "file": "chapters/27-do-agents-cooperate.md"
+          "title": "One world, many colours",
+          "file": "chapters/27-one-world-many-colours.md"
         },
         {
           "id": "28",
-          "title": "Questioning the mechanics",
-          "file": "chapters/28-questioning-the-mechanics.md"
+          "title": "Do agents cooperate?",
+          "file": "chapters/28-do-agents-cooperate.md"
         },
         {
           "id": "29",
+          "title": "Questioning the mechanics",
+          "file": "chapters/29-questioning-the-mechanics.md"
+        },
+        {
+          "id": "30",
           "title": "Meta II · What the measurements say about open-ended evolution",
-          "file": "chapters/29-meta-2.md"
+          "file": "chapters/30-meta-2.md"
         }
       ]
     },
@@ -187,45 +192,50 @@
       "title": "Part IV · One change at a time",
       "chapters": [
         {
-          "id": "30",
+          "id": "31",
           "title": "Do the brains matter?",
-          "file": "chapters/30-do-the-brains-matter.md",
+          "file": "chapters/31-do-the-brains-matter.md",
           "experiment": "E07",
           "status": "analysed"
         },
         {
-          "id": "31",
+          "id": "32",
           "title": "How does a world's size follow its tokens?",
-          "file": "chapters/31-how-does-a-worlds-size-follow-its-tokens.md",
+          "file": "chapters/32-how-does-a-worlds-size-follow-its-tokens.md",
           "experiment": "E08",
           "status": "analysed"
         },
         {
-          "id": "32",
+          "id": "33",
           "title": "How fast should brains change?",
-          "file": "chapters/32-how-fast-should-brains-change.md",
+          "file": "chapters/33-how-fast-should-brains-change.md",
           "experiment": "E09",
           "status": "ready"
         },
         {
-          "id": "33",
-          "title": "What keeps wealth spread?",
-          "note": "No coalitions: allow_revolutions off, against the baseline runs of Chapter 9."
-        },
-        {
           "id": "34",
-          "title": "Meta III",
-          "note": "Written once Chapters 30 to 33 are analysed."
+          "title": "Brains replaced by their average",
+          "note": "A better control than decisions by chance (Chapter 31): every decision drawn at random from the distribution of that decision in the settled baseline worlds — first unconditionally, then given the agent's own tokens and connections. If a world of such agents looks like the baseline, what the brains add is their average, not what they respond to."
         },
         {
           "id": "35",
-          "title": "How big should a brain be?",
-          "note": "The hidden layers, against the baseline runs of Chapter 9."
+          "title": "What keeps wealth spread?",
+          "note": "No coalitions: allow_revolutions off, against the baseline runs of Chapter 10."
         },
         {
           "id": "36",
+          "title": "Meta III",
+          "note": "Written once Chapters 31 to 35 are analysed."
+        },
+        {
+          "id": "37",
+          "title": "How big should a brain be?",
+          "note": "The hidden layers, against the baseline runs of Chapter 10."
+        },
+        {
+          "id": "38",
           "title": "Does size change the dynamics?",
-          "note": "Builds on Chapter 31: the wander, the sweeps and dying out, against the size of a world."
+          "note": "Builds on Chapter 32: the wander, the sweeps and dying out, against the size of a world."
         }
       ]
     },
@@ -233,34 +243,84 @@
       "title": "Part V · Towards open-ended evolution",
       "chapters": [
         {
-          "id": "37",
+          "id": "39",
           "title": "Mutation at replication, and nowhere else",
           "note": "The first of the mechanics in research/Research.md §4, once Part IV is done."
         },
         {
-          "id": "38",
-          "title": "Can a brain hold its place?",
-          "note": "Incumbency: the agent on a node defends it with an advantage. How long brains then hold hubs, and how long partners last (Chapter 29)."
-        },
-        {
-          "id": "39",
-          "title": "Kin that know each other",
-          "note": "Heritable tags every agent can see on its neighbours. Kin discrimination and Hamilton's accounting of Chapter 27, against the baseline."
-        },
-        {
           "id": "40",
+          "title": "Can a brain hold its place?",
+          "note": "Incumbency: the agent on a node defends it with an advantage. How long brains then hold hubs, and how long partners last (Chapter 30)."
+        },
+        {
+          "id": "41",
+          "title": "Kin that know each other",
+          "note": "Heritable tags every agent can see on its neighbours. Kin discrimination and Hamilton's accounting of Chapter 28, against the baseline."
+        },
+        {
+          "id": "42",
           "title": "When cooperation produces",
           "note": "Mutual flow yield: a connection used both ways in a game makes new tokens, with a small decay of every holding. research/Research.md §4.4."
         },
         {
-          "id": "41",
+          "id": "43",
           "title": "An open world",
-          "note": "Connections proposed beyond the neighbourhood, and pieces that separate allowed to live and meet again (Chapters 24, 25 and 28)."
+          "note": "Connections proposed beyond the neighbourhood, and pieces that separate allowed to live and meet again (Chapters 25, 26 and 29)."
         },
         {
-          "id": "42",
+          "id": "44",
           "title": "Meta IV",
-          "note": "What moved on the ladder of Chapter 1, written once Chapters 37 to 41 are analysed."
+          "note": "What moved on the ladder of Chapter 1, written once Chapters 39 to 43 are analysed."
+        }
+      ]
+    },
+    {
+      "title": "Part VI · Towards a physics: space, scale and locality",
+      "chapters": [
+        {
+          "id": "45",
+          "title": "Worlds of 100,000 tokens",
+          "note": "A second baseline for the questions that need size: twelve worlds of 100,000 tokens (about 14,000 agents each), 2,000 iterations each. From Experiment 8: 7 to 8 hours per world, 3.4 GB of memory and 4 GB of disk — about 20 hours on four workers and 50 GB for twelve worlds; thirty would take 2½ days and 120 GB."
+        },
+        {
+          "id": "46",
+          "title": "How many dimensions does a world have?",
+          "note": "Ball growth, width, box covering and the spectral dimension — how a random walk returns — on the worlds of Chapter 32, then of Chapter 45 (Chapter 7)."
+        },
+        {
+          "id": "47",
+          "title": "Which properties have no scale?",
+          "note": "The same quantities measured at many sizes and rescaled: do their distributions collapse onto one curve? Starts from the cuts of Chapter 32, whose share of a world has the same distribution at every size."
+        },
+        {
+          "id": "48",
+          "title": "Local rules only",
+          "note": "The three rules that reach across a world, each made local: a piece that separates lives on, the tokens of the dead go to their former neighbours, and every agent draws its random numbers from a stream of its own (Chapter 7)."
+        },
+        {
+          "id": "49",
+          "title": "How far does a difference travel?",
+          "note": "Twin worlds that differ in one token at one agent: how fast the difference spreads and whether it grows or dies away — the light cone of Chapter 7, measured. Needs the local random numbers of Chapter 48."
+        },
+        {
+          "id": "50",
+          "title": "A source and a sink",
+          "note": "A world with a flow running through it: tokens that are spent when used and slowly renewed, or a few nodes that release tokens and a way for tokens to leave. What forms in the flow? (Chapter 7; research/Research.md §4.3.)"
+        },
+        {
+          "id": "51",
+          "title": "Particles",
+          "note": "Patterns that persist while what carries them changes: tokens bound in loops, groups that outlast their members, local beats in the flow of tokens (Chapter 7)."
+        },
+        {
+          "id": "52",
+          "title": "One agent in a sea of average agents",
+          "note": "A large world of agents that decide as the average evolved agent does (Chapter 34), and in it a single agent, or a small group, with a brain of its own: can it draw tokens from the sea without exhausting it or being cut off, can its line invade, can a group hold together? Invasion analysis and a reservoir, in one experiment."
+        },
+        {
+          "id": "53",
+          "title": "Meta V",
+          "note": "What the measurements say about space, scale and matter, written once Chapters 45 to 52 are analysed."
         }
       ]
     },

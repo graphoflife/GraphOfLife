@@ -52,7 +52,7 @@ connection has a way round it. A tree-like network, with few triangles,
 falls apart when a connection is cut. A settled baseline world is in
 between: clustered far above a random network, but with long tree-like
 stretches hanging off its clustered core
-([Chapter 15](../chapters/15-what-shape-does-the-network-take.md)).
+([Chapter 16](../chapters/16-what-shape-does-the-network-take.md)).
 
 <!-- turns -->
 [Contents](../README.md)

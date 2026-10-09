@@ -37,7 +37,7 @@ Averaged over the settled life of each baseline world (iterations 500 to
 13.0 across the 26 worlds that lived to the end. A random network with the
 same number of agents *N* and mean degree *k̄* would have, by the usual rough
 estimate ln *N* / ln *k̄*, about 6.0
-([Chapter 15](../chapters/15-what-shape-does-the-network-take.md)). The
+([Chapter 16](../chapters/16-what-shape-does-the-network-take.md)). The
 founders' ring of seed 1 started at 4.4 ([The starting ring](starting-ring.md)).
 
 Since an agent can only stake on its neighbours, a token needs about ten

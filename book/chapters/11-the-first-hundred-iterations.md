@@ -1,6 +1,6 @@
 # The first hundred iterations
 
-[Chapter 9](09-a-worlds-life.md) found that every world begins with a
+[Chapter 10](10-a-worlds-life.md) found that every world begins with a
 **youth** unlike the rest of its life. This chapter looks at it closely.
 
 > [!question] Questions of this chapter
@@ -57,7 +57,7 @@
 **Agents in the first 150 iterations.** Each thin blue line is one of the 30 worlds: the number of agents alive after every game. The yellow line is their median. The axis is logarithmic, so equal heights are equal factors: the step from 100 to 1,000 is as tall as the one from 1,000 to 10,000.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 8](08-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
 >
@@ -89,7 +89,7 @@ break, and many fall steeply for a few iterations: the boom ends in a crash.
 **Births and deaths in the first 150 iterations.** For each iteration, the median over the worlds of: the children born in the reproduction phase (yellow); the agents removed by the cleanup of that phase because they were joined to no one or to a piece smaller than the largest (orange — mostly newborns joined to no one); the agents removed by the cleanup of the game because nobody, not even themselves, staked a token on their node (red); and those removed in the game's cleanup because they were cut off (violet).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 8](08-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
 >
@@ -115,7 +115,7 @@ to the largest piece and are removed, with everyone on them.
 **Share of all tokens given to children.** In each reproduction phase, the tokens all parents together gave their children, as a share of all 10,000 tokens. The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th), here at every single iteration.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 8](08-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
 >
@@ -130,12 +130,12 @@ parents together gave 50% of all tokens to their children; at iteration 10,
 38%; at iteration 20, 26%; at iteration 50, 5%; at iteration 100, 2%. Two
 things lower it. Far fewer agents have a child at all: about 75 in every
 hundred in each of the first ten iterations, about 3 in a settled world
-([Chapter 11](11-births-deaths-and-ages.md)). And parents give smaller shares
+([Chapter 12](12-births-deaths-and-ages.md)). And parents give smaller shares
 ([Chapter 4](04-the-brain.md)). Part of the first is plain rounding: a parent
 gives ⌊*f* · τ⌋ tokens, and an agent holding 3 tokens that would give a
 fifth gives ⌊0.6⌋ = 0 and has no child. The founders held 100 tokens each;
 the median agent of a settled world holds about 5
-([Chapter 13](13-where-do-the-tokens-go.md)).
+([Chapter 14](14-where-do-the-tokens-go.md)).
 
 ## A bottleneck of lines
 
@@ -145,7 +145,7 @@ the median agent of a settled world holds about 5
 **Families: distinct ancestors eight iterations back.** After every game, how many different genotypes of eight iterations earlier the living descend from (before iteration 8: how many founders). The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th), at every iteration.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 8](08-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
 >
@@ -205,7 +205,7 @@ founder was noted:
 **When everyone descends from one founder.** For each world, the first of the checks — made every 25 iterations — at which every living agent descends from one and the same founder. 29 of the 30 worlds got there; the world with seed 23 died after 4 iterations, first.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 8](08-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From the runs' frames, through the lineage analysis of Experiment 6 (`python3 gol_lab.py analyse E06`), whose results file `book/results/E06.json` holds every run's `oneFounder`.
 >
@@ -241,5 +241,5 @@ To make every figure of this chapter: `python3 book_figures.py youth`.
 <!-- turns -->
 ---
 
-← [Chapter 9 · A world's life](09-a-worlds-life.md) · [Contents](../README.md) · [Chapter 11 · Births, deaths and ages](11-births-deaths-and-ages.md) →
+← [Chapter 10 · A world's life](10-a-worlds-life.md) · [Contents](../README.md) · [Chapter 12 · Births, deaths and ages](12-births-deaths-and-ages.md) →
 <!-- /turns -->

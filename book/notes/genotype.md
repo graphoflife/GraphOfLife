@@ -49,7 +49,7 @@ The book uses the tree in three ways:
 
 A genotype is *alive* after a game if at least one living agent carries it.
 Its lifetime is from the first game after which it is alive to the last
-([Age and lifetime](age-and-lifetime.md); [Chapter 16](../chapters/16-genotypes-and-lineages.md)).
+([Age and lifetime](age-and-lifetime.md); [Chapter 17](../chapters/17-genotypes-and-lineages.md)).
 
 <!-- turns -->
 [Contents](../README.md)

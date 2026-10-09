@@ -51,7 +51,7 @@ what the estimates assume. The figure is redrawn by `python3 gol_lab.py costs`.
 
 ## What the baseline set cost
 
-The thirty runs of [Chapter 8](08-thirty-worlds.md) — 10,000 tokens, 3,000 iterations each — took
+The thirty runs of [Chapter 9](09-thirty-worlds.md) — 10,000 tokens, 3,000 iterations each — took
 26 hours of computing, done in 7.2 hours on four workers, and fill 7.8 GB.
 No run needed more than 651 MB of memory. That is the unit the experiments
 of Parts II and III are sized in: one condition of thirty seeds at 10,000 tokens is
@@ -67,7 +67,7 @@ about seven hours.
   and an agent costs about 0.87 ms per iteration, so 10,000 tokens cost about
   1.1 seconds per iteration. If the number of agents grows in step with the
   tokens, 200,000 tokens cost about 22 —
-  [Chapter 31](31-how-does-a-worlds-size-follow-its-tokens.md) will say whether it does.
+  [Chapter 32](32-how-does-a-worlds-size-follow-its-tokens.md) will say whether it does.
 - Memory limits big worlds before time does: the lab starts a run only when
   its estimated peak fits next to the runs already going, in three quarters
   of the machine's memory.
@@ -79,5 +79,5 @@ about seven hours.
 <!-- turns -->
 ---
 
-← [Chapter 32 · How fast should brains change?](32-how-fast-should-brains-change.md) · [Contents](../README.md)
+← [Chapter 33 · How fast should brains change?](33-how-fast-should-brains-change.md) · [Contents](../README.md)
 <!-- /turns -->

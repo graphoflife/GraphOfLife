@@ -78,7 +78,7 @@ Three decisions per agent and game ([What a brain says](../notes/brain-outputs.m
 **How much of its stake an agent puts on its own node.** For every agent that staked in a game: the share of its tokens it put on its own node. '0' and '1' are exact: nothing at home, everything at home. Grey: the game of iteration 0, played by the founders and their first children, whose brains no selection has touched yet. Blue: the game of iteration 2,999.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 8](08-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -97,7 +97,7 @@ share rose from 0.25 to 0.39.
 
 Why do the bars in the last game have peaks? A question to keep in mind: an
 agent holds few tokens — half of all agents hold 4 or fewer
-([Chapter 13](13-where-do-the-tokens-go.md)) — and stakes whole tokens. An
+([Chapter 14](14-where-do-the-tokens-go.md)) — and stakes whole tokens. An
 agent with 3 tokens can only put 0, ⅓, ⅔ or all of them at home; one with 2,
 only 0, ½ or all. So the shares cluster at simple fractions.
 
@@ -109,7 +109,7 @@ only 0, ½ or all. So the shares cluster at simple fractions.
 **How agents stake, over a world's life.** After every game of the 30 baseline worlds. Blue: the share of the agents that staked who spread their tokens over several candidates rather than putting all on one (`spreadShare`). Yellow: of all tokens staked, the share staked by agents on their own node (`selfAllocationShare`). Red: of all tokens staked, the share marked revolutionary (`revoltShare`). For each, the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th) ([Bands](../notes/bands.md)).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 8](08-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
 >
@@ -149,7 +149,7 @@ largest staker.
 **Who wins a node.** Every node on which anyone staked in the game, by who won it: the agent living on it (green and cyan) or one of its neighbours (orange and violet), and whether the winner was the largest single staker (green, orange) or the member of a coalition that outweighed the largest staker (cyan, violet; see [How a coalition takes a node](../notes/revolution.md)). Each column adds up to 1. Left: the game of iteration 0; right: the game of iteration 2,999.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 8](08-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -176,7 +176,7 @@ half of all nodes** (12% + 39%).
 **Who wins the nodes, over a world's life.** After every game of the 30 baseline worlds. Green: of all nodes on which anyone staked, the share won by the agent living on it (`heldHomeShare`). Violet: the number of nodes won by a coalition, divided by the number of agents at the start of the game (`revolutions/nodes_before`). For each, the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th) ([Bands](../notes/bands.md)).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 8](08-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
 >
@@ -192,7 +192,7 @@ iteration 500 on, the median world's agents kept their node in 45% of games,
 and the number of nodes won by a coalition was 52% of the number of agents.
 
 That 45% is an average over very different places.
-[Chapter 20](20-where-the-tokens-flow.md) sorts the nodes by their
+[Chapter 21](21-where-the-tokens-flow.md) sorts the nodes by their
 connections: an agent with one connection keeps its node in 73% of games, an
 agent with fifty or more in only 2%. On a node with *d* connections, the agent
 living there is one of *d* + 1 stakers, and it wins about as often as one of
@@ -208,7 +208,7 @@ replaced in nearly every game.
 **How the game is played in each settled world.** One dot per world that lived to the end: its mean over iterations 500 to 2,999 of each statistic of the two figures above; the bar is the median of the 26. From left: the share of stakers who spread their stake, the share of staked tokens marked revolutionary, the share of nodes kept by their own agent, nodes won by a coalition per agent, and the share of staked tokens put at home. The dots are spread sideways only so that they do not hide each other.
 
 > [!example]- How to make this figure
-> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 8](08-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
 >
@@ -230,20 +230,20 @@ ends up playing the game in much the same way.
 - **Brains spread mostly by conquest.** In a settled world of about 1,300
   agents, about 54% of nodes — some 700 — go to a neighbour in every game, and
   each takes on the winner's brain. Against that, about 40 children are born
-  per iteration ([Chapter 11](11-births-deaths-and-ages.md)). A brain's
+  per iteration ([Chapter 12](12-births-deaths-and-ages.md)). A brain's
   descendants are mostly the nodes it conquers, not its children.
 - **The game is a game of coalitions.** With 96% of staked tokens marked
   revolutionary, a node on which the other stakers together put more than its
   largest single staker did is, nearly always, won by one of them — which may
   be the agent living on it.
-- **The stakes are nearly an even split.** [Chapter 20](20-where-the-tokens-flow.md)
+- **The stakes are nearly an even split.** [Chapter 21](21-where-the-tokens-flow.md)
   shows that agents stake on almost all of their candidates and keep a little
   more than an even share at home; a game moves tokens almost as a random walk
   would.
 - **The behaviour converges.** Founders' random brains play every way there
   is; all 26 surviving worlds end up at nearly the same shares. Is that
   selection — brains that play otherwise losing their nodes — or would any
-  way of copying and changing brains end there? [Chapter 30](30-do-the-brains-matter.md)
+  way of copying and changing brains end there? [Chapter 31](31-do-the-brains-matter.md)
   compares worlds whose brains never change.
 
 To make every figure of this chapter: `python3 book_figures.py game`.
@@ -251,5 +251,5 @@ To make every figure of this chapter: `python3 book_figures.py game`.
 <!-- turns -->
 ---
 
-← [Chapter 13 · Where do the tokens go?](13-where-do-the-tokens-go.md) · [Contents](../README.md) · [Chapter 15 · What shape does the network take?](15-what-shape-does-the-network-take.md) →
+← [Chapter 14 · Where do the tokens go?](14-where-do-the-tokens-go.md) · [Contents](../README.md) · [Chapter 16 · What shape does the network take?](16-what-shape-does-the-network-take.md) →
 <!-- /turns -->

@@ -39,7 +39,7 @@ line: one genotype, a few iterations ago, took over — a **sweep**. A deep one
 means several lines have coexisted for a long time. In the baseline the
 depth for all of the living rises and falls in a saw-tooth: it grows by one
 per iteration while no line takes over, and drops when one does
-([Chapter 16](../chapters/16-genotypes-and-lineages.md)).
+([Chapter 17](../chapters/17-genotypes-and-lineages.md)).
 
 <!-- turns -->
 [Contents](../README.md)

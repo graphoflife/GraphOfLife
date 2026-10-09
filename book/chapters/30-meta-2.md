@@ -47,23 +47,23 @@ other.
 
 Here is what Part III found, put together. **Tokens** move almost as a random
 walk would: agents spread their stakes nearly evenly over everyone they can
-reach ([Chapter 20](20-where-the-tokens-flow.md)), so tokens settle locally in
-proportion to connections plus one ([Chapter 23](23-how-properties-scale-together.md)),
-run downhill from rich neighbourhoods to poor ([Chapter 19](19-gains-and-losses.md)),
+reach ([Chapter 21](21-where-the-tokens-flow.md)), so tokens settle locally in
+proportion to connections plus one ([Chapter 24](24-how-properties-scale-together.md)),
+run downhill from rich neighbourhoods to poor ([Chapter 20](20-gains-and-losses.md)),
 and never circulate. Half of every agent's traffic is an equal exchange that
 keeps its connections alive at their price of a token a game
-([Chapter 27](27-do-agents-cooperate.md)). The **network** is a stretched web
+([Chapter 28](28-do-agents-cooperate.md)). The **network** is a stretched web
 of stars, grown locally by children joining their parents' neighbourhoods,
 twice as long and thirty times easier to cut than a random network with the
-same connections ([Chapter 24](24-the-geometry-of-a-world.md)); it breaks
+same connections ([Chapter 25](25-the-geometry-of-a-world.md)); it breaks
 along its poor regions, whose borders go quiet, and the global cull kills
-whatever falls off ([Chapter 25](25-how-a-world-breaks.md)). **Brains** spread
+whatever falls off ([Chapter 26](26-how-a-world-breaks.md)). **Brains** spread
 by conquest eighteen times more than by birth, and change mostly in place, not
-when copied ([Chapter 28](28-questioning-the-mechanics.md)); the brain on a hub
+when copied ([Chapter 29](29-questioning-the-mechanics.md)); the brain on a hub
 is replaced almost every game, and the same two brains rarely face each other
-twice ([Chapter 20](20-where-the-tokens-flow.md), [Chapter 27](27-do-agents-cooperate.md)).
+twice ([Chapter 21](21-where-the-tokens-flow.md), [Chapter 28](28-do-agents-cooperate.md)).
 Relatives live together, but cannot recognise each other, and do not treat each
-other differently ([Chapter 27](27-do-agents-cooperate.md)). Almost every
+other differently ([Chapter 28](28-do-agents-cooperate.md)). Almost every
 structural statistic is the same in every world: it follows from the rules,
 not from what brains compute.
 
@@ -75,10 +75,10 @@ brains — change almost every game.
 
 **P1, evolution: partly.** There are lineages, and they matter: a whole world
 descends from one branch of the family tree about every 350 iterations
-([Chapter 16](16-genotypes-and-lineages.md)), families occupy regions
-([Chapter 26](26-one-world-many-colours.md)), and worlds whose brains never
+([Chapter 17](17-genotypes-and-lineages.md)), families occupy regions
+([Chapter 27](27-one-world-many-colours.md)), and worlds whose brains never
 change end up in very different places, while worlds that evolve all end up
-alike ([Chapter 30](30-do-the-brains-matter.md)). But heredity is weak. A brain
+alike ([Chapter 31](31-do-the-brains-matter.md)). But heredity is weak. A brain
 is changed with probability 0.2 after every game whether or not it is copied,
 and a brain is overwritten whenever its node is won. The project's pilot
 measurements (`research/pilot_heredity.py`, at a higher mutation rate) found a
@@ -99,7 +99,7 @@ members change. Partnerships last one game in twenty; positions are not held.
 ## What stands in the way
 
 Part III, read together, points at six obstacles. Each is a rule, and each was
-examined in [Chapter 28](28-questioning-the-mechanics.md).
+examined in [Chapter 29](29-questioning-the-mechanics.md).
 
 1. **Variation in the living.** 97% of new genotypes are made in brains that
    are not being copied. Successful brains are eroded in place.
@@ -116,7 +116,7 @@ examined in [Chapter 28](28-questioning-the-mechanics.md).
 6. **The world can neither reach across nor split.** Growth is local only, so
    the network stretches and its shortcuts are never renewed; the global cull
    kills any part that separates, so populations can never diverge in
-   isolation. [Chapter 31](31-how-does-a-worlds-size-follow-its-tokens.md)
+   isolation. [Chapter 32](32-how-does-a-worlds-size-follow-its-tokens.md)
    adds that a bigger world is no escape: distances grow like a power of its
    size, and the regions the cull removes grow with it.
 
@@ -132,7 +132,7 @@ interesting they are.
 
 - **Mutation at replication, and nowhere else** (§4.1 of the plan). A brain
   changes only when it is copied — into a child or into a won node. A brain
-  that is not copied stays itself. This is planned as Chapter 37 (see
+  that is not copied stays itself. This is planned as Chapter 39 (see
   [the contents](../README.md)); its measure is how long a lineage stays like
   its ancestor, and whether selection then separates good brains from bad.
 - **A germline** (§4.2), if that is not enough: every agent carries an
@@ -180,7 +180,7 @@ a second heritable structure that belongs to a relationship rather than an
 agent (§4.8), and, at the very end, groups that copy themselves (§4.9) — each
 only once the earlier steps hold.
 
-Three smaller repairs from [Chapter 28](28-questioning-the-mechanics.md) can go
+Three smaller repairs from [Chapter 29](29-questioning-the-mechanics.md) can go
 along with any of these: a smooth share function, a separate output for
 whole-agent decisions, and the option to hold tokens back from the game.
 
@@ -197,7 +197,7 @@ measures, by rung of the ladder:
 - **For P2.** The cross-time tournament: earlier against later brains, in the
   same world. A clean gradient — later beats earlier — is accumulation; a
   pattern of bands is cycling, as rock–paper–scissors would give.
-- **For cooperation** — the measures of [Chapter 27](27-do-agents-cooperate.md):
+- **For cooperation** — the measures of [Chapter 28](28-do-agents-cooperate.md):
   kin discrimination, Hamilton's accounting Σ(*rB* − *C*), reciprocity beyond
   the even split, the lifetimes of partnerships, coalitions that repeat, and
   whether regions held by one family outlast mixed ones.
@@ -220,16 +220,16 @@ Findings change the teaching, and the earlier chapters have been brought up to
 date where they did:
 
 - **Wealth follows connections because of a law**, not a mystery: the even
-  split's resting state ([Chapter 13](13-where-do-the-tokens-go.md) now says
-  so, and [Chapter 20](20-where-the-tokens-flow.md) derives it).
+  split's resting state ([Chapter 14](14-where-do-the-tokens-go.md) now says
+  so, and [Chapter 21](21-where-the-tokens-flow.md) derives it).
 - **"Keeping one's node" is about places**: hubs are nearly always taken
-  ([Chapter 14](14-how-the-game-is-played.md)).
+  ([Chapter 15](15-how-the-game-is-played.md)).
 - **The network's shape has a mechanism**: copying neighbourhoods at birth
   gives the stars, the triangles and the hierarchy
-  ([Chapter 15](15-what-shape-does-the-network-take.md),
-  [Chapter 23](23-how-properties-scale-together.md)).
+  ([Chapter 16](16-what-shape-does-the-network-take.md),
+  [Chapter 24](24-how-properties-scale-together.md)).
 - **"An agent" has two meanings**, the node and the brain, and the book now
-  says which it means where it matters ([Chapter 28](28-questioning-the-mechanics.md)).
+  says which it means where it matters ([Chapter 29](29-questioning-the-mechanics.md)).
 
 ## Questions for the next analyses
 
@@ -242,12 +242,12 @@ Some questions need no new runs, only new looks at the old ones:
   changed — a neighbour's tokens, a message — and see what its stakes do. If
   brains mostly tell "me" from "others" and little else, the even split is no
   surprise.
-- **Are the old at the edges?** [Chapter 26](26-one-world-many-colours.md)
+- **Are the old at the edges?** [Chapter 27](27-one-world-many-colours.md)
   suggested it; age against distance from the hubs would say.
 - **Why do worlds reproduce less as they age?** Births fall by 41% over a
-  world's youth ([Chapter 11](11-births-deaths-and-ages.md)), and founders
+  world's youth ([Chapter 12](12-births-deaths-and-ages.md)), and founders
   reproduce twenty times as often as settled agents
-  ([Chapter 21](21-how-agents-have-children.md)). That is a candidate for an
+  ([Chapter 22](22-how-agents-have-children.md)). That is a candidate for an
   adaptation — the clearest one Part III saw.
 
 ## The road from here
@@ -265,8 +265,17 @@ has turned a vague hope — that interesting things might emerge if we watch lon
 enough — into a list of specific rules that stand in the way, each of which can
 be changed and tested on its own.
 
+> [!info] Added later: the second aim
+> [Chapter 7](07-physical-inspiration.md), written after this chapter, sets
+> out the book's second aim — a world that grows a space and stable things in
+> it — and finds it pointing at the same rules. The cull and the share-out,
+> which this chapter questions for evolution's sake, also break locality, the
+> speed limit physics insists on; and the organisations of P3 are what a
+> physicist would call particles. Part VI follows that aim, and the rule
+> changes of both parts will be tested together where they coincide.
+
 <!-- turns -->
 ---
 
-← [Chapter 28 · Questioning the mechanics](28-questioning-the-mechanics.md) · [Contents](../README.md) · [Chapter 30 · Do the brains matter?](30-do-the-brains-matter.md) →
+← [Chapter 29 · Questioning the mechanics](29-questioning-the-mechanics.md) · [Contents](../README.md) · [Chapter 31 · Do the brains matter?](31-do-the-brains-matter.md) →
 <!-- /turns -->

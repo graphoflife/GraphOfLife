@@ -1,6 +1,6 @@
 # Where the tokens flow
 
-[Chapter 19](19-gains-and-losses.md) followed the agents through a game:
+[Chapter 20](20-gains-and-losses.md) followed the agents through a game:
 who gains, who loses. This chapter follows the **tokens**: where each staked
 token goes, how much of it comes back, and whether the whole movement obeys
 a simple law. It does — nearly — and the law explains several findings of
@@ -76,7 +76,7 @@ token, by whoever holds it. Each staked token lands in one of three places
 **Where the tokens of a game go.** Every token is staked in every game. Yellow: the share staked by agents on their own node. Cyan: staked on a neighbour's node, but cancelled by what that neighbour staked back — if A puts 5 on B's node and B puts 3 on A's, 3 tokens each way cancel. Red: what is left after cancelling, flow with a direction ([Token flow](../notes/token-flow.md)). Left: the game of iteration 0, pooled over the 30 worlds; right: every game from iteration 500 on of the 26 worlds that lived to the end, pooled. Exactly 10,000 tokens are staked in each game.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 8](08-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
 >
@@ -91,7 +91,7 @@ In the first game, a quarter stays home, a quarter is matched and half goes
 one way. In settled games, 30% stays home, **49% is matched** and only 21%
 goes one way. Most of what agents send to their neighbours is an exchange of
 equal amounts, which is why half of all agents end a game with exactly what
-they had ([Chapter 19](19-gains-and-losses.md)).
+they had ([Chapter 20](20-gains-and-losses.md)).
 
 ## Stakes that are returned
 
@@ -101,7 +101,7 @@ they had ([Chapter 19](19-gains-and-losses.md)).
 **Stakes that are returned.** Of all pairs (A, B) in a game where agent A staked at least one token on neighbour B's node, the share in which B also staked at least one token on A's — every 25 iterations, in the 30 baseline worlds. The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 8](08-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's frames, read every 25 iterations by `book_figures.sample_pass` (frame `2·t` after the reproduction phase of iteration *t*, frame `2·t + 1` after its game; `gol_store.read_frame(run, index)`).
 >
@@ -119,7 +119,7 @@ necessarily. Look at how widely agents stake (the next figure): they stake on
 independently of who staked on it, B would still stake on A with about that
 probability. A reciprocity of 92% is what breadth alone would give. To find
 real reciprocity one would have to show that B stakes *more* on A *because* A
-staked on B — a question for [Chapter 27](27-do-agents-cooperate.md).
+staked on B — a question for [Chapter 28](28-do-agents-cooperate.md).
 
 ## How widely agents stake
 
@@ -133,7 +133,7 @@ them on each, home included.
 **How widely agents stake.** Agents at the start of a game, sorted by their number of connections. Blue: the share of their candidates (themselves and their neighbours) on which they staked at least one token. Yellow: the share of their tokens they staked on their own node. White dots: the home share an agent would have if it split its tokens evenly over all its candidates, 1/(d + 1), averaged over the class. From the games of every 100th iteration from 500 on, in the 26 worlds that lived to the end.
 
 > [!example]- How to make this figure
-> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 8](08-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's frames, read every 25 iterations by `book_figures.sample_pass` (frame `2·t` after the reproduction phase of iteration *t*, frame `2·t + 1` after its game; `gol_store.read_frame(run, index)`).
 >
@@ -176,7 +176,7 @@ tokens it holds — and set it against the balance it really ended with.
 **The game as a random walk of tokens.** For every agent at the start of a game: x is the balance it would end the stakes with — the tokens staked on its node minus the tokens it held — if every agent split its tokens evenly over itself and its neighbours; y is the balance it really ended them with. Agents are binned by x in steps of 2; the line is the mean of y in each bin and the band its middle half. The dashed line is y = x. Over all 335,453 agents (the games of every 250th iteration from 500 on, 26 worlds), the straight line fitted to the points has slope 0.94, and the even split accounts for 46% of the variance (R², [Fitting a straight line](../notes/least-squares.md)).
 
 > [!example]- How to make this figure
-> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 8](08-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's frames, read (frame `2·t` after the reproduction phase of iteration *t*, frame `2·t + 1` after its game; `gol_store.read_frame(run, index)`).
 >
@@ -211,13 +211,13 @@ That holds if π(*u*) is proportional to *d*ᵤ + 1. So:
 > proportion to its number of connections plus one.**
 
 This is the law behind several earlier findings: that agents with more
-connections hold more tokens ([Chapter 13](13-where-do-the-tokens-go.md)),
+connections hold more tokens ([Chapter 14](14-where-do-the-tokens-go.md)),
 that tokens run downhill from agents richer than their neighbourhood
-([Chapter 19](19-gains-and-losses.md)), and that a rich agent with few
+([Chapter 20](20-gains-and-losses.md)), and that a rich agent with few
 connections drains away within a few games. A world is never quite at rest,
 because the network keeps changing under the tokens;
-[Chapter 23](23-how-properties-scale-together.md) measures how close it
-comes, and [Chapter 24](24-the-geometry-of-a-world.md) how fast a random walk
+[Chapter 24](24-how-properties-scale-together.md) measures how close it
+comes, and [Chapter 25](25-the-geometry-of-a-world.md) how fast a random walk
 on such a network can settle at all.
 
 ## Who keeps their node
@@ -234,7 +234,7 @@ roughly equal size there.
 **Who keeps their node, by connections.** Every node on which anyone staked in a game, sorted by its number of connections at the start of the game; the share that was won by the agent living on it — whether as the largest staker or through a coalition. From the games of every 25th iteration from 500 on, in the 26 worlds that lived to the end.
 
 > [!example]- How to make this figure
-> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 8](08-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's frames, read every 25 iterations by `book_figures.sample_pass` (frame `2·t` after the reproduction phase of iteration *t*, frame `2·t + 1` after its game; `gol_store.read_frame(run, index)`).
 >
@@ -273,7 +273,7 @@ loops.
 **Do tokens go round?** Left, on the flow as staked: the share of all tokens staked on neighbours that a greedy search could place in closed loops (blue; [Lightning](../notes/lightning.md)), and the share that conservation forbids from ever going round, because some agents receive more than they send (red) — so at most 1 − red can circulate. Right, after cancelling every stake against the one coming back: the share of the flow left (cyan), and of that, the share found in loops (green). Every 25 iterations, 30 worlds; the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 8](08-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
 >
@@ -316,8 +316,8 @@ circulate.
 - **For open-ended evolution this is a warning.** A behaviour this close to
   "split evenly" leaves little for brains to differ in, and a world whose
   wealth and positions are set by the network rather than by the brains gives
-  selection little to grip. [Chapter 28](28-questioning-the-mechanics.md)
-  asks which rules make it so, and [Meta II](29-meta-2.md) what could be
+  selection little to grip. [Chapter 29](29-questioning-the-mechanics.md)
+  asks which rules make it so, and [Meta II](30-meta-2.md) what could be
   changed.
 
 To make every figure of this chapter: `python3 book_figures.py flow`.
@@ -325,5 +325,5 @@ To make every figure of this chapter: `python3 book_figures.py flow`.
 <!-- turns -->
 ---
 
-← [Chapter 19 · Gains and losses](19-gains-and-losses.md) · [Contents](../README.md) · [Chapter 21 · How agents have children](21-how-agents-have-children.md) →
+← [Chapter 20 · Gains and losses](20-gains-and-losses.md) · [Contents](../README.md) · [Chapter 22 · How agents have children](22-how-agents-have-children.md) →
 <!-- /turns -->

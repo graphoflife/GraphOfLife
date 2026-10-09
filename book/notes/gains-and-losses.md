@@ -42,7 +42,7 @@ stream](random-numbers.md)). `redistributed` is the size of that pool.
 gets a binomial number of them, with mean 0.1: about 90% get none, 9% get
 one, and fewer than 1% get two or more. For an agent holding 2 tokens, one
 extra token is a 50% gain — the share-out is a small lottery that matters most
-to the poor ([Chapter 19](../chapters/19-gains-and-losses.md)).
+to the poor ([Chapter 20](../chapters/20-gains-and-losses.md)).
 
 ## In the code
 

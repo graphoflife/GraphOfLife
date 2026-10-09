@@ -70,7 +70,7 @@ then erased ([Chapter 3](03-one-iteration.md)).
 **How brains spread, and where new ones come from.** One dot per world that lived to the end: means over the iterations sampled every 25 from 500 on. From the left: children born in a reproduction phase; nodes won in a game by a neighbour, each of which takes on a copy of the winner's brain; genotypes that appear for the first time in the frame after a reproduction phase (a newborn's brain that changed); and genotypes that appear for the first time after a game (every brain is offered a change at its end). On a logarithmic axis.
 
 > [!example]- How to make this figure
-> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 8](08-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's frames, read every 25 iterations by `book_figures.sample_pass` (frame `2·t` after the reproduction phase of iteration *t*, frame `2·t + 1` after its game; `gol_store.read_frame(run, index)`).
 >
@@ -115,12 +115,12 @@ genomes are copied; a body does not keep rewriting its own genes. Here,
 variation is mostly **somatic**: a brain that does well does not stay itself.
 Selection works on a target that moves under it, and a good brain is eroded in
 place, whether or not it is copied. This may be why genotypes last two
-iterations ([Chapter 16](16-genotypes-and-lineages.md)) and why the
-distinct-genotype count is set by the rules ([Chapter 18](18-how-even-is-a-world.md)).
+iterations ([Chapter 17](17-genotypes-and-lineages.md)) and why the
+distinct-genotype count is set by the rules ([Chapter 19](19-how-even-is-a-world.md)).
 
 **Alternatives.** Change brains **only when they are copied** — at birth and at
 conquest — and never in place. Part V begins with exactly this experiment
-(Chapter 37 in [the contents](../README.md)).
+(Chapter 39 in [the contents](../README.md)).
 
 ## Hubs are places
 
@@ -129,9 +129,9 @@ ones; the agent living on it has no special claim.
 
 **What the data say.** The agent on a node with fifty or more connections keeps
 it in 2.2% of games; on a node with one connection, in 73%
-([Chapter 20](20-where-the-tokens-flow.md)). A pair of brains facing each
+([Chapter 21](21-where-the-tokens-flow.md)). A pair of brains facing each
 other across a connection survives one more game in 5% of cases
-([Chapter 27](27-do-agents-cooperate.md)).
+([Chapter 28](28-do-agents-cooperate.md)).
 
 **Why it matters.** The most important positions of the world have no lasting
 occupant, so no brain can be selected for holding one, and no partnership
@@ -151,7 +151,7 @@ spread or go all in — use the **average** of those outputs over all its
 columns ([Chapter 3](03-one-iteration.md)).
 
 **What the data say.** The share of agents with a child rises from 2.1% at
-one connection to 8.6% at fifty or more ([Chapter 21](21-how-agents-have-children.md)),
+one connection to 8.6% at fifty or more ([Chapter 22](22-how-agents-have-children.md)),
 only partly because the well connected are richer.
 
 **Why it matters.** The same brain behaves differently depending on how many
@@ -205,8 +205,8 @@ makes a small change of the share.
 a node on which nobody stakes is left with nothing, and its agent dies.
 
 **What the data say.** 31% of agents holding one token die in a game
-([Chapter 19](19-gains-and-losses.md)); quiet borders of agents too poor to
-stake across their connections cost whole regions ([Chapter 25](25-how-a-world-breaks.md)).
+([Chapter 20](20-gains-and-losses.md)); quiet borders of agents too poor to
+stake across their connections cost whole regions ([Chapter 26](26-how-a-world-breaks.md)).
 
 **Why it matters.** There is no way to save, to wait, or to hold back. The
 poor live on a coin toss, and that toss kills a large share of the world's
@@ -224,14 +224,14 @@ it keep its agent alive at zero, for one game.
 [`inactive_window`](../notes/settings.md#inactive_window)).
 
 **What the data say.** 88% of the connections of the world of seed 1 carried
-only one or two tokens in its last game ([Chapter 26](26-one-world-many-colours.md));
-58% of mutual stakes are one token each way ([Chapter 27](27-do-agents-cooperate.md));
-regions of poor agents lose their connections and die ([Chapter 25](25-how-a-world-breaks.md)).
+only one or two tokens in its last game ([Chapter 27](27-one-world-many-colours.md));
+58% of mutual stakes are one token each way ([Chapter 28](28-do-agents-cooperate.md));
+regions of poor agents lose their connections and die ([Chapter 26](26-how-a-world-breaks.md)).
 
 **Why it matters.** Much of what agents stake on their neighbours is the rent
 of their connections. The rule ties the network to the tokens — every
 connection costs a token a game — which may be what sets a world's size
-([Chapter 31](31-how-does-a-worlds-size-follow-its-tokens.md)), and it makes
+([Chapter 32](32-how-does-a-worlds-size-follow-its-tokens.md)), and it makes
 the poor lose their place in the network first.
 
 **Alternatives.** The setting `inactive_window = iteration` already lets a
@@ -245,18 +245,18 @@ instead of a stake.
 network survives ([Chapter 3](03-one-iteration.md)).
 
 **What the data say.** Three deaths in four are cut-offs
-([Chapter 11](11-births-deaths-and-ages.md)); a fifth of them happen in the one
-game in forty that cuts off a hundred agents or more ([Chapter 25](25-how-a-world-breaks.md)).
+([Chapter 12](12-births-deaths-and-ages.md)); a fifth of them happen in the one
+game in forty that cuts off a hundred agents or more ([Chapter 26](26-how-a-world-breaks.md)).
 And the losses grow with the world: in worlds from 3,200 to 409,600 tokens, a
 single game has cut off a third to a half of all agents, at every size, so
 that a big world changes from game to game as much, relatively, as a small one
-([Chapter 31](31-how-does-a-worlds-size-follow-its-tokens.md)).
+([Chapter 32](32-how-does-a-worlds-size-follow-its-tokens.md)).
 
 **Why it matters.** Every other rule is local: an agent stakes on its
 neighbours, has its children beside itself, dies when its own node is empty.
 This one is not: whether a region lives depends on its connection to the rest
 of the world, however well it is doing inside. The thesis of
-[Chapter 31](31-how-does-a-worlds-size-follow-its-tokens.md) reasoned that
+[Chapter 32](32-how-does-a-worlds-size-follow-its-tokens.md) reasoned that
 "nothing in the rules reaches across the world" except the share-out; this
 rule does too. And it forbids a world from ever splitting into populations
 that go their own ways — the isolation that, in nature, is how most new species
@@ -267,7 +267,7 @@ holds. On its own that would make the split permanent, since births only join
 a child to its parent's neighbourhood; so pair it with an occasional
 long-range connection — a child joined, rarely, to an agent anywhere — which
 would let separated populations meet again, and would also shorten the world's
-distances ([Chapter 24](24-the-geometry-of-a-world.md)).
+distances ([Chapter 25](25-the-geometry-of-a-world.md)).
 
 ## The share-out lottery
 
@@ -275,7 +275,7 @@ distances ([Chapter 24](24-the-geometry-of-a-world.md)).
 uniformly at random.
 
 **What the data say.** About 110 tokens after a game, 0.11 per agent
-([Chapter 19](19-gains-and-losses.md)).
+([Chapter 20](20-gains-and-losses.md)).
 
 **Why it matters.** It is a transfer from the dead to everyone, unrelated to
 what anyone did — small, but it is the only income the poorest have besides
@@ -291,7 +291,7 @@ Two pieces of bookkeeping deserve care, though they change nothing in a world:
 
 - **A genotype is an event, not a difference.** A brain drawn to change gets a
   new number even if its weights did not change (with sparsity 0, as in
-  [Chapter 30](30-do-the-brains-matter.md)), and two brains a single tiny
+  [Chapter 31](31-do-the-brains-matter.md)), and two brains a single tiny
   change apart have different numbers. What lasts and spreads is a **line**,
   not a number.
 - **Age belongs to the node.** An agent's age counts from the birth of its
@@ -310,12 +310,12 @@ Two pieces of bookkeeping deserve care, though they change nothing in a world:
   mixes, positions that cannot be held, and the cull that forbids separate
   populations.
 - **Each can be tested one at a time**, against the baseline, with the methods
-  of Part IV. [Meta II](29-meta-2.md) sets out the order.
+  of Part IV. [Meta II](30-meta-2.md) sets out the order.
 
 To make every figure of this chapter: `python3 book_figures.py mechanics`.
 
 <!-- turns -->
 ---
 
-← [Chapter 27 · Do agents cooperate?](27-do-agents-cooperate.md) · [Contents](../README.md) · [Chapter 29 · Meta II · What the measurements say about open-ended evolution](29-meta-2.md) →
+← [Chapter 28 · Do agents cooperate?](28-do-agents-cooperate.md) · [Contents](../README.md) · [Chapter 30 · Meta II · What the measurements say about open-ended evolution](30-meta-2.md) →
 <!-- /turns -->

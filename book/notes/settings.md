@@ -43,7 +43,7 @@ The number of tokens in the world, *T*. Tokens are never made or destroyed
 (unless [`tokens_created_per_phase`](#tokens_created_per_phase) is above 0,
 which it never is in this book), so the sum of all agents' tokens is *T*
 after every phase of every iteration. Part II uses *T* = 10,000;
-[Chapter 31](../chapters/31-how-does-a-worlds-size-follow-its-tokens.md)
+[Chapter 32](../chapters/32-how-does-a-worlds-size-follow-its-tokens.md)
 varies it from 800 to 409,600. Since every living agent holds at least one
 token, a world can never hold more than *T* agents.
 
@@ -154,7 +154,7 @@ replaced by an independent draw from the standard normal distribution
 (mean 0, standard deviation 1), and every decision is taken from those
 numbers by exactly the same rules. The brains still exist, are still copied,
 and still mutate — they are just never asked. Used in
-[Chapter 30](../chapters/30-do-the-brains-matter.md).
+[Chapter 31](../chapters/31-do-the-brains-matter.md).
 
 ### prune_after
 
@@ -205,7 +205,7 @@ probability of a rarer **reset**, which redraws a share *s* of a weight
 matrix from scratch. Each weight matrix and each bias vector is treated
 separately. Baseline 0.1. With *s* = 0 a "change" changes nothing — but the
 brain is still given a new genotype number
-([Chapter 30](../chapters/30-do-the-brains-matter.md) uses exactly this).
+([Chapter 31](../chapters/31-do-the-brains-matter.md) uses exactly this).
 
 ### extinction_threshold
 

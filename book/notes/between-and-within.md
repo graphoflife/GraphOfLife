@@ -38,7 +38,7 @@ The **share between** is *B* / (*B* + *W*).
 
 In the baseline the share between is between a tenth and a quarter for every
 statistic looked at — 17% for the number of agents
-([Chapter 12](../chapters/12-how-much-does-the-seed-decide.md)). So most of
+([Chapter 13](../chapters/13-how-much-does-the-seed-decide.md)). So most of
 the variation is time, not seed.
 
 ## A caution

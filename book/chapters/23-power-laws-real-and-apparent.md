@@ -129,7 +129,7 @@ of this world. What it does not say is anything about the other 95%.
 **Power-law exponents of the 26 worlds.** One dot per world that lived to the end, at its mean over the measurements (every 25 iterations) from iteration 500 on; the bar is the median. Left: the exponent γ of the degree distribution by maximum likelihood on the tail (`degreeGamma`) and by least squares on the whole distribution (`degreeExponent`), and of the token distribution by least squares (`tokenExponent`). Right: the share of agents in the tail the maximum-likelihood fit chose (`degreeTailShare`) and the largest gap between that tail and the fitted law (`degreeGammaKS`).
 
 > [!example]- How to make this figure
-> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 8](08-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
 >
@@ -156,7 +156,7 @@ more than this.
 
 Where would a tail like this come from? The rules contain a known mechanism.
 A child is joined to some of its parent's candidates — in effect it **copies**
-part of its parent's neighbourhood ([Chapter 21](21-how-agents-have-children.md)).
+part of its parent's neighbourhood ([Chapter 22](22-how-agents-have-children.md)).
 An agent gains a connection whenever one of its neighbours has a child that is
 joined to it; an agent with twice the neighbours has about twice the chances.
 The well connected gain connections in proportion to their connections:
@@ -174,7 +174,7 @@ experiment that joined children to random agents instead would test it.
 **Two candidate laws for the tokens.** Dots: for every token count x that occurs among the agents alive after the last game of the 26 worlds that lived to the end, the share holding at least x. Red: a power law fitted by maximum likelihood to the tail, from the x that fits it best. Cyan: a log-normal distribution with the mean and standard deviation of ln x over all agents — a distribution whose logarithm is normal. Both on logarithmic axes.
 
 > [!example]- How to make this figure
-> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 8](08-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -203,7 +203,7 @@ than the connection tail would need the hubs to hold *more* tokens per
 connection than everyone else. They do not: among the 579 agents in the token
 tail, 44% have ten connections or more — but **34% have only one or two**.
 A third of the richest agents are rich far beyond their place, and
-[Chapter 19](19-gains-and-losses.md) showed what happens to them: they drain,
+[Chapter 20](20-gains-and-losses.md) showed what happens to them: they drain,
 losing 44% of their tokens per game on average.
 
 That suggests a different mechanism, also a classic. An agent's tokens are
@@ -222,7 +222,7 @@ simplest test would be to look for.
 **How many agents one game removes.** Of all games from iteration 500 on in the 26 worlds that lived to the end (65,000 games), the share that cut off at least n agents (orange) and the share in which at least n agents starved (red), for every n, on logarithmic axes. Games in which no one was removed count in the denominator, which is why the curves start below 1.
 
 > [!example]- How to make this figure
-> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 8](08-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
 >
@@ -242,7 +242,7 @@ But big ones matter. Of all agents ever cut off, 94% died in games that cut
 off ten or more, and 20% in the 2.5% of games that cut off a hundred or more.
 Death by cutting comes in **lumps**: whole branches of the network fall off
 at once. Starvation comes in smaller lumps (at most 637 in one game).
-[Chapter 25](25-how-a-world-breaks.md) asks where the lumps come from and
+[Chapter 26](26-how-a-world-breaks.md) asks where the lumps come from and
 whether they can be foreseen.
 
 ## The rhythm of the wander
@@ -257,7 +257,7 @@ splits the movement into rhythms and says how much of it happens at each
 **The rhythm of the wander.** The power spectrum of the number of agents ([The power spectrum](../notes/power-spectrum.md)): for each frequency, how much of a world's up-and-down motion happens at that rhythm — slow wanders on the left, iteration-to-iteration jitter on the right. Each world's series from iteration 500 to 2,999, with its straight-line trend removed and a Hann window applied, normalised to total power 1 and averaged over the 26 worlds; then averaged in 39 bands of equal width on the logarithmic axis. Red: the straight line least squares fits between periods of 500 and 4 iterations.
 
 > [!example]- How to make this figure
-> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 8](08-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
 >
@@ -276,7 +276,7 @@ back to a level is the Ornstein–Uhlenbeck process, whose spectrum is flat
 below a corner and falls as *f*^−2 above it; the corner here corresponds to a
 pull that takes a few hundred iterations to act — which fits the
 [autocorrelation](../notes/autocorrelation.md) of 0.68 after 100 iterations
-found in [Chapter 12](12-how-much-does-the-seed-decide.md). 70% of the
+found in [Chapter 13](13-how-much-does-the-seed-decide.md). 70% of the
 movement happens at periods of 500 iterations or more, and only 0.4% at
 periods shorter than 10: the wander is slow.
 
@@ -299,12 +299,12 @@ scale. The world forgets.
   criticality — to systems on the edge between order and chaos, where small
   causes can have effects of every size. Whatever the truth of that, this
   world is not on such an edge; it is a world that wanders and returns
-  ([Meta II](29-meta-2.md)).
+  ([Meta II](30-meta-2.md)).
 
 To make every figure of this chapter: `python3 book_figures.py powerlaws`.
 
 <!-- turns -->
 ---
 
-← [Chapter 21 · How agents have children](21-how-agents-have-children.md) · [Contents](../README.md) · [Chapter 23 · How properties scale together](23-how-properties-scale-together.md) →
+← [Chapter 22 · How agents have children](22-how-agents-have-children.md) · [Contents](../README.md) · [Chapter 24 · How properties scale together](24-how-properties-scale-together.md) →
 <!-- /turns -->

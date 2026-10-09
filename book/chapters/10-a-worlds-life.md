@@ -57,7 +57,7 @@ the same scale. Each line is the number of agents alive after every game.
 **Six worlds, one at a time.** The number of agents alive after every game in the worlds with seeds 1 to 6, each in a chart of its own and all on the same scale (0 to 4,000 agents, iterations 0 to 3,000). Each line has one point per iteration.
 
 > [!example]- How to make this figure
-> **Runs.** `B1-10000-s001` … `B1-10000-s006`, six of the 30 baseline runs (their settings are listed in [Chapter 8](08-thirty-worlds.md)).
+> **Runs.** `B1-10000-s001` … `B1-10000-s006`, six of the 30 baseline runs (their settings are listed in [Chapter 9](09-thirty-worlds.md)).
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
 >
@@ -71,7 +71,7 @@ Three things are visible in every one of them:
 
 - **A youth.** Within the first twenty or so iterations, the 100 founders
   become well over a thousand agents, and the line jumps up and down before
-  it settles into a calmer motion. [Chapter 10](10-the-first-hundred-iterations.md) zooms in on this.
+  it settles into a calmer motion. [Chapter 11](11-the-first-hundred-iterations.md) zooms in on this.
 - **No fixed level.** After the youth, no world stays at one size. Each
   drifts, over hundreds of iterations, between roughly 500 and 2,500 agents,
   and the six worlds drift differently.
@@ -89,7 +89,7 @@ at each moment, the shading how far the others spread around it.
 **Agents alive, 30 worlds.** The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th). Four worlds die out; after a world's death it is no longer counted, so the bands of the last thousand iterations are those of 26 worlds.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 8](08-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
 >
@@ -106,7 +106,7 @@ at each moment, the shading how far the others spread around it.
 **Worlds still alive.** How many of the 30 worlds are still alive. A world dies when an iteration ends with 20 agents or fewer; four did, after 4, 313, 1,547 and 2,184 iterations.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 8](08-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
 >
@@ -133,7 +133,7 @@ life, and over iterations 2,800 to 2,999, at its end — and join the two:
 **Each world early and late.** One line per surviving world, from its mean number of agents over iterations 100–200 (left) to its mean over iterations 2,800–2,999 (right). Green: the late mean is more than 1.2 times the early one; red: less than 0.8 times; grey: in between. The thick blue line joins the medians of the 26 worlds.
 
 > [!example]- How to make this figure
-> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 8](08-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
 >
@@ -150,7 +150,7 @@ that lived to the end. But only 8 of the 26 lines stay within a fifth of where
 they began; 12 end more than a fifth higher, 6 more than a fifth lower. The
 most extreme world ended with 0.38 times its early size, another with 4.6
 times. **A typical world exists; a single world does not stay put.** Chapter
-12 measures this wandering and asks how much of it the seed decides.
+13 measures this wandering and asks how much of it the seed decides.
 
 ## Connections
 
@@ -160,7 +160,7 @@ times. **A typical world exists; a single world does not stay put.** Chapter
 **Connections, 30 worlds.** The number of connections after every game. The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 8](08-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
 >
@@ -173,7 +173,7 @@ times. **A typical world exists; a single world does not stay put.** Chapter
 
 The number of connections follows the number of agents, at about 1.6
 connections per agent (a mean degree of 3.3: every agent is joined to three or
-four others on average, [Chapter 15](15-what-shape-does-the-network-take.md)). Its median over iterations 100 to 200
+four others on average, [Chapter 16](16-what-shape-does-the-network-take.md)). Its median over iterations 100 to 200
 was 2,037, over the last two hundred 2,161.
 
 ## Births and deaths slow down
@@ -183,7 +183,7 @@ the median world had 68 births per iteration; over its last two hundred
 iterations, 40 — 41% fewer. Agents starving in the game fell from 10 per
 iteration to 5.6, agents cut off in the game from 41 to 23. Fewer births and
 fewer deaths around a population of the same size means the living get older.
-[Chapter 11](11-births-deaths-and-ages.md) follows this.
+[Chapter 12](12-births-deaths-and-ages.md) follows this.
 
 ## Four worlds died
 
@@ -214,7 +214,7 @@ the true rate could be anywhere from 5% to 30%
 ([The Wilson interval](../notes/wilson-interval.md)).
 
 A world stopped at 20 agents is not certain to have died.
-[Chapter 31](31-how-does-a-worlds-size-follow-its-tokens.md) let small worlds
+[Chapter 32](32-how-does-a-worlds-size-follow-its-tokens.md) let small worlds
 go on below that line, and they recovered — one from 4 agents. Seed 23,
 stopped at its fourth iteration, is the one most likely to have come back; the
 other three had lingered below a hundred agents for scores of iterations
@@ -254,7 +254,7 @@ every *single* world wanders and turnover slows; and for some worlds a
   it measures from iteration 500 on ([The settled life](../notes/settled-life.md)).
 - **The end of a run is a moment in a wander.** Where a world stands at
   iteration 3,000 is not where it "settled"; a world's mean over a long
-  stretch says more ([Chapter 12](12-how-much-does-the-seed-decide.md)).
+  stretch says more ([Chapter 13](13-how-much-does-the-seed-decide.md)).
 - **Dying out is an outcome of its own.** Where worlds end up is measured over
   the worlds that lived to the end, and the dead are counted apart.
 
@@ -263,5 +263,5 @@ To make every figure of this chapter: `python3 book_figures.py life`.
 <!-- turns -->
 ---
 
-← [Chapter 8 · Thirty worlds](08-thirty-worlds.md) · [Contents](../README.md) · [Chapter 10 · The first hundred iterations](10-the-first-hundred-iterations.md) →
+← [Chapter 9 · Thirty worlds](09-thirty-worlds.md) · [Contents](../README.md) · [Chapter 11 · The first hundred iterations](11-the-first-hundred-iterations.md) →
 <!-- /turns -->

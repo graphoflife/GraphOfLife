@@ -132,7 +132,7 @@ every random input of a brain, every share-out of tokens — is drawn from one
 stream of pseudo-random numbers, started from the same seed. A run therefore
 depends on its settings and its seed and on nothing else
 ([Seeds and the random stream](../notes/random-numbers.md));
-[Chapter 7](07-is-a-run-reproducible.md) tests this.
+[Chapter 8](08-is-a-run-reproducible.md) tests this.
 
 ## What is recorded
 

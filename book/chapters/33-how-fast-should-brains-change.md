@@ -24,7 +24,7 @@ probability *p* = 0.2 ([How a brain changes](../notes/mutation.md)). Is that
 a lot or a little?
 
 Too little, and a world is stuck with what it started with.
-[Chapter 30](30-do-the-brains-matter.md) took change away altogether, and
+[Chapter 31](31-do-the-brains-matter.md) took change away altogether, and
 worlds whose brains never change ended up anywhere: some frozen, with no one
 born and no one dying, some teeming, with a child for every agent in every
 iteration. Too much, and selection cannot keep what it finds. Between the two
@@ -47,13 +47,13 @@ change can leave its mark. Theory offers three pictures of how:
 Two findings of this book make the question sharper.
 
 - **Three births per hundred agents.** The 26 evolving worlds of
-  [Chapter 30](30-do-the-brains-matter.md) all settled near three births per
+  [Chapter 31](31-do-the-brains-matter.md) all settled near three births per
   hundred agents per iteration, while worlds without change spread from none
   to a hundred. Is three what selection finds — a rate any evolving world
   arrives at — or only the churn of mutation, which keeps brains from
   settling anywhere extreme? If it is churn, it should move with the amount
   of churn.
-- **Change in the living.** [Chapter 28](28-questioning-the-mechanics.md)
+- **Change in the living.** [Chapter 29](29-questioning-the-mechanics.md)
   found that 97% of new genotypes arise in brains that are not being copied,
   after a game. The rate of mutation decides how fast a successful brain is
   eroded in place, and so how long a line stays like its ancestor — the
@@ -73,7 +73,7 @@ third.
 > [!quote] The thesis of Experiment 9, written down before any of its runs existed
 > **The claim.** The rate of births is set by how much brains change, not fixed by selection. Births per hundred agents rise steadily with the mutation probability: settled worlds at 0.05 have fewer than the baseline's three per hundred agents per iteration, worlds at 0.8 at least twice as many. Selection holds reproduction down; every change of a brain undoes a little of that, and where the two balance moves with how often brains change.
 >
-> **Why it would be so.** Founders, whose brains no selection has touched, have children some twenty times as often as settled agents (Chapter 21): selection holds reproduction down. A change to a brain is blind, so it can undo that as easily as anything else. When selection removes a trait that mutation keeps making, the trait settles at a level that rises with the rate of mutation — mutation–selection balance, the oldest result of population genetics about variation (Haldane 1927). Two pilots run to plan this chapter — seed 1 at 10,000 tokens for 600 iterations, at mutation probabilities 0.05 and 0.8 — point that way. Over iterations 500 to 599, births per hundred agents were 2.0 at 0.05, 2.9 in the baseline's world of the same seed at 0.2, and 8.0 at 0.8; genotypes per agent were 0.32, 0.60 and 0.98.
+> **Why it would be so.** Founders, whose brains no selection has touched, have children some twenty times as often as settled agents (Chapter 22): selection holds reproduction down. A change to a brain is blind, so it can undo that as easily as anything else. When selection removes a trait that mutation keeps making, the trait settles at a level that rises with the rate of mutation — mutation–selection balance, the oldest result of population genetics about variation (Haldane 1927). Two pilots run to plan this chapter — seed 1 at 10,000 tokens for 600 iterations, at mutation probabilities 0.05 and 0.8 — point that way. Over iterations 500 to 599, births per hundred agents were 2.0 at 0.05, 2.9 in the baseline's world of the same seed at 0.2, and 8.0 at 0.8; genotypes per agent were 0.32, 0.60 and 0.98.
 >
 > **It holds if:** Over iterations 500 to 2,999 of the worlds that live to the end: the median world's mean births per hundred agents per iteration rises at every step from mutation probability 0.05 to 0.1, 0.2, 0.4 and 0.8; the difference from the baseline, paired by seed, is below 0 at 0.05 and above 0 at 0.8, both with 95% intervals that leave out 0; and the median at 0.8 is at least twice the baseline's 3.1.
 >
@@ -129,7 +129,7 @@ third.
 Five rates of mutation, each double the one before: *p* = 0.05, 0.1, 0.2,
 0.4 and 0.8 — from a change every twenty offers to one in almost every
 offer. The baseline is *p* = 0.2, and its thirty worlds are those of
-[Chapter 8](08-thirty-worlds.md): nothing is run again for it. Every other
+[Chapter 9](09-thirty-worlds.md): nothing is run again for it. Every other
 rate is run with the same thirty seeds, at 10,000 tokens, for 3,000
 iterations. Two worlds with the same seed start from the same founders, the
 same brains and the same ring; they part at the first change one of them
@@ -142,13 +142,13 @@ the share of nodes kept by their own agent, genotypes per agent and families
 ([Families](../notes/families.md)); and, from the frames, how long genotypes
 last and how often one branch of the family tree replaces all others
 ([The common ancestor](../notes/common-ancestor.md)), as in
-[Chapter 30](30-do-the-brains-matter.md). Each rate is compared with the
+[Chapter 31](31-do-the-brains-matter.md). Each rate is compared with the
 baseline seed by seed: the difference of the means, an interval for it from
 resampling the seeds, and how often flipping the signs of the differences at
 random gives one as large ([Permutation tests](../notes/permutation-test.md)).
 Worlds that fall to twenty agents are stopped, as in the baseline, and counted
 apart ([When a world ends](../notes/extinction.md)) — remembering, from
-[Chapter 31](31-how-does-a-worlds-size-follow-its-tokens.md), that not every
+[Chapter 32](32-how-does-a-worlds-size-follow-its-tokens.md), that not every
 one of them would have died.
 
 **What each rate means.** Every brain is offered a change after every game,
@@ -168,5 +168,5 @@ pilots, an iteration took about 1.0 milliseconds per agent at 0.8 and 0.6 at
 <!-- turns -->
 ---
 
-← [Chapter 31 · How does a world's size follow its tokens?](31-how-does-a-worlds-size-follow-its-tokens.md) · [Contents](../README.md) · [Appendix A · What a simulation costs](A-costs.md) →
+← [Chapter 32 · How does a world's size follow its tokens?](32-how-does-a-worlds-size-follow-its-tokens.md) · [Contents](../README.md) · [Appendix A · What a simulation costs](A-costs.md) →
 <!-- /turns -->

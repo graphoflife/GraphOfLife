@@ -54,7 +54,7 @@ cleanup then removes all of it. The share of a world that hangs in trees is
 the share that can be lost to a single cut.
 
 In a settled baseline world about 54% of agents are in the core, 36% are
-leaves and the rest in trees ([Chapter 15](../chapters/15-what-shape-does-the-network-take.md)).
+leaves and the rest in trees ([Chapter 16](../chapters/16-what-shape-does-the-network-take.md)).
 
 <!-- turns -->
 [Contents](../README.md)

@@ -54,8 +54,8 @@ reproduction phase, 3.1 have a child.
 
 [Chapter 3](../chapters/03-one-iteration.md) shows what an average
 iteration of a settled world does;
-[Chapter 10](../chapters/10-the-first-hundred-iterations.md) the youth;
-[Chapter 11](../chapters/11-births-deaths-and-ages.md) the rates over a
+[Chapter 11](../chapters/11-the-first-hundred-iterations.md) the youth;
+[Chapter 12](../chapters/12-births-deaths-and-ages.md) the rates over a
 world's life.
 
 <!-- turns -->

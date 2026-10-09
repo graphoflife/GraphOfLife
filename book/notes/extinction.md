@@ -21,7 +21,7 @@ statistics — inequality, clustering, families — mean little. Stopping at 20
 also saves running a dying world to its end.
 
 But a world at 20 agents is not always dying.
-[Chapter 31](../chapters/31-how-does-a-worlds-size-follow-its-tokens.md) ran
+[Chapter 32](../chapters/32-how-does-a-worlds-size-follow-its-tokens.md) ran
 small worlds with the threshold at 0: all six worlds of 800 and 1,600 tokens
 lived to iteration 600, and five of them were worlds the threshold had stopped
 after their first game; one fell to 4 agents and came back. So "extinct" in
@@ -42,7 +42,7 @@ is its dying. So where the worlds of a setting end up is measured over the
 worlds that lived to the end, and the dead are reported beside them, as an
 outcome of their own ([The settled life of a world](settled-life.md)). Of the
 30 baseline worlds, four died: after 4, 313, 1,547 and 2,184 iterations
-([Chapter 9](../chapters/09-a-worlds-life.md)).
+([Chapter 10](../chapters/10-a-worlds-life.md)).
 
 "Died after *N* iterations" means: the iteration numbered *N* − 1 was the
 last to run, and it ended with 20 agents or fewer.

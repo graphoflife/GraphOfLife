@@ -59,7 +59,7 @@ factor *e*. Its autocorrelation after a time *s* is *e*^(−*s*/τ)
 
 The number of agents of the baseline worlds has β ≈ −2.1 for periods
 between 4 and 500 iterations, and a spectrum that levels off for periods of
-800 iterations and more ([Chapter 22](../chapters/22-power-laws-real-and-apparent.md)):
+800 iterations and more ([Chapter 23](../chapters/23-power-laws-real-and-apparent.md)):
 a random walk on short scales, pulled back on long ones, with τ of a few
 hundred iterations. 70% of the variance lies at periods of 500 iterations or
 more, and 0.4% at periods shorter than 10.

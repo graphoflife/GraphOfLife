@@ -420,9 +420,85 @@ def reproducibility() -> str:
     return svg(760, 425, "".join(body), "Experiment 1: four ways to run each seed")
 
 
+def light_cone() -> str:
+    """How far a difference at one agent can reach in one phase, on a square grid."""
+    body = [text(20, 26, "How far a change at x can reach in one phase", "dg-h")]
+    size, step, x0, y0 = 9, 34, 40, 60
+    centre = (4, 4)
+    def at(i, j):
+        return x0 + i * step, y0 + j * step
+    for i in range(size):
+        for j in range(size):
+            if i + 1 < size:
+                body.append(seg(*at(i, j), *at(i + 1, j), "dg-faint"))
+            if j + 1 < size:
+                body.append(seg(*at(i, j), *at(i, j + 1), "dg-faint"))
+    for i in range(size):
+        for j in range(size):
+            d = abs(i - centre[0]) + abs(j - centre[1])
+            cls = ("dg-node2" if d == 0 else "dg-node3" if d == 1 else "dg-node" if d <= 4 else "dg-grey")
+            body.append(dot(*at(i, j), 9 if d == 0 else 7, cls))
+    body.append(text(*at(*centre), "x", "dg-b", "middle").replace('y="', 'dy="4" y="', 1))
+    rows = [
+        "Every dot is an agent, every line a connection;",
+        "on a grid, the steps between two agents are",
+        "the steps along the lines.",
+        "",
+        "1. x's tokens and connections are measured at",
+        "   the start of the phase.",
+        "2. Agents up to 2 steps away see them: a brain",
+        "   reads a summary of each neighbour's neighbours.",
+        "3. Their neighbours read the messages they wrote",
+        "   before anyone acts: 3 steps.",
+        "4. Those neighbours stake on their own neighbours:",
+        "   4 steps. Blue: as far as news of x can travel.",
+        "",
+        "Green: x's own tokens, and a copy of its brain,",
+        "move at most one step in a game.",
+        "Grey: out of reach — unless the cull, the share-out",
+        "or the one random stream carry it there at once.",
+    ]
+    body.append(lines(380, 74, rows, "dg-t", 19))
+    return svg(760, 400, "".join(body), "A light cone on a network")
+
+
+def finite_difference() -> str:
+    """The even split on a line of agents is a finite-difference step of the heat equation."""
+    body = [text(20, 26, "The even split is a step of the heat equation", "dg-h")]
+    states = [("before", [0, 0, 9, 0, 0]), ("after one game", [0, 3, 3, 3, 0]),
+              ("after two games", [1, 2, 3, 2, 1])]
+    w, x0 = 84, 220
+    for k, (label, values) in enumerate(states):
+        y = 70 + k * 92
+        body.append(text(30, y + 30, label, "dg-t"))
+        for i, v in enumerate(values):
+            x = x0 + i * w
+            body.append(box(x, y, w - 14, 46, "dg-box2" if v else "dg-box"))
+            body.append(text(x + (w - 14) / 2, y + 29, str(v), "dg-b", "middle"))
+        if k < len(states) - 1:
+            for i in range(len(values)):
+                x = x0 + i * w + (w - 14) / 2
+                body.append(arrow(x, y + 50, x, y + 86, "dg-faint"))
+                if i > 0:
+                    body.append(arrow(x, y + 50, x - w + 8, y + 86, "dg-faint"))
+                if i < len(values) - 1:
+                    body.append(arrow(x, y + 50, x + w - 8, y + 86, "dg-faint"))
+    rows = [
+        "Five agents of a long line (those beyond hold nothing), each joined to its two neighbours. In a",
+        "game each splits its tokens evenly over itself and its neighbours: a third each. A node then",
+        "holds the thirds staked on it, so every agent ends with the average of itself and its neighbours:",
+        "    τ'(i) = (τ(i−1) + τ(i) + τ(i+1)) / 3  =  τ(i) + (τ(i−1) − 2τ(i) + τ(i+1)) / 3.",
+        "The bracket is the discrete Laplacian — the token curvature. This is exactly how a computer",
+        "solves the heat equation ∂u/∂t = D ∂²u/∂x² on a grid, one small step at a time.",
+    ]
+    body.append(lines(30, 352, rows, "dg-t", 19))
+    return svg(760, 470, "".join(body), "The even split as a step of the heat equation")
+
+
 DIAGRAMS = {"ring": ring, "one-iteration": one_iteration, "reproduction": reproduction,
             "game": game, "revolution": revolution, "cleanup": cleanup, "brain": brain,
-            "gini": gini, "reproducibility": reproducibility}
+            "gini": gini, "reproducibility": reproducibility, "light-cone": light_cone,
+            "finite-difference": finite_difference}
 
 
 def main() -> None:

@@ -34,7 +34,7 @@ load, not how many runs go on at once.
 ## What "the same" needs
 
 The same Python, numpy and networkx versions, and — this was found in
-[Chapter 7](../chapters/07-is-a-run-reproducible.md) — the matrix library
+[Chapter 8](../chapters/08-is-a-run-reproducible.md) — the matrix library
 held to **one thread**. With several threads, a sum of many products may be
 added up in a different order, and floating-point addition is not exactly
 associative: (*a* + *b*) + *c* can differ from *a* + (*b* + *c*) in the last

@@ -49,8 +49,8 @@ would understate the long lives too.
 
 The curve *S*(*L*) starts at 1 and falls in steps. The book draws it on
 [logarithmic axes](logarithmic-axes.md), so that both the many short lives
-and the few long ones are visible ([Chapter 11](../chapters/11-births-deaths-and-ages.md),
-[Chapter 16](../chapters/16-genotypes-and-lineages.md)).
+and the few long ones are visible ([Chapter 12](../chapters/12-births-deaths-and-ages.md),
+[Chapter 17](../chapters/17-genotypes-and-lineages.md)).
 
 ## The median lifetime
 

@@ -43,7 +43,7 @@ everything at home and always kept their nodes, the game would change
 nothing; brains would be passed on only to children. In fact, in a settled
 baseline world agents stake about 30% of their tokens at home, keep their
 node in about 45% of games, and about half of all nodes are won by a
-coalition rather than by their largest staker ([Chapter 14](../chapters/14-how-the-game-is-played.md)).
+coalition rather than by their largest staker ([Chapter 15](../chapters/15-how-the-game-is-played.md)).
 
 <!-- turns -->
 [Contents](../README.md)

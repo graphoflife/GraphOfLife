@@ -40,11 +40,11 @@ is 1,300; the deviations are −300, −100, 0, 100, 300; their squares add to
 The book's "dot columns" show the same thing without summing it up: each
 world is a dot at its level divided by the mean of all worlds, so 1 is the
 average world, and a column's height shows the spread
-([Chapter 12](../chapters/12-how-much-does-the-seed-decide.md)).
+([Chapter 13](../chapters/13-how-much-does-the-seed-decide.md)).
 
 ## What it is used for
 
-- To say how much the seed decides ([Chapter 12](../chapters/12-how-much-does-the-seed-decide.md)).
+- To say how much the seed decides ([Chapter 13](../chapters/13-how-much-does-the-seed-decide.md)).
 - To work out how many seeds an experiment needs: the number grows with *c*²
   ([How many seeds an experiment needs](seeds-needed.md)).
 

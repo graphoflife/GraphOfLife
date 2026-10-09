@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Part II, how a world is organised: Chapters 13 to 16 — wealth, the game, the
+Part II, how a world is organised: Chapters 14 to 17 — wealth, the game, the
 shape of the network, genotypes and lineages.
 """
 from __future__ import annotations
@@ -17,7 +17,7 @@ from book_chapters.common import (BAND_STEPS, BAND_WORDS, BLUE, CYAN, GREEN, GRE
                                   VIOLET, YELLOW, baseline)
 
 # ---------------------------------------------------------------------------
-# Chapter 13 · Where do the tokens go?
+# Chapter 14 · Where do the tokens go?
 # ---------------------------------------------------------------------------
 
 def lorenz(tokens: List[int], points: int = 101) -> np.ndarray:
@@ -142,7 +142,7 @@ def tokens(ch: F.Chapter) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 14 · How the game is played
+# Chapter 15 · How the game is played
 # ---------------------------------------------------------------------------
 
 @chapter
@@ -287,7 +287,7 @@ def game(ch: F.Chapter) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 15 · What shape does the network take?
+# Chapter 16 · What shape does the network take?
 # ---------------------------------------------------------------------------
 
 def roles(ids: List[int], edges: List[List[int]]) -> Dict[int, int]:
@@ -447,7 +447,7 @@ def shape(ch: F.Chapter) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 16 · Genotypes and lineages
+# Chapter 17 · Genotypes and lineages
 # ---------------------------------------------------------------------------
 
 @chapter
@@ -482,7 +482,7 @@ def lineage(ch: F.Chapter) -> None:
                        "and every agent (id in `ids`) note the first and last iteration it appears.",
                        "Keep those first seen at iteration 500 or later; one still present in the "
                        "last frame is censored.",
-                       "Kaplan–Meier as in Chapter 11."]))
+                       "Kaplan–Meier as in Chapter 12."]))
 
     s12 = F.world_pass("B1-10000-s012", (2550, 2999))
     top = band_series([(np.array([t for t, _ in F.world_pass(s.run_id)["top"]], float),

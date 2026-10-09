@@ -71,7 +71,7 @@ to reach to touch everyone.
 **Three distances.** Every 25 iterations, in the 30 baseline worlds: the diameter, the radius and the mean path length, all estimated from breadth-first searches out of 8 to 16 spread agents ([Radius and diameter](../notes/radius-and-diameter.md)). For each, the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 8](08-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
 >
@@ -91,7 +91,7 @@ the mean path falls to **4.2**, the radius to 5.8, the diameter to 11.
 The world is **twice as long** as its connections require. Random networks are
 "small worlds" because every connection is as likely to be a long jump as a
 short one. In this world there are no long jumps: a child is joined to its
-parent's neighbourhood ([Chapter 21](21-how-agents-have-children.md)), so the
+parent's neighbourhood ([Chapter 22](22-how-agents-have-children.md)), so the
 network only ever grows locally, branch by branch.
 
 ## How the world grows around an agent
@@ -117,7 +117,7 @@ Stand on an agent and count the agents within *r* steps.
 
 Within one step there are, on average, 3.5 agents (the agent and its
 neighbours). Within two, already **70**: from most agents, two steps reach a
-hub and everything around it — the stars of [Chapter 23](23-how-properties-scale-together.md).
+hub and everything around it — the stars of [Chapter 24](24-how-properties-scale-together.md).
 Then the count grows more slowly, as *r*^2.68, until half the world is
 reached at seven steps, and flattens as the balls run into the edges of the
 world. The growth is neither a clean power law (the left panel would show a
@@ -136,7 +136,7 @@ records every 25 iterations ([Dimension and curvature](../notes/ball-dimension-a
 **Four measures of a world's geometry.** Every 25 iterations, in the 30 baseline worlds: the dimension and the curvature read off how balls grow ([Dimension and curvature](../notes/ball-dimension-and-curvature.md)), the box dimension ([Box dimension](../notes/box-dimension.md)), and the spectral gap, on a logarithmic axis ([The spectral gap](../notes/spectral-gap.md)). In each, the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 8](08-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
 >
@@ -198,17 +198,17 @@ started — after about 1/λ₂ steps ([The spectral gap](../notes/spectral-gap.
 The world of seed 1 has λ₂ = 0.0019. Its random twin, with the same
 connections per agent, has 0.062: **thirty-two times larger**. By Cheeger's
 inequality, a small λ₂ guarantees a bottleneck — a large part of the world
-joined to the rest by few connections. [Chapter 25](25-how-a-world-breaks.md)
+joined to the rest by few connections. [Chapter 26](26-how-a-world-breaks.md)
 finds those bottlenecks: whole branches hanging on single connections.
 
-The gap also says something about the tokens. [Chapter 20](20-where-the-tokens-flow.md)
+The gap also says something about the tokens. [Chapter 21](21-where-the-tokens-flow.md)
 showed that a game moves tokens almost like a random walk. On this network, a
 random walk needs some 400 to 500 steps to forget its start — so tokens could
 spread evenly across a whole world only over hundreds of games. Meanwhile the
 network changes every game: about 165 connections are made and 117 cut per
 iteration, and the hubs change brains every game. **Locally**, tokens settle
 in a few games, which is why every agent's tokens follow its connections
-([Chapter 23](23-how-properties-scale-together.md)). **Globally**, the world is
+([Chapter 24](24-how-properties-scale-together.md)). **Globally**, the world is
 never at rest: far-apart regions are only loosely coupled.
 
 ## Loops
@@ -252,20 +252,20 @@ heavy-tailed: most agents are on a few, a handful on hundreds.
   size: in worlds of up to 60,000 agents, distances grow like the number of
   agents to the power 0.25 to 0.30, as in a body of about three dimensions,
   not with its logarithm, as in a random network
-  ([Chapter 31](31-how-does-a-worlds-size-follow-its-tokens.md)).
+  ([Chapter 32](32-how-does-a-worlds-size-follow-its-tokens.md)).
 - **The world mixes slowly.** Tokens settle within neighbourhoods and not
   across the world; regions of a world are only loosely coupled.
 - **For evolution, that cuts both ways.** A network that mixes slowly lets
   regions differ for a long time, which is how spatial structure protects
   variety and how cooperation can grow among neighbours (Nowak and May 1992;
-  [Chapter 27](27-do-agents-cooperate.md)). But a network with bottlenecks
+  [Chapter 28](28-do-agents-cooperate.md)). But a network with bottlenecks
   also breaks easily, and whole branches can be lost at once
-  ([Chapter 25](25-how-a-world-breaks.md)).
+  ([Chapter 26](26-how-a-world-breaks.md)).
 
 To make every figure of this chapter: `python3 book_figures.py geometry`.
 
 <!-- turns -->
 ---
 
-← [Chapter 23 · How properties scale together](23-how-properties-scale-together.md) · [Contents](../README.md) · [Chapter 25 · How a world breaks](25-how-a-world-breaks.md) →
+← [Chapter 24 · How properties scale together](24-how-properties-scale-together.md) · [Contents](../README.md) · [Chapter 26 · How a world breaks](26-how-a-world-breaks.md) →
 <!-- /turns -->

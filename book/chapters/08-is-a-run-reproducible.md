@@ -191,5 +191,5 @@ The limits that remain:
 <!-- turns -->
 ---
 
-← [Chapter 6 · The ideas this builds on](06-the-ideas-this-builds-on.md) · [Contents](../README.md) · [Chapter 8 · Thirty worlds](08-thirty-worlds.md) →
+← [Chapter 7 · Physical inspiration](07-physical-inspiration.md) · [Contents](../README.md) · [Chapter 9 · Thirty worlds](09-thirty-worlds.md) →
 <!-- /turns -->

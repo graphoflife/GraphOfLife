@@ -1,7 +1,7 @@
 # Do the brains matter?
 
 Everything Part II found is a fact about the baseline, with nothing to hold
-it against ([Chapter 17](17-meta-1.md)). This chapter takes the brains away,
+it against ([Chapter 18](18-meta-1.md)). This chapter takes the brains away,
 in two different ways, and compares.
 
 > [!question] Questions of this chapter
@@ -59,7 +59,7 @@ in two different ways, and compares.
 
 Each changes one setting of the baseline B1, for the same thirty seeds:
 
-- **baseline** — the thirty runs of [Chapter 8](08-thirty-worlds.md),
+- **baseline** — the thirty runs of [Chapter 9](09-thirty-worlds.md),
   reused.
 - **brains never change** — [`mutation_sparsity`](../notes/settings.md#mutation_sparsity)
   = 0. A brain still "changes" with probability one in five, at birth and
@@ -104,6 +104,17 @@ random brain is a *function* of what it sees: what it does on one connection
 hangs together with what it does on the next, and with what it did in the
 last game. Noise has nothing of the kind. This is a guess the experiment
 does not test.
+
+Decisions by chance are also a crude control in another way: a draw from the
+standard normal distribution makes, for instance, a parent give exactly half
+of its tokens, or all of them, far more often than any settled world does
+([Chapter 22](22-how-agents-have-children.md)). A sharper control draws every
+decision at random **from the distribution of that decision in the evolved
+worlds themselves** — first as it is overall, then given the agent's own
+tokens and connections. Agents that decide like that behave, on average,
+exactly like evolved ones, but respond to nothing. If such a world looks like
+the baseline, what the brains contribute is their average; if it does not,
+what they respond to matters. It is planned as Chapter 34.
 
 ## Without change: frozen or teeming
 
@@ -250,7 +261,7 @@ brain, and which genotype spreads is pure chance.
 >
 > **Data.** From the lineage analysis of Experiment 7, `book/results/E07.json` (`lineage.<condition>.runs.<run>.ancestor.moves`).
 >
-> 1. As in [Chapter 16](16-genotypes-and-lineages.md), for every run.
+> 1. As in [Chapter 17](17-genotypes-and-lineages.md), for every run.
 >
 > **To make it again:** `python3 book_figures.py brains`.
 <!-- /figure -->
@@ -265,7 +276,7 @@ often as the baseline's 8.
 
 So chance alone can make one line take a world over — much faster than in
 the baseline, or never, depending on how often agents are born and die. The
-sweeps of [Chapter 16](16-genotypes-and-lineages.md) are therefore not, by
+sweeps of [Chapter 17](17-genotypes-and-lineages.md) are therefore not, by
 themselves, evidence of selection: a fair comparison needs a world that is
 born and dies as the baseline does while no brain is better than another,
 and none of these is one. The three breeding worlds come closest, with 0, 16
@@ -286,7 +297,7 @@ Before the runs, as Experiment 7:
 > **It fails if:** The worlds without change are about as alike as the baseline's, and wander as much. Then evolution is not what keeps the seed from mattering, and the brain a world starts with does not decide its fate.
 <!-- /thesis -->
 
-("Chapter 4" in the thesis is today's [Chapter 12](12-how-much-does-the-seed-decide.md).)
+("Chapter 4" in the thesis is today's [Chapter 13](13-how-much-does-the-seed-decide.md).)
 
 The thesis **holds**, on all three counts and by wide margins: the spread of
 the number of agents is 0.45 against 0.17 (it asked for at least 0.34);
@@ -315,7 +326,7 @@ change (it asked for more than half).
   mutation's churn, it should move with them.
 - **The wander needs evolution.** A world without change hardly wanders at
   all. Whether the sweeps drive the wander, rather than mutation in general,
-  is still open ([Chapter 17](17-meta-1.md)).
+  is still open ([Chapter 18](18-meta-1.md)).
 
 > [!info] Where everything came from
 > - **Survived to iteration 3,000:** baseline 26, brains never change 30,
@@ -333,5 +344,5 @@ change (it asked for more than half).
 <!-- turns -->
 ---
 
-← [Chapter 29 · Meta II · What the measurements say about open-ended evolution](29-meta-2.md) · [Contents](../README.md) · [Chapter 31 · How does a world's size follow its tokens?](31-how-does-a-worlds-size-follow-its-tokens.md) →
+← [Chapter 30 · Meta II · What the measurements say about open-ended evolution](30-meta-2.md) · [Contents](../README.md) · [Chapter 32 · How does a world's size follow its tokens?](32-how-does-a-worlds-size-follow-its-tokens.md) →
 <!-- /turns -->

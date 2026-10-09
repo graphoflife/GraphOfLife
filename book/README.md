@@ -36,54 +36,68 @@ everything can be checked with it.
 - [Chapter 4 · The brain](chapters/04-the-brain.md)
 - [Chapter 5 · How worlds are measured](chapters/05-how-worlds-are-measured.md)
 - [Chapter 6 · The ideas this builds on](chapters/06-the-ideas-this-builds-on.md)
-- [Chapter 7 · Is a run reproducible?](chapters/07-is-a-run-reproducible.md)
+- [Chapter 7 · Physical inspiration](chapters/07-physical-inspiration.md)
+- [Chapter 8 · Is a run reproducible?](chapters/08-is-a-run-reproducible.md)
 
 **Part II · The baseline world**
 
-- [Chapter 8 · Thirty worlds](chapters/08-thirty-worlds.md)
-- [Chapter 9 · A world's life](chapters/09-a-worlds-life.md)
-- [Chapter 10 · The first hundred iterations](chapters/10-the-first-hundred-iterations.md)
-- [Chapter 11 · Births, deaths and ages](chapters/11-births-deaths-and-ages.md)
-- [Chapter 12 · How much does the seed decide?](chapters/12-how-much-does-the-seed-decide.md)
-- [Chapter 13 · Where do the tokens go?](chapters/13-where-do-the-tokens-go.md)
-- [Chapter 14 · How the game is played](chapters/14-how-the-game-is-played.md)
-- [Chapter 15 · What shape does the network take?](chapters/15-what-shape-does-the-network-take.md)
-- [Chapter 16 · Genotypes and lineages](chapters/16-genotypes-and-lineages.md)
-- [Chapter 17 · Meta I · What the baseline world is](chapters/17-meta-1.md)
+- [Chapter 9 · Thirty worlds](chapters/09-thirty-worlds.md)
+- [Chapter 10 · A world's life](chapters/10-a-worlds-life.md)
+- [Chapter 11 · The first hundred iterations](chapters/11-the-first-hundred-iterations.md)
+- [Chapter 12 · Births, deaths and ages](chapters/12-births-deaths-and-ages.md)
+- [Chapter 13 · How much does the seed decide?](chapters/13-how-much-does-the-seed-decide.md)
+- [Chapter 14 · Where do the tokens go?](chapters/14-where-do-the-tokens-go.md)
+- [Chapter 15 · How the game is played](chapters/15-how-the-game-is-played.md)
+- [Chapter 16 · What shape does the network take?](chapters/16-what-shape-does-the-network-take.md)
+- [Chapter 17 · Genotypes and lineages](chapters/17-genotypes-and-lineages.md)
+- [Chapter 18 · Meta I · What the baseline world is](chapters/18-meta-1.md)
 
 **Part III · The baseline world, measured every way**
 
-- [Chapter 18 · How even is a world?](chapters/18-how-even-is-a-world.md)
-- [Chapter 19 · Gains and losses](chapters/19-gains-and-losses.md)
-- [Chapter 20 · Where the tokens flow](chapters/20-where-the-tokens-flow.md)
-- [Chapter 21 · How agents have children](chapters/21-how-agents-have-children.md)
-- [Chapter 22 · Power laws, real and apparent](chapters/22-power-laws-real-and-apparent.md)
-- [Chapter 23 · How properties scale together](chapters/23-how-properties-scale-together.md)
-- [Chapter 24 · The geometry of a world](chapters/24-the-geometry-of-a-world.md)
-- [Chapter 25 · How a world breaks](chapters/25-how-a-world-breaks.md)
-- [Chapter 26 · One world, many colours](chapters/26-one-world-many-colours.md)
-- [Chapter 27 · Do agents cooperate?](chapters/27-do-agents-cooperate.md)
-- [Chapter 28 · Questioning the mechanics](chapters/28-questioning-the-mechanics.md)
-- [Chapter 29 · Meta II · What the measurements say about open-ended evolution](chapters/29-meta-2.md)
+- [Chapter 19 · How even is a world?](chapters/19-how-even-is-a-world.md)
+- [Chapter 20 · Gains and losses](chapters/20-gains-and-losses.md)
+- [Chapter 21 · Where the tokens flow](chapters/21-where-the-tokens-flow.md)
+- [Chapter 22 · How agents have children](chapters/22-how-agents-have-children.md)
+- [Chapter 23 · Power laws, real and apparent](chapters/23-power-laws-real-and-apparent.md)
+- [Chapter 24 · How properties scale together](chapters/24-how-properties-scale-together.md)
+- [Chapter 25 · The geometry of a world](chapters/25-the-geometry-of-a-world.md)
+- [Chapter 26 · How a world breaks](chapters/26-how-a-world-breaks.md)
+- [Chapter 27 · One world, many colours](chapters/27-one-world-many-colours.md)
+- [Chapter 28 · Do agents cooperate?](chapters/28-do-agents-cooperate.md)
+- [Chapter 29 · Questioning the mechanics](chapters/29-questioning-the-mechanics.md)
+- [Chapter 30 · Meta II · What the measurements say about open-ended evolution](chapters/30-meta-2.md)
 
 **Part IV · One change at a time**
 
-- [Chapter 30 · Do the brains matter?](chapters/30-do-the-brains-matter.md)
-- [Chapter 31 · How does a world's size follow its tokens?](chapters/31-how-does-a-worlds-size-follow-its-tokens.md)
-- [Chapter 32 · How fast should brains change?](chapters/32-how-fast-should-brains-change.md)
-- Chapter 33 · What keeps wealth spread? — *not written yet*
-- Chapter 34 · Meta III — *not written yet*
-- Chapter 35 · How big should a brain be? — *not written yet*
-- Chapter 36 · Does size change the dynamics? — *not written yet*
+- [Chapter 31 · Do the brains matter?](chapters/31-do-the-brains-matter.md)
+- [Chapter 32 · How does a world's size follow its tokens?](chapters/32-how-does-a-worlds-size-follow-its-tokens.md)
+- [Chapter 33 · How fast should brains change?](chapters/33-how-fast-should-brains-change.md)
+- Chapter 34 · Brains replaced by their average — *not written yet*
+- Chapter 35 · What keeps wealth spread? — *not written yet*
+- Chapter 36 · Meta III — *not written yet*
+- Chapter 37 · How big should a brain be? — *not written yet*
+- Chapter 38 · Does size change the dynamics? — *not written yet*
 
 **Part V · Towards open-ended evolution**
 
-- Chapter 37 · Mutation at replication, and nowhere else — *not written yet*
-- Chapter 38 · Can a brain hold its place? — *not written yet*
-- Chapter 39 · Kin that know each other — *not written yet*
-- Chapter 40 · When cooperation produces — *not written yet*
-- Chapter 41 · An open world — *not written yet*
-- Chapter 42 · Meta IV — *not written yet*
+- Chapter 39 · Mutation at replication, and nowhere else — *not written yet*
+- Chapter 40 · Can a brain hold its place? — *not written yet*
+- Chapter 41 · Kin that know each other — *not written yet*
+- Chapter 42 · When cooperation produces — *not written yet*
+- Chapter 43 · An open world — *not written yet*
+- Chapter 44 · Meta IV — *not written yet*
+
+**Part VI · Towards a physics: space, scale and locality**
+
+- Chapter 45 · Worlds of 100,000 tokens — *not written yet*
+- Chapter 46 · How many dimensions does a world have? — *not written yet*
+- Chapter 47 · Which properties have no scale? — *not written yet*
+- Chapter 48 · Local rules only — *not written yet*
+- Chapter 49 · How far does a difference travel? — *not written yet*
+- Chapter 50 · A source and a sink — *not written yet*
+- Chapter 51 · Particles — *not written yet*
+- Chapter 52 · One agent in a sea of average agents — *not written yet*
+- Chapter 53 · Meta V — *not written yet*
 
 **Notes · the rules**
 
@@ -194,7 +208,7 @@ already exist from another side.
 - **Every run can be made again.** Each simulation records its seed, the
   frozen copy of the engine it ran on and the commit it came from, and the
   versions of Python, numpy and networkx, beside it in `provenance.json`
-  ([Chapter 7](chapters/07-is-a-run-reproducible.md)).
+  ([Chapter 8](chapters/08-is-a-run-reproducible.md)).
 - **The dead are counted apart.** A world that dies out did not end up
   anywhere, so where the worlds of a condition end up is measured over the
   worlds that lived to the end, and the dead are reported beside them as an

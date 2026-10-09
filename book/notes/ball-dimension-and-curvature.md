@@ -58,7 +58,7 @@ radii are needed): the first coefficient gives *d* − 1, the second −*R*/(6*d
 
 Both are fitted to five or fewer points, on networks that are not
 lattices. They are indices for comparing worlds and moments, not exact
-geometry. [Chapter 24](../chapters/24-the-geometry-of-a-world.md) reads them on
+geometry. [Chapter 25](../chapters/25-the-geometry-of-a-world.md) reads them on
 the baseline worlds, beside a picture of the ball growth itself.
 
 <!-- turns -->

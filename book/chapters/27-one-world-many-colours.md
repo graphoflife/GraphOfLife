@@ -86,7 +86,7 @@ right, up and down mean nothing — rotate the picture and it says the same.
 > 1. Read frames `5998` (start of the last game) and `5999` (after it): `ids`, `tokens`, `ages`, `delta`, `brain_ids`, `edges`.
 > 2. Curvature: in frame 5998, Σ over neighbours of (their tokens − own tokens).
 > 3. Families: read frames 5799 to 5999, note each genotype's parent, and climb from each living genotype to one alive after the game of iteration 2,899.
-> 4. Loops: as in [Chapter 24](24-the-geometry-of-a-world.md).
+> 4. Loops: as in [Chapter 25](25-the-geometry-of-a-world.md).
 > 5. Lay out with `networkx.forceatlas2_layout(G, max_iter=200, seed=1)` and colour.
 >
 > **To make it again:** `python3 book_figures.py colours`.
@@ -99,18 +99,18 @@ right, up and down mean nothing — rotate the picture and it says the same.
 - **Age.** The oldest agents — up to 700 iterations — sit far out on the arms;
   the clumps around the hubs are younger. A plausible reason: the
   neighbourhoods of hubs are where most children are born and most nodes change
-  hands ([Chapter 21](21-how-agents-have-children.md), [Chapter 20](20-where-the-tokens-flow.md)),
+  hands ([Chapter 22](22-how-agents-have-children.md), [Chapter 21](21-where-the-tokens-flow.md)),
   while the ends of arms are quiet. One picture is not a proof; it is a
   question worth measuring.
 - **Change in the last game.** Almost everything is dark: most agents ended the
-  game with what they had or close to it ([Chapter 19](19-gains-and-losses.md)).
+  game with what they had or close to it ([Chapter 20](20-gains-and-losses.md)).
   The few bright dots are the big winners and losers of the game.
 - **Token curvature before the game.** Blue dots are richer than their
   neighbourhood (hills), red dots poorer (valleys). The hubs are blue, and the
   clump around the largest hub is red: every agent there is poorer than its
   rich neighbour. The landscape of wealth is a set of peaks with valleys
   around them — and tokens flow downhill, from the peaks into the valleys
-  ([Chapter 19](19-gains-and-losses.md)).
+  ([Chapter 20](20-gains-and-losses.md)).
 - **Families.** Each agent is coloured by the genotype, among those alive 100
   iterations earlier, from which its own genotype descends
   ([Families](../notes/families.md)). The seven largest families hold 339, 167,
@@ -119,7 +119,7 @@ right, up and down mean nothing — rotate the picture and it says the same.
   top, others the clusters on the right. A family is a region.
 - **Loops.** The clumps around hubs carry the loops — up to 576 of the world's
   1,112 independent loops pass through one agent — and the arms carry none
-  ([Chapter 24](24-the-geometry-of-a-world.md)).
+  ([Chapter 25](25-the-geometry-of-a-world.md)).
 
 ## Where the tokens went
 
@@ -144,7 +144,7 @@ the others were cut. Of the 2,447 connections, **2,145 carried only one or two
 tokens**, both directions together; 292 carried 3 to 9; 4 carried 10 to 49;
 6 carried 50 or more. Almost every connection of the world is kept alive at
 about the lowest price a connection can have, one token a game
-([Chapter 25](25-how-a-world-breaks.md)). The traffic of a world is thin and
+([Chapter 26](26-how-a-world-breaks.md)). The traffic of a world is thin and
 everywhere, not heavy on a few roads.
 
 ## Reading pictures well
@@ -167,7 +167,7 @@ Four cautions, which apply to every picture the viewer draws:
 
 - **Families live together.** Descent is regional: a line of brains holds a
   part of the world, not scattered agents. Spatial structure like this is what
-  kin selection and network reciprocity need ([Chapter 27](27-do-agents-cooperate.md)
+  kin selection and network reciprocity need ([Chapter 28](28-do-agents-cooperate.md)
   asks whether it is used).
 - **Wealth is a landscape of peaks and valleys,** peaks at the hubs.
 - **Connections are kept at their minimum price,** one or two tokens a game.
@@ -180,5 +180,5 @@ To make every figure of this chapter: `python3 book_figures.py colours`.
 <!-- turns -->
 ---
 
-← [Chapter 25 · How a world breaks](25-how-a-world-breaks.md) · [Contents](../README.md) · [Chapter 27 · Do agents cooperate?](27-do-agents-cooperate.md) →
+← [Chapter 26 · How a world breaks](26-how-a-world-breaks.md) · [Contents](../README.md) · [Chapter 28 · Do agents cooperate?](28-do-agents-cooperate.md) →
 <!-- /turns -->

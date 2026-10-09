@@ -11,7 +11,7 @@ something quite different from what it seems to say.
 
 > [!question] Questions of this chapter
 > - How do an agent's tokens grow with its connections? Is that the resting
->   state of the even split ([Chapter 20](20-where-the-tokens-flow.md))?
+>   state of the even split ([Chapter 21](21-where-the-tokens-flow.md))?
 > - How closely knit is the neighbourhood of a well-connected agent?
 > - To whom are the well-connected joined?
 > - Does the size of an agent's gains and losses grow with its wealth?
@@ -61,10 +61,10 @@ something quite different from what it seems to say.
 <!-- figure scaling/tokens-degree -->
 ![Tokens against connections](../figures/scaling/tokens-degree.svg)
 
-**Tokens against connections.** Every agent alive after the last game of the 26 worlds that lived to the end (35,554 agents), counted in cells of connections k and tokens, both in classes of growing width; a cell's colour is how many agents it holds, on a logarithmic scale. White: the median tokens in each class of k. Red: the straight line least squares fits through ln(tokens) against ln(k) over all agents ([Scaling relations](../notes/scaling-relations.md)). Cyan: tokens proportional to k + 1, through the median at k = 1 — where an even split of every stake would leave the tokens on a network that held still ([Chapter 20](20-where-the-tokens-flow.md)).
+**Tokens against connections.** Every agent alive after the last game of the 26 worlds that lived to the end (35,554 agents), counted in cells of connections k and tokens, both in classes of growing width; a cell's colour is how many agents it holds, on a logarithmic scale. White: the median tokens in each class of k. Red: the straight line least squares fits through ln(tokens) against ln(k) over all agents ([Scaling relations](../notes/scaling-relations.md)). Cyan: tokens proportional to k + 1, through the median at k = 1 — where an even split of every stake would leave the tokens on a network that held still ([Chapter 21](21-where-the-tokens-flow.md)).
 
 > [!example]- How to make this figure
-> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 8](08-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -125,7 +125,7 @@ joined pairs.
 **How an agent's neighbourhood closes, by its connections.** Agents alive after the last game of the 26 worlds that lived to the end, in classes of their connections k. Left: the geometric mean (the mean of the logarithms, turned back) of the clustering coefficient — the share of pairs of an agent's neighbours that are joined to each other — of the agents with k ≥ 2 and clustering above 0. Right: the geometric mean of the number of triangles an agent is a corner of, over the agents in at least one. Red: least squares on the logarithms of all those agents (not of the class means); grey: the slopes −1 and 2 for comparison.
 
 > [!example]- How to make this figure
-> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 8](08-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -146,7 +146,7 @@ share of joined neighbour pairs is a few in a thousand.
 A falling *C*(*k*) ∝ 1/*k* is the signature Ravasz and Barabási (2003) gave
 for **hierarchical** networks: small, tight groups inside larger, looser ones.
 The rules suggest how it comes about here. A hub gains connections through
-the children of its neighbours ([Chapter 22](22-power-laws-real-and-apparent.md)):
+the children of its neighbours ([Chapter 23](23-power-laws-real-and-apparent.md)):
 a child born to a neighbour *v* of the hub *h* and joined to both *v* and *h*
 closes the triangle (child, *v*, *h*). So each connection a hub gains this way
 comes with about one triangle — triangles in proportion to connections, and
@@ -160,7 +160,7 @@ clustering falling as 1/*k*.
 **Whom the well-connected are joined to.** For the agents alive after the last game of the 26 worlds that lived to the end, in classes of their connections k: the mean, over the class, of the average number of connections of an agent's neighbours. A falling line means the well-connected are joined mostly to the poorly connected ([Assortativity](../notes/assortativity.md)).
 
 > [!example]- How to make this figure
-> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 8](08-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -196,7 +196,7 @@ fraction of its wealth, |Δ| ∝ τ — Gibrat's law of proportionate growth
 **Four scaling relations in the 26 worlds.** One dot per world that lived to the end: its mean, over the measurements every 25 iterations from 500 on, of four slopes fitted by least squares on the logarithms of the agents of a frame, and of their R². Tokens and triangles against connections, clustering against connections, and the size of an agent's change in tokens over the game against the tokens it holds ([Scaling relations](../notes/scaling-relations.md)).
 
 > [!example]- How to make this figure
-> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 8](08-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
 >
@@ -231,12 +231,12 @@ world's history.
   world, and they follow from two mechanisms — splitting stakes evenly and
   joining children to their parents' neighbours — that say nothing about what
   a brain computes. Structure that the rules alone fix is not where to look
-  for evolution; [Meta II](29-meta-2.md) asks where to look instead.
+  for evolution; [Meta II](30-meta-2.md) asks where to look instead.
 
 To make every figure of this chapter: `python3 book_figures.py scaling`.
 
 <!-- turns -->
 ---
 
-← [Chapter 22 · Power laws, real and apparent](22-power-laws-real-and-apparent.md) · [Contents](../README.md) · [Chapter 24 · The geometry of a world](24-the-geometry-of-a-world.md) →
+← [Chapter 23 · Power laws, real and apparent](23-power-laws-real-and-apparent.md) · [Contents](../README.md) · [Chapter 25 · The geometry of a world](25-the-geometry-of-a-world.md) →
 <!-- /turns -->

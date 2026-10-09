@@ -182,7 +182,7 @@ So after every phase Σ τ(*u*) = *T*.
 
 ## What an iteration does, on average
 
-Once a world has settled ([Chapter 9](09-a-worlds-life.md)), how many agents
+Once a world has settled ([Chapter 10](10-a-worlds-life.md)), how many agents
 does one iteration add and remove? Here is the average over iterations 500
 to 2,999 of the 26 baseline worlds that lived that long, per hundred agents
 alive at the start of the phase:
@@ -193,7 +193,7 @@ alive at the start of the phase:
 **What one iteration does to a settled world.** Agents added (above zero) and removed (below), per 100 agents alive at the start of an iteration, averaged over iterations 500 to 2,999 of the 26 worlds that lived to the end, pooled: every iteration of every world counts once. The bars add up to 0.00: the population hardly changes from one iteration to the next, while about three in a hundred agents are replaced.
 
 > [!example]- How to make this figure
-> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 8](08-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
 >
@@ -214,7 +214,7 @@ members are replaced.
 
 But the game changes far more than that: in a settled baseline world only
 about 45% of agents keep their node through a game; the rest take on another
-agent's brain ([Chapter 14](14-how-the-game-is-played.md)). The members of a
+agent's brain ([Chapter 15](15-how-the-game-is-played.md)). The members of a
 world stay; their brains are replaced all the time.
 
 > [!summary] In short

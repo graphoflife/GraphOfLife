@@ -57,8 +57,8 @@ where *m* is the number of rows in the stretch that hold the statistic.
 <!-- /figure -->
 
 A world spends its first hundred iterations or so in a **youth** unlike the
-rest of its life ([Chapter 10](10-the-first-hundred-iterations.md)), and then
-**wanders** ([Chapter 9](09-a-worlds-life.md)). So when the book asks where a
+rest of its life ([Chapter 11](11-the-first-hundred-iterations.md)), and then
+**wanders** ([Chapter 10](10-a-worlds-life.md)). So when the book asks where a
 world **settles**, it takes the mean from iteration 500 to its end — its
 [settled life](../notes/settled-life.md).
 
@@ -75,7 +75,7 @@ world, they look like this:
 **30 worlds, each a line.** The number of agents of each of the 30 baseline worlds, every line one world, averaged over stretches of 25 iterations so that the lines stay legible.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 8](08-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
 >
@@ -95,7 +95,7 @@ band ([Bands](../notes/bands.md); [Median and quantiles](../notes/median-and-qua
 **The same 30 worlds, as a band.** The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 8](08-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
 >
@@ -113,8 +113,8 @@ worlds.
 When the question is not *when* but *where*, the book draws a **dot plot**:
 one dot per world, at its mean over a stretch, with a short bar at the
 median. The dots are spread sideways at random only so that they do not hide
-each other; their sideways position means nothing. [Chapter 12](12-how-much-does-the-seed-decide.md)
-and [Chapter 30](30-do-the-brains-matter.md) are full of them.
+each other; their sideways position means nothing. [Chapter 13](13-how-much-does-the-seed-decide.md)
+and [Chapter 31](31-do-the-brains-matter.md) are full of them.
 
 ## Step 4 · How different are worlds?
 

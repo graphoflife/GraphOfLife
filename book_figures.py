@@ -47,7 +47,7 @@ COMMAND = "python3 book_figures.py"
 #: The runs most of Part II reads, and how the recipes name them.
 BASELINE_RUNS = ("The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at "
                  "10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in "
-                 "Chapter 8). They are made with `python3 gol_lab.py run E02`.")
+                 "Chapter 9). They are made with `python3 gol_lab.py run E02`.")
 STATS_FILE = ("each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per "
               "recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just "
               "after the game, and every statistic is a field of the row (see [What a run records]"
@@ -231,7 +231,7 @@ def describe(values: Iterable[float]) -> Dict[str, Any]:
 # One pass over a world's frames
 # ---------------------------------------------------------------------------
 
-#: From which iteration on a life counts as one of the settled world's (Chapter 9).
+#: From which iteration on a life counts as one of the settled world's (Chapter 10).
 SETTLED = 500
 #: Iterations between two looks at the common ancestor of the living.
 ANCESTRY_EVERY = 25

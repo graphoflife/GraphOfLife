@@ -62,13 +62,13 @@ from, so the genotypes of a world form one family tree
 **How long genotypes and agents last.** Of all genotypes that appeared, and all agents born, at iteration 500 or later in the 26 worlds that lived to the end, the share that lasted at least L iterations. A genotype lasts from the first game after which some agent carries it to the last; an agent from its birth to the last game it is alive after. Lives still going at the end are counted as far as they went (Kaplan–Meier).
 
 > [!example]- How to make this figure
-> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 8](08-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
 > 1. Read every frame with `phase` = 2; for every genotype (brain id in `brain_ids`) and every agent (id in `ids`) note the first and last iteration it appears.
 > 2. Keep those first seen at iteration 500 or later; one still present in the last frame is censored.
-> 3. Kaplan–Meier as in [Chapter 11](11-births-deaths-and-ages.md).
+> 3. Kaplan–Meier as in [Chapter 12](12-births-deaths-and-ages.md).
 >
 > **To make it again:** `python3 book_figures.py lineage`.
 <!-- /figure -->
@@ -81,13 +81,13 @@ worlds that lived to the end, the share that lasted at least *L* iterations.
   at least 5, 6% at least 10, and only one in a hundred thousand reaches 50.
   None reached 100.
 - **Agents** (blue) last far longer: 48% at least 10 iterations, 15% at least
-  100 ([Chapter 11](11-births-deaths-and-ages.md)).
+  100 ([Chapter 12](12-births-deaths-and-ages.md)).
 
 Why the difference? An agent keeps its node, its id and its age when its
 brain changes or is replaced by a conqueror's; a genotype ends when the last
 agent carrying it either mutates, dies, or has its node won by another
 genotype. With a change in one brain of five after every game, and half of
-all nodes changing hands in every game ([Chapter 14](14-how-the-game-is-played.md)),
+all nodes changing hands in every game ([Chapter 15](15-how-the-game-is-played.md)),
 a genotype has little time.
 
 At any moment, a settled world holds about one genotype for every 1.6
@@ -102,7 +102,7 @@ in the median world, between 0.61 and 0.67 across the 26).
 **The most common genotype's share of the world.** After every game, the share of the living that carry the most common genotype. The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th). The yellow line is the single world with seed 12.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 8](08-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -146,7 +146,7 @@ How far back do all the living share one ancestor
 Each line is one world. It starts by rising with the age of the world: the
 living still descend from more than one founder. The first drop is the
 moment everyone alive descends from one founder — in the median of the 26
-worlds, by iteration 125 ([Chapter 10](10-the-first-hundred-iterations.md)
+worlds, by iteration 125 ([Chapter 11](11-the-first-hundred-iterations.md)
 counts it for all 29 worlds that lived past their youth: 175). After that
 the line rises steadily, one iteration per iteration, while the common
 ancestor stays the same and grows older, and drops whenever one branch of the
@@ -210,7 +210,7 @@ In the world with seed 1, from iteration 1,000, nothing like it happens in
 **How often one branch replaces all others.** One dot per surviving world: how many times, between iteration 100 and the end, the newest common ancestor of all the living moved forward to a younger genotype (one of the drops in the figure above). The bar is the median.
 
 > [!example]- How to make this figure
-> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 8](08-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From the lineage analysis of Experiment 6 (`python3 gol_lab.py analyse E06`), in `book/results/E06.json` (`ancestor.moves` of every run).
 >
@@ -261,7 +261,7 @@ importantly, whole lines take the world over again and again.
   [coalescent](06-the-ideas-this-builds-on.md)). Whether lines take over
   here *faster than chance would make them*, because some brains do better,
   needs a world in which no brain is better than another.
-  [Chapter 30](30-do-the-brains-matter.md) builds one, and finds that how
+  [Chapter 31](31-do-the-brains-matter.md) builds one, and finds that how
   often chance alone sweeps a world depends on how often agents are born and
   die.
 
@@ -270,5 +270,5 @@ To make every figure of this chapter: `python3 book_figures.py lineage`.
 <!-- turns -->
 ---
 
-← [Chapter 15 · What shape does the network take?](15-what-shape-does-the-network-take.md) · [Contents](../README.md) · [Chapter 17 · Meta I · What the baseline world is](17-meta-1.md) →
+← [Chapter 16 · What shape does the network take?](16-what-shape-does-the-network-take.md) · [Contents](../README.md) · [Chapter 18 · Meta I · What the baseline world is](18-meta-1.md) →
 <!-- /turns -->

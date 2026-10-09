@@ -2,8 +2,8 @@
 
 Part II looks at one kind of world, the baseline B1, from every side. It does
 so with thirty worlds that differ only in their seed. This chapter introduces
-them: every chapter up to [Chapter 17](17-meta-1.md) reads these same thirty
-runs, and [Chapter 30](30-do-the-brains-matter.md) compares them with worlds
+them: every chapter up to [Chapter 18](18-meta-1.md) reads these same thirty
+runs, and [Chapter 31](31-do-the-brains-matter.md) compares them with worlds
 made under other rules.
 
 ## The runs
@@ -90,30 +90,30 @@ line, the dots placed so that joined agents lie near each other:
 The hundred founders on their ring ([Chapter 2](02-the-world.md)) have become
 1,336 agents in a network of dense clusters joined by long, thin paths, with
 many agents that hang on by a single connection.
-[Chapter 15](15-what-shape-does-the-network-take.md) takes this shape apart.
+[Chapter 16](16-what-shape-does-the-network-take.md) takes this shape apart.
 
 Any of the thirty can be opened in the **Viewer** of the Graph of Life app,
 which replays a run frame by frame.
 
 ## The questions of Part II
 
-- [Chapter 9](09-a-worlds-life.md) — What does a world do over 3,000
+- [Chapter 10](10-a-worlds-life.md) — What does a world do over 3,000
   iterations? Does it settle?
-- [Chapter 10](10-the-first-hundred-iterations.md) — What happens in its first
+- [Chapter 11](11-the-first-hundred-iterations.md) — What happens in its first
   hundred iterations?
-- [Chapter 11](11-births-deaths-and-ages.md) — How often are agents born and
+- [Chapter 12](12-births-deaths-and-ages.md) — How often are agents born and
   how do they die? How old do they get?
-- [Chapter 12](12-how-much-does-the-seed-decide.md) — How much of what a world
+- [Chapter 13](13-how-much-does-the-seed-decide.md) — How much of what a world
   does is decided by its seed?
-- [Chapter 13](13-where-do-the-tokens-go.md) — Where do the tokens go — how
+- [Chapter 14](14-where-do-the-tokens-go.md) — Where do the tokens go — how
   unequal does a world become?
-- [Chapter 14](14-how-the-game-is-played.md) — How is the game played: where
+- [Chapter 15](15-how-the-game-is-played.md) — How is the game played: where
   do agents stake, who wins the nodes?
-- [Chapter 15](15-what-shape-does-the-network-take.md) — What shape does the
+- [Chapter 16](16-what-shape-does-the-network-take.md) — What shape does the
   network take?
-- [Chapter 16](16-genotypes-and-lineages.md) — How long do genotypes last, and
+- [Chapter 17](17-genotypes-and-lineages.md) — How long do genotypes last, and
   do lineages take over?
-- [Chapter 17](17-meta-1.md) — What the baseline world is, in sum.
+- [Chapter 18](18-meta-1.md) — What the baseline world is, in sum.
 
 Five of these chapters (9, 12, 13, 15 and 16) were planned as experiments,
 with a thesis written down before the runs; they quote it and say whether it
@@ -122,5 +122,5 @@ held. The others only ask.
 <!-- turns -->
 ---
 
-← [Chapter 7 · Is a run reproducible?](07-is-a-run-reproducible.md) · [Contents](../README.md) · [Chapter 9 · A world's life](09-a-worlds-life.md) →
+← [Chapter 8 · Is a run reproducible?](08-is-a-run-reproducible.md) · [Contents](../README.md) · [Chapter 10 · A world's life](10-a-worlds-life.md) →
 <!-- /turns -->

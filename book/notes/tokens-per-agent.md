@@ -25,7 +25,7 @@ For the *n* agents alive, holding τ₁, …, τₙ tokens, with *T* = Σ τᵢ:
   rich agents pull the mean up and leave the median where it is.
 - **The richest** is a reading of how far concentration goes. In a settled
   baseline world the richest agent holds about 8% of all tokens — some 800
-  ([Chapter 13](../chapters/13-where-do-the-tokens-go.md)).
+  ([Chapter 14](../chapters/14-where-do-the-tokens-go.md)).
 - **The poorest is almost always 1.** An agent holding 0 tokens after a phase
   has already been removed by the cleanup, so the poorest survivor holds at
   least 1 ([Births and the four ways to die](births-and-deaths.md)).

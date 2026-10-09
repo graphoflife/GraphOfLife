@@ -46,7 +46,7 @@ lifetime** is 50. But look at the world at any moment: an agent of the
 second kind is alive at 99 times as many moments as one of the first, so 99 in
 100 of the agents you see are long-lived ones. The **living are a sample
 weighted by lifetime**. This is why, in
-[Chapter 11](../chapters/11-births-deaths-and-ages.md), half of all agents
+[Chapter 12](../chapters/12-births-deaths-and-ages.md), half of all agents
 are gone within ten iterations, while the median age of the agents alive at
 the end is 72.
 

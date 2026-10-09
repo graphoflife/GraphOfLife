@@ -28,7 +28,7 @@ throughout would look like a world with a long memory.
 - Close to 0: where a world was says nothing about where it will be.
 - In the baseline: 0.68 for the number of agents after 100 iterations, about
   half that after 200, little after 300, nothing after 500
-  ([Chapter 12](../chapters/12-how-much-does-the-seed-decide.md)).
+  ([Chapter 13](../chapters/13-how-much-does-the-seed-decide.md)).
 
 ## Why it dips below zero
 

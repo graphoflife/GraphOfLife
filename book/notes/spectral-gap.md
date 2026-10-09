@@ -48,7 +48,7 @@ A small λ₂ promises that a good cut exists; a large one proves that none does
 - A complete network of *n* agents: λ₂ = *n*/(*n* − 1), about 1.
 - A ring of *n* agents: λ₂ = 1 − cos(2π/*n*) ≈ 2π²/*n*², tiny for large *n* —
   a ring is easy to cut (twice) into two arcs.
-- A settled baseline world: about 0.0026 ([Chapter 24](../chapters/24-the-geometry-of-a-world.md)) —
+- A settled baseline world: about 0.0026 ([Chapter 25](../chapters/25-the-geometry-of-a-world.md)) —
   a random walk needs on the order of 1/0.0026 ≈ 400 steps to forget its start.
 
 ## How it is computed

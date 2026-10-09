@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Part II, the life of a world: Chapters 9 to 12 — a world's life, its youth,
+Part II, the life of a world: Chapters 10 to 13 — a world's life, its youth,
 births and deaths, and how much the seed decides.
 """
 from __future__ import annotations
@@ -16,7 +16,7 @@ from book_chapters.common import (BAND_STEPS, BAND_WORDS, BLUE, CYAN, GREEN, GRE
                                   VIOLET, YELLOW, baseline)
 
 # ---------------------------------------------------------------------------
-# Chapter 9 · A world's life
+# Chapter 10 · A world's life
 # ---------------------------------------------------------------------------
 
 @chapter
@@ -40,7 +40,7 @@ def life(ch: F.Chapter) -> None:
                 "each in a chart of its own and all on the same scale (0 to 4,000 agents, "
                 "iterations 0 to 3,000). Each line has one point per iteration.",
         recipe=recipe("`B1-10000-s001` … `B1-10000-s006`, six of the 30 baseline runs (their "
-                      "settings are listed in [Chapter 8](08-thirty-worlds.md)).", STATS_FILE,
+                      "settings are listed in [Chapter 9](09-thirty-worlds.md)).", STATS_FILE,
                       ["Take the rows with `phase` = 2.",
                        "Plot `nodes` against `iteration`, one point per iteration, joined."]))
 
@@ -148,7 +148,7 @@ def life(ch: F.Chapter) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 10 · The first hundred iterations
+# Chapter 11 · The first hundred iterations
 # ---------------------------------------------------------------------------
 
 @chapter
@@ -301,7 +301,7 @@ def youth(ch: F.Chapter) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 11 · Births, deaths and ages
+# Chapter 12 · Births, deaths and ages
 # ---------------------------------------------------------------------------
 
 @chapter
@@ -324,7 +324,7 @@ def births(ch: F.Chapter) -> None:
         series=out,
         caption="Each line is the median over the worlds, in stretches of 25 iterations, of a "
                 "count divided by the agents present when the phase began, times 100. The first "
-                "iterations run far above the top of the axis (Chapter 10).",
+                "iterations run far above the top of the axis (Chapter 11).",
         recipe=recipe(BASELINE_RUNS, STATS_FILE,
                       ["For every row, divide the count (`births` or `orphaned` in rows with "
                        "`phase` = 1; `starved` or `orphaned` in rows with `phase` = 2) by the "
@@ -406,7 +406,7 @@ def births(ch: F.Chapter) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 12 · How much does the seed decide?
+# Chapter 13 · How much does the seed decide?
 # ---------------------------------------------------------------------------
 
 SEED_STATS = [("nodes", 2, "agents"), ("edges", 2, "connections"), (("births"), 1, "births"),

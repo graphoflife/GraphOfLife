@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Part III, the first half: Chapters 18 to 22 — entropy, gains and losses, the
+Part III, the first half: Chapters 19 to 23 — entropy, gains and losses, the
 flow of tokens, how agents have children, and power laws.
 
 Most of what these chapters show is read from the statistics every run
@@ -81,7 +81,7 @@ def settled_rows(run_id: str, phase: int = 2) -> List[Dict[str, Any]]:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 18 · How even is a world?
+# Chapter 19 · How even is a world?
 # ---------------------------------------------------------------------------
 
 @chapter
@@ -176,7 +176,7 @@ def entropy(ch: F.Chapter) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 19 · Gains and losses
+# Chapter 20 · Gains and losses
 # ---------------------------------------------------------------------------
 
 @chapter
@@ -318,7 +318,7 @@ def gains(ch: F.Chapter) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 20 · Where the tokens flow
+# Chapter 21 · Where the tokens flow
 # ---------------------------------------------------------------------------
 
 def even_split(run_id: str, iterations) -> Tuple[np.ndarray, np.ndarray]:
@@ -529,7 +529,7 @@ def flow(ch: F.Chapter) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 21 · How agents have children
+# Chapter 22 · How agents have children
 # ---------------------------------------------------------------------------
 
 @chapter
@@ -651,7 +651,7 @@ def children(ch: F.Chapter) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 22 · Power laws, real and apparent
+# Chapter 23 · Power laws, real and apparent
 # ---------------------------------------------------------------------------
 
 def ccdf(values: Sequence[float]) -> Tuple[np.ndarray, np.ndarray]:
