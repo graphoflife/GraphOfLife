@@ -98,7 +98,7 @@ Two independent ancestries are tracked, and they are not the same thing:
 """
 from __future__ import annotations
 
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Callable, Dict, List, Optional, Tuple
 
 import networkx as nx
 import numpy as np
@@ -1177,7 +1177,8 @@ class GraphOfLife:
         X = self._inputs(u, candidates, log_deg, q_tok, q_deg, log_tok, at_risk)
         return self.brains[u].forward(X)
 
-    def _note(self, step: str, **marks) -> None:
+    def _note(self, step: str, marks: Optional[Callable[[], Dict[str, Any]]] = None,
+              over: Optional[Dict[str, Any]] = None) -> None:
         """
         Offer a snapshot of the world partway through a phase.
 
@@ -1191,13 +1192,19 @@ class GraphOfLife:
         tokens, edges — plus a bag of marks naming who did what. Anything that
         can produce that shape can drive the same picture, which is what keeps
         this useful to more than the one page it was written for.
+
+        The marks come as a function, called only when something listens: a
+        game's marks list every connection and every stake, and building them
+        in every game of every run only to drop them cost every run that
+        nobody watches. `over` is a snapshot taken earlier in the step, for a
+        step whose picture is of the world as it was before it.
         """
         if self.on_step is None:
             return
-        self.on_step({**(marks.pop("_over", None) or self._snapshot()),
+        self.on_step({**(over or self._snapshot()),
                       "step": step,
                       "iteration": int(self.iteration),
-                      "marks": marks})
+                      "marks": marks() if marks else {}})
 
     def _snapshot(self) -> Dict[str, Any]:
         """The graph as it stands, in the shape a frame uses."""
@@ -1356,10 +1363,10 @@ class GraphOfLife:
             self._drop_edges([(parent, v)])
 
         self._drop_edges(list(nx.selfloop_edges(self.G)))
-        self._note("repro.born",
-                   born=[int(d["child"]) for d in decisions],
-                   parents=[[int(d["agent"]), int(d["child"])] for d in decisions],
-                   handed=[[int(p), int(v), int(c)] for p, v, c in handovers])
+        self._note("repro.born", lambda: {
+            "born": [int(d["child"]) for d in decisions],
+            "parents": [[int(d["agent"]), int(d["child"])] for d in decisions],
+            "handed": [[int(p), int(v), int(c)] for p, v, c in handovers]})
 
         # Pay the gifts. A giver may have handed a connection to its newborn
         # since deciding, so the edge is checked rather than assumed — and a
@@ -1376,22 +1383,22 @@ class GraphOfLife:
             self.tokens[taker] = int(self.tokens.get(taker, 0)) + amount
             self._mark_flow(giver, taker)
             paid.append((int(giver), int(taker), amount))
-        self._note("repro.gifts",
-                   gifts=[[g, t, a] for g, t, a in paid])
+        self._note("repro.gifts", lambda: {"gifts": [[g, t, a] for g, t, a in paid]})
 
         # The accounting may fall due here rather than after the game. When it
         # does, a gift paid moments ago is what keeps a connection standing.
         dead_edges = self._stale_edges() if self._prunes_after(1) else []
         self._drop_edges(dead_edges)
-        self._note("repro.prune", cut=[[int(a), int(b)] for a, b in dead_edges])
+        self._note("repro.prune", lambda: {"cut": [[int(a), int(b)] for a, b in dead_edges]})
 
         self._deliver_messages(outbox)
 
         before = self._snapshot() if self.on_step else None
         alive_before = set(self.G.nodes())
         cleanup = self._cleanup_and_redistribute()
-        self._note("repro.cleanup", _over=before,
-                   removed=[int(u) for u in sorted(alive_before - set(self.G.nodes()))])
+        self._note("repro.cleanup", lambda: {
+            "removed": [int(u) for u in sorted(alive_before - set(self.G.nodes()))]},
+            over=before)
 
         payload = None
         if record_decisions:
@@ -1648,20 +1655,20 @@ class GraphOfLife:
                     entry["revolt"] = int(by_revolt)
                 winners.append(entry)
 
-        self._note("game.stake",
-                   flow=[[int(a), int(b), int(f)] for (a, b), f in edge_flow.items()],
-                   staked=[[int(v), int(who), int(amount)]
-                           for v, offers in allocations_to.items()
-                           for who, amount in offers.items()])
-        self._note("game.winner",
-                   won=[[int(x["node"]), int(x["winner"]), int(x["amount"])] for x in winners],
-                   revolts=[[int(x["node"]), int(x.get("revolt", 0))] for x in winners])
+        self._note("game.stake", lambda: {
+            "flow": [[int(a), int(b), int(f)] for (a, b), f in edge_flow.items()],
+            "staked": [[int(v), int(who), int(amount)]
+                       for v, offers in allocations_to.items()
+                       for who, amount in offers.items()]})
+        self._note("game.winner", lambda: {
+            "won": [[int(x["node"]), int(x["winner"]), int(x["amount"])] for x in winners],
+            "revolts": [[int(x["node"]), int(x.get("revolt", 0))] for x in winners]})
 
         self.tokens = new_tokens
         self.brains = new_brains
-        self._note("game.conquer",
-                   taken=[[int(x["node"]), int(x["winner"])] for x in winners
-                          if int(x["winner"]) != int(x["node"])])
+        self._note("game.conquer", lambda: {
+            "taken": [[int(x["node"]), int(x["winner"])] for x in winners
+                      if int(x["winner"]) != int(x["node"])]})
 
         # --- 4. Aftermath -----------------------------------------------------
         #
@@ -1671,14 +1678,15 @@ class GraphOfLife:
         # leaves every connection standing at this point.
         dead_edges = self._stale_edges() if self._prunes_after(2) else []
         self._drop_edges(dead_edges)
-        self._note("game.prune", cut=[[int(a), int(b)] for a, b in dead_edges])
+        self._note("game.prune", lambda: {"cut": [[int(a), int(b)] for a, b in dead_edges]})
 
         self._deliver_messages(outbox)
         before = self._snapshot() if self.on_step else None
         alive_before = set(self.G.nodes())
         cleanup = self._cleanup_and_redistribute()
-        self._note("game.cleanup", _over=before,
-                   removed=[int(u) for u in sorted(alive_before - set(self.G.nodes()))])
+        self._note("game.cleanup", lambda: {
+            "removed": [int(u) for u in sorted(alive_before - set(self.G.nodes()))]},
+            over=before)
 
         # Every brain mutates, and it happens after the clearing-up rather than
         # before it. Nothing between the two reads a brain — the pruning goes on
