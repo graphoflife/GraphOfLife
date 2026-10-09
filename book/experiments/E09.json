@@ -1,0 +1,130 @@
+{
+  "id": "E09",
+  "title": "How fast should brains change?",
+  "thesis": {
+    "claim": "The rate of births is set by how much brains change, not fixed by selection. Births per hundred agents rise steadily with the mutation probability: settled worlds at 0.05 have fewer than the baseline's three per hundred agents per iteration, worlds at 0.8 at least twice as many. Selection holds reproduction down; every change of a brain undoes a little of that, and where the two balance moves with how often brains change.",
+    "why": "Founders, whose brains no selection has touched, have children some twenty times as often as settled agents (Chapter 21): selection holds reproduction down. A change to a brain is blind, so it can undo that as easily as anything else. When selection removes a trait that mutation keeps making, the trait settles at a level that rises with the rate of mutation — mutation–selection balance, the oldest result of population genetics about variation (Haldane 1927). Two pilots run to plan this chapter — seed 1 at 10,000 tokens for 600 iterations, at mutation probabilities 0.05 and 0.8 — point that way. Over iterations 500 to 599, births per hundred agents were 2.0 at 0.05, 2.9 in the baseline's world of the same seed at 0.2, and 8.0 at 0.8; genotypes per agent were 0.32, 0.60 and 0.98.",
+    "confirm": "Over iterations 500 to 2,999 of the worlds that live to the end: the median world's mean births per hundred agents per iteration rises at every step from mutation probability 0.05 to 0.1, 0.2, 0.4 and 0.8; the difference from the baseline, paired by seed, is below 0 at 0.05 and above 0 at 0.8, both with 95% intervals that leave out 0; and the median at 0.8 is at least twice the baseline's 3.1.",
+    "refute": "Births per hundred agents stay within 30% of the baseline's (2.2 to 4.1) at every mutation probability, or do not rise with it. Then the baseline's three births per hundred agents is a rate selection finds, whatever the churn of mutation."
+  },
+  "runs": {
+    "baseline": "B1",
+    "world": {
+      "total_tokens": 10000
+    },
+    "seeds": "1..30",
+    "iterations": 3000,
+    "record": {
+      "heavy_every": 25
+    },
+    "conditions": [
+      {
+        "name": "baseline"
+      },
+      {
+        "name": "mutation 0.05",
+        "set": {
+          "mutation_probability": 0.05
+        }
+      },
+      {
+        "name": "mutation 0.1",
+        "set": {
+          "mutation_probability": 0.1
+        }
+      },
+      {
+        "name": "mutation 0.4",
+        "set": {
+          "mutation_probability": 0.4
+        }
+      },
+      {
+        "name": "mutation 0.8",
+        "set": {
+          "mutation_probability": 0.8
+        }
+      }
+    ]
+  },
+  "analyse": {
+    "kind": "series",
+    "reference": "baseline",
+    "settledFrom": 500,
+    "wandering": {
+      "from": 100,
+      "stretch": 100
+    },
+    "lineage": true,
+    "figures": [
+      {
+        "name": "births",
+        "stat": "births/nodes_before",
+        "phase": 1,
+        "title": "Births per agent in a reproduction phase",
+        "y": "births per agent",
+        "min": 0
+      },
+      {
+        "name": "agents",
+        "stat": "nodes",
+        "phase": 2,
+        "title": "Agents alive",
+        "y": "agents"
+      },
+      {
+        "name": "genotypes",
+        "stat": "distinctBrains/nodes",
+        "phase": 2,
+        "title": "Genotypes per agent",
+        "y": "genotypes per agent",
+        "min": 0
+      },
+      {
+        "name": "home",
+        "stat": "heldHomeShare",
+        "phase": 2,
+        "title": "Share of agents that kept their own node in the game",
+        "y": "share",
+        "min": 0
+      },
+      {
+        "name": "gini",
+        "stat": "gini",
+        "phase": 2,
+        "title": "Inequality of wealth (Gini)",
+        "y": "Gini",
+        "min": 0
+      },
+      {
+        "name": "families",
+        "stat": "cladesInWindow",
+        "phase": 2,
+        "title": "Families: distinct ancestors eight iterations back",
+        "y": "families"
+      }
+    ],
+    "endpoints": [
+      "nodes",
+      "edges",
+      {
+        "stat": "births/nodes_before",
+        "phase": 1
+      },
+      {
+        "stat": "meanInvestedShare",
+        "phase": 1
+      },
+      "starved",
+      "orphaned",
+      "gini",
+      "selfAllocationShare",
+      "heldHomeShare",
+      "revolutions/nodes_before",
+      "distinctBrains/nodes",
+      "cladesInWindow",
+      "bridges/edges",
+      "coreShare"
+    ]
+  }
+}

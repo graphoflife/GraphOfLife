@@ -213,6 +213,13 @@ exactly what "died after" means). Four of thirty is 13%; with so few worlds,
 the true rate could be anywhere from 5% to 30%
 ([The Wilson interval](../notes/wilson-interval.md)).
 
+A world stopped at 20 agents is not certain to have died.
+[Chapter 31](31-how-does-a-worlds-size-follow-its-tokens.md) let small worlds
+go on below that line, and they recovered — one from 4 agents. Seed 23,
+stopped at its fourth iteration, is the one most likely to have come back; the
+other three had lingered below a hundred agents for scores of iterations
+before they reached the line.
+
 ## What was expected
 
 Before the runs, this was written down as Experiment 2:

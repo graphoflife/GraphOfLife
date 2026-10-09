@@ -116,7 +116,9 @@ examined in [Chapter 28](28-questioning-the-mechanics.md).
 6. **The world can neither reach across nor split.** Growth is local only, so
    the network stretches and its shortcuts are never renewed; the global cull
    kills any part that separates, so populations can never diverge in
-   isolation.
+   isolation. [Chapter 31](31-how-does-a-worlds-size-follow-its-tokens.md)
+   adds that a bigger world is no escape: distances grow like a power of its
+   size, and the regions the cull removes grow with it.
 
 ## What we propose to change
 

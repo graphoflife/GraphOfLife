@@ -247,6 +247,10 @@ network survives ([Chapter 3](03-one-iteration.md)).
 **What the data say.** Three deaths in four are cut-offs
 ([Chapter 11](11-births-deaths-and-ages.md)); a fifth of them happen in the one
 game in forty that cuts off a hundred agents or more ([Chapter 25](25-how-a-world-breaks.md)).
+And the losses grow with the world: in worlds from 3,200 to 409,600 tokens, a
+single game has cut off a third to a half of all agents, at every size, so
+that a big world changes from game to game as much, relatively, as a small one
+([Chapter 31](31-how-does-a-worlds-size-follow-its-tokens.md)).
 
 **Why it matters.** Every other rule is local: an agent stakes on its
 neighbours, has its children beside itself, dies when its own node is empty.

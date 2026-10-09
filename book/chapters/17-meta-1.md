@@ -117,7 +117,8 @@ accumulates.
   14% in connections and 5% in inequality, four times in five. Smaller effects
   are reported as not seen, not as absent.
 - **The dead are counted apart.** About one world in eight dies at this
-  size. Extinction is reported for every condition; only a large change in it
+  size — falls, that is, to 20 agents, which [Chapter 31](31-how-does-a-worlds-size-follow-its-tokens.md)
+  later found is not always the end. Extinction is reported for every condition; only a large change in it
   — from 13% to 30% would take about ninety seeds per condition — can be seen
   ([When a world ends](../notes/extinction.md)).
 - **Pairing by seed helps little.** Two conditions with the same seed share

@@ -70,7 +70,7 @@ everything can be checked with it.
 
 - [Chapter 30 · Do the brains matter?](chapters/30-do-the-brains-matter.md)
 - [Chapter 31 · How does a world's size follow its tokens?](chapters/31-how-does-a-worlds-size-follow-its-tokens.md)
-- Chapter 32 · How fast should brains change? — *not written yet*
+- [Chapter 32 · How fast should brains change?](chapters/32-how-fast-should-brains-change.md)
 - Chapter 33 · What keeps wealth spread? — *not written yet*
 - Chapter 34 · Meta III — *not written yet*
 - Chapter 35 · How big should a brain be? — *not written yet*

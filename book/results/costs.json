@@ -1,6 +1,6 @@
 {
  "fitted": {
-  "secondsPerAgentIteration": 0.0005749732571217488,
+  "secondsPerAgentIteration": 0.0005688022426912186,
   "agentsPerToken": 0.1383,
   "bytesPerAgentIteration": 72.27011494252874,
   "peakBytesPerWeightByte": 68.55135774942538,
@@ -14,8 +14,8 @@
   "kinds": {
    "e7db2d953b": {
     "label": "gol-1+brain_kind=float16, 30-number messages, mutation 0.2, 15,795 weights",
-    "secondsPerAgent": 0.0009158226377556467,
-    "agentsPerToken": 0.1329,
+    "secondsPerAgent": 0.0009040516382588064,
+    "agentsPerToken": 0.133359375,
     "runs": 72
    },
    "f36d271472": {
@@ -38,14 +38,14 @@
    }
   },
   "runs": 144,
-  "fitted": "2026-10-08T21:50:21+0200"
+  "fitted": "2026-10-09T06:59:50+0200"
  },
  "runs": [
   {
    "id": "B1-409600-s003",
    "tokens": 409600,
    "weights": 15795,
-   "iterations": 72,
+   "iterations": 600,
    "peakMB": 11032.8
   },
   {
@@ -1050,5 +1050,5 @@
    "peakMB": 582.5
   }
  ],
- "updated": "2026-10-08"
+ "updated": "2026-10-09"
 }

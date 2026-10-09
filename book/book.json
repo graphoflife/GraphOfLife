@@ -198,12 +198,14 @@
           "title": "How does a world's size follow its tokens?",
           "file": "chapters/31-how-does-a-worlds-size-follow-its-tokens.md",
           "experiment": "E08",
-          "status": "ready"
+          "status": "analysed"
         },
         {
           "id": "32",
           "title": "How fast should brains change?",
-          "note": "The mutation probability, against the baseline runs of Chapter 9."
+          "file": "chapters/32-how-fast-should-brains-change.md",
+          "experiment": "E09",
+          "status": "ready"
         },
         {
           "id": "33",

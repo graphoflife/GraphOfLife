@@ -30,7 +30,7 @@ What is measured, and how each figure is estimated:
 - **Disk:** 72 bytes per agent per iteration.
 - **Memory:** 300 MB, plus 68.6 times every byte of every brain.
 
-Fitted to 144 recorded runs on 2026-10-08 by `python3 gol_lab.py costs`.
+Fitted to 144 recorded runs on 2026-10-09 by `python3 gol_lab.py costs`.
 <!-- /costs -->
 
 Each kind of run — the same settings apart from the size of the world and
@@ -79,5 +79,5 @@ about seven hours.
 <!-- turns -->
 ---
 
-← [Chapter 31 · How does a world's size follow its tokens?](31-how-does-a-worlds-size-follow-its-tokens.md) · [Contents](../README.md)
+← [Chapter 32 · How fast should brains change?](32-how-fast-should-brains-change.md) · [Contents](../README.md)
 <!-- /turns -->

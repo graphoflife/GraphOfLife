@@ -18,8 +18,16 @@ recovers in the game is not extinct.
 
 A world of a handful of agents is not a population any more, and its
 statistics — inequality, clustering, families — mean little. Stopping at 20
-also saves running a dying world to its end. [Chapter 31](../chapters/31-how-does-a-worlds-size-follow-its-tokens.md)
-runs small worlds with the threshold at 0 to see what happens below it.
+also saves running a dying world to its end.
+
+But a world at 20 agents is not always dying.
+[Chapter 31](../chapters/31-how-does-a-worlds-size-follow-its-tokens.md) ran
+small worlds with the threshold at 0: all six worlds of 800 and 1,600 tokens
+lived to iteration 600, and five of them were worlds the threshold had stopped
+after their first game; one fell to 4 agents and came back. So "extinct" in
+this book means exactly what the rule says — **fell to 20 agents or fewer** —
+which is not always the same as dying. An experiment that cares about
+extinction should run a condition with the threshold at 0 beside it.
 
 ## An empty world
 

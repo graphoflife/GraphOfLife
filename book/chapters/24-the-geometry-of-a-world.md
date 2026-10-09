@@ -248,7 +248,11 @@ heavy-tailed: most agents are on a few, a handful on hundreds.
 - **The world is a stretched network of stars.** Twice the distances and a
   thirty-second of the spectral gap of a random network with the same
   connections. Growth by birth is local — a child joins its parent's
-  neighbourhood — and nothing ever makes a long jump.
+  neighbourhood — and nothing ever makes a long jump. The gap widens with
+  size: in worlds of up to 60,000 agents, distances grow like the number of
+  agents to the power 0.25 to 0.30, as in a body of about three dimensions,
+  not with its logarithm, as in a random network
+  ([Chapter 31](31-how-does-a-worlds-size-follow-its-tokens.md)).
 - **The world mixes slowly.** Tokens settle within neighbourhoods and not
   across the world; regions of a world are only loosely coupled.
 - **For evolution, that cuts both ways.** A network that mixes slowly lets

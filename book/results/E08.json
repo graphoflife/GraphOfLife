@@ -1,0 +1,2322 @@
+{
+ "experiment": "E08",
+ "analysed": "2026-10-09",
+ "kind": "scaling",
+ "engines": {
+  "engines": [
+   "f820369a1583af53"
+  ],
+  "agree": true,
+  "checked": []
+ },
+ "reference": "baseline",
+ "figures": [
+  "agents",
+  "connections",
+  "degree"
+ ],
+ "window": {
+  "from": 500,
+  "to": 599
+ },
+ "check": {
+  "from": 400,
+  "to": 499
+ },
+ "fitFrom": 3200,
+ "scaling": {
+  "agents": {
+   "baseline": {
+    "points": [
+     {
+      "tokens": 1600,
+      "seed": 2,
+      "value": 56.19,
+      "settling": 0.8037476755828923
+     },
+     {
+      "tokens": 3200,
+      "seed": 1,
+      "value": 575.21,
+      "settling": 1.1950677304080446
+     },
+     {
+      "tokens": 3200,
+      "seed": 2,
+      "value": 481.27,
+      "settling": 1.284619901772368
+     },
+     {
+      "tokens": 3200,
+      "seed": 3,
+      "value": 282.32,
+      "settling": 0.9694389121626261
+     },
+     {
+      "tokens": 6400,
+      "seed": 1,
+      "value": 874.85,
+      "settling": 0.8545626819309591
+     },
+     {
+      "tokens": 6400,
+      "seed": 2,
+      "value": 1279.34,
+      "settling": 1.0038684567760767
+     },
+     {
+      "tokens": 6400,
+      "seed": 3,
+      "value": 1144.81,
+      "settling": 2.1509281527130617
+     },
+     {
+      "tokens": 12800,
+      "seed": 1,
+      "value": 1689.16,
+      "settling": 1.039246448500957
+     },
+     {
+      "tokens": 12800,
+      "seed": 2,
+      "value": 1158.85,
+      "settling": 0.9506406785778739
+     },
+     {
+      "tokens": 12800,
+      "seed": 3,
+      "value": 2724.46,
+      "settling": 1.1145401661709902
+     },
+     {
+      "tokens": 25600,
+      "seed": 1,
+      "value": 3503.71,
+      "settling": 1.1218980345947192
+     },
+     {
+      "tokens": 25600,
+      "seed": 2,
+      "value": 2910.44,
+      "settling": 0.9870616124995336
+     },
+     {
+      "tokens": 25600,
+      "seed": 3,
+      "value": 3208.06,
+      "settling": 1.2843336642859429
+     },
+     {
+      "tokens": 51200,
+      "seed": 1,
+      "value": 5165.26,
+      "settling": 0.8264296994123285
+     },
+     {
+      "tokens": 51200,
+      "seed": 2,
+      "value": 7799.8,
+      "settling": 1.0768013761322237
+     },
+     {
+      "tokens": 51200,
+      "seed": 3,
+      "value": 5690.43,
+      "settling": 0.8858258339599028
+     },
+     {
+      "tokens": 102400,
+      "seed": 1,
+      "value": 17920.15,
+      "settling": 1.0738435006046312
+     },
+     {
+      "tokens": 102400,
+      "seed": 2,
+      "value": 18409.73,
+      "settling": 1.0800124370447939
+     },
+     {
+      "tokens": 102400,
+      "seed": 3,
+      "value": 11128.9,
+      "settling": 0.8356893391394327
+     },
+     {
+      "tokens": 204800,
+      "seed": 1,
+      "value": 34952.16,
+      "settling": 0.9869025373263288
+     },
+     {
+      "tokens": 204800,
+      "seed": 2,
+      "value": 27465.91,
+      "settling": 1.124128486514384
+     },
+     {
+      "tokens": 204800,
+      "seed": 3,
+      "value": 26628.4,
+      "settling": 0.9443719779522176
+     },
+     {
+      "tokens": 409600,
+      "seed": 1,
+      "value": 66977.77,
+      "settling": 1.0058459043228185
+     },
+     {
+      "tokens": 409600,
+      "seed": 2,
+      "value": 59805.3,
+      "settling": 1.1067117972609646
+     },
+     {
+      "tokens": 409600,
+      "seed": 3,
+      "value": 54916.6,
+      "settling": 1.0218581776974762
+     }
+    ],
+    "bySize": {
+     "1600": {
+      "n": 1,
+      "mean": 56.19,
+      "perToken": 0.03511875,
+      "cv": null,
+      "settling": 0.8037476755828923
+     },
+     "3200": {
+      "n": 3,
+      "mean": 446.26666666666665,
+      "perToken": 0.13945833333333332,
+      "cv": 0.33511248964338425,
+      "settling": 1.1950677304080446
+     },
+     "6400": {
+      "n": 3,
+      "mean": 1099.6666666666667,
+      "perToken": 0.1718229166666667,
+      "cv": 0.18731951793200774,
+      "settling": 1.0038684567760767
+     },
+     "12800": {
+      "n": 3,
+      "mean": 1857.49,
+      "perToken": 0.14511640625,
+      "cv": 0.42867691925976076,
+      "settling": 1.039246448500957
+     },
+     "25600": {
+      "n": 3,
+      "mean": 3207.403333333333,
+      "perToken": 0.12528919270833333,
+      "cv": 0.09248464078249541,
+      "settling": 1.1218980345947192
+     },
+     "51200": {
+      "n": 3,
+      "mean": 6218.496666666667,
+      "perToken": 0.12145501302083334,
+      "cv": 0.22423366611646062,
+      "settling": 0.8858258339599028
+     },
+     "102400": {
+      "n": 3,
+      "mean": 15819.593333333336,
+      "perToken": 0.15448821614583336,
+      "cv": 0.2572524014059967,
+      "settling": 1.0738435006046312
+     },
+     "204800": {
+      "n": 3,
+      "mean": 29682.156666666666,
+      "perToken": 0.14493240559895834,
+      "cv": 0.1544068205036432,
+      "settling": 0.9869025373263288
+     },
+     "409600": {
+      "n": 3,
+      "mean": 60566.55666666667,
+      "perToken": 0.14786756998697917,
+      "cv": 0.10016276466830536,
+      "settling": 1.0218581776974762
+     }
+    },
+    "local": [
+     {
+      "from": 1600,
+      "to": 3200,
+      "exponent": 2.989520744888534
+     },
+     {
+      "from": 3200,
+      "to": 6400,
+      "exponent": 1.3010883217657638
+     },
+     {
+      "from": 6400,
+      "to": 12800,
+      "exponent": 0.7562881666969923
+     },
+     {
+      "from": 12800,
+      "to": 25600,
+      "exponent": 0.7880513412734808
+     },
+     {
+      "from": 25600,
+      "to": 51200,
+      "exponent": 0.955160063099913
+     },
+     {
+      "from": 51200,
+      "to": 102400,
+      "exponent": 1.3470747602560955
+     },
+     {
+      "from": 102400,
+      "to": 204800,
+      "exponent": 0.9078834064803127
+     },
+     {
+      "from": 204800,
+      "to": 409600,
+      "exponent": 1.02892547344011
+     }
+    ],
+    "fit": {
+     "n": 24,
+     "sizes": 8,
+     "exponent": 1.0019159288148247,
+     "interval": [
+      0.9521335864194597,
+      1.0555806114272956
+     ],
+     "prefactor": 0.13721615106127436,
+     "r2": 0.9788700240877344,
+     "bend": 0.04186093254317291,
+     "bendInterval": [
+      -0.048246320091737044,
+      0.12449505826906337
+     ]
+    },
+    "fitAll": {
+     "n": 25,
+     "sizes": 9,
+     "exponent": 1.0609217637086161,
+     "interval": [
+      1.0194483986570646,
+      1.1059291754534433
+     ],
+     "prefactor": 0.07041888482752541,
+     "r2": 0.9645734349523475,
+     "bend": -0.08859074720854923,
+     "bendInterval": [
+      -0.14886818567344443,
+      -0.03025798148886393
+     ]
+    }
+   },
+   "stopped only when empty": {
+    "points": [
+     {
+      "tokens": 800,
+      "seed": 1,
+      "value": 72.15,
+      "settling": 0.6994667959282598
+     },
+     {
+      "tokens": 800,
+      "seed": 2,
+      "value": 123.54,
+      "settling": 0.7431424446583254
+     },
+     {
+      "tokens": 800,
+      "seed": 3,
+      "value": 23.26,
+      "settling": 0.33039772727272726
+     },
+     {
+      "tokens": 1600,
+      "seed": 1,
+      "value": 72.34,
+      "settling": 0.45597226599432716
+     },
+     {
+      "tokens": 1600,
+      "seed": 2,
+      "value": 56.19,
+      "settling": 0.8037476755828923
+     },
+     {
+      "tokens": 1600,
+      "seed": 3,
+      "value": 255.04,
+      "settling": 0.8706814147207428
+     },
+     {
+      "tokens": 3200,
+      "seed": 1,
+      "value": 575.21,
+      "settling": 1.1950677304080446
+     },
+     {
+      "tokens": 3200,
+      "seed": 2,
+      "value": 481.27,
+      "settling": 1.284619901772368
+     },
+     {
+      "tokens": 3200,
+      "seed": 3,
+      "value": 282.32,
+      "settling": 0.9694389121626261
+     },
+     {
+      "tokens": 6400,
+      "seed": 1,
+      "value": 874.85,
+      "settling": 0.8545626819309591
+     },
+     {
+      "tokens": 6400,
+      "seed": 2,
+      "value": 1279.34,
+      "settling": 1.0038684567760767
+     },
+     {
+      "tokens": 6400,
+      "seed": 3,
+      "value": 1144.81,
+      "settling": 2.1509281527130617
+     }
+    ],
+    "bySize": {
+     "800": {
+      "n": 3,
+      "mean": 72.98333333333333,
+      "perToken": 0.09122916666666667,
+      "cv": 0.6870773261714423,
+      "settling": 0.6994667959282598
+     },
+     "1600": {
+      "n": 3,
+      "mean": 127.85666666666667,
+      "perToken": 0.07991041666666666,
+      "cv": 0.8637766455871774,
+      "settling": 0.8037476755828923
+     },
+     "3200": {
+      "n": 3,
+      "mean": 446.26666666666665,
+      "perToken": 0.13945833333333332,
+      "cv": 0.33511248964338425,
+      "settling": 1.1950677304080446
+     },
+     "6400": {
+      "n": 3,
+      "mean": 1099.6666666666667,
+      "perToken": 0.1718229166666667,
+      "cv": 0.18731951793200774,
+      "settling": 1.0038684567760767
+     }
+    },
+    "local": [
+     {
+      "from": 800,
+      "to": 1600,
+      "exponent": 0.8088884380739884
+     },
+     {
+      "from": 1600,
+      "to": 3200,
+      "exponent": 1.80337866315989
+     },
+     {
+      "from": 3200,
+      "to": 6400,
+      "exponent": 1.3010883217657638
+     }
+    ],
+    "fit": {
+     "n": 6,
+     "sizes": 2
+    },
+    "fitAll": {
+     "n": 12,
+     "sizes": 4,
+     "exponent": 1.467219131852291,
+     "interval": [
+      1.12277572831125,
+      1.8579453370960568
+     ],
+     "prefactor": 0.002748470968215016,
+     "r2": 0.8144771451389576,
+     "bend": 0.4742416053891619,
+     "bendInterval": [
+      -0.9468387140358723,
+      1.750050757290726
+     ]
+    }
+   }
+  },
+  "connections": {
+   "baseline": {
+    "points": [
+     {
+      "tokens": 1600,
+      "seed": 2,
+      "value": 125.72,
+      "settling": 1.1876062724352918
+     },
+     {
+      "tokens": 3200,
+      "seed": 1,
+      "value": 1064.2,
+      "settling": 1.345879020121157
+     },
+     {
+      "tokens": 3200,
+      "seed": 2,
+      "value": 635.61,
+      "settling": 0.9497773527390095
+     },
+     {
+      "tokens": 3200,
+      "seed": 3,
+      "value": 346.85,
+      "settling": 1.0036749811910413
+     },
+     {
+      "tokens": 6400,
+      "seed": 1,
+      "value": 1262.03,
+      "settling": 0.8394170779402178
+     },
+     {
+      "tokens": 6400,
+      "seed": 2,
+      "value": 2657.65,
+      "settling": 1.0651306139134478
+     },
+     {
+      "tokens": 6400,
+      "seed": 3,
+      "value": 1367.82,
+      "settling": 1.652635140033347
+     },
+     {
+      "tokens": 12800,
+      "seed": 1,
+      "value": 3192.72,
+      "settling": 1.1301223669166862
+     },
+     {
+      "tokens": 12800,
+      "seed": 2,
+      "value": 1915.16,
+      "settling": 1.017154753938158
+     },
+     {
+      "tokens": 12800,
+      "seed": 3,
+      "value": 4532.41,
+      "settling": 1.0468789338137638
+     },
+     {
+      "tokens": 25600,
+      "seed": 1,
+      "value": 6266.08,
+      "settling": 1.2053514922430293
+     },
+     {
+      "tokens": 25600,
+      "seed": 2,
+      "value": 4340.57,
+      "settling": 0.9363414565747776
+     },
+     {
+      "tokens": 25600,
+      "seed": 3,
+      "value": 5885.6,
+      "settling": 1.2388467796424656
+     },
+     {
+      "tokens": 51200,
+      "seed": 1,
+      "value": 9659.92,
+      "settling": 0.9336214761779579
+     },
+     {
+      "tokens": 51200,
+      "seed": 2,
+      "value": 13419.32,
+      "settling": 1.0885528246619192
+     },
+     {
+      "tokens": 51200,
+      "seed": 3,
+      "value": 10904.09,
+      "settling": 0.9645036571051508
+     },
+     {
+      "tokens": 102400,
+      "seed": 1,
+      "value": 32025.89,
+      "settling": 0.9929113833002682
+     },
+     {
+      "tokens": 102400,
+      "seed": 2,
+      "value": 30487.88,
+      "settling": 1.0097357348764255
+     },
+     {
+      "tokens": 102400,
+      "seed": 3,
+      "value": 21215.07,
+      "settling": 0.9387626958219777
+     },
+     {
+      "tokens": 204800,
+      "seed": 1,
+      "value": 57803.15,
+      "settling": 0.9014790156323227
+     },
+     {
+      "tokens": 204800,
+      "seed": 2,
+      "value": 46834.38,
+      "settling": 1.1185363280140757
+     },
+     {
+      "tokens": 204800,
+      "seed": 3,
+      "value": 50132.23,
+      "settling": 0.8892418933677355
+     },
+     {
+      "tokens": 409600,
+      "seed": 1,
+      "value": 128754.7,
+      "settling": 1.0146908473970917
+     },
+     {
+      "tokens": 409600,
+      "seed": 2,
+      "value": 110499.9,
+      "settling": 1.0799800736165905
+     },
+     {
+      "tokens": 409600,
+      "seed": 3,
+      "value": 90523.3,
+      "settling": 0.9915551107424376
+     }
+    ],
+    "bySize": {
+     "1600": {
+      "n": 1,
+      "mean": 125.72,
+      "perToken": 0.078575,
+      "cv": null,
+      "settling": 1.1876062724352918
+     },
+     "3200": {
+      "n": 3,
+      "mean": 682.2199999999999,
+      "perToken": 0.21319374999999996,
+      "cv": 0.5290657350572632,
+      "settling": 1.0036749811910413
+     },
+     "6400": {
+      "n": 3,
+      "mean": 1762.5,
+      "perToken": 0.275390625,
+      "cv": 0.44086531112368726,
+      "settling": 1.0651306139134478
+     },
+     "12800": {
+      "n": 3,
+      "mean": 3213.4300000000003,
+      "perToken": 0.25104921875,
+      "cv": 0.40727443918969647,
+      "settling": 1.0468789338137638
+     },
+     "25600": {
+      "n": 3,
+      "mean": 5497.416666666667,
+      "perToken": 0.21474283854166668,
+      "cv": 0.18549816696218954,
+      "settling": 1.2053514922430293
+     },
+     "51200": {
+      "n": 3,
+      "mean": 11327.776666666667,
+      "perToken": 0.22124563802083333,
+      "cv": 0.16906914423178654,
+      "settling": 0.9645036571051508
+     },
+     "102400": {
+      "n": 3,
+      "mean": 27909.61333333333,
+      "perToken": 0.2725548177083333,
+      "cv": 0.20954869293784215,
+      "settling": 0.9929113833002682
+     },
+     "204800": {
+      "n": 3,
+      "mean": 51589.920000000006,
+      "perToken": 0.25190390625000003,
+      "cv": 0.10908718618715908,
+      "settling": 0.9014790156323227
+     },
+     "409600": {
+      "n": 3,
+      "mean": 109925.96666666666,
+      "perToken": 0.26837394205729165,
+      "cv": 0.17395490295376106,
+      "settling": 1.0146908473970917
+     }
+    },
+    "local": [
+     {
+      "from": 1600,
+      "to": 3200,
+      "exponent": 2.4400228724511686
+     },
+     {
+      "from": 3200,
+      "to": 6400,
+      "exponent": 1.3693143026983234
+     },
+     {
+      "from": 6400,
+      "to": 12800,
+      "exponent": 0.8664907881468095
+     },
+     {
+      "from": 12800,
+      "to": 25600,
+      "exponent": 0.774639784300046
+     },
+     {
+      "from": 25600,
+      "to": 51200,
+      "exponent": 1.04303899221857
+     },
+     {
+      "from": 51200,
+      "to": 102400,
+      "exponent": 1.3008974098000212
+     },
+     {
+      "from": 102400,
+      "to": 204800,
+      "exponent": 0.8863270722292791
+     },
+     {
+      "from": 204800,
+      "to": 409600,
+      "exponent": 1.091371104942637
+     }
+    ],
+    "fit": {
+     "n": 24,
+     "sizes": 8,
+     "exponent": 1.0426976748510437,
+     "interval": [
+      0.9661294066584336,
+      1.118012207555075
+     ],
+     "prefactor": 0.1511586025463466,
+     "r2": 0.9726461052494263,
+     "bend": 0.0023182343381110897,
+     "bendInterval": [
+      -0.11594604759416244,
+      0.12097040654021458
+     ]
+    },
+    "fitAll": {
+     "n": 25,
+     "sizes": 9,
+     "exponent": 1.0842339736058426,
+     "interval": [
+      1.0220734041086148,
+      1.147444795198685
+     ],
+     "prefactor": 0.09451297701441855,
+     "r2": 0.9689496154866452,
+     "bend": -0.08216047157119352,
+     "bendInterval": [
+      -0.157125054376966,
+      -0.006706079272247629
+     ]
+    }
+   },
+   "stopped only when empty": {
+    "points": [
+     {
+      "tokens": 800,
+      "seed": 1,
+      "value": 81.34,
+      "settling": 0.6764241164241165
+     },
+     {
+      "tokens": 800,
+      "seed": 2,
+      "value": 181.79,
+      "settling": 0.6764027385027533
+     },
+     {
+      "tokens": 800,
+      "seed": 3,
+      "value": 27.39,
+      "settling": 0.3013532841896798
+     },
+     {
+      "tokens": 1600,
+      "seed": 1,
+      "value": 88.12,
+      "settling": 0.4023193169885404
+     },
+     {
+      "tokens": 1600,
+      "seed": 2,
+      "value": 125.72,
+      "settling": 1.1876062724352918
+     },
+     {
+      "tokens": 1600,
+      "seed": 3,
+      "value": 414.35,
+      "settling": 0.855600066077476
+     },
+     {
+      "tokens": 3200,
+      "seed": 1,
+      "value": 1064.2,
+      "settling": 1.345879020121157
+     },
+     {
+      "tokens": 3200,
+      "seed": 2,
+      "value": 635.61,
+      "settling": 0.9497773527390095
+     },
+     {
+      "tokens": 3200,
+      "seed": 3,
+      "value": 346.85,
+      "settling": 1.0036749811910413
+     },
+     {
+      "tokens": 6400,
+      "seed": 1,
+      "value": 1262.03,
+      "settling": 0.8394170779402178
+     },
+     {
+      "tokens": 6400,
+      "seed": 2,
+      "value": 2657.65,
+      "settling": 1.0651306139134478
+     },
+     {
+      "tokens": 6400,
+      "seed": 3,
+      "value": 1367.82,
+      "settling": 1.652635140033347
+     }
+    ],
+    "bySize": {
+     "800": {
+      "n": 3,
+      "mean": 96.83999999999999,
+      "perToken": 0.12104999999999999,
+      "cv": 0.8091524945555584,
+      "settling": 0.6764027385027533
+     },
+     "1600": {
+      "n": 3,
+      "mean": 209.39666666666668,
+      "perToken": 0.13087291666666667,
+      "cv": 0.8523901265867168,
+      "settling": 0.855600066077476
+     },
+     "3200": {
+      "n": 3,
+      "mean": 682.2199999999999,
+      "perToken": 0.21319374999999996,
+      "cv": 0.5290657350572632,
+      "settling": 1.0036749811910413
+     },
+     "6400": {
+      "n": 3,
+      "mean": 1762.5,
+      "perToken": 0.275390625,
+      "cv": 0.44086531112368726,
+      "settling": 1.0651306139134478
+     }
+    },
+    "local": [
+     {
+      "from": 800,
+      "to": 1600,
+      "exponent": 1.11256349209934
+     },
+     {
+      "from": 1600,
+      "to": 3200,
+      "exponent": 1.7039985731516434
+     },
+     {
+      "from": 3200,
+      "to": 6400,
+      "exponent": 1.3693143026983234
+     }
+    ],
+    "fit": {
+     "n": 6,
+     "sizes": 2
+    },
+    "fitAll": {
+     "n": 12,
+     "sizes": 4,
+     "exponent": 1.535937762924391,
+     "interval": [
+      1.1259028264563467,
+      1.967656851111054
+     ],
+     "prefactor": 0.0023582770587710186,
+     "r2": 0.8015356777367585,
+     "bend": 0.21781724680725917,
+     "bendInterval": [
+      -1.4038255921208471,
+      1.7338713078741033
+     ]
+    }
+   }
+  },
+  "degree": {
+   "baseline": {
+    "points": [
+     {
+      "tokens": 1600,
+      "seed": 2,
+      "value": 3.770506281005664,
+      "settling": 1.2460464110728997
+     },
+     {
+      "tokens": 3200,
+      "seed": 1,
+      "value": 3.6910811705579403,
+      "settling": 1.1243893037648547
+     },
+     {
+      "tokens": 3200,
+      "seed": 2,
+      "value": 2.6861362147861962,
+      "settling": 0.7635674968413295
+     },
+     {
+      "tokens": 3200,
+      "seed": 3,
+      "value": 2.459027403060747,
+      "settling": 1.0344657129054362
+     },
+     {
+      "tokens": 6400,
+      "seed": 1,
+      "value": 2.8721799317893373,
+      "settling": 0.9790949531124938
+     },
+     {
+      "tokens": 6400,
+      "seed": 2,
+      "value": 4.186457053199533,
+      "settling": 1.0673484404919278
+     },
+     {
+      "tokens": 6400,
+      "seed": 3,
+      "value": 2.4162422568752517,
+      "settling": 0.7767313856157927
+     },
+     {
+      "tokens": 12800,
+      "seed": 1,
+      "value": 3.7690092547035614,
+      "settling": 1.085146730314396
+     },
+     {
+      "tokens": 12800,
+      "seed": 2,
+      "value": 3.3015508656038706,
+      "settling": 1.0662015707690817
+     },
+     {
+      "tokens": 12800,
+      "seed": 3,
+      "value": 3.329525680031568,
+      "settling": 0.9366159607366896
+     },
+     {
+      "tokens": 25600,
+      "seed": 1,
+      "value": 3.5807555679708276,
+      "settling": 1.0701473962967192
+     },
+     {
+      "tokens": 25600,
+      "seed": 2,
+      "value": 2.9861647534242133,
+      "settling": 0.948191645289571
+     },
+     {
+      "tokens": 25600,
+      "seed": 3,
+      "value": 3.665332099649959,
+      "settling": 0.9636605686032553
+     },
+     {
+      "tokens": 51200,
+      "seed": 1,
+      "value": 3.7241121250685962,
+      "settling": 1.1263129290510203
+     },
+     {
+      "tokens": 51200,
+      "seed": 2,
+      "value": 3.4686724564185614,
+      "settling": 1.0197985221653014
+     },
+     {
+      "tokens": 51200,
+      "seed": 3,
+      "value": 3.8438531302799497,
+      "settling": 1.09054737705713
+     },
+     {
+      "tokens": 102400,
+      "seed": 1,
+      "value": 3.5725188666819943,
+      "settling": 0.923287380178712
+     },
+     {
+      "tokens": 102400,
+      "seed": 2,
+      "value": 3.312149681419443,
+      "settling": 0.9343307650142869
+     },
+     {
+      "tokens": 102400,
+      "seed": 3,
+      "value": 3.812715599956439,
+      "settling": 1.1092204779129171
+     },
+     {
+      "tokens": 204800,
+      "seed": 1,
+      "value": 3.3070856090309464,
+      "settling": 0.9127732160863905
+     },
+     {
+      "tokens": 204800,
+      "seed": 2,
+      "value": 3.41183251086444,
+      "settling": 0.9955711332625043
+     },
+     {
+      "tokens": 204800,
+      "seed": 3,
+      "value": 3.766248270597597,
+      "settling": 0.938956438371251
+     },
+     {
+      "tokens": 409600,
+      "seed": 1,
+      "value": 3.857939659803878,
+      "settling": 1.008292714537754
+     },
+     {
+      "tokens": 409600,
+      "seed": 2,
+      "value": 3.7157321221034705,
+      "settling": 0.9795531170165656
+     },
+     {
+      "tokens": 409600,
+      "seed": 3,
+      "value": 3.2962023736516666,
+      "settling": 0.9695144156878681
+     }
+    ],
+    "bySize": {
+     "1600": {
+      "n": 1,
+      "mean": 3.770506281005664,
+      "perToken": 0.0023565664256285403,
+      "cv": null,
+      "settling": 1.2460464110728997
+     },
+     "3200": {
+      "n": 3,
+      "mean": 2.9454149294682943,
+      "perToken": 0.000920442165458842,
+      "cv": 0.2226083168227123,
+      "settling": 1.0344657129054362
+     },
+     "6400": {
+      "n": 3,
+      "mean": 3.1582930806213736,
+      "perToken": 0.0004934832938470896,
+      "cv": 0.2910229662508943,
+      "settling": 0.9790949531124938
+     },
+     "12800": {
+      "n": 3,
+      "mean": 3.4666952667796664,
+      "perToken": 0.00027083556771716145,
+      "cv": 0.07562965560614307,
+      "settling": 1.0662015707690817
+     },
+     "25600": {
+      "n": 3,
+      "mean": 3.4107508070150003,
+      "perToken": 0.00013323245339902346,
+      "cv": 0.10851746739301962,
+      "settling": 0.9636605686032553
+     },
+     "51200": {
+      "n": 3,
+      "mean": 3.678879237255702,
+      "perToken": 7.185311010265043e-05,
+      "cv": 0.05209106923017303,
+      "settling": 1.09054737705713
+     },
+     "102400": {
+      "n": 3,
+      "mean": 3.565794716019292,
+      "perToken": 3.48222140236259e-05,
+      "cv": 0.07020894770114232,
+      "settling": 0.9343307650142869
+     },
+     "204800": {
+      "n": 3,
+      "mean": 3.495055463497661,
+      "perToken": 1.7065700505359672e-05,
+      "cv": 0.06884829771916229,
+      "settling": 0.938956438371251
+     },
+     "409600": {
+      "n": 3,
+      "mean": 3.6232913851863384,
+      "perToken": 8.845926233365084e-06,
+      "cv": 0.08060490745958317,
+      "settling": 0.9795531170165656
+     }
+    },
+    "local": [
+     {
+      "from": 1600,
+      "to": 3200,
+      "exponent": -0.3562873677858777
+     },
+     {
+      "from": 3200,
+      "to": 6400,
+      "exponent": 0.10067417024362864
+     },
+     {
+      "from": 6400,
+      "to": 12800,
+      "exponent": 0.13441596935494396
+     },
+     {
+      "from": 12800,
+      "to": 25600,
+      "exponent": -0.023471670756231657
+     },
+     {
+      "from": 25600,
+      "to": 51200,
+      "exponent": 0.10917696522945919
+     },
+     {
+      "from": 51200,
+      "to": 102400,
+      "exponent": -0.04504267031468961
+     },
+     {
+      "from": 102400,
+      "to": 204800,
+      "exponent": -0.028908298822238027
+     },
+     {
+      "from": 204800,
+      "to": 409600,
+      "exponent": 0.05198548192806443
+     }
+    ],
+    "fit": {
+     "n": 24,
+     "sizes": 8,
+     "exponent": 0.04021935562758717,
+     "interval": [
+      0.003884523527927434,
+      0.07245115600223254
+     ],
+     "prefactor": 2.2201969639146064,
+     "r2": 0.20903179512255954,
+     "bend": -0.038074979810393796,
+     "bendInterval": [
+      -0.08055919655724171,
+      0.010516976838488394
+     ]
+    },
+    "fitAll": {
+     "n": 25,
+     "sizes": 9,
+     "exponent": 0.030239705769532062,
+     "interval": [
+      0.00021437481248544267,
+      0.05748442790550947
+     ],
+     "prefactor": 2.4853705753644264,
+     "r2": 0.13324719355880643,
+     "bend": -0.007619542417075627,
+     "bendInterval": [
+      -0.0351850389283218,
+      0.021681778489116187
+     ]
+    }
+   },
+   "stopped only when empty": {
+    "points": [
+     {
+      "tokens": 800,
+      "seed": 1,
+      "value": 2.265743346600955,
+      "settling": 0.9727794900470632
+     },
+     {
+      "tokens": 800,
+      "seed": 2,
+      "value": 2.943583209021038,
+      "settling": 0.9066450976484922
+     },
+     {
+      "tokens": 800,
+      "seed": 3,
+      "value": 2.295981412744573,
+      "settling": 0.8881085566503615
+     },
+     {
+      "tokens": 1600,
+      "seed": 1,
+      "value": 2.428828506615145,
+      "settling": 0.8868140862660933
+     },
+     {
+      "tokens": 1600,
+      "seed": 2,
+      "value": 3.770506281005664,
+      "settling": 1.2460464110728997
+     },
+     {
+      "tokens": 1600,
+      "seed": 3,
+      "value": 3.2451422049633294,
+      "settling": 0.9681472571446106
+     },
+     {
+      "tokens": 3200,
+      "seed": 1,
+      "value": 3.6910811705579403,
+      "settling": 1.1243893037648547
+     },
+     {
+      "tokens": 3200,
+      "seed": 2,
+      "value": 2.6861362147861962,
+      "settling": 0.7635674968413295
+     },
+     {
+      "tokens": 3200,
+      "seed": 3,
+      "value": 2.459027403060747,
+      "settling": 1.0344657129054362
+     },
+     {
+      "tokens": 6400,
+      "seed": 1,
+      "value": 2.8721799317893373,
+      "settling": 0.9790949531124938
+     },
+     {
+      "tokens": 6400,
+      "seed": 2,
+      "value": 4.186457053199533,
+      "settling": 1.0673484404919278
+     },
+     {
+      "tokens": 6400,
+      "seed": 3,
+      "value": 2.4162422568752517,
+      "settling": 0.7767313856157927
+     }
+    ],
+    "bySize": {
+     "800": {
+      "n": 3,
+      "mean": 2.5017693227888556,
+      "perToken": 0.0031272116534860695,
+      "cv": 0.15305993164298112,
+      "settling": 0.9066450976484922
+     },
+     "1600": {
+      "n": 3,
+      "mean": 3.1481589975280464,
+      "perToken": 0.001967599373455029,
+      "cv": 0.2147528978121628,
+      "settling": 0.9681472571446106
+     },
+     "3200": {
+      "n": 3,
+      "mean": 2.9454149294682943,
+      "perToken": 0.000920442165458842,
+      "cv": 0.2226083168227123,
+      "settling": 1.0344657129054362
+     },
+     "6400": {
+      "n": 3,
+      "mean": 3.1582930806213736,
+      "perToken": 0.0004934832938470896,
+      "cv": 0.2910229662508943,
+      "settling": 0.9790949531124938
+     }
+    },
+    "local": [
+     {
+      "from": 800,
+      "to": 1600,
+      "exponent": 0.33155963485339696
+     },
+     {
+      "from": 1600,
+      "to": 3200,
+      "exponent": -0.09603752072150187
+     },
+     {
+      "from": 3200,
+      "to": 6400,
+      "exponent": 0.10067417024362864
+     }
+    ],
+    "fit": {
+     "n": 6,
+     "sizes": 2
+    },
+    "fitAll": {
+     "n": 12,
+     "sizes": 4,
+     "exponent": 0.08287599654073309,
+     "interval": [
+      -0.044892697407347686,
+      0.22212865687826258
+     ],
+     "prefactor": 1.5170808750775564,
+     "r2": 0.10155893074020217,
+     "bend": -0.19479078682134787,
+     "bendInterval": [
+      -0.6656648826935989,
+      0.3133656002224007
+     ]
+    }
+   }
+  }
+ },
+ "extinct": {
+  "baseline": [
+   {
+    "tokens": 800,
+    "seed": 1,
+    "at": 1
+   },
+   {
+    "tokens": 800,
+    "seed": 2,
+    "at": 1
+   },
+   {
+    "tokens": 800,
+    "seed": 3,
+    "at": 1
+   },
+   {
+    "tokens": 1600,
+    "seed": 1,
+    "at": 1
+   },
+   {
+    "tokens": 1600,
+    "seed": 3,
+    "at": 1
+   }
+  ],
+  "stopped only when empty": []
+ },
+ "reached": {
+  "baseline": 25,
+  "stopped only when empty": 12
+ },
+ "citation": {
+  "strains": [
+   "gol-1+brain_kind=float16"
+  ],
+  "commits": [
+   "4bc71658922c65e905377d1a385207fb721e7cd4"
+  ],
+  "engines": [
+   "f820369a1583af53"
+  ],
+  "environments": [
+   {
+    "python": "3.12.3",
+    "numpy": "2.5.1",
+    "networkx": "3.6.1",
+    "blas": "scipy-openblas 0.3.33.112.0",
+    "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+    "dispatch": "AVX2"
+   }
+  ],
+  "setup": {
+   "baseline": "B1",
+   "world": {
+    "total_tokens": [
+     800,
+     1600,
+     3200,
+     6400,
+     12800,
+     25600,
+     51200,
+     102400,
+     204800,
+     409600
+    ]
+   },
+   "seeds": "1..3",
+   "iterations": 600,
+   "workers": 1,
+   "record": {
+    "heavy_every": 25
+   },
+   "conditions": [
+    {
+     "name": "baseline"
+    },
+    {
+     "name": "stopped only when empty",
+     "set": {
+      "extinction_threshold": 0
+     },
+     "sizes": [
+      800,
+      1600,
+      3200,
+      6400
+     ]
+    }
+   ]
+  },
+  "runs": [
+   {
+    "id": "B1-800-s001",
+    "condition": "baseline",
+    "seed": 1,
+    "iterations": 1,
+    "status": "extinct",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f820369a1583af53",
+    "commit": "4bc71658922c65e905377d1a385207fb721e7cd4",
+    "seconds": 0.0,
+    "peakMB": 62.5,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-800-s002",
+    "condition": "baseline",
+    "seed": 2,
+    "iterations": 1,
+    "status": "extinct",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f820369a1583af53",
+    "commit": "4bc71658922c65e905377d1a385207fb721e7cd4",
+    "seconds": 0.0,
+    "peakMB": 62.5,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-800-s003",
+    "condition": "baseline",
+    "seed": 3,
+    "iterations": 1,
+    "status": "extinct",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f820369a1583af53",
+    "commit": "4bc71658922c65e905377d1a385207fb721e7cd4",
+    "seconds": 0.0,
+    "peakMB": 62.5,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-1600-s001",
+    "condition": "baseline",
+    "seed": 1,
+    "iterations": 1,
+    "status": "extinct",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f820369a1583af53",
+    "commit": "4bc71658922c65e905377d1a385207fb721e7cd4",
+    "seconds": 0.0,
+    "peakMB": 62.5,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-1600-s002",
+    "condition": "baseline",
+    "seed": 2,
+    "iterations": 600,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f820369a1583af53",
+    "commit": "4bc71658922c65e905377d1a385207fb721e7cd4",
+    "seconds": 96.8,
+    "peakMB": 119.4,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-1600-s003",
+    "condition": "baseline",
+    "seed": 3,
+    "iterations": 1,
+    "status": "extinct",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f820369a1583af53",
+    "commit": "4bc71658922c65e905377d1a385207fb721e7cd4",
+    "seconds": 0.0,
+    "peakMB": 62.5,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-3200-s001",
+    "condition": "baseline",
+    "seed": 1,
+    "iterations": 600,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f820369a1583af53",
+    "commit": "4bc71658922c65e905377d1a385207fb721e7cd4",
+    "seconds": 213.5,
+    "peakMB": 148.6,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-3200-s002",
+    "condition": "baseline",
+    "seed": 2,
+    "iterations": 600,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f820369a1583af53",
+    "commit": "4bc71658922c65e905377d1a385207fb721e7cd4",
+    "seconds": 123.8,
+    "peakMB": 140.7,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-3200-s003",
+    "condition": "baseline",
+    "seed": 3,
+    "iterations": 600,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f820369a1583af53",
+    "commit": "4bc71658922c65e905377d1a385207fb721e7cd4",
+    "seconds": 93.6,
+    "peakMB": 89.4,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-6400-s001",
+    "condition": "baseline",
+    "seed": 1,
+    "iterations": 600,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f820369a1583af53",
+    "commit": "4bc71658922c65e905377d1a385207fb721e7cd4",
+    "seconds": 349.3,
+    "peakMB": 246.5,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-6400-s002",
+    "condition": "baseline",
+    "seed": 2,
+    "iterations": 600,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f820369a1583af53",
+    "commit": "4bc71658922c65e905377d1a385207fb721e7cd4",
+    "seconds": 459.5,
+    "peakMB": 281.9,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-6400-s003",
+    "condition": "baseline",
+    "seed": 3,
+    "iterations": 600,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f820369a1583af53",
+    "commit": "4bc71658922c65e905377d1a385207fb721e7cd4",
+    "seconds": 235.7,
+    "peakMB": 181.8,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-12800-s001",
+    "condition": "baseline",
+    "seed": 1,
+    "iterations": 600,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f820369a1583af53",
+    "commit": "4bc71658922c65e905377d1a385207fb721e7cd4",
+    "seconds": 728.4,
+    "peakMB": 438.4,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-12800-s002",
+    "condition": "baseline",
+    "seed": 2,
+    "iterations": 600,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f820369a1583af53",
+    "commit": "4bc71658922c65e905377d1a385207fb721e7cd4",
+    "seconds": 716.8,
+    "peakMB": 536.5,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-12800-s003",
+    "condition": "baseline",
+    "seed": 3,
+    "iterations": 600,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f820369a1583af53",
+    "commit": "4bc71658922c65e905377d1a385207fb721e7cd4",
+    "seconds": 756.8,
+    "peakMB": 390.7,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-25600-s001",
+    "condition": "baseline",
+    "seed": 1,
+    "iterations": 600,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f820369a1583af53",
+    "commit": "4bc71658922c65e905377d1a385207fb721e7cd4",
+    "seconds": 1608.7,
+    "peakMB": 799.9,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-25600-s002",
+    "condition": "baseline",
+    "seed": 2,
+    "iterations": 600,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f820369a1583af53",
+    "commit": "4bc71658922c65e905377d1a385207fb721e7cd4",
+    "seconds": 1626.5,
+    "peakMB": 824.9,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-25600-s003",
+    "condition": "baseline",
+    "seed": 3,
+    "iterations": 600,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f820369a1583af53",
+    "commit": "4bc71658922c65e905377d1a385207fb721e7cd4",
+    "seconds": 1510.9,
+    "peakMB": 1137.7,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-51200-s001",
+    "condition": "baseline",
+    "seed": 1,
+    "iterations": 600,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f820369a1583af53",
+    "commit": "4bc71658922c65e905377d1a385207fb721e7cd4",
+    "seconds": 3571.7,
+    "peakMB": 1652.2,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-51200-s002",
+    "condition": "baseline",
+    "seed": 2,
+    "iterations": 600,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f820369a1583af53",
+    "commit": "4bc71658922c65e905377d1a385207fb721e7cd4",
+    "seconds": 3655.5,
+    "peakMB": 1456.4,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-51200-s003",
+    "condition": "baseline",
+    "seed": 3,
+    "iterations": 600,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f820369a1583af53",
+    "commit": "4bc71658922c65e905377d1a385207fb721e7cd4",
+    "seconds": 2831.8,
+    "peakMB": 1552.2,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-102400-s001",
+    "condition": "baseline",
+    "seed": 1,
+    "iterations": 600,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f820369a1583af53",
+    "commit": "4bc71658922c65e905377d1a385207fb721e7cd4",
+    "seconds": 8358.8,
+    "peakMB": 2847.6,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-102400-s002",
+    "condition": "baseline",
+    "seed": 2,
+    "iterations": 600,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f820369a1583af53",
+    "commit": "4bc71658922c65e905377d1a385207fb721e7cd4",
+    "seconds": 7562.1,
+    "peakMB": 2812.8,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-102400-s003",
+    "condition": "baseline",
+    "seed": 3,
+    "iterations": 600,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f820369a1583af53",
+    "commit": "4bc71658922c65e905377d1a385207fb721e7cd4",
+    "seconds": 8207.2,
+    "peakMB": 3387.7,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-204800-s001",
+    "condition": "baseline",
+    "seed": 1,
+    "iterations": 600,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f820369a1583af53",
+    "commit": "4bc71658922c65e905377d1a385207fb721e7cd4",
+    "seconds": 18140.3,
+    "peakMB": 5257.9,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-204800-s002",
+    "condition": "baseline",
+    "seed": 2,
+    "iterations": 600,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f820369a1583af53",
+    "commit": "4bc71658922c65e905377d1a385207fb721e7cd4",
+    "seconds": 15380.2,
+    "peakMB": 5599.0,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-204800-s003",
+    "condition": "baseline",
+    "seed": 3,
+    "iterations": 600,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f820369a1583af53",
+    "commit": "4bc71658922c65e905377d1a385207fb721e7cd4",
+    "seconds": 15046.6,
+    "peakMB": 6508.9,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-409600-s001",
+    "condition": "baseline",
+    "seed": 1,
+    "iterations": 600,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f820369a1583af53",
+    "commit": "4bc71658922c65e905377d1a385207fb721e7cd4",
+    "seconds": 37715.1,
+    "peakMB": 11027.7,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-409600-s002",
+    "condition": "baseline",
+    "seed": 2,
+    "iterations": 600,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f820369a1583af53",
+    "commit": "4bc71658922c65e905377d1a385207fb721e7cd4",
+    "seconds": 34462.9,
+    "peakMB": 10958.2,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-409600-s003",
+    "condition": "baseline",
+    "seed": 3,
+    "iterations": 600,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f820369a1583af53",
+    "commit": "4bc71658922c65e905377d1a385207fb721e7cd4",
+    "seconds": 36320.9,
+    "peakMB": 11032.8,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-800-57b358-s001",
+    "condition": "stopped only when empty",
+    "seed": 1,
+    "iterations": 600,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f820369a1583af53",
+    "commit": "4bc71658922c65e905377d1a385207fb721e7cd4",
+    "seconds": 49.1,
+    "peakMB": 68.7,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-800-57b358-s002",
+    "condition": "stopped only when empty",
+    "seed": 2,
+    "iterations": 600,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f820369a1583af53",
+    "commit": "4bc71658922c65e905377d1a385207fb721e7cd4",
+    "seconds": 113.9,
+    "peakMB": 71.5,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-800-57b358-s003",
+    "condition": "stopped only when empty",
+    "seed": 3,
+    "iterations": 600,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f820369a1583af53",
+    "commit": "4bc71658922c65e905377d1a385207fb721e7cd4",
+    "seconds": 49.6,
+    "peakMB": 78.7,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-1600-57b358-s001",
+    "condition": "stopped only when empty",
+    "seed": 1,
+    "iterations": 600,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f820369a1583af53",
+    "commit": "4bc71658922c65e905377d1a385207fb721e7cd4",
+    "seconds": 84.5,
+    "peakMB": 93.3,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-1600-57b358-s002",
+    "condition": "stopped only when empty",
+    "seed": 2,
+    "iterations": 600,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f820369a1583af53",
+    "commit": "4bc71658922c65e905377d1a385207fb721e7cd4",
+    "seconds": 80.3,
+    "peakMB": 119.5,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-1600-57b358-s003",
+    "condition": "stopped only when empty",
+    "seed": 3,
+    "iterations": 600,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f820369a1583af53",
+    "commit": "4bc71658922c65e905377d1a385207fb721e7cd4",
+    "seconds": 75.0,
+    "peakMB": 83.8,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-3200-57b358-s001",
+    "condition": "stopped only when empty",
+    "seed": 1,
+    "iterations": 600,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f820369a1583af53",
+    "commit": "4bc71658922c65e905377d1a385207fb721e7cd4",
+    "seconds": 209.5,
+    "peakMB": 148.3,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-3200-57b358-s002",
+    "condition": "stopped only when empty",
+    "seed": 2,
+    "iterations": 600,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f820369a1583af53",
+    "commit": "4bc71658922c65e905377d1a385207fb721e7cd4",
+    "seconds": 123.5,
+    "peakMB": 140.6,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-3200-57b358-s003",
+    "condition": "stopped only when empty",
+    "seed": 3,
+    "iterations": 600,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f820369a1583af53",
+    "commit": "4bc71658922c65e905377d1a385207fb721e7cd4",
+    "seconds": 93.8,
+    "peakMB": 89.3,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-6400-57b358-s001",
+    "condition": "stopped only when empty",
+    "seed": 1,
+    "iterations": 600,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f820369a1583af53",
+    "commit": "4bc71658922c65e905377d1a385207fb721e7cd4",
+    "seconds": 348.2,
+    "peakMB": 246.3,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-6400-57b358-s002",
+    "condition": "stopped only when empty",
+    "seed": 2,
+    "iterations": 600,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f820369a1583af53",
+    "commit": "4bc71658922c65e905377d1a385207fb721e7cd4",
+    "seconds": 457.8,
+    "peakMB": 281.9,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   },
+   {
+    "id": "B1-6400-57b358-s003",
+    "condition": "stopped only when empty",
+    "seed": 3,
+    "iterations": 600,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "f820369a1583af53",
+    "commit": "4bc71658922c65e905377d1a385207fb721e7cd4",
+    "seconds": 235.5,
+    "peakMB": 182.3,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V",
+     "dispatch": "AVX2"
+    }
+   }
+  ]
+ }
+}
