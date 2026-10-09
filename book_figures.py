@@ -38,7 +38,7 @@ import book_data as D
 import book_svg
 from book_graph import degrees
 import gol_analysis as A
-import gol_lab
+import gol_plan
 import gol_record
 import gol_store as store
 from gol_series import NO_PARENT
@@ -130,7 +130,7 @@ def _runs_of(experiment: str, condition: str) -> str:
     """'30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at …', to the end."""
     import book_fill
     specs = runs_of(experiment, condition)
-    plan = gol_lab.read_plan(experiment)["runs"]
+    plan = gol_plan.read_plan(experiment)["runs"]
     seeds, _ = book_fill.seeds_text(plan["seeds"])
     return (f"{len(specs)} {condition} runs `{specs[0].run_id}` … `{specs[-1].run_id}`: the "
             f"baseline {plan['baseline']} at {book_fill.number(specs[0].config['total_tokens'])} "
@@ -177,16 +177,16 @@ def rows(run_id: str) -> List[Dict[str, Any]]:
     return _ROWS[run_id]
 
 
-def runs_of(experiment: str, condition: Optional[str] = None) -> List[gol_lab.RunSpec]:
-    return [s for s in gol_lab.experiment_runs(experiment)
+def runs_of(experiment: str, condition: Optional[str] = None) -> List[gol_plan.RunSpec]:
+    return [s for s in gol_plan.experiment_runs(experiment)
             if condition is None or s.condition == condition]
 
 
-def lived(spec: gol_lab.RunSpec) -> int:
+def lived(spec: gol_plan.RunSpec) -> int:
     return store.load_meta(spec.run_id).get("iteration", 0)
 
 
-def survivors(specs: List[gol_lab.RunSpec]) -> List[gol_lab.RunSpec]:
+def survivors(specs: List[gol_plan.RunSpec]) -> List[gol_plan.RunSpec]:
     return [s for s in specs if lived(s) >= s.until]
 
 

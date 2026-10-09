@@ -120,7 +120,7 @@ def seeds_text(seeds: str) -> tuple:
 
 
 def runs(md: str, name: str) -> str:
-    import gol_lab                                     # only here: it reads the runs folder
+    import gol_plan                                    # only here: it reads the runs folder
     plan, borrowed = resolve(name)
     spec = plan["runs"]
     base = read_json(f"experiments/{spec['baseline']}.json")
@@ -133,7 +133,7 @@ def runs(md: str, name: str) -> str:
 
     seeds, count = seeds_text(spec["seeds"])
     ids: Dict[str, List[str]] = {}
-    for r in gol_lab.experiment_runs(borrowed or name):
+    for r in gol_plan.experiment_runs(borrowed or name):
         ids.setdefault(r.condition, []).append(r.run_id)
 
     lines = []

@@ -54,6 +54,7 @@ from typing import Any, Dict, List, Optional, Tuple
 import numpy as np
 
 import gol_lab
+import gol_plan
 import gol_record
 import gol_store as store
 import gol_worker
@@ -298,15 +299,15 @@ def wandering(runs: Dict[int, Tuple[np.ndarray, np.ndarray]], start: int, stop: 
 # An experiment
 # ----------------------------------------------------------------------------
 
-def _runs_by_condition(name: str) -> Dict[str, List[gol_lab.RunSpec]]:
-    found: Dict[str, List[gol_lab.RunSpec]] = {}
-    for spec in gol_lab.experiment_runs(name):
+def _runs_by_condition(name: str) -> Dict[str, List[gol_plan.RunSpec]]:
+    found: Dict[str, List[gol_plan.RunSpec]] = {}
+    for spec in gol_plan.experiment_runs(name):
         if os.path.exists(os.path.join(store.run_dir(spec.run_id), "meta.json")):
             found.setdefault(spec.condition, []).append(spec)
     return found
 
 
-def _citation(name: str, by_condition: Dict[str, List[gol_lab.RunSpec]]) -> Dict[str, Any]:
+def _citation(name: str, by_condition: Dict[str, List[gol_plan.RunSpec]]) -> Dict[str, Any]:
     """Where every run came from, and the experiment as the strain registry cites one."""
     from gol_config import SimConfig
     runs, strains, commits, engines, environments = [], set(), set(), set(), set()
@@ -330,7 +331,7 @@ def _citation(name: str, by_condition: Dict[str, List[gol_lab.RunSpec]]) -> Dict
                          "commit": lab.get("commit"), "seconds": round(seconds, 1),
                          "peakMB": peak, "sessions": len(sessions),
                          "environment": {k: first.get(k) for k in gol_worker.FINGERPRINT}})
-    plan = gol_lab.read_plan(name)
+    plan = gol_plan.read_plan(name)
     return {"strains": sorted(s for s in strains if s), "commits": sorted(c for c in commits if c),
             "engines": sorted(e for e in engines if e),
             "environments": [dict(zip(gol_worker.FINGERPRINT, e))
@@ -361,7 +362,7 @@ def _engines_agree(citation: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def analyse_identity(name: str, plan: Dict[str, Any],
-                     by_condition: Dict[str, List[gol_lab.RunSpec]]) -> Dict[str, Any]:
+                     by_condition: Dict[str, List[gol_plan.RunSpec]]) -> Dict[str, Any]:
     """Each condition's runs against the reference condition's, seed by seed."""
     reference = plan["analyse"].get("reference", "straight")
     base = {spec.lab["seed"]: spec for spec in by_condition.get(reference, [])}
@@ -389,7 +390,7 @@ class _Runs:
     recorded rows once, and how far each run lived.
     """
 
-    def __init__(self, by_condition: Dict[str, List[gol_lab.RunSpec]]) -> None:
+    def __init__(self, by_condition: Dict[str, List[gol_plan.RunSpec]]) -> None:
         self.by_condition = by_condition
         everyone = [s for specs in by_condition.values() for s in specs]
         self.rows = {s.run_id: gol_record.read_stats(s.run_id) for s in everyone}
@@ -401,7 +402,7 @@ class _Runs:
             self._measured[run_id, stat, phase] = series(self.rows[run_id], stat, phase)
         return self._measured[run_id, stat, phase]
 
-    def reached_end(self, spec: gol_lab.RunSpec) -> bool:
+    def reached_end(self, spec: gol_plan.RunSpec) -> bool:
         return self.lived[spec.run_id] >= spec.until
 
     def levels(self, endpoints: List[Tuple[str, int]], start, stop,
@@ -458,7 +459,7 @@ def _compared(name: str, label: str, reference: str,
 
 
 def analyse_series(name: str, plan: Dict[str, Any],
-                   by_condition: Dict[str, List[gol_lab.RunSpec]]) -> Dict[str, Any]:
+                   by_condition: Dict[str, List[gol_plan.RunSpec]]) -> Dict[str, Any]:
     """
     Figures; where the runs ended up, and the endpoints over any other
     stretches the plan names; each condition against the reference; how
@@ -672,7 +673,7 @@ def _lineage_job(job: Tuple[str, str]) -> Tuple[str, Dict[str, Any]]:
     return run_id, lineage(run_id)
 
 
-def analyse_lineage(name: str, by_condition: Dict[str, List[gol_lab.RunSpec]],
+def analyse_lineage(name: str, by_condition: Dict[str, List[gol_plan.RunSpec]],
                     reached: set) -> Dict[str, Any]:
     """
     Every run's lineage, read in parallel; figures of the largest genotype's
@@ -746,16 +747,17 @@ def _describe(values: List[float]) -> Dict[str, Any]:
 
 def analyse(name: str) -> Dict[str, Any]:
     """Analyse an experiment and write its results and figures into the book."""
-    plan = gol_lab.read_plan(name)
+    plan = gol_plan.read_plan(name)
     if "analyse" not in plan:
-        raise gol_lab.LabError(f"{name}'s plan does not say what to analyse")
+        raise gol_plan.LabError(f"{name}'s plan does not say what to analyse")
+    gol_plan.check_analyse(name, plan["analyse"])
     by_condition = _runs_by_condition(name)
     if not by_condition:
-        raise gol_lab.LabError(f"none of {name}'s runs exist yet")
+        raise gol_plan.LabError(f"none of {name}'s runs exist yet")
     citation = _citation(name, by_condition)
     engines = _engines_agree(citation)
     if not engines["agree"]:
-        raise gol_lab.LabError(f"{name}'s runs come from engines that do not make each other's "
+        raise gol_plan.LabError(f"{name}'s runs come from engines that do not make each other's "
                                f"runs again: {engines['checked']}")
     kind = plan["analyse"].get("kind", "series")
     body = {"identity": analyse_identity, "scaling": analyse_scaling,
@@ -810,7 +812,7 @@ def power_fit(x: np.ndarray, y: np.ndarray, groups: np.ndarray, seed: int = 0) -
 
 
 def analyse_scaling(name: str, plan: Dict[str, Any],
-                    by_condition: Dict[str, List[gol_lab.RunSpec]]) -> Dict[str, Any]:
+                    by_condition: Dict[str, List[gol_plan.RunSpec]]) -> Dict[str, Any]:
     """
     How a world's size follows its token supply. Every run's mean of each
     statistic over the plan's window of iterations, against the tokens of its
@@ -826,7 +828,7 @@ def analyse_scaling(name: str, plan: Dict[str, Any],
     fit_from = spec.get("fitFrom", 0)
     runs = _Runs(by_condition)
 
-    def tokens(s: gol_lab.RunSpec) -> int:
+    def tokens(s: gol_plan.RunSpec) -> int:
         return int(s.lab["world"]["total_tokens"])
 
     results: Dict[str, Any] = {}

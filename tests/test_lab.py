@@ -32,6 +32,7 @@ os.environ["GOL_RUNS_DIR"] = tempfile.mkdtemp(prefix="gol-tests-")
 atexit.register(shutil.rmtree, os.environ["GOL_RUNS_DIR"], True)
 
 import gol_lab        # noqa: E402
+import gol_plan       # noqa: E402
 import gol_record     # noqa: E402
 import gol_store      # noqa: E402
 from gol_config import SimConfig   # noqa: E402
@@ -67,14 +68,14 @@ def lab(*plans, baseline=TINY):
         for p in plans:
             with open(os.path.join(plans_dir, f"{p['id']}.json"), "w") as f:
                 json.dump(p, f)
-        saved = gol_store.BASE_DIR, gol_lab.PLANS, gol_lab._git
-        gol_store.BASE_DIR, gol_lab.PLANS = runs, plans_dir
+        saved = gol_store.BASE_DIR, gol_plan.PLANS, gol_lab._git
+        gol_store.BASE_DIR, gol_plan.PLANS = runs, plans_dir
         # The tests run on whatever is in the working tree, committed or not.
         gol_lab._git = lambda *args: "" if args[0] == "status" else "test-commit"
         try:
             yield tmp
         finally:
-            gol_store.BASE_DIR, gol_lab.PLANS, gol_lab._git = saved
+            gol_store.BASE_DIR, gol_plan.PLANS, gol_lab._git = saved
 
 
 def work(spec, until, *extra, engine=None):
@@ -90,7 +91,7 @@ def work(spec, until, *extra, engine=None):
 def refused(fn, *words):
     try:
         fn()
-    except gol_lab.LabError as exc:
+    except gol_plan.LabError as exc:
         for word in words:
             assert word in str(exc), (word, str(exc))
         return
@@ -111,9 +112,9 @@ def test_a_plan_with_an_unknown_setting_is_refused():
     with lab(plan("E91", [{"name": "a", "set": {"mutation_rate": 0.1}}]),
              plan("E92", [{"name": "a", "sets": {"mutation_probability": 0.1}}]),
              plan("E93", seed_list=[1])):
-        refused(lambda: gol_lab.experiment_runs("E91"), "mutation_rate")
-        refused(lambda: gol_lab.experiment_runs("E92"), "sets")
-        refused(lambda: gol_lab.experiment_runs("E93"), "seed_list")
+        refused(lambda: gol_plan.experiment_runs("E91"), "mutation_rate")
+        refused(lambda: gol_plan.experiment_runs("E92"), "sets")
+        refused(lambda: gol_plan.experiment_runs("E93"), "seed_list")
 
 
 def test_a_condition_may_not_set_seed_or_infrastructure():
@@ -121,9 +122,9 @@ def test_a_condition_may_not_set_seed_or_infrastructure():
     with lab(plan("E91", [{"name": "a", "set": {"seed": 3}}]),
              plan("E92", [{"name": "a", "set": {"checkpoint_every": 5}}]),
              plan("E93", [{"name": "a", "set": {"total_tokens": 900}}])):
-        refused(lambda: gol_lab.experiment_runs("E91"), "seed")
-        refused(lambda: gol_lab.experiment_runs("E92"), "checkpoint_every")
-        refused(lambda: gol_lab.experiment_runs("E93"), "total_tokens")
+        refused(lambda: gol_plan.experiment_runs("E91"), "seed")
+        refused(lambda: gol_plan.experiment_runs("E92"), "checkpoint_every")
+        refused(lambda: gol_plan.experiment_runs("E93"), "total_tokens")
 
 
 def test_a_baseline_names_every_mechanic_and_parameter():
@@ -132,17 +133,17 @@ def test_a_baseline_names_every_mechanic_and_parameter():
     default is on the day, and a default that moved would move the baseline
     with it. B1 names them all, and its strain is the one its settings give.
     """
-    settings = gol_lab.baseline("B1")
+    settings = gol_plan.baseline("B1")
     assert SimConfig.from_dict({**settings, "seed": 1}).strain_id() == B1["strain"]
     with lab(baseline={k: v for k, v in TINY.items() if k != "rewire_p"}):
-        refused(lambda: gol_lab.baseline("B9"), "rewire_p")
+        refused(lambda: gol_plan.baseline("B9"), "rewire_p")
 
 
 def test_every_strain_an_experiment_uses_is_registered():
     """Every algorithm an experiment runs is named in research/strains.md, as the scheme asks."""
-    registered = set(gol_lab.registered_strains())
-    for name in gol_lab.experiments():
-        for spec in gol_lab.experiment_runs(name):
+    registered = set(gol_plan.registered_strains())
+    for name in gol_plan.experiments():
+        for spec in gol_plan.experiment_runs(name):
             strain = SimConfig.from_dict(spec.config).strain_id()
             assert strain in registered, f"{name} runs {strain}, which strains.md does not list"
 
@@ -189,6 +190,92 @@ def test_a_file_two_processes_change_loses_neither_change():
             assert len(json.load(f)["seen"]) == 8 * 25
 
 
+def test_every_plan_says_only_what_its_analysis_reads():
+    # The analysis reads its block with .get(): a misspelt key was never read,
+    # and an analysis ran without what its plan asked for.
+    import gol_analysis
+    assert set(gol_analysis.WINDOW_OF) == set(gol_plan.WINDOW_SUMMARIES), \
+        "the plans' window summaries and the analysis's are two lists"
+    for name in gol_plan.experiments():
+        gol_plan.check_analyse(name, gol_plan.read_plan(name).get("analyse") or {})
+
+
+def test_an_analyse_block_that_says_what_is_not_read_is_refused():
+    series = {"kind": "series", "figures": [{"name": "nodes", "stat": "nodes"}],
+              "endpoints": ["nodes", {"stat": "births", "phase": 1}],
+              "windows": [{"name": "late", "from": 500, "of": "min"}],
+              "wandering": {"from": 100, "stretch": 100}}
+    gol_plan.check_analyse("E99", series)
+    refused(lambda: gol_plan.check_analyse("E99", {**series, "figure": []}), "figure")
+    refused(lambda: gol_plan.check_analyse("E99", {**series, "figures": [{"name": "x"}]}), "stat")
+    refused(lambda: gol_plan.check_analyse("E99", {**series, "windows": [{"name": "w", "of": "avg"}]}), "avg")
+    refused(lambda: gol_plan.check_analyse("E99", {**series, "wandering": {"from": 0}}), "stretch")
+    refused(lambda: gol_plan.check_analyse("E99", {"kind": "scaling", "stats": [{"stat": "nodes"}]}),
+            "window")
+    refused(lambda: gol_plan.check_analyse("E99", {"kind": "longrun"}), "longrun")
+
+
+def test_a_plan_is_read_once_a_tick_and_handed_out_as_copies():
+    with lab(plan("E91"), plan("E92", seeds="1")):
+        reads = []
+        real = gol_plan._read
+        gol_plan._read = lambda name: reads.append(name) or real(name)
+        try:
+            with gol_plan.reading():
+                gol_plan.wanted(["E91", "E92"])
+                first = gol_plan.experiment_runs("E91")
+                first[0].targets.append(99)               # wanted() changes what it merges
+                again = gol_plan.experiment_runs("E91")
+                gol_plan.workers_cap("E91")
+            assert 99 not in again[0].targets, "a spec changed by one caller reached the next"
+            assert sorted(reads) == ["B9", "E91", "E92"], f"read {reads} in one tick"
+            before = len(reads)
+            gol_plan.experiment_runs("E91")
+            assert "E91" in reads[before:], "outside a tick a plan was still being kept"
+        finally:
+            gol_plan._read = real
+
+
+def test_the_lab_starts_what_fits_and_no_more():
+    with lab(plan("E91", seeds="1..4"), plan("E92", seeds="1..3", workers=1)):
+        known = gol_lab.costs()
+        jobs = [gol_lab.Job(s, s.until, "e", False, None, 0)
+                for s in gol_plan.experiment_runs("E91") + gol_plan.experiment_runs("E92")]
+        cost = gol_lab.predict(jobs[0].spec.config, jobs[0].until, known)
+        roomy = 10 ** 15
+
+        start, short = gol_lab.decide(jobs, [], 3, {}, 1e9, roomy, known)
+        assert [j for j, _ in start] == jobs[:3] and short is None, "more or fewer than the workers"
+
+        caps = {"E92": 1}
+        start, _ = gol_lab.decide(jobs[4:], [], 4, caps, 1e9, roomy, known)
+        assert len(start) == 1, "an experiment ran past its plan's cap"
+
+        start, _ = gol_lab.decide(jobs, [], 4, {}, cost["peakMB"] * 1.5, roomy, known)
+        assert len(start) == 1, "the memory budget was not kept"
+        start, _ = gol_lab.decide(jobs, [], 4, {}, cost["peakMB"] / 2, roomy, known)
+        assert len(start) == 1, "a job too big for the budget could never run, even alone"
+        start, _ = gol_lab.decide(jobs, [(jobs[0], cost)], 4, {}, cost["peakMB"] / 2, roomy, known)
+        assert not start, "a job over the budget started beside another"
+
+        free = gol_lab.DISK_MARGIN + int(cost["diskBytes"] * 1.5)
+        start, short = gol_lab.decide(jobs, [], 4, {}, 1e9, free, known)
+        assert len(start) == 1 and short and jobs[1].spec.run_id in short, (start, short)
+
+
+def test_a_run_the_lab_gives_up_on_is_in_its_own_record():
+    # Kept in the run's metadata, giving up on a run deleted while it crashed
+    # would have written into a folder that was no longer there.
+    with lab(plan("E91")):
+        spec = gol_plan.experiment_runs("E91")[0]
+        work(spec, 2)
+        gol_lab._block(spec.run_id, "it crashed twice")
+        state = gol_lab.run_state(spec, None)
+        assert state["state"] == "blocked" and state["reason"] == "it crashed twice", state
+        assert "lab_blocked" not in gol_store.load_meta(spec.run_id)
+        gol_lab._block("B9-400-s999", "a run that is gone")       # no folder, no error
+
+
 def test_a_plan_can_list_world_sizes_and_a_condition_its_own():
     """
     A plan may run its conditions at several sizes of world, and a condition
@@ -204,14 +291,14 @@ def test_a_plan_can_list_world_sizes_and_a_condition_its_own():
     broken["runs"]["world"] = {"total_tokens": [400, 20]}
     odd = plan("E93", [{"name": "a", "sizes": [400.5]}])
     with lab(sizes, broken, odd):
-        specs = gol_lab.experiment_runs("E91")
+        specs = gol_plan.experiment_runs("E91")
         ids = [s.run_id for s in specs]
         assert ids[:4] == ["B9-300-s001", "B9-300-s002", "B9-400-s001", "B9-400-s002"], ids
         assert len(ids) == 6 and all(i.startswith("B9-400-") for i in ids[4:]), ids
         assert specs[0].config["total_tokens"] == 300 and "300 tokens" in specs[0].name
         assert specs[0].lab["world"] == {"total_tokens": 300}
-        refused(lambda: gol_lab.experiment_runs("E92"), "20 tokens")
-        refused(lambda: gol_lab.experiment_runs("E93"), "whole numbers")
+        refused(lambda: gol_plan.experiment_runs("E92"), "20 tokens")
+        refused(lambda: gol_plan.experiment_runs("E93"), "whole numbers")
 
 
 def test_a_plan_can_keep_its_runs_to_one_worker():
@@ -223,7 +310,7 @@ def test_a_plan_can_keep_its_runs_to_one_worker():
     alone = plan("E91", seeds="1..3", workers=1)
     beside = plan("E92", [{"name": "other", "set": {"mutation_probability": 0.5}}], seeds="1..2")
     with lab(alone, beside, plan("E93", workers=0)):
-        refused(lambda: gol_lab.experiment_runs("E93"), "workers")
+        refused(lambda: gol_plan.experiment_runs("E93"), "workers")
         assert gol_lab.experiment_status("E91", gol_lab.read_control() | {"workers": 3},
                                          gol_lab.costs(), False)["workers"] == 1
         gol_lab.request(run="E91", workers=3)
@@ -313,8 +400,8 @@ def test_two_experiments_asking_for_the_same_run_share_it():
                           {"name": "apart", "replicate": True}],
                   iterations=6),
              {"id": "E93", "runs": "same as E91"}):
-        runs = gol_lab.wanted(["E91", "E92", "E93"])
-        fast = [gol_lab.run_id_for("B9", {"total_tokens": 400},
+        runs = gol_plan.wanted(["E91", "E92", "E93"])
+        fast = [gol_plan.run_id_for("B9", {"total_tokens": 400},
                                    {"mutation_probability": 0.9}, seed) for seed in (1, 2)]
         assert sorted(runs) == sorted(fast + ["B9-400-s001", "B9-400-s001-cut",
                                               "B9-400-s002", "B9-400-s002-cut",
@@ -333,19 +420,19 @@ def test_a_plan_can_grow_but_not_change():
     stopped and named rather than carried on as something they are not.
     """
     with lab(plan("E91", seeds="1", iterations=2)) as tmp:
-        spec = gol_lab.experiment_runs("E91")[0]
+        spec = gol_plan.experiment_runs("E91")[0]
         assert work(spec, 2) == 0
         assert gol_lab.run_state(spec, None)["state"] == "done"
 
         grown = plan("E91", seeds="1..2", iterations=3)
         with open(os.path.join(tmp, "plans", "E91.json"), "w") as f:
             json.dump(grown, f)
-        states = [gol_lab.run_state(s, None)["state"] for s in gol_lab.experiment_runs("E91")]
+        states = [gol_lab.run_state(s, None)["state"] for s in gol_plan.experiment_runs("E91")]
         assert states == ["waiting", "waiting"], states
 
         with open(os.path.join(tmp, "plans", "B9.json"), "w") as f:
             json.dump({"id": "B9", "settings": {**TINY, "mutation_probability": 0.3}}, f)
-        state = gol_lab.run_state(gol_lab.experiment_runs("E91")[0], None)
+        state = gol_lab.run_state(gol_plan.experiment_runs("E91")[0], None)
         assert state["state"] == "blocked" and "other settings" in state["reason"], state
 
 
@@ -360,7 +447,7 @@ def test_a_worker_imports_only_its_snapshot():
     be records the snapshot's hash and commit in the run's provenance.
     """
     with lab(plan("E91", seeds="1", iterations=1)) as tmp:
-        spec = gol_lab.experiment_runs("E91")[0]
+        spec = gol_plan.experiment_runs("E91")[0]
         assert work(spec, 1) == 0
         with open(os.path.join(gol_store.run_dir(spec.run_id), "provenance.json")) as f:
             session = json.load(f)["sessions"][0]
@@ -389,7 +476,7 @@ def test_a_changed_environment_is_refused():
     which library moved, and the lab treats the run as blocked.
     """
     with lab(plan("E91", seeds="1", iterations=4)):
-        spec = gol_lab.experiment_runs("E91")[0]
+        spec = gol_plan.experiment_runs("E91")[0]
         assert work(spec, 2) == 0
         path = os.path.join(gol_store.run_dir(spec.run_id), "provenance.json")
         with open(path) as f:
@@ -411,7 +498,7 @@ def test_a_terminated_worker_resumes_to_the_same_run():
     """
     with lab(plan("E91", [{"name": "straight"}, {"name": "paused", "stops": []}],
                   seeds="1", iterations=40)):
-        straight, paused = gol_lab.experiment_runs("E91")
+        straight, paused = gol_plan.experiment_runs("E91")
         assert work(straight, 40) == 0
 
         engine = gol_lab.snapshot()
@@ -444,7 +531,7 @@ def test_an_engine_that_does_not_remake_a_run_is_caught():
     whose agents hear their noise a hundred times louder is caught.
     """
     with lab(plan("E91", seeds="1", iterations=3)):
-        spec = gol_lab.experiment_runs("E91")[0]
+        spec = gol_plan.experiment_runs("E91")[0]
         assert work(spec, 3) == 0
         engine = gol_lab.snapshot()
         assert gol_lab.reproduce(spec.run_id, engine, 3)["same"]
@@ -516,7 +603,7 @@ def test_what_a_simulation_costs_is_fitted_to_what_runs_recorded():
             assert gol_lab.run_lab() == 0
         costs = gol_lab.fit_costs()
         seconds = work = 0.0
-        for spec in gol_lab.experiment_runs("E91"):
+        for spec in gol_plan.experiment_runs("E91"):
             weights = brain_shape(SimConfig.from_dict(spec.config))["weights"]
             for row in gol_record.read_stats(spec.run_id):
                 if row.get("_seconds"):
@@ -530,9 +617,9 @@ def test_what_a_simulation_costs_is_fitted_to_what_runs_recorded():
 
         # A run of the kind measured is estimated from that kind's own speed,
         # not from all runs scaled by the size of their brains.
-        spec = gol_lab.experiment_runs("E91")[0]
+        spec = gol_plan.experiment_runs("E91")[0]
         kind = costs["kinds"][gol_lab.kind_of(spec.config)]
-        nodes = sum(r["nodes"] for s in gol_lab.experiment_runs("E91")
+        nodes = sum(r["nodes"] for s in gol_plan.experiment_runs("E91")
                     for r in gol_record.read_stats(s.run_id) if r.get("_seconds"))
         assert abs(kind["secondsPerAgent"] - seconds / nodes) < 1e-12, kind
         guess = gol_lab.predict(spec.config, 10, costs)

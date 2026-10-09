@@ -57,24 +57,21 @@ import gol_worker
 # How a worker's session can end: the worker owns these, and the command line
 # that starts it, because every snapshot of it ever taken answers to them.
 from gol_worker import EXIT_FAULT, EXIT_REFUSED
-from gol_config import INFRASTRUCTURE, MECHANICS, PARAMETERS, SPEC, SimConfig
+import gol_plan
+from gol_config import SimConfig
+# The plans, which the lab carries out and the analysis and the book read too.
+from gol_plan import (WORLD, LabError, RunSpec, baseline, experiment_runs, experiments, read_plan,
+                      wanted, what_it_is, workers_cap)
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-PLANS = os.path.join(HERE, "book", "experiments")
-STRAINS = os.path.join(HERE, "research", "strains.md")
 
 #: What a run is made and advanced by, copied whole into each snapshot.
 ENGINE_FILES = ("GraphOfLifeSimple.py", "gol_config.py", "gol_series.py", "gol_spectral.py",
                 "gol_lightning.py", "gol_store.py", "gol_run.py", "gol_record.py",
                 "gol_worker.py")
 
-#: A baseline names every one of these; a condition may change any of them.
-SETTABLE = (set(MECHANICS) | set(PARAMETERS)) - {"seed"}
-WORLD = ("total_tokens", "n_nodes", "k_neighbors")
-
 DEFAULT_WORKERS = 4
 SETTLED = 100                     # iterations before a world's size says anything
-HEAVY_EVERY = 25
 CHECKPOINT_SECONDS = 600          # about how often a run saves itself
 DISK_MARGIN = 10 * 2**30          # never fill the disk closer than this
 MEMORY_SHARE = 0.75               # of the machine's memory, for all workers together
@@ -92,234 +89,8 @@ CALIBRATION = {
 }
 
 
-
-class LabError(ValueError):
-    """A plan that cannot be carried out as written, with the reason."""
-
-
 def lab_dir() -> str:
     return os.path.join(store.BASE_DIR, ".lab")
-
-
-# ----------------------------------------------------------------------------
-# Plans
-# ----------------------------------------------------------------------------
-
-def read_plan(name: str) -> Dict[str, Any]:
-    if not re.fullmatch(r"[A-Z]\d+", name or ""):
-        raise LabError(f"{name!r} is not the name of a plan")
-    try:
-        with open(os.path.join(PLANS, f"{name}.json")) as f:
-            return json.load(f)
-    except FileNotFoundError:
-        raise LabError(f"there is no plan {name}") from None
-
-
-def experiments() -> List[str]:
-    """Every experiment the book has a plan for, in order."""
-    names = (n[:-5] for n in os.listdir(PLANS) if re.fullmatch(r"E\d+\.json", n))
-    return sorted(names, key=lambda n: int(n[1:]))
-
-
-def baseline(name: str) -> Dict[str, Any]:
-    """A baseline's settings, which have to name every mechanic and parameter but the seed."""
-    settings = read_plan(name)["settings"]
-    missing = SETTABLE - set(settings)
-    unknown = set(settings) - SETTABLE
-    if missing or unknown:
-        raise LabError(f"{name} has to name every mechanic and parameter but the seed: "
-                       f"missing {sorted(missing)}, not settings {sorted(unknown)}")
-    return settings
-
-
-def parse_seeds(seeds: Any) -> List[int]:
-    """Seeds as `[1, 2, 3]`, `"1..30"` or `"1..10,20"`."""
-    if isinstance(seeds, list):
-        return [int(s) for s in seeds]
-    out: List[int] = []
-    for part in str(seeds).split(","):
-        if ".." in part:
-            low, high = part.split("..")
-            out.extend(range(int(low), int(high) + 1))
-        else:
-            out.append(int(part))
-    return out
-
-
-@dataclasses.dataclass
-class RunSpec:
-    """One run an experiment needs, and how far."""
-    run_id: str
-    name: str
-    config: Dict[str, Any]
-    lab: Dict[str, Any]
-    record: Dict[str, Any]
-    targets: List[int]
-    condition: str
-    threads: Optional[str] = None
-    fault_at: Optional[int] = None
-    experiments: List[str] = dataclasses.field(default_factory=list)
-
-    @property
-    def until(self) -> int:
-        return self.targets[-1]
-
-
-def _slug(text: str) -> str:
-    return re.sub(r"[^a-z0-9]+", "-", str(text).lower()).strip("-")[:20]
-
-
-def run_id_for(base: str, world: Dict[str, Any], changed: Dict[str, Any], seed: int,
-               replicate: Optional[str] = None) -> str:
-    """
-    A run's name, from what it is: `B1-5000-s007`, or with a short hash of
-    whatever else differs from the baseline, `B1-5000-3fa2c1-s007`. A
-    replicate — a run made again on purpose, to stop it or cut it — carries
-    its condition's name as well. Once the algorithm's SPEC moves past 1
-    (gol_config), runs carry it too, since the same settings then name a
-    different algorithm.
-    """
-    differs = {**{k: v for k, v in world.items() if k != "total_tokens"}, **changed}
-    mark = ("-" + hashlib.sha1(json.dumps(differs, sort_keys=True).encode()).hexdigest()[:6]
-            if differs else "")
-    run_id = f"{base}-{int(world['total_tokens'])}{mark}-s{int(seed):03d}"
-    run_id += f"-g{SPEC}" if SPEC != 1 else ""
-    return f"{run_id}-{_slug(replicate)}" if replicate else run_id
-
-
-def _check_keys(where: str, given: Iterable[str], allowed: Iterable[str]) -> None:
-    unknown = sorted(set(given) - set(allowed))
-    if unknown:
-        raise LabError(f"{where}: {', '.join(unknown)} is not something a plan can say "
-                       f"(it can say {', '.join(sorted(allowed))})")
-
-
-def experiment_runs(name: str) -> List[RunSpec]:
-    """Every run an experiment needs, made from its plan and checked on the way."""
-    plan = read_plan(name)
-    runs = plan.get("runs")
-    if isinstance(runs, str):
-        other = re.fullmatch(r"same as (E\d+)", runs.strip())
-        if not other:
-            raise LabError(f"{name}: runs is either a plan or 'same as E<n>', not {runs!r}")
-        specs = experiment_runs(other.group(1))
-        for spec in specs:
-            spec.experiments = [name]
-        return specs
-
-    _check_keys(f"{name} runs", runs,
-                ("baseline", "world", "seeds", "iterations", "conditions", "record", "workers"))
-    base_name = runs["baseline"]
-    base = baseline(base_name)
-    world = dict(runs["world"])
-    _check_keys(f"{name} world", world, WORLD)
-    record = dict(runs.get("record", {}))
-    _check_keys(f"{name} record", record, ("heavy_every", "checkpoint_every"))
-    iterations = int(runs["iterations"])
-    workers_cap(name)                                       # refuses one that is not a count
-
-    specs: List[RunSpec] = []
-    for condition in runs["conditions"]:
-        label = condition.get("name")
-        _check_keys(f"{name} condition {label!r}", condition,
-                    ("name", "set", "sizes", "stops", "fault_at", "threads", "replicate"))
-        changed = dict(condition.get("set", {}))
-        forbidden = sorted(set(changed) & ({"seed"} | set(INFRASTRUCTURE)))
-        if forbidden:
-            raise LabError(f"{name} condition {label!r} sets {', '.join(forbidden)}, which a "
-                           f"condition cannot: the seed belongs to the seeds, and what is "
-                           f"recorded to the lab")
-        _check_keys(f"{name} condition {label!r} set", changed, SETTABLE - set(WORLD))
-        # A run made again on purpose — to be stopped, cut off, run on other
-        # threads, or simply kept apart from anyone else's — has a run of its
-        # own, named for its condition, rather than sharing one.
-        replicate = (label if condition.get("replicate")
-                     or any(k in condition for k in ("stops", "fault_at", "threads")) else None)
-
-        for size, seed in ((size, seed) for size in _sizes(name, label, condition, world)
-                           for seed in parse_seeds(runs["seeds"])):
-            here = {**world, "total_tokens": size}
-            config = {**base, **here, **changed, "seed": seed, "export_every": 1,
-                      "export_decisions": True,
-                      "checkpoint_every": int(record.get("checkpoint_every", 0))}
-            try:
-                SimConfig.from_dict(config, stored=False)        # refuses what it cannot run
-            except ValueError as exc:
-                raise LabError(f"{name} condition {label!r} at {size:,} tokens cannot be run: "
-                               f"{exc}") from None
-            run_id = run_id_for(base_name, here, changed, seed, replicate)
-            differs = "".join(f" · {k}={v}" for k, v in {**here, **changed}.items()
-                              if k != "total_tokens")
-            specs.append(RunSpec(
-                run_id=run_id,
-                name=(f"{base_name} · {size:,} tokens{differs}"
-                      f" · seed {seed}" + (f" · {replicate}" if replicate else "")),
-                config=config,
-                lab={"baseline": base_name, "world": here, "set": changed, "seed": seed,
-                     "replicate": replicate},
-                record={"heavy_every": int(record.get("heavy_every", HEAVY_EVERY))},
-                targets=sorted(set(int(s) for s in condition.get("stops", [])) | {iterations}),
-                condition=label,
-                threads=condition.get("threads"),
-                fault_at=condition.get("fault_at"),
-                experiments=[name]))
-    return specs
-
-
-def _sizes(name: str, label: str, condition: Dict[str, Any], world: Dict[str, Any]) -> List[int]:
-    """
-    The token supplies a condition runs at: the plan's world, which may list
-    several, unless the condition names its own.
-    """
-    sizes = condition.get("sizes", world["total_tokens"])
-    sizes = sizes if isinstance(sizes, list) else [sizes]
-    if not sizes or not all(isinstance(t, int) and not isinstance(t, bool) and t > 0
-                            for t in sizes):
-        raise LabError(f"{name} condition {label!r}: a world's tokens are whole numbers above "
-                       f"nothing, not {sizes!r}")
-    return sizes
-
-
-def workers_cap(name: str) -> Optional[int]:
-    """The most of an experiment's runs its plan lets run at once, if it says."""
-    runs = read_plan(name).get("runs")
-    cap = runs.get("workers") if isinstance(runs, dict) else None
-    if cap is not None and (not isinstance(cap, int) or isinstance(cap, bool) or cap < 1):
-        raise LabError(f"{name}: workers is how many of its runs may run at once, not {cap!r}")
-    return cap
-
-
-def _what_it_is(config: Dict[str, Any]) -> Dict[str, Any]:
-    """A run's configuration without what only decides how it is recorded."""
-    return {k: v for k, v in SimConfig.from_dict(config).to_dict().items()
-            if k not in INFRASTRUCTURE}
-
-
-def wanted(queue: Iterable[str]) -> Dict[str, RunSpec]:
-    """
-    Every run the queued experiments need, each once, taken as far as the
-    furthest of them asks. Two plans that say different things about the same
-    run are refused rather than reconciled.
-    """
-    merged: Dict[str, RunSpec] = {}
-    for name in queue:
-        for spec in experiment_runs(name):
-            have = merged.get(spec.run_id)
-            if have is None:
-                merged[spec.run_id] = spec
-                continue
-            if _what_it_is(have.config) != _what_it_is(spec.config):
-                raise LabError(f"{have.experiments[0]} and {name} describe {spec.run_id} "
-                               f"differently")
-            have.targets = sorted(set(have.targets) | set(spec.targets))
-            have.experiments.append(name)
-    return merged
-
-
-def registered_strains() -> List[str]:
-    """The strains research/strains.md says have been used."""
-    with open(STRAINS) as f:
-        return re.findall(r"^\| `(gol-[^`]+)` \|", f.read(), flags=re.M)
 
 
 # ----------------------------------------------------------------------------
@@ -492,7 +263,7 @@ def kind_of(config: Dict[str, Any]) -> str:
     the ones before it and cost an agent hardly any more, because its agents
     have fewer neighbours to look at — so each is fitted on its own.
     """
-    what = {k: v for k, v in _what_it_is(config).items() if k not in WORLD and k != "seed"}
+    what = {k: v for k, v in what_it_is(config).items() if k not in WORLD and k != "seed"}
     return hashlib.sha1(json.dumps(what, sort_keys=True).encode()).hexdigest()[:10]
 
 
@@ -748,11 +519,14 @@ def run_state(spec: RunSpec, engine: Optional[str]) -> Dict[str, Any]:
     meta = store.load_meta(spec.run_id)
     state = {"iteration": meta.get("iteration", 0), "status": meta.get("status"),
              "checkpoint": meta.get("checkpoint_iteration") or 0}
-    if _what_it_is(meta["config"]) != _what_it_is(spec.config):
+    if what_it_is(meta["config"]) != what_it_is(spec.config):
         return {**state, "state": "blocked",
                 "reason": f"{spec.run_id} exists with other settings than the plan gives it"}
-    if meta.get("lab_blocked"):
-        return {**state, "state": "blocked", "reason": meta["lab_blocked"]}
+    # Blocked by its worker, which says so in the run's own metadata when the
+    # environment it was made in has changed; or by the lab, in its own record.
+    blocked = meta.get("lab_blocked") or _blocked().get(spec.run_id)
+    if blocked:
+        return {**state, "state": "blocked", "reason": blocked}
     if meta.get("status") == "extinct":
         return {**state, "state": "done"}
     made_by = (meta.get("lab") or {}).get("engine")
@@ -848,67 +622,11 @@ def run_lab() -> int:
 
     try:
         while True:
-            control = read_control()
-            stopping = asked["stop"] or control["paused"]
-            if stopping:
-                for proc, _job, _ in running.values():
-                    if proc.poll() is None and not getattr(proc, "_asked", False):
-                        proc.send_signal(signal.SIGTERM)
-                        proc._asked = True          # type: ignore[attr-defined]
-            else:
-                engine, held_back = None, None
-                try:
-                    engine = snapshot()
-                except LabError as exc:
-                    held_back = str(exc)
-                try:
-                    waiting = [j for j in jobs(control["queue"], engine)
-                               if j.spec.run_id not in running]
-                except LabError as exc:
-                    _pause(str(exc))
-                    waiting = []
-                # Runs that exist go on, on their own engines. Runs still to
-                # be made wait for a snapshot to be made with.
-                startable = [j for j in waiting if j.engine is not None]
-                if waiting and not startable and not running:
-                    _pause(held_back)
-                waiting = startable
-                used = sum(info["peakMB"] for _, _, info in running.values())
-                caps = _caps(control["queue"])
-                for job in waiting:
-                    if len(running) >= control["workers"]:
-                        break
-                    if _at_cap(job, [j for _, j, _ in running.values()], caps):
-                        continue
-                    cost = predict(job.spec.config, job.until - job.progress, known)
-                    if running and used + cost["peakMB"] > budget:
-                        continue
-                    free = shutil.disk_usage(_made(store.BASE_DIR)).free
-                    if cost["diskBytes"] > free - DISK_MARGIN:
-                        _pause(f"{job.spec.run_id} needs about "
-                               f"{cost['diskBytes'] / 2**30:.1f} GB and the disk has "
-                               f"{(free - DISK_MARGIN) / 2**30:.1f} GB to spare")
-                        break
-                    running[job.spec.run_id] = (_start(job), job, cost)
-                    used += cost["peakMB"]
-                    _log(f"started {job.spec.run_id} at {job.progress} → {job.until}")
-
-            for run_id, (proc, job, _cost) in list(running.items()):
-                code = proc.poll()
-                if code is None:
-                    continue
-                del running[run_id]
-                _log(f"{run_id} ended with {code}")
-                if code not in (0, EXIT_FAULT, EXIT_REFUSED) and not stopping:
-                    meta = store.load_meta(run_id) if os.path.isdir(store.run_dir(run_id)) else {}
-                    crashes[run_id] = crashes.get(run_id, 0) + 1
-                    if crashes[run_id] >= 2 and (meta.get("checkpoint_iteration") or 0) <= job.progress:
-                        store.update_meta(run_id, lab_blocked=(
-                            f"it crashed twice without getting past iteration {job.progress}; "
-                            f"its lab.log says why"))
-
+            with gol_plan.reading():
+                stopping, queue = _tick(running, crashes, asked, budget, known)
+                done = not running and (stopping or not _anything_left(queue))
             _write_state(running)
-            if not running and (stopping or not _anything_left(control["queue"])):
+            if done:
                 break
             time.sleep(2)
     finally:
@@ -916,6 +634,116 @@ def run_lab() -> int:
         lock.__exit__(None, None, None)
         _log("lab stopped")
     return 0
+
+
+def _tick(running: Dict[str, Tuple[subprocess.Popen, Job, Dict[str, Any]]], crashes: Dict[str, int],
+          asked: Dict[str, bool], budget: float, known: Dict[str, Any]) -> Tuple[bool, List[str]]:
+    """
+    One turn of the lab: start what can be started and see to what has ended.
+    Whether it is stopping, and the queue it worked from.
+    """
+    control = read_control()
+    stopping = asked["stop"] or control["paused"]
+    if stopping:
+        for proc, _job, _ in running.values():
+            if proc.poll() is None and not getattr(proc, "_asked", False):
+                proc.send_signal(signal.SIGTERM)
+                proc._asked = True          # type: ignore[attr-defined]
+    else:
+        engine, held_back = None, None
+        try:
+            engine = snapshot()
+        except LabError as exc:
+            held_back = str(exc)
+        try:
+            waiting = [j for j in jobs(control["queue"], engine)
+                       if j.spec.run_id not in running]
+        except LabError as exc:
+            _pause(str(exc))
+            waiting = []
+        # Runs that exist go on, on their own engines. Runs still to
+        # be made wait for a snapshot to be made with.
+        startable = [j for j in waiting if j.engine is not None]
+        if waiting and not startable and not running:
+            _pause(held_back)
+        start, short = decide(startable, [(job, cost) for _, job, cost in running.values()],
+                              control["workers"], _caps(control["queue"]), budget,
+                              shutil.disk_usage(_made(store.BASE_DIR)).free, known)
+        for job, cost in start:
+            running[job.spec.run_id] = (_start(job), job, cost)
+            _log(f"started {job.spec.run_id} at {job.progress} → {job.until}")
+        if short:
+            _pause(short)
+
+    for run_id, (proc, job, _cost) in list(running.items()):
+        code = proc.poll()
+        if code is None:
+            continue
+        del running[run_id]
+        _log(f"{run_id} ended with {code}")
+        if code not in (0, EXIT_FAULT, EXIT_REFUSED) and not stopping:
+            meta = store.load_meta(run_id) if os.path.isdir(store.run_dir(run_id)) else {}
+            crashes[run_id] = crashes.get(run_id, 0) + 1
+            if crashes[run_id] >= 2 and (meta.get("checkpoint_iteration") or 0) <= job.progress:
+                _block(run_id, f"it crashed twice without getting past iteration {job.progress}; "
+                               f"its lab.log says why")
+    return stopping, control["queue"]
+
+
+def decide(waiting: List[Job], running: List[Tuple[Job, Dict[str, Any]]], workers: int,
+           caps: Dict[str, int], budget: float, free: int, known: Dict[str, Any]
+           ) -> Tuple[List[Tuple[Job, Dict[str, Any]]], Optional[str]]:
+    """
+    Which of the waiting jobs to start now, in their order, each with what it
+    is expected to cost — and, if one would not fit on the disk, why the lab
+    has to pause instead of starting it or anything after it.
+
+    No more than `workers` at once, nor more of an experiment than its plan's
+    cap; within `budget` megabytes of memory, except that a job always starts
+    when nothing else is running, or the lab could never make a run larger
+    than its budget; and within the `free` disk, counting what the jobs chosen
+    before it will write — each used to be held against the whole disk, so
+    jobs that fitted one by one could fill it together. Everything is handed
+    in, so the choice can be tested without starting a process or asking the
+    disk.
+    """
+    start: List[Tuple[Job, Dict[str, Any]]] = []
+    busy = [job for job, _ in running]
+    used = sum(cost["peakMB"] for _, cost in running)
+    for job in waiting:
+        if len(busy) >= workers:
+            break
+        if _at_cap(job, busy, caps):
+            continue
+        cost = predict(job.spec.config, job.until - job.progress, known)
+        if busy and used + cost["peakMB"] > budget:
+            continue
+        if cost["diskBytes"] > free - DISK_MARGIN:
+            return start, (f"{job.spec.run_id} needs about {cost['diskBytes'] / 2**30:.1f} GB and "
+                           f"the disk has {(free - DISK_MARGIN) / 2**30:.1f} GB to spare")
+        start.append((job, cost))
+        busy.append(job)
+        used += cost["peakMB"]
+        free -= cost["diskBytes"]          # what the jobs chosen so far will write
+    return start, None
+
+
+def _blocked() -> Dict[str, str]:
+    """
+    The runs the lab has given up on, and why. Kept in the lab's own state
+    rather than in a run's metadata, which a run deleted while the lab ran
+    would not have. Taking a run off this list lets the lab try it again.
+    """
+    try:
+        with open(os.path.join(lab_dir(), "blocked.json")) as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return {}
+
+
+def _block(run_id: str, reason: str) -> None:
+    store.update_json(os.path.join(_made(lab_dir()), "blocked.json"),
+                      lambda blocked: blocked.update({run_id: reason}), indent=1)
 
 
 def _caps(queue: List[str]) -> Dict[str, int]:
@@ -1062,6 +890,11 @@ def experiment_status(name: str, control: Dict[str, Any], known: Dict[str, Any],
 
 
 def status() -> Dict[str, Any]:
+    with gol_plan.reading():
+        return _status()
+
+
+def _status() -> Dict[str, Any]:
     control = read_control()
     known = costs()
     alive = lab_alive()
