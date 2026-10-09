@@ -106,6 +106,16 @@ def get(m: Measure, run_id: str, **params: Any) -> Dict[str, Any]:
     return made
 
 
+def needs_decisions(run_id: str, what: str) -> None:
+    """
+    Refuse a run that did not record its agents' decisions: a measure of what
+    they decided would read nothing there and quietly come out as nothing.
+    """
+    if not store.load_config(run_id).export_decisions:
+        raise ValueError(f"{run_id} did not record its agents' decisions, so {what} cannot "
+                         f"be read from it")
+
+
 def _plain(value: Any) -> Any:
     """A number kept in an .npz comes back as an array of no dimensions."""
     return value.item() if isinstance(value, np.ndarray) and value.ndim == 0 else value

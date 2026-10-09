@@ -10,6 +10,7 @@ from typing import Any, Dict, List, Tuple
 
 import numpy as np
 
+import book_data as D
 import book_figures as F
 from book_figures import FRAMES, chapter, describe, dots, line, recipe, survivors
 from book_chapters.common import BLUE, CYAN, GREEN, GREY, ORANGE, RED, VIOLET, YELLOW, baseline
@@ -19,21 +20,13 @@ from book_chapters.measures import (DEGREE_CLASSES, FR, PA, SAMPLE, SURVIVORS, b
 EVERY = 100
 
 
+@D.measure("kin")
 def kinship(run_id: str) -> Dict[str, Any]:
     """
     Who is related to whom, and whether it shows in the game: from the starts and
-    ends of the games of every EVERY-th iteration from SETTLED on. Kept beside
-    the runs, like sample_pass.
+    ends of the games of every EVERY-th iteration from SETTLED on.
     """
-    import json
-    import os
-    path = os.path.join(F.store.BASE_DIR, ".book", f"{run_id}.kin.json")
-    stamp = F.store.load_meta(run_id).get("iteration")
-    if os.path.exists(path):
-        with open(path) as f:
-            cached = json.load(f)
-        if cached.get("stamp") == stamp:
-            return cached
+    D.needs_decisions(run_id, "who staked on whom")
     rng = np.random.default_rng(11)
     edges_same = edges_close = edges_all = 0
     pairs_same = pairs_close = pairs_all = 0
@@ -109,24 +102,19 @@ def kinship(run_id: str) -> Dict[str, Any]:
             taken_same += same(node, winner)
             expect_same += np.mean([same(node, s) for s in others])
     returned_arr = np.array(returned, float) if returned else np.zeros((0, 2))
-    out = {"stamp": stamp,
-           "edges": [edges_all, edges_same, edges_close], "pairs": [pairs_all, pairs_same, pairs_close],
-           "agents_with_both": both, "kin_more": int(kin_more),
-           "kin_stake": float(np.mean(kin_stake)) if kin_stake else None,
-           "other_stake": float(np.mean(other_stake)) if other_stake else None,
-           "kin_revolt": float(np.mean(kin_revolt)) if kin_revolt else None,
-           "other_revolt": float(np.mean(other_revolt)) if other_revolt else None,
-           "by_degree": {str(k): v for k, v in by_degree.items()},
-           "taken": [taken_all, taken_same, expect_same],
-           "returned_equal": float(np.mean(returned_arr[:, 0] == returned_arr[:, 1])) if len(returned_arr) else None,
-           "returned_corr": float(np.corrcoef(np.log(returned_arr[:, 0]), np.log(returned_arr[:, 1]))[0, 1])
-           if len(returned_arr) > 2 else None,
-           "returned_sample": returned_arr[rng.choice(len(returned_arr), min(400, len(returned_arr)),
-                                                      replace=False)].tolist() if len(returned_arr) else []}
-    os.makedirs(os.path.dirname(path), exist_ok=True)
-    with open(path, "w") as f:
-        json.dump(out, f)
-    return out
+    return {"edges": [edges_all, edges_same, edges_close], "pairs": [pairs_all, pairs_same, pairs_close],
+            "agents_with_both": both, "kin_more": int(kin_more),
+            "kin_stake": float(np.mean(kin_stake)) if kin_stake else None,
+            "other_stake": float(np.mean(other_stake)) if other_stake else None,
+            "kin_revolt": float(np.mean(kin_revolt)) if kin_revolt else None,
+            "other_revolt": float(np.mean(other_revolt)) if other_revolt else None,
+            "by_degree": {str(k): v for k, v in by_degree.items()},
+            "taken": [taken_all, taken_same, expect_same],
+            "returned_equal": float(np.mean(returned_arr[:, 0] == returned_arr[:, 1])) if len(returned_arr) else None,
+            "returned_corr": float(np.corrcoef(np.log(returned_arr[:, 0]), np.log(returned_arr[:, 1]))[0, 1])
+            if len(returned_arr) > 2 else None,
+            "returned_sample": returned_arr[rng.choice(len(returned_arr), min(400, len(returned_arr)),
+                                                       replace=False)].tolist() if len(returned_arr) else []}
 
 
 # ---------------------------------------------------------------------------
@@ -136,6 +124,7 @@ def kinship(run_id: str) -> Dict[str, Any]:
 LAGS = (1, 2, 4, 8, 16)
 
 
+@D.measure("partners")
 def partners(run_id: str) -> Dict[str, Any]:
     """
     How long two brains stay face to face across one connection.
@@ -144,17 +133,9 @@ def partners(run_id: str) -> Dict[str, Any]:
     SETTLED on: the share still there k games later; the share still there with
     neither end taken over by a neighbour in those k games (the same two brains,
     give or take the changes every brain is offered after a game); and the share
-    still there with exactly the same two genotypes. Kept beside the runs.
+    still there with exactly the same two genotypes.
     """
-    import json
-    import os
-    path = os.path.join(F.store.BASE_DIR, ".book", f"{run_id}.partners.json")
-    stamp = F.store.load_meta(run_id).get("iteration")
-    if os.path.exists(path):
-        with open(path) as f:
-            cached = json.load(f)
-        if cached.get("stamp") == stamp:
-            return cached
+    D.needs_decisions(run_id, "which nodes were taken")
     last = (F.store.count_frames(run_id) - 1) // 2
     there = {k: [0, 0, 0] for k in LAGS}
     total = 0
@@ -177,12 +158,9 @@ def partners(run_id: str) -> Dict[str, Any]:
                 there[k][0] += 1
                 there[k][1] += a not in taken and b not in taken
                 there[k][2] += g2.get(a) == g[a] and g2.get(b) == g[b]
-    out = {"stamp": stamp, "lags": list(LAGS), "connections": total,
-           "share": {name: [there[k][i] / total for k in LAGS]
-                     for i, name in enumerate(("connection", "brains", "genotypes"))}}
-    with open(path, "w") as f:
-        json.dump(out, f)
-    return out
+    return {"lags": list(LAGS), "connections": total,
+            "share": {name: [there[k][i] / total for k in LAGS]
+                      for i, name in enumerate(("connection", "brains", "genotypes"))}}
 
 
 @chapter
