@@ -16,6 +16,7 @@ import numpy as np
 
 import book_data as D
 import book_figures as F
+from book_graph import graph
 from book_figures import FRAMES, band_series, chapter, describe, dots, line, lived_text, recipe, survivors
 from book_chapters.common import BLUE, CYAN, GREEN, GREY, ORANGE, RED, VIOLET, YELLOW, baseline
 
@@ -98,7 +99,6 @@ DEGREE_CLASSES = ((1, 1, "1"), (2, 2, "2"), (3, 9, "3–9"), (10, 49, "10–49")
 @D.measure("fragile")
 def fragile(run_id: str) -> Dict[str, Any]:
     """Who dies within ten games, by connections: the richest hundredth, and every agent."""
-    from book_chapters.structure import graph
     out = {label: {"richest": [0, 0], "all": [0, 0]} for _, _, label in DEGREE_CLASSES}
     for t0 in STARTS:
         a = D.frame_at(run_id, t0, 2)

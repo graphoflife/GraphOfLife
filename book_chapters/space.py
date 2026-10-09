@@ -10,33 +10,18 @@ first calibrates its rulers on spaces whose dimension is known.
 """
 from __future__ import annotations
 
-from collections import deque
 from typing import Any, Dict, List, Tuple
 
 import numpy as np
 
 import book_data as D
 import book_figures as F
+from book_graph import bfs, core, degree_preserving, graph
 from book_figures import FRAMES, chapter, describe, dots, line, lived_text, recipe, runs_of, survivors
 from book_chapters.common import BLUE, GREEN, GREY, ORANGE, RED, VIOLET, YELLOW, baseline
-from book_chapters.structure import graph
 
 MOMENTS = (1000, 1500, 2000, 2500, 2999)
 MAX_R = 15
-
-
-def bfs(adj: Dict[int, set], source: int, limit: int = 10 ** 9) -> Dict[int, int]:
-    dist = {source: 0}
-    queue = deque([source])
-    while queue:
-        u = queue.popleft()
-        if dist[u] >= limit:
-            continue
-        for v in adj[u]:
-            if v not in dist:
-                dist[v] = dist[u] + 1
-                queue.append(v)
-    return dist
 
 
 # ---------------------------------------------------------------------------
@@ -260,13 +245,6 @@ def tree(n: int, seed: int) -> Dict[int, set]:
     return {u: set(g[u]) for u in g}
 
 
-def core(adj: Dict[int, set]) -> Dict[int, set]:
-    """What is left when dead ends are pruned until none is left: every agent with one connection, again and again."""
-    import networkx as nx
-    g = nx.k_core(nx.Graph([(u, v) for u in adj for v in adj[u]]), 2)
-    return {u: set(g[u]) for u in g}
-
-
 def ball_growth(adj: Dict[int, set], sources: int, seed: int, limit: int = 40) -> np.ndarray:
     """
     The typical number of agents within r steps, r = 0 … limit: the geometric mean over
@@ -374,7 +352,6 @@ def world_dimensions(run_id: str) -> Dict[str, Any]:
     core. A world of more than LARGE_WORLD agents is read with more balls and
     longer walks, which its size allows and its wider range of scales needs.
     """
-    from book_chapters.structure import degree_preserving
     adj = last_world(run_id)
     size = dict(steps=1024, balls=100, walks=48) if len(adj) > LARGE_WORLD else {}
     return {"world": measure(adj, 23, **size), "twin": measure(degree_preserving(adj, 23), 23, **size),

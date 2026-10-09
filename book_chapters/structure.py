@@ -13,6 +13,7 @@ import numpy as np
 
 import book_data as D
 import book_figures as F
+from book_graph import bfs, degree_preserving, graph, triangles
 from book_figures import (DEGREE_CLASSES, FRAMES, STATS_FILE, band_series, chapter, describe, dots, line,
                           mean_over, recipe, runs_text, series, surviving_text, survivors)
 from book_chapters.common import (BAND_STEPS, BAND_WORDS, BLUE, CYAN, GREEN, GREY, ORANGE, RED,
@@ -20,30 +21,6 @@ from book_chapters.common import (BAND_STEPS, BAND_WORDS, BLUE, CYAN, GREEN, GRE
 from book_chapters.measures import bars, in_class, settled_rows
 
 LAST = 2999
-
-
-def graph(frame: Dict[str, Any]) -> Dict[int, set]:
-    adj: Dict[int, set] = {a: set() for a in frame["ids"]}
-    for a, b in frame["edges"]:
-        if a != b and a in adj and b in adj:
-            adj[a].add(b)
-            adj[b].add(a)
-    return adj
-
-
-def triangles(adj: Dict[int, set]) -> Dict[int, int]:
-    """How many triangles each agent is a corner of."""
-    out = Counter()
-    for a, na in adj.items():
-        for b in na:
-            if b <= a:
-                continue
-            for c in na & adj[b]:
-                if c > b:
-                    out[a] += 1
-                    out[b] += 1
-                    out[c] += 1
-    return out
 
 
 def log_classes(values: np.ndarray, edges: Sequence[float]) -> List[Tuple[float, float, np.ndarray]]:
@@ -246,14 +223,7 @@ def exact_geometry(adj: Dict[int, set]) -> Dict[str, float]:
     total = pairs = 0
     eccentricity = []
     for s in piece:
-        dist = {s: 0}
-        queue = deque([s])
-        while queue:
-            u = queue.popleft()
-            for w in sub[u]:
-                if w not in dist:
-                    dist[w] = dist[u] + 1
-                    queue.append(w)
+        dist = bfs(sub, s)
         total += sum(dist.values())
         pairs += len(dist) - 1
         eccentricity.append(max(dist.values()))
@@ -263,15 +233,6 @@ def exact_geometry(adj: Dict[int, set]) -> Dict[str, float]:
             "cycle_rank": edges - len(piece) + 1}
 
 
-def degree_preserving(adj: Dict[int, set], seed: int) -> Dict[int, set]:
-    """A random network with the same numbers of connections (a configuration model, made simple)."""
-    import networkx as nx
-    ids = sorted(adj)
-    g = nx.Graph(nx.configuration_model([len(adj[a]) for a in ids], seed=seed))
-    g.remove_edges_from(list(nx.selfloop_edges(g)))
-    return {u: set(g[u]) for u in g}
-
-
 def balls(adj: Dict[int, set], sources: int = 24, radius: int = 40) -> np.ndarray:
     """The mean number of agents within r steps of a source, for r = 0 … radius."""
     ids = sorted(adj)
@@ -279,14 +240,7 @@ def balls(adj: Dict[int, set], sources: int = 24, radius: int = 40) -> np.ndarra
     volumes = np.zeros(radius + 1)
     used = 0
     for s in ids[::step][:sources]:
-        dist = {s: 0}
-        queue = deque([s])
-        while queue:
-            u = queue.popleft()
-            for v in adj[u]:
-                if v not in dist:
-                    dist[v] = dist[u] + 1
-                    queue.append(v)
+        dist = bfs(adj, s)
         counts = np.bincount(np.minimum(list(dist.values()), radius + 1), minlength=radius + 2)[:radius + 1]
         volumes += np.cumsum(counts)
         used += 1

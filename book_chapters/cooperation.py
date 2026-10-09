@@ -12,6 +12,7 @@ import numpy as np
 
 import book_data as D
 import book_figures as F
+from book_graph import degrees
 from book_figures import (DEGREE_CLASSES, FR, FRAMES, KEPT_BY, PA, chapter, describe, dots, line, recipe,
                           surviving_text, survivors)
 from book_chapters.common import BLUE, CYAN, GREEN, GREY, ORANGE, RED, VIOLET, YELLOW, baseline
@@ -57,10 +58,7 @@ def kinship(run_id: str) -> Dict[str, Any]:
             pairs_all += 1
             pairs_same += same(ids[a], ids[b])
             pairs_close += close(ids[a], ids[b])
-        degree = defaultdict(int)
-        for a, b in start["edges"]:
-            degree[a] += 1
-            degree[b] += 1
+        degree = degrees(start["edges"])
         stakes: Dict[Tuple[int, int], int] = {}
         stakers = defaultdict(list)
         for r in (game.get("decisions") or {}).get("allocations") or []:

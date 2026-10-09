@@ -36,6 +36,7 @@ import numpy as np
 
 import book_data as D
 import book_svg
+from book_graph import degrees
 import gol_analysis as A
 import gol_lab
 import gol_record
@@ -424,10 +425,7 @@ def world_pass(run_id: str, muller: Optional[Tuple[int, int]] = None) -> Dict[st
 
     agents = [[birth[a], last_a[a], last_a[a] == end] for a in birth if birth[a] >= SETTLED]
     genotypes = [[first_g[g], last_g[g], last_g[g] == end] for g in first_g if first_g[g] >= SETTLED]
-    degree = Counter()
-    for a, b in last_frame["edges"]:
-        degree[a] += 1
-        degree[b] += 1
+    degree = degrees(last_frame["edges"])
     return {"end": end, "agents": agents, "genotypes": genotypes, "top": top,
             "age": age, "ancestry": ancestry, "founders": keep_big(founders_t),
             "muller": keep_big(muller_t),
@@ -497,10 +495,7 @@ def sample_pass(run_id: str) -> Dict[str, Any]:
         entropy = float(-(p * np.log2(p)).sum())
         new_repro = len(set(repro["brain_ids"]) - set(before["brain_ids"])) if before else 0
         new_game = len(set(game["brain_ids"]) - set(repro["brain_ids"]))
-        degree = Counter()
-        for a, b in repro["edges"]:
-            degree[a] += 1
-            degree[b] += 1
+        degree = degrees(repro["edges"])
         tokens0 = dict(zip(repro["ids"], repro["tokens"]))
         flows: Dict[Tuple[int, int], int] = {}
         home = others = 0
@@ -550,10 +545,7 @@ def sample_pass(run_id: str) -> Dict[str, Any]:
             else:
                 ids0 = start["ids"]
                 start_tokens = dict(zip(start["ids"], start["tokens"]))
-                start_degree = Counter()
-                for a, b in start["edges"]:
-                    start_degree[a] += 1
-                    start_degree[b] += 1
+                start_degree = degrees(start["edges"])
             by_parent = {d["agent"]: d for d in births}
             for a in ids0:
                 d = by_parent.get(a)
