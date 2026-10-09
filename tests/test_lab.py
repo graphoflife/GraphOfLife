@@ -35,6 +35,7 @@ import gol_costs      # noqa: E402
 import gol_lab        # noqa: E402
 import gol_plan       # noqa: E402
 import gol_record     # noqa: E402
+import gol_stats      # noqa: E402
 import gol_store      # noqa: E402
 from gol_config import SimConfig   # noqa: E402
 
@@ -764,7 +765,7 @@ def test_figures_hold_no_nan():
         # pieces, a ratio over nothing — reaches the writer as NaN or infinity.
         import numpy as np
         odd = os.path.join(book, "odd.json")
-        gol_analysis._write(odd, {"gap": float("nan"), "ratio": [np.float64("inf"), 1.0]})
+        gol_stats.write_json(odd, {"gap": float("nan"), "ratio": [np.float64("inf"), 1.0]})
         assert _strict(odd) == {"gap": None, "ratio": [None, 1.0]}
 
 

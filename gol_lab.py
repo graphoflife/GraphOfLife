@@ -60,7 +60,8 @@ from gol_worker import EXIT_FAULT, EXIT_REFUSED
 import gol_plan
 from gol_config import SimConfig
 # What a simulation costs, fitted to what the runs recorded.
-from gol_costs import costs, fit_costs, median, predict, tail_rows
+from gol_costs import costs, fit_costs, predict, tail_rows
+from gol_stats import median
 # The plans, which the lab carries out and the analysis and the book read too.
 from gol_plan import (WORLD, LabError, RunSpec, baseline, experiment_runs, experiments, read_plan,
                       wanted, what_it_is, workers_cap)

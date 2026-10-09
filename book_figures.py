@@ -42,6 +42,8 @@ import gol_plan
 import gol_record
 import gol_store as store
 from gol_series import NO_PARENT
+# The chapters read describe from here, with the rest of what they draw with.
+from gol_stats import describe, write_json  # noqa: F401
 
 BOOK = os.path.join(os.path.dirname(os.path.abspath(__file__)), "book")
 COMMAND = "python3 book_figures.py"
@@ -95,7 +97,7 @@ class Chapter:
         return value
 
     def save(self) -> None:
-        A._write(os.path.join(BOOK, "results", f"{self.name}.json"),
+        write_json(os.path.join(BOOK, "results", f"{self.name}.json"),
                  {"chapter": self.name, "numbers": self.numbers, "figures": self.figures})
         # A figure the chapter no longer draws would otherwise linger beside the ones it does.
         folder = os.path.join(BOOK, "figures", self.name)
@@ -336,16 +338,6 @@ def dots(categories: List[str], groups: List[List[float]], colour_of: List[int],
         out.append({"label": None, "x": [k - 0.38, k + 0.38], "y": [med, med],
                     "colour": colour_of[k], "width": 3})
     return out
-
-
-def describe(values: Iterable[float]) -> Dict[str, Any]:
-    v = np.array([x for x in values if x is not None and np.isfinite(x)], dtype=float)
-    if not v.size:
-        return {"n": 0}
-    return {"n": int(v.size), "mean": float(v.mean()), "median": float(np.median(v)),
-            "sd": float(v.std(ddof=1)) if v.size > 1 else None,
-            "min": float(v.min()), "max": float(v.max()),
-            "q25": float(np.quantile(v, 0.25)), "q75": float(np.quantile(v, 0.75))}
 
 
 # ---------------------------------------------------------------------------

@@ -58,6 +58,7 @@ import gol_lab
 import gol_plan
 import gol_record
 import gol_store as store
+from gol_stats import finite, write_json
 import gol_worker
 from gol_series import NO_PARENT
 
@@ -72,37 +73,12 @@ EFFECT_SEEDS = 30           # below this a comparison is indicative
 Z_ALPHA, Z_POWER = 1.959964, 0.841621   # two-sided 5%, 80% power
 
 
-def _finite(value: Any) -> Any:
-    if isinstance(value, float) and not math.isfinite(value):
-        return None
-    if isinstance(value, (np.floating, np.integer)):
-        return _finite(value.item())
-    if isinstance(value, dict):
-        return {k: _finite(v) for k, v in value.items()}
-    if isinstance(value, (list, tuple)):
-        return [_finite(v) for v in value]
-    return value
-
-
 def _draw(path: str, chart: Dict[str, Any]) -> None:
     """A chart for the book, as an SVG image (book_svg.py) at `path`, minus its extension."""
     import book_svg
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(f"{path}.svg", "w", encoding="utf-8") as f:
-        f.write(book_svg.render([_finite(chart)], name=os.path.relpath(path, BOOK)))
-
-
-def _write(path: str, value: Any, compact: bool = False) -> None:
-    """
-    Write JSON the page can read: no NaN anywhere. Results are indented for
-    people to read; figures, which are thousands of points for the page to
-    draw, are written compactly.
-    """
-    os.makedirs(os.path.dirname(path), exist_ok=True)
-    with open(path, "w") as f:
-        json.dump(_finite(value), f, allow_nan=False,
-                  **({"separators": (",", ":")} if compact else {"indent": 1}))
-        f.write("\n")
+        f.write(book_svg.render([finite(chart)], name=os.path.relpath(path, BOOK)))
 
 
 # ----------------------------------------------------------------------------
@@ -765,7 +741,7 @@ def analyse(name: str) -> Dict[str, Any]:
             "series": analyse_series}[kind](name, plan, by_condition)
     results = {"experiment": name, "analysed": time.strftime("%Y-%m-%d"), "kind": kind,
                "engines": engines, **body, "citation": citation}
-    _write(os.path.join(BOOK, "results", f"{name}.json"), results)
+    write_json(os.path.join(BOOK, "results", f"{name}.json"), results)
     return results
 
 
@@ -947,5 +923,5 @@ def costs_report() -> Dict[str, Any]:
             {"label": "what the estimates assume", "x": [0, top],
              "y": [0, top * known["secondsPerAgentIteration"]]}]})
     report = {"fitted": known, "runs": runs, "updated": time.strftime("%Y-%m-%d")}
-    _write(os.path.join(BOOK, "results", "costs.json"), report)
+    write_json(os.path.join(BOOK, "results", "costs.json"), report)
     return report

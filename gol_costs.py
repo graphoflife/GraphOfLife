@@ -23,6 +23,7 @@ from typing import Any, Dict, Iterator, List, Optional, Tuple
 import gol_store as store
 from gol_config import SimConfig
 from gol_plan import WORLD, what_it_is
+from gol_stats import median
 
 #: What a simulation costs before anything has been measured: the calibration
 #: of 2026-10-02 on the baseline B1 (Core Ultra 7 258V, numpy 2.5.1) — about
@@ -82,11 +83,6 @@ def weights_of(config: Dict[str, Any]) -> Tuple[int, int]:
     from GraphOfLifeSimple import brain_shape
     shape = brain_shape(SimConfig.from_dict(config))
     return shape["weights"], shape["bytesPerWeight"]
-
-
-def median(values: List[float]) -> Optional[float]:
-    values = sorted(v for v in values if v is not None)
-    return values[len(values) // 2] if values else None
 
 
 def kind_of(config: Dict[str, Any]) -> str:
