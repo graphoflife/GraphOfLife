@@ -73,11 +73,16 @@ jobs:
           chmod +x build_site.sh
           ./build_site.sh
 
+      # What the browser runs is the worker's PY_FILES, and the Explanation
+      # fetches the teaching script. The list is read from the worker: written
+      # out here, it kept a file the browser had stopped needing and failed
+      # every deploy after.
       - name: Check the engine actually made it
         run: |
-          for f in py/GraphOfLifeSimple.py py/gol_config.py py/gol_series.py \
-                   py/explain_minimal.py py/gol_browser.py py/gol_store.py \
-                   js/sim-worker.js index.html; do
+          wanted=$(sed -n "/const PY_FILES = \[/,/\];/p" web/js/sim-worker.js \
+                   | grep -o "'[^']*\.py'" | tr -d "'")
+          test -n "$wanted" || { echo "could not read PY_FILES from sim-worker.js"; exit 1; }
+          for f in $(printf 'py/%s ' $wanted) py/explain_minimal.py js/sim-worker.js index.html; do
             test -s "_site/$f" || { echo "missing or empty: $f"; exit 1; }
           done
           echo "site contains $(find _site -type f | wc -l) files"
