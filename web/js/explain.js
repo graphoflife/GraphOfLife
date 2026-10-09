@@ -98,12 +98,14 @@ const Explain = {
     {
       title: 'Reproduction and Handover', emblem: 'heart',
       stage: 'repro.born', effect: 'brains inherit',
-      code: ['# ---- how much of me goes into a child ----', 'self.unlink(u, v)'],
+      code: ['# ---- how much of me goes into a child ----', 'self.unlink(parent, v)'],
       text: `An agent spends a share of its tokens on a child. The child starts
         with exactly that; no tokens are created.
         <p>The child inherits a mutated copy of the brain and is linked to
-        neighbours the parent chooses. The parent may instead <b>hand over</b> a
-        link: it drops that connection and the child takes its place.</p>
+        whom the parent chooses — the parent itself included, which is a choice
+        like any other. The parent may also <b>hand over</b> a link: once
+        everyone has had their children, it drops that connection and the child
+        takes its place.</p>
         <p>Newborns and the links they arrive on are green. What the child was
         given crosses the link it came down.</p>`
     },

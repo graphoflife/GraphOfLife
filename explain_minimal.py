@@ -14,7 +14,11 @@ same order; what it adds is the parts a research tool needs and a reader does
 not — configuration, checkpoints, recording, three kinds of brain, and the
 switches that make each mechanic optional. The observation vector here is
 shorter than the real one, so this will not reproduce a particular run of it
-token for token. The structure is the point, and the structure is identical.
+token for token. The structure is the point, and the structure is identical —
+with one step left out: the full version begins every phase with an extra look
+in which agents only write their messages (the pre-pass), so the look that
+acts reads what was said this phase. Here each agent writes as it acts, and
+reads what was said the phase before.
 
 Nothing here is trained and nothing is optimised. Agents hold tokens, spend
 them on children, and fight over position. What survives, survives.
@@ -26,7 +30,7 @@ import random
 
 import numpy as np
 
-TOKENS = 500          # the whole economy, and it never changes
+TOKENS = 2000         # the whole economy, and it never changes
 AGENTS = 40           # how many the world starts with
 NEIGHBOURS = 4        # how many each is joined to at the start
 HIDDEN = [24, 16]     # the brain's hidden layers
@@ -53,15 +57,24 @@ class Brain:
     """
 
     def __init__(self, n_in: int, n_out: int):
+        # Drawn as the full version draws a founder's: each weight normal with
+        # a spread of one over the square root of how many inputs it reads, so
+        # a sum of many stays the size of one, and no biases at all.
         sizes = [n_in] + HIDDEN + [n_out]
-        self.weights = [np.random.randn(b, a) * 0.5
+        self.weights = [np.random.randn(b, a) / np.sqrt(a)
                         for a, b in zip(sizes, sizes[1:])]
-        self.biases = [np.random.randn(b) * 0.5 for b in sizes[1:]]
+        self.biases = [np.zeros(b) for b in sizes[1:]]
 
     def forward(self, x: np.ndarray) -> np.ndarray:
-        """x is (inputs, columns); the answer is (outputs, columns)."""
-        for w, b in zip(self.weights, self.biases):
-            x = 1.0 / (1.0 + np.exp(-(w @ x + b[:, None])))
+        """
+        x is (inputs, columns); the answer is (outputs, columns). Every hidden
+        layer is squashed into 0 to 1; the last is left as it comes, so an
+        output can be any number, and a negative one means "not at all".
+        """
+        last = len(self.weights) - 1
+        for i, (w, b) in enumerate(zip(self.weights, self.biases)):
+            z = w @ x + b[:, None]
+            x = z if i == last else 1.0 / (1.0 + np.exp(-z))
         return x
 
     def copy(self) -> "Brain":
@@ -90,13 +103,12 @@ class Brain:
 # lineage decides is itself something evolution settles.
 
 def decide(yes: float, no: float, mode_a: float, mode_b: float) -> bool:
-    """A yes/no choice, read sharply or gambled on."""
+    """A yes/no choice, gambled on (mode_a ahead) or read sharply."""
     if mode_a > mode_b:
-        if yes == no:
-            return random.random() < 0.5
-        return yes > no
-    total = yes + no
-    return random.random() < (yes / total if total > 0 else 0.5)
+        return random.random() < share_of(yes, no)
+    if yes == no:
+        return random.random() < 0.5
+    return yes > no
 
 
 def pick(scores: np.ndarray) -> int:
@@ -105,9 +117,10 @@ def pick(scores: np.ndarray) -> int:
 
 
 def share_of(a: float, b: float) -> float:
-    """Two outputs read as a fraction between 0 and 1."""
+    """Two outputs read as a fraction between 0 and 1: a negative one counts as nothing."""
+    a, b = max(0.0, a), max(0.0, b)
     total = a + b
-    return (a / total) if total > 0 else 0.0
+    return (a / total) if total > 0 else 0.5
 
 
 def apportion(scores: np.ndarray, total: int) -> np.ndarray:
@@ -117,11 +130,9 @@ def apportion(scores: np.ndarray, total: int) -> np.ndarray:
     Largest remainder: floor everything, then hand the leftovers to whoever was
     cut hardest. Tokens are conserved, so they cannot be rounded away.
     """
-    if total <= 0 or scores.sum() <= 0:
-        out = np.zeros(len(scores), dtype=int)
-        if total > 0:
-            out[int(np.argmax(scores))] = total
-        return out
+    scores = np.maximum(0.0, scores)                 # a negative score is no score
+    if scores.sum() <= 0:
+        scores = np.ones(len(scores))                 # no preference: an even split
     exact = scores / scores.sum() * total
     whole = np.floor(exact).astype(int)
     for i in np.argsort(-(exact - whole))[:total - int(whole.sum())]:
@@ -250,6 +261,7 @@ class World:
         the ones it writes now will be read next.
         """
         outbox: dict = {}
+        handovers = []
         for u in sorted(self.adj):
             if self.tokens.get(u, 0) <= 0:
                 continue
@@ -276,17 +288,28 @@ class World:
             # This is the only way a new brain ever enters the world.
             self.brains[child] = self.brains[u].copy()
             self.brains[child].mutate()
-            self.link(child, u)
 
-            # ---- which of my neighbours does the child meet ----
-            for col, v in enumerate(targets[1:], start=1):
+            # ---- whom the child meets ----
+            # Each of my columns, my own included: the child is joined to its
+            # parent only if the parent says so, like to anyone else.
+            for col, v in enumerate(targets):
                 if decide(y[2, col], y[3, col], y[4, col], y[5, col]):
                     self.link(child, v)
-                    # ---- handover: give the edge away instead of copying ----
-                    # The parent drops that connection and the child takes its
-                    # place, so a lineage can pass on position, not just tokens.
-                    if decide(y[6, col], y[7, col], y[8, col], y[9, col]):
-                        self.unlink(u, v)
+
+            # ---- handover: give an edge away instead of copying it ----
+            # Decided for each of my neighbours, and done once everyone has
+            # had their children, so nobody's neighbours change under them
+            # while they decide. The parent drops the connection and the
+            # child takes its place, so a lineage can pass on position, not
+            # just tokens.
+            for col, v in enumerate(targets[1:], start=1):
+                if decide(y[6, col], y[7, col], y[8, col], y[9, col]):
+                    handovers.append((u, v, child))
+
+        for parent, v, child in handovers:
+            if child in self.adj and v in self.adj.get(parent, ()):
+                self.link(child, v)
+                self.unlink(parent, v)
 
         self.deliver(outbox)
         self.cleanup()
@@ -431,7 +454,8 @@ def resolve(staked: dict, revolt: dict) -> int:
     The biggest stake usually wins. Sometimes the small ones combine and take
     it instead.
 
-    The largest single staker is the HEGEMON. Against it stands the MOB: every
+    The largest single staker is the HEGEMON (drawn, if several put in the
+    same most). Against it stands the MOB: every
     other agent that flagged part of its stake as a revolt. The mob is sorted
     weakest first and walked upward, gathering a lower class as it goes. At
     each rung the question is whether that lower class now outweighs everyone
@@ -444,7 +468,8 @@ def resolve(staked: dict, revolt: dict) -> int:
     So a crowd of small stakers can take a node from someone who outspent every
     one of them individually, and the best-placed of them collects it.
     """
-    hegemon = max(staked, key=lambda a: (staked[a], a))
+    most = max(staked.values())
+    hegemon = random.choice([a for a, t in staked.items() if t == most])
     mob = sorted(((a, t) for a, t in revolt.items() if a != hegemon and t > 0),
                  key=lambda pair: pair[1])
     if not mob:
