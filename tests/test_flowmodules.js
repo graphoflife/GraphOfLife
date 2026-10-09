@@ -244,41 +244,4 @@ function test_frames_without_decisions_are_counted_not_guessed() {
 
 // ---------------------------------------------------------------------------
 
-const tests = Object.entries({
-  test_plogp_is_zero_at_zero,
-  test_two_cliques_joined_by_a_thread_are_two_modules,
-  test_one_clique_is_one_module,
-  test_structureless_flow_barely_compresses,
-  test_an_agent_nobody_trades_with_is_in_no_module,
-  test_flow_comes_from_the_allocations_and_ignores_self_stakes,
-  test_a_module_keeps_its_name_while_its_members_are_replaced,
-  test_turnover_is_reported_for_a_module_that_persists,
-  test_frames_without_decisions_are_counted_not_guessed,
-  test_regenerating_and_exchanging_modules_are_told_apart
-}).sort(([a], [b]) => a.localeCompare(b));
-
-// A test that is written and never listed here is worse than no test: it
-// reads as coverage and runs never. This one was, until the count gave it
-// away, so the count is now checked.
-const written = (fs.readFileSync(__filename, 'utf8').match(/^function test_/gm) || []).length;
-if (written !== tests.length) {
-  console.error(`${written} tests are written and ${tests.length} are listed to run`);
-  process.exit(1);
-}
-
-const failures = [];
-const started = Date.now();
-for (const [name, fn] of tests) {
-  try {
-    fn();
-    process.stdout.write('.');
-  } catch (err) {
-    failures.push([name, err]);
-    process.stdout.write('F');
-  }
-}
-const elapsed = ((Date.now() - started) / 1000).toFixed(1);
-console.log(`\n\n${tests.length - failures.length} passed, ${failures.length} failed `
-          + `in ${elapsed}s`);
-for (const [name, err] of failures) console.log(`\n--- ${name} ---\n${err.stack}`);
-process.exit(failures.length ? 1 : 0);
+require('./harness').run(__filename, name => eval(name));

@@ -310,40 +310,4 @@ async function test_a_stored_frame_reaches_the_page_as_a_frame() {
 
 // ---------------------------------------------------------------------------
 
-const tests = Object.entries({
-  test_a_stop_in_the_middle_of_a_slice_waits_for_it,
-  test_a_run_stopped_as_its_tab_closes_resumes_without_a_hole,
-  test_a_stop_and_a_start_at_once_leave_one_run,
-  test_a_rename_during_a_slice_is_kept,
-  test_a_run_deleted_during_a_slice_stays_deleted,
-  test_the_worker_answers_what_the_server_does_by_the_same_names,
-  test_a_stored_frame_reaches_the_page_as_a_frame
-}).sort(([a], [b]) => a.localeCompare(b));
-
-// A test that is written and never listed here is worse than no test: it reads
-// as coverage and runs never.
-const written = (fs.readFileSync(__filename, 'utf8')
-  .match(/^(async )?function test_/gm) || []).length;
-if (written !== tests.length) {
-  console.error(`${written} tests are written and ${tests.length} are listed to run`);
-  process.exit(1);
-}
-
-(async () => {
-  const failures = [];
-  const started = Date.now();
-  for (const [name, fn] of tests) {
-    try {
-      await fn();
-      process.stdout.write('.');
-    } catch (err) {
-      failures.push([name, err]);
-      process.stdout.write('F');
-    }
-  }
-  const elapsed = ((Date.now() - started) / 1000).toFixed(1);
-  console.log(`\n\n${tests.length - failures.length} passed, ${failures.length} failed `
-            + `in ${elapsed}s`);
-  for (const [name, err] of failures) console.log(`\n--- ${name} ---\n${err.stack}`);
-  process.exit(failures.length ? 1 : 0);
-})();
+require('./harness').run(__filename, name => eval(name));

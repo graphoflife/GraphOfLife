@@ -282,45 +282,4 @@ function test_one_iteration_is_the_smallest_window() {
 
 // ---------------------------------------------------------------------------
 
-const tests = Object.entries({
-  test_a_short_run_is_shown_whole,
-  test_the_scrubber_says_which_stretch_is_on_screen,
-  test_a_long_run_is_capped_at_the_asked_for_iterations,
-  test_the_window_is_contiguous,
-  test_the_window_cannot_hang_off_the_end,
-  test_the_slider_steps_by_whole_iterations,
-  test_frames_are_read_in_batches_and_all_of_them_arrive,
-  test_only_the_fields_a_caller_reads_are_asked_for,
-  test_reading_can_stop_early,
-  test_a_window_stopped_between_batches_ends_as_stopped,
-  test_the_budget_is_the_windows_not_each_batchs,
-  test_where_the_window_sits_is_read_off_the_frames,
-  test_one_iteration_is_the_smallest_window
-}).sort(([a], [b]) => a.localeCompare(b));
-
-// A test that is written and never listed here is worse than no test: it reads
-// as coverage and runs never.
-const written = (fs.readFileSync(__filename, 'utf8').match(/^function test_/gm) || []).length;
-if (written !== tests.length) {
-  console.error(`${written} tests are written and ${tests.length} are listed to run`);
-  process.exit(1);
-}
-
-(async () => {
-  const failures = [];
-  const started = Date.now();
-  for (const [name, fn] of tests) {
-    try {
-      await fn();
-      process.stdout.write('.');
-    } catch (err) {
-      failures.push([name, err]);
-      process.stdout.write('F');
-    }
-  }
-  const elapsed = ((Date.now() - started) / 1000).toFixed(1);
-  console.log(`\n\n${tests.length - failures.length} passed, ${failures.length} failed `
-            + `in ${elapsed}s`);
-  for (const [name, err] of failures) console.log(`\n--- ${name} ---\n${err.stack}`);
-  process.exit(failures.length ? 1 : 0);
-})();
+require('./harness').run(__filename, name => eval(name));

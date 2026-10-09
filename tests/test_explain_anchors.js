@@ -194,38 +194,4 @@ function test_the_matcher_here_is_the_one_that_ships() {
 
 // ---------------------------------------------------------------------------
 
-const tests = Object.entries({
-  test_every_anchor_still_finds_its_line,
-  test_every_step_resolves_to_as_many_regions_as_it_names,
-  test_a_head_picks_out_one_line_in_the_whole_script,
-  test_a_tail_picks_out_one_line_after_its_head,
-  test_no_region_is_too_long_to_read,
-  test_regions_run_forwards_and_land_inside_the_script,
-  test_the_blotto_step_reaches_the_revolution,
-  test_the_matcher_here_is_the_one_that_ships
-}).sort(([a], [b]) => a.localeCompare(b));
-
-// A test that is written and never listed here is worse than no test: it reads
-// as coverage and runs never.
-const written = (fs.readFileSync(__filename, 'utf8').match(/^function test_/gm) || []).length;
-if (written !== tests.length) {
-  console.error(`${written} tests are written and ${tests.length} are listed to run`);
-  process.exit(1);
-}
-
-const failures = [];
-const started = Date.now();
-for (const [name, fn] of tests) {
-  try {
-    fn();
-    process.stdout.write('.');
-  } catch (err) {
-    failures.push([name, err]);
-    process.stdout.write('F');
-  }
-}
-const elapsed = ((Date.now() - started) / 1000).toFixed(1);
-console.log(`\n\n${tests.length - failures.length} passed, ${failures.length} failed `
-          + `in ${elapsed}s`);
-for (const [name, err] of failures) console.log(`\n--- ${name} ---\n${err.stack}`);
-process.exit(failures.length ? 1 : 0);
+require('./harness').run(__filename, name => eval(name));
