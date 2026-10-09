@@ -16,9 +16,9 @@ import numpy as np
 
 import book_data as D
 import book_figures as F
-from book_figures import (AG, DEGREE_CLASSES, FR, FRAMES, KEPT_BY, PA, STATS_FILE, band_series, chapter,
-                          describe, dots, line, mean_over, recipe, runs_text, series, surviving_text,
-                          survivors)
+from book_figures import (AG, Classes, DEGREE_CLASSES, FR, FRAMES, KEPT_BY, PA, STATS_FILE, band_series,
+                          chapter, describe, dots, line, mean_over, recipe, runs_text, series,
+                          surviving_text, survivors)
 from book_chapters.common import (BAND_STEPS, BAND_WORDS, BLUE, CYAN, GREEN, GREY, ORANGE, RED,
                                   VIOLET, YELLOW, baseline)
 
@@ -26,8 +26,8 @@ SAMPLE = ("each run's frames, read every 25 iterations by `book_figures.sample_p
           "`2·t` after the reproduction phase of iteration *t*, frame `2·t + 1` after its game; "
           "`gol_store.read_frame(run, index)`)")
 
-TOKEN_CLASSES = [(1, 1, "1"), (2, 2, "2"), (3, 4, "3–4"), (5, 9, "5–9"), (10, 19, "10–19"),
-                 (20, 49, "20–49"), (50, 99, "50–99"), (100, 10 ** 9, "100+")]
+TOKEN_CLASSES = Classes((1, 1, "1"), (2, 2, "2"), (3, 4, "3–4"), (5, 9, "5–9"), (10, 19, "10–19"),
+                        (20, 49, "20–49"), (50, 99, "50–99"), (100, 10 ** 9, "100+"))
 
 
 def sampled(which: str, settled: bool = True) -> List[Tuple[Any, np.ndarray]]:
@@ -43,10 +43,6 @@ def sampled(which: str, settled: bool = True) -> List[Tuple[Any, np.ndarray]]:
 
 def pooled(which: str) -> np.ndarray:
     return np.concatenate([table for _, table in sampled(which)])
-
-
-def in_class(values: np.ndarray, classes) -> List[np.ndarray]:
-    return [(values >= lo) & (values <= hi) for lo, hi, _ in classes]
 
 
 def bars(categories: Sequence[str], values: Sequence[float], colour: int, label: str = None,
@@ -211,9 +207,9 @@ def gains(ch: F.Chapter) -> None:
     ag = pooled("agents")
     tokens, change = ag[:, AG["tokens"]], ag[:, AG["change"]]
     survived = ~np.isnan(change)
-    labels = [c[2] for c in TOKEN_CLASSES]
+    labels = TOKEN_CLASSES.labels
     died, lost, same, gained, rel = [], [], [], [], []
-    for m in in_class(tokens, TOKEN_CLASSES):
+    for m in TOKEN_CLASSES.masks(tokens):
         died.append(np.mean(~survived[m]))
         sm = m & survived
         lost.append(np.sum(change[sm] < 0) / m.sum())
@@ -401,10 +397,10 @@ def flow(ch: F.Chapter) -> None:
 
     ag = pooled("agents")
     degree = ag[:, AG["degree"]]
-    labels = [c[2] for c in DEGREE_CLASSES]
+    labels = DEGREE_CLASSES.labels
     from GraphOfLifeSimple import _apportion
     staked_share, home_share, even, rounded = [], [], [], []
-    for m in in_class(degree, DEGREE_CLASSES):
+    for m in DEGREE_CLASSES.masks(degree):
         ok = m & (ag[:, AG["candidates"]] > 0)
         staked_share.append(float(np.mean(ag[ok, AG["staked"]] / ag[ok, AG["candidates"]])))
         home_share.append(float(np.nanmean(ag[ok, AG["home"]])))
@@ -548,9 +544,9 @@ def children(ch: F.Chapter) -> None:
     founders = founders[founders[:, PA["t"]] == 0]
     tokens, invested = settled_[:, PA["tokens"]], settled_[:, PA["invested"]]
     had = invested > 0
-    labels = [c[2] for c in TOKEN_CLASSES]
+    labels = TOKEN_CLASSES.labels
     p_child, med, q25, q75, mean_share = [], [], [], [], []
-    for m in in_class(tokens, TOKEN_CLASSES):
+    for m in TOKEN_CLASSES.masks(tokens):
         p_child.append(float(had[m].mean()))
         share = invested[m & had] / tokens[m & had]
         med.append(float(np.median(share)) if share.size else None)
@@ -614,8 +610,8 @@ def children(ch: F.Chapter) -> None:
     ch.number("links", {"share": dict(zip(lcats, lshare)), "mean": float(links.mean()),
                         "handed": dict(zip(hcats, hshare)), "handed_mean": float(handed.mean())})
 
-    p_by_degree = [float(had[m].mean()) for m in in_class(settled_[:, PA["degree"]], DEGREE_CLASSES)]
-    dl = [c[2] for c in DEGREE_CLASSES]
+    p_by_degree = [float(had[m].mean()) for m in DEGREE_CLASSES.masks(settled_[:, PA["degree"]])]
+    dl = DEGREE_CLASSES.labels
     ch.figure(
         "by-degree", title="Who has a child, by connections",
         x={"label": "connections of the agent", "categories": dl}, y={"label": "share that had a child", "min": 0},

@@ -439,9 +439,36 @@ def world_pass(run_id: str, muller: Optional[Tuple[int, int]] = None) -> Dict[st
 SAMPLE_EVERY = 25
 AGENT_EVERY = 100
 
+class Classes(tuple):
+    """
+    Classes of a count — connections, tokens — as (lowest, highest, label), in
+    order, both ends included: what a figure groups agents by, and labels its
+    axis with.
+    """
+
+    def __new__(cls, *classes: Tuple[int, int, str]) -> "Classes":
+        return super().__new__(cls, classes)
+
+    @property
+    def labels(self) -> List[str]:
+        return [label for _, _, label in self]
+
+    def which(self, value: float) -> Optional[int]:
+        """The position of the class a value falls in, or None if it falls in none."""
+        return next((i for i, (lo, hi, _) in enumerate(self) if lo <= value <= hi), None)
+
+    def label_of(self, value: float) -> Optional[str]:
+        i = self.which(value)
+        return None if i is None else self[i][2]
+
+    def masks(self, values: np.ndarray) -> List[np.ndarray]:
+        """For each class, which of the values fall in it."""
+        return [(values >= lo) & (values <= hi) for lo, hi, _ in self]
+
+
 #: Nodes by how many connections they have, as Part III groups them.
-DEGREE_CLASSES = [(1, 1, "1"), (2, 2, "2"), (3, 4, "3–4"), (5, 9, "5–9"), (10, 49, "10–49"),
-                  (50, 10 ** 9, "50+")]
+DEGREE_CLASSES = Classes((1, 1, "1"), (2, 2, "2"), (3, 4, "3–4"), (5, 9, "5–9"), (10, 49, "10–49"),
+                         (50, 10 ** 9, "50+"))
 
 #: The columns of sample_pass's three tables, in order, and where each is.
 FRAME_COLUMNS = ("t", "agents", "genotypes", "entropy", "new_repro", "new_game", "births", "home",

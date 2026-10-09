@@ -18,7 +18,7 @@ from book_figures import (DEGREE_CLASSES, FRAMES, STATS_FILE, band_series, chapt
                           mean_over, recipe, runs_text, series, surviving_text, survivors)
 from book_chapters.common import (BAND_STEPS, BAND_WORDS, BLUE, CYAN, GREEN, GREY, ORANGE, RED,
                                   VIOLET, YELLOW, baseline)
-from book_chapters.measures import bars, in_class, settled_rows
+from book_chapters.measures import bars, settled_rows
 
 LAST = 2999
 
@@ -114,7 +114,7 @@ def scaling(ch: F.Chapter) -> None:
         # The exponent least squares would report if every agent held exactly its resting share.
         "slope_if_resting": float(np.polyfit(np.log(deg), np.log(deg + 1), 1)[0]),
         "classes": {lab: {"median": float(np.median(per[m])), "mean": float(per[m].mean())}
-                    for lab, m in zip([c[2] for c in DEGREE_CLASSES], in_class(deg, DEGREE_CLASSES))}})
+                    for lab, m in zip(DEGREE_CLASSES.labels, DEGREE_CLASSES.masks(deg))}})
 
     def classes_mean(x, y, positive=True):
         out = []

@@ -17,7 +17,8 @@ import numpy as np
 import book_data as D
 import book_figures as F
 from book_graph import graph
-from book_figures import FRAMES, band_series, chapter, describe, dots, line, lived_text, recipe, survivors
+from book_figures import (Classes, FRAMES, band_series, chapter, describe, dots, line, lived_text,
+                          recipe, survivors)
 from book_chapters.common import BLUE, CYAN, GREEN, GREY, ORANGE, RED, VIOLET, YELLOW, baseline
 
 LAGS = (1, 2, 5, 10, 20, 50, 100, 200)
@@ -93,13 +94,15 @@ def mobility(run_id: str) -> Dict[str, Any]:
                     for k, v in top.items()}}
 
 
-DEGREE_CLASSES = ((1, 1, "1"), (2, 2, "2"), (3, 9, "3–9"), (10, 49, "10–49"), (50, 10 ** 9, "50+"))
+#: Coarser than the book's DEGREE_CLASSES: there are few of the richest hundredth to share out.
+COARSE_DEGREE_CLASSES = Classes((1, 1, "1"), (2, 2, "2"), (3, 9, "3–9"), (10, 49, "10–49"),
+                                (50, 10 ** 9, "50+"))
 
 
 @D.measure("fragile")
 def fragile(run_id: str) -> Dict[str, Any]:
     """Who dies within ten games, by connections: the richest hundredth, and every agent."""
-    out = {label: {"richest": [0, 0], "all": [0, 0]} for _, _, label in DEGREE_CLASSES}
+    out = {label: {"richest": [0, 0], "all": [0, 0]} for label in COARSE_DEGREE_CLASSES.labels}
     for t0 in STARTS:
         a = D.frame_at(run_id, t0, 2)
         later = set(D.frame_at(run_id, t0 + 10, 2)["ids"])
@@ -108,7 +111,7 @@ def fragile(run_id: str) -> Dict[str, Any]:
         cut = np.quantile(tokens, 0.99)
         for u, tok in zip(a["ids"], tokens):
             k = len(adj[u])
-            label = next(lab for lo, hi, lab in DEGREE_CLASSES if lo <= k <= hi) if k else None
+            label = COARSE_DEGREE_CLASSES.label_of(k)
             if label is None:
                 continue
             for group in ("all", "richest") if tok >= cut else ("all",):
@@ -217,7 +220,7 @@ def rich(ch: F.Chapter) -> None:
     # Which of the richest die: wealth on a dead end.
     from book_chapters.measures import bars
     frag = [fragile(s.run_id) for s in alive]
-    labels = [label for _, _, label in DEGREE_CLASSES]
+    labels = COARSE_DEGREE_CLASSES.labels
     counts = {g: np.array([[sum(f[lab][g][i] for f in frag) for lab in labels] for i in (0, 1)], float)
               for g in ("richest", "all")}
     share = {g: c[1] / np.maximum(c[0], 1) for g, c in counts.items()}
@@ -245,7 +248,9 @@ def rich(ch: F.Chapter) -> None:
 # ---------------------------------------------------------------------------
 
 GROWTH_STARTS = range(500, 3000, 25)
-CLASSES = [(1, 1), (2, 2), (3, 4), (5, 9), (10, 19), (20, 49), (50, 99), (100, 10 ** 6)]
+#: Finer than the book's DEGREE_CLASSES, for a rate fitted as a power of the connections.
+FINE_DEGREE_CLASSES = Classes((1, 1, "1"), (2, 2, "2"), (3, 4, "3–4"), (5, 9, "5–9"), (10, 19, "10–19"),
+                              (20, 49, "20–49"), (50, 99, "50–99"), (100, 10 ** 6, "100+"))
 
 
 @D.measure("growth")
@@ -282,7 +287,7 @@ def growth(run_id: str) -> Dict[str, Any]:
             if u not in alive_b:
                 continue
             k = deg_a[u]
-            cls = next(i for i, (lo, hi) in enumerate(CLASSES) if lo <= k <= hi) if k else None
+            cls = FINE_DEGREE_CLASSES.which(k)
             if cls is not None:
                 gained[cls][0] += 1
                 gained[cls][1] += new_b[u]
@@ -291,7 +296,7 @@ def growth(run_id: str) -> Dict[str, Any]:
             k = deg_b[u]
             if not k:
                 continue
-            cls = next(i for i, (lo, hi) in enumerate(CLASSES) if lo <= k <= hi)
+            cls = FINE_DEGREE_CLASSES.which(k)
             lost[cls][0] += 1
             lost[cls][1] += k if u not in alive_c else gone_c[u]
         for birth in (b.get("decisions") or {}).get("births") or []:
@@ -307,13 +312,13 @@ def growth(run_id: str) -> Dict[str, Any]:
 def grows(ch: F.Chapter) -> None:
     alive = survivors(baseline())
     g = {s.run_id: growth(s.run_id) for s in alive}
-    labels = ["1", "2", "3–4", "5–9", "10–19", "20–49", "50–99", "100+"]
+    labels = FINE_DEGREE_CLASSES.labels
     mids = np.array([1, 2, 3.5, 7, 14.5, 34.5, 74.5, 150.0])
 
     def rate(kind):
-        table = np.full((len(g), len(CLASSES)), np.nan)
+        table = np.full((len(g), len(FINE_DEGREE_CLASSES)), np.nan)
         for w, m in enumerate(g.values()):
-            for c in range(len(CLASSES)):
+            for c in range(len(FINE_DEGREE_CLASSES)):
                 n, total = m[kind].get(str(c), [0, 0])
                 if n >= 20:
                     table[w, c] = total / n
@@ -321,7 +326,7 @@ def grows(ch: F.Chapter) -> None:
     gain_t, loss_t = rate("gained"), rate("lost")
     pooled = {kind: np.array([sum(m[kind].get(str(c), [0, 0])[1] for m in g.values()) /
                               max(1, sum(m[kind].get(str(c), [0, 0])[0] for m in g.values()))
-                              for c in range(len(CLASSES))]) for kind in ("gained", "lost")}
+                              for c in range(len(FINE_DEGREE_CLASSES))]) for kind in ("gained", "lost")}
     fit = {}
     for kind, values in pooled.items():
         keep = values > 0
@@ -359,8 +364,8 @@ def grows(ch: F.Chapter) -> None:
                        "ln(class middle)."]))
     ch.number("kernel", {"classes": labels, "gained": pooled["gained"].tolist(), "lost": pooled["lost"].tolist(),
                          "gain_slope": fit["gained"][0], "loss_slope": fit["lost"][0],
-                         "gained_by_world": [describe(gain_t[:, c]) for c in range(len(CLASSES))],
-                         "lost_by_world": [describe(loss_t[:, c]) for c in range(len(CLASSES))]})
+                         "gained_by_world": [describe(gain_t[:, c]) for c in range(len(FINE_DEGREE_CLASSES))],
+                         "lost_by_world": [describe(loss_t[:, c]) for c in range(len(FINE_DEGREE_CLASSES))]})
 
     births = sum(m["births"] for m in g.values())
     linked = sum(m["parent_linked"] for m in g.values())

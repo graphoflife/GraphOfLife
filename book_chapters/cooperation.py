@@ -16,7 +16,7 @@ from book_graph import degrees
 from book_figures import (DEGREE_CLASSES, FR, FRAMES, KEPT_BY, PA, chapter, describe, dots, line, recipe,
                           surviving_text, survivors)
 from book_chapters.common import BLUE, CYAN, GREEN, GREY, ORANGE, RED, VIOLET, YELLOW, baseline
-from book_chapters.measures import SAMPLE, bars, in_class, sampled, stacked
+from book_chapters.measures import SAMPLE, bars, sampled, stacked
 
 EVERY = 100
 
@@ -78,7 +78,7 @@ def kinship(run_id: str) -> Dict[str, Any]:
                 other_stake.append(float(np.mean(other)))
                 kin_more += np.mean(kin) > np.mean(other)
                 d = degree[u]
-                cls = next(i for i, (lo, hi, _) in enumerate(DEGREE_CLASSES) if lo <= d <= hi)
+                cls = DEGREE_CLASSES.which(d)
                 by_degree[cls][0] += np.mean(kin)
                 by_degree[cls][1] += np.mean(other)
                 by_degree[cls][2] += 1
