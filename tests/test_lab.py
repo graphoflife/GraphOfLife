@@ -192,6 +192,12 @@ def test_a_file_two_processes_change_loses_neither_change():
             assert len(json.load(f)["seen"]) == 8 * 25
 
 
+def test_a_median_of_an_even_number_is_between_the_two_in_the_middle():
+    assert gol_stats.median([4, 1, 3, 2]) == 2.5
+    assert gol_stats.median([3, None, 1, 2]) == 2
+    assert gol_stats.median([None]) is None
+
+
 def test_every_plan_says_only_what_its_analysis_reads():
     # The analysis reads its block with .get(): a misspelt key was never read,
     # and an analysis ran without what its plan asked for.

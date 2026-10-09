@@ -19,9 +19,15 @@ import numpy as np
 
 
 def median(values: Iterable[Optional[float]]) -> Optional[float]:
-    """The middle of the values that are there, or None if none is."""
+    """
+    The middle of the values that are there — the mean of the two in the
+    middle when there is an even number of them — or None if none is.
+    """
     values = sorted(v for v in values if v is not None)
-    return values[len(values) // 2] if values else None
+    if not values:
+        return None
+    middle = len(values) // 2
+    return values[middle] if len(values) % 2 else (values[middle - 1] + values[middle]) / 2
 
 
 def describe(values: Iterable[Optional[float]]) -> Dict[str, Any]:
