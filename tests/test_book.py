@@ -202,6 +202,33 @@ def test_frame_at_refuses_a_frame_that_is_not_the_one_asked_for():
 
 
 # ---------------------------------------------------------------------------
+# The book's lists of settings
+# ---------------------------------------------------------------------------
+
+def test_the_book_explains_every_setting_a_plan_can_set():
+    # Every chapter's table of settings lists them in book/settings.json's order,
+    # explains each from it, and links each to its heading in the settings note.
+    # A setting the engine gains and these miss is left out of every table, or
+    # linked to nowhere.
+    import json
+    import re
+    import gol_plan
+    book = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "book")
+    with open(os.path.join(book, "settings.json"), encoding="utf-8") as f:
+        glossary = json.load(f)
+    order = glossary["order"]
+    assert len(order) == len(set(order)), "a setting is listed twice"
+    assert set(order) == gol_plan.SETTABLE, (
+        f"settings.json lists {sorted(set(order) - gol_plan.SETTABLE)} that a plan cannot set, "
+        f"and misses {sorted(gol_plan.SETTABLE - set(order))}")
+    missing = [k for k in order if not (glossary["settings"].get(k) or {}).get("meaning")]
+    assert not missing, f"no meaning for {missing}"
+    with open(os.path.join(book, "notes", "settings.md"), encoding="utf-8") as f:
+        headings = set(re.findall(r"^### (\w+)$", f.read(), re.M))
+    assert set(order) <= headings, f"the settings note has no heading for {sorted(set(order) - headings)}"
+
+
+# ---------------------------------------------------------------------------
 # Drawing
 # ---------------------------------------------------------------------------
 
