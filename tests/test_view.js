@@ -483,8 +483,13 @@ function test_the_starving_die_first_and_the_stranded_second() {
   // Two removals in order, for different reasons, and the recording keeps one
   // list. The split is read back from the tokens: starvation runs first, so
   // anyone removed holding nothing starved and anyone removed still holding
-  // something was cut adrift.
-  const stage = stageWhere(s => (s.marks.removed || []).length > 1);
+  // something was cut adrift. Read at a moment that removed some of each.
+  const stage = stageWhere(s => {
+    const had = heldMap(s);
+    const removed = s.marks.removed || [];
+    return removed.some(id => had.get(id) === 0) && removed.some(id => had.get(id) > 0);
+  });
+  if (!stage) throw new Error('the recording has no moment where some starved and some were stranded');
   const view = { shown: new Map(), layout: fakeLayout() };
   StepView.show(view, stage, { effect: 'none' });
 
@@ -502,9 +507,6 @@ function test_the_starving_die_first_and_the_stranded_second() {
   if (together.size !== removed.size || [...removed].some(id => !together.has(id))) {
     throw new Error(`the two waves cover ${together.size} agents and the recording `
                   + `removed ${removed.size}`);
-  }
-  if (!starved.length || !stranded.length) {
-    throw new Error('the fixture stage should have one of each kind to be worth testing');
   }
 }
 

@@ -14,11 +14,15 @@ leaves switched off; this turns it on and writes down what comes back.
 The window was not picked by hand. Every mechanic has to appear at least once
 or the Explanation would be describing something the reader cannot see, and the
 world has to stay small enough to follow one agent through it. A search over
-seeds and starting points settled on seed 5 from iteration 129, which runs
-between 27 and 42 agents and contains, across ten iterations, 59 births, 32
-handovers, 95 revolutions, 193 conquests, 169 pruned links and 27 starvations.
-Its first iteration also loses a piece to the largest-component rule in both
-phases, which is the one thing hardest to catch by chance.
+seeds and starting points settled on seed 1 from iteration 96, which runs
+between 19 and 49 agents after its games (68 at most, between a phase's births
+and its cull) and contains, across ten iterations, 48 births, 38 handovers,
+147 revolutions, 222 conquests, 37 pruned links and 6 starvations. Its first
+iteration also loses a piece to the largest-component rule, which is the one
+thing hardest to catch by chance. Searched again on 2026-10-09, when the
+recording no longer held the stages the engine had come to show (the messages
+written before each look, gifts and pruning after reproduction) and the old
+window had grown to hundreds of agents.
 
 Nothing here belongs to the Explanation in particular. What comes out is a list
 of stages, each a graph plus a bag of marks naming who did what, which is the
@@ -41,8 +45,8 @@ HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(HERE, "web", "data", "explain-run.json")
 
 # Chosen by tools/record_explain_run.py --search; see the note above.
-SEED = 5
-SKIP = 128            # iterations computed and thrown away
+SEED = 1
+SKIP = 95             # iterations computed and thrown away
 KEEP = 10
 TOKENS = 500
 AGENTS = 40
