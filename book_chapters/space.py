@@ -366,19 +366,19 @@ def measure(adj: Dict[int, set], seed: int, steps: int = 512, balls: int = 40, w
 
 #: Agents above which a world's dimensions are read with more balls and longer walks:
 #: the worlds of 409,600 tokens (52,000 to 70,000), and none smaller (at most 30,000).
-BIG = 40_000
+LARGE_WORLD = 40_000
 
 
 @D.measure("dims2")
 def world_dimensions(run_id: str) -> Dict[str, Any]:
     """
     Both rulers on a world after its last game, on its random twin and on its
-    core. A world of more than BIG agents is read with more balls and longer
-    walks, which its size allows and its wider range of scales needs.
+    core. A world of more than LARGE_WORLD agents is read with more balls and
+    longer walks, which its size allows and its wider range of scales needs.
     """
     from book_chapters.structure import degree_preserving
     adj = last_world(run_id)
-    size = dict(steps=1024, balls=100, walks=48) if len(adj) > BIG else {}
+    size = dict(steps=1024, balls=100, walks=48) if len(adj) > LARGE_WORLD else {}
     return {"world": measure(adj, 23, **size), "twin": measure(degree_preserving(adj, 23), 23, **size),
             "core": measure(core(adj), 23, **size)}
 
