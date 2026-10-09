@@ -12,8 +12,8 @@ import numpy as np
 
 import book_data as D
 import book_figures as F
-from book_figures import (FRAMES, STATS_FILE, band_series, chapter, describe, dots, line, mean_over, recipe,
-                          runs_text, series, surviving_text, survivors)
+from book_figures import (FRAMES, STATS_FILE, band_series, chapter, describe, dots, line, mean_over,
+                          recipe, runs_text, series, stacked_areas, surviving_text, survivors)
 from book_chapters.common import (BAND_STEPS, BAND_WORDS, BLUE, CYAN, GREEN, GREY, ORANGE, RED,
                                   VIOLET, YELLOW, baseline)
 
@@ -530,15 +530,8 @@ def lineage(ch: F.Chapter) -> None:
         m = w["muller"]
         xs = [t for t, n, _ in m["series"]]
         shares = np.array([[c / n for c in per] for t, n, per in m["series"]])
-        bottom = np.zeros(len(xs))
-        areas = []
-        for rank in range(min(7, shares.shape[1])):
-            hi = bottom + shares[:, rank]
-            areas.append({"label": f"family {rank + 1}", "kind": "area", "x": xs, "lo": bottom.tolist(),
-                          "hi": hi.tolist(), "colour": rank, "alpha": 0.9})
-            bottom = hi
-        areas.append({"label": "all other families", "kind": "area", "x": xs, "lo": bottom.tolist(),
-                      "hi": [1.0] * len(xs), "colour": "#5b6b7c", "alpha": 0.9})
+        areas = stacked_areas(xs, [(f"family {rank + 1}", shares[:, rank], rank)
+                                   for rank in range(min(7, shares.shape[1]))], "all other families")
         ch.figure(
             f"families-{seed}", title=f"Families of iteration {window[0]:,}, world of seed {seed}",
             x={"label": "iteration", "min": window[0], "max": window[1]},

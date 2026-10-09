@@ -30,7 +30,7 @@ import math
 import os
 import sys
 from collections import Counter
-from typing import Any, Callable, Dict, Iterable, List, Optional, Tuple
+from typing import Any, Callable, Dict, Iterable, List, Optional, Sequence, Tuple
 
 import numpy as np
 
@@ -258,6 +258,58 @@ def thin(its: np.ndarray, values: np.ndarray, every: int) -> Tuple[np.ndarray, n
             xs.append((edges[b] + edges[b + 1] - 1) / 2)
             ys.append(inside.mean())
     return np.array(xs), np.array(ys)
+
+
+def bars(categories: Sequence[str], values: Sequence[float], colour: int, label: str = None,
+         slot: Tuple[float, float] = (-0.38, 0.38), **extra: Any) -> Dict[str, Any]:
+    """One bar per category, filling `slot` of the space each category has."""
+    k = np.arange(len(categories))
+    return {"label": label, "kind": "bars", "x0": (k + slot[0]).tolist(), "x1": (k + slot[1]).tolist(),
+            "y": [float(v) for v in values], "colour": colour, **extra}
+
+
+def stacked(categories: Sequence[str], parts: Sequence[Tuple[str, Sequence[float], int]],
+            width: float = 0.36) -> List[Dict[str, Any]]:
+    """Bars stacked one on another: parts are (label, a value per category, colour)."""
+    below = np.zeros(len(categories))
+    out = []
+    for label, values, colour in parts:
+        top = below + np.asarray(values, float)
+        out.append(bars(categories, top, colour, label, (-width, width), y0=below.tolist(), alpha=0.9))
+        below = top
+    return out
+
+
+#: What is left over in a stack of shares: a grey of its own, apart from the palette.
+REST = "#5b6b7c"
+
+
+def area(x: List[float], lo: List[float], hi: List[float], colour: Any, label: Optional[str] = None,
+         alpha: float = 0.9) -> Dict[str, Any]:
+    """A region filled between lo and hi."""
+    return {"label": label, "kind": "area", "x": x, "lo": lo, "hi": hi, "colour": colour, "alpha": alpha}
+
+
+def stacked_areas(x: List[float], parts: Iterable[Tuple[str, np.ndarray, Any]],
+                  rest: str) -> List[Dict[str, Any]]:
+    """Shares stacked from 0 up: parts are (label, a share per x, colour), and `rest` names what is left up to 1."""
+    bottom = np.zeros(len(x))
+    out = []
+    for label, share, colour in parts:
+        top = bottom + share
+        out.append(area(x, bottom.tolist(), top.tolist(), colour, label))
+        bottom = top
+    out.append(area(x, bottom.tolist(), [1.0] * len(x), REST, rest))
+    return out
+
+
+def cells(rects: Iterable[Tuple[float, float, float, float, float]]) -> Dict[str, Any]:
+    """Rectangles (x0, x1, y0, y1, value), coloured by value on the chart's colour bar."""
+    out: Dict[str, Any] = {"kind": "cells", "x0": [], "x1": [], "y0": [], "y1": [], "value": []}
+    for rect in rects:
+        for key, v in zip(("x0", "x1", "y0", "y1", "value"), rect):
+            out[key].append(v)
+    return out
 
 
 def jitter(k: int, n: int, seed: int, width: float = 0.28) -> np.ndarray:

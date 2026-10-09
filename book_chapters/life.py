@@ -10,8 +10,9 @@ from typing import List
 import numpy as np
 
 import book_figures as F
-from book_figures import (FRAMES, STATS_FILE, band_series, chapter, describe, dots, line, lived, mean_over,
-                          per_agent, recipe, runs_text, series, surviving_text, survivors)
+from book_figures import (FRAMES, STATS_FILE, band_series, chapter, describe, dots, line, lived,
+                          mean_over, per_agent, recipe, runs_text, series, stacked_areas, surviving_text,
+                          survivors)
 from book_chapters.common import (BAND_STEPS, BAND_WORDS, BLUE, CYAN, GREEN, GREY, ORANGE, RED,
                                   VIOLET, YELLOW, baseline)
 
@@ -272,15 +273,8 @@ def youth(ch: F.Chapter) -> None:
     shares = np.array([[c / n for c in per] for t, n, per in founders["series"]])
     order = np.argsort(-shares.max(axis=0))
     top = order[:7]
-    bottom = np.zeros(len(xs))
-    areas = []
-    for rank, j in enumerate(top):
-        hi = bottom + shares[:, j]
-        areas.append({"label": f"founder line {rank + 1}", "kind": "area", "x": xs,
-                      "lo": bottom.tolist(), "hi": hi.tolist(), "colour": rank, "alpha": 0.9})
-        bottom = hi
-    areas.append({"label": "all other founders", "kind": "area", "x": xs, "lo": bottom.tolist(),
-                  "hi": [1.0] * len(xs), "colour": "#5b6b7c", "alpha": 0.9})
+    areas = stacked_areas(xs, [(f"founder line {rank + 1}", shares[:, j], rank) for rank, j in enumerate(top)],
+                          "all other founders")
     ch.figure(
         "founder-lines", title="Whose descendants? World of seed 1, first 300 iterations",
         x={"label": "iteration", "min": 0, "max": 300}, y={"label": "share of the living", "min": 0, "max": 1},

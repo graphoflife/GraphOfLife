@@ -556,6 +556,66 @@ class Chart:
 
 
 # ---------------------------------------------------------------------------
+# What a chart may say
+# ---------------------------------------------------------------------------
+#
+# Every key the drawing above reads, and nothing else. A key it does not read
+# is not drawn, and a misspelt one — `color`, `outerlo` — would vanish without
+# a word; so render() refuses a chart that says something it cannot draw.
+
+AXIS = {"label", "min", "max", "log", "categories"}
+GUIDE = {"axis", "at", "label"}
+BAR = {"map", "min", "max", "label", "log", "symlog"}
+CHART = {"title", "x", "y", "series", "guides", "legend", "height", "colourbar"}
+NETWORK = {"kind", "title", "nodes", "edges", "colour", "edgeGroup", "edgeLabels", "edgeAlpha",
+           "nodeSize", "legend", "height"}
+NODES = {"x", "y", "group", "value"}
+NETWORK_COLOUR = {"labels", "by"} | BAR
+#: Each kind of series, and what it reads. A band series also carries `alive`,
+#: how many runs each of its points counted, for whoever reads the data.
+SERIES = {
+    None: {"label", "x", "y", "colour", "width", "dash", "alpha", "lo", "hi", "outerLo", "outerHi",
+           "points", "size", "alive"},
+    "bars": {"kind", "label", "x0", "x1", "y", "y0", "colour", "alpha"},
+    "area": {"kind", "label", "x", "lo", "hi", "colour", "alpha"},
+    "cells": {"kind", "label", "x0", "x1", "y0", "y1", "value", "colour"},
+}
+
+
+def validate(chart: Dict[str, Any], where: str = "a chart") -> List[str]:
+    """What in a chart the drawing would not read: unknown kinds and keys, by where they are."""
+    problems: List[str] = []
+
+    def unknown(what: str, given: Any, allowed: set) -> None:
+        if not isinstance(given, dict):
+            problems.append(f"{where}: {what} is not a dict")
+            return
+        extra = sorted(set(given) - allowed)
+        if extra:
+            problems.append(f"{where}: {what} says {', '.join(extra)}, which is not drawn")
+
+    if chart.get("kind") == "network":
+        unknown("the network", chart, NETWORK)
+        unknown("its nodes", chart.get("nodes", {}), NODES)
+        unknown("its colour", chart.get("colour") or {}, NETWORK_COLOUR)
+        return problems
+    unknown("the chart", chart, CHART)
+    for axis in ("x", "y"):
+        unknown(f"its {axis} axis", chart.get(axis, {}), AXIS)
+    for guide in chart.get("guides") or []:
+        unknown("a guide", guide, GUIDE)
+    if chart.get("colourbar"):
+        unknown("its colour bar", chart["colourbar"], BAR)
+    for i, series in enumerate(chart.get("series") or []):
+        kind = series.get("kind")
+        if kind not in SERIES:
+            problems.append(f"{where}: series {i} is of kind {kind!r}, which is not drawn")
+            continue
+        unknown(f"series {i} ({kind or 'line'})", series, SERIES[kind])
+    return problems
+
+
+# ---------------------------------------------------------------------------
 # A figure
 # ---------------------------------------------------------------------------
 
@@ -565,6 +625,9 @@ def render(charts: List[Dict[str, Any]], columns: int = 1, name: str = "figure")
     `name` makes its ids its own, so that several figures inlined in one page
     do not clip each other's charts.
     """
+    problems = [p for k, chart in enumerate(charts) for p in validate(chart, f"{name}, chart {k + 1}")]
+    if problems:
+        raise ValueError("\n".join(problems))
     prefix = re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-") or "figure"
     columns = max(1, min(columns, len(charts)))
     w = WIDTH / columns

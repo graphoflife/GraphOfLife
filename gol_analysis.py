@@ -442,7 +442,7 @@ class _Runs:
                         drawn.append({"label": f"{condition}, seed {seed}" if several else f"seed {seed}",
                                       "x": its.tolist(), "y": values.tolist(), "width": 1.0})
         _draw(os.path.join(BOOK, "figures", name, figure["name"]), {
-            "title": figure.get("title"), "caption": figure.get("caption"),
+            "title": figure.get("title"),
             "x": {"label": "iteration"},
             "y": {"label": figure.get("y", stat), "log": bool(figure.get("log")),
                   **({"min": figure["min"]} if "min" in figure else {})},
@@ -889,7 +889,7 @@ def analyse_scaling(name: str, plan: Dict[str, Any],
             drawn.append({"label": "in proportion to the tokens (exponent 1)",
                           "x": ends.tolist(), "y": (middle * ends).tolist(), "width": 1.0})
         _draw(os.path.join(BOOK, "figures", name, item.get("name", stat)), {
-            "title": item.get("title"), "caption": item.get("caption"),
+            "title": item.get("title"),
             "x": {"label": "tokens in the world", "log": True},
             "y": {"label": item.get("y", stat), "log": True}, "series": drawn})
         figures.append(item.get("name", stat))

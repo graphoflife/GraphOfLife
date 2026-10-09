@@ -14,11 +14,11 @@ import numpy as np
 import book_data as D
 import book_figures as F
 from book_graph import bfs, degree_preserving, graph, triangles
-from book_figures import (DEGREE_CLASSES, FRAMES, STATS_FILE, band_series, chapter, describe, dots, line,
-                          mean_over, recipe, runs_text, series, surviving_text, survivors)
+from book_figures import (DEGREE_CLASSES, FRAMES, STATS_FILE, band_series, cells, chapter, describe,
+                          dots, line, mean_over, recipe, runs_text, series, surviving_text, survivors)
 from book_chapters.common import (BAND_STEPS, BAND_WORDS, BLUE, CYAN, GREEN, GREY, ORANGE, RED,
                                   VIOLET, YELLOW, baseline)
-from book_chapters.measures import bars, settled_rows
+from book_chapters.measures import settled_rows
 
 LAST = 2999
 
@@ -69,14 +69,8 @@ def scaling(ch: F.Chapter) -> None:
 
     # Tokens against degree: a two-dimensional histogram.
     tedges = [1, 2, 3, 4, 6, 9, 13, 20, 30, 50, 100, 200, 500, 1000, 5000]
-    cells = {"kind": "cells", "x0": [], "x1": [], "y0": [], "y1": [], "value": []}
-    for _, (a, b), m in log_classes(deg, DEGREE_EDGES):
-        for _, (c, d), m2 in log_classes(tok[m], tedges):
-            cells["x0"].append(a)
-            cells["x1"].append(b)
-            cells["y0"].append(c)
-            cells["y1"].append(d)
-            cells["value"].append(int(m2.sum()))
+    grid = cells((a, b, c, d, int(m2.sum())) for _, (a, b), m in log_classes(deg, DEGREE_EDGES)
+                 for _, (c, d), m2 in log_classes(tok[m], tedges))
     slope, intercept = np.polyfit(np.log(deg), np.log(tok), 1)
     ks = np.array([1, 400])
     mid = [(np.sqrt(a * b), float(np.median(tok[m]))) for _, (a, b), m in log_classes(deg, DEGREE_EDGES)]
@@ -84,14 +78,14 @@ def scaling(ch: F.Chapter) -> None:
         "tokens-degree", title="Tokens against connections",
         x={"label": "connections k (logarithmic)", "log": True, "min": 1, "max": 400},
         y={"label": "tokens (logarithmic)", "log": True, "min": 1, "max": 5000},
-        series=[cells,
+        series=[grid,
                 line([m[0] for m in mid], [m[1] for m in mid], "median tokens of each class of k", "#eef4fa",
                      width=2),
                 line(ks, np.exp(intercept) * ks ** slope, f"least squares: tokens ∝ k^{slope:.2f}", RED,
                      width=1.5, dash=[5, 4]),
                 line(ks, mid[0][1] * (ks + 1) / 2, "tokens ∝ k + 1 (an even split's resting state)", CYAN,
                      width=1.5, dash=[2, 3])],
-        colourbar={"map": "viridis", "min": 1, "max": max(cells["value"]), "label": "agents", "log": True},
+        colourbar={"map": "viridis", "min": 1, "max": max(grid["value"]), "label": "agents", "log": True},
         caption="Every agent alive after the last game of the 26 worlds that lived to the end "
                 f"({len(deg):,} agents), counted in cells of connections k and tokens, both in classes of "
                 "growing width; a cell's colour is how many agents it holds, on a logarithmic scale. White: the "

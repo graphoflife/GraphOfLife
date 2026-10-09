@@ -17,8 +17,8 @@ import numpy as np
 import book_data as D
 import book_figures as F
 from book_graph import graph
-from book_figures import (Classes, FRAMES, band_series, chapter, describe, dots, line, lived_text,
-                          quantile_band, recipe, survivors)
+from book_figures import (Classes, FRAMES, band_series, bars, cells, chapter, describe, dots, line,
+                          lived_text, quantile_band, recipe, survivors)
 from book_chapters.common import BLUE, CYAN, GREEN, GREY, ORANGE, RED, VIOLET, YELLOW, baseline
 
 LAGS = (1, 2, 5, 10, 20, 50, 100, 200)
@@ -161,21 +161,15 @@ def rich(ch: F.Chapter) -> None:
     moves = np.sum([np.array(m["moves"]) for m in mob.values()], axis=0)
     shares = moves / moves.sum(axis=1, keepdims=True)
     names = ["poorest fifth", "second", "third", "fourth", "richest fifth"]
-    cells = {"kind": "cells", "x0": [], "x1": [], "y0": [], "y1": [], "value": []}
-    for i in range(QUINTILES):
-        for j in range(QUINTILES + 1):
-            cells["x0"].append(j - 0.5)
-            cells["x1"].append(j + 0.5)
-            cells["y0"].append(i - 0.5)
-            cells["y1"].append(i + 0.5)
-            cells["value"].append(float(shares[i, j]))
+    grid = cells((j - 0.5, j + 0.5, i - 0.5, i + 0.5, float(shares[i, j]))
+                 for i in range(QUINTILES) for j in range(QUINTILES + 1))
     stay = shares[:, :QUINTILES]
     shorrocks = float((QUINTILES - np.trace(stay / stay.sum(axis=1, keepdims=True))) / (QUINTILES - 1))
     ch.figure(
         "moves", title="From one fifth to another, ten games later",
         x={"label": "fifth of wealth ten games later", "categories": names + ["dead"]},
         y={"label": "fifth of wealth now", "categories": names},
-        series=[cells], colourbar={"map": "viridis", "min": 0, "max": float(shares.max()), "label": "share of the row"},
+        series=[grid], colourbar={"map": "viridis", "min": 0, "max": float(shares.max()), "label": "share of the row"},
         caption="All agents alive after the game of t = 500, 600, …, 2,700 in the 26 worlds that lived to the "
                 "end, sorted into fifths of the world by their tokens (ranks, ties shared), and where each one "
                 "was ten games later: in which fifth, or dead. Each row adds up to 1; a cell's colour is the "
@@ -216,7 +210,6 @@ def rich(ch: F.Chapter) -> None:
                           "ratio": ratio.tolist(), "count": tops})
 
     # Which of the richest die: wealth on a dead end.
-    from book_chapters.measures import bars
     frag = [fragile(s.run_id) for s in alive]
     labels = COARSE_DEGREE_CLASSES.labels
     counts = {g: np.array([[sum(f[lab][g][i] for f in frag) for lab in labels] for i in (0, 1)], float)

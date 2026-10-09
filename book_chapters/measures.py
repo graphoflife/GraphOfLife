@@ -17,8 +17,8 @@ import numpy as np
 import book_data as D
 import book_figures as F
 from book_figures import (AG, Classes, DEGREE_CLASSES, FR, FRAMES, KEPT_BY, PA, STATS_FILE, band_series,
-                          chapter, describe, dots, line, mean_over, recipe, runs_text, series,
-                          surviving_text, survivors)
+                          bars, chapter, describe, dots, line, mean_over, recipe, runs_text, series,
+                          stacked, surviving_text, survivors)
 from book_chapters.common import (BAND_STEPS, BAND_WORDS, BLUE, CYAN, GREEN, GREY, ORANGE, RED,
                                   VIOLET, YELLOW, baseline)
 
@@ -43,26 +43,6 @@ def sampled(which: str, settled: bool = True) -> List[Tuple[Any, np.ndarray]]:
 
 def pooled(which: str) -> np.ndarray:
     return np.concatenate([table for _, table in sampled(which)])
-
-
-def bars(categories: Sequence[str], values: Sequence[float], colour: int, label: str = None,
-         slot: Tuple[float, float] = (-0.38, 0.38), **extra: Any) -> Dict[str, Any]:
-    """One bar per category, filling `slot` of the space each category has."""
-    k = np.arange(len(categories))
-    return {"label": label, "kind": "bars", "x0": (k + slot[0]).tolist(), "x1": (k + slot[1]).tolist(),
-            "y": [float(v) for v in values], "colour": colour, **extra}
-
-
-def stacked(categories: Sequence[str], parts: Sequence[Tuple[str, Sequence[float], int]],
-            width: float = 0.36) -> List[Dict[str, Any]]:
-    """Bars stacked one on another: parts are (label, a value per category, colour)."""
-    below = np.zeros(len(categories))
-    out = []
-    for label, values, colour in parts:
-        top = below + np.asarray(values, float)
-        out.append(bars(categories, top, colour, label, (-width, width), y0=below.tolist(), alpha=0.9))
-        below = top
-    return out
 
 
 def settled_rows(run_id: str, phase: int = 2) -> List[Dict[str, Any]]:

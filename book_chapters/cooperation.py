@@ -13,10 +13,10 @@ import numpy as np
 import book_data as D
 import book_figures as F
 from book_graph import degrees
-from book_figures import (DEGREE_CLASSES, FR, FRAMES, KEPT_BY, PA, chapter, describe, dots, line, recipe,
-                          surviving_text, survivors)
+from book_figures import (DEGREE_CLASSES, FR, FRAMES, KEPT_BY, PA, cells, chapter, describe, dots, line,
+                          recipe, surviving_text, survivors)
 from book_chapters.common import BLUE, CYAN, GREEN, GREY, ORANGE, RED, VIOLET, YELLOW, baseline
-from book_chapters.measures import SAMPLE, bars, sampled, stacked
+from book_chapters.measures import SAMPLE, sampled
 
 EVERY = 100
 
@@ -249,24 +249,21 @@ def cooperation(ch: F.Chapter) -> None:
 
     # How exactly stakes are returned.
     sample = np.array([pair for k in kin for pair in k["returned_sample"]], float)
-    cells = {"kind": "cells", "x0": [], "x1": [], "y0": [], "y1": [], "value": []}
     edges_ = [1, 2, 3, 4, 6, 9, 15, 30, 60, 120, 250, 500, 1000]
+    counted = []
     for a, b in zip(edges_[:-1], edges_[1:]):
         for c, d in zip(edges_[:-1], edges_[1:]):
             m = (sample[:, 0] >= a) & (sample[:, 0] < b) & (sample[:, 1] >= c) & (sample[:, 1] < d)
             if m.any():
-                cells["x0"].append(a)
-                cells["x1"].append(b)
-                cells["y0"].append(c)
-                cells["y1"].append(d)
-                cells["value"].append(int(m.sum()))
+                counted.append((a, b, c, d, int(m.sum())))
+    grid = cells(counted)
     equal = [k["returned_equal"] for k in kin]
     corr = [k["returned_corr"] for k in kin]
     ch.figure(
         "returned", title="What comes back for what is given",
         x={"label": "tokens A staked on B (logarithmic)", "log": True, "min": 1, "max": 1000},
         y={"label": "tokens B staked on A (logarithmic)", "log": True, "min": 1, "max": 1000},
-        series=[cells], colourbar={"map": "viridis", "min": 1, "max": max(cells["value"]), "label": "pairs",
+        series=[grid], colourbar={"map": "viridis", "min": 1, "max": max(grid["value"]), "label": "pairs",
                                    "log": True},
         caption="Pairs of neighbours that both staked on each other in a game: how many tokens each staked on the "
                 f"other ({len(sample):,} pairs, up to 400 drawn at random per world that lived to the end, from "
