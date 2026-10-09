@@ -59,6 +59,8 @@ import gol_worker
 from gol_worker import EXIT_FAULT, EXIT_REFUSED
 import gol_plan
 from gol_config import SimConfig
+# What a simulation costs, fitted to what the runs recorded.
+from gol_costs import costs, fit_costs, median, predict, tail_rows
 # The plans, which the lab carries out and the analysis and the book read too.
 from gol_plan import (WORLD, LabError, RunSpec, baseline, experiment_runs, experiments, read_plan,
                       wanted, what_it_is, workers_cap)
@@ -71,22 +73,10 @@ ENGINE_FILES = ("GraphOfLifeSimple.py", "gol_config.py", "gol_series.py", "gol_s
                 "gol_worker.py")
 
 DEFAULT_WORKERS = 4
-SETTLED = 100                     # iterations before a world's size says anything
 CHECKPOINT_SECONDS = 600          # about how often a run saves itself
 DISK_MARGIN = 10 * 2**30          # never fill the disk closer than this
 MEMORY_SHARE = 0.75               # of the machine's memory, for all workers together
 
-#: What a simulation costs before anything has been measured: the calibration
-#: of 2026-10-02 on the baseline B1 (Core Ultra 7 258V, numpy 2.5.1) — about
-#: 0.95 ms an agent in memory with 15,795 weights, and more in the lab, which
-#: also writes every frame and its statistics.
-CALIBRATION = {
-    "secondsPerAgentIteration": 0.85e-3,    # per 10,000 weights in a brain
-    "agentsPerToken": 0.18,
-    "bytesPerAgentIteration": 70.0,
-    "peakBytesPerWeightByte": 3.0,          # the Blotto copy and the checkpoint stack
-    "baseMB": 300.0,
-}
 
 
 def lab_dir() -> str:
@@ -221,174 +211,8 @@ def reproduce(run_id: str, engine: str, iterations: int) -> Dict[str, Any]:
 
 
 # ----------------------------------------------------------------------------
-# What a simulation costs
+# Costs: when a job starts, and how long the queue takes
 # ----------------------------------------------------------------------------
-
-def _tail_rows(path: str, count: int = 400) -> List[Dict[str, Any]]:
-    """The last complete rows of a stats file, read from its end."""
-    try:
-        with open(path, "rb") as f:
-            f.seek(0, os.SEEK_END)
-            size = f.tell()
-            f.seek(max(0, size - count * 2500))
-            lines = f.read().split(b"\n")
-    except FileNotFoundError:
-        return []
-    rows = []
-    for line in lines[1 if size > count * 2500 else 0:]:
-        if line:
-            try:
-                rows.append(json.loads(line))
-            except json.JSONDecodeError:
-                pass
-    return rows
-
-
-def _weights(config: Dict[str, Any]) -> Tuple[int, int]:
-    from GraphOfLifeSimple import brain_shape
-    shape = brain_shape(SimConfig.from_dict(config))
-    return shape["weights"], shape["bytesPerWeight"]
-
-
-def _median(values: List[float]) -> Optional[float]:
-    values = sorted(v for v in values if v is not None)
-    return values[len(values) // 2] if values else None
-
-
-def kind_of(config: Dict[str, Any]) -> str:
-    """
-    Which kind of run a configuration makes, for what it costs: everything but
-    the size of the world, the seed and what is recorded. Kinds differ in
-    more than the size of their brains — B1's brains are half as big again as
-    the ones before it and cost an agent hardly any more, because its agents
-    have fewer neighbours to look at — so each is fitted on its own.
-    """
-    what = {k: v for k, v in what_it_is(config).items() if k not in WORLD and k != "seed"}
-    return hashlib.sha1(json.dumps(what, sort_keys=True).encode()).hexdigest()[:10]
-
-
-def fit_costs() -> Dict[str, Any]:
-    """
-    Fit what a simulation costs to every run the lab has recorded, and keep it
-    in .lab/costs.json: overall, and for each kind of run. Each measure falls
-    back from the kind to all runs to the calibration, until something has
-    measured it.
-    """
-    seconds, agent_iterations, per_token, disk, peak = 0.0, 0.0, [], [], []
-    kinds: Dict[str, Dict[str, Any]] = {}
-    runs = 0
-    for meta in store.list_runs():
-        if "lab" not in meta:
-            continue
-        import gol_record
-        rows = _tail_rows(gol_record.stats_path(meta["id"]))
-        timed = [r for r in rows if r.get("_seconds") and r.get("nodes")]
-        if not timed:
-            continue
-        runs += 1
-        weights, width = _weights(meta["config"])
-        # Total time over total work, not the typical iteration: a run spends
-        # most of its time when it is biggest, and that is what an estimate of
-        # its length has to get right.
-        spent = sum(r["_seconds"] for r in timed)
-        seconds += spent
-        agent_iterations += sum(r["nodes"] * weights / 1e4 for r in timed)
-        # Only after the founding boom: a world's first iterations are
-        # nothing like the population it settles at, and short runs would
-        # otherwise teach the estimates that worlds stay small.
-        tokens = meta["config"]["total_tokens"]
-        settled = [r["nodes"] / tokens for r in rows if r.get("iteration", 0) >= SETTLED]
-        per_token += settled
-        config = meta["config"]
-        kind = kinds.setdefault(kind_of(config), {
-            "seconds": 0.0, "agentIterations": 0, "perToken": [], "runs": 0,
-            "label": (f"{meta.get('strain')}, {config['message_amount']}-number messages, "
-                      f"mutation {config['mutation_probability']}, {weights:,} weights")})
-        kind["seconds"] += spent
-        kind["agentIterations"] += sum(r["nodes"] for r in timed)
-        kind["perToken"] += settled
-        kind["runs"] += 1
-        biggest = max(r["nodes"] for r in timed)
-        top = max((r.get("_peakMB") or 0) for r in timed)
-        if top and biggest:
-            peak.append((biggest * weights * width / 2**20, top))
-        frames = os.path.join(store.run_dir(meta["id"]), "frames")
-        stored = sum(os.path.getsize(os.path.join(frames, n)) for n in os.listdir(frames))
-        recorded = (meta.get("iteration") or 0) * (_median([r["nodes"] for r in rows]) or 0)
-        if recorded:
-            disk.append(stored / recorded)
-
-    slope, base = _memory_line(peak)
-    fitted = {
-        "secondsPerAgentIteration": seconds / agent_iterations if agent_iterations else None,
-        "agentsPerToken": _median(per_token),
-        "bytesPerAgentIteration": _median(disk),
-        "peakBytesPerWeightByte": slope,
-        "baseMB": base,
-    }
-    costs = {**CALIBRATION, **{k: v for k, v in fitted.items() if v is not None},
-             "measured": {k: v is not None for k, v in fitted.items()},
-             # Seconds per agent as each kind of run measured them, unscaled,
-             # and the population it settles at, where it has been seen to.
-             "kinds": {key: {"label": k["label"],
-                             "secondsPerAgent": k["seconds"] / k["agentIterations"],
-                             "agentsPerToken": _median(k["perToken"]), "runs": k["runs"]}
-                       for key, k in kinds.items() if k["agentIterations"]},
-             "runs": runs, "fitted": time.strftime("%Y-%m-%dT%H:%M:%S%z")}
-    store.write_json(os.path.join(_made(lab_dir()), "costs.json"), costs, indent=1)
-    return costs
-
-
-def _memory_line(points: List[Tuple[float, float]]) -> Tuple[Optional[float], Optional[float]]:
-    """
-    A run's peak memory as a base plus a multiple of its brains' bytes, from
-    (brain MB, peak MB) of the recorded runs: the multiple by least squares, the
-    base then raised until no run lies above the line, so that an estimate
-    bounds a run rather than averaging it. Small runs are nearly all base and
-    big ones nearly all brains; until runs of very different sizes have been
-    measured the two cannot be told apart, and the calibration's multiple stands.
-    """
-    if not points:
-        return None, None
-    xs, ys = [p[0] for p in points], [p[1] for p in points]
-    slope = CALIBRATION["peakBytesPerWeightByte"]
-    if len(points) >= 3 and max(xs) >= 10 * max(min(xs), 1e-9):
-        mx, my = sum(xs) / len(xs), sum(ys) / len(ys)
-        sxx = sum((x - mx) ** 2 for x in xs)
-        if sxx > 0:
-            slope = max(1.0, sum((x - mx) * (y - my) for x, y in zip(xs, ys)) / sxx)
-    return slope, max(y - slope * x for x, y in points)
-
-
-def costs() -> Dict[str, Any]:
-    try:
-        with open(os.path.join(lab_dir(), "costs.json")) as f:
-            return json.load(f)
-    except FileNotFoundError:
-        return {**CALIBRATION, "measured": {}, "runs": 0}
-
-
-def predict(config: Dict[str, Any], iterations: int,
-            known: Optional[Dict[str, Any]] = None) -> Dict[str, float]:
-    """
-    What `iterations` more of a run with this configuration will cost: from
-    runs of its own kind where some have been measured, otherwise from all
-    runs scaled by the size of its brains, otherwise from the calibration.
-    """
-    known = known or costs()
-    weights, width = _weights(config)
-    kind = known.get("kinds", {}).get(kind_of(config), {})
-    agents = (kind.get("agentsPerToken") or known["agentsPerToken"]) * config["total_tokens"]
-    per_agent = kind.get("secondsPerAgent") or known["secondsPerAgentIteration"] * weights / 1e4
-    return {
-        "agents": agents,
-        "seconds": iterations * agents * per_agent,
-        # The frames, and the checkpoint beside them, which holds every brain.
-        "diskBytes": iterations * agents * known["bytesPerAgentIteration"] + agents * weights * width,
-        "peakMB": known["baseMB"] + agents * weights * width
-                  * known["peakBytesPerWeightByte"] / 2**20,
-    }
-
 
 def _planned_checkpoints(config: Dict[str, Any], known: Dict[str, Any]) -> int:
     """Iterations between checkpoints so that one falls about every ten minutes."""
@@ -817,9 +641,9 @@ def _write_state(running: Dict[str, Any]) -> None:
 def _recent_rate(run_id: str) -> Optional[float]:
     """Seconds per iteration lately, from the run's own record."""
     import gol_record
-    rows = [r["_seconds"] for r in _tail_rows(gol_record.stats_path(run_id), 40)
+    rows = [r["_seconds"] for r in tail_rows(gol_record.stats_path(run_id), 40)
             if r.get("_seconds")]
-    return _median(rows[-20:])
+    return median(rows[-20:])
 
 
 def experiment_status(name: str, control: Dict[str, Any], known: Dict[str, Any],

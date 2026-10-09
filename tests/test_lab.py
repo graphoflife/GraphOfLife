@@ -31,6 +31,7 @@ sys.path.insert(0, HERE)
 os.environ["GOL_RUNS_DIR"] = tempfile.mkdtemp(prefix="gol-tests-")
 atexit.register(shutil.rmtree, os.environ["GOL_RUNS_DIR"], True)
 
+import gol_costs      # noqa: E402
 import gol_lab        # noqa: E402
 import gol_plan       # noqa: E402
 import gol_record     # noqa: E402
@@ -238,10 +239,10 @@ def test_a_plan_is_read_once_a_tick_and_handed_out_as_copies():
 
 def test_the_lab_starts_what_fits_and_no_more():
     with lab(plan("E91", seeds="1..4"), plan("E92", seeds="1..3", workers=1)):
-        known = gol_lab.costs()
+        known = gol_costs.costs()
         jobs = [gol_lab.Job(s, s.until, "e", False, None, 0)
                 for s in gol_plan.experiment_runs("E91") + gol_plan.experiment_runs("E92")]
-        cost = gol_lab.predict(jobs[0].spec.config, jobs[0].until, known)
+        cost = gol_costs.predict(jobs[0].spec.config, jobs[0].until, known)
         roomy = 10 ** 15
 
         start, short = gol_lab.decide(jobs, [], 3, {}, 1e9, roomy, known)
@@ -312,7 +313,7 @@ def test_a_plan_can_keep_its_runs_to_one_worker():
     with lab(alone, beside, plan("E93", workers=0)):
         refused(lambda: gol_plan.experiment_runs("E93"), "workers")
         assert gol_lab.experiment_status("E91", gol_lab.read_control() | {"workers": 3},
-                                         gol_lab.costs(), False)["workers"] == 1
+                                         gol_costs.costs(), False)["workers"] == 1
         gol_lab.request(run="E91", workers=3)
         gol_lab.request(run="E92")
         log = io.StringIO()
@@ -601,7 +602,7 @@ def test_what_a_simulation_costs_is_fitted_to_what_runs_recorded():
         gol_lab.request(run="E91", workers=2)
         with contextlib.redirect_stdout(io.StringIO()):
             assert gol_lab.run_lab() == 0
-        costs = gol_lab.fit_costs()
+        costs = gol_costs.fit_costs()
         seconds = work = 0.0
         for spec in gol_plan.experiment_runs("E91"):
             weights = brain_shape(SimConfig.from_dict(spec.config))["weights"]
@@ -612,22 +613,22 @@ def test_what_a_simulation_costs_is_fitted_to_what_runs_recorded():
         assert abs(costs["secondsPerAgentIteration"] - seconds / work) < 1e-12, costs
         assert costs["measured"]["secondsPerAgentIteration"] and costs["runs"] == 2
         assert not costs["measured"]["agentsPerToken"], "a five-iteration run taught the size of a world"
-        assert costs["agentsPerToken"] == gol_lab.CALIBRATION["agentsPerToken"]
-        assert gol_lab.costs() == costs, "the fit was not kept for the estimates"
+        assert costs["agentsPerToken"] == gol_costs.CALIBRATION["agentsPerToken"]
+        assert gol_costs.costs() == costs, "the fit was not kept for the estimates"
 
         # A run of the kind measured is estimated from that kind's own speed,
         # not from all runs scaled by the size of their brains.
         spec = gol_plan.experiment_runs("E91")[0]
-        kind = costs["kinds"][gol_lab.kind_of(spec.config)]
+        kind = costs["kinds"][gol_costs.kind_of(spec.config)]
         nodes = sum(r["nodes"] for s in gol_plan.experiment_runs("E91")
                     for r in gol_record.read_stats(s.run_id) if r.get("_seconds"))
         assert abs(kind["secondsPerAgent"] - seconds / nodes) < 1e-12, kind
-        guess = gol_lab.predict(spec.config, 10, costs)
+        guess = gol_costs.predict(spec.config, 10, costs)
         assert abs(guess["seconds"] - 10 * guess["agents"] * kind["secondsPerAgent"]) < 1e-9
         other = {**spec.config, "message_amount": 7}
-        assert gol_lab.kind_of(other) != gol_lab.kind_of(spec.config)
-        assert gol_lab.kind_of({**spec.config, "total_tokens": 999, "seed": 4}) \
-            == gol_lab.kind_of(spec.config), "world size and seed made another kind"
+        assert gol_costs.kind_of(other) != gol_costs.kind_of(spec.config)
+        assert gol_costs.kind_of({**spec.config, "total_tokens": 999, "seed": 4}) \
+            == gol_costs.kind_of(spec.config), "world size and seed made another kind"
 
 
 def test_the_memory_estimate_bounds_every_run_and_is_not_inflated_by_small_ones():
@@ -639,14 +640,14 @@ def test_the_memory_estimate_bounds_every_run_and_is_not_inflated_by_small_ones(
     """
     # (MB of brains, MB at the peak): an overhead of about 100 MB, then five times the brains.
     runs = [(0.3, 62.0), (3.0, 220.0), (30.0, 260.0), (300.0, 1600.0), (2000.0, 10100.0)]
-    slope, base = gol_lab._memory_line(runs)
+    slope, base = gol_costs._memory_line(runs)
     assert 4.5 < slope < 5.5, slope
     assert all(peak <= base + slope * brains + 1e-9 for brains, peak in runs), (slope, base)
     assert any(abs(peak - (base + slope * brains)) < 1e-9 for brains, peak in runs), "the bound is loose"
     # Runs of one size cannot tell base from brains: the calibration's multiple stands.
-    slope, base = gol_lab._memory_line([(3.0, 220.0), (3.1, 230.0), (3.2, 210.0)])
-    assert slope == gol_lab.CALIBRATION["peakBytesPerWeightByte"], slope
-    assert gol_lab._memory_line([]) == (None, None)
+    slope, base = gol_costs._memory_line([(3.0, 220.0), (3.1, 230.0), (3.2, 210.0)])
+    assert slope == gol_costs.CALIBRATION["peakBytesPerWeightByte"], slope
+    assert gol_costs._memory_line([]) == (None, None)
 
 
 def test_a_disk_that_would_fill_pauses_the_lab_and_says_why():

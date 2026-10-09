@@ -53,6 +53,7 @@ from typing import Any, Dict, List, Optional, Tuple
 
 import numpy as np
 
+import gol_costs
 import gol_lab
 import gol_plan
 import gol_record
@@ -925,15 +926,10 @@ def costs_report() -> Dict[str, Any]:
     from GraphOfLifeSimple import brain_shape
     from gol_config import SimConfig
 
-    known = gol_lab.fit_costs()
+    known = gol_costs.fit_costs()
     points, runs = [], []
-    for meta in store.list_runs():
-        if "lab" not in meta:
-            continue
-        rows = [r for r in gol_lab._tail_rows(gol_record.stats_path(meta["id"]), 2000)
-                if r.get("_seconds") and r.get("nodes")]
-        if not rows:
-            continue
+    # The samples the costs were just fitted to, not a reading of its own.
+    for meta, _, rows in gol_costs.samples():
         weights = brain_shape(SimConfig.from_dict(meta["config"]))["weights"]
         step = max(1, len(rows) // 100)
         points += [(r["nodes"], r["_seconds"] / (weights / 1e4)) for r in rows[::step]]
