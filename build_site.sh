@@ -33,8 +33,8 @@ for f in GraphOfLifeSimple.py gol_config.py gol_series.py gol_lineage.py gol_spe
   cp "${here}/${f}" "${out}/py/${f}"
 done
 
-# web/py already holds the two modules that only make sense in a browser —
-# gol_browser.py and the gol_store stand-in — and cp -r brought them along.
+# web/py already holds the one module that only makes sense in a browser —
+# gol_browser.py — and cp -r brought it along.
 
 # The notes the Research tab renders. Kept in research/ rather than web/,
 # because they are written for a reader with a text editor first and the site

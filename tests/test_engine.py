@@ -46,6 +46,7 @@ atexit.register(shutil.rmtree, os.environ["GOL_RUNS_DIR"], True)
 
 import networkx as nx
 
+import gol_record
 import gol_series
 from gol_config import SimConfig
 from GraphOfLifeSimple import GraphOfLife, make_brain, new_world
@@ -612,7 +613,7 @@ def test_the_recorder_summarises_a_frame_as_the_series_does():
         assert [row["_heavy"] for row in rows] == [row["iteration"] % 2 == 0 for row in rows]
         assert all("_seconds" in row for row in rows if row["phase"] == 2)
 
-        series = gol_series.build_series(run_id)["series"]
+        series = gol_record.build_series(run_id)["series"]
         for row in rows:
             frame = row["_frame"]
             for key, value in row.items():
@@ -1213,9 +1214,9 @@ def test_a_coarse_request_spans_the_whole_run_and_a_finer_one_refines_it():
             gol_store.update_meta(run_id, frame_count=written,
                                   iteration=world.iteration)
 
-            coarse = gol_series.build_series(run_id, points=3)
-            finer = gol_series.build_series(run_id, points=5)
-            whole = gol_series.build_series(run_id)
+            coarse = gol_record.build_series(run_id, points=3)
+            finer = gol_record.build_series(run_id, points=5)
+            whole = gol_record.build_series(run_id)
 
             last = whole["series"]["iteration"][-1]
             assert coarse["series"]["iteration"][0] == 0
@@ -1298,11 +1299,11 @@ def test_a_heavy_pass_upgrades_the_rows_a_light_one_left_behind():
             gol_store.update_meta(run_id, frame_count=written,
                                   iteration=world.iteration)
 
-            light = gol_series.build_series(run_id, heavy=False)
+            light = gol_record.build_series(run_id, heavy=False)
             assert light["heavy"] is False
             assert all(v is None for v in light["series"]["bridges"])
 
-            heavy = gol_series.build_series(run_id, heavy=True)
+            heavy = gol_record.build_series(run_id, heavy=True)
             assert heavy["heavy"] is True
             assert all(v is not None for v in heavy["series"]["bridges"]), (
                 "the heavy pass did not upgrade the rows the light pass stored")
@@ -1310,7 +1311,7 @@ def test_a_heavy_pass_upgrades_the_rows_a_light_one_left_behind():
 
             # And going back to a light request keeps what the heavy pass found,
             # rather than throwing the expensive work away again.
-            back = gol_series.build_series(run_id, heavy=False)
+            back = gol_record.build_series(run_id, heavy=False)
             assert all(v is not None for v in back["series"]["bridges"])
 
             assert not [k for k in heavy["keys"] if k.startswith("_")], (
@@ -1356,15 +1357,15 @@ def test_a_reply_is_everything_the_history_knows():
         gol_store.BASE_DIR = tmp
         try:
             run_id, _, _ = _recorded_run(20)
-            whole = gol_series.build_series(run_id, heavy=False)
-            coarse = gol_series.build_series(run_id, points=2, heavy=False)
+            whole = gol_record.build_series(run_id, heavy=False)
+            coarse = gol_record.build_series(run_id, points=2, heavy=False)
             assert coarse["count"] == whole["count"], (
                 f"a coarse request returned {coarse['count']} of {whole['count']} known rows")
             assert coarse["done"] == coarse["totalPoints"] and coarse["complete"], (
                 "a summarised run does not say it is finished, so a climb would not stop")
 
             # The first deep step summarises two samples and hands back the rest.
-            deep = gol_series.build_series(run_id, points=2, heavy=True)
+            deep = gol_record.build_series(run_id, points=2, heavy=True)
             assert deep["count"] == whole["count"], "a deep step dropped the cheap rows"
             filled = sum(v is not None for v in deep["series"]["bridges"])
             assert 0 < filled < deep["count"], f"{filled} bridge counts after one deep step"
@@ -1516,7 +1517,7 @@ def test_the_browser_and_the_server_summarise_a_run_alike():
         try:
             run_id, _, written = _recorded_run(24)
             for points in (2, 5, None):
-                server = gol_series.build_series(run_id, points=points, heavy=False)
+                server = gol_record.build_series(run_id, points=points, heavy=False)
                 plan = browser.series_plan(run_id, written, points, ["nodes"])
                 frames = [{"index": f, "frame": gol_store.read_frame(run_id, f)}
                           for it in plan["iterations"] for f in (2 * it, 2 * it + 1)
@@ -1549,11 +1550,11 @@ def test_a_history_says_how_big_the_run_was():
         gol_store.BASE_DIR = tmp
         try:
             run_id, world, written = _recorded_run(10)
-            first = gol_series.build_series(run_id, heavy=False)
+            first = gol_record.build_series(run_id, heavy=False)
             assert first["frames"] == written and first["complete"]
 
             written = _record(run_id, world, written, 10)
-            grown = gol_series.build_series(run_id, heavy=False)
+            grown = gol_record.build_series(run_id, heavy=False)
             assert grown["frames"] == written and grown["complete"]
             assert max(grown["series"]["iteration"]) > max(first["series"]["iteration"]), (
                 "the history of a run that grew did not grow with it")
@@ -3302,7 +3303,7 @@ def test_families_are_counted_from_ancestry_not_from_one_frame():
     import gol_series
     import gol_store
 
-    window = gol_series._CladeWindow(window=2)
+    window = gol_series.CladeWindow(window=2)
 
     # A founder, then two children of it, then a grandchild of each. Anchored
     # two iterations back from iteration 3, everything alive descends from the
@@ -3314,10 +3315,10 @@ def test_families_are_counted_from_ancestry_not_from_one_frame():
     assert window.families([5, 6], 3) == 1, "both descend from brain 2, alive at 1"
 
     # Anchored at the present, everything is its own family.
-    assert gol_series._CladeWindow(window=0).families([5, 6], 3) == 2
+    assert gol_series.CladeWindow(window=0).families([5, 6], 3) == 2
 
     # Ancestry beyond the window is dropped rather than kept for ever.
-    long_window = gol_series._CladeWindow(window=1)
+    long_window = gol_series.CladeWindow(window=1)
     for i in range(1, 400):
         long_window.observe(i, [i], [i - 1])
     assert len(long_window.parent) < 40, \
@@ -3353,7 +3354,7 @@ def test_the_family_count_is_absent_when_the_chain_is_broken():
                             written += 1
                 gol_store.update_meta(run_id, frame_count=written,
                                       iteration=world.iteration)
-                return gol_series.build_series(run_id)
+                return gol_record.build_series(run_id)
             finally:
                 gol_store.BASE_DIR = original
 
@@ -3785,16 +3786,16 @@ def test_a_cancelled_series_build_keeps_what_it_finished():
                 calls["n"] += 1
                 return calls["n"] > 3          # asked before every frame
 
-            gol_series.build_series(run_id, heavy=False, cancelled=hung_up)
-            kept = len(gol_series._load_cache(run_id).get("rows", []))
+            gol_record.build_series(run_id, heavy=False, cancelled=hung_up)
+            kept = len(gol_record._load_cache(run_id).get("rows", []))
             assert 0 < kept < written, (
                 f"a cancelled build kept {kept} of {written} rows; it should keep "
                 f"what it finished and nothing it did not")
 
             # The next build carries on from there and completes.
-            done = gol_series.build_series(run_id, heavy=False)
+            done = gol_record.build_series(run_id, heavy=False)
             assert done["complete"], "the build after a cancelled one did not finish"
-            assert len(gol_series._load_cache(run_id)["rows"]) == written
+            assert len(gol_record._load_cache(run_id)["rows"]) == written
         finally:
             gol_store.BASE_DIR = original
 

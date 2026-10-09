@@ -109,7 +109,9 @@ def history(engine: Any, worlds: List[Any], iterations: int,
 def stats_digest(modules: Dict[str, Any], frames: List[Dict[str, Any]]) -> str:
     """Every frame's row as a run's stats.jsonl would hold it, heavy every time."""
     series, record = modules["gol_series"], modules["gol_record"]
-    families = series._CladeWindow()
+    # Public since the series cache moved to gol_record; older engines name it privately.
+    families = getattr(series, "CladeWindow", None) or series._CladeWindow
+    families = families()
     previous = None
     digest_ = hashlib.sha256()
     for index, frame in enumerate(frames):

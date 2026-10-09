@@ -48,7 +48,7 @@ have descendants ([Chapter 11](../chapters/11-the-first-hundred-iterations.md)).
 
 ## In the code
 
-`_CladeWindow` in `gol_series.py`. It needs every frame in order, because
+`CladeWindow` in `gol_series.py`. It needs every frame in order, because
 the family tree is a chain; it is computed while a run records, and kept for
 both phases' rows.
 

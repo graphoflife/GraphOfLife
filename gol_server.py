@@ -376,7 +376,8 @@ class Handler(BaseHTTPRequestHandler):
             keys = query.get("keys")
             heavy = (gol_series.needs_graph(k for k in keys[0].split(",") if k)
                      if keys else True)
-            answer = gol_series.build_series(parts[2], points, heavy,
+            import gol_record
+            answer = gol_record.build_series(parts[2], points, heavy,
                                              cancelled=self._client_gone)
             if self._client_gone():
                 self.close_connection = True
@@ -386,8 +387,8 @@ class Handler(BaseHTTPRequestHandler):
 
         if (len(parts) == 5 and parts[:2] == ["api", "runs"]
                 and parts[3] == "series" and parts[4] == "progress"):
-            import gol_series
-            self._send_json(gol_series.progress(parts[2]))
+            import gol_record
+            self._send_json(gol_record.series_progress(parts[2]))
             return
 
         if len(parts) == 5 and parts[:2] == ["api", "runs"] and parts[3] == "frames":

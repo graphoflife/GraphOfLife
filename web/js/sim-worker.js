@@ -33,7 +33,6 @@ const PY_DIR = new URL('../py/', self.location.href).href;
 const PY_FILES = [
   'gol_config.py',
   'GraphOfLifeSimple.py',
-  'gol_store.py',
   'gol_spectral.py',
   'gol_lightning.py',
   'gol_series.py',
