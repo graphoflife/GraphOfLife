@@ -1134,7 +1134,7 @@ def test_the_teaching_script_gives_a_revolution_to_its_strongest_rebel():
 #: kept under the version, and the version is bumped by hand — its own comment
 #: records a time it was not. Change what a row holds and this digest moves;
 #: the test then asks for the version to move with it.
-SERIES_ROW_PIN = (22, "cb770dabf276")
+SERIES_ROW_PIN = (23, "cb770dabf276")
 
 
 def test_the_series_version_moves_with_what_a_row_holds():
@@ -3323,6 +3323,41 @@ def test_families_are_counted_from_ancestry_not_from_one_frame():
         long_window.observe(i, [i], [i - 1])
     assert len(long_window.parent) < 40, \
         f"the window is holding {len(long_window.parent)} links; it is not forgetting"
+
+
+def test_a_genotype_that_outlives_the_window_stays_its_own_family():
+    """
+    A founder and its child, both alive for ever, are two families however
+    long they live. Twice the window after it was first seen, a genotype's
+    ancestry is let go — and the founder's was, while it was still alive, so
+    the next time it was seen it was taken for a newborn, and its child was
+    counted into its family.
+
+    It also made the count depend on where it had started: a count taken up
+    after a pause had first seen everybody later, and let them go later. The
+    rows of a run that was paused were not the rows of one that was not.
+    """
+    founder, child = 1, 2
+
+    def frames(until):
+        yield 0, [founder], [gol_series.NO_PARENT]
+        for t in range(1, until):
+            yield t, [founder, child], [gol_series.NO_PARENT, founder]
+
+    window = gol_series.CladeWindow(window=2)
+    counts = [window.count({"iteration": t, "brain_ids": ids, "parent_brain_ids": up}, t)
+              for t, ids, up in frames(30)]
+    assert counts[3:] == [2] * 27, counts
+
+    # A count taken up anywhere, warmed on the frames before as the recorder
+    # warms it, goes on exactly as one that never stopped.
+    for start in range(1, 25):
+        resumed = gol_series.CladeWindow(window=2)
+        history = [({"iteration": t, "brain_ids": ids, "parent_brain_ids": up}, t)
+                   for t, ids, up in frames(30)]
+        resumed.warm((index, frame) for frame, index in history[max(0, start - 4):start])
+        again = [resumed.count(frame, index) for frame, index in history[start:]]
+        assert again == counts[start:], (start, again, counts[start:])
 
 
 def test_the_family_count_is_absent_when_the_chain_is_broken():

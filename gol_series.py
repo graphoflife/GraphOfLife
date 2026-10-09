@@ -36,6 +36,11 @@ NO_PARENT = -1
 # row at once, which is how the power-law statistics came to be computed and
 # then dropped on the way out.
 #
+# 23: `cladesInWindow` — a genotype alive for longer than twice the window
+# was let go, then taken for a newborn when next seen and counted into its
+# parent's family: the count ran about 0.2% low, and depended on when the run
+# had last been paused.
+# 22: gifts — `gifts`, `giftTokens` and `giftShare`.
 # 21: net lightning — the same, on flow with reciprocity cancelled.
 # 20: lightning — how much of the Blotto flow circulates.
 # 19: `spectralGap` — lambda2 of the normalised Laplacian.
@@ -44,7 +49,7 @@ NO_PARENT = -1
 # pool was dropped in favour of a resurrection. That commit did not bump this,
 # so every cache built before it has been serving the old number ever since,
 # which is the exact failure the paragraph above describes.
-SERIES_VERSION = 22
+SERIES_VERSION = 23
 
 # At most this many iterations are analysed for a run's history.
 #
@@ -1052,9 +1057,12 @@ class CladeWindow:
     """
     Who each living agent descends from, a few iterations ago.
 
-    Only the last `window` iterations of ancestry are held, which is all a
-    windowed count needs and is what keeps this bounded on a long run — the
-    whole forest of a five-thousand-iteration world is millions of nodes.
+    Ancestry older than twice the window is let go, which is what keeps this
+    bounded on a long run — the whole forest of a five-thousand-iteration world
+    is millions of nodes. A genotype still alive is the exception: it is held
+    for as long as it lives. Let go, it would be taken for a newborn the next
+    time it was seen and counted into its parent's family, and the count would
+    then depend on when the run had last been paused.
 
     It has to be fed every iteration in order. Ancestry is a chain: sample it
     and the links between the samples are gone, so a run recorded with
@@ -1072,24 +1080,33 @@ class CladeWindow:
 
     def observe(self, iteration: int, brain_ids: Any, parent_brain_ids: Any) -> None:
         added: List[int] = []
+        living: Set[int] = set()
         for brain, parent in zip(brain_ids, parent_brain_ids):
             brain = int(brain)
+            living.add(brain)
             if brain in self.born:
                 continue
             self.born[brain] = iteration
             self.parent[brain] = int(parent)
             added.append(brain)
         self._seen.append((iteration, added))
-        self._forget(iteration)
+        self._forget(iteration, living)
 
-    def _forget(self, now: int) -> None:
-        """Drop ancestry older than the window, so this stays bounded."""
+    def _forget(self, now: int, living: Set[int]) -> None:
+        """
+        Drop ancestry older than twice the window, so this stays bounded. A
+        genotype among the `living` is filed again under now and looked at
+        once more when that comes due.
+        """
         keep = now - self.window * 2
         while self._seen and self._seen[0][0] < keep:
             _at, ids = self._seen.pop(0)
             for brain in ids:
-                self.parent.pop(brain, None)
-                self.born.pop(brain, None)
+                if brain in living:
+                    self._seen[-1][1].append(brain)
+                else:
+                    self.parent.pop(brain, None)
+                    self.born.pop(brain, None)
 
     def count(self, frame: Dict[str, Any], index: int) -> int:
         """Take in one frame, in order, and say how many families its living form."""

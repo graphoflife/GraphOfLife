@@ -50,7 +50,17 @@ have descendants ([Chapter 11](../chapters/11-the-first-hundred-iterations.md)).
 
 `CladeWindow` in `gol_series.py`. It needs every frame in order, because
 the family tree is a chain; it is computed while a run records, and kept for
-both phases' rows.
+both phases' rows. It holds a genotype's place in the tree for sixteen
+iterations after it first appears, and for as long as it lives if that is
+longer.
+
+Until 2026-10-09 it let go of living genotypes too. One that outlived sixteen
+iterations was then taken for a newborn the next time it was seen, and for
+eight iterations was counted into its parent's family. Runs recorded before
+that date carry counts that are slightly low: by 0.2% on average, and by
+2% at most, over the 3,000 iterations of `B1-10000-s001`. That is small
+beside the differences between seeds, but it also made the count depend on
+when a run had last been paused.
 
 <!-- turns -->
 [Contents](../README.md)
