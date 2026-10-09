@@ -26,7 +26,6 @@ import itertools
 import os
 import re
 import sys
-import tempfile
 
 import runner  # first: the repository on the path, and a runs folder of the tests' own
 
@@ -404,10 +403,9 @@ def test_the_engine_calls_no_module_level_random():
     process with it. Nothing else would say so: a run with nobody beside it
     is unchanged either way.
     """
-    here = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     for name in ("GraphOfLifeSimple.py", "gol_config.py", "gol_series.py",
                  "gol_lineage.py", "gol_spectral.py", "gol_lightning.py"):
-        with open(os.path.join(here, name)) as f:
+        with open(os.path.join(runner.ROOT, name)) as f:
             found = re.findall(r"np\.random\.(?!RandomState\b)\w+", f.read())
         assert not found, f"{name} draws from the global stream: {found}"
 
@@ -736,14 +734,13 @@ def test_a_lock_dies_with_its_process():
     import subprocess
     import gol_store
 
-    here = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     with scratch_runs() as tmp:
         run_id = gol_store.create_run("x", small(seed=74))["id"]
         script = ("import gol_store, time\n"
                   f"with gol_store.hold({run_id!r}):\n"
                   "    print('held', flush=True)\n"
                   "    time.sleep(60)\n")
-        holder = subprocess.Popen([sys.executable, "-B", "-c", script], cwd=here,
+        holder = subprocess.Popen([sys.executable, "-B", "-c", script], cwd=runner.ROOT,
                                   env={**os.environ, "GOL_RUNS_DIR": tmp},
                                   stdout=subprocess.PIPE, text=True)
         try:
@@ -811,25 +808,20 @@ def test_a_truncated_resume_removes_frames_past_a_hundred_thousand():
     """The same thing, exercised through the call that actually matters."""
     import gol_store
 
-    with tempfile.TemporaryDirectory() as tmp:
-        original = gol_store.BASE_DIR
-        gol_store.BASE_DIR = tmp
-        try:
-            run_id = "GOL_00_00_00_n001"
-            os.makedirs(gol_store.frames_dir(run_id))
-            kept, cut = 99998, 100001
-            for index in (kept, cut):
-                with open(gol_store.frame_path(run_id, index), "w") as f:
-                    f.write("{}")
+    with scratch_runs():
+        run_id = "GOL_00_00_00_n001"
+        os.makedirs(gol_store.frames_dir(run_id))
+        kept, cut = 99998, 100001
+        for index in (kept, cut):
+            with open(gol_store.frame_path(run_id, index), "w") as f:
+                f.write("{}")
 
-            gol_store.truncate_frames_from(run_id, 100000)
+        gol_store.truncate_frames_from(run_id, 100000)
 
-            assert os.path.exists(gol_store.frame_path(run_id, kept)), \
-                "a frame before the cut was deleted"
-            assert not os.path.exists(gol_store.frame_path(run_id, cut)), \
-                "a frame past the cut survived the truncation"
-        finally:
-            gol_store.BASE_DIR = original
+        assert os.path.exists(gol_store.frame_path(run_id, kept)), \
+            "a frame before the cut was deleted"
+        assert not os.path.exists(gol_store.frame_path(run_id, cut)), \
+            "a frame past the cut survived the truncation"
 
 
 def test_copying_a_run_forks_it_rather_than_backing_it_up():
@@ -843,34 +835,29 @@ def test_copying_a_run_forks_it_rather_than_backing_it_up():
     """
     import gol_store
 
-    with tempfile.TemporaryDirectory() as tmp:
-        original = gol_store.BASE_DIR
-        gol_store.BASE_DIR = tmp
-        try:
-            meta = gol_store.create_run("first world", SimConfig())
-            run_id = meta["id"]
-            for index in range(4):
-                gol_store.write_frame(run_id, index, {"ids": [1, 2], "at": index})
-            gol_store.update_meta(run_id, status="running", iteration=42,
-                                  frame_count=4, error="something went wrong")
+    with scratch_runs():
+        meta = gol_store.create_run("first world", SimConfig())
+        run_id = meta["id"]
+        for index in range(4):
+            gol_store.write_frame(run_id, index, {"ids": [1, 2], "at": index})
+        gol_store.update_meta(run_id, status="running", iteration=42,
+                              frame_count=4, error="something went wrong")
 
-            copy = gol_store.copy_run(run_id)
+        copy = gol_store.copy_run(run_id)
 
-            assert copy["id"] != run_id, "a copy must not share the original's id"
-            assert copy["iteration"] == 42, "the copy should start where the original is"
-            assert copy["status"] == "idle" and copy["error"] is None, \
-                "nothing is advancing the copy, and it did not inherit the failure"
-            assert gol_store.count_frames(copy["id"]) == 4, "the frames did not come along"
-            assert gol_store.read_frame(copy["id"], 3) == gol_store.read_frame(run_id, 3)
-            assert gol_store.load_meta(run_id)["status"] == "running", \
-                "copying changed the original"
+        assert copy["id"] != run_id, "a copy must not share the original's id"
+        assert copy["iteration"] == 42, "the copy should start where the original is"
+        assert copy["status"] == "idle" and copy["error"] is None, \
+            "nothing is advancing the copy, and it did not inherit the failure"
+        assert gol_store.count_frames(copy["id"]) == 4, "the frames did not come along"
+        assert gol_store.read_frame(copy["id"], 3) == gol_store.read_frame(run_id, 3)
+        assert gol_store.load_meta(run_id)["status"] == "running", \
+            "copying changed the original"
 
-            # Independent from here on.
-            gol_store.write_frame(copy["id"], 4, {"ids": [1], "at": 4})
-            assert gol_store.count_frames(run_id) == 4
-            assert gol_store.count_frames(copy["id"]) == 5
-        finally:
-            gol_store.BASE_DIR = original
+        # Independent from here on.
+        gol_store.write_frame(copy["id"], 4, {"ids": [1], "at": 4})
+        assert gol_store.count_frames(run_id) == 4
+        assert gol_store.count_frames(copy["id"]) == 5
 
 
 def test_a_run_size_is_kept_until_the_run_changes():
@@ -880,20 +867,15 @@ def test_a_run_size_is_kept_until_the_run_changes():
     """
     import gol_store
 
-    with tempfile.TemporaryDirectory() as tmp:
-        original = gol_store.BASE_DIR
-        gol_store.BASE_DIR = tmp
-        try:
-            run_id, world, written = unrecorded_run(3)
-            before = gol_store.run_size_bytes(run_id)
-            assert gol_store.run_size_bytes(run_id) == before
-            write_frames(run_id, world, written, 2)
-            after = gol_store.run_size_bytes(run_id)
-            walked = sum(os.path.getsize(os.path.join(r, f))
-                         for r, _, fs in os.walk(gol_store.run_dir(run_id)) for f in fs)
-            assert after == walked > before, (before, after, walked)
-        finally:
-            gol_store.BASE_DIR = original
+    with scratch_runs():
+        run_id, world, written = unrecorded_run(3)
+        before = gol_store.run_size_bytes(run_id)
+        assert gol_store.run_size_bytes(run_id) == before
+        write_frames(run_id, world, written, 2)
+        after = gol_store.run_size_bytes(run_id)
+        walked = sum(os.path.getsize(os.path.join(r, f))
+                     for r, _, fs in os.walk(gol_store.run_dir(run_id)) for f in fs)
+        assert after == walked > before, (before, after, walked)
 
 
 # ---------------------------------------------------------------------------
@@ -1256,8 +1238,6 @@ def test_a_binary_world_says_bits_and_hears_bits():
 
 def test_the_float_brains_do_not_ladder_anything():
     """The ladder belongs to the binary brain; the others read values whole."""
-    import numpy as np
-
     for kind in ("float", "float16"):
         cfg = small(brain_kind=kind)
         brain = new_world(cfg).brains[sorted(new_world(cfg).G.nodes())[0]]

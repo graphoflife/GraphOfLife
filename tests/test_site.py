@@ -46,8 +46,7 @@ def test_the_server_and_the_build_ship_the_same_python():
     import re
     import gol_server
 
-    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    script = open(os.path.join(root, "build_site.sh")).read()
+    script = open(os.path.join(runner.ROOT, "build_site.sh")).read()
     match = re.search(r"for f in ([^;]+); do", script)
     assert match, "could not find the copy loop in build_site.sh"
     copied = set(match.group(1).split())
@@ -58,7 +57,7 @@ def test_the_server_and_the_build_ship_the_same_python():
         f"{sorted(served)}")
 
     for name in served:
-        assert os.path.isfile(os.path.join(root, name)), f"{name} does not exist"
+        assert os.path.isfile(os.path.join(runner.ROOT, name)), f"{name} does not exist"
 
     # The same arrangement for documents the page renders, which live outside
     # web/ for the same reason and would fail the same way: rendering on the
@@ -72,7 +71,7 @@ def test_the_server_and_the_build_ship_the_same_python():
     stamped = re.search(r"declare -A stamp_in=\((.*?)\n\)", script, re.S)
     assert stamped, "could not find the stamp_in table in build_site.sh"
     for url, source in gol_server.SHIPPED_DOCS.items():
-        assert os.path.isfile(os.path.join(root, source)), f"{source} does not exist"
+        assert os.path.isfile(os.path.join(runner.ROOT, source)), f"{source} does not exist"
         assert os.path.basename(source) in script, (
             f"gol_server serves {url} from {source}, and build_site.sh never "
             f"copies it into the site")
@@ -92,12 +91,11 @@ def test_the_browser_is_sent_every_module_its_python_imports():
     from closure import closure
     import gol_server
 
-    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    web_py = os.path.join(root, "web", "py")
-    reached = closure(os.path.join(web_py, "gol_browser.py"), [web_py, root])
+    web_py = os.path.join(runner.ROOT, "web", "py")
+    reached = closure(os.path.join(web_py, "gol_browser.py"), [web_py, runner.ROOT])
     needed = {os.path.basename(path) for path in reached.values()} | {"gol_browser.py"}
 
-    worker = open(os.path.join(root, "web", "js", "sim-worker.js")).read()
+    worker = open(os.path.join(runner.ROOT, "web", "js", "sim-worker.js")).read()
     listed = re.search(r"const PY_FILES = \[(.*?)\];", worker, re.S)
     assert listed, "could not find PY_FILES in sim-worker.js"
     sent = set(re.findall(r"'([^']+\.py)'", listed.group(1)))
@@ -124,8 +122,7 @@ def test_every_asset_a_script_fetches_by_name_is_cache_stamped():
     that build_site.sh does not stamp fails here rather than in someone's
     cache.
     """
-    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    script = open(os.path.join(root, "build_site.sh")).read()
+    script = open(os.path.join(runner.ROOT, "build_site.sh")).read()
 
     # Only the stamping table counts, not the whole script. Looking for the
     # path anywhere in the file passed for a `cp` line that shipped a document
@@ -152,7 +149,7 @@ def test_every_asset_a_script_fetches_by_name_is_cache_stamped():
         return not line[:at].rstrip().endswith("+")
 
     unstamped = []
-    js_dir = os.path.join(root, "web", "js")
+    js_dir = os.path.join(runner.ROOT, "web", "js")
     for name in sorted(os.listdir(js_dir)):
         if not name.endswith(".js"):
             continue
@@ -178,8 +175,7 @@ def test_the_server_and_the_build_ship_the_same_book():
     """The published book and the one served locally are the same kinds of file from the same folder."""
     import gol_server
 
-    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    script = open(os.path.join(root, "build_site.sh")).read()
+    script = open(os.path.join(runner.ROOT, "build_site.sh")).read()
     copy = re.search(r'cd "\$\{here\}/book" && find \. -type f (.+?)\)', script)
     assert copy, "could not find where build_site.sh copies the book"
     built = tuple(sorted(re.findall(r"-name '\*(\.\w+)'", copy.group(1))))
@@ -337,14 +333,13 @@ def test_the_server_keeps_the_matrix_library_to_one_thread():
     """
     import subprocess
 
-    here = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     ask = ("import gol_server, os; "
            "print(os.environ['OPENBLAS_NUM_THREADS'], os.environ['OMP_NUM_THREADS'])")
     bare = {k: v for k, v in os.environ.items() if not k.endswith("_NUM_THREADS")}
-    said = subprocess.run([sys.executable, "-B", "-c", ask], cwd=here, env=bare,
+    said = subprocess.run([sys.executable, "-B", "-c", ask], cwd=runner.ROOT, env=bare,
                           capture_output=True, text=True, check=True).stdout.split()
     assert said == ["1", "1"], said
-    chosen = subprocess.run([sys.executable, "-B", "-c", ask], cwd=here,
+    chosen = subprocess.run([sys.executable, "-B", "-c", ask], cwd=runner.ROOT,
                             env={**bare, "OPENBLAS_NUM_THREADS": "4"},
                             capture_output=True, text=True, check=True).stdout.split()
     assert chosen[0] == "4", "the server overrode a thread count it was given"
@@ -404,9 +399,8 @@ def _browser_module():
     """gol_browser, which lives with the page rather than beside the engine."""
     import importlib.util
 
-    here = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     spec = importlib.util.spec_from_file_location(
-        "gol_browser", os.path.join(here, "web", "py", "gol_browser.py"))
+        "gol_browser", os.path.join(runner.ROOT, "web", "py", "gol_browser.py"))
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
@@ -500,27 +494,22 @@ def test_the_browser_and_the_server_summarise_a_run_alike():
     same = lambda a, b: a == b or (isinstance(a, float) and isinstance(b, float)
                                    and math.isnan(a) and math.isnan(b))
 
-    with tempfile.TemporaryDirectory() as tmp:
-        original = gol_store.BASE_DIR
-        gol_store.BASE_DIR = tmp
-        try:
-            run_id, _, written = unrecorded_run(24)
-            for points in (2, 5, None):
-                server = gol_record.build_series(run_id, points=points, heavy=False)
-                plan = browser.series_plan(run_id, written, points, ["nodes"])
-                frames = [{"index": f, "frame": gol_store.read_frame(run_id, f)}
-                          for it in plan["iterations"] for f in (2 * it, 2 * it + 1)
-                          if f < written]
-                reply = browser.series_absorb(run_id, frames, plan["heavy"])
-                for key in ("done", "complete", "heavy", "totalPoints", "frames", "stride"):
-                    assert reply[key] == server[key], (points, key, reply[key], server[key])
-                for key in server["keys"]:
-                    if key == "cladesInWindow":
-                        continue
-                    ours, theirs = reply["series"].get(key), server["series"][key]
-                    assert ours is not None and all(map(same, ours, theirs)), (points, key)
-        finally:
-            gol_store.BASE_DIR = original
+    with scratch_runs():
+        run_id, _, written = unrecorded_run(24)
+        for points in (2, 5, None):
+            server = gol_record.build_series(run_id, points=points, heavy=False)
+            plan = browser.series_plan(run_id, written, points, ["nodes"])
+            frames = [{"index": f, "frame": gol_store.read_frame(run_id, f)}
+                      for it in plan["iterations"] for f in (2 * it, 2 * it + 1)
+                      if f < written]
+            reply = browser.series_absorb(run_id, frames, plan["heavy"])
+            for key in ("done", "complete", "heavy", "totalPoints", "frames", "stride"):
+                assert reply[key] == server[key], (points, key, reply[key], server[key])
+            for key in server["keys"]:
+                if key == "cladesInWindow":
+                    continue
+                ours, theirs = reply["series"].get(key), server["series"][key]
+                assert ours is not None and all(map(same, ours, theirs)), (points, key)
 
 
 # ---------------------------------------------------------------------------
@@ -537,8 +526,7 @@ def test_the_interface_offers_every_setting_the_engine_has():
     touches. The settings shown beside every run are read off this same form
     (RunsView.settingGroups), so they cannot fall a setting behind it either.
     """
-    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    page = open(os.path.join(root, "web", "index.html")).read()
+    page = open(os.path.join(runner.ROOT, "web", "index.html")).read()
 
     # Not offered on purpose: the seed graph's rewire probability and the
     # run-control knobs are set elsewhere or left at their defaults.
@@ -563,8 +551,7 @@ def test_every_mode_is_one_table_the_form_and_the_engine_share():
     """
     import GraphOfLifeSimple as engine
 
-    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    page = open(os.path.join(root, "web", "index.html")).read()
+    page = open(os.path.join(runner.ROOT, "web", "index.html")).read()
     assert set(engine.BRAIN_KINDS) == set(SimConfig.MODES["brain_kind"])
     for setting, allowed in SimConfig.MODES.items():
         select = re.search(rf'<select[^>]*data-cfg="{setting}"[^>]*>(.*?)</select>', page, re.S)

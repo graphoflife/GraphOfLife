@@ -206,7 +206,7 @@ def test_the_book_explains_every_setting_a_plan_can_set():
     import json
     import re
     import gol_plan
-    book = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "book")
+    book = os.path.join(runner.ROOT, "book")
     with open(os.path.join(book, "settings.json"), encoding="utf-8") as f:
         glossary = json.load(f)
     order = glossary["order"]

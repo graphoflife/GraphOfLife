@@ -22,7 +22,6 @@ import math
 import shutil
 import subprocess
 import sys
-import tempfile
 
 import runner  # first: the repository on the path, and a runs folder of the tests' own
 
@@ -30,7 +29,7 @@ import gol_record
 import gol_series
 from gol_config import SimConfig
 from GraphOfLifeSimple import new_world
-from worlds import adjacency, small, unrecorded_run, write_frames
+from worlds import adjacency, scratch_runs, small, unrecorded_run, write_frames
 
 
 # ---------------------------------------------------------------------------
@@ -276,40 +275,23 @@ def test_a_coarse_request_spans_the_whole_run_and_a_finer_one_refines_it():
     it a chart of the run. A coarse pass has to reach the last iteration, and
     every later pass has to be a superset of the earlier one.
     """
-    import gol_store
+    with scratch_runs():
+        run_id, _, _ = unrecorded_run(40, seed=3)
 
-    with tempfile.TemporaryDirectory() as tmp:
-        original = gol_store.BASE_DIR
-        gol_store.BASE_DIR = tmp
-        try:
-            cfg = SimConfig(total_tokens=400, n_nodes=30, k_neighbors=4,
-                            seed=3, hidden_layers=[6], export_decisions=False)
-            run_id = gol_store.create_run("x", cfg)["id"]
-            world = new_world(cfg)
-            written = 0
-            for _ in range(40):
-                for frame in world.step(record_decisions=False):
-                    gol_store.write_frame(run_id, written, frame)
-                    written += 1
-            gol_store.update_meta(run_id, frame_count=written,
-                                  iteration=world.iteration)
+        coarse = gol_record.build_series(run_id, points=3)
+        finer = gol_record.build_series(run_id, points=5)
+        whole = gol_record.build_series(run_id)
 
-            coarse = gol_record.build_series(run_id, points=3)
-            finer = gol_record.build_series(run_id, points=5)
-            whole = gol_record.build_series(run_id)
+        last = whole["series"]["iteration"][-1]
+        assert coarse["series"]["iteration"][0] == 0
+        assert coarse["series"]["iteration"][-1] == last, (
+            "a coarse pass must still reach the end of the run")
+        assert not coarse["complete"] and whole["complete"]
+        assert coarse["done"] < finer["done"] <= whole["done"]
 
-            last = whole["series"]["iteration"][-1]
-            assert coarse["series"]["iteration"][0] == 0
-            assert coarse["series"]["iteration"][-1] == last, (
-                "a coarse pass must still reach the end of the run")
-            assert not coarse["complete"] and whole["complete"]
-            assert coarse["done"] < finer["done"] <= whole["done"]
-
-            of = lambda r: set(r["series"]["iteration"])
-            assert of(coarse) < of(finer) <= of(whole), (
-                "each pass must contain the one before it")
-        finally:
-            gol_store.BASE_DIR = original
+        of = lambda r: set(r["series"]["iteration"])
+        assert of(coarse) < of(finer) <= of(whole), (
+            "each pass must contain the one before it")
 
 
 def test_a_heavy_pass_upgrades_the_rows_a_light_one_left_behind():
@@ -321,43 +303,26 @@ def test_a_heavy_pass_upgrades_the_rows_a_light_one_left_behind():
     frame the cheap pass reached first, and the chart would be permanently
     empty with no sign that anything was missing.
     """
-    import gol_store, gol_series
+    with scratch_runs():
+        run_id, _, _ = unrecorded_run(20)
 
-    with tempfile.TemporaryDirectory() as tmp:
-        original = gol_store.BASE_DIR
-        gol_store.BASE_DIR = tmp
-        try:
-            cfg = SimConfig(total_tokens=400, n_nodes=30, k_neighbors=4,
-                            seed=4, hidden_layers=[6], export_decisions=False)
-            run_id = gol_store.create_run("x", cfg)["id"]
-            world = new_world(cfg)
-            written = 0
-            for _ in range(20):
-                for frame in world.step(record_decisions=False):
-                    gol_store.write_frame(run_id, written, frame)
-                    written += 1
-            gol_store.update_meta(run_id, frame_count=written,
-                                  iteration=world.iteration)
+        light = gol_record.build_series(run_id, heavy=False)
+        assert light["heavy"] is False
+        assert all(v is None for v in light["series"]["bridges"])
 
-            light = gol_record.build_series(run_id, heavy=False)
-            assert light["heavy"] is False
-            assert all(v is None for v in light["series"]["bridges"])
+        heavy = gol_record.build_series(run_id, heavy=True)
+        assert heavy["heavy"] is True
+        assert all(v is not None for v in heavy["series"]["bridges"]), (
+            "the heavy pass did not upgrade the rows the light pass stored")
+        assert heavy["count"] == light["count"], "the upgrade duplicated points"
 
-            heavy = gol_record.build_series(run_id, heavy=True)
-            assert heavy["heavy"] is True
-            assert all(v is not None for v in heavy["series"]["bridges"]), (
-                "the heavy pass did not upgrade the rows the light pass stored")
-            assert heavy["count"] == light["count"], "the upgrade duplicated points"
+        # And going back to a light request keeps what the heavy pass found,
+        # rather than throwing the expensive work away again.
+        back = gol_record.build_series(run_id, heavy=False)
+        assert all(v is not None for v in back["series"]["bridges"])
 
-            # And going back to a light request keeps what the heavy pass found,
-            # rather than throwing the expensive work away again.
-            back = gol_record.build_series(run_id, heavy=False)
-            assert all(v is not None for v in back["series"]["bridges"])
-
-            assert not [k for k in heavy["keys"] if k.startswith("_")], (
-                "bookkeeping fields must not travel with the statistics")
-        finally:
-            gol_store.BASE_DIR = original
+        assert not [k for k in heavy["keys"] if k.startswith("_")], (
+            "bookkeeping fields must not travel with the statistics")
 
 
 def test_a_reply_is_everything_the_history_knows():
@@ -369,30 +334,23 @@ def test_a_reply_is_everything_the_history_knows():
     asked for bridges got two points back. The reply is the history now, and
     the page keeps the latest one.
     """
-    import gol_store
+    with scratch_runs():
+        run_id, _, _ = unrecorded_run(20)
+        whole = gol_record.build_series(run_id, heavy=False)
+        coarse = gol_record.build_series(run_id, points=2, heavy=False)
+        assert coarse["count"] == whole["count"], (
+            f"a coarse request returned {coarse['count']} of {whole['count']} known rows")
+        assert coarse["done"] == coarse["totalPoints"] and coarse["complete"], (
+            "a summarised run does not say it is finished, so a climb would not stop")
 
-    with tempfile.TemporaryDirectory() as tmp:
-        original = gol_store.BASE_DIR
-        gol_store.BASE_DIR = tmp
-        try:
-            run_id, _, _ = unrecorded_run(20)
-            whole = gol_record.build_series(run_id, heavy=False)
-            coarse = gol_record.build_series(run_id, points=2, heavy=False)
-            assert coarse["count"] == whole["count"], (
-                f"a coarse request returned {coarse['count']} of {whole['count']} known rows")
-            assert coarse["done"] == coarse["totalPoints"] and coarse["complete"], (
-                "a summarised run does not say it is finished, so a climb would not stop")
-
-            # The first deep step summarises two samples and hands back the rest.
-            deep = gol_record.build_series(run_id, points=2, heavy=True)
-            assert deep["count"] == whole["count"], "a deep step dropped the cheap rows"
-            filled = sum(v is not None for v in deep["series"]["bridges"])
-            assert 0 < filled < deep["count"], f"{filled} bridge counts after one deep step"
-            assert all(v is not None for v in deep["series"]["nodes"]), (
-                "a deep step blanked the cheap statistics")
-            assert deep["done"] == 2 and deep["complete"] and not deep["heavy"]
-        finally:
-            gol_store.BASE_DIR = original
+        # The first deep step summarises two samples and hands back the rest.
+        deep = gol_record.build_series(run_id, points=2, heavy=True)
+        assert deep["count"] == whole["count"], "a deep step dropped the cheap rows"
+        filled = sum(v is not None for v in deep["series"]["bridges"])
+        assert 0 < filled < deep["count"], f"{filled} bridge counts after one deep step"
+        assert all(v is not None for v in deep["series"]["nodes"]), (
+            "a deep step blanked the cheap statistics")
+        assert deep["done"] == 2 and deep["complete"] and not deep["heavy"]
 
 
 def test_a_cheap_row_never_blanks_what_a_deep_one_found():
@@ -429,23 +387,16 @@ def test_a_history_says_how_big_the_run_was():
     drawing it as it once was. The reply says which run size it describes, so
     a page that knows the run is bigger now can ask again.
     """
-    import gol_store
+    with scratch_runs():
+        run_id, world, written = unrecorded_run(10)
+        first = gol_record.build_series(run_id, heavy=False)
+        assert first["frames"] == written and first["complete"]
 
-    with tempfile.TemporaryDirectory() as tmp:
-        original = gol_store.BASE_DIR
-        gol_store.BASE_DIR = tmp
-        try:
-            run_id, world, written = unrecorded_run(10)
-            first = gol_record.build_series(run_id, heavy=False)
-            assert first["frames"] == written and first["complete"]
-
-            written = write_frames(run_id, world, written, 10)
-            grown = gol_record.build_series(run_id, heavy=False)
-            assert grown["frames"] == written and grown["complete"]
-            assert max(grown["series"]["iteration"]) > max(first["series"]["iteration"]), (
-                "the history of a run that grew did not grow with it")
-        finally:
-            gol_store.BASE_DIR = original
+        written = write_frames(run_id, world, written, 10)
+        grown = gol_record.build_series(run_id, heavy=False)
+        assert grown["frames"] == written and grown["complete"]
+        assert max(grown["series"]["iteration"]) > max(first["series"]["iteration"]), (
+            "the history of a run that grew did not grow with it")
 
 
 def test_a_run_is_never_summarised_at_more_than_the_cap():
@@ -475,42 +426,26 @@ def test_a_cancelled_series_build_keeps_what_it_finished():
     finish summarising at all. The rows computed before the stop have to reach
     the cache, and the next build has to begin after them.
     """
-    import gol_store, gol_series
+    with scratch_runs():
+        run_id, _, written = unrecorded_run(24)
 
-    with tempfile.TemporaryDirectory() as tmp:
-        original = gol_store.BASE_DIR
-        gol_store.BASE_DIR = tmp
-        try:
-            cfg = SimConfig(total_tokens=400, n_nodes=30, k_neighbors=4,
-                            seed=4, hidden_layers=[6], export_decisions=False)
-            run_id = gol_store.create_run("x", cfg)["id"]
-            world = new_world(cfg)
-            written = 0
-            for _ in range(24):
-                for frame in world.step(record_decisions=False):
-                    gol_store.write_frame(run_id, written, frame)
-                    written += 1
-            gol_store.update_meta(run_id, frame_count=written, iteration=world.iteration)
+        # Hang up after three frames: part-way through the second iteration,
+        # whose other phase must not be forgotten.
+        calls = {"n": 0}
+        def hung_up():
+            calls["n"] += 1
+            return calls["n"] > 3          # asked before every frame
 
-            # Hang up after three frames: part-way through the second iteration,
-            # whose other phase must not be forgotten.
-            calls = {"n": 0}
-            def hung_up():
-                calls["n"] += 1
-                return calls["n"] > 3          # asked before every frame
+        gol_record.build_series(run_id, heavy=False, cancelled=hung_up)
+        kept = len(gol_record._load_cache(run_id).get("rows", []))
+        assert 0 < kept < written, (
+            f"a cancelled build kept {kept} of {written} rows; it should keep "
+            f"what it finished and nothing it did not")
 
-            gol_record.build_series(run_id, heavy=False, cancelled=hung_up)
-            kept = len(gol_record._load_cache(run_id).get("rows", []))
-            assert 0 < kept < written, (
-                f"a cancelled build kept {kept} of {written} rows; it should keep "
-                f"what it finished and nothing it did not")
-
-            # The next build carries on from there and completes.
-            done = gol_record.build_series(run_id, heavy=False)
-            assert done["complete"], "the build after a cancelled one did not finish"
-            assert len(gol_record._load_cache(run_id)["rows"]) == written
-        finally:
-            gol_store.BASE_DIR = original
+        # The next build carries on from there and completes.
+        done = gol_record.build_series(run_id, heavy=False)
+        assert done["complete"], "the build after a cancelled one did not finish"
+        assert len(gol_record._load_cache(run_id)["rows"]) == written
 
 
 # ---------------------------------------------------------------------------
@@ -540,10 +475,7 @@ def test_families_are_counted_from_ancestry_not_from_one_frame():
     lineages — looks one step back and tracks the population. The windowed
     count looks as far back as the window and does not.
     """
-    import tempfile
-
     import gol_series
-    import gol_store
 
     window = gol_series.CladeWindow(window=2)
 
@@ -608,32 +540,24 @@ def test_the_family_count_is_absent_when_the_chain_is_broken():
     family count computed over holes is a guess. Absent is the honest answer,
     and it is the convention the rest of these statistics already follow.
     """
-    import tempfile
-
-    import gol_series
     import gol_store
 
     def series_for(export_every):
-        with tempfile.TemporaryDirectory() as tmp:
-            original = gol_store.BASE_DIR
-            gol_store.BASE_DIR = tmp
-            try:
-                cfg = small(seed=7, export_every=export_every, export_decisions=False)
-                meta = gol_store.create_run("x", cfg)
-                run_id = meta["id"]
-                world = new_world(cfg)
-                written = 0
-                for iteration in range(14):
-                    frames = world.step(record_decisions=False)
-                    if iteration % export_every == 0:
-                        for frame in frames:
-                            gol_store.write_frame(run_id, written, frame)
-                            written += 1
-                gol_store.update_meta(run_id, frame_count=written,
-                                      iteration=world.iteration)
-                return gol_record.build_series(run_id)
-            finally:
-                gol_store.BASE_DIR = original
+        with scratch_runs():
+            cfg = small(seed=7, export_every=export_every, export_decisions=False)
+            meta = gol_store.create_run("x", cfg)
+            run_id = meta["id"]
+            world = new_world(cfg)
+            written = 0
+            for iteration in range(14):
+                frames = world.step(record_decisions=False)
+                if iteration % export_every == 0:
+                    for frame in frames:
+                        gol_store.write_frame(run_id, written, frame)
+                        written += 1
+            gol_store.update_meta(run_id, frame_count=written,
+                                  iteration=world.iteration)
+            return gol_record.build_series(run_id)
 
     whole = series_for(1)
     assert "cladesInWindow" in whole["keys"], \
