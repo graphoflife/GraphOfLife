@@ -1537,3 +1537,117 @@ function drawTrajectory(canvas, points, options = {}) {
   }
   if (chrome) _chrome(ctx, pad, outer, chrome);
 }
+
+/**
+ * Statistics through the iterations of a run, one line per track: the
+ * Diagrams tab's time series and the Viewer's statistic popup alike, so the
+ * two look the same.
+ *
+ * A track is { points: [{t, v}], mapped, lo, hi, colour, legend, stretch }:
+ * its values as they are drawn (`mapped`, on whatever scale the caller chose)
+ * and their range, and what the legend says of it. One track gives the
+ * vertical axis its own units, read out through `yFormat`, and the axis is
+ * widened to the round numbers it labels; several keep a scale each, and the
+ * axis says so — a share of each line's own range. A stretched track spans
+ * the whole width whatever its length. Guides on axis 'x' cross the
+ * iterations; guides on axis 'y' are values, put through `mapY`, and drawn on
+ * every track whose range holds them.
+ */
+function drawTimeline(canvas, tracks, options = {}) {
+  const { chrome = null, logX = false, guides = [], mapY = v => v,
+          yFormat = v => formatNumber(v), message = null } = options;
+  const pad = _chromePad(chrome);
+  const { ctx, w, h, outer } = _prepareCanvas(canvas, pad);
+  if (message || !tracks.length) {
+    ctx.fillStyle = Ink.of('dim');
+    ctx.font = Ink.font(13);
+    ctx.textAlign = 'center';
+    ctx.fillText(message || 'no data', w / 2, h / 2);
+    ctx.textAlign = 'left';
+    return;
+  }
+
+  // Absolute lines share one iteration axis, so a run half as long stops
+  // halfway across. A stretched line gets the whole width whatever its
+  // length, which is what lets two runs be compared by shape. The axis starts
+  // at the earliest iteration drawn rather than at zero: iterations cut away
+  // are not on the chart, and leaving room for them would waste the width.
+  const earliest = Math.min(...tracks.map(t => t.points[0].t));
+  const longest = Math.max(...tracks.map(t => t.points[t.points.length - 1].t), 1);
+  const mapT = t => (logX ? Metrics.applyLog(t, false) : t);
+  const loT = mapT(earliest), hiT = Math.max(mapT(longest), loT + 1e-9);
+
+  // A lone line's scale takes in its constant lines, with a little room
+  // beyond: a threshold is most worth seeing when the data stays clear of it.
+  // Then it is widened to the round numbers the axis labels, so the top and
+  // bottom lines are labelled values rather than wherever the data stopped.
+  const single = tracks.length === 1 ? tracks[0] : null;
+  const yGuides = guides.filter(g => g.axis === 'y');
+  if (single) {
+    for (const guide of yGuides) {
+      const v = mapY(guide.at);
+      if (v > single.hi) single.hi = v + 0.05 * (v - single.lo);
+      if (v < single.lo) single.lo = v - 0.05 * (single.hi - v);
+    }
+    if (single.hi - single.lo < 1e-12) { single.lo -= 0.5; single.hi += 0.5; }
+    const ticks = _axisTicks(single.lo, single.hi, _tickCounts(w, h).down);
+    if (ticks.length > 1) {
+      single.lo = Math.min(single.lo, ticks[0]);
+      single.hi = Math.max(single.hi, ticks[ticks.length - 1]);
+    }
+  }
+  _axes(ctx, w, h, {
+    x: { lo: loT, hi: hiT,
+         format: v => formatNumber(Math.round(logX ? Metrics.undoLog(v, false) : v)) },
+    y: single ? { lo: single.lo, hi: single.hi, format: yFormat }
+              : { lo: 0, hi: 100, format: v => `${Math.round(v)}%` },
+    grid: chrome ? chrome.grid !== false : true,
+    guides: guides.filter(g => g.axis === 'x'), pad
+  });
+
+  for (const track of tracks) {
+    if (track.hi === track.lo) track.hi = track.lo + 1;
+    const span = track.stretch ? (mapT(track.points[track.points.length - 1].t) - mapT(track.points[0].t)) || 1
+                               : (hiT - loT);
+    const base = track.stretch ? mapT(track.points[0].t) : loT;
+    const xAt = t => ((mapT(t) - base) / span) * w;
+    const yAt = v => (1 - (v - track.lo) / (track.hi - track.lo)) * h;
+
+    // Each line keeps its own vertical scale: these are different quantities
+    // in different units, and one shared axis flattens whichever has the
+    // smaller spread. A constant line is given in real units, so it is mapped
+    // the same way the values were before it is compared against them.
+    for (const guide of yGuides) {
+      const value = mapY(guide.at);
+      if (value < track.lo || value > track.hi) continue;
+      ctx.save();
+      ctx.setLineDash([5, 4]);
+      ctx.strokeStyle = track.colour;
+      ctx.globalAlpha = 0.5;
+      const at = Math.round(yAt(value)) + 0.5;
+      ctx.beginPath(); ctx.moveTo(0, at); ctx.lineTo(w, at); ctx.stroke();
+      // A thesis names its threshold; a line added by hand has no name.
+      if (guide.label) {
+        ctx.globalAlpha = 0.85;
+        ctx.fillStyle = track.colour;
+        ctx.font = Ink.font(11);
+        ctx.fillText(guide.label, 6, at - 5);
+      }
+      ctx.restore();
+    }
+
+    ctx.strokeStyle = track.colour;
+    ctx.lineWidth = 1.4;
+    ctx.beginPath();
+    track.points.forEach((p, k) => {
+      const x = xAt(p.t), y = yAt(track.mapped[k]);
+      if (k === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    });
+    ctx.stroke();
+  }
+
+  if (chrome) {
+    chrome.legend = tracks.filter(t => t.legend).map(t => ({ colour: t.colour, label: t.legend }));
+    _chrome(ctx, pad, outer, chrome);
+  }
+}

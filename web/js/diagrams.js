@@ -661,8 +661,6 @@ const Diagrams = {
    */
   drawTimeline(ink) {
     const s = this.now;
-    const canvas = this.canvas;
-
     const tracks = [];
     // Whether any line had data that the cutoff then removed. Without this a
     // cutoff past the end of every run is indistinguishable from a chart still
@@ -709,7 +707,6 @@ const Diagrams = {
         lo: Math.min(...vs), hi: Math.max(...vs),
         rawLo: Math.min(...points.map(p => p.v)),
         rawHi: Math.max(...points.map(p => p.v)),
-        firstT: points[0].t, lastT: points[points.length - 1].t,
         label: `${this.nameOf(line.stat)} — ${run ? run.name : line.run}`
           + (line.phase === 'all' ? '' :
              line.phase === '1' ? ' · reproduction' : ' · game')
@@ -724,121 +721,34 @@ const Diagrams = {
       : 'share of each line’s own range';
     const chrome = this.chromeFor('iterations' + (s.logX ? ' (log)' : ''), yName,
                                   tracks.map(t => ({ label: t.label, colour: t.colour })));
-    const pad = _chromePad(chrome);
-    const { ctx, w, h, outer } = _prepareCanvas(canvas, pad);
 
-    if (!s.lines.length || !tracks.length) {
-      ctx.fillStyle = Ink.of('dim');
-      ctx.font = Ink.font(13);
-      ctx.textAlign = 'center';
-      ctx.fillText(cutAway
-                   ? `Nothing left after iteration ${formatNumber(s.cutoff)} — lower the cutoff.`
-                   : s.lines.length ? 'Reading…'
-                   : 'Add a line: pick a simulation, a statistic, and a phase.',
-                   w / 2, h / 2);
-      ctx.textAlign = 'left';
+    const round = v => (Math.abs(v) >= 100 ? v.toFixed(0)
+                      : Math.abs(v) >= 1 ? v.toFixed(2) : v.toFixed(4));
+    // Ranges are quoted in the statistic's own units whatever the axis is
+    // doing, because that is the number the reader recognises.
+    for (const t of tracks) {
+      t.stretch = t.line.stretch;
+      t.legend = `${t.label}   ${round(t.rawLo)}–${round(t.rawHi)}`
+        + (t.line.stretch ? '   (stretched)' : '')
+        + (t.line.maxFrames ? `   first ${formatNumber(t.points.length)}` : '');
+    }
+    const empty = !s.lines.length || !tracks.length;
+    drawTimeline(this.canvas, tracks, {
+      chrome, logX: s.logX, guides: s.guides || [],
+      mapY: v => (s.logY ? Metrics.applyLog(v, v < 0) : v),
+      yFormat: v => formatNumber(s.logY ? Metrics.undoLog(v, v < 0) : v),
+      message: !empty ? null
+        : cutAway ? `Nothing left after iteration ${formatNumber(s.cutoff)} — lower the cutoff.`
+        : s.lines.length ? 'Reading…'
+        : 'Add a line: pick a simulation, a statistic, and a phase.'
+    });
+    if (empty) {
       if (!s.lines.length) this.say('');
       else if (cutAway) this.say(`the cutoff removed every frame of `
                                  + `${s.lines.length === 1 ? 'the line' : 'every line'}`);
       this.explain(null);
       return;
     }
-
-    // Absolute lines share one iteration axis, so a run half as long stops
-    // halfway across. A stretched line gets the whole width whatever its
-    // length, which is what lets two runs be compared by shape. The axis starts
-    // at the cutoff rather than at zero: the dropped iterations are not on the
-    // chart, and leaving room for them would waste the width they used to fill.
-    const earliest = Math.min(...tracks.map(t => t.firstT));
-    const longest = Math.max(...tracks.map(t => t.lastT), 1);
-    const mapT = t => (s.logX ? Metrics.applyLog(t, false) : t);
-    const loT = mapT(earliest), hiT = Math.max(mapT(longest), loT + 1e-9);
-
-    // With one line the vertical axis can carry that line's real units. With
-    // several it cannot — they are different quantities on different scales,
-    // each normalised to its own range — so it carries that normalisation
-    // honestly, as a percentage, and the legend gives every line its range.
-    const single = tracks.length === 1 ? tracks[0] : null;
-
-    // A lone line's scale takes in its constant lines, with a little room
-    // beyond. A threshold is most worth seeing when the data stays clear of
-    // it: "no cut costs more than a tenth" is confirmed exactly when the line
-    // never reaches 0.1, and a range fitted to the data alone left the
-    // threshold off the chart in precisely that case.
-    const yGuides = (s.guides || []).filter(g => g.axis === 'y');
-    const mapY = v => (s.logY ? Metrics.applyLog(v, v < 0) : v);
-    if (single) {
-      for (const guide of yGuides) {
-        const v = mapY(guide.at);
-        if (v > single.hi) single.hi = v + 0.05 * (v - single.lo);
-        if (v < single.lo) single.lo = v - 0.05 * (single.hi - v);
-      }
-    }
-    if (single && single.hi === single.lo) single.hi = single.lo + 1;
-    _axes(ctx, w, h, {
-      x: { lo: loT, hi: hiT,
-           format: v => formatNumber(Math.round(s.logX ? Metrics.undoLog(v, false) : v)) },
-      y: single
-        ? { lo: single.lo, hi: single.hi,
-            format: v => formatNumber(s.logY ? Metrics.undoLog(v, v < 0) : v) }
-        : { lo: 0, hi: 100, format: v => `${Math.round(v)}%` },
-      grid: chrome.grid, guides: (s.guides || []).filter(g => g.axis === 'x'),
-      pad
-    });
-
-    for (const track of tracks) {
-      if (track.hi === track.lo) track.hi = track.lo + 1;
-      const span = track.line.stretch ? (mapT(track.lastT) - mapT(track.firstT)) || 1
-                                      : (hiT - loT);
-      const base = track.line.stretch ? mapT(track.firstT) : loT;
-      const xAt = t => ((mapT(t) - base) / span) * w;
-      const yAt = v => (1 - (v - track.lo) / (track.hi - track.lo)) * h;
-
-      // Each line keeps its own vertical scale: these are different quantities
-      // in different units, and one shared axis flattens whichever has the
-      // smaller spread. The legend carries every range. A constant line is
-      // given in real units, so it is mapped the same way the values were
-      // before it is compared against them.
-      for (const guide of yGuides) {
-        const value = mapY(guide.at);
-        if (value < track.lo || value > track.hi) continue;
-        ctx.save();
-        ctx.setLineDash([5, 4]);
-        ctx.strokeStyle = track.colour;
-        ctx.globalAlpha = 0.5;
-        const at = Math.round(yAt(value)) + 0.5;
-        ctx.beginPath(); ctx.moveTo(0, at); ctx.lineTo(w, at); ctx.stroke();
-        // A thesis names its threshold; a line added by hand has no name.
-        if (guide.label) {
-          ctx.globalAlpha = 0.85;
-          ctx.fillStyle = track.colour;
-          ctx.font = Ink.font(11);
-          ctx.fillText(guide.label, 6, at - 5);
-        }
-        ctx.restore();
-      }
-
-      ctx.strokeStyle = track.colour;
-      ctx.lineWidth = 1.4;
-      ctx.beginPath();
-      track.points.forEach((p, k) => {
-        const x = xAt(p.t), y = yAt(track.mapped[k]);
-        if (k === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
-      });
-      ctx.stroke();
-    }
-
-    const round = v => (Math.abs(v) >= 100 ? v.toFixed(0)
-                      : Math.abs(v) >= 1 ? v.toFixed(2) : v.toFixed(4));
-    // Ranges are quoted in the statistic's own units whatever the axis is
-    // doing, because that is the number the reader recognises.
-    chrome.legend = tracks.map(t => ({
-      colour: t.colour,
-      label: `${t.label}   ${round(t.rawLo)}–${round(t.rawHi)}`
-        + (t.line.stretch ? '   (stretched)' : '')
-        + (t.line.maxFrames ? `   first ${formatNumber(t.points.length)}` : '')
-    }));
-    _chrome(ctx, pad, outer, chrome);
     this.say(`${tracks.length} line${tracks.length === 1 ? '' : 's'}`
              + (s.cutoff ? ` · from iteration ${formatNumber(s.cutoff)}` : ''));
     this.explain(tracks);

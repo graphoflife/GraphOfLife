@@ -113,66 +113,31 @@ const StatDetail = {
   redraw() {
     const { xs, ys, asShare } = this.points();
 
-    if (!ys.length) {
-      const { ctx, h } = _prepareCanvas(this.canvas);
-      ctx.fillStyle = Ink.of('dim');
-      ctx.font = Ink.font(12);
-      ctx.fillText(Jobs.busy(Viewer)
-        ? 'Summarising the run\u2026'
-        : 'No data for this statistic under the current phase filter.', 10, h / 2);
+    // Drawn as the Diagrams tab draws a time series (drawTimeline), so the two
+    // look alike: this popup once drew its own grid, labels and axes, and so
+    // looked like none of the other charts.
+    const current = Viewer.frame ? Viewer.frame.iteration : null;
+    const track = ys.length ? {
+      points: xs.map((t, i) => ({ t, v: ys[i] })), mapped: ys,
+      lo: Math.min(...ys), hi: Math.max(...ys), colour: Ink.of('accent')
+    } : null;
+    drawTimeline(this.canvas, track ? [track] : [], {
+      chrome: { xLabel: 'iteration', ticks: true, grid: true, legend: [] },
+      // Where the frame on screen sits, so the number in the strip has a home.
+      guides: track && current !== null && current >= xs[0] && current <= xs[xs.length - 1]
+        ? [{ axis: 'x', at: current, colour: Ink.of('accent') }] : [],
+      yFormat: v => asShare
+        ? `${+v.toFixed(2)}%`
+        : (Math.abs(v) >= 1000 ? Math.round(v).toLocaleString('en-US')
+                               : String(+v.toFixed(Math.abs(v) < 1 ? 3 : 2))),
+      message: track ? null
+        : Jobs.busy(Viewer) ? 'Summarising the run\u2026'
+        : 'No data for this statistic under the current phase filter.'
+    });
+    if (!track) {
       this.footEl.textContent = '';
       return;
     }
-
-    // Drawn on the axes every other chart uses. This popup drew its own grid,
-    // labels and axes beside them, and so looked like none of the others.
-    const pad = { left: 62, right: 12, top: 10, bottom: 30 };
-    const { ctx, w, h } = _prepareCanvas(this.canvas, pad);
-
-    let lo = Math.min(...ys), hi = Math.max(...ys);
-    if (hi - lo < 1e-12) { lo -= 0.5; hi += 0.5; }
-
-    // Widen to the round numbers the axis labels, so the top and bottom lines
-    // are labelled values rather than wherever the data happened to stop.
-    const yTicks = _axisTicks(lo, hi, _tickCounts(w, h).down);
-    if (yTicks.length > 1) {
-      lo = Math.min(lo, yTicks[0]);
-      hi = Math.max(hi, yTicks[yTicks.length - 1]);
-    }
-    const xLo = xs[0], xHi = xs[xs.length - 1];
-
-    // Where the frame on screen sits, so the number in the strip has a home.
-    const current = Viewer.frame ? Viewer.frame.iteration : null;
-    _axes(ctx, w, h, {
-      x: { lo: xLo, hi: xHi, format: v => Math.round(v).toLocaleString('en-US') },
-      y: {
-        lo, hi,
-        format: v => asShare
-          ? `${+v.toFixed(2)}%`
-          : (Math.abs(v) >= 1000 ? Math.round(v).toLocaleString('en-US')
-                                 : String(+v.toFixed(Math.abs(v) < 1 ? 3 : 2)))
-      },
-      guides: current !== null && current >= xLo && current <= xHi
-        ? [{ axis: 'x', at: current, colour: Ink.of('accent') }] : [],
-      pad
-    });
-
-    // The curve
-    const xAt = v => (xHi === xLo ? w / 2 : ((v - xLo) / (xHi - xLo)) * w);
-    const yAt = v => h - ((v - lo) / (hi - lo)) * h;
-    ctx.strokeStyle = Ink.of('accent');
-    ctx.lineWidth = 1.6;
-    ctx.beginPath();
-    for (let i = 0; i < ys.length; i++) {
-      const x = xAt(xs[i]), y = yAt(ys[i]);
-      if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
-    }
-    ctx.stroke();
-
-    ctx.fillStyle = Ink.of('dim');
-    ctx.font = Ink.font(9);
-    const axisLabel = 'iteration';
-    ctx.fillText(axisLabel, w - ctx.measureText(axisLabel).width, h + pad.bottom - 1);
 
     const payload = SeriesLoad.cache.get(Viewer.runId);
     const sampled = payload && payload.sampled;
