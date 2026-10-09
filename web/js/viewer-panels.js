@@ -36,9 +36,19 @@ Object.assign(Viewer, {
     }
   },
 
+  /**
+   * The strip under the canvas: the statistics of the frame on screen.
+   *
+   * They are worked out in Python — by the server, or in the browser by the
+   * worker (gol_framestats) — and asked for here, as deep as the open sections
+   * need. The page used to work them out itself, from a second copy of every
+   * formula that tests had to hold to the first. A stored frame is asked for
+   * by its index, so a run that recorded it is answered from its record; a
+   * frame cropped to a region is sent, since only the page has it.
+   */
   updateStats() {
     const container = document.getElementById('statsStrip');
-    if (!this.metrics) { container.innerHTML = ''; return; }
+    if (!this.frame) { container.innerHTML = ''; return; }
 
     // Whether the reader currently has the Structure group open decides
     // whether its statistics are worth computing at all: they cost more than
@@ -52,17 +62,88 @@ Object.assign(Viewer, {
       const declared = RunStats.GROUPS.find(g => g.key === key);
       return Boolean(declared && declared.open);
     };
-    const heavyGroups = ['structure', 'powerlaws'];
-    const structureOpen = heavyGroups.some(isOpen);
+    const structureOpen = this.HEAVY_GROUPS.some(isOpen);
     // The lightning search is its own cost and its own group. It walks this
     // phase's allocations rather than the graph, so it is asked for on its own
     // terms — otherwise the group holding it would sit open and empty while
     // Structure was closed.
-    const s = this.metrics.summary(structureOpen, isOpen('blotto'));
+    const groups = [...(structureOpen ? ['structure'] : []), ...(isOpen('blotto') ? ['flow'] : [])];
+
+    const frame = this.frame;
+    const kept = this._statsKept.get(frame);
+    const deep = kept?.get(groups.join(','));
+    if (deep) { this.drawStats(deep, structureOpen); return; }
+    // In two steps. What a run recorded comes back at once, and the flow and
+    // the graph statistics can take seconds on a large world (5.7 s for all of
+    // them at 70,000 agents): so the light row is asked for first and drawn,
+    // and the rest fills in when it is ready. Until the light row is in, the
+    // numbers of the frame before would be wrong for this one: dashes.
+    const light = kept?.get('');
+    if (light) this.drawStats(light, structureOpen);
+    else for (const el of container.querySelectorAll('.stat-val')) el.textContent = '\u2014';
+    this.askStats(frame, light || !groups.length ? groups : [], structureOpen);
+  },
+
+  HEAVY_GROUPS: ['structure', 'powerlaws'],
+
+  // Answers kept per frame and depth, so stepping back is instant. Keyed by the
+  // frame object: a crop or a refocus is a new one, and a frame let go of is
+  // let go of here too.
+  _statsKept: new WeakMap(),
+  _statsAsking: null,
+
+  /**
+   * Ask for one frame's statistics. One question at a time: a new frame calls
+   * off the question about the last, and while playing, frames stepped past
+   * are not asked about at all — the frame on screen when the answer in hand
+   * arrives is asked about next.
+   */
+  askStats(frame, groups, structureOpen) {
+    const key = groups.join(',');
+    const asking = this._statsAsking;
+    if (asking) {
+      if (asking.frame === frame && asking.key === key) return;
+      if (this.playing) { asking.again = true; return; }
+      asking.abort.abort();
+    }
+    const abort = new AbortController();
+    const question = { frame, key, abort, again: false, next: false };
+    this._statsAsking = question;
+    const opts = { signal: abort.signal };
+    const answer = frame === this.fullFrame
+      ? API.getFrameStats(this.runId, this.frameIndex, groups, opts)
+      : API.frameStats(this.sentFrame(frame), frame.previous ? this.sentFrame(frame.previous) : null,
+                       groups, opts);
+    answer.then(row => {
+      if (!this._statsKept.has(frame)) this._statsKept.set(frame, new Map());
+      this._statsKept.get(frame).set(key, row);
+      // The light row of a frame whose open sections want more: drawn, and
+      // the rest asked for in turn (updateStats finds this row kept).
+      if (this.frame === frame) question.next = true;
+    }).catch(err => {
+      if (err.name === 'AbortError' || this.frame !== frame) return;
+      const container = document.getElementById('statsStrip');
+      container.innerHTML = `<p class="stats-failed">The statistics could not be worked out: ${err.message}</p>`;
+    }).finally(() => {
+      if (this._statsAsking !== question) return;
+      this._statsAsking = null;
+      if (question.next || question.again) this.updateStats();
+    });
+  },
+
+  /** A frame as sent to be measured: itself, without the frame before it hung on it. */
+  sentFrame(frame) {
+    const { previous, ...sent } = frame;
+    return sent;
+  },
+
+  /** Draw the strip from a frame's statistics, as gol_series names them. */
+  drawStats(s, structureOpen) {
+    const container = document.getElementById('statsStrip');
 
     // Node counts are also given as a share of the population that entered the
     // phase — "40 births" reads very differently at 100 agents than at 4,000.
-    const base = s.nodesBefore || s.nodes || 0;
+    const base = s.nodes_before || s.nodes || 0;
     const withShare = v => (base && v !== null && v !== undefined)
       ? `${formatNumber(v)} <i>${((v / base) * 100).toFixed(1)}%</i>` : formatNumber(v);
 
@@ -237,7 +318,7 @@ Object.assign(Viewer, {
     // Opening Structure is what asks for those statistics, so redraw the strip
     // once they can be computed. Closing it costs nothing and needs no redraw.
     if (!structureOpen) {
-      for (const key of heavyGroups) {
+      for (const key of this.HEAVY_GROUPS) {
         const group = container.querySelector(`.stat-group[data-group="${key}"]`);
         if (!group) continue;
         group.addEventListener('toggle', () => {

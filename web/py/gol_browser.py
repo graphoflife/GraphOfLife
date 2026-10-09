@@ -23,6 +23,7 @@ from typing import Any, Callable, Dict, List, Optional
 
 import numpy as np
 
+import gol_framestats
 import gol_lineage
 import gol_series
 from gol_config import SimConfig
@@ -155,6 +156,11 @@ class Worlds:
     def lineage_fields(self) -> List[str]:
         """What the forest reads of a frame, so the worker can hand it no more."""
         return list(gol_lineage.FIELDS)
+
+    def frame_stats(self, frame: Dict[str, Any], previous: Optional[Dict[str, Any]],
+                    structure: bool, flow: bool) -> Dict[str, Any]:
+        """A frame's statistics for the strip, as deep as asked: what the server answers with."""
+        return gol_framestats.strip(frame, previous, bool(structure), bool(flow))
 
     # ---- helpers ---------------------------------------------------------
 

@@ -700,6 +700,43 @@ def test_resuming_drops_frames_and_stats_rows_past_the_checkpoint():
             assert _what_was_recorded(cut) == _what_was_recorded(straight), when
 
 
+def test_the_strip_is_answered_from_the_record_or_worked_out_alike():
+    """
+    The strip under the canvas asks the server for one frame's statistics. A
+    frame the run recorded deep enough is answered from its stats.jsonl line,
+    found by its offset; anything deeper is worked out from the frame by the
+    same frame_stats, and both answers are the row the run would record.
+    """
+    import gol_framestats
+    import gol_record
+    import gol_server
+    import gol_store
+
+    with _scratch_runs():
+        run_id = _recorded_run_of(small(seed=84), 6, {"heavy_every": 3})
+        rows = gol_record.read_stats(run_id)
+        light = next(r for r in rows if not r["_heavy"])
+        heavy = next(r for r in rows if r["_heavy"])
+
+        assert gol_server.recorded_row(run_id, light["_frame"]) == light
+        assert gol_server.frame_row(run_id, light["_frame"]) == light, "a light question missed the record"
+        assert gol_server.frame_row(run_id, heavy["_frame"], True, True) == heavy
+
+        index = light["_frame"]
+        frame = gol_store.read_frame(run_id, index)
+        deep = gol_server.frame_row(run_id, index, True, False)
+        assert deep == gol_framestats.strip(frame, None, True, False)
+        assert deep == {k: v for k, v in gol_series.frame_stats(frame, None, True).items()}
+        assert all(deep[k] is not None or light.get(k) is None for k in gol_series.HEAVY_KEYS
+                   if k in ("bridges", "triangles", "cycleRank"))
+        flow = gol_server.frame_row(run_id, index, False, True)
+        assert flow["lightningScore"] == deep["lightningScore"] and flow["bridges"] is None, \
+            "the flow on its own should come without the graph walk"
+
+        # A line out of step with its frame is not handed out as that frame's.
+        assert gol_server.recorded_row(run_id, 999) is None
+
+
 def test_recording_decisions_does_not_change_the_run():
     """
     What the agents decided is recorded or not as a run is configured, and

@@ -37,6 +37,8 @@ const PY_FILES = [
   'gol_lightning.py',
   'gol_series.py',
   'gol_lineage.py',
+  'gol_stats.py',
+  'gol_framestats.py',
   'gol_browser.py'
 ];
 
@@ -528,6 +530,27 @@ const handlers = {
                               `[${JSON.stringify(runId)},[${frames}],${plan.heavy}]`);
     report('ready', 'ready');
     return reply;
+  },
+
+  /**
+   * A stored frame's statistics for the strip, as deep as `groups` asks. The
+   * frame goes over as the text it is stored as; the frame before only when
+   * this one is too old to carry its own token change.
+   */
+  async getFrameStats(runId, index, groups) {
+    const text = await RunStore.getFrameText(runId, Number(index));
+    const previous = Number(index) > 0 && !text.includes('"delta"')
+      ? await RunStore.getFrameText(runId, Number(index) - 1) : null;
+    const asked = groups || [];
+    return callWritten('gol_browser.WORLDS.frame_stats',
+                       `[${text},${previous || 'null'},${asked.includes('structure')},${asked.includes('flow')}]`);
+  },
+
+  /** The same of a frame the page sends — the one on screen, cropped. */
+  async frameStats(frame, previous, groups) {
+    const asked = groups || [];
+    return call('gol_browser.WORLDS.frame_stats',
+                [frame, previous || null, asked.includes('structure'), asked.includes('flow')]);
   },
 
   async getSeriesProgress() {

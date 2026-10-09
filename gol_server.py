@@ -25,6 +25,8 @@ API
     POST   /api/runs/<id>/copy        duplicate a run, data and all
     POST   /api/runs/<id>/rename      give it a different name  {name}
     GET    /api/runs/<id>/frames/<n>  one recorded frame
+    GET    /api/runs/<id>/frames/<n>/stats   ?groups=structure,flow its statistics
+    POST   /api/stats                 {frame, previous, groups} a cropped frame's
     GET    /api/runs/<id>/frames      ?from=&count=&fields= a run of them
     GET    /api/runs/<id>/lineage     ?from=&count=&limit= the genotype forest
     GET    /api/runs/<id>/series      per-frame statistics for the whole run
@@ -55,12 +57,16 @@ import socket
 import threading
 import traceback
 import webbrowser
+from collections import OrderedDict
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
-from typing import Any, Callable, Dict
+from typing import Any, Callable, Dict, List, Optional, Tuple
 from urllib.parse import parse_qs, urlparse
 
+import gol_framestats
 import gol_lab
+import gol_record
 import gol_run
+import gol_stats
 import gol_store as store
 from gol_config import SimConfig
 
@@ -81,7 +87,7 @@ WEB_DIR = os.path.join(BASE_DIR, "web")
 # build_site.sh so the two cannot drift.
 SHIPPED_PY = ("GraphOfLifeSimple.py", "gol_config.py", "gol_series.py",
               "gol_lineage.py", "gol_spectral.py", "gol_lightning.py",
-              "explain_minimal.py")
+              "gol_stats.py", "gol_framestats.py", "explain_minimal.py")
 
 # Documents the page renders, which live outside web/ because they are written
 # for a reader with a text editor first and the site second. Same problem and
@@ -105,6 +111,9 @@ BOOK_TYPES = (".md", ".json", ".svg")
 
 # Requests are capped so a malformed or hostile body cannot exhaust memory.
 MAX_BODY_BYTES = 1 << 20
+#: A frame sent to have its statistics worked out: cropped to the core of a
+#: large world it can be tens of megabytes, which nothing else sends.
+STATS_BODY_BYTES = 64 << 20
 
 def _project(frame: Dict[str, Any], fields) -> Dict[str, Any]:
     """
@@ -135,6 +144,92 @@ MAX_FRAME_BATCH = 64
 # ----------------------------------------------------------------------------
 # Workers — one background thread per running simulation
 # ----------------------------------------------------------------------------
+
+
+# ---------------------------------------------------------------------------
+# A run's record, one row at a time
+# ---------------------------------------------------------------------------
+#
+# stats.jsonl is a line per frame. A run of 3,000 iterations at 100,000 tokens
+# has a file of tens of megabytes, and the strip wants one line of it per
+# step: so the offset of every line is found once, by scanning for newlines,
+# and kept for as long as the file is the same size. A run still recording
+# appends, which the size says.
+
+_ROWS_LOCK = threading.Lock()
+_ROW_OFFSETS: Dict[str, Tuple[int, List[int]]] = {}
+
+
+def _row_offsets(path: str) -> List[int]:
+    size = os.path.getsize(path)
+    with _ROWS_LOCK:
+        known = _ROW_OFFSETS.get(path)
+        if known and known[0] == size:
+            return known[1]
+    starts, at = [0], 0
+    with open(path, "rb") as f:
+        for line in f:
+            at += len(line)
+            starts.append(at)
+    starts.pop()                   # the end of the last line starts nothing
+    with _ROWS_LOCK:
+        _ROW_OFFSETS[path] = (size, starts)
+    return starts
+
+
+def recorded_row(run_id: str, index: int) -> Optional[Dict[str, Any]]:
+    """The row a run recorded for frame `index`, if it recorded one."""
+    path = gol_record.stats_path(run_id)
+    if not os.path.exists(path):
+        return None
+    starts = _row_offsets(path)
+    if index >= len(starts):
+        return None
+    with open(path, "rb") as f:
+        f.seek(starts[index])
+        line = f.readline()
+    try:
+        row = json.loads(line)
+    except json.JSONDecodeError:
+        return None                # the line being written as the run goes
+    return row if row.get("_frame") == index else None
+
+
+# ---------------------------------------------------------------------------
+# What the strip asks of a stored run
+# ---------------------------------------------------------------------------
+
+_ROWS: "OrderedDict[Tuple[str, int, float, bool, bool], Dict[str, Any]]" = OrderedDict()
+_ROWS_KEPT = 64
+
+
+def frame_row(run_id: str, index: int, structure: bool = False,
+              flow: bool = False) -> Dict[str, Any]:
+    """
+    The statistics of a stored frame: from the run's record when it holds
+    what is asked, otherwise worked out from the frame and kept for the next
+    time someone steps back to it.
+    """
+    row = recorded_row(run_id, index)
+    if row is not None and gol_framestats.holds(row, structure, flow):
+        return gol_stats.finite(row)
+    # A resumed run writes its frames again under the same numbers, so the
+    # file's time is part of what a kept answer was made from.
+    key = (run_id, index, os.path.getmtime(store.frame_path(run_id, index)), structure, flow)
+    with _ROWS_LOCK:
+        if key in _ROWS:
+            _ROWS.move_to_end(key)
+            return _ROWS[key]
+    frame = store.read_frame(run_id, index)
+    previous = None
+    if not frame.get("delta") and index > 0 and store.has_frame(run_id, index - 1):
+        previous = store.read_frame(run_id, index - 1)
+    row = gol_framestats.strip(frame, previous, structure, flow)
+    with _ROWS_LOCK:
+        _ROWS[key] = row
+        while len(_ROWS) > _ROWS_KEPT:
+            _ROWS.popitem(last=False)
+    return row
 
 class Worker:
     """
@@ -282,11 +377,16 @@ class Handler(BaseHTTPRequestHandler):
     def _error(self, message: str, status: int = 400) -> None:
         self._send_json({"error": message}, status)
 
-    def _read_json(self) -> Dict[str, Any]:
+    def _groups(self) -> set:
+        """The parts of the strip a request for statistics names: ?groups=structure,flow."""
+        asked = parse_qs(urlparse(self.path).query).get("groups", [""])[0]
+        return {g for g in asked.split(",") if g}
+
+    def _read_json(self, limit: int = MAX_BODY_BYTES) -> Dict[str, Any]:
         length = int(self.headers.get("Content-Length") or 0)
         if length <= 0:
             return {}
-        if length > MAX_BODY_BYTES:
+        if length > limit:
             raise ValueError("request body too large")
         try:
             return json.loads(self.rfile.read(length).decode("utf-8")) or {}
@@ -436,6 +536,19 @@ class Handler(BaseHTTPRequestHandler):
             self._send_json(gol_lineage.forest(read, phase))
             return
 
+        # One stored frame's statistics, for the strip under the canvas: from
+        # the run's record when it holds what is asked, otherwise worked out
+        # from the frame (gol_framestats).
+        if (len(parts) == 6 and parts[:2] == ["api", "runs"] and parts[3] == "frames"
+                and parts[5] == "stats"):
+            run_id, index = parts[2], int(parts[4])
+            if not store.has_frame(run_id, index):
+                self._error("frame not found", 404)
+                return
+            groups = self._groups()
+            self._send_json(frame_row(run_id, index, "structure" in groups, "flow" in groups))
+            return
+
         # A contiguous run of frames, optionally cut down to the fields the
         # caller actually reads.
         #
@@ -475,6 +588,17 @@ class Handler(BaseHTTPRequestHandler):
 
     def _route_post(self, path: str) -> None:
         parts = [p for p in path.split("/") if p]
+
+        # The statistics of a frame the page sends: the one on screen, cropped
+        # to a region of a stored frame, which only the page has.
+        if parts == ["api", "stats"]:
+            body = self._read_json(STATS_BODY_BYTES)
+            if not isinstance(body.get("frame"), dict):
+                raise ValueError("a frame is needed to work out its statistics")
+            groups = set(body.get("groups") or [])
+            self._send_json(gol_framestats.strip(body["frame"], body.get("previous"),
+                                                 "structure" in groups, "flow" in groups))
+            return
 
         # What a configuration being filled in would build, for the form.
         if parts == ["api", "describe"]:

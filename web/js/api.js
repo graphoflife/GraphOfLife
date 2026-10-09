@@ -86,7 +86,17 @@ const ServerBackend = {
     return this._request('GET', `/api/runs/${encodeURIComponent(id)}/series`
       + (query.length ? `?${query.join('&')}` : ''), undefined, opts && opts.signal);
   },
-  getSeriesProgress(id, opts) { return this._request('GET', `/api/runs/${encodeURIComponent(id)}/series/progress`, undefined, opts && opts.signal); }
+  getSeriesProgress(id, opts) { return this._request('GET', `/api/runs/${encodeURIComponent(id)}/series/progress`, undefined, opts && opts.signal); },
+  // A frame's statistics, as deep as `groups` asks ('structure', 'flow'): of a
+  // stored frame by its index, or of a frame the page has cropped and sends.
+  getFrameStats(id, index, groups, opts) {
+    return this._request('GET', `/api/runs/${encodeURIComponent(id)}/frames/${index}/stats`
+      + `?groups=${(groups || []).join(',')}`, undefined, opts && opts.signal);
+  },
+  frameStats(frame, previous, groups, opts) {
+    return this._request('POST', '/api/stats', { frame, previous: previous || null, groups: groups || [] },
+                         opts && opts.signal);
+  }
 };
 
 /** Runs the same Python in a worker, through Pyodide. */
