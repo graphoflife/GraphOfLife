@@ -14,54 +14,29 @@ afternoon.
     python3 -m pytest tests/          # if you have pytest
     python3 tests/test_engine.py      # if you do not
 
-Deliberately dependency-free. A research repository that needs a toolchain
-installed before anyone can check it still works is a repository whose tests
-do not get run.
+The statistics a run records are held to theirs in test_series.py, the two
+ways the site is served in test_site.py, and the teaching script in
+test_explain_minimal.py.
 """
 
 from __future__ import annotations
 
-import atexit
-import contextlib
 import dataclasses
-import hashlib
 import itertools
-import math
 import os
-import random
 import re
-import shutil
 import sys
 import tempfile
 
-# The modules under test sit in the repository root, one level up. Added here
-# rather than left to the caller so that running this file directly works from
-# anywhere, which is the whole point of it being runnable directly.
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
-# A runs folder of the tests' own. Tests point the store at scratch folders as
-# they go, but one that forgot would otherwise write into the live runs folder.
-os.environ["GOL_RUNS_DIR"] = tempfile.mkdtemp(prefix="gol-tests-")
-atexit.register(shutil.rmtree, os.environ["GOL_RUNS_DIR"], True)
+import runner  # first: the repository on the path, and a runs folder of the tests' own
 
 import networkx as nx
 
-import gol_record
 import gol_series
 from gol_config import SimConfig
 from GraphOfLifeSimple import GraphOfLife, make_brain, new_world
 from GraphOfLifeSimple import _choose_binary as G_choose_binary
-
-
-def small(**overrides) -> SimConfig:
-    """A world small enough to run many times in a test."""
-    settings = dict(
-        total_tokens=3000, n_nodes=60, k_neighbors=6,
-        hidden_layers=[14, 12], message_amount=2, random_input_amount=2,
-        seed=17,
-    )
-    settings.update(overrides)
-    return SimConfig(**settings)
+from worlds import adjacency, advanced_run, scratch_runs, small, unrecorded_run, write_frames
 
 
 # ---------------------------------------------------------------------------
@@ -169,6 +144,106 @@ def test_no_self_loops_survive_a_phase():
     for _ in range(10):
         world.step(record_decisions=False)
         assert not list(nx.selfloop_edges(world.G))
+
+
+# ---------------------------------------------------------------------------
+# Topology: what a cut would cost
+# ---------------------------------------------------------------------------
+
+def test_a_path_is_all_bridges_and_the_middle_one_is_the_worst():
+    """
+    Every edge of a path splits it, and the worst split is the middle.
+
+    0-1-2-3: cutting the outer edges strands one node, cutting the middle one
+    strands two of four. So the worst single cut costs half the population,
+    which is the largest a cut can ever cost.
+    """
+    import GraphOfLifeSimple as G
+
+    edges = [(0, 1), (1, 2), (2, 3)]
+    ids, adj = [0, 1, 2, 3], adjacency(edges)
+
+    splits = G.bridge_splits(ids, adj)
+    assert len(splits) == 3, f"a path of four has three bridges, got {len(splits)}"
+    sides = sorted(min(b, 4 - b) for _, _, b in splits)
+    assert sides == [1, 1, 2], f"expected splits of 1, 1 and 2, got {sides}"
+    assert G.worst_cut_share(ids, adj) == 0.5
+
+
+def test_a_cycle_has_no_bridges_at_all():
+    """Every edge of a cycle lies on a loop, so nothing can be cut in two."""
+    import GraphOfLifeSimple as G
+
+    edges = [(0, 1), (1, 2), (2, 3), (3, 0)]
+    ids, adj = [0, 1, 2, 3], adjacency(edges)
+
+    assert G.bridge_splits(ids, adj) == []
+    assert G.worst_cut_share(ids, adj) == 0.0
+    # And nothing peels: a cycle is its own 2-core.
+    assert G.two_core_size(ids, adj) == 4
+
+
+def test_two_blobs_on_one_edge_is_the_worst_case_the_thesis_is_about():
+    """
+    Two triangles joined by a single edge: one bridge, half the world behind it.
+
+    This is the shape `Graphs.md` §6 says is a mass extinction waiting to
+    happen — cleanup keeps only the largest component, so cutting that edge
+    kills three of six. A bridge *count* cannot tell this apart from a triangle
+    with three leaves stuck on it, which also has three bridges and costs one
+    node each. That is the whole reason for measuring the split.
+    """
+    import GraphOfLifeSimple as G
+
+    dumbbell = [(0, 1), (1, 2), (2, 0), (3, 4), (4, 5), (5, 3), (0, 3)]
+    ids, adj = list(range(6)), adjacency(dumbbell)
+    assert len(G.bridge_splits(ids, adj)) == 1
+    assert G.worst_cut_share(ids, adj) == 0.5
+
+    fringed = [(0, 1), (1, 2), (2, 0), (0, 3), (1, 4), (2, 5)]
+    ids, adj = list(range(6)), adjacency(fringed)
+    assert len(G.bridge_splits(ids, adj)) == 3, "same bridge count as the dumbbell"
+    assert abs(G.worst_cut_share(ids, adj) - 1 / 6) < 1e-12, (
+        "three leaves cost one node each, and the count alone cannot say so")
+
+
+def test_peeling_leaves_leaves_the_core():
+    """
+    The 2-core is what survives stripping hanging trees, however deep.
+
+    A triangle with a two-node tail loses both tail nodes, not just the leaf —
+    peeling the leaf makes its neighbour a leaf in turn.
+    """
+    import GraphOfLifeSimple as G
+
+    edges = [(0, 1), (1, 2), (2, 0), (0, 3), (3, 4)]
+    ids, adj = list(range(5)), adjacency(edges)
+    assert G.two_core_size(ids, adj) == 3
+
+    # A tree has no core at all: peeling never stops until nothing is left.
+    edges = [(0, 1), (1, 2), (1, 3), (3, 4)]
+    ids, adj = list(range(5)), adjacency(edges)
+    assert G.two_core_size(ids, adj) == 0
+
+
+def test_the_cut_risk_is_recorded_before_the_cull_not_after():
+    """
+    The engine's own reading has to come from the graph the cull has not touched.
+
+    Measured afterwards it is a consequence of the cull, and the thesis it
+    exists to test — that fragility predicts the cull — becomes untestable,
+    which is exactly how the first attempt at it stalled.
+    """
+    world = new_world(SimConfig(total_tokens=600, n_nodes=40, k_neighbors=4,
+                                seed=5, hidden_layers=[6]))
+    seen = 0
+    for _ in range(6):
+        for frame in world.step(record_decisions=False):
+            risk = frame["cleanup"]["cutRiskBefore"]
+            assert risk is not None, "the engine did not record it"
+            assert 0.0 <= risk <= 0.5, f"a share of the population, got {risk}"
+            seen += 1
+    assert seen >= 12, f"both phases of six iterations, got {seen}"
 
 
 # ---------------------------------------------------------------------------
@@ -291,28 +366,6 @@ def test_two_worlds_stepped_in_turn_record_what_each_records_alone():
     assert together_b == alone_b, "a binary world was moved by the worlds beside it"
 
 
-def test_two_browser_worlds_stepped_in_turn_record_what_each_records_alone():
-    """The same for the page's worker, which holds every run in one interpreter."""
-    config = {"total_tokens": 2000, "n_nodes": 40, "k_neighbors": 4,
-              "hidden_layers": [6], "message_amount": 2, "random_input_amount": 2}
-
-    def alone(seed):
-        worlds = _browser_module().Worlds()
-        worlds.create("x", {**config, "seed": seed})
-        return [worlds.step("x")["frames"] for _ in range(4)]
-
-    worlds = _browser_module().Worlds()
-    worlds.create("a", {**config, "seed": 5})
-    worlds.create("b", {**config, "seed": 6})
-    together = {"a": [], "b": []}
-    for _ in range(4):
-        for run in ("a", "b"):
-            together[run].append(worlds.step(run)["frames"])
-
-    assert together["a"] == alone(5) and together["b"] == alone(6), \
-        "two runs in one worker moved each other"
-
-
 def test_the_own_generator_draws_the_global_stream():
     """
     A world's stream is a RandomState seeded the way np.random.seed seeded the
@@ -385,19 +438,6 @@ def test_a_checkpoint_carries_the_worlds_own_stream():
         "the resumed world drew from something other than its own stream"
 
 
-@contextlib.contextmanager
-def _scratch_runs():
-    """A runs folder of its own for the length of a test."""
-    import gol_store
-    with tempfile.TemporaryDirectory() as tmp:
-        original = gol_store.BASE_DIR
-        gol_store.BASE_DIR = tmp
-        try:
-            yield tmp
-        finally:
-            gol_store.BASE_DIR = original
-
-
 def _what_was_recorded(run_id):
     """A run's frames as canonical JSON, and the bytes of every checkpoint array."""
     import json
@@ -422,7 +462,7 @@ def test_a_stopped_and_resumed_run_is_the_run_that_never_stopped():
     import gol_store
 
     cfg = small(seed=61, checkpoint_every=4)
-    with _scratch_runs():
+    with scratch_runs():
         straight = gol_store.create_run("straight", cfg)["id"]
         assert gol_run.advance(straight, until=10) == "stopped"
 
@@ -453,7 +493,7 @@ def test_a_run_cut_between_checkpoints_resumes_to_the_same_run():
         return False
 
     cfg = small(seed=62, checkpoint_every=4)
-    with _scratch_runs():
+    with scratch_runs():
         straight = gol_store.create_run("straight", cfg)["id"]
         gol_run.advance(straight, until=10)
 
@@ -479,7 +519,7 @@ def test_two_runs_in_two_threads_match_each_alone():
     import gol_run
     import gol_store
 
-    with _scratch_runs():
+    with scratch_runs():
         made = {seed: [gol_store.create_run(f"{seed}", small(seed=seed))["id"]
                        for _ in range(2)] for seed in (71, 72)}
         for seed, (alone, _) in made.items():
@@ -498,99 +538,6 @@ def test_two_runs_in_two_threads_match_each_alone():
                 f"seed {seed} recorded something else beside another run"
 
 
-def test_a_held_run_cannot_be_advanced_twice():
-    """
-    One run, one advancer. A second — Start pressed twice, or the server and
-    the lab reaching for the same run — is refused rather than let loose on
-    the same frames, and anyone asking sees the run is going.
-    """
-    import gol_run
-    import gol_server
-    import gol_store
-
-    with _scratch_runs():
-        run_id = gol_store.create_run("x", small(seed=73))["id"]
-        assert not gol_store.held(run_id)
-        with gol_store.hold(run_id):
-            assert gol_store.held(run_id)
-            try:
-                gol_run.advance(run_id, until=2)
-                raise AssertionError("a held run was advanced a second time")
-            except gol_store.RunBusy:
-                pass
-            assert not gol_server.POOL.start(run_id), "the server started a held run"
-            assert gol_server.Handler._decorate(gol_store.load_meta(run_id))["running"]
-        assert not gol_store.held(run_id)
-
-
-def test_a_lock_dies_with_its_process():
-    """
-    A run whose advancer was killed must not stay locked, since nobody is left
-    to let go. The system releases the lock when its holder dies, so the run
-    is free at once — and the runs folder is wherever GOL_RUNS_DIR says.
-    """
-    import signal
-    import subprocess
-    import gol_store
-
-    here = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    with _scratch_runs() as tmp:
-        run_id = gol_store.create_run("x", small(seed=74))["id"]
-        script = ("import gol_store, time\n"
-                  f"with gol_store.hold({run_id!r}):\n"
-                  "    print('held', flush=True)\n"
-                  "    time.sleep(60)\n")
-        holder = subprocess.Popen([sys.executable, "-B", "-c", script], cwd=here,
-                                  env={**os.environ, "GOL_RUNS_DIR": tmp},
-                                  stdout=subprocess.PIPE, text=True)
-        try:
-            assert holder.stdout.readline().strip() == "held"
-            assert gol_store.held(run_id), "another process's hold was not seen"
-            holder.send_signal(signal.SIGKILL)
-            holder.wait(timeout=10)
-            assert not gol_store.held(run_id), "a dead holder still held the run"
-        finally:
-            if holder.poll() is None:
-                holder.kill()
-            holder.stdout.close()
-
-
-def test_meta_written_from_two_threads_is_never_torn():
-    """
-    A running run rewrites its metadata every iteration while the page may
-    rename it, both by reading the file, changing it and writing it back.
-    Unlocked, the later write carried the earlier read and the rename was
-    lost; with one temporary name for both, a write could fail outright.
-    """
-    import threading
-    import gol_store
-
-    with _scratch_runs():
-        run_id = gol_store.create_run("x", small(seed=75))["id"]
-
-        def write(key):
-            for i in range(150):
-                gol_store.update_meta(run_id, **{key: i})
-
-        threads = [threading.Thread(target=write, args=(key,)) for key in ("iteration", "name")]
-        for thread in threads:
-            thread.start()
-        for thread in threads:
-            thread.join()
-        meta = gol_store.load_meta(run_id)
-        assert (meta["iteration"], meta["name"]) == (149, 149), meta
-
-
-def _recorded_run_of(cfg, until, record=None, name="x"):
-    """A run made in the current runs folder and advanced to `until`."""
-    import gol_run
-    import gol_store
-    extra = {} if record is None else {"record": record}
-    run_id = gol_store.create_run(name, cfg, **extra)["id"]
-    gol_run.advance(run_id, until=until)
-    return run_id
-
-
 def _rows_without_costs(run_id):
     """A run's recorded rows, without what the iteration cost, which differs every time."""
     import gol_record
@@ -606,8 +553,8 @@ def test_the_recorder_summarises_a_frame_as_the_series_does():
     """
     import gol_record
 
-    with _scratch_runs():
-        run_id = _recorded_run_of(small(seed=81), 6, {"heavy_every": 2})
+    with scratch_runs():
+        run_id = advanced_run(small(seed=81), 6, {"heavy_every": 2})
         rows = gol_record.read_stats(run_id)
         assert [row["_frame"] for row in rows] == list(range(12))
         assert [row["_heavy"] for row in rows] == [row["iteration"] % 2 == 0 for row in rows]
@@ -631,9 +578,9 @@ def test_the_recorder_reads_stored_frames_as_it_reads_live_ones():
     import gol_record
     import gol_store
 
-    with _scratch_runs():
-        live = _recorded_run_of(small(seed=82), 6, {"heavy_every": 3}, "live")
-        later = _recorded_run_of(small(seed=82), 6, None, "later")
+    with scratch_runs():
+        live = advanced_run(small(seed=82), 6, {"heavy_every": 3}, "live")
+        later = advanced_run(small(seed=82), 6, None, "later")
         assert gol_record.read_stats(later) == []
 
         assert gol_record.record_stored(later, heavy_every=3) == 12
@@ -644,7 +591,7 @@ def test_the_recorder_reads_stored_frames_as_it_reads_live_ones():
         # A run from before deltas were kept works its token changes out from
         # the frame before, so one summarised in two sittings has to pick that
         # frame up again where the first sitting stopped.
-        old = [_recorded_run_of(small(seed=85), 5, None, name) for name in ("once", "twice")]
+        old = [advanced_run(small(seed=85), 5, None, name) for name in ("once", "twice")]
         for run_id in old:
             for index in range(gol_store.count_frames(run_id)):
                 frame = gol_store.read_frame(run_id, index)
@@ -680,8 +627,8 @@ def test_resuming_drops_frames_and_stats_rows_past_the_checkpoint():
         return cut
 
     cfg = small(seed=83, checkpoint_every=7)
-    with _scratch_runs():
-        straight = _recorded_run_of(cfg, 24, {"heavy_every": 5}, "straight")
+    with scratch_runs():
+        straight = advanced_run(cfg, 24, {"heavy_every": 5}, "straight")
 
         # Cut between checkpoints, and cut just after one: the second leaves no
         # whole row to drop, only the line being written when it died.
@@ -700,41 +647,16 @@ def test_resuming_drops_frames_and_stats_rows_past_the_checkpoint():
             assert _what_was_recorded(cut) == _what_was_recorded(straight), when
 
 
-def test_the_strip_is_answered_from_the_record_or_worked_out_alike():
+def test_a_checkpoint_timeline_ends_where_its_frames_do():
     """
-    The strip under the canvas asks the server for one frame's statistics. A
-    frame the run recorded deep enough is answered from its stats.jsonl line,
-    found by its offset; anything deeper is worked out from the frame by the
-    same frame_stats, and both answers are the row the run would record.
+    Both backends drop the frames a resume abandons, from the same rule: two
+    frames for every recorded iteration below the checkpoint's.
     """
-    import gol_framestats
-    import gol_record
-    import gol_server
-    import gol_store
-
-    with _scratch_runs():
-        run_id = _recorded_run_of(small(seed=84), 6, {"heavy_every": 3})
-        rows = gol_record.read_stats(run_id)
-        light = next(r for r in rows if not r["_heavy"])
-        heavy = next(r for r in rows if r["_heavy"])
-
-        assert gol_server.recorded_row(run_id, light["_frame"]) == light
-        assert gol_server.frame_row(run_id, light["_frame"]) == light, "a light question missed the record"
-        assert gol_server.frame_row(run_id, heavy["_frame"], True, True) == heavy
-
-        index = light["_frame"]
-        frame = gol_store.read_frame(run_id, index)
-        deep = gol_server.frame_row(run_id, index, True, False)
-        assert deep == gol_framestats.strip(frame, None, True, False)
-        assert deep == {k: v for k, v in gol_series.frame_stats(frame, None, True).items()}
-        assert all(deep[k] is not None or light.get(k) is None for k in gol_series.HEAVY_KEYS
-                   if k in ("bridges", "triangles", "cycleRank"))
-        flow = gol_server.frame_row(run_id, index, False, True)
-        assert flow["lightningScore"] == deep["lightningScore"] and flow["bridges"] is None, \
-            "the flow on its own should come without the graph walk"
-
-        # A line out of step with its frame is not handed out as that frame's.
-        assert gol_server.recorded_row(run_id, 999) is None
+    every = SimConfig(export_every=1)
+    assert [every.frames_before(i) for i in (0, 1, 5)] == [0, 2, 10]
+    sparse = SimConfig(export_every=3)
+    assert [i for i in range(10) if sparse.records(i)] == [0, 3, 6, 9]
+    assert sparse.frames_before(7) == 6 and sparse.frames_before(6) == 4
 
 
 def test_recording_decisions_does_not_change_the_run():
@@ -773,6 +695,205 @@ def test_neighbour_order_does_not_depend_on_graph_history():
     # Insertion order genuinely differs; sorting is what removes the dependence.
     differs = any(list(grown[n]) != list(rebuilt[n]) for n in grown.nodes())
     assert differs, "this test is not exercising what it claims to"
+
+
+# ---------------------------------------------------------------------------
+# The runs folder
+# ---------------------------------------------------------------------------
+
+def test_a_held_run_cannot_be_advanced_twice():
+    """
+    One run, one advancer. A second — Start pressed twice, or the server and
+    the lab reaching for the same run — is refused rather than let loose on
+    the same frames, and anyone asking sees the run is going.
+    """
+    import gol_run
+    import gol_server
+    import gol_store
+
+    with scratch_runs():
+        run_id = gol_store.create_run("x", small(seed=73))["id"]
+        assert not gol_store.held(run_id)
+        with gol_store.hold(run_id):
+            assert gol_store.held(run_id)
+            try:
+                gol_run.advance(run_id, until=2)
+                raise AssertionError("a held run was advanced a second time")
+            except gol_store.RunBusy:
+                pass
+            assert not gol_server.POOL.start(run_id), "the server started a held run"
+            assert gol_server.Handler._decorate(gol_store.load_meta(run_id))["running"]
+        assert not gol_store.held(run_id)
+
+
+def test_a_lock_dies_with_its_process():
+    """
+    A run whose advancer was killed must not stay locked, since nobody is left
+    to let go. The system releases the lock when its holder dies, so the run
+    is free at once — and the runs folder is wherever GOL_RUNS_DIR says.
+    """
+    import signal
+    import subprocess
+    import gol_store
+
+    here = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    with scratch_runs() as tmp:
+        run_id = gol_store.create_run("x", small(seed=74))["id"]
+        script = ("import gol_store, time\n"
+                  f"with gol_store.hold({run_id!r}):\n"
+                  "    print('held', flush=True)\n"
+                  "    time.sleep(60)\n")
+        holder = subprocess.Popen([sys.executable, "-B", "-c", script], cwd=here,
+                                  env={**os.environ, "GOL_RUNS_DIR": tmp},
+                                  stdout=subprocess.PIPE, text=True)
+        try:
+            assert holder.stdout.readline().strip() == "held"
+            assert gol_store.held(run_id), "another process's hold was not seen"
+            holder.send_signal(signal.SIGKILL)
+            holder.wait(timeout=10)
+            assert not gol_store.held(run_id), "a dead holder still held the run"
+        finally:
+            if holder.poll() is None:
+                holder.kill()
+            holder.stdout.close()
+
+
+def test_meta_written_from_two_threads_is_never_torn():
+    """
+    A running run rewrites its metadata every iteration while the page may
+    rename it, both by reading the file, changing it and writing it back.
+    Unlocked, the later write carried the earlier read and the rename was
+    lost; with one temporary name for both, a write could fail outright.
+    """
+    import threading
+    import gol_store
+
+    with scratch_runs():
+        run_id = gol_store.create_run("x", small(seed=75))["id"]
+
+        def write(key):
+            for i in range(150):
+                gol_store.update_meta(run_id, **{key: i})
+
+        threads = [threading.Thread(target=write, args=(key,)) for key in ("iteration", "name")]
+        for thread in threads:
+            thread.start()
+        for thread in threads:
+            thread.join()
+        meta = gol_store.load_meta(run_id)
+        assert (meta["iteration"], meta["name"]) == (149, 149), meta
+
+
+def test_a_frame_index_survives_growing_past_five_digits():
+    """
+    Frame names are zero-padded to five digits, but padding is a minimum.
+
+    At index 100000 the name grows a digit. Reading the index from a fixed
+    five-character slice turned that into 10000, which is not a harmless
+    misreading: truncating a resumed run walks the directory asking whether
+    each frame is at or after the cut, and a frame claiming to be 10000 when it
+    is really 100000 is stepped straight over. Frames from a timeline the
+    resumed world never lived through would stay on disk, which is the one
+    thing the store promises cannot happen.
+    """
+    import gol_store
+
+    for index in (0, 1, 99999, 100000, 123456, 9999999):
+        name = os.path.basename(gol_store.frame_path("GOL_00_00_00_n001", index))
+        assert gol_store.frame_index(name) == index, name
+
+    for other in ("checkpoint.npz", "meta.json", "frame_.json.gz",
+                  "frame_00001.json.gz.tmp", "frame_abc.json.gz"):
+        assert gol_store.frame_index(other) is None, other
+
+
+def test_a_truncated_resume_removes_frames_past_a_hundred_thousand():
+    """The same thing, exercised through the call that actually matters."""
+    import gol_store
+
+    with tempfile.TemporaryDirectory() as tmp:
+        original = gol_store.BASE_DIR
+        gol_store.BASE_DIR = tmp
+        try:
+            run_id = "GOL_00_00_00_n001"
+            os.makedirs(gol_store.frames_dir(run_id))
+            kept, cut = 99998, 100001
+            for index in (kept, cut):
+                with open(gol_store.frame_path(run_id, index), "w") as f:
+                    f.write("{}")
+
+            gol_store.truncate_frames_from(run_id, 100000)
+
+            assert os.path.exists(gol_store.frame_path(run_id, kept)), \
+                "a frame before the cut was deleted"
+            assert not os.path.exists(gol_store.frame_path(run_id, cut)), \
+                "a frame past the cut survived the truncation"
+        finally:
+            gol_store.BASE_DIR = original
+
+
+def test_copying_a_run_forks_it_rather_than_backing_it_up():
+    """
+    A duplicate is a run in its own right, starting where the original is.
+
+    Its own id, its own directory, its own creation time — but every frame and
+    the checkpoint, so it can be resumed and taken somewhere else while the
+    original carries on. Whatever the original was doing, the copy is doing
+    nothing: nothing is advancing it.
+    """
+    import gol_store
+
+    with tempfile.TemporaryDirectory() as tmp:
+        original = gol_store.BASE_DIR
+        gol_store.BASE_DIR = tmp
+        try:
+            meta = gol_store.create_run("first world", SimConfig())
+            run_id = meta["id"]
+            for index in range(4):
+                gol_store.write_frame(run_id, index, {"ids": [1, 2], "at": index})
+            gol_store.update_meta(run_id, status="running", iteration=42,
+                                  frame_count=4, error="something went wrong")
+
+            copy = gol_store.copy_run(run_id)
+
+            assert copy["id"] != run_id, "a copy must not share the original's id"
+            assert copy["iteration"] == 42, "the copy should start where the original is"
+            assert copy["status"] == "idle" and copy["error"] is None, \
+                "nothing is advancing the copy, and it did not inherit the failure"
+            assert gol_store.count_frames(copy["id"]) == 4, "the frames did not come along"
+            assert gol_store.read_frame(copy["id"], 3) == gol_store.read_frame(run_id, 3)
+            assert gol_store.load_meta(run_id)["status"] == "running", \
+                "copying changed the original"
+
+            # Independent from here on.
+            gol_store.write_frame(copy["id"], 4, {"ids": [1], "at": 4})
+            assert gol_store.count_frames(run_id) == 4
+            assert gol_store.count_frames(copy["id"]) == 5
+        finally:
+            gol_store.BASE_DIR = original
+
+
+def test_a_run_size_is_kept_until_the_run_changes():
+    """
+    The size is cached against the run's folders, so it has to notice a write.
+    A stale size would say a run takes less room than it does.
+    """
+    import gol_store
+
+    with tempfile.TemporaryDirectory() as tmp:
+        original = gol_store.BASE_DIR
+        gol_store.BASE_DIR = tmp
+        try:
+            run_id, world, written = unrecorded_run(3)
+            before = gol_store.run_size_bytes(run_id)
+            assert gol_store.run_size_bytes(run_id) == before
+            write_frames(run_id, world, written, 2)
+            after = gol_store.run_size_bytes(run_id)
+            walked = sum(os.path.getsize(os.path.join(r, f))
+                         for r, _, fs in os.walk(gol_store.run_dir(run_id)) for f in fs)
+            assert after == walked > before, (before, after, walked)
+        finally:
+            gol_store.BASE_DIR = original
 
 
 # ---------------------------------------------------------------------------
@@ -913,727 +1034,6 @@ def test_a_binary_checkpoint_says_how_many_flags_its_brains_read():
     GraphOfLife.from_checkpoint(old, plain)
 
 
-# ---------------------------------------------------------------------------
-# Frames
-# ---------------------------------------------------------------------------
-
-def test_frame_arrays_stay_aligned():
-    cfg = small()
-    world = new_world(cfg)
-    for _ in range(6):
-        for frame in world.step(record_decisions=True):
-            n = len(frame["ids"])
-            for key in ("tokens", "brain_ids", "parent_brain_ids", "parent_ids", "delta"):
-                assert len(frame[key]) == n, f"{key} is out of step with ids"
-
-
-def test_delta_is_the_change_across_the_phase():
-    cfg = small()
-    world = new_world(cfg)
-    previous = dict(world.tokens)   # the phase before the first one is the start
-    for _ in range(6):
-        for frame in world.step(record_decisions=False):
-            for i, node in enumerate(frame["ids"]):
-                before = previous.get(node, 0)
-                assert frame["delta"][i] == frame["tokens"][i] - before
-            previous = dict(zip(frame["ids"], frame["tokens"]))
-
-
-def test_edges_only_reference_present_nodes():
-    cfg = small()
-    world = new_world(cfg)
-    for _ in range(6):
-        for frame in world.step(record_decisions=False):
-            present = set(frame["ids"])
-            for a, b in frame["edges"]:
-                assert a in present and b in present
-
-
-def test_a_frame_records_the_decisions_its_mechanics_say_it_does():
-    """
-    Every combination of the mechanics that add or take away a decision, a
-    few iterations each: every record holds exactly the keys the engine's own
-    statement of the contract, decision_keys, says it does.
-    """
-    from GraphOfLifeSimple import decision_keys
-    for gifting, handover, revolutions, prune in itertools.product(
-            (False, True), (False, True), (False, True), ("blotto", "reproduction", "both")):
-        cfg = small(allow_gifting=gifting, allow_handover=handover,
-                    allow_revolutions=revolutions, prune_after=prune, seed=5)
-        expected = decision_keys(cfg)
-        world = new_world(cfg)
-        seen = set()
-        for _ in range(4):
-            for frame in world.step(record_decisions=True):
-                decisions = frame["decisions"]
-                if frame["phase"] == 1:
-                    records = [("reproduction", decisions)]
-                    records += [("birth", b) for b in decisions["births"]]
-                else:
-                    records = [("game", decisions)]
-                    records += [("allocation", a) for a in decisions["allocations"]]
-                    records += [("winner", w) for w in decisions["winners"]]
-                for kind, record in records:
-                    assert set(record) == expected[kind], (
-                        f"{cfg.strain_id()}, prune after {prune}: a {kind} record holds "
-                        f"{sorted(record)}, not {sorted(expected[kind])}")
-                    seen.add(kind)
-        assert seen == set(expected), f"{cfg.strain_id()}: never saw {set(expected) - seen}"
-
-
-# ---------------------------------------------------------------------------
-# Optional mechanics
-# ---------------------------------------------------------------------------
-
-def test_a_mechanic_can_be_switched_off():
-    """Switching a rule off changes the brain, so the run must still start."""
-    for mechanic in ("allow_handover", "allow_revolutions"):
-        world = new_world(small(**{mechanic: False}))
-        for _ in range(3):
-            world.step(record_decisions=True)
-        assert world.G.number_of_nodes() > 0, f"a run with {mechanic} off died immediately"
-
-
-def test_output_layout_matches_the_configuration():
-    for handover in (True, False):
-        for revolutions in (True, False):
-            cfg = small(allow_handover=handover, allow_revolutions=revolutions)
-            world = new_world(cfg)
-            node = next(iter(world.G.nodes()))
-            rows = world.brains[node].weights[-1].shape[0]
-            assert rows == cfg.n_outputs()
-
-
-def test_statistics_absent_rather_than_zero_when_a_rule_is_off():
-    """
-    "Not part of these rules" and "allowed but nobody did it" are different
-    findings, and a zero cannot tell them apart.
-    """
-    world = new_world(small(allow_revolutions=False))
-    _, game = world.step(record_decisions=True)
-    stats = gol_series.frame_stats(game)
-    assert stats["revolutions"] is None
-    assert stats["revoltShare"] is None
-
-
-def test_every_agent_in_a_phase_reads_the_same_messages():
-    """
-    A phase must not let its own writes change what it is reading.
-
-    Messages used to be written straight into the store the observation loop
-    was reading from, so an agent saw a mixture: some signals from last phase,
-    some written moments earlier in this one, and which it got depended on
-    where its id fell in the loop. Seventeen per cent of all reads in a phase
-    were of values written during that same phase — low ids systematically
-    reading stale signals and high ids fresh ones, for no reason anyone chose.
-
-    Writes now go to an outbox delivered once the phase is over.
-
-    The pre-pass adds a delivery partway through, on purpose — that is the
-    whole option — so with it on the rule is per pass rather than per phase:
-    within any one sweep of the population, nobody's read changes under them.
-    Checked both ways, because the property being protected is that a read
-    never depends on where an id fell in a loop, and that holds either way.
-    """
-    import copy
-
-    for prepass in (False, True):
-        world = new_world(small(seed=3, message_prepass=prepass))
-        for _ in range(3):
-            world.step()
-
-        for run in (world.reproduction_phase, world.blotto_phase):
-            baseline = {"at": copy.deepcopy(world.messages)}
-            changed = []
-            original_input = world._inputs
-            original_deliver = world._deliver_messages
-
-            def watching(u, candidates, *args, **kwargs):
-                for v in candidates:
-                    for src, dst in ((u, u), (u, v), (v, u), (v, v)):
-                        if world.messages.get(src, {}).get(dst) != baseline["at"].get(src, {}).get(dst):
-                            changed.append((src, dst))
-                return original_input(u, candidates, *args, **kwargs)
-
-            # A delivery ends one sweep and begins the next, so that is where
-            # the comparison is allowed to move on.
-            def delivering(outbox):
-                original_deliver(outbox)
-                baseline["at"] = copy.deepcopy(world.messages)
-
-            world._inputs = watching
-            world._deliver_messages = delivering
-            try:
-                run(record_decisions=False)
-            finally:
-                world._inputs = original_input
-                world._deliver_messages = original_deliver
-
-            assert not changed, (
-                f"with message_prepass={prepass}, {len(changed)} reads returned a "
-                f"message that had changed mid-sweep, e.g. {changed[:3]}")
-
-
-def test_a_phase_looks_exactly_as_often_as_it_was_asked_to():
-    """
-    One pass per agent, or two if a pre-pass was asked for. Never a spare one.
-
-    The game phase used to observe twice unconditionally: once to write
-    messages, once to place stakes. That second look is now a choice, and the
-    cost of the choice is exactly one extra forward pass per agent per phase —
-    so the count is worth pinning down, in both directions.
-
-    Reproduction's acting pass skips agents who cannot afford a child, so it
-    looks no more than once each; the pre-pass gives everyone a turn, which is
-    why the counts are compared against a ceiling rather than an equality.
-    """
-    for prepass, passes in ((False, 1), (True, 2)):
-        world = new_world(small(seed=3, message_prepass=prepass))
-        world.step()
-
-        for name, run in (("reproduction", world.reproduction_phase),
-                          ("game", world.blotto_phase)):
-            present = world.G.number_of_nodes()
-            calls = []
-            original = world._observe
-
-            def counting(*args, **kwargs):
-                calls.append(1)
-                return original(*args, **kwargs)
-
-            world._observe = counting
-            try:
-                run(record_decisions=False)
-            finally:
-                world._observe = original
-
-            assert len(calls) <= present * passes, (
-                f"the {name} phase made {len(calls)} forward passes for {present} "
-                f"agents with message_prepass={prepass}, wanted at most "
-                f"{present * passes}")
-            if prepass:
-                assert len(calls) > present, (
-                    f"the {name} phase made {len(calls)} forward passes for "
-                    f"{present} agents, which is not enough for a pre-pass")
-
-
-# ---------------------------------------------------------------------------
-# The teaching script
-# ---------------------------------------------------------------------------
-
-def test_the_teaching_script_runs_and_conserves_tokens():
-    """
-    explain_minimal.py is on the site for people to copy and run, and the
-    Explanation walks through it line by line. A version of it that crashes, or
-    that quietly leaks tokens, would be teaching something false — so it is
-    held to the same invariants as the engine it stands in for.
-    """
-    import random
-    import numpy as np
-    import explain_minimal as minimal
-
-    random.seed(11)
-    np.random.seed(11)
-    world = minimal.World()
-
-    for i in range(40):
-        world.step()
-        assert world.adj, f"the world emptied at iteration {i + 1}"
-        assert sum(world.tokens.values()) == minimal.TOKENS, (
-            f"tokens were not conserved at iteration {i + 1}")
-        assert len(minimal.components(world.adj)) == 1, (
-            f"cleanup left more than one piece at iteration {i + 1}")
-        for agent, neighbours in world.adj.items():
-            assert agent not in neighbours, f"agent {agent} is joined to itself"
-
-
-def test_the_teaching_script_gives_a_revolution_to_its_strongest_rebel():
-    """
-    The revolution goes to the strongest staker in the rung that tipped it, not
-    to a random member of the crowd. The full engine is held to this too; the
-    teaching script has its own copy of the rule, so it gets its own check.
-    """
-    import explain_minimal as minimal
-
-    # One big spender against four small ones and a larger rebel.
-    staked = {1: 20, 2: 1, 3: 2, 4: 3, 5: 4, 6: 14}
-    revolt = {2: 1, 3: 2, 4: 3, 5: 4, 6: 14}
-    winners = {minimal.resolve(dict(staked), dict(revolt)) for _ in range(200)}
-    assert winners == {6}, f"expected the strongest rebel to take it, got {winners}"
-
-
-# ---------------------------------------------------------------------------
-# Loading a run's history at increasing resolution
-# ---------------------------------------------------------------------------
-
-#: What a row of statistics holds under the current SERIES_VERSION: every key
-#: of a heavy row, and which of them are heavy, as a digest. Caches of rows are
-#: kept under the version, and the version is bumped by hand — its own comment
-#: records a time it was not. Change what a row holds and this digest moves;
-#: the test then asks for the version to move with it.
-SERIES_ROW_PIN = (23, "cb770dabf276")
-
-
-def test_the_series_version_moves_with_what_a_row_holds():
-    world = new_world(small(seed=3))
-    frames = [frame for _ in range(2) for frame in world.step(record_decisions=True)]
-    keys = sorted(gol_series.frame_stats(frames[-1], frames[-2], True))
-    text = "\n".join(keys) + "\n--heavy--\n" + "\n".join(sorted(gol_series.HEAVY_KEYS))
-    digest = hashlib.sha256(text.encode()).hexdigest()[:12]
-    assert (gol_series.SERIES_VERSION, digest) == SERIES_ROW_PIN, (
-        f"a row now holds {len(keys)} statistics, {len(gol_series.HEAVY_KEYS)} of them heavy "
-        f"(digest {digest}), under SERIES_VERSION {gol_series.SERIES_VERSION}. If what a row "
-        f"holds changed, bump SERIES_VERSION and pin both here.")
-
-
-def test_bisection_visits_the_ends_first_and_then_keeps_halving():
-    """
-    Both ends, then the middle, then the middles of the halves.
-
-    The order has to be a permutation — every sample reached exactly once —
-    and it has to *start* wide, because the whole point is that a partial
-    answer spans the entire run rather than describing its first few percent.
-    """
-    import gol_series
-
-    order = gol_series.bisection_order(9)
-    assert sorted(order) == list(range(9)), f"not a permutation: {order}"
-    assert order[:3] == [0, 8, 4], f"ends then middle, got {order[:3]}"
-    assert sorted(order[:5]) == [0, 2, 4, 6, 8], (
-        f"five points should be evenly spread, got {sorted(order[:5])}")
-
-    for count in (0, 1, 2, 3, 300):
-        got = gol_series.bisection_order(count)
-        assert sorted(got) == list(range(count)), f"{count} gave {got}"
-
-
-def test_every_prefix_of_the_order_contains_the_one_before_it():
-    """
-    Nesting is what makes the climb free.
-
-    Each pass must only pay for samples the previous pass did not take. If the
-    prefixes were not nested, asking for five points after three would recompute
-    work already done, and a progressive load would cost more than a single one
-    rather than the same.
-    """
-    import gol_series
-
-    order = gol_series.bisection_order(64)
-    for size in range(2, len(order)):
-        assert set(order[:size - 1]) < set(order[:size]), (
-            f"prefix of {size} does not contain the prefix of {size - 1}")
-
-
-def test_a_coarse_request_spans_the_whole_run_and_a_finer_one_refines_it():
-    """
-    Asking for fewer points must not mean asking for less of the run.
-
-    The failure this guards against is the obvious implementation — take the
-    first N samples — which draws a chart of the beginning of the run and calls
-    it a chart of the run. A coarse pass has to reach the last iteration, and
-    every later pass has to be a superset of the earlier one.
-    """
-    import gol_store
-
-    with tempfile.TemporaryDirectory() as tmp:
-        original = gol_store.BASE_DIR
-        gol_store.BASE_DIR = tmp
-        try:
-            cfg = SimConfig(total_tokens=400, n_nodes=30, k_neighbors=4,
-                            seed=3, hidden_layers=[6], export_decisions=False)
-            run_id = gol_store.create_run("x", cfg)["id"]
-            world = new_world(cfg)
-            written = 0
-            for _ in range(40):
-                for frame in world.step(record_decisions=False):
-                    gol_store.write_frame(run_id, written, frame)
-                    written += 1
-            gol_store.update_meta(run_id, frame_count=written,
-                                  iteration=world.iteration)
-
-            coarse = gol_record.build_series(run_id, points=3)
-            finer = gol_record.build_series(run_id, points=5)
-            whole = gol_record.build_series(run_id)
-
-            last = whole["series"]["iteration"][-1]
-            assert coarse["series"]["iteration"][0] == 0
-            assert coarse["series"]["iteration"][-1] == last, (
-                "a coarse pass must still reach the end of the run")
-            assert not coarse["complete"] and whole["complete"]
-            assert coarse["done"] < finer["done"] <= whole["done"]
-
-            of = lambda r: set(r["series"]["iteration"])
-            assert of(coarse) < of(finer) <= of(whole), (
-                "each pass must contain the one before it")
-        finally:
-            gol_store.BASE_DIR = original
-
-
-def test_a_light_pass_leaves_the_costly_statistics_empty_and_the_rest_filled():
-    """
-    A chart of the node count should not wait on a box-covering dimension.
-
-    Five sixths of what summarising a frame costs goes on statistics that walk
-    the graph — bridges, triangles, distance sweeps, two dimension estimates —
-    and most charts plot none of them. A light row has to hold the cheap ones
-    and carry the rest as explicit nulls: *present and empty*, because a row
-    that simply lacked them would be indistinguishable from a run recorded
-    before those statistics existed.
-    """
-    import gol_series
-
-    world = new_world(SimConfig(total_tokens=600, n_nodes=40, k_neighbors=4,
-                                seed=9, hidden_layers=[6]))
-    frame = world.step(record_decisions=False)[0]
-
-    light = gol_series.frame_stats(frame, None, heavy=False)
-    heavy = gol_series.frame_stats(frame, None, heavy=True)
-
-    assert set(light) == set(heavy), "the two passes must produce the same row shape"
-    for key in gol_series.HEAVY_KEYS:
-        assert key in light, f"{key} must be present in a light row, as a null"
-        assert light[key] is None, f"{key} was computed on a light pass"
-    assert heavy["bridges"] is not None, "a heavy pass must actually count bridges"
-
-    # HEAVY_KEYS is what the light pass fills with nulls, and it has to name
-    # exactly what the heavy pass produces. Since that pass is one function,
-    # the list can be checked against it directly rather than inferred from
-    # two rows having the same shape.
-    produced = set(gol_series._heavy_stats(
-        frame, frame["ids"], frame["edges"], frame["tokens"], None))
-    assert produced == set(gol_series.HEAVY_KEYS), (
-        f"_heavy_stats and HEAVY_KEYS disagree. "
-        f"returned but unlisted: {sorted(produced - set(gol_series.HEAVY_KEYS))}; "
-        f"listed but not returned: {sorted(set(gol_series.HEAVY_KEYS) - produced)}")
-    assert light["nodes"] == heavy["nodes"], "the cheap statistics must agree"
-    assert light["gini"] == heavy["gini"]
-
-
-def test_a_heavy_pass_upgrades_the_rows_a_light_one_left_behind():
-    """
-    The two passes share one cache, so the second has to fill in the first.
-
-    The failure this guards against is the cache counting a light row as
-    already done: the expensive statistics would then never be computed for any
-    frame the cheap pass reached first, and the chart would be permanently
-    empty with no sign that anything was missing.
-    """
-    import gol_store, gol_series
-
-    with tempfile.TemporaryDirectory() as tmp:
-        original = gol_store.BASE_DIR
-        gol_store.BASE_DIR = tmp
-        try:
-            cfg = SimConfig(total_tokens=400, n_nodes=30, k_neighbors=4,
-                            seed=4, hidden_layers=[6], export_decisions=False)
-            run_id = gol_store.create_run("x", cfg)["id"]
-            world = new_world(cfg)
-            written = 0
-            for _ in range(20):
-                for frame in world.step(record_decisions=False):
-                    gol_store.write_frame(run_id, written, frame)
-                    written += 1
-            gol_store.update_meta(run_id, frame_count=written,
-                                  iteration=world.iteration)
-
-            light = gol_record.build_series(run_id, heavy=False)
-            assert light["heavy"] is False
-            assert all(v is None for v in light["series"]["bridges"])
-
-            heavy = gol_record.build_series(run_id, heavy=True)
-            assert heavy["heavy"] is True
-            assert all(v is not None for v in heavy["series"]["bridges"]), (
-                "the heavy pass did not upgrade the rows the light pass stored")
-            assert heavy["count"] == light["count"], "the upgrade duplicated points"
-
-            # And going back to a light request keeps what the heavy pass found,
-            # rather than throwing the expensive work away again.
-            back = gol_record.build_series(run_id, heavy=False)
-            assert all(v is not None for v in back["series"]["bridges"])
-
-            assert not [k for k in heavy["keys"] if k.startswith("_")], (
-                "bookkeeping fields must not travel with the statistics")
-        finally:
-            gol_store.BASE_DIR = original
-
-
-def _recorded_run(iterations: int, seed: int = 4):
-    """A small run with `iterations` recorded, in whatever BASE_DIR is current."""
-    import gol_store
-    cfg = SimConfig(total_tokens=400, n_nodes=30, k_neighbors=4,
-                    seed=seed, hidden_layers=[6], export_decisions=False)
-    run_id = gol_store.create_run("x", cfg)["id"]
-    world = new_world(cfg)
-    return run_id, world, _record(run_id, world, 0, iterations)
-
-
-def _record(run_id: str, world, written: int, iterations: int) -> int:
-    """Run `world` on and record what it does, returning the new frame count."""
-    import gol_store
-    for _ in range(iterations):
-        for frame in world.step(record_decisions=False):
-            gol_store.write_frame(run_id, written, frame)
-            written += 1
-    gol_store.update_meta(run_id, frame_count=written, iteration=world.iteration)
-    return written
-
-
-def test_a_reply_is_everything_the_history_knows():
-    """
-    A coarse request on a summarised run hands back all of it.
-
-    Only the samples asked for used to go back, so the page merged replies
-    into what it held — and a page with the whole run drawn cheaply that then
-    asked for bridges got two points back. The reply is the history now, and
-    the page keeps the latest one.
-    """
-    import gol_store
-
-    with tempfile.TemporaryDirectory() as tmp:
-        original = gol_store.BASE_DIR
-        gol_store.BASE_DIR = tmp
-        try:
-            run_id, _, _ = _recorded_run(20)
-            whole = gol_record.build_series(run_id, heavy=False)
-            coarse = gol_record.build_series(run_id, points=2, heavy=False)
-            assert coarse["count"] == whole["count"], (
-                f"a coarse request returned {coarse['count']} of {whole['count']} known rows")
-            assert coarse["done"] == coarse["totalPoints"] and coarse["complete"], (
-                "a summarised run does not say it is finished, so a climb would not stop")
-
-            # The first deep step summarises two samples and hands back the rest.
-            deep = gol_record.build_series(run_id, points=2, heavy=True)
-            assert deep["count"] == whole["count"], "a deep step dropped the cheap rows"
-            filled = sum(v is not None for v in deep["series"]["bridges"])
-            assert 0 < filled < deep["count"], f"{filled} bridge counts after one deep step"
-            assert all(v is not None for v in deep["series"]["nodes"]), (
-                "a deep step blanked the cheap statistics")
-            assert deep["done"] == 2 and deep["complete"] and not deep["heavy"]
-        finally:
-            gol_store.BASE_DIR = original
-
-
-def test_a_cheap_row_never_blanks_what_a_deep_one_found():
-    """
-    The page used to guard this itself, when it merged replies. The history
-    does it now: a cheap row for a frame whose graph statistics are already
-    known keeps them, and keeps whatever only the cheap row carried.
-    """
-    history = gol_series.History()
-    history.add({"_frame": 0, "_heavy": True, "nodes": 10, "bridges": 3})
-    history.add({"_frame": 0, "_heavy": False, "nodes": 10, "bridges": None,
-                 "cladesInWindow": 2})
-    row = history.rows[0]
-    assert row["bridges"] == 3 and row["_heavy"], "a cheap row blanked a bridge count"
-    assert row["cladesInWindow"] == 2, "what only the cheap row carried was lost"
-
-
-def test_the_depth_follows_the_statistics_named():
-    """
-    The page names what it plots, and the one list of what walks the graph
-    decides how deep to summarise.
-    """
-    assert not gol_series.needs_graph(["nodes", "edges", "tokens"])
-    assert gol_series.needs_graph(["nodes", "bridges"])
-    assert not gol_series.needs_graph([])
-
-
-def _browser_module():
-    """gol_browser, which lives with the page rather than beside the engine."""
-    import importlib.util
-
-    here = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    spec = importlib.util.spec_from_file_location(
-        "gol_browser", os.path.join(here, "web", "py", "gol_browser.py"))
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module
-
-
-def test_a_browser_checkpoint_says_which_iteration_it_holds():
-    """
-    The worker recorded a checkpoint under the iteration in the run's stored
-    record, which a slice in flight could have left behind the world. The
-    checkpoint says for itself now, from the world it was written from, and a
-    world restored from it is at that iteration.
-    """
-    import json
-
-    browser = _browser_module().Worlds()
-    config = {"total_tokens": 2000, "n_nodes": 40, "k_neighbors": 4,
-              "hidden_layers": [6], "seed": 3}
-    # The run keeps the configuration create settles on, as the worker does.
-    stored = browser.create("a", config)["config"]
-    browser.step("a", 3)
-    with tempfile.TemporaryDirectory() as tmp:
-        path = os.path.join(tmp, "a.npz")
-        saved = browser.checkpoint("a", path)
-        assert saved["iteration"] == 3 and saved["bytes"] == os.path.getsize(path), saved
-        assert json.loads(_browser_module().to_json(saved)) == saved
-
-        again = _browser_module().Worlds()
-        restored = again.restore("a", stored, path)
-        assert restored["iteration"] == saved["iteration"], restored
-
-
-def test_the_worker_answers_in_json_with_what_is_not_a_number_as_null():
-    """
-    An answer crosses from Python to the page as JSON, which cannot write a
-    NaN or an infinity, so those arrive as null and read as missing. Answers
-    holding none are written straight out rather than rebuilt first, and must
-    come out exactly as the rebuilt ones did.
-    """
-    import json
-
-    browser = _browser_module()
-    write = lambda value: json.dumps(value, separators=(",", ":"), allow_nan=False)
-
-    clean = {"frames": [{"ids": [3, 4], "tokens": [0.5, 2.0]}], "pair": (1, 2.5), "extinct": False}
-    assert browser.answer(lambda: clean, "[]") == write(browser._finite(clean))
-
-    odd = {"ratio": float("nan"), "range": [1.0, float("inf"), -float("inf")],
-           "pair": (float("nan"), 3)}
-    assert json.loads(browser.answer(lambda: odd, "[]")) == \
-        {"ratio": None, "range": [1.0, None, None], "pair": [None, 3]}
-
-    assert browser.answer(lambda a, b: {"sum": a + b}, "[2, 3]") == '{"sum":5}'
-
-
-def test_a_frame_is_compared_only_with_the_phase_it_started_from():
-    """
-    A frame recorded before deltas were tracked has its change worked out
-    from the frame before, as long as that frame is the state its phase began
-    in: (it, 1) before (it, 2), and (it - 1, 2) before (it, 1). On a run that
-    records every Nth iteration the frame before a reproduction frame is N
-    iterations back. Every caller used to settle this from the run's
-    configuration and the frame indices, and the page's Diagrams never did.
-    """
-    import gol_series
-
-    world = new_world(small(seed=12))
-    frames = []
-    for _ in range(4):
-        frames.extend(world.step(record_decisions=False))
-    older = [{k: v for k, v in f.items() if k != "delta"} for f in frames]
-
-    game, its_start = older[5], older[4]          # (2, 2) and (2, 1)
-    reproduction, last_game = older[4], older[3]  # (2, 1) and (1, 2)
-    for frame, start in ((game, its_start), (reproduction, last_game)):
-        assert gol_series.starts(start, frame)
-        worked_out = gol_series.frame_stats(frame, start, heavy=False)
-        recorded = gol_series.frame_stats(frames[older.index(frame)], None, heavy=False)
-        for key in ("gainers", "losers", "maxTokenAdded", "maxTokenLost"):
-            assert worked_out[key] == recorded[key] is not None, (frame["phase"], key)
-
-    # Two iterations back is not where anything started.
-    assert not gol_series.starts(older[1], game)
-    assert gol_series.frame_stats(game, older[1], heavy=False)["gainers"] is None
-    assert gol_series.frame_stats(reproduction, older[1], heavy=False)["gainers"] is None
-
-
-def test_the_browser_and_the_server_summarise_a_run_alike():
-    """
-    Two backends, one history.
-
-    The worker used to assemble its replies itself and keep nothing, so the
-    two backends had their own rules for what a reply holds. Both go through
-    gol_series.History now; this holds them to answering the same request with
-    the same numbers. The family count is the one difference, and it is on
-    purpose: it needs every iteration in order, which only the server reads.
-    """
-    import gol_store
-
-    browser = _browser_module().Worlds()
-
-    same = lambda a, b: a == b or (isinstance(a, float) and isinstance(b, float)
-                                   and math.isnan(a) and math.isnan(b))
-
-    with tempfile.TemporaryDirectory() as tmp:
-        original = gol_store.BASE_DIR
-        gol_store.BASE_DIR = tmp
-        try:
-            run_id, _, written = _recorded_run(24)
-            for points in (2, 5, None):
-                server = gol_record.build_series(run_id, points=points, heavy=False)
-                plan = browser.series_plan(run_id, written, points, ["nodes"])
-                frames = [{"index": f, "frame": gol_store.read_frame(run_id, f)}
-                          for it in plan["iterations"] for f in (2 * it, 2 * it + 1)
-                          if f < written]
-                reply = browser.series_absorb(run_id, frames, plan["heavy"])
-                for key in ("done", "complete", "heavy", "totalPoints", "frames", "stride"):
-                    assert reply[key] == server[key], (points, key, reply[key], server[key])
-                for key in server["keys"]:
-                    if key == "cladesInWindow":
-                        continue
-                    ours, theirs = reply["series"].get(key), server["series"][key]
-                    assert ours is not None and all(map(same, ours, theirs)), (points, key)
-        finally:
-            gol_store.BASE_DIR = original
-
-
-def test_a_history_says_how_big_the_run_was():
-    """
-    A history finished at one size is not finished at the next.
-
-    The page used to trust a finished history until someone told it to forget
-    one, and only the Viewer ever did — Diagrams on a run still going kept
-    drawing it as it once was. The reply says which run size it describes, so
-    a page that knows the run is bigger now can ask again.
-    """
-    import gol_store
-
-    with tempfile.TemporaryDirectory() as tmp:
-        original = gol_store.BASE_DIR
-        gol_store.BASE_DIR = tmp
-        try:
-            run_id, world, written = _recorded_run(10)
-            first = gol_record.build_series(run_id, heavy=False)
-            assert first["frames"] == written and first["complete"]
-
-            written = _record(run_id, world, written, 10)
-            grown = gol_record.build_series(run_id, heavy=False)
-            assert grown["frames"] == written and grown["complete"]
-            assert max(grown["series"]["iteration"]) > max(first["series"]["iteration"]), (
-                "the history of a run that grew did not grow with it")
-        finally:
-            gol_store.BASE_DIR = original
-
-
-def test_a_run_size_is_kept_until_the_run_changes():
-    """
-    The size is cached against the run's folders, so it has to notice a write.
-    A stale size would say a run takes less room than it does.
-    """
-    import gol_store
-
-    with tempfile.TemporaryDirectory() as tmp:
-        original = gol_store.BASE_DIR
-        gol_store.BASE_DIR = tmp
-        try:
-            run_id, world, written = _recorded_run(3)
-            before = gol_store.run_size_bytes(run_id)
-            assert gol_store.run_size_bytes(run_id) == before
-            _record(run_id, world, written, 2)
-            after = gol_store.run_size_bytes(run_id)
-            walked = sum(os.path.getsize(os.path.join(r, f))
-                         for r, _, fs in os.walk(gol_store.run_dir(run_id)) for f in fs)
-            assert after == walked > before, (before, after, walked)
-        finally:
-            gol_store.BASE_DIR = original
-
-
-def test_a_checkpoint_timeline_ends_where_its_frames_do():
-    """
-    Both backends drop the frames a resume abandons, from the same rule: two
-    frames for every recorded iteration below the checkpoint's.
-    """
-    every = SimConfig(export_every=1)
-    assert [every.frames_before(i) for i in (0, 1, 5)] == [0, 2, 10]
-    sparse = SimConfig(export_every=3)
-    assert [i for i in range(10) if sparse.records(i)] == [0, 3, 6, 9]
-    assert sparse.frames_before(7) == 6 and sparse.frames_before(6) == 4
-
-
 def test_the_form_is_told_the_shape_of_the_brain_it_would_build():
     """
     brain_shape reads an unallocated brain, so a built one has to agree with
@@ -1653,994 +1053,6 @@ def test_the_form_is_told_the_shape_of_the_brain_it_would_build():
         assert shape["firstLayer"] == brain.weights[0].shape[1], overrides
         assert shape["outputs"] == brain.weights[-1].shape[0], overrides
         assert shape["bytesPerWeight"] == brain.weights[0].dtype.itemsize, overrides
-
-
-def test_the_forest_keeps_only_the_phase_asked_for():
-    """
-    The phase filter lives in gol_lineage.forest now. Both backends used to
-    filter before calling it and count what was left after, each its own way.
-    """
-    import gol_lineage
-    frames = [{"iteration": i // 2, "phase": 1 + i % 2,
-               "brain_ids": [1, 1, 2], "parent_brain_ids": [-1, -1, 1]} for i in range(6)]
-    game = gol_lineage.forest(frames, "2")
-    assert game["frames"] == 3, f"{game['frames']} frames kept of the three game frames"
-    assert [c["phase"] for c in game["columns"]] == [2, 2, 2]
-    assert gol_lineage.forest(frames)["frames"] == 6
-
-
-def test_a_run_is_never_summarised_at_more_than_the_cap():
-    """
-    However long a run is, the chart is capped.
-
-    Summarising one large frame costs over a second, so an uncapped history is
-    hours of work for a chart a few hundred pixels wide.
-    """
-    import gol_series
-
-    for iterations in (299, 300, 301, 5000, 100000):
-        stride = gol_series._sample_stride(iterations)
-        assert len(range(0, iterations, stride)) <= gol_series.MAX_SAMPLED_ITERATIONS, (
-            f"{iterations} iterations at stride {stride} exceeds the cap")
-
-
-# ---------------------------------------------------------------------------
-# Topology: what a cut would cost
-# ---------------------------------------------------------------------------
-
-def _adj(edges):
-    """Adjacency as the bridge walk wants it, from a list of pairs."""
-    out = {}
-    for a, b in edges:
-        out.setdefault(a, set()).add(b)
-        out.setdefault(b, set()).add(a)
-    return out
-
-
-def test_a_path_is_all_bridges_and_the_middle_one_is_the_worst():
-    """
-    Every edge of a path splits it, and the worst split is the middle.
-
-    0-1-2-3: cutting the outer edges strands one node, cutting the middle one
-    strands two of four. So the worst single cut costs half the population,
-    which is the largest a cut can ever cost.
-    """
-    import GraphOfLifeSimple as G
-
-    edges = [(0, 1), (1, 2), (2, 3)]
-    ids, adj = [0, 1, 2, 3], _adj(edges)
-
-    splits = G.bridge_splits(ids, adj)
-    assert len(splits) == 3, f"a path of four has three bridges, got {len(splits)}"
-    sides = sorted(min(b, 4 - b) for _, _, b in splits)
-    assert sides == [1, 1, 2], f"expected splits of 1, 1 and 2, got {sides}"
-    assert G.worst_cut_share(ids, adj) == 0.5
-
-
-def test_a_cycle_has_no_bridges_at_all():
-    """Every edge of a cycle lies on a loop, so nothing can be cut in two."""
-    import GraphOfLifeSimple as G
-
-    edges = [(0, 1), (1, 2), (2, 3), (3, 0)]
-    ids, adj = [0, 1, 2, 3], _adj(edges)
-
-    assert G.bridge_splits(ids, adj) == []
-    assert G.worst_cut_share(ids, adj) == 0.0
-    # And nothing peels: a cycle is its own 2-core.
-    assert G.two_core_size(ids, adj) == 4
-
-
-def test_two_blobs_on_one_edge_is_the_worst_case_the_thesis_is_about():
-    """
-    Two triangles joined by a single edge: one bridge, half the world behind it.
-
-    This is the shape `Graphs.md` §6 says is a mass extinction waiting to
-    happen — cleanup keeps only the largest component, so cutting that edge
-    kills three of six. A bridge *count* cannot tell this apart from a triangle
-    with three leaves stuck on it, which also has three bridges and costs one
-    node each. That is the whole reason for measuring the split.
-    """
-    import GraphOfLifeSimple as G
-
-    dumbbell = [(0, 1), (1, 2), (2, 0), (3, 4), (4, 5), (5, 3), (0, 3)]
-    ids, adj = list(range(6)), _adj(dumbbell)
-    assert len(G.bridge_splits(ids, adj)) == 1
-    assert G.worst_cut_share(ids, adj) == 0.5
-
-    fringed = [(0, 1), (1, 2), (2, 0), (0, 3), (1, 4), (2, 5)]
-    ids, adj = list(range(6)), _adj(fringed)
-    assert len(G.bridge_splits(ids, adj)) == 3, "same bridge count as the dumbbell"
-    assert abs(G.worst_cut_share(ids, adj) - 1 / 6) < 1e-12, (
-        "three leaves cost one node each, and the count alone cannot say so")
-
-
-def test_peeling_leaves_leaves_the_core():
-    """
-    The 2-core is what survives stripping hanging trees, however deep.
-
-    A triangle with a two-node tail loses both tail nodes, not just the leaf —
-    peeling the leaf makes its neighbour a leaf in turn.
-    """
-    import GraphOfLifeSimple as G
-
-    edges = [(0, 1), (1, 2), (2, 0), (0, 3), (3, 4)]
-    ids, adj = list(range(5)), _adj(edges)
-    assert G.two_core_size(ids, adj) == 3
-
-    # A tree has no core at all: peeling never stops until nothing is left.
-    edges = [(0, 1), (1, 2), (1, 3), (3, 4)]
-    ids, adj = list(range(5)), _adj(edges)
-    assert G.two_core_size(ids, adj) == 0
-
-
-def test_the_cut_risk_is_recorded_before_the_cull_not_after():
-    """
-    The engine's own reading has to come from the graph the cull has not touched.
-
-    Measured afterwards it is a consequence of the cull, and the thesis it
-    exists to test — that fragility predicts the cull — becomes untestable,
-    which is exactly how the first attempt at it stalled.
-    """
-    world = new_world(SimConfig(total_tokens=600, n_nodes=40, k_neighbors=4,
-                                seed=5, hidden_layers=[6]))
-    seen = 0
-    for _ in range(6):
-        for frame in world.step(record_decisions=False):
-            risk = frame["cleanup"]["cutRiskBefore"]
-            assert risk is not None, "the engine did not record it"
-            assert 0.0 <= risk <= 0.5, f"a share of the population, got {risk}"
-            seen += 1
-    assert seen >= 12, f"both phases of six iterations, got {seen}"
-
-
-# ---------------------------------------------------------------------------
-# The control: decisions taken from noise
-# ---------------------------------------------------------------------------
-
-def test_a_random_world_never_asks_its_brains_anything():
-    """
-    The control has to actually bypass the brain, not merely disturb it.
-
-    Checked by making the brain unusable: if anything still calls it, this
-    raises. That is a stronger guarantee than comparing trajectories, which
-    could match by luck or diverge for reasons that have nothing to do with
-    whether the forward pass happened.
-    """
-    import GraphOfLifeSimple as G
-
-    world = new_world(SimConfig(total_tokens=600, n_nodes=30, k_neighbors=4,
-                                seed=3, hidden_layers=[6], random_decisions=True))
-
-    def refuse(self, X):
-        raise AssertionError("a control world consulted a brain")
-
-    # Patched on the class: Brain has __slots__, so an instance cannot be given
-    # a different method, and newborns would arrive with working ones anyway.
-    original = G.Brain.forward
-    G.Brain.forward = refuse
-    try:
-        for _ in range(8):
-            world.step(record_decisions=False)
-    finally:
-        G.Brain.forward = original
-
-
-def test_the_control_is_a_mechanic_and_says_so_in_the_name():
-    """A run taken from noise must not be filed under the same algorithm."""
-    assert SimConfig().strain_id() == "gol-1"
-    assert SimConfig(random_decisions=True).strain_id() == "gol-1+random_decisions"
-    # And it is off unless asked for, or every run ever made would be a control.
-    assert SimConfig().random_decisions is False
-
-
-def test_an_ordinary_world_still_reads_its_inputs():
-    """
-    The other half of the guarantee, or the test above would pass on a world
-    that had stopped using its brains entirely.
-    """
-    import GraphOfLifeSimple as G
-
-    world = new_world(SimConfig(total_tokens=600, n_nodes=30, k_neighbors=4,
-                                seed=3, hidden_layers=[6]))
-    asked = []
-    original = G.Brain.forward
-
-    def counted(self, X):
-        asked.append(1)
-        return original(self, X)
-
-    G.Brain.forward = counted
-    try:
-        world.step(record_decisions=False)
-    finally:
-        G.Brain.forward = original
-    assert asked, "an ordinary world went a whole iteration without a forward pass"
-
-
-# ---------------------------------------------------------------------------
-# Lightning: circulating token flow
-# ---------------------------------------------------------------------------
-
-def _flow(triples):
-    """A frame carrying just the allocations, from (source, target, tokens)."""
-    by = {}
-    for source, target, tokens in triples:
-        by.setdefault(source, {"agent": source, "targets": [], "alloc": []})
-        by[source]["targets"].append(target)
-        by[source]["alloc"].append(tokens)
-    return {"decisions": {"allocations": list(by.values())}}
-
-
-def test_a_long_loop_is_worth_far_more_than_short_ones():
-    """
-    The whole point of squaring the hops, checked against the same tokens.
-
-    Ten tokens round one ten-hop ring and ten tokens round three triangles are
-    the same amount of flow. If the score did not distinguish them it would be
-    measuring volume rather than structure, which is what `cyclingShare`
-    already does.
-    """
-    import gol_lightning
-
-    ring = gol_lightning.lightning(_flow([(i, (i + 1) % 10, 1) for i in range(10)]))
-    triangles = []
-    for base in (0, 3, 6):
-        triangles += [(base, base + 1, 1), (base + 1, base + 2, 1), (base + 2, base, 1)]
-    tri = gol_lightning.lightning(_flow(triangles))
-
-    assert ring["lightningScore"] == 100, f"one ten-hop loop is 10², got {ring['lightningScore']}"
-    assert tri["lightningScore"] == 27, f"three three-hop loops is 3x3², got {tri['lightningScore']}"
-    assert ring["lightningLongest"] == 10 and tri["lightningLongest"] == 3
-    # Both are entirely circulating: the difference is shape, not volume.
-    assert ring["cyclingShare"] == 1.0 and tri["cyclingShare"] == 1.0
-
-
-def test_more_tokens_round_the_same_ring_is_more_lightnings():
-    """Two tokens on every edge of a ten-ring is two loops, not one heavier."""
-    import gol_lightning
-
-    got = gol_lightning.lightning(_flow([(i, (i + 1) % 10, 2) for i in range(10)]))
-    assert got["lightningScore"] == 200, got["lightningScore"]
-    assert got["lightningLongest"] == 10
-
-
-def test_one_way_transport_has_no_lightning_and_shows_as_imbalance():
-    """
-    A line has nothing to find, and says so twice over.
-
-    The score is zero because there is no loop, and the imbalance is above zero
-    because conservation forbids one — which is the half of the answer that
-    needs no heuristic and is what makes the zero trustworthy.
-    """
-    import gol_lightning
-
-    got = gol_lightning.lightning(_flow([(i, i + 1, 5) for i in range(6)]))
-    assert got["lightningScore"] == 0
-    assert got["cyclingShare"] == 0
-    assert got["flowImbalance"] > 0, "a line strands flow at both ends"
-
-
-def test_netting_removes_sloshing_and_keeps_real_circuits():
-    """
-    The distinction the net measure exists to make.
-
-    Two neighbours trading tokens both ways is a two-hop loop under the gross
-    reading and nothing at all once reciprocity is cancelled — which is the
-    honest answer, since nothing went anywhere. A genuine ring is untouched.
-    And a ring buried in reciprocal noise keeps exactly the ring.
-    """
-    import gol_lightning
-
-    sloshing = gol_lightning.lightning(_flow([(0, 1, 5), (1, 0, 3)]))
-    assert sloshing["lightningScore"] == 12, "three tokens go round and back"
-    assert sloshing["netLightningScore"] == 0, "but none of it went anywhere"
-    assert sloshing["netFlowShare"] == 0.25, "two of eight tokens survive"
-
-    ring = gol_lightning.lightning(_flow([(i, (i + 1) % 10, 1) for i in range(10)]))
-    assert ring["netLightningScore"] == ring["lightningScore"] == 100
-    assert ring["netFlowShare"] == 1.0, "nothing to cancel in a one-way ring"
-
-    noisy = _flow([(i, (i + 1) % 10, 3) for i in range(10)]
-                  + [((i + 1) % 10, i, 2) for i in range(10)])
-    buried = gol_lightning.lightning(noisy)
-    assert buried["lightningScore"] == 500, buried["lightningScore"]
-    assert buried["netLightningScore"] == 100, (
-        "netting should leave the ring and nothing else, got "
-        f"{buried['netLightningScore']}")
-    assert buried["netLightningLongest"] == 10
-
-
-def test_the_bracket_never_closes_the_wrong_way_round():
-    """
-    Circulation cannot exceed what conservation permits.
-
-    `cyclingShare` is a lower bound found by searching and `flowImbalance` an
-    exact upper bound found by counting, so the first can never be larger than
-    one minus the second. If it were, one of the two would be wrong, and there
-    would be no telling which.
-    """
-    import gol_lightning
-
-    world = new_world(SimConfig(total_tokens=800, n_nodes=40, k_neighbors=4,
-                                seed=6, hidden_layers=[6]))
-    seen = 0
-    for _ in range(12):
-        for frame in world.step(record_decisions=True):
-            got = gol_lightning.lightning(frame)
-            if got["lightningScore"] is None:
-                continue          # a reproduction phase moves nothing on links
-            seen += 1
-            assert got["cyclingShare"] <= 1 - got["flowImbalance"] + 1e-9, (
-                f"circulating {got['cyclingShare']} but only "
-                f"{1 - got['flowImbalance']} is permitted")
-            assert 0 <= got["cyclingShare"] <= 1
-            assert got["lightningScore"] >= 0
-            # Netting cannot invent circulation, and cannot change a balance,
-            # so the same ceiling holds and the net score is never the larger.
-            assert got["netCyclingShare"] <= 1 - got["flowImbalance"] + 1e-9
-            assert got["netLightningScore"] <= got["lightningScore"]
-            assert got["netLightningLongest"] <= got["lightningLongest"]
-    assert seen >= 6, f"only {seen} game phases carried any flow"
-
-
-# ---------------------------------------------------------------------------
-# The spectral gap: how hard the graph is to cut in half
-# ---------------------------------------------------------------------------
-
-def test_the_spectral_gap_is_exact_on_a_complete_graph():
-    """
-    The one family with an answer in closed form.
-
-    Every complete graph has normalised-Laplacian eigenvalues 0 and n/(n-1),
-    repeated. Anything that is not that is not a spectral gap, and since this
-    is found by iteration rather than by solving, it is worth pinning against
-    a case where the true value is known to every digit.
-    """
-    import gol_spectral
-
-    for n in (4, 6, 10, 20):
-        edges = [(i, j) for i in range(n) for j in range(i + 1, n)]
-        got = gol_spectral.spectral_gap(list(range(n)), _adj(edges))
-        exact = n / (n - 1)
-        assert abs(got - exact) < 1e-12, f"K{n} gave {got}, wanted {exact}"
-
-
-def test_a_ring_matches_its_closed_form_too():
-    """
-    A cycle of n has λ₂ = 1 - cos(2π/n), which is small and gets smaller.
-
-    Worth having beside the complete graph because it is the opposite end: a
-    ring is about as easy to cut as a connected graph gets, so the two together
-    pin both ends of the range rather than one point in it.
-
-    A ring is also the case that decided the algorithm. Its eigenvalues crowd
-    together as it grows, and power iteration separates them at a rate set by
-    the space between — so an 80-ring defeated it entirely while Lanczos is
-    exact here to the last bit. That is the same crowding real graphs in this
-    substrate have, which is why the slow ones are in this test.
-    """
-    import gol_spectral
-
-    for n in (12, 20, 40, 80):
-        ring = [(i, (i + 1) % n) for i in range(n)]
-        got = gol_spectral.spectral_gap(list(range(n)), _adj(ring))
-        exact = 1 - math.cos(2 * math.pi / n)
-        assert abs(got - exact) < 1e-12, f"a {n}-cycle gave {got}, wanted {exact}"
-
-
-def test_a_cheap_cut_shows_up_as_a_small_gap():
-    """
-    Two cliques joined by one edge against one clique of the same size.
-
-    This is the whole point of the measure: both graphs are dense, both are
-    connected, and only one of them can be split without cost. A count of
-    bridges says "one" for the dumbbell and nothing about how much that bridge
-    is holding together.
-    """
-    import gol_spectral
-
-    half = [(i, j) for i in range(6) for j in range(i + 1, 6)]
-    other = [(i + 6, j + 6) for i, j in half]
-    dumbbell = half + other + [(0, 6)]
-    whole = [(i, j) for i in range(12) for j in range(i + 1, 12)]
-
-    weak = gol_spectral.spectral_gap(list(range(12)), _adj(dumbbell))
-    strong = gol_spectral.spectral_gap(list(range(12)), _adj(whole))
-
-    assert weak < 0.2, f"a dumbbell should cut cheaply, got {weak}"
-    assert strong > 1.0, f"a complete graph should not cut at all, got {strong}"
-    assert weak < strong / 5, "the two should not be anywhere near each other"
-
-
-def test_the_gap_ignores_a_stray_component_rather_than_reporting_zero():
-    """
-    Read on the largest component, deliberately.
-
-    The textbook definition gives exactly zero for a disconnected graph, which
-    is true and useless here: one pair of agents adrift would answer for the
-    whole population and the number would be zero forever. Cleanup keeps only
-    the largest component anyway, so this is the reading that means something.
-    """
-    import gol_spectral
-
-    core = [(i, j) for i in range(8) for j in range(i + 1, 8)]
-    ids = list(range(10))
-    adrift = _adj(core + [(8, 9)])
-    adrift.setdefault(8, set()).add(9)
-
-    got = gol_spectral.spectral_gap(ids, adrift)
-    alone = gol_spectral.spectral_gap(list(range(8)), _adj(core))
-    assert abs(got - alone) < 1e-9, (
-        f"the stray pair changed the answer: {got} against {alone}")
-
-
-# ---------------------------------------------------------------------------
-# Curvature: the term the dimension fit was throwing away
-# ---------------------------------------------------------------------------
-
-def test_curvature_recovers_the_ricci_scalar_it_was_given():
-    """
-    Feed the model in, get the parameter back.
-
-    The shell of a ball of radius r in d dimensions with Ricci scalar R goes as
-    r^(d-1) (1 - R r^2 / 6d), so log shell is linear in log r and in r^2. Build
-    exactly that and the fit has to return the R that built it, or the algebra
-    converting the second coefficient is wrong.
-    """
-    import math
-    import gol_series
-
-    d, R = 3.0, 0.6
-    rs = [1.0, 2.0, 3.0, 4.0, 5.0]
-    log_r = [math.log(r) for r in rs]
-    shell = [2.5 + (d - 1) * math.log(r) - R * r * r / (6 * d) for r in rs]
-
-    got = gol_series._ball_curvature(rs, log_r, shell)
-    assert abs(got - R) < 1e-9, f"expected {R}, got {got}"
-
-
-def test_a_ring_is_flat_and_a_tree_is_negatively_curved():
-    """
-    The two cases with an answer known in advance.
-
-    A ring's shells never change size, so it has no bend at all and reads flat.
-    A branching tree's shells grow exponentially — far more room than flat
-    space allows — which is negative curvature, and is the same statement as a
-    tree being hyperbolic. Sparse expanders are negatively curved as a theorem
-    (Salez 2021), so the sign here is also a reading on expansion.
-    """
-    import gol_series
-
-    ring = [[i, (i + 1) % 60] for i in range(60)]
-    flat = gol_series._structure(list(range(60)), ring)["ricciCurvature"]
-    assert flat is not None, "a ring gives enough radii to fit"
-    assert abs(flat) < 1e-6, f"a ring should read flat, got {flat}"
-
-    # Balanced binary tree, deep enough for the ball to keep growing.
-    tree = [[(i - 1) // 2, i] for i in range(1, 255)]
-    curved = gol_series._structure(list(range(255)), tree)["ricciCurvature"]
-    assert curved is not None and curved < 0, (
-        f"a branching tree should read negatively curved, got {curved}")
-
-
-def test_curvature_refuses_a_fit_with_no_evidence_in_it():
-    """
-    Three points fit three parameters exactly, which is not a measurement.
-
-    The residual would be zero whatever the data said, so the curvature would
-    be a restatement of the input rather than a reading of it.
-    """
-    import math
-    import gol_series
-
-    rs = [1.0, 2.0, 3.0]
-    assert gol_series._ball_curvature(rs, [math.log(r) for r in rs],
-                                      [1.0, 2.0, 2.5]) is None
-
-
-# ---------------------------------------------------------------------------
-# The two ways the site is served
-# ---------------------------------------------------------------------------
-
-def test_every_setting_is_classified_as_one_of_the_three_kinds():
-    """
-    A new setting has to be declared a mechanic, a parameter or infrastructure.
-
-    This is the guard that keeps the strain scheme honest. A mechanic left out
-    of the table changes what a run does without changing its name, so two runs
-    of different algorithms compare as the same one — and nothing anywhere else
-    would notice.
-    """
-    import gol_config
-
-    declared = (set(gol_config.MECHANICS)
-                | set(gol_config.PARAMETERS)
-                | set(gol_config.INFRASTRUCTURE))
-    actual = {f.name for f in dataclasses.fields(SimConfig)}
-
-    assert actual - declared == set(), (
-        f"settings that are not classified: {sorted(actual - declared)}. Add "
-        f"each to MECHANICS, PARAMETERS or INFRASTRUCTURE in gol_config.py — "
-        f"see research/Research.md §5.1 for which is which")
-    assert declared - actual == set(), (
-        f"classified but not a setting: {sorted(declared - actual)}")
-
-    overlap = set(gol_config.MECHANICS) & set(gol_config.PARAMETERS)
-    assert not overlap, f"classified twice: {sorted(overlap)}"
-
-
-def test_a_default_world_is_the_baseline_strain():
-    assert SimConfig().strain_id() == "gol-1"
-    # Parameters are not part of the algorithm's name; otherwise every seed
-    # would be its own strain and nothing could be grouped.
-    varied = SimConfig(total_tokens=2500, n_nodes=50, seed=7,
-                       hidden_layers=[12, 10], mutation_probability=0.1)
-    assert varied.strain_id() == "gol-1"
-
-
-def test_a_changed_mechanic_shows_up_in_the_name():
-    assert SimConfig(brain_kind="binary").strain_id() == "gol-1+brain_kind=binary"
-    assert SimConfig(exchange_messages=False).strain_id() == "gol-1+exchange_messages=false"
-    assert SimConfig(tokens_created_per_phase=5).strain_id() == "gol-1+tokens_created_per_phase=5"
-
-    # Alphabetical, so the same set of mechanics always spells the same strain
-    # whatever order they were passed in.
-    one = SimConfig(brain_kind="binary", allow_revolutions=False).strain_id()
-    other = SimConfig(allow_revolutions=False, brain_kind="binary").strain_id()
-    assert one == other == "gol-1+allow_revolutions=false+brain_kind=binary"
-
-
-def test_the_frozen_defaults_are_what_a_bare_config_does():
-    """
-    The scheme only works if a mechanic's frozen default is its actual default.
-
-    Otherwise `gol-1` would name a world nobody can build by asking for
-    nothing, and every run would carry a strain listing mechanics it never
-    changed.
-    """
-    import gol_config
-
-    bare = SimConfig()
-    for name, frozen in gol_config.MECHANICS.items():
-        assert getattr(bare, name) == frozen, (
-            f"{name} defaults to {getattr(bare, name)!r} but is frozen at "
-            f"{frozen!r}. Changing a frozen default renames every existing "
-            f"strain — bump SPEC instead")
-
-
-def test_a_run_and_its_checkpoint_both_say_which_algorithm_they_are():
-    cfg = small(brain_kind="binary")
-    world = new_world(cfg)
-    blob = world.to_checkpoint()
-
-    assert "strain" in blob, "a checkpoint travels alone and must name its algorithm"
-    assert str(blob["strain"]) == cfg.strain_id() == "gol-1+brain_kind=binary"
-
-    # And it does not disturb restoring, which reads the keys it knows.
-    restored = GraphOfLife.from_checkpoint(blob, cfg)
-    assert set(restored.G.nodes()) == set(world.G.nodes())
-
-
-def test_the_server_and_the_build_ship_the_same_python():
-    """
-    The page fetches engine files from /py/. build_site.sh copies them there
-    when it assembles the static site; gol_server.py serves them from the
-    repository root, because when it is serving web/ off the disk there is
-    nowhere to copy them to.
-
-    Two lists of the same thing, so they drift. They already did: the
-    Explanation fetches the script it walks through, which the build shipped
-    and the server did not, so the tab worked once published and reported that
-    it could not load on localhost.
-    """
-    import re
-    import gol_server
-
-    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    script = open(os.path.join(root, "build_site.sh")).read()
-    match = re.search(r"for f in ([^;]+); do", script)
-    assert match, "could not find the copy loop in build_site.sh"
-    copied = set(match.group(1).split())
-
-    served = set(gol_server.SHIPPED_PY)
-    assert copied == served, (
-        f"build_site.sh copies {sorted(copied)} but gol_server serves "
-        f"{sorted(served)}")
-
-    for name in served:
-        assert os.path.isfile(os.path.join(root, name)), f"{name} does not exist"
-
-    # The same arrangement for documents the page renders, which live outside
-    # web/ for the same reason and would fail the same way: rendering on the
-    # published site and reporting that it cannot be read on localhost.
-    #
-    # Checked by name rather than by the whole destination path, because the
-    # build copies them in a loop and the full string never appears. The
-    # stamping table is checked separately, and is the half that matters — a
-    # document that is copied and not stamped is a document a returning visitor
-    # keeps the old version of.
-    stamped = re.search(r"declare -A stamp_in=\((.*?)\n\)", script, re.S)
-    assert stamped, "could not find the stamp_in table in build_site.sh"
-    for url, source in gol_server.SHIPPED_DOCS.items():
-        assert os.path.isfile(os.path.join(root, source)), f"{source} does not exist"
-        assert os.path.basename(source) in script, (
-            f"gol_server serves {url} from {source}, and build_site.sh never "
-            f"copies it into the site")
-        assert url in stamped.group(1), (
-            f"build_site.sh copies {url} but never stamps it, so a cached copy "
-            f"survives a deploy")
-
-
-def test_the_browser_is_sent_every_module_its_python_imports():
-    """
-    The worker writes PY_FILES into the interpreter before it imports
-    gol_browser, and the site has to hold every one of them. A module that
-    gol_browser reaches and nobody sends fails only in a browser, as an import
-    error on someone else's machine — so the list is checked against what the
-    imports actually reach, and every file on it against what the build ships.
-    """
-    from closure import closure
-    import gol_server
-
-    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    web_py = os.path.join(root, "web", "py")
-    reached = closure(os.path.join(web_py, "gol_browser.py"), [web_py, root])
-    needed = {os.path.basename(path) for path in reached.values()} | {"gol_browser.py"}
-
-    worker = open(os.path.join(root, "web", "js", "sim-worker.js")).read()
-    listed = re.search(r"const PY_FILES = \[(.*?)\];", worker, re.S)
-    assert listed, "could not find PY_FILES in sim-worker.js"
-    sent = set(re.findall(r"'([^']+\.py)'", listed.group(1)))
-    assert needed <= sent, (
-        f"gol_browser.py reaches {sorted(needed - sent)}, which the worker never sends")
-
-    shipped = set(gol_server.SHIPPED_PY) | set(os.listdir(web_py))
-    assert sent <= shipped, (
-        f"the worker fetches {sorted(sent - shipped)}, which the site does not hold")
-
-
-# ---------------------------------------------------------------------------
-# Running without pytest
-# ---------------------------------------------------------------------------
-
-def test_every_asset_a_script_fetches_by_name_is_cache_stamped():
-    """
-    A returning visitor must never run new code against an old asset.
-
-    index.html's script and stylesheet tags are stamped wholesale, but anything
-    a script fetches by name — a worker, what a worker imports, the teaching
-    script, a recording — is invisible to that pass and has to be named in
-    build_site.sh. Nothing about adding a new one makes you remember, and the
-    failure is silent and only hits people who have been here before: the page
-    is new, the file behind it is last week's.
-
-    So the two are checked against each other. Any asset reference in web/js
-    that build_site.sh does not stamp fails here rather than in someone's
-    cache.
-    """
-    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    script = open(os.path.join(root, "build_site.sh")).read()
-
-    # Only the stamping table counts, not the whole script. Looking for the
-    # path anywhere in the file passed for a `cp` line that shipped a document
-    # and never stamped it — mentioning an asset is not the same as versioning
-    # it, and the whole failure this guards against is a file that is shipped
-    # and cached.
-    table = re.search(r"declare -A stamp_in=\((.*?)\n\)", script, re.S)
-    assert table, "could not find the stamp_in table in build_site.sh"
-    build = table.group(1)
-
-    # A quoted path into one of the shipped directories, or a bare file next to
-    # the script — which is what importScripts() takes.
-    quoted = re.compile(r"""['"]((?:js|py|data|css|book)/[\w./-]+|[\w-]+\.js)['"]""")
-    interesting = (".js", ".py", ".json", ".bin", ".css", ".md")
-
-    def ours(line, at):
-        """
-        False for a name glued onto a base URL.
-
-        `importScripts(PYODIDE + 'pyodide.js')` is fetched from a CDN that
-        versions itself in its own path; there is nothing of ours in it to
-        stamp.
-        """
-        return not line[:at].rstrip().endswith("+")
-
-    unstamped = []
-    js_dir = os.path.join(root, "web", "js")
-    for name in sorted(os.listdir(js_dir)):
-        if not name.endswith(".js"):
-            continue
-        source = open(os.path.join(js_dir, name)).read()
-        for line in source.splitlines():
-            # Only where a file is actually being fetched.
-            if not re.search(r"importScripts\(|new Worker\(|fetch\(|SOURCE|SCRIPT|RUN:|INDEX:|workerUrl",
-                             line):
-                continue
-            for match in quoted.finditer(line):
-                ref = match.group(1)
-                if not ref.endswith(interesting) or not ours(line, match.start()):
-                    continue
-                if ref not in build:
-                    unstamped.append(f"{name}: {ref}")
-
-    assert not unstamped, (
-        "these are fetched by name but build_site.sh does not stamp them, so a "
-        "cached copy will survive a deploy:\n  " + "\n  ".join(unstamped))
-
-
-def test_a_frame_index_survives_growing_past_five_digits():
-    """
-    Frame names are zero-padded to five digits, but padding is a minimum.
-
-    At index 100000 the name grows a digit. Reading the index from a fixed
-    five-character slice turned that into 10000, which is not a harmless
-    misreading: truncating a resumed run walks the directory asking whether
-    each frame is at or after the cut, and a frame claiming to be 10000 when it
-    is really 100000 is stepped straight over. Frames from a timeline the
-    resumed world never lived through would stay on disk, which is the one
-    thing the store promises cannot happen.
-    """
-    import gol_store
-
-    for index in (0, 1, 99999, 100000, 123456, 9999999):
-        name = os.path.basename(gol_store.frame_path("GOL_00_00_00_n001", index))
-        assert gol_store.frame_index(name) == index, name
-
-    for other in ("checkpoint.npz", "meta.json", "frame_.json.gz",
-                  "frame_00001.json.gz.tmp", "frame_abc.json.gz"):
-        assert gol_store.frame_index(other) is None, other
-
-
-def test_a_truncated_resume_removes_frames_past_a_hundred_thousand():
-    """The same thing, exercised through the call that actually matters."""
-    import gol_store
-
-    with tempfile.TemporaryDirectory() as tmp:
-        original = gol_store.BASE_DIR
-        gol_store.BASE_DIR = tmp
-        try:
-            run_id = "GOL_00_00_00_n001"
-            os.makedirs(gol_store.frames_dir(run_id))
-            kept, cut = 99998, 100001
-            for index in (kept, cut):
-                with open(gol_store.frame_path(run_id, index), "w") as f:
-                    f.write("{}")
-
-            gol_store.truncate_frames_from(run_id, 100000)
-
-            assert os.path.exists(gol_store.frame_path(run_id, kept)), \
-                "a frame before the cut was deleted"
-            assert not os.path.exists(gol_store.frame_path(run_id, cut)), \
-                "a frame past the cut survived the truncation"
-        finally:
-            gol_store.BASE_DIR = original
-
-
-def test_the_message_prepass_gives_the_acting_pass_messages_from_this_graph():
-    """
-    The whole point of the option, stated as the thing it changes.
-
-    Without it a phase is one pass — observe, speak, act — so what an agent
-    acts on was written by its neighbours a phase ago, before the births,
-    deaths and conquests since. With it, everyone speaks first, that is
-    delivered, and the pass that acts reads a generation written from the graph
-    as it stands.
-
-    Checked by watching what is actually in front of the acting pass rather
-    than by counting deliveries, because a delivery that happened is not
-    evidence that anybody read it.
-    """
-    import copy
-
-    def what_the_acting_pass_sees(prepass):
-        cfg = SimConfig(total_tokens=4000, message_prepass=prepass, seed=3)
-        world = new_world(cfg)
-        for _ in range(6):
-            world.step(record_decisions=False)
-
-        before = copy.deepcopy(world.messages)
-        seen = {"in_prepass": False}
-
-        real_prepass = world._message_prepass
-        def prepass_wrap(step, features):
-            seen["in_prepass"] = True
-            real_prepass(step, features)
-            seen["in_prepass"] = False
-            seen["after_prepass"] = copy.deepcopy(world.messages)
-        world._message_prepass = prepass_wrap
-
-        real_observe = world._observe
-        def observe(u, candidates, *rest):
-            if "at_act" not in seen and not seen["in_prepass"]:
-                seen["at_act"] = copy.deepcopy(world.messages)
-            return real_observe(u, candidates, *rest)
-        world._observe = observe
-
-        world.reproduction_phase(False)
-        return before, seen, copy.deepcopy(world.messages)
-
-    before, seen, after = what_the_acting_pass_sees(False)
-    assert seen["at_act"] == before, \
-        "without the pre-pass the acting pass should be reading last phase's messages"
-    assert after != seen["at_act"], "the acting pass should still write messages"
-
-    before, seen, after = what_the_acting_pass_sees(True)
-    assert seen["at_act"] == seen["after_prepass"], \
-        "with the pre-pass the acting pass should be reading what the pre-pass just delivered"
-    assert seen["at_act"] != before, \
-        "with the pre-pass the acting pass should not be reading last phase's messages"
-    assert after != seen["at_act"], \
-        "the acting pass must keep writing its own messages, not only consume the pre-pass's"
-
-
-def test_the_message_prepass_speaks_for_everyone_including_the_broke():
-    """
-    An agent with nothing is still there and can still be seen.
-
-    The reproduction phase's acting pass skips anyone who cannot afford a
-    child, so leaving the pre-pass to follow that rule would silence exactly
-    the agents whose neighbours most need to know about them.
-    """
-
-    cfg = SimConfig(total_tokens=4000, message_prepass=True, seed=7)
-    world = new_world(cfg)
-    for _ in range(6):
-        world.step(record_decisions=False)
-
-    world.tokens[sorted(world.G.nodes())[0]] = 0
-    broke = [u for u in world.G.nodes() if world.tokens.get(u, 0) <= 0]
-    assert broke, "wanted at least one agent holding nothing"
-
-    spoke = []
-    real_emit = world._emit_messages
-    world._emit_messages = lambda u, t, Y, o: (spoke.append(u), real_emit(u, t, Y, o))[1]
-    world._message_prepass("repro.messages", world._precompute_features())
-
-    for u in broke:
-        assert u in spoke, f"agent {u} holds nothing and was not given a turn to speak"
-
-
-def test_the_message_prepass_changes_nothing_it_should_not():
-    """Tokens stay conserved and a seeded run stays reproducible with it on."""
-
-    for prepass in (False, True):
-        cfg = SimConfig(total_tokens=3000, message_prepass=prepass, seed=11)
-        world = new_world(cfg)
-        for _ in range(8):
-            world.step(record_decisions=False)
-            assert sum(world.tokens.values()) == cfg.total_tokens, \
-                f"tokens leaked with message_prepass={prepass}"
-
-    def run():
-        world = new_world(SimConfig(total_tokens=3000, message_prepass=True, seed=11))
-        for _ in range(8):
-            world.step(record_decisions=False)
-        return sorted(world.tokens.items())
-
-    assert run() == run(), "a seeded run with the pre-pass is not reproducible"
-
-
-def test_a_prepass_without_messages_is_refused():
-    """
-    A pass that exists only to send messages has nothing to do without them.
-
-    Refused rather than quietly ignored: a setting that is accepted and then
-    does nothing is worse than one that says why it cannot be had.
-    """
-    try:
-        SimConfig.from_dict({"message_prepass": True, "exchange_messages": False})
-    except ValueError:
-        pass
-    else:
-        raise AssertionError("a pre-pass without messages should not validate")
-
-    assert SimConfig.from_dict({"message_prepass": True}).message_prepass
-    assert SimConfig.from_dict({}).message_prepass is False, \
-        "a run recorded before the option existed must read as having run without it"
-
-
-def test_the_interface_offers_every_setting_the_engine_has():
-    """
-    A field nobody can set is a field nobody knows about.
-
-    Every knob on SimConfig should have somewhere in the form to set it, and
-    every checkbox should say what it does — the pre-pass and messages were
-    both added without one, and an unexplained checkbox is a checkbox nobody
-    touches. The settings shown beside every run are read off this same form
-    (RunsView.settingGroups), so they cannot fall a setting behind it either.
-    """
-    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    page = open(os.path.join(root, "web", "index.html")).read()
-
-    # Not offered on purpose: the seed graph's rewire probability and the
-    # run-control knobs are set elsewhere or left at their defaults.
-    from dataclasses import fields as dataclass_fields
-    missing = [f.name for f in dataclass_fields(SimConfig)
-               if f'data-cfg="{f.name}"' not in page]
-    assert not missing, f"no form field for: {', '.join(missing)}"
-
-    for name in ("exchange_messages", "message_prepass", "allow_handover",
-                 "allow_revolutions"):
-        block = page.split(f'data-cfg="{name}"')[1].split("</div>")[0]
-        assert "<small>" in block, f"the {name} checkbox has no explanation under it"
-
-
-def test_every_mode_is_one_table_the_form_and_the_engine_share():
-    """
-    A setting that names a rule — which brain, when to prune, how long a
-    connection may idle, how the dead are shared out — has one table in
-    gol_config. validate() refuses anything outside it, the engine looks its
-    rule up in it, and the form offers exactly what it holds. The engine used
-    to fall back onto some other rule for a value it did not know.
-    """
-    import GraphOfLifeSimple as engine
-
-    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    page = open(os.path.join(root, "web", "index.html")).read()
-    assert set(engine.BRAIN_KINDS) == set(SimConfig.MODES["brain_kind"])
-    for setting, allowed in SimConfig.MODES.items():
-        select = re.search(rf'<select[^>]*data-cfg="{setting}"[^>]*>(.*?)</select>', page, re.S)
-        assert select, f"the form offers no choice of {setting}"
-        offered = re.findall(r'<option value="([^"]+)"', select.group(1))
-        assert sorted(offered) == sorted(allowed), (
-            f"the form offers {setting} = {offered}, the engine knows {list(allowed)}")
-        try:
-            SimConfig(**{setting: "no-such-rule"}).validate()
-        except ValueError as exc:
-            assert setting in str(exc), str(exc)
-        else:
-            raise AssertionError(f"an unknown {setting} was accepted")
-
-    # Past validation — a config built by hand — the engine refuses it too.
-    world = new_world(small())
-    world.cfg.prune_after = "no-such-rule"
-    try:
-        world._prunes_after(1)
-    except KeyError:
-        pass
-    else:
-        raise AssertionError("the engine fell back onto some rule for an unknown prune_after")
-
-
-def test_copying_a_run_forks_it_rather_than_backing_it_up():
-    """
-    A duplicate is a run in its own right, starting where the original is.
-
-    Its own id, its own directory, its own creation time — but every frame and
-    the checkpoint, so it can be resumed and taken somewhere else while the
-    original carries on. Whatever the original was doing, the copy is doing
-    nothing: nothing is advancing it.
-    """
-    import gol_store
-
-    with tempfile.TemporaryDirectory() as tmp:
-        original = gol_store.BASE_DIR
-        gol_store.BASE_DIR = tmp
-        try:
-            meta = gol_store.create_run("first world", SimConfig())
-            run_id = meta["id"]
-            for index in range(4):
-                gol_store.write_frame(run_id, index, {"ids": [1, 2], "at": index})
-            gol_store.update_meta(run_id, status="running", iteration=42,
-                                  frame_count=4, error="something went wrong")
-
-            copy = gol_store.copy_run(run_id)
-
-            assert copy["id"] != run_id, "a copy must not share the original's id"
-            assert copy["iteration"] == 42, "the copy should start where the original is"
-            assert copy["status"] == "idle" and copy["error"] is None, \
-                "nothing is advancing the copy, and it did not inherit the failure"
-            assert gol_store.count_frames(copy["id"]) == 4, "the frames did not come along"
-            assert gol_store.read_frame(copy["id"], 3) == gol_store.read_frame(run_id, 3)
-            assert gol_store.load_meta(run_id)["status"] == "running", \
-                "copying changed the original"
-
-            # Independent from here on.
-            gol_store.write_frame(copy["id"], 4, {"ids": [1], "at": 4})
-            assert gol_store.count_frames(run_id) == 4
-            assert gol_store.count_frames(copy["id"]) == 5
-        finally:
-            gol_store.BASE_DIR = original
 
 
 def test_every_brain_kind_has_a_preset_that_validates():
@@ -2669,219 +1081,6 @@ def test_every_brain_kind_has_a_preset_that_validates():
         "a binary unit carries a bit where a float carries many; it needs the room"
     assert binary["mutation_sparsity"] < floaty["mutation_sparsity"], \
         "a binary brain's smallest move is a whole step, so its rate must be gentler"
-
-
-def test_a_run_is_reported_as_it_is_not_as_it_was_written():
-    """
-    Whether a run is going is a live fact; its status on disk is what was last
-    written. The server settles the two, both ways, so the page shows the
-    status it is given: written down as running with nothing advancing it is
-    interrupted, and advancing is running whatever was last written.
-    """
-    import gol_server
-
-    meta = {"id": "no-such-run", "status": "running", "config": {}}
-    try:
-        gol_server.POOL.is_running = lambda run_id: False
-        assert gol_server.Handler._decorate(meta)["status"] == "interrupted"
-        assert gol_server.Handler._decorate({**meta, "status": "stopped"})["status"] == "stopped"
-
-        gol_server.POOL.is_running = lambda run_id: True
-        assert gol_server.Handler._decorate({**meta, "status": "idle"})["status"] == "running"
-    finally:
-        del gol_server.POOL.is_running
-
-
-def test_every_request_turns_what_goes_wrong_into_an_answer():
-    """
-    GET, POST and DELETE each turned exceptions into answers their own way,
-    and no two agreed. One dispatcher does it now: a request that makes no
-    sense is a 400, a missing run a 404, a browser that hung up is left alone,
-    and anything else is a 500 with a message rather than a dropped connection.
-    """
-    import contextlib
-    import io
-    import gol_server
-
-    class Request:
-        path = "/api/runs/x?from=1"
-
-        def __init__(self):
-            self.answered = []
-
-        def _error(self, message, status=400):
-            self.answered.append((status, message))
-
-    for raised, answer in ((ValueError("bad count"), (400, "bad count")),
-                           (FileNotFoundError(), (404, "run not found")),
-                           (KeyError("config"), (500, "KeyError: 'config'")),
-                           (BrokenPipeError(), None)):
-        request, seen = Request(), []
-
-        def route(path, raised=raised):
-            seen.append(path)
-            raise raised
-
-        with contextlib.redirect_stderr(io.StringIO()):
-            gol_server.Handler._dispatch(request, route)
-        assert seen == ["/api/runs/x"], seen
-        assert request.answered == ([answer] if answer else []), (raised, request.answered)
-
-
-def test_the_book_route_serves_only_the_book():
-    """
-    The book is served as a folder, since it grows with every chapter — and a
-    folder served off the disk is a way to read anything beside it unless the
-    path is held inside it after every link is followed, and only the kinds of
-    file a book is made of are given out.
-    """
-    import gol_server
-
-    found = gol_server.Handler._engine_file("book/experiments/E01.json")
-    assert found and found.endswith(os.path.join("book", "experiments", "E01.json")), found
-    for asked in ("book/../gol_server.py", "book/../research/Research.md",
-                  "book/experiments/../../gol_lab.py", "book/missing.json",
-                  "book/experiments/E01.json.py", "bookish/E01.json"):
-        assert gol_server.Handler._engine_file(asked) is None, asked
-
-    with tempfile.TemporaryDirectory() as tmp:
-        os.makedirs(os.path.join(tmp, "book"))
-        with open(os.path.join(tmp, "secret.json"), "w") as f:
-            f.write("{}")
-        os.symlink(os.path.join(tmp, "secret.json"), os.path.join(tmp, "book", "link.json"))
-        with open(os.path.join(tmp, "book", "tool.py"), "w") as f:
-            f.write("")
-        saved = gol_server.BASE_DIR, gol_server.BOOK_DIR
-        gol_server.BASE_DIR, gol_server.BOOK_DIR = tmp, os.path.join(tmp, "book")
-        try:
-            assert gol_server.Handler._engine_file("book/link.json") is None, \
-                "a link inside the book reached a file outside it"
-            assert gol_server.Handler._engine_file("book/tool.py") is None, \
-                "the book gave out a file a book is not made of"
-        finally:
-            gol_server.BASE_DIR, gol_server.BOOK_DIR = saved
-
-
-def test_the_server_and_the_build_ship_the_same_book():
-    """The published book and the one served locally are the same kinds of file from the same folder."""
-    import gol_server
-
-    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    script = open(os.path.join(root, "build_site.sh")).read()
-    copy = re.search(r'cd "\$\{here\}/book" && find \. -type f (.+?)\)', script)
-    assert copy, "could not find where build_site.sh copies the book"
-    built = tuple(sorted(re.findall(r"-name '\*(\.\w+)'", copy.group(1))))
-    assert built == tuple(sorted(gol_server.BOOK_TYPES)), (built, gol_server.BOOK_TYPES)
-
-
-def test_a_lab_run_shows_running_and_refuses_start():
-    """
-    A run that belongs to an experiment is advanced by the lab, on the engine
-    it was made with. Held by the lab it shows as running; and the server will
-    not start it, stop it or delete it, which would run it on today's engine or
-    pull it out from under the lab, and says where to go instead.
-    """
-    import gol_server
-    import gol_store
-
-    class Request:
-        headers = {}
-        _held_elsewhere = staticmethod(gol_server.Handler._held_elsewhere)
-
-        def __init__(self, path):
-            self.path = path
-            self.answered = []
-
-        def _read_json(self):
-            return {}
-
-        def _error(self, message, status=400):
-            self.answered.append((status, message))
-
-        def _send_json(self, payload, status=200):
-            self.answered.append((status, payload))
-
-    with _scratch_runs():
-        run_id = gol_store.create_run("lab run", small(seed=91), run_id="E9-s001",
-                                      lab={"baseline": "B1", "engine": "x"})["id"]
-        with gol_store.hold(run_id):
-            assert gol_server.Handler._decorate(gol_store.load_meta(run_id))["running"]
-            for action, route in (("start", gol_server.Handler._route_post),
-                                  ("stop", gol_server.Handler._route_post),
-                                  (None, gol_server.Handler._route_delete)):
-                path = f"/api/runs/{run_id}" + (f"/{action}" if action else "")
-                request = Request(path)
-                route(request, path)
-                status, message = request.answered[0]
-                assert status == 409 and "Book" in message, (action, request.answered)
-        assert os.path.isdir(gol_store.run_dir(run_id)), "a run held by the lab was deleted"
-
-        request = Request(f"/api/runs/{run_id}/start")
-        gol_server.Handler._route_post(request, f"/api/runs/{run_id}/start")
-        assert request.answered[0][0] == 409, "an experiment's run was started outside the lab"
-
-
-def test_the_server_keeps_the_matrix_library_to_one_thread():
-    """
-    A brain's matrix products are added up in another order when the library
-    splits them across threads, and the last bit of a message moves: a run made
-    on all threads is not the run the lab makes on one (Chapter 2). The server
-    asks for one before numpy is loaded, unless the environment says otherwise.
-    """
-    import subprocess
-
-    here = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    ask = ("import gol_server, os; "
-           "print(os.environ['OPENBLAS_NUM_THREADS'], os.environ['OMP_NUM_THREADS'])")
-    bare = {k: v for k, v in os.environ.items() if not k.endswith("_NUM_THREADS")}
-    said = subprocess.run([sys.executable, "-B", "-c", ask], cwd=here, env=bare,
-                          capture_output=True, text=True, check=True).stdout.split()
-    assert said == ["1", "1"], said
-    chosen = subprocess.run([sys.executable, "-B", "-c", ask], cwd=here,
-                            env={**bare, "OPENBLAS_NUM_THREADS": "4"},
-                            capture_output=True, text=True, check=True).stdout.split()
-    assert chosen[0] == "4", "the server overrode a thread count it was given"
-
-
-def test_the_defaults_endpoint_carries_the_brain_presets():
-    """The form fills itself in from the engine, so the engine has to say."""
-    import gol_server
-
-    payload = gol_server.Handler._defaults()
-    assert "brain_presets" in payload, "the form has nowhere to read the presets from"
-    assert set(payload["brain_presets"]) == set(SimConfig.BRAIN_PRESETS)
-
-
-def test_the_pre_pass_is_on_for_new_runs_and_off_for_old_ones():
-    """
-    Turning a default on must not reach backwards.
-
-    A run recorded before the option existed ran one pass per phase. Reading
-    its stored configuration as though it had used a pre-pass would change what
-    a resumed run does, which is the whole reason LEGACY_WHEN_ABSENT exists.
-    """
-    assert SimConfig().message_prepass is True, "new runs should get the pre-pass"
-
-    # Read back off disk: a key that is not there says what that run did.
-    assert SimConfig.from_dict({"total_tokens": 10000}).message_prepass is False, \
-        "a configuration written before the option existed must read as off"
-    assert SimConfig.from_dict({"total_tokens": 10000,
-                                "message_prepass": True}).message_prepass is True
-
-    # Arriving from outside: a key that is not there says nothing about the
-    # past, so it means today's default. Asking the API for a world without
-    # naming the pre-pass used to quietly get one without it.
-    assert SimConfig.from_dict({"total_tokens": 10000}, stored=False).message_prepass is True, \
-        "a fresh request that omits the option should get the current default"
-    assert SimConfig.from_dict({"total_tokens": 10000, "message_prepass": False},
-                               stored=False).message_prepass is False, \
-        "an explicit choice must survive either way"
-
-    # The dangerous direction is the one that is not the default: a stored
-    # config read as fresh would change what a resumed run does.
-    import inspect
-    assert inspect.signature(SimConfig.from_dict).parameters["stored"].default is True, \
-        "reading a stored config must be what happens when nobody says otherwise"
 
 
 def test_a_binary_brain_spends_no_rows_on_things_that_are_already_bits():
@@ -3278,6 +1477,94 @@ def test_a_brain_id_names_a_genotype_not_an_allocation():
     assert world.next_brain_id > before
 
 
+def test_copies_of_one_genotype_are_counted_once():
+    """
+    `distinctBrains` counts genotypes now, so it has to be able to fall.
+
+    While an id was handed out per copy it tracked the population almost
+    exactly and could not report diversity at all.
+    """
+    cfg = small(seed=8)
+    world = new_world(cfg)
+    for _ in range(8):
+        world.step(record_decisions=False)
+
+    agents = world.G.number_of_nodes()
+    genotypes = len({b.brain_id for b in world.brains.values()})
+    assert genotypes <= agents
+    assert genotypes < agents, (
+        f"{genotypes} genotypes among {agents} agents — no two agents share "
+        f"one, which is what the old allocation-per-copy behaviour looked like")
+
+
+# ---------------------------------------------------------------------------
+# Frames
+# ---------------------------------------------------------------------------
+
+def test_frame_arrays_stay_aligned():
+    cfg = small()
+    world = new_world(cfg)
+    for _ in range(6):
+        for frame in world.step(record_decisions=True):
+            n = len(frame["ids"])
+            for key in ("tokens", "brain_ids", "parent_brain_ids", "parent_ids", "delta"):
+                assert len(frame[key]) == n, f"{key} is out of step with ids"
+
+
+def test_delta_is_the_change_across_the_phase():
+    cfg = small()
+    world = new_world(cfg)
+    previous = dict(world.tokens)   # the phase before the first one is the start
+    for _ in range(6):
+        for frame in world.step(record_decisions=False):
+            for i, node in enumerate(frame["ids"]):
+                before = previous.get(node, 0)
+                assert frame["delta"][i] == frame["tokens"][i] - before
+            previous = dict(zip(frame["ids"], frame["tokens"]))
+
+
+def test_edges_only_reference_present_nodes():
+    cfg = small()
+    world = new_world(cfg)
+    for _ in range(6):
+        for frame in world.step(record_decisions=False):
+            present = set(frame["ids"])
+            for a, b in frame["edges"]:
+                assert a in present and b in present
+
+
+def test_a_frame_records_the_decisions_its_mechanics_say_it_does():
+    """
+    Every combination of the mechanics that add or take away a decision, a
+    few iterations each: every record holds exactly the keys the engine's own
+    statement of the contract, decision_keys, says it does.
+    """
+    from GraphOfLifeSimple import decision_keys
+    for gifting, handover, revolutions, prune in itertools.product(
+            (False, True), (False, True), (False, True), ("blotto", "reproduction", "both")):
+        cfg = small(allow_gifting=gifting, allow_handover=handover,
+                    allow_revolutions=revolutions, prune_after=prune, seed=5)
+        expected = decision_keys(cfg)
+        world = new_world(cfg)
+        seen = set()
+        for _ in range(4):
+            for frame in world.step(record_decisions=True):
+                decisions = frame["decisions"]
+                if frame["phase"] == 1:
+                    records = [("reproduction", decisions)]
+                    records += [("birth", b) for b in decisions["births"]]
+                else:
+                    records = [("game", decisions)]
+                    records += [("allocation", a) for a in decisions["allocations"]]
+                    records += [("winner", w) for w in decisions["winners"]]
+                for kind, record in records:
+                    assert set(record) == expected[kind], (
+                        f"{cfg.strain_id()}, prune after {prune}: a {kind} record holds "
+                        f"{sorted(record)}, not {sorted(expected[kind])}")
+                    seen.add(kind)
+        assert seen == set(expected), f"{cfg.strain_id()}: never saw {set(expected) - seen}"
+
+
 def test_a_frame_names_only_ancestors_that_were_themselves_recorded():
     """
     The genealogy has to be rebuildable from what is written down.
@@ -3307,147 +1594,364 @@ def test_a_frame_names_only_ancestors_that_were_themselves_recorded():
         f"themselves; the genealogy cannot be rebuilt from the frames")
 
 
-def test_copies_of_one_genotype_are_counted_once():
-    """
-    `distinctBrains` counts genotypes now, so it has to be able to fall.
+# ---------------------------------------------------------------------------
+# Optional mechanics
+# ---------------------------------------------------------------------------
 
-    While an id was handed out per copy it tracked the population almost
-    exactly and could not report diversity at all.
+def test_a_mechanic_can_be_switched_off():
+    """Switching a rule off changes the brain, so the run must still start."""
+    for mechanic in ("allow_handover", "allow_revolutions"):
+        world = new_world(small(**{mechanic: False}))
+        for _ in range(3):
+            world.step(record_decisions=True)
+        assert world.G.number_of_nodes() > 0, f"a run with {mechanic} off died immediately"
+
+
+def test_output_layout_matches_the_configuration():
+    for handover in (True, False):
+        for revolutions in (True, False):
+            cfg = small(allow_handover=handover, allow_revolutions=revolutions)
+            world = new_world(cfg)
+            node = next(iter(world.G.nodes()))
+            rows = world.brains[node].weights[-1].shape[0]
+            assert rows == cfg.n_outputs()
+
+
+def test_statistics_absent_rather_than_zero_when_a_rule_is_off():
     """
-    cfg = small(seed=8)
+    "Not part of these rules" and "allowed but nobody did it" are different
+    findings, and a zero cannot tell them apart.
+    """
+    world = new_world(small(allow_revolutions=False))
+    _, game = world.step(record_decisions=True)
+    stats = gol_series.frame_stats(game)
+    assert stats["revolutions"] is None
+    assert stats["revoltShare"] is None
+
+
+def test_every_agent_in_a_phase_reads_the_same_messages():
+    """
+    A phase must not let its own writes change what it is reading.
+
+    Messages used to be written straight into the store the observation loop
+    was reading from, so an agent saw a mixture: some signals from last phase,
+    some written moments earlier in this one, and which it got depended on
+    where its id fell in the loop. Seventeen per cent of all reads in a phase
+    were of values written during that same phase — low ids systematically
+    reading stale signals and high ids fresh ones, for no reason anyone chose.
+
+    Writes now go to an outbox delivered once the phase is over.
+
+    The pre-pass adds a delivery partway through, on purpose — that is the
+    whole option — so with it on the rule is per pass rather than per phase:
+    within any one sweep of the population, nobody's read changes under them.
+    Checked both ways, because the property being protected is that a read
+    never depends on where an id fell in a loop, and that holds either way.
+    """
+    import copy
+
+    for prepass in (False, True):
+        world = new_world(small(seed=3, message_prepass=prepass))
+        for _ in range(3):
+            world.step()
+
+        for run in (world.reproduction_phase, world.blotto_phase):
+            baseline = {"at": copy.deepcopy(world.messages)}
+            changed = []
+            original_input = world._inputs
+            original_deliver = world._deliver_messages
+
+            def watching(u, candidates, *args, **kwargs):
+                for v in candidates:
+                    for src, dst in ((u, u), (u, v), (v, u), (v, v)):
+                        if world.messages.get(src, {}).get(dst) != baseline["at"].get(src, {}).get(dst):
+                            changed.append((src, dst))
+                return original_input(u, candidates, *args, **kwargs)
+
+            # A delivery ends one sweep and begins the next, so that is where
+            # the comparison is allowed to move on.
+            def delivering(outbox):
+                original_deliver(outbox)
+                baseline["at"] = copy.deepcopy(world.messages)
+
+            world._inputs = watching
+            world._deliver_messages = delivering
+            try:
+                run(record_decisions=False)
+            finally:
+                world._inputs = original_input
+                world._deliver_messages = original_deliver
+
+            assert not changed, (
+                f"with message_prepass={prepass}, {len(changed)} reads returned a "
+                f"message that had changed mid-sweep, e.g. {changed[:3]}")
+
+
+def test_a_phase_looks_exactly_as_often_as_it_was_asked_to():
+    """
+    One pass per agent, or two if a pre-pass was asked for. Never a spare one.
+
+    The game phase used to observe twice unconditionally: once to write
+    messages, once to place stakes. That second look is now a choice, and the
+    cost of the choice is exactly one extra forward pass per agent per phase —
+    so the count is worth pinning down, in both directions.
+
+    Reproduction's acting pass skips agents who cannot afford a child, so it
+    looks no more than once each; the pre-pass gives everyone a turn, which is
+    why the counts are compared against a ceiling rather than an equality.
+    """
+    for prepass, passes in ((False, 1), (True, 2)):
+        world = new_world(small(seed=3, message_prepass=prepass))
+        world.step()
+
+        for name, run in (("reproduction", world.reproduction_phase),
+                          ("game", world.blotto_phase)):
+            present = world.G.number_of_nodes()
+            calls = []
+            original = world._observe
+
+            def counting(*args, **kwargs):
+                calls.append(1)
+                return original(*args, **kwargs)
+
+            world._observe = counting
+            try:
+                run(record_decisions=False)
+            finally:
+                world._observe = original
+
+            assert len(calls) <= present * passes, (
+                f"the {name} phase made {len(calls)} forward passes for {present} "
+                f"agents with message_prepass={prepass}, wanted at most "
+                f"{present * passes}")
+            if prepass:
+                assert len(calls) > present, (
+                    f"the {name} phase made {len(calls)} forward passes for "
+                    f"{present} agents, which is not enough for a pre-pass")
+
+
+def test_the_message_prepass_gives_the_acting_pass_messages_from_this_graph():
+    """
+    The whole point of the option, stated as the thing it changes.
+
+    Without it a phase is one pass — observe, speak, act — so what an agent
+    acts on was written by its neighbours a phase ago, before the births,
+    deaths and conquests since. With it, everyone speaks first, that is
+    delivered, and the pass that acts reads a generation written from the graph
+    as it stands.
+
+    Checked by watching what is actually in front of the acting pass rather
+    than by counting deliveries, because a delivery that happened is not
+    evidence that anybody read it.
+    """
+    import copy
+
+    def what_the_acting_pass_sees(prepass):
+        cfg = SimConfig(total_tokens=4000, message_prepass=prepass, seed=3)
+        world = new_world(cfg)
+        for _ in range(6):
+            world.step(record_decisions=False)
+
+        before = copy.deepcopy(world.messages)
+        seen = {"in_prepass": False}
+
+        real_prepass = world._message_prepass
+        def prepass_wrap(step, features):
+            seen["in_prepass"] = True
+            real_prepass(step, features)
+            seen["in_prepass"] = False
+            seen["after_prepass"] = copy.deepcopy(world.messages)
+        world._message_prepass = prepass_wrap
+
+        real_observe = world._observe
+        def observe(u, candidates, *rest):
+            if "at_act" not in seen and not seen["in_prepass"]:
+                seen["at_act"] = copy.deepcopy(world.messages)
+            return real_observe(u, candidates, *rest)
+        world._observe = observe
+
+        world.reproduction_phase(False)
+        return before, seen, copy.deepcopy(world.messages)
+
+    before, seen, after = what_the_acting_pass_sees(False)
+    assert seen["at_act"] == before, \
+        "without the pre-pass the acting pass should be reading last phase's messages"
+    assert after != seen["at_act"], "the acting pass should still write messages"
+
+    before, seen, after = what_the_acting_pass_sees(True)
+    assert seen["at_act"] == seen["after_prepass"], \
+        "with the pre-pass the acting pass should be reading what the pre-pass just delivered"
+    assert seen["at_act"] != before, \
+        "with the pre-pass the acting pass should not be reading last phase's messages"
+    assert after != seen["at_act"], \
+        "the acting pass must keep writing its own messages, not only consume the pre-pass's"
+
+
+def test_the_message_prepass_speaks_for_everyone_including_the_broke():
+    """
+    An agent with nothing is still there and can still be seen.
+
+    The reproduction phase's acting pass skips anyone who cannot afford a
+    child, so leaving the pre-pass to follow that rule would silence exactly
+    the agents whose neighbours most need to know about them.
+    """
+
+    cfg = SimConfig(total_tokens=4000, message_prepass=True, seed=7)
     world = new_world(cfg)
-    for _ in range(8):
+    for _ in range(6):
         world.step(record_decisions=False)
 
-    agents = world.G.number_of_nodes()
-    genotypes = len({b.brain_id for b in world.brains.values()})
-    assert genotypes <= agents
-    assert genotypes < agents, (
-        f"{genotypes} genotypes among {agents} agents — no two agents share "
-        f"one, which is what the old allocation-per-copy behaviour looked like")
+    world.tokens[sorted(world.G.nodes())[0]] = 0
+    broke = [u for u in world.G.nodes() if world.tokens.get(u, 0) <= 0]
+    assert broke, "wanted at least one agent holding nothing"
+
+    spoke = []
+    real_emit = world._emit_messages
+    world._emit_messages = lambda u, t, Y, o: (spoke.append(u), real_emit(u, t, Y, o))[1]
+    world._message_prepass("repro.messages", world._precompute_features())
+
+    for u in broke:
+        assert u in spoke, f"agent {u} holds nothing and was not given a turn to speak"
 
 
-def test_families_are_counted_from_ancestry_not_from_one_frame():
+def test_the_message_prepass_changes_nothing_it_should_not():
+    """Tokens stay conserved and a seeded run stays reproducible with it on."""
+
+    for prepass in (False, True):
+        cfg = SimConfig(total_tokens=3000, message_prepass=prepass, seed=11)
+        world = new_world(cfg)
+        for _ in range(8):
+            world.step(record_decisions=False)
+            assert sum(world.tokens.values()) == cfg.total_tokens, \
+                f"tokens leaked with message_prepass={prepass}"
+
+    def run():
+        world = new_world(SimConfig(total_tokens=3000, message_prepass=True, seed=11))
+        for _ in range(8):
+            world.step(record_decisions=False)
+        return sorted(world.tokens.items())
+
+    assert run() == run(), "a seeded run with the pre-pass is not reproducible"
+
+
+def test_a_prepass_without_messages_is_refused():
     """
-    How many families the living divide into needs ancestry, and ancestry is a
-    chain: it cannot be read off a single frame and it cannot be sampled.
+    A pass that exists only to send messages has nothing to do without them.
 
-    `distinctParents` — which was called `distinctLineages` and never counted
-    lineages — looks one step back and tracks the population. The windowed
-    count looks as far back as the window and does not.
+    Refused rather than quietly ignored: a setting that is accepted and then
+    does nothing is worse than one that says why it cannot be had.
     """
-    import tempfile
+    try:
+        SimConfig.from_dict({"message_prepass": True, "exchange_messages": False})
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("a pre-pass without messages should not validate")
 
-    import gol_series
-    import gol_store
-
-    window = gol_series.CladeWindow(window=2)
-
-    # A founder, then two children of it, then a grandchild of each. Anchored
-    # two iterations back from iteration 3, everything alive descends from the
-    # single agent that was alive at iteration 1.
-    window.observe(0, [1], [-1])
-    window.observe(1, [2], [1])
-    window.observe(2, [3, 4], [2, 2])
-    window.observe(3, [5, 6], [3, 4])
-    assert window.families([5, 6], 3) == 1, "both descend from brain 2, alive at 1"
-
-    # Anchored at the present, everything is its own family.
-    assert gol_series.CladeWindow(window=0).families([5, 6], 3) == 2
-
-    # Ancestry beyond the window is dropped rather than kept for ever.
-    long_window = gol_series.CladeWindow(window=1)
-    for i in range(1, 400):
-        long_window.observe(i, [i], [i - 1])
-    assert len(long_window.parent) < 40, \
-        f"the window is holding {len(long_window.parent)} links; it is not forgetting"
+    assert SimConfig.from_dict({"message_prepass": True}).message_prepass
+    assert SimConfig.from_dict({}).message_prepass is False, \
+        "a run recorded before the option existed must read as having run without it"
 
 
-def test_a_genotype_that_outlives_the_window_stays_its_own_family():
+def test_the_pre_pass_is_on_for_new_runs_and_off_for_old_ones():
     """
-    A founder and its child, both alive for ever, are two families however
-    long they live. Twice the window after it was first seen, a genotype's
-    ancestry is let go — and the founder's was, while it was still alive, so
-    the next time it was seen it was taken for a newborn, and its child was
-    counted into its family.
+    Turning a default on must not reach backwards.
 
-    It also made the count depend on where it had started: a count taken up
-    after a pause had first seen everybody later, and let them go later. The
-    rows of a run that was paused were not the rows of one that was not.
+    A run recorded before the option existed ran one pass per phase. Reading
+    its stored configuration as though it had used a pre-pass would change what
+    a resumed run does, which is the whole reason LEGACY_WHEN_ABSENT exists.
     """
-    founder, child = 1, 2
+    assert SimConfig().message_prepass is True, "new runs should get the pre-pass"
 
-    def frames(until):
-        yield 0, [founder], [gol_series.NO_PARENT]
-        for t in range(1, until):
-            yield t, [founder, child], [gol_series.NO_PARENT, founder]
+    # Read back off disk: a key that is not there says what that run did.
+    assert SimConfig.from_dict({"total_tokens": 10000}).message_prepass is False, \
+        "a configuration written before the option existed must read as off"
+    assert SimConfig.from_dict({"total_tokens": 10000,
+                                "message_prepass": True}).message_prepass is True
 
-    window = gol_series.CladeWindow(window=2)
-    counts = [window.count({"iteration": t, "brain_ids": ids, "parent_brain_ids": up}, t)
-              for t, ids, up in frames(30)]
-    assert counts[3:] == [2] * 27, counts
+    # Arriving from outside: a key that is not there says nothing about the
+    # past, so it means today's default. Asking the API for a world without
+    # naming the pre-pass used to quietly get one without it.
+    assert SimConfig.from_dict({"total_tokens": 10000}, stored=False).message_prepass is True, \
+        "a fresh request that omits the option should get the current default"
+    assert SimConfig.from_dict({"total_tokens": 10000, "message_prepass": False},
+                               stored=False).message_prepass is False, \
+        "an explicit choice must survive either way"
 
-    # A count taken up anywhere, warmed on the frames before as the recorder
-    # warms it, goes on exactly as one that never stopped.
-    for start in range(1, 25):
-        resumed = gol_series.CladeWindow(window=2)
-        history = [({"iteration": t, "brain_ids": ids, "parent_brain_ids": up}, t)
-                   for t, ids, up in frames(30)]
-        resumed.warm((index, frame) for frame, index in history[max(0, start - 4):start])
-        again = [resumed.count(frame, index) for frame, index in history[start:]]
-        assert again == counts[start:], (start, again, counts[start:])
+    # The dangerous direction is the one that is not the default: a stored
+    # config read as fresh would change what a resumed run does.
+    import inspect
+    assert inspect.signature(SimConfig.from_dict).parameters["stored"].default is True, \
+        "reading a stored config must be what happens when nobody says otherwise"
 
 
-def test_the_family_count_is_absent_when_the_chain_is_broken():
+# ---------------------------------------------------------------------------
+# The control: decisions taken from noise
+# ---------------------------------------------------------------------------
+
+def test_a_random_world_never_asks_its_brains_anything():
     """
-    A run recorded every other iteration has holes where the links were, and a
-    family count computed over holes is a guess. Absent is the honest answer,
-    and it is the convention the rest of these statistics already follow.
+    The control has to actually bypass the brain, not merely disturb it.
+
+    Checked by making the brain unusable: if anything still calls it, this
+    raises. That is a stronger guarantee than comparing trajectories, which
+    could match by luck or diverge for reasons that have nothing to do with
+    whether the forward pass happened.
     """
-    import tempfile
+    import GraphOfLifeSimple as G
 
-    import gol_series
-    import gol_store
+    world = new_world(SimConfig(total_tokens=600, n_nodes=30, k_neighbors=4,
+                                seed=3, hidden_layers=[6], random_decisions=True))
 
-    def series_for(export_every):
-        with tempfile.TemporaryDirectory() as tmp:
-            original = gol_store.BASE_DIR
-            gol_store.BASE_DIR = tmp
-            try:
-                cfg = small(seed=7, export_every=export_every, export_decisions=False)
-                meta = gol_store.create_run("x", cfg)
-                run_id = meta["id"]
-                world = new_world(cfg)
-                written = 0
-                for iteration in range(14):
-                    frames = world.step(record_decisions=False)
-                    if iteration % export_every == 0:
-                        for frame in frames:
-                            gol_store.write_frame(run_id, written, frame)
-                            written += 1
-                gol_store.update_meta(run_id, frame_count=written,
-                                      iteration=world.iteration)
-                return gol_record.build_series(run_id)
-            finally:
-                gol_store.BASE_DIR = original
+    def refuse(self, X):
+        raise AssertionError("a control world consulted a brain")
 
-    whole = series_for(1)
-    assert "cladesInWindow" in whole["keys"], \
-        "a fully recorded run should have a family count"
-    counts = whole["series"]["cladesInWindow"]
-    assert all(c >= 1 for c in counts)
-    assert max(counts) > 1, "everything in one family from the first frame is suspicious"
+    # Patched on the class: Brain has __slots__, so an instance cannot be given
+    # a different method, and newborns would arrive with working ones anyway.
+    original = G.Brain.forward
+    G.Brain.forward = refuse
+    try:
+        for _ in range(8):
+            world.step(record_decisions=False)
+    finally:
+        G.Brain.forward = original
 
-    sampled = series_for(2)
-    assert "cladesInWindow" not in sampled["keys"], \
-        "a sampled run cannot have its ancestry rebuilt and must not pretend to"
 
+def test_the_control_is_a_mechanic_and_says_so_in_the_name():
+    """A run taken from noise must not be filed under the same algorithm."""
+    assert SimConfig().strain_id() == "gol-1"
+    assert SimConfig(random_decisions=True).strain_id() == "gol-1+random_decisions"
+    # And it is off unless asked for, or every run ever made would be a control.
+    assert SimConfig().random_decisions is False
+
+
+def test_an_ordinary_world_still_reads_its_inputs():
+    """
+    The other half of the guarantee, or the test above would pass on a world
+    that had stopped using its brains entirely.
+    """
+    import GraphOfLifeSimple as G
+
+    world = new_world(SimConfig(total_tokens=600, n_nodes=30, k_neighbors=4,
+                                seed=3, hidden_layers=[6]))
+    asked = []
+    original = G.Brain.forward
+
+    def counted(self, X):
+        asked.append(1)
+        return original(self, X)
+
+    G.Brain.forward = counted
+    try:
+        world.step(record_decisions=False)
+    finally:
+        G.Brain.forward = original
+    assert asked, "an ordinary world went a whole iteration without a forward pass"
 
 
 # ---------------------------------------------------------------------------
 # Edge upkeep
 # ---------------------------------------------------------------------------
-
 
 def test_a_newborns_links_survive_the_first_accounting():
     """
@@ -3700,8 +2204,6 @@ def test_the_head_layout_is_the_only_statement_of_where_the_rows_are():
                 assert all(a[1] == b[0] for a, b in zip(spans, spans[1:])), spans
 
 
-
-
 def test_the_seed_graph_survives_its_first_accounting():
     """
     A connection cannot be cut before anybody has had a chance to use it.
@@ -3754,8 +2256,6 @@ def test_a_resumed_run_does_not_cut_a_graph_it_has_no_history_for():
         "a resumed run cut connections it simply had no history for")
 
 
-
-
 def test_a_resumed_run_remembers_which_connections_were_used():
     """
     Which connections carried tokens, and when, is world state like any other.
@@ -3786,8 +2286,6 @@ def test_a_resumed_run_remembers_which_connections_were_used():
 
     # And so the next accounting falls exactly as it would have.
     assert sorted(resumed._stale_edges()) == sorted(world._stale_edges())
-
-
 
 
 def test_no_legacy_entry_restates_the_frozen_default():
@@ -3821,88 +2319,88 @@ def test_no_legacy_entry_restates_the_frozen_default():
     assert not unknown, f"legacy entries for fields that do not exist: {sorted(unknown)}"
 
 
+# ---------------------------------------------------------------------------
+# Strains: which algorithm a run is
+# ---------------------------------------------------------------------------
 
-
-def test_a_cancelled_series_build_keeps_what_it_finished():
+def test_every_setting_is_classified_as_one_of_the_three_kinds():
     """
-    Stopping a summary nobody is waiting for must not throw its work away.
+    A new setting has to be declared a mechanic, a parameter or infrastructure.
 
-    The server now stops a build when the browser hangs up, which is what keeps
-    abandoned requests from piling up behind the one that is wanted. But the
-    build is incremental — each request finishes what the last did not — so a
-    build that discarded its partial rows on the way out would make navigating
-    back and forth start from nothing every time, and a large run would never
-    finish summarising at all. The rows computed before the stop have to reach
-    the cache, and the next build has to begin after them.
+    This is the guard that keeps the strain scheme honest. A mechanic left out
+    of the table changes what a run does without changing its name, so two runs
+    of different algorithms compare as the same one — and nothing anywhere else
+    would notice.
     """
-    import gol_store, gol_series
+    import gol_config
 
-    with tempfile.TemporaryDirectory() as tmp:
-        original = gol_store.BASE_DIR
-        gol_store.BASE_DIR = tmp
-        try:
-            cfg = SimConfig(total_tokens=400, n_nodes=30, k_neighbors=4,
-                            seed=4, hidden_layers=[6], export_decisions=False)
-            run_id = gol_store.create_run("x", cfg)["id"]
-            world = new_world(cfg)
-            written = 0
-            for _ in range(24):
-                for frame in world.step(record_decisions=False):
-                    gol_store.write_frame(run_id, written, frame)
-                    written += 1
-            gol_store.update_meta(run_id, frame_count=written, iteration=world.iteration)
+    declared = (set(gol_config.MECHANICS)
+                | set(gol_config.PARAMETERS)
+                | set(gol_config.INFRASTRUCTURE))
+    actual = {f.name for f in dataclasses.fields(SimConfig)}
 
-            # Hang up after three frames: part-way through the second iteration,
-            # whose other phase must not be forgotten.
-            calls = {"n": 0}
-            def hung_up():
-                calls["n"] += 1
-                return calls["n"] > 3          # asked before every frame
+    assert actual - declared == set(), (
+        f"settings that are not classified: {sorted(actual - declared)}. Add "
+        f"each to MECHANICS, PARAMETERS or INFRASTRUCTURE in gol_config.py — "
+        f"see research/Research.md §5.1 for which is which")
+    assert declared - actual == set(), (
+        f"classified but not a setting: {sorted(declared - actual)}")
 
-            gol_record.build_series(run_id, heavy=False, cancelled=hung_up)
-            kept = len(gol_record._load_cache(run_id).get("rows", []))
-            assert 0 < kept < written, (
-                f"a cancelled build kept {kept} of {written} rows; it should keep "
-                f"what it finished and nothing it did not")
-
-            # The next build carries on from there and completes.
-            done = gol_record.build_series(run_id, heavy=False)
-            assert done["complete"], "the build after a cancelled one did not finish"
-            assert len(gol_record._load_cache(run_id)["rows"]) == written
-        finally:
-            gol_store.BASE_DIR = original
+    overlap = set(gol_config.MECHANICS) & set(gol_config.PARAMETERS)
+    assert not overlap, f"classified twice: {sorted(overlap)}"
 
 
+def test_a_default_world_is_the_baseline_strain():
+    assert SimConfig().strain_id() == "gol-1"
+    # Parameters are not part of the algorithm's name; otherwise every seed
+    # would be its own strain and nothing could be grouped.
+    varied = SimConfig(total_tokens=2500, n_nodes=50, seed=7,
+                       hidden_layers=[12, 10], mutation_probability=0.1)
+    assert varied.strain_id() == "gol-1"
 
-def _main() -> int:
-    """Find the tests in this file and run them, reporting like pytest would."""
-    import time
-    import traceback
 
-    tests = sorted(
-        (name, fn) for name, fn in globals().items()
-        if name.startswith("test_") and callable(fn)
-    )
+def test_a_changed_mechanic_shows_up_in_the_name():
+    assert SimConfig(brain_kind="binary").strain_id() == "gol-1+brain_kind=binary"
+    assert SimConfig(exchange_messages=False).strain_id() == "gol-1+exchange_messages=false"
+    assert SimConfig(tokens_created_per_phase=5).strain_id() == "gol-1+tokens_created_per_phase=5"
 
-    failures = []
-    started = time.perf_counter()
-    for name, fn in tests:
-        try:
-            fn()
-            print(".", end="", flush=True)
-        except Exception:
-            failures.append((name, traceback.format_exc()))
-            print("F", end="", flush=True)
+    # Alphabetical, so the same set of mechanics always spells the same strain
+    # whatever order they were passed in.
+    one = SimConfig(brain_kind="binary", allow_revolutions=False).strain_id()
+    other = SimConfig(allow_revolutions=False, brain_kind="binary").strain_id()
+    assert one == other == "gol-1+allow_revolutions=false+brain_kind=binary"
 
-    elapsed = time.perf_counter() - started
-    print(f"\n\n{len(tests) - len(failures)} passed, {len(failures)} failed "
-          f"in {elapsed:.1f}s")
 
-    for name, trace in failures:
-        print(f"\n--- {name} ---\n{trace}")
-    return 1 if failures else 0
+def test_the_frozen_defaults_are_what_a_bare_config_does():
+    """
+    The scheme only works if a mechanic's frozen default is its actual default.
+
+    Otherwise `gol-1` would name a world nobody can build by asking for
+    nothing, and every run would carry a strain listing mechanics it never
+    changed.
+    """
+    import gol_config
+
+    bare = SimConfig()
+    for name, frozen in gol_config.MECHANICS.items():
+        assert getattr(bare, name) == frozen, (
+            f"{name} defaults to {getattr(bare, name)!r} but is frozen at "
+            f"{frozen!r}. Changing a frozen default renames every existing "
+            f"strain — bump SPEC instead")
+
+
+def test_a_run_and_its_checkpoint_both_say_which_algorithm_they_are():
+    cfg = small(brain_kind="binary")
+    world = new_world(cfg)
+    blob = world.to_checkpoint()
+
+    assert "strain" in blob, "a checkpoint travels alone and must name its algorithm"
+    assert str(blob["strain"]) == cfg.strain_id() == "gol-1+brain_kind=binary"
+
+    # And it does not disturb restoring, which reads the keys it knows.
+    restored = GraphOfLife.from_checkpoint(blob, cfg)
+    assert set(restored.G.nodes()) == set(world.G.nodes())
 
 
 if __name__ == "__main__":
-    import sys
-    sys.exit(_main())
+    sys.exit(runner.main(globals()))

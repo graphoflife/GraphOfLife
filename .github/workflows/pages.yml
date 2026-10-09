@@ -46,11 +46,13 @@ jobs:
         run: python3 tests/test_engine.py
       - name: The lab runs what the book plans, and stopping it changes nothing
         run: python3 tests/test_lab.py
-      - name: The series and the page's registry of statistics agree
+      - name: A run's statistics, and the page's registry of them
         run: python3 tests/test_series.py
+      - name: The server and the static site ship and answer alike
+        run: python3 tests/test_site.py
       - name: The book keeps what it measures, and draws only what it can
         run: python3 tests/test_book.py
-      - name: The teaching script decides as the engine does
+      - name: The teaching script decides as the engine does, and keeps its tokens
         run: python3 tests/test_explain_minimal.py
       - name: The page's tests, every file of them
         run: node tests/run.js
@@ -81,7 +83,7 @@ jobs:
           echo "site contains $(find _site -type f | wc -l) files"
 
       # The stamping is what stops a returning visitor running new code against
-      # an old worker or an old recording. tests/test_engine.py checks nothing
+      # an old worker or an old recording. tests/test_site.py checks nothing
       # escapes the list; this checks the list was actually applied.
       - name: Every asset carries the commit it came from
         run: |

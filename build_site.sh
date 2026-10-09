@@ -41,7 +41,7 @@ done
 # second, and copying them means there is one document rather than a page and
 # a file that disagree. gol_server serves the same file from where it lives;
 # SHIPPED_DOCS there and this line are checked against each other by
-# tests/test_engine.py.
+# tests/test_site.py.
 for doc in Research.md Literature.md Graphs.md; do
   cp "${here}/research/${doc}" "${out}/data/${doc}"
 done
@@ -49,7 +49,7 @@ done
 # The book: its chapters, the plans of its experiments, and the figures and
 # results their analysis writes. In book/ for the same reason the notes are in
 # research/, and gol_server.py serves the same folder, the same two kinds of
-# file; tests/test_engine.py holds the two to that.
+# file; tests/test_site.py holds the two to that.
 (cd "${here}/book" && find . -type f \( -name '*.md' -o -name '*.json' -o -name '*.svg' \)) | while read -r f; do
   mkdir -p "${out}/book/$(dirname "${f}")"
   cp "${here}/book/${f}" "${out}/book/${f}"

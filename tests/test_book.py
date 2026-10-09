@@ -14,17 +14,10 @@ new measure has to be put on one list or the other.
 """
 from __future__ import annotations
 
-import atexit
 import os
-import shutil
 import sys
-import tempfile
 
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
-
-# Nothing here may touch the real runs folder: gol_store reads this on import.
-os.environ["GOL_RUNS_DIR"] = tempfile.mkdtemp(prefix="gol-tests-")
-atexit.register(shutil.rmtree, os.environ["GOL_RUNS_DIR"], True)
+import runner  # first: the repository on the path, and a runs folder of the tests' own
 
 import numpy as np
 
@@ -276,27 +269,5 @@ def test_a_chart_that_says_what_is_not_drawn_is_refused():
     raise AssertionError("a misspelt key was drawn as nothing, without a word")
 
 
-def _main() -> int:
-    import time
-    import traceback
-
-    tests = sorted((name, fn) for name, fn in globals().items()
-                   if name.startswith("test_") and callable(fn))
-    failures = []
-    started = time.perf_counter()
-    for name, fn in tests:
-        try:
-            fn()
-            print(".", end="", flush=True)
-        except Exception:
-            failures.append((name, traceback.format_exc()))
-            print("F", end="", flush=True)
-    print(f"\n\n{len(tests) - len(failures)} passed, {len(failures)} failed "
-          f"in {time.perf_counter() - started:.1f}s")
-    for name, trace in failures:
-        print(f"\n--- {name} ---\n{trace}")
-    return 1 if failures else 0
-
-
 if __name__ == "__main__":
-    sys.exit(_main())
+    sys.exit(runner.main(globals()))

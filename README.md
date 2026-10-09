@@ -210,12 +210,16 @@ python3 gol_lab.py analyse E02   # its results and figures, into book/
 ## Checking that it still works
 
 ```bash
-python3 tests/test_engine.py        # invariants: tokens, topology, resuming
-python3 tests/test_series.py        # the series, and the page's registry of statistics
-node tests/run.js                   # the page's own tests
+python3 tests/test_engine.py           # invariants: tokens, topology, resuming
+python3 tests/test_series.py           # a run's statistics, and the page's registry of them
+python3 tests/test_site.py             # the server and the static site, alike
+python3 tests/test_lab.py              # the lab: plans, workers, stopping and resuming
+python3 tests/test_book.py             # the book's measures and figures
+python3 tests/test_explain_minimal.py  # the teaching script, held to the engine
+node tests/run.js                      # the page's own tests
 ```
 
-Neither needs pytest, though `python3 -m pytest tests/` works too. A research
+None of them needs pytest, though `python3 -m pytest tests/` works too. A research
 repository whose tests need a toolchain installed first is a repository whose
 tests do not get run.
 

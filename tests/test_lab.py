@@ -10,7 +10,6 @@ small enough that a worker process spends most of its life importing numpy.
 
 from __future__ import annotations
 
-import atexit
 import contextlib
 import io
 import json
@@ -21,15 +20,8 @@ import subprocess
 import sys
 import tempfile
 import time
-import traceback
 
-HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0, HERE)
-
-# A runs folder of the tests' own. Tests point the store at scratch folders as
-# they go, but one that forgot would otherwise write into the live runs folder.
-os.environ["GOL_RUNS_DIR"] = tempfile.mkdtemp(prefix="gol-tests-")
-atexit.register(shutil.rmtree, os.environ["GOL_RUNS_DIR"], True)
+import runner  # first: the repository on the path, and a runs folder of the tests' own
 
 import gol_costs      # noqa: E402
 import gol_lab        # noqa: E402
@@ -39,7 +31,7 @@ import gol_stats      # noqa: E402
 import gol_store      # noqa: E402
 from gol_config import SimConfig   # noqa: E402
 
-with open(os.path.join(HERE, "book", "experiments", "B1.json")) as _f:
+with open(os.path.join(runner.ROOT, "book", "experiments", "B1.json")) as _f:
     B1 = json.load(_f)
 
 #: The real baseline, shrunk to a world a test can run in a second, and never
@@ -161,7 +153,7 @@ def test_the_engine_a_lab_freezes_is_exactly_what_its_worker_imports():
     a new engine.
     """
     from closure import closure
-    reached = closure(os.path.join(HERE, "gol_worker.py"), [HERE])
+    reached = closure(os.path.join(runner.ROOT, "gol_worker.py"), [runner.ROOT])
     needed = {os.path.basename(path) for path in reached.values()} | {"gol_worker.py"}
     listed = set(gol_lab.ENGINE_FILES)
     assert needed == listed, (
@@ -467,10 +459,10 @@ def test_a_worker_imports_only_its_snapshot():
 
         alone = os.path.join(tmp, "alone")
         os.makedirs(alone)
-        shutil.copy(os.path.join(HERE, "gol_worker.py"), alone)
+        shutil.copy(os.path.join(runner.ROOT, "gol_worker.py"), alone)
         done = subprocess.run([sys.executable, "-B", os.path.join(alone, "gol_worker.py"),
                                spec.run_id, "--until", "2"],
-                              env={**os.environ, "PYTHONPATH": HERE,
+                              env={**os.environ, "PYTHONPATH": runner.ROOT,
                                    "GOL_RUNS_DIR": gol_store.BASE_DIR},
                               capture_output=True, text=True, timeout=120)
         assert done.returncode == gol_lab.EXIT_REFUSED, done.stderr
@@ -865,24 +857,5 @@ def test_an_identity_experiment_reports_every_variant():
         assert all(c["frames"] == 12 and c["rows"] == 12 for c in results["comparisons"])
 
 
-def _main() -> int:
-    tests = sorted((name, fn) for name, fn in globals().items()
-                   if name.startswith("test_") and callable(fn))
-    failures = []
-    started = time.perf_counter()
-    for name, fn in tests:
-        try:
-            fn()
-            print(".", end="", flush=True)
-        except Exception:
-            failures.append((name, traceback.format_exc()))
-            print("F", end="", flush=True)
-    print(f"\n\n{len(tests) - len(failures)} passed, {len(failures)} failed "
-          f"in {time.perf_counter() - started:.1f}s")
-    for name, trace in failures:
-        print(f"\n--- {name} ---\n{trace}")
-    return 1 if failures else 0
-
-
 if __name__ == "__main__":
-    sys.exit(_main())
+    sys.exit(runner.main(globals()))
