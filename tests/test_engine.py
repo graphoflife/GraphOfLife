@@ -2509,7 +2509,8 @@ def test_the_interface_offers_every_setting_the_engine_has():
     Every knob on SimConfig should have somewhere in the form to set it, and
     every checkbox should say what it does — the pre-pass and messages were
     both added without one, and an unexplained checkbox is a checkbox nobody
-    touches.
+    touches. The settings shown beside every run are read off this same form
+    (RunsView.settingGroups), so they cannot fall a setting behind it either.
     """
     root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     page = open(os.path.join(root, "web", "index.html")).read()

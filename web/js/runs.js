@@ -33,48 +33,6 @@ const RunsView = {
     ['seed', 'seed']
   ],
 
-  // Everything, grouped the way the form groups it, for reading one run off
-  // against another. Short labels and no explanations — the explanations are
-  // in the form that sets them.
-  ALL_SETTINGS: [
-    ['Simulation', [
-      ['total_tokens', 'Total tokens'],
-      ['tokens_created_per_phase', 'New tokens each phase'],
-      ['exchange_messages', 'Exchange messages'],
-      ['message_amount', 'Message size'],
-      ['message_prepass', 'Message pre-pass'],
-      ['random_input_amount', 'Noise inputs'],
-      ['allow_handover', 'Handover'],
-      ['allow_revolutions', 'Revolutions'],
-      ['allow_gifting', 'Gifting'],
-      ['prune_after', 'Unused links die'],
-      ['inactive_window', 'Used within'],
-      ['redistribution', 'Estate of the dead']
-    ]],
-    ['Seed graph', [
-      ['n_nodes', 'Agents'],
-      ['k_neighbors', 'Neighbours k'],
-      ['rewire_p', 'Shortcuts'],
-      ['seed', 'Seed']
-    ]],
-    ['Brain', [
-      ['brain_kind', 'Kind'],
-      ['brain_bits', 'Bits per input'],
-      ['hidden_layers', 'Hidden layers']
-    ]],
-    ['Mutation', [
-      ['mutation_probability', 'Probability'],
-      ['mutation_noise_std', 'Noise std'],
-      ['mutation_sparsity', 'Sparsity']
-    ]],
-    ['Run control', [
-      ['extinction_threshold', 'Extinct below'],
-      ['checkpoint_every', 'Checkpoint every'],
-      ['export_every', 'Record every'],
-      ['export_decisions', 'Record decisions']
-    ]]
-  ],
-
   init() {
     this.grid = document.getElementById('simGrid');
     if (!this.grid) return;
@@ -299,7 +257,7 @@ const RunsView = {
     field.append(input, save, said);
     rename.append(field);
 
-    const groups = this.ALL_SETTINGS.map(([heading, rows]) => {
+    const groups = this.settingGroups().map(([heading, rows]) => {
       const group = document.createElement('section');
       group.append(Object.assign(document.createElement('h3'), { textContent: heading }));
       const list = document.createElement('dl');
@@ -313,6 +271,29 @@ const RunsView = {
     });
     body.replaceChildren(rename, ...groups);
     document.getElementById('settingsDialog').showModal();
+  },
+
+  /**
+   * Every setting, grouped and named the way the form that makes a run groups
+   * and names it: [legend, [[key, label], ...]] per fieldset. Read off the form
+   * itself, so a setting the form gains is shown beside every run too — a list
+   * of its own here once fell a setting behind.
+   */
+  settingGroups() {
+    return [...this.form.querySelectorAll('fieldset')]
+      .map(fieldset => [fieldset.querySelector('legend')?.textContent.trim() ?? '',
+                        [...fieldset.querySelectorAll('[data-cfg]')]
+                          .map(input => [input.dataset.cfg, this.labelOf(input)])])
+      .filter(([, rows]) => rows.length);
+  },
+
+  /** What the form calls an input: its label's words, without the hint beside them. */
+  labelOf(input) {
+    const label = input.closest('label') || this.form.querySelector(`label[for="${input.id}"]`);
+    if (!label) return input.dataset.cfg;
+    const words = label.cloneNode(true);
+    words.querySelectorAll('input, select, .hint').forEach(node => node.remove());
+    return words.textContent.trim();
   },
 
   fillForm(cfg) {
