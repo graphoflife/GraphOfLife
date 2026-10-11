@@ -102,7 +102,7 @@ many connections does it have? which genotype does it carry?*
 >
 > 1. Take `tokenEvenness` and `degreeEvenness` of the rows with `phase` = 2.
 > 2. For genotypes: in the frame after the game of every 25th iteration, count the agents per genotype (`brain_ids`), turn the counts into shares pᵢ, and compute H = −Σ pᵢ log₂ pᵢ; divide by log₂ of the number of agents.
-> 3. Cut the iterations into stretches of 5 (600 stretches over 3,000 iterations) and take each world's mean in each stretch.
+> 3. Cut the 3,000 iterations into 600 stretches of 5 and take each world's mean in each stretch.
 > 4. In each stretch, take the median, the 25th and 75th and the 5th and 95th percentiles of those means over the worlds that still have a value there (a world that died has none after its death).
 >
 > **To make it again:** `python3 book_figures.py entropy`.

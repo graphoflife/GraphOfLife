@@ -18,11 +18,13 @@ import book_data as D
 import book_figures as F
 from book_graph import graph
 from book_figures import (Classes, FRAMES, band_series, bars, cells, chapter, describe, dots, line,
-                          lived_text, quantile_band, recipe, survivors)
-from book_chapters.common import BLUE, CYAN, GREEN, GREY, ORANGE, RED, VIOLET, YELLOW, baseline
+                          quantile_band, recipe)
+from book_chapters.common import BLUE, CYAN, GREEN, GREY, ORANGE, RED, VIOLET, WORLDS as W, YELLOW
 
 LAGS = (1, 2, 5, 10, 20, 50, 100, 200)
-STARTS = range(500, 2800, 100)
+#: Moments a hundred iterations apart, from the settled start to the last that has 200 games after it.
+STARTS = range(W.settled, W.until - max(LAGS), 100)
+MOMENT_WORDS = f"t = {STARTS[0]}, {STARTS[1]}, …, {STARTS[-1]:,}"
 QUINTILES = 5
 
 
@@ -122,7 +124,7 @@ def fragile(run_id: str) -> Dict[str, Any]:
 
 @chapter
 def rich(ch: F.Chapter) -> None:
-    alive = survivors(baseline())
+    alive = W.alive
     mob = {s.run_id: mobility(s.run_id) for s in alive}
     lags = np.array(LAGS, float)
     # A moment after which fewer than three of its agents were still alive has no correlation.
@@ -144,12 +146,12 @@ def rich(ch: F.Chapter) -> None:
                 "they are still alive: Spearman's rank correlation of their tokens then and later "
                 "([Correlation](../notes/correlation.md)) — 1 if every agent kept its place in the order of "
                 "wealth, 0 if the later order has nothing to do with the earlier. Right: the share of the "
-                "agents still alive k games later. For each world, the mean over 23 moments t = 500, 600, …, "
-                "2,700 (leaving out, for the correlation, the few moments after which fewer than three of the "
-                "agents were alive); the line is the median of the 26 worlds, the darker band the middle half "
+                f"agents still alive k games later. For each world, the mean over {len(STARTS)} moments {MOMENT_WORDS} "
+                "(leaving out, for the correlation, the few moments after which fewer than three of the "
+                f"agents were alive); the line is the median of the {len(alive)} worlds, the darker band the middle half "
                 "of them and the paler band nine in ten.",
-        recipe=recipe(lived_text(), FRAMES,
-                      ["For t = 500, 600, …, 2,700 and k = 1, 2, 5, 10, 20, 50, 100, 200: read frames 2·t + 1 and "
+        recipe=recipe(W.lived_text(), FRAMES,
+                      [f"For {MOMENT_WORDS} and k = 1, 2, 5, 10, 20, 50, 100, 200: read frames 2·t + 1 and "
                        "2·(t + k) + 1; the agents (`ids`) in both, and their `tokens` in each.",
                        "Spearman's ρ: the correlation of the ranks of the two token counts (ties share their "
                        "mean rank); alive: agents in both over agents in the first.",
@@ -170,11 +172,11 @@ def rich(ch: F.Chapter) -> None:
         x={"label": "fifth of wealth ten games later", "categories": names + ["dead"]},
         y={"label": "fifth of wealth now", "categories": names},
         series=[grid], colourbar={"map": "viridis", "min": 0, "max": float(shares.max()), "label": "share of the row"},
-        caption="All agents alive after the game of t = 500, 600, …, 2,700 in the 26 worlds that lived to the "
-                "end, sorted into fifths of the world by their tokens (ranks, ties shared), and where each one "
+        caption=f"All agents alive after the game of {MOMENT_WORDS} in {W.lived}, "
+                "sorted into fifths of the world by their tokens (ranks, ties shared), and where each one "
                 "was ten games later: in which fifth, or dead. Each row adds up to 1; a cell's colour is the "
                 "share of its row.",
-        recipe=recipe(lived_text(), FRAMES,
+        recipe=recipe(W.lived_text(), FRAMES,
                       ["As in the figure above, with k = 10: each agent's fifth is ⌈rank / n · 5⌉ among the n "
                        "agents of its frame.",
                        "Count the agents in every pair of fifths, and those not in the later frame as dead; divide "
@@ -198,12 +200,12 @@ def rich(ch: F.Chapter) -> None:
                  series=[line(lags, ratio, "median of the survivors, median over worlds", ORANGE, width=2)],
                  guides=[{"axis": "y", "at": 1.0, "label": "as much as then"}])],
         columns=2, title="The fate of the richest",
-        caption="The agents in the richest hundredth of their world after the game of t = 500, 600, …, 2,700 "
-                f"({tops:,} in all, pooled over the 26 worlds that lived to the end), followed k games on. Left: "
+        caption=f"The agents in the richest hundredth of their world after the game of {MOMENT_WORDS} "
+                f"({tops:,} in all, pooled over {W.lived}), followed k games on. Left: "
                 "the share of them still in the richest tenth of their world, and the share dead. Right: for "
                 "those alive, their tokens then divided by their tokens at t — the median in each world, and the "
                 "median of the worlds.",
-        recipe=recipe(lived_text(), FRAMES,
+        recipe=recipe(W.lived_text(), FRAMES,
                       ["As in the first figure: the richest hundredth are the agents with tokens at or above the "
                        "99th percentile of their frame; the richest tenth later, at or above the 90th."]))
     ch.number("richest", {"lags": list(LAGS), "dead": dead.tolist(), "top10": top10.tolist(),
@@ -220,13 +222,13 @@ def rich(ch: F.Chapter) -> None:
         x={"label": "connections", "categories": labels}, y={"label": "share dead ten games later", "min": 0, "max": 0.6},
         series=[bars(labels, share["richest"], RED, "the richest hundredth", slot=(-0.38, 0)),
                 bars(labels, share["all"], GREY, "every agent", slot=(0, 0.38))],
-        caption="The agents alive after the game of t = 500, 600, …, 2,700 in the 26 worlds that lived to the end, "
+        caption=f"The agents alive after the game of {MOMENT_WORDS} in {W.lived}, "
                 "in classes of their connections at t: the share no longer alive ten games later, for the richest "
                 "hundredth of their world (red) and for every agent (grey). Pooled over moments and worlds: "
                 + ", ".join(f"{int(counts['richest'][0][i]):,} of the richest and {int(counts['all'][0][i]):,} in "
                             f"all with {lab}" for i, lab in enumerate(labels)) + " connections.",
-        recipe=recipe(lived_text(), FRAMES,
-                      ["For t = 500, 600, …, 2,700: read frames 2·t + 1 and 2·(t + 10) + 1; each agent's "
+        recipe=recipe(W.lived_text(), FRAMES,
+                      [f"For {MOMENT_WORDS}: read frames 2·t + 1 and 2·(t + 10) + 1; each agent's "
                        "connections at t from `edges`; the richest hundredth as above.",
                        "Per class of connections, the agents of the first frame missing from the second, over all "
                        "agents of the class (`book_chapters.dynamics.fragile`)."]))
@@ -238,7 +240,7 @@ def rich(ch: F.Chapter) -> None:
 # Chapter 21 · How the network grows
 # ---------------------------------------------------------------------------
 
-GROWTH_STARTS = range(500, 3000, 25)
+GROWTH_STARTS = range(W.settled, W.until, 25)
 #: Finer than the book's DEGREE_CLASSES, for a rate fitted as a power of the connections.
 FINE_DEGREE_CLASSES = Classes((1, 1, "1"), (2, 2, "2"), (3, 4, "3–4"), (5, 9, "5–9"), (10, 19, "10–19"),
                               (20, 49, "20–49"), (50, 99, "50–99"), (100, 10 ** 6, "100+"))
@@ -301,7 +303,7 @@ def growth(run_id: str) -> Dict[str, Any]:
 
 @chapter
 def grows(ch: F.Chapter) -> None:
-    alive = survivors(baseline())
+    alive = W.alive
     g = {s.run_id: growth(s.run_id) for s in alive}
     labels = FINE_DEGREE_CLASSES.labels
     mids = np.array([1, 2, 3.5, 7, 14.5, 34.5, 74.5, 150.0])
@@ -343,10 +345,11 @@ def grows(ch: F.Chapter) -> None:
                 "child, or handed over. Red: the connections an agent had after the reproduction phase and no "
                 "longer had after the game that followed — cut for carrying nothing, or gone with it if it died "
                 "— per agent. Pooled over the reproduction phases and games of every 25th iteration from 500 on, "
-                "in the 26 worlds that lived to the end. Dashed: straight lines fitted on these logarithmic axes; "
+                f"in {W.lived}. Dashed: straight lines fitted on these logarithmic axes; "
                 "dotted: a line of slope 1, in proportion to k.",
-        recipe=recipe(lived_text(), FRAMES,
-                      ["For t = 500, 525, …, 2,975 read frames 2·t − 1 (before the reproduction phase of t), 2·t "
+        recipe=recipe(W.lived_text(), FRAMES,
+                      [f"For t = {GROWTH_STARTS[0]}, {GROWTH_STARTS[1]}, …, {GROWTH_STARTS[-1]:,} read frames 2·t − 1 "
+                       "(before the reproduction phase of t), 2·t "
                        "(after it) and 2·t + 1 (after the game).",
                        "Gained: the edges in 2·t not in 2·t − 1, counted at both ends, for agents in both frames, "
                        "by their degree in 2·t − 1. Lost: the edges in 2·t not in 2·t + 1, counted for agents of "
@@ -378,7 +381,7 @@ def _age_degree(ch: F.Chapter, alive) -> None:
         ages.extend(last["ages"])
         degrees.extend(last["degrees"])
     ages, degrees = np.array(ages, float), np.array(degrees, float)
-    edges = [0, 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 3000]
+    edges = [e for e in (0, 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048) if e < W.until] + [W.until]
     mids, med, q25, q75, top = [], [], [], [], []
     for a, b in zip(edges[:-1], edges[1:]):
         m = (ages >= a) & (ages < b)
@@ -390,18 +393,18 @@ def _age_degree(ch: F.Chapter, alive) -> None:
             top.append(float(np.quantile(degrees[m], 0.99)))
     ch.figure(
         "age", title="Connections and age",
-        x={"label": "age of the agent, iterations (logarithmic)", "log": True, "min": 0.5, "max": 3000},
+        x={"label": "age of the agent, iterations (logarithmic)", "log": True, "min": 0.5, "max": W.until},
         y={"label": "connections (logarithmic)", "log": True, "min": 0.8, "max": 500},
         series=[{"label": "median, with the middle half", "x": mids, "y": med, "lo": q25, "hi": q75,
                  "colour": BLUE, "width": 2},
                 line(mids, top, "the best-connected hundredth", ORANGE, width=1.5, dash=[5, 4])],
-        caption="The agents alive after the last game of the 26 worlds that lived to the end, sorted by age — "
+        caption=f"The agents alive after the last game of {W.lived}, sorted by age — "
                 "the iterations since their node was born — in classes doubling in width: the median number "
                 "of connections of each class, with the band from its 25th to its 75th percentile, and the 99th "
                 "percentile (dashed).",
-        recipe=recipe(lived_text(), FRAMES,
-                      ["Read frame 5,999 of each run: `ages`, and each agent's connections in `edges`.",
-                       "Classes of age [0, 1), [1, 2), [2, 4), …, [1,024, 3,000); in each class with at least 30 "
+        recipe=recipe(W.lived_text(), FRAMES,
+                      [f"Read frame {W.frame(W.last):,} of each run: `ages`, and each agent's connections in `edges`.",
+                       f"Classes of age [0, 1), [1, 2), [2, 4), …, [{edges[-2]:,}, {edges[-1]:,}); in each class with at least 30 "
                        "agents, the median, quartiles and 99th percentile of the connections."]))
     ch.number("age", {"mids": mids, "median": med, "top": top,
                       "corr_log": float(np.corrcoef(np.log1p(ages), np.log(degrees))[0, 1])})

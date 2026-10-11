@@ -114,7 +114,7 @@ only 0, ½ or all. So the shares cluster at simple fractions.
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
 >
 > 1. Take the rows with `phase` = 2 and the statistics `spreadShare`, `selfAllocationShare`, `revoltShare` (`a/b` is the row's `a` divided by its `b`; [Staking at home](../notes/home-stake.md) defines each).
-> 2. Cut the iterations into stretches of 5 (600 stretches over 3,000 iterations) and take each world's mean in each stretch.
+> 2. Cut the 3,000 iterations into 600 stretches of 5 and take each world's mean in each stretch.
 > 3. In each stretch, take the median, the 25th and 75th and the 5th and 95th percentiles of those means over the worlds that still have a value there (a world that died has none after its death).
 >
 > **To make it again:** `python3 book_figures.py game`.
@@ -181,7 +181,7 @@ half of all nodes** (12% + 39%).
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
 >
 > 1. Take the rows with `phase` = 2 and the statistics `heldHomeShare`, `revolutions/nodes_before` (`a/b` is the row's `a` divided by its `b`; [Staking at home](../notes/home-stake.md) defines each).
-> 2. Cut the iterations into stretches of 5 (600 stretches over 3,000 iterations) and take each world's mean in each stretch.
+> 2. Cut the 3,000 iterations into 600 stretches of 5 and take each world's mean in each stretch.
 > 3. In each stretch, take the median, the 25th and 75th and the 5th and 95th percentiles of those means over the worlds that still have a value there (a world that died has none after its death).
 >
 > **To make it again:** `python3 book_figures.py game`.

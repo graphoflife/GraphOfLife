@@ -4,7 +4,7 @@ Part II, the inside of a world: Chapter 18 — what the brains are like — and
 Chapter 19 — what agents say to each other.
 
 Both read the final checkpoint of every world that lived to the end, which holds
-every living agent's brain and every message in flight at iteration 3,000. The
+every living agent's brain and every message in flight after its last iteration. The
 probes rebuild the world from it and run each brain on the inputs it would read
 there — once as it is, and again with one input changed — so what a brain
 responds to is measured on the states it actually meets.
@@ -17,8 +17,8 @@ import numpy as np
 
 import book_data as D
 import book_figures as F
-from book_figures import chapter, describe, dots, line, lived, lived_text, recipe, runs_of, survivors
-from book_chapters.common import BLUE, CYAN, GREEN, GREY, ORANGE, RED, VIOLET, YELLOW, baseline
+from book_figures import chapter, describe, dots, line, lived, recipe, runs_of, survivors
+from book_chapters.common import BLUE, CYAN, GREEN, GREY, ORANGE, RED, VIOLET, WORLDS as W, YELLOW
 
 #: What each group of a brain's input rows reads, by the blocks of
 #: SimConfig.input_layout() it is made of.
@@ -322,7 +322,7 @@ def _founder_note() -> str:
 
 @chapter
 def minds(ch: F.Chapter) -> None:
-    alive = survivors(baseline())
+    alive = W.alive
     fixed = survivors(runs_of("E07", "brains never change"))
     probes = {s.run_id: {k: np.array(v) for k, v in probe(s.run_id).items() if k != "stamp"} for s in alive}
     gains = {s.run_id: gain(s.run_id) for s in alive}
@@ -351,7 +351,7 @@ def minds(ch: F.Chapter) -> None:
                 "its agents, for the agents' own brains (blue) and for " + _founder_note() + " (grey). Right: "
                 "the same ratio layer by layer for the evolved brains, the median over worlds: each of the five "
                 "hidden layers ends in a sigmoid, the last is linear.",
-        recipe=recipe(lived_text(short=True), FINAL,
+        recipe=recipe(W.lived_text(short=True), FINAL,
                       [PROBE, "Draw ε, normal with standard deviation 0.1, the shape of the input matrix X; the "
                        "gain is RMS(forward(X + ε) − forward(X)) / RMS(ε). The same after each layer for the "
                        "layer-by-layer ratios (`book_chapters.inner.gain`)."]))
@@ -385,7 +385,7 @@ def minds(ch: F.Chapter) -> None:
                 "tokens of at least one token); and the share whose every stake score is zero or below, so that "
                 "the rules split its tokens evenly over all its candidates. Blue: the agents' own brains; grey: "
                 + _founder_note() + ".",
-        recipe=recipe(lived_text(short=True), FINAL,
+        recipe=recipe(W.lived_text(short=True), FINAL,
                       [PROBE, "Spread: the mean of the two BLOTTO_MODE outputs over the columns, first larger than "
                        "second. Child: ⌊f(ā, b̄) · tokens⌋ ≥ 1 with ā, b̄ the REPRO_FRACTION outputs averaged over "
                        "the columns. Even by default: every BLOTTO score ≤ 0 (`book_chapters.inner.probe`)."]))
@@ -418,7 +418,7 @@ def minds(ch: F.Chapter) -> None:
                 "of a and b ([The share function](../notes/share-function.md)): a below 0 and b above it means no child. "
                 "Likewise for the revolutionary part of a stake; spread or all in follows whichever of its two "
                 "outputs is larger.",
-        recipe=recipe(lived_text(short=True), FINAL,
+        recipe=recipe(W.lived_text(short=True), FINAL,
                       [PROBE, "For each agent, the mean over its columns of output rows 0–14 (`World.heads`: "
                        "REPRO_FRACTION 0–1, LINK 2–3, LINK_MODE 4–5, BLOTTO 6, BLOTTO_MODE 7–8, REV_FRACTION 9–10, "
                        "HANDOVER 11–12, HANDOVER_MODE 13–14); then the mean over agents."]))
@@ -441,7 +441,7 @@ def minds(ch: F.Chapter) -> None:
                 "their inputs were different — every message they read set to 0; the five random numbers of "
                 "every column drawn again; or every neighbour's tokens, as the agent sees them, doubled. Blue: "
                 "the agents' own brains; grey: " + _founder_note() + ".",
-        recipe=recipe(lived_text(short=True), FINAL,
+        recipe=recipe(W.lived_text(short=True), FINAL,
                       [PROBE, "Change the inputs — rows 29–148 set to 0; rows 149–153 drawn again, uniform on "
                        "(−2, 2); row 2 of every neighbour's column replaced by ln(1 + 2·(e^x − 1)) — and decide again; "
                        "count the agents whose shares of stake differ in any candidate."]))
@@ -451,13 +451,13 @@ def minds(ch: F.Chapter) -> None:
     cfg = store.load_config(alive[0].run_id)
     fgroups, fdist = founder_weights(cfg)
     neutral = float(np.mean(list(fgroups.values())) * np.sqrt(1.396))
-    W = {s.run_id: weights(s.run_id) for s in alive}
+    kept = {s.run_id: weights(s.run_id) for s in alive}
     Wfix = {s.run_id: weights(s.run_id) for s in fixed}
     gnames = [name for name, _ in GROUPS]
     ch.figure(
         "listen", title="What a brain listens to",
         x={"label": "", "categories": gnames}, y={"label": "size of the weights reading it", "min": 0.4, "max": 0.85},
-        series=dots(gnames, [[w["groups"][g] for w in W.values()] for g in gnames], [BLUE] * len(gnames)),
+        series=dots(gnames, [[w["groups"][g] for w in kept.values()] for g in gnames], [BLUE] * len(gnames)),
         guides=[{"axis": "y", "at": float(np.mean(list(fgroups.values()))), "label": "founders"},
                 {"axis": "y", "at": neutral, "label": "mutation alone, at its balance"}], legend=False,
         caption="For each group of the brain's inputs ([What a brain sees](../notes/brain-inputs.md)) — whether "
@@ -469,20 +469,20 @@ def minds(ch: F.Chapter) -> None:
                 "founders' brains. Upper: what the changes of [How a brain changes](../notes/mutation.md) alone "
                 "would bring every weight to, whatever it reads — its jitters adding variance, its resets "
                 "drawing weights back — at the balance of the two.",
-        recipe=recipe(lived_text(short=True), FINAL,
+        recipe=recipe(W.lived_text(short=True), FINAL,
                       ["Read the first weight matrix W0 (agents × 50 × 154) from the checkpoint; for each input "
                        "the norm of its column; average within each group of inputs and over agents.",
                        "Mutation alone: each change jitters a weight with probability 0.1 by a normal amount of "
                        "variance 0.2²/k and redraws it with probability 0.1 · 0.1 from variance 1/k; the variance v "
                        "at balance satisfies v = 0.99 (v + 0.004/k) + 0.01/k, so v = 1.396/k: √1.396 = 1.18 times "
                        "a founder's."]))
-    ch.number("listen", {"evolved": {g: describe([w["groups"][g] for w in W.values()]) for g in gnames},
+    ch.number("listen", {"evolved": {g: describe([w["groups"][g] for w in kept.values()]) for g in gnames},
                          "changeless": {g: describe([w["groups"][g] for w in Wfix.values()]) for g in gnames},
                          "founders": fgroups, "neutral": neutral})
 
     # ---- how far apart brains are ----
-    one = [float(np.median(w["parent"])) for w in W.values() if w["parent"]]
-    two = [float(np.median(w["random"])) for w in W.values()]
+    one = [float(np.median(w["parent"])) for w in kept.values() if w["parent"]]
+    two = [float(np.median(w["random"])) for w in kept.values()]
     dcats = ["a genotype and its parent", "two agents of one world", "two founders"]
     ch.figure(
         "apart", title="How far apart brains are",
@@ -494,7 +494,7 @@ def minds(ch: F.Chapter) -> None:
                 "alive at the end of a world — one change apart; one dot per world, the median of its pairs. "
                 "Middle: two agents drawn at random from one world; one dot per world, the median of 3,000 pairs. "
                 "Right: two fresh founders' brains, one dot per pair (200 pairs).",
-        recipe=recipe(lived_text(short=True), FINAL,
+        recipe=recipe(W.lived_text(short=True), FINAL,
                       ["Concatenate every weight matrix and bias vector of a brain into one vector of 15,795 "
                        "numbers; the difference of two brains is the root mean square of the difference of their "
                        "vectors (`book_chapters.inner.weights`)."]))
@@ -507,7 +507,7 @@ def minds(ch: F.Chapter) -> None:
 
 @chapter
 def talk(ch: F.Chapter) -> None:
-    alive = survivors(baseline())
+    alive = W.alive
     stats = {s.run_id: message_stats(s.run_id) for s in alive}
     e = [m["evolved"] for m in stats.values()]
     f = [m["founder"] for m in stats.values()]
@@ -522,7 +522,7 @@ def talk(ch: F.Chapter) -> None:
                 "(the 30 message outputs, squashed by tanh into −1 to 1). Left: how different the messages one "
                 "agent writes to two of its readers are; right: how different the messages of two agents are. "
                 "One dot per world, each the median over its agents.",
-        recipe=recipe(lived_text(short=True), FINAL,
+        recipe=recipe(W.lived_text(short=True), FINAL,
                       ["For every agent, its inputs as the engine builds them and tanh of output rows 15–44 of "
                        "its brain: one message per candidate.",
                        "Left: the root-mean-square difference between its messages to its first two candidates; "
@@ -556,7 +556,7 @@ def talk(ch: F.Chapter) -> None:
                 "messages' variety that a straight-line fit on the writer's and reader's tokens and connections "
                 "(their logarithms) and whether the message is to itself accounts for. Blue: the agents' own "
                 "brains; grey: " + _founder_note() + ".",
-        recipe=recipe(lived_text(short=True), FINAL,
+        recipe=recipe(W.lived_text(short=True), FINAL,
                       ["As in the figure above, every message an agent's brain writes to each candidate.",
                        "Kin: each writer's mean message; between-genotype sum of squares of those means over their "
                        "total; the null shuffles the genotypes among writers.",
@@ -576,7 +576,7 @@ def talk(ch: F.Chapter) -> None:
         y={"label": "share of all numbers, per 0.05"},
         series=[line(centres, hist_e / hist_e.sum(), "evolved brains", BLUE, width=2),
                 line(centres, hist_f / hist_f.sum(), "founders' brains", GREY, width=2, dash=[5, 4])],
-        caption="Every one of the 30 numbers of every message written at the end of the 26 worlds, in bins 0.05 "
+        caption=f"Every one of the 30 numbers of every message written at the end of the {len(alive)} worlds, in bins 0.05 "
                 "wide: by the agents' own brains (blue) and by " + _founder_note() + " (grey, dashed).",
-        recipe=recipe(lived_text(short=True), FINAL,
+        recipe=recipe(W.lived_text(short=True), FINAL,
                       ["As above; count the numbers in 40 bins from −1 to 1 and divide by all numbers."]))

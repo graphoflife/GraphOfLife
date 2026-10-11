@@ -17,11 +17,16 @@ import numpy as np
 import book_data as D
 import book_figures as F
 from book_graph import bfs, core, degree_preserving, graph
-from book_figures import (FRAMES, chapter, describe, dots, line, lived_text, quantile_band, recipe,
-                          runs_of, survivors)
-from book_chapters.common import BLUE, GREEN, GREY, ORANGE, RED, VIOLET, YELLOW, baseline
+from book_figures import (FRAMES, chapter, describe, dots, line, quantile_band, recipe, runs_of)
+from book_chapters.common import BLUE, GREEN, GREY, ORANGE, RED, VIOLET, WORLDS as W, YELLOW, listed
 
-MOMENTS = (1000, 1500, 2000, 2500, 2999)
+def moments(last: int) -> tuple:
+    """Five moments of a world's settled life, a sixth of its life apart, the last its last iteration."""
+    step = (last + 1) // 6
+    return (2 * step, 3 * step, 4 * step, 5 * step, last)
+
+
+MOMENTS = moments(W.last)
 MAX_R = 15
 
 
@@ -53,7 +58,7 @@ def likeness(run_id: str) -> Dict[str, Any]:
     neighbour = {name: [] for name in names}
     shuffled = {name: [] for name in VALUES}
     random_kin = []
-    for t in MOMENTS:
+    for t in moments(D.last_iteration(run_id)):
         frame = D.frame_at(run_id, t, 2)
         adj = graph(frame)
         ids = list(frame["ids"])
@@ -118,7 +123,7 @@ def likeness(run_id: str) -> Dict[str, Any]:
 
 @chapter
 def alike(ch: F.Chapter) -> None:
-    alive = survivors(baseline())
+    alive = W.alive
     data = {s.run_id: likeness(s.run_id) for s in alive}
     names = [("tokens", "tokens", YELLOW), ("age", "age", GREEN), ("degree", "connections", BLUE)]
     cats = [label for _, label, _ in names]
@@ -130,12 +135,12 @@ def alike(ch: F.Chapter) -> None:
         guides=[{"axis": "y", "at": 0.0, "label": "no relation"}], legend=False,
         caption="For every connection of a world, the two agents at its ends: the correlation of their tokens, of "
                 "their ages and of their numbers of connections (tokens and age as ln(1 + x), connections as "
-                "ln k), counting every connection both ways round. One dot per world that lived to the end, the "
-                "mean over five moments (after the games of iterations 1,000, 1,500, 2,000, 2,500 and 2,999); the "
+                f"ln k), counting every connection both ways round. One dot per {W.per_lived}, the "
+                f"mean over five moments (after the games of iterations {listed(list(MOMENTS))}); the "
                 "bar is the median. The same values shuffled among a world's agents give correlations within "
                 "0.01 of zero; the last column is the assortativity of Chapter 30, taken of ln k instead of k.",
-        recipe=recipe(lived_text(), FRAMES,
-                      ["Read frames 2·t + 1 for t = 1,000, 1,500, 2,000, 2,500, 2,999: `ids`, `tokens`, `ages`, "
+        recipe=recipe(W.lived_text(), FRAMES,
+                      [f"Read frames 2·t + 1 for t = {', '.join(f'{t:,}' for t in MOMENTS)}: `ids`, `tokens`, `ages`, "
                        "`brain_ids` and `edges`.",
                        "Pearson's correlation of the value at one end of a connection with the value at the other, "
                        "over every connection in both directions; the null shuffles the values among agents first "
@@ -165,12 +170,12 @@ def alike(ch: F.Chapter) -> None:
         "distance", panels, columns=3, title="How alike, how far apart",
         caption="For pairs of agents r steps apart, the correlation of their tokens, ages and connections (as in "
                 "the figure above), for r = 1 to 15. For each world, pairs from breadth-first searches out of 150 "
-                "agents drawn at random at each of the five moments; the coloured line is the median of the 26 "
+                f"agents drawn at random at each of the five moments; the coloured line is the median of the {len(alive)} "
                 "worlds, the darker band the middle half of them and the paler band nine in ten. Grey dashes: the "
                 "median when each agent's tokens (or age) are first shuffled among the agents with about as many "
                 "connections (1, 2, 3–4, 5–9, 10–49, 50 and more) — what an agent's place in the network explains "
                 "without any closeness of its own.",
-        recipe=recipe(lived_text(), FRAMES,
+        recipe=recipe(W.lived_text(), FRAMES,
                       ["At each moment, a breadth-first search out of 150 agents drawn at random (generator seeded "
                        "with 22), to 15 steps; every agent reached at r steps gives the pair (source, agent).",
                        "Standardise each value within its moment (subtract the mean, divide by the standard "
@@ -195,10 +200,10 @@ def alike(ch: F.Chapter) -> None:
         caption="For pairs of agents r steps apart (as in the figure above), the share that carry the same "
                 "genotype, divided by the share among all pairs of agents of the world, on a logarithmic axis: "
                 "a straight falling line would be a relatedness that halves over a fixed number of steps. The "
-                "line is the median of the 26 worlds, the darker band the middle half of them and the paler band "
+                f"line is the median of the {len(alive)} worlds, the darker band the middle half of them and the paler band "
                 "nine in ten. From 9 steps on, most worlds have no such pair at all, and none has a twentieth of what "
                 "chance would give.",
-        recipe=recipe(lived_text(), FRAMES,
+        recipe=recipe(W.lived_text(), FRAMES,
                       ["As above; for every pair, whether the two `brain_ids` are equal.",
                        "Any two agents: Σ c(c − 1) / (n(n − 1)) over the genotypes' counts c among the n agents."]))
     ch.number("kin", {"enrichment": [describe(enrich[:, i]) for i in range(len(rs))],
@@ -355,7 +360,12 @@ def world_dimensions(run_id: str) -> Dict[str, Any]:
             "core": measure(core(adj), 23, **size)}
 
 
-LIFE = (10, 25, 50, 100, 200, 300, 500, 750, 1000, 1500, 2000, 2500, 2999)
+def life_moments(last: int) -> tuple:
+    """Moments of a whole life, closer together early on, ending at its last iteration."""
+    return tuple(t for t in (10, 25, 50, 100, 200, 300, 500, 750, 1000, 1500, 2000, 2500) if t < last) + (last,)
+
+
+LIFE = life_moments(W.last)
 
 
 def at(xs: List[float], ds: List[float], x: float) -> float:
@@ -370,7 +380,7 @@ def at(xs: List[float], ds: List[float], x: float) -> float:
 def life_dimensions(run_id: str) -> Dict[str, Any]:
     """Both rulers, read at one scale each, after the games of a few iterations of a world's life."""
     out = {"t": [], "agents": [], "ball": [], "spectral": []}
-    for t in LIFE:
+    for t in life_moments(D.last_iteration(run_id)):
         m = measure(graph(D.frame_at(run_id, t, 2)), 23, 128)
         out["t"].append(t)
         out["agents"].append(m["n"])
@@ -394,6 +404,9 @@ def band(rows: List[Dict[str, Any]], xkey: str, ykey: str) -> Dict[str, Any]:
             table[i, grid.index(round(x, 6))] = y
     return quantile_band(table, grid, min_count=max(3, len(rows) // 2))
 
+
+#: Where each ruler is read for a typical value, by the size of world: the ball's radius and the walk's steps.
+PLATEAUS = {"E02": ((2, 6), (4, 64)), "E10": ((3, 10), (4, 160))}[W.experiment]
 
 RULERS = (("ball_r", "ball_d", "From balls", "radius r, steps (logarithmic)"),
           ("spec_t", "spec_d", "From a random walk", "steps of the walk t (logarithmic)"))
@@ -436,14 +449,15 @@ def dimensions(ch: F.Chapter) -> None:
                                         "walk": plateau(m["spec_t"], m["spec_d"], 4, 64)}
                                  for name, m in measured.items()})
 
-    alive = survivors(baseline())
+    alive = W.alive
     dims = [world_dimensions(s.run_id) for s in alive]
+    typical = int(round(float(np.median([d["world"]["n"] for d in dims])), -2))
     big = [s for s in runs_of("E08", "baseline") if int(s.lab["world"]["total_tokens"]) == 409600
            and F.lived(s) >= s.until]
     bigs = [world_dimensions(s.run_id) for s in big]
     panels = []
     for xk, yk, title, xl in RULERS:
-        series_ = [{**band([d["world"] for d in dims], xk, yk), "label": "the 26 worlds", "colour": BLUE},
+        series_ = [{**band([d["world"] for d in dims], xk, yk), "label": f"the {len(alive)} worlds", "colour": BLUE},
                    {**band([d["twin"] for d in dims], xk, yk), "label": "their random twins", "colour": RED}]
         for i, d in enumerate(bigs):
             series_.append(line(d["world"][xk], d["world"][yk], "worlds of 409,600 tokens" if i == 0 else None,
@@ -455,13 +469,13 @@ def dimensions(ch: F.Chapter) -> None:
     ch.grid(
         "worlds", panels, columns=2, title="The same rulers, on the worlds",
         caption="The two rulers of the figure above, on the largest piece of each world after its last game. "
-                "Blue: the 26 baseline worlds of 10,000 tokens that lived to the end (about 1,300 agents each) — "
+                f"Blue: {W.lived} of {W.tokens:,} tokens (about {typical:,} agents each) — "
                 "the line is the median of the worlds, the darker band the middle half and the paler band nine in "
                 "ten. Red: for each, its random twin, a network with exactly as many connections at every agent "
                 "but wired at random. Yellow: the three worlds of 409,600 tokens of Chapter 38 (about 60,000 "
                 "agents each), measured from 100 balls and 48 walks of up to 1,024 steps; dashed orange, their "
                 "random twins.",
-        recipe=recipe(lived_text() + " " + BIG, FRAMES,
+        recipe=recipe(W.lived_text() + " " + BIG, FRAMES,
                       ["Read each run's last frame; build its network from `edges` and keep its largest piece.",
                        "The rulers as in the figure above (`book_chapters.space.measure`); the twin by "
                        "`book_chapters.structure.degree_preserving` (seed 23)."]))
@@ -471,7 +485,7 @@ def dimensions(ch: F.Chapter) -> None:
                 "walk": describe([plateau(d["spec_t"], d["spec_d"], *walk) for d in rows]),
                 "agents": describe([d["n"] for d in rows]),
                 "reach": describe([max(d["ball_r"]) if d["ball_r"] else np.nan for d in rows])}
-    ch.number("worlds", {kind: plateaus([d[kind] for d in dims], (2, 6), (4, 64)) for kind in ("world", "twin", "core")})
+    ch.number("worlds", {kind: plateaus([d[kind] for d in dims], *PLATEAUS) for kind in ("world", "twin", "core")})
     ch.number("big", {kind: plateaus([d[kind] for d in bigs], (3, 14), (4, 400)) for kind in ("world", "twin", "core")})
     ch.number("big_curves", bigs)
 
@@ -516,13 +530,12 @@ def dimensions(ch: F.Chapter) -> None:
         ch.number(f"life_{key}", {str(t): describe(table[:, i]) for i, t in enumerate(LIFE)})
     ch.grid(
         "life", panels, columns=2, title="Dimension over a world's life",
-        caption="The two rulers, each read at one scale, after the games of iterations 10, 25, 50, 100, 200, 300, "
-                "500, 750, 1,000, 1,500, 2,000, 2,500 and 2,999 of the 26 baseline worlds that lived to the end, on "
-                "a logarithmic axis of time. Left: the local dimension from balls between radius 2 and 3; right: "
+        caption=f"The two rulers, each read at one scale, after the games of iterations {listed(list(LIFE))} of "
+                f"{W.lived}, on a logarithmic axis of time. Left: the local dimension from balls between radius 2 and 3; right: "
                 "the spectral dimension from walks of 4 to 8 steps. The line is the median of the worlds, the "
                 "darker band the middle half of them and the paler band nine in ten. The viewer's own dimensions, "
                 "every 25 iterations, are drawn in Chapter 31.",
-        recipe=recipe(lived_text(), FRAMES,
+        recipe=recipe(W.lived_text(), FRAMES,
                       ["Read frame 2·t + 1 for each t; take the largest piece of its network.",
                        "The rulers as in the first figure, the walk run for 128 steps "
                        "(`book_chapters.space.life_dimensions`); read the ball ruler at r = √6 and the walk at "

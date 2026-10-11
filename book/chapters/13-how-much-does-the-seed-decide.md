@@ -174,7 +174,7 @@ also crowded in the second?
 <!-- figure seed/halves -->
 ![First half against second half](../figures/seed/halves.svg)
 
-**First half against second half.** One dot per surviving world. Left: its mean number of agents over iterations 100–1,499 (x) against its mean over iterations 1,500–2,999 (y). Right: the same for connections. A dot on the dashed diagonal had the same mean in both halves. r is the correlation over the 26 dots.
+**First half against second half.** One dot per world that lived to the end. Left: its mean number of agents over iterations 100–1,499 (x) against its mean over iterations 1,500–2,999 (y). Right: the same for connections. A dot on the dashed diagonal had the same mean in both halves. r is the correlation over the 26 dots.
 
 > [!example]- How to make this figure
 > **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.

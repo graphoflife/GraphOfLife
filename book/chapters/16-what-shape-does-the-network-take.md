@@ -93,7 +93,7 @@ all agents in the core, a third or more leaves.
 <!-- figure shape/degree -->
 ![How many connections agents have](../figures/shape/degree.svg)
 
-**How many connections agents have.** Of all agents alive after the last game of the 26 surviving worlds, the share that have at least d connections, for every d. At the start every founder had exactly four (the grey line).
+**How many connections agents have.** Of all agents alive after the last game of the 26 worlds that lived to the end, the share that have at least d connections, for every d. At the start every founder had exactly four (the grey line).
 
 > [!example]- How to make this figure
 > **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
@@ -131,7 +131,7 @@ log–log axes rather than running straight, so it is not a clean power law.
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
 >
 > 1. Take the rows with `phase` = 2 and the statistics `coreShare`, `leaves/nodes` and `bridges/edges` (`a/b` is the row's `a` divided by its `b`).
-> 2. For `leaves/nodes`, make the band as for every other band ([Bands](../notes/bands.md)): stretches of 5 iterations.
+> 2. For `leaves/nodes`, make the band as for every other band ([Bands](../notes/bands.md)): cut the 3,000 iterations into 600 stretches of 5 and take each world's mean in each stretch.
 > 3. For `coreShare` and `bridges/edges`, which are measured every 25 iterations, use stretches of 25.
 >
 > **To make it again:** `python3 book_figures.py shape`.
@@ -179,7 +179,7 @@ the moment it is born.
 <!-- figure shape/distance -->
 ![Steps between two agents](../figures/shape/distance.svg)
 
-**Steps between two agents.** For each surviving world (blue): its mean number of agents and the mean number of steps along connections from one agent to another, both averaged over iterations 500–2,999. Grey: the rough distance in a random network with the same number of agents N and connections per agent k, ln N / ln k.
+**Steps between two agents.** For each world that lived to the end (blue): its mean number of agents and the mean number of steps along connections from one agent to another, both averaged over iterations 500–2,999. Grey: the rough distance in a random network with the same number of agents N and connections per agent k, ln N / ln k.
 
 > [!example]- How to make this figure
 > **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.

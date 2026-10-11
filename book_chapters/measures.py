@@ -17,10 +17,9 @@ import numpy as np
 import book_data as D
 import book_figures as F
 from book_figures import (AG, Classes, DEGREE_CLASSES, FR, FRAMES, KEPT_BY, PA, STATS_FILE, band_series,
-                          bars, chapter, describe, dots, line, mean_over, recipe, runs_text, series,
-                          stacked, surviving_text, survivors)
+                          bars, chapter, describe, dots, line, mean_over, recipe, series, stacked)
 from book_chapters.common import (BAND_STEPS, BAND_WORDS, BLUE, CYAN, GREEN, GREY, ORANGE, RED,
-                                  VIOLET, YELLOW, baseline)
+                                  VIOLET, WORLDS as W, YELLOW)
 
 SAMPLE = ("each run's frames, read every 25 iterations by `book_figures.sample_pass` (frame "
           "`2·t` after the reproduction phase of iteration *t*, frame `2·t + 1` after its game; "
@@ -31,9 +30,9 @@ TOKEN_CLASSES = Classes((1, 1, "1"), (2, 2, "2"), (3, 4, "3–4"), (5, 9, "5–9
 
 
 def sampled(which: str, settled: bool = True) -> List[Tuple[Any, np.ndarray]]:
-    """(run, table) for every surviving baseline run, the frame rows from SETTLED on if asked."""
+    """(run, table) for every surviving run of the worlds, the frame rows from SETTLED on if asked."""
     out = []
-    for s in survivors(baseline()):
+    for s in W.alive:
         table = F.sample_pass(s.run_id)[which]
         if which == "frames" and settled:
             table = table[table[:, 0] >= F.SETTLED]
@@ -55,8 +54,8 @@ def settled_rows(run_id: str, phase: int = 2) -> List[Dict[str, Any]]:
 
 @chapter
 def entropy(ch: F.Chapter) -> None:
-    specs = baseline()
-    alive = survivors(specs)
+    specs = W.specs
+    alive = W.alive
 
     def genotype_evenness(run_id: str) -> Tuple[np.ndarray, np.ndarray]:
         fr = F.sample_pass(run_id)["frames"]
@@ -73,21 +72,21 @@ def entropy(ch: F.Chapter) -> None:
                            series=[band_series(data, None, colour)], legend=False))
     ch.grid(
         "evenness", panels, columns=3, title="How even a world is, in three respects",
-        caption="Evenness after every game of the 30 baseline worlds, from 0 (everything in one hand) "
+        caption=f"Evenness after every game of the {len(specs)} baseline worlds, from 0 (everything in one hand) "
                 "to 1 (as even as it can be; [Entropy and evenness](../notes/entropy-and-evenness.md)). "
                 "Left: of the tokens over the agents (`tokenEvenness`). Middle: of the agents over the "
                 "numbers of connections that occur (`degreeEvenness`). Right: of the agents over the "
                 "genotypes they carry — the entropy of the genotypes' shares divided by log₂ of the "
                 f"number of agents, measured every 25 iterations. In each, {BAND_WORDS[0].lower()}"
                 f"{BAND_WORDS[1:]}.",
-        recipe=recipe(runs_text(), STATS_FILE + "; for genotypes, " + SAMPLE,
+        recipe=recipe(W.runs_text(), STATS_FILE + "; for genotypes, " + SAMPLE,
                       ["Take `tokenEvenness` and `degreeEvenness` of the rows with `phase` = 2.",
                        "For genotypes: in the frame after the game of every 25th iteration, count the "
                        "agents per genotype (`brain_ids`), turn the counts into shares pᵢ, and compute "
                        "H = −Σ pᵢ log₂ pᵢ; divide by log₂ of the number of agents.",
                        *BAND_STEPS]))
     for stat in ("tokenEvenness", "degreeEvenness", "tokenEntropy", "degreeEntropy", "gini"):
-        ch.number(f"{stat}_settled", describe([mean_over(s.run_id, stat, 500, 2999) for s in alive]))
+        ch.number(f"{stat}_settled", describe([mean_over(s.run_id, stat, *W.window) for s in alive]))
     ch.number("tokenEvenness_first", F.A.bands([series(s.run_id, "tokenEvenness") for s in specs])["y"][0])
 
     # Effective numbers: how many equal holders, or equal genotypes, the world is worth.
@@ -101,17 +100,17 @@ def entropy(ch: F.Chapter) -> None:
     cats = ["effective holders of the tokens", "distinct genotypes", "effective genotypes"]
     ch.figure(
         "effective", title="Effective numbers, as a share of the agents",
-        x={"label": "", "categories": cats}, y={"label": "per agent (mean over iterations 500–2,999)",
+        x={"label": "", "categories": cats}, y={"label": f"per agent (mean over iterations {W.span})",
                                                 "min": 0, "max": 1},
         series=dots(cats, [holders, distinct, effective], [YELLOW, VIOLET, VIOLET]), legend=False,
-        caption="One dot per world that lived to the end; the bar is the median. Left: 2^H of the tokens "
+        caption=f"One dot per {W.per_lived}; the bar is the median. Left: 2^H of the tokens "
                 "— the number of agents that, holding equal shares, would make the tokens as even as "
                 "they are — divided by the number of agents. Middle: the number of different genotypes "
                 "among the living, per agent. Right: 2^H of the genotypes — how many equally common "
                 "genotypes would be as diverse as the ones there are — per agent. The dots are spread "
                 "sideways only so that they do not hide each other.",
-        recipe=recipe(surviving_text(), STATS_FILE + "; for genotypes, " + SAMPLE,
-                      ["Tokens: for each row with `phase` = 2 and 500 ≤ `iteration` ≤ 2,999, compute "
+        recipe=recipe(W.surviving_text(), STATS_FILE + "; for genotypes, " + SAMPLE,
+                      [f"Tokens: for each row with `phase` = 2 and 500 ≤ `iteration` ≤ {W.last:,}, compute "
                        "2^`tokenEntropy` / `nodes`, and average over the rows.",
                        "Genotypes: in the frames after the game of every 25th iteration from 500 on, the "
                        "number of distinct `brain_ids` per agent, and 2^H per agent with H the entropy of "
@@ -133,12 +132,12 @@ def entropy(ch: F.Chapter) -> None:
         x={"label": "Gini coefficient"}, y={"label": "token evenness"},
         series=[{"label": None, "x": g.tolist(), "y": e.tolist(), "points": True, "size": 3,
                  "colour": YELLOW, "alpha": 0.45}], legend=False,
-        caption=f"One dot per world and look: every 25th iteration from 500 on of the 26 worlds that "
-                f"lived to the end ({len(g):,} dots). Across the dots the two measures move against each "
+        caption=f"One dot per world and look: every 25th iteration from 500 on of {W.lived} "
+                f"({len(g):,} dots). Across the dots the two measures move against each "
                 f"other — the correlation is {np.corrcoef(g, e)[0, 1]:.2f} — but not along one curve: the "
                 "same Gini comes with different evenness, because the two weigh the poor and the rich "
                 "differently.",
-        recipe=recipe(surviving_text(), STATS_FILE,
+        recipe=recipe(W.surviving_text(), STATS_FILE,
                       ["Take the rows with `phase` = 2 and `iteration` a multiple of 25 from 500 on.",
                        "Plot `tokenEvenness` against `gini`, one dot per row."]))
     ch.number("gini_evenness_corr", float(np.corrcoef(g, e)[0, 1]))
@@ -150,8 +149,8 @@ def entropy(ch: F.Chapter) -> None:
 
 @chapter
 def gains(ch: F.Chapter) -> None:
-    specs = baseline()
-    alive = survivors(specs)
+    specs = W.specs
+    alive = W.alive
 
     def shares(rows_):
         start = sum(r["nodes_before"] for r in rows_)
@@ -164,7 +163,7 @@ def gains(ch: F.Chapter) -> None:
 
     first = shares([r for s in specs for r in F.rows(s.run_id) if r["phase"] == 2 and r["iteration"] == 0])
     late = shares([r for s in alive for r in settled_rows(s.run_id)])
-    cats = ["the first game (30 worlds)", "games from iteration 500 on (26 worlds)"]
+    cats = [f"the first game ({len(specs)} worlds)", f"games from iteration 500 on ({len(alive)} worlds)"]
     names = ["starved", "cut off", "lost tokens", "kept exactly what it had", "gained tokens"]
     ch.figure(
         "outcome", title="What one game does to the agents",
@@ -175,10 +174,10 @@ def gains(ch: F.Chapter) -> None:
         caption="Every agent alive at the start of a game ends it in one of five ways: it starved (no one "
                 "staked on its node), it was cut off from the largest piece of the network, or it "
                 "survived holding fewer tokens, exactly as many, or more than before. Left: the game of "
-                "iteration 0 in all 30 worlds. Right: every game from iteration 500 on in the 26 worlds "
-                "that lived to the end, pooled.",
-        recipe=recipe(runs_text(), STATS_FILE,
-                      ["Take the rows with `phase` = 2 (iteration 0, or 500 to 2,999).",
+                f"iteration 0 in all {len(specs)} worlds. Right: every game from iteration 500 on in {W.lived}, "
+                "pooled.",
+        recipe=recipe(W.runs_text(), STATS_FILE,
+                      [f"Take the rows with `phase` = 2 (iteration 0, or {W.stretch}).",
                        "Sum over them: `nodes_before` (agents at the start), `starved`, `orphaned`, `gainers`, "
                        "`losers`, and `nodes` − `gainers` − `losers` (survivors whose tokens did not change).",
                        "Divide each sum by the sum of `nodes_before` and stack the shares."]))
@@ -205,8 +204,8 @@ def gains(ch: F.Chapter) -> None:
         caption="Agents alive at the start of a game, sorted by the tokens they held then; for each class, "
                 "the share that died in the game (starved or cut off), and of the rest the shares that "
                 "lost tokens, kept exactly as many, or gained. From the games of every 100th iteration "
-                f"from 500 on, in the 26 worlds that lived to the end ({len(tokens):,} agents in all).",
-        recipe=recipe(surviving_text(), SAMPLE,
+                f"from 500 on, in {W.lived} ({len(tokens):,} agents in all).",
+        recipe=recipe(W.surviving_text(), SAMPLE,
                       ["For every 100th iteration t from 500 on, take each agent in frame `2·t` (the start "
                        "of the game) with its `tokens`.",
                        "Find it in frame `2·t + 1`: if it is not there, it died in the game; if it is, its "
@@ -251,7 +250,7 @@ def gains(ch: F.Chapter) -> None:
                 "tokens it held at the start, over the agents that survived the game. Yellow: all agents; "
                 "cyan: only agents that held 3 to 9 tokens, so that wealth itself cannot explain the "
                 "pattern. A class with fewer than 1,000 agents is left out (drawn at 0).",
-        recipe=recipe(surviving_text(), SAMPLE,
+        recipe=recipe(W.surviving_text(), SAMPLE,
                       ["For every 100th iteration t from 500 on, read frame `2·t`: for every agent u, "
                        "κ(u) = Σ over its neighbours v of (τ(v) − τ(u)).",
                        "Find each agent in frame `2·t + 1` and take its `delta` (agents not there died and "
@@ -270,7 +269,7 @@ def gains(ch: F.Chapter) -> None:
         caption="How many tokens the cleanup dealt out at random among the survivors — the tokens of the "
                 "agents that were cut off — after each game (green) and after each reproduction phase "
                 f"(cyan), on a logarithmic axis. For each, {BAND_WORDS[0].lower()}{BAND_WORDS[1:]}.",
-        recipe=recipe(runs_text(), STATS_FILE,
+        recipe=recipe(W.runs_text(), STATS_FILE,
                       ["Take `redistributed` of the rows with `phase` = 2 and of those with `phase` = 1.",
                        *BAND_STEPS]))
     lot = []
@@ -279,10 +278,10 @@ def gains(ch: F.Chapter) -> None:
         lot.append(float(np.mean([r["redistributed"] / r["nodes"] for r in rows_])))
     ch.number("lottery_per_agent", describe(lot))
     ch.number("redistributed_settled", {
-        "game": describe([mean_over(s.run_id, "redistributed", 500, 2999, 2) for s in alive]),
-        "repro": describe([mean_over(s.run_id, "redistributed", 500, 2999, 1) for s in alive])})
+        "game": describe([mean_over(s.run_id, "redistributed", *W.window, 2) for s in alive]),
+        "repro": describe([mean_over(s.run_id, "redistributed", *W.window, 1) for s in alive])})
     for stat in ("maxTokenAdded", "maxTokenLost", "gainers", "losers"):
-        ch.number(f"{stat}_settled", {ph: describe([mean_over(s.run_id, stat, 500, 2999, ph) for s in alive])
+        ch.number(f"{stat}_settled", {ph: describe([mean_over(s.run_id, stat, *W.window, ph) for s in alive])
                                       for ph in (1, 2)})
 
 
@@ -323,8 +322,8 @@ def even_split(run_id: str, iterations) -> Tuple[np.ndarray, np.ndarray]:
 
 @chapter
 def flow(ch: F.Chapter) -> None:
-    specs = baseline()
-    alive = survivors(specs)
+    specs = W.specs
+    alive = W.alive
 
     def budget(rows_):
         total = sum(r["tokens"] for r in rows_)
@@ -334,7 +333,7 @@ def flow(ch: F.Chapter) -> None:
 
     first = budget([r for s in specs for r in F.rows(s.run_id) if r["phase"] == 2 and r["iteration"] == 0])
     late = budget([r for s in alive for r in settled_rows(s.run_id) if r.get("netFlowShare") is not None])
-    cats = ["the first game (30 worlds)", "games from iteration 500 on (26 worlds)"]
+    cats = [f"the first game ({len(specs)} worlds)", f"games from iteration 500 on ({len(alive)} worlds)"]
     names = ["staked on the agent's own node", "staked on a neighbour, and matched by a stake back",
              "staked on a neighbour, one way"]
     ch.figure(
@@ -346,9 +345,9 @@ def flow(ch: F.Chapter) -> None:
                 "Cyan: staked on a neighbour's node, but cancelled by what that neighbour staked back — if A "
                 "puts 5 on B's node and B puts 3 on A's, 3 tokens each way cancel. Red: what is left after "
                 "cancelling, flow with a direction ([Token flow](../notes/token-flow.md)). Left: the game of "
-                "iteration 0, pooled over the 30 worlds; right: every game from iteration 500 on of the 26 "
-                "worlds that lived to the end, pooled. Exactly 10,000 tokens are staked in each game.",
-        recipe=recipe(runs_text(), STATS_FILE,
+                f"iteration 0, pooled over the {len(specs)} worlds; right: every game from iteration 500 on of "
+                f"{W.lived}, pooled. Exactly {W.tokens:,} tokens are staked in each game.",
+        recipe=recipe(W.runs_text(), STATS_FILE,
                       ["Take the rows with `phase` = 2: `tokens` (all staked), `totalFlow` (staked on "
                        "others) and `netFlowShare` (the share of that flow left after cancelling).",
                        "Sum over the rows: at home = Σ `tokens` − Σ `totalFlow`; cancelled = Σ `totalFlow` × "
@@ -367,7 +366,7 @@ def flow(ch: F.Chapter) -> None:
         caption="Of all pairs (A, B) in a game where agent A staked at least one token on neighbour B's node, "
                 "the share in which B also staked at least one token on A's — every 25 iterations, in the 30 "
                 f"baseline worlds. {BAND_WORDS}.",
-        recipe=recipe(runs_text(), SAMPLE,
+        recipe=recipe(W.runs_text(), SAMPLE,
                       ["In the frame after the game of every 25th iteration, read `decisions.allocations`: "
                        "for every agent A and every target B ≠ A with a stake > 0, note the pair (A, B).",
                        "Count the pairs whose reverse (B, A) is also there, divided by all pairs.",
@@ -407,9 +406,9 @@ def flow(ch: F.Chapter) -> None:
                 "averaged over the class. Red dots: the same even split dealt out in whole tokens by the "
                 "rules' own rounding ([Splitting tokens into whole numbers](../notes/largest-remainder.md)), "
                 "which gives the tokens left over to the largest remainders, and, when all remainders tie, "
-                "to the agent's own node first. From the games of every 100th iteration from 500 on, in the "
-                "26 worlds that lived to the end.",
-        recipe=recipe(surviving_text(), SAMPLE,
+                "to the agent's own node first. From the games of every 100th iteration from 500 on, in "
+                f"{W.lived}.",
+        recipe=recipe(W.surviving_text(), SAMPLE,
                       ["For every 100th iteration t from 500 on, take each agent's degree d in frame `2·t`.",
                        "In frame `2·t + 1`, read its entry of `decisions.allocations`: the number of `targets` "
                        "(its candidates), how many of them got `alloc` > 0, and `alloc[0]` / `tokens` (its "
@@ -422,7 +421,7 @@ def flow(ch: F.Chapter) -> None:
 
     predicted, real = [], []
     for s in alive:
-        p, r = even_split(s.run_id, range(500, 3000, 250))
+        p, r = even_split(s.run_id, range(W.settled, W.until, 250))
         predicted.append(p)
         real.append(r)
     predicted, real = np.concatenate(predicted), np.concatenate(real)
@@ -449,10 +448,10 @@ def flow(ch: F.Chapter) -> None:
                 "over itself and its neighbours; y is the balance it really ended them with. Agents are "
                 "binned by x in steps of 2; the line is the mean of y in each bin and the band its middle "
                 "half. The dashed line is y = x. Over all "
-                f"{len(predicted):,} agents (the games of every 250th iteration from 500 on, 26 worlds), "
+                f"{len(predicted):,} agents (the games of every 250th iteration from 500 on, {len(alive)} worlds), "
                 f"the straight line fitted to the points has slope {slope:.2f}, and the even split accounts "
                 f"for {100 * r2:.0f}% of the variance (R², [Fitting a straight line](../notes/least-squares.md)).",
-        recipe=recipe(surviving_text(), SAMPLE.replace("every 25 iterations by `book_figures.sample_pass` ", ""),
+        recipe=recipe(W.surviving_text(), SAMPLE.replace("every 25 iterations by `book_figures.sample_pass` ", ""),
                       ["For every 250th iteration t from 500 on, read frame `2·t` (the start of the game): each "
                        "agent's tokens τ and neighbours.",
                        "Even split: every agent u gives τ(u)/(d(u) + 1) to itself and to each neighbour; x(u) is "
@@ -475,9 +474,9 @@ def flow(ch: F.Chapter) -> None:
         series=[bars(labels, share_kept, GREEN)], legend=False,
         caption="Every node on which anyone staked in a game, sorted by its number of connections at the start "
                 "of the game; the share that was won by the agent living on it — whether as the largest "
-                "staker or through a coalition. From the games of every 25th iteration from 500 on, in the "
-                "26 worlds that lived to the end.",
-        recipe=recipe(surviving_text(), SAMPLE,
+                "staker or through a coalition. From the games of every 25th iteration from 500 on, in "
+                f"{W.lived}.",
+        recipe=recipe(W.surviving_text(), SAMPLE,
                       ["For every 25th iteration t from 500 on, count each node's connections in frame `2·t`.",
                        "In frame `2·t + 1`, read `decisions.winners`: for each node, whether `winner` = `node`.",
                        "Pool over runs and frames, and divide kept by all, per class."]))
@@ -493,7 +492,7 @@ def flow(ch: F.Chapter) -> None:
                            series=[band_series([series(s.run_id, st) for s in specs], lab, c)
                                    for st, lab, c in stats_]))
         for st, _, _ in stats_:
-            ch.number(f"{st}_settled", describe([mean_over(s.run_id, st, 500, 2999) for s in alive]))
+            ch.number(f"{st}_settled", describe([mean_over(s.run_id, st, *W.window) for s in alive]))
     ch.grid(
         "circulation", panels, columns=2, title="Do tokens go round?",
         caption="Left, on the flow as staked: the share of all tokens staked on neighbours that a greedy search "
@@ -501,13 +500,13 @@ def flow(ch: F.Chapter) -> None:
                 "conservation forbids from ever going round, because some agents receive more than they send "
                 "(red) — so at most 1 − red can circulate. Right, after cancelling every stake against the one "
                 "coming back: the share of the flow left (cyan), and of that, the share found in loops "
-                f"(green). Every 25 iterations, 30 worlds; {BAND_WORDS[0].lower()}{BAND_WORDS[1:]}.",
-        recipe=recipe(runs_text(), STATS_FILE,
+                f"(green). Every 25 iterations, {len(specs)} worlds; {BAND_WORDS[0].lower()}{BAND_WORDS[1:]}.",
+        recipe=recipe(W.runs_text(), STATS_FILE,
                       ["Take `cyclingShare`, `flowImbalance`, `netFlowShare` and `netCyclingShare` of the rows "
                        "with `phase` = 2 (measured every 25 iterations).", *BAND_STEPS[1:]]))
     for stat in ("totalFlow", "meanEdgeFlow", "maxEdgeFlow", "prunedEdges", "lightningLongest",
                  "netLightningLongest", "lightningScore", "netLightningScore"):
-        ch.number(f"{stat}_settled", describe([mean_over(s.run_id, stat, 500, 2999) for s in alive]))
+        ch.number(f"{stat}_settled", describe([mean_over(s.run_id, stat, *W.window) for s in alive]))
 
 
 # ---------------------------------------------------------------------------
@@ -516,8 +515,8 @@ def flow(ch: F.Chapter) -> None:
 
 @chapter
 def children(ch: F.Chapter) -> None:
-    specs = baseline()
-    alive = survivors(specs)
+    specs = W.specs
+    alive = W.alive
     pa = pooled("parents")
     settled_ = pa[pa[:, PA["t"]] >= F.SETTLED]
     founders = np.concatenate([F.sample_pass(s.run_id)["parents"] for s in specs])
@@ -551,10 +550,10 @@ def children(ch: F.Chapter) -> None:
                           "colour": "#eef4fa"}])],
         columns=2, title="Children, by the wealth of the parent",
         caption="Agents alive at the start of the reproduction phases of every 100th iteration from 500 on, in "
-                "the 26 worlds that lived to the end, sorted by the tokens they held. Left: the share of them "
+                f"{W.lived}, sorted by the tokens they held. Left: the share of them "
                 "that had a child. Right: for those that did, the share of their tokens they gave it — the "
                 "white dot is the median, the cyan bar runs from the 25th to the 75th percentile.",
-        recipe=recipe(surviving_text(), SAMPLE,
+        recipe=recipe(W.surviving_text(), SAMPLE,
                       ["For every 100th iteration t from 500 on, take the agents of frame `2·t − 1` (after the "
                        "game before) with their `tokens`.",
                        "In frame `2·t`, `decisions.births` lists every parent (`agent`) with `tokens_before` and "
@@ -579,11 +578,11 @@ def children(ch: F.Chapter) -> None:
                  y={"label": "share of the births", "min": 0}, series=[bars(hcats, hshare, VIOLET)],
                  legend=False)],
         columns=2, title="How a child is joined to the world",
-        caption="Every birth in the reproduction phases of every 100th iteration from 500 on, in the 26 worlds "
-                "that lived to the end. Left: how many of its parent's candidates — the parent itself and its "
+        caption="Every birth in the reproduction phases of every 100th iteration from 500 on, in "
+                f"{W.lived}. Left: how many of its parent's candidates — the parent itself and its "
                 "neighbours — the child was joined to at birth. Right: how many of its own connections the "
                 "parent handed to the child. A child with no connection at all is cut off at once.",
-        recipe=recipe(surviving_text(), SAMPLE,
+        recipe=recipe(W.surviving_text(), SAMPLE,
                       ["In frame `2·t` of every 100th iteration t from 500 on, read `decisions.births`: the "
                        "length of `links` and of `handed_over` for every birth.",
                        "Count the births by these lengths and divide by all births."]))
@@ -598,7 +597,7 @@ def children(ch: F.Chapter) -> None:
         series=[bars(dl, p_by_degree, GREEN)], legend=False,
         caption="As the left panel of the figure above, with the agents sorted by their number of connections "
                 "at the start of the reproduction phase instead of their tokens.",
-        recipe=recipe(surviving_text(), SAMPLE,
+        recipe=recipe(W.surviving_text(), SAMPLE,
                       ["As for the figure above, counting each agent's connections in frame `2·t − 1`."]))
     ch.number("by_degree", dict(zip(dl, p_by_degree)))
 
@@ -620,16 +619,16 @@ def children(ch: F.Chapter) -> None:
                            series=[band_series(data, None, colour)], legend=False))
     ch.grid(
         "over-time", panels, columns=2, title="Reproduction over a world's life",
-        caption="After every reproduction phase of the 30 baseline worlds ([Reproduction statistics]"
+        caption=f"After every reproduction phase of the {len(specs)} baseline worlds ([Reproduction statistics]"
                 "(../notes/reproduction-statistics.md)): the mean share of its tokens a parent gave its child "
                 "(`meanInvestedShare`); the tokens given to all children as a share of all tokens "
                 "(`reproTokenShare`); the mean number of connections a child was born with (`meanChildLinks`); "
                 f"and the connections handed over per birth (`handovers` / `births`). {BAND_WORDS}.",
-        recipe=recipe(runs_text(), STATS_FILE,
+        recipe=recipe(W.runs_text(), STATS_FILE,
                       ["Take the rows with `phase` = 1: `meanInvestedShare`, `reproTokenShare`, "
                        "`meanChildLinks`, and `handovers` divided by `births`.", *BAND_STEPS]))
     for stat in ("meanInvestedShare", "reproTokenShare", "meanChildLinks"):
-        ch.number(f"{stat}_settled", describe([mean_over(s.run_id, stat, 500, 2999, 1) for s in alive]))
+        ch.number(f"{stat}_settled", describe([mean_over(s.run_id, stat, *W.window, 1) for s in alive]))
 
 
 # ---------------------------------------------------------------------------
@@ -676,11 +675,11 @@ def lognormal_ccdf(x: np.ndarray, mu: float, sigma: float) -> np.ndarray:
 @chapter
 def powerlaws(ch: F.Chapter) -> None:
     import gol_series
-    specs = baseline()
-    alive = survivors(specs)
+    specs = W.specs
+    alive = W.alive
 
     # One world's degrees, the two ways of fitting them.
-    w = F.world_pass("B1-10000-s001")
+    w = F.world_pass(W.run(1))
     degrees = np.array(w["last"]["degrees"], float)
     xs, ys = ccdf(degrees)
     mle = gol_series._scale_free(list(degrees))
@@ -705,8 +704,8 @@ def powerlaws(ch: F.Chapter) -> None:
                 "(the viewer's `degreeExponent`). Red: the power law fitted by maximum likelihood to the "
                 f"tail from the k that fits best, k = {mle['kMin']:.0f} (`degreeGamma`, `degreeKMin`), which "
                 f"holds {100 * tail:.1f}% of the agents ([Fitting a power law](../notes/power-law-fit.md)).",
-        recipe=recipe("`B1-10000-s001`.", FRAMES,
-                      ["Read the last frame after a game (`5999`) and count every agent's connections in `edges`.",
+        recipe=recipe(f"`{W.run(1)}`.", FRAMES,
+                      [f"Read the last frame after a game (`{W.frame(W.last)}`) and count every agent's connections in `edges`.",
                        "Dots: for each distinct count k, the share of agents with at least k.",
                        "Dashed: least squares of ln(share) on ln(k) over the dots.",
                        "Red: `gol_series._scale_free(degrees)` — for each candidate k_min, γ = 1 + n / Σ ln(k / "
@@ -717,9 +716,9 @@ def powerlaws(ch: F.Chapter) -> None:
     p_worlds = [tail_pvalue(F.world_pass(s.run_id)["last"]["degrees"], 100) for s in alive]
     ch.number("degree_p_per_world", {"values": p_worlds, "ruled_out": int(sum(p <= 0.1 for p in p_worlds))})
 
-    groups = [[mean_over(s.run_id, st, 500, 2999) for s in alive]
+    groups = [[mean_over(s.run_id, st, *W.window) for s in alive]
               for st in ("degreeGamma", "degreeExponent", "tokenExponent")]
-    groups2 = [[mean_over(s.run_id, st, 500, 2999) for s in alive]
+    groups2 = [[mean_over(s.run_id, st, *W.window) for s in alive]
                for st in ("degreeTailShare", "degreeGammaKS")]
     c1 = ["degrees, maximum likelihood", "degrees, least squares", "tokens, least squares"]
     c2 = ["share of agents in the fitted tail", "Kolmogorov–Smirnov distance"]
@@ -730,23 +729,23 @@ def powerlaws(ch: F.Chapter) -> None:
             dict(title="How much the tail is, and how well it fits", x={"label": "", "categories": c2},
                  y={"label": "share or distance", "min": 0, "max": 0.3},
                  series=dots(c2, groups2, [RED, RED]), legend=False)],
-        columns=2, title="Power-law exponents of the 26 worlds",
-        caption="One dot per world that lived to the end, at its mean over the measurements (every 25 "
+        columns=2, title=f"Power-law exponents of the {len(alive)} worlds",
+        caption=f"One dot per {W.per_lived}, at its mean over the measurements (every 25 "
                 "iterations) from iteration 500 on; the bar is the median. Left: the exponent γ of the degree "
                 "distribution by maximum likelihood on the tail (`degreeGamma`) and by least squares on the "
                 "whole distribution (`degreeExponent`), and of the token distribution by least squares "
                 "(`tokenExponent`). Right: the share of agents in the tail the maximum-likelihood fit chose "
                 "(`degreeTailShare`) and the largest gap between that tail and the fitted law "
                 "(`degreeGammaKS`).",
-        recipe=recipe(surviving_text(), STATS_FILE,
+        recipe=recipe(W.surviving_text(), STATS_FILE,
                       ["Average `degreeGamma`, `degreeExponent`, `tokenExponent`, `degreeTailShare` and "
-                       "`degreeGammaKS` over the rows with `phase` = 2 and 500 ≤ `iteration` ≤ 2,999.",
+                       f"`degreeGammaKS` over the rows with `phase` = 2 and 500 ≤ `iteration` ≤ {W.last:,}.",
                        "One dot per run, a bar at the median."]))
     for st, g in zip(("degreeGamma", "degreeExponent", "tokenExponent", "degreeTailShare", "degreeGammaKS"),
                      groups + groups2):
         ch.number(f"{st}_settled", describe(g))
     for st in ("degreeGammaR2", "degreeExponentR2", "tokenExponentR2", "degreeKMin"):
-        ch.number(f"{st}_settled", describe([mean_over(s.run_id, st, 500, 2999) for s in alive]))
+        ch.number(f"{st}_settled", describe([mean_over(s.run_id, st, *W.window) for s in alive]))
 
     # The tokens: a power law, or a log-normal?
     tokens = np.concatenate([np.array(F.world_pass(s.run_id)["last"]["tokens"], float) for s in alive])
@@ -759,18 +758,18 @@ def powerlaws(ch: F.Chapter) -> None:
         "tokens-fit", title="Two candidate laws for the tokens",
         x={"label": "tokens x (logarithmic)", "log": True, "min": 1},
         y={"label": "share of agents with at least x (logarithmic)", "log": True, "max": 1, "min": 1e-5},
-        series=[{"label": f"{len(tokens):,} agents of 26 worlds, after the last game", "x": xs.tolist(),
+        series=[{"label": f"{len(tokens):,} agents of {len(alive)} worlds, after the last game", "x": xs.tolist(),
                  "y": ys.tolist(), "points": True, "size": 5, "colour": YELLOW},
                 line(kfit, fit["coverage"] * ((kfit - 0.5) / (fit["kMin"] - 0.5)) ** (1 - fit["exponent"]),
                      f"power law from x = {fit['kMin']:.0f}, exponent {fit['exponent']:.2f}", RED, width=2),
                 line(xs, lognormal_ccdf(xs, mu, sigma), f"log-normal: ln x has mean {mu:.2f}, sd {sigma:.2f}",
                      CYAN, width=2, dash=[6, 4])],
-        caption="Dots: for every token count x that occurs among the agents alive after the last game of the 26 "
-                "worlds that lived to the end, the share holding at least x. Red: a power law fitted by maximum "
+        caption="Dots: for every token count x that occurs among the agents alive after the last game of "
+                f"{W.lived}, the share holding at least x. Red: a power law fitted by maximum "
                 "likelihood to the tail, from the x that fits it best. Cyan: a log-normal distribution with the "
                 "mean and standard deviation of ln x over all agents — a distribution whose logarithm is "
                 "normal. Both on logarithmic axes.",
-        recipe=recipe(surviving_text(), FRAMES,
+        recipe=recipe(W.surviving_text(), FRAMES,
                       ["Pool the `tokens` of the last frame of every run.",
                        "Dots: for each distinct x, the share of agents with at least x.",
                        "Red: `gol_series._scale_free(tokens)`, as for the degrees.",
@@ -795,12 +794,12 @@ def powerlaws(ch: F.Chapter) -> None:
         y={"label": "share of games removing at least n (logarithmic)", "log": True, "max": 1},
         series=[line(cx, cy * np.mean(cut > 0), "cut off", ORANGE, width=2),
                 line(sx, sy * np.mean(starved > 0), "starved", RED, width=2)],
-        caption="Of all games from iteration 500 on in the 26 worlds that lived to the end "
+        caption=f"Of all games from iteration 500 on in {W.lived} "
                 f"({len(cut):,} games), the share that cut off at least n agents (orange) and the share in "
                 "which at least n agents starved (red), for every n, on logarithmic axes. Games in which no "
                 "one was removed count in the denominator, which is why the curves start below 1.",
-        recipe=recipe(surviving_text(), STATS_FILE,
-                      ["Take `orphaned` and `starved` of every row with `phase` = 2 and 500 ≤ `iteration` ≤ 2,999.",
+        recipe=recipe(W.surviving_text(), STATS_FILE,
+                      [f"Take `orphaned` and `starved` of every row with `phase` = 2 and 500 ≤ `iteration` ≤ {W.last:,}.",
                        "For each n that occurs, the share of rows with at least n."]))
     ch.number("avalanches", {"games": int(len(cut)), "share_with_cut": float(np.mean(cut > 0)),
                              "max_cut": float(cut.max()), "share_cut_ge_10": float(np.mean(cut >= 10)),
@@ -813,12 +812,13 @@ def powerlaws(ch: F.Chapter) -> None:
     spectra = []
     for s in alive:
         its, n = series(s.run_id, "nodes")
-        x = n[(its >= 500) & (its <= 2999)]
+        x = n[(its >= W.settled) & (its <= W.last)]
         x = x - np.polyval(np.polyfit(np.arange(x.size), x, 1), np.arange(x.size))
         power = np.abs(np.fft.rfft(x * np.hanning(x.size))) ** 2
         spectra.append(power / power[1:].sum())
     power = np.mean(spectra, axis=0)[1:]
-    freq = np.arange(1, power.size + 1) / 2500
+    values = W.last - W.settled + 1
+    freq = np.arange(1, power.size + 1) / values
     # Averaged over bands of equal width on the log axis, so the line is legible.
     edges_ = np.geomspace(freq[0], freq[-1] * 1.0001, 40)
     fx, fy = [], []
@@ -834,21 +834,21 @@ def powerlaws(ch: F.Chapter) -> None:
         "spectrum", title="The rhythm of the wander",
         x={"label": "frequency, cycles per iteration (logarithmic)", "log": True},
         y={"label": "power (logarithmic)", "log": True},
-        series=[line(fx, fy, "number of agents, 26 worlds", BLUE, width=2),
+        series=[line(fx, fy, f"number of agents, {len(alive)} worlds", BLUE, width=2),
                 line(fx[fitm], np.exp(a1) * fx[fitm] ** b1, f"a power law, slope {b1:.2f}", RED, width=1.5,
                      dash=[5, 4])],
         caption="The power spectrum of the number of agents ([The power spectrum](../notes/power-spectrum.md)): "
                 "for each frequency, how much of a world's up-and-down motion happens at that rhythm — slow "
                 "wanders on the left, iteration-to-iteration jitter on the right. Each world's series from "
-                "iteration 500 to 2,999, with its straight-line trend removed and a Hann window applied, "
-                "normalised to total power 1 and averaged over the 26 worlds; then averaged in 39 bands of equal "
+                f"iteration {W.stretch}, with its straight-line trend removed and a Hann window applied, "
+                f"normalised to total power 1 and averaged over the {len(alive)} worlds; then averaged in 39 bands of equal "
                 "width on the logarithmic axis. Red: the straight line least squares fits between periods of "
                 "500 and 4 iterations.",
-        recipe=recipe(surviving_text(), STATS_FILE,
-                      ["For each run, take `nodes` of the rows with `phase` = 2 and 500 ≤ `iteration` ≤ 2,999 "
-                       "(2,500 values); subtract the least-squares straight line.",
-                       "Multiply by a Hann window and take |FFT|², the power at frequencies k/2,500, "
-                       "k = 1 … 1,250; divide by the total.",
+        recipe=recipe(W.surviving_text(), STATS_FILE,
+                      [f"For each run, take `nodes` of the rows with `phase` = 2 and 500 ≤ `iteration` ≤ {W.last:,} "
+                       f"({values:,} values); subtract the least-squares straight line.",
+                       f"Multiply by a Hann window and take |FFT|², the power at frequencies k/{values:,}, "
+                       f"k = 1 … {values // 2:,}; divide by the total.",
                        "Average over runs; average within bands of equal width in log frequency; fit a line on "
                        "log–log axes between frequencies 1/500 and 1/4."]))
     ch.number("spectrum", {"slope": float(b1)})

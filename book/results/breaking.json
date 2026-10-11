@@ -181,7 +181,7 @@
    "recipe": "**Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` \u2026 `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in Chapter 9). They are made with `python3 gol_lab.py run E02`.\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).\n\n1. Take `orphaned` of the rows with `phase` = 2 and 500 \u2264 `iteration` \u2264 2,999.\n2. For every n, add up `orphaned` over the rows with `orphaned` \u2265 n and divide by the total.\n\n**To make it again:** `python3 book_figures.py breaking`."
   },
   "one-world": {
-   "title": "Six hundred iterations of one world",
+   "title": "600 iterations of one world",
    "caption": "The world with seed 1, iterations 1,000 to 1,600. Top: its number of agents after every game. Middle: how many agents each game cut off. Bottom: before each game, the largest share of the world held to the rest by a single bridge, measured on the network as it stood before the cleanup.",
    "recipe": "**Runs.** `B1-10000-s001`.\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).\n\n1. Take `nodes`, `orphaned` and `cutRiskBefore` of the rows with `phase` = 2 and 1,000 \u2264 `iteration` \u2264 1,600.\n\n**To make it again:** `python3 book_figures.py breaking`."
   }

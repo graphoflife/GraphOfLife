@@ -10,7 +10,11 @@ import numpy as np
 import book_figures as F
 from book_figures import (FRAMES, STATS_FILE, band_series, chapter, describe, line, recipe, rows, runs_of,
                           runs_text, series, surviving_text, survivors)
-from book_chapters.common import BAND_STEPS, BAND_WORDS, BLUE, GREY, YELLOW, baseline
+from book_chapters.common import BAND_WORDS, BLUE, GREY, WORLD_SETS, YELLOW, band_steps
+
+#: Part I teaches with the worlds of 10,000 tokens, whatever worlds Parts II and III read.
+PART_ONE = WORLD_SETS["E02"]
+BAND_STEPS = band_steps(PART_ONE)
 
 
 # ---------------------------------------------------------------------------
@@ -53,7 +57,7 @@ def world(ch: F.Chapter) -> None:
 @chapter
 def iteration(ch: F.Chapter) -> None:
     """Chapter 3: what one iteration does, on average, in a settled world."""
-    alive = survivors(baseline())
+    alive = survivors(PART_ONE.specs)
     sums = {k: 0.0 for k in ("births", "orphaned1", "starved1", "starved2", "orphaned2", "start")}
     for s in alive:
         r = rows(s.run_id)
@@ -94,7 +98,7 @@ def iteration(ch: F.Chapter) -> None:
 @chapter
 def brain(ch: F.Chapter) -> None:
     """Chapter 4: one decision a brain makes, before and after selection."""
-    specs = baseline()
+    specs = PART_ONE.specs
     first, last = [], []
     for s in specs:
         first += F.world_pass(s.run_id)["shares"]["first"]
@@ -130,7 +134,7 @@ def brain(ch: F.Chapter) -> None:
 @chapter
 def measure(ch: F.Chapter) -> None:
     """Chapter 5: how a band is made from the worlds."""
-    specs = baseline()
+    specs = PART_ONE.specs
     thin_lines = []
     for s in specs:
         its, n = F.thin(*series(s.run_id, "nodes"), 25)

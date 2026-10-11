@@ -172,7 +172,7 @@ Following every founder's line in one world shows it plainly:
 <!-- figure youth/founder-lines -->
 ![Whose descendants? World of seed 1, first 300 iterations](../figures/youth/founder-lines.svg)
 
-**Whose descendants? World of seed 1, first 300 iterations.** After every game, the share of the living agents that descend from each of the 100 founders, stacked. Each coloured layer is the line of one founder; the seven founders whose lines ever held the most are drawn in colour, the other 93 together in grey. Where a layer reaches the full height, everyone alive descends from that founder.
+**Whose descendants? World of seed 1, first 300 iterations.** After every game, the share of the living agents that descend from each of the 100 founders, stacked. Each coloured layer is the line of one founder; the seven founders whose lines ever held the most are drawn in colour, the other 93 together in grey (most of them with no descendants alive at all). Where a layer reaches the full height, everyone alive descends from that founder.
 
 > [!example]- How to make this figure
 > **Runs.** `B1-10000-s001`, one of the 30 baseline runs.

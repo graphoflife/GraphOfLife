@@ -169,7 +169,7 @@ were 100 iterations old or more; and ten were over a thousand.
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
 > 1. After every game (frames with `phase` = 2) take the median of `ages`.
-> 2. Cut the iterations into stretches of 5 (600 stretches over 3,000 iterations) and take each world's mean in each stretch.
+> 2. Cut the 3,000 iterations into 600 stretches of 5 and take each world's mean in each stretch.
 > 3. In each stretch, take the median, the 25th and 75th and the 5th and 95th percentiles of those means over the worlds that still have a value there (a world that died has none after its death).
 >
 > **To make it again:** `python3 book_figures.py births`.

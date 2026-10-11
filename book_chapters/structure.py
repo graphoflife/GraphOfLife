@@ -15,12 +15,14 @@ import book_data as D
 import book_figures as F
 from book_graph import bfs, degree_preserving, graph, triangles
 from book_figures import (DEGREE_CLASSES, FRAMES, STATS_FILE, band_series, cells, chapter, describe,
-                          dots, line, mean_over, recipe, runs_text, series, surviving_text, survivors)
+                          dots, line, mean_over, recipe, series)
 from book_chapters.common import (BAND_STEPS, BAND_WORDS, BLUE, CYAN, GREEN, GREY, ORANGE, RED,
-                                  VIOLET, YELLOW, baseline)
+                                  VIOLET, WORLDS as W, YELLOW, ceiling)
 from book_chapters.measures import settled_rows
 
-LAST = 2999
+LAST = W.last
+#: The stretch of one world's life Chapter 32 draws game by game: one with big cuts in it.
+ONE_WORLD = {"E02": (1, (1000, 1600)), "E10": (1, (900, 1499))}[W.experiment]
 
 
 def log_classes(values: np.ndarray, edges: Sequence[float]) -> List[Tuple[float, float, np.ndarray]]:
@@ -37,7 +39,7 @@ DEGREE_EDGES = [1, 2, 3, 4, 6, 9, 13, 20, 30, 50, 100, 200, 10 ** 5]
 
 
 def last_frames() -> List[Tuple[Any, Dict[str, Any]]]:
-    return [(s, D.frame_at(s.run_id, LAST, 2)) for s in survivors(baseline())]
+    return [(s, D.frame_at(s.run_id, LAST, 2)) for s in W.alive]
 
 
 # ---------------------------------------------------------------------------
@@ -46,7 +48,7 @@ def last_frames() -> List[Tuple[Any, Dict[str, Any]]]:
 
 @chapter
 def scaling(ch: F.Chapter) -> None:
-    alive = survivors(baseline())
+    alive = W.alive
     deg, tok, tri, clu_k, clu, knn_k, knn = [], [], [], [], [], [], []
     for s, frame in last_frames():
         adj = graph(frame)
@@ -68,16 +70,17 @@ def scaling(ch: F.Chapter) -> None:
     clu_k, clu, knn_k, knn = map(lambda v: np.array(v, float), (clu_k, clu, knn_k, knn))
 
     # Tokens against degree: a two-dimensional histogram.
-    tedges = [1, 2, 3, 4, 6, 9, 13, 20, 30, 50, 100, 200, 500, 1000, 5000]
+    tedges = [1, 2, 3, 4, 6, 9, 13, 20, 30, 50, 100, 200, 500, 1000, 5000, 20000, 10 ** 6]
     grid = cells((a, b, c, d, int(m2.sum())) for _, (a, b), m in log_classes(deg, DEGREE_EDGES)
                  for _, (c, d), m2 in log_classes(tok[m], tedges))
     slope, intercept = np.polyfit(np.log(deg), np.log(tok), 1)
-    ks = np.array([1, 400])
+    kmax = ceiling(deg.max())
+    ks = np.array([1, kmax])
     mid = [(np.sqrt(a * b), float(np.median(tok[m]))) for _, (a, b), m in log_classes(deg, DEGREE_EDGES)]
     ch.figure(
         "tokens-degree", title="Tokens against connections",
-        x={"label": "connections k (logarithmic)", "log": True, "min": 1, "max": 400},
-        y={"label": "tokens (logarithmic)", "log": True, "min": 1, "max": 5000},
+        x={"label": "connections k (logarithmic)", "log": True, "min": 1, "max": kmax},
+        y={"label": "tokens (logarithmic)", "log": True, "min": 1, "max": ceiling(tok.max())},
         series=[grid,
                 line([m[0] for m in mid], [m[1] for m in mid], "median tokens of each class of k", "#eef4fa",
                      width=2),
@@ -86,7 +89,7 @@ def scaling(ch: F.Chapter) -> None:
                 line(ks, mid[0][1] * (ks + 1) / 2, "tokens ∝ k + 1 (an even split's resting state)", CYAN,
                      width=1.5, dash=[2, 3])],
         colourbar={"map": "viridis", "min": 1, "max": max(grid["value"]), "label": "agents", "log": True},
-        caption="Every agent alive after the last game of the 26 worlds that lived to the end "
+        caption=f"Every agent alive after the last game of {W.lived} "
                 f"({len(deg):,} agents), counted in cells of connections k and tokens, both in classes of "
                 "growing width; a cell's colour is how many agents it holds, on a logarithmic scale. White: the "
                 "median tokens in each class of k. Red: the straight line least squares fits through ln(tokens) "
@@ -94,8 +97,8 @@ def scaling(ch: F.Chapter) -> None:
                 "tokens proportional to k + 1, through the median at k = 1 — where an even split of every "
                 "stake would leave the tokens on a network that held still "
                 "([Chapter 27](27-where-the-tokens-flow.md)).",
-        recipe=recipe(surviving_text(), FRAMES,
-                      ["Read frame `5999` of every run: each agent's tokens and its connections in `edges`.",
+        recipe=recipe(W.surviving_text(), FRAMES,
+                      [f"Read frame `{W.frame(LAST)}` of every run: each agent's tokens and its connections in `edges`.",
                        "Count the agents in each cell of the classes shown; colour by the count.",
                        "Fit ln(tokens) = a + b·ln(k) by least squares over all agents (the viewer's "
                        "`tokensVsDegree` does this for one frame)."]))
@@ -126,7 +129,7 @@ def scaling(ch: F.Chapter) -> None:
     s1, i1 = np.polyfit(np.log(clu_k[clu > 0]), np.log(clu[clu > 0]), 1)
     tcls = classes_mean(deg, tri)
     s2, i2 = np.polyfit(np.log(deg[tri > 0]), np.log(tri[tri > 0]), 1)
-    kk = np.array([2, 300])
+    kk = np.array([2, max(300, kmax)])
     ch.grid(
         "clustering-triangles", [
             dict(title="Clustering against connections", x={"label": "connections k (logarithmic)", "log": True},
@@ -142,7 +145,7 @@ def scaling(ch: F.Chapter) -> None:
                          line(kk, np.exp(i2) * kk ** s2, f"least squares: slope {s2:.2f}", RED, width=1.5, dash=[5, 4]),
                          line(kk, tcls[0, 1] * (kk / kk[0]) ** 2, "slope 2", GREY, width=1, dash=[2, 3])])],
         columns=2, title="How an agent's neighbourhood closes, by its connections",
-        caption="Agents alive after the last game of the 26 worlds that lived to the end, in classes of their "
+        caption=f"Agents alive after the last game of {W.lived}, in classes of their "
                 "connections k. Left: the geometric mean (the mean of the logarithms, turned back) of the clustering "
                 "coefficient — the share of pairs of an agent's "
                 "neighbours that are joined to each other — of the agents with k ≥ 2 and clustering above 0. "
@@ -150,8 +153,8 @@ def scaling(ch: F.Chapter) -> None:
                 "in at least one. "
                 "Red: least squares on the logarithms of all those agents (not of the class means); grey: the "
                 "slopes −1 and 2 for comparison.",
-        recipe=recipe(surviving_text(), FRAMES,
-                      ["Read frame `5999` of every run; for every agent count its triangles: pairs of its "
+        recipe=recipe(W.surviving_text(), FRAMES,
+                      [f"Read frame `{W.frame(LAST)}` of every run; for every agent count its triangles: pairs of its "
                        "neighbours that are joined.",
                        "Clustering of an agent with k ≥ 2 neighbours = triangles / (k(k − 1)/2).",
                        "Average ln(y) by class of k and turn it back for the dots; fit ln(y) on ln(k) over the agents with y > 0 for the "
@@ -160,7 +163,7 @@ def scaling(ch: F.Chapter) -> None:
     ch.number("triangles_slope", float(s2))
 
     n = classes_mean(knn_k, knn, positive=False)
-    assort = [mean_over(s.run_id, "assortativity", 500, 2999) for s in alive]
+    assort = [mean_over(s.run_id, "assortativity", *W.window) for s in alive]
     ch.figure(
         "neighbours", title="Whom the well-connected are joined to",
         x={"label": "connections k of an agent (logarithmic)", "log": True},
@@ -168,20 +171,20 @@ def scaling(ch: F.Chapter) -> None:
         series=[{"label": "mean of each class of k", "x": n[:, 0].tolist(), "y": n[:, 1].tolist(),
                  "points": True, "size": 8, "colour": ORANGE},
                 line(n[:, 0], n[:, 1], None, ORANGE, width=1)],
-        caption="For the agents alive after the last game of the 26 worlds that lived to the end, in classes of "
+        caption=f"For the agents alive after the last game of {W.lived}, in classes of "
                 "their connections k: the mean, over the class, of the average number of connections of an "
                 "agent's neighbours. A falling line means the well-connected are joined mostly to the poorly "
                 "connected ([Assortativity](../notes/assortativity.md)).",
-        recipe=recipe(surviving_text(), FRAMES,
-                      ["Read frame `5999` of every run; for every agent, the mean degree of its neighbours.",
+        recipe=recipe(W.surviving_text(), FRAMES,
+                      [f"Read frame `{W.frame(LAST)}` of every run; for every agent, the mean degree of its neighbours.",
                        "Average by class of the agent's own degree."]))
     ch.number("assortativity_settled", describe(assort))
     ch.number("neighbours", [{"k": float(k), "mean": float(v)} for k, v in n])
 
     names = ["tokensVsDegree", "trianglesVsDegree", "clusteringVsDegree", "changeVsTokens"]
     labels = ["tokens ~ k", "triangles ~ k", "clustering ~ k", "|change| ~ tokens"]
-    ex = [[mean_over(s.run_id, st, 500, 2999) for s in alive] for st in names]
-    r2 = [[mean_over(s.run_id, st + "R2", 500, 2999) for s in alive] for st in names]
+    ex = [[mean_over(s.run_id, st, *W.window) for s in alive] for st in names]
+    r2 = [[mean_over(s.run_id, st + "R2", *W.window) for s in alive] for st in names]
     ch.grid(
         "exponents", [
             dict(title="Exponents", x={"label": "", "categories": labels}, y={"label": "slope on log–log axes"},
@@ -190,16 +193,16 @@ def scaling(ch: F.Chapter) -> None:
             dict(title="How tightly the agents follow them", x={"label": "", "categories": labels},
                  y={"label": "R²", "min": 0, "max": 1}, series=dots(labels, r2, [YELLOW, VIOLET, GREEN, CYAN]),
                  legend=False)],
-        columns=2, title="Four scaling relations in the 26 worlds",
-        caption="One dot per world that lived to the end: its mean, over the measurements every 25 iterations "
+        columns=2, title=f"Four scaling relations in the {len(alive)} worlds",
+        caption=f"One dot per {W.per_lived}: its mean, over the measurements every 25 iterations "
                 "from 500 on, of four slopes fitted by least squares on the logarithms of the agents of a frame, "
                 "and of their R². Tokens and triangles against connections, clustering against connections, and "
                 "the size of an agent's change in tokens over the game against the tokens it holds "
                 "([Scaling relations](../notes/scaling-relations.md)).",
-        recipe=recipe(surviving_text(), STATS_FILE,
+        recipe=recipe(W.surviving_text(), STATS_FILE,
                       ["Average `tokensVsDegree`, `trianglesVsDegree`, `clusteringVsDegree` and "
                        "`changeVsTokens`, and the same with `R2` appended, over the rows with `phase` = 2 and "
-                       "500 ≤ `iteration` ≤ 2,999.", "One dot per run, a bar at the median."]))
+                       f"500 ≤ `iteration` ≤ {LAST:,}.", "One dot per run, a bar at the median."]))
     for st, a, b in zip(names, ex, r2):
         ch.number(f"{st}_settled", {"slope": describe(a), "r2": describe(b)})
 
@@ -225,6 +228,18 @@ def exact_geometry(adj: Dict[int, set]) -> Dict[str, float]:
     return {"agents": len(piece), "mean_path": total / pairs, "diameter": max(eccentricity),
             "radius": min(eccentricity), "gap": gol_spectral.spectral_gap(piece, sub),
             "cycle_rank": edges - len(piece) + 1}
+
+
+@D.measure("nullgeo")
+def null_geometry(run_id: str) -> Dict[str, Any]:
+    """
+    A world after its last game against five random twins — the same connections
+    at every agent, wired at random — measured exactly: every agent's distance to
+    every other, which in a world of 15,000 agents is a few minutes per network.
+    """
+    adj = graph(D.frame_at(run_id, D.last_iteration(run_id), 2))
+    nulls = [exact_geometry(degree_preserving(adj, seed)) for seed in range(1, 6)]
+    return {"world": exact_geometry(adj), "random": {k: float(np.mean([g[k] for g in nulls])) for k in nulls[0]}}
 
 
 def balls(adj: Dict[int, set], sources: int = 24, radius: int = 40) -> np.ndarray:
@@ -309,9 +324,9 @@ def fundamental_cycles(adj: Dict[int, set]) -> Dict[int, int]:
 
 @chapter
 def geometry(ch: F.Chapter) -> None:
-    specs = baseline()
-    alive = survivors(specs)
-    frame = D.frame_at("B1-10000-s001", LAST, 2)
+    specs = W.specs
+    alive = W.alive
+    frame = D.frame_at(W.run(1), LAST, 2)
     adj = graph(frame)
     v = balls(adj)
     r = np.arange(len(v))
@@ -340,8 +355,8 @@ def geometry(ch: F.Chapter) -> None:
                 "the radius where half the world is reached. Right, only the vertical axis logarithmic: "
                 "exponential growth, as in a tree or a random network, would be a straight line there "
                 "([Dimension and curvature](../notes/ball-dimension-and-curvature.md)).",
-        recipe=recipe("`B1-10000-s001`.", FRAMES,
-                      ["Read frame `5999`; build the network from `edges`.",
+        recipe=recipe(f"`{W.run(1)}`.", FRAMES,
+                      [f"Read frame `{W.frame(LAST)}`; build the network from `edges`.",
                        "From every ⌊n/24⌋-th agent of the id-sorted list, breadth-first search; count the agents "
                        "at distance ≤ r for r = 1 … 40; average over the 24 sources.",
                        "Fit ln V(r) = a + d·ln r by least squares for r with V(r) ≤ n/2."]))
@@ -358,20 +373,20 @@ def geometry(ch: F.Chapter) -> None:
         panels.append(dict(title=title, x={"label": "iteration"}, y=y,
                            series=[band_series([series(s.run_id, stat) for s in specs], None, colour)],
                            legend=False, guides=[{"axis": "y", "at": 0}] if stat == "ricciCurvature" else []))
-        ch.number(f"{stat}_settled", describe([mean_over(s.run_id, stat, 500, 2999) for s in alive]))
+        ch.number(f"{stat}_settled", describe([mean_over(s.run_id, stat, *W.window) for s in alive]))
         ch.number(f"{stat}_first", F.A.bands([series(s.run_id, stat) for s in specs])["y"][0])
     ch.grid(
         "measures", panels, columns=2, title="Four measures of a world's geometry",
-        caption="Every 25 iterations, in the 30 baseline worlds: the dimension and the curvature read off how "
+        caption=f"Every 25 iterations, in the {len(specs)} baseline worlds: the dimension and the curvature read off how "
                 "balls grow ([Dimension and curvature](../notes/ball-dimension-and-curvature.md)), the box "
                 "dimension ([Box dimension](../notes/box-dimension.md)), and the spectral gap, on a logarithmic "
                 f"axis ([The spectral gap](../notes/spectral-gap.md)). In each, {BAND_WORDS[0].lower()}"
                 f"{BAND_WORDS[1:]}.",
-        recipe=recipe(runs_text(), STATS_FILE,
+        recipe=recipe(W.runs_text(), STATS_FILE,
                       ["Take `dimension`, `ricciCurvature`, `boxDimension` and `spectralGap` of the rows with "
                        "`phase` = 2 (measured every 25 iterations).", *BAND_STEPS[1:]]))
     for stat in ("boxDimensionR2", "radius", "diameter", "meanPathLength", "cycleRank", "loopDensity"):
-        ch.number(f"{stat}_settled", describe([mean_over(s.run_id, stat, 500, 2999) for s in alive]))
+        ch.number(f"{stat}_settled", describe([mean_over(s.run_id, stat, *W.window) for s in alive]))
 
     counts = box_counts(adj)
     sz = np.array([c[0] for c in counts], float)
@@ -389,8 +404,8 @@ def geometry(ch: F.Chapter) -> None:
                 "the agents no box holds yet. Dots: how many boxes it takes for ℓ = 1, 3, 5, 9, 17 and 33; red: "
                 "the least-squares line on logarithmic axes, whose slope is minus the box dimension "
                 "([Box dimension](../notes/box-dimension.md)).",
-        recipe=recipe("`B1-10000-s001`.", FRAMES,
-                      ["Read frame `5999`; order the agents by degree, highest first.",
+        recipe=recipe(f"`{W.run(1)}`.", FRAMES,
+                      [f"Read frame `{W.frame(LAST)}`; order the agents by degree, highest first.",
                        "For each ℓ: go down the order; every agent not yet in a box starts a new box, which takes "
                        "every agent within (ℓ − 1)/2 steps of it; count the boxes.",
                        "Fit ln(boxes) on ln ℓ by least squares."]))
@@ -403,11 +418,11 @@ def geometry(ch: F.Chapter) -> None:
     ch.figure(
         "distances", title="Three distances", x={"label": "iteration"}, y={"label": "steps", "min": 0},
         series=lines_,
-        caption="Every 25 iterations, in the 30 baseline worlds: the diameter, the radius and the mean path "
+        caption=f"Every 25 iterations, in the {len(specs)} baseline worlds: the diameter, the radius and the mean path "
                 "length, all estimated from breadth-first searches out of 8 to 16 spread agents "
                 f"([Radius and diameter](../notes/radius-and-diameter.md)). For each, {BAND_WORDS[0].lower()}"
                 f"{BAND_WORDS[1:]}.",
-        recipe=recipe(runs_text(), STATS_FILE,
+        recipe=recipe(W.runs_text(), STATS_FILE,
                       ["Take `diameter`, `radius` and `meanPathLength` of the rows with `phase` = 2.",
                        *BAND_STEPS[1:]]))
 
@@ -424,17 +439,16 @@ def geometry(ch: F.Chapter) -> None:
                 f"{int(len(frame['edges']) - n + 1):,} connections over, each closing one loop of a cycle basis "
                 "([Loops](../notes/loops.md)). For every count x, the share of agents that at least x of those "
                 f"loops pass through. {100 * np.mean(through == 0):.0f}% of the agents lie on none of them.",
-        recipe=recipe("`B1-10000-s001`.", FRAMES,
-                      ["Read frame `5999`; build a breadth-first spanning tree.",
+        recipe=recipe(f"`{W.run(1)}`.", FRAMES,
+                      [f"Read frame `{W.frame(LAST)}`; build a breadth-first spanning tree.",
                        "For every connection not in the tree, walk both ends up the tree to where they meet; "
                        "every agent on the way, and the meeting point, lies on that loop.",
                        "Count the loops per agent; draw the share with at least x."]))
     ch.number("loops_seed1", {"basis": int(len(frame["edges"]) - n + 1), "on_none": float(np.mean(through == 0)),
                               "max": float(through.max())})
     # Against a null: the same connections per agent, wired at random.
-    nulls = [exact_geometry(degree_preserving(adj, seed)) for seed in range(1, 6)]
-    ch.number("null_seed1", {"world": exact_geometry(adj),
-                             "random": {k: float(np.mean([g[k] for g in nulls])) for k in nulls[0]}})
+    null = null_geometry(W.run(1))
+    ch.number("null_seed1", {"world": null["world"], "random": null["random"]})
 
 
 # ---------------------------------------------------------------------------
@@ -479,7 +493,7 @@ def cut_anatomy(run_id: str, t: int) -> Dict[str, float]:
 
 @chapter
 def breaking(ch: F.Chapter) -> None:
-    alive = survivors(baseline())
+    alive = W.alive
     risk, culled = [], []
     for s in alive:
         for row in settled_rows(s.run_id):
@@ -504,12 +518,12 @@ def breaking(ch: F.Chapter) -> None:
                  "points": True, "size": 3, "colour": ORANGE, "alpha": 0.4},
                 line(bx, by_, "mean in classes of 0.05", "#eef4fa", width=2),
                 line([0, 0.5], [0, 0.5], "the whole worst cut lost", BLUE, width=1, dash=[4, 4])],
-        caption="Every game from iteration 500 on of the 26 worlds that lived to the end. x: before the game, "
+        caption=f"Every game from iteration 500 on of {W.lived}. x: before the game, "
                 "the largest share of the world that one bridge held to the rest — if that one connection were "
                 "cut, that many would be cut off ([Cut risk](../notes/cut-risk.md)). y: the share of agents the "
                 "game really cut off. White: the mean of y in classes of x 0.05 wide; dashed: y = x.",
-        recipe=recipe(surviving_text(), STATS_FILE,
-                      ["Take the rows with `phase` = 2 and 500 ≤ `iteration` ≤ 2,999: `cutRiskBefore`, and "
+        recipe=recipe(W.surviving_text(), STATS_FILE,
+                      [f"Take the rows with `phase` = 2 and 500 ≤ `iteration` ≤ {LAST:,}: `cutRiskBefore`, and "
                        "`orphaned` / `nodes_before`.", "Plot one against the other; average y in classes of x."]))
     ch.number("risk", {"corr": float(np.corrcoef(risk, culled)[0, 1]), "games": int(len(risk)),
                        "mean_risk": float(risk.mean()), "mean_culled": float(culled.mean()),
@@ -525,11 +539,11 @@ def breaking(ch: F.Chapter) -> None:
         x={"label": "agents cut off in one game, n (logarithmic)", "log": True, "min": 1},
         y={"label": "share of all cut-off deaths", "min": 0, "max": 1},
         series=[line(xs, weighted, "in games cutting off at least n", ORANGE, width=2)],
-        caption="Of all agents cut off in games from iteration 500 on of the 26 worlds that lived to the end, the "
+        caption=f"Of all agents cut off in games from iteration 500 on of {W.lived}, the "
                 "share that died in games which cut off at least n agents, for every n. Where the line is at "
                 "0.5, half of all such deaths happened in games at least that large.",
-        recipe=recipe(surviving_text(), STATS_FILE,
-                      ["Take `orphaned` of the rows with `phase` = 2 and 500 ≤ `iteration` ≤ 2,999.",
+        recipe=recipe(W.surviving_text(), STATS_FILE,
+                      [f"Take `orphaned` of the rows with `phase` = 2 and 500 ≤ `iteration` ≤ {LAST:,}.",
                        "For every n, add up `orphaned` over the rows with `orphaned` ≥ n and divide by the total."]))
     half = float(xs[np.searchsorted(-np.array(weighted), -0.5)]) if len(xs) else None
     ch.number("deaths_by_size", {"half_in_games_of_at_least": half, "total": float(cut.sum()),
@@ -550,14 +564,14 @@ def breaking(ch: F.Chapter) -> None:
         return {"agents": len(pairs), "median_tokens": float(np.median(pairs[:, 0])),
                 "median_degree": float(np.median(pairs[:, 1])), "fewer_tokens_than_links": float(np.mean(pairs[:, 0] < pairs[:, 1]))}
     seed1 = [{k: v for k, v in x.items() if not k.endswith("side") and k != "everyone"}
-             for x in sorted((x for x in big if x["run"] == "B1-10000-s001"), key=lambda x: -x["cut"])[:6]]
+             for x in sorted((x for x in big if x["run"] == W.run(1)), key=lambda x: -x["cut"])[:6]]
     ch.number("anatomy", {"games": len(big), "kinds": kinds, "seed1_largest": seed1,
                           "border": {side: poverty(side) for side in ("lost_side", "kept_side", "everyone")}})
 
-    its, n = series("B1-10000-s001", "nodes")
-    oits, o = series("B1-10000-s001", "orphaned")
-    rits, rk = series("B1-10000-s001", "cutRiskBefore")
-    window = (1000, 1600)
+    seed, window = ONE_WORLD
+    its, n = series(W.run(seed), "nodes")
+    oits, o = series(W.run(seed), "orphaned")
+    rits, rk = series(W.run(seed), "cutRiskBefore")
     m = (its >= window[0]) & (its <= window[1])
     mo = (oits >= window[0]) & (oits <= window[1])
     mr = (rits >= window[0]) & (rits <= window[1]) & np.isfinite(rk)
@@ -571,15 +585,15 @@ def breaking(ch: F.Chapter) -> None:
             dict(title="Worst single cut before the game", x={"label": "iteration", "min": window[0], "max": window[1]},
                  y={"label": "share of agents", "min": 0, "max": 0.5},
                  series=[line(rits[mr], rk[mr], None, RED, width=1.2)], legend=False)],
-        columns=1, title="Six hundred iterations of one world",
-        caption="The world with seed 1, iterations 1,000 to 1,600. Top: its number of agents after every game. "
+        columns=1, title=f"{window[1] - window[0]:,} iterations of one world",
+        caption=f"The world with seed {seed}, iterations {window[0]:,} to {window[1]:,}. Top: its number of agents after every game. "
                 "Middle: how many agents each game cut off. Bottom: before each game, the largest share of the "
                 "world held to the rest by a single bridge, measured on the network as it stood before the cleanup.",
-        recipe=recipe("`B1-10000-s001`.", STATS_FILE,
-                      ["Take `nodes`, `orphaned` and `cutRiskBefore` of the rows with `phase` = 2 and 1,000 ≤ "
-                       "`iteration` ≤ 1,600."]))
+        recipe=recipe(f"`{W.run(seed)}`.", STATS_FILE,
+                      ["Take `nodes`, `orphaned` and `cutRiskBefore` of the rows with `phase` = 2 and "
+                       f"{window[0]:,} ≤ `iteration` ≤ {window[1]:,}."]))
     for stat in ("bridges", "prunedEdges", "cutRisk", "cutRiskBefore", "orphaned", "starved"):
-        ch.number(f"{stat}_settled", describe([mean_over(s.run_id, stat, 500, 2999) for s in alive]))
+        ch.number(f"{stat}_settled", describe([mean_over(s.run_id, stat, *W.window) for s in alive]))
 
 
 # ---------------------------------------------------------------------------
@@ -589,7 +603,7 @@ def breaking(ch: F.Chapter) -> None:
 @chapter
 def colours(ch: F.Chapter) -> None:
     import networkx as nx
-    run = "B1-10000-s001"
+    run = W.run(1)
     game = D.frame_at(run, LAST, 2)
     start = D.frame_at(run, LAST, 1)
     ids, edges = game["ids"], game["edges"]
@@ -657,7 +671,7 @@ def colours(ch: F.Chapter) -> None:
     panels[4]["legend"] = True
     ch.grid(
         "six-views", panels, columns=2, title="The world of seed 1 after its last game, six ways",
-        caption="Every agent alive after the game of iteration 2,999 of the world with seed 1 is a dot, every "
+        caption=f"Every agent alive after the game of iteration {LAST:,} of the world with seed 1 is a dot, every "
                 "connection a faint line, and the dots sit in the same places in all six pictures (a "
                 "ForceAtlas2 layout, seed 1, which pulls joined agents together). Each picture colours the "
                 "dots by one of the quantities the viewer offers ([What the viewer can colour by]"
@@ -668,11 +682,12 @@ def colours(ch: F.Chapter) -> None:
                 "genotype descends from, the seven largest in colour; and how many loops of a breadth-first "
                 "cycle basis pass through each agent.",
         recipe=recipe(f"`{run}`.", FRAMES,
-                      ["Read frames `5998` (start of the last game) and `5999` (after it): `ids`, `tokens`, "
+                      [f"Read frames `{W.frame(LAST, 1)}` (start of the last game) and `{W.frame(LAST)}` (after it): `ids`, `tokens`, "
                        "`ages`, `delta`, `brain_ids`, `edges`.",
-                       "Curvature: in frame 5998, Σ over neighbours of (their tokens − own tokens).",
-                       "Families: read frames 5799 to 5999, note each genotype's parent, and climb from each "
-                       "living genotype to one alive after the game of iteration 2,899.",
+                       f"Curvature: in frame {W.frame(LAST, 1)}, Σ over neighbours of (their tokens − own tokens).",
+                       f"Families: read frames {W.frame(LAST - 100)} to {W.frame(LAST)}, note each genotype's parent, "
+                       "and climb from each "
+                       f"living genotype to one alive after the game of iteration {LAST - 100:,}.",
                        "Loops: as in [Chapter 31](31-the-geometry-of-a-world.md).",
                        "Lay out with `networkx.forceatlas2_layout(G, max_iter=200, seed=1)` and colour."]))
     ch.number("six_views", {"agents": len(ids), "families": {str(k): v for k, v in shares.items()},
@@ -697,6 +712,6 @@ def colours(ch: F.Chapter) -> None:
                 "that is left carried at least one token — the others were cut at the end of the game. Agents "
                 "are small dots.",
         recipe=recipe(f"`{run}`.", FRAMES,
-                      ["In frame `5999`, read `decisions.allocations`: for every agent and target ≠ itself, add "
+                      [f"In frame `{W.frame(LAST)}`, read `decisions.allocations`: for every agent and target ≠ itself, add "
                        "the `alloc` to the connection between them.", "Colour each connection of `edges` by its class."]))
     ch.number("flows", {"classes": {str(k): v for k, v in Counter(edge_group).items()}})

@@ -100,9 +100,9 @@ flows across it.
 ## One world, six hundred iterations
 
 <!-- figure breaking/one-world -->
-![Six hundred iterations of one world](../figures/breaking/one-world.svg)
+![600 iterations of one world](../figures/breaking/one-world.svg)
 
-**Six hundred iterations of one world.** The world with seed 1, iterations 1,000 to 1,600. Top: its number of agents after every game. Middle: how many agents each game cut off. Bottom: before each game, the largest share of the world held to the rest by a single bridge, measured on the network as it stood before the cleanup.
+**600 iterations of one world.** The world with seed 1, iterations 1,000 to 1,600. Top: its number of agents after every game. Middle: how many agents each game cut off. Bottom: before each game, the largest share of the world held to the rest by a single bridge, measured on the network as it stood before the cleanup.
 
 > [!example]- How to make this figure
 > **Runs.** `B1-10000-s001`.

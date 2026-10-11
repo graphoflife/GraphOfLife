@@ -78,7 +78,7 @@ shows why, and works an example by hand.
 <!-- figure tokens/lorenz -->
 ![Lorenz curves at iteration 2,999](../figures/tokens/lorenz.svg)
 
-**Lorenz curves at iteration 2,999.** For each of the 26 surviving worlds (thin blue lines), after its last game: the poorest share x of its agents holds the share y of all tokens. The yellow line is the median over the worlds at each x; the dashed diagonal is a world where everyone holds the same. The further a curve sags below the diagonal, the more unequal the world ([Chapter 5](05-how-worlds-are-measured.md), and the diagram there).
+**Lorenz curves at iteration 2,999.** For each of the 26 worlds that lived to the end (thin blue lines), after its last game: the poorest share x of its agents holds the share y of all tokens. The yellow line is the median over the worlds at each x; the dashed diagonal is a world where everyone holds the same. The further a curve sags below the diagonal, the more unequal the world ([Chapter 5](05-how-worlds-are-measured.md), and the diagram there).
 
 > [!example]- How to make this figure
 > **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
@@ -102,7 +102,7 @@ close together.
 <!-- figure tokens/distribution -->
 ![How many tokens agents hold](../figures/tokens/distribution.svg)
 
-**How many tokens agents hold.** Of all agents alive after the last game of the 26 surviving worlds, the share that hold at least x tokens, for every x. Both axes are logarithmic: a straight falling line here would be a power law.
+**How many tokens agents hold.** Of all agents alive after the last game of the 26 worlds that lived to the end, the share that hold at least x tokens, for every x. Both axes are logarithmic: a straight falling line here would be a power law.
 
 > [!example]- How to make this figure
 > **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
@@ -110,7 +110,7 @@ close together.
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
 > 1. Pool the `tokens` of the last frame of every run.
-> 2. For every value x that occurs, the share of agents with at least x tokens.
+> 2. For every value x that occurs, the share of agents with at least x.
 >
 > **To make it again:** `python3 book_figures.py tokens`.
 <!-- /figure -->
@@ -134,7 +134,7 @@ the kind a power law would make.
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
 >
 > 1. Take every run's rows with `phase` = 2 and the statistic `gini` ([What a run records](../notes/frames-and-stats.md)).
-> 2. Cut the iterations into stretches of 5 (600 stretches over 3,000 iterations) and take each world's mean in each stretch.
+> 2. Cut the 3,000 iterations into 600 stretches of 5 and take each world's mean in each stretch.
 > 3. In each stretch, take the median, the 25th and 75th and the 5th and 95th percentiles of those means over the worlds that still have a value there (a world that died has none after its death).
 >
 > **To make it again:** `python3 book_figures.py tokens`.
@@ -157,7 +157,7 @@ the median world's average is 0.49, and the 26 worlds lie between 0.42 and
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
 >
 > 1. Take every run's rows with `phase` = 2 and the statistic `topDecileShare` ([What a run records](../notes/frames-and-stats.md)).
-> 2. Cut the iterations into stretches of 5 (600 stretches over 3,000 iterations) and take each world's mean in each stretch.
+> 2. Cut the 3,000 iterations into 600 stretches of 5 and take each world's mean in each stretch.
 > 3. In each stretch, take the median, the 25th and 75th and the 5th and 95th percentiles of those means over the worlds that still have a value there (a world that died has none after its death).
 >
 > **To make it again:** `python3 book_figures.py tokens`.
@@ -174,7 +174,7 @@ the median world's average is 0.49, and the 26 worlds lie between 0.42 and
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
 >
 > 1. Take the rows with `phase` = 2; divide `maxTokens` by 10,000.
-> 2. Cut the iterations into stretches of 5 (600 stretches over 3,000 iterations) and take each world's mean in each stretch.
+> 2. Cut the 3,000 iterations into 600 stretches of 5 and take each world's mean in each stretch.
 > 3. In each stretch, take the median, the 25th and 75th and the 5th and 95th percentiles of those means over the worlds that still have a value there (a world that died has none after its death).
 >
 > **To make it again:** `python3 book_figures.py tokens`.
@@ -195,7 +195,7 @@ worlds); the single richest agent holds about 8% (from 5% to 13%).
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
 >
 > 1. Take the rows with `phase` = 2 and the statistics `meanTokens` and `medianTokens`.
-> 2. Cut the iterations into stretches of 5 (600 stretches over 3,000 iterations) and take each world's mean in each stretch.
+> 2. Cut the 3,000 iterations into 600 stretches of 5 and take each world's mean in each stretch.
 > 3. In each stretch, take the median, the 25th and 75th and the 5th and 95th percentiles of those means over the worlds that still have a value there (a world that died has none after its death).
 >
 > **To make it again:** `python3 book_figures.py tokens`.
@@ -253,7 +253,7 @@ back to its share within a few games ([Chapter 26](26-gains-and-losses.md)).
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
 >
 > 1. Take the rows with `phase` = 2 and the statistic `redistributed`.
-> 2. Cut the iterations into stretches of 5 (600 stretches over 3,000 iterations) and take each world's mean in each stretch.
+> 2. Cut the 3,000 iterations into 600 stretches of 5 and take each world's mean in each stretch.
 > 3. In each stretch, take the median, the 25th and 75th and the 5th and 95th percentiles of those means over the worlds that still have a value there (a world that died has none after its death).
 >
 > **To make it again:** `python3 book_figures.py tokens`.

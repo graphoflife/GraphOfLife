@@ -70,8 +70,8 @@ them. Each figure says, folded beneath it, which of the runs it reads and how.
 One world after 3,000 iterations — every agent a dot, every connection a
 line, the dots placed so that joined agents lie near each other:
 
-<!-- figure shape/world-2999 -->
-![World of seed 1 after the game of iteration 2,999](../figures/shape/world-2999.svg)
+<!-- figure shape/world-end -->
+![World of seed 1 after the game of iteration 2,999](../figures/shape/world-end.svg)
 
 **World of seed 1 after the game of iteration 2,999.** Every agent alive after the game of iteration 2,999 is a dot, every connection a line. Blue: agents in the core, which is what is left when agents with one connection or none are removed again and again until none remains ([Core, trees and leaves](../notes/core-trees-leaves.md)); yellow: the rest of the hanging trees; red: leaves, agents with a single connection. Where a dot is drawn means nothing in itself: a layout (networkx's ForceAtlas2, seed 1) pulls joined agents together and pushes the rest apart.
 

@@ -107,7 +107,7 @@ in the median world, between 0.61 and 0.67 across the 26).
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
 > 1. After every game, count the agents per genotype in `brain_ids`; the largest count divided by the number of agents.
-> 2. Cut the iterations into stretches of 5 (600 stretches over 3,000 iterations) and take each world's mean in each stretch.
+> 2. Cut the 3,000 iterations into 600 stretches of 5 and take each world's mean in each stretch.
 > 3. In each stretch, take the median, the 25th and 75th and the 5th and 95th percentiles of those means over the worlds that still have a value there (a world that died has none after its death).
 >
 > **To make it again:** `python3 book_figures.py lineage`.
@@ -207,7 +207,7 @@ In the world with seed 1, from iteration 1,000, nothing like it happens in
 <!-- figure lineage/moves -->
 ![How often one branch replaces all others](../figures/lineage/moves.svg)
 
-**How often one branch replaces all others.** One dot per surviving world: how many times, between iteration 100 and the end, the newest common ancestor of all the living moved forward to a younger genotype (one of the drops in the figure above). The bar is the median.
+**How often one branch replaces all others.** One dot per world that lived to the end: how many times, between iteration 100 and the end, the newest common ancestor of all the living moved forward to a younger genotype (one of the drops in the figure above). The bar is the median.
 
 > [!example]- How to make this figure
 > **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.

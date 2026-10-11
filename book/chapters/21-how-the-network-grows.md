@@ -149,7 +149,7 @@ early. Is that so here?
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
 > 1. Read frame 5,999 of each run: `ages`, and each agent's connections in `edges`.
-> 2. Classes of age [0, 1), [1, 2), [2, 4), …, [1,024, 3,000); in each class with at least 30 agents, the median, quartiles and 99th percentile of the connections.
+> 2. Classes of age [0, 1), [1, 2), [2, 4), …, [2,048, 3,000); in each class with at least 30 agents, the median, quartiles and 99th percentile of the connections.
 >
 > **To make it again:** `python3 book_figures.py grows`.
 <!-- /figure -->
