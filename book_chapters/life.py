@@ -479,22 +479,48 @@ def seed(ch: F.Chapter) -> None:
         w = float(levels.var(axis=1, ddof=1).mean())
         between[label] = b / (b + w)
         ch.number(f"memory_{label}", dict(zip([100 * L for L in lags], corr)))
+    # What the same cutting and centring give a level that wanders without limit, and one with no memory.
+    rng = np.random.default_rng(13)
+
+    def reference(walk: bool) -> List[float]:
+        total = np.zeros(len(lags))
+        for _ in range(200):
+            steps = rng.normal(size=(n, pieces * 100))
+            x = np.cumsum(steps, axis=1) if walk else steps
+            levels = x.reshape(n, pieces, 100).mean(axis=2)
+            centred = levels - levels.mean(axis=1, keepdims=True)
+            total += [np.corrcoef(centred[:, :-L].ravel(), centred[:, L:].ravel())[0, 1] for L in lags]
+        return (total / 200).tolist()
+    walk, noise = reference(True), reference(False)
+    memory += [line([100 * L for L in lags], walk, "a random walk, cut and centred the same way", GREY, width=1.5,
+                    dash=[5, 4]),
+               line([100 * L for L in lags], noise, "levels with no memory, the same way", GREY, width=1.5,
+                    dash=[2, 3])]
+    ch.number("memory_reference", {"walk": dict(zip([100 * L for L in lags], walk)),
+                                   "noise": dict(zip([100 * L for L in lags], noise))})
     ch.figure(
         "memory", title="How long a world remembers its level",
         x={"label": "iterations apart", "min": 0, "max": 100 * max(lags)},
-        y={"label": "correlation", "min": -0.4, "max": 1},
+        y={"label": "correlation", "min": -0.8, "max": 1},
         series=memory, guides=[{"axis": "y", "at": 0}],
         caption="For each statistic, the correlation between a world's level in one stretch of "
                 "100 iterations and its level a given number of iterations later, over all pairs "
                 f"of stretches in the {n} worlds. 1 would mean a world stays exactly where it was; "
-                "0 that where it was says nothing about where it will be.",
+                "0 that where it was says nothing about where it will be. Because each world's own mean is "
+                f"taken away first, a world cut into only {pieces} stretches shows negative correlations at long "
+                "lags even if it simply wandered: the grey dashes are what a random walk, cut and centred the "
+                "same way, gives (averaged over 200 sets of as many walks), and the grey dots what levels with no "
+                "memory at all give.",
         recipe=recipe(W.surviving_text(), STATS_FILE,
                       [f"For each run, cut iterations 100 to {W.last:,} into {pieces} stretches of 100 and take "
                        "the mean of the statistic in each.",
                        f"Subtract from each run's {pieces} values their own mean, so that only the run's "
                        "movement remains.",
                        "For a lag of L stretches, pair every stretch with the one L later, in every "
-                       "run, and take the Pearson correlation of all the pairs together."]))
+                       "run, and take the Pearson correlation of all the pairs together.",
+                       f"References: {n} series of {pieces * 100:,} steps, each step normal with mean 0 — summed "
+                       "(a random walk) or not (no memory) — cut, centred and correlated the same way; the mean over "
+                       "200 such sets (generator seeded with 13)."]))
 
     cats = list(between)
     ch.figure(

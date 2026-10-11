@@ -11,6 +11,253 @@ ever make.
 > - How many seeds does an experiment need to see that a change of setting
 >   changed something?
 
+The worlds are the thirty of 100,000 tokens of [Chapter 9](09-thirty-worlds.md),
+all of which lived to the end; the thirty of 10,000 tokens this chapter was
+first written from are given beside them.
+
+## Where the worlds settle
+
+Measure each world by its mean over its settled life, iterations 500 to 1,499,
+and divide by the mean of the thirty, so that 1 is the average world:
+
+<!-- figure seed/dots-1 -->
+![Where 30 worlds settle: people, wealth, families](../figures/seed/dots-1.svg)
+
+**Where 30 worlds settle: people, wealth, families.** One dot per world: its mean over iterations 500 to 1,499, divided by the mean of that value over the 30 worlds, so that every statistic is on the same scale and 1 is the average world. The bar is the median. A column of dots close to 1 means the worlds settle alike; a tall column, that they do not. The dots are spread sideways only so they do not hide one another.
+
+> [!example]- How to make this figure
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+>
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
+>
+> 1. For each run and statistic, average the statistic over the rows with 500 ≤ `iteration` ≤ 1,499 (rows with `phase` 1 for births, 2 for the rest; `a/b` means the row's `a` divided by its `b`).
+> 2. Divide each run's average by the mean of the 30 averages.
+> 3. Plot one dot per run, with a bar at the median.
+>
+> **To make it again:** `python3 book_figures.py seed`.
+<!-- /figure -->
+
+<!-- figure seed/dots-2 -->
+![Where 30 worlds settle: the shape of the network, genotypes](../figures/seed/dots-2.svg)
+
+**Where 30 worlds settle: the shape of the network, genotypes.** One dot per world: its mean over iterations 500 to 1,499, divided by the mean of that value over the 30 worlds, so that every statistic is on the same scale and 1 is the average world. The bar is the median. A column of dots close to 1 means the worlds settle alike; a tall column, that they do not. The dots are spread sideways only so they do not hide one another.
+
+> [!example]- How to make this figure
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+>
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
+>
+> 1. For each run and statistic, average the statistic over the rows with 500 ≤ `iteration` ≤ 1,499 (rows with `phase` 1 for births, 2 for the rest; `a/b` means the row's `a` divided by its `b`).
+> 2. Divide each run's average by the mean of the 30 averages.
+> 3. Plot one dot per run, with a bar at the median.
+>
+> **To make it again:** `python3 book_figures.py seed`.
+<!-- /figure -->
+
+The columns differ a great deal in height. The share of agents that are
+distinct genotypes is almost the same in every world (a
+[spread](../notes/spread-between-worlds.md), sd ÷ mean, of 0.02); inequality
+(Gini, 0.06), connections per agent (0.08) and the share held by the richest
+tenth (0.09) vary little; the number of agents (0.11) and connections (0.12)
+vary more, families (0.20) and births (0.22) more still. These counts vary
+*less* than in the worlds of 10,000 tokens — the number of agents had a spread
+of 0.17 there, connections 0.19 — as larger worlds average more of their own
+accidents away.
+
+The shape of the network does the opposite. The share of agents that are
+leaves varies with a spread of 0.25 (0.12 at 10,000 tokens), the share of
+connections that are bridges 0.35 (0.24), the share of agents in the core 0.17
+(0.13) and clustering 0.62 (0.34). And these columns are not one even spread:
+most worlds sit together, and a few lie far out — the same few for leaves,
+bridges and the core, and among the lowest for clustering. They are the worlds
+in which a single agent became a **hub** joined to a sixth of the world or
+more: in the world with seed 28, on average 58% of
+all agents were neighbours of one agent over its settled life, and 72% of its
+connections were bridges. Seven of the thirty worlds had a hub that held, on
+average, a tenth of the world or more, and across all thirty the share of
+agents in the core goes with the share joined to the largest hub almost
+exactly (a correlation of −0.96). [Chapter 17](17-what-shape-does-the-network-take.md)
+shows what such a world looks like and [Chapter 33](33-the-largest-and-the-smallest.md)
+how a hub grows and falls. Hubs of this kind were there in the worlds of 10,000 tokens
+too — ten of the 26 had a hub that held, on average, a tenth of the world or
+more, three a fifth or more — but there the shape of a world went with its hub
+far more loosely (a correlation of −0.54). At 100,000 tokens the hub is almost
+the whole of it.
+
+## A world forgets
+
+The single worlds of [Chapter 10](10-a-worlds-life.md) wander. How fast? Correlate each world's level
+in a stretch of 100 iterations with its level some iterations later:
+
+<!-- figure seed/memory -->
+![How long a world remembers its level](../figures/seed/memory.svg)
+
+**How long a world remembers its level.** For each statistic, the correlation between a world's level in one stretch of 100 iterations and its level a given number of iterations later, over all pairs of stretches in the 30 worlds. 1 would mean a world stays exactly where it was; 0 that where it was says nothing about where it will be. Because each world's own mean is taken away first, a world cut into only 14 stretches shows negative correlations at long lags even if it simply wandered: the grey dashes are what a random walk, cut and centred the same way, gives (averaged over 200 sets of as many walks), and the grey dots what levels with no memory at all give.
+
+> [!example]- How to make this figure
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+>
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
+>
+> 1. For each run, cut iterations 100 to 1,499 into 14 stretches of 100 and take the mean of the statistic in each.
+> 2. Subtract from each run's 14 values their own mean, so that only the run's movement remains.
+> 3. For a lag of L stretches, pair every stretch with the one L later, in every run, and take the Pearson correlation of all the pairs together.
+> 4. References: 30 series of 1,400 steps, each step normal with mean 0 — summed (a random walk) or not (no memory) — cut, centred and correlated the same way; the mean over 200 such sets (generator seeded with 13).
+>
+> **To make it again:** `python3 book_figures.py seed`.
+<!-- /figure -->
+
+A hundred iterations on, a world is still much where it was: the correlation
+is 0.61 for the number of agents and 0.62 for inequality. Two hundred on, it
+is about a third of that (0.21 for both); three hundred on, nothing is left.
+The share of agents in the core is remembered a little longer (0.37 after 200
+iterations), births a little less (0.36 after 100).
+
+Then every line goes below zero, to about −0.5 at 700 iterations — and this is
+not a real anti-memory. Each world was measured against its own average, so a
+world above it in some stretches must be below it in others; with only 14
+stretches per world, that alone pulls distant stretches to opposite sides.
+How much it pulls depends on how the world moves, and the two grey lines
+bracket it: a level that wanders without limit (a random walk, dashed),
+measured the same way, falls from 0.83 at one stretch to −0.66 at nine, and a
+level with no memory at all (dotted) sits at −0.08 everywhere. The worlds
+forget far faster than the random walk — at 100 and 200 iterations they are
+well below it — and their dip at long lags is what centring does to a level
+that has drifted within the window. In the worlds of 10,000 tokens, with 29
+stretches per world, the same dip was only −0.1 to −0.17
+([Autocorrelation](../notes/autocorrelation.md)).
+
+## The seed, or time?
+
+All the variation in a statistic's 100-iteration levels — 14 stretches in
+each of 30 worlds — can be split into the part that lies between the worlds'
+own averages and the part that is each world moving around its own average
+([Between and within](../notes/between-and-within.md)):
+
+<!-- figure seed/between -->
+![Variation between worlds, and within each world](../figures/seed/between.svg)
+
+**Variation between worlds, and within each world.** All the variation of a statistic's 100-iteration levels — 14 stretches in each of 30 worlds — split into the part that lies between the worlds' own averages (blue) and the part that is each world moving around its own average (the rest of the column, grey).
+
+> [!example]- How to make this figure
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+>
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
+>
+> 1. Take each run's 14 stretch means as for the figure above.
+> 2. Between: the variance (n − 1 in the denominator) of the 30 runs' own averages.
+> 3. Within: the mean over runs of the variance of each run's 14 values.
+> 4. Draw between ÷ (between + within).
+>
+> **To make it again:** `python3 book_figures.py seed`.
+<!-- /figure -->
+
+For the counts, between a sixth and a quarter of the variation lies between
+the worlds — 21% for the number of agents, 27% for connections, 25% for
+inequality. The rest, three quarters or more, is each world wandering, and
+even the part between worlds is partly wandering that 1,400 iterations did not
+average away. The share of agents in the core is the exception: 54% of its
+variation lies between the worlds' own averages (24% at 10,000 tokens). Which
+shape a world settles into — with a giant hub or without — is more its own
+than how many agents it holds.
+
+A sharper test: is a world that is crowded in the first half of its life
+also crowded in the second?
+
+<!-- figure seed/halves -->
+![First half against second half](../figures/seed/halves.svg)
+
+**First half against second half.** One dot per world. Left: its mean number of agents over iterations 100–749 (x) against its mean over iterations 750–1,499 (y). Right: the same for connections. A dot on the dashed diagonal had the same mean in both halves. r is the correlation over the 30 dots.
+
+> [!example]- How to make this figure
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+>
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
+>
+> 1. For `nodes` and `edges`, average over the rows with `phase` = 2 and 100 ≤ `iteration` ≤ 749, and over 750 ≤ `iteration` ≤ 1,499.
+> 2. Plot the second against the first, one dot per run; r is their Pearson correlation ([correlation](../notes/correlation.md)).
+>
+> **To make it again:** `python3 book_figures.py seed`.
+<!-- /figure -->
+
+Hardly: the correlation between the halves over the 30 worlds is 0.17 for the
+number of agents and 0.20 for connections, and random pairings of first and
+second halves ([a permutation test](../notes/permutation-test.md)) give one at
+least that large 18 and 14 times in 100. At 10,000 tokens connections had kept
+something of their own (0.41, reached by random pairings only 2 times in 100);
+at this size nothing of the kind shows.
+
+## Longer looks, smaller differences
+
+A world forgets its level within a few hundred iterations, so its mean over a
+longer stretch averages more of its wandering away, and the worlds look more
+alike:
+
+<!-- figure seed/stretch -->
+![Longer looks, smaller differences](../figures/seed/stretch.svg)
+
+**Longer looks, smaller differences.** For each statistic, how much the 30 worlds differ — the standard deviation of their averages divided by the mean — when each world is measured by its average over its last L iterations, for L from 100 to 1,400.
+
+> [!example]- How to make this figure
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+>
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
+>
+> 1. For each length L, average the statistic over the rows with 1,500 − L ≤ `iteration` ≤ 1,499 in each run.
+> 2. Divide the standard deviation of the 30 averages (n − 1 in the denominator) by their mean.
+>
+> **To make it again:** `python3 book_figures.py seed`.
+<!-- /figure -->
+
+Measured over its last 100 iterations, the number of agents varies between
+worlds by 0.24 of the mean; over the last 300 — the last fifth — by 0.17; over
+the last 1,400 by 0.10. Inequality falls from 0.12 to 0.05, families from 0.31
+to 0.16, connections from 0.23 to 0.11. Births vary most and fall most slowly
+(0.27 to 0.18).
+
+## How many seeds an experiment needs
+
+From the spread *c* follows how many worlds each condition needs ([How many seeds](../notes/seeds-needed.md)):
+
+<!-- figure seed/seeds-needed -->
+![Seeds a condition needs](../figures/seed/seeds-needed.svg)
+
+**Seeds a condition needs.** How many worlds each of two conditions needs for a change of a given size in the average to be found four times in five at the 5% level, if worlds vary as much as these do. Dashed: worlds measured over their last fifth (iterations 1,200–1,499); solid: over iterations 500–1,499. The grey line is 30 seeds.
+
+> [!example]- How to make this figure
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+>
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
+>
+> 1. Measure each run by its average over the stretch, and compute the spread c = sd ÷ mean of the 30 averages.
+> 2. For a change Δ (as a share of the mean), n = 2 (z₁ + z₂)² c² / Δ², with z₁ = 1.960 (5%, two-sided) and z₂ = 0.842 (power 80%); round up.
+>
+> **To make it again:** `python3 book_figures.py seed`.
+<!-- /figure -->
+
+Measured over the last fifth of the runs (dashed), seeing a change of 10% in
+the number of agents takes 48 seeds per condition; measured over the settled
+life (solid), 19 — where the worlds of 10,000 tokens needed 100 and 46. For
+inequality, 14 and 7. With 30 seeds per condition and the settled-life
+measure, the smallest change that can be seen four times in five is about 8%
+in the number of agents, 9% in connections and 5% in inequality. Larger
+worlds make sharper experiments — at a price: each costs about eight times the
+computing ([Chapter 9](09-thirty-worlds.md)).
+
+Two more things this means for experiments:
+
+- **Pairing by seed helps little.** Two conditions run with the same seed
+  share their starting ring and founders — and, since the seed hardly decides
+  where a world goes, little else. A comparison seed by seed is about as noisy
+  as one between unrelated worlds.
+- **Shape needs more seeds than size.** Whether a world grows a giant hub is
+  something a few worlds in thirty do; a change of setting that made it twice
+  as common would need far more than thirty seeds to see.
+
+## What was expected
+
+Before the runs of 10,000 tokens, as Experiment 3:
+
 <!-- runs E03 -->
 > [!info] The runs behind this chapter
 > These are the runs of Experiment 2; nothing new was run for this chapter.
@@ -53,219 +300,6 @@ ever make.
 > A value in **bold** differs from the baseline B1.
 <!-- /runs -->
 
-## Where the worlds settle
-
-Measure each of the 26 surviving worlds by its mean over its settled life,
-iterations 500 to 2,999, and divide by the mean of the 26, so that 1 is the
-average world:
-
-<!-- figure seed/dots-1 -->
-![Where 26 worlds settle: people, wealth, families](../figures/seed/dots-1.svg)
-
-**Where 26 worlds settle: people, wealth, families.** One dot per world: its mean over iterations 500 to 2,999, divided by the mean of that value over the 26 worlds, so that every statistic is on the same scale and 1 is the average world. The bar is the median. A column of dots close to 1 means the worlds settle alike; a tall column, that they do not. The dots are spread sideways only so they do not hide one another.
-
-> [!example]- How to make this figure
-> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
->
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
->
-> 1. For each run and statistic, average the statistic over the rows with 500 ≤ `iteration` ≤ 2,999 (rows with `phase` 1 for births, 2 for the rest; `a/b` means the row's `a` divided by its `b`).
-> 2. Divide each run's average by the mean of the 26 averages.
-> 3. Plot one dot per run, with a bar at the median.
->
-> **To make it again:** `python3 book_figures.py seed`.
-<!-- /figure -->
-
-<!-- figure seed/dots-2 -->
-![Where 26 worlds settle: the shape of the network, genotypes](../figures/seed/dots-2.svg)
-
-**Where 26 worlds settle: the shape of the network, genotypes.** One dot per world: its mean over iterations 500 to 2,999, divided by the mean of that value over the 26 worlds, so that every statistic is on the same scale and 1 is the average world. The bar is the median. A column of dots close to 1 means the worlds settle alike; a tall column, that they do not. The dots are spread sideways only so they do not hide one another.
-
-> [!example]- How to make this figure
-> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
->
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
->
-> 1. For each run and statistic, average the statistic over the rows with 500 ≤ `iteration` ≤ 2,999 (rows with `phase` 1 for births, 2 for the rest; `a/b` means the row's `a` divided by its `b`).
-> 2. Divide each run's average by the mean of the 26 averages.
-> 3. Plot one dot per run, with a bar at the median.
->
-> **To make it again:** `python3 book_figures.py seed`.
-<!-- /figure -->
-
-The columns differ a great deal in height. The share of agents that are
-distinct genotypes is almost the same in every world (a
-[spread](../notes/spread-between-worlds.md), sd ÷ mean, of
-0.02); inequality (Gini, 0.07), connections per agent (0.08) and the share
-held by the richest tenth (0.09) vary little; the number of agents (0.17),
-connections (0.19), births (0.19) and families (0.20) vary more; and
-clustering varies most (0.34). No column falls into separate clumps: the
-worlds spread evenly between their lowest and highest values, as one kind of
-world would.
-
-## A world forgets
-
-The single worlds of [Chapter 10](10-a-worlds-life.md) wander. How fast? Correlate each world's level
-in a stretch of 100 iterations with its level some iterations later:
-
-<!-- figure seed/memory -->
-![How long a world remembers its level](../figures/seed/memory.svg)
-
-**How long a world remembers its level.** For each statistic, the correlation between a world's level in one stretch of 100 iterations and its level a given number of iterations later, over all pairs of stretches in the 26 worlds. 1 would mean a world stays exactly where it was; 0 that where it was says nothing about where it will be.
-
-> [!example]- How to make this figure
-> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
->
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
->
-> 1. For each run, cut iterations 100 to 2,999 into 29 stretches of 100 and take the mean of the statistic in each.
-> 2. Subtract from each run's 29 values their own mean, so that only the run's movement remains.
-> 3. For a lag of L stretches, pair every stretch with the one L later, in every run, and take the Pearson correlation of all the pairs together.
->
-> **To make it again:** `python3 book_figures.py seed`.
-<!-- /figure -->
-
-A hundred iterations on, a world is still much where it was: the correlation
-is 0.68 for the number of agents and for inequality. Two hundred on, it is
-about half that; three hundred on, little is left (0.17 for agents); five
-hundred on, nothing. Births are remembered a little longer (0.41 after 300
-iterations), and so is the share of agents in the core (0.31).
-
-The values below zero after about 500 iterations are not a real
-anti-memory. Each world was measured against its own average, so a world
-above it in one stretch is below it in others; with 29 stretches per world and
-correlations at neighbouring lags adding to *S* = 1 + 2(0.68 + 0.34 + 0.17 +
-0.04) ≈ 3.5, that pulls the curve down by about *S* / 29 ≈ 0.12 ([Autocorrelation](../notes/autocorrelation.md)) —
-about what is seen.
-
-## The seed, or time?
-
-All the variation in a statistic's 100-iteration levels — 29 stretches in
-each of 26 worlds — can be split into the part that lies between the worlds'
-own averages and the part that is each world moving around its own average
-([Between and within](../notes/between-and-within.md)):
-
-<!-- figure seed/between -->
-![Variation between worlds, and within each world](../figures/seed/between.svg)
-
-**Variation between worlds, and within each world.** All the variation of a statistic's 100-iteration levels — 29 stretches in each of 26 worlds — split into the part that lies between the worlds' own averages (blue) and the part that is each world moving around its own average (the rest of the column, grey).
-
-> [!example]- How to make this figure
-> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
->
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
->
-> 1. Take each run's 29 stretch means as for the figure above.
-> 2. Between: the variance (n − 1 in the denominator) of the 26 runs' own averages.
-> 3. Within: the mean over runs of the variance of each run's 29 values.
-> 4. Draw between ÷ (between + within).
->
-> **To make it again:** `python3 book_figures.py seed`.
-<!-- /figure -->
-
-Between a tenth and a quarter of the variation lies between the worlds — 17%
-for the number of agents. The rest, four fifths or more, is each world
-wandering. And even the part between worlds is partly wandering that 2,900
-iterations did not average away.
-
-A sharper test: is a world that is crowded in the first half of its life
-also crowded in the second?
-
-<!-- figure seed/halves -->
-![First half against second half](../figures/seed/halves.svg)
-
-**First half against second half.** One dot per world that lived to the end. Left: its mean number of agents over iterations 100–1,499 (x) against its mean over iterations 1,500–2,999 (y). Right: the same for connections. A dot on the dashed diagonal had the same mean in both halves. r is the correlation over the 26 dots.
-
-> [!example]- How to make this figure
-> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
->
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
->
-> 1. For `nodes` and `edges`, average over the rows with `phase` = 2 and 100 ≤ `iteration` ≤ 1,499, and over 1,500 ≤ `iteration` ≤ 2,999.
-> 2. Plot the second against the first, one dot per run; r is their Pearson correlation ([correlation](../notes/correlation.md)).
->
-> **To make it again:** `python3 book_figures.py seed`.
-<!-- /figure -->
-
-For the number of agents, hardly: the correlation between the halves over the
-26 worlds is 0.12, and random pairings of first and second halves
-([a permutation test](../notes/permutation-test.md)) give one at
-least that large 28 times in 100. Connections are the exception: 0.41, which
-random pairings reach only 2 times in 100. A world keeps something of its own
-in how densely it is connected — perhaps a trace of its starting ring — but
-little in how many agents it holds.
-
-## Longer looks, smaller differences
-
-A world forgets its level within a few hundred iterations, so its mean over a
-longer stretch averages more of its wandering away, and the worlds look more
-alike:
-
-<!-- figure seed/stretch -->
-![Longer looks, smaller differences](../figures/seed/stretch.svg)
-
-**Longer looks, smaller differences.** For each statistic, how much the 26 worlds differ — the standard deviation of their averages divided by the mean — when each world is measured by its average over its last L iterations, for L from 100 to 2,900.
-
-> [!example]- How to make this figure
-> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
->
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
->
-> 1. For each length L, average the statistic over the rows with 3,000 − L ≤ `iteration` ≤ 2,999 in each run.
-> 2. Divide the standard deviation of the 26 averages (n − 1 in the denominator) by their mean.
->
-> **To make it again:** `python3 book_figures.py seed`.
-<!-- /figure -->
-
-Measured over its last 100 iterations, the number of agents varies between
-worlds by 0.33 of the mean; over the last 600 — the last fifth — by 0.25; over
-iterations 500 to 2,999 by 0.17. Inequality falls from 0.19 to 0.07, families
-from 0.49 to 0.20. Connections fall at first and then level off at about 0.19:
-the part of them a world keeps of its own does not average away. Births are
-the exception at the longest stretches: from iteration 100 on, one world's
-(seed 17's) boom-and-crash cycles of its early life dominate its average.
-
-## How many seeds an experiment needs
-
-From the spread *c* follows how many worlds each condition needs ([How many seeds](../notes/seeds-needed.md)):
-
-<!-- figure seed/seeds-needed -->
-![Seeds a condition needs](../figures/seed/seeds-needed.svg)
-
-**Seeds a condition needs.** How many worlds each of two conditions needs for a change of a given size in the average to be found four times in five at the 5% level, if worlds vary as much as these do. Dashed: worlds measured over their last fifth (iterations 2,400–2,999); solid: over iterations 500–2,999. The grey line is 30 seeds.
-
-> [!example]- How to make this figure
-> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
->
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
->
-> 1. Measure each run by its average over the stretch, and compute the spread c = sd ÷ mean of the 26 averages.
-> 2. For a change Δ (as a share of the mean), n = 2 (z₁ + z₂)² c² / Δ², with z₁ = 1.960 (5%, two-sided) and z₂ = 0.842 (power 80%); round up.
->
-> **To make it again:** `python3 book_figures.py seed`.
-<!-- /figure -->
-
-Measured over the last fifth of the runs (dashed), seeing a change of 10% in
-the number of agents takes 100 seeds per condition; measured over the settled
-life (solid), 46. For inequality, 26 and 8. With 30 seeds per condition and
-the settled-life measure, the smallest change that can be seen four times in
-five is about 12% in the number of agents, 14% in connections and 5% in
-inequality.
-
-Two more things this means for experiments:
-
-- **Pairing by seed helps little.** Two conditions run with the same seed
-  share their starting ring and founders — and, since the seed hardly decides
-  where a world goes, little else. A comparison seed by seed is about as noisy
-  as one between unrelated worlds.
-- **Dying out is rare and hard to compare.** Four of the thirty worlds died:
-  13%, with a [Wilson interval](../notes/wilson-interval.md) of 5% to 30%. To see a rise from 13% to 30%
-  four times in five would take about 90 seeds per condition.
-
-## What was expected
-
-Before the runs, as Experiment 3:
-
 <!-- thesis E03 -->
 > [!quote] The thesis of Experiment 3, written down before any of its runs existed
 > **The claim.** Thirty seeds give thirty different histories, but the same kind of world. Where a world ends up — how many agents, how many connections, how unequal — differs from seed to seed by less than a fifth of its typical value. Thirty seeds per condition are enough to see a change of a tenth in those.
@@ -278,16 +312,24 @@ Before the runs, as Experiment 3:
 <!-- /thesis -->
 
 It was checked, as planned, on the last fifth of each run (iterations
-2,400–2,999). Inequality passes both of its tests: its spread was 0.13, and 26
-seeds would see a change of a tenth. Connections pass the first and fail the
-second (0.19; 58 seeds). The number of agents fails both (0.25; 100 seeds). So
-the thesis is refuted, narrowly — and it holds in what it says about *kind*:
-there are no separate groups of worlds.
+2,400–2,999). Inequality passed both of its tests: its spread was 0.13, and 26
+seeds would see a change of a tenth. Connections passed the first and failed
+the second (0.19; 58 seeds). The number of agents failed both (0.25; 100
+seeds). So the thesis was refuted, narrowly — and it held in what it says about
+*kind*: there were no separate groups of worlds.
 
-What it missed is where the spread comes from. It is not the seed but time:
-each world wanders, and the end of a run catches it wherever it happens to
-be. That is why every later chapter measures worlds over their settled life,
-from iteration 500 on.
+**At 100,000 tokens**, on the last fifth of each run (iterations 1,200–1,499),
+the thesis is refuted again, more narrowly. All three spreads are now below a
+fifth — the number of agents 0.17, connections 0.19, inequality 0.09 — but
+seeing a change of a tenth still takes more than thirty seeds for the first
+two (48 and 55), and 14 for inequality. On kind it holds less well than before:
+in agents, connections and inequality the worlds spread evenly, but in the
+shape of their network a few lie far from the rest — the worlds of a giant hub.
+
+What the thesis missed at both sizes is where the spread comes from. It is
+mostly not the seed but time: each world wanders, and the end of a run catches
+it wherever it happens to be. That is why every later chapter measures worlds
+over their settled life, from iteration 500 on.
 
 To make every figure of this chapter: `python3 book_figures.py seed`.
 

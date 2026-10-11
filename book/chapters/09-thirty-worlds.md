@@ -2,24 +2,32 @@
 
 Part II looks at one kind of world, the baseline B1, from every side. It does
 so with thirty worlds that differ only in their seed. This chapter introduces
-them: every chapter up to [Chapter 26](26-meta-1.md) reads these same thirty
-runs, and [Chapter 41](41-do-the-brains-matter.md) compares them with worlds
-made under other rules.
+them: every chapter up to [Chapter 26](26-meta-1.md), and every chapter of
+Part III up to [Chapter 40](40-meta-2.md), reads these same thirty runs.
+
+> [!info] The second edition of Parts II and III
+> Parts II and III were first written from thirty worlds of 10,000 tokens,
+> about 1,300 agents each (Experiment 2). They are written here from thirty
+> worlds of 100,000 tokens, about 14,000 agents each (Experiment 10, planned in
+> [Chapter 55](55-worlds-of-100000-tokens.md)): worlds big enough for space, for
+> scale and for rare events to show. Where the two sizes differ, the chapters
+> give both. The worlds of 10,000 tokens remain the ones Part I teaches with and
+> the baseline the experiments of Part IV compare against.
 
 ## The runs
 
-<!-- runs E02 -->
+<!-- runs E10 -->
 > [!info] The runs behind this chapter
-> **30 runs.** Every condition below is run once for every seed (1 to 30), for 3,000 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
+> **30 runs.** Every condition below is run once for every seed (1 to 30), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
 >
-> - **baseline** — changes nothing: B1 as it is; 10,000 tokens. Runs `B1-10000-s001` … `B1-10000-s030`.
+> - **baseline** — changes nothing: B1 as it is; 100,000 tokens. Runs `B1-100000-s001` … `B1-100000-s030`.
 >
-> To make these runs again: `python3 gol_lab.py run E02`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | baseline | what it is |
 > |---|---|---|
-> | [`total_tokens`](../notes/settings.md#total_tokens) | 10,000 | The number of tokens in the world, *T*. It never changes during a run. |
+> | [`total_tokens`](../notes/settings.md#total_tokens) | 100,000 | The number of tokens in the world, *T*. It never changes during a run. |
 > | [`n_nodes`](../notes/settings.md#n_nodes) | 0 | How many founders the world starts with. 0 means one founder per hundred tokens: *n* = ⌊*T* / 100⌋. |
 > | [`k_neighbors`](../notes/settings.md#k_neighbors) | 0 | How many neighbours each founder starts with in the ring. 0 means *k* = max(⌊*n* / 100⌋, 5); an odd *k* is wired as *k* − 1. |
 > | [`rewire_p`](../notes/settings.md#rewire_p) | 0.2 | In the starting ring, the probability that a connection is moved to a founder chosen at random (Watts–Strogatz). |
@@ -43,32 +51,38 @@ made under other rules.
 > | [`mutation_sparsity`](../notes/settings.md#mutation_sparsity) | 0.1 | The share of a brain's numbers a change touches; also the probability, for each weight matrix and bias vector, of a rarer reset that redraws that share of it. |
 > | [`extinction_threshold`](../notes/settings.md#extinction_threshold) | 20 | A run stops, as extinct, when an iteration ends (after its game) with this many agents or fewer. |
 > | seeds | 1 to 30 | one run per seed |
-> | iterations | 3,000 | how far each run goes, unless its world dies first |
+> | iterations | 1,500 | how far each run goes, unless its world dies first |
 >
 > A value in **bold** differs from the baseline B1.
 <!-- /runs -->
 
-Thirty runs of the baseline at 10,000 tokens — so a hundred founders of a
-hundred tokens each — with seeds 1 to 30, each run for 3,000 iterations
-unless its world died first. Every frame was kept, with every decision; every
-statistic was recorded for every frame, and the statistics that walk the whole
-network (bridges, the core, clustering, distances) every 25 iterations
+Thirty runs of the baseline at 100,000 tokens — so a thousand founders of a
+hundred tokens each — with seeds 1 to 30, each run for 1,500 iterations.
+Every frame was kept, with every decision; every statistic was recorded for
+every frame, and the statistics that walk the whole network (bridges, the
+core, clustering, distances, the flow's loops) every 25 iterations
 ([What a run records](../notes/frames-and-stats.md)).
 
-Together they took 26 hours of computing, done in 7.2 hours on four
-processor cores, and fill 7.8 GB. Four of the thirty worlds died before
-iteration 3,000; 26 lived to the end.
+Together they took 211 hours of computing, done in a little over two days on
+four processor cores, and fill 58 GB. All thirty worlds lived to the end:
+where four of the thirty smaller worlds died, none of these did
+([Chapter 10](10-a-worlds-life.md)).
 
-To replicate any figure of Part II, you need exactly these runs: on a
+To replicate any figure of Parts II and III, you need exactly these runs: on a
 computer with Python 3, numpy and networkx and a copy of this repository,
-`python3 gol_lab.py run E02` makes them into the folder `GraphOfLifeRuns/`,
+`python3 gol_lab.py run E10` makes them into the folder `GraphOfLifeRuns/`,
 and `python3 book_figures.py` then redraws every figure of the book from
 them. Each figure says, folded beneath it, which of the runs it reads and how.
+A run of 1,500 iterations at this size takes about eight hours on one core;
+the thirty worlds of 10,000 tokens (`python3 gol_lab.py run E02`) take an
+eighth of the computing in all, and show most of the same things.
 
 ## A first look
 
-One world after 3,000 iterations — every agent a dot, every connection a
-line, the dots placed so that joined agents lie near each other:
+One world after 1,500 iterations — every agent a dot, every connection a
+line, the dots placed so that joined agents lie near each other. A world of
+15,000 agents drawn whole is a tangle, so the picture holds a piece of it:
+every agent within a few steps of the world's oldest agent.
 
 <!-- figure shape/world-end -->
 ![World of seed 1 after the game of iteration 2,999](../figures/shape/world-end.svg)
@@ -88,22 +102,24 @@ line, the dots placed so that joined agents lie near each other:
 > **To make it again:** `python3 book_figures.py shape`.
 <!-- /figure -->
 
-The hundred founders on their ring ([Chapter 2](02-the-world.md)) have become
-1,336 agents in a network of dense clusters joined by long, thin paths, with
-many agents that hang on by a single connection.
-[Chapter 17](17-what-shape-does-the-network-take.md) takes this shape apart.
+The thousand founders on their ring ([Chapter 2](02-the-world.md)) have become
+a network of dense clusters joined by thin paths, with many agents that hang
+on by a single connection. [Chapter 17](17-what-shape-does-the-network-take.md)
+takes this shape apart, and [Chapter 25](25-the-core-of-a-world.md) its core.
 
 Any of the thirty can be opened in the **Viewer** of the Graph of Life app,
 which replays a run frame by frame.
 
 ## The questions of Part II
 
-- [Chapter 10](10-a-worlds-life.md) — What does a world do over 3,000
+- [Chapter 10](10-a-worlds-life.md) — What does a world do over 1,500
   iterations? Does it settle?
 - [Chapter 11](11-the-first-hundred-iterations.md) — What happens in its first
   hundred iterations?
 - [Chapter 12](12-births-deaths-and-ages.md) — How often are agents born and
   how do they die? How old do they get?
+- [Chapter 13](13-how-ages-change.md) — How do ages and lifespans change over a
+  world's life?
 - [Chapter 14](14-how-much-does-the-seed-decide.md) — How much of what a world
   does is decided by its seed?
 - [Chapter 15](15-where-do-the-tokens-go.md) — Where do the tokens go — how
@@ -114,11 +130,21 @@ which replays a run frame by frame.
   network take?
 - [Chapter 18](18-genotypes-and-lineages.md) — How long do genotypes last, and
   do lineages take over?
+- [Chapter 19](19-what-the-brains-are-like.md) and
+  [Chapter 20](20-what-agents-say-to-each-other.md) — What are the brains like,
+  and what do agents say to each other?
+- [Chapter 21](21-do-the-rich-stay-rich.md) — Do the rich stay rich?
+- [Chapter 22](22-how-the-network-grows.md) — How does the network grow?
+- [Chapter 23](23-like-next-to-like.md) — Are neighbours alike?
+- [Chapter 24](24-how-many-dimensions-does-a-world-have.md) and
+  [Chapter 25](25-the-core-of-a-world.md) — How many dimensions does a world
+  have, and its core?
 - [Chapter 26](26-meta-1.md) — What the baseline world is, in sum.
 
-Five of these chapters (9, 12, 13, 15 and 16) were planned as experiments,
-with a thesis written down before the runs; they quote it and say whether it
-held. The others only ask.
+Five of these chapters (10, 14, 15, 17 and 18) were planned as experiments,
+with a thesis written down before the runs of 10,000 tokens; they quote it,
+say whether it held there, and test it again on these worlds. The others only
+ask.
 
 <!-- turns -->
 ---
