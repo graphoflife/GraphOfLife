@@ -33,8 +33,9 @@ time proportional to agents plus connections.
 
 `bridges`, the number of bridges, every 25 iterations. The book divides it by
 the number of connections, `bridges/edges`: the share of all connections
-that are bridges. In a settled baseline world about 31% of connections are
-bridges ([Chapter 17](../chapters/17-what-shape-does-the-network-take.md)).
+that are bridges. In a settled baseline world about a quarter of the
+connections are bridges at 100,000 tokens, 31% at 10,000
+([Chapter 17](../chapters/17-what-shape-does-the-network-take.md)).
 
 A count of bridges does not say how much hangs on each. The program also
 works out, for every bridge, how many agents lie behind it; `cutRisk` is the

@@ -9,6 +9,7 @@ import json
 from collections import Counter
 from typing import Any, Dict, List, Tuple
 
+import networkx as nx
 import numpy as np
 
 import book_data as D
@@ -16,14 +17,15 @@ import book_figures as F
 from book_figures import (FRAMES, STATS_FILE, band_series, chapter, describe, dots, line, mean_over,
                           recipe, series, stacked_areas)
 from book_graph import ball
-from book_chapters.common import (BAND_STEPS, BAND_WORDS, BLUE, CYAN, GREEN, GREY, ORANGE, RED,
-                                  VIOLET, WORLDS as W, YELLOW)
+from book_chapters.common import (BAND_STEPS, BAND_WORDS, BLUE, CYAN, GREEN, GREY, ORANGE, RED, STAR,
+                                  VIOLET, WORLDS as W, YELLOW, at_start)
 
-#: The single worlds the lineage figures follow, chosen for what each shows:
-#: a world one family took over late, and two more for the common ancestor.
+#: The single worlds the lineage figures follow, chosen for what each shows: the world whose most
+#: common genotype held the largest share, a world one family took over within the window and one no
+#: family took over, and three for the common ancestor.
 EXAMPLES = {
     "E02": {"top": 12, "families": ((12, (2550, 2999)), (1, (1000, 1499))), "ancestry": (1, 12, 17)},
-    "E10": {"top": 12, "families": ((12, (1050, 1499)), (1, (1000, 1499))), "ancestry": (1, 12, 17)},
+    "E10": {"top": 28, "families": ((12, (550, 1499)), (1, (1000, 1499))), "ancestry": (1, 12, 17)},
 }[W.experiment]
 
 # ---------------------------------------------------------------------------
@@ -100,7 +102,8 @@ def tokens(ch: F.Chapter) -> None:
                                 [f"Take every run's rows with `phase` = 2 and the statistic `{stat}` ([What a run records](../notes/frames-and-stats.md)).",
                                  *BAND_STEPS]))
         ch.number(f"{name}_settled", describe([mean_over(s.run_id, stat, *W.window) for s in alive]))
-        ch.number(f"{name}_first", F.A.bands([series(s.run_id, stat) for s in specs])["y"][0])
+        # The first five iterations, in the median world.
+        ch.number(f"{name}_first", float(np.median([mean_over(s.run_id, stat, 0, 4) for s in specs])))
 
     richest = band_series([(series(s.run_id, "maxTokens")[0], series(s.run_id, "maxTokens")[1] / W.tokens)
                            for s in specs], "the richest single agent's share", RED)
@@ -152,6 +155,13 @@ def tokens(ch: F.Chapter) -> None:
               recipe=recipe(W.runs_text(), STATS_FILE,
                             ["Take the rows with `phase` = 2 and the statistic `redistributed`.", *BAND_STEPS]))
     ch.number("shared_out_settled", describe([mean_over(s.run_id, "redistributed", *W.window) for s in alive]))
+
+    # The thesis of Experiment 4 checked on these worlds, as its plan checked it: from iteration 100 on.
+    thesis = {}
+    for stat, above in (("gini", 0.5), ("topDecileShare", 0.4), ("selfAllocationShare", 0.5)):
+        values = [mean_over(s.run_id, stat, 100, W.last) for s in alive]
+        thesis[stat] = {**describe(values), "above": int(sum(v > above for v in values)), "threshold": above}
+    ch.number("thesis_E04", thesis)
 
 
 # ---------------------------------------------------------------------------
@@ -265,7 +275,7 @@ def game(ch: F.Chapter) -> None:
         for stat, colour in stats:
             out.append(band_series([series(s.run_id, stat) for s in specs], named[stat], colour))
             ch.number(f"{stat}_settled", describe([mean_over(s.run_id, stat, *W.window) for s in alive]))
-            ch.number(f"{stat}_first", F.A.bands([series(s.run_id, stat) for s in specs])["y"][0])
+            ch.number(f"{stat}_first", at_start(specs, stat))
         ch.figure(name, title=title, x={"label": "iteration"}, y={"label": ylabel, "min": 0, "max": 1},
                   series=out,
                   caption=f"After every game of the {len(specs)} baseline worlds. {words} For each, "
@@ -305,6 +315,13 @@ def game(ch: F.Chapter) -> None:
 #: A world with more agents than this is drawn a piece at a time: a layout of every agent
 #: costs the square of their number, and fifteen thousand dots are a tangle.
 PICTURE_LIMIT = 2500
+
+
+def starting_ring(run_id: str) -> "nx.Graph":
+    """A run's founders as the engine wired them, before anything happened: its own Watts–Strogatz ring."""
+    from GraphOfLifeSimple import stream_seed
+    cfg = F.store.load_config(run_id)
+    return nx.watts_strogatz_graph(n=cfg.resolved_n(), k=cfg.resolved_k(), p=cfg.rewire_p, seed=stream_seed(cfg))
 
 
 def roles(ids: List[int], edges: List[List[int]]) -> Dict[int, int]:
@@ -432,16 +449,21 @@ def shape(ch: F.Chapter) -> None:
 
     pooled = np.concatenate([F.world_pass(s.run_id)["last"]["degrees"] for s in alive])
     ds = np.arange(1, pooled.max() + 1)
+    rings = [starting_ring(s.run_id) for s in specs]
+    founders_degree = int(round(np.mean([2 * g.number_of_edges() / g.number_of_nodes() for g in rings])))
+    ch.number("ring", {"founders": rings[0].number_of_nodes(), "degree": founders_degree,
+                       "transitivity": describe([nx.transitivity(g) for g in rings])})
     ch.figure(
         "degree", title="How many connections agents have",
         x={"label": "connections d (logarithmic)", "log": True, "min": 1},
         y={"label": "share of agents with at least d (logarithmic)", "log": True, "max": 1},
         series=[line(ds, [(pooled >= d).mean() for d in ds], f"{len(pooled):,} agents of {n} worlds, after the last game",
                      BLUE, width=2)],
-        guides=[{"axis": "x", "at": 4, "label": "every founder at the start"}],
+        guides=[{"axis": "x", "at": founders_degree, "label": "a founder at the start"}],
         caption=f"Of all agents alive after the last game of {W.lived}, the share "
-                "that have at least d connections, for every d. At the start every founder had "
-                "exactly four (the grey line).",
+                f"that have at least d connections, for every d. At the start a founder had {founders_degree} "
+                "on average (the grey line) — every one of them exactly that many before the ring's rewiring "
+                "([The starting ring](../notes/starting-ring.md)).",
         recipe=recipe(W.surviving_text(), FRAMES,
                       [f"Count every agent's connections in the last frame's `edges`; pool the {n} runs.",
                        "For d = 1, 2, …, the share of agents with at least d."]))
@@ -457,7 +479,7 @@ def shape(ch: F.Chapter) -> None:
                            series=[band_series([series(s.run_id, stat) for s in specs], None, colour)],
                            legend=False))
         ch.number(f"{stat}_settled", describe([mean_over(s.run_id, stat, *W.window) for s in alive]))
-        ch.number(f"{stat}_first", F.A.bands([series(s.run_id, stat) for s in specs])["y"][0])
+        ch.number(f"{stat}_first", at_start(specs, stat))
     ch.grid(
         "structure", panels, columns=3, title="Core, leaves and bridges",
         caption=f"Three shares, after every game of the {len(specs)} baseline worlds. Left: the share of agents "
@@ -476,12 +498,21 @@ def shape(ch: F.Chapter) -> None:
     ch.figure("clustering", title="Clustering", x={"label": "iteration"}, y={"label": "transitivity", "min": 0},
               series=[clus],
               caption="Three times the number of triangles divided by the number of connected triples "
-                      "([Clustering](../notes/clustering.md)), every 25 iterations. The founders' ring starts near 0.24. "
-                      f"{BAND_WORDS}.",
+                      "([Clustering](../notes/clustering.md)), every 25 iterations. The founders' ring starts at "
+                      f"{ch.numbers['ring']['transitivity']['median']:.2f} in the median world. {BAND_WORDS}.",
               recipe=recipe(W.runs_text(), STATS_FILE,
                             ["Take the rows with `phase` = 2 and the statistic `transitivity`.",
                              "Bands as above, in stretches of 25."]))
     ch.number("transitivity_settled", describe([mean_over(s.run_id, "transitivity", *W.window) for s in alive]))
+
+    # The thesis of Experiment 5 checked on these worlds, as its plan checked it: from iteration 100 on.
+    thesis = {}
+    for stat, bound, side in (("bridges/edges", 0.2, "above"), ("transitivity", 0.1, "below"),
+                              ("coreShare", 0.5, "below")):
+        values = [mean_over(s.run_id, stat, 100, W.last) for s in alive]
+        thesis[stat] = {**describe(values), "bound": bound, "side": side,
+                        "worlds_on_side": int(sum((v > bound) if side == "above" else (v < bound) for v in values))}
+    ch.number("thesis_E05", thesis)
 
     agents = np.array([mean_over(s.run_id, "nodes", *W.window) for s in alive])
     k = np.array([mean_over(s.run_id, "meanDegree", *W.window) for s in alive])
@@ -504,7 +535,13 @@ def shape(ch: F.Chapter) -> None:
                        f"`phase` = 2 and {W.settled} ≤ `iteration` ≤ {W.last:,} (`meanPathLength` is measured every "
                        "25 iterations, from breadth-first searches out of 8 to 16 evenly spread agents; [Path length](../notes/path-length.md)).",
                        "Plot one dot per run, and ln N / ln k for the same run."]))
-    ch.number("distance", {"measured": describe(L), "random": describe(rnd), "ratio": describe(L / rnd)})
+    hubs = np.array([mean_over(s.run_id, "maxDegree/nodes", *W.window) for s in alive])
+    plain = hubs < STAR
+    ch.number("distance", {"measured": describe(L), "random": describe(rnd), "ratio": describe(L / rnd),
+                           "agents": describe(agents), "size_corr": float(np.corrcoef(agents, L)[0, 1]),
+                           "size_corr_without_stars": float(np.corrcoef(agents[plain], L[plain])[0, 1])
+                           if plain.sum() > 2 else None,
+                           "measured_without_stars": describe(L[plain])})
 
 
 # ---------------------------------------------------------------------------
@@ -546,8 +583,7 @@ def lineage(ch: F.Chapter) -> None:
                        "Kaplan–Meier as in Chapter 12."]))
 
     top_seed = EXAMPLES["top"]
-    top_window = dict(EXAMPLES["families"])[top_seed]
-    example = F.world_pass(W.run(top_seed), top_window)
+    example = F.world_pass(W.run(top_seed))
     top = band_series([(np.array([t for t, _ in F.world_pass(s.run_id)["top"]], float),
                         np.array([v for _, v in F.world_pass(s.run_id)["top"]], float)) for s in specs],
                       f"{len(specs)} worlds: median, middle half, nine in ten", VIOLET)
@@ -560,6 +596,26 @@ def lineage(ch: F.Chapter) -> None:
               recipe=recipe(W.runs_text(), FRAMES,
                             ["After every game, count the agents per genotype in `brain_ids`; the "
                              "largest count divided by the number of agents.", *BAND_STEPS]))
+    peaks = {s.run_id: max(((t, v) for t, v in F.world_pass(s.run_id)["top"] if t >= 100), key=lambda x: x[1])
+             for s in specs}
+    highest = max(peaks, key=lambda r: peaks[r][1])
+    ch.number("top_share", {
+        "median": float(np.median([np.median([v for t, v in F.world_pass(s.run_id)["top"] if t >= 100])
+                                   for s in specs])),
+        "worlds_above": {str(x): int(sum(v > x for _, v in peaks.values())) for x in (0.1, 0.2, 0.33, 0.5)},
+        "highest": {"seed": int(highest.rsplit("s", 1)[1]), "share": float(peaks[highest][1]),
+                    "iteration": int(peaks[highest][0])}})
+
+    # The thesis of Experiment 6 checked on these worlds, as its plan checked it: from iteration 100 on.
+    lowest = []
+    for s in alive:
+        its, v = series(s.run_id, "cladesInWindow")
+        lowest.append(float(np.nanmin(v[its >= 100])))
+    ch.number("thesis_E06", {
+        "distinct_per_agent": describe([mean_over(s.run_id, "distinctBrains/nodes", 100, W.last) for s in alive]),
+        "families": describe([mean_over(s.run_id, "cladesInWindow", 100, W.last) for s in alive]),
+        "families_lowest": describe(lowest), "worlds_ever_ten_or_fewer": int(sum(x <= 10 for x in lowest)),
+        "worlds_with_a_tenth": int(sum(v > 0.1 for _, v in peaks.values()))})
 
     depth = []
     seeds = EXAMPLES["ancestry"]

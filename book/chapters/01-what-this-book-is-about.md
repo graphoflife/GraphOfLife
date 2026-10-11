@@ -94,16 +94,20 @@ written, will climb the ladder, by the changes to the rules that
   physical ideas behind the rules ([Chapter 7](07-physical-inspiration.md)), and
   whether a run can be made again exactly ([Chapter 8](08-is-a-run-reproducible.md)).
 - **Part II · The baseline world.** Thirty worlds of one fixed setting — the
-  *baseline*, called B1 — looked at from every side: their life over 3,000
-  iterations, their first hundred iterations, births and deaths, chance,
+  *baseline*, called B1, at 100,000 tokens, about 14,000 agents each — looked
+  at from every side: their life over 1,500 iterations, their first hundred
+  iterations, births, deaths and ages, chance,
   wealth, the game, the shape of the network, lineages, what the brains are
   like and what agents say to each other, whether the rich stay rich, how
   the network grows, how far likeness reaches, and how many dimensions a
-  world has ([Chapters 9 to 26](09-thirty-worlds.md)).
+  world and its core have ([Chapters 9 to 26](09-thirty-worlds.md)). They
+  were first written from thirty worlds of 10,000 tokens, which the chapters
+  still compare against.
 - **Part III · The baseline world, measured every way.** The same thirty
   worlds again, through every statistic the Graph of Life viewer offers and
-  some it does not: entropy, gains and losses, the flow of tokens, how agents
-  have children, power laws, scaling, the geometry of the network, how it
+  some it does not: entropy, gains and losses, the flow of tokens and what
+  crosses each connection, how agents have children, power laws, the largest
+  and the smallest, scaling, the geometry of the network, how it
   breaks, pictures of one world in many colours, whether agents cooperate —
   then a chapter that questions the rules themselves, and a meta chapter on
   what it all means for open-ended evolution, with proposals for changing the

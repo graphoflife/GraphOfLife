@@ -127,7 +127,7 @@
   "worlds": {
    "title": "Six worlds, one at a time",
    "caption": "The number of agents alive after every game in the worlds with seeds 1 to 6, each in a chart of its own and all on the same scale (0 to 25,000 agents, iterations 0 to 1,500). Each line has one point per iteration.",
-   "recipe": "**Runs.** `B1-100000-s001` \u2026 `B1-100000-s006`, six of the 30 baseline runs (their settings are listed in [Chapter 9](09-thirty-worlds.md)).\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).\n\n1. Take the rows with `phase` = 2.\n2. Plot `nodes` against `iteration`, one point per iteration, joined.\n\n**To make it again:** `python3 book_figures.py life`."
+   "recipe": "**Runs.** `B1-100000-s001` \u2026 `B1-100000-s006`, six of the 30 baseline runs (their settings are listed in Chapter 9).\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).\n\n1. Take the rows with `phase` = 2.\n2. Plot `nodes` against `iteration`, one point per iteration, joined.\n\n**To make it again:** `python3 book_figures.py life`."
   },
   "agents": {
    "title": "Agents alive, 30 worlds",

@@ -20,8 +20,8 @@ import numpy as np
 
 import book_data as D
 import book_figures as F
-from book_figures import FRAMES, chapter, describe, dots, line, quantile_band, recipe
-from book_chapters.common import BLUE, GREEN, GREY, ORANGE, RED, VIOLET, WORLD_SETS, YELLOW, listed
+from book_figures import FRAMES, STATS_FILE, chapter, describe, line, mean_over, recipe
+from book_chapters.common import BLUE, GREEN, GREY, ORANGE, RED, VIOLET, WORLD_SETS, YELLOW
 
 E08_WORDS = ("the baseline worlds of Experiment 8, three seeds at each of ten sizes from 800 to 409,600 tokens, "
              "600 iterations each (Chapter 42; `python3 gol_lab.py run E08`)")
@@ -142,6 +142,7 @@ def takeover(ch: F.Chapter) -> None:
                         "exponent_between_sets": float(np.log(mb / ms) / np.log(large.tokens / small.tokens))
                         if mb and ms else None})
     domain_figures(ch)
+    ten_small(ch)
 
 
 #: How far back a family is founded, in iterations, and how far out it is looked for.
@@ -233,7 +234,7 @@ def reach(row: np.ndarray) -> float:
 
 
 def domain_figures(ch: F.Chapter) -> None:
-    """Chapter 51's last figure: how far a line of descent reaches in a world."""
+    """Chapter 55's figure of domains: how far a line of descent reaches in a world."""
     large, small = WORLD_SETS["E10"], WORLD_SETS["E02"]
     sets = {"large": (large, [domains(s.run_id) for s in large.alive]),
             "small": (small, [domains(s.run_id) for s in small.alive])}
@@ -266,3 +267,73 @@ def domain_figures(ch: F.Chapter) -> None:
                        "Breadth-first searches out of 100 agents drawn at random (seed 51), to 30 steps; per r, the "
                        "pairs and the pairs in one family; chance: Σ c(c − 1) / (n(n − 1)) over the families' counts "
                        "c (`book_chapters.scale.domains`)."]))
+
+
+# ---------------------------------------------------------------------------
+# Is a large world ten small ones?
+# ---------------------------------------------------------------------------
+
+#: The viewer's statistics compared across the two sizes, in three panels: shares and rates per agent; the
+#: network's shape and distances; its largest single things and its totals. (stat, phase, label, colour)
+COMPARED = (
+    ("Shares and rates per agent", (0.5, 2), (
+        ("edges/nodes", 2, "connections", BLUE), ("births/nodes_before", 1, "births", BLUE),
+        ("starved/nodes_before", 2, "starved", BLUE), ("orphaned/nodes_before", 2, "cut off", BLUE),
+        ("leaves/nodes", 2, "leaves", BLUE), ("distinctBrains/nodes", 2, "genotypes", BLUE),
+        ("revolutions/nodes_before", 2, "nodes taken", BLUE), ("heldHomeShare", 2, "nodes kept", BLUE),
+        ("gini", 2, "Gini", BLUE), ("topDecileShare", 2, "richest tenth", BLUE))),
+    ("Shape and distances", (0.3, 3), (
+        ("coreShare", 2, "core", GREEN), ("cycleRank/nodes", 2, "loops", GREEN),
+        ("bridges/edges", 2, "bridges", GREEN), ("transitivity", 2, "clustering", GREEN),
+        ("assortativity", 2, "assortativity", GREEN), ("spectralGap", 2, "spectral gap", GREEN),
+        ("dimension", 2, "dimension", ORANGE), ("meanPathLength", 2, "mean distance", ORANGE),
+        ("diameter", 2, "diameter", ORANGE))),
+    ("The largest, and totals", (1, 20), (
+        ("maxTokenAdded", 2, "largest gain", RED), ("maxTokens", 2, "richest", RED),
+        ("maxDegree", 2, "best-connected", RED), ("nodes", 2, "agents", GREY),
+        ("cladesInWindow", 2, "families", GREY))),
+)
+#: Both sets of worlds are compared over the same iterations.
+COMPARED_WINDOW = (500, 1499)
+
+
+def ten_small(ch: F.Chapter) -> None:
+    """Every compared statistic's median over the large worlds, divided by its median over the small ones."""
+    large, small = WORLD_SETS["E10"], WORLD_SETS["E02"]
+    said, panels = {}, []
+    for title, (low, high), stats in COMPARED:
+        for stat, phase, label, colour in stats:
+            values = {w.experiment: float(np.median([mean_over(s.run_id, stat, *COMPARED_WINDOW, phase)
+                                                     for s in w.alive])) for w in (large, small)}
+            said[stat] = {"large": values[large.experiment], "small": values[small.experiment],
+                          "ratio": values[large.experiment] / values[small.experiment]}
+        labels = [label for _, _, label, _ in stats]
+        panels.append(dict(
+            title=title, x={"label": "", "categories": labels},
+            y={"label": "large ÷ small (logarithmic)", "log": True, "min": low, "max": high},
+            series=[{"label": None, "kind": "bars", "x0": [k - 0.36], "x1": [k + 0.36], "y0": [1.0],
+                     "y": [said[stat]["ratio"]], "colour": colour} for k, (stat, _, _, colour) in enumerate(stats)],
+            legend=False))
+    width = (large.tokens / small.tokens) ** 0.30
+    agents = said["nodes"]["ratio"]
+    for panel in panels:
+        panel["guides"] = [{"axis": "y", "at": at, "label": text} for at, text in
+                           ((1, "the same"), (width, f"×{width:.1f}"), (agents, f"×{agents:.0f}"))
+                           if panel["y"]["min"] <= at <= panel["y"]["max"]]
+    ch.grid(
+        "ten-small", panels, columns=1, title="One world of 100,000 tokens beside one of 10,000",
+        caption=f"For each of {len(said)} of the viewer's statistics, its mean over iterations "
+                f"{COMPARED_WINDOW[0]}–{COMPARED_WINDOW[1]:,} in each world that lived to the end; the median of "
+                f"the {len(large.alive)} worlds of {large.tokens:,} tokens divided by the median of the "
+                f"{len(small.alive)} worlds of {small.tokens:,} — over the same iterations, though the small worlds "
+                "ran on to 2,999. On logarithmic axes, so that half as much and twice as much lie equally far from "
+                "1; each bar rises from 1 or falls from it. Blue: shares and rates per agent; green: the shape of the "
+                "network; orange: its distances; red: its largest single things; grey: totals. The dashed guides: no change; "
+                f"×{width:.1f}, the factor by which the width of a world grows (tokens^0.30, Chapter 42); and "
+                f"×{agents:.0f}, the ratio of the agents.",
+        recipe=recipe(f"{large.runs_text()} {small.surviving_text()}", STATS_FILE,
+                      [f"For every run and statistic, the mean over the rows of iterations {COMPARED_WINDOW[0]} to "
+                       f"{COMPARED_WINDOW[1]:,} (`phase` 1 for births, 2 for the rest; a ratio such as "
+                       "`edges/nodes` is taken row by row).",
+                       "The median over each set's runs; the large set's divided by the small set's."]))
+    ch.number("ten_small", said)

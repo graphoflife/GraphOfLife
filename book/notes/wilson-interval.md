@@ -1,6 +1,6 @@
 # The Wilson interval
 
-Four of thirty baseline worlds died out: 13%. With only thirty worlds, the
+Four of the thirty baseline worlds of 10,000 tokens died out: 13%. With only thirty worlds, the
 true rate could easily be lower or higher. The **Wilson interval** (Wilson
 1927) gives a range for a share estimated from a count.
 

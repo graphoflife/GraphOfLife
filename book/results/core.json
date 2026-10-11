@@ -1,0 +1,930 @@
+{
+ "chapter": "core",
+ "numbers": {
+  "core_agents_settled": {
+   "n": 30,
+   "mean": 0.5734827763867593,
+   "median": 0.5949094171828552,
+   "sd": 0.09327803919618909,
+   "min": 0.21892228357676008,
+   "max": 0.6600796034713726,
+   "q25": 0.5579644856812072,
+   "q75": 0.6262601393846366
+  },
+  "tree_agents_settled": {
+   "n": 30,
+   "mean": 0.07786268554901161,
+   "median": 0.07515533571394822,
+   "sd": 0.012789045426844189,
+   "min": 0.053686493633455054,
+   "max": 0.11144623785110541,
+   "q25": 0.06963787149220635,
+   "q75": 0.08641757604048006
+  },
+  "leaf_agents_settled": {
+   "n": 30,
+   "mean": 0.3486545380642291,
+   "median": 0.31980728930714486,
+   "sd": 0.0897262982864838,
+   "min": 0.2595621855128686,
+   "max": 0.6944402922788245,
+   "q25": 0.30285499261293297,
+   "q75": 0.3525895382327563
+  },
+  "core_token_share_settled": {
+   "n": 30,
+   "mean": 0.7057927416666666,
+   "median": 0.729248375,
+   "sd": 0.07851225532735824,
+   "min": 0.395001,
+   "max": 0.770674,
+   "q25": 0.7006016875,
+   "q75": 0.7459347500000001
+  },
+  "tree_token_share_settled": {
+   "n": 30,
+   "mean": 0.07428144999999998,
+   "median": 0.07144275,
+   "sd": 0.013002938036101289,
+   "min": 0.046667,
+   "max": 0.105268,
+   "q25": 0.06608962500000001,
+   "q75": 0.084691375
+  },
+  "leaf_token_share_settled": {
+   "n": 30,
+   "mean": 0.21992580833333336,
+   "median": 0.197876875,
+   "sd": 0.07356968301580517,
+   "min": 0.15519975000000003,
+   "max": 0.5171477500000001,
+   "q25": 0.18323718749999998,
+   "q75": 0.20860906250000003
+  },
+  "dimension": {
+   "world": {
+    "ball": {
+     "n": 27,
+     "mean": 2.9678396459488314,
+     "median": 2.8014989289497474,
+     "sd": 0.8928993772415258,
+     "min": 1.9078615132557706,
+     "max": 6.569154955756743,
+     "q25": 2.4823886971271607,
+     "q75": 3.110006323439146
+    },
+    "walk": {
+     "n": 30,
+     "mean": 2.0482573349644593,
+     "median": 1.871387659458645,
+     "sd": 0.7488474504582493,
+     "min": 1.3537973000735024,
+     "max": 5.091339818126423,
+     "q25": 1.6544979421196253,
+     "q75": 2.1590195100684344
+    },
+    "agents": {
+     "n": 30,
+     "mean": 13135.2,
+     "median": 13759.0,
+     "sd": 3445.4975257573474,
+     "min": 6292.0,
+     "max": 18303.0,
+     "q25": 11198.5,
+     "q75": 15469.75
+    }
+   },
+   "core": {
+    "ball": {
+     "n": 27,
+     "mean": 2.6699788768425314,
+     "median": 2.4668003720302583,
+     "sd": 0.7719580041039571,
+     "min": 1.8777798569012278,
+     "max": 5.398918070080774,
+     "q25": 2.214259062475408,
+     "q75": 2.9495600366697157
+    },
+    "walk": {
+     "n": 30,
+     "mean": 1.906157691591916,
+     "median": 1.8567755377573094,
+     "sd": 0.6014161332307144,
+     "min": 1.1426574285943136,
+     "max": 4.552597146381645,
+     "q25": 1.5794046872682492,
+     "q75": 1.993123710109529
+    },
+    "agents": {
+     "n": 30,
+     "mean": 7542.033333333334,
+     "median": 7693.0,
+     "sd": 1975.2742015387046,
+     "min": 4124.0,
+     "max": 11319.0,
+     "q25": 5945.0,
+     "q75": 9087.0
+    }
+   },
+   "twin": {
+    "ball": {
+     "n": 21,
+     "mean": 6.582424483922335,
+     "median": 6.490588348091901,
+     "sd": 0.3909469778275441,
+     "min": 6.10777724661232,
+     "max": 7.340766801354656,
+     "q25": 6.272677779426612,
+     "q75": 6.9038327251558185
+    },
+    "walk": {
+     "n": 30,
+     "mean": 3.2734341999230088,
+     "median": 3.248083788616955,
+     "sd": 0.3664116470645373,
+     "min": 2.7532132506032654,
+     "max": 4.637690242161631,
+     "q25": 3.079888113999759,
+     "q75": 3.453992392877927
+    },
+    "agents": {
+     "n": 30,
+     "mean": 12430.833333333334,
+     "median": 12463.5,
+     "sd": 3111.8251777343803,
+     "min": 6165.0,
+     "max": 17606.0,
+     "q25": 10602.5,
+     "q75": 14623.5
+    }
+   }
+  },
+  "dimension_big": {
+   "world": {
+    "ball": {
+     "n": 3,
+     "mean": 2.971770039058383,
+     "median": 3.2699534281525686,
+     "sd": 0.5615697520334455,
+     "min": 2.3240045169946115,
+     "max": 3.32135217202797,
+     "q25": 2.79697897257359,
+     "q75": 3.295652800090269
+    },
+    "walk": {
+     "n": 3,
+     "mean": 1.8599843116410373,
+     "median": 1.8722976859384985,
+     "sd": 0.030824859145317043,
+     "min": 1.8249060486122373,
+     "max": 1.8827492003723756,
+     "q25": 1.848601867275368,
+     "q75": 1.877523443155437
+    },
+    "agents": {
+     "n": 3,
+     "mean": 62273.0,
+     "median": 64370.0,
+     "sd": 8910.527986601019,
+     "min": 52501.0,
+     "max": 69948.0,
+     "q25": 58435.5,
+     "q75": 67159.0
+    }
+   },
+   "core": {
+    "ball": {
+     "n": 3,
+     "mean": 2.5955645741728475,
+     "median": 2.6726224223228523,
+     "sd": 0.27201827590888283,
+     "min": 2.293330306091871,
+     "max": 2.8207409941038195,
+     "q25": 2.482976364207362,
+     "q75": 2.7466817082133357
+    },
+    "walk": {
+     "n": 3,
+     "mean": 1.5830977919673765,
+     "median": 1.476687599238609,
+     "sd": 0.3507728914730614,
+     "min": 1.2978516000273101,
+     "max": 1.9747541766362104,
+     "q25": 1.3872695996329596,
+     "q75": 1.7257208879374097
+    },
+    "agents": {
+     "n": 3,
+     "mean": 38337.666666666664,
+     "median": 42284.0,
+     "sd": 8898.011032434908,
+     "min": 28149.0,
+     "max": 44580.0,
+     "q25": 35216.5,
+     "q75": 43432.0
+    }
+   },
+   "twin": {
+    "ball": {
+     "n": 3,
+     "mean": 7.981458514517968,
+     "median": 8.035461767066854,
+     "sd": 0.42861811332411964,
+     "min": 7.528397944428079,
+     "max": 8.380515832058972,
+     "q25": 7.7819298557474665,
+     "q75": 8.207988799562912
+    },
+    "walk": {
+     "n": 3,
+     "mean": 3.5807029261341285,
+     "median": 3.6085237464572426,
+     "sd": 0.06576258253164297,
+     "min": 3.5056024944932247,
+     "max": 3.627982537451918,
+     "q25": 3.5570631204752337,
+     "q75": 3.6182531419545803
+    },
+    "agents": {
+     "n": 3,
+     "mean": 60058.666666666664,
+     "median": 62719.0,
+     "sd": 9493.30924037205,
+     "min": 49519.0,
+     "max": 67938.0,
+     "q25": 56119.0,
+     "q75": 65328.5
+    }
+   }
+  },
+  "dimension_small": {
+   "world": {
+    "ball": {
+     "n": 24,
+     "mean": 2.377675525949759,
+     "median": 2.2912221274382483,
+     "sd": 0.5987465489298255,
+     "min": 1.7159781948215511,
+     "max": 3.9061653447273956,
+     "q25": 1.9747654977489257,
+     "q75": 2.5424309042299607
+    },
+    "walk": {
+     "n": 26,
+     "mean": 1.8653659799255933,
+     "median": 1.769597140213245,
+     "sd": 0.5149044385964744,
+     "min": 1.343513318386274,
+     "max": 3.9422539141698465,
+     "q25": 1.5600962857586373,
+     "q75": 2.0699302632959506
+    },
+    "agents": {
+     "n": 26,
+     "mean": 1367.4615384615386,
+     "median": 1476.5,
+     "sd": 508.2782884026608,
+     "min": 358.0,
+     "max": 2209.0,
+     "q25": 990.75,
+     "q75": 1745.75
+    }
+   },
+   "core": {
+    "ball": {
+     "n": 24,
+     "mean": 2.0725077138326458,
+     "median": 1.9375186457586209,
+     "sd": 0.47626070021548766,
+     "min": 1.414462164634919,
+     "max": 3.507748413386461,
+     "q25": 1.8294275265243887,
+     "q75": 2.2353614257383114
+    },
+    "walk": {
+     "n": 26,
+     "mean": 1.717095247431796,
+     "median": 1.6334850129312815,
+     "sd": 0.42240721344137105,
+     "min": 1.1777068139692124,
+     "max": 2.871396594757914,
+     "q25": 1.4299886250894767,
+     "q75": 1.9462414596905657
+    },
+    "agents": {
+     "n": 26,
+     "mean": 741.6923076923077,
+     "median": 778.5,
+     "sd": 333.00051282011793,
+     "min": 87.0,
+     "max": 1277.0,
+     "q25": 528.75,
+     "q75": 1005.25
+    }
+   },
+   "twin": {
+    "ball": {
+     "n": 24,
+     "mean": 4.183460828408205,
+     "median": 4.14851992589393,
+     "sd": 0.560746929670927,
+     "min": 3.309043156192852,
+     "max": 5.258335301176737,
+     "q25": 3.693788834866947,
+     "q75": 4.4892105391469626
+    },
+    "walk": {
+     "n": 26,
+     "mean": 2.7996881295806255,
+     "median": 2.8562342629374466,
+     "sd": 0.35067162035880545,
+     "min": 1.8042985267282787,
+     "max": 3.3273994866785714,
+     "q25": 2.559214589295137,
+     "q75": 3.034439344335006
+    },
+    "agents": {
+     "n": 26,
+     "mean": 1267.1538461538462,
+     "median": 1361.5,
+     "sd": 488.066609577643,
+     "min": 306.0,
+     "max": 2086.0,
+     "q25": 918.75,
+     "q75": 1630.75
+    }
+   }
+  },
+  "life_ball_world": {
+   "500": {
+    "n": 28,
+    "mean": 3.117906762122172,
+    "median": 3.0949205949071397,
+    "sd": 0.6639104971455018,
+    "min": 1.8456518640961406,
+    "max": 4.925105986241061,
+    "q25": 2.6033105033668633,
+    "q75": 3.593909378984018
+   },
+   "750": {
+    "n": 28,
+    "mean": 3.078037948135152,
+    "median": 2.927342907853333,
+    "sd": 0.7696234892070151,
+    "min": 1.2305261666653518,
+    "max": 5.323432103991669,
+    "q25": 2.620513767123461,
+    "q75": 3.4010415934902043
+   },
+   "1000": {
+    "n": 29,
+    "mean": 2.9108757612576808,
+    "median": 2.744923334816579,
+    "sd": 0.6855417968890956,
+    "min": 1.7774006159459015,
+    "max": 5.297092889763816,
+    "q25": 2.508013444161606,
+    "q75": 3.149777420888917
+   },
+   "1250": {
+    "n": 28,
+    "mean": 3.0327888389815065,
+    "median": 2.9759072985337727,
+    "sd": 0.7299814715353858,
+    "min": 0.9849297629283571,
+    "max": 4.423897010428138,
+    "q25": 2.565195114624694,
+    "q75": 3.4194653616667905
+   },
+   "1499": {
+    "n": 27,
+    "mean": 2.9678396459488314,
+    "median": 2.8014989289497474,
+    "sd": 0.8928993772415258,
+    "min": 1.9078615132557706,
+    "max": 6.569154955756743,
+    "q25": 2.4823886971271607,
+    "q75": 3.110006323439146
+   }
+  },
+  "life_ball_core": {
+   "500": {
+    "n": 29,
+    "mean": 2.8424417005901947,
+    "median": 2.788557692581747,
+    "sd": 0.7754412457406544,
+    "min": 1.682842115282617,
+    "max": 4.587848326365817,
+    "q25": 2.310383157245224,
+    "q75": 3.0783888108529864
+   },
+   "750": {
+    "n": 29,
+    "mean": 2.908005115805316,
+    "median": 2.7940255826106,
+    "sd": 0.7780726527282248,
+    "min": 1.8203540575181079,
+    "max": 5.463120394921602,
+    "q25": 2.3173196294416485,
+    "q75": 3.184617920045308
+   },
+   "1000": {
+    "n": 29,
+    "mean": 2.632140608530011,
+    "median": 2.4730399985731144,
+    "sd": 0.6311252317659808,
+    "min": 1.7102041817575144,
+    "max": 4.796339274510823,
+    "q25": 2.2851886966467148,
+    "q75": 2.766910245923472
+   },
+   "1250": {
+    "n": 28,
+    "mean": 2.7589668576784825,
+    "median": 2.6258271824600388,
+    "sd": 0.5575592613341567,
+    "min": 1.847792128801796,
+    "max": 3.9524062041101393,
+    "q25": 2.327356953169102,
+    "q75": 2.996527111441167
+   },
+   "1499": {
+    "n": 27,
+    "mean": 2.6699788768425314,
+    "median": 2.4668003720302583,
+    "sd": 0.7719580041039571,
+    "min": 1.8777798569012278,
+    "max": 5.398918070080774,
+    "q25": 2.214259062475408,
+    "q75": 2.9495600366697157
+   }
+  },
+  "life_ball_core3": {
+   "500": {
+    "n": 25,
+    "mean": 2.4909996226641953,
+    "median": 2.2791070584462103,
+    "sd": 0.7473167327555876,
+    "min": 1.5746188741238925,
+    "max": 4.660757109869999,
+    "q25": 1.9895898127831348,
+    "q75": 2.73311176248251
+   },
+   "750": {
+    "n": 26,
+    "mean": 2.482567682967945,
+    "median": 2.227446378152319,
+    "sd": 0.6504970502571451,
+    "min": 1.6925272443413495,
+    "max": 3.8221336349211694,
+    "q25": 1.9745813975507716,
+    "q75": 2.80777587867508
+   },
+   "1000": {
+    "n": 26,
+    "mean": 2.2212572375554895,
+    "median": 2.220917982071297,
+    "sd": 0.45947702719009553,
+    "min": 1.402612989463567,
+    "max": 3.469527033926144,
+    "q25": 1.8547210768311873,
+    "q75": 2.4894170277060614
+   },
+   "1250": {
+    "n": 26,
+    "mean": 2.3291604061175324,
+    "median": 2.2486061066328413,
+    "sd": 0.4809635260265803,
+    "min": 1.619545174871201,
+    "max": 3.314025443177072,
+    "q25": 2.001294713621222,
+    "q75": 2.711785626161506
+   },
+   "1499": {
+    "n": 26,
+    "mean": 2.3430430315668676,
+    "median": 2.1072996972311655,
+    "sd": 0.7070205384179729,
+    "min": 1.3952602634073876,
+    "max": 3.8470947020567814,
+    "q25": 1.8156813139610226,
+    "q75": 2.718653723270706
+   }
+  },
+  "life_walk_world": {
+   "500": {
+    "n": 30,
+    "mean": 1.9869232614998842,
+    "median": 1.9062165079271547,
+    "sd": 0.4017475020435319,
+    "min": 1.490748142328274,
+    "max": 3.5858245632635652,
+    "q25": 1.7452026717186773,
+    "q75": 2.137230257107439
+   },
+   "750": {
+    "n": 30,
+    "mean": 2.050513341366311,
+    "median": 1.9556885956616084,
+    "sd": 0.4679688856583196,
+    "min": 1.4199146881841465,
+    "max": 3.658426735336795,
+    "q25": 1.7274231820304722,
+    "q75": 2.107549827151348
+   },
+   "1000": {
+    "n": 30,
+    "mean": 1.870353128213141,
+    "median": 1.7574336059872921,
+    "sd": 0.3244630134030117,
+    "min": 1.4453453760647756,
+    "max": 2.885279767895479,
+    "q25": 1.6702153747828552,
+    "q75": 2.105632879960331
+   },
+   "1250": {
+    "n": 30,
+    "mean": 1.8454069877625427,
+    "median": 1.7993500784718017,
+    "sd": 0.30818151861897064,
+    "min": 1.3453974182737014,
+    "max": 2.8211799386876657,
+    "q25": 1.6425237745108354,
+    "q75": 2.003232635518379
+   },
+   "1499": {
+    "n": 30,
+    "mean": 2.0482573349644593,
+    "median": 1.871387659458645,
+    "sd": 0.7488474504582493,
+    "min": 1.3537973000735024,
+    "max": 5.091339818126423,
+    "q25": 1.6544979421196253,
+    "q75": 2.1590195100684344
+   }
+  },
+  "life_walk_core": {
+   "500": {
+    "n": 30,
+    "mean": 1.7867205768597798,
+    "median": 1.7467855233487783,
+    "sd": 0.339830441256761,
+    "min": 1.126830257992833,
+    "max": 2.4554221728493855,
+    "q25": 1.5248212157926977,
+    "q75": 2.0753458408698213
+   },
+   "750": {
+    "n": 30,
+    "mean": 1.9346450900109764,
+    "median": 1.8338134022635977,
+    "sd": 0.47077819044997976,
+    "min": 1.279535990224173,
+    "max": 3.296445101226741,
+    "q25": 1.6893079345000543,
+    "q75": 2.0096762890675564
+   },
+   "1000": {
+    "n": 30,
+    "mean": 1.81754970129899,
+    "median": 1.7806484111333765,
+    "sd": 0.3506417391584181,
+    "min": 1.2404362828390283,
+    "max": 2.817483688674426,
+    "q25": 1.5974595942807621,
+    "q75": 1.9973888349403324
+   },
+   "1250": {
+    "n": 30,
+    "mean": 1.8396889227049849,
+    "median": 1.752986933752913,
+    "sd": 0.38597461269736333,
+    "min": 1.2680978669691005,
+    "max": 3.1205464096493003,
+    "q25": 1.6184978403978842,
+    "q75": 1.9725605627219278
+   },
+   "1499": {
+    "n": 30,
+    "mean": 1.906157691591916,
+    "median": 1.8567755377573094,
+    "sd": 0.6014161332307144,
+    "min": 1.1426574285943136,
+    "max": 4.552597146381645,
+    "q25": 1.5794046872682492,
+    "q75": 1.993123710109529
+   }
+  },
+  "life_walk_core3": {
+   "500": {
+    "n": 30,
+    "mean": 1.932820572032551,
+    "median": 1.8136683848969937,
+    "sd": 0.6234891115788687,
+    "min": 0.877202213195924,
+    "max": 4.186122245483559,
+    "q25": 1.6042618490901328,
+    "q75": 2.0186184499581046
+   },
+   "750": {
+    "n": 30,
+    "mean": 1.9081732303753796,
+    "median": 1.8379788556759848,
+    "sd": 0.4549282647027756,
+    "min": 1.2452774470018702,
+    "max": 2.8200415278312905,
+    "q25": 1.5432339785840956,
+    "q75": 2.180318564775276
+   },
+   "1000": {
+    "n": 30,
+    "mean": 1.9257105928824578,
+    "median": 1.7495300052618667,
+    "sd": 0.6371276264096845,
+    "min": 1.0539828692497928,
+    "max": 3.9408124328520264,
+    "q25": 1.4835746014259021,
+    "q75": 2.1416976819194073
+   },
+   "1250": {
+    "n": 30,
+    "mean": 1.8471416734031656,
+    "median": 1.6679594937916387,
+    "sd": 0.5500014291044504,
+    "min": 1.0500134047544132,
+    "max": 3.793660853564056,
+    "q25": 1.5509343222532106,
+    "q75": 2.0339677576676145
+   },
+   "1499": {
+    "n": 30,
+    "mean": 1.952964707615337,
+    "median": 1.7301435414891948,
+    "sd": 0.697276267911355,
+    "min": 1.1496264689242595,
+    "max": 4.545964803123788,
+    "q25": 1.5404154596921664,
+    "q75": 2.111841577998296
+   }
+  },
+  "depth_share": [
+   0.7692467360822821,
+   0.1502180052881975,
+   0.05002247702170605,
+   0.018124232848081262,
+   0.00725323606212849,
+   0.0029276609597367353,
+   0.0012216665652569172,
+   0.000522709493929407,
+   0.000239275662250593,
+   0.00012027966498326483,
+   5.4427511155714285e-05,
+   2.5544987547139487e-05
+  ],
+  "largest_tree_settled": {
+   "n": 30,
+   "mean": 1081.9733333333336,
+   "median": 345.2875,
+   "sd": 2152.6556834537537,
+   "min": 60.075,
+   "max": 10821.225,
+   "q25": 187.74375,
+   "q75": 644.525
+  },
+  "deepest_settled": {
+   "n": 30,
+   "mean": 8.994166666666667,
+   "median": 8.9875,
+   "sd": 0.5924701117637354,
+   "min": 8.025,
+   "max": 10.725,
+   "q25": 8.65,
+   "q75": 9.287500000000001
+  },
+  "mean_tree_settled": {
+   "n": 30,
+   "mean": 6.438464291965331,
+   "median": 3.00033068051445,
+   "sd": 12.25263954926853,
+   "min": 2.2772792092289267,
+   "max": 67.46374450638889,
+   "q25": 2.778939769092157,
+   "q75": 3.822586378609465
+  },
+  "shells": {
+   "1": 0.43360790829318796,
+   "2": 0.3019415616763934,
+   "3": 0.15208541713630508,
+   "4": 0.06580720752312012,
+   "5": 0.026118908268140565,
+   "6": 0.010836888669956224,
+   "7": 0.004682246137832956,
+   "8+": 0.004919862295063718
+  },
+  "deepest_shell_settled": {
+   "n": 30,
+   "mean": 8.399166666666666,
+   "median": 8.25,
+   "sd": 1.1337016600600833,
+   "min": 6.375,
+   "max": 11.925,
+   "q25": 7.83125,
+   "q75": 8.70625
+  },
+  "loops_per_agent_settled": {
+   "n": 30,
+   "mean": 0.7863833432976283,
+   "median": 0.8201811257927949,
+   "sd": 0.16488755518432596,
+   "min": 0.2666640399739456,
+   "max": 1.0963211812587523,
+   "q25": 0.7430134475049166,
+   "q75": 0.8781540880628925
+  },
+  "loops_per_core_agent_settled": {
+   "n": 30,
+   "mean": 1.3423014349793365,
+   "median": 1.3366955213652538,
+   "sd": 0.1517874458376733,
+   "min": 0.9751052688862103,
+   "max": 1.7259075625297222,
+   "q25": 1.2605313578107729,
+   "q75": 1.4430204838699243
+  },
+  "core_degree_settled": {
+   "n": 30,
+   "mean": 4.684329920916834,
+   "median": 4.673157512375153,
+   "sd": 0.303652001759357,
+   "min": 3.9493083144272405,
+   "max": 5.451621123005106,
+   "q25": 4.520810966328799,
+   "q75": 4.88582300918335
+  },
+  "where": {
+   "core": {
+    "died": {
+     "n": 30,
+     "mean": 0.03147782667921262,
+     "median": 0.026942505925003236,
+     "sd": 0.015526972672484153,
+     "min": 0.016565354335222014,
+     "max": 0.09739647641428022,
+     "q25": 0.021935660612787546,
+     "q75": 0.0343226951025647
+    },
+    "tokens": {
+     "n": 30,
+     "mean": 9.036394820092447,
+     "median": 8.769380594728815,
+     "sd": 1.8039306872491452,
+     "min": 6.895109599524001,
+     "max": 16.529963942527058,
+     "q25": 7.890437960275562,
+     "q75": 9.586984932329148
+    },
+    "age": {
+     "n": 30,
+     "mean": 86.5044323403966,
+     "median": 82.02158055361545,
+     "sd": 18.80356508776899,
+     "min": 60.57957910616925,
+     "max": 134.30661720274009,
+     "q25": 75.76167487727571,
+     "q75": 89.3470508591607
+    },
+    "degree": {
+     "n": 30,
+     "mean": 5.452385386512764,
+     "median": 5.33348029755542,
+     "sd": 0.7944306374742267,
+     "min": 4.797845261842332,
+     "max": 9.22038062938818,
+     "q25": 5.103683386922462,
+     "q75": 5.468463378696766
+    }
+   },
+   "tree": {
+    "died": {
+     "n": 30,
+     "mean": 0.02881499763274057,
+     "median": 0.027838700317586916,
+     "sd": 0.008311090485963677,
+     "min": 0.018605959533042657,
+     "max": 0.061199090167803956,
+     "q25": 0.0244283932815905,
+     "q75": 0.03233794646163531
+    },
+    "tokens": {
+     "n": 30,
+     "mean": 6.797691108074332,
+     "median": 6.71307045885148,
+     "sd": 0.8680243727933356,
+     "min": 5.294735098805854,
+     "max": 8.409340363134111,
+     "q25": 6.208180251299883,
+     "q75": 7.603320146694881
+    },
+    "age": {
+     "n": 30,
+     "mean": 87.77329999148589,
+     "median": 85.69795275820083,
+     "sd": 18.347514717318756,
+     "min": 61.902872059000245,
+     "max": 135.27236170799884,
+     "q25": 74.09345998833511,
+     "q75": 90.87735315424895
+    },
+    "degree": {
+     "n": 30,
+     "mean": 2.31102513578346,
+     "median": 2.3075423747397803,
+     "sd": 0.03958453231001038,
+     "min": 2.174773278867737,
+     "max": 2.436752813685051,
+     "q25": 2.2986282341766318,
+     "q75": 2.3311391026435113
+    }
+   },
+   "leaf": {
+    "died": {
+     "n": 30,
+     "mean": 0.028331964992998594,
+     "median": 0.02727881012742983,
+     "sd": 0.008870803681761944,
+     "min": 0.012260641160266796,
+     "max": 0.06553427789800335,
+     "q25": 0.024634011704419825,
+     "q75": 0.030958253581516024
+    },
+    "tokens": {
+     "n": 30,
+     "mean": 4.5144736138857215,
+     "median": 4.394548222248276,
+     "sd": 0.776010465012698,
+     "min": 3.499440959603618,
+     "max": 7.414828417345464,
+     "q25": 3.983785126324145,
+     "q75": 4.965478567550321
+    },
+    "age": {
+     "n": 30,
+     "mean": 82.15954056190412,
+     "median": 76.97750863882574,
+     "sd": 17.86006946423329,
+     "min": 58.260522295750775,
+     "max": 118.0821691843425,
+     "q25": 70.42887315946041,
+     "q75": 90.24521433722484
+    },
+    "degree": {
+     "n": 30,
+     "mean": 1.0,
+     "median": 1.0,
+     "sd": 0.0,
+     "min": 1.0,
+     "max": 1.0,
+     "q25": 1.0,
+     "q75": 1.0
+    }
+   }
+  }
+ },
+ "figures": {
+  "parts": {
+   "title": "Core, trees and leaves",
+   "caption": "At the start of the game of every 25th iteration of the 30 worlds: the share of the agents (left) and of the tokens (right) in the core, on the hanging trees (agents with two connections or more that the peeling removes), and on leaves (agents with one connection). The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).",
+   "recipe": "**Runs.** The 30 baseline runs `B1-100000-s001` \u2026 `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in Chapter 9). They are made with `python3 gol_lab.py run E10`.\n\n**Data.** From each run's frames, read every 25 iterations by `book_chapters.core.core_shape`: frame `2\u00b7t` (the start of the game of t) and frame `2\u00b7t + 1` (after it), `gol_store.read_frame`.\n\n1. Peel every agent with one connection or none, again and again; what is never peeled is the core; leaves are agents with one connection; the rest of the peeled are on trees.\n2. Count the agents and add up the tokens of each part; divide by the world's.\n\n**To make it again:** `python3 book_figures.py core`."
+  },
+  "dimension": {
+   "title": "How many dimensions the core has",
+   "caption": "The two rulers of Chapter 24 \u2014 the local dimension from how balls grow, and the spectral dimension from how a random walk spreads \u2014 on the 30 worlds after their last game (blue), on their cores alone (green), and on their random twins (red); each line is the median of the worlds, the darker band the middle half of them and the paler band nine in ten. Yellow: the cores of the three worlds of 409,600 tokens of Chapter 42.",
+   "recipe": "**Runs.** The 30 baseline runs `B1-100000-s001` \u2026 `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in Chapter 9). They are made with `python3 gol_lab.py run E10`. The three worlds of 409,600 tokens of Experiment 8 (`B1-409600-s001` \u2026 `-s003`, Chapter 42; `python3 gol_lab.py run E08`), after their last game.\n\n**Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2\u00b7t` is iteration *t* after reproduction and frame `2\u00b7t + 1` after the game.\n\n1. Read each run's last frame; build its network from `edges`; its core by peeling; its random twin by `book_graph.degree_preserving` (seed 23).\n2. Each network's largest piece, measured as in Chapter 24 (`book_chapters.space.measure`).\n\n**To make it again:** `python3 book_figures.py core`."
+  },
+  "over-life": {
+   "title": "The core's dimension over a world's life",
+   "caption": "After the games of iterations 500, 750, 1,000, 1,250 and 1,499 of the 30 worlds: each ruler's typical reading \u2014 the median of its values over the scales of Chapter 24's plateau \u2014 on the whole world, on its 2-core and on its 3-core (what is left when agents with fewer than three connections inside the core are peeled away too). The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).",
+   "recipe": "**Runs.** The 30 baseline runs `B1-100000-s001` \u2026 `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in Chapter 9). They are made with `python3 gol_lab.py run E10`.\n\n**Data.** From each run's frames, read every 25 iterations by `book_chapters.core.core_shape`: frame `2\u00b7t` (the start of the game of t) and frame `2\u00b7t + 1` (after it), `gol_store.read_frame`.\n\n1. At each moment, the network after the game, its 2-core, and its 3-core (`networkx.core_number` \u2265 3).\n2. Both rulers on the largest piece of each (`book_chapters.space.measure`); the median of the readings over the plateau's scales.\n\n**To make it again:** `python3 book_figures.py core`."
+  },
+  "trees": {
+   "title": "The trees that hang off the core",
+   "caption": "Left: of all agents off the core at the start of the games of every 25th iteration from 500 on, pooled over the worlds, the share at each number of steps from the core, on a logarithmic axis: a straight falling line is a share that shrinks by the same factor with every step. Right: every 25 iterations, the number of agents hanging from the core agent that holds the most, the steps from the core to the farthest agent, and the mean number hanging from a core agent that holds any. The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).",
+   "recipe": "**Runs.** The 30 baseline runs `B1-100000-s001` \u2026 `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in Chapter 9). They are made with `python3 gol_lab.py run E10`.\n\n**Data.** From each run's frames, read every 25 iterations by `book_chapters.core.core_shape`: frame `2\u00b7t` (the start of the game of t) and frame `2\u00b7t + 1` (after it), `gol_store.read_frame`.\n\n1. Peel as above; a breadth-first search out of every core agent at once gives every other agent its steps from the core and the core agent its tree hangs from (`book_chapters.core.hanging`).\n2. Count the agents per step and per core agent.\n\n**To make it again:** `python3 book_figures.py core`."
+  },
+  "onion": {
+   "title": "A world as an onion",
+   "caption": "An agent's core number is the largest k such that it belongs to the k-core: what is left when every agent with fewer than k connections is removed, again and again. Core number 1 is everything peeled to reach the 2-core (trees and leaves), 2 the agents of the 2-core that the 3-core no longer holds, and so on. Left: the share of agents with each core number, at the start of every 25th game from 500 on, pooled over the worlds. Right: the deepest core number in a world every 25 iterations; the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).",
+   "recipe": "**Runs.** The 30 baseline runs `B1-100000-s001` \u2026 `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in Chapter 9). They are made with `python3 gol_lab.py run E10`.\n\n**Data.** From each run's frames, read every 25 iterations by `book_chapters.core.core_shape`: frame `2\u00b7t` (the start of the game of t) and frame `2\u00b7t + 1` (after it), `gol_store.read_frame`.\n\n1. `networkx.core_number` of the network at the start of the game.\n2. Count the agents of each core number (8 and more together); and the largest.\n\n**To make it again:** `python3 book_figures.py core`."
+  },
+  "loops": {
+   "title": "Loops, per agent and per core agent",
+   "caption": "Every 25 iterations at the start of the game: the number of independent loops of a world \u2014 connections minus agents plus one, its cycle rank ([Loops](../notes/loops.md)) \u2014 divided by its agents and by the agents of its core, which holds every loop; and the mean number of connections a core agent has to other core agents. The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).",
+   "recipe": "**Runs.** The 30 baseline runs `B1-100000-s001` \u2026 `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in Chapter 9). They are made with `python3 gol_lab.py run E10`.\n\n**Data.** From each run's frames, read every 25 iterations by `book_chapters.core.core_shape`: frame `2\u00b7t` (the start of the game of t) and frame `2\u00b7t + 1` (after it), `gol_store.read_frame`.\n\n1. Cycle rank = connections \u2212 agents + 1 (the world is one piece after every cleanup).\n2. Divide by the agents, and by the core's agents; connections with both ends in the core, twice, over the core's agents.\n\n**To make it again:** `python3 book_figures.py core`."
+  },
+  "where": {
+   "title": "Who lives where",
+   "caption": "At the start of the games of every 25th iteration from 500 on: for the agents of the core, of the trees and the leaves, the share no longer alive after that game, their mean tokens, and their mean age. One dot per world; the bar is the median.",
+   "recipe": "**Runs.** The 30 baseline runs `B1-100000-s001` \u2026 `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in Chapter 9). They are made with `python3 gol_lab.py run E10`.\n\n**Data.** From each run's frames, read every 25 iterations by `book_chapters.core.core_shape`: frame `2\u00b7t` (the start of the game of t) and frame `2\u00b7t + 1` (after it), `gol_store.read_frame`.\n\n1. Peel as above; for each part, the agents of frame `2\u00b7t` missing from frame `2\u00b7t + 1`, and the means of `tokens` and `ages`.\n2. Pool the looks of a world; one dot per world.\n\n**To make it again:** `python3 book_figures.py core`."
+  }
+ }
+}

@@ -16,18 +16,22 @@ classic setting for the evolution of signals, from Lewis's signalling games
 > - Do kin speak alike? Could an agent recognise its kin by what they say?
 > - How many of the 30 numbers are used?
 
-<!-- runs E02 -->
+The worlds are the thirty of 100,000 tokens of [Chapter 9](09-thirty-worlds.md);
+where the thirty of 10,000 tokens this chapter was first written from differ,
+both are given.
+
+<!-- runs E10 -->
 > [!info] The runs behind this chapter
-> **30 runs.** Every condition below is run once for every seed (1 to 30), for 3,000 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
+> **30 runs.** Every condition below is run once for every seed (1 to 30), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
 >
-> - **baseline** — changes nothing: B1 as it is; 10,000 tokens. Runs `B1-10000-s001` … `B1-10000-s030`.
+> - **baseline** — changes nothing: B1 as it is; 100,000 tokens. Runs `B1-100000-s001` … `B1-100000-s030`.
 >
-> To make these runs again: `python3 gol_lab.py run E02`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | baseline | what it is |
 > |---|---|---|
-> | [`total_tokens`](../notes/settings.md#total_tokens) | 10,000 | The number of tokens in the world, *T*. It never changes during a run. |
+> | [`total_tokens`](../notes/settings.md#total_tokens) | 100,000 | The number of tokens in the world, *T*. It never changes during a run. |
 > | [`n_nodes`](../notes/settings.md#n_nodes) | 0 | How many founders the world starts with. 0 means one founder per hundred tokens: *n* = ⌊*T* / 100⌋. |
 > | [`k_neighbors`](../notes/settings.md#k_neighbors) | 0 | How many neighbours each founder starts with in the ring. 0 means *k* = max(⌊*n* / 100⌋, 5); an odd *k* is wired as *k* − 1. |
 > | [`rewire_p`](../notes/settings.md#rewire_p) | 0.2 | In the starting ring, the probability that a connection is moved to a founder chosen at random (Watts–Strogatz). |
@@ -51,19 +55,19 @@ classic setting for the evolution of signals, from Lewis's signalling games
 > | [`mutation_sparsity`](../notes/settings.md#mutation_sparsity) | 0.1 | The share of a brain's numbers a change touches; also the probability, for each weight matrix and bias vector, of a rarer reset that redraws that share of it. |
 > | [`extinction_threshold`](../notes/settings.md#extinction_threshold) | 20 | A run stops, as extinct, when an iteration ends (after its game) with this many agents or fewer. |
 > | seeds | 1 to 30 | one run per seed |
-> | iterations | 3,000 | how far each run goes, unless its world dies first |
+> | iterations | 1,500 | how far each run goes, unless its world dies first |
 >
 > A value in **bold** differs from the baseline B1.
 <!-- /runs -->
 
 ## How the messages are read
 
-As in [Chapter 19](19-what-the-brains-are-like.md), every one of the 26
-worlds that lived to the end is rebuilt exactly as its last game left it.
-Every agent looks at its candidates, and its brain writes a message to each,
-30 outputs squeezed by tanh into −1 to 1. That gives between 1,400 and
-10,000 messages per world, one for every connection in each direction and
-one from every agent to itself. As a control, a fresh founder's brain
+As in [Chapter 19](19-what-the-brains-are-like.md), every one of the thirty
+worlds is rebuilt exactly as its last game left it. Every agent looks at its
+candidates, and its brain writes a message to each, 30 outputs squeezed by
+tanh into −1 to 1. That gives between 32,000 and 79,000 messages per world,
+one for every connection in each direction and one from every agent to
+itself. As a control, a fresh founder's brain
 writes from exactly the same inputs.
 
 ## A name, not news
@@ -74,7 +78,7 @@ writes from exactly the same inputs.
 **A name, not news.** For every agent of a world at its end, the message its brain writes to each of its candidates (the 30 message outputs, squashed by tanh into −1 to 1). Left: how different the messages one agent writes to two of its readers are; right: how different the messages of two agents are. One dot per world, each the median over its agents.
 
 > [!example]- How to make this figure
-> **Runs.** The 26 baseline worlds that lived to the end.
+> **Runs.** The 30 baseline worlds that lived to the end.
 >
 > **Data.** From the final checkpoint of each run, `GraphOfLifeRuns/<run>/checkpoint.npz`, read with `gol_store.load_checkpoint(run, config)`: the world after its last iteration, every living agent's brain and every message in flight.
 >
@@ -86,7 +90,7 @@ writes from exactly the same inputs.
 
 Two messages written by **one** agent to two of its readers differ, in the
 root mean square of their 30 numbers, by **0.0005**. Two messages written by
-**two** agents differ by **0.55**. An agent says the same thing to everyone:
+**two** agents differ by **0.60** (0.55 at 10,000 tokens). An agent says the same thing to everyone:
 to itself, to a rich neighbour and to a poor one, to kin and to strangers. So
 a message tells its reader one thing, *who wrote it*. It is a name.
 
@@ -107,7 +111,7 @@ questions, one per panel:
 **What the messages carry.** One dot per world. Left: of how much the agents' messages differ from one agent to the next, the share that lies between genotypes — 1 if agents of one genotype write exactly alike — against the same share with the genotypes shuffled among the agents (the median of 50 shuffles). Middle: the effective number of independent numbers the messages use, of their 30 (the participation ratio of the eigenvalues of their covariance). Right: the share of the messages' variety that a straight-line fit on the writer's and reader's tokens and connections (their logarithms) and whether the message is to itself accounts for. Blue: the agents' own brains; grey: a fresh founder's brain — weights drawn as for the founders of a world, normal with standard deviation 1/√(fan-in), biases 0 — given exactly the same inputs.
 
 > [!example]- How to make this figure
-> **Runs.** The 26 baseline worlds that lived to the end.
+> **Runs.** The 30 baseline worlds that lived to the end.
 >
 > **Data.** From the final checkpoint of each run, `GraphOfLifeRuns/<run>/checkpoint.npz`, read with `gol_store.load_checkpoint(run, config)`: the world after its last iteration, every living agent's brain and every message in flight.
 >
@@ -130,29 +134,33 @@ one genotype is one brain, and a brain that hardly sees writes the same
 thing whoever it is in. A message is the name **of a genotype**.
 
 **Few numbers are used.** Of the 30 numbers, a world's messages vary along
-only **8.8** independent directions in the median world (2.2 to 13), counted
-as a participation ratio ([How many directions a cloud of points uses](../notes/participation-ratio.md)).
-Founders' brains, independent of each other, use 28.5, all of them. A
-world's genotypes descend from a few lines ([Chapter 18](18-genotypes-and-lineages.md)),
+only **15** independent directions in the median world (6 to 21), counted as
+a participation ratio ([How many directions a cloud of points uses](../notes/participation-ratio.md)).
+Founders' brains, independent of each other, use 30, all of them. A world's
+genotypes descend from a few lines ([Chapter 18](18-genotypes-and-lineages.md)),
 and the messages of one line differ only where the line's changes moved
-them. So a world speaks a few dialects, each spoken by a line.
+them. So a world speaks a few dialects, each spoken by a line. The worlds of
+10,000 tokens used fewer directions, 8.8 in the median world: in a world ten
+times larger more lines live side by side, for longer
+([Chapter 55](55-worlds-of-100000-tokens.md)), and so do more dialects.
 
 **Nearly nothing about the world.** A straight-line fit of the messages on
 what a message could be about — the writer's and the reader's tokens and
 connections (as logarithms), and whether the message is to oneself —
-accounts for **3.5%** of their variety (0.7% to 40%; founders' brains,
-0.9%). One world reaches 40%, but in the others what an agent says has
-almost nothing to do with its situation.
+accounts for **1.2%** of their variety (0.2% to 12%; founders' brains,
+0.2%). At 10,000 tokens it was 3.5%, and one world reached 40%; here none
+comes close, and what an agent says has almost nothing to do with its
+situation.
 
 ## The numbers themselves
 
 <!-- figure talk/values -->
 ![The numbers in a message](../figures/talk/values.svg)
 
-**The numbers in a message.** Every one of the 30 numbers of every message written at the end of the 26 worlds, in bins 0.05 wide: by the agents' own brains (blue) and by a fresh founder's brain — weights drawn as for the founders of a world, normal with standard deviation 1/√(fan-in), biases 0 — given exactly the same inputs (grey, dashed).
+**The numbers in a message.** Every one of the 30 numbers of every message written at the end of the 30 worlds, in bins 0.05 wide: by the agents' own brains (blue) and by a fresh founder's brain — weights drawn as for the founders of a world, normal with standard deviation 1/√(fan-in), biases 0 — given exactly the same inputs (grey, dashed).
 
 > [!example]- How to make this figure
-> **Runs.** The 26 baseline worlds that lived to the end.
+> **Runs.** The 30 baseline worlds that lived to the end.
 >
 > **Data.** From the final checkpoint of each run, `GraphOfLifeRuns/<run>/checkpoint.npz`, read with `gol_store.load_checkpoint(run, config)`: the world after its last iteration, every living agent's brain and every message in flight.
 >
@@ -182,10 +190,10 @@ evolution. When an agent *u* looks at a neighbour *v*, it reads, among other
 things, the message it wrote to itself and the message *v* wrote to it
 ([Messages](../notes/messages.md)). If the two share a genotype, the two
 messages are identical. If *v* is a close relative, they are nearly
-identical. If *v* is a stranger, they differ by about 0.55 per number (as a root mean square).
+identical. If *v* is a stranger, they differ by about 0.6 per number (as a root mean square).
 Telling them apart needs one comparison.
 
-What is missing is a brain that can make it. A difference of 0.55 in 30
+What is missing is a brain that can make it. A difference of 0.6 in 30
 inputs reaches the stakes at a thousandth of its size, and the stakes split
 evenly anyway. Kin recognition is one comparison away, and blocked by the
 same obstacle as everything else in the brain. The planned Chapter 51, *Kin
@@ -202,7 +210,7 @@ heritable tags. A brain that can see is what it needs.
   situation — and what is done on receipt depends on what was sent. Neither
   holds here: messages ignore the situation, and decisions ignore the
   messages ([Chapter 19](19-what-the-brains-are-like.md): setting every
-  message to 0 changes the stakes of only 6.7% of agents at all).
+  message to 0 changes the stakes of only 9% of agents at all).
 - **The raw material is there.** The names identify kin exactly. If brains
   could compare what they read, kin recognition, and with it Hamilton's kin
   selection ([Chapter 38](38-do-agents-cooperate.md)), would be one

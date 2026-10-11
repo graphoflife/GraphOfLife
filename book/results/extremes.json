@@ -1,0 +1,650 @@
+{
+ "chapter": "extremes",
+ "numbers": {
+  "maxTokens_settled": {
+   "n": 30,
+   "mean": 0.028199420000000006,
+   "median": 0.02123098,
+   "sd": 0.02406620014402973,
+   "min": 0.0097422,
+   "max": 0.12814188,
+   "q25": 0.015137494999999999,
+   "q75": 0.02894187
+  },
+  "maxTokenAdded_settled": {
+   "n": 30,
+   "mean": 0.015828102333333333,
+   "median": 0.014390305,
+   "sd": 0.004872335291214933,
+   "min": 0.00818593,
+   "max": 0.02574008,
+   "q25": 0.012146899999999999,
+   "q75": 0.018971015
+  },
+  "maxTokenLost_settled": {
+   "n": 30,
+   "mean": 0.015370795666666668,
+   "median": 0.013781435,
+   "sd": 0.004673802082765891,
+   "min": 0.00801101,
+   "max": 0.02469967,
+   "q25": 0.011880505,
+   "q75": 0.018475285
+  },
+  "minTokens_settled": {
+   "n": 30,
+   "mean": 1.0015000000000003e-05,
+   "median": 1.0009999999999999e-05,
+   "sd": 2.674915403109594e-08,
+   "min": 1e-05,
+   "max": 1.014e-05,
+   "q25": 1e-05,
+   "q75": 1.002e-05
+  },
+  "maxDegree_settled": {
+   "n": 30,
+   "mean": 1437.9566333333335,
+   "median": 642.122,
+   "sd": 2284.0117376908292,
+   "min": 128.529,
+   "max": 10998.031,
+   "q25": 362.798,
+   "q75": 1058.434
+  },
+  "medianDegree_settled": {
+   "n": 30,
+   "mean": 2.0004,
+   "median": 2.0235000000000003,
+   "sd": 0.26597026019903963,
+   "min": 1.101,
+   "max": 2.527,
+   "q25": 2.0,
+   "q75": 2.11475
+  },
+  "minDegree_settled": {
+   "n": 30,
+   "mean": 1.0,
+   "median": 1.0,
+   "sd": 0.0,
+   "min": 1.0,
+   "max": 1.0,
+   "q25": 1.0,
+   "q75": 1.0
+  },
+  "meanDegree_settled": {
+   "n": 30,
+   "mean": 3.381776507105822,
+   "median": 3.4589326924481574,
+   "sd": 0.26576788814063124,
+   "min": 2.4878025452246506,
+   "max": 3.7917466428272038,
+   "q25": 3.3000832506419338,
+   "q75": 3.5491219588421496
+  },
+  "hub_share_settled": {
+   "n": 30,
+   "mean": 0.08757464817675562,
+   "median": 0.04566326520321229,
+   "sd": 0.12026631799815422,
+   "min": 0.008981958872339532,
+   "max": 0.5773473484467214,
+   "q25": 0.02390494946036932,
+   "q75": 0.0740494340694959
+  },
+  "minTokens_ever": 9.0,
+  "minDegree_ever": 1.0,
+  "stars_E10": {
+   "worlds": 30,
+   "star_worlds": 7,
+   "corr_core_hub": -0.9576761040597095,
+   "largest": 0.5773473484467214
+  },
+  "stars_E02": {
+   "worlds": 26,
+   "star_worlds": 10,
+   "corr_core_hub": -0.5433667232607565,
+   "largest": 0.3061266742857155
+  },
+  "succession": {
+   "rich": {
+    "changes": 18103,
+    "to_child": 0.03590565099707231,
+    "to_newborn": 0.029774070596033805,
+    "dynasties": 17483,
+    "dynasty_median": 1.0,
+    "dynasty_longest": 466.0,
+    "dynasty_share_ge_100": 0.0007435794772064291
+   },
+   "hub": {
+    "changes": 1299,
+    "to_child": 0.20708237105465743,
+    "to_newborn": 0.1578137028483449,
+    "dynasties": 1060,
+    "dynasty_median": 7.0,
+    "dynasty_longest": 942.0,
+    "dynasty_share_ge_100": 0.0660377358490566
+   }
+  },
+  "star": {
+   "run": "B1-100000-s028",
+   "seed": 28,
+   "at": {
+    "t": 1122,
+    "agents": 25958,
+    "hub_degree": 20666,
+    "hub_tokens": 20286,
+    "hub_token_share": 0.20286,
+    "leaf_neighbours": 19452,
+    "leaf_tokens": 2.7868599629858113,
+    "staked_per_neighbour": 0.9816123100745185,
+    "neighbours_staked_on": 0.9816123100745185,
+    "staked_most": 1.0,
+    "staked_home": 0.0,
+    "leaf_share_on_hub": 0.4075629388090832
+   },
+   "games": {
+    "count": 100,
+    "taken_by_coalition": 100,
+    "brains": 78
+   },
+   "handover": {
+    "t": 1153,
+    "old_before": 18913,
+    "old_after": 219,
+    "new": 18865,
+    "new_age": 0,
+    "child": true
+   },
+   "settled_changes": 10,
+   "to_newborn_child": 0.8
+  },
+  "reigns_rich": {
+   "reigns": 18133,
+   "median": 1.0,
+   "mean": 1.6544421772459053,
+   "share_1": 0.8938951083659626,
+   "share_ge_10": 0.015441460320961782,
+   "share_ge_100": 0.0007720730160480891,
+   "longest": 304.0
+  },
+  "reigns_hub": {
+   "reigns": 1329,
+   "median": 6.0,
+   "mean": 22.573363431151243,
+   "share_1": 0.23401053423626786,
+   "share_ge_10": 0.41911211437170803,
+   "share_ge_100": 0.04815650865312265,
+   "longest": 592.0
+  },
+  "rich_is_hub": {
+   "n": 30,
+   "mean": 0.22119999999999998,
+   "median": 0.187,
+   "sd": 0.21028427392952848,
+   "min": 0.003,
+   "max": 0.913,
+   "q25": 0.068,
+   "q75": 0.32125000000000004
+  },
+  "gain_loss_joined": {
+   "n": 30,
+   "mean": 0.8954,
+   "median": 0.924,
+   "sd": 0.08188242201158172,
+   "min": 0.616,
+   "max": 0.958,
+   "q25": 0.905,
+   "q75": 0.938
+  },
+  "first": {
+   "rich_degree": {
+    "n": 30,
+    "mean": 455.3666666666667,
+    "median": 7.0,
+    "sd": 1734.2706552747545,
+    "min": 4.0,
+    "max": 8939.0,
+    "q25": 5.0,
+    "q75": 15.75
+   },
+   "hub_tokens": {
+    "n": 30,
+    "mean": 1112.55,
+    "median": 474.25,
+    "sd": 2290.743172399855,
+    "min": 96.0,
+    "max": 11523.5,
+    "q25": 282.75,
+    "q75": 771.875
+   },
+   "rich_age": {
+    "n": 30,
+    "mean": 142.2,
+    "median": 132.5,
+    "sd": 56.17377594080958,
+    "min": 61.5,
+    "max": 321.5,
+    "q25": 107.0,
+    "q75": 157.125
+   },
+   "hub_age": {
+    "n": 30,
+    "mean": 302.3333333333333,
+    "median": 289.25,
+    "sd": 187.39964364102087,
+    "min": 45.0,
+    "max": 681.5,
+    "q25": 129.125,
+    "q75": 425.875
+   }
+  },
+  "with_size": {
+   "slopes": {
+    "rich": -0.523117393392204,
+    "hub": 0.6115702885903648
+   },
+   "sizes": {
+    "1600": {
+     "agents": {
+      "n": 1,
+      "mean": 94.05333333333333,
+      "median": 94.05333333333333,
+      "sd": null,
+      "min": 94.05333333333333,
+      "max": 94.05333333333333,
+      "q25": 94.05333333333333,
+      "q75": 94.05333333333333
+     },
+     "rich": {
+      "n": 1,
+      "mean": 0.38435,
+      "median": 0.38435,
+      "sd": null,
+      "min": 0.38435,
+      "max": 0.38435,
+      "q25": 0.38435,
+      "q75": 0.38435
+     },
+     "hub": {
+      "n": 1,
+      "mean": 18.503333333333334,
+      "median": 18.503333333333334,
+      "sd": null,
+      "min": 18.503333333333334,
+      "max": 18.503333333333334,
+      "q25": 18.503333333333334,
+      "q75": 18.503333333333334
+     },
+     "gain": {
+      "n": 1,
+      "mean": 0.3342520833333333,
+      "median": 0.3342520833333333,
+      "sd": null,
+      "min": 0.3342520833333333,
+      "max": 0.3342520833333333,
+      "q25": 0.3342520833333333,
+      "q75": 0.3342520833333333
+     }
+    },
+    "3200": {
+     "agents": {
+      "n": 3,
+      "mean": 398.8677777777778,
+      "median": 327.71666666666664,
+      "sd": 126.09147694931355,
+      "min": 324.43333333333334,
+      "max": 544.4533333333334,
+      "q25": 326.075,
+      "q75": 436.08500000000004
+     },
+     "rich": {
+      "n": 3,
+      "mean": 0.10011388888888889,
+      "median": 0.08434375,
+      "sd": 0.04549617710795138,
+      "min": 0.06460104166666666,
+      "max": 0.15139687500000001,
+      "q25": 0.07447239583333333,
+      "q75": 0.1178703125
+     },
+     "hub": {
+      "n": 3,
+      "mean": 71.70222222222223,
+      "median": 69.43,
+      "sd": 40.06335570531219,
+      "min": 32.82333333333333,
+      "max": 112.85333333333334,
+      "q25": 51.126666666666665,
+      "q75": 91.14166666666668
+     },
+     "gain": {
+      "n": 3,
+      "mean": 0.052967708333333335,
+      "median": 0.056403125000000005,
+      "sd": 0.02266177116634605,
+      "min": 0.028784375,
+      "max": 0.07371562499999999,
+      "q25": 0.04259375,
+      "q75": 0.065059375
+     }
+    },
+    "6400": {
+     "agents": {
+      "n": 3,
+      "mean": 941.5288888888889,
+      "median": 973.9366666666666,
+      "sd": 291.482671608705,
+      "min": 635.1966666666667,
+      "max": 1215.4533333333334,
+      "q25": 804.5666666666666,
+      "q75": 1094.695
+     },
+     "rich": {
+      "n": 3,
+      "mean": 0.13369322916666668,
+      "median": 0.10051302083333333,
+      "sd": 0.11700923722916477,
+      "min": 0.03685729166666667,
+      "max": 0.263709375,
+      "q25": 0.06868515624999999,
+      "q75": 0.1821111979166667
+     },
+     "hub": {
+      "n": 3,
+      "mean": 336.24111111111114,
+      "median": 345.6766666666667,
+      "sd": 308.3549574639471,
+      "min": 23.276666666666667,
+      "max": 639.77,
+      "q25": 184.47666666666666,
+      "q75": 492.72333333333336
+     },
+     "gain": {
+      "n": 3,
+      "mean": 0.0800767361111111,
+      "median": 0.027156770833333333,
+      "sd": 0.0980435688109198,
+      "min": 0.019864062499999998,
+      "max": 0.193209375,
+      "q25": 0.023510416666666666,
+      "q75": 0.11018307291666667
+     }
+    },
+    "12800": {
+     "agents": {
+      "n": 3,
+      "mean": 1757.2844444444445,
+      "median": 1555.6666666666667,
+      "sd": 646.4150826531521,
+      "min": 1235.7066666666667,
+      "max": 2480.48,
+      "q25": 1395.6866666666667,
+      "q75": 2018.0733333333333
+     },
+     "rich": {
+      "n": 3,
+      "mean": 0.04476388888888889,
+      "median": 0.04787317708333333,
+      "sd": 0.005563195329593396,
+      "min": 0.03834114583333333,
+      "max": 0.04807734375,
+      "q25": 0.043107161458333335,
+      "q75": 0.047975260416666665
+     },
+     "hub": {
+      "n": 3,
+      "mean": 74.15777777777778,
+      "median": 60.00333333333333,
+      "sd": 31.584114560845183,
+      "min": 52.126666666666665,
+      "max": 110.34333333333333,
+      "q25": 56.065,
+      "q75": 85.17333333333333
+     },
+     "gain": {
+      "n": 3,
+      "mean": 0.03840876736111111,
+      "median": 0.040358593750000005,
+      "sd": 0.004179479659076091,
+      "min": 0.03361067708333333,
+      "max": 0.04125703125,
+      "q25": 0.03698463541666667,
+      "q75": 0.0408078125
+     }
+    },
+    "25600": {
+     "agents": {
+      "n": 3,
+      "mean": 3033.371111111111,
+      "median": 2916.99,
+      "sd": 355.68710594711905,
+      "min": 2750.4533333333334,
+      "max": 3432.67,
+      "q25": 2833.7216666666664,
+      "q75": 3174.83
+     },
+     "rich": {
+      "n": 3,
+      "mean": 0.056980989583333336,
+      "median": 0.056454947916666665,
+      "sd": 0.009080055330344108,
+      "min": 0.048175390625,
+      "max": 0.06631263020833333,
+      "q25": 0.05231516927083334,
+      "q75": 0.0613837890625
+     },
+     "hub": {
+      "n": 3,
+      "mean": 125.43555555555555,
+      "median": 124.59666666666666,
+      "sd": 36.88548861504168,
+      "min": 88.97666666666667,
+      "max": 162.73333333333332,
+      "q25": 106.78666666666666,
+      "q75": 143.665
+     },
+     "gain": {
+      "n": 3,
+      "mean": 0.04822408854166666,
+      "median": 0.047904296874999995,
+      "sd": 0.0016012157483705507,
+      "min": 0.04680690104166667,
+      "max": 0.049961067708333334,
+      "q25": 0.04735559895833333,
+      "q75": 0.04893268229166667
+     }
+    },
+    "51200": {
+     "agents": {
+      "n": 3,
+      "mean": 6513.107777777778,
+      "median": 6109.8966666666665,
+      "sd": 758.1974677434583,
+      "min": 6041.713333333333,
+      "max": 7387.713333333333,
+      "q25": 6075.805,
+      "q75": 6748.805
+     },
+     "rich": {
+      "n": 3,
+      "mean": 0.029388476562499998,
+      "median": 0.03390247395833333,
+      "sd": 0.012411814409324904,
+      "min": 0.0153513671875,
+      "max": 0.03891158854166667,
+      "q25": 0.024626920572916666,
+      "q75": 0.03640703125
+     },
+     "hub": {
+      "n": 3,
+      "mean": 354.00555555555553,
+      "median": 155.7,
+      "sd": 437.42479470867437,
+      "min": 50.85666666666667,
+      "max": 855.46,
+      "q25": 103.27833333333334,
+      "q75": 505.58000000000004
+     },
+     "gain": {
+      "n": 3,
+      "mean": 0.024738780381944447,
+      "median": 0.028777994791666667,
+      "sd": 0.009333706783891707,
+      "min": 0.014065755208333332,
+      "max": 0.03137259114583333,
+      "q25": 0.021421875,
+      "q75": 0.03007529296875
+     }
+    },
+    "102400": {
+     "agents": {
+      "n": 3,
+      "mean": 15811.145555555553,
+      "median": 15609.363333333333,
+      "sd": 1439.5226908417071,
+      "min": 14483.16,
+      "max": 17340.913333333334,
+      "q25": 15046.261666666665,
+      "q75": 16475.138333333332
+     },
+     "rich": {
+      "n": 3,
+      "mean": 0.026996126302083336,
+      "median": 0.031039713541666666,
+      "sd": 0.011424708806664585,
+      "min": 0.014099544270833334,
+      "max": 0.03584912109375,
+      "q25": 0.02256962890625,
+      "q75": 0.033444417317708336
+     },
+     "hub": {
+      "n": 3,
+      "mean": 633.5,
+      "median": 741.1566666666666,
+      "sd": 348.58778073503635,
+      "min": 243.78333333333333,
+      "max": 915.56,
+      "q25": 492.46999999999997,
+      "q75": 828.3583333333333
+     },
+     "gain": {
+      "n": 3,
+      "mean": 0.019955468749999997,
+      "median": 0.022554752604166665,
+      "sd": 0.006693700068556997,
+      "min": 0.012351985677083333,
+      "max": 0.024959667968749998,
+      "q25": 0.017453369140625,
+      "q75": 0.02375721028645833
+     }
+    },
+    "204800": {
+     "agents": {
+      "n": 3,
+      "mean": 29361.92111111111,
+      "median": 27221.103333333333,
+      "sd": 4607.624046494791,
+      "min": 26214.17,
+      "max": 34650.49,
+      "q25": 26717.636666666665,
+      "q75": 30935.796666666665
+     },
+     "rich": {
+      "n": 3,
+      "mean": 0.019209255642361114,
+      "median": 0.014125130208333335,
+      "sd": 0.013553286631104007,
+      "min": 0.008933154296875,
+      "max": 0.034569482421875,
+      "q25": 0.011529142252604168,
+      "q75": 0.024347306315104168
+     },
+     "hub": {
+      "n": 3,
+      "mean": 1018.9,
+      "median": 1237.7733333333333,
+      "sd": 470.339477623462,
+      "min": 479.01,
+      "max": 1339.9166666666667,
+      "q25": 858.3916666666667,
+      "q75": 1288.845
+     },
+     "gain": {
+      "n": 3,
+      "mean": 0.012911414930555554,
+      "median": 0.012397216796874999,
+      "sd": 0.008129888806355146,
+      "min": 0.0050508300781250005,
+      "max": 0.021286197916666666,
+      "q25": 0.008724023437499999,
+      "q75": 0.016841707356770833
+     }
+    },
+    "409600": {
+     "agents": {
+      "n": 3,
+      "mean": 60164.11777777778,
+      "median": 59314.46666666667,
+      "sd": 3131.169279715972,
+      "min": 57545.46,
+      "max": 63632.426666666666,
+      "q25": 58429.96333333333,
+      "q75": 61473.44666666667
+     },
+     "rich": {
+      "n": 3,
+      "mean": 0.006711197916666666,
+      "median": 0.006353361002604166,
+      "sd": 0.0011009401230978285,
+      "min": 0.00583369140625,
+      "max": 0.007946541341145833,
+      "q25": 0.006093526204427083,
+      "q75": 0.007149951171875
+     },
+     "hub": {
+      "n": 3,
+      "mean": 1450.6833333333334,
+      "median": 1369.6566666666668,
+      "sd": 1058.461906877669,
+      "min": 435.06333333333333,
+      "max": 2547.33,
+      "q25": 902.36,
+      "q75": 1958.4933333333333
+     },
+     "gain": {
+      "n": 3,
+      "mean": 0.005571088324652778,
+      "median": 0.0054816650390625,
+      "sd": 0.0003146001493760829,
+      "min": 0.005310880533854166,
+      "max": 0.0059207194010416665,
+      "q25": 0.005396272786458333,
+      "q75": 0.005701192220052083
+     }
+    }
+   }
+  }
+ },
+ "figures": {
+  "over-time": {
+   "title": "The largest, over a world's life",
+   "caption": "After every game of the 30 worlds. Left: the tokens of the richest agent, the largest gain and the largest loss of one agent in that game, and the tokens of the mean agent, each as a share of all 100,000 tokens. Right: the connections of the best-connected agent, of the mean agent and of the median one. Both on logarithmic axes; the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).",
+   "recipe": "**Runs.** The 30 baseline runs `B1-100000-s001` \u2026 `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in Chapter 9). They are made with `python3 gol_lab.py run E10`.\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).\n\n1. Take the rows with `phase` = 2: `maxTokens`, `maxTokenAdded`, `maxTokenLost` and `meanTokens`, divided by 100,000; `maxDegree`, `meanDegree` and `medianDegree`.\n2. Cut the 1,500 iterations into 600 stretches of 2.5 and take each world's mean in each stretch.\n3. In each stretch, take the median, the 25th and 75th and the 5th and 95th percentiles of those means over the worlds that still have a value there (a world that died has none after its death).\n\n**To make it again:** `python3 book_figures.py extremes`."
+  },
+  "stars": {
+   "title": "Worlds held together by one agent",
+   "caption": "Left: after every game, the connections of the best-connected agent divided by the agents alive, in the worlds whose best-connected agent held, on average over iterations 500\u20131,499, a tenth of the world or more (one line each), and in the other worlds (the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th)). Right: one dot per world, its mean over the settled life of that share and of the share of agents in the core ([Core, trees and leaves](../notes/core-trees-leaves.md)), for the worlds of 100,000 tokens (blue) and of 10,000 (yellow, over iterations 500\u20132,999).",
+   "recipe": "**Runs.** The 30 baseline runs `B1-100000-s001` \u2026 `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in Chapter 9). They are made with `python3 gol_lab.py run E10`. The 26 surviving ones of the 30 baseline runs `B1-10000-s001` \u2026 `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in Chapter 10). They are made with `python3 gol_lab.py run E02`.\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).\n\n1. Take the rows with `phase` = 2: `maxDegree` / `nodes`, and `coreShare` (every 25 iterations).\n2. Left: one line per star world; the band over the others as every band. Right: each world's means over its settled life.\n\n**To make it again:** `python3 book_figures.py extremes`."
+  },
+  "reigns": {
+   "title": "How long first place is held",
+   "caption": "After every game from iteration 500 on, in the 30 worlds, which agent holds the most tokens and which the most connections. A reign is a stretch of consecutive iterations with the same agent first; for every L, the share of the reigns that lasted at least L iterations, pooled over the worlds. Dashed: the same for dynasties \u2014 a dynasty goes on while every new first agent is a child of the one before it, and ends when first place passes to anyone else \u2014 pooled over the worlds. A reign still going at the end of a run is counted as far as it went.",
+   "recipe": "**Runs.** The 30 baseline runs `B1-100000-s001` \u2026 `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in Chapter 9). They are made with `python3 gol_lab.py run E10`.\n\n**Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2\u00b7t` is iteration *t* after reproduction and frame `2\u00b7t + 1` after the game.\n\n1. Read the frame after every game; the agent with the most `tokens`, and the one with the most connections in `edges` (`book_chapters.extremes.reigns`).\n2. Cut each run's sequence of first agents into stretches of the same agent; count lengths.\n\n**To make it again:** `python3 book_figures.py extremes`."
+  },
+  "with-size": {
+   "title": "The largest, by the size of a world",
+   "caption": "For every world of Experiment 8 that lived to its end, from 800 to 409,600 tokens, its mean over iterations 300\u2013599 of the number of agents (x), and of the richest agent's share of all tokens (left) or the best-connected agent's connections (right); and the same for the 30 worlds of 100,000 tokens over iterations 500\u20131,499 (yellow). Both axes logarithmic; grey: the straight line least squares fits through the worlds of Experiment 8.",
+   "recipe": "**Runs.** The baseline worlds of Experiment 8, from 800 to 409,600 tokens, three seeds each, 600 iterations (Chapter 42; `python3 gol_lab.py run E08`); The 30 baseline runs `B1-100000-s001` \u2026 `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in Chapter 9). They are made with `python3 gol_lab.py run E10`.\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).\n\n1. Average `nodes`, `maxTokens` / total tokens and `maxDegree` over the rows with `phase` = 2 in the stretch.\n2. Fit ln y = a + b\u00b7ln x by least squares.\n\n**To make it again:** `python3 book_figures.py extremes`."
+  }
+ }
+}

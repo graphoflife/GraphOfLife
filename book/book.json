@@ -265,7 +265,7 @@
         {
           "id": "44",
           "title": "Brains replaced by their average",
-          "note": "A better control than decisions by chance (Chapter 37): every decision drawn at random from the distribution of that decision in the settled baseline worlds — first unconditionally, then given the agent's own tokens and connections. If a world of such agents looks like the baseline, what the brains add is their average, not what they respond to."
+          "note": "A better control than decisions by chance (Chapter 41): every decision drawn at random from the distribution of that decision in the settled baseline worlds — first unconditionally, then given the agent's own tokens and connections. If a world of such agents looks like the baseline, what the brains add is their average, not what they respond to."
         },
         {
           "id": "45",
@@ -275,7 +275,7 @@
         {
           "id": "46",
           "title": "Meta III",
-          "note": "Written once Chapters 37 to 41 are analysed."
+          "note": "Written once Chapters 41 to 45 are analysed."
         },
         {
           "id": "47",
@@ -285,7 +285,7 @@
         {
           "id": "48",
           "title": "Does size change the dynamics?",
-          "note": "Builds on Chapter 38: the wander, the sweeps and dying out, against the size of a world."
+          "note": "Builds on Chapter 42: the wander, the sweeps and dying out, against the size of a world."
         }
       ]
     },
@@ -300,12 +300,12 @@
         {
           "id": "50",
           "title": "Can a brain hold its place?",
-          "note": "Incumbency: the agent on a node defends it with an advantage. How long brains then hold hubs, and how long partners last (Chapter 36)."
+          "note": "Incumbency: the agent on a node defends it with an advantage. How long brains then hold hubs, and how long partners last (Chapter 38)."
         },
         {
           "id": "51",
           "title": "Kin that know each other",
-          "note": "Heritable tags every agent can see on its neighbours. Kin discrimination and Hamilton's accounting of Chapter 34, against the baseline."
+          "note": "Heritable tags every agent can see on its neighbours. Kin discrimination and Hamilton's accounting of Chapter 38, against the baseline."
         },
         {
           "id": "52",
@@ -315,12 +315,12 @@
         {
           "id": "53",
           "title": "An open world",
-          "note": "Connections proposed beyond the neighbourhood, and pieces that separate allowed to live and meet again (Chapters 31, 32 and 35)."
+          "note": "Connections proposed beyond the neighbourhood, and pieces that separate allowed to live and meet again (Chapters 35, 36 and 39)."
         },
         {
           "id": "54",
           "title": "Meta IV",
-          "note": "What moved on the ladder of Chapter 1, written once Chapters 45 to 49 are analysed."
+          "note": "What moved on the ladder of Chapter 1, written once Chapters 49 to 53 are analysed."
         }
       ]
     },
@@ -332,17 +332,17 @@
           "title": "Worlds of 100,000 tokens",
           "file": "chapters/55-worlds-of-100000-tokens.md",
           "experiment": "E10",
-          "status": "ready"
+          "status": "analysed"
         },
         {
           "id": "56",
           "title": "Dimensions at scale",
-          "note": "The measures of Chapter 23 on the worlds of 100,000 tokens (Chapter 51): does a world look three-dimensional only at middle scales, as causal dynamical triangulations look four-dimensional only at large ones? Ball growth and the spectral dimension as functions of scale, and the width of worlds from 3,200 to 409,600 tokens (Chapter 38)."
+          "note": "The measures of Chapter 24 on the worlds of 100,000 tokens (Chapter 55): does a world look three-dimensional only at middle scales, as causal dynamical triangulations look four-dimensional only at large ones? Ball growth and the spectral dimension as functions of scale, and the width of worlds from 3,200 to 409,600 tokens (Chapter 42)."
         },
         {
           "id": "57",
           "title": "Which properties have no scale?",
-          "note": "The same quantities measured at many sizes and rescaled: do their distributions collapse onto one curve? Starts from the cuts of Chapter 38, whose share of a world has the same distribution at every size."
+          "note": "The same quantities measured at many sizes and rescaled: do their distributions collapse onto one curve? Starts from the cuts of Chapter 42, whose share of a world has the same distribution at every size."
         },
         {
           "id": "58",
@@ -352,7 +352,7 @@
         {
           "id": "59",
           "title": "How far does a difference travel?",
-          "note": "Twin worlds that differ in one token at one agent: how fast the difference spreads and whether it grows or dies away — the light cone of Chapter 7, measured. Needs the local random numbers of Chapter 54."
+          "note": "Twin worlds that differ in one token at one agent: how fast the difference spreads and whether it grows or dies away — the light cone of Chapter 7, measured. Needs the local random numbers of Chapter 58."
         },
         {
           "id": "60",
@@ -367,12 +367,12 @@
         {
           "id": "62",
           "title": "One agent in a sea of average agents",
-          "note": "A large world of agents that decide as the average evolved agent does (Chapter 40), and in it a single agent, or a small group, with a brain of its own: can it draw tokens from the sea without exhausting it or being cut off, can its line invade, can a group hold together? Invasion analysis and a reservoir, in one experiment."
+          "note": "A large world of agents that decide as the average evolved agent does (Chapter 44), and in it a single agent, or a small group, with a brain of its own: can it draw tokens from the sea without exhausting it or being cut off, can its line invade, can a group hold together? Invasion analysis and a reservoir, in one experiment."
         },
         {
           "id": "63",
           "title": "Meta V",
-          "note": "What the measurements say about space, scale and matter, written once Chapters 51 to 58 are analysed."
+          "note": "What the measurements say about space, scale and matter, written once Chapters 55 to 62 are analysed."
         }
       ]
     },

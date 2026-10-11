@@ -6,7 +6,8 @@ second tool, **entropy** — and then uses that tool on two things a Gini cannot
 measure at all, because they are not amounts: how the agents are spread over
 the numbers of connections, and over the genotypes. Part III begins here: a
 chapter for every statistic the viewer shows, read on the thirty baseline
-worlds of [Chapter 9](09-thirty-worlds.md).
+worlds of 100,000 tokens of [Chapter 9](09-thirty-worlds.md), with the thirty
+of 10,000 tokens it was first written from beside them where they differ.
 
 > [!question] Questions of this chapter
 > - How evenly are tokens, connections and genotypes spread over the agents?
@@ -14,18 +15,18 @@ worlds of [Chapter 9](09-thirty-worlds.md).
 >   tokens were as even as they are? How many genotypes are there, in effect?
 > - Do entropy and the Gini coefficient say the same thing?
 
-<!-- runs E02 -->
+<!-- runs E10 -->
 > [!info] The runs behind this chapter
-> **30 runs.** Every condition below is run once for every seed (1 to 30), for 3,000 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
+> **30 runs.** Every condition below is run once for every seed (1 to 30), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
 >
-> - **baseline** — changes nothing: B1 as it is; 10,000 tokens. Runs `B1-10000-s001` … `B1-10000-s030`.
+> - **baseline** — changes nothing: B1 as it is; 100,000 tokens. Runs `B1-100000-s001` … `B1-100000-s030`.
 >
-> To make these runs again: `python3 gol_lab.py run E02`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | baseline | what it is |
 > |---|---|---|
-> | [`total_tokens`](../notes/settings.md#total_tokens) | 10,000 | The number of tokens in the world, *T*. It never changes during a run. |
+> | [`total_tokens`](../notes/settings.md#total_tokens) | 100,000 | The number of tokens in the world, *T*. It never changes during a run. |
 > | [`n_nodes`](../notes/settings.md#n_nodes) | 0 | How many founders the world starts with. 0 means one founder per hundred tokens: *n* = ⌊*T* / 100⌋. |
 > | [`k_neighbors`](../notes/settings.md#k_neighbors) | 0 | How many neighbours each founder starts with in the ring. 0 means *k* = max(⌊*n* / 100⌋, 5); an odd *k* is wired as *k* − 1. |
 > | [`rewire_p`](../notes/settings.md#rewire_p) | 0.2 | In the starting ring, the probability that a connection is moved to a founder chosen at random (Watts–Strogatz). |
@@ -49,7 +50,7 @@ worlds of [Chapter 9](09-thirty-worlds.md).
 > | [`mutation_sparsity`](../notes/settings.md#mutation_sparsity) | 0.1 | The share of a brain's numbers a change touches; also the probability, for each weight matrix and bias vector, of a rarer reset that redraws that share of it. |
 > | [`extinction_threshold`](../notes/settings.md#extinction_threshold) | 20 | A run stops, as extinct, when an iteration ends (after its game) with this many agents or fewer. |
 > | seeds | 1 to 30 | one run per seed |
-> | iterations | 3,000 | how far each run goes, unless its world dies first |
+> | iterations | 1,500 | how far each run goes, unless its world dies first |
 >
 > A value in **bold** differs from the baseline B1.
 <!-- /runs -->
@@ -96,13 +97,13 @@ many connections does it have? which genotype does it carry?*
 **How even a world is, in three respects.** Evenness after every game of the 30 baseline worlds, from 0 (everything in one hand) to 1 (as even as it can be; [Entropy and evenness](../notes/entropy-and-evenness.md)). Left: of the tokens over the agents (`tokenEvenness`). Middle: of the agents over the numbers of connections that occur (`degreeEvenness`). Right: of the agents over the genotypes they carry — the entropy of the genotypes' shares divided by log₂ of the number of agents, measured every 25 iterations. In each, the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)); for genotypes, each run's frames, read every 25 iterations by `book_figures.sample_pass` (frame `2·t` after the reproduction phase of iteration *t*, frame `2·t + 1` after its game; `gol_store.read_frame(run, index)`).
 >
 > 1. Take `tokenEvenness` and `degreeEvenness` of the rows with `phase` = 2.
 > 2. For genotypes: in the frame after the game of every 25th iteration, count the agents per genotype (`brain_ids`), turn the counts into shares pᵢ, and compute H = −Σ pᵢ log₂ pᵢ; divide by log₂ of the number of agents.
-> 3. Cut the 3,000 iterations into 600 stretches of 5 and take each world's mean in each stretch.
+> 3. Cut the 1,500 iterations into 600 stretches of 2.5 and take each world's mean in each stretch.
 > 4. In each stretch, take the median, the 25th and 75th and the 5th and 95th percentiles of those means over the worlds that still have a value there (a world that died has none after its death).
 >
 > **To make it again:** `python3 book_figures.py entropy`.
@@ -110,16 +111,17 @@ many connections does it have? which genotype does it carry?*
 
 The founders hold equal shares: a token evenness of exactly 1. The first
 reproduction phase ends that, and after the first game the median world is at
-0.91. Then it settles a little lower: over the settled life the median world's
-**token evenness** is 0.88, and the 26 worlds that lived to the end lie
-between 0.82 and 0.93. In bits, the median world has a token entropy of 9.0
-bits — some 9 questions to find a token's owner among about 1,300 agents,
-where perfect equality would need 10.3.
+0.96. Then it falls, and settles a little lower: over the settled life the
+median world's **token evenness** is 0.91, and the thirty worlds lie between
+0.84 and 0.95 (0.88 at 10,000 tokens). In bits, the median world has a token
+entropy of 12.6 bits — some 12.6 questions to find a token's owner among about
+14,000 agents, where perfect equality would need 13.8.
 
-The **degree evenness** is far lower, 0.59 (0.50 to 0.63): agents are piled
-onto a few numbers of connections — 37% have exactly one, 23% exactly two
-([Chapter 17](17-what-shape-does-the-network-take.md)) — while the hubs make
-the list of numbers that occur long. Read this one with care: its ceiling is
+The **degree evenness** is far lower, 0.47 (0.27 to 0.54; 0.59 at 10,000
+tokens): agents are piled onto a few numbers of connections — 35% have
+exactly one, 23% exactly two ([Chapter 17](17-what-shape-does-the-network-take.md)) —
+while the hubs make the list of numbers that occur long, and longer in a
+larger world. Read this one with care: its ceiling is
 log₂ of the number of *distinct* degrees in the world, so a single new hub of
 an unusual size raises the ceiling and lowers the evenness, without anything
 else changing.
@@ -132,14 +134,14 @@ spread over many genotypes, none of which holds much of the world for long.
 <!-- figure entropy/effective -->
 ![Effective numbers, as a share of the agents](../figures/entropy/effective.svg)
 
-**Effective numbers, as a share of the agents.** One dot per world that lived to the end; the bar is the median. Left: 2^H of the tokens — the number of agents that, holding equal shares, would make the tokens as even as they are — divided by the number of agents. Middle: the number of different genotypes among the living, per agent. Right: 2^H of the genotypes — how many equally common genotypes would be as diverse as the ones there are — per agent. The dots are spread sideways only so that they do not hide each other.
+**Effective numbers, as a share of the agents.** One dot per world; the bar is the median. Left: 2^H of the tokens — the number of agents that, holding equal shares, would make the tokens as even as they are — divided by the number of agents. Middle: the number of different genotypes among the living, per agent. Right: 2^H of the genotypes — how many equally common genotypes would be as diverse as the ones there are — per agent. The dots are spread sideways only so that they do not hide each other.
 
 > [!example]- How to make this figure
-> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)); for genotypes, each run's frames, read every 25 iterations by `book_figures.sample_pass` (frame `2·t` after the reproduction phase of iteration *t*, frame `2·t + 1` after its game; `gol_store.read_frame(run, index)`).
 >
-> 1. Tokens: for each row with `phase` = 2 and 500 ≤ `iteration` ≤ 2,999, compute 2^`tokenEntropy` / `nodes`, and average over the rows.
+> 1. Tokens: for each row with `phase` = 2 and 500 ≤ `iteration` ≤ 1,499, compute 2^`tokenEntropy` / `nodes`, and average over the rows.
 > 2. Genotypes: in the frames after the game of every 25th iteration from 500 on, the number of distinct `brain_ids` per agent, and 2^H per agent with H the entropy of the genotypes' shares; average over the frames.
 > 3. One dot per run, a bar at the median.
 >
@@ -150,15 +152,17 @@ Effective numbers are the easiest way to read an entropy, because they are in
 the units of the things counted. Per agent, over the settled life:
 
 - **Token holders.** The tokens are as even as if 47% of the agents held them
-  in equal shares (the worlds: 36% to 61%). In a world of 1,300 agents, some
-  600 equal holders.
+  in equal shares (the worlds: 24% to 64%). In a world of 14,000 agents, some
+  6,700 equal holders.
 - **Distinct genotypes.** There are 0.63 genotypes per agent — and this is
-  the tightest number in the whole book so far: the 26 worlds lie between 0.61
-  and 0.67, a standard deviation of 0.011. Whatever their seed and their
-  history, the worlds keep almost exactly two genotypes for every three agents.
+  the tightest number in the whole book so far: the thirty worlds lie between
+  0.61 and 0.66, a standard deviation of 0.012, and the worlds of 10,000 tokens
+  had the same 0.63. Whatever their seed, their history and their size, the
+  worlds keep almost exactly two genotypes for every three agents.
 - **Effective genotypes.** Weighted by how many agents carry them, the
-  genotypes are worth 0.49 per agent (0.40 to 0.53): fewer than the distinct
-  count, because some genotypes are carried by many agents and most by one.
+  genotypes are worth 0.45 per agent (0.22 to 0.51; 0.49 at 10,000 tokens):
+  fewer than the distinct count, because some genotypes are carried by many
+  agents and most by one.
 
 The gap between the second and the third is the difference ecologists draw
 between **richness** — how many kinds there are — and **diversity** — how many
@@ -180,10 +184,10 @@ genotypes are made.
 <!-- figure entropy/gini-evenness -->
 ![Two measures of the same inequality](../figures/entropy/gini-evenness.svg)
 
-**Two measures of the same inequality.** One dot per world and look: every 25th iteration from 500 on of the 26 worlds that lived to the end (2,600 dots). Across the dots the two measures move against each other — the correlation is -0.90 — but not along one curve: the same Gini comes with different evenness, because the two weigh the poor and the rich differently.
+**Two measures of the same inequality.** One dot per world and look: every 25th iteration from 500 on of the 30 worlds (1,200 dots). Across the dots the two measures move against each other — the correlation is -0.72 — but not along one curve: the same Gini comes with different evenness, because the two weigh the poor and the rich differently.
 
 > [!example]- How to make this figure
-> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
 >
@@ -193,9 +197,9 @@ genotypes are made.
 > **To make it again:** `python3 book_figures.py entropy`.
 <!-- /figure -->
 
-Across 2,600 looks at the 26 worlds, the Gini coefficient and the token
-evenness move against each other with a correlation of −0.90 — as they should,
-since both measure inequality. But they do not lie on one curve: the same
+Across 1,200 looks at the 30 worlds, the Gini coefficient and the token
+evenness move against each other with a correlation of −0.72 (−0.90 at 10,000
+tokens) — as they should, since both measure inequality. But they do not lie on one curve: the same
 Gini comes with token evenness that differs by several hundredths. They weigh
 inequality differently, and the difference can be stated exactly. Move a small
 amount of tokens from a richer agent *j* to a poorer agent *i*:

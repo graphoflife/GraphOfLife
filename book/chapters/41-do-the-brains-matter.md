@@ -59,7 +59,7 @@ in two different ways, and compares.
 
 Each changes one setting of the baseline B1, for the same thirty seeds:
 
-- **baseline** — the thirty runs of [Chapter 9](09-thirty-worlds.md),
+- **baseline** — the thirty runs of 10,000 tokens of [Chapter 10](10-a-worlds-life.md),
   reused.
 - **brains never change** — [`mutation_sparsity`](../notes/settings.md#mutation_sparsity)
   = 0. A brain still "changes" with probability one in five, at birth and

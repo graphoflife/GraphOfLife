@@ -6,7 +6,7 @@ colours the viewer offers.
 """
 from __future__ import annotations
 
-from collections import Counter, defaultdict, deque
+from collections import Counter, deque
 from typing import Any, Dict, List, Sequence, Tuple
 
 import numpy as np
@@ -17,7 +17,7 @@ from book_graph import bfs, degree_preserving, graph, triangles
 from book_figures import (DEGREE_CLASSES, FRAMES, STATS_FILE, band_series, cells, chapter, describe,
                           dots, line, mean_over, recipe, series)
 from book_chapters.common import (BAND_STEPS, BAND_WORDS, BLUE, CYAN, GREEN, GREY, ORANGE, RED,
-                                  VIOLET, WORLDS as W, YELLOW, ceiling)
+                                  VIOLET, WORLDS as W, YELLOW, at_start, ceiling)
 from book_chapters.measures import settled_rows
 
 LAST = W.last
@@ -362,7 +362,8 @@ def geometry(ch: F.Chapter) -> None:
                        "From every ⌊n/24⌋-th agent of the id-sorted list, breadth-first search; count the agents "
                        "at distance ≤ r for r = 1 … 40; average over the 24 sources.",
                        "Fit ln V(r) = a + d·ln r by least squares for r with V(r) ≤ n/2."]))
-    ch.number("ball_seed1", {"slope": float(slope), "agents": n, "half_radius": int(r[v >= n / 2][0])})
+    ch.number("ball_seed1", {"slope": float(slope), "agents": n, "half_radius": int(r[v >= n / 2][0]),
+                             "within": {str(int(k)): float(x) for k, x in zip(r, v) if int(k) in (1, 2, 3, 5, 10)}})
 
     panels = []
     for title, stat, colour, log in (("Dimension from ball growth", "dimension", BLUE, False),
@@ -376,7 +377,7 @@ def geometry(ch: F.Chapter) -> None:
                            series=[band_series([series(s.run_id, stat) for s in specs], None, colour)],
                            legend=False, guides=[{"axis": "y", "at": 0}] if stat == "ricciCurvature" else []))
         ch.number(f"{stat}_settled", describe([mean_over(s.run_id, stat, *W.window) for s in alive]))
-        ch.number(f"{stat}_first", F.A.bands([series(s.run_id, stat) for s in specs])["y"][0])
+        ch.number(f"{stat}_first", at_start(specs, stat))
     ch.grid(
         "measures", panels, columns=2, title="Four measures of a world's geometry",
         caption=f"Every 25 iterations, in the {len(specs)} baseline worlds: the dimension and the curvature read off how "

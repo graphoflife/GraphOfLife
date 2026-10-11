@@ -21,8 +21,8 @@ import numpy as np
 import book_data as D
 import book_figures as F
 from book_graph import graph
-from book_figures import FRAMES, bars, chapter, describe, dots, line, quantile_band, recipe, stacked
-from book_chapters.common import (BAND_WORDS, BLUE, CYAN, GREEN, GREY, ORANGE, RED, VIOLET, WORLD_SETS,
+from book_figures import FRAMES, bars, chapter, describe, dots, line, quantile_band, recipe
+from book_chapters.common import (BAND_WORDS, BLUE, CYAN, GREEN, ORANGE, RED, VIOLET, WORLD_SETS,
                                   WORLDS as W, YELLOW, listed)
 from book_chapters.space import BIG, PLATEAUS, RULERS, band, measure, moments, plateau, world_dimensions
 

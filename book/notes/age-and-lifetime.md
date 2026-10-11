@@ -48,7 +48,7 @@ second kind is alive at 99 times as many moments as one of the first, so 99 in
 weighted by lifetime**. This is why, in
 [Chapter 12](../chapters/12-births-deaths-and-ages.md), half of all agents
 are gone within ten iterations, while the median age of the agents alive at
-the end is 72.
+the end is 54.
 
 In general: in a world in a steady state, where lifetimes *L* occur with
 frequency *p*(*L*) and have mean μ, the agents alive at a random moment have
@@ -60,9 +60,31 @@ $$
 
 so long lives are over-represented in proportion to their length, and each
 such agent is equally likely to be at any point of its life. This is the
-*inspection paradox* of renewal theory. (The baseline world is not exactly in
-a steady state — its births slow down over the run — but the effect is the
-same in kind.)
+*inspection paradox* of renewal theory. (The baseline worlds of 10,000 tokens
+are not exactly in a steady state — their births slow down for over a
+thousand iterations — but the effect is the same in kind; those of 100,000
+tokens are in one from iteration 500 on,
+[Chapter 13](../chapters/13-how-ages-change.md).)
+
+## The ages of a steady world
+
+The same idea, turned into a formula for the ages of the living. Suppose a
+world has *B* births in every iteration, always, and every agent's life
+follows the same survival curve *S*(*L*). The agents of age *a* alive after a
+game are those born *a* iterations earlier whose lives lasted at least
+*a* + 1 games: *B* · *S*(*a* + 1) of them. Summed over all ages, the living
+number *B* · Σ *S*(*L*), and Σ *S*(*L*) over *L* ≥ 1 is the mean lifetime μ.
+So in such a world
+
+$$
+\text{share of the living of age } a = \frac{S(a+1)}{\mu} ,
+$$
+
+and in particular the newborns, of age 0, are a share 1/μ of the living. This
+is the **stationary population** of demography. Its ages follow from the
+lifetimes alone; a world whose living are older than its lifetimes say has
+had more births in the past than now. [Chapter 13](../chapters/13-how-ages-change.md)
+checks the worlds against it.
 
 ## The risk of dying at each age
 

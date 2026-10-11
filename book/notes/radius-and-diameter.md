@@ -42,8 +42,9 @@ length), then once more from the furthest agent any of them reached — the
 - `radius` can only **over**-report: a more central agent might never have
   been tried.
 
-In a settled baseline world the diameter is about 29 steps, the radius about
-17 and the mean path length about 10 ([Chapter 35](../chapters/35-the-geometry-of-a-world.md)).
+In a settled baseline world of 100,000 tokens the diameter is about 60
+steps, the radius about 36 and the mean path length about 18; in one of
+10,000 tokens, 29, 17 and 10 ([Chapter 35](../chapters/35-the-geometry-of-a-world.md)).
 
 <!-- turns -->
 [Contents](../README.md)

@@ -68,8 +68,8 @@ further checks would be needed:
   whose logarithm is normal — or a power law with an exponential cut-off
   often fits as well over the range one has.
 
-And a tail of 5% of a world is a small part of it: a power law there says
-nothing about the other 95%. [Chapter 32](../chapters/32-power-laws-real-and-apparent.md)
+And a tail of 5% of a world — or, at 100,000 tokens, of 1% — is a small part
+of it: a power law there says nothing about the rest. [Chapter 32](../chapters/32-power-laws-real-and-apparent.md)
 fits both methods to the baseline worlds.
 
 <!-- turns -->

@@ -32,7 +32,7 @@ from gol_config import SimConfig
 
 #: Measures that read a settled world — from iteration 500, often to 3,000 —
 #: and so cannot be taken of the tiny one. Every other measure is.
-SETTLED_ONLY = {"partners", "mobility", "fragile", "growth", "alike3", "lifedims2"}
+SETTLED_ONLY = {"partners", "mobility", "fragile", "growth", "alike3", "lifedims2", "star"}
 
 
 def _tiny_run(name: str = "tiny", iterations: int = 30, **overrides) -> str:

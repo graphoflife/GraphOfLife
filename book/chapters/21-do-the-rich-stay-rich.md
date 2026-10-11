@@ -13,18 +13,22 @@ follows single agents through time to tell which world Graph of Life is.
 > - How far does an agent move up or down the order of wealth?
 > - What becomes of the very richest?
 
-<!-- runs E02 -->
+The worlds are the thirty of 100,000 tokens of [Chapter 9](09-thirty-worlds.md);
+where the thirty of 10,000 tokens this chapter was first written from differ,
+both are given.
+
+<!-- runs E10 -->
 > [!info] The runs behind this chapter
-> **30 runs.** Every condition below is run once for every seed (1 to 30), for 3,000 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
+> **30 runs.** Every condition below is run once for every seed (1 to 30), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
 >
-> - **baseline** — changes nothing: B1 as it is; 10,000 tokens. Runs `B1-10000-s001` … `B1-10000-s030`.
+> - **baseline** — changes nothing: B1 as it is; 100,000 tokens. Runs `B1-100000-s001` … `B1-100000-s030`.
 >
-> To make these runs again: `python3 gol_lab.py run E02`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | baseline | what it is |
 > |---|---|---|
-> | [`total_tokens`](../notes/settings.md#total_tokens) | 10,000 | The number of tokens in the world, *T*. It never changes during a run. |
+> | [`total_tokens`](../notes/settings.md#total_tokens) | 100,000 | The number of tokens in the world, *T*. It never changes during a run. |
 > | [`n_nodes`](../notes/settings.md#n_nodes) | 0 | How many founders the world starts with. 0 means one founder per hundred tokens: *n* = ⌊*T* / 100⌋. |
 > | [`k_neighbors`](../notes/settings.md#k_neighbors) | 0 | How many neighbours each founder starts with in the ring. 0 means *k* = max(⌊*n* / 100⌋, 5); an odd *k* is wired as *k* − 1. |
 > | [`rewire_p`](../notes/settings.md#rewire_p) | 0.2 | In the starting ring, the probability that a connection is moved to a founder chosen at random (Watts–Strogatz). |
@@ -48,7 +52,7 @@ follows single agents through time to tell which world Graph of Life is.
 > | [`mutation_sparsity`](../notes/settings.md#mutation_sparsity) | 0.1 | The share of a brain's numbers a change touches; also the probability, for each weight matrix and bias vector, of a rarer reset that redraws that share of it. |
 > | [`extinction_threshold`](../notes/settings.md#extinction_threshold) | 20 | A run stops, as extinct, when an iteration ends (after its game) with this many agents or fewer. |
 > | seeds | 1 to 30 | one run per seed |
-> | iterations | 3,000 | how far each run goes, unless its world dies first |
+> | iterations | 1,500 | how far each run goes, unless its world dies first |
 >
 > A value in **bold** differs from the baseline B1.
 <!-- /runs -->
@@ -64,29 +68,31 @@ alike the two orders are, from 1 (exactly the same) through 0 (unrelated)
 <!-- figure rich/memory -->
 ![How long wealth lasts](../figures/rich/memory.svg)
 
-**How long wealth lasts.** Left: the agents alive after the game of an iteration t, and the same agents k games later, if they are still alive: Spearman's rank correlation of their tokens then and later ([Correlation](../notes/correlation.md)) — 1 if every agent kept its place in the order of wealth, 0 if the later order has nothing to do with the earlier. Right: the share of the agents still alive k games later. For each world, the mean over 23 moments t = 500, 600, …, 2,700 (leaving out, for the correlation, the few moments after which fewer than three of the agents were alive); the line is the median of the 26 worlds, the darker band the middle half of them and the paler band nine in ten.
+**How long wealth lasts.** Left: the agents alive after the game of an iteration t, and the same agents k games later, if they are still alive: Spearman's rank correlation of their tokens then and later ([Correlation](../notes/correlation.md)) — 1 if every agent kept its place in the order of wealth, 0 if the later order has nothing to do with the earlier. Right: the share of the agents still alive k games later. For each world, the mean over 8 moments t = 500, 600, …, 1,200 (leaving out, for the correlation, the few moments after which fewer than three of the agents were alive); the line is the median of the 30 worlds, the darker band the middle half of them and the paler band nine in ten.
 
 > [!example]- How to make this figure
-> **Runs.** The 26 baseline worlds that lived to the end (`B1-10000-s001` … `-s030`, [Chapter 9](09-thirty-worlds.md); `python3 gol_lab.py run E02`).
+> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Chapter 9](09-thirty-worlds.md); `python3 gol_lab.py run E10`).
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
-> 1. For t = 500, 600, …, 2,700 and k = 1, 2, 5, 10, 20, 50, 100, 200: read frames 2·t + 1 and 2·(t + k) + 1; the agents (`ids`) in both, and their `tokens` in each.
+> 1. For t = 500, 600, …, 1,200 and k = 1, 2, 5, 10, 20, 50, 100, 200: read frames 2·t + 1 and 2·(t + k) + 1; the agents (`ids`) in both, and their `tokens` in each.
 > 2. Spearman's ρ: the correlation of the ranks of the two token counts (ties share their mean rank); alive: agents in both over agents in the first.
 > 3. Mean over t for each world; median and quantiles over worlds.
 >
 > **To make it again:** `python3 book_figures.py rich`.
 <!-- /figure -->
 
-After one game, ρ = **0.88**. After 10 games, 0.78; after 50, 0.57; after
-100, 0.45; after 200, 0.32. Meanwhile the agents themselves die: 87% are
-still alive after 10 games, 58% after 50, 36% after 100, 16% after 200.
+After one game, ρ = **0.86**. After 10 games, 0.77; after 50, 0.57; after
+100, 0.46; after 200, 0.33 — almost exactly as at 10,000 tokens. Meanwhile the
+agents themselves die, a little faster than in the small worlds: 84% are
+still alive after 10 games, 50% after 50, 30% after 100, 10% after 200 (87%,
+58%, 36% and 16% at 10,000 tokens).
 
 The order of wealth is forgotten slowly, and in a particular way. A process
 that forgets a fixed fraction every game would have ρ falling like
-0.88, 0.88², 0.88³, … — to 0.28 after 10 games and to nothing after 50. The
-worlds lose instead about **a tenth of ρ every time the lag doubles**: 0.09
-from 10 to 20 games, 0.12 from 50 to 100 and again from 100 to 200. That is
+0.86, 0.86², 0.86³, … — to 0.22 after 10 games and to nothing after 50. The
+worlds lose instead about **a tenth of ρ every time the lag doubles**: 0.07
+from 10 to 20 games, 0.11 from 50 to 100 and 0.13 from 100 to 200. That is
 how memory fades when it is held by many things that last for very
 different times. Here the likely holders are the connections. An agent's tokens follow its number of
 connections plus one ([Chapter 34](34-how-properties-scale-together.md)),
@@ -96,9 +102,9 @@ time.
 ## A two-game rhythm
 
 The left panel has a small surprise at its start. After **two** games the
-order is *closer* to the first than after one: ρ = 0.89 against 0.88. The
+order is *closer* to the first than after one: ρ = 0.88 against 0.86. The
 richest show it too (below): 76% of the richest hundredth are still in the
-richest tenth two games later, but only 72% one game later.
+richest tenth two games later, but only 73% one game later.
 
 [Chapter 29](29-where-the-tokens-flow.md) found that the brains move tokens
 almost as an even split would: each agent stakes the same share on itself
@@ -134,10 +140,10 @@ on the star-shaped parts of the network.
 <!-- figure rich/moves -->
 ![From one fifth to another, ten games later](../figures/rich/moves.svg)
 
-**From one fifth to another, ten games later.** All agents alive after the game of t = 500, 600, …, 2,700 in the 26 worlds that lived to the end, sorted into fifths of the world by their tokens (ranks, ties shared), and where each one was ten games later: in which fifth, or dead. Each row adds up to 1; a cell's colour is the share of its row.
+**From one fifth to another, ten games later.** All agents alive after the game of t = 500, 600, …, 1,200 in the 30 worlds, sorted into fifths of the world by their tokens (ranks, ties shared), and where each one was ten games later: in which fifth, or dead. Each row adds up to 1; a cell's colour is the share of its row.
 
 > [!example]- How to make this figure
-> **Runs.** The 26 baseline worlds that lived to the end (`B1-10000-s001` … `-s030`, [Chapter 9](09-thirty-worlds.md); `python3 gol_lab.py run E02`).
+> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Chapter 9](09-thirty-worlds.md); `python3 gol_lab.py run E10`).
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -149,17 +155,18 @@ on the star-shaped parts of the network.
 
 Ten games on, where are the agents of each fifth of the order of wealth?
 
-- Of the **richest fifth**, 72% are still in it, 13% have fallen one fifth,
-  and 9% are dead.
-- Of the **middle fifths**, 38% to 49% are where they were, and most of the
+- Of the **richest fifth**, 68% are still in it, 12% have fallen one fifth,
+  and 12% are dead.
+- Of the **middle fifths**, 37% to 44% are where they were, and most of the
   others are one fifth up or down.
-- Of the **poorest fifth**, 40% are still in it, 22% have risen one fifth,
-  and **26% are dead**. Poverty is where agents die
+- Of the **poorest fifth**, 34% are still in it, 24% have risen one fifth,
+  and **29% are dead**. Poverty is where agents die
   ([Chapter 12](12-births-deaths-and-ages.md)).
 
 Among those still alive, the **Shorrocks index** of the moves — 0 for a
 world in which nobody changes place, 1 for one that forgets the order
-completely in ten games ([Mobility](../notes/mobility.md)) — is **0.57**.
+completely in ten games ([Mobility](../notes/mobility.md)) — is **0.59**
+(0.57 at 10,000 tokens).
 The top is the stickiest part of the order: an agent at the top has the
 most connections to hold it there.
 
@@ -168,10 +175,10 @@ most connections to hold it there.
 <!-- figure rich/richest -->
 ![The fate of the richest](../figures/rich/richest.svg)
 
-**The fate of the richest.** The agents in the richest hundredth of their world after the game of t = 500, 600, …, 2,700 (8,026 in all, pooled over the 26 worlds that lived to the end), followed k games on. Left: the share of them still in the richest tenth of their world, and the share dead. Right: for those alive, their tokens then divided by their tokens at t — the median in each world, and the median of the worlds.
+**The fate of the richest.** The agents in the richest hundredth of their world after the game of t = 500, 600, …, 1,200 (36,656 in all, pooled over the 30 worlds), followed k games on. Left: the share of them still in the richest tenth of their world, and the share dead. Right: for those alive, their tokens then divided by their tokens at t — the median in each world, and the median of the worlds.
 
 > [!example]- How to make this figure
-> **Runs.** The 26 baseline worlds that lived to the end (`B1-10000-s001` … `-s030`, [Chapter 9](09-thirty-worlds.md); `python3 gol_lab.py run E02`).
+> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Chapter 9](09-thirty-worlds.md); `python3 gol_lab.py run E10`).
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -180,39 +187,39 @@ most connections to hold it there.
 > **To make it again:** `python3 book_figures.py rich`.
 <!-- /figure -->
 
-Follow the richest hundredth of a world — 8,026 agents over all the moments
-and worlds. One game later, 72% are still in the richest tenth and 3.6% are
-dead. Ten games later, 58% and 21%; a hundred games later, 23% and 64%. The
-survivors keep almost all they had for ten games (89% in the median), then
-lose it steadily: a hundred games later they hold a third of what they held.
+Follow the richest hundredth of a world — 36,656 agents over all the moments
+and worlds. One game later, 73% are still in the richest tenth and 4% are
+dead. Ten games later, 56% and 25%; a hundred games later, 19% and 70%. The
+survivors keep almost all they had for ten games (87% in the median), then
+lose it steadily: a hundred games later they hold a quarter of what they held.
 
-So the very richest **die faster** at first than agents in general: 21%
-within ten games, against 13% of all agents. That is odd. Nearly half of
+So the very richest **die faster** at first than agents in general: 25%
+within ten games, against 16% of all agents. That is odd. Nearly half of
 the richest are hubs with ten connections or more, and a hub is safe. Which
 of them die?
 
 <!-- figure rich/fragile -->
 ![Which of the richest die](../figures/rich/fragile.svg)
 
-**Which of the richest die.** The agents alive after the game of t = 500, 600, …, 2,700 in the 26 worlds that lived to the end, in classes of their connections at t: the share no longer alive ten games later, for the richest hundredth of their world (red) and for every agent (grey). Pooled over moments and worlds: 1,436 of the richest and 285,223 in all with 1, 725 of the richest and 179,652 in all with 2, 2,099 of the richest and 257,041 in all with 3–9, 2,716 of the richest and 30,737 in all with 10–49, 1,050 of the richest and 1,222 in all with 50+ connections.
+**Which of the richest die.** The agents alive after the game of t = 500, 600, …, 1,200 in the 30 worlds, in classes of their connections at t: the share no longer alive ten games later, for the richest hundredth of their world (red) and for every agent (grey). Pooled over moments and worlds: 7,069 of the richest and 1,367,720 in all with 1, 3,674 of the richest and 818,555 in all with 2, 8,721 of the richest and 1,223,956 in all with 3–9, 11,114 of the richest and 148,486 in all with 10–49, 6,078 of the richest and 6,405 in all with 50+ connections.
 
 > [!example]- How to make this figure
-> **Runs.** The 26 baseline worlds that lived to the end (`B1-10000-s001` … `-s030`, [Chapter 9](09-thirty-worlds.md); `python3 gol_lab.py run E02`).
+> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Chapter 9](09-thirty-worlds.md); `python3 gol_lab.py run E10`).
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
-> 1. For t = 500, 600, …, 2,700: read frames 2·t + 1 and 2·(t + 10) + 1; each agent's connections at t from `edges`; the richest hundredth as above.
+> 1. For t = 500, 600, …, 1,200: read frames 2·t + 1 and 2·(t + 10) + 1; each agent's connections at t from `edges`; the richest hundredth as above.
 > 2. Per class of connections, the agents of the first frame missing from the second, over all agents of the class (`book_chapters.dynamics.fragile`).
 >
 > **To make it again:** `python3 book_figures.py rich`.
 <!-- /figure -->
 
-Not the hubs. Among the richest with ten connections or more, 3% to 5% die
+Not the hubs. Among the richest with ten connections or more, 7% to 9% die
 within ten games, as many as among other agents with that many connections.
 The excess is all among the **rich with few connections**. Of the richest
-agents with a single connection, **53%** are dead ten games later, against
-16% of all agents with a single connection. With two connections it is 43%
-against 14%.
+agents with a single connection, **54%** are dead ten games later, against
+18% of all agents with a single connection. With two connections it is 44%
+against 17%.
 
 Wealth on a dead end does not last. An agent with one connection hangs on
 it: if that connection is cut, or the piece it leads to is cut off from the

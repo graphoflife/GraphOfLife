@@ -18,7 +18,7 @@ import book_data as D
 import book_figures as F
 from book_graph import bfs, core, degree_preserving, graph
 from book_figures import (FRAMES, chapter, describe, dots, line, quantile_band, recipe, runs_of)
-from book_chapters.common import BLUE, GREEN, GREY, ORANGE, RED, VIOLET, WORLDS as W, YELLOW, listed
+from book_chapters.common import BLUE, GREEN, GREY, ORANGE, RED, VIOLET, WORLD_SETS, WORLDS as W, YELLOW, listed
 
 def moments(last: int) -> tuple:
     """Five moments of a world's settled life, a sixth of its life apart, the last its last iteration."""
@@ -389,6 +389,12 @@ def life_dimensions(run_id: str) -> Dict[str, Any]:
     return out
 
 
+def _median_curve(rows: List[Dict[str, Any]], xkey: str, ykey: str) -> Tuple[List[float], List[float]]:
+    """A ruler's median reading over networks, at every scale at least half of them read."""
+    b = band(rows, xkey, ykey)
+    return b["x"], b["y"]
+
+
 def plateau(xs: List[float], ds: List[float], lo: float, hi: float) -> float:
     """A ruler's typical reading over a range of scales: the median of its values there."""
     inside = [d for x, d in zip(xs, ds) if lo <= x <= hi]
@@ -455,10 +461,15 @@ def dimensions(ch: F.Chapter) -> None:
     big = [s for s in runs_of("E08", "baseline") if int(s.lab["world"]["total_tokens"]) == 409600
            and F.lived(s) >= s.until]
     bigs = [world_dimensions(s.run_id) for s in big]
+    other = WORLD_SETS["E02"] if W.experiment != "E02" else None
+    smalls = [world_dimensions(s.run_id) for s in other.alive] if other else []
     panels = []
     for xk, yk, title, xl in RULERS:
         series_ = [{**band([d["world"] for d in dims], xk, yk), "label": f"the {len(alive)} worlds", "colour": BLUE},
                    {**band([d["twin"] for d in dims], xk, yk), "label": "their random twins", "colour": RED}]
+        if smalls:
+            series_.append(line(*_median_curve([d["world"] for d in smalls], xk, yk),
+                                f"worlds of {other.tokens:,} tokens (median)", GREEN, width=2, dash=[2, 3]))
         for i, d in enumerate(bigs):
             series_.append(line(d["world"][xk], d["world"][yk], "worlds of 409,600 tokens" if i == 0 else None,
                                 YELLOW, width=2))
@@ -474,8 +485,10 @@ def dimensions(ch: F.Chapter) -> None:
                 "ten. Red: for each, its random twin, a network with exactly as many connections at every agent "
                 "but wired at random. Yellow: the three worlds of 409,600 tokens of Chapter 42 (about 60,000 "
                 "agents each), measured from 100 balls and 48 walks of up to 1,024 steps; dashed orange, their "
-                "random twins.",
-        recipe=recipe(W.lived_text() + " " + BIG, FRAMES,
+                "random twins."
+                + (f" Green dots: the median of the {len(smalls)} worlds of {other.tokens:,} tokens that lived to the "
+                   "end, read the same way." if smalls else ""),
+        recipe=recipe(W.lived_text() + " " + BIG + (" " + other.lived_text() if smalls else ""), FRAMES,
                       ["Read each run's last frame; build its network from `edges` and keep its largest piece.",
                        "The rulers as in the figure above (`book_chapters.space.measure`); the twin by "
                        "`book_chapters.structure.degree_preserving` (seed 23)."]))
@@ -487,6 +500,13 @@ def dimensions(ch: F.Chapter) -> None:
                 "reach": describe([max(d["ball_r"]) if d["ball_r"] else np.nan for d in rows])}
     ch.number("worlds", {kind: plateaus([d[kind] for d in dims], *PLATEAUS) for kind in ("world", "twin", "core")})
     ch.number("big", {kind: plateaus([d[kind] for d in bigs], (3, 14), (4, 400)) for kind in ("world", "twin", "core")})
+    # The same radii and walking times for every size, so that the sizes are compared where all can be read.
+    common = ((3, 6), (4, 64))
+    sets = [("here", dims)] + ([("small", smalls)] if smalls else []) + [("big", bigs)]
+    ch.number("common", {name: {kind: plateaus([d[kind] for d in rows], *common) for kind in ("world", "core")}
+                         for name, rows in sets})
+    if smalls:
+        ch.number("small", {kind: plateaus([d[kind] for d in smalls], (2, 6), (4, 64)) for kind in ("world", "twin", "core")})
     ch.number("big_curves", bigs)
 
     r = np.arange(1, 41)

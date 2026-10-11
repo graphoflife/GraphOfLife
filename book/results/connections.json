@@ -1,0 +1,263 @@
+{
+ "chapter": "connections",
+ "numbers": {
+  "per_connection": {
+   "gross": {
+    "0": 0.07074088853945001,
+    "1": 0.15405950309012753,
+    "2": 0.5192258718310399,
+    "3\u20134": 0.197348024092181,
+    "5\u20139": 0.05137122189898498,
+    "10\u201319": 0.004346297863297727,
+    "20\u201349": 0.0012851994896148228,
+    "50\u201399": 0.0006486003584408432,
+    "100\u2013199": 0.0004751794827521315,
+    "200\u2013499": 0.00035501012595696437,
+    "500\u2013999": 0.00010292151970221373,
+    "1,000\u20134,999": 4.0025035439749785e-05,
+    "5,000+": 1.2566730122370419e-06
+   },
+   "net": {
+    "0": 0.6951082557824709,
+    "1": 0.28417903971206104,
+    "2": 0.011767171918334601,
+    "3\u20134": 0.00324227920522218,
+    "5\u20139": 0.001982590177755769,
+    "10\u201319": 0.0011354669002067793,
+    "20\u201349": 0.0010266076005217455,
+    "50\u201399": 0.0006063761452296787,
+    "100\u2013199": 0.0004611989954909944,
+    "200\u2013499": 0.0003482869253414962,
+    "500\u2013999": 0.00010182193081650632,
+    "1,000\u20134,999": 3.9648033536078676e-05,
+    "5,000+": 1.2566730122370419e-06
+   },
+   "connections": 31830078.0
+  },
+  "cut": {
+   "share_empty": {
+    "n": 30,
+    "mean": 0.06589120060776034,
+    "median": 0.061240611368535695,
+    "sd": 0.02067102446264636,
+    "min": 0.032450658243121544,
+    "max": 0.11933619474409793,
+    "q25": 0.05178384519189927,
+    "q75": 0.07867177580269147
+   },
+   "by_degree": {
+    "1": 0.012647227360776326,
+    "2": 0.0475734428657277,
+    "3\u20134": 0.0823887129682999,
+    "5\u20139": 0.10917441446686715,
+    "10\u201349": 0.12642812105159373,
+    "50+": 0.13808732436924007
+   },
+   "fate": {
+    "empty cut": 1650222.0,
+    "empty kept": 0.0,
+    "carried cut": 0.0,
+    "carried kept": 29186620.0
+   }
+  },
+  "prunedEdges_settled": {
+   "n": 30,
+   "mean": 0.07362643047323812,
+   "median": 0.06674890155786092,
+   "sd": 0.024883123530937246,
+   "min": 0.03801171966026397,
+   "max": 0.14109472687032446,
+   "q25": 0.05450139562178542,
+   "q75": 0.08722381031417248
+  },
+  "meanEdgeFlow_settled": {
+   "n": 30,
+   "mean": 3.0264937533976375,
+   "median": 3.0378184277869877,
+   "sd": 0.34965216087335876,
+   "min": 2.381003434489894,
+   "max": 3.629057066379877,
+   "q25": 2.7989090139550115,
+   "q75": 3.2753615110979677
+  },
+  "maxEdgeFlow_settled": {
+   "n": 30,
+   "mean": 1556.5853333333332,
+   "median": 1413.337,
+   "sd": 501.2953991803658,
+   "min": 790.199,
+   "max": 2548.654,
+   "q25": 1185.27425,
+   "q75": 1907.05975
+  },
+  "totalFlow_settled": {
+   "n": 30,
+   "mean": 70202.33513333331,
+   "median": 71357.129,
+   "sd": 3909.1038048072082,
+   "min": 54739.782,
+   "max": 74131.609,
+   "q25": 70536.3635,
+   "q75": 72017.94125
+  },
+  "lightningScore_settled": {
+   "n": 30,
+   "mean": 34321.355,
+   "median": 34875.5125,
+   "sd": 8460.11744912767,
+   "min": 10551.475,
+   "max": 47650.525,
+   "q25": 30951.275,
+   "q75": 39941.2625
+  },
+  "lightningLongest_settled": {
+   "n": 30,
+   "mean": 39.02083333333333,
+   "median": 40.7375,
+   "sd": 8.37227331663902,
+   "min": 14.475,
+   "max": 53.825,
+   "q25": 36.2375,
+   "q75": 45.1125
+  },
+  "netLightningScore_settled": {
+   "n": 30,
+   "mean": 206.79166666666669,
+   "median": 209.22500000000002,
+   "sd": 63.29524766075872,
+   "min": 97.35,
+   "max": 352.125,
+   "q25": 149.6875,
+   "q75": 240.175
+  },
+  "netLightningLongest_settled": {
+   "n": 30,
+   "mean": 5.521666666666666,
+   "median": 5.550000000000001,
+   "sd": 0.6545837494602745,
+   "min": 4.25,
+   "max": 6.7,
+   "q25": 5.03125,
+   "q75": 5.9624999999999995
+  },
+  "cyclingShare_settled": {
+   "n": 30,
+   "mean": 0.12964171475017314,
+   "median": 0.12921877183952601,
+   "sd": 0.02111783594215441,
+   "min": 0.08362261227519163,
+   "max": 0.17479836876017688,
+   "q25": 0.11827176872227702,
+   "q75": 0.14124638776864526
+  },
+  "netCyclingShare_settled": {
+   "n": 30,
+   "mean": 0.0028229959292829236,
+   "median": 0.0027085667051887138,
+   "sd": 0.0007593597467320958,
+   "min": 0.001563082505310278,
+   "max": 0.005535015636429061,
+   "q25": 0.0024678274629340163,
+   "q75": 0.0030993702133215073
+  },
+  "maxEdgeFlow_share_settled": {
+   "n": 30,
+   "mean": 0.01556585333333333,
+   "median": 0.01413337,
+   "sd": 0.005012953991803657,
+   "min": 0.00790199,
+   "max": 0.02548654,
+   "q25": 0.0118527425,
+   "q75": 0.0190705975
+  },
+  "small": {
+   "meanEdgeFlow": {
+    "n": 26,
+    "mean": 4.267852984201104,
+    "median": 3.7325114433312994,
+    "sd": 1.2596336787004099,
+    "min": 2.932976593484866,
+    "max": 7.03345467755264,
+    "q25": 3.3128583450085127,
+    "q75": 4.798597322569661
+   },
+   "maxEdgeFlow": {
+    "n": 26,
+    "mean": 619.4123076923076,
+    "median": 642.7768,
+    "sd": 161.8859020756852,
+    "min": 318.9496,
+    "max": 932.8944,
+    "q25": 528.765,
+    "q75": 698.3659
+   },
+   "lightningScore": {
+    "n": 26,
+    "mean": 4397.361923076924,
+    "median": 4415.975,
+    "sd": 884.0599938964289,
+    "min": 2735.13,
+    "max": 6610.93,
+    "q25": 3980.1875,
+    "q75": 4575.349999999999
+   },
+   "lightningLongest": {
+    "n": 26,
+    "mean": 19.673846153846153,
+    "median": 19.705,
+    "sd": 3.360621462673923,
+    "min": 12.16,
+    "max": 25.59,
+    "q25": 17.822499999999998,
+    "q75": 21.82
+   },
+   "netLightningScore": {
+    "n": 26,
+    "mean": 17.51269230769231,
+    "median": 16.84,
+    "sd": 7.46705380063238,
+    "min": 5.81,
+    "max": 39.89,
+    "q25": 12.057500000000001,
+    "q75": 21.185000000000002
+   },
+   "netLightningLongest": {
+    "n": 26,
+    "mean": 2.2126923076923073,
+    "median": 2.205,
+    "sd": 0.5284964158236662,
+    "min": 1.11,
+    "max": 3.18,
+    "q25": 1.99,
+    "q75": 2.5825
+   },
+   "prunedEdges/edges": {
+    "n": 26,
+    "mean": 0.05456092864322564,
+    "median": 0.05329576379606015,
+    "sd": 0.01617544506440365,
+    "min": 0.021369391512335318,
+    "max": 0.09919695920273292,
+    "q25": 0.045257875358663276,
+    "q75": 0.062141587131889504
+   }
+  }
+ },
+ "figures": {
+  "per-connection": {
+   "title": "Tokens across one connection in one game",
+   "caption": "Every connection at the start of the games of every 25th iteration from 500 on, in the 30 worlds, pooled: how many tokens its two agents staked on each other in that game, both directions added (blue), and what is left when the smaller direction is cancelled against the larger (cyan; [Token flow](../notes/token-flow.md)). A connection in the first class carried nothing and is cut at the end of the game.",
+   "recipe": "**Runs.** The 30 baseline runs `B1-100000-s001` \u2026 `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in Chapter 9). They are made with `python3 gol_lab.py run E10`.\n\n**Data.** From each run's frames every 25 iterations from 500 on, read by `book_chapters.connections.edge_flow`: the connections of frame `2\u00b7t` (the start of the game of t), `decisions.allocations` and the connections of frame `2\u00b7t + 1` (after it).\n\n1. For every connection (a, b) of frame `2\u00b7t`: the tokens a staked on b and b on a, from `decisions.allocations` of frame `2\u00b7t + 1`.\n2. Count the connections by the sum, and by the difference, in the classes shown.\n\n**To make it again:** `python3 book_figures.py connections`."
+  },
+  "cut": {
+   "title": "The connections a game cuts",
+   "caption": "Left: at the start of the game of every 25th iteration from 500 on, the share of the connections across which no token was staked in that game \u2014 the ones the game cuts; the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th). Right: the same share, pooled over the games and worlds, for connections sorted by the number of connections of their less connected end.",
+   "recipe": "**Runs.** The 30 baseline runs `B1-100000-s001` \u2026 `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in Chapter 9). They are made with `python3 gol_lab.py run E10`.\n\n**Data.** From each run's frames every 25 iterations from 500 on, read by `book_chapters.connections.edge_flow`: the connections of frame `2\u00b7t` (the start of the game of t), `decisions.allocations` and the connections of frame `2\u00b7t + 1` (after it).\n\n1. As above; a connection carried nothing if neither end staked a token on the other.\n2. Sort the connections by the smaller of their two ends' degrees in frame `2\u00b7t`.\n\n**To make it again:** `python3 book_figures.py connections`."
+  },
+  "round-figures": {
+   "title": "Flow on the connections, and the loops it makes",
+   "caption": "After every game of the 30 worlds. Left: the viewer's `meanEdgeFlow` \u2014 the tokens staked across a connection, over the connections something crossed \u2014 and `maxEdgeFlow`, the most across one, on a logarithmic axis. Right, every 25 iterations: the longest closed loop of flow the greedy peel of [Lightning](../notes/lightning.md) found in the flow as staked (`lightningLongest`) and in what is left after cancelling (`netLightningLongest`). The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).",
+   "recipe": "**Runs.** The 30 baseline runs `B1-100000-s001` \u2026 `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in Chapter 9). They are made with `python3 gol_lab.py run E10`.\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).\n\n1. Take the rows with `phase` = 2: `meanEdgeFlow`, `maxEdgeFlow`, `lightningLongest` and `netLightningLongest`.\n2. Cut the 1,500 iterations into 600 stretches of 2.5 and take each world's mean in each stretch.\n3. In each stretch, take the median, the 25th and 75th and the 5th and 95th percentiles of those means over the worlds that still have a value there (a world that died has none after its death).\n\n**To make it again:** `python3 book_figures.py connections`."
+  }
+ }
+}

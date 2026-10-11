@@ -26,7 +26,7 @@ Chapter 26 · Meta I, and `research/Research.md` §8):
 
 ## Part IV · One change at a time
 
-### 39 · How fast should brains change? (Experiment 9, ready)
+### 43 · How fast should brains change? (Experiment 9, ready)
 
 **Question.** Is the baseline's birth rate (≈ 3.1 per hundred agents per
 iteration) something selection finds, or a mutation–selection balance that
@@ -60,7 +60,7 @@ as the *p* → 0 end (careful: sparsity 0 is not *p* = 0 — it renames).
 **Pitfalls.** At high *p*, genotype numbers churn every game, so genotype-based
 lineage statistics measure mutation, not descent — follow lines, not numbers.
 
-### 40 · Brains replaced by their average
+### 44 · Brains replaced by their average
 
 **Question.** Does a world need what brains *respond to*, or only their
 average behaviour? (The user's idea, 2026-10-09.)
@@ -96,7 +96,7 @@ iterations — do these?), and whether they freeze or teem.
 **Pitfalls.** The table conditions on states that the policy itself changes;
 a mismatch can be a feedback, not "brains matter". Report both levels.
 
-### 41 · What keeps wealth spread? (`allow_revolutions` off)
+### 45 · What keeps wealth spread? (`allow_revolutions` off)
 
 **Question.** Coalitions decide half of all nodes (Chapter 16). Without them,
 does wealth concentrate (the original Experiment 4 thesis), do hubs become
@@ -109,14 +109,14 @@ hoarders?
 
 **Observe.** Any world that "freezes" around a few rich hubs.
 
-### 42 · Meta III
+### 46 · Meta III
 
-Write once 37–41 are analysed. Re-read the ladder: what moved for P1
-(heredity: Chapter 43), for the null (Chapter 44), for structure (41). Update
+Write once 41–45 are analysed. Re-read the ladder: what moved for P1
+(heredity: Chapter 43), for the null (Chapter 44), for structure (45). Update
 the obstacles list of Chapter 40 and the order of Part V. Fold in what the six
-Part II chapters (18–23) changed.
+Part II chapters (19–24) changed.
 
-### 43 · How big should a brain be? (`hidden_layers`) — PRIORITY, run next after 39
+### 47 · How big should a brain be? (`hidden_layers`) — PRIORITY, run next after 43
 
 **Why it moved up.** Chapter 19: the baseline brain is nearly blind — gain
 0.0015 (founders 0.0006), each sigmoid layer passes ×0.23–0.27, the last
@@ -153,12 +153,12 @@ Cost: fewer weights, cheaper per agent (Appendix A).
 wealth changes the stakes of ≥ 20% of agents (baseline 1%), and stakes depart
 from the even split (R² of the random-walk fit, Chapter 29, below 0.46)." 
 
-### 44 · Does size change the dynamics?
+### 48 · Does size change the dynamics?
 
 Now largely served by Chapter 55 (worlds of 100,000 tokens, 30 seeds, 1,500
 iterations) against the baseline's first 1,500 iterations: sweeps, the wander's
-time scale, the sawtooth of cuts (Chapter 42), extinction. Decide when 51 is
-analysed whether 44 remains a separate chapter or folds into 51/52.
+time scale, the sawtooth of cuts (Chapter 42), extinction. Decide when 55 is
+analysed whether 48 remains a separate chapter or folds into 55/56.
 
 ---
 
@@ -171,7 +171,7 @@ heredity half-life, selection ablation (winner by coin), cross-time tournament
 let them play; checkpoints only exist at run ends today — plan checkpoints at
 fixed iterations for these experiments: `record.checkpoint_every`).
 
-### 45 · Mutation at replication, and nowhere else
+### 49 · Mutation at replication, and nowhere else
 
 **Build.** `mutate_on_replication`: no change after the game; change only when
 a brain is copied — into a child (already) and into a won node (new).
@@ -183,7 +183,7 @@ sweeps; whether selection now separates good from bad (selection ablation).
 **Observe.** Whether worlds freeze (Chapter 41's changeless worlds froze when
 nothing varied — but here copies still vary).
 
-### 46 · Can a brain hold its place? (incumbency)
+### 50 · Can a brain hold its place? (incumbency)
 
 **Build.** The agent's own stake on its node counts double (or a coalition
 must outweigh hegemon + home). One parameter, two or three values.
@@ -195,7 +195,7 @@ inequality, world size.
 **Pitfall.** Incumbency may simply freeze the world (no conquest, no
 spread) — measure births and sweeps too.
 
-### 47 · Kin that know each other (heritable tags)
+### 51 · Kin that know each other (heritable tags)
 
 **Build.** A few numbers per brain (a tag), copied with it, changed rarely;
 each agent sees its candidates' tags (new input rows — changes input width,
@@ -208,7 +208,7 @@ dynamics (tags without kinship — Riolo, Cohen, Axelrod 2001).
 **Check.** Tags must not be a covert channel the brains already had: compare
 with a condition where tags are random per agent (not inherited).
 
-### 48 · When cooperation produces (mutual flow yield)
+### 52 · When cooperation produces (mutual flow yield)
 
 **Build.** A connection with tokens flowing both ways in a game yields *y* new
 tokens to its ends; every holding decays by a small rate so the total stays
@@ -222,7 +222,7 @@ exploiting a partner); whether clusters of mutual exchange form and persist
 anyway (Chapter 38: 58% of mutual pairs exchange 1↔1) makes it a flat subsidy —
 maybe yield only on stakes above a threshold, or only on matched stakes.
 
-### 49 · An open world
+### 53 · An open world
 
 **Build.** (a) Pieces that separate live on (no cull) — every piece is its own
 world; (b) local long-range links: a child may join an agent within *k* steps
@@ -236,7 +236,7 @@ vanish — what replaces them?
 **Pitfall.** Without the cull, tiny pieces of a few agents may linger forever —
 decide how to measure "a world" (largest piece? all pieces?).
 
-### 50 · Meta IV
+### 54 · Meta IV
 
 What moved on the ladder (P1–P4); which mechanic combinations to run next.
 
@@ -244,7 +244,22 @@ What moved on the ladder (P1–P4); which mechanic combinations to run next.
 
 ## Part VI · Towards a physics: space, scale and locality
 
-### 51 · Worlds of 100,000 tokens (Experiment 10, ready)
+### 55 · Worlds of 100,000 tokens (Experiment 10, analysed 2026-10-11)
+
+**Found (2026-10-11).** Thesis refuted: median time to one founder 1,037.5
+(27/30 reached; s013, s018, s020 never), 5.9× the 10k's 175, exponent 0.77
+between front (0.30) and chance (1). E08's 102,400 trio was lucky (p ≈ 0.008).
+Domains of lines (lags 25–200): enrichment 99× at 1 step for lag 25, reach
+7 → 12 steps from lag 25 to 200 — widening like a random walk on these worlds
+(t^0.34, Ch. 24), which gives takeover ∝ N^0.88, near the 0.77. Per-agent stats
+size-independent; clustering ×0.44, spectral gap ×0.47, distances ×1.8–2.0,
+richest ×3.1, best-connected ×7.7 (stars). Stars: 7/30 worlds; centre a place
+handed to newborn children (dynasties, Ch. 33). Ages settle by 500 (stationary
+population, Ch. 13). Parts II and III now read these worlds (second edition).
+Follow-ups: dynasty as unit of selection with incumbency (Ch. 50); does the
+domain reach keep growing as t^0.3 over the 100k-iteration run (Ch. 64)?
+
+### (plan as written before the runs)
 
 **Runs.** B1 at 100,000 tokens, seeds 1–30, 1,500 iterations, four workers.
 The lab's plan (after fixing its memory fit, 2026-10-09): about 40 h on four
@@ -275,12 +290,12 @@ regions at once; families per agent. Regions: do families occupy regions
 (Chapter 37) of a typical size that does not grow with the world? Space: the
 dimension measures of Chapter 24 at scale (→ Chapter 56); distances; cut
 sizes (Chapter 42's sawtooth). Scale-free: tails with 14,000 agents per frame
-(→ 53).
+(→ 57).
 
 **Observe.** The sawtooth; whether big cuts remove whole family regions
 (selection on regions!).
 
-### 52 · Dimensions at scale
+### 56 · Dimensions at scale
 
 Chapter 24's tools on the 100,000-token worlds: local dimension *d(r)* from ball
 growth out to *r* ≈ 30; spectral dimension *d_s(t)* out to *t* of thousands
@@ -289,7 +304,7 @@ distance scaling across 3,200–409,600 tokens (Chapter 42). Question: is there 
 plateau at 3? Does the dimension depend on scale (CDT: 2 at small, 4 at large)?
 Compare with degree-preserving nulls at the same size.
 
-### 53 · Which properties have no scale?
+### 57 · Which properties have no scale?
 
 Finite-size scaling: for each quantity *X*, does the distribution of *X/N^a*
 collapse across sizes (Experiment 8's ten sizes, Chapter 55's large worlds)?
@@ -300,22 +315,22 @@ functions (Chapter 23): exponential (a scale ξ) or power law (none)? Teach
 data collapse with a known critical system (percolation on a lattice) as the
 positive control.
 
-### 54 · Local rules only
+### 58 · Local rules only
 
 **Build (three engine options).** (a) Local share-out: tokens of the dead go to
 their former neighbours (or stay as a "fossil" node that neighbours can win?);
-(b) no global cull: separated pieces live on (same as 49a); (c) local random
+(b) no global cull: separated pieces live on (same as 53a); (c) local random
 numbers: a counter-based generator keyed by (seed, agent id, iteration,
 purpose) — Philox-style, so runs stay exactly repeatable (Chapter 8's tests must
 pass under the new option).
 
 **Find out.** Each alone vs the baseline: world size, inequality (the lottery
 was the poor's basic income — Chapter 28), deaths, sweeps; then all three
-together = "the local world", the substrate for 55.
+together = "the local world", the substrate for 59.
 
-### 55 · How far does a difference travel?
+### 59 · How far does a difference travel?
 
-Damage spreading on the local world (54c is a prerequisite: with one global
+Damage spreading on the local world (58c is a prerequisite: with one global
 stream the difference is everywhere at once). Twin runs from one checkpoint:
 add one token to one agent; record the set of agents whose state differs
 (tokens, brain id, connections) every phase; the maximum and mean network
@@ -324,7 +339,7 @@ per phase by Chapter 7's cone); the Hamming distance between the twins vs time
 → chaos (grows) or order (fades) (Derrida & Weisbuch 1986). Many origins,
 many times; positive control: a lattice cellular automaton with known speed.
 
-### 56 · A source and a sink
+### 60 · A source and a sink
 
 **Design options.** (a) Token quality: tokens carry a "freshness"; a stake
 spends it; spent tokens regenerate slowly (or only at "stars"); only fresh
@@ -334,7 +349,7 @@ total is stationary. **Find out.** Entropy production; whether stable
 structures sit in the flow (dissipative structures); gradients around stars;
 whether life-like persistence (P3) is commoner near sources.
 
-### 57 · Particles
+### 61 · Particles
 
 **Detectors (each with a null and a positive control).** (1) Bound tokens:
 persistent cycles of *net* flow (Chapter 29: almost none in the baseline) —
@@ -344,7 +359,7 @@ track the same cycle over games; (2) groups that outlast their members
 or regions' token holdings, peaks against a random-walk null; (4) moving
 patterns: a group whose "centre" drifts through the network.
 
-### 58 · One agent in a sea of average agents
+### 62 · One agent in a sea of average agents
 
 Needs Chapter 44's empirical policy. **Design.** (a) A large world (10,000–
 100,000 tokens) of empirical-policy agents, run to stationarity; (b) insert a
@@ -360,7 +375,7 @@ boundary (cheap, open system, breaks conservation at the border); a group
 probe (bound state?). **Theory.** Invasion fitness (Metz et al. 1992),
 ESS (Maynard Smith & Price 1973), reservoir/grand canonical ensemble.
 
-### 59 · Meta V
+### 63 · Meta V
 
 What the measurements say about space, scale and matter; which rule changes to
 combine with Part V's.
@@ -369,7 +384,7 @@ combine with Part V's.
 
 ## Part VII · The long run
 
-### 60 · A hundred thousand iterations (Experiment 11, planned, not runnable yet)
+### 64 · A hundred thousand iterations (Experiment 11, planned, not runnable yet)
 
 **Question.** The user's, 2026-10-09: what if there simply was not enough time
 to learn cooperation? One world of B1 at 204,800 tokens (seed 1; its first 600
@@ -494,7 +509,7 @@ check that spectral and box dimension do not dominate.
 - The two-game rhythm (Chapter 21): predict lag-1 vs lag-2 rank correlation
   from the even-split matrix's spectrum on the actual networks (most negative
   eigenvalues of D⁻¹(A+I)); check the hub–leaf explanation quantitatively.
-- Dimension over life at fixed *scale* beyond r = 3 needs larger worlds (52).
+- Dimension over life at fixed *scale* beyond r = 3 needs larger worlds (56).
 - Chapter 24 core (2-core) reads lower (2.7 balls, 1.5 walks at 60k agents):
   is the core threadlike at large scales (loops only local)? Count cycle-basis
   lengths; compare the core's spectral dimension with branched polymers (4/3).

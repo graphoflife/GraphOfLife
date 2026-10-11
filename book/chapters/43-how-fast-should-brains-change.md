@@ -130,8 +130,8 @@ third.
 
 Five rates of mutation, each double the one before: *p* = 0.05, 0.1, 0.2,
 0.4 and 0.8 — from a change every twenty offers to one in almost every
-offer. The baseline is *p* = 0.2, and its thirty worlds are those of
-[Chapter 9](09-thirty-worlds.md): nothing is run again for it. Every other
+offer. The baseline is *p* = 0.2, and its thirty worlds are those of 10,000 tokens of
+[Chapter 10](10-a-worlds-life.md): nothing is run again for it. Every other
 rate is run with the same thirty seeds, at 10,000 tokens, for 3,000
 iterations. Two worlds with the same seed start from the same founders, the
 same brains and the same ring; they part at the first change one of them

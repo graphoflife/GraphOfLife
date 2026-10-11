@@ -1,8 +1,11 @@
 # Meta II · What the measurements say about open-ended evolution
 
 Part III measured the baseline world in every way the viewer can, and a few
-more. This chapter steps back and asks what all of it means for the question
-the book exists for: **can open-ended evolution happen in Graph of Life, and
+more — in this second edition on thirty worlds of 100,000 tokens, with two new
+chapters on what crosses a connection ([Chapter 30](30-what-crosses-a-connection.md))
+and on the largest and the smallest ([Chapter 33](33-the-largest-and-the-smallest.md)).
+This chapter steps back and asks what all of it means for the question the
+book exists for: **can open-ended evolution happen in Graph of Life, and
 what would it take?** It is written the way a researcher keeps a notebook —
 what we now know, what we think it means, what we propose to do about it, and
 how we will know whether it worked — and, as in every chapter, so that a
@@ -50,18 +53,23 @@ walk would: agents spread their stakes nearly evenly over everyone they can
 reach ([Chapter 29](29-where-the-tokens-flow.md)), so tokens settle locally in
 proportion to connections plus one ([Chapter 34](34-how-properties-scale-together.md)),
 run downhill from rich neighbourhoods to poor ([Chapter 28](28-gains-and-losses.md)),
-and never circulate. Half of every agent's traffic is an equal exchange that
-keeps its connections alive at their price of a token a game
-([Chapter 38](38-do-agents-cooperate.md)). The **network** is a stretched web
+and never circulate. Two connections in three carry one or two tokens a
+game, most of them one each way: an equal exchange that keeps the connection
+alive at its price of a token a game, and every connection that carries
+nothing is cut ([Chapter 30](30-what-crosses-a-connection.md),
+[Chapter 38](38-do-agents-cooperate.md)). The **network** is a stretched web
 of stars, grown locally by children joining their parents' neighbourhoods,
-twice as long and thirty times easier to cut than a random network with the
-same connections ([Chapter 35](35-the-geometry-of-a-world.md)); it breaks
-along its poor regions, whose borders go quiet, and the global cull kills
-whatever falls off ([Chapter 36](36-how-a-world-breaks.md)). **Brains** spread
-by conquest eighteen times more than by birth, and change mostly in place, not
-when copied ([Chapter 39](39-questioning-the-mechanics.md)); the brain on a hub
-is replaced almost every game, and the same two brains rarely face each other
-twice ([Chapter 29](29-where-the-tokens-flow.md), [Chapter 38](38-do-agents-cooperate.md)).
+four and a half times as long and thirty times easier to cut than a random
+network with the same connections ([Chapter 35](35-the-geometry-of-a-world.md));
+it breaks along its poor regions, whose borders go quiet, and the global cull
+kills whatever falls off ([Chapter 36](36-how-a-world-breaks.md)). Some worlds
+condense around a single centre joined to thousands, a place handed from
+parent to newborn child in **dynasties**
+([Chapter 33](33-the-largest-and-the-smallest.md)). **Brains** spread by
+conquest seventeen times more than by birth, and change mostly in place, not
+when copied ([Chapter 39](39-questioning-the-mechanics.md)); the brain on a
+hub is replaced almost every game, and the same two brains rarely face each
+other twice ([Chapter 29](29-where-the-tokens-flow.md), [Chapter 38](38-do-agents-cooperate.md)).
 Relatives live together, but cannot recognise each other, and do not treat each
 other differently ([Chapter 38](38-do-agents-cooperate.md)). Almost every
 structural statistic is the same in every world: it follows from the rules,
@@ -74,11 +82,13 @@ brains — change almost every game.
 ## Where the world stands on the ladder
 
 **P1, evolution: partly.** There are lineages, and they matter: a whole world
-descends from one branch of the family tree about every 350 iterations
-([Chapter 18](18-genotypes-and-lineages.md)), families occupy regions
-([Chapter 37](37-one-world-many-colours.md)), and worlds whose brains never
-change end up in very different places, while worlds that evolve all end up
-alike ([Chapter 41](41-do-the-brains-matter.md)). But heredity is weak. A brain
+of 10,000 tokens descends from one branch of the family tree about every 350
+iterations, a world of 100,000 about once in a run
+([Chapter 18](18-genotypes-and-lineages.md)); families occupy regions that
+widen as their line ages, about as a random walk spreads
+([Chapter 37](37-one-world-many-colours.md), [Chapter 55](55-worlds-of-100000-tokens.md));
+and worlds whose brains never change end up in very different places, while
+worlds that evolve all end up alike ([Chapter 41](41-do-the-brains-matter.md)). But heredity is weak. A brain
 is changed with probability 0.2 after every game whether or not it is copied,
 and a brain is overwritten whenever its node is won. The project's pilot
 measurements (`research/pilot_heredity.py`, at a higher mutation rate) found a
@@ -92,7 +102,13 @@ answer it.
 
 **P3, organisations: not found.** The candidates exist — family regions, hubs
 with their stars — but nothing yet shows a group that persists while its
-members change. Partnerships last one game in twenty; positions are not held.
+members change. The nearest thing is a star's **dynasty**: a centre joined to
+thousands, passed from parent to newborn child for hundreds of iterations
+while the brain on it changes every game
+([Chapter 33](33-the-largest-and-the-smallest.md)). It persists while its
+members come and go — but it is a place, kept by the rules of the even split,
+not a group that does anything together. Partnerships last one game in
+twenty-five; positions are not held by any brain.
 
 **P4: out of reach** until P1 to P3 stand.
 
@@ -106,7 +122,7 @@ examined in [Chapter 39](39-questioning-the-mechanics.md).
 2. **Conquest erases.** A won node loses its brain entirely; an individual
    ends whenever its node is won, and on a hub that is almost every game.
 3. **Nothing can be held.** No incumbency, no lasting partners: the "shadow of
-   the future" that reciprocity needs is about 0.05.
+   the future" that reciprocity needs is about 0.04 (0.05 at 10,000 tokens).
 4. **Nothing is positive-sum.** Tokens are conserved and every stake is a
    transfer; no interaction makes anything that was not there before. An
    organisation can never be worth more than its parts, so there is no reason
@@ -257,21 +273,58 @@ Some questions need no new runs, only new looks at the old ones:
   for hundreds of iterations, while its nodes turn over, would be a first
   candidate for P3 — measurable now, against a null that shuffles lineages.
   [Chapter 23](23-like-next-to-like.md) found genotypes clustered within two
-  steps and no territories; lines, which last longer, are still to be
-  measured.
+  or three steps and no territories; [Chapter 55](55-worlds-of-100000-tokens.md)
+  found lines, which last longer, in patches that widen from 7 steps to 12 as
+  they age. Whether a patch is ever more than the sum of its agents is the
+  next question.
 - **What does a brain respond to?** Feed a stored brain the same inputs with one
   changed — a neighbour's tokens, a message — and see what its stakes do. If
   brains mostly tell "me" from "others" and little else, the even split is no
   surprise. [Chapter 19](19-what-the-brains-are-like.md) did this: doubling
-  every neighbour's tokens changes the stakes of 1% of agents, setting every
-  message to 0 those of 7%. Brains respond to almost nothing.
-- **Are the old at the edges?** [Chapter 37](37-one-world-many-colours.md)
-  suggested it; age against distance from the hubs would say.
-- **Why do worlds reproduce less as they age?** Births fall by 41% over a
-  world's youth ([Chapter 12](12-births-deaths-and-ages.md)), and founders
-  reproduce twenty times as often as settled agents
-  ([Chapter 31](31-how-agents-have-children.md)). That is a candidate for an
-  adaptation — the clearest one Part III saw.
+  every neighbour's tokens changes the stakes of 1.5% of agents, setting every
+  message to 0 those of 9%. Brains respond to almost nothing.
+- **Where are the old?** At 10,000 tokens a picture suggested the edges; at
+  100,000 the old sit in clumps of their own ([Chapter 37](37-one-world-many-colours.md)),
+  as cohorts ([Chapter 23](23-like-next-to-like.md)). Age against distance from
+  the hubs would say.
+- **Why do worlds reproduce less as they age?** Births per agent fall over a
+  world's first five hundred iterations and then, in a large world, hold
+  still ([Chapter 13](13-how-ages-change.md)); founders reproduce twenty times
+  as often as settled agents ([Chapter 31](31-how-agents-have-children.md)).
+  That is a candidate for an adaptation — the clearest one Part III saw — but
+  one that is finished early, not one that accumulates.
+
+## What the second edition changed
+
+Redoing Parts II and III on worlds ten times larger left most of them as
+they were, and that is itself a finding: per agent, a world of 100,000
+tokens does what a world of 10,000 does — the same births and deaths within
+a tenth, the same inequality, the same game, the same brains
+([Chapter 55](55-worlds-of-100000-tokens.md)). What changed is how the agents
+are arranged and how fast anything crosses a world:
+
+- **The shape changes.** Half the clustering, more loops per agent, fewer
+  bridges, distances twice as long, a ball dimension that rises with size
+  ([Chapter 24](24-how-many-dimensions-does-a-world-have.md),
+  [Chapter 25](25-the-core-of-a-world.md)).
+- **Stars can take a world.** One world in four condensed around a single
+  centre, and then everything about it — its core, its game, its cuts —
+  follows from the star ([Chapter 33](33-the-largest-and-the-smallest.md)).
+- **Lines take longer.** A takeover by one founder's line takes six times as
+  long in a world ten times larger, so lines live side by side for most of a
+  run, and the messages of a world speak more dialects
+  ([Chapter 20](20-what-agents-say-to-each-other.md), [Chapter 55](55-worlds-of-100000-tokens.md)).
+- **Demography settles.** Ages, lifetimes and births per agent hold still from
+  iteration 500 on, as a stationary population's do
+  ([Chapter 13](13-how-ages-change.md)).
+
+For open-ended evolution the larger world is the better stage: more room and
+more time for lines to differ, and the first lasting inherited structure, the
+dynasty. It does not remove a single obstacle above — every one of them is a
+rule, and the rules are the same at both sizes. The proposals below are
+therefore planned at 10,000 tokens, where a run is eight times cheaper, and
+those that bear on space and organisation (P3, Part VI) are to be checked at
+100,000.
 
 ## The road from here
 

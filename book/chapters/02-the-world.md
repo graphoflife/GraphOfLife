@@ -68,9 +68,10 @@ least one token, a world can never hold more than *T* agents.
 
 A world is fixed by its **settings** and its **seed**. The settings are 23
 numbers and switches; [Every setting](../notes/settings.md) lists them all,
-with the values of the baseline **B1** that Part II uses. The ones that
-shape the start are the number of tokens *T* = 10,000, the number of founders
-and their ring.
+with the values of the baseline **B1**. The ones that shape the start are
+the number of tokens *T*, the number of founders and their ring. This part of
+the book teaches with worlds of *T* = 10,000 tokens; Parts II and III study the
+same baseline at *T* = 100,000, which starts the same way, ten times over.
 
 From them the world is built in three steps.
 
@@ -146,7 +147,8 @@ connections, the inequality of wealth, and so on — and kept in the run's
 fields and links each statistic to the note that defines it.
 
 A baseline run of 10,000 tokens and 3,000 iterations writes 6,000 frames,
-about 300 megabytes on disk.
+about 300 megabytes on disk; one of 100,000 tokens and 1,500 iterations writes
+3,000 frames, about 2 gigabytes.
 
 > [!summary] In short
 > A world is a network of agents on nodes. Each agent holds a whole number of

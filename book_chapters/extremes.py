@@ -17,15 +17,14 @@ import numpy as np
 
 import book_data as D
 import book_figures as F
-from book_figures import (FRAMES, STATS_FILE, band_series, chapter, describe, dots, line, mean_over, recipe,
-                          series)
-from book_chapters.common import (BAND_STEPS, BAND_WORDS, BLUE, CYAN, GREEN, GREY, ORANGE, RED, VIOLET,
-                                  WORLD_SETS, WORLDS as W, YELLOW, listed)
+from book_figures import FRAMES, STATS_FILE, band_series, chapter, describe, line, mean_over, recipe, series
+from book_chapters.common import (BAND_STEPS, BAND_WORDS, BLUE, CYAN, GREEN, GREY, ORANGE, RED, STAR, VIOLET,
+                                  WORLD_SETS, WORLDS as W, YELLOW)
 
 #: The columns of a reigns table: after the game of iteration t, the richest agent and the
 #: best-connected, and the largest gain and loss of that game.
 REIGN_COLUMNS = ("t", "rich_id", "rich_tokens", "rich_degree", "rich_age", "hub_id", "hub_degree", "hub_tokens",
-                 "hub_age", "gain", "loss", "gainer_id", "loser_id", "pair")
+                 "hub_age", "gain", "loss", "gainer_id", "loser_id", "pair", "rich_parent", "hub_parent")
 
 
 @D.measure("reigns", file="{run}.reigns.npz")
@@ -33,8 +32,10 @@ def reigns(run_id: str) -> Dict[str, Any]:
     """
     After every game: who is richest and who has the most connections, with
     their tokens, connections and age; the largest gain and loss of the game, by
-    whom; and whether the two were joined at the start of the game (`pair` 1),
-    so that one pile may simply have crossed one connection.
+    whom; whether the two were joined at the start of the game (`pair` 1),
+    so that one pile may simply have crossed one connection; and the parent
+    agent of the richest and of the best-connected (−1 for a founder), so that
+    a first place handed from parent to child can be told apart.
     """
     last = D.last_iteration(run_id)
     rows = []
@@ -47,12 +48,83 @@ def reigns(run_id: str) -> Dict[str, Any]:
         tokens = np.asarray(after["tokens"], dtype=float)
         ages = np.asarray(after["ages"], dtype=float)
         delta = np.asarray(after["delta"], dtype=float)
+        parents = np.asarray(after["parent_ids"], dtype=np.int64)
         r, h, g, l = int(np.argmax(tokens)), int(np.argmax(degree)), int(np.argmax(delta)), int(np.argmin(delta))
         joined = {(min(a, b), max(a, b)) for a, b in start["edges"]}
         pair = (min(ids[g], ids[l]), max(ids[g], ids[l])) in joined
         rows.append([t, ids[r], tokens[r], degree[r], ages[r], ids[h], degree[h], tokens[h], ages[h],
-                     delta[g], delta[l], ids[g], ids[l], float(pair)])
+                     delta[g], delta[l], ids[g], ids[l], float(pair), parents[r], parents[h]])
     return {"table": np.array(rows, dtype=float)}
+
+
+#: How many games a star is followed for.
+STAR_GAMES = 100
+
+
+@D.measure("star")
+def star(run_id: str) -> Dict[str, Any]:
+    """
+    The anatomy of a world's biggest star: at the game of its settled life whose
+    best-connected agent held the largest share of the world, and before which
+    STAR_GAMES more games are left —
+
+    at        that game: the agents at its start, the hub's connections and tokens,
+              its share of all tokens; how many of its neighbours are leaves and
+              what they hold; what the hub staked on its neighbours and on its
+              own node, and what its leaves staked on the hub's node;
+    games     the STAR_GAMES games from there: whether the best-connected agent's
+              node was taken by a coalition, and how many different brains the
+              best-connected agent carried after them;
+    handover  the first time in those games that first place passed to another
+              agent: the old hub's connections before and after, the new one's,
+              its age, and whether it is the old hub's child.
+    """
+    until = D.last_iteration(run_id) - STAR_GAMES
+    settled = [r for r in F.rows(run_id) if r.get("phase") == 2 and F.SETTLED <= r["iteration"] <= until]
+    t0 = int(max(settled, key=lambda r: r["maxDegree"] / r["nodes"])["iteration"])
+
+    def hub_of(frame):
+        degree: Dict[int, int] = {}
+        for a, b in frame["edges"]:
+            degree[a] = degree.get(a, 0) + 1
+            degree[b] = degree.get(b, 0) + 1
+        return max(degree, key=degree.get), degree
+
+    start, after = D.frame_at(run_id, t0, 1), D.frame_at(run_id, t0, 2)
+    hub, degree = hub_of(start)
+    tokens = dict(zip(start["ids"], start["tokens"]))
+    neighbours = {b if a == hub else a for a, b in start["edges"] if hub in (a, b)}
+    leaves = [u for u in neighbours if degree[u] == 1]
+    allocations = {r["agent"]: r for r in after["decisions"]["allocations"]}
+    mine = allocations[hub]
+    on = dict(zip(mine["targets"], mine["alloc"]))
+    leaf_share = [allocations[u]["alloc"][allocations[u]["targets"].index(hub)] / max(1, tokens[u])
+                  for u in leaves if u in allocations and hub in allocations[u]["targets"]]
+    at = {"t": t0, "agents": len(start["ids"]), "hub_degree": degree[hub], "hub_tokens": tokens[hub],
+          "hub_token_share": tokens[hub] / sum(start["tokens"]), "leaf_neighbours": len(leaves),
+          "leaf_tokens": float(np.mean([tokens[u] for u in leaves])) if leaves else None,
+          "staked_per_neighbour": float(np.mean([on.get(u, 0) for u in neighbours])),
+          "neighbours_staked_on": float(np.mean([on.get(u, 0) > 0 for u in neighbours])),
+          "staked_most": float(max(on.get(u, 0) for u in neighbours)), "staked_home": float(on.get(hub, 0)),
+          "leaf_share_on_hub": float(np.mean(leaf_share)) if leaf_share else None}
+
+    taken, brains, handover = 0, set(), None
+    for t in range(t0, t0 + STAR_GAMES):
+        start, after = D.frame_at(run_id, t, 1), D.frame_at(run_id, t, 2)
+        h, deg = hub_of(start)
+        won = next(w for w in after["decisions"]["winners"] if w["node"] == h)
+        taken += bool(won["revolt"])
+        if h in after["ids"]:
+            brains.add(after["brain_ids"][after["ids"].index(h)])
+        if handover is None and h != hub:
+            parents = dict(zip(start["ids"], start["parent_ids"]))
+            before = D.frame_at(run_id, t - 1, 2)
+            _, old_degree = hub_of(before)
+            handover = {"t": t, "old_before": old_degree.get(hub, 0), "old_after": deg.get(hub, 0),
+                        "new": deg[h], "new_age": int(dict(zip(start["ids"], start["ages"]))[h]),
+                        "child": parents.get(h) == hub}
+    return {"at": at, "games": {"count": STAR_GAMES, "taken_by_coalition": taken, "brains": len(brains)},
+            "handover": handover}
 
 
 def runs_of_reign(ids: np.ndarray) -> List[int]:
@@ -108,6 +180,45 @@ def extremes(ch: F.Chapter) -> None:
     ch.number("minTokens_ever", float(max(np.nanmax(series(s.run_id, "minTokens")[1]) for s in specs)))
     ch.number("minDegree_ever", float(max(np.nanmax(series(s.run_id, "minDegree")[1]) for s in specs)))
 
+    # ---- stars: worlds held together by one hub ----
+    hub_mean = {s.run_id: mean_over(s.run_id, "maxDegree/nodes", *W.window) for s in alive}
+    stars = sorted((r for r in hub_mean if hub_mean[r] >= STAR), key=lambda r: -hub_mean[r])
+    rest = [s for s in alive if s.run_id not in stars]
+    series_ = [band_series([series(s.run_id, "maxDegree/nodes") for s in rest],
+                           f"the other {len(rest)} worlds", GREY)]
+    for k, run in enumerate(stars):
+        its, v = series(run, "maxDegree/nodes")
+        series_.append(line(its, v, f"seed {int(run.rsplit('s', 1)[1])}", [RED, ORANGE, YELLOW, GREEN, CYAN, BLUE,
+                                                                             VIOLET][k % 7], width=1.2, alpha=0.9))
+    scatter = []
+    small = WORLD_SETS["E02"] if W.experiment != "E02" else None
+    for worlds, colour, label in ((W, BLUE, f"{W.tokens:,} tokens"),) + (((small, YELLOW, f"{small.tokens:,} tokens"),)
+                                                                         if small else ()):
+        hx = [mean_over(s.run_id, "maxDegree/nodes", *worlds.window) for s in worlds.alive]
+        cy = [mean_over(s.run_id, "coreShare", *worlds.window) for s in worlds.alive]
+        scatter.append({"label": f"a world of {label}", "x": hx, "y": cy, "points": True, "size": 7, "colour": colour})
+        ch.number(f"stars_{worlds.experiment}", {"worlds": len(hx), "star_worlds": int(sum(x >= STAR for x in hx)),
+                                                  "corr_core_hub": float(np.corrcoef(hx, cy)[0, 1]),
+                                                  "largest": float(max(hx))})
+    ch.grid(
+        "stars", [
+            dict(title="The largest hub's share of the world", x={"label": "iteration"},
+                 y={"label": "agents joined to the best-connected agent, share", "min": 0, "max": 1}, series=series_),
+            dict(title="Hub and core", x={"label": "agents joined to the largest hub, share (mean)", "min": 0},
+                 y={"label": "agents in the core, share (mean)", "min": 0, "max": 1}, series=scatter)],
+        columns=2, title="Worlds held together by one agent",
+        caption=f"Left: after every game, the connections of the best-connected agent divided by the agents alive, in "
+                f"the worlds whose best-connected agent held, on average over iterations {W.span}, a tenth of the "
+                f"world or more (one line each), and in the other worlds ({BAND_WORDS[0].lower()}{BAND_WORDS[1:]}). "
+                f"Right: one dot "
+                f"per world, its mean over the settled life of that share and of the share of agents in the core "
+                f"([Core, trees and leaves](../notes/core-trees-leaves.md)), for the worlds of {W.tokens:,} tokens"
+                + (f" (blue) and of {small.tokens:,} (yellow, over iterations {small.span})." if small else "."),
+        recipe=recipe(W.runs_text() + (" " + small.surviving_text() if small else ""), STATS_FILE,
+                      ["Take the rows with `phase` = 2: `maxDegree` / `nodes`, and `coreShare` (every 25 iterations).",
+                       "Left: one line per star world; the band over the others as every band. Right: each world's means "
+                       "over its settled life."]))
+
     # ---- who holds first place, and for how long ----
     kept = {s.run_id: reigns(s.run_id)["table"] for s in alive}
     col = {name: i for i, name in enumerate(REIGN_COLUMNS)}
@@ -118,11 +229,60 @@ def extremes(ch: F.Chapter) -> None:
         hub_runs += runs_of_reign(settled[:, col["hub_id"]])
         same.append(float(np.mean(settled[:, col["rich_id"]] == settled[:, col["hub_id"]])))
         pairs.append(float(np.mean(settled[:, col["pair"]])))
+    # ---- succession: is first place handed down? ----
+    succession, dynasty_runs = {}, {}
+    for who in ("rich", "hub"):
+        changes = to_child = newborn = 0
+        dynasties = []
+        for table in kept.values():
+            settled = table[table[:, 0] >= W.settled]
+            ids, parents, ages = (settled[:, col[f"{who}_id"]], settled[:, col[f"{who}_parent"]],
+                                  settled[:, col[f"{who}_age"]])
+            start = 0
+            for i in range(1, len(ids)):
+                if ids[i] == ids[i - 1]:
+                    continue
+                changes += 1
+                handed = parents[i] == ids[i - 1]
+                to_child += handed
+                newborn += ages[i] == 0
+                if not handed:
+                    dynasties.append(i - start)
+                    start = i
+            dynasties.append(len(ids) - start)
+        v = np.asarray(dynasties, float)
+        dynasty_runs[who] = v
+        succession[who] = {"changes": changes, "to_child": to_child / max(1, changes),
+                           "to_newborn": newborn / max(1, changes), "dynasties": int(v.size),
+                           "dynasty_median": float(np.median(v)), "dynasty_longest": float(v.max()),
+                           "dynasty_share_ge_100": float(np.mean(v >= 100))}
+    ch.number("succession", succession)
+
+    # ---- the biggest star, from inside ----
+    if stars:
+        biggest = stars[0]
+        table = reigns(biggest)["table"]
+        settled = table[table[:, 0] >= W.settled]
+        ids, parents, ages = (settled[:, col["hub_id"]], settled[:, col["hub_parent"]], settled[:, col["hub_age"]])
+        changes = np.flatnonzero(np.diff(ids) != 0) + 1
+        anatomy = star(biggest)
+        ch.number("star", {"run": biggest, "seed": int(biggest.rsplit("s", 1)[1]),
+                           **{k: anatomy[k] for k in ("at", "games", "handover")},
+                           "settled_changes": int(changes.size),
+                           "to_newborn_child": float(np.mean([parents[i] == ids[i - 1] and ages[i] == 0
+                                                              for i in changes])) if changes.size else None})
+
     out = []
     for runs, label, colour in ((rich_runs, "the richest agent", RED), (hub_runs, "the best-connected agent", BLUE)):
         v = np.asarray(runs, float)
         xs = np.unique(v)
         out.append(line(xs, [(v >= x).mean() for x in xs], f"{label} ({len(v):,} reigns)", colour, width=2))
+    for who, label, colour in (("rich", "the richest, handed down", ORANGE), ("hub", "the best-connected, handed down",
+                                                                              CYAN)):
+        v = dynasty_runs[who]
+        xs = np.unique(v)
+        out.append(line(xs, [(v >= x).mean() for x in xs], f"{label} ({len(v):,} dynasties)", colour, width=1.5,
+                        dash=[5, 4]))
     ch.figure(
         "reigns", title="How long first place is held",
         x={"label": "iterations in a row, L (logarithmic)", "log": True, "min": 1},
@@ -131,6 +291,8 @@ def extremes(ch: F.Chapter) -> None:
         caption=f"After every game from iteration {W.settled} on, in {W.lived}, which agent holds the most tokens "
                 "and which the most connections. A reign is a stretch of consecutive iterations with the same agent "
                 "first; for every L, the share of the reigns that lasted at least L iterations, pooled over the "
+                "worlds. Dashed: the same for dynasties — a dynasty goes on while every new first agent is a child "
+                "of the one before it, and ends when first place passes to anyone else — pooled over the "
                 "worlds. A reign still going at the end of a run is counted as far as it went.",
         recipe=recipe(W.surviving_text(), FRAMES,
                       ["Read the frame after every game; the agent with the most `tokens`, and the one with the most "
@@ -142,6 +304,7 @@ def extremes(ch: F.Chapter) -> None:
                                      "share_1": float(np.mean(v == 1)), "share_ge_10": float(np.mean(v >= 10)),
                                      "share_ge_100": float(np.mean(v >= 100)), "longest": float(v.max())})
     ch.number("rich_is_hub", describe(same))
+
     ch.number("gain_loss_joined", describe(pairs))
 
     # ---- what kind of agent comes first ----
@@ -151,7 +314,6 @@ def extremes(ch: F.Chapter) -> None:
                         for name, _ in fields})
 
     # ---- with the size of a world ----
-    import gol_plan
     by_size: Dict[int, List[Dict[str, float]]] = {}
     for s in F.runs_of("E08", "baseline"):
         if F.lived(s) < s.until:

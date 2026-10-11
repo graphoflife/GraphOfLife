@@ -85,16 +85,16 @@ line, the dots placed so that joined agents lie near each other. A world of
 every agent within a few steps of the world's oldest agent.
 
 <!-- figure shape/world-end -->
-![World of seed 1 after the game of iteration 2,999](../figures/shape/world-end.svg)
+![World of seed 1 after the game of iteration 1,499](../figures/shape/world-end.svg)
 
-**World of seed 1 after the game of iteration 2,999.** The world with seed 1 after the game of iteration 2,999, every one of its 1,336 agents: every agent drawn is a dot, every connection between two of them a line. Blue: agents in the core, which is what is left when agents with one connection or none are removed again and again until none remains ([Core, trees and leaves](../notes/core-trees-leaves.md)); yellow: the rest of the hanging trees; red: leaves, agents with a single connection. Where a dot is drawn means nothing in itself: a layout (networkx's ForceAtlas2, seed 1) pulls joined agents together and pushes the rest apart.
+**World of seed 1 after the game of iteration 1,499.** The world with seed 1 after the game of iteration 1,499, the 2,495 of its 14,870 agents within 25 steps of agent 660,973, the oldest, 806 iterations old — a piece, since a world this large is a tangle when drawn whole: every agent drawn is a dot, every connection between two of them a line. Blue: agents in the core, which is what is left when agents with one connection or none are removed again and again until none remains ([Core, trees and leaves](../notes/core-trees-leaves.md)); yellow: the rest of the hanging trees; red: leaves, agents with a single connection. Where a dot is drawn means nothing in itself: a layout (networkx's ForceAtlas2, seed 1) pulls joined agents together and pushes the rest apart.
 
 > [!example]- How to make this figure
-> **Runs.** `B1-10000-s001`.
+> **Runs.** `B1-100000-s001`.
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
-> 1. Read frame `5999` (iteration 2,999, after the game): `ids` and `edges`.
+> 1. Read frame `2999` (iteration 1,499, after the game): `ids` and `edges`.
 > 2. Peel: remove every agent with one connection or none, again and again, until none is left; the agents never removed are the core. Leaves are agents with exactly one connection.
 > 3. In a world of more than 2,500 agents, keep the agents within r steps of the oldest agent, for the largest r that keeps at most 2,500 (`book_chapters.society.shown`).
 > 4. Lay the graph out with `networkx.forceatlas2_layout(G, max_iter=200, seed=1)`.

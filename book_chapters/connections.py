@@ -20,10 +20,10 @@ import numpy as np
 
 import book_data as D
 import book_figures as F
-from book_figures import (DEGREE_CLASSES, STATS_FILE, band_series, bars, chapter, describe, line, mean_over,
+from book_figures import (DEGREE_CLASSES, STATS_FILE, band_series, bars, chapter, describe, mean_over,
                           recipe, series)
-from book_chapters.common import (BAND_STEPS, BAND_WORDS, BLUE, CYAN, GREEN, GREY, ORANGE, RED, VIOLET,
-                                  WORLD_SETS, WORLDS as W, YELLOW)
+from book_chapters.common import (BAND_STEPS, BAND_WORDS, BLUE, CYAN, GREEN, ORANGE, RED, WORLD_SETS,
+                                  WORLDS as W)
 
 #: How often the connections are looked at one by one.
 FLOW_EVERY = 25
@@ -107,7 +107,6 @@ def connections(ch: F.Chapter) -> None:
               "1,000–4,999", "5,000+"]
     gross = np.sum([m["gross"] for m in kept.values()], axis=0)
     net = np.sum([m["net"] for m in kept.values()], axis=0)
-    k = np.arange(len(labels))
     ch.figure(
         "per-connection", title="Tokens across one connection in one game",
         x={"label": "tokens, both directions together", "categories": labels},

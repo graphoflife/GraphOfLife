@@ -30,7 +30,8 @@ itself is their combination.
 
 `loopDensity` = `cycleRank` / |*E*|: the share of connections that are
 "spare", beyond what a tree would need. 0 is a tree; values near 1 a densely
-interwoven network. A settled baseline world has about 0.38.
+interwoven network. A settled baseline world has about 0.42 at 100,000
+tokens, 0.38 at 10,000.
 
 ## Pieces
 

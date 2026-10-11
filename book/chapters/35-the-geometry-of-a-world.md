@@ -16,18 +16,22 @@ world has and the random network lacks is what the rules built.
 >   token — need to cross it?
 > - How many loops does it have, and where do they run?
 
-<!-- runs E02 -->
+The worlds are the thirty of 100,000 tokens of [Chapter 9](09-thirty-worlds.md);
+where the thirty of 10,000 tokens this chapter was first written from differ,
+both are given.
+
+<!-- runs E10 -->
 > [!info] The runs behind this chapter
-> **30 runs.** Every condition below is run once for every seed (1 to 30), for 3,000 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
+> **30 runs.** Every condition below is run once for every seed (1 to 30), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
 >
-> - **baseline** — changes nothing: B1 as it is; 10,000 tokens. Runs `B1-10000-s001` … `B1-10000-s030`.
+> - **baseline** — changes nothing: B1 as it is; 100,000 tokens. Runs `B1-100000-s001` … `B1-100000-s030`.
 >
-> To make these runs again: `python3 gol_lab.py run E02`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | baseline | what it is |
 > |---|---|---|
-> | [`total_tokens`](../notes/settings.md#total_tokens) | 10,000 | The number of tokens in the world, *T*. It never changes during a run. |
+> | [`total_tokens`](../notes/settings.md#total_tokens) | 100,000 | The number of tokens in the world, *T*. It never changes during a run. |
 > | [`n_nodes`](../notes/settings.md#n_nodes) | 0 | How many founders the world starts with. 0 means one founder per hundred tokens: *n* = ⌊*T* / 100⌋. |
 > | [`k_neighbors`](../notes/settings.md#k_neighbors) | 0 | How many neighbours each founder starts with in the ring. 0 means *k* = max(⌊*n* / 100⌋, 5); an odd *k* is wired as *k* − 1. |
 > | [`rewire_p`](../notes/settings.md#rewire_p) | 0.2 | In the starting ring, the probability that a connection is moved to a founder chosen at random (Watts–Strogatz). |
@@ -51,7 +55,7 @@ world has and the random network lacks is what the rules built.
 > | [`mutation_sparsity`](../notes/settings.md#mutation_sparsity) | 0.1 | The share of a brain's numbers a change touches; also the probability, for each weight matrix and bias vector, of a rarer reset that redraws that share of it. |
 > | [`extinction_threshold`](../notes/settings.md#extinction_threshold) | 20 | A run stops, as extinct, when an iteration ends (after its game) with this many agents or fewer. |
 > | seeds | 1 to 30 | one run per seed |
-> | iterations | 3,000 | how far each run goes, unless its world dies first |
+> | iterations | 1,500 | how far each run goes, unless its world dies first |
 >
 > A value in **bold** differs from the baseline B1.
 <!-- /runs -->
@@ -71,7 +75,7 @@ to reach to touch everyone.
 **Three distances.** Every 25 iterations, in the 30 baseline worlds: the diameter, the radius and the mean path length, all estimated from breadth-first searches out of 8 to 16 spread agents ([Radius and diameter](../notes/radius-and-diameter.md)). For each, the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
 >
@@ -81,14 +85,19 @@ to reach to touch everyone.
 > **To make it again:** `python3 book_figures.py geometry`.
 <!-- /figure -->
 
-Over the settled life the median world has a mean path length of 9.8 steps,
-a radius of 17 and a diameter of 29. Are those long? Take the world of seed 1
-after its last game, 1,336 agents, and compute every distance exactly: a mean
-path of 8.8, a radius of 15, a diameter of 29. Now keep every agent's number
-of connections and wire them at random (five times, a "configuration model"):
-the mean path falls to **4.2**, the radius to 5.8, the diameter to 11.
+Over the settled life the median world has a mean path length of 17.7
+steps, a radius of 36 and a diameter of 60 — about twice those of the worlds
+of 10,000 tokens (9.8, 17 and 29). Are those long? Take the world of seed 1
+after its last game, 14,870 agents, and compute every distance exactly: a
+mean path of 27.9, a radius of 48, a diameter of 96. Now keep every agent's
+number of connections and wire them at random (five times, a "configuration
+model"): the mean path falls to **6.0**, the radius to 8.6, the diameter to
+16.
 
-The world is **twice as long** as its connections require. Random networks are
+The world is **four and a half times as long** as its connections require —
+where the world of seed 1 at 10,000 tokens was twice as long (8.8 against
+4.2). The gap widens with size: a random network's distances grow with the
+logarithm of its agents, a world's with a power of them. Random networks are
 "small worlds" because every connection is as likely to be a long jump as a
 short one. In this world there are no long jumps: a child is joined to its
 parent's neighbourhood ([Chapter 31](31-how-agents-have-children.md)), so the
@@ -101,28 +110,30 @@ Stand on an agent and count the agents within *r* steps.
 <!-- figure geometry/ball -->
 ![How many agents are within r steps](../figures/geometry/ball.svg)
 
-**How many agents are within r steps.** The world with seed 1 after its last game (1,336 agents). From 24 agents spread evenly through the list of ids, a breadth-first search counts how many agents lie within r steps; the dots are the means over the 24. Left, both axes logarithmic: a power law r^d — growth like a d-dimensional space — is a straight line of slope d; red is the line least squares fits up to the radius where half the world is reached. Right, only the vertical axis logarithmic: exponential growth, as in a tree or a random network, would be a straight line there ([Dimension and curvature](../notes/ball-dimension-and-curvature.md)).
+**How many agents are within r steps.** The world with seed 1 after its last game (14,870 agents). From 24 agents spread evenly through the list of ids, a breadth-first search counts how many agents lie within r steps; the dots are the means over the 24. Left, both axes logarithmic: a power law r^d — growth like a d-dimensional space — is a straight line of slope d; red is the line least squares fits up to the radius where half the world is reached. Right, only the vertical axis logarithmic: exponential growth, as in a tree or a random network, would be a straight line there ([Dimension and curvature](../notes/ball-dimension-and-curvature.md)).
 
 > [!example]- How to make this figure
-> **Runs.** `B1-10000-s001`.
+> **Runs.** `B1-100000-s001`.
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
-> 1. Read frame `5999`; build the network from `edges`.
+> 1. Read frame `2999`; build the network from `edges`.
 > 2. From every ⌊n/24⌋-th agent of the id-sorted list, breadth-first search; count the agents at distance ≤ r for r = 1 … 40; average over the 24 sources.
 > 3. Fit ln V(r) = a + d·ln r by least squares for r with V(r) ≤ n/2.
 >
 > **To make it again:** `python3 book_figures.py geometry`.
 <!-- /figure -->
 
-Within one step there are, on average, 3.5 agents (the agent and its
-neighbours). Within two, already **70**: from most agents, two steps reach a
-hub and everything around it — the stars of [Chapter 34](34-how-properties-scale-together.md).
-Then the count grows more slowly, as *r*^2.68, until half the world is
-reached at seven steps, and flattens as the balls run into the edges of the
-world. The growth is neither a clean power law (the left panel would show a
-straight line) nor a clean exponential (the right one would): a world of a
-thousand agents is too small for either to have room.
+Within one step there are, on average, 6 agents (the agent and its
+neighbours). Within two, 21; within three, 62; within five, 200; within ten,
+1,270. The count grows as *r*^2.38, until half the world is reached at 24
+steps, and then flattens as the balls run into the edges of the world. In the
+world of seed 1 at 10,000 tokens, two steps already held 70 agents — most
+agents were two steps from a hub — and half the world lay within seven. The
+growth is closer to a power law here (the left panel would show a straight
+line) than to an exponential (the right one would), and
+[Chapter 24](24-how-many-dimensions-does-a-world-have.md) reads it as a
+dimension.
 
 ## Four measures of a world's shape
 
@@ -136,7 +147,7 @@ records every 25 iterations ([Dimension and curvature](../notes/ball-dimension-a
 **Four measures of a world's geometry.** Every 25 iterations, in the 30 baseline worlds: the dimension and the curvature read off how balls grow ([Dimension and curvature](../notes/ball-dimension-and-curvature.md)), the box dimension ([Box dimension](../notes/box-dimension.md)), and the spectral gap, on a logarithmic axis ([The spectral gap](../notes/spectral-gap.md)). In each, the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
 >
@@ -146,18 +157,21 @@ records every 25 iterations ([Dimension and curvature](../notes/ball-dimension-a
 > **To make it again:** `python3 book_figures.py geometry`.
 <!-- /figure -->
 
-- **Dimension from ball growth**: 3.0 in the median world (the worlds: 2.6 to
-  5.4), up from 2.3 in the starting ring. Balls grow, over their first few
-  steps, about as fast as in three-dimensional space.
-- **Curvature**: +1.0 (0.2 to 3.4), from −0.15 at the start. Positive
+- **Dimension from ball growth**: 3.4 in the median world (the worlds: 2.9 to
+  6.9; 3.0 at 10,000 tokens), against 3.7 in the founders' ring after the
+  first game. Balls grow, over their first few steps, about as fast as in
+  three-dimensional space, or faster.
+- **Curvature**: +1.4 (0.1 to 23), from −1.7 at the start. Positive
   curvature means balls grow more slowly at larger *r* than at smaller — as on
-  a sphere. Here that is mostly the world's **finite size**: the balls begin to
-  run out of world before they reach half of it. Read it as "the growth
-  slows", not as a sphere.
-- **Box dimension**: 1.85 (1.68 to 2.16), up from 1.53, with R² = 0.96.
-- **Spectral gap**: 0.0026 (0.0016 to 0.015), down from 0.011.
+  a sphere. Here that is mostly the bushy neighbourhoods of hubs, which fill
+  the first steps of a ball, and in a star the whole world is two steps from
+  everywhere (the 23). Read it as "the growth slows", not as a sphere.
+- **Box dimension**: 1.88 (1.66 to 2.58; 1.85 at 10,000 tokens), from 2.48 in
+  the ring, with R² = 0.96.
+- **Spectral gap**: 0.0012 (0.0010 to 0.0019), half that of the worlds of
+  10,000 tokens (0.0026), down from 0.080 in the ring.
 
-Two dimensions, 3.0 and 1.85, for the same world. They do not contradict each
+Two dimensions, 3.4 and 1.9, for the same world. They do not contradict each
 other; they look at different scales. Ball growth is fitted at radii 1 to 5,
 where the bushy neighbourhoods of hubs make the world look high-dimensional;
 box covering runs from size 1 to 33, and at large sizes it counts the long,
@@ -173,21 +187,22 @@ comparing worlds.
 **Covering one world with boxes.** The world with seed 1 after its last game, covered by boxes: a box of size ℓ is every agent within (ℓ − 1)/2 steps of a centre, and centres are taken greedily, best-connected first, among the agents no box holds yet. Dots: how many boxes it takes for ℓ = 1, 3, 5, 9, 17 and 33; red: the least-squares line on logarithmic axes, whose slope is minus the box dimension ([Box dimension](../notes/box-dimension.md)).
 
 > [!example]- How to make this figure
-> **Runs.** `B1-10000-s001`.
+> **Runs.** `B1-100000-s001`.
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
-> 1. Read frame `5999`; order the agents by degree, highest first.
+> 1. Read frame `2999`; order the agents by degree, highest first.
 > 2. For each ℓ: go down the order; every agent not yet in a box starts a new box, which takes every agent within (ℓ − 1)/2 steps of it; count the boxes.
 > 3. Fit ln(boxes) on ln ℓ by least squares.
 >
 > **To make it again:** `python3 book_figures.py geometry`.
 <!-- /figure -->
 
-The world of seed 1 needs 1,336 boxes of size 1 (every agent alone), 460 of
-size 3, 122 of size 5, 41 of size 9, 5 of size 17 and 2 of size 33. On
-logarithmic axes these lie close to a line of slope −1.99: a box dimension of
-about 2, like a sheet.
+The world of seed 1 needs 14,870 boxes of size 1 (every agent alone), 5,135
+of size 3, 2,004 of size 5, 756 of size 9, 185 of size 17 and 42 of size 33.
+On logarithmic axes these lie close to a line of slope −1.71: a box dimension
+of about 1.7, between a line and a sheet (2.0 for the same world at 10,000
+tokens).
 
 ## How easily a world could be cut
 
@@ -195,18 +210,20 @@ The **spectral gap** λ₂ measures, in one number, how hard a network is to cut
 into two large parts, and how quickly a random walk on it forgets where it
 started — after about 1/λ₂ steps ([The spectral gap](../notes/spectral-gap.md)).
 
-The world of seed 1 has λ₂ = 0.0019. Its random twin, with the same
-connections per agent, has 0.062: **thirty-two times larger**. By Cheeger's
+The world of seed 1 has λ₂ = 0.00095. Its random twin, with the same
+connections per agent, has 0.031: **thirty-three times larger** (thirty-two
+at 10,000 tokens). By Cheeger's
 inequality, a small λ₂ guarantees a bottleneck — a large part of the world
 joined to the rest by few connections. [Chapter 36](36-how-a-world-breaks.md)
 finds those bottlenecks: whole branches hanging on single connections.
 
 The gap also says something about the tokens. [Chapter 29](29-where-the-tokens-flow.md)
 showed that a game moves tokens almost like a random walk. On this network, a
-random walk needs some 400 to 500 steps to forget its start — so tokens could
-spread evenly across a whole world only over hundreds of games. Meanwhile the
-network changes every game: about 165 connections are made and 117 cut per
-iteration, and the hubs change brains every game. **Locally**, tokens settle
+random walk needs about a thousand steps to forget its start — so tokens could
+spread evenly across a whole world only over a thousand games, as long as the
+whole run. Meanwhile the network changes every game: about 2,300 connections
+are made and 1,600 cut per iteration, and the hubs change brains every
+game. **Locally**, tokens settle
 in a few games, which is why every agent's tokens follow its connections
 ([Chapter 34](34-how-properties-scale-together.md)). **Globally**, the world is
 never at rest: far-apart regions are only loosely coupled.
@@ -220,34 +237,35 @@ closes one, and those loops are independent: the **cycle rank** |*E*| − |*V*|
 <!-- figure geometry/loops -->
 ![How many loops pass through an agent](../figures/geometry/loops.svg)
 
-**How many loops pass through an agent.** A breadth-first spanning tree of the world with seed 1 after its last game leaves 1,112 connections over, each closing one loop of a cycle basis ([Loops](../notes/loops.md)). For every count x, the share of agents that at least x of those loops pass through. 41% of the agents lie on none of them.
+**How many loops pass through an agent.** A breadth-first spanning tree of the world with seed 1 after its last game leaves 11,297 connections over, each closing one loop of a cycle basis ([Loops](../notes/loops.md)). For every count x, the share of agents that at least x of those loops pass through. 37% of the agents lie on none of them.
 
 > [!example]- How to make this figure
-> **Runs.** `B1-10000-s001`.
+> **Runs.** `B1-100000-s001`.
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
-> 1. Read frame `5999`; build a breadth-first spanning tree.
+> 1. Read frame `2999`; build a breadth-first spanning tree.
 > 2. For every connection not in the tree, walk both ends up the tree to where they meet; every agent on the way, and the meeting point, lies on that loop.
 > 3. Count the loops per agent; draw the share with at least x.
 >
 > **To make it again:** `python3 book_figures.py geometry`.
 <!-- /figure -->
 
-Over the settled life, the median world has 816 independent loops, a
-**loop density** — independent loops per connection — of 0.38: 38% of the
-connections are "spare", beyond what holding the world together needs. In the
-world of seed 1, 1,112 connections close loops of a breadth-first spanning
-tree; 41% of the agents lie on none of those loops — they hang on tree-like
-branches — and one agent lies on 575 of them: half of all the loops of the
-world run through a single hub. The number of loops through an agent is
+Over the settled life, the median world has 10,000 independent loops, a
+**loop density** — independent loops per connection — of 0.42 (0.38 at 10,000
+tokens): 42% of the connections are "spare", beyond what holding the world
+together needs. In the world of seed 1, 11,297 connections close loops of a
+breadth-first spanning tree; 37% of the agents lie on none of those loops —
+they hang on tree-like branches — and one agent lies on 1,012 of them: a
+tenth of all the loops of the world run through a single hub (half, in the
+smaller world of seed 1). The number of loops through an agent is
 heavy-tailed: most agents are on a few, a handful on hundreds.
 
 ## What this means
 
-- **The world is a stretched network of stars.** Twice the distances and a
-  thirty-second of the spectral gap of a random network with the same
-  connections. Growth by birth is local — a child joins its parent's
+- **The world is a stretched network of stars.** Four and a half times the
+  distances and a thirty-third of the spectral gap of a random network with
+  the same connections (twice the distances at 10,000 tokens). Growth by birth is local — a child joins its parent's
   neighbourhood — and nothing ever makes a long jump. The gap widens with
   size: in worlds of up to 60,000 agents, distances grow like the number of
   agents to the power 0.25 to 0.30, as in a body of about three dimensions,

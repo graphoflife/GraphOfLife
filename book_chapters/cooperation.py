@@ -15,7 +15,7 @@ import book_figures as F
 from book_graph import degrees
 from book_figures import (DEGREE_CLASSES, FR, FRAMES, KEPT_BY, PA, cells, chapter, describe, dots, line,
                           recipe)
-from book_chapters.common import BLUE, CYAN, GREEN, GREY, ORANGE, RED, VIOLET, WORLDS as W, YELLOW, ceiling
+from book_chapters.common import BLUE, CYAN, GREEN, GREY, ORANGE, VIOLET, WORLDS as W, YELLOW, ceiling
 from book_chapters.measures import SAMPLE, sampled
 
 EVERY = 100

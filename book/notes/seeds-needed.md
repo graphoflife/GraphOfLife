@@ -40,8 +40,8 @@ worlds they are.
 
 ## Example
 
-The number of agents in a settled baseline world has *c* = 0.17. To see a
-change of 10%:
+The number of agents in a settled baseline world of 10,000 tokens, measured
+over the last fifth of its run, has *c* = 0.17. To see a change of 10%:
 
 $$
 n = \frac{2 \times (1.960 + 0.842)^2 \times 0.17^2}{0.1^2}
@@ -49,7 +49,9 @@ n = \frac{2 \times (1.960 + 0.842)^2 \times 0.17^2}{0.1^2}
 $$
 
 so 46 seeds per condition. Turned around, with 30 seeds the smallest change
-found four times in five is Δ = (*z*₁ + *z*₂)·*c*·√(2/30) ≈ 0.12: 12%.
+found four times in five is Δ = (*z*₁ + *z*₂)·*c*·√(2/30) ≈ 0.12: 12%. In the
+worlds of 100,000 tokens, measured over their settled life, *c* is about 0.10,
+and 19 seeds are enough ([Chapter 14](../chapters/14-how-much-does-the-seed-decide.md)).
 
 ## Two lessons
 

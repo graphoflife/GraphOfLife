@@ -18,18 +18,22 @@ looked at in the open.
 > - Which of them stand in the way of open-ended evolution, and what could
 >   replace them?
 
-<!-- runs E02 -->
+The worlds are the thirty of 100,000 tokens of [Chapter 9](09-thirty-worlds.md);
+where the thirty of 10,000 tokens this chapter was first written from differ,
+both are given.
+
+<!-- runs E10 -->
 > [!info] The runs behind this chapter
-> **30 runs.** Every condition below is run once for every seed (1 to 30), for 3,000 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
+> **30 runs.** Every condition below is run once for every seed (1 to 30), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
 >
-> - **baseline** — changes nothing: B1 as it is; 10,000 tokens. Runs `B1-10000-s001` … `B1-10000-s030`.
+> - **baseline** — changes nothing: B1 as it is; 100,000 tokens. Runs `B1-100000-s001` … `B1-100000-s030`.
 >
-> To make these runs again: `python3 gol_lab.py run E02`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | baseline | what it is |
 > |---|---|---|
-> | [`total_tokens`](../notes/settings.md#total_tokens) | 10,000 | The number of tokens in the world, *T*. It never changes during a run. |
+> | [`total_tokens`](../notes/settings.md#total_tokens) | 100,000 | The number of tokens in the world, *T*. It never changes during a run. |
 > | [`n_nodes`](../notes/settings.md#n_nodes) | 0 | How many founders the world starts with. 0 means one founder per hundred tokens: *n* = ⌊*T* / 100⌋. |
 > | [`k_neighbors`](../notes/settings.md#k_neighbors) | 0 | How many neighbours each founder starts with in the ring. 0 means *k* = max(⌊*n* / 100⌋, 5); an odd *k* is wired as *k* − 1. |
 > | [`rewire_p`](../notes/settings.md#rewire_p) | 0.2 | In the starting ring, the probability that a connection is moved to a founder chosen at random (Watts–Strogatz). |
@@ -53,7 +57,7 @@ looked at in the open.
 > | [`mutation_sparsity`](../notes/settings.md#mutation_sparsity) | 0.1 | The share of a brain's numbers a change touches; also the probability, for each weight matrix and bias vector, of a rarer reset that redraws that share of it. |
 > | [`extinction_threshold`](../notes/settings.md#extinction_threshold) | 20 | A run stops, as extinct, when an iteration ends (after its game) with this many agents or fewer. |
 > | seeds | 1 to 30 | one run per seed |
-> | iterations | 3,000 | how far each run goes, unless its world dies first |
+> | iterations | 1,500 | how far each run goes, unless its world dies first |
 >
 > A value in **bold** differs from the baseline B1.
 <!-- /runs -->
@@ -67,10 +71,10 @@ then erased ([Chapter 3](03-one-iteration.md)).
 <!-- figure mechanics/where-brains-go -->
 ![How brains spread, and where new ones come from](../figures/mechanics/where-brains-go.svg)
 
-**How brains spread, and where new ones come from.** One dot per world that lived to the end: means over the iterations sampled every 25 from 500 on. From the left: children born in a reproduction phase; nodes won in a game by a neighbour, each of which takes on a copy of the winner's brain; genotypes that appear for the first time in the frame after a reproduction phase (a newborn's brain that changed); and genotypes that appear for the first time after a game (every brain is offered a change at its end). On a logarithmic axis.
+**How brains spread, and where new ones come from.** One dot per world: means over the iterations sampled every 25 from 500 on. From the left: children born in a reproduction phase; nodes won in a game by a neighbour, each of which takes on a copy of the winner's brain; genotypes that appear for the first time in the frame after a reproduction phase (a newborn's brain that changed); and genotypes that appear for the first time after a game (every brain is offered a change at its end). On a logarithmic axis.
 
 > [!example]- How to make this figure
-> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames, read every 25 iterations by `book_figures.sample_pass` (frame `2·t` after the reproduction phase of iteration *t*, frame `2·t + 1` after its game; `gol_store.read_frame(run, index)`).
 >
@@ -81,9 +85,10 @@ then erased ([Chapter 3](03-one-iteration.md)).
 > **To make it again:** `python3 book_figures.py mechanics`.
 <!-- /figure -->
 
-**What the data say.** In a settled world, about **39** children are born per
-iteration, and about **720** nodes are taken by a neighbour per game. A brain
-spreads by conquest eighteen times more than by birth.
+**What the data say.** In a settled world, about **480** children are born
+per iteration, and about **8,100** nodes are taken by a neighbour per game. A
+brain spreads by conquest seventeen times more than by birth (eighteen times
+at 10,000 tokens: 39 children against 720 nodes).
 
 **Why it matters.** In this world the thing that evolves — the brain — is not
 the thing that lives and dies — the node. Nodes are bodies; brains move from
@@ -105,9 +110,10 @@ own agent's stake by a margin, so that holding a place is possible.
 **The rule.** Every brain is offered a change after every game, with
 probability 0.2, as well as at birth ([How a brain changes](../notes/mutation.md)).
 
-**What the data say.** In the figure above: about **7** new genotypes appear in
-a reproduction phase, about **263** in a game — 97.3% of all new genotypes
-arise in living brains, after a game, not at birth. And a brain that is not
+**What the data say.** In the figure above: about **91** new genotypes appear
+in a reproduction phase, about **2,900** in a game — 97.0% of all new
+genotypes arise in living brains, after a game, not at birth (97.3% at 10,000
+tokens). And a brain that is not
 copied for five games is unchanged with probability 0.8⁵ = 33% only.
 
 **Why it matters.** In biology, almost all heritable variation arises when
@@ -128,10 +134,12 @@ conquest — and never in place. Part V begins with exactly this experiment
 ones; the agent living on it has no special claim.
 
 **What the data say.** The agent on a node with fifty or more connections keeps
-it in 2.2% of games; on a node with one connection, in 73%
+it in 2.0% of games; on a node with one connection, in 74%
 ([Chapter 29](29-where-the-tokens-flow.md)). A pair of brains facing each
-other across a connection survives one more game in 5% of cases
-([Chapter 38](38-do-agents-cooperate.md)).
+other across a connection survives one more game in 4% of cases
+([Chapter 38](38-do-agents-cooperate.md)). The centre of a star is the
+extreme: its node is taken by a coalition in every game, and it carries a new
+brain almost every game ([Chapter 33](33-the-largest-and-the-smallest.md)).
 
 **Why it matters.** The most important positions of the world have no lasting
 occupant, so no brain can be selected for holding one, and no partnership
@@ -151,7 +159,7 @@ spread or go all in — use the **average** of those outputs over all its
 columns ([Chapter 3](03-one-iteration.md)).
 
 **What the data say.** The share of agents with a child rises from 2.1% at
-one connection to 8.6% at fifty or more ([Chapter 31](31-how-agents-have-children.md)),
+one connection to 10.5% at fifty or more ([Chapter 31](31-how-agents-have-children.md)),
 only partly because the well connected are richer.
 
 **Why it matters.** The same brain behaves differently depending on how many
@@ -171,10 +179,10 @@ than an average over neighbours.
 <!-- figure mechanics/child-shares -->
 ![Where the share function jumps](../figures/mechanics/child-shares.svg)
 
-**Where the share function jumps.** The share of its tokens a parent gave its child, in 50 classes of width 0.02. Left: the 2,241 founders that had a child in the first reproduction phase of the 30 worlds, each holding 100 tokens, so the share is exact to a hundredth. Right: the births in the reproduction phases of every 100th iteration from 500 on, in the 26 worlds that lived to the end — parents with few tokens, whose shares can only be simple fractions.
+**Where the share function jumps.** The share of its tokens a parent gave its child, in 50 classes of width 0.02. Left: the 22,408 founders that had a child in the first reproduction phase of the 30 worlds, each holding 100 tokens, so the share is exact to a hundredth. Right: the births in the reproduction phases of every 100th iteration from 500 on, in the 30 worlds — parents with few tokens, whose shares can only be simple fractions.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs (left) and the 26 that lived to the end (right).
+> **Runs.** The 30 baseline runs, left and right.
 >
 > **Data.** From each run's frames, read every 25 iterations by `book_figures.sample_pass` (frame `2·t` after the reproduction phase of iteration *t*, frame `2·t + 1` after its game; `gol_store.read_frame(run, index)`).
 >
@@ -184,10 +192,11 @@ than an average over neighbours.
 > **To make it again:** `python3 book_figures.py mechanics`.
 <!-- /figure -->
 
-**What the data say.** Of the founders' first children, 33.2% got exactly half
-of the parent's tokens and 32.7% exactly all of them (their parents starved).
-Later, 29.7% get exactly half and 4.5% everything; other shares are mostly the
-simple fractions that small token counts allow.
+**What the data say.** Of the founders' first children, 33.7% got exactly half
+of the parent's tokens and 33.1% exactly all of them (their parents starved).
+Later, 25.3% get exactly half and 5.7% everything; other shares are mostly the
+simple fractions that small token counts allow. (At 10,000 tokens: 33.2% and
+32.7% first, 29.7% and 4.5% later.)
 
 **Why it matters.** *f* is not continuous: as *a* passes through 0 with *b*
 negative, the share jumps from ½ to 1 — from giving half to giving everything
@@ -204,7 +213,7 @@ makes a small change of the share.
 **The rule.** An agent stakes **all** its tokens, as whole tokens, every game;
 a node on which nobody stakes is left with nothing, and its agent dies.
 
-**What the data say.** 31% of agents holding one token die in a game
+**What the data say.** 30% of agents holding one token die in a game
 ([Chapter 28](28-gains-and-losses.md)); quiet borders of agents too poor to
 stake across their connections cost whole regions ([Chapter 36](36-how-a-world-breaks.md)).
 
@@ -223,9 +232,9 @@ it keep its agent alive at zero, for one game.
 ([`prune_after`](../notes/settings.md#prune_after),
 [`inactive_window`](../notes/settings.md#inactive_window)).
 
-**What the data say.** 88% of the connections of the world of seed 1 carried
-only one or two tokens in its last game ([Chapter 37](37-one-world-many-colours.md));
-58% of mutual stakes are one token each way ([Chapter 38](38-do-agents-cooperate.md));
+**What the data say.** Most connections carry one or two tokens in a game
+([Chapter 30](30-what-crosses-a-connection.md));
+66% of mutual stakes are one token each way ([Chapter 38](38-do-agents-cooperate.md));
 regions of poor agents lose their connections and die ([Chapter 36](36-how-a-world-breaks.md)).
 
 **Why it matters.** Much of what agents stake on their neighbours is the rent
@@ -245,8 +254,9 @@ instead of a stake.
 network survives ([Chapter 3](03-one-iteration.md)).
 
 **What the data say.** Three deaths in four are cut-offs
-([Chapter 12](12-births-deaths-and-ages.md)); a fifth of them happen in the one
-game in forty that cuts off a hundred agents or more ([Chapter 36](36-how-a-world-breaks.md)).
+([Chapter 12](12-births-deaths-and-ages.md)); a sixth of them happen in the one
+game in fifty that cuts off a thousand agents or more, and a single game has
+cut off two thirds of a world ([Chapter 36](36-how-a-world-breaks.md)).
 And the losses grow with the world: in worlds from 3,200 to 409,600 tokens, a
 single game has cut off a third to a half of all agents, at every size, so
 that a big world changes from game to game as much, relatively, as a small one
@@ -274,7 +284,7 @@ distances ([Chapter 35](35-the-geometry-of-a-world.md)).
 **The rule.** The tokens of the cut-off are dealt out to survivors chosen
 uniformly at random.
 
-**What the data say.** About 110 tokens after a game, 0.11 per agent
+**What the data say.** About 1,300 tokens after a game, 0.10 per agent
 ([Chapter 28](28-gains-and-losses.md)).
 
 **Why it matters.** It is a transfer from the dead to everyone, unrelated to

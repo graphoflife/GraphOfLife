@@ -9,7 +9,9 @@ import functools
 import os
 from typing import Any, List, Tuple
 
-from book_figures import lived_text, runs_of, runs_text, surviving_text, survivors
+import numpy as np
+
+from book_figures import lived_text, runs_of, runs_text, series, surviving_text, survivors
 
 # Colours of the shared palette (web/js/ink.js), named for what they stand for.
 BLUE, YELLOW, RED, GREEN, VIOLET, ORANGE, CYAN, GREY = range(8)
@@ -122,6 +124,11 @@ WORLD_SETS = {"E02": Worlds("E02", lineage="E06"), "E10": Worlds("E10", lineage=
 WORLDS = WORLD_SETS[os.environ.get("GOL_BOOK_WORLDS", "E10")]
 
 
+#: A world whose best-connected agent is joined, on average over its settled life, to this share of
+#: all its agents or more is a star: one held together by a single hub (Chapter 33).
+STAR = 0.1
+
+
 def band_steps(worlds: Worlds = WORLDS) -> Tuple[str, str]:
     """How every band over the worlds is made, said for their length of life."""
     from gol_analysis import FIGURE_POINTS
@@ -133,6 +140,14 @@ def band_steps(worlds: Worlds = WORLDS) -> Tuple[str, str]:
 
 
 BAND_STEPS = band_steps()
+
+
+def at_start(specs: List[Any], stat: str, phase: int = 2) -> float:
+    """
+    A statistic's first recorded value — after the game of iteration 0 for the
+    rows of phase 2 — in the median world.
+    """
+    return float(np.median([series(s.run_id, stat, phase)[1][0] for s in specs]))
 
 
 def baseline() -> List[Any]:

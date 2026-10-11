@@ -22,8 +22,9 @@ $$
 \bar k = \frac{1}{|V|}\sum_u \deg(u) = \frac{2\,|E|}{|V|} ,
 $$
 
-recorded as `meanDegree`. A settled baseline world has about 1.6
-connections per agent, so a mean degree of about 3.3.
+recorded as `meanDegree`. A settled baseline world has about 1.7
+connections per agent at 100,000 tokens (1.6 at 10,000), so a mean degree of
+about 3.5 (3.3).
 
 Three more numbers describe the degrees of a frame: `medianDegree`, the
 [median](median-and-quantiles.md); `minDegree`, which is 1 in a connected
@@ -67,10 +68,11 @@ falls like *d*^−(γ−1) and is a straight line on log–log axes, with slope
 A **leaf** is an agent of degree 1: it hangs on the network by a single
 connection, and the cut of that one connection cuts it off (`leaves` in the
 statistics). A **hub** is an agent of very high degree. A settled baseline world has
-both. After the last game of the 26 baseline worlds that lived to the end,
-37% of all agents had exactly one connection and 23% two; 4% had ten or more;
-and the largest hub had 1,399
-([Chapter 17](../chapters/17-what-shape-does-the-network-take.md)).
+both. After the last game of the thirty baseline worlds of 100,000 tokens,
+35% of all agents had exactly one connection and 23% two; 4.7% had ten or
+more; and the largest hub had 10,735
+([Chapter 17](../chapters/17-what-shape-does-the-network-take.md); at 10,000
+tokens, 37%, 23%, 4% and 1,399).
 
 <!-- turns -->
 [Contents](../README.md)

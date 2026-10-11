@@ -158,7 +158,7 @@ parent gives a child:
 **What share of its tokens a parent gives its child.** For every birth: the tokens the child received divided by the tokens its parent held just before, in bins of 0.1. Grey: the founders' births in the very first reproduction phase, decided by brains of random weights. Blue: the births of the last 50 iterations, decided by brains descended from them through 2,950 iterations of copying, changing and conquering. Only parents that gave at least one whole token had a child and are counted.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 10](10-a-worlds-life.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -178,7 +178,8 @@ agents (49% in the median world) spread their stake over several candidates
 rather than putting it all on one, and half of all staked tokens (50%) were
 marked revolutionary — what brains of random weights do, since each of these
 choices depends on which of two random outputs is the larger. From iteration
-500 on it was 97% and 96% ([Chapter 16](16-how-the-game-is-played.md)).
+500 on it was 98% and 97% ([Chapter 16](16-how-the-game-is-played.md)), in
+the worlds of 10,000 tokens and in those of 100,000 alike.
 
 Nobody chose these numbers. Are they the work of selection — brains that did
 otherwise losing their tokens and their nodes — or only of the churn of

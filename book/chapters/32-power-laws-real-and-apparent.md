@@ -23,18 +23,22 @@ wander — and teaches, on the way, how a real one is told from an apparent one.
 >   removals come in avalanches of every size?
 > - What rhythm does a world's wander have?
 
-<!-- runs E02 -->
+The worlds are the thirty of 100,000 tokens of [Chapter 9](09-thirty-worlds.md);
+where the thirty of 10,000 tokens this chapter was first written from differ,
+both are given.
+
+<!-- runs E10 -->
 > [!info] The runs behind this chapter
-> **30 runs.** Every condition below is run once for every seed (1 to 30), for 3,000 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
+> **30 runs.** Every condition below is run once for every seed (1 to 30), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
 >
-> - **baseline** — changes nothing: B1 as it is; 10,000 tokens. Runs `B1-10000-s001` … `B1-10000-s030`.
+> - **baseline** — changes nothing: B1 as it is; 100,000 tokens. Runs `B1-100000-s001` … `B1-100000-s030`.
 >
-> To make these runs again: `python3 gol_lab.py run E02`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | baseline | what it is |
 > |---|---|---|
-> | [`total_tokens`](../notes/settings.md#total_tokens) | 10,000 | The number of tokens in the world, *T*. It never changes during a run. |
+> | [`total_tokens`](../notes/settings.md#total_tokens) | 100,000 | The number of tokens in the world, *T*. It never changes during a run. |
 > | [`n_nodes`](../notes/settings.md#n_nodes) | 0 | How many founders the world starts with. 0 means one founder per hundred tokens: *n* = ⌊*T* / 100⌋. |
 > | [`k_neighbors`](../notes/settings.md#k_neighbors) | 0 | How many neighbours each founder starts with in the ring. 0 means *k* = max(⌊*n* / 100⌋, 5); an odd *k* is wired as *k* − 1. |
 > | [`rewire_p`](../notes/settings.md#rewire_p) | 0.2 | In the starting ring, the probability that a connection is moved to a founder chosen at random (Watts–Strogatz). |
@@ -58,7 +62,7 @@ wander — and teaches, on the way, how a real one is told from an apparent one.
 > | [`mutation_sparsity`](../notes/settings.md#mutation_sparsity) | 0.1 | The share of a brain's numbers a change touches; also the probability, for each weight matrix and bias vector, of a rarer reset that redraws that share of it. |
 > | [`extinction_threshold`](../notes/settings.md#extinction_threshold) | 20 | A run stops, as extinct, when an iteration ends (after its game) with this many agents or fewer. |
 > | seeds | 1 to 30 | one run per seed |
-> | iterations | 3,000 | how far each run goes, unless its world dies first |
+> | iterations | 1,500 | how far each run goes, unless its world dies first |
 >
 > A value in **bold** differs from the baseline B1.
 <!-- /runs -->
@@ -94,14 +98,14 @@ too).
 <!-- figure powerlaws/degree-fit -->
 ![Fitting the degrees of one world](../figures/powerlaws/degree-fit.svg)
 
-**Fitting the degrees of one world.** Dots: for every number of connections k that occurs among the 1,336 agents of the world with seed 1 after its last game, the share of agents with at least k — the complementary cumulative distribution, on logarithmic axes. Dashed: the straight line least squares fits through all the dots, whose slope is 1 − γ for a power law of exponent γ (the viewer's `degreeExponent`). Red: the power law fitted by maximum likelihood to the tail from the k that fits best, k = 11 (`degreeGamma`, `degreeKMin`), which holds 5.0% of the agents ([Fitting a power law](../notes/power-law-fit.md)).
+**Fitting the degrees of one world.** Dots: for every number of connections k that occurs among the 14,870 agents of the world with seed 1 after its last game, the share of agents with at least k — the complementary cumulative distribution, on logarithmic axes. Dashed: the straight line least squares fits through all the dots, whose slope is 1 − γ for a power law of exponent γ (the viewer's `degreeExponent`). Red: the power law fitted by maximum likelihood to the tail from the k that fits best, k = 22 (`degreeGamma`, `degreeKMin`), which holds 0.8% of the agents ([Fitting a power law](../notes/power-law-fit.md)).
 
 > [!example]- How to make this figure
-> **Runs.** `B1-10000-s001`.
+> **Runs.** `B1-100000-s001`.
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
-> 1. Read the last frame after a game (`5999`) and count every agent's connections in `edges`.
+> 1. Read the last frame after a game (`2999`) and count every agent's connections in `edges`.
 > 2. Dots: for each distinct count k, the share of agents with at least k.
 > 3. Dashed: least squares of ln(share) on ln(k) over the dots.
 > 4. Red: `gol_series._scale_free(degrees)` — for each candidate k_min, γ = 1 + n / Σ ln(k / (k_min − ½)) over the n agents with k ≥ k_min, and the Kolmogorov–Smirnov distance; the k_min with the smallest distance wins.
@@ -109,31 +113,31 @@ too).
 > **To make it again:** `python3 book_figures.py powerlaws`.
 <!-- /figure -->
 
-The world of seed 1 has 1,336 agents after its last game. The dashed line,
-least squares through every point, has the exponent 2.48 — but it is drawn
-through points that are not on a line: below about ten connections the
+The world of seed 1 has 14,870 agents after its last game. The dashed line,
+least squares through every point, has the exponent 3.15 — but it is drawn
+through points that are not on a line: below about twenty connections the
 distribution bends. The maximum-likelihood fit chooses the tail from
-*k*_min = 11, which holds 67 agents (5.0%), and gives γ = 2.65. With 67
-values, the exponent is known to about ±(γ − 1)/√67 = ±0.20.
+*k*_min = 22, which holds 125 agents (0.8%), and gives γ = 3.50. With 125
+values, the exponent is known to about ±(γ − 1)/√125 = ±0.22.
 
 Is the tail a power law? The largest gap between the data and the fitted law
-is 0.108. Samples drawn from the fitted law show a gap at least as large in
-19.5% of cases (200 samples): a power law is **not ruled out** for the top 5%
-of this world. What it does not say is anything about the other 95%.
+is 0.068. Samples drawn from the fitted law show a gap at least as large in
+55% of cases (200 samples): a power law is **not ruled out** for the top 1%
+of this world. What it does not say is anything about the other 99%.
 
-## Twenty-six worlds
+## Thirty worlds
 
 <!-- figure powerlaws/exponents -->
-![Power-law exponents of the 26 worlds](../figures/powerlaws/exponents.svg)
+![Power-law exponents of the 30 worlds](../figures/powerlaws/exponents.svg)
 
-**Power-law exponents of the 26 worlds.** One dot per world that lived to the end, at its mean over the measurements (every 25 iterations) from iteration 500 on; the bar is the median. Left: the exponent γ of the degree distribution by maximum likelihood on the tail (`degreeGamma`) and by least squares on the whole distribution (`degreeExponent`), and of the token distribution by least squares (`tokenExponent`). Right: the share of agents in the tail the maximum-likelihood fit chose (`degreeTailShare`) and the largest gap between that tail and the fitted law (`degreeGammaKS`).
+**Power-law exponents of the 30 worlds.** One dot per world, at its mean over the measurements (every 25 iterations) from iteration 500 on; the bar is the median. Left: the exponent γ of the degree distribution by maximum likelihood on the tail (`degreeGamma`) and by least squares on the whole distribution (`degreeExponent`), and of the token distribution by least squares (`tokenExponent`). Right: the share of agents in the tail the maximum-likelihood fit chose (`degreeTailShare`) and the largest gap between that tail and the fitted law (`degreeGammaKS`).
 
 > [!example]- How to make this figure
-> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
 >
-> 1. Average `degreeGamma`, `degreeExponent`, `tokenExponent`, `degreeTailShare` and `degreeGammaKS` over the rows with `phase` = 2 and 500 ≤ `iteration` ≤ 2,999.
+> 1. Average `degreeGamma`, `degreeExponent`, `tokenExponent`, `degreeTailShare` and `degreeGammaKS` over the rows with `phase` = 2 and 500 ≤ `iteration` ≤ 1,499.
 > 2. One dot per run, a bar at the median.
 >
 > **To make it again:** `python3 book_figures.py powerlaws`.
@@ -141,17 +145,18 @@ of this world. What it does not say is anything about the other 95%.
 
 Across the worlds, over their settled life:
 
-- maximum likelihood finds the tail from about 10 connections, holding 5.0% of
-  the agents (3.6% to 10.5%), with γ = 3.34 (2.60 to 4.01);
-- least squares through everything gives 2.86 (2.46 to 3.15) — consistently
+- maximum likelihood finds the tail from about 21 connections, holding 1.1%
+  of the agents (0.7% to 1.6%), with γ = 3.04 (2.40 to 4.11);
+- least squares through everything gives 2.80 (1.95 to 3.45) — consistently
   **lower**, because a line through the whole distribution is tilted by the
   bend of the body;
-- the test, on each world's last frame, rules a power law out in 4 of the 26
-  worlds and leaves it plausible in 22.
+- the test, on each world's last frame, rules a power law out in 6 of the 30
+  worlds and leaves it plausible in 24.
 
-So: the top twentieth of the connections looks like a power law with an
-exponent near 3, the bulk does not, and the exponent one reports depends on
-the method by about half a unit. "The network is scale-free" would claim far
+At 10,000 tokens the tail began at about 10 connections and held 5% of the
+agents, with γ = 3.34. So: the top hundredth of the connections looks like a
+power law with an exponent near 3, the bulk does not, and the exponent one
+reports depends on the method by a quarter to half a unit. "The network is scale-free" would claim far
 more than this.
 
 Where would a tail like this come from? The rules contain a known mechanism.
@@ -171,10 +176,10 @@ experiment that joined children to random agents instead would test it.
 <!-- figure powerlaws/tokens-fit -->
 ![Two candidate laws for the tokens](../figures/powerlaws/tokens-fit.svg)
 
-**Two candidate laws for the tokens.** Dots: for every token count x that occurs among the agents alive after the last game of the 26 worlds that lived to the end, the share holding at least x. Red: a power law fitted by maximum likelihood to the tail, from the x that fits it best. Cyan: a log-normal distribution with the mean and standard deviation of ln x over all agents — a distribution whose logarithm is normal. Both on logarithmic axes.
+**Two candidate laws for the tokens.** Dots: for every token count x that occurs among the agents alive after the last game of the 30 worlds, the share holding at least x. Red: a power law fitted by maximum likelihood to the tail, from the x that fits it best. Cyan: a log-normal distribution with the mean and standard deviation of ln x over all agents — a distribution whose logarithm is normal. Both on logarithmic axes.
 
 > [!example]- How to make this figure
-> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -186,25 +191,28 @@ experiment that joined children to random agents instead would test it.
 > **To make it again:** `python3 book_figures.py powerlaws`.
 <!-- /figure -->
 
-The tokens of 35,554 agents, pooled over the 26 worlds after their last game,
-tell a clearer story. The **log-normal** distribution with the mean and spread
-of ln *x* (μ = 1.53, σ = 0.75: a median of *e*^1.53 ≈ 4.6 tokens) fits the
-body up to about 20 tokens — and then falls far below the data. From 33 tokens
-on, the data follow a straight line for two decades, to over 3,000 tokens:
-a power law with γ = 2.29, fitted to 579 agents (1.6%), with a largest gap of
-only 0.025. Samples from the fitted law fit it worse than the data in **92%**
-of cases. Of the four candidates in this chapter, this is the most convincing
-power law: the share of agents with at least *x* tokens falls as *x*^−1.29 —
-a heavier tail than Pareto's incomes, which fell about as *x*^−1.5.
+The tokens of 394,056 agents, pooled over the thirty worlds after their last
+game, tell a clearer story. The **log-normal** distribution with the mean and
+spread of ln *x* (μ = 1.59, σ = 0.73: a median of *e*^1.59 ≈ 4.9 tokens) fits
+the body up to about 20 tokens — and then falls far below the data. From 49
+tokens on, the data follow a straight line for two decades, to about 5,000
+tokens, before the few richest fall a little below it: a power law with
+γ = 2.22, fitted to 3,358 agents (0.9%), with a largest gap of only 0.016.
+Samples from the fitted law fit it worse than the data in **37%** of cases.
+Of the four candidates in this chapter, this is the most convincing power
+law: the share of agents with at least *x* tokens falls as *x*^−1.22 — a
+heavier tail than Pareto's incomes, which fell about as *x*^−1.5. (At 10,000
+tokens: γ = 2.29 from 33 tokens on, plausible in 92% of samples, over a
+range ten times shorter.)
 
 Are the richest rich because they are hubs? If tokens were a fixed function of
 connections, the two tails would be tied together, and a token tail heavier
 than the connection tail would need the hubs to hold *more* tokens per
-connection than everyone else. They do not: among the 579 agents in the token
-tail, 44% have ten connections or more — but **34% have only one or two**.
-A third of the richest agents are rich far beyond their place, and
+connection than everyone else. They do not: among the 3,358 agents in the
+token tail, 40% have ten connections or more — but **33% have only one or
+two**. A third of the richest agents are rich far beyond their place, and
 [Chapter 28](28-gains-and-losses.md) showed what happens to them: they drain,
-losing 44% of their tokens per game on average.
+losing 48% of their tokens per game on average.
 
 That suggests a different mechanism, also a classic. An agent's tokens are
 multiplied, game after game, by a random factor — sometimes a big gain, more
@@ -219,29 +227,34 @@ simplest test would be to look for.
 <!-- figure powerlaws/avalanches -->
 ![How many agents one game removes](../figures/powerlaws/avalanches.svg)
 
-**How many agents one game removes.** Of all games from iteration 500 on in the 26 worlds that lived to the end (65,000 games), the share that cut off at least n agents (orange) and the share in which at least n agents starved (red), for every n, on logarithmic axes. Games in which no one was removed count in the denominator, which is why the curves start below 1.
+**How many agents one game removes.** Of all games from iteration 500 on in the 30 worlds (30,000 games), the share that cut off at least n agents (orange) and the share in which at least n agents starved (red), for every n, on logarithmic axes. Games in which no one was removed count in the denominator, which is why the curves start below 1.
 
 > [!example]- How to make this figure
-> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
 >
-> 1. Take `orphaned` and `starved` of every row with `phase` = 2 and 500 ≤ `iteration` ≤ 2,999.
+> 1. Take `orphaned` and `starved` of every row with `phase` = 2 and 500 ≤ `iteration` ≤ 1,499.
 > 2. For each n that occurs, the share of rows with at least n.
 >
 > **To make it again:** `python3 book_figures.py powerlaws`.
 <!-- /figure -->
 
-In 95.7% of settled games at least one agent is cut off; in 65%, ten or more;
-in 2.5%, a hundred or more; the most ever cut off in one game was 1,037. On
-log–log axes the curve bends downwards all the way: there is no straight
-stretch, and so no power law. The removals have a typical size, and big ones
-are rare.
+In every settled game but three of the 30,000, at least one agent is cut
+off; in 94%, a hundred or more; in 2%, a thousand or more; the median game
+cuts off 239 agents, and the most ever cut off in one game was 9,460 — two
+thirds of a world. On log–log axes the curve is flat to about 200 and then
+falls, bending, with no straight stretch long enough to call a power law. The
+removals have a typical size, a few hundred agents — about 2% of a world —
+and big ones are rare.
 
-But big ones matter. Of all agents ever cut off, 94% died in games that cut
-off ten or more, and 20% in the 2.5% of games that cut off a hundred or more.
-Death by cutting comes in **lumps**: whole branches of the network fall off
-at once. Starvation comes in smaller lumps (at most 637 in one game).
+But big ones matter. Of all agents ever cut off, 16% died in the 2% of games
+that cut off a thousand or more. Counted against the size of a world, this is
+what the worlds of 10,000 tokens did: there 2.5% of games cut off a hundred
+or more (a hundredth of their tokens' worth, as a thousand is here), and 20%
+of the deaths by cutting fell in them. Death by cutting comes in **lumps**:
+whole branches of the network fall off at once. Starvation comes in smaller
+lumps (at most 3,966 in one game).
 [Chapter 36](36-how-a-world-breaks.md) asks where the lumps come from and
 whether they can be foreseen.
 
@@ -254,31 +267,34 @@ splits the movement into rhythms and says how much of it happens at each
 <!-- figure powerlaws/spectrum -->
 ![The rhythm of the wander](../figures/powerlaws/spectrum.svg)
 
-**The rhythm of the wander.** The power spectrum of the number of agents ([The power spectrum](../notes/power-spectrum.md)): for each frequency, how much of a world's up-and-down motion happens at that rhythm — slow wanders on the left, iteration-to-iteration jitter on the right. Each world's series from iteration 500 to 2,999, with its straight-line trend removed and a Hann window applied, normalised to total power 1 and averaged over the 26 worlds; then averaged in 39 bands of equal width on the logarithmic axis. Red: the straight line least squares fits between periods of 500 and 4 iterations.
+**The rhythm of the wander.** The power spectrum of the number of agents ([The power spectrum](../notes/power-spectrum.md)): for each frequency, how much of a world's up-and-down motion happens at that rhythm — slow wanders on the left, iteration-to-iteration jitter on the right. Each world's series from iteration 500 to 1,499, with its straight-line trend removed and a Hann window applied, normalised to total power 1 and averaged over the 30 worlds; then averaged in 39 bands of equal width on the logarithmic axis. Red: the straight line least squares fits between periods of 500 and 4 iterations.
 
 > [!example]- How to make this figure
-> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
 >
-> 1. For each run, take `nodes` of the rows with `phase` = 2 and 500 ≤ `iteration` ≤ 2,999 (2,500 values); subtract the least-squares straight line.
-> 2. Multiply by a Hann window and take |FFT|², the power at frequencies k/2,500, k = 1 … 1,250; divide by the total.
+> 1. For each run, take `nodes` of the rows with `phase` = 2 and 500 ≤ `iteration` ≤ 1,499 (1,000 values); subtract the least-squares straight line.
+> 2. Multiply by a Hann window and take |FFT|², the power at frequencies k/1,000, k = 1 … 500; divide by the total.
 > 3. Average over runs; average within bands of equal width in log frequency; fit a line on log–log axes between frequencies 1/500 and 1/4.
 >
 > **To make it again:** `python3 book_figures.py powerlaws`.
 <!-- /figure -->
 
-Between periods of 4 and 500 iterations, the power falls as *f*^−2.11 — the
-signature of a **random walk**, in which every step is added to the last. For
-periods longer than about 800 iterations the spectrum flattens: the world does
-not keep walking away, something pulls it back. A random walk with a pull
-back to a level is the Ornstein–Uhlenbeck process, whose spectrum is flat
-below a corner and falls as *f*^−2 above it; the corner here corresponds to a
-pull that takes a few hundred iterations to act — which fits the
-[autocorrelation](../notes/autocorrelation.md) of 0.68 after 100 iterations
-found in [Chapter 14](14-how-much-does-the-seed-decide.md). 70% of the
-movement happens at periods of 500 iterations or more, and only 0.4% at
-periods shorter than 10: the wander is slow.
+Between periods of 4 and 500 iterations, the power falls as *f*^−1.80 —
+close to the *f*^−2 of a **random walk**, in which every step is added to the
+last (*f*^−2.11 at 10,000 tokens). At the slowest end, periods near a
+thousand iterations, the spectrum flattens a little: the world does not keep
+walking away, something pulls it back. A random walk with a pull back to a
+level is the Ornstein–Uhlenbeck process, whose spectrum is flat below a
+corner and falls as *f*^−2 above it; the corner corresponds to a pull that
+takes a few hundred iterations to act — which fits the
+[autocorrelation](../notes/autocorrelation.md) of 0.61 after 100 iterations
+found in [Chapter 14](14-how-much-does-the-seed-decide.md). Each world's
+series is a thousand iterations long here, so the slow end is seen less well
+than in the worlds of 10,000 tokens, whose wander had 2,500 iterations to
+show it. Most of the movement happens at the slowest rhythms: the wander is
+slow.
 
 It is not 1/*f* noise (a slope of −1), which would mean memory on every time
 scale. The world forgets.
@@ -287,7 +303,7 @@ scale. The world forgets.
 
 - **One real power law, one plausible, two apparent.** The token tail is a
   power law over two decades. The tail of the connections is plausibly one,
-  for the top 5%. The degree distribution as a whole is not, and neither are
+  for the top 1% (the top 5% at 10,000 tokens). The degree distribution as a whole is not, and neither are
   the lumps of death.
 - **The rules contain two textbook mechanisms for heavy tails** — copying
   neighbourhoods at birth, and multiplying tokens by chance with a floor below.

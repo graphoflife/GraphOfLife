@@ -16,15 +16,18 @@ For the *n* agents alive, holding τ₁, …, τₙ tokens, with *T* = Σ τᵢ:
 
 ## What each says
 
-- **The mean is not about wealth at all.** Tokens are conserved, so
-  *T* = 10,000 in every baseline world after every phase, and the mean is
-  10,000 divided by the number of agents. It rises when agents die and falls
-  when they are born. A settled baseline world has a mean of about 9.
-- **The median is the typical agent.** About 5 in a settled baseline world.
+- **The mean is not about wealth at all.** Tokens are conserved, so *T* is
+  the same after every phase — 100,000 in the baseline worlds of Parts II and
+  III, 10,000 in those of Part I — and the mean is *T* divided by the number
+  of agents. It rises when agents die and falls when they are born. A settled
+  baseline world has a mean of about 7 at 100,000 tokens, 9 at 10,000.
+- **The median is the typical agent.** About 4.5 in a settled baseline world
+  (5 at 10,000 tokens).
   The gap between mean and median is itself a reading of inequality: a few
   rich agents pull the mean up and leave the median where it is.
 - **The richest** is a reading of how far concentration goes. In a settled
-  baseline world the richest agent holds about 8% of all tokens — some 800
+  baseline world the richest agent holds about 2% of all tokens at 100,000
+  tokens — some 2,100 — and about 8%, some 800, at 10,000
   ([Chapter 15](../chapters/15-where-do-the-tokens-go.md)).
 - **The poorest is almost always 1.** An agent holding 0 tokens after a phase
   has already been removed by the cleanup, so the poorest survivor holds at

@@ -39,8 +39,9 @@ In the code: `bands` in `gol_analysis.py`.
   near the top of the band at one moment can be near the bottom later. To see
   single worlds, the book draws them separately, as in
   [Chapter 10](../chapters/10-a-worlds-life.md).
-- After a world dies, the band is made of fewer worlds. In the baseline,
-  four of thirty died; the last thousand iterations are bands of 26.
+- After a world dies, the band is made of fewer worlds. In the baseline of
+  10,000 tokens four of thirty died, and its last thousand iterations are bands
+  of 26; in the baseline of 100,000 tokens none died.
 
 <!-- turns -->
 [Contents](../README.md)

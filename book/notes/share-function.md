@@ -40,7 +40,8 @@ is one half.
 - The share is exactly 0 or exactly 1 whenever one of the two numbers is
   zero or negative and the other positive, and exactly ½ whenever both are.
   A brain can therefore say "all", "nothing" or "half" outright — and random
-  brains do: in the first reproduction phase of the 30 baseline worlds, of
+  brains do: in the first reproduction phase of the 30 baseline worlds of
+  10,000 tokens, of
   the 2,241 founders that had a child, 33% gave it every token they had (and
   died for it, holding none), and another 33% gave exactly half
   ([Chapter 4](../chapters/04-the-brain.md)).

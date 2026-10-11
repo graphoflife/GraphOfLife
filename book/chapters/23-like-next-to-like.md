@@ -15,18 +15,22 @@ steps along connections.
 >   from closeness itself?
 > - Do kin live together, and in territories?
 
-<!-- runs E02 -->
+The worlds are the thirty of 100,000 tokens of [Chapter 9](09-thirty-worlds.md);
+where the thirty of 10,000 tokens this chapter was first written from differ,
+both are given.
+
+<!-- runs E10 -->
 > [!info] The runs behind this chapter
-> **30 runs.** Every condition below is run once for every seed (1 to 30), for 3,000 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
+> **30 runs.** Every condition below is run once for every seed (1 to 30), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
 >
-> - **baseline** — changes nothing: B1 as it is; 10,000 tokens. Runs `B1-10000-s001` … `B1-10000-s030`.
+> - **baseline** — changes nothing: B1 as it is; 100,000 tokens. Runs `B1-100000-s001` … `B1-100000-s030`.
 >
-> To make these runs again: `python3 gol_lab.py run E02`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | baseline | what it is |
 > |---|---|---|
-> | [`total_tokens`](../notes/settings.md#total_tokens) | 10,000 | The number of tokens in the world, *T*. It never changes during a run. |
+> | [`total_tokens`](../notes/settings.md#total_tokens) | 100,000 | The number of tokens in the world, *T*. It never changes during a run. |
 > | [`n_nodes`](../notes/settings.md#n_nodes) | 0 | How many founders the world starts with. 0 means one founder per hundred tokens: *n* = ⌊*T* / 100⌋. |
 > | [`k_neighbors`](../notes/settings.md#k_neighbors) | 0 | How many neighbours each founder starts with in the ring. 0 means *k* = max(⌊*n* / 100⌋, 5); an odd *k* is wired as *k* − 1. |
 > | [`rewire_p`](../notes/settings.md#rewire_p) | 0.2 | In the starting ring, the probability that a connection is moved to a founder chosen at random (Watts–Strogatz). |
@@ -50,7 +54,7 @@ steps along connections.
 > | [`mutation_sparsity`](../notes/settings.md#mutation_sparsity) | 0.1 | The share of a brain's numbers a change touches; also the probability, for each weight matrix and bias vector, of a rarer reset that redraws that share of it. |
 > | [`extinction_threshold`](../notes/settings.md#extinction_threshold) | 20 | A run stops, as extinct, when an iteration ends (after its game) with this many agents or fewer. |
 > | seeds | 1 to 30 | one run per seed |
-> | iterations | 3,000 | how far each run goes, unless its world dies first |
+> | iterations | 1,500 | how far each run goes, unless its world dies first |
 >
 > A value in **bold** differs from the baseline B1.
 <!-- /runs -->
@@ -65,28 +69,32 @@ means like beside like, a negative one unlike beside unlike.
 <!-- figure alike/neighbours -->
 ![Are neighbours alike?](../figures/alike/neighbours.svg)
 
-**Are neighbours alike?** For every connection of a world, the two agents at its ends: the correlation of their tokens, of their ages and of their numbers of connections (tokens and age as ln(1 + x), connections as ln k), counting every connection both ways round. One dot per world that lived to the end, the mean over five moments (after the games of iterations 1,000, 1,500, 2,000, 2,500 and 2,999); the bar is the median. The same values shuffled among a world's agents give correlations within 0.01 of zero; the last column is the assortativity of [Chapter 34](34-how-properties-scale-together.md), taken of ln k instead of k.
+**Are neighbours alike?** For every connection of a world, the two agents at its ends: the correlation of their tokens, of their ages and of their numbers of connections (tokens and age as ln(1 + x), connections as ln k), counting every connection both ways round. One dot per world, the mean over five moments (after the games of iterations 500, 750, 1,000, 1,250 and 1,499); the bar is the median. The same values shuffled among a world's agents give correlations within 0.01 of zero; the last column is the assortativity of [Chapter 34](34-how-properties-scale-together.md), taken of ln k instead of k.
 
 > [!example]- How to make this figure
-> **Runs.** The 26 baseline worlds that lived to the end (`B1-10000-s001` … `-s030`, [Chapter 9](09-thirty-worlds.md); `python3 gol_lab.py run E02`).
+> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Chapter 9](09-thirty-worlds.md); `python3 gol_lab.py run E10`).
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
-> 1. Read frames 2·t + 1 for t = 1,000, 1,500, 2,000, 2,500, 2,999: `ids`, `tokens`, `ages`, `brain_ids` and `edges`.
+> 1. Read frames 2·t + 1 for t = 500, 750, 1,000, 1,250, 1,499: `ids`, `tokens`, `ages`, `brain_ids` and `edges`.
 > 2. Pearson's correlation of the value at one end of a connection with the value at the other, over every connection in both directions; the null shuffles the values among agents first (`book_chapters.space.likeness`).
 >
 > **To make it again:** `python3 book_figures.py alike`.
 <!-- /figure -->
 
-- **Tokens: unlike.** Neighbours' tokens are correlated at **−0.10** in the
-  median world. The rich sit among the poor.
-- **Age: like.** **+0.15**. The old sit among the old, the young among the
-  young.
-- **Connections: unlike.** **−0.19**: hubs sit among agents with few
+- **Tokens: unlike.** Neighbours' tokens are correlated at **−0.16** in the
+  median world (−0.10 at 10,000 tokens). The rich sit among the poor.
+- **Age: like.** **+0.14** (+0.15). The old sit among the old, the young among
+  the young.
+- **Connections: unlike.** **−0.20** (−0.19): hubs sit among agents with few
   connections, the assortativity of [Chapter 34](34-how-properties-scale-together.md).
 
-All three are small. Neighbours are alike or unlike only a little, and the
-worlds differ: the age correlation ranges from 0 to 0.32 between them.
+All three are small in the median world. Neighbours are alike or unlike only
+a little, and the worlds differ: the age correlation ranges from −0.09 to
+0.30 between them, and the worlds with a giant hub
+([Chapter 14](14-how-much-does-the-seed-decide.md)) reach −0.57 for tokens
+and −0.65 for connections — a star is one rich, connected agent among
+thousands of poor leaves.
 
 ## Place, or closeness?
 
@@ -101,9 +109,9 @@ connections as it has, and measure again
 ([How alike at a distance](../notes/correlation-function.md)). The shuffle
 keeps how tokens follow connections and destroys everything else.
 
-- For **tokens**, the shuffled worlds give −0.13, as much as the real ones.
-  Rich beside poor is entirely place: hubs are rich, leaves are poor, and
-  hubs sit among leaves.
+- For **tokens**, the shuffled worlds give −0.12, most of the −0.16 of the
+  real ones. Rich beside poor is mostly place: hubs are rich, leaves are
+  poor, and hubs sit among leaves.
 - For **age**, the shuffled worlds give −0.01. Old beside old is not place.
   It is something about the agents themselves.
 
@@ -122,10 +130,10 @@ Now measure the same correlations between agents 2, 3, … 15 steps apart, the
 <!-- figure alike/distance -->
 ![How alike, how far apart](../figures/alike/distance.svg)
 
-**How alike, how far apart.** For pairs of agents r steps apart, the correlation of their tokens, ages and connections (as in the figure above), for r = 1 to 15. For each world, pairs from breadth-first searches out of 150 agents drawn at random at each of the five moments; the coloured line is the median of the 26 worlds, the darker band the middle half of them and the paler band nine in ten. Grey dashes: the median when each agent's tokens (or age) are first shuffled among the agents with about as many connections (1, 2, 3–4, 5–9, 10–49, 50 and more) — what an agent's place in the network explains without any closeness of its own.
+**How alike, how far apart.** For pairs of agents r steps apart, the correlation of their tokens, ages and connections (as in the figure above), for r = 1 to 15. For each world, pairs from breadth-first searches out of 150 agents drawn at random at each of the five moments; the coloured line is the median of the 30 worlds, the darker band the middle half of them and the paler band nine in ten. Grey dashes: the median when each agent's tokens (or age) are first shuffled among the agents with about as many connections (1, 2, 3–4, 5–9, 10–49, 50 and more) — what an agent's place in the network explains without any closeness of its own.
 
 > [!example]- How to make this figure
-> **Runs.** The 26 baseline worlds that lived to the end (`B1-10000-s001` … `-s030`, [Chapter 9](09-thirty-worlds.md); `python3 gol_lab.py run E02`).
+> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Chapter 9](09-thirty-worlds.md); `python3 gol_lab.py run E10`).
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -136,14 +144,15 @@ Now measure the same correlations between agents 2, 3, … 15 steps apart, the
 > **To make it again:** `python3 book_figures.py alike`.
 <!-- /figure -->
 
-Every curve is close to zero from **three steps** on.
+Every curve is close to zero from **three steps** on, as in the worlds of
+10,000 tokens.
 
-- **Tokens:** −0.10 at one step, **+0.10** at two, and nothing from three
+- **Tokens:** −0.13 at one step, **+0.08** at two, and nothing from three
   on. Two agents two steps apart are often two leaves of one hub, poor alike.
-  The shuffle explains half of that (+0.05).
-- **Age:** +0.15 at one step, +0.12 at two, +0.04 at three, nothing from
-  five on. Cohorts span two or three steps.
-- **Connections:** −0.19 at one step, +0.14 at two (two leaves of one hub
+  The shuffle explains most of that (+0.06).
+- **Age:** +0.13 at one step, +0.08 at two, +0.03 at three and four, and
+  nothing from five on. Cohorts span two or three steps.
+- **Connections:** −0.17 at one step, +0.12 at two (two leaves of one hub
   again), and close to zero beyond.
 
 In the language of physics, the **correlation length** of a world is one to
@@ -159,10 +168,10 @@ together?
 <!-- figure alike/kin -->
 ![Kin, near and far](../figures/alike/kin.svg)
 
-**Kin, near and far.** For pairs of agents r steps apart (as in the figure above), the share that carry the same genotype, divided by the share among all pairs of agents of the world, on a logarithmic axis: a straight falling line would be a relatedness that halves over a fixed number of steps. The line is the median of the 26 worlds, the darker band the middle half of them and the paler band nine in ten. From 9 steps on, most worlds have no such pair at all, and none has a twentieth of what chance would give.
+**Kin, near and far.** For pairs of agents r steps apart (as in the figure above), the share that carry the same genotype, divided by the share among all pairs of agents of the world, on a logarithmic axis: a straight falling line would be a relatedness that halves over a fixed number of steps. The line is the median of the 30 worlds, the darker band the middle half of them and the paler band nine in ten. From 9 steps on, most worlds have no such pair at all, and none has a twentieth of what chance would give.
 
 > [!example]- How to make this figure
-> **Runs.** The 26 baseline worlds that lived to the end (`B1-10000-s001` … `-s030`, [Chapter 9](09-thirty-worlds.md); `python3 gol_lab.py run E02`).
+> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Chapter 9](09-thirty-worlds.md); `python3 gol_lab.py run E10`).
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -172,26 +181,33 @@ together?
 > **To make it again:** `python3 book_figures.py alike`.
 <!-- /figure -->
 
-Among agents one step apart, **9.9%** carry the same genotype, 33 times as
-many as among any two agents of the world (0.30%). That is the finding of
+Among agents one step apart, **9.2%** carry the same genotype, 290 times as
+many as among any two agents of the world (0.03%). That is the finding of
 [Chapter 38](38-do-agents-cooperate.md), counted here from agents drawn at
-random rather than from connections. Two steps apart it is 5.0% (18 times
-chance), three steps 0.6% (2.6 times), and from **four steps on, fewer than
-chance would give**: 0.8 times at four steps, 0.2 at five. Beyond eight
-steps, almost no pair shares a genotype.
+random rather than from connections. Two steps apart it is 4.1% (100 times
+chance), three steps 0.5% (12 times), four steps 0.09% (2.6 times), and from
+**five steps on, fewer than chance would give**: 0.6 times at five steps,
+0.1 at six. Beyond eight steps, almost no pair shares a genotype.
+
+At 10,000 tokens the same shares were 9.9% at one step and 5.0% at two, but
+two agents drawn at random shared a genotype ten times as often (0.30%), so
+the enrichment was 33 at one step, and it fell below chance from four steps
+on. The kin clusters are the same size in both: what changes with a larger
+world is only how rare the same genotype is far away.
 
 So kin live together, but only as small clusters: a parent, its children,
-the nodes it has just conquered, within two steps. There are no
-territories. A family is a few agents, not a region.
+the nodes it has just conquered, within two or three steps. There are no
+territories of genotypes. A genotype is a few agents, not a region.
 
 Two reasons keep it so. A genotype lasts about two iterations before a
 change renames it ([Chapter 18](18-genotypes-and-lineages.md)), so a
 cluster of one genotype has little time to grow. And more than half of all
 nodes change hands in every game ([Chapter 16](16-how-the-game-is-played.md)),
 so any territory is broken up as soon as it forms. Lines, which last much
-longer than genotypes, might well hold larger domains; that is the next
-thing to measure, by asking the same question of agents that share an
-ancestor some tens of iterations back.
+longer than genotypes, might well hold larger domains.
+[Chapter 55](55-worlds-of-100000-tokens.md) measures them, asking the same
+question of agents that share an ancestor some tens or hundreds of
+iterations back.
 
 ## What this means
 

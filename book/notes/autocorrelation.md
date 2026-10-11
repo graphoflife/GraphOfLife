@@ -26,8 +26,9 @@ throughout would look like a world with a long memory.
 
 - Close to 1: a world is still where it was.
 - Close to 0: where a world was says nothing about where it will be.
-- In the baseline: 0.68 for the number of agents after 100 iterations, about
-  half that after 200, little after 300, nothing after 500
+- In the baseline: 0.61 for the number of agents after 100 iterations in
+  the worlds of 100,000 tokens (0.68 in those of 10,000), about a third of that
+  after 200, nothing after 300
   ([Chapter 14](../chapters/14-how-much-does-the-seed-decide.md)).
 
 ## Why it dips below zero

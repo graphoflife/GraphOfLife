@@ -17,9 +17,8 @@ import numpy as np
 import book_data as D
 import book_figures as F
 from book_graph import graph
-from book_figures import (Classes, FRAMES, band_series, bars, cells, chapter, describe, dots, line,
-                          quantile_band, recipe)
-from book_chapters.common import BLUE, CYAN, GREEN, GREY, ORANGE, RED, VIOLET, WORLDS as W, YELLOW
+from book_figures import Classes, FRAMES, bars, cells, chapter, describe, line, quantile_band, recipe
+from book_chapters.common import BLUE, GREEN, GREY, ORANGE, RED, WORLDS as W, YELLOW
 
 LAGS = (1, 2, 5, 10, 20, 50, 100, 200)
 #: Moments a hundred iterations apart, from the settled start to the last that has 200 games after it.

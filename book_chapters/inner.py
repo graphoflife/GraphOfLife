@@ -17,8 +17,8 @@ import numpy as np
 
 import book_data as D
 import book_figures as F
-from book_figures import chapter, describe, dots, line, lived, recipe, runs_of, survivors
-from book_chapters.common import BLUE, CYAN, GREEN, GREY, ORANGE, RED, VIOLET, WORLDS as W, YELLOW
+from book_figures import chapter, describe, dots, line, recipe, runs_of, survivors
+from book_chapters.common import BLUE, CYAN, GREEN, GREY, WORLDS as W
 
 #: What each group of a brain's input rows reads, by the blocks of
 #: SimConfig.input_layout() it is made of.

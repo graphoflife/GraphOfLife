@@ -18,18 +18,22 @@ connections, and who loses them?
 > - Do agents gather connections as they grow old, so that the oldest are
 >   the hubs?
 
-<!-- runs E02 -->
+The worlds are the thirty of 100,000 tokens of [Chapter 9](09-thirty-worlds.md);
+where the thirty of 10,000 tokens this chapter was first written from differ,
+both are given.
+
+<!-- runs E10 -->
 > [!info] The runs behind this chapter
-> **30 runs.** Every condition below is run once for every seed (1 to 30), for 3,000 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
+> **30 runs.** Every condition below is run once for every seed (1 to 30), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
 >
-> - **baseline** — changes nothing: B1 as it is; 10,000 tokens. Runs `B1-10000-s001` … `B1-10000-s030`.
+> - **baseline** — changes nothing: B1 as it is; 100,000 tokens. Runs `B1-100000-s001` … `B1-100000-s030`.
 >
-> To make these runs again: `python3 gol_lab.py run E02`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | baseline | what it is |
 > |---|---|---|
-> | [`total_tokens`](../notes/settings.md#total_tokens) | 10,000 | The number of tokens in the world, *T*. It never changes during a run. |
+> | [`total_tokens`](../notes/settings.md#total_tokens) | 100,000 | The number of tokens in the world, *T*. It never changes during a run. |
 > | [`n_nodes`](../notes/settings.md#n_nodes) | 0 | How many founders the world starts with. 0 means one founder per hundred tokens: *n* = ⌊*T* / 100⌋. |
 > | [`k_neighbors`](../notes/settings.md#k_neighbors) | 0 | How many neighbours each founder starts with in the ring. 0 means *k* = max(⌊*n* / 100⌋, 5); an odd *k* is wired as *k* − 1. |
 > | [`rewire_p`](../notes/settings.md#rewire_p) | 0.2 | In the starting ring, the probability that a connection is moved to a founder chosen at random (Watts–Strogatz). |
@@ -53,15 +57,15 @@ connections, and who loses them?
 > | [`mutation_sparsity`](../notes/settings.md#mutation_sparsity) | 0.1 | The share of a brain's numbers a change touches; also the probability, for each weight matrix and bias vector, of a rarer reset that redraws that share of it. |
 > | [`extinction_threshold`](../notes/settings.md#extinction_threshold) | 20 | A run stops, as extinct, when an iteration ends (after its game) with this many agents or fewer. |
 > | seeds | 1 to 30 | one run per seed |
-> | iterations | 3,000 | how far each run goes, unless its world dies first |
+> | iterations | 1,500 | how far each run goes, unless its world dies first |
 >
 > A value in **bold** differs from the baseline B1.
 <!-- /runs -->
 
 ## How a newborn is wired
 
-Of 103,597 births in the reproduction phases of every 25th iteration from
-500 on, **78%** of the children were joined to their own parent. 12% were
+Of 600,854 births in the reproduction phases of every 25th iteration from
+500 on, **80%** of the children were joined to their own parent. 12% were
 joined to no one, and are cut off at once
 ([Chapter 31](31-how-agents-have-children.md)). The rest were joined to two
 to six of their parent's candidates, often more. A child is born into its
@@ -88,14 +92,14 @@ of the network ([Preferential attachment and its kernel](../notes/preferential-a
 <!-- figure grows/kernel -->
 ![Who gains and who loses connections](../figures/grows/kernel.svg)
 
-**Who gains and who loses connections.** Agents sorted by their number of connections k at the start of a phase, in classes of growing width (dots at the middle of each class). Green: the new connections an agent alive before and after a reproduction phase gained in it, per agent — to its own newborn child, to a neighbour's child, or handed over. Red: the connections an agent had after the reproduction phase and no longer had after the game that followed — cut for carrying nothing, or gone with it if it died — per agent. Pooled over the reproduction phases and games of every 25th iteration from 500 on, in the 26 worlds that lived to the end. Dashed: straight lines fitted on these logarithmic axes; dotted: a line of slope 1, in proportion to k.
+**Who gains and who loses connections.** Agents sorted by their number of connections k at the start of a phase, in classes of growing width (dots at the middle of each class). Green: the new connections an agent alive before and after a reproduction phase gained in it, per agent — to its own newborn child, to a neighbour's child, or handed over. Red: the connections an agent had after the reproduction phase and no longer had after the game that followed — cut for carrying nothing, or gone with it if it died — per agent. Pooled over the reproduction phases and games of every 25th iteration from 500 on, in the 30 worlds. Dashed: straight lines fitted on these logarithmic axes; dotted: a line of slope 1, in proportion to k.
 
 > [!example]- How to make this figure
-> **Runs.** The 26 baseline worlds that lived to the end (`B1-10000-s001` … `-s030`, [Chapter 9](09-thirty-worlds.md); `python3 gol_lab.py run E02`).
+> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Chapter 9](09-thirty-worlds.md); `python3 gol_lab.py run E10`).
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
-> 1. For t = 500, 525, …, 2,975 read frames 2·t − 1 (before the reproduction phase of t), 2·t (after it) and 2·t + 1 (after the game).
+> 1. For t = 500, 525, …, 1,475 read frames 2·t − 1 (before the reproduction phase of t), 2·t (after it) and 2·t + 1 (after the game).
 > 2. Gained: the edges in 2·t not in 2·t − 1, counted at both ends, for agents in both frames, by their degree in 2·t − 1. Lost: the edges in 2·t not in 2·t + 1, counted for agents of 2·t by their degree there (all of them if the agent is gone).
 > 3. Sum over t and worlds per class, divide by the agents; least squares of ln(rate) on ln(class middle).
 >
@@ -104,20 +108,21 @@ of the network ([Preferential attachment and its kernel](../notes/preferential-a
 
 Both are straight lines on logarithmic axes, over two decades of *k*:
 
-- **Gains grow as k^0.94.** An agent with one connection gains 0.05 new ones
-  per reproduction phase; with ten, about 0.5; with a hundred or more, 7.5.
-  That is very nearly **linear preferential attachment**, the mechanism
-  Barabási and Albert (1999) proposed for heavy-tailed networks.
+- **Gains grow as k^1.02.** An agent with one connection gains 0.05 new ones
+  per reproduction phase; with ten to nineteen, about 0.65; with a hundred or
+  more, 15. That is **linear preferential attachment**, the mechanism
+  Barabási and Albert (1999) proposed for heavy-tailed networks (k^0.94 at
+  10,000 tokens).
   [Chapter 32](32-power-laws-real-and-apparent.md) suggested it would be
   found here, reached by copying. A child joins some of its parent's
   candidates, so an agent gains a connection whenever one of its neighbours
   has a child, and an agent with twice the neighbours has twice the chances.
   Now it is measured.
-- **Losses grow as k^1.11**, a little faster than in proportion. From two
-  connections on, every class loses at least as much in a game as it gained
-  in the reproduction phase before. Hubs of a hundred connections or more
-  gain 7.5 and lose 10.6. Only agents with a single connection gain more
-  than they lose: 0.05 against 0.025.
+- **Losses grow as k^1.20**, faster than in proportion (k^1.11 at 10,000
+  tokens). From two connections on, every class loses at least as much in a
+  game as it gained in the reproduction phase before. Hubs of a hundred
+  connections or more gain 15 and lose 22. Only agents with a single
+  connection gain more than they lose: 0.053 against 0.027.
 
 So no agent can run away with the network. Linear preferential attachment
 on its own makes a few nodes grow without limit, as in a growing web. Here
@@ -141,32 +146,35 @@ early. Is that so here?
 <!-- figure grows/age -->
 ![Connections and age](../figures/grows/age.svg)
 
-**Connections and age.** The agents alive after the last game of the 26 worlds that lived to the end, sorted by age — the iterations since their node was born — in classes doubling in width: the median number of connections of each class, with the band from its 25th to its 75th percentile, and the 99th percentile (dashed).
+**Connections and age.** The agents alive after the last game of the 30 worlds, sorted by age — the iterations since their node was born — in classes doubling in width: the median number of connections of each class, with the band from its 25th to its 75th percentile, and the 99th percentile (dashed).
 
 > [!example]- How to make this figure
-> **Runs.** The 26 baseline worlds that lived to the end (`B1-10000-s001` … `-s030`, [Chapter 9](09-thirty-worlds.md); `python3 gol_lab.py run E02`).
+> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Chapter 9](09-thirty-worlds.md); `python3 gol_lab.py run E10`).
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
-> 1. Read frame 5,999 of each run: `ages`, and each agent's connections in `edges`.
-> 2. Classes of age [0, 1), [1, 2), [2, 4), …, [2,048, 3,000); in each class with at least 30 agents, the median, quartiles and 99th percentile of the connections.
+> 1. Read frame 2,999 of each run: `ages`, and each agent's connections in `edges`.
+> 2. Classes of age [0, 1), [1, 2), [2, 4), …, [1,024, 1,500); in each class with at least 30 agents, the median, quartiles and 99th percentile of the connections.
 >
 > **To make it again:** `python3 book_figures.py grows`.
 <!-- /figure -->
 
 For the typical agent, **no**. The median agent has 3 connections when it
 is born and **2** at every age after that, from a few iterations to over
-700. Across all agents, the correlation of age and connections (both as
-logarithms) is −0.04, none at all.
+700 (only the few agents older than a thousand iterations have a median of
+4). Across all agents, the correlation of age and connections (both as
+logarithms) is −0.01, none at all.
 
 For the very best connected, a little. The best-connected hundredth of
-agents of any age up to a hundred iterations have 14 to 17 connections. The
-best-connected hundredth of agents aged 362 have 36, and of agents aged 724,
-61. The greatest hubs are old. But this is mostly survival, not
+agents of any age up to a hundred iterations have 16 to 22 connections. The
+best-connected hundredth of agents aged 362 have 40, and of agents aged 724,
+126. The great hubs are old. But this is mostly survival, not
 accumulation: a hub is far less likely to die than a leaf
 ([Chapter 21](21-do-the-rich-stay-rich.md)), so among the old the hubs are
 overrepresented. Age gives an agent no connections; connections give it
-age.
+age. (The very greatest hubs, the centres of a world's stars, are the
+exception the other way: they pass from parent to newborn child —
+[Chapter 33](33-the-largest-and-the-smallest.md).)
 
 ## What this means
 

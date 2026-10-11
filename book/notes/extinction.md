@@ -41,7 +41,8 @@ A world that dies out did not end up anywhere: the last stretch of its life
 is its dying. So where the worlds of a setting end up is measured over the
 worlds that lived to the end, and the dead are reported beside them, as an
 outcome of their own ([The settled life of a world](settled-life.md)). Of the
-30 baseline worlds, four died: after 4, 313, 1,547 and 2,184 iterations
+30 baseline worlds of 10,000 tokens, four died: after 4, 313, 1,547 and 2,184
+iterations; of the 30 of 100,000 tokens, none
 ([Chapter 10](../chapters/10-a-worlds-life.md)).
 
 "Died after *N* iterations" means: the iteration numbered *N* − 1 was the

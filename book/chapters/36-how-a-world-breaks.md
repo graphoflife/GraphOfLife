@@ -5,7 +5,7 @@ piece** of the network; every agent outside it dies, however many tokens it
 holds, and its tokens are dealt out among the survivors
 ([Chapter 3](03-one-iteration.md)). Three deaths in four are of this kind
 ([Chapter 12](12-births-deaths-and-ages.md)), and [Chapter 32](32-power-laws-real-and-apparent.md)
-found that they come in lumps: half of them in games that cut off dozens of
+found that they come in lumps: half of them in games that cut off hundreds of
 agents at once. This chapter asks how fragile a world is, whether its breaks
 can be foreseen, and what actually severs a region from the rest.
 
@@ -13,20 +13,26 @@ can be foreseen, and what actually severs a region from the rest.
 > - How much of a world hangs on single connections?
 > - Does a world in which a large part hangs on one connection lose more
 >   agents?
-> - When a game cuts off a hundred agents, what severed them — and why there?
+> - When a game cuts off a thousand agents, what severed them — and why there?
 
-<!-- runs E02 -->
+The worlds are the thirty of 100,000 tokens of [Chapter 9](09-thirty-worlds.md);
+where the thirty of 10,000 tokens this chapter was first written from differ,
+both are given. A "big" cut is counted against the size of a world: a
+thousand agents or more here, a hundred in the worlds of 10,000 tokens — a
+hundredth of the world's tokens' worth.
+
+<!-- runs E10 -->
 > [!info] The runs behind this chapter
-> **30 runs.** Every condition below is run once for every seed (1 to 30), for 3,000 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
+> **30 runs.** Every condition below is run once for every seed (1 to 30), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
 >
-> - **baseline** — changes nothing: B1 as it is; 10,000 tokens. Runs `B1-10000-s001` … `B1-10000-s030`.
+> - **baseline** — changes nothing: B1 as it is; 100,000 tokens. Runs `B1-100000-s001` … `B1-100000-s030`.
 >
-> To make these runs again: `python3 gol_lab.py run E02`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | baseline | what it is |
 > |---|---|---|
-> | [`total_tokens`](../notes/settings.md#total_tokens) | 10,000 | The number of tokens in the world, *T*. It never changes during a run. |
+> | [`total_tokens`](../notes/settings.md#total_tokens) | 100,000 | The number of tokens in the world, *T*. It never changes during a run. |
 > | [`n_nodes`](../notes/settings.md#n_nodes) | 0 | How many founders the world starts with. 0 means one founder per hundred tokens: *n* = ⌊*T* / 100⌋. |
 > | [`k_neighbors`](../notes/settings.md#k_neighbors) | 0 | How many neighbours each founder starts with in the ring. 0 means *k* = max(⌊*n* / 100⌋, 5); an odd *k* is wired as *k* − 1. |
 > | [`rewire_p`](../notes/settings.md#rewire_p) | 0.2 | In the starting ring, the probability that a connection is moved to a founder chosen at random (Watts–Strogatz). |
@@ -50,7 +56,7 @@ can be foreseen, and what actually severs a region from the rest.
 > | [`mutation_sparsity`](../notes/settings.md#mutation_sparsity) | 0.1 | The share of a brain's numbers a change touches; also the probability, for each weight matrix and bias vector, of a rarer reset that redraws that share of it. |
 > | [`extinction_threshold`](../notes/settings.md#extinction_threshold) | 20 | A run stops, as extinct, when an iteration ends (after its game) with this many agents or fewer. |
 > | seeds | 1 to 30 | one run per seed |
-> | iterations | 3,000 | how far each run goes, unless its world dies first |
+> | iterations | 1,500 | how far each run goes, unless its world dies first |
 >
 > A value in **bold** differs from the baseline B1.
 <!-- /runs -->
@@ -58,38 +64,39 @@ can be foreseen, and what actually severs a region from the rest.
 ## Bridges and the worst cut
 
 A **bridge** is a connection on no loop: cut it, and the network falls in two
-([Bridges](../notes/bridges.md)). A settled world has about 625 of them — 31%
+([Bridges](../notes/bridges.md)). A settled world has about 6,400 of them — 26%
 of its connections ([Chapter 17](17-what-shape-does-the-network-take.md)). Most
 hold a single leaf. The **cut risk** asks about the worst one: the largest
 share of the world that one bridge holds to the rest ([Cut risk](../notes/cut-risk.md)).
-In the median world it is **12%**: somewhere, a single connection is all that
-joins an eighth of the world to the other seven eighths.
+In the median world it is **11%** (12% at 10,000 tokens): somewhere, a single
+connection is all that joins a ninth of the world to the rest.
 
 ## Does a fragile world lose more?
 
-If the worst bridge failed, the game would cut off that eighth. Does it?
+If the worst bridge failed, the game would cut off that ninth. Does it?
 
 <!-- figure breaking/risk -->
 ![Does a fragile world lose more?](../figures/breaking/risk.svg)
 
-**Does a fragile world lose more?** Every game from iteration 500 on of the 26 worlds that lived to the end. x: before the game, the largest share of the world that one bridge held to the rest — if that one connection were cut, that many would be cut off ([Cut risk](../notes/cut-risk.md)). y: the share of agents the game really cut off. White: the mean of y in classes of x 0.05 wide; dashed: y = x.
+**Does a fragile world lose more?** Every game from iteration 500 on of the 30 worlds. x: before the game, the largest share of the world that one bridge held to the rest — if that one connection were cut, that many would be cut off ([Cut risk](../notes/cut-risk.md)). y: the share of agents the game really cut off. White: the mean of y in classes of x 0.05 wide; dashed: y = x.
 
 > [!example]- How to make this figure
-> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
 >
-> 1. Take the rows with `phase` = 2 and 500 ≤ `iteration` ≤ 2,999: `cutRiskBefore`, and `orphaned` / `nodes_before`.
+> 1. Take the rows with `phase` = 2 and 500 ≤ `iteration` ≤ 1,499: `cutRiskBefore`, and `orphaned` / `nodes_before`.
 > 2. Plot one against the other; average y in classes of x.
 >
 > **To make it again:** `python3 book_figures.py breaking`.
 <!-- /figure -->
 
-Over 65,000 settled games, the cut risk before a game and the share of agents
-the game cut off have a correlation of **0.06**: nothing. The mean risk is 13%;
-the mean share cut off is 1.75%. In 41% of games more than a tenth of the world
-hung on one connection; in only 1.25% of games was more than a tenth cut off.
-The worst bridge almost never fails.
+Over 30,000 settled games, the cut risk before a game and the share of agents
+the game cut off have a correlation of **0.09**: almost nothing. The mean risk
+is 11%; the mean share cut off is 2.0%. In 32% of games more than a tenth of
+the world hung on one connection; in only 1.1% of games was more than a tenth
+cut off. The worst bridge almost never fails. (At 10,000 tokens: 0.06, 41%
+and 1.25%.)
 
 The rules say why. A connection is cut only if **no** token crosses it, in
 either direction, during the game ([`prune_after`](../notes/settings.md#prune_after)).
@@ -102,48 +109,56 @@ flows across it.
 <!-- figure breaking/one-world -->
 ![600 iterations of one world](../figures/breaking/one-world.svg)
 
-**600 iterations of one world.** The world with seed 1, iterations 1,000 to 1,600. Top: its number of agents after every game. Middle: how many agents each game cut off. Bottom: before each game, the largest share of the world held to the rest by a single bridge, measured on the network as it stood before the cleanup.
+**600 iterations of one world.** The world with seed 26, iterations 600 to 1,200. Top: its number of agents after every game. Middle: how many agents each game cut off. Bottom: before each game, the largest share of the world held to the rest by a single bridge, measured on the network as it stood before the cleanup.
 
 > [!example]- How to make this figure
-> **Runs.** `B1-10000-s001`.
+> **Runs.** `B1-100000-s026`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
 >
-> 1. Take `nodes`, `orphaned` and `cutRiskBefore` of the rows with `phase` = 2 and 1,000 ≤ `iteration` ≤ 1,600.
+> 1. Take `nodes`, `orphaned` and `cutRiskBefore` of the rows with `phase` = 2 and 600 ≤ `iteration` ≤ 1,200.
 >
 > **To make it again:** `python3 book_figures.py breaking`.
 <!-- /figure -->
 
-The world of seed 1 between iterations 1,000 and 1,600. It grows from about
-950 agents to 1,950 in 170 iterations, then loses almost half in the next
-sixty, through a handful of games that cut off 100 to 340 agents each. The
-worst single cut (bottom) lives in **plateaus**: the same bridge holds 10% to
-25% of the world for tens of iterations, until the plateau ends abruptly —
-because a new connection closed a loop around the bridge, or because the
-branch was lost. Around iteration 1,510, 45% of the world hung on one
-connection for about twenty iterations, and was not lost through it.
+The world of seed 26 between iterations 600 and 1,200. It shrinks from about
+22,800 agents to 19,000 by iteration 734. Then a single game, that of
+iteration 735, cuts off **9,460** agents — half the world, the largest cut of
+all thirty worlds. Before that game 49% of the world hung on one connection;
+the game cut off a region of about that size, across 79 connections that all
+carried nothing in it. The world grows back to 15,000 within a hundred
+iterations and wanders there, losing a thousand or two in a few games. The
+worst single cut (bottom) lives in **plateaus**: the same bridge holds a few
+percent to a tenth of the world for tens of iterations, until the plateau
+ends abruptly — because a new connection closed a loop around the bridge, or
+because the branch was lost. From iteration 1,060 on, a third to almost half
+of the world hung on one connection, for 140 iterations, and none of it was
+lost through it.
 
 ## Where the cut-off deaths happen
 
 <!-- figure breaking/deaths-by-size -->
 ![Where the cut-off deaths happen](../figures/breaking/deaths-by-size.svg)
 
-**Where the cut-off deaths happen.** Of all agents cut off in games from iteration 500 on of the 26 worlds that lived to the end, the share that died in games which cut off at least n agents, for every n. Where the line is at 0.5, half of all such deaths happened in games at least that large.
+**Where the cut-off deaths happen.** Of all agents cut off in games from iteration 500 on of the 30 worlds, the share that died in games which cut off at least n agents, for every n. Where the line is at 0.5, half of all such deaths happened in games at least that large.
 
 > [!example]- How to make this figure
-> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
 >
-> 1. Take `orphaned` of the rows with `phase` = 2 and 500 ≤ `iteration` ≤ 2,999.
+> 1. Take `orphaned` of the rows with `phase` = 2 and 500 ≤ `iteration` ≤ 1,499.
 > 2. For every n, add up `orphaned` over the rows with `orphaned` ≥ n and divide by the total.
 >
 > **To make it again:** `python3 book_figures.py breaking`.
 <!-- /figure -->
 
-Half of all agents cut off died in games that cut off at least 42; the largest
-single loss was 1,037 agents. One game in forty cuts off a hundred or more
-agents, and these games account for a fifth of all deaths by cutting.
+Half of all agents cut off died in games that cut off at least 353; the
+largest single loss was 9,460 agents. One game in fifty cuts off a thousand or
+more agents, and these games account for a sixth of all deaths by cutting.
+Counted against the size of a world, it is much as at 10,000 tokens, where
+half died in games that cut off at least 42 and one game in forty cut off a
+hundred or more — a fifth of the deaths.
 
 ## What severs a region
 
@@ -155,24 +170,20 @@ survived. So the connections between the lost and the kept, as they stood
 before the game, are exactly the connections pruned across the cut: the
 region's **border**. Counting them tells what kind of break it was.
 
-Of the 1,614 games that cut off a hundred agents or more (26 worlds, settled
-life):
+Of the 601 games that cut off a thousand agents or more (30 worlds, settled
+life), **every one** was a whole border going quiet: ten or more connections
+between a region and the rest of the world, all carrying nothing in the same
+game — 1.4 million agents cut off in them. Not one big cut was a bridge
+failing.
 
-| connections pruned across the cut | 1–2 | 3–9 | 10 or more |
-|---|---|---|---|
-| games | 32 | 161 | 1,421 |
-| agents cut off in them | 8,527 | 42,631 | 268,904 |
-
-Only one big cut in fifty is a bridge failing. **Nine in ten are a whole
-border going quiet**: ten or more connections between a region and the rest
-of the world, all carrying nothing in the same game.
-
-The six largest cuts in the world of seed 1 show both kinds. At iteration 999,
-503 agents were lost through a single connection; at 1,984, 394 through two.
-But at 722, 644 agents were lost across 20 connections, and at 541, 319 across
-529 — and there, 60% of the lost agents carried a single genotype, and the
-typical one staked **all** its tokens on its own node. A line of brains that
-keeps everything at home cut its whole region off, and died with it.
+At 10,000 tokens it was nine in ten: of the 1,614 games that cut off a
+hundred or more, 32 went through one or two connections, 161 through three
+to nine, and 1,421 through ten or more. There, too, a single line of brains
+once cut itself off — in the world of seed 1 at iteration 541, 60% of the 319
+lost agents carried one genotype, and the typical one staked all its tokens
+on its own node. In the large worlds no such cut shows: in the six largest
+cuts of the world of seed 1, from 2,177 to 4,608 agents, lost across 202 to
+843 connections, no genotype held more than 4% of the lost.
 
 ## Poverty disconnects
 
@@ -181,9 +192,9 @@ sides of the quiet borders (the games with ten or more border connections):
 
 | | median tokens | median connections | hold fewer tokens than connections |
 |---|---|---|---|
-| lost side of the border | 1 | 2 | 64% |
-| kept side of the border | 3 | 5 | 78% |
-| every agent, same games | 3 | 2 | 20% |
+| lost side of the border | 1 | 2 | 52% |
+| kept side of the border | 3 | 4 | 72% |
+| every agent, same games | 3 | 2 | 13% |
 
 The agents on both sides of a quiet border are **poor for their connections**.
 Here is the arithmetic that makes that fatal. A connection survives a game only

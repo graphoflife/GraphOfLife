@@ -11,7 +11,7 @@ still listed. The measure keeps both beside the runs.
 """
 from __future__ import annotations
 
-from typing import Any, Dict, Tuple
+from typing import Any, Dict, Optional, Tuple
 
 import numpy as np
 
@@ -19,7 +19,7 @@ import book_data as D
 import book_figures as F
 from book_figures import Classes, band_series, chapter, describe, line, quantile_band, recipe, stacked
 from book_chapters.common import (BAND_STEPS, BAND_WORDS, BLUE, CYAN, GREEN, GREY, ORANGE, RED, VIOLET,
-                                  WORLD_SETS, WORLDS as W, YELLOW, listed)
+                                  WORLD_SETS, WORLDS as W, YELLOW, count_word, listed)
 
 #: Ages, in classes doubling in width from 4 on.
 AGE_CLASSES = Classes((0, 0, "0"), (1, 3, "1–3"), (4, 15, "4–15"), (16, 63, "16–63"), (64, 255, "64–255"),
@@ -122,6 +122,44 @@ COHORTS = {"E02": ((1, 49), (50, 99), (100, 249), (250, 499), (500, 999), (1000,
 RESTRICTED = 100
 
 
+def median_life(S: np.ndarray) -> Optional[int]:
+    """The median lifetime: the longest L that more than half the lives reach, S(L) > ½ ≥ S(L + 1)."""
+    below = S <= 0.5
+    return int(np.argmax(below)) - 1 if below.any() else None
+
+
+def stationary(S: np.ndarray) -> Dict[str, float]:
+    """
+    The ages the living would have in a world whose births never change and
+    whose lives all follow S: as many agents of age a as lives lasting at least
+    a + 1 iterations, so a share S(a + 1) / Σ S of the living has age a — their
+    median and 90th percentile, the mean life Σ S, and the newborns' share
+    1 / Σ S.
+    """
+    weights = S[1:] / S[1:].sum()
+    cum = np.cumsum(weights)
+    return {"median_age": int(np.argmax(cum >= 0.5)), "q90_age": int(np.argmax(cum >= 0.9)),
+            "mean_life": float(S[1:].sum()), "newborn_share": float(weights[0])}
+
+
+#: Lives are followed this far when a world's ages are rebuilt from its survival curve.
+STATIONARY = 999
+
+
+def settled_lives(worlds: Any, kept: Any) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """
+    The lives begun in the settled stretch of a set of worlds, pooled — born from
+    its first iteration to RESTRICTED iterations before the end, so that every
+    one of them can be followed at least that far.
+    """
+    kept = list(kept)
+    b = np.concatenate([m["birth"] for m in kept])
+    d = np.concatenate([m["last"] for m in kept])
+    c = np.concatenate([m["censored"] for m in kept])
+    keep = (b >= worlds.settled) & (b <= worlds.last - RESTRICTED)
+    return b[keep], d[keep], c[keep]
+
+
 def _column(m: Dict[str, Any], name: str) -> Tuple[np.ndarray, np.ndarray]:
     table = m["by_iteration"]
     return table[:, 0], table[:, AGE_COLUMNS.index(name)]
@@ -160,6 +198,9 @@ def ages(ch: F.Chapter) -> None:
     for c in ("mean", "median", "q90", "q99", "oldest"):
         ch.number(f"{c}_settled", describe([float(np.mean(_column(m, c)[1][W.settled:])) for m in kept.values()]))
         ch.number(f"{c}_end", describe([float(_column(m, c)[1][W.last]) for m in kept.values()]))
+    at = [t for t in (50, 100, 200, 300, 500, 750, 1000, 1250, 2000) if t < W.last] + [W.last]
+    for c in ("median", "q90", "oldest"):
+        ch.number(f"{c}_at", {str(t): describe([float(_column(m, c)[1][t]) for m in kept.values()]) for t in at})
     for t in (25, 50, 100, 200, 300, 400, 500):
         ch.number(f"from_start_{t}", describe([float(_column(m, "from_start")[1][t]) for m in kept.values()]))
     ch.number("last_from_start", describe([float(max((t for t, v in zip(*_column(m, "from_start")) if v > 0),
@@ -180,7 +221,7 @@ def ages(ch: F.Chapter) -> None:
         shares.append(counts / counts.sum())
     shares = np.array(shares)
     ch.figure(
-        "pyramids", title="The living, by age, at seven moments",
+        "pyramids", title=f"The living, by age, at {count_word(len(moments))} moments",
         x={"label": "", "categories": cats}, y={"label": "share of the living", "min": 0, "max": 1},
         series=stacked(cats, [(f"age {lab}", shares[:, i], c) for i, (lab, c) in
                               enumerate(zip(labels, [RED, ORANGE, YELLOW, GREEN, CYAN, BLUE]))]),
@@ -206,7 +247,7 @@ def ages(ch: F.Chapter) -> None:
         keep = S[1:reach + 1] > 0
         curves.append(line(L[keep], S[1:reach + 1][keep], f"born in iterations {lo:,}–{hi:,} ({b.size:,})",
                            colour, width=2))
-        said[f"{lo}-{hi}"] = {"lives": int(b.size), "median": int(np.argmax(S <= 0.5)) if (S <= 0.5).any() else None,
+        said[f"{lo}-{hi}"] = {"lives": int(b.size), "median": median_life(S),
                               **{f"at_least_{x}": float(S[x]) for x in (2, 5, 10, 50, 100, 500) if x <= reach}}
     ch.figure(
         "cohorts", title="How long agents live, by when they were born",
@@ -236,7 +277,7 @@ def ages(ch: F.Chapter) -> None:
             if b.size >= 20:
                 S = survival(b, d, c, RESTRICTED)
                 table[w, j] = float(S[1:RESTRICTED + 1].sum())
-                medians[w, j] = float(np.argmax(S <= 0.5)) if (S <= 0.5).any() else np.nan
+                medians[w, j] = np.nan if median_life(S) is None else median_life(S)
     mids = [lo + width / 2 for lo in starts]
     ch.grid(
         "expectancy", [
@@ -250,13 +291,13 @@ def ages(ch: F.Chapter) -> None:
                 "their first children, left out). Left: how many of their first "
                 f"{RESTRICTED} iterations they live on average — the sum of the Kaplan–Meier curve up to "
                 f"L = {RESTRICTED}, a mean that every stretch born at least {RESTRICTED} iterations before the end "
-                "can be measured by in full. Right: the median lifetime, the L at which half of them have died. "
+                "can be measured by in full. Right: the median lifetime, the longest L that more than half of them live. "
                 f"For each world separately; the line is the median of the {n} worlds, the darker band the middle "
                 "half and the paler band nine in ten.",
         recipe=recipe(W.runs_text(), LIFELINES,
                       [f"For each world and stretch of {width} birth iterations with at least 20 births, the "
                        "Kaplan–Meier curve S(L) of their lives.",
-                       f"Left: Σ S(L) for L = 1 … {RESTRICTED}. Right: the smallest L with S(L) ≤ ½."]))
+                       f"Left: Σ S(L) for L = 1 … {RESTRICTED}. Right: the largest L with S(L) > ½."]))
     ch.number("expectancy", {"starts": starts, "restricted": [describe(table[:, j]) for j in range(len(starts))],
                              "median": [describe(medians[:, j]) for j in range(len(starts))]})
 
@@ -325,7 +366,7 @@ def ages(ch: F.Chapter) -> None:
             "two-sizes", panels, columns=2, title="Ages in worlds of two sizes",
             caption=f"The median age and the oldest agent after every game, in the {n} worlds of {W.tokens:,} tokens "
                     f"(blue, {W.until:,} iterations) and in the {len(other.specs)} worlds of {other.tokens:,} tokens "
-                    f"of Chapter 41's comparisons (yellow, {other.until:,} iterations). {BAND_WORDS}; a world that "
+                    f"of the first edition, Experiment 2 (yellow, {other.until:,} iterations). {BAND_WORDS}; a world that "
                     "died is no longer counted.",
             recipe=recipe(W.runs_text() + " " + other.runs_text(), LIFELINES,
                           ["As in the first figure, for both sets of worlds.", *BAND_STEPS[1:]]))
@@ -333,13 +374,25 @@ def ages(ch: F.Chapter) -> None:
             ch.number(f"small_{c}", {str(t): describe([float(_column(m, c)[1][t]) for m in small.values()
                                                        if len(m["by_iteration"]) > t])
                                      for t in (500, 1000, 1499, 2000, 2999)})
-        b = np.concatenate([m["birth"] for m in small.values()])
-        d = np.concatenate([m["last"] for m in small.values()])
-        c = np.concatenate([m["censored"] for m in small.values()])
-        keep = b >= other.settled
-        S = survival(b[keep], d[keep], c[keep], 1000)
+        ch.number("small_median_settled", describe([float(np.mean(_column(m, "median")[1][other.settled:]))
+                                                    for s, m in small.items() if s in {x.run_id for x in other.alive}]))
+        b, d, c = settled_lives(other, small.values())
+        S = survival(b, d, c, 1000)
         ch.number("small_survival", {f"at_least_{x}": float(S[x]) for x in (2, 5, 10, 50, 100, 500, 1000)})
-    keep = pooled["birth"] >= W.settled
-    S = survival(pooled["birth"][keep], pooled["last"][keep], pooled["censored"][keep], W.last)
-    ch.number("survival", {"lives": int(keep.sum()), **{f"at_least_{x}": float(S[x]) for x in (2, 5, 10, 50, 100, 500)
-                                                       if x <= W.last}})
+        ch.number("small_stationary", stationary(S[:STATIONARY + 1]))
+        risk, h = hazard(b, d, c, 500)
+        ch.number("small_hazard", {str(a): float(h[a - 1]) for a in (1, 2, 3, 5, 10, 20, 50, 100, 200, 300, 500)
+                                   if risk[a - 1] >= 200})
+    # Whether births hold steady, which the ages of a steady world assume: births per agent, stretch by stretch.
+    for worlds, key in ((W, "births_rate"), (other, "small_births_rate")):
+        if worlds is not None:
+            stretches = [(a, min(a + 249, worlds.last)) for a in range(0, worlds.until, 250)]
+            ch.number(key, {f"{a}-{b}": describe([F.mean_over(s.run_id, "births/nodes_before", a, b, 1)
+                                                   for s in worlds.alive]) for a, b in stretches})
+    b, d, c = settled_lives(W, kept.values())
+    S = survival(b, d, c, STATIONARY)
+    ch.number("survival", {"lives": int(b.size), **{f"at_least_{x}": float(S[x]) for x in (2, 5, 10, 50, 100, 500)}})
+    ch.number("stationary", stationary(S))
+    risk, h = hazard(b, d, c, 500)
+    ch.number("settled_hazard", {str(a): float(h[a - 1]) for a in (1, 2, 3, 5, 10, 20, 50, 100, 200, 300, 500)
+                                 if risk[a - 1] >= 200})

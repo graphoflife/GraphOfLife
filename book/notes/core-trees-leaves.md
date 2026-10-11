@@ -53,8 +53,10 @@ loop. Cutting a connection of a tree cuts off everything beyond it, and the
 cleanup then removes all of it. The share of a world that hangs in trees is
 the share that can be lost to a single cut.
 
-In a settled baseline world about 54% of agents are in the core, 36% are
-leaves and the rest in trees ([Chapter 17](../chapters/17-what-shape-does-the-network-take.md)).
+In a settled baseline world of 100,000 tokens about 57% of agents are in the
+core, 35% are leaves and the rest in trees; at 10,000 tokens, 54% and 36%
+([Chapter 17](../chapters/17-what-shape-does-the-network-take.md),
+[Chapter 25](../chapters/25-the-core-of-a-world.md)).
 
 ## How far a tree hangs
 

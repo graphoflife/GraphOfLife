@@ -3,142 +3,142 @@
  "numbers": {
   "by_tokens": {
    "1": {
-    "p_child": 0.004172585227272727,
+    "p_child": 0.00443447527835371,
     "median_share": 1.0,
     "q25": 1.0,
     "q75": 1.0,
     "mean_share": 1.0
    },
    "2": {
-    "p_child": 0.03787684765110493,
+    "p_child": 0.03094803429755022,
     "median_share": 0.5,
     "q25": 0.5,
     "q75": 0.5,
-    "mean_share": 0.5249939628109153
+    "mean_share": 0.5348708672495227
    },
    "3\u20134": {
-    "p_child": 0.02736317554233862,
+    "p_child": 0.028162630720340982,
     "median_share": 0.3333333333333333,
     "q25": 0.3333333333333333,
     "q75": 0.5,
-    "mean_share": 0.40299552656883647
+    "mean_share": 0.4202608907955774
    },
    "5\u20139": {
-    "p_child": 0.03511334680608031,
-    "median_share": 0.2857142857142857,
+    "p_child": 0.03943029779887786,
+    "median_share": 0.25,
     "q25": 0.16666666666666666,
     "q75": 0.42857142857142855,
-    "mean_share": 0.3288200495504217
+    "mean_share": 0.31425040858189934
    },
    "10\u201319": {
-    "p_child": 0.03889086682443611,
+    "p_child": 0.05166159621340038,
     "median_share": 0.2,
     "q25": 0.1,
-    "q75": 0.4666666666666667,
-    "mean_share": 0.287268068260831
+    "q75": 0.46153846153846156,
+    "mean_share": 0.27545757479891486
    },
    "20\u201349": {
-    "p_child": 0.05660886319845857,
-    "median_share": 0.25925925925925924,
-    "q25": 0.1,
-    "q75": 0.48717948717948717,
-    "mean_share": 0.305350568868591
+    "p_child": 0.0765394265970137,
+    "median_share": 0.2,
+    "q25": 0.09302325581395349,
+    "q75": 0.48,
+    "mean_share": 0.2700136857431016
    },
    "50\u201399": {
-    "p_child": 0.06531694384188962,
-    "median_share": 0.3,
-    "q25": 0.0941722972972973,
-    "q75": 0.5,
-    "mean_share": 0.3309003040804363
+    "p_child": 0.08384350766719141,
+    "median_share": 0.18708333333333332,
+    "q25": 0.08,
+    "q75": 0.49122807017543857,
+    "mean_share": 0.267348564366346
    },
    "100+": {
-    "p_child": 0.04324028461959496,
-    "median_share": 0.18452949605923097,
-    "q25": 0.07518939393939394,
-    "q75": 0.5,
-    "mean_share": 0.3034981930066696
+    "p_child": 0.0520403329498545,
+    "median_share": 0.17587939698492464,
+    "q25": 0.06607929515418502,
+    "q75": 0.4956521739130435,
+    "mean_share": 0.2658380140196841
    }
   },
   "founders": {
-   "p_child": 0.747
+   "p_child": 0.7469333333333333
   },
   "links": {
    "share": {
-    "0": 0.11440662507752362,
-    "1": 0.056108861406004885,
-    "2": 0.21206814782386632,
-    "3": 0.17981832111196236,
-    "4": 0.12578891685819563,
-    "5+": 0.3118091277224472
+    "0": 0.11483820561234455,
+    "1": 0.05495800507845563,
+    "2": 0.19358031121817826,
+    "3": 0.16433361546975714,
+    "4": 0.118080604206003,
+    "5+": 0.3542092584152614
    },
-   "mean": 4.563642333369815,
+   "mean": 5.063396054430627,
    "handed": {
-    "0": 0.6547736310240414,
-    "1": 0.13848454999817592,
-    "2": 0.08901535879756302,
-    "3+": 0.11772646018021962
+    "0": 0.7472882349111271,
+    "1": 0.1071879679666645,
+    "2": 0.061579529917312324,
+    "3+": 0.08394426720489616
    },
-   "handed_mean": 0.9355733099850425
+   "handed_mean": 0.7445601927208803
   },
   "by_degree": {
-   "1": 0.020534879850469204,
-   "2": 0.02794057794057794,
-   "3\u20134": 0.03944232602478551,
-   "5\u20139": 0.05517090936681968,
-   "10\u201349": 0.07793097287156428,
-   "50+": 0.08581818181818182
+   "1": 0.021484313235284467,
+   "2": 0.028752521457105565,
+   "3\u20134": 0.03954813122395725,
+   "5\u20139": 0.05890519295554764,
+   "10\u201349": 0.08900809860502759,
+   "50+": 0.1054172767203514
   },
   "meanInvestedShare_settled": {
-   "n": 26,
-   "mean": 0.3572886454443679,
-   "median": 0.36972227912950184,
-   "sd": 0.038004311225923654,
-   "min": 0.2561250672318787,
-   "max": 0.4118506044095796,
-   "q25": 0.33155182379668224,
-   "q75": 0.3819053820732353
+   "n": 30,
+   "mean": 0.3604339602159368,
+   "median": 0.3640548475166963,
+   "sd": 0.029924932226924952,
+   "min": 0.28451131313442185,
+   "max": 0.40321212336103507,
+   "q25": 0.3439946793410794,
+   "q75": 0.38370640686980156
   },
   "reproTokenShare_settled": {
-   "n": 26,
-   "mean": 0.011761363076923078,
-   "median": 0.01113472,
-   "sd": 0.002986278655213232,
-   "min": 0.0073700400000000004,
-   "max": 0.019375559999999997,
-   "q25": 0.00987067,
-   "q75": 0.01337723
+   "n": 30,
+   "mean": 0.013391928666666667,
+   "median": 0.013435989999999998,
+   "sd": 0.0029413027840804727,
+   "min": 0.00872201,
+   "max": 0.02059892,
+   "q25": 0.011095049999999999,
+   "q75": 0.014512515
   },
   "meanChildLinks_settled": {
-   "n": 26,
-   "mean": 4.291476161481253,
-   "median": 4.224457968637963,
-   "sd": 0.9657390346342473,
-   "min": 2.6290667057400308,
-   "max": 5.784394692589478,
-   "q25": 3.5868503424822538,
-   "q75": 5.193809010036916
+   "n": 30,
+   "mean": 5.03375285293446,
+   "median": 4.80362951101888,
+   "sd": 1.2273330895828298,
+   "min": 3.0516650212628518,
+   "max": 8.296654792880588,
+   "q25": 4.377157667273996,
+   "q75": 5.718739923507482
   }
  },
  "figures": {
   "by-tokens": {
    "title": "Children, by the wealth of the parent",
-   "caption": "Agents alive at the start of the reproduction phases of every 100th iteration from 500 on, in the 26 worlds that lived to the end, sorted by the tokens they held. Left: the share of them that had a child. Right: for those that did, the share of their tokens they gave it \u2014 the white dot is the median, the cyan bar runs from the 25th to the 75th percentile.",
-   "recipe": "**Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` \u2026 `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in Chapter 9). They are made with `python3 gol_lab.py run E02`.\n\n**Data.** From each run's frames, read every 25 iterations by `book_figures.sample_pass` (frame `2\u00b7t` after the reproduction phase of iteration *t*, frame `2\u00b7t + 1` after its game; `gol_store.read_frame(run, index)`).\n\n1. For every 100th iteration t from 500 on, take the agents of frame `2\u00b7t \u2212 1` (after the game before) with their `tokens`.\n2. In frame `2\u00b7t`, `decisions.births` lists every parent (`agent`) with `tokens_before` and `invested`, the tokens its child got.\n3. Per class of tokens: the share of agents that are parents, and the quantiles of `invested` / `tokens_before` over the parents.\n\n**To make it again:** `python3 book_figures.py children`."
+   "caption": "Agents alive at the start of the reproduction phases of every 100th iteration from 500 on, in the 30 worlds, sorted by the tokens they held. Left: the share of them that had a child. Right: for those that did, the share of their tokens they gave it \u2014 the white dot is the median, the cyan bar runs from the 25th to the 75th percentile.",
+   "recipe": "**Runs.** The 30 baseline runs `B1-100000-s001` \u2026 `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in Chapter 9). They are made with `python3 gol_lab.py run E10`.\n\n**Data.** From each run's frames, read every 25 iterations by `book_figures.sample_pass` (frame `2\u00b7t` after the reproduction phase of iteration *t*, frame `2\u00b7t + 1` after its game; `gol_store.read_frame(run, index)`).\n\n1. For every 100th iteration t from 500 on, take the agents of frame `2\u00b7t \u2212 1` (after the game before) with their `tokens`.\n2. In frame `2\u00b7t`, `decisions.births` lists every parent (`agent`) with `tokens_before` and `invested`, the tokens its child got.\n3. Per class of tokens: the share of agents that are parents, and the quantiles of `invested` / `tokens_before` over the parents.\n\n**To make it again:** `python3 book_figures.py children`."
   },
   "links": {
    "title": "How a child is joined to the world",
-   "caption": "Every birth in the reproduction phases of every 100th iteration from 500 on, in the 26 worlds that lived to the end. Left: how many of its parent's candidates \u2014 the parent itself and its neighbours \u2014 the child was joined to at birth. Right: how many of its own connections the parent handed to the child. A child with no connection at all is cut off at once.",
-   "recipe": "**Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` \u2026 `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in Chapter 9). They are made with `python3 gol_lab.py run E02`.\n\n**Data.** From each run's frames, read every 25 iterations by `book_figures.sample_pass` (frame `2\u00b7t` after the reproduction phase of iteration *t*, frame `2\u00b7t + 1` after its game; `gol_store.read_frame(run, index)`).\n\n1. In frame `2\u00b7t` of every 100th iteration t from 500 on, read `decisions.births`: the length of `links` and of `handed_over` for every birth.\n2. Count the births by these lengths and divide by all births.\n\n**To make it again:** `python3 book_figures.py children`."
+   "caption": "Every birth in the reproduction phases of every 100th iteration from 500 on, in the 30 worlds. Left: how many of its parent's candidates \u2014 the parent itself and its neighbours \u2014 the child was joined to at birth. Right: how many of its own connections the parent handed to the child. A child with no connection at all is cut off at once.",
+   "recipe": "**Runs.** The 30 baseline runs `B1-100000-s001` \u2026 `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in Chapter 9). They are made with `python3 gol_lab.py run E10`.\n\n**Data.** From each run's frames, read every 25 iterations by `book_figures.sample_pass` (frame `2\u00b7t` after the reproduction phase of iteration *t*, frame `2\u00b7t + 1` after its game; `gol_store.read_frame(run, index)`).\n\n1. In frame `2\u00b7t` of every 100th iteration t from 500 on, read `decisions.births`: the length of `links` and of `handed_over` for every birth.\n2. Count the births by these lengths and divide by all births.\n\n**To make it again:** `python3 book_figures.py children`."
   },
   "by-degree": {
    "title": "Who has a child, by connections",
    "caption": "As the left panel of the figure above, with the agents sorted by their number of connections at the start of the reproduction phase instead of their tokens.",
-   "recipe": "**Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` \u2026 `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in Chapter 9). They are made with `python3 gol_lab.py run E02`.\n\n**Data.** From each run's frames, read every 25 iterations by `book_figures.sample_pass` (frame `2\u00b7t` after the reproduction phase of iteration *t*, frame `2\u00b7t + 1` after its game; `gol_store.read_frame(run, index)`).\n\n1. As for the figure above, counting each agent's connections in frame `2\u00b7t \u2212 1`.\n\n**To make it again:** `python3 book_figures.py children`."
+   "recipe": "**Runs.** The 30 baseline runs `B1-100000-s001` \u2026 `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in Chapter 9). They are made with `python3 gol_lab.py run E10`.\n\n**Data.** From each run's frames, read every 25 iterations by `book_figures.sample_pass` (frame `2\u00b7t` after the reproduction phase of iteration *t*, frame `2\u00b7t + 1` after its game; `gol_store.read_frame(run, index)`).\n\n1. As for the figure above, counting each agent's connections in frame `2\u00b7t \u2212 1`.\n\n**To make it again:** `python3 book_figures.py children`."
   },
   "over-time": {
    "title": "Reproduction over a world's life",
    "caption": "After every reproduction phase of the 30 baseline worlds ([Reproduction statistics](../notes/reproduction-statistics.md)): the mean share of its tokens a parent gave its child (`meanInvestedShare`); the tokens given to all children as a share of all tokens (`reproTokenShare`); the mean number of connections a child was born with (`meanChildLinks`); and the connections handed over per birth (`handovers` / `births`). The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).",
-   "recipe": "**Runs.** The 30 baseline runs `B1-10000-s001` \u2026 `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in Chapter 9). They are made with `python3 gol_lab.py run E02`.\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).\n\n1. Take the rows with `phase` = 1: `meanInvestedShare`, `reproTokenShare`, `meanChildLinks`, and `handovers` divided by `births`.\n2. Cut the 3,000 iterations into 600 stretches of 5 and take each world's mean in each stretch.\n3. In each stretch, take the median, the 25th and 75th and the 5th and 95th percentiles of those means over the worlds that still have a value there (a world that died has none after its death).\n\n**To make it again:** `python3 book_figures.py children`."
+   "recipe": "**Runs.** The 30 baseline runs `B1-100000-s001` \u2026 `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in Chapter 9). They are made with `python3 gol_lab.py run E10`.\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).\n\n1. Take the rows with `phase` = 1: `meanInvestedShare`, `reproTokenShare`, `meanChildLinks`, and `handovers` divided by `births`.\n2. Cut the 1,500 iterations into 600 stretches of 2.5 and take each world's mean in each stretch.\n3. In each stretch, take the median, the 25th and 75th and the 5th and 95th percentiles of those means over the worlds that still have a value there (a world that died has none after its death).\n\n**To make it again:** `python3 book_figures.py children`."
   }
  }
 }

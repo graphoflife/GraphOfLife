@@ -27,8 +27,9 @@ genotype is carried by about one agent; in the other, one genotype is carried
 by half the world and the rest by one agent each. The **effective number of
 genotypes**, 2^H with *H* the entropy of the genotypes' shares, weighs the
 common ones more ([Entropy and evenness](entropy-and-evenness.md)). In a
-settled baseline world it is about 0.49 per agent, against 0.63 distinct
-genotypes per agent ([Chapter 27](../chapters/27-how-even-is-a-world.md)).
+settled baseline world it is about 0.45 per agent at 100,000 tokens (0.49 at
+10,000), against 0.63 distinct genotypes per agent at both sizes
+([Chapter 27](../chapters/27-how-even-is-a-world.md)).
 
 ## A caution about names
 

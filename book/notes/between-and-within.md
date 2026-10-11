@@ -36,10 +36,11 @@ The **share between** is *B* / (*B* + *W*).
 - Close to 0: every world covers much the same range over time. The seed
   tells you little.
 
-In the baseline the share between is between a tenth and a quarter for every
-statistic looked at — 17% for the number of agents
-([Chapter 14](../chapters/14-how-much-does-the-seed-decide.md)). So most of
-the variation is time, not seed.
+In the baseline worlds of 100,000 tokens the share between is a fifth to a
+quarter for most statistics — 21% for the number of agents — and half for
+the share of agents in the core; at 10,000 tokens, a tenth to a quarter, 17%
+for the number of agents ([Chapter 14](../chapters/14-how-much-does-the-seed-decide.md)).
+So most of the variation is time, not seed.
 
 ## A caution
 

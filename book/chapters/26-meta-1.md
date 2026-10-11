@@ -3,129 +3,148 @@
 Part II looked at thirty baseline worlds from every side. This chapter puts
 the pieces together: what the theses predicted, what was found instead, what
 seems to hold across the chapters, and what that changed in how the book
-measures. It was first written after Experiments 1 to 5 and is brought up to
-date here, with everything Part II found — last with its six chapters on the
-brains, the messages, mobility, growth, likeness and dimension
-(Chapters 19 to 24).
+measures. It was first written after Experiments 1 to 5, on worlds of 10,000
+tokens, and brought up to date as Part II grew. In this second edition Part II
+reads thirty worlds of 100,000 tokens ([Chapter 9](09-thirty-worlds.md)), and
+two of its chapters are new: how ages change over a world's life
+([Chapter 13](13-how-ages-change.md)) and the core of a world
+([Chapter 25](25-the-core-of-a-world.md)).
 
 > [!question] Questions of this chapter
 > - What is a settled baseline world, in numbers?
 > - What do the chapters of Part II, taken together, suggest about how it
 >   works?
+> - What changes when a world is ten times larger, and what does not?
 > - What do the experiments still need — and in what order?
 
 ## The record
+
+Each thesis was written before the runs of 10,000 tokens and tested on them;
+the second edition tests it again on the worlds of 100,000.
 
 - [Chapter 8](08-is-a-run-reproducible.md) — *Is a run reproducible?* —
   thesis **refuted**, but only by the number of threads of the matrix
   library, in the last bits. Every run now uses one thread, and is then
   exactly reproducible.
-- [Chapter 10](10-a-worlds-life.md) — *A world's life* — thesis **refuted**.
-  A youth of a hundred iterations, then a long wander; births fall by 41%;
-  4 of 30 worlds die.
+- [Chapter 10](10-a-worlds-life.md) — *A world's life* — thesis **refuted**
+  at both sizes. At 10,000 tokens births fell by 41% and 4 of 30 worlds died;
+  at 100,000 none died, the typical world held its size, and only the fall of
+  births (28%) broke the thesis.
 - [Chapter 14](14-how-much-does-the-seed-decide.md) — *How much does the seed
-  decide?* — thesis **refuted, narrowly**. Little: worlds differ mostly
-  because each one wanders, not because of their seeds.
+  decide?* — thesis **refuted, narrowly**, at both sizes. Little: worlds
+  differ mostly because each one wanders, not because of their seeds.
 - [Chapter 15](15-where-do-the-tokens-go.md) — *Where do the tokens go?* —
-  thesis **refuted**. Inequality is moderate (a Gini near 0.5) and steady,
-  and agents stake 70% of their tokens on their neighbours.
+  thesis **refuted** at both sizes. Inequality is moderate (a Gini just under
+  0.5) and steady, and agents stake 70% of their tokens on their neighbours.
 - [Chapter 17](17-what-shape-does-the-network-take.md) — *What shape does the
-  network take?* — thesis **refuted, narrowly**. Half tree, half web.
+  network take?* — thesis **refuted**, narrowly at 10,000 tokens (a core of
+  53%), more clearly at 100,000 (57%). Part tree, part web.
 - [Chapter 18](18-genotypes-and-lineages.md) — *Genotypes and lineages* —
-  thesis **refuted**. Genotypes last two iterations; lines take the world
-  over, again and again.
+  thesis **refuted** at both sizes. Genotypes last two iterations; lines take
+  the world over — again and again in a small world, about once a run in a
+  large one.
 
-Six of six theses failed, two of them narrowly. That is what a thesis
-written before its runs is for: each failure is something about the world
-that was not known before.
+Six of six theses failed, and none of the failures changed with the size of
+the world. That is what a thesis written before its runs is for: each failure
+is something about the world that was not known before.
 
 ## The baseline world in numbers
 
-A settled baseline world of 10,000 tokens — each number the median over the
-26 worlds that lived to the end of each world's mean over iterations 500 to
-2,999:
+A settled baseline world of 100,000 tokens — each number the median over the
+thirty worlds of each world's mean over iterations 500 to 1,499, with the
+worlds of 10,000 tokens in brackets where they differ:
 
-- **about 1,300 agents** with **3.3 connections** each
+- **about 14,400 agents** (1,300) with **3.5 connections** each (3.3)
   ([Chapter 10](10-a-worlds-life.md), [Chapter 17](17-what-shape-does-the-network-take.md));
-- **3.1 births** per hundred agents per iteration, and as many deaths, three
-  in four of them agents cut off from the network
+- **3.5 births** per hundred agents per iteration (3.1), and as many deaths,
+  three in four of them agents cut off from the network
   ([Chapter 12](12-births-deaths-and-ages.md));
-- a **Gini coefficient** of wealth near **0.5**, the richest tenth holding
-  **44%** ([Chapter 15](15-where-do-the-tokens-go.md));
-- **45%** of agents keep their node in a game; **half** of all nodes are won
-  by coalitions ([Chapter 16](16-how-the-game-is-played.md));
-- **31%** of connections bridges, **36%** of agents leaves, **54%** in a core
-  of loops, **10 steps** from one agent to another
+- ages that **settle by iteration 500**: 2.4% of the living are newborns, half
+  are younger than 55 iterations, and the risk of dying falls with age to
+  about one game in a hundred, with no ageing; the ages of the living follow
+  from the lifetimes as in a stationary population
+  ([Chapter 13](13-how-ages-change.md));
+- a **Gini coefficient** of wealth of **0.47** (0.49), the richest tenth
+  holding **42%** (44%) ([Chapter 15](15-where-do-the-tokens-go.md));
+- **44%** of agents keep their node in a game (45%); **half** of all nodes are
+  won by coalitions ([Chapter 16](16-how-the-game-is-played.md));
+- **26%** of connections bridges (31%), **35%** of agents leaves (36%), **57%**
+  in a core of loops (54%), **18 steps** from one agent to another (10)
   ([Chapter 17](17-what-shape-does-the-network-take.md));
 - a genotype for every **1.6 agents**, each lasting a couple of iterations;
-  lines that take the whole world over, about **every 350 iterations**
-  ([Chapter 18](18-genotypes-and-lineages.md));
+  lines that take a whole world over in about a thousand iterations (175 at
+  10,000 tokens) ([Chapter 18](18-genotypes-and-lineages.md));
 - brains with a **gain of 0.0015**: a change in what a brain sees reaches
   what it does at a seven-hundredth of its size. Selection has set their
-  constants alike in every world — a child in 2.6% of cases, the stake
-  spread in 98% — and in the median world 58% of agents score every
+  constants alike in every world — a child in 3.6% of cases, the stake
+  spread in 98% — and in the median world 42% of agents score every
   candidate at zero or below, so the rules split their tokens evenly
   ([Chapter 19](19-what-the-brains-are-like.md));
 - messages that are **names**: one agent's messages to two readers differ
-  by 0.0005, two agents' by 0.55, and agents of one genotype write the same
+  by 0.0005, two agents' by 0.6, and agents of one genotype write the same
   ([Chapter 20](20-what-agents-say-to-each-other.md));
 - an order of wealth that is **half forgotten in fifty games**, and rich
   agents with one connection that die three times as often as other leaves
   ([Chapter 21](21-do-the-rich-stay-rich.md));
 - connections gained in proportion to the connections an agent has
-  (k^0.94) and lost slightly faster (k^1.11), and **no new connection ever
+  (k^1.02) and lost faster (k^1.20), and **no new connection ever
   bringing two agents closer** ([Chapter 22](22-how-the-network-grows.md));
-- likeness that fades within **two steps** — tokens, age, connections and
-  kin alike ([Chapter 23](23-like-next-to-like.md));
-- a **finite dimension**: about 3 by the room within *r* steps (3.3 in
-  worlds of 60,000 agents), about 2 by how a walker spreads, where random
-  networks with the same connections have none
-  ([Chapter 24](24-how-many-dimensions-does-a-world-have.md)).
+- likeness that fades within **two or three steps** — tokens, age,
+  connections and kin alike ([Chapter 23](23-like-next-to-like.md));
+- a **finite dimension**: 2.8 by the room within *r* steps (2.3 at 10,000
+  tokens, 3.3 in worlds of 60,000 agents), about 1.9 by how a walker spreads,
+  where random networks with the same connections have none
+  ([Chapter 24](24-how-many-dimensions-does-a-world-have.md));
+- a **core** of three agents in five, holding three quarters of the tokens
+  and every loop, a little lower in dimension by balls than the whole world
+  (2.5) and the same by walks ([Chapter 25](25-the-core-of-a-world.md)).
 
 ## What seems to hold across the chapters
 
 ### One slow wander, in everything
 
 [Chapter 14](14-how-much-does-the-seed-decide.md) measured how long a world
-remembers its level, statistic by statistic. They all forget at much the same
+remembers its level, statistic by statistic. They forget at much the same
 pace: a hundred iterations later, a world's level is still clearly alike
-(correlations of 0.64 to 0.72 for the number of agents, connections,
-inequality, leaves, genotypes, families, bridges, clustering and the core);
-three hundred later, little is left (0.12 to 0.31); five hundred later,
-nothing. Size, wealth and shape do not seem to wander each on its own
-schedule; they look like one slow process seen through many windows.
+(correlations of 0.52 to 0.69 for the number of agents, connections,
+inequality, families and the core; 0.36 for births); three hundred later,
+nothing is left (−0.06 to 0.08). Size, wealth and shape do not seem to wander
+each on its own schedule; they look like one slow process seen through many
+windows.
 
-[Chapter 18](18-genotypes-and-lineages.md), from the same runs, found a
-process with about that rhythm: every 350 iterations or so, one branch of the
-family tree outlives all the others and the whole world descends from it. A
-sweep replaces the brains of a whole world, and with them how it plays.
-
-> [!question] An open question
-> Is the wander the sweeps? Two tests would tell: whether a world's level
-> moves faster around a sweep than between sweeps, and whether a world whose
-> brains never change still wanders. [Chapter 41](41-do-the-brains-matter.md)
-> did the second: a world without change hardly wanders at all.
+In the worlds of 10,000 tokens, [Chapter 18](18-genotypes-and-lineages.md)
+found a process with about that rhythm: every 350 iterations or so, one
+branch of the family tree outlived all the others and the whole world
+descended from it, and the book asked whether the wander was the sweeps. The
+large worlds answer no. They forget their level within three hundred
+iterations, as the small ones do, but a line needs about a thousand to take
+one over ([Chapter 55](55-worlds-of-100000-tokens.md)): the wander is faster
+than the sweeps, and so not made by them. [Chapter 41](41-do-the-brains-matter.md)
+found the other half of the answer: a world whose brains never change hardly
+wanders at all.
 
 ### A world of attack
 
-Agents put only 30% of their staked tokens on their own node
-([Chapter 15](15-where-do-the-tokens-go.md)), more than half of all nodes
+Agents put only 29% of their staked tokens on their own node
+([Chapter 16](16-how-the-game-is-played.md)), more than half of all nodes
 change hands in every game, and coalitions of smaller stakers take half of
-all nodes ([Chapter 16](16-how-the-game-is-played.md)). Over the first five
-hundred iterations, the share of agents that keep their node rose, while the
-share of tokens they put at home barely moved. Defence got better without
-agents staking more on their own node; what changed instead is not yet known.
+all nodes. Over the first five hundred iterations, the share of agents that
+keep their node rose, while the share of tokens they put at home barely
+moved. Defence got better without agents staking more on their own node;
+what changed instead is not yet known.
 
-### A world that ages
+### A turnover that settles late
 
-Births fell by 41% between iterations 100–200 and the last two hundred, and
-the median age of the living rose from 26 iterations to 80
-([Chapter 12](12-births-deaths-and-ages.md)). The baseline is still changing
-at iteration 3,000. That could be a world slowly settling towards something,
-or a trend — brains that have fewer children, or children that last — and a
-lasting trend is what the second rung of the ladder in
-[Chapter 1](01-what-this-book-is-about.md) looks for: adaptation that
-accumulates.
+Births fall long after a world's size has settled — by 28% from iterations
+100–200 to the end in a large world, by 41% in a small one — and with them
+the ages of the living rise. But in a large world the change is over by
+iteration 500: from then on its births per agent, its lifetimes and its ages
+hold still, as a stationary population's do
+([Chapter 13](13-how-ages-change.md)). The small worlds went on slowing until
+about iteration 1,250, and their living grew older than their lifetimes
+alone would make them. Neither is the lasting trend that the second rung of
+the ladder in [Chapter 1](01-what-this-book-is-about.md) looks for —
+adaptation that accumulates. The demography of a world is finished early.
 
 ### Brains that cannot see
 
@@ -157,12 +176,28 @@ the world.
 New connections are only ever made inside a neighbourhood, and none brings
 two agents closer ([Chapter 22](22-how-the-network-grows.md)). So a world
 grows as a body does. It has a finite dimension
-([Chapter 24](24-how-many-dimensions-does-a-world-have.md)), and its width
-grows with its size ([Chapter 42](42-how-does-a-worlds-size-follow-its-tokens.md)),
+([Chapter 24](24-how-many-dimensions-does-a-world-have.md)), its core is a
+space of the same kind ([Chapter 25](25-the-core-of-a-world.md)), and its
+width grows with its size ([Chapter 42](42-how-does-a-worlds-size-follow-its-tokens.md)),
 where a random network of the same connections would be a small world. Yet
-nothing in the space keeps regions apart: likeness fades within two steps
-([Chapter 23](23-like-next-to-like.md)). A world has the room for regions
-that differ, and nothing to make them.
+nothing in the space keeps regions apart: likeness fades within two or three
+steps ([Chapter 23](23-like-next-to-like.md)). A world has the room for
+regions that differ, and nothing to make them.
+
+### Stars
+
+Seven of the thirty large worlds condensed, for long stretches, around a
+single agent joined to a tenth of the world or more — in one, to more than
+half ([Chapter 14](14-how-much-does-the-seed-decide.md)). Such a world plays
+its game differently ([Chapter 16](16-how-the-game-is-played.md)) and has a
+different shape: fewer agents in the core, far more leaves and bridges
+([Chapter 17](17-what-shape-does-the-network-take.md)).
+[Chapter 33](33-the-largest-and-the-smallest.md) shows that the centre of a
+star is a place, handed down from parent to newborn child. Stars are not new
+with size — ten of the 26 worlds of 10,000 tokens had one by the same
+measure — but in a large world a star decides the world's whole shape: across
+the thirty, the share of agents in the core follows the share joined to the
+largest hub almost exactly ([Chapter 14](14-how-much-does-the-seed-decide.md)).
 
 ## What this changed in the method
 
@@ -170,28 +205,36 @@ that differ, and nothing to make them.
   iteration 500 on, the settled life of a run ([The settled life](../notes/settled-life.md)).
 - **Long stretches, not the last fifth.** A run's mean over its settled life
   varies across seeds by much less than its last fifth does — for the number
-  of agents 0.17 of the mean instead of 0.25 — so it needs fewer than half the
-  seeds ([How many seeds](../notes/seeds-needed.md)).
+  of agents 0.10 of the mean instead of 0.17 at 100,000 tokens, 0.17 instead
+  of 0.25 at 10,000 — so it needs fewer than half the seeds
+  ([How many seeds](../notes/seeds-needed.md)).
 - **Thirty seeds see changes of about a tenth.** Over the settled life,
-  thirty seeds per condition can see a change of 12% in the number of agents,
-  14% in connections and 5% in inequality, four times in five. Smaller effects
-  are reported as not seen, not as absent.
-- **The dead are counted apart.** About one world in eight dies at this
-  size — falls, that is, to 20 agents, which [Chapter 42](42-how-does-a-worlds-size-follow-its-tokens.md)
-  later found is not always the end. Extinction is reported for every condition; only a large change in it
-  — from 13% to 30% would take about ninety seeds per condition — can be seen
+  thirty seeds per condition can see a change of 8% in the number of agents,
+  9% in connections and 5% in inequality at 100,000 tokens, four times in
+  five (12%, 14% and 5% at 10,000). Smaller effects are reported as not seen,
+  not as absent.
+- **The dead are counted apart.** About one world in eight dies at 10,000
+  tokens — falls, that is, to 20 agents, which [Chapter 42](42-how-does-a-worlds-size-follow-its-tokens.md)
+  later found is not always the end; none of thirty did at 100,000.
+  Extinction is reported for every condition; only a large change in it —
+  from 13% to 30% would take about ninety seeds per condition — can be seen
   ([When a world ends](../notes/extinction.md)).
 - **Pairing by seed helps little.** Two conditions with the same seed share
   their starting ring and little else.
 - **Lines, not genotypes.** A genotype lasts two iterations; what lasts,
   spreads and takes over is a line, and the chapters to come follow lines.
+- **Size is a setting like any other.** The per-agent numbers of a world
+  hardly change from 10,000 tokens to 100,000; its shape, its distances, its
+  extremes and the pace of its lines do ([Chapter 55](55-worlds-of-100000-tokens.md)).
+  A finding at one size is checked at another before it is trusted.
 
 ## What came next
 
 Part III then measured the same thirty worlds through every statistic the
-viewer offers — entropy, gains and losses, the flow of tokens, children, power
-laws, scaling, geometry, how worlds break, pictures, cooperation — and closed
-with a chapter questioning the rules themselves and a second meta chapter,
+viewer offers — entropy, gains and losses, the flow of tokens, what crosses
+a connection, children, power laws, the largest and the smallest, scaling,
+geometry, how worlds break, pictures, cooperation — and closed with a chapter
+questioning the rules themselves and a second meta chapter,
 [Meta II](40-meta-2.md), on what all of it means for open-ended evolution.
 
 Every number of Part II is a number about the baseline, with nothing to hold
@@ -206,8 +249,10 @@ planned after them — the rate of mutation, coalitions switched off, the size
 of a brain — are listed in [the contents](../README.md). After
 [Chapter 19](19-what-the-brains-are-like.md), the size and shape of a brain
 moves up: a brain that cannot see is the first thing to change.
-[Chapter 55](55-worlds-of-100000-tokens.md) prepares a second baseline of
-thirty worlds of 100,000 tokens, for the questions that need room.
+[Chapter 55](55-worlds-of-100000-tokens.md) made the thirty worlds of 100,000
+tokens this edition of Parts II and III is written from, and asked of them
+the question they were made for: how a line takes over a world ten times the
+size.
 
 <!-- turns -->
 ---

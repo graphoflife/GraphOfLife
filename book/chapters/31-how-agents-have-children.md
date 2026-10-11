@@ -13,18 +13,22 @@ births do for the world besides adding agents.
 > - How is a child joined to the world, and how often is it born cut off?
 > - What would the world look like without births?
 
-<!-- runs E02 -->
+The worlds are the thirty of 100,000 tokens of [Chapter 9](09-thirty-worlds.md);
+where the thirty of 10,000 tokens this chapter was first written from differ,
+both are given.
+
+<!-- runs E10 -->
 > [!info] The runs behind this chapter
-> **30 runs.** Every condition below is run once for every seed (1 to 30), for 3,000 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
+> **30 runs.** Every condition below is run once for every seed (1 to 30), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
 >
-> - **baseline** — changes nothing: B1 as it is; 10,000 tokens. Runs `B1-10000-s001` … `B1-10000-s030`.
+> - **baseline** — changes nothing: B1 as it is; 100,000 tokens. Runs `B1-100000-s001` … `B1-100000-s030`.
 >
-> To make these runs again: `python3 gol_lab.py run E02`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | baseline | what it is |
 > |---|---|---|
-> | [`total_tokens`](../notes/settings.md#total_tokens) | 10,000 | The number of tokens in the world, *T*. It never changes during a run. |
+> | [`total_tokens`](../notes/settings.md#total_tokens) | 100,000 | The number of tokens in the world, *T*. It never changes during a run. |
 > | [`n_nodes`](../notes/settings.md#n_nodes) | 0 | How many founders the world starts with. 0 means one founder per hundred tokens: *n* = ⌊*T* / 100⌋. |
 > | [`k_neighbors`](../notes/settings.md#k_neighbors) | 0 | How many neighbours each founder starts with in the ring. 0 means *k* = max(⌊*n* / 100⌋, 5); an odd *k* is wired as *k* − 1. |
 > | [`rewire_p`](../notes/settings.md#rewire_p) | 0.2 | In the starting ring, the probability that a connection is moved to a founder chosen at random (Watts–Strogatz). |
@@ -48,7 +52,7 @@ births do for the world besides adding agents.
 > | [`mutation_sparsity`](../notes/settings.md#mutation_sparsity) | 0.1 | The share of a brain's numbers a change touches; also the probability, for each weight matrix and bias vector, of a rarer reset that redraws that share of it. |
 > | [`extinction_threshold`](../notes/settings.md#extinction_threshold) | 20 | A run stops, as extinct, when an iteration ends (after its game) with this many agents or fewer. |
 > | seeds | 1 to 30 | one run per seed |
-> | iterations | 3,000 | how far each run goes, unless its world dies first |
+> | iterations | 1,500 | how far each run goes, unless its world dies first |
 >
 > A value in **bold** differs from the baseline B1.
 <!-- /runs -->
@@ -85,10 +89,10 @@ Two consequences follow from the arithmetic alone, before any data:
 <!-- figure children/by-tokens -->
 ![Children, by the wealth of the parent](../figures/children/by-tokens.svg)
 
-**Children, by the wealth of the parent.** Agents alive at the start of the reproduction phases of every 100th iteration from 500 on, in the 26 worlds that lived to the end, sorted by the tokens they held. Left: the share of them that had a child. Right: for those that did, the share of their tokens they gave it — the white dot is the median, the cyan bar runs from the 25th to the 75th percentile.
+**Children, by the wealth of the parent.** Agents alive at the start of the reproduction phases of every 100th iteration from 500 on, in the 30 worlds, sorted by the tokens they held. Left: the share of them that had a child. Right: for those that did, the share of their tokens they gave it — the white dot is the median, the cyan bar runs from the 25th to the 75th percentile.
 
 > [!example]- How to make this figure
-> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames, read every 25 iterations by `book_figures.sample_pass` (frame `2·t` after the reproduction phase of iteration *t*, frame `2·t + 1` after its game; `gol_store.read_frame(run, index)`).
 >
@@ -104,17 +108,19 @@ In a settled world, only a few agents in a hundred do in any one phase:
 
 | tokens | 1 | 2 | 3–4 | 5–9 | 10–19 | 20–49 | 50–99 | 100+ |
 |---|---|---|---|---|---|---|---|---|
-| had a child | 0.4% | 3.8% | 2.7% | 3.5% | 3.9% | 5.7% | 6.5% | 4.3% |
-| median share given | 1 | ½ | ⅓ | 0.29 | 0.2 | 0.26 | 0.3 | 0.18 |
+| had a child | 0.4% | 3.1% | 2.8% | 3.9% | 5.2% | 7.7% | 8.4% | 5.2% |
+| median share given | 1 | ½ | ⅓ | ¼ | 0.2 | 0.2 | 0.19 | 0.18 |
 
 The 1-token parents all give their only token — and starve for it. The
 2-token parents mostly give half. From 3 tokens on, the median share falls to
-a third, then to a fifth to a quarter for the richer; but the spread is wide
-(the bars run up to ½ in every class from 20 tokens on). The mean over all
-parents is 37% of what they hold.
+a third, then to a quarter and a fifth for the richer; but the spread is wide
+(the bars run up to ½ in every class from 10 tokens on). The mean over all
+parents is 36% of what they hold. All of this is much as at 10,000 tokens,
+where the rich were a little less likely to have a child (6.5% at 50 to 99
+tokens).
 
-Wealth helps a little: an agent with 50 to 99 tokens is more than twice as
-likely to have a child as one with 3 or 4. Connections help more:
+Wealth helps: an agent with 50 to 99 tokens is three times as likely to have
+a child as one with 3 or 4. Connections help more:
 
 <!-- figure children/by-degree -->
 ![Who has a child, by connections](../figures/children/by-degree.svg)
@@ -122,7 +128,7 @@ likely to have a child as one with 3 or 4. Connections help more:
 **Who has a child, by connections.** As the left panel of the figure above, with the agents sorted by their number of connections at the start of the reproduction phase instead of their tokens.
 
 > [!example]- How to make this figure
-> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames, read every 25 iterations by `book_figures.sample_pass` (frame `2·t` after the reproduction phase of iteration *t*, frame `2·t + 1` after its game; `gol_store.read_frame(run, index)`).
 >
@@ -131,8 +137,8 @@ likely to have a child as one with 3 or 4. Connections help more:
 > **To make it again:** `python3 book_figures.py children`.
 <!-- /figure -->
 
-From 2.1% of agents with one connection to 8.6% of agents with fifty or more,
-a fourfold rise. Part of this is wealth — well-connected agents are richer
+From 2.1% of agents with one connection to 10.5% of agents with fifty or
+more, a fivefold rise (fourfold at 10,000 tokens). Part of this is wealth — well-connected agents are richer
 ([Chapter 29](29-where-the-tokens-flow.md)) — and part is an effect of the
 rules themselves: the child-share outputs are **averaged** over all of an
 agent's candidates, so the decision of an agent with many neighbours is an
@@ -144,10 +150,10 @@ value. [Chapter 39](39-questioning-the-mechanics.md) comes back to it.
 <!-- figure children/links -->
 ![How a child is joined to the world](../figures/children/links.svg)
 
-**How a child is joined to the world.** Every birth in the reproduction phases of every 100th iteration from 500 on, in the 26 worlds that lived to the end. Left: how many of its parent's candidates — the parent itself and its neighbours — the child was joined to at birth. Right: how many of its own connections the parent handed to the child. A child with no connection at all is cut off at once.
+**How a child is joined to the world.** Every birth in the reproduction phases of every 100th iteration from 500 on, in the 30 worlds. Left: how many of its parent's candidates — the parent itself and its neighbours — the child was joined to at birth. Right: how many of its own connections the parent handed to the child. A child with no connection at all is cut off at once.
 
 > [!example]- How to make this figure
-> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames, read every 25 iterations by `book_figures.sample_pass` (frame `2·t` after the reproduction phase of iteration *t*, frame `2·t + 1` after its game; `gol_store.read_frame(run, index)`).
 >
@@ -157,15 +163,18 @@ value. [Chapter 39](39-questioning-the-mechanics.md) comes back to it.
 > **To make it again:** `python3 book_figures.py children`.
 <!-- /figure -->
 
-**11.4% of children are joined to no one.** They are not part of the
+**11.5% of children are joined to no one.** They are not part of the
 network, and the cleanup at the end of the phase removes them at once, with
 the tokens they were given (which are shared out among the survivors). The
-others are most often joined to two, three or four candidates, and 31% of all
-children to five or more: 4.6 on average, pooled over the worlds, counting
-the children joined to no one.
+others are most often joined to two, three or four candidates, and 35% of all
+children to five or more: 5.1 on average, pooled over the worlds, counting
+the children joined to no one (4.6 at 10,000 tokens, whose agents had fewer
+connections to pass on).
 
-Most parents hand over nothing (65.5%); 14% hand over one connection, 9% two
-and 12% three or more — about one per birth on average.
+Most parents hand over nothing (75%); 11% hand over one connection, 6% two
+and 8% three or more — about three for every four births on average. Rare as
+it is, a handover can be enormous: the centre of a star hands nearly all its
+connections to a newborn child ([Chapter 33](33-the-largest-and-the-smallest.md)).
 
 ## Reproduction over a world's life
 
@@ -175,20 +184,20 @@ and 12% three or more — about one per birth on average.
 **Reproduction over a world's life.** After every reproduction phase of the 30 baseline worlds ([Reproduction statistics](../notes/reproduction-statistics.md)): the mean share of its tokens a parent gave its child (`meanInvestedShare`); the tokens given to all children as a share of all tokens (`reproTokenShare`); the mean number of connections a child was born with (`meanChildLinks`); and the connections handed over per birth (`handovers` / `births`). The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
 >
 > 1. Take the rows with `phase` = 1: `meanInvestedShare`, `reproTokenShare`, `meanChildLinks`, and `handovers` divided by `births`.
-> 2. Cut the 3,000 iterations into 600 stretches of 5 and take each world's mean in each stretch.
+> 2. Cut the 1,500 iterations into 600 stretches of 2.5 and take each world's mean in each stretch.
 > 3. In each stretch, take the median, the 25th and 75th and the 5th and 95th percentiles of those means over the worlds that still have a value there (a world that died has none after its death).
 >
 > **To make it again:** `python3 book_figures.py children`.
 <!-- /figure -->
 
-Over the settled life, the median world's parents give 37% of what they hold;
-all the tokens given to children in one phase are 1.1% of the world's tokens;
-and its children are born with 4.2 connections on average. Births move little
+Over the settled life, the median world's parents give 36% of what they hold;
+all the tokens given to children in one phase are 1.3% of the world's tokens;
+and its children are born with 4.8 connections on average. Births move little
 wealth.
 
 ## Births build the network
@@ -201,25 +210,26 @@ that **adds** connections is a birth. Apart from the starting
 ring, **every connection in a world was made at a birth.**
 
 So the network is grown by births and pruned by games. In a settled world,
-about 39 children are born per iteration with about 4.2 connections each —
-some 165 new connections — while each game cuts about 117 unused ones, and the
-dead take theirs with them. The two balance, and the number of connections
+about 490 children are born per iteration with about 4.8 connections each —
+some 2,300 new connections — while each game cuts about 1,600 unused ones, and
+the dead take theirs with them. The two balance, and the number of connections
 wanders but does not drift ([Chapter 10](10-a-worlds-life.md)). A world
 without births could only lose connections, never gain one.
 
 ## What this means
 
 - **Reproduction is rare, and cheap for the world.** Three or four agents in
-  a hundred have a child in a phase, and children take about 1% of the tokens.
+  a hundred have a child in a phase, and children take about 1.3% of the
+  tokens.
   Founders, with random brains and 100 tokens each, reproduced some twenty
   times as often: something over the world's youth made brains that
   reproduce less.
 - **Births are how the network grows.** Every connection beyond the starting
   ring was made at a birth; births are the world's only source of structure.
-- **Births are not the main road of inheritance.** About 39 children are born
-  per iteration, but about 720 nodes take a neighbour's brain in every game
-  ([Chapter 39](39-questioning-the-mechanics.md)). A brain spreads by
-  conquest twenty times more than by birth. In most models of evolution,
+- **Births are not the main road of inheritance.** About 480 children are
+  born per iteration, but about 8,100 nodes take a neighbour's brain in every
+  game ([Chapter 39](39-questioning-the-mechanics.md)). A brain spreads by
+  conquest seventeen times more than by birth. In most models of evolution,
   reproduction is where heredity and variation happen; here, it is a side
   road. [Meta II](40-meta-2.md) asks what that means for open-ended
   evolution.

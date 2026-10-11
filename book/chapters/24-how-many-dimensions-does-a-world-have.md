@@ -18,18 +18,20 @@ into.
 >   with the same numbers of connections have it?
 > - Does it change as a world grows from its first iterations?
 
-<!-- runs E02 -->
+The worlds are the thirty of 100,000 tokens of [Chapter 9](09-thirty-worlds.md).
+
+<!-- runs E10 -->
 > [!info] The runs behind this chapter
-> **30 runs.** Every condition below is run once for every seed (1 to 30), for 3,000 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
+> **30 runs.** Every condition below is run once for every seed (1 to 30), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
 >
-> - **baseline** — changes nothing: B1 as it is; 10,000 tokens. Runs `B1-10000-s001` … `B1-10000-s030`.
+> - **baseline** — changes nothing: B1 as it is; 100,000 tokens. Runs `B1-100000-s001` … `B1-100000-s030`.
 >
-> To make these runs again: `python3 gol_lab.py run E02`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | baseline | what it is |
 > |---|---|---|
-> | [`total_tokens`](../notes/settings.md#total_tokens) | 10,000 | The number of tokens in the world, *T*. It never changes during a run. |
+> | [`total_tokens`](../notes/settings.md#total_tokens) | 100,000 | The number of tokens in the world, *T*. It never changes during a run. |
 > | [`n_nodes`](../notes/settings.md#n_nodes) | 0 | How many founders the world starts with. 0 means one founder per hundred tokens: *n* = ⌊*T* / 100⌋. |
 > | [`k_neighbors`](../notes/settings.md#k_neighbors) | 0 | How many neighbours each founder starts with in the ring. 0 means *k* = max(⌊*n* / 100⌋, 5); an odd *k* is wired as *k* − 1. |
 > | [`rewire_p`](../notes/settings.md#rewire_p) | 0.2 | In the starting ring, the probability that a connection is moved to a founder chosen at random (Watts–Strogatz). |
@@ -53,15 +55,17 @@ into.
 > | [`mutation_sparsity`](../notes/settings.md#mutation_sparsity) | 0.1 | The share of a brain's numbers a change touches; also the probability, for each weight matrix and bias vector, of a rarer reset that redraws that share of it. |
 > | [`extinction_threshold`](../notes/settings.md#extinction_threshold) | 20 | A run stops, as extinct, when an iteration ends (after its game) with this many agents or fewer. |
 > | seeds | 1 to 30 | one run per seed |
-> | iterations | 3,000 | how far each run goes, unless its world dies first |
+> | iterations | 1,500 | how far each run goes, unless its world dies first |
 >
 > A value in **bold** differs from the baseline B1.
 <!-- /runs -->
 
-Besides the baseline worlds of 10,000 tokens, the chapter measures the three
-worlds of 409,600 tokens of [Chapter 42](42-how-does-a-worlds-size-follow-its-tokens.md),
-about 60,000 agents each after 600 iterations (`B1-409600-s001` … `-s003`,
-`python3 gol_lab.py run E08`).
+Besides them, the chapter measures the three worlds of 409,600 tokens of
+[Chapter 42](42-how-does-a-worlds-size-follow-its-tokens.md), about 60,000
+agents each after 600 iterations (`B1-409600-s001` … `-s003`,
+`python3 gol_lab.py run E08`), and the thirty worlds of 10,000 tokens it was
+first written from, about 1,500 agents each: three sizes, each four to ten
+times the one before.
 
 ## Two rulers
 
@@ -95,7 +99,8 @@ and how they differ says what kind of space it is.
 
 Before measuring anything unknown, a ruler is tried on things whose size is
 known. Here: five networks of about 2,000 points, the size of a world of
-10,000 tokens.
+10,000 tokens — the smallest of the three sizes, and the hardest for the
+rulers.
 
 <!-- figure dimensions/rulers -->
 ![Two rulers, tried on spaces whose dimension is known](../figures/dimensions/rulers.svg)
@@ -138,10 +143,10 @@ rising is the mark of a network that is not a space at all.
 <!-- figure dimensions/worlds -->
 ![The same rulers, on the worlds](../figures/dimensions/worlds.svg)
 
-**The same rulers, on the worlds.** The two rulers of the figure above, on the largest piece of each world after its last game. Blue: the 26 worlds that lived to the end of 10,000 tokens (about 1,500 agents each) — the line is the median of the worlds, the darker band the middle half and the paler band nine in ten. Red: for each, its random twin, a network with exactly as many connections at every agent but wired at random. Yellow: the three worlds of 409,600 tokens of [Chapter 42](42-how-does-a-worlds-size-follow-its-tokens.md) (about 60,000 agents each), measured from 100 balls and 48 walks of up to 1,024 steps; dashed orange, their random twins.
+**The same rulers, on the worlds.** The two rulers of the figure above, on the largest piece of each world after its last game. Blue: the 30 worlds of 100,000 tokens (about 13,800 agents each) — the line is the median of the worlds, the darker band the middle half and the paler band nine in ten. Red: for each, its random twin, a network with exactly as many connections at every agent but wired at random. Yellow: the three worlds of 409,600 tokens of [Chapter 42](42-how-does-a-worlds-size-follow-its-tokens.md) (about 60,000 agents each), measured from 100 balls and 48 walks of up to 1,024 steps; dashed orange, their random twins. Green dots: the median of the 26 worlds of 10,000 tokens that lived to the end, read the same way.
 
 > [!example]- How to make this figure
-> **Runs.** The 26 baseline worlds that lived to the end (`B1-10000-s001` … `-s030`, [Chapter 9](09-thirty-worlds.md); `python3 gol_lab.py run E02`). The three worlds of 409,600 tokens of Experiment 8 (`B1-409600-s001` … `-s003`, [Chapter 42](42-how-does-a-worlds-size-follow-its-tokens.md); `python3 gol_lab.py run E08`), after their last game.
+> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Chapter 9](09-thirty-worlds.md); `python3 gol_lab.py run E10`). The three worlds of 409,600 tokens of Experiment 8 (`B1-409600-s001` … `-s003`, [Chapter 42](42-how-does-a-worlds-size-follow-its-tokens.md); `python3 gol_lab.py run E08`), after their last game. The 26 baseline worlds that lived to the end (`B1-10000-s001` … `-s030`, [Chapter 10](10-a-worlds-life.md); `python3 gol_lab.py run E02`).
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -151,21 +156,25 @@ rising is the mark of a network that is not a space at all.
 > **To make it again:** `python3 book_figures.py dimensions`.
 <!-- /figure -->
 
-**The worlds of 10,000 tokens** (blue) read **2.3** by balls, between radii
-2 and 6 in the median world, and **1.8** by walks, flat from 4 to 64 steps.
-A world of 1,500 agents gives the balls little room. In the median world a
-quarter of it lies within about seven steps, and the reading stops there.
+**The worlds of 100,000 tokens** (blue) read **2.8** by balls, between radii
+3 and 10 in the median world, and **1.9** by walks, flat from 4 to 160 steps.
+Their reading by balls rises to about 3 at radius 5 and holds there until
+the balls near a quarter of the world, at about 12 steps. **The worlds of
+10,000 tokens** (green dots) read less, 2.3 by balls between radii 2 and 6
+and 1.8 by walks: a world of 1,500 agents gives the balls little room, and in
+the median world a quarter of it lies within about seven steps, where the
+reading stops.
 
 **Their random twins** (red) are the decisive comparison. A twin has exactly
 the connections of its world at every agent, wired at random instead. If
 the dimension came from the numbers of connections, the twins would read
-the same. They do not. By balls they read 4.2 and are still climbing when a
-quarter of the twin is reached, after only three steps. By walks they climb
-past 4 and keep going. The twins are small worlds without a dimension; the
-worlds are not.
+the same. They do not. By balls they read 6.5 and are still climbing when a
+quarter of the twin is reached, after only three or four steps. By walks
+they climb past 3 and keep going. The twins are small worlds without a
+dimension; the worlds are not.
 
-**The worlds of 409,600 tokens** (yellow) are 40 times larger, and here the
-rulers have room. By balls, two of the three read **3.3**, flat from radius 3
+**The worlds of 409,600 tokens** (yellow) are four times larger again, and
+here the rulers have the most room. By balls, two of the three read **3.3**, flat from radius 3
 to radius 14; the third wanders between 2.1 and 3.3. By walks, all three
 stay between 1.5 and 2.3 from 4 steps to 400, with medians of **1.8 to
 1.9**. In one world the reading is 1.8 at every scale from 6 steps to 724,
@@ -188,15 +197,23 @@ by walks.
 > **To make it again:** `python3 book_figures.py dimensions`.
 <!-- /figure -->
 
-Drawn directly, the count of agents within *r* steps of the large worlds
+Drawn directly, the count of agents within *r* steps of the largest worlds
 runs along a straight line of slope about 3.3 on logarithmic axes. From
 radius 3 to about 15 it is steeper than *r*³ and far steeper than *r*², and
 then it bends as the balls reach the edges of the world, around 60,000
 agents. The twins' counts shoot up and hold the whole world within seven
 steps.
 
+**The three sizes at the same scales.** Read over the same radii, 3 to 6,
+and the same walks, 4 to 64 steps, the worlds of 10,000, 100,000 and 409,600
+tokens read 2.4, 2.9 and 3.3 by balls, and 1.8, 1.8 and 1.9 by walks. The
+larger the world, the more room it holds at the same few steps, and the
+longer its plateau; the walker's reading hardly changes. Whether the reading
+by balls goes on rising with the size of a world, or settles near 3.3, these
+three sizes cannot tell.
+
 A word on the viewer's own dimension, which [Chapter 35](35-the-geometry-of-a-world.md)
-found to be about 3 in the small worlds. It is fitted to the **mean** ball
+finds to be about 3.4 in these worlds (3.0 at 10,000 tokens). It is fitted to the **mean** ball
 over radii 1 to 5, and the mean is pulled up by the few agents next to a
 hub. The rulers here use the **typical** ball, the geometric mean over 40 to
 100 agents, which grows more slowly at small radii. The two answer slightly
@@ -211,7 +228,8 @@ grid the two would agree. Where they disagree, the space is irregular in a
 particular way: it has room, but the room is hard to get around in. Dead
 ends trap a walker, and narrow passages slow it. The ratio says how much. A
 walker's typical distance after *t* steps grows like *t* to the power
-*d*ₛ / 2*d*_ball ≈ 1.9 / 6.6 ≈ 0.29, instead of the 0.5 of a grid. Physicists
+*d*ₛ / 2*d*_ball — about 1.9 / 5.6 ≈ 0.34 in these worlds, 1.9 / 6.6 ≈ 0.29 in
+the largest — instead of the 0.5 of a grid. Physicists
 call such slowed spreading **anomalous diffusion**. It is what is found on
 fractals, such as the clusters of percolation, whose ball dimension in three
 dimensions is about 2.5 and whose spectral dimension is close to 4/3
@@ -219,11 +237,14 @@ dimensions is about 2.5 and whose spectral dimension is close to 4/3
 
 Where are the dead ends? Prune every agent with a single connection, again
 and again until none is left, and what remains is the **core** of a world
-([Core, trees and leaves](../notes/core-trees-leaves.md)), between a half
-and two thirds of the large worlds. The core reads lower, 2.7 by balls and
-1.5 by walks. So the trees that hang off the core add room, and the core
-itself seems threadlike at large scales: its loops close at short range,
-but over long distances it branches more than it meshes.
+([Core, trees and leaves](../notes/core-trees-leaves.md)), more than half of
+its agents. In these worlds the core reads 2.5 by balls and 1.9 by walks,
+against 2.8 and 1.9 for the whole: the trees that hang off the core add room,
+not ways round. In the worlds of 409,600 tokens the core reads 3.1 by balls
+and 2.0 by walks at short range (radii 3 to 6, walks up to 64 steps), but
+2.7 and 1.5 over the whole range of scales: its loops close at short range,
+and over long distances it seems to branch more than it meshes.
+[Chapter 25](25-the-core-of-a-world.md) takes the core apart.
 
 This matters beyond geometry. In the game, tokens move almost as a random
 walk would ([Chapter 29](29-where-the-tokens-flow.md)). On these worlds that
@@ -236,10 +257,10 @@ a random network.
 <!-- figure dimensions/life -->
 ![Dimension over a world's life](../figures/dimensions/life.svg)
 
-**Dimension over a world's life.** The two rulers, each read at one scale, after the games of iterations 10, 25, 50, 100, 200, 300, 500, 750, 1,000, 1,500, 2,000, 2,500 and 2,999 of the 26 worlds that lived to the end, on a logarithmic axis of time. Left: the local dimension from balls between radius 2 and 3; right: the spectral dimension from walks of 4 to 8 steps. The line is the median of the worlds, the darker band the middle half of them and the paler band nine in ten. The viewer's own dimensions, every 25 iterations, are drawn in [Chapter 35](35-the-geometry-of-a-world.md).
+**Dimension over a world's life.** The two rulers, each read at one scale, after the games of iterations 10, 25, 50, 100, 200, 300, 500, 750, 1,000 and 1,499 of the 30 worlds, on a logarithmic axis of time. Left: the local dimension from balls between radius 2 and 3; right: the spectral dimension from walks of 4 to 8 steps. The line is the median of the worlds, the darker band the middle half of them and the paler band nine in ten. The viewer's own dimensions, every 25 iterations, are drawn in [Chapter 35](35-the-geometry-of-a-world.md).
 
 > [!example]- How to make this figure
-> **Runs.** The 26 baseline worlds that lived to the end (`B1-10000-s001` … `-s030`, [Chapter 9](09-thirty-worlds.md); `python3 gol_lab.py run E02`).
+> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Chapter 9](09-thirty-worlds.md); `python3 gol_lab.py run E10`).
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -250,11 +271,14 @@ a random network.
 <!-- /figure -->
 
 Read at one small scale each — balls between radius 2 and 3, walks of 4 to
-8 steps — the dimension of the baseline worlds is the same from iteration 10
-to iteration 2,999: about 2 by balls (1.8 to 2.3 in the median world) and
-1.6 to 1.9 by walks. A world takes its shape in its first few iterations of
-growth, and keeps it through 3,000 iterations of births, deaths and
-conquests.
+8 steps — the dimension of a world rises through its youth and then holds:
+by balls, 1.8 at iteration 10, 2.6 by iteration 50, and between 2.4 and 2.7
+from then to the end in the median world; by walks, 1.6 at iteration 10,
+1.9 by iteration 50, and between 1.85 and 1.97 after. A world takes its shape
+in its first fifty iterations of growth, and keeps it through 1,500
+iterations of births, deaths and conquests. (At 10,000 tokens, where the
+same small scales are a larger part of a world, the readings were about 2 by
+balls and 1.6 to 1.9 by walks throughout.)
 
 ## What this means
 
@@ -265,9 +289,10 @@ conquests.
   [Chapter 22](22-how-the-network-grows.md): every new connection is made
   inside a neighbourhood and none ever brings two agents closer together, so
   a world can only grow like a body grows, outwards, never by shortcuts.
-- **About three dimensions of room.** At 60,000 agents the worlds hold as
-  much within *r* steps as a three-dimensional body does, somewhat more:
-  3.3, steady from 3 to 14 steps. Together with the diameters of
+- **About three dimensions of room.** At 14,000 agents the worlds hold
+  about as much within *r* steps as a three-dimensional body does, from 5 to
+  10 steps; at 60,000 agents somewhat more, 3.3, steady from 3 to 14 steps.
+  Together with the diameters of
   [Chapter 42](42-how-does-a-worlds-size-follow-its-tokens.md), which grow as
   agents^0.30, this is the first sign that something like three-dimensional
   space can emerge from these rules with no geometry put in.
@@ -277,9 +302,8 @@ conquests.
   question for Part VI is what rule would make the rulers agree: rules that
   close loops at long range, or that let dead ends wither, or that give
   every place the same number of neighbours. Chapter 56 (planned, see
-  [the contents](../README.md)) is to measure the worlds of 100,000 tokens
-  of [Chapter 55](55-worlds-of-100000-tokens.md) the same way, and ask
-  whether the dimension depends on the scale, as it does in the causal
+  [the contents](../README.md)) is to follow the dimension to still larger
+  worlds, and ask whether it depends on the scale, as it does in the causal
   dynamical triangulations of quantum gravity (Ambjørn, Jurkiewicz and Loll
   2005).
 - **Room for open-ended evolution.** In a space, distant places are far

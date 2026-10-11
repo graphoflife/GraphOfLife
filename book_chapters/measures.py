@@ -18,8 +18,8 @@ import book_data as D
 import book_figures as F
 from book_figures import (AG, Classes, DEGREE_CLASSES, FR, FRAMES, KEPT_BY, PA, STATS_FILE, band_series,
                           bars, chapter, describe, dots, line, mean_over, recipe, series, stacked)
-from book_chapters.common import (BAND_STEPS, BAND_WORDS, BLUE, CYAN, GREEN, GREY, ORANGE, RED,
-                                  VIOLET, WORLDS as W, YELLOW)
+from book_chapters.common import (BAND_STEPS, BAND_WORDS, BLUE, CYAN, GREEN, GREY, ORANGE, RED, STAR,
+                                  VIOLET, WORLDS as W, YELLOW, at_start)
 
 SAMPLE = ("each run's frames, read every 25 iterations by `book_figures.sample_pass` (frame "
           "`2·t` after the reproduction phase of iteration *t*, frame `2·t + 1` after its game; "
@@ -87,7 +87,7 @@ def entropy(ch: F.Chapter) -> None:
                        *BAND_STEPS]))
     for stat in ("tokenEvenness", "degreeEvenness", "tokenEntropy", "degreeEntropy", "gini"):
         ch.number(f"{stat}_settled", describe([mean_over(s.run_id, stat, *W.window) for s in alive]))
-    ch.number("tokenEvenness_first", F.A.bands([series(s.run_id, "tokenEvenness") for s in specs])["y"][0])
+    ch.number("tokenEvenness_first", at_start(specs, "tokenEvenness"))
 
     # Effective numbers: how many equal holders, or equal genotypes, the world is worth.
     holders, distinct, effective = [], [], []
@@ -419,14 +419,24 @@ def flow(ch: F.Chapter) -> None:
     ch.number("breadth", {lab: {"staked": a, "home": b, "even": c, "rounded": d} for lab, a, b, c, d in
                           zip(labels, staked_share, home_share, even, rounded)})
 
-    predicted, real = [], []
+    predicted, real, per_world, apart = [], [], [], {"predicted": [], "real": []}
     for s in alive:
         p, r = even_split(s.run_id, range(W.settled, W.until, 250))
         predicted.append(p)
         real.append(r)
+        per_world.append(float(np.polyfit(p, r, 1)[0]))
+        # The worlds held together by one hub (Chapter 33) apart: the even split misreads a star's centre.
+        if mean_over(s.run_id, "maxDegree/nodes", *W.window) < STAR:
+            apart["predicted"].append(p)
+            apart["real"].append(r)
     predicted, real = np.concatenate(predicted), np.concatenate(real)
     slope, intercept = np.polyfit(predicted, real, 1)
     r2 = float(np.corrcoef(predicted, real)[0, 1] ** 2)
+    p, r = np.concatenate(apart["predicted"]), np.concatenate(apart["real"])
+    without = {"slope": float(np.polyfit(p, r, 1)[0]), "r2": float(np.corrcoef(p, r)[0, 1] ** 2),
+               "agents": int(len(p)), "worlds": len(apart["real"])}
+    ch.number("random_walk_without_stars", without)
+    ch.number("random_walk_per_world", describe(per_world))
     edges = np.arange(-20, 22, 2)
     xs, mean, lo, hi = [], [], [], []
     for a, b in zip(edges[:-1], edges[1:]):
@@ -450,7 +460,10 @@ def flow(ch: F.Chapter) -> None:
                 "half. The dashed line is y = x. Over all "
                 f"{len(predicted):,} agents (the games of every 250th iteration from 500 on, {len(alive)} worlds), "
                 f"the straight line fitted to the points has slope {slope:.2f}, and the even split accounts "
-                f"for {100 * r2:.0f}% of the variance (R², [Fitting a straight line](../notes/least-squares.md)).",
+                f"for {100 * r2:.0f}% of the variance (R², [Fitting a straight line](../notes/least-squares.md))"
+                + (f"; over the {without['worlds']} worlds that are not held together by a single hub (Chapter "
+                   f"33), slope {without['slope']:.2f} and {100 * without['r2']:.0f}%."
+                   if without["worlds"] < len(alive) else "."),
         recipe=recipe(W.surviving_text(), SAMPLE.replace("every 25 iterations by `book_figures.sample_pass` ", ""),
                       ["For every 250th iteration t from 500 on, read frame `2·t` (the start of the game): each "
                        "agent's tokens τ and neighbours.",
@@ -801,11 +814,20 @@ def powerlaws(ch: F.Chapter) -> None:
         recipe=recipe(W.surviving_text(), STATS_FILE,
                       [f"Take `orphaned` and `starved` of every row with `phase` = 2 and 500 ≤ `iteration` ≤ {W.last:,}.",
                        "For each n that occurs, the share of rows with at least n."]))
+    # Cut-offs counted against the size of a world too: a thousandth and a hundredth of its tokens' worth
+    # of agents (10 and 100 at 10,000 tokens, 100 and 1,000 at 100,000).
+    small, large = W.tokens // 1000, W.tokens // 100
     ch.number("avalanches", {"games": int(len(cut)), "share_with_cut": float(np.mean(cut > 0)),
                              "max_cut": float(cut.max()), "share_cut_ge_10": float(np.mean(cut >= 10)),
                              "share_cut_ge_100": float(np.mean(cut >= 100)), "mean_cut": float(cut.mean()),
                              "deaths_in_cuts_ge_100": float(cut[cut >= 100].sum() / cut.sum()),
                              "deaths_in_cuts_ge_10": float(cut[cut >= 10].sum() / cut.sum()),
+                             "relative": {"small": small, "large": large,
+                                          "share_ge_small": float(np.mean(cut >= small)),
+                                          "share_ge_large": float(np.mean(cut >= large)),
+                                          "deaths_ge_small": float(cut[cut >= small].sum() / cut.sum()),
+                                          "deaths_ge_large": float(cut[cut >= large].sum() / cut.sum())},
+                             "median_cut": float(np.median(cut)),
                              "max_starved": float(starved.max())})
 
     # The rhythm of the wander: a power spectrum.

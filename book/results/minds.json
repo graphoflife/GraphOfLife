@@ -3,543 +3,543 @@
  "numbers": {
   "gain": {
    "evolved": {
-    "n": 26,
-    "mean": 0.0015045905994107778,
-    "median": 0.0015078392144617858,
-    "sd": 0.00013470849982314285,
-    "min": 0.0011456877904741673,
-    "max": 0.0017213286556027226,
-    "q25": 0.001435272643200355,
-    "q75": 0.0016154352674773013
+    "n": 30,
+    "mean": 0.0014437164505947462,
+    "median": 0.0014833790273169373,
+    "sd": 0.00013077320154091847,
+    "min": 0.0009952464237441036,
+    "max": 0.0015778592321805014,
+    "q25": 0.0014393931573577201,
+    "q75": 0.0015111530103253078
    },
    "founder": {
-    "n": 26,
-    "mean": 0.0006042930134634316,
-    "median": 0.000613591113623208,
-    "sd": 3.772118992455408e-05,
-    "min": 0.00045339762957178026,
-    "max": 0.000651664735118859,
-    "q25": 0.0006027797753460945,
-    "q75": 0.0006225314932906067
+    "n": 30,
+    "mean": 0.0005947759618146568,
+    "median": 0.0006096797812262124,
+    "sd": 4.939249136196123e-05,
+    "min": 0.0004302812525824709,
+    "max": 0.0006353558707635357,
+    "q25": 0.0006019670448857147,
+    "q75": 0.0006192004195473876
    },
    "layers": [
-    0.23347552623813161,
-    0.269798585608345,
-    0.268288171132004,
-    0.27004974532792114,
-    0.2709279436837699,
-    1.2238266496437111
+    0.23305437594761505,
+    0.2681096391798672,
+    0.267652791346917,
+    0.27079542094022313,
+    0.2692357380085477,
+    1.2254690574575606
    ],
    "within": {
-    "n": 26,
-    "mean": 0.0003777198705937388,
-    "median": 0.00036359474507186343,
-    "sd": 9.549218628339467e-05,
-    "min": 0.0003007820208357989,
-    "max": 0.0008166217812754786,
-    "q25": 0.00034161705536931266,
-    "q75": 0.0003839045625606242
+    "n": 30,
+    "mean": 0.00038347836588542106,
+    "median": 0.0003551164065939743,
+    "sd": 9.045862986258217e-05,
+    "min": 0.00028826144405966637,
+    "max": 0.0006810445890840747,
+    "q25": 0.0003330971619294658,
+    "q75": 0.00037841623390326174
    },
    "between": {
-    "n": 26,
-    "mean": 0.47861856267532765,
-    "median": 0.48258514420927634,
-    "sd": 0.060311468727643806,
-    "min": 0.3593868827938142,
-    "max": 0.5922815326556605,
-    "q25": 0.4563596832826595,
-    "q75": 0.525158686835939
+    "n": 30,
+    "mean": 0.53276481160847,
+    "median": 0.548263910454281,
+    "sd": 0.07199657352689989,
+    "min": 0.26722961576501947,
+    "max": 0.6204854516891174,
+    "q25": 0.5260920834987974,
+    "q75": 0.5709259408011841
    }
   },
   "decisions": {
    "spread": [
     {
-     "n": 26,
-     "mean": 0.9743185502964072,
-     "median": 0.9840494036234221,
-     "sd": 0.023347873131708483,
-     "min": 0.9089082384460817,
-     "max": 0.9990557129367328,
-     "q25": 0.9662320945482652,
-     "q75": 0.9892334739689721
+     "n": 30,
+     "mean": 0.977084347243872,
+     "median": 0.9820962159594662,
+     "sd": 0.01459046358430129,
+     "min": 0.9391755354977772,
+     "max": 0.9950070488721805,
+     "q25": 0.9748409472513958,
+     "q75": 0.9867471141252764
     },
     {
-     "n": 26,
-     "mean": 0.500171865581726,
-     "median": 0.5018522548379571,
-     "sd": 0.004563926485803003,
-     "min": 0.4860335195530726,
-     "max": 0.5046728971962616,
-     "q25": 0.4990470824655038,
-     "q75": 0.5025828734306422
+     "n": 30,
+     "mean": 0.4987575356804692,
+     "median": 0.4985967399383058,
+     "sd": 0.0006615736440520722,
+     "min": 0.4979236589112009,
+     "max": 0.5012714558169103,
+     "q25": 0.4983500064116819,
+     "q75": 0.498906918905481
     }
    ],
    "child": [
     {
-     "n": 26,
-     "mean": 0.032449539742180976,
-     "median": 0.026385535130082564,
-     "sd": 0.03364717638121745,
-     "min": 0.005856515373352855,
-     "max": 0.18319169027384324,
-     "q25": 0.016544502117530648,
-     "q75": 0.03908099139818219
+     "n": 30,
+     "mean": 0.037668363248358275,
+     "median": 0.03639304525508302,
+     "sd": 0.01995047358455539,
+     "min": 0.004862590832104026,
+     "max": 0.09406952965235174,
+     "q25": 0.02482991065760771,
+     "q75": 0.04239574021309256
     },
     {
-     "n": 26,
-     "mean": 0.687312483349727,
-     "median": 0.6864096075631165,
-     "sd": 0.017459320690802575,
-     "min": 0.6591217745586239,
-     "max": 0.7176581680830972,
-     "q25": 0.6720840516468676,
-     "q75": 0.6977923861852433
+     "n": 30,
+     "mean": 0.6876522091039803,
+     "median": 0.6873930400418481,
+     "sd": 0.013870373739328172,
+     "min": 0.6604495747266099,
+     "max": 0.7280340118526153,
+     "q25": 0.6798787568533833,
+     "q75": 0.6950378826950613
     }
    ],
    "even": [
     {
-     "n": 26,
-     "mean": 0.5406622659924264,
-     "median": 0.5842881040305528,
-     "sd": 0.2881201020003652,
-     "min": 0.033235581622678395,
-     "max": 0.9664650907091809,
-     "q25": 0.2874464509715746,
-     "q75": 0.762171598801304
+     "n": 30,
+     "mean": 0.4991560773009153,
+     "median": 0.4241872820685054,
+     "sd": 0.258090369416937,
+     "min": 0.13431777909037212,
+     "max": 0.9780992294173313,
+     "q25": 0.291667695832563,
+     "q75": 0.7004483517228477
     },
     {
-     "n": 26,
-     "mean": 0.4964973112031308,
-     "median": 0.49865752220043824,
-     "sd": 0.009522207534845164,
-     "min": 0.46089385474860334,
-     "max": 0.5089707271010387,
-     "q25": 0.49488989711436965,
-     "q75": 0.4997470729282344
+     "n": 30,
+     "mean": 0.49537412105829015,
+     "median": 0.4938114290679781,
+     "sd": 0.0026712320605319106,
+     "min": 0.49296138447630117,
+     "max": 0.5010224948875256,
+     "q25": 0.4934535986919181,
+     "q75": 0.49722963385351737
     }
    ]
   },
   "outputs": {
    "a": {
     "evolved": {
-     "n": 26,
-     "mean": -0.5457245808751247,
-     "median": -0.525832533588399,
-     "sd": 0.28793462765378613,
-     "min": -1.2089564629424123,
-     "max": -0.05182414838579892,
-     "q25": -0.6833310646150084,
-     "q75": -0.33690943086597136
+     "n": 30,
+     "mean": -0.531234310734892,
+     "median": -0.5293228483269983,
+     "sd": 0.15875454380219953,
+     "min": -1.04825833200609,
+     "max": -0.2927323062419402,
+     "q25": -0.6070502684308476,
+     "q75": -0.41662444246207836
     },
     "founder": {
-     "n": 26,
-     "mean": 0.0008280056832837195,
-     "median": 0.0005897730327864918,
-     "sd": 0.006349545908090769,
-     "min": -0.008344118150906592,
-     "max": 0.010949548937962591,
-     "q25": -0.00476804148074871,
-     "q75": 0.005916383296062411
+     "n": 30,
+     "mean": -0.0019131932753934226,
+     "median": -0.002709129568977925,
+     "sd": 0.0017837296070340985,
+     "min": -0.004180722930667227,
+     "max": 0.0013901172110228385,
+     "q25": -0.003185785046316839,
+     "q75": -0.0001575277519316397
     }
    },
    "b": {
     "evolved": {
-     "n": 26,
-     "mean": 0.7241344304742141,
-     "median": 0.6747152866593699,
-     "sd": 0.1914771261353432,
-     "min": 0.4398082464192971,
-     "max": 1.219862666879454,
-     "q25": 0.6104375358605242,
-     "q75": 0.7927430330906071
+     "n": 30,
+     "mean": 0.7154533478222302,
+     "median": 0.699982330892938,
+     "sd": 0.16905735194227875,
+     "min": 0.4451682467272088,
+     "max": 1.2006846923116492,
+     "q25": 0.6173820384862339,
+     "q75": 0.798144735222064
     },
     "founder": {
-     "n": 26,
-     "mean": 0.004591411415765712,
-     "median": 0.003935702511349222,
-     "sd": 0.004783252061049079,
-     "min": -0.006217765071384918,
-     "max": 0.012959231457263892,
-     "q25": 0.0008020404351933561,
-     "q75": 0.009061496596332506
+     "n": 30,
+     "mean": 6.0587580028145815e-05,
+     "median": -0.001127200024841308,
+     "sd": 0.002731954699574858,
+     "min": -0.0021625727949465623,
+     "max": 0.007771499076877209,
+     "q25": -0.001565253433520944,
+     "q75": 0.00013434817605583631
     }
    },
    "score": {
     "evolved": {
-     "n": 26,
-     "mean": -0.06445203581079507,
-     "median": -0.13749674929694805,
-     "sd": 0.4528891127982895,
-     "min": -1.014974249935475,
-     "max": 0.9097989137522198,
-     "q25": -0.33067043571767063,
-     "q75": 0.14516319972287564
+     "n": 30,
+     "mean": 0.014676846615539195,
+     "median": 0.07939510666619441,
+     "sd": 0.39366032104596227,
+     "min": -1.1079627700099857,
+     "max": 0.6308751274572879,
+     "q25": -0.23325316818061492,
+     "q75": 0.3013928971921343
     },
     "founder": {
-     "n": 26,
-     "mean": 0.004144710691967336,
-     "median": 0.0041435177581751435,
-     "sd": 0.006361043724310485,
-     "min": -0.007783543252161167,
-     "max": 0.019675607712203627,
-     "q25": 0.0016747716204945319,
-     "q75": 0.006137961013887343
+     "n": 30,
+     "mean": 0.0059553391863280325,
+     "median": 0.006859577293785212,
+     "sd": 0.0031204861622985943,
+     "min": -0.00043962917585863546,
+     "max": 0.008992224435966647,
+     "q25": 0.0038309617897659843,
+     "q75": 0.008530058296905261
     }
    },
    "spread": {
     "evolved": {
-     "n": 26,
-     "mean": 0.6357012027098923,
-     "median": 0.6469939320713907,
-     "sd": 0.2693841942498671,
-     "min": 0.10905433104188549,
-     "max": 1.1904038771527226,
-     "q25": 0.4534717102721718,
-     "q75": 0.8267720151051303
+     "n": 30,
+     "mean": 0.5583557307212129,
+     "median": 0.6131034354048577,
+     "sd": 0.32024966195893373,
+     "min": -0.675860771453784,
+     "max": 1.0756748551454343,
+     "q25": 0.45771107776419157,
+     "q75": 0.7185779945557347
     },
     "founder": {
-     "n": 26,
-     "mean": 0.0032261699218248804,
-     "median": 0.0031580792881127874,
-     "sd": 0.004870406765530739,
-     "min": -0.002897748776109222,
-     "max": 0.017513079993650513,
-     "q25": 9.147706837211642e-05,
-     "q75": 0.00427675304775829
+     "n": 30,
+     "mean": 0.0013868506987263173,
+     "median": 0.0005422860821002771,
+     "sd": 0.0021974512195535273,
+     "min": -0.0013960796045566163,
+     "max": 0.006227026063553548,
+     "q25": -4.334988844194666e-05,
+     "q75": 0.0021161767146494876
     }
    },
    "all in": {
     "evolved": {
-     "n": 26,
-     "mean": -0.45161121382779196,
-     "median": -0.45325103901447494,
-     "sd": 0.37224137962090265,
-     "min": -1.0705659277135013,
-     "max": 0.37914639169437603,
-     "q25": -0.7813071969502763,
-     "q75": -0.21880569584968118
+     "n": 30,
+     "mean": -0.5122837991608006,
+     "median": -0.45359422094294266,
+     "sd": 0.29136657640238356,
+     "min": -1.162487116316364,
+     "max": 0.09778475243569391,
+     "q25": -0.6865071006417366,
+     "q75": -0.36518862265881075
     },
     "founder": {
-     "n": 26,
-     "mean": 0.020794182048592093,
-     "median": 0.015779899664185627,
-     "sd": 0.012412892526470416,
-     "min": 0.005931017054321215,
-     "max": 0.04522374679190195,
-     "q25": 0.010628798398257647,
-     "q75": 0.0322733403294702
+     "n": 30,
+     "mean": 0.0011784368028250251,
+     "median": 0.0006707863611695656,
+     "sd": 0.001588956451797272,
+     "min": -0.0005329687193791633,
+     "max": 0.004843961105058218,
+     "q25": -0.00013370768306856048,
+     "q75": 0.0024034397626446903
     }
    },
    "revolutionary a": {
     "evolved": {
-     "n": 26,
-     "mean": 0.6035410152524273,
-     "median": 0.5784759580057373,
-     "sd": 0.1689699098619693,
-     "min": 0.2969419636911654,
-     "max": 1.0382081045842977,
-     "q25": 0.49636576161758555,
-     "q75": 0.6952978906114342
+     "n": 30,
+     "mean": 0.6269031364965504,
+     "median": 0.6369436675313144,
+     "sd": 0.1183389469046542,
+     "min": 0.2911135830006354,
+     "max": 0.8021413809437683,
+     "q25": 0.5598473312152793,
+     "q75": 0.7223251125228658
     },
     "founder": {
-     "n": 26,
-     "mean": 0.008301148825541284,
-     "median": 0.008232753216976247,
-     "sd": 0.004039489054872431,
-     "min": 0.0009236183428547658,
-     "max": 0.01550176637820979,
-     "q25": 0.0066523308743573544,
-     "q75": 0.009994807161599775
+     "n": 30,
+     "mean": -0.0027961979408222,
+     "median": -0.002387842518103518,
+     "sd": 0.0016403448314731089,
+     "min": -0.007568698470075537,
+     "max": -0.0006602871854530483,
+     "q25": -0.00268750265036134,
+     "q75": -0.0018895474131259563
     }
    },
    "revolutionary b": {
     "evolved": {
-     "n": 26,
-     "mean": -0.60343426822774,
-     "median": -0.6153069114212381,
-     "sd": 0.14955675871412702,
-     "min": -0.9884452791832593,
-     "max": -0.30208956184351987,
-     "q25": -0.7033574734239757,
-     "q75": -0.5024591432599211
+     "n": 30,
+     "mean": -0.6733271411766586,
+     "median": -0.6116882199282195,
+     "sd": 0.15474412842246357,
+     "min": -1.0815224803693204,
+     "max": -0.5088726459734852,
+     "q25": -0.739289675625427,
+     "q75": -0.5781410006244944
     },
     "founder": {
-     "n": 26,
-     "mean": -0.0006643087413487843,
-     "median": 0.0005470620105978017,
-     "sd": 0.006264000480287425,
-     "min": -0.019451455909954393,
-     "max": 0.006955208353851758,
-     "q25": -0.0013949980071274039,
-     "q75": 0.002582485266708957
+     "n": 30,
+     "mean": 0.00542084718364957,
+     "median": 0.005555115488425556,
+     "sd": 0.0008379127262001046,
+     "min": 0.003909068643365735,
+     "max": 0.006979268885884896,
+     "q25": 0.004809573715430916,
+     "q75": 0.005962626991553448
     }
    },
    "join": {
     "evolved": {
-     "n": 26,
-     "mean": 0.10213868775456171,
-     "median": 0.10371262742164644,
-     "sd": 0.40347842123057476,
-     "min": -0.7603297788098092,
-     "max": 0.9673071406832399,
-     "q25": -0.07400314501314559,
-     "q75": 0.29842606936936444
+     "n": 30,
+     "mean": 0.08254359039476146,
+     "median": 0.050360958374127685,
+     "sd": 0.33209366156363396,
+     "min": -0.7198851816367209,
+     "max": 0.755004199986633,
+     "q25": -0.1145794622223976,
+     "q75": 0.227138503293284
     },
     "founder": {
-     "n": 26,
-     "mean": 0.002572343248736862,
-     "median": 0.00825146524489939,
-     "sd": 0.012469248143261558,
-     "min": -0.026134391091724,
-     "max": 0.015193640603936269,
-     "q25": 0.0018562650978139628,
-     "q75": 0.0105226914164324
+     "n": 30,
+     "mean": -0.0005709488170745644,
+     "median": -0.0010553528770549784,
+     "sd": 0.0023512059389059984,
+     "min": -0.0036865996334980683,
+     "max": 0.004214414877689425,
+     "q25": -0.0024263392535676088,
+     "q75": 0.0011208670970635566
     }
    },
    "do not": {
     "evolved": {
-     "n": 26,
-     "mean": -0.23434692092741594,
-     "median": -0.2299081798423861,
-     "sd": 0.36998102397283805,
-     "min": -0.9725429052019193,
-     "max": 0.45107702232578095,
-     "q25": -0.5074324467473064,
-     "q75": 0.0051152909276230545
+     "n": 30,
+     "mean": -0.206678953314617,
+     "median": -0.22271452730192315,
+     "sd": 0.27979377291882784,
+     "min": -0.7347001791560922,
+     "max": 0.3968064445207709,
+     "q25": -0.4002923414523716,
+     "q75": 0.004384279388182187
     },
     "founder": {
-     "n": 26,
-     "mean": -0.032518723971377866,
-     "median": -0.027429569346974082,
-     "sd": 0.013193994145113491,
-     "min": -0.07222651983571494,
-     "max": -0.020412237031474725,
-     "q25": -0.03563102105134748,
-     "q75": -0.024868940769270414
+     "n": 30,
+     "mean": -0.005412134915641591,
+     "median": -0.005534423413663366,
+     "sd": 0.003779257207844776,
+     "min": -0.016800767355582877,
+     "max": 0.0007016583385268709,
+     "q25": -0.008012784643275556,
+     "q75": -0.002971219822189139
     }
    },
    "hand over": {
     "evolved": {
-     "n": 26,
-     "mean": -0.1531575964697409,
-     "median": -0.05510820219707185,
-     "sd": 0.4863580414852637,
-     "min": -1.209982281604266,
-     "max": 0.5869173370100463,
-     "q25": -0.2706641023556468,
-     "q75": 0.07724292466635008
+     "n": 30,
+     "mean": -0.12495538666155533,
+     "median": -0.09896968164356348,
+     "sd": 0.25365696964773277,
+     "min": -0.6703516536530857,
+     "max": 0.26733136531174506,
+     "q25": -0.2401866852257628,
+     "q75": 0.0696647335722884
     },
     "founder": {
-     "n": 26,
-     "mean": 0.024229909959809486,
-     "median": 0.02656040169603072,
-     "sd": 0.005313912630167768,
-     "min": 0.010801671430982809,
-     "max": 0.03207054674431079,
-     "q25": 0.020066243284646422,
-     "q75": 0.028035704326674404
+     "n": 30,
+     "mean": 0.0026208515475311185,
+     "median": 0.002712273222601062,
+     "sd": 0.0008147472716461895,
+     "min": -0.00031287239336659446,
+     "max": 0.004030412317364893,
+     "q25": 0.002437856250041399,
+     "q75": 0.003038376251278671
     }
    },
    "keep": {
     "evolved": {
-     "n": 26,
-     "mean": 0.2896072121283531,
-     "median": 0.3244180530036266,
-     "sd": 0.4397668319737367,
-     "min": -0.9319953742519469,
-     "max": 0.9821752310251013,
-     "q25": 0.06905199394413346,
-     "q75": 0.5236317841603008
+     "n": 30,
+     "mean": 0.04908157998542763,
+     "median": -0.019791421357583817,
+     "sd": 0.28088963880681184,
+     "min": -0.4301109141381071,
+     "max": 0.5521732925681208,
+     "q25": -0.14056053859385542,
+     "q75": 0.26493160574736435
     },
     "founder": {
-     "n": 26,
-     "mean": 0.0011147350624382687,
-     "median": 0.001481369859457258,
-     "sd": 0.005411378506660208,
-     "min": -0.009843252815495154,
-     "max": 0.017208388682030173,
-     "q25": -0.00022329439917351517,
-     "q75": 0.0030836910374170963
+     "n": 30,
+     "mean": 0.005611165029413031,
+     "median": 0.0056682803928967684,
+     "sd": 0.0015049610347323123,
+     "min": 0.0028148593426510775,
+     "max": 0.008091661834590534,
+     "q25": 0.004491667368768415,
+     "q75": 0.006936233829569531
     }
    }
   },
   "changed_messages": [
    {
-    "n": 26,
-    "mean": 0.07820896990417989,
-    "median": 0.06710500099621439,
-    "sd": 0.057760367343669676,
-    "min": 0.0043980208905992305,
-    "max": 0.23537234042553193,
-    "q25": 0.033881132686739424,
-    "q75": 0.11634935186764456
+    "n": 30,
+    "mean": 0.09222940700948125,
+    "median": 0.09100742070822795,
+    "sd": 0.04904731754126071,
+    "min": 0.005354313500519041,
+    "max": 0.17310051911278906,
+    "q25": 0.05879734255921752,
+    "q75": 0.13780647380856004
    },
    {
-    "n": 26,
-    "mean": 0.1468998916322875,
-    "median": 0.1484496024257737,
-    "sd": 0.03039770030403662,
-    "min": 0.044876088412592094,
-    "max": 0.19924457034938622,
-    "q25": 0.1314572913924717,
-    "q75": 0.16638668295662798
+    "n": 30,
+    "mean": 0.16201888062039205,
+    "median": 0.16885869948276153,
+    "sd": 0.03049900079194338,
+    "min": 0.05862426924547888,
+    "max": 0.20046379799020872,
+    "q25": 0.15456865957620225,
+    "q75": 0.181327162530116
    }
   ],
   "changed_noise": [
    {
-    "n": 26,
-    "mean": 0.14613024752603015,
-    "median": 0.10956661432104114,
-    "sd": 0.11471350621297839,
-    "min": 0.009895547003848268,
-    "max": 0.37996334758704947,
-    "q25": 0.056291479395239874,
-    "q75": 0.251070744973184
+    "n": 30,
+    "mean": 0.15753703657642756,
+    "median": 0.1535601897882597,
+    "sd": 0.08755275549308299,
+    "min": 0.013822870567666503,
+    "max": 0.301840490797546,
+    "q25": 0.09786287272908008,
+    "q75": 0.23130891046336421
    },
    {
-    "n": 26,
-    "mean": 0.2930175800459238,
-    "median": 0.29113915027088677,
-    "sd": 0.07269685471121114,
-    "min": 0.07300736771600803,
-    "max": 0.49291784702549574,
-    "q25": 0.2560587339141668,
-    "q75": 0.3218619439665766
+    "n": 30,
+    "mean": 0.29057417440901456,
+    "median": 0.29595328358945194,
+    "sd": 0.06149825414837978,
+    "min": 0.10304321695896848,
+    "max": 0.3704704386522568,
+    "q25": 0.27009967790024475,
+    "q75": 0.3354065575069331
    }
   ],
   "changed_richer": [
    {
-    "n": 26,
-    "mean": 0.012548893929408635,
-    "median": 0.01038716975278867,
-    "sd": 0.010655536913545757,
-    "min": 0.0005497526113249038,
-    "max": 0.04337202199144777,
-    "q25": 0.0034501142964762474,
-    "q75": 0.01770259638080252
+    "n": 30,
+    "mean": 0.014383991307628022,
+    "median": 0.014728356703120187,
+    "sd": 0.008279259497823712,
+    "min": 0.001162340178225494,
+    "max": 0.030580462482302975,
+    "q25": 0.009016600536363845,
+    "q75": 0.020379333328635157
    },
    {
-    "n": 26,
-    "mean": 0.021494982241383163,
-    "median": 0.02148715144887917,
-    "sd": 0.005576718988451631,
-    "min": 0.004018754186202277,
-    "max": 0.030982905982905984,
-    "q25": 0.018707558492582297,
-    "q75": 0.024905485189565757
+    "n": 30,
+    "mean": 0.023996189711415258,
+    "median": 0.025085425026927455,
+    "sd": 0.0051359441917531575,
+    "min": 0.009014915587608589,
+    "max": 0.030275702138624065,
+    "q25": 0.02292914626884219,
+    "q75": 0.02722161800871665
    }
   ],
   "listen": {
    "evolved": {
     "me?": {
-     "n": 26,
-     "mean": 0.6794530220797762,
-     "median": 0.6734068804182032,
-     "sd": 0.03947174017272037,
-     "min": 0.622925208769904,
-     "max": 0.7539437125667368,
-     "q25": 0.6489895112288541,
-     "q75": 0.7093828248627231
+     "n": 30,
+     "mean": 0.6682945872694633,
+     "median": 0.6675274561701762,
+     "sd": 0.029359960421291225,
+     "min": 0.5904705096853755,
+     "max": 0.7279154273843792,
+     "q25": 0.6498545921792731,
+     "q75": 0.6869806157893845
     },
     "my tokens": {
-     "n": 26,
-     "mean": 0.6615699908598113,
-     "median": 0.6660903066328883,
-     "sd": 0.036251531852626806,
-     "min": 0.5697000044443129,
-     "max": 0.7137907898248919,
-     "q25": 0.6442680250877646,
-     "q75": 0.6883574034625412
+     "n": 30,
+     "mean": 0.6649769706017913,
+     "median": 0.6653948592800615,
+     "sd": 0.02355910274223589,
+     "min": 0.6131503363545372,
+     "max": 0.718569612404184,
+     "q25": 0.6463522587074488,
+     "q75": 0.6761970613249926
     },
     "its tokens": {
-     "n": 26,
-     "mean": 0.6614531490866951,
-     "median": 0.6639768357984382,
-     "sd": 0.04359240972754648,
-     "min": 0.5951458733302811,
-     "max": 0.801538598142243,
-     "q25": 0.6294877979521402,
-     "q75": 0.6761705544332919
+     "n": 30,
+     "mean": 0.6815712783311322,
+     "median": 0.6851713870304035,
+     "sd": 0.031676102399890806,
+     "min": 0.5877463216530576,
+     "max": 0.7404736333617635,
+     "q25": 0.6660636209127038,
+     "q75": 0.6986614293194652
     },
     "my links": {
-     "n": 26,
-     "mean": 0.6624326685535885,
-     "median": 0.6595215623756521,
-     "sd": 0.033500880818176745,
-     "min": 0.5869414493700272,
-     "max": 0.7241899731931053,
-     "q25": 0.6449820653124896,
-     "q75": 0.6850592229531842
+     "n": 30,
+     "mean": 0.667075102882158,
+     "median": 0.6709807990511973,
+     "sd": 0.03180195428594095,
+     "min": 0.6034156840648418,
+     "max": 0.7350921423579857,
+     "q25": 0.6453867734101408,
+     "q75": 0.6864352196651275
     },
     "its links": {
-     "n": 26,
-     "mean": 0.6733671067567752,
-     "median": 0.6666563577739684,
-     "sd": 0.03434860215482859,
-     "min": 0.614741101836138,
-     "max": 0.7644743925381201,
-     "q25": 0.6483789869601616,
-     "q75": 0.6918322741813818
+     "n": 30,
+     "mean": 0.6739837178132565,
+     "median": 0.6776470726552986,
+     "sd": 0.02916807300650042,
+     "min": 0.620714197144731,
+     "max": 0.7389205146513439,
+     "q25": 0.6506100168466672,
+     "q75": 0.6904987443026485
     },
     "around": {
-     "n": 26,
-     "mean": 0.672326569067415,
-     "median": 0.6707107665018994,
-     "sd": 0.009033795227586103,
-     "min": 0.6563133199598195,
-     "max": 0.6922304267275996,
-     "q25": 0.6667786905909119,
-     "q75": 0.6774148890717857
+     "n": 30,
+     "mean": 0.666597419640066,
+     "median": 0.6663864648543383,
+     "sd": 0.012740122940214224,
+     "min": 0.6387705144952815,
+     "max": 0.706657731906683,
+     "q25": 0.6600391480746836,
+     "q75": 0.6719374527780291
     },
     "I\u2192me": {
-     "n": 26,
-     "mean": 0.6697743396778735,
-     "median": 0.6696958336744534,
-     "sd": 0.014908915588224355,
-     "min": 0.6446030200694755,
-     "max": 0.6979788446906671,
-     "q25": 0.6583749396943928,
-     "q75": 0.6786613251379132
+     "n": 30,
+     "mean": 0.6666554534662356,
+     "median": 0.667092567728317,
+     "sd": 0.010711451837184293,
+     "min": 0.6414970992186326,
+     "max": 0.6926167005070709,
+     "q25": 0.6623578805317812,
+     "q75": 0.6733217154212376
     },
     "I\u2192it": {
-     "n": 26,
-     "mean": 0.6697024327253968,
-     "median": 0.6681003287059311,
-     "sd": 0.011487616164972472,
-     "min": 0.6480616968708215,
-     "max": 0.7001848241922684,
-     "q25": 0.6645062528931801,
-     "q75": 0.6753198424879039
+     "n": 30,
+     "mean": 0.6666961526048422,
+     "median": 0.6654739099780688,
+     "sd": 0.01056389108248728,
+     "min": 0.6450923759756992,
+     "max": 0.6941981510075671,
+     "q25": 0.6590159039151873,
+     "q75": 0.6736544041105688
     },
     "it\u2192me": {
-     "n": 26,
-     "mean": 0.6722981797570712,
-     "median": 0.6725614500662076,
-     "sd": 0.011325207871894213,
-     "min": 0.6479191130022757,
-     "max": 0.6967010000713855,
-     "q25": 0.6646117974700593,
-     "q75": 0.6785239483918066
+     "n": 30,
+     "mean": 0.6670314864229939,
+     "median": 0.6664529100303679,
+     "sd": 0.009037842200180965,
+     "min": 0.6456044403803798,
+     "max": 0.6863910284306064,
+     "q25": 0.6594749535235341,
+     "q75": 0.6739349633825867
     },
     "it\u2192it": {
-     "n": 26,
-     "mean": 0.6683936896483513,
-     "median": 0.6697855773269445,
-     "sd": 0.013258273039865584,
-     "min": 0.6385438149386482,
-     "max": 0.6881935736212814,
-     "q25": 0.662119128050909,
-     "q75": 0.6772929081676
+     "n": 30,
+     "mean": 0.6664026320222765,
+     "median": 0.6646334933834475,
+     "sd": 0.011520307981605846,
+     "min": 0.640808819123443,
+     "max": 0.6942723852172556,
+     "q25": 0.6598830628044396,
+     "q75": 0.6737091264163688
     },
     "random": {
-     "n": 26,
-     "mean": 0.6692302419006217,
-     "median": 0.6679774378781786,
-     "sd": 0.019475043316273387,
-     "min": 0.6264941954293219,
-     "max": 0.7248765900887695,
-     "q25": 0.6553457895938786,
-     "q75": 0.6792674914469699
+     "n": 30,
+     "mean": 0.6658991338793016,
+     "median": 0.6652025808747516,
+     "sd": 0.014315546771059184,
+     "min": 0.637993746873221,
+     "max": 0.7017987435467216,
+     "q25": 0.6572699550810651,
+     "q75": 0.6754928333117789
     }
    },
    "changeless": {
@@ -671,24 +671,24 @@
   },
   "apart": {
    "parent": {
-    "n": 26,
-    "mean": 0.010941633954644203,
-    "median": 0.00841206917539239,
-    "sd": 0.005328635327722881,
-    "min": 0.007952803280204535,
-    "max": 0.02299422025680542,
-    "q25": 0.008323407848365605,
-    "q75": 0.008659353945404291
+    "n": 30,
+    "mean": 0.0088878460538884,
+    "median": 0.008453784510493279,
+    "sd": 0.0022758700834702938,
+    "min": 0.008254130836576223,
+    "max": 0.020920670591294765,
+    "q25": 0.008399814832955599,
+    "q75": 0.008570621721446514
    },
    "world": {
-    "n": 26,
-    "mean": 0.1736476689290542,
-    "median": 0.18219291046261787,
-    "sd": 0.02462054537736342,
-    "min": 0.11534005030989647,
-    "max": 0.20374159514904022,
-    "q25": 0.1680507678538561,
-    "q75": 0.1908827107399702
+    "n": 30,
+    "mean": 0.1905235173801581,
+    "median": 0.19835513457655907,
+    "sd": 0.02297560653684417,
+    "min": 0.09433890134096146,
+    "max": 0.2071147933602333,
+    "q25": 0.1867474615573883,
+    "q75": 0.20453198440372944
    },
    "founders": {
     "n": 200,
@@ -706,32 +706,32 @@
   "gain": {
    "title": "How much of what a brain sees reaches what it does",
    "caption": "Left: for 300 agents of each world, every one of the 154 inputs of each of its columns moved by a small random amount (normal, standard deviation 0.1), and the root-mean-square change of the 45 outputs divided by that of the inputs \u2014 the brain's gain; one dot per world, the median of its agents, for the agents' own brains (blue) and for a fresh founder's brain \u2014 weights drawn as for the founders of a world, normal with standard deviation 1/\u221a(fan-in), biases 0 \u2014 given exactly the same inputs (grey). Right: the same ratio layer by layer for the evolved brains, the median over worlds: each of the five hidden layers ends in a sigmoid, the last is linear.",
-   "recipe": "**Runs.** The 26 baseline worlds that lived to the end.\n\n**Data.** From the final checkpoint of each run, `GraphOfLifeRuns/<run>/checkpoint.npz`, read with `gol_store.load_checkpoint(run, config)`: the world after its last iteration, every living agent's brain and every message in flight.\n\n1. For every agent of the world with at least one token, its inputs exactly as the engine builds them for a look at its candidates (`World._precompute_features` and `World._inputs`), and its brain's outputs (`Brain.forward`); the decisions follow by the engine's own rules (`_apportion` for the stakes, `_share_of_first` for a child's share).\n2. Draw \u03b5, normal with standard deviation 0.1, the shape of the input matrix X; the gain is RMS(forward(X + \u03b5) \u2212 forward(X)) / RMS(\u03b5). The same after each layer for the layer-by-layer ratios (`book_chapters.inner.gain`).\n\n**To make it again:** `python3 book_figures.py minds`."
+   "recipe": "**Runs.** The 30 baseline worlds that lived to the end.\n\n**Data.** From the final checkpoint of each run, `GraphOfLifeRuns/<run>/checkpoint.npz`, read with `gol_store.load_checkpoint(run, config)`: the world after its last iteration, every living agent's brain and every message in flight.\n\n1. For every agent of the world with at least one token, its inputs exactly as the engine builds them for a look at its candidates (`World._precompute_features` and `World._inputs`), and its brain's outputs (`Brain.forward`); the decisions follow by the engine's own rules (`_apportion` for the stakes, `_share_of_first` for a child's share).\n2. Draw \u03b5, normal with standard deviation 0.1, the shape of the input matrix X; the gain is RMS(forward(X + \u03b5) \u2212 forward(X)) / RMS(\u03b5). The same after each layer for the layer-by-layer ratios (`book_chapters.inner.gain`).\n\n**To make it again:** `python3 book_figures.py minds`."
   },
   "decisions": {
    "title": "What evolution changed",
    "caption": "One dot per world: of its agents with a token or more at the end, the share whose brain would spread its stakes rather than go all in; the share that would have a child (a share of its tokens of at least one token); and the share whose every stake score is zero or below, so that the rules split its tokens evenly over all its candidates. Blue: the agents' own brains; grey: a fresh founder's brain \u2014 weights drawn as for the founders of a world, normal with standard deviation 1/\u221a(fan-in), biases 0 \u2014 given exactly the same inputs.",
-   "recipe": "**Runs.** The 26 baseline worlds that lived to the end.\n\n**Data.** From the final checkpoint of each run, `GraphOfLifeRuns/<run>/checkpoint.npz`, read with `gol_store.load_checkpoint(run, config)`: the world after its last iteration, every living agent's brain and every message in flight.\n\n1. For every agent of the world with at least one token, its inputs exactly as the engine builds them for a look at its candidates (`World._precompute_features` and `World._inputs`), and its brain's outputs (`Brain.forward`); the decisions follow by the engine's own rules (`_apportion` for the stakes, `_share_of_first` for a child's share).\n2. Spread: the mean of the two BLOTTO_MODE outputs over the columns, first larger than second. Child: \u230af(\u0101, b\u0304) \u00b7 tokens\u230b \u2265 1 with \u0101, b\u0304 the REPRO_FRACTION outputs averaged over the columns. Even by default: every BLOTTO score \u2264 0 (`book_chapters.inner.probe`).\n\n**To make it again:** `python3 book_figures.py minds`."
+   "recipe": "**Runs.** The 30 baseline worlds that lived to the end.\n\n**Data.** From the final checkpoint of each run, `GraphOfLifeRuns/<run>/checkpoint.npz`, read with `gol_store.load_checkpoint(run, config)`: the world after its last iteration, every living agent's brain and every message in flight.\n\n1. For every agent of the world with at least one token, its inputs exactly as the engine builds them for a look at its candidates (`World._precompute_features` and `World._inputs`), and its brain's outputs (`Brain.forward`); the decisions follow by the engine's own rules (`_apportion` for the stakes, `_share_of_first` for a child's share).\n2. Spread: the mean of the two BLOTTO_MODE outputs over the columns, first larger than second. Child: \u230af(\u0101, b\u0304) \u00b7 tokens\u230b \u2265 1 with \u0101, b\u0304 the REPRO_FRACTION outputs averaged over the columns. Even by default: every BLOTTO score \u2264 0 (`book_chapters.inner.probe`).\n\n**To make it again:** `python3 book_figures.py minds`."
   },
   "outputs": {
    "title": "Where selection pushed",
    "caption": "One dot per world: the mean, over its agents and their columns, of each of the brain's outputs that make decisions (Chapter 4). A founder's brain averages 0 on every one of them (the dashed line). A child's share is f(a, b), the share of the positive part of a in the positive parts of a and b ([The share function](../notes/share-function.md)): a below 0 and b above it means no child. Likewise for the revolutionary part of a stake; spread or all in follows whichever of its two outputs is larger.",
-   "recipe": "**Runs.** The 26 baseline worlds that lived to the end.\n\n**Data.** From the final checkpoint of each run, `GraphOfLifeRuns/<run>/checkpoint.npz`, read with `gol_store.load_checkpoint(run, config)`: the world after its last iteration, every living agent's brain and every message in flight.\n\n1. For every agent of the world with at least one token, its inputs exactly as the engine builds them for a look at its candidates (`World._precompute_features` and `World._inputs`), and its brain's outputs (`Brain.forward`); the decisions follow by the engine's own rules (`_apportion` for the stakes, `_share_of_first` for a child's share).\n2. For each agent, the mean over its columns of output rows 0\u201314 (`World.heads`: REPRO_FRACTION 0\u20131, LINK 2\u20133, LINK_MODE 4\u20135, BLOTTO 6, BLOTTO_MODE 7\u20138, REV_FRACTION 9\u201310, HANDOVER 11\u201312, HANDOVER_MODE 13\u201314); then the mean over agents.\n\n**To make it again:** `python3 book_figures.py minds`."
+   "recipe": "**Runs.** The 30 baseline worlds that lived to the end.\n\n**Data.** From the final checkpoint of each run, `GraphOfLifeRuns/<run>/checkpoint.npz`, read with `gol_store.load_checkpoint(run, config)`: the world after its last iteration, every living agent's brain and every message in flight.\n\n1. For every agent of the world with at least one token, its inputs exactly as the engine builds them for a look at its candidates (`World._precompute_features` and `World._inputs`), and its brain's outputs (`Brain.forward`); the decisions follow by the engine's own rules (`_apportion` for the stakes, `_share_of_first` for a child's share).\n2. For each agent, the mean over its columns of output rows 0\u201314 (`World.heads`: REPRO_FRACTION 0\u20131, LINK 2\u20133, LINK_MODE 4\u20135, BLOTTO 6, BLOTTO_MODE 7\u20138, REV_FRACTION 9\u201310, HANDOVER 11\u201312, HANDOVER_MODE 13\u201314); then the mean over agents.\n\n**To make it again:** `python3 book_figures.py minds`."
   },
   "sensitivity": {
    "title": "What changes a decision",
    "caption": "One dot per world: the share of its agents whose stakes would differ at all if one thing about their inputs were different \u2014 every message they read set to 0; the five random numbers of every column drawn again; or every neighbour's tokens, as the agent sees them, doubled. Blue: the agents' own brains; grey: a fresh founder's brain \u2014 weights drawn as for the founders of a world, normal with standard deviation 1/\u221a(fan-in), biases 0 \u2014 given exactly the same inputs.",
-   "recipe": "**Runs.** The 26 baseline worlds that lived to the end.\n\n**Data.** From the final checkpoint of each run, `GraphOfLifeRuns/<run>/checkpoint.npz`, read with `gol_store.load_checkpoint(run, config)`: the world after its last iteration, every living agent's brain and every message in flight.\n\n1. For every agent of the world with at least one token, its inputs exactly as the engine builds them for a look at its candidates (`World._precompute_features` and `World._inputs`), and its brain's outputs (`Brain.forward`); the decisions follow by the engine's own rules (`_apportion` for the stakes, `_share_of_first` for a child's share).\n2. Change the inputs \u2014 rows 29\u2013148 set to 0; rows 149\u2013153 drawn again, uniform on (\u22122, 2); row 2 of every neighbour's column replaced by ln(1 + 2\u00b7(e^x \u2212 1)) \u2014 and decide again; count the agents whose shares of stake differ in any candidate.\n\n**To make it again:** `python3 book_figures.py minds`."
+   "recipe": "**Runs.** The 30 baseline worlds that lived to the end.\n\n**Data.** From the final checkpoint of each run, `GraphOfLifeRuns/<run>/checkpoint.npz`, read with `gol_store.load_checkpoint(run, config)`: the world after its last iteration, every living agent's brain and every message in flight.\n\n1. For every agent of the world with at least one token, its inputs exactly as the engine builds them for a look at its candidates (`World._precompute_features` and `World._inputs`), and its brain's outputs (`Brain.forward`); the decisions follow by the engine's own rules (`_apportion` for the stakes, `_share_of_first` for a child's share).\n2. Change the inputs \u2014 rows 29\u2013148 set to 0; rows 149\u2013153 drawn again, uniform on (\u22122, 2); row 2 of every neighbour's column replaced by ln(1 + 2\u00b7(e^x \u2212 1)) \u2014 and decide again; count the agents whose shares of stake differ in any candidate.\n\n**To make it again:** `python3 book_figures.py minds`."
   },
   "listen": {
    "title": "What a brain listens to",
    "caption": "For each group of the brain's inputs ([What a brain sees](../notes/brain-inputs.md)) \u2014 whether the candidate is the agent itself; the agent's and the candidate's tokens and connections; the summaries of both neighbourhoods (around); the four messages, from writer to reader (I\u2192me is what the agent wrote to itself, it\u2192me what the candidate wrote to it, and so on); and the random numbers \u2014 the size of the first layer's weights that read it: for each input, the length of its column of 50 weights, averaged over the inputs of the group and the agents of the world; one dot per world. Lower dashed line: the same for founders' brains. Upper: what the changes of [How a brain changes](../notes/mutation.md) alone would bring every weight to, whatever it reads \u2014 its jitters adding variance, its resets drawing weights back \u2014 at the balance of the two.",
-   "recipe": "**Runs.** The 26 baseline worlds that lived to the end.\n\n**Data.** From the final checkpoint of each run, `GraphOfLifeRuns/<run>/checkpoint.npz`, read with `gol_store.load_checkpoint(run, config)`: the world after its last iteration, every living agent's brain and every message in flight.\n\n1. Read the first weight matrix W0 (agents \u00d7 50 \u00d7 154) from the checkpoint; for each input the norm of its column; average within each group of inputs and over agents.\n2. Mutation alone: each change jitters a weight with probability 0.1 by a normal amount of variance 0.2\u00b2/k and redraws it with probability 0.1 \u00b7 0.1 from variance 1/k; the variance v at balance satisfies v = 0.99 (v + 0.004/k) + 0.01/k, so v = 1.396/k: \u221a1.396 = 1.18 times a founder's.\n\n**To make it again:** `python3 book_figures.py minds`."
+   "recipe": "**Runs.** The 30 baseline worlds that lived to the end.\n\n**Data.** From the final checkpoint of each run, `GraphOfLifeRuns/<run>/checkpoint.npz`, read with `gol_store.load_checkpoint(run, config)`: the world after its last iteration, every living agent's brain and every message in flight.\n\n1. Read the first weight matrix W0 (agents \u00d7 50 \u00d7 154) from the checkpoint; for each input the norm of its column; average within each group of inputs and over agents.\n2. Mutation alone: each change jitters a weight with probability 0.1 by a normal amount of variance 0.2\u00b2/k and redraws it with probability 0.1 \u00b7 0.1 from variance 1/k; the variance v at balance satisfies v = 0.99 (v + 0.004/k) + 0.01/k, so v = 1.396/k: \u221a1.396 = 1.18 times a founder's.\n\n**To make it again:** `python3 book_figures.py minds`."
   },
   "apart": {
    "title": "How far apart brains are",
    "caption": "The difference between two brains: the root mean square of the differences of all their 15,795 numbers (weights and biases). Left: a genotype and its parent genotype, where both are alive at the end of a world \u2014 one change apart; one dot per world, the median of its pairs. Middle: two agents drawn at random from one world; one dot per world, the median of 3,000 pairs. Right: two fresh founders' brains, one dot per pair (200 pairs).",
-   "recipe": "**Runs.** The 26 baseline worlds that lived to the end.\n\n**Data.** From the final checkpoint of each run, `GraphOfLifeRuns/<run>/checkpoint.npz`, read with `gol_store.load_checkpoint(run, config)`: the world after its last iteration, every living agent's brain and every message in flight.\n\n1. Concatenate every weight matrix and bias vector of a brain into one vector of 15,795 numbers; the difference of two brains is the root mean square of the difference of their vectors (`book_chapters.inner.weights`).\n\n**To make it again:** `python3 book_figures.py minds`."
+   "recipe": "**Runs.** The 30 baseline worlds that lived to the end.\n\n**Data.** From the final checkpoint of each run, `GraphOfLifeRuns/<run>/checkpoint.npz`, read with `gol_store.load_checkpoint(run, config)`: the world after its last iteration, every living agent's brain and every message in flight.\n\n1. Concatenate every weight matrix and bias vector of a brain into one vector of 15,795 numbers; the difference of two brains is the root mean square of the difference of their vectors (`book_chapters.inner.weights`).\n\n**To make it again:** `python3 book_figures.py minds`."
   }
  }
 }

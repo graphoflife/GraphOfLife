@@ -43,7 +43,7 @@ def life(ch: F.Chapter) -> None:
                 f"each in a chart of its own and all on the same scale (0 to {top:,.0f} agents, "
                 f"iterations 0 to {W.until:,}). Each line has one point per iteration.",
         recipe=recipe(f"`{W.run(1)}` … `{W.run(6)}`, six of the {len(specs)} baseline runs (their "
-                      "settings are listed in [Chapter 9](09-thirty-worlds.md)).", STATS_FILE,
+                      f"settings are listed in {F._listed_in(W.experiment)}).", STATS_FILE,
                       ["Take the rows with `phase` = 2.",
                        "Plot `nodes` against `iteration`, one point per iteration, joined."]))
 
@@ -332,6 +332,9 @@ def births(ch: F.Chapter) -> None:
         out.append(line(b["x"], b["y"], label, colour, width=2))
         settled = [np.nanmean(per_agent(s.run_id, stat, phase)[1][W.settled:]) for s in alive]
         ch.number(f"rate_{stat}_{phase}", describe(settled))
+    # Starving in reproduction is too rare to draw beside the others; the text gives its rate.
+    ch.number("rate_starved_1", describe([np.nanmean(per_agent(s.run_id, "starved", 1)[1][W.settled:])
+                                          for s in alive]))
     ch.figure(
         "rates", title="Births and deaths per 100 agents",
         x={"label": "iteration"}, y={"label": "per 100 agents", "min": 0, "max": 12},
@@ -401,23 +404,6 @@ def births(ch: F.Chapter) -> None:
     ch.number("ages_end", {"n": int(len(ages)), "median": float(np.median(ages)),
                            "share_0": float(np.mean(ages == 0)), "share_ge_100": float(np.mean(ages >= 100)),
                            "share_ge_1000": float(np.mean(ages >= 1000))})
-
-    med_age = []
-    for s in specs:
-        a = F.world_pass(s.run_id)["age"]
-        med_age.append((np.array([x for x, _ in a], float), np.array([y for _, y in a], float)))
-    band = band_series(med_age, f"{len(specs)} worlds: median, middle half, nine in ten", BLUE)
-    ch.figure(
-        "median-age", title="Median age of the living",
-        x={"label": "iteration"}, y={"label": "iterations", "min": 0},
-        series=[band],
-        caption=f"After every game, the median age of the agents alive. {BAND_WORDS}.",
-        recipe=recipe(W.runs_text(), FRAMES,
-                      ["After every game (frames with `phase` = 2) take the median of `ages`.",
-                       *BAND_STEPS]))
-    for t in sorted({t for t in (100, 500, 1000, 2000) if t < W.last} | {W.last}):
-        k = int(np.argmin(np.abs(np.array(band["x"]) - t)))
-        ch.number(f"median_age_{t}", float(band["y"][k]))
 
 
 # ---------------------------------------------------------------------------
