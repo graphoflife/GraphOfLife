@@ -22,7 +22,9 @@ from book_chapters.measures import settled_rows
 
 LAST = W.last
 #: The stretch of one world's life Chapter 32 draws game by game: one with big cuts in it.
-ONE_WORLD = {"E02": (1, (1000, 1600)), "E10": (1, (900, 1499))}[W.experiment]
+ONE_WORLD = {"E02": (1, (1000, 1600)), "E10": (26, (600, 1200))}[W.experiment]
+#: A cut this large is taken apart agent by agent: one agent per hundred tokens, as 100 was at 10,000.
+BIG_CUT = W.tokens // 100
 
 
 def log_classes(values: np.ndarray, edges: Sequence[float]) -> List[Tuple[float, float, np.ndarray]]:
@@ -551,7 +553,7 @@ def breaking(ch: F.Chapter) -> None:
 
     # The anatomy of the big cuts: one unused bridge, or a whole border gone quiet?
     big = [dict(run=s.run_id, **cut_anatomy(s.run_id, r["iteration"])) for s in alive
-           for r in settled_rows(s.run_id) if (r["orphaned"] or 0) >= 100]
+           for r in settled_rows(s.run_id) if (r["orphaned"] or 0) >= BIG_CUT]
     kinds = {}
     for label, lo, hi in (("1–2", 1, 2), ("3–9", 3, 9), ("10+", 10, 10 ** 9)):
         g = [x for x in big if lo <= x["attachments"] <= hi]
@@ -603,18 +605,24 @@ def breaking(ch: F.Chapter) -> None:
 @chapter
 def colours(ch: F.Chapter) -> None:
     import networkx as nx
+    from book_chapters.society import piece_words, shown
     run = W.run(1)
     game = D.frame_at(run, LAST, 2)
     start = D.frame_at(run, LAST, 1)
+    # What each picture colours is read off the whole world; a world too large to draw is drawn a piece.
     ids, edges = game["ids"], game["edges"]
-    G = nx.Graph()
-    G.add_nodes_from(ids)
-    G.add_edges_from(edges)
-    pos = nx.forceatlas2_layout(G, max_iter=200, seed=1)
-    index = {u: i for i, u in enumerate(ids)}
-    xy = {"x": [float(pos[u][0]) for u in ids], "y": [float(pos[u][1]) for u in ids]}
-    E = [[index[a], index[b]] for a, b in edges]
     adj = graph(game)
+    drawn, info = shown(game)
+    inside = set(drawn)
+    keep = [i for i, u in enumerate(ids) if u in inside]
+    drawn_edges = [(a, b) for a, b in edges if a in inside and b in inside]
+    G = nx.Graph()
+    G.add_nodes_from(drawn)
+    G.add_edges_from(drawn_edges)
+    pos = nx.forceatlas2_layout(G, max_iter=200, seed=1)
+    index = {u: i for i, u in enumerate(drawn)}
+    xy = {"x": [float(pos[u][0]) for u in drawn], "y": [float(pos[u][1]) for u in drawn]}
+    E = [[index[a], index[b]] for a, b in drawn_edges]
 
     tokens = np.array(game["tokens"], float)
     ages = np.array(game["ages"], float) + 1
@@ -648,9 +656,9 @@ def colours(ch: F.Chapter) -> None:
     def panel(title, colour_spec, values=None, groups=None):
         nodes = dict(xy)
         if values is not None:
-            nodes["value"] = [float(v) for v in values]
+            nodes["value"] = [float(values[i]) for i in keep]
         if groups is not None:
-            nodes["group"] = groups
+            nodes["group"] = [groups[i] for i in keep]
         return dict(kind="network", title=title, nodes=nodes, edges=E, colour=colour_spec, nodeSize=2.0,
                     edgeAlpha=0.25)
     sym = max(abs(change).max(), 1)
@@ -671,8 +679,9 @@ def colours(ch: F.Chapter) -> None:
     panels[4]["legend"] = True
     ch.grid(
         "six-views", panels, columns=2, title="The world of seed 1 after its last game, six ways",
-        caption=f"Every agent alive after the game of iteration {LAST:,} of the world with seed 1 is a dot, every "
-                "connection a faint line, and the dots sit in the same places in all six pictures (a "
+        caption=f"The world with seed 1 after the game of iteration {LAST:,}, "
+                f"{piece_words(info, len(drawn), len(ids))}: every agent drawn is a dot, every "
+                "connection between two of them a faint line, and the dots sit in the same places in all six pictures (a "
                 "ForceAtlas2 layout, seed 1, which pulls joined agents together). Each picture colours the "
                 "dots by one of the quantities the viewer offers ([What the viewer can colour by]"
                 "(../notes/viewer-colours.md)): tokens and age on logarithmic scales; the change of tokens in "
@@ -689,8 +698,10 @@ def colours(ch: F.Chapter) -> None:
                        "and climb from each "
                        f"living genotype to one alive after the game of iteration {LAST - 100:,}.",
                        "Loops: as in [Chapter 31](31-the-geometry-of-a-world.md).",
+                       "Which agents are drawn: as in Chapter 16 (`book_chapters.society.shown`).",
                        "Lay out with `networkx.forceatlas2_layout(G, max_iter=200, seed=1)` and colour."]))
-    ch.number("six_views", {"agents": len(ids), "families": {str(k): v for k, v in shares.items()},
+    ch.number("six_views", {"agents": len(ids), "drawn": len(drawn), "piece": info,
+                            "families": {str(k): v for k, v in shares.items()},
                             "max_tokens": float(tokens.max()), "max_age": float(ages.max() - 1)})
 
     flow = Counter()
@@ -700,12 +711,12 @@ def colours(ch: F.Chapter) -> None:
                 flow[(min(r["agent"], target), max(r["agent"], target))] += amount
     classes = [(1, 2), (3, 9), (10, 49), (50, 10 ** 9)]
     edge_group = []
-    for a, b in edges:
+    for a, b in drawn_edges:
         f = flow.get((min(a, b), max(a, b)), 0)
         edge_group.append(next((k + 1 for k, (lo, hi) in enumerate(classes) if lo <= f <= hi), 0))
     ch.network(
         "flows", title="Where the tokens went in the last game",
-        nodes={**xy, "group": [0] * len(ids)}, edges=E, colour={"labels": []}, nodeSize=1.4, edgeAlpha=0.15,
+        nodes={**xy, "group": [0] * len(drawn)}, edges=E, colour={"labels": []}, nodeSize=1.4, edgeAlpha=0.15,
         edgeGroup=edge_group, edgeLabels=["1–2 tokens", "3–9 tokens", "10–49 tokens", "50 or more"],
         caption="The same world and layout; every connection is coloured by how many tokens crossed it in the "
                 "last game, in both directions together, and drawn the wider the more crossed. Every connection "

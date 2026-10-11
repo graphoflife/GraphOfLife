@@ -14,7 +14,7 @@ the run's recorded rows instead.
 from __future__ import annotations
 
 from collections import Counter, deque
-from typing import Any, Dict, Iterable
+from typing import Any, Dict, Iterable, Tuple
 
 
 def graph(frame: Dict[str, Any]) -> Dict[int, set]:
@@ -80,3 +80,20 @@ def degree_preserving(adj: Dict[int, set], seed: int) -> Dict[int, set]:
     g = nx.Graph(nx.configuration_model([len(adj[a]) for a in ids], seed=seed))
     g.remove_edges_from(list(nx.selfloop_edges(g)))
     return {u: set(g[u]) for u in g}
+
+
+def ball(adj: Dict[int, set], centre: int, limit: int) -> Tuple[set, int]:
+    """
+    The agents within r steps of `centre`, for the largest r whose ball holds at
+    most `limit` of them (r is at least 1), and that r: a piece of a world small
+    enough to draw.
+    """
+    dist = bfs(adj, centre)
+    count = Counter(dist.values())
+    radius, held = 1, 0
+    for r in sorted(count):
+        held += count[r]
+        if held > limit and r > 1:
+            break
+        radius = r
+    return {u for u, d in dist.items() if d <= radius}, radius

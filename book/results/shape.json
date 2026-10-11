@@ -6,28 +6,44 @@
    "edges": 172,
    "core": 0.76,
    "tree": 0.056,
-   "leaves": 0.184
+   "leaves": 0.184,
+   "drawn": 125,
+   "piece": {
+    "whole": true
+   }
   },
   "picture_100": {
    "agents": 1800,
    "edges": 2574,
    "core": 0.5188888888888888,
    "tree": 0.10277777777777777,
-   "leaves": 0.37833333333333335
+   "leaves": 0.37833333333333335,
+   "drawn": 1800,
+   "piece": {
+    "whole": true
+   }
   },
   "picture_1000": {
    "agents": 917,
    "edges": 1266,
    "core": 0.5070883315158125,
    "tree": 0.13086150490730644,
-   "leaves": 0.36205016357688113
+   "leaves": 0.36205016357688113,
+   "drawn": 917,
+   "piece": {
+    "whole": true
+   }
   },
   "picture_2999": {
    "agents": 1336,
    "edges": 2447,
    "core": 0.5890718562874252,
    "tree": 0.05464071856287425,
-   "leaves": 0.3562874251497006
+   "leaves": 0.3562874251497006,
+   "drawn": 1336,
+   "piece": {
+    "whole": true
+   }
   },
   "degree_end": {
    "agents": 35554,
@@ -117,12 +133,12 @@
   "worlds": {
    "title": "One world at four moments",
    "caption": "The world with seed 1 after the games of iterations 0, 100, 1,000 and 2,999. Every agent alive is a dot, every connection a line. Blue: agents in the core, which is what is left when agents with one connection or none are removed again and again until none remains ([Core, trees and leaves](../notes/core-trees-leaves.md)); yellow: the rest of the hanging trees; red: leaves, agents with a single connection. Where a dot is drawn means nothing in itself: a layout (networkx's ForceAtlas2, seed 1) pulls joined agents together and pushes the rest apart.",
-   "recipe": "**Runs.** `B1-10000-s001`, one of the 30 baseline runs.\n\n**Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2\u00b7t` is iteration *t* after reproduction and frame `2\u00b7t + 1` after the game.\n\n1. Read frames `1`, `201`, `2001` and `5999` (iterations 0, 100, 1,000 and 2,999, after the game): `ids` and `edges`.\n2. Peel: remove every agent with one connection or none, again and again, until none is left; the agents never removed are the core. Leaves are agents with exactly one connection.\n3. Lay the graph out with `networkx.forceatlas2_layout(G, max_iter=200, seed=1)`.\n\n**To make it again:** `python3 book_figures.py shape`."
+   "recipe": "**Runs.** `B1-10000-s001`, one of the 30 baseline runs.\n\n**Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2\u00b7t` is iteration *t* after reproduction and frame `2\u00b7t + 1` after the game.\n\n1. Read frames `1`, `201`, `2001` and `5999` (iterations 0, 100, 1,000 and 2,999, after the game): `ids` and `edges`.\n2. Peel: remove every agent with one connection or none, again and again, until none is left; the agents never removed are the core. Leaves are agents with exactly one connection.\n3. In a world of more than 2,500 agents, keep the agents within r steps of the oldest agent, for the largest r that keeps at most 2,500 (`book_chapters.society.shown`).\n4. Lay the graph out with `networkx.forceatlas2_layout(G, max_iter=200, seed=1)`.\n\n**To make it again:** `python3 book_figures.py shape`."
   },
   "world-end": {
    "title": "World of seed 1 after the game of iteration 2,999",
-   "caption": "Every agent alive after the game of iteration 2,999 is a dot, every connection a line. Blue: agents in the core, which is what is left when agents with one connection or none are removed again and again until none remains ([Core, trees and leaves](../notes/core-trees-leaves.md)); yellow: the rest of the hanging trees; red: leaves, agents with a single connection. Where a dot is drawn means nothing in itself: a layout (networkx's ForceAtlas2, seed 1) pulls joined agents together and pushes the rest apart.",
-   "recipe": "**Runs.** `B1-10000-s001`.\n\n**Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2\u00b7t` is iteration *t* after reproduction and frame `2\u00b7t + 1` after the game.\n\n1. Read frame `5999` (iteration 2,999, after the game): `ids` and `edges`.\n2. Peel: remove every agent with one connection or none, again and again, until none is left; the agents never removed are the core. Leaves are agents with exactly one connection.\n3. Lay the graph out with `networkx.forceatlas2_layout(G, max_iter=200, seed=1)`.\n\n**To make it again:** `python3 book_figures.py shape`."
+   "caption": "The world with seed 1 after the game of iteration 2,999, every one of its 1,336 agents: every agent drawn is a dot, every connection between two of them a line. Blue: agents in the core, which is what is left when agents with one connection or none are removed again and again until none remains ([Core, trees and leaves](../notes/core-trees-leaves.md)); yellow: the rest of the hanging trees; red: leaves, agents with a single connection. Where a dot is drawn means nothing in itself: a layout (networkx's ForceAtlas2, seed 1) pulls joined agents together and pushes the rest apart.",
+   "recipe": "**Runs.** `B1-10000-s001`.\n\n**Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2\u00b7t` is iteration *t* after reproduction and frame `2\u00b7t + 1` after the game.\n\n1. Read frame `5999` (iteration 2,999, after the game): `ids` and `edges`.\n2. Peel: remove every agent with one connection or none, again and again, until none is left; the agents never removed are the core. Leaves are agents with exactly one connection.\n3. In a world of more than 2,500 agents, keep the agents within r steps of the oldest agent, for the largest r that keeps at most 2,500 (`book_chapters.society.shown`).\n4. Lay the graph out with `networkx.forceatlas2_layout(G, max_iter=200, seed=1)`.\n\n**To make it again:** `python3 book_figures.py shape`."
   },
   "degree": {
    "title": "How many connections agents have",

@@ -15,6 +15,7 @@ import book_data as D
 import book_figures as F
 from book_figures import (FRAMES, STATS_FILE, band_series, chapter, describe, dots, line, mean_over,
                           recipe, series, stacked_areas)
+from book_graph import ball
 from book_chapters.common import (BAND_STEPS, BAND_WORDS, BLUE, CYAN, GREEN, GREY, ORANGE, RED,
                                   VIOLET, WORLDS as W, YELLOW)
 
@@ -301,6 +302,11 @@ def game(ch: F.Chapter) -> None:
 # Chapter 16 · What shape does the network take?
 # ---------------------------------------------------------------------------
 
+#: A world with more agents than this is drawn a piece at a time: a layout of every agent
+#: costs the square of their number, and fifteen thousand dots are a tangle.
+PICTURE_LIMIT = 2500
+
+
 def roles(ids: List[int], edges: List[List[int]]) -> Dict[int, int]:
     """0 for an agent in the 2-core, 1 for one on a hanging tree, 2 for a leaf."""
     adj = {i: set() for i in ids}
@@ -330,30 +336,65 @@ ROLE_WORDS = ("Blue: agents in the core, which is what is left when agents with 
               "rest apart.")
 ROLE_STEPS = ("Peel: remove every agent with one connection or none, again and again, until none is "
               "left; the agents never removed are the core. Leaves are agents with exactly one connection.",
+              f"In a world of more than {PICTURE_LIMIT:,} agents, keep the agents within r steps of the oldest "
+              f"agent, for the largest r that keeps at most {PICTURE_LIMIT:,} (`book_chapters.society.shown`).",
               "Lay the graph out with `networkx.forceatlas2_layout(G, max_iter=200, seed=1)`.")
 
 
+def shown(frame: Dict[str, Any]) -> Tuple[List[int], Dict[str, Any]]:
+    """
+    The agents of a frame a picture draws: all of them, or, in a world too large
+    to draw, every agent within r steps of its oldest agent (the lowest id among
+    the oldest), for the largest r that holds at most PICTURE_LIMIT.
+    """
+    ids = list(frame["ids"])
+    if len(ids) <= PICTURE_LIMIT:
+        return ids, {"whole": True}
+    adj = {u: set() for u in ids}
+    for a, b in frame["edges"]:
+        if a != b:
+            adj[a].add(b)
+            adj[b].add(a)
+    centre = max(ids, key=lambda u: (frame["ages"][ids.index(u)], -u))
+    members, radius = ball(adj, centre, PICTURE_LIMIT)
+    return [u for u in ids if u in members], {"whole": False, "centre": centre, "radius": radius,
+                                              "age": int(frame["ages"][ids.index(centre)])}
+
+
+def piece_words(info: Dict[str, Any], drawn: int, total: int) -> str:
+    """How a caption says which agents a picture holds."""
+    if info["whole"]:
+        return f"every one of its {total:,} agents"
+    return (f"the {drawn:,} of its {total:,} agents within {info['radius']} steps of agent {info['centre']:,}, the "
+            f"oldest, {info['age']:,} iterations old — a piece, since a world this large is a tangle when drawn whole")
+
+
 def picture(run_id: str, iteration: int) -> Tuple[Dict[str, Any], Dict[str, float]]:
-    """A world after the game of `iteration`, as a network chart, and the shares of its roles."""
+    """A world after the game of `iteration` — or a piece of it — as a network chart, and the shares of its roles."""
     import networkx as nx
     frame = D.frame_at(run_id, iteration, 2)
-    ids, edges = frame["ids"], frame["edges"]
+    ids_all, edges_all = frame["ids"], frame["edges"]
+    role = roles(ids_all, edges_all)
+    ids, info = shown(frame)
+    inside = set(ids)
+    edges = [(a, b) for a, b in edges_all if a in inside and b in inside]
     G = nx.Graph()
     G.add_nodes_from(ids)
     G.add_edges_from(edges)
     pos = nx.forceatlas2_layout(G, max_iter=200, seed=1)
     index = {u: i for i, u in enumerate(ids)}
-    role = roles(ids, edges)
-    chart = dict(kind="network", title=f"Iteration {iteration:,}: {len(ids):,} agents",
+    title = (f"Iteration {iteration:,}: {len(ids):,} agents" if info["whole"] else
+             f"Iteration {iteration:,}: {len(ids):,} of {len(ids_all):,} agents")
+    chart = dict(kind="network", title=title,
                  nodes={"x": [float(pos[u][0]) for u in ids], "y": [float(pos[u][1]) for u in ids],
                         "group": [role[u] for u in ids]},
                  edges=[[index[a], index[b]] for a, b in edges],
                  colour={"labels": ["core: on a loop or between loops", "on a hanging tree",
                                     "leaf: a single connection"]})
-    n = len(ids)
-    return chart, {"agents": n, "edges": len(edges), "core": sum(1 for v in role.values() if v == 0) / n,
+    n = len(ids_all)
+    return chart, {"agents": n, "edges": len(edges_all), "core": sum(1 for v in role.values() if v == 0) / n,
                    "tree": sum(1 for v in role.values() if v == 1) / n,
-                   "leaves": sum(1 for v in role.values() if v == 2) / n}
+                   "leaves": sum(1 for v in role.values() if v == 2) / n, "drawn": len(ids), "piece": info}
 
 
 @chapter
@@ -362,24 +403,29 @@ def shape(ch: F.Chapter) -> None:
     alive = W.alive
     n = len(alive)
     moments = (0, 100, W.until // 3, W.last)
-    charts = []
+    charts, said = [], []
     for t in moments:
         chart, counts = picture(W.run(1), t)
         charts.append(chart)
         ch.number(f"picture_{t}", counts)
+        said.append(f"at iteration {t:,}, " + piece_words(counts["piece"], counts["drawn"], counts["agents"]))
+    whole = all(ch.numbers[f"picture_{t}"]["piece"]["whole"] for t in moments)
     ch.grid(
         "worlds", [dict(c, legend=False) for c in charts[:3]] + [charts[3]], columns=2,
         title="One world at four moments",
         caption=f"The world with seed 1 after the games of iterations {moments[0]}, {moments[1]}, "
-                f"{moments[2]:,} and {moments[3]:,}. Every agent alive is a dot, every connection a line. {ROLE_WORDS}",
+                f"{moments[2]:,} and {moments[3]:,}. Every agent alive is a dot, every connection a line"
+                + (". " if whole else f" ({'; '.join(said)}). ") + ROLE_WORDS,
         recipe=recipe(f"`{W.run(1)}`, one of the {len(specs)} baseline runs.", FRAMES,
                       ["Read frames " + ", ".join(f"`{W.frame(t)}`" for t in moments[:3])
                        + f" and `{W.frame(moments[3])}` (iterations {moments[0]}, {moments[1]}, "
                        f"{moments[2]:,} and {moments[3]:,}, after the game): `ids` and `edges`.", *ROLE_STEPS]))
+    end = ch.numbers[f"picture_{W.last}"]
     ch.figure(
         "world-end", **dict(charts[3], title=f"World of seed 1 after the game of iteration {W.last:,}"),
-        caption=f"Every agent alive after the game of iteration {W.last:,} is a dot, every connection a "
-                f"line. {ROLE_WORDS}",
+        caption=f"The world with seed 1 after the game of iteration {W.last:,}, "
+                f"{piece_words(end['piece'], end['drawn'], end['agents'])}: every agent drawn is a dot, every "
+                f"connection between two of them a line. {ROLE_WORDS}",
         recipe=recipe(f"`{W.run(1)}`.", FRAMES,
                       [f"Read frame `{W.frame(W.last)}` (iteration {W.last:,}, after the game): `ids` and `edges`.",
                        *ROLE_STEPS]))
