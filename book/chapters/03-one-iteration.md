@@ -214,7 +214,7 @@ members are replaced.
 
 But the game changes far more than that: in a settled baseline world only
 about 45% of agents keep their node through a game; the rest take on another
-agent's brain ([Chapter 15](15-how-the-game-is-played.md)). The members of a
+agent's brain ([Chapter 16](16-how-the-game-is-played.md)). The members of a
 world stay; their brains are replaced all the time.
 
 > [!summary] In short

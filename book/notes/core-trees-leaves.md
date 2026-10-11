@@ -54,7 +54,37 @@ cleanup then removes all of it. The share of a world that hangs in trees is
 the share that can be lost to a single cut.
 
 In a settled baseline world about 54% of agents are in the core, 36% are
-leaves and the rest in trees ([Chapter 16](../chapters/16-what-shape-does-the-network-take.md)).
+leaves and the rest in trees ([Chapter 17](../chapters/17-what-shape-does-the-network-take.md)).
+
+## How far a tree hangs
+
+Every agent off the core belongs to exactly one tree, and every tree joins
+the core at exactly one core agent — two ways into the core would close a
+loop, and the agent would be in the core. So each agent off the core has a
+**depth**, its number of steps to the core, and a **root**, the core agent
+its tree hangs from. In the example, d hangs from c at depth 1; g hangs from
+f at depth 1, and h and i at depth 2. The tree hanging from f holds three
+agents (g, h and i), the one hanging from c one (d). A breadth-first search
+out of every core agent at once finds both for every agent.
+
+## Deeper cores: the onion
+
+The peeling can go further. Remove every agent with fewer than **three**
+connections, again and again, and what is left is the **3-core**; with
+fewer than *k*, the ***k*-core**. Each *k*-core lies inside the one before,
+like the layers of an onion, and an agent's **core number** is the largest
+*k* whose *k*-core still holds it (Seidman 1983). An agent on a tree or a
+leaf has core number 1; an agent of the 2-core that the 3-core no longer
+holds has core number 2; and so on.
+
+In the example every core agent has two connections inside the core, so the
+3-core is empty: a, b, c, e and f have core number 2, and d, g, h and i
+core number 1. A network in which many agents have high core numbers is
+held together by many overlapping loops, not by single rings.
+
+The viewer records only the share of agents in the 2-core (`coreShare`);
+the deeper cores, the trees and the dimension of the core are measured in
+[Chapter 25](../chapters/25-the-core-of-a-world.md).
 
 <!-- turns -->
 [Contents](../README.md)

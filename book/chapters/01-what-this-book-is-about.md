@@ -63,7 +63,7 @@ every brain changes with the same probability after every game
 question, not a given: brains that keep their tokens and take over
 neighbouring nodes spread, and the others vanish — but is that because of
 *how they differ*, or by chance? Nothing in the rules says which brains are
-good. [Chapter 37](37-do-the-brains-matter.md) asks it directly.
+good. [Chapter 41](41-do-the-brains-matter.md) asks it directly.
 
 ## What would count as open-ended
 
@@ -82,7 +82,7 @@ before the next:
 
 Parts II to IV answer questions that lie underneath P1. Part V, not yet
 written, will climb the ladder, by the changes to the rules that
-[Meta II](36-meta-2.md) proposes.
+[Meta II](40-meta-2.md) proposes.
 
 ## How the book is organised
 
@@ -99,7 +99,7 @@ written, will climb the ladder, by the changes to the rules that
   wealth, the game, the shape of the network, lineages, what the brains are
   like and what agents say to each other, whether the rich stay rich, how
   the network grows, how far likeness reaches, and how many dimensions a
-  world has ([Chapters 9 to 24](09-thirty-worlds.md)).
+  world has ([Chapters 9 to 26](09-thirty-worlds.md)).
 - **Part III · The baseline world, measured every way.** The same thirty
   worlds again, through every statistic the Graph of Life viewer offers and
   some it does not: entropy, gains and losses, the flow of tokens, how agents
@@ -107,15 +107,15 @@ written, will climb the ladder, by the changes to the rules that
   breaks, pictures of one world in many colours, whether agents cooperate —
   then a chapter that questions the rules themselves, and a meta chapter on
   what it all means for open-ended evolution, with proposals for changing the
-  rules ([Chapters 25 to 36](25-how-even-is-a-world.md)).
+  rules ([Chapters 27 to 40](27-how-even-is-a-world.md)).
 - **Part IV · One change at a time.** One setting changed against the
   baseline: worlds whose brains never change or are never asked
-  ([Chapter 37](37-do-the-brains-matter.md)), worlds of other sizes
-  ([Chapter 38](38-how-does-a-worlds-size-follow-its-tokens.md)), and more.
+  ([Chapter 41](41-do-the-brains-matter.md)), worlds of other sizes
+  ([Chapter 42](42-how-does-a-worlds-size-follow-its-tokens.md)), and more.
 - **Part V · Towards open-ended evolution.** Changed rules, aimed at the
-  ladder above, in the order [Meta II](36-meta-2.md) sets out.
+  ladder above, in the order [Meta II](40-meta-2.md) sets out.
 - **Part VI · Towards a physics.** The second aim: worlds ten times the size
-  ([Chapter 51](51-worlds-of-100000-tokens.md)), how many dimensions a world
+  ([Chapter 55](55-worlds-of-100000-tokens.md)), how many dimensions a world
   has at scale, which of its properties have no scale, what changes when
   every rule is local, how far a difference travels, what forms when a flow
   runs through a world, and whether anything like a particle appears

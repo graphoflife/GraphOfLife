@@ -65,7 +65,7 @@ means like beside like, a negative one unlike beside unlike.
 <!-- figure alike/neighbours -->
 ![Are neighbours alike?](../figures/alike/neighbours.svg)
 
-**Are neighbours alike?** For every connection of a world, the two agents at its ends: the correlation of their tokens, of their ages and of their numbers of connections (tokens and age as ln(1 + x), connections as ln k), counting every connection both ways round. One dot per world that lived to the end, the mean over five moments (after the games of iterations 1,000, 1,500, 2,000, 2,500 and 2,999); the bar is the median. The same values shuffled among a world's agents give correlations within 0.01 of zero; the last column is the assortativity of [Chapter 30](30-how-properties-scale-together.md), taken of ln k instead of k.
+**Are neighbours alike?** For every connection of a world, the two agents at its ends: the correlation of their tokens, of their ages and of their numbers of connections (tokens and age as ln(1 + x), connections as ln k), counting every connection both ways round. One dot per world that lived to the end, the mean over five moments (after the games of iterations 1,000, 1,500, 2,000, 2,500 and 2,999); the bar is the median. The same values shuffled among a world's agents give correlations within 0.01 of zero; the last column is the assortativity of [Chapter 34](34-how-properties-scale-together.md), taken of ln k instead of k.
 
 > [!example]- How to make this figure
 > **Runs.** The 26 baseline worlds that lived to the end (`B1-10000-s001` … `-s030`, [Chapter 9](09-thirty-worlds.md); `python3 gol_lab.py run E02`).
@@ -83,7 +83,7 @@ means like beside like, a negative one unlike beside unlike.
 - **Age: like.** **+0.15**. The old sit among the old, the young among the
   young.
 - **Connections: unlike.** **−0.19**: hubs sit among agents with few
-  connections, the assortativity of [Chapter 30](30-how-properties-scale-together.md).
+  connections, the assortativity of [Chapter 34](34-how-properties-scale-together.md).
 
 All three are small. Neighbours are alike or unlike only a little, and the
 worlds differ: the age correlation ranges from 0 to 0.32 between them.
@@ -91,7 +91,7 @@ worlds differ: the age correlation ranges from 0 to 0.32 between them.
 ## Place, or closeness?
 
 A correlation between neighbours need not mean that neighbours influence
-each other. Tokens follow connections ([Chapter 30](30-how-properties-scale-together.md)),
+each other. Tokens follow connections ([Chapter 34](34-how-properties-scale-together.md)),
 and hubs sit among leaves. Then a rich hub will have poor leaves around it,
 and neighbours' tokens will be unlike without any agent doing anything to
 another. How much of the likeness is just **place**?
@@ -109,8 +109,8 @@ keeps how tokens follow connections and destroys everything else.
 
 Why would the old sit beside the old? A likely reason: agents die
 together, when a piece of the world is cut off
-([Chapter 32](32-how-a-world-breaks.md)), and they are born into their
-parents' neighbourhoods ([Chapter 21](21-how-the-network-grows.md)), so
+([Chapter 36](36-how-a-world-breaks.md)), and they are born into their
+parents' neighbourhoods ([Chapter 22](22-how-the-network-grows.md)), so
 the young arrive where the old are gone, side by side. Agents that arrived
 together live together, as cohorts.
 
@@ -174,7 +174,7 @@ together?
 
 Among agents one step apart, **9.9%** carry the same genotype, 33 times as
 many as among any two agents of the world (0.30%). That is the finding of
-[Chapter 34](34-do-agents-cooperate.md), counted here from agents drawn at
+[Chapter 38](38-do-agents-cooperate.md), counted here from agents drawn at
 random rather than from connections. Two steps apart it is 5.0% (18 times
 chance), three steps 0.6% (2.6 times), and from **four steps on, fewer than
 chance would give**: 0.8 times at four steps, 0.2 at five. Beyond eight
@@ -185,9 +185,9 @@ the nodes it has just conquered, within two steps. There are no
 territories. A family is a few agents, not a region.
 
 Two reasons keep it so. A genotype lasts about two iterations before a
-change renames it ([Chapter 17](17-genotypes-and-lineages.md)), so a
+change renames it ([Chapter 18](18-genotypes-and-lineages.md)), so a
 cluster of one genotype has little time to grow. And more than half of all
-nodes change hands in every game ([Chapter 15](15-how-the-game-is-played.md)),
+nodes change hands in every game ([Chapter 16](16-how-the-game-is-played.md)),
 so any territory is broken up as soon as it forms. Lines, which last much
 longer than genotypes, might well hold larger domains; that is the next
 thing to measure, by asking the same question of agents that share an
@@ -205,9 +205,9 @@ ancestor some tens of iterations back.
 - **A world is far from critical.** At a critical point the correlation
   length grows without bound and likeness falls off with distance only as a
   power. Here it is gone within three steps. That fits
-  [Chapter 29](29-power-laws-real-and-apparent.md), which found no
+  [Chapter 32](32-power-laws-real-and-apparent.md), which found no
   avalanches of every size and no 1/*f* noise. Whatever has no scale in
-  these worlds — and [Chapter 23](23-how-many-dimensions-does-a-world-have.md)
+  these worlds — and [Chapter 24](24-how-many-dimensions-does-a-world-have.md)
   finds something — it is not what the agents hold, which is alike only
   within three steps.
 - **For open-ended evolution, there is no room for a second kind of world
@@ -222,5 +222,5 @@ To make every figure of this chapter: `python3 book_figures.py alike`.
 <!-- turns -->
 ---
 
-← [Chapter 21 · How the network grows](21-how-the-network-grows.md) · [Contents](../README.md) · [Chapter 23 · How many dimensions does a world have?](23-how-many-dimensions-does-a-world-have.md) →
+← [Chapter 22 · How the network grows](22-how-the-network-grows.md) · [Contents](../README.md) · [Chapter 24 · How many dimensions does a world have?](24-how-many-dimensions-does-a-world-have.md) →
 <!-- /turns -->

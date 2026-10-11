@@ -150,7 +150,7 @@ that lived to the end. But only 8 of the 26 lines stay within a fifth of where
 they began; 12 end more than a fifth higher, 6 more than a fifth lower. The
 most extreme world ended with 0.38 times its early size, another with 4.6
 times. **A typical world exists; a single world does not stay put.** Chapter
-13 measures this wandering and asks how much of it the seed decides.
+14 measures this wandering and asks how much of it the seed decides.
 
 ## Connections
 
@@ -173,7 +173,7 @@ times. **A typical world exists; a single world does not stay put.** Chapter
 
 The number of connections follows the number of agents, at about 1.6
 connections per agent (a mean degree of 3.3: every agent is joined to three or
-four others on average, [Chapter 16](16-what-shape-does-the-network-take.md)). Its median over iterations 100 to 200
+four others on average, [Chapter 17](17-what-shape-does-the-network-take.md)). Its median over iterations 100 to 200
 was 2,037, over the last two hundred 2,161.
 
 ## Births and deaths slow down
@@ -214,7 +214,7 @@ the true rate could be anywhere from 5% to 30%
 ([The Wilson interval](../notes/wilson-interval.md)).
 
 A world stopped at 20 agents is not certain to have died.
-[Chapter 38](38-how-does-a-worlds-size-follow-its-tokens.md) let small worlds
+[Chapter 42](42-how-does-a-worlds-size-follow-its-tokens.md) let small worlds
 go on below that line, and they recovered — one from 4 agents. Seed 23,
 stopped at its fourth iteration, is the one most likely to have come back; the
 other three had lingered below a hundred agents for scores of iterations
@@ -254,7 +254,7 @@ every *single* world wanders and turnover slows; and for some worlds a
   it measures from iteration 500 on ([The settled life](../notes/settled-life.md)).
 - **The end of a run is a moment in a wander.** Where a world stands at
   iteration 3,000 is not where it "settled"; a world's mean over a long
-  stretch says more ([Chapter 13](13-how-much-does-the-seed-decide.md)).
+  stretch says more ([Chapter 14](14-how-much-does-the-seed-decide.md)).
 - **Dying out is an outcome of its own.** Where worlds end up is measured over
   the worlds that lived to the end, and the dead are counted apart.
 

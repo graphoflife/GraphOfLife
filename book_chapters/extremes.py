@@ -66,7 +66,7 @@ def runs_of_reign(ids: np.ndarray) -> List[int]:
 
 #: The worlds of Experiment 8, from 800 to 409,600 tokens, run for 600 iterations each.
 SIZES = ("The baseline worlds of Experiment 8, from 800 to 409,600 tokens, three seeds each, 600 iterations "
-         "(Chapter 38; `python3 gol_lab.py run E08`)")
+         "(Chapter 42; `python3 gol_lab.py run E08`)")
 SIZE_WINDOW = (300, 599)
 
 

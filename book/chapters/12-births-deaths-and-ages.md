@@ -90,7 +90,7 @@ typical world is the median one.)
 
 The rates are steady from about iteration 500 on, after falling from the
 youth, and they differ little between worlds: the middle half of the worlds
-have between 2.7 and 3.3 births per hundred agents. [Chapter 37](37-do-the-brains-matter.md) shows how
+have between 2.7 and 3.3 births per hundred agents. [Chapter 41](41-do-the-brains-matter.md) shows how
 remarkable that is.
 
 ## How long agents live
@@ -193,5 +193,5 @@ To make every figure of this chapter: `python3 book_figures.py births`.
 <!-- turns -->
 ---
 
-← [Chapter 11 · The first hundred iterations](11-the-first-hundred-iterations.md) · [Contents](../README.md) · [Chapter 13 · How much does the seed decide?](13-how-much-does-the-seed-decide.md) →
+← [Chapter 11 · The first hundred iterations](11-the-first-hundred-iterations.md) · [Contents](../README.md) · [Chapter 13 · How ages change over a world's life](13-how-ages-change.md) →
 <!-- /turns -->

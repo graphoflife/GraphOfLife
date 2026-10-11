@@ -17,12 +17,12 @@
 
 ## Why ask
 
-[Meta II](36-meta-2.md) ended by saying that Part III had turned a vague
+[Meta II](40-meta-2.md) ended by saying that Part III had turned a vague
 hope — that interesting things might emerge if we watch long enough — into
 a list of rules that stand in the way. That is a claim about time, and it
 has never been tested. The longest any world of this book has lived is
 3,000 iterations; the largest worlds, those of
-[Chapter 38](38-how-does-a-worlds-size-follow-its-tokens.md), lived 600. A
+[Chapter 42](42-how-does-a-worlds-size-follow-its-tokens.md), lived 600. A
 reader may fairly ask whether cooperation is impossible here, or only slow:
 perhaps the brains need longer to learn it.
 
@@ -30,10 +30,10 @@ Three findings say the question deserves a month of computing.
 
 - **The brains were still changing.** Evolution raised the brains' gain —
   how much of a change in what a brain sees reaches what it does — 2.5 times
-  in 3,000 iterations ([Chapter 18](18-what-the-brains-are-like.md)). If it
+  in 3,000 iterations ([Chapter 19](19-what-the-brains-are-like.md)). If it
   went on rising, the brains would one day see what is around them, and
   every road to cooperation that needs seeing — recognising kin, answering
-  a partner ([Chapter 34](34-do-agents-cooperate.md)) — would open.
+  a partner ([Chapter 38](38-do-agents-cooperate.md)) — would open.
 - **No world has been seen at rest.** For this plan, the statistics of the
   26 baseline worlds that lived to the end
   ([Chapter 10](10-a-worlds-life.md)) were averaged over blocks of
@@ -55,10 +55,10 @@ And two things say that nothing will change.
 - **The obstacles are rules.** A node's brain is replaced almost every game,
   so the same two brains rarely meet twice; brains cannot see who is kin;
   and nothing an agent does creates anything that was not there before
-  ([Chapter 36](36-meta-2.md)). Time does not change a rule.
+  ([Chapter 40](40-meta-2.md)). Time does not change a rule.
 - **The brains' rise has a ceiling.** By iteration 3,000 their first-layer
   weights already sit at the balance between mutation, which spreads them,
-  and the rarer resets, which draw them back ([Chapter 18](18-what-the-brains-are-like.md)).
+  and the rarer resets, which draw them back ([Chapter 19](19-what-the-brains-are-like.md)).
   The rise of the gain looks like the approach to that balance, not a
   climb.
 
@@ -68,9 +68,9 @@ A world of 204,800 tokens holds about 27,000 agents. After every game each
 brain is changed with probability 0.2, so some 5,400 changed brains are
 tried in every iteration, and over 100,000 iterations some 500 million. In
 the baseline worlds all the living came to descend from a single founder
-about every 350 iterations ([Chapter 17](17-genotypes-and-lineages.md)); a
+about every 350 iterations ([Chapter 18](18-genotypes-and-lineages.md)); a
 world twenty times larger is slower, by a factor that
-[Chapter 51](51-worlds-of-100000-tokens.md) is to measure. Even if it took
+[Chapter 55](55-worlds-of-100000-tokens.md) is to measure. Even if it took
 ten times as long, one line would take the world over again and again,
 dozens of times. Whatever is one change away from what the brains do now
 would be found. What needs a rule changed would not.
@@ -80,7 +80,7 @@ would be found. What needs a rule changed would not.
 > [!quote] The thesis of Experiment 11, written down before any of its runs existed
 > **The claim.** Time is not what is missing. A world of 204,800 tokens left for 100,000 iterations, thirty times longer than any world of this book has lived, goes on wandering, but within bounds it reaches in its first few thousand iterations, and nothing appears late that was not there early. Its agents do not learn to cooperate: they stake on kin as they stake on strangers, the same two brains still rarely face each other twice, and the brains stay nearly blind.
 >
-> **Why it would be so.** Part III found what stands in the way of cooperation in the rules, not in a lack of time (Chapter 36): a node's brain is replaced almost every game, so nobody meets anybody twice (Chapter 34); brains cannot see who is kin; and nothing an agent does creates anything. Chapter 18 found the brains nearly blind, with a gain of 0.0015 and their first-layer weights already, by iteration 3,000, at the balance between the jitters of mutation and its resets, so that selection can only set constants, and it has set them alike in every world. A hundred thousand iterations are a great deal of evolution: some 27,000 agents, each brain changed with probability 0.2 after every game, try some 500 million changed brains, and the living come to descend from a single founder every few hundred iterations (Chapter 17), so one line takes the world over again and again, dozens of times at the least. What is one step away will be found; what needs the rules changed will not. Against this: evolution raised the gain 2.5 times in 3,000 iterations (Chapter 18), and the baseline worlds are still moving at the longest scale yet measured: a mean over 500 iterations keeps between a third and two thirds of the spread of single iterations (a Hurst exponent of 0.8 to 0.9, in the 26 worlds of Experiment 2), so no world has yet been seen at rest.
+> **Why it would be so.** Part III found what stands in the way of cooperation in the rules, not in a lack of time (Chapter 40): a node's brain is replaced almost every game, so nobody meets anybody twice (Chapter 38); brains cannot see who is kin; and nothing an agent does creates anything. Chapter 19 found the brains nearly blind, with a gain of 0.0015 and their first-layer weights already, by iteration 3,000, at the balance between the jitters of mutation and its resets, so that selection can only set constants, and it has set them alike in every world. A hundred thousand iterations are a great deal of evolution: some 27,000 agents, each brain changed with probability 0.2 after every game, try some 500 million changed brains, and the living come to descend from a single founder every few hundred iterations (Chapter 18), so one line takes the world over again and again, dozens of times at the least. What is one step away will be found; what needs the rules changed will not. Against this: evolution raised the gain 2.5 times in 3,000 iterations (Chapter 19), and the baseline worlds are still moving at the longest scale yet measured: a mean over 500 iterations keeps between a third and two thirds of the spread of single iterations (a Hurst exponent of 0.8 to 0.9, in the 26 worlds of Experiment 2), so no world has yet been seen at rest.
 >
 > **It holds if:** From iteration 2,000 on, over at least 50,000 iterations, all three hold. (1) The wander levels off: for at least seven of the eight statistics (agents; connections per agent; Gini; births per agent; the share of stakes placed at home; the share of nodes kept; genotypes per agent; families), the median difference between the means of 500-iteration blocks 20,000 to 50,000 iterations apart is at most twice the median difference between blocks 2,000 to 5,000 iterations apart. (2) In no three successive windows from iteration 5,000 on does the ratio of stakes on kin to stakes on others leave 0.85 to 1.15 (in the baseline worlds 0.89 to 1.10), or the share of connections whose two brains face each other again one game later rise above 10% (in the baseline worlds 3% to 9%). (3) At every kept checkpoint the median gain of the brains stays below 0.005 (in the baseline worlds 0.0011 to 0.0017).
 >
@@ -101,7 +101,7 @@ to tell whether it belongs to this world or to the rules.
 
 Why 204,800 tokens rather than an even 200,000: Experiment 8 already ran
 this world, seed for seed, for 600 iterations (`B1-204800-s001`,
-[Chapter 38](38-how-does-a-worlds-size-follow-its-tokens.md)). The long
+[Chapter 42](42-how-does-a-worlds-size-follow-its-tokens.md)). The long
 run's first frames must be those frames again — a free check that a run is
 still the same run a month and several versions of the program later
 ([Chapter 8](08-is-a-run-reproducible.md)).
@@ -125,7 +125,7 @@ something new is what this experiment is for. It is flagged instead.
 
 | the sentinel flags | when |
 |---|---|
-| **outside the known** | a statistic per agent or a share lies outside the band of the thirty worlds of [Chapter 51](51-worlds-of-100000-tokens.md), for three blocks in a row |
+| **outside the known** | a statistic per agent or a share lies outside the band of the thirty worlds of [Chapter 55](55-worlds-of-100000-tokens.md), for three blocks in a row |
 | **a new level** | a statistic's block mean lies beyond the range of all its earlier blocks by more than half that range, for five blocks in a row |
 | **cooperation** | the kin ratio or the share of lasting partners leaves the baseline worlds' range, in a window (below) |
 | **brains that see** | the median gain at a kept checkpoint passes 0.005 |
@@ -152,7 +152,7 @@ would need more than 200 GB, more than the disk holds. So the run keeps:
   [What a run records](../notes/frames-and-stats.md)): about 400 MB for the
   whole run;
 - **frames**, with the decisions, only for the last 17 iterations of every
-  block — enough for every measure of Chapter 34, which looks up to 16
+  block — enough for every measure of Chapter 38, which looks up to 16
   games ahead: about 8 GB;
 - a **checkpoint** — every brain, every token and the state of the random
   stream — at the end of every block, and a copy kept every 10,000
@@ -173,18 +173,18 @@ frame that was not kept is a frame that has not been made again yet.
   world at rest gives a curve that levels off; a world still moving, one
   that keeps rising; a change of state, a step.
 - **Cooperation**, in every window: the measures of
-  [Chapter 34](34-do-agents-cooperate.md) — how related neighbours are, the
+  [Chapter 38](38-do-agents-cooperate.md) — how related neighbours are, the
   ratio of stakes on kin to stakes on others, whether a node taken stays in
   the family, how often a stake is answered with an equal one, and how long
   the same two brains face each other.
 - **The brains**, at every kept checkpoint: the gain and the probes of
-  [Chapter 18](18-what-the-brains-are-like.md) — what a brain responds to,
+  [Chapter 19](19-what-the-brains-are-like.md) — what a brain responds to,
   and how much.
 - **Everything of [Chapter 9](09-thirty-worlds.md)**, as block means over
   the whole run, set beside the bands of the baseline worlds and of the
-  worlds of Chapter 51.
+  worlds of Chapter 55.
 - **Later, from the kept checkpoints:** the tournament across time of
-  [Meta II](36-meta-2.md) — the brains of iteration 10,000 against those of
+  [Meta II](40-meta-2.md) — the brains of iteration 10,000 against those of
   iteration 90,000, in one world. A later population that beats an earlier
   one is adaptation that accumulates (P2 on the ladder of
   [Chapter 1](01-what-this-book-is-about.md)).
@@ -195,7 +195,7 @@ iterations on one worker. It keeps about 20 GB, where every frame would
 have needed over 200. The thesis can be decided from iteration 52,000,
 about two weeks in, and the run can be stopped after any block.
 
-The run should start once [Chapter 51](51-worlds-of-100000-tokens.md) is
+The run should start once [Chapter 55](55-worlds-of-100000-tokens.md) is
 analysed, because the sentinel's bands of the known come from its thirty
 worlds.
 
@@ -233,5 +233,5 @@ windows of cooperation and the gains, and decides the thesis.
 <!-- turns -->
 ---
 
-← [Chapter 51 · Worlds of 100,000 tokens](51-worlds-of-100000-tokens.md) · [Contents](../README.md) · [Appendix A · What a simulation costs](A-costs.md) →
+← [Chapter 55 · Worlds of 100,000 tokens](55-worlds-of-100000-tokens.md) · [Contents](../README.md) · [Appendix A · What a simulation costs](A-costs.md) →
 <!-- /turns -->

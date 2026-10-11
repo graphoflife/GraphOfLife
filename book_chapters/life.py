@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Part II, the life of a world: Chapters 10 to 13 — a world's life, its youth,
+Part II, the life of a world: Chapters 10 to 14 — a world's life, its youth,
 births and deaths, and how much the seed decides.
 """
 from __future__ import annotations
@@ -421,7 +421,7 @@ def births(ch: F.Chapter) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 13 · How much does the seed decide?
+# Chapter 14 · How much does the seed decide?
 # ---------------------------------------------------------------------------
 
 SEED_STATS = [("nodes", 2, "agents"), ("edges", 2, "connections"), (("births"), 1, "births"),

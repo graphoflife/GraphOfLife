@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Part IV: Chapter 38 — how does a world's size follow its tokens?
+Part IV: Chapter 42 — how does a world's size follow its tokens?
 """
 from __future__ import annotations
 
@@ -16,7 +16,7 @@ from book_figures import STATS_FILE, chapter, describe, line, lived, mean_over, 
 from book_chapters.common import BLUE, CYAN, GREEN, GREY, ORANGE, RED, VIOLET, YELLOW
 
 # ---------------------------------------------------------------------------
-# Chapter 38 · How does a world's size follow its tokens?
+# Chapter 42 · How does a world's size follow its tokens?
 # ---------------------------------------------------------------------------
 
 E08_RUNS = ("The 42 runs of Experiment 8 — B1 at 800 to 409,600 tokens, each size double the one before, "
@@ -84,7 +84,7 @@ def size(ch: F.Chapter) -> None:
         series=[dots_of(alive, lambda s: settled(s, "nodes"), BLUE, "baseline, one dot per run"),
                 dots_of(small, lambda s: settled(s, "nodes"), ORANGE,
                         "stopped only when empty, 800 and 1,600 tokens"),
-                dots_of(e02, lambda s: settled(s, "nodes"), GREY, "the 28 worlds of Chapter 9, 11,000 tokens",
+                dots_of(e02, lambda s: settled(s, "nodes"), GREY, "the 28 worlds of Chapter 9, 11,0 tokens",
                         size_=5),
                 line(ends, f["prefactor"] * ends ** f["exponent"],
                      f"power law fitted from 3,200 tokens on: exponent {f['exponent']:.2f}", RED, width=2),

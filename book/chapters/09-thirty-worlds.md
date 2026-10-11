@@ -2,8 +2,8 @@
 
 Part II looks at one kind of world, the baseline B1, from every side. It does
 so with thirty worlds that differ only in their seed. This chapter introduces
-them: every chapter up to [Chapter 24](24-meta-1.md) reads these same thirty
-runs, and [Chapter 37](37-do-the-brains-matter.md) compares them with worlds
+them: every chapter up to [Chapter 26](26-meta-1.md) reads these same thirty
+runs, and [Chapter 41](41-do-the-brains-matter.md) compares them with worlds
 made under other rules.
 
 ## The runs
@@ -73,7 +73,7 @@ line, the dots placed so that joined agents lie near each other:
 <!-- figure shape/world-end -->
 ![World of seed 1 after the game of iteration 2,999](../figures/shape/world-end.svg)
 
-**World of seed 1 after the game of iteration 2,999.** Every agent alive after the game of iteration 2,999 is a dot, every connection a line. Blue: agents in the core, which is what is left when agents with one connection or none are removed again and again until none remains ([Core, trees and leaves](../notes/core-trees-leaves.md)); yellow: the rest of the hanging trees; red: leaves, agents with a single connection. Where a dot is drawn means nothing in itself: a layout (networkx's ForceAtlas2, seed 1) pulls joined agents together and pushes the rest apart.
+**World of seed 1 after the game of iteration 2,999.** The world with seed 1 after the game of iteration 2,999, every one of its 1,336 agents: every agent drawn is a dot, every connection between two of them a line. Blue: agents in the core, which is what is left when agents with one connection or none are removed again and again until none remains ([Core, trees and leaves](../notes/core-trees-leaves.md)); yellow: the rest of the hanging trees; red: leaves, agents with a single connection. Where a dot is drawn means nothing in itself: a layout (networkx's ForceAtlas2, seed 1) pulls joined agents together and pushes the rest apart.
 
 > [!example]- How to make this figure
 > **Runs.** `B1-10000-s001`.
@@ -82,7 +82,8 @@ line, the dots placed so that joined agents lie near each other:
 >
 > 1. Read frame `5999` (iteration 2,999, after the game): `ids` and `edges`.
 > 2. Peel: remove every agent with one connection or none, again and again, until none is left; the agents never removed are the core. Leaves are agents with exactly one connection.
-> 3. Lay the graph out with `networkx.forceatlas2_layout(G, max_iter=200, seed=1)`.
+> 3. In a world of more than 2,500 agents, keep the agents within r steps of the oldest agent, for the largest r that keeps at most 2,500 (`book_chapters.society.shown`).
+> 4. Lay the graph out with `networkx.forceatlas2_layout(G, max_iter=200, seed=1)`.
 >
 > **To make it again:** `python3 book_figures.py shape`.
 <!-- /figure -->
@@ -90,7 +91,7 @@ line, the dots placed so that joined agents lie near each other:
 The hundred founders on their ring ([Chapter 2](02-the-world.md)) have become
 1,336 agents in a network of dense clusters joined by long, thin paths, with
 many agents that hang on by a single connection.
-[Chapter 16](16-what-shape-does-the-network-take.md) takes this shape apart.
+[Chapter 17](17-what-shape-does-the-network-take.md) takes this shape apart.
 
 Any of the thirty can be opened in the **Viewer** of the Graph of Life app,
 which replays a run frame by frame.
@@ -103,17 +104,17 @@ which replays a run frame by frame.
   hundred iterations?
 - [Chapter 12](12-births-deaths-and-ages.md) — How often are agents born and
   how do they die? How old do they get?
-- [Chapter 13](13-how-much-does-the-seed-decide.md) — How much of what a world
+- [Chapter 14](14-how-much-does-the-seed-decide.md) — How much of what a world
   does is decided by its seed?
-- [Chapter 14](14-where-do-the-tokens-go.md) — Where do the tokens go — how
+- [Chapter 15](15-where-do-the-tokens-go.md) — Where do the tokens go — how
   unequal does a world become?
-- [Chapter 15](15-how-the-game-is-played.md) — How is the game played: where
+- [Chapter 16](16-how-the-game-is-played.md) — How is the game played: where
   do agents stake, who wins the nodes?
-- [Chapter 16](16-what-shape-does-the-network-take.md) — What shape does the
+- [Chapter 17](17-what-shape-does-the-network-take.md) — What shape does the
   network take?
-- [Chapter 17](17-genotypes-and-lineages.md) — How long do genotypes last, and
+- [Chapter 18](18-genotypes-and-lineages.md) — How long do genotypes last, and
   do lineages take over?
-- [Chapter 24](24-meta-1.md) — What the baseline world is, in sum.
+- [Chapter 26](26-meta-1.md) — What the baseline world is, in sum.
 
 Five of these chapters (9, 12, 13, 15 and 16) were planned as experiments,
 with a thesis written down before the runs; they quote it and say whether it

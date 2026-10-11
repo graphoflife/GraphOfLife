@@ -76,7 +76,7 @@ right, up and down mean nothing — rotate the picture and it says the same.
 <!-- figure colours/six-views -->
 ![The world of seed 1 after its last game, six ways](../figures/colours/six-views.svg)
 
-**The world of seed 1 after its last game, six ways.** Every agent alive after the game of iteration 2,999 of the world with seed 1 is a dot, every connection a faint line, and the dots sit in the same places in all six pictures (a ForceAtlas2 layout, seed 1, which pulls joined agents together). Each picture colours the dots by one of the quantities the viewer offers ([What the viewer can colour by](../notes/viewer-colours.md)): tokens and age on logarithmic scales; the change of tokens in the last game and the token curvature at its start on a signed scale, blue below zero, red above, dark at zero (both stretched logarithmically, the curvature cut at its 1st and 99th percentile); the family — which of the genotypes alive 100 iterations earlier each agent's genotype descends from, the seven largest in colour; and how many loops of a breadth-first cycle basis pass through each agent.
+**The world of seed 1 after its last game, six ways.** The world with seed 1 after the game of iteration 2,999, every one of its 1,336 agents: every agent drawn is a dot, every connection between two of them a faint line, and the dots sit in the same places in all six pictures (a ForceAtlas2 layout, seed 1, which pulls joined agents together). Each picture colours the dots by one of the quantities the viewer offers ([What the viewer can colour by](../notes/viewer-colours.md)): tokens and age on logarithmic scales; the change of tokens in the last game and the token curvature at its start on a signed scale, blue below zero, red above, dark at zero (both stretched logarithmically, the curvature cut at its 1st and 99th percentile); the family — which of the genotypes alive 100 iterations earlier each agent's genotype descends from, the seven largest in colour; and how many loops of a breadth-first cycle basis pass through each agent.
 
 > [!example]- How to make this figure
 > **Runs.** `B1-10000-s001`.
@@ -86,8 +86,9 @@ right, up and down mean nothing — rotate the picture and it says the same.
 > 1. Read frames `5998` (start of the last game) and `5999` (after it): `ids`, `tokens`, `ages`, `delta`, `brain_ids`, `edges`.
 > 2. Curvature: in frame 5998, Σ over neighbours of (their tokens − own tokens).
 > 3. Families: read frames 5799 to 5999, note each genotype's parent, and climb from each living genotype to one alive after the game of iteration 2,899.
-> 4. Loops: as in [Chapter 31](31-the-geometry-of-a-world.md).
-> 5. Lay out with `networkx.forceatlas2_layout(G, max_iter=200, seed=1)` and colour.
+> 4. Loops: as in [Chapter 35](35-the-geometry-of-a-world.md).
+> 5. Which agents are drawn: as in [Chapter 17](17-what-shape-does-the-network-take.md) (`book_chapters.society.shown`).
+> 6. Lay out with `networkx.forceatlas2_layout(G, max_iter=200, seed=1)` and colour.
 >
 > **To make it again:** `python3 book_figures.py colours`.
 <!-- /figure -->
@@ -99,18 +100,18 @@ right, up and down mean nothing — rotate the picture and it says the same.
 - **Age.** The oldest agents — up to 700 iterations — sit far out on the arms;
   the clumps around the hubs are younger. A plausible reason: the
   neighbourhoods of hubs are where most children are born and most nodes change
-  hands ([Chapter 28](28-how-agents-have-children.md), [Chapter 27](27-where-the-tokens-flow.md)),
+  hands ([Chapter 31](31-how-agents-have-children.md), [Chapter 29](29-where-the-tokens-flow.md)),
   while the ends of arms are quiet. One picture is not a proof; it is a
   question worth measuring.
 - **Change in the last game.** Almost everything is dark: most agents ended the
-  game with what they had or close to it ([Chapter 26](26-gains-and-losses.md)).
+  game with what they had or close to it ([Chapter 28](28-gains-and-losses.md)).
   The few bright dots are the big winners and losers of the game.
 - **Token curvature before the game.** Blue dots are richer than their
   neighbourhood (hills), red dots poorer (valleys). The hubs are blue, and the
   clump around the largest hub is red: every agent there is poorer than its
   rich neighbour. The landscape of wealth is a set of peaks with valleys
   around them — and tokens flow downhill, from the peaks into the valleys
-  ([Chapter 26](26-gains-and-losses.md)).
+  ([Chapter 28](28-gains-and-losses.md)).
 - **Families.** Each agent is coloured by the genotype, among those alive 100
   iterations earlier, from which its own genotype descends
   ([Families](../notes/families.md)). The seven largest families hold 339, 167,
@@ -119,7 +120,7 @@ right, up and down mean nothing — rotate the picture and it says the same.
   top, others the clusters on the right. A family is a region.
 - **Loops.** The clumps around hubs carry the loops — up to 576 of the world's
   1,112 independent loops pass through one agent — and the arms carry none
-  ([Chapter 31](31-the-geometry-of-a-world.md)).
+  ([Chapter 35](35-the-geometry-of-a-world.md)).
 
 ## Where the tokens went
 
@@ -144,7 +145,7 @@ the others were cut. Of the 2,447 connections, **2,145 carried only one or two
 tokens**, both directions together; 292 carried 3 to 9; 4 carried 10 to 49;
 6 carried 50 or more. Almost every connection of the world is kept alive at
 about the lowest price a connection can have, one token a game
-([Chapter 32](32-how-a-world-breaks.md)). The traffic of a world is thin and
+([Chapter 36](36-how-a-world-breaks.md)). The traffic of a world is thin and
 everywhere, not heavy on a few roads.
 
 ## Reading pictures well
@@ -167,7 +168,7 @@ Four cautions, which apply to every picture the viewer draws:
 
 - **Families live together.** Descent is regional: a line of brains holds a
   part of the world, not scattered agents. Spatial structure like this is what
-  kin selection and network reciprocity need ([Chapter 34](34-do-agents-cooperate.md)
+  kin selection and network reciprocity need ([Chapter 38](38-do-agents-cooperate.md)
   asks whether it is used).
 - **Wealth is a landscape of peaks and valleys,** peaks at the hubs.
 - **Connections are kept at their minimum price,** one or two tokens a game.
@@ -180,5 +181,5 @@ To make every figure of this chapter: `python3 book_figures.py colours`.
 <!-- turns -->
 ---
 
-← [Chapter 32 · How a world breaks](32-how-a-world-breaks.md) · [Contents](../README.md) · [Chapter 34 · Do agents cooperate?](34-do-agents-cooperate.md) →
+← [Chapter 36 · How a world breaks](36-how-a-world-breaks.md) · [Contents](../README.md) · [Chapter 38 · Do agents cooperate?](38-do-agents-cooperate.md) →
 <!-- /turns -->

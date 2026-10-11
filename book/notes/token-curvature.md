@@ -32,8 +32,8 @@ In matrix language κ = −*L*τ, with *L* the graph's Laplacian matrix
 ## What it is for
 
 If tokens behaved like heat, an agent's change of tokens in a game would
-follow its curvature at the start of the game. [Chapter 26](../chapters/26-gains-and-losses.md)
-tests that, and [Chapter 27](../chapters/27-where-the-tokens-flow.md) explains
+follow its curvature at the start of the game. [Chapter 28](../chapters/28-gains-and-losses.md)
+tests that, and [Chapter 29](../chapters/29-where-the-tokens-flow.md) explains
 why something like it should happen: an agent that splits its stake evenly
 over itself and its neighbours sends tokens **down** the slope.
 

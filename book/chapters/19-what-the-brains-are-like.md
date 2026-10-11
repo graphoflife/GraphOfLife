@@ -145,7 +145,7 @@ differently:
 - **Spreading the stake.** A founder's brain spreads its tokens over its
   candidates half the time and goes all in on one the other half. An evolved
   brain spreads in **98%** of cases. That fits the 97% of
-  [Chapter 15](15-how-the-game-is-played.md).
+  [Chapter 16](16-how-the-game-is-played.md).
 - **Splitting evenly.** In the median world, **58%** of agents give every
   candidate a score of zero or below. The rules then split their tokens
   exactly evenly ([Splitting tokens into whole numbers](../notes/largest-remainder.md)).
@@ -182,7 +182,7 @@ of them. In the evolved worlds:
 - **spread** beats **all in**, +0.65 against −0.45;
 - the two outputs of the **revolutionary share** sit at +0.58 and −0.62,
   the first above 0 and the second below it in every world, so nearly every
-  staked token is marked revolutionary (96%, [Chapter 15](15-how-the-game-is-played.md));
+  staked token is marked revolutionary (96%, [Chapter 16](16-how-the-game-is-played.md));
 - the outputs for joining a child to a candidate and for handing it
   connections lean, in most worlds, towards joining and keeping, but many
   worlds lean the other way. They are used only when a child is born, which
@@ -325,13 +325,13 @@ depends on it.
   coming needs behaviour that depends on circumstances. A brain that reacts
   to who its neighbour is can find a new way to treat a new kind of
   neighbour, and that creates a new niche for someone else. A brain that
-  cannot see has only its constants to vary. [Meta II](36-meta-2.md) lists
+  cannot see has only its constants to vary. [Meta II](40-meta-2.md) lists
   the obstacles; this one comes first, because it limits all the others.
 - **The remedy is in the architecture.** Fewer layers, a squashing with a
   steeper slope, or larger starting weights would each give the brains a
   gain near 1 ([How a signal fades through layers](../notes/vanishing-signal.md)).
-  Chapter 43, *How big should a brain be?*, is planned for that and should
-  come early. [Chapter 37](37-do-the-brains-matter.md), which replaced the
+  Chapter 47, *How big should a brain be?*, is planned for that and should
+  come early. [Chapter 41](41-do-the-brains-matter.md), which replaced the
   brains by chance, reads differently in this light: its brains did matter,
   but as constants.
 
@@ -340,5 +340,5 @@ To make every figure of this chapter: `python3 book_figures.py minds`.
 <!-- turns -->
 ---
 
-← [Chapter 17 · Genotypes and lineages](17-genotypes-and-lineages.md) · [Contents](../README.md) · [Chapter 19 · What agents say to each other](19-what-agents-say-to-each-other.md) →
+← [Chapter 18 · Genotypes and lineages](18-genotypes-and-lineages.md) · [Contents](../README.md) · [Chapter 20 · What agents say to each other](20-what-agents-say-to-each-other.md) →
 <!-- /turns -->

@@ -87,7 +87,7 @@ Why the difference? An agent keeps its node, its id and its age when its
 brain changes or is replaced by a conqueror's; a genotype ends when the last
 agent carrying it either mutates, dies, or has its node won by another
 genotype. With a change in one brain of five after every game, and half of
-all nodes changing hands in every game ([Chapter 15](15-how-the-game-is-played.md)),
+all nodes changing hands in every game ([Chapter 16](16-how-the-game-is-played.md)),
 a genotype has little time.
 
 At any moment, a settled world holds about one genotype for every 1.6
@@ -261,7 +261,7 @@ importantly, whole lines take the world over again and again.
   [coalescent](06-the-ideas-this-builds-on.md)). Whether lines take over
   here *faster than chance would make them*, because some brains do better,
   needs a world in which no brain is better than another.
-  [Chapter 37](37-do-the-brains-matter.md) builds one, and finds that how
+  [Chapter 41](41-do-the-brains-matter.md) builds one, and finds that how
   often chance alone sweeps a world depends on how often agents are born and
   die.
 
@@ -270,5 +270,5 @@ To make every figure of this chapter: `python3 book_figures.py lineage`.
 <!-- turns -->
 ---
 
-← [Chapter 16 · What shape does the network take?](16-what-shape-does-the-network-take.md) · [Contents](../README.md) · [Chapter 18 · What the brains are like](18-what-the-brains-are-like.md) →
+← [Chapter 17 · What shape does the network take?](17-what-shape-does-the-network-take.md) · [Contents](../README.md) · [Chapter 19 · What the brains are like](19-what-the-brains-are-like.md) →
 <!-- /turns -->

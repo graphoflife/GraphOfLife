@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-Part II, the inside of a world: Chapter 18 — what the brains are like — and
-Chapter 19 — what agents say to each other.
+Part II, the inside of a world: Chapter 19 — what the brains are like — and
+Chapter 20 — what agents say to each other.
 
 Both read the final checkpoint of every world that lived to the end, which holds
 every living agent's brain and every message in flight after its last iteration. The
@@ -306,7 +306,7 @@ def gain(run_id: str) -> Dict[str, Any]:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 18 · What the brains are like
+# Chapter 19 · What the brains are like
 # ---------------------------------------------------------------------------
 
 PROBE = ("For every agent of the world with at least one token, its inputs exactly as the engine builds "
@@ -502,7 +502,7 @@ def minds(ch: F.Chapter) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 19 · What agents say to each other
+# Chapter 20 · What agents say to each other
 # ---------------------------------------------------------------------------
 
 @chapter

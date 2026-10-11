@@ -4,7 +4,7 @@ At the end of every phase the cleanup keeps only the **largest connected
 piece** of the network; every agent outside it dies, however many tokens it
 holds, and its tokens are dealt out among the survivors
 ([Chapter 3](03-one-iteration.md)). Three deaths in four are of this kind
-([Chapter 12](12-births-deaths-and-ages.md)), and [Chapter 29](29-power-laws-real-and-apparent.md)
+([Chapter 12](12-births-deaths-and-ages.md)), and [Chapter 32](32-power-laws-real-and-apparent.md)
 found that they come in lumps: half of them in games that cut off dozens of
 agents at once. This chapter asks how fragile a world is, whether its breaks
 can be foreseen, and what actually severs a region from the rest.
@@ -59,7 +59,7 @@ can be foreseen, and what actually severs a region from the rest.
 
 A **bridge** is a connection on no loop: cut it, and the network falls in two
 ([Bridges](../notes/bridges.md)). A settled world has about 625 of them — 31%
-of its connections ([Chapter 16](16-what-shape-does-the-network-take.md)). Most
+of its connections ([Chapter 17](17-what-shape-does-the-network-take.md)). Most
 hold a single leaf. The **cut risk** asks about the worst one: the largest
 share of the world that one bridge holds to the rest ([Cut risk](../notes/cut-risk.md)).
 In the median world it is **12%**: somewhere, a single connection is all that
@@ -204,18 +204,18 @@ tokens handed out by lottery to the survivors.
 - **Connections have a price.** One token of flow per game, per connection,
   paid by one side or the other. That caps how many connections a world of
   *T* tokens can hold, which may be part of why a world's size follows its
-  tokens ([Chapter 38](38-how-does-a-worlds-size-follow-its-tokens.md)).
+  tokens ([Chapter 42](42-how-does-a-worlds-size-follow-its-tokens.md)).
 - **The cull is global, and blind.** A region that is cut off dies whatever its
   brains did, even if it was doing well inside. Selection here acts on regions
   through their borders, not on agents through what they do — and a world can
   never split into two populations that go their own ways, which in nature is
-  how new species begin. [Chapter 35](35-questioning-the-mechanics.md)
-  questions this rule, and [Meta II](36-meta-2.md) what changing it might do.
+  how new species begin. [Chapter 39](39-questioning-the-mechanics.md)
+  questions this rule, and [Meta II](40-meta-2.md) what changing it might do.
 
 To make every figure of this chapter: `python3 book_figures.py breaking`.
 
 <!-- turns -->
 ---
 
-← [Chapter 31 · The geometry of a world](31-the-geometry-of-a-world.md) · [Contents](../README.md) · [Chapter 33 · One world, many colours](33-one-world-many-colours.md) →
+← [Chapter 35 · The geometry of a world](35-the-geometry-of-a-world.md) · [Contents](../README.md) · [Chapter 37 · One world, many colours](37-one-world-many-colours.md) →
 <!-- /turns -->

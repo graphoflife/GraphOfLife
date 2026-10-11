@@ -38,7 +38,7 @@ near 28 or 29.
 
 ## Where it is used
 
-[Chapter 19](../chapters/19-what-agents-say-to-each-other.md) uses it on the
+[Chapter 20](../chapters/20-what-agents-say-to-each-other.md) uses it on the
 messages agents write, as the number of the 30 message numbers a world's
 messages actually use. The measure comes from physics, where it counts over
 how many sites a wave is spread (Bell and Dean 1970), and is used in

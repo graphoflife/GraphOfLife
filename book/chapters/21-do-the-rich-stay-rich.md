@@ -1,6 +1,6 @@
 # Do the rich stay rich?
 
-[Chapter 14](14-where-do-the-tokens-go.md) found the tokens of a world held
+[Chapter 15](15-where-do-the-tokens-go.md) found the tokens of a world held
 unequally, with a Gini coefficient that hardly moves over a world's settled
 life. But an unchanging inequality can hide two very different worlds. In
 one, the same agents are rich game after game. In the other, wealth is as
@@ -89,7 +89,7 @@ worlds lose instead about **a tenth of ρ every time the lag doubles**: 0.09
 from 10 to 20 games, 0.12 from 50 to 100 and again from 100 to 200. That is
 how memory fades when it is held by many things that last for very
 different times. Here the likely holders are the connections. An agent's tokens follow its number of
-connections plus one ([Chapter 30](30-how-properties-scale-together.md)),
+connections plus one ([Chapter 34](34-how-properties-scale-together.md)),
 and a hub's connections outlast many games, while a leaf's change all the
 time.
 
@@ -100,7 +100,7 @@ order is *closer* to the first than after one: ρ = 0.89 against 0.88. The
 richest show it too (below): 76% of the richest hundredth are still in the
 richest tenth two games later, but only 72% one game later.
 
-[Chapter 27](27-where-the-tokens-flow.md) found that the brains move tokens
+[Chapter 29](29-where-the-tokens-flow.md) found that the brains move tokens
 almost as an even split would: each agent stakes the same share on itself
 and on each of its neighbours. Take a hub with *k* neighbours that have no
 other connections. The hub keeps 1/(*k* + 1) of its tokens and gives each
@@ -235,7 +235,7 @@ connectedness is taxed away in this manner, a little at a time.
 - **Tokens move like a diffusion, overshoot included.** The two-game rhythm
   is what an even split does on a network of hubs and leaves. It is one more
   sign that the game, as the brains play it, is close to a random walk of
-  tokens ([Chapter 27](27-where-the-tokens-flow.md)). The rich are those
+  tokens ([Chapter 29](29-where-the-tokens-flow.md)). The rich are those
   that the walk's resting state favours, not those that played well.
 - **For open-ended evolution**, this world rewards position, not strategy.
   A lineage cannot bank an advantage as tokens for long. Wealth drains back
@@ -248,5 +248,5 @@ To make every figure of this chapter: `python3 book_figures.py rich`.
 <!-- turns -->
 ---
 
-← [Chapter 19 · What agents say to each other](19-what-agents-say-to-each-other.md) · [Contents](../README.md) · [Chapter 21 · How the network grows](21-how-the-network-grows.md) →
+← [Chapter 20 · What agents say to each other](20-what-agents-say-to-each-other.md) · [Contents](../README.md) · [Chapter 22 · How the network grows](22-how-the-network-grows.md) →
 <!-- /turns -->

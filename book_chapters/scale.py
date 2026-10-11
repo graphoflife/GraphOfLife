@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Part VI, worlds at scale: Chapter 51 — how a line takes over a world ten
+Part VI, worlds at scale: Chapter 55 — how a line takes over a world ten
 times the size of the baseline, the thesis of Experiment 10.
 
 When does every agent alive descend from one and the same founder? The lineage
@@ -24,7 +24,7 @@ from book_figures import FRAMES, chapter, describe, dots, line, quantile_band, r
 from book_chapters.common import BLUE, GREEN, GREY, ORANGE, RED, VIOLET, WORLD_SETS, YELLOW, listed
 
 E08_WORDS = ("the baseline worlds of Experiment 8, three seeds at each of ten sizes from 800 to 409,600 tokens, "
-             "600 iterations each (Chapter 38; `python3 gol_lab.py run E08`)")
+             "600 iterations each (Chapter 42; `python3 gol_lab.py run E08`)")
 
 
 @D.measure("lineage")

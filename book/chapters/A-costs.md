@@ -72,7 +72,7 @@ about seven hours.
   and an agent costs about 0.87 ms per iteration, so 10,000 tokens cost about
   1.1 seconds per iteration. If the number of agents grows in step with the
   tokens, 200,000 tokens cost about 22 —
-  [Chapter 38](38-how-does-a-worlds-size-follow-its-tokens.md) will say whether it does.
+  [Chapter 42](42-how-does-a-worlds-size-follow-its-tokens.md) will say whether it does.
 - Memory limits big worlds before time does: the lab starts a run only when
   its estimated peak fits next to the runs already going, in three quarters
   of the machine's memory.
@@ -84,5 +84,5 @@ about seven hours.
 <!-- turns -->
 ---
 
-← [Chapter 60 · A hundred thousand iterations](60-a-hundred-thousand-iterations.md) · [Contents](../README.md)
+← [Chapter 64 · A hundred thousand iterations](64-a-hundred-thousand-iterations.md) · [Contents](../README.md)
 <!-- /turns -->

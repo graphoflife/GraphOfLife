@@ -232,13 +232,13 @@ with more neighbours can be staked on by more of them. Whether connections
 make agents rich, or rich agents attract connections, this figure cannot say.
 
 Part III found the law behind it. Agents spread their stakes nearly evenly
-over their own node and their neighbours' ([Chapter 27](27-where-the-tokens-flow.md)),
+over their own node and their neighbours' ([Chapter 29](29-where-the-tokens-flow.md)),
 and stakes spread that way move tokens like a random walk, which comes to rest
 when every agent holds tokens in proportion to its connections **plus one**.
 The median agent of every class of connections holds close to that resting
-share ([Chapter 30](30-how-properties-scale-together.md)). So, in the main,
+share ([Chapter 34](34-how-properties-scale-together.md)). So, in the main,
 connections make agents rich — and a rich agent with few connections drains
-back to its share within a few games ([Chapter 26](26-gains-and-losses.md)).
+back to its share within a few games ([Chapter 28](28-gains-and-losses.md)).
 
 ## The tokens of the dead
 
@@ -284,7 +284,7 @@ richest tenth held 44% (23 of 26 above 40%) — that part holds; and agents put 
 median 30% of what they staked on their own node, in no world more than 34% —
 far from the half the thesis expected. So the thesis is refuted, and refuted
 mostly in its explanation: wealth pools moderately and stays steady, but not
-because agents defend their own nodes. [Chapter 15](15-how-the-game-is-played.md) looks at how the game is
+because agents defend their own nodes. [Chapter 16](16-how-the-game-is-played.md) looks at how the game is
 played instead.
 
 To make every figure of this chapter: `python3 book_figures.py tokens`.
@@ -292,5 +292,5 @@ To make every figure of this chapter: `python3 book_figures.py tokens`.
 <!-- turns -->
 ---
 
-← [Chapter 13 · How much does the seed decide?](13-how-much-does-the-seed-decide.md) · [Contents](../README.md) · [Chapter 15 · How the game is played](15-how-the-game-is-played.md) →
+← [Chapter 14 · How much does the seed decide?](14-how-much-does-the-seed-decide.md) · [Contents](../README.md) · [Chapter 16 · How the game is played](16-how-the-game-is-played.md) →
 <!-- /turns -->

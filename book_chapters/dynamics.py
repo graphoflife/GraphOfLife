@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-Part II, agents and connections over time: Chapter 20 — do the rich stay rich? —
-and Chapter 21 — how the network grows.
+Part II, agents and connections over time: Chapter 21 — do the rich stay rich? —
+and Chapter 22 — how the network grows.
 
 Both follow single agents and single connections from frame to frame, so they read
 the frames themselves, at regular moments of every world's settled life, and keep
@@ -237,7 +237,7 @@ def rich(ch: F.Chapter) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 21 · How the network grows
+# Chapter 22 · How the network grows
 # ---------------------------------------------------------------------------
 
 GROWTH_STARTS = range(W.settled, W.until, 25)

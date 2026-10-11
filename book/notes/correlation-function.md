@@ -59,7 +59,7 @@ it was there because of place; what disappears was closeness.
 
 ## Where it is used
 
-[Chapter 22](../chapters/22-like-next-to-like.md) measures *C*(*r*) for
+[Chapter 23](../chapters/23-like-next-to-like.md) measures *C*(*r*) for
 tokens, age and connections, and the share of kin at each distance.
 
 ## References

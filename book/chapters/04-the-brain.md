@@ -143,7 +143,7 @@ id: a child whose brain did not mutate, and a node that took on a
 conqueror's brain, carry the same genotype as the brain they copied. A
 mutation gives the brain a new id and remembers the old one as its parent.
 The ids therefore form a family tree ([Genotypes and the family
-tree](../notes/genotype.md)), which [Chapter 17](17-genotypes-and-lineages.md)
+tree](../notes/genotype.md)), which [Chapter 18](18-genotypes-and-lineages.md)
 climbs.
 
 ## What brains end up doing
@@ -178,12 +178,12 @@ agents (49% in the median world) spread their stake over several candidates
 rather than putting it all on one, and half of all staked tokens (50%) were
 marked revolutionary — what brains of random weights do, since each of these
 choices depends on which of two random outputs is the larger. From iteration
-500 on it was 97% and 96% ([Chapter 15](15-how-the-game-is-played.md)).
+500 on it was 97% and 96% ([Chapter 16](16-how-the-game-is-played.md)).
 
 Nobody chose these numbers. Are they the work of selection — brains that did
 otherwise losing their tokens and their nodes — or only of the churn of
 copying and changing brains? Parts II and III come back to this question
-([Chapter 15](15-how-the-game-is-played.md), [Chapter 37](37-do-the-brains-matter.md)).
+([Chapter 16](16-how-the-game-is-played.md), [Chapter 41](41-do-the-brains-matter.md)).
 
 ## The control: decisions by chance
 
@@ -191,7 +191,7 @@ One setting replaces the brain by noise: with
 [`random_decisions`](../notes/settings.md#random_decisions) on, every one of
 the 45 outputs of every column is drawn from a standard normal distribution
 instead of being computed, and every decision is read from that noise exactly
-as above. Nothing else changes. [Chapter 37](37-do-the-brains-matter.md) shows
+as above. Nothing else changes. [Chapter 41](41-do-the-brains-matter.md) shows
 what becomes of a world run that way.
 
 > [!summary] In short

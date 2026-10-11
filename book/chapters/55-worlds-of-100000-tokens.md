@@ -21,23 +21,23 @@
 
 Every finding of Parts II and III was made on worlds of 10,000 tokens, about
 1,300 agents each. That is small. A world of 1,300 agents is some 30 steps
-across ([Chapter 31](31-the-geometry-of-a-world.md)), and its structure
-fades within three ([Chapter 22](22-like-next-to-like.md)): there is room
+across ([Chapter 35](35-the-geometry-of-a-world.md)), and its structure
+fades within three ([Chapter 23](23-like-next-to-like.md)): there is room
 for a dozen regions side by side, no more. Questions about space, about
 scale, and about whether different kinds of agents can live side by side
 need worlds with more room.
 
-[Chapter 38](38-how-does-a-worlds-size-follow-its-tokens.md) showed that a
+[Chapter 42](42-how-does-a-worlds-size-follow-its-tokens.md) showed that a
 bigger world is, on average, more of the same: agents, connections and
 births all follow the tokens in proportion. It ran only three worlds of each
 size, for 600 iterations. This experiment makes a **second baseline**:
 thirty worlds of 100,000 tokens, ten times the baseline, each run for 1,500
-iterations. Part VI builds on it — Chapter 52 is to measure its dimensions
-at scale, and Chapter 53 to look for properties without a scale (both
+iterations. Part VI builds on it — Chapter 56 is to measure its dimensions
+at scale, and Chapter 57 to look for properties without a scale (both
 planned, see [the contents](../README.md)) — and it answers one question of
 its own: how a line takes over a world.
 
-**How a line takes over.** [Chapter 17](17-genotypes-and-lineages.md) found
+**How a line takes over.** [Chapter 18](18-genotypes-and-lineages.md) found
 that whole lines of descent take the baseline worlds over again and again,
 about once every 350 iterations. Is that chance or merit? Three answers give
 three different paces, and the size of the world tells them apart:
@@ -54,18 +54,18 @@ three different paces, and the size of the world tells them apart:
    of the world.
 
 A world is a space: it has a finite dimension
-([Chapter 23](23-how-many-dimensions-does-a-world-have.md)), new connections
+([Chapter 24](24-how-many-dimensions-does-a-world-have.md)), new connections
 are only ever made inside a neighbourhood
-([Chapter 21](21-how-the-network-grows.md)), and a node can only be taken by
+([Chapter 22](22-how-the-network-grows.md)), and a node can only be taken by
 a neighbour. Ten times the agents make a world only about twice as wide: its
-diameter grows as agents^0.30 ([Chapter 38](38-how-does-a-worlds-size-follow-its-tokens.md)).
+diameter grows as agents^0.30 ([Chapter 42](42-how-does-a-worlds-size-follow-its-tokens.md)).
 So the third answer predicts two to three times as long, the first ten, the
 second barely longer.
 
-[Chapter 18](18-what-the-brains-are-like.md) gives a reason to expect the
+[Chapter 19](19-what-the-brains-are-like.md) gives a reason to expect the
 first answer: the brains are nearly blind and agree on every decision that
 matters, which leaves little for one line to be better at. The worlds of
-Chapter 38 point to the third: at 102,400 tokens, all three came from a
+Chapter 42 point to the third: at 102,400 tokens, all three came from a
 single founder by iterations 400, 400 and 525, where the median baseline
 world needed 175.
 
@@ -81,6 +81,8 @@ world needed 175.
 >
 > **It fails if:** The median is below 350: a large world is taken over about as fast as a small one, as a better brain spreading through a well-mixed population would take it. Or it is above 875, or most worlds never get there by iteration 1,500: then the pace is set by the number of agents, as chance alone would set it.
 <!-- /thesis -->
+
+("Chapter 23" and "Chapter 38" in the thesis are today's [Chapter 24](24-how-many-dimensions-does-a-world-have.md) and [Chapter 42](42-how-does-a-worlds-size-follow-its-tokens.md).)
 
 ## Method
 
@@ -139,8 +141,8 @@ starts with 1,000 founders in a ring and settles at about 13,000 agents.
   1,499: agents, connections, births, deaths, inequality, genotypes and
   families, each per token or per agent and set beside the baseline.
 - **Space**, in the frames of iterations 500, 1,000 and 1,499: the two
-  rulers of [Chapter 23](23-how-many-dimensions-does-a-world-have.md), the
-  correlation functions of [Chapter 22](22-like-next-to-like.md), the
+  rulers of [Chapter 24](24-how-many-dimensions-does-a-world-have.md), the
+  correlation functions of [Chapter 23](23-like-next-to-like.md), the
   domains of lines — how far apart two agents can be that share an ancestor
   of 25, 50 and 100 iterations back — and the widths of the worlds.
 
@@ -157,5 +159,5 @@ five hours. Together with Experiment 9 (48 GB), it fits on the disk as it is now
 <!-- turns -->
 ---
 
-← [Chapter 39 · How fast should brains change?](39-how-fast-should-brains-change.md) · [Contents](../README.md) · [Chapter 60 · A hundred thousand iterations](60-a-hundred-thousand-iterations.md) →
+← [Chapter 43 · How fast should brains change?](43-how-fast-should-brains-change.md) · [Contents](../README.md) · [Chapter 64 · A hundred thousand iterations](64-a-hundred-thousand-iterations.md) →
 <!-- /turns -->

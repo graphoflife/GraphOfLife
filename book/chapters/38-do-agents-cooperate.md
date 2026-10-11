@@ -92,15 +92,15 @@ with its **cost** *C* to the helper.
 What can an agent of Graph of Life give, and at what cost?
 
 - **A stake on a neighbour's node.** Every token staked on a neighbour ends the
-  game on the neighbour's node ([Chapter 26](26-gains-and-losses.md)): a pure
+  game on the neighbour's node ([Chapter 28](28-gains-and-losses.md)): a pure
   gift of tokens, cost *C* to the staker, benefit *B* = *C* to the node. But a
   stake is also a **bid** for that node: if it wins, the node takes the
   staker's brain. For the brain, every gift is also an attack. This
   double meaning is built into the game.
 - **A child's endowment.** The tokens and connections a parent gives its child
-  ([Chapter 28](28-how-agents-have-children.md)).
+  ([Chapter 31](31-how-agents-have-children.md)).
 - **Keeping a connection alive.** A connection survives only if a token crosses
-  it ([Chapter 32](32-how-a-world-breaks.md)). Paying that token keeps open a
+  it ([Chapter 36](36-how-a-world-breaks.md)). Paying that token keeps open a
   channel both sides need.
 - **Joining a coalition.** A stake marked revolutionary can join others to take
   a node from its largest staker ([How a coalition takes a node](../notes/revolution.md)).
@@ -132,9 +132,9 @@ Yes, strongly. In the median world, **10.6%** of neighbours carry the same
 genotype, against **0.28%** of two agents drawn at random — 38 times as often.
 Counting close kin too (one's genotype the parent of the other's, or both
 sharing a parent genotype): 23% of neighbours against 0.8% of random pairs.
-This is the picture of [Chapter 33](33-one-world-many-colours.md) in numbers:
+This is the picture of [Chapter 37](37-one-world-many-colours.md) in numbers:
 families live together. A brain's copies sit next to it — because a brain
-spreads by taking neighbouring nodes ([Chapter 27](27-where-the-tokens-flow.md))
+spreads by taking neighbouring nodes ([Chapter 29](29-where-the-tokens-flow.md))
 and children are joined to their parents.
 
 So the precondition of kin selection is met: *r* between neighbours is high.
@@ -221,7 +221,7 @@ two stakes is 0.63.
 
 Is that reciprocity? Two observations say: not in the sense of the theory.
 An equal exchange cancels: it changes neither balance
-([Chapter 27](27-where-the-tokens-flow.md)). What it does is keep the
+([Chapter 29](29-where-the-tokens-flow.md)). What it does is keep the
 connection alive at its minimum price, paid by both. And it is what the even
 split gives: two poor agents splitting a few tokens evenly over a few
 candidates put one token on each other. It is a **handshake**, not a favour
@@ -256,7 +256,7 @@ do not. In only **5%** of connections do the same two brains face each other
 one game later (neither end won by a neighbour in between); after two games,
 1%; after four, 0.3%. The stage stays; the actors change almost every game —
 because about half of all nodes, and nearly every hub, are taken over in every
-game ([Chapter 27](27-where-the-tokens-flow.md)).
+game ([Chapter 29](29-where-the-tokens-flow.md)).
 
 With *w* ≈ 0.05, direct reciprocity would need a benefit twenty times its
 cost. In this world, nobody meets anybody twice.
@@ -286,8 +286,8 @@ every run already writes:
    nodes again and again.
 6. **Groups that win.** Whether regions held by one family grow, survive or
    split more than mixed regions — selection between groups, read from the
-   families of [Chapter 33](33-one-world-many-colours.md) and the breaks of
-   [Chapter 32](32-how-a-world-breaks.md).
+   families of [Chapter 37](37-one-world-many-colours.md) and the breaks of
+   [Chapter 36](36-how-a-world-breaks.md).
 
 ## What this means
 
@@ -301,8 +301,8 @@ every run already writes:
   price the rules set, and need no cooperation to explain.
 - **For open-ended evolution** this chapter points at rules, not brains: an
   agent that keeps its identity when its node is taken, a way to recognise
-  kin, a way to commit to a partner. [Chapter 35](35-questioning-the-mechanics.md)
-  examines the rules responsible, and [Meta II](36-meta-2.md) proposes
+  kin, a way to commit to a partner. [Chapter 39](39-questioning-the-mechanics.md)
+  examines the rules responsible, and [Meta II](40-meta-2.md) proposes
   changes.
 
 To make every figure of this chapter: `python3 book_figures.py cooperation`.
@@ -310,5 +310,5 @@ To make every figure of this chapter: `python3 book_figures.py cooperation`.
 <!-- turns -->
 ---
 
-← [Chapter 33 · One world, many colours](33-one-world-many-colours.md) · [Contents](../README.md) · [Chapter 35 · Questioning the mechanics](35-questioning-the-mechanics.md) →
+← [Chapter 37 · One world, many colours](37-one-world-many-colours.md) · [Contents](../README.md) · [Chapter 39 · Questioning the mechanics](39-questioning-the-mechanics.md) →
 <!-- /turns -->

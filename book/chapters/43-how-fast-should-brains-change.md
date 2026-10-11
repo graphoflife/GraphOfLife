@@ -24,7 +24,7 @@ probability *p* = 0.2 ([How a brain changes](../notes/mutation.md)). Is that
 a lot or a little?
 
 Too little, and a world is stuck with what it started with.
-[Chapter 37](37-do-the-brains-matter.md) took change away altogether, and
+[Chapter 41](41-do-the-brains-matter.md) took change away altogether, and
 worlds whose brains never change ended up anywhere: some frozen, with no one
 born and no one dying, some teeming, with a child for every agent in every
 iteration. Too much, and selection cannot keep what it finds. Between the two
@@ -47,13 +47,13 @@ change can leave its mark. Theory offers three pictures of how:
 Two findings of this book make the question sharper.
 
 - **Three births per hundred agents.** The 26 evolving worlds of
-  [Chapter 37](37-do-the-brains-matter.md) all settled near three births per
+  [Chapter 41](41-do-the-brains-matter.md) all settled near three births per
   hundred agents per iteration, while worlds without change spread from none
   to a hundred. Is three what selection finds — a rate any evolving world
   arrives at — or only the churn of mutation, which keeps brains from
   settling anywhere extreme? If it is churn, it should move with the amount
   of churn.
-- **Change in the living.** [Chapter 35](35-questioning-the-mechanics.md)
+- **Change in the living.** [Chapter 39](39-questioning-the-mechanics.md)
   found that 97% of new genotypes arise in brains that are not being copied,
   after a game. The rate of mutation decides how fast a successful brain is
   eroded in place, and so how long a line stays like its ancestor — the
@@ -79,6 +79,8 @@ third.
 >
 > **It fails if:** Births per hundred agents stay within 30% of the baseline's (2.2 to 4.1) at every mutation probability, or do not rise with it. Then the baseline's three births per hundred agents is a rate selection finds, whatever the churn of mutation.
 <!-- /thesis -->
+
+("Chapter 28" in the thesis is today's [Chapter 31](31-how-agents-have-children.md).)
 
 ## Method
 
@@ -142,13 +144,13 @@ the share of nodes kept by their own agent, genotypes per agent and families
 ([Families](../notes/families.md)); and, from the frames, how long genotypes
 last and how often one branch of the family tree replaces all others
 ([The common ancestor](../notes/common-ancestor.md)), as in
-[Chapter 37](37-do-the-brains-matter.md). Each rate is compared with the
+[Chapter 41](41-do-the-brains-matter.md). Each rate is compared with the
 baseline seed by seed: the difference of the means, an interval for it from
 resampling the seeds, and how often flipping the signs of the differences at
 random gives one as large ([Permutation tests](../notes/permutation-test.md)).
 Worlds that fall to twenty agents are stopped, as in the baseline, and counted
 apart ([When a world ends](../notes/extinction.md)) — remembering, from
-[Chapter 38](38-how-does-a-worlds-size-follow-its-tokens.md), that not every
+[Chapter 42](42-how-does-a-worlds-size-follow-its-tokens.md), that not every
 one of them would have died.
 
 **What each rate means.** Every brain is offered a change after every game,
@@ -169,5 +171,5 @@ pilots, an iteration took about 1.0 milliseconds per agent at 0.8 and 0.6 at
 <!-- turns -->
 ---
 
-← [Chapter 38 · How does a world's size follow its tokens?](38-how-does-a-worlds-size-follow-its-tokens.md) · [Contents](../README.md) · [Chapter 51 · Worlds of 100,000 tokens](51-worlds-of-100000-tokens.md) →
+← [Chapter 42 · How does a world's size follow its tokens?](42-how-does-a-worlds-size-follow-its-tokens.md) · [Contents](../README.md) · [Chapter 55 · Worlds of 100,000 tokens](55-worlds-of-100000-tokens.md) →
 <!-- /turns -->

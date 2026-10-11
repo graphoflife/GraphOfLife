@@ -11,7 +11,7 @@ something quite different from what it seems to say.
 
 > [!question] Questions of this chapter
 > - How do an agent's tokens grow with its connections? Is that the resting
->   state of the even split ([Chapter 27](27-where-the-tokens-flow.md))?
+>   state of the even split ([Chapter 29](29-where-the-tokens-flow.md))?
 > - How closely knit is the neighbourhood of a well-connected agent?
 > - To whom are the well-connected joined?
 > - Does the size of an agent's gains and losses grow with its wealth?
@@ -61,7 +61,7 @@ something quite different from what it seems to say.
 <!-- figure scaling/tokens-degree -->
 ![Tokens against connections](../figures/scaling/tokens-degree.svg)
 
-**Tokens against connections.** Every agent alive after the last game of the 26 worlds that lived to the end (35,554 agents), counted in cells of connections k and tokens, both in classes of growing width; a cell's colour is how many agents it holds, on a logarithmic scale. White: the median tokens in each class of k. Red: the straight line least squares fits through ln(tokens) against ln(k) over all agents ([Scaling relations](../notes/scaling-relations.md)). Cyan: tokens proportional to k + 1, through the median at k = 1 — where an even split of every stake would leave the tokens on a network that held still ([Chapter 27](27-where-the-tokens-flow.md)).
+**Tokens against connections.** Every agent alive after the last game of the 26 worlds that lived to the end (35,554 agents), counted in cells of connections k and tokens, both in classes of growing width; a cell's colour is how many agents it holds, on a logarithmic scale. White: the median tokens in each class of k. Red: the straight line least squares fits through ln(tokens) against ln(k) over all agents ([Scaling relations](../notes/scaling-relations.md)). Cyan: tokens proportional to k + 1, through the median at k = 1 — where an even split of every stake would leave the tokens on a network that held still ([Chapter 29](29-where-the-tokens-flow.md)).
 
 > [!example]- How to make this figure
 > **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 9](09-thirty-worlds.md)). They are made with `python3 gol_lab.py run E02`.
@@ -146,7 +146,7 @@ share of joined neighbour pairs is a few in a thousand.
 A falling *C*(*k*) ∝ 1/*k* is the signature Ravasz and Barabási (2003) gave
 for **hierarchical** networks: small, tight groups inside larger, looser ones.
 The rules suggest how it comes about here. A hub gains connections through
-the children of its neighbours ([Chapter 29](29-power-laws-real-and-apparent.md)):
+the children of its neighbours ([Chapter 32](32-power-laws-real-and-apparent.md)):
 a child born to a neighbour *v* of the hub *h* and joined to both *v* and *h*
 closes the triangle (child, *v*, *h*). So each connection a hub gains this way
 comes with about one triangle — triangles in proportion to connections, and
@@ -231,12 +231,12 @@ world's history.
   world, and they follow from two mechanisms — splitting stakes evenly and
   joining children to their parents' neighbours — that say nothing about what
   a brain computes. Structure that the rules alone fix is not where to look
-  for evolution; [Meta II](36-meta-2.md) asks where to look instead.
+  for evolution; [Meta II](40-meta-2.md) asks where to look instead.
 
 To make every figure of this chapter: `python3 book_figures.py scaling`.
 
 <!-- turns -->
 ---
 
-← [Chapter 29 · Power laws, real and apparent](29-power-laws-real-and-apparent.md) · [Contents](../README.md) · [Chapter 31 · The geometry of a world](31-the-geometry-of-a-world.md) →
+← [Chapter 33 · The largest and the smallest](33-the-largest-and-the-smallest.md) · [Contents](../README.md) · [Chapter 35 · The geometry of a world](35-the-geometry-of-a-world.md) →
 <!-- /turns -->

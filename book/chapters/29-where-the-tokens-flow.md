@@ -1,6 +1,6 @@
 # Where the tokens flow
 
-[Chapter 26](26-gains-and-losses.md) followed the agents through a game:
+[Chapter 28](28-gains-and-losses.md) followed the agents through a game:
 who gains, who loses. This chapter follows the **tokens**: where each staked
 token goes, how much of it comes back, and whether the whole movement obeys
 a simple law. It does — nearly — and the law explains several findings of
@@ -91,7 +91,7 @@ In the first game, a quarter stays home, a quarter is matched and half goes
 one way. In settled games, 30% stays home, **49% is matched** and only 21%
 goes one way. Most of what agents send to their neighbours is an exchange of
 equal amounts, which is why half of all agents end a game with exactly what
-they had ([Chapter 26](26-gains-and-losses.md)).
+they had ([Chapter 28](28-gains-and-losses.md)).
 
 ## Stakes that are returned
 
@@ -119,7 +119,7 @@ necessarily. Look at how widely agents stake (the next figure): they stake on
 independently of who staked on it, B would still stake on A with about that
 probability. A reciprocity of 92% is what breadth alone would give. To find
 real reciprocity one would have to show that B stakes *more* on A *because* A
-staked on B — a question for [Chapter 34](34-do-agents-cooperate.md).
+staked on B — a question for [Chapter 38](38-do-agents-cooperate.md).
 
 ## How widely agents stake
 
@@ -167,7 +167,7 @@ home than that.
 
 Often there is not even a split to round. In the median world, 58% of agents
 give every candidate a score of zero or below, and then the rules split
-their tokens evenly by default ([Chapter 18](18-what-the-brains-are-like.md)).
+their tokens evenly by default ([Chapter 19](19-what-the-brains-are-like.md)).
 And the brains that do give positive scores give nearly the same one to
 every candidate, because a brain's outputs barely move with what it sees.
 The evolved brains end up doing something close to the simplest thing
@@ -227,13 +227,13 @@ That holds if π(*u*) is proportional to *d*ᵤ + 1. So:
 > proportion to its number of connections plus one.**
 
 This is the law behind several earlier findings: that agents with more
-connections hold more tokens ([Chapter 14](14-where-do-the-tokens-go.md)),
+connections hold more tokens ([Chapter 15](15-where-do-the-tokens-go.md)),
 that tokens run downhill from agents richer than their neighbourhood
-([Chapter 26](26-gains-and-losses.md)), and that a rich agent with few
+([Chapter 28](28-gains-and-losses.md)), and that a rich agent with few
 connections drains away within a few games. A world is never quite at rest,
 because the network keeps changing under the tokens;
-[Chapter 30](30-how-properties-scale-together.md) measures how close it
-comes, and [Chapter 31](31-the-geometry-of-a-world.md) how fast a random walk
+[Chapter 34](34-how-properties-scale-together.md) measures how close it
+comes, and [Chapter 35](35-the-geometry-of-a-world.md) how fast a random walk
 on such a network can settle at all.
 
 ## Who keeps their node
@@ -333,8 +333,8 @@ circulate.
 - **For open-ended evolution this is a warning.** A behaviour this close to
   "split evenly" leaves little for brains to differ in, and a world whose
   wealth and positions are set by the network rather than by the brains gives
-  selection little to grip. [Chapter 35](35-questioning-the-mechanics.md)
-  asks which rules make it so, and [Meta II](36-meta-2.md) what could be
+  selection little to grip. [Chapter 39](39-questioning-the-mechanics.md)
+  asks which rules make it so, and [Meta II](40-meta-2.md) what could be
   changed.
 
 To make every figure of this chapter: `python3 book_figures.py flow`.
@@ -342,5 +342,5 @@ To make every figure of this chapter: `python3 book_figures.py flow`.
 <!-- turns -->
 ---
 
-← [Chapter 26 · Gains and losses](26-gains-and-losses.md) · [Contents](../README.md) · [Chapter 28 · How agents have children](28-how-agents-have-children.md) →
+← [Chapter 28 · Gains and losses](28-gains-and-losses.md) · [Contents](../README.md) · [Chapter 30 · What crosses a connection](30-what-crosses-a-connection.md) →
 <!-- /turns -->

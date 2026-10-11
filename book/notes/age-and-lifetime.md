@@ -64,6 +64,43 @@ such agent is equally likely to be at any point of its life. This is the
 a steady state — its births slow down over the run — but the effect is the
 same in kind.)
 
+## The risk of dying at each age
+
+The survival curve *S*(*L*), the share of lives lasting at least *L*
+iterations, is built from one number per age: of the agents whose lives
+reach age *a*, the share whose lives end there,
+
+$$
+h(a) = \frac{d(a)}{n(a)} ,
+$$
+
+with *n*(*a*) the lives lasting at least *a* (finished or not) and *d*(*a*)
+the finished lives of exactly *a*. This is the **hazard**, the chance of
+dying at age *a* for an agent that got there, and
+
+$$
+S(L) = \prod_{a < L} \bigl(1 - h(a)\bigr) .
+$$
+
+If the hazard is the same at every age, an agent's past says nothing about
+its future: lives are **memoryless**, and *S*(*L*) falls along a straight
+line when it is drawn on a logarithmic axis against *L*. A hazard that falls
+with age means that those who survive become safer — the young die most,
+as in a population with high infant mortality. A hazard that rises with age
+is ageing in the usual sense.
+
+## Cohorts
+
+Agents born in the same stretch of iterations are a **cohort**. Following
+each cohort's lives says how life expectancy changes over a world's life.
+Cohorts born late can only be followed to the end of the run, and the
+Kaplan–Meier estimate leaves their unfinished lives open rather than
+cutting them short. To compare cohorts on equal terms, each is measured by
+how many of its first 100 iterations an agent lives on average, the
+**restricted mean lifetime** Σ *S*(*L*) for *L* = 1 to 100: every cohort born
+at least 100 iterations before the end can be measured by it in full
+([Chapter 13](../chapters/13-how-ages-change.md)).
+
 <!-- turns -->
 [Contents](../README.md)
 <!-- /turns -->

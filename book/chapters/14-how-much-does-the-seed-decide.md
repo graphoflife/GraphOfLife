@@ -294,5 +294,5 @@ To make every figure of this chapter: `python3 book_figures.py seed`.
 <!-- turns -->
 ---
 
-← [Chapter 12 · Births, deaths and ages](12-births-deaths-and-ages.md) · [Contents](../README.md) · [Chapter 14 · Where do the tokens go?](14-where-do-the-tokens-go.md) →
+← [Chapter 13 · How ages change over a world's life](13-how-ages-change.md) · [Contents](../README.md) · [Chapter 15 · Where do the tokens go?](15-where-do-the-tokens-go.md) →
 <!-- /turns -->

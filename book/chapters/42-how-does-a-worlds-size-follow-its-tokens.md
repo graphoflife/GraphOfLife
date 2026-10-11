@@ -223,9 +223,9 @@ The right panel shows why. On average a game cuts off about 2% of the agents
 of a world — between 1.5% and 3.9%, size by size, with no trend. And the
 largest single cut is a large part of the world at every size: 35% at 3,200
 tokens, 48% at 409,600, 71% in one world of Chapter 9. In the biggest
-worlds, one game has cut off nearly thirty thousand agents at once. [Chapter 32](32-how-a-world-breaks.md) found how such cuts
+worlds, one game has cut off nearly thirty thousand agents at once. [Chapter 36](36-how-a-world-breaks.md) found how such cuts
 happen — a whole border of poor agents going quiet — and
-[Chapter 35](35-questioning-the-mechanics.md) the rule that makes them fatal:
+[Chapter 39](39-questioning-the-mechanics.md) the rule that makes them fatal:
 everything outside the largest connected piece dies. This experiment adds the
 scale: **the regions a world can lose grow with the world.** The cull couples
 every part of a world to every other, however big it is.
@@ -267,7 +267,7 @@ flat within what three seeds per size can see:
 | dimension from ball growth | −0.001 | −0.048 to 0.045 |
 
 Genotypes per agent are flatter than anything: 0.61 to 0.66 at every size —
-the balance of making and copying of [Chapter 25](25-how-even-is-a-world.md)
+the balance of making and copying of [Chapter 27](27-how-even-is-a-world.md)
 does not care how big the world is.
 
 Three properties of the network's shape do change, slowly:
@@ -319,7 +319,7 @@ a space of a fixed dimension *d*: a lump of *N* points has a width of about
 growth reads off every world, at every size (the last panel of the figure
 before). At large scales a world is less like a small world than like a
 three-dimensional body: grown locally, by children joined to their parents'
-neighbourhoods ([Chapter 31](31-the-geometry-of-a-world.md)), it never makes
+neighbourhoods ([Chapter 35](35-the-geometry-of-a-world.md)), it never makes
 the long jumps that keep a random network small. The mean distances scatter
 widely between worlds of one size, and bend a little; the diameter is the
 cleaner of the two.
@@ -403,7 +403,7 @@ lose half of itself in a game.
   world is not less noisy: in every world, at every size, a game can remove a
   third or half of everyone, whatever their brains — the noise comes from a
   rule, not from small numbers, and only a change of the rule removes it
-  ([Meta II](36-meta-2.md)). What size does give is room: a world of 60,000
+  ([Meta II](40-meta-2.md)). What size does give is room: a world of 60,000
   agents is 25 steps across on average and 80 at its widest, and keeps the
   same number of genotypes per agent — space in which regions could differ,
   if the rules let them stay apart.
@@ -429,5 +429,5 @@ lose half of itself in a game.
 <!-- turns -->
 ---
 
-← [Chapter 37 · Do the brains matter?](37-do-the-brains-matter.md) · [Contents](../README.md) · [Chapter 39 · How fast should brains change?](39-how-fast-should-brains-change.md) →
+← [Chapter 41 · Do the brains matter?](41-do-the-brains-matter.md) · [Contents](../README.md) · [Chapter 43 · How fast should brains change?](43-how-fast-should-brains-change.md) →
 <!-- /turns -->

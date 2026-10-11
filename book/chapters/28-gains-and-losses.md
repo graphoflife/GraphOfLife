@@ -107,9 +107,9 @@ Settled games are calm. 0.6% starve and 1.9% are cut off; 24% lose and 25%
 gain; and **48% of the agents end the game with exactly the tokens they began
 with**. Nearly half the world is, in tokens, untouched by a game in which every
 token was staked. That is not because they stake nothing on their neighbours —
-70% of staked tokens go to neighbours ([Chapter 14](14-where-do-the-tokens-go.md)) —
+70% of staked tokens go to neighbours ([Chapter 15](15-where-do-the-tokens-go.md)) —
 but because what they send out comes back in equal measure
-([Chapter 27](27-where-the-tokens-flow.md) counts how much of the flow is
+([Chapter 29](29-where-the-tokens-flow.md) counts how much of the flow is
 returned).
 
 In numbers per game in a settled world of about 1,300: some 330 agents gain,
@@ -160,10 +160,10 @@ they moved to the neighbour's node), or its connection carries nothing and is
 cut, and it is cut off with its tokens.
 
 If the rich lose 44% per game, why is there always a rich tenth holding 44%
-of the tokens ([Chapter 14](14-where-do-the-tokens-go.md))? Because the rich
+of the tokens ([Chapter 15](15-where-do-the-tokens-go.md))? Because the rich
 are replaced as fast as they shrink: tokens pile up again wherever there are
 many connections. Who is rich is mostly a matter of **where** an agent is.
-[Chapter 27](27-where-the-tokens-flow.md) shows the law behind it.
+[Chapter 29](29-where-the-tokens-flow.md) shows the law behind it.
 
 ## Tokens run downhill
 
@@ -215,7 +215,7 @@ The change would be **proportional to the curvature**: the discrete heat
 equation, in which heat flows from warm to cold in proportion to the
 difference. Real agents do not split exactly evenly, and degrees differ —
 which is why the relation is a tendency and not a law — but
-[Chapter 27](27-where-the-tokens-flow.md) shows how close to an even split the
+[Chapter 29](29-where-the-tokens-flow.md) shows how close to an even split the
 brains in fact play.
 
 ## The lottery
@@ -258,7 +258,7 @@ matters only to the poor.
   neighbourhood within a few games, its wealth cannot record that its brain
   did well in the past. For evolution, that matters: selection needs
   differences in success that last long enough to be inherited
-  ([Meta II](36-meta-2.md)).
+  ([Meta II](40-meta-2.md)).
 - **The poor live on a knife's edge.** A third of 1-token agents die in every
   game; the survivors multiply their tokens. Being poor in this world is not a
   slow decline, it is a coin toss.
@@ -268,5 +268,5 @@ To make every figure of this chapter: `python3 book_figures.py gains`.
 <!-- turns -->
 ---
 
-← [Chapter 25 · How even is a world?](25-how-even-is-a-world.md) · [Contents](../README.md) · [Chapter 27 · Where the tokens flow](27-where-the-tokens-flow.md) →
+← [Chapter 27 · How even is a world?](27-how-even-is-a-world.md) · [Contents](../README.md) · [Chapter 29 · Where the tokens flow](29-where-the-tokens-flow.md) →
 <!-- /turns -->

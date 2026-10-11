@@ -51,7 +51,7 @@ order tends to reverse.
 
 ## Where it is used
 
-[Chapter 20](../chapters/20-do-the-rich-stay-rich.md) measures all three in
+[Chapter 21](../chapters/21-do-the-rich-stay-rich.md) measures all three in
 the baseline worlds.
 
 ## References

@@ -135,7 +135,7 @@ hundred in each of the first ten iterations, about 3 in a settled world
 gives ⌊*f* · τ⌋ tokens, and an agent holding 3 tokens that would give a
 fifth gives ⌊0.6⌋ = 0 and has no child. The founders held 100 tokens each;
 the median agent of a settled world holds about 5
-([Chapter 14](14-where-do-the-tokens-go.md)).
+([Chapter 15](15-where-do-the-tokens-go.md)).
 
 ## A bottleneck of lines
 

@@ -156,7 +156,7 @@ more than this.
 
 Where would a tail like this come from? The rules contain a known mechanism.
 A child is joined to some of its parent's candidates — in effect it **copies**
-part of its parent's neighbourhood ([Chapter 28](28-how-agents-have-children.md)).
+part of its parent's neighbourhood ([Chapter 31](31-how-agents-have-children.md)).
 An agent gains a connection whenever one of its neighbours has a child that is
 joined to it; an agent with twice the neighbours has about twice the chances.
 The well connected gain connections in proportion to their connections:
@@ -203,7 +203,7 @@ than the connection tail would need the hubs to hold *more* tokens per
 connection than everyone else. They do not: among the 579 agents in the token
 tail, 44% have ten connections or more — but **34% have only one or two**.
 A third of the richest agents are rich far beyond their place, and
-[Chapter 26](26-gains-and-losses.md) showed what happens to them: they drain,
+[Chapter 28](28-gains-and-losses.md) showed what happens to them: they drain,
 losing 44% of their tokens per game on average.
 
 That suggests a different mechanism, also a classic. An agent's tokens are
@@ -242,7 +242,7 @@ But big ones matter. Of all agents ever cut off, 94% died in games that cut
 off ten or more, and 20% in the 2.5% of games that cut off a hundred or more.
 Death by cutting comes in **lumps**: whole branches of the network fall off
 at once. Starvation comes in smaller lumps (at most 637 in one game).
-[Chapter 32](32-how-a-world-breaks.md) asks where the lumps come from and
+[Chapter 36](36-how-a-world-breaks.md) asks where the lumps come from and
 whether they can be foreseen.
 
 ## The rhythm of the wander
@@ -276,7 +276,7 @@ back to a level is the Ornstein–Uhlenbeck process, whose spectrum is flat
 below a corner and falls as *f*^−2 above it; the corner here corresponds to a
 pull that takes a few hundred iterations to act — which fits the
 [autocorrelation](../notes/autocorrelation.md) of 0.68 after 100 iterations
-found in [Chapter 13](13-how-much-does-the-seed-decide.md). 70% of the
+found in [Chapter 14](14-how-much-does-the-seed-decide.md). 70% of the
 movement happens at periods of 500 iterations or more, and only 0.4% at
 periods shorter than 10: the wander is slow.
 
@@ -299,12 +299,12 @@ scale. The world forgets.
   criticality — to systems on the edge between order and chaos, where small
   causes can have effects of every size. Whatever the truth of that, this
   world is not on such an edge; it is a world that wanders and returns
-  ([Meta II](36-meta-2.md)).
+  ([Meta II](40-meta-2.md)).
 
 To make every figure of this chapter: `python3 book_figures.py powerlaws`.
 
 <!-- turns -->
 ---
 
-← [Chapter 28 · How agents have children](28-how-agents-have-children.md) · [Contents](../README.md) · [Chapter 30 · How properties scale together](30-how-properties-scale-together.md) →
+← [Chapter 31 · How agents have children](31-how-agents-have-children.md) · [Contents](../README.md) · [Chapter 33 · The largest and the smallest](33-the-largest-and-the-smallest.md) →
 <!-- /turns -->

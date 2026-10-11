@@ -133,11 +133,11 @@ likely to have a child as one with 3 or 4. Connections help more:
 
 From 2.1% of agents with one connection to 8.6% of agents with fifty or more,
 a fourfold rise. Part of this is wealth — well-connected agents are richer
-([Chapter 27](27-where-the-tokens-flow.md)) — and part is an effect of the
+([Chapter 29](29-where-the-tokens-flow.md)) — and part is an effect of the
 rules themselves: the child-share outputs are **averaged** over all of an
 agent's candidates, so the decision of an agent with many neighbours is an
 average of many columns, and an average behaves differently from a single
-value. [Chapter 35](35-questioning-the-mechanics.md) comes back to it.
+value. [Chapter 39](39-questioning-the-mechanics.md) comes back to it.
 
 ## How a child is joined
 
@@ -218,10 +218,10 @@ without births could only lose connections, never gain one.
   ring was made at a birth; births are the world's only source of structure.
 - **Births are not the main road of inheritance.** About 39 children are born
   per iteration, but about 720 nodes take a neighbour's brain in every game
-  ([Chapter 35](35-questioning-the-mechanics.md)). A brain spreads by
+  ([Chapter 39](39-questioning-the-mechanics.md)). A brain spreads by
   conquest twenty times more than by birth. In most models of evolution,
   reproduction is where heredity and variation happen; here, it is a side
-  road. [Meta II](36-meta-2.md) asks what that means for open-ended
+  road. [Meta II](40-meta-2.md) asks what that means for open-ended
   evolution.
 
 To make every figure of this chapter: `python3 book_figures.py children`.
@@ -229,5 +229,5 @@ To make every figure of this chapter: `python3 book_figures.py children`.
 <!-- turns -->
 ---
 
-← [Chapter 27 · Where the tokens flow](27-where-the-tokens-flow.md) · [Contents](../README.md) · [Chapter 29 · Power laws, real and apparent](29-power-laws-real-and-apparent.md) →
+← [Chapter 30 · What crosses a connection](30-what-crosses-a-connection.md) · [Contents](../README.md) · [Chapter 32 · Power laws, real and apparent](32-power-laws-real-and-apparent.md) →
 <!-- /turns -->

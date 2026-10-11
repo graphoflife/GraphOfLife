@@ -325,7 +325,7 @@ def ages(ch: F.Chapter) -> None:
             "two-sizes", panels, columns=2, title="Ages in worlds of two sizes",
             caption=f"The median age and the oldest agent after every game, in the {n} worlds of {W.tokens:,} tokens "
                     f"(blue, {W.until:,} iterations) and in the {len(other.specs)} worlds of {other.tokens:,} tokens "
-                    f"of Chapter 37's comparisons (yellow, {other.until:,} iterations). {BAND_WORDS}; a world that "
+                    f"of Chapter 41's comparisons (yellow, {other.until:,} iterations). {BAND_WORDS}; a world that "
                     "died is no longer counted.",
             recipe=recipe(W.runs_text() + " " + other.runs_text(), LIFELINES,
                           ["As in the first figure, for both sets of worlds.", *BAND_STEPS[1:]]))

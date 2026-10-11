@@ -70,7 +70,8 @@ So what shape comes out?
 >
 > 1. Read frames `1`, `201`, `2001` and `5999` (iterations 0, 100, 1,000 and 2,999, after the game): `ids` and `edges`.
 > 2. Peel: remove every agent with one connection or none, again and again, until none is left; the agents never removed are the core. Leaves are agents with exactly one connection.
-> 3. Lay the graph out with `networkx.forceatlas2_layout(G, max_iter=200, seed=1)`.
+> 3. In a world of more than 2,500 agents, keep the agents within r steps of the oldest agent, for the largest r that keeps at most 2,500 (`book_chapters.society.shown`).
+> 4. Lay the graph out with `networkx.forceatlas2_layout(G, max_iter=200, seed=1)`.
 >
 > **To make it again:** `python3 book_figures.py shape`.
 <!-- /figure -->
@@ -245,17 +246,17 @@ world grows only locally, by copying: that gives hubs whose connections grow
 with their connections, a triangle for nearly every connection a hub gains,
 and clustering that falls as one over the number of connections — a
 **hierarchy of stars**, with leaves hanging on hubs
-([Chapter 29](29-power-laws-real-and-apparent.md),
-[Chapter 30](30-how-properties-scale-together.md)). Against a random network
+([Chapter 32](32-power-laws-real-and-apparent.md),
+[Chapter 34](34-how-properties-scale-together.md)). Against a random network
 with exactly the same number of connections at every agent, the world is twice
 as long and thirty times easier to cut in two
-([Chapter 31](31-the-geometry-of-a-world.md)) — and it breaks, when it breaks,
-along its poorest regions ([Chapter 32](32-how-a-world-breaks.md)).
+([Chapter 35](35-the-geometry-of-a-world.md)) — and it breaks, when it breaks,
+along its poorest regions ([Chapter 36](36-how-a-world-breaks.md)).
 
 To make every figure of this chapter: `python3 book_figures.py shape`.
 
 <!-- turns -->
 ---
 
-← [Chapter 15 · How the game is played](15-how-the-game-is-played.md) · [Contents](../README.md) · [Chapter 17 · Genotypes and lineages](17-genotypes-and-lineages.md) →
+← [Chapter 16 · How the game is played](16-how-the-game-is-played.md) · [Contents](../README.md) · [Chapter 18 · Genotypes and lineages](18-genotypes-and-lineages.md) →
 <!-- /turns -->

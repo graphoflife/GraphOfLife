@@ -6,7 +6,7 @@ the reproduction phase, when a newborn child is joined to some of its
 parent's candidates and the parent may hand it some of its own connections.
 They are **lost** in two: after the game, when a connection that carried no
 tokens is cut, and whenever an agent dies, taking its connections with it
-([Chapter 3](03-one-iteration.md)). [Chapter 16](16-what-shape-does-the-network-take.md)
+([Chapter 3](03-one-iteration.md)). [Chapter 17](17-what-shape-does-the-network-take.md)
 described the shape that results. This chapter watches the making and the
 unmaking, and asks the question that decides the shape: who gains
 connections, and who loses them?
@@ -63,7 +63,7 @@ connections, and who loses them?
 Of 103,597 births in the reproduction phases of every 25th iteration from
 500 on, **78%** of the children were joined to their own parent. 12% were
 joined to no one, and are cut off at once
-([Chapter 28](28-how-agents-have-children.md)). The rest were joined to two
+([Chapter 31](31-how-agents-have-children.md)). The rest were joined to two
 to six of their parent's candidates, often more. A child is born into its
 parent's neighbourhood and nowhere else.
 
@@ -75,7 +75,7 @@ together**: two neighbours of a parent were at most two steps apart,
 through the parent, before the child arrived, and the child adds only
 another path of two steps. Distances in a world can grow, but new connections never shorten
 them. This is why a world keeps a shape in space at all
-([Chapter 23](23-how-many-dimensions-does-a-world-have.md)).
+([Chapter 24](24-how-many-dimensions-does-a-world-have.md)).
 
 ## Who gains and who loses
 
@@ -108,7 +108,7 @@ Both are straight lines on logarithmic axes, over two decades of *k*:
   per reproduction phase; with ten, about 0.5; with a hundred or more, 7.5.
   That is very nearly **linear preferential attachment**, the mechanism
   Barabási and Albert (1999) proposed for heavy-tailed networks.
-  [Chapter 29](29-power-laws-real-and-apparent.md) suggested it would be
+  [Chapter 32](32-power-laws-real-and-apparent.md) suggested it would be
   found here, reached by copying. A child joins some of its parent's
   candidates, so an agent gains a connection whenever one of its neighbours
   has a child, and an agent with twice the neighbours has twice the chances.
@@ -128,7 +128,7 @@ agent go up and down by a random factor game after game, in a world whose
 total is held in place by its tokens. Growth by random factors, kept off
 zero from below, makes heavy tails (Gabaix 1999), and losses that grow
 faster than gains bend the tail down at the top. That fits what
-[Chapter 29](29-power-laws-real-and-apparent.md) found: a power-law tail of
+[Chapter 32](32-power-laws-real-and-apparent.md) found: a power-law tail of
 exponent about 3 in the top twentieth of the connections, and nothing
 scale-free below it.
 
@@ -164,7 +164,7 @@ agents of any age up to a hundred iterations have 14 to 17 connections. The
 best-connected hundredth of agents aged 362 have 36, and of agents aged 724,
 61. The greatest hubs are old. But this is mostly survival, not
 accumulation: a hub is far less likely to die than a leaf
-([Chapter 20](20-do-the-rich-stay-rich.md)), so among the old the hubs are
+([Chapter 21](21-do-the-rich-stay-rich.md)), so among the old the hubs are
 overrepresented. Age gives an agent no connections; connections give it
 age.
 
@@ -177,11 +177,11 @@ age.
   than young ones, except that the best connected live longest.
 - **Growth is local.** A connection is only ever made inside a parent's
   neighbourhood, and never brings two agents closer together. That is what
-  lets a world keep a geometry ([Chapter 23](23-how-many-dimensions-does-a-world-have.md)).
+  lets a world keep a geometry ([Chapter 24](24-how-many-dimensions-does-a-world-have.md)).
   A network that added connections between random agents would collapse
   into a small world in which everything is a few steps from everything.
 - **For open-ended evolution**, the network is a churn of proportional
-  gains and losses. Connections, which [Chapter 20](20-do-the-rich-stay-rich.md)
+  gains and losses. Connections, which [Chapter 21](21-do-the-rich-stay-rich.md)
   found to be the only lasting form of wealth, are themselves turned over at
   every scale. No structure is built up that lasts longer than the agents in
   it.
@@ -191,5 +191,5 @@ To make every figure of this chapter: `python3 book_figures.py grows`.
 <!-- turns -->
 ---
 
-← [Chapter 20 · Do the rich stay rich?](20-do-the-rich-stay-rich.md) · [Contents](../README.md) · [Chapter 22 · Like next to like](22-like-next-to-like.md) →
+← [Chapter 21 · Do the rich stay rich?](21-do-the-rich-stay-rich.md) · [Contents](../README.md) · [Chapter 23 · Like next to like](23-like-next-to-like.md) →
 <!-- /turns -->

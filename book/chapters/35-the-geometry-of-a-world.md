@@ -91,7 +91,7 @@ the mean path falls to **4.2**, the radius to 5.8, the diameter to 11.
 The world is **twice as long** as its connections require. Random networks are
 "small worlds" because every connection is as likely to be a long jump as a
 short one. In this world there are no long jumps: a child is joined to its
-parent's neighbourhood ([Chapter 28](28-how-agents-have-children.md)), so the
+parent's neighbourhood ([Chapter 31](31-how-agents-have-children.md)), so the
 network only ever grows locally, branch by branch.
 
 ## How the world grows around an agent
@@ -117,7 +117,7 @@ Stand on an agent and count the agents within *r* steps.
 
 Within one step there are, on average, 3.5 agents (the agent and its
 neighbours). Within two, already **70**: from most agents, two steps reach a
-hub and everything around it — the stars of [Chapter 30](30-how-properties-scale-together.md).
+hub and everything around it — the stars of [Chapter 34](34-how-properties-scale-together.md).
 Then the count grows more slowly, as *r*^2.68, until half the world is
 reached at seven steps, and flattens as the balls run into the edges of the
 world. The growth is neither a clean power law (the left panel would show a
@@ -198,17 +198,17 @@ started — after about 1/λ₂ steps ([The spectral gap](../notes/spectral-gap.
 The world of seed 1 has λ₂ = 0.0019. Its random twin, with the same
 connections per agent, has 0.062: **thirty-two times larger**. By Cheeger's
 inequality, a small λ₂ guarantees a bottleneck — a large part of the world
-joined to the rest by few connections. [Chapter 32](32-how-a-world-breaks.md)
+joined to the rest by few connections. [Chapter 36](36-how-a-world-breaks.md)
 finds those bottlenecks: whole branches hanging on single connections.
 
-The gap also says something about the tokens. [Chapter 27](27-where-the-tokens-flow.md)
+The gap also says something about the tokens. [Chapter 29](29-where-the-tokens-flow.md)
 showed that a game moves tokens almost like a random walk. On this network, a
 random walk needs some 400 to 500 steps to forget its start — so tokens could
 spread evenly across a whole world only over hundreds of games. Meanwhile the
 network changes every game: about 165 connections are made and 117 cut per
 iteration, and the hubs change brains every game. **Locally**, tokens settle
 in a few games, which is why every agent's tokens follow its connections
-([Chapter 30](30-how-properties-scale-together.md)). **Globally**, the world is
+([Chapter 34](34-how-properties-scale-together.md)). **Globally**, the world is
 never at rest: far-apart regions are only loosely coupled.
 
 ## Loops
@@ -252,20 +252,20 @@ heavy-tailed: most agents are on a few, a handful on hundreds.
   size: in worlds of up to 60,000 agents, distances grow like the number of
   agents to the power 0.25 to 0.30, as in a body of about three dimensions,
   not with its logarithm, as in a random network
-  ([Chapter 38](38-how-does-a-worlds-size-follow-its-tokens.md)).
+  ([Chapter 42](42-how-does-a-worlds-size-follow-its-tokens.md)).
 - **The world mixes slowly.** Tokens settle within neighbourhoods and not
   across the world; regions of a world are only loosely coupled.
 - **For evolution, that cuts both ways.** A network that mixes slowly lets
   regions differ for a long time, which is how spatial structure protects
   variety and how cooperation can grow among neighbours (Nowak and May 1992;
-  [Chapter 34](34-do-agents-cooperate.md)). But a network with bottlenecks
+  [Chapter 38](38-do-agents-cooperate.md)). But a network with bottlenecks
   also breaks easily, and whole branches can be lost at once
-  ([Chapter 32](32-how-a-world-breaks.md)).
+  ([Chapter 36](36-how-a-world-breaks.md)).
 
 To make every figure of this chapter: `python3 book_figures.py geometry`.
 
 <!-- turns -->
 ---
 
-← [Chapter 30 · How properties scale together](30-how-properties-scale-together.md) · [Contents](../README.md) · [Chapter 32 · How a world breaks](32-how-a-world-breaks.md) →
+← [Chapter 34 · How properties scale together](34-how-properties-scale-together.md) · [Contents](../README.md) · [Chapter 36 · How a world breaks](36-how-a-world-breaks.md) →
 <!-- /turns -->

@@ -65,7 +65,7 @@ same. On irregular spaces they differ, and how they differ is informative:
 
 ## Where it is used
 
-[Chapter 23](../chapters/23-how-many-dimensions-does-a-world-have.md)
+[Chapter 24](../chapters/24-how-many-dimensions-does-a-world-have.md)
 measures both dimensions on the worlds, after calibrating them on spaces
 whose dimension is known.
 

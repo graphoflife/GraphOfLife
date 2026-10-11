@@ -97,7 +97,7 @@ share rose from 0.25 to 0.39.
 
 Why do the bars in the last game have peaks? A question to keep in mind: an
 agent holds few tokens — half of all agents hold 4 or fewer
-([Chapter 14](14-where-do-the-tokens-go.md)) — and stakes whole tokens. An
+([Chapter 15](15-where-do-the-tokens-go.md)) — and stakes whole tokens. An
 agent with 3 tokens can only put 0, ⅓, ⅔ or all of them at home; one with 2,
 only 0, ½ or all. So the shares cluster at simple fractions.
 
@@ -192,7 +192,7 @@ iteration 500 on, the median world's agents kept their node in 45% of games,
 and the number of nodes won by a coalition was 52% of the number of agents.
 
 That 45% is an average over very different places.
-[Chapter 27](27-where-the-tokens-flow.md) sorts the nodes by their
+[Chapter 29](29-where-the-tokens-flow.md) sorts the nodes by their
 connections: an agent with one connection keeps its node in 73% of games, an
 agent with fifty or more in only 2%. On a node with *d* connections, the agent
 living there is one of *d* + 1 stakers, and it wins about as often as one of
@@ -236,14 +236,14 @@ ends up playing the game in much the same way.
   revolutionary, a node on which the other stakers together put more than its
   largest single staker did is, nearly always, won by one of them — which may
   be the agent living on it.
-- **The stakes are nearly an even split.** [Chapter 27](27-where-the-tokens-flow.md)
+- **The stakes are nearly an even split.** [Chapter 29](29-where-the-tokens-flow.md)
   shows that agents stake on almost all of their candidates and keep a little
   more than an even share at home — which is the rules' rounding of whole
   tokens, not the brains; a game moves tokens almost as a random walk would.
 - **The behaviour converges.** Founders' random brains play every way there
   is; all 26 surviving worlds end up at nearly the same shares. Is that
   selection — brains that play otherwise losing their nodes — or would any
-  way of copying and changing brains end there? [Chapter 37](37-do-the-brains-matter.md)
+  way of copying and changing brains end there? [Chapter 41](41-do-the-brains-matter.md)
   compares worlds whose brains never change.
 
 To make every figure of this chapter: `python3 book_figures.py game`.
@@ -251,5 +251,5 @@ To make every figure of this chapter: `python3 book_figures.py game`.
 <!-- turns -->
 ---
 
-← [Chapter 14 · Where do the tokens go?](14-where-do-the-tokens-go.md) · [Contents](../README.md) · [Chapter 16 · What shape does the network take?](16-what-shape-does-the-network-take.md) →
+← [Chapter 15 · Where do the tokens go?](15-where-do-the-tokens-go.md) · [Contents](../README.md) · [Chapter 17 · What shape does the network take?](17-what-shape-does-the-network-take.md) →
 <!-- /turns -->

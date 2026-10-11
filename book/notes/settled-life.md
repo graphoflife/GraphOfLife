@@ -30,7 +30,7 @@ down over hundreds of iterations ([Chapter 10](../chapters/10-a-worlds-life.md))
 Where it stands at iteration 2,999, or over its last few hundred iterations,
 is wherever the wander happens to have taken it. A mean over 2,500
 iterations averages much of the wander away, so it says more about the world
-and less about the moment. [Chapter 13](../chapters/13-how-much-does-the-seed-decide.md)
+and less about the moment. [Chapter 14](../chapters/14-how-much-does-the-seed-decide.md)
 measures how much: the worlds' sizes differ by a third of the mean when each
 is measured over its last 100 iterations, and by a sixth when measured over
 its settled life.

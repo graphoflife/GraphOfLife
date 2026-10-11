@@ -58,7 +58,7 @@ classic setting for the evolution of signals, from Lewis's signalling games
 
 ## How the messages are read
 
-As in [Chapter 18](18-what-the-brains-are-like.md), every one of the 26
+As in [Chapter 19](19-what-the-brains-are-like.md), every one of the 26
 worlds that lived to the end is rebuilt exactly as its last game left it.
 Every agent looks at its candidates, and its brain writes a message to each,
 30 outputs squeezed by tanh into −1 to 1. That gives between 1,400 and
@@ -90,7 +90,7 @@ root mean square of their 30 numbers, by **0.0005**. Two messages written by
 to itself, to a rich neighbour and to a poor one, to kin and to strangers. So
 a message tells its reader one thing, *who wrote it*. It is a name.
 
-This follows from [Chapter 18](18-what-the-brains-are-like.md). A brain's
+This follows from [Chapter 19](19-what-the-brains-are-like.md). A brain's
 outputs move by a thousandth of a change in its inputs, so the message it
 writes to one candidate is nearly the message it writes to the next. A
 founder's brain is no different (0.0002 against 0.60). The architecture
@@ -125,7 +125,7 @@ writers of one genotype. In every world, **all of it** (1.00) lies between
 genotypes. Two agents of one genotype write exactly the same message. With
 the genotypes shuffled among the writers the share is 0.63. That much would
 lie "between genotypes" by chance, since most genotypes are carried by a
-single agent ([Chapter 17](17-genotypes-and-lineages.md)). It is no wonder:
+single agent ([Chapter 18](18-genotypes-and-lineages.md)). It is no wonder:
 one genotype is one brain, and a brain that hardly sees writes the same
 thing whoever it is in. A message is the name **of a genotype**.
 
@@ -133,7 +133,7 @@ thing whoever it is in. A message is the name **of a genotype**.
 only **8.8** independent directions in the median world (2.2 to 13), counted
 as a participation ratio ([How many directions a cloud of points uses](../notes/participation-ratio.md)).
 Founders' brains, independent of each other, use 28.5, all of them. A
-world's genotypes descend from a few lines ([Chapter 17](17-genotypes-and-lineages.md)),
+world's genotypes descend from a few lines ([Chapter 18](18-genotypes-and-lineages.md)),
 and the messages of one line differ only where the line's changes moved
 them. So a world speaks a few dialects, each spoken by a line.
 
@@ -165,13 +165,13 @@ Founders' messages pile up around 0, in a bell. Evolved messages are spread
 almost evenly from −0.7 to +0.7, with more numbers near the ends: 2.5% lie
 beyond ±0.9, against 0.4% for founders. Larger weights would do this. Mutation
 alone leaves the weights of an evolved brain larger than a founder's
-([Chapter 18](18-what-the-brains-are-like.md)), so nothing here needs
+([Chapter 19](19-what-the-brains-are-like.md)), so nothing here needs
 selection to explain it. The evolved values are no more informative for
 being spread wider. They are still the same for every reader.
 
 ## Could kin recognise each other?
 
-[Chapter 34](34-do-agents-cooperate.md) found that kin live side by side —
+[Chapter 38](38-do-agents-cooperate.md) found that kin live side by side —
 a tenth of an agent's neighbours carry its own genotype — but are staked on
 exactly like strangers. It noted that a brain cannot see genotypes and could
 only tell kin through messages, if a lineage evolved a password, a
@@ -188,7 +188,7 @@ Telling them apart needs one comparison.
 What is missing is a brain that can make it. A difference of 0.55 in 30
 inputs reaches the stakes at a thousandth of its size, and the stakes split
 evenly anyway. Kin recognition is one comparison away, and blocked by the
-same obstacle as everything else in the brain. The planned Chapter 47, *Kin
+same obstacle as everything else in the brain. The planned Chapter 51, *Kin
 that know each other*, meant to add heritable tags. Messages already are
 heritable tags. A brain that can see is what it needs.
 
@@ -201,11 +201,11 @@ heritable tags. A brain that can see is what it needs.
   sent depends on something — the sender's state, the receiver, the
   situation — and what is done on receipt depends on what was sent. Neither
   holds here: messages ignore the situation, and decisions ignore the
-  messages ([Chapter 18](18-what-the-brains-are-like.md): setting every
+  messages ([Chapter 19](19-what-the-brains-are-like.md): setting every
   message to 0 changes the stakes of only 6.7% of agents at all).
 - **The raw material is there.** The names identify kin exactly. If brains
   could compare what they read, kin recognition, and with it Hamilton's kin
-  selection ([Chapter 34](34-do-agents-cooperate.md)), would be one
+  selection ([Chapter 38](38-do-agents-cooperate.md)), would be one
   comparison away. That makes the gain of the brain, again, the first thing
   to change.
 
@@ -214,5 +214,5 @@ To make every figure of this chapter: `python3 book_figures.py talk`.
 <!-- turns -->
 ---
 
-← [Chapter 18 · What the brains are like](18-what-the-brains-are-like.md) · [Contents](../README.md) · [Chapter 20 · Do the rich stay rich?](20-do-the-rich-stay-rich.md) →
+← [Chapter 19 · What the brains are like](19-what-the-brains-are-like.md) · [Contents](../README.md) · [Chapter 21 · Do the rich stay rich?](21-do-the-rich-stay-rich.md) →
 <!-- /turns -->

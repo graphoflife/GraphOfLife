@@ -1,6 +1,6 @@
 # How even is a world?
 
-[Chapter 14](14-where-do-the-tokens-go.md) measured how unequally tokens are
+[Chapter 15](15-where-do-the-tokens-go.md) measured how unequally tokens are
 held with the Gini coefficient. This chapter measures the same thing with a
 second tool, **entropy** — and then uses that tool on two things a Gini cannot
 measure at all, because they are not amounts: how the agents are spread over
@@ -118,7 +118,7 @@ where perfect equality would need 10.3.
 
 The **degree evenness** is far lower, 0.59 (0.50 to 0.63): agents are piled
 onto a few numbers of connections — 37% have exactly one, 23% exactly two
-([Chapter 16](16-what-shape-does-the-network-take.md)) — while the hubs make
+([Chapter 17](17-what-shape-does-the-network-take.md)) — while the hubs make
 the list of numbers that occur long. Read this one with care: its ceiling is
 log₂ of the number of *distinct* degrees in the world, so a single new hub of
 an unusual size raises the ceiling and lowers the evenness, without anything
@@ -169,10 +169,10 @@ Why is the distinct count so tight? Something in the rules must set it. Every
 brain may change after every game (with probability 0.2,
 [How a brain changes](../notes/mutation.md)), which makes a new genotype; and
 every game, about half the nodes take a copy of a winner's brain
-([Chapter 15](15-how-the-game-is-played.md)), which makes genotypes common
+([Chapter 16](16-how-the-game-is-played.md)), which makes genotypes common
 again. A balance between a fixed rate of making and a fixed rate of copying
 gives a fixed ratio, whatever the brains do.
-[Chapter 35](35-questioning-the-mechanics.md) comes back to where the new
+[Chapter 39](39-questioning-the-mechanics.md) comes back to where the new
 genotypes are made.
 
 ## Two measures of the same inequality
@@ -218,12 +218,12 @@ have the same Gini and different evenness.
   equally among half the agents; genotypes as if each were carried by two.
   Neither drifts over the settled life.
 - **High diversity is not the same as novelty.** A genotype evenness of 0.9
-  sounds like a world full of variety. But [Chapter 17](17-genotypes-and-lineages.md)
+  sounds like a world full of variety. But [Chapter 18](18-genotypes-and-lineages.md)
   found that a genotype lasts about two iterations: the variety is churn — new
   numbers made by small changes, lost as fast as they are made. Entropy counts
   how many kinds there are *now*; it cannot say whether any of them is new in a
   way that matters. Measures of open-ended evolution have to look across time
-  ([Meta II](36-meta-2.md)).
+  ([Meta II](40-meta-2.md)).
 - **One number is set by the rules.** Two genotypes for every three agents, in
   every world: a balance of making and copying. If a change of the rules moves
   it, that will be a sign the change reached the brains.
@@ -233,5 +233,5 @@ To make every figure of this chapter: `python3 book_figures.py entropy`.
 <!-- turns -->
 ---
 
-← [Chapter 24 · Meta I · What the baseline world is](24-meta-1.md) · [Contents](../README.md) · [Chapter 26 · Gains and losses](26-gains-and-losses.md) →
+← [Chapter 26 · Meta I · What the baseline world is](26-meta-1.md) · [Contents](../README.md) · [Chapter 28 · Gains and losses](28-gains-and-losses.md) →
 <!-- /turns -->

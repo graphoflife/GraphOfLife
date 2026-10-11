@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Part II, how a world is organised: Chapters 14 to 17 — wealth, the game, the
+Part II, how a world is organised: Chapters 15 to 18 — wealth, the game, the
 shape of the network, genotypes and lineages.
 """
 from __future__ import annotations
@@ -27,7 +27,7 @@ EXAMPLES = {
 }[W.experiment]
 
 # ---------------------------------------------------------------------------
-# Chapter 14 · Where do the tokens go?
+# Chapter 15 · Where do the tokens go?
 # ---------------------------------------------------------------------------
 
 def lorenz(tokens: List[int], points: int = 101) -> np.ndarray:
@@ -155,7 +155,7 @@ def tokens(ch: F.Chapter) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 15 · How the game is played
+# Chapter 16 · How the game is played
 # ---------------------------------------------------------------------------
 
 @chapter
@@ -299,7 +299,7 @@ def game(ch: F.Chapter) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 16 · What shape does the network take?
+# Chapter 17 · What shape does the network take?
 # ---------------------------------------------------------------------------
 
 #: A world with more agents than this is drawn a piece at a time: a layout of every agent
@@ -508,7 +508,7 @@ def shape(ch: F.Chapter) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 17 · Genotypes and lineages
+# Chapter 18 · Genotypes and lineages
 # ---------------------------------------------------------------------------
 
 @chapter
