@@ -33,7 +33,7 @@ a time. The plan that defines B1 is the file `book/experiments/B1.json`.
 | [`mend_on_death`](#mend_on_death) | off | a death never splits a neighbourhood |
 | [`prune_needs`](#prune_needs) | 0 | only redundant connections lapse |
 | [`valence`](#valence) | 0 | most connections a brain may choose |
-| [`keep_one`](#keep_one) | off | the last token stays at home |
+| [`keep_home`](#keep_home) | 0 | a share of the tokens stays at home |
 | [`max_age`](#max_age) | 0 | the longest life |
 | [`min_child`](#min_child) | 1 | the smallest child |
 | [`mutation_probability`](#mutation_probability) | 0.2 | how often a brain changes |
@@ -248,12 +248,14 @@ limit. The links a newborn is born with (`birth_links`) and those made by
 mending do not count against it. An agent at its limit cannot have a child —
 it is crowded — which is what keeps a dense region from growing denser.
 
-### keep_one
+### keep_home
 
-Whether an agent's last token always stays on its own node, whatever its
-brain says, and a parent always keeps at least one token. Baseline off. With
-it on no agent can stake or breed itself to death: a world then loses agents
-only to age (`max_age`) and to being cut off.
+The share of an agent's tokens that stays on its own node whatever its brain
+says — rounded up, and never less than one token — while a parent always
+keeps at least one token too. Baseline 0. Above 0, no agent can stake or
+breed itself to death: a world then loses agents only to age (`max_age`) and
+to being cut off. A tiny share is a floor of one token; a larger one also
+keeps agents from staking nearly everything on a single neighbour.
 
 ### max_age
 
@@ -295,6 +297,19 @@ brain is still given a new genotype number
 A run stops, counted as **extinct**, when an iteration ends — after its
 game — with this many agents or fewer. Baseline 20. See
 [When a world ends](extinction.md).
+
+## Recording
+
+Settings that change what a run keeps, never what happens in it.
+
+### archive_every
+
+Every how many iterations a run keeps a whole world — its network, tokens,
+ages and every brain — in `archive/` beside its frames; 0 keeps none. The
+rolling checkpoint is overwritten and is for resuming; these are kept, for
+anything that needs the brains of more than one moment, above all the
+cross-time tournament of [Chapter 49](../chapters/49-how-to-tell-a-world-that-keeps-evolving.md).
+A plan asks for it in its `record` block.
 
 <!-- turns -->
 [Contents](../README.md)

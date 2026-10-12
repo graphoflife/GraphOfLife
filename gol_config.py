@@ -75,7 +75,7 @@ MECHANICS: Dict[str, Any] = {
     "mend_on_death": False,
     "prune_needs": 0,
     "valence": 0,
-    "keep_one": False,
+    "keep_home": 0.0,
     "max_age": 0,
     "min_child": 1,
 }
@@ -376,9 +376,13 @@ class SimConfig:
     # so is mending. An agent at its limit cannot have a child: it is crowded.
     valence: int = 0
 
-    # Demography. An agent's last token always stays on its own node, and a
-    # parent keeps at least one: no agent can stake or breed itself to death.
-    keep_one: bool = False
+    # Demography. At least this share of an agent's tokens stays on its own
+    # node whatever its brain says — rounded up, and never less than one token
+    # — and a parent keeps at least one: no agent can stake or breed itself to
+    # death. 0 is the old rule. A small share is a floor of one token; a larger
+    # one also keeps agents from staking nearly everything on one neighbour,
+    # which in the pilots left three agents in four with a single token.
+    keep_home: float = 0.0
     # An agent dies when it reaches this age (0 = never). Its tokens are shared
     # out like any other estate.
     max_age: int = 0
@@ -726,6 +730,8 @@ class SimConfig:
         for name in ("birth_links", "prune_needs", "valence", "max_age"):
             if getattr(self, name) < 0:
                 raise ValueError(f"{name} cannot be negative")
+        if not 0.0 <= self.keep_home <= 1.0:
+            raise ValueError("keep_home is a share of an agent's tokens, between 0 and 1")
         if self.min_child < 1:
             raise ValueError("min_child must be at least 1: a child is born with something")
         if self.valence == 1:

@@ -88,13 +88,13 @@ everything can be checked with it.
 - Chapter 47 · How big should a brain be? — *not written yet*
 - Chapter 48 · Does size change the dynamics? — *not written yet*
 
-**Part V · Towards open-ended evolution**
+**Part V · Engineering open-ended evolution**
 
-- Chapter 49 · Mutation at replication, and nowhere else — *not written yet*
-- Chapter 50 · Can a brain hold its place? — *not written yet*
-- Chapter 51 · Kin that know each other — *not written yet*
-- Chapter 52 · When cooperation produces — *not written yet*
-- Chapter 53 · An open world — *not written yet*
+- [Chapter 49 · How to tell a world that keeps evolving](chapters/49-how-to-tell-a-world-that-keeps-evolving.md)
+- Chapter 50 · Brains that see, and worlds that break — *not written yet*
+- Chapter 51 · A world that cannot break — *not written yet*
+- Chapter 52 · Who dies, and why — *not written yet*
+- Chapter 53 · Why evolution stops — *not written yet*
 - Chapter 54 · Meta IV — *not written yet*
 
 **Part VI · Towards a physics: space, scale and locality**

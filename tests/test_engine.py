@@ -2362,20 +2362,20 @@ def test_no_legacy_entry_restates_the_frozen_default():
 
 #: Every rule of Part V switched on, at the values the pilots settled on.
 PART_V = dict(mutate_on_replication=True, incumbency=1.5, birth_links=2,
-              mend_on_death=True, prune_needs=2, valence=8, keep_one=True,
+              mend_on_death=True, prune_needs=2, valence=8, keep_home=0.3,
               max_age=12, min_child=4, allow_handover=False)
 
 
 def test_the_rules_of_part_v_are_named_in_the_strain():
     cfg = small(**PART_V)
     name = cfg.strain_id()
-    for part in ("birth_links=2", "incumbency=1.5", "keep_one", "max_age=12",
+    for part in ("birth_links=2", "incumbency=1.5", "keep_home=0.3", "max_age=12",
                  "mend_on_death", "min_child=4", "mutate_on_replication",
                  "prune_needs=2", "valence=8"):
         assert f"+{part}" in name, f"{part} is missing from {name}"
 
 
-def test_the_rules_of_part_v_conserve_tokens_and_keep_one_world():
+def test_the_rules_of_part_v_conserve_tokens_and_keep_one_world_alive():
     """
     With mending and redundant-only pruning, no death and no lapse can split
     the graph, so the cull never fires — and every agent keeps a token.
@@ -2385,7 +2385,7 @@ def test_the_rules_of_part_v_conserve_tokens_and_keep_one_world():
         for frame in world.step(record_decisions=False):
             assert frame["summary"]["tokens"] == 3000
             assert frame["cleanup"]["orphaned"] == 0, "a piece was cut off"
-            assert frame["cleanup"]["starved"] == 0, "keep_one let an agent starve"
+            assert frame["cleanup"]["starved"] == 0, "keep_home let an agent starve"
         assert nx.is_connected(world.G)
         assert min(world.tokens.values()) >= 1
 
@@ -2514,8 +2514,8 @@ def test_valence_caps_the_links_a_brain_chooses_and_crowds_out_births():
         assert d <= max(8, start.get(u, 0)), f"agent {u} chose its way past its valence"
 
 
-def test_keep_one_leaves_every_agent_a_token_and_a_parent_its_last():
-    world = new_world(small(keep_one=True))
+def test_keep_home_leaves_every_agent_a_token_and_a_parent_its_last():
+    world = new_world(small(keep_home=0.01))
     for _ in range(10):
         repro, game = world.step(record_decisions=True)
         for b in repro["decisions"]["births"]:

@@ -26,7 +26,7 @@
   "mend_on_death",
   "prune_needs",
   "valence",
-  "keep_one",
+  "keep_home",
   "max_age",
   "min_child",
   "mutation_probability",
@@ -122,14 +122,14 @@
   "valence": {
    "meaning": "The most connections an agent's brain may choose to hold (0 = no limit). An agent at its limit cannot have a child."
   },
-  "keep_one": {
-   "meaning": "Whether an agent's last token always stays on its own node, and a parent always keeps one, so that no agent can stake or breed itself to death."
-  },
   "max_age": {
    "meaning": "The age at which an agent dies (0 = never); its tokens are shared out like those of any other dead agent."
   },
   "min_child": {
    "meaning": "The fewest tokens a child can be born with; a parent that would give less has no child."
+  },
+  "keep_home": {
+   "meaning": "The share of an agent's tokens — rounded up, never less than one — that stays on its own node whatever its brain says; a parent also keeps one. 0 is the old rule."
   }
  }
 }

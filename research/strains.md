@@ -49,7 +49,7 @@ which it is.
 | `mend_on_death` | `false` | when an agent dies, the groups of its neighbours not linked to one another are joined through their least-linked members; no death can split the graph |
 | `prune_needs` | `0` | an unused link lapses only if its ends share this many neighbours; 2 means no pruning can cut the graph or leave anyone hanging on a single agent |
 | `valence` | `0` | the most links a brain may choose to hold; birth links and mending are exempt; an agent at its limit cannot have a child |
-| `keep_one` | `false` | an agent's last token always stays home, and a parent keeps one: no agent can stake or breed itself to death |
+| `keep_home` | `0.0` | at least this share of an agent's tokens (rounded up, at least one) stays home, and a parent keeps one: no agent can stake or breed itself to death |
 | `max_age` | `0` | agents die at this age (0 = never) |
 | `min_child` | `1` | the smallest endowment that makes a child |
 

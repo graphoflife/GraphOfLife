@@ -370,9 +370,10 @@
           <input type="number" id="cfg_valence" data-cfg="valence" min="0" step="1">
           <small>The most links a brain may choose to hold. An agent at its limit is crowded and has no children.</small>
         </div>
-        <div class="field checkbox">
-          <label><input type="checkbox" id="cfg_keep_one" data-cfg="keep_one"> Keep the last token</label>
-          <small>An agent's last token always stays home and a parent keeps one, so nobody can stake or breed itself to death.</small>
+        <div class="field">
+          <label for="cfg_keep_home">Kept at home <span class="hint">(share, 0 = none)</span></label>
+          <input type="number" id="cfg_keep_home" data-cfg="keep_home" min="0" max="1" step="0.05">
+          <small>At least this share of an agent's tokens — and never less than one — stays on its own node, and a parent keeps one, so nobody can stake or breed itself to death.</small>
         </div>
         <div class="field">
           <label for="cfg_max_age">Longest life <span class="hint">(0 = none)</span></label>

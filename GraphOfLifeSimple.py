@@ -1506,10 +1506,10 @@ class GraphOfLife:
         Under the old rules, whatever was asked for: anything from one token up
         is a child. The rules of Part V can refuse a birth outright — a parent
         at its valence is crowded, and an endowment below min_child is no
-        child — and keep_one leaves the parent its last token.
+        child — and keep_home leaves the parent its last token.
         """
         cfg = self.cfg
-        if cfg.keep_one:
+        if cfg.keep_home > 0:
             wanted = min(wanted, tokens - 1)
         if wanted < cfg.min_child:
             return 0
@@ -1690,10 +1690,12 @@ class GraphOfLife:
             scores = np.asarray(Y[self.heads["BLOTTO"], :], dtype=float)
             mode = np.mean(Y[self.heads["BLOTTO_MODE"], :], axis=1)
 
-            # With keep_one the last token is not the agent's to stake: it stays
-            # on its own node whatever the brain says, and only the rest is
-            # placed. That is what makes starving oneself impossible.
-            kept = 1 if self.cfg.keep_one else 0
+            # Under keep_home part of the tokens is not the agent's to stake: it
+            # stays on its own node whatever the brain says, at least one token,
+            # and only the rest is placed. That is what makes starving oneself
+            # impossible.
+            share = self.cfg.keep_home
+            kept = max(1, int(np.ceil(share * tokens_u))) if share > 0 else 0
             stake = tokens_u - kept
 
             # The agent picks its own doctrine: spread by score, or all-in.
