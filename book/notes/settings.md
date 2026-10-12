@@ -229,8 +229,10 @@ attachment, and makes hubs.
 
 Whether the neighbours of an agent that dies are joined up again. They fall
 into groups — neighbours linked directly to one another are one group — and
-each group is joined to the next through its least-connected member. A
-neighbourhood that was one piece gains nothing. Baseline off. With it on, no
+each group is joined to the next through its least-connected member, the
+last back to the first when there are three or more: the neighbours close in
+a ring round the gap, as the edge of a hole closes. A neighbourhood that was
+one piece gains nothing. Baseline off. With it on, no
 death can split the world, so the cull of the cut-off never fires.
 
 ### prune_needs

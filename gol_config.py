@@ -363,8 +363,9 @@ class SimConfig:
     # brain chooses, and is often a leaf.
     birth_links: int = 0
     # When an agent dies, the groups of its former neighbours that are not
-    # linked to one another are joined, through their least-linked members, so
-    # a death never splits a neighbourhood — and so never the world.
+    # linked to one another are joined in a ring, through their least-linked
+    # members, so a death never splits a neighbourhood — and so never the
+    # world — and none of the new links is a bridge.
     mend_on_death: bool = False
     # How many neighbours the two ends of an unused link must have in common
     # for the link to lapse. 0 is the old rule — any unused link lapses — and

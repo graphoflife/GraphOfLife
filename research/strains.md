@@ -46,7 +46,7 @@ which it is.
 | `mutate_on_replication` | `false` | (was reserved, Research.md §4.1) a brain changes only when copied — into a newborn or into a node its owner won — never after the game where it sits |
 | `incumbency` | `1.0` | the weight of an agent's own stake on its own node when the game decides who takes it. 1.5: an attacker needs more than one and a half times the home stake |
 | `birth_links` | `0` | a newborn is joined to its parent and this many of the parent's neighbours, at random, before its own link choices |
-| `mend_on_death` | `false` | when an agent dies, the groups of its neighbours not linked to one another are joined through their least-linked members; no death can split the graph |
+| `mend_on_death` | `false` | when an agent dies, the groups of its neighbours not linked to one another are joined in a ring through their least-linked members; no death can split the graph, and no new link is a bridge |
 | `prune_needs` | `0` | an unused link lapses only if its ends share this many neighbours; 2 means no pruning can cut the graph or leave anyone hanging on a single agent |
 | `valence` | `0` | the most links a brain may choose to hold; birth links and mending are exempt; an agent at its limit cannot have a child |
 | `keep_home` | `0.0` | at least this share of an agent's tokens (rounded up, at least one) stays home, and a parent keeps one: no agent can stake or breed itself to death |

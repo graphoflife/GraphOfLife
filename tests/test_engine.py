@@ -2445,8 +2445,8 @@ def test_a_newborn_closes_triangles_with_its_parent():
 
 def test_mending_rejoins_a_neighbourhood_split_by_a_death():
     """
-    A star's centre dies: its five leaves would each be alone. Mending chains
-    them, so they stay one piece through their own new links.
+    A star's centre dies: its five leaves would each be alone. Mending closes
+    them in a ring, so they stay one piece and no new link is a bridge.
     """
     world = new_world(small(mend_on_death=True))
     G = world.G
@@ -2455,8 +2455,15 @@ def test_mending_rejoins_a_neighbourhood_split_by_a_death():
     for v in leaves:
         world._add_edge(centre, v)
     made = world._remove_and_mend(centre)
-    assert made == 4
+    assert made == 5
     assert nx.is_connected(world.G) and set(world.G.nodes()) == set(leaves)
+    assert not list(nx.bridges(world.G)), "a mended neighbourhood hangs on a bridge"
+
+    # Two groups are joined once: a ring of two is the same link twice.
+    world.G.clear()
+    for a, b in [(0, 1), (0, 2), (1, 2), (0, 3), (0, 4), (3, 4)]:
+        world._add_edge(a, b)
+    assert world._remove_and_mend(0) == 1 and nx.is_connected(world.G)
 
 
 def test_mending_adds_nothing_to_a_neighbourhood_already_in_one_piece():
