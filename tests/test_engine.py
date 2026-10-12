@@ -206,6 +206,19 @@ def test_two_blobs_on_one_edge_is_the_worst_case_the_thesis_is_about():
         "three leaves cost one node each, and the count alone cannot say so")
 
 
+def test_the_worst_node_cut_is_the_biggest_piece_one_agent_holds_on():
+    from GraphOfLifeSimple import worst_node_cut_share
+    # A path of five: the middle agent holds two pairs together.
+    path = adjacency([(0, 1), (1, 2), (2, 3), (3, 4)])
+    assert worst_node_cut_share(list(path), path) == 2 / 5
+    # A cycle has no cut vertex at all.
+    ring = adjacency([(i, (i + 1) % 10) for i in range(10)])
+    assert worst_node_cut_share(list(ring), ring) == 0
+    # A ring with a two-agent tail: agent 0 alone holds the tail on.
+    tail = adjacency([(i, (i + 1) % 10) for i in range(10)] + [(0, 10), (10, 11)])
+    assert worst_node_cut_share(list(tail), tail) == 2 / 12
+
+
 def test_peeling_leaves_leaves_the_core():
     """
     The 2-core is what survives stripping hanging trees, however deep.

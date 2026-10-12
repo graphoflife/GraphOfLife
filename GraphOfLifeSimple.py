@@ -356,6 +356,60 @@ def worst_cut_share(ids, adj, splits=None) -> float:
     return max((min(below, n - below) / n for _, _, below in splits), default=0.0)
 
 
+def worst_node_cut_share(ids, adj) -> float:
+    """
+    The largest share of the graph a single agent's loss can sever.
+
+    worst_cut_share asks it of a connection; this asks it of an agent, which is
+    the stricter question — an agent is a cut whenever it is the only way in to
+    some part of the graph, bridge or no bridge. For every articulation point
+    and every piece it alone holds on, the smaller of that piece and the rest,
+    over the whole node count: 0 when no agent's loss can cut anything off, and
+    near 0.5 when one agent holds two halves together.
+
+    One depth-first walk with low-links and subtree sizes, iterative for the
+    same reason bridge_splits is.
+    """
+    n = len(ids)
+    if n < 3:
+        return 0.0
+    disc: Dict[int, int] = {}
+    low: Dict[int, int] = {}
+    size: Dict[int, int] = {}
+    worst = 0
+    timer = 0
+    for root in ids:
+        if root in disc:
+            continue
+        disc[root] = low[root] = timer
+        size[root] = 1
+        timer += 1
+        stack = [(root, None, iter(adj[root]))]
+        while stack:
+            node, parent, it = stack[-1]
+            nxt = next(it, None)
+            if nxt is None:
+                stack.pop()
+                if stack:
+                    u = stack[-1][0]
+                    low[u] = min(low[u], low[node])
+                    size[u] += size[node]
+                    if low[node] >= disc[u]:
+                        piece = size[node]
+                        worst = max(worst, min(piece, n - 1 - piece))
+                continue
+            if nxt == parent:
+                continue
+            if nxt in disc:
+                low[node] = min(low[node], disc[nxt])
+                continue
+            disc[nxt] = low[nxt] = timer
+            size[nxt] = 1
+            timer += 1
+            stack.append((nxt, node, iter(adj[nxt])))
+    return worst / n
+
+
 def two_core_size(ids, adj) -> int:
     """
     How many nodes survive peeling degree-1 nodes until there are none left.

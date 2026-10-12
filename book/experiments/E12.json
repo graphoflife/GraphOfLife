@@ -1,0 +1,48 @@
+{
+  "id": "E12",
+  "title": "Does the baseline keep improving?",
+  "thesis": {
+    "claim": "The baseline stops improving within a few hundred iterations. Played against the brains of their own world's iteration 300, the brains of iteration 1,000 hold between 45% and 55% of a contested world: no better and no worse. The brains of iteration 300 have learned something all the same: against the founders' brains they hold more than 60%.",
+    "why": "A world whose statistics have settled may be finished, or may be running in place — every lineage changing, none getting ahead, as in a Red Queen race. Nothing measured inside one moment tells the two apart; playing the brains of two moments against each other does (Cliff and Miller 1995). A pilot of the same world (seed 1, 5,000 tokens, eras every 100 iterations to 600, two contests per pair): against the founders, the brains of iteration 100 held 74% and those of iterations 200 to 600 held 77–90%; every pair of eras from iteration 200 on scored between 45% and 59% (median 50%). As Elo ratings against the founders: +283 at iteration 100, then +320 to +345 to iteration 600.",
+    "confirm": "Over the ten worlds, the median world's score of the brains of iteration 1,000 against those of iteration 300 — the mean of its two contests, one in each era's world — lies between 0.45 and 0.55, and the median world's score of the brains of iteration 300 against the founders' is above 0.6.",
+    "refute": "The median world's score of iteration 1,000 against iteration 300 is above 0.55: the baseline keeps improving. Or the score of iteration 300 against the founders is 0.6 or less: there was nothing to learn, or it was not learned."
+  },
+  "runs": {
+    "baseline": "B1",
+    "world": {
+      "total_tokens": 5000
+    },
+    "seeds": "1..10",
+    "iterations": 1000,
+    "record": {
+      "heavy_every": 25,
+      "archive_every": 50
+    },
+    "conditions": [
+      {
+        "name": "baseline"
+      }
+    ]
+  },
+  "analyse": {
+    "kind": "series",
+    "settledFrom": 300,
+    "figures": [
+      {
+        "name": "agents",
+        "stat": "nodes",
+        "phase": 2,
+        "title": "Agents alive",
+        "y": "agents"
+      },
+      {
+        "name": "births",
+        "stat": "births/nodes_before",
+        "phase": 1,
+        "title": "Births per agent in a reproduction phase",
+        "y": "births per agent",
+        "min": 0
+      }
+    ]
+  }
+}
