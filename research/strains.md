@@ -43,6 +43,18 @@ which it is.
 | `prune_after` | `blotto` | when unused links are cut: `blotto`, `reproduction` or `both`. Cutting after reproduction is what gives a gift somewhere to land |
 | `inactive_window` | `phase` | how far back "used" looks: the phase just ended, or the last whole `iteration`. A newly made link counts as used either way |
 | `redistribution` | `uniform` | how the estate of the dead is shared out. `by_tokens` weights it by what each survivor already holds, making every cull a concentration event |
+| `mutate_on_replication` | `false` | (was reserved, Research.md §4.1) a brain changes only when copied — into a newborn or into a node its owner won — never after the game where it sits |
+| `incumbency` | `1.0` | the weight of an agent's own stake on its own node when the game decides who takes it. 1.5: an attacker needs more than one and a half times the home stake |
+| `birth_links` | `0` | a newborn is joined to its parent and this many of the parent's neighbours, at random, before its own link choices |
+| `mend_on_death` | `false` | when an agent dies, the groups of its neighbours not linked to one another are joined through their least-linked members; no death can split the graph |
+| `prune_needs` | `0` | an unused link lapses only if its ends share this many neighbours; 2 means no pruning can cut the graph or leave anyone hanging on a single agent |
+| `valence` | `0` | the most links a brain may choose to hold; birth links and mending are exempt; an agent at its limit cannot have a child |
+| `keep_one` | `false` | an agent's last token always stays home, and a parent keeps one: no agent can stake or breed itself to death |
+| `max_age` | `0` | agents die at this age (0 = never) |
+| `min_child` | `1` | the smallest endowment that makes a child |
+
+The nine above were added together on 2026-10-12 for Part V of the book, from
+the pilots in `research/oee/` (`LOG.md` there says which failure each answers).
 
 ### What a new run is offered
 
@@ -74,7 +86,6 @@ strain name for a run that ignored it.
 
 | mechanic | frozen default | section |
 |---|---|---|
-| `mutate_on_replication` | `false` | Research.md §4.1 |
 | `germline` | `false` | §4.2 |
 | `token_colours` | `1` | §4.3 |
 | `mutual_flow_yield` | `0` | §4.4 |

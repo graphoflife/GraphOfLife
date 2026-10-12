@@ -20,6 +20,15 @@
   "inactive_window",
   "redistribution",
   "tokens_created_per_phase",
+  "mutate_on_replication",
+  "incumbency",
+  "birth_links",
+  "mend_on_death",
+  "prune_needs",
+  "valence",
+  "keep_one",
+  "max_age",
+  "min_child",
   "mutation_probability",
   "mutation_noise_std",
   "mutation_sparsity",
@@ -94,6 +103,33 @@
   },
   "extinction_threshold": {
    "meaning": "A run stops, as extinct, when an iteration ends (after its game) with this many agents or fewer."
+  },
+  "mutate_on_replication": {
+   "meaning": "Whether a brain changes only when it is copied — into a newborn, or into a node its owner has just won — instead of also after every game, wherever it sits."
+  },
+  "incumbency": {
+   "meaning": "How many times over an agent's stake on its own node counts when the game decides who takes the node. 1 is the old rule."
+  },
+  "birth_links": {
+   "meaning": "How many of its parent's neighbours a newborn is joined to, drawn at random, besides its parent itself; 0 leaves every link to the brain's choice."
+  },
+  "mend_on_death": {
+   "meaning": "Whether the neighbours of an agent that dies are joined up where its death would leave them in separate pieces."
+  },
+  "prune_needs": {
+   "meaning": "How many neighbours the two ends of an unused connection must share for it to be cut; 0 cuts every unused connection."
+  },
+  "valence": {
+   "meaning": "The most connections an agent's brain may choose to hold (0 = no limit). An agent at its limit cannot have a child."
+  },
+  "keep_one": {
+   "meaning": "Whether an agent's last token always stays on its own node, and a parent always keeps one, so that no agent can stake or breed itself to death."
+  },
+  "max_age": {
+   "meaning": "The age at which an agent dies (0 = never); its tokens are shared out like those of any other dead agent."
+  },
+  "min_child": {
+   "meaning": "The fewest tokens a child can be born with; a parent that would give less has no child."
   }
  }
 }

@@ -2300,6 +2300,195 @@ def test_no_legacy_entry_restates_the_frozen_default():
 
 
 # ---------------------------------------------------------------------------
+# The rules of Part V: heredity, space and demography for open-ended evolution
+# ---------------------------------------------------------------------------
+
+#: Every rule of Part V switched on, at the values the pilots settled on.
+PART_V = dict(mutate_on_replication=True, incumbency=1.5, birth_links=2,
+              mend_on_death=True, prune_needs=2, valence=8, keep_one=True,
+              max_age=12, min_child=4, allow_handover=False)
+
+
+def test_the_rules_of_part_v_are_named_in_the_strain():
+    cfg = small(**PART_V)
+    name = cfg.strain_id()
+    for part in ("birth_links=2", "incumbency=1.5", "keep_one", "max_age=12",
+                 "mend_on_death", "min_child=4", "mutate_on_replication",
+                 "prune_needs=2", "valence=8"):
+        assert f"+{part}" in name, f"{part} is missing from {name}"
+
+
+def test_the_rules_of_part_v_conserve_tokens_and_keep_one_world():
+    """
+    With mending and redundant-only pruning, no death and no lapse can split
+    the graph, so the cull never fires — and every agent keeps a token.
+    """
+    world = new_world(small(**PART_V))
+    for _ in range(25):
+        for frame in world.step(record_decisions=False):
+            assert frame["summary"]["tokens"] == 3000
+            assert frame["cleanup"]["orphaned"] == 0, "a piece was cut off"
+            assert frame["cleanup"]["starved"] == 0, "keep_one let an agent starve"
+        assert nx.is_connected(world.G)
+        assert min(world.tokens.values()) >= 1
+
+
+def test_the_rules_of_part_v_resume_to_the_same_run():
+    """Every new rule reads only world state the checkpoint already carries."""
+    cfg = small(seed=33, **PART_V)
+    world = new_world(cfg)
+    for _ in range(14):
+        world.step(record_decisions=False)
+    blob = {k: v.copy() for k, v in world.to_checkpoint().items()}
+    straight_on = _recorded(world, 6)
+    restored = GraphOfLife.from_checkpoint(blob, cfg)
+    assert _recorded(restored, 6) == straight_on, "the resumed run diverged"
+
+
+def test_without_world_wide_mutation_only_copies_change():
+    """
+    Under mutate_on_replication a brain that keeps its own node is the brain it
+    was: only newborns and won nodes may carry a new genotype.
+    """
+    world = new_world(small(mutate_on_replication=True, mutation_probability=1.0))
+    for _ in range(3):
+        world.step(record_decisions=False)
+    world.reproduction_phase(record_decisions=False)
+    before = {u: world.brains[u].brain_id for u in world.G.nodes()}
+    frame = world.blotto_phase(record_decisions=True)
+    taken = {w["node"] for w in frame["decisions"]["winners"] if w["winner"] != w["node"]}
+    kept = [u for u in world.G.nodes() if u in before and u not in taken]
+    assert kept, "wanted agents that held their own nodes"
+    for u in kept:
+        assert world.brains[u].brain_id == before[u], "a brain changed where it sat"
+    # And with mutation certain, every won node holds a new genotype.
+    changed = [u for u in taken if world.G.has_node(u)
+               and world.brains[u].parent_brain_id != -1
+               and world.brains[u].brain_id not in before.values()]
+    assert taken and changed, "no won node was a fresh copy"
+
+
+def test_incumbency_weighs_only_the_home_stake():
+    world = new_world(small(incumbency=1.5))
+    offers = {7: 10, 3: 14}
+    assert world._weighed(7, offers) == {7: 15.0, 3: 14}
+    assert world._weighed(9, offers) == offers, "a node nobody defends is not weighed"
+    assert new_world(small())._weighed(7, offers) is offers
+
+
+def test_a_newborn_closes_triangles_with_its_parent():
+    world = new_world(small(birth_links=2))
+    frame = world.reproduction_phase(record_decisions=True)
+    births = frame["decisions"]["births"]
+    assert births, "wanted some births"
+    for b in births:
+        assert b["agent"] in b["links"], "a newborn was not joined to its parent"
+        assert len(b["links"]) >= 3, "a newborn got fewer than two of its parent's neighbours"
+
+
+def test_mending_rejoins_a_neighbourhood_split_by_a_death():
+    """
+    A star's centre dies: its five leaves would each be alone. Mending chains
+    them, so they stay one piece through their own new links.
+    """
+    world = new_world(small(mend_on_death=True))
+    G = world.G
+    G.clear()
+    centre, leaves = 0, [1, 2, 3, 4, 5]
+    for v in leaves:
+        world._add_edge(centre, v)
+    made = world._remove_and_mend(centre)
+    assert made == 4
+    assert nx.is_connected(world.G) and set(world.G.nodes()) == set(leaves)
+
+
+def test_mending_adds_nothing_to_a_neighbourhood_already_in_one_piece():
+    world = new_world(small(mend_on_death=True))
+    G = world.G
+    G.clear()
+    # A wheel: the rim is a cycle, so the hub's death splits nothing.
+    rim = [1, 2, 3, 4, 5]
+    for a, b in zip(rim, rim[1:] + rim[:1]):
+        world._add_edge(a, b)
+    for v in rim:
+        world._add_edge(0, v)
+    edges = world.G.number_of_edges()
+    assert world._remove_and_mend(0) == 0
+    assert world.G.number_of_edges() == edges - 5
+
+
+def test_redundant_pruning_never_cuts_and_keeps_two_paths():
+    """
+    A square with one diagonal, every link unused. With prune_needs 1 a link
+    may lapse when its ends share a neighbour; with 2, only when they share two.
+    """
+    def square(need):
+        world = new_world(small(prune_needs=need))
+        world.G.clear()
+        world.edge_active_at.clear()
+        for a, b in [(0, 1), (1, 2), (2, 3), (3, 0), (0, 2)]:
+            world._add_edge(a, b, when=-10)
+        return world
+
+    one = square(1)
+    gone = one._stale_edges()
+    # The diagonal's ends share two neighbours; each side shares one. Taken in
+    # order, (0, 1) goes, then (0, 2) no longer has 1 beside it, and so on —
+    # whatever goes, what is left is connected.
+    one._drop_edges(gone)
+    assert gone and nx.is_connected(one.G)
+
+    two = square(2)
+    assert two._stale_edges() == [(0, 2)], "only the diagonal is doubly redundant"
+    # And the old rule lets every unused link go, bridges or not.
+    assert set(square(0)._stale_edges()) == {(0, 1), (1, 2), (2, 3), (0, 3), (0, 2)}
+
+
+def test_valence_caps_the_links_a_brain_chooses_and_crowds_out_births():
+    cfg = small(valence=8, allow_handover=False)
+    world = new_world(cfg)
+    start = dict(world.G.degree())
+    born = 0
+    for _ in range(8):
+        frame = world.step(record_decisions=True)[0]
+        born += len(frame["decisions"]["births"])
+    assert born, "wanted some births"
+    for u, d in world.G.degree():
+        assert d <= max(8, start.get(u, 0)), f"agent {u} chose its way past its valence"
+
+
+def test_keep_one_leaves_every_agent_a_token_and_a_parent_its_last():
+    world = new_world(small(keep_one=True))
+    for _ in range(10):
+        repro, game = world.step(record_decisions=True)
+        for b in repro["decisions"]["births"]:
+            assert b["invested"] <= b["tokens_before"] - 1
+        assert game["cleanup"]["starved"] == 0
+        assert min(world.tokens.values()) >= 1
+
+
+def test_nobody_outlives_max_age():
+    world = new_world(small(max_age=5))
+    aged = 0
+    for _ in range(12):
+        for frame in world.step(record_decisions=False):
+            aged += frame["cleanup"]["aged"]
+        assert max(world._age_of(u) for u in world.G.nodes()) <= 5
+    assert aged > 0, "the founders should have died of age"
+
+
+def test_no_child_is_born_with_less_than_min_child():
+    world = new_world(small(min_child=7))
+    seen = 0
+    for _ in range(6):
+        repro, _ = world.step(record_decisions=True)
+        for b in repro["decisions"]["births"]:
+            assert b["invested"] >= 7
+            seen += 1
+    assert seen, "wanted some births"
+
+
+# ---------------------------------------------------------------------------
 # Strains: which algorithm a run is
 # ---------------------------------------------------------------------------
 

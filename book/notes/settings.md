@@ -27,6 +27,15 @@ a time. The plan that defines B1 is the file `book/experiments/B1.json`.
 | [`inactive_window`](#inactive_window) | phase | how long a connection may be unused |
 | [`redistribution`](#redistribution) | uniform | who gets the tokens of the dead |
 | [`tokens_created_per_phase`](#tokens_created_per_phase) | 0 | new tokens per cleanup |
+| [`mutate_on_replication`](#mutate_on_replication) | off | brains change only when copied |
+| [`incumbency`](#incumbency) | 1 | home advantage in the game |
+| [`birth_links`](#birth_links) | 0 | links a newborn is born with |
+| [`mend_on_death`](#mend_on_death) | off | a death never splits a neighbourhood |
+| [`prune_needs`](#prune_needs) | 0 | only redundant connections lapse |
+| [`valence`](#valence) | 0 | most connections a brain may choose |
+| [`keep_one`](#keep_one) | off | the last token stays at home |
+| [`max_age`](#max_age) | 0 | the longest life |
+| [`min_child`](#min_child) | 1 | the smallest child |
 | [`mutation_probability`](#mutation_probability) | 0.2 | how often a brain changes |
 | [`mutation_noise_std`](#mutation_noise_std) | 0.2 | how big a change is |
 | [`mutation_sparsity`](#mutation_sparsity) | 0.1 | how many weights a change touches |
@@ -184,13 +193,87 @@ each survivor by what it already holds. Baseline: `uniform`.
 Tokens added to the pool at every cleanup and dealt out like the tokens of
 the dead. Baseline 0: the supply is fixed.
 
+## Open-ended evolution
+
+Nine rules added for Part V, each the answer to one way a world was seen to
+fail once its brains could see. Every one is off in the baseline B1 and in
+every run before Part V, so the runs of Parts II–IV are unchanged by them.
+All are local: they read an agent, its connections and its neighbours, and
+nothing further away.
+
+### mutate_on_replication
+
+Whether a brain changes only when it is copied — into a newborn, or into a
+node its owner has just won — rather than also after every game, wherever it
+sits. Baseline off: every brain in the world may change after every game,
+which wears an adaptation away within a few dozen iterations of its making.
+
+### incumbency
+
+How many times over an agent's stake on its own node counts when the game
+decides who takes the node, *h*. Baseline 1: the old rule, where a defender
+needs to outstake every attacker. With *h* = 1.5 an attacker must stake more
+than one and a half times what the defender keeps at home. Only who wins is
+weighed; the tokens the node ends with are still what was staked on it.
+
+### birth_links
+
+How many of its parent's neighbours a newborn is joined to, drawn at random,
+besides its parent, before the links its brain chooses. Baseline 0: the
+newborn has only the links its brain chooses and is often a leaf. With 2,
+every birth closes triangles. Drawn at random rather than by the brain's
+liking, because a liking for well-connected agents is preferential
+attachment, and makes hubs.
+
+### mend_on_death
+
+Whether the neighbours of an agent that dies are joined up again. They fall
+into groups — neighbours linked directly to one another are one group — and
+each group is joined to the next through its least-connected member. A
+neighbourhood that was one piece gains nothing. Baseline off. With it on, no
+death can split the world, so the cull of the cut-off never fires.
+
+### prune_needs
+
+How many neighbours the two ends of an unused connection must have in common
+for it to be cut. Baseline 0: every unused connection is cut, bridges as
+readily as anything else. With 1 the ends always stay joined through a third
+agent; with 2 they stay joined twice over, so pruning cannot leave anybody
+hanging on a single agent either.
+
+### valence
+
+The most connections an agent's brain may choose to hold. Baseline 0: no
+limit. The links a newborn is born with (`birth_links`) and those made by
+mending do not count against it. An agent at its limit cannot have a child —
+it is crowded — which is what keeps a dense region from growing denser.
+
+### keep_one
+
+Whether an agent's last token always stays on its own node, whatever its
+brain says, and a parent always keeps at least one token. Baseline off. With
+it on no agent can stake or breed itself to death: a world then loses agents
+only to age (`max_age`) and to being cut off.
+
+### max_age
+
+The age at which an agent dies, in iterations; 0 means never. Its tokens are
+shared out like those of any other dead agent. Baseline 0.
+
+### min_child
+
+The fewest tokens a child can be born with. A parent whose brain would give a
+child less has no child. Baseline 1: any child at all.
+
 ## Change
 
 ### mutation_probability
 
 The probability *p* that a brain changes. It is applied twice: once to a
 newborn's copy of its parent's brain, and once to every brain in the world
-after every game. Baseline 0.2. See [How a brain changes](mutation.md).
+after every game — or, under [`mutate_on_replication`](#mutate_on_replication),
+once to every copy of a brain into a node its owner has won instead. Baseline
+0.2. See [How a brain changes](mutation.md).
 
 ### mutation_noise_std
 

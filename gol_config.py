@@ -38,11 +38,10 @@ SPEC = 1
 # was last bumped, so that omitting it reproduces that behaviour.
 #
 # Reserved but not yet implemented, so not fields and not settable:
-# mutate_on_replication, germline, token_colours, mutual_flow_yield,
-# edge_proposal, growable_layers, local_rules, contracts,
-# structure_replication. Their names and defaults are fixed in
-# research/strains.md so the first experiment to turn one on does not also get
-# to choose what it is called.
+# germline, token_colours, mutual_flow_yield, edge_proposal,
+# growable_layers, local_rules, contracts, structure_replication. Their names
+# and defaults are fixed in research/strains.md so the first experiment to
+# turn one on does not also get to choose what it is called.
 MECHANICS: Dict[str, Any] = {
     "brain_kind": "float",
     "exchange_messages": True,
@@ -64,6 +63,21 @@ MECHANICS: Dict[str, Any] = {
     "prune_after": "blotto",
     "inactive_window": "phase",
     "redistribution": "uniform",
+
+    # ---- open-ended evolution (Part V of the book) ---------------------------
+    #
+    # Each of these answers one way the pilots of research/oee/ saw a world
+    # fail; research/strains.md says which, and the book's Part V teaches it.
+    # All off, so that `gol-1` keeps naming the algorithm it always named.
+    "mutate_on_replication": False,
+    "incumbency": 1.0,
+    "birth_links": 0,
+    "mend_on_death": False,
+    "prune_needs": 0,
+    "valence": 0,
+    "keep_one": False,
+    "max_age": 0,
+    "min_child": 1,
 }
 
 # What the new-simulation form arrives filled in with.
@@ -324,6 +338,53 @@ class SimConfig:
     # already holds, which makes the cull an engine of concentration rather
     # than a leveller.
     redistribution: str = "uniform"
+
+    # ---- Open-ended evolution ----
+    #
+    # Nine rules, each the answer to a way a world was seen to fail when brains
+    # could see (research/oee/LOG.md, the book's Part V). Every one is off by
+    # default and local: it reads an agent, its links and its neighbours, and
+    # nothing further away.
+
+    # Heredity. A brain changes only when it is copied — into a newborn, or into
+    # a node its owner won — and no longer after every game wherever it sits.
+    # The world-wide change wore every adaptation away within a few dozen
+    # iterations of its making.
+    mutate_on_replication: bool = False
+
+    # An agent's own stake on its node counts this many times over when the game
+    # decides who takes the node. 1 is the old rule; above it, defending is
+    # cheaper than attacking.
+    incumbency: float = 1.0
+
+    # Space. A newborn is always joined to its parent and to this many of the
+    # parent's neighbours, drawn at random, before its own link choices. Every
+    # birth then closes triangles; with 0 the newborn has only the links its
+    # brain chooses, and is often a leaf.
+    birth_links: int = 0
+    # When an agent dies, the groups of its former neighbours that are not
+    # linked to one another are joined, through their least-linked members, so
+    # a death never splits a neighbourhood — and so never the world.
+    mend_on_death: bool = False
+    # How many neighbours the two ends of an unused link must have in common
+    # for the link to lapse. 0 is the old rule — any unused link lapses — and
+    # it cuts bridges as readily as anything else; 2 lets only links lapse
+    # whose ends stay joined twice over without them.
+    prune_needs: int = 0
+    # The most links an agent's brain may choose to hold (0 = no limit). A
+    # newborn's links to its parent and the parent's neighbours are exempt, and
+    # so is mending. An agent at its limit cannot have a child: it is crowded.
+    valence: int = 0
+
+    # Demography. An agent's last token always stays on its own node, and a
+    # parent keeps at least one: no agent can stake or breed itself to death.
+    keep_one: bool = False
+    # An agent dies when it reaches this age (0 = never). Its tokens are shared
+    # out like any other estate.
+    max_age: int = 0
+    # The fewest tokens a child can be born with; a smaller endowment means no
+    # birth. 1 is the old rule.
+    min_child: int = 1
 
     # ---- Mutation ----
     mutation_probability: float = 0.5
@@ -653,3 +714,12 @@ class SimConfig:
             raise ValueError("checkpoint_every cannot be negative")
         if self.total_tokens < self.resolved_n():
             raise ValueError("total_tokens must be at least the seed node count, or every node starts broke")
+        if not self.incumbency > 0:
+            raise ValueError("incumbency must be positive")
+        for name in ("birth_links", "prune_needs", "valence", "max_age"):
+            if getattr(self, name) < 0:
+                raise ValueError(f"{name} cannot be negative")
+        if self.min_child < 1:
+            raise ValueError("min_child must be at least 1: a child is born with something")
+        if self.valence == 1:
+            raise ValueError("valence 1 would let no agent choose a second link; use 0 for no limit")

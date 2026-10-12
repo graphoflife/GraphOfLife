@@ -31,7 +31,16 @@
     "mutation_probability": 0.2,
     "mutation_noise_std": 0.2,
     "mutation_sparsity": 0.1,
-    "extinction_threshold": 20
+    "extinction_threshold": 20,
+    "mutate_on_replication": false,
+    "incumbency": 1.0,
+    "birth_links": 0,
+    "mend_on_death": false,
+    "prune_needs": 0,
+    "valence": 0,
+    "keep_one": false,
+    "max_age": 0,
+    "min_child": 1
   },
   "why": {
     "mechanics": "As the new-simulation form offers them since 2026-10-02 (gol_config.NEW_RUN_DEFAULTS), chosen by the author: every mechanic at its frozen gol-1 value but the brain's precision. No gifts; a link that carried no tokens during a phase is cut at the end of the game; the tokens of the dead are shared out evenly.",

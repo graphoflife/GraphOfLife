@@ -1019,8 +1019,38 @@ class GraphOfLife:
         or its own creation — falls before that has lapsed.
         """
         oldest = self.phase_count - self._window_phases() + 1
-        return [self._edge_key(u, v) for u, v in self.G.edges()
-                if self.edge_active_at.get(self._edge_key(u, v), -1) < oldest]
+        stale = [self._edge_key(u, v) for u, v in self.G.edges()
+                 if self.edge_active_at.get(self._edge_key(u, v), -1) < oldest]
+        return self._redundant(stale) if self.cfg.prune_needs else stale
+
+    def _redundant(self, stale: List[Tuple[int, int]]) -> List[Tuple[int, int]]:
+        """
+        Of the unused links, those whose ends stay joined without them.
+
+        A link may lapse only if its two ends share at least prune_needs
+        neighbours through links that are not lapsing too. Taken in order and
+        against the links already let go, so two links that each looked
+        redundant because of the other cannot both go. With one shared
+        neighbour pruning can never cut the graph; with two it cannot even
+        leave the ends hanging on a single agent.
+        """
+        need = self.cfg.prune_needs
+        adj = self.G.adj
+        gone: set = set()
+        out: List[Tuple[int, int]] = []
+        for a, b in sorted(stale):
+            small, large = (adj[a], adj[b]) if len(adj[a]) <= len(adj[b]) else (adj[b], adj[a])
+            shared = 0
+            for c in small:
+                if (c in large and self._edge_key(a, c) not in gone
+                        and self._edge_key(b, c) not in gone):
+                    shared += 1
+                    if shared >= need:
+                        break
+            if shared >= need:
+                gone.add((a, b))
+                out.append((a, b))
+        return out
 
     def _prunes_after(self, phase: int) -> bool:
         """Whether the accounting falls due at the end of this phase."""
@@ -1317,7 +1347,7 @@ class GraphOfLife:
             # How much of myself do I give away? Averaged over the whole view.
             frac = np.mean(Y[self.heads["REPRO_FRACTION"], :], axis=1)
             child_tokens = int(np.floor(_share_of_first(frac[0], frac[1]) * tokens_u))
-            child_tokens = max(0, min(tokens_u, child_tokens))
+            child_tokens = self._endowment(u, tokens_u, max(0, min(tokens_u, child_tokens)))
 
             if child_tokens >= 1:
                 child_id, links = self._spawn_child(u, tokens_u, child_tokens,
@@ -1415,6 +1445,24 @@ class GraphOfLife:
         return self._frame(phase=1, cleanup=cleanup, nodes_before=nodes_before,
                            tokens_before=tokens_before, decisions=payload)
 
+    def _endowment(self, parent: int, tokens: int, wanted: int) -> int:
+        """
+        What a birth may actually take from a parent who wants to give `wanted`.
+
+        Under the old rules, whatever was asked for: anything from one token up
+        is a child. The rules of Part V can refuse a birth outright — a parent
+        at its valence is crowded, and an endowment below min_child is no
+        child — and keep_one leaves the parent its last token.
+        """
+        cfg = self.cfg
+        if cfg.keep_one:
+            wanted = min(wanted, tokens - 1)
+        if wanted < cfg.min_child:
+            return 0
+        if cfg.valence and self.G.degree(parent) >= cfg.valence:
+            return 0
+        return wanted
+
     def _spawn_child(self, parent: int, parent_tokens: int, child_tokens: int,
                      candidates: List[int], Y: np.ndarray) -> Tuple[int, List[int]]:
         """Create the newborn, wire it up, and debit the parent."""
@@ -1432,8 +1480,20 @@ class GraphOfLife:
         link_logits = Y[self.heads["LINK"], :]
         link_mode = Y[self.heads["LINK_MODE"], :]
 
-        linked: List[int] = []
+        # The links space gives a newborn before it chooses any: its parent, and
+        # some of its parent's neighbours. Drawn at random rather than by the
+        # brain's liking, because a liking for the well-connected is
+        # preferential attachment, and the pilots grew hubs of a third of the
+        # world from it.
+        linked: List[int] = self._birth_links(child_id, parent, candidates)
+
+        valence = self.cfg.valence
         for col, v in enumerate(candidates):
+            if v in linked:
+                continue
+            if valence and (self.G.degree(child_id) >= valence
+                            or (self.G.has_node(v) and self.G.degree(v) >= valence)):
+                continue
             if _choose_binary(link_logits[0, col], link_logits[1, col],
                               link_mode[0, col], link_mode[1, col], self.rng):
                 if v != child_id and self.G.has_node(v):
@@ -1441,6 +1501,18 @@ class GraphOfLife:
                     linked.append(v)
 
         return child_id, linked
+
+    def _birth_links(self, child: int, parent: int, candidates: List[int]) -> List[int]:
+        """Join a newborn to its parent and to birth_links of the parent's neighbours."""
+        k = self.cfg.birth_links
+        if not k:
+            return []
+        self._add_edge(child, parent)
+        others = [v for v in candidates if v != parent and v != child and self.G.has_node(v)]
+        chosen = [others[i] for i in self.rng.permutation(len(others))[:k]] if others else []
+        for v in chosen:
+            self._add_edge(child, v)
+        return [parent] + chosen
 
     def _choose_gifts(self, u: int, purse: int, candidates: List[int],
                       Y: np.ndarray) -> List[Tuple[int, int, int]]:
@@ -1564,13 +1636,20 @@ class GraphOfLife:
             scores = np.asarray(Y[self.heads["BLOTTO"], :], dtype=float)
             mode = np.mean(Y[self.heads["BLOTTO_MODE"], :], axis=1)
 
+            # With keep_one the last token is not the agent's to stake: it stays
+            # on its own node whatever the brain says, and only the rest is
+            # placed. That is what makes starving oneself impossible.
+            kept = 1 if self.cfg.keep_one else 0
+            stake = tokens_u - kept
+
             # The agent picks its own doctrine: spread by score, or all-in.
             spread = bool(mode[0] > mode[1])
             if spread:
-                alloc = _apportion(scores, tokens_u)
+                alloc = _apportion(scores, stake)
             else:
                 alloc = np.zeros(len(targets), dtype=int)
-                alloc[int(np.argmax(scores))] = tokens_u
+                alloc[int(np.argmax(scores))] = stake
+            alloc[0] += kept
 
             revolts_allowed = self.cfg.allow_revolutions
             rev_logits = Y[self.heads["REV_FRACTION"], :] if revolts_allowed else None
@@ -1635,9 +1714,13 @@ class GraphOfLife:
                 new_brains[v] = self._copy_brain(self.brains[v])
                 continue
 
-            winner, max_amount, by_revolt = self._resolve_winner(offers, revolution_to[v],
-                                                                 self.rng)
+            winner, max_amount, by_revolt = self._resolve_winner(
+                self._weighed(v, offers), revolution_to[v], self.rng)
             new_brains[v] = self._copy_brain(self.brains[winner])
+            # A won node is a copy of its winner's brain made somewhere new, so
+            # under mutate_on_replication it is a replication like a birth.
+            if self.cfg.mutate_on_replication and winner != v:
+                self._mutate_brain(new_brains[v])
             new_tokens[v] = int(incoming_totals[v])
 
             # Kept whenever anything downstream reads it. This used to be built
@@ -1692,9 +1775,12 @@ class GraphOfLife:
         # before it. Nothing between the two reads a brain — the pruning goes on
         # token flow and the cleanup on tokens and connectivity — so the only
         # difference is that the brains of agents about to be removed are no
-        # longer jittered on their way out the door.
-        for brain in self.brains.values():
-            self._mutate_brain(brain)
+        # longer jittered on their way out the door. Under
+        # mutate_on_replication nothing happens here: a brain has changed
+        # already, if at all, where it was copied.
+        if not self.cfg.mutate_on_replication:
+            for brain in self.brains.values():
+                self._mutate_brain(brain)
         self._note("game.mutate")
 
         self._prune_stale_messages()
@@ -1708,6 +1794,19 @@ class GraphOfLife:
             }
         return self._frame(phase=2, cleanup=cleanup, nodes_before=nodes_before,
                            tokens_before=tokens_before, decisions=decisions)
+
+    def _weighed(self, v: int, offers: Dict[int, int]) -> Dict[int, float]:
+        """
+        The offers on node `v` as the game weighs them.
+
+        Under incumbency an agent's stake on its own node counts that many times
+        over, and nothing else changes: the tokens the node ends with are what
+        was staked, whoever takes it.
+        """
+        h = self.cfg.incumbency
+        if h == 1.0 or v not in offers:
+            return offers
+        return {**offers, v: offers[v] * h}
 
     @staticmethod
     def _resolve_winner(offers: Dict[int, int], revolutionaries: Dict[int, int],
@@ -1769,7 +1868,10 @@ class GraphOfLife:
         """
         Starve the broke, cull the disconnected, and share out the estate.
 
-        1. Nodes holding <= 0 tokens are removed.
+        1. Nodes holding <= 0 tokens are removed, and under max_age so are the
+           old. Under mend_on_death each is removed on its own and its
+           neighbourhood joined up again before the next, so none of these
+           removals can split the graph.
         2. Of what remains, only the largest connected component survives.
         3. Every token held by the dead is pooled and scattered uniformly at
            random over the survivors, so the global count stays conserved.
@@ -1795,9 +1897,28 @@ class GraphOfLife:
         report["cutRiskBefore"] = worst_cut_share(ids_before, self.G.adj)
 
         starved = [u for u in self.G.nodes() if self.tokens.get(u, 0) <= 0]
+        # Old age, under max_age. An agent whose birth was never recorded has
+        # no age to reach, and is spared rather than guessed at.
+        limit = self.cfg.max_age
+        aged = ([u for u in self.G.nodes() if self.tokens.get(u, 0) > 0
+                 and self.born_at.get(u, UNKNOWN_BIRTH) != UNKNOWN_BIRTH
+                 and self._age_of(u) >= limit] if limit else [])
+        report["starved"] = len(starved)
+        report["aged"] = len(aged)
+        dying = starved + aged
+
+        global_pool = self.cfg.tokens_created_per_phase
+        if self.cfg.mend_on_death:
+            # Each death on its own, its neighbourhood mended before the next:
+            # then no death can split the graph, and the cull below finds one
+            # piece. Their estates join the pool like any other.
+            for u in sorted(dying):
+                global_pool += max(0, self.tokens.get(u, 0))
+                self._remove_and_mend(u)
+            dying = []
 
         G_active = self.G.copy()
-        G_active.remove_nodes_from(starved)
+        G_active.remove_nodes_from(dying)
 
         orphaned: set[int] = set()
         if G_active.number_of_nodes() > 0:
@@ -1805,11 +1926,9 @@ class GraphOfLife:
             for c in components[1:]:
                 orphaned.update(c)
 
-        doomed = set(starved) | orphaned
-        report["starved"] = len(starved)
+        doomed = set(dying) | orphaned
         report["orphaned"] = len(orphaned)
 
-        global_pool = self.cfg.tokens_created_per_phase
         for u in doomed:
             global_pool += max(0, self.tokens.get(u, 0))
 
@@ -1869,6 +1988,48 @@ class GraphOfLife:
             report["resurrected"] = True
 
         return report
+
+    def _remove_and_mend(self, u: int) -> int:
+        """
+        Remove a dying agent, then join what its death would have split.
+
+        Its former neighbours fall into groups: those linked to one another
+        directly are one group. Each group is joined to the next through its
+        least-linked member (the lowest id among equals), so the neighbourhood
+        is one piece again and no agent is made a hub by it. A neighbourhood
+        that was already one piece gains nothing. Returns the links made.
+        """
+        nbrs = sorted(self.G.neighbors(u))
+        self._drop_edges([(u, v) for v in nbrs])
+        self.G.remove_node(u)
+        self._forget_agent(u)
+
+        adj = self.G.adj
+        group_of: Dict[int, int] = {}
+        groups: List[List[int]] = []
+        for x in nbrs:
+            joined = sorted({group_of[y] for y in adj[x] if y in group_of})
+            if not joined:
+                group_of[x] = len(groups)
+                groups.append([x])
+                continue
+            keep = joined[0]
+            groups[keep].append(x)
+            group_of[x] = keep
+            for g in joined[1:]:
+                for y in groups[g]:
+                    group_of[y] = keep
+                groups[keep].extend(groups[g])
+                groups[g] = []
+        groups = [g for g in groups if g]
+
+        made = 0
+        for first, second in zip(groups, groups[1:]):
+            a = min(first, key=lambda z: (len(adj[z]), z))
+            b = min(second, key=lambda z: (len(adj[z]), z))
+            self._add_edge(a, b)
+            made += 1
+        return made
 
     def _prune_stale_messages(self) -> None:
         """Forget messages to or from anyone who is no longer a neighbor."""

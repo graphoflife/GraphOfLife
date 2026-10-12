@@ -333,6 +333,50 @@
           <label for="cfg_mutation_sparsity">Sparsity</label>
           <input type="number" id="cfg_mutation_sparsity" data-cfg="mutation_sparsity" min="0" max="1" step="0.01">
         </div>
+        <div class="field checkbox">
+          <label><input type="checkbox" id="cfg_mutate_on_replication" data-cfg="mutate_on_replication"> Only when copied</label>
+          <small>A brain changes only when it is copied — into a child, or into a node its owner won — and never after the game where it sits.</small>
+        </div>
+        </fieldset>
+        <fieldset>
+          <legend>Open-ended evolution</legend>
+          <small class='fieldset-note'>The rules of the book's Part V. All off by default; each answers one way a world fell apart once its brains could see.</small>
+        <div class="field">
+          <label for="cfg_incumbency">Home advantage <span class="hint">(1 = none)</span></label>
+          <input type="number" id="cfg_incumbency" data-cfg="incumbency" min="0.1" step="0.1">
+          <small>How many times over an agent's stake on its own node counts when the game decides who takes it.</small>
+        </div>
+        <div class="field">
+          <label for="cfg_birth_links">Links at birth <span class="hint">(0 = chosen)</span></label>
+          <input type="number" id="cfg_birth_links" data-cfg="birth_links" min="0" step="1">
+          <small>A newborn joins its parent and this many of the parent's neighbours, at random, so every birth closes triangles.</small>
+        </div>
+        <div class="field checkbox">
+          <label><input type="checkbox" id="cfg_mend_on_death" data-cfg="mend_on_death"> Mend on death</label>
+          <small>The neighbours of an agent that dies are joined where its death would have left them apart, so no death can split the world.</small>
+        </div>
+        <div class="field">
+          <label for="cfg_prune_needs">Unused links need <span class="hint">(shared neighbours, 0 = none)</span></label>
+          <input type="number" id="cfg_prune_needs" data-cfg="prune_needs" min="0" step="1">
+          <small>An unused link lapses only if its two ends share this many neighbours, so pruning cuts only what is redundant.</small>
+        </div>
+        <div class="field">
+          <label for="cfg_valence">Valence <span class="hint">(0 = no limit)</span></label>
+          <input type="number" id="cfg_valence" data-cfg="valence" min="0" step="1">
+          <small>The most links a brain may choose to hold. An agent at its limit is crowded and has no children.</small>
+        </div>
+        <div class="field checkbox">
+          <label><input type="checkbox" id="cfg_keep_one" data-cfg="keep_one"> Keep the last token</label>
+          <small>An agent's last token always stays home and a parent keeps one, so nobody can stake or breed itself to death.</small>
+        </div>
+        <div class="field">
+          <label for="cfg_max_age">Longest life <span class="hint">(0 = none)</span></label>
+          <input type="number" id="cfg_max_age" data-cfg="max_age" min="0" step="1">
+        </div>
+        <div class="field">
+          <label for="cfg_min_child">Smallest child</label>
+          <input type="number" id="cfg_min_child" data-cfg="min_child" min="1" step="1">
+        </div>
         </fieldset>
       </div>
     </div>
