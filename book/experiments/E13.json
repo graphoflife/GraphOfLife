@@ -1,0 +1,97 @@
+{
+  "id": "E13",
+  "title": "Brains that see, and worlds that break",
+  "thesis": {
+    "claim": "Brains that see break worlds. With one hidden layer of 16 instead of five, and every brain changed only when it is copied, at least six of ten worlds of 5,000 tokens fall below 50 agents — or die out — at some time after iteration 50 within 1,500 iterations; of the baseline's ten, at most two do.",
+    "why": "One hidden layer passes about a fifth of a change in what a brain sees on to what it does (a gain of 0.2 for a founder, against 0.0006 through the baseline's five sigmoid layers: Chapter 19), so agents stake on one neighbour rather than evenly on all. Pilots of two seeds each, 5,000 tokens, 1,500 iterations: the baseline's worlds never fell below 74 and 397 agents; with one hidden layer, to 1 (and regrown from it) and 84; with one hidden layer and change only when copied, to 15 and 1. In the worlds that see, fewer agents sat in the 2-core (0.27 to 0.62, against 0.54 and 0.55) and the best-connected agent was joined to 15–35% of the others (9–12%).",
+    "confirm": "At least 6 of the 10 worlds of the condition 'one hidden layer, change only when copied' have fewer than 50 agents after the game of some iteration from 50 on, or die out; and at most 2 of the baseline's 10 do.",
+    "refute": "Fewer than 6 of the 10 worlds that see fall below 50 agents: seeing does not break worlds. Or more than 2 of the baseline's do: worlds of 5,000 tokens break anyway, and seeing is not the reason."
+  },
+  "runs": {
+    "baseline": "B1",
+    "world": {
+      "total_tokens": 5000
+    },
+    "seeds": "1..10",
+    "iterations": 1500,
+    "record": {
+      "heavy_every": 25,
+      "archive_every": 100
+    },
+    "conditions": [
+      {
+        "name": "baseline"
+      },
+      {
+        "name": "one hidden layer",
+        "set": {
+          "hidden_layers": [
+            16
+          ]
+        }
+      },
+      {
+        "name": "one hidden layer, change only when copied",
+        "set": {
+          "hidden_layers": [
+            16
+          ],
+          "mutate_on_replication": true
+        }
+      }
+    ]
+  },
+  "analyse": {
+    "kind": "series",
+    "settledFrom": 200,
+    "figures": [
+      {
+        "name": "agents",
+        "stat": "nodes",
+        "phase": 2,
+        "title": "Agents alive",
+        "y": "agents"
+      },
+      {
+        "name": "births",
+        "stat": "births/nodes_before",
+        "phase": 1,
+        "title": "Births per agent in a reproduction phase",
+        "y": "births per agent",
+        "min": 0
+      },
+      {
+        "name": "core",
+        "stat": "coreShare",
+        "phase": 2,
+        "title": "Share of agents in the 2-core",
+        "y": "share",
+        "min": 0
+      },
+      {
+        "name": "cut",
+        "stat": "cutRisk",
+        "phase": 2,
+        "title": "The largest share one connection's loss cuts off",
+        "y": "share",
+        "min": 0
+      },
+      {
+        "name": "hub",
+        "stat": "maxDegree/nodes",
+        "phase": 2,
+        "title": "The best-connected agent's links per agent alive",
+        "y": "share",
+        "min": 0
+      },
+      {
+        "name": "degree",
+        "stat": "meanDegree",
+        "phase": 2,
+        "title": "Connections per agent",
+        "y": "connections",
+        "min": 0
+      }
+    ]
+  }
+}

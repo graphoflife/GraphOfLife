@@ -1,0 +1,54 @@
+{
+  "id": "E16",
+  "title": "Why evolution stops",
+  "thesis": {
+    "claim": "A world that cannot break still stops improving. In B2 the brains of iteration 2,000 hold between 45% and 55% of a contested world against those of iteration 500, in the median world of ten; and taking the random inputs away does not change that.",
+    "why": "In every pilot the cross-time tournament of Chapter 49 flattened within a few hundred iterations: the baseline at +320 to +345 from iteration 200, a B2-like world at +160 to +170 from 200 to 1,000, one with 30% kept at home at +162 to +180 from 50 to 800. Redrawing an evolved agent's random inputs changed 25–58% of its stakes, its neighbour's state 4–23%, its own 2–7%: what evolution found is a way to be unpredictable, which is the best play in a Colonel Blotto contest and cannot be bettered. Without random inputs a pilot flattened all the same (+141 to +188 from 50 to 1,000).",
+    "confirm": "In the median world of the ten B2 worlds, and again of the ten without random inputs, the score of iteration 2,000 against iteration 500 — the mean of its two contests — lies between 0.45 and 0.55.",
+    "refute": "Above 0.55 in either condition's median world: evolution in that world does not stop by iteration 500."
+  },
+  "runs": {
+    "baseline": "B2",
+    "world": {
+      "total_tokens": 5000
+    },
+    "seeds": "1..10",
+    "iterations": 2000,
+    "record": {
+      "heavy_every": 25,
+      "archive_every": 100
+    },
+    "conditions": [
+      {
+        "name": "B2"
+      },
+      {
+        "name": "no random inputs",
+        "set": {
+          "random_input_amount": 0
+        }
+      }
+    ]
+  },
+  "analyse": {
+    "kind": "series",
+    "settledFrom": 300,
+    "figures": [
+      {
+        "name": "agents",
+        "stat": "nodes",
+        "phase": 2,
+        "title": "Agents alive",
+        "y": "agents"
+      },
+      {
+        "name": "births",
+        "stat": "births/nodes_before",
+        "phase": 1,
+        "title": "Births per agent in a reproduction phase",
+        "y": "births per agent",
+        "min": 0
+      }
+    ]
+  }
+}

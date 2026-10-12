@@ -1,0 +1,49 @@
+{
+  "id": "B2",
+  "title": "A world that cannot break",
+  "strain": "gol-1+allow_handover=false+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8",
+  "settings": {
+    "brain_kind": "float16",
+    "exchange_messages": true,
+    "message_prepass": false,
+    "allow_handover": false,
+    "allow_revolutions": true,
+    "random_decisions": false,
+    "tokens_created_per_phase": 0,
+    "allow_gifting": false,
+    "prune_after": "blotto",
+    "inactive_window": "phase",
+    "redistribution": "uniform",
+    "total_tokens": 10000,
+    "n_nodes": 0,
+    "k_neighbors": 0,
+    "rewire_p": 0.2,
+    "hidden_layers": [
+      16
+    ],
+    "brain_bits": 16,
+    "message_amount": 8,
+    "random_input_amount": 5,
+    "mutation_probability": 0.2,
+    "mutation_noise_std": 0.2,
+    "mutation_sparsity": 0.1,
+    "extinction_threshold": 20,
+    "mutate_on_replication": true,
+    "incumbency": 1.5,
+    "birth_links": 2,
+    "mend_on_death": true,
+    "prune_needs": 2,
+    "valence": 8,
+    "keep_home": 0.3,
+    "max_age": 100,
+    "min_child": 10
+  },
+  "why": {
+    "hidden_layers": "One hidden layer of 16: brains whose decisions follow what they see. Founders' gain about 0.2, against 0.0006 for the five layers of B1 (Chapter 50).",
+    "message_amount": "8 numbers in a message, and no pre-pass: half the work of B1's 30 numbers with a pre-pass, for worlds that have to run for thousands of iterations.",
+    "mutate_on_replication": "A brain changes only when it is copied. With every brain changing after every game, adaptations wear away in place (Chapter 43).",
+    "space": "birth_links 2, mend_on_death, prune_needs 2, valence 8 and no handover: the rules under which no death and no pruning can split the world, and no agent becomes a hub (Chapter 51).",
+    "demography": "keep_home 0.3, max_age 100, min_child 10, incumbency 1.5: no agent can stake itself to death, everyone dies of age at 100, a child starts with at least 10 tokens, and defending is a little cheaper than attacking (Chapter 52)."
+  },
+  "history": "Made on 2026-10-12 for Part V, from the pilots in research/oee/ (LOG.md there)."
+}

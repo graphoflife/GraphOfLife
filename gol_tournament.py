@@ -161,6 +161,31 @@ def ratings(eras: Sequence[int], results: Sequence[Dict[str, Any]],
     return [float(v) for v in r * 400 / np.log(10)], residual
 
 
+def dominance(eras: Sequence[int], results: Sequence[Dict[str, Any]],
+              margin: float = 0.55) -> List[int]:
+    """
+    The eras that beat every champion before them — Stanley and
+    Miikkulainen's dominance tournament, read off contests already played.
+
+    The founders are the first champion. Each later era, in order, joins the
+    champions if its mean score against every one of them is above `margin`.
+    The number of champions by an iteration can only rise, and rises once for
+    every era that is better than all the best of its past: a count of the
+    innovations that lasted, which drift alone does not raise. Returns the
+    champions' eras.
+    """
+    pairs: Dict[Tuple[int, int], List[float]] = {}
+    for r in results:
+        if r.get("share") is not None:
+            pairs.setdefault((r["a"], r["b"]), []).append(r["share"])
+    champions = [eras[0]]
+    for era in eras[1:]:
+        scores = [float(np.mean(pairs[(c, era)])) for c in champions if (c, era) in pairs]
+        if len(scores) == len(champions) and all(s > margin for s in scores):
+            champions.append(era)
+    return champions
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("run")

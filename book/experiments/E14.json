@@ -1,0 +1,102 @@
+{
+  "id": "E14",
+  "title": "A world that cannot break",
+  "thesis": {
+    "claim": "Under all the rules of B2 every world keeps a network that holds: from iteration 200 to 1,000 every one of ten worlds of 5,000 tokens has all its agents in one piece in every frame, and its medians over those frames pass every line of the health bar of Chapter 49 — at least 80% of agents in the 2-core, no connection whose loss cuts off more than 1% of them, no agent joined to more than 5% of the others, 3 to 12 connections per agent, a ball dimension between 2.3 and 4. Each rule taken away on its own breaks some line of it in at least half of the worlds.",
+    "why": "Births by themselves grow a tree of blobs, and random deaths cut its necks: in the space-only model of research/oee/space.py (1,500 agents, no brains) one agent's loss could cut off 40% of the world. A newborn joined to its parent and two of its neighbours, and deaths mended in a ring, bring that to 1.1–1.3% with a dimension of 3.4–3.6. Under the game, unused links lapsing cut what mending saves unless only redundant links may lapse; a brain's liking for well-connected neighbours makes hubs unless their number is capped; and a parent handing its links to its child leaves itself hanging. In the engine, B2's seed 1 at 5,000 tokens kept everyone in the 2-core with no single cut at all, 5.1–5.3 connections per agent and a dimension of 3.1–3.7 through iteration 400.",
+    "confirm": "All ten B2 worlds: no agent cut off in any cull from iteration 200 on, and median coreShare ≥ 0.8, cutRisk ≤ 0.01, maxDegree/nodes ≤ 0.05, meanDegree in 3–12 and dimension in 2.3–4 over iterations 200 to 1,000. And for each of the five conditions that take one rule away, at least five of its ten worlds fail at least one of these.",
+    "refute": "A B2 world fails a line of the bar: the rules do not make a network that holds. Or a condition without one of the rules has fewer than five failing worlds: that rule is not needed."
+  },
+  "runs": {
+    "baseline": "B2",
+    "world": {
+      "total_tokens": 5000
+    },
+    "seeds": "1..10",
+    "iterations": 1000,
+    "record": {
+      "heavy_every": 25,
+      "archive_every": 100
+    },
+    "conditions": [
+      {
+        "name": "all the rules"
+      },
+      {
+        "name": "no mending",
+        "set": {
+          "mend_on_death": false
+        }
+      },
+      {
+        "name": "any unused link lapses",
+        "set": {
+          "prune_needs": 0
+        }
+      },
+      {
+        "name": "no links at birth",
+        "set": {
+          "birth_links": 0
+        }
+      },
+      {
+        "name": "no valence",
+        "set": {
+          "valence": 0
+        }
+      },
+      {
+        "name": "handover",
+        "set": {
+          "allow_handover": true
+        }
+      }
+    ]
+  },
+  "analyse": {
+    "kind": "series",
+    "settledFrom": 300,
+    "figures": [
+      {
+        "name": "agents",
+        "stat": "nodes",
+        "phase": 2,
+        "title": "Agents alive",
+        "y": "agents"
+      },
+      {
+        "name": "core",
+        "stat": "coreShare",
+        "phase": 2,
+        "title": "Share of agents in the 2-core",
+        "y": "share",
+        "min": 0
+      },
+      {
+        "name": "cut",
+        "stat": "cutRisk",
+        "phase": 2,
+        "title": "The largest share one connection's loss cuts off",
+        "y": "share",
+        "min": 0
+      },
+      {
+        "name": "hub",
+        "stat": "maxDegree/nodes",
+        "phase": 2,
+        "title": "The best-connected agent's links per agent alive",
+        "y": "share",
+        "min": 0
+      },
+      {
+        "name": "degree",
+        "stat": "meanDegree",
+        "phase": 2,
+        "title": "Connections per agent",
+        "y": "connections",
+        "min": 0
+      }
+    ]
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "id": "E15",
+  "title": "Who dies, and why",
+  "thesis": {
+    "claim": "How agents die decides who is left to play. In B2, with at least 30% of an agent's tokens kept at home, fewer than half the agents hold a single token after iteration 300; with only the last token kept, more than two in three do; with nothing kept, worlds starve: at least half fall below 100 agents within 1,000 iterations.",
+    "why": "An agent that cannot lose its last token can stake everything else on one neighbour at no risk to itself, and brains that see do: in a pilot with only the last token kept, 75% of the agents held exactly one token at iteration 1,500, against 1% in the baseline's blind world. Kept to 30% of its tokens, an agent's stake stays spread: 35–61% at one token in pilots. With nothing kept, agents stake themselves to death and worlds starved to a single agent within 300 iterations in both pilot seeds.",
+    "confirm": "Median over iterations 300 to 1,000 of the share of agents holding one token (from the frames): below 0.5 in at least 7 of the 10 B2 worlds, above 0.67 in at least 7 of the 10 worlds with keep_home 0.01; and at least 5 of the 10 worlds with keep_home 0 have fewer than 100 agents after some game.",
+    "refute": "Any of the three fails: the share at one token does not follow what is kept at home, or worlds without it do not starve."
+  },
+  "runs": {
+    "baseline": "B2",
+    "world": {
+      "total_tokens": 5000
+    },
+    "seeds": "1..10",
+    "iterations": 1000,
+    "record": {
+      "heavy_every": 25,
+      "archive_every": 100
+    },
+    "conditions": [
+      {
+        "name": "B2"
+      },
+      {
+        "name": "the last token kept",
+        "set": {
+          "keep_home": 0.01
+        }
+      },
+      {
+        "name": "nothing kept",
+        "set": {
+          "keep_home": 0.0
+        }
+      },
+      {
+        "name": "half kept",
+        "set": {
+          "keep_home": 0.5
+        }
+      },
+      {
+        "name": "children of any size",
+        "set": {
+          "min_child": 1
+        }
+      },
+      {
+        "name": "no old age",
+        "set": {
+          "max_age": 0
+        }
+      }
+    ]
+  },
+  "analyse": {
+    "kind": "series",
+    "settledFrom": 300,
+    "figures": [
+      {
+        "name": "agents",
+        "stat": "nodes",
+        "phase": 2,
+        "title": "Agents alive",
+        "y": "agents"
+      },
+      {
+        "name": "births",
+        "stat": "births/nodes_before",
+        "phase": 1,
+        "title": "Births per agent in a reproduction phase",
+        "y": "births per agent",
+        "min": 0
+      },
+      {
+        "name": "median",
+        "stat": "medianTokens",
+        "phase": 2,
+        "title": "The median agent's tokens",
+        "y": "tokens",
+        "min": 0
+      }
+    ]
+  }
+}
