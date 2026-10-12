@@ -508,6 +508,50 @@ def test_a_run_cut_between_checkpoints_resumes_to_the_same_run():
         assert _what_was_recorded(cut) == _what_was_recorded(straight)
 
 
+def test_a_run_keeps_a_whole_world_every_archive_every():
+    """
+    The archive is what a cross-time tournament plays from: whole worlds from
+    along a run, kept, unlike the checkpoint, which is overwritten. A run cut
+    off between checkpoints and taken up again keeps exactly the worlds a run
+    left alone keeps — the ones from its lost future are forgotten and made
+    again.
+    """
+    import gol_run
+    import gol_store
+
+    class PowerCut(Exception):
+        pass
+
+    def at_seven(world):
+        if world.iteration == 7:
+            raise PowerCut
+        return False
+
+    cfg = small(seed=64, checkpoint_every=4, archive_every=3)
+    with scratch_runs():
+        straight = gol_store.create_run("straight", cfg)["id"]
+        gol_run.advance(straight, until=10)
+        assert gol_store.archived(straight) == [0, 3, 6, 9]
+        kept = GraphOfLife.from_checkpoint(gol_store.load_archive(straight, 6), cfg)
+        assert kept.iteration == 6
+
+        cut = gol_store.create_run("cut", cfg)["id"]
+        try:
+            gol_run.advance(cut, at_seven)
+        except PowerCut:
+            pass
+        assert gol_store.archived(cut) == [0, 3, 6]
+        gol_run.advance(cut, until=10)
+        assert gol_store.archived(cut) == [0, 3, 6, 9]
+        for it in (0, 3, 6, 9):
+            a, b = gol_store.load_archive(straight, it), gol_store.load_archive(cut, it)
+            assert set(a) == set(b)
+            assert all((a[k] == b[k]).all() for k in a), f"the world kept at {it} differs"
+
+        assert gol_store.truncate_archive_after(cut, 5) == 2
+        assert gol_store.archived(cut) == [0, 3]
+
+
 def test_two_runs_in_two_threads_match_each_alone():
     """
     The server advances every run it is asked to from a thread of one process.
@@ -2486,6 +2530,53 @@ def test_no_child_is_born_with_less_than_min_child():
             assert b["invested"] >= 7
             seen += 1
     assert seen, "wanted some births"
+
+
+def test_a_tournament_plays_every_pair_home_and_away_and_rates_them():
+    import gol_run
+    import gol_store
+    import gol_tournament as tour
+
+    cfg = small(seed=65, archive_every=2, mutate_on_replication=True)
+    with scratch_runs():
+        run = gol_store.create_run("t", cfg)["id"]
+        gol_run.advance(run, until=4)
+        out = tour.play(run, T=2, coins=1)
+        assert out["eras"] == [0, 2, 4]
+        played = {(c["a"], c["b"], c["home"]) for c in out["contests"]}
+        assert played == {(0, 2, 0), (0, 2, 2), (0, 4, 0), (0, 4, 4), (2, 4, 2), (2, 4, 4)}
+        assert all(0 <= c["share"] <= 1 for c in out["contests"])
+        assert out["elo"][0] == 0 and len(out["elo"]) == 3
+
+
+def test_ratings_read_scores_as_odds():
+    import gol_tournament as tour
+    # B beats A three times in four, C beats B three times in four.
+    results = [{"a": 0, "b": 1, "share": 0.75}, {"a": 1, "b": 2, "share": 0.75},
+               {"a": 0, "b": 2, "share": 0.9}]
+    elo, residual = tour.ratings([0, 1, 2], results)
+    assert elo[0] == 0 and 150 < elo[1] < 250 and elo[2] > elo[1]
+    # A tie is no difference at all.
+    flat, _ = tour.ratings([0, 1], [{"a": 0, "b": 1, "share": 0.5}])
+    assert abs(flat[1]) < 1e-9
+
+
+def test_a_contest_cannot_change_a_brain():
+    """Mutation is off in a contest, so every agent's brain is one of the two eras' own."""
+    import gol_tournament as tour
+    cfg = small(seed=66, mutate_on_replication=True, mutation_probability=1.0)
+    world = new_world(cfg)
+    early = world.to_checkpoint()
+    for _ in range(3):
+        world.step(record_decisions=False)
+    late = world.to_checkpoint()
+    import numpy as np
+    blob = tour.mixed(late, early, late, cfg.message_amount, np.random.RandomState(1))
+    ids = set(int(x) for x in blob["brain_ids"])
+    contestant = GraphOfLife.from_checkpoint(blob, dataclasses.replace(cfg, mutation_probability=0.0))
+    for _ in range(3):
+        contestant.step(record_decisions=False)
+    assert {contestant.brains[u].brain_id for u in contestant.G.nodes()} <= ids
 
 
 # ---------------------------------------------------------------------------

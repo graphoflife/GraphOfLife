@@ -290,6 +290,11 @@
           <input type="number" id="cfg_checkpoint_every" data-cfg="checkpoint_every" min="0" step="1">
         </div>
         <div class="field">
+          <label for="cfg_archive_every">Keep a world every <span class="hint">(0 = never)</span></label>
+          <input type="number" id="cfg_archive_every" data-cfg="archive_every" min="0" step="1">
+          <small>A whole world kept every this many iterations, beside the run, for comparing the brains of different moments.</small>
+        </div>
+        <div class="field">
           <label for="cfg_export_every">Record every</label>
           <input type="number" id="cfg_export_every" data-cfg="export_every" min="1" step="1">
         </div>

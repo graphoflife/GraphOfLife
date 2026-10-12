@@ -120,7 +120,7 @@ PARAMETERS = (
 )
 
 # Infrastructure — affects only what is recorded, never what happens.
-INFRASTRUCTURE = ("checkpoint_every", "export_every", "export_decisions")
+INFRASTRUCTURE = ("checkpoint_every", "archive_every", "export_every", "export_decisions")
 
 
 def _spell(value: Any) -> str:
@@ -399,6 +399,11 @@ class SimConfig:
     extinction_threshold: int = 20
     # Write a resume checkpoint every N iterations. 0 disables checkpointing.
     checkpoint_every: int = 20
+    # Keep a whole world every N iterations, beside the run in archive/, for
+    # whatever needs the brains of more than one moment — a cross-time
+    # tournament above all. The checkpoint is overwritten; these are not.
+    # 0 keeps none.
+    archive_every: int = 0
     # Random seed for reproducibility. Left blank on a new run, one is drawn and
     # written down — see resolve_seed. It fixes the starting graph and every
     # random choice the run goes on to make.
@@ -712,6 +717,8 @@ class SimConfig:
             raise ValueError("export_every must be at least 1")
         if self.checkpoint_every < 0:
             raise ValueError("checkpoint_every cannot be negative")
+        if self.archive_every < 0:
+            raise ValueError("archive_every cannot be negative")
         if self.total_tokens < self.resolved_n():
             raise ValueError("total_tokens must be at least the seed node count, or every node starts broke")
         if not self.incumbency > 0:

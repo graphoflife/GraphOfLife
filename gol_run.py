@@ -57,11 +57,15 @@ def _advance(run_id: str, should_stop: Callable[[Any], bool], until: Optional[in
     world = store.load_checkpoint(run_id, cfg)
     if world is None:
         store.truncate_frames_from(run_id, 0)
+        store.truncate_archive_after(run_id, -1)
         world = new_world(cfg)
         cursor = 0
+        if cfg.archive_every:
+            store.save_archive(run_id, world)
     else:
         cursor = cfg.frames_before(world.iteration)
         store.truncate_frames_from(run_id, cursor)
+        store.truncate_archive_after(run_id, world.iteration)
 
     # A run made with a recording policy keeps a line of statistics per frame
     # as it goes (gol_record). Families need every iteration in order, so such
@@ -93,6 +97,8 @@ def _advance(run_id: str, should_stop: Callable[[Any], bool], until: Optional[in
                 if recorder is not None:
                     recorder.observe(enumerate(frames, first))
 
+            if cfg.archive_every and world.iteration % cfg.archive_every == 0:
+                store.save_archive(run_id, world)
             if cfg.checkpoint_every and world.iteration % cfg.checkpoint_every == 0:
                 store.save_checkpoint(run_id, world)
 

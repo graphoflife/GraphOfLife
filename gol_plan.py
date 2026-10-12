@@ -195,7 +195,7 @@ def _experiment_runs(name: str) -> List[RunSpec]:
     world = dict(runs["world"])
     _check_keys(f"{name} world", world, WORLD)
     record = dict(runs.get("record", {}))
-    _check_keys(f"{name} record", record, ("heavy_every", "checkpoint_every"))
+    _check_keys(f"{name} record", record, ("heavy_every", "checkpoint_every", "archive_every"))
     iterations = int(runs["iterations"])
     workers_cap(name)                                       # refuses one that is not a count
 
@@ -222,7 +222,8 @@ def _experiment_runs(name: str) -> List[RunSpec]:
             here = {**world, "total_tokens": size}
             config = {**base, **here, **changed, "seed": seed, "export_every": 1,
                       "export_decisions": True,
-                      "checkpoint_every": int(record.get("checkpoint_every", 0))}
+                      "checkpoint_every": int(record.get("checkpoint_every", 0)),
+                      "archive_every": int(record.get("archive_every", 0))}
             try:
                 SimConfig.from_dict(config, stored=False)        # refuses what it cannot run
             except ValueError as exc:

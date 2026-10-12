@@ -537,3 +537,65 @@ def load_checkpoint(run_id: str, cfg: SimConfig):
 
 def has_checkpoint(run_id: str) -> bool:
     return os.path.exists(checkpoint_path(run_id))
+
+
+# ----------------------------------------------------------------------------
+# The archive: whole worlds kept from along the way
+# ----------------------------------------------------------------------------
+#
+# The checkpoint is overwritten; it is for resuming. A cross-time tournament —
+# do the brains of iteration 1,000 beat those of iteration 200? — needs the
+# brains of both, so a run with `archive_every` set keeps a whole world every
+# that many iterations, in archive/, and nothing else ever deletes one but a
+# resume from before it.
+
+ARCHIVE_PREFIX = "world_"
+
+
+def archive_dir(run_id: str) -> str:
+    return os.path.join(run_dir(run_id), "archive")
+
+
+def archive_path(run_id: str, iteration: int) -> str:
+    return os.path.join(archive_dir(run_id), f"{ARCHIVE_PREFIX}{int(iteration):06d}.npz")
+
+
+def save_archive(run_id: str, world: Any) -> None:
+    """Keep the world as it stands, under its iteration."""
+    os.makedirs(archive_dir(run_id), exist_ok=True)
+    with _replacing(archive_path(run_id, world.iteration), "wb") as f:
+        np.savez_compressed(f, **world.to_checkpoint())
+
+
+def archived(run_id: str) -> List[int]:
+    """The iterations this run kept a whole world of, in order."""
+    directory = archive_dir(run_id)
+    if not os.path.isdir(directory):
+        return []
+    found = []
+    for name in os.listdir(directory):
+        if name.startswith(ARCHIVE_PREFIX) and name.endswith(".npz"):
+            digits = name[len(ARCHIVE_PREFIX):-4]
+            if digits.isdigit():
+                found.append(int(digits))
+    return sorted(found)
+
+
+def load_archive(run_id: str, iteration: int) -> Dict[str, np.ndarray]:
+    """A kept world's arrays, as to_checkpoint wrote them."""
+    with np.load(archive_path(run_id, iteration)) as blob:
+        return {key: blob[key] for key in blob.files}
+
+
+def truncate_archive_after(run_id: str, iteration: int) -> int:
+    """
+    Forget every world kept after `iteration`, as a resume does with frames:
+    they belong to a future the resumed run is about to live through again.
+    """
+    removed = 0
+    for it in archived(run_id):
+        if it > iteration:
+            with contextlib.suppress(OSError):
+                os.remove(archive_path(run_id, it))
+                removed += 1
+    return removed
