@@ -224,5 +224,5 @@ iterations and then stops. Experiment 12 asks ten.
 <!-- turns -->
 ---
 
-← [Chapter 43 · How fast should brains change?](43-how-fast-should-brains-change.md) · [Contents](../README.md) · [Chapter 55 · Worlds of 100,000 tokens](55-worlds-of-100000-tokens.md) →
+← [Chapter 43 · How fast should brains change?](43-how-fast-should-brains-change.md) · [Contents](../README.md) · [Chapter 50 · Brains that see, and worlds that break](50-brains-that-see-and-worlds-that-break.md) →
 <!-- /turns -->

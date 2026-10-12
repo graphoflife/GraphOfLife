@@ -302,7 +302,9 @@
         {
           "id": "50",
           "title": "Brains that see, and worlds that break",
-          "note": "One hidden layer instead of five: brains whose decisions follow what they see (gain 0.2 instead of 0.0015), with mutation only at replication. Pilots: worlds fall apart — tree-like networks, one cut takes half the world, populations crash to a single agent."
+          "file": "chapters/50-brains-that-see-and-worlds-that-break.md",
+          "experiment": "E13",
+          "status": "ready"
         },
         {
           "id": "51",

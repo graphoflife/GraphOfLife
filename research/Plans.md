@@ -162,83 +162,63 @@ analysed whether 48 remains a separate chapter or folds into 55/56.
 
 ---
 
-## Part V · Towards open-ended evolution
+## Part V · Engineering open-ended evolution (rewritten 2026-10-12)
 
-Every chapter here needs an engine option (off by default, its own strain
-label, `research/strains.md`). Measurement battery: `research/Research.md` §6 —
-heredity half-life, selection ablation (winner by coin), cross-time tournament
-(needs a tournament harness: load brains from two checkpoints of one world and
-let them play; checkpoints only exist at run ends today — plan checkpoints at
-fixed iterations for these experiments: `record.checkpoint_every`).
+The author's brief (2026-10-12): invent an algorithm on this simulation in
+which open-ended evolution emerges; find a statistic that keeps rising (its
+ceiling may be set by the tokens, but should rise with them); the network
+must be neither a tree nor complete — resilient, large, decentralised, about
+three-dimensional, few single points of failure — and must come out of the
+rules; rules local (long reach only at a price in tokens). Pilots by me,
+experiments for the author; teach it all in the book.
 
-### 49 · Mutation at replication, and nowhere else
+Everything found so far is in `research/oee/LOG.md` (the pilot log) and the
+tools beside it. In short:
 
-**Build.** `mutate_on_replication`: no change after the game; change only when
-a brain is copied — into a child (already) and into a won node (new).
+- **Yardstick** (Ch. 49, E12): cross-time tournament (`gol_tournament.py`,
+  runs keep worlds with `archive_every`), Elo per era, dominance count;
+  health bar (2-core ≥ 0.8, node cut ≤ 2%, edge cut ≤ 1%, max degree ≤ 5%,
+  degree 3–12, dimension 2.3–4); shadows for traits. Pilot B1 (5k, seed 1):
+  Elo +283 at 100, flat +320–345 from 200 to 600.
+- **Brains that see** (Ch. 50, E13): [16] gives gain 0.2 (five layers
+  0.0006). Pilots: worlds crash (to 1 agent in 3 of 4 seeing worlds), tree-
+  like networks, hubs. Mechanism: concentrated stakes kill links, the cull
+  takes half the world at one cut.
+- **A world that cannot break** (Ch. 51, E14, baseline B2): birth_links 2 +
+  mend_on_death (ring) + prune_needs 2 + valence 8 + no handover. Space alone
+  (`research/oee/space.py`): node cut 1.1–1.3%, dimension 3.4–3.6. Engine B2
+  seed 1: 2-core 1.0, no cut at all, degree 5.1–5.3, dimension 3.1–3.7.
+- **Who dies, and why** (Ch. 52, E15): kamikaze children, hoarding queens,
+  one-token froth; keep_home (a share kept at home), max_age, min_child.
+  keep_home = one token left 75% of agents at one token (zombies); 0.3 leaves
+  35–61%; nothing kept starves worlds.
+- **Why evolution stops** (Ch. 53, E16): every variant flattens within a few
+  hundred iterations (B1, B2-like, home floor, no dice, allies, sizes 1.25k
+  to 5k tie in a round robin). Evolved stakes follow the noise inputs (25–58%
+  of decisions change when they are redrawn), not what agents see: Colonel
+  Blotto's best play is mixed, and a good mixed strategy cannot be bettered.
+  One rare late step (allies, seed 1, ~400 iterations, +150 Elo).
 
-**Find out.** Heredity half-life (distance of a lineage to its ancestor over
-time, in weights — Chapter 19's tools — and in behaviour); genotype lifetimes;
-sweeps; whether selection now separates good from bad (selection ablation).
+### Open questions, in the order to try them
 
-**Observe.** Whether worlds freeze (Chapter 41's changeless worlds froze when
-nothing varied — but here copies still vary).
-
-### 50 · Can a brain hold its place? (incumbency)
-
-**Build.** The agent's own stake on its node counts double (or a coalition
-must outweigh hegemon + home). One parameter, two or three values.
-
-**Find out.** Kept share by degree class (hubs!), pair persistence *w*
-(Chapter 38), whether partnerships appear (reciprocity beyond the even split),
-inequality, world size.
-
-**Pitfall.** Incumbency may simply freeze the world (no conquest, no
-spread) — measure births and sweeps too.
-
-### 51 · Kin that know each other (heritable tags)
-
-**Build.** A few numbers per brain (a tag), copied with it, changed rarely;
-each agent sees its candidates' tags (new input rows — changes input width,
-so a new strain).
-
-**Find out.** Kin discrimination ratio (Chapter 38: 1.01 in the baseline);
-Hamilton accounting Σ(rB − C); whether tag-groups form regions; green-beard
-dynamics (tags without kinship — Riolo, Cohen, Axelrod 2001).
-
-**Check.** Tags must not be a covert channel the brains already had: compare
-with a condition where tags are random per agent (not inherited).
-
-### 52 · When cooperation produces (mutual flow yield)
-
-**Build.** A connection with tokens flowing both ways in a game yields *y* new
-tokens to its ends; every holding decays by a small rate so the total stays
-bounded (choose the decay so the expected total stays near *T*).
-
-**Find out.** Reciprocity beyond the even split; defection (one-way stakes
-exploiting a partner); whether clusters of mutual exchange form and persist
-(P3 candidates); total tokens over time (stability).
-
-**Pitfalls.** Runaway growth; a yield that every pair gets by the even split
-anyway (Chapter 38: 58% of mutual pairs exchange 1↔1) makes it a flat subsidy —
-maybe yield only on stakes above a threshold, or only on matched stakes.
-
-### 53 · An open world
-
-**Build.** (a) Pieces that separate live on (no cull) — every piece is its own
-world; (b) local long-range links: a child may join an agent within *k* steps
-of its parent (*k* small), or reach grows with tokens spent (Chapter 7's
-locality caution).
-
-**Find out.** Number and sizes of pieces over time; divergence between pieces
-(genotype distance, behaviour); whether pieces reconnect; deaths by cutting
-vanish — what replaces them?
-
-**Pitfall.** Without the cull, tiny pieces of a few agents may linger forever —
-decide how to measure "a world" (largest piece? all pieces?).
+1. **Depth.** A game whose best response keeps depending on information:
+   growing memory (Lindgren 1991; `memory_len` + grow brains with shadow),
+   cooperation that pays (yield on mutual stakes, now without hubs thanks to
+   valence), fog of war (neighbours' tokens hidden: bluffing, inference),
+   coalitions that are superadditive. Pilots running (X/ in the scratch log).
+2. **Size.** If a game with depth is found: B2 at 1,250 / 5,000 / 20,000 /
+   80,000 tokens, 5 seeds, 2,000–3,000 iterations, archive every 100; Elo,
+   dominance count, and a cross-size round robin (the decisive test of
+   "the ceiling rises with the tokens").
+3. **Port** to the engine whatever the pilots keep (memory needs the last
+   stakes in the checkpoint; grow brains need a brain kind and `active` in
+   the checkpoint).
 
 ### 54 · Meta IV
 
-What moved on the ladder (P1–P4); which mechanic combinations to run next.
+Once 49–53 are analysed: what the engineering found, which rules are needed
+for a world that cannot break, what stops evolution, and the experiments at
+scale.
 
 ---
 

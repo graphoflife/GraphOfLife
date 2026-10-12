@@ -364,5 +364,5 @@ To make every figure of this chapter: `python3 book_figures.py takeover`.
 <!-- turns -->
 ---
 
-← [Chapter 49 · How to tell a world that keeps evolving](49-how-to-tell-a-world-that-keeps-evolving.md) · [Contents](../README.md) · [Chapter 64 · A hundred thousand iterations](64-a-hundred-thousand-iterations.md) →
+← [Chapter 50 · Brains that see, and worlds that break](50-brains-that-see-and-worlds-that-break.md) · [Contents](../README.md) · [Chapter 64 · A hundred thousand iterations](64-a-hundred-thousand-iterations.md) →
 <!-- /turns -->
