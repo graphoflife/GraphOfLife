@@ -200,7 +200,7 @@ descended from more than one founder at their last check. Not one world got
 there within its first hundred iterations, where 13 of the thirty smaller
 worlds did, and half of them by iteration 175. **A world ten times the size
 takes about six times as long to come down to a single founder** —
-[Chapter 55](55-worlds-of-100000-tokens.md) reads in that pace that a line
+[Chapter 54](54-worlds-of-100000-tokens.md) reads in that pace that a line
 spreads through a world as a random walk spreads, not as a front. The other
 999 founders' lines are gone by then: a line ends when the last agent carrying
 one of its brains either dies or has its node won by an agent of another line,
@@ -220,7 +220,7 @@ descendant of one founder: whatever diversity of brains a world later holds,
 it has made since.
 
 > [!info] Added later: the youth is when the brains learn
-> [Chapter 49](49-how-to-tell-a-world-that-keeps-evolving.md) played the
+> [Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md) played the
 > brains of different eras of ten worlds of 5,000 tokens against each other.
 > By iteration 50 the brains of every world beat their founders' — they hold
 > nine tenths of a world contested with them — and every later era ties with

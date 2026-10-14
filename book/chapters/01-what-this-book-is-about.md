@@ -83,7 +83,7 @@ before the next:
 Parts II to IV answer questions that lie underneath P1. Part V turns from
 watching the rules to building them: a yardstick for evolution that keeps
 going and a health bar for the network
-([Chapter 49](49-how-to-tell-a-world-that-keeps-evolving.md)), then rules
+([Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md)), then rules
 meant to pass them, starting from the obstacles [Meta II](40-meta-2.md)
 lists.
 
@@ -93,7 +93,7 @@ lists.
 > [Chapter 19](19-what-the-brains-are-like.md) that selection did shape the
 > brains — but only their constant tendencies, since they are nearly blind
 > to what they see.
-> [Chapter 49](49-how-to-tell-a-world-that-keeps-evolving.md) ran the test
+> [Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md) ran the test
 > of P2, playing the brains of each era against earlier ones: the baseline's
 > brains beat their founders by iteration 50 (+361 Elo in the median world)
 > and gain nothing after iteration 100 — those of iteration 1,000 score
@@ -133,14 +133,16 @@ lists.
   ([Chapter 42](42-how-does-a-worlds-size-follow-its-tokens.md)), and more.
 - **Part V · Engineering open-ended evolution.** A yardstick for a world
   that keeps evolving and a health bar for its network
-  ([Chapter 49](49-how-to-tell-a-world-that-keeps-evolving.md)), then rules
+  ([Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md)), then rules
   built to pass them: brains that see
-  ([Chapter 50](50-brains-that-see-and-worlds-that-break.md)), a world that
-  cannot break ([Chapter 51](51-a-world-that-cannot-break.md)), who dies and
-  why ([Chapter 52](52-who-dies-and-why.md)), and why evolution stops
-  ([Chapter 53](53-why-evolution-stops.md)).
+  ([Chapter 47](47-brains-that-see-and-worlds-that-break.md)), a world that
+  cannot break ([Chapter 48](48-a-world-that-cannot-break.md)), who dies and
+  why ([Chapter 49](49-who-dies-and-why.md)), and why evolution stops
+  ([Chapter 50](50-why-evolution-stops.md)); then whether the rate at which
+  brains change ([Chapter 51](51-how-fast-should-brains-change.md)), or their
+  size, decides where it stops.
 - **Part VI · Towards a physics.** The second aim: what a world's size
-  changes ([Chapter 55](55-worlds-of-100000-tokens.md) sets the worlds of
+  changes ([Chapter 54](54-worlds-of-100000-tokens.md) sets the worlds of
   100,000 tokens beside those of 10,000), how many dimensions a world has at
   scale, which of its properties have no scale, what changes when every rule
   is local, how far a difference travels, what forms when a flow runs
@@ -148,7 +150,7 @@ lists.
   agent with a brain of its own does in a sea of average agents
   ([Chapter 7](07-physical-inspiration.md) sets out the questions).
 - **Part VII · The long run.** One world followed for a hundred thousand
-  iterations ([Chapter 64](64-a-hundred-thousand-iterations.md)).
+  iterations ([Chapter 63](63-a-hundred-thousand-iterations.md)).
 - **Notes.** Short notes, one per idea, that define every rule, every
   measurement and every statistical method the chapters use, with worked
   examples: [Every setting](../notes/settings.md),

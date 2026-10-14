@@ -224,7 +224,7 @@ worlds had such early culls too. But the worlds that died out did not die of
 one of them: each shrank over a hundred iterations or more.
 
 **The network kills every iteration — in every world.** By the health bar of
-[Chapter 49](49-how-to-tell-a-world-that-keeps-evolving.md#the-network-that-holds-in-numbers),
+[Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md#the-network-that-holds-in-numbers),
 no world of any condition holds. The baseline's median world had 51% of its
 agents in the 2-core and a link whose loss cut off 8% of it; the seeing worlds
 had 55% and 11%, and with change only when copied 46% and 6%, and there the
@@ -238,7 +238,7 @@ one hidden layer.
 <!-- figure seeing/health -->
 ![How the network holds](../figures/seeing/health.svg)
 
-**How the network holds.** One dot per world, at its median over iterations 200 to 1,500 while it lived; the bar is the median world and the dashed line the health bar of [Chapter 49](49-how-to-tell-a-world-that-keeps-evolving.md).
+**How the network holds.** One dot per world, at its median over iterations 200 to 1,500 while it lived; the bar is the median world and the dashed line the health bar of [Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md).
 
 > [!example]- How to make this figure
 > **Runs.** The 30 runs of Experiment 13 — at 5,000 tokens, seeds 1 to 10, 1,500 iterations — in three conditions: the baseline B1 (`B1-5000-s001` … `-s010`, shared with Experiment 12), its brains with one hidden layer of 16, and those brains changed only when copied. They are made with `python3 gol_lab.py run E13`.
@@ -332,12 +332,12 @@ losses dies.
 Two things follow for the rules a world needs before anything can evolve in
 it. Its network must stop killing — no agent should be lost because a link or
 a neighbour vanished, which is what the rules of the
-[next chapter](51-a-world-that-cannot-break.md) do. And its births must keep
+[next chapter](48-a-world-that-cannot-break.md) do. And its births must keep
 up with its deaths whatever its brains decide — which depends on who dies, and
-why: the subject of [Chapter 52](52-who-dies-and-why.md).
+why: the subject of [Chapter 49](49-who-dies-and-why.md).
 
 <!-- turns -->
 ---
 
-← [Chapter 49 · How to tell a world that keeps evolving](49-how-to-tell-a-world-that-keeps-evolving.md) · [Contents](../README.md) · [Chapter 51 · A world that cannot break](51-a-world-that-cannot-break.md) →
+← [Chapter 46 · How to tell a world that keeps evolving](46-how-to-tell-a-world-that-keeps-evolving.md) · [Contents](../README.md) · [Chapter 48 · A world that cannot break](48-a-world-that-cannot-break.md) →
 <!-- /turns -->

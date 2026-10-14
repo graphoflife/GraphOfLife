@@ -184,7 +184,7 @@ down at the top. Whether this is what makes the tail is still a hypothesis:
 an experiment that joined children to random agents instead would test it.
 
 > [!info] Added later: preferential attachment, capped
-> [Chapter 51](51-a-world-that-cannot-break.md) meets the same mechanism when
+> [Chapter 48](48-a-world-that-cannot-break.md) meets the same mechanism when
 > brains can see: whatever a brain favours, the well connected are offered as
 > candidates more often, and in pilots in which the brains chose a newborn's
 > links the best-connected agent was joined to 30% of the world. The second

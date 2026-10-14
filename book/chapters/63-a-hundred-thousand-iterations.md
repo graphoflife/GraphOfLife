@@ -64,7 +64,7 @@ And two things say that nothing will change.
   climb.
 
 > [!info] Added later: what Part V found
-> [Chapter 49](49-how-to-tell-a-world-that-keeps-evolving.md), written after
+> [Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md), written after
 > this chapter, plays the brains of different moments of one world against
 > each other. In ten worlds of B1 at 5,000 tokens, nothing is learned after
 > the first 50 to 100 iterations: every later era ties with the one before
@@ -74,7 +74,7 @@ And two things say that nothing will change.
 > 100,000 tokens, now gives the rise of the gain as 2.4 times in 1,500
 > iterations — to the 0.0015 that the worlds of 10,000 tokens reached in
 > 3,000. And Part V has made a second baseline, B2
-> ([Chapter 51](51-a-world-that-cannot-break.md)), whose brains see: if this
+> ([Chapter 48](48-a-world-that-cannot-break.md)), whose brains see: if this
 > run is made, it would now be planned on B2.
 
 ## How much evolution is a hundred thousand iterations?
@@ -85,14 +85,14 @@ tried in every iteration, and over 100,000 iterations some 500 million. In
 the worlds of 10,000 tokens one branch of the family tree replaced all
 others about every 350 iterations
 ([Chapter 18](18-genotypes-and-lineages.md)); a world twenty times larger
-is slower, by a factor that [Chapter 55](55-worlds-of-100000-tokens.md) is
+is slower, by a factor that [Chapter 54](54-worlds-of-100000-tokens.md) is
 to measure. Even if it took ten times as long, one line would take the
 world over again and again, dozens of times. Whatever is one change away
 from what the brains do now would be found. What needs a rule changed
 would not.
 
 > [!info] Added later: the factor, measured
-> [Chapter 55](55-worlds-of-100000-tokens.md) has measured it: the time a
+> [Chapter 54](54-worlds-of-100000-tokens.md) has measured it: the time a
 > world needs to come down to a single founder's line grows as the tokens to
 > the power 0.77. If that holds to 204,800 tokens, a world of that size needs
 > about ten times as long as one of 10,000 — as much as this paragraph
@@ -148,7 +148,7 @@ something new is what this experiment is for. It is flagged instead.
 
 | the sentinel flags | when |
 |---|---|
-| **outside the known** | a statistic per agent or a share lies outside the band of the thirty worlds of [Chapter 55](55-worlds-of-100000-tokens.md), for three blocks in a row |
+| **outside the known** | a statistic per agent or a share lies outside the band of the thirty worlds of [Chapter 54](54-worlds-of-100000-tokens.md), for three blocks in a row |
 | **a new level** | a statistic's block mean lies beyond the range of all its earlier blocks by more than half that range, for five blocks in a row |
 | **cooperation** | the kin ratio or the share of lasting partners leaves the baseline worlds' range, in a window (below) |
 | **brains that see** | the median gain at a kept checkpoint passes 0.005 |
@@ -205,7 +205,7 @@ frame that was not kept is a frame that has not been made again yet.
   and how much.
 - **Everything of [Chapter 9](09-thirty-worlds.md)**, as block means over
   the whole run, set beside the bands of the baseline worlds and of the
-  worlds of Chapter 55.
+  worlds of Chapter 54.
 - **Later, from the kept checkpoints:** the tournament across time of
   [Meta II](40-meta-2.md) — the brains of iteration 10,000 against those of
   iteration 90,000, in one world. A later population that beats an earlier
@@ -218,7 +218,7 @@ iterations on one worker. It keeps about 20 GB, where every frame would
 have needed over 200. The thesis can be decided from iteration 52,000,
 about two weeks in, and the run can be stopped after any block.
 
-The run should start once [Chapter 55](55-worlds-of-100000-tokens.md) is
+The run should start once [Chapter 54](54-worlds-of-100000-tokens.md) is
 analysed, because the sentinel's bands of the known come from its thirty
 worlds.
 
@@ -255,10 +255,10 @@ windows of cooperation and the gains, and decides the thesis.
 > the network, every token and every brain, as a checkpoint holds them — at
 > fixed iterations, which is most of the third item; and the tournament
 > across time that the kept checkpoints were to serve is the yardstick of
-> [Chapter 49](49-how-to-tell-a-world-that-keeps-evolving.md)
-> (`gol_tournament.py`). [Chapter 55](55-worlds-of-100000-tokens.md) is
+> [Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md)
+> (`gol_tournament.py`). [Chapter 54](54-worlds-of-100000-tokens.md) is
 > analysed, so the sentinel's bands of the known exist. And the costs above
-> may be too low: the same cost model gave the worlds of Chapter 55 12
+> may be too low: the same cost model gave the worlds of Chapter 54 12
 > seconds an iteration, and they took 17. They are also B1's costs; a run on
 > B2, whose brains are smaller, would have to be costed again.
 
@@ -269,5 +269,5 @@ windows of cooperation and the gains, and decides the thesis.
 <!-- turns -->
 ---
 
-← [Chapter 55 · Worlds of 100,000 tokens](55-worlds-of-100000-tokens.md) · [Contents](../README.md) · [Appendix A · What a simulation costs](A-costs.md) →
+← [Chapter 54 · Worlds of 100,000 tokens](54-worlds-of-100000-tokens.md) · [Contents](../README.md) · [Appendix A · What a simulation costs](A-costs.md) →
 <!-- /turns -->

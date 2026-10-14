@@ -312,7 +312,7 @@ Every how many iterations a run keeps a whole world — its network, tokens,
 ages and every brain — in `archive/` beside its frames; 0 keeps none. The
 rolling checkpoint is overwritten and is for resuming; these are kept, for
 anything that needs the brains of more than one moment, above all the
-cross-time tournament of [Chapter 49](../chapters/49-how-to-tell-a-world-that-keeps-evolving.md).
+cross-time tournament of [Chapter 46](../chapters/46-how-to-tell-a-world-that-keeps-evolving.md).
 A plan asks for it in its `record` block.
 
 <!-- turns -->

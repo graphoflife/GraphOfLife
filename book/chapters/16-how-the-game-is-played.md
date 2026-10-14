@@ -288,7 +288,7 @@ game in much the same way, whatever its founders started with.
 > [Chapter 19](19-what-the-brains-are-like.md) finds selection behind these
 > shares: it set the brains' constants — few children, the stake spread,
 > every token revolutionary — alike in every world.
-> [Chapter 49](49-how-to-tell-a-world-that-keeps-evolving.md) plays the
+> [Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md) plays the
 > brains of each era against their founders' in ten worlds of 5,000 tokens:
 > by iteration 50 they hold nine tenths of a contested world, and no later
 > era does better than the one before it.

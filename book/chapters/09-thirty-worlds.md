@@ -9,7 +9,7 @@ Part III up to [Chapter 40](40-meta-2.md), reads these same thirty runs.
 > Parts II and III were first written from thirty worlds of 10,000 tokens,
 > about 1,300 agents each (Experiment 2). They are written here from thirty
 > worlds of 100,000 tokens, about 14,000 agents each (Experiment 10,
-> [Chapter 55](55-worlds-of-100000-tokens.md)): worlds big enough for space, for
+> [Chapter 54](54-worlds-of-100000-tokens.md)): worlds big enough for space, for
 > scale and for rare events to show. Where the two sizes differ, the chapters
 > give both. The worlds of 10,000 tokens remain the ones Part I teaches with and
 > the baseline the experiments of Part IV compare against.

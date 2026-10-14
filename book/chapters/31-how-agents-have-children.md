@@ -232,11 +232,11 @@ without births could only lose connections, never gain one.
 > to five agents in a hundred to the cull in every iteration and live only
 > while their births keep up; brains that see can give up having children,
 > and then their worlds die out
-> ([Chapter 50](50-brains-that-see-and-worlds-that-break.md)). And since a
+> ([Chapter 47](47-brains-that-see-and-worlds-that-break.md)). And since a
 > newborn is joined only to agents at most two steps apart, a birth closes
 > only small loops: a network grown by births alone is, at large scale, a
 > tree of dense blobs joined by necks that one death can cut
-> ([Chapter 51](51-a-world-that-cannot-break.md)).
+> ([Chapter 48](48-a-world-that-cannot-break.md)).
 
 ## What this means
 

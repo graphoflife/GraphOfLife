@@ -166,7 +166,7 @@ Each line is one world. It starts by rising with the age of the world: the
 living still descend from more than one founder. The first drop is the
 moment everyone alive descends from one founder — in the median world at
 iteration 1,000 among the 27 that got there, and never in three
-([Chapter 55](55-worlds-of-100000-tokens.md) counts it, and finds it 5.9
+([Chapter 54](54-worlds-of-100000-tokens.md) counts it, and finds it 5.9
 times as late as in the worlds of 10,000 tokens). After that the line rises
 steadily, one iteration per iteration, while the common ancestor stays the
 same and grows older, and drops whenever one branch of the family tree has
@@ -354,13 +354,13 @@ a single founder by iteration 1,500 — but slowly, about once a run.
 > [!info] Added later: no better brains
 > None of the worlds of Chapter 41 is born and dies as the baseline does, so
 > they could not settle the question.
-> [Chapter 49](49-how-to-tell-a-world-that-keeps-evolving.md) asked the
+> [Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md) asked the
 > brains themselves, playing the brains of different eras of ten worlds of
 > 5,000 tokens against each other: the brains of iteration 50 already beat
 > their founders' (+361 Elo), and every later era ties with the one before
 > it (iteration 1,000 against 300: 0.483). The lines that take a settled
 > world over do not carry brains that play better.
-> [Chapter 55](55-worlds-of-100000-tokens.md) times the takeovers in worlds of
+> [Chapter 54](54-worlds-of-100000-tokens.md) times the takeovers in worlds of
 > two sizes: the time to a single founder grows as the tokens to the power
 > 0.77 — between what a front (0.30) and chance (1) would give — and a line
 > spreads through a world as a random walk does.

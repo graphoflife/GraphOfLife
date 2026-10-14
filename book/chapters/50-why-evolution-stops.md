@@ -13,15 +13,15 @@
 ## Why ask
 
 The baseline learns what it learns in its first fifty to a hundred iterations
-and then stops ([Chapter 49](49-how-to-tell-a-world-that-keeps-evolving.md)).
+and then stops ([Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md)).
 Its brains are nearly blind, so that was no surprise: evolution could only set
-a few constants. Chapters 50 to 52 then built a world in which brains can see
+a few constants. Chapters 47 to 49 then built a world in which brains can see
 without the world breaking — B2. The question now is the one Part V exists
 for: in such a world, does evolution keep going?
 
 ## What the pilots tried
 
-Every pilot below played its eras against each other as in Chapter 49 — the
+Every pilot below played its eras against each other as in Chapter 46 — the
 brains of iterations 0, 100, 200, 500 and 1,000, two contests per pair — and
 reports the rating of each era against the founders and the **step score**,
 each era against the one before it. A world still improving keeps its step
@@ -51,7 +51,7 @@ Two more things were measured along the way.
 **Brains that can grow did not grow for a reason.** A growable brain gains or
 loses a hidden unit by mutation, and carries a *shadow* — a size that is
 inherited and mutated exactly like the real one but used by nothing
-([Chapter 49](49-how-to-tell-a-world-that-keeps-evolving.md#numbers-that-rise-and-mean-nothing)).
+([Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md#numbers-that-rise-and-mean-nothing)).
 In four worlds without handover, the real size followed its shadow: what
 rose, rose because a size cannot fall below its floor — the left wall — not
 because larger brains won.
@@ -142,6 +142,8 @@ the same without random inputs. Its tournaments play the eras 0, 100, 200,
 > **It fails if:** Above 0.55 in either condition's median world: evolution in that world does not stop by iteration 500.
 <!-- /thesis -->
 
+("Chapter 49" in the thesis is today's [Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md): the chapters were renumbered on 2026-10-14.)
+
 ## The runs
 
 <!-- runs E16 -->
@@ -201,5 +203,5 @@ the same without random inputs. Its tournaments play the eras 0, 100, 200,
 <!-- turns -->
 ---
 
-← [Chapter 52 · Who dies, and why](52-who-dies-and-why.md) · [Contents](../README.md) · [Chapter 55 · Worlds of 100,000 tokens](55-worlds-of-100000-tokens.md) →
+← [Chapter 49 · Who dies, and why](49-who-dies-and-why.md) · [Contents](../README.md) · [Chapter 51 · How fast should brains change?](51-how-fast-should-brains-change.md) →
 <!-- /turns -->

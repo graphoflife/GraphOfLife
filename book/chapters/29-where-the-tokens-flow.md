@@ -381,12 +381,12 @@ circulate.
 
 > [!info] Added later: brains that see
 > The even split is what blind brains do.
-> [Chapter 50](50-brains-that-see-and-worlds-that-break.md) gives the brains
+> [Chapter 47](47-brains-that-see-and-worlds-that-break.md) gives the brains
 > one hidden layer instead of five, so that a change in what an agent sees
 > reaches what it stakes (a founder's gain about 0.2 instead of 0.0006). Such
 > brains stake on one neighbour or two, their unused connections lapse, and
-> their worlds need the rules of [Chapter 51](51-a-world-that-cannot-break.md)
-> and [Chapter 52](52-who-dies-and-why.md) to hold together.
+> their worlds need the rules of [Chapter 48](48-a-world-that-cannot-break.md)
+> and [Chapter 49](49-who-dies-and-why.md) to hold together.
 
 To make every figure of this chapter: `python3 book_figures.py flow`.
 

@@ -87,7 +87,7 @@ of 10,000 tokens descends from one branch of the family tree about every 350
 iterations, a world of 100,000 about once in a run
 ([Chapter 18](18-genotypes-and-lineages.md)); families occupy regions that
 widen as their line ages, about as a random walk spreads
-([Chapter 37](37-one-world-many-colours.md), [Chapter 55](55-worlds-of-100000-tokens.md));
+([Chapter 37](37-one-world-many-colours.md), [Chapter 54](54-worlds-of-100000-tokens.md));
 and worlds whose brains never change end up in very different places, while
 worlds that evolve all end up alike ([Chapter 41](41-do-the-brains-matter.md)). But heredity is weak. A brain
 is changed with probability 0.2 after every game whether or not it is copied,
@@ -103,14 +103,14 @@ bring back the brains of iteration 500 and set them against those of iteration
 answer it.
 
 > [!info] Added later: asked, and answered for the baseline
-> [Chapter 49](49-how-to-tell-a-world-that-keeps-evolving.md) ran this
+> [Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md) ran this
 > tournament on ten worlds of 5,000 tokens (Experiment 12). By iteration 50
 > every world's brains beat their founders — +361 Elo in the median world,
 > +400 by iteration 100 — and then nothing more: the brains of iteration
 > 1,000 held 0.483 of a world contested with those of iteration 300, every
 > era tied with the one before it (0.47 to 0.52), and a dominance tournament
 > crowned no more champions than chance. Adaptation accumulates for fifty to
-> a hundred iterations and stops. [Chapter 53](53-why-evolution-stops.md)
+> a hundred iterations and stops. [Chapter 50](50-why-evolution-stops.md)
 > finds the same plateau in every pilot of Part V.
 
 **P3, organisations: not found.** The candidates exist — family regions, hubs
@@ -156,19 +156,19 @@ examined in [Chapter 39](39-questioning-the-mechanics.md).
 
 > [!info] Added later: what Part V did about the six
 > 1. Brains change only when copied in B2
->    ([Chapter 50](50-brains-that-see-and-worlds-that-break.md),
->    [Chapter 51](51-a-world-that-cannot-break.md)).
+>    ([Chapter 47](47-brains-that-see-and-worlds-that-break.md),
+>    [Chapter 48](48-a-world-that-cannot-break.md)).
 > 2. Conquest still erases.
-> 3. A home stake counts 1.5 times ([Chapter 52](52-who-dies-and-why.md));
+> 3. A home stake counts 1.5 times ([Chapter 49](49-who-dies-and-why.md));
 >    how long partners last has not been measured again.
 > 4. A yield on stakes returned, and support stakes, were tried and gave
->    nothing that lasted ([Chapter 53](53-why-evolution-stops.md)).
+>    nothing that lasted ([Chapter 50](50-why-evolution-stops.md)).
 > 5. Brains that see could tell kin by the names in their messages
 >    ([Chapter 20](20-what-agents-say-to-each-other.md),
->    [Chapter 50](50-brains-that-see-and-worlds-that-break.md)); whether they
+>    [Chapter 47](47-brains-that-see-and-worlds-that-break.md)); whether they
 >    do has not been measured.
 > 6. Worlds now cannot split
->    ([Chapter 51](51-a-world-that-cannot-break.md)), rather than living on
+>    ([Chapter 48](48-a-world-that-cannot-break.md)), rather than living on
 >    apart; long-range links were not adopted.
 
 > [!info] Added later: a seventh obstacle, and the first
@@ -186,10 +186,10 @@ examined in [Chapter 39](39-questioning-the-mechanics.md).
 > could tell each other by it, if a brain could compare what it reads. The
 > remedy is in the architecture — fewer layers, a steeper squashing, larger
 > starting weights ([How a signal fades through layers](../notes/vanishing-signal.md)).
-> [Chapter 50](50-brains-that-see-and-worlds-that-break.md) tried fewer
+> [Chapter 47](47-brains-that-see-and-worlds-that-break.md) tried fewer
 > layers, as the first step of Part V: one hidden layer of 16 gives a
 > founder a gain of 0.2 — and four of ten such worlds of 5,000 tokens died
-> out. Chapter 47, *How big should a brain be?*, is still to come.
+> out. Chapter 52, *How big should a brain be?*, is still to come.
 
 ## What we propose to change
 
@@ -204,21 +204,21 @@ interesting they are.
 - **Mutation at replication, and nowhere else** (§4.1 of the plan). A brain
   changes only when it is copied — into a child or into a won node. A brain
   that is not copied stays itself. It is tried in
-  [Chapter 50](50-brains-that-see-and-worlds-that-break.md); its measure was
+  [Chapter 47](47-brains-that-see-and-worlds-that-break.md); its measure was
   to be how long a lineage stays like its ancestor, and whether selection
   then separates good brains from bad.
 - **A germline** (§4.2), if that is not enough: every agent carries an
   unchanged copy of the brain it was born with, and passes that on.
 
 > [!info] Added later: mutation at replication, tried
-> [Chapter 50](50-brains-that-see-and-worlds-that-break.md) tried it with
+> [Chapter 47](47-brains-that-see-and-worlds-that-break.md) tried it with
 > brains that see (Experiment 13, ten worlds of 5,000 tokens): with one
 > hidden layer of 16, four worlds died out; with change only when copied as
 > well, eight did. A stricter variant, which changed a brain only when it was
 > copied into a newborn, froze a pilot world into one genotype with no births
 > at all. B2 keeps the rule, inside rules that stop worlds breaking and
-> starving ([Chapter 51](51-a-world-that-cannot-break.md),
-> [Chapter 52](52-who-dies-and-why.md)). How long a lineage now stays like
+> starving ([Chapter 48](48-a-world-that-cannot-break.md),
+> [Chapter 49](49-who-dies-and-why.md)). How long a lineage now stays like
 > its ancestor has not been measured. A germline has not been tried.
 
 ### Second: let individuals last
@@ -237,10 +237,10 @@ interesting they are.
 > spread — but one agent gathered 57% of all the tokens, staked them all at
 > home where nobody could outbid them, and had child after child: a queen.
 > B2 uses 1.5, with a share of every agent's tokens kept at home, and in the
-> pilots no queen formed ([Chapter 52](52-who-dies-and-why.md)). How long
+> pilots no queen formed ([Chapter 49](49-who-dies-and-why.md)). How long
 > brains hold their nodes, and how long partners last, has not been
 > measured; under B2's cap on links no agent is joined to more than a few per
-> cent of the others ([Chapter 51](51-a-world-that-cannot-break.md)).
+> cent of the others ([Chapter 48](48-a-world-that-cannot-break.md)).
 > Recombination at conquest has not been tried.
 
 ### Third: let cooperation pay, and let kin find each other
@@ -258,7 +258,7 @@ interesting they are.
 
 > [!info] Added later: a yield, tried
 > A yield on stakes returned, paid for by a small tax on holdings, was tried
-> in the pilots of Part V ([Chapter 53](53-why-evolution-stops.md)). It went
+> in the pilots of Part V ([Chapter 50](50-why-evolution-stops.md)). It went
 > to whoever had the most partners and built stars rather than partnerships,
 > and evolution stopped as in every other pilot: cooperation needs a surplus
 > that pairs, not hubs, can earn. Heritable tags have not been built; the
@@ -282,12 +282,12 @@ interesting they are.
 > In the pilots of Part V an agent could pay tokens for a short walk through
 > the network and join an agent it met, if both agreed: few links were made,
 > one to ten an iteration, and little changed. Part V keeps every rule local
-> ([Chapter 49](49-how-to-tell-a-world-that-keeps-evolving.md),
+> ([Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md),
 > [Chapter 7](07-physical-inspiration.md)), so no child is joined to an agent
 > anywhere; and it took the other road from letting pieces live —
-> [Chapter 51](51-a-world-that-cannot-break.md) adds local rules under which
+> [Chapter 48](48-a-world-that-cannot-break.md) adds local rules under which
 > worlds cannot split at all. A piece that lives on as a world of its own is
-> planned for Chapter 58, *Local rules only*. Several kinds of tokens have
+> planned for Chapter 57, *Local rules only*. Several kinds of tokens have
 > not been tried.
 
 ### Later: let the possible grow
@@ -300,7 +300,7 @@ only once the earlier steps hold.
 > [!info] Added later: brains that can grow, tried
 > In the pilots of Part V a brain could gain or lose hidden units by
 > mutation, beside a "shadow" size that nothing reads
-> ([Chapter 53](53-why-evolution-stops.md)). Without handover the real size
+> ([Chapter 50](50-why-evolution-stops.md)). Without handover the real size
 > followed its shadow — the left wall, not selection — and evolution stopped
 > as in every other pilot. §4.7 to §4.9 have not been tried.
 
@@ -312,7 +312,7 @@ whole-agent decisions, and the option to hold tokens back from the game.
 > Only something like the last has been tried:
 > [`keep_home`](../notes/settings.md#keep_home) keeps a share of every
 > agent's tokens on its own node, so that no agent can stake itself to death
-> ([Chapter 52](52-who-dies-and-why.md)) — held at home, not out of the game.
+> ([Chapter 49](49-who-dies-and-why.md)) — held at home, not out of the game.
 > The share function and the averaging of whole-agent decisions are
 > unchanged.
 
@@ -349,9 +349,9 @@ measures, by rung of the ladder:
 > [!info] Added later: what has been used
 > The cross-time tournament is built and is Part V's yardstick, with a
 > dominance tournament held against its chance null
-> ([Chapter 49](49-how-to-tell-a-world-that-keeps-evolving.md)); a neutral
+> ([Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md)); a neutral
 > shadow judged brains that can grow
-> ([Chapter 53](53-why-evolution-stops.md)). The heredity half-life,
+> ([Chapter 50](50-why-evolution-stops.md)). The heredity half-life,
 > selection ablation, the cooperation measures of Chapter 38, flow modules
 > and evolutionary activity have not yet been used in the book.
 
@@ -380,7 +380,7 @@ Some questions need no new runs, only new looks at the old ones:
   for hundreds of iterations, while its nodes turn over, would be a first
   candidate for P3 — measurable now, against a null that shuffles lineages.
   [Chapter 23](23-like-next-to-like.md) found genotypes clustered within two
-  or three steps and no territories; [Chapter 55](55-worlds-of-100000-tokens.md)
+  or three steps and no territories; [Chapter 54](54-worlds-of-100000-tokens.md)
   found lines, which last longer, in patches that widen from 7 steps to 12 as
   they age. Whether a patch is ever more than the sum of its agents is the
   next question.
@@ -402,9 +402,9 @@ Some questions need no new runs, only new looks at the old ones:
   one that is finished early, not one that accumulates.
 
 > [!info] Added later: the adaptation, dated
-> [Chapter 49](49-how-to-tell-a-world-that-keeps-evolving.md) dates it: the
+> [Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md) dates it: the
 > baseline's brains beat their founders by iteration 50 and improve no
-> further. [Chapter 50](50-brains-that-see-and-worlds-that-break.md)'s births
+> further. [Chapter 47](47-brains-that-see-and-worlds-that-break.md)'s births
 > probe puts the change in the brains: put back into their founders' world,
 > the founders' own brains have a child in about three agent-iterations in
 > four, the baseline's later brains in 3 to 9 in a hundred.
@@ -415,7 +415,7 @@ Redoing Parts II and III on worlds ten times larger left most of them as
 they were, and that is itself a finding: per agent, a world of 100,000
 tokens does what a world of 10,000 does — the same births and deaths within
 a tenth, the same inequality, the same game, the same brains
-([Chapter 55](55-worlds-of-100000-tokens.md)). What changed is how the agents
+([Chapter 54](54-worlds-of-100000-tokens.md)). What changed is how the agents
 are arranged and how fast anything crosses a world:
 
 - **The shape changes.** Half the clustering, more loops per agent, fewer
@@ -428,7 +428,7 @@ are arranged and how fast anything crosses a world:
 - **Lines take longer.** A takeover by one founder's line takes six times as
   long in a world ten times larger, so lines live side by side for most of a
   run, and the messages of a world speak more dialects
-  ([Chapter 20](20-what-agents-say-to-each-other.md), [Chapter 55](55-worlds-of-100000-tokens.md)).
+  ([Chapter 20](20-what-agents-say-to-each-other.md), [Chapter 54](54-worlds-of-100000-tokens.md)).
 - **Demography settles.** Ages, lifetimes and births per agent hold still from
   iteration 500 on, as a stationary population's do
   ([Chapter 13](13-how-ages-change.md)).
@@ -454,16 +454,16 @@ and Meta IV, to say what moved.
 
 > [!info] Added later: the road Part V took
 > Part V did not keep this order. It built its yardstick first
-> ([Chapter 49](49-how-to-tell-a-world-that-keeps-evolving.md)), then gave
+> ([Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md)), then gave
 > the brains sight, with change only when copied
-> ([Chapter 50](50-brains-that-see-and-worlds-that-break.md)) — and the
+> ([Chapter 47](47-brains-that-see-and-worlds-that-break.md)) — and the
 > worlds broke. So it built rules that keep a world whole
-> ([Chapter 51](51-a-world-that-cannot-break.md)) and keep agents from
+> ([Chapter 48](48-a-world-that-cannot-break.md)) and keep agents from
 > staking or breeding themselves to death, with an incumbent's advantage of
-> 1.5 ([Chapter 52](52-who-dies-and-why.md)), all gathered in a second
+> 1.5 ([Chapter 49](49-who-dies-and-why.md)), all gathered in a second
 > baseline, B2. Even then, evolution stopped in every pilot
-> ([Chapter 53](53-why-evolution-stops.md)). Meta III closes Part IV; what
-> Part V moved is for Meta IV, Chapter 54.
+> ([Chapter 50](50-why-evolution-stops.md)). Meta III closes Part IV; what
+> Part V moved is for Meta IV, Chapter 53.
 
 It is a long way. But Part III has made it shorter in one important sense: it
 has turned a vague hope — that interesting things might emerge if we watch long

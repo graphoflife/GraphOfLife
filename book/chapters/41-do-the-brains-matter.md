@@ -123,7 +123,7 @@ worlds themselves** — first as it is overall, then given the agent's own
 tokens and connections. Agents that decide like that behave, on average,
 exactly like evolved ones, but respond to nothing. If such a world looks like
 the baseline, what the brains contribute is their average; if it does not,
-what they respond to matters. It is planned as Chapter 44.
+what they respond to matters. It is planned as Chapter 43.
 
 ## Without change: frozen or teeming
 
@@ -260,7 +260,7 @@ baseline's ([Between and within](../notes/between-and-within.md)).
 In a world whose brains never change, the founders' lines still compete
 until one of them fills the world — between iterations 75 and 100 in the
 median world (175 in the baseline, as
-[Chapter 55](55-worlds-of-100000-tokens.md) counts it over all thirty
+[Chapter 54](54-worlds-of-100000-tokens.md) counts it over all thirty
 worlds; 125 among the 26 that lived to the end). From then on every agent
 carries the same brain, and which genotype spreads is pure chance.
 
@@ -341,7 +341,7 @@ change (it asked for more than half).
 - **The wander needs evolution.** A world without change hardly wanders at
   all. But it is not the sweeps that drive the wander:
   [Chapter 26](26-meta-1.md) finds, from the large worlds of
-  [Chapter 55](55-worlds-of-100000-tokens.md), that a world forgets its
+  [Chapter 54](54-worlds-of-100000-tokens.md), that a world forgets its
   level within three hundred iterations, while a line needs about a
   thousand to take a world over.
 

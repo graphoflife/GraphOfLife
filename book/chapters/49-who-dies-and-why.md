@@ -11,9 +11,9 @@
 
 ## Why ask
 
-[Chapter 50](50-brains-that-see-and-worlds-that-break.md) found that a world
+[Chapter 47](47-brains-that-see-and-worlds-that-break.md) found that a world
 lives as long as its births replace its deaths, and that most of its deaths
-were agents cut off by the cull. [Chapter 51](51-a-world-that-cannot-break.md)
+were agents cut off by the cull. [Chapter 48](48-a-world-that-cannot-break.md)
 built rules under which nobody is cut off. What is left is the other way to
 die — starving, by staking one's last token away — and a question the
 baseline never had to ask: which deaths does a world *need*?
@@ -40,7 +40,7 @@ agents bodies and brains what moves between them).
 
 ## Children as missiles
 
-The first pilots of Chapter 51's rules joined every newborn to its parent and
+The first pilots of Chapter 48's rules joined every newborn to its parent and
 two of its neighbours and mended every death. The worlds never split — and
 still shrank, with 30 to 60% of their agents starving in a single game. The
 starving were children: 46% of them were born that very iteration, 83% at
@@ -114,7 +114,7 @@ between a few and about ten per cent of the nodes a game.
 
 ## Old age
 
-With a share kept at home and the rules of Chapter 51, nothing kills an agent
+With a share kept at home and the rules of Chapter 48, nothing kills an agent
 any more: it cannot starve, it cannot be cut off, and winning its node changes
 only its brain. An agent that cannot die holds its place forever — and in a
 world of fixed tokens, a world without deaths has no room for births.
@@ -129,7 +129,7 @@ to 1.05 per hundred agents and iteration, while not one agent starved or was
 cut off. The population, 800 to 1,800 agents at 5,000 tokens, settles where
 enough agents are rich enough to give a child ten tokens.
 
-Old age also answers what [Chapter 50](50-brains-that-see-and-worlds-that-break.md)
+Old age also answers what [Chapter 47](47-brains-that-see-and-worlds-that-break.md)
 left open: there, seeing brains could give up having children, and a world
 whose births fell short of its losses drained slowly. Under old age a line
 that stops having children loses a body every time one of its agents turns
@@ -227,5 +227,5 @@ nothing kept, half kept, children of any size, and no old age.
 <!-- turns -->
 ---
 
-← [Chapter 51 · A world that cannot break](51-a-world-that-cannot-break.md) · [Contents](../README.md) · [Chapter 53 · Why evolution stops](53-why-evolution-stops.md) →
+← [Chapter 48 · A world that cannot break](48-a-world-that-cannot-break.md) · [Contents](../README.md) · [Chapter 50 · Why evolution stops](50-why-evolution-stops.md) →
 <!-- /turns -->

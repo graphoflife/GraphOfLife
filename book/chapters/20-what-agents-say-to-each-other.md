@@ -152,7 +152,7 @@ and the messages of one line differ only where the line's changes moved
 them. So a world speaks a few dialects, each spoken by a line. The worlds of
 10,000 tokens used fewer directions, 8.8 in the median world: in a world ten
 times larger more lines live side by side, for longer
-([Chapter 55](55-worlds-of-100000-tokens.md)), and so do more dialects.
+([Chapter 54](54-worlds-of-100000-tokens.md)), and so do more dialects.
 
 **Nearly nothing about the world.** A straight-line fit of the messages on
 what a message could be about — the writer's and the reader's tokens and
@@ -213,7 +213,7 @@ already here: messages are heritable tags. A brain that can see is what
 it needs.
 
 > [!info] Added later: brains that see, and kin
-> [Chapter 50](50-brains-that-see-and-worlds-that-break.md) gave the brains
+> [Chapter 47](47-brains-that-see-and-worlds-that-break.md) gave the brains
 > sight: one hidden layer of 16, a founder's gain of about 0.2. Whether
 > seeing brains use the names to tell kin from strangers has not been
 > measured yet. In the pilots of Part V, groups of kin shrank over time in

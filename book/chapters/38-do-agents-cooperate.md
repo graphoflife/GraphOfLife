@@ -320,7 +320,7 @@ every run already writes:
 > [!info] Added later: not yet used
 > None of the six has been computed since. Part V judged progress by playing
 > a world's eras against each other instead
-> ([Chapter 49](49-how-to-tell-a-world-that-keeps-evolving.md)). In the
+> ([Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md)). In the
 > pilots of Part V, connected groups of one genotype and of close kin shrank
 > over time in every world.
 
@@ -342,14 +342,14 @@ every run already writes:
 
 > [!info] Added later: what Part V tried
 > Part V has given an incumbent an advantage, so that a brain keeps its node
-> longer ([Chapter 52](52-who-dies-and-why.md)), and given agents brains that
+> longer ([Chapter 49](49-who-dies-and-why.md)), and given agents brains that
 > see, which could read the names of their kin
-> ([Chapter 50](50-brains-that-see-and-worlds-that-break.md)). A memory of
+> ([Chapter 47](47-brains-that-see-and-worlds-that-break.md)). A memory of
 > what each neighbour staked in the last game was tried too: it changed 11 to
 > 24% of decisions, and evolution stopped all the same. Two attempts to make
 > helping pay failed: stakes that support a neighbour's defence were given up
 > by evolution, and a yield on stakes returned built stars rather than
-> partnerships ([Chapter 53](53-why-evolution-stops.md)). Alliances by mutual
+> partnerships ([Chapter 50](50-why-evolution-stops.md)). Alliances by mutual
 > consent — a way to commit to a partner — are still to be tested.
 
 To make every figure of this chapter: `python3 book_figures.py cooperation`.

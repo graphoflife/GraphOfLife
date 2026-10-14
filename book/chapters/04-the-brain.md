@@ -194,7 +194,7 @@ in Part IV, tests it against worlds whose brains never change.
 > world — but only as constants. The brains are nearly blind: their outputs
 > move by about a thousandth of a change in what they see, so they decide
 > almost the same whatever their situation.
-> [Chapter 49](49-how-to-tell-a-world-that-keeps-evolving.md) played evolved
+> [Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md) played evolved
 > brains against their founders: by iteration 50 they hold about nine tenths
 > of a world contested with the founders, and after iteration 100 they gain
 > nothing more.

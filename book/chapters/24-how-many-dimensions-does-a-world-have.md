@@ -311,7 +311,7 @@ balls and 1.6 to 1.9 by walks throughout.)
   solid. In our space, both rulers read 3 at every scale we can measure. The
   question for Part VI is what rule would make the rulers agree: rules that
   close loops at long range, or that let dead ends wither, or that give
-  every place the same number of neighbours. Chapter 56 (planned, see
+  every place the same number of neighbours. Chapter 55 (planned, see
   [the contents](../README.md)) is to follow the dimension to still larger
   worlds, and ask whether it depends on the scale, as it does in the causal
   dynamical triangulations of quantum gravity (Ambjørn, Jurkiewicz and Loll
@@ -323,7 +323,7 @@ balls and 1.6 to 1.9 by walks throughout.)
   does: likeness dies within three steps.
 
 > [!info] Added later: rules that close loops and leave no dead ends
-> [Chapter 51](51-a-world-that-cannot-break.md) builds rules of this kind, to
+> [Chapter 48](48-a-world-that-cannot-break.md) builds rules of this kind, to
 > keep a world from breaking: a newborn joined to two of its parent's
 > neighbours, a dead agent's neighbours joined in a ring, unused links lapsing
 > only where their ends share two neighbours, and at most 8 links a brain may
@@ -334,7 +334,7 @@ balls and 1.6 to 1.9 by walks throughout.)
 > rises to meet the balls' there has not been measured yet.
 
 > [!info] Added later: lines hold patches
-> [Chapter 55](55-worlds-of-100000-tokens.md) finds that lines of descent do
+> [Chapter 54](54-worlds-of-100000-tokens.md) finds that lines of descent do
 > hold regions: two agents share a family of 25 iterations back more often
 > than chance up to about 7 steps apart, and a family of 200 iterations back
 > up to about 12, the patches widening as a random walk on these worlds

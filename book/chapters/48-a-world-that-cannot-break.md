@@ -13,7 +13,7 @@
 
 ## Why ask
 
-[Chapter 50](50-brains-that-see-and-worlds-that-break.md) gave the brains
+[Chapter 47](47-brains-that-see-and-worlds-that-break.md) gave the brains
 sight, and the worlds broke — not in one great cut, but by bleeding. Every
 world of 5,000 tokens, blind or seeing, lost agents to the cull in every
 iteration — 1.9 in a hundred without sight, 5.3 with it — and a seeing world
@@ -24,7 +24,7 @@ keep breeding is at the mercy of what evolution does to their breeding.
 So before asking evolution to build anything, Part V builds the ground it
 stands on: rules that keep the network whole *however the agents play*. The
 target is the health bar of
-[Chapter 49](49-how-to-tell-a-world-that-keeps-evolving.md#the-network-that-holds-in-numbers):
+[Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md#the-network-that-holds-in-numbers):
 one piece, at least 80% of agents in the 2-core, no agent whose loss cuts off
 more than 2% of the others and no connection whose loss cuts off more than
 1%, no agent joined to more than 5% of the others, 3 to 12 connections per
@@ -51,7 +51,7 @@ each set of rules below was run with ten seeds.
 <!-- figure unbreakable/space -->
 ![What the rules of space make, with no brains](../figures/unbreakable/space.svg)
 
-**What the rules of space make, with no brains.** Each column is one set of rules, each dot one world of about 1,500 agents after 300 iterations, the bar the median of ten. *parent*: a newborn is joined to its parent alone; *+2*: also to two of the parent's neighbours, drawn at random; *chain*: also, when an agent dies, the groups of its former neighbours that are not linked to one another are joined in a chain; *ring*: joined in a ring — B2's rules; *ring, 1* and *ring, 3*: the ring, with one or three of the parent's neighbours instead of two; *join all*: every former neighbour of the dead joined in a chain, linked or not; *ring, ≤ 8*: B2's rules with no agent above 8 links. The dashed lines are the health bar of [Chapter 49](49-how-to-tell-a-world-that-keeps-evolving.md). Cut shares and the best-connected agent's share are drawn on logarithmic axes, a cut of nothing at 0.0001.
+**What the rules of space make, with no brains.** Each column is one set of rules, each dot one world of about 1,500 agents after 300 iterations, the bar the median of ten. *parent*: a newborn is joined to its parent alone; *+2*: also to two of the parent's neighbours, drawn at random; *chain*: also, when an agent dies, the groups of its former neighbours that are not linked to one another are joined in a chain; *ring*: joined in a ring — B2's rules; *ring, 1* and *ring, 3*: the ring, with one or three of the parent's neighbours instead of two; *join all*: every former neighbour of the dead joined in a chain, linked or not; *ring, ≤ 8*: B2's rules with no agent above 8 links. The dashed lines are the health bar of [Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md). Cut shares and the best-connected agent's share are drawn on logarithmic axes, a cut of nothing at 0.0001.
 
 > [!example]- How to make this figure
 > **Runs.** No runs: the worlds are made by the model itself, seeds 1 to 10 for every set of rules.
@@ -209,7 +209,7 @@ cut ([Chapter 3](03-one-iteration.md)). A blind brain spreads its stake over
 everyone and every link carries something; a seeing brain stakes on one
 neighbour or two, and most of its links lapse. Every lapse that leaves a part
 of the world hanging on nothing hands that part to the cull — the steady toll
-that, in [Chapter 50](50-brains-that-see-and-worlds-that-break.md), every world
+that, in [Chapter 47](47-brains-that-see-and-worlds-that-break.md), every world
 of 5,000 tokens paid, blind or seeing. The rule
 [`prune_needs`](../notes/settings.md#prune_needs)
 lets an unused link lapse only if its two ends share at least that many
@@ -240,14 +240,14 @@ its links to its newborn, and a parent that hands over all but one hangs on
 that one. Switched off.
 
 **B2** is the second baseline of Part V: B1 with brains of one hidden layer of
-16 that change only when copied (Chapter 50), shorter messages (8 numbers, no
+16 that change only when copied (Chapter 47), shorter messages (8 numbers, no
 extra look before acting), an agent's stake on its own node counting 1.5
 times ([`incumbency`](../notes/settings.md#incumbency)), the rules of this
 chapter — links at birth 2, mending in a ring, `prune_needs` 2, valence 8, no
-handover — and the rules of [Chapter 52](52-who-dies-and-why.md) on who
+handover — and the rules of [Chapter 49](49-who-dies-and-why.md) on who
 dies: 30% of an agent's tokens kept at home, so that nobody stakes itself to
 death; children of at least 10 tokens; and death at age 100. It keeps change
-only when copied although Chapter 50 found it harmful: it is what heredity
+only when copied although Chapter 47 found it harmful: it is what heredity
 means — a brain that is not copied stays itself — and the harm it did there
 was the drain of worlds whose births fell short of the cull, which B2's other
 rules remove. Every setting is listed in the box under the thesis.
@@ -294,6 +294,8 @@ handover, put one back — to see whether every rule is needed.
 >
 > **It fails if:** A B2 world fails a line of the bar: the rules do not make a network that holds. Or a condition without one of the rules has fewer than five failing worlds: that rule is not needed.
 <!-- /thesis -->
+
+("Chapter 49" in the thesis is today's [Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md): the chapters were renumbered on 2026-10-14.)
 
 ## The runs
 
@@ -358,5 +360,5 @@ handover, put one back — to see whether every rule is needed.
 <!-- turns -->
 ---
 
-← [Chapter 50 · Brains that see, and worlds that break](50-brains-that-see-and-worlds-that-break.md) · [Contents](../README.md) · [Chapter 52 · Who dies, and why](52-who-dies-and-why.md) →
+← [Chapter 47 · Brains that see, and worlds that break](47-brains-that-see-and-worlds-that-break.md) · [Contents](../README.md) · [Chapter 49 · Who dies, and why](49-who-dies-and-why.md) →
 <!-- /turns -->

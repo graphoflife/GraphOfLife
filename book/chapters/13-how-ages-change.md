@@ -433,7 +433,7 @@ the 2.4% of newborns carry, and which brains take over nodes in the games
 last.
 
 > [!info] Added later: the brains settle even earlier
-> [Chapter 49](49-how-to-tell-a-world-that-keeps-evolving.md) played the
+> [Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md) played the
 > brains of different eras of ten worlds of 5,000 tokens against each other.
 > The baseline's brains improve over their first 50 to 100 iterations and
 > not after: from then on every era ties with the one before it. Inside this

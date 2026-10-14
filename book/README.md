@@ -81,37 +81,36 @@ everything can be checked with it.
 
 - [Chapter 41 · Do the brains matter?](chapters/41-do-the-brains-matter.md)
 - [Chapter 42 · How does a world's size follow its tokens?](chapters/42-how-does-a-worlds-size-follow-its-tokens.md)
-- [Chapter 43 · How fast should brains change?](chapters/43-how-fast-should-brains-change.md)
-- Chapter 44 · Brains replaced by their average — *not written yet*
-- Chapter 45 · What keeps wealth spread? — *not written yet*
-- Chapter 46 · Meta III — *not written yet*
-- Chapter 47 · How big should a brain be? — *not written yet*
-- Chapter 48 · Does size change the dynamics? — *not written yet*
+- Chapter 43 · Brains replaced by their average — *not written yet*
+- Chapter 44 · What keeps wealth spread? — *not written yet*
+- Chapter 45 · Meta III — *not written yet*
 
 **Part V · Engineering open-ended evolution**
 
-- [Chapter 49 · How to tell a world that keeps evolving](chapters/49-how-to-tell-a-world-that-keeps-evolving.md)
-- [Chapter 50 · Brains that see, and worlds that break](chapters/50-brains-that-see-and-worlds-that-break.md)
-- [Chapter 51 · A world that cannot break](chapters/51-a-world-that-cannot-break.md)
-- [Chapter 52 · Who dies, and why](chapters/52-who-dies-and-why.md)
-- [Chapter 53 · Why evolution stops](chapters/53-why-evolution-stops.md)
-- Chapter 54 · Meta IV — *not written yet*
+- [Chapter 46 · How to tell a world that keeps evolving](chapters/46-how-to-tell-a-world-that-keeps-evolving.md)
+- [Chapter 47 · Brains that see, and worlds that break](chapters/47-brains-that-see-and-worlds-that-break.md)
+- [Chapter 48 · A world that cannot break](chapters/48-a-world-that-cannot-break.md)
+- [Chapter 49 · Who dies, and why](chapters/49-who-dies-and-why.md)
+- [Chapter 50 · Why evolution stops](chapters/50-why-evolution-stops.md)
+- [Chapter 51 · How fast should brains change?](chapters/51-how-fast-should-brains-change.md)
+- Chapter 52 · How big should a brain be? — *not written yet*
+- Chapter 53 · Meta IV — *not written yet*
 
 **Part VI · Towards a physics: space, scale and locality**
 
-- [Chapter 55 · Worlds of 100,000 tokens](chapters/55-worlds-of-100000-tokens.md)
-- Chapter 56 · Dimensions at scale — *not written yet*
-- Chapter 57 · Which properties have no scale? — *not written yet*
-- Chapter 58 · Local rules only — *not written yet*
-- Chapter 59 · How far does a difference travel? — *not written yet*
-- Chapter 60 · A source and a sink — *not written yet*
-- Chapter 61 · Particles — *not written yet*
-- Chapter 62 · One agent in a sea of average agents — *not written yet*
-- Chapter 63 · Meta V — *not written yet*
+- [Chapter 54 · Worlds of 100,000 tokens](chapters/54-worlds-of-100000-tokens.md)
+- Chapter 55 · Dimensions at scale — *not written yet*
+- Chapter 56 · Which properties have no scale? — *not written yet*
+- Chapter 57 · Local rules only — *not written yet*
+- Chapter 58 · How far does a difference travel? — *not written yet*
+- Chapter 59 · A source and a sink — *not written yet*
+- Chapter 60 · Particles — *not written yet*
+- Chapter 61 · One agent in a sea of average agents — *not written yet*
+- Chapter 62 · Meta V — *not written yet*
 
 **Part VII · The long run**
 
-- [Chapter 64 · A hundred thousand iterations](chapters/64-a-hundred-thousand-iterations.md)
+- [Chapter 63 · A hundred thousand iterations](chapters/63-a-hundred-thousand-iterations.md)
 
 **Notes · the rules**
 

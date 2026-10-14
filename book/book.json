@@ -257,35 +257,18 @@
         },
         {
           "id": "43",
-          "title": "How fast should brains change?",
-          "file": "chapters/43-how-fast-should-brains-change.md",
-          "experiment": "E09",
-          "status": "ready"
-        },
-        {
-          "id": "44",
           "title": "Brains replaced by their average",
           "note": "A better control than decisions by chance (Chapter 41): every decision drawn at random from the distribution of that decision in the settled baseline worlds — first unconditionally, then given the agent's own tokens and connections. If a world of such agents looks like the baseline, what the brains add is their average, not what they respond to."
         },
         {
-          "id": "45",
+          "id": "44",
           "title": "What keeps wealth spread?",
           "note": "No coalitions: allow_revolutions off, against the baseline runs of Chapter 10."
         },
         {
-          "id": "46",
+          "id": "45",
           "title": "Meta III",
-          "note": "Written once Chapters 41 to 45 are analysed."
-        },
-        {
-          "id": "47",
-          "title": "How big should a brain be?",
-          "note": "The hidden layers, against the baseline runs of Chapter 10."
-        },
-        {
-          "id": "48",
-          "title": "Does size change the dynamics?",
-          "note": "Builds on Chapter 42: the wander, the sweeps and dying out, against the size of a world."
+          "note": "Written once Chapters 41 to 44 are analysed."
         }
       ]
     },
@@ -293,45 +276,57 @@
       "title": "Part V · Engineering open-ended evolution",
       "chapters": [
         {
-          "id": "49",
+          "id": "46",
           "title": "How to tell a world that keeps evolving",
-          "file": "chapters/49-how-to-tell-a-world-that-keeps-evolving.md",
+          "file": "chapters/46-how-to-tell-a-world-that-keeps-evolving.md",
           "experiment": "E12",
           "status": "analysed"
         },
         {
-          "id": "50",
+          "id": "47",
           "title": "Brains that see, and worlds that break",
-          "file": "chapters/50-brains-that-see-and-worlds-that-break.md",
+          "file": "chapters/47-brains-that-see-and-worlds-that-break.md",
           "experiment": "E13",
           "status": "analysed"
         },
         {
-          "id": "51",
+          "id": "48",
           "title": "A world that cannot break",
-          "note": "The rules of space: a newborn joins its parent and two of its neighbours; a death is mended; only redundant links lapse; a brain may choose only so many links; no handover. Space alone (no brains) and space under the game: the health bar of Chapter 49.",
-          "file": "chapters/51-a-world-that-cannot-break.md",
+          "note": "The rules of space: a newborn joins its parent and two of its neighbours; a death is mended; only redundant links lapse; a brain may choose only so many links; no handover. Space alone (no brains) and space under the game: the health bar of Chapter 46.",
+          "file": "chapters/48-a-world-that-cannot-break.md",
           "experiment": "E14",
           "status": "ready"
         },
         {
-          "id": "52",
+          "id": "49",
           "title": "Who dies, and why",
           "note": "The rules of demography and the exploits they invite: children spent as missiles, a hoarding queen with half the tokens, worlds of one-token agents; the last token kept at home, a longest life, a smallest child, a home share.",
-          "file": "chapters/52-who-dies-and-why.md",
+          "file": "chapters/49-who-dies-and-why.md",
           "experiment": "E15",
           "status": "ready"
         },
         {
-          "id": "53",
+          "id": "50",
           "title": "Why evolution stops",
-          "note": "In every variant the tournament of Chapter 49 flattens within a few hundred iterations, and redrawing an agent's random inputs changes more of its decisions than anything it sees: in a Colonel Blotto contest the best play is to be unpredictable, and a good mixed strategy cannot be bettered. Without dice; with allies; with cooperation that pays.",
-          "file": "chapters/53-why-evolution-stops.md",
+          "note": "In every variant the tournament of Chapter 46 flattens within a few hundred iterations, and redrawing an agent's random inputs changes more of its decisions than anything it sees: in a Colonel Blotto contest the best play is to be unpredictable, and a good mixed strategy cannot be bettered. Without dice; with allies; with cooperation that pays.",
+          "file": "chapters/50-why-evolution-stops.md",
           "experiment": "E16",
           "status": "ready"
         },
         {
-          "id": "54",
+          "id": "51",
+          "title": "How fast should brains change?",
+          "file": "chapters/51-how-fast-should-brains-change.md",
+          "experiment": "E09",
+          "status": "ready"
+        },
+        {
+          "id": "52",
+          "title": "How big should a brain be?",
+          "note": "Brain size in a world that cannot break: B2 with hidden layers of 8, 16, 32 and 16 + 16, judged by cross-time tournaments."
+        },
+        {
+          "id": "53",
           "title": "Meta IV",
           "note": "What the engineering of Part V found: what makes a world that cannot break, what keeps evolution from going on, and the experiments that would show whether larger worlds go further."
         }
@@ -341,51 +336,51 @@
       "title": "Part VI · Towards a physics: space, scale and locality",
       "chapters": [
         {
-          "id": "55",
+          "id": "54",
           "title": "Worlds of 100,000 tokens",
-          "file": "chapters/55-worlds-of-100000-tokens.md",
+          "file": "chapters/54-worlds-of-100000-tokens.md",
           "experiment": "E10",
           "status": "analysed"
         },
         {
-          "id": "56",
+          "id": "55",
           "title": "Dimensions at scale",
-          "note": "The measures of Chapter 24 on the worlds of 100,000 tokens (Chapter 55): does a world look three-dimensional only at middle scales, as causal dynamical triangulations look four-dimensional only at large ones? Ball growth and the spectral dimension as functions of scale, and the width of worlds from 3,200 to 409,600 tokens (Chapter 42)."
+          "note": "The measures of Chapter 24 on the worlds of 100,000 tokens (Chapter 54): does a world look three-dimensional only at middle scales, as causal dynamical triangulations look four-dimensional only at large ones? Ball growth and the spectral dimension as functions of scale, and the width of worlds from 3,200 to 409,600 tokens (Chapter 42)."
         },
         {
-          "id": "57",
+          "id": "56",
           "title": "Which properties have no scale?",
           "note": "The same quantities measured at many sizes and rescaled: do their distributions collapse onto one curve? Starts from the cuts of Chapter 42, whose share of a world has the same distribution at every size."
         },
         {
-          "id": "58",
+          "id": "57",
           "title": "Local rules only",
           "note": "The three rules that reach across a world, each made local: a piece that separates lives on, the tokens of the dead go to their former neighbours, and every agent draws its random numbers from a stream of its own (Chapter 7)."
         },
         {
-          "id": "59",
+          "id": "58",
           "title": "How far does a difference travel?",
-          "note": "Twin worlds that differ in one token at one agent: how fast the difference spreads and whether it grows or dies away — the light cone of Chapter 7, measured. Needs the local random numbers of Chapter 58."
+          "note": "Twin worlds that differ in one token at one agent: how fast the difference spreads and whether it grows or dies away — the light cone of Chapter 7, measured. Needs the local random numbers of Chapter 57."
         },
         {
-          "id": "60",
+          "id": "59",
           "title": "A source and a sink",
           "note": "A world with a flow running through it: tokens that are spent when used and slowly renewed, or a few nodes that release tokens and a way for tokens to leave. What forms in the flow? (Chapter 7; research/Research.md §4.3.)"
         },
         {
-          "id": "61",
+          "id": "60",
           "title": "Particles",
           "note": "Patterns that persist while what carries them changes: tokens bound in loops, groups that outlast their members, local beats in the flow of tokens (Chapter 7)."
         },
         {
-          "id": "62",
+          "id": "61",
           "title": "One agent in a sea of average agents",
-          "note": "A large world of agents that decide as the average evolved agent does (Chapter 44), and in it a single agent, or a small group, with a brain of its own: can it draw tokens from the sea without exhausting it or being cut off, can its line invade, can a group hold together? Invasion analysis and a reservoir, in one experiment."
+          "note": "A large world of agents that decide as the average evolved agent does (Chapter 43), and in it a single agent, or a small group, with a brain of its own: can it draw tokens from the sea without exhausting it or being cut off, can its line invade, can a group hold together? Invasion analysis and a reservoir, in one experiment."
         },
         {
-          "id": "63",
+          "id": "62",
           "title": "Meta V",
-          "note": "What the measurements say about space, scale and matter, written once Chapters 55 to 62 are analysed."
+          "note": "What the measurements say about space, scale and matter, written once Chapters 54 to 61 are analysed."
         }
       ]
     },
@@ -393,9 +388,9 @@
       "title": "Part VII · The long run",
       "chapters": [
         {
-          "id": "64",
+          "id": "63",
           "title": "A hundred thousand iterations",
-          "file": "chapters/64-a-hundred-thousand-iterations.md",
+          "file": "chapters/63-a-hundred-thousand-iterations.md",
           "experiment": "E11",
           "status": "draft"
         }

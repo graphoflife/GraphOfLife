@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Part V: engineering open-ended evolution — Chapters 49 to 53, Experiments 12 to 16.
+Part V: engineering open-ended evolution — Chapters 46 to 50, Experiments 12 to 16.
 
 The yardstick is a cross-time tournament (gol_tournament): the brains of two
 moments of one world play each other in that world, with mutation switched off,
@@ -177,7 +177,7 @@ from book_chapters.common import GREEN, ORANGE, RED, VIOLET, YELLOW  # noqa: E40
 
 COLOURS = (BLUE, RED, GREEN, VIOLET, ORANGE, YELLOW)
 
-#: The health bar of Chapter 49: statistic of the recorded rows, its words,
+#: The health bar of Chapter 46: statistic of the recorded rows, its words,
 #: and the range it has to lie in.
 BAR = (("coreShare", "agents in the 2-core", 0.8, None),
        ("cutRisk", "largest share one connection cuts off", None, 0.01),
@@ -216,7 +216,7 @@ def dots(name: str, conditions: List[str], values: Dict[str, List[float]], *, ti
 
 
 # ---------------------------------------------------------------------------
-# Chapter 50 · Brains that see, and worlds that break (Experiment 13)
+# Chapter 47 · Brains that see, and worlds that break (Experiment 13)
 # ---------------------------------------------------------------------------
 
 E13_CONDITIONS = ["baseline", "one hidden layer", "one hidden layer, change only when copied"]
@@ -267,7 +267,7 @@ def seeing(ch: F.Chapter) -> None:
     ch.grid("health", panels, columns=1, title="How the network holds",
             caption=("One dot per world, at its median over iterations "
                      "200 to 1,500 while it lived; the bar is the median world and the dashed line the "
-                     "health bar of Chapter 49."),
+                     "health bar of Chapter 46."),
             recipe=recipe(E13_RUNS, F.STATS_FILE, [
                 "Take `coreShare`, `cutRisk` and `maxDegree` / `nodes` of the rows with `phase` = 2 "
                 "and 200 ≤ `iteration` ≤ 1,500, and each world's median of each."]))
@@ -415,7 +415,7 @@ def children(run_id: str) -> Dict[str, Any]:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 51 · A world that cannot break (Experiment 14)
+# Chapter 48 · A world that cannot break (Experiment 14)
 # ---------------------------------------------------------------------------
 
 E14_CONDITIONS = ["all the rules", "no mending", "any unused link lapses", "no links at birth",
@@ -533,7 +533,7 @@ def _space_world(task):
 
 
 def space_alone(ch: F.Chapter) -> None:
-    """Chapter 51's model: every rule of space on its own, ten worlds each, and two pictures."""
+    """Chapter 48's model: every rule of space on its own, ten worlds each, and two pictures."""
     from concurrent.futures import ProcessPoolExecutor
     tasks = [(k, seed) for k in range(len(SPACE_RULES)) for seed in SPACE_SEEDS]
     with ProcessPoolExecutor(_jobs()) as pool:
@@ -564,7 +564,7 @@ def space_alone(ch: F.Chapter) -> None:
                      "chain, linked or not; *ring, ≤ 8*: B2's rules, and no child for an agent of 8 "
                      "links or more nor a newborn's random link to one (mending still links past the "
                      "cap). The "
-                     "dashed lines are the health bar of Chapter 49. Cut shares and the "
+                     "dashed lines are the health bar of Chapter 46. Cut shares and the "
                      "best-connected agent's share are drawn on logarithmic axes, a cut of nothing "
                      "at 0.0001."),
             recipe=recipe("No runs: the worlds are made by the model itself, seeds 1 to 10 for every "
@@ -665,7 +665,7 @@ def unbreakable(ch: F.Chapter) -> None:
     ch.grid("bar", panels, columns=2, title="Each rule against the health bar",
             caption=("One dot per world, at its median over "
                      "iterations 200 to 1,000; the bar is the median world; dashed lines are the "
-                     "health bar of Chapter 49. The first column has every rule of B2; each other "
+                     "health bar of Chapter 46. The first column has every rule of B2; each other "
                      "column takes one away."),
             recipe=recipe(E14_RUNS, F.STATS_FILE, [
                 "For every run take the rows with `phase` = 2 and 200 ≤ `iteration` ≤ 1,000, and "
@@ -679,7 +679,7 @@ def unbreakable(ch: F.Chapter) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 52 · Who dies, and why (Experiment 15)
+# Chapter 49 · Who dies, and why (Experiment 15)
 # ---------------------------------------------------------------------------
 
 E15_CONDITIONS = ["B2", "the last token kept", "nothing kept", "half kept", "children of any size",
@@ -744,7 +744,7 @@ def deaths(ch: F.Chapter) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 53 · Why evolution stops (Experiment 16)
+# Chapter 50 · Why evolution stops (Experiment 16)
 # ---------------------------------------------------------------------------
 
 E16_ERAS = (0, 100, 200, 500, 1000, 1500, 2000)

@@ -282,7 +282,7 @@ tokens the core reads 2.0 by balls (the whole world 2.3), and in the three
 worlds of 409,600 tokens of [Chapter 42](42-how-does-a-worlds-size-follow-its-tokens.md),
 about 42,000 core agents each, 2.7 over radii 3 to 14 (the whole world 3.3),
 and 3.1 at radii 3 to 6. By walks the cores read 1.6, 1.9 and 1.5. The core's dimension by balls grows with the world, as
-the world's does, and has not settled at any of these sizes. Chapter 56,
+the world's does, and has not settled at any of these sizes. Chapter 55,
 planned (see [the contents](../README.md)), is to follow it further.
 
 ## Over a world's life

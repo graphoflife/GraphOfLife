@@ -74,7 +74,7 @@ standing. A connection that carries nothing for one game is gone, and with
 it, perhaps, the only path between two parts of a world.
 
 > [!info] Added later: links that may not lapse
-> [Chapter 51](51-a-world-that-cannot-break.md) changes this rule for the
+> [Chapter 48](48-a-world-that-cannot-break.md) changes this rule for the
 > second baseline, B2: there an unused connection lapses only if its two ends
 > share at least two neighbours
 > ([`prune_needs`](../notes/settings.md#prune_needs)), so no lapse can cut a
@@ -236,7 +236,7 @@ not circulate.
   let a connection store what crosses it, would be a way to give them one.
 
 > [!info] Added later: a yield on exchanges
-> [Chapter 53](53-why-evolution-stops.md) pilots a rule of this kind: a yield
+> [Chapter 50](50-why-evolution-stops.md) pilots a rule of this kind: a yield
 > on stakes that are returned across a connection. The yield went to whoever
 > had the most partners, and it built stars rather than partnerships.
 

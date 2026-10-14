@@ -205,7 +205,7 @@ worlds; 44% at 10,000 tokens). The single richest agent holds about 2% — some
 about 690 tokens over the same iterations, 7% of all (820 over the small
 worlds' longer settled life, to iteration 2,999): in a world ten times larger
 the richest agent holds three times as many tokens, about a third of the
-share ([Chapter 55](55-worlds-of-100000-tokens.md);
+share ([Chapter 54](54-worlds-of-100000-tokens.md);
 [Chapter 33](33-the-largest-and-the-smallest.md) follows the richest).
 
 <!-- figure tokens/typical -->

@@ -298,7 +298,7 @@ second edition of those parts, at 100,000 tokens, checks
 ([Chapter 9](09-thirty-worlds.md)).
 
 > [!info] Added later: thirty worlds at each of two sizes
-> [Chapter 55](55-worlds-of-100000-tokens.md), written after this chapter,
+> [Chapter 54](54-worlds-of-100000-tokens.md), written after this chapter,
 > sets thirty worlds of 100,000 tokens beside thirty of 10,000, over
 > iterations 500 to 1,499. Inequality, the nodes kept by their own agent and
 > the genotypes per agent come out within 3% of each other — the nodes kept
@@ -437,7 +437,7 @@ lose half of itself in a game.
   a condition with the rule off, as this one did.
 
 > [!info] Added later: the rule, changed
-> [Chapter 51](51-a-world-that-cannot-break.md) makes the change of rule
+> [Chapter 48](48-a-world-that-cannot-break.md) makes the change of rule
 > asked for above. When an agent dies, the groups its former neighbours fall
 > into are joined up in a ring, and a link that carried no tokens may lapse
 > only if its two ends share at least two neighbours. A death mended so
@@ -463,5 +463,5 @@ lose half of itself in a game.
 <!-- turns -->
 ---
 
-← [Chapter 41 · Do the brains matter?](41-do-the-brains-matter.md) · [Contents](../README.md) · [Chapter 43 · How fast should brains change?](43-how-fast-should-brains-change.md) →
+← [Chapter 41 · Do the brains matter?](41-do-the-brains-matter.md) · [Contents](../README.md) · [Chapter 46 · How to tell a world that keeps evolving](46-how-to-tell-a-world-that-keeps-evolving.md) →
 <!-- /turns -->

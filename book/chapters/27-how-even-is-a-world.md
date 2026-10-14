@@ -242,12 +242,12 @@ falls off smoothly can have the same Gini and different evenness.
   how many kinds there are *now*; it cannot say whether any of them is new in a
   way that matters. Measures of open-ended evolution have to look across time
   ([Meta II](40-meta-2.md));
-  [Chapter 49](49-how-to-tell-a-world-that-keeps-evolving.md) builds one,
+  [Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md) builds one,
   playing the brains of different eras against each other.
 - **One number is set by the rules.** Five genotypes for every eight agents,
   in every world: a balance of making and copying. If a change of the rules
   moves it, the change has altered how often brains are changed or copied:
-  in the pilots of [Chapter 43](43-how-fast-should-brains-change.md) it went
+  in the pilots of [Chapter 51](51-how-fast-should-brains-change.md) it went
   from 0.32 to 0.98 as the probability of a change rose from 0.05 to 0.8.
 
 To make every figure of this chapter: `python3 book_figures.py entropy`.

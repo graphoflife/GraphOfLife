@@ -36,9 +36,9 @@ otherwise. Last consolidated: 2026-10-14.
 - 97% of new genotypes arise in brains that are not being copied (mutation after
   every game) (Ch. 39).
 - A world of 10,000 tokens descends from one branch about every 350 iterations;
-  takeover time ∝ tokens^0.77 (E10 thesis refuted) (Ch. 18, 55).
+  takeover time ∝ tokens^0.77 (E10 thesis refuted) (Ch. 18, 54).
 - Families live in patches that widen like a random walk (reach 7 → 12 steps for
-  lags 25 → 200) (Ch. 37, 55).
+  lags 25 → 200) (Ch. 37, 54).
 - Hazard falls with age to ~1% per game; no ageing; the oldest (~850) is set by
   numbers; implied median age 55 = observed (Ch. 12–13).
 - Worlds whose brains never change end in very different places; evolving
@@ -61,17 +61,17 @@ otherwise. Last consolidated: 2026-10-14.
 
 ## Part V: engineering open-ended evolution
 
-**The yardstick (Ch. 49, E12; 10 worlds of 5,000 tokens)**
+**The yardstick (Ch. 46, E12; 10 worlds of 5,000 tokens)**
 - B1 learns in its first 50–100 iterations (+361 Elo against its founders at 50,
   +400 at 100) and nothing after: 1,000 vs 300 = 0.483; each era ties with the
   one before (0.47–0.52); a dominance tournament crowns as many champions as
   chance (null mean 3.05, observed 3.1). Thesis held.
-- Health bar (Ch. 49): one piece; 2-core ≥ 0.8; worst agent cut ≤ 2%; worst link
+- Health bar (Ch. 46): one piece; 2-core ≥ 0.8; worst agent cut ≤ 2%; worst link
   cut ≤ 1%; best-connected agent ≤ 5% of the others; 3–12 links per agent; ball
   dimension 2.3–4. B1 at 5,000 tokens fails it in every world (2-core 0.51,
   link cut 8%, hub 9%).
 
-**Brains that see (Ch. 50, E13)**
+**Brains that see (Ch. 47, E13)**
 - One hidden layer of 16: founder gain 0.2. Worlds die out: 4/10, and 8/10 with
   change only when copied (MOR); B1 never below 74 agents. Thesis held.
 - Not the network alone: no world of any condition passes the bar, seeing
@@ -84,10 +84,10 @@ otherwise. Last consolidated: 2026-10-14.
   small worlds) open.
 - MOR alone at birth only ("spawn") froze a pilot world: no births, no change.
 
-**Space (Ch. 51, model research/oee/space.py; E14 running)**
+**Space (Ch. 48, model research/oee/space.py; E14 running)**
 - Births alone make a tree of blobs: newborns close only triangles; one agent's
   loss can cut 37% (links 2), 41% (parent only).
-- A death mended in a ring never splits the world (proof in Ch. 51); with 2 birth
+- A death mended in a ring never splits the world (proof in Ch. 48); with 2 birth
   links: cuts 1.4% / 1.2%, dimension 3.7, 4.5 links. 3 birth links pass the bar.
   Chain mending stretches the world (dimension 2.3); mending everything makes
   hubs and dimension 4.9; a link cap hurts without brains (5.7% / 3.0%).
@@ -98,14 +98,14 @@ otherwise. Last consolidated: 2026-10-14.
   2–3%, 5.0–5.8 links); one world's dimension 4.19 > 4. With handover every world
   fails (2-core 0.28–0.87).
 
-**Who dies (Ch. 52, E15 planned)**
+**Who dies (Ch. 49, E15 planned)**
 - Kamikaze children: with links at birth and mending, newborns with 1–2 tokens
   stake everything away (46% of the starving are age 0).
 - keep_one (last token home) makes all-in attacks free: 75% of agents end with
   exactly one token (zombies). keep_home 0.3 (a share) avoids it.
 - Without any keep rule worlds starve to one agent.
 
-**Why evolution stops (Ch. 53; pilots, research/oee/pilots/LOG.md)**
+**Why evolution stops (Ch. 50; pilots, research/oee/pilots/LOG.md)**
 - Every depth mechanic tried plateaus within 100–200 iterations: memory inputs,
   memory of 6 games + growable brains, a mutual-stake yield, fog of war,
   support stakes, no random inputs; brain size above its neutral shadow did not

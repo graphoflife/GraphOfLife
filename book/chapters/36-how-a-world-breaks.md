@@ -236,13 +236,13 @@ tokens handed out by lottery to the survivors.
 > In the baseline's worlds of 5,000 tokens the cull removes about 2% of the
 > agents in every iteration, four times as many as starve, and no world
 > passes the health bar of
-> [Chapter 49](49-how-to-tell-a-world-that-keeps-evolving.md), one of whose
+> [Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md), one of whose
 > lines is a cut risk of at most 1%
-> ([Chapter 50](50-brains-that-see-and-worlds-that-break.md)).
-> [Chapter 51](51-a-world-that-cannot-break.md) answers with local rules —
+> ([Chapter 47](47-brains-that-see-and-worlds-that-break.md)).
+> [Chapter 48](48-a-world-that-cannot-break.md) answers with local rules —
 > two links at birth, a death mended in a ring, only redundant links
 > lapsing — under which neither a death nor a lapsed link can split a world.
-> Letting separated populations live on is planned for Chapter 58, *Local
+> Letting separated populations live on is planned for Chapter 57, *Local
 > rules only*.
 
 To make every figure of this chapter: `python3 book_figures.py breaking`.

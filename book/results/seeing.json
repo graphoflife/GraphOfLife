@@ -795,7 +795,7 @@
   },
   "health": {
    "title": "How the network holds",
-   "caption": "One dot per world, at its median over iterations 200 to 1,500 while it lived; the bar is the median world and the dashed line the health bar of Chapter 49.",
+   "caption": "One dot per world, at its median over iterations 200 to 1,500 while it lived; the bar is the median world and the dashed line the health bar of Chapter 46.",
    "recipe": "**Runs.** The 30 runs of Experiment 13 \u2014 at 5,000 tokens, seeds 1 to 10, 1,500 iterations \u2014 in three conditions: the baseline B1 (`B1-5000-s001` \u2026 `-s010`, shared with Experiment 12), its brains with one hidden layer of 16, and those brains changed only when copied. They are made with `python3 gol_lab.py run E13`.\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).\n\n1. Take `coreShare`, `cutRisk` and `maxDegree` / `nodes` of the rows with `phase` = 2 and 200 \u2264 `iteration` \u2264 1,500, and each world's median of each.\n\n**To make it again:** `python3 book_figures.py seeing`."
   },
   "births": {

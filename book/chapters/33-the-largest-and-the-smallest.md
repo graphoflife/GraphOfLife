@@ -266,7 +266,7 @@ grows about as agents^0.30,
 than its agents (×11). Measured directly against the worlds of 10,000
 tokens, the richest is 3.1 times as rich and the best-connected, stars
 included, 7.7 times as connected
-([Chapter 55](55-worlds-of-100000-tokens.md)). No agent becomes a fixed share
+([Chapter 54](54-worlds-of-100000-tokens.md)). No agent becomes a fixed share
 of the world as it grows; but there is more room at the top in a large world,
 and the stars show what it can be used for.
 
@@ -293,9 +293,9 @@ and the stars show what it can be used for.
 > Part V weighs an agent's stake on its own node more than anyone else's.
 > Counted twice, it let one agent gather 57% of all tokens behind a home stake
 > nobody could outbid; counted one and a half times, it is part of the second
-> baseline, B2 ([Chapter 52](52-who-dies-and-why.md)). B2 also switches
+> baseline, B2 ([Chapter 49](49-who-dies-and-why.md)). B2 also switches
 > handover off, so a place can no longer be handed to a newborn child as it
-> is here ([Chapter 51](51-a-world-that-cannot-break.md)).
+> is here ([Chapter 48](48-a-world-that-cannot-break.md)).
 
 To make every figure of this chapter: `python3 book_figures.py extremes`.
 

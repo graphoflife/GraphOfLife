@@ -89,5 +89,5 @@ about seven hours. The thirty worlds of 100,000 tokens that
 <!-- turns -->
 ---
 
-← [Chapter 64 · A hundred thousand iterations](64-a-hundred-thousand-iterations.md) · [Contents](../README.md)
+← [Chapter 63 · A hundred thousand iterations](63-a-hundred-thousand-iterations.md) · [Contents](../README.md)
 <!-- /turns -->

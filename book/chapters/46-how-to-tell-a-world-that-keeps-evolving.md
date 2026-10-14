@@ -340,13 +340,13 @@ Why does the baseline stop so soon? Part II answered half of it: its brains
 are nearly blind ([Chapter 19](19-what-the-brains-are-like.md)), so evolution
 can only set constants, and a few constants are quickly set. Brains that see
 are the obvious next step, and they are what
-[Chapter 50](50-brains-that-see-and-worlds-that-break.md) tries — with
+[Chapter 47](47-brains-that-see-and-worlds-that-break.md) tries — with
 consequences for the world itself that have to be dealt with first. Whether
 evolution then keeps going is the subject of
-[Chapter 53](53-why-evolution-stops.md).
+[Chapter 50](50-why-evolution-stops.md).
 
 <!-- turns -->
 ---
 
-← [Chapter 43 · How fast should brains change?](43-how-fast-should-brains-change.md) · [Contents](../README.md) · [Chapter 50 · Brains that see, and worlds that break](50-brains-that-see-and-worlds-that-break.md) →
+← [Chapter 42 · How does a world's size follow its tokens?](42-how-does-a-worlds-size-follow-its-tokens.md) · [Contents](../README.md) · [Chapter 47 · Brains that see, and worlds that break](47-brains-that-see-and-worlds-that-break.md) →
 <!-- /turns -->

@@ -76,7 +76,7 @@ three remedies:
   what suits tanh, since the sigmoid's slope is a quarter of tanh's.
 
 [Chapter 19](../chapters/19-what-the-brains-are-like.md) measures the gain of
-Graph of Life's brains. Chapter 47 (planned, see [the contents](../README.md))
+Graph of Life's brains. Chapter 52 (planned, see [the contents](../README.md))
 is to try the remedies.
 
 ## References
