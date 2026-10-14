@@ -1,0 +1,1380 @@
+{
+ "experiment": "E14",
+ "analysed": "2026-10-14",
+ "kind": "series",
+ "engines": {
+  "engines": [
+   "c74b7c17808a373f"
+  ],
+  "agree": true,
+  "checked": []
+ },
+ "reference": null,
+ "figures": [
+  "agents",
+  "core",
+  "cut",
+  "hub",
+  "degree"
+ ],
+ "endingsFrom": 300,
+ "endings": {},
+ "windows": {},
+ "comparisons": {},
+ "extinct": {
+  "all the rules": [],
+  "no mending": [],
+  "any unused link lapses": [
+   {
+    "seed": 1,
+    "at": 532
+   }
+  ],
+  "no links at birth": [],
+  "no valence": [],
+  "handover": []
+ },
+ "reached": {
+  "all the rules": 10,
+  "no mending": 10,
+  "any unused link lapses": 9,
+  "no links at birth": 10,
+  "no valence": 10,
+  "handover": 10
+ },
+ "citation": {
+  "strains": [
+   "gol-1+allow_handover=false+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2",
+   "gol-1+allow_handover=false+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8",
+   "gol-1+allow_handover=false+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+valence=8",
+   "gol-1+allow_handover=false+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8",
+   "gol-1+allow_handover=false+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8",
+   "gol-1+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8"
+  ],
+  "commits": [
+   "9ea24298fec5de58fb67906c818784a019b29bdf"
+  ],
+  "engines": [
+   "c74b7c17808a373f"
+  ],
+  "environments": [
+   {
+    "python": "3.12.3",
+    "numpy": "2.5.1",
+    "networkx": "3.6.1",
+    "blas": "scipy-openblas 0.3.33.112.0",
+    "dispatch": "AVX2",
+    "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+   }
+  ],
+  "setup": {
+   "baseline": "B2",
+   "world": {
+    "total_tokens": 5000
+   },
+   "seeds": "1..10",
+   "iterations": 1000,
+   "record": {
+    "heavy_every": 25,
+    "archive_every": 100
+   },
+   "conditions": [
+    {
+     "name": "all the rules"
+    },
+    {
+     "name": "no mending",
+     "set": {
+      "mend_on_death": false
+     }
+    },
+    {
+     "name": "any unused link lapses",
+     "set": {
+      "prune_needs": 0
+     }
+    },
+    {
+     "name": "no links at birth",
+     "set": {
+      "birth_links": 0
+     }
+    },
+    {
+     "name": "no valence",
+     "set": {
+      "valence": 0
+     }
+    },
+    {
+     "name": "handover",
+     "set": {
+      "allow_handover": true
+     }
+    }
+   ]
+  },
+  "runs": [
+   {
+    "id": "B2-5000-s001",
+    "condition": "all the rules",
+    "seed": 1,
+    "iterations": 1075,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 412.4,
+    "peakMB": 92.2,
+    "sessions": 2,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-s002",
+    "condition": "all the rules",
+    "seed": 2,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 517.2,
+    "peakMB": 103.5,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-s003",
+    "condition": "all the rules",
+    "seed": 3,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 430.6,
+    "peakMB": 96.7,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-s004",
+    "condition": "all the rules",
+    "seed": 4,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 253.4,
+    "peakMB": 82.8,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-s005",
+    "condition": "all the rules",
+    "seed": 5,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 421.1,
+    "peakMB": 96.0,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-s006",
+    "condition": "all the rules",
+    "seed": 6,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 407.6,
+    "peakMB": 92.3,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-s007",
+    "condition": "all the rules",
+    "seed": 7,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 311.1,
+    "peakMB": 89.9,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-s008",
+    "condition": "all the rules",
+    "seed": 8,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 366.0,
+    "peakMB": 91.5,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-s009",
+    "condition": "all the rules",
+    "seed": 9,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 477.4,
+    "peakMB": 104.4,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-s010",
+    "condition": "all the rules",
+    "seed": 10,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 441.0,
+    "peakMB": 93.0,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-d6b607-s001",
+    "condition": "no mending",
+    "seed": 1,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 588.6,
+    "peakMB": 104.5,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-d6b607-s002",
+    "condition": "no mending",
+    "seed": 2,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 855.8,
+    "peakMB": 109.7,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-d6b607-s003",
+    "condition": "no mending",
+    "seed": 3,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 685.9,
+    "peakMB": 99.0,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-d6b607-s004",
+    "condition": "no mending",
+    "seed": 4,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 667.3,
+    "peakMB": 93.2,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-d6b607-s005",
+    "condition": "no mending",
+    "seed": 5,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 617.1,
+    "peakMB": 91.3,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-d6b607-s006",
+    "condition": "no mending",
+    "seed": 6,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 675.9,
+    "peakMB": 115.6,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-d6b607-s007",
+    "condition": "no mending",
+    "seed": 7,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 312.3,
+    "peakMB": 87.2,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-d6b607-s008",
+    "condition": "no mending",
+    "seed": 8,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 447.2,
+    "peakMB": 97.5,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-d6b607-s009",
+    "condition": "no mending",
+    "seed": 9,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 528.8,
+    "peakMB": 104.1,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-d6b607-s010",
+    "condition": "no mending",
+    "seed": 10,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 432.2,
+    "peakMB": 91.6,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-71fc89-s001",
+    "condition": "any unused link lapses",
+    "seed": 1,
+    "iterations": 532,
+    "status": "extinct",
+    "strain": "gol-1+allow_handover=false+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 53.4,
+    "peakMB": 64.0,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-71fc89-s002",
+    "condition": "any unused link lapses",
+    "seed": 2,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 333.3,
+    "peakMB": 67.6,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-71fc89-s003",
+    "condition": "any unused link lapses",
+    "seed": 3,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 475.4,
+    "peakMB": 67.8,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-71fc89-s004",
+    "condition": "any unused link lapses",
+    "seed": 4,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 436.6,
+    "peakMB": 67.7,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-71fc89-s005",
+    "condition": "any unused link lapses",
+    "seed": 5,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 378.1,
+    "peakMB": 66.8,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-71fc89-s006",
+    "condition": "any unused link lapses",
+    "seed": 6,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 274.7,
+    "peakMB": 67.7,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-71fc89-s007",
+    "condition": "any unused link lapses",
+    "seed": 7,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 239.2,
+    "peakMB": 65.5,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-71fc89-s008",
+    "condition": "any unused link lapses",
+    "seed": 8,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 170.7,
+    "peakMB": 67.8,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-71fc89-s009",
+    "condition": "any unused link lapses",
+    "seed": 9,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 202.1,
+    "peakMB": 67.0,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-71fc89-s010",
+    "condition": "any unused link lapses",
+    "seed": 10,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 234.6,
+    "peakMB": 67.4,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-28aef0-s001",
+    "condition": "no links at birth",
+    "seed": 1,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 433.6,
+    "peakMB": 90.0,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-28aef0-s002",
+    "condition": "no links at birth",
+    "seed": 2,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 493.0,
+    "peakMB": 98.9,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-28aef0-s003",
+    "condition": "no links at birth",
+    "seed": 3,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 434.3,
+    "peakMB": 96.3,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-28aef0-s004",
+    "condition": "no links at birth",
+    "seed": 4,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 414.9,
+    "peakMB": 97.8,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-28aef0-s005",
+    "condition": "no links at birth",
+    "seed": 5,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 436.5,
+    "peakMB": 96.5,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-28aef0-s006",
+    "condition": "no links at birth",
+    "seed": 6,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 467.3,
+    "peakMB": 100.6,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-28aef0-s007",
+    "condition": "no links at birth",
+    "seed": 7,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 249.1,
+    "peakMB": 89.2,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-28aef0-s008",
+    "condition": "no links at birth",
+    "seed": 8,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 390.3,
+    "peakMB": 91.7,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-28aef0-s009",
+    "condition": "no links at birth",
+    "seed": 9,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 420.9,
+    "peakMB": 93.2,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-28aef0-s010",
+    "condition": "no links at birth",
+    "seed": 10,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 397.5,
+    "peakMB": 96.7,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-5c8c75-s001",
+    "condition": "no valence",
+    "seed": 1,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 428.0,
+    "peakMB": 104.4,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-5c8c75-s002",
+    "condition": "no valence",
+    "seed": 2,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 975.8,
+    "peakMB": 188.9,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-5c8c75-s003",
+    "condition": "no valence",
+    "seed": 3,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 1546.0,
+    "peakMB": 331.7,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-5c8c75-s004",
+    "condition": "no valence",
+    "seed": 4,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 551.5,
+    "peakMB": 134.0,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-5c8c75-s005",
+    "condition": "no valence",
+    "seed": 5,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 1742.4,
+    "peakMB": 371.1,
+    "sessions": 2,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-5c8c75-s006",
+    "condition": "no valence",
+    "seed": 6,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 727.9,
+    "peakMB": 166.8,
+    "sessions": 2,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-5c8c75-s007",
+    "condition": "no valence",
+    "seed": 7,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 737.0,
+    "peakMB": 103.0,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-5c8c75-s008",
+    "condition": "no valence",
+    "seed": 8,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 765.2,
+    "peakMB": 109.1,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-5c8c75-s009",
+    "condition": "no valence",
+    "seed": 9,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 2685.2,
+    "peakMB": 695.6,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-5c8c75-s010",
+    "condition": "no valence",
+    "seed": 10,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+allow_handover=false+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 659.7,
+    "peakMB": 97.0,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-894419-s001",
+    "condition": "handover",
+    "seed": 1,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 331.0,
+    "peakMB": 86.6,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-894419-s002",
+    "condition": "handover",
+    "seed": 2,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 252.5,
+    "peakMB": 82.0,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-894419-s003",
+    "condition": "handover",
+    "seed": 3,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 300.7,
+    "peakMB": 91.7,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-894419-s004",
+    "condition": "handover",
+    "seed": 4,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 378.6,
+    "peakMB": 92.8,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-894419-s005",
+    "condition": "handover",
+    "seed": 5,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 388.8,
+    "peakMB": 96.5,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-894419-s006",
+    "condition": "handover",
+    "seed": 6,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 249.5,
+    "peakMB": 84.1,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-894419-s007",
+    "condition": "handover",
+    "seed": 7,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 350.9,
+    "peakMB": 89.0,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-894419-s008",
+    "condition": "handover",
+    "seed": 8,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 308.7,
+    "peakMB": 88.2,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-894419-s009",
+    "condition": "handover",
+    "seed": 9,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 230.3,
+    "peakMB": 83.7,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B2-5000-894419-s010",
+    "condition": "handover",
+    "seed": 10,
+    "iterations": 1000,
+    "status": "stopped",
+    "strain": "gol-1+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 363.6,
+    "peakMB": 96.3,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   }
+  ]
+ }
+}

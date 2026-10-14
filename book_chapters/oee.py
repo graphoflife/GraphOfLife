@@ -656,17 +656,21 @@ def unbreakable(ch: F.Chapter) -> None:
                   "Add one, and draw a dot per world."]))
     ch.number("medians", {c: {stat: describe([h["medians"][stat] for h in checked[c]])
                               for stat, *_ in BAR + (NODE_CUT,)} for c in E14_CONDITIONS})
+    short = dict(zip(E14_CONDITIONS, ("B2", "no mending", "all lapse", "no birth links", "no valence",
+                                      "handover")))
     panels = []
     for stat, words, lo, hi in BAR + (NODE_CUT,):
-        values = {c: [h["medians"][stat] for h in checked[c]] for c in E14_CONDITIONS}
+        values = {short[c]: [h["medians"][stat] for h in checked[c]] for c in E14_CONDITIONS}
         guides = [{"axis": "y", "at": v, "label": "the bar"} for v in (lo, hi) if v is not None]
-        panels.append(dots(stat, E14_CONDITIONS, values, title=words, y={"label": words, "min": 0},
-                           guides=guides))
+        panels.append(dots(stat, [short[c] for c in E14_CONDITIONS], values, title=words,
+                           y={"label": words, "min": 0}, guides=guides))
     ch.grid("bar", panels, columns=2, title="Each rule against the health bar",
             caption=("One dot per world, at its median over "
                      "iterations 200 to 1,000; the bar is the median world; dashed lines are the "
-                     "health bar of Chapter 46. The first column has every rule of B2; each other "
-                     "column takes one away."),
+                     "health bar of Chapter 46. *B2*: every rule; *no mending*: deaths not mended; "
+                     "*all lapse*: any unused link lapses; *no birth links*: a newborn joined to its "
+                     "parent alone; *no valence*: no cap on chosen links; *handover*: a parent may "
+                     "hand its links to its child."),
             recipe=recipe(E14_RUNS, F.STATS_FILE, [
                 "For every run take the rows with `phase` = 2 and 200 ≤ `iteration` ≤ 1,000, and "
                 "the median of `coreShare`, `cutRisk`, `maxDegree` / `nodes`, `meanDegree` and "

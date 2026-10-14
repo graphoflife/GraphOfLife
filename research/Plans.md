@@ -100,21 +100,23 @@ wiped /tmp on 2026-10-14 — keep everything there, never only in /tmp).
 
 State of the chapters:
 
-- **49 · yardstick** (E12) — analysed 2026-10-14. B1 learns in 50–100
+- **46 · yardstick** (E12) — analysed 2026-10-14. B1 learns in 50–100
   iterations, then ties itself forever; thesis held.
-- **50 · brains that see** (E13) — analysed 2026-10-14. 8/10 MOR seeing worlds
+- **47 · brains that see** (E13) — analysed 2026-10-14. 8/10 MOR seeing worlds
   die, 4/10 one-layer; but no world passes the bar and the deaths are the
   cull's steady toll against births; births probe (`oee.children`): seeing
   brains can give up children. Thesis held.
-- **51 · a world that cannot break** (E14) — written; E14 analysed when the
-  lab finishes ("no valence" last). First look: B2 holds in 9/10 (one world's
-  dimension 4.19 > 4: the thesis, which asked for all ten, is refuted on that
-  line); every ablation fails in every finished world.
-- **52 · who dies, and why** (E15) — written 2026-10-14, queued in the lab.
+- **48 · a world that cannot break** (E14) — analysed 2026-10-14. B2 holds
+  in 9/10 (nobody cut off anywhere; seed 5's dimension 4.19 refutes the
+  thesis on that line); every ablation fails in 9–10 worlds. B2's space sits
+  at dimension 3.4–4.2 — near the top of the bar.
+- **49 · who dies, and why** (E15) — written 2026-10-14; running at 10,000 tokens.
   B2 has one way to die, old age; births run at 1.00–1.05 per hundred.
-- **53 · why evolution stops** (E16) — written 2026-10-14, queued. Colonel
+- **50 · why evolution stops** (E16) — written 2026-10-14; running at 10,000 tokens. Colonel
   Blotto reading; the pilot table.
-- **54 · Meta IV** — after 51–53 are analysed.
+- **51 · how fast should brains change?** (E09 on B2) — written 2026-10-14; queued after E16.
+- **52 · how big should a brain be?** — planned.
+- **53 · Meta IV** — after 49–52 are analysed.
 
 ### 51 · How fast should brains change? (Experiment 9, re-planned on B2 2026-10-14)
 

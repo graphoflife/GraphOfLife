@@ -205,3 +205,25 @@ B2 ("all the rules"), ten worlds at 5,000 tokens to 1,000: 2-core 1.000, cut
 risk 0.000, hub 2-3%, 5.0-5.8 links, no agent cut off from 200 on; dimension
 3.45-3.97 in nine worlds and 4.19 in seed 5 (above the bar's 4). Handover put
 back: every world fails (2-core 0.28-0.87, cut risk 1.2-6.8%).
+
+## Batch A at 10,000 tokens (2026-10-14; the author: every simulation ≥ 10,000 tokens from now)
+Rerun of batch A (ctrl / allies / kin_pool 2 / support_gain 2, seeds 1-2, 1,000
+iterations, revolutions off; data in GraphOfLifeRuns/.pilots/A10k). The 3,000-token
+runs (A3k) were stopped and kept only as hints.
+- **Alliances grow.** In allies-s1 the founders' random ally decisions make one
+  bloc of 54% of the agents at iteration 60; it decays to 15% by 310, then the
+  largest alliance grows steadily: 28% (360), 52% (560), 71% (760), 83% (960);
+  allied pairs 1,450 -> 7,020; conquest falls to ~2% of nodes a game. Seed 2:
+  64% -> 19-22% at 370-490 -> 46% at 910-970. Same shape, slower.
+- Support at gain 2 is still given up (631 -> 17 tokens a game in s1).
+- Kin pooling: peace (conquest 1.6%), kin sides of 30-80 agents.
+- Coin tournaments (eras 0/100/200/500/1000, T 20): ctrl +126 +204 +230 +196;
+  gain +222 +294 +306 +284; kin plateau from 200 (1000 vs 500: 0.494); allies
+  +113 +127 +135 +143 — the only one still creeping up (steps 0.51-0.53, 1000
+  vs 100: 0.566).
+- A coin per agent breaks up the alliances whose advantage is spatial, so
+  tourney.py gained `--layout halves` (each era a contiguous half, BFS from a
+  random agent); running with T 50.
+- Next (batch AL, running): allies at 10k for 3,000 iterations (s3, s4) and at
+  20k for 2,000 (s1, s2): does the bloc reach the whole world, what happens
+  after, and does it take longer in a world twice the size?

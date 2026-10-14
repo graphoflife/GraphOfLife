@@ -752,12 +752,610 @@
    "cutVertices": 47,
    "nodeCut": 0.0282574568288854,
    "edgeCut": 0.0282574568288854
+  },
+  "hold": {
+   "all the rules": 9,
+   "no mending": 0,
+   "any unused link lapses": 0,
+   "no links at birth": 0,
+   "no valence": 1,
+   "handover": 0
+  },
+  "worlds": {
+   "all the rules": 10,
+   "no mending": 10,
+   "any unused link lapses": 10,
+   "no links at birth": 10,
+   "no valence": 10,
+   "handover": 10
+  },
+  "extinct": {
+   "all the rules": [],
+   "no mending": [],
+   "any unused link lapses": [
+    1
+   ],
+   "no links at birth": [],
+   "no valence": [],
+   "handover": []
+  },
+  "cutOff": {
+   "all the rules": {
+    "1": 0.0,
+    "2": 0.0,
+    "3": 0.0,
+    "4": 0.0,
+    "5": 0.0,
+    "6": 0.0,
+    "7": 0.0,
+    "8": 0.0,
+    "9": 0.0,
+    "10": 0.0
+   },
+   "no mending": {
+    "1": 35011.0,
+    "2": 42896.0,
+    "3": 36620.0,
+    "4": 29241.0,
+    "5": 28954.0,
+    "6": 31923.0,
+    "7": 16141.0,
+    "8": 22984.0,
+    "9": 32380.0,
+    "10": 24717.0
+   },
+   "any unused link lapses": {
+    "1": 5064.0,
+    "2": 11558.0,
+    "3": 13204.0,
+    "4": 6595.0,
+    "5": 5747.0,
+    "6": 8903.0,
+    "7": 6289.0,
+    "8": 29577.0,
+    "9": 17950.0,
+    "10": 5650.0
+   },
+   "no links at birth": {
+    "1": 199.0,
+    "2": 271.0,
+    "3": 164.0,
+    "4": 434.0,
+    "5": 247.0,
+    "6": 177.0,
+    "7": 25.0,
+    "8": 140.0,
+    "9": 169.0,
+    "10": 271.0
+   },
+   "no valence": {
+    "1": 0.0,
+    "2": 0.0,
+    "3": 0.0,
+    "4": 0.0,
+    "5": 0.0,
+    "6": 0.0,
+    "7": 0.0,
+    "8": 0.0,
+    "9": 0.0,
+    "10": 0.0
+   },
+   "handover": {
+    "1": 0.0,
+    "2": 0.0,
+    "3": 0.0,
+    "4": 0.0,
+    "5": 0.0,
+    "6": 0.0,
+    "7": 0.0,
+    "8": 0.0,
+    "9": 0.0,
+    "10": 0.0
+   }
+  },
+  "fails": {
+   "all the rules": {
+    "coreShare": 0,
+    "cutRisk": 0,
+    "maxDegree/nodes": 0,
+    "meanDegree": 0,
+    "dimension": 1,
+    "nodeCut": 0
+   },
+   "no mending": {
+    "coreShare": 0,
+    "cutRisk": 0,
+    "maxDegree/nodes": 5,
+    "meanDegree": 0,
+    "dimension": 0,
+    "nodeCut": 9
+   },
+   "any unused link lapses": {
+    "coreShare": 4,
+    "cutRisk": 10,
+    "maxDegree/nodes": 1,
+    "meanDegree": 2,
+    "dimension": 9,
+    "nodeCut": 10
+   },
+   "no links at birth": {
+    "coreShare": 0,
+    "cutRisk": 1,
+    "maxDegree/nodes": 0,
+    "meanDegree": 0,
+    "dimension": 0,
+    "nodeCut": 4
+   },
+   "no valence": {
+    "coreShare": 0,
+    "cutRisk": 0,
+    "maxDegree/nodes": 4,
+    "meanDegree": 2,
+    "dimension": 7,
+    "nodeCut": 0
+   },
+   "handover": {
+    "coreShare": 9,
+    "cutRisk": 10,
+    "maxDegree/nodes": 0,
+    "meanDegree": 2,
+    "dimension": 0,
+    "nodeCut": 9
+   }
+  },
+  "dimension_worlds": {
+   "all the rules": {
+    "1": 3.8392872700894594,
+    "2": 3.972266384372044,
+    "3": 3.765157447882141,
+    "4": 3.517787912216556,
+    "5": 4.1936503966394945,
+    "6": 3.845132645280118,
+    "7": 3.445571765938687,
+    "8": 3.9679090091832943,
+    "9": 3.8870016355264574,
+    "10": 3.877672490345279
+   },
+   "no mending": {
+    "1": 3.1445582799031304,
+    "2": 2.9783440105899293,
+    "3": 3.196798901274552,
+    "4": 3.1758357703131126,
+    "5": 2.9433971914855226,
+    "6": 2.954079628058864,
+    "7": 3.027261369886797,
+    "8": 2.9952826150711154,
+    "9": 3.0874376366996135,
+    "10": 2.8898917058027247
+   },
+   "any unused link lapses": {
+    "1": 3.1722488578996937,
+    "2": 1.9618531197482778,
+    "3": 2.0194268412138663,
+    "4": 1.9455629613016256,
+    "5": 1.9762444118607543,
+    "6": 1.947019800264846,
+    "7": 1.947335998386727,
+    "8": 2.20331908603121,
+    "9": 2.097212685308762,
+    "10": 1.9603938844506246
+   },
+   "no links at birth": {
+    "1": 3.819759504692199,
+    "2": 3.6533764011386003,
+    "3": 3.5322968936946895,
+    "4": 3.7473431317186403,
+    "5": 3.9036964391865157,
+    "6": 3.690684593474641,
+    "7": 3.535525512206448,
+    "8": 3.64613699918854,
+    "9": 3.4570279607616614,
+    "10": 3.5896589676955544
+   },
+   "no valence": {
+    "1": 4.324579058477958,
+    "2": 3.9184507081954565,
+    "3": 4.121319812514935,
+    "4": 3.7122159334334306,
+    "5": 4.290794152316746,
+    "6": 4.449780027504415,
+    "7": 3.943925367477717,
+    "8": 4.308077053594872,
+    "9": 4.25084074692,
+    "10": 4.01862525941706
+   },
+   "handover": {
+    "1": 3.5274404675978137,
+    "2": 3.2190302616332067,
+    "3": 3.2466080344517882,
+    "4": 3.8741261378365097,
+    "5": 3.49943477885284,
+    "6": 3.274497899356354,
+    "7": 3.680844476547093,
+    "8": 3.323708445866181,
+    "9": 3.207491873175348,
+    "10": 3.5844903076295873
+   }
+  },
+  "medians": {
+   "all the rules": {
+    "coreShare": {
+     "n": 10,
+     "mean": 1.0,
+     "median": 1.0,
+     "sd": 0.0,
+     "min": 1.0,
+     "max": 1.0,
+     "q25": 1.0,
+     "q75": 1.0
+    },
+    "cutRisk": {
+     "n": 10,
+     "mean": 0.0,
+     "median": 0.0,
+     "sd": 0.0,
+     "min": 0.0,
+     "max": 0.0,
+     "q25": 0.0,
+     "q75": 0.0
+    },
+    "maxDegree/nodes": {
+     "n": 10,
+     "mean": 0.024980154819661766,
+     "median": 0.023979379255248373,
+     "sd": 0.002977705999117667,
+     "min": 0.02065778896848476,
+     "max": 0.031055900621118012,
+     "q25": 0.023597527820928436,
+     "q75": 0.026562955983800283
+    },
+    "meanDegree": {
+     "n": 10,
+     "mean": 5.434981136459402,
+     "median": 5.382932253103892,
+     "sd": 0.23389288255874185,
+     "min": 5.017380428688489,
+     "max": 5.758543812503447,
+     "q25": 5.297959688376907,
+     "q75": 5.630166672222434
+    },
+    "dimension": {
+     "n": 10,
+     "mean": 3.8311436957473526,
+     "median": 3.861402567812698,
+     "sd": 0.21776395582442085,
+     "min": 3.445571765938687,
+     "max": 4.1936503966394945,
+     "q25": 3.7836899034339706,
+     "q75": 3.947682165769085
+    },
+    "nodeCut": {
+     "n": 10,
+     "mean": 0.0,
+     "median": 0.0,
+     "sd": 0.0,
+     "min": 0.0,
+     "max": 0.0,
+     "q25": 0.0,
+     "q75": 0.0
+    }
+   },
+   "no mending": {
+    "coreShare": {
+     "n": 10,
+     "mean": 0.9902201340489288,
+     "median": 0.9918565603017099,
+     "sd": 0.006491535895532844,
+     "min": 0.9746159563924678,
+     "max": 0.9979915426561385,
+     "q25": 0.9883699492411908,
+     "q75": 0.9936394715418112
+    },
+    "cutRisk": {
+     "n": 10,
+     "mean": 0.0014513768066953254,
+     "median": 0.0011326939981654385,
+     "sd": 0.0007230983219427631,
+     "min": 0.0007165935438285146,
+     "max": 0.003030199934224702,
+     "q25": 0.0009829140237874524,
+     "q75": 0.001642378713749746
+    },
+    "maxDegree/nodes": {
+     "n": 10,
+     "mean": 0.05278991709317264,
+     "median": 0.050032352456455154,
+     "sd": 0.019747450612894794,
+     "min": 0.02256965632146704,
+     "max": 0.08401386525753085,
+     "q25": 0.040295441321446315,
+     "q75": 0.06164247765227843
+    },
+    "meanDegree": {
+     "n": 10,
+     "mean": 4.612861982409585,
+     "median": 4.605130279050841,
+     "sd": 0.48981660139126415,
+     "min": 3.9517363959529668,
+     "max": 5.689405684754522,
+     "q25": 4.390526091564774,
+     "q75": 4.785464524686848
+    },
+    "dimension": {
+     "n": 10,
+     "mean": 3.0392887109085365,
+     "median": 3.011271992478956,
+     "sd": 0.10615776888097074,
+     "min": 2.8898917058027247,
+     "max": 3.196798901274552,
+     "q25": 2.9601457236916304,
+     "q75": 3.1302781191022513
+    },
+    "nodeCut": {
+     "n": 10,
+     "mean": 0.1664970042252371,
+     "median": 0.16393332030138988,
+     "sd": 0.09285100073945116,
+     "min": 0.01694908405172414,
+     "max": 0.31048549295409134,
+     "q25": 0.13195391287908864,
+     "q75": 0.2101453217678674
+    }
+   },
+   "any unused link lapses": {
+    "coreShare": {
+     "n": 10,
+     "mean": 0.8305918419532687,
+     "median": 0.824878242934568,
+     "sd": 0.07781351850473459,
+     "min": 0.6838472834067548,
+     "max": 0.9330006787210782,
+     "q25": 0.7843945783845534,
+     "q75": 0.8847004146328729
+    },
+    "cutRisk": {
+     "n": 10,
+     "mean": 0.19914252997291026,
+     "median": 0.2023583805132195,
+     "sd": 0.03833900572490476,
+     "min": 0.13936020623388798,
+     "max": 0.2547537522792704,
+     "q25": 0.18312347309240895,
+     "q75": 0.22801207273593838
+    },
+    "maxDegree/nodes": {
+     "n": 10,
+     "mean": 0.04797778247009709,
+     "median": 0.01844613215025978,
+     "sd": 0.08181483877551295,
+     "min": 0.015267182924949916,
+     "max": 0.27925863044708543,
+     "q25": 0.016019132785060584,
+     "q75": 0.03179748619982239
+    },
+    "meanDegree": {
+     "n": 10,
+     "mean": 3.414967117844662,
+     "median": 3.4264614522729238,
+     "sd": 0.4310963655216852,
+     "min": 2.8902456939292667,
+     "max": 4.113732369780757,
+     "q25": 3.0892256457243175,
+     "q75": 3.4745948015960084
+    },
+    "dimension": {
+     "n": 10,
+     "mean": 2.1230617646466383,
+     "median": 1.9690487658045162,
+     "sd": 0.37800995157367423,
+     "min": 1.9455629613016256,
+     "max": 3.1722488578996937,
+     "q25": 1.9506004699027015,
+     "q75": 2.077766224285038
+    },
+    "nodeCut": {
+     "n": 10,
+     "mean": 0.30848030812483296,
+     "median": 0.3265971577695974,
+     "sd": 0.05308688305793309,
+     "min": 0.23829423644554917,
+     "max": 0.39645084645084644,
+     "q25": 0.25506947641654726,
+     "q75": 0.33987160950610246
+    }
+   },
+   "no links at birth": {
+    "coreShare": {
+     "n": 10,
+     "mean": 0.9807651995008031,
+     "median": 0.9803021364983332,
+     "sd": 0.00837266959201042,
+     "min": 0.9639492249141373,
+     "max": 0.9934670922373182,
+     "q25": 0.9766810986581731,
+     "q75": 0.9865929305784055
+    },
+    "cutRisk": {
+     "n": 10,
+     "mean": 0.007038281080507447,
+     "median": 0.007070560236697079,
+     "sd": 0.002576421740021327,
+     "min": 0.002656648849901984,
+     "max": 0.011345811514616376,
+     "q25": 0.006528127184561262,
+     "q75": 0.008494206923323283
+    },
+    "maxDegree/nodes": {
+     "n": 10,
+     "mean": 0.020233957090409926,
+     "median": 0.020007462069496315,
+     "sd": 0.0017015762166351746,
+     "min": 0.018261504747991233,
+     "max": 0.024070290341842066,
+     "q25": 0.01923752436386938,
+     "q75": 0.02090493086110448
+    },
+    "meanDegree": {
+     "n": 10,
+     "mean": 5.537237126275728,
+     "median": 5.5534913207003385,
+     "sd": 0.316084914407577,
+     "min": 5.151463581151237,
+     "max": 6.1350302078639025,
+     "q25": 5.334989792801017,
+     "q75": 5.5901389374069765
+    },
+    "dimension": {
+     "n": 10,
+     "mean": 3.6575506403757494,
+     "median": 3.6497567001635702,
+     "sd": 0.13808410198305918,
+     "min": 3.4570279607616614,
+     "max": 3.9036964391865157,
+     "q25": 3.5490588760787247,
+     "q75": 3.7331784971576405
+    },
+    "nodeCut": {
+     "n": 10,
+     "mean": 0.018675380379178028,
+     "median": 0.018110291461507708,
+     "sd": 0.004260159230947464,
+     "min": 0.011680051835558512,
+     "max": 0.02466094994830627,
+     "q25": 0.015729452843485592,
+     "q75": 0.021658074411643767
+    }
+   },
+   "no valence": {
+    "coreShare": {
+     "n": 10,
+     "mean": 1.0,
+     "median": 1.0,
+     "sd": 0.0,
+     "min": 1.0,
+     "max": 1.0,
+     "q25": 1.0,
+     "q75": 1.0
+    },
+    "cutRisk": {
+     "n": 10,
+     "mean": 0.0,
+     "median": 0.0,
+     "sd": 0.0,
+     "min": 0.0,
+     "max": 0.0,
+     "q25": 0.0,
+     "q75": 0.0
+    },
+    "maxDegree/nodes": {
+     "n": 10,
+     "mean": 0.04337195349256346,
+     "median": 0.04482736048004316,
+     "sd": 0.013357735690925427,
+     "min": 0.02461113797549968,
+     "max": 0.061068731699799664,
+     "q25": 0.03112599790584341,
+     "q75": 0.054327942394361325
+    },
+    "meanDegree": {
+     "n": 10,
+     "mean": 10.327614238459912,
+     "median": 8.654658192128256,
+     "sd": 3.419008004974992,
+     "min": 7.281105524460045,
+     "max": 17.716619331489895,
+     "q25": 8.022536263794718,
+     "q75": 11.291270177864357
+    },
+    "dimension": {
+     "n": 10,
+     "mean": 4.133860811985258,
+     "median": 4.186080279717467,
+     "sd": 0.23058861308312992,
+     "min": 3.7122159334334306,
+     "max": 4.449780027504415,
+     "q25": 3.9626003404625525,
+     "q75": 4.30375632827534
+    },
+    "nodeCut": {
+     "n": 10,
+     "mean": 0.0,
+     "median": 0.0,
+     "sd": 0.0,
+     "min": 0.0,
+     "max": 0.0,
+     "q25": 0.0,
+     "q75": 0.0
+    }
+   },
+   "handover": {
+    "coreShare": {
+     "n": 10,
+     "mean": 0.588210895188909,
+     "median": 0.597929960687671,
+     "sd": 0.17463967465586822,
+     "min": 0.2762951316998638,
+     "max": 0.8702431521281079,
+     "q25": 0.5235721480082208,
+     "q75": 0.6922920284762192
+    },
+    "cutRisk": {
+     "n": 10,
+     "mean": 0.04162999624679311,
+     "median": 0.040629998466242004,
+     "sd": 0.0181506566722747,
+     "min": 0.011862623816285816,
+     "max": 0.06763795916828677,
+     "q25": 0.030299944706624178,
+     "q75": 0.05717287929891859
+    },
+    "maxDegree/nodes": {
+     "n": 10,
+     "mean": 0.01730383162964235,
+     "median": 0.016067179978096726,
+     "sd": 0.0026624238558324003,
+     "min": 0.014006455200837948,
+     "max": 0.021204410517387615,
+     "q25": 0.01529604683618839,
+     "q75": 0.01999791337296696
+    },
+    "meanDegree": {
+     "n": 10,
+     "mean": 3.4059275289854334,
+     "median": 3.2617009480931447,
+     "sd": 0.5811937201896207,
+     "min": 2.449687952014404,
+     "max": 4.297805093065657,
+     "q25": 3.203520588740857,
+     "q75": 3.870801616202792
+    },
+    "dimension": {
+     "n": 10,
+     "mean": 3.443767268294672,
+     "median": 3.4115716123595106,
+     "sd": 0.2259764484223637,
+     "min": 3.207491873175348,
+     "max": 3.8741261378365097,
+     "q25": 3.2535805006779297,
+     "q75": 3.570227847621644
+    },
+    "nodeCut": {
+     "n": 10,
+     "mean": 0.056422715129394695,
+     "median": 0.057226419519362415,
+     "sd": 0.02493604856809973,
+     "min": 0.019272824388392028,
+     "max": 0.09095042482971702,
+     "q25": 0.03477353708140911,
+     "q75": 0.07771779736488765
+    }
+   }
   }
  },
  "figures": {
   "space": {
    "title": "What the rules of space make, with no brains",
-   "caption": "Each column is one set of rules, each dot one world of about 1,500 agents after 300 iterations, the bar the median of ten. *parent*: a newborn is joined to its parent alone; *+2*: also to two of the parent's neighbours, drawn at random; *chain*: also, when an agent dies, the groups of its former neighbours that are not linked to one another are joined in a chain; *ring*: joined in a ring \u2014 B2's rules; *ring, 1* and *ring, 3*: the ring, with one or three of the parent's neighbours instead of two; *join all*: every former neighbour of the dead joined in a chain, linked or not; *ring, \u2264 8*: B2's rules with no agent above 8 links. The dashed lines are the health bar of Chapter 46. Cut shares and the best-connected agent's share are drawn on logarithmic axes, a cut of nothing at 0.0001.",
+   "caption": "Each column is one set of rules, each dot one world of about 1,500 agents after 300 iterations, the bar the median of ten. *parent*: a newborn is joined to its parent alone; *+2*: also to two of the parent's neighbours, drawn at random; *chain*: also, when an agent dies, the groups of its former neighbours that are not linked to one another are joined in a chain; *ring*: joined in a ring \u2014 B2's rules; *ring, 1* and *ring, 3*: the ring, with one or three of the parent's neighbours instead of two; *join all*: every former neighbour of the dead joined in a chain, linked or not; *ring, \u2264 8*: B2's rules, and no child for an agent of 8 links or more nor a newborn's random link to one (mending still links past the cap). The dashed lines are the health bar of Chapter 46. Cut shares and the best-connected agent's share are drawn on logarithmic axes, a cut of nothing at 0.0001.",
    "recipe": "**Runs.** No runs: the worlds are made by the model itself, seeds 1 to 10 for every set of rules.\n\n**Data.** From the networks the model returns.\n\n1. A world of no brains (`research/oee/space.py`): it starts as a ring of 50 agents, each joined to its 6 nearest (Watts\u2013Strogatz, rewiring 0.2). Every iteration each agent has a child with probability 0.02 \u00d7 1,500 / *n*, plus 0.05 while there are fewer than 1,500 agents, and then dies with probability 0.02; after both, only the largest piece is kept. 300 iterations.\n2. Measure the last network (`space.measure`): the largest share of the others one agent's loss would cut off from the largest piece (`GraphOfLifeSimple.worst_node_cut_share`), the same for one link (`cutRisk`), the 2-core, links per agent, the ball dimension, and the best-connected agent's links over the agents less one.\n\n**To make it again:** `python3 book_figures.py unbreakable`."
   },
   "blobs": {
@@ -769,6 +1367,21 @@
    "title": "Mended in a ring",
    "caption": "A world of the model aiming at 600 agents (637 at the end): the same, and every death mended in a ring. Of seeds 1 to 5, the world that ended largest. Agents and links whose loss alone would split the world are drawn in the second colour, the links wider; the worst of them cuts off 2.8% of the world.",
    "recipe": "**Runs.** No runs: the model's worlds, seeds 1 to 5.\n\n**Data.** From the network the model returns.\n\n1. A world of no brains (`research/oee/space.py`): it starts as a ring of 50 agents, each joined to its 6 nearest (Watts\u2013Strogatz, rewiring 0.2). Every iteration each agent has a child with probability 0.02 \u00d7 600 / *n*, plus 0.05 while there are fewer than 600 agents, and then dies with probability 0.02; after both, only the largest piece is kept. 300 iterations.\n2. Keep the world that ended with the most agents.\n3. Find the bridges and the cut vertices (`networkx.bridges`, `networkx.articulation_points`), lay the network out with `networkx.forceatlas2_layout(G, max_iter=300, seed=1)` and draw it.\n\n**To make it again:** `python3 book_figures.py unbreakable`."
+  },
+  "agents": {
+   "title": "Agents alive",
+   "caption": "For each condition the median world at each iteration, with the middle half of the worlds (darker) and nine in ten (paler). A world that died out leaves the band when it does.",
+   "recipe": "**Runs.** The 60 runs of Experiment 14 \u2014 B2 at 5,000 tokens, seeds 1 to 10, 1,000 iterations \u2014 in six conditions: all the rules of B2, and B2 with one of them taken away or changed. They are made with `python3 gol_lab.py run E14`.\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).\n\n1. Take `nodes` of the rows with `phase` = 2, one line per run.\n2. For each condition, the median, quartiles and 5th and 95th percentiles of the runs at each iteration (`book_figures.band_series`).\n\n**To make it again:** `python3 book_figures.py unbreakable`."
+  },
+  "lost": {
+   "title": "Agents cut off from iteration 200 to 1,000",
+   "caption": "One dot per world: every agent the cull removed because it was no longer joined to the largest piece, in either phase, from iteration 200 to 1,000 \u2014 plus one, so that a world that lost nobody sits at 1 on the logarithmic axis. The bar is the median world.",
+   "recipe": "**Runs.** The 60 runs of Experiment 14 \u2014 B2 at 5,000 tokens, seeds 1 to 10, 1,000 iterations \u2014 in six conditions: all the rules of B2, and B2 with one of them taken away or changed. They are made with `python3 gol_lab.py run E14`.\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).\n\n1. Sum `orphaned` over the rows of both phases with 200 \u2264 `iteration` \u2264 1,000.\n2. Add one, and draw a dot per world.\n\n**To make it again:** `python3 book_figures.py unbreakable`."
+  },
+  "bar": {
+   "title": "Each rule against the health bar",
+   "caption": "One dot per world, at its median over iterations 200 to 1,000; the bar is the median world; dashed lines are the health bar of Chapter 46. *B2*: every rule; *no mending*: deaths not mended; *all lapse*: any unused link lapses; *no birth links*: a newborn joined to its parent alone; *no valence*: no cap on chosen links; *handover*: a parent may hand its links to its child.",
+   "recipe": "**Runs.** The 60 runs of Experiment 14 \u2014 B2 at 5,000 tokens, seeds 1 to 10, 1,000 iterations \u2014 in six conditions: all the rules of B2, and B2 with one of them taken away or changed. They are made with `python3 gol_lab.py run E14`.\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).\n\n1. For every run take the rows with `phase` = 2 and 200 \u2264 `iteration` \u2264 1,000, and the median of `coreShare`, `cutRisk`, `maxDegree` / `nodes`, `meanDegree` and `dimension`.\n2. No run records the worst cut by one agent, so read it off the frames: every 10th iteration from 200 to 1,000, rebuild the network after the game and take `GraphOfLifeSimple.worst_node_cut_share` (`oee.node_cut`); its median.\n3. A world holds if every median is inside the bar and `orphaned` is 0 in every row of either phase in the same iterations.\n\n**To make it again:** `python3 book_figures.py unbreakable`."
   }
  }
 }

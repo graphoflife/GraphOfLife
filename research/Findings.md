@@ -84,7 +84,7 @@ otherwise. Last consolidated: 2026-10-14.
   small worlds) open.
 - MOR alone at birth only ("spawn") froze a pilot world: no births, no change.
 
-**Space (Ch. 48, model research/oee/space.py; E14 running)**
+**Space (Ch. 48, model research/oee/space.py; E14)**
 - Births alone make a tree of blobs: newborns close only triangles; one agent's
   loss can cut 37% (links 2), 41% (parent only).
 - A death mended in a ring never splits the world (proof in Ch. 48); with 2 birth
@@ -94,9 +94,16 @@ otherwise. Last consolidated: 2026-10-14.
 - In the game: unused links lapse only if their ends share ≥ 2 neighbours
   (prune_needs 2; with 1 a cactus can form); valence 8 against preferential
   attachment by brains; no handover.
-- E14 first look: B2 holds the bar in 9/10 worlds (2-core 1.000, no cut, hub
-  2–3%, 5.0–5.8 links); one world's dimension 4.19 > 4. With handover every world
-  fails (2-core 0.28–0.87).
+- E14 (analysed 2026-10-14): under B2 nobody was cut off from 200 to 1,000 in
+  any of ten worlds; 2-core 1.000; no link and (in the median frame) no agent
+  whose loss cuts anything off, worst moment 1.2%; hub 2.1–3.1%, 5.0–5.8
+  links; dimension 3.45–4.19 (median 3.86) — seed 5 above the bar's 4, so the
+  pre-registered thesis is refuted by that one line. Every ablation fails in
+  9–10 worlds: no mending 16,000–43,000 agents cut off (deaths by age cut;
+  worlds knit at links but hung at agents, worst agent cut 16%); any unused
+  link lapses → dimension 2.0, link cut 20%, one extinction; no birth links →
+  25–434 cut off; no valence → 8.7 links (up to 17.7), dimension > 4 in 7;
+  handover → 40% outside the 2-core.
 
 **Who dies (Ch. 49, E15 planned)**
 - Kamikaze children: with links at birth and mending, newborns with 1–2 tokens

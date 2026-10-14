@@ -51,7 +51,7 @@ each set of rules below was run with ten seeds.
 <!-- figure unbreakable/space -->
 ![What the rules of space make, with no brains](../figures/unbreakable/space.svg)
 
-**What the rules of space make, with no brains.** Each column is one set of rules, each dot one world of about 1,500 agents after 300 iterations, the bar the median of ten. *parent*: a newborn is joined to its parent alone; *+2*: also to two of the parent's neighbours, drawn at random; *chain*: also, when an agent dies, the groups of its former neighbours that are not linked to one another are joined in a chain; *ring*: joined in a ring — B2's rules; *ring, 1* and *ring, 3*: the ring, with one or three of the parent's neighbours instead of two; *join all*: every former neighbour of the dead joined in a chain, linked or not; *ring, ≤ 8*: B2's rules with no agent above 8 links. The dashed lines are the health bar of [Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md). Cut shares and the best-connected agent's share are drawn on logarithmic axes, a cut of nothing at 0.0001.
+**What the rules of space make, with no brains.** Each column is one set of rules, each dot one world of about 1,500 agents after 300 iterations, the bar the median of ten. *parent*: a newborn is joined to its parent alone; *+2*: also to two of the parent's neighbours, drawn at random; *chain*: also, when an agent dies, the groups of its former neighbours that are not linked to one another are joined in a chain; *ring*: joined in a ring — B2's rules; *ring, 1* and *ring, 3*: the ring, with one or three of the parent's neighbours instead of two; *join all*: every former neighbour of the dead joined in a chain, linked or not; *ring, ≤ 8*: B2's rules, and no child for an agent of 8 links or more nor a newborn's random link to one (mending still links past the cap). The dashed lines are the health bar of [Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md). Cut shares and the best-connected agent's share are drawn on logarithmic axes, a cut of nothing at 0.0001.
 
 > [!example]- How to make this figure
 > **Runs.** No runs: the worlds are made by the model itself, seeds 1 to 10 for every set of rules.
@@ -353,9 +353,133 @@ handover, put one back — to see whether every rule is needed.
 > A value in **bold** differs from the baseline B2.
 <!-- /runs -->
 
-> [!warning] Waiting for the runs
-> The plan, the thesis and the method above were written before any run of
-> Experiment 14 existed; the results follow when they are done.
+## What the sixty worlds did
+
+The most direct measure of a world that cannot break is how many of its
+agents were cut off: lost not to age or hunger, but because the network they
+belonged to came apart and the cull removed every piece but the largest.
+
+<!-- figure unbreakable/lost -->
+![Agents cut off from iteration 200 to 1,000](../figures/unbreakable/lost.svg)
+
+**Agents cut off from iteration 200 to 1,000.** One dot per world: every agent the cull removed because it was no longer joined to the largest piece, in either phase, from iteration 200 to 1,000 — plus one, so that a world that lost nobody sits at 1 on the logarithmic axis. The bar is the median world.
+
+> [!example]- How to make this figure
+> **Runs.** The 60 runs of Experiment 14 — B2 at 5,000 tokens, seeds 1 to 10, 1,000 iterations — in six conditions: all the rules of B2, and B2 with one of them taken away or changed. They are made with `python3 gol_lab.py run E14`.
+>
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
+>
+> 1. Sum `orphaned` over the rows of both phases with 200 ≤ `iteration` ≤ 1,000.
+> 2. Add one, and draw a dot per world.
+>
+> **To make it again:** `python3 book_figures.py unbreakable`.
+<!-- /figure -->
+
+**Under all of B2's rules, nobody.** In none of the ten worlds was a single
+agent cut off between iteration 200 and iteration 1,000. Every agent sat in
+the 2-core in every world, and in the median frame of every world no link
+and no agent existed whose loss alone would have cut anything off — not a
+single cut vertex among 800 to 1,800 agents. Read every tenth iteration, the
+worst a single agent's loss could have done at any moment was to cut off 1.2%
+of a world, below the bar's 2%. The best-connected agent was
+joined to 2.1 to 3.1% of the others, an agent had 5.0 to 5.8 links in the
+median frame of its world, and the ball dimension was 3.45 to 4.19, 3.86 in
+the median world.
+
+<!-- figure unbreakable/bar -->
+![Each rule against the health bar](../figures/unbreakable/bar.svg)
+
+**Each rule against the health bar.** One dot per world, at its median over iterations 200 to 1,000; the bar is the median world; dashed lines are the health bar of [Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md). *B2*: every rule; *no mending*: deaths not mended; *all lapse*: any unused link lapses; *no birth links*: a newborn joined to its parent alone; *no valence*: no cap on chosen links; *handover*: a parent may hand its links to its child.
+
+> [!example]- How to make this figure
+> **Runs.** The 60 runs of Experiment 14 — B2 at 5,000 tokens, seeds 1 to 10, 1,000 iterations — in six conditions: all the rules of B2, and B2 with one of them taken away or changed. They are made with `python3 gol_lab.py run E14`.
+>
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
+>
+> 1. For every run take the rows with `phase` = 2 and 200 ≤ `iteration` ≤ 1,000, and the median of `coreShare`, `cutRisk`, `maxDegree` / `nodes`, `meanDegree` and `dimension`.
+> 2. No run records the worst cut by one agent, so read it off the frames: every 10th iteration from 200 to 1,000, rebuild the network after the game and take `GraphOfLifeSimple.worst_node_cut_share` (`oee.node_cut`); its median.
+> 3. A world holds if every median is inside the bar and `orphaned` is 0 in every row of either phase in the same iterations.
+>
+> **To make it again:** `python3 book_figures.py unbreakable`.
+<!-- /figure -->
+
+**And each rule taken away breaks something different.**
+
+- **No mending.** Now every death by age can cut, and every iteration someone
+  dies of age: the worlds lost 16,000 to 43,000 agents to the cull in 800
+  iterations — worlds of 640 to 1,400 agents lost twenty to fifty of them in
+  every iteration. Strikingly, no single *link* could cut off more than 0.3%:
+  the worlds were knit at every link but hung together at agents. One
+  agent's loss could cut off 16% of the world in the median frame of the
+  median world (2% to 31%), and in every world there were moments when a
+  single agent held half of it to the rest.
+  Without the death that mending answers, links at birth alone only make the
+  tree of blobs of the model.
+- **Any unused link lapses.** The network thins towards a tree: a ball
+  dimension of 2.0, one link's loss cutting off a fifth of the world, one
+  agent's a third, 18% of agents outside the 2-core; 5,000 to 30,000 agents
+  cut off, and one world died out at iteration 532.
+- **No links at birth.** Mending keeps deaths from cutting, but a newborn
+  joined only to its parent hangs on it: 25 to 434 agents were cut off, and
+  one agent's loss could cut off 1.2 to 2.5% (above the bar's 2% in four
+  worlds).
+- **No valence.** Nobody was cut off, but the links ran away: 8.7 per agent
+  in the median world and up to 17.7, the best-connected agent joined to up to
+  6% of the others, and the dimension above 4 in seven worlds — the crowd the
+  model made when it mended everything.
+- **Handover.** Nobody was cut off — mending and the pruning rule still
+  hold — but 40% of the agents hung in trees outside the 2-core in the median
+  world, and one link's loss could cut off 4%.
+
+<!-- figure unbreakable/agents -->
+![Agents alive](../figures/unbreakable/agents.svg)
+
+**Agents alive.** For each condition the median world at each iteration, with the middle half of the worlds (darker) and nine in ten (paler). A world that died out leaves the band when it does.
+
+> [!example]- How to make this figure
+> **Runs.** The 60 runs of Experiment 14 — B2 at 5,000 tokens, seeds 1 to 10, 1,000 iterations — in six conditions: all the rules of B2, and B2 with one of them taken away or changed. They are made with `python3 gol_lab.py run E14`.
+>
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
+>
+> 1. Take `nodes` of the rows with `phase` = 2, one line per run.
+> 2. For each condition, the median, quartiles and 5th and 95th percentiles of the runs at each iteration (`book_figures.band_series`).
+>
+> **To make it again:** `python3 book_figures.py unbreakable`.
+<!-- /figure -->
+
+## The verdict
+
+The thesis asked two things. Every one of the ten B2 worlds should pass every
+line of the health bar with nobody cut off; nine did, and the tenth (seed 5)
+failed by one line: a median ball dimension of 4.19 against the bar's 4. And
+each condition that takes a rule away should fail some line in at least five
+of its ten worlds; every one did, in nine or ten. **Strictly, the thesis is
+refuted** — by one world's dimension — while everything it was about held: no
+B2 world lost an agent to a cut, and every rule turned out to be needed.
+
+(The thesis's confirmation lists five lines of the bar; the sixth, the cut by
+one agent, is not in the recorded statistics and was read off the frames
+afterwards. B2 passed it everywhere.)
+
+## What it teaches
+
+Four local rules — a newborn joined to two of its parent's neighbours, a
+death mended in a ring, an unused link lapsing only where its ends share two
+neighbours, and a cap on the links a brain chooses — make a network with no
+single point of failure at all, under brains that see, at every frame of every
+world. Each answers one force: births close small loops, mending repairs what
+deaths would cut, the pruning rule keeps the game from cutting, the cap keeps
+the brains from piling links on a few agents.
+
+What they do not do is hold the world close to three dimensions. B2's worlds
+sit at 3.4 to 4.2, at the top of the bar, and the model shows why: every
+mending adds links where a neighbourhood was, and a world that is mended
+everywhere is drawn together. A world closer to three dimensions would need
+fewer links at birth or sparser mending — and the model says what that costs:
+with one link at birth, cuts of 2% instead of 1.4%. The next experiments keep
+B2 as it is: a world in which no agent is ever lost to a cut, so that every
+death that remains is a death of age, and every change in a population is
+evolution's — [Chapter 49](49-who-dies-and-why.md) asks who dies, and why.
 
 <!-- turns -->
 ---

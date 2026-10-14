@@ -42,6 +42,34 @@ def era_path(run, it):
     return os.path.join(run, f"ckpt_{it:06d}.npz")
 
 
+def halves(state, rng):
+    """A coin per agent replaced by two contiguous regions: era B gets the half of
+    the agents nearest (in steps) to a random agent, era A the rest."""
+    from collections import deque
+    # A checkpoint's edges are pairs of positions in its `ids`, not agent ids.
+    n = len(state["ids"])
+    adj = [[] for _ in range(n)]
+    for a, b in state["edges"]:
+        adj[int(a)].append(int(b))
+        adj[int(b)].append(int(a))
+    start = int(rng.randint(n))
+    seen, order, queue = {start}, [], deque([start])
+    while queue:
+        u = queue.popleft()
+        order.append(u)
+        for v in adj[u]:
+            if v not in seen:
+                seen.add(v)
+                queue.append(v)
+    order += [u for u in range(n) if u not in seen]
+    from_b = np.zeros(n, dtype=bool)
+    from_b[order[: n // 2]] = True
+    return from_b
+
+
+LAYOUT = "coins"
+
+
 def contest(args):
     run, state_it, a_it, b_it, T, seed = args
     meta = json.load(open(os.path.join(run, "config.json")))
@@ -59,7 +87,7 @@ def contest(args):
     rng = np.random.RandomState(seed)
     n = len(state["ids"])
     nl = int(state["n_layers"][0])
-    from_b = rng.random_sample(n) < 0.5
+    from_b = halves(state, rng) if LAYOUT == "halves" else rng.random_sample(n) < 0.5
     pick_a = rng.randint(0, len(A["ids"]), size=n)
     pick_b = rng.randint(0, len(B["ids"]), size=n)
     blob = dict(state)
@@ -101,7 +129,11 @@ def main():
     ap.add_argument("--jobs", type=int, default=6)
     ap.add_argument("--pairs", default="all", help="all | base (each vs the first) | step (each vs the previous)")
     ap.add_argument("--out", default="")
+    ap.add_argument("--layout", default="coins", choices=("coins", "halves"),
+                    help="coins: a coin per agent; halves: each era gets a contiguous half of the world")
     a = ap.parse_args()
+    global LAYOUT
+    LAYOUT = a.layout
     if a.eras:
         eras = [int(x) for x in a.eras.split(",")]
     else:
@@ -121,7 +153,7 @@ def main():
                 tasks.append((a.run, state_it, a_it, b_it, a.T, 1000 + r))
     with ProcessPoolExecutor(a.jobs) as ex:
         results = list(ex.map(contest, tasks))
-    out = a.out or os.path.join(a.run, f"tourney_T{a.T}_{a.pairs}.json")
+    out = a.out or os.path.join(a.run, f"tourney_T{a.T}_{a.pairs}{'' if a.layout == 'coins' else '_' + a.layout}.json")
     json.dump({"eras": eras, "T": a.T, "results": results}, open(out, "w"))
     # Later era's score against the earlier one, averaged over arenas and coins.
     by_pair = {}

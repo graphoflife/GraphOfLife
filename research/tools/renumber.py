@@ -17,8 +17,8 @@ What it rewrites, in one pass each so that a permutation cannot chain:
   is left to the caller (move entries by hand before or after);
 - in Markdown, Python, and the JSON of results and of experiments without
   runs: "Chapter N", "Chapters N–M" (and "to", "and", "or", commas between),
-  "Ch. N", the file names of moved chapters, and "### N ·" headings in
-  research notes.
+  "Ch. N", the file names of moved chapters, and "### N ·" headings and
+  "- **N ·" bullets in research notes.
 
 It never touches the thesis of an experiment that has runs (pre-registered
 text is not reworded); it lists those that cite a moved chapter, so a note
@@ -43,7 +43,7 @@ TEXT_GLOBS = ("book/chapters/*.md", "book/notes/*.md", "book/README.md", "resear
               "gol_tournament.py", "book/results/*.json")
 NUMBER_RUN = r"(\d+)((?:\s*(?:[–-]|to|and|or|,)\s*\d+)*)"
 REFERENCE = re.compile(r"\b(Chapters?|chapters?|Ch\.)(\s+)" + NUMBER_RUN)
-HEADING = re.compile(r"^(###\s+)(\d+)(\s+·)", re.M)
+HEADING = re.compile(r"^(###\s+|- \*\*)(\d+)(\s+·)", re.M)   # "### N ·" headings and "- **N ·" bullets
 
 
 def load_mapping(path: str) -> Dict[str, Optional[str]]:
