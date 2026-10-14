@@ -115,7 +115,7 @@ The first game is a scramble. Of the agents alive at its start, 57% lose
 tokens and 41% gain; fewer than one in a hundred come out with exactly what
 they had. Few die in it: 0.8% starve — nobody, not even they themselves,
 staked on their node — and 0.4% are cut off from the network. (In the worlds
-of 10,000 tokens, whose founders had five neighbours each instead of ten, the
+of 10,000 tokens, whose founders had four neighbours each instead of ten, the
 first game was violent: 3.8% starved and 4.0% were cut off.)
 
 Settled games are calm. 0.7% starve and 2.1% are cut off; 24% lose and 26%
@@ -171,10 +171,12 @@ Which rich agents die? Almost only those with few connections: of the rich
 agents in the sample with one or two connections, 10.4% died in the game;
 with three to nine, 3.1%; with ten or more, 0.7%. All of this is as at 10,000
 tokens, within a few points. A rich agent with one connection
-dies in one of two ways, both visible in the rules: it puts all its tokens on
-its neighbour and nobody stakes on it (it starves — its tokens are not lost,
-they moved to the neighbour's node), or its connection carries nothing and is
-cut, and it is cut off with its tokens.
+dies in one of two ways of its own, both visible in the rules: it puts all its
+tokens on its neighbour and nobody stakes on it (it starves — its tokens are
+not lost, they moved to the neighbour's node), or its connection carries
+nothing and is cut, and it is cut off with its tokens. Otherwise it can only
+go with its branch, when a connection further in is cut and the part of the
+network it hangs on is no longer joined to the largest piece.
 
 If the rich lose 48% per game, why is there always a rich tenth holding 42%
 of the tokens ([Chapter 15](15-where-do-the-tokens-go.md))? Because the rich

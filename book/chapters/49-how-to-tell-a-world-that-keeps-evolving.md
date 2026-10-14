@@ -311,11 +311,12 @@ In every world the brains of iteration 50 beat the founders and became the
 second champion. After that, seven worlds crowned one more, two worlds two
 more, and one world none. That is just what chance crowns. A contest is
 noisy — the two contests of a pair differ by enough that one contest's share
-spreads by about 0.12 around the pair's mean — and an era that is in truth no
+spreads by about 0.12 around the pair's true score, and the mean of two by
+about 0.08 — and an era that is in truth no
 better than the era 50 still beats every champion by more than 0.55 now and
 then. In 20,000 tournaments simulated with that spread, every era after 50
 exactly as good as the era 50 and the founders losing every contest, the
-number of champions was 2 in 15% of them, 3 in 66% and 4 in 19%; the ten
+number of champions was 2 in 15% of them, 3 in 66%, 4 in 19% and 5 in 0.7%; the ten
 worlds had 2 once, 3 seven times and 4 twice. Nothing in the ten worlds is
 better than its iteration 50 by more than chance can make it look.
 
@@ -341,7 +342,8 @@ can only set constants, and a few constants are quickly set. Brains that see
 are the obvious next step, and they are what
 [Chapter 50](50-brains-that-see-and-worlds-that-break.md) tries — with
 consequences for the world itself that have to be dealt with first. Whether
-evolution then keeps going is the subject of Chapter 53.
+evolution then keeps going is the subject of
+[Chapter 53](53-why-evolution-stops.md).
 
 <!-- turns -->
 ---

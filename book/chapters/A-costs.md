@@ -56,11 +56,15 @@ what the estimates assume. The figure is redrawn by `python3 gol_lab.py costs`.
 
 ## What the baseline set cost
 
-The thirty runs of [Chapter 9](09-thirty-worlds.md) — 10,000 tokens, 3,000 iterations each — took
+The thirty runs of Experiment 2 — 10,000 tokens, 3,000 iterations each, the
+worlds Parts II and III were first written from
+([Chapter 10](10-a-worlds-life.md) lists their settings) — took
 26 hours of computing, done in 7.2 hours on four workers, and fill 7.8 GB.
 No run needed more than 651 MB of memory. That is the unit the experiments
 of Parts II and III are sized in: one condition of thirty seeds at 10,000 tokens is
-about seven hours.
+about seven hours. The thirty worlds of 100,000 tokens that
+[Chapter 9](09-thirty-worlds.md) introduces, 1,500 iterations each, took
+211 hours and fill 58 GB.
 
 ## The rules for sizing an experiment
 
@@ -71,8 +75,9 @@ about seven hours.
   settles at about 0.12 × *T* agents (measured on worlds of 10,000 tokens),
   and an agent costs about 0.87 ms per iteration, so 10,000 tokens cost about
   1.1 seconds per iteration. If the number of agents grows in step with the
-  tokens, 200,000 tokens cost about 22 —
-  [Chapter 42](42-how-does-a-worlds-size-follow-its-tokens.md) will say whether it does.
+  tokens, 200,000 tokens cost about 22 — and it does: agents grow as the
+  tokens to the power 1.00
+  ([Chapter 42](42-how-does-a-worlds-size-follow-its-tokens.md)).
 - Memory limits big worlds before time does: the lab starts a run only when
   its estimated peak fits next to the runs already going, in three quarters
   of the machine's memory.

@@ -99,10 +99,10 @@ still alive after 10 games, 50% after 50, 30% after 100, 10% after 200 (87%,
 
 The order of wealth is forgotten slowly, and in a particular way. A process
 that forgets a fixed fraction every game would have ρ falling like
-0.86, 0.86², 0.86³, … — to 0.22 after 10 games and to nothing after 50. The
-worlds lose instead about **a tenth of ρ every time the lag doubles**: 0.07
-from 10 to 20 games, 0.11 from 50 to 100 and 0.13 from 100 to 200. That is
-how memory fades when it is held by many things that last for very
+0.86, 0.86², 0.86³, … — to 0.22 after 10 games and to nothing after 50. In
+the worlds, instead, **ρ falls by about 0.1 every time the lag doubles**:
+0.07 from 10 to 20 games, 0.11 from 50 to 100 and 0.13 from 100 to 200.
+That is how memory fades when it is held by many things that last for very
 different times. Here the likely holders are the connections. An agent's tokens follow its number of
 connections plus one ([Chapter 34](34-how-properties-scale-together.md)),
 and a hub's connections outlast many games, while a leaf's change all the
@@ -115,7 +115,7 @@ order is *closer* to the first than after one: ρ = 0.88 against 0.86. The
 richest show it too (below): 76% of the richest hundredth are still in the
 richest tenth two games later, but only 73% one game later.
 
-[Chapter 29](29-where-the-tokens-flow.md) found that the brains move tokens
+[Chapter 29](29-where-the-tokens-flow.md) shows that the brains move tokens
 almost as an even split would: each agent stakes the same share on itself
 and on each of its neighbours. Take a hub with *k* neighbours that have no
 other connections. The hub keeps 1/(*k* + 1) of its tokens and gives each
@@ -138,9 +138,9 @@ $$
 which is **negative** for every hub with two neighbours or more: −0.17 for
 *k* = 2, −0.4 for *k* = 9. A negative factor flips the sign of the
 departure every game. A hub above its resting share falls below it in the
-next game and comes back above it in the one after, each time by a little
-less. Tokens slosh between hubs and leaves, and the order of wealth swings
-with a period of two games. The even split is the step of a diffusion
+next game and comes back above it in the one after, each time by less than
+half as much. Tokens slosh between hubs and leaves, and the order of wealth
+swings with a period of two games. The even split is the step of a diffusion
 ([Chapter 7](07-physical-inspiration.md)), and this rhythm is its overshoot
 on the star-shaped parts of the network.
 
@@ -169,8 +169,9 @@ Ten games on, where are the agents of each fifth of the order of wealth?
 - Of the **middle fifths**, 37% to 44% are where they were, and most of the
   others are one fifth up or down.
 - Of the **poorest fifth**, 34% are still in it, 24% have risen one fifth,
-  and **29% are dead**. Poverty is where agents die
-  ([Chapter 12](12-births-deaths-and-ages.md)).
+  and **29% are dead**. Poverty is where agents die:
+  [Chapter 36](36-how-a-world-breaks.md) shows why — a region too poor to
+  keep its connections in use is cut off whole.
 
 Among those still alive, the **Shorrocks index** of the moves — 0 for a
 world in which nobody changes place, 1 for one that forgets the order
@@ -242,7 +243,8 @@ connectedness is taxed away in this manner, a little at a time.
 ## What this means
 
 - **The rich stay rich for a while, and then they don't.** The order of
-  wealth is half forgotten in about 50 games and mostly forgotten in 200.
+  wealth is half forgotten in fifty to a hundred games and mostly forgotten
+  in 200.
   It is remembered as long as the connections that carry it, because tokens
   follow connections.
 - **Wealth without connections is fragile.** The richest agents on dead ends

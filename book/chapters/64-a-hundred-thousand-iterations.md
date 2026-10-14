@@ -45,10 +45,11 @@ Three findings say the question deserves a month of computing.
   this: how the spread of a mean over *B* iterations shrinks with *B*, as
   *B*^(*H* − 1). Noise has *H* = 0.5, a random walk *H* = 1. These worlds
   have 0.8 to 0.9.)
-- **Births fall as a world ages**, by 41% over its youth
-  ([Chapter 12](12-births-deaths-and-ages.md)), the clearest sign of an
-  adaptation that Part III saw. An adaptation that takes ten thousand
-  iterations would not have been seen at all.
+- **Births fall as a world ages**, long after it has settled — by 41% from
+  iterations 100–200 to the end in the worlds of 10,000 tokens
+  ([Chapter 10](10-a-worlds-life.md)) — the clearest sign of an adaptation
+  that Part II saw. An adaptation that takes ten thousand iterations would
+  not have been seen at all.
 
 And two things say that nothing will change.
 
@@ -62,18 +63,40 @@ And two things say that nothing will change.
   The rise of the gain looks like the approach to that balance, not a
   climb.
 
+> [!info] Added later: what Part V found
+> [Chapter 49](49-how-to-tell-a-world-that-keeps-evolving.md), written after
+> this chapter, plays the brains of different moments of one world against
+> each other. In ten worlds of B1 at 5,000 tokens, nothing is learned after
+> the first 50 to 100 iterations: every later era ties with the one before
+> it, and the brains of iteration 1,000 hold 0.48 of a world contested with
+> those of iteration 300. That speaks for the thesis below, before any run.
+> [Chapter 19](19-what-the-brains-are-like.md), rewritten on the worlds of
+> 100,000 tokens, now gives the rise of the gain as 2.4 times in 1,500
+> iterations — to the 0.0015 that the worlds of 10,000 tokens reached in
+> 3,000. And Part V has made a second baseline, B2
+> ([Chapter 51](51-a-world-that-cannot-break.md)), whose brains see: if this
+> run is made, it would now be planned on B2.
+
 ## How much evolution is a hundred thousand iterations?
 
 A world of 204,800 tokens holds about 27,000 agents. After every game each
 brain is changed with probability 0.2, so some 5,400 changed brains are
 tried in every iteration, and over 100,000 iterations some 500 million. In
-the baseline worlds all the living came to descend from a single founder
-about every 350 iterations ([Chapter 18](18-genotypes-and-lineages.md)); a
-world twenty times larger is slower, by a factor that
-[Chapter 55](55-worlds-of-100000-tokens.md) is to measure. Even if it took
-ten times as long, one line would take the world over again and again,
-dozens of times. Whatever is one change away from what the brains do now
-would be found. What needs a rule changed would not.
+the worlds of 10,000 tokens one branch of the family tree replaced all
+others about every 350 iterations
+([Chapter 18](18-genotypes-and-lineages.md)); a world twenty times larger
+is slower, by a factor that [Chapter 55](55-worlds-of-100000-tokens.md) is
+to measure. Even if it took ten times as long, one line would take the
+world over again and again, dozens of times. Whatever is one change away
+from what the brains do now would be found. What needs a rule changed
+would not.
+
+> [!info] Added later: the factor, measured
+> [Chapter 55](55-worlds-of-100000-tokens.md) has measured it: the time a
+> world needs to come down to a single founder's line grows as the tokens to
+> the power 0.77. If that holds to 204,800 tokens, a world of that size needs
+> about ten times as long as one of 10,000 — as much as this paragraph
+> allowed for.
 
 ## The thesis
 
@@ -225,6 +248,19 @@ before the run.
 
 With them comes an analysis of its own, which draws the variograms, the
 windows of cooperation and the gains, and decides the thesis.
+
+> [!info] Added later: what exists now
+> Some of this has been built since, for Part V. A run made with
+> [`archive_every`](../notes/settings.md#archive_every) keeps whole worlds —
+> the network, every token and every brain, as a checkpoint holds them — at
+> fixed iterations, which is most of the third item; and the tournament
+> across time that the kept checkpoints were to serve is the yardstick of
+> [Chapter 49](49-how-to-tell-a-world-that-keeps-evolving.md)
+> (`gol_tournament.py`). [Chapter 55](55-worlds-of-100000-tokens.md) is
+> analysed, so the sentinel's bands of the known exist. And the costs above
+> may be too low: the same cost model gave the worlds of Chapter 55 12
+> seconds an iteration, and they took 17. They are also B1's costs; a run on
+> B2, whose brains are smaller, would have to be costed again.
 
 ## Results
 

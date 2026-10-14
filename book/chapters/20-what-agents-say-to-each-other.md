@@ -135,12 +135,13 @@ questions, one per panel:
 **Kin speak alike.** Take the mean message of every writer, and ask how much
 of the variety between writers lies between genotypes, and how much among
 writers of one genotype. In every world, **all of it** (1.00) lies between
-genotypes. Two agents of one genotype write exactly the same message. With
-the genotypes shuffled among the writers the share is 0.63. That much would
-lie "between genotypes" by chance, since most genotypes are carried by a
-single agent ([Chapter 18](18-genotypes-and-lineages.md)). It is no wonder:
-one genotype is one brain, and a brain that hardly sees writes the same
-thing whoever it is in. A message is the name **of a genotype**.
+genotypes. Two agents of one genotype write the same message, but for a
+thousandth or so. With the genotypes shuffled among the writers the share is
+0.63. That much would lie "between genotypes" by chance, since most
+genotypes are carried by a single agent
+([Chapter 18](18-genotypes-and-lineages.md)). It is no wonder: one genotype
+is one brain, and a brain that hardly sees writes the same thing whoever it
+is in. A message is the name **of a genotype**.
 
 **Few numbers are used.** Of the 30 numbers, a world's messages vary along
 only **15** independent directions in the median world (6 to 21), counted as
@@ -188,26 +189,36 @@ being spread wider. They are still the same for every reader.
 
 ## Could kin recognise each other?
 
-[Chapter 38](38-do-agents-cooperate.md) found that kin live side by side —
-a tenth of an agent's neighbours carry its own genotype — but are staked on
-exactly like strangers. It noted that a brain cannot see genotypes and could
-only tell kin through messages, if a lineage evolved a password, a
-**green beard** (Hamilton 1964; Dawkins 1976).
+[Chapter 38](38-do-agents-cooperate.md) will find that kin live side by
+side — a tenth of an agent's neighbours carry its own genotype — but are
+staked on exactly like strangers. It will note that a brain cannot see
+genotypes and could only tell kin through messages, if a lineage evolved a
+password, a **green beard** (Hamilton 1964; Dawkins 1976).
 
 This chapter shows that the password exists already, without any
 evolution. When an agent *u* looks at a neighbour *v*, it reads, among other
 things, the message it wrote to itself and the message *v* wrote to it
 ([Messages](../notes/messages.md)). If the two share a genotype, the two
-messages are identical. If *v* is a close relative, they are nearly
-identical. If *v* is a stranger, they differ by about 0.6 per number (as a root mean square).
-Telling them apart needs one comparison.
+messages are identical but for a thousandth or so. If *v* is a close
+relative, they are nearly identical. If *v* is a stranger, they differ by
+about 0.6 per number (as a root mean square). Telling them apart needs one
+comparison.
 
 What is missing is a brain that can make it. A difference of 0.6 in 30
 inputs reaches the stakes at a thousandth of its size, and the stakes split
 evenly anyway. Kin recognition is one comparison away, and blocked by the
-same obstacle as everything else in the brain. The planned Chapter 51, *Kin
-that know each other*, meant to add heritable tags. Messages already are
-heritable tags. A brain that can see is what it needs.
+same obstacle as everything else in the brain. The heritable tags that
+[Meta II](40-meta-2.md) proposes, so that kin can find each other, are
+already here: messages are heritable tags. A brain that can see is what
+it needs.
+
+> [!info] Added later: brains that see, and kin
+> [Chapter 50](50-brains-that-see-and-worlds-that-break.md) gave the brains
+> sight: one hidden layer of 16, a founder's gain of about 0.2. Whether
+> seeing brains use the names to tell kin from strangers has not been
+> measured yet. In the pilots of Part V, groups of kin shrank over time in
+> every world, and kin cooperation by pooled stakes is now being piloted;
+> there are no results yet.
 
 ## What this means
 

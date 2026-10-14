@@ -358,10 +358,11 @@ def births(ch: F.Chapter) -> None:
         "lifetimes", title="How long agents live",
         x={"label": "lifetime L, in iterations (logarithmic)", "log": True, "min": 1},
         y={"label": "share living at least L (logarithmic)", "log": True, "min": 1e-5, "max": 1},
-        series=[line(at[keep], surv[keep], f"{len(lives):,} agents born from iteration {W.settled} on", BLUE,
+        series=[line(at[keep], surv[keep], f"{len(lives):,} agents born from iteration {W.settled} on, alive after a game", BLUE,
                      width=2)],
-        caption=f"Of all agents born at iteration {W.settled} or later in {W.lived} and that took part in "
-                "at least one game, the share that lived at least L "
+        caption=f"Of all agents born at iteration {W.settled} or later in {W.lived} and alive after at "
+                "least one game — the newborns cut off in the reproduction phase of their birth, or dead "
+                "in their first game, are left out — the share that lived at least L "
                 "iterations, for every L. A life is counted from the iteration of birth to the last "
                 "iteration after whose game the agent was alive, both included. Lives still going "
                 "when a run ended are counted as far as they went (Kaplan–Meier). Both axes are "

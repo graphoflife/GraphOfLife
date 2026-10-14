@@ -26,7 +26,11 @@ program peels loops greedily:
    still carry tokens, preferring an agent not yet visited in this walk.
 2. As soon as the walk reaches an agent already on it, a loop is closed:
    remove one token from each arrow of the loop, and add *L*² to the score.
-3. Repeat until no loop can be found from any start.
+3. Walk again from the same agent while its walks keep closing loops; as
+   soon as a walk ends at an agent with no arrow left to follow, move on to
+   the next agent. The walk from an agent always takes the same path — the
+   first unvisited target in order of id — so an agent is given up even when
+   another path from it would have closed a loop.
 
 | field | definition |
 |---|---|

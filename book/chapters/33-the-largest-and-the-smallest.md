@@ -163,20 +163,24 @@ Of its neighbours, 19,452 (94%) are leaves, joined to nothing else, holding
 In the game, the centre stakes **exactly one token** on 98% of its
 neighbours and nothing on its own node: it holds fewer tokens than it has
 neighbours, and spreads them one by one. Its leaves stake 41% of their few
-tokens on the centre's node and keep the rest at home, where one or two
-tokens are enough to outbid the centre's single token and keep their own
-node ([Chapter 16](16-how-the-game-is-played.md)). So across nearly every
-one of the twenty thousand connections about one token goes out and about one
-comes back, every game: the centre is a clearing house, and its tokens are,
-almost to the token, the number of its connections — the resting state of an
-even split ([Chapter 29](29-where-the-tokens-flow.md)) at its most extreme.
+tokens on the centre's node and keep the rest at home
+([Chapter 16](16-how-the-game-is-played.md)): two tokens at home outbid the
+centre's single token and keep the leaf its node, and one ties it, which a
+coin then settles ([How a coalition takes a node](../notes/revolution.md)).
+So across nearly every one of the twenty thousand connections about one token
+goes out and about one comes back, every game: the centre is a clearing
+house, and its tokens are, almost to the token, the number of its
+connections — the resting state of an even split
+([Chapter 29](29-where-the-tokens-flow.md)) at its most extreme.
 
 The centre's own node is won by a coalition of its neighbours in every game —
-in all of the hundred games from iteration 1,122 on — since on a node with
-twenty thousand stakers its own agent is one staker among many. Each time, a
-winner's brain is copied in: the centre carried 78 different genotypes in
-those hundred games. What persists is not a brain but a place — the agent's
-connections, and the tokens that flow through them.
+in all of the hundred games from iteration 1,122 on. Its own agent, spreading
+its tokens one by one, puts a token or two on it at most, and often none, as
+in the game above: on a node with twenty thousand stakers it is at best one
+small staker among many. Each time, a winner's brain is copied in: the
+centre carried 78 different genotypes in those hundred games. What persists
+is not a brain but a place — the agent's connections, and the tokens that
+flow through them.
 
 ## How a star is handed down
 
@@ -214,13 +218,13 @@ often: 4% of its 18,103 changes went to a child.
 > **To make it again:** `python3 book_figures.py extremes`.
 <!-- /figure -->
 
-The richest agent changes almost every game: of 18,133 reigns over the
-settled life, 89% lasted a single iteration and only 1.5% ten or more; the
-longest lasted 304. The best-connected holds on far longer: a median reign of
-6 iterations, 42% of reigns ten or more, 5% a hundred or more, the longest
-592. Wealth is a flicker — a pile that crosses a connection and spreads out
-again ([Chapter 28](28-gains-and-losses.md)); connections last, and first
-place in them lasts with them.
+The richest agent changes in three games out of five: of 18,133 reigns over
+the settled life, 89% lasted a single iteration and only 1.5% ten or more;
+the longest lasted 304. The best-connected holds on far longer: a median
+reign of 6 iterations, 42% of reigns ten or more, 5% a hundred or more, the
+longest 592. Wealth is a flicker — a pile that crosses a connection and
+spreads out again ([Chapter 28](28-gains-and-losses.md)); connections last,
+and first place in them lasts with them.
 
 Who are they? The richest agent of the median world has 7 connections and is
 133 iterations old; the best-connected holds 474 tokens and is 289 iterations
@@ -229,8 +233,10 @@ almost never to 91% of the time in a star, where the centre is both.
 
 ## The largest, by the size of a world
 
-The worlds of [Chapter 42](42-how-does-a-worlds-size-follow-its-tokens.md),
-from 800 to 409,600 tokens, say how the extremes grow with a world:
+The worlds of Experiment 8, which
+[Chapter 42](42-how-does-a-worlds-size-follow-its-tokens.md) describes — ten
+sizes from 800 to 409,600 tokens, each double the one before, three seeds
+each — say how the extremes grow with a world:
 
 <!-- figure extremes/with-size -->
 ![The largest, by the size of a world](../figures/extremes/with-size.svg)
@@ -254,10 +260,13 @@ the world's tokens. The best-connected agent's connections **rise** as about
 agents^0.61. The thirty worlds of 100,000 tokens lie around both lines, with
 their stars far above the second. So a world ten times larger has a richest
 agent about three times as rich and a best-connected agent about four times
-as connected — faster than the width of a world grows (×2) and slower than
-its agents (×11). Measured directly against the worlds of 10,000 tokens, the
-richest is 3.1 times as rich and the best-connected, stars included, 7.7
-times as connected ([Chapter 55](55-worlds-of-100000-tokens.md)). No agent becomes a fixed share
+as connected — faster than the width of a world grows (×2: its diameter
+grows about as agents^0.30,
+[Chapter 42](42-how-does-a-worlds-size-follow-its-tokens.md)) and slower
+than its agents (×11). Measured directly against the worlds of 10,000
+tokens, the richest is 3.1 times as rich and the best-connected, stars
+included, 7.7 times as connected
+([Chapter 55](55-worlds-of-100000-tokens.md)). No agent becomes a fixed share
 of the world as it grows; but there is more room at the top in a large world,
 and the stars show what it can be used for.
 
@@ -268,9 +277,9 @@ and the stars show what it can be used for.
   are handed from parent to newborn child. A star is the clearest case of
   what [Chapter 29](29-where-the-tokens-flow.md) called a hub: a place, not
   an individual.
-- **Wealth flickers, connections last.** First place in tokens changes almost
-  every game; first place in connections lasts tens to hundreds of
-  iterations, in dynasties.
+- **Wealth flickers, connections last.** First place in tokens changes in
+  three games out of five; first place in connections lasts tens to hundreds
+  of iterations, in dynasties.
 - **For open-ended evolution, a dynasty is the first thing in these worlds
   that is inherited and lasts.** It is not a brain — the centre's brain is
   replaced every game — but a position, passed from parent to child for
@@ -279,6 +288,14 @@ and the stars show what it can be used for.
   nothing a brain did. A rule that let the centre's brain keep its node — an
   incumbent's advantage ([Chapter 39](39-questioning-the-mechanics.md)) — would
   turn the dynasty of a place into a dynasty of a line.
+
+> [!info] Added later: incumbency tried
+> Part V weighs an agent's stake on its own node more than anyone else's.
+> Counted twice, it let one agent gather 57% of all tokens behind a home stake
+> nobody could outbid; counted one and a half times, it is part of the second
+> baseline, B2 ([Chapter 52](52-who-dies-and-why.md)). B2 also switches
+> handover off, so a place can no longer be handed to a newborn child as it
+> is here ([Chapter 51](51-a-world-that-cannot-break.md)).
 
 To make every figure of this chapter: `python3 book_figures.py extremes`.
 

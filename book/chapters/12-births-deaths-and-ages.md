@@ -109,11 +109,22 @@ three ways drawn: a large world turns its agents over about a tenth faster.
 
 ## How long agents live
 
-Follow every agent born at iteration 500 or later in the thirty worlds — 10.4
-million of them — from its birth to the last game after which it was alive ([Age and lifetime](../notes/age-and-lifetime.md)). Agents
-still alive at the end of a run are counted as having lived *at least* that
-long, by the [Kaplan–Meier estimate](../notes/kaplan-meier.md). The share
-that lived at least *L* iterations:
+Not every newborn lives long enough to be followed. From iteration 500 on,
+15.2 million agents were born in the thirty worlds, and 4.7 million of them —
+nearly a third — died in the very iteration they were born in: some 2 million
+were cut off in the cleanup of the reproduction phase, most of them because
+they were joined to no one, and the rest died in their first game, starved or
+cut off. None of them was ever alive after a game, and a life is counted here
+to the last game after which an agent was alive, so the curves of this
+chapter and the next leave them out.
+
+The curve follows the other 10.4 million: every agent born at iteration 500
+or later that was still alive after the game of its birth iteration, from its
+birth to the last game after which it was alive
+([Age and lifetime](../notes/age-and-lifetime.md)). Agents still alive at the
+end of a run are counted as having lived *at least* that long, by the
+[Kaplan–Meier estimate](../notes/kaplan-meier.md). The share that lived at
+least *L* iterations:
 
 <!-- figure births/lifetimes -->
 ![How long agents live](../figures/births/lifetimes.svg)
@@ -134,9 +145,11 @@ that lived at least *L* iterations:
 
 On these logarithmic axes the curve shows several things at once:
 
-- 79% of agents live at least 2 iterations, 58% at least 5, 48% at least 10:
-  **about half of all agents are gone within ten iterations.** The median
-  lifetime is 8 iterations.
+- 79% of these agents live at least 2 iterations, 58% at least 5, 48% at
+  least 10: **about half of them are gone within ten iterations**, and their
+  median lifetime is 8 iterations. Counted over all 15.2 million newborns,
+  the third that died in the iteration of their birth included, **two thirds
+  are gone within ten iterations**, and the median lifetime is 2.
 - 25% live at least 50 iterations and 13% at least 100. The curve falls slowly
   there: an agent that has survived its first ten iterations has good chances
   of surviving many more.
@@ -153,9 +166,10 @@ limit.
 
 ## How old the living are
 
-The lifetimes above are of all agents ever born. The **living** are a
-different sample: an agent that lives long is alive at many moments, so the
-living are older than the typical agent at death.
+The lifetimes above are of every agent that lived through its first game,
+whatever became of it later. The **living** are a different sample: an agent
+that lives long is alive at many moments, so the living are older than the
+typical agent at death.
 
 <!-- figure births/ages -->
 ![Ages of the living at the end](../figures/births/ages.svg)
@@ -187,11 +201,11 @@ agents born at each moment live, is the next chapter's question.
 
 A settled world replaces about 3.5 of every 100 agents in every iteration,
 and three in four of those that die are cut off from the network rather than
-starved. Half of all agents are gone within ten iterations, while a few live
-more than a thousand: the living are a sample weighted towards long lives,
-older than the typical agent ever gets. Whether this turnover, and the ages
-it makes, ever settle is the question of
-[Chapter 13](13-how-ages-change.md).
+starved. Nearly a third of its newborns die in the iteration they are born
+in, and two thirds within ten iterations, while a few agents live more than a
+thousand: the living are a sample weighted towards long lives, older than the
+typical agent ever gets. Whether this turnover, and the ages it makes, ever
+settle is the question of [Chapter 13](13-how-ages-change.md).
 
 To make every figure of this chapter: `python3 book_figures.py births`.
 

@@ -85,6 +85,17 @@ when an organism's environment is mostly other organisms, all of them
 changing, no improvement buys a lasting advantage. A fixed supply of tokens
 fought over by neighbours is such a setting.
 
+> [!info] Added later: a game with an answer
+> Here the game has not kept the population moving. Played against the
+> brains of earlier eras, the baseline's brains stop improving within their
+> first hundred iterations, and later eras neither beat the ones before them
+> nor run in place: they tie
+> ([Chapter 49](49-how-to-tell-a-world-that-keeps-evolving.md)).
+> [Chapter 53](53-why-evolution-stops.md) proposes why: like Blotto, the
+> game has a mixed-strategy answer — be unpredictable — and evolution finds
+> it quickly, using the brains' random inputs as dice; against it, nothing
+> does better. Experiment 16 tests this in a world that cannot break.
+
 ## Networks
 
 - **Small worlds** (Watts and Strogatz 1998): a ring lattice with a few
@@ -147,7 +158,9 @@ fought over by neighbours is such a setting.
   twelve *E. coli* populations followed for tens of thousands of generations
   with frozen samples of their ancestors, is the standing example (Lenski,
   Rose, Simpson and Tadler 1991; Blount, Borland and Lenski 2008). It is the
-  test for the second rung of the ladder in [Chapter 1](01-what-this-book-is-about.md).
+  test for the second rung of the ladder in [Chapter 1](01-what-this-book-is-about.md);
+  [Chapter 49](49-how-to-tell-a-world-that-keeps-evolving.md) runs it on the
+  baseline.
 
 ## References
 

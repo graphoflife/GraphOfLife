@@ -100,7 +100,7 @@ to draw: the picture holds the 748 within two steps of its oldest agent, and
 the world has changed character — dense knots of core, joined by thin
 strands, with leaves bunched at their ends. At iterations 500 and 1,499 it
 looks the same in kind: more than half of all agents in the core (58% and
-64% of the whole world), a third or less leaves (36% and 29%).
+64% of the whole world), about a third or less leaves (36% and 29%).
 
 ## Connections per agent
 
@@ -162,6 +162,11 @@ Three shares settle within the first hundred or so iterations and then hold
 - **Leaves** rise from 3% to about 35% of all agents (36%).
 - **Bridges** — connections on no loop, whose cut would split the world —
   rise from 1% to about 26% of all connections (31%).
+
+All three are counted after the game, when the connections that carried
+nothing have just been cut. Counted at the start of a game, as
+[Chapter 25](25-the-core-of-a-world.md) does, the core holds 60% of the
+agents and the leaves 32%.
 
 The worlds at the far ends of these ranges are the stars: in the world with
 seed 28, whose largest hub is joined to more than half of all agents, only
@@ -332,9 +337,10 @@ and clustering that falls as one over the number of connections — a
 ([Chapter 32](32-power-laws-real-and-apparent.md),
 [Chapter 34](34-how-properties-scale-together.md)). Against a random network
 with exactly the same number of connections at every agent, the world is four
-and a half times as long (twice at 10,000 tokens) and thirty times easier to
-cut in two
-([Chapter 35](35-the-geometry-of-a-world.md)) — and it breaks, when it breaks,
+and a half times as long (twice at 10,000 tokens), and its spectral gap —
+which says how hard a network is to cut into two large parts — is a
+thirty-third of the random network's: the world has bottlenecks
+([Chapter 35](35-the-geometry-of-a-world.md)). And it breaks, when it breaks,
 along its poorest regions ([Chapter 36](36-how-a-world-breaks.md)).
 
 To make every figure of this chapter: `python3 book_figures.py shape`.

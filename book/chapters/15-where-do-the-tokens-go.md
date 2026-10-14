@@ -201,10 +201,12 @@ shrinks.
 The richest tenth ([The richest tenth's share](../notes/richest-tenth.md))
 hold on average 42% of all tokens over the settled life (33% to 50% between
 worlds; 44% at 10,000 tokens). The single richest agent holds about 2% — some
-2,100 tokens — and from 1% to 13% between worlds. At 10,000 tokens it held 8%,
-about 820 tokens: in a world ten times larger the richest agent holds two and
-a half times as many tokens, a quarter of the share
-([Chapter 33](33-the-largest-and-the-smallest.md)).
+2,100 tokens — and from 1% to 13% between worlds. At 10,000 tokens it held
+about 690 tokens over the same iterations, 7% of all (820 over the small
+worlds' longer settled life, to iteration 2,999): in a world ten times larger
+the richest agent holds three times as many tokens, about a third of the
+share ([Chapter 55](55-worlds-of-100000-tokens.md);
+[Chapter 33](33-the-largest-and-the-smallest.md) follows the richest).
 
 <!-- figure tokens/typical -->
 ![What a typical agent holds](../figures/tokens/typical.svg)
@@ -225,8 +227,9 @@ a half times as many tokens, a quarter of the share
 
 The mean number of tokens per agent is 100,000 divided by the number of
 agents, about 7 in the median world over its settled life; the median agent
-holds about 4.5 (9 and 5 at 10,000 tokens, whose worlds held a few more agents
-per token). The median lies below the mean because a few agents hold a lot.
+holds about 4.5 (9 and 5 at 10,000 tokens, whose worlds held a few fewer
+agents per token). The median lies below the mean because a few agents hold a
+lot.
 
 ## Rich agents are connected agents
 

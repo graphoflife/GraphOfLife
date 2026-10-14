@@ -62,7 +62,8 @@ def tokens(ch: F.Chapter) -> None:
                 "poorest share x of its agents holds the share y of all tokens. The yellow line "
                 "is the median over the worlds at each x; the dashed diagonal is a world where "
                 "everyone holds the same. The further a curve sags below the diagonal, the more "
-                "unequal the world (Chapter 5, and the diagram there).",
+                "unequal the world (the diagram above; [The Gini coefficient]"
+                "(../notes/gini-coefficient.md)).",
         recipe=recipe(W.surviving_text(), FRAMES,
                       [f"Read each run's last frame (iteration {W.last:,}, `phase` 2) and its `tokens`.",
                        "Sort the tokens from smallest to largest; the curve passes through the "
@@ -571,7 +572,7 @@ def lineage(ch: F.Chapter) -> None:
         y={"label": "share lasting at least L (logarithmic)", "log": True, "min": 1e-6, "max": 1},
         series=out,
         caption=f"Of all genotypes that appeared, and all agents born, at iteration {W.settled} or later in "
-                f"{W.lived}, the share that lasted at least L iterations. "
+                f"{W.lived} and present after at least one game, the share that lasted at least L iterations. "
                 "A genotype lasts from the first game after which some agent carries it to the last; "
                 "an agent from its birth to the last game it is alive after. Lives still going at the "
                 "end are counted as far as they went (Kaplan–Meier).",

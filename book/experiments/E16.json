@@ -10,7 +10,7 @@
   "runs": {
     "baseline": "B2",
     "world": {
-      "total_tokens": 5000
+      "total_tokens": 10000
     },
     "seeds": "1..10",
     "iterations": 2000,

@@ -143,11 +143,13 @@ Kin selection needs relatives to meet. Do they?
 
 Yes, strongly. In the median world, **9.6%** of neighbours carry the same
 genotype, against **0.05%** of two agents drawn at random — 200 times as
-often (at 10,000 tokens, 10.6% against 0.28%: 38 times). Counting close kin
-too (one's genotype the parent of the other's, or both sharing a parent
-genotype): 20% of neighbours against 0.12% of random pairs. The share of kin
-among neighbours is the same at both sizes; what a larger world changes is
-how rare kin are far away.
+often (at 10,000 tokens, 10.6% against 0.28%: 38 times). Counted over all
+pairs of a world rather than a sample of them, chance is rarer still, 0.03%,
+and [Chapter 23](23-like-next-to-like.md) puts the ratio near 290. Counting
+close kin too (one's genotype the parent of the other's, or both sharing a
+parent genotype): 20% of neighbours against 0.12% of random pairs. The share
+of kin among neighbours is the same at both sizes; what a larger world
+changes is how rare kin are far away.
 This is the picture of [Chapter 37](37-one-world-many-colours.md) in numbers:
 families live together. A brain's copies sit next to it — because a brain
 spreads by taking neighbouring nodes ([Chapter 29](29-where-the-tokens-flow.md))
@@ -188,6 +190,13 @@ messages: a lineage could, in principle, evolve a "password" — send a
 particular pattern and treat those who send it back differently, a
 **green-beard** (Hamilton 1964; Dawkins 1976). Nothing in the stakes says that
 this has happened.
+
+> [!info] Added later: the password exists
+> [Chapter 20](20-what-agents-say-to-each-other.md) found that every message
+> already names its writer's genotype: two agents of one genotype write
+> exactly the same message. Kin could tell each other by it; what is missing
+> is a brain that compares what it reads, and the baseline's brains barely
+> see ([Chapter 19](19-what-the-brains-are-like.md)).
 
 ## When a node changes hands, does it stay in the family?
 
@@ -273,7 +282,8 @@ do not. In only **4%** of connections do the same two brains face each other
 one game later (neither end won by a neighbour in between); after two games,
 0.8%; after four, 0.2%. The stage stays; the actors change almost every game —
 because about half of all nodes, and nearly every hub, are taken over in every
-game ([Chapter 29](29-where-the-tokens-flow.md)).
+game ([Chapter 16](16-how-the-game-is-played.md),
+[Chapter 29](29-where-the-tokens-flow.md)).
 
 With *w* ≈ 0.04, direct reciprocity would need a benefit twenty-five times
 its cost (twenty at 10,000 tokens, *w* ≈ 0.05). In this world, nobody meets
@@ -283,7 +293,7 @@ anybody twice.
 
 Nothing measured here shows cooperation beyond what the even split and kinship
 by proximity produce. But "not found" depends on where one looks. These are
-the measures the book will use from here on, each computable from the frames
+measures the book can use from here on, each computable from the frames
 every run already writes:
 
 1. **Kin discrimination.** The ratio of stakes on kin to stakes on others,
@@ -307,6 +317,13 @@ every run already writes:
    families of [Chapter 37](37-one-world-many-colours.md) and the breaks of
    [Chapter 36](36-how-a-world-breaks.md).
 
+> [!info] Added later: not yet used
+> None of the six has been computed since. Part V judged progress by playing
+> a world's eras against each other instead
+> ([Chapter 49](49-how-to-tell-a-world-that-keeps-evolving.md)). In the
+> pilots of Part V, connected groups of one genotype and of close kin shrank
+> over time in every world.
+
 ## What this means
 
 - **The precondition is there; the behaviour is not.** Kin live together, so
@@ -322,6 +339,18 @@ every run already writes:
   kin, a way to commit to a partner. [Chapter 39](39-questioning-the-mechanics.md)
   examines the rules responsible, and [Meta II](40-meta-2.md) proposes
   changes.
+
+> [!info] Added later: what Part V tried
+> Part V has given an incumbent an advantage, so that a brain keeps its node
+> longer ([Chapter 52](52-who-dies-and-why.md)), and given agents brains that
+> see, which could read the names of their kin
+> ([Chapter 50](50-brains-that-see-and-worlds-that-break.md)). A memory of
+> what each neighbour staked in the last game was tried too: it changed 11 to
+> 24% of decisions, and evolution stopped all the same. Two attempts to make
+> helping pay failed: stakes that support a neighbour's defence were given up
+> by evolution, and a yield on stakes returned built stars rather than
+> partnerships ([Chapter 53](53-why-evolution-stops.md)). Alliances by mutual
+> consent — a way to commit to a partner — are still to be tested.
 
 To make every figure of this chapter: `python3 book_figures.py cooperation`.
 

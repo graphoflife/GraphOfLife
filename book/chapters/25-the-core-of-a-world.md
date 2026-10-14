@@ -69,11 +69,14 @@ dimensions a whole world has. This chapter asks the same of the core.
 ## Why ask
 
 The core is where a world can hold anything together. Every connection in it
-lies on a loop, so cutting one connection never splits the core; a tree, by
-contrast, is cut off whole by the loss of the one connection that holds it
-([Chapter 36](36-how-a-world-breaks.md)). Anything larger than an agent that
-might persist and evolve — a group of agents that holds together while its
-members come and go — can only live in the core.
+lies on a loop or on a path between loops. Cutting one on a loop splits
+nothing — there is another way round — but one on a path between loops is a
+bridge, and its loss splits the core in two ([Bridges](../notes/bridges.md)):
+in one world of [Chapter 36](36-how-a-world-breaks.md), a third to almost
+half of the world hung on a single connection for 140 iterations. A tree is
+cut off whole by the loss of the one connection that holds it. Anything
+larger than an agent that might persist and evolve — a group of agents that
+holds together while its members come and go — can only live in the core.
 
 And the core is the better candidate for a **space**, in the sense of
 [Chapter 7](07-physical-inspiration.md). The trees branch: a tree of depth *d*
@@ -108,10 +111,12 @@ agents and tokens are counted in the three parts:
 
 Over the settled stretch the core holds **60%** of the agents in the median
 world (the middle half of the worlds between 56% and 63%), the hanging trees
-7.5% and the leaves 32%. The core holds more of the tokens than of the
-agents — **73%** — and the leaves less: 20% of the tokens on 32% of the
-agents. The shares settle within the first hundred iterations and do not
-move after.
+7.5% and the leaves 32%. These are counted at the start of a game, just after
+the births; [Chapter 17](17-what-shape-does-the-network-take.md) counts after
+the game, when the core holds 57% and the leaves 35%. The core holds more of
+the tokens than of the agents — **73%** — and the leaves less: 20% of the
+tokens on 32% of the agents. The shares settle within the first hundred
+iterations and do not move after.
 
 ## How far the trees hang
 
@@ -265,12 +270,12 @@ By balls the core reads **2.5** in the median world (the middle half between
 2.2 and 3.0), the whole world 2.8. By walks the two read the same, **1.9**.
 The random twins read 6.5 by balls and 3.3 by walks — no dimension at all in
 the sense of a space, since a random network's balls grow exponentially and
-their reading only rises with *r*. The core of a world is a space of between
-two and three dimensions, as the world is, and a little lower by balls: the
-trees inflate how fast a ball grows, by about 0.3 dimensions, as this
-chapter supposed — they add agents to every ball without adding a direction to
-move in. The random walk is hardly affected: it spends a few steps in a tree
-and comes back.
+their reading only rises with *r*. The core of a world is a space as the
+world is — between two and three dimensions by balls, a little under two by
+walks — and a little lower by balls than the world: the trees inflate how
+fast a ball grows, by about 0.3 dimensions, as this chapter supposed — they
+add agents to every ball without adding a direction to move in. The random
+walk is hardly affected: it spends a few steps in a tree and comes back.
 
 The size of a world matters more than its trees. In the worlds of 10,000
 tokens the core reads 2.0 by balls (the whole world 2.3), and in the three
@@ -315,19 +320,23 @@ small trees, mostly a single step deep. Inside the mesh is a denser mesh, and
 inside that a denser one still, down to a knot of agents each joined to
 eight others.
 
-The mesh is a space. By both rulers the core has between two and three
-dimensions — by balls a little fewer than the whole world, because trees
-inflate a ball's growth; by walks just as many. It is not a random network:
-its random twin has no dimension at all. So a world's dimension is not an
-artefact of its trees; it is the dimension of its core, and like the world's
-it grows with the world's size over the sizes run so far.
+The mesh is a space. By balls the core has between two and three dimensions,
+a little fewer than the whole world because trees inflate a ball's growth;
+by walks a little under two (1.5 to 1.9 at the three sizes), as the world
+reads. It is not a random network: its random twin has no dimension at all.
+So a world's dimension is not an artefact of its trees; it is the dimension
+of its core, and by balls, like the world's, it grows with the world's size
+over the sizes run so far.
 
 For open-ended evolution, the core is where anything lasting would have to
 live: a group of agents that holds together needs loops, and the loops are
 all in the core. That the core dies as fast as the leaves — 2.7% in every
-game — means nothing in it is protected either. A part of the world that
-lasted would show as agents of the core that die less often than the rest; in
-these worlds there is none.
+game — means the core as a whole is not protected either. A part of the
+world that lasted would show as agents of the core that die less often than
+the rest; in these worlds there is none but the hubs, which die about half as
+often as other agents ([Chapter 21](21-do-the-rich-stay-rich.md)) — and a
+hub is a place, not an individual: the brain on it changes in nearly every
+game ([Chapter 16](16-how-the-game-is-played.md)).
 
 To make every figure of this chapter: `python3 book_figures.py core`.
 

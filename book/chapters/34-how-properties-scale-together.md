@@ -109,7 +109,8 @@ in each class:
 
 At rest, every agent would hold *T* / Σ(*k* + 1) = 1.70 tokens per candidate.
 The means lie around that value in every class, from one connection to
-hundreds: **the typical agent holds about the resting state's share.**
+hundreds, and the medians a little below it, from 1.5 down to 1.0: **on
+average, agents of every class hold about the resting state's share.**
 
 Then why does the fit say 0.58 and not 1? Because *k* + 1 is not a power of
 *k*, and most agents have one or two connections. Between *k* = 1 and
@@ -239,9 +240,9 @@ world's history.
 ## What this means
 
 - **The even split's resting state describes wealth.** Across three decades of
-  connections, the typical agent holds about 1.7 tokens for each of its
-  candidates. The famous-looking exponent 0.6 is that law seen through a
-  log–log fit.
+  connections, agents hold on average about 1.7 tokens for each of their
+  candidates, the median agent a little less. The famous-looking exponent 0.6
+  is that law seen through a log–log fit.
 - **The network is a hierarchy of stars.** Triangles grow with connections,
   clustering falls as 1/*k*, leaves hang on hubs. Copying neighbourhoods at
   birth explains all three.

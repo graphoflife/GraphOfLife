@@ -39,8 +39,11 @@ outright, and an exact tie is decided by a fair coin
 ([A yes-or-no decision](../notes/binary-decision.md)).
 
 **Splitting whole tokens.** When τ tokens are split in proportion to scores,
-every candidate first gets its exact share rounded down, and the tokens left
-over go one each to the candidates that lost the most in the rounding — the
+negative scores count as zero, and if no score is above zero the tokens are
+split evenly over all the candidates — in a settled world, about half of all
+agents stake that way ([Chapter 19](19-what-the-brains-are-like.md)). Every
+candidate first gets its exact share rounded down, and the tokens left over
+go one each to the candidates that lost the most in the rounding — the
 *largest-remainder* method. No token is lost or made
 ([Splitting tokens into whole numbers](../notes/largest-remainder.md)).
 Splitting 11 tokens by the scores (2, 1, −0.5, 0.5) gives (6, 3, 0, 2).

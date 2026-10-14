@@ -36,18 +36,18 @@ At the start every founder holds a hundred tokens and has a brain nobody has
 selected. In the first reproduction phase most of them give a large part of
 their tokens to a child ([Chapter 4](04-the-brain.md): a median of half). The
 children give in turn, and the median world grows from 1,000 founders to 1,370
-agents after the first game, 4,050 after the fifth, 12,480 after the tenth and
-16,200 after the twentieth. The median of the thirty worlds peaks at about
-17,400 agents around iteration 39, falls back, and is near 15,000 at iteration
-100.
+agents after the first game (that of iteration 0), 4,050 after the game of
+iteration 5, 12,480 after that of iteration 10 and 16,200 after that of
+iteration 20. The median of the thirty worlds peaks at about 17,400 agents
+around iteration 39, falls back, and is near 15,000 at iteration 100.
 
 The axis is logarithmic. On it, steady growth by a constant factor per
 iteration is a straight line, and the first ten or so iterations are close to
 one: the population doubles about every three iterations — a little faster
 than the worlds of 10,000 tokens, which doubled about every three and a half
-and had only grown sevenfold by their tenth iteration, where these grew
-ninefold. Then the lines break, and many fall steeply for a few iterations:
-the boom ends in a crash.
+and had only grown sevenfold by iteration 10, where these grew ninefold. Then
+the lines break, and many fall steeply for a few iterations: the boom ends in
+a crash.
 
 ## Where the agents come from, and where they go
 
@@ -71,12 +71,13 @@ Births peak at a median of 10,360 in the reproduction phase of iteration 15.
 Deaths follow: agents cut off in the game peak at 6,390 per iteration in the
 same iteration, starvation at 1,670. So the crash is mostly the network
 breaking apart: at the peak, nearly four agents are cut off for every one that
-starves (five at 10,000 tokens). A newborn is joined to its parent and some of
-its parent's neighbours ([Chapter 3](03-one-iteration.md)), and every one of
-those connections is cut at the end of the game unless tokens cross it. In the
-boom, most agents hold a few tokens and many new connections carry nothing;
-whole branches of the network lose their link to the largest piece and are
-removed, with everyone on them.
+starves (five at 10,000 tokens). A newborn is joined to those of its parent's
+candidates — the parent itself and its neighbours — that the parent's brain
+picks ([Chapter 3](03-one-iteration.md)), and every one of those connections
+is cut at the end of the game unless tokens cross it. In the boom, most agents
+hold a few tokens and many new connections carry nothing; whole branches of
+the network lose their link to the largest piece and are removed, with
+everyone on them.
 
 <!-- figure youth/children-share -->
 ![Share of all tokens given to children](../figures/youth/children-share.svg)
@@ -199,10 +200,11 @@ descended from more than one founder at their last check. Not one world got
 there within its first hundred iterations, where 13 of the thirty smaller
 worlds did, and half of them by iteration 175. **A world ten times the size
 takes about six times as long to come down to a single founder** —
-[Chapter 55](55-worlds-of-100000-tokens.md) asks what that pace says about how
-lines spread. The other 999 founders' lines are gone by then: a line ends when
-the last agent carrying one of its brains either dies or has its node won by an
-agent of another line, whose brain then replaces its own.
+[Chapter 55](55-worlds-of-100000-tokens.md) reads in that pace that a line
+spreads through a world as a random walk spreads, not as a front. The other
+999 founders' lines are gone by then: a line ends when the last agent carrying
+one of its brains either dies or has its node won by an agent of another line,
+whose brain then replaces its own.
 
 ## What this means
 
@@ -216,6 +218,14 @@ them longer: three of thirty had not come down to one founder after 1,500
 iterations. Once it has, every agent of a settled world is, in its brains, a
 descendant of one founder: whatever diversity of brains a world later holds,
 it has made since.
+
+> [!info] Added later: the youth is when the brains learn
+> [Chapter 49](49-how-to-tell-a-world-that-keeps-evolving.md) played the
+> brains of different eras of ten worlds of 5,000 tokens against each other.
+> By iteration 50 the brains of every world beat their founders' — they hold
+> nine tenths of a world contested with them — and every later era ties with
+> the one before it. Whatever the brains of a world learn, they learn in its
+> youth.
 
 To make every figure of this chapter: `python3 book_figures.py youth`.
 

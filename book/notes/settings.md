@@ -51,7 +51,8 @@ number of neighbours in the starting ring.
 The number of tokens in the world, *T*. Tokens are never made or destroyed
 (unless [`tokens_created_per_phase`](#tokens_created_per_phase) is above 0,
 which it never is in this book), so the sum of all agents' tokens is *T*
-after every phase of every iteration. Part II uses *T* = 10,000;
+after every phase of every iteration. Part I teaches with *T* = 10,000,
+Parts II and III use *T* = 100,000, and
 [Chapter 42](../chapters/42-how-does-a-worlds-size-follow-its-tokens.md)
 varies it from 800 to 409,600. Since every living agent holds at least one
 token, a world can never hold more than *T* agents.
@@ -79,8 +80,9 @@ $$
 
 The ring joins every founder to its ⌊*k*/2⌋ nearest founders on either side,
 so an odd *k* is wired as *k* − 1: in the baseline *k* = 5 and every founder
-starts with **4** neighbours. Below 10,000 founders (*T* < 1,000,000) this is
-always 5, wired as 4.
+starts with **4** neighbours. Below 600 founders (*T* < 60,000) this is
+always 5, wired as 4; with the 1,000 founders of *T* = 100,000 it is 10,
+five on either side.
 
 ### rewire_p
 

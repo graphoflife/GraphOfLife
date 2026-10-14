@@ -8,7 +8,7 @@ Part III up to [Chapter 40](40-meta-2.md), reads these same thirty runs.
 > [!info] The second edition of Parts II and III
 > Parts II and III were first written from thirty worlds of 10,000 tokens,
 > about 1,300 agents each (Experiment 2). They are written here from thirty
-> worlds of 100,000 tokens, about 14,000 agents each (Experiment 10, planned in
+> worlds of 100,000 tokens, about 14,000 agents each (Experiment 10,
 > [Chapter 55](55-worlds-of-100000-tokens.md)): worlds big enough for space, for
 > scale and for rare events to show. Where the two sizes differ, the chapters
 > give both. The worlds of 10,000 tokens remain the ones Part I teaches with and
@@ -77,14 +77,18 @@ four processor cores, and fill 58 GB. All thirty worlds lived to the end:
 where four of the thirty smaller worlds died, none of these did
 ([Chapter 10](10-a-worlds-life.md)).
 
-To replicate any figure of Parts II and III, you need exactly these runs: on a
+To replicate a figure of Parts II and III, these are the runs you need: on a
 computer with Python 3, numpy and networkx and a copy of this repository,
 `python3 gol_lab.py run E10` makes them into the folder `GraphOfLifeRuns/`,
-and `python3 book_figures.py` then redraws every figure of the book from
-them. Each figure says, folded beneath it, which of the runs it reads and how.
-A run of 1,500 iterations at this size takes about eight hours on one core;
-the thirty worlds of 10,000 tokens (`python3 gol_lab.py run E02`) take an
-eighth of the computing in all, and show most of the same things.
+and `python3 book_figures.py` then redraws the figures from them. The few
+figures that set worlds of different sizes side by side — in Chapters 13,
+24, 25 and 33 — also read the thirty worlds of 10,000 tokens
+(`python3 gol_lab.py run E02`) or the worlds of every size of
+[Chapter 42](42-how-does-a-worlds-size-follow-its-tokens.md)
+(`python3 gol_lab.py run E08`). Each figure says, folded beneath it, which of
+the runs it reads and how. A run of 1,500 iterations at this size takes about
+seven hours on one core; the thirty worlds of 10,000 tokens take an eighth of
+the computing in all, and show most of the same things.
 
 ## A first look
 

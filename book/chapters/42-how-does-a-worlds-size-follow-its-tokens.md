@@ -1,8 +1,8 @@
 # How does a world's size follow its tokens?
 
-Every chapter so far looked at worlds of 10,000 tokens. This one runs the
-baseline at ten sizes, from 800 tokens to 409,600 — each double the one
-before — and asks what changes with size and what does not.
+Parts II and III looked at worlds of two sizes, 10,000 and 100,000 tokens.
+This one runs the baseline at ten sizes, from 800 tokens to 409,600 — each
+double the one before — and asks what changes with size and what does not.
 
 > [!question] Questions of this chapter
 > - Does a world of twice the tokens hold twice the agents and twice the
@@ -297,6 +297,20 @@ III first found at 10,000 tokens hold, roughly, at other sizes — as the
 second edition of those parts, at 100,000 tokens, checks
 ([Chapter 9](09-thirty-worlds.md)).
 
+> [!info] Added later: thirty worlds at each of two sizes
+> [Chapter 55](55-worlds-of-100000-tokens.md), written after this chapter,
+> sets thirty worlds of 100,000 tokens beside thirty of 10,000, over
+> iterations 500 to 1,499. Inequality, the nodes kept by their own agent and
+> the genotypes per agent come out within 3% of each other — the nodes kept
+> do not fall with size after all. But at ten times the tokens the dimension
+> from ball growth is 15% higher (3.4 against 3.0,
+> [Chapter 35](35-the-geometry-of-a-world.md)), births and deaths per agent
+> run 13 to 21% higher (as [Chapter 12](12-births-deaths-and-ages.md) and
+> [Chapter 13](13-how-ages-change.md) find too), leaves are only 5% fewer,
+> and clustering is less than half. Births, the rate of cutting and the
+> dimension do change with size, a little; and the shape changes more than
+> leaves and loops alone show.
+
 ## Distances grow like a power
 
 <!-- figure size/distances -->
@@ -421,6 +435,15 @@ lose half of itself in a game.
 - **The stopping rule needs care.** A world at twenty agents is not
   necessarily dying. Future experiments that care about extinction should run
   a condition with the rule off, as this one did.
+
+> [!info] Added later: the rule, changed
+> [Chapter 51](51-a-world-that-cannot-break.md) makes the change of rule
+> asked for above. When an agent dies, the groups its former neighbours fall
+> into are joined up in a ring, and a link that carried no tokens may lapse
+> only if its two ends share at least two neighbours. A death mended so
+> never splits a world — that chapter proves it — and such a lapse cannot
+> either, so under these rules the cull has nothing left to remove, however
+> large the world.
 
 > [!info] Where everything came from
 > - **Survived to iteration 600:** baseline 25 of 30 (every world of 3,200

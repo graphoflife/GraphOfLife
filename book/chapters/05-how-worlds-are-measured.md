@@ -69,8 +69,10 @@ world **settles**, it takes the mean from iteration 500 to its end — its
 
 Every world is a matter of chance: the seed decides the starting ring, the
 founders' brains and every random decision after. So the book makes many
-worlds — thirty for each setting — with seeds 1, 2, …, 30. Drawn one line per
-world, they look like this:
+worlds — thirty for each setting, with seeds 1, 2, …, 30, unless a chapter
+says otherwise (three per size in
+[Chapter 42](42-how-does-a-worlds-size-follow-its-tokens.md), ten per
+condition in Part V). Drawn one line per world, they look like this:
 
 <!-- figure measure/thirty -->
 ![30 worlds, each a line](../figures/measure/thirty.svg)

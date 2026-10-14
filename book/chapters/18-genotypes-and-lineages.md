@@ -85,14 +85,17 @@ beside them.
 <!-- /figure -->
 
 The two curves are [survival curves](../notes/kaplan-meier.md) on
-logarithmic axes: of everything that appeared from iteration 500 on in the
-thirty worlds, the share that lasted at least *L* iterations.
+logarithmic axes: of every genotype that some agent carried after a game, and
+every agent alive after a game, from iteration 500 on in the thirty worlds,
+the share that lasted at least *L* iterations.
 
 - **Genotypes** (violet) are short-lived: 57% last at least 2 iterations, 20%
   at least 5, 6% at least 10, and only one in a hundred thousand reaches 50.
   None reached 100 — exactly as at 10,000 tokens.
 - **Agents** (blue) last far longer: 48% at least 10 iterations, 13% at least
-  100 ([Chapter 12](12-births-deaths-and-ages.md)).
+  100 — of the agents that lived through their first game, as in
+  [Chapter 12](12-births-deaths-and-ages.md), where nearly a third of all
+  newborns do not.
 
 Why the difference? An agent keeps its node, its id and its age when its
 brain changes or is replaced by a conqueror's; a genotype ends when the last
@@ -131,10 +134,11 @@ After iteration 100, a single genotype held more than a tenth of the world at
 some moment in 10 of the 30 worlds, more than a fifth in 7, more than a third
 in 2, and more than half in one — 56% of all agents, at iteration 1,408 in
 the world with seed 28 (the yellow line), the star of
-[Chapter 33](33-the-largest-and-the-smallest.md). At 10,000 tokens it was
-more common: a tenth in 21 of 26 worlds, a fifth in 17. Since no genotype
-lasts long, a long stretch of one large share is several genotypes in turn,
-each changed from the one before: a **line** spreading.
+[Chapter 33](33-the-largest-and-the-smallest.md), when its collapse
+([Chapter 10](10-a-worlds-life.md)) had left it some 2,100 agents. At 10,000
+tokens it was more common: a tenth in 21 of 26 worlds, a fifth in 17. Since
+no genotype lasts long, a long stretch of one large share is several
+genotypes in turn, each changed from the one before: a **line** spreading.
 
 ## Lines take over
 
@@ -343,9 +347,23 @@ a single founder by iteration 1,500 — but slowly, about once a run.
   [coalescent](06-the-ideas-this-builds-on.md)). Whether lines take over
   here *faster than chance would make them*, because some brains do better,
   needs a world in which no brain is better than another.
-  [Chapter 41](41-do-the-brains-matter.md) builds one, and finds that how
-  often chance alone sweeps a world depends on how often agents are born and
-  die.
+  [Chapter 41](41-do-the-brains-matter.md) builds worlds whose brains never
+  change, and finds that how often chance alone sweeps a world depends on how
+  often agents are born and die.
+
+> [!info] Added later: no better brains
+> None of the worlds of Chapter 41 is born and dies as the baseline does, so
+> they could not settle the question.
+> [Chapter 49](49-how-to-tell-a-world-that-keeps-evolving.md) asked the
+> brains themselves, playing the brains of different eras of ten worlds of
+> 5,000 tokens against each other: the brains of iteration 50 already beat
+> their founders' (+361 Elo), and every later era ties with the one before
+> it (iteration 1,000 against 300: 0.483). The lines that take a settled
+> world over do not carry brains that play better.
+> [Chapter 55](55-worlds-of-100000-tokens.md) times the takeovers in worlds of
+> two sizes: the time to a single founder grows as the tokens to the power
+> 0.77 — between what a front (0.30) and chance (1) would give — and a line
+> spreads through a world as a random walk does.
 
 To make every figure of this chapter: `python3 book_figures.py lineage`.
 

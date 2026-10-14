@@ -137,7 +137,7 @@ same places in every picture. What each colouring shows:
   belongs to many smaller families. A family is a region — a small one in a
   large world, where many more lines live side by side
   ([Chapter 55](55-worlds-of-100000-tokens.md)).
-- **Loops.** The clumps around hubs carry the loops — up to 1,013 of the
+- **Loops.** The clumps around hubs carry the loops — up to 1,012 of the
   world's 11,297 independent loops pass through one agent — and the arms carry
   none ([Chapter 35](35-the-geometry-of-a-world.md)).
 
@@ -195,9 +195,10 @@ Five cautions, which apply to every picture the viewer draws:
   asks whether it is used).
 - **Wealth is a landscape of peaks and valleys,** peaks at the hubs.
 - **Connections are kept near their minimum price,** a few tokens a game.
-- **Pictures raise questions.** Two from this chapter: do the old live at the
-  periphery in every world, and do families always occupy regions? The second
-  is measured in the next chapter.
+- **Pictures raise questions.** Two from this chapter: where do the old live —
+  at the edges, as a picture at 10,000 tokens suggested, or in cohorts, as
+  this one does? And do families always occupy regions? The second is
+  measured in the next chapter.
 
 To make every figure of this chapter: `python3 book_figures.py colours`.
 

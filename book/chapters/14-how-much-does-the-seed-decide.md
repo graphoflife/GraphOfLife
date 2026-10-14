@@ -201,9 +201,9 @@ own averages and the part that is each world moving around its own average
 > **To make it again:** `python3 book_figures.py seed`.
 <!-- /figure -->
 
-For the counts, between a sixth and a quarter of the variation lies between
-the worlds — 21% for the number of agents, 27% for connections, 25% for
-inequality. The rest, three quarters or more, is each world wandering, and
+For the counts, about a fifth to a quarter of the variation lies between the
+worlds — 21% for the number of agents, 27% for connections, 25% for
+inequality. The rest, about three quarters, is each world wandering, and
 even the part between worlds is partly wandering that 1,400 iterations did not
 average away. The share of agents in the core is the exception: 54% of its
 variation lies between the worlds' own averages (24% at 10,000 tokens). Which

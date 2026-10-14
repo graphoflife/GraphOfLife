@@ -47,11 +47,13 @@ leaves = {d, h, i}; tree = {g}.
 ## Why it matters here
 
 In the game, every connection that carries no tokens is cut
-([Chapter 3](../chapters/03-one-iteration.md)). Cutting a connection inside
-the core never disconnects anything — there is always another way round the
-loop. Cutting a connection of a tree cuts off everything beyond it, and the
-cleanup then removes all of it. The share of a world that hangs in trees is
-the share that can be lost to a single cut.
+([Chapter 3](../chapters/03-one-iteration.md)). Cutting a connection on a
+loop never disconnects anything — there is always another way round the
+loop. Every other connection is a [bridge](bridges.md): one of a tree cuts
+off everything beyond it, and one on a path between two loops of the core
+cuts the core itself in two. The cleanup then removes whatever is no longer
+joined to the largest piece. So a single cut can lose any tree whole — and,
+through a bridge of the core, part of the core too.
 
 In a settled baseline world of 100,000 tokens about 57% of agents are in the
 core, 35% are leaves and the rest in trees; at 10,000 tokens, 54% and 36%

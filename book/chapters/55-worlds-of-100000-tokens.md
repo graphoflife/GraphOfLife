@@ -14,28 +14,32 @@
 
 ## Why ask
 
-Every finding of Parts II and III was made on worlds of 10,000 tokens, about
-1,300 agents each. That is small. A world of 1,300 agents is some 30 steps
-across ([Chapter 35](35-the-geometry-of-a-world.md)), and its structure
-fades within three ([Chapter 23](23-like-next-to-like.md)): there is room
-for a dozen regions side by side, no more. Questions about space, about
-scale, and about whether different kinds of agents can live side by side
-need worlds with more room.
+When this experiment was planned, every finding of Parts II and III had
+been made on worlds of 10,000 tokens, about 1,300 agents each. That is
+small. A world of 1,300 agents is some 30 steps across
+([Chapter 35](35-the-geometry-of-a-world.md)), and its structure fades
+within three ([Chapter 23](23-like-next-to-like.md)): there is room for a
+dozen regions side by side, no more. Questions about space, about scale,
+and about whether different kinds of agents can live side by side need
+worlds with more room.
 
 [Chapter 42](42-how-does-a-worlds-size-follow-its-tokens.md) showed that a
 bigger world is, on average, more of the same: agents, connections and
 births all follow the tokens in proportion. It ran only three worlds of each
-size, for 600 iterations. This experiment makes a **second baseline**:
-thirty worlds of 100,000 tokens, ten times the baseline, each run for 1,500
-iterations. Part VI builds on it — Chapter 56 is to measure its dimensions
-at scale, and Chapter 57 to look for properties without a scale (both
-planned, see [the contents](../README.md)) — and it answers one question of
-its own: how a line takes over a world.
+size, for 600 iterations. This experiment makes a **second set of baseline
+worlds** — of B1 itself, not of the second baseline B2 of
+[Chapter 51](51-a-world-that-cannot-break.md): thirty worlds of 100,000
+tokens, ten times the first, each run for 1,500 iterations. Part VI builds
+on it — Chapter 56 is to measure its dimensions at scale, and Chapter 57 to
+look for properties without a scale (both planned, see
+[the contents](../README.md)) — and it answers one question of its own: how
+a line takes over a world.
 
 **How a line takes over.** [Chapter 18](18-genotypes-and-lineages.md) found
-that whole lines of descent take the baseline worlds over again and again,
-about once every 350 iterations. Is that chance or merit? Three answers give
-three different paces, and the size of the world tells them apart:
+that whole lines of descent take the worlds of 10,000 tokens over again and
+again, about once every 350 iterations. Is that chance or merit? Three
+answers give three different paces, and the size of the world tells them
+apart:
 
 1. **Chance.** If no line is better than another, all but one die out by
    chance in the end, in a time that grows in proportion to the number of
@@ -314,7 +318,7 @@ the genotypes per agent are within 3% of their values at 10,000 tokens; there
 are 8% more connections per agent and 5% fewer leaves; births and deaths per
 agent are 13 to 21% higher ([Chapter 13](13-how-ages-change.md) finds the
 old dying more often too). A large world is made of the same kind of agents,
-living the same kind of lives.
+living the same kind of lives, a little faster.
 
 Its shape is not the same. Clustering — the share of an agent's pairs of
 neighbours that are joined — is **less than half** (0.039 against 0.088),
@@ -345,10 +349,12 @@ matters.
   a region of a world, a few steps across at first, a dozen after two
   hundred iterations. Its spread is local, as the rules require, but with no
   steady speed, and far slower than the fastest the rules allow.
-- **Size changes the arrangement, not the agents.** Per-agent rates and
-  shares are the same at both sizes; distances, clustering, loops and the
-  extremes are not. A finding made at one size holds, per agent, at the
-  other — but a finding about shape has to be checked at both.
+- **Size changes the arrangement more than the agents.** Inequality, the
+  nodes agents take and keep, and the genotypes per agent are the same at
+  both sizes; births and deaths per agent run 13 to 21% faster in the large
+  worlds; distances, clustering, loops and the extremes differ much more. A
+  finding made at one size holds, per agent, roughly at the other — but a
+  finding about shape has to be checked at both.
 - **For open-ended evolution, a large world has room for lines to live side
   by side for most of a run.** At 10,000 tokens one founder's line held a
   world from iteration 175 on; here the median world was still shared by
@@ -364,5 +370,5 @@ To make every figure of this chapter: `python3 book_figures.py takeover`.
 <!-- turns -->
 ---
 
-← [Chapter 51 · A world that cannot break](51-a-world-that-cannot-break.md) · [Contents](../README.md) · [Chapter 64 · A hundred thousand iterations](64-a-hundred-thousand-iterations.md) →
+← [Chapter 53 · Why evolution stops](53-why-evolution-stops.md) · [Contents](../README.md) · [Chapter 64 · A hundred thousand iterations](64-a-hundred-thousand-iterations.md) →
 <!-- /turns -->

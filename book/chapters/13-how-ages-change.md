@@ -124,20 +124,29 @@ iteration 161 in the median world (the earliest at 24, the latest at 702).
 
 Why should the oldest stop near 850? Not because agents wear out — the
 section on the risk of dying, below, finds no sign of that. It is a matter of
-numbers. A settled world has about *B* = 500 births in every iteration (3.5
-per hundred agents, of some 14,400); a share *S*(100) = 0.13 of them live to
-an age of 100 iterations; and from then on about *h* = 1% of those left die
-in every game, whatever their age. The number of agents alive that are older
-than *L* is then about
+numbers. A settled world has about 500 births in every iteration (3.5 per
+hundred agents, of some 14,400), but nearly a third of the newborns die in
+the iteration they are born in
+([Chapter 12](12-births-deaths-and-ages.md)), so about *B* = 345 in every
+iteration live through their first game — 2.4 per hundred agents. A share
+*S*(100) = 0.13 of these live to an age of 100 iterations (the curves of
+Chapter 12 count exactly these agents); and from then on about *h* = 1% of
+those left die in every game, whatever their age. The number of agents alive
+that are older than *L* is then about
 
 $$
-N(L) \approx \frac{B \, S(100)}{h} \, (1-h)^{L-100} ,
+N(L) \approx \frac{B \, S(100)}{h} \, (1-h)^{L-100}
+= \frac{345 \times 0.13}{0.01} \, 0.99^{\,L-100}
+\approx 4{,}500 \times 0.99^{\,L-100} ,
 $$
 
-which falls to one at *L* ≈ 930 — near the 820 to 850 that the oldest agent
-reaches, given that *h* is not quite constant. A world holds a few agents near
-that age at any time and almost never one much older: the oldest agent is
-where the long tail of lifetimes runs out of agents.
+which falls to one at *L* ≈ 100 + ln 4,500 / −ln 0.99 ≈ 940 — near the 820
+to 850 that the oldest agent reaches, given that *h* is not quite constant.
+(All 500 births with the same *S*(100) would give *L* ≈ 975, too high: 0.13
+is a share of the agents that live through their first game, not of all
+newborns.) A world holds a few agents near that age at any time and almost
+never one much older: the oldest agent is where the long tail of lifetimes
+runs out of agents.
 
 ## The living, by age
 
@@ -161,8 +170,9 @@ structure at a few moments:
 <!-- /figure -->
 
 At iteration 100, half of the living (51%) are 16 to 63 iterations old: they
-were born in iterations 37 to 84, the boom of [Chapter 11](11-the-first-hundred-iterations.md),
-and few agents born since have lasted. At iteration 250 that generation has
+were born in iterations 37 to 84, as the boom of
+[Chapter 11](11-the-first-hundred-iterations.md) turned into its crash, and
+few agents born since have lasted. At iteration 250 that generation has
 moved on, and 39% of the living are 64 to 255 iterations old. From iteration
 500 on, the columns hardly change: about 2.5% of the living were born in that
 very iteration, 5% are 1 to 3 iterations old, 13 to 15% are 4 to 15, about a
@@ -172,9 +182,10 @@ of the population is set by iteration 500 and holds.
 ## How long the agents of each period live
 
 Ages of the living mix agents born at many times. Lifetimes separate them:
-group the agents by the period in which they were born — a **cohort**
-([Age and lifetime](../notes/age-and-lifetime.md)) — and follow each group to
-its end:
+group the agents that lived through their first game, as in
+[Chapter 12](12-births-deaths-and-ages.md), by the period in which they were
+born — a **cohort** ([Age and lifetime](../notes/age-and-lifetime.md)) — and
+follow each group to its end:
 
 <!-- figure ages/cohorts -->
 ![How long agents live, by when they were born](../figures/ages/cohorts.svg)
@@ -229,8 +240,11 @@ An agent born in iterations 1 to 24 lived 5 of its first 100 iterations, in
 the median world; one born in 50 to 74, 18; one born in 100 to 124, 24. By
 iteration 250 the expectancy is 27, and from iteration 500 on it hovers
 between 28 and 31 for the rest of the run. The median lifetime does the same,
-from 2 iterations to between 8 and 11. Life expectancy rises through a world's first
-five hundred iterations, as its youth ends ([Chapter 11](11-the-first-hundred-iterations.md)), and then it holds still.
+from 2 iterations to between 8 and 11. Life expectancy rises through a
+world's first five hundred iterations — its youth
+([Chapter 11](11-the-first-hundred-iterations.md)) and the slowing of its
+turnover after it ([Chapter 10](10-a-worlds-life.md)) — and then it holds
+still.
 
 ## The risk of dying at each age
 
@@ -304,18 +318,31 @@ has 3.6 connections — what its parent gave it at birth
 young hold less: 4.7 tokens at ages 1 to 3, 4.9 at 4 to 15, with three
 connections. From then on the older the class, the richer: 6.0 tokens at 16
 to 63, 8.5 at 64 to 255, **15.3** at 256 and over — three times what the
-young hold — and 5.5 connections. The old are the rich and the well
-connected. Whether they became rich by living long, or lived long because
-they were rich, is the same question as above; [Chapter 21](21-do-the-rich-stay-rich.md)
-follows single agents' tokens from game to game.
+young hold — and 5.5 connections. On average, the old are the rich and the
+well connected. Whether they became rich by living long, or lived long
+because they were rich, is the same question as above;
+[Chapter 21](21-do-the-rich-stay-rich.md) follows single agents' tokens from
+game to game.
+
+> [!info] Added later: connections give age
+> [Chapter 22](22-how-the-network-grows.md) sorts the living by age and looks
+> at the median instead of the mean: the median agent has 2 connections at
+> every age, from a few iterations to over 700. The old classes' higher means
+> come from the hubs among them, which die far less often than leaves
+> ([Chapter 21](21-do-the-rich-stay-rich.md)), and an agent's tokens follow
+> its connections ([Chapter 34](34-how-properties-scale-together.md)).
+> Connections give an agent age, not age connections. And an agent's age is
+> its node's, not its brain's, which may have arrived in the last game
+> ([Chapter 39](39-questioning-the-mechanics.md)).
 
 ## The ages of a steady world
 
 If a world's births never changed and every agent's life followed the same
 survival curve *S*, the ages of the living would follow from *S* alone. The
 agents of age *a* alive after a game are those born *a* iterations earlier
-whose lives lasted at least *a* + 1 games; with *B* births per iteration
-there are *B* · *S*(*a* + 1) of them. So the share of the living at age *a* is
+whose lives lasted at least *a* + 1 games; with *B* newborns per iteration
+that live through their first game, there are *B* · *S*(*a* + 1) of them. So
+the share of the living at age *a* is
 
 $$
 \frac{S(a+1)}{\sum_{L \ge 1} S(L)} ,
@@ -376,18 +403,22 @@ those lives would be — while the large worlds' births held still. Why old
 agents die less often in a small world is open. One candidate is the cuts:
 an agent is cut off in a game about a fifth more often in a world of 100,000
 tokens than in one of 10,000 ([Chapter 12](12-births-deaths-and-ages.md)),
-and being old is no protection against a border going quiet
-([Chapter 36](36-how-a-world-breaks.md)).
+and being old is no protection when every connection between an agent's
+region and the rest of the world carries no tokens in the same game, so that
+all of them are cut together and the region dies
+([Chapter 36](36-how-a-world-breaks.md) calls it a border going quiet).
 
 ## What this means
 
 Ages settle. By iteration 500 a world of 100,000 tokens has the same age
 structure, the same life expectancy and the same risk at every age that it
 will have at iteration 1,500: about 2.4% of its agents are newborns, half are
-younger than 55, and an agent's expected life is some 41 iterations. Its
-youth ([Chapter 11](11-the-first-hundred-iterations.md)) is the only time
-the ages change. The ages of its living follow from its lifetimes, as those
-of a stationary population do.
+younger than 55, and an agent that lives through its first game can expect
+some 41 iterations. Its first five hundred iterations — the youth of
+[Chapter 11](11-the-first-hundred-iterations.md) and the slowing of its
+turnover after it ([Chapter 10](10-a-worlds-life.md)) — are the only time the
+ages change. The ages of its living follow from its lifetimes, as those of a
+stationary population do.
 
 Agents do not age. The risk of dying falls with age and then holds near one
 game in a hundred; long lives are almost memoryless, and the oldest agent is
@@ -400,6 +431,14 @@ it acts, would have to act inside that steady turnover — through which brains
 the 2.4% of newborns carry, and which brains take over nodes in the games
 ([Chapter 18](18-genotypes-and-lineages.md)) — not through how long agents
 last.
+
+> [!info] Added later: the brains settle even earlier
+> [Chapter 49](49-how-to-tell-a-world-that-keeps-evolving.md) played the
+> brains of different eras of ten worlds of 5,000 tokens against each other.
+> The baseline's brains improve over their first 50 to 100 iterations and
+> not after: from then on every era ties with the one before it. Inside this
+> steady turnover, the brains stop improving even before the ages stop
+> changing.
 
 To make every figure of this chapter: `python3 book_figures.py ages`.
 

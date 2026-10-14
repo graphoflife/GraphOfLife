@@ -74,11 +74,11 @@ hundred agents to sixty thousand
 [Chapter 42](42-how-does-a-worlds-size-follow-its-tokens.md)), and their width
 grows as *N*^0.30 — as a body of 3.3 dimensions would. That is a surprise
 worth taking seriously, and also with care: by box covering they measure
-about 1.85; they are full of stars and trees; and a third of their connections
-are **bridges**, some of which hold half a world to the rest
-([Chapter 36](36-how-a-world-breaks.md)). A three-dimensional lattice has no
-bridges at all: to cut a cube of *N* points in two, you must cut about
-*N*^(2/3) connections — a whole cross-section.
+about 1.9; they are full of stars and trees; and about a quarter of their
+connections (a third at 10,000 tokens) are **bridges**, some of which hold
+half a world to the rest ([Chapter 36](36-how-a-world-breaks.md)). A
+three-dimensional lattice has no bridges at all: to cut a cube of *N* points
+in two, you must cut about *N*^(2/3) connections — a whole cross-section.
 [Chapter 24](24-how-many-dimensions-does-a-world-have.md) measured the
 dimension with two rulers calibrated on known spaces. By the room within *r*
 steps, worlds of 60,000 agents read 3.3, steady from 3 steps to 14; by how a
@@ -96,6 +96,18 @@ world. The tools are ready — the dimensions above, the cut risk
 is tiny ([The spectral gap](../notes/spectral-gap.md)). One hint is already in:
 bigger worlds have more loops per connection and fewer leaves
 ([Chapter 42](42-how-does-a-worlds-size-follow-its-tokens.md)).
+
+> [!info] Added later: rules for a well-knit world
+> [Chapter 51](51-a-world-that-cannot-break.md) builds such rules, all of
+> them local: a newborn is joined to its parent and two of its parent's
+> neighbours; a death is mended by joining the separated groups of its
+> former neighbours in a ring; an unused connection may lapse only where its
+> two ends share two neighbours; and a brain may choose at most eight
+> connections. A mended death can never split the world, so the cull below
+> is left with nothing to do. In a model without brains, mending brought the
+> largest share of the world one agent's loss could cut off from 37% to
+> 1.4%, and one connection's from 12% to 1.2%, at a ball dimension of 3.7.
+> Experiment 14 tests the rules with brains.
 
 ## A speed limit
 
@@ -145,7 +157,8 @@ agent could draw its random numbers from a stream of its own, fixed by the
 seed, its id and the iteration — "counter-based" generators do exactly this
 (Salmon, Moraes, Dror and Shaw 2011), and keep a run exactly repeatable. The
 first two changes were proposed for quite another reason in
-[Meta II](40-meta-2.md): they stand in the way of open-ended evolution.
+[Chapter 39](39-questioning-the-mechanics.md) and [Meta II](40-meta-2.md):
+they stand in the way of open-ended evolution.
 Physics and evolution, asked separately, point at the same rules.
 
 ### A word of care about long-range connections
@@ -216,6 +229,15 @@ keeps only 1/(*d* + 1) of its tokens, and [Chapter 21](21-do-the-rich-stay-rich.
 found exactly that flip: wealth swings between hubs and leaves with a period
 of two games.
 
+> [!info] Added later: the even split is not computed
+> [Chapter 19](19-what-the-brains-are-like.md) found the evolved brains
+> nearly blind: a change in what they see moves their outputs by about a
+> thousandth of its size. In the median world 42% of agents (58% at 10,000
+> tokens) give every candidate a score of zero or below, and the rules then
+> split their tokens exactly evenly; the others give every candidate nearly
+> the same score. Selection set one constant — spread the stake — and the
+> heat equation is what the rules make of it.
+
 That is also a limitation. The heat equation **forgets**: it smooths every
 difference away, and its world ends uniform — "heat death" in miniature. The
 fundamental equations of physics are of another kind: wave equations, which
@@ -238,18 +260,21 @@ here is an open, speculative question.
 The universe began small, dense and hot, expanded and cooled, and formed
 structure — atoms, stars, galaxies — out of a nearly uniform start.
 
-A world of Graph of Life begins the same way, at least in outline. A hundred
-founders hold a hundred tokens each, in a ring: small, dense in tokens and
-uniform. Then the network — which is space here — grows explosively: about 75
-births per hundred agents in each of the first ten iterations
-([Chapter 11](11-the-first-hundred-iterations.md)). In the median world, the
-founders' 100 become 1,132 agents by iteration 10 and about 1,850 by iteration
-20, while the tokens per agent fall from 100 to under 9 and then to about 5 —
-expansion, and cooling, if tokens per agent are read as a temperature. Then
-comes a crash and a bottleneck — the families fall from a hundred to about
-twenty, and every later brain descends from a single founder — and then
-structure: inequality, hubs, a settled world after about a hundred
-iterations.
+A world of Graph of Life begins the same way, at least in outline. In a world
+of 10,000 tokens, a hundred founders hold a hundred tokens each, in a ring:
+small, dense in tokens and uniform. Then the network — which is space here —
+grows explosively: about 75 births per hundred agents in each of the first
+ten iterations. In the median world, the founders' 100 become 1,132 agents by
+iteration 10 and about 1,850 by iteration 20, while the tokens per agent fall
+from 100 to under 9 and then to about 5 — expansion, and cooling, if tokens
+per agent are read as a temperature. Then comes a crash and a bottleneck —
+the families fall from a hundred to about twenty, and every later brain
+descends from a single founder — and then structure: inequality, hubs, a
+settled world after about a hundred iterations. The worlds of 100,000 tokens
+of [Chapter 11](11-the-first-hundred-iterations.md) do the same ten times
+over, a little faster; their bottleneck keeps about 400 of their 1,000
+founders' lines, and three of thirty still descended from more than one
+founder after 1,500 iterations.
 
 The differences matter as much. Space here does not stretch everywhere at
 once; new places are born one at a time, next to their parents. And nothing
@@ -268,13 +293,20 @@ same rules and differs only in its state — its tokens, its connections, its
 brain. And its worlds are statistically homogeneous:
 [Chapter 42](42-how-does-a-worlds-size-follow-its-tokens.md) found that
 inequality, home stakes, births and genotype diversity are the same in worlds
-of three hundred agents and of sixty thousand. Structure, where there is any,
+of five hundred agents and of sixty thousand. Structure, where there is any,
 shows only in collective patterns: families side by side
 ([Chapter 37](37-one-world-many-colours.md)), hubs with their stars. And it
 does not reach far. [Chapter 23](23-like-next-to-like.md) measured how alike
-agents are at a distance: tokens, ages, connections and kin are alike only
-within one or two steps, and beyond three every part of a world is like
-every other.
+agents are at a distance: tokens, ages and connections are alike only within
+one or two steps, and agents of one genotype within two or three; beyond
+that, every part of a world is like every other.
+
+> [!info] Added later: lines of descent reach further
+> [Chapter 55](55-worlds-of-100000-tokens.md) found that lines of descent
+> reach further than genotypes. Two agents belong to the same family of 25
+> iterations back more often than chance would have them out to about 7
+> steps, and of 200 iterations back out to about 12: a family is a patch of
+> the world that widens as its line ages, as a random walk spreads.
 
 ### No scale at all
 
@@ -360,6 +392,15 @@ What to look for:
 - **A beat**: a pattern with a characteristic frequency, local in the
   network.
 
+> [!info] Added later: the nearest thing so far
+> [Chapter 33](33-the-largest-and-the-smallest.md) found a star's
+> **dynasty**: a centre joined to thousands of agents, handed down from
+> parent to child — in the longest dynasties for hundreds of iterations —
+> while the brain on it changes nearly every game. It is a place that lasts,
+> kept by the rules, not yet a group that does anything together
+> ([Meta II](40-meta-2.md)). And [Chapter 55](55-worlds-of-100000-tokens.md)
+> found families holding patches of a world that widen as their lines age.
+
 ### Vacuum and matter
 
 Most of the universe is nearly empty; matter is a tiny fraction of it. Most
@@ -420,9 +461,11 @@ network which connections remain: a connection that no token crosses is cut
 The second aim adds its own questions, and its own planned chapters, in a new
 part of the book (see [the contents](../README.md)):
 
-- **How many dimensions does a world have?** Every measure of dimension —
-  ball growth, width, boxes, the spectral dimension — on the largest worlds the
-  book can afford.
+- **Dimensions at scale.**
+  [Chapter 24](24-how-many-dimensions-does-a-world-have.md) has read balls
+  and walks on worlds of 60,000 agents; next, every measure of dimension —
+  ball growth, width, boxes, the spectral dimension — on the largest worlds
+  the book can afford.
 - **How far does a difference travel?** Damage spreading: the light cone,
   measured — once random numbers are local.
 - **Which properties have no scale?** The same quantities across many sizes,
@@ -445,11 +488,31 @@ part of the book (see [the contents](../README.md)):
   balls grow and how its width grows — and in others like a tree held
   together by bridges: a walker reads only two dimensions in it
   ([Chapter 24](24-how-many-dimensions-does-a-world-have.md)).
-- **The evolved brains compute, in effect, the heat equation.** A world that
-  only diffuses ends uniform; a world in which something lasting forms will
-  need more — a flow, a gradient, something that holds tokens together.
+- **The evolved brains spread their stakes evenly, and the rules make that a
+  step of the heat equation.** A world that only diffuses ends uniform; a
+  world in which something lasting forms will need more — a flow, a
+  gradient, something that holds tokens together.
 - **Particles and organisations are the same question.** A pattern that
   persists while what carries it changes is what both aims are looking for.
+
+## References
+
+- Ambjørn, J., Jurkiewicz, J. and Loll, R. (2005). Spectral dimension of the universe is scale dependent. *Physical Review Letters* 95, 171301.
+- Bak, P., Tang, C. and Wiesenfeld, K. (1987). Self-organized criticality: an explanation of 1/*f* noise. *Physical Review Letters* 59, 381–384.
+- Bak, P. and Sneppen, K. (1993). Punctuated equilibrium and criticality in a simple model of evolution. *Physical Review Letters* 71, 4083–4086.
+- Boltzmann, L. (1886). *Der zweite Hauptsatz der mechanischen Wärmetheorie*. Lecture to the Imperial Academy of Sciences, Vienna.
+- Bombelli, L., Lee, J., Meyer, D. and Sorkin, R. D. (1987). Space-time as a causal set. *Physical Review Letters* 59, 521–524.
+- Derrida, B. and Weisbuch, G. (1986). Evolution of overlaps between configurations in random Boolean networks. *Journal de Physique* 47, 1297–1303.
+- Gardner, M. (1970). Mathematical games: the fantastic combinations of John Conway's new solitaire game "life". *Scientific American* 223(4), 120–123.
+- Jefferson, D. R. (1985). Virtual time. *ACM Transactions on Programming Languages and Systems* 7, 404–425.
+- Langton, C. G. (1990). Computation at the edge of chaos: phase transitions and emergent computation. *Physica D* 42, 12–37.
+- Metz, J. A. J., Nisbet, R. M. and Geritz, S. A. H. (1992). How should we define 'fitness' for general ecological scenarios? *Trends in Ecology & Evolution* 7, 198–202.
+- Nicolis, G. and Prigogine, I. (1977). *Self-Organization in Nonequilibrium Systems*. New York: Wiley.
+- Noether, E. (1918). Invariante Variationsprobleme. *Nachrichten von der Gesellschaft der Wissenschaften zu Göttingen, Mathematisch-Physikalische Klasse*, 235–257.
+- Salmon, J. K., Moraes, M. A., Dror, R. O. and Shaw, D. E. (2011). Parallel random numbers: as easy as 1, 2, 3. *Proceedings of the International Conference for High Performance Computing, Networking, Storage and Analysis (SC11)*.
+- Schrödinger, E. (1944). *What Is Life?* Cambridge: Cambridge University Press.
+- Wheeler, J. A. and Ford, K. (1998). *Geons, Black Holes, and Quantum Foam: A Life in Physics*. New York: W. W. Norton.
+- Wolfram, S. (2020). A class of models with the potential to represent fundamental physics. *Complex Systems* 29(2), 107–536.
 
 <!-- turns -->
 ---

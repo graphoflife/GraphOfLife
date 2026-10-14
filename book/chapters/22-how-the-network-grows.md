@@ -76,9 +76,10 @@ both are given.
 Of 600,854 births in the reproduction phases of every 25th iteration from
 500 on, **80%** of the children were joined to their own parent. 12% were
 joined to no one, and are cut off at once
-([Chapter 31](31-how-agents-have-children.md)). The rest were joined to two
-to six of their parent's candidates, often more. A child is born into its
-parent's neighbourhood and nowhere else.
+([Chapter 31](31-how-agents-have-children.md)). Of all the children, 6% were
+joined to just one of their parent's candidates, 56% to two to five, and 27%
+to six or more. A child is born into its parent's neighbourhood and nowhere
+else.
 
 That has a consequence worth stating exactly. Every connection the rules
 make runs from a newborn to its parent or to one of its parent's
@@ -121,12 +122,9 @@ Both are straight lines on logarithmic axes, over two decades of *k*:
   per reproduction phase; with ten to nineteen, about 0.65; with a hundred or
   more, 15. That is **linear preferential attachment**, the mechanism
   Barabási and Albert (1999) proposed for heavy-tailed networks (k^0.94 at
-  10,000 tokens).
-  [Chapter 32](32-power-laws-real-and-apparent.md) suggested it would be
-  found here, reached by copying. A child joins some of its parent's
+  10,000 tokens), reached here by copying. A child joins some of its parent's
   candidates, so an agent gains a connection whenever one of its neighbours
   has a child, and an agent with twice the neighbours has twice the chances.
-  Now it is measured.
 - **Losses grow as k^1.20**, faster than in proportion (k^1.11 at 10,000
   tokens). From two connections on, every class loses at least as much in a
   game as it gained in the reproduction phase before. Hubs of a hundred
@@ -142,9 +140,9 @@ agent go up and down by a random factor game after game, in a world whose
 total is held in place by its tokens. Growth by random factors, kept off
 zero from below, makes heavy tails (Gabaix 1999), and losses that grow
 faster than gains bend the tail down at the top. That fits what
-[Chapter 32](32-power-laws-real-and-apparent.md) found: a power-law tail of
-exponent about 3 in the top twentieth of the connections, and nothing
-scale-free below it.
+[Chapter 32](32-power-laws-real-and-apparent.md) will find: a power-law tail
+of exponent about 3 in the top hundredth of the connections (the top
+twentieth at 10,000 tokens), and nothing scale-free below it.
 
 ## Connections and age
 

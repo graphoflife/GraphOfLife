@@ -14,10 +14,12 @@
 ## Why ask
 
 [Chapter 50](50-brains-that-see-and-worlds-that-break.md) gave the brains
-sight, and the worlds broke: agents that stake on one or two neighbours leave
-the other connections unused, unused connections are cut, the network
-thins into trees, and one game can cut off a thousand agents at once. Nothing
-can evolve for long in a world that falls apart every few hundred iterations.
+sight, and the worlds broke — not in one great cut, but by bleeding. Every
+world of 5,000 tokens, blind or seeing, lost agents to the cull in every
+iteration — 1.9 in a hundred without sight, 5.3 with it — and a seeing world
+died when its births stopped keeping up. Nothing can evolve for long in a
+world that bleeds like that, and a world that holds only while its brains
+keep breeding is at the mercy of what evolution does to their breeding.
 
 So before asking evolution to build anything, Part V builds the ground it
 stands on: rules that keep the network whole *however the agents play*. The
@@ -40,8 +42,8 @@ network, it pays to ask what the three forces do on their own.
 So take the brains away. In the model of `research/oee/space.py` every agent,
 every iteration, has a child with the same probability and then dies with the
 same probability, 0.02; the probability of a child is set so that births
-balance deaths at about 1,500 agents (and is a little higher while there are
-fewer). The world starts as a ring of 50 agents and runs 300 iterations — six
+balance deaths at about 1,500 agents (and 0.05 higher while there are fewer,
+so that the world fills quickly). The world starts as a ring of 50 agents and runs 300 iterations — six
 lifetimes, so that nothing of the start is left. What the network looks like
 then is what the rules of space make by themselves. A run takes six seconds;
 each set of rules below was run with ten seeds.
@@ -109,7 +111,7 @@ world.
 What cuts a world is a death. When agent *u* dies, two of its neighbours *x*
 and *y* that were joined only through *u* are no longer joined at all —
 unless something replaces *u*. **Mending** ([`mend_on_death`](../notes/settings.md#mend_on_death))
-replaces it with as few links as needed, all between *u*'s former neighbours:
+replaces it with a few new links, all between *u*'s former neighbours:
 
 1. Group the former neighbours by the links among them: two neighbours are
    in one group if a path of direct links *among the former neighbours*
@@ -122,7 +124,10 @@ replaces it with as few links as needed, all between *u*'s former neighbours:
 An example. Agent *u* dies with neighbours *a*, *b*, *c*, *d*, and of these
 only *a* and *b* are linked to each other. The groups are {*a*, *b*}, {*c*}
 and {*d*}. Mending adds three links — the less-linked of *a* and *b* to *c*,
-*c* to *d*, and *d* back to that same member of {*a*, *b*}. Had *a*, *b*, *c*
+*c* to *d*, and *d* back to whichever of *a* and *b* has fewer links by then
+(each member is chosen afresh, so the first link may have tipped it). A chain
+would have needed two; the ring's third makes sure that no new link is the
+only one between two groups. Had *a*, *b*, *c*
 and *d* all been linked in a cycle, there would be one group and nothing to
 add: the death left no hole.
 
@@ -183,10 +188,10 @@ are. With one, only 15% of agents are in the 3-core and the cuts are 2.1% and
 1.7%; with three, the world passes every line of the health bar — 0.9% and
 0.7%, 99% in the 2-core, 5.6 links per agent, dimension 3.7.
 
-And a cap on links helps nothing here. When no agent may have more than 8
-links (the last column), the cuts *grow*, to 5.7% and 3.0%. The likely
-reason: an agent at the cap has no child, and a newborn's random links skip
-full agents, so births shift towards the thinly linked parts of the world —
+And a cap on links helps nothing here. When an agent with 8 links or more
+may have no child and receives no newborn's random link (the last column;
+mending still links past the cap), the cuts *grow*, to 5.7% and 3.0%. The
+likely reason: births shift towards the thinly linked parts of the world —
 where the cuts are. In this model there is nothing for a cap to stop: no
 agent prefers anyone. It is the brains that will need it.
 
@@ -202,8 +207,11 @@ the network.
 **Unused links lapse.** At the end of a game a link that carried no tokens is
 cut ([Chapter 3](03-one-iteration.md)). A blind brain spreads its stake over
 everyone and every link carries something; a seeing brain stakes on one
-neighbour or two, and most of its links lapse. That is what broke the worlds
-of Chapter 50. The rule [`prune_needs`](../notes/settings.md#prune_needs)
+neighbour or two, and most of its links lapse. Every lapse that leaves a part
+of the world hanging on nothing hands that part to the cull — the steady toll
+that, in [Chapter 50](50-brains-that-see-and-worlds-that-break.md), every world
+of 5,000 tokens paid, blind or seeing. The rule
+[`prune_needs`](../notes/settings.md#prune_needs)
 lets an unused link lapse only if its two ends share at least that many
 neighbours. With 1, removing the link leaves a path of two steps between its
 ends — so no lapse can cut the world — but in time the network can thin into
@@ -222,7 +230,9 @@ best-connected agent was joined to 30% of the world. Two rules answer it. The ne
 [`birth_links`](../notes/settings.md#birth_links) are drawn at random rather
 than chosen, and [`valence`](../notes/settings.md#valence) = 8 caps the links a
 brain may *choose*: an agent with 8 has no child and no chosen link is made to
-it. Mending is exempt from the cap — it only replaces links that were lost.
+it. A newborn's two random links and mending are exempt from the cap — the
+first are the rule of space itself, the second only replaces links that were
+lost.
 
 **A parent can give its links away.** With
 [`allow_handover`](../notes/settings.md#allow_handover) a parent moves some of
@@ -234,9 +244,13 @@ that one. Switched off.
 extra look before acting), an agent's stake on its own node counting 1.5
 times ([`incumbency`](../notes/settings.md#incumbency)), the rules of this
 chapter — links at birth 2, mending in a ring, `prune_needs` 2, valence 8, no
-handover — and the rules of Chapter 52 on who dies,
-which keep agents from staking themselves to death. Every setting is listed
-in the box under the thesis.
+handover — and the rules of [Chapter 52](52-who-dies-and-why.md) on who
+dies: 30% of an agent's tokens kept at home, so that nobody stakes itself to
+death; children of at least 10 tokens; and death at age 100. It keeps change
+only when copied although Chapter 50 found it harmful: it is what heredity
+means — a brain that is not copied stays itself — and the harm it did there
+was the drain of worlds whose births fell short of the cull, which B2's other
+rules remove. Every setting is listed in the box under the thesis.
 
 In a first engine run of B2 (5,000 tokens, seed 1) every agent was in the
 2-core and no single agent or link could cut anyone off, with 5.1 to 5.3
@@ -344,5 +358,5 @@ handover, put one back — to see whether every rule is needed.
 <!-- turns -->
 ---
 
-← [Chapter 50 · Brains that see, and worlds that break](50-brains-that-see-and-worlds-that-break.md) · [Contents](../README.md) · [Chapter 55 · Worlds of 100,000 tokens](55-worlds-of-100000-tokens.md) →
+← [Chapter 50 · Brains that see, and worlds that break](50-brains-that-see-and-worlds-that-break.md) · [Contents](../README.md) · [Chapter 52 · Who dies, and why](52-who-dies-and-why.md) →
 <!-- /turns -->

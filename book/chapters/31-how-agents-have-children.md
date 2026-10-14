@@ -172,13 +172,15 @@ value. [Chapter 39](39-questioning-the-mechanics.md) comes back to it.
 > **To make it again:** `python3 book_figures.py children`.
 <!-- /figure -->
 
-**11.5% of children are joined to no one.** They are not part of the
+**11.5% of children are joined to none of their parent's candidates at
+birth.** About a third of these are handed connections by their parent (the
+right panel) and live. The rest — some 7% of all children — belong to no
 network, and the cleanup at the end of the phase removes them at once, with
 the tokens they were given (which are shared out among the survivors). The
 others are most often joined to two, three or four candidates, and 35% of all
 children to five or more: 5.1 on average, pooled over the worlds, counting
-the children joined to no one (4.6 at 10,000 tokens, whose agents had fewer
-connections to pass on).
+the children with no link at birth (4.6 at 10,000 tokens, whose agents had
+fewer connections to pass on).
 
 Most parents hand over nothing (75%); 11% hand over one connection, 6% two
 and 8% three or more — about three for every four births on average. Rare as
@@ -219,11 +221,22 @@ that **adds** connections is a birth. Apart from the starting
 ring, **every connection in a world was made at a birth.**
 
 So the network is grown by births and pruned by games. In a settled world,
-about 490 children are born per iteration with about 4.8 connections each —
+about 480 children are born per iteration with about 4.8 connections each —
 some 2,300 new connections — while each game cuts about 1,600 unused ones, and
 the dead take theirs with them. The two balance, and the number of connections
 wanders but does not drift ([Chapter 10](10-a-worlds-life.md)). A world
 without births could only lose connections, never gain one.
+
+> [!info] Added later: what births can and cannot build
+> Births are also what keeps a world alive. Worlds of 5,000 tokens lose two
+> to five agents in a hundred to the cull in every iteration and live only
+> while their births keep up; brains that see can give up having children,
+> and then their worlds die out
+> ([Chapter 50](50-brains-that-see-and-worlds-that-break.md)). And since a
+> newborn is joined only to agents at most two steps apart, a birth closes
+> only small loops: a network grown by births alone is, at large scale, a
+> tree of dense blobs joined by necks that one death can cut
+> ([Chapter 51](51-a-world-that-cannot-break.md)).
 
 ## What this means
 

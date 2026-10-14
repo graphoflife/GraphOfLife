@@ -102,7 +102,7 @@ token, by whoever holds it. Each staked token lands in one of three places
 
 In the first game, 13% stays home, 23% is matched and 64% goes one way — the
 founders, with ten neighbours each, keep less at home than the founders of a
-world of 10,000 tokens, with five (a quarter, a quarter and a half there). In
+world of 10,000 tokens, with four (a quarter, a quarter and a half there). In
 settled games, at both sizes, 30% stays home, **51% is matched** and only 20%
 goes one way. Most of what agents send to their neighbours is an exchange of
 equal amounts, which is why half of all agents end a game with exactly what
@@ -331,15 +331,24 @@ loops.
 > **To make it again:** `python3 book_figures.py flow`.
 <!-- /figure -->
 
-On the flow as staked, the greedy search places 13% of the tokens staked on
-neighbours in loops, and conservation forbids at least 23% from ever going
-round. But most of those loops are trivial: two neighbours staking on each
-other is a loop of length 2. After cancelling every stake against the one
-coming back (right panel), 28% of the flow is left — and of that, the search
+On the flow as staked, the budget at the start of this chapter already pins
+the answer down. Two neighbours staking on each other form a loop of length
+2: a token goes from A to B, and one comes back from B to A. So every matched
+stake goes round, and matched stakes are 51% of all tokens — 72% of the
+tokens staked on neighbours (51 of the 71). That is a floor: at least 72% of
+the flow goes round. The ceiling comes from conservation, which forbids 23%
+of the flow from ever going round (red), so at most 77% can. Between 72% and
+77% of the flow as staked goes round, then, and nearly all of it in loops of
+two: neighbours trading equal stakes back and forth. (The greedy search, the
+blue line, hunts for long loops and places only 13% of the flow in the loops
+it finds — a weak floor beside the 72% the matched stakes guarantee.)
+
+After cancelling every stake against the one coming back (right panel), no
+loop of two is left, and 28% of the flow remains — and of that, the search
 finds only **0.3%** in loops. The ceiling is not much higher: the imbalance
-does not change when stakes cancel, so at least 23/28 = 84% of what is left
-must flow one way. Between 0.3% and 16% of the net flow can go round; the
-search finds almost nothing, as at 10,000 tokens.
+does not change when stakes cancel, so at least 23.4/27.8 ≈ 84% of what is
+left must flow one way. Between 0.3% and 16% of the net flow can go round;
+the search finds almost nothing, as at 10,000 tokens.
 [Chapter 30](30-what-crosses-a-connection.md) looks at the flow connection by
 connection.
 
@@ -369,6 +378,15 @@ circulate.
   selection little to grip. [Chapter 39](39-questioning-the-mechanics.md)
   asks which rules make it so, and [Meta II](40-meta-2.md) what could be
   changed.
+
+> [!info] Added later: brains that see
+> The even split is what blind brains do.
+> [Chapter 50](50-brains-that-see-and-worlds-that-break.md) gives the brains
+> one hidden layer instead of five, so that a change in what an agent sees
+> reaches what it stakes (a founder's gain about 0.2 instead of 0.0006). Such
+> brains stake on one neighbour or two, their unused connections lapse, and
+> their worlds need the rules of [Chapter 51](51-a-world-that-cannot-break.md)
+> and [Chapter 52](52-who-dies-and-why.md) to hold together.
 
 To make every figure of this chapter: `python3 book_figures.py flow`.
 

@@ -1,0 +1,3 @@
+jobs_*.txt
+jobq_*.log
+__pycache__/

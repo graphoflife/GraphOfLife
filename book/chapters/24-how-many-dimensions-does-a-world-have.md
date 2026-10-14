@@ -72,9 +72,10 @@ The worlds are the thirty of 100,000 tokens of [Chapter 9](09-thirty-worlds.md).
 Besides them, the chapter measures the three worlds of 409,600 tokens of
 [Chapter 42](42-how-does-a-worlds-size-follow-its-tokens.md), about 60,000
 agents each after 600 iterations (`B1-409600-s001` … `-s003`,
-`python3 gol_lab.py run E08`), and the thirty worlds of 10,000 tokens it was
-first written from, about 1,500 agents each: three sizes, each four to ten
-times the one before.
+`python3 gol_lab.py run E08`), and the worlds of 10,000 tokens it was first
+written from — the 26 of thirty that lived to the end, about 1,500 agents
+each at their end (1,300 over their settled life): three sizes, each four to
+ten times the one before.
 
 ## Two rulers
 
@@ -107,9 +108,9 @@ and how they differ says what kind of space it is.
 ## The rulers, tried on known spaces
 
 Before measuring anything unknown, a ruler is tried on things whose size is
-known. Here: five networks of about 2,000 points, the size of a world of
-10,000 tokens — the smallest of the three sizes, and the hardest for the
-rulers.
+known. Here: five networks of about 2,000 points, a little larger than a
+world of 10,000 tokens — the smallest of the three sizes, and the hardest for
+the rulers.
 
 <!-- figure dimensions/rulers -->
 ![Two rulers, tried on spaces whose dimension is known](../figures/dimensions/rulers.svg)
@@ -292,8 +293,8 @@ balls and 1.6 to 1.9 by walks throughout.)
 ## What this means
 
 - **The worlds are spaces.** They have a finite dimension, which shows as a
-  plateau over a decade of radii and two decades of walking times. Their
-  random twins, with the same connections per agent, have none. The
+  plateau from radius 3 to 10–14 and over two decades of walking times.
+  Their random twins, with the same connections per agent, have none. The
   dimension is made by how the worlds are wired. The reason is in
   [Chapter 22](22-how-the-network-grows.md): every new connection is made
   inside a neighbourhood and none ever brings two agents closer together, so
@@ -320,6 +321,24 @@ balls and 1.6 to 1.9 by walks throughout.)
   So a large world has room for regions that evolve apart — if anything held
   them apart. [Chapter 23](23-like-next-to-like.md) found that so far nothing
   does: likeness dies within three steps.
+
+> [!info] Added later: rules that close loops and leave no dead ends
+> [Chapter 51](51-a-world-that-cannot-break.md) builds rules of this kind, to
+> keep a world from breaking: a newborn joined to two of its parent's
+> neighbours, a dead agent's neighbours joined in a ring, unused links lapsing
+> only where their ends share two neighbours, and at most 8 links a brain may
+> choose. In a model without brains the first two alone put 97% of agents in
+> the 2-core, with a ball dimension of 3.7; in a first run of the second
+> baseline, B2, with all four, every agent was in the 2-core — no dead ends
+> at all — with a ball dimension of 3.1 to 3.7. Whether the walker's reading
+> rises to meet the balls' there has not been measured yet.
+
+> [!info] Added later: lines hold patches
+> [Chapter 55](55-worlds-of-100000-tokens.md) finds that lines of descent do
+> hold regions: two agents share a family of 25 iterations back more often
+> than chance up to about 7 steps apart, and a family of 200 iterations back
+> up to about 12, the patches widening as a random walk on these worlds
+> would.
 
 To make every figure of this chapter: `python3 book_figures.py dimensions`.
 

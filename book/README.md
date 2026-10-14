@@ -93,8 +93,8 @@ everything can be checked with it.
 - [Chapter 49 · How to tell a world that keeps evolving](chapters/49-how-to-tell-a-world-that-keeps-evolving.md)
 - [Chapter 50 · Brains that see, and worlds that break](chapters/50-brains-that-see-and-worlds-that-break.md)
 - [Chapter 51 · A world that cannot break](chapters/51-a-world-that-cannot-break.md)
-- Chapter 52 · Who dies, and why — *not written yet*
-- Chapter 53 · Why evolution stops — *not written yet*
+- [Chapter 52 · Who dies, and why](chapters/52-who-dies-and-why.md)
+- [Chapter 53 · Why evolution stops](chapters/53-why-evolution-stops.md)
 - Chapter 54 · Meta IV — *not written yet*
 
 **Part VI · Towards a physics: space, scale and locality**

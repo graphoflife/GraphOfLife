@@ -254,8 +254,8 @@ def ages(ch: F.Chapter) -> None:
         x={"label": "lifetime L, in iterations (logarithmic)", "log": True, "min": 1},
         y={"label": "share living at least L (logarithmic)", "log": True, "min": 1e-5, "max": 1},
         series=curves,
-        caption=f"Of all agents born in each period of the {n} worlds' lives that took part in at least one game, "
-                "the share that lived at least L iterations. A life is counted from the iteration of birth to the "
+        caption=f"Of all agents born in each period of the {n} worlds' lives that were alive after at least one "
+                "game, the share that lived at least L iterations. A life is counted from the iteration of birth to the "
                 "last iteration after whose game the agent was alive, both included; lives still going at the end "
                 "of a run are counted as far as they went (Kaplan–Meier, as in Chapter 12). A period's line stops "
                 "at the longest life its agents could have had before the run ended. Both axes logarithmic.",

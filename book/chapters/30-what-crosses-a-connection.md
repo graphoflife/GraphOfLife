@@ -73,6 +73,13 @@ the connections is not only how tokens move; it is what keeps the network
 standing. A connection that carries nothing for one game is gone, and with
 it, perhaps, the only path between two parts of a world.
 
+> [!info] Added later: links that may not lapse
+> [Chapter 51](51-a-world-that-cannot-break.md) changes this rule for the
+> second baseline, B2: there an unused connection lapses only if its two ends
+> share at least two neighbours
+> ([`prune_needs`](../notes/settings.md#prune_needs)), so no lapse can cut a
+> world in two.
+
 The flow is also where anything like cooperation would first show: a pair of
 agents that keep staking on each other keep their connection, and with it each
 other's tokens within reach. [Lightning](../notes/lightning.md) — tokens going
@@ -115,9 +122,10 @@ connections — two thirds of those that carried anything — the two directions
 cancel exactly: as many tokens went each way. Almost all of the connections
 that carried two tokens carried one each way. Where something is left, it is
 mostly a single token: 28% of the connections moved one token net, and only
-2% moved more. This is the handshake of [Chapter 38](38-do-agents-cooperate.md),
-seen from the connections: two neighbours, each splitting a few tokens evenly
-over a few candidates, put one token on each other.
+2% moved more. This is what [Chapter 38](38-do-agents-cooperate.md) will call
+a **handshake**, seen here from the connections: two neighbours, each
+splitting a few tokens evenly over a few candidates, put one token on each
+other.
 
 ## Which connections carry nothing
 
@@ -152,9 +160,9 @@ of games; one between two agents with ten connections or more, in 13% to 14%.
 A leaf stakes on its only neighbour or keeps everything at home, and its
 neighbour almost always stakes back on it; an agent with many connections
 and few tokens cannot send a token across each, and if its neighbour does not
-either, the connection is gone. This is the price of a connection
-([Chapter 36](36-how-a-world-breaks.md)) paid connection by connection: a
-token a game, from one side or the other.
+either, the connection is gone. Every connection costs a token a game, from
+one side or the other — what [Chapter 36](36-how-a-world-breaks.md) will call
+the price of a connection, paid here connection by connection.
 
 The viewer counts the cut connections after every game as `prunedEdges`:
 6.7% of all connections in the median world (5.3% at 10,000 tokens) — a
@@ -192,16 +200,22 @@ game:
   carry a smaller part of the whole.
 - **Loops of flow.** The longest closed loop the greedy search of
   [Lightning](../notes/lightning.md) finds in the flow as staked is **41**
-  agents long in the median world (20 at 10,000 tokens) — but most of the
-  flow in such loops is exchanges: 13% of the tokens staked on neighbours go
-  round in the loops found. After cancelling each pair's two directions, the
-  longest loop is 5 or 6 agents (2 at 10,000 tokens), and 0.3% of the net
-  flow goes round ([Chapter 29](29-where-the-tokens-flow.md)).
+  agents long in the median world (20 at 10,000 tokens). Most of the flow
+  that goes round, though, goes round in loops of two — the equal exchanges
+  above — and the greedy search, which hunts for long loops, places only 13%
+  of the flow in the loops it finds
+  ([Chapter 29](29-where-the-tokens-flow.md)). After cancelling each pair's
+  two directions, no loop of two is left: the longest loop found is 5 or 6
+  agents in the median world, and 0.3% of the net flow goes round. (At
+  10,000 tokens the longest averages 2.2 over the games: a loop left after
+  cancelling needs at least three agents, and in many games none was found
+  at all.)
 
-Loops that survive cancellation are tokens genuinely going round, and they
-are longer in a larger world. But they carry almost nothing: the net flow of
-a game runs downhill, from agents richer than their neighbourhood to agents
-poorer than it, and does not circulate.
+Loops that survive cancellation are tokens genuinely going round. A larger
+world finds longer ones, if only because it has more flow to find them in.
+But they carry almost nothing: the net flow of a game runs downhill, from
+agents richer than their neighbourhood to agents poorer than it, and does
+not circulate.
 
 ## What this means
 
@@ -220,6 +234,11 @@ poorer than it, and does not circulate.
   economy of their own — nothing like a trade route along which one part of a
   world could feed another. A rule that made flows along loops pay, or that
   let a connection store what crosses it, would be a way to give them one.
+
+> [!info] Added later: a yield on exchanges
+> [Chapter 53](53-why-evolution-stops.md) pilots a rule of this kind: a yield
+> on stakes that are returned across a connection. The yield went to whoever
+> had the most partners, and it built stars rather than partnerships.
 
 To make every figure of this chapter: `python3 book_figures.py connections`.
 

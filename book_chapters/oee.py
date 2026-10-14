@@ -425,18 +425,64 @@ E14_RUNS = ("The 60 runs of Experiment 14 — B2 at 5,000 tokens, seeds 1 to 10,
             "changed. They are made with `python3 gol_lab.py run E14`.")
 
 
+#: The line of the health bar no run records: the largest share of the others
+#: one agent's loss would cut off from the largest piece. Read off the frames.
+NODE_CUT = ("nodeCut", "largest share one agent's loss cuts off", None, 0.02)
+NODE_CUT_EVERY = 10
+
+
+def _want_node_cut(run_id: str) -> Dict[str, Any]:
+    return {"every": NODE_CUT_EVERY, "upTo": min(_lived(run_id), 1000)}
+
+
+@D.measure("nodecut", field="key", want=_want_node_cut)
+def node_cut(run_id: str) -> Dict[str, Any]:
+    """The worst single-agent cut after the game, every NODE_CUT_EVERY iterations."""
+    from GraphOfLifeSimple import worst_node_cut_share
+    its, shares = [], []
+    for t in range(0, min(_lived(run_id), 1000) + 1, NODE_CUT_EVERY):
+        try:
+            frame = D.frame_at(run_id, t, 2)
+        except (KeyError, ValueError, FileNotFoundError):
+            continue
+        adj = {u: set() for u in frame["ids"]}
+        for a, b in frame["edges"]:
+            adj[a].add(b)
+            adj[b].add(a)
+        its.append(t)
+        shares.append(float(worst_node_cut_share(frame["ids"], adj)) if adj else float("nan"))
+    return {"iterations": its, "share": shares}
+
+
 def health(run_id: str, start: int = 200, stop: int = 1000) -> Dict[str, Any]:
-    """A world against the health bar: its medians, whether each passes, and whether anyone was cut off."""
+    """
+    A world against the health bar: its medians, whether each passes, how many
+    agents were cut off, and whether it held — every median inside the bar,
+    nobody cut off, and the world still alive at the end. The worst agent cut
+    comes from the frames (node_cut), every other line from the recorded rows.
+    """
     medians = {stat: settled_median(run_id, stat, start, stop) for stat, *_ in BAR}
+    cut = node_cut(run_id)
+    picked = [v for t, v in zip(cut["iterations"], cut["share"]) if start <= t <= stop and np.isfinite(v)]
+    medians[NODE_CUT[0]] = float(np.median(picked)) if picked else float("nan")
     passes = {stat: bool(np.isfinite(medians[stat]) and (lo is None or medians[stat] >= lo)
-                         and (hi is None or medians[stat] <= hi)) for stat, _, lo, hi in BAR}
+                         and (hi is None or medians[stat] <= hi)) for stat, _, lo, hi in BAR + (NODE_CUT,)}
     cut_off = 0.0
     for phase in (1, 2):
         its, orphaned = series(run_id, "orphaned", phase)
         pick = (its >= start) & (its <= stop) & np.isfinite(orphaned)
         cut_off += float(np.sum(orphaned[pick]))
-    return {"medians": medians, "passes": passes, "cutOff": cut_off,
-            "holds": all(passes.values()) and cut_off == 0}
+    extinct = store.load_meta(run_id).get("status") == "extinct"
+    return {"medians": medians, "passes": passes, "cutOff": cut_off, "extinct": extinct,
+            "holds": all(passes.values()) and cut_off == 0 and not extinct}
+
+
+def ended(spec) -> bool:
+    """A run is over: it reached its last iteration, or its world died out."""
+    if not os.path.exists(store.meta_path(spec.run_id)):
+        return False
+    meta = store.load_meta(spec.run_id)
+    return meta.get("status") == "extinct" or meta.get("iteration", 0) >= spec.until
 
 
 # Space alone: the network that births, deaths and the cull make with no brains
@@ -515,7 +561,9 @@ def space_alone(ch: F.Chapter) -> None:
                      "another are joined in a chain; *ring*: joined in a ring — B2's rules; "
                      "*ring, 1* and *ring, 3*: the ring, with one or three of the parent's neighbours "
                      "instead of two; *join all*: every former neighbour of the dead joined in a "
-                     "chain, linked or not; *ring, ≤ 8*: B2's rules with no agent above 8 links. The "
+                     "chain, linked or not; *ring, ≤ 8*: B2's rules, and no child for an agent of 8 "
+                     "links or more nor a newborn's random link to one (mending still links past the "
+                     "cap). The "
                      "dashed lines are the health bar of Chapter 49. Cut shares and the "
                      "best-connected agent's share are drawn on logarithmic axes, a cut of nothing "
                      "at 0.0001."),
@@ -570,17 +618,46 @@ def space_alone(ch: F.Chapter) -> None:
 @chapter
 def unbreakable(ch: F.Chapter) -> None:
     space_alone(ch)
-    specs = {c: [s for s in runs_of("E14", c) if _lived(s.run_id) >= 1000]
-             for c in E14_CONDITIONS}
-    if not all(specs.values()):
+    specs = {c: runs_of("E14", c) for c in E14_CONDITIONS}
+    if not all(specs.values()) or not all(ended(s) for c in specs for s in specs[c]):
         return
     checked = {c: [health(s.run_id) for s in specs[c]] for c in E14_CONDITIONS}
     ch.number("hold", {c: int(sum(h["holds"] for h in checked[c])) for c in E14_CONDITIONS})
     ch.number("worlds", {c: len(checked[c]) for c in E14_CONDITIONS})
-    ch.number("medians", {c: {stat: describe([h["medians"][stat] for h in checked[c]]) for stat, *_ in BAR}
+    ch.number("extinct", {c: [s.lab["seed"] for s, h in zip(specs[c], checked[c]) if h["extinct"]]
                           for c in E14_CONDITIONS})
+    ch.number("cutOff", {c: {str(s.lab["seed"]): h["cutOff"] for s, h in zip(specs[c], checked[c])}
+                         for c in E14_CONDITIONS})
+    ch.number("fails", {c: {stat: int(sum(1 for h in checked[c] if not h["passes"][stat]))
+                            for stat, *_ in BAR + (NODE_CUT,)} for c in E14_CONDITIONS})
+    ch.number("dimension_worlds", {c: {str(s.lab["seed"]): h["medians"]["dimension"]
+                                       for s, h in zip(specs[c], checked[c])} for c in E14_CONDITIONS})
+
+    ch.figure("agents", title="Agents alive", x={"label": "iteration"}, y={"label": "agents", "min": 0},
+              series=[band_series([series(s.run_id, "nodes", 2) for s in specs[c]], c, COLOURS[k % len(COLOURS)])
+                      for k, c in enumerate(E14_CONDITIONS)],
+              caption=("For each condition the median world at each iteration, with the middle half "
+                       "of the worlds (darker) and nine in ten (paler). A world that died out leaves the "
+                       "band when it does."),
+              recipe=recipe(E14_RUNS, F.STATS_FILE, [
+                  "Take `nodes` of the rows with `phase` = 2, one line per run.",
+                  "For each condition, the median, quartiles and 5th and 95th percentiles of the runs "
+                  "at each iteration (`book_figures.band_series`)."]))
+    ch.figure("lost", **dots("lost", E14_CONDITIONS,
+                             {c: [h["cutOff"] + 1 for h in checked[c]] for c in E14_CONDITIONS},
+                             title="Agents cut off from iteration 200 to 1,000",
+                             y={"label": "agents cut off, plus one", "log": True}),
+              caption=("One dot per world: every agent the cull removed because it was no longer "
+                       "joined to the largest piece, in either phase, from iteration 200 to 1,000 — "
+                       "plus one, so that a world that lost nobody sits at 1 on the logarithmic "
+                       "axis. The bar is the median world."),
+              recipe=recipe(E14_RUNS, F.STATS_FILE, [
+                  "Sum `orphaned` over the rows of both phases with 200 ≤ `iteration` ≤ 1,000.",
+                  "Add one, and draw a dot per world."]))
+    ch.number("medians", {c: {stat: describe([h["medians"][stat] for h in checked[c]])
+                              for stat, *_ in BAR + (NODE_CUT,)} for c in E14_CONDITIONS})
     panels = []
-    for stat, words, lo, hi in BAR:
+    for stat, words, lo, hi in BAR + (NODE_CUT,):
         values = {c: [h["medians"][stat] for h in checked[c]] for c in E14_CONDITIONS}
         guides = [{"axis": "y", "at": v, "label": "the bar"} for v in (lo, hi) if v is not None]
         panels.append(dots(stat, E14_CONDITIONS, values, title=words, y={"label": words, "min": 0},
@@ -594,6 +671,9 @@ def unbreakable(ch: F.Chapter) -> None:
                 "For every run take the rows with `phase` = 2 and 200 ≤ `iteration` ≤ 1,000, and "
                 "the median of `coreShare`, `cutRisk`, `maxDegree` / `nodes`, `meanDegree` and "
                 "`dimension`.",
+                f"No run records the worst cut by one agent, so read it off the frames: every "
+                f"{NODE_CUT_EVERY}th iteration from 200 to 1,000, rebuild the network after the game "
+                f"and take `GraphOfLifeSimple.worst_node_cut_share` (`oee.node_cut`); its median.",
                 "A world holds if every median is inside the bar and `orphaned` is 0 in every row "
                 "of either phase in the same iterations."]))
 
@@ -604,7 +684,7 @@ def unbreakable(ch: F.Chapter) -> None:
 
 E15_CONDITIONS = ["B2", "the last token kept", "nothing kept", "half kept", "children of any size",
                   "no old age"]
-E15_RUNS = ("The 60 runs of Experiment 15 — B2 at 5,000 tokens, seeds 1 to 10, 1,000 iterations — "
+E15_RUNS = ("The 60 runs of Experiment 15 — B2 at 10,000 tokens, seeds 1 to 10, 1,000 iterations — "
             "in six conditions that change how much an agent keeps at home, how small a child may "
             "be, and whether agents die of age. They are made with `python3 gol_lab.py run E15`.")
 
@@ -669,7 +749,7 @@ def deaths(ch: F.Chapter) -> None:
 
 E16_ERAS = (0, 100, 200, 500, 1000, 1500, 2000)
 E16_CONDITIONS = ["B2", "no random inputs"]
-E16_RUNS = ("The 20 runs of Experiment 16 — B2 at 5,000 tokens, seeds 1 to 10, 2,000 iterations, "
+E16_RUNS = ("The 20 runs of Experiment 16 — B2 at 10,000 tokens, seeds 1 to 10, 2,000 iterations, "
             "a whole world archived every 100 — with and without the random inputs. They are made "
             "with `python3 gol_lab.py run E16`.")
 

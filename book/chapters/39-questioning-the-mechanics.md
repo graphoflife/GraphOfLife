@@ -114,6 +114,13 @@ heredity only through birth. (b) The winner's brain and the loser's are
 nearest thing here to sex. (c) A node is only taken if the winner outbids its
 own agent's stake by a margin, so that holding a place is possible.
 
+> [!info] Added later: (c) became a setting
+> (c) is now [`incumbency`](../notes/settings.md#incumbency): an agent's
+> stake on its own node counts *h* times over. In pilots with brains that
+> see and *h* = 2, conquest fell to 15–25% of the nodes in a game and births
+> came back as the way brains spread; B2 uses 1.5
+> ([Chapter 52](52-who-dies-and-why.md)). (a) and (b) have not been tried.
+
 ## Variation in the living
 
 **The rule.** Every brain is offered a change after every game, with
@@ -134,8 +141,19 @@ iterations ([Chapter 18](18-genotypes-and-lineages.md)) and why the
 distinct-genotype count is set by the rules ([Chapter 27](27-how-even-is-a-world.md)).
 
 **Alternatives.** Change brains **only when they are copied** — at birth and at
-conquest — and never in place. Part V begins with exactly this experiment
-(Chapter 49 in [the contents](../README.md)).
+conquest — and never in place. Part V tries exactly this
+([Chapter 50](50-brains-that-see-and-worlds-that-break.md)).
+
+> [!info] Added later: tried, and harmful on its own
+> In Experiment 13, on ten worlds of 5,000 tokens, four worlds whose brains
+> had one hidden layer of 16 died out — and eight when those brains changed
+> only when copied as well. A stricter variant, which changed a brain only
+> when it was copied into a newborn, froze a pilot world into one genotype
+> with no births at all. B2 keeps the rule all the same, inside rules that
+> stop worlds breaking and starving
+> ([Chapter 51](51-a-world-that-cannot-break.md),
+> [Chapter 52](52-who-dies-and-why.md)). How long a lineage now stays like
+> its ancestor has not been measured.
 
 ## Hubs are places
 
@@ -159,6 +177,15 @@ struggles to build anything that lasts on top of them.
 own stake on its node counting double, or a takeover needing the coalition's
 revolutionary part to exceed the hegemon's stake *and* the home stake. Then
 measure how long brains hold hubs, and whether partnerships appear.
+
+> [!info] Added later: incumbency, and no more hubs
+> The first alternative is now [`incumbency`](../notes/settings.md#incumbency)
+> ([Chapter 52](52-who-dies-and-why.md)). Part V also took the hubs away: no
+> brain may choose more than 8 links
+> ([`valence`](../notes/settings.md#valence)), and in prototype worlds under
+> B2's rules the best-connected agent was joined to 1–5% of the others
+> ([Chapter 51](51-a-world-that-cannot-break.md)). How long brains hold their
+> nodes, and whether partnerships appear, has not been measured.
 
 ## Decisions averaged over neighbours
 
@@ -217,6 +244,14 @@ death.
 *f* = 1 / (1 + *e*^(*b* − *a*)), where a small change of the outputs always
 makes a small change of the share.
 
+> [!info] Added later: the cliff no longer kills
+> Under B2's rules a parent always keeps at least one token
+> ([`keep_home`](../notes/settings.md#keep_home)) and a child gets at least
+> ten ([`min_child`](../notes/settings.md#min_child)), so a jump to "give
+> everything" no longer kills the parent
+> ([Chapter 52](52-who-dies-and-why.md)). The share function itself is
+> unchanged; a smooth one has not been tried.
+
 ## Every token at stake, every game
 
 **The rule.** An agent stakes **all** its tokens, as whole tokens, every game;
@@ -234,6 +269,17 @@ selection has to work through.
 **Alternatives.** Let agents keep part of their tokens out of the game
 ("savings", which neither defend nor attack); or let a node with no stakes on
 it keep its agent alive at zero, for one game.
+
+> [!info] Added later: a share kept at home
+> Part V tried a form of the first alternative:
+> [`keep_home`](../notes/settings.md#keep_home) keeps a share of an agent's
+> tokens on its own node whatever its brain says — not out of the game, but
+> always defending it ([Chapter 52](52-who-dies-and-why.md)). Keeping only
+> the last token ended starvation but made an all-in attack free: three
+> agents in four were left with a single token. Keeping 30% is part of B2;
+> with nothing kept, pilot worlds of brains that see starved to a single
+> agent. Experiment 15 tests these rules. Keeping an agent alive at zero has
+> not been tried.
 
 ## Connections have a price
 
@@ -257,6 +303,13 @@ connection survive one quiet phase. Others: a connection that decays with a
 probability instead of at once, or connections that cost a small fixed fee
 instead of a stake.
 
+> [!info] Added later: only redundant links lapse
+> [Chapter 51](51-a-world-that-cannot-break.md) changes this rule for Part V:
+> with [`prune_needs`](../notes/settings.md#prune_needs) = 2, an unused
+> connection lapses only if its two ends share at least two neighbours, so a
+> lapse can never split a world. A fee, or decay by chance, has not been
+> tried.
+
 ## One rule reaches across the world
 
 **The rule.** After every phase, only the **largest connected piece** of the
@@ -265,7 +318,7 @@ network survives ([Chapter 3](03-one-iteration.md)).
 **What the data say.** Three deaths in four are cut-offs
 ([Chapter 12](12-births-deaths-and-ages.md)); a sixth of them happen in the one
 game in fifty that cuts off a thousand agents or more, and a single game has
-cut off two thirds of a world ([Chapter 36](36-how-a-world-breaks.md)).
+cut off half a world ([Chapter 36](36-how-a-world-breaks.md)).
 And the losses grow with the world: in worlds from 3,200 to 409,600 tokens, a
 single game has cut off a third to a half of all agents, at every size, so
 that a big world changes from game to game as much, relatively, as a small one
@@ -288,6 +341,16 @@ long-range connection — a child joined, rarely, to an agent anywhere — which
 would let separated populations meet again, and would also shorten the world's
 distances ([Chapter 35](35-the-geometry-of-a-world.md)).
 
+> [!info] Added later: a world that cannot split
+> Part V took the other road. [Chapter 51](51-a-world-that-cannot-break.md)
+> adds local rules — two links at birth, a death mended in a ring, only
+> redundant links lapsing — under which neither a death nor a lapsed link
+> can split a world. Letting a separated piece live on is planned for
+> Chapter 58, *Local rules only*. A child joined to an agent anywhere would
+> break the locality that Part V asks of every rule
+> ([Chapter 49](49-how-to-tell-a-world-that-keeps-evolving.md),
+> [Chapter 7](07-physical-inspiration.md)).
+
 ## The share-out lottery
 
 **The rule.** The tokens of the cut-off are dealt out to survivors chosen
@@ -303,6 +366,12 @@ stakes, and it is noise.
 **Alternatives.** The setting `redistribution = by_tokens` exists. Others: give
 the tokens to the agents across the border that went quiet, or remove them
 from the world.
+
+> [!info] Added later: not yet tried
+> Giving the tokens of the dead to their former neighbours is planned for
+> Chapter 58, *Local rules only*. Under B2's rules no one is cut off, and the
+> share-out deals out the estates of agents that die of age
+> ([Chapter 52](52-who-dies-and-why.md)).
 
 ## Numbers that mislead
 
@@ -330,6 +399,18 @@ Two pieces of bookkeeping deserve care, though they change nothing in a world:
   populations.
 - **Each can be tested one at a time**, against the baseline, with the methods
   of Part IV. [Meta II](40-meta-2.md) sets out the order.
+
+> [!info] Added later: what became of the four
+> Part V changed three of the four — not one at a time against the baseline,
+> but together, in a second baseline, B2
+> ([Chapter 51](51-a-world-that-cannot-break.md)). Brains change only when
+> copied ([Chapter 50](50-brains-that-see-and-worlds-that-break.md)), a home
+> stake counts 1.5 times ([Chapter 52](52-who-dies-and-why.md)), and a world
+> can no longer split, so the cull has nothing left to cut — though
+> populations still cannot separate. Conquest still erases. Experiments 14
+> and 15 test the rules by changing them one at a time from B2, and in every
+> pilot evolution still stopped within a few hundred iterations
+> ([Chapter 53](53-why-evolution-stops.md)).
 
 To make every figure of this chapter: `python3 book_figures.py mechanics`.
 

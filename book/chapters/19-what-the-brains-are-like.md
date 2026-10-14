@@ -159,7 +159,8 @@ differently:
   brain spreads in **98%** of cases. That fits the 98% of
   [Chapter 16](16-how-the-game-is-played.md).
 - **Splitting evenly.** In the median world, **42%** of agents give every
-  candidate a score of zero or below. The rules then split their tokens
+  candidate a score of zero or below (the founders' brains, on the same
+  inputs, 49%: this is not something selection made). The rules then split their tokens
   exactly evenly ([Splitting tokens into whole numbers](../notes/largest-remainder.md)).
   The worlds differ enormously here, from 13% to 98% (58% in the median world
   of 10,000 tokens, from 3% to 97%). In a world where it is 98%, almost every
@@ -245,10 +246,11 @@ brains, although their gain is larger. Their habits make them so. A
 founder's brain goes all in half the time, on whichever candidate scores
 highest, and with scores this close almost any change can make another
 candidate the highest. An evolved brain spreads, and a spread changes only
-when the rounding of a token tips. More than half of the evolved agents give
-every candidate a score of zero or below, and their even split cannot change
-at all unless a score is pushed above zero. And the random numbers
-change more stakes than a doubling of the neighbours' wealth. Five numbers
+when the rounding of a token tips. In the median world 42% of the evolved
+agents (58% at 10,000 tokens) give every candidate a score of zero or below,
+and their even split cannot change at all unless a score is pushed above
+zero. And the random numbers change more stakes than a doubling of the
+neighbours' wealth. Five numbers
 drawn from −2 to 2 move the inputs further than one doubling (ln 2 ≈ 0.7 on
 the logarithmic scale the brain reads), and a brain that weighs all its
 inputs alike cannot tell information from noise.
@@ -350,9 +352,23 @@ depends on it.
   steeper slope, or larger starting weights would each give the brains a
   gain near 1 ([How a signal fades through layers](../notes/vanishing-signal.md)).
   Chapter 47, *How big should a brain be?*, is planned for that and should
-  come early. [Chapter 41](41-do-the-brains-matter.md), which replaced the
-  brains by chance, reads differently in this light: its brains did matter,
-  but as constants.
+  come early. [Chapter 41](41-do-the-brains-matter.md), which replaces the
+  brains by chance, should be read in this light: its brains do matter, but
+  as constants.
+
+> [!info] Added later: brains that see
+> The remedy was tried in Part V, not in Chapter 47, which is still to come.
+> [Chapter 50](50-brains-that-see-and-worlds-that-break.md) gave the brains
+> one hidden layer of 16 — a founder's gain of about 0.2 — and the worlds
+> broke: at 5,000 tokens four of ten died out, and eight of ten when brains
+> change only when copied, against none of the baseline's.
+> [Chapter 49](49-how-to-tell-a-world-that-keeps-evolving.md) confirmed that
+> the blind brains' evolution is soon over: by iteration 50 they beat their
+> founders, and after that no era beats the one before. And
+> [Chapter 53](53-why-evolution-stops.md) finds that seeing brains, in worlds
+> that cannot break, stop improving within a few hundred iterations too; it
+> proposes that the limit lies in the game rather than in the brain, a
+> reading Experiment 16 is to test.
 
 To make every figure of this chapter: `python3 book_figures.py minds`.
 

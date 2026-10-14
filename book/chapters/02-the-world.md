@@ -66,12 +66,18 @@ least one token, a world can never hold more than *T* agents.
 
 ## How a world begins
 
-A world is fixed by its **settings** and its **seed**. The settings are 23
+A world is fixed by its **settings** and its **seed**. The settings are 32
 numbers and switches; [Every setting](../notes/settings.md) lists them all,
-with the values of the baseline **B1**. The ones that shape the start are
-the number of tokens *T*, the number of founders and their ring. This part of
-the book teaches with worlds of *T* = 10,000 tokens; Parts II and III study the
-same baseline at *T* = 100,000, which starts the same way, ten times over.
+with the values of the baseline **B1**. Nine of them, added for Part V, keep
+their old rule in B1, so the rules are exactly as this part describes them.
+The ones that shape the start are the number of tokens *T*, the number of
+founders and their ring. This part of the book teaches with worlds of
+*T* = 10,000 tokens. Parts II and III study the same baseline at
+*T* = 100,000: ten times as many founders of 100 tokens each, on a denser
+ring — with 1,000 founders the rule for the ring gives every founder 10
+neighbours, not 4 ([Every setting](../notes/settings.md#k_neighbors);
+[Chapter 16](16-how-the-game-is-played.md) shows what that changes in the
+first game).
 
 From them the world is built in three steps.
 
@@ -141,7 +147,7 @@ After every phase the world is written down as a **frame**: frame 2*t* after
 the reproduction phase of iteration *t*, frame 2*t* + 1 after its game. A
 frame holds every living agent's id, tokens, genotype and parent genotype and
 age; every connection; and every decision taken in the phase. From each frame
-a row of about seventy **statistics** is computed — the number of agents, of
+a row of about ninety **statistics** is computed — the number of agents, of
 connections, the inequality of wealth, and so on — and kept in the run's
 `stats.jsonl`. [What a run records](../notes/frames-and-stats.md) lists the
 fields and links each statistic to the note that defines it.

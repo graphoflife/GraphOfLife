@@ -177,8 +177,19 @@ The well connected gain connections in proportion to their connections:
 preferential attachment (Barabási and Albert 1999), reached by copying, as in
 the "duplication" models of protein networks (Vázquez, Flammini, Maritan and
 Vespignani 2003; Chung, Lu, Dewey and Galas 2003). Preferential attachment on
-its own gives γ = 3. Whether that is what happens here is a hypothesis: an
-experiment that joined children to random agents instead would test it.
+its own gives γ = 3. [Chapter 22](22-how-the-network-grows.md) has measured
+it here: an agent gains connections in proportion to those it has (as
+*k*^1.02), and loses them a little faster (as *k*^1.20), which bends the tail
+down at the top. Whether this is what makes the tail is still a hypothesis:
+an experiment that joined children to random agents instead would test it.
+
+> [!info] Added later: preferential attachment, capped
+> [Chapter 51](51-a-world-that-cannot-break.md) meets the same mechanism when
+> brains can see: whatever a brain favours, the well connected are offered as
+> candidates more often, and in pilots in which the brains chose a newborn's
+> links the best-connected agent was joined to 30% of the world. The second
+> baseline, B2, draws two of a newborn's links at random and caps the links a
+> brain may choose at eight.
 
 ## The tokens: a power law in the tail
 
@@ -220,8 +231,9 @@ than the connection tail would need the hubs to hold *more* tokens per
 connection than everyone else. They do not: among the 3,358 agents in the
 token tail, 40% have ten connections or more — but **33% have only one or
 two**. A third of the richest agents are rich far beyond their place, and
-[Chapter 28](28-gains-and-losses.md) showed what happens to them: they drain,
-losing 48% of their tokens per game on average.
+[Chapter 28](28-gains-and-losses.md) showed what happens to the rich: those
+with a hundred tokens or more lose 48% of their tokens per game on average,
+and a rich agent with one or two connections dies in one game in ten.
 
 That suggests a different mechanism, also a classic. An agent's tokens are
 multiplied, game after game, by a random factor — sometimes a big gain, more

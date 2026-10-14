@@ -191,12 +191,13 @@ together?
 <!-- /figure -->
 
 Among agents one step apart, **9.2%** carry the same genotype, 290 times as
-many as among any two agents of the world (0.03%). That is the finding of
-[Chapter 38](38-do-agents-cooperate.md), counted here from agents drawn at
-random rather than from connections. Two steps apart it is 4.1% (100 times
-chance), three steps 0.5% (12 times), four steps 0.09% (2.6 times), and from
-**five steps on, fewer than chance would give**: 0.6 times at five steps,
-0.1 at six. Beyond eight steps, almost no pair shares a genotype.
+many as among any two agents of the world (0.03%).
+[Chapter 38](38-do-agents-cooperate.md) will find the same, counting
+neighbours along connections rather than from agents drawn at random. Two
+steps apart it is 4.1% (100 times chance), three steps 0.5% (12 times), four
+steps 0.09% (2.6 times), and from **five steps on, fewer than chance would
+give**: 0.6 times at five steps, 0.1 at six. Beyond eight steps, almost no
+pair shares a genotype.
 
 At 10,000 tokens the same shares were 9.9% at one step and 5.0% at two, but
 two agents drawn at random shared a genotype ten times as often (0.30%), so
@@ -218,19 +219,28 @@ longer than genotypes, might well hold larger domains.
 question of agents that share an ancestor some tens or hundreds of
 iterations back.
 
+> [!info] Added later: lines do hold regions
+> [Chapter 55](55-worlds-of-100000-tokens.md) measured them. Two neighbours
+> share a family of 25 iterations back 99 times as often as chance would have
+> them, and the excess reaches about 7 steps; for families of 200 iterations
+> back, about 12 (4 to 17 across the worlds). A line's patch widens as a
+> walker spreads on these worlds, about as *t*^0.34, not as a front.
+> [Chapter 37](37-one-world-many-colours.md) draws such families in colour.
+> So a world has territories after all: of lines, not of genotypes.
+
 ## What this means
 
 - **A world has structure only within one or two steps.** Its correlation
   length is one to two connections. Beyond three steps, a world is
   statistically the same everywhere: no rich regions, no old towns, no
-  territories.
+  territories of genotypes.
 - **Most of the local structure is place, not influence.** Rich beside poor
   is just hubs among leaves. Only age is alike beside alike beyond what place
   explains, as cohorts born and dying together.
 - **A world is far from critical.** At a critical point the correlation
   length grows without bound and likeness falls off with distance only as a
   power. Here it is gone within three steps. That fits
-  [Chapter 32](32-power-laws-real-and-apparent.md), which found no
+  [Chapter 32](32-power-laws-real-and-apparent.md), which finds no
   avalanches of every size and no 1/*f* noise. Whatever has no scale in
   these worlds — and [Chapter 24](24-how-many-dimensions-does-a-world-have.md)
   finds something — it is not what the agents hold, which is alike only

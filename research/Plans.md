@@ -116,7 +116,12 @@ Write once 41–45 are analysed. Re-read the ladder: what moved for P1
 the obstacles list of Chapter 40 and the order of Part V. Fold in what the six
 Part II chapters (19–24) changed.
 
-### 47 · How big should a brain be? (`hidden_layers`) — PRIORITY, run next after 43
+### 47 · How big should a brain be? (`hidden_layers`)
+
+**Partly served by Chapter 50 (2026-10-14):** one hidden layer of 16 gives a
+founder gain of 0.2 and breaks worlds unless the rules of Chapters 51–52 hold
+them; the remaining question is size *within* a world that cannot break (B2
+with [8], [16], [32], [16, 16]).
 
 **Why it moved up.** Chapter 19: the baseline brain is nearly blind — gain
 0.0015 (founders 0.0006), each sigmoid layer passes ×0.23–0.27, the last
@@ -162,7 +167,7 @@ analysed whether 48 remains a separate chapter or folds into 55/56.
 
 ---
 
-## Part V · Engineering open-ended evolution (rewritten 2026-10-12)
+## Part V · Engineering open-ended evolution (updated 2026-10-14)
 
 The author's brief (2026-10-12): invent an algorithm on this simulation in
 which open-ended evolution emerges; find a statistic that keeps rising (its
@@ -172,53 +177,53 @@ three-dimensional, few single points of failure — and must come out of the
 rules; rules local (long reach only at a price in tokens). Pilots by me,
 experiments for the author; teach it all in the book.
 
-Everything found so far is in `research/oee/LOG.md` (the pilot log) and the
-tools beside it. In short:
+What is established is in `research/Findings.md`; the pilot log and the tools
+are in `research/oee/pilots/` (rebuilt from the transcript after a reboot
+wiped /tmp on 2026-10-14 — keep everything there, never only in /tmp).
 
-- **Yardstick** (Ch. 49, E12): cross-time tournament (`gol_tournament.py`,
-  runs keep worlds with `archive_every`), Elo per era, dominance count;
-  health bar (2-core ≥ 0.8, node cut ≤ 2%, edge cut ≤ 1%, max degree ≤ 5%,
-  degree 3–12, dimension 2.3–4); shadows for traits. Pilot B1 (5k, seed 1):
-  Elo +283 at 100, flat +320–345 from 200 to 600.
-- **Brains that see** (Ch. 50, E13): [16] gives gain 0.2 (five layers
-  0.0006). Pilots: worlds crash (to 1 agent in 3 of 4 seeing worlds), tree-
-  like networks, hubs. Mechanism: concentrated stakes kill links, the cull
-  takes half the world at one cut.
-- **A world that cannot break** (Ch. 51, E14, baseline B2): birth_links 2 +
-  mend_on_death (ring) + prune_needs 2 + valence 8 + no handover. Space alone
-  (`research/oee/space.py`): node cut 1.1–1.3%, dimension 3.4–3.6. Engine B2
-  seed 1: 2-core 1.0, no cut at all, degree 5.1–5.3, dimension 3.1–3.7.
-- **Who dies, and why** (Ch. 52, E15): kamikaze children, hoarding queens,
-  one-token froth; keep_home (a share kept at home), max_age, min_child.
-  keep_home = one token left 75% of agents at one token (zombies); 0.3 leaves
-  35–61%; nothing kept starves worlds.
-- **Why evolution stops** (Ch. 53, E16): every variant flattens within a few
-  hundred iterations (B1, B2-like, home floor, no dice, allies, sizes 1.25k
-  to 5k tie in a round robin). Evolved stakes follow the noise inputs (25–58%
-  of decisions change when they are redrawn), not what agents see: Colonel
-  Blotto's best play is mixed, and a good mixed strategy cannot be bettered.
-  One rare late step (allies, seed 1, ~400 iterations, +150 Elo).
+State of the chapters:
+
+- **49 · yardstick** (E12) — analysed 2026-10-14. B1 learns in 50–100
+  iterations, then ties itself forever; thesis held.
+- **50 · brains that see** (E13) — analysed 2026-10-14. 8/10 MOR seeing worlds
+  die, 4/10 one-layer; but no world passes the bar and the deaths are the
+  cull's steady toll against births; births probe (`oee.children`): seeing
+  brains can give up children. Thesis held.
+- **51 · a world that cannot break** (E14) — written; E14 analysed when the
+  lab finishes ("no valence" last). First look: B2 holds in 9/10 (one world's
+  dimension 4.19 > 4: the thesis, which asked for all ten, is refuted on that
+  line); every ablation fails in every finished world.
+- **52 · who dies, and why** (E15) — written 2026-10-14, queued in the lab.
+  B2 has one way to die, old age; births run at 1.00–1.05 per hundred.
+- **53 · why evolution stops** (E16) — written 2026-10-14, queued. Colonel
+  Blotto reading; the pilot table.
+- **54 · Meta IV** — after 51–53 are analysed.
 
 ### Open questions, in the order to try them
 
-1. **Depth.** A game whose best response keeps depending on information:
-   growing memory (Lindgren 1991; `memory_len` + grow brains with shadow),
-   cooperation that pays (yield on mutual stakes, now without hubs thanks to
-   valence), fog of war (neighbours' tokens hidden: bluffing, inference),
-   coalitions that are superadditive. Pilots running (X/ in the scratch log).
-2. **Size.** If a game with depth is found: B2 at 1,250 / 5,000 / 20,000 /
-   80,000 tokens, 5 seeds, 2,000–3,000 iterations, archive every 100; Elo,
-   dominance count, and a cross-size round robin (the decisive test of
-   "the ceiling rises with the tokens").
-3. **Port** to the engine whatever the pilots keep (memory needs the last
-   stakes in the checkpoint; grow brains need a brain kind and `active` in
-   the checkpoint).
+1. **A surplus for cooperation.** The prototype has three ways (proto.py):
+   `allies` (mutual consent; stakes pooled by side; an ally cannot take an
+   ally's node), `kin_pool` k (pooling for genotypes within k mutations),
+   `support_gain` g (support worth g times in defence). Smoke test: allies at
+   once form one giant peaceful bloc (conquests 4 vs 43) — the risk is a
+   world at peace, where nothing is selected. Rerun batch A (ctrl / allies /
+   kin / gain × 2 seeds, 3,000 tokens, 1,000 iterations, revolutions off) and
+   measure Elo, step scores, side sizes, conquests, lightning.
+2. **Births as a decision.** E13 showed seeing brains can stop breeding. Under
+   B2's old age a non-breeding line loses bodies; check in E15/E16 worlds with
+   the births probe whether reproduction stays.
+3. **Size.** Once a game with room to evolve exists: B2 (or its successor) at
+   1,250 / 5,000 / 20,000 / 80,000 tokens, 5 seeds, 2,000–3,000 iterations,
+   archive every 100; Elo, dominance count, and a cross-size round robin (the
+   test of "the ceiling rises with the tokens").
+4. **Port** to the engine what the pilots keep (memory needs the last stakes
+   in the checkpoint; grow brains need a brain kind and `active` there).
 
 ### 54 · Meta IV
 
-Once 49–53 are analysed: what the engineering found, which rules are needed
-for a world that cannot break, what stops evolution, and the experiments at
-scale.
+Once 51–53 are analysed: what the engineering found, which rules are needed
+for a world that cannot break, why evolution stops, and the proposal for a
+game with a surplus.
 
 ---
 

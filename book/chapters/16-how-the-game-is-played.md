@@ -112,12 +112,13 @@ The first game differs from that of the worlds of 10,000 tokens, where 38%
 staked nothing at home, 12% everything, and the mean share was 0.25. The
 reason is the starting ring ([Chapter 2](02-the-world.md)): each of the 1,000
 founders here starts with *k* = max(⌊1,000 / 100⌋, 5) = 10 neighbours, where
-the 100 founders of a small world had 5. A brain that splits its tokens
-between more candidates puts a smaller share on any one of them, its own node
-included. By the last game the two sizes agree (0.39 at 10,000 tokens).
+the 100 founders of a small world had 4 (there *k* = 5, and an odd *k* is
+wired as *k* − 1). A brain that splits its tokens between more candidates
+puts a smaller share on any one of them, its own node included. By the last
+game the two sizes agree (0.39 at 10,000 tokens).
 
 Why do the bars in the last game have peaks? A question to keep in mind: an
-agent holds few tokens — half of all agents hold 4 or fewer
+agent holds few tokens — half of all agents hold 5 or fewer
 ([Chapter 15](15-where-do-the-tokens-go.md)) — and stakes whole tokens. An
 agent with 3 tokens can only put 0, ⅓, ⅔ or all of them at home; one with 2,
 only 0, ½ or all. So the shares cluster at simple fractions.
@@ -186,7 +187,7 @@ largest staker.
 In the **first game**, 82% of the nodes went to a neighbour — most of them
 (60% of all nodes) to a neighbour that simply staked the most there, and 23%
 to a coalition. The founders' random brains, each with ten neighbours to
-stake on, left their own nodes open. (At 10,000 tokens, with five neighbours
+stake on, left their own nodes open. (At 10,000 tokens, with four neighbours
 each, 72% went to a neighbour.)
 
 In the **last game**, the agent living on a node won it 45% of the time —
@@ -269,7 +270,7 @@ game in much the same way, whatever its founders started with.
   and each takes on the winner's brain. Against that, about 500 children are
   born per iteration ([Chapter 12](12-births-deaths-and-ages.md)). A brain's
   descendants are mostly the nodes it conquers, not its children.
-- **The game is a game of coalitions.** With 96% of staked tokens marked
+- **The game is a game of coalitions.** With 97% of staked tokens marked
   revolutionary, a node on which the other stakers together put more than its
   largest single staker did is, nearly always, won by one of them — which may
   be the agent living on it.
@@ -282,6 +283,15 @@ game in much the same way, whatever its founders started with.
   selection — brains that play otherwise losing their nodes — or would any
   way of copying and changing brains end there? [Chapter 41](41-do-the-brains-matter.md)
   compares worlds whose brains never change.
+
+> [!info] Added later: selection, and early
+> [Chapter 19](19-what-the-brains-are-like.md) finds selection behind these
+> shares: it set the brains' constants — few children, the stake spread,
+> every token revolutionary — alike in every world.
+> [Chapter 49](49-how-to-tell-a-world-that-keeps-evolving.md) plays the
+> brains of each era against their founders' in ten worlds of 5,000 tokens:
+> by iteration 50 they hold nine tenths of a contested world, and no later
+> era does better than the one before it.
 
 To make every figure of this chapter: `python3 book_figures.py game`.
 

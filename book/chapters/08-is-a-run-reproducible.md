@@ -1,6 +1,6 @@
 # Is a run reproducible?
 
-Every later chapter compares worlds: thirty seeds against thirty, one setting
+Every later chapter compares worlds: many seeds against many, one setting
 against another. That only means something if a world is decided by its
 settings and its seed and by **nothing else** — not by when it was stopped
 and continued, not by a crash, not by which computer or how many processor
@@ -22,9 +22,11 @@ if three things hold.
    Graph of Life every world owns its own generator, started from its seed,
    and draws everything from it ([Seeds and the random stream](../notes/random-numbers.md)).
 2. **Everything is done in a fixed order.** Agents act in increasing order of
-   id; neighbours are listed in increasing order of id; messages written in a
-   phase are held back and delivered together at its end, so that no agent
-   reads a message another agent wrote a moment earlier in the same phase.
+   id; neighbours are listed in increasing order of id; messages are held
+   back in an outbox and delivered together once every agent has written —
+   after the look that only talks, and again at the end of the phase — so
+   that no agent reads a message another agent wrote a moment earlier in the
+   same look.
 3. **A saved world is the whole world.** To stop a run and continue it later,
    the program saves a **checkpoint**: every agent's tokens, brain weights,
    genotype and age, every connection and when it last carried tokens, every

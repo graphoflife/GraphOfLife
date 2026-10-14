@@ -163,11 +163,12 @@ the units of the things counted. Per agent, over the settled life:
 - **Token holders.** The tokens are as even as if 47% of the agents held them
   in equal shares (the worlds: 24% to 64%). In a world of 14,000 agents, some
   6,700 equal holders.
-- **Distinct genotypes.** There are 0.63 genotypes per agent — and this is
-  the tightest number in the whole book so far: the thirty worlds lie between
-  0.61 and 0.66, a standard deviation of 0.012, and the worlds of 10,000 tokens
-  had the same 0.63. Whatever their seed, their history and their size, the
-  worlds keep almost exactly two genotypes for every three agents.
+- **Distinct genotypes.** There are 0.63 genotypes per agent, as
+  [Chapter 18](18-genotypes-and-lineages.md) found — and this is the tightest
+  number in the whole book so far: the thirty worlds lie between 0.61 and
+  0.66, a standard deviation of 0.012, and the worlds of 10,000 tokens had the
+  same 0.63. Whatever their seed, their history and their size, the worlds
+  keep almost exactly five genotypes for every eight agents.
 - **Effective genotypes.** Weighted by how many agents carry them, the
   genotypes are worth 0.45 per agent (0.22 to 0.51; 0.49 at 10,000 tokens):
   fewer than the distinct count, because some genotypes are carried by many
@@ -214,16 +215,20 @@ inequality differently, and the difference can be stated exactly. Move a small
 amount of tokens from a richer agent *j* to a poorer agent *i*:
 
 - the **Gini** falls in proportion to how far apart *i* and *j* are **in rank**
-  — how many agents lie between them when all are sorted;
+  — how many agents hold more than *i* and less than *j*;
 - the **entropy** rises in proportion to log₂(τⱼ / τᵢ), how many **times**
   richer *j* is than *i*.
 
-So a token passed from an agent with 2 to one with 1 counts for a lot in
-entropy (a doubling) and for little in the Gini (thousands of agents hold 1 or
-2, so the two are close in rank). Entropy listens more to the poor; the Gini
-to the spread of the whole ladder. A world in which a few agents dominate and
-the rest are equally poor and a world in which wealth falls off smoothly can
-have the same Gini and different evenness.
+So a small amount passed from an agent with 2 tokens to one with 1, and the
+same amount passed from one with 20 to one with 10, raise the entropy alike —
+in both, the giver holds twice what the taker holds — but the second lowers
+the Gini far more: many agents hold between 10 and 20 tokens, and nobody holds
+between 1 and 2. (With whole tokens, one token passed from 2 to 1 would only
+swap the two holdings and change neither measure; what is compared here is
+how strongly each measure answers a small transfer.) Entropy listens more to
+the poor; the Gini to the spread of the whole ladder. A world in which a few
+agents dominate and the rest are equally poor and a world in which wealth
+falls off smoothly can have the same Gini and different evenness.
 
 ## What this means
 
@@ -236,10 +241,14 @@ have the same Gini and different evenness.
   numbers made by small changes, lost as fast as they are made. Entropy counts
   how many kinds there are *now*; it cannot say whether any of them is new in a
   way that matters. Measures of open-ended evolution have to look across time
-  ([Meta II](40-meta-2.md)).
-- **One number is set by the rules.** Two genotypes for every three agents, in
-  every world: a balance of making and copying. If a change of the rules moves
-  it, that will be a sign the change reached the brains.
+  ([Meta II](40-meta-2.md));
+  [Chapter 49](49-how-to-tell-a-world-that-keeps-evolving.md) builds one,
+  playing the brains of different eras against each other.
+- **One number is set by the rules.** Five genotypes for every eight agents,
+  in every world: a balance of making and copying. If a change of the rules
+  moves it, the change has altered how often brains are changed or copied:
+  in the pilots of [Chapter 43](43-how-fast-should-brains-change.md) it went
+  from 0.32 to 0.98 as the probability of a change rose from 0.05 to 0.8.
 
 To make every figure of this chapter: `python3 book_figures.py entropy`.
 

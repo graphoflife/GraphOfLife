@@ -80,9 +80,24 @@ before the next:
 4. **P4 — the space of organisations keeps growing:** new kinds keep
    appearing, without a ceiling.
 
-Parts II to IV answer questions that lie underneath P1. Part V, not yet
-written, will climb the ladder, by the changes to the rules that
-[Meta II](40-meta-2.md) proposes.
+Parts II to IV answer questions that lie underneath P1. Part V turns from
+watching the rules to building them: a yardstick for evolution that keeps
+going and a health bar for the network
+([Chapter 49](49-how-to-tell-a-world-that-keeps-evolving.md)), then rules
+meant to pass them, starting from the obstacles [Meta II](40-meta-2.md)
+lists.
+
+> [!info] Added later: selection, and the second rung
+> [Chapter 41](41-do-the-brains-matter.md) found that the brains matter and
+> that evolution makes worlds alike, and
+> [Chapter 19](19-what-the-brains-are-like.md) that selection did shape the
+> brains — but only their constant tendencies, since they are nearly blind
+> to what they see.
+> [Chapter 49](49-how-to-tell-a-world-that-keeps-evolving.md) ran the test
+> of P2, playing the brains of each era against earlier ones: the baseline's
+> brains beat their founders by iteration 50 (+361 Elo in the median world)
+> and gain nothing after iteration 100 — those of iteration 1,000 score
+> 0.483 against those of iteration 300.
 
 ## How the book is organised
 
@@ -116,14 +131,24 @@ written, will climb the ladder, by the changes to the rules that
   baseline: worlds whose brains never change or are never asked
   ([Chapter 41](41-do-the-brains-matter.md)), worlds of other sizes
   ([Chapter 42](42-how-does-a-worlds-size-follow-its-tokens.md)), and more.
-- **Part V · Towards open-ended evolution.** Changed rules, aimed at the
-  ladder above, in the order [Meta II](40-meta-2.md) sets out.
-- **Part VI · Towards a physics.** The second aim: worlds ten times the size
-  ([Chapter 55](55-worlds-of-100000-tokens.md)), how many dimensions a world
-  has at scale, which of its properties have no scale, what changes when
-  every rule is local, how far a difference travels, what forms when a flow
-  runs through a world, and whether anything like a particle appears
+- **Part V · Engineering open-ended evolution.** A yardstick for a world
+  that keeps evolving and a health bar for its network
+  ([Chapter 49](49-how-to-tell-a-world-that-keeps-evolving.md)), then rules
+  built to pass them: brains that see
+  ([Chapter 50](50-brains-that-see-and-worlds-that-break.md)), a world that
+  cannot break ([Chapter 51](51-a-world-that-cannot-break.md)), who dies and
+  why ([Chapter 52](52-who-dies-and-why.md)), and why evolution stops
+  ([Chapter 53](53-why-evolution-stops.md)).
+- **Part VI · Towards a physics.** The second aim: what a world's size
+  changes ([Chapter 55](55-worlds-of-100000-tokens.md) sets the worlds of
+  100,000 tokens beside those of 10,000), how many dimensions a world has at
+  scale, which of its properties have no scale, what changes when every rule
+  is local, how far a difference travels, what forms when a flow runs
+  through a world, whether anything like a particle appears, and what one
+  agent with a brain of its own does in a sea of average agents
   ([Chapter 7](07-physical-inspiration.md) sets out the questions).
+- **Part VII · The long run.** One world followed for a hundred thousand
+  iterations ([Chapter 64](64-a-hundred-thousand-iterations.md)).
 - **Notes.** Short notes, one per idea, that define every rule, every
   measurement and every statistical method the chapters use, with worked
   examples: [Every setting](../notes/settings.md),
@@ -132,6 +157,8 @@ written, will climb the ladder, by the changes to the rules that
   [Survival curves](../notes/kaplan-meier.md) and some sixty more. The
   chapters link to them wherever they are needed;
   [the contents](../README.md) lists them all.
+- **Appendix.** What a simulation costs: the hours, the memory and the disk
+  ([Appendix A](A-costs.md)).
 
 Many chapters only **ask**: what does a world do, how often, how fast. The
 chapters that report an **experiment** also show a prediction — a
@@ -152,10 +179,11 @@ numpy and networkx. Each chapter that reads runs shows:
   which fields, every step of the calculation, and the one command that draws
   it again from the runs.
 
-Three commands do all of it. `python3 gol_lab.py run E02` makes the runs of an
-experiment — here Experiment 2, the thirty baseline worlds — into the folder
-`GraphOfLifeRuns/`. `python3 gol_lab.py analyse E02` computes an experiment's
-results. And `python3 book_figures.py life` draws the figures of one chapter
+Three commands do all of it. `python3 gol_lab.py run E10` makes the runs of an
+experiment — here Experiment 10, the thirty baseline worlds of 100,000 tokens
+of Parts II and III — into the folder `GraphOfLifeRuns/`.
+`python3 gol_lab.py analyse E10` computes an experiment's results. And
+`python3 book_figures.py life` draws the figures of one chapter
 — here [A world's life](10-a-worlds-life.md) — from the runs, and writes them
 into the chapters. On the same kind of computer, with the same versions of
 the libraries, every run, figure and number comes out identical; [Chapter 8](08-is-a-run-reproducible.md)

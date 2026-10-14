@@ -176,15 +176,28 @@ iterations of the runs the typical parent gives a third, and only 4% give
 everything. Other decisions moved just as far. In the first game, half of the
 agents (49% in the median world) spread their stake over several candidates
 rather than putting it all on one, and half of all staked tokens (50%) were
-marked revolutionary — what brains of random weights do, since each of these
-choices depends on which of two random outputs is the larger. From iteration
-500 on it was 98% and 97% ([Chapter 16](16-how-the-game-is-played.md)), in
-the worlds of 10,000 tokens and in those of 100,000 alike.
+marked revolutionary — what brains of random weights do: spreading turns on
+which of two random outputs is the larger, and the revolutionary share is
+*f* of two random outputs, a half on average. From iteration 500 on it was
+98% and 97% ([Chapter 16](16-how-the-game-is-played.md)), in the worlds of
+10,000 tokens and in those of 100,000 alike.
 
 Nobody chose these numbers. Are they the work of selection — brains that did
 otherwise losing their tokens and their nodes — or only of the churn of
-copying and changing brains? Parts II and III come back to this question
-([Chapter 16](16-how-the-game-is-played.md), [Chapter 41](41-do-the-brains-matter.md)).
+copying and changing brains? [Chapter 16](16-how-the-game-is-played.md)
+comes back to this question, and [Chapter 41](41-do-the-brains-matter.md),
+in Part IV, tests it against worlds whose brains never change.
+
+> [!info] Added later: selection, on constants
+> [Chapter 19](19-what-the-brains-are-like.md), written after this chapter,
+> opened the brains. Selection did set these numbers, the same way in every
+> world — but only as constants. The brains are nearly blind: their outputs
+> move by about a thousandth of a change in what they see, so they decide
+> almost the same whatever their situation.
+> [Chapter 49](49-how-to-tell-a-world-that-keeps-evolving.md) played evolved
+> brains against their founders: by iteration 50 they hold about nine tenths
+> of a world contested with the founders, and after iteration 100 they gain
+> nothing more.
 
 ## The control: decisions by chance
 

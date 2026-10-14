@@ -164,12 +164,14 @@ worlds whose brains never change fall into kinds the baseline never shows:
 <!-- /figure -->
 
 - **frozen** — 15 worlds without a single birth after iteration 500. Their
-  last child was born between iterations 29 and 439. Fourteen of them then
+  last child was born between iterations 29 and 439. Thirteen of them then
   kept exactly the same number of agents to the end of the run — between 183
-  and 2,252, depending on the world — playing the game every iteration with
-  no one born and no one dying. The fifteenth, seed 20, lost agents without
-  ever replacing them, from 1,165 at iteration 300 to 23 by iteration 2,024,
-  and then sat at 23, three above the line at which a run counts as extinct.
+  and 2,062, depending on the world — playing the game every iteration with
+  no one born and no one dying. A fourteenth, seed 18, lost five agents after
+  its last child, the last of them at iteration 1,363, and ended with 2,252.
+  The fifteenth, seed 20, lost agents without ever replacing them, from 1,165
+  at iteration 300 to 23 by iteration 2,024, and then sat at 23, three above
+  the line at which a run counts as extinct.
 - **nearly frozen** — 2 worlds, with a birth in about one iteration in ten.
 - **breeding** — 3 worlds, with 8 to 24 births per hundred agents per
   iteration.
@@ -211,7 +213,7 @@ without change are coloured by their kind:
   Their [spread](../notes/spread-between-worlds.md) is 0.45, against 0.17.
 - **Births.** The evolving worlds all sit near 3 per hundred agents (between
   2.3 and 4.3); the worlds without change range from none at all to one per
-  agent — a spread of 1.39, against 0.19.
+  agent — a spread of 1.33, against 0.15.
 - **Inequality.** Wealth is more evenly spread without change: a median Gini
   of 0.32 against 0.49 (paired by seed, a difference of 0.17, 95% interval
   0.11 to 0.23, by the [bootstrap](../notes/bootstrap.md)), and most evenly in
@@ -257,8 +259,10 @@ baseline's ([Between and within](../notes/between-and-within.md)).
 
 In a world whose brains never change, the founders' lines still compete
 until one of them fills the world — between iterations 75 and 100 in the
-median world (125 in the baseline). From then on every agent carries the same
-brain, and which genotype spreads is pure chance.
+median world (175 in the baseline, as
+[Chapter 55](55-worlds-of-100000-tokens.md) counts it over all thirty
+worlds; 125 among the 26 that lived to the end). From then on every agent
+carries the same brain, and which genotype spreads is pure chance.
 
 <!-- figure brains/moves-dots -->
 ![How often one branch replaces all others](../figures/brains/moves-dots.svg)
@@ -310,7 +314,8 @@ Before the runs, as Experiment 7:
 
 The thesis **holds**, on all three counts and by wide margins: the spread of
 the number of agents is 0.45 against 0.17 (it asked for at least 0.34);
-births spread 1.39 against 0.19 (at least twice the baseline's); and 96% of
+births per iteration spread 1.39 against 0.19, and births per hundred agents
+1.33 against 0.15 (it asked for at least twice the baseline's); and 96% of
 the variation in the number of agents lies between the worlds without
 change (it asked for more than half).
 
@@ -334,8 +339,11 @@ change (it asked for more than half).
   selection finds, it should hold at other rates of mutation; if it is
   mutation's churn, it should move with them.
 - **The wander needs evolution.** A world without change hardly wanders at
-  all. Whether the sweeps drive the wander, rather than mutation in general,
-  is still open ([Chapter 26](26-meta-1.md)).
+  all. But it is not the sweeps that drive the wander:
+  [Chapter 26](26-meta-1.md) finds, from the large worlds of
+  [Chapter 55](55-worlds-of-100000-tokens.md), that a world forgets its
+  level within three hundred iterations, while a line needs about a
+  thousand to take a world over.
 
 > [!info] Where everything came from
 > - **Survived to iteration 3,000:** baseline 26, brains never change 30,

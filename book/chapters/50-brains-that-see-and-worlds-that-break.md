@@ -22,9 +22,9 @@ almost nothing; its decisions are near enough constants.
 Open-ended evolution needs agents whose behaviour can depend on their world:
 kin recognised, partners answered, threats met. The first step of Part V is
 therefore to give the brains sight, and the cheapest way is to take layers
-away. With one hidden layer of 16 units, a founder's gain is about 0.2 — two
-hundred times the baseline's — and with no hidden layer at all it is about
-1:
+away. With one hidden layer of 16 units, a founder's gain is about 0.2 — some
+three hundred times the baseline founders' 0.0006 — and with no hidden layer
+at all it is about 1:
 
 | hidden layers | founders' gain (median of 30 brains) |
 |---|---|
@@ -65,8 +65,10 @@ cull removes it whole: in one pilot world a single game cut off 1,195
 agents — that iteration's newborns among them — and left 562.
 
 **And what is left is ruled by a few.** The best-connected agent in a seeing
-world was joined to 15–35% of the others — hubs that the baseline's
-even-handed stakes never grow so large (9–12%).
+world was joined to 15–35% of the others — more than in the baseline's two
+pilot worlds (9–12%), though the ten worlds below show that the baseline can
+grow such hubs too (one of its worlds 55%; the stars of
+[Chapter 33](33-the-largest-and-the-smallest.md)).
 
 **Change only when copied made it worse, not better** — its two worlds were
 the two that fell furthest. And a stricter variant of it, which changed a
@@ -177,6 +179,12 @@ fell to 20 agents or fewer, where a run is stopped as extinct
 and 619; the other six fell as low as 84 to 231. With one hidden layer and
 change only when copied, eight of ten died out, at iterations 219, 292, 415,
 454, 674, 820, 975 and 1,018; the two that lived fell to 96 and 181.
+
+"Died out" here means fell to twenty agents, where the lab stops a run — a
+rule that ends some worlds that would have lived
+([Chapter 42](42-how-does-a-worlds-size-follow-its-tokens.md)). The pilot of
+the world with one hidden layer and seed 1, run on without the rule, fell to a
+single agent at iteration 547 and grew back from it.
 
 <!-- figure seeing/lowest -->
 ![The fewest agents a world fell to](../figures/seeing/lowest.svg)
@@ -326,7 +334,7 @@ it. Its network must stop killing — no agent should be lost because a link or
 a neighbour vanished, which is what the rules of the
 [next chapter](51-a-world-that-cannot-break.md) do. And its births must keep
 up with its deaths whatever its brains decide — which depends on who dies, and
-why: the subject of Chapter 52.
+why: the subject of [Chapter 52](52-who-dies-and-why.md).
 
 <!-- turns -->
 ---

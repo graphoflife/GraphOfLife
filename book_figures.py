@@ -369,7 +369,7 @@ def world_pass(run_id: str, muller: Optional[Tuple[int, int]] = None) -> Dict[st
     asked for: asked with another window, it is made again.
 
       agents     every agent born in a reproduction phase at iteration
-                 b ≥ SETTLED that took part in at least one game: (b, d,
+                 b ≥ SETTLED that was alive after at least one game: (b, d,
                  alive) — d the last iteration after whose game it was alive,
                  alive whether it still was at the end of the run
       genotypes  the same for genotypes: first and last iteration after a game

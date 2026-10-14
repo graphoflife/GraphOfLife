@@ -317,12 +317,18 @@
         {
           "id": "52",
           "title": "Who dies, and why",
-          "note": "The rules of demography and the exploits they invite: children spent as missiles, a hoarding queen with half the tokens, worlds of one-token agents; the last token kept at home, a longest life, a smallest child, a home share."
+          "note": "The rules of demography and the exploits they invite: children spent as missiles, a hoarding queen with half the tokens, worlds of one-token agents; the last token kept at home, a longest life, a smallest child, a home share.",
+          "file": "chapters/52-who-dies-and-why.md",
+          "experiment": "E15",
+          "status": "ready"
         },
         {
           "id": "53",
           "title": "Why evolution stops",
-          "note": "In every variant the tournament of Chapter 49 flattens within a few hundred iterations, and redrawing an agent's random inputs changes more of its decisions than anything it sees: in a Colonel Blotto contest the best play is to be unpredictable, and a good mixed strategy cannot be bettered. Without dice; with allies; with cooperation that pays."
+          "note": "In every variant the tournament of Chapter 49 flattens within a few hundred iterations, and redrawing an agent's random inputs changes more of its decisions than anything it sees: in a Colonel Blotto contest the best play is to be unpredictable, and a good mixed strategy cannot be bettered. Without dice; with allies; with cooperation that pays.",
+          "file": "chapters/53-why-evolution-stops.md",
+          "experiment": "E16",
+          "status": "ready"
         },
         {
           "id": "54",
