@@ -76,14 +76,14 @@ stopped, and the world froze into a single genotype, its agents ageing by one
 every iteration, every node taken by its own kin each game. Longer lives, for
 once, meant that nothing was happening.
 
-## What it teaches
+## What the pilots suggested
 
 The baseline holds together because its agents are blind. Their stakes are
 spread evenly over every neighbour, every connection carries tokens, and the
 network keeps its loops. Sight is the precondition of anything evolution
-might build — and the first thing it does is break the world it lives in.
-Before brains can be allowed to see, the world needs rules that keep its
-network whole however its agents stake. Building them is the next chapter.
+might build — and the first thing it does, the pilots suggested, is break
+the world it lives in. Experiment 13 asks whether that holds in ten worlds,
+and the results below say what, exactly, kills them.
 
 ## The thesis
 
@@ -151,12 +151,185 @@ network whole however its agents stake. Building them is the next chapter.
 > A value in **bold** differs from the baseline B1.
 <!-- /runs -->
 
-> [!warning] Waiting for the runs
-> The plan, the thesis and the method above were written before any run of
-> Experiment 13 existed; the results follow when they are done.
+## What the thirty worlds did
+
+<!-- figure seeing/agents -->
+![Agents alive](../figures/seeing/agents.svg)
+
+**Agents alive.** For each condition the median world at each iteration, with the middle half of the worlds (darker) and nine in ten (paler).
+
+> [!example]- How to make this figure
+> **Runs.** The 30 runs of Experiment 13 — at 5,000 tokens, seeds 1 to 10, 1,500 iterations — in three conditions: the baseline B1 (`B1-5000-s001` … `-s010`, shared with Experiment 12), its brains with one hidden layer of 16, and those brains changed only when copied. They are made with `python3 gol_lab.py run E13`.
+>
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
+>
+> 1. Take `nodes` of the rows with `phase` = 2, one line per run.
+> 2. For each condition, the median, quartiles and 5th and 95th percentiles of the runs at each iteration (`book_figures.band_series`).
+>
+> **To make it again:** `python3 book_figures.py seeing`.
+<!-- /figure -->
+
+Every baseline world lived its 1,500 iterations, and none ever fell below 74
+agents after iteration 50 — the median world's lowest was 188. Brains that see
+did not do so well. With one hidden layer, four of the ten worlds died out —
+fell to 20 agents or fewer, where a run is stopped as extinct
+([When a world ends](../notes/extinction.md)) — at iterations 219, 478, 534
+and 619; the other six fell as low as 84 to 231. With one hidden layer and
+change only when copied, eight of ten died out, at iterations 219, 292, 415,
+454, 674, 820, 975 and 1,018; the two that lived fell to 96 and 181.
+
+<!-- figure seeing/lowest -->
+![The fewest agents a world fell to](../figures/seeing/lowest.svg)
+
+**The fewest agents a world fell to.** One dot per world: its fewest agents after the game of any iteration from 50 on, 0 for a world that died out; the bar is the median world. The dashed line is the thesis's 50 agents.
+
+> [!example]- How to make this figure
+> **Runs.** The 30 runs of Experiment 13 — at 5,000 tokens, seeds 1 to 10, 1,500 iterations — in three conditions: the baseline B1 (`B1-5000-s001` … `-s010`, shared with Experiment 12), its brains with one hidden layer of 16, and those brains changed only when copied. They are made with `python3 gol_lab.py run E13`.
+>
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
+>
+> 1. Take the smallest `nodes` of the rows with `phase` = 2 and `iteration` ≥ 50; a run that ended extinct counts 0.
+> 2. Count the worlds below 50 in each condition.
+>
+> **To make it again:** `python3 book_figures.py seeing`.
+<!-- /figure -->
+
+## The verdict
+
+The thesis asked for at least six of the ten worlds that see, with change only
+when copied, to fall below 50 agents or die out, and for at most two of the
+baseline's. Eight did, and none of the baseline's: **the thesis holds.** Brains
+that see break worlds — and the second change, which the pilots had already
+found harmful, doubles the toll of the first.
+
+## What kills a world
+
+The pilots blamed the network: seeing brains leave links unused, unused links
+are cut, and a world of trees falls apart. The ten worlds of each condition
+say that this is only half of it.
+
+**Not one big cut.** The largest single cull of a world — the most agents ever
+cut off at once — came in its first fifty iterations in seven of the
+baseline's worlds, when 400 to 1,250 agents at a time were lost as the first
+boom ended ([Chapter 11](11-the-first-hundred-iterations.md)). The seeing
+worlds had such early culls too. But the worlds that died out did not die of
+one of them: each shrank over a hundred iterations or more.
+
+**The network kills every iteration — in every world.** By the health bar of
+[Chapter 49](49-how-to-tell-a-world-that-keeps-evolving.md#the-network-that-holds-in-numbers),
+no world of any condition holds. The baseline's median world had 51% of its
+agents in the 2-core and a link whose loss cut off 8% of it; the seeing worlds
+had 55% and 11%, and with change only when copied 46% and 6%, and there the
+best-connected agent was joined to a fifth of the world in the median. These
+networks are not clearly worse than the baseline's. What they share with it
+is that agents are cut off all the time: in the median world, the cull
+removed 1.9% of the agents in every iteration of the baseline from iteration
+500 on — four times as many as starved (0.5%) — and 5.3% in the worlds with
+one hidden layer.
+
+<!-- figure seeing/health -->
+![How the network holds](../figures/seeing/health.svg)
+
+**How the network holds.** One dot per world, at its median over iterations 200 to 1,500 while it lived; the bar is the median world and the dashed line the health bar of [Chapter 49](49-how-to-tell-a-world-that-keeps-evolving.md).
+
+> [!example]- How to make this figure
+> **Runs.** The 30 runs of Experiment 13 — at 5,000 tokens, seeds 1 to 10, 1,500 iterations — in three conditions: the baseline B1 (`B1-5000-s001` … `-s010`, shared with Experiment 12), its brains with one hidden layer of 16, and those brains changed only when copied. They are made with `python3 gol_lab.py run E13`.
+>
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
+>
+> 1. Take `coreShare`, `cutRisk` and `maxDegree` / `nodes` of the rows with `phase` = 2 and 200 ≤ `iteration` ≤ 1,500, and each world's median of each.
+>
+> **To make it again:** `python3 book_figures.py seeing`.
+<!-- /figure -->
+
+**So births have to keep up.** A world whose agents are cut off and starve at a
+few per cent per iteration lives only as long as it has as many children.
+Seeing brains turn the population over faster: with one hidden layer the median
+world had 6.4 births per hundred agents and iteration from 500 on, against the
+baseline's 2.3, and lost agents correspondingly faster. A world shrinks
+whenever its births fall short of its losses for a while, and a world that
+shrinks to a few dozen agents is a few unlucky games from the end.
+
+<!-- figure seeing/births -->
+![Births per agent](../figures/seeing/births.svg)
+
+**Births per agent.** For each condition the median world at each iteration, with the middle half of the worlds (darker) and nine in ten (paler), on a logarithmic axis. A world that died out leaves the band when it does.
+
+> [!example]- How to make this figure
+> **Runs.** The 30 runs of Experiment 13 — at 5,000 tokens, seeds 1 to 10, 1,500 iterations — in three conditions: the baseline B1 (`B1-5000-s001` … `-s010`, shared with Experiment 12), its brains with one hidden layer of 16, and those brains changed only when copied. They are made with `python3 gol_lab.py run E13`.
+>
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
+>
+> 1. Take `births` / `nodes_before` of the rows with `phase` = 1, one line per run.
+> 2. For each condition, the median, quartiles and 5th and 95th percentiles of the runs at each iteration (`book_figures.band_series`).
+>
+> **To make it again:** `python3 book_figures.py seeing`.
+<!-- /figure -->
+
+**And seeing brains can stop having children.** In the baseline, whether an
+agent has a child is close to a constant of its brain — the brains barely see
+([Chapter 19](19-what-the-brains-are-like.md)). With one hidden layer it is a
+decision that depends on what the agent sees, and evolution can change it a
+great deal. To see what it did, every era's brains were put back into the same
+world — their own run's founders' world, 50 agents with 100 tokens each — and
+played ten iterations with mutation off. The founders' own brains had a child
+in about three agent-iterations in four there (73–75% in the median world of
+each condition). Later brains had far fewer: in the median baseline world 3
+to 9 per hundred, and between 1 and 17 per hundred in the median seeing world.
+But the seeing worlds spread far wider. In six of the twelve worlds that died
+out, the last brains kept from them — rich, in an empty world — had no child
+at all. Of the six worlds with one hidden layer that lived to the end, the
+last brains had children at 7 to 43 per hundred agent-iterations — 17 in the
+median, against 3 for the baseline's last brains (0 to 13).
+
+<!-- figure seeing/children -->
+![Do the brains still have children?](../figures/seeing/children.svg)
+
+**Do the brains still have children?** Every era's brains play the same world — the founders' world of their own run, 50 agents of 100 tokens on the starting ring — for 10 iterations with mutation off. Thin lines: one world each, its births per agent and iteration, the mean of 2 draws; thick lines: the median world of each condition at each era, over the worlds that still lived. No birth at all is drawn at 0.0001.
+
+> [!example]- How to make this figure
+> **Runs.** The 30 runs of Experiment 13 — at 5,000 tokens, seeds 1 to 10, 1,500 iterations — in three conditions: the baseline B1 (`B1-5000-s001` … `-s010`, shared with Experiment 12), its brains with one hidden layer of 16, and those brains changed only when copied. They are made with `python3 gol_lab.py run E13`.
+>
+> **Data.** From each run's archive, `GraphOfLifeRuns/<run>/archive/world_<iteration>.npz`, kept every 100 iterations (every 50 for the baseline, of which every 100th is used).
+>
+> 1. For every era *e* that is a multiple of 100: take the archived world of iteration 0, give every agent a brain drawn at random from the agents of era *e* (`gol_tournament.mixed` with both eras *e*), clear the messages, switch mutation off and run 10 iterations; count the births of the reproduction phases over the agents alive at the start of each iteration (`oee.children`). Draws 5, 6.
+> 2. Draw each world's rate by era, and each condition's median.
+>
+> **To make it again:** `python3 book_figures.py seeing`.
+<!-- /figure -->
+
+A brain spreads mostly by winning nodes, not by having children — seventeen
+times more in the baseline ([Chapter 39](39-questioning-the-mechanics.md#two-roads-of-inheritance))
+— and tokens given to a child are tokens not staked. Whether that is why some worlds' brains gave up their
+children — selected, as a lineage gains from keeping its tokens while the world
+it lives in drains — or whether a decision that has become easy to change simply
+drifted to zero in a world already small, these runs cannot say. Biologists
+know both roads to extinction: selection that is good for each lineage and
+fatal for the population is called **evolutionary suicide** (Gyllenberg and
+Parvinen, 2001; Rankin and López-Sepulcre, 2005), and a small population whose
+losses make it smaller still is caught in an **extinction vortex** (Gilpin and
+Soulé, 1986).
+
+## What it teaches
+
+Sight breaks worlds — but not quite the way the pilots suggested. Every world
+of 5,000 tokens, blind or seeing, loses two to five agents in every hundred to
+the cull in every iteration, because its network is fragile: half its agents
+hang in trees outside the 2-core, and the rest is held together by necks. The
+baseline lives with that because its blind brains keep having children at a
+steady rate. Brains that see make having children a real decision, one
+evolution can take away, and a world whose children no longer replace its
+losses dies.
+
+Two things follow for the rules a world needs before anything can evolve in
+it. Its network must stop killing — no agent should be lost because a link or
+a neighbour vanished, which is what the rules of the
+[next chapter](51-a-world-that-cannot-break.md) do. And its births must keep
+up with its deaths whatever its brains decide — which depends on who dies, and
+why: the subject of Chapter 52.
 
 <!-- turns -->
 ---
 
-← [Chapter 49 · How to tell a world that keeps evolving](49-how-to-tell-a-world-that-keeps-evolving.md) · [Contents](../README.md) · [Chapter 55 · Worlds of 100,000 tokens](55-worlds-of-100000-tokens.md) →
+← [Chapter 49 · How to tell a world that keeps evolving](49-how-to-tell-a-world-that-keeps-evolving.md) · [Contents](../README.md) · [Chapter 51 · A world that cannot break](51-a-world-that-cannot-break.md) →
 <!-- /turns -->

@@ -1,0 +1,207 @@
+# OEE programme — research log (scratch; becomes the book's Part V)
+
+Goal (user, 2026-10-12): an algorithm on GraphOfLife where open-ended evolution
+emerges; a statistic that keeps rising (ceiling grows with tokens); network
+neither tree nor complete, resilient, large, decentralised, ~3D, few single
+points of failure, emerging from local rules (token-limited long-range search
+allowed). Pilots by me, big experiments for the user. Teach in the book.
+
+## Tools (scratchpad/oee)
+- proto.py   ProtoWorld/ProtoConfig: engine + prototype mechanics (P dict),
+             identical to the engine with everything off (equiv.py).
+- run.py     one pilot world: series.jsonl (per iteration counters + health
+             every 10), ckpt_*.npz every 100 (with founder roots).
+- tourney.py cross-time tournament: half the agents get era-A brains, half
+             era-B, mutation off, T=20 iterations, share held by each era.
+- probe.py   decisions of the agents of a checkpoint (repro share, link, spread,
+             home share, revolution share, handover, gain, seek, accept).
+- summary.py window means of the series.
+
+## Round 1 (5,000 tokens, 1,500 it): B1 vs brains that see ([16]) x mutation rule
+- gain: 5 layers 0.0006, [16] 0.20, [16,16] 0.04, [] 1.0 (founder brains).
+- Seeing worlds are fragile: H16-s1 fell to 1 agent at ~550 and regrew at
+  ~1,100; H16mor-s1 decayed to 25; H16mor-s2 to 1; H16morsp-s1 fell to 1 at
+  ~40 and regrew at ~490. B1 worlds steady at ~1,000 agents.
+- Mutation only at birth (morsp): s1 froze — one genotype from ~800 on, no
+  births, every node retaken by its own kin each game, ages climbing to 650.
+  Longer lives as stasis, not progress.
+- Collapse mechanism in H16mor: births go to zero (median agent's repro share
+  0) while a few deaths per iteration continue — the world drains.
+- Every evolved world (blind or seeing): the median agent never has a child,
+  spreads its stake, keeps ~40% at home, flags all of it revolutionary.
+  Conquest is the replication channel; births are a minority's act.
+- Conquest churn: 40-90% of nodes change brain every game, ~all to kin.
+- Tournament H16morsp-s1 (eras 600..1500): 900 beats 600 (0.75), later eras
+  only 0.52-0.55 against 900/1200.
+
+## Ideas queue
+- incumbency (home stake counts h times) → births become the replication
+  channel, lifespans meaningful, small stakes become gifts. Round 2.
+- juvenile protection (newborn untakeable J iterations). Round 2.
+- memory inputs (what each neighbour staked on me) → reciprocity, deterrence.
+- seek (token-limited walk + mutual consent) → redundancy, partner choice.
+- mutual-flow yield financed by a holding tax → cooperation pays.
+- growable brains → possibility space that can grow.
+
+## Round 2-3 and the window pilots (5,000 / 3,000 tokens)
+- Incumbency 2 (home stake counts double): churn falls (15-25% of nodes
+  conquered per game instead of 40-90%), populations survive and grow, births
+  return as the replication channel. But networks become tree-like (mean degree
+  2.2-2.8, articulation 30-50%) and H16inc2all-s1 collapsed at ~900 through
+  repeated huge cuts (669 agents orphaned in one game).
+- Tournament H16inc2all-s1: 200 beats 100 (0.93), 300 beats 200 (0.71) — then
+  500/700/900 LOSE to 200-300 (0.25-0.37). The world went peaceful (conquest
+  1-3%), defences decayed; old aggressive brains win. Elo vs the past can fall.
+- Tournament B1-s1: 100 beats founders 0.74; from 200 on every pair ~0.50 —
+  the baseline stops improving after ~200 iterations.
+- Mutual-stake yield (tax 5%): stars (max degree 36-90% of agents) and
+  collapse — the yield accrues to whoever has most mutual links. First version
+  also taxed agents' last token (bug, fixed).
+- Seek walks: few links made (1-10 per iteration), little effect.
+- Window 4/16 phases: early networks much better (2-core 0.8-0.95, degree 4-6)
+  but the population explodes to ~1.3 tokens per agent and conquest vanishes;
+  leaves remain (16-19%) — not newborns but agents whose links lapsed (1-token
+  agents can keep one link a game).
+- Minimum child endowment 4/8: fewer, richer agents; health still poor.
+
+## Space alone (tissue*.py): what network do births and deaths make?
+No brains: births (child joined to parent + k of its neighbours), random deaths,
+the cull. 1,500 agents.
+- k=0..3, no repair: big single cuts always (node cut 0.17-0.44) — local growth
+  plus random death makes a tree of blobs; nothing closes large loops.
+- Full path repair (all neighbours of the dead joined in a path): node cut 0.006,
+  but dimension 4.5 (contraction).
+- Partial repair (probability q): cuts stay large.
+- Walk links (p 0.02-0.05, L 4-16): node cut 0.05-0.34.
+- **k=2 + neighbourhood repair (r=1: only groups of the dead agent's neighbours
+  that are not linked to each other are joined, least-connected members
+  first): degree 4.7, 2-core 99.5%, 3-core 90%, node cut 0.5-0.9%, edge cut
+  0.5%, dimension 3.5-3.65, max degree 1.4-2.2%.** Two seeds. This is the user's
+  network, from two local rules.
+- Repair keeps every dead agent's neighbourhood in one piece, so the world can
+  never split from a death; with safe pruning (an unused link lapses only if its
+  ends share a neighbour) it cannot split from pruning either: the cull never
+  fires.
+
+## The game on the new space (p, q, a, g, v, k, kk)
+- birth_links=2 + repair + safe_prune(1): the world never splits (orphaned = 0)
+  but shrinks: starvation 30-60% a game. Diagnosis: the starving are newborns
+  (46% age 0, 83% age <= 2) with 1-2 tokens who stake everything away —
+  "kamikaze children": a parent spends a child as a missile (its stake can take a
+  neighbour for the lineage). Each death triggers repairs -> degree climbs to
+  11-14 -> stakes thinner -> more starvation.
+- newborn_home (first game at home) only delays the kamikaze by a game.
+- Without incumbency the worlds collapse into a few rich agents; with
+  incumbency 2 into a hoarding "queen" (one agent with 57% of all tokens, staking
+  everything at home, unassailable, reproducing; everyone else holds 1 token).
+- safe_prune(1) can thin the mesh into a cactus (triangles glued at single
+  agents = cut vertices); safe_prune(2) (two common neighbours) cannot.
+- Children linked to the two neighbours the LINK head likes most -> hubs (max
+  degree 30% of agents): preferential attachment. Random choice + valence fix it.
+- keep_one (last token stays home): no starvation at all; with cheap births the
+  population fills up to ~1.2 tokens per agent and freezes (no conquest).
+- keep_one + min_child 10 + valence 8 + max_age + incumbency 1.5, 10k tokens:
+  3,000-5,000 agents, no starvation, no cuts, conquest 6-10% a game, births
+  2-3%, gini 0.5-0.6. Running.
+- m=8 messages without the pre-pass: half the cost per agent (0.26 vs 0.53 ms).
+
+## Why the game stops improving (2026-10-12, evening)
+- Elo against the past, v3fix-s1 (tamed world, eras 0-1000): 0, +133, +160,
+  +164, +171, +166, +137 — a plateau from iteration ~200, like B1 (+283, +329,
+  +345, +327, +344, +320). v3grow-s1: +128, +130, +128, +114, +125, +113.
+- Which inputs change an evolved agent's stakes (sense.py; agents with >= 3
+  tokens only — most agents hold 1-2 and have no choice to make): redrawing the
+  noise changes 25-58% of decisions; own state 2-7%, the neighbour's state
+  4-23%, messages 2-23%, memory of last game's stakes 11-24% (more in worlds
+  with a yield).
+- Reading: in a Colonel Blotto contest the best play is mixed — be
+  unpredictable. Evolution finds randomisation (the noise inputs are its dice)
+  within ~200 iterations, and nothing beats a good mixed strategy, so nothing
+  more is selected. A contest game alone has no headroom; information has to
+  pay somewhere — cooperation (who reciprocates?) or coordination.
+- Brain size (grow brains with a neutral shadow): v2 (handover on) active rose
+  ~1.4 units above the shadow in 2 seeds; v3 (handover off), 4 seeds, active ~
+  shadow. A rising mean size is mostly the left wall: a size bounded below
+  drifts up with nothing selecting it. The shadow is what shows it.
+- Tamed world v3 = MOR + incumbency 1.5 + birth_links 2 + mend + prune_needs 2
+  + valence 8 (chosen links) + keep_one + max_age 100 + min_child 10 +
+  handover off, [16] brains, 8-number messages, no pre-pass: ~1,900 agents at
+  5k tokens for 3,000 iterations, 2-core 100%, node cut 0.02, edge cut 0.01,
+  max degree 1%, mean degree 4.3, dimension 3.3, conquest 6-9% a game,
+  births 1%, every death by age.
+
+## Zombies, and what keep_one cost (2026-10-12, late)
+- Tokens per agent in the tamed world (v3fix-s1 at 1,500): 75% of agents hold
+  exactly 1 token, 8% hold 2; the game is played by a fifth of the world. Yield
+  worlds: 80% at 1. B1 (blind): 1% at 1, 43% at 3-5, 37% at 6-10.
+  Reason: keep_one makes all-in attacks free (an agent cannot die of them), so
+  seeing brains stake everything but the protected token on one neighbour;
+  most agents are left with that token and nothing else.
+- Without keep_one (same rules otherwise) worlds starve out: 1 agent holding
+  all 5,000 tokens by iteration 300 in both seeds, 58-138 agents with a yield.
+  Without noise inputs and without keep_one: 19 and 116 agents at 1,000.
+- keep_frac f (at least ceil(f t) tokens stay home) as a middle way: running
+  with f = 0.3 and 0.5.
+- Cross-size: era-800 brains of the 5,000-token world hold 0.531 (0.47-0.60
+  over six contests) against era-800 brains of the 1,250-token world, in both
+  worlds' arenas: a hint, one run each, that the bigger world evolved the
+  better brains. A design for the user: many seeds, sizes 1k-100k tokens.
+- Elo vs founders, 1,250 tokens: +305 at 50, plateau +330 from 300 (faster and
+  higher than at 5,000 — Elo against one's own founders does not compare
+  across sizes; cross-size contests do).
+- Yield 0.03 (keep_one world): gross circulation (cycling share) rises over
+  time (0.014 -> 0.134 in s2), mutual pairs stay few (most agents have one
+  spare token).
+- Next: support stakes (allies can help a neighbour hold its node; support can
+  never take a node) — cooperation with a value of its own, no yield needed.
+
+## Every depth pilot stops too (2026-10-13)
+Cross-time tournaments (eras 0, 100, 200, 500, 1000; T = 20; one coin, both
+worlds), Elo against the founders, and the step score (each era against the one
+before it):
+- U/support-s1 (support stakes, keep_frac 0.3): +155, +194, +319, +337; steps
+  0.80 0.59 0.72 0.61 — the only world still beating its predecessor at 1,000.
+  Seed 2: +342 at 100, then flat (steps 0.87 0.52 0.47 0.47).
+- U/nodice (no random inputs): +134..+184 then flat in both seeds.
+- X (3,000 tokens; memory inputs; control / memory_len 6 + grow brains / yield
+  0.05 / fog): plateaus at +100 to +250 from iteration 100-200 in all eight;
+  late steps 0.44-0.59 except memgrow-s2 (0.64, 0.59) and yield-s2 (0.76 last).
+- Support is selected against: support tokens fall from ~200-300 to ~20 per
+  iteration (of 5,000) by iteration 600 — a gift with no surplus (support counts
+  1x, the home stake 1.5x).
+- Group sizes (connected clone domains, kin-within-4 domains) SHRINK over time
+  in every pilot; net lightning (cycling share of the net flow) stays ~0.
+- Fog of war ends conquest (0.2-0.4% of nodes a game) and with it evolution
+  (1-2 mutations per iteration).
+Reading: the plateau is the game's — a local Blotto has a mixed equilibrium —
+not the brains'; more sight, memory or capacity cannot help. Cooperation needs
+a surplus of its own.
+
+## Batch A: cooperation with a surplus (launched 2026-10-13; data lost)
+proto.py gained `allies` (ALLY head; mutual consent; stakes pooled by side —
+owner + its allies vs. other bidders grouped by alliance; an ally can never
+take an ally's node), `kin_pool` k (the same pooling for genotypes within k
+mutations) and `support_gain` (support counts g times in defence), each with a
+`same_side` input row; run.py records sideDomains/sideLargest/sideMean.
+Smoke test at 1,000 tokens, 40 iterations: allies -> 421 allied pairs among 192
+agents, one bloc of 165, conquests 4 (control 43): a giant peaceful bloc forms
+at once. Batch A (ctrl/allies/kin/gain x seeds 1-2, 3,000 tokens, 1,000
+iterations, revolutions off everywhere) was running when a reboot wiped /tmp
+(2026-10-14): rerun it from research/oee/pilots.
+
+## Experiment 13, analysed (2026-10-14)
+Thesis holds (8/10 MOR seeing worlds extinct, 0/10 baseline below 50). But no
+world of any condition passes the health bar, and the networks of the seeing
+worlds are not clearly worse than the baseline's; what kills worlds is the
+steady cull (1.9% of agents per iteration in the baseline from 500 on, 5.3%
+with one hidden layer) against births. Births probe (era brains in the
+founders' world, 10 iterations, 2 draws; oee.children): founders 73-75%, later
+eras 1-17%; in 6 of 12 extinct worlds the last brains had no child at all;
+surviving one-hidden-layer worlds' last brains 7-43% (median 17%) vs baseline
+0-13% (median 3%). Seeing makes reproduction a real, losable decision.
+
+## Experiment 14, first look (2026-10-14, partial)
+B2 ("all the rules"), ten worlds at 5,000 tokens to 1,000: 2-core 1.000, cut
+risk 0.000, hub 2-3%, 5.0-5.8 links, no agent cut off from 200 on; dimension
+3.45-3.97 in nine worlds and 4.19 in seed 5 (above the bar's 4). Handover put
+back: every world fails (2-core 0.28-0.87, cut risk 1.2-6.8%).

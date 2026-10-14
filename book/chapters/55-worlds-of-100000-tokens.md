@@ -364,5 +364,5 @@ To make every figure of this chapter: `python3 book_figures.py takeover`.
 <!-- turns -->
 ---
 
-← [Chapter 50 · Brains that see, and worlds that break](50-brains-that-see-and-worlds-that-break.md) · [Contents](../README.md) · [Chapter 64 · A hundred thousand iterations](64-a-hundred-thousand-iterations.md) →
+← [Chapter 51 · A world that cannot break](51-a-world-that-cannot-break.md) · [Contents](../README.md) · [Chapter 64 · A hundred thousand iterations](64-a-hundred-thousand-iterations.md) →
 <!-- /turns -->

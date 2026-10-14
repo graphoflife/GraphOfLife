@@ -1,0 +1,298 @@
+{
+ "chapter": "yardstick",
+ "numbers": {
+  "elo_median": {
+   "0": 0.0,
+   "50": 361.4479105249543,
+   "100": 400.2812844906572,
+   "200": 408.70369657266673,
+   "300": 401.80916497510884,
+   "500": 410.9263970088937,
+   "700": 357.93127182736157,
+   "1000": 388.11831453220924
+  },
+  "late_vs_300": {
+   "n": 10,
+   "mean": 0.47789911005129193,
+   "median": 0.482901998696848,
+   "sd": 0.0573326343890739,
+   "min": 0.3892602581390869,
+   "max": 0.5729504626843029,
+   "q25": 0.434764637789957,
+   "q75": 0.5047699992132882
+  },
+  "300_vs_founders": {
+   "n": 10,
+   "mean": 0.8849650999623824,
+   "median": 0.8993562710243246,
+   "sd": 0.07184603887348381,
+   "min": 0.7716701902748414,
+   "max": 0.9687062224879401,
+   "q25": 0.8189425977016591,
+   "q75": 0.9462450728664384
+  },
+  "late_vs_300_worlds": {
+   "1": 0.49639353637684624,
+   "2": 0.4734085601313386,
+   "3": 0.5075621534921022,
+   "4": 0.44962986242056013,
+   "5": 0.3892602581390869,
+   "6": 0.4203152466159007,
+   "7": 0.5729504626843029,
+   "8": 0.42980956291308925,
+   "9": 0.4923954372623574,
+   "10": 0.547266020477335
+  },
+  "300_vs_founders_worlds": {
+   "1": 0.9687062224879401,
+   "2": 0.8995537097873922,
+   "3": 0.9492608498162448,
+   "4": 0.7716701902748414,
+   "5": 0.8991588322612568,
+   "6": 0.9585511383176284,
+   "7": 0.8579759045910975,
+   "8": 0.9371977420170191,
+   "9": 0.8059314954051796,
+   "10": 0.8016449146652251
+  },
+  "steps": {
+   "0-50": {
+    "n": 10,
+    "mean": 0.889471713187706,
+    "median": 0.8978080220675152,
+    "sd": 0.07746583752369988,
+    "min": 0.7478437888891287,
+    "max": 0.9785813481465655,
+    "q25": 0.8410926479306094,
+    "q75": 0.9487724496676397
+   },
+   "50-100": {
+    "n": 10,
+    "mean": 0.5528904627410027,
+    "median": 0.521392262545191,
+    "sd": 0.0710024427165839,
+    "min": 0.485002046436772,
+    "max": 0.7010224282547628,
+    "q25": 0.5185452085953934,
+    "q75": 0.5778305180707286
+   },
+   "100-200": {
+    "n": 10,
+    "mean": 0.4706702168424015,
+    "median": 0.4675582653767385,
+    "sd": 0.07543884149185416,
+    "min": 0.34092127771691005,
+    "max": 0.5988426894198211,
+    "q25": 0.42196400988522287,
+    "q75": 0.5212336369648399
+   },
+   "200-300": {
+    "n": 10,
+    "mean": 0.4760669725406535,
+    "median": 0.48717414272484877,
+    "sd": 0.039866119523056166,
+    "min": 0.39361698656774363,
+    "max": 0.5225695102985244,
+    "q25": 0.4540931104218602,
+    "q75": 0.5003823389755537
+   },
+   "300-500": {
+    "n": 10,
+    "mean": 0.5233085573160634,
+    "median": 0.5095936819042546,
+    "sd": 0.07332370944180078,
+    "min": 0.4156579875574963,
+    "max": 0.6784577386534323,
+    "q25": 0.483405423769011,
+    "q75": 0.5644212803474946
+   },
+   "500-700": {
+    "n": 10,
+    "mean": 0.479075587740694,
+    "median": 0.4772054410421886,
+    "sd": 0.06082719723875916,
+    "min": 0.39154481295262694,
+    "max": 0.6161537259803156,
+    "q25": 0.4491723191960988,
+    "q75": 0.5006536633019912
+   },
+   "700-1000": {
+    "n": 10,
+    "mean": 0.5010993879449999,
+    "median": 0.5192883814935976,
+    "sd": 0.07495954746091747,
+    "min": 0.3510595060463666,
+    "max": 0.6172594311764178,
+    "q25": 0.4636418635023529,
+    "q75": 0.5415967445931715
+   }
+  },
+  "champions": {
+   "1": [
+    0,
+    50,
+    1000
+   ],
+   "2": [
+    0,
+    50,
+    300
+   ],
+   "3": [
+    0,
+    50,
+    300
+   ],
+   "4": [
+    0,
+    50,
+    100
+   ],
+   "5": [
+    0,
+    50,
+    300
+   ],
+   "6": [
+    0,
+    50,
+    200
+   ],
+   "7": [
+    0,
+    50,
+    100
+   ],
+   "8": [
+    0,
+    50
+   ],
+   "9": [
+    0,
+    50,
+    200,
+    1000
+   ],
+   "10": [
+    0,
+    50,
+    100,
+    1000
+   ]
+  },
+  "elo_worlds": {
+   "1": {
+    "0": 0.0,
+    "50": 320.36238383723804,
+    "100": 316.43892404318524,
+    "200": 321.746678162465,
+    "300": 373.3944250735264,
+    "500": 318.0617660698084,
+    "700": 303.7236839812065,
+    "1000": 363.84734895432985
+   },
+   "2": {
+    "0": 0.0,
+    "50": 449.3318557854164,
+    "100": 439.5609726453645,
+    "200": 478.623577490944,
+    "300": 445.2500935132534,
+    "500": 443.56045950555443,
+    "700": 429.1888069047179,
+    "1000": 443.5079600723394
+   },
+   "3": {
+    "0": 0.0,
+    "50": 464.2877678679034,
+    "100": 423.67487782233235,
+    "200": 447.4915569153616,
+    "300": 473.74043677091305,
+    "500": 441.76222855116396,
+    "700": 408.347998190533,
+    "1000": 421.01975518042826
+   },
+   "4": {
+    "0": 0.0,
+    "50": 206.59065644986933,
+    "100": 267.24393697688595,
+    "200": 208.99119026094843,
+    "300": 212.89521490978254,
+    "500": 208.55844320896045,
+    "700": 208.71457076492558,
+    "1000": 230.4807439245572
+   },
+   "5": {
+    "0": 0.0,
+    "50": 405.3291986946695,
+    "100": 415.1345644235191,
+    "200": 419.60789109050285,
+    "300": 430.2239048766912,
+    "500": 447.11679551209255,
+    "700": 423.62247754329036,
+    "1000": 412.38928011008863
+   },
+   "6": {
+    "0": 0.0,
+    "50": 402.5334372126705,
+    "100": 424.8389084184684,
+    "200": 440.7716920654787,
+    "300": 447.2665873599311,
+    "500": 404.179602474959,
+    "700": 421.16152958373704,
+    "1000": 433.9763600381726
+   },
+   "7": {
+    "0": 0.0,
+    "50": 307.65366397466767,
+    "100": 349.43161667624094,
+    "200": 372.8870356112519,
+    "300": 329.1935306649732,
+    "500": 276.9682141502767,
+    "700": 305.1886431158393,
+    "1000": 350.03075040573765
+   },
+   "8": {
+    "0": 0.0,
+    "50": 464.5857253762105,
+    "100": 436.8897233358398,
+    "200": 469.3907109082814,
+    "300": 439.7277016937181,
+    "500": 417.67319154282836,
+    "700": 427.5271470144811,
+    "1000": 426.2955478805265
+   },
+   "9": {
+    "0": 0.0,
+    "50": 306.2732520296658,
+    "100": 385.42800455779525,
+    "200": 397.7995020548306,
+    "300": 329.95601291230537,
+    "500": 466.2736265577769,
+    "700": 307.5145454641901,
+    "1000": 313.2251305155251
+   },
+   "10": {
+    "0": 0.0,
+    "50": 283.5235604841387,
+    "100": 347.39163570350513,
+    "200": 342.7901419921994,
+    "300": 330.4948663296952,
+    "500": 336.91945834504423,
+    "700": 277.1642235292805,
+    "1000": 337.6822076597765
+   }
+  }
+ },
+ "figures": {
+  "elo": {
+   "title": "How much better than the founders",
+   "caption": "Each grey line is one world; the blue line is the median of the ten at each era. A rating says how often an era's brains beat the founders': +200 is about three contests in four, +400 ten in eleven. The ratings are fitted to every contest between every pair of eras, so each point leans on the others.",
+   "recipe": "**Runs.** The 10 runs of Experiment 12 \u2014 B1 at 5,000 tokens, seeds 1 to 10, 1,000 iterations, a whole world archived every 50 \u2014 `B1-5000-s001` \u2026 `-s010`. They are made with `python3 gol_lab.py run E12`; every setting is listed in the box under the thesis.\n\n**Data.** From each run's archive, `GraphOfLifeRuns/<run>/archive/world_<iteration>.npz`: the whole world as a checkpoint writes it, kept every 50 iterations.\n\n1. For every pair of the eras 0, 50, 100, 200, 300, 500, 700, 1000 play two contests, one in each era's world: give every agent a brain drawn at random from one era or the other, a coin each, clear the messages, switch mutation off and run 20 iterations (`gol_tournament.contest`). The later era's score is the share of agents carrying one of its brains at the end.\n2. Read every score *p* as odds, log(*p* / (1 \u2212 *p*)), after keeping it between 0.02 and 0.98, and find one rating per era \u2014 the founders' at 0 \u2014 that fits them best by least squares, the later era's rating minus the earlier's for each contest (`gol_tournament.ratings`). Multiply by 400 / ln 10 for Elo points.\n3. Draw each world's ratings, and the median world at each era.\n\n**To make it again:** `python3 book_figures.py yardstick`."
+  },
+  "pairs": {
+   "title": "Every era against every earlier one",
+   "caption": "Each square is one pair of eras: the share of a contested world the later era's brains held, in the median world. 0.5 is a tie. The left column is every era against the founders; in a world still improving the shares would grow the further a square is from the diagonal, in every column.",
+   "recipe": "**Runs.** The 10 runs of Experiment 12 \u2014 B1 at 5,000 tokens, seeds 1 to 10, 1,000 iterations, a whole world archived every 50 \u2014 `B1-5000-s001` \u2026 `-s010`. They are made with `python3 gol_lab.py run E12`; every setting is listed in the box under the thesis.\n\n**Data.** From each run's archive, `GraphOfLifeRuns/<run>/archive/world_<iteration>.npz`: the whole world as a checkpoint writes it, kept every 50 iterations.\n\n1. For every pair of the eras 0, 50, 100, 200, 300, 500, 700, 1000 play two contests, one in each era's world: give every agent a brain drawn at random from one era or the other, a coin each, clear the messages, switch mutation off and run 20 iterations (`gol_tournament.contest`). The later era's score is the share of agents carrying one of its brains at the end.\n2. For each world and each pair, average its two contests.\n3. Take the median over the ten worlds, and colour the pair's square by it.\n\n**To make it again:** `python3 book_figures.py yardstick`."
+  }
+ }
+}

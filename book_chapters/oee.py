@@ -11,7 +11,7 @@ it.
 from __future__ import annotations
 
 import os
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
 import numpy as np
 
@@ -35,6 +35,11 @@ T = 20
 def _jobs() -> int:
     """Contests are played in parallel, on this many processes."""
     return int(os.environ.get("GOL_BOOK_JOBS", max(1, (os.cpu_count() or 2) // 2)))
+
+
+def _lived(run_id: str) -> int:
+    """How far a run has gone: 0 for one that does not exist yet."""
+    return store.load_meta(run_id).get("iteration", 0) if os.path.exists(store.meta_path(run_id)) else 0
 
 
 def _eras(run_id: str) -> List[int]:
@@ -67,8 +72,8 @@ def score(played: Dict[str, Any], earlier: int, later: int) -> float:
 
 E12_RUNS = ("The 10 runs of Experiment 12 — B1 at 5,000 tokens, seeds 1 to 10, 1,000 "
             "iterations, a whole world archived every 50 — `B1-5000-s001` … `-s010`. They are made "
-            "with `python3 gol_lab.py run E12`; every setting is listed in the box at the top of "
-            "the chapter.")
+            "with `python3 gol_lab.py run E12`; every setting is listed in the box under the "
+            "thesis.")
 ARCHIVE = ("each run's archive, `GraphOfLifeRuns/<run>/archive/world_<iteration>.npz`: the whole "
            "world as a checkpoint writes it, kept every 50 iterations")
 HOW = (f"For every pair of the eras {', '.join(str(e) for e in ERAS)} play two contests, one in "
@@ -81,7 +86,7 @@ HOW = (f"For every pair of the eras {', '.join(str(e) for e in ERAS)} play two c
 @chapter
 def yardstick(ch: F.Chapter) -> None:
     specs = [s for s in runs_of("E12", "baseline")
-             if store.load_meta(s.run_id).get("iteration", 0) >= ERAS[-1]]
+             if _lived(s.run_id) >= ERAS[-1]]
     if not specs:
         return
     played = {s.lab["seed"]: tournament(s.run_id) for s in specs}
@@ -103,7 +108,7 @@ def yardstick(ch: F.Chapter) -> None:
         y={"label": "Elo rating against the founders"},
         series=curves,
         guides=[{"axis": "y", "at": 0, "label": "the founders"}],
-        caption=("**How much better than the founders.** Each grey line is one world; the blue "
+        caption=("Each grey line is one world; the blue "
                  "line is the median of the ten at each era. A rating says how often an era's "
                  "brains beat the founders': +200 is about three contests in four, +400 ten in "
                  "eleven. The ratings are fitted to every contest between every pair of eras, "
@@ -138,11 +143,11 @@ def yardstick(ch: F.Chapter) -> None:
         y={"label": "the later era", "categories": [str(e) for e in ERAS]},
         series=[cells],
         colourbar={"label": "the later era's share", "min": 0.3, "max": 0.9},
-        caption=("**Every era against every earlier one.** Each square is one pair of eras: "
+        caption=("Each square is one pair of eras: "
                  "the share of a contested world the later era's brains held, in the median "
-                 "world. 0.5 is a tie. The bottom row is every era against the founders; a "
-                 "world still improving would be darker the further a square is from the "
-                 "diagonal."),
+                 "world. 0.5 is a tie. The left column is every era against the founders; in a "
+                 "world still improving the shares would grow the further a square is from the "
+                 "diagonal, in every column."),
         recipe=recipe(E12_RUNS, ARCHIVE, [
             HOW,
             "For each world and each pair, average its two contests.",
@@ -153,6 +158,14 @@ def yardstick(ch: F.Chapter) -> None:
     early = [score(p, 0, 300) for p in played.values()]
     ch.number("late_vs_300", describe(late))
     ch.number("300_vs_founders", describe(early))
+    ch.number("late_vs_300_worlds", {str(seed): score(p, 300, 1000) for seed, p in sorted(played.items())})
+    ch.number("300_vs_founders_worlds", {str(seed): score(p, 0, 300) for seed, p in sorted(played.items())})
+    # Each era against the one before it, and the champions of a dominance tournament.
+    steps = {f"{a}-{b}": describe([score(p, a, b) for p in played.values()]) for a, b in zip(ERAS, ERAS[1:])}
+    ch.number("steps", steps)
+    ch.number("champions", {str(seed): tour.dominance(p["eras"], p["contests"])
+                            for seed, p in sorted(played.items())})
+    ch.number("elo_worlds", {str(seed): dict(zip(p["eras"], p["elo"])) for seed, p in sorted(played.items())})
 
 
 # ---------------------------------------------------------------------------
@@ -215,7 +228,7 @@ E13_RUNS = ("The 30 runs of Experiment 13 — at 5,000 tokens, seeds 1 to 10, 1,
 
 @chapter
 def seeing(ch: F.Chapter) -> None:
-    specs = {c: [s for s in runs_of("E13", c) if store.load_meta(s.run_id).get("iteration", 0) > 0]
+    specs = {c: [s for s in runs_of("E13", c) if _lived(s.run_id) > 0]
              for c in E13_CONDITIONS}
     if not all(specs.values()):
         return
@@ -228,7 +241,7 @@ def seeing(ch: F.Chapter) -> None:
              for k, c in enumerate(E13_CONDITIONS)]
     ch.figure("agents", title="Agents alive", x={"label": "iteration"}, y={"label": "agents", "min": 0},
               series=bands,
-              caption=("**Agents alive.** For each condition the median world at each iteration, "
+              caption=("For each condition the median world at each iteration, "
                        "with the middle half of the worlds (darker) and nine in ten (paler)."),
               recipe=recipe(E13_RUNS, F.STATS_FILE, [
                   "Take `nodes` of the rows with `phase` = 2, one line per run.",
@@ -237,7 +250,7 @@ def seeing(ch: F.Chapter) -> None:
     ch.figure("lowest", **dots("lowest", E13_CONDITIONS, low, title="The fewest agents a world fell to",
                                y={"label": "agents (0: died out)", "min": 0},
                                guides=[{"axis": "y", "at": 50, "label": "50 agents"}]),
-              caption=("**The fewest agents a world fell to.** One dot per world: its fewest agents "
+              caption=("One dot per world: its fewest agents "
                        "after the game of any iteration from 50 on, 0 for a world that died out; the "
                        "bar is the median world. The dashed line is the thesis's 50 agents."),
               recipe=recipe(E13_RUNS, F.STATS_FILE, [
@@ -247,16 +260,158 @@ def seeing(ch: F.Chapter) -> None:
     panels = []
     for stat, words, lo, hi in BAR[:3]:
         values = {c: [settled_median(s.run_id, stat, 200, 1500) for s in specs[c]] for c in E13_CONDITIONS}
+        ch.number(f"health_{stat}", {c: describe(values[c]) for c in E13_CONDITIONS})
         guides = [{"axis": "y", "at": v, "label": "the bar"} for v in (lo, hi) if v is not None]
-        panels.append(dots(stat, E13_CONDITIONS, values, title=words, y={"label": words, "min": 0},
-                           guides=guides))
-    ch.grid("health", panels, columns=3, title="How the network holds",
-            caption=("**How the network holds.** One dot per world, at its median over iterations "
+        y = {"label": words, "min": 0, **({"max": 1} if stat == "coreShare" else {})}
+        panels.append(dots(stat, E13_CONDITIONS, values, title=words, y=y, guides=guides))
+    ch.grid("health", panels, columns=1, title="How the network holds",
+            caption=("One dot per world, at its median over iterations "
                      "200 to 1,500 while it lived; the bar is the median world and the dashed line the "
                      "health bar of Chapter 49."),
             recipe=recipe(E13_RUNS, F.STATS_FILE, [
                 "Take `coreShare`, `cutRisk` and `maxDegree` / `nodes` of the rows with `phase` = 2 "
                 "and 200 ≤ `iteration` ≤ 1,500, and each world's median of each."]))
+
+    ch.number("worst_cull", {c: [worst_cull(s.run_id) for s in specs[c]] for c in E13_CONDITIONS})
+
+    # How the worlds that died, died: births against the deaths of each kind.
+    rates: Dict[str, Dict[str, Any]] = {}
+    for c in E13_CONDITIONS:
+        for a, b in ((50, 200), (200, 500), (500, 1500)):
+            got = [r for r in (death_rates(s.run_id, a, b) for s in specs[c]) if r]
+            if got:
+                rates.setdefault(c, {})[f"{a}-{b}"] = {k: describe([r[k] for r in got])
+                                                       for k in ("births", "cutOff", "starved")}
+    ch.number("rates", rates)
+    ch.figure("births", title="Births per agent",
+              x={"label": "iteration"}, y={"label": "births per agent in a reproduction phase", "log": True},
+              series=[band_series([series(s.run_id, "births/nodes_before", 1) for s in specs[c]], c, COLOURS[k])
+                      for k, c in enumerate(E13_CONDITIONS)],
+              caption=("For each condition the median world at each iteration, with the middle half "
+                       "of the worlds (darker) and nine in ten (paler), on a logarithmic axis. A world "
+                       "that died out leaves the band when it does."),
+              recipe=recipe(E13_RUNS, F.STATS_FILE, [
+                  "Take `births` / `nodes_before` of the rows with `phase` = 1, one line per run.",
+                  "For each condition, the median, quartiles and 5th and 95th percentiles of the runs "
+                  "at each iteration (`book_figures.band_series`)."]))
+
+    # Do the brains of each era still have children? Their own worlds cannot say —
+    # a rich agent in a small world lives differently — so every era plays the same
+    # world: the founders'.
+    probed = {c: [children(s.run_id) for s in specs[c]] for c in E13_CONDITIONS}
+    curves = []
+    for k, c in enumerate(E13_CONDITIONS):
+        for p in probed[c]:
+            curves.append({"x": p["eras"], "y": [max(v, 1e-4) for v in p["births"]],
+                           "colour": COLOURS[k], "alpha": 0.35, "width": 1})
+    for k, c in enumerate(E13_CONDITIONS):
+        eras = sorted({e for p in probed[c] for e in p["eras"]})
+        median = [float(np.median([dict(zip(p["eras"], p["births"]))[e] for p in probed[c] if e in p["eras"]]))
+                  for e in eras]
+        curves.append({"x": eras, "y": [max(v, 1e-4) for v in median], "colour": COLOURS[k], "width": 3,
+                       "label": c})
+    ch.number("children", {c: {str(e): describe([dict(zip(p["eras"], p["births"]))[e]
+                                                 for p in probed[c] if e in p["eras"]])
+                               for e in (0, 100, 200, 300, 500, 1000, 1500)
+                               if any(e in p["eras"] for p in probed[c])}
+                           for c in E13_CONDITIONS})
+    ch.number("childless", {c: int(sum(1 for p in probed[c] if p["eras"][-1] >= 300 and p["births"][-1] == 0))
+                            for c in E13_CONDITIONS})
+    ch.figure("children", title="Do the brains still have children?",
+              x={"label": "iteration the brains are taken from"},
+              y={"label": "births per agent and iteration, in the founders' world", "log": True},
+              series=curves,
+              caption=(f"Every era's brains play the same world — the founders' world of their own "
+                       f"run, 50 agents of 100 tokens on the starting ring — for {CHILD_T} iterations "
+                       f"with mutation off. Thin lines: one world each, its births per agent and "
+                       f"iteration, the mean of {len(CHILD_COINS)} draws; thick lines: the median "
+                       f"world of each condition at each era, over the worlds that still lived. No "
+                       f"birth at all is drawn at 0.0001."),
+              recipe=recipe(E13_RUNS, ("each run's archive, `GraphOfLifeRuns/<run>/archive/"
+                                       "world_<iteration>.npz`, kept every 100 iterations (every 50 for "
+                                       "the baseline, of which every 100th is used)"), [
+                  "For every era *e* that is a multiple of 100: take the archived world of iteration 0, "
+                  "give every agent a brain drawn at random from the agents of era *e* "
+                  "(`gol_tournament.mixed` with both eras *e*), clear the messages, switch mutation off "
+                  f"and run {CHILD_T} iterations; count the births of the reproduction phases over the "
+                  "agents alive at the start of each iteration (`oee.children`). Draws "
+                  f"{', '.join(str(c) for c in CHILD_COINS)}.",
+                  "Draw each world's rate by era, and each condition's median."]))
+
+
+def worst_cull(run_id: str) -> Dict[str, Any]:
+    """The most agents one cull cut off, in either phase, and when."""
+    size, at = 0.0, None
+    for phase in (1, 2):
+        its, cut = series(run_id, "orphaned", phase)
+        if len(cut) and np.nanmax(cut) > size:
+            k = int(np.nanargmax(cut))
+            size, at = float(cut[k]), int(its[k])
+    return {"agents": size, "iteration": at}
+
+
+def death_rates(run_id: str, start: int, stop: int) -> Optional[Dict[str, float]]:
+    """Births, agents cut off and agents starved, each per agent alive and iteration, in [start, stop)."""
+    alive = {}
+    count = {"births": 0.0, "cutOff": 0.0, "starved": 0.0}
+    for r in F.rows(run_id):
+        if not start <= r["iteration"] < stop:
+            continue
+        count["births"] += r.get("births") or 0
+        count["cutOff"] += r.get("orphaned") or 0
+        count["starved"] += r.get("starved") or 0
+        if r.get("phase") == 2:
+            alive[r["iteration"]] = r["nodes"]
+    total = sum(alive.values())
+    return {k: v / total for k, v in count.items()} if total else None
+
+
+#: The births probe: iterations a probe lasts, and its draws.
+CHILD_T = 10
+CHILD_COINS = (5, 6)
+
+
+def _child_eras(run_id: str) -> List[int]:
+    return [e for e in store.archived(run_id) if e % 100 == 0]
+
+
+def _want_children(run_id: str) -> Dict[str, Any]:
+    return {"eras": _child_eras(run_id), "T": CHILD_T, "coins": list(CHILD_COINS)}
+
+
+def _children_in_founders_world(task) -> float:
+    """Births per agent and iteration when the brains of one era play the founders' world."""
+    run_id, era, coin = task
+    from gol_config import SimConfig
+    from GraphOfLifeSimple import GraphOfLife
+    cfg = SimConfig.from_dict(store.load_meta(run_id)["config"])
+    cfg.mutation_probability = 0.0
+    cfg.extinction_threshold = 0
+    brains = store.load_archive(run_id, era)
+    planted = tour.mixed(store.load_archive(run_id, 0), brains, brains, cfg.message_amount,
+                         np.random.RandomState(coin))
+    world = GraphOfLife.from_checkpoint(planted, cfg)
+    world.rng = np.random.RandomState(coin + 1)
+    births = alive = 0
+    for _ in range(CHILD_T):
+        if world.G.number_of_nodes() == 0:
+            break
+        alive += world.G.number_of_nodes()
+        for frame in world.step(record_decisions=True):
+            births += len((frame.get("decisions") or {}).get("births") or [])
+    return births / max(1, alive)
+
+
+@D.measure("children", field="key", want=_want_children)
+def children(run_id: str) -> Dict[str, Any]:
+    """For every hundredth archived era: how often its brains have children in the founders' world."""
+    from concurrent.futures import ProcessPoolExecutor
+    eras = _child_eras(run_id)
+    tasks = [(run_id, e, c) for e in eras for c in CHILD_COINS]
+    with ProcessPoolExecutor(_jobs()) as pool:
+        rates = list(pool.map(_children_in_founders_world, tasks))
+    k = len(CHILD_COINS)
+    return {"eras": eras, "births": [float(np.mean(rates[i * k:(i + 1) * k])) for i in range(len(eras))]}
 
 
 # ---------------------------------------------------------------------------
@@ -284,9 +439,138 @@ def health(run_id: str, start: int = 200, stop: int = 1000) -> Dict[str, Any]:
             "holds": all(passes.values()) and cut_off == 0}
 
 
+# Space alone: the network that births, deaths and the cull make with no brains
+# at all (research/oee/space.py). Each rule is a set of keyword arguments of
+# its `grow`; the label is what the figure's column says.
+SPACE_FILE = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                          "research", "oee", "space.py")
+SPACE_RULES = (
+    ("parent", {"links": 0, "mend": False}),
+    ("+2", {"links": 2, "mend": False}),
+    ("chain", {"links": 2, "mend": True}),
+    ("ring", {"links": 2, "mend": True, "ring": True}),
+    ("ring, 1", {"links": 1, "mend": True, "ring": True}),
+    ("ring, 3", {"links": 3, "mend": True, "ring": True}),
+    ("join all", {"links": 2, "mend": False, "mend_all": True}),
+    ("ring, ≤ 8", {"links": 2, "mend": True, "ring": True, "cap": 8}),
+)
+SPACE_SEEDS = range(1, 11)
+#: What the space figure shows of each world, its words, and the health bar's range.
+SPACE_BAR = (("nodeCut", "largest share one agent's loss cuts off", None, 0.02, True),
+             ("edgeCut", "largest share one link's loss cuts off", None, 0.01, True),
+             ("core2", "agents in the 2-core", 0.8, None, False),
+             ("links", "links per agent", 3.0, 12.0, False),
+             ("dimension", "ball dimension", 2.3, 4.0, False),
+             ("hub", "best-connected agent's links per agent", None, 0.05, True))
+SPACE_HOW = ("A world of no brains (`research/oee/space.py`): it starts as a ring of 50 agents, each "
+             "joined to its 6 nearest (Watts–Strogatz, rewiring 0.2). Every iteration each agent has "
+             "a child with probability 0.02 × 1,500 / *n*, plus 0.05 while there are fewer than "
+             "1,500 agents, and then dies with probability 0.02; after both, only the largest piece "
+             "is kept. 300 iterations.")
+_SPACE = None
+
+
+def _space_model():
+    global _SPACE
+    if _SPACE is None:
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("oee_space", SPACE_FILE)
+        _SPACE = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(_SPACE)
+    return _SPACE
+
+
+def _space_world(task):
+    k, seed = task
+    model = _space_model()
+    return k, seed, model.measure(model.grow(seed=seed, **SPACE_RULES[k][1]))
+
+
+def space_alone(ch: F.Chapter) -> None:
+    """Chapter 51's model: every rule of space on its own, ten worlds each, and two pictures."""
+    from concurrent.futures import ProcessPoolExecutor
+    tasks = [(k, seed) for k in range(len(SPACE_RULES)) for seed in SPACE_SEEDS]
+    with ProcessPoolExecutor(_jobs()) as pool:
+        done = list(pool.map(_space_world, tasks))
+    labels = [label for label, _ in SPACE_RULES]
+    got = {label: [] for label in labels}
+    for k, seed, out in done:
+        got[labels[k]].append(out)
+    ch.number("space", {label: {stat: describe([w[stat] for w in got[label]])
+                                for stat in ("agents", "links", "core2", "core3", "nodeCut",
+                                             "edgeCut", "dimension", "diameter", "hub")}
+                        for label in labels})
+    panels = []
+    for stat, words, lo, hi, log in SPACE_BAR:
+        values = {label: [max(w[stat], 1e-4) if log else w[stat] for w in got[label]] for label in labels}
+        guides = [{"axis": "y", "at": v, "label": "the bar"} for v in (lo, hi) if v is not None]
+        panels.append(dots(stat, labels, values, title=words,
+                           y={"label": words, **({"log": True} if log else {"min": 0})}, guides=guides))
+    ch.grid("space", panels, columns=2, title="What the rules of space make, with no brains",
+            caption=("Each column is one set of "
+                     "rules, each dot one world of about 1,500 agents after 300 iterations, the bar "
+                     "the median of ten. *parent*: a newborn is joined to its parent alone; *+2*: "
+                     "also to two of the parent's neighbours, drawn at random; *chain*: also, when an "
+                     "agent dies, the groups of its former neighbours that are not linked to one "
+                     "another are joined in a chain; *ring*: joined in a ring — B2's rules; "
+                     "*ring, 1* and *ring, 3*: the ring, with one or three of the parent's neighbours "
+                     "instead of two; *join all*: every former neighbour of the dead joined in a "
+                     "chain, linked or not; *ring, ≤ 8*: B2's rules with no agent above 8 links. The "
+                     "dashed lines are the health bar of Chapter 49. Cut shares and the "
+                     "best-connected agent's share are drawn on logarithmic axes, a cut of nothing "
+                     "at 0.0001."),
+            recipe=recipe("No runs: the worlds are made by the model itself, seeds 1 to 10 for every "
+                          "set of rules.", "the networks the model returns",
+                          [SPACE_HOW,
+                           "Measure the last network (`space.measure`): the largest share of the "
+                           "others one agent's loss would cut off from the largest piece "
+                           "(`GraphOfLifeSimple.worst_node_cut_share`), the same for one link "
+                           "(`cutRisk`), the 2-core, links per agent, the ball dimension, and the "
+                           "best-connected agent's links over the agents less one."]))
+
+    # Two worlds drawn: what births alone make, and what mending makes of it.
+    import networkx as nx
+    model = _space_model()
+    for name, label, rules in (("blobs", "A tree of blobs", SPACE_RULES[1][1]),
+                               ("mended", "Mended in a ring", SPACE_RULES[3][1])):
+        # Of five seeds, the world that ended largest: the cull can leave a tree of
+        # blobs with few agents, and a picture needs some to show.
+        G = max((model.grow(seed=seed, target=600, **rules) for seed in range(1, 6)),
+                key=lambda g: (g.number_of_nodes(), -min(g.nodes())))
+        nodes = sorted(G.nodes())
+        index = {u: i for i, u in enumerate(nodes)}
+        pos = nx.forceatlas2_layout(G, max_iter=300, seed=1)
+        bridges = set(map(frozenset, nx.bridges(G)))
+        cuts = set(nx.articulation_points(G))
+        edges = [(index[a], index[b]) for a, b in G.edges()]
+        worst = model.measure(G)
+        ch.network(
+            name, title=label,
+            nodes={"x": [float(pos[u][0]) for u in nodes], "y": [float(pos[u][1]) for u in nodes],
+                   "group": [1 if u in cuts else 0 for u in nodes]},
+            edges=edges, edgeGroup=[1 if frozenset((nodes[a], nodes[b])) in bridges else 0 for a, b in edges],
+            colour={"labels": ["an agent", "one whose loss alone splits the world"]},
+            edgeLabels=["a link whose loss alone splits it"], nodeSize=2.0, edgeAlpha=0.3,
+            caption=(f"A world of the model aiming at 600 agents "
+                     f"({len(nodes)} at the end): {'newborns joined to their parent and two of its neighbours, nothing mended' if name == 'blobs' else 'the same, and every death mended in a ring'}. "
+                     "Of seeds 1 to 5, the world that ended largest. "
+                     "Agents and links whose loss alone would split the world are drawn in the "
+                     f"second colour, the links wider; the worst of them cuts off "
+                     f"{100 * max(worst['nodeCut'], worst['edgeCut']):.1f}% of the world."),
+            recipe=recipe("No runs: the model's worlds, seeds 1 to 5.", "the network the model returns",
+                          [SPACE_HOW.replace("1,500", "600"),
+                           "Keep the world that ended with the most agents.",
+                           "Find the bridges and the cut vertices (`networkx.bridges`, "
+                           "`networkx.articulation_points`), lay the network out with "
+                           "`networkx.forceatlas2_layout(G, max_iter=300, seed=1)` and draw it."]))
+        ch.number(name, {"agents": len(nodes), "bridges": len(bridges), "cutVertices": len(cuts),
+                         "nodeCut": worst["nodeCut"], "edgeCut": worst["edgeCut"]})
+
+
 @chapter
 def unbreakable(ch: F.Chapter) -> None:
-    specs = {c: [s for s in runs_of("E14", c) if store.load_meta(s.run_id).get("iteration", 0) >= 1000]
+    space_alone(ch)
+    specs = {c: [s for s in runs_of("E14", c) if _lived(s.run_id) >= 1000]
              for c in E14_CONDITIONS}
     if not all(specs.values()):
         return
@@ -302,7 +586,7 @@ def unbreakable(ch: F.Chapter) -> None:
         panels.append(dots(stat, E14_CONDITIONS, values, title=words, y={"label": words, "min": 0},
                            guides=guides))
     ch.grid("bar", panels, columns=2, title="Each rule against the health bar",
-            caption=("**Each rule against the health bar.** One dot per world, at its median over "
+            caption=("One dot per world, at its median over "
                      "iterations 200 to 1,000; the bar is the median world; dashed lines are the "
                      "health bar of Chapter 49. The first column has every rule of B2; each other "
                      "column takes one away."),
@@ -344,7 +628,7 @@ def one_token(run_id: str) -> Dict[str, Any]:
 
 @chapter
 def deaths(ch: F.Chapter) -> None:
-    specs = {c: [s for s in runs_of("E15", c) if store.load_meta(s.run_id).get("iteration", 0) > 0]
+    specs = {c: [s for s in runs_of("E15", c) if _lived(s.run_id) > 0]
              for c in E15_CONDITIONS}
     if not all(specs.values()):
         return
@@ -367,7 +651,7 @@ def deaths(ch: F.Chapter) -> None:
              y={"label": "agents (0: died out)", "min": 0},
              guides=[{"axis": "y", "at": 100, "label": "100 agents"}]),
     ], columns=1, title="Who is left to play",
-        caption=("**Who is left to play.** Top: one dot per world, the median over iterations 300 "
+        caption=("Top: one dot per world, the median over iterations 300 "
                  "to 1,000 of the share of its agents holding exactly one token after the game. "
                  "Bottom: the fewest agents it fell to after the game of any iteration from 50 on, "
                  "0 if it died out. Bars are the median worlds."),
@@ -408,7 +692,7 @@ def tournament_long(run_id: str) -> Dict[str, Any]:
 
 @chapter
 def stopping(ch: F.Chapter) -> None:
-    specs = {c: [s for s in runs_of("E16", c) if store.load_meta(s.run_id).get("iteration", 0) >= 2000]
+    specs = {c: [s for s in runs_of("E16", c) if _lived(s.run_id) >= 2000]
              for c in E16_CONDITIONS}
     if not all(specs.values()):
         return
@@ -424,7 +708,7 @@ def stopping(ch: F.Chapter) -> None:
     ch.figure("elo", title="How much better than the founders, over 2,000 iterations",
               x={"label": "iteration the brains are taken from"}, y={"label": "Elo rating against the founders"},
               series=series_, guides=[{"axis": "y", "at": 0, "label": "the founders"}],
-              caption=("**How much better than the founders, over 2,000 iterations.** Thin lines are "
+              caption=("Thin lines are "
                        "single worlds, thick ones the median world of each condition."),
               recipe=recipe(E16_RUNS, ARCHIVE.replace("every 50", "every 100"), [
                   f"For every pair of the eras {', '.join(str(e) for e in E16_ERAS)} play two contests, "

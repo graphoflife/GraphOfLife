@@ -217,9 +217,131 @@ iterations and then stops. Experiment 12 asks ten.
 > A value in **bold** differs from the baseline B1.
 <!-- /runs -->
 
-> [!warning] Waiting for the runs
-> The plan, the thesis and the method above were written before any run of
-> Experiment 12 existed; the results follow when they are done.
+## What the ten worlds did
+
+Every pair of the eras 0, 50, 100, 200, 300, 500, 700 and 1,000 was played
+twice in each of the ten worlds — once in each era's world — 560 contests in
+all, each twenty iterations long.
+
+<!-- figure yardstick/elo -->
+![How much better than the founders](../figures/yardstick/elo.svg)
+
+**How much better than the founders.** Each grey line is one world; the blue line is the median of the ten at each era. A rating says how often an era's brains beat the founders': +200 is about three contests in four, +400 ten in eleven. The ratings are fitted to every contest between every pair of eras, so each point leans on the others.
+
+> [!example]- How to make this figure
+> **Runs.** The 10 runs of Experiment 12 — B1 at 5,000 tokens, seeds 1 to 10, 1,000 iterations, a whole world archived every 50 — `B1-5000-s001` … `-s010`. They are made with `python3 gol_lab.py run E12`; every setting is listed in the box under the thesis.
+>
+> **Data.** From each run's archive, `GraphOfLifeRuns/<run>/archive/world_<iteration>.npz`: the whole world as a checkpoint writes it, kept every 50 iterations.
+>
+> 1. For every pair of the eras 0, 50, 100, 200, 300, 500, 700, 1000 play two contests, one in each era's world: give every agent a brain drawn at random from one era or the other, a coin each, clear the messages, switch mutation off and run 20 iterations (`gol_tournament.contest`). The later era's score is the share of agents carrying one of its brains at the end.
+> 2. Read every score *p* as odds, log(*p* / (1 − *p*)), after keeping it between 0.02 and 0.98, and find one rating per era — the founders' at 0 — that fits them best by least squares, the later era's rating minus the earlier's for each contest (`gol_tournament.ratings`). Multiply by 400 / ln 10 for Elo points.
+> 3. Draw each world's ratings, and the median world at each era.
+>
+> **To make it again:** `python3 book_figures.py yardstick`.
+<!-- /figure -->
+
+**Every world learned, and learned fast.** By iteration 50 the brains of
+every world beat their founders: a rating of +207 to +465, +361 in the median
+world — the brains of iteration 50 hold about nine-tenths of a world contested
+with the founders' (0.90 in the median world) — and by iteration 100 the
+median world stood at +400. That is the first boom of
+[Chapter 11](11-the-first-hundred-iterations.md), seen from the brains' side:
+whatever the founders do that does not pay, the first few dozen games remove.
+
+**And then nothing.** From iteration 50 to iteration 1,000 the median world's
+rating stays between +358 and +411, and no world's line climbs: a straight
+line fitted to each world's ratings from iteration 50 on falls by 0.8 points
+per hundred iterations in the median world, and lies between −4 and +2 points
+per hundred in every one. Played against the era just before it, every later
+era tied — the median world's score of each era against the one before was
+0.47 to 0.52 for every step from iteration 50 to iteration 1,000, against 0.90
+for the step from the founders to iteration 50.
+
+<!-- figure yardstick/pairs -->
+![Every era against every earlier one](../figures/yardstick/pairs.svg)
+
+**Every era against every earlier one.** Each square is one pair of eras: the share of a contested world the later era's brains held, in the median world. 0.5 is a tie. The left column is every era against the founders; in a world still improving the shares would grow the further a square is from the diagonal, in every column.
+
+> [!example]- How to make this figure
+> **Runs.** The 10 runs of Experiment 12 — B1 at 5,000 tokens, seeds 1 to 10, 1,000 iterations, a whole world archived every 50 — `B1-5000-s001` … `-s010`. They are made with `python3 gol_lab.py run E12`; every setting is listed in the box under the thesis.
+>
+> **Data.** From each run's archive, `GraphOfLifeRuns/<run>/archive/world_<iteration>.npz`: the whole world as a checkpoint writes it, kept every 50 iterations.
+>
+> 1. For every pair of the eras 0, 50, 100, 200, 300, 500, 700, 1000 play two contests, one in each era's world: give every agent a brain drawn at random from one era or the other, a coin each, clear the messages, switch mutation off and run 20 iterations (`gol_tournament.contest`). The later era's score is the share of agents carrying one of its brains at the end.
+> 2. For each world and each pair, average its two contests.
+> 3. Take the median over the ten worlds, and colour the pair's square by it.
+>
+> **To make it again:** `python3 book_figures.py yardstick`.
+<!-- /figure -->
+
+The same in every pair: whatever two eras from iteration 50 on are played
+against each other, the median world's score lies between 0.46 and 0.58,
+never far from a tie, and it does not grow as the eras move apart. A world
+still improving would rate its iteration 1,000 well above its iteration 100;
+these rate them the same.
+
+## The verdict
+
+The thesis asked for two things of the median world. Against the brains of
+iteration 300, those of iteration 1,000 should hold between 0.45 and 0.55: they
+held **0.483** (0.39 to 0.57 in the ten worlds; between 0.45 and 0.55 in
+five, below in four, above in one). Against the founders, the brains of
+iteration 300 should hold more than 0.6: they held **0.899** (0.77 to 0.97).
+**The thesis holds** — and was, if anything, too generous to the baseline: it
+learns what it learns in fifty to a hundred iterations, not a few hundred,
+and then stops.
+
+## Finished, or running in place?
+
+A tie between two eras has two readings. The world may have **finished** —
+found what it could, nothing left to find — or it may be **running in place**,
+each era beating the one before at what the one before did, and losing to the
+one before that, so that no era gets ahead of all of them.
+
+The step scores already argue against the second: an era that answered its
+predecessor would beat it, and the eras here tie with their predecessors too.
+A **dominance tournament** asks the question directly (Stanley and
+Miikkulainen, 2004). The founders are the first champion; each later era, in
+order, becomes a champion if it beats *every* champion before it, each by a
+margin — here a mean score above 0.55 (`gol_tournament.dominance`). A world
+that keeps making better brains keeps crowning champions; a world running in
+place, or finished, stops.
+
+In every world the brains of iteration 50 beat the founders and became the
+second champion. After that, seven worlds crowned one more, two worlds two
+more, and one world none. That is just what chance crowns. A contest is
+noisy — the two contests of a pair differ by enough that one contest's share
+spreads by about 0.12 around the pair's mean — and an era that is in truth no
+better than the era 50 still beats every champion by more than 0.55 now and
+then. In 20,000 tournaments simulated with that spread, every era after 50
+exactly as good as the era 50 and the founders losing every contest, the
+number of champions was 2 in 15% of them, 3 in 66% and 4 in 19%; the ten
+worlds had 2 once, 3 seven times and 4 twice. Nothing in the ten worlds is
+better than its iteration 50 by more than chance can make it look.
+
+> [!example]- The null of the dominance tournament, to run yourself
+> Read every E12 tournament, take the spread *σ* of one contest's share around
+> its pair's mean from the difference of the pair's two contests (as the
+> standard deviation of the differences divided by √2), then play 20,000
+> tournaments with the same eras and two contests per pair: a later era's
+> share against the founders 0.95, every other share 0.5 + *σ* times a
+> standard normal draw, kept between 0 and 1; count the champions with
+> `gol_tournament.dominance`. The script is `research/oee/champion_null.py`.
+
+## What it means for Part V
+
+The yardstick works: it separates the first boom, which every world has, from
+what comes after, which the baseline does not have. Elo against the founders
+alone would have shown a rise; the eras against each other show that the rise
+was all in the first fifty iterations.
+
+Why does the baseline stop so soon? Part II answered half of it: its brains
+are nearly blind ([Chapter 19](19-what-the-brains-are-like.md)), so evolution
+can only set constants, and a few constants are quickly set. Brains that see
+are the obvious next step, and they are what
+[Chapter 50](50-brains-that-see-and-worlds-that-break.md) tries — with
+consequences for the world itself that have to be dealt with first. Whether
+evolution then keeps going is the subject of Chapter 53.
 
 <!-- turns -->
 ---

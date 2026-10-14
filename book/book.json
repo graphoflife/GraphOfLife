@@ -297,19 +297,22 @@
           "title": "How to tell a world that keeps evolving",
           "file": "chapters/49-how-to-tell-a-world-that-keeps-evolving.md",
           "experiment": "E12",
-          "status": "ready"
+          "status": "analysed"
         },
         {
           "id": "50",
           "title": "Brains that see, and worlds that break",
           "file": "chapters/50-brains-that-see-and-worlds-that-break.md",
           "experiment": "E13",
-          "status": "ready"
+          "status": "analysed"
         },
         {
           "id": "51",
           "title": "A world that cannot break",
-          "note": "The rules of space: a newborn joins its parent and two of its neighbours; a death is mended; only redundant links lapse; a brain may choose only so many links; no handover. Space alone (no brains) and space under the game: the health bar of Chapter 49."
+          "note": "The rules of space: a newborn joins its parent and two of its neighbours; a death is mended; only redundant links lapse; a brain may choose only so many links; no handover. Space alone (no brains) and space under the game: the health bar of Chapter 49.",
+          "file": "chapters/51-a-world-that-cannot-break.md",
+          "experiment": "E14",
+          "status": "ready"
         },
         {
           "id": "52",

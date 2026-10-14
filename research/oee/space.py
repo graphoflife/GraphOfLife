@@ -72,8 +72,9 @@ def groups_of(G: nx.Graph, nbrs: List[int]) -> List[List[int]]:
     return [g for g in groups if g]
 
 
-def run(links: int = 2, mend: bool = True, mend_all: bool = False, cap: int = 0, ring: bool = False,
-        target: int = 1500, deaths: float = 0.02, steps: int = 300, seed: int = 0) -> Dict[str, float]:
+def grow(links: int = 2, mend: bool = True, mend_all: bool = False, cap: int = 0, ring: bool = False,
+         target: int = 1500, deaths: float = 0.02, steps: int = 300, seed: int = 0) -> nx.Graph:
+    """The world's network after `steps` iterations of births, deaths and the cull."""
     rng = np.random.RandomState(seed)
     G = nx.watts_strogatz_graph(50, 6, 0.2, seed=seed)
     nxt = 50
@@ -112,6 +113,11 @@ def run(links: int = 2, mend: bool = True, mend_all: bool = False, cap: int = 0,
                     G.add_edge(a, b)
         if G.number_of_nodes():
             G = G.subgraph(max(nx.connected_components(G), key=len)).copy()
+    return G
+
+
+def measure(G: nx.Graph) -> Dict[str, float]:
+    """What the health bar asks of a network, and a little more."""
     ids = list(G.nodes())
     s = _structure(ids, [list(e) for e in G.edges()])
     core = nx.core_number(G)
@@ -141,7 +147,7 @@ def main() -> None:
     ap.add_argument("--steps", type=int, default=300)
     ap.add_argument("--seed", type=int, default=0)
     a = ap.parse_args()
-    out = run(a.links, a.mend, a.mend_all, a.cap, a.ring, a.target, a.deaths, a.steps, a.seed)
+    out = measure(grow(a.links, a.mend, a.mend_all, a.cap, a.ring, a.target, a.deaths, a.steps, a.seed))
     print("  ".join(f"{k}={v:.3g}" for k, v in out.items()))
 
 

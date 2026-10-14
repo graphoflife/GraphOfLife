@@ -1,0 +1,792 @@
+{
+ "experiment": "E13",
+ "analysed": "2026-10-14",
+ "kind": "series",
+ "engines": {
+  "engines": [
+   "957de64079e6ce35",
+   "324bf48a10f3cd77",
+   "c74b7c17808a373f"
+  ],
+  "agree": true,
+  "checked": [
+   {
+    "run": "B1-5000-s001",
+    "madeBy": "957de64079e6ce35",
+    "remadeBy": "c74b7c17808a373f",
+    "same": true
+   },
+   {
+    "run": "B1-5000-s004",
+    "madeBy": "324bf48a10f3cd77",
+    "remadeBy": "c74b7c17808a373f",
+    "same": true
+   }
+  ]
+ },
+ "reference": null,
+ "figures": [
+  "agents",
+  "births",
+  "core",
+  "cut",
+  "hub",
+  "degree"
+ ],
+ "endingsFrom": 200,
+ "endings": {},
+ "windows": {},
+ "comparisons": {},
+ "extinct": {
+  "baseline": [],
+  "one hidden layer": [
+   {
+    "seed": 1,
+    "at": 534
+   },
+   {
+    "seed": 6,
+    "at": 478
+   },
+   {
+    "seed": 8,
+    "at": 619
+   },
+   {
+    "seed": 10,
+    "at": 219
+   }
+  ],
+  "one hidden layer, change only when copied": [
+   {
+    "seed": 1,
+    "at": 975
+   },
+   {
+    "seed": 2,
+    "at": 674
+   },
+   {
+    "seed": 3,
+    "at": 219
+   },
+   {
+    "seed": 5,
+    "at": 454
+   },
+   {
+    "seed": 6,
+    "at": 292
+   },
+   {
+    "seed": 8,
+    "at": 1018
+   },
+   {
+    "seed": 9,
+    "at": 820
+   },
+   {
+    "seed": 10,
+    "at": 415
+   }
+  ]
+ },
+ "reached": {
+  "baseline": 10,
+  "one hidden layer": 6,
+  "one hidden layer, change only when copied": 2
+ },
+ "citation": {
+  "strains": [
+   "gol-1+brain_kind=float16",
+   "gol-1+brain_kind=float16+mutate_on_replication"
+  ],
+  "commits": [
+   "9ea24298fec5de58fb67906c818784a019b29bdf",
+   "e0d1d4ba4632d87644840a2904033ca3f689d0d8",
+   "e5bc64c1427446f058e73d20a9dfa63142b475a4"
+  ],
+  "engines": [
+   "324bf48a10f3cd77",
+   "957de64079e6ce35",
+   "c74b7c17808a373f"
+  ],
+  "environments": [
+   {
+    "python": "3.12.3",
+    "numpy": "2.5.1",
+    "networkx": "3.6.1",
+    "blas": "scipy-openblas 0.3.33.112.0",
+    "dispatch": "AVX2",
+    "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+   }
+  ],
+  "setup": {
+   "baseline": "B1",
+   "world": {
+    "total_tokens": 5000
+   },
+   "seeds": "1..10",
+   "iterations": 1500,
+   "record": {
+    "heavy_every": 25,
+    "archive_every": 100
+   },
+   "conditions": [
+    {
+     "name": "baseline"
+    },
+    {
+     "name": "one hidden layer",
+     "set": {
+      "hidden_layers": [
+       16
+      ]
+     }
+    },
+    {
+     "name": "one hidden layer, change only when copied",
+     "set": {
+      "hidden_layers": [
+       16
+      ],
+      "mutate_on_replication": true
+     }
+    }
+   ]
+  },
+  "runs": [
+   {
+    "id": "B1-5000-s001",
+    "condition": "baseline",
+    "seed": 1,
+    "iterations": 1500,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "957de64079e6ce35",
+    "commit": "e0d1d4ba4632d87644840a2904033ca3f689d0d8",
+    "seconds": 1411.2,
+    "peakMB": 306.8,
+    "sessions": 4,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B1-5000-s002",
+    "condition": "baseline",
+    "seed": 2,
+    "iterations": 1500,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "957de64079e6ce35",
+    "commit": "e0d1d4ba4632d87644840a2904033ca3f689d0d8",
+    "seconds": 1434.5,
+    "peakMB": 311.9,
+    "sessions": 4,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B1-5000-s003",
+    "condition": "baseline",
+    "seed": 3,
+    "iterations": 1500,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "957de64079e6ce35",
+    "commit": "e0d1d4ba4632d87644840a2904033ca3f689d0d8",
+    "seconds": 770.2,
+    "peakMB": 192.3,
+    "sessions": 4,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B1-5000-s004",
+    "condition": "baseline",
+    "seed": 4,
+    "iterations": 1500,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "324bf48a10f3cd77",
+    "commit": "e5bc64c1427446f058e73d20a9dfa63142b475a4",
+    "seconds": 897.0,
+    "peakMB": 199.0,
+    "sessions": 2,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B1-5000-s005",
+    "condition": "baseline",
+    "seed": 5,
+    "iterations": 1500,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "324bf48a10f3cd77",
+    "commit": "e5bc64c1427446f058e73d20a9dfa63142b475a4",
+    "seconds": 1281.7,
+    "peakMB": 276.1,
+    "sessions": 2,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B1-5000-s006",
+    "condition": "baseline",
+    "seed": 6,
+    "iterations": 1500,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "324bf48a10f3cd77",
+    "commit": "e5bc64c1427446f058e73d20a9dfa63142b475a4",
+    "seconds": 1229.0,
+    "peakMB": 289.2,
+    "sessions": 2,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B1-5000-s007",
+    "condition": "baseline",
+    "seed": 7,
+    "iterations": 1500,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 1015.9,
+    "peakMB": 210.3,
+    "sessions": 2,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B1-5000-s008",
+    "condition": "baseline",
+    "seed": 8,
+    "iterations": 1500,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 1475.6,
+    "peakMB": 232.0,
+    "sessions": 2,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B1-5000-s009",
+    "condition": "baseline",
+    "seed": 9,
+    "iterations": 1500,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 1308.1,
+    "peakMB": 301.7,
+    "sessions": 2,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B1-5000-s010",
+    "condition": "baseline",
+    "seed": 10,
+    "iterations": 1500,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 1032.2,
+    "peakMB": 246.1,
+    "sessions": 2,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B1-5000-f7c30b-s001",
+    "condition": "one hidden layer",
+    "seed": 1,
+    "iterations": 534,
+    "status": "extinct",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 134.1,
+    "peakMB": 108.8,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B1-5000-f7c30b-s002",
+    "condition": "one hidden layer",
+    "seed": 2,
+    "iterations": 1500,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 491.1,
+    "peakMB": 121.6,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B1-5000-f7c30b-s003",
+    "condition": "one hidden layer",
+    "seed": 3,
+    "iterations": 1500,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 448.7,
+    "peakMB": 185.7,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B1-5000-f7c30b-s004",
+    "condition": "one hidden layer",
+    "seed": 4,
+    "iterations": 1500,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 626.5,
+    "peakMB": 130.1,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B1-5000-f7c30b-s005",
+    "condition": "one hidden layer",
+    "seed": 5,
+    "iterations": 1500,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 518.8,
+    "peakMB": 123.8,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B1-5000-f7c30b-s006",
+    "condition": "one hidden layer",
+    "seed": 6,
+    "iterations": 478,
+    "status": "extinct",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 139.6,
+    "peakMB": 101.1,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B1-5000-f7c30b-s007",
+    "condition": "one hidden layer",
+    "seed": 7,
+    "iterations": 1500,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 611.4,
+    "peakMB": 123.3,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B1-5000-f7c30b-s008",
+    "condition": "one hidden layer",
+    "seed": 8,
+    "iterations": 619,
+    "status": "extinct",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 116.6,
+    "peakMB": 116.7,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B1-5000-f7c30b-s009",
+    "condition": "one hidden layer",
+    "seed": 9,
+    "iterations": 1500,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 699.0,
+    "peakMB": 168.3,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B1-5000-f7c30b-s010",
+    "condition": "one hidden layer",
+    "seed": 10,
+    "iterations": 219,
+    "status": "extinct",
+    "strain": "gol-1+brain_kind=float16",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 44.5,
+    "peakMB": 113.5,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B1-5000-4802b8-s001",
+    "condition": "one hidden layer, change only when copied",
+    "seed": 1,
+    "iterations": 975,
+    "status": "extinct",
+    "strain": "gol-1+brain_kind=float16+mutate_on_replication",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 293.9,
+    "peakMB": 106.5,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B1-5000-4802b8-s002",
+    "condition": "one hidden layer, change only when copied",
+    "seed": 2,
+    "iterations": 674,
+    "status": "extinct",
+    "strain": "gol-1+brain_kind=float16+mutate_on_replication",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 73.2,
+    "peakMB": 116.0,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B1-5000-4802b8-s003",
+    "condition": "one hidden layer, change only when copied",
+    "seed": 3,
+    "iterations": 219,
+    "status": "extinct",
+    "strain": "gol-1+brain_kind=float16+mutate_on_replication",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 62.0,
+    "peakMB": 97.1,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B1-5000-4802b8-s004",
+    "condition": "one hidden layer, change only when copied",
+    "seed": 4,
+    "iterations": 1500,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16+mutate_on_replication",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 310.7,
+    "peakMB": 126.6,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B1-5000-4802b8-s005",
+    "condition": "one hidden layer, change only when copied",
+    "seed": 5,
+    "iterations": 454,
+    "status": "extinct",
+    "strain": "gol-1+brain_kind=float16+mutate_on_replication",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 47.1,
+    "peakMB": 81.4,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B1-5000-4802b8-s006",
+    "condition": "one hidden layer, change only when copied",
+    "seed": 6,
+    "iterations": 292,
+    "status": "extinct",
+    "strain": "gol-1+brain_kind=float16+mutate_on_replication",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 53.3,
+    "peakMB": 86.0,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B1-5000-4802b8-s007",
+    "condition": "one hidden layer, change only when copied",
+    "seed": 7,
+    "iterations": 1500,
+    "status": "stopped",
+    "strain": "gol-1+brain_kind=float16+mutate_on_replication",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 669.5,
+    "peakMB": 159.8,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B1-5000-4802b8-s008",
+    "condition": "one hidden layer, change only when copied",
+    "seed": 8,
+    "iterations": 1018,
+    "status": "extinct",
+    "strain": "gol-1+brain_kind=float16+mutate_on_replication",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 379.1,
+    "peakMB": 134.1,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B1-5000-4802b8-s009",
+    "condition": "one hidden layer, change only when copied",
+    "seed": 9,
+    "iterations": 820,
+    "status": "extinct",
+    "strain": "gol-1+brain_kind=float16+mutate_on_replication",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 257.5,
+    "peakMB": 163.9,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   },
+   {
+    "id": "B1-5000-4802b8-s010",
+    "condition": "one hidden layer, change only when copied",
+    "seed": 10,
+    "iterations": 415,
+    "status": "extinct",
+    "strain": "gol-1+brain_kind=float16+mutate_on_replication",
+    "engine": "c74b7c17808a373f",
+    "commit": "9ea24298fec5de58fb67906c818784a019b29bdf",
+    "seconds": 101.8,
+    "peakMB": 95.5,
+    "sessions": 1,
+    "environment": {
+     "python": "3.12.3",
+     "numpy": "2.5.1",
+     "networkx": "3.6.1",
+     "blas": "scipy-openblas 0.3.33.112.0",
+     "dispatch": "AVX2",
+     "cpu": "Intel(R) Core(TM) Ultra 7 258V"
+    }
+   }
+  ]
+ }
+}

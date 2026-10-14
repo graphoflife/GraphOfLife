@@ -30,12 +30,12 @@ What is measured, and how each figure is estimated:
   ten times too large, and a world of 100,000 tokens looked like 28 GB.)
 
 <!-- costs -->
-- **Time:** 0.57 ms per agent per iteration, for every 10,000 weights in a brain.
+- **Time:** 0.65 ms per agent per iteration, for every 10,000 weights in a brain.
 - **Agents:** 0.14 alive per token of the world, once settled.
 - **Disk:** 72 bytes per agent per iteration.
-- **Memory:** 1595 MB, plus 5.2 times every byte of every brain.
+- **Memory:** 1503 MB, plus 5.3 times every byte of every brain.
 
-Fitted to 144 recorded runs on 2026-10-09 by `python3 gol_lab.py costs`.
+Fitted to 246 recorded runs on 2026-10-14 by `python3 gol_lab.py costs`.
 <!-- /costs -->
 
 Each kind of run — the same settings apart from the size of the world and

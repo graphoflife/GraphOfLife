@@ -1,0 +1,812 @@
+{
+ "chapter": "seeing",
+ "numbers": {
+  "lowest": {
+   "baseline": {
+    "n": 10,
+    "mean": 218.6,
+    "median": 187.5,
+    "sd": 104.75495215024443,
+    "min": 74.0,
+    "max": 397.0,
+    "q25": 151.75,
+    "q75": 272.0
+   },
+   "one hidden layer": {
+    "n": 10,
+    "mean": 80.9,
+    "median": 87.5,
+    "sd": 83.65995989055271,
+    "min": 0.0,
+    "max": 231.0,
+    "q25": 0.0,
+    "q75": 110.25
+   },
+   "one hidden layer, change only when copied": {
+    "n": 10,
+    "mean": 27.7,
+    "median": 0.0,
+    "sd": 61.73788680110996,
+    "min": 0.0,
+    "max": 181.0,
+    "q25": 0.0,
+    "q75": 0.0
+   }
+  },
+  "broke": {
+   "baseline": 0,
+   "one hidden layer": 4,
+   "one hidden layer, change only when copied": 8
+  },
+  "health_coreShare": {
+   "baseline": {
+    "n": 10,
+    "mean": 0.49600073089124025,
+    "median": 0.5109680030038779,
+    "sd": 0.13765273199299355,
+    "min": 0.151139204679466,
+    "max": 0.6146875601681914,
+    "q25": 0.4581068502533391,
+    "q75": 0.5983192930199428
+   },
+   "one hidden layer": {
+    "n": 10,
+    "mean": 0.5240019282755245,
+    "median": 0.5475517599269674,
+    "sd": 0.17391274695426953,
+    "min": 0.22014925373134328,
+    "max": 0.7201583994607679,
+    "q25": 0.39709102579064065,
+    "q75": 0.6837605189173815
+   },
+   "one hidden layer, change only when copied": {
+    "n": 10,
+    "mean": 0.45306638223044854,
+    "median": 0.4567007836238606,
+    "sd": 0.19197334659114262,
+    "min": 0.0,
+    "max": 0.7106088407005838,
+    "q25": 0.4019562961606543,
+    "q75": 0.5667241379310345
+   }
+  },
+  "health_cutRisk": {
+   "baseline": {
+    "n": 10,
+    "mean": 0.1065004085213455,
+    "median": 0.08454820338265917,
+    "sd": 0.07361691839617564,
+    "min": 0.0605300161866745,
+    "max": 0.30588631110851056,
+    "q25": 0.06475934342909168,
+    "q75": 0.11189707438791154
+   },
+   "one hidden layer": {
+    "n": 10,
+    "mean": 0.1520643632964258,
+    "median": 0.11436815700101415,
+    "sd": 0.14343356076042085,
+    "min": 0.02443553922932784,
+    "max": 0.432,
+    "q25": 0.05805912684448763,
+    "q75": 0.15038782807435197
+   },
+   "one hidden layer, change only when copied": {
+    "n": 10,
+    "mean": 0.11074208891136553,
+    "median": 0.05954359144787859,
+    "sd": 0.1035522034050187,
+    "min": 0.01557935735150925,
+    "max": 0.29310344827586204,
+    "q25": 0.03489844232673675,
+    "q75": 0.19942996255856787
+   }
+  },
+  "health_maxDegree/nodes": {
+   "baseline": {
+    "n": 10,
+    "mean": 0.12689127632017688,
+    "median": 0.08876085348123353,
+    "sd": 0.1541172682111081,
+    "min": 0.03607379733019898,
+    "max": 0.5551694178974804,
+    "q25": 0.05190752254263472,
+    "q75": 0.10711197893016075
+   },
+   "one hidden layer": {
+    "n": 10,
+    "mean": 0.08894366305369526,
+    "median": 0.05861625016986249,
+    "sd": 0.07156036542059634,
+    "min": 0.02447267251508687,
+    "max": 0.20604537840718745,
+    "q25": 0.030251301972167677,
+    "q75": 0.152556674354503
+   },
+   "one hidden layer, change only when copied": {
+    "n": 10,
+    "mean": 0.27015263388206723,
+    "median": 0.19605614813754266,
+    "sd": 0.25041233472265884,
+    "min": 0.04093647316538883,
+    "max": 0.8823529411764706,
+    "q25": 0.14346323663158583,
+    "q75": 0.27
+   }
+  },
+  "worst_cull": {
+   "baseline": [
+    {
+     "agents": 860.0,
+     "iteration": 14
+    },
+    {
+     "agents": 1078.0,
+     "iteration": 15
+    },
+    {
+     "agents": 411.0,
+     "iteration": 34
+    },
+    {
+     "agents": 559.0,
+     "iteration": 7
+    },
+    {
+     "agents": 916.0,
+     "iteration": 20
+    },
+    {
+     "agents": 1253.0,
+     "iteration": 14
+    },
+    {
+     "agents": 693.0,
+     "iteration": 526
+    },
+    {
+     "agents": 454.0,
+     "iteration": 306
+    },
+    {
+     "agents": 878.0,
+     "iteration": 23
+    },
+    {
+     "agents": 437.0,
+     "iteration": 307
+    }
+   ],
+   "one hidden layer": [
+    {
+     "agents": 344.0,
+     "iteration": 217
+    },
+    {
+     "agents": 451.0,
+     "iteration": 1400
+    },
+    {
+     "agents": 2562.0,
+     "iteration": 47
+    },
+    {
+     "agents": 746.0,
+     "iteration": 651
+    },
+    {
+     "agents": 1368.0,
+     "iteration": 125
+    },
+    {
+     "agents": 745.0,
+     "iteration": 15
+    },
+    {
+     "agents": 519.0,
+     "iteration": 873
+    },
+    {
+     "agents": 688.0,
+     "iteration": 18
+    },
+    {
+     "agents": 2148.0,
+     "iteration": 106
+    },
+    {
+     "agents": 815.0,
+     "iteration": 12
+    }
+   ],
+   "one hidden layer, change only when copied": [
+    {
+     "agents": 171.0,
+     "iteration": 479
+    },
+    {
+     "agents": 495.0,
+     "iteration": 15
+    },
+    {
+     "agents": 795.0,
+     "iteration": 26
+    },
+    {
+     "agents": 1571.0,
+     "iteration": 17
+    },
+    {
+     "agents": 288.0,
+     "iteration": 11
+    },
+    {
+     "agents": 269.0,
+     "iteration": 19
+    },
+    {
+     "agents": 1087.0,
+     "iteration": 26
+    },
+    {
+     "agents": 635.0,
+     "iteration": 25
+    },
+    {
+     "agents": 806.0,
+     "iteration": 686
+    },
+    {
+     "agents": 202.0,
+     "iteration": 83
+    }
+   ]
+  },
+  "rates": {
+   "baseline": {
+    "50-200": {
+     "births": {
+      "n": 10,
+      "mean": 0.07217962314919536,
+      "median": 0.06255227484582351,
+      "sd": 0.06124508648018899,
+      "min": 0.003989693764046219,
+      "max": 0.22983124175840458,
+      "q25": 0.04122775907979452,
+      "q75": 0.08165964814602299
+     },
+     "cutOff": {
+      "n": 10,
+      "mean": 0.0459526463908831,
+      "median": 0.04294970558286682,
+      "sd": 0.027455354254621825,
+      "min": 0.0027070895098862684,
+      "max": 0.10854458980931356,
+      "q25": 0.03415179833447842,
+      "q75": 0.05557045627221908
+     },
+     "starved": {
+      "n": 10,
+      "mean": 0.026458870176041104,
+      "median": 0.02052802967761843,
+      "sd": 0.03407366570230001,
+      "min": 0.0011463984926562394,
+      "max": 0.11870860681848489,
+      "q25": 0.006369548908692973,
+      "q75": 0.026572570424168235
+     }
+    },
+    "200-500": {
+     "births": {
+      "n": 10,
+      "mean": 0.06705683652244686,
+      "median": 0.03467412908451159,
+      "sd": 0.08439929793582475,
+      "min": 0.0038977781657277533,
+      "max": 0.2905971485455444,
+      "q25": 0.02757074729030204,
+      "q75": 0.06772031645754562
+     },
+     "cutOff": {
+      "n": 10,
+      "mean": 0.044775882532179706,
+      "median": 0.026851907585116956,
+      "sd": 0.04772207275007326,
+      "min": 0.004602802640148794,
+      "max": 0.17128769759082832,
+      "q25": 0.02395384303602082,
+      "q75": 0.04980268125955823
+     },
+     "starved": {
+      "n": 10,
+      "mean": 0.022389478036474616,
+      "median": 0.0069393975842296255,
+      "sd": 0.036347205258406616,
+      "min": 0.00044651550046665903,
+      "max": 0.11823380857574259,
+      "q25": 0.005039336610764994,
+      "q75": 0.017122688702473382
+     }
+    },
+    "500-1500": {
+     "births": {
+      "n": 10,
+      "mean": 0.03274646218186017,
+      "median": 0.02263685914715909,
+      "sd": 0.021762544436054097,
+      "min": 0.018454438734756048,
+      "max": 0.08755494190987965,
+      "q25": 0.021042342777410693,
+      "q75": 0.03307885500991565
+     },
+     "cutOff": {
+      "n": 10,
+      "mean": 0.02336383979358762,
+      "median": 0.01864555026724469,
+      "sd": 0.011300403219273319,
+      "min": 0.01452682709130363,
+      "max": 0.051070391557592305,
+      "q25": 0.016409025873120917,
+      "q75": 0.02529878664830775
+     },
+     "starved": {
+      "n": 10,
+      "mean": 0.009592416837015403,
+      "median": 0.005013544375771206,
+      "sd": 0.010674106196300583,
+      "min": 0.0032378892785241914,
+      "max": 0.03690951540108028,
+      "q25": 0.004241460329282637,
+      "q75": 0.007805415674181678
+     }
+    }
+   },
+   "one hidden layer": {
+    "50-200": {
+     "births": {
+      "n": 10,
+      "mean": 0.22511495829559075,
+      "median": 0.09903504762764676,
+      "sd": 0.22930088053660094,
+      "min": 0.04558814200833104,
+      "max": 0.6268855698498311,
+      "q25": 0.07741103710398518,
+      "q75": 0.3183421772598339
+     },
+     "cutOff": {
+      "n": 10,
+      "mean": 0.1759611199725966,
+      "median": 0.0626447013580157,
+      "sd": 0.18402752079599147,
+      "min": 0.04440403442369907,
+      "max": 0.5137489790362102,
+      "q25": 0.05683534870040585,
+      "q75": 0.23996786010284293
+     },
+     "starved": {
+      "n": 10,
+      "mean": 0.05046740280001531,
+      "median": 0.031466508016296135,
+      "sd": 0.04731050249439096,
+      "min": 0.0013664049653766878,
+      "max": 0.14155393288081913,
+      "q25": 0.016153648408140403,
+      "q75": 0.0797164000740453
+     }
+    },
+    "200-500": {
+     "births": {
+      "n": 10,
+      "mean": 0.06855806925250754,
+      "median": 0.07957429879930406,
+      "sd": 0.03533735875171834,
+      "min": 0.00686106346483705,
+      "max": 0.12129815423586503,
+      "q25": 0.04627837705043089,
+      "q75": 0.08224860303533543
+     },
+     "cutOff": {
+      "n": 10,
+      "mean": 0.061277656531092406,
+      "median": 0.05450486980940865,
+      "sd": 0.026432784229038886,
+      "min": 0.035849148655900866,
+      "max": 0.1112510495382032,
+      "q25": 0.03882362254545897,
+      "q75": 0.07458955340059864
+     },
+     "starved": {
+      "n": 10,
+      "mean": 0.01834501430425852,
+      "median": 0.0131452897123,
+      "sd": 0.013192509409407858,
+      "min": 0.002205200761086988,
+      "max": 0.03882103159735232,
+      "q25": 0.010914406462765657,
+      "q75": 0.02925654694736019
+     }
+    },
+    "500-1500": {
+     "births": {
+      "n": 8,
+      "mean": 0.06590974667223246,
+      "median": 0.06361407562652233,
+      "sd": 0.02423440235624046,
+      "min": 0.028891542967639197,
+      "max": 0.10817442775259431,
+      "q25": 0.05148910719371376,
+      "q75": 0.0788752922901579
+     },
+     "cutOff": {
+      "n": 8,
+      "mean": 0.05773253317867329,
+      "median": 0.05330060627884657,
+      "sd": 0.019553399416065997,
+      "min": 0.03742251037934369,
+      "max": 0.09946140035906642,
+      "q25": 0.047516908838152905,
+      "q75": 0.058965302633889764
+     },
+     "starved": {
+      "n": 8,
+      "mean": 0.018873431580250614,
+      "median": 0.018550954430640924,
+      "sd": 0.011367998022602887,
+      "min": 0.004318898097350298,
+      "max": 0.0361777360241377,
+      "q25": 0.01028244768364012,
+      "q75": 0.026424809441731544
+     }
+    }
+   },
+   "one hidden layer, change only when copied": {
+    "50-200": {
+     "births": {
+      "n": 10,
+      "mean": 0.08182077288604575,
+      "median": 0.07427469192739654,
+      "sd": 0.057119932835167406,
+      "min": 0.011488788527058078,
+      "max": 0.2141295593142331,
+      "q25": 0.048496989542457354,
+      "q75": 0.09558887584096562
+     },
+     "cutOff": {
+      "n": 10,
+      "mean": 0.0643587281787604,
+      "median": 0.048761908325874445,
+      "sd": 0.05293546909084813,
+      "min": 0.018540527691942,
+      "max": 0.19565067311011392,
+      "q25": 0.035761426945255165,
+      "q75": 0.05580378182837681
+     },
+     "starved": {
+      "n": 10,
+      "mean": 0.019832085258546916,
+      "median": 0.012248791913723123,
+      "sd": 0.01768502220925177,
+      "min": 0.0020701832721073247,
+      "max": 0.05086377678954879,
+      "q25": 0.00490374506097167,
+      "q75": 0.03385137725572093
+     }
+    },
+    "200-500": {
+     "births": {
+      "n": 10,
+      "mean": 0.03531368718820989,
+      "median": 0.03296106359894349,
+      "sd": 0.031023484953490357,
+      "min": 0.0018628095551172475,
+      "max": 0.0909313725490196,
+      "q25": 0.011517592852412481,
+      "q75": 0.035185662581764386
+     },
+     "cutOff": {
+      "n": 10,
+      "mean": 0.033153918497964806,
+      "median": 0.029864979769080542,
+      "sd": 0.023645054745658645,
+      "min": 0.005588428665351742,
+      "max": 0.0741421568627451,
+      "q25": 0.01485023667170159,
+      "q75": 0.044223920049467735
+     },
+     "starved": {
+      "n": 10,
+      "mean": 0.010511127353086522,
+      "median": 0.0048896625505108005,
+      "sd": 0.011628790428487792,
+      "min": 0.000446990938274615,
+      "max": 0.030943627450980393,
+      "q25": 0.002849957779177332,
+      "q75": 0.014992397850871962
+     }
+    },
+    "500-1500": {
+     "births": {
+      "n": 6,
+      "mean": 0.10124033284826668,
+      "median": 0.03294438585858256,
+      "sd": 0.1836708583055427,
+      "min": 0.0009350163627863488,
+      "max": 0.4749807116195984,
+      "q25": 0.024187035057860816,
+      "q75": 0.041513280913968165
+     },
+     "cutOff": {
+      "n": 6,
+      "mean": 0.04988757389236809,
+      "median": 0.027466116366229674,
+      "sd": 0.06833983250145607,
+      "min": 0.0016362786348761104,
+      "max": 0.18722587909834643,
+      "q25": 0.020378930050461375,
+      "q75": 0.03500241779904843
+     },
+     "starved": {
+      "n": 6,
+      "mean": 0.05251645558063168,
+      "median": 0.007015459455758806,
+      "sd": 0.11558908327223698,
+      "min": 0.0002337540906965872,
+      "max": 0.28835259854450923,
+      "q25": 0.0035698348928165807,
+      "q75": 0.00929899128786283
+     }
+    }
+   }
+  },
+  "children": {
+   "baseline": {
+    "0": {
+     "n": 10,
+     "mean": 0.7334978270090813,
+     "median": 0.7264018544636394,
+     "sd": 0.1406978903661843,
+     "min": 0.4587267005567659,
+     "max": 0.9399675402967398,
+     "q25": 0.6494567942430743,
+     "q75": 0.8302740487765026
+    },
+    "100": {
+     "n": 10,
+     "mean": 0.09954625048933533,
+     "median": 0.08469682907464016,
+     "sd": 0.08108208261494909,
+     "min": 0.0,
+     "max": 0.23604497426318877,
+     "q25": 0.0397073753328099,
+     "q75": 0.16040372178067797
+    },
+    "200": {
+     "n": 10,
+     "mean": 0.10476443060966674,
+     "median": 0.0894261741222929,
+     "sd": 0.08787442431158664,
+     "min": 0.004672897196261682,
+     "max": 0.2819584039326377,
+     "q25": 0.030306792983452083,
+     "q75": 0.1614442722301228
+    },
+    "300": {
+     "n": 10,
+     "mean": 0.11559520493992197,
+     "median": 0.08886695011647,
+     "sd": 0.11604367362028568,
+     "min": 0.001,
+     "max": 0.40630524454920447,
+     "q25": 0.04192027865508011,
+     "q75": 0.14877517489214356
+    },
+    "500": {
+     "n": 10,
+     "mean": 0.11161013830317854,
+     "median": 0.027576855509391863,
+     "sd": 0.23335286084849796,
+     "min": 0.0,
+     "max": 0.7661282773903,
+     "q25": 0.012197027278138619,
+     "q75": 0.08803628472298292
+    },
+    "1000": {
+     "n": 10,
+     "mean": 0.06568489263382703,
+     "median": 0.07847264911854127,
+     "sd": 0.05299027941437283,
+     "min": 0.003,
+     "max": 0.12858589878088486,
+     "q25": 0.010499532159976933,
+     "q75": 0.10931917392982408
+    },
+    "1500": {
+     "n": 10,
+     "mean": 0.050701933764437254,
+     "median": 0.03141309245097629,
+     "sd": 0.04617177566091631,
+     "min": 0.0,
+     "max": 0.12834837987350184,
+     "q25": 0.013922592590423208,
+     "q75": 0.08823937484444397
+    }
+   },
+   "one hidden layer": {
+    "0": {
+     "n": 10,
+     "mean": 0.7327499661332557,
+     "median": 0.7498447009994186,
+     "sd": 0.1531230302913555,
+     "min": 0.4979280956298551,
+     "max": 0.9552261156034741,
+     "q25": 0.6514721524140856,
+     "q75": 0.8327963972386099
+    },
+    "100": {
+     "n": 10,
+     "mean": 0.30750421474078676,
+     "median": 0.16208006974157693,
+     "sd": 0.3010972815390054,
+     "min": 0.03412512990116134,
+     "max": 0.8427350267291707,
+     "q25": 0.0844901383160086,
+     "q75": 0.47208547472427465
+    },
+    "200": {
+     "n": 10,
+     "mean": 0.14199555710124923,
+     "median": 0.15906530763114057,
+     "sd": 0.11565798221961114,
+     "min": 0.008388066506147688,
+     "max": 0.36526887828214305,
+     "q25": 0.04112690212192542,
+     "q75": 0.18997598061378318
+    },
+    "300": {
+     "n": 9,
+     "mean": 0.05901464709823759,
+     "median": 0.03818686317321689,
+     "sd": 0.05132072573198,
+     "min": 0.005,
+     "max": 0.17819623135237755,
+     "q25": 0.03083464070965748,
+     "q75": 0.06355102310106599
+    },
+    "500": {
+     "n": 8,
+     "mean": 0.09755725968799002,
+     "median": 0.08166966795568108,
+     "sd": 0.07002816692870528,
+     "min": 0.008760867743090744,
+     "max": 0.2125182439436927,
+     "q25": 0.047898710951798304,
+     "q75": 0.15118466988307758
+    },
+    "1000": {
+     "n": 6,
+     "mean": 0.1204423325105236,
+     "median": 0.13022407165126038,
+     "sd": 0.04569045468299186,
+     "min": 0.0408814378851832,
+     "max": 0.17341178640335944,
+     "q25": 0.10731075915829925,
+     "q75": 0.14373574727138952
+    },
+    "1500": {
+     "n": 6,
+     "mean": 0.20244239614227488,
+     "median": 0.17204003537750265,
+     "sd": 0.12057383381456649,
+     "min": 0.07097730514572821,
+     "max": 0.4257482553491012,
+     "q25": 0.1521528369109985,
+     "q75": 0.2142537399806137
+    }
+   },
+   "one hidden layer, change only when copied": {
+    "0": {
+     "n": 10,
+     "mean": 0.6932772674424924,
+     "median": 0.7460223913723202,
+     "sd": 0.15222496797000884,
+     "min": 0.43459645164598504,
+     "max": 0.841900568421537,
+     "q25": 0.5915709840388659,
+     "q75": 0.8134339689396289
+    },
+    "100": {
+     "n": 10,
+     "mean": 0.09730224153138331,
+     "median": 0.05422485909554876,
+     "sd": 0.09213696486167847,
+     "min": 0.001,
+     "max": 0.24896083072421704,
+     "q25": 0.026973325717344857,
+     "q75": 0.16591974609348975
+    },
+    "200": {
+     "n": 10,
+     "mean": 0.0814399217262732,
+     "median": 0.08621427858384303,
+     "sd": 0.06853671563454541,
+     "min": 0.0,
+     "max": 0.18724356883267249,
+     "q25": 0.013012076813830922,
+     "q75": 0.13150229998444513
+    },
+    "300": {
+     "n": 8,
+     "mean": 0.05210980535983642,
+     "median": 0.045890759324811944,
+     "sd": 0.05389877630030173,
+     "min": 0.0,
+     "max": 0.14843641901692486,
+     "q25": 0.000736738703339882,
+     "q75": 0.0847647581935027
+    },
+    "500": {
+     "n": 6,
+     "mean": 0.05582802635912241,
+     "median": 0.05515605927209899,
+     "sd": 0.04724437616099547,
+     "min": 0.0,
+     "max": 0.11088533019738056,
+     "q25": 0.017677772396143373,
+     "q75": 0.09522828929977305
+    },
+    "1000": {
+     "n": 3,
+     "mean": 0.029014672707966663,
+     "median": 0.01082261208576998,
+     "sd": 0.03522674411328827,
+     "min": 0.006603399126763613,
+     "max": 0.0696180069113664,
+     "q25": 0.008713005606266797,
+     "q75": 0.04022030949856819
+    },
+    "1500": {
+     "n": 2,
+     "mean": 0.09421206047597566,
+     "median": 0.09421206047597566,
+     "sd": 0.040853491792760356,
+     "min": 0.06532427939416585,
+     "max": 0.12309984155778547,
+     "q25": 0.07976816993507076,
+     "q75": 0.10865595101688057
+    }
+   }
+  },
+  "childless": {
+   "baseline": 1,
+   "one hidden layer": 2,
+   "one hidden layer, change only when copied": 4
+  }
+ },
+ "figures": {
+  "agents": {
+   "title": "Agents alive",
+   "caption": "For each condition the median world at each iteration, with the middle half of the worlds (darker) and nine in ten (paler).",
+   "recipe": "**Runs.** The 30 runs of Experiment 13 \u2014 at 5,000 tokens, seeds 1 to 10, 1,500 iterations \u2014 in three conditions: the baseline B1 (`B1-5000-s001` \u2026 `-s010`, shared with Experiment 12), its brains with one hidden layer of 16, and those brains changed only when copied. They are made with `python3 gol_lab.py run E13`.\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).\n\n1. Take `nodes` of the rows with `phase` = 2, one line per run.\n2. For each condition, the median, quartiles and 5th and 95th percentiles of the runs at each iteration (`book_figures.band_series`).\n\n**To make it again:** `python3 book_figures.py seeing`."
+  },
+  "lowest": {
+   "title": "The fewest agents a world fell to",
+   "caption": "One dot per world: its fewest agents after the game of any iteration from 50 on, 0 for a world that died out; the bar is the median world. The dashed line is the thesis's 50 agents.",
+   "recipe": "**Runs.** The 30 runs of Experiment 13 \u2014 at 5,000 tokens, seeds 1 to 10, 1,500 iterations \u2014 in three conditions: the baseline B1 (`B1-5000-s001` \u2026 `-s010`, shared with Experiment 12), its brains with one hidden layer of 16, and those brains changed only when copied. They are made with `python3 gol_lab.py run E13`.\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).\n\n1. Take the smallest `nodes` of the rows with `phase` = 2 and `iteration` \u2265 50; a run that ended extinct counts 0.\n2. Count the worlds below 50 in each condition.\n\n**To make it again:** `python3 book_figures.py seeing`."
+  },
+  "health": {
+   "title": "How the network holds",
+   "caption": "One dot per world, at its median over iterations 200 to 1,500 while it lived; the bar is the median world and the dashed line the health bar of Chapter 49.",
+   "recipe": "**Runs.** The 30 runs of Experiment 13 \u2014 at 5,000 tokens, seeds 1 to 10, 1,500 iterations \u2014 in three conditions: the baseline B1 (`B1-5000-s001` \u2026 `-s010`, shared with Experiment 12), its brains with one hidden layer of 16, and those brains changed only when copied. They are made with `python3 gol_lab.py run E13`.\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).\n\n1. Take `coreShare`, `cutRisk` and `maxDegree` / `nodes` of the rows with `phase` = 2 and 200 \u2264 `iteration` \u2264 1,500, and each world's median of each.\n\n**To make it again:** `python3 book_figures.py seeing`."
+  },
+  "births": {
+   "title": "Births per agent",
+   "caption": "For each condition the median world at each iteration, with the middle half of the worlds (darker) and nine in ten (paler), on a logarithmic axis. A world that died out leaves the band when it does.",
+   "recipe": "**Runs.** The 30 runs of Experiment 13 \u2014 at 5,000 tokens, seeds 1 to 10, 1,500 iterations \u2014 in three conditions: the baseline B1 (`B1-5000-s001` \u2026 `-s010`, shared with Experiment 12), its brains with one hidden layer of 16, and those brains changed only when copied. They are made with `python3 gol_lab.py run E13`.\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).\n\n1. Take `births` / `nodes_before` of the rows with `phase` = 1, one line per run.\n2. For each condition, the median, quartiles and 5th and 95th percentiles of the runs at each iteration (`book_figures.band_series`).\n\n**To make it again:** `python3 book_figures.py seeing`."
+  },
+  "children": {
+   "title": "Do the brains still have children?",
+   "caption": "Every era's brains play the same world \u2014 the founders' world of their own run, 50 agents of 100 tokens on the starting ring \u2014 for 10 iterations with mutation off. Thin lines: one world each, its births per agent and iteration, the mean of 2 draws; thick lines: the median world of each condition at each era, over the worlds that still lived. No birth at all is drawn at 0.0001.",
+   "recipe": "**Runs.** The 30 runs of Experiment 13 \u2014 at 5,000 tokens, seeds 1 to 10, 1,500 iterations \u2014 in three conditions: the baseline B1 (`B1-5000-s001` \u2026 `-s010`, shared with Experiment 12), its brains with one hidden layer of 16, and those brains changed only when copied. They are made with `python3 gol_lab.py run E13`.\n\n**Data.** From each run's archive, `GraphOfLifeRuns/<run>/archive/world_<iteration>.npz`, kept every 100 iterations (every 50 for the baseline, of which every 100th is used).\n\n1. For every era *e* that is a multiple of 100: take the archived world of iteration 0, give every agent a brain drawn at random from the agents of era *e* (`gol_tournament.mixed` with both eras *e*), clear the messages, switch mutation off and run 10 iterations; count the births of the reproduction phases over the agents alive at the start of each iteration (`oee.children`). Draws 5, 6.\n2. Draw each world's rate by era, and each condition's median.\n\n**To make it again:** `python3 book_figures.py seeing`."
+  }
+ }
+}
