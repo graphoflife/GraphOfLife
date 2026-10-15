@@ -260,8 +260,12 @@ const FlowModules = {
    * `turnover` is the part worth watching: the share of a module's agents that
    * were not in it last time. A module with a long life and a high turnover is
    * a pattern being carried by different matter each iteration.
+   *
+   * `mutual` matches a pair only if each is the other's best overlap, at any
+   * overlap at all: a matching with no floor to choose, which the book uses
+   * beside the floor the view offers.
    */
-  track(previous, current, { floor = 0.3 } = {}) {
+  track(previous, current, { floor = 0.3, mutual = false } = {}) {
     // The modules of one frame are disjoint, so what each new module shares
     // with the old ones is counted by walking its members once and asking
     // whose each was. Intersecting every old module with every new one was
@@ -291,6 +295,17 @@ const FlowModules = {
     // Best pair first. Among equals, old module before new, which is the order
     // the pairs used to be found in, so the matching is exactly what it was.
     pairs.sort((a, b) => (b.overlap - a.overlap) || (a.oldAt - b.oldAt) || (a.newAt - b.newAt));
+    if (mutual) {
+      const bestOld = new Map(), bestNew = new Map();
+      for (const pair of pairs) {
+        bestOld.set(pair.oldId, Math.max(bestOld.get(pair.oldId) || 0, pair.overlap));
+        bestNew.set(pair.newKey, Math.max(bestNew.get(pair.newKey) || 0, pair.overlap));
+      }
+      const kept = pairs.filter(pair => pair.overlap === bestOld.get(pair.oldId)
+                                        && pair.overlap === bestNew.get(pair.newKey));
+      pairs.length = 0;
+      pairs.push(...kept);
+    }
 
     const takenOld = new Set(), takenNew = new Set(), assigned = new Map();
     for (const pair of pairs) {
@@ -348,7 +363,7 @@ const FlowModules = {
    * not alive last frame was born, one that is gone has died — so this needs
    * nothing beyond what a frame always carries.
    */
-  follow(frames, { floor = 0.3 } = {}) {
+  follow(frames, { floor = 0.3, mutual = false } = {}) {
     const history = [];
     let previous = new Map();
     let alivePrev = null;
@@ -360,7 +375,7 @@ const FlowModules = {
       if (!hasFlow) { withoutFlow++; continue; }
       const alive = new Set(ids);
 
-      const carried = this.track(previous, groups, { floor });
+      const carried = this.track(previous, groups, { floor, mutual });
       const now = new Map();
       for (const [label, members] of groups) {
         const match = carried.get(label);

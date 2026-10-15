@@ -244,4 +244,18 @@ function test_frames_without_decisions_are_counted_not_guessed() {
 
 // ---------------------------------------------------------------------------
 
+function test_a_mutual_match_needs_each_to_be_the_others_best() {
+  // A takes most of X and much of Y; B shares a little with Y only. Matched
+  // best-first at any overlap, B would live on as Y on a tenth of its members,
+  // though Y is far more A's than B's. Matched mutually, Y is a new module.
+  const set = (a, b) => new Set(Array.from({ length: b - a }, (_, i) => a + i));
+  const previous = new Map([['A', set(0, 20)], ['B', set(20, 30)]]);
+  const current = new Map([['X', set(0, 12)], ['Y', new Set([...set(12, 20), 20])]]);
+  const greedy = FlowModules.track(previous, current, { floor: 0 });
+  const mutual = FlowModules.track(previous, current, { floor: 0, mutual: true });
+  if (!greedy.has('Y') || greedy.get('Y').id !== 'B') throw new Error('best-first at no floor should give Y to B');
+  if (mutual.get('X').id !== 'A') throw new Error('X is A\'s best and A is X\'s best');
+  if (mutual.has('Y')) throw new Error('Y is not B\'s module: B is not Y\'s best overlap');
+}
+
 require('./harness').run(__filename, name => eval(name));
