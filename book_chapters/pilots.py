@@ -422,12 +422,9 @@ def _health(world: str) -> Dict[str, float]:
     h = [r for r in health_rows(_window(world)) if r["nodes"] > 20]
     if not h:
         return {}
-    return {"nodeCut": float(np.median([r["nodeCutRisk"] for r in h])),
-            "edgeCut": float(np.median([r["cutRisk"] for r in h])),
-            "core2": float(np.median([r["coreShare"] for r in h])),
-            "links": float(np.median([r["meanDegree"] for r in h])),
-            "dimension": float(np.median([r["dimension"] for r in h])),
-            "hub": float(np.median([r["maxDegreeShare"] for r in h]))}
+    med = lambda key: float(np.median([r[key] for r in h if r.get(key) is not None] or [np.nan]))
+    return {"nodeCut": med("nodeCutRisk"), "edgeCut": med("cutRisk"), "core2": med("coreShare"),
+            "links": med("meanDegree"), "dimension": med("dimension"), "hub": med("maxDegreeShare")}
 
 
 def _life(world: str) -> Dict[str, float]:
@@ -482,23 +479,30 @@ def switches(ch: F.Chapter) -> None:
     if not all(_finished(w) for w in every):
         return
     labels = list(SWITCHES)
-    _bar_grid(ch, "bar", labels, worlds, "Each switch against the health bar",
+    short = dict(zip(labels, ("B1", "B1 −rev", "B2", "B2 −rev", "gifts", "gifts, lapse", "lapse", "by wealth")))
+    worlds_short = {short[l]: worlds[l] for l in labels}
+    _bar_grid(ch, "bar", list(short.values()), worlds_short, "Each switch against the health bar",
               ("One dot per world, at its median over iterations 500 to 1,000; the bar is the median of "
-               "the two; dashed lines are the health bar of Chapter 46. Cut shares and the "
-               "best-connected agent's share are drawn on logarithmic axes, a cut of nothing at 0.0001."),
+               "the two; dashed lines are the health bar of Chapter 46. *−rev*: no revolutions; "
+               "*gifts, lapse*: gifts, and every unused link lapses; *lapse*: every unused link lapses; "
+               "*by wealth*: estates shared by wealth. Cut shares and the best-connected agent's share "
+               "are drawn on logarithmic axes, a cut of nothing at 0.0001."),
               SWITCH_RUNS)
     from book_chapters.oee import dots
     life = {label: [_life(w) for w in worlds[label]] for label in labels}
-    panels = [dots("conquests", labels, {l: [m["conquests"] for m in life[l] if m] for l in labels},
+    sl = list(short.values())
+    lf = {short[l]: life[l] for l in labels}
+    panels = [dots("conquests", sl, {l: [m["conquests"] for m in lf[l] if m] for l in sl},
                    title="nodes taken per 100 agents per game", y={"label": "per 100 agents", "min": 0}),
-              dots("births", labels, {l: [m["births"] for m in life[l] if m] for l in labels},
+              dots("births", sl, {l: [m["births"] for m in lf[l] if m] for l in sl},
                    title="births per 100 agents per iteration", y={"label": "per 100 agents", "min": 0}),
-              dots("age", labels, {l: [m["mean_age"] for m in life[l] if m] for l in labels},
+              dots("age", sl, {l: [m["mean_age"] for m in lf[l] if m] for l in sl},
                    title="mean age of the agents", y={"label": "iterations", "log": True}),
-              dots("agents", labels, {l: [m["agents"] for m in life[l] if m] for l in labels},
+              dots("agents", sl, {l: [m["agents"] for m in lf[l] if m] for l in sl},
                    title="agents", y={"label": "agents", "min": 0})]
     ch.grid("life", panels, columns=2, title="How each switch changes a world's life",
-            caption="One dot per world, the mean or median over iterations 500 to 1,000; the bar is the median of the two.",
+            caption=("One dot per world, the mean or median over iterations 500 to 1,000; the bar is the "
+                     "median of the two. Labels as in the figure below."),
             recipe=recipe(SWITCH_RUNS, "each world's `series.jsonl`", [
                 "Of the rows from iteration 500 to 1,000: the nodes taken (`conquests`) and the births per "
                 "100 agents, averaged; the mean age (`meanAge`), averaged; the agents (`nodes`), median."]))

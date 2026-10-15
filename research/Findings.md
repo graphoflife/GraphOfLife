@@ -180,7 +180,7 @@ otherwise. Last consolidated: 2026-10-15.
 - Kin sense alone: no groups (3); one world crept upward (1,000 vs 100: 0.67),
   the other did not (0.53). The sense is used less than by founders (12–16% vs 26%).
 
-**The original switches (Ch. 54; batch S, engine mode) — partial**
+**The original switches (Ch. 54; batch S, engine mode)**
 - The pilot B2 of seed 1 equals the lab's run B2-10000-s001 for all 1,000
   iterations (agents and links): engine mode reproduces the lab exactly.
 - B1 without revolutions is a mayfly world (births 14–96 per 100 agents an
@@ -188,8 +188,17 @@ otherwise. Last consolidated: 2026-10-15.
   revolutions B1 has old agents (age 80–160), stars (hub 23–40%). In one world
   without revolutions the brains of 1,000 beat those of 500 (0.73) — the only
   clear late improvement of the day; seed 2 and a 3,000-iteration run pending.
-- Gifts on B2's space: harmless; gifts with every unused link lapsing: the
-  network breaks (one agent's loss cuts up to half the world).
+- Seed 2 of B1 without revolutions: improvement to 500 (+383), then back
+  (1,000 vs 500 = 0.40). With revolutions B1 stops by 200 in both worlds;
+  without, by 500 and not by 1,000. A 3,000-iteration run is testing it.
+- In B2 no switch keeps evolution going: 1,000 vs 500 between 0.47 and 0.57 in
+  every variant (B2 0.50/0.50). Gifts and lapsing links give more to learn at
+  first (+263/+157 and +520/+256 at 100 vs +102/+85), then stop. Revolutions
+  are rare in B2 (0.1–0.3 nodes per 100 a game) and change nothing; in B1 they
+  take 28–39 of the 46–55 nodes that change hands a game.
+- Gifts on B2's space: harmless. Gifts with every unused link lapsing: the
+  network breaks as without gifts (dimension ~2, worst agent cut ~20%,
+  1,300–1,450 agents): brains do not pay for the links that matter.
 
 **Open (being tested)**
 - Rules without numbers (B3, Ch. 57): all seven of B2's numbers removed at once

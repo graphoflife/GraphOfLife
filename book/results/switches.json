@@ -1,0 +1,780 @@
+{
+ "chapter": "switches",
+ "numbers": {
+  "tournaments": {
+   "B1": [
+    {
+     "eras": [
+      0,
+      100,
+      200,
+      500,
+      1000
+     ],
+     "elo": [
+      0.0,
+      352.58979983447153,
+      379.32705348957126,
+      323.62218122077456,
+      350.8885959692713
+     ],
+     "1000_vs_500": 0.5356950570100315,
+     "1000_vs_100": 0.501099634188895,
+     "steps": [
+      0.8505577381537746,
+      0.5168905594455875,
+      0.4960728338798056,
+      0.5356950570100315
+     ]
+    },
+    {
+     "eras": [
+      0,
+      100,
+      200,
+      500,
+      1000
+     ],
+     "elo": [
+      0.0,
+      352.0540508236653,
+      377.52823694572214,
+      351.768010447172,
+      312.4149996357638
+     ],
+     "1000_vs_500": 0.4141614855295269,
+     "1000_vs_100": 0.5056623442806318,
+     "steps": [
+      0.880130437309464,
+      0.5489261173621955,
+      0.40742285245862475,
+      0.4141614855295269
+     ]
+    }
+   ],
+   "B1, no revolutions": [
+    {
+     "eras": [
+      0,
+      100,
+      200,
+      500,
+      1000
+     ],
+     "elo": [
+      0.0,
+      145.4999013660739,
+      79.31223428497138,
+      177.0402004951029,
+      275.08475986576144
+     ],
+     "1000_vs_500": 0.7262039661957009,
+     "1000_vs_100": 0.5973205835348326,
+     "steps": [
+      0.5912011178823512,
+      0.4364558231663059,
+      0.7072024593013402,
+      0.7262039661957009
+     ]
+    },
+    {
+     "eras": [
+      0,
+      100,
+      200,
+      500,
+      1000
+     ],
+     "elo": [
+      0.0,
+      161.30598034096744,
+      233.80291693280603,
+      383.389125332931,
+      303.0526007953119
+     ],
+     "1000_vs_500": 0.3946261229368944,
+     "1000_vs_100": 0.6877895060232634,
+     "steps": [
+      0.6820403715462968,
+      0.6170167338615582,
+      0.6576187321561652,
+      0.3946261229368944
+     ]
+    }
+   ],
+   "B2": [
+    {
+     "eras": [
+      0,
+      100,
+      200,
+      500,
+      1000
+     ],
+     "elo": [
+      0.0,
+      102.32893146293662,
+      133.50105224019805,
+      134.8075093551828,
+      135.53669833796707
+     ],
+     "1000_vs_500": 0.5034782646712465,
+     "1000_vs_100": 0.5800615620077176,
+     "steps": [
+      0.7170739730495757,
+      0.5683786153571158,
+      0.4999560068895472,
+      0.5034782646712465
+     ]
+    },
+    {
+     "eras": [
+      0,
+      100,
+      200,
+      500,
+      1000
+     ],
+     "elo": [
+      0.0,
+      84.7787779598876,
+      108.7694863187148,
+      145.95776144753395,
+      148.50130975669174
+     ],
+     "1000_vs_500": 0.49947572431547366,
+     "1000_vs_100": 0.6192351116792276,
+     "steps": [
+      0.6546811175113334,
+      0.5312381021567598,
+      0.593913932744935,
+      0.49947572431547366
+     ]
+    }
+   ],
+   "B2, no revolutions": [
+    {
+     "eras": [
+      0,
+      100,
+      200,
+      500,
+      1000
+     ],
+     "elo": [
+      0.0,
+      123.35485888889069,
+      133.58709772748213,
+      146.0850249096842,
+      138.59589219366373
+     ],
+     "1000_vs_500": 0.4919757841639489,
+     "1000_vs_100": 0.5417064641487739,
+     "steps": [
+      0.699598726493112,
+      0.5022862071131977,
+      0.5295865937681083,
+      0.4919757841639489
+     ]
+    },
+    {
+     "eras": [
+      0,
+      100,
+      200,
+      500,
+      1000
+     ],
+     "elo": [
+      0.0,
+      89.78757869956343,
+      85.83056370025702,
+      115.7811824702641,
+      99.88371551732777
+     ],
+     "1000_vs_500": 0.4703867064788707,
+     "1000_vs_100": 0.5490260104421596,
+     "steps": [
+      0.66781392576699,
+      0.5037942259918917,
+      0.5286765964061694,
+      0.4703867064788707
+     ]
+    }
+   ],
+   "gifts": [
+    {
+     "eras": [
+      0,
+      100,
+      200,
+      500,
+      1000
+     ],
+     "elo": [
+      0.0,
+      263.2034177657153,
+      270.6547747809987,
+      256.35633441650396,
+      295.0164654083177
+     ],
+     "1000_vs_500": 0.5358156443681598,
+     "1000_vs_100": 0.59261209689743,
+     "steps": [
+      0.8508789040593948,
+      0.5047514366465244,
+      0.4860316483084194,
+      0.5358156443681598
+     ]
+    },
+    {
+     "eras": [
+      0,
+      100,
+      200,
+      500,
+      1000
+     ],
+     "elo": [
+      0.0,
+      156.83826555982583,
+      209.34601540119885,
+      173.6436943419189,
+      189.88921287632306
+     ],
+     "1000_vs_500": 0.5224912684310352,
+     "1000_vs_100": 0.5943856957957377,
+     "steps": [
+      0.7291931219072207,
+      0.5355147336228148,
+      0.448268507121031,
+      0.5224912684310352
+     ]
+    }
+   ],
+   "gifts, all lapse": [
+    {
+     "eras": [
+      0,
+      100,
+      200,
+      500,
+      1000
+     ],
+     "elo": [
+      0.0,
+      145.59367826707816,
+      162.38569080676018,
+      202.9166094638379,
+      147.1108732102403
+     ],
+     "1000_vs_500": 0.47284883158182733,
+     "1000_vs_100": 0.5253890597855577,
+     "steps": [
+      0.4640597269699538,
+      0.31038871812483154,
+      0.5862521373266889,
+      0.47284883158182733
+     ]
+    },
+    {
+     "eras": [
+      0,
+      100,
+      200,
+      500,
+      1000
+     ],
+     "elo": [
+      0.0,
+      207.5064706065879,
+      161.1789642400472,
+      126.09612339211913,
+      103.44445960655068
+     ],
+     "1000_vs_500": 0.5266422303415956,
+     "1000_vs_100": 0.38222474441591414,
+     "steps": [
+      0.7769061298914801,
+      0.46664241512474786,
+      0.496291524972036,
+      0.5266422303415956
+     ]
+    }
+   ],
+   "all lapse": [
+    {
+     "eras": [
+      0,
+      100,
+      200,
+      500,
+      1000
+     ],
+     "elo": [
+      0.0,
+      519.6739995370089,
+      500.98446266101604,
+      504.1163649579819,
+      521.789131820387
+     ],
+     "1000_vs_500": 0.5734698946252864,
+     "1000_vs_100": 0.5498410129308002,
+     "steps": [
+      0.9660720986088258,
+      0.515049753552661,
+      0.5167391504811734,
+      0.5734698946252864
+     ]
+    },
+    {
+     "eras": [
+      0,
+      100,
+      200,
+      500,
+      1000
+     ],
+     "elo": [
+      0.0,
+      255.95517693381598,
+      200.58985089668641,
+      212.52391461790398,
+      241.33927050034322
+     ],
+     "1000_vs_500": 0.5129361972887551,
+     "1000_vs_100": 0.5477073125772527,
+     "steps": [
+      0.8421749124854345,
+      0.4100884062313188,
+      0.5005741831872668,
+      0.5129361972887551
+     ]
+    }
+   ],
+   "estates by wealth": [
+    {
+     "eras": [
+      0,
+      100,
+      200,
+      500,
+      1000
+     ],
+     "elo": [
+      0.0,
+      115.74162463423808,
+      128.67229867008666,
+      100.19916607787759,
+      118.00901196624442
+     ],
+     "1000_vs_500": 0.49786464055218804,
+     "1000_vs_100": 0.5632655310641661,
+     "steps": [
+      0.7419031191037659,
+      0.5286674321372589,
+      0.4364079129767129,
+      0.49786464055218804
+     ]
+    },
+    {
+     "eras": [
+      0,
+      100,
+      200,
+      500,
+      1000
+     ],
+     "elo": [
+      0.0,
+      79.2378116388877,
+      86.88683308852427,
+      75.47452788606712,
+      86.39322075206378
+     ],
+     "1000_vs_500": 0.5071671608223618,
+     "1000_vs_100": 0.5261134965478731,
+     "steps": [
+      0.6438922881255874,
+      0.513332142318242,
+      0.4801942730875669,
+      0.5071671608223618
+     ]
+    }
+   ]
+  },
+  "life": {
+   "B1": [
+    {
+     "agents": 1638.0,
+     "births": 3.1166483955183306,
+     "conquests": 55.445853214648736,
+     "revolutions": 38.70681377951298,
+     "starved": 0.8904459156480606,
+     "cut_off": 2.4717255382332897,
+     "mean_age": 116.04091032172416,
+     "lifespan": 35.90072027920101,
+     "clone_mean": 1.8412732236325775,
+     "genotypes": 1005.0558882235529
+    },
+    {
+     "agents": 1273.0,
+     "births": 3.0469898242359257,
+     "conquests": 46.010677049617456,
+     "revolutions": 28.149075195177765,
+     "starved": 1.0452762412278231,
+     "cut_off": 2.1796574755016835,
+     "mean_age": 137.0263114530087,
+     "lifespan": 36.084463347510635,
+     "clone_mean": 2.214352198820953,
+     "genotypes": 798.2315369261477
+    }
+   ],
+   "B1, no revolutions": [
+    {
+     "agents": 1702.0,
+     "births": 28.492104218966684,
+     "conquests": 84.12387687018786,
+     "revolutions": 0.0,
+     "starved": 7.206192132996109,
+     "cut_off": 23.514433117114205,
+     "mean_age": 7.326579725699243,
+     "lifespan": 3.477331898117154,
+     "clone_mean": 2.099405568426203,
+     "genotypes": 896.439121756487
+    },
+    {
+     "agents": 1829.0,
+     "births": 14.473671583246679,
+     "conquests": 70.51690415190934,
+     "revolutions": 0.0,
+     "starved": 1.8003628406401837,
+     "cut_off": 14.023157945745105,
+     "mean_age": 12.61935169942922,
+     "lifespan": 7.061344544345407,
+     "clone_mean": 2.1707848912487178,
+     "genotypes": 1041.4590818363274
+    }
+   ],
+   "B2": [
+    {
+     "agents": 3394.0,
+     "births": 1.0217280602830554,
+     "conquests": 7.974352023020199,
+     "revolutions": 0.2606980464227183,
+     "starved": 0.0,
+     "cut_off": 0.0,
+     "mean_age": 50.14864657620893,
+     "lifespan": 100.0,
+     "clone_mean": 2.9111762772538654,
+     "genotypes": 1506.1437125748503
+    },
+    {
+     "agents": 3405.0,
+     "births": 0.9983067188513853,
+     "conquests": 8.572011141553729,
+     "revolutions": 0.10475171150118001,
+     "starved": 0.0,
+     "cut_off": 0.0,
+     "mean_age": 50.35810387057505,
+     "lifespan": 100.0,
+     "clone_mean": 2.7224486783427038,
+     "genotypes": 1601.2375249501
+    }
+   ],
+   "B2, no revolutions": [
+    {
+     "agents": 3616.0,
+     "births": 1.01009814046184,
+     "conquests": 8.991346275992244,
+     "revolutions": 0.0,
+     "starved": 0.0,
+     "cut_off": 0.0,
+     "mean_age": 50.40321969778669,
+     "lifespan": 100.0,
+     "clone_mean": 2.9863164264236217,
+     "genotypes": 1690.7105788423153
+    },
+    {
+     "agents": 3249.0,
+     "births": 0.9926784448496384,
+     "conquests": 6.655589543128577,
+     "revolutions": 0.0,
+     "starved": 0.0,
+     "cut_off": 0.0,
+     "mean_age": 50.64201313242443,
+     "lifespan": 100.0,
+     "clone_mean": 3.175776764920808,
+     "genotypes": 1442.2175648702596
+    }
+   ],
+   "gifts": [
+    {
+     "agents": 3050.0,
+     "births": 1.0083434910925257,
+     "conquests": 10.917011005952508,
+     "revolutions": 0.4697298248216427,
+     "starved": 0.00935202677248883,
+     "cut_off": 0.0,
+     "mean_age": 50.270666321040906,
+     "lifespan": 99.42858081903636,
+     "clone_mean": 2.9282436055871433,
+     "genotypes": 1446.8522954091816
+    },
+    {
+     "agents": 3388.0,
+     "births": 1.034579215973957,
+     "conquests": 6.447674543941974,
+     "revolutions": 0.03371305378973731,
+     "starved": 0.0572921613745969,
+     "cut_off": 0.0,
+     "mean_age": 49.9943543602697,
+     "lifespan": 97.02521008403362,
+     "clone_mean": 3.1953404486940875,
+     "genotypes": 1494.7724550898204
+    }
+   ],
+   "gifts, all lapse": [
+    {
+     "agents": 1323.0,
+     "births": 3.271972306782452,
+     "conquests": 2.5765960641514414,
+     "revolutions": 0.020178955456793764,
+     "starved": 0.013635785578420146,
+     "cut_off": 3.1819038793199073,
+     "mean_age": 32.74257849584076,
+     "lifespan": 31.534584885831663,
+     "clone_mean": 5.520288782656184,
+     "genotypes": 398.3832335329341
+    },
+    {
+     "agents": 1454.0,
+     "births": 1.4774422359805426,
+     "conquests": 1.42466736289366,
+     "revolutions": 0.46343818150798394,
+     "starved": 0.0011025617211019314,
+     "cut_off": 0.829528371669888,
+     "mean_age": 45.359424702223905,
+     "lifespan": 69.06008788689338,
+     "clone_mean": 2.0579038158825953,
+     "genotypes": 697.9540918163673
+    }
+   ],
+   "all lapse": [
+    {
+     "agents": 1416.0,
+     "births": 1.6027703452973667,
+     "conquests": 3.6629197326363827,
+     "revolutions": 3.5148399689087086,
+     "starved": 0.0,
+     "cut_off": 0.9610750979568777,
+     "mean_age": 45.83845486662716,
+     "lifespan": 69.30325084910238,
+     "clone_mean": 2.617678895461565,
+     "genotypes": 625.6067864271457
+    },
+    {
+     "agents": 1398.0,
+     "births": 2.297190307731849,
+     "conquests": 1.5137571084879387,
+     "revolutions": 0.0,
+     "starved": 0.0,
+     "cut_off": 2.396962515399138,
+     "mean_age": 35.573227718092014,
+     "lifespan": 44.057908213511915,
+     "clone_mean": 4.137793868296422,
+     "genotypes": 464.812375249501
+    }
+   ],
+   "estates by wealth": [
+    {
+     "agents": 2456.0,
+     "births": 1.0275933500239116,
+     "conquests": 8.311849115015173,
+     "revolutions": 0.21361687450911732,
+     "starved": 0.0,
+     "cut_off": 0.0,
+     "mean_age": 50.17937656837677,
+     "lifespan": 100.0,
+     "clone_mean": 2.8973919977131657,
+     "genotypes": 1131.3832335329341
+    },
+    {
+     "agents": 2822.0,
+     "births": 1.031449461011785,
+     "conquests": 8.797200122576113,
+     "revolutions": 0.3121320834841433,
+     "starved": 0.0,
+     "cut_off": 0.0,
+     "mean_age": 49.552936716117415,
+     "lifespan": 100.0,
+     "clone_mean": 3.196844580691965,
+     "genotypes": 1239.3972055888223
+    }
+   ]
+  },
+  "health": {
+   "B1": [
+    {
+     "nodeCut": 0.17854763491005995,
+     "edgeCut": 0.04419263456090652,
+     "core2": 0.5798082346305696,
+     "links": 3.3768844221105527,
+     "dimension": 3.1398249139867187,
+     "hub": 0.09161290322580645
+    },
+    {
+     "nodeCut": 0.10365853658536585,
+     "edgeCut": 0.026792750197005517,
+     "core2": 0.4972067039106145,
+     "links": 3.045886075949367,
+     "dimension": 3.1620442743495727,
+     "hub": 0.3159144893111639
+    }
+   ],
+   "B1, no revolutions": [
+    {
+     "nodeCut": 0.363567649281935,
+     "edgeCut": 0.327286470143613,
+     "core2": 0.7148483654982276,
+     "links": 3.011634349030471,
+     "dimension": 2.101709797931604,
+     "hub": 0.009036144578313253
+    },
+    {
+     "nodeCut": 0.3683158420789605,
+     "edgeCut": 0.29035482258870565,
+     "core2": 0.709211986681465,
+     "links": 3.094441446303292,
+     "dimension": 2.176338614088107,
+     "hub": 0.009279717189571365
+    }
+   ],
+   "B2": [
+    {
+     "nodeCut": 0.0,
+     "edgeCut": 0.0,
+     "core2": 1.0,
+     "links": 5.4773064372589735,
+     "dimension": 4.451522102987527,
+     "hub": 0.013928368391131325
+    },
+    {
+     "nodeCut": 0.0,
+     "edgeCut": 0.0,
+     "core2": 1.0,
+     "links": 5.37004662004662,
+     "dimension": 4.4479201577484115,
+     "hub": 0.01427241700279243
+    }
+   ],
+   "B2, no revolutions": [
+    {
+     "nodeCut": 0.0,
+     "edgeCut": 0.0,
+     "core2": 1.0,
+     "links": 5.851990382046487,
+     "dimension": 4.436198476670265,
+     "hub": 0.013772616797191467
+    },
+    {
+     "nodeCut": 0.0,
+     "edgeCut": 0.0,
+     "core2": 1.0,
+     "links": 5.785393978219091,
+     "dimension": 4.380245271861284,
+     "hub": 0.01694915254237288
+    }
+   ],
+   "gifts": [
+    {
+     "nodeCut": 0.0,
+     "edgeCut": 0.0,
+     "core2": 1.0,
+     "links": 5.824094146794673,
+     "dimension": 4.2456479107689695,
+     "hub": 0.013901760889712697
+    },
+    {
+     "nodeCut": 0.0,
+     "edgeCut": 0.0,
+     "core2": 1.0,
+     "links": 5.2967798085291555,
+     "dimension": 4.436014777259885,
+     "hub": 0.01625072547881602
+    }
+   ],
+   "gifts, all lapse": [
+    {
+     "nodeCut": 0.19409937888198758,
+     "edgeCut": 0.10802700675168792,
+     "core2": 0.8261504747991234,
+     "links": 3.740399385560676,
+     "dimension": 2.2105853863093943,
+     "hub": 0.013816925734024179
+    },
+    {
+     "nodeCut": 0.19138056975894813,
+     "edgeCut": 0.18830727396329028,
+     "core2": 0.8107344632768362,
+     "links": 2.903924221921516,
+     "dimension": 1.9129579991053074,
+     "hub": 0.007482993197278911
+    }
+   ],
+   "all lapse": [
+    {
+     "nodeCut": 0.20328102710413695,
+     "edgeCut": 0.19777931991672448,
+     "core2": 0.9476987447698745,
+     "links": 3.4114285714285715,
+     "dimension": 1.9292386827712207,
+     "hub": 0.00872093023255814
+    },
+    {
+     "nodeCut": 0.3191948238677211,
+     "edgeCut": 0.1695906432748538,
+     "core2": 0.9085872576177285,
+     "links": 3.994273443092341,
+     "dimension": 2.020420494187457,
+     "hub": 0.015280135823429542
+    }
+   ],
+   "estates by wealth": [
+    {
+     "nodeCut": 0.0,
+     "edgeCut": 0.0,
+     "core2": 1.0,
+     "links": 5.462745098039216,
+     "dimension": 4.415234593571083,
+     "hub": 0.017695473251028805
+    },
+    {
+     "nodeCut": 0.0,
+     "edgeCut": 0.0,
+     "core2": 1.0,
+     "links": 5.134059331580924,
+     "dimension": 4.003055456134009,
+     "hub": 0.015135515663498769
+    }
+   ]
+  }
+ },
+ "figures": {
+  "bar": {
+   "title": "Each switch against the health bar",
+   "caption": "One dot per world, at its median over iterations 500 to 1,000; the bar is the median of the two; dashed lines are the health bar of Chapter 46. *\u2212rev*: no revolutions; *gifts, lapse*: gifts, and every unused link lapses; *lapse*: every unused link lapses; *by wealth*: estates shared by wealth. Cut shares and the best-connected agent's share are drawn on logarithmic axes, a cut of nothing at 0.0001.",
+   "recipe": "**Runs.** Pilot worlds of `research/oee/pilots/run.py` in the engine's own code (`--proto engine=true`), kept in `GraphOfLifeRuns/.pilots/S`, two seeds each (`-s1`, `-s2`), at 10,000 tokens for 1,000 iterations with a whole world every 100 (`--ckpt 100`): B1 (`S6-B1`, the settings of Parts II and III), B1 without revolutions (`S7-B1norev`), B2 (`S0-B2`: `--set hidden_layers=16 message_amount=8 message_prepass=false allow_handover=false mutate_on_replication=true incumbency=1.5 birth_links=2 mend_on_death=true prune_needs=2 valence=8 keep_home=0.3 max_age=100 min_child=10`), B2 without revolutions (`S1-norev`), B2 with gifts (`S2-gifts`: `allow_gifting=true prune_after=reproduction inactive_window=iteration`), the same with every unused link lapsing (`S3-giftslapse`: also `prune_needs=0`), B2 with every unused link lapsing (`S4-lapse`) and B2 with estates shared by wealth (`S5-bytokens`: `redistribution=by_tokens`). The jobs are listed in `research/oee/pilots/jobs_S.txt`.\n\n**Data.** From each world's `series.jsonl`.\n\n1. Of the rows from iteration 500 to 1,000 that measured the network (every 10th), take the median of the worst share of the others one agent's loss cuts off (`nodeCutRisk`), the same for one link (`cutRisk`), the 2-core (`coreShare`), links per agent (`meanDegree`), the ball dimension and the best-connected agent's share (`maxDegreeShare`).\n\n**To make it again:** `python3 book_figures.py switches`."
+  },
+  "life": {
+   "title": "How each switch changes a world's life",
+   "caption": "One dot per world, the mean or median over iterations 500 to 1,000; the bar is the median of the two. Labels as in the figure below.",
+   "recipe": "**Runs.** Pilot worlds of `research/oee/pilots/run.py` in the engine's own code (`--proto engine=true`), kept in `GraphOfLifeRuns/.pilots/S`, two seeds each (`-s1`, `-s2`), at 10,000 tokens for 1,000 iterations with a whole world every 100 (`--ckpt 100`): B1 (`S6-B1`, the settings of Parts II and III), B1 without revolutions (`S7-B1norev`), B2 (`S0-B2`: `--set hidden_layers=16 message_amount=8 message_prepass=false allow_handover=false mutate_on_replication=true incumbency=1.5 birth_links=2 mend_on_death=true prune_needs=2 valence=8 keep_home=0.3 max_age=100 min_child=10`), B2 without revolutions (`S1-norev`), B2 with gifts (`S2-gifts`: `allow_gifting=true prune_after=reproduction inactive_window=iteration`), the same with every unused link lapsing (`S3-giftslapse`: also `prune_needs=0`), B2 with every unused link lapsing (`S4-lapse`) and B2 with estates shared by wealth (`S5-bytokens`: `redistribution=by_tokens`). The jobs are listed in `research/oee/pilots/jobs_S.txt`.\n\n**Data.** From each world's `series.jsonl`.\n\n1. Of the rows from iteration 500 to 1,000: the nodes taken (`conquests`) and the births per 100 agents, averaged; the mean age (`meanAge`), averaged; the agents (`nodes`), median.\n\n**To make it again:** `python3 book_figures.py switches`."
+  },
+  "elo": {
+   "title": "Does any switch keep evolution going?",
+   "caption": "One dot per world. Top: the rating of the brains of iteration 1,000 against the founders'. Bottom: their share of a world contested with the brains of iteration 500 of the same world.",
+   "recipe": "**Runs.** Pilot worlds of `research/oee/pilots/run.py` in the engine's own code (`--proto engine=true`), kept in `GraphOfLifeRuns/.pilots/S`, two seeds each (`-s1`, `-s2`), at 10,000 tokens for 1,000 iterations with a whole world every 100 (`--ckpt 100`): B1 (`S6-B1`, the settings of Parts II and III), B1 without revolutions (`S7-B1norev`), B2 (`S0-B2`: `--set hidden_layers=16 message_amount=8 message_prepass=false allow_handover=false mutate_on_replication=true incumbency=1.5 birth_links=2 mend_on_death=true prune_needs=2 valence=8 keep_home=0.3 max_age=100 min_child=10`), B2 without revolutions (`S1-norev`), B2 with gifts (`S2-gifts`: `allow_gifting=true prune_after=reproduction inactive_window=iteration`), the same with every unused link lapsing (`S3-giftslapse`: also `prune_needs=0`), B2 with every unused link lapsing (`S4-lapse`) and B2 with estates shared by wealth (`S5-bytokens`: `redistribution=by_tokens`). The jobs are listed in `research/oee/pilots/jobs_S.txt`.\n\n**Data.** From each world's checkpoints, `ckpt_<iteration>.npz`.\n\n1. For every pair of the eras 0, 100, 200, 500 and 1,000 play four contests, two in each era's world: every agent gets a brain drawn at random from one era or the other, mutation is switched off, and 20 iterations are played under the world's own rules (`research/oee/pilots/tourney.py --T 20 --reps 2`).\n2. Fit one rating per era (Bradley\u2013Terry, `research/oee/pilots/elo.py`), the founders at 0.\n\n**To make it again:** `python3 book_figures.py switches`."
+  }
+ }
+}

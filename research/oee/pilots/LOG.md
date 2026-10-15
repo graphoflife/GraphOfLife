@@ -381,3 +381,10 @@ family) against clone groups of 3-7. Pilots running: G4 (family sense) and G5
 (stakes pooled by family), B2 without revolutions, 10k, seeds 1-2 (jobs_G45.txt).
 The question: given a password and a crowd for free, does evolution find the
 raiders' play, and does it keep going?
+S7-B1norev-s2 tournament: +161 +234 +383 +303 (100/200/500/1000); steps 0.68 0.62
+0.66 0.40; 1000 vs 500 = 0.395. Improvement goes on to 500 (later than B2's 200),
+then falls back. Contest shares within a pair range 0.09-1.00 (a mayfly world).
+B1 without revolutions evolves longer, not without end; the long run decides.
+Switches, seed 1 (1000 vs 500): gifts 0.54 (+263 at 100: more to learn early),
+all lapse 0.57 (+520 at 100), gifts+lapse 0.47 (noisy, breaking world), estates
+by wealth 0.50; B1 0.54 (s2 0.41).
