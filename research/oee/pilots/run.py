@@ -122,7 +122,12 @@ def main():
                          "(its own settings; --set is ignored)")
     ap.add_argument("--copy-eras", default="",
                     help="with --from: copy these archived iterations of the lab run in as checkpoints")
+    ap.add_argument("--resume", default="",
+                    help="ITERATION or 'last': go on in OUT from its own checkpoint, with its own settings "
+                         "(--set and --proto are ignored); the series is appended to")
     a = ap.parse_args()
+    if a.resume:
+        return resume(a)
 
     overrides = {}
     for kv in a.set:
@@ -159,11 +164,16 @@ def main():
         json.dump({"cfg": cfg.to_dict(), "proto": proto, "strain": cfg.strain_id(),
                    "iters": a.iters, "from": a.start or None}, f, indent=1)
 
-    rows = open(os.path.join(a.out, "series.jsonl"), "w")
+    run_loop(world, a, os.path.join(a.out, "series.jsonl"), mode="w", first_ckpt_done=bool(a.start))
+
+
+def run_loop(world, a, path, mode, first_ckpt_done):
+    """Step the world a.iters times: a row of the series each iteration, a checkpoint every a.ckpt."""
+    rows = open(path, mode)
     t0 = time.time()
     first = world.iteration
     for it in range(first, first + a.iters):
-        if a.ckpt and it % a.ckpt == 0 and not (a.start and it == first):
+        if a.ckpt and it % a.ckpt == 0 and not (first_ckpt_done and it == first):
             save_ckpt(world, a.out, it)
         world.c = {}
         world.step(record_decisions=False)
@@ -205,6 +215,39 @@ def main():
     if a.ckpt:
         save_ckpt(world, a.out, world.iteration)
     rows.close()
+
+
+def resume(a):
+    """Go on with a pilot world from one of its own checkpoints, for a.iters more iterations."""
+    import glob
+    from proto import ProtoConfig, ProtoWorld, restore_tags, set_proto
+    meta = json.load(open(os.path.join(a.out, "config.json")))
+    set_proto(meta.get("proto", {}))
+    if meta["cfg"].get("brain_kind") == "grow":
+        import grow
+        grow.install()
+    cfg = ProtoConfig.from_dict(meta["cfg"], stored=False)
+    cfg.extinction_threshold = 0
+    if a.resume == "last":
+        at = max(int(os.path.basename(f)[5:11]) for f in glob.glob(os.path.join(a.out, "ckpt_*.npz")))
+    else:
+        at = int(a.resume)
+    with np.load(os.path.join(a.out, f"ckpt_{at:06d}.npz"), allow_pickle=False) as z:
+        blob = {k: z[k] for k in z.files}
+    world = ProtoWorld.from_checkpoint(blob, cfg)
+    restore_tags(world, blob)
+    import grow
+    grow.restore_active(world, blob)
+    meta.setdefault("resumes", []).append({"at": at, "iters": a.iters})
+    with open(os.path.join(a.out, "config.json"), "w") as f:
+        json.dump(meta, f, indent=1)
+    # The series goes on from the checkpoint: rows after it, from a run that went further
+    # before, would be read twice.
+    path = os.path.join(a.out, "series.jsonl")
+    kept = [l for l in open(path) if json.loads(l)["it"] <= at] if os.path.exists(path) else []
+    with open(path, "w") as f:
+        f.writelines(kept)
+    run_loop(world, a, path, mode="a", first_ckpt_done=True)
 
 
 def save_ckpt(world, out, it):
