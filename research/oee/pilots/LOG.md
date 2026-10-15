@@ -544,8 +544,8 @@ rejudge.py, T = 100, once in each era's world, 188 contests + 12 self-contests
   one alliance).
 - Lab E12 (B1-5000): median 0.49 (0.31-0.77) vs 500, 0.56 vs 300.
 => B2's family keeps improving 500 -> 1,000 almost everywhere; B1's does not;
-the lottery stops evolution. Chapters 46, 55, 56, 57 corrected; 54 waits for
-its control S0-B2 (rejudge_control.txt).
+the lottery stops evolution. Chapters 46, 54, 55, 56, 57 corrected. Control S0-B2
+(rejudge_control.txt): 1,000 vs 500 0.692/0.670, vs 100 0.839/0.901.
 
 ## B2 to 10,000: a plateau after ~5,000 (2026-10-15, night)
 long_worlds.txt, T = 100, once in each era's world (s001/s002/s003):

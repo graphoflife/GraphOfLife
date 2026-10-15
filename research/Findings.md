@@ -273,7 +273,7 @@ alliance pilots played on 200 iterations; research/oee/checks)**
 **Earlier pilots re-judged a lifetime long (T = 100; rejudge.py, 2026-10-15)**
 - Control: eras against themselves 0.44–0.58 (12 contests, pilots and lab).
 - B2-based pilots keep evolving 500 -> 1,000 (later era's share, two seeds):
-  alliances 0.62/0.59, their control 0.70/0.62, kin pooled 0.80/0.59, support
+  B2 itself (S0) 0.69/0.67, alliances 0.62/0.59, their control 0.70/0.62, kin pooled 0.80/0.59, support
   doubled 0.69/0.97; Blotto without revolutions 0.76/0.61, gifts 0.87/0.83,
   lapse 0.65/0.53, estate by tokens 0.65/0.62; genotype pooling 0.59/0.65, kin
   sense 0.72/0.80, family sense 0.62/0.67, family pooling 0.46/0.78. Long

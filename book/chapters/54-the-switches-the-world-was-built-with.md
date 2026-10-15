@@ -137,7 +137,19 @@ against 3,400, and otherwise left it as it was.
 > 500 (0.73) where in contests of 20 they tied
 > ([Chapter 50](50-why-evolution-stops.md#would-we-notice-if-it-went-on)). Where
 > this chapter says that evolution stops, read: it stops *as far as a short
-> contest can see*. The longer contests are being played now.
+> contest can see*.
+>
+> The longer contests have since been played, 100 iterations each, once in
+> each era's world (`research/oee/checks/rejudge.py`, seed 17); eras played
+> against themselves that way hold 0.44 to 0.58. The brains of iteration 1,000
+> against those of 500, in the two seeds: B2 itself 0.69 and 0.67; without
+> revolutions 0.76 and 0.61; with gifts 0.87 and 0.83; with every unused link
+> lapsing 0.65 and 0.53; with the estate shared by wealth 0.65 and 0.62; with
+> gifts and lapsing links 0.25 and 0.62, in worlds whose networks were breaking.
+> So **in B2 and its variants evolution went on** between iterations 500 and
+> 1,000; the switches do not change that, they only change how fast. In B1
+> the short contests were right: with revolutions 0.37 and 0.68, without them
+> 0.35 and 0.16, where the later brains lost.
 
 <!-- figure switches/elo -->
 ![Does any switch keep evolution going?](../figures/switches/elo.svg)
