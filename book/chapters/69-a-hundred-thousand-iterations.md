@@ -269,5 +269,5 @@ windows of cooperation and the gains, and decides the thesis.
 <!-- turns -->
 ---
 
-← [Chapter 60 · Worlds of 100,000 tokens](60-worlds-of-100000-tokens.md) · [Contents](../README.md) · [Appendix A · What a simulation costs](A-costs.md) →
+← [Chapter 60 · Worlds of 100,000 tokens](60-worlds-of-100000-tokens.md) · [Contents](../README.md) · [Chapter 74 · Meta VI · Every world side by side](74-meta-6-every-world.md) →
 <!-- /turns -->

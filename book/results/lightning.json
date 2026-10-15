@@ -1,0 +1,75 @@
+{
+ "chapter": "lightning",
+ "numbers": {
+  "cyclingShare:B1 10k": 0.17275000000000001,
+  "cyclingShare:B1 fixed": 0.13,
+  "cyclingShare:B1 100k": 0.13435,
+  "cyclingShare:B1 sizes": 0.1433,
+  "cyclingShare:B2 10k": 0.045,
+  "cyclingShare:B2 var": 0.04592,
+  "cyclingShare:lapse": 0.24785000000000001,
+  "cyclingShare:B2 5k": 0.043265,
+  "netFlowShare:B1 10k": 0.258,
+  "netFlowShare:B1 fixed": 0.15477,
+  "netFlowShare:B1 100k": 0.24730000000000002,
+  "netFlowShare:B1 sizes": 0.3017,
+  "netFlowShare:B2 10k": 0.95485,
+  "netFlowShare:B2 var": 0.9543,
+  "netFlowShare:lapse": 0.15175,
+  "netFlowShare:B2 5k": 0.9562999999999999,
+  "lightningLongest:B1 10k": 18.625,
+  "lightningLongest:B1 fixed": 14.625,
+  "lightningLongest:B1 100k": 35.75,
+  "lightningLongest:B1 sizes": 14.5,
+  "lightningLongest:B2 10k": 2.375,
+  "lightningLongest:B2 var": 2.5,
+  "lightningLongest:lapse": 19.75,
+  "lightningLongest:B2 5k": 2.25,
+  "netCyclingShare:B1 10k": 0.001755,
+  "netCyclingShare:B1 fixed": 0.0,
+  "netCyclingShare:B1 100k": 0.0030275,
+  "netCyclingShare:B1 sizes": 0.002168,
+  "netCyclingShare:B2 10k": 0.00062385,
+  "netCyclingShare:B2 var": 0.0006112,
+  "netCyclingShare:lapse": 0.006029,
+  "netCyclingShare:B2 5k": 0.00088795,
+  "longest_exponent": 0.305,
+  "longest_at": {
+   "1600": 14.5,
+   "3200": 9.25,
+   "5000": 17.75,
+   "6400": 14.5,
+   "10000": 18.625,
+   "12800": 21.0,
+   "25600": 21.25,
+   "51200": 29.5,
+   "100000": 35.75,
+   "102400": 41.5,
+   "204800": 48.75,
+   "409600": 61.0
+  },
+  "hodge_vs_greedy_r": 0.875
+ },
+ "figures": {
+  "every_world": {
+   "title": "Loops of flow in every world",
+   "caption": "Each dot is one world, over iterations 900\u2013999 (400\u2013499 for a world that did not live to 1,000), a column per kind of world; the bar is the median. Top left: how much of what agents stake on their neighbours a greedy search can put on closed loops, before a token one way and a token back cancel. Top right: what is left once they cancel. Bottom: the longest loop found, and how much of the net flow goes round. B1 10k: the thirty B1 worlds of 10,000 tokens (Experiment 2); B1 fixed: the same with brains that never change (Experiment 7); B1 100k: B1 at 100,000 tokens (Experiment 10); B1 sizes: B1 at 800 to 409,600 tokens (Experiment 8) and at 5,000 with and without a hidden layer (Experiments 12 and 13); B2 10k: the ten B2 worlds of Experiment 16; B2 var: B2 with one rule or rate changed (Experiments 9, 15 and 16); B2 5k: B2 at 5,000 tokens, with all its rules or with one taken away (Experiment 14) \u2014 except lapse: the condition in which any unused link lapses; B1 and B2 pilots: the pilot worlds that play the engine's game.",
+   "recipe": "**Runs.** every simulation made so far, as `book/results/worlds.json` holds it (`python3 research/atlas/across.py lab`, `pilots`, `write`): a lab run's statistics are the means of its record over a stretch of iterations; a pilot's, of 20 games recorded from its checkpoint and summarised the same way.\n\n**Data.** From each world's `cyclingShare`, `netFlowShare`, `lightningLongest` and `netCyclingShare` (gol_lightning.py, on the heavy rows of a run's record).\n\n1. Take each world's mean over iterations 900\u2013999, or 400\u2013499 if it has no later one.\n2. Put it in the first group of the list in book_chapters/everyworld.py it belongs to.\n3. Draw one dot per world; the bar is each group's median.\n\n**To make it again:** `python3 book_figures.py lightning`."
+  },
+  "size": {
+   "title": "The longest loop grows with the world",
+   "caption": "The longest loop the greedy search finds in a B1 world, against the world's size, both axes logarithmic: the median grows as the tokens to the power 0.31, so a world twice the size has loops 1.24 times as long. The blue line is the same after a token one way and a token back have cancelled.",
+   "recipe": "**Runs.** The B1 worlds of Experiment 8 (800 to 409,600 tokens, three seeds each, over iterations 400\u2013499), of Experiments 12 and 2 (5,000 and 10,000 tokens) and of Experiment 10 (100,000 tokens), over iterations 900\u2013999.\n\n**Data.** From each world's mean `lightningLongest` and `netLightningLongest` in book/results/worlds.json.\n\n1. Take each world's mean of the longest loop over its stretch.\n2. Take the median at each size; fit a straight line to the logarithms.\n\n**To make it again:** `python3 book_figures.py lightning`."
+  },
+  "life": {
+   "title": "Through a world's life",
+   "caption": "The two statistics through the life of thirty B1 worlds (Experiment 2) and ten B2 worlds (Experiment 16): the median at each recorded iteration, with the middle half of the worlds as a band.",
+   "recipe": "**Runs.** The thirty B1 worlds of Experiment 2 and the ten B2 worlds of Experiment 16, 10,000 tokens each.\n\n**Data.** From `stats.jsonl`, the heavy rows (every 25th iteration).\n\n1. Read each world's statistic at every heavy row.\n2. Draw the median of the worlds and their middle half at each iteration.\n\n**To make it again:** `python3 book_figures.py lightning`."
+  },
+  "exact": {
+   "title": "A greedy count and an exact one",
+   "caption": "Each dot is a world: across, the exact share of the flow over 50 games that circulates (the Helmholtz\u2013Hodge decomposition of Chapter 58); up, the greedy loop count of a single game, averaged over the same thousand iterations.",
+   "recipe": "**Runs.** The ten B2 worlds of Experiment 16 and the first ten B1 worlds of Experiment 2, iterations 1,000 to 2,000.\n\n**Data.** From `GraphOfLifeRuns/.pilots/circulation_20.json` (research/oee/checks/circulation.py) and each world's `cyclingShare`.\n\n1. Take each world's circulating share, the median over its twenty windows of 50 games.\n2. Take its mean greedy loop share over the same iterations.\n3. Draw one against the other.\n\n**To make it again:** `python3 book_figures.py lightning`."
+  }
+ }
+}

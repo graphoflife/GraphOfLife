@@ -482,5 +482,5 @@ be changed and tested on its own.
 <!-- turns -->
 ---
 
-← [Chapter 39 · Questioning the mechanics](39-questioning-the-mechanics.md) · [Contents](../README.md) · [Chapter 41 · Do the brains matter?](41-do-the-brains-matter.md) →
+← [Chapter 39 · Questioning the mechanics](39-questioning-the-mechanics.md) · [Contents](../README.md) · [Chapter 72 · Lightning in every world](72-lightning-in-every-world.md) →
 <!-- /turns -->

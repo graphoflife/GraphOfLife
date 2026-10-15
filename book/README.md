@@ -76,6 +76,9 @@ everything can be checked with it.
 - [Chapter 38 · Do agents cooperate?](chapters/38-do-agents-cooperate.md)
 - [Chapter 39 · Questioning the mechanics](chapters/39-questioning-the-mechanics.md)
 - [Chapter 40 · Meta II · What the measurements say about open-ended evolution](chapters/40-meta-2.md)
+- Chapter 70 · How different are the agents? — *not written yet*
+- Chapter 71 · Flow modules: groups that outlast their members — *not written yet*
+- [Chapter 72 · Lightning in every world](chapters/72-lightning-in-every-world.md)
 
 **Part IV · One change at a time**
 
@@ -101,6 +104,7 @@ everything can be checked with it.
 - [Chapter 57 · Rules without numbers](chapters/57-rules-without-numbers.md)
 - [Chapter 58 · Gliders, and who helps whom](chapters/58-gliders-and-who-helps-whom.md)
 - Chapter 59 · Meta IV — *not written yet*
+- Chapter 73 · Who inherits? — *not written yet*
 
 **Part VI · Towards a physics: space, scale and locality**
 
@@ -117,6 +121,13 @@ everything can be checked with it.
 **Part VII · The long run**
 
 - [Chapter 69 · A hundred thousand iterations](chapters/69-a-hundred-thousand-iterations.md)
+
+**Part VIII · Across all worlds**
+
+- [Chapter 74 · Meta VI · Every world side by side](chapters/74-meta-6-every-world.md)
+- Chapter 75 · Meta VII · Where tokens go — *not written yet*
+- Chapter 76 · Meta VIII · Who helps whom — *not written yet*
+- Chapter 77 · Meta IX · How alike the agents are — *not written yet*
 
 **Notes · the rules**
 
@@ -175,6 +186,7 @@ everything can be checked with it.
 - [Exploitability](notes/exploitability.md)
 - [Flows that go round](notes/circulation.md)
 - [Help](notes/help.md)
+- [Flow modules and the map equation](notes/map-equation.md)
 
 **Notes · statistics**
 
@@ -197,6 +209,8 @@ everything can be checked with it.
 - [Fitting a straight line, and R²](notes/least-squares.md)
 - [Fitting a power law properly](notes/power-law-fit.md)
 - [The power spectrum of a time series](notes/power-spectrum.md)
+- [Where, who and chance: splitting a decision's variance](notes/variance-split.md)
+- [Effective numbers: how many kinds there really are](notes/effective-number.md)
 
 **Appendices**
 

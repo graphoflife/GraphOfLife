@@ -235,6 +235,22 @@
           "id": "40",
           "title": "Meta II · What the measurements say about open-ended evolution",
           "file": "chapters/40-meta-2.md"
+        },
+        {
+          "id": "70",
+          "title": "How different are the agents?",
+          "note": "Every brain of a world put into the same situations: how much of what an agent does comes from where it is, who it is and chance; how many kinds of behaviour live side by side, and whether they last."
+        },
+        {
+          "id": "71",
+          "title": "Flow modules: groups that outlast their members",
+          "note": "Groups of agents a token tends to stay inside (the map equation), followed from game to game in every world: how many, how long they live, and whether they renew their members or trade them."
+        },
+        {
+          "id": "72",
+          "title": "Lightning in every world",
+          "note": "Loops of flow measured in every world the book has made: B1's flow goes round and B2's runs one way, decided by whether unused links lapse; the longest loop is as long as the world is wide.",
+          "file": "chapters/72-lightning-in-every-world.md"
         }
       ]
     },
@@ -370,6 +386,11 @@
           "id": "59",
           "title": "Meta IV",
           "note": "What the engineering of Part V found: what makes a world that cannot break, what keeps evolution from going on, and the experiments that would show whether larger worlds go further."
+        },
+        {
+          "id": "73",
+          "title": "Who inherits?",
+          "note": "Three new rules for the estate of the dead — to the poorest, to the newborns, to their parents — tested in B1 and B2 worlds and compared with every earlier world."
         }
       ]
     },
@@ -434,6 +455,32 @@
           "file": "chapters/69-a-hundred-thousand-iterations.md",
           "experiment": "E11",
           "status": "draft"
+        }
+      ]
+    },
+    {
+      "title": "Part VIII · Across all worlds",
+      "chapters": [
+        {
+          "id": "74",
+          "title": "Meta VI · Every world side by side",
+          "note": "Every simulation made so far in one table: two clouds of worlds, what the settings decide and what the seed does, and which measure has been taken of which world.",
+          "file": "chapters/74-meta-6-every-world.md"
+        },
+        {
+          "id": "75",
+          "title": "Meta VII · Where tokens go",
+          "note": "What the book knows about flow: the even split, curvature, loops, circulation over time, modules, and the estate of the dead."
+        },
+        {
+          "id": "76",
+          "title": "Meta VIII · Who helps whom",
+          "note": "Every chapter that looked for cooperation, side by side: where help exists, why so little, what was tried to make it pay, and what would have to change."
+        },
+        {
+          "id": "77",
+          "title": "Meta IX · How alike the agents are",
+          "note": "Genotypes, brains and behaviour: how much of the variety of a world is real, and what it would take for many kinds to evolve."
         }
       ]
     },
@@ -704,6 +751,11 @@
           "id": "n-help",
           "title": "Help",
           "file": "notes/help.md"
+        },
+        {
+          "id": "n-map-equation",
+          "title": "Flow modules and the map equation",
+          "file": "notes/map-equation.md"
         }
       ]
     },
@@ -804,6 +856,16 @@
           "id": "n-power-spectrum",
           "title": "The power spectrum of a time series",
           "file": "notes/power-spectrum.md"
+        },
+        {
+          "id": "n-variance-split",
+          "title": "Where, who and chance: splitting a decision's variance",
+          "file": "notes/variance-split.md"
+        },
+        {
+          "id": "n-effective-number",
+          "title": "Effective numbers: how many kinds there really are",
+          "file": "notes/effective-number.md"
         }
       ]
     },
