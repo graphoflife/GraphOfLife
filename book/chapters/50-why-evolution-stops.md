@@ -279,6 +279,78 @@ random inputs. Both lie inside 0.45 to 0.55. A world that cannot break still
 stops improving, within its first few hundred iterations, and taking the
 random inputs away does not change that.
 
+
+> [!warning] Added later: the verdict stands, the reading does not
+> The thesis was judged as it was written, with contests of 20 iterations,
+> and it holds. But a contest of 20 iterations cannot see what pays off over
+> an agent's life of 100. In contests of 100 iterations the brains of
+> iteration 2,000 beat those of 500 in all ten worlds (0.73), and those of 200
+> (0.82). Evolution did not stop at iteration 200 to 500: it went on improving
+> what a short contest cannot show. See
+> [Would we notice if it went on?](#would-we-notice-if-it-went-on) below.
+
+## Would we notice if it went on?
+
+A tie with the past is what a world that has stopped looks like. Before
+believing that these worlds have stopped, it is fair to ask what the yardstick
+would miss. The author of the simulation asked exactly that, and there are at
+least four ways it could.
+
+**Improvement too slow to see.** One contest's share varies by about 0.046
+around the mean of its pair, so a single world's two contests pin a score to
+within about 0.03. But the ten worlds agree with each other closely: the
+median score of iteration 2,000 against 500 is 0.482, with a standard error of
+0.005, and even the top of its 95% range, 0.492, lies below a tie. So between
+iterations 500 and 2,000 these worlds did not improve, not even slowly. They
+lost a little. What happens after iteration 2,000 this experiment cannot say.
+
+**Change that goes round in circles.** In a *Red Queen* race every era would
+be adapted to its own world. It would win at home and lose away, while no era
+was better than another overall. The contests are played once in each era's
+world, so this would show as a home advantage of the later era, but there is
+none. For pairs from iteration 200 on, the later era's share at home minus
+its share away averaged −0.006, positive in 46 of 100 pairs.
+
+**Traits a short contest cannot show.** A contest lasts 20 iterations and an
+agent lives 100. What a brain does for its children over a whole life barely
+shows in 20 iterations, so the late eras were played again in contests five
+times as long, 100 iterations, once in each era's world.
+
+The answer is unambiguous. In contests of 100 iterations the brains of
+iteration 2,000 held 0.73 of the world against those of iteration 500 in the
+median world, and more than half in all ten worlds. They held 0.70 in
+iteration 500's world and 0.77 in their own. Against the brains of iteration
+200 they held 0.82, and those of 200 held 0.75 against those of 100. Two
+controls make sure the contest is fair. The brains of iteration 2,000 played
+against themselves held 0.48 (0.44 to 0.54), a tie. With the labels swapped,
+the brains of 500 counted as the later era, those of 500 held 0.26 against
+those of 2,000.
+
+So the twenty worlds did not stop evolving at iteration 200 or 500. In a
+contest of 20 iterations the later brains start a little behind (0.48); over
+a life they overtake. What evolution kept improving pays off slowly, and the
+yardstick of [Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md) was
+too short to see it. How far the improvement goes, step by step, and whether
+it continues past iteration 2,000, is being measured now: the ten worlds are
+being continued to iteration 10,000.
+
+**Distance to the best play.** A tie between eras says nothing about how good
+both are. [Exploitability](../notes/exploitability.md) measures it from
+outside. For each agent it asks how much more it would hold after a game if
+it alone played its best reply to everyone else.
+
+<!-- figure stopping/exploit -->
+
+The founders could have gained 0.87 nodes a game by their best replies, in
+the median B2 world. The brains of iteration 200 could have gained 1.49, and
+those of 1,000 to 2,000 about 1.2. At iteration 2,000, 87% of agents could
+have held at least half a node more. Evolution made the brains better at
+holding what they have: 1.23 nodes a game at iteration 100 against the
+founders' 1.00. But it did not move them towards an equilibrium. It moved
+them away from one, and from iteration 1,000 on they stayed where they were.
+Without random inputs the picture is the same, with a peak of 1.75 at
+iteration 200 and 1.33 at 2,000.
+
 ## What the probes say about why
 
 The thesis said *that* evolution stops, and it does. The reason this chapter

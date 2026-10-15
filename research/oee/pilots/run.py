@@ -117,6 +117,11 @@ def main():
     ap.add_argument("--health", type=int, default=10)
     ap.add_argument("--set", nargs="*", default=[])
     ap.add_argument("--proto", nargs="*", default=[])
+    ap.add_argument("--from", dest="start", default="",
+                    help="RUN:ITERATION: go on from a lab run's archive instead of new founders "
+                         "(its own settings; --set is ignored)")
+    ap.add_argument("--copy-eras", default="",
+                    help="with --from: copy these archived iterations of the lab run in as checkpoints")
     a = ap.parse_args()
 
     overrides = {}
@@ -135,18 +140,30 @@ def main():
     if overrides.get("brain_kind") == "grow":
         import grow
         grow.install()
-    cfg = make_config(**overrides)
-    cfg.extinction_threshold = 0
     os.makedirs(a.out, exist_ok=True)
+    if a.start:
+        import gol_store as store
+        from proto import ProtoConfig, ProtoWorld
+        run, at = a.start.rsplit(":", 1)
+        cfg = ProtoConfig.from_dict(store.load_meta(run)["config"])
+        cfg.extinction_threshold = 0
+        world = ProtoWorld.from_checkpoint(store.load_archive(run, int(at)), cfg)
+        for era in [int(e) for e in a.copy_eras.split(",") if e]:
+            import shutil
+            shutil.copy(store.archive_path(run, era), os.path.join(a.out, f"ckpt_{era:06d}.npz"))
+    else:
+        cfg = make_config(**overrides)
+        cfg.extinction_threshold = 0
+        world = make_world(cfg, proto)
     with open(os.path.join(a.out, "config.json"), "w") as f:
         json.dump({"cfg": cfg.to_dict(), "proto": proto, "strain": cfg.strain_id(),
-                   "iters": a.iters}, f, indent=1)
+                   "iters": a.iters, "from": a.start or None}, f, indent=1)
 
-    world = make_world(cfg, proto)
     rows = open(os.path.join(a.out, "series.jsonl"), "w")
     t0 = time.time()
-    for it in range(a.iters):
-        if a.ckpt and it % a.ckpt == 0:
+    first = world.iteration
+    for it in range(first, first + a.iters):
+        if a.ckpt and it % a.ckpt == 0 and not (a.start and it == first):
             save_ckpt(world, a.out, it)
         world.c = {}
         world.step(record_decisions=False)

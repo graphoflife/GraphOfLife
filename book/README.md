@@ -171,6 +171,7 @@ everything can be checked with it.
 - [What the viewer can colour by](notes/viewer-colours.md)
 - [Pilot worlds](notes/pilot-worlds.md)
 - [The invasion test](notes/invasion-test.md)
+- [Exploitability](notes/exploitability.md)
 
 **Notes · statistics**
 

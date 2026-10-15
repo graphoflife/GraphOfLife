@@ -774,6 +774,41 @@ def tournament_long(run_id: str) -> Dict[str, Any]:
             "contests": played["contests"]}
 
 
+EXPLOIT_FILE = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                            "research", "oee", "checks", "exploitability.py")
+EXPLOIT_DRAWS, EXPLOIT_SAMPLE = 8, 300
+_EXPLOIT = None
+
+
+def _exploit_era(task):
+    """One world at one era: what its agents hold in a game, and what their best replies would."""
+    global _EXPLOIT
+    if _EXPLOIT is None:
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("oee_exploit", EXPLOIT_FILE)
+        _EXPLOIT = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(_EXPLOIT)
+    run_id, era = task
+    return _EXPLOIT.analyse((run_id, era, EXPLOIT_DRAWS, EXPLOIT_SAMPLE, 1234))
+
+
+def _want_exploit(run_id: str) -> Dict[str, Any]:
+    have = set(store.archived(run_id))
+    return {"eras": [e for e in E16_ERAS if e in have], "draws": EXPLOIT_DRAWS, "sample": EXPLOIT_SAMPLE}
+
+
+@D.measure("exploitability", field="key", want=_want_exploit)
+def exploitability(run_id: str) -> Dict[str, Any]:
+    """Exploitability of a world's brains at each era (the note *Exploitability*)."""
+    eras = _want_exploit(run_id)["eras"]
+    if not eras:
+        return {"eras": [], "rows": []}
+    from concurrent.futures import ProcessPoolExecutor
+    with ProcessPoolExecutor(_jobs()) as pool:
+        rows = list(pool.map(_exploit_era, [(run_id, e) for e in eras]))
+    return {"eras": eras, "rows": rows}
+
+
 @chapter
 def stopping(ch: F.Chapter) -> None:
     specs = {c: [s for s in runs_of("E16", c) if _lived(s.run_id) >= 2000]
@@ -827,5 +862,42 @@ def stopping(ch: F.Chapter) -> None:
                                  for e in E16_ERAS} for c in E16_CONDITIONS})
     ch.number("champions_eras", {c: [tour.dominance(p["eras"], p["contests"]) for p in played[c]]
                                  for c in E16_CONDITIONS})
+
+    exploited = {c: [exploitability(s.run_id) for s in specs[c]] for c in E16_CONDITIONS}
+    lines = []
+    for k, c in enumerate(E16_CONDITIONS):
+        table = [{r["iteration"]: r["exploitability"] for r in w["rows"]} for w in exploited[c]]
+        for row in table:
+            lines.append({"x": list(row), "y": list(row.values()), "colour": COLOURS[k], "alpha": 0.3,
+                          "width": 1})
+        lines.append({"x": list(E16_ERAS), "y": [float(np.median([row[e] for row in table if e in row]))
+                                                 for e in E16_ERAS],
+                      "colour": COLOURS[k], "width": 3, "label": c})
+    ch.figure("exploit", title="How far from an equilibrium",
+              x={"label": "iteration the brains are taken from"},
+              y={"label": "nodes a best reply would gain, per agent and game", "min": 0},
+              series=lines,
+              caption=("For a sample of 300 agents with at least three tokens: how many more nodes each "
+                       "would hold after one game with its best reply to everyone else's play than with "
+                       "its own, averaged. Zero would be an equilibrium. Thin lines are single worlds, "
+                       "thick ones the median world of each condition."),
+              recipe=recipe(E16_RUNS, ARCHIVE.replace("every 50", "every 100"), [
+                  "Load the world of each era, play one game so that its messages are fresh, and draw "
+                  "the random inputs eight times; for each draw, turn every agent's brain outputs into "
+                  "stakes as the engine does (`research/oee/checks/exploitability.py`).",
+                  "Score a way of staking by the nodes an agent holds after the game (its own, and "
+                  "every neighbour's it takes), everyone else as drawn and each node decided by the "
+                  "engine's rule, averaged over the eight draws.",
+                  "An agent's best reply is the best of: everything at home; for each draw, the "
+                  "cheapest stakes that keep its node and then take the cheapest neighbours (one token "
+                  "above the largest rival offer), or that only take them. Its exploitability is the "
+                  "best reply's score minus its own; average over the agents (see the note "
+                  "*Exploitability*)."]))
+    ch.number("exploitability", {c: {e: describe([r["exploitability"] for w in exploited[c] for r in w["rows"]
+                                                  if r["iteration"] == e]) for e in E16_ERAS}
+                                 for c in E16_CONDITIONS})
+    ch.number("holds", {c: {e: describe([r["actual"] for w in exploited[c] for r in w["rows"]
+                                         if r["iteration"] == e]) for e in E16_ERAS}
+                        for c in E16_CONDITIONS})
     ch.number("champions", {c: [len(tour.dominance(p["eras"], p["contests"])) for p in played[c]]
                             for c in E16_CONDITIONS})

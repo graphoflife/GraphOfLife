@@ -421,3 +421,41 @@ clone groups at 1,500 (clones-1500). Every pair ties (medians 0.49-0.52), every
 rate stops by ~500 (1,500 vs 1,000: 0.49-0.51); worlds differ in genes (0.20 ->
 0.90 genotypes per agent), clone groups (~8 -> 1.2) and size (3,730 -> 2,600).
 Thesis held.
+
+## Would we notice open-ended evolution? (2026-10-15, evening; the author's question)
+- Power of the yardstick (E16 B2): 2,000 vs 500 median 0.482, SE 0.005 across
+  worlds (one contest +-0.046, a world's two-contest mean +-0.033); 95% upper
+  bound 0.492: between 500 and 2,000 B2 did not improve, not even slowly.
+  Beyond 2,000, and in contests longer than 20 iterations, nothing is known.
+- No Red Queen signature: a later era's share at home minus away, pairs from
+  200 on, mean -0.006 (positive in 46 of 100 pairs; 39/100 without dice).
+- Exploitability (research/oee/checks/exploitability.py): per agent, the
+  nodes it would hold after one game with its best reply to the others' play
+  (K = 8 draws of the dice, everyone else as drawn), minus what it holds with
+  its own play. B2, median of 10 worlds: 0 0.87 | 100 1.16 | 200 1.49 | 500
+  1.33 | 1,000 1.21 | 1,500 1.26 | 2,000 1.20 (holds 1.00 -> 1.23 -> 1.13; 87%
+  of agents gain >= half a node at 2,000). Without dice: 0.94 -> 1.75 (200) ->
+  1.33. Evolution moves away from a one-game equilibrium, then stays put.
+- A continuation from a lab archive is exact (run.py --from RUN:IT; 100
+  iterations from B2-10000-s001 at 1,900 identical to the lab's in agents,
+  links and Gini).
+- Long runs started (jobs_L.txt, GraphOfLifeRuns/.pilots/L): the ten B2 worlds
+  of E16 continued 2,000 -> 10,000 (checkpoints every 500, the lab's archives
+  0..2,000 copied in), and B1 at 10,000 tokens, seeds 1-2, 10,000 iterations.
+  Then: tournaments 2,000 vs 10,000 etc. (detects drift of ~2 Elo per 1,000
+  iterations), exploitability at 10,000, contests of T = 100.
+
+## Lifetime contests: evolution did NOT stop (2026-10-15, evening)
+research/oee/checks/long_contests.py, E16's ten B2 worlds, contests of T = 100
+(an agent's lifetime) instead of 20, once in each era's world:
+- 2,000 vs 500: median 0.734 (0.65-0.83), 10 of 10 worlds above a half
+  (0.700 in 500's world, 0.771 in 2,000's); token share 0.78.
+- 2,000 vs 200: 0.820 (0.75-0.92), 10/10.   200 vs 100: 0.749, 10/10.
+- At T = 20 the same pair 2,000 vs 500 is 0.482: the later brains start a little
+  behind and overtake over a life.
+- Controls (contest_controls.py, T = 100): era 2,000 against itself 0.476
+  (0.44-0.54) - a tie; labels swapped (2,000 as A, 500 as B): B holds 0.257.
+=> The 20-iteration yardstick is blind to what pays over a lifetime. Chapter
+50's "evolution stops by 200-500" and every pilot verdict drawn from T = 20
+tournaments must be re-examined. Running: steps at T = 100 (0->100 ... 1,500->
+2,000, and 1,000->2,000), long_steps.json.

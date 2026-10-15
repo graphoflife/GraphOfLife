@@ -170,6 +170,20 @@ mutation probability per copy 0.05/0.1/0.2/0.4/0.8, 10 seeds each, to 1,500)**
 - No mutation–selection balance or error threshold in play up to 0.8. More
   variation, or larger families, do not find the better play of Ch. 51.
 
+**The yardstick was too short (2026-10-15, evening; the author's question)**
+- Contests of 20 iterations miss what pays over a lifetime (B2: everyone dies at
+  100). In contests of T = 100, E16's B2 brains of 2,000 beat those of 500
+  (0.73, 10/10 worlds), of 200 (0.82); 200 beats 100 (0.75). At T = 20 the same
+  pair was 0.48. Controls at T = 100: self vs self 0.48, labels swapped 0.26.
+- So "evolution stops by 200–500" (Ch. 50, 52, and the pilot chapters 54–56)
+  holds only for what a 20-iteration contest can see. Steps at T = 100 and the
+  ten B2 worlds continued to 10,000 are being run.
+- Detection otherwise: E16's T = 20 data exclude even slow improvement between
+  500 and 2,000 (2,000 vs 500 = 0.482 ± 0.005); no Red Queen signature (home
+  minus away −0.006). Exploitability (one game): founders 0.87 → 1.49 (200) →
+  ~1.2 from 1,000 on — the brains move away from a one-game equilibrium and
+  stay there (note *Exploitability*).
+
 **Strategies written by hand (Ch. 51; manual.py, the invasion test)**
 - In E16's B2 world s002 at 2,000 a 5% patch of raiders (all they can stake on
   the poorest stranger they are sure to take, else home; a password so they

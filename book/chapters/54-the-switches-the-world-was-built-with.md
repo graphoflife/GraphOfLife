@@ -130,6 +130,15 @@ against 3,400, and otherwise left it as it was.
 
 ## Does any switch keep evolution going?
 
+> [!warning] Added later: these contests were 20 iterations long
+> Every tournament in this chapter was played with contests of 20 iterations.
+> In B2's worlds such contests miss what pays off over an agent's life of 100
+> iterations: in contests of 100 the brains of iteration 2,000 beat those of
+> 500 (0.73) where in contests of 20 they tied
+> ([Chapter 50](50-why-evolution-stops.md#would-we-notice-if-it-went-on)). Where
+> this chapter says that evolution stops, read: it stops *as far as a short
+> contest can see*. The longer contests are being played now.
+
 <!-- figure switches/elo -->
 ![Does any switch keep evolution going?](../figures/switches/elo.svg)
 

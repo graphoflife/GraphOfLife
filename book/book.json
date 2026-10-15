@@ -682,6 +682,11 @@
           "id": "n-invasion-test",
           "title": "The invasion test",
           "file": "notes/invasion-test.md"
+        },
+        {
+          "id": "n-exploitability",
+          "title": "Exploitability",
+          "file": "notes/exploitability.md"
         }
       ]
     },

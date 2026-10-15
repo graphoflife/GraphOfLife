@@ -116,6 +116,18 @@ all alike, however far apart. Of the four warnings above, this answers the
 last three — a tournament counts nothing, has no floor to lean on, and plays
 the settled world against its own past rather than against its boom.
 
+> [!info] Added later: a contest must last as long as what it judges
+> Twenty iterations is long enough for most of a world of B1 to change hands,
+> but not for an agent of B2 to live its life: there everyone dies at age 100.
+> In B2's worlds the brains of iteration 2,000 tied with those of iteration 500
+> in contests of 20 iterations (0.48), and beat them in contests of 100 (0.73,
+> in all ten worlds; brains against themselves 0.48, the labels swapped 0.26).
+> What evolution improved there pays off slowly, over a life, and a short
+> contest cannot see it. The tournaments of this book were played with 20
+> iterations until 2026-10-15; [Chapter 50](50-why-evolution-stops.md#would-we-notice-if-it-went-on)
+> shows what longer ones find.
+
+
 ## The network that holds, in numbers
 
 The second half of the goal is a property of the network, and every part of

@@ -193,6 +193,15 @@ them, and that is the part evolution would still have to find.
 
 ## What it teaches
 
+> [!warning] Added later: these contests were 20 iterations long
+> Every tournament in this chapter was played with contests of 20 iterations.
+> In B2's worlds such contests miss what pays off over an agent's life of 100
+> iterations: in contests of 100 the brains of iteration 2,000 beat those of
+> 500 (0.73) where in contests of 20 they tied
+> ([Chapter 50](50-why-evolution-stops.md#would-we-notice-if-it-went-on)). Where
+> this chapter says that evolution stops, read: it stops *as far as a short
+> contest can see*. The longer contests are being played now.
+
 **Another contest moves where evolution stops, not whether it does.** A
 lottery stops it almost where it starts. Pooling by genotype and a sense of
 kin stop it where Blotto does. Every one of these worlds kept a network that
