@@ -181,6 +181,20 @@ come next:
   young in B2, and the tree of old agents above shows what a world without
   it can become.
 
+> [!info] First tries
+> Two of these candidates have been tried since, briefly. **Links that cost**
+> fail as gifts stand: with every unused link lapsing, the brains do not pay
+> for the links that hold their world together, and the network breaks as it
+> does without gifts ([Chapter 54](54-the-switches-the-world-was-built-with.md)).
+> **Birth by division** stops the missiles but not the starving: alone, a world
+> of 3,000 tokens starved out in 60 iterations. With half of every agent's
+> tokens kept at home, a world lived, but most of its agents held a single
+> token, and half of one token is no child. With B2's rules of space added,
+> births stopped altogether, and with no age limit nobody died. Replacing the
+> numbers one by one leaves the problems they solved; what replaces them has
+> to solve those problems too (`research/oee/pilots/LOG.md`, *Number-free
+> candidates*).
+
 <!-- turns -->
 ---
 
