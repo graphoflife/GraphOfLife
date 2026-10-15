@@ -852,6 +852,7 @@ class ProtoWorld(GraphOfLife):
         new_brains = dict(self.brains)
         mor = P.get("mor", "off")
         gain = float(P.get("support_gain", 1.0))
+        won: Dict[int, int] = {}
         for v in list(self.G.nodes()):
             offers = allocations_to[v]
             if not offers and not support_to.get(v):
@@ -876,6 +877,7 @@ class ProtoWorld(GraphOfLife):
                 self._count("protected")
             new_brains[v] = self._copy_brain(self.brains[winner])
             new_tokens[v] = int(incoming_totals[v])
+            won[v] = winner
             if winner != v:
                 self._count("conquests")
                 if self.root(winner) == self.root(v):
@@ -888,6 +890,9 @@ class ProtoWorld(GraphOfLife):
         self.tokens = new_tokens
         self.brains = new_brains
         self.last_allies = allies_now
+        # Who took each node this game (nodes nobody staked on are absent): with
+        # last_alloc, what research/oee/checks/pilot_frames.py records.
+        self.last_winners = won
         if P.get("yield_tax", 0.0) > 0:
             self._mutual_yield(sent)
 

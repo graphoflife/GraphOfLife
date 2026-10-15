@@ -276,6 +276,298 @@
     ]
    ]
   },
+  "exploitability": {
+   "B2": {
+    "0": {
+     "n": 10,
+     "mean": 0.8577945506448351,
+     "median": 0.8674835706462212,
+     "sd": 0.05200841529626698,
+     "min": 0.7937853107344632,
+     "max": 0.9360294117647059,
+     "q25": 0.8069131180079394,
+     "q75": 0.8946534253945481
+    },
+    "100": {
+     "n": 10,
+     "mean": 1.1567916666666667,
+     "median": 1.1556250000000001,
+     "sd": 0.14046660146292145,
+     "min": 0.96625,
+     "max": 1.3866666666666667,
+     "q25": 1.0648958333333334,
+     "q75": 1.2555208333333332
+    },
+    "200": {
+     "n": 10,
+     "mean": 1.4710416666666668,
+     "median": 1.4929166666666664,
+     "sd": 0.22140433255070285,
+     "min": 1.1429166666666666,
+     "max": 1.86875,
+     "q25": 1.3260416666666666,
+     "q75": 1.5785416666666665
+    },
+    "500": {
+     "n": 10,
+     "mean": 1.3342083333333332,
+     "median": 1.328125,
+     "sd": 0.19448139033920858,
+     "min": 1.0875,
+     "max": 1.7654166666666666,
+     "q25": 1.2198958333333332,
+     "q75": 1.3507291666666665
+    },
+    "1000": {
+     "n": 10,
+     "mean": 1.2322083333333333,
+     "median": 1.2083333333333333,
+     "sd": 0.11790906761275254,
+     "min": 1.0783333333333334,
+     "max": 1.4058333333333333,
+     "q25": 1.1373958333333334,
+     "q75": 1.3189583333333335
+    },
+    "1500": {
+     "n": 10,
+     "mean": 1.2514583333333333,
+     "median": 1.2625,
+     "sd": 0.1750678054266791,
+     "min": 1.0520833333333333,
+     "max": 1.61375,
+     "q25": 1.1063541666666667,
+     "q75": 1.3103125
+    },
+    "2000": {
+     "n": 10,
+     "mean": 1.2274166666666666,
+     "median": 1.2033333333333334,
+     "sd": 0.12489158879050773,
+     "min": 0.9929166666666667,
+     "max": 1.4170833333333333,
+     "q25": 1.1867708333333333,
+     "q75": 1.3161458333333333
+    }
+   },
+   "no random inputs": {
+    "0": {
+     "n": 10,
+     "mean": 0.9398537486435858,
+     "median": 0.9368743945753955,
+     "sd": 0.08308331960956664,
+     "min": 0.8295454545454546,
+     "max": 1.0825757575757575,
+     "q25": 0.8763155563430192,
+     "q75": 0.995544315992293
+    },
+    "100": {
+     "n": 10,
+     "mean": 1.3916666666666666,
+     "median": 1.3870833333333334,
+     "sd": 0.13759410360069585,
+     "min": 1.17125,
+     "max": 1.6575,
+     "q25": 1.2991666666666666,
+     "q75": 1.4692708333333333
+    },
+    "200": {
+     "n": 10,
+     "mean": 1.734416666666667,
+     "median": 1.7485416666666667,
+     "sd": 0.19704248460862636,
+     "min": 1.3891666666666667,
+     "max": 2.077916666666667,
+     "q25": 1.6148958333333332,
+     "q75": 1.8509375000000001
+    },
+    "500": {
+     "n": 10,
+     "mean": 1.4771666666666665,
+     "median": 1.4572916666666669,
+     "sd": 0.13486930687992585,
+     "min": 1.3166666666666667,
+     "max": 1.7825,
+     "q25": 1.3924999999999998,
+     "q75": 1.4808333333333332
+    },
+    "1000": {
+     "n": 10,
+     "mean": 1.3157083333333335,
+     "median": 1.2964583333333333,
+     "sd": 0.1330039406382707,
+     "min": 1.1141666666666667,
+     "max": 1.5583333333333333,
+     "q25": 1.2651041666666667,
+     "q75": 1.3666666666666667
+    },
+    "1500": {
+     "n": 10,
+     "mean": 1.3859166666666665,
+     "median": 1.3720833333333333,
+     "sd": 0.12830714619783307,
+     "min": 1.1854166666666666,
+     "max": 1.6225,
+     "q25": 1.31125,
+     "q75": 1.4154166666666668
+    },
+    "2000": {
+     "n": 10,
+     "mean": 1.376625,
+     "median": 1.3279166666666666,
+     "sd": 0.16368165452419456,
+     "min": 1.1854166666666666,
+     "max": 1.7008333333333334,
+     "q25": 1.2705208333333333,
+     "q75": 1.4684375
+    }
+   }
+  },
+  "holds": {
+   "B2": {
+    "0": {
+     "n": 10,
+     "mean": 1.0038392060938928,
+     "median": 1.0045059182209468,
+     "sd": 0.005085114670283559,
+     "min": 0.9963235294117647,
+     "max": 1.012857142857143,
+     "q25": 1.000742986739859,
+     "q75": 1.0059578839239856
+    },
+    "100": {
+     "n": 10,
+     "mean": 1.2360416666666667,
+     "median": 1.2277083333333332,
+     "sd": 0.04053093335517918,
+     "min": 1.1879166666666667,
+     "max": 1.29,
+     "q25": 1.2,
+     "q75": 1.2740625
+    },
+    "200": {
+     "n": 10,
+     "mean": 1.212,
+     "median": 1.2327083333333333,
+     "sd": 0.04727562340045065,
+     "min": 1.1016666666666666,
+     "max": 1.2566666666666666,
+     "q25": 1.1901041666666665,
+     "q75": 1.2373958333333333
+    },
+    "500": {
+     "n": 10,
+     "mean": 1.1653333333333333,
+     "median": 1.165625,
+     "sd": 0.019597414165529823,
+     "min": 1.1383333333333334,
+     "max": 1.1975,
+     "q25": 1.1546874999999999,
+     "q75": 1.1723958333333333
+    },
+    "1000": {
+     "n": 10,
+     "mean": 1.1529583333333335,
+     "median": 1.155,
+     "sd": 0.0204873587190724,
+     "min": 1.1216666666666666,
+     "max": 1.1825,
+     "q25": 1.138125,
+     "q75": 1.1671875
+    },
+    "1500": {
+     "n": 10,
+     "mean": 1.1367916666666666,
+     "median": 1.1368749999999999,
+     "sd": 0.027955024780776536,
+     "min": 1.0916666666666666,
+     "max": 1.1725,
+     "q25": 1.1152083333333334,
+     "q75": 1.1629166666666668
+    },
+    "2000": {
+     "n": 10,
+     "mean": 1.1300416666666666,
+     "median": 1.133125,
+     "sd": 0.020240119140941495,
+     "min": 1.09375,
+     "max": 1.1591666666666667,
+     "q25": 1.1170833333333332,
+     "q75": 1.1432291666666667
+    }
+   },
+   "no random inputs": {
+    "0": {
+     "n": 10,
+     "mean": 1.0021994325542714,
+     "median": 1.0,
+     "sd": 0.00397554438277334,
+     "min": 1.0,
+     "max": 1.0116959064327486,
+     "q25": 1.0,
+     "q75": 1.0033885542168675
+    },
+    "100": {
+     "n": 10,
+     "mean": 1.1814166666666668,
+     "median": 1.1791666666666667,
+     "sd": 0.047287210183236464,
+     "min": 1.0975,
+     "max": 1.25125,
+     "q25": 1.1629166666666666,
+     "q75": 1.2054166666666666
+    },
+    "200": {
+     "n": 10,
+     "mean": 1.098375,
+     "median": 1.0899999999999999,
+     "sd": 0.04400935033224947,
+     "min": 1.03875,
+     "max": 1.16375,
+     "q25": 1.0713541666666666,
+     "q75": 1.1366666666666667
+    },
+    "500": {
+     "n": 10,
+     "mean": 1.06875,
+     "median": 1.0754166666666667,
+     "sd": 0.03564279661610862,
+     "min": 1.01,
+     "max": 1.1345833333333333,
+     "q25": 1.0529166666666665,
+     "q75": 1.0811458333333333
+    },
+    "1000": {
+     "n": 10,
+     "mean": 1.082875,
+     "median": 1.0816666666666666,
+     "sd": 0.02969264494079712,
+     "min": 1.0470833333333334,
+     "max": 1.13875,
+     "q25": 1.0594791666666667,
+     "q75": 1.0930208333333333
+    },
+    "1500": {
+     "n": 10,
+     "mean": 1.0764583333333333,
+     "median": 1.078125,
+     "sd": 0.027066768438505976,
+     "min": 1.0316666666666667,
+     "max": 1.1170833333333334,
+     "q25": 1.0676041666666667,
+     "q75": 1.0916666666666668
+    },
+    "2000": {
+     "n": 10,
+     "mean": 1.06225,
+     "median": 1.0631249999999999,
+     "sd": 0.020982981051965905,
+     "min": 1.0258333333333334,
+     "max": 1.0908333333333333,
+     "q25": 1.0466666666666666,
+     "q75": 1.0764583333333333
+    }
+   }
+  },
   "champions": {
    "B2": [
     3,
@@ -313,6 +605,11 @@
    "title": "Each era against the one before",
    "caption": "One dot per world: the later era's share of the agents, the mean of its two contests with the era before. The bars are the medians.",
    "recipe": "**Runs.** The 20 runs of Experiment 16 \u2014 B2 at 10,000 tokens, seeds 1 to 10, 2,000 iterations, a whole world archived every 100 \u2014 with and without the random inputs. They are made with `python3 gol_lab.py run E16`.\n\n**Data.** From each run's archive, `GraphOfLifeRuns/<run>/archive/world_<iteration>.npz`: the whole world as a checkpoint writes it, kept every 100 iterations.\n\n1. Of the contests of the figure above, take those between consecutive eras and average each pair's two.\n\n**To make it again:** `python3 book_figures.py stopping`."
+  },
+  "exploit": {
+   "title": "How far from an equilibrium",
+   "caption": "For a sample of 300 agents with at least three tokens: how many more nodes each would hold after one game with its best reply to everyone else's play than with its own, averaged. Zero would be an equilibrium. Thin lines are single worlds, thick ones the median world of each condition.",
+   "recipe": "**Runs.** The 20 runs of Experiment 16 \u2014 B2 at 10,000 tokens, seeds 1 to 10, 2,000 iterations, a whole world archived every 100 \u2014 with and without the random inputs. They are made with `python3 gol_lab.py run E16`.\n\n**Data.** From each run's archive, `GraphOfLifeRuns/<run>/archive/world_<iteration>.npz`: the whole world as a checkpoint writes it, kept every 100 iterations.\n\n1. Load the world of each era, play one game so that its messages are fresh, and draw the random inputs eight times; for each draw, turn every agent's brain outputs into stakes as the engine does (`research/oee/checks/exploitability.py`).\n2. Score a way of staking by the nodes an agent holds after the game (its own, and every neighbour's it takes), everyone else as drawn and each node decided by the engine's rule, averaged over the eight draws.\n3. An agent's best reply is the best of: everything at home; for each draw, the cheapest stakes that keep its node and then take the cheapest neighbours (one token above the largest rival offer), or that only take them. Its exploitability is the best reply's score minus its own; average over the agents (see the note *Exploitability*).\n\n**To make it again:** `python3 book_figures.py stopping`."
   }
  }
 }

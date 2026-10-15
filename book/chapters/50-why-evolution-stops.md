@@ -340,6 +340,21 @@ outside. For each agent it asks how much more it would hold after a game if
 it alone played its best reply to everyone else.
 
 <!-- figure stopping/exploit -->
+![How far from an equilibrium](../figures/stopping/exploit.svg)
+
+**How far from an equilibrium.** For a sample of 300 agents with at least three tokens: how many more nodes each would hold after one game with its best reply to everyone else's play than with its own, averaged. Zero would be an equilibrium. Thin lines are single worlds, thick ones the median world of each condition.
+
+> [!example]- How to make this figure
+> **Runs.** The 20 runs of Experiment 16 — B2 at 10,000 tokens, seeds 1 to 10, 2,000 iterations, a whole world archived every 100 — with and without the random inputs. They are made with `python3 gol_lab.py run E16`.
+>
+> **Data.** From each run's archive, `GraphOfLifeRuns/<run>/archive/world_<iteration>.npz`: the whole world as a checkpoint writes it, kept every 100 iterations.
+>
+> 1. Load the world of each era, play one game so that its messages are fresh, and draw the random inputs eight times; for each draw, turn every agent's brain outputs into stakes as the engine does (`research/oee/checks/exploitability.py`).
+> 2. Score a way of staking by the nodes an agent holds after the game (its own, and every neighbour's it takes), everyone else as drawn and each node decided by the engine's rule, averaged over the eight draws.
+> 3. An agent's best reply is the best of: everything at home; for each draw, the cheapest stakes that keep its node and then take the cheapest neighbours (one token above the largest rival offer), or that only take them. Its exploitability is the best reply's score minus its own; average over the agents (see the note *Exploitability*).
+>
+> **To make it again:** `python3 book_figures.py stopping`.
+<!-- /figure -->
 
 The founders could have gained 0.87 nodes a game by their best replies, in
 the median B2 world. The brains of iteration 200 could have gained 1.49, and
