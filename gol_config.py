@@ -201,7 +201,8 @@ class SimConfig:
     # How many phases a connection may go without carrying anything.
     INACTIVE_WINDOW: ClassVar[Dict[str, int]] = {"phase": 1, "iteration": 2}
     # How the tokens of removed agents are shared among the survivors.
-    REDISTRIBUTIONS: ClassVar[Tuple[str, ...]] = ("uniform", "by_tokens")
+    REDISTRIBUTIONS: ClassVar[Tuple[str, ...]] = (
+        "uniform", "by_tokens", "poorest", "newborns", "parents")
     MODES: ClassVar[Dict[str, Tuple[str, ...]]] = {
         "brain_kind": tuple(BRAIN_PRESETS),
         "prune_after": tuple(PRUNE_AFTER),
@@ -336,7 +337,10 @@ class SimConfig:
     # How the estate of the dead is shared out. `uniform` scatters it evenly
     # over the survivors; `by_tokens` weights each survivor's share by what it
     # already holds, which makes the cull an engine of concentration rather
-    # than a leveller.
+    # than a leveller; `poorest` raises the poorest to a common level, like
+    # water filling the lowest places first; `newborns` gives it to the
+    # children born this iteration, and `parents` to their parents, once per
+    # child. The last two fall back to `uniform` in an iteration without any.
     redistribution: str = "uniform"
 
     # ---- Open-ended evolution ----

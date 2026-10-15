@@ -73,8 +73,10 @@ PHASE 2 — BLOTTO (competition)
 CLEANUP (after both phases)
   1. Nodes at zero tokens starve and are removed.
   2. Only the largest connected component survives; splinter groups are culled.
-  3. All tokens from the dead are pooled and redistributed uniformly at random
-     across the survivors, keeping the global count conserved.
+  3. All tokens from the dead are pooled and shared out over the survivors —
+     uniformly at random by default; `redistribution` names the other rules
+     (by holdings, to the poorest, to this iteration's newborns or to their
+     parents) — keeping the global count conserved.
   4. If the world empties completely, a single fresh agent is resurrected
      holding every token.
 
@@ -98,6 +100,7 @@ Two independent ancestries are tracked, and they are not the same thing:
 """
 from __future__ import annotations
 
+from collections import Counter
 from typing import Any, Callable, Dict, List, Optional, Tuple
 
 import networkx as nx
@@ -1929,8 +1932,9 @@ class GraphOfLife:
            neighbourhood joined up again before the next, so none of these
            removals can split the graph.
         2. Of what remains, only the largest connected component survives.
-        3. Every token held by the dead is pooled and scattered uniformly at
-           random over the survivors, so the global count stays conserved.
+        3. Every token held by the dead is pooled and shared out over the
+           survivors by the rule `redistribution` names (`_share_out`), so
+           the global count stays conserved.
         4. An empty world resurrects a single fresh agent holding everything.
         """
         report: Dict[str, Any] = {
@@ -1998,35 +2002,12 @@ class GraphOfLife:
             for u in doomed:
                 self._forget_agent(u)
 
-        survivors = list(self.G.nodes())
-        if global_pool > 0 and survivors:
-            # Who the estate goes to. Uniform gives every survivor the same
-            # chance at each token, which makes the cull a leveller. Weighting
-            # by what a survivor already holds makes it the opposite — the
-            # largest holders take most of what the dead leave, and every cull
-            # concentrates rather than spreads. Anyone at zero was starved out
-            # already, so the weights are never all zero.
-            rule = self.cfg.redistribution
-            if rule == "by_tokens":
-                held = np.array([max(0, int(self.tokens.get(u, 0)))
-                                 for u in survivors], dtype=float)
-                total_held = float(held.sum())
-                probs = ((held / total_held) if total_held > 0
-                         else np.full(len(survivors), 1 / len(survivors)))
-            elif rule == "uniform":
-                probs = np.full(len(survivors), 1 / len(survivors))
-            else:
-                raise ValueError(f"no rule for sharing out the dead: {rule!r}")
-            # Multinomial keeps the token count exactly conserved.
-            draws = self.rng.multinomial(global_pool, probs)
-            for u, extra in zip(survivors, draws):
-                self.tokens[u] = self.tokens.get(u, 0) + int(extra)
-            # Counted here rather than beside the pool, because with nobody left
-            # to receive it the pool is not redistributed — it is dropped, and
-            # the resurrection below mints a whole world's worth instead. It was
-            # reported all the same, which put a number on a chart for tokens
-            # that went nowhere. The report already starts this at zero.
-            report["redistributed"] = int(global_pool)
+        # Counted by what was given rather than beside the pool, because with
+        # nobody left to receive it the pool is not redistributed — it is
+        # dropped, and the resurrection below mints a whole world's worth
+        # instead. It was reported all the same, which put a number on a chart
+        # for tokens that went nowhere.
+        report["redistributed"] = self._share_out(global_pool)
 
         if self.G.number_of_nodes() == 0:
             aid = self.next_agent_id
@@ -2044,6 +2025,94 @@ class GraphOfLife:
             report["resurrected"] = True
 
         return report
+
+    def _share_out(self, pool: int) -> int:
+        """
+        Give `pool` tokens to the living by the rule `redistribution` names, and
+        return how many were given: all of them, or none when nobody is alive.
+
+        - `uniform`: every survivor has the same chance at each token, which
+          makes a death a leveller.
+        - `by_tokens`: each survivor's chance is what it already holds, so the
+          largest holders take most of what the dead leave and every death
+          concentrates rather than spreads. Anyone at zero was starved out
+          already, so the weights are never all zero.
+        - `poorest`: water poured on an uneven floor. The poorest are raised to
+          one common level, as high as the pool reaches; the whole tokens left
+          over go one each to agents drawn at that level.
+        - `newborns`: an even chance for each child born this iteration that is
+          still alive.
+        - `parents`: an even chance for each such child's parent, once per
+          child, which pays for having had children that lived.
+
+        The last two fall back to `uniform` in an iteration without any heir.
+        A node keeps its id when it is taken, so "newborn" and "parent" are of
+        the node — whoever holds it now. Every draw is a multinomial or a draw
+        without replacement from the world's stream, so the count of tokens is
+        exactly conserved.
+        """
+        survivors = list(self.G.nodes())
+        if pool <= 0 or not survivors:
+            return 0
+        rule = self.cfg.redistribution
+        if rule == "poorest":
+            self._fill_from_the_bottom(survivors, pool)
+            return int(pool)
+        heirs = survivors
+        if rule == "by_tokens":
+            held = np.array([max(0, int(self.tokens.get(u, 0)))
+                             for u in survivors], dtype=float)
+            total_held = float(held.sum())
+            probs = ((held / total_held) if total_held > 0
+                     else np.full(len(survivors), 1 / len(survivors)))
+        elif rule in ("newborns", "parents"):
+            # Born this iteration to someone: not a founder, not a
+            # resurrection, not an agent restored from a checkpoint.
+            born = [u for u in survivors if self.born_at.get(u) == self.iteration
+                    and self.parent_of.get(u, NO_PARENT) != NO_PARENT]
+            if rule == "parents":
+                children = Counter(self.parent_of[c] for c in born)
+                heirs = [u for u in survivors if u in children]
+                weights = np.array([children[u] for u in heirs], dtype=float)
+            else:
+                heirs = born
+                weights = np.ones(len(heirs))
+            if not heirs:
+                heirs = survivors
+                weights = np.ones(len(heirs))
+            probs = weights / weights.sum()
+        elif rule == "uniform":
+            probs = np.full(len(survivors), 1 / len(survivors))
+        else:
+            raise ValueError(f"no rule for sharing out the dead: {rule!r}")
+        draws = self.rng.multinomial(pool, probs)
+        for u, extra in zip(heirs, draws):
+            self.tokens[u] = self.tokens.get(u, 0) + int(extra)
+        return int(pool)
+
+    def _fill_from_the_bottom(self, survivors: List[int], pool: int) -> None:
+        """
+        Raise the poorest to the highest whole level the pool can pay for
+        everyone below it, then give the tokens left over one each to agents
+        drawn at that level — fewer of them than stand there, or the level
+        would have been one higher.
+        """
+        held = np.array([int(self.tokens.get(u, 0)) for u in survivors], dtype=np.int64)
+        low, high = int(held.min()), int(held.min()) + int(pool)
+        while low < high:
+            level = (low + high + 1) // 2
+            if int(np.maximum(0, level - held).sum()) <= pool:
+                low = level
+            else:
+                high = level - 1
+        give = np.maximum(0, low - held)
+        rest = int(pool) - int(give.sum())
+        if rest:
+            at_level = np.flatnonzero(held <= low)
+            give[self.rng.choice(at_level, size=rest, replace=False)] += 1
+        for u, extra in zip(survivors, give):
+            if extra:
+                self.tokens[u] = self.tokens.get(u, 0) + int(extra)
 
     def _remove_and_mend(self, u: int) -> int:
         """

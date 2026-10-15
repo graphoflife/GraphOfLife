@@ -2157,7 +2157,7 @@ def test_weighted_redistribution_conserves_tokens_and_favours_the_rich():
     cleanup from a leveller into an engine of concentration.
     """
 
-    for mode in ("uniform", "by_tokens"):
+    for mode in SimConfig.REDISTRIBUTIONS:
         world = new_world(small(redistribution=mode))
         for _ in range(6):
             world.step(record_decisions=False)
@@ -2179,6 +2179,79 @@ def test_weighted_redistribution_conserves_tokens_and_favours_the_rich():
     world._cleanup_and_redistribute()
     assert world.tokens[rich] > before, (
         "weighting by holdings should send most of the pool to the largest holder")
+
+
+def test_the_poorest_are_raised_to_one_level_before_anyone_else_gets_anything():
+    """
+    `poorest` pours the estate like water on an uneven floor.
+
+    The lowest holdings rise to one common level, as high as the pool reaches;
+    nobody already above it gets a token; and the whole tokens left over lift
+    some of those at the level by one, never by more, since enough of them to
+    lift everyone there would have raised the level itself.
+    """
+    world = new_world(small(redistribution="poorest"))
+    nodes = sorted(world.G.nodes())
+    for i, u in enumerate(nodes):
+        world.tokens[u] = 1 + 3 * i
+    before = dict(world.tokens)
+    pool = 4 * len(nodes) + 1
+
+    assert world._share_out(pool) == pool
+    assert sum(world.tokens.values()) == sum(before.values()) + pool, "tokens are conserved"
+    gained = [u for u in nodes if world.tokens[u] > before[u]]
+    level = min(world.tokens.values())
+    assert level > min(before.values()), "the poorest should have been raised"
+    assert all(world.tokens[u] in (level, level + 1) for u in gained), (
+        "everyone who was given something should end at the level or one above it")
+    assert all(before[u] >= level for u in nodes if u not in gained), (
+        "an agent below the level was passed over")
+
+
+def test_newborns_and_parents_inherit_only_from_this_iterations_births():
+    """
+    `newborns` gives the estate to the children born this iteration, `parents`
+    to their parents, once per child. A founder, a resurrected agent or an
+    agent restored from a checkpoint has no parent and is nobody's newborn; a
+    parent that has died receives nothing. With no birth at all both fall back
+    to `uniform`, draw for draw.
+    """
+    def world_with_births(rule):
+        world = new_world(small(redistribution=rule))
+        nodes = sorted(world.G.nodes())
+        first, second, lone = nodes[1], nodes[2], nodes[3]
+        for child in nodes[4:7]:
+            world.parent_of[child] = first
+            world.born_at[child] = world.iteration
+        world.parent_of[nodes[7]] = second
+        world.born_at[nodes[7]] = world.iteration
+        world.parent_of[nodes[8]] = 10 ** 9           # its parent is no longer alive
+        world.born_at[nodes[8]] = world.iteration
+        world.parent_of[lone] = first                  # born in an earlier iteration
+        world.born_at[lone] = world.iteration - 1
+        return world, nodes
+
+    world, nodes = world_with_births("newborns")
+    before = dict(world.tokens)
+    assert world._share_out(600) == 600
+    gained = {u for u in nodes if world.tokens[u] > before[u]}
+    assert gained and gained <= set(nodes[4:9]), f"only this iteration's children may inherit: {gained}"
+    assert sum(world.tokens.values()) == sum(before.values()) + 600
+
+    world, nodes = world_with_births("parents")
+    before = dict(world.tokens)
+    assert world._share_out(600) == 600
+    gained = {u: world.tokens[u] - before[u] for u in nodes if world.tokens[u] > before[u]}
+    assert set(gained) == {nodes[1], nodes[2]}, f"only living parents may inherit: {gained}"
+    assert gained[nodes[1]] > gained[nodes[2]], "three children should earn more than one"
+    assert sum(world.tokens.values()) == sum(before.values()) + 600
+
+    # Founders are nobody's children: the same draws as `uniform`.
+    for rule in ("newborns", "parents"):
+        a, b = new_world(small(redistribution=rule)), new_world(small(redistribution="uniform"))
+        a._share_out(500)
+        b._share_out(500)
+        assert a.tokens == b.tokens, f"{rule} without a birth should share out as uniform does"
 
 
 def test_the_frozen_upkeep_settings_reproduce_the_old_engine():

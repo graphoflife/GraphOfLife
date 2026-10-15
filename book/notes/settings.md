@@ -187,8 +187,15 @@ newborn got in the reproduction phase just before.
 
 Who gets the tokens of agents removed by the cleanup. `uniform` gives every
 surviving agent the same chance at every token: the pooled tokens are dealt
-out by one multinomial draw with equal probabilities. `by_tokens` would weight
-each survivor by what it already holds. Baseline: `uniform`.
+out by one multinomial draw with equal probabilities. `by_tokens` weights
+each survivor by what it already holds. `poorest` raises the poorest
+survivors to one common level, as high as the pool reaches, and gives the
+whole tokens left over one each to agents drawn at that level — water poured
+on an uneven floor fills the lowest places first. `newborns` deals the pool
+out evenly over the children born this iteration that are still alive;
+`parents` over their parents, once per child, which pays for having
+children. In an iteration without a birth these two deal it out as
+`uniform` does. Baseline: `uniform`.
 
 ### tokens_created_per_phase
 

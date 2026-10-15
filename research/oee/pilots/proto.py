@@ -44,8 +44,8 @@ Mechanics (P keys):
                   (a child pays for its birth links, a searcher for its find); when a
                   link lapses its token goes to one of its two ends, drawn at random;
                   when an agent dies, its links' tokens pay for the links that mend
-                  its neighbourhood and the rest is scattered over the survivors like
-                  the estate. Tokens held plus links equal the world's tokens, so the
+                  its neighbourhood and the rest is shared out over the survivors like
+                  the estate, by the world's `redistribution` rule. Tokens held plus links equal the world's tokens, so the
                   links can never outnumber the tokens; run it with valence=0.
   incumbency float  an agent's stake on its own node counts this many times over
                   when the game decides who takes the node (1 = the engine's rule).
@@ -334,7 +334,8 @@ class ProtoWorld(GraphOfLife):
         After a phase, square every node's account for its brain's units: a node pays
         for units it has gained, from its own tokens, and switches off what it cannot
         pay for; it is paid back for units it has lost; a dead agent's units are
-        scattered over the survivors with its estate.
+        shared out over the survivors like its estate, by the world's rule for estates
+        (`redistribution`, the engine's `_share_out`).
         """
         released = sum(k for u, k in before.items() if not self.G.has_node(u))
         for u in self.G.nodes():
@@ -348,11 +349,7 @@ class ProtoWorld(GraphOfLife):
                 self.tokens[u] = self.tokens.get(u, 0) - pay
             elif now < was:
                 self.tokens[u] = self.tokens.get(u, 0) + (was - now)
-        survivors = list(self.G.nodes())
-        if released and survivors:
-            draws = self.rng.multinomial(released, np.full(len(survivors), 1 / len(survivors)))
-            for x, extra in zip(survivors, draws):
-                self.tokens[x] += int(extra)
+        self._share_out(released)
 
     def _forget_agent(self, aid):
         born = self.born_at.get(aid)
@@ -479,12 +476,7 @@ class ProtoWorld(GraphOfLife):
                 self._forget_agent(u)
         report["starved"] = len(starved)
         report["orphaned"] = len(orphaned)
-        survivors = list(self.G.nodes())
-        if pool > 0 and survivors:
-            draws = self.rng.multinomial(pool, np.full(len(survivors), 1 / len(survivors)))
-            for u, extra in zip(survivors, draws):
-                self.tokens[u] = self.tokens.get(u, 0) + int(extra)
-            report["redistributed"] = int(pool)
+        report["redistributed"] = self._share_out(pool)
         if self.G.number_of_nodes() == 0:
             aid = self.next_agent_id
             self.next_agent_id += 1
@@ -922,13 +914,8 @@ class ProtoWorld(GraphOfLife):
             report = self._cleanup_rules()
         finally:
             bank, self._link_bank = self._link_bank, None
-        survivors = list(self.G.nodes())
-        if report.get("resurrected"):
-            bank = 0                                 # an emptied world starts again with everything
-        if bank > 0 and survivors:
-            draws = self.rng.multinomial(bank, np.full(len(survivors), 1 / len(survivors)))
-            for x, extra in zip(survivors, draws):
-                self.tokens[x] = self.tokens.get(x, 0) + int(extra)
+        if not report.get("resurrected"):            # an emptied world starts again with everything
+            self._share_out(bank)
         return report
 
     # ---- the engine's own game, with the contest and pooling hooks ------------

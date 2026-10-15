@@ -17,7 +17,8 @@ B2 = dict(hidden_layers=[16], message_amount=8, message_prepass=False, allow_han
           mutate_on_replication=True, incumbency=1.5, birth_links=2, mend_on_death=True,
           prune_needs=2, valence=8, keep_home=0.3, max_age=100, min_child=10)
 for extra in ({}, {"allow_revolutions": False}, {"allow_gifting": True, "prune_after": "reproduction",
-              "inactive_window": "iteration", "prune_needs": 0}, {"redistribution": "by_tokens"}):
+              "inactive_window": "iteration", "prune_needs": 0}, {"redistribution": "by_tokens"},
+              {"redistribution": "poorest"}, {"redistribution": "newborns"}, {"redistribution": "parents"}):
     s = {**B2, **extra, "seed": 11, "total_tokens": 3000}
     a = new_world(SimConfig.for_new_run(**s))
     b = make_world(SimConfig.for_new_run(**s), {"engine": True})

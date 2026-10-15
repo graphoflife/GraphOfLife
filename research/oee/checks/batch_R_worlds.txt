@@ -1,0 +1,13 @@
+# Batch R: who inherits the estate of the dead, in B2 and B1 (2026-10-15).
+pilot GraphOfLifeRuns/.pilots/R/B2-poorest-s1 500:1000,1000:2000,500:2000
+pilot GraphOfLifeRuns/.pilots/R/B1-poorest-s1 500:1000,1000:2000,500:2000
+pilot GraphOfLifeRuns/.pilots/R/B2-newborns-s1 500:1000,1000:2000,500:2000
+pilot GraphOfLifeRuns/.pilots/R/B1-newborns-s1 500:1000,1000:2000,500:2000
+pilot GraphOfLifeRuns/.pilots/R/B2-parents-s1 500:1000,1000:2000,500:2000
+pilot GraphOfLifeRuns/.pilots/R/B1-parents-s1 500:1000,1000:2000,500:2000
+pilot GraphOfLifeRuns/.pilots/R/B2-poorest-s2 500:1000,1000:2000,500:2000
+pilot GraphOfLifeRuns/.pilots/R/B1-poorest-s2 500:1000,1000:2000,500:2000
+pilot GraphOfLifeRuns/.pilots/R/B2-newborns-s2 500:1000,1000:2000,500:2000
+pilot GraphOfLifeRuns/.pilots/R/B1-newborns-s2 500:1000,1000:2000,500:2000
+pilot GraphOfLifeRuns/.pilots/R/B2-parents-s2 500:1000,1000:2000,500:2000
+pilot GraphOfLifeRuns/.pilots/R/B1-parents-s2 500:1000,1000:2000,500:2000

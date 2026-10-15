@@ -242,10 +242,16 @@
           <select id="cfg_redistribution" data-cfg="redistribution">
             <option value="uniform">Evenly over the survivors</option>
             <option value="by_tokens">Weighted by what each already holds</option>
+            <option value="poorest">To the poorest first, raised to one level</option>
+            <option value="newborns">To the children born this iteration</option>
+            <option value="parents">To this iteration's parents, once per child</option>
           </select>
           <small>Evenly makes each cull a leveller. Weighted makes it the opposite —
             the largest holders take most of what the dead leave, and every cull
-            concentrates rather than spreads.</small>
+            concentrates rather than spreads. To the poorest fills the lowest
+            holdings first, like water on an uneven floor. To the newborns or to
+            their parents rewards having children; in an iteration without births
+            the estate is shared out evenly.</small>
         </div>
         <div class="field checkbox">
           <label><input type="checkbox" id="cfg_random_decisions" data-cfg="random_decisions"> Random decisions</label>

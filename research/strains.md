@@ -42,7 +42,7 @@ which it is.
 | `allow_gifting` | `false` | an agent may hand tokens to a neighbour during reproduction; the transfer is also flow, so it is the one way to deliberately keep a link that would otherwise lapse. Adds three output heads and the input flag saying whether a link is about to |
 | `prune_after` | `blotto` | when unused links are cut: `blotto`, `reproduction` or `both`. Cutting after reproduction is what gives a gift somewhere to land |
 | `inactive_window` | `phase` | how far back "used" looks: the phase just ended, or the last whole `iteration`. A newly made link counts as used either way |
-| `redistribution` | `uniform` | how the estate of the dead is shared out. `by_tokens` weights it by what each survivor already holds, making every cull a concentration event |
+| `redistribution` | `uniform` | how the estate of the dead is shared out. `by_tokens` weights it by what each survivor already holds, making every cull a concentration event; `poorest` raises the poorest to one level first; `newborns` and `parents` give it to this iteration's children or to their parents, once per child (`uniform` in an iteration without births) |
 | `mutate_on_replication` | `false` | (was reserved, Research.md §4.1) a brain changes only when copied — into a newborn or into a node its owner won — never after the game where it sits |
 | `incumbency` | `1.0` | the weight of an agent's own stake on its own node when the game decides who takes it. 1.5: an attacker needs more than one and a half times the home stake |
 | `birth_links` | `0` | a newborn is joined to its parent and this many of the parent's neighbours, at random, before its own link choices |
