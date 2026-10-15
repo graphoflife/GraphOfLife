@@ -112,13 +112,15 @@ State of the chapters:
   at dimension 3.4–4.2 — near the top of the bar.
 - **49 · who dies, and why** (E15) — written 2026-10-14; running at 10,000 tokens.
   B2 has one way to die, old age; births run at 1.00–1.05 per hundred.
-- **50 · why evolution stops** (E16) — written 2026-10-14; running at 10,000 tokens. Colonel
-  Blotto reading; the pilot table.
+- **50 · why evolution stops** (E16) — analysed 2026-10-15. Thesis held (2,000 vs 500
+  = 0.48); the Blotto/dice reading did not survive the probes (Ch. 51, 55).
 - **51 · strategies written by hand** (pilots: the invasion test,
   `research/oee/pilots/manual.py`) — method written 2026-10-15; turtle, raider
   and factory planted as 5% patches in E16's B2 worlds at iteration 2,000,
   against a patch of the residents' own brains.
-- **52 · how fast should brains change?** (E09 on B2) — written 2026-10-14; running.
+- **52 · how fast should brains change?** (E09 on B2) — analysed 2026-10-15. Thesis
+  held: rates 0.05–0.8 tie and all stop by ~500; they change genes, clone
+  groups and world size, not play.
 - **53 · how big should a brain be?** — planned.
 - **54 · the switches the world was built with** (pilots, batch S) — the
   original algorithm's switches judged for OEE: B1 and B2 with and without

@@ -401,3 +401,23 @@ by wealth 0.50; B1 0.54 (s2 0.41).
   100; steps after 200: 0.50 0.48 / 0.47 0.54. G5 pooled by family: family mean
   153-491, largest 57% at 410 -> 12% at 710 -> ~30% (s1), fighting 1.3-1.6;
   steps after 200: 0.53 0.43 / 0.54 0.52. Families rise and fall, brains stop.
+
+## Experiment 9: what the brains use, by rate (2026-10-15; probe_lab.py, iteration 1,500)
+Share of agents (>= 3 tokens, of 400 sampled) whose division of stakes changes
+when one input group is perturbed, seeds 1-3, rates 0.05 / 0.2 / 0.8:
+own state .105 .064 .084 | .077 .027 .034 | .077 .044 .096
+its state .073 .073 .079 | .066 .075 .069 | .146 .074 .090
+messages  .145 .118 .274 | .264 .156 .154 | .146 .125 .198
+noise     .411 .364 .300 | .538 .408 .314 | .338 .346 .316
+founders (0.05, s1, iteration 0): own .141 its .200 messages .435 noise .653.
+No rate keeps brains less deaf; faster change rolls the dice a little less.
+Groups of clones at 1,500 (seed 1): mean 8.2 at 0.05, 3.0 at 0.2, 1.2 at 0.8.
+
+## Experiment 9 analysed (2026-10-15)
+book_chapters/rates.py: cross-rate contests at 1,500 (rates-cross, 200 contests,
+gol_tournament.contest with brains from two runs), steps per world
+(tournament-steps, eras 0/100/200/500/1000/1500, against the previous),
+clone groups at 1,500 (clones-1500). Every pair ties (medians 0.49-0.52), every
+rate stops by ~500 (1,500 vs 1,000: 0.49-0.51); worlds differ in genes (0.20 ->
+0.90 genotypes per agent), clone groups (~8 -> 1.2) and size (3,730 -> 2,600).
+Thesis held.

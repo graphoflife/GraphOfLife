@@ -217,8 +217,10 @@ password as a sense of clones, evolving brains find no crowd to use it with:
 one copy in five is a new genotype, so clones seldom sit together. Given
 families large enough to be a crowd, they still did not find the raiders'
 play, and stopped improving where the others did. What evolution cannot find
-is not the parts but the play itself. Whether a slower rate of change helps is
-a question for [Chapter 52](52-how-fast-should-brains-change.md).
+is not the parts but the play itself. A slower rate of change makes larger
+families of clones too, eight agents strong at one copy in twenty changed,
+and finds no better play either
+([Chapter 52](52-how-fast-should-brains-change.md)).
 
 <!-- turns -->
 ---

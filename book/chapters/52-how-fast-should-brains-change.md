@@ -162,10 +162,126 @@ agent, and the share of nodes kept by their own agent in a game.
 > A value in **bold** differs from the baseline B2.
 <!-- /runs -->
 
-> [!warning] Waiting for the runs
-> The plan, the thesis and the method above were written before any run of
-> Experiment 9 existed; the results follow when they are done. The B1 plan
-> this chapter had before was never run.
+## What the fifty worlds did
+
+All fifty worlds lived to iteration 1,500, and none came near dying out.
+
+<!-- figure rates/worlds -->
+![What the rate of change does to a world](../figures/rates/worlds.svg)
+
+**What the rate of change does to a world.** One dot per world, the bar the median of ten. Genotypes and agents: the mean over iterations 500 to 1,500. Groups of clones: in the world of iteration 1,500, neighbours that carry the same brain joined together, the size of an agent's group averaged over agents.
+
+> [!example]- How to make this figure
+> **Runs.** The 50 runs of Experiment 9 — B2 at 10,000 tokens, seeds 1 to 10, with the probability that a brain changes when it is copied at 0.05, 0.1, 0.2 (B2 itself, `B2-10000-s001` … `-s010`, shared with Experiment 16), 0.4 and 0.8, run to iteration 1,500 at least with a whole world archived every 100. They are made with `python3 gol_lab.py run E09`; every setting is listed in the box under the thesis.
+>
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)) and the archive of iteration 1,500.
+>
+> 1. For every run take the rows with `phase` = 2 and 500 ≤ `iteration` ≤ 1,500 and average `distinctBrains` / `nodes` and `nodes`.
+> 2. Load the world of iteration 1,500 (`gol_store.load_archive`), join every two neighbours with the same `brain_ids` into one group, and average over agents the size of the group each belongs to (`rates.clones`).
+>
+> **To make it again:** `python3 book_figures.py rates`.
+<!-- /figure -->
+
+**The rate shapes a world's genes, not its play.** The faster brains change,
+the more kinds of brain a world holds. There were 0.20 genotypes per agent at
+*p* = 0.05, then 0.31, 0.46 (B2), 0.65 and 0.90 at *p* = 0.8, where nearly
+every agent carries a brain of its own. Groups of clones shrink to match:
+neighbours that carry the same brain formed groups of about 8 agents on
+average at the slowest rate and 1.2 at the fastest. Births stayed at one agent in a
+hundred an iteration at every rate, since the age limit sets them, and so
+did the share of agents that kept their own node in a game, 0.91 to 0.92.
+
+The worlds differ in one more way. The faster brains change, the fewer agents
+a world holds: 3,730 in the median world at *p* = 0.05, 3,250 in B2 and 2,600
+at *p* = 0.8. The extra agents of a slowly changing world are poor ones. At
+0.05 and 0.1 half of all agents or more held a single token, against a median of 1.6
+at 0.4 and 2 at 0.8, while inequality, by its Gini coefficient, was 0.50 to
+0.52 at every rate. Why a world of fast change keeps fewer poor agents alive
+is not measured here.
+
+<!-- figure rates/steps -->
+![Each era against the one before, at five rates of change](../figures/rates/steps.svg)
+
+**Each era against the one before, at five rates of change.** One dot per world: the later era's share of the agents, the mean of its two contests with the era before, one in each era's world. The bars are the medians of each rate's ten worlds.
+
+> [!example]- How to make this figure
+> **Runs.** The 50 runs of Experiment 9 — B2 at 10,000 tokens, seeds 1 to 10, with the probability that a brain changes when it is copied at 0.05, 0.1, 0.2 (B2 itself, `B2-10000-s001` … `-s010`, shared with Experiment 16), 0.4 and 0.8, run to iteration 1,500 at least with a whole world archived every 100. They are made with `python3 gol_lab.py run E09`; every setting is listed in the box under the thesis.
+>
+> **Data.** From each run's archive, `GraphOfLifeRuns/<run>/archive/world_<iteration>.npz`, kept every 100 iterations.
+>
+> 1. For each world, play each of the eras 0, 100, 200, 500, 1,000 and 1,500 against the one before it, once in each era's world (`gol_tournament.play` with `against="previous"`, 20 iterations, a coin per agent), and average each pair's two shares.
+>
+> **To make it again:** `python3 book_figures.py rates`.
+<!-- /figure -->
+
+**Every rate stops at the same time.** In every condition the brains of
+iteration 100 beat the founders clearly, with step scores of 0.66 to 0.70 in
+the median world. The brains of 200 beat those of 100 a little, 0.54 to 0.56.
+From iteration 500 on, every rate ties with itself. The step from 500 to
+1,000 had medians of 0.49 to 0.50, and the step from 1,000 to 1,500 0.49 to
+0.51. Even at the slowest rate, where one copy in twenty is changed, nothing
+was being gained after iteration 500. In single worlds, iteration 1,500
+against 1,000 lay between 0.45 and 0.53.
+
+<!-- figure rates/cross -->
+![The brains of one rate against another's](../figures/rates/cross.svg)
+
+**The brains of one rate against another's.** Each column is a pair of rates of change, written lower–higher; each dot one seed: the share of a world the brains of iteration 1,500 of the higher rate held against those of the lower, the mean of two contests, one in each rate's world. The bar is the median seed; the dashed lines the band of the thesis.
+
+> [!example]- How to make this figure
+> **Runs.** The 50 runs of Experiment 9 — B2 at 10,000 tokens, seeds 1 to 10, with the probability that a brain changes when it is copied at 0.05, 0.1, 0.2 (B2 itself, `B2-10000-s001` … `-s010`, shared with Experiment 16), 0.4 and 0.8, run to iteration 1,500 at least with a whole world archived every 100. They are made with `python3 gol_lab.py run E09`; every setting is listed in the box under the thesis.
+>
+> **Data.** From each run's archive, `GraphOfLifeRuns/<run>/archive/world_<iteration>.npz`, kept every 100 iterations.
+>
+> 1. For each seed and each pair of rates, take the worlds of both rates at iteration 1,500. Play two contests, one in each of the two worlds: every agent gets a brain drawn at random from the agents of one rate's world or of the other's, a coin each, mutation is switched off, and 20 iterations are played (`gol_tournament.contest`, brains from two runs).
+> 2. The higher rate's score is its share of the agents at the end, averaged over the two.
+>
+> **To make it again:** `python3 book_figures.py rates`.
+<!-- /figure -->
+
+**No rate's brains beat another's.** For every pair of rates the median seed
+lay between 0.49 and 0.52: the brains of a world that changes sixteen times as
+often as another are as good as its. Averaged over all four of its opponents,
+each rate held between 0.49 and 0.51 of a contested world. The slowest rate
+was the weakest by a hair, at 0.49, and the steepest gap between two rates in
+any single seed was 0.57.
+
+## The verdict
+
+The thesis holds on both counts. For all ten pairs of rates the median
+seed's score lay between 0.45 and 0.55 (0.49 to 0.52), and in all five
+conditions the median world's score of iteration 1,500 against 1,000 did too
+(0.49 to 0.51). The rate at which brains change does not decide where
+evolution stops in B2. It did not decide how soon either, though the thesis
+claimed it would: every rate stopped between iterations 200 and 500.
+
+## What it teaches
+
+**Of the three pictures, only the first fits.** A mutation–selection balance
+would have made the brains of a fast-changing world worse, the faster the
+worse, and they were not. An error threshold would have made the fastest rate
+lose all it had learned, and at four copies in five changed it lost nothing.
+Every rate ended in the same place, as picture 1 says a world does when
+selection finds the answer.
+
+**But the place is not the answer.** [Chapter 51](51-strategies-written-by-hand.md)
+showed that better play exists in these very worlds. So what every rate
+reaches is the best that this search can find, not the best there is. That is
+a statement about the search, and the rate of change is the first thing about
+the search one would turn. Turned sixteenfold, it changed nothing.
+
+**More variation did not help, and neither did larger families.** A fast rate
+offers evolution many more variants to choose from; a slow rate makes groups
+of clones eight agents strong, a crowd of the kind the raiders needed. Neither
+found better play. The limit is not the supply of variation. It is that the
+better play needs several new things at once, which no single change makes
+([Chapter 51](51-strategies-written-by-hand.md#what-it-teaches)).
+
+**The thesis was right for the wrong reason.** It was written to test Chapter
+50's reading, that the game has an answer and evolution finds it. The ties it
+predicted came, but the reading has since fallen: the brains roll dice no game
+asks for, and hand-written teams beat them. The rate of change is not what
+keeps evolution from going on.
 
 <!-- turns -->
 ---

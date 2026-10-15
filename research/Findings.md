@@ -156,6 +156,20 @@ otherwise. Last consolidated: 2026-10-15.
 - A rising statistic with a ceiling set by the world, but one convention
   spreading once — not open-ended evolution (the author's objection).
 
+**How fast brains change (Ch. 52, E09; analysed 2026-10-15; B2 at 10,000 tokens,
+mutation probability per copy 0.05/0.1/0.2/0.4/0.8, 10 seeds each, to 1,500)**
+- Thesis held on both counts: every pair of rates ties in the median seed
+  (0.49–0.52), and every rate has stopped (1,500 vs 1,000: 0.49–0.51).
+- Not even how soon differs: every rate's steps are 0.66–0.70 (0→100),
+  0.54–0.56 (100→200), then ties from ~500 on. Each rate holds 0.49–0.51
+  against all the others.
+- What the rate changes is the world: genotypes per agent 0.20 → 0.90, clone
+  groups ~8 → 1.2 agents, agents 3,730 → 2,600 (the extra agents of slow
+  worlds are single-token ones: median tokens 1.0 at 0.05/0.1, 2.0 at 0.8),
+  Gini ~0.5 throughout. Probes: no rate keeps brains less deaf.
+- No mutation–selection balance or error threshold in play up to 0.8. More
+  variation, or larger families, do not find the better play of Ch. 51.
+
 **Strategies written by hand (Ch. 51; manual.py, the invasion test)**
 - In E16's B2 world s002 at 2,000 a 5% patch of raiders (all they can stake on
   the poorest stranger they are sure to take, else home; a password so they
