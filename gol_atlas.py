@@ -136,6 +136,19 @@ WORLD_GROUPS = [
 ]
 
 
+#: World statistics that count things, and so grow with the size of a world.
+#: Across worlds of different sizes any two of them go together for that reason
+#: alone, so in the table of every world a pair of them counts as made from the
+#: same numbers.
+EXTENSIVE = {"nodes", "edges", "totalFlow", "maxEdgeFlow", "giftTokens", "redistributed", "prunedEdges",
+             "maxDegree", "maxTokens", "maxTokenAdded", "maxTokenLost", "triangles", "bridges",
+             "components", "distinctBrains", "distinctParents", "cycleRank", "diameter", "radius",
+             "lightningLongest", "lightningScore", "netLightningLongest", "netLightningScore",
+             "meanPathLength", "cutRisk", "cutRiskBefore", "tokens", "births", "gainers", "losers",
+             "starved", "orphaned", "revolutions", "leaves", "handovers", "gifts", "genotypes", "roots",
+             "conquests", "kin_conquests", "deaths"}
+
+
 def definitional(a: str, b: str) -> bool:
     """Whether two quantities are related by how they are made rather than by how the world behaves."""
     return frozenset((a, b)) in DEFINITIONAL or any(a in g and b in g for g in WORLD_GROUPS)
@@ -162,6 +175,12 @@ class Table:
         self.note = note
         #: For a table of every world, the stretches of iterations it can be taken over.
         self.periods: List[str] = []
+        #: Whether its rows are worlds of different sizes, where two counts go together by size alone.
+        self.sized = False
+
+    def made_alike(self, a: str, b: str) -> bool:
+        """Whether two columns are related by how they are made, in this table."""
+        return definitional(a, b) or (self.sized and a in EXTENSIVE and b in EXTENSIVE)
 
     @property
     def rows(self) -> int:
@@ -487,6 +506,7 @@ def world_table(worlds: Dict[str, Any], window: str) -> Table:
                   groups=[f"{w.get('baseline') or '?'} {w.get('source', '')}".strip() for w in entries],
                   note=f"{len(entries)} worlds, {window}")
     table.periods = list(worlds.get("windows") or [])
+    table.sized = True
     return table
 
 
@@ -591,7 +611,7 @@ def summary(table: Table) -> Dict[str, Any]:
                 continue
             best = max(axes, key=lambda key: abs(got[key])) if axes else None
             pairs.append([i, j, got.get("lin-lin"), best, got.get(best) if best else None,
-                          got["rank"], got["n"], definitional(a, b)])
+                          got["rank"], got["n"], table.made_alike(a, b)])
     ranked = sorted((p for p in pairs if not p[7] and p[4] is not None), key=lambda p: -abs(p[4]))
     return finite({
         "level": table.level,
@@ -733,7 +753,7 @@ def detail(table: Table, a: str, b: str, xlog: bool = False, ylog: bool = False)
         "r": pearson(xs, ys),
         "lin": pearson(va[both], vb[both]),
         "rank": pearson(rank(va[both]), rank(vb[both])) if both.sum() >= MIN_ROWS else None,
-        "definitional": definitional(a, b),
+        "definitional": table.made_alike(a, b),
         "points": {"x": x[shown].tolist(), "y": y[shown].tolist()},
         "bins": bins(xs, ys),
         "range": {"x": [float(xs.min()), float(xs.max())] if len(xs) else None,

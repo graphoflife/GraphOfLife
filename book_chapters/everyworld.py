@@ -19,6 +19,7 @@ import numpy as np
 import book_figures as F
 from book_figures import chapter, recipe
 from book_chapters.common import BLUE, CYAN, GREEN, GREY, ORANGE, RED, VIOLET, YELLOW
+from gol_atlas import EXTENSIVE
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PILOTS = os.path.join(ROOT, "GraphOfLifeRuns", ".pilots")
@@ -246,13 +247,8 @@ def lightning(ch: F.Chapter) -> None:
 # Every world side by side (Meta VI)
 # ---------------------------------------------------------------------------
 
-#: Statistics that count things, and so grow with the world; the per-agent ones
-#: among them are divided by the agents, the rest are left out of the comparison.
-EXTENSIVE = {"nodes", "edges", "totalFlow", "maxEdgeFlow", "giftTokens", "redistributed", "prunedEdges",
-             "maxDegree", "maxTokens", "maxTokenAdded", "maxTokenLost", "triangles", "bridges",
-             "components", "distinctBrains", "distinctParents", "cycleRank", "diameter", "radius",
-             "lightningLongest", "lightningScore", "netLightningLongest", "netLightningScore",
-             "meanPathLength", "cutRisk", "cutRiskBefore", "tokens"}
+#: The counts of agents among the statistics that grow with a world, which the
+#: comparison divides by the agents; the rest of gol_atlas.EXTENSIVE is left out.
 PER_AGENT = {"births", "gainers", "losers", "starved", "orphaned", "revolutions", "leaves", "handovers", "gifts"}
 WINDOW = "500"
 
