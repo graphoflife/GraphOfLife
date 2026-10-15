@@ -37,8 +37,6 @@ def load(pilot, at):
     from proto import ProtoConfig, ProtoWorld, restore_tags, set_proto
     meta = json.load(open(os.path.join(pilot, "config.json")))
     set_proto(meta.get("proto", {}))
-    if meta.get("proto", {}).get("engine"):
-        raise SystemExit("engine-mode pilots record their games themselves; this is for the pilot's own game")
     cfg = ProtoConfig.from_dict(meta["cfg"], stored=False)
     cfg.extinction_threshold = 0
     with np.load(os.path.join(pilot, f"ckpt_{at:06d}.npz"), allow_pickle=False) as z:
@@ -50,6 +48,9 @@ def load(pilot, at):
 
 def record(world, games):
     """Step `games` iterations; frames keyed (iteration, phase) as book_data.frame_at returns them."""
+    from proto import P
+    if P.get("engine"):
+        return record_engine(world, games)
     frames = {}
     play = type(world).blotto_phase
 
@@ -81,12 +82,27 @@ def record(world, games):
     return first, world.iteration, frames
 
 
+def record_engine(world, games):
+    """The engine records its own games, in the lab's form: keep the frames it hands back."""
+    frames = {}
+    first = world.iteration
+    for _ in range(games):
+        for frame in world.step(record_decisions=True):
+            frames[(frame["iteration"], frame["phase"])] = frame
+        if world.G.number_of_nodes() == 0:
+            break
+    return first, world.iteration, frames
+
+
 def rules(pilot):
-    """How the pilot's own game decides a node, for decisive.py."""
+    """How the pilot's game decides a node, for decisive.py: the engine's rule or the prototype's."""
     meta = json.load(open(os.path.join(pilot, "config.json")))
-    proto = meta.get("proto", {})
+    proto, cfg = meta.get("proto", {}), meta["cfg"]
+    if proto.get("engine"):
+        return {"pooled": False, "incumbency": float(cfg.get("incumbency") or 1.0),
+                "revolutions": bool(cfg.get("allow_revolutions"))}
     return {"pooled": bool(proto.get("allies")), "incumbency": float(proto.get("incumbency", 1.0)),
-            "revolutions": bool(meta["cfg"].get("allow_revolutions"))}
+            "revolutions": bool(cfg.get("allow_revolutions"))}
 
 
 def alliances(frames, t0, t1):
@@ -98,7 +114,7 @@ def alliances(frames, t0, t1):
         f = frames.get((t, 2))
         if not f:
             continue
-        allied = {(u, v) for u, v in f["allies"]} | {(v, u) for u, v in f["allies"]}
+        allied = {(u, v) for u, v in f.get("allies", [])} | {(v, u) for u, v in f.get("allies", [])}
         has_ally = {u for u, v in allied}
         winners = {w["node"]: w["winner"] for w in f["decisions"]["winners"]}
         stakes = {}
