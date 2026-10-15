@@ -814,6 +814,12 @@
           "id": "A",
           "title": "What a simulation costs",
           "file": "chapters/A-costs.md"
+        },
+        {
+          "id": "B",
+          "title": "What goes with what",
+          "note": "An atlas of correlations: every quantity of an agent against every other, on linear and logarithmic axes, in twenty worlds; a world's statistics against each other over time; and thirty worlds against each other.",
+          "file": "chapters/B-what-goes-with-what.md"
         }
       ]
     }

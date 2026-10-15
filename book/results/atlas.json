@@ -1,0 +1,303 @@
+{
+ "chapter": "atlas",
+ "numbers": {
+  "pairs": {
+   "B2": 406,
+   "B1": 406
+  },
+  "curvature": {
+   "B2": {
+    "slope": {
+     "n": 10,
+     "mean": 0.19871085325561916,
+     "median": 0.20391290982696922,
+     "sd": 0.04722564908919839,
+     "min": 0.10163141840603404,
+     "max": 0.26404815760576916,
+     "q25": 0.1730362843241602,
+     "q75": 0.23319276466242583
+    },
+    "r": {
+     "n": 10,
+     "mean": 0.2996387017046088,
+     "median": 0.3003144375640784,
+     "sd": 0.04528038357736466,
+     "min": 0.20219797437791395,
+     "max": 0.3564900781668296,
+     "q25": 0.27800912302371955,
+     "q75": 0.3310932040079149
+    },
+    "r_kept": {
+     "n": 10,
+     "mean": 0.29540765516206124,
+     "median": 0.283327344952934,
+     "sd": 0.06399397382510294,
+     "min": 0.16978186707786835,
+     "max": 0.3939783503845617,
+     "q25": 0.2712651567114086,
+     "q75": 0.33981967988244527
+    },
+    "relative": [
+     -0.14299702634462697,
+     -0.14545277443187865,
+     -0.1051416084555889,
+     -0.06392222631460559,
+     -0.00420682041047639,
+     0.11578034075724296,
+     0.3162549107453292,
+     0.5799635192284208,
+     1.0803305071439786
+    ],
+    "kept": [
+     0.9819335066144237,
+     0.9845996979117833,
+     0.9725563161445094,
+     0.9485314950505942,
+     0.9825767776159262,
+     0.9374450855387848,
+     0.8888712729675567,
+     0.8775344833504909,
+     0.8981001727115717
+    ],
+    "net": [
+     -0.1281510736798054,
+     -0.20822214057290533,
+     -0.1909463502540465,
+     -0.16949041313932578,
+     -0.03708147276318591,
+     0.02833134235038924,
+     0.07356709097527428,
+     0.10981715652051008,
+     0.05633802816901408
+    ]
+   },
+   "B1": {
+    "slope": {
+     "n": 10,
+     "mean": 0.28998413827530334,
+     "median": 0.2112478366043568,
+     "sd": 0.2627754695207983,
+     "min": 0.0011238525966770112,
+     "max": 0.706594910916012,
+     "q25": 0.08810843198619897,
+     "q75": 0.47911838193626344
+    },
+    "r": {
+     "n": 10,
+     "mean": 0.333104657276451,
+     "median": 0.33924258247292516,
+     "sd": 0.20512675910905667,
+     "min": 0.0211733613840119,
+     "max": 0.6008865447977372,
+     "q25": 0.21465460644308043,
+     "q75": 0.5004922020481418
+    },
+    "r_kept": {
+     "n": 10,
+     "mean": -0.02137834142846968,
+     "median": -0.011653018958499854,
+     "sd": 0.057465569321484326,
+     "min": -0.12216906776927532,
+     "max": 0.044263767766268516,
+     "q25": -0.05063212244026309,
+     "q75": 0.02941437711702638
+    },
+    "relative": [
+     -0.0796400148103468,
+     -0.03642673411585952,
+     -0.06405199435342603,
+     -0.07183145139377156,
+     -0.04740231312145374,
+     0.04496219688342845,
+     0.10284155256456451,
+     0.2687898949515809,
+     1.9928037109073085
+    ],
+    "kept": [
+     0.09859511881783128,
+     0.1892899607113317,
+     0.3177105382180009,
+     0.45789223379827537,
+     0.5561128356764309,
+     0.547136283102733,
+     0.48928977022301995,
+     0.4365904881630195,
+     0.43212558970348636
+    ],
+    "net": [
+     -0.1510461338531514,
+     -0.14667729500899276,
+     -0.2181505661286437,
+     -0.2500390960982094,
+     -0.2032774644415769,
+     0.006870539638322515,
+     0.09755565534909746,
+     0.10033332353230094,
+     0.021462033863387076
+    ]
+   }
+  },
+  "world_components": {
+   "share": [
+    0.47162597384510635,
+    0.17811380832343401,
+    0.15699191030195395,
+    0.06099370741361312,
+    0.036343803504242565,
+    0.02012787746757572,
+    0.01567073586138339,
+    0.01220160126262372,
+    0.010288655398485776,
+    0.0077458518498996634,
+    0.0067756087234471865,
+    0.0048299211482236894,
+    0.003731865840466153,
+    0.002808263023073967,
+    0.0023769711208546773,
+    0.0019171150400378685,
+    0.0016222507017803975,
+    0.0012500341177722762,
+    0.001024985279861673,
+    0.000843724726224361,
+    0.0006463195411035966,
+    0.0005013485890775396,
+    0.0004031680082543245,
+    0.0003196123164643958,
+    0.00024395598735963648,
+    0.0002079348678539118,
+    0.00016376951579801912,
+    0.00013085905425240553,
+    9.836716977563332e-05,
+    8.235926149743765e-30
+   ],
+   "loadings": [
+    [
+     [
+      "selfAllocationShare",
+      0.1608118464583609
+     ],
+     [
+      "totalFlow",
+      -0.16081184645836083
+     ],
+     [
+      "coreShare",
+      -0.16064299983772393
+     ],
+     [
+      "degreeEntropy",
+      -0.1597398542205675
+     ],
+     [
+      "assortativity",
+      -0.1591217648013385
+     ],
+     [
+      "maxTokens",
+      0.1587019194807972
+     ],
+     [
+      "heldHomeShare",
+      0.15726806409271454
+     ],
+     [
+      "medianDegree",
+      -0.15718897617637625
+     ]
+    ],
+    [
+     [
+      "medianTokens",
+      0.23598926510981189
+     ],
+     [
+      "changeVsTokensR2",
+      -0.20905308142691542
+     ],
+     [
+      "trianglesVsDegree",
+      0.20454893595101417
+     ],
+     [
+      "clusteringVsDegreeR2",
+      -0.19999341807385146
+     ],
+     [
+      "boxDimensionR2",
+      0.19290575377816677
+     ],
+     [
+      "degreeGamma",
+      0.18812652314922534
+     ],
+     [
+      "clusteringVsDegree",
+      0.18377570456759623
+     ],
+     [
+      "tokensVsDegree",
+      -0.1806602494396422
+     ]
+    ],
+    [
+     [
+      "distinctParents",
+      -0.25723386906289175
+     ],
+     [
+      "flowImbalance",
+      0.24645588004796584
+     ],
+     [
+      "distinctBrains",
+      -0.24395529615138092
+     ],
+     [
+      "nodes",
+      -0.24371627504153742
+     ],
+     [
+      "netFlowShare",
+      0.24198559222872992
+     ],
+     [
+      "gini",
+      0.22287750375319687
+     ],
+     [
+      "density",
+      0.20740770847248607
+     ],
+     [
+      "changeVsTokens",
+      0.2032899781421779
+     ]
+    ]
+   ],
+   "statistics": 79,
+   "r_score_hub": 0.8842900762449984
+  }
+ },
+ "figures": {
+  "before_after": {
+   "title": "What comes before, and what follows",
+   "caption": "Each cell is the rank correlation (Spearman's) between a quantity known at the start of a game (rows) and what then happened (columns), the median over ten worlds. Red: the more of the one, the more of the other; blue: the more of the one, the less of the other. The quantities are those of the table in the text.",
+   "recipe": "**Runs.** The ten B2 worlds of Experiment 16, `B2-10000-s001` \u2026 `-s010`, and the first ten worlds of B1's baseline set, `B1-10000-s001` \u2026 `-s010` (Experiment 2): 10,000 tokens each, every game recorded with every agent's stakes.\n\n**Data.** From the runs' recorded frames.\n\n1. For every 20th game from iteration 1,000 to 2,000, one row per agent alive at the start of the game, from the frames after the reproduction phase and after the game, of the next iteration's reproduction and of ten iterations later: the 29 quantities of the table in the text (`python3 research/atlas/correlations.py extract <run> --from 1000 --to 2000 --step 20`).\n2. In each world, rank every column (ties share their mean rank) and take Pearson's correlation of the ranks for every pair (`python3 research/atlas/correlations.py analyse --runs <runs> --label <B2|B1>`).\n3. Take the median over the ten worlds.\n\n**To make it again:** `python3 book_figures.py atlas`."
+  },
+  "logarithm": {
+   "title": "What the logarithm reveals",
+   "caption": "One dot per pair of quantities that are not made from the same numbers. Across, Pearson's correlation on linear axes; up, on whichever axes give the strongest: linear or logarithmic on either. Dots far above the dashed diagonal are relations a linear plot hides: power laws, and quantities whose few large values swamp the rest.",
+   "recipe": "**Runs.** The ten B2 worlds of Experiment 16, `B2-10000-s001` \u2026 `-s010`, and the first ten worlds of B1's baseline set, `B1-10000-s001` \u2026 `-s010` (Experiment 2): 10,000 tokens each, every game recorded with every agent's stakes.\n\n**Data.** From the runs' recorded frames.\n\n1. For every 20th game from iteration 1,000 to 2,000, one row per agent alive at the start of the game, from the frames after the reproduction phase and after the game, of the next iteration's reproduction and of ten iterations later: the 29 quantities of the table in the text (`python3 research/atlas/correlations.py extract <run> --from 1000 --to 2000 --step 20`).\n2. For every pair, Pearson's r with each quantity on a linear axis or a logarithmic one: the logarithm of a positive quantity, log(1 + x) of a count, sign(x) log(1 + |x|) of a signed one; shares and yes-or-no stay linear. The median over ten worlds for each choice of axes.\n3. Leave out the pairs made from the same numbers (tokens and tokens per link, say).\n\n**To make it again:** `python3 book_figures.py atlas`."
+  },
+  "curvature": {
+   "title": "Tokens run downhill",
+   "caption": "One dot per world, the bar the median of ten. Token curvature is the sum, over an agent's neighbours, of their tokens minus its own (the note *Token curvature*): below zero an agent is a peak, above zero a valley. Left: of the agents in a class, the share whose node held more tokens after the game than before, minus the share whose node held fewer; most hold the same. Right: the share of agents that kept their own node. A class with fewer than 50 agents in a world has no dot for it.",
+   "recipe": "**Runs.** The ten B2 worlds of Experiment 16, `B2-10000-s001` \u2026 `-s010`, and the first ten worlds of B1's baseline set, `B1-10000-s001` \u2026 `-s010` (Experiment 2): 10,000 tokens each, every game recorded with every agent's stakes.\n\n**Data.** From the runs' recorded frames.\n\n1. For every 20th game from iteration 1,000 to 2,000, one row per agent alive at the start of the game, from the frames after the reproduction phase and after the game, of the next iteration's reproduction and of ten iterations later: the 29 quantities of the table in the text (`python3 research/atlas/correlations.py extract <run> --from 1000 --to 2000 --step 20`).\n2. Sort the rows by curvature into the classes on the axis; in each, count the agents whose node gained tokens over the game and those whose node lost, and those that kept their own node.\n\n**To make it again:** `python3 book_figures.py atlas`."
+  },
+  "worlds": {
+   "title": "What tells thirty worlds apart",
+   "caption": "One dot per world of Experiment 10 (B1 at 100,000 tokens). Each world is described by the means of 79 statistics over iterations 500 to 1,500, each standardised over the thirty worlds; the first principal component of those descriptions holds 47% of their variance. Across, how many of the other agents the best-connected agent is linked to.",
+   "recipe": "**Runs.** The thirty runs of Experiment 10, `B1-100000-s001` \u2026 `-s030`.\n\n**Data.** From each run's statistics after every game (`stats.jsonl`).\n\n1. Average every statistic a run records after the game over iterations 500 to 1,500 (`python3 research/atlas/world_series.py --runs <runs> --label E10 --from 500 --to 1500`).\n2. Standardise each over the thirty worlds and take the principal components (a singular value decomposition of the worlds-by-statistics table).\n3. The best-connected agent's share: its connections divided by the agents, both averaged over the same iterations.\n\n**To make it again:** `python3 book_figures.py atlas`."
+  }
+ }
+}

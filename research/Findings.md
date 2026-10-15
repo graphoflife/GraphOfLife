@@ -285,6 +285,22 @@ alliance pilots played on 200 iterations; research/oee/checks)**
 - The short-contest verdicts of Chapters 54-57 ("tournaments flat") were wrong
   for B2's family of worlds and right for B1's.
 
+**What goes with what (Appendix B; research/atlas; 2.3 million agent rows from E16's B2 and E02's
+B1 worlds, games 1,000-2,000; world statistics of the same worlds and of E10's thirty)**
+- Token curvature drives change at ~1/5 of the even split's pace in both (slope 0.20 B2, 0.21 B1;
+  r ~0.3); in B1 through nodes changing hands (peaks keep 10%, level agents 56%; among kept
+  agents r -0.01), in B2 among agents that stay (r 0.28; 88-98% keep).
+- Wealth persistence over 10 games: rank 0.78 B1, 0.41 B2; connections 0.92 in both.
+- 30 of 374 non-definitional pairs reverse sign B2 vs B1, mostly where wealth sits: tokens vs
+  connections -0.18/+0.56, PageRank -0.14/+0.65, age -0.17/+0.36; the rich go all-in in B2
+  (+0.42) and spread in B1 (-0.45).
+- B2: nothing among 21 quantities predicts losing one's node (max |r| 0.16). B1: home share +0.47,
+  connections -0.43.
+- Logarithmic axes reveal much in B1 (curvature vs neighbours' connections 0.05 -> 0.64; tokens
+  vs targets 0.23 -> 0.67), little in B2 (narrow distributions).
+- World over time (changes): B1's scattered estate levels (Gini -0.78); B2's hoarding unlevels
+  (Gini +0.43). Between E10's 30 worlds: PC1 = 47% of 79 statistics = the star (hub share).
+
 **Open (being tested)**
 - Rules without numbers (B3, Ch. 57): all seven of B2's numbers removed at once
   — s1: without alliances extinct, with alliances a peaceful near-tree.

@@ -201,6 +201,7 @@ everything can be checked with it.
 **Appendices**
 
 - [Appendix A · What a simulation costs](chapters/A-costs.md)
+- [Appendix B · What goes with what](chapters/B-what-goes-with-what.md)
 <!-- /contents -->
 
 ## How it is made
