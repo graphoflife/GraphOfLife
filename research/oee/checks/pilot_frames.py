@@ -81,6 +81,14 @@ def record(world, games):
     return first, world.iteration, frames
 
 
+def rules(pilot):
+    """How the pilot's own game decides a node, for decisive.py."""
+    meta = json.load(open(os.path.join(pilot, "config.json")))
+    proto = meta.get("proto", {})
+    return {"pooled": bool(proto.get("allies")), "incumbency": float(proto.get("incumbency", 1.0)),
+            "revolutions": bool(meta["cfg"].get("allow_revolutions"))}
+
+
 def alliances(frames, t0, t1):
     """What the alliance labels say, to check the label-free measures against (alliance pilots only)."""
     staked = on_allies = gifts_to_allies = 0
@@ -136,7 +144,8 @@ def main():
            "gliders": check("gliders").analyse(name, t0, t1),
            "circulation": check("circulation").analyse(name, t0, t1, a.window),
            "kin": check("kin_flows").analyse(name, t0, t1),
-           "alliances": alliances(frames, t0, t1)}
+           "alliances": alliances(frames, t0, t1),
+           "decisive": check("decisive").analyse(name, t0, t1, rules(a.pilot))}
     res["gliders"].pop("examined_rows", None)
     for k in ("all", "gift", "take"):
         res["circulation"].pop(k + "_rows", None)

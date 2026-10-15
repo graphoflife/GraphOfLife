@@ -495,10 +495,62 @@ def finite_difference() -> str:
     return svg(760, 470, "".join(body), "The even split as a step of the heat equation")
 
 
+def patterns() -> str:
+    """Takeover patterns, each over three games, after the patterns of Conway's Game of Life."""
+    body = [text(20, 26, "Patterns of takeovers, three games each", "dg-h")]
+    gap, r = 58, 11
+
+    def panel(x0, y0, name, note, rows):
+        # rows: one per game, (colours of the five nodes, node holding the packet, arrow (from, to))
+        body.append(text(x0, y0, name, "dg-b"))
+        body.append(text(x0, y0 + 17, note, "dg-m"))
+        for k, (colours, packet, move) in enumerate(rows):
+            y = y0 + 58 + k * 50
+            body.append(text(x0, y + 4, f"game {k + 1}", "dg-s"))
+            xs = [x0 + 78 + i * gap for i in range(5)]
+            for a, b in zip(xs, xs[1:]):
+                body.append(seg(a + r, y, b - r, y, "dg-faint"))
+            for x, c in zip(xs, colours):
+                body.append(dot(x, y, r, {"L": "dg-node", "o": "dg-grey", "x": "dg-node2"}[c]))
+            if packet is not None:
+                body.append(box(xs[packet] - 6, y - r - 11, 12, 8, "dg-box2", 2))
+            if move is not None:
+                a, b = xs[move[0]], xs[move[1]]
+                bend = -24 if b > a else -24
+                mid = (a + b) / 2
+                body.append(f'<path d="M{a:.1f},{y - r:.1f} Q{mid:.1f},{y - r + bend:.1f} {b:.1f},{y - r - 1:.1f}" '
+                            f'class="dg-acc" marker-end="url(#dg-arrow)"/>')
+
+    L, o, x = "L", "o", "x"
+    panel(20, 60, "Puffer", "moves on and keeps its home: a trail of copies",
+          [([L, o, o, o, o], 0, (0, 1)), ([L, L, o, o, o], 1, (1, 2)), ([L, L, L, o, o], 2, (2, 3))])
+    panel(400, 60, "Glider", "moves on while its home is taken: nothing is left",
+          [([L, o, o, o, o], 0, (0, 1)), ([x, L, o, o, o], 1, (1, 2)), ([x, x, L, o, o], 2, (2, 3))])
+    panel(20, 290, "Blinker", "the packet swings between two nodes",
+          [([o, L, o, o, o], 1, (1, 2)), ([o, L, L, o, o], 2, (2, 1)), ([o, L, L, o, o], 1, (1, 2))])
+    panel(400, 290, "Gun", "stays where it is and fires chain after chain",
+          [([o, o, L, o, o], 2, (2, 1)), ([o, L, L, o, o], 2, (2, 3)), ([o, L, L, L, o], 2, (2, 1))])
+    legend_y = 520
+    body.append(dot(30, legend_y, 7, "dg-node"))
+    body.append(text(44, legend_y + 4, "the lineage (copies of one brain)", "dg-m"))
+    body.append(dot(300, legend_y, 7, "dg-node2"))
+    body.append(text(314, legend_y + 4, "another agent", "dg-m"))
+    body.append(dot(450, legend_y, 7, "dg-grey"))
+    body.append(text(464, legend_y + 4, "others", "dg-m"))
+    body.append(box(540, legend_y - 4, 12, 8, "dg-box2", 2))
+    body.append(text(560, legend_y + 4, "the packet of tokens", "dg-m"))
+    body.append(lines(20, 556, [
+        "A row is one game: the arrow is a takeover with at least half of the taker's tokens, which",
+        "carries the packet and a copy of the brain to the node taken. A chain is a run of such moves,",
+        "each made from the node the last one took.",
+    ], "dg-t", 18))
+    return svg(760, 620, "".join(body), "Patterns of takeovers")
+
+
 DIAGRAMS = {"ring": ring, "one-iteration": one_iteration, "reproduction": reproduction,
             "game": game, "revolution": revolution, "cleanup": cleanup, "brain": brain,
             "gini": gini, "reproducibility": reproducibility, "light-cone": light_cone,
-            "finite-difference": finite_difference}
+            "finite-difference": finite_difference, "patterns": patterns}
 
 
 def main() -> None:

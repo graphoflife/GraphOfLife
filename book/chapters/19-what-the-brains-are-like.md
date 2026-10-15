@@ -319,7 +319,7 @@ spread every number out to √1.40 times the founders' spread (the section
 above), and two brains drawn independently with that spread would be
 √1.40 × 0.176 = 0.21 apart. In the worlds of 10,000 tokens two agents of one
 world were 0.18 apart: in a smaller world two agents share an ancestor more
-recently ([Chapter 59](59-worlds-of-100000-tokens.md)).
+recently ([Chapter 60](60-worlds-of-100000-tokens.md)).
 
 So the brains of one world are, in their numbers, nearly as different from
 each other as brains drawn independently. Yet they agree on every decision

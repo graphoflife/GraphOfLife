@@ -215,12 +215,12 @@ cluster of one genotype has little time to grow. And more than half of all
 nodes change hands in every game ([Chapter 16](16-how-the-game-is-played.md)),
 so any territory is broken up as soon as it forms. Lines, which last much
 longer than genotypes, might well hold larger domains.
-[Chapter 59](59-worlds-of-100000-tokens.md) measures them, asking the same
+[Chapter 60](60-worlds-of-100000-tokens.md) measures them, asking the same
 question of agents that share an ancestor some tens or hundreds of
 iterations back.
 
 > [!info] Added later: lines do hold regions
-> [Chapter 59](59-worlds-of-100000-tokens.md) measured them. Two neighbours
+> [Chapter 60](60-worlds-of-100000-tokens.md) measured them. Two neighbours
 > share a family of 25 iterations back 99 times as often as chance would have
 > them, and the excess reaches about 7 steps; for families of 200 iterations
 > back, about 12 (4 to 17 across the worlds). A line's patch widens as a

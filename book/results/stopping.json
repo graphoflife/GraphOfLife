@@ -125,6 +125,68 @@
     "q75": 0.49735948170029315
    }
   },
+  "steps_lifetime": {
+   "0\u2192100": {
+    "n": 10,
+    "mean": 0.7907458434159785,
+    "median": 0.7936256613830999,
+    "sd": 0.05446321344831795,
+    "min": 0.707015742350992,
+    "max": 0.8572358370514185,
+    "q25": 0.7572552976369451,
+    "q75": 0.8348769477598785
+   },
+   "100\u2192200": {
+    "n": 10,
+    "mean": 0.7550071154121056,
+    "median": 0.7492783692245906,
+    "sd": 0.058562764165663285,
+    "min": 0.6524192185001345,
+    "max": 0.8818516363334952,
+    "q25": 0.7329073281885213,
+    "q75": 0.7613352796592875
+   },
+   "200\u2192500": {
+    "n": 10,
+    "mean": 0.7909063431655181,
+    "median": 0.7895219180778774,
+    "sd": 0.061074764652303944,
+    "min": 0.7057613837738639,
+    "max": 0.9073210245898427,
+    "q25": 0.7738112576426854,
+    "q75": 0.800723185403765
+   },
+   "500\u21921,000": {
+    "n": 10,
+    "mean": 0.6939086079239982,
+    "median": 0.6819306236881428,
+    "sd": 0.0408162742073832,
+    "min": 0.6418905598959261,
+    "max": 0.7576223200012386,
+    "q25": 0.6713123087155239,
+    "q75": 0.7201582391170115
+   },
+   "1,000\u21921,500": {
+    "n": 10,
+    "mean": 0.6363613058645727,
+    "median": 0.6177059753865731,
+    "sd": 0.07153267924118918,
+    "min": 0.5326109826840093,
+    "max": 0.7895975226735363,
+    "q25": 0.5969473008833828,
+    "q75": 0.6622941288365165
+   },
+   "1,500\u21922,000": {
+    "n": 10,
+    "mean": 0.595093211232488,
+    "median": 0.5951589561173596,
+    "sd": 0.04044658744018289,
+    "min": 0.52432824610968,
+    "max": 0.6472774083832685,
+    "q25": 0.5689452724639179,
+    "q75": 0.6289597898615356
+   }
+  },
   "late_vs_500": {
    "B2": {
     "n": 10,
@@ -603,8 +665,8 @@
   },
   "steps": {
    "title": "Each era against the one before",
-   "caption": "One dot per world: the later era's share of the agents, the mean of its two contests with the era before. The bars are the medians.",
-   "recipe": "**Runs.** The 20 runs of Experiment 16 \u2014 B2 at 10,000 tokens, seeds 1 to 10, 2,000 iterations, a whole world archived every 100 \u2014 with and without the random inputs. They are made with `python3 gol_lab.py run E16`.\n\n**Data.** From each run's archive, `GraphOfLifeRuns/<run>/archive/world_<iteration>.npz`: the whole world as a checkpoint writes it, kept every 100 iterations.\n\n1. Of the contests of the figure above, take those between consecutive eras and average each pair's two.\n\n**To make it again:** `python3 book_figures.py stopping`."
+   "caption": "One dot per world: the later era's share of the agents, the mean of its two contests with the era before, one in each era's world. The bars are the medians. The contests of the yardstick last 20 iterations; the third colour is the same steps of B2 in contests of 100 iterations, an agent's life.",
+   "recipe": "**Runs.** The 20 runs of Experiment 16 \u2014 B2 at 10,000 tokens, seeds 1 to 10, 2,000 iterations, a whole world archived every 100 \u2014 with and without the random inputs. They are made with `python3 gol_lab.py run E16`.\n\n**Data.** From each run's archive, `GraphOfLifeRuns/<run>/archive/world_<iteration>.npz`: the whole world as a checkpoint writes it, kept every 100 iterations.\n\n1. Of the contests of the figure above, take those between consecutive eras and average each pair's two.\n2. For the contests a lifetime long: the same pairs of eras of the ten B2 worlds, played with T = 100, once in each era's world, seed 17 (`python3 research/oee/checks/long_contests.py --T 100 --pairs 0:100,100:200,200:500,500:1000,1000:1500,1500:2000,1000:2000 --out GraphOfLifeRuns/.pilots/long_steps.json`).\n\n**To make it again:** `python3 book_figures.py stopping`."
   },
   "exploit": {
    "title": "How far from an equilibrium",

@@ -49,11 +49,14 @@ def main():
     ap.add_argument("--T", type=int, default=100)
     ap.add_argument("--jobs", type=int, default=2)
     ap.add_argument("--out", required=True)
+    ap.add_argument("--seeds", default="17", help="contest seeds, comma-separated: an era against itself "
+                                                  "(a pair a:a) needs more than one to be a control")
     a = ap.parse_args()
     done = []
     if os.path.exists(a.out):
         done = json.load(open(a.out))
-    have = {(r["world"], r["home"], r["a"], r["b"], r["T"]) for r in done}
+    have = {(r["world"], r["home"], r["a"], r["b"], r["T"], r["seed"]) for r in done}
+    seeds = [int(x) for x in a.seeds.split(",")]
     tasks = []
     for line in open(a.worlds):
         line = line.strip()
@@ -62,9 +65,10 @@ def main():
         kind, world, pairs = line.split()
         for pair in pairs.split(","):
             x, y = (int(v) for v in pair.split(":"))
-            for home in (x, y):
-                if (world, home, x, y, a.T) not in have:
-                    tasks.append((kind, world, home, x, y, a.T, 17))
+            for home in sorted({x, y}):
+                for seed in seeds:
+                    if (world, home, x, y, a.T, seed) not in have:
+                        tasks.append((kind, world, home, x, y, a.T, seed))
     print(f"{len(tasks)} contests to play", flush=True)
     with ProcessPoolExecutor(a.jobs) as pool:
         futures = [pool.submit(play, t) for t in tasks]

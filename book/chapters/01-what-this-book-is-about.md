@@ -142,7 +142,7 @@ lists.
   brains change ([Chapter 52](52-how-fast-should-brains-change.md)), or their
   size, decides where it stops.
 - **Part VI · Towards a physics.** The second aim: what a world's size
-  changes ([Chapter 59](59-worlds-of-100000-tokens.md) sets the worlds of
+  changes ([Chapter 60](60-worlds-of-100000-tokens.md) sets the worlds of
   100,000 tokens beside those of 10,000), how many dimensions a world has at
   scale, which of its properties have no scale, what changes when every rule
   is local, how far a difference travels, what forms when a flow runs
@@ -150,7 +150,7 @@ lists.
   agent with a brain of its own does in a sea of average agents
   ([Chapter 7](07-physical-inspiration.md) sets out the questions).
 - **Part VII · The long run.** One world followed for a hundred thousand
-  iterations ([Chapter 68](68-a-hundred-thousand-iterations.md)).
+  iterations ([Chapter 69](69-a-hundred-thousand-iterations.md)).
 - **Notes.** Short notes, one per idea, that define every rule, every
   measurement and every statistical method the chapters use, with worked
   examples: [Every setting](../notes/settings.md),

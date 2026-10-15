@@ -152,7 +152,7 @@ and the messages of one line differ only where the line's changes moved
 them. So a world speaks a few dialects, each spoken by a line. The worlds of
 10,000 tokens used fewer directions, 8.8 in the median world: in a world ten
 times larger more lines live side by side, for longer
-([Chapter 59](59-worlds-of-100000-tokens.md)), and so do more dialects.
+([Chapter 60](60-worlds-of-100000-tokens.md)), and so do more dialects.
 
 **Nearly nothing about the world.** A straight-line fit of the messages on
 what a message could be about — the writer's and the reader's tokens and

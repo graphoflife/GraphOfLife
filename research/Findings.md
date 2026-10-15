@@ -36,9 +36,9 @@ otherwise. Last consolidated: 2026-10-15.
 - 97% of new genotypes arise in brains that are not being copied (mutation after
   every game) (Ch. 39).
 - A world of 10,000 tokens descends from one branch about every 350 iterations;
-  takeover time ∝ tokens^0.77 (E10 thesis refuted) (Ch. 18, 59).
+  takeover time ∝ tokens^0.77 (E10 thesis refuted) (Ch. 18, 60).
 - Families live in patches that widen like a random walk (reach 7 → 12 steps for
-  lags 25 → 200) (Ch. 37, 59).
+  lags 25 → 200) (Ch. 37, 60).
 - Hazard falls with age to ~1% per game; no ageing; the oldest (~850) is set by
   numbers; implied median age 55 = observed (Ch. 12–13).
 - Worlds whose brains never change end in very different places; evolving
@@ -235,6 +235,37 @@ mutation probability per copy 0.05/0.1/0.2/0.4/0.8, 10 seeds each, to 1,500)**
 - Gifts on B2's space: harmless. Gifts with every unused link lapsing: the
   network breaks as without gifts (dimension ~2, worst agent cut ~20%,
   1,300–1,450 agents): brains do not pay for the links that matter.
+
+**Structures and help (Ch. 58; E16 B2 and B1 baseline worlds, games 1,000–2,000;
+alliance pilots played on 200 iterations; research/oee/checks)**
+- Takeover chains (moves with >= half the taker's tokens, each from the node the
+  last took) are 23x chance in B2 and 11x in B1 for >= 3 moves. B2's are
+  puffers (mover keeps its node 93%; packets 2–3 tokens); B1's are gliders
+  (keeps 9%; packets grow 18 -> 82 tokens). They blink a little (back to the
+  node before 1.37x / 1.27x chance), wander like random walks (no direction:
+  an agent cannot know where it came from), and guns fire without a period.
+- Lasting mutual stakes are feuds, not partnerships (B2 kept 0.80 vs 0.89, 10/10).
+- Gifts run downhill in every world without alliances (circulation 0.09–0.13
+  below the sign-flip level) along slopes that last (0.20 B2, 0.50 B1): tribute,
+  to the well-connected in B1. Takeovers go round, but no ring lasts 50 games.
+  With alliances gifts go round (+0.04 to +0.14): exchange.
+- Help defined by the rules (a stake without which the holder would have lost
+  its node; counted exactly) exists only via revolutions or pooled sides. B2:
+  ~0.01 nodes saved per 100 agents a game, falling over evolution. B1: 2.4
+  (1.5-4.4), a by-product: returned 0.76x exposure-matched chance, runs one
+  way, clones 1.03x (10/10 worlds). Alliances: rescue ~nil (0.02-0.09); they
+  protect by peace and exchange. Rare help (B2, allies) is returned 4-75x
+  chance, but in situations symmetric by nature (shared attacker, mutual
+  alliance) and, in B1/B2, without any input saying who helped: the trace of
+  reciprocity, not reciprocity.
+- Outcome comparisons of the helped against the rest measure need, not
+  benefit (allied pairs keep less, allied agents more); help has to be defined
+  by the rules.
+
+**Lifetime steps (E16 B2, T = 100; 2026-10-15)**
+- Every step from the founders to 2,000 is won by the later era in 10/10 worlds:
+  0.79 (100 vs 0), 0.75, 0.79, 0.68 (1,000 vs 500), 0.62, 0.60 (2,000 vs 1,500);
+  2,000 vs 1,000 0.67. B2 keeps evolving, more slowly as it goes.
 
 **Open (being tested)**
 - Rules without numbers (B3, Ch. 57): all seven of B2's numbers removed at once

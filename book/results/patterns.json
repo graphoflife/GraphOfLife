@@ -1,0 +1,1340 @@
+{
+ "chapter": "patterns",
+ "numbers": {
+  "examples": {
+   "B2": {
+    "run": "B2-10000-s001",
+    "moves": 31,
+    "nodes": 28,
+    "reach": null,
+    "walk": null,
+    "games": [
+     1120,
+     1150
+    ],
+    "home_kept": 0.9354838709677419,
+    "packet_first": 4,
+    "packet_last": 2,
+    "end": "kept"
+   },
+   "B1": {
+    "run": "B1-10000-s001",
+    "moves": 100,
+    "nodes": 66,
+    "reach": null,
+    "walk": null,
+    "games": [
+     1544,
+     1643
+    ],
+    "home_kept": 0.0,
+    "packet_first": 380,
+    "packet_last": 1358,
+    "end": "kept"
+   }
+  },
+  "chains_over_chance": {
+   "B2": {
+    "median": 22.672900714958335,
+    "min": 18.02944038689106,
+    "max": 54.02905671706647,
+    "worlds": 10
+   },
+   "B1": {
+    "median": 10.574337076895876,
+    "min": 6.501506321087823,
+    "max": 25.653666486637594,
+    "worlds": 10
+   }
+  },
+  "home_kept": {
+   "B2": {
+    "median": 0.9302843495570876,
+    "min": 0.917736177807998,
+    "max": 0.9560209593952274,
+    "worlds": 10
+   },
+   "B1": {
+    "median": 0.09423692322644156,
+    "min": 0.04320469798657718,
+    "max": 0.1629879756218086,
+    "worlds": 10
+   }
+  },
+  "lag2_over_chance": {
+   "B2": {
+    "median": 1.3668445181824265,
+    "min": 1.305400092081753,
+    "max": 1.4700306562055923,
+    "worlds": 10
+   },
+   "B1": {
+    "median": 1.2727601180819954,
+    "min": 1.2393437198923987,
+    "max": 1.3444732625055353,
+    "worlds": 10
+   }
+  },
+  "reach_over_walk": {
+   "B2": {
+    "median": 0.8,
+    "min": 0.75,
+    "max": 1.0,
+    "worlds": 10
+   },
+   "B1": {
+    "median": 1.0,
+    "min": 1.0,
+    "max": 1.0,
+    "worlds": 10
+   }
+  },
+  "gl_moves": {
+   "B2": {
+    "median": 243593.0,
+    "min": 162190,
+    "max": 302375,
+    "worlds": 10
+   },
+   "B1": {
+    "median": 80943.5,
+    "min": 38326,
+    "max": 121659,
+    "worlds": 10
+   }
+  },
+  "gl_taken": {
+   "B2": {
+    "median": 244491.5,
+    "min": 163113,
+    "max": 303621,
+    "worlds": 10
+   },
+   "B1": {
+    "median": 709274.5,
+    "min": 359529,
+    "max": 887578,
+    "worlds": 10
+   }
+  },
+  "gl_length_max": {
+   "B2": {
+    "median": 27.0,
+    "min": 18,
+    "max": 32,
+    "worlds": 10
+   },
+   "B1": {
+    "median": 107.5,
+    "min": 69,
+    "max": 175,
+    "worlds": 10
+   }
+  },
+  "gl_home_starved_long": {
+   "B2": {
+    "median": 0.0,
+    "min": 0.0,
+    "max": 0.0,
+    "worlds": 10
+   },
+   "B1": {
+    "median": 0.07637745217320256,
+    "min": 0.03859060402684564,
+    "max": 0.16803400217455766,
+    "worlds": 10
+   }
+  },
+  "gl_packet_first_median": {
+   "B2": {
+    "median": 3.0,
+    "min": 2.0,
+    "max": 4.0,
+    "worlds": 10
+   },
+   "B1": {
+    "median": 18.0,
+    "min": 9.0,
+    "max": 36.5,
+    "worlds": 10
+   }
+  },
+  "gl_packet_last_median": {
+   "B2": {
+    "median": 2.0,
+    "min": 2.0,
+    "max": 3.0,
+    "worlds": 10
+   },
+   "B1": {
+    "median": 82.0,
+    "min": 35.0,
+    "max": 133.5,
+    "worlds": 10
+   }
+  },
+  "gl_lag3_return": {
+   "B2": {
+    "median": 0.015661198964121086,
+    "min": 0.01328420683259393,
+    "max": 0.019681349578256794,
+    "worlds": 10
+   },
+   "B1": {
+    "median": 0.014277417911597819,
+    "min": 0.009342105263157895,
+    "max": 0.018002606712284132,
+    "worlds": 10
+   }
+  },
+  "gl_lag3_chance": {
+   "B2": {
+    "median": 0.011090051387861996,
+    "min": 0.009527631872878334,
+    "max": 0.012913137368438934,
+    "worlds": 10
+   },
+   "B1": {
+    "median": 0.01334683798752279,
+    "min": 0.007628476559527653,
+    "max": 0.01767427440044366,
+    "worlds": 10
+   }
+  },
+  "gl_launches_per_node_dispersion": {
+   "B2": {
+    "median": 2.613271487425126,
+    "min": 2.4611904991638758,
+    "max": 2.8814282149911876,
+    "worlds": 10
+   },
+   "B1": {
+    "median": 13.153350734209216,
+    "min": 6.708929581019643,
+    "max": 21.44126584593482,
+    "worlds": 10
+   }
+  },
+  "gl_launches_per_node_max": {
+   "B2": {
+    "median": 34.0,
+    "min": 31,
+    "max": 38,
+    "worlds": 10
+   },
+   "B1": {
+    "median": 127.5,
+    "min": 63,
+    "max": 201,
+    "worlds": 10
+   }
+  },
+  "gl_share_of_taken_in_long": {
+   "B2": {
+    "median": 0.31200154322756746,
+    "min": 0.2469256633355499,
+    "max": 0.35089995377205146,
+    "worlds": 10
+   },
+   "B1": {
+    "median": 0.018693283744081392,
+    "min": 0.012757741358751558,
+    "max": 0.03127646502050779,
+    "worlds": 10
+   }
+  },
+  "gl_same_brain_median": {
+   "B2": {
+    "median": 0.3,
+    "min": 0.2330316742081448,
+    "max": 0.4,
+    "worlds": 10
+   },
+   "B1": {
+    "median": 0.2985294117647059,
+    "min": 0.2727272727272727,
+    "max": 0.38461538461538464,
+    "worlds": 10
+   }
+  },
+  "gl_long_chains": {
+   "B2": {
+    "median": 19374.5,
+    "min": 13190,
+    "max": 25032,
+    "worlds": 10
+   },
+   "B1": {
+    "median": 2222.5,
+    "min": 1015,
+    "max": 5163,
+    "worlds": 10
+   }
+  },
+  "all_in": {
+   "B2": {
+    "median": 0.9960633357056978,
+    "min": 0.9943413461833208,
+    "max": 0.9974312188887394,
+    "worlds": 10
+   },
+   "B1": {
+    "median": 0.1107038794500205,
+    "min": 0.07485236301058877,
+    "max": 0.1683507414357118,
+    "worlds": 10
+   }
+  },
+  "ends_long": {
+   "B2": {
+    "kept": 0.9171142120120472,
+    "taken": 0.06410360127221382,
+    "starved": 0.017408211758710823
+   },
+   "B1": {
+    "kept": 0.4900271434252198,
+    "taken": 0.28506424952971754,
+    "starved": 0.23987654755059917
+   }
+  },
+  "partnerships": {
+   "B2": {
+    "kept_in": {
+     "median": 0.7952843537525289,
+     "min": 0.6839378238341969,
+     "max": 0.8833819241982507,
+     "worlds": 10
+    },
+    "kept_otherwise": {
+     "median": 0.8892622018486624,
+     "min": 0.8732659691704465,
+     "max": 0.9170827536841069,
+     "worlds": 10
+    },
+    "longest": {
+     "median": 24.5,
+     "min": 8,
+     "max": 78,
+     "worlds": 10
+    },
+    "two_loops": {
+     "median": 0.03420410245988856,
+     "min": 0.021003127657363913,
+     "max": 0.04599223557745041,
+     "worlds": 10
+    },
+    "two_loops_chance": {
+     "median": 0.029504840812409616,
+     "min": 0.020084489831108932,
+     "max": 0.036710155680204214,
+     "worlds": 10
+    },
+    "channel_repeat": {
+     "median": 0.1168941002394592,
+     "min": 0.090257993384785,
+     "max": 0.14761700987193288,
+     "worlds": 10
+    },
+    "channel_repeat_chance": {
+     "median": 0.07654162952039748,
+     "min": 0.06151966934465763,
+     "max": 0.09094737520600621,
+     "worlds": 10
+    }
+   },
+   "B1": {
+    "kept_in": {
+     "median": 0.4405985297761128,
+     "min": 0.3914147749165826,
+     "max": 0.49912545420434,
+     "worlds": 10
+    },
+    "kept_otherwise": {
+     "median": 0.40591848110803896,
+     "min": 0.32567611914367894,
+     "max": 0.530952473048168,
+     "worlds": 10
+    },
+    "longest": {
+     "median": 517.5,
+     "min": 388,
+     "max": 859,
+     "worlds": 10
+    },
+    "two_loops": {
+     "median": 0.46332977374692574,
+     "min": 0.45274819996592747,
+     "max": 0.47394549789070434,
+     "worlds": 10
+    },
+    "two_loops_chance": {
+     "median": 0.4608494789190871,
+     "min": 0.4486232391788874,
+     "max": 0.4727323562840204,
+     "worlds": 10
+    },
+    "channel_repeat": {
+     "median": 0.925652666273586,
+     "min": 0.9126445267036483,
+     "max": 0.9544650253947102,
+     "worlds": 10
+    },
+    "channel_repeat_chance": {
+     "median": 0.935453650186267,
+     "min": 0.9045820456515833,
+     "max": 0.9576768468983258,
+     "worlds": 10
+    }
+   }
+  },
+  "swaps": {
+   "B2": {
+    "swaps_over_chance": {
+     "median": 0.6969808026511167,
+     "min": 0.5421497248434084,
+     "max": 0.8468318539496194,
+     "worlds": 10
+    },
+    "shift_share": {
+     "median": 0.07884378870926353,
+     "min": 0.05516517443655449,
+     "max": 0.0934699294650979,
+     "worlds": 10
+    },
+    "rotations": {
+     "median": 3.0,
+     "min": 0,
+     "max": 8,
+     "worlds": 10
+    }
+   },
+   "B1": {
+    "swaps_over_chance": {
+     "median": 1.0157727557706138,
+     "min": 0.9935011674937294,
+     "max": 1.036507457028362,
+     "worlds": 10
+    },
+    "shift_share": {
+     "median": 0.7448701107714624,
+     "min": 0.7275580823968661,
+     "max": 0.7979780733691842,
+     "worlds": 10
+    },
+    "rotations": {
+     "median": 2522.0,
+     "min": 1511,
+     "max": 4843,
+     "worlds": 10
+    }
+   }
+  },
+  "flow_all_circulation_share": {
+   "B2": {
+    "median": 0.5935159260373506,
+    "min": 0.5136297831075125,
+    "max": 0.6881878872135747,
+    "worlds": 10
+   },
+   "B1": {
+    "median": 0.8015805766889939,
+    "min": 0.6836411403446323,
+    "max": 0.9172178112235625,
+    "worlds": 10
+   },
+   "alliances": {
+    "median": 0.6332023372555445,
+    "min": 0.5760274224748492,
+    "max": 0.7316118164836583,
+    "worlds": 4
+   },
+   "no alliances": {
+    "median": 0.6925327693794436,
+    "min": 0.6699775862698785,
+    "max": 0.7150879524890089,
+    "worlds": 2
+   }
+  },
+  "flow_all_flip_share": {
+   "B2": {
+    "median": 0.5295566324147173,
+    "min": 0.4290812401560322,
+    "max": 0.5908046194263533,
+    "worlds": 10
+   },
+   "B1": {
+    "median": 0.5983312016385977,
+    "min": 0.48749042731561976,
+    "max": 0.6485914910194887,
+    "worlds": 10
+   },
+   "alliances": {
+    "median": 0.5452446091824812,
+    "min": 0.505360500533578,
+    "max": 0.5844799435307746,
+    "worlds": 4
+   },
+   "no alliances": {
+    "median": 0.5743296451884814,
+    "min": 0.5710285664445607,
+    "max": 0.5776307239324022,
+    "worlds": 2
+   }
+  },
+  "flow_all_random_share": {
+   "B2": {
+    "median": 0.4999493045397701,
+    "min": 0.35520471809208615,
+    "max": 0.5368136368438929,
+    "worlds": 10
+   },
+   "B1": {
+    "median": 0.5906966755857794,
+    "min": 0.4980645114114456,
+    "max": 0.6202453706311715,
+    "worlds": 10
+   },
+   "alliances": {
+    "median": 0.5047093657953251,
+    "min": 0.4680599974546664,
+    "max": 0.5275983508128771,
+    "worlds": 4
+   },
+   "no alliances": {
+    "median": 0.558724776994528,
+    "min": 0.5557244526063931,
+    "max": 0.561725101382663,
+    "worlds": 2
+   }
+  },
+  "flow_all_persistence_flow": {
+   "B2": {
+    "median": 0.004513323509575571,
+    "min": -0.013288804895864655,
+    "max": 0.021289068736435702,
+    "worlds": 10
+   },
+   "B1": {
+    "median": -0.032121734488574874,
+    "min": -0.05310695979752792,
+    "max": -0.008387285390570055,
+    "worlds": 10
+   },
+   "alliances": {
+    "median": 0.010411721993071398,
+    "min": 0.00492215779224606,
+    "max": 0.07222637804540634,
+    "worlds": 4
+   },
+   "no alliances": {
+    "median": -0.024459751081136048,
+    "min": -0.025203588960659856,
+    "max": -0.02371591320161224,
+    "worlds": 2
+   }
+  },
+  "flow_all_persistence_gradient": {
+   "B2": {
+    "median": 0.031432857414291006,
+    "min": 0.0012300650442884995,
+    "max": 0.06085000870334131,
+    "worlds": 10
+   },
+   "B1": {
+    "median": -0.15501190175575824,
+    "min": -0.3037223052700786,
+    "max": -0.07897160234636552,
+    "worlds": 10
+   },
+   "alliances": {
+    "median": 0.06535533784467198,
+    "min": 0.054529560020456,
+    "max": 0.10062448463711039,
+    "worlds": 4
+   },
+   "no alliances": {
+    "median": -0.032557081867944905,
+    "min": -0.04430918652606177,
+    "max": -0.020804977209828036,
+    "worlds": 2
+   }
+  },
+  "flow_all_persistence_circulation": {
+   "B2": {
+    "median": 4.358622636576275e-05,
+    "min": -0.01797394202598646,
+    "max": 0.008248613554696936,
+    "worlds": 10
+   },
+   "B1": {
+    "median": -0.008006094665386414,
+    "min": -0.021137422346466588,
+    "max": 0.020629371336904737,
+    "worlds": 10
+   },
+   "alliances": {
+    "median": -0.008834220674699012,
+    "min": -0.044377574604922906,
+    "max": 0.04998087188945432,
+    "worlds": 4
+   },
+   "no alliances": {
+    "median": -0.008367113285004375,
+    "min": -0.02002278006606949,
+    "max": 0.0032885534960607416,
+    "worlds": 2
+   }
+  },
+  "flow_all_excess": {
+   "B2": {
+    "median": 0.07788310821458921,
+    "min": 0.04935770947620899,
+    "max": 0.0973832677872214,
+    "worlds": 10
+   },
+   "B1": {
+    "median": 0.24328012576156482,
+    "min": 0.13623355810635562,
+    "max": 0.26862632020407384,
+    "worlds": 10
+   },
+   "alliances": {
+    "median": 0.08795772807306335,
+    "min": 0.07066692194127122,
+    "max": 0.14713187295288366,
+    "worlds": 4
+   },
+   "no alliances": {
+    "median": 0.11820312419096224,
+    "min": 0.09234686233747624,
+    "max": 0.14405938604444823,
+    "worlds": 2
+   }
+  },
+  "flow_gift_circulation_share": {
+   "B2": {
+    "median": 0.35232693742208976,
+    "min": 0.2930097345284868,
+    "max": 0.4133422310864978,
+    "worlds": 10
+   },
+   "B1": {
+    "median": 0.2162603744582518,
+    "min": 0.1537028349699871,
+    "max": 0.26113015603309164,
+    "worlds": 10
+   },
+   "alliances": {
+    "median": 0.6119470731712998,
+    "min": 0.5188343203391184,
+    "max": 0.7262071931285947,
+    "worlds": 4
+   },
+   "no alliances": {
+    "median": 0.42337501323486676,
+    "min": 0.4083999033302877,
+    "max": 0.4383501231394458,
+    "worlds": 2
+   }
+  },
+  "flow_gift_flip_share": {
+   "B2": {
+    "median": 0.45485573977265026,
+    "min": 0.3655869565254676,
+    "max": 0.5219855019374722,
+    "worlds": 10
+   },
+   "B1": {
+    "median": 0.34796824854678277,
+    "min": 0.25064833403966397,
+    "max": 0.4609510357652347,
+    "worlds": 10
+   },
+   "alliances": {
+    "median": 0.5410108167151186,
+    "min": 0.47636206852157725,
+    "max": 0.5890327640908088,
+    "worlds": 4
+   },
+   "no alliances": {
+    "median": 0.5288739466766437,
+    "min": 0.5224069657439847,
+    "max": 0.5353409276093026,
+    "worlds": 2
+   }
+  },
+  "flow_gift_random_share": {
+   "B2": {
+    "median": 0.40607951607670817,
+    "min": 0.2751684013249374,
+    "max": 0.45869100879705277,
+    "worlds": 10
+   },
+   "B1": {
+    "median": 0.5724991542564328,
+    "min": 0.4665109186916031,
+    "max": 0.5982493454370188,
+    "worlds": 10
+   },
+   "alliances": {
+    "median": 0.4871713355535365,
+    "min": 0.4060988864489292,
+    "max": 0.527305399670507,
+    "worlds": 4
+   },
+   "no alliances": {
+    "median": 0.4871266589096453,
+    "min": 0.48192367710644735,
+    "max": 0.49232964071284324,
+    "worlds": 2
+   }
+  },
+  "flow_gift_persistence_flow": {
+   "B2": {
+    "median": 0.15100781495694834,
+    "min": 0.12871009536400765,
+    "max": 0.19410078275822523,
+    "worlds": 10
+   },
+   "B1": {
+    "median": 0.46122196523259196,
+    "min": 0.4141905075740273,
+    "max": 0.5378847076837303,
+    "worlds": 10
+   },
+   "alliances": {
+    "median": 0.048181165980258525,
+    "min": 0.014376554426126287,
+    "max": 0.09253458413356078,
+    "worlds": 4
+   },
+   "no alliances": {
+    "median": 0.14560248276815652,
+    "min": 0.10229197281453607,
+    "max": 0.18891299272177695,
+    "worlds": 2
+   }
+  },
+  "flow_gift_persistence_gradient": {
+   "B2": {
+    "median": 0.19926443421302403,
+    "min": 0.17496331259632517,
+    "max": 0.21480431856950424,
+    "worlds": 10
+   },
+   "B1": {
+    "median": 0.49941923153228507,
+    "min": 0.4718765283457888,
+    "max": 0.5552144619503,
+    "worlds": 10
+   },
+   "alliances": {
+    "median": 0.09480490677173975,
+    "min": 0.05835781734750322,
+    "max": 0.15569136551448975,
+    "worlds": 4
+   },
+   "no alliances": {
+    "median": 0.17816825556019572,
+    "min": 0.12510568827893934,
+    "max": 0.23123082284145208,
+    "worlds": 2
+   }
+  },
+  "flow_gift_persistence_circulation": {
+   "B2": {
+    "median": 0.022442571026289174,
+    "min": 0.0017150391370516092,
+    "max": 0.03762870717386421,
+    "worlds": 10
+   },
+   "B1": {
+    "median": 0.08540134645630112,
+    "min": 0.03492764248938746,
+    "max": 0.11622719479195845,
+    "worlds": 10
+   },
+   "alliances": {
+    "median": 0.004667341230341073,
+    "min": -0.01882891874857413,
+    "max": 0.058974519020033984,
+    "worlds": 4
+   },
+   "no alliances": {
+    "median": 0.012097037477618273,
+    "min": 0.009427295744061443,
+    "max": 0.014766779211175102,
+    "worlds": 2
+   }
+  },
+  "flow_gift_excess": {
+   "B2": {
+    "median": -0.09082026043010635,
+    "min": -0.12087341006753366,
+    "max": -0.0725772219969808,
+    "worlds": 10
+   },
+   "B1": {
+    "median": -0.13399230630969383,
+    "min": -0.21523035241203128,
+    "max": -0.09694549906967687,
+    "worlds": 10
+   },
+   "alliances": {
+    "median": 0.07093625645618112,
+    "min": 0.04247225181754111,
+    "max": 0.13717442903778587,
+    "worlds": 4
+   },
+   "no alliances": {
+    "median": -0.10549893344177691,
+    "min": -0.12694102427901494,
+    "max": -0.08405684260453888,
+    "worlds": 2
+   }
+  },
+  "flow_take_circulation_share": {
+   "B2": {
+    "median": 0.43083353106087874,
+    "min": 0.3606495804648395,
+    "max": 0.48348531525284644,
+    "worlds": 10
+   },
+   "B1": {
+    "median": 0.710100460001413,
+    "min": 0.5478420257463623,
+    "max": 0.8868028447418153,
+    "worlds": 10
+   },
+   "alliances": {
+    "median": 0.25773366402602493,
+    "min": 0.07254930889283309,
+    "max": 0.3461965122903001,
+    "worlds": 4
+   },
+   "no alliances": {
+    "median": 0.5000520634844131,
+    "min": 0.47001530918208817,
+    "max": 0.530088817786738,
+    "worlds": 2
+   }
+  },
+  "flow_take_flip_share": {
+   "B2": {
+    "median": 0.3668855753318851,
+    "min": 0.2947887366908278,
+    "max": 0.41653770972618853,
+    "worlds": 10
+   },
+   "B1": {
+    "median": 0.4918717903647266,
+    "min": 0.38060777540814805,
+    "max": 0.6114767915169401,
+    "worlds": 10
+   },
+   "alliances": {
+    "median": 0.2273087325555585,
+    "min": 0.04917062318750457,
+    "max": 0.291814695761738,
+    "worlds": 4
+   },
+   "no alliances": {
+    "median": 0.4079648621684866,
+    "min": 0.3984993969992815,
+    "max": 0.41743032733769164,
+    "worlds": 2
+   }
+  },
+  "flow_take_random_share": {
+   "B2": {
+    "median": 0.34133926543276105,
+    "min": 0.234670175050258,
+    "max": 0.3965919713377104,
+    "worlds": 10
+   },
+   "B1": {
+    "median": 0.47519798676951513,
+    "min": 0.36761507129392623,
+    "max": 0.4943281216703148,
+    "worlds": 10
+   },
+   "alliances": {
+    "median": 0.21946865426124462,
+    "min": 0.05132113821138211,
+    "max": 0.2559293903228835,
+    "worlds": 4
+   },
+   "no alliances": {
+    "median": 0.39383738846619293,
+    "min": 0.39085810379992325,
+    "max": 0.3968166731324626,
+    "worlds": 2
+   }
+  },
+  "flow_take_persistence_flow": {
+   "B2": {
+    "median": 0.028492397909484435,
+    "min": 0.004047523851612613,
+    "max": 0.04922760589493174,
+    "worlds": 10
+   },
+   "B1": {
+    "median": 0.026803697094489248,
+    "min": -0.02387084817297432,
+    "max": 0.11126654148966639,
+    "worlds": 10
+   },
+   "alliances": {
+    "median": 0.09275657978538694,
+    "min": 0.04380476764408186,
+    "max": 0.1285737899392789,
+    "worlds": 3
+   },
+   "no alliances": {
+    "median": 0.04701767340692107,
+    "min": -0.016928882376517882,
+    "max": 0.11096422919036002,
+    "worlds": 2
+   }
+  },
+  "flow_take_persistence_gradient": {
+   "B2": {
+    "median": 0.05953013212592553,
+    "min": 0.02858189725905955,
+    "max": 0.0755406155106587,
+    "worlds": 10
+   },
+   "B1": {
+    "median": 0.05249244903680169,
+    "min": -0.10167492942856264,
+    "max": 0.23402051741230304,
+    "worlds": 10
+   },
+   "alliances": {
+    "median": 0.015262135556539005,
+    "min": 0.005944962821627157,
+    "max": 0.09473427994020918,
+    "worlds": 3
+   },
+   "no alliances": {
+    "median": 0.04097623117642684,
+    "min": 0.021402689037060264,
+    "max": 0.06054977331579341,
+    "worlds": 2
+   }
+  },
+  "flow_take_persistence_circulation": {
+   "B2": {
+    "median": -0.0007051902861119354,
+    "min": -0.016417997262115475,
+    "max": 0.0217750398461976,
+    "worlds": 10
+   },
+   "B1": {
+    "median": -0.003257302429430247,
+    "min": -0.023598679481574954,
+    "max": 0.020876228874353836,
+    "worlds": 10
+   },
+   "alliances": {
+    "median": 0.05775733988132582,
+    "min": 0.02921953095545057,
+    "max": 0.26169536256838055,
+    "worlds": 3
+   },
+   "no alliances": {
+    "median": -0.006521987641597993,
+    "min": -0.012341466377409948,
+    "max": -0.0007025089057860387,
+    "worlds": 2
+   }
+  },
+  "flow_take_excess": {
+   "B2": {
+    "median": 0.06470844953600088,
+    "min": 0.03568545550789415,
+    "max": 0.07985039958819007,
+    "worlds": 10
+   },
+   "B1": {
+    "median": 0.23850734150135644,
+    "min": 0.0887407911612883,
+    "max": 0.2925575725386611,
+    "worlds": 10
+   },
+   "alliances": {
+    "median": 0.03566271492245189,
+    "min": 0.012903118801357583,
+    "max": 0.054381816528562055,
+    "worlds": 4
+   },
+   "no alliances": {
+    "median": 0.09208720131592651,
+    "min": 0.05258498184439653,
+    "max": 0.1315894207874565,
+    "worlds": 2
+   }
+  },
+  "help_saved": {
+   "B2": {
+    "median": 0.012209792446632948,
+    "min": 0.005300988189153933,
+    "max": 0.02762599755045471,
+    "worlds": 10
+   },
+   "B1": {
+    "median": 2.3707550796975756,
+    "min": 1.5263662574752987,
+    "max": 4.426790913201943,
+    "worlds": 10
+   },
+   "alliances": {
+    "median": 0.02368187196461584,
+    "min": 0.015490397534181617,
+    "max": 0.08488861889033275,
+    "worlds": 4
+   },
+   "no alliances": {
+    "median": 0.0,
+    "min": 0.0,
+    "max": 0.0,
+    "worlds": 2
+   }
+  },
+  "help_returned_over_chance": {
+   "B2": {
+    "median": 6.215363542302712,
+    "min": 3.7965771479316377,
+    "max": 7.937625548962122,
+    "worlds": 7
+   },
+   "B1": {
+    "median": 0.7581608119192473,
+    "min": 0.6826194443463566,
+    "max": 0.8353360204144595,
+    "worlds": 10
+   },
+   "alliances": {
+    "median": 7.142875838132539,
+    "min": 7.142875838132539,
+    "max": 7.142875838132539,
+    "worlds": 1
+   },
+   "no alliances": {
+    "median": null,
+    "min": null,
+    "max": null,
+    "worlds": 0
+   }
+  },
+  "help_round_excess": {
+   "B2": {
+    "median": null,
+    "min": null,
+    "max": null,
+    "worlds": 0
+   },
+   "B1": {
+    "median": -0.07620459160418697,
+    "min": -0.10467213206373416,
+    "max": -0.03536584688596556,
+    "worlds": 10
+   },
+   "alliances": {
+    "median": -0.008011799446173454,
+    "min": -0.008011799446173454,
+    "max": -0.008011799446173454,
+    "worlds": 1
+   },
+   "no alliances": {
+    "median": null,
+    "min": null,
+    "max": null,
+    "worlds": 0
+   }
+  },
+  "help_clones_over_chance": {
+   "B2": {
+    "median": 1.2242863299947744,
+    "min": 1.131836923969705,
+    "max": 1.347117596218413,
+    "worlds": 10
+   },
+   "B1": {
+    "median": 1.0348394534374872,
+    "min": 1.0172820965356677,
+    "max": 1.067696026885618,
+    "worlds": 10
+   },
+   "alliances": {
+    "median": 1.1278400488656128,
+    "min": 0.8951752069949144,
+    "max": 1.3533161503296358,
+    "worlds": 4
+   },
+   "no alliances": {
+    "median": null,
+    "min": null,
+    "max": null,
+    "worlds": 0
+   }
+  },
+  "help_returned_pairs": {
+   "B2": [
+    {
+     "seen": 12.0,
+     "chance": 1.6164329106732624
+    },
+    {
+     "seen": 12.0,
+     "chance": 1.6047885124340384
+    },
+    {
+     "seen": 8.0,
+     "chance": 0.4548051010316413
+    },
+    {
+     "seen": 12.0,
+     "chance": 1.5117871113949248
+    },
+    {
+     "seen": 20.0,
+     "chance": 5.216232447762925
+    },
+    {
+     "seen": 34.0,
+     "chance": 8.955435034034034
+    },
+    {
+     "seen": 4.0,
+     "chance": 0.3458633333607293
+    },
+    {
+     "seen": 14.0,
+     "chance": 0.7423443170582342
+    },
+    {
+     "seen": 24.0,
+     "chance": 5.221509416514563
+    },
+    {
+     "seen": 16.0,
+     "chance": 2.5742661537175677
+    }
+   ],
+   "B1": [
+    {
+     "seen": 18890.0,
+     "chance": 24554.97061837607
+    },
+    {
+     "seen": 10904.0,
+     "chance": 15973.7612081079
+    },
+    {
+     "seen": 10908.0,
+     "chance": 13167.620774375711
+    },
+    {
+     "seen": 9452.0,
+     "chance": 12843.075167262396
+    },
+    {
+     "seen": 13656.0,
+     "chance": 18485.490683306176
+    },
+    {
+     "seen": 10212.0,
+     "chance": 14901.693190367107
+    },
+    {
+     "seen": 8386.0,
+     "chance": 10106.371760174026
+    },
+    {
+     "seen": 14760.0,
+     "chance": 18800.666535701814
+    },
+    {
+     "seen": 13304.0,
+     "chance": 17809.255898747517
+    },
+    {
+     "seen": 19728.0,
+     "chance": 23616.84342333493
+    }
+   ],
+   "alliances": [
+    {
+     "seen": 26.0,
+     "chance": 3.639990472912594
+    },
+    {
+     "seen": 0.0,
+     "chance": 0.10117963104949257
+    },
+    {
+     "seen": 10.0,
+     "chance": 0.1320778771438048
+    },
+    {
+     "seen": 6.0,
+     "chance": 0.527080508612241
+    }
+   ],
+   "no alliances": [
+    {
+     "seen": 0,
+     "chance": 0
+    },
+    {
+     "seen": 0,
+     "chance": 0
+    }
+   ]
+  },
+  "help_cost": {
+   "B2": {
+    "median": 6.522976899129718,
+    "min": 4.571988701180566,
+    "max": 7.868771096807176,
+    "worlds": 10
+   },
+   "B1": {
+    "median": 31.221545169376938,
+    "min": 27.95345647488996,
+    "max": 34.206709471632,
+    "worlds": 10
+   },
+   "alliances": {
+    "median": 1.5443291341584702,
+    "min": 0.059626471538166824,
+    "max": 3.363471113569903,
+    "worlds": 4
+   },
+   "no alliances": {
+    "median": 7.982966106723428,
+    "min": 7.589034288010901,
+    "max": 8.376897925435955,
+    "worlds": 2
+   }
+  },
+  "help_stakes": {
+   "B2": {
+    "median": 0.001568376306719791,
+    "min": 0.0006946174696293611,
+    "max": 0.0031709096590679226,
+    "worlds": 10
+   },
+   "B1": {
+    "median": 0.022823493697751277,
+    "min": 0.014226610873606181,
+    "max": 0.033280071810434846,
+    "worlds": 10
+   },
+   "alliances": {
+    "median": 0.0011228386475380635,
+    "min": 0.0007678132678132678,
+    "max": 0.004168867074648194,
+    "worlds": 4
+   },
+   "no alliances": {
+    "median": 0.0,
+    "min": 0.0,
+    "max": 0.0,
+    "worlds": 2
+   }
+  },
+  "alliance_labels": {
+   "A10k/allies-s1": {
+    "stakes_on_allies": 0.6919087160190963,
+    "of_those_gifts": 1.0,
+    "kept_with_ally": 0.9889502875128254,
+    "kept_without": 0.94043312820031,
+    "agents_with_ally": 0.6574362027832202,
+    "partnerships_allied": 0.847972972972973,
+    "partnerships": 296
+   },
+   "A10k/allies-s2": {
+    "stakes_on_allies": 0.35745206753834086,
+    "of_those_gifts": 1.0,
+    "kept_with_ally": 0.993431556124963,
+    "kept_without": 0.9495892578715878,
+    "agents_with_ally": 0.3207776811823283,
+    "partnerships_allied": 0.5594405594405595,
+    "partnerships": 143
+   },
+   "AL/allies10k-s3": {
+    "stakes_on_allies": 0.986251007334875,
+    "of_those_gifts": 1.0,
+    "kept_with_ally": 0.9995252297127508,
+    "kept_without": 0.9440314822912111,
+    "agents_with_ally": 0.9970095232366714,
+    "partnerships_allied": 1.0,
+    "partnerships": 59
+   },
+   "AL/allies10k-s4": {
+    "stakes_on_allies": 0.9493953482088425,
+    "of_those_gifts": 1.0,
+    "kept_with_ally": 0.9972541101262797,
+    "kept_without": 0.9009567387687188,
+    "agents_with_ally": 0.9719341503250806,
+    "partnerships_allied": 0.9713656387665198,
+    "partnerships": 454
+   }
+  },
+  "alliance_partnerships": {
+   "A10k/allies-s1": {
+    "kept_in": 0.9361518550474547,
+    "kept_otherwise": 0.9653960938385403
+   },
+   "A10k/allies-s2": {
+    "kept_in": 0.9057187017001546,
+    "kept_otherwise": 0.9525544406045717
+   },
+   "AL/allies10k-s3": {
+    "kept_in": 1.0,
+    "kept_otherwise": 0.9990530519110097
+   },
+   "AL/allies10k-s4": {
+    "kept_in": 0.9891833423472147,
+    "kept_otherwise": 0.9931896133747553
+   },
+   "A10k/ctrl-s1": {
+    "kept_in": 0.49261083743842365,
+    "kept_otherwise": 0.8800563124957814
+   },
+   "A10k/ctrl-s2": {
+    "kept_in": 0.4846743295019157,
+    "kept_otherwise": 0.8602217834349988
+   }
+  }
+ },
+ "figures": {
+  "chains": {
+   "title": "How long the chains of takeovers get",
+   "caption": "One line per world. A move is a takeover made with at least half of the taker's tokens; a chain is a run of moves, each made from the node the last one took. Dashed: the chains there would be if every node holding a packet moved it on with the same chance as any agent moves one in a game, whatever came before.",
+   "recipe": "**Runs.** The ten B2 worlds of Experiment 16, `B2-10000-s001` \u2026 `-s010`, and the first ten worlds of the baseline set, `B1-10000-s001` \u2026 `-s010` (B1 at 10,000 tokens, Experiment 2). Both record every game with every agent's stakes; read are the games of iterations 1,000 to 2,000.\n\n**Data.** From each run's frames of the game phase, with its agents' decisions.\n\n1. In every game, find the moves: an agent's stake on a neighbour's node that took it and was at least half of the agent's tokens (`research/oee/checks/gliders.py`).\n2. A move made from a node that a move took in the game before continues that chain; any other starts one. Count the chains by their number of moves.\n3. Chance: with p the share of agents that make a move in a game, averaged over the games (`structures.py`, `packet_go_on_chance`), and N the chains, N (1 \u2212 p) p^(L\u22121) chains would have L moves.\n\n**To make it again:** `python3 book_figures.py patterns`."
+  },
+  "example": {
+   "title": "Two chains on their networks",
+   "caption": "Left, in `B2-10000-s001`, the chain of its 300 longest that took the most different nodes: 31 moves over 28 nodes in games 1,120 to 1,150, its packet 4 tokens at the first move and 2 at the last. Right, the same for `B1-10000-s001`: 100 moves over 66 nodes, games 1,544 to 1,643, its packet 380 tokens, then 1358. Drawn is the network of each chain's last game around the nodes it took, with their neighbours; the chain's moves are the coloured links, drawn even where the connection a move crossed has gone since. A node the chain took that no longer exists at its last game is not drawn, the node where it began among them.",
+   "recipe": "**Runs.** The ten B2 worlds of Experiment 16, `B2-10000-s001` \u2026 `-s010`, and the first ten worlds of the baseline set, `B1-10000-s001` \u2026 `-s010` (B1 at 10,000 tokens, Experiment 2). Both record every game with every agent's stakes; read are the games of iterations 1,000 to 2,000.\n\n**Data.** From the two runs' frames of the game phase, with their agents' decisions.\n\n1. Track the chains as for the figures below and keep the 300 longest of each world, with the nodes each took (`research/oee/checks/gliders.py`).\n2. Of those, take the chain that took the most different nodes.\n3. Take the network of its last game, the nodes it took that are still there and their neighbours; add the moves as links; lay it out with `networkx.forceatlas2_layout(G, max_iter=300, seed=1)`.\n\n**To make it again:** `python3 book_figures.py patterns`."
+  },
+  "zoo": {
+   "title": "What the chains are",
+   "caption": "One dot per world, the bar the median of ten. Chains of at least three moves, over games 1,000 to 2,000. Top right: after how many of their moves the mover still held its own node, a puffer leaving copies behind (high) or a glider leaving nothing (low). Bottom left: how often a move went back to the node the packet held two moves before, divided by the chance of picking that node among the mover's neighbours. Bottom right: the distance from a chain's first node to its last, divided by a random walk's of the same length from the same node, for the 300 longest chains of each world.",
+   "recipe": "**Runs.** The ten B2 worlds of Experiment 16, `B2-10000-s001` \u2026 `-s010`, and the first ten worlds of the baseline set, `B1-10000-s001` \u2026 `-s010` (B1 at 10,000 tokens, Experiment 2). Both record every game with every agent's stakes; read are the games of iterations 1,000 to 2,000.\n\n**Data.** From each run's frames of the game phase, with its agents' decisions.\n\n1. Find the chains as for the figure above (`research/oee/checks/gliders.py`).\n2. Chance of a chain of at least three moves: N p\u00b2 for N chains and p as above (`structures.py`).\n3. For every move, note whether the mover won its own node in the same game.\n4. For every move from the third on, note whether it went to the node the packet held two moves before, and the chance 1/k of that node among the mover's k neighbours.\n5. Distance: steps through the network at the chain's end between its first and last node; the walk's: the median of five random walks with as many steps from the first node.\n\n**To make it again:** `python3 book_figures.py patterns`."
+  },
+  "flows": {
+   "title": "Where the tokens go",
+   "caption": "One dot per world, the bar the median. The tokens each connection carried, net, over 50 games, split into the part that runs downhill and the part that goes round loops (the note *Flows that go round*). Top: how much more of the flow goes round than if each connection's net flow had a random direction; above zero it goes round, below it runs downhill. Gifts are stakes that did not take their target, takeovers stakes that did. Bottom: how much of each part comes back on the same connections in the next 50 games.",
+   "recipe": "**Runs.** The ten B2 worlds of Experiment 16, `B2-10000-s001` \u2026 `-s010`, and the first ten worlds of the baseline set, `B1-10000-s001` \u2026 `-s010` (B1 at 10,000 tokens, Experiment 2). Both record every game with every agent's stakes; read are the games of iterations 1,000 to 2,000. Pilot worlds of Chapter 56 (`GraphOfLifeRuns/.pilots`): with alliances `A10k/allies-s1` and `-s2` from iteration 500 and `AL/allies10k-s3` and `-s4` from iteration 2,000; without, `A10k/ctrl-s1` and `-s2` from iteration 500. Each goes on from its checkpoint for 200 iterations with every game recorded in the lab's form (`python3 research/oee/checks/pilot_frames.py <world> --at <iteration> --games 200`).\n\n**Data.** From the recorded games.\n\n1. Add up, over each stretch of 50 games, the tokens staked from each node on each neighbour's node, one way minus the other, separately for gifts and takeovers (`research/oee/checks/circulation.py`).\n2. Find the pressure that explains as much of that net flow as possible (least squares, by conjugate gradients on the network's Laplacian); the circulation is the rest. Its share is its sum of squares over the flow's.\n3. Chance level: the same with each connection's direction thrown at random, four times, averaged.\n4. Persistence: over the connections two consecutive stretches both used, the correlation of their downhill parts, and of their circulations.\n5. Each world's number is the median over its stretches.\n\n**To make it again:** `python3 book_figures.py patterns`."
+  },
+  "help": {
+   "title": "Who helps whom",
+   "caption": "One dot per world, the bar the median. A stake on a neighbour's node helps if, without it, the neighbour would have been less likely to keep its node (the note *Help*). Top left: the nodes so saved, counted as the sum of those effects, per 100 agents and game; the pilots without alliances, in which no stake can help, are drawn at 0.001. Top right: the pairs in which help went both ways within a stretch of 50 games, summed over the stretches, divided by the number expected from how long each pair were neighbours; worlds in which chance expects fewer than one have no dot. Bottom: whether the net help between agents goes round loops more than chance (only where stretches have at least 100 helping pairs and their help closes loops), and whether help goes to agents carrying the helper's brain more than such agents are among its neighbours (only where at least 100 stakes helped).",
+   "recipe": "**Runs.** The ten B2 worlds of Experiment 16, `B2-10000-s001` \u2026 `-s010`, and the first ten worlds of the baseline set, `B1-10000-s001` \u2026 `-s010` (B1 at 10,000 tokens, Experiment 2). Both record every game with every agent's stakes; read are the games of iterations 1,000 to 2,000. Pilot worlds of Chapter 56 (`GraphOfLifeRuns/.pilots`): with alliances `A10k/allies-s1` and `-s2` from iteration 500 and `AL/allies10k-s3` and `-s4` from iteration 2,000; without, `A10k/ctrl-s1` and `-s2` from iteration 500. Each goes on from its checkpoint for 200 iterations with every game recorded in the lab's form (`python3 research/oee/checks/pilot_frames.py <world> --at <iteration> --games 200`).\n\n**Data.** From the recorded games.\n\n1. For every stake u \u2192 v on another agent's node, the chance that v keeps its node with all stakes and without u's, from the world's rule for deciding a node counted exactly: the largest stake, the owner's counting 1.5 times in B2 and the pilots, ties drawn, and the revolution's crowd (B1, B2), or the sides of allies (the pilots with alliances) (`research/oee/checks/decisive.py`). The difference is the stake's effect; above zero it is help.\n2. Saved: the sum of the positive effects over the games, per 100 agents and game.\n3. Returned: in each stretch of 50 games, the pairs with help from u to v that also had help from v to u; chance, for each such pair, 1 \u2212 (1 \u2212 q)^n for the n games in which v had u for a neighbour and q the help per neighbour and game of the stretch; both summed over the stretches.\n4. Round: the net help between two agents in a stretch, split as the token flow above, minus the same for random directions.\n5. Clones: the share of the help that went to an agent with the helper's brain id, divided by the share of such agents among the helper's neighbours, both weighted by the help.\n\n**To make it again:** `python3 book_figures.py patterns`."
+  }
+ }
+}

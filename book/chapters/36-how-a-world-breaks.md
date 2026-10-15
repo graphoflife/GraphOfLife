@@ -242,7 +242,7 @@ tokens handed out by lottery to the survivors.
 > [Chapter 48](48-a-world-that-cannot-break.md) answers with local rules —
 > two links at birth, a death mended in a ring, only redundant links
 > lapsing — under which neither a death nor a lapsed link can split a world.
-> Letting separated populations live on is planned for Chapter 62, *Local
+> Letting separated populations live on is planned for Chapter 63, *Local
 > rules only*.
 
 To make every figure of this chapter: `python3 book_figures.py breaking`.

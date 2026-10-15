@@ -298,7 +298,7 @@ second edition of those parts, at 100,000 tokens, checks
 ([Chapter 9](09-thirty-worlds.md)).
 
 > [!info] Added later: thirty worlds at each of two sizes
-> [Chapter 59](59-worlds-of-100000-tokens.md), written after this chapter,
+> [Chapter 60](60-worlds-of-100000-tokens.md), written after this chapter,
 > sets thirty worlds of 100,000 tokens beside thirty of 10,000, over
 > iterations 500 to 1,499. Inequality, the nodes kept by their own agent and
 > the genotypes per agent come out within 3% of each other — the nodes kept

@@ -459,3 +459,73 @@ research/oee/checks/long_contests.py, E16's ten B2 worlds, contests of T = 100
 50's "evolution stops by 200-500" and every pilot verdict drawn from T = 20
 tournaments must be re-examined. Running: steps at T = 100 (0->100 ... 1,500->
 2,000, and 1,000->2,000), long_steps.json.
+
+## Structures and help: gliders, rings, feuds (2026-10-15, late; the author's question)
+"Find a new way to define cooperation; maybe there are cyclic structures, like
+gliders in the Game of Life, harder to spot because they depend on the
+topology." Read the record of play of E16's ten B2 worlds and B1's first ten
+baseline worlds, games 1,000-2,000 (every game recorded with decisions), and of
+alliance pilots played on 200 iterations from a checkpoint with their games
+recorded (research/oee/checks/pilot_frames.py; proto.py now keeps
+last_winners). Tools in research/oee/checks: structures, gliders, rotations,
+circulation, kin_flows, decisive. Chapter 58 (new; Meta IV -> 59, Part VI/VII
++1, research/tools/renumber-2026-10-15b.json).
+- Chains of takeovers (a move = a takeover with >= half the taker's tokens; a
+  chain = moves each made from the node the last took). B2: 99.6% of takeovers
+  are moves; chains >= 3 are 23x chance (18-54), 31% of takeovers, longest
+  18-32; mover keeps its node 93% (PUFFERS: a lineage copying itself outward),
+  packets 3 -> 2 tokens. B1: 11% of takeovers are moves; chains >= 3 11x chance
+  (6.5-26), longest 69-175; mover keeps its node 9%, starves 8% (GLIDERS), packets
+  grow 18 -> 82 tokens (rich nomads). Back to the node before (blinker) 1.37x
+  chance in B2, 1.27x in B1; triangles rare / at chance. Reach = a random walk's
+  (0.8 B2, 1.0 B1): no direction. Guns bursty (var/mean 2.6, 13), no period.
+- Musical chairs: B1 72% of takeovers by agents losing their own node the same
+  game; swaps at chance (s001: 17,150 vs 17,096); B2 swaps 0.65x chance, no
+  rotations.
+- Channels: B2 recur 1.5x chance; B1 at chance (stakes on ~all neighbours).
+  Lasting mutual stakes are FEUDS in B2 (kept 0.80 vs 0.89, 10/10 worlds); B1
+  no effect; controls 0.49 vs 0.86-0.88. Among allies 85%/56% of lasting pairs
+  are allied, yet they keep less (0.94 vs 0.97): help goes where the attack is,
+  so outcome comparisons measure need, not benefit.
+- Flows (Helmholtz-Hodge per 50 games, sign-flip chance): gifts run DOWNHILL in
+  20/20 worlds (circulation - chance: B2 -0.09, B1 -0.13), and the slope lasts
+  (gradient persistence 0.20, 0.50): tribute; B1 drains to the well-connected
+  (rank r -0.28/-0.33, two worlds), B2 weakly to the rich (-0.16). Takeovers go
+  round more than chance (+0.07, +0.24) but never in the same place twice
+  (persistence 0.00). Only with alliances do gifts go round (+0.07, +0.04;
+  AL s3 at 2,000: +0.14); controls -0.13/-0.08; no ring persists (<= 0.09).
+- Help defined by the rules (decisive.py): effect of u's stake on v = P(v keeps
+  | all stakes) - P(v keeps | all but u's), the engine's rule counted exactly
+  (checked against 4,000 engine draws per contest, 300 contests). Help possible
+  only via revolutions or pooled sides. B2: 0.005-0.028 nodes saved per 100
+  agents a game (vs 6-7 lost), falling over evolution (0.03-0.07 at 100 ->
+  0.002-0.012 at 1,900). B1: 2.4 (1.5-4.4) saved vs 31 lost, 2.3% of stakes on
+  others; a by-product of the revolutionary crowd: returned 0.76x
+  exposure-matched chance (10/10 below), net help runs one way (-0.08 vs
+  sign-flip, 10/10), clones 1.03x; doubles 100 -> 1,000, then no trend.
+  Alliances: rescue ~nil (0.016-0.085 per 100 a game) although agents with an
+  ally keep 99-100% vs 90-95%: alliances protect by PEACE (an ally cannot take
+  the node) and EXCHANGE (gifts go round), not rescue. Controls (no
+  revolutions, no alliances): no stake can help, none did.
+- Rare help is RETURNED above chance (pooled over stretches): B2 156 pairs vs
+  28 expected (10/10 worlds), allies 26 vs 3.6, 10 vs 0.1, 6 vs 0.5; clones
+  1.2x (B2). But the situations that allow help are symmetric (two neighbours'
+  crowds against one attacker; mutual alliances), and in B1/B2 no input tells
+  an agent who staked on it: returned help is the trace reciprocity would
+  leave, not proof of it. A before/after timing test is degenerate (each pair
+  of events counts once each way) and was dropped.
+- Kin: B2 clones get ~1.4x their share of stakes, gifts AND takeovers
+  (proximity); B1 1.0x stakes, 1.1x gifts, 1.5x takeovers. No kin favour.
+- A reciprocity artefact caught: help "returned" 3.5x chance against a
+  density null fell to 0.8x against an exposure-matched one.
+
+## Lifetime steps: B2 improves at every step to 2,000 (2026-10-15, evening)
+research/oee/checks/long_contests.py, E16's ten B2 worlds, T = 100, once in
+each era's world (long_steps.json): later era's share, median (range), worlds
+above one half:
+- 100 vs 0: 0.794 (0.71-0.86) 10/10;  200 vs 100: 0.749 (0.65-0.88) 10/10
+- 500 vs 200: 0.790 (0.71-0.91) 10/10;  1,000 vs 500: 0.682 (0.64-0.76) 10/10
+- 1,500 vs 1,000: 0.618 (0.53-0.79) 10/10;  2,000 vs 1,500: 0.595 (0.52-0.65) 10/10
+- 2,000 vs 1,000: 0.667 (0.57-0.76) 10/10.
+=> Evolution in B2 never stopped; it slows (0.68 -> 0.62 -> 0.60 per 500
+iterations). The long runs to 10,000 will show whether it slows towards a tie.

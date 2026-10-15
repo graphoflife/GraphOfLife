@@ -10,6 +10,7 @@ it.
 """
 from __future__ import annotations
 
+import json
 import os
 from typing import Any, Dict, List, Optional
 
@@ -21,6 +22,8 @@ from book_figures import chapter, describe, recipe, runs_of
 from book_chapters.common import BLUE, GREY
 import gol_store as store
 import gol_tournament as tour
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 #: The moments a world's brains are played from: the founders, then ever
 #: further apart. Every one of them is in the archive of a run made with
@@ -61,6 +64,23 @@ def tournament(run_id: str) -> Dict[str, Any]:
     played = tour.play(run_id, eras, T=T, coins=1, against="all", jobs=_jobs())
     return {"eras": played["eras"], "elo": played["elo"], "residual": played["residual"],
             "contests": played["contests"]}
+
+
+def _lifetime_steps(steps_) -> Optional[List[List[float]]]:
+    """The B2 worlds' steps in contests of 100 iterations: one row per world, the later era's share."""
+    path = os.path.join(ROOT, "GraphOfLifeRuns", ".pilots", "long_steps.json")
+    if not os.path.exists(path):
+        return None
+    rows = json.load(open(path))
+    runs = sorted({r["run"] for r in rows})
+    table = []
+    for run in runs:
+        row = []
+        for a, b in steps_:
+            s = [r["share"] for r in rows if r["run"] == run and r["a"] == a and r["b"] == b and r["share"] is not None]
+            row.append(float(np.mean(s)) if s else float("nan"))
+        table.append(row)
+    return table
 
 
 def score(played: Dict[str, Any], earlier: int, later: int) -> float:
@@ -835,27 +855,42 @@ def stopping(ch: F.Chapter) -> None:
                   "(`gol_tournament.ratings`)."]))
     steps_ = list(zip(E16_ERAS, E16_ERAS[1:]))
     labels = [f"{a:,}→{b:,}" for a, b in steps_]
+    groups = [(f"{c}, 20 iterations", [[score(p, a, b) for a, b in steps_] for p in played[c]], COLOURS[k])
+              for k, c in enumerate(E16_CONDITIONS)]
+    lifetime = _lifetime_steps(steps_)
+    if lifetime:
+        groups.append((f"{E16_CONDITIONS[0]}, 100 iterations", lifetime, GREEN))
     dots_ = []
-    for k, c in enumerate(E16_CONDITIONS):
-        table = [[score(p, a, b) for a, b in steps_] for p in played[c]]
+    for k, (name, table, colour) in enumerate(groups):
         rng = np.random.RandomState(7 + k)
         for j in range(len(steps_)):
             v = [row[j] for row in table if np.isfinite(row[j])]
-            x0 = j + (k - 0.5) * 0.3
-            dots_.append({"label": c if j == 0 else None, "x": (x0 + rng.uniform(-0.08, 0.08, len(v))).tolist(),
-                          "y": v, "points": True, "size": 6, "colour": COLOURS[k], "alpha": 0.8})
-            dots_.append({"label": None, "x": [x0 - 0.12, x0 + 0.12], "y": [float(np.median(v))] * 2,
-                          "colour": COLOURS[k], "width": 3})
+            x0 = j + (k - (len(groups) - 1) / 2) * 0.27
+            dots_.append({"label": name if j == 0 else None, "x": (x0 + rng.uniform(-0.06, 0.06, len(v))).tolist(),
+                          "y": v, "points": True, "size": 5, "colour": colour, "alpha": 0.8})
+            dots_.append({"label": None, "x": [x0 - 0.1, x0 + 0.1], "y": [float(np.median(v))] * 2,
+                          "colour": colour, "width": 3})
+    for k, c in enumerate(E16_CONDITIONS):
+        table = groups[k][1]
         ch.number(f"steps_{c}", {lab: describe([row[j] for row in table]) for j, lab in enumerate(labels)})
+    if lifetime:
+        ch.number("steps_lifetime", {lab: describe([row[j] for row in lifetime]) for j, lab in enumerate(labels)})
     ch.figure("steps", title="Each era against the one before",
               x={"label": "the step, from one era to the next", "categories": labels},
-              y={"label": "the later era's share of the world", "min": 0.4, "max": 0.8},
+              y={"label": "the later era's share of the world", "min": 0.4, "max": 0.95},
               series=dots_, guides=[{"axis": "y", "at": 0.5, "label": "a tie"}],
               caption=("One dot per world: the later era's share of the agents, the mean of its two "
-                       "contests with the era before. The bars are the medians."),
+                       "contests with the era before, one in each era's world. The bars are the medians. "
+                       "The contests of the yardstick last 20 iterations; the third colour is the same "
+                       "steps of B2 in contests of 100 iterations, an agent's life."),
               recipe=recipe(E16_RUNS, ARCHIVE.replace("every 50", "every 100"), [
                   "Of the contests of the figure above, take those between consecutive eras and "
-                  "average each pair's two."]))
+                  "average each pair's two.",
+                  "For the contests a lifetime long: the same pairs of eras of the ten B2 worlds, played "
+                  "with T = 100, once in each era's world, seed 17 "
+                  "(`python3 research/oee/checks/long_contests.py --T 100 --pairs "
+                  "0:100,100:200,200:500,500:1000,1000:1500,1500:2000,1000:2000 --out "
+                  "GraphOfLifeRuns/.pilots/long_steps.json`)."]))
     late = {c: [score(p, 500, 2000) for p in played[c]] for c in E16_CONDITIONS}
     ch.number("late_vs_500", {c: describe(late[c]) for c in E16_CONDITIONS})
     ch.number("elo_median", {c: {e: float(np.median([dict(zip(p["eras"], p["elo"]))[e] for p in played[c]]))

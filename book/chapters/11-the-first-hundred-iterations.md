@@ -200,7 +200,7 @@ descended from more than one founder at their last check. Not one world got
 there within its first hundred iterations, where 13 of the thirty smaller
 worlds did, and half of them by iteration 175. **A world ten times the size
 takes about six times as long to come down to a single founder** —
-[Chapter 59](59-worlds-of-100000-tokens.md) reads in that pace that a line
+[Chapter 60](60-worlds-of-100000-tokens.md) reads in that pace that a line
 spreads through a world as a random walk spreads, not as a front. The other
 999 founders' lines are gone by then: a line ends when the last agent carrying
 one of its brains either dies or has its node won by an agent of another line,

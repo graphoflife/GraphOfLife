@@ -229,7 +229,7 @@ and none went on improving.
 <!-- figure stopping/steps -->
 ![Each era against the one before](../figures/stopping/steps.svg)
 
-**Each era against the one before.** One dot per world: the later era's share of the agents, the mean of its two contests with the era before. The bars are the medians.
+**Each era against the one before.** One dot per world: the later era's share of the agents, the mean of its two contests with the era before, one in each era's world. The bars are the medians. The contests of the yardstick last 20 iterations; the third colour is the same steps of B2 in contests of 100 iterations, an agent's life.
 
 > [!example]- How to make this figure
 > **Runs.** The 20 runs of Experiment 16 — B2 at 10,000 tokens, seeds 1 to 10, 2,000 iterations, a whole world archived every 100 — with and without the random inputs. They are made with `python3 gol_lab.py run E16`.
@@ -237,6 +237,7 @@ and none went on improving.
 > **Data.** From each run's archive, `GraphOfLifeRuns/<run>/archive/world_<iteration>.npz`: the whole world as a checkpoint writes it, kept every 100 iterations.
 >
 > 1. Of the contests of the figure above, take those between consecutive eras and average each pair's two.
+> 2. For the contests a lifetime long: the same pairs of eras of the ten B2 worlds, played with T = 100, once in each era's world, seed 17 (`python3 research/oee/checks/long_contests.py --T 100 --pairs 0:100,100:200,200:500,500:1000,1000:1500,1500:2000,1000:2000 --out GraphOfLifeRuns/.pilots/long_steps.json`).
 >
 > **To make it again:** `python3 book_figures.py stopping`.
 <!-- /figure -->
@@ -250,6 +251,12 @@ the step score there was 0.56 in both conditions. From 200 to 500 it was
 median B2 world stood at +90 at iteration 100, +124 at 200, +126 at 500, +128
 at 1,000 and +120 at 1,500 and 2,000. Without random inputs it stood at +86,
 +121, +130, +162, +139 and +123.
+
+> [!info] Added later: the third colour
+> The green dots were added after the rest of this chapter was written: the
+> same steps in contests a lifetime long, 100 iterations. None of them is a
+> tie. See [Would we notice if it went on?](#would-we-notice-if-it-went-on)
+> below.
 
 **Later is a little worse.** The brains of iteration 2,000 held 0.482 of a
 world against those of iteration 500 in the median B2 world (0.471 to 0.502),
@@ -330,9 +337,18 @@ So the twenty worlds did not stop evolving at iteration 200 or 500. In a
 contest of 20 iterations the later brains start a little behind (0.48); over
 a life they overtake. What evolution kept improving pays off slowly, and the
 yardstick of [Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md) was
-too short to see it. How far the improvement goes, step by step, and whether
-it continues past iteration 2,000, is being measured now: the ten worlds are
-being continued to iteration 10,000.
+too short to see it.
+
+Played step by step, a lifetime long, every era beats the one before it in all
+ten worlds: the third colour of the figure *Each era against the one before*
+above. Iteration 100 holds 0.79 of the world against the founders, 200 holds
+0.75 against 100, 500 holds 0.79 against 200, and from there each 500
+iterations win a little less: 0.68 for 1,000 against 500, 0.62 for 1,500
+against 1,000, and 0.60 for 2,000 against 1,500, the lowest world still at
+0.52. Where the contests of 20 iterations see a tie from iteration 500 on, the
+contests of 100 see evolution going on all the way, more slowly as it goes.
+Whether it slows to a tie past iteration 2,000 is being measured now: the ten
+worlds are being continued to iteration 10,000.
 
 **Distance to the best play.** A tie between eras says nothing about how good
 both are. [Exploitability](../notes/exploitability.md) measures it from
@@ -367,6 +383,14 @@ Without random inputs the picture is the same, with a peak of 1.75 at
 iteration 200 and 1.33 at 2,000.
 
 ## What the probes say about why
+
+> [!info] Added later: it slows, it does not stop
+> This section was written while the contests of 20 iterations were the
+> yardstick. A lifetime long, every step to iteration 2,000 is won by the later
+> era ([above](#would-we-notice-if-it-went-on)). Read "stops" below as "stops
+> showing in a short contest": what the probes say about the dice and the
+> senses holds for the brains as they are, but evolution goes on improving
+> them, more slowly as it goes.
 
 The thesis said *that* evolution stops, and it does. The reason this chapter
 gave, that evolution finds the best play and the best play is to roll dice,

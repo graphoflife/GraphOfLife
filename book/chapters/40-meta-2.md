@@ -87,7 +87,7 @@ of 10,000 tokens descends from one branch of the family tree about every 350
 iterations, a world of 100,000 about once in a run
 ([Chapter 18](18-genotypes-and-lineages.md)); families occupy regions that
 widen as their line ages, about as a random walk spreads
-([Chapter 37](37-one-world-many-colours.md), [Chapter 59](59-worlds-of-100000-tokens.md));
+([Chapter 37](37-one-world-many-colours.md), [Chapter 60](60-worlds-of-100000-tokens.md));
 and worlds whose brains never change end up in very different places, while
 worlds that evolve all end up alike ([Chapter 41](41-do-the-brains-matter.md)). But heredity is weak. A brain
 is changed with probability 0.2 after every game whether or not it is copied,
@@ -287,7 +287,7 @@ interesting they are.
 > anywhere; and it took the other road from letting pieces live —
 > [Chapter 48](48-a-world-that-cannot-break.md) adds local rules under which
 > worlds cannot split at all. A piece that lives on as a world of its own is
-> planned for Chapter 62, *Local rules only*. Several kinds of tokens have
+> planned for Chapter 63, *Local rules only*. Several kinds of tokens have
 > not been tried.
 
 ### Later: let the possible grow
@@ -380,7 +380,7 @@ Some questions need no new runs, only new looks at the old ones:
   for hundreds of iterations, while its nodes turn over, would be a first
   candidate for P3 — measurable now, against a null that shuffles lineages.
   [Chapter 23](23-like-next-to-like.md) found genotypes clustered within two
-  or three steps and no territories; [Chapter 59](59-worlds-of-100000-tokens.md)
+  or three steps and no territories; [Chapter 60](60-worlds-of-100000-tokens.md)
   found lines, which last longer, in patches that widen from 7 steps to 12 as
   they age. Whether a patch is ever more than the sum of its agents is the
   next question.
@@ -415,7 +415,7 @@ Redoing Parts II and III on worlds ten times larger left most of them as
 they were, and that is itself a finding: per agent, a world of 100,000
 tokens does what a world of 10,000 does — the same births and deaths within
 a tenth, the same inequality, the same game, the same brains
-([Chapter 59](59-worlds-of-100000-tokens.md)). What changed is how the agents
+([Chapter 60](60-worlds-of-100000-tokens.md)). What changed is how the agents
 are arranged and how fast anything crosses a world:
 
 - **The shape changes.** Half the clustering, more loops per agent, fewer
@@ -428,7 +428,7 @@ are arranged and how fast anything crosses a world:
 - **Lines take longer.** A takeover by one founder's line takes six times as
   long in a world ten times larger, so lines live side by side for most of a
   run, and the messages of a world speak more dialects
-  ([Chapter 20](20-what-agents-say-to-each-other.md), [Chapter 59](59-worlds-of-100000-tokens.md)).
+  ([Chapter 20](20-what-agents-say-to-each-other.md), [Chapter 60](60-worlds-of-100000-tokens.md)).
 - **Demography settles.** Ages, lifetimes and births per agent hold still from
   iteration 500 on, as a stationary population's do
   ([Chapter 13](13-how-ages-change.md)).
@@ -463,7 +463,7 @@ and Meta IV, to say what moved.
 > 1.5 ([Chapter 49](49-who-dies-and-why.md)), all gathered in a second
 > baseline, B2. Even then, evolution stopped in every pilot
 > ([Chapter 50](50-why-evolution-stops.md)). Meta III closes Part IV; what
-> Part V moved is for Meta IV, Chapter 58.
+> Part V moved is for Meta IV, Chapter 59.
 
 It is a long way. But Part III has made it shorter in one important sense: it
 has turned a vague hope — that interesting things might emerge if we watch long

@@ -198,5 +198,5 @@ come next:
 <!-- turns -->
 ---
 
-← [Chapter 56 · Alliances](56-alliances.md) · [Contents](../README.md) · [Chapter 59 · Worlds of 100,000 tokens](59-worlds-of-100000-tokens.md) →
+← [Chapter 56 · Alliances](56-alliances.md) · [Contents](../README.md) · [Chapter 58 · Gliders, and who helps whom](58-gliders-and-who-helps-whom.md) →
 <!-- /turns -->

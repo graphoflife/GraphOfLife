@@ -1,0 +1,7 @@
+# An era against itself, T = 100, two seeds each: what a tie looks like in pilot and lab contests.
+pilot GraphOfLifeRuns/.pilots/A10k/allies-s1 1000:1000
+pilot GraphOfLifeRuns/.pilots/A10k/ctrl-s1 1000:1000
+pilot GraphOfLifeRuns/.pilots/AL/allies10k-s4 3000:3000
+pilot GraphOfLifeRuns/.pilots/S/S1-norev-s1 1000:1000
+lab B1-5000-s001 1000:1000
+lab B1-5000-s002 1000:1000

@@ -99,23 +99,24 @@ everything can be checked with it.
 - [Chapter 55 · Another game](chapters/55-another-game.md)
 - [Chapter 56 · Alliances](chapters/56-alliances.md)
 - [Chapter 57 · Rules without numbers](chapters/57-rules-without-numbers.md)
-- Chapter 58 · Meta IV — *not written yet*
+- [Chapter 58 · Gliders, and who helps whom](chapters/58-gliders-and-who-helps-whom.md)
+- Chapter 59 · Meta IV — *not written yet*
 
 **Part VI · Towards a physics: space, scale and locality**
 
-- [Chapter 59 · Worlds of 100,000 tokens](chapters/59-worlds-of-100000-tokens.md)
-- Chapter 60 · Dimensions at scale — *not written yet*
-- Chapter 61 · Which properties have no scale? — *not written yet*
-- Chapter 62 · Local rules only — *not written yet*
-- Chapter 63 · How far does a difference travel? — *not written yet*
-- Chapter 64 · A source and a sink — *not written yet*
-- Chapter 65 · Particles — *not written yet*
-- Chapter 66 · One agent in a sea of average agents — *not written yet*
-- Chapter 67 · Meta V — *not written yet*
+- [Chapter 60 · Worlds of 100,000 tokens](chapters/60-worlds-of-100000-tokens.md)
+- Chapter 61 · Dimensions at scale — *not written yet*
+- Chapter 62 · Which properties have no scale? — *not written yet*
+- Chapter 63 · Local rules only — *not written yet*
+- Chapter 64 · How far does a difference travel? — *not written yet*
+- Chapter 65 · A source and a sink — *not written yet*
+- Chapter 66 · Particles — *not written yet*
+- Chapter 67 · One agent in a sea of average agents — *not written yet*
+- Chapter 68 · Meta V — *not written yet*
 
 **Part VII · The long run**
 
-- [Chapter 68 · A hundred thousand iterations](chapters/68-a-hundred-thousand-iterations.md)
+- [Chapter 69 · A hundred thousand iterations](chapters/69-a-hundred-thousand-iterations.md)
 
 **Notes · the rules**
 
@@ -172,6 +173,8 @@ everything can be checked with it.
 - [Pilot worlds](notes/pilot-worlds.md)
 - [The invasion test](notes/invasion-test.md)
 - [Exploitability](notes/exploitability.md)
+- [Flows that go round](notes/circulation.md)
+- [Help](notes/help.md)
 
 **Notes · statistics**
 

@@ -185,7 +185,8 @@ def analyse(run, t0, t1, min_len=3, seed=1):
                      "packet_max": max(c["packets"]),
                      "same_brain": float(np.mean([b == c["first_brain"] for b in c["brains"]])),
                      "home_kept": float(np.mean(c["home_kept"])), "end": c["end"],
-                     "revisits": len(c["nodes"]) - len(set(c["nodes"]))})
+                     "revisits": len(c["nodes"]) - len(set(c["nodes"])),
+                     "nodes": c["nodes"], "t0": c["t0"], "t1": c["t1"]})
     if rows:
         L = np.array([r["length"] for r in rows])
         reach = np.array([np.nan if r["reach"] is None else r["reach"] for r in rows], dtype=float)
