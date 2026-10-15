@@ -184,5 +184,5 @@ longer makes.
 <!-- turns -->
 ---
 
-← [Chapter 69 · A hundred thousand iterations](69-a-hundred-thousand-iterations.md) · [Contents](../README.md) · [Appendix A · What a simulation costs](A-costs.md) →
+← [Chapter 69 · A hundred thousand iterations](69-a-hundred-thousand-iterations.md) · [Contents](../README.md) · [Chapter 76 · Meta VIII · Who helps whom](76-meta-8-who-helps-whom.md) →
 <!-- /turns -->

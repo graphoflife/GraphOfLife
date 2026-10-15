@@ -421,6 +421,36 @@ can know. Two inputs would change that, and neither needs a number:
   in B1 or by support, without a pact, and the measures of this chapter would
   show whether it was.
 
+> [!info] Added later: both inputs, tested (batch P, 2026-10-16)
+> Both inputs were built (`came_from` and `helped_by` in
+> research/oee/pilots/proto.py, the second computed by the rules exactly as
+> above) and given to B2 worlds of 10,000 tokens for 2,000 iterations: each
+> alone and both together, two seeds each, beside two control worlds.
+>
+> - **The sense of direction was used — to go back.** With `came_from` alone,
+>   chains of three takeovers or more were 20–35% more common than in the
+>   control (3,500–4,000 against 2,900–3,000 in 200 games; with both inputs,
+>   one world had more and one fewer), and a chain returned to the node it had
+>   just left 1.4–1.5 times as often as chance has it, against 1.2–1.35 in the
+>   control. Chains did not travel further: the longest reached no further for
+>   the steps they took than a random walk would, and in two of the four worlds
+>   with the input less far (three quarters of it). The input made blinkers,
+>   not gliders.
+> - **The sense of who helped changed nothing.** Help stayed where it was,
+>   0.006–0.012 nodes saved per 100 agents a game (control 0.009); no help was
+>   returned in any world with the inputs; gifts still ran downhill (circulation
+>   0.34–0.37 of their energy against 0.44–0.48 for the sign-flip null, as in the
+>   control). Where helping is all but impossible, knowing who helped is
+>   knowing nothing.
+> - **Evolution went on at the control's pace.** In lifetime contests
+>   (T = 100) the brains of 1,000 beat those of 500 in 0.67–0.78 of games with
+>   an input and 0.64–0.71 in the control, and those of 2,000 beat those of
+>   1,000 in 0.56–0.70 (control 0.65–0.80).
+>
+> So information alone does not make cooperation; the rules have to make it
+> pay. [Meta VIII · Who helps whom](76-meta-8-who-helps-whom.md) puts this beside
+> every other attempt.
+
 The measure itself is the third result. Help computed from the rules, nodes
 saved per 100 agents a game, with its three signs of cooperation against
 chance, can be taken of any world that records its games. For the worlds so far
