@@ -852,5 +852,118 @@ def test_curvature_refuses_a_fit_with_no_evidence_in_it():
                                       [1.0, 2.0, 2.5]) is None
 
 
+# ---------------------------------------------------------------------------
+# What goes with what (gol_atlas)
+# ---------------------------------------------------------------------------
+
+def _atlas_table(columns, kinds):
+    import gol_atlas
+    import numpy as np
+    names = list(columns)
+    return gol_atlas.Table("test", names, dict(zip(names, kinds)),
+                           np.column_stack([columns[n] for n in names]))
+
+
+def test_a_logarithm_finds_what_a_straight_line_misses():
+    """
+    y = exp(x) is a perfect relation that a straight line fits badly: on a
+    logarithmic y it is a line. The summary says so by naming that axis as
+    the best, and the rank correlation, which no axis changes, is 1.
+    """
+    import gol_atlas
+    import numpy as np
+    rng = np.random.default_rng(3)
+    x = rng.uniform(0, 8, 500)
+    table = _atlas_table({"x": x, "y": np.exp(x), "noise": rng.normal(size=500)}, ["pos", "pos", "signed"])
+    summary = gol_atlas.summary(table)
+    names = [v["name"] for v in summary["variables"]]
+    pair = next(p for p in summary["pairs"] if (names[p[0]], names[p[1]]) == ("x", "y"))
+    lin, best, r, rank = pair[2], pair[3], pair[4], pair[5]
+    assert best == "lin-log" and r > 0.999 and lin < 0.8, pair
+    assert abs(rank - 1) < 1e-12
+    unrelated = next(p for p in summary["pairs"] if "noise" in (names[p[0]], names[p[1]]))
+    assert abs(unrelated[4]) < 0.15, unrelated
+
+    detail = gol_atlas.detail(table, "x", "y", False, True)
+    assert detail["r"] > 0.999 and detail["ylog"] and not detail["xlog"]
+    # The points come on the axes they are drawn on: the logarithm is taken.
+    assert max(detail["points"]["y"]) < 8.5
+    positions = [t[0] for t in detail["ticks"]["y"]]
+    assert positions == sorted(positions)
+    assert all(abs(at - math.log(float(label.replace(",", "")))) < 1e-9 for at, label in detail["ticks"]["y"])
+    means = [b["mean"] for b in detail["bins"]]
+    assert means == sorted(means), "the binned means of a rising relation should rise"
+
+
+def test_pairs_made_from_the_same_numbers_are_flagged():
+    """A change of tokens contains the tokens held; tokens and age do not share anything by construction."""
+    import gol_atlas
+    assert gol_atlas.definitional("change", "tokens") and gol_atlas.definitional("tokens", "change")
+    assert not gol_atlas.definitional("tokens", "age")
+    assert gol_atlas.definitional("meanTokens", "nodes") and gol_atlas.definitional("gini", "tokenEvenness")
+    assert not gol_atlas.definitional("gini", "births")
+
+
+def test_a_column_says_what_its_logarithm_is_from_its_values():
+    import gol_atlas
+    import numpy as np
+    assert gol_atlas.kind_of(np.array([0.1, 0.5, 0.9])) == "share"
+    assert gol_atlas.kind_of(np.array([1.0, 3.0, 40.0])) == "pos"
+    assert gol_atlas.kind_of(np.array([0.0, 3.0, 40.0])) == "count"
+    assert gol_atlas.kind_of(np.array([-2.0, 3.0])) == "signed"
+
+
+def test_the_ticks_of_a_signed_logarithm_are_written_in_the_columns_units():
+    import gol_atlas
+    ticks = gol_atlas.ticks(math.copysign(math.log1p(150), -1), math.log1p(30), "signed", True)
+    labels = [label for _, label in ticks]
+    assert "0" in labels and "-100" in labels and "10" in labels, labels
+    for at, label in ticks:
+        value = float(label.replace(",", ""))
+        assert abs(at - math.copysign(math.log1p(abs(value)), value)) < 1e-9, (at, label)
+
+
+def test_the_agents_of_a_game_are_one_row_each_with_or_without_decisions():
+    """
+    Every agent of a game is a row. Without the game's decisions the six
+    columns read from them are missing, the rest are not, and the note says why.
+    """
+    import gol_atlas
+    import numpy as np
+    world = new_world(small(seed=21))
+    frames = []
+    for _ in range(14):
+        frames += world.step(record_decisions=True)
+    first = frames[0]["iteration"]
+    table = gol_atlas.agent_table(frames, first, first + 1)
+    assert table.rows == len(frames[0]["ids"]) + len(frames[2]["ids"])
+    assert np.isfinite(table.column("home_share")).any() and np.isfinite(table.column("alive_10")).any()
+
+    bare = [{k: v for k, v in f.items() if k != "decisions"} for f in frames]
+    table = gol_atlas.agent_table(bare, first, first + 1)
+    for name in gol_atlas.FROM_DECISIONS:
+        assert not np.isfinite(table.column(name)).any(), f"{name} was invented without decisions"
+    assert np.isfinite(table.column("degree")).all() and "decisions" in table.note
+
+
+def test_the_statistics_of_a_game_join_its_two_phases():
+    """
+    A game's row holds what its reproduction recorded (births) and what its
+    game recorded (the flow); the changes are the differences between games.
+    """
+    import gol_atlas
+    rows, nodes = [], [100 + (t * t) % 13 for t in range(40)]
+    for t in range(40):
+        rows.append({"iteration": t, "phase": 1, "births": t % 5, "nodes": nodes[t] + 1, "_frame": 2 * t})
+        rows.append({"iteration": t, "phase": 2, "totalFlow": 10 + (t * 7) % 11, "nodes": nodes[t],
+                     "births": None, "_frame": 2 * t + 1})
+    table = gol_atlas.stat_table(rows)
+    assert set(table.columns) == {"births", "nodes", "totalFlow"} and table.rows == 40
+    assert list(table.column("nodes")) == nodes, "the game's value should win where both have one"
+    changes = gol_atlas.stat_table(rows, changes=True)
+    assert changes.rows == 39
+    assert list(changes.column("nodes")) == [b - a for a, b in zip(nodes, nodes[1:])]
+
+
 if __name__ == "__main__":
     sys.exit(runner.main(globals()))

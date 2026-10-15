@@ -39,8 +39,13 @@ const PY_FILES = [
   'gol_lineage.py',
   'gol_stats.py',
   'gol_framestats.py',
+  'gol_atlas.py',
   'gol_browser.py'
 ];
+
+// The table of every simulation the book has measured, among the book's
+// results, which the site ships beside the page: one level up from here.
+const WORLDS_TABLE = 'book/results/worlds.json';
 
 let pyodide = null;
 let ready = null;
@@ -116,6 +121,12 @@ function project(frame, fields) {
     }
   }
   return out;
+}
+
+let atlasReadsAsked = null;
+/** What gol_atlas reads of a frame and how far past a window, asked of Python once. */
+function atlasReads() {
+  return (atlasReadsAsked ||= call('gol_browser.WORLDS.atlas_reads'));
 }
 
 let lineageFieldsRead = null;
@@ -484,6 +495,43 @@ const handlers = {
       for (const frame of batch) read.push(project(frame, fields));
     }
     return call('gol_browser.WORLDS.lineage', [read, phase || 'all']);
+  },
+
+  /**
+   * What goes with what in a window of a run, or one pair of it: the same
+   * tables and the same arithmetic as the server's, gol_atlas. A table is
+   * built once from the frames and kept in Python, so the pairs a reader
+   * clicks through after it cost no reading.
+   */
+  async getAtlas(runId, level, from, count, step, a, b, xlog, ylog) {
+    const run = await loadRun(runId);
+    const key = JSON.stringify([runId, level, Number(from), Number(count), Number(step), run.frame_count]);
+    if (!call('gol_browser.WORLDS.atlas_has', [key])) {
+      const reads = atlasReads();
+      const agents = level === 'agents';
+      const end = Number(from) + Number(count) + (agents ? reads.lookahead : 0);
+      const read = [];
+      for (let at = Number(from); at < end; at += 16) {
+        const batch = await RunStore.getFrameRange(runId, at, Math.min(16, end - at));
+        if (!batch.length) break;
+        for (const frame of batch) read.push(agents ? project(frame, reads.fields) : frame);
+      }
+      if (agents) call('gol_browser.WORLDS.atlas_agents', [key, read, Number(count), Number(step)]);
+      else call('gol_browser.WORLDS.atlas_stats', [key, read, level === 'changes']);
+    }
+    return call('gol_browser.WORLDS.atlas_answer', [key, a ?? null, b ?? null, !!xlog, !!ylog]);
+  },
+
+  /** The same over every simulation the book has measured, from the shipped table. */
+  async getWorldsAtlas(window, a, b, xlog, ylog) {
+    const key = JSON.stringify(['worlds', window || '']);
+    if (!call('gol_browser.WORLDS.atlas_has', [key])) {
+      const response = await fetch(new URL('../', self.location.href).href + WORLDS_TABLE);
+      if (!response.ok) throw new Error(`the table of every world is not here (${response.status})`);
+      callWritten('gol_browser.WORLDS.atlas_worlds',
+                  `[${JSON.stringify(key)},${await response.text()},${JSON.stringify(window || '')}]`);
+    }
+    return call('gol_browser.WORLDS.atlas_answer', [key, a ?? null, b ?? null, !!xlog, !!ylog]);
   },
 
   /**

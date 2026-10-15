@@ -37,6 +37,9 @@ const Research = {
     // answer to a question nobody asked. The theses live here now, as
     // ready-made time series.
     diagrams:   { group: 'analysis', label: 'Diagrams',     view: Diagrams, choose: true },
+    // Correlating a window is seconds of work on a large world, so it too
+    // waits for a run to be picked.
+    correlations: { group: 'analysis', label: 'Correlations', view: Correlations, choose: true },
     notes:      { group: 'reading',  label: 'Findings',     page: Notes },
     literature: { group: 'reading',  label: 'Literature',   page: Literature },
     graphs:     { group: 'reading',  label: 'Graphs',       page: Graphs }

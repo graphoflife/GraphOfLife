@@ -75,6 +75,18 @@ const ServerBackend = {
     return this._request('GET', `/api/runs/${encodeURIComponent(id)}/lineage`
       + `?from=${from}&count=${count}&phase=${phase || 'all'}`, undefined, opts && opts.signal);
   },
+  // What goes with what in a window of a run — its agents game by game, or
+  // the world's statistics — and, with `a` and `b`, one pair of it.
+  getAtlas(id, level, from, count, step, a, b, xlog, ylog, opts) {
+    return this._request('GET', `/api/runs/${encodeURIComponent(id)}/atlas`
+      + `?level=${level}&from=${from}&count=${count}&step=${step || 1}` + _pairQuery(a, b, xlog, ylog),
+      undefined, opts && opts.signal);
+  },
+  // The same over every simulation the book has measured.
+  getWorldsAtlas(window, a, b, xlog, ylog, opts) {
+    return this._request('GET', `/api/worlds/atlas?window=${encodeURIComponent(window || '')}`
+      + _pairQuery(a, b, xlog, ylog), undefined, opts && opts.signal);
+  },
   // `points` asks for a coarse pass over the whole run rather than every
   // sample of it, so a chart can be drawn before the full build finishes.
   // `keys` names the statistics the chart plots; the server decides from them
@@ -98,6 +110,12 @@ const ServerBackend = {
                          opts && opts.signal);
   }
 };
+
+/** The part of an atlas question that names one pair, if it names one. */
+function _pairQuery(a, b, xlog, ylog) {
+  return a && b ? `&a=${encodeURIComponent(a)}&b=${encodeURIComponent(b)}`
+    + `&xlog=${xlog ? 1 : 0}&ylog=${ylog ? 1 : 0}` : '';
+}
 
 /** Runs the same Python in a worker, through Pyodide. */
 const BrowserBackend = {

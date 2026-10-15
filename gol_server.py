@@ -32,6 +32,11 @@ API
     GET    /api/runs/<id>/series      per-frame statistics for the whole run
                                       ?points=N coarse, ?keys=a,b what is plotted
     GET    /api/runs/<id>/series/progress   how far a rebuild has got
+    GET    /api/runs/<id>/atlas       ?level=agents|stats|changes&from=&count=&step=
+                                      what goes with what in a window; &a=&b=&xlog=&ylog=
+                                      one pair of it
+    GET    /api/worlds/atlas          ?window=[&a=&b=&xlog=&ylog=] the same over every
+                                      simulation in book/results/worlds.json
     GET    /api/lab                   the book's experiments and the lab running them
     POST   /api/lab                   {run: E} queue one, {pause: bool}, {workers: n}
 """
@@ -62,6 +67,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Any, Callable, Dict, List, Optional, Tuple
 from urllib.parse import parse_qs, urlparse
 
+import gol_atlas
 import gol_framestats
 import gol_lab
 import gol_record
@@ -87,7 +93,7 @@ WEB_DIR = os.path.join(BASE_DIR, "web")
 # build_site.sh so the two cannot drift.
 SHIPPED_PY = ("GraphOfLifeSimple.py", "gol_config.py", "gol_series.py",
               "gol_lineage.py", "gol_spectral.py", "gol_lightning.py",
-              "gol_stats.py", "gol_framestats.py", "explain_minimal.py")
+              "gol_stats.py", "gol_framestats.py", "gol_atlas.py", "explain_minimal.py")
 
 # Documents the page renders, which live outside web/ because they are written
 # for a reader with a text editor first and the site second. Same problem and
@@ -230,6 +236,88 @@ def frame_row(run_id: str, index: int, structure: bool = False,
         while len(_ROWS) > _ROWS_KEPT:
             _ROWS.popitem(last=False)
     return row
+
+# ---------------------------------------------------------------------------
+# What goes with what, for the Correlations view
+# ---------------------------------------------------------------------------
+#
+# A table is the slow part — a window of frames read, and for the agents a
+# network measured in every game — and a reader asks for one pair of it after
+# another. So each table is built once and kept, keyed by what it was made from.
+
+_ATLAS_LOCK = threading.Lock()
+_ATLAS: "OrderedDict[Tuple[Any, ...], gol_atlas.Table]" = OrderedDict()
+_ATLAS_KEPT = 6
+WORLDS_FILE = os.path.join(BASE_DIR, "book", "results", "worlds.json")
+
+
+def _kept(key: Tuple[Any, ...], build: Callable[[], Optional["gol_atlas.Table"]]) -> Optional["gol_atlas.Table"]:
+    with _ATLAS_LOCK:
+        if key in _ATLAS:
+            _ATLAS.move_to_end(key)
+            return _ATLAS[key]
+    table = build()
+    if table is not None:
+        with _ATLAS_LOCK:
+            _ATLAS[key] = table
+            while len(_ATLAS) > _ATLAS_KEPT:
+                _ATLAS.popitem(last=False)
+    return table
+
+
+def atlas_table(run_id: str, level: str, start: int, count: int, step: int = 1,
+                gone: Callable[[], bool] = lambda: False) -> Optional["gol_atlas.Table"]:
+    """
+    One level of a stored run's window, as the table the Correlations view
+    correlates: the agents of its games (frames read with enough after the
+    window for their outcomes), or the world's statistics game by game, from
+    the run's record where it has them. None when the reader left first.
+    """
+    if level not in ("agents", "stats", "changes"):
+        raise ValueError(f"no level {level!r}: agents, stats or changes")
+    if not store.has_frame(run_id, start):
+        store.load_meta(run_id)                    # a run that is not there is a 404
+        raise ValueError(f"{run_id} has no frame {start}")
+    # A resumed run writes its frames again under the same numbers.
+    key = (run_id, level, start, count, step, os.path.getmtime(store.frame_path(run_id, start)))
+
+    def build() -> Optional["gol_atlas.Table"]:
+        if level == "agents":
+            frames = []
+            for n, index in enumerate(range(start, start + count + gol_atlas.lookahead())):
+                if n % 8 == 0 and gone():
+                    return None
+                if not store.has_frame(run_id, index):
+                    break
+                frame = store.read_frame(run_id, index)
+                frames.append({k: frame[k] for k in gol_atlas.FIELDS if k in frame})
+            return gol_atlas.window_agents(frames, count, step)
+        rows = []
+        for n, index in enumerate(range(start, start + count)):
+            if n % 64 == 0 and gone():
+                return None
+            if not store.has_frame(run_id, index):
+                break
+            rows.append(frame_row(run_id, index))
+        return gol_atlas.stat_table(rows, changes=level == "changes")
+
+    return _kept(key, build)
+
+
+def worlds_table(window: str = "") -> "gol_atlas.Table":
+    """Every simulation's statistics over one stretch of iterations, from book/results/worlds.json."""
+    if not os.path.exists(WORLDS_FILE):
+        # A ValueError, so the page is told why rather than "run not found".
+        raise ValueError("the table of every world (book/results/worlds.json) is not built yet")
+    stamp = os.path.getmtime(WORLDS_FILE)
+
+    def build() -> "gol_atlas.Table":
+        with open(WORLDS_FILE) as f:
+            worlds = json.load(f)
+        return gol_atlas.world_table(worlds, window or (worlds.get("windows") or [""])[0])
+
+    return _kept(("worlds", window, stamp), build)
+
 
 class Worker:
     """
@@ -552,6 +640,28 @@ class Handler(BaseHTTPRequestHandler):
         # A contiguous run of frames, optionally cut down to the fields the
         # caller actually reads.
         #
+        # What goes with what in a window of a run, or one pair of it.
+        if len(parts) == 4 and parts[:2] == ["api", "runs"] and parts[3] == "atlas":
+            query = parse_qs(urlparse(self.path).query)
+            arg = lambda name, default="": query.get(name, [default])[0] or default
+            table = atlas_table(parts[2], arg("level", "agents"), max(0, int(arg("from", "0"))),
+                                max(1, int(arg("count", "40"))), max(1, int(arg("step", "1"))),
+                                self._client_gone)
+            if table is None:
+                self.close_connection = True
+                return
+            self._send_json(gol_atlas.answer(table, arg("a") or None, arg("b") or None,
+                                             arg("xlog") == "1", arg("ylog") == "1"))
+            return
+
+        # The same over every simulation the book has measured.
+        if parts == ["api", "worlds", "atlas"]:
+            query = parse_qs(urlparse(self.path).query)
+            arg = lambda name, default="": query.get(name, [default])[0] or default
+            self._send_json(gol_atlas.answer(worlds_table(arg("window")), arg("a") or None,
+                                             arg("b") or None, arg("xlog") == "1", arg("ylog") == "1"))
+            return
+
         # Both Research views want a couple of hundred consecutive frames
         # and a few columns of each. Asked for one at a time and whole,
         # that was two hundred round trips carrying the entire topology of

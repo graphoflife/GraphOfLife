@@ -1409,6 +1409,87 @@ function test_every_tab_names_a_view() {
   }
 }
 
+function test_every_research_mode_has_its_section() {
+  // Research.show unhides `research-<mode>` for the mode it shows and throws
+  // when there is none, so a mode added to the table without its section is a
+  // button that breaks the tab.
+  const html = fs.readFileSync(path.join(root, 'web', 'index.html'), 'utf8');
+  const research = fs.readFileSync(path.join(root, 'web', 'js', 'research.js'), 'utf8');
+  const table = research.match(/MODES: \{([\s\S]*?)\n  \},/);
+  assert(table, 'could not find the MODES table in research.js');
+  const modes = [...table[1].matchAll(/^\s+(\w+):\s+\{ group:/gm)].map(m => m[1]);
+  assert(modes.includes('correlations'), `the modes read were ${modes}`);
+  for (const mode of modes) {
+    assert(html.includes(`id="research-${mode}"`), `no section research-${mode} for the ${mode} mode`);
+  }
+}
+
+// ---- the charts of the Correlations view -----------------------------------
+
+/** charts.js on a canvas that records nothing, with the page's ink stood in for. */
+function chartsOnAPretendCanvas(width, height) {
+  const ink = { of: () => '#808080', alpha: () => 'rgba(128, 128, 128, 0.5)',
+                font: px => `${px}px monospace`, line: () => '#5ac8fa' };
+  const context = new Proxy({}, {
+    get: (target, name) => name in target ? target[name]
+      : name === 'measureText' ? text => ({ width: String(text).length * 6 })
+      : name === 'getTransform' ? () => ({ a: 1, d: 1 })
+      : () => {},
+    set: (target, name, value) => { target[name] = value; return true; }
+  });
+  const canvas = { width: 0, height: 0, getContext: () => context,
+                   getBoundingClientRect: () => ({ width, height, left: 0, top: 0 }) };
+  const charts = new Function('window', 'Ink', ['colormaps.js', 'charts.js']
+    .map(name => fs.readFileSync(path.join(root, 'web', 'js', name), 'utf8')).join('\n')
+    + '; return { drawMatrix, drawScatter };')({ devicePixelRatio: 1 }, ink);
+  return { charts, canvas };
+}
+
+function test_the_matrix_says_which_pair_is_under_the_pointer() {
+  const { charts, canvas } = chartsOnAPretendCanvas(400, 420);
+  const names = ['tokens', 'degree', 'age', 'change'];
+  const cells = charts.drawMatrix(canvas, { names, value: (i, j) => (i + j) / 10 - 0.3 });
+  assert(cells, 'a matrix with names drew nothing');
+  // Walk across the canvas and collect every pair found: each off-diagonal
+  // pair, and no diagonal one.
+  const seen = new Set();
+  for (let x = 0; x < 400; x += 3) {
+    for (let y = 0; y < 420; y += 3) {
+      const at = cells.at(x, y);
+      if (at) seen.add(at.join());
+    }
+  }
+  for (let i = 0; i < names.length; i++) {
+    assert(!seen.has(`${i},${i}`), 'a quantity paired with itself was offered');
+    for (let j = 0; j < names.length; j++) {
+      if (i !== j) assert(seen.has(`${i},${j}`), `the cell of ${names[i]} and ${names[j]} cannot be reached`);
+    }
+  }
+  assert(charts.drawMatrix(canvas, { names: [] }) === null, 'an empty matrix should say so, not draw');
+}
+
+function test_the_scatter_finds_the_point_under_the_pointer() {
+  const { charts, canvas } = chartsOnAPretendCanvas(500, 360);
+  const points = { x: [0, 1, 2, 3], y: [0, 1, 4, 9] };
+  const drawn = charts.drawScatter(canvas, {
+    points, bins: [{ x: 1, mean: 2, q25: 1, q75: 3, n: 4 }],
+    ticks: { x: [[0, '0'], [3, '3']], y: [[0, '0'], [9, '9']] },
+    chrome: { ticks: true, xLabel: 'x', yLabel: 'y' } });
+  assert(drawn, 'a scatter with points drew nothing');
+  // The first point sits at the bottom left of the plot and the last at the
+  // top right, a little way in from the furniture.
+  assert(drawn.nearest(0, 0) === -1, 'a corner of the canvas found a point');
+  let found = new Set();
+  for (let x = 0; x < 500; x += 2) {
+    for (let y = 0; y < 360; y += 2) {
+      const i = drawn.nearest(x, y);
+      if (i >= 0) found.add(i);
+    }
+  }
+  assert(found.size === 4, `only points ${[...found]} could be found`);
+  assert(charts.drawScatter(canvas, { points: { x: [], y: [] } }) === null, 'an empty scatter should say so');
+}
+
 // ---- the browser worker ------------------------------------------------------
 
 function test_the_worker_cuts_frames_the_way_the_server_does() {

@@ -1280,6 +1280,7 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   color: var(--muted);
 }
 .lineage-bar select { width: auto; min-width: 240px; max-width: 420px; }
+.lineage-bar [hidden] { display: none; }
 .lineage-filter { display: flex; align-items: center; gap: 7px; margin-left: auto; }
 .lineage-filter input[type="range"] { width: 120px; }
 .lineage-filter input[type="number"] { width: 68px; }
@@ -1314,6 +1315,63 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
 }
 #lineageCanvas,
 #flowCanvas { width: 100%; height: 100%; display: block; }
+
+/* Correlations: the matrix of every pair beside the pair that is open. */
+.atlas-stage {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 14px;
+}
+.atlas-box {
+  background: var(--stage);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+#atlasMatrix { width: 100%; aspect-ratio: 1 / 1.06; display: block; cursor: pointer; }
+#atlasScatter { width: 100%; flex: 1; min-height: 340px; display: block; }
+.atlas-axes {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.atlas-about { max-width: 1080px; margin: 6px auto 0; font-size: 12px; color: var(--muted); }
+.atlas-about p { margin: 2px 0; }
+.atlas-about b { color: var(--text); font-weight: 600; }
+.atlas-list-head { max-width: 1080px; margin: 16px auto 6px; }
+.atlas-list {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding-left: 22px;
+  columns: 2 320px;
+  font-family: var(--font);
+  font-size: 11.5px;
+  color: var(--text-soft);
+}
+.atlas-list li { cursor: pointer; padding: 1px 0; break-inside: avoid; }
+.atlas-list li:hover { color: var(--accent); }
+@media (max-width: 900px) {
+  .atlas-stage { grid-template-columns: minmax(0, 1fr); }
+}
+/* On a phone every control of the bars takes a line of its own, and the
+   buttons of a group share theirs evenly rather than running off the edge. */
+@media (max-width: 760px) {
+  #research-correlations .lineage-bar { flex-direction: column; align-items: stretch; gap: 8px; }
+  #research-correlations .lineage-filter { margin-left: 0; flex-wrap: wrap; }
+  #research-correlations .lineage-scrub span { white-space: normal; }
+  #research-correlations .seg { display: flex; }
+  #research-correlations .seg-btn { flex: 1 1 0; padding: 6px 4px; }
+  .atlas-list { columns: 1; }
+}
 
 /* --- Diagrams: the Viewer's charts, configured rather than followed ------ */
 

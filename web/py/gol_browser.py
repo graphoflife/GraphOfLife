@@ -23,6 +23,7 @@ from typing import Any, Callable, Dict, List, Optional
 
 import numpy as np
 
+import gol_atlas
 import gol_framestats
 import gol_lineage
 import gol_series
@@ -39,6 +40,9 @@ class Worlds:
         # its in series.json; here there is no disk, and keeping nothing meant
         # summarising every sample again at every step of a climb.
         self._histories: Dict[str, gol_series.History] = {}
+        # The Correlations view's tables, by what they were made from: a reader
+        # asks for one pair after another of the same one.
+        self._atlas: Dict[str, gol_atlas.Table] = {}
 
     # ---- settings --------------------------------------------------------
 
@@ -161,6 +165,42 @@ class Worlds:
                     structure: bool, flow: bool) -> Dict[str, Any]:
         """A frame's statistics for the strip, as deep as asked: what the server answers with."""
         return gol_framestats.strip(frame, previous, bool(structure), bool(flow))
+
+    # ---- what goes with what ----------------------------------------------
+
+    def atlas_reads(self) -> Dict[str, Any]:
+        """What the agents table reads of a frame, and how many frames past a window it needs."""
+        return {"fields": list(gol_atlas.FIELDS), "lookahead": gol_atlas.lookahead()}
+
+    def atlas_has(self, key: str) -> bool:
+        return key in self._atlas
+
+    def atlas_agents(self, key: str, frames: List[Dict[str, Any]], count: int, step: int) -> None:
+        """Build and keep the agents table of a window, as the server does."""
+        self._keep(key, gol_atlas.window_agents(frames, int(count), int(step)))
+
+    def atlas_stats(self, key: str, frames: List[Dict[str, Any]], changes: bool) -> None:
+        """
+        Build and keep the world's statistics game by game: each frame's row as
+        the strip works it out, which is what a run's record holds.
+        """
+        rows = [gol_framestats.strip(f, frames[i - 1] if i and not f.get("delta") else None)
+                for i, f in enumerate(frames)]
+        self._keep(key, gol_atlas.stat_table(rows, changes=bool(changes)))
+
+    def atlas_worlds(self, key: str, worlds: Dict[str, Any], window: str) -> None:
+        """Build and keep the table of every world, from book/results/worlds.json."""
+        self._keep(key, gol_atlas.world_table(worlds, window or (worlds.get("windows") or [""])[0]))
+
+    def atlas_answer(self, key: str, a: Optional[str], b: Optional[str],
+                     xlog: bool, ylog: bool) -> Dict[str, Any]:
+        """The summary of a kept table, or one pair of it."""
+        return gol_atlas.answer(self._atlas[key], a or None, b or None, bool(xlog), bool(ylog))
+
+    def _keep(self, key: str, table: "gol_atlas.Table") -> None:
+        self._atlas[key] = table
+        while len(self._atlas) > 4:
+            self._atlas.pop(next(iter(self._atlas)))
 
     # ---- helpers ---------------------------------------------------------
 

@@ -743,3 +743,187 @@ function drawTimeline(canvas, tracks, options = {}) {
     _chrome(ctx, pad, outer, chrome);
   }
 }
+
+/**
+ * A cloud of points with the mean of y in bins of x drawn through it, and the
+ * middle half of y in each bin as a band.
+ *
+ * The coordinates arrive on the axes they are drawn on — a logarithm already
+ * taken where the reader asked for one — with the ticks to rule each axis at
+ * and what to write there (gol_atlas.detail), so nothing here transforms a
+ * number: a log1p here and a log there would put a point and its tick in
+ * different places. `colours`, one per point, colours them by group.
+ *
+ * Returns how to find a point from a position, for hovering.
+ */
+function drawScatter(canvas, options = {}) {
+  const { points = { x: [], y: [] }, bins = [], ticks = {}, colours = null,
+          chrome = null, marked = -1, message = 'nothing to draw' } = options;
+  const pad = _chromePad(chrome) || { left: 8, right: 8, top: 8, bottom: 8 };
+  const { ctx, w, h, outer } = _prepareCanvas(canvas, pad);
+  const xs = points.x || [], ys = points.y || [];
+  if (!xs.length) {
+    _noData(ctx, w, h, message);
+    _chrome(ctx, pad, outer, chrome);
+    return null;
+  }
+
+  // The domain is the points' and the band's, with a little room round them.
+  let xlo = Infinity, xhi = -Infinity, ylo = Infinity, yhi = -Infinity;
+  for (let i = 0; i < xs.length; i++) {
+    if (xs[i] < xlo) xlo = xs[i];
+    if (xs[i] > xhi) xhi = xs[i];
+    if (ys[i] < ylo) ylo = ys[i];
+    if (ys[i] > yhi) yhi = ys[i];
+  }
+  for (const b of bins) {
+    ylo = Math.min(ylo, b.q25);
+    yhi = Math.max(yhi, b.q75);
+  }
+  const room = (lo, hi) => (hi > lo ? (hi - lo) * 0.04 : 0.5);
+  const xr = room(xlo, xhi), yr = room(ylo, yhi);
+  const labelled = list => {
+    const names = new Map((list || []).map(([at, text]) => [at, text]));
+    return { ticks: list ? list.map(([at]) => at) : null, format: v => names.get(v) ?? _short(v) };
+  };
+  const x = { lo: xlo - xr, hi: xhi + xr, ...labelled(ticks.x) };
+  const y = { lo: ylo - yr, hi: yhi + yr, ...labelled(ticks.y) };
+  const px = v => (v - x.lo) / (x.hi - x.lo) * w;
+  const py = v => h - (v - y.lo) / (y.hi - y.lo) * h;
+  _axes(ctx, w, h, { x, y, pad });
+
+  // Faint enough that where the points pile up still reads darker than where
+  // a few stand alone.
+  const fade = Math.max(0.12, Math.min(0.85, 40 / Math.sqrt(xs.length)));
+  const plain = Ink.alpha(Ink.of('accent'), fade);
+  for (let i = 0; i < xs.length; i++) {
+    ctx.fillStyle = colours ? Ink.alpha(colours[i], Math.max(fade, 0.55)) : plain;
+    ctx.beginPath();
+    ctx.arc(px(xs[i]), py(ys[i]), colours ? 2.6 : 1.7, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  if (marked >= 0 && marked < xs.length) {
+    ctx.strokeStyle = Ink.of('text');
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.arc(px(xs[marked]), py(ys[marked]), 5, 0, Math.PI * 2);
+    ctx.stroke();
+  }
+
+  if (bins.length) {
+    ctx.fillStyle = Ink.alpha(Ink.of('text'), 0.16);
+    ctx.beginPath();
+    bins.forEach((b, i) => (i ? ctx.lineTo(px(b.x), py(b.q75)) : ctx.moveTo(px(b.x), py(b.q75))));
+    for (let i = bins.length - 1; i >= 0; i--) ctx.lineTo(px(bins[i].x), py(bins[i].q25));
+    ctx.closePath();
+    ctx.fill();
+    ctx.strokeStyle = Ink.of('text');
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    bins.forEach((b, i) => (i ? ctx.lineTo(px(b.x), py(b.mean)) : ctx.moveTo(px(b.x), py(b.mean))));
+    ctx.stroke();
+  }
+  _chrome(ctx, pad, outer, chrome);
+
+  return {
+    /** The point nearest a position on the canvas, within a few pixels, or -1. */
+    nearest(cx, cy) {
+      let best = -1, dist = 64;
+      for (let i = 0; i < xs.length; i++) {
+        const d = (px(xs[i]) + pad.left - cx) ** 2 + (py(ys[i]) + pad.top - cy) ** 2;
+        if (d < dist) { dist = d; best = i; }
+      }
+      return best;
+    }
+  };
+}
+
+/**
+ * Every pair of a set of quantities as a square of cells, coloured by how
+ * strongly they go together: red as one rises with the other, blue as it
+ * falls, pale at nothing. A pair made from the same numbers can be `muted`,
+ * drawn as an outline, so its necessarily large value does not shout.
+ * Names run down the left and across the foot when the cells are big enough
+ * to carry them.
+ *
+ * Returns where the cells are, for hovering and clicking.
+ */
+function drawMatrix(canvas, options = {}) {
+  const { names = [], value = () => null, muted = () => false, selected = null,
+          hovered = null, message = 'nothing to draw' } = options;
+  const { ctx, w, h } = _prepareCanvas(canvas);
+  const n = names.length;
+  if (!n) {
+    _noData(ctx, w, h, message);
+    return null;
+  }
+  ctx.font = Ink.font(10);
+  const widest = Math.max(...names.map(name => ctx.measureText(name).width));
+  const legend = 26;
+  const roomy = (Math.min(w, h - legend) - widest - 8) / n >= 10;
+  const margin = roomy ? widest + 8 : 0;
+  const cell = Math.max(2, Math.floor(Math.min(w - margin, h - legend - margin) / n));
+  const x0 = margin, y0 = 0;
+
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < n; j++) {
+      const at = [x0 + j * cell, y0 + i * cell];
+      if (i === j) {
+        ctx.fillStyle = Ink.of('grid');
+        ctx.fillRect(at[0], at[1], cell - 1, cell - 1);
+        continue;
+      }
+      const r = value(i, j);
+      if (r === null || r === undefined || !Number.isFinite(r)) continue;
+      const colour = colormapCss('coolwarm', (r + 1) / 2, 1);
+      if (muted(i, j)) {
+        ctx.strokeStyle = colour;
+        ctx.lineWidth = 1;
+        ctx.strokeRect(at[0] + 1.5, at[1] + 1.5, cell - 4, cell - 4);
+      } else {
+        ctx.fillStyle = colour;
+        ctx.fillRect(at[0], at[1], cell - 1, cell - 1);
+      }
+    }
+  }
+  for (const [mark, colour] of [[hovered, Ink.of('label')], [selected, Ink.of('text')]]) {
+    if (!mark) continue;
+    ctx.strokeStyle = colour;
+    ctx.lineWidth = 2;
+    for (const [i, j] of [mark, [mark[1], mark[0]]]) {
+      ctx.strokeRect(x0 + j * cell - 1, y0 + i * cell - 1, cell + 1, cell + 1);
+    }
+  }
+  if (roomy) {
+    ctx.fillStyle = Ink.of('label');
+    names.forEach((name, i) => {
+      ctx.fillText(name, x0 - ctx.measureText(name).width - 6, y0 + i * cell + cell / 2 + 3.5);
+    });
+    ctx.save();
+    names.forEach((name, j) => {
+      ctx.save();
+      ctx.translate(x0 + j * cell + cell / 2 + 3.5, y0 + n * cell + 6);
+      ctx.rotate(-Math.PI / 2);
+      ctx.fillText(name, -ctx.measureText(name).width, 0);
+      ctx.restore();
+    });
+    ctx.restore();
+  }
+
+  // The scale: −1 to +1 across the foot.
+  const top = Math.min(h - legend + 6, y0 + n * cell + (roomy ? margin : 0) + 10);
+  const width = Math.min(220, w - 60);
+  drawColormapStrip(ctx, x0, top, width, 8, 'coolwarm');
+  ctx.fillStyle = Ink.of('label');
+  ctx.fillText('−1', x0, top + 20);
+  ctx.fillText('0', x0 + width / 2 - 3, top + 20);
+  ctx.fillText('+1', x0 + width - 14, top + 20);
+
+  return {
+    /** The pair under a position on the canvas, or null. */
+    at(cx, cy) {
+      const j = Math.floor((cx - x0) / cell), i = Math.floor((cy - y0) / cell);
+      return i >= 0 && j >= 0 && i < n && j < n && i !== j ? [i, j] : null;
+    }
+  };
+}

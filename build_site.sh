@@ -29,7 +29,7 @@ find "${out}" -name '__pycache__' -type d -prune -exec rm -rf {} +
 
 # The engine, verbatim. Not a copy kept in step by hand: these are the files
 # the desktop version runs, and the browser imports exactly them.
-for f in GraphOfLifeSimple.py gol_config.py gol_series.py gol_lineage.py gol_spectral.py gol_lightning.py gol_stats.py gol_framestats.py explain_minimal.py; do
+for f in GraphOfLifeSimple.py gol_config.py gol_series.py gol_lineage.py gol_spectral.py gol_lightning.py gol_stats.py gol_framestats.py gol_atlas.py explain_minimal.py; do
   cp "${here}/${f}" "${out}/py/${f}"
 done
 
@@ -79,7 +79,7 @@ declare -A stamp_in=(
   ["${out}/js/layoutclient.js"]="js/layout-worker.js"
   ["${out}/js/layout-worker.js"]="force.js"
   ["${out}/js/api.js"]="js/sim-worker.js"
-  ["${out}/js/sim-worker.js"]="runstore.js"
+  ["${out}/js/sim-worker.js"]="runstore.js|book/results/worlds.json"
   ["${out}/js/explain.js"]="py/explain_minimal.py|data/explain-run.json"
   ["${out}/js/home.js"]="data/home-run.bin"
   ["${out}/js/docpage.js"]="data/Research.md|data/Literature.md|data/Graphs.md"

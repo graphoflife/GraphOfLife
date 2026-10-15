@@ -773,6 +773,71 @@
     <p class="lineage-readout" id="flowReadout"></p>
   </section>
 
+  <!-- ---------------- correlations ---------------- -->
+  <section id="research-correlations" class="research-panel" hidden>
+    <div class="explain-intro">
+      <h2>Correlations</h2>
+      <p><b>What goes with what.</b> Every pair of quantities is correlated &mdash;
+        on linear axes, on logarithmic ones, and by rank &mdash; and the matrix shows
+        how strongly: red when one rises with the other, blue when it falls, pale
+        when they have nothing to do with each other. Click a cell, or a line of
+        the list, to see the pair: every point, and the mean of the one in bins
+        of the other, with the middle half as a band.</p>
+      <p><b>A point is</b> an agent in one game of the window (its tokens, its
+        neighbourhood, its place in the network, what it staked and what then
+        happened to it), one game of the run (the world&rsquo;s statistics after it),
+        the change from one game to the next (two quantities that both drift over a
+        run correlate whatever they have to do with each other; their changes do
+        not), or one whole simulation of those the book has measured. An outlined
+        cell is a pair related by how it is made &mdash; a change of tokens contains
+        the tokens held &mdash; so its correlation says little about the world. The
+        book&rsquo;s Appendix B is what this showed in the baseline worlds.</p>
+    </div>
+    <div class="lineage-bar">
+      <span class="seg" id="atlasLevel" role="group" aria-label="What a point is">
+        <button type="button" class="seg-btn active" data-level="agents">Agents</button>
+        <button type="button" class="seg-btn" data-level="stats">World statistics</button>
+        <button type="button" class="seg-btn" data-level="changes">Their changes</button>
+        <button type="button" class="seg-btn" data-level="worlds">Every world</button>
+      </span>
+      <label for="atlasSpan" class="lineage-filter atlas-run">Show
+        <input type="number" id="atlasSpan" min="2" max="5000" step="1" value="20">
+        iterations</label>
+      <label for="atlasStep" class="lineage-filter atlas-run atlas-agents">one game in
+        <input type="number" id="atlasStep" min="1" max="100" step="1" value="2"></label>
+      <label for="atlasWindow" class="lineage-filter lineage-scrub atlas-run" hidden>from
+        <input type="range" id="atlasWindow" min="0" max="0" value="0" step="2">
+        <span id="atlasWindowValue"></span></label>
+      <label for="atlasPeriod" class="lineage-filter atlas-worlds" hidden>iterations
+        <select id="atlasPeriod"></select></label>
+    </div>
+    <div class="lineage-bar">
+      <span class="seg" id="atlasColour" role="group" aria-label="What a cell's colour is">
+        <button type="button" class="seg-btn active" data-colour="best">r on its best axes</button>
+        <button type="button" class="seg-btn" data-colour="linear">r on linear axes</button>
+        <button type="button" class="seg-btn" data-colour="rank">by rank</button>
+      </span>
+      <label for="atlasHide" class="lineage-filter"><input type="checkbox" id="atlasHide" checked>
+        outline the pairs related by how they are made</label>
+    </div>
+    <div class="atlas-stage">
+      <div class="atlas-box"><canvas id="atlasMatrix"></canvas></div>
+      <div class="atlas-box">
+        <div class="atlas-axes">
+          <label for="atlasXLog"><input type="checkbox" id="atlasXLog"> x logarithmic</label>
+          <label for="atlasYLog"><input type="checkbox" id="atlasYLog"> y logarithmic</label>
+          <button type="button" id="atlasSwap" class="small">swap axes</button>
+        </div>
+        <canvas id="atlasScatter"></canvas>
+      </div>
+    </div>
+    <p class="lineage-note" id="atlasNote"></p>
+    <p class="lineage-readout" id="atlasReadout"></p>
+    <div class="atlas-about" id="atlasAbout"></div>
+    <h3 class="atlas-list-head">The strongest pairs</h3>
+    <ol class="atlas-list" id="atlasList"></ol>
+  </section>
+
   <!-- ---------------- literature ---------------- -->
   <!-- Filled by Literature.render() from research/Literature.md. -->
   <section id="research-literature" class="research-panel" hidden></section>
@@ -860,6 +925,7 @@
 <script src="js/framewindow.js"></script>
 <script src="js/lineage.js"></script>
 <script src="js/flowview.js"></script>
+<script src="js/correlations.js"></script>
 <script src="js/markdown.js"></script>
 <script src="js/docpage.js"></script>
 <script src="js/theses.js"></script>

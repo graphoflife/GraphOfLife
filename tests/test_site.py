@@ -512,6 +512,68 @@ def test_the_browser_and_the_server_summarise_a_run_alike():
                 assert ours is not None and all(map(same, ours, theirs)), (points, key)
 
 
+def test_the_browser_and_the_server_correlate_a_window_alike():
+    """
+    The Correlations view asks either backend for a window of a run made into
+    a table — its agents game by game, or the world's statistics — with every
+    pair correlated, or one pair drawn. The server reads the frames and, for
+    the statistics, the run's record; the browser's worker is handed the
+    frames and works the statistics out afresh. Both go through gol_atlas, and
+    this holds them to the same answer, through the route the page calls.
+    """
+    import gol_atlas
+    import gol_server
+    import gol_store
+
+    browser = _browser_module().Worlds()
+
+    class Request:
+        headers = {}
+        close_connection = False
+
+        def __init__(self, path):
+            self.path = path
+            self.answered = []
+
+        def _client_gone(self):
+            return False
+
+        def _error(self, message, status=400):
+            self.answered.append((status, message))
+
+        def _send_json(self, payload, status=200):
+            self.answered.append((status, payload))
+
+    def ask(path):
+        request = Request(path)
+        gol_server.Handler._route_get(request, path.split("?")[0])
+        (status, payload), = request.answered
+        assert status == 200, payload
+        return payload
+
+    with scratch_runs():
+        run_id = advanced_run(small(seed=86), 45, {"heavy_every": 5})
+        frames = [gol_store.read_frame(run_id, i) for i in range(gol_store.count_frames(run_id))]
+        reads = browser.atlas_reads()
+        for level, count in (("agents", 20), ("stats", 80), ("changes", 80)):
+            if level == "agents":
+                window = [{k: f[k] for k in reads["fields"] if k in f}
+                          for f in frames[:count + reads["lookahead"]]]
+                browser.atlas_agents(level, window, count, 2)
+            else:
+                browser.atlas_stats(level, frames[:count], level == "changes")
+            query = f"/api/runs/{run_id}/atlas?level={level}&from=0&count={count}&step={2 if level == 'agents' else 1}"
+            theirs = ask(query)
+            ours = browser.atlas_answer(level, None, None, False, False)
+            assert theirs == ours, f"the two backends correlate the {level} differently"
+            assert theirs["pairs"], f"nothing correlated at the {level} level"
+            names = [v["name"] for v in theirs["variables"]]
+            a, b = names[theirs["strongest"][0][0]], names[theirs["strongest"][0][1]]
+            one = ask(query + f"&a={a}&b={b}&xlog=1&ylog=0")
+            assert one == browser.atlas_answer(level, a, b, True, False), f"one pair of the {level} differs"
+            assert one["a"] == a and len(one["points"]["x"]) == min(one["n"], gol_atlas.POINTS)
+
+
 # ---------------------------------------------------------------------------
 # The form
 # ---------------------------------------------------------------------------
