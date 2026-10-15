@@ -9,7 +9,11 @@ share of agents carrying an A brain at the end. 0.5 means the two eras are
 equally good at spreading; above 0.5, A is better.
 
 Each pair is played on both eras' worlds (A's and B's) and with `reps` coins,
-and the scores are averaged.
+and the scores are averaged. With --layout halves each era gets a contiguous
+half of the world instead of a coin per agent; with --layout turf, also the
+era whose world it is keeps its own brains in place on its half, so that what
+its brains are as a group (clones next to clones, allies next to allies) is
+played too, once at home and once, drawn at random, away.
 
     python3 tourney.py RUNDIR --eras 0,250,500,... --T 20 --reps 2 --jobs 6
 """
@@ -87,16 +91,24 @@ def contest(args):
     rng = np.random.RandomState(seed)
     n = len(state["ids"])
     nl = int(state["n_layers"][0])
-    from_b = halves(state, rng) if LAYOUT == "halves" else rng.random_sample(n) < 0.5
+    from_b = halves(state, rng) if LAYOUT in ("halves", "turf") else rng.random_sample(n) < 0.5
     pick_a = rng.randint(0, len(A["ids"]), size=n)
     pick_b = rng.randint(0, len(B["ids"]), size=n)
+    if LAYOUT == "turf":
+        # The era whose world this is keeps its own brains where they are on its half,
+        # clones next to clones; only the visiting era's brains are drawn at random.
+        if state_it == b_it:
+            pick_b = np.arange(n)
+        if state_it == a_it:
+            pick_a = np.arange(n)
     blob = dict(state)
     for i in range(nl):
         W = np.where(from_b[:, None, None], B[f"W{i}"][pick_b], A[f"W{i}"][pick_a])
         b = np.where(from_b[:, None, None], B[f"b{i}"][pick_b], A[f"b{i}"][pick_a])
         blob[f"W{i}"], blob[f"b{i}"] = W, b
-    # A brain's label is its era: ids below LABEL_B are A's, at or above are B's.
-    blob["brain_ids"] = np.where(from_b, LABEL_B + pick_b, pick_a).astype(np.int64)
+    # A brain's label is its era: ids below LABEL_B are A's, at or above are B's. Within
+    # an era a brain keeps its genotype's id, so clones are still clones (pool=genotype).
+    blob["brain_ids"] = np.where(from_b, LABEL_B + B["brain_ids"][pick_b], A["brain_ids"][pick_a]).astype(np.int64)
     blob["parent_brain_ids"] = np.full(n, -1, dtype=np.int64)
     blob["msg_to"] = np.zeros(0, dtype=np.int64)
     blob["msg_from"] = np.zeros(0, dtype=np.int64)
@@ -129,8 +141,9 @@ def main():
     ap.add_argument("--jobs", type=int, default=6)
     ap.add_argument("--pairs", default="all", help="all | base (each vs the first) | step (each vs the previous)")
     ap.add_argument("--out", default="")
-    ap.add_argument("--layout", default="coins", choices=("coins", "halves"),
-                    help="coins: a coin per agent; halves: each era gets a contiguous half of the world")
+    ap.add_argument("--layout", default="coins", choices=("coins", "halves", "turf"),
+                    help="coins: a coin per agent; halves: each era gets a contiguous half of the world; "
+                         "turf: halves, and the era whose world it is keeps its own brains in place")
     a = ap.parse_args()
     global LAYOUT
     LAYOUT = a.layout

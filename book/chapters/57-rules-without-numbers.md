@@ -58,6 +58,129 @@ at 10,000 tokens:
   space from the alliances, with no number;
 - **B3c**: without alliances.
 
+## What the six worlds did
+
+<!-- figure numberless/agents -->
+![Worlds without numbers](../figures/numberless/agents.svg)
+
+**Worlds without numbers.** One line per world, each a mean over 10 iterations; a world that died out ends at one agent.
+
+> [!example]- How to make this figure
+> **Runs.** Pilot worlds of `research/oee/pilots/run.py`, kept in `GraphOfLifeRuns/.pilots/N`: `B3a-s1`, `-s2`, `B3b-s1`, `-s2` and `B3c-s1`, `-s2`, at 10,000 tokens for 1,000 iterations. Settings: one hidden layer of 16, messages of 8 numbers, no pre-pass, no handover, revolutions off, and every number of B2 at its original value; prototype switches `mor=all repair=true memory=true`, with `allies=true` (B3a), `allies=true birth_allies=true` (B3b), or neither (B3c).
+>
+> **Data.** From each world's `series.jsonl`.
+>
+> 1. Take the agents after each iteration's game (`nodes`) and average over consecutive stretches of 10 iterations.
+>
+> **To make it again:** `python3 book_figures.py numberless`.
+<!-- /figure -->
+
+**Without alliances, the worlds died.** Both B3c worlds died out, one at
+iteration 102 and the other at 432. Before they did, nearly every node
+changed hands in every game: 88 to 91 per hundred agents. In the
+longer-lived world, 96 agents in a hundred were born and 77 starved in every
+iteration from 100 to 400, so the average agent was one and a half iterations
+old. This is the world [Chapter 49](49-who-dies-and-why.md) warns of. Children
+of a token or two stake everything and lose it, and nothing holds the
+population up but births, until they fall short.
+
+**With alliances, the worlds lived, but not as worlds should.** Every world
+with alliances that lived became one alliance. In the last 300 iterations the
+largest held 99.7 to 100% of the agents, and the fighting stopped, at 0.0 to
+0.4 nodes per hundred agents a game. What was left differed from world to
+world:
+
+- **B3a, seed 1, a star and then a tree.** From iteration 130 to 330 one
+  agent was joined to between 58 and 98% of all the others. Nothing stopped
+  brains from joining their children to the best-connected neighbour. When
+  the star went, the world grew back as a tree: at the end, 2.2 links per
+  agent, 42% of agents with a single link, a third in the 2-core, and one
+  agent or one link whose loss would cut off 39% of the world. It was a tree
+  of old agents, with a mean age of 206. There were 3.5 births per hundred
+  agents an iteration, and as many agents cut off.
+- **B3a, seed 2, a world of mayflies.** In every iteration 26 agents in a
+  hundred were born and 24 starved; the mean age was 21.
+- **B3b, birth among allies.** Seed 1 died out at iteration 74. Seed 2 lived
+  dense and short. It had 8 links per agent, one agent joined to a fifth of
+  the world, and a ball dimension of 5.2. There were 53 births and 49
+  starvations per hundred agents an iteration, and the mean age was 5.
+
+<!-- figure numberless/ages -->
+![How old the agents are](../figures/numberless/ages.svg)
+
+**How old the agents are.** One line per world while it had more than 20 agents, each a mean over 10 iterations. In B2 every agent dies at 100, so the mean age settles near 50.
+
+> [!example]- How to make this figure
+> **Runs.** Pilot worlds of `research/oee/pilots/run.py`, kept in `GraphOfLifeRuns/.pilots/N`: `B3a-s1`, `-s2`, `B3b-s1`, `-s2` and `B3c-s1`, `-s2`, at 10,000 tokens for 1,000 iterations. Settings: one hidden layer of 16, messages of 8 numbers, no pre-pass, no handover, revolutions off, and every number of B2 at its original value; prototype switches `mor=all repair=true memory=true`, with `allies=true` (B3a), `allies=true birth_allies=true` (B3b), or neither (B3c).
+>
+> **Data.** From each world's `series.jsonl`.
+>
+> 1. Take the mean age of the agents after each game (`meanAge`) while the world has more than 20 agents, and average over stretches of 10 iterations.
+>
+> **To make it again:** `python3 book_figures.py numberless`.
+<!-- /figure -->
+
+None of the six passes the health bar of
+[Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md), and none is a
+world in which evolution could work for long. The three that lived ended the
+fighting, and with it nearly all selection but that between who has children
+and who does not.
+
+## What each number was doing
+
+Every failure above was already named in Chapters 48 and 49, one number at a
+time. Here they come all at once:
+
+| without | what happened |
+|---|---|
+| a share kept at home | agents stake themselves to death: 24 to 77 in a hundred starve in every iteration where the world lives as mayflies |
+| a smallest child | the starving are children of a token or two; mean ages of 1.5 to 21 iterations |
+| a cap on links | a star, one agent joined to 98% of the world |
+| links at birth, and with every unused link lapsing | a tree: 2.2 links per agent, and a cut of 39% by one loss |
+| an age limit | in the tree, agents live for hundreds of iterations and births nearly stop |
+| the home advantage | the alliances do its work, as in [Chapter 56](56-alliances.md) |
+
+Alliances made the difference between dying and living: both worlds without
+them died, and three of the four with them lived. They did not make the
+difference between living and evolving.
+
+## Numbers and definitions
+
+Not every number in a rule is a factor chosen by hand. Some say what a rule
+*means*. A unit of tokens is one token. "An unused link lapses only if its
+two ends stay joined twice over without it" uses a 2 that is the definition
+of the property wanted, as three is the definition of a triangle. Pruning
+with one shared neighbour can leave two agents hanging on a single third;
+with two it cannot, and no smaller number does that. Other numbers are
+**magnitudes**: 1.5, 0.3, 8, 10 and 100. Nothing in the rules picks them; a
+world would work, differently, at 1.4 or at 120.
+
+The author's rule is aimed at the magnitudes. Each needs a replacement that
+the world decides for itself, and each failure above says what that
+replacement must prevent. These are candidates, and the pilots that test them
+come next:
+
+- **The owner's one and a half → none.** Alliances form without it
+  ([Chapter 56](56-alliances.md)), and what defends a node is then whoever
+  stands with its owner.
+- **The share kept at home and the smallest child → birth by division.** An
+  agent decides only *when* to have a child, and a child always takes half of
+  its parent's tokens. No child is then poorer than the parent it leaves, so
+  none can be spent as a missile, and no number is needed to say how small a
+  child may be.
+- **The cap on links → links that cost.** In the original algorithm a link
+  lives only while tokens cross it, and with gifts
+  ([Chapter 54](54-the-switches-the-world-was-built-with.md)) an agent can pay
+  to keep the links it wants. How many links an agent holds is then set by
+  what it can pay for.
+- **The links at birth → all of them.** A newborn joined to its parent and to
+  every neighbour of its parent closes every triangle it can, and needs no
+  number. Combined with links that cost, it is the brains that decide which
+  of those links last.
+- **The age limit** has no candidate yet. It is what makes room for the
+  young in B2, and the tree of old agents above shows what a world without
+  it can become.
+
 <!-- turns -->
 ---
 

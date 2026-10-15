@@ -79,7 +79,7 @@ Mechanics (P keys):
                   (incumbency, keep_home, mutate_on_replication, birth_links, ... and
                   the switches gifting, handover, revolutions, redistribution), with
                   only the bookkeeping added. The other keys above are then unused,
-                  except the two below. (equiv.py checks it against the engine.)
+                  except the three below. (equiv.py checks it against the engine.)
   contest  str    "plurality" (the engine's: the largest stake takes the node) or
                   "lottery": the node goes to a staker drawn with probability in
                   proportion to its stake as the game weighs it (Tullock's contest).
@@ -87,6 +87,8 @@ Mechanics (P keys):
                   stake by agents with one brain counts as one side's; the side with
                   most takes the node, kept by the owner if its genotype wins. Adds
                   the input row of the pooling rules (is this candidate my genotype?).
+  kin_sense bool  the same input row — is this candidate's brain identical to mine? —
+                  without any pooling: an agent can tell its clones, nothing more.
 """
 from __future__ import annotations
 
@@ -109,7 +111,7 @@ DEFAULTS = {"mor": "off", "memory": False, "seek": False, "toll": "pool", "seek_
             "keep_one": False, "memory_len": 0, "keep_frac": 0.0,
             "support": False, "fog": False, "support_gain": 1.0, "allies": False,
             "kin_pool": -1, "birth_allies": False, "ally_keep": False,
-            "engine": False, "contest": "plurality", "pool": ""}
+            "engine": False, "contest": "plurality", "pool": "", "kin_sense": False}
 P: Dict[str, Any] = dict(DEFAULTS)
 
 
@@ -136,7 +138,7 @@ class ProtoConfig(SimConfig):
             for name in (f"hist_to_{k}", f"hist_from_{k}"):
                 layout[name] = (row, row + 1, "bit")
                 row += 1
-        if pooled():
+        if pooled() or P.get("kin_sense"):
             layout["same_side"] = (row, row + 1, "bit")
             row += 1
         return layout
@@ -367,6 +369,10 @@ class ProtoWorld(GraphOfLife):
             X = np.vstack([X, rows])
         if pooled():
             X = np.vstack([X, [[1.0 if v != u and self.same_side(u, v) else 0.0
+                                for v in candidates]]])
+        elif P.get("kin_sense"):
+            own = self.brains[u].brain_id
+            X = np.vstack([X, [[1.0 if v != u and self.brains[v].brain_id == own else 0.0
                                 for v in candidates]]])
         return X
 

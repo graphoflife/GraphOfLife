@@ -311,3 +311,15 @@ founders 0.62, 500: 0.59; G1-s1 at 1,000: 0.48; G2-s1 at 1,000: 0.54). B2 with
 revolutions (S0) rolled them less (0.42-0.44), one seed each. With the founders' baseline (0.49-0.66) this says the
 dice are inherited, not discovered: Chapter 50's mixed-strategy reading is not
 what the probes show.
+
+## The password is the edge (2026-10-15)
+Lone raider (the raider without password: every neighbour a stranger, no
+message, children joined to nobody chosen), worlds s002 and s001 at 2,000, 5%
+patch, seeds 1-2: dies out in all four plantings within 96-130 iterations, also
+in s002 where the raider with password took 40-50% of the world. A raider
+without a way to tell its own raids its own: its poorest neighbour is often its
+own newborn. Evolution would have to find the signature and its reading at once
+(a green beard), which no single mutation does.
+Next (running): G3, B2 without revolutions + kin_sense (one input row: is this
+candidate's brain identical to mine? no pooling), seeds 1-2 (jobs_G3.txt).
+Compare S1 (no sense), G3 (sense), G2 (sense + pooling).

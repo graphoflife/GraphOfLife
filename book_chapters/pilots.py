@@ -204,53 +204,91 @@ def allies(ch: F.Chapter) -> None:
 # Chapter 51 · Strategies written by hand
 # ---------------------------------------------------------------------------
 
-INVASIONS = os.path.join(PILOTS, "invade_B2_2000.json")
-STRATEGY_COLOURS = {"resident": GREY, "turtle": GREEN, "raider": RED, "factory": BLUE}
-INVASION_RUNS = ("Two of the B2 worlds of Experiment 16, `B2-10000-s001` and `-s002`, as their "
-                 "archives keep them at iteration 2,000 (`GraphOfLifeRuns/<run>/archive/`). Each "
-                 "strategy, and the resident control, was planted in each world on two seeds "
-                 "(`python3 research/oee/pilots/manual.py B2-10000-s001 B2-10000-s002 --era 2000 "
-                 "--strategies factory,turtle,raider,resident --seeds 1,2 --T 300 --patch 0.05`).")
+INVADE = {"first": "invade_B2_2000.json", "ten": "invade_B2_2000_ten.json",
+          "lone": "invade_B2_2000_lone.json", "single": "invade_B2_2000_single.json"}
+STRATEGY_COLOURS = {"resident": GREY, "turtle": GREEN, "raider": RED, "lone": VIOLET, "factory": BLUE}
+MANUAL = "python3 research/oee/pilots/manual.py"
+INVASION_RUNS = ("The B2 worlds of Experiment 16, `B2-10000-s001` … `-s010`, as their archives keep them "
+                 "at iteration 2,000 (`GraphOfLifeRuns/<run>/archive/`). Strategies planted with "
+                 f"`{MANUAL}`: in `-s001` and `-s002` every strategy and the control on seeds 1 and 2 "
+                 "(`--strategies factory,turtle,raider,resident --seeds 1,2 --T 300 --patch 0.05`); in all "
+                 "ten worlds the raider, the factory and the control on seed 1; in `-s001` and `-s002` the "
+                 "lone raider on seeds 1 and 2; in `-s002` a single raider, and a single resident, on seeds "
+                 "1 to 20 (`--patch 0.0002 --T 200`).")
 INVASION_STEPS = [
     "Load the world of iteration 2,000 (`GraphOfLife.from_checkpoint`). On seed *s*, draw an "
-    "agent at random and take the agents nearest to it, step by step, until 5% of the world.",
+    "agent at random and take the agents nearest to it, step by step, until the patch holds the "
+    "share asked for (5%, or one agent).",
     "Give each agent of that patch the strategy (`manual.py`), or, for the control, a frozen copy "
     "of the brain of one agent of the patch drawn at random; neither ever mutates.",
-    "Play 300 iterations under the world's own rules and count, after each, the agents carrying "
+    "Play on under the world's own rules and count, after each iteration, the agents carrying "
     "the strategy, as a share of all agents."]
 
 
-def invasions() -> List[Dict[str, Any]]:
-    if not os.path.exists(INVASIONS):
+def invasions(which: str) -> List[Dict[str, Any]]:
+    path = os.path.join(PILOTS, INVADE[which])
+    if not os.path.exists(path):
         return []
-    with open(INVASIONS) as f:
+    with open(path) as f:
         return json.load(f)
+
+
+def end_share(r: Dict[str, Any], T: int) -> float:
+    """A planting's share of the agents after T iterations (0 if it died out before)."""
+    s = r["series"]
+    at = [p for p in s if p["t"] == T]
+    return at[0]["mine"] / max(1, at[0]["agents"]) if at else 0.0
 
 
 @chapter
 def handmade(ch: F.Chapter) -> None:
-    played = invasions()
-    if not played:
+    first = invasions("first")
+    if not first:
         return
-    series_, final = [], {}
+    series_ = []
     for strategy, colour in STRATEGY_COLOURS.items():
-        mine = [r for r in played if r["strategy"] == strategy]
+        mine = [r for r in first + invasions("lone") if r["strategy"] == strategy]
         for k, r in enumerate(mine):
             s = r["series"]
             series_.append({"label": strategy if k == 0 else None, "x": [p["t"] for p in s],
-                            "y": [p["mine"] / max(1, p["agents"]) for p in s], "colour": colour, "width": 1.5})
-            final.setdefault(strategy, []).append(s[-1]["mine"] / max(1, s[-1]["agents"]) if s[-1]["t"] == 300 else 0.0)
-    ch.figure("shares", title="The share of an evolved world held by a strategy",
+                            "y": [p["mine"] / max(1, p["agents"]) for p in s], "colour": colour, "width": 1.5,
+                            **({"dash": [6, 3]} if r["run"].endswith("s001") else {})})
+    ch.figure("shares", title="The share of two evolved worlds held by a strategy",
               x={"label": "iterations after planting"}, y={"label": "share of the agents", "min": 0},
               series=series_,
-              caption=("One line per planting: two worlds, two seeds each. The grey lines are the "
-                       "control, a patch of the residents' own brains planted in the same place."),
+              caption=("One line per planting: two seeds in each of two worlds, the world of seed 1 "
+                       "dashed, of seed 2 solid. Grey is the control, a patch of the residents' own "
+                       "brains planted in the same place."),
               recipe=recipe(INVASION_RUNS, "the worlds the archives keep", INVASION_STEPS))
-    ch.number("final_share", {s: v for s, v in final.items()})
-    ch.number("versus_resident", {
-        s: [a - b for a, b in zip(final[s], final["resident"])] for s in final if s != "resident"})
-    ch.number("planted", [{"run": r["run"], "seed": r["seed"], "strategy": r["strategy"], "patch": r["patch"],
-                           "agents": r["series"][0]["agents"]} for r in played])
+    ch.number("first", [{"run": r["run"], "seed": r["seed"], "strategy": r["strategy"], "patch": r["patch"],
+                         "end": end_share(r, 300), "last": r["series"][-1]["t"]} for r in first])
+    ten = invasions("ten")
+    if ten:
+        worlds = sorted({r["run"] for r in ten})
+        cats = ["resident", "raider", "factory"]
+        groups = [[end_share(r, 300) for r in ten if r["strategy"] == c] for c in cats]
+        ch.figure("ten", title="Ten evolved worlds, a patch of 5% each",
+                  x={"categories": ["residents (control)", "raider", "factory"]},
+                  y={"label": "share of the agents after 300 iterations", "min": 0},
+                  series=F.dots(cats, groups, [STRATEGY_COLOURS[c] for c in cats]),
+                  caption="One dot per world, the bar the median of ten.",
+                  recipe=recipe(INVASION_RUNS, "the worlds the archives keep", INVASION_STEPS))
+        ch.number("ten", {w: {c: end_share(next(r for r in ten if r["run"] == w and r["strategy"] == c), 300)
+                              for c in cats} for w in worlds})
+    lone = invasions("lone")
+    if lone:
+        ch.number("lone", [{"run": r["run"], "seed": r["seed"], "end": end_share(r, 300),
+                            "last": r["series"][-1]["t"]} for r in lone])
+    single = invasions("single")
+    if single:
+        out = {}
+        for c in ("raider", "resident"):
+            mine = [r for r in single if r["strategy"] == c]
+            out[c] = {"plantings": len(mine),
+                      "alive_at_200": sum(1 for r in mine if r["series"][-1]["t"] == 200 and r["series"][-1]["mine"] > 0),
+                      "agents_at_200": [r["series"][-1]["mine"] if r["series"][-1]["t"] == 200 else 0 for r in mine],
+                      "lived": [r["series"][-1]["t"] for r in mine]}
+        ch.number("single", out)
 
 
 # ---------------------------------------------------------------------------
@@ -321,7 +359,7 @@ def numberless(ch: F.Chapter) -> None:
                           ("meanDegree", "coreShare", "nodeCutRisk", "cutRisk", "maxDegreeShare", "dimension",
                            "leafShare")})
             entry["side"] = float(np.median([r.get("sideLargest", 0) / r["nodes"] for r in h]))
-            entry.update({k: float(np.mean([100 * r.get(c, 0) / r["nodes"] for r in tail for c in cs]) * 1)
+            entry.update({k: float(np.mean([100 * sum(r.get(c, 0) for c in cs) / r["nodes"] for r in tail]))
                           for k, cs in (("births", ("births",)), ("conquests", ("conquests",)),
                                         ("starved", ("starved_r", "starved_g")),
                                         ("cut_off", ("orphaned_r", "orphaned_g")))})

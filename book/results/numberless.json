@@ -1,0 +1,82 @@
+{
+ "chapter": "numberless",
+ "numbers": {
+  "worlds": {
+   "N/B3a-s1": {
+    "died_at": null,
+    "agents": 3146,
+    "meanDegree": 2.1726163231253977,
+    "coreShare": 0.3274759576576991,
+    "nodeCutRisk": 0.39137334781821476,
+    "cutRisk": 0.39143536336880236,
+    "maxDegreeShare": 0.20273739485583703,
+    "dimension": -0.2189555660922461,
+    "leafShare": 0.4223717163867793,
+    "side": 1.0,
+    "births": 3.4536096040743702,
+    "conquests": 0.0021354084838415372,
+    "starved": 0.01608458070699479,
+    "cut_off": 3.537856702647426,
+    "mean_age": 205.61104413013632
+   },
+   "N/B3a-s2": {
+    "died_at": null,
+    "agents": 3064,
+    "meanDegree": 3.0952420378649887,
+    "coreShare": 0.5014462504438446,
+    "nodeCutRisk": 0.0700718410936048,
+    "cutRisk": 0.06512869128781912,
+    "maxDegreeShare": 0.08842952059811265,
+    "dimension": 4.229743383061453,
+    "leafShare": 0.4769709039957637,
+    "side": 0.9968909308464643,
+    "births": 26.491880387377407,
+    "conquests": 0.3862436106140596,
+    "starved": 24.074453374234043,
+    "cut_off": 2.4589257055898797,
+    "mean_age": 21.131078415366915
+   },
+   "N/B3b-s1": {
+    "died_at": 74,
+    "agents": 1
+   },
+   "N/B3b-s2": {
+    "died_at": null,
+    "agents": 1973,
+    "meanDegree": 8.043499789682174,
+    "coreShare": 0.924472438366472,
+    "nodeCutRisk": 0.00308564423530845,
+    "cutRisk": 0.0015242656981167874,
+    "maxDegreeShare": 0.20883434718365795,
+    "dimension": 5.192378139469385,
+    "leafShare": 0.07099104831864222,
+    "side": 0.9984897984421319,
+    "births": 52.6824055706166,
+    "conquests": 0.0010887448834544615,
+    "starved": 49.35789598165747,
+    "cut_off": 3.3116784329124367,
+    "mean_age": 5.124916505613986
+   },
+   "N/B3c-s1": {
+    "died_at": 102,
+    "agents": 1
+   },
+   "N/B3c-s2": {
+    "died_at": 432,
+    "agents": 1
+   }
+  }
+ },
+ "figures": {
+  "agents": {
+   "title": "Worlds without numbers",
+   "caption": "One line per world, each a mean over 10 iterations; a world that died out ends at one agent.",
+   "recipe": "**Runs.** Pilot worlds of `research/oee/pilots/run.py`, kept in `GraphOfLifeRuns/.pilots/N`: `B3a-s1`, `-s2`, `B3b-s1`, `-s2` and `B3c-s1`, `-s2`, at 10,000 tokens for 1,000 iterations. Settings: one hidden layer of 16, messages of 8 numbers, no pre-pass, no handover, revolutions off, and every number of B2 at its original value; prototype switches `mor=all repair=true memory=true`, with `allies=true` (B3a), `allies=true birth_allies=true` (B3b), or neither (B3c).\n\n**Data.** From each world's `series.jsonl`.\n\n1. Take the agents after each iteration's game (`nodes`) and average over consecutive stretches of 10 iterations.\n\n**To make it again:** `python3 book_figures.py numberless`."
+  },
+  "ages": {
+   "title": "How old the agents are",
+   "caption": "One line per world while it had more than 20 agents, each a mean over 10 iterations. In B2 every agent dies at 100, so the mean age settles near 50.",
+   "recipe": "**Runs.** Pilot worlds of `research/oee/pilots/run.py`, kept in `GraphOfLifeRuns/.pilots/N`: `B3a-s1`, `-s2`, `B3b-s1`, `-s2` and `B3c-s1`, `-s2`, at 10,000 tokens for 1,000 iterations. Settings: one hidden layer of 16, messages of 8 numbers, no pre-pass, no handover, revolutions off, and every number of B2 at its original value; prototype switches `mor=all repair=true memory=true`, with `allies=true` (B3a), `allies=true birth_allies=true` (B3b), or neither (B3c).\n\n**Data.** From each world's `series.jsonl`.\n\n1. Take the mean age of the agents after each game (`meanAge`) while the world has more than 20 agents, and average over stretches of 10 iterations.\n\n**To make it again:** `python3 book_figures.py numberless`."
+  }
+ }
+}
