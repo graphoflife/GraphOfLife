@@ -126,6 +126,15 @@ the settled world against its own past rather than against its boom.
 > contest cannot see it. The tournaments of this book were played with 20
 > iterations until 2026-10-15; [Chapter 50](50-why-evolution-stops.md#would-we-notice-if-it-went-on)
 > shows what longer ones find.
+>
+> For B1, this chapter's world, the longer contests agree with the short ones.
+> In contests of 100 iterations, once in each era's world, the brains of
+> iteration 1,000 held a median 0.49 of the world against those of 500 in this
+> experiment's ten worlds, and 0.56 against those of 300. They scatter more than
+> B2's: from 0.31 to 0.77 against 500, above 0.6 in three worlds and below 0.4
+> in two. Eras played against themselves held 0.48 to 0.58. The verdict below
+> stands: in B1 evolution stops within a few hundred iterations, whichever
+> length of contest asks.
 
 
 ## The network that holds, in numbers

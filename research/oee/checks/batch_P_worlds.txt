@@ -1,0 +1,13 @@
+# Batch P: the inputs of Chapter 58 and links that hold a token.
+pilot GraphOfLifeRuns/.pilots/P/B2-s1 500:1000,1000:2000,500:2000
+pilot GraphOfLifeRuns/.pilots/P/B2-s2 500:1000,1000:2000,500:2000
+pilot GraphOfLifeRuns/.pilots/P/came-s1 500:1000,1000:2000,500:2000
+pilot GraphOfLifeRuns/.pilots/P/came-s2 500:1000,1000:2000,500:2000
+pilot GraphOfLifeRuns/.pilots/P/helped-s1 500:1000,1000:2000,500:2000
+pilot GraphOfLifeRuns/.pilots/P/helped-s2 500:1000,1000:2000,500:2000
+pilot GraphOfLifeRuns/.pilots/P/both-s1 500:1000,1000:2000,500:2000
+pilot GraphOfLifeRuns/.pilots/P/both-s2 500:1000,1000:2000,500:2000
+pilot GraphOfLifeRuns/.pilots/P/linktoken-s1 500:1000,1000:2000,500:2000
+pilot GraphOfLifeRuns/.pilots/P/linktoken-s2 500:1000,1000:2000,500:2000
+pilot GraphOfLifeRuns/.pilots/P/linkseek-s1 500:1000,1000:2000,500:2000
+pilot GraphOfLifeRuns/.pilots/P/linkseek-s2 500:1000,1000:2000,500:2000

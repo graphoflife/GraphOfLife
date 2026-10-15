@@ -187,7 +187,19 @@ agents changed hands in a game from iteration 500 without it, against 2.2 and
 > 500 (0.73) where in contests of 20 they tied
 > ([Chapter 50](50-why-evolution-stops.md#would-we-notice-if-it-went-on)). Where
 > this chapter says that evolution stops, read: it stops *as far as a short
-> contest can see*. The longer contests are being played now.
+> contest can see*.
+>
+> The longer contests have since been played, 100 iterations each, once in
+> each era's world (`research/oee/checks/rejudge.py`, seed 17). In every one of
+> these worlds the brains of iteration 1,000 held more than half of the world
+> against those of 500: 0.62 and 0.59 with alliances, 0.70 and 0.62 without,
+> 0.80 and 0.59 with kin pooled, 0.69 and 0.97 with support counted twice. In
+> the two long worlds of alliances the brains of 3,000 beat those of 1,000
+> (0.69 and 0.88), and in one of them those of 2,000 as well (0.69; the other
+> tied, 0.52). The same eras played against themselves held 0.44 to 0.56. So a
+> world of allies does go on evolving, as far as 3,000 iterations in one world
+> of two: the alliance spreads once, and the brains inside it keep improving,
+> which the tournaments below were too short to see.
 
 <!-- figure allies/elo -->
 ![How much better than the founders](../figures/allies/elo.svg)

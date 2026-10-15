@@ -144,6 +144,17 @@ Alliances made the difference between dying and living: both worlds without
 them died, and three of the four with them lived. They did not make the
 difference between living and evolving.
 
+> [!info] Added later: contests a lifetime long
+> Played in contests of 100 iterations, once in each era's world
+> ([Chapter 50](50-why-evolution-stops.md#would-we-notice-if-it-went-on)), the
+> three worlds that lived answer three ways. In B3a, seed 1, the brains of
+> iteration 1,000 tied with those of 500 (0.50 and 0.46). In seed 2 they took
+> 0.84 of their own world and the whole of 500's. In B3b, seed 2, the brains of
+> 500 took the whole of 1,000's world and lost a little more than half of their
+> own (1,000 held 0.00 and 0.43). These worlds, of 1,500 to 3,400 agents, are
+> held together by one alliance, and a contest in them tends to go to one side
+> entirely. Whether B3 keeps evolving, two seeds cannot say.
+
 ## Numbers and definitions
 
 Not every number in a rule is a factor chosen by hand. Some say what a rule

@@ -1,0 +1,11 @@
+# Batch Q: mixed brains, the attack input, units that hold a token, links without the age limit.
+pilot GraphOfLifeRuns/.pilots/Q/mix-s1 500:1000,1000:2000,500:2000
+pilot GraphOfLifeRuns/.pilots/Q/mix-s2 500:1000,1000:2000,500:2000
+pilot GraphOfLifeRuns/.pilots/Q/tookkin-s1 500:1000,1000:2000,500:2000
+pilot GraphOfLifeRuns/.pilots/Q/tookkin-s2 500:1000,1000:2000,500:2000
+pilot GraphOfLifeRuns/.pilots/Q/grow-s1 500:1000,1000:2000,500:2000
+pilot GraphOfLifeRuns/.pilots/Q/grow-s2 500:1000,1000:2000,500:2000
+pilot GraphOfLifeRuns/.pilots/Q/unittoken-s1 500:1000,1000:2000,500:2000
+pilot GraphOfLifeRuns/.pilots/Q/unittoken-s2 500:1000,1000:2000,500:2000
+pilot GraphOfLifeRuns/.pilots/Q/linknoage-s1 500:1000,1000:2000,500:2000
+pilot GraphOfLifeRuns/.pilots/Q/linknoage-s2 500:1000,1000:2000,500:2000

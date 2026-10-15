@@ -529,3 +529,27 @@ above one half:
 - 2,000 vs 1,000: 0.667 (0.57-0.76) 10/10.
 => Evolution in B2 never stopped; it slows (0.68 -> 0.62 -> 0.60 per 500
 iterations). The long runs to 10,000 will show whether it slows towards a tie.
+
+## Earlier pilots re-judged a lifetime long (2026-10-15, night)
+rejudge.py, T = 100, once in each era's world, 188 contests + 12 self-contests
+(control 0.44-0.58). Later era 1,000 vs 500, mean of the two homes:
+- A10k allies 0.62/0.59, ctrl 0.70/0.62, kin 0.80/0.59, gain 0.69/0.97.
+  AL s3: 3,000 vs 1,000 0.69, vs 2,000 0.52; s4: 0.88, 0.69.
+- S1-norev 0.76/0.61, S2-gifts 0.87/0.83, S3-giftslapse 0.25/0.62 (erratic),
+  S4-lapse 0.65/0.53, S5-bytokens 0.65/0.62; S6-B1 0.37/0.68,
+  S7-B1norev 0.35/0.16.
+- G1-lottery 0.47/0.56, G2-genotype 0.59/0.65, G3-kinsense 0.72/0.80,
+  G4-familysense 0.62/0.67, G5-familypool 0.46/0.78.
+- B3a s1 0.48, s2 0.92; B3b s2 0.22 (all-or-nothing contests in worlds held by
+  one alliance).
+- Lab E12 (B1-5000): median 0.49 (0.31-0.77) vs 500, 0.56 vs 300.
+=> B2's family keeps improving 500 -> 1,000 almost everywhere; B1's does not;
+the lottery stops evolution. Chapters 46, 55, 56, 57 corrected; 54 waits for
+its control S0-B2 (rejudge_control.txt).
+
+## B2 to 10,000: a plateau after ~5,000 (2026-10-15, night)
+long_worlds.txt, T = 100, once in each era's world (s001/s002/s003):
+5,000 vs 2,000 0.690/0.590/0.632; 10,000 vs 2,000 0.613/0.615/0.650;
+10,000 vs 5,000 0.505/0.574/0.551; 10,000 vs 9,500 0.476/0.456/0.593.
+Self-contests 0.44-0.58. Chapter 50 updated. jobs_XL.txt continues the three
+to 50,000 (run.py --resume last) when jobq_L ends.

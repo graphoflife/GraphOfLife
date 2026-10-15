@@ -266,6 +266,24 @@ alliance pilots played on 200 iterations; research/oee/checks)**
 - Every step from the founders to 2,000 is won by the later era in 10/10 worlds:
   0.79 (100 vs 0), 0.75, 0.79, 0.68 (1,000 vs 500), 0.62, 0.60 (2,000 vs 1,500);
   2,000 vs 1,000 0.67. B2 keeps evolving, more slowly as it goes.
+- Continued to 10,000 (three worlds): 5,000 vs 2,000 0.69/0.59/0.63, 10,000 vs
+  2,000 0.61/0.62/0.65, 10,000 vs 5,000 0.51/0.57/0.55, 10,000 vs 9,500
+  0.48/0.46/0.59. A plateau after ~5,000; runs to 50,000 under way (jobs_XL).
+
+**Earlier pilots re-judged a lifetime long (T = 100; rejudge.py, 2026-10-15)**
+- Control: eras against themselves 0.44–0.58 (12 contests, pilots and lab).
+- B2-based pilots keep evolving 500 -> 1,000 (later era's share, two seeds):
+  alliances 0.62/0.59, their control 0.70/0.62, kin pooled 0.80/0.59, support
+  doubled 0.69/0.97; Blotto without revolutions 0.76/0.61, gifts 0.87/0.83,
+  lapse 0.65/0.53, estate by tokens 0.65/0.62; genotype pooling 0.59/0.65, kin
+  sense 0.72/0.80, family sense 0.62/0.67, family pooling 0.46/0.78. Long
+  alliance worlds: 3,000 beats 1,000 (0.69/0.88) and 2,000 in one (0.69; 0.52).
+- Exceptions: the lottery (0.47/0.56) - a ticket does not pay for a better brain;
+  gifts that lapse (breaking networks, erratic); B3 (all-or-nothing contests).
+- B1 does not: E12's ten worlds 0.49 median (0.31-0.77) for 500 -> 1,000;
+  B1 pilots 0.37/0.68, B1 without revolutions 0.35/0.16 (later brains lose).
+- The short-contest verdicts of Chapters 54-57 ("tournaments flat") were wrong
+  for B2's family of worlds and right for B1's.
 
 **Open (being tested)**
 - Rules without numbers (B3, Ch. 57): all seven of B2's numbers removed at once

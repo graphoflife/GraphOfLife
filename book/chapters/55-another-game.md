@@ -200,7 +200,18 @@ them, and that is the part evolution would still have to find.
 > 500 (0.73) where in contests of 20 they tied
 > ([Chapter 50](50-why-evolution-stops.md#would-we-notice-if-it-went-on)). Where
 > this chapter says that evolution stops, read: it stops *as far as a short
-> contest can see*. The longer contests are being played now.
+> contest can see*.
+>
+> The longer contests have since been played, 100 iterations each, once in
+> each era's world (`research/oee/checks/rejudge.py`, seed 17). The brains of
+> iteration 1,000 against those of 500, in the two seeds: Blotto without
+> revolutions, the control, 0.76 and 0.61; stakes pooled by genotype 0.59 and
+> 0.65; kin sensed 0.72 and 0.80; family sensed 0.62 and 0.67; family pooled
+> 0.46 and 0.78; the lottery 0.47 and 0.56. Eras played against themselves held
+> 0.44 to 0.58. Under every contest but the lottery, then, evolution went on
+> between iterations 500 and 1,000 in at least one world of two, and in both
+> under Blotto and three of the others. The lottery is the one contest under
+> which it stopped: a ticket's chance does not pay more for a better brain.
 
 **Another contest moves where evolution stops, not whether it does.** A
 lottery stops it almost where it starts. Pooling by genotype and a sense of

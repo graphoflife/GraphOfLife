@@ -347,8 +347,20 @@ iterations win a little less: 0.68 for 1,000 against 500, 0.62 for 1,500
 against 1,000, and 0.60 for 2,000 against 1,500, the lowest world still at
 0.52. Where the contests of 20 iterations see a tie from iteration 500 on, the
 contests of 100 see evolution going on all the way, more slowly as it goes.
-Whether it slows to a tie past iteration 2,000 is being measured now: the ten
-worlds are being continued to iteration 10,000.
+
+How far it goes was measured by going on: three of the ten worlds were
+continued from iteration 2,000 to 10,000 under the same rules, exactly as the
+lab would have run them (`research/oee/pilots/run.py --from`), and their eras
+played against each other the same way. All three kept improving to iteration
+5,000: its brains held 0.69, 0.59 and 0.63 of the world against those of
+2,000. After that the gains all but stopped. The brains of 10,000 held 0.51,
+0.57 and 0.55 against those of 5,000, inside or at the edge of the 0.44 to
+0.58 that eras reach against themselves, and against those of 2,000 they held
+0.61, 0.62 and 0.65, no more than the brains of 5,000 had. Each 500 iterations
+won a step of 0.6 to 0.7 up to iteration 2,000; the 5,000 iterations from 5,000
+to 10,000 together won barely one. Evolution in B2 slows towards a plateau. The
+same three worlds are being continued to iteration 50,000 to see whether the
+plateau is where it ends.
 
 **Distance to the best play.** A tie between eras says nothing about how good
 both are. [Exploitability](../notes/exploitability.md) measures it from

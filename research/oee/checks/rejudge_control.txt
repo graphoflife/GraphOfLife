@@ -1,0 +1,2 @@
+pilot GraphOfLifeRuns/.pilots/S/S0-B2-s1 500:1000,100:1000
+pilot GraphOfLifeRuns/.pilots/S/S0-B2-s2 500:1000,100:1000
