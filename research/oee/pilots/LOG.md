@@ -572,7 +572,9 @@ two seeds each; link_token and link_token+seek one seed. Lifetime contests
 ## Batch Q so far (2026-10-16)
 Contests (batch_Q_T100.json): grow 0.59-0.85 (keeps evolving); took_kin
 0.59-0.74 (like B2); mix s1 500->1,000 0.58/0.62 but 1,000->2,000 0.34/0.49,
-s2 0.41/0.30 and 0.40/0.39: brains mixed at birth make later brains LOSE.
+s2 0.41/0.30 and 0.40/0.39 — NOT a result: in contests every mixed child drew a
+fresh id below LABEL_B and counted as the earlier era's (fixed in tourney.contest:
+side by ancestry); replayed in batch_Q_mix_T100.json.
 Frames: mix 971/673 agents, conquest cost 12.7/9.7 per 100 a game (B2 ~6),
 circulation 0.84/0.83 (flip 0.63); unit tokens 1,439/1,312 agents, help
 0.04/0.08 (B2 0.009); link tokens without old age 1,630/1,912 agents, conquest
