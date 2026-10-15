@@ -201,6 +201,106 @@
       0.4957009939379015
      ]
     }
+   ],
+   "family sense": [
+    {
+     "eras": [
+      0,
+      100,
+      200,
+      500,
+      1000
+     ],
+     "elo": [
+      0.0,
+      58.59156923382265,
+      106.67464874400008,
+      104.42043849721526,
+      82.04763874657031
+     ],
+     "1000_vs_500": 0.4749119323338369,
+     "1000_vs_100": 0.5480177848787282,
+     "steps": [
+      0.5869110372934695,
+      0.5521423222050901,
+      0.500987598542892,
+      0.4749119323338369
+     ]
+    },
+    {
+     "eras": [
+      0,
+      100,
+      200,
+      500,
+      1000
+     ],
+     "elo": [
+      0.0,
+      106.54623152370057,
+      174.0659550391421,
+      112.05982498961474,
+      135.3607137040848
+     ],
+     "1000_vs_500": 0.536492914246656,
+     "1000_vs_100": 0.5356519960576515,
+     "steps": [
+      0.6964696358579632,
+      0.6356248207820137,
+      0.4662504991292873,
+      0.536492914246656
+     ]
+    }
+   ],
+   "pooled by family": [
+    {
+     "eras": [
+      0,
+      100,
+      200,
+      500,
+      1000
+     ],
+     "elo": [
+      0.0,
+      91.411890377458,
+      142.6405577842171,
+      155.1897122736899,
+      124.59664448882221
+     ],
+     "1000_vs_500": 0.4330982103934168,
+     "1000_vs_100": 0.575743088583708,
+     "steps": [
+      0.6676158221153108,
+      0.5847306274563284,
+      0.526036595848818,
+      0.4330982103934168
+     ]
+    },
+    {
+     "eras": [
+      0,
+      100,
+      200,
+      500,
+      1000
+     ],
+     "elo": [
+      0.0,
+      113.57239325647843,
+      157.96661145411522,
+      178.67798847333736,
+      177.78047615206927
+     ],
+     "1000_vs_500": 0.52298304080942,
+     "1000_vs_100": 0.5955379028816523,
+     "steps": [
+      0.6978640674786157,
+      0.5680457276149936,
+      0.5397979508367635,
+      0.52298304080942
+     ]
+    }
    ]
   },
   "life": {
@@ -307,6 +407,58 @@
      "clone_mean": 3.348769393450062,
      "genotypes": 1353.8882235528943
     }
+   ],
+   "family sense": [
+    {
+     "agents": 2532.0,
+     "births": 0.9866217250283045,
+     "conquests": 7.970859785133846,
+     "revolutions": 0.0,
+     "starved": 0.0,
+     "cut_off": 0.0,
+     "mean_age": 50.81485978609349,
+     "lifespan": 100.0,
+     "clone_mean": 2.8103990362933744,
+     "genotypes": 1171.688622754491
+    },
+    {
+     "agents": 2944.0,
+     "births": 0.9941995351439084,
+     "conquests": 8.2019818985388,
+     "revolutions": 0.0,
+     "starved": 0.0,
+     "cut_off": 0.0,
+     "mean_age": 50.55748311659174,
+     "lifespan": 100.0,
+     "clone_mean": 3.553800656380459,
+     "genotypes": 1299.686626746507
+    }
+   ],
+   "pooled by family": [
+    {
+     "agents": 4064.0,
+     "births": 0.9993492333621922,
+     "conquests": 1.3108322826978058,
+     "revolutions": 0.0,
+     "starved": 0.0,
+     "cut_off": 0.0,
+     "mean_age": 50.48033278158134,
+     "lifespan": 100.0,
+     "clone_mean": 8.080241790457098,
+     "genotypes": 1156.1536926147705
+    },
+    {
+     "agents": 3584.0,
+     "births": 1.010924052330032,
+     "conquests": 1.6329350246309882,
+     "revolutions": 0.0,
+     "starved": 0.0,
+     "cut_off": 0.0,
+     "mean_age": 50.281609711915515,
+     "lifespan": 100.0,
+     "clone_mean": 7.79893126757725,
+     "genotypes": 1027.0099800399203
+    }
    ]
   },
   "health": {
@@ -381,6 +533,42 @@
      "dimension": 4.148258669347399,
      "hub": 0.015112540192926046
     }
+   ],
+   "family sense": [
+    {
+     "nodeCut": 0.0,
+     "edgeCut": 0.0,
+     "core2": 1.0,
+     "links": 5.488906497622821,
+     "dimension": 4.428100586743511,
+     "hub": 0.018574677786201668
+    },
+    {
+     "nodeCut": 0.0,
+     "edgeCut": 0.0,
+     "core2": 1.0,
+     "links": 5.617962003454231,
+     "dimension": 3.8407730356499576,
+     "hub": 0.013756613756613757
+    }
+   ],
+   "pooled by family": [
+    {
+     "nodeCut": 0.0,
+     "edgeCut": 0.0,
+     "core2": 1.0,
+     "links": 5.545477075588599,
+     "dimension": 4.333734607961001,
+     "hub": 0.012843565373747753
+    },
+    {
+     "nodeCut": 0.0,
+     "edgeCut": 0.0,
+     "core2": 1.0,
+     "links": 5.572957746478873,
+     "dimension": 4.351516014184186,
+     "hub": 0.014190317195325543
+    }
    ]
   }
  },
@@ -388,17 +576,17 @@
   "fighting": {
    "title": "How much changes hands",
    "caption": "One line per world, means over 50 iterations.",
-   "recipe": "**Runs.** Pilot worlds of `research/oee/pilots/run.py` in the engine's own code, kept in `GraphOfLifeRuns/.pilots/S`, two seeds each, at 10,000 tokens for 1,000 iterations with a whole world every 100: B2 without revolutions (`--set hidden_layers=16 message_amount=8 message_prepass=false allow_handover=false mutate_on_replication=true incumbency=1.5 birth_links=2 mend_on_death=true prune_needs=2 valence=8 keep_home=0.3 max_age=100 min_child=10 allow_revolutions=false --proto engine=true`, worlds `S1-norev`), the same with a lottery contest (`contest=lottery`, `G1-lottery`), with stakes pooled by genotype (`pool=genotype`, `G2-genotype`) and with only the sense of which neighbours carry one's own brain (`kin_sense=true`, `G3-kinsense`).\n\n**Data.** From each world's `series.jsonl`.\n\n1. Count the nodes whose winner was not their owner in each game, per 100 agents.\n\n**To make it again:** `python3 book_figures.py games`."
+   "recipe": "**Runs.** Pilot worlds of `research/oee/pilots/run.py` in the engine's own code, kept in `GraphOfLifeRuns/.pilots/S`, two seeds each, at 10,000 tokens for 1,000 iterations with a whole world every 100: B2 without revolutions (`--set hidden_layers=16 message_amount=8 message_prepass=false allow_handover=false mutate_on_replication=true incumbency=1.5 birth_links=2 mend_on_death=true prune_needs=2 valence=8 keep_home=0.3 max_age=100 min_child=10 allow_revolutions=false --proto engine=true`, worlds `S1-norev`), the same with a lottery contest (`contest=lottery`, `G1-lottery`), with stakes pooled by genotype (`pool=genotype`, `G2-genotype`), with only the sense of which neighbours carry one's own brain (`kin_sense=true`, `G3-kinsense`), and with family tags (`tag_rate=0.05`) sensed (`kin_sense=true`, `G4-familysense`) or pooled (`pool=family`, `G5-familypool`).\n\n**Data.** From each world's `series.jsonl`.\n\n1. Count the nodes whose winner was not their owner in each game, per 100 agents.\n\n**To make it again:** `python3 book_figures.py games`."
   },
   "groups": {
    "title": "How large a group of clones is",
    "caption": "One line per world, every 10th iteration: the agents of an agent's connected group of neighbours with the same brain, averaged over agents.",
-   "recipe": "**Runs.** Pilot worlds of `research/oee/pilots/run.py` in the engine's own code, kept in `GraphOfLifeRuns/.pilots/S`, two seeds each, at 10,000 tokens for 1,000 iterations with a whole world every 100: B2 without revolutions (`--set hidden_layers=16 message_amount=8 message_prepass=false allow_handover=false mutate_on_replication=true incumbency=1.5 birth_links=2 mend_on_death=true prune_needs=2 valence=8 keep_home=0.3 max_age=100 min_child=10 allow_revolutions=false --proto engine=true`, worlds `S1-norev`), the same with a lottery contest (`contest=lottery`, `G1-lottery`), with stakes pooled by genotype (`pool=genotype`, `G2-genotype`) and with only the sense of which neighbours carry one's own brain (`kin_sense=true`, `G3-kinsense`).\n\n**Data.** From each world's `series.jsonl`.\n\n1. Every 10th iteration, join neighbours with the same brain and take the size of each agent's group, averaged over agents (`organisation`, `cloneMean`).\n\n**To make it again:** `python3 book_figures.py games`."
+   "recipe": "**Runs.** Pilot worlds of `research/oee/pilots/run.py` in the engine's own code, kept in `GraphOfLifeRuns/.pilots/S`, two seeds each, at 10,000 tokens for 1,000 iterations with a whole world every 100: B2 without revolutions (`--set hidden_layers=16 message_amount=8 message_prepass=false allow_handover=false mutate_on_replication=true incumbency=1.5 birth_links=2 mend_on_death=true prune_needs=2 valence=8 keep_home=0.3 max_age=100 min_child=10 allow_revolutions=false --proto engine=true`, worlds `S1-norev`), the same with a lottery contest (`contest=lottery`, `G1-lottery`), with stakes pooled by genotype (`pool=genotype`, `G2-genotype`), with only the sense of which neighbours carry one's own brain (`kin_sense=true`, `G3-kinsense`), and with family tags (`tag_rate=0.05`) sensed (`kin_sense=true`, `G4-familysense`) or pooled (`pool=family`, `G5-familypool`).\n\n**Data.** From each world's `series.jsonl`.\n\n1. Every 10th iteration, join neighbours with the same brain and take the size of each agent's group, averaged over agents (`organisation`, `cloneMean`).\n\n**To make it again:** `python3 book_figures.py games`."
   },
   "elo": {
    "title": "How much better than the founders",
    "caption": "One line per world, its eras played against each other, four contests per pair.",
-   "recipe": "**Runs.** Pilot worlds of `research/oee/pilots/run.py` in the engine's own code, kept in `GraphOfLifeRuns/.pilots/S`, two seeds each, at 10,000 tokens for 1,000 iterations with a whole world every 100: B2 without revolutions (`--set hidden_layers=16 message_amount=8 message_prepass=false allow_handover=false mutate_on_replication=true incumbency=1.5 birth_links=2 mend_on_death=true prune_needs=2 valence=8 keep_home=0.3 max_age=100 min_child=10 allow_revolutions=false --proto engine=true`, worlds `S1-norev`), the same with a lottery contest (`contest=lottery`, `G1-lottery`), with stakes pooled by genotype (`pool=genotype`, `G2-genotype`) and with only the sense of which neighbours carry one's own brain (`kin_sense=true`, `G3-kinsense`).\n\n**Data.** From each world's checkpoints, `ckpt_<iteration>.npz`.\n\n1. For every pair of the eras 0, 100, 200, 500 and 1,000 play four contests, two in each era's world: every agent gets a brain drawn at random from one era or the other, mutation is switched off, and 20 iterations are played under the world's own rules (`research/oee/pilots/tourney.py --T 20 --reps 2`).\n2. Fit one rating per era (Bradley\u2013Terry, `research/oee/pilots/elo.py`), the founders at 0.\n\n**To make it again:** `python3 book_figures.py games`."
+   "recipe": "**Runs.** Pilot worlds of `research/oee/pilots/run.py` in the engine's own code, kept in `GraphOfLifeRuns/.pilots/S`, two seeds each, at 10,000 tokens for 1,000 iterations with a whole world every 100: B2 without revolutions (`--set hidden_layers=16 message_amount=8 message_prepass=false allow_handover=false mutate_on_replication=true incumbency=1.5 birth_links=2 mend_on_death=true prune_needs=2 valence=8 keep_home=0.3 max_age=100 min_child=10 allow_revolutions=false --proto engine=true`, worlds `S1-norev`), the same with a lottery contest (`contest=lottery`, `G1-lottery`), with stakes pooled by genotype (`pool=genotype`, `G2-genotype`), with only the sense of which neighbours carry one's own brain (`kin_sense=true`, `G3-kinsense`), and with family tags (`tag_rate=0.05`) sensed (`kin_sense=true`, `G4-familysense`) or pooled (`pool=family`, `G5-familypool`).\n\n**Data.** From each world's checkpoints, `ckpt_<iteration>.npz`.\n\n1. For every pair of the eras 0, 100, 200, 500 and 1,000 play four contests, two in each era's world: every agent gets a brain drawn at random from one era or the other, mutation is switched off, and 20 iterations are played under the world's own rules (`research/oee/pilots/tourney.py --T 20 --reps 2`).\n2. Fit one rating per era (Bradley\u2013Terry, `research/oee/pilots/elo.py`), the founders at 0.\n\n**To make it again:** `python3 book_figures.py games`."
   }
  }
 }

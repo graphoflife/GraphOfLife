@@ -165,8 +165,18 @@ In the other they improved until iteration 500, to +383, and then fell back
 many births per agent as B2, and every brain changes after every game, so a
 thousand of its iterations hold many more generations than a thousand of
 B2's. Its contests are noisy too: single contests between its eras ended
-anywhere from 0.09 to 1.00. A world of 3,000 iterations is testing whether
-its evolution stops later or not at all.
+anywhere from 0.09 to 1.00.
+
+A third world, of seed 3, ran for 3,000 iterations to see whether its
+evolution stops later or not at all. It stopped later, and then the world
+itself nearly died. Its brains improved until iteration 500: the brains of
+iteration 500 beat those of 0, 100 and 200 in eleven of twelve contests. Then
+they lost ground: iteration 1,000 held 0.32 against iteration 500, and
+iteration 1,500 held 0.11. Meanwhile the world shrank, from about a thousand
+agents between iterations 1,000 and 1,750 to a few dozen after 2,000: 13 at
+its smallest and 44 at iteration 3,000. A lab run would have counted it as
+extinct. Contests played in its later eras' worlds often ended with fewer
+than 50 agents, so their scores say nothing.
 
 ## What it teaches
 
@@ -178,10 +188,11 @@ to learn and then stop like the rest.
 **Revolutions matter where they are common.** In B1 they are most of the
 fighting, and they decide whether a world is old and calm, with stars, or
 young and turbulent. With them, B1's brains stopped improving by iteration
-200 in both worlds. Without them, they went on to iteration 500 in one world
-and to 1,000 or beyond in the other. That is
-the only lead of its kind in Part V so far, and it comes from the original
-algorithm with one of its own switches turned off.
+200 in both worlds. Without them, two worlds improved until iteration 500
+and then lost ground, and the third was still improving at iteration 1,000,
+where its run ended. So evolution lasts longer in B1 without revolutions, but
+not without end. The turbulent world it
+lasts in can also die, as the world of 3,000 iterations nearly did.
 
 **Gifts do not make the network a decision.** The author built gifts so that
 an agent could pay to keep a connection it values. With every unused link

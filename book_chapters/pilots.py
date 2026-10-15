@@ -24,7 +24,7 @@ import numpy as np
 
 import book_figures as F
 from book_figures import chapter, recipe
-from book_chapters.common import BLUE, GREEN, GREY, RED, VIOLET
+from book_chapters.common import BLUE, GREEN, GREY, ORANGE, RED, VIOLET
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PILOTS = os.path.join(ROOT, "GraphOfLifeRuns", ".pilots")
@@ -377,7 +377,8 @@ def numberless(ch: F.Chapter) -> None:
 SWITCHES = {"B1": "S6-B1", "B1, no revolutions": "S7-B1norev", "B2": "S0-B2", "B2, no revolutions": "S1-norev",
             "gifts": "S2-gifts", "gifts, all lapse": "S3-giftslapse", "all lapse": "S4-lapse",
             "estates by wealth": "S5-bytokens"}
-GAMES = {"Blotto": "S1-norev", "lottery": "G1-lottery", "by genotype": "G2-genotype", "kin sense": "G3-kinsense"}
+GAMES = {"Blotto": "S1-norev", "lottery": "G1-lottery", "by genotype": "G2-genotype", "kin sense": "G3-kinsense",
+         "family sense": "G4-familysense", "pooled by family": "G5-familypool"}
 SEEDS = (1, 2)
 B2_SET = ("hidden_layers=16 message_amount=8 message_prepass=false allow_handover=false "
           "mutate_on_replication=true incumbency=1.5 birth_links=2 mend_on_death=true prune_needs=2 "
@@ -396,8 +397,10 @@ GAME_RUNS = ("Pilot worlds of `research/oee/pilots/run.py` in the engine's own c
              "`GraphOfLifeRuns/.pilots/S`, two seeds each, at 10,000 tokens for 1,000 iterations with a "
              f"whole world every 100: B2 without revolutions (`--set {B2_SET} allow_revolutions=false "
              "--proto engine=true`, worlds `S1-norev`), the same with a lottery contest (`contest=lottery`, "
-             "`G1-lottery`), with stakes pooled by genotype (`pool=genotype`, `G2-genotype`) and with "
-             "only the sense of which neighbours carry one's own brain (`kin_sense=true`, `G3-kinsense`).")
+             "`G1-lottery`), with stakes pooled by genotype (`pool=genotype`, `G2-genotype`), with "
+             "only the sense of which neighbours carry one's own brain (`kin_sense=true`, `G3-kinsense`), "
+             "and with family tags (`tag_rate=0.05`) sensed (`kin_sense=true`, `G4-familysense`) or pooled "
+             "(`pool=family`, `G5-familypool`).")
 TOURNEY_STEPS = [
     "For every pair of the eras 0, 100, 200, 500 and 1,000 play four contests, two in each era's world: "
     "every agent gets a brain drawn at random from one era or the other, mutation is switched off, and "
@@ -531,7 +534,7 @@ def games(ch: F.Chapter) -> None:
     if not all(_finished(w) for w in every):
         return
     labels = list(GAMES)
-    colours = dict(zip(labels, (GREY, RED, BLUE, GREEN)))
+    colours = dict(zip(labels, (GREY, RED, BLUE, GREEN, VIOLET, ORANGE)))
     for name, key, title, ylabel, log in (("fighting", "conquests", "How much changes hands",
                                            "nodes taken per 100 agents per game", False),
                                           ("groups", "cloneMean", "How large a group of clones is",

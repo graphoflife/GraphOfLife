@@ -179,6 +179,12 @@ otherwise. Last consolidated: 2026-10-15.
   as under Blotto; on turf later brains lose (0.35).
 - Kin sense alone: no groups (3); one world crept upward (1,000 vs 100: 0.67),
   the other did not (0.53). The sense is used less than by founders (12–16% vs 26%).
+- Family tags (tag_rate 0.05, a mutation parameter; 1 copy in 100 starts a
+  family): sensed — families of 30–39, no change; pooled — families of
+  150–490 that rise and fall like empires (one held 57% at 410, 12% at 710,
+  ~30% at the end), fighting 1.3–1.6. Brains stop either way (1,000 vs 500:
+  0.43–0.54). A password and a crowd for free are not enough: the play itself
+  is what evolution does not find.
 
 **The original switches (Ch. 54; batch S, engine mode)**
 - The pilot B2 of seed 1 equals the lab's run B2-10000-s001 for all 1,000
@@ -186,11 +192,13 @@ otherwise. Last consolidated: 2026-10-15.
 - B1 without revolutions is a mayfly world (births 14–96 per 100 agents an
   iteration, conquest 70–90, mean age 2–16, worst cut 30–34%); with
   revolutions B1 has old agents (age 80–160), stars (hub 23–40%). In one world
-  without revolutions the brains of 1,000 beat those of 500 (0.73) — the only
-  clear late improvement of the day; seed 2 and a 3,000-iteration run pending.
+  without revolutions the brains of 1,000 beat those of 500 (0.73).
 - Seed 2 of B1 without revolutions: improvement to 500 (+383), then back
-  (1,000 vs 500 = 0.40). With revolutions B1 stops by 200 in both worlds;
-  without, by 500 and not by 1,000. A 3,000-iteration run is testing it.
+  (1,000 vs 500 = 0.40). Seed 3 run for 3,000: improvement to 500 (500 beat 0,
+  100, 200 in 11/12 contests), then back (1,000 vs 500 0.32, 1,500 vs 500
+  0.11), and the world shrank to a few dozen agents after 2,000 (13 at its
+  smallest) — extinct by the lab's rule; later contests meaningless. Without
+  revolutions B1 evolves longer (to 500, once to 1,000), not without end.
 - In B2 no switch keeps evolution going: 1,000 vs 500 between 0.47 and 0.57 in
   every variant (B2 0.50/0.50). Gifts and lapsing links give more to learn at
   first (+263/+157 and +520/+256 at 100 vs +102/+85), then stop. Revolutions

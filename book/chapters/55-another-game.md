@@ -75,7 +75,7 @@ would mix with the rule under test.
 **How much changes hands.** One line per world, means over 50 iterations.
 
 > [!example]- How to make this figure
-> **Runs.** Pilot worlds of `research/oee/pilots/run.py` in the engine's own code, kept in `GraphOfLifeRuns/.pilots/S`, two seeds each, at 10,000 tokens for 1,000 iterations with a whole world every 100: B2 without revolutions (`--set hidden_layers=16 message_amount=8 message_prepass=false allow_handover=false mutate_on_replication=true incumbency=1.5 birth_links=2 mend_on_death=true prune_needs=2 valence=8 keep_home=0.3 max_age=100 min_child=10 allow_revolutions=false --proto engine=true`, worlds `S1-norev`), the same with a lottery contest (`contest=lottery`, `G1-lottery`), with stakes pooled by genotype (`pool=genotype`, `G2-genotype`) and with only the sense of which neighbours carry one's own brain (`kin_sense=true`, `G3-kinsense`).
+> **Runs.** Pilot worlds of `research/oee/pilots/run.py` in the engine's own code, kept in `GraphOfLifeRuns/.pilots/S`, two seeds each, at 10,000 tokens for 1,000 iterations with a whole world every 100: B2 without revolutions (`--set hidden_layers=16 message_amount=8 message_prepass=false allow_handover=false mutate_on_replication=true incumbency=1.5 birth_links=2 mend_on_death=true prune_needs=2 valence=8 keep_home=0.3 max_age=100 min_child=10 allow_revolutions=false --proto engine=true`, worlds `S1-norev`), the same with a lottery contest (`contest=lottery`, `G1-lottery`), with stakes pooled by genotype (`pool=genotype`, `G2-genotype`), with only the sense of which neighbours carry one's own brain (`kin_sense=true`, `G3-kinsense`), and with family tags (`tag_rate=0.05`) sensed (`kin_sense=true`, `G4-familysense`) or pooled (`pool=family`, `G5-familypool`).
 >
 > **Data.** From each world's `series.jsonl`.
 >
@@ -90,7 +90,7 @@ would mix with the rule under test.
 **How large a group of clones is.** One line per world, every 10th iteration: the agents of an agent's connected group of neighbours with the same brain, averaged over agents.
 
 > [!example]- How to make this figure
-> **Runs.** Pilot worlds of `research/oee/pilots/run.py` in the engine's own code, kept in `GraphOfLifeRuns/.pilots/S`, two seeds each, at 10,000 tokens for 1,000 iterations with a whole world every 100: B2 without revolutions (`--set hidden_layers=16 message_amount=8 message_prepass=false allow_handover=false mutate_on_replication=true incumbency=1.5 birth_links=2 mend_on_death=true prune_needs=2 valence=8 keep_home=0.3 max_age=100 min_child=10 allow_revolutions=false --proto engine=true`, worlds `S1-norev`), the same with a lottery contest (`contest=lottery`, `G1-lottery`), with stakes pooled by genotype (`pool=genotype`, `G2-genotype`) and with only the sense of which neighbours carry one's own brain (`kin_sense=true`, `G3-kinsense`).
+> **Runs.** Pilot worlds of `research/oee/pilots/run.py` in the engine's own code, kept in `GraphOfLifeRuns/.pilots/S`, two seeds each, at 10,000 tokens for 1,000 iterations with a whole world every 100: B2 without revolutions (`--set hidden_layers=16 message_amount=8 message_prepass=false allow_handover=false mutate_on_replication=true incumbency=1.5 birth_links=2 mend_on_death=true prune_needs=2 valence=8 keep_home=0.3 max_age=100 min_child=10 allow_revolutions=false --proto engine=true`, worlds `S1-norev`), the same with a lottery contest (`contest=lottery`, `G1-lottery`), with stakes pooled by genotype (`pool=genotype`, `G2-genotype`), with only the sense of which neighbours carry one's own brain (`kin_sense=true`, `G3-kinsense`), and with family tags (`tag_rate=0.05`) sensed (`kin_sense=true`, `G4-familysense`) or pooled (`pool=family`, `G5-familypool`).
 >
 > **Data.** From each world's `series.jsonl`.
 >
@@ -105,7 +105,7 @@ would mix with the rule under test.
 **How much better than the founders.** One line per world, its eras played against each other, four contests per pair.
 
 > [!example]- How to make this figure
-> **Runs.** Pilot worlds of `research/oee/pilots/run.py` in the engine's own code, kept in `GraphOfLifeRuns/.pilots/S`, two seeds each, at 10,000 tokens for 1,000 iterations with a whole world every 100: B2 without revolutions (`--set hidden_layers=16 message_amount=8 message_prepass=false allow_handover=false mutate_on_replication=true incumbency=1.5 birth_links=2 mend_on_death=true prune_needs=2 valence=8 keep_home=0.3 max_age=100 min_child=10 allow_revolutions=false --proto engine=true`, worlds `S1-norev`), the same with a lottery contest (`contest=lottery`, `G1-lottery`), with stakes pooled by genotype (`pool=genotype`, `G2-genotype`) and with only the sense of which neighbours carry one's own brain (`kin_sense=true`, `G3-kinsense`).
+> **Runs.** Pilot worlds of `research/oee/pilots/run.py` in the engine's own code, kept in `GraphOfLifeRuns/.pilots/S`, two seeds each, at 10,000 tokens for 1,000 iterations with a whole world every 100: B2 without revolutions (`--set hidden_layers=16 message_amount=8 message_prepass=false allow_handover=false mutate_on_replication=true incumbency=1.5 birth_links=2 mend_on_death=true prune_needs=2 valence=8 keep_home=0.3 max_age=100 min_child=10 allow_revolutions=false --proto engine=true`, worlds `S1-norev`), the same with a lottery contest (`contest=lottery`, `G1-lottery`), with stakes pooled by genotype (`pool=genotype`, `G2-genotype`), with only the sense of which neighbours carry one's own brain (`kin_sense=true`, `G3-kinsense`), and with family tags (`tag_rate=0.05`) sensed (`kin_sense=true`, `G4-familysense`) or pooled (`pool=family`, `G5-familypool`).
 >
 > **Data.** From each world's checkpoints, `ckpt_<iteration>.npz`.
 >
@@ -159,6 +159,38 @@ stopped as under Blotto, with steps of 0.69, 0.55, 0.48 and 0.50. The brains
 made little use of the sense. Flipping which neighbours are clones changed 12
 to 16% of their divisions, less than it changed the founders' (26%).
 
+## A password and a crowd, for free
+
+The raiders of [Chapter 51](51-strategies-written-by-hand.md) needed a
+password and a crowd that knew it. A sense of one's clones gives the password,
+but clones seldom sit together, so it brings no crowd. The last pilots give
+both. Every brain carries a **family tag**. A copy keeps its parent's tag; a
+brain that mutates takes a new tag with probability 0.05 (`tag_rate`), so one
+copy in a hundred starts a new family. That probability is a parameter of
+mutation, the kind of number the author's rule allows. A family is then every
+genotype descended from one tag. It is far larger than a group of clones and
+far smaller than a founder's whole line. Two more pairs of worlds ran:
+
+- **family sense** (`kin_sense=true`, `tag_rate=0.05`): one input row per
+  candidate, *same family as mine*, and nothing else;
+- **pooled by family** (`pool=family`, `tag_rate=0.05`): stakes counted by
+  family, as by genotype above, and the same input row.
+
+With the sense alone, families held 30 to 39 agents on average, and after
+iteration 500 the largest held 3 to 12% of the world. The fighting stayed as under Blotto, 8
+nodes per hundred agents a game. Pooled by family, families grew to 150 and
+490 agents on average and the fighting fell to 1.3 to 1.6. In one world a
+single family held 57% of the agents at iteration 410, then broke up again
+into families of its own as its tags mutated, to 12% at 710 and about 30% at
+the end. Families rise and fall there like empires, which is more movement
+than one alliance holding the world.
+
+But the brains did not keep improving. Iteration 1,000 against 500 scored
+0.48 and 0.54 with the family sense, and 0.43 and 0.52 pooled by family. The
+steps after iteration 200 were 0.43 to 0.54. A password and a crowd for free
+were not enough. The raiders of Chapter 51 also had their play written for
+them, and that is the part evolution would still have to find.
+
 ## What it teaches
 
 **Another contest moves where evolution stops, not whether it does.** A
@@ -179,13 +211,14 @@ work among themselves is only a crowd. The factory of
 the frontier fights, the inside feeds it. Under pooling the inside's tokens
 already defend the frontier, yet nothing better evolved.
 
-**A password given for free is not used.** The raiders of Chapter 51 won with
-a password and a crowd that already used it. Given the password as a sense,
-evolving brains find no crowd to use it with. One copy in five is a new
-genotype, so clones seldom sit together, and a sense of one's clones has
-little to work with. Whether a slower rate of change makes larger families,
-and with them a use for the sense, is a question for
-[Chapter 52](52-how-fast-should-brains-change.md).
+**A password and a crowd given for free are not enough.** The raiders of
+Chapter 51 won with a password and a crowd that already used it. Given the
+password as a sense of clones, evolving brains find no crowd to use it with:
+one copy in five is a new genotype, so clones seldom sit together. Given
+families large enough to be a crowd, they still did not find the raiders'
+play, and stopped improving where the others did. What evolution cannot find
+is not the parts but the play itself. Whether a slower rate of change helps is
+a question for [Chapter 52](52-how-fast-should-brains-change.md).
 
 <!-- turns -->
 ---

@@ -388,3 +388,16 @@ B1 without revolutions evolves longer, not without end; the long run decides.
 Switches, seed 1 (1000 vs 500): gifts 0.54 (+263 at 100: more to learn early),
 all lapse 0.57 (+520 at 100), gifts+lapse 0.47 (noisy, breaking world), estates
 by wealth 0.50; B1 0.54 (s2 0.41).
+
+## The long run and the family tags (2026-10-15, afternoon)
+- B1norev-long-s3, 3,000 iterations: improvement to 500 (500 beat 0/100/200 in
+  11 of 12 contests), then back (1,000 vs 500 = 0.32, 1,500 vs 500 = 0.11). The
+  world shrank from ~1,000 agents (1,000-1,750) to a few dozen after 2,000 (13
+  at its smallest, 44 at 3,000): extinct by the lab's rule. Contests in the
+  eras 2,000-3,000 ended with 9-40 agents; their Elo (+551 at 3,000, residual
+  2.3 logits) is meaningless. The B1-without-revolutions lead is withdrawn:
+  longer evolution (to 500, once to 1,000), not open-ended.
+- G4 family sense: family mean 30-39, largest 3-12% after 500, conquest 8 per
+  100; steps after 200: 0.50 0.48 / 0.47 0.54. G5 pooled by family: family mean
+  153-491, largest 57% at 410 -> 12% at 710 -> ~30% (s1), fighting 1.3-1.6;
+  steps after 200: 0.53 0.43 / 0.54 0.52. Families rise and fall, brains stop.

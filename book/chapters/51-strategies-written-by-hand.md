@@ -212,9 +212,11 @@ beard**, a gene that would have to make its bearers both show a sign and
 favour those who show it.
 
 **What would let evolution get there** is what the following chapters try: a
-sense of one's own given for free, stakes that count together by lineage
+sense of one's own given for free, stakes that count together by lineage,
+families that carry a password of their own
 ([Chapter 55](55-another-game.md)), and alliances, where knowing one's own is
-a decision two agents make together ([Chapter 56](56-alliances.md)).
+a decision two agents make together ([Chapter 56](56-alliances.md)). None of
+them made evolution find the raiders' play, or go on improving.
 
 <!-- turns -->
 ---
