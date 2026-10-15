@@ -553,3 +553,28 @@ long_worlds.txt, T = 100, once in each era's world (s001/s002/s003):
 10,000 vs 5,000 0.505/0.574/0.551; 10,000 vs 9,500 0.476/0.456/0.593.
 Self-contests 0.44-0.58. Chapter 50 updated. jobs_XL.txt continues the three
 to 50,000 (run.py --resume last) when jobq_L ends.
+
+## Batch P: the two inputs of Chapter 58 (2026-10-16)
+jobs_P.txt: B2 (10,000 tokens, 2,000 iterations), came_from, helped_by, both,
+two seeds each; link_token and link_token+seek one seed. Lifetime contests
+(batch_P_T100.json) and 200 recorded games from 2,000 (frames_P_*.json):
+- Contests 1,000 vs 500: B2 0.68/0.71 0.64/0.70; came 0.78/0.71 0.76/0.77;
+  helped 0.78/0.73 0.74/0.72; both-s1 0.71/0.67. 2,000 vs 1,000: B2 0.65/0.66
+  0.73/0.80; came 0.64/0.70 0.56/0.68; helped 0.62/0.59 0.60/0.63.
+- Help (nodes saved per 100 agents a game): B2 0.009/0.009; came 0.009/0.011;
+  helped-s1 0.006; both 0.012/0.007. Returned: 0 with any input.
+- Chains >= 3 moves in 200 games: B2 2,978/2,861; came 4,015/3,488; both
+  4,511/2,296; helped-s1 3,026. Lag-2 return / chance: B2 1.24/1.35; came
+  1.54/1.42; both 1.62/1.36; helped-s1 1.38.
+=> came_from used to go back (blinkers), helped_by unused. Written into Ch. 58
+(Added later) and Meta VIII (Ch. 76).
+
+## Batch Q so far (2026-10-16)
+Contests (batch_Q_T100.json): grow 0.59-0.85 (keeps evolving); took_kin
+0.59-0.74 (like B2); mix s1 500->1,000 0.58/0.62 but 1,000->2,000 0.34/0.49,
+s2 0.41/0.30 and 0.40/0.39: brains mixed at birth make later brains LOSE.
+Frames: mix 971/673 agents, conquest cost 12.7/9.7 per 100 a game (B2 ~6),
+circulation 0.84/0.83 (flip 0.63); unit tokens 1,439/1,312 agents, help
+0.04/0.08 (B2 0.009); link tokens without old age 1,630/1,912 agents, conquest
+0.6/0.1: peaceful. grow frames redone (pilot_frames did not restore growable
+brains before; fixed).

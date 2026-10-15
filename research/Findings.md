@@ -3,7 +3,7 @@
 A living list of what the book has established, with where it is shown. When a
 later result changes an earlier one, the earlier line is corrected here and the
 chapter gets an "Added later" note. Numbers are medians over worlds unless said
-otherwise. Last consolidated: 2026-10-15.
+otherwise. Last consolidated: 2026-10-16.
 
 ## The baseline B1 (Parts II and III; 30 worlds of 10,000 and 30 of 100,000 tokens)
 
@@ -300,6 +300,30 @@ B1 worlds, games 1,000-2,000; world statistics of the same worlds and of E10's t
   vs targets 0.23 -> 0.67), little in B2 (narrow distributions).
 - World over time (changes): B1's scattered estate levels (Gini -0.78); B2's hoarding unlevels
   (Gini +0.43). Between E10's 30 worlds: PC1 = 47% of 79 statistics = the star (hub share).
+
+**Every world side by side (Meta VI, Ch. 74; Lightning in every world, Ch. 72; research/atlas/across.py,
+book/results/worlds.json; 2026-10-16)**
+- 369 lab worlds of 15 experiments in one table, each over the same stretches (400–499, 900–999,
+  1,900–1,999, last fifth); pilots get the lab's ~95 statistics from 20 recorded games per checkpoint.
+- Two clouds, nothing between: PC1 = 33% of 59 size-free statistics = how agents play (spread vs all-in,
+  one-way vs cancelling flow, home share, revolutions). Every B2 setting stays in B2's cloud (no mending and
+  handover a third of the way); only 'any unused link lapses' (E14, prune_needs 0) crosses to B1's.
+- The settings decide the play (eta² between 35 conditions: spreadShare 0.99, minDegree 0.96, home 0.95,
+  flowImbalance 0.88); the seed decides how many agents share the tokens and breeding (reproTokenShare
+  0.29, orphaned 0.27, meanTokens 0.24, starved 0.14).
+- Lightning: B1 puts 0.17 of its staked flow on greedy loops and three quarters cancels (net 0.26); B2
+  0.045 and 0.95 net — one-way flow; lapse-B2 like B1 (0.25, 0.15). Net flow on loops ≤ 0.6% everywhere.
+  Longest loop ∝ tokens^0.31 (= distances; loops as long as the world is wide). Over 50 games Hodge
+  circulation 0.80 B1 / 0.59 B2 vs null 0.59–0.60 / 0.50–0.53: circulation spread over time, in B2
+  barely above chance. No world builds circulation as it evolves.
+
+**Inputs for direction and help (batch P, Ch. 58 added later; 2026-10-16)**
+- came_from: used to go back — chains ≥ 3 moves +20–35%, return to the node just left 1.4–1.5x chance
+  (control 1.2–1.35x), reach no better than a random walk. Blinkers, not gliders.
+- helped_by: nothing — help 0.006–0.012 per 100 agents a game (control 0.009), never returned, gifts
+  downhill. Evolution at the control's pace (T = 100: 1,000 vs 500 0.67–0.78, control 0.64–0.71).
+- Meta VIII (Ch. 76): help exists only where a rule makes it possible; information alone does not make
+  helping pay.
 
 **Open (being tested)**
 - Rules without numbers (B3, Ch. 57): all seven of B2's numbers removed at once
