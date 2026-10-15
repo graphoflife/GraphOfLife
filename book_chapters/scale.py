@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Part VI, worlds at scale: Chapter 54 — how a line takes over a world ten
+Part VI, worlds at scale: Chapter 59 — how a line takes over a world ten
 times the size of the baseline, the thesis of Experiment 10.
 
 When does every agent alive descend from one and the same founder? The lineage
@@ -234,7 +234,7 @@ def reach(row: np.ndarray) -> float:
 
 
 def domain_figures(ch: F.Chapter) -> None:
-    """Chapter 54's figure of domains: how far a line of descent reaches in a world."""
+    """Chapter 59's figure of domains: how far a line of descent reaches in a world."""
     large, small = WORLD_SETS["E10"], WORLD_SETS["E02"]
     sets = {"large": (large, [domains(s.run_id) for s in large.alive]),
             "small": (small, [domains(s.run_id) for s in small.alive])}

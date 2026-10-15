@@ -311,7 +311,7 @@ balls and 1.6 to 1.9 by walks throughout.)
   solid. In our space, both rulers read 3 at every scale we can measure. The
   question for Part VI is what rule would make the rulers agree: rules that
   close loops at long range, or that let dead ends wither, or that give
-  every place the same number of neighbours. Chapter 55 (planned, see
+  every place the same number of neighbours. Chapter 60 (planned, see
   [the contents](../README.md)) is to follow the dimension to still larger
   worlds, and ask whether it depends on the scale, as it does in the causal
   dynamical triangulations of quantum gravity (Ambjørn, Jurkiewicz and Loll
@@ -334,7 +334,7 @@ balls and 1.6 to 1.9 by walks throughout.)
 > rises to meet the balls' there has not been measured yet.
 
 > [!info] Added later: lines hold patches
-> [Chapter 54](54-worlds-of-100000-tokens.md) finds that lines of descent do
+> [Chapter 59](59-worlds-of-100000-tokens.md) finds that lines of descent do
 > hold regions: two agents share a family of 25 iterations back more often
 > than chance up to about 7 steps apart, and a family of 200 iterations back
 > up to about 12, the patches widening as a random walk on these worlds

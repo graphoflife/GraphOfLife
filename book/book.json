@@ -308,25 +308,59 @@
         {
           "id": "50",
           "title": "Why evolution stops",
-          "note": "In every variant the tournament of Chapter 46 flattens within a few hundred iterations, and redrawing an agent's random inputs changes more of its decisions than anything it sees: in a Colonel Blotto contest the best play is to be unpredictable, and a good mixed strategy cannot be bettered. Without dice; with allies; with cooperation that pays.",
           "file": "chapters/50-why-evolution-stops.md",
           "experiment": "E16",
-          "status": "ready"
+          "status": "analysed"
         },
         {
           "id": "51",
+          "title": "Strategies written by hand",
+          "note": "Is the evolved play the best there is? Strategies written by hand — a turtle that only defends, a raider, and a factory whose members pump tokens to their frontier — planted as a patch in evolved worlds, against a patch of the residents' own brains.",
+          "file": "chapters/51-strategies-written-by-hand.md",
+          "status": "draft"
+        },
+        {
+          "id": "52",
           "title": "How fast should brains change?",
-          "file": "chapters/51-how-fast-should-brains-change.md",
+          "file": "chapters/52-how-fast-should-brains-change.md",
           "experiment": "E09",
           "status": "ready"
         },
         {
-          "id": "52",
+          "id": "53",
           "title": "How big should a brain be?",
           "note": "Brain size in a world that cannot break: B2 with hidden layers of 8, 16, 32 and 16 + 16, judged by cross-time tournaments."
         },
         {
-          "id": "53",
+          "id": "54",
+          "title": "The switches the world was built with",
+          "note": "The original algorithm's own switches, judged for open-ended evolution with the tournaments of Chapter 46: revolutions on and off, gifts, connections that must be used, estates shared by wealth — in B1 and in B2.",
+          "file": "chapters/54-the-switches-the-world-was-built-with.md",
+          "status": "draft"
+        },
+        {
+          "id": "55",
+          "title": "Another game",
+          "note": "Two contests other than Colonel Blotto's, with no number in them: a lottery, in which every staked token is a ticket, and stakes pooled by genotype, in which agents with one brain fight as one side.",
+          "file": "chapters/55-another-game.md",
+          "status": "draft"
+        },
+        {
+          "id": "56",
+          "title": "Alliances",
+          "note": "Cooperation with a surplus: two neighbours that both want it are allied, and their stakes on a node count together. One alliance grows until it holds the whole world, and with it the fighting ends.",
+          "file": "chapters/56-alliances.md",
+          "status": "draft"
+        },
+        {
+          "id": "57",
+          "title": "Rules without numbers",
+          "note": "B2 has seven numbers in its rules. What each does, shown by taking them away: worlds that die out, and a world of one peaceful alliance that grows as a tree.",
+          "file": "chapters/57-rules-without-numbers.md",
+          "status": "draft"
+        },
+        {
+          "id": "58",
           "title": "Meta IV",
           "note": "What the engineering of Part V found: what makes a world that cannot break, what keeps evolution from going on, and the experiments that would show whether larger worlds go further."
         }
@@ -336,51 +370,51 @@
       "title": "Part VI · Towards a physics: space, scale and locality",
       "chapters": [
         {
-          "id": "54",
+          "id": "59",
           "title": "Worlds of 100,000 tokens",
-          "file": "chapters/54-worlds-of-100000-tokens.md",
+          "file": "chapters/59-worlds-of-100000-tokens.md",
           "experiment": "E10",
           "status": "analysed"
         },
         {
-          "id": "55",
+          "id": "60",
           "title": "Dimensions at scale",
-          "note": "The measures of Chapter 24 on the worlds of 100,000 tokens (Chapter 54): does a world look three-dimensional only at middle scales, as causal dynamical triangulations look four-dimensional only at large ones? Ball growth and the spectral dimension as functions of scale, and the width of worlds from 3,200 to 409,600 tokens (Chapter 42)."
+          "note": "The measures of Chapter 24 on the worlds of 100,000 tokens (Chapter 59): does a world look three-dimensional only at middle scales, as causal dynamical triangulations look four-dimensional only at large ones? Ball growth and the spectral dimension as functions of scale, and the width of worlds from 3,200 to 409,600 tokens (Chapter 42)."
         },
         {
-          "id": "56",
+          "id": "61",
           "title": "Which properties have no scale?",
           "note": "The same quantities measured at many sizes and rescaled: do their distributions collapse onto one curve? Starts from the cuts of Chapter 42, whose share of a world has the same distribution at every size."
         },
         {
-          "id": "57",
+          "id": "62",
           "title": "Local rules only",
           "note": "The three rules that reach across a world, each made local: a piece that separates lives on, the tokens of the dead go to their former neighbours, and every agent draws its random numbers from a stream of its own (Chapter 7)."
         },
         {
-          "id": "58",
+          "id": "63",
           "title": "How far does a difference travel?",
-          "note": "Twin worlds that differ in one token at one agent: how fast the difference spreads and whether it grows or dies away — the light cone of Chapter 7, measured. Needs the local random numbers of Chapter 57."
+          "note": "Twin worlds that differ in one token at one agent: how fast the difference spreads and whether it grows or dies away — the light cone of Chapter 7, measured. Needs the local random numbers of Chapter 62."
         },
         {
-          "id": "59",
+          "id": "64",
           "title": "A source and a sink",
           "note": "A world with a flow running through it: tokens that are spent when used and slowly renewed, or a few nodes that release tokens and a way for tokens to leave. What forms in the flow? (Chapter 7; research/Research.md §4.3.)"
         },
         {
-          "id": "60",
+          "id": "65",
           "title": "Particles",
           "note": "Patterns that persist while what carries them changes: tokens bound in loops, groups that outlast their members, local beats in the flow of tokens (Chapter 7)."
         },
         {
-          "id": "61",
+          "id": "66",
           "title": "One agent in a sea of average agents",
           "note": "A large world of agents that decide as the average evolved agent does (Chapter 43), and in it a single agent, or a small group, with a brain of its own: can it draw tokens from the sea without exhausting it or being cut off, can its line invade, can a group hold together? Invasion analysis and a reservoir, in one experiment."
         },
         {
-          "id": "62",
+          "id": "67",
           "title": "Meta V",
-          "note": "What the measurements say about space, scale and matter, written once Chapters 54 to 61 are analysed."
+          "note": "What the measurements say about space, scale and matter, written once Chapters 59 to 66 are analysed."
         }
       ]
     },
@@ -388,9 +422,9 @@
       "title": "Part VII · The long run",
       "chapters": [
         {
-          "id": "63",
+          "id": "68",
           "title": "A hundred thousand iterations",
-          "file": "chapters/63-a-hundred-thousand-iterations.md",
+          "file": "chapters/68-a-hundred-thousand-iterations.md",
           "experiment": "E11",
           "status": "draft"
         }
@@ -638,6 +672,11 @@
           "id": "n-viewer-colours",
           "title": "What the viewer can colour by",
           "file": "notes/viewer-colours.md"
+        },
+        {
+          "id": "n-pilot-worlds",
+          "title": "Pilot worlds",
+          "file": "notes/pilot-worlds.md"
         }
       ]
     },

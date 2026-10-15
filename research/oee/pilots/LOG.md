@@ -227,3 +227,87 @@ runs (A3k) were stopped and kept only as hints.
 - Next (batch AL, running): allies at 10k for 3,000 iterations (s3, s4) and at
   20k for 2,000 (s1, s2): does the bloc reach the whole world, what happens
   after, and does it take longer in a world twice the size?
+
+## Batch AL and N0: alliances over 3,000 iterations, at 20,000 tokens, and without the home advantage (2026-10-15)
+- AL (proto-B2 + memory + allies, revolutions off): the largest alliance reaches
+  0.99/0.97 of the world at 2,000 (10k, s3/s4) and stays; 0.91/0.96 at 2,000 in
+  the 20k worlds (s1 slower: half the world first at 720, s2 at 120). Allied
+  connections 0.98 of all at 2,000 (10k-s3). Conquest 1.8-1.9 per 100 agents a
+  game (500-1,000) -> 0.2-0.4 (last 500). Kin groups (4 mutations) stay at 2%
+  while the alliance holds 99%: the habit spreads, not a family.
+- Tournament AL 10k-s3 (coins, T 20, eras 0/500/1000/1500/2000): +178 +198 +190
+  +209, steps 0.74 0.53 0.52 0.52.
+- N0 (the same with incumbency 1): largest alliance 0.37 / 0.71 at 1,000
+  (against 0.83 / 0.44 with 1.5); conquest 6.0 / 3.1 (against 2.2 / 3.4).
+  Alliances form without the home advantage; two seeds cannot tell the sizes apart.
+- Health in every allied world (last 500): 2-core 1.0, no cut, hub <= 1.6%,
+  4.9-5.5 links, dimension 4.1-4.8 (above the bar's 4; highest at 20k).
+- Written up as Chapter 56 (Alliances), figures in book_chapters/pilots.py.
+
+## Batch N: rules without numbers, B3 (2026-10-14/15)
+B1's game (incumbency 1, no keep rule, no age limit, min child 1, any unused
+link lapses, no birth links, no valence) + one hidden layer of 16, MOR, mending,
+memory; B3a with allies, B3b with allies + birth_allies, B3c without allies.
+- s1: B3b and B3c died out (to one agent by iteration ~80 and ~120); B3a lived as
+  a single alliance (side 1.0) on a near-tree: 3,342 agents, 2.09 links/agent,
+  dimension 1.1, 71% of agents articulation points, worst single-agent cut 31%;
+  no conquest; deaths ~ births ~ 10% of agents per iteration, by being cut off.
+- s2 (running): all three alive at 67-200 iterations, a world of mayflies: mean
+  age 1.4-8, a third of the agents starving each game, births half the world.
+
+## Batch S and G: the original switches, and two other contests (started 2026-10-15)
+Engine mode (`--proto engine=true`: the engine's own phases, only bookkeeping;
+equiv.py checks it identical to the engine under B2 and three switch variants).
+10,000 tokens, 1,000 iterations, ckpt every 100, seeds 1-2 (jobs_S.txt):
+S6 B1, S7 B1 without revolutions; S0 B2, S1 B2 without revolutions, S2 B2 +
+gifts (allow_gifting, prune_after=reproduction, inactive_window=iteration), S3
+the same with prune_needs 0 (a link must carry a stake or a gift), S4 prune_needs
+0 alone, S5 redistribution by_tokens; G1 B2 without revolutions + a lottery
+contest (contest=lottery: a node goes to a staker drawn in proportion to its
+weighed stake), G2 B2 without revolutions + stakes pooled by genotype
+(pool=genotype, plus the input row "same genotype").
+
+## The dice were there from the start (2026-10-15)
+sense.py (share of agents with >= 3 tokens whose stake division changes when
+one input group is perturbed) on the founders, iteration 0, of three 10k worlds
+(A10k ctrl-s1, allies-s1, AL allies10k-s3): noise 0.58 / 0.54 / 0.49, own state
+0.20 / 0.22 / 0.14, its state 0.19 / 0.20 / 0.13, messages 0.42 / 0.40 / 0.34,
+memory 0.35 / 0.40 / 0.37. Evolved (iteration 1,000; 3,000 for AL): noise
+0.38 / 0.47 / 0.58, own state 0.09 / 0.01 / 0.04, its state 0.10 / 0.07 / 0.09,
+messages 0.15 / 0.11 / 0.16, memory 0.30 / 0.19 / 0.18. Kin pooled 1,000:
+noise 0.58, own 0.24, its 0.17, messages 0.26, memory 0.15.
+=> Random brains already roll the dice; evolution does not add randomness, it
+turns down everything else (own state x2-20, messages x2-4). Peaceful allied
+worlds keep the dice as much as the warring control, where randomising has no
+strategic value: the dice may be kept because nothing selects against them.
+Chapter 50's "evolution finds randomisation" needs this baseline; the lottery
+contest (G1, where dice are useless) is the test.
+
+## The invasion test (2026-10-15; manual.py, invade_B2_2000.json)
+E16's B2 worlds s001 and s002 at iteration 2,000, a 5% patch (177 / 153 agents)
+given a strategy, 300 iterations, seeds 1-2; control: frozen copies of one
+resident brain in the same patch.
+- s002: factory 0.477 / 0.515 of the world at 300 (still rising), raider
+  0.395 / 0.500; resident control 0.070 / 0.008.
+- s001: factory and raider die out (by 135-196 and 148-175 iterations); resident
+  control 0.080 / 0.049.
+- turtle dies out everywhere within ~100 iterations (old bodies die of age; it
+  never conquers and rarely breeds).
+=> In one of two evolved worlds a simple rule (all you can stake on the poorest
+non-teammate neighbour you are sure to take, else all at home) takes half the
+world: the evolved play is not "the answer". The pipeline adds little over the
+raider. Residents of s001 and s002 look alike on the probes (home share ~0.8,
+all-in mode, 19-21% of divisions change when a neighbour's message is replaced
+by the strategies' signature). Running: all ten E16 worlds (raider, factory,
+resident; invade_B2_2000_ten.json) and a lone raider without password (lone;
+invade_B2_2000_lone.json).
+
+## Dice in a lottery (2026-10-15)
+sense.py, noise share: B2 (S0-s1) founders 0.66, 500: 0.44, 1,000: 0.42; lottery
+(G1-s1) 500: 0.67, 800: 0.57; genotype pooling (G2-s1) 500: 0.62, 900: 0.57.
+Under a lottery contest randomising is worthless, yet the brains roll the dice
+as much as under plurality without revolutions, the right control (S1-s1:
+founders 0.62, 500: 0.59; G1-s1 at 1,000: 0.48; G2-s1 at 1,000: 0.54). B2 with
+revolutions (S0) rolled them less (0.42-0.44), one seed each. With the founders' baseline (0.49-0.66) this says the
+dice are inherited, not discovered: Chapter 50's mixed-strategy reading is not
+what the probes show.

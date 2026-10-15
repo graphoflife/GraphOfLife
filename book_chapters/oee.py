@@ -798,7 +798,34 @@ def stopping(ch: F.Chapter) -> None:
                   f"For every pair of the eras {', '.join(str(e) for e in E16_ERAS)} play two contests, "
                   "one in each era's world (`gol_tournament.contest`), and fit one rating per era "
                   "(`gol_tournament.ratings`)."]))
+    steps_ = list(zip(E16_ERAS, E16_ERAS[1:]))
+    labels = [f"{a:,}→{b:,}" for a, b in steps_]
+    dots_ = []
+    for k, c in enumerate(E16_CONDITIONS):
+        table = [[score(p, a, b) for a, b in steps_] for p in played[c]]
+        rng = np.random.RandomState(7 + k)
+        for j in range(len(steps_)):
+            v = [row[j] for row in table if np.isfinite(row[j])]
+            x0 = j + (k - 0.5) * 0.3
+            dots_.append({"label": c if j == 0 else None, "x": (x0 + rng.uniform(-0.08, 0.08, len(v))).tolist(),
+                          "y": v, "points": True, "size": 6, "colour": COLOURS[k], "alpha": 0.8})
+            dots_.append({"label": None, "x": [x0 - 0.12, x0 + 0.12], "y": [float(np.median(v))] * 2,
+                          "colour": COLOURS[k], "width": 3})
+        ch.number(f"steps_{c}", {lab: describe([row[j] for row in table]) for j, lab in enumerate(labels)})
+    ch.figure("steps", title="Each era against the one before",
+              x={"label": "the step, from one era to the next", "categories": labels},
+              y={"label": "the later era's share of the world", "min": 0.4, "max": 0.8},
+              series=dots_, guides=[{"axis": "y", "at": 0.5, "label": "a tie"}],
+              caption=("One dot per world: the later era's share of the agents, the mean of its two "
+                       "contests with the era before. The bars are the medians."),
+              recipe=recipe(E16_RUNS, ARCHIVE.replace("every 50", "every 100"), [
+                  "Of the contests of the figure above, take those between consecutive eras and "
+                  "average each pair's two."]))
     late = {c: [score(p, 500, 2000) for p in played[c]] for c in E16_CONDITIONS}
     ch.number("late_vs_500", {c: describe(late[c]) for c in E16_CONDITIONS})
+    ch.number("elo_median", {c: {e: float(np.median([dict(zip(p["eras"], p["elo"]))[e] for p in played[c]]))
+                                 for e in E16_ERAS} for c in E16_CONDITIONS})
+    ch.number("champions_eras", {c: [tour.dominance(p["eras"], p["contests"]) for p in played[c]]
+                                 for c in E16_CONDITIONS})
     ch.number("champions", {c: [len(tour.dominance(p["eras"], p["contests"])) for p in played[c]]
                             for c in E16_CONDITIONS})

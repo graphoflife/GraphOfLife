@@ -302,7 +302,7 @@ one or two steps, and agents of one genotype within two or three; beyond
 that, every part of a world is like every other.
 
 > [!info] Added later: lines of descent reach further
-> [Chapter 54](54-worlds-of-100000-tokens.md) found that lines of descent
+> [Chapter 59](59-worlds-of-100000-tokens.md) found that lines of descent
 > reach further than genotypes. Two agents belong to the same family of 25
 > iterations back more often than chance would have them out to about 7
 > steps, and of 200 iterations back out to about 12: a family is a patch of
@@ -398,7 +398,7 @@ What to look for:
 > parent to child — in the longest dynasties for hundreds of iterations —
 > while the brain on it changes nearly every game. It is a place that lasts,
 > kept by the rules, not yet a group that does anything together
-> ([Meta II](40-meta-2.md)). And [Chapter 54](54-worlds-of-100000-tokens.md)
+> ([Meta II](40-meta-2.md)). And [Chapter 59](59-worlds-of-100000-tokens.md)
 > found families holding patches of a world that widen as their lines age.
 
 ### Vacuum and matter

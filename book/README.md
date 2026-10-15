@@ -92,25 +92,30 @@ everything can be checked with it.
 - [Chapter 48 · A world that cannot break](chapters/48-a-world-that-cannot-break.md)
 - [Chapter 49 · Who dies, and why](chapters/49-who-dies-and-why.md)
 - [Chapter 50 · Why evolution stops](chapters/50-why-evolution-stops.md)
-- [Chapter 51 · How fast should brains change?](chapters/51-how-fast-should-brains-change.md)
-- Chapter 52 · How big should a brain be? — *not written yet*
-- Chapter 53 · Meta IV — *not written yet*
+- [Chapter 51 · Strategies written by hand](chapters/51-strategies-written-by-hand.md)
+- [Chapter 52 · How fast should brains change?](chapters/52-how-fast-should-brains-change.md)
+- Chapter 53 · How big should a brain be? — *not written yet*
+- [Chapter 54 · The switches the world was built with](chapters/54-the-switches-the-world-was-built-with.md)
+- [Chapter 55 · Another game](chapters/55-another-game.md)
+- [Chapter 56 · Alliances](chapters/56-alliances.md)
+- [Chapter 57 · Rules without numbers](chapters/57-rules-without-numbers.md)
+- Chapter 58 · Meta IV — *not written yet*
 
 **Part VI · Towards a physics: space, scale and locality**
 
-- [Chapter 54 · Worlds of 100,000 tokens](chapters/54-worlds-of-100000-tokens.md)
-- Chapter 55 · Dimensions at scale — *not written yet*
-- Chapter 56 · Which properties have no scale? — *not written yet*
-- Chapter 57 · Local rules only — *not written yet*
-- Chapter 58 · How far does a difference travel? — *not written yet*
-- Chapter 59 · A source and a sink — *not written yet*
-- Chapter 60 · Particles — *not written yet*
-- Chapter 61 · One agent in a sea of average agents — *not written yet*
-- Chapter 62 · Meta V — *not written yet*
+- [Chapter 59 · Worlds of 100,000 tokens](chapters/59-worlds-of-100000-tokens.md)
+- Chapter 60 · Dimensions at scale — *not written yet*
+- Chapter 61 · Which properties have no scale? — *not written yet*
+- Chapter 62 · Local rules only — *not written yet*
+- Chapter 63 · How far does a difference travel? — *not written yet*
+- Chapter 64 · A source and a sink — *not written yet*
+- Chapter 65 · Particles — *not written yet*
+- Chapter 66 · One agent in a sea of average agents — *not written yet*
+- Chapter 67 · Meta V — *not written yet*
 
 **Part VII · The long run**
 
-- [Chapter 63 · A hundred thousand iterations](chapters/63-a-hundred-thousand-iterations.md)
+- [Chapter 68 · A hundred thousand iterations](chapters/68-a-hundred-thousand-iterations.md)
 
 **Notes · the rules**
 
@@ -164,6 +169,7 @@ everything can be checked with it.
 - [Assortativity](notes/assortativity.md)
 - [How alike at a distance](notes/correlation-function.md)
 - [What the viewer can colour by](notes/viewer-colours.md)
+- [Pilot worlds](notes/pilot-worlds.md)
 
 **Notes · statistics**
 

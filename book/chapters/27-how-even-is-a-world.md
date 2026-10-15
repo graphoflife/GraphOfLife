@@ -247,7 +247,7 @@ falls off smoothly can have the same Gini and different evenness.
 - **One number is set by the rules.** Five genotypes for every eight agents,
   in every world: a balance of making and copying. If a change of the rules
   moves it, the change has altered how often brains are changed or copied:
-  in the pilots of [Chapter 51](51-how-fast-should-brains-change.md) it went
+  in the pilots of [Chapter 52](52-how-fast-should-brains-change.md) it went
   from 0.32 to 0.98 as the probability of a change rose from 0.05 to 0.8.
 
 To make every figure of this chapter: `python3 book_figures.py entropy`.

@@ -1,0 +1,330 @@
+# -*- coding: utf-8 -*-
+"""
+Part V, the chapters written from pilot worlds: worlds made by
+research/oee/pilots/run.py rather than by the lab, kept in
+GraphOfLifeRuns/.pilots — Chapter 51 (strategies written by hand), 54 (the
+original algorithm's switches), 55 (another game), 56 (alliances) and 57
+(rules without numbers).
+
+A pilot world writes one row per iteration to `series.jsonl` (the network's
+health every tenth), its settings to `config.json` and its whole world every
+100 iterations (`ckpt_<iteration>.npz`); a tournament between those is written
+beside them by research/oee/pilots/tourney.py. Pilots are fewer and shorter than
+an experiment's runs — two seeds where an experiment has ten — so what they
+show is a lead, and the chapters say so.
+"""
+from __future__ import annotations
+
+import json
+import os
+import sys
+from typing import Any, Dict, List, Optional, Tuple
+
+import numpy as np
+
+import book_figures as F
+from book_figures import chapter, recipe
+from book_chapters.common import BLUE, GREEN, GREY, RED, VIOLET
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PILOTS = os.path.join(ROOT, "GraphOfLifeRuns", ".pilots")
+TOOLS = os.path.join(ROOT, "research", "oee", "pilots")
+
+
+def rows_of(world: str) -> List[Dict[str, Any]]:
+    """One row per iteration of a pilot world (`A10k/allies-s1`), empty if it does not exist."""
+    path = os.path.join(PILOTS, world, "series.jsonl")
+    if not os.path.exists(path):
+        return []
+    with open(path) as f:
+        return [json.loads(line) for line in f]
+
+
+def lived(world: str) -> int:
+    rows = rows_of(world)
+    return rows[-1]["it"] if rows else 0
+
+
+def per_agent(rows: List[Dict[str, Any]], key: str, lo: int, hi: int) -> Optional[float]:
+    """A count per 100 agents per iteration, averaged over iterations lo to hi."""
+    v = [100 * r.get(key, 0) / max(1, r["nodes"]) for r in rows if lo <= r["it"] < hi]
+    return float(np.mean(v)) if v else None
+
+
+def health_rows(rows: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    return [r for r in rows if "coreShare" in r]
+
+
+def share_at(rows: List[Dict[str, Any]], key: str, t: int) -> Optional[float]:
+    """`key` (a count of agents) as a share of the agents, at the first measured iteration from t."""
+    later = [r for r in rows if r["it"] >= t and key in r]
+    return later[0][key] / later[0]["nodes"] if later else None
+
+
+def ratings(world: str, name: str = "tourney_T20_all.json") -> Optional[Tuple[List[int], List[float]]]:
+    """The Elo rating of every era of a pilot tournament, the first era at 0 (research/oee/pilots/elo.py)."""
+    path = os.path.join(PILOTS, world, name)
+    if not os.path.exists(path):
+        return None
+    sys.path.insert(0, TOOLS)
+    from elo import ratings as fit
+    eras, elo, _ = fit(path)
+    return list(eras), [float(e) for e in elo]
+
+
+def pair_score(world: str, earlier: int, later: int, name: str = "tourney_T20_all.json") -> Optional[float]:
+    """The later era's share of the agents against the earlier one, over every contest the two played."""
+    path = os.path.join(PILOTS, world, name)
+    if not os.path.exists(path):
+        return None
+    with open(path) as f:
+        data = json.load(f)
+    s = [1 - share_a for _, a, b, _, share_a, _, _ in data["results"]
+         if a == earlier and b == later and share_a is not None]
+    return float(np.mean(s)) if s else None
+
+
+PROTO_B2 = ("B2's rules as the pilots' prototype states them (`research/oee/pilots/proto.py`: mor=all "
+            "incumbency=1.5 birth_links=2 repair=true safe_prune=2 max_age=100 valence=8 "
+            "valence_mode=optional min_child=10 keep_frac=0.3), with one hidden layer of 16, messages of "
+            "8 numbers and no pre-pass, revolutions off, and a memory of the last game's stakes "
+            "(memory=true)")
+
+
+# ---------------------------------------------------------------------------
+# Chapter 56 · Alliances
+# ---------------------------------------------------------------------------
+
+ALLY_WORLDS = {
+    "with a home advantage, 10,000 tokens": (["A10k/allies-s1", "A10k/allies-s2", "AL/allies10k-s3",
+                                              "AL/allies10k-s4"], BLUE),
+    "with a home advantage, 20,000 tokens": (["AL/allies20k-s1", "AL/allies20k-s2"], RED),
+    "without one, 10,000 tokens": (["N/N0-s1", "N/N0-s2"], GREEN),
+}
+FIGHT_WORLDS = {
+    "no alliances": (["A10k/ctrl-s1", "A10k/ctrl-s2"], GREY),
+    "alliances": (["A10k/allies-s1", "A10k/allies-s2", "AL/allies10k-s3", "AL/allies10k-s4"], BLUE),
+    "kin pooled": (["A10k/kin-s1", "A10k/kin-s2"], VIOLET),
+    "alliances, no home advantage": (["N/N0-s1", "N/N0-s2"], GREEN),
+}
+TOURNEYS = {"no alliances": "A10k/ctrl-s1", "alliances": "A10k/allies-s1", "kin pooled": "A10k/kin-s1",
+            "support counted twice": "A10k/gain-s1", "alliances, 3,000 iterations": "AL/allies10k-s3"}
+ALLY_RUNS = ("Pilot worlds of `research/oee/pilots/run.py`, two seeds each, kept in "
+             "`GraphOfLifeRuns/.pilots`: at 10,000 tokens for 1,000 iterations without alliances "
+             "(`A10k/ctrl-s1`, `-s2`), with them (`A10k/allies-s1`, `-s2`), with kin pooled "
+             "(`A10k/kin-s1`, `-s2`) and with support counted twice (`A10k/gain-s1`, `-s2`); with "
+             "alliances for 3,000 iterations (`AL/allies10k-s3`, `-s4`), at 20,000 tokens for 2,000 "
+             "(`AL/allies20k-s1`, `-s2`), and without the home advantage, incumbency 1, for 1,000 "
+             f"(`N/N0-s1`, `-s2`). Every one under {PROTO_B2}.")
+
+
+@chapter
+def allies(ch: F.Chapter) -> None:
+    if not all(lived(w) for group, _ in ALLY_WORLDS.values() for w in group):
+        return
+    series_ = []
+    for label, (worlds, colour) in ALLY_WORLDS.items():
+        for k, w in enumerate(worlds):
+            h = [r for r in health_rows(rows_of(w)) if "sideLargest" in r]
+            series_.append({"label": label if k == 0 else None, "x": [r["it"] for r in h],
+                            "y": [r["sideLargest"] / r["nodes"] for r in h], "colour": colour, "width": 1.5})
+    ch.figure("bloc", title="The largest alliance's share of the world",
+              x={"label": "iteration"}, y={"label": "share of the agents in the largest alliance", "min": 0, "max": 1},
+              series=series_,
+              caption=("One line per world. An alliance is a group of agents joined by connections "
+                       "between allies: two neighbours that both chose, in the last game, to be allied."),
+              recipe=recipe(ALLY_RUNS, "each world's `series.jsonl`", [
+                  "Every 10th iteration, join every two neighbours that were allied in the game just "
+                  "played (`ProtoWorld.same_side`) and find the largest connected group "
+                  "(`research/oee/pilots/run.py`, `organisation`, `sideLargest`).",
+                  "Divide by the agents."]))
+
+    fights = []
+    for label, (worlds, colour) in FIGHT_WORLDS.items():
+        for k, w in enumerate(worlds):
+            rows = rows_of(w)
+            its = np.array([r["it"] for r in rows])
+            vals = np.array([100 * r.get("conquests", 0) / max(1, r["nodes"]) for r in rows])
+            x, y = F.thin(its, vals, 50)
+            fights.append({"label": label if k == 0 else None, "x": x.tolist(), "y": y.tolist(),
+                           "colour": colour, "width": 1.5})
+    ch.figure("fighting", title="How much changes hands",
+              x={"label": "iteration"}, y={"label": "nodes taken per 100 agents per game"},
+              series=fights,
+              caption="One line per world, each a mean over 50 iterations.",
+              recipe=recipe(ALLY_RUNS, "each world's `series.jsonl`", [
+                  "Count the nodes whose winner was not their owner in each game (`conquests`), per 100 "
+                  "agents, and average over consecutive stretches of 50 iterations."]))
+
+    elo_series, table = [], {}
+    for k, (label, w) in enumerate(TOURNEYS.items()):
+        got = ratings(w)
+        if got is None:
+            continue
+        eras, elo = got
+        colour = [GREY, BLUE, VIOLET, RED, BLUE][k]
+        elo_series.append({"label": label, "x": eras, "y": elo, "colour": colour, "width": 2,
+                           **({"dash": [6, 4]} if k == 4 else {})})
+        table[label] = {"eras": eras, "elo": [round(e) for e in elo],
+                        "steps": [pair_score(w, a, b) for a, b in zip(eras, eras[1:])]}
+    ch.figure("elo", title="How much better than the founders",
+              x={"label": "iteration the brains are taken from"}, y={"label": "Elo rating against the founders"},
+              series=elo_series, guides=[{"axis": "y", "at": 0, "label": "the founders"}],
+              caption=("One world of each kind, seed 1 (seed 3 for the long one), its eras played "
+                       "against each other two contests per pair in each era's world."),
+              recipe=recipe(ALLY_RUNS, "each world's checkpoints, `ckpt_<iteration>.npz`, every 100 iterations", [
+                  "For every pair of eras play four contests, two in each era's world: every agent gets "
+                  "a brain drawn from one era or the other, a coin each, mutation is switched off, and "
+                  "20 iterations are played (`research/oee/pilots/tourney.py --T 20 --reps 2`).",
+                  "Fit one rating per era to the later era's shares (Bradley–Terry, "
+                  "`research/oee/pilots/elo.py`), the founders at 0, in Elo points."]))
+    ch.number("tournaments", table)
+    ch.number("halves_1000_vs_500", {w: pair_score(w, 500, 1000, "tourney_T50_all_halves.json")
+                                     for w in ("A10k/allies-s1", "A10k/ctrl-s1")})
+
+    worlds = sorted({w for g, _ in ALLY_WORLDS.values() for w in g})
+    ch.number("bloc", {w: {t: share_at(rows_of(w), "sideLargest", t) for t in (60, 300, 500, 1000, 2000, 3000)
+                           if lived(w) >= t} for w in worlds})
+    ch.number("wish", {w: {t: (lambda r: r["ally_wishes"] / (2 * r["edges"]))([x for x in rows_of(w) if x["it"] >= t][0])
+                           for t in (1, 300, 1000, 2000) if lived(w) >= t} for w in worlds})
+    ch.number("conquest", {w: {"0-100": per_agent(rows_of(w), "conquests", 0, 100),
+                               "500-1000": per_agent(rows_of(w), "conquests", 500, 1000),
+                               "last 500": per_agent(rows_of(w), "conquests", lived(w) - 500, lived(w) + 1)}
+                           for g, _ in FIGHT_WORLDS.values() for w in g})
+    bar = {}
+    for w in worlds:
+        h = [r for r in health_rows(rows_of(w)) if r["it"] > lived(w) - 500]
+        bar[w] = {k: float(np.median([r[k] for r in h])) for k in
+                  ("coreShare", "nodeCutRisk", "cutRisk", "maxDegreeShare", "meanDegree", "dimension")}
+        bar[w]["agents"] = float(np.median([r["nodes"] for r in h]))
+    ch.number("health_last_500", bar)
+
+
+# ---------------------------------------------------------------------------
+# Chapter 51 · Strategies written by hand
+# ---------------------------------------------------------------------------
+
+INVASIONS = os.path.join(PILOTS, "invade_B2_2000.json")
+STRATEGY_COLOURS = {"resident": GREY, "turtle": GREEN, "raider": RED, "factory": BLUE}
+INVASION_RUNS = ("Two of the B2 worlds of Experiment 16, `B2-10000-s001` and `-s002`, as their "
+                 "archives keep them at iteration 2,000 (`GraphOfLifeRuns/<run>/archive/`). Each "
+                 "strategy, and the resident control, was planted in each world on two seeds "
+                 "(`python3 research/oee/pilots/manual.py B2-10000-s001 B2-10000-s002 --era 2000 "
+                 "--strategies factory,turtle,raider,resident --seeds 1,2 --T 300 --patch 0.05`).")
+INVASION_STEPS = [
+    "Load the world of iteration 2,000 (`GraphOfLife.from_checkpoint`). On seed *s*, draw an "
+    "agent at random and take the agents nearest to it, step by step, until 5% of the world.",
+    "Give each agent of that patch the strategy (`manual.py`), or, for the control, a frozen copy "
+    "of the brain of one agent of the patch drawn at random; neither ever mutates.",
+    "Play 300 iterations under the world's own rules and count, after each, the agents carrying "
+    "the strategy, as a share of all agents."]
+
+
+def invasions() -> List[Dict[str, Any]]:
+    if not os.path.exists(INVASIONS):
+        return []
+    with open(INVASIONS) as f:
+        return json.load(f)
+
+
+@chapter
+def handmade(ch: F.Chapter) -> None:
+    played = invasions()
+    if not played:
+        return
+    series_, final = [], {}
+    for strategy, colour in STRATEGY_COLOURS.items():
+        mine = [r for r in played if r["strategy"] == strategy]
+        for k, r in enumerate(mine):
+            s = r["series"]
+            series_.append({"label": strategy if k == 0 else None, "x": [p["t"] for p in s],
+                            "y": [p["mine"] / max(1, p["agents"]) for p in s], "colour": colour, "width": 1.5})
+            final.setdefault(strategy, []).append(s[-1]["mine"] / max(1, s[-1]["agents"]) if s[-1]["t"] == 300 else 0.0)
+    ch.figure("shares", title="The share of an evolved world held by a strategy",
+              x={"label": "iterations after planting"}, y={"label": "share of the agents", "min": 0},
+              series=series_,
+              caption=("One line per planting: two worlds, two seeds each. The grey lines are the "
+                       "control, a patch of the residents' own brains planted in the same place."),
+              recipe=recipe(INVASION_RUNS, "the worlds the archives keep", INVASION_STEPS))
+    ch.number("final_share", {s: v for s, v in final.items()})
+    ch.number("versus_resident", {
+        s: [a - b for a, b in zip(final[s], final["resident"])] for s in final if s != "resident"})
+    ch.number("planted", [{"run": r["run"], "seed": r["seed"], "strategy": r["strategy"], "patch": r["patch"],
+                           "agents": r["series"][0]["agents"]} for r in played])
+
+
+# ---------------------------------------------------------------------------
+# Chapter 57 · Rules without numbers
+# ---------------------------------------------------------------------------
+
+B3_WORLDS = {"B3a, alliances": (["N/B3a-s1", "N/B3a-s2"], BLUE),
+             "B3b, alliances and births among allies": (["N/B3b-s1", "N/B3b-s2"], RED),
+             "B3c, no alliances": (["N/B3c-s1", "N/B3c-s2"], GREY)}
+B3_RUNS = ("Pilot worlds of `research/oee/pilots/run.py`, kept in `GraphOfLifeRuns/.pilots/N`: "
+           "`B3a-s1`, `-s2`, `B3b-s1`, `-s2` and `B3c-s1`, `-s2`, at 10,000 tokens for 1,000 "
+           "iterations. Settings: one hidden layer of 16, messages of 8 numbers, no pre-pass, no "
+           "handover, revolutions off, and every number of B2 at its original value; prototype "
+           "switches `mor=all repair=true memory=true`, with `allies=true` (B3a), `allies=true "
+           "birth_allies=true` (B3b), or neither (B3c).")
+
+
+def _thinned(world: str, key: str, every: int = 10) -> Tuple[List[float], List[float]]:
+    rows = rows_of(world)
+    its = np.array([r["it"] for r in rows], dtype=float)
+    vals = np.array([float(r[key]) for r in rows])
+    x, y = F.thin(its, vals, every)
+    return x.tolist(), y.tolist()
+
+
+@chapter
+def numberless(ch: F.Chapter) -> None:
+    worlds = [w for g, _ in B3_WORLDS.values() for w in g]
+    if not all(lived(w) >= 1000 or (rows_of(w) and rows_of(w)[-1]["nodes"] <= 1) for w in worlds):
+        return
+    agents, ages = [], []
+    for label, (group, colour) in B3_WORLDS.items():
+        for k, w in enumerate(group):
+            x, y = _thinned(w, "nodes")
+            agents.append({"label": label if k == 0 else None, "x": x, "y": [max(1.0, v) for v in y],
+                           "colour": colour, "width": 1.5})
+            alive = [r for r in rows_of(w) if r["nodes"] > 20]
+            its = np.array([r["it"] for r in alive], dtype=float)
+            x, y = F.thin(its, np.array([r["meanAge"] for r in alive]), 10)
+            ages.append({"label": label if k == 0 else None, "x": x.tolist(), "y": y.tolist(),
+                         "colour": colour, "width": 1.5})
+    ch.figure("agents", title="Worlds without numbers",
+              x={"label": "iteration"}, y={"label": "agents", "log": True, "min": 1},
+              series=agents,
+              caption="One line per world, each a mean over 10 iterations; a world that died out ends at one agent.",
+              recipe=recipe(B3_RUNS, "each world's `series.jsonl`", [
+                  "Take the agents after each iteration's game (`nodes`) and average over consecutive "
+                  "stretches of 10 iterations."]))
+    ch.figure("ages", title="How old the agents are",
+              x={"label": "iteration"}, y={"label": "mean age of the agents", "log": True, "min": 1},
+              series=ages + [{"label": "B2: everyone dies at 100", "x": [0, 1000], "y": [50, 50],
+                              "colour": GREEN, "width": 1, "dash": [4, 4]}],
+              caption=("One line per world while it had more than 20 agents, each a mean over 10 "
+                       "iterations. In B2 every agent dies at 100, so the mean age settles near 50."),
+              recipe=recipe(B3_RUNS, "each world's `series.jsonl`", [
+                  "Take the mean age of the agents after each game (`meanAge`) while the world has more "
+                  "than 20 agents, and average over stretches of 10 iterations."]))
+    out = {}
+    for w in worlds:
+        rows = rows_of(w)
+        last = rows[-1]["it"]
+        died = next((r["it"] for r in rows if r["nodes"] <= 20), None)
+        tail = [r for r in rows if r["it"] > last - 300]
+        h = [r for r in health_rows(tail) if r["nodes"] > 20]
+        entry = {"died_at": died, "agents": rows[-1]["nodes"]}
+        if h and died is None:
+            entry.update({k: float(np.median([r[k] for r in h])) for k in
+                          ("meanDegree", "coreShare", "nodeCutRisk", "cutRisk", "maxDegreeShare", "dimension",
+                           "leafShare")})
+            entry["side"] = float(np.median([r.get("sideLargest", 0) / r["nodes"] for r in h]))
+            entry.update({k: float(np.mean([100 * r.get(c, 0) / r["nodes"] for r in tail for c in cs]) * 1)
+                          for k, cs in (("births", ("births",)), ("conquests", ("conquests",)),
+                                        ("starved", ("starved_r", "starved_g")),
+                                        ("cut_off", ("orphaned_r", "orphaned_g")))})
+            entry["mean_age"] = float(np.mean([r["meanAge"] for r in tail]))
+        out[w] = entry
+    ch.number("worlds", out)

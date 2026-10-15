@@ -319,7 +319,7 @@ spread every number out to √1.40 times the founders' spread (the section
 above), and two brains drawn independently with that spread would be
 √1.40 × 0.176 = 0.21 apart. In the worlds of 10,000 tokens two agents of one
 world were 0.18 apart: in a smaller world two agents share an ancestor more
-recently ([Chapter 54](54-worlds-of-100000-tokens.md)).
+recently ([Chapter 59](59-worlds-of-100000-tokens.md)).
 
 So the brains of one world are, in their numbers, nearly as different from
 each other as brains drawn independently. Yet they agree on every decision
@@ -351,13 +351,13 @@ depends on it.
 - **The remedy is in the architecture.** Fewer layers, a squashing with a
   steeper slope, or larger starting weights would each give the brains a
   gain near 1 ([How a signal fades through layers](../notes/vanishing-signal.md)).
-  Chapter 52, *How big should a brain be?*, is planned for that and should
+  Chapter 53, *How big should a brain be?*, is planned for that and should
   come early. [Chapter 41](41-do-the-brains-matter.md), which replaces the
   brains by chance, should be read in this light: its brains do matter, but
   as constants.
 
 > [!info] Added later: brains that see
-> The remedy was tried in Part V, not in Chapter 52, which is still to come.
+> The remedy was tried in Part V, not in Chapter 53, which is still to come.
 > [Chapter 47](47-brains-that-see-and-worlds-that-break.md) gave the brains
 > one hidden layer of 16 — a founder's gain of about 0.2 — and the worlds
 > broke: at 5,000 tokens four of ten died out, and eight of ten when brains

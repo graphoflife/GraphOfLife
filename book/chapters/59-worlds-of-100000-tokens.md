@@ -30,7 +30,7 @@ size, for 600 iterations. This experiment makes a **second set of baseline
 worlds** — of B1 itself, not of the second baseline B2 of
 [Chapter 48](48-a-world-that-cannot-break.md): thirty worlds of 100,000
 tokens, ten times the first, each run for 1,500 iterations. Part VI builds
-on it — Chapter 55 is to measure its dimensions at scale, and Chapter 56 to
+on it — Chapter 60 is to measure its dimensions at scale, and Chapter 61 to
 look for properties without a scale (both planned, see
 [the contents](../README.md)) — and it answers one question of its own: how
 a line takes over a world.
@@ -361,8 +361,8 @@ matters.
   several until iteration 1,000. That is time and room for lines to differ —
   if anything in the brains could make them differ
   ([Chapter 19](19-what-the-brains-are-like.md)). Part VI builds on these
-  worlds: Chapter 55 is to follow their dimension to larger sizes, and the
-  long run of [Chapter 63](63-a-hundred-thousand-iterations.md) a single
+  worlds: Chapter 60 is to follow their dimension to larger sizes, and the
+  long run of [Chapter 68](68-a-hundred-thousand-iterations.md) a single
   world of twice this size for a hundred thousand iterations.
 
 To make every figure of this chapter: `python3 book_figures.py takeover`.
@@ -370,5 +370,5 @@ To make every figure of this chapter: `python3 book_figures.py takeover`.
 <!-- turns -->
 ---
 
-← [Chapter 51 · How fast should brains change?](51-how-fast-should-brains-change.md) · [Contents](../README.md) · [Chapter 63 · A hundred thousand iterations](63-a-hundred-thousand-iterations.md) →
+← [Chapter 57 · Rules without numbers](57-rules-without-numbers.md) · [Contents](../README.md) · [Chapter 68 · A hundred thousand iterations](68-a-hundred-thousand-iterations.md) →
 <!-- /turns -->

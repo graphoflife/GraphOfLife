@@ -78,13 +78,13 @@ hoarders?
 ### 45 · Meta III
 
 Write once 41–45 are analysed. Re-read the ladder: what moved for P1
-(heredity: Chapter 51), for the null (Chapter 43), for structure (45). Update
+(heredity: Chapter 52), for the null (Chapter 43), for structure (45). Update
 the obstacles list of Chapter 40 and the order of Part V. Fold in what the six
 Part II chapters (19–24) changed.
 
 ---
 
-## Part V · Engineering open-ended evolution (updated 2026-10-14)
+## Part V · Engineering open-ended evolution (updated 2026-10-15)
 
 The author's brief (2026-10-12): invent an algorithm on this simulation in
 which open-ended evolution emerges; find a statistic that keeps rising (its
@@ -114,11 +114,26 @@ State of the chapters:
   B2 has one way to die, old age; births run at 1.00–1.05 per hundred.
 - **50 · why evolution stops** (E16) — written 2026-10-14; running at 10,000 tokens. Colonel
   Blotto reading; the pilot table.
-- **51 · how fast should brains change?** (E09 on B2) — written 2026-10-14; queued after E16.
-- **52 · how big should a brain be?** — planned.
-- **53 · Meta IV** — after 49–52 are analysed.
+- **51 · strategies written by hand** (pilots: the invasion test,
+  `research/oee/pilots/manual.py`) — method written 2026-10-15; turtle, raider
+  and factory planted as 5% patches in E16's B2 worlds at iteration 2,000,
+  against a patch of the residents' own brains.
+- **52 · how fast should brains change?** (E09 on B2) — written 2026-10-14; running.
+- **53 · how big should a brain be?** — planned.
+- **54 · the switches the world was built with** (pilots, batch S) — the
+  original algorithm's switches judged for OEE: B1 and B2 with and without
+  revolutions; B2 with gifts, with links that must be used, with both, and
+  with estates shared by wealth. Running 2026-10-15.
+- **55 · another game** (pilots, batch G) — a lottery contest (Tullock) and
+  stakes pooled by genotype, both on B2 without revolutions. Running.
+- **56 · alliances** (pilots A10k, AL, N0) — written 2026-10-15: one alliance
+  takes the world, peace, flat tournaments; not OEE.
+- **57 · rules without numbers** (pilots, batch N: B3) — the author's rule of
+  2026-10-15 (no hand-chosen numbers but the tokens and the mutation
+  parameters). All seven of B2's numbers removed at once.
+- **58 · Meta IV** — after 49–57 are analysed.
 
-### 51 · How fast should brains change? (Experiment 9, re-planned on B2 2026-10-14)
+### 52 · How fast should brains change? (Experiment 9, re-planned on B2 2026-10-14)
 
 **Question.** Does the rate of change decide where evolution stops, or only
 how soon? Five rates (*p* = 0.05, 0.1, 0.2 = B2, 0.4, 0.8), ten seeds, 10,000
@@ -137,7 +152,7 @@ compare descendants of the same start. At *p* = 0.05 a world may not have
 stopped by 1,000 — the second clause of the thesis tests exactly that. The old
 B1 plan (births vs *p*; pilots 2.0 / 2.9 / 8.0 per hundred) was never run.
 
-### 52 · How big should a brain be? (`hidden_layers`, on B2)
+### 53 · How big should a brain be? (`hidden_layers`, on B2)
 
 **Partly served by Chapter 47 (2026-10-14):** one hidden layer of 16 gives a
 founder gain of 0.2 and breaks worlds unless the rules of Chapters 48–49 hold
@@ -199,17 +214,18 @@ from the even split (R² of the random-walk fit, Chapter 29, below 0.46)."
 4. **Port** to the engine what the pilots keep (memory needs the last stakes
    in the checkpoint; grow brains need a brain kind and `active` there).
 
-### 53 · Meta IV
+### 58 · Meta IV
 
-Once 51–53 are analysed: what the engineering found, which rules are needed
-for a world that cannot break, why evolution stops, and the proposal for a
-game with a surplus.
+Once 49–57 are analysed: what the engineering found, which rules are needed
+for a world that cannot break, why evolution stops, what a game with a surplus
+did (alliances: one convention spreading, then peace), which of B2's numbers
+can be replaced by something emergent, and the proposal that follows.
 
 ---
 
 ## Part VI · Towards a physics: space, scale and locality
 
-### 54 · Worlds of 100,000 tokens (Experiment 10, analysed 2026-10-11)
+### 59 · Worlds of 100,000 tokens (Experiment 10, analysed 2026-10-11)
 
 **Found (2026-10-11).** Thesis refuted: median time to one founder 1,037.5
 (27/30 reached; s013, s018, s020 never), 5.9× the 10k's 175, exponent 0.77
@@ -222,7 +238,7 @@ richest ×3.1, best-connected ×7.7 (stars). Stars: 7/30 worlds; centre a place
 handed to newborn children (dynasties, Ch. 33). Ages settle by 500 (stationary
 population, Ch. 13). Parts II and III now read these worlds (second edition).
 Follow-ups: dynasty as unit of selection with incumbency (Ch. 47); does the
-domain reach keep growing as t^0.3 over the 100k-iteration run (Ch. 63)?
+domain reach keep growing as t^0.3 over the 100k-iteration run (Ch. 68)?
 
 ### (plan as written before the runs)
 
@@ -253,14 +269,14 @@ moves of the common ancestor over 100–1,499 (baseline, lab definition: median
 light cone of Chapter 7 (≤ 1 step per iteration); how many lines hold large
 regions at once; families per agent. Regions: do families occupy regions
 (Chapter 37) of a typical size that does not grow with the world? Space: the
-dimension measures of Chapter 24 at scale (→ Chapter 55); distances; cut
+dimension measures of Chapter 24 at scale (→ Chapter 60); distances; cut
 sizes (Chapter 42's sawtooth). Scale-free: tails with 14,000 agents per frame
 (→ 57).
 
 **Observe.** The sawtooth; whether big cuts remove whole family regions
 (selection on regions!).
 
-### 55 · Dimensions at scale
+### 60 · Dimensions at scale
 
 Chapter 24's tools on the 100,000-token worlds: local dimension *d(r)* from ball
 growth out to *r* ≈ 30; spectral dimension *d_s(t)* out to *t* of thousands
@@ -269,10 +285,10 @@ distance scaling across 3,200–409,600 tokens (Chapter 42). Question: is there 
 plateau at 3? Does the dimension depend on scale (CDT: 2 at small, 4 at large)?
 Compare with degree-preserving nulls at the same size.
 
-### 56 · Which properties have no scale?
+### 61 · Which properties have no scale?
 
 Finite-size scaling: for each quantity *X*, does the distribution of *X/N^a*
-collapse across sizes (Experiment 8's ten sizes, Chapter 54's large worlds)?
+collapse across sizes (Experiment 8's ten sizes, Chapter 59's large worlds)?
 Candidates: the share of a world cut off per game (Chapter 42: same at every
 size), cluster/branch sizes behind bridges, family-region sizes, token tails
 (γ ≈ 2.3, Chapter 32), degree tails, loops per agent. Also correlation
@@ -280,7 +296,7 @@ functions (Chapter 23): exponential (a scale ξ) or power law (none)? Teach
 data collapse with a known critical system (percolation on a lattice) as the
 positive control.
 
-### 57 · Local rules only
+### 62 · Local rules only
 
 **Build (three engine options).** (a) Local share-out: tokens of the dead go to
 their former neighbours (or stay as a "fossil" node that neighbours can win?);
@@ -293,7 +309,7 @@ pass under the new option).
 was the poor's basic income — Chapter 28), deaths, sweeps; then all three
 together = "the local world", the substrate for 59.
 
-### 58 · How far does a difference travel?
+### 63 · How far does a difference travel?
 
 Damage spreading on the local world (58c is a prerequisite: with one global
 stream the difference is everywhere at once). Twin runs from one checkpoint:
@@ -304,7 +320,7 @@ per phase by Chapter 7's cone); the Hamming distance between the twins vs time
 → chaos (grows) or order (fades) (Derrida & Weisbuch 1986). Many origins,
 many times; positive control: a lattice cellular automaton with known speed.
 
-### 59 · A source and a sink
+### 64 · A source and a sink
 
 **Design options.** (a) Token quality: tokens carry a "freshness"; a stake
 spends it; spent tokens regenerate slowly (or only at "stars"); only fresh
@@ -314,7 +330,7 @@ total is stationary. **Find out.** Entropy production; whether stable
 structures sit in the flow (dissipative structures); gradients around stars;
 whether life-like persistence (P3) is commoner near sources.
 
-### 60 · Particles
+### 65 · Particles
 
 **Detectors (each with a null and a positive control).** (1) Bound tokens:
 persistent cycles of *net* flow (Chapter 29: almost none in the baseline) —
@@ -324,7 +340,7 @@ track the same cycle over games; (2) groups that outlast their members
 or regions' token holdings, peaks against a random-walk null; (4) moving
 patterns: a group whose "centre" drifts through the network.
 
-### 61 · One agent in a sea of average agents
+### 66 · One agent in a sea of average agents
 
 Needs Chapter 43's empirical policy. **Design.** (a) A large world (10,000–
 100,000 tokens) of empirical-policy agents, run to stationarity; (b) insert a
@@ -340,7 +356,7 @@ boundary (cheap, open system, breaks conservation at the border); a group
 probe (bound state?). **Theory.** Invasion fitness (Metz et al. 1992),
 ESS (Maynard Smith & Price 1973), reservoir/grand canonical ensemble.
 
-### 62 · Meta V
+### 67 · Meta V
 
 What the measurements say about space, scale and matter; which rule changes to
 combine with Part V's.
@@ -349,7 +365,7 @@ combine with Part V's.
 
 ## Part VII · The long run
 
-### 63 · A hundred thousand iterations (Experiment 11, planned, not runnable yet)
+### 68 · A hundred thousand iterations (Experiment 11, planned, not runnable yet)
 
 **Question.** The user's, 2026-10-09: what if there simply was not enough time
 to learn cooperation? One world of B1 at 204,800 tokens (seed 1; its first 600

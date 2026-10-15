@@ -1,0 +1,366 @@
+{
+ "chapter": "allies",
+ "numbers": {
+  "tournaments": {
+   "no alliances": {
+    "eras": [
+     0,
+     100,
+     200,
+     500,
+     1000
+    ],
+    "elo": [
+     0,
+     126,
+     204,
+     230,
+     196
+    ],
+    "steps": [
+     0.7187496649306075,
+     0.6171613647200134,
+     0.5599917653592903,
+     0.47744262832477613
+    ]
+   },
+   "alliances": {
+    "eras": [
+     0,
+     100,
+     200,
+     500,
+     1000
+    ],
+    "elo": [
+     0,
+     113,
+     127,
+     135,
+     143
+    ],
+    "steps": [
+     0.6881373047877575,
+     0.5272663233579479,
+     0.5057303814889229,
+     0.5216117991602273
+    ]
+   },
+   "kin pooled": {
+    "eras": [
+     0,
+     100,
+     200,
+     500,
+     1000
+    ],
+    "elo": [
+     0,
+     92,
+     141,
+     116,
+     117
+    ],
+    "steps": [
+     0.6861720236744242,
+     0.5634010360835335,
+     0.4792685427617116,
+     0.4946632889633962
+    ]
+   },
+   "support counted twice": {
+    "eras": [
+     0,
+     100,
+     200,
+     500,
+     1000
+    ],
+    "elo": [
+     0,
+     222,
+     294,
+     306,
+     284
+    ],
+    "steps": [
+     0.863543811179553,
+     0.6561285337315502,
+     0.5632505218040454,
+     0.493922993179421
+    ]
+   },
+   "alliances, 3,000 iterations": {
+    "eras": [
+     0,
+     500,
+     1000,
+     1500,
+     2000
+    ],
+    "elo": [
+     0,
+     178,
+     198,
+     190,
+     209
+    ],
+    "steps": [
+     0.7418183984514969,
+     0.5317218270251429,
+     0.5160396601018477,
+     0.5190114354622491
+    ]
+   }
+  },
+  "halves_1000_vs_500": {
+   "A10k/allies-s1": 0.4117370852100725,
+   "A10k/ctrl-s1": 0.4192034840663364
+  },
+  "bloc": {
+   "A10k/allies-s1": {
+    "60": 0.5429880197322058,
+    "300": 0.20146198830409356,
+    "500": 0.4921201308355635,
+    "1000": 0.8342749529190208
+   },
+   "A10k/allies-s2": {
+    "60": 0.5330754352030947,
+    "300": 0.3209920920201294,
+    "500": 0.2788065843621399,
+    "1000": 0.4395544688943222
+   },
+   "AL/allies10k-s3": {
+    "60": 0.15527065527065528,
+    "300": 0.6701368233194527,
+    "500": 0.5966709346991037,
+    "1000": 0.8717160424818334,
+    "2000": 0.99392177589852,
+    "3000": 0.9852786540483701
+   },
+   "AL/allies10k-s4": {
+    "60": 0.6127401415571284,
+    "300": 0.6233807266982623,
+    "500": 0.7489819662594531,
+    "1000": 0.8866459627329193,
+    "2000": 0.9668146763262444,
+    "3000": 0.9741763134461264
+   },
+   "AL/allies20k-s1": {
+    "60": 0.30123037759864235,
+    "300": 0.31109271523178805,
+    "500": 0.3922942206654991,
+    "1000": 0.7096405436301283,
+    "2000": 0.9095338279260325
+   },
+   "AL/allies20k-s2": {
+    "60": 0.27246246919112704,
+    "300": 0.44447708578143363,
+    "500": 0.7021247049020969,
+    "1000": 0.9607074890854136,
+    "2000": 0.9555531755381814
+   },
+   "N/N0-s1": {
+    "60": 0.4338268281740691,
+    "300": 0.48976940565118543,
+    "500": 0.21002059025394645,
+    "1000": 0.36765746638358104
+   },
+   "N/N0-s2": {
+    "60": 0.6176911544227887,
+    "300": 0.4154451197711834,
+    "500": 0.5214384508990318,
+    "1000": 0.7141355754072517
+   }
+  },
+  "wish": {
+   "A10k/allies-s1": {
+    "1": 0.503393665158371,
+    "300": 0.25691679428279734,
+    "1000": 0.8022151898734177
+   },
+   "A10k/allies-s2": {
+    "1": 0.6705069124423964,
+    "300": 0.34358094735453226,
+    "1000": 0.4160091362126246
+   },
+   "AL/allies10k-s3": {
+    "1": 0.4717948717948718,
+    "300": 0.6763935087188792,
+    "1000": 0.8535064215097478,
+    "2000": 0.9925503943908852
+   },
+   "AL/allies10k-s4": {
+    "1": 0.6230569948186528,
+    "300": 0.6525364431486881,
+    "1000": 0.8686528753835494,
+    "2000": 0.9615316590024762
+   },
+   "AL/allies20k-s1": {
+    "1": 0.5200918484500574,
+    "300": 0.3503293342742884,
+    "1000": 0.6709664713701935,
+    "2000": 0.8945492939157978
+   },
+   "AL/allies20k-s2": {
+    "1": 0.6121605667060213,
+    "300": 0.5830670061210118,
+    "1000": 0.9510228994780267,
+    "2000": 0.9331104373468455
+   },
+   "N/N0-s1": {
+    "1": 0.503393665158371,
+    "300": 0.5059343587259295,
+    "1000": 0.4311783107403545
+   },
+   "N/N0-s2": {
+    "1": 0.6705069124423964,
+    "300": 0.46274950801236997,
+    "1000": 0.6806252000426758
+   }
+  },
+  "conquest": {
+   "A10k/ctrl-s1": {
+    "0-100": 14.820350352287107,
+    "500-1000": 7.621907292831192,
+    "last 500": 7.620042801522918
+   },
+   "A10k/ctrl-s2": {
+    "0-100": 14.790420785792975,
+    "500-1000": 8.04202239555538,
+    "last 500": 8.03970731876977
+   },
+   "A10k/allies-s1": {
+    "0-100": 6.741189818848994,
+    "500-1000": 2.214594132643739,
+    "last 500": 2.2124761483320095
+   },
+   "A10k/allies-s2": {
+    "0-100": 6.355051007308957,
+    "500-1000": 3.352443458198344,
+    "last 500": 3.3511201909216357
+   },
+   "AL/allies10k-s3": {
+    "0-100": 10.367855885750625,
+    "500-1000": 1.7663956187677559,
+    "last 500": 0.17223012641345153
+   },
+   "AL/allies10k-s4": {
+    "0-100": 5.342555858821484,
+    "500-1000": 1.8787839619531859,
+    "last 500": 0.42291016228580985
+   },
+   "A10k/kin-s1": {
+    "0-100": 4.714771556126627,
+    "500-1000": 1.7568498047601957,
+    "last 500": 1.7548296512126789
+   },
+   "A10k/kin-s2": {
+    "0-100": 3.871545716381793,
+    "500-1000": 0.6076941453643923,
+    "last 500": 0.607284281227811
+   },
+   "N/N0-s1": {
+    "0-100": 9.35370491326538,
+    "500-1000": 6.0482162848663235,
+    "last 500": 6.043560162418344
+   },
+   "N/N0-s2": {
+    "0-100": 6.802408567629283,
+    "500-1000": 3.1181435418835863,
+    "last 500": 3.1167969684406622
+   }
+  },
+  "health_last_500": {
+   "A10k/allies-s1": {
+    "coreShare": 1.0,
+    "nodeCutRisk": 0.0,
+    "cutRisk": 0.0,
+    "maxDegreeShare": 0.012700241910333027,
+    "meanDegree": 5.1647664304431125,
+    "dimension": 4.2691313554639265,
+    "agents": 3942.0
+   },
+   "A10k/allies-s2": {
+    "coreShare": 1.0,
+    "nodeCutRisk": 0.0,
+    "cutRisk": 0.0,
+    "maxDegreeShare": 0.015198253509290046,
+    "meanDegree": 5.373005161058453,
+    "dimension": 4.364421734490673,
+    "agents": 3342.5
+   },
+   "AL/allies10k-s3": {
+    "coreShare": 1.0,
+    "nodeCutRisk": 0.0,
+    "cutRisk": 0.0,
+    "maxDegreeShare": 0.012793165153197048,
+    "meanDegree": 5.3119700042350795,
+    "dimension": 4.143603829914216,
+    "agents": 3781.5
+   },
+   "AL/allies10k-s4": {
+    "coreShare": 1.0,
+    "nodeCutRisk": 0.0,
+    "cutRisk": 0.0,
+    "maxDegreeShare": 0.011893005009490656,
+    "meanDegree": 5.137895450642892,
+    "dimension": 4.337497400855382,
+    "agents": 4493.5
+   },
+   "AL/allies20k-s1": {
+    "coreShare": 1.0,
+    "nodeCutRisk": 0.0,
+    "cutRisk": 0.0,
+    "maxDegreeShare": 0.008693296605484587,
+    "meanDegree": 5.064391814805829,
+    "dimension": 4.778345152351337,
+    "agents": 8926.5
+   },
+   "AL/allies20k-s2": {
+    "coreShare": 1.0,
+    "nodeCutRisk": 0.0,
+    "cutRisk": 0.0,
+    "maxDegreeShare": 0.008464353370555209,
+    "meanDegree": 5.176083207077477,
+    "dimension": 4.79106401882394,
+    "agents": 9362.5
+   },
+   "N/N0-s1": {
+    "coreShare": 1.0,
+    "nodeCutRisk": 0.0,
+    "cutRisk": 0.0,
+    "maxDegreeShare": 0.016035377909634944,
+    "meanDegree": 5.547064352863513,
+    "dimension": 4.370063347613669,
+    "agents": 2767.5
+   },
+   "N/N0-s2": {
+    "coreShare": 1.0,
+    "nodeCutRisk": 0.0,
+    "cutRisk": 0.0,
+    "maxDegreeShare": 0.013246438597539122,
+    "meanDegree": 4.937385295743505,
+    "dimension": 4.2253087069004085,
+    "agents": 3539.5
+   }
+  }
+ },
+ "figures": {
+  "bloc": {
+   "title": "The largest alliance's share of the world",
+   "caption": "One line per world. An alliance is a group of agents joined by connections between allies: two neighbours that both chose, in the last game, to be allied.",
+   "recipe": "**Runs.** Pilot worlds of `research/oee/pilots/run.py`, two seeds each, kept in `GraphOfLifeRuns/.pilots`: at 10,000 tokens for 1,000 iterations without alliances (`A10k/ctrl-s1`, `-s2`), with them (`A10k/allies-s1`, `-s2`), with kin pooled (`A10k/kin-s1`, `-s2`) and with support counted twice (`A10k/gain-s1`, `-s2`); with alliances for 3,000 iterations (`AL/allies10k-s3`, `-s4`), at 20,000 tokens for 2,000 (`AL/allies20k-s1`, `-s2`), and without the home advantage, incumbency 1, for 1,000 (`N/N0-s1`, `-s2`). Every one under B2's rules as the pilots' prototype states them (`research/oee/pilots/proto.py`: mor=all incumbency=1.5 birth_links=2 repair=true safe_prune=2 max_age=100 valence=8 valence_mode=optional min_child=10 keep_frac=0.3), with one hidden layer of 16, messages of 8 numbers and no pre-pass, revolutions off, and a memory of the last game's stakes (memory=true).\n\n**Data.** From each world's `series.jsonl`.\n\n1. Every 10th iteration, join every two neighbours that were allied in the game just played (`ProtoWorld.same_side`) and find the largest connected group (`research/oee/pilots/run.py`, `organisation`, `sideLargest`).\n2. Divide by the agents.\n\n**To make it again:** `python3 book_figures.py allies`."
+  },
+  "fighting": {
+   "title": "How much changes hands",
+   "caption": "One line per world, each a mean over 50 iterations.",
+   "recipe": "**Runs.** Pilot worlds of `research/oee/pilots/run.py`, two seeds each, kept in `GraphOfLifeRuns/.pilots`: at 10,000 tokens for 1,000 iterations without alliances (`A10k/ctrl-s1`, `-s2`), with them (`A10k/allies-s1`, `-s2`), with kin pooled (`A10k/kin-s1`, `-s2`) and with support counted twice (`A10k/gain-s1`, `-s2`); with alliances for 3,000 iterations (`AL/allies10k-s3`, `-s4`), at 20,000 tokens for 2,000 (`AL/allies20k-s1`, `-s2`), and without the home advantage, incumbency 1, for 1,000 (`N/N0-s1`, `-s2`). Every one under B2's rules as the pilots' prototype states them (`research/oee/pilots/proto.py`: mor=all incumbency=1.5 birth_links=2 repair=true safe_prune=2 max_age=100 valence=8 valence_mode=optional min_child=10 keep_frac=0.3), with one hidden layer of 16, messages of 8 numbers and no pre-pass, revolutions off, and a memory of the last game's stakes (memory=true).\n\n**Data.** From each world's `series.jsonl`.\n\n1. Count the nodes whose winner was not their owner in each game (`conquests`), per 100 agents, and average over consecutive stretches of 50 iterations.\n\n**To make it again:** `python3 book_figures.py allies`."
+  },
+  "elo": {
+   "title": "How much better than the founders",
+   "caption": "One world of each kind, seed 1 (seed 3 for the long one), its eras played against each other two contests per pair in each era's world.",
+   "recipe": "**Runs.** Pilot worlds of `research/oee/pilots/run.py`, two seeds each, kept in `GraphOfLifeRuns/.pilots`: at 10,000 tokens for 1,000 iterations without alliances (`A10k/ctrl-s1`, `-s2`), with them (`A10k/allies-s1`, `-s2`), with kin pooled (`A10k/kin-s1`, `-s2`) and with support counted twice (`A10k/gain-s1`, `-s2`); with alliances for 3,000 iterations (`AL/allies10k-s3`, `-s4`), at 20,000 tokens for 2,000 (`AL/allies20k-s1`, `-s2`), and without the home advantage, incumbency 1, for 1,000 (`N/N0-s1`, `-s2`). Every one under B2's rules as the pilots' prototype states them (`research/oee/pilots/proto.py`: mor=all incumbency=1.5 birth_links=2 repair=true safe_prune=2 max_age=100 valence=8 valence_mode=optional min_child=10 keep_frac=0.3), with one hidden layer of 16, messages of 8 numbers and no pre-pass, revolutions off, and a memory of the last game's stakes (memory=true).\n\n**Data.** From each world's checkpoints, `ckpt_<iteration>.npz`, every 100 iterations.\n\n1. For every pair of eras play four contests, two in each era's world: every agent gets a brain drawn from one era or the other, a coin each, mutation is switched off, and 20 iterations are played (`research/oee/pilots/tourney.py --T 20 --reps 2`).\n2. Fit one rating per era to the later era's shares (Bradley\u2013Terry, `research/oee/pilots/elo.py`), the founders at 0, in Elo points.\n\n**To make it again:** `python3 book_figures.py allies`."
+  }
+ }
+}

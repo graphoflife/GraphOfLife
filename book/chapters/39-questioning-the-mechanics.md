@@ -346,7 +346,7 @@ distances ([Chapter 35](35-the-geometry-of-a-world.md)).
 > adds local rules — two links at birth, a death mended in a ring, only
 > redundant links lapsing — under which neither a death nor a lapsed link
 > can split a world. Letting a separated piece live on is planned for
-> Chapter 57, *Local rules only*. A child joined to an agent anywhere would
+> Chapter 62, *Local rules only*. A child joined to an agent anywhere would
 > break the locality that Part V asks of every rule
 > ([Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md),
 > [Chapter 7](07-physical-inspiration.md)).
@@ -369,7 +369,7 @@ from the world.
 
 > [!info] Added later: not yet tried
 > Giving the tokens of the dead to their former neighbours is planned for
-> Chapter 57, *Local rules only*. Under B2's rules no one is cut off, and the
+> Chapter 62, *Local rules only*. Under B2's rules no one is cut off, and the
 > share-out deals out the estates of agents that die of age
 > ([Chapter 49](49-who-dies-and-why.md)).
 

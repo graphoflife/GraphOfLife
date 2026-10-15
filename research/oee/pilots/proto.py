@@ -70,6 +70,23 @@ Mechanics (P keys):
                   their genotypes are within this many mutations (0 = clones; -1 = off).
   Both pooling rules add one input row: is this candidate on my side (allied in the
   last game, or kin)?
+  birth_allies bool  a newborn is also joined to every neighbour its parent was allied
+                  with in the last game (how many is the brains' doing, not a number).
+  ally_keep bool  a connection between agents allied in the game just played never
+                  lapses for want of use; every other unused one lapses as the engine
+                  (or safe_prune) says.
+  engine   bool   play the engine's own phases, every rule as the run's settings say
+                  (incumbency, keep_home, mutate_on_replication, birth_links, ... and
+                  the switches gifting, handover, revolutions, redistribution), with
+                  only the bookkeeping added. The other keys above are then unused,
+                  except the two below. (equiv.py checks it against the engine.)
+  contest  str    "plurality" (the engine's: the largest stake takes the node) or
+                  "lottery": the node goes to a staker drawn with probability in
+                  proportion to its stake as the game weighs it (Tullock's contest).
+  pool     str    "" or "genotype": stakes on a node are pooled by genotype — every
+                  stake by agents with one brain counts as one side's; the side with
+                  most takes the node, kept by the owner if its genotype wins. Adds
+                  the input row of the pooling rules (is this candidate my genotype?).
 """
 from __future__ import annotations
 
@@ -91,12 +108,13 @@ DEFAULTS = {"mor": "off", "memory": False, "seek": False, "toll": "pool", "seek_
             "newborn_home": False, "max_age": 0, "valence": 0, "valence_mode": "all",
             "keep_one": False, "memory_len": 0, "keep_frac": 0.0,
             "support": False, "fog": False, "support_gain": 1.0, "allies": False,
-            "kin_pool": -1}
+            "kin_pool": -1, "birth_allies": False, "ally_keep": False,
+            "engine": False, "contest": "plurality", "pool": ""}
 P: Dict[str, Any] = dict(DEFAULTS)
 
 
 def pooled() -> bool:
-    return bool(P.get("allies")) or int(P.get("kin_pool", -1)) >= 0
+    return bool(P.get("allies")) or int(P.get("kin_pool", -1)) >= 0 or P.get("pool") == "genotype"
 
 
 def set_proto(proto: Dict[str, Any]) -> None:
@@ -207,6 +225,12 @@ class ProtoWorld(GraphOfLife):
 
     def _stale_edges(self):
         stale = super()._stale_edges()
+        if P.get("ally_keep") and stale:
+            allied = self.last_allies
+            kept = [(a, b) for a, b in stale if b in allied.get(a, ())]
+            if kept:
+                self._count("ally_kept", len(kept))
+                stale = [(a, b) for a, b in stale if b not in allied.get(a, ())]
         if not P.get("safe_prune") or not stale:
             return stale
         gone = set()
@@ -351,6 +375,8 @@ class ProtoWorld(GraphOfLife):
         if P.get("allies"):
             book = self.last_allies if allies is None else allies
             return b in book.get(a, ())
+        if P.get("pool") == "genotype":
+            return self.brains[a].brain_id == self.brains[b].brain_id
         k = int(P.get("kin_pool", -1))
         return self.kin_distance(self.brains[a].brain_id, self.brains[b].brain_id, k) is not None
 
@@ -392,6 +418,17 @@ class ProtoWorld(GraphOfLife):
 
     # ---- reproduction, with the search for partners after it ----------------
     def _spawn_child(self, parent, parent_tokens, child_tokens, candidates, Y):
+        child_id, linked = self._spawn_child_rules(parent, parent_tokens, child_tokens, candidates, Y)
+        if P.get("birth_allies"):
+            G = self.G
+            for v in [parent] + sorted(self.last_allies.get(parent, ())):
+                if G.has_node(v) and v != child_id and not G.has_edge(child_id, v):
+                    self._add_edge(child_id, v)
+                    linked.append(v)
+                    self._count("birth_ally_links")
+        return child_id, linked
+
+    def _spawn_child_rules(self, parent, parent_tokens, child_tokens, candidates, Y):
         K = int(P.get("valence", 0))
         if K:
             return self._spawn_child_valence(parent, parent_tokens, child_tokens, candidates, Y, K)
@@ -523,7 +560,8 @@ class ProtoWorld(GraphOfLife):
     def reproduction_phase(self, record_decisions):
         nxt = self.next_agent_id
         self._seekers = []
-        frame = self._engine_reproduction()
+        frame = (GraphOfLife.reproduction_phase(self, record_decisions) if P.get("engine")
+                 else self._engine_reproduction())
         self._count("births", self.next_agent_id - nxt)
         cl = frame["cleanup"]
         self._count("starved_r", cl["starved"])
@@ -618,8 +656,55 @@ class ProtoWorld(GraphOfLife):
         mode = Y[self.heads["LINK_MODE"], 1]
         return _choose_binary(acc[0], acc[1], mode[0], mode[1], self.rng)
 
-    # ---- the game, copied from the engine with the prototype hooks -------------
+    # ---- the engine's own game, with the contest and pooling hooks ------------
+    def _weighed(self, v, offers):
+        """The engine's weighing; under pool=genotype, one offer per genotype."""
+        self._contested = v
+        weighed = super()._weighed(v, offers)
+        if P.get("pool") != "genotype" or len(weighed) < 2:
+            return weighed
+        own = self.brains[v].brain_id
+        sides: Dict[int, float] = {}
+        rep: Dict[int, int] = {}
+        for b in sorted(weighed):
+            g = self.brains[b].brain_id
+            sides[g] = sides.get(g, 0) + weighed[b]
+            if g == own:
+                rep[g] = v
+            elif g not in rep or weighed[b] > weighed[rep[g]]:
+                rep[g] = b
+        if len(sides) < len(weighed):
+            self._count("pooled_contests")
+        return {rep[g]: total for g, total in sides.items()}
+
+    def _resolve_winner(self, offers, revolutionaries, rng):
+        if P.get("contest") == "lottery":
+            keys = sorted(offers)
+            w = np.array([float(offers[k]) for k in keys])
+            pick = int(rng.choice(len(keys), p=w / w.sum())) if w.sum() > 0 else 0
+            out = (int(keys[pick]), max(offers.values()), False)
+        else:
+            out = GraphOfLife._resolve_winner(offers, revolutionaries, rng)
+        if P.get("engine"):
+            v = self._contested
+            if out[0] != v:
+                self._count("conquests")
+                if out[2]:
+                    self._count("revolutions")
+                if self.root(out[0]) == self.root(v):
+                    self._count("kin_conquests")
+        return out
+
     def blotto_phase(self, record_decisions: bool) -> Dict[str, Any]:
+        if not P.get("engine"):
+            return self._proto_blotto(record_decisions)
+        frame = GraphOfLife.blotto_phase(self, record_decisions)
+        self._count("starved_g", frame["cleanup"]["starved"])
+        self._count("orphaned_g", frame["cleanup"]["orphaned"])
+        return frame
+
+    # ---- the game, copied from the engine with the prototype hooks -------------
+    def _proto_blotto(self, record_decisions: bool) -> Dict[str, Any]:
         nodes_before = self.G.number_of_nodes()
         tokens_before = dict(self.tokens)
         self.phase_count += 1

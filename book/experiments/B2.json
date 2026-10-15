@@ -41,7 +41,7 @@
   "why": {
     "hidden_layers": "One hidden layer of 16: brains whose decisions follow what they see. Founders' gain about 0.2, against 0.0006 for the five layers of B1 (Chapter 47).",
     "message_amount": "8 numbers in a message, and no pre-pass: half the work of B1's 30 numbers with a pre-pass, for worlds that have to run for thousands of iterations.",
-    "mutate_on_replication": "A brain changes only when it is copied, as genomes do: in B1 97% of new genotypes arise in brains that are not being copied, so an adaptation wears away in the agent that carries it (Chapter 39). In Chapter 47 the rule made seeing worlds die more often, by draining worlds whose births fell short of the cull; B2's other rules remove that drain (Chapters 48 and 49). How the rate of change matters within B2 is Experiment 9's question (Chapter 51).",
+    "mutate_on_replication": "A brain changes only when it is copied, as genomes do: in B1 97% of new genotypes arise in brains that are not being copied, so an adaptation wears away in the agent that carries it (Chapter 39). In Chapter 47 the rule made seeing worlds die more often, by draining worlds whose births fell short of the cull; B2's other rules remove that drain (Chapters 48 and 49). How the rate of change matters within B2 is Experiment 9's question (Chapter 52).",
     "space": "birth_links 2, mend_on_death, prune_needs 2, valence 8 and no handover: the rules under which no death and no pruning can split the world, and no agent becomes a hub (Chapter 48).",
     "demography": "keep_home 0.3, max_age 100, min_child 10, incumbency 1.5: no agent can stake itself to death, everyone dies of age at 100, a child starts with at least 10 tokens, and defending is a little cheaper than attacking (Chapter 49)."
   },

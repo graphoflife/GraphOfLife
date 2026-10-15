@@ -95,7 +95,7 @@ agent, and the share of nodes kept by their own agent in a game.
 > **It fails if:** A pair of rates outside 0.45 to 0.55 in the median seed: the rate of change decides how good the brains become — by damage that grows with the rate if the slower rate wins, by too little variation if the faster wins. Or a condition still improving after iteration 1,000 (above 0.55): that rate has not stopped.
 <!-- /thesis -->
 
-("Chapter 53", "Chapter 43" and "Chapter 52" in the thesis are today's [Chapter 50](50-why-evolution-stops.md), this chapter, and [Chapter 49](49-who-dies-and-why.md): the chapters were renumbered on 2026-10-14.)
+("Chapter 53", "Chapter 43" and "Chapter 52" in the thesis are today's [Chapter 50](50-why-evolution-stops.md), this chapter, and [Chapter 49](49-who-dies-and-why.md): the chapters were renumbered on 2026-10-14 and again on 2026-10-15.)
 
 ## The runs
 
@@ -160,5 +160,5 @@ agent, and the share of nodes kept by their own agent in a game.
 <!-- turns -->
 ---
 
-← [Chapter 50 · Why evolution stops](50-why-evolution-stops.md) · [Contents](../README.md) · [Chapter 54 · Worlds of 100,000 tokens](54-worlds-of-100000-tokens.md) →
+← [Chapter 51 · Strategies written by hand](51-strategies-written-by-hand.md) · [Contents](../README.md) · [Chapter 54 · The switches the world was built with](54-the-switches-the-world-was-built-with.md) →
 <!-- /turns -->

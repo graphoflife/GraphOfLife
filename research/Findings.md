@@ -3,7 +3,7 @@
 A living list of what the book has established, with where it is shown. When a
 later result changes an earlier one, the earlier line is corrected here and the
 chapter gets an "Added later" note. Numbers are medians over worlds unless said
-otherwise. Last consolidated: 2026-10-14.
+otherwise. Last consolidated: 2026-10-15.
 
 ## The baseline B1 (Parts II and III; 30 worlds of 10,000 and 30 of 100,000 tokens)
 
@@ -36,9 +36,9 @@ otherwise. Last consolidated: 2026-10-14.
 - 97% of new genotypes arise in brains that are not being copied (mutation after
   every game) (Ch. 39).
 - A world of 10,000 tokens descends from one branch about every 350 iterations;
-  takeover time ∝ tokens^0.77 (E10 thesis refuted) (Ch. 18, 54).
+  takeover time ∝ tokens^0.77 (E10 thesis refuted) (Ch. 18, 59).
 - Families live in patches that widen like a random walk (reach 7 → 12 steps for
-  lags 25 → 200) (Ch. 37, 54).
+  lags 25 → 200) (Ch. 37, 59).
 - Hazard falls with age to ~1% per game; no ageing; the oldest (~850) is set by
   numbers; implied median age 55 = observed (Ch. 12–13).
 - Worlds whose brains never change end in very different places; evolving
@@ -117,16 +117,54 @@ otherwise. Last consolidated: 2026-10-14.
   memory of 6 games + growable brains, a mutual-stake yield, fog of war,
   support stakes, no random inputs; brain size above its neutral shadow did not
   rise when handover was off.
-- Reading: a local Blotto game has a mixed equilibrium; evolution finds
-  randomisation (the noise inputs, 25–58% of decision changes) quickly, and then
-  nothing beats it. Information has to pay somewhere else — cooperation needs a
-  surplus of its own.
+- E16 (analysed 2026-10-15; 10 B2 worlds of 10,000 tokens to 2,000, and 10
+  without random inputs): thesis held — 2,000 vs 500 = 0.482 (0.471–0.502) and
+  0.477 (0.452–0.519) in the median world. Steps 0.68 (0→100), 0.56 (100→200),
+  0.52 (200→500), then 0.49–0.50. Later is a little worse: 2,000 vs 500 below
+  one half in 9/10 (7/10 without dice). Ratings +90, +124, +126, +128, +120,
+  +120 (B2 median). Dominance: 3.2 champions against 2.3 by chance (contest
+  sigma 0.046 at 10,000 tokens vs 0.117 at 5,000); the excess is the step to 200.
+- The Blotto reading is NOT supported by the probes (2026-10-15): founders
+  already change 49–66% of stake divisions when their dice are redrawn; evolved
+  brains 38–59% — evolution keeps the dice and turns the senses down (own state
+  14–22% → 1–9%, messages 34–48% → 11–20%). Under a lottery contest, where dice
+  are worthless, evolved brains roll them as much (48–67% vs 59% under Blotto
+  without revolutions). And the game is not solved: a hand-written raider takes
+  half of an evolved B2 world (Ch. 51). Evolution stops because the search
+  stops, not because the game has no better play.
 - Support stakes at face value are selected against (a gift without surplus).
 - Fog of war ends conquest and with it evolution.
 - Group sizes (clone and kin domains) shrink over time in every pilot; net token
   circulation stays ~0.
 
+**Alliances (Ch. 56; pilots A10k, AL, N0 — two seeds each)**
+- Alliances by mutual consent with pooled stakes are taken up — the first rule
+  of Part V evolution adopts rather than gives up: the largest alliance holds
+  83/44% of the world at 1,000 iterations, 99/97% at 2,000 (10,000 tokens),
+  91/96% at 2,000 (20,000 tokens); allied connections 98% at 2,000.
+- It spreads as a habit (say yes to every neighbour), not as a family: kin groups
+  (4 mutations) stay at 2% while the alliance holds 99%.
+- Peace: conquest from 7.6–8.0 per 100 agents a game (no alliances) to 2.2–3.4
+  (500–1,000) and 0.2–0.4 (last 500 of 3,000). Selection by conquest ends.
+- Tournaments flat: +113→+143 (100→1,000), +178→+209 (500→2,000); steps
+  0.51–0.53; territorial contests (halves, T 50): 1,000 vs 500 = 0.41, later
+  brains lose, as in the control.
+- Without the home advantage (incumbency 1) alliances still form (37/71% at
+  1,000); two seeds cannot tell the sizes apart.
+- Kin pooling (within 2 mutations): peace (0.6–1.8) with small sides (2–14%).
+  Support counted twice: still given up.
+- A rising statistic with a ceiling set by the world, but one convention
+  spreading once — not open-ended evolution (the author's objection).
+
 **Open (being tested)**
-- Cooperation with a surplus: alliances by mutual consent with pooled stakes,
-  kin pooling, support worth more than the home stake (proto.py; batch A lost in
-  a reboot, to rerun).
+- Rules without numbers (B3, Ch. 57): all seven of B2's numbers removed at once
+  — s1: without alliances extinct, with alliances a peaceful near-tree.
+- The original switches judged for OEE (Ch. 54) and two other contests, a
+  lottery and stakes pooled by genotype (Ch. 55): batch S/G running.
+- Strategies written by hand in evolved worlds (Ch. 51): in E16's B2 world s002
+  at 2,000 a 5% patch of raiders (all it can stake on the poorest stranger it is
+  sure to take, else home; a password so teammates never fight) reaches 40/50%
+  of the world in 300 iterations, a factory 48/52%; the resident control 7/1%.
+  In world s001 both die out (control 8/5%). The turtle dies out everywhere
+  (age). Ten worlds, a lone raider without password, and single-agent
+  invasions running.

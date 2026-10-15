@@ -139,10 +139,10 @@ lists.
   cannot break ([Chapter 48](48-a-world-that-cannot-break.md)), who dies and
   why ([Chapter 49](49-who-dies-and-why.md)), and why evolution stops
   ([Chapter 50](50-why-evolution-stops.md)); then whether the rate at which
-  brains change ([Chapter 51](51-how-fast-should-brains-change.md)), or their
+  brains change ([Chapter 52](52-how-fast-should-brains-change.md)), or their
   size, decides where it stops.
 - **Part VI · Towards a physics.** The second aim: what a world's size
-  changes ([Chapter 54](54-worlds-of-100000-tokens.md) sets the worlds of
+  changes ([Chapter 59](59-worlds-of-100000-tokens.md) sets the worlds of
   100,000 tokens beside those of 10,000), how many dimensions a world has at
   scale, which of its properties have no scale, what changes when every rule
   is local, how far a difference travels, what forms when a flow runs
@@ -150,7 +150,7 @@ lists.
   agent with a brain of its own does in a sea of average agents
   ([Chapter 7](07-physical-inspiration.md) sets out the questions).
 - **Part VII · The long run.** One world followed for a hundred thousand
-  iterations ([Chapter 63](63-a-hundred-thousand-iterations.md)).
+  iterations ([Chapter 68](68-a-hundred-thousand-iterations.md)).
 - **Notes.** Short notes, one per idea, that define every rule, every
   measurement and every statistical method the chapters use, with worked
   examples: [Every setting](../notes/settings.md),

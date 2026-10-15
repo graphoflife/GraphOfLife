@@ -120,7 +120,7 @@ branch of the family tree outlived all the others and the whole world
 descended from it, and the book asked whether the wander was the sweeps. The
 large worlds answer no. They forget their level within three hundred
 iterations, as the small ones do, but a line needs about a thousand to take
-one over ([Chapter 54](54-worlds-of-100000-tokens.md)): the wander is faster
+one over ([Chapter 59](59-worlds-of-100000-tokens.md)): the wander is faster
 than the sweeps, and so not made by them.
 [Chapter 41](41-do-the-brains-matter.md), in Part IV, finds the other half of
 the answer: a world whose brains never change hardly wanders at all.
@@ -223,7 +223,7 @@ steps ([Chapter 23](23-like-next-to-like.md)). A world has the room for
 regions that differ, and nothing to make them.
 
 > [!info] Added later: lines hold patches
-> [Chapter 54](54-worlds-of-100000-tokens.md) finds that lines of descent do
+> [Chapter 59](59-worlds-of-100000-tokens.md) finds that lines of descent do
 > hold regions: two neighbours share a family of 25 iterations back 99 times
 > as often as chance, and the excess reaches about 7 steps; for families of
 > 200 iterations back, about 12. But a patch widens as a random walk on these
@@ -278,7 +278,7 @@ largest hub almost exactly ([Chapter 14](14-how-much-does-the-seed-decide.md)).
   spreads and takes over is a line, and the chapters to come follow lines.
 - **Size is a setting like any other.** The per-agent numbers of a world
   hardly change from 10,000 tokens to 100,000; its shape, its distances, its
-  extremes and the pace of its lines do ([Chapter 54](54-worlds-of-100000-tokens.md)).
+  extremes and the pace of its lines do ([Chapter 59](59-worlds-of-100000-tokens.md)).
   A finding at one size is checked at another before it is trusted.
 
 ## What came next
@@ -302,7 +302,7 @@ planned after them — the rate of mutation, coalitions switched off, the size
 of a brain — are listed in [the contents](../README.md). After
 [Chapter 19](19-what-the-brains-are-like.md), the size and shape of a brain
 moves up: a brain that cannot see is the first thing to change.
-[Chapter 54](54-worlds-of-100000-tokens.md) made the thirty worlds of 100,000
+[Chapter 59](59-worlds-of-100000-tokens.md) made the thirty worlds of 100,000
 tokens this edition of Parts II and III is written from, and asked of them
 the question they were made for: how a line takes over a world ten times the
 size.
@@ -315,7 +315,7 @@ size.
 > [Chapter 48](48-a-world-that-cannot-break.md) and
 > [Chapter 49](49-who-dies-and-why.md) first build a world that cannot break,
 > and [Chapter 50](50-why-evolution-stops.md) asks whether evolution then
-> keeps going. Chapter 52, on the size of a brain, is still to come.
+> keeps going. Chapter 53, on the size of a brain, is still to come.
 
 <!-- turns -->
 ---

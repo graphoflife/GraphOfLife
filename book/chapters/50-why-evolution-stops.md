@@ -109,6 +109,15 @@ for nothing that needs it. Taking the dice away did not help either (the last
 line of the table) — presumably because a brain without random inputs can
 read randomness off a world that is noisy enough.
 
+> [!info] Added later: the dice were inherited, and the game is not solved
+> Two later tests do not support this reading, though the experiment's thesis,
+> that evolution stops, held. Random founder brains already change their stakes
+> as often when their random inputs are redrawn, and in a lottery contest,
+> where dice are worthless, evolved brains use them as much. A strategy written by
+> hand took half of one of these worlds. See
+> [What the probes say about why](#what-the-probes-say-about-why) below and
+> [Chapter 51](51-strategies-written-by-hand.md).
+
 ## Room to go on
 
 If competition for nodes has an answer, evolution needs a game without one.
@@ -120,7 +129,8 @@ things the pilots tried were meant to be such games, and both lacked the one
 thing cooperation needs, a **surplus**: support counted less than a home
 stake, and the yield on returned stakes went to whoever had most partners, so
 it built stars rather than partnerships. What a surplus could look like is
-the subject of the next part of the work.
+the subject of [Chapter 56](56-alliances.md), and other contests are that of
+[Chapter 55](55-another-game.md).
 
 ## The experiment
 
@@ -196,12 +206,118 @@ the same without random inputs. Its tournaments play the eras 0, 100, 200,
 > A value in **bold** differs from the baseline B2.
 <!-- /runs -->
 
-> [!warning] Waiting for the runs
-> The plan, the thesis and the method above were written before any run of
-> Experiment 16 existed; the results follow when they are done.
+## What the twenty worlds did
+
+All twenty worlds lived their 2,000 iterations. Every one improved at first,
+and none went on improving.
+
+<!-- figure stopping/elo -->
+![How much better than the founders, over 2,000 iterations](../figures/stopping/elo.svg)
+
+**How much better than the founders, over 2,000 iterations.** Thin lines are single worlds, thick ones the median world of each condition.
+
+> [!example]- How to make this figure
+> **Runs.** The 20 runs of Experiment 16 — B2 at 10,000 tokens, seeds 1 to 10, 2,000 iterations, a whole world archived every 100 — with and without the random inputs. They are made with `python3 gol_lab.py run E16`.
+>
+> **Data.** From each run's archive, `GraphOfLifeRuns/<run>/archive/world_<iteration>.npz`: the whole world as a checkpoint writes it, kept every 100 iterations.
+>
+> 1. For every pair of the eras 0, 100, 200, 500, 1000, 1500, 2000 play two contests, one in each era's world (`gol_tournament.contest`), and fit one rating per era (`gol_tournament.ratings`).
+>
+> **To make it again:** `python3 book_figures.py stopping`.
+<!-- /figure -->
+
+<!-- figure stopping/steps -->
+![Each era against the one before](../figures/stopping/steps.svg)
+
+**Each era against the one before.** One dot per world: the later era's share of the agents, the mean of its two contests with the era before. The bars are the medians.
+
+> [!example]- How to make this figure
+> **Runs.** The 20 runs of Experiment 16 — B2 at 10,000 tokens, seeds 1 to 10, 2,000 iterations, a whole world archived every 100 — with and without the random inputs. They are made with `python3 gol_lab.py run E16`.
+>
+> **Data.** From each run's archive, `GraphOfLifeRuns/<run>/archive/world_<iteration>.npz`: the whole world as a checkpoint writes it, kept every 100 iterations.
+>
+> 1. Of the contests of the figure above, take those between consecutive eras and average each pair's two.
+>
+> **To make it again:** `python3 book_figures.py stopping`.
+<!-- /figure -->
+
+**The first hundred iterations do almost everything.** Against the founders,
+the brains of iteration 100 held 0.68 of a contested world in the median B2
+world, and 0.69 without random inputs. A little more came between 100 and 200:
+the step score there was 0.56 in both conditions. From 200 to 500 it was
+0.52, and after that a tie: 0.49, 0.50 and 0.50 for the steps from 500 to
+2,000 in B2, and 0.50, 0.49 and 0.49 without random inputs. In ratings, the
+median B2 world stood at +90 at iteration 100, +124 at 200, +126 at 500, +128
+at 1,000 and +120 at 1,500 and 2,000. Without random inputs it stood at +86,
++121, +130, +162, +139 and +123.
+
+**Later is a little worse.** The brains of iteration 2,000 held 0.482 of a
+world against those of iteration 500 in the median B2 world (0.471 to 0.502),
+and less than half in nine of the ten worlds. Without random inputs the
+median was 0.477 (0.452 to 0.519), less than half in seven. The loss is small,
+about two points in a hundred, but it is nearly always a loss. After its first
+few hundred iterations a world does not only stop climbing. It slips back a
+little, as a world would whose brains are worn by mutation faster than
+selection can repair them, once there is little left to select for.
+
+**The dominance tournament agrees.** It crowns the founders, the brains of
+iteration 100, and one or two later eras in every world. The last era crowned
+was iteration 200 in four of the ten B2 worlds, 500 in three, 1,000 in two and
+2,000 in one. Without random inputs it was 100, 200, 500 or 1,000. Contests
+in worlds of 10,000 tokens are less noisy than those of
+[Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md). One contest's
+share varies around its pair's mean by about 0.05, against 0.12 there. A
+tournament of these seven eras would crown 2.3 champions on average if every
+era after the founders were equally good, and the worlds crowned 3.2. The
+difference fits the real step from iteration 100 to 200; it needs no later one.
+
+## The verdict
+
+The thesis holds. In the median world the brains of iteration 2,000 held
+0.482 of a world contested with those of iteration 500, and 0.477 without
+random inputs. Both lie inside 0.45 to 0.55. A world that cannot break still
+stops improving, within its first few hundred iterations, and taking the
+random inputs away does not change that.
+
+## What the probes say about why
+
+The thesis said *that* evolution stops, and it does. The reason this chapter
+gave, that evolution finds the best play and the best play is to roll dice,
+did not survive the tests that came after it.
+
+**The dice were there from the start.** Redraw the random inputs of a
+*founder*, a brain no selection has touched, and its division of stakes
+changes in 49 to 66% of agents. Redrawing them in evolved brains changes 38
+to 59%. Evolution did not find the dice; random brains already roll them. What
+evolution does is turn the senses down. In all but one of the worlds probed,
+sensitivity to an agent's own state falls from 14–22% to 1–9%, to the
+neighbour's state from 13–20% to 5–10%, and to messages from 34–48% to
+11–20%. The exception is a world that pooled the stakes of kin
+(`research/oee/pilots/sense.py`; `LOG.md`, *The dice were there from the
+start*). And in a contest where dice are worthless, a lottery, evolved brains
+roll them as much as under Blotto: 48 to 67%, against 59% in the same world
+under Blotto, both without revolutions ([Chapter 55](55-another-game.md)). The
+brains keep the founders' dice because nothing selects against them, not
+because the game rewards them.
+
+**The game is not solved.** A strategy written by hand, which stakes what it
+can on the poorest neighbour it is sure to take and otherwise keeps
+everything at home, took half of the B2 world of seed 2 from a patch of 5% in
+300 iterations ([Chapter 51](51-strategies-written-by-hand.md)). Its brains
+were the very brains of iteration 2,000 played here. So there is better play
+than the play these worlds end with, and evolution does not reach it, or does
+not keep it.
+
+That changes the question. Evolution stops in B2 not because the game has run
+out of answers, but because the search has. Whether the cause is how fast
+brains change ([Chapter 52](52-how-fast-should-brains-change.md)), how large
+they are (Chapter 53), what the game asks of them
+([Chapters 54](54-the-switches-the-world-was-built-with.md) and
+[55](55-another-game.md)) or what they could do together
+([Chapter 56](56-alliances.md)) is what the rest of Part V asks.
 
 <!-- turns -->
 ---
 
-← [Chapter 49 · Who dies, and why](49-who-dies-and-why.md) · [Contents](../README.md) · [Chapter 51 · How fast should brains change?](51-how-fast-should-brains-change.md) →
+← [Chapter 49 · Who dies, and why](49-who-dies-and-why.md) · [Contents](../README.md) · [Chapter 51 · Strategies written by hand](51-strategies-written-by-hand.md) →
 <!-- /turns -->
