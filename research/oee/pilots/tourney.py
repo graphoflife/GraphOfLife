@@ -130,7 +130,17 @@ def contest(args):
     ids = list(world.G.nodes())
     if not ids:
         return (state_it, a_it, b_it, seed, None, None, 0)
-    is_a = np.array([world.brains[u].brain_id < LABEL_B for u in ids])
+    # A brain made during the contest is of its parent's side. Without mutation only
+    # brains mixed at birth are new, and they draw fresh ids, which fall below LABEL_B
+    # and would all have been counted as the first era's.
+    start = {int(b): int(b) >= LABEL_B for b in blob["brain_ids"]}
+    parent = getattr(world, "brain_parent", {})
+
+    def later(bid):
+        while bid not in start and bid in parent:
+            bid = parent[bid]
+        return start.get(bid, bid >= LABEL_B)
+    is_a = np.array([not later(world.brains[u].brain_id) for u in ids])
     tok = np.array([world.tokens[u] for u in ids], dtype=float)
     return (state_it, a_it, b_it, seed, float(is_a.mean()),
             float(tok[is_a].sum() / max(1.0, tok.sum())), len(ids))

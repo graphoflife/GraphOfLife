@@ -1,0 +1,3 @@
+# Batch Q's mixed-brain worlds judged again, the contest counting a mixed child with its parent's side (2026-10-16).
+pilot GraphOfLifeRuns/.pilots/Q/mix-s1 500:1000,1000:2000,500:2000
+pilot GraphOfLifeRuns/.pilots/Q/mix-s2 500:1000,1000:2000,500:2000
