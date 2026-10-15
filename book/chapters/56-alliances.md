@@ -221,8 +221,13 @@ together is tested against strangers. A **territorial** contest is fairer to
 alliances: each era gets a contiguous half of the world, the half nearest an
 agent drawn at random (`tourney.py --layout halves`), and plays 50 iterations.
 In it, the brains of iteration 1,000 held 0.41 of the world against those of
-iteration 500, in the world of alliances and in the control alike. The later
-brains lost. Whatever they had become, it was not better at war.
+iteration 500, in the world of alliances and in the control alike. A **turf**
+contest goes one step further: the era whose world it is keeps its own brains
+where they are, so its alliances stand as they stood
+([Pilot worlds](../notes/pilot-worlds.md)). On turf the brains of iteration
+1,000 held 0.39 against those of iteration 500 in the world of alliances, and
+0.42 in the control. The later brains lost every way they were played.
+Whatever they had become, it was not better at war, alone or together.
 
 ## What it teaches
 

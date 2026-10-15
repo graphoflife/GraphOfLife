@@ -303,7 +303,8 @@ because the game rewards them.
 **The game is not solved.** A strategy written by hand, which stakes what it
 can on the poorest neighbour it is sure to take and otherwise keeps
 everything at home, took half of the B2 world of seed 2 from a patch of 5% in
-300 iterations ([Chapter 51](51-strategies-written-by-hand.md)). Its brains
+300 iterations, and it or its cousin, the factory, took 40 to 62% of three of
+the ten worlds ([Chapter 51](51-strategies-written-by-hand.md)). The residents
 were the very brains of iteration 2,000 played here. So there is better play
 than the play these worlds end with, and evolution does not reach it, or does
 not keep it.

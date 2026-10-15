@@ -109,6 +109,8 @@ def contest(args):
     # A brain's label is its era: ids below LABEL_B are A's, at or above are B's. Within
     # an era a brain keeps its genotype's id, so clones are still clones (pool=genotype).
     blob["brain_ids"] = np.where(from_b, LABEL_B + B["brain_ids"][pick_b], A["brain_ids"][pick_a]).astype(np.int64)
+    if "tags" in A and "tags" in B:
+        blob["tags"] = np.where(from_b, LABEL_B + B["tags"][pick_b], A["tags"][pick_a]).astype(np.int64)
     blob["parent_brain_ids"] = np.full(n, -1, dtype=np.int64)
     blob["msg_to"] = np.zeros(0, dtype=np.int64)
     blob["msg_from"] = np.zeros(0, dtype=np.int64)
@@ -116,6 +118,8 @@ def contest(args):
     if "active" in A and "active" in B:
         blob["active"] = np.where(from_b, B["active"][pick_b], A["active"][pick_a])
     world = ProtoWorld.from_checkpoint(blob, cfg)
+    from proto import restore_tags
+    restore_tags(world, blob)
     import grow
     grow.restore_active(world, blob)
     world.rng = np.random.RandomState(seed + 7)

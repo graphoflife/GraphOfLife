@@ -364,3 +364,20 @@ probe.py (eras 0/500/1000): B1 without revolutions (S7-s1) repro share 0.50 /
 / 0.00, revolutionary share 0.5 / 1.0 / 1.0, handover 0.5 / 0.0 / 1.0. Gain
 0.001-0.002 in both (blind brains): what changes between 500 and 1,000 without
 revolutions is a few constants (how much a child gets, what it inherits).
+
+## Ten worlds (2026-10-15; invade_B2_2000_ten.json, seed 1 each)
+End shares at 300 (raider / factory / resident): s001 0 / 0 / .080, s002 .395 /
+.477 / .070, s003 .616 / .004 / 0, s004 0 / 0 / .026, s005 0 / 0 / .061, s006 0 /
+.428 / 0, s007 0 / 0 / .084, s008 0 / 0 / .001, s009 0 / 0 / 0, s010 0 / 0 /
+.038. Three worlds of ten fall to one of the two (s003 to the raider only, s006
+to the factory only); seven resist both. Weak points differ between worlds.
+
+## Family tags (2026-10-15; proto tag_rate)
+A tag carried with every brain; a copy keeps its parent's tag; a brain that
+mutates takes a new tag with probability tag_rate (a mutation parameter), so a
+family is all genotypes since one tag. Smoke test (3,000 tokens, 60 its,
+tag_rate 0.05): families of mean size 29 (kin_sense by family) and 68 (pool by
+family) against clone groups of 3-7. Pilots running: G4 (family sense) and G5
+(stakes pooled by family), B2 without revolutions, 10k, seeds 1-2 (jobs_G45.txt).
+The question: given a password and a crowd for free, does evolution find the
+raiders' play, and does it keep going?

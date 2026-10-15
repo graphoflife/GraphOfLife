@@ -181,6 +181,8 @@ def allies(ch: F.Chapter) -> None:
     ch.number("tournaments", table)
     ch.number("halves_1000_vs_500", {w: pair_score(w, 500, 1000, "tourney_T50_all_halves.json")
                                      for w in ("A10k/allies-s1", "A10k/ctrl-s1")})
+    ch.number("turf_1000_vs_500", {w: pair_score(w, 500, 1000, "tourney_T50_all_turf.json")
+                                   for w in ("A10k/allies-s1", "A10k/ctrl-s1")})
 
     worlds = sorted({w for g, _ in ALLY_WORLDS.values() for w in g})
     ch.number("bloc", {w: {t: share_at(rows_of(w), "sideLargest", t) for t in (60, 300, 500, 1000, 2000, 3000)

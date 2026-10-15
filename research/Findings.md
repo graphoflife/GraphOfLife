@@ -156,6 +156,41 @@ otherwise. Last consolidated: 2026-10-15.
 - A rising statistic with a ceiling set by the world, but one convention
   spreading once — not open-ended evolution (the author's objection).
 
+**Strategies written by hand (Ch. 51; manual.py, the invasion test)**
+- In E16's B2 world s002 at 2,000 a 5% patch of raiders (all they can stake on
+  the poorest stranger they are sure to take, else home; a password so they
+  never attack a teammate) reaches 40/50% in 300 iterations, a factory 48/52%,
+  the residents' own brains 1/7%. In s001 both die out. Turtles die of age.
+- Without the password (lone raider) it dies out everywhere (97-122
+  iterations), also in s002: the edge is knowing one's own. A single raider
+  never establishes (0/20 in s002; peaks up to 28 agents): an Allee effect.
+- Ten worlds (one planting each): the raider took 40/62% of two worlds, the
+  factory 43/48% of two (three worlds in all; seed 2 by both); in seven both
+  died out; the control never above 8%. Which strategy wins depends on the
+  world — evolved worlds differ in their weak points.
+- So better play exists, but needs a raid, a password and a crowd at once — a
+  valley single mutations cannot cross (the green-beard problem).
+
+**Other contests (Ch. 55; batch G, engine mode, B2 without revolutions)**
+- Lottery (Tullock): almost nothing learned (+14/+23 Elo at 1,000 vs +100/+139
+  under Blotto); dice still rolled (48–67% vs 59%) where worthless.
+- Stakes pooled by genotype: fighting cut to a third (3.2 vs 6.7–9.0 per 100 a
+  game), clone groups 8–11 (vs 3), slowly growing in one world; ratings stop
+  as under Blotto; on turf later brains lose (0.35).
+- Kin sense alone: no groups (3); one world crept upward (1,000 vs 100: 0.67),
+  the other did not (0.53). The sense is used less than by founders (12–16% vs 26%).
+
+**The original switches (Ch. 54; batch S, engine mode) — partial**
+- The pilot B2 of seed 1 equals the lab's run B2-10000-s001 for all 1,000
+  iterations (agents and links): engine mode reproduces the lab exactly.
+- B1 without revolutions is a mayfly world (births 14–96 per 100 agents an
+  iteration, conquest 70–90, mean age 2–16, worst cut 30–34%); with
+  revolutions B1 has old agents (age 80–160), stars (hub 23–40%). In one world
+  without revolutions the brains of 1,000 beat those of 500 (0.73) — the only
+  clear late improvement of the day; seed 2 and a 3,000-iteration run pending.
+- Gifts on B2's space: harmless; gifts with every unused link lapsing: the
+  network breaks (one agent's loss cuts up to half the world).
+
 **Open (being tested)**
 - Rules without numbers (B3, Ch. 57): all seven of B2's numbers removed at once
   — s1: without alliances extinct, with alliances a peaceful near-tree.

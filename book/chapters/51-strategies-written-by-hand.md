@@ -115,12 +115,47 @@ never takes a node and rarely has a child, and under B2 every agent dies at
 age 100. A strategy that only defends cannot outlive its own bodies.
 
 So in one of two evolved worlds a plain rule took half the world from brains
-that evolution had shaped for 2,000 iterations. The evolved play is not the
-best there is. That settles the question of
+that evolution had shaped for 2,000 iterations.
+
+## Ten worlds
+
+Then the raider, the factory and the control were planted once in each of the
+ten B2 worlds of Experiment 16, on one seed each.
+
+<!-- figure handmade/ten -->
+![Ten evolved worlds, a patch of 5% each](../figures/handmade/ten.svg)
+
+**Ten evolved worlds, a patch of 5% each.** One dot per world, the bar the median of ten.
+
+> [!example]- How to make this figure
+> **Runs.** The B2 worlds of Experiment 16, `B2-10000-s001` … `-s010`, as their archives keep them at iteration 2,000 (`GraphOfLifeRuns/<run>/archive/`). Strategies planted with `python3 research/oee/pilots/manual.py`: in `-s001` and `-s002` every strategy and the control on seeds 1 and 2 (`--strategies factory,turtle,raider,resident --seeds 1,2 --T 300 --patch 0.05`); in all ten worlds the raider, the factory and the control on seed 1; in `-s001` and `-s002` the lone raider on seeds 1 and 2; in `-s002` a single raider, and a single resident, on seeds 1 to 20 (`--patch 0.0002 --T 200`).
+>
+> **Data.** From the worlds the archives keep.
+>
+> 1. Load the world of iteration 2,000 (`GraphOfLife.from_checkpoint`). On seed *s*, draw an agent at random and take the agents nearest to it, step by step, until the patch holds the share asked for (5%, or one agent).
+> 2. Give each agent of that patch the strategy (`manual.py`), or, for the control, a frozen copy of the brain of one agent of the patch drawn at random; neither ever mutates.
+> 3. Play on under the world's own rules and count, after each iteration, the agents carrying the strategy, as a share of all agents.
+>
+> **To make it again:** `python3 book_figures.py handmade`.
+<!-- /figure -->
+
+In three of the ten worlds one of the two strategies took between 40 and 62%
+of the world in 300 iterations. In seed 2 both did. In seed 3 the raider took
+62% while the factory died out, and in seed 6 it was the other way round, the
+factory with 43%. In the other seven worlds both died out. The control, a
+patch of the residents' own brains, never held more than 8%.
+
+So the answer is not one strategy that beats every evolved world. Evolved
+worlds differ in where they are weak. Some can be raided, from where the patch
+happened to land, and most could not be by these two rules. But in three
+worlds out of ten, a plain rule took half or more of the world from brains
+that evolution had shaped for 2,000 iterations, and the residents' own brains
+did nothing of the kind from the same places. The evolved play is not the best
+there is. That answers the question of
 [Chapter 50](50-why-evolution-stops.md#what-the-probes-say-about-why): the game
-had more to give, and evolution had not taken it. The pipeline of the factory
-added little to the raider's success. What the two share is what matters,
-and the next two tests take it apart.
+had more to give, and evolution had not taken it. Whether the factory or the
+raider won depended on the world; the pipeline is no advantage in general.
+What the two share is what matters, and the next two tests take it apart.
 
 ## The password
 
@@ -162,8 +197,9 @@ it dies.
 ## What it teaches
 
 **Evolution stopped short of the top.** The game has better play than the
-play these worlds end with, and a small rule written by hand reaches it in at
-least one world.
+play these worlds end with: a small rule written by hand took half or more of
+three evolved worlds in ten. No rule here beat them all, and evolved worlds
+differ in their weak points.
 
 **The better play needs three things at once.** It needs a way to attack (the
 raid), a way to know one's own (the password), and enough of one's own to

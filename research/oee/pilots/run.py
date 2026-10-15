@@ -61,6 +61,11 @@ def domains(world, same):
     return len(sizes), max(sizes), (sum(s * s for s in sizes) / n if n else 0.0)
 
 
+def P_tags():
+    from proto import P
+    return P.get("tag_rate", 0) > 0
+
+
 def organisation(world):
     out = {}
     bid = {u: world.brains[u].brain_id for u in world.G.nodes()}
@@ -68,6 +73,9 @@ def organisation(world):
     out.update(cloneDomains=c, cloneLargest=big, cloneMean=mean)
     c, big, mean = domains(world, lambda a, b: world.kin_distance(bid[a], bid[b], 4) is not None)
     out.update(kin4Domains=c, kin4Largest=big, kin4Mean=mean)
+    if P_tags():
+        c, big, mean = domains(world, lambda a, b: world.family(bid[a]) == world.family(bid[b]))
+        out.update(familyDomains=c, familyLargest=big, familyMean=mean)
     from proto import pooled
     if pooled():
         c, big, mean = domains(world, lambda a, b: world.same_side(a, b))
@@ -186,6 +194,9 @@ def save_ckpt(world, out, it):
     blob = world.to_checkpoint()
     nodes = sorted(world.G.nodes())
     blob["roots"] = np.array([world.root(u) for u in nodes], dtype=np.int64)
+    from proto import P
+    if P.get("tag_rate", 0) > 0:
+        blob["tags"] = np.array([world.family(world.brains[u].brain_id) for u in nodes], dtype=np.int64)
     import grow
     grow.save_active(world, blob)
     np.savez_compressed(os.path.join(out, f"ckpt_{it:06d}.npz"), **blob)

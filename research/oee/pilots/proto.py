@@ -89,6 +89,11 @@ Mechanics (P keys):
                   the input row of the pooling rules (is this candidate my genotype?).
   kin_sense bool  the same input row — is this candidate's brain identical to mine? —
                   without any pooling: an agent can tell its clones, nothing more.
+  tag_rate float  a family tag carried with every brain: a copy keeps its parent's tag,
+                  and a brain that mutates takes a new tag with this probability, so a
+                  family is all the genotypes descended from one tag (a mutation
+                  parameter; 0 = no tags). kin_sense then tells same family, and
+                  pool="family" pools stakes by family.
   fission  bool   birth by division: an agent whose brain would give a child at least
                   half its tokens divides into two equal halves (the child takes the
                   lower half); anything less is no child. No smallest child is needed:
@@ -116,12 +121,12 @@ DEFAULTS = {"mor": "off", "memory": False, "seek": False, "toll": "pool", "seek_
             "support": False, "fog": False, "support_gain": 1.0, "allies": False,
             "kin_pool": -1, "birth_allies": False, "ally_keep": False,
             "engine": False, "contest": "plurality", "pool": "", "kin_sense": False,
-            "fission": False}
+            "fission": False, "tag_rate": 0.0}
 P: Dict[str, Any] = dict(DEFAULTS)
 
 
 def pooled() -> bool:
-    return bool(P.get("allies")) or int(P.get("kin_pool", -1)) >= 0 or P.get("pool") == "genotype"
+    return bool(P.get("allies")) or int(P.get("kin_pool", -1)) >= 0 or P.get("pool") in ("genotype", "family")
 
 
 def set_proto(proto: Dict[str, Any]) -> None:
@@ -180,9 +185,12 @@ class ProtoWorld(GraphOfLife):
         # Who was allied with whom in the last game (both ways).
         self.last_allies: Dict[int, set] = {}
         self._seekers: List[Tuple[int, int]] = []
+        # Each genotype's family tag (tag_rate > 0): a tag changes only when a brain mutates.
+        self.tag_of: Dict[int, int] = {}
         super().__init__(G_init, cfg, _empty=_empty)
         for b in self.brains.values():
             self.root_of.setdefault(b.brain_id, b.brain_id)
+            self.tag_of.setdefault(b.brain_id, b.brain_id)
 
     # ---- bookkeeping -------------------------------------------------------
     def _count(self, key, n=1):
@@ -191,7 +199,12 @@ class ProtoWorld(GraphOfLife):
     def _new_brain(self):
         b = super()._new_brain()
         self.root_of[b.brain_id] = b.brain_id
+        self.tag_of[b.brain_id] = b.brain_id
         return b
+
+    def family(self, brain_id: int) -> int:
+        """A genotype's family: its tag when tags are on, else the genotype itself."""
+        return self.tag_of.get(brain_id, brain_id) if P.get("tag_rate", 0) > 0 else brain_id
 
     def _mutate_brain(self, brain):
         old = brain.brain_id
@@ -201,6 +214,12 @@ class ProtoWorld(GraphOfLife):
             self.brain_parent[brain.brain_id] = old
             self.brain_depth[brain.brain_id] = self.brain_depth.get(old, 0) + 1
             self._count("mutations")
+            rate = P.get("tag_rate", 0)
+            if rate > 0:
+                fresh = self.rng.random_sample() < rate
+                self.tag_of[brain.brain_id] = brain.brain_id if fresh else self.tag_of.get(old, old)
+                if fresh:
+                    self._count("new_families")
 
     def _forget_agent(self, aid):
         born = self.born_at.get(aid)
@@ -376,8 +395,8 @@ class ProtoWorld(GraphOfLife):
             X = np.vstack([X, [[1.0 if v != u and self.same_side(u, v) else 0.0
                                 for v in candidates]]])
         elif P.get("kin_sense"):
-            own = self.brains[u].brain_id
-            X = np.vstack([X, [[1.0 if v != u and self.brains[v].brain_id == own else 0.0
+            own = self.family(self.brains[u].brain_id)
+            X = np.vstack([X, [[1.0 if v != u and self.family(self.brains[v].brain_id) == own else 0.0
                                 for v in candidates]]])
         return X
 
@@ -388,6 +407,8 @@ class ProtoWorld(GraphOfLife):
             return b in book.get(a, ())
         if P.get("pool") == "genotype":
             return self.brains[a].brain_id == self.brains[b].brain_id
+        if P.get("pool") == "family":
+            return self.family(self.brains[a].brain_id) == self.family(self.brains[b].brain_id)
         k = int(P.get("kin_pool", -1))
         return self.kin_distance(self.brains[a].brain_id, self.brains[b].brain_id, k) is not None
 
@@ -669,16 +690,18 @@ class ProtoWorld(GraphOfLife):
 
     # ---- the engine's own game, with the contest and pooling hooks ------------
     def _weighed(self, v, offers):
-        """The engine's weighing; under pool=genotype, one offer per genotype."""
+        """The engine's weighing; under pool=genotype (or family), one offer per genotype (family)."""
         self._contested = v
         weighed = super()._weighed(v, offers)
-        if P.get("pool") != "genotype" or len(weighed) < 2:
+        if P.get("pool") not in ("genotype", "family") or len(weighed) < 2:
             return weighed
-        own = self.brains[v].brain_id
+        key = (lambda b: self.brains[b].brain_id) if P.get("pool") == "genotype" else \
+              (lambda b: self.family(self.brains[b].brain_id))
+        own = key(v)
         sides: Dict[int, float] = {}
         rep: Dict[int, int] = {}
         for b in sorted(weighed):
-            g = self.brains[b].brain_id
+            g = key(b)
             sides[g] = sides.get(g, 0) + weighed[b]
             if g == own:
                 rep[g] = v
@@ -895,3 +918,11 @@ def make_world(cfg: SimConfig, proto: Dict[str, Any]) -> ProtoWorld:
     G0 = nx.watts_strogatz_graph(n=cfg.resolved_n(), k=cfg.resolved_k(),
                                  p=cfg.rewire_p, seed=stream_seed(cfg))
     return ProtoWorld(G0, cfg)
+
+
+def restore_tags(world: "ProtoWorld", blob: Dict[str, Any]) -> None:
+    """Family tags from a checkpoint written with them (`tags`, one per agent, in `ids` order)."""
+    if "tags" not in blob:
+        return
+    for bid, tag in zip(blob["brain_ids"].tolist(), blob["tags"].tolist()):
+        world.tag_of[int(bid)] = int(tag)
