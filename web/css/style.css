@@ -270,7 +270,37 @@ h3 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.8px; color: v
   font-weight: 600;
 }
 
-.run-label { margin-left: auto; color: var(--muted); font-size: 12px; }
+/* One line, shortened rather than wrapped when the loading bar and the byline
+   share the bar with it. */
+.run-label {
+  margin-left: auto;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* Who made this, at the right end of the bar. Its margin is fixed: the loading
+   bar or the run label before it already pushes everything after it across. */
+.byline {
+  margin-left: 16px;
+  flex-shrink: 0;
+  white-space: nowrap;
+  color: var(--muted);
+  font-size: 12px;
+}
+.byline a { color: inherit; text-decoration: none; border-bottom: 1px dotted var(--border-strong); }
+.byline a:hover { color: var(--text); border-bottom-color: var(--text); }
+/* In two short lines when the bar is crowded: beside a loading bar, and on
+   narrower windows. */
+.job-bar:not([hidden]) ~ .byline { white-space: normal; text-align: right; font-size: 11px; line-height: 1.3; }
+.job-bar:not([hidden]) ~ .byline > span { display: block; }
+@media (max-width: 1000px) {
+  .byline { white-space: normal; text-align: right; font-size: 11px; line-height: 1.3; }
+  .byline > span { display: block; }
+}
 
 /* ---- views ---- */
 .view { display: none; padding: 18px; }
@@ -2341,11 +2371,11 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   .charts { grid-template-columns: minmax(0, 1fr); }
 }
 
-@media (max-width: 760px) {
-  html { scrollbar-gutter: auto; }
-
-  /* The mark and the wordmark keep the first line; the tabs get a row of
-     their own, which slides sideways when they do not all fit. */
+/* The top bar in two rows once one no longer holds the wordmark, the tabs and
+   the byline: the mark, the wordmark and the byline keep the first line; the
+   tabs get a row of their own, which slides sideways when they do not all fit.
+   While something is loading, the bar has the byline's place. */
+@media (max-width: 900px) {
   .topbar { flex-wrap: wrap; gap: 4px 10px; padding: 8px 12px 0; }
   .tabs {
     order: 3;
@@ -2363,6 +2393,13 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   .job-bar { order: 2; margin-left: auto; max-width: calc(100vw - 196px); }
   .job-track { flex-basis: 40px; }
   .run-label { display: none; }
+  .byline { order: 1; margin-left: auto; }
+  .job-bar:not([hidden]) ~ .byline { display: none; }
+}
+
+@media (max-width: 760px) {
+  html { scrollbar-gutter: auto; }
+
 
   .view { padding: 12px 10px; }
   .panel { padding: 12px; }
