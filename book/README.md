@@ -170,6 +170,7 @@ everything can be checked with it.
 - [How alike at a distance](notes/correlation-function.md)
 - [What the viewer can colour by](notes/viewer-colours.md)
 - [Pilot worlds](notes/pilot-worlds.md)
+- [The invasion test](notes/invasion-test.md)
 
 **Notes · statistics**
 

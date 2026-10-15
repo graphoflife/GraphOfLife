@@ -40,6 +40,16 @@ If the game has an answer, the first picture should hold over a wide range of
 rates. If evolution stops for another reason — because damage keeps pace with
 repair — the second or third should.
 
+> [!info] Added later: the game is not solved
+> Since this was written, Experiment 16 showed that the brains of iteration
+> 2,000 are a little *worse* than those of iteration 500 in nine of ten B2
+> worlds ([Chapter 50](50-why-evolution-stops.md#what-the-twenty-worlds-did)),
+> and a strategy written by hand took half of one of those worlds
+> ([Chapter 51](51-strategies-written-by-hand.md)). Both speak against the
+> first picture and for the second: what the brains could do is not what they
+> end up doing, and damage seems to keep pace with repair. The thesis below
+> was written before either result and is kept as it was.
+
 ## Why the question moved
 
 This experiment was first planned on the baseline B1, to ask whether three

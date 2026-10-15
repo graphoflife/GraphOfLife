@@ -35,7 +35,7 @@ def run(path, it, sample=300, rng=np.random.RandomState(0)):
     groups = {"own state": ["own_tokens", "own_degree", "own_token_quantiles", "own_degree_quantiles"],
               "its state": ["its_tokens", "its_degree", "its_token_quantiles", "its_degree_quantiles"],
               "messages": ["message_to_self", "message_to_it", "message_from_it", "message_its_own"],
-              "noise": ["noise"], "memory": ["stake_from_it", "stake_to_it"]}
+              "noise": ["noise"], "memory": ["stake_from_it", "stake_to_it"], "kin": ["same_side"]}
     nodes = sorted(w.G.nodes())
     nodes = [nodes[i] for i in rng.choice(len(nodes), min(sample, len(nodes)), replace=False)]
     counts = {g: 0 for g in groups}; used = 0
@@ -56,6 +56,8 @@ def run(path, it, sample=300, rng=np.random.RandomState(0)):
                 a, b, _ = lay[name]
                 if name == "noise":
                     X2[a:b] = rng.uniform(-2, 2, size=X2[a:b].shape)
+                elif name == "same_side":
+                    X2[a:b, 1:] = 1.0 - X2[a:b, 1:]       # every neighbour's kinship flipped
                 elif name.startswith("message") or name.startswith("stake"):
                     X2[a:b] = 0
                 else:

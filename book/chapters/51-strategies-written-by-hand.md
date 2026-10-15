@@ -31,6 +31,7 @@ could get there.
 
 ## The invasion test
 
+The method has a note of its own ([The invasion test](../notes/invasion-test.md)).
 Take an evolved world: one of the B2 worlds of
 [Experiment 16](50-why-evolution-stops.md#the-runs), 10,000 tokens, as it
 stood at iteration 2,000. Choose a **patch**: an agent at random and the
@@ -79,6 +80,105 @@ Teammates know each other by what they write. The first four numbers of every
 message a strategy sends are a fixed signature, and the fifth carries its
 distance. This is a password, not a privilege: an evolved brain could write
 the same numbers.
+
+## What the strategies did
+
+<!-- figure handmade/shares -->
+![The share of two evolved worlds held by a strategy](../figures/handmade/shares.svg)
+
+**The share of two evolved worlds held by a strategy.** One line per planting: two seeds in each of two worlds, the world of seed 1 dashed, of seed 2 solid. Grey is the control, a patch of the residents' own brains planted in the same place.
+
+> [!example]- How to make this figure
+> **Runs.** The B2 worlds of Experiment 16, `B2-10000-s001` … `-s010`, as their archives keep them at iteration 2,000 (`GraphOfLifeRuns/<run>/archive/`). Strategies planted with `python3 research/oee/pilots/manual.py`: in `-s001` and `-s002` every strategy and the control on seeds 1 and 2 (`--strategies factory,turtle,raider,resident --seeds 1,2 --T 300 --patch 0.05`); in all ten worlds the raider, the factory and the control on seed 1; in `-s001` and `-s002` the lone raider on seeds 1 and 2; in `-s002` a single raider, and a single resident, on seeds 1 to 20 (`--patch 0.0002 --T 200`).
+>
+> **Data.** From the worlds the archives keep.
+>
+> 1. Load the world of iteration 2,000 (`GraphOfLife.from_checkpoint`). On seed *s*, draw an agent at random and take the agents nearest to it, step by step, until the patch holds the share asked for (5%, or one agent).
+> 2. Give each agent of that patch the strategy (`manual.py`), or, for the control, a frozen copy of the brain of one agent of the patch drawn at random; neither ever mutates.
+> 3. Play on under the world's own rules and count, after each iteration, the agents carrying the strategy, as a share of all agents.
+>
+> **To make it again:** `python3 book_figures.py handmade`.
+<!-- /figure -->
+
+**In one world, the strategies took half of it.** In the world of seed 2 the
+factory grew from 5% of the agents to 48 and 52% in 300 iterations, and it was
+still growing when the test stopped. The raider did nearly as well, with 40
+and 50%. The control, a patch of the residents' own brains in the same place,
+ended with 7 and 1%.
+
+**In the other world, they died out.** In the world of seed 1 the factory and
+the raider grew a little at first, to 6 or 7% of the world, then shrank, and
+were gone after 135 to 196 iterations. The control there ended with 8 and 5%.
+
+**The turtle died out everywhere** within about a hundred iterations. It
+never takes a node and rarely has a child, and under B2 every agent dies at
+age 100. A strategy that only defends cannot outlive its own bodies.
+
+So in one of two evolved worlds a plain rule took half the world from brains
+that evolution had shaped for 2,000 iterations. The evolved play is not the
+best there is. That settles the question of
+[Chapter 50](50-why-evolution-stops.md#what-the-probes-say-about-why): the game
+had more to give, and evolution had not taken it. The pipeline of the factory
+added little to the raider's success. What the two share is what matters,
+and the next two tests take it apart.
+
+## The password
+
+The raider differs from a resident in two ways. It attacks the poorest
+neighbour it is sure to take, and it knows its teammates and never attacks
+them. Which of the two wins?
+
+The **lone raider** keeps the first and drops the second. It attacks the
+poorest neighbour it is sure to take, whoever that is. It writes no password
+and joins its children to nobody by choice. Planted in the same patches, it
+grew a little at first, from 153 or 177 agents to about 200, and then died
+out in all four plantings, within 97 to 122 iterations. That includes the
+world where the raider with its password took half.
+
+The rule of attack is not what wins; knowing one's own is. A raider that
+cannot tell its own spends its attacks on its own. Inside the patch its
+poorest neighbour is usually a teammate, often its own newborn child, and
+taking it gains nothing. Meanwhile the bodies it lives in grow old and die,
+as the turtle's did.
+
+## One raider alone
+
+Evolution makes a new strategy one agent at a time: a mutation changes one
+brain, and the new brain must spread from there. So the last test plants a
+single raider, a patch of one agent, in the world where a patch of 5% took
+half. It ran on twenty seeds for 200 iterations, against a single resident
+planted the same way.
+
+The single raider died out every time. It grew larger than the single
+resident before it went, with peaks of up to 28 agents against at most 5, and
+it lived longer, a median of about 34 iterations against 21. But it never
+took hold. The single resident never did either: one brain in three thousand
+is easily lost.
+
+A raider needs a crowd. With a few hundred teammates who know one another it
+takes half a world. Alone, or among teammates it cannot tell from strangers,
+it dies.
+
+## What it teaches
+
+**Evolution stopped short of the top.** The game has better play than the
+play these worlds end with, and a small rule written by hand reaches it in at
+least one world.
+
+**The better play needs three things at once.** It needs a way to attack (the
+raid), a way to know one's own (the password), and enough of one's own to
+start with (a crowd). Each alone is worth nothing or less: a raid without a
+password is spent on one's own, and a password without a crowd is a secret
+nobody else knows. Evolution changes one brain a little at a time, and every
+step on the way must pay. A strategy whose parts pay only together is a
+valley evolution cannot cross. This is the old problem of the **green
+beard**, a gene that would have to make its bearers both show a sign and
+favour those who show it.
+
+**What would let evolution get there** is what the following chapters try: a
+sense of one's own given for free, stakes that count together by lineage
+([Chapter 55](55-another-game.md)), and alliances, where knowing one's own is
+a decision two agents make together ([Chapter 56](56-alliances.md)).
 
 <!-- turns -->
 ---

@@ -677,6 +677,11 @@
           "id": "n-pilot-worlds",
           "title": "Pilot worlds",
           "file": "notes/pilot-worlds.md"
+        },
+        {
+          "id": "n-invasion-test",
+          "title": "The invasion test",
+          "file": "notes/invasion-test.md"
         }
       ]
     },

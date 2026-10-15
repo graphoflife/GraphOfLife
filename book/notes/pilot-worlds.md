@@ -66,7 +66,16 @@ The brains can be dealt in two ways:
   starts as one territory. This is the fairer contest for anything that
   depends on neighbours of one kind standing together, such as an alliance,
   which a coin per agent cuts through
-  ([Chapter 56](../chapters/56-alliances.md)).
+  ([Chapter 56](../chapters/56-alliances.md));
+- **turf** (`--layout turf`): halves, and the era whose world the contest is
+  played in keeps its own brains where they are on its half, so its clones
+  still sit next to clones and its allies next to allies. Each era plays once
+  at home in this way and once away, where its brains are drawn at random.
+  It is the contest for what brains are as a group
+  ([Chapter 55](../chapters/55-another-game.md)).
+
+Within an era a brain keeps its genotype's number in a contest, so clones
+are still clones, which matters where stakes are pooled by genotype.
 
 ## How far to trust one
 

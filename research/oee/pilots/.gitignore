@@ -2,3 +2,4 @@ jobs_*.txt
 jobq_*.log
 __pycache__/
 when_done_*.log
+tourney_*.log

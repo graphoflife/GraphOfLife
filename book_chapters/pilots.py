@@ -366,3 +366,201 @@ def numberless(ch: F.Chapter) -> None:
             entry["mean_age"] = float(np.mean([r["meanAge"] for r in tail]))
         out[w] = entry
     ch.number("worlds", out)
+
+
+# ---------------------------------------------------------------------------
+# Chapters 54 and 55 · The original switches, and other contests
+# ---------------------------------------------------------------------------
+
+SWITCHES = {"B1": "S6-B1", "B1, no revolutions": "S7-B1norev", "B2": "S0-B2", "B2, no revolutions": "S1-norev",
+            "gifts": "S2-gifts", "gifts, all lapse": "S3-giftslapse", "all lapse": "S4-lapse",
+            "estates by wealth": "S5-bytokens"}
+GAMES = {"Blotto": "S1-norev", "lottery": "G1-lottery", "by genotype": "G2-genotype", "kin sense": "G3-kinsense"}
+SEEDS = (1, 2)
+B2_SET = ("hidden_layers=16 message_amount=8 message_prepass=false allow_handover=false "
+          "mutate_on_replication=true incumbency=1.5 birth_links=2 mend_on_death=true prune_needs=2 "
+          "valence=8 keep_home=0.3 max_age=100 min_child=10")
+SWITCH_RUNS = ("Pilot worlds of `research/oee/pilots/run.py` in the engine's own code (`--proto "
+               "engine=true`), kept in `GraphOfLifeRuns/.pilots/S`, two seeds each (`-s1`, `-s2`), at "
+               "10,000 tokens for 1,000 iterations with a whole world every 100 (`--ckpt 100`): B1 "
+               "(`S6-B1`, the settings of Parts II and III), B1 without revolutions (`S7-B1norev`), "
+               f"B2 (`S0-B2`: `--set {B2_SET}`), B2 without revolutions (`S1-norev`), B2 with gifts "
+               "(`S2-gifts`: `allow_gifting=true prune_after=reproduction inactive_window=iteration`), "
+               "the same with every unused link lapsing (`S3-giftslapse`: also `prune_needs=0`), B2 "
+               "with every unused link lapsing (`S4-lapse`) and B2 with estates shared by wealth "
+               "(`S5-bytokens`: `redistribution=by_tokens`). The jobs are listed in "
+               "`research/oee/pilots/jobs_S.txt`.")
+GAME_RUNS = ("Pilot worlds of `research/oee/pilots/run.py` in the engine's own code, kept in "
+             "`GraphOfLifeRuns/.pilots/S`, two seeds each, at 10,000 tokens for 1,000 iterations with a "
+             f"whole world every 100: B2 without revolutions (`--set {B2_SET} allow_revolutions=false "
+             "--proto engine=true`, worlds `S1-norev`), the same with a lottery contest (`contest=lottery`, "
+             "`G1-lottery`), with stakes pooled by genotype (`pool=genotype`, `G2-genotype`) and with "
+             "only the sense of which neighbours carry one's own brain (`kin_sense=true`, `G3-kinsense`).")
+TOURNEY_STEPS = [
+    "For every pair of the eras 0, 100, 200, 500 and 1,000 play four contests, two in each era's world: "
+    "every agent gets a brain drawn at random from one era or the other, mutation is switched off, and "
+    "20 iterations are played under the world's own rules (`research/oee/pilots/tourney.py --T 20 --reps 2`).",
+    "Fit one rating per era (Bradley–Terry, `research/oee/pilots/elo.py`), the founders at 0."]
+
+
+def _set_worlds(table: Dict[str, str]) -> Dict[str, List[str]]:
+    return {label: [f"S/{name}-s{s}" for s in SEEDS] for label, name in table.items()}
+
+
+def _finished(world: str) -> bool:
+    rows = rows_of(world)
+    return bool(rows) and (rows[-1]["it"] >= 1000 or rows[-1]["nodes"] <= 1)
+
+
+def _window(world: str, lo: int = 500, hi: int = 1001) -> List[Dict[str, Any]]:
+    return [r for r in rows_of(world) if lo <= r["it"] < hi]
+
+
+def _health(world: str) -> Dict[str, float]:
+    h = [r for r in health_rows(_window(world)) if r["nodes"] > 20]
+    if not h:
+        return {}
+    return {"nodeCut": float(np.median([r["nodeCutRisk"] for r in h])),
+            "edgeCut": float(np.median([r["cutRisk"] for r in h])),
+            "core2": float(np.median([r["coreShare"] for r in h])),
+            "links": float(np.median([r["meanDegree"] for r in h])),
+            "dimension": float(np.median([r["dimension"] for r in h])),
+            "hub": float(np.median([r["maxDegreeShare"] for r in h]))}
+
+
+def _life(world: str) -> Dict[str, float]:
+    rows = [r for r in _window(world) if r["nodes"] > 20]
+    if not rows:
+        return {}
+    rate = lambda cs: float(np.mean([100 * sum(r.get(c, 0) for c in cs) / r["nodes"] for r in rows]))
+    deaths = sum(r.get("deaths", 0) for r in rows)
+    return {"agents": float(np.median([r["nodes"] for r in rows])), "births": rate(("births",)),
+            "conquests": rate(("conquests",)), "revolutions": rate(("revolutions",)),
+            "starved": rate(("starved_r", "starved_g")), "cut_off": rate(("orphaned_r", "orphaned_g")),
+            "mean_age": float(np.mean([r["meanAge"] for r in rows])),
+            "lifespan": float(sum(r.get("deathAgeSum", 0) for r in rows) / deaths) if deaths else float("nan"),
+            "clone_mean": float(np.mean([r["cloneMean"] for r in rows if "cloneMean" in r])),
+            "genotypes": float(np.mean([r["genotypes"] for r in rows]))}
+
+
+def _tourney(world: str) -> Dict[str, Any]:
+    got = ratings(world)
+    if got is None:
+        return {}
+    eras, elo = got
+    return {"eras": eras, "elo": elo, "1000_vs_500": pair_score(world, 500, 1000),
+            "1000_vs_100": pair_score(world, 100, 1000),
+            "steps": [pair_score(world, a, b) for a, b in zip(eras, eras[1:])]}
+
+
+def _bar_grid(ch: F.Chapter, name: str, labels: List[str], worlds: Dict[str, List[str]], title: str,
+              caption: str, runs: str) -> None:
+    from book_chapters.oee import SPACE_BAR, dots
+    measured = {label: [_health(w) for w in worlds[label]] for label in labels}
+    panels = []
+    for stat, words, lo, hi, log in SPACE_BAR:
+        values = {label: [max(m[stat], 1e-4) if log else m[stat] for m in measured[label] if m]
+                  for label in labels}
+        guides = [{"axis": "y", "at": v, "label": "the bar"} for v in (lo, hi) if v is not None]
+        panels.append(dots(stat, labels, values, title=words,
+                           y={"label": words, **({"log": True} if log else {"min": 0})}, guides=guides))
+    ch.grid(name, panels, columns=2, title=title, caption=caption,
+            recipe=recipe(runs, "each world's `series.jsonl`", [
+                "Of the rows from iteration 500 to 1,000 that measured the network (every 10th), take "
+                "the median of the worst share of the others one agent's loss cuts off (`nodeCutRisk`), "
+                "the same for one link (`cutRisk`), the 2-core (`coreShare`), links per agent "
+                "(`meanDegree`), the ball dimension and the best-connected agent's share "
+                "(`maxDegreeShare`)."]))
+
+
+@chapter
+def switches(ch: F.Chapter) -> None:
+    worlds = _set_worlds(SWITCHES)
+    every = [w for ws in worlds.values() for w in ws]
+    if not all(_finished(w) for w in every):
+        return
+    labels = list(SWITCHES)
+    _bar_grid(ch, "bar", labels, worlds, "Each switch against the health bar",
+              ("One dot per world, at its median over iterations 500 to 1,000; the bar is the median of "
+               "the two; dashed lines are the health bar of Chapter 46. Cut shares and the "
+               "best-connected agent's share are drawn on logarithmic axes, a cut of nothing at 0.0001."),
+              SWITCH_RUNS)
+    from book_chapters.oee import dots
+    life = {label: [_life(w) for w in worlds[label]] for label in labels}
+    panels = [dots("conquests", labels, {l: [m["conquests"] for m in life[l] if m] for l in labels},
+                   title="nodes taken per 100 agents per game", y={"label": "per 100 agents", "min": 0}),
+              dots("births", labels, {l: [m["births"] for m in life[l] if m] for l in labels},
+                   title="births per 100 agents per iteration", y={"label": "per 100 agents", "min": 0}),
+              dots("age", labels, {l: [m["mean_age"] for m in life[l] if m] for l in labels},
+                   title="mean age of the agents", y={"label": "iterations", "log": True}),
+              dots("agents", labels, {l: [m["agents"] for m in life[l] if m] for l in labels},
+                   title="agents", y={"label": "agents", "min": 0})]
+    ch.grid("life", panels, columns=2, title="How each switch changes a world's life",
+            caption="One dot per world, the mean or median over iterations 500 to 1,000; the bar is the median of the two.",
+            recipe=recipe(SWITCH_RUNS, "each world's `series.jsonl`", [
+                "Of the rows from iteration 500 to 1,000: the nodes taken (`conquests`) and the births per "
+                "100 agents, averaged; the mean age (`meanAge`), averaged; the agents (`nodes`), median."]))
+    played = {label: [_tourney(w) for w in worlds[label]] for label in labels}
+    if all(p for ps in played.values() for p in ps):
+        panels = [dots("elo1000", labels, {l: [p["elo"][-1] for p in played[l]] for l in labels},
+                       title="rating of iteration 1,000 against the founders", y={"label": "Elo"},
+                       guides=[{"axis": "y", "at": 0, "label": "the founders"}]),
+                  dots("late", labels, {l: [p["1000_vs_500"] for p in played[l]] for l in labels},
+                       title="iteration 1,000 against iteration 500", y={"label": "share of the world"},
+                       guides=[{"axis": "y", "at": 0.5, "label": "a tie"}])]
+        ch.grid("elo", panels, columns=1, title="Does any switch keep evolution going?",
+                caption=("One dot per world. Top: the rating of the brains of iteration 1,000 against the "
+                         "founders'. Bottom: their share of a world contested with the brains of "
+                         "iteration 500 of the same world."),
+                recipe=recipe(SWITCH_RUNS, "each world's checkpoints, `ckpt_<iteration>.npz`", TOURNEY_STEPS))
+        ch.number("tournaments", played)
+    ch.number("life", life)
+    ch.number("health", {label: [_health(w) for w in worlds[label]] for label in labels})
+
+
+@chapter
+def games(ch: F.Chapter) -> None:
+    worlds = _set_worlds(GAMES)
+    every = [w for ws in worlds.values() for w in ws]
+    if not all(_finished(w) for w in every):
+        return
+    labels = list(GAMES)
+    colours = dict(zip(labels, (GREY, RED, BLUE, GREEN)))
+    for name, key, title, ylabel, log in (("fighting", "conquests", "How much changes hands",
+                                           "nodes taken per 100 agents per game", False),
+                                          ("groups", "cloneMean", "How large a group of clones is",
+                                           "agents in an agent's group of clones, on average", True)):
+        series_ = []
+        for label in labels:
+            for k, w in enumerate(worlds[label]):
+                rows = [r for r in rows_of(w) if key in r]
+                its = np.array([r["it"] for r in rows], dtype=float)
+                vals = np.array([(100 * r[key] / r["nodes"]) if key == "conquests" else r[key] for r in rows])
+                x, y = F.thin(its, vals, 50 if key == "conquests" else 10)
+                series_.append({"label": label if k == 0 else None, "x": x.tolist(), "y": y.tolist(),
+                                "colour": colours[label], "width": 1.5})
+        ch.figure(name, title=title, x={"label": "iteration"}, y={"label": ylabel, **({"log": True} if log else {"min": 0})},
+                  series=series_,
+                  caption=("One line per world, means over 50 iterations." if key == "conquests" else
+                           "One line per world, every 10th iteration: the agents of an agent's connected "
+                           "group of neighbours with the same brain, averaged over agents."),
+                  recipe=recipe(GAME_RUNS, "each world's `series.jsonl`", [
+                      "Count the nodes whose winner was not their owner in each game, per 100 agents."
+                      if key == "conquests" else
+                      "Every 10th iteration, join neighbours with the same brain and take the size of each "
+                      "agent's group, averaged over agents (`organisation`, `cloneMean`)."]))
+    played = {label: [_tourney(w) for w in worlds[label]] for label in labels}
+    if all(p for ps in played.values() for p in ps):
+        series_ = []
+        for label in labels:
+            for k, p in enumerate(played[label]):
+                series_.append({"label": label if k == 0 else None, "x": p["eras"], "y": p["elo"],
+                                "colour": colours[label], "width": 2})
+        ch.figure("elo", title="How much better than the founders",
+                  x={"label": "iteration the brains are taken from"}, y={"label": "Elo rating against the founders"},
+                  series=series_, guides=[{"axis": "y", "at": 0, "label": "the founders"}],
+                  caption="One line per world, its eras played against each other, four contests per pair.",
+                  recipe=recipe(GAME_RUNS, "each world's checkpoints, `ckpt_<iteration>.npz`", TOURNEY_STEPS))
+        ch.number("tournaments", played)
+    ch.number("life", {label: [_life(w) for w in worlds[label]] for label in labels})
+    ch.number("health", {label: [_health(w) for w in worlds[label]] for label in labels})

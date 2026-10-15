@@ -91,10 +91,15 @@ fought over by neighbours is such a setting.
 > first hundred iterations, and later eras neither beat the ones before them
 > nor run in place: they tie
 > ([Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md)).
-> [Chapter 50](50-why-evolution-stops.md) proposes why: like Blotto, the
+> [Chapter 50](50-why-evolution-stops.md) proposed why: like Blotto, the
 > game has a mixed-strategy answer — be unpredictable — and evolution finds
-> it quickly, using the brains' random inputs as dice; against it, nothing
-> does better. Experiment 16 tests this in a world that cannot break.
+> it quickly, using the brains' random inputs as dice. Experiment 16 found
+> that evolution does stop in a world that cannot break, but the reason did
+> not survive the tests that followed. Random founder brains already roll
+> those dice, and a strategy written by hand took half of an evolved world
+> ([Chapter 51](51-strategies-written-by-hand.md)). The game is not solved;
+> evolution stops short of better play that needs several agents acting
+> together.
 
 ## Networks
 

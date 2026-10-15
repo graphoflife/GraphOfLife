@@ -79,7 +79,7 @@ Mechanics (P keys):
                   (incumbency, keep_home, mutate_on_replication, birth_links, ... and
                   the switches gifting, handover, revolutions, redistribution), with
                   only the bookkeeping added. The other keys above are then unused,
-                  except the three below. (equiv.py checks it against the engine.)
+                  except the four below. (equiv.py checks it against the engine.)
   contest  str    "plurality" (the engine's: the largest stake takes the node) or
                   "lottery": the node goes to a staker drawn with probability in
                   proportion to its stake as the game weighs it (Tullock's contest).
@@ -89,6 +89,10 @@ Mechanics (P keys):
                   the input row of the pooling rules (is this candidate my genotype?).
   kin_sense bool  the same input row — is this candidate's brain identical to mine? —
                   without any pooling: an agent can tell its clones, nothing more.
+  fission  bool   birth by division: an agent whose brain would give a child at least
+                  half its tokens divides into two equal halves (the child takes the
+                  lower half); anything less is no child. No smallest child is needed:
+                  a child is never poorer than the parent it leaves. (Engine mode.)
 """
 from __future__ import annotations
 
@@ -111,7 +115,8 @@ DEFAULTS = {"mor": "off", "memory": False, "seek": False, "toll": "pool", "seek_
             "keep_one": False, "memory_len": 0, "keep_frac": 0.0,
             "support": False, "fog": False, "support_gain": 1.0, "allies": False,
             "kin_pool": -1, "birth_allies": False, "ally_keep": False,
-            "engine": False, "contest": "plurality", "pool": "", "kin_sense": False}
+            "engine": False, "contest": "plurality", "pool": "", "kin_sense": False,
+            "fission": False}
 P: Dict[str, Any] = dict(DEFAULTS)
 
 
@@ -682,6 +687,16 @@ class ProtoWorld(GraphOfLife):
         if len(sides) < len(weighed):
             self._count("pooled_contests")
         return {rep[g]: total for g, total in sides.items()}
+
+    def _endowment(self, parent, tokens, wanted):
+        if not P.get("fission"):
+            return super()._endowment(parent, tokens, wanted)
+        half = tokens // 2
+        if half < 1 or wanted < half:
+            return 0
+        if self.cfg.valence and self.G.degree(parent) >= self.cfg.valence:
+            return 0
+        return half
 
     def _resolve_winner(self, offers, revolutionaries, rng):
         if P.get("contest") == "lottery":

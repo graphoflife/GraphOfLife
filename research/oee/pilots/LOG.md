@@ -323,3 +323,44 @@ own newborn. Evolution would have to find the signature and its reading at once
 Next (running): G3, B2 without revolutions + kin_sense (one input row: is this
 candidate's brain identical to mine? no pooling), seeds 1-2 (jobs_G3.txt).
 Compare S1 (no sense), G3 (sense), G2 (sense + pooling).
+
+## Number-free candidates, first smoke tests (2026-10-15; one seed, 5,000 tokens, 150 iterations)
+proto `fission` (birth by division: a brain that would give at least half its
+tokens divides into two equal halves; less is no child), engine mode, one
+hidden layer of 16, MOR, mending, revolutions on.
+- division alone (+ gifts, every unused link lapsing, nothing kept, 3,000
+  tokens): starves out by 60 iterations (32 agents): division stops missiles
+  but not agents staking themselves to death.
+- division + half kept at home + gifts/lapse: lives (4,228 agents at 150),
+  median token 1 (half of one token is one: a world of single-token agents that
+  can never divide), births falling (947 -> 278 a game), no starvation, 2.9 links.
+- division + half kept at home + B2's space (birth links 2, prune_needs 2): births
+  stop (median token 1), nobody dies (no age limit): a frozen world, mean age
+  rising 21 -> 132.
+=> Number-free replacements must also stop tokens fragmenting into units and
+must keep turnover going once nobody dies of age.
+
+## B1 without revolutions keeps improving? (2026-10-15, lead)
+Coin tournament (T 20, eras 0/100/200/500/1000) of S7-B1norev-s1: +145 +79
++177 +275; 1000 vs 500 = 0.726 (0.90 0.63 0.68 0.70), 1000 vs 200 = 0.819 (all
+four > 0.5). B1 with revolutions (S6-s2): +352 +378 +352 +312, 1000 vs 500 0.414.
+B1 without revolutions is a mayfly world (84 of 100 nodes change hands a game,
+28 births per 100 agents an iteration, mean age 7, lifetime 3; dimension 2.1, a
+worst cut of 30-34%): many more generations per iteration, and every brain
+mutates after every game (no MOR). Single contests are noisy (0.02-1.00).
+Checking: S7-B1norev-s2 moved to the front; a long run, seed 3, 3,000
+iterations (GraphOfLifeRuns/.pilots/L/B1norev-long-s3).
+
+## A single raider never starts (2026-10-15; invade_B2_2000_single.json)
+World s002 at 2,000 (where a 5% patch of raiders takes 40-50%), a patch of ONE
+agent, seeds 1-20, 200 iterations: the raider dies out in 20/20 (lived 2-180
+iterations, peak 1-28 agents, median life ~34); a frozen resident in 20/20 too
+(lived 2-134, peak 1-5). The raider grows larger before it dies, but never
+establishes: an Allee effect. A raider needs a crowd of teammates and a way to
+know them - three things at once that no single mutation makes.
+probe.py (eras 0/500/1000): B1 without revolutions (S7-s1) repro share 0.50 /
+0.50 / 0.09, links 0.75 / 1.0 / 1.0, spread 0.45 / 0.98 / 0.99, home 0.29 / 0.32 /
+0.31, handover 0.50 / 0.97 / 0.50; B1 with revolutions (S6-s1) repro 0.50 / 0.00
+/ 0.00, revolutionary share 0.5 / 1.0 / 1.0, handover 0.5 / 0.0 / 1.0. Gain
+0.001-0.002 in both (blind brains): what changes between 500 and 1,000 without
+revolutions is a few constants (how much a child gets, what it inherits).

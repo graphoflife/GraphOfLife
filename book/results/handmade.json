@@ -1,0 +1,266 @@
+{
+ "chapter": "handmade",
+ "numbers": {
+  "first": [
+   {
+    "run": "B2-10000-s001",
+    "seed": 1,
+    "strategy": "factory",
+    "patch": 177,
+    "end": 0.0,
+    "last": 196
+   },
+   {
+    "run": "B2-10000-s001",
+    "seed": 2,
+    "strategy": "factory",
+    "patch": 177,
+    "end": 0.0,
+    "last": 135
+   },
+   {
+    "run": "B2-10000-s001",
+    "seed": 1,
+    "strategy": "turtle",
+    "patch": 177,
+    "end": 0.0,
+    "last": 100
+   },
+   {
+    "run": "B2-10000-s001",
+    "seed": 2,
+    "strategy": "turtle",
+    "patch": 177,
+    "end": 0.0,
+    "last": 100
+   },
+   {
+    "run": "B2-10000-s001",
+    "seed": 1,
+    "strategy": "raider",
+    "patch": 177,
+    "end": 0.0,
+    "last": 175
+   },
+   {
+    "run": "B2-10000-s001",
+    "seed": 2,
+    "strategy": "raider",
+    "patch": 177,
+    "end": 0.0,
+    "last": 148
+   },
+   {
+    "run": "B2-10000-s001",
+    "seed": 1,
+    "strategy": "resident",
+    "patch": 177,
+    "end": 0.08026030368763558,
+    "last": 300
+   },
+   {
+    "run": "B2-10000-s001",
+    "seed": 2,
+    "strategy": "resident",
+    "patch": 177,
+    "end": 0.04852263486039577,
+    "last": 300
+   },
+   {
+    "run": "B2-10000-s002",
+    "seed": 1,
+    "strategy": "factory",
+    "patch": 153,
+    "end": 0.477088948787062,
+    "last": 300
+   },
+   {
+    "run": "B2-10000-s002",
+    "seed": 2,
+    "strategy": "factory",
+    "patch": 153,
+    "end": 0.5145914396887159,
+    "last": 300
+   },
+   {
+    "run": "B2-10000-s002",
+    "seed": 1,
+    "strategy": "turtle",
+    "patch": 153,
+    "end": 0.0,
+    "last": 99
+   },
+   {
+    "run": "B2-10000-s002",
+    "seed": 2,
+    "strategy": "turtle",
+    "patch": 153,
+    "end": 0.0,
+    "last": 94
+   },
+   {
+    "run": "B2-10000-s002",
+    "seed": 1,
+    "strategy": "raider",
+    "patch": 153,
+    "end": 0.395497311827957,
+    "last": 300
+   },
+   {
+    "run": "B2-10000-s002",
+    "seed": 2,
+    "strategy": "raider",
+    "patch": 153,
+    "end": 0.5003579098067287,
+    "last": 300
+   },
+   {
+    "run": "B2-10000-s002",
+    "seed": 1,
+    "strategy": "resident",
+    "patch": 153,
+    "end": 0.07039274924471299,
+    "last": 300
+   },
+   {
+    "run": "B2-10000-s002",
+    "seed": 2,
+    "strategy": "resident",
+    "patch": 153,
+    "end": 0.008251348778165662,
+    "last": 300
+   }
+  ],
+  "lone": [
+   {
+    "run": "B2-10000-s002",
+    "seed": 1,
+    "end": 0.0,
+    "last": 122
+   },
+   {
+    "run": "B2-10000-s002",
+    "seed": 2,
+    "end": 0.0,
+    "last": 97
+   },
+   {
+    "run": "B2-10000-s001",
+    "seed": 1,
+    "end": 0.0,
+    "last": 100
+   },
+   {
+    "run": "B2-10000-s001",
+    "seed": 2,
+    "end": 0.0,
+    "last": 100
+   }
+  ],
+  "single": {
+   "raider": {
+    "plantings": 20,
+    "alive_at_200": 0,
+    "agents_at_200": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "lived": [
+     21,
+     4,
+     75,
+     108,
+     66,
+     84,
+     16,
+     6,
+     94,
+     84,
+     50,
+     15,
+     2,
+     17,
+     115,
+     180,
+     2,
+     30,
+     3,
+     38
+    ]
+   },
+   "resident": {
+    "plantings": 20,
+    "alive_at_200": 0,
+    "agents_at_200": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "lived": [
+     22,
+     134,
+     94,
+     84,
+     76,
+     3,
+     20,
+     11,
+     13,
+     45,
+     26,
+     26,
+     2,
+     2,
+     20,
+     56,
+     2,
+     7,
+     3,
+     38
+    ]
+   }
+  }
+ },
+ "figures": {
+  "shares": {
+   "title": "The share of two evolved worlds held by a strategy",
+   "caption": "One line per planting: two seeds in each of two worlds, the world of seed 1 dashed, of seed 2 solid. Grey is the control, a patch of the residents' own brains planted in the same place.",
+   "recipe": "**Runs.** The B2 worlds of Experiment 16, `B2-10000-s001` \u2026 `-s010`, as their archives keep them at iteration 2,000 (`GraphOfLifeRuns/<run>/archive/`). Strategies planted with `python3 research/oee/pilots/manual.py`: in `-s001` and `-s002` every strategy and the control on seeds 1 and 2 (`--strategies factory,turtle,raider,resident --seeds 1,2 --T 300 --patch 0.05`); in all ten worlds the raider, the factory and the control on seed 1; in `-s001` and `-s002` the lone raider on seeds 1 and 2; in `-s002` a single raider, and a single resident, on seeds 1 to 20 (`--patch 0.0002 --T 200`).\n\n**Data.** From the worlds the archives keep.\n\n1. Load the world of iteration 2,000 (`GraphOfLife.from_checkpoint`). On seed *s*, draw an agent at random and take the agents nearest to it, step by step, until the patch holds the share asked for (5%, or one agent).\n2. Give each agent of that patch the strategy (`manual.py`), or, for the control, a frozen copy of the brain of one agent of the patch drawn at random; neither ever mutates.\n3. Play on under the world's own rules and count, after each iteration, the agents carrying the strategy, as a share of all agents.\n\n**To make it again:** `python3 book_figures.py handmade`."
+  }
+ }
+}
