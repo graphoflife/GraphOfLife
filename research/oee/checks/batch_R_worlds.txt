@@ -11,3 +11,6 @@ pilot GraphOfLifeRuns/.pilots/R/B2-newborns-s2 500:1000,1000:2000,500:2000
 pilot GraphOfLifeRuns/.pilots/R/B1-newborns-s2 500:1000,1000:2000,500:2000
 pilot GraphOfLifeRuns/.pilots/R/B2-parents-s2 500:1000,1000:2000,500:2000
 pilot GraphOfLifeRuns/.pilots/R/B1-parents-s2 500:1000,1000:2000,500:2000
+# Controls of the same settings and seeds, judged the same way: B1 (the long B1 pilots' first 2,000 iterations).
+pilot GraphOfLifeRuns/.pilots/L/B1-long-s1 500:1000,1000:2000,500:2000
+pilot GraphOfLifeRuns/.pilots/L/B1-long-s2 500:1000,1000:2000,500:2000
