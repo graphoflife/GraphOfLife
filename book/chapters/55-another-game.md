@@ -62,6 +62,130 @@ would mix with the rule under test.
   chance in proportion to its weighed stake.
 - **by genotype** (`pool=genotype`): stakes pooled by genotype, and one more
   input row per candidate, *same brain as mine*.
+- **kin sense** (`kin_sense=true`): the input row alone, with no pooling. An
+  agent can tell its clones, and nothing in the rules makes it matter. This is
+  the free version of the raiders' password in
+  [Chapter 51](51-strategies-written-by-hand.md).
+
+## What the contests did
+
+<!-- figure games/fighting -->
+![How much changes hands](../figures/games/fighting.svg)
+
+**How much changes hands.** One line per world, means over 50 iterations.
+
+> [!example]- How to make this figure
+> **Runs.** Pilot worlds of `research/oee/pilots/run.py` in the engine's own code, kept in `GraphOfLifeRuns/.pilots/S`, two seeds each, at 10,000 tokens for 1,000 iterations with a whole world every 100: B2 without revolutions (`--set hidden_layers=16 message_amount=8 message_prepass=false allow_handover=false mutate_on_replication=true incumbency=1.5 birth_links=2 mend_on_death=true prune_needs=2 valence=8 keep_home=0.3 max_age=100 min_child=10 allow_revolutions=false --proto engine=true`, worlds `S1-norev`), the same with a lottery contest (`contest=lottery`, `G1-lottery`), with stakes pooled by genotype (`pool=genotype`, `G2-genotype`) and with only the sense of which neighbours carry one's own brain (`kin_sense=true`, `G3-kinsense`).
+>
+> **Data.** From each world's `series.jsonl`.
+>
+> 1. Count the nodes whose winner was not their owner in each game, per 100 agents.
+>
+> **To make it again:** `python3 book_figures.py games`.
+<!-- /figure -->
+
+<!-- figure games/groups -->
+![How large a group of clones is](../figures/games/groups.svg)
+
+**How large a group of clones is.** One line per world, every 10th iteration: the agents of an agent's connected group of neighbours with the same brain, averaged over agents.
+
+> [!example]- How to make this figure
+> **Runs.** Pilot worlds of `research/oee/pilots/run.py` in the engine's own code, kept in `GraphOfLifeRuns/.pilots/S`, two seeds each, at 10,000 tokens for 1,000 iterations with a whole world every 100: B2 without revolutions (`--set hidden_layers=16 message_amount=8 message_prepass=false allow_handover=false mutate_on_replication=true incumbency=1.5 birth_links=2 mend_on_death=true prune_needs=2 valence=8 keep_home=0.3 max_age=100 min_child=10 allow_revolutions=false --proto engine=true`, worlds `S1-norev`), the same with a lottery contest (`contest=lottery`, `G1-lottery`), with stakes pooled by genotype (`pool=genotype`, `G2-genotype`) and with only the sense of which neighbours carry one's own brain (`kin_sense=true`, `G3-kinsense`).
+>
+> **Data.** From each world's `series.jsonl`.
+>
+> 1. Every 10th iteration, join neighbours with the same brain and take the size of each agent's group, averaged over agents (`organisation`, `cloneMean`).
+>
+> **To make it again:** `python3 book_figures.py games`.
+<!-- /figure -->
+
+<!-- figure games/elo -->
+![How much better than the founders](../figures/games/elo.svg)
+
+**How much better than the founders.** One line per world, its eras played against each other, four contests per pair.
+
+> [!example]- How to make this figure
+> **Runs.** Pilot worlds of `research/oee/pilots/run.py` in the engine's own code, kept in `GraphOfLifeRuns/.pilots/S`, two seeds each, at 10,000 tokens for 1,000 iterations with a whole world every 100: B2 without revolutions (`--set hidden_layers=16 message_amount=8 message_prepass=false allow_handover=false mutate_on_replication=true incumbency=1.5 birth_links=2 mend_on_death=true prune_needs=2 valence=8 keep_home=0.3 max_age=100 min_child=10 allow_revolutions=false --proto engine=true`, worlds `S1-norev`), the same with a lottery contest (`contest=lottery`, `G1-lottery`), with stakes pooled by genotype (`pool=genotype`, `G2-genotype`) and with only the sense of which neighbours carry one's own brain (`kin_sense=true`, `G3-kinsense`).
+>
+> **Data.** From each world's checkpoints, `ckpt_<iteration>.npz`.
+>
+> 1. For every pair of the eras 0, 100, 200, 500 and 1,000 play four contests, two in each era's world: every agent gets a brain drawn at random from one era or the other, mutation is switched off, and 20 iterations are played under the world's own rules (`research/oee/pilots/tourney.py --T 20 --reps 2`).
+> 2. Fit one rating per era (Bradley–Terry, `research/oee/pilots/elo.py`), the founders at 0.
+>
+> **To make it again:** `python3 book_figures.py games`.
+<!-- /figure -->
+
+
+**The lottery leaves almost nothing to learn.** Under a lottery the brains of
+iteration 1,000 rated +23 and +14 against the founders, against +139 and +100
+under Blotto. Each era tied with the one before it almost from the start,
+with step scores of 0.47 to 0.56. Every staked token is a ticket, so where it
+is staked matters less. More nodes changed hands, 10 and 12 per hundred agents
+a game against 9 and 7. The worlds held more agents, about 4,300 against
+3,250 to 3,600, and more genotypes, about 2,000 against 1,450 to 1,700.
+
+And the dice stayed. Redrawing the random inputs of brains evolved under the
+lottery changed 48 to 67% of their divisions of stakes. Under Blotto it was
+59%, in the same world without revolutions. Randomising is worthless under a
+lottery, and the brains roll the dice all the same. So the lottery confirms
+one half of [Chapter 50](50-why-evolution-stops.md) and refutes the other.
+Evolution stops under a lottery too, sooner and lower, but not because brains
+learn to roll dice: they roll them anyway.
+
+**Pooling by genotype builds bodies, and peace.** Counting stakes by genotype
+cut the fighting to about a third, 3.2 nodes per hundred agents a game against
+9.0 and 6.7. It made groups of clones two to three times larger. At the end an
+agent's group of clones held 8 and 11 agents on average, the largest 39 and
+57, against 3 under Blotto. In one world the groups kept growing, from 7.8
+agents at iterations 300 to 400 to 10.6 at 900 to 1,000; in the other they
+barely grew, from 7.1 to 8.1. The ratings stopped where Blotto's did: +146 and
++138 by iteration 200, +112 and +121 at 1,000, and 0.49 for iteration 1,000
+against 500 in both worlds.
+
+A contest of coins cannot see a body of clones, since it deals brains out
+one agent at a time. The **turf** contest can
+([Pilot worlds](../notes/pilot-worlds.md)): the era whose world it is keeps
+its clones in place. On turf, the brains of iteration 1,000 held 0.35 of the
+world against those of iteration 500, in the one world measured so far. In
+the same contest without pooling they held 0.45. The bodies grew larger but
+not better.
+
+**A sense of one's clones made no groups.** With the kin sense alone, groups
+of clones stayed at 3, as under Blotto. In one world the brains improved
+slowly to the end, the only steady climb in this chapter. Its steps were 0.70,
+0.57, 0.54 and 0.53, and the brains of iteration 1,000 held 0.67 against those
+of iteration 100, against 0.54 and 0.55 under Blotto. In the other world they
+stopped as under Blotto, with steps of 0.69, 0.55, 0.48 and 0.50. The brains
+made little use of the sense. Flipping which neighbours are clones changed 12
+to 16% of their divisions, less than it changed the founders' (26%).
+
+## What it teaches
+
+**Another contest moves where evolution stops, not whether it does.** A
+lottery stops it almost where it starts. Pooling by genotype and a sense of
+kin stop it where Blotto does. Every one of these worlds kept a network that
+holds, with no cut and five or six links per agent. As in B2, their ball
+dimension, 4.1 to 4.4, is a little above the bar's 4.
+
+**The mixed strategy was not the reason.** Where dice are worthless, the
+brains keep them. Whatever stops evolution in these worlds, it is not that
+the brains have found the one unbeatable way to play.
+
+**Bodies are not organisms.** Pooling makes clones fight as one, and the
+clones gather into bodies two to three times larger, which keep growing
+slowly in one world. But a body of clones whose members do not divide the
+work among themselves is only a crowd. The factory of
+[Chapter 51](51-strategies-written-by-hand.md) is what an organism would be:
+the frontier fights, the inside feeds it. Under pooling the inside's tokens
+already defend the frontier, yet nothing better evolved.
+
+**A password given for free is not used.** The raiders of Chapter 51 won with
+a password and a crowd that already used it. Given the password as a sense,
+evolving brains find no crowd to use it with. One copy in five is a new
+genotype, so clones seldom sit together, and a sense of one's clones has
+little to work with. Whether a slower rate of change makes larger families,
+and with them a use for the sense, is a question for
+[Chapter 52](52-how-fast-should-brains-change.md).
 
 <!-- turns -->
 ---

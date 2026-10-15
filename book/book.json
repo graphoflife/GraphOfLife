@@ -317,7 +317,7 @@
           "title": "Strategies written by hand",
           "note": "Is the evolved play the best there is? Strategies written by hand — a turtle that only defends, a raider, and a factory whose members pump tokens to their frontier — planted as a patch in evolved worlds, against a patch of the residents' own brains.",
           "file": "chapters/51-strategies-written-by-hand.md",
-          "status": "draft"
+          "status": "analysed"
         },
         {
           "id": "52",
@@ -343,7 +343,7 @@
           "title": "Another game",
           "note": "Two contests other than Colonel Blotto's, with no number in them: a lottery, in which every staked token is a ticket, and stakes pooled by genotype, in which agents with one brain fight as one side.",
           "file": "chapters/55-another-game.md",
-          "status": "draft"
+          "status": "analysed"
         },
         {
           "id": "56",

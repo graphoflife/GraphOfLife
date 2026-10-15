@@ -1,0 +1,404 @@
+{
+ "chapter": "games",
+ "numbers": {
+  "tournaments": {
+   "Blotto": [
+    {
+     "eras": [
+      0,
+      100,
+      200,
+      500,
+      1000
+     ],
+     "elo": [
+      0.0,
+      123.35485888889069,
+      133.58709772748213,
+      146.0850249096842,
+      138.59589219366373
+     ],
+     "1000_vs_500": 0.4919757841639489,
+     "1000_vs_100": 0.5417064641487739,
+     "steps": [
+      0.699598726493112,
+      0.5022862071131977,
+      0.5295865937681083,
+      0.4919757841639489
+     ]
+    },
+    {
+     "eras": [
+      0,
+      100,
+      200,
+      500,
+      1000
+     ],
+     "elo": [
+      0.0,
+      89.78757869956343,
+      85.83056370025702,
+      115.7811824702641,
+      99.88371551732777
+     ],
+     "1000_vs_500": 0.4703867064788707,
+     "1000_vs_100": 0.5490260104421596,
+     "steps": [
+      0.66781392576699,
+      0.5037942259918917,
+      0.5286765964061694,
+      0.4703867064788707
+     ]
+    }
+   ],
+   "lottery": [
+    {
+     "eras": [
+      0,
+      100,
+      200,
+      500,
+      1000
+     ],
+     "elo": [
+      0.0,
+      7.371406056682844,
+      44.16443159123336,
+      31.322017829949303,
+      22.91631247489244
+     ],
+     "1000_vs_500": 0.4869503723564557,
+     "1000_vs_100": 0.5078853595030841,
+     "steps": [
+      0.5078073363967482,
+      0.5613227792431024,
+      0.49391794444700043,
+      0.4869503723564557
+     ]
+    },
+    {
+     "eras": [
+      0,
+      100,
+      200,
+      500,
+      1000
+     ],
+     "elo": [
+      0.0,
+      10.584672421560096,
+      29.230291720753446,
+      21.592764778750592,
+      14.137288965371788
+     ],
+     "1000_vs_500": 0.46523017257870825,
+     "1000_vs_100": 0.5054096501134461,
+     "steps": [
+      0.509757483905176,
+      0.5270292538736635,
+      0.49986813347314984,
+      0.46523017257870825
+     ]
+    }
+   ],
+   "by genotype": [
+    {
+     "eras": [
+      0,
+      100,
+      200,
+      500,
+      1000
+     ],
+     "elo": [
+      0.0,
+      88.55402736601252,
+      145.79897765229268,
+      133.02772564391418,
+      112.33550841412182
+     ],
+     "1000_vs_500": 0.49213075215243396,
+     "1000_vs_100": 0.5262384827035186,
+     "steps": [
+      0.6451095078847386,
+      0.5971415237392375,
+      0.5115182990363367,
+      0.49213075215243396
+     ]
+    },
+    {
+     "eras": [
+      0,
+      100,
+      200,
+      500,
+      1000
+     ],
+     "elo": [
+      0.0,
+      129.51624475470038,
+      137.9824020983371,
+      136.9344311775449,
+      120.7061128550505
+     ],
+     "1000_vs_500": 0.49445567132749535,
+     "1000_vs_100": 0.5257986150204825,
+     "steps": [
+      0.7363732247126389,
+      0.5128905927357221,
+      0.4997904926089276,
+      0.49445567132749535
+     ]
+    }
+   ],
+   "kin sense": [
+    {
+     "eras": [
+      0,
+      100,
+      200,
+      500,
+      1000
+     ],
+     "elo": [
+      0.0,
+      99.0740160214995,
+      146.1778036031477,
+      168.7753884955493,
+      188.22605537569802
+     ],
+     "1000_vs_500": 0.5303398132392286,
+     "1000_vs_100": 0.6669216220789662,
+     "steps": [
+      0.7048164643580102,
+      0.5662727200871069,
+      0.5359944399217527,
+      0.5303398132392286
+     ]
+    },
+    {
+     "eras": [
+      0,
+      100,
+      200,
+      500,
+      1000
+     ],
+     "elo": [
+      0.0,
+      123.20089415443644,
+      151.3614592832008,
+      132.0958659173602,
+      133.65152071140182
+     ],
+     "1000_vs_500": 0.4957009939379015,
+     "1000_vs_100": 0.5301154336101238,
+     "steps": [
+      0.6938727364733974,
+      0.5452467117141899,
+      0.48117372000345515,
+      0.4957009939379015
+     ]
+    }
+   ]
+  },
+  "life": {
+   "Blotto": [
+    {
+     "agents": 3616.0,
+     "births": 1.01009814046184,
+     "conquests": 8.991346275992244,
+     "revolutions": 0.0,
+     "starved": 0.0,
+     "cut_off": 0.0,
+     "mean_age": 50.40321969778669,
+     "lifespan": 100.0,
+     "clone_mean": 2.9863164264236217,
+     "genotypes": 1690.7105788423153
+    },
+    {
+     "agents": 3249.0,
+     "births": 0.9926784448496384,
+     "conquests": 6.655589543128577,
+     "revolutions": 0.0,
+     "starved": 0.0,
+     "cut_off": 0.0,
+     "mean_age": 50.64201313242443,
+     "lifespan": 100.0,
+     "clone_mean": 3.175776764920808,
+     "genotypes": 1442.2175648702596
+    }
+   ],
+   "lottery": [
+    {
+     "agents": 4313.0,
+     "births": 1.0096987924451795,
+     "conquests": 10.107129568676745,
+     "revolutions": 0.0,
+     "starved": 0.0,
+     "cut_off": 0.0,
+     "mean_age": 50.267894649952865,
+     "lifespan": 100.0,
+     "clone_mean": 2.856122558018934,
+     "genotypes": 2006.8243512974052
+    },
+    {
+     "agents": 4254.0,
+     "births": 1.0065499885038207,
+     "conquests": 11.581065778531244,
+     "revolutions": 0.0,
+     "starved": 0.0,
+     "cut_off": 0.0,
+     "mean_age": 50.31267494687056,
+     "lifespan": 100.0,
+     "clone_mean": 2.959078566718944,
+     "genotypes": 1949.562874251497
+    }
+   ],
+   "by genotype": [
+    {
+     "agents": 3809.0,
+     "births": 1.0051019087873596,
+     "conquests": 3.2383758842704164,
+     "revolutions": 0.0,
+     "starved": 0.0,
+     "cut_off": 0.0,
+     "mean_age": 50.343207245380995,
+     "lifespan": 100.0,
+     "clone_mean": 7.646271827480233,
+     "genotypes": 1028.7005988023952
+    },
+    {
+     "agents": 3452.0,
+     "births": 1.017395601186844,
+     "conquests": 3.1542365808795605,
+     "revolutions": 0.0,
+     "starved": 0.0,
+     "cut_off": 0.0,
+     "mean_age": 50.263184109646666,
+     "lifespan": 100.0,
+     "clone_mean": 10.039322038599003,
+     "genotypes": 859.556886227545
+    }
+   ],
+   "kin sense": [
+    {
+     "agents": 2903.0,
+     "births": 0.9929556832372027,
+     "conquests": 8.790955024710518,
+     "revolutions": 0.0,
+     "starved": 0.0,
+     "cut_off": 0.0,
+     "mean_age": 50.61121962407041,
+     "lifespan": 100.0,
+     "clone_mean": 2.968730481718792,
+     "genotypes": 1329.4770459081835
+    },
+    {
+     "agents": 3071.0,
+     "births": 1.006204299949905,
+     "conquests": 7.085068312211824,
+     "revolutions": 0.0,
+     "starved": 0.0,
+     "cut_off": 0.0,
+     "mean_age": 50.431439889341966,
+     "lifespan": 100.0,
+     "clone_mean": 3.348769393450062,
+     "genotypes": 1353.8882235528943
+    }
+   ]
+  },
+  "health": {
+   "Blotto": [
+    {
+     "nodeCut": 0.0,
+     "edgeCut": 0.0,
+     "core2": 1.0,
+     "links": 5.851990382046487,
+     "dimension": 4.436198476670265,
+     "hub": 0.013772616797191467
+    },
+    {
+     "nodeCut": 0.0,
+     "edgeCut": 0.0,
+     "core2": 1.0,
+     "links": 5.785393978219091,
+     "dimension": 4.380245271861284,
+     "hub": 0.01694915254237288
+    }
+   ],
+   "lottery": [
+    {
+     "nodeCut": 0.0,
+     "edgeCut": 0.0,
+     "core2": 1.0,
+     "links": 5.1903992614816525,
+     "dimension": 4.331594350947899,
+     "hub": 0.012380284980144826
+    },
+    {
+     "nodeCut": 0.0,
+     "edgeCut": 0.0,
+     "core2": 1.0,
+     "links": 5.741272118603539,
+     "dimension": 4.217083082600475,
+     "hub": 0.012593283582089552
+    }
+   ],
+   "by genotype": [
+    {
+     "nodeCut": 0.0,
+     "edgeCut": 0.0,
+     "core2": 1.0,
+     "links": 5.239957716701903,
+     "dimension": 4.089608911152189,
+     "hub": 0.013203063110641669
+    },
+    {
+     "nodeCut": 0.0,
+     "edgeCut": 0.0,
+     "core2": 1.0,
+     "links": 5.592120509849362,
+     "dimension": 4.130505222380501,
+     "hub": 0.013396595032096009
+    }
+   ],
+   "kin sense": [
+    {
+     "nodeCut": 0.0,
+     "edgeCut": 0.0,
+     "core2": 1.0,
+     "links": 5.298281092012133,
+     "dimension": 4.37326885628117,
+     "hub": 0.01603346113628442
+    },
+    {
+     "nodeCut": 0.0,
+     "edgeCut": 0.0,
+     "core2": 1.0,
+     "links": 5.79101684341859,
+     "dimension": 4.148258669347399,
+     "hub": 0.015112540192926046
+    }
+   ]
+  }
+ },
+ "figures": {
+  "fighting": {
+   "title": "How much changes hands",
+   "caption": "One line per world, means over 50 iterations.",
+   "recipe": "**Runs.** Pilot worlds of `research/oee/pilots/run.py` in the engine's own code, kept in `GraphOfLifeRuns/.pilots/S`, two seeds each, at 10,000 tokens for 1,000 iterations with a whole world every 100: B2 without revolutions (`--set hidden_layers=16 message_amount=8 message_prepass=false allow_handover=false mutate_on_replication=true incumbency=1.5 birth_links=2 mend_on_death=true prune_needs=2 valence=8 keep_home=0.3 max_age=100 min_child=10 allow_revolutions=false --proto engine=true`, worlds `S1-norev`), the same with a lottery contest (`contest=lottery`, `G1-lottery`), with stakes pooled by genotype (`pool=genotype`, `G2-genotype`) and with only the sense of which neighbours carry one's own brain (`kin_sense=true`, `G3-kinsense`).\n\n**Data.** From each world's `series.jsonl`.\n\n1. Count the nodes whose winner was not their owner in each game, per 100 agents.\n\n**To make it again:** `python3 book_figures.py games`."
+  },
+  "groups": {
+   "title": "How large a group of clones is",
+   "caption": "One line per world, every 10th iteration: the agents of an agent's connected group of neighbours with the same brain, averaged over agents.",
+   "recipe": "**Runs.** Pilot worlds of `research/oee/pilots/run.py` in the engine's own code, kept in `GraphOfLifeRuns/.pilots/S`, two seeds each, at 10,000 tokens for 1,000 iterations with a whole world every 100: B2 without revolutions (`--set hidden_layers=16 message_amount=8 message_prepass=false allow_handover=false mutate_on_replication=true incumbency=1.5 birth_links=2 mend_on_death=true prune_needs=2 valence=8 keep_home=0.3 max_age=100 min_child=10 allow_revolutions=false --proto engine=true`, worlds `S1-norev`), the same with a lottery contest (`contest=lottery`, `G1-lottery`), with stakes pooled by genotype (`pool=genotype`, `G2-genotype`) and with only the sense of which neighbours carry one's own brain (`kin_sense=true`, `G3-kinsense`).\n\n**Data.** From each world's `series.jsonl`.\n\n1. Every 10th iteration, join neighbours with the same brain and take the size of each agent's group, averaged over agents (`organisation`, `cloneMean`).\n\n**To make it again:** `python3 book_figures.py games`."
+  },
+  "elo": {
+   "title": "How much better than the founders",
+   "caption": "One line per world, its eras played against each other, four contests per pair.",
+   "recipe": "**Runs.** Pilot worlds of `research/oee/pilots/run.py` in the engine's own code, kept in `GraphOfLifeRuns/.pilots/S`, two seeds each, at 10,000 tokens for 1,000 iterations with a whole world every 100: B2 without revolutions (`--set hidden_layers=16 message_amount=8 message_prepass=false allow_handover=false mutate_on_replication=true incumbency=1.5 birth_links=2 mend_on_death=true prune_needs=2 valence=8 keep_home=0.3 max_age=100 min_child=10 allow_revolutions=false --proto engine=true`, worlds `S1-norev`), the same with a lottery contest (`contest=lottery`, `G1-lottery`), with stakes pooled by genotype (`pool=genotype`, `G2-genotype`) and with only the sense of which neighbours carry one's own brain (`kin_sense=true`, `G3-kinsense`).\n\n**Data.** From each world's checkpoints, `ckpt_<iteration>.npz`.\n\n1. For every pair of the eras 0, 100, 200, 500 and 1,000 play four contests, two in each era's world: every agent gets a brain drawn at random from one era or the other, mutation is switched off, and 20 iterations are played under the world's own rules (`research/oee/pilots/tourney.py --T 20 --reps 2`).\n2. Fit one rating per era (Bradley\u2013Terry, `research/oee/pilots/elo.py`), the founders at 0.\n\n**To make it again:** `python3 book_figures.py games`."
+  }
+ }
+}
