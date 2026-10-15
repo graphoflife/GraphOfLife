@@ -28,6 +28,18 @@ Mechanics (P keys):
                   last game, P(I keep my node | all stakes) - P(... | all but its),
                   counted exactly by the game's rule (research/oee/checks/rules.py):
                   above zero it helped me keep my node, below zero it attacked.
+  mix      bool   a newborn's brain is mixed from its parent's and a mate's, a neighbour
+                  of the parent drawn at random: each hidden unit (its incoming weights,
+                  bias and outgoing weights together) and each output bias from one or
+                  the other with an even chance. The mixture is a new genotype, then
+                  mutated as any copy is.
+  took_kin bool   one input row per candidate: did it take, in the last game, a node held
+                  by an agent of my genotype?
+  unit_token bool (brain_kind=grow) every active hidden unit holds one token, as
+                  link_token makes every link hold one: a unit switched on, or brought by
+                  a copy, is paid by the node it is in; what the node cannot pay for stays
+                  switched off; a unit switched off gives its token back, and a dead
+                  agent's units join its estate.
   link_token bool every link holds one token. Making a link costs its maker one token
                   (a child pays for its birth links, a searcher for its find); when a
                   link lapses its token goes to one of its two ends, drawn at random;
@@ -130,6 +142,7 @@ from gol_config import SimConfig
 
 DEFAULTS = {"mor": "off", "memory": False, "seek": False, "toll": "pool", "seek_max": 8,
             "came_from": False, "helped_by": False, "link_token": False,
+            "mix": False, "took_kin": False, "unit_token": False,
             "incumbency": 1.0, "juvenile": 0, "yield_tax": 0.0, "window": 0, "min_child": 1,
             "triangle_birth": False, "birth_links": 0, "repair": False, "safe_prune": False,
             "newborn_home": False, "max_age": 0, "valence": 0, "valence_mode": "all",
@@ -167,7 +180,7 @@ class ProtoConfig(SimConfig):
         if pooled() or P.get("kin_sense"):
             layout["same_side"] = (row, row + 1, "bit")
             row += 1
-        for name in ("came_from", "helped_by"):
+        for name in ("came_from", "helped_by", "took_kin"):
             if P.get(name):
                 layout[name] = (row, row + 1, "bit")
                 row += 1
@@ -216,6 +229,10 @@ class ProtoWorld(GraphOfLife):
         # starts with them empty and has them again after its first game.
         self.came_from: Dict[int, int] = {}
         self.effect_on: Dict[Tuple[int, int], float] = {}
+        # took_kin: taker's node -> the genotypes whose nodes it took in the last game.
+        self.victims_of: Dict[int, set] = {}
+        # mix: the parent's and the mate's brains while a birth copies the parent's.
+        self._mating: Optional[Tuple[Any, Any]] = None
         # link_token: tokens of lapsed links waiting, during a cleanup, to pay for the
         # links that mend it or to be scattered with the estate.
         self._link_bank: Optional[int] = None
@@ -231,6 +248,8 @@ class ProtoWorld(GraphOfLife):
             self.tag_of.setdefault(b.brain_id, b.brain_id)
         if P.get("link_token") and not _empty:
             self._pay_for_founding_links()
+        if P.get("unit_token") and not _empty:
+            self._settle_units({})                   # the founders pay for their units
 
     @classmethod
     def from_checkpoint(cls, blob, cfg):
@@ -269,6 +288,71 @@ class ProtoWorld(GraphOfLife):
                 self.tag_of[brain.brain_id] = brain.brain_id if fresh else self.tag_of.get(old, old)
                 if fresh:
                     self._count("new_families")
+
+    def _copy_brain(self, source):
+        if self._mating is not None and source is self._mating[0]:
+            mate = self._mating[1]
+            self._mating = None
+            return self._mixed(source, mate)
+        return super()._copy_brain(source)
+
+    def _mixed(self, a, b):
+        """A new genotype: each hidden unit, and each output bias, from brain a or brain b."""
+        child = a.copy()
+        if len(a.weights) == 2 and a.weights[0].shape == b.weights[0].shape:
+            H = a.weights[0].shape[0]
+            take = self.rng.random_sample(H) < 0.5
+            child.weights[0][take] = b.weights[0][take]
+            child.biases[0][take] = b.biases[0][take]
+            child.weights[1][:, take] = b.weights[1][:, take]
+        else:                                        # deeper brains: row by row, layer by layer
+            for i, (W, B) in enumerate(zip(b.weights, b.biases)):
+                take = self.rng.random_sample(W.shape[0]) < 0.5
+                child.weights[i][take] = W[take]
+                child.biases[i][take] = B[take]
+        out = child.biases[-1].shape[0]
+        take = self.rng.random_sample(out) < 0.5
+        child.biases[-1][take] = b.biases[-1][take]
+        old = a.brain_id
+        child.brain_id = self.next_brain_id
+        child.parent_brain_id = old
+        self.next_brain_id += 1
+        self.root_of[child.brain_id] = self.root_of.get(old, old)
+        self.brain_parent[child.brain_id] = old
+        self.brain_depth[child.brain_id] = self.brain_depth.get(old, 0) + 1
+        if P.get("tag_rate", 0) > 0:
+            self.tag_of[child.brain_id] = self.tag_of.get(old, old)
+        self._count("mixed")
+        return child
+
+    # ---- units that hold a token -----------------------------------------------
+    def _units(self) -> Dict[int, int]:
+        return {u: int(getattr(self.brains[u], "active", 0)) for u in self.G.nodes()}
+
+    def _settle_units(self, before: Dict[int, int]) -> None:
+        """
+        After a phase, square every node's account for its brain's units: a node pays
+        for units it has gained, from its own tokens, and switches off what it cannot
+        pay for; it is paid back for units it has lost; a dead agent's units are
+        scattered over the survivors with its estate.
+        """
+        released = sum(k for u, k in before.items() if not self.G.has_node(u))
+        for u in self.G.nodes():
+            brain = self.brains[u]
+            now, was = int(getattr(brain, "active", 0)), before.get(u, 0)
+            if now > was:
+                pay = min(now - was, max(0, int(self.tokens.get(u, 0))))
+                if pay < now - was:
+                    brain.active = was + pay
+                    self._count("units_unaffordable", now - was - pay)
+                self.tokens[u] = self.tokens.get(u, 0) - pay
+            elif now < was:
+                self.tokens[u] = self.tokens.get(u, 0) + (was - now)
+        survivors = list(self.G.nodes())
+        if released and survivors:
+            draws = self.rng.multinomial(released, np.full(len(survivors), 1 / len(survivors)))
+            for x, extra in zip(survivors, draws):
+                self.tokens[x] += int(extra)
 
     def _forget_agent(self, aid):
         born = self.born_at.get(aid)
@@ -452,6 +536,10 @@ class ProtoWorld(GraphOfLife):
             X = np.vstack([X, [[1.0 if v != u and v == origin else 0.0 for v in candidates]]])
         if P.get("helped_by"):
             X = np.vstack([X, [[self.effect_on.get((u, v), 0.0) for v in candidates]]])
+        if P.get("took_kin"):
+            mine = self.brains[u].brain_id
+            X = np.vstack([X, [[1.0 if v != u and mine in self.victims_of.get(v, ()) else 0.0
+                                for v in candidates]]])
         return X
 
     def same_side(self, a, b, allies=None) -> bool:
@@ -504,7 +592,15 @@ class ProtoWorld(GraphOfLife):
 
     # ---- reproduction, with the search for partners after it ----------------
     def _spawn_child(self, parent, parent_tokens, child_tokens, candidates, Y):
-        child_id, linked = self._spawn_child_rules(parent, parent_tokens, child_tokens, candidates, Y)
+        if P.get("mix"):
+            mates = [v for v in candidates[1:] if v != parent and self.G.has_node(v)]
+            if mates:
+                mate = mates[self.rng.randint(len(mates))]
+                self._mating = (self.brains[parent], self.brains[mate])
+        try:
+            child_id, linked = self._spawn_child_rules(parent, parent_tokens, child_tokens, candidates, Y)
+        finally:
+            self._mating = None
         if P.get("came_from"):
             self.came_from[int(child_id)] = int(parent)
         if P.get("birth_allies"):
@@ -650,8 +746,11 @@ class ProtoWorld(GraphOfLife):
     def reproduction_phase(self, record_decisions):
         nxt = self.next_agent_id
         self._seekers = []
+        units = self._units() if P.get("unit_token") else None
         frame = (GraphOfLife.reproduction_phase(self, record_decisions) if P.get("engine")
                  else self._engine_reproduction())
+        if units is not None:
+            self._settle_units(units)
         self._count("births", self.next_agent_id - nxt)
         cl = frame["cleanup"]
         self._count("starved_r", cl["starved"])
@@ -755,10 +854,15 @@ class ProtoWorld(GraphOfLife):
         if len(self.came_from) > 2 * max(1, self.G.number_of_nodes()):
             self.came_from = {v: w for v, w in self.came_from.items() if self.G.has_node(v)}
 
-    def _after_game(self, decisions: Dict[str, Any]) -> None:
+    def _after_game(self, decisions: Dict[str, Any], pre: Optional[Dict[int, int]] = None) -> None:
         winners = {int(x["node"]): int(x["winner"]) for x in decisions["winners"]}
         if P.get("came_from"):
             self._note_origins(winners)
+        if P.get("took_kin"):
+            self.victims_of = {}
+            for v, w in winners.items():
+                if w != v and v in pre:
+                    self.victims_of.setdefault(w, set()).add(pre[v])
         if P.get("helped_by"):
             from rules import effects
             rules = {"incumbency": float(self.cfg.incumbency or 1.0), "revolutions": self.cfg.allow_revolutions}
@@ -886,10 +990,14 @@ class ProtoWorld(GraphOfLife):
             if P.get("came_from"):
                 self._note_origins(self.last_winners)
             return frame
-        needs = bool(P.get("came_from") or P.get("helped_by"))
+        needs = bool(P.get("came_from") or P.get("helped_by") or P.get("took_kin"))
+        pre = {u: self.brains[u].brain_id for u in self.G.nodes()} if P.get("took_kin") else None
+        units = self._units() if P.get("unit_token") else None
         frame = GraphOfLife.blotto_phase(self, record_decisions or needs)
+        if units is not None:
+            self._settle_units(units)
         if needs:
-            self._after_game(frame["decisions"])
+            self._after_game(frame["decisions"], pre)
             if not record_decisions:
                 frame["decisions"] = None
         self._count("starved_g", frame["cleanup"]["starved"])
