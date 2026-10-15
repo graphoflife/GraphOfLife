@@ -101,11 +101,15 @@ def lab_runs(per_family):
     chosen = []
     for run in runs:
         family = re.sub(r"-s\d+$", "", run)
-        if seen.get(family, 0) < per_family and not done(os.path.join(OUT, f"lab_{run}.json")):
-            meta = json.load(open(os.path.join(RUNS, run, "meta.json")))
-            if (meta.get("config") or {}).get("export_decisions", True) and int(meta.get("iteration", 0)) >= GAMES:
-                chosen.append(run)
-                seen[family] = seen.get(family, 0) + 1
+        if seen.get(family, 0) >= per_family:
+            continue
+        meta = json.load(open(os.path.join(RUNS, run, "meta.json")))
+        if not (meta.get("config") or {}).get("export_decisions", True) or int(meta.get("iteration", 0)) < GAMES:
+            continue
+        # A world measured already counts towards its family's share too.
+        seen[family] = seen.get(family, 0) + 1
+        if not done(os.path.join(OUT, f"lab_{run}.json")):
+            chosen.append(run)
     return chosen
 
 
