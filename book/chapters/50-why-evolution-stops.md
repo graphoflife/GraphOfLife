@@ -15,13 +15,13 @@
 The baseline learns what it learns in its first fifty to a hundred iterations
 and then stops ([Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md)).
 Its brains are nearly blind, so that was no surprise: evolution could only set
-a few constants. Chapters 47 to 49 then built a world in which brains can see
+a few constants. Chapters [47](47-brains-that-see-and-worlds-that-break.md) to 49 then built a world in which brains can see
 without the world breaking — B2. The question now is the one Part V exists
 for: in such a world, does evolution keep going?
 
 ## What the pilots tried
 
-Every pilot below played its eras against each other as in Chapter 46 — the
+Every pilot below played its eras against each other as in [Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md) — the
 brains of iterations 0, 100, 200, 500 and 1,000, two contests per pair — and
 reports the rating of each era against the founders and the **step score**,
 each era against the one before it. A world still improving keeps its step
@@ -152,7 +152,7 @@ the same without random inputs. Its tournaments play the eras 0, 100, 200,
 > **It fails if:** Above 0.55 in either condition's median world: evolution in that world does not stop by iteration 500.
 <!-- /thesis -->
 
-("Chapter 49" in the thesis is today's [Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md): the chapters were renumbered on 2026-10-14.)
+("[Chapter 49](49-who-dies-and-why.md)" in the thesis is today's [Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md): the chapters were renumbered on 2026-10-14.)
 
 ## The runs
 

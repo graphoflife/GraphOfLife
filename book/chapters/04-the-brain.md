@@ -9,7 +9,7 @@ and how it changes from one generation to the next.
 
 > [!question] Questions of this chapter
 > - What does a brain see, and what does it compute from it?
-> - How do its outputs become the decisions of Chapter 3?
+> - How do its outputs become the decisions of [Chapter 3](03-one-iteration.md)?
 > - How is a brain inherited, and how does it change?
 > - Do brains end up deciding differently from the random brains they start as?
 
@@ -211,7 +211,7 @@ what becomes of a world run that way.
 > [!summary] In short
 > A brain is a neural network of 15,795 numbers: 154 inputs per candidate
 > (tokens, connections, neighbourhood summaries, messages and noise), five
-> sigmoid layers, and 45 linear outputs that the rules of Chapter 3 turn into
+> sigmoid layers, and 45 linear outputs that the rules of [Chapter 3](03-one-iteration.md) turn into
 > decisions. It is inherited by copying, and changed with probability 0.2 at
 > every birth and after every game.
 

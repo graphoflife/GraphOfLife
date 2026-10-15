@@ -352,7 +352,7 @@ a single founder by iteration 1,500 — but slowly, about once a run.
   often agents are born and die.
 
 > [!info] Added later: no better brains
-> None of the worlds of Chapter 41 is born and dies as the baseline does, so
+> None of the worlds of [Chapter 41](41-do-the-brains-matter.md) is born and dies as the baseline does, so
 > they could not settle the question.
 > [Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md) asked the
 > brains themselves, playing the brains of different eras of ten worlds of

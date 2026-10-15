@@ -240,14 +240,14 @@ its links to its newborn, and a parent that hands over all but one hangs on
 that one. Switched off.
 
 **B2** is the second baseline of Part V: B1 with brains of one hidden layer of
-16 that change only when copied (Chapter 47), shorter messages (8 numbers, no
+16 that change only when copied ([Chapter 47](47-brains-that-see-and-worlds-that-break.md)), shorter messages (8 numbers, no
 extra look before acting), an agent's stake on its own node counting 1.5
 times ([`incumbency`](../notes/settings.md#incumbency)), the rules of this
 chapter — links at birth 2, mending in a ring, `prune_needs` 2, valence 8, no
 handover — and the rules of [Chapter 49](49-who-dies-and-why.md) on who
 dies: 30% of an agent's tokens kept at home, so that nobody stakes itself to
 death; children of at least 10 tokens; and death at age 100. It keeps change
-only when copied although Chapter 47 found it harmful: it is what heredity
+only when copied although [Chapter 47](47-brains-that-see-and-worlds-that-break.md) found it harmful: it is what heredity
 means — a brain that is not copied stays itself — and the harm it did there
 was the drain of worlds whose births fell short of the cull, which B2's other
 rules remove. Every setting is listed in the box under the thesis.
@@ -295,7 +295,7 @@ handover, put one back — to see whether every rule is needed.
 > **It fails if:** A B2 world fails a line of the bar: the rules do not make a network that holds. Or a condition without one of the rules has fewer than five failing worlds: that rule is not needed.
 <!-- /thesis -->
 
-("Chapter 49" in the thesis is today's [Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md): the chapters were renumbered on 2026-10-14.)
+("[Chapter 49](49-who-dies-and-why.md)" in the thesis is today's [Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md): the chapters were renumbered on 2026-10-14.)
 
 ## The runs
 

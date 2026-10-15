@@ -40,7 +40,7 @@ agents bodies and brains what moves between them).
 
 ## Children as missiles
 
-The first pilots of Chapter 48's rules joined every newborn to its parent and
+The first pilots of [Chapter 48](48-a-world-that-cannot-break.md)'s rules joined every newborn to its parent and
 two of its neighbours and mended every death. The worlds never split — and
 still shrank, with 30 to 60% of their agents starving in a single game. The
 starving were children: 46% of them were born that very iteration, 83% at
@@ -114,7 +114,7 @@ between a few and about ten per cent of the nodes a game.
 
 ## Old age
 
-With a share kept at home and the rules of Chapter 48, nothing kills an agent
+With a share kept at home and the rules of [Chapter 48](48-a-world-that-cannot-break.md), nothing kills an agent
 any more: it cannot starve, it cannot be cut off, and winning its node changes
 only its brain. An agent that cannot die holds its place forever — and in a
 world of fixed tokens, a world without deaths has no room for births.

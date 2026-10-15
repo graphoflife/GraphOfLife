@@ -103,7 +103,7 @@ would not.
 > [!quote] The thesis of Experiment 11, written down before any of its runs existed
 > **The claim.** Time is not what is missing. A world of 204,800 tokens left for 100,000 iterations, thirty times longer than any world of this book has lived, goes on wandering, but within bounds it reaches in its first few thousand iterations, and nothing appears late that was not there early. Its agents do not learn to cooperate: they stake on kin as they stake on strangers, the same two brains still rarely face each other twice, and the brains stay nearly blind.
 >
-> **Why it would be so.** Part III found what stands in the way of cooperation in the rules, not in a lack of time (Chapter 40): a node's brain is replaced almost every game, so nobody meets anybody twice (Chapter 38); brains cannot see who is kin; and nothing an agent does creates anything. Chapter 19 found the brains nearly blind, with a gain of 0.0015 and their first-layer weights already, by iteration 3,000, at the balance between the jitters of mutation and its resets, so that selection can only set constants, and it has set them alike in every world. A hundred thousand iterations are a great deal of evolution: some 27,000 agents, each brain changed with probability 0.2 after every game, try some 500 million changed brains, and the living come to descend from a single founder every few hundred iterations (Chapter 18), so one line takes the world over again and again, dozens of times at the least. What is one step away will be found; what needs the rules changed will not. Against this: evolution raised the gain 2.5 times in 3,000 iterations (Chapter 19), and the baseline worlds are still moving at the longest scale yet measured: a mean over 500 iterations keeps between a third and two thirds of the spread of single iterations (a Hurst exponent of 0.8 to 0.9, in the 26 worlds of Experiment 2), so no world has yet been seen at rest.
+> **Why it would be so.** Part III found what stands in the way of cooperation in the rules, not in a lack of time ([Chapter 40](40-meta-2.md)): a node's brain is replaced almost every game, so nobody meets anybody twice ([Chapter 38](38-do-agents-cooperate.md)); brains cannot see who is kin; and nothing an agent does creates anything. [Chapter 19](19-what-the-brains-are-like.md) found the brains nearly blind, with a gain of 0.0015 and their first-layer weights already, by iteration 3,000, at the balance between the jitters of mutation and its resets, so that selection can only set constants, and it has set them alike in every world. A hundred thousand iterations are a great deal of evolution: some 27,000 agents, each brain changed with probability 0.2 after every game, try some 500 million changed brains, and the living come to descend from a single founder every few hundred iterations ([Chapter 18](18-genotypes-and-lineages.md)), so one line takes the world over again and again, dozens of times at the least. What is one step away will be found; what needs the rules changed will not. Against this: evolution raised the gain 2.5 times in 3,000 iterations ([Chapter 19](19-what-the-brains-are-like.md)), and the baseline worlds are still moving at the longest scale yet measured: a mean over 500 iterations keeps between a third and two thirds of the spread of single iterations (a Hurst exponent of 0.8 to 0.9, in the 26 worlds of Experiment 2), so no world has yet been seen at rest.
 >
 > **It holds if:** From iteration 2,000 on, over at least 50,000 iterations, all three hold. (1) The wander levels off: for at least seven of the eight statistics (agents; connections per agent; Gini; births per agent; the share of stakes placed at home; the share of nodes kept; genotypes per agent; families), the median difference between the means of 500-iteration blocks 20,000 to 50,000 iterations apart is at most twice the median difference between blocks 2,000 to 5,000 iterations apart. (2) In no three successive windows from iteration 5,000 on does the ratio of stakes on kin to stakes on others leave 0.85 to 1.15 (in the baseline worlds 0.89 to 1.10), or the share of connections whose two brains face each other again one game later rise above 10% (in the baseline worlds 3% to 9%). (3) At every kept checkpoint the median gain of the brains stays below 0.005 (in the baseline worlds 0.0011 to 0.0017).
 >
@@ -175,7 +175,7 @@ would need more than 200 GB, more than the disk holds. So the run keeps:
   [What a run records](../notes/frames-and-stats.md)): about 400 MB for the
   whole run;
 - **frames**, with the decisions, only for the last 17 iterations of every
-  block — enough for every measure of Chapter 38, which looks up to 16
+  block — enough for every measure of [Chapter 38](38-do-agents-cooperate.md), which looks up to 16
   games ahead: about 8 GB;
 - a **checkpoint** — every brain, every token and the state of the random
   stream — at the end of every block, and a copy kept every 10,000
@@ -205,7 +205,7 @@ frame that was not kept is a frame that has not been made again yet.
   and how much.
 - **Everything of [Chapter 9](09-thirty-worlds.md)**, as block means over
   the whole run, set beside the bands of the baseline worlds and of the
-  worlds of Chapter 60.
+  worlds of [Chapter 60](60-worlds-of-100000-tokens.md).
 - **Later, from the kept checkpoints:** the tournament across time of
   [Meta II](40-meta-2.md) — the brains of iteration 10,000 against those of
   iteration 90,000, in one world. A later population that beats an earlier
@@ -258,7 +258,7 @@ windows of cooperation and the gains, and decides the thesis.
 > [Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md)
 > (`gol_tournament.py`). [Chapter 60](60-worlds-of-100000-tokens.md) is
 > analysed, so the sentinel's bands of the known exist. And the costs above
-> may be too low: the same cost model gave the worlds of Chapter 60 12
+> may be too low: the same cost model gave the worlds of [Chapter 60](60-worlds-of-100000-tokens.md) 12
 > seconds an iteration, and they took 17. They are also B1's costs; a run on
 > B2, whose brains are smaller, would have to be costed again.
 

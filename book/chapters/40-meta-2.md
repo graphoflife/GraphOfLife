@@ -352,7 +352,7 @@ measures, by rung of the ladder:
 > ([Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md)); a neutral
 > shadow judged brains that can grow
 > ([Chapter 50](50-why-evolution-stops.md)). The heredity half-life,
-> selection ablation, the cooperation measures of Chapter 38, flow modules
+> selection ablation, the cooperation measures of [Chapter 38](38-do-agents-cooperate.md), flow modules
 > and evolutionary activity have not yet been used in the book.
 
 ## What Part III changed in what this book teaches

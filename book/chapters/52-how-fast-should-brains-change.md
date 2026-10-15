@@ -85,7 +85,7 @@ twenty iterations, and the share each side holds at the end:
   Under the first picture every pair ties; under the second the slower rate
   wins, the more the further apart; under the third the fastest rate loses to
   all the others.
-- **Within a rate.** Each world plays its own eras, as in Chapter 46 — to see
+- **Within a rate.** Each world plays its own eras, as in [Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md) — to see
   when each rate stops, and whether the slowest has stopped at all by
   iteration 1,500.
 

@@ -81,7 +81,7 @@ To replicate a figure of Parts II and III, these are the runs you need: on a
 computer with Python 3, numpy and networkx and a copy of this repository,
 `python3 gol_lab.py run E10` makes them into the folder `GraphOfLifeRuns/`,
 and `python3 book_figures.py` then redraws the figures from them. The few
-figures that set worlds of different sizes side by side — in Chapters 13,
+figures that set worlds of different sizes side by side — in Chapters [13](13-how-ages-change.md),
 24, 25 and 33 — also read the thirty worlds of 10,000 tokens
 (`python3 gol_lab.py run E02`) or the worlds of every size of
 [Chapter 42](42-how-does-a-worlds-size-follow-its-tokens.md)

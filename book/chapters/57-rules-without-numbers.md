@@ -21,13 +21,13 @@ stop one way a world was seen to fail, and each was tested in
 
 | number | in B2 | what it stops | shown in |
 |---|---|---|---|
-| `incumbency` | 1.5 | an owner's stake counts one and a half times: defending is cheaper than attacking | Chapter 49 |
-| `birth_links` | 2 | a newborn is joined to its parent and two of the parent's neighbours: no world grows as a tree | Chapter 48 |
-| `prune_needs` | 2 | an unused link lapses only if its ends share two neighbours: pruning never cuts | Chapter 48 |
-| `valence` | 8 | a brain may choose at most 8 links: no hubs | Chapter 48 |
-| `keep_home` | 0.3 | 30% of an agent's tokens stay at home: no agent stakes itself to death, and no world of one-token zombies | Chapter 49 |
-| `max_age` | 100 | every agent dies at 100: no hoarding queen, and room for the young | Chapter 49 |
-| `min_child` | 10 | a child starts with at least 10 tokens: children are not spent as missiles | Chapter 49 |
+| `incumbency` | 1.5 | an owner's stake counts one and a half times: defending is cheaper than attacking | [Chapter 49](49-who-dies-and-why.md) |
+| `birth_links` | 2 | a newborn is joined to its parent and two of the parent's neighbours: no world grows as a tree | [Chapter 48](48-a-world-that-cannot-break.md) |
+| `prune_needs` | 2 | an unused link lapses only if its ends share two neighbours: pruning never cuts | [Chapter 48](48-a-world-that-cannot-break.md) |
+| `valence` | 8 | a brain may choose at most 8 links: no hubs | [Chapter 48](48-a-world-that-cannot-break.md) |
+| `keep_home` | 0.3 | 30% of an agent's tokens stay at home: no agent stakes itself to death, and no world of one-token zombies | [Chapter 49](49-who-dies-and-why.md) |
+| `max_age` | 100 | every agent dies at 100: no hoarding queen, and room for the young | [Chapter 49](49-who-dies-and-why.md) |
+| `min_child` | 10 | a child starts with at least 10 tokens: children are not spent as missiles | [Chapter 49](49-who-dies-and-why.md) |
 
 Two more rules of B2 have no number in them: a death is mended by joining the
 dead agent's neighbours in a ring, and a brain changes only when it is
@@ -128,7 +128,7 @@ and who does not.
 
 ## What each number was doing
 
-Every failure above was already named in Chapters 48 and 49, one number at a
+Every failure above was already named in Chapters [48](48-a-world-that-cannot-break.md) and [49](49-who-dies-and-why.md), one number at a
 time. Here they come all at once:
 
 | without | what happened |

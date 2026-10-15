@@ -64,7 +64,7 @@ second barely longer.
 [Chapter 19](19-what-the-brains-are-like.md) gives a reason to expect the
 first answer: the brains are nearly blind and agree on every decision that
 matters, which leaves little for one line to be better at. The worlds of
-Chapter 42 point to the third: at 102,400 tokens, all three came from a
+[Chapter 42](42-how-does-a-worlds-size-follow-its-tokens.md) point to the third: at 102,400 tokens, all three came from a
 single founder by iterations 400, 400 and 525, where the median baseline
 world needed 175.
 
@@ -81,7 +81,7 @@ world needed 175.
 > **It fails if:** The median is below 350: a large world is taken over about as fast as a small one, as a better brain spreading through a well-mixed population would take it. Or it is above 875, or most worlds never get there by iteration 1,500: then the pace is set by the number of agents, as chance alone would set it.
 <!-- /thesis -->
 
-("Chapter 23" and "Chapter 38" in the thesis are today's [Chapter 24](24-how-many-dimensions-does-a-world-have.md) and [Chapter 42](42-how-does-a-worlds-size-follow-its-tokens.md).)
+("[Chapter 23](23-like-next-to-like.md)" and "[Chapter 38](38-do-agents-cooperate.md)" in the thesis are today's [Chapter 24](24-how-many-dimensions-does-a-world-have.md) and [Chapter 42](42-how-does-a-worlds-size-follow-its-tokens.md).)
 
 ## Method
 

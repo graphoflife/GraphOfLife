@@ -131,7 +131,7 @@ proportion, as closely as three seeds per size can tell: the fitted exponent
 is **1.00** (95% interval 0.95 to 1.06), the line explains 98% of the scatter,
 and the points do not bend away from it. A settled world holds about 0.14
 agents per token — a world of 409,600 tokens about 60,000 agents. The worlds
-of Chapter 10 fall where the line says they should: 0.124 agents per token in
+of [Chapter 10](10-a-worlds-life.md) fall where the line says they should: 0.124 agents per token in
 the median world, against 0.140 predicted, well inside their own spread
 (0.06 to 0.25).
 
@@ -231,7 +231,7 @@ agents lived and died independently, it would be about 0.1%.
 The right panel shows why. On average a game cuts off about 2% of the agents
 of a world — between 1.5% and 3.9%, size by size, with no trend. And the
 largest single cut is a large part of the world at every size: 35% at 3,200
-tokens, 48% at 409,600, 71% in one world of Chapter 10. In the biggest
+tokens, 48% at 409,600, 71% in one world of [Chapter 10](10-a-worlds-life.md). In the biggest
 worlds, one game has cut off nearly thirty thousand agents at once. [Chapter 36](36-how-a-world-breaks.md) found how such cuts
 happen — a whole border of poor agents going quiet — and
 [Chapter 39](39-questioning-the-mechanics.md) the rule that makes them fatal:
@@ -292,7 +292,7 @@ Three properties of the network's shape do change, slowly:
 All three go with the slow rise in connections per agent: more connections,
 fewer leaves, more loops, more neighbours to lose one's node to. Over a
 128-fold range of sizes they shift by between a fifth and a half. The worlds
-of Chapter 10 sit among the others in every panel: the numbers Parts II and
+of [Chapter 10](10-a-worlds-life.md) sit among the others in every panel: the numbers Parts II and
 III first found at 10,000 tokens hold, roughly, at other sizes — as the
 second edition of those parts, at 100,000 tokens, checks
 ([Chapter 9](09-thirty-worlds.md)).
@@ -396,7 +396,7 @@ Before the runs, as Experiment 8:
 > **It fails if:** The exponent's interval leaves out 1, so that bigger worlds hold clearly fewer or more agents (or connections) per token than smaller ones, or the points bend on logarithmic axes. Then a world's size is more than its tokens, something in the dynamics reaches across the whole world, and every result in this book belongs to the size it was found at.
 <!-- /thesis -->
 
-("Chapter 3" in the thesis is today's [Chapter 10](10-a-worlds-life.md).)
+("[Chapter 3](03-one-iteration.md)" in the thesis is today's [Chapter 10](10-a-worlds-life.md).)
 
 The thesis **holds**, on every count it set: the exponent for agents is 1.00
 with an interval from 0.95 to 1.06, for connections 1.04 with an interval from

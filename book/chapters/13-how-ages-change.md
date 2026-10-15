@@ -130,7 +130,7 @@ the iteration they are born in
 ([Chapter 12](12-births-deaths-and-ages.md)), so about *B* = 345 in every
 iteration live through their first game — 2.4 per hundred agents. A share
 *S*(100) = 0.13 of these live to an age of 100 iterations (the curves of
-Chapter 12 count exactly these agents); and from then on about *h* = 1% of
+[Chapter 12](12-births-deaths-and-ages.md) count exactly these agents); and from then on about *h* = 1% of
 those left die in every game, whatever their age. The number of agents alive
 that are older than *L* is then about
 

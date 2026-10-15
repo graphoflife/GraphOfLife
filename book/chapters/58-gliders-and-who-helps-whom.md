@@ -42,7 +42,7 @@ ask whether the worlds without alliances cooperate in some way of their own.
 This chapter reads the record of play. B2's ten worlds of Experiment 16 and the
 first ten worlds of B1's baseline set record every game with every agent's
 stakes, and the games of iterations 1,000 to 2,000 are read: a settled world,
-long after the founders. For alliances, pilot worlds of Chapter 56 are played
+long after the founders. For alliances, pilot worlds of [Chapter 56](56-alliances.md) are played
 on for 200 iterations from a checkpoint, recording their games in the same form
 (`research/oee/checks/pilot_frames.py`), together with the same pilots without
 alliances as their control. Every check is a script in `research/oee/checks/`.

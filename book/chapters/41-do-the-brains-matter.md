@@ -310,7 +310,7 @@ Before the runs, as Experiment 7:
 > **It fails if:** The worlds without change are about as alike as the baseline's, and wander as much. Then evolution is not what keeps the seed from mattering, and the brain a world starts with does not decide its fate.
 <!-- /thesis -->
 
-("Chapter 4" in the thesis is today's [Chapter 14](14-how-much-does-the-seed-decide.md).)
+("[Chapter 4](04-the-brain.md)" in the thesis is today's [Chapter 14](14-how-much-does-the-seed-decide.md).)
 
 The thesis **holds**, on all three counts and by wide margins: the spread of
 the number of agents is 0.45 against 0.17 (it asked for at least 0.34);

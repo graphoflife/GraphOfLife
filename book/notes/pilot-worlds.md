@@ -59,7 +59,7 @@ contests. `research/oee/pilots/elo.py` fits one rating per era.
 
 The brains can be dealt in two ways:
 
-- **coins** (the default): a coin per agent, as in Chapter 46, so the two eras
+- **coins** (the default): a coin per agent, as in [Chapter 46](../chapters/46-how-to-tell-a-world-that-keeps-evolving.md), so the two eras
   are mixed agent by agent;
 - **halves** (`--layout halves`): era B gets the half of the agents nearest,
   in steps, to an agent drawn at random, and era A the rest. Each era then

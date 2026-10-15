@@ -19,7 +19,7 @@ coordinate are questions whose answers change as the population changes.
 
 But cooperation needs a **surplus**. In this world tokens are never made;
 every token an agent gives away is a token it no longer has. The two kinds of
-help the pilots of Chapter 50 tried were both gifts without a return. Support
+help the pilots of [Chapter 50](50-why-evolution-stops.md) tried were both gifts without a return. Support
 counted for less than a stake at home, and the yield on returned stakes went
 to whoever had most partners. Evolution gave both up.
 

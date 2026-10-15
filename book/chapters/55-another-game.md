@@ -188,7 +188,7 @@ than one alliance holding the world.
 But the brains did not keep improving. Iteration 1,000 against 500 scored
 0.48 and 0.54 with the family sense, and 0.43 and 0.52 pooled by family. The
 steps after iteration 200 were 0.43 to 0.54. A password and a crowd for free
-were not enough. The raiders of Chapter 51 also had their play written for
+were not enough. The raiders of [Chapter 51](51-strategies-written-by-hand.md) also had their play written for
 them, and that is the part evolution would still have to find.
 
 ## What it teaches
@@ -232,7 +232,7 @@ the frontier fights, the inside feeds it. Under pooling the inside's tokens
 already defend the frontier, yet nothing better evolved.
 
 **A password and a crowd given for free are not enough.** The raiders of
-Chapter 51 won with a password and a crowd that already used it. Given the
+[Chapter 51](51-strategies-written-by-hand.md) won with a password and a crowd that already used it. Given the
 password as a sense of clones, evolving brains find no crowd to use it with:
 one copy in five is a new genotype, so clones seldom sit together. Given
 families large enough to be a crowd, they still did not find the raiders'
