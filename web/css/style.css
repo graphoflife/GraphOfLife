@@ -2419,6 +2419,11 @@ button, .tab, .seg-btn, select, input[type="text"], input[type="number"] {
 }
 button:active:not(:disabled) { transform: translateY(1px); }
 
+/* The loading bar gives way before the page does: it shrinks, and its text
+   ends in an ellipsis, rather than pushing the top bar wider than the window. */
+.job-bar { min-width: 0; flex-shrink: 1; }
+.job-text { min-width: 0; }
+
 /* The tab you are on: lighter, white, and underlined in the accent. Still
    unmistakable at a glance, and calmer than a white box. */
 .tab.active {
