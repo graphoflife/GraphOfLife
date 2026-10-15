@@ -77,6 +77,12 @@ if (nullSeed !== null) {
 const { history, withoutFlow } = FlowModules.follow(frames, { floor, mutual });
 const perFrame = new Map();
 for (const row of history) perFrame.set(row.iteration * 2 + row.phase, row.modules);
+// How many games each module lived, and how many agents it had, as counts.
+const lives = new Map();
+for (const row of history) lives.set(row.id, (lives.get(row.id) || 0) + 1);
+const lifeCounts = {}, sizeCounts = {};
+for (const life of lives.values()) lifeCounts[life] = (lifeCounts[life] || 0) + 1;
+for (const row of history) sizeCounts[row.size] = (sizeCounts[row.size] || 0) + 1;
 process.stdout.write(JSON.stringify({
   frames: frames.length,
   withoutFlow,
@@ -84,5 +90,8 @@ process.stdout.write(JSON.stringify({
   mutual,
   null: nullSeed !== null,
   modulesPerFrame: [...perFrame.values()],
+  agentsPerFrame: frames.filter(f => (f.decisions || {}).allocations?.length).map(f => (f.ids || []).length),
+  lives: lifeCounts,
+  sizes: sizeCounts,
   summary: FlowModules.summarise(history)
 }));

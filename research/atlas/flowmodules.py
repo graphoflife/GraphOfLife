@@ -85,13 +85,23 @@ def pilot_world(item):
     return f"{batch}/{name}", result["mutual"]["summary"]
 
 
+def done(path):
+    """Whether a world's result is there and holds what the chapter draws (module lives came later)."""
+    if not os.path.exists(path):
+        return False
+    try:
+        return "lives" in json.load(open(path))["mutual"]
+    except (ValueError, KeyError):
+        return False
+
+
 def lab_runs(per_family):
     runs = sorted(d for d in os.listdir(RUNS) if os.path.exists(os.path.join(RUNS, d, "stats.jsonl")))
     seen = {}
     chosen = []
     for run in runs:
         family = re.sub(r"-s\d+$", "", run)
-        if seen.get(family, 0) < per_family and not os.path.exists(os.path.join(OUT, f"lab_{run}.json")):
+        if seen.get(family, 0) < per_family and not done(os.path.join(OUT, f"lab_{run}.json")):
             meta = json.load(open(os.path.join(RUNS, run, "meta.json")))
             if (meta.get("config") or {}).get("export_decisions", True) and int(meta.get("iteration", 0)) >= GAMES:
                 chosen.append(run)
@@ -114,7 +124,7 @@ def main():
         todo = [p for p in across.pilots()
                 if os.path.realpath(p[2]) not in busy
                 and json.load(open(os.path.join(p[2], "config.json"))).get("proto", {}).get("engine")
-                and not os.path.exists(os.path.join(OUT, f"pilot_{p[0]}_{p[1]}.json"))]
+                and not done(os.path.join(OUT, f"pilot_{p[0]}_{p[1]}.json"))]
         work = pilot_world
     print(f"{len(todo)} worlds", flush=True)
     with ProcessPoolExecutor(max_workers=a.jobs) as pool:
