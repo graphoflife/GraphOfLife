@@ -20,7 +20,21 @@ Mechanics (P keys):
                   are joined.
   toll     "pool" | "path"   where a searcher's tokens go: shared out uniformly, or
                   paid to the agent each step enters.
-  seek_max int    the longest walk (tokens a single search may spend).
+  seek_max int    the longest walk (tokens a single search may spend); 0 = as many
+                  steps as the tokens the searcher chooses to spend.
+  came_from bool  one input row per candidate: is this the node my brain came from?
+                  (the node whose holder took mine, or my parent if I was born here)
+  helped_by bool  one input row per candidate: what its stake on my node did in the
+                  last game, P(I keep my node | all stakes) - P(... | all but its),
+                  counted exactly by the game's rule (research/oee/checks/rules.py):
+                  above zero it helped me keep my node, below zero it attacked.
+  link_token bool every link holds one token. Making a link costs its maker one token
+                  (a child pays for its birth links, a searcher for its find); when a
+                  link lapses its token goes to one of its two ends, drawn at random;
+                  when an agent dies, its links' tokens pay for the links that mend
+                  its neighbourhood and the rest is scattered over the survivors like
+                  the estate. Tokens held plus links equal the world's tokens, so the
+                  links can never outnumber the tokens; run it with valence=0.
   incumbency float  an agent's stake on its own node counts this many times over
                   when the game decides who takes the node (1 = the engine's rule).
   juvenile int    a newborn cannot be taken for this many iterations after its birth.
@@ -102,9 +116,10 @@ Mechanics (P keys):
 from __future__ import annotations
 
 import sys
-from typing import Any, Dict, List, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 sys.path.insert(0, "/home/stefan/Documents/CodingProjects/GraphOfLife Claude")
+sys.path.insert(0, "/home/stefan/Documents/CodingProjects/GraphOfLife Claude/research/oee/checks")
 
 import numpy as np
 import networkx as nx
@@ -114,6 +129,7 @@ from GraphOfLifeSimple import (GraphOfLife, _apportion, _share_of_first,
 from gol_config import SimConfig
 
 DEFAULTS = {"mor": "off", "memory": False, "seek": False, "toll": "pool", "seek_max": 8,
+            "came_from": False, "helped_by": False, "link_token": False,
             "incumbency": 1.0, "juvenile": 0, "yield_tax": 0.0, "window": 0, "min_child": 1,
             "triangle_birth": False, "birth_links": 0, "repair": False, "safe_prune": False,
             "newborn_home": False, "max_age": 0, "valence": 0, "valence_mode": "all",
@@ -151,6 +167,10 @@ class ProtoConfig(SimConfig):
         if pooled() or P.get("kin_sense"):
             layout["same_side"] = (row, row + 1, "bit")
             row += 1
+        for name in ("came_from", "helped_by"):
+            if P.get(name):
+                layout[name] = (row, row + 1, "bit")
+                row += 1
         return layout
 
     def head_layout(self):
@@ -171,6 +191,11 @@ class ProtoConfig(SimConfig):
         return layout
 
 
+#: Non-zero while a world is being built or loaded: the links it is given then are not
+#: made in play, so link_token does not charge for them (the founders pay afterwards).
+_BUILDING = [0]
+
+
 class ProtoWorld(GraphOfLife):
 
     def __init__(self, G_init, cfg, _empty=False):
@@ -185,12 +210,36 @@ class ProtoWorld(GraphOfLife):
         # Who was allied with whom in the last game (both ways).
         self.last_allies: Dict[int, set] = {}
         self._seekers: List[Tuple[int, int]] = []
+        # came_from: node -> the node its holder's brain came from. effect_on: (holder,
+        # staker) -> what the staker's stake did to the holder's chance to keep its node
+        # in the last game. Neither is kept in checkpoints: a world loaded from one
+        # starts with them empty and has them again after its first game.
+        self.came_from: Dict[int, int] = {}
+        self.effect_on: Dict[Tuple[int, int], float] = {}
+        # link_token: tokens of lapsed links waiting, during a cleanup, to pay for the
+        # links that mend it or to be scattered with the estate.
+        self._link_bank: Optional[int] = None
         # Each genotype's family tag (tag_rate > 0): a tag changes only when a brain mutates.
         self.tag_of: Dict[int, int] = {}
-        super().__init__(G_init, cfg, _empty=_empty)
+        _BUILDING[0] += 1
+        try:
+            super().__init__(G_init, cfg, _empty=_empty)
+        finally:
+            _BUILDING[0] -= 1
         for b in self.brains.values():
             self.root_of.setdefault(b.brain_id, b.brain_id)
             self.tag_of.setdefault(b.brain_id, b.brain_id)
+        if P.get("link_token") and not _empty:
+            self._pay_for_founding_links()
+
+    @classmethod
+    def from_checkpoint(cls, blob, cfg):
+        # A checkpoint's links were paid for when they were made: its tokens are what is left.
+        _BUILDING[0] += 1
+        try:
+            return super().from_checkpoint(blob, cfg)
+        finally:
+            _BUILDING[0] -= 1
 
     # ---- bookkeeping -------------------------------------------------------
     def _count(self, key, n=1):
@@ -311,7 +360,7 @@ class ProtoWorld(GraphOfLife):
             self._add_edge(a, b)
             self._count("repairs")
 
-    def _cleanup_and_redistribute(self):
+    def _cleanup_rules(self):
         if not P.get("repair"):
             return super()._cleanup_and_redistribute()
         # The engine's cleanup with one change: each starved agent is removed on its
@@ -398,6 +447,11 @@ class ProtoWorld(GraphOfLife):
             own = self.family(self.brains[u].brain_id)
             X = np.vstack([X, [[1.0 if v != u and self.family(self.brains[v].brain_id) == own else 0.0
                                 for v in candidates]]])
+        if P.get("came_from"):
+            origin = self.came_from.get(u)
+            X = np.vstack([X, [[1.0 if v != u and v == origin else 0.0 for v in candidates]]])
+        if P.get("helped_by"):
+            X = np.vstack([X, [[self.effect_on.get((u, v), 0.0) for v in candidates]]])
         return X
 
     def same_side(self, a, b, allies=None) -> bool:
@@ -451,6 +505,8 @@ class ProtoWorld(GraphOfLife):
     # ---- reproduction, with the search for partners after it ----------------
     def _spawn_child(self, parent, parent_tokens, child_tokens, candidates, Y):
         child_id, linked = self._spawn_child_rules(parent, parent_tokens, child_tokens, candidates, Y)
+        if P.get("came_from"):
+            self.came_from[int(child_id)] = int(parent)
         if P.get("birth_allies"):
             G = self.G
             for v in [parent] + sorted(self.last_allies.get(parent, ())):
@@ -527,7 +583,9 @@ class ProtoWorld(GraphOfLife):
         if P.get("seek") and purse >= 1:
             frac = np.mean(Y[self.heads["SEEK"], :], axis=1)
             budget = int(np.floor(_share_of_first(frac[0], frac[1]) * purse))
-            budget = min(budget, int(P.get("seek_max", 8)))
+            cap = int(P.get("seek_max", 8))
+            if cap:
+                budget = min(budget, cap)
             if budget >= 1:
                 self._seekers.append((int(u), budget))
         return super()._choose_gifts(u, purse, candidates, Y)
@@ -688,6 +746,87 @@ class ProtoWorld(GraphOfLife):
         mode = Y[self.heads["LINK_MODE"], 1]
         return _choose_binary(acc[0], acc[1], mode[0], mode[1], self.rng)
 
+    # ---- what an agent remembers of the last game: where it came from, who helped ----
+    def _note_origins(self, winners: Dict[int, int]) -> None:
+        """A node taken by another agent now holds a brain that came from the taker's node."""
+        for v, w in winners.items():
+            if w != v:
+                self.came_from[int(v)] = int(w)
+        if len(self.came_from) > 2 * max(1, self.G.number_of_nodes()):
+            self.came_from = {v: w for v, w in self.came_from.items() if self.G.has_node(v)}
+
+    def _after_game(self, decisions: Dict[str, Any]) -> None:
+        winners = {int(x["node"]): int(x["winner"]) for x in decisions["winners"]}
+        if P.get("came_from"):
+            self._note_origins(winners)
+        if P.get("helped_by"):
+            from rules import effects
+            rules = {"incumbency": float(self.cfg.incumbency or 1.0), "revolutions": self.cfg.allow_revolutions}
+            self.effect_on = {(v, u): e for u, v, e, _ in effects({"decisions": decisions}, rules) if e}
+            self._count("helps", sum(1 for e in self.effect_on.values() if e > 0))
+
+    # ---- links that hold a token ---------------------------------------------
+    def _pay_for_founding_links(self) -> None:
+        """The founders' links are paid like any other: one token each, from an end that has one."""
+        unpaid = 0
+        for u, v in list(self.G.edges()):
+            ends = [x for x in (u, v) if self.tokens.get(x, 0) > 0]
+            if not ends:
+                unpaid += 1
+                continue
+            payer = ends[self.rng.randint(len(ends))]
+            self.tokens[payer] -= 1
+        if unpaid:
+            raise ValueError(f"{unpaid} founding links could not be paid for: too few tokens")
+
+    def _add_edge(self, u, v, when=None):
+        if not P.get("link_token") or _BUILDING[0] or u == v or self.G.has_edge(u, v):
+            return super()._add_edge(u, v, when)
+        if self._link_bank is not None and self._link_bank > 0:
+            self._link_bank -= 1                     # paid by the links of the dead
+        elif self.tokens.get(u, 0) >= 1:
+            self.tokens[u] -= 1                      # paid by its maker
+        else:
+            self._count("links_unaffordable")
+            return
+        self._count("links_paid")
+        return super()._add_edge(u, v, when)
+
+    def _drop_edges(self, edges):
+        if not P.get("link_token"):
+            return super()._drop_edges(edges)
+        edges = [(u, v) for u, v in edges if self.G.has_edge(u, v)]
+        seen = set()
+        for u, v in edges:
+            key = (u, v) if u < v else (v, u)
+            if key in seen:
+                continue
+            seen.add(key)
+            if self._link_bank is not None:
+                self._link_bank += 1                 # a cleanup: the token waits in the bank
+            else:
+                end = (u, v)[self.rng.randint(2)]
+                self.tokens[end] = self.tokens.get(end, 0) + 1
+        self._count("links_freed", len(seen))
+        return super()._drop_edges(edges)
+
+    def _cleanup_and_redistribute(self):
+        if not P.get("link_token"):
+            return self._cleanup_rules()
+        self._link_bank = 0
+        try:
+            report = self._cleanup_rules()
+        finally:
+            bank, self._link_bank = self._link_bank, None
+        survivors = list(self.G.nodes())
+        if report.get("resurrected"):
+            bank = 0                                 # an emptied world starts again with everything
+        if bank > 0 and survivors:
+            draws = self.rng.multinomial(bank, np.full(len(survivors), 1 / len(survivors)))
+            for x, extra in zip(survivors, draws):
+                self.tokens[x] = self.tokens.get(x, 0) + int(extra)
+        return report
+
     # ---- the engine's own game, with the contest and pooling hooks ------------
     def _weighed(self, v, offers):
         """The engine's weighing; under pool=genotype (or family), one offer per genotype (family)."""
@@ -741,8 +880,18 @@ class ProtoWorld(GraphOfLife):
 
     def blotto_phase(self, record_decisions: bool) -> Dict[str, Any]:
         if not P.get("engine"):
-            return self._proto_blotto(record_decisions)
-        frame = GraphOfLife.blotto_phase(self, record_decisions)
+            if P.get("helped_by"):
+                raise NotImplementedError("helped_by reads the engine's record of the game: run it with engine=true")
+            frame = self._proto_blotto(record_decisions)
+            if P.get("came_from"):
+                self._note_origins(self.last_winners)
+            return frame
+        needs = bool(P.get("came_from") or P.get("helped_by"))
+        frame = GraphOfLife.blotto_phase(self, record_decisions or needs)
+        if needs:
+            self._after_game(frame["decisions"])
+            if not record_decisions:
+                frame["decisions"] = None
         self._count("starved_g", frame["cleanup"]["starved"])
         self._count("orphaned_g", frame["cleanup"]["orphaned"])
         return frame

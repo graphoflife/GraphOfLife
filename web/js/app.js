@@ -21,6 +21,14 @@ const App = {
 
     Jobs.attach(document.getElementById('jobBar'));
 
+    // The views that fill the window below the top bar size themselves by its
+    // height. It was a constant, 47px, true on a desktop and wrong as soon as a
+    // narrow screen gives the tabs a row of their own; now it is measured.
+    const topbar = document.querySelector('.topbar');
+    const publish = () => document.documentElement.style.setProperty('--topbar-h', `${topbar.offsetHeight}px`);
+    if (window.ResizeObserver) new ResizeObserver(publish).observe(topbar);
+    publish();
+
     // A hidden tab is not a tab anyone is reading. Work started in it kept
     // fetching and kept the layout worker spinning, which is most of what
     // "something in another window is still loading" was.

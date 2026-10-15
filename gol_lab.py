@@ -670,8 +670,12 @@ def experiment_status(name: str, control: Dict[str, Any], known: Dict[str, Any],
             except LabError:
                 pass
 
-    runs, left, total_iterations, done_iterations = [], [], 0, 0
-    whole, engines = [], {}
+    runs, total_iterations, done_iterations = [], 0, 0
+    whole, engines, pending = [], {}, []
+    # The model's seconds and the measured ones for the iterations already run, and the
+    # model's seconds for the whole experiment: how fast it has gone so far, and how much
+    # of it that is.
+    model_done = measured_done = model_all = 0.0
     for spec in specs:
         state = run_state(spec, None)
         state.pop("job", None)
@@ -682,16 +686,32 @@ def experiment_status(name: str, control: Dict[str, Any], known: Dict[str, Any],
             iteration = spec.until
         total_iterations += spec.until
         done_iterations += iteration
-        rate = _recent_rate(spec.run_id) if state["state"] == "running" else None
         guess = predict(spec.config, 1, known)["seconds"]
+        model_all += spec.until * guess
+        measured = _recent_rate(spec.run_id) if iteration and state["state"] in ("running", "done") else None
+        if measured:
+            model_done += iteration * guess
+            measured_done += iteration * measured
+        rate = measured if state["state"] == "running" else None
         remaining = 0 if state["state"] in ("done", "blocked") else spec.until - iteration
-        left.append(remaining * (rate or guess))
+        if remaining:
+            pending.append((remaining, guess, rate))
         whole.append(predict(spec.config, spec.until, known))
         runs.append({"id": spec.run_id, "name": spec.name, "condition": spec.condition,
                      "seed": spec.lab["seed"], "iteration": iteration, "until": spec.until,
                      "state": state["state"], "reason": state.get("reason"),
                      "diedAt": state["iteration"] if state.get("status") == "extinct" else None,
                      "secondsPerIteration": rate, "sharedWith": shared.get(spec.run_id, [])})
+
+    # A run that is going is timed by its own pace. One that has not started is timed by
+    # the cost model, corrected by how much faster or slower than the model this
+    # experiment has run so far, on this machine as it is loaded now. The correction
+    # counts in proportion to the share of the experiment's work already done: the model
+    # alone at the start, the experiment's own pace at the end.
+    pace = measured_done / model_done if model_done else 1.0
+    share = min(1.0, model_done / model_all) if model_all else 0.0
+    correction = (1.0 - share) + share * pace
+    left = [remaining * (rate if rate else guess * correction) for remaining, guess, rate in pending]
 
     states = {r["state"] for r in runs}
     if "blocked" in states:
@@ -708,6 +728,7 @@ def experiment_status(name: str, control: Dict[str, Any], known: Dict[str, Any],
         "state": overall, "runs": runs, "engines": engines, "workers": workers,
         "done": done_iterations, "total": total_iterations,
         "secondsLeft": schedule([s for s in left if s], workers),
+        "pace": {"measured": pace if model_done else None, "share": share, "correction": correction},
         "estimate": {"seconds": schedule([w["seconds"] for w in whole], workers),
                      "diskBytes": sum(w["diskBytes"] for w in whole),
                      "peakMB": max((w["peakMB"] for w in whole), default=0)},

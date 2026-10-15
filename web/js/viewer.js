@@ -175,6 +175,45 @@ const Viewer = {
     // Middle-click drag would otherwise trigger autoscroll.
     this.canvas.addEventListener('auxclick', e => { if (e.button === 1) e.preventDefault(); });
 
+    // Fingers. The mouse handlers above see only the mouse; on a touch screen a
+    // drag scrolled the page and a pinch zoomed the whole site. One finger pans,
+    // as a mouse drag does; two pinch to zoom about the point between them, and
+    // moving both together pans in 2D and turns the graph in 3D, as alt-drag
+    // does. A tap is still a click, and picks the agent under it.
+    const fingers = new Map();
+    let pair = null;
+    this.canvas.addEventListener('pointerdown', e => {
+      if (e.pointerType !== 'touch') return;
+      this.canvas.setPointerCapture(e.pointerId);
+      fingers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      pair = null;
+    });
+    this.canvas.addEventListener('pointermove', e => {
+      if (e.pointerType !== 'touch' || !fingers.has(e.pointerId)) return;
+      const before = fingers.get(e.pointerId);
+      fingers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      if (fingers.size === 1) {
+        this.renderer.pan(e.clientX - before.x, e.clientY - before.y);
+        this.setAutoFit(false);
+        return;
+      }
+      if (fingers.size !== 2) return;
+      const [a, b] = [...fingers.values()];
+      const now = { gap: Math.hypot(a.x - b.x, a.y - b.y), x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 };
+      if (pair) {
+        const rect = this.canvas.getBoundingClientRect();
+        if (pair.gap > 0 && now.gap > 0) this.renderer.zoomAt(now.x - rect.left, now.y - rect.top, now.gap / pair.gap);
+        const dx = now.x - pair.x, dy = now.y - pair.y;
+        if (this.renderer.mode3D) this.renderer.rotate(dx * 0.007, dy * 0.007);
+        else this.renderer.pan(dx, dy);
+        this.setAutoFit(false);
+      }
+      pair = now;
+    });
+    const lift = e => { fingers.delete(e.pointerId); pair = null; };
+    this.canvas.addEventListener('pointerup', lift);
+    this.canvas.addEventListener('pointercancel', lift);
+
     this.canvas.addEventListener('wheel', e => {
       e.preventDefault();
       const rect = this.canvas.getBoundingClientRect();

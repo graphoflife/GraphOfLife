@@ -1,0 +1,4 @@
+# B2 worlds of Experiment 16 continued from 2,000 to 10,000 (run.py --from): later eras against earlier, T = 100.
+pilot GraphOfLifeRuns/.pilots/L/B2-long-s001 2000:10000,5000:10000,2000:5000,9500:10000
+pilot GraphOfLifeRuns/.pilots/L/B2-long-s002 2000:10000,5000:10000,2000:5000,9500:10000
+pilot GraphOfLifeRuns/.pilots/L/B2-long-s003 2000:10000,5000:10000,2000:5000,9500:10000

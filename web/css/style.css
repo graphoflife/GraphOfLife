@@ -390,7 +390,9 @@ button.small { padding: 4px 9px; font-size: 12px; }
   height: min(64vh, 720px);
 }
 
-#graphCanvas { width: 100%; height: 100%; display: block; cursor: grab; }
+/* touch-action: the canvas takes every finger itself (viewer.js pans and zooms
+   with them) instead of the browser scrolling or zooming the page. */
+#graphCanvas { width: 100%; height: 100%; display: block; cursor: grab; touch-action: none; }
 #graphCanvas:active { cursor: grabbing; }
 
 .canvas-empty {
@@ -462,10 +464,10 @@ button.small { padding: 4px 9px; font-size: 12px; }
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 12px;
-  max-height: calc(100vh - 90px);
+  max-height: calc(100vh - var(--topbar-h, 47px) - 43px);
   overflow-y: auto;
   position: sticky;
-  top: 68px;
+  top: calc(var(--topbar-h, 47px) + 21px);
 }
 
 .control-group { margin-bottom: 16px; }
@@ -1065,9 +1067,9 @@ details.control-group > summary:hover h3 { color: var(--text); }
 }
 .book-toc {
   position: sticky;
-  top: 68px;
+  top: calc(var(--topbar-h, 47px) + 21px);
   align-self: start;
-  max-height: calc(100vh - 90px);
+  max-height: calc(100vh - var(--topbar-h, 47px) - 43px);
   overflow-y: auto;
   font-size: 13px;
   padding-right: 4px;
@@ -1859,7 +1861,11 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
 
 .home-stage {
   position: relative;
-  height: calc(100vh - 47px);
+  /* What is left under the top bar: its height is measured (app.js), and the
+     small viewport height keeps a phone's sliding address bar from cutting
+     the bottom off. */
+  height: calc(100vh - var(--topbar-h, 47px));
+  height: calc(100svh - var(--topbar-h, 47px));
   min-height: 420px;
   overflow: hidden;
   background: var(--stage);
@@ -2043,7 +2049,7 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
 #view-explain { padding: 0; }
 
 .ex {
-  height: calc(100vh - 47px);
+  height: calc(100vh - var(--topbar-h, 47px));
   display: flex;
   flex-direction: column;
   padding: 14px 18px 10px;
@@ -2242,4 +2248,209 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   .ex-stage { min-height: 340px; }
   .ex-note { max-height: none; }
   .ex-code { max-height: 420px; }
+}
+
+/* ==========================================================================
+   Narrow screens: a phone in the hand
+   Every rule from here on sits inside a width query, so nothing in it changes
+   the page on a desktop. One column, nothing wider than the screen, and every
+   tab, button and chapter within reach of a thumb.
+   ========================================================================== */
+
+/* The chapter list's drawer: only where the list cannot stand beside the page. */
+.book-toc-toggle, .book-scrim { display: none; }
+
+@media (max-width: 900px) {
+  .book-layout { grid-template-columns: minmax(0, 1fr); }
+
+  /* Sticky under the top bar, and naming the chapter that is open. */
+  .book-toc-toggle {
+    position: sticky;
+    top: calc(var(--topbar-h, 47px) + 6px);
+    z-index: 15;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    margin: 0 0 12px;
+    padding: 10px 12px;
+    background: var(--panel);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+    font: 600 13px/1.3 var(--font);
+    text-align: left;
+    cursor: pointer;
+  }
+  .book-toc-toggle:active { background: var(--panel-2); }
+  .book-toc-toggle-text { flex: 1 1 auto; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  /* Three bars, drawn rather than typed, so they sit centred in any font. */
+  .book-toc-toggle-icon {
+    flex: 0 0 auto;
+    width: 15px;
+    height: 11px;
+    background:
+      linear-gradient(currentColor 0 0) 0 0 / 100% 2px no-repeat,
+      linear-gradient(currentColor 0 0) 0 50% / 100% 2px no-repeat,
+      linear-gradient(currentColor 0 0) 0 100% / 100% 2px no-repeat;
+  }
+
+  /* The list slides in from the left over the page, which a scrim dims. */
+  .book-toc {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 40;
+    width: min(86vw, 340px);
+    max-height: none;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 18px 14px 28px;
+    background: var(--panel);
+    border-right: 1px solid var(--border);
+    box-shadow: 0 0 44px rgba(0, 0, 0, 0.6);
+    transform: translateX(-105%);
+    visibility: hidden;
+    transition: transform 0.22s ease, visibility 0s linear 0.22s;
+  }
+  .book-toc.open { transform: none; visibility: visible; transition: transform 0.22s ease, visibility 0s; }
+  .book-toc-item { padding-top: 7px; padding-bottom: 7px; }
+  .book-scrim:not([hidden]) {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 39;
+    background: rgba(5, 7, 10, 0.62);
+    backdrop-filter: blur(2px);
+  }
+}
+@media (max-width: 900px) and (prefers-reduced-motion: reduce) {
+  .book-toc, .book-toc.open { transition: none; }
+}
+
+/* Two-column layouts drop to one: minmax(0, 1fr) rather than 1fr, because a
+   plain 1fr column grows to the widest thing inside it and pushed the whole
+   page sideways on a phone. */
+@media (max-width: 1100px) {
+  .ex-body { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 1000px) {
+  .viewer-layout { grid-template-columns: minmax(0, 1fr) !important; }
+  .charts { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 760px) {
+  html { scrollbar-gutter: auto; }
+
+  /* The mark and the wordmark keep the first line; the tabs get a row of
+     their own, which slides sideways when they do not all fit. */
+  .topbar { flex-wrap: wrap; gap: 4px 10px; padding: 8px 12px 0; }
+  .tabs {
+    order: 3;
+    flex: 1 0 100%;
+    gap: 2px;
+    margin: 0 -12px;
+    padding: 3px 12px 8px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab { flex: 0 0 auto; padding: 7px 12px; }
+  .job-bar { order: 2; margin-left: auto; max-width: calc(100vw - 196px); }
+  .job-track { flex-basis: 40px; }
+  .run-label { display: none; }
+
+  .view { padding: 12px 10px; }
+  .panel { padding: 12px; }
+
+  /* Front page: the note a little smaller, so it covers fewer of the agents. */
+  .home-note p { font-size: 12px; }
+
+  /* Explanation: the picture first, then the words, then the script. */
+  .ex { padding: 10px; }
+  .ex-stage { min-height: 56vw; }
+  .ex-code { max-height: 360px; }
+
+  /* Viewer: the canvas a square-ish window, the play bar in two rows. */
+  .canvas-wrap { height: min(78vw, 520px); }
+  .playbar { flex-wrap: wrap; row-gap: 8px; }
+  #frameSlider { order: 10; flex: 1 0 100%; }
+  .frame-label { flex-wrap: wrap; row-gap: 2px; }
+  .fl-iter, .fl-phase, .fl-pos { min-width: 0; }
+  .run-inline { flex: 1 1 100%; max-width: 100%; min-width: 0; }
+  .run-inline select { min-width: 0; max-width: none; flex: 1 1 0; width: 0; }
+  .stat { min-width: 0; }
+  .stat-detail { right: 8px; left: 8px; bottom: 8px; width: auto; }
+
+  /* Research: the pickers take the whole width. */
+  .research-bar { flex-wrap: wrap; }
+  .research-bar select { min-width: 0; max-width: none; width: 100%; }
+  .research-run { flex-wrap: wrap; }
+
+  /* Book: tables and wide formulas scroll inside themselves, not the page. */
+  .md table { display: block; overflow-x: auto; min-width: 0; }
+  .md .katex-display { overflow-x: auto; overflow-y: hidden; padding-bottom: 2px; }
+  .md pre { white-space: pre; overflow-x: auto; }
+
+  /* Fingers are wider than a mouse pointer. */
+  button, select, input[type="text"], input[type="number"] { min-height: 34px; }
+}
+
+/* ==========================================================================
+   Finish
+   Small things that make the page feel made rather than assembled: the top
+   bar lets what scrolls beneath it show through, controls answer the hand,
+   the tab you are on is marked by a bar of the accent, and a keyboard user
+   always sees where they are.
+   ========================================================================== */
+
+.topbar {
+  background: rgba(32, 43, 56, 0.86);
+  -webkit-backdrop-filter: saturate(140%) blur(10px);
+  backdrop-filter: saturate(140%) blur(10px);
+}
+
+button, .tab, .seg-btn, select, input[type="text"], input[type="number"] {
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+button:active:not(:disabled) { transform: translateY(1px); }
+
+/* The tab you are on: lighter, white, and underlined in the accent. Still
+   unmistakable at a glance, and calmer than a white box. */
+.tab.active {
+  border-color: transparent;
+  background: var(--panel-2);
+  box-shadow: inset 0 -2px 0 var(--accent);
+}
+
+/* Where the keyboard is. A mouse click does not show it (:focus-visible). */
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+input:focus-visible, select:focus-visible { outline-offset: 0; }
+
+/* A view arrives rather than snaps. */
+.view.active { animation: view-in 0.18s ease-out; }
+@keyframes view-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+/* Cards lift a little under the pointer, on screens that have one. */
+@media (hover: hover) {
+  .charts figure, .flow-facts div { transition: border-color 0.15s ease, transform 0.15s ease; }
+  .charts figure:hover { border-color: var(--border-strong); }
+}
+
+/* On a phone the row of tabs slides: its edges fade, so it is plain that
+   there is more of it to either side. */
+@media (max-width: 760px) {
+  .tabs {
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 14px, #000 calc(100% - 28px), transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0, #000 14px, #000 calc(100% - 28px), transparent 100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .view.active { animation: none; }
+  button:active:not(:disabled) { transform: none; }
 }

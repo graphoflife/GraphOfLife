@@ -48,7 +48,17 @@ const Book = {
       const link = event.target.closest('[data-chapter]');
       if (!link) return;
       event.preventDefault();
+      this.showToc(false);
       this.open(link.dataset.chapter);
+    });
+    // The drawer of a narrow screen: the button opens and closes it, a tap
+    // beside it or Escape closes it.
+    this.toggle = document.getElementById('bookTocToggle');
+    this.scrim = document.getElementById('bookScrim');
+    this.toggle.addEventListener('click', () => this.showToc(!this.toc.classList.contains('open')));
+    this.scrim.addEventListener('click', () => this.showToc(false));
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') this.showToc(false);
     });
     this.page.addEventListener('click', event => this.onClick(event));
     this.page.addEventListener('change', event => this.onChange(event));
@@ -214,8 +224,31 @@ const Book = {
 
   // ---- the chapter list -------------------------------------------------
 
+  /** Open or close the chapter list where it is a drawer (narrow screens). */
+  showToc(open) {
+    if (!this.toggle) return;
+    this.toc.classList.toggle('open', open);
+    this.scrim.hidden = !open;
+    this.toggle.setAttribute('aria-expanded', String(open));
+    if (open) {
+      const here = this.toc.querySelector('.book-toc-item.active');
+      if (here) here.scrollIntoView({ block: 'center' });
+    }
+  },
+
+  /** The drawer's button names the chapter that is open. */
+  labelToggle() {
+    if (!this.toggle || !this.index) return;
+    const chapter = this.chapters().find(c => c.id === this.current);
+    const text = this.toggle.querySelector('.book-toc-toggle-text');
+    if (!chapter) { text.textContent = 'Contents'; return; }
+    const number = /^\d+$/.test(chapter.id) ? `${chapter.id} · ` : /^[A-Z]$/.test(chapter.id) ? `${chapter.id} · ` : '';
+    text.textContent = `${number}${chapter.title.replace(/[*_`]/g, '')}`;
+  },
+
   renderToc() {
     if (!this.index) return;
+    this.labelToggle();
     const parts = this.index.parts.map(part => {
       const items = part.chapters.map(c => {
         const state = this.describe(c);
@@ -357,6 +390,17 @@ const Book = {
     live.innerHTML = this.liveHtml(name, status, this.lab);
   },
 
+  /**
+   * How the time left was corrected: the experiment's own pace against the cost model,
+   * which counts in proportion to the share of the work already done (gol_lab).
+   */
+  paceNote(pace) {
+    if (!pace || pace.measured == null) return '';
+    const times = pace.measured >= 1 ? `${pace.measured.toFixed(1)}× slower` : `${(1 / pace.measured).toFixed(1)}× faster`;
+    return ` So far it has run ${times} than the model says; with ${Math.round(100 * pace.share)}% of `
+      + `the work done, the time left for runs not yet started is ${pace.correction.toFixed(1)}× the model's.`;
+  },
+
   /** Progress, the time left, the buttons and every run's bar: only where there is a lab. */
   liveHtml(name, status, lab) {
     const chapter = this.chapters().find(c => c.experiment === name) || {};
@@ -375,7 +419,7 @@ const Book = {
       this.eta(status.estimate.seconds, '')} on ${own} worker${own === 1 ? '' : 's'} from the start, `
       + `${formatBytes(status.estimate.diskBytes)} of disk (${formatBytes(lab.disk.free)} free), `
       + `up to ${formatNumber(Math.round(status.estimate.peakMB))} MB of memory a run. `
-      + `Fitted to ${lab.costs.runs || 'no'} recorded runs so far.</p>`;
+      + `Fitted to ${lab.costs.runs || 'no'} recorded runs so far.${this.paceNote(status.pace)}</p>`;
     const reason = [this.refusal, lab.lab.reason && status.state === 'paused' ? lab.lab.reason : null]
       .filter(Boolean).map(text => `<p class="book-reason">${Markdown.escape(text)}</p>`).join('');
     const blocked = status.runs.filter(r => r.reason)

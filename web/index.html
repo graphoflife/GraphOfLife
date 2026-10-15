@@ -803,6 +803,14 @@
      it is read from book/ by book.js: the chapter list on the left, the
      chapter on the right. -->
 <main id="view-book" class="view">
+  <!-- On a narrow screen the chapter list is a drawer: this opens it, and says
+       which chapter is open. On a wide one the list stands beside the page and
+       the button is not shown. -->
+  <button class="book-toc-toggle" id="bookTocToggle" aria-expanded="false" aria-controls="bookToc">
+    <span class="book-toc-toggle-icon" aria-hidden="true"></span>
+    <span class="book-toc-toggle-text">Contents</span>
+  </button>
+  <div class="book-scrim" id="bookScrim" hidden></div>
   <div class="book-layout">
     <nav class="book-toc" id="bookToc" aria-label="Chapters"></nav>
     <article class="book-page md" id="bookPage"><p class="md-status">Reading…</p></article>
