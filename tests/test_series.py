@@ -965,5 +965,23 @@ def test_the_statistics_of_a_game_join_its_two_phases():
     assert list(changes.column("nodes")) == [b - a for a, b in zip(nodes, nodes[1:])]
 
 
+def test_every_world_is_a_row_labelled_with_what_it_is():
+    """
+    The table of every world: one row per world that has the stretch asked
+    for, grouped by baseline and source, labelled with its id and experiments;
+    a statistic few worlds have, or one that never varies, is left out.
+    """
+    import gol_atlas
+    worlds = {"windows": ["1000", "end"], "worlds": [
+        {"id": f"B1-x-s{i:03d}", "source": "lab", "baseline": "B1", "conditions": ["E02 · baseline"],
+         "at": {"1000": {"nodes": 100 + i, "gini": 0.3 + i / 100, "same": 1.0}}}
+        for i in range(40)] + [
+        {"id": "P/x-s1", "source": "pilot", "baseline": "B2", "at": {"end": {"nodes": 5}}}]}
+    table = gol_atlas.world_table(worlds, "1000")
+    assert table.rows == 40 and table.columns == ["gini", "nodes"], table.columns
+    assert table.groups[0] == "B1 lab" and table.labels[0] == "B1-x-s000 — E02 · baseline"
+    assert table.periods == ["1000", "end"] and gol_atlas.summary(table)["periods"] == ["1000", "end"]
+
+
 if __name__ == "__main__":
     sys.exit(runner.main(globals()))

@@ -34,15 +34,22 @@ def check(name):
 
 
 def load(pilot, at):
+    """A pilot world from its checkpoint at `at`, as run.py --resume restores one (growable brains too)."""
     from proto import ProtoConfig, ProtoWorld, restore_tags, set_proto
     meta = json.load(open(os.path.join(pilot, "config.json")))
     set_proto(meta.get("proto", {}))
+    grows = meta["cfg"].get("brain_kind") == "grow"
+    if grows:
+        import grow
+        grow.install()
     cfg = ProtoConfig.from_dict(meta["cfg"], stored=False)
     cfg.extinction_threshold = 0
     with np.load(os.path.join(pilot, f"ckpt_{at:06d}.npz"), allow_pickle=False) as z:
         blob = {k: z[k] for k in z.files}
     world = ProtoWorld.from_checkpoint(blob, cfg)
     restore_tags(world, blob)
+    if grows:
+        grow.restore_active(world, blob)
     return world
 
 

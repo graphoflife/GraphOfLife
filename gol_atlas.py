@@ -467,8 +467,9 @@ def stat_table(frame_rows: Iterable[Dict[str, Any]], changes: bool = False) -> T
 def world_table(worlds: Dict[str, Any], window: str) -> Table:
     """
     One row per simulation of the table research/atlas/across.py builds: its
-    statistics over the stretch `window` names, with its family as the group
-    and its id as the label.
+    statistics over the stretch `window` names, grouped by its baseline and
+    whether it is a lab run or a pilot, and labelled with its id and the
+    experiments it belongs to.
     """
     entries = [w for w in worlds.get("worlds", []) if (w.get("at") or {}).get(window)]
     names = sorted({k for w in entries for k, v in w["at"][window].items()
@@ -480,8 +481,10 @@ def world_table(worlds: Dict[str, Any], window: str) -> Table:
     names = [names[j] for j in keep]
     values = values[:, keep] if len(values) else np.zeros((0, len(names)))
     table = Table("worlds", names, {n: kind_of(values[:, j]) for j, n in enumerate(names)}, values,
-                  about=dict(worlds.get("about") or {}),
-                  labels=[w.get("id", "") for w in entries], groups=[w.get("family", "") for w in entries],
+                  about=dict(worlds.get("explanations") or {}),
+                  labels=[w.get("id", "") + (f" — {'; '.join(w['conditions'])}" if w.get("conditions") else "")
+                          for w in entries],
+                  groups=[f"{w.get('baseline') or '?'} {w.get('source', '')}".strip() for w in entries],
                   note=f"{len(entries)} worlds, {window}")
     table.periods = list(worlds.get("windows") or [])
     return table
