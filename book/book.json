@@ -404,10 +404,10 @@
         {
           "id": "80",
           "title": "Mixed at birth: ten long worlds",
-          "note": "Brains mixed at birth, now a setting of the engine, in ten worlds of B2 for 10,000 iterations: do they stay healthy and rich, as the pilots that came closest to the author's picture did?",
+          "note": "Brains mixed at birth in ten worlds of B2 for 10,000 iterations: rich, because their agents put off having children, but only half of them healthy, since health follows a size that drifts; evolution goes on.",
           "file": "chapters/80-mixed-at-birth-ten-long-worlds.md",
           "experiment": "E17",
-          "status": "ready"
+          "status": "analysed"
         }
       ]
     },

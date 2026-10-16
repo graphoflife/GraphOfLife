@@ -74,6 +74,19 @@ agents most diverse — is empty.
   to 7, since every agent dies at 100. And at 10,000 tokens B2 misses the one
   mark B1 meets: its dimension is 4.5, above the bar and far from three.
 
+> [!info] Added later (2026-10-16, Chapter 80)
+> B2's dimension is a matter of its size. In B2's kind of network the
+> dimension shown by ball growth rises with the number of agents: B2 at 5,000
+> tokens, with 1,200 to 1,800 agents, shows 3.6 to 4.1, and six of its ten
+> worlds meet every mark; the mixed worlds of Experiment 17 show about 3.1 below
+> 300 agents and 4 above 1,500 (a correlation of 0.78 with the logarithm of the
+> size). B1's does not rise: from 40 agents to 70,000 it stays between about
+> 2.5 and 4. So for B2's kind of network two marks of the bar are partly marks
+> of size — the dimension fails a large world, the hub a small one, and worlds
+> of 600 to 1,000 agents met both at 98% of their moments. Health compared
+> between worlds of different sizes has to be read with that in mind
+> ([Chapter 80](80-mixed-at-birth-ten-long-worlds.md#the-marks-a-world-misses)).
+
 <!-- figure healthy/poor -->
 ![Agents with three tokens or fewer](../figures/healthy/poor.svg)
 
@@ -217,6 +230,18 @@ The long runs are planned in three steps:
    it on, and its experiment is written and ready for the lab:
    [Chapter 80](80-mixed-at-birth-ten-long-worlds.md), Experiment 17, ten worlds
    of B2 with mixing for 10,000 iterations.
+
+> [!info] Added later (2026-10-16, Experiment 17)
+> Step 3 has run. The ten mixed worlds of Experiment 17
+> ([Chapter 80](80-mixed-at-birth-ten-long-worlds.md)) are rich — 11% of the
+> agents at three tokens or fewer in the median world at 10,000 iterations —
+> but only five of the ten met every mark, so its thesis is refuted; the five
+> that did are being played on to 50,000
+> ([Chapter 81](81-five-mixed-worlds-fifty-thousand-iterations.md), Experiment
+> 18). Two of its worlds are the two mixed worlds of batch Q again, agent for
+> agent — the lab's engine and the prototype play a mixed world alike — so
+> `Q/mix-s1` and `s2` and their long runs count as Experiment 17's worlds s001
+> and s002 from the next count on, and leave the tables above.
 
 The batches still running (T to Y, [Appendix C](C-every-simulation.md)) and the
 search for settings by elimination (batch Z: worlds whose every setting is

@@ -439,6 +439,35 @@ book/results/worlds.json; 2026-10-16)**
   weights. Experiment 17 (Ch. 80) is planned: ten B2 worlds with mixing for 10,000 iterations.
 - An input for raids on kin: like B2 in everything.
 
+**Mixed at birth, ten long worlds (E17, Ch. 80; 2026-10-16; B2 + mix_at_birth, 10,000 tokens, ten seeds,
+10,000 iterations)**
+- Thesis refuted: rich, but not healthy enough. Median share at ≤ 3 tokens 0.106 at 10,000 (limit 0.5; B2
+  0.66–0.79); every mark met in 5 of 10 (needed 7): three small worlds miss the hub (152, 173, 346 agents),
+  one misses the dimension by 0.05, one died out at 5,376 after shrinking for ~3,000 iterations.
+- Size drifts (40 to 2,400 agents), and riches are size: the tokens are fixed.
+- Every agent lives its 100 iterations (agents / births per iteration = 100 in both B2 and mixed worlds);
+  one birth per 100 agents per iteration everywhere. Agents that could have a child (≥ 11 tokens,
+  < 8 links): 2.3% of B2's (median), 33% of the mixed worlds'; they have one at 42 vs 3 per 100 per
+  iteration (≈ 14x less eager). Eagerness and size go together (r 0.87 on logs, 181 moments).
+- Brains spread mainly by taking nodes: 5.6 (B2) / 7.7 (mixed) nodes per 100 agents change hands per
+  iteration vs 1 birth. Under mixing a child carries half its parent's brain, a taken node all of it.
+  Not simply more fighting: the rate does not change with a mixed world's size (r -0.08).
+- Switch (batch SW): mixing off at 5,000 → seed 2's world 893 → 2,753 agents, seed 4's 744 → 2,206 within
+  ~1,000 iterations (twins with mixing stay near 1,000). Mixing on in B2 at 2,000: s001 3,535 → 1,942,
+  s002 3,064 → 2,289 within 700 iterations (twins above 3,000). Six more worlds running.
+- Health is size in B2-type networks: 125 of 190 moments meet every mark; < 300 agents fail the hub (96%),
+  > 1,500 the dimension (dimension vs log size r 0.78); 600–1,000 agents: 98% with every mark. B2 at
+  5,000 tokens (1,200–1,800 agents): dimension 3.6–4.1, 6/10 with every mark, as poor as ever. B1's
+  dimension does not grow with size (2.5–4 from 40 to 70,000 agents).
+- Contests (T = 100, the lab's gol_tournament, fixed 2026-10-16: a newborn's mixed brain now counts for its
+  parent's era; before, every one counted for the earlier era — an era against itself gave 0.40, now
+  0.52): later era's share 1,000 vs 500 median 0.84 (all 10 above half; B2 0.68), 5,000 vs 2,000 0.66
+  (9/10; B2 0.63, three worlds), 10,000 vs 5,000 0.54 (7/9; B2 0.55). Mixing does not stop selection; its
+  first steps are larger. One contest varies by ~0.1 between plays.
+- Q/mix-s1, s2 (pilots, prototype) are E17's s001, s002 agent for agent over 10,000 iterations
+  (everyworld.replicas now maps the prototype's `mix` to mix_at_birth).
+- Next: E18 (Ch. 81), the five healthy worlds to 50,000 (running since 2026-10-16 22:52).
+
 **Open (being tested)**
 - Rules without numbers (B3, Ch. 57): all seven of B2's numbers removed at once
   — s1: without alliances extinct, with alliances a peaceful near-tree.

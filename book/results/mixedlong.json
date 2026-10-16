@@ -1,0 +1,175 @@
+{
+ "chapter": "mixedlong",
+ "numbers": {
+  "verdict": {
+   "median_share": 0.10629371541914605,
+   "seven_marks": 5,
+   "shares": [
+    0.645204862674471,
+    0.06048387096774194,
+    0.006578947368421052,
+    0.20063694267515925,
+    0.6331413380593709,
+    0.4216589861751152,
+    0.017341040462427744,
+    0.005780346820809248,
+    0.0,
+    0.15210355987055016
+   ],
+   "marks": [
+    6,
+    7,
+    6,
+    7,
+    7,
+    7,
+    6,
+    6,
+    5,
+    7
+   ],
+   "b2_end": [
+    0.7915869980879541,
+    0.754722381224957,
+    0.7014877102199224,
+    0.7402717726991971,
+    0.7181432038834952,
+    0.7526849642004774,
+    0.7604473219540906,
+    0.7550906555090655,
+    0.6560443366816765,
+    0.7290132547864506
+   ]
+  },
+  "breeding": {
+   "B2": {
+    "able": [
+     0.023412350014632717
+    ],
+    "per_100_able": 42.21621621621621
+   },
+   "mixed": {
+    "able": [
+     0.33180987202925044
+    ],
+    "per_100_able": 3.0313588850174216
+   }
+  },
+  "switch": {
+   "mixoff-s002": {
+    "at": 6592,
+    "agents": 3258.0,
+    "twin": 988.0
+   },
+   "mixoff-s004": {
+    "at": 6435,
+    "agents": 2374.0,
+    "twin": 774.0
+   },
+   "mixon-s001": {
+    "at": 2719,
+    "agents": 1931.0,
+    "twin": 3441.0
+   },
+   "mixon-s002": {
+    "at": 2719,
+    "agents": 2287.0,
+    "twin": 3104.0
+   }
+  },
+  "size": {
+   "moments": 190,
+   "seven": 125,
+   "corr_dimension_log_agents": 0.7794827565057455,
+   "by_size": [
+    {
+     "from": 0,
+     "to": 300,
+     "moments": 26,
+     "seven": 0.038461538461538464
+    },
+    {
+     "from": 300,
+     "to": 600,
+     "moments": 36,
+     "seven": 0.5833333333333334
+    },
+    {
+     "from": 600,
+     "to": 1000,
+     "moments": 52,
+     "seven": 0.9807692307692307
+    },
+    {
+     "from": 1000,
+     "to": 1500,
+     "moments": 49,
+     "seven": 0.8163265306122449
+    },
+    {
+     "from": 1500,
+     "to": 3000,
+     "moments": 27,
+     "seven": 0.4444444444444444
+    }
+   ]
+  },
+  "evolution": {
+   "1,000 vs 500": {
+    "mixed": 0.8351108779611284,
+    "mixed_worlds": 10,
+    "b2": 0.6819306236881428,
+    "b2_worlds": 10
+   },
+   "5,000 vs 2,000": {
+    "mixed": 0.6557856019824683,
+    "mixed_worlds": 10,
+    "b2": 0.631748791429281,
+    "b2_worlds": 3
+   },
+   "10,000 vs 5,000": {
+    "mixed": 0.5355697154591781,
+    "mixed_worlds": 9,
+    "b2": 0.5505145824613383,
+    "b2_worlds": 3
+   }
+  }
+ },
+ "figures": {
+  "sizes": {
+   "title": "Agents alive, world by world",
+   "caption": "Each orange line is one world of Experiment 17, its agents after each game (means over 25 iterations); the grey band is B2's ten worlds \u2014 their median, middle half and nine in ten. B2's worlds keep their size; the mixed ones swing between a few hundred and two thousand agents, and one died out at iteration 5,376.",
+   "recipe": "**Runs.** The ten runs of Experiment 17 \u2014 B2 at 10,000 tokens with brains mixed at birth, seeds 1 to 10, 10,000 iterations (`python3 gol_lab.py run E17`) \u2014 and B2 itself: Experiment 16's ten worlds to 2,000 iterations and the same worlds played on to 10,000 as pilots (`GraphOfLifeRuns/.pilots/L/B2-long-s001` \u2026 `s010`).\n\n**Data.** From Each run's `stats.jsonl` (the lab's runs) and `series.jsonl` (B2's continuations).\n\n1. Read the agents after each game (`nodes`, phase 2).\n2. For B2, join each lab world (to 2,000) to its continuation (2,000 to 10,000).\n\n**To make it again:** `python3 book_figures.py mixedlong`."
+  },
+  "poor": {
+   "title": "Agents holding three tokens or fewer",
+   "caption": "Each band is ten worlds \u2014 the median, the middle half and nine in ten \u2014 every 500 iterations: the share of their agents holding one, two or three tokens. A world that died out leaves the band when it does.",
+   "recipe": "**Runs.** The ten runs of Experiment 17 \u2014 B2 at 10,000 tokens with brains mixed at birth, seeds 1 to 10, 10,000 iterations (`python3 gol_lab.py run E17`) \u2014 and B2 itself: Experiment 16's ten worlds to 2,000 iterations and the same worlds played on to 10,000 as pilots (`GraphOfLifeRuns/.pilots/L/B2-long-s001` \u2026 `s010`).\n\n**Data.** From Each run's whole worlds: the lab's archives (`archive/world_<iteration>.npz`) and the continuations' checkpoints (`ckpt_<iteration>.npz`).\n\n1. Read every agent's tokens in each whole world kept at a multiple of 500 iterations.\n2. Count those holding three or fewer, as a share of all.\n\n**To make it again:** `python3 book_figures.py mixedlong`."
+  },
+  "verdict": {
+   "title": "Experiment 17 at iteration 10,000",
+   "caption": "Each dot is a world at its last checkpoint, read as Meta X reads every world. Left: the share of its agents holding three tokens or fewer, B2's ten worlds at 10,000 iterations beside the mixed ones. Right: how many of the seven marks of Chapter 46's health bar each mixed world meets; the world that died out is read at its last checkpoint, with 20 agents.",
+   "recipe": "**Runs.** The ten runs of Experiment 17 \u2014 B2 at 10,000 tokens with brains mixed at birth, seeds 1 to 10, 10,000 iterations (`python3 gol_lab.py run E17`) \u2014 and B2 itself: Experiment 16's ten worlds to 2,000 iterations and the same worlds played on to 10,000 as pilots (`GraphOfLifeRuns/.pilots/L/B2-long-s001` \u2026 `s010`).\n\n**Data.** From Each run's last checkpoint (`checkpoint.npz`; B2's continuations' `ckpt_010000.npz`) (`GraphOfLifeRuns/.pilots/e17_profile.json`).\n\n1. Count the agents holding three tokens or fewer, as a share of all.\n2. Measure the seven marks as `research/atlas/profile.py` does.\n\n**To make it again:** `python3 book_figures.py mixedlong`."
+  },
+  "breeding": {
+   "title": "Who could have a child, and who has one",
+   "caption": "Left: the share of the agents that could have a child \u2014 11 tokens or more, since a child takes at least 10 and the parent keeps one, and fewer than 8 links. Right: the births of the next 50 iterations, per iteration, per hundred such agents, on a logarithmic axis. Each band is ten worlds every 500 iterations \u2014 the median, the middle half and nine in ten; B2's ten worlds are Experiment 16's to 2,000 iterations and the same worlds played on after.",
+   "recipe": "**Runs.** The ten runs of Experiment 17 \u2014 B2 at 10,000 tokens with brains mixed at birth, seeds 1 to 10, 10,000 iterations (`python3 gol_lab.py run E17`) \u2014 and B2 itself: Experiment 16's ten worlds to 2,000 iterations and the same worlds played on to 10,000 as pilots (`GraphOfLifeRuns/.pilots/L/B2-long-s001` \u2026 `s010`).\n\n**Data.** From Each world kept whole every 500 iterations, and each run's births (`research/oee/checks/e17_breeding.py`, `GraphOfLifeRuns/.pilots/e17_breeding.json`).\n\n1. In each whole world, count the agents with 11 tokens or more and fewer than 8 links.\n2. Read the births of the 50 reproduction phases that follow, from the run's record.\n3. Divide their mean per iteration by the agents counted.\n\n**To make it again:** `python3 book_figures.py mixedlong`."
+  },
+  "switch": {
+   "title": "Mixing switched at a moment",
+   "caption": "Each solid line is a world played on as a pilot from the moment the lab had kept it whole, with mixing at birth switched; each dashed line is the same world played on unchanged \u2014 the lab's own run of Experiment 17, or B2's continuation. Agents after each game, means over 25 iterations. Batch SW: mixing off in the five worlds of Experiment 17 that met every mark, at iteration 5,000; on in five of B2's worlds, at 2,000.",
+   "recipe": "**Runs.** The ten runs of Experiment 17 \u2014 B2 at 10,000 tokens with brains mixed at birth, seeds 1 to 10, 10,000 iterations (`python3 gol_lab.py run E17`) \u2014 and B2 itself: Experiment 16's ten worlds to 2,000 iterations and the same worlds played on to 10,000 as pilots (`GraphOfLifeRuns/.pilots/L/B2-long-s001` \u2026 `s010`). Batch SW: `GraphOfLifeRuns/.pilots/SW/mixoff-sNNN` and `mixon-sNNN` (`research/oee/pilots/make_jobs_TU.py`).\n\n**Data.** From Each pilot's `series.jsonl`; the lab runs' `stats.jsonl`.\n\n1. Start from the lab's whole world at the moment (`run.py --from RUN:ITERATION --set mix_at_birth=\u2026`) and play 2,000 iterations.\n2. Read the agents after each game in the pilot and in the run it was taken from.\n\n**To make it again:** `python3 book_figures.py mixedlong`."
+  },
+  "size": {
+   "title": "The marks a world misses, against its size",
+   "caption": "Each orange dot is a world of Experiment 17 at one of the moments it was kept whole, every 500 iterations; each grey dot a world of B2 at 10,000 tokens \u2014 Experiment 16's ten at 2,000 iterations, and the same worlds played on, at 10,000 or more \u2014 and each blue one a world of B2 at 5,000 tokens, Experiment 14's ten at 1,000 iterations. Across, on a logarithmic axis: the agents alive. Left: the dimension the network shows by ball growth; right: the share of the others the best-connected agent is joined to.",
+   "recipe": "**Runs.** The ten runs of Experiment 17 \u2014 B2 at 10,000 tokens with brains mixed at birth, seeds 1 to 10, 10,000 iterations (`python3 gol_lab.py run E17`) \u2014 and B2 itself: Experiment 16's ten worlds to 2,000 iterations and the same worlds played on to 10,000 as pilots (`GraphOfLifeRuns/.pilots/L/B2-long-s001` \u2026 `s010`). B2 at 5,000 tokens: Experiment 14's ten runs (`B2-5000-s001` \u2026 `s010`).\n\n**Data.** From `GraphOfLifeRuns/.pilots/e17_health.json` (`research/oee/checks/e17_health.py`) and `GraphOfLifeRuns/.pilots/atlas/profile.json`.\n\n1. Read each whole world as `research/atlas/profile.py` reads every world: the dimension by ball growth, the best-connected agent's links over the others.\n2. Set each against the number of agents alive.\n\n**To make it again:** `python3 book_figures.py mixedlong`."
+  },
+  "evolution": {
+   "title": "Do later brains beat earlier ones?",
+   "caption": "Each dot is a world: the share of a world the later era's brains hold after 100 iterations against the earlier era's, the mean of two contests, one in each era's world; the bar is the median world. Orange: the mixed worlds of Experiment 17; grey: B2 \u2014 its ten worlds for 1,000 against 500, three of their continuations for the later pairs.",
+   "recipe": "**Runs.** The ten runs of Experiment 17 \u2014 B2 at 10,000 tokens with brains mixed at birth, seeds 1 to 10, 10,000 iterations (`python3 gol_lab.py run E17`) \u2014 and B2 itself: Experiment 16's ten worlds to 2,000 iterations and the same worlds played on to 10,000 as pilots (`GraphOfLifeRuns/.pilots/L/B2-long-s001` \u2026 `s010`).\n\n**Data.** From Each run's whole worlds every 500 iterations (`GraphOfLifeRuns/.pilots/e17_T100.json`, `long_steps.json`, `long_rejudge_T100.json`).\n\n1. Seat the brains of the two eras on alternate agents of each era's world and play it on for 100 iterations, an agent's lifetime (`research/oee/checks/rejudge.py`).\n2. Count the agents the later era's brains hold at the end, as a share of all.\n\n**To make it again:** `python3 book_figures.py mixedlong`."
+  }
+ }
+}

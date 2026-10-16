@@ -133,16 +133,293 @@ length.
 > A value in **bold** differs from the baseline B2.
 <!-- /runs -->
 
-## What else will be read
+## What the ten worlds did
 
-- **Does evolution go on?** The brains of 5,000 and 10,000 iterations against
-  those before them over an agent's lifetime, as
-  [Chapter 50](50-why-evolution-stops.md#would-we-notice-if-it-went-on) did
-  for B2.
-- **How alike are the agents?** The measure of
-  [Chapter 70](70-how-different-are-the-agents.md): kinds of behaviour, and
-  how they turn over between eras 500 iterations apart.
-- **Where the tokens go:** the flow modules of
+<!-- figure mixedlong/sizes -->
+![Agents alive, world by world](../figures/mixedlong/sizes.svg)
+
+**Agents alive, world by world.** Each orange line is one world of Experiment 17, its agents after each game (means over 25 iterations); the grey band is B2's ten worlds — their median, middle half and nine in ten. B2's worlds keep their size; the mixed ones swing between a few hundred and two thousand agents, and one died out at iteration 5,376.
+
+> [!example]- How to make this figure
+> **Runs.** The ten runs of Experiment 17 — B2 at 10,000 tokens with brains mixed at birth, seeds 1 to 10, 10,000 iterations (`python3 gol_lab.py run E17`) — and B2 itself: Experiment 16's ten worlds to 2,000 iterations and the same worlds played on to 10,000 as pilots (`GraphOfLifeRuns/.pilots/L/B2-long-s001` … `s010`).
+>
+> **Data.** From Each run's `stats.jsonl` (the lab's runs) and `series.jsonl` (B2's continuations).
+>
+> 1. Read the agents after each game (`nodes`, phase 2).
+> 2. For B2, join each lab world (to 2,000) to its continuation (2,000 to 10,000).
+>
+> **To make it again:** `python3 book_figures.py mixedlong`.
+<!-- /figure -->
+
+B2's worlds fill up within 1,500 iterations to some 3,000 to 3,700 agents and
+stay there. The mixed worlds never settle. Each wanders, over thousands of
+iterations, between a few hundred agents and two thousand: seed 3 fell to 40
+agents at iteration 2,543 and came back to more than 800; seed 6 fell to 91
+and ended near 2,000. Seed 9 grew to 1,424 agents at iteration 2,592, then
+shrank for nearly three thousand iterations, and died out at 5,376, when 20
+agents were left — the lab stops a world there.
+
+<!-- figure mixedlong/poor -->
+![Agents holding three tokens or fewer](../figures/mixedlong/poor.svg)
+
+**Agents holding three tokens or fewer.** Each band is ten worlds — the median, the middle half and nine in ten — every 500 iterations: the share of their agents holding one, two or three tokens. A world that died out leaves the band when it does.
+
+> [!example]- How to make this figure
+> **Runs.** The ten runs of Experiment 17 — B2 at 10,000 tokens with brains mixed at birth, seeds 1 to 10, 10,000 iterations (`python3 gol_lab.py run E17`) — and B2 itself: Experiment 16's ten worlds to 2,000 iterations and the same worlds played on to 10,000 as pilots (`GraphOfLifeRuns/.pilots/L/B2-long-s001` … `s010`).
+>
+> **Data.** From Each run's whole worlds: the lab's archives (`archive/world_<iteration>.npz`) and the continuations' checkpoints (`ckpt_<iteration>.npz`).
+>
+> 1. Read every agent's tokens in each whole world kept at a multiple of 500 iterations.
+> 2. Count those holding three or fewer, as a share of all.
+>
+> **To make it again:** `python3 book_figures.py mixedlong`.
+<!-- /figure -->
+
+The riches go with the size. In B2 three agents in four hold three tokens or
+fewer at every moment of the 10,000 iterations. In the mixed worlds that share
+falls from about 40% at iteration 1,000 to between 5% and 25% in the median
+world after 3,000 — but the worlds spread from none to two thirds. With the
+tokens fixed, a world's riches *are* its size: 152 agents share 10,000 tokens
+at 66 each, 2,257 agents at 4.4.
+
+## The verdict
+
+<!-- figure mixedlong/verdict -->
+![Experiment 17 at iteration 10,000](../figures/mixedlong/verdict.svg)
+
+**Experiment 17 at iteration 10,000.** Each dot is a world at its last checkpoint, read as Meta X reads every world. Left: the share of its agents holding three tokens or fewer, B2's ten worlds at 10,000 iterations beside the mixed ones. Right: how many of the seven marks of [Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md)'s health bar each mixed world meets; the world that died out is read at its last checkpoint, with 20 agents.
+
+> [!example]- How to make this figure
+> **Runs.** The ten runs of Experiment 17 — B2 at 10,000 tokens with brains mixed at birth, seeds 1 to 10, 10,000 iterations (`python3 gol_lab.py run E17`) — and B2 itself: Experiment 16's ten worlds to 2,000 iterations and the same worlds played on to 10,000 as pilots (`GraphOfLifeRuns/.pilots/L/B2-long-s001` … `s010`).
+>
+> **Data.** From Each run's last checkpoint (`checkpoint.npz`; B2's continuations' `ckpt_010000.npz`) (`GraphOfLifeRuns/.pilots/e17_profile.json`).
+>
+> 1. Count the agents holding three tokens or fewer, as a share of all.
+> 2. Measure the seven marks as `research/atlas/profile.py` does.
+>
+> **To make it again:** `python3 book_figures.py mixedlong`.
+<!-- /figure -->
+
+The thesis asked two things of the worlds at iteration 10,000, and got one.
+
+- **Rich: yes, by far.** In the median world 11% of the agents hold three
+  tokens or fewer, against the thesis's limit of a half; B2's worlds hold 66%
+  to 79%. Seven of the ten are below 25%. The two exceptions, seeds 1 and 5,
+  at 65% and 63%, are the two largest worlds, with 2,221 and 2,257 agents.
+- **Healthy: five worlds of ten, where seven were needed.** Seeds 2, 4, 5, 6
+  and 10 meet every mark. Three small worlds miss one mark, the hub: in seed
+  3's 152 agents the best-connected agent is joined to 12 others, 7.9% of the
+  world; in seed 8's 173, to 17 (9.9%); in seed 7's 346, to 47 (13.6%). Seed 1
+  misses the dimension by a hair, 4.05 against the bar's 4. Seed 9 died out.
+
+**Strictly, the thesis is refuted.** And yet five worlds of ten meet every
+mark, where none of B2's ten does at 10,000 iterations: each of them misses
+the dimension, at 4.3 to 4.5.
+
+## Why a mixed world is rich
+
+<!-- figure mixedlong/breeding -->
+![Who could have a child, and who has one](../figures/mixedlong/breeding.svg)
+
+**Who could have a child, and who has one.** Left: the share of the agents that could have a child — 11 tokens or more, since a child takes at least 10 and the parent keeps one, and fewer than 8 links. Right: the births of the next 50 iterations, per iteration, per hundred such agents, on a logarithmic axis. Each band is ten worlds every 500 iterations — the median, the middle half and nine in ten; B2's ten worlds are Experiment 16's to 2,000 iterations and the same worlds played on after.
+
+> [!example]- How to make this figure
+> **Runs.** The ten runs of Experiment 17 — B2 at 10,000 tokens with brains mixed at birth, seeds 1 to 10, 10,000 iterations (`python3 gol_lab.py run E17`) — and B2 itself: Experiment 16's ten worlds to 2,000 iterations and the same worlds played on to 10,000 as pilots (`GraphOfLifeRuns/.pilots/L/B2-long-s001` … `s010`).
+>
+> **Data.** From Each world kept whole every 500 iterations, and each run's births (`research/oee/checks/e17_breeding.py`, `GraphOfLifeRuns/.pilots/e17_breeding.json`).
+>
+> 1. In each whole world, count the agents with 11 tokens or more and fewer than 8 links.
+> 2. Read the births of the 50 reproduction phases that follow, from the run's record.
+> 3. Divide their mean per iteration by the agents counted.
+>
+> **To make it again:** `python3 book_figures.py mixedlong`.
+<!-- /figure -->
+
+In every world of both kinds, an agent lives out its hundred iterations:
+almost nobody dies young. A world's agents divided by its births per
+iteration, which is how long its agents live on average, is 100 in the median
+stretch of 500 iterations, in B2 and in the mixed worlds alike. And every
+world replaces itself one for one, a birth per hundred agents per iteration.
+So a world's size is not set by death. It is set by who has children.
+
+A child takes at least 10 tokens and its parent keeps one, and an agent at its
+valence of 8 links cannot have one. In B2, 1% to 6% of the agents hold 11
+tokens or more with fewer than 8 links — the agents that *could* have a child
+— and they have one at a median rate of 42 per hundred per iteration: an
+agent that can afford a child has it within two or three iterations. In the
+mixed worlds a third of the agents could have a child (8% to 89%), and they
+have one at a median rate of 3 per hundred per iteration, about fourteen times
+less often.
+
+That is why a mixed world is rich. B2's agents have a child as soon as they
+can afford one, so the world fills up until hardly anyone can: tokens go into
+children as fast as they come. The mixed worlds' agents put children off, so
+a mixed world settles where many could have a child and few do, and each
+agent holds more.
+
+And it is why the size drifts. How eagerly an agent breeds is a matter of its
+brain. Where the brains are eager, a world grows until few are able; where they
+are reluctant, it shrinks until many are. The mixed worlds' eagerness wanders,
+from under 1 to 10 per hundred, and the size follows it: across the 181
+moments, the two go together with a correlation of 0.87, on logarithms. B2's
+brains are eager in every world at every moment.
+
+Why should mixing make agents put children off? A brain spreads in two
+ways: by its agent's children, and by every node its agent takes in the game,
+which gets a copy of the winner's brain. Taking nodes is by far the main way.
+In the mixed worlds 7.7 nodes per hundred agents change hands in the median
+iteration (3 to 18), in B2's 5.6 (4 to 11), against one birth. Where brains are
+mixed at birth, a child carries only about half of its parent's brain, while a
+node taken carries all of it. A brain that spends its tokens on children
+spreads less of itself than one that stakes them on its neighbours' nodes, so
+selection — which keeps working in these worlds, as the contests below show —
+may come to favour putting children off. It is not simply that the reluctant
+fight more, though: within the mixed worlds, the share of nodes that change
+hands does not rise as a world grows small and rich (a correlation of −0.08
+with its size).
+
+<!-- figure mixedlong/switch -->
+![Mixing switched at a moment](../figures/mixedlong/switch.svg)
+
+**Mixing switched at a moment.** Each solid line is a world played on as a pilot from the moment the lab had kept it whole, with mixing at birth switched; each dashed line is the same world played on unchanged — the lab's own run of Experiment 17, or B2's continuation. Agents after each game, means over 25 iterations. Batch SW: mixing off in the five worlds of Experiment 17 that met every mark, at iteration 5,000; on in five of B2's worlds, at 2,000.
+
+> [!example]- How to make this figure
+> **Runs.** The ten runs of Experiment 17 — B2 at 10,000 tokens with brains mixed at birth, seeds 1 to 10, 10,000 iterations (`python3 gol_lab.py run E17`) — and B2 itself: Experiment 16's ten worlds to 2,000 iterations and the same worlds played on to 10,000 as pilots (`GraphOfLifeRuns/.pilots/L/B2-long-s001` … `s010`). Batch SW: `GraphOfLifeRuns/.pilots/SW/mixoff-sNNN` and `mixon-sNNN` (`research/oee/pilots/make_jobs_TU.py`).
+>
+> **Data.** From Each pilot's `series.jsonl`; the lab runs' `stats.jsonl`.
+>
+> 1. Start from the lab's whole world at the moment (`run.py --from RUN:ITERATION --set mix_at_birth=…`) and play 2,000 iterations.
+> 2. Read the agents after each game in the pilot and in the run it was taken from.
+>
+> **To make it again:** `python3 book_figures.py mixedlong`.
+<!-- /figure -->
+
+Whatever the way, the switch says that mixing is what does it. Batch SW took
+worlds from the lab at a moment and played them on with the rule switched. Without mixing from
+iteration 5,000, seed 2's world grew from 893 agents to 2,753 within a
+thousand iterations, and seed 4's from 744 to 2,206, on their way to B2's size,
+while the same worlds with mixing stayed near a thousand. And the other way:
+with mixing from iteration 2,000, two of B2's worlds shrank from 3,535 and
+3,064 agents to 1,942 and 2,289 within 700 iterations, while the same worlds
+without it stayed above 3,000. (These are the first two worlds of each kind;
+the batch's other six are still being played.)
+
+## The marks a world misses
+
+<!-- figure mixedlong/size -->
+![The marks a world misses, against its size](../figures/mixedlong/size.svg)
+
+**The marks a world misses, against its size.** Each orange dot is a world of Experiment 17 at one of the moments it was kept whole, every 500 iterations; each grey dot a world of B2 at 10,000 tokens — Experiment 16's ten at 2,000 iterations, and the same worlds played on, at 10,000 or more — and each blue one a world of B2 at 5,000 tokens, Experiment 14's ten at 1,000 iterations. Across, on a logarithmic axis: the agents alive. Left: the dimension the network shows by ball growth; right: the share of the others the best-connected agent is joined to.
+
+> [!example]- How to make this figure
+> **Runs.** The ten runs of Experiment 17 — B2 at 10,000 tokens with brains mixed at birth, seeds 1 to 10, 10,000 iterations (`python3 gol_lab.py run E17`) — and B2 itself: Experiment 16's ten worlds to 2,000 iterations and the same worlds played on to 10,000 as pilots (`GraphOfLifeRuns/.pilots/L/B2-long-s001` … `s010`). B2 at 5,000 tokens: Experiment 14's ten runs (`B2-5000-s001` … `s010`).
+>
+> **Data.** From `GraphOfLifeRuns/.pilots/e17_health.json` (`research/oee/checks/e17_health.py`) and `GraphOfLifeRuns/.pilots/atlas/profile.json`.
+>
+> 1. Read each whole world as `research/atlas/profile.py` reads every world: the dimension by ball growth, the best-connected agent's links over the others.
+> 2. Set each against the number of agents alive.
+>
+> **To make it again:** `python3 book_figures.py mixedlong`.
+<!-- /figure -->
+
+Read every 500 iterations, the ten worlds met every mark at 125 of their 190
+moments, two in three. They missed only two marks (and one other once), and
+each follows the world's size:
+
+- **Small worlds miss the hub.** Below 300 agents, 96% of the moments: a
+  best-connected agent with 12 to 47 links is more than 5% of a small world.
+- **Large worlds miss the dimension.** The dimension the network shows by
+  ball growth rises with the number of agents (a correlation of 0.78 with its
+  logarithm), and above 1,500 agents it is near 4 or above.
+
+Worlds of 600 to 1,000 agents met every mark at 98% of their moments.
+
+B2 follows the same rule. Its worlds of 10,000 tokens hold 3,000 to 3,700
+agents, and all but one miss the dimension, at 4.2 to 4.8. Its worlds of 5,000 tokens
+([Experiment 14](48-a-world-that-cannot-break.md)) hold 1,200 to 1,800, and
+six of the ten meet every mark — as poor as ever, three agents in four at
+three tokens or fewer.
+
+So half of what the thesis asked, every mark of the health bar, was a
+question of size: mixing makes a world smaller, and at that size a network of
+B2's kind meets the bar. What mixing changes that size does not change is how
+rich the agents are: B2's worlds of 5,000 tokens are as poor as those of
+10,000. (The dimension of B1's worlds does not grow with their size: from 40
+agents to 70,000 it stays between about 2.5 and 4. The rise belongs to B2's
+kind of network, not to the measure.)
+
+## Does evolution go on?
+
+<!-- figure mixedlong/evolution -->
+![Do later brains beat earlier ones?](../figures/mixedlong/evolution.svg)
+
+**Do later brains beat earlier ones?** Each dot is a world: the share of a world the later era's brains hold after 100 iterations against the earlier era's, the mean of two contests, one in each era's world; the bar is the median world. Orange: the mixed worlds of Experiment 17; grey: B2 — its ten worlds for 1,000 against 500, three of their continuations for the later pairs.
+
+> [!example]- How to make this figure
+> **Runs.** The ten runs of Experiment 17 — B2 at 10,000 tokens with brains mixed at birth, seeds 1 to 10, 10,000 iterations (`python3 gol_lab.py run E17`) — and B2 itself: Experiment 16's ten worlds to 2,000 iterations and the same worlds played on to 10,000 as pilots (`GraphOfLifeRuns/.pilots/L/B2-long-s001` … `s010`).
+>
+> **Data.** From Each run's whole worlds every 500 iterations (`GraphOfLifeRuns/.pilots/e17_T100.json`, `long_steps.json`, `long_rejudge_T100.json`).
+>
+> 1. Seat the brains of the two eras on alternate agents of each era's world and play it on for 100 iterations, an agent's lifetime (`research/oee/checks/rejudge.py`).
+> 2. Count the agents the later era's brains hold at the end, as a share of all.
+>
+> **To make it again:** `python3 book_figures.py mixedlong`.
+<!-- /figure -->
+
+Yes, and at first faster than in B2. In each world the brains of a later
+moment met those of an earlier one over an agent's lifetime, 100 iterations,
+once in each era's world, as
+[Chapter 50](50-why-evolution-stops.md#would-we-notice-if-it-went-on) did for
+B2; a newborn whose brain is mixed counts for its parent's era. The brains of
+iteration 1,000 took 84% of a contested world from those of 500 in the median
+world, and more than half in every one of the ten (72% to 91%), where B2's
+took 68%. Those of 5,000 took 66% from those of 2,000 (B2: 63%, in three
+worlds), and those of 10,000 took 54% from those of 5,000 (B2: 55%), more than
+half in seven worlds of nine.
+
+So mixing does not stop evolution. The steps shrink with time as they do in
+B2, and the first ones are larger. The worlds differ more, though: from 41% to
+95% for the last pair. One world's step is uncertain on its own, since a
+contest of two eras varies by about a tenth from one play to the next (an era
+of seed 4 played against itself gave 40% and 64%); the median of ten is not.
+
+## What it teaches
+
+- **A rich world, here, is a small one.** The tokens are fixed, so how rich
+  the agents are is how few they are. Mixing brains at birth made the worlds
+  rich by making their agents slow to have children: in B2 an agent that can
+  afford a child has one within two or three iterations, in a mixed world
+  after thirty or so. Switch mixing off and the riches go within a thousand
+  iterations; switch it on in B2 and its worlds begin to shrink at once.
+- **Nothing holds the size.** How eagerly agents breed drifts as their brains
+  change, and the size, the riches and the marks of health drift with it; one
+  world of ten shrank until it died. The riches of a world that keeps evolving
+  would need something to hold them: a rule (batch M tries the engine's), or
+  something the agents keep up themselves.
+- **Evolution goes on all the same.** Mixing does not stop selection: later
+  brains beat earlier ones as they do in B2, and by more at first.
+- **Two marks of the health bar measure size.** In B2's kind of network the
+  dimension fails a large world and the hub a small one. Networks are best
+  compared at one size.
+- **A count has to follow every way its labels are made.** The lab's contests
+  told the two eras apart by the number each brain carries. Mixing makes new
+  brains even where mutation is switched off, and the numbers they drew
+  counted for the earlier era, so the first count of these contests said that
+  evolution stops in mixed worlds. Counted by the parent's era, it goes on.
+
+## What comes next
+
+- **[Experiment 18](81-five-mixed-worlds-fifty-thousand-iterations.md)**
+  plays the five worlds that met every mark on to 50,000 iterations: is their
+  health a state they keep, or one their drifting size passes through?
+- **Batch SW** is still being played: mixing switched off in three more of
+  these worlds and on in three more of B2's.
+- **Batch M** tries each rule of the engine that might hold a mixed world's
+  size: the estates of the dead to the newborns, to the parents or to the
+  poorest, half of an agent's tokens kept at home, links to strangers, and a
+  slower change of brains.
+- Not yet read: the kinds of behaviour of
+  [Chapter 70](70-how-different-are-the-agents.md), the flow modules of
   [Chapter 71](71-flow-modules.md) and the circulation of
   [Chapter 58](58-gliders-and-who-helps-whom.md), which mixing doubled in the
   pilots.
