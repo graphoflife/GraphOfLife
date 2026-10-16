@@ -177,8 +177,15 @@ def worlds() -> List[Tuple[str, str, str]]:
         if not have:
             continue
         last = have[-1]
-        if int(re.search(r"ckpt_(\d+)", last).group(1)) < SETTLED:
+        at = int(re.search(r"ckpt_(\d+)", last).group(1))
+        if at < SETTLED:
             continue
+        # A candidate's long run (research/oee/pilots/candidates.py) is a copy of
+        # its world, LC/<batch>-<name>, until it has gone further than the original.
+        if batch == "LC":
+            original = glob.glob(os.path.join(PILOTS, *name.split("-", 1), "ckpt_*.npz"))
+            if at <= max((int(re.search(r"ckpt_(\d+)", p).group(1)) for p in original), default=-1):
+                continue
         out.append((pid, last, f"{batch}/{re.sub(r'-s[0-9]+$', '', name)}"))
     return out
 

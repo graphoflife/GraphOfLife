@@ -47,7 +47,7 @@ def _group(w: Dict[str, Any]) -> Optional[str]:
     family = w["family"]
     if "/" in family:
         batch = family.split("/")[0]
-        if batch == "L":
+        if batch in ("L", "LC"):
             return "long runs"
         config = os.path.join(PILOTS, w["id"], "config.json")
         cfg = json.load(open(config))["cfg"] if os.path.exists(config) else {}
@@ -126,7 +126,7 @@ def healthy(ch: F.Chapter) -> None:
                             ["Read each world's checkpoint: its agents' tokens, links, birth times and genotypes.",
                              "The network: pieces, the 2-core, the worst cut by one agent and by one link (one "
                              "depth-first search), the best-connected agent's share, links per agent; the "
-                             "dimension from the table of every world.",
+                             "dimension by ball growth on the same checkpoint (the lab's measure, gol_series).",
                              "The spreads: the effective number of doubling classes the agents fill (exp of the "
                              "entropy), for tokens, links and ages; genotypes per agent (1 / sum of squared "
                              "shares, over the agents).",
@@ -174,12 +174,21 @@ def healthy(ch: F.Chapter) -> None:
         if ws:
             ch.number(f"marks:{name}", {m: float(np.mean([bool(w["bar"].get(m)) for w in ws])) for m in MARKS})
     best = sorted(worlds, key=lambda w: (-w["marks"], -w["diversity"]))[:12]
-    ch.number("table:closest", {
-        "head": ["world", "group", "marks (of 7)", "diversity score", "median tokens", "agents with 3 tokens or fewer",
-                 "dimension", "agents"],
-        "rows": [[f"`{w['id']}`", w["group"], str(w["marks"]), f"{w['diversity']:.2f}", f"{w['median_tokens']:.0f}",
-                  f"{w['share_at_most_three']:.0%}", f"{w['dimension']:.1f}" if w.get("dimension") else "—",
-                  f"{w['agents']:,}"] for w in best]})
+    head = ["world", "group", "at iteration", "marks (of 7)", "diversity score", "median tokens",
+            "agents with 3 tokens or fewer", "dimension", "agents"]
+
+    def row(w: Dict[str, Any]) -> List[str]:
+        return [f"`{w['id']}`", w["group"], f"{int(w['at']):,}", str(w["marks"]), f"{w['diversity']:.2f}",
+                f"{w['median_tokens']:.0f}", f"{w['share_at_most_three']:.0%}",
+                f"{w['dimension']:.1f}" if w.get("dimension") else "—", f"{w['agents']:,}"]
+    ch.number("table:closest", {"head": head, "rows": [row(w) for w in best]})
+    # The candidates' long runs (research/oee/pilots/candidates.py): each where it was chosen, and where it is now.
+    by_id = {w["id"]: w for w in worlds}
+    long_rows = []
+    for w in sorted((w for w in worlds if w["id"].startswith("LC/")), key=lambda w: w["id"]):
+        original = by_id.get("/".join(w["id"][3:].split("-", 1)))
+        long_rows += [row(x) for x in (original, w) if x]
+    ch.number("table:long", {"head": head, "rows": long_rows})
     ch.number("seven_marks", {name: sum(1 for w in worlds if w["group"] in members and w["marks"] == 7)
                               for name, members, _ in MAP})
     ch.number("closest", [{"id": w["id"], "group": w["group"], "marks": w["marks"], "diversity": round(w["diversity"], 3),

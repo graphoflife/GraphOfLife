@@ -1,67 +1,67 @@
 {
  "chapter": "healthy",
  "numbers": {
-  "worlds": 404,
+  "worlds": 424,
   "poor:B1 10k": 0.3416547072826451,
   "poor:B1 100k": 0.301299794579696,
   "poor:B1 sizes": 0.39006888633754305,
   "poor:B1 5k": 0.19212431806910235,
   "poor:B1 fixed": 0.12753358622583366,
   "poor:B2 10k": 0.7481413384438922,
-  "poor:B2 var": 0.7835746805799382,
+  "poor:B2 var": 0.7847762150612188,
   "poor:B2 5k": 0.7597596578179102,
   "poor:lapse": 0.0463856662862939,
   "poor:long runs": 0.7181432038834952,
   "poor:B1 pil.": 0.7080764306116418,
-  "poor:B2 pil.": 0.7574789539843008,
+  "poor:B2 pil.": 0.7575384600914583,
   "spread_tokens:B1 10k": 3.5493177557937825,
   "spread_tokens:B1 100k": 3.6588905857685483,
   "spread_tokens:B1 sizes": 3.649335754063105,
   "spread_tokens:B1 5k": 4.070659630268564,
   "spread_tokens:B1 fixed": 2.6287609390379236,
   "spread_tokens:B2 10k": 3.3828490684558403,
-  "spread_tokens:B2 var": 3.1389576650974624,
+  "spread_tokens:B2 var": 3.1246814861192833,
   "spread_tokens:B2 5k": 3.234326794274205,
   "spread_tokens:lapse": 2.4083837225875544,
   "spread_tokens:long runs": 3.524149904642527,
   "spread_tokens:B1 pil.": 3.4540455527657574,
-  "spread_tokens:B2 pil.": 3.292383158539304,
+  "spread_tokens:B2 pil.": 3.2722833907004376,
   "spread_links:B1 10k": 3.4887359342229196,
   "spread_links:B1 100k": 3.7497415777515464,
   "spread_links:B1 sizes": 3.5844358362618833,
   "spread_links:B1 5k": 3.2103856617157334,
   "spread_links:B1 fixed": 2.833918792748748,
   "spread_links:B2 10k": 3.1507388066834245,
-  "spread_links:B2 var": 3.1571648405110984,
+  "spread_links:B2 var": 3.145876413071324,
   "spread_links:B2 5k": 3.245467127048029,
   "spread_links:lapse": 2.7269675377134774,
   "spread_links:long runs": 3.065844963888189,
   "spread_links:B1 pil.": 3.070221706007963,
-  "spread_links:B2 pil.": 3.0955078012365984,
+  "spread_links:B2 pil.": 3.098175715260691,
   "spread_ages:B1 10k": 6.2144438812650336,
   "spread_ages:B1 100k": 6.8539893490493835,
   "spread_ages:B1 sizes": 6.236358551732848,
   "spread_ages:B1 5k": 5.578136923011817,
   "spread_ages:B1 fixed": 1.0,
   "spread_ages:B2 10k": 4.185928760666222,
-  "spread_ages:B2 var": 4.147055965802631,
+  "spread_ages:B2 var": 4.144789352786817,
   "spread_ages:B2 5k": 4.149566348187139,
   "spread_ages:lapse": 4.41690628407018,
-  "spread_ages:long runs": 4.259871801799353,
+  "spread_ages:long runs": 4.287753283975632,
   "spread_ages:B1 pil.": 4.208294819029966,
-  "spread_ages:B2 pil.": 4.160572478373396,
+  "spread_ages:B2 pil.": 4.186424673507392,
   "effective_genotypes_per_agent:B1 10k": 0.3295481325516027,
   "effective_genotypes_per_agent:B1 100k": 0.2802266338672985,
   "effective_genotypes_per_agent:B1 sizes": 0.26693227091633465,
   "effective_genotypes_per_agent:B1 5k": 0.3531569760368274,
   "effective_genotypes_per_agent:B1 fixed": 0.23027191764399238,
   "effective_genotypes_per_agent:B2 10k": 0.27745794057988304,
-  "effective_genotypes_per_agent:B2 var": 0.24207468141597782,
+  "effective_genotypes_per_agent:B2 var": 0.24223766699037466,
   "effective_genotypes_per_agent:B2 5k": 0.24237950720381368,
   "effective_genotypes_per_agent:lapse": 0.14365716899069075,
-  "effective_genotypes_per_agent:long runs": 0.27471245207534595,
-  "effective_genotypes_per_agent:B1 pil.": 0.15809082950157183,
-  "effective_genotypes_per_agent:B2 pil.": 0.2547380995441064,
+  "effective_genotypes_per_agent:long runs": 0.2761358201817312,
+  "effective_genotypes_per_agent:B1 pil.": 0.15009281689069429,
+  "effective_genotypes_per_agent:B2 pil.": 0.2532629678480868,
   "marks:B1 10k": {
    "one piece": 1.0,
    "2-core": 0.03571428571428571,
@@ -69,7 +69,7 @@
    "link cut": 0.03571428571428571,
    "no hub": 0.4642857142857143,
    "links": 0.6428571428571429,
-   "dimension": 0.9285714285714286
+   "dimension": 0.75
   },
   "marks:B1 100k": {
    "one piece": 1.0,
@@ -78,7 +78,7 @@
    "link cut": 0.16666666666666666,
    "no hub": 0.6333333333333333,
    "links": 0.9,
-   "dimension": 0.7666666666666667
+   "dimension": 0.8666666666666667
   },
   "marks:B1 sizes": {
    "one piece": 1.0,
@@ -87,7 +87,7 @@
    "link cut": 0.13513513513513514,
    "no hub": 0.3783783783783784,
    "links": 0.6756756756756757,
-   "dimension": 0.7027027027027027
+   "dimension": 0.6756756756756757
   },
   "marks:B1 5k": {
    "one piece": 1.0,
@@ -96,7 +96,7 @@
    "link cut": 0.041666666666666664,
    "no hub": 0.2916666666666667,
    "links": 0.5,
-   "dimension": 0.7083333333333334
+   "dimension": 0.625
   },
   "marks:B1 fixed": {
    "one piece": 1.0,
@@ -105,7 +105,7 @@
    "link cut": 0.1,
    "no hub": 0.4666666666666667,
    "links": 0.3333333333333333,
-   "dimension": 0.43333333333333335
+   "dimension": 0.4
   },
   "marks:B2 10k": {
    "one piece": 1.0,
@@ -114,16 +114,16 @@
    "link cut": 1.0,
    "no hub": 1.0,
    "links": 1.0,
-   "dimension": 0.0
+   "dimension": 0.1
   },
   "marks:B2 var": {
    "one piece": 1.0,
    "2-core": 1.0,
    "agent cut": 1.0,
    "link cut": 1.0,
-   "no hub": 1.0,
+   "no hub": 0.9888888888888889,
    "links": 1.0,
-   "dimension": 0.06818181818181818
+   "dimension": 0.12222222222222222
   },
   "marks:B2 5k": {
    "one piece": 1.0,
@@ -132,7 +132,7 @@
    "link cut": 0.76,
    "no hub": 0.92,
    "links": 0.84,
-   "dimension": 0.76
+   "dimension": 0.74
   },
   "marks:lapse": {
    "one piece": 1.0,
@@ -141,39 +141,187 @@
    "link cut": 0.1,
    "no hub": 0.9,
    "links": 0.6,
-   "dimension": 0.1
+   "dimension": 0.0
   },
   "marks:long runs": {
    "one piece": 1.0,
-   "2-core": 0.8461538461538461,
-   "agent cut": 0.7692307692307693,
-   "link cut": 0.7692307692307693,
-   "no hub": 0.7692307692307693,
-   "links": 0.7692307692307693,
-   "dimension": 0.15384615384615385
+   "2-core": 0.8666666666666667,
+   "agent cut": 0.8,
+   "link cut": 0.8,
+   "no hub": 0.8,
+   "links": 0.8,
+   "dimension": 0.26666666666666666
   },
   "marks:B1 pil.": {
    "one piece": 1.0,
-   "2-core": 0.7333333333333333,
-   "agent cut": 0.7,
-   "link cut": 0.7333333333333333,
+   "2-core": 0.7666666666666667,
+   "agent cut": 0.6666666666666666,
+   "link cut": 0.7,
    "no hub": 0.7666666666666667,
-   "links": 0.8333333333333334,
-   "dimension": 0.23333333333333334
+   "links": 0.8666666666666667,
+   "dimension": 0.4
   },
   "marks:B2 pil.": {
    "one piece": 1.0,
-   "2-core": 0.9814814814814815,
-   "agent cut": 0.8888888888888888,
-   "link cut": 0.9074074074074074,
-   "no hub": 1.0,
-   "links": 1.0,
-   "dimension": 0.16666666666666666
+   "2-core": 0.9285714285714286,
+   "agent cut": 0.8428571428571429,
+   "link cut": 0.8428571428571429,
+   "no hub": 0.9857142857142858,
+   "links": 0.9857142857142858,
+   "dimension": 0.37142857142857144
   },
   "table:closest": {
    "head": [
     "world",
     "group",
+    "at iteration",
+    "marks (of 7)",
+    "diversity score",
+    "median tokens",
+    "agents with 3 tokens or fewer",
+    "dimension",
+    "agents"
+   ],
+   "rows": [
+    [
+     "`LC/Q-mix-s2`",
+     "long runs",
+     "4,500",
+     "7",
+     "0.67",
+     "13",
+     "15%",
+     "3.6",
+     "514"
+    ],
+    [
+     "`Y/mix-poorest-s1`",
+     "B2 pil.",
+     "800",
+     "7",
+     "0.66",
+     "3",
+     "51%",
+     "3.7",
+     "1,410"
+    ],
+    [
+     "`Q/mix-s1`",
+     "B2 pil.",
+     "2,000",
+     "7",
+     "0.64",
+     "5",
+     "37%",
+     "3.5",
+     "908"
+    ],
+    [
+     "`B2-5000-d6b607-s006`",
+     "B2 5k",
+     "1,000",
+     "7",
+     "0.62",
+     "1",
+     "71%",
+     "3.0",
+     "1,158"
+    ],
+    [
+     "`B2-5000-s001`",
+     "B2 5k",
+     "1,075",
+     "7",
+     "0.60",
+     "2",
+     "74%",
+     "4.0",
+     "1,518"
+    ],
+    [
+     "`LC/Q-mix-s1`",
+     "long runs",
+     "2,500",
+     "7",
+     "0.60",
+     "3",
+     "52%",
+     "3.4",
+     "1,380"
+    ],
+    [
+     "`W/norev-linktoken-s1`",
+     "B2 pil.",
+     "1,000",
+     "7",
+     "0.60",
+     "5",
+     "42%",
+     "4.0",
+     "921"
+    ],
+    [
+     "`A3k/gain-s1`",
+     "B1 pil.",
+     "1,000",
+     "7",
+     "0.57",
+     "2",
+     "70%",
+     "3.6",
+     "804"
+    ],
+    [
+     "`A3k/ctrl-s2`",
+     "B1 pil.",
+     "1,000",
+     "7",
+     "0.57",
+     "2",
+     "65%",
+     "3.9",
+     "779"
+    ],
+    [
+     "`B2-5000-28aef0-s006`",
+     "B2 5k",
+     "1,000",
+     "7",
+     "0.55",
+     "1",
+     "75%",
+     "3.9",
+     "1,564"
+    ],
+    [
+     "`Q/mix-s2`",
+     "B2 pil.",
+     "2,000",
+     "7",
+     "0.55",
+     "11",
+     "20%",
+     "3.5",
+     "659"
+    ],
+    [
+     "`B2-5000-28aef0-s003`",
+     "B2 5k",
+     "1,000",
+     "7",
+     "0.53",
+     "1",
+     "78%",
+     "3.8",
+     "1,736"
+    ]
+   ]
+  },
+  "table:long": {
+   "head": [
+    "world",
+    "group",
+    "at iteration",
     "marks (of 7)",
     "diversity score",
     "median tokens",
@@ -185,6 +333,7 @@
     [
      "`Q/mix-s1`",
      "B2 pil.",
+     "2,000",
      "7",
      "0.64",
      "5",
@@ -193,127 +342,70 @@
      "908"
     ],
     [
-     "`B2-5000-d6b607-s006`",
-     "B2 5k",
-     "7",
-     "0.62",
-     "1",
-     "71%",
-     "2.7",
-     "1,158"
-    ],
-    [
-     "`B2-5000-s004`",
-     "B2 5k",
-     "7",
-     "0.61",
-     "2",
-     "64%",
-     "3.7",
-     "1,203"
-    ],
-    [
-     "`B2-5000-s001`",
-     "B2 5k",
+     "`LC/Q-mix-s1`",
+     "long runs",
+     "2,500",
      "7",
      "0.60",
-     "2",
-     "74%",
-     "3.9",
-     "1,518"
-    ],
-    [
-     "`A3k/gain-s1`",
-     "B1 pil.",
-     "7",
-     "0.57",
-     "2",
-     "70%",
-     "3.6",
-     "804"
-    ],
-    [
-     "`A3k/ctrl-s2`",
-     "B1 pil.",
-     "7",
-     "0.57",
-     "2",
-     "65%",
-     "3.9",
-     "779"
+     "3",
+     "52%",
+     "3.4",
+     "1,380"
     ],
     [
      "`Q/mix-s2`",
      "B2 pil.",
+     "2,000",
      "7",
      "0.55",
      "11",
      "20%",
-     "3.6",
+     "3.5",
      "659"
     ],
     [
-     "`B2-5000-28aef0-s006`",
-     "B2 5k",
+     "`LC/Q-mix-s2`",
+     "long runs",
+     "4,500",
      "7",
-     "0.55",
-     "1",
-     "75%",
-     "3.7",
-     "1,564"
-    ],
-    [
-     "`B2-5000-d6b607-s007`",
-     "B2 5k",
-     "7",
-     "0.53",
-     "1",
-     "67%",
-     "2.9",
-     "880"
-    ],
-    [
-     "`B2-5000-28aef0-s003`",
-     "B2 5k",
-     "7",
-     "0.53",
-     "1",
-     "78%",
-     "3.7",
-     "1,736"
-    ],
-    [
-     "`S/G4-familysense-s2`",
-     "B2 pil.",
-     "7",
-     "0.53",
-     "1",
-     "74%",
-     "3.9",
-     "2,935"
-    ],
-    [
-     "`B2-5000-5c8c75-s009`",
-     "B2 5k",
-     "7",
-     "0.52",
-     "1",
-     "79%",
-     "4.0",
-     "1,599"
+     "0.67",
+     "13",
+     "15%",
+     "3.6",
+     "514"
     ]
    ]
   },
   "seven_marks": {
    "B1": 0,
    "B1, brains fixed": 0,
-   "B2": 21,
+   "B2": 26,
    "lapse": 0,
-   "long runs": 0,
-   "B1 pilots": 4,
-   "B2 pilots": 9
+   "long runs": 2,
+   "B1 pilots": 5,
+   "B2 pilots": 18
   },
   "closest": [
+   {
+    "id": "LC/Q-mix-s2",
+    "group": "long runs",
+    "marks": 7,
+    "diversity": 0.669,
+    "median_tokens": 13.0,
+    "share_at_most_three": 0.15,
+    "dimension": 3.573789404131375,
+    "agents": 514
+   },
+   {
+    "id": "Y/mix-poorest-s1",
+    "group": "B2 pil.",
+    "marks": 7,
+    "diversity": 0.663,
+    "median_tokens": 3.0,
+    "share_at_most_three": 0.511,
+    "dimension": 3.6660595713235247,
+    "agents": 1410
+   },
    {
     "id": "Q/mix-s1",
     "group": "B2 pil.",
@@ -321,118 +413,98 @@
     "diversity": 0.637,
     "median_tokens": 5.0,
     "share_at_most_three": 0.371,
-    "dimension": 3.5387916400194603,
+    "dimension": 3.52584072985092,
     "agents": 908
    },
    {
     "id": "B2-5000-d6b607-s006",
     "group": "B2 5k",
     "marks": 7,
-    "diversity": 0.621,
+    "diversity": 0.623,
     "median_tokens": 1.0,
     "share_at_most_three": 0.708,
-    "dimension": 2.714205366456121,
+    "dimension": 2.9768425095914983,
     "agents": 1158
-   },
-   {
-    "id": "B2-5000-s004",
-    "group": "B2 5k",
-    "marks": 7,
-    "diversity": 0.614,
-    "median_tokens": 2.0,
-    "share_at_most_three": 0.641,
-    "dimension": 3.6861260969580845,
-    "agents": 1203
    },
    {
     "id": "B2-5000-s001",
     "group": "B2 5k",
     "marks": 7,
-    "diversity": 0.601,
+    "diversity": 0.605,
     "median_tokens": 2.0,
     "share_at_most_three": 0.736,
-    "dimension": 3.922938554043198,
+    "dimension": 3.984802235370325,
     "agents": 1518
+   },
+   {
+    "id": "LC/Q-mix-s1",
+    "group": "long runs",
+    "marks": 7,
+    "diversity": 0.597,
+    "median_tokens": 3.0,
+    "share_at_most_three": 0.516,
+    "dimension": 3.356416535586341,
+    "agents": 1380
+   },
+   {
+    "id": "W/norev-linktoken-s1",
+    "group": "B2 pil.",
+    "marks": 7,
+    "diversity": 0.596,
+    "median_tokens": 5.0,
+    "share_at_most_three": 0.419,
+    "dimension": 3.9908675424598474,
+    "agents": 921
    },
    {
     "id": "A3k/gain-s1",
     "group": "B1 pil.",
     "marks": 7,
-    "diversity": 0.572,
+    "diversity": 0.574,
     "median_tokens": 2.0,
     "share_at_most_three": 0.701,
-    "dimension": 3.59428665688362,
+    "dimension": 3.6073001389161314,
     "agents": 804
    },
    {
     "id": "A3k/ctrl-s2",
     "group": "B1 pil.",
     "marks": 7,
-    "diversity": 0.569,
+    "diversity": 0.57,
     "median_tokens": 2.0,
     "share_at_most_three": 0.65,
-    "dimension": 3.8540450709247667,
+    "dimension": 3.8605088058217847,
     "agents": 779
-   },
-   {
-    "id": "Q/mix-s2",
-    "group": "B2 pil.",
-    "marks": 7,
-    "diversity": 0.553,
-    "median_tokens": 11.0,
-    "share_at_most_three": 0.202,
-    "dimension": 3.5857704070087166,
-    "agents": 659
    },
    {
     "id": "B2-5000-28aef0-s006",
     "group": "B2 5k",
     "marks": 7,
-    "diversity": 0.551,
+    "diversity": 0.554,
     "median_tokens": 1.0,
     "share_at_most_three": 0.747,
-    "dimension": 3.7490802101935294,
+    "dimension": 3.929208549499599,
     "agents": 1564
    },
    {
-    "id": "B2-5000-d6b607-s007",
-    "group": "B2 5k",
+    "id": "Q/mix-s2",
+    "group": "B2 pil.",
     "marks": 7,
-    "diversity": 0.53,
-    "median_tokens": 1.0,
-    "share_at_most_three": 0.672,
-    "dimension": 2.9142775581831817,
-    "agents": 880
+    "diversity": 0.552,
+    "median_tokens": 11.0,
+    "share_at_most_three": 0.202,
+    "dimension": 3.538293209729456,
+    "agents": 659
    },
    {
     "id": "B2-5000-28aef0-s003",
     "group": "B2 5k",
     "marks": 7,
-    "diversity": 0.528,
+    "diversity": 0.532,
     "median_tokens": 1.0,
     "share_at_most_three": 0.775,
-    "dimension": 3.6977523044324156,
+    "dimension": 3.800255526427074,
     "agents": 1736
-   },
-   {
-    "id": "S/G4-familysense-s2",
-    "group": "B2 pil.",
-    "marks": 7,
-    "diversity": 0.526,
-    "median_tokens": 1.0,
-    "share_at_most_three": 0.739,
-    "dimension": 3.9260722147020934,
-    "agents": 2935
-   },
-   {
-    "id": "B2-5000-5c8c75-s009",
-    "group": "B2 5k",
-    "marks": 7,
-    "diversity": 0.517,
-    "median_tokens": 1.0,
-    "share_at_most_three": 0.79,
-    "dimension": 3.984047326887062,
-    "agents": 1599
    }
   ]
  },
@@ -440,7 +512,7 @@
   "map": {
    "title": "Healthy, and diverse?",
    "caption": "Each dot is a world at its last checkpoint. Across: how many of the seven marks of Chapter 46's health bar it meets \u2014 one piece, a 2-core of at least 0.8, no agent whose loss cuts off more than 2%, no link more than 1%, no agent joined to more than 5% of the others, 3 to 12 links per agent, a dimension of 2.3 to 4 (the dots are spread sideways within each count only so that they do not hide each other). Up: how widely its agents spread over tokens, links, ages and genotypes, as the mean of its percentiles among all worlds. The author's picture of a world that might keep evolving is the top right. B1: B1 at every size and its variants (Experiments 2, 8, 10, 12, 13); brains fixed: Experiment 7; B2: B2 and its variants (Experiments 9, 14, 15, 16), except lapse, where any unused link lapses; long runs: the pilot worlds played to 10,000 iterations; pilots: the other pilot worlds, by the rule set they start from.",
-   "recipe": "**Runs.** Every world the book has made that settled (500 iterations or more), each once, at its last checkpoint: the lab's runs at their end, the pilot worlds at theirs, the long runs at 10,000 iterations; pilots that replay a lab world are counted as that world (`python3 research/atlas/profile.py`).\n\n**Data.** From `GraphOfLifeRuns/.pilots/atlas/profile.json`.\n\n1. Read each world's checkpoint: its agents' tokens, links, birth times and genotypes.\n2. The network: pieces, the 2-core, the worst cut by one agent and by one link (one depth-first search), the best-connected agent's share, links per agent; the dimension from the table of every world.\n3. The spreads: the effective number of doubling classes the agents fill (exp of the entropy), for tokens, links and ages; genotypes per agent (1 / sum of squared shares, over the agents).\n4. Rank every world on each spread; the score is the mean of its four percentiles.\n\n**To make it again:** `python3 book_figures.py healthy`."
+   "recipe": "**Runs.** Every world the book has made that settled (500 iterations or more), each once, at its last checkpoint: the lab's runs at their end, the pilot worlds at theirs, the long runs at 10,000 iterations; pilots that replay a lab world are counted as that world (`python3 research/atlas/profile.py`).\n\n**Data.** From `GraphOfLifeRuns/.pilots/atlas/profile.json`.\n\n1. Read each world's checkpoint: its agents' tokens, links, birth times and genotypes.\n2. The network: pieces, the 2-core, the worst cut by one agent and by one link (one depth-first search), the best-connected agent's share, links per agent; the dimension by ball growth on the same checkpoint (the lab's measure, gol_series).\n3. The spreads: the effective number of doubling classes the agents fill (exp of the entropy), for tokens, links and ages; genotypes per agent (1 / sum of squared shares, over the agents).\n4. Rank every world on each spread; the score is the mean of its four percentiles.\n\n**To make it again:** `python3 book_figures.py healthy`."
   },
   "poor": {
    "title": "Agents with three tokens or fewer",

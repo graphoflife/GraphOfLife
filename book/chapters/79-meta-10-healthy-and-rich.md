@@ -13,8 +13,9 @@ is **decentralised, resilient and almost three-dimensional**, and agents that
 genes and in what they do.
 
 This chapter turns that picture into measurements and reads every world the
-book has made against them: 404 worlds, the lab's runs at their end and the
-pilot worlds at their last checkpoint, each counted once.
+book has made against them: 424 worlds when this was last counted, the lab's
+runs at their end and the pilot worlds at their last checkpoint, each counted
+once.
 
 ## Two halves
 
@@ -48,7 +49,7 @@ worlds on these four.
 > **Data.** From `GraphOfLifeRuns/.pilots/atlas/profile.json`.
 >
 > 1. Read each world's checkpoint: its agents' tokens, links, birth times and genotypes.
-> 2. The network: pieces, the 2-core, the worst cut by one agent and by one link (one depth-first search), the best-connected agent's share, links per agent; the dimension from the table of every world.
+> 2. The network: pieces, the 2-core, the worst cut by one agent and by one link (one depth-first search), the best-connected agent's share, links per agent; the dimension by ball growth on the same checkpoint (the lab's measure, gol_series).
 > 3. The spreads: the effective number of doubling classes the agents fill (exp of the entropy), for tokens, links and ages; genotypes per agent (1 / sum of squared shares, over the agents).
 > 4. Rank every world on each spread; the score is the mean of its four percentiles.
 >
@@ -59,7 +60,7 @@ The worlds fall into two clouds, and the author's corner — every mark met, the
 agents most diverse — is empty.
 
 - **B1's worlds are rich but fragile.** Their agents spread widely: over 5.6
-  to 6.9 classes of age, 3.5 to 4 of tokens, with a diversity score of 0.67 to
+  to 6.9 classes of age, 3.5 to 4.1 of tokens, with a diversity score of 0.67 to
   0.75.
   But their networks meet two to four of the seven marks: only half the agents
   are in the 2-core, and in the median world one agent's loss cuts off 13% to
@@ -105,46 +106,103 @@ agents most diverse — is empty.
 
 ## The worlds that come closest
 
-Only 34 worlds meet all seven marks: 15 of Experiment 14's B2 worlds at 5,000
-tokens (smaller worlds, with a dimension of about 3.7); six of Experiment 15's
-at 10,000, five of them without old age; the first alliance pilots (at 3,000
-tokens, below the book's rule of 10,000); and nine pilot worlds built on B2.
+Only 51 worlds meet all seven marks: 15 of Experiment 14's B2 worlds at 5,000
+tokens (smaller worlds, with a dimension of about 3.8); eleven of the lab's B2
+worlds at 10,000, nine of them without old age (Experiment 15), one of B2
+itself and one whose brains rarely change (Experiment 9); five alliance pilots,
+four of them at 3,000 tokens, below the book's rule of 10,000; and twenty pilot
+worlds built on B2, two of them long runs.
 
-A healthy network is not enough. B2's worlds without old age meet every mark
-and have stopped: about 0.4 births an iteration in a world of 3,800 agents,
-more than nine agents in ten holding three tokens or fewer, and nearly all of
-them of one age, the founders' generation that never dies (their ages fill 1.3
-to 1.7 classes). Their diversity scores are among the lowest of all. Ranked by
-how diverse their agents are, the worlds that meet every mark are:
+> [!info] Added later (2026-10-16, the same day)
+> This section first counted 34 worlds. A world's dimension was then taken from
+> the table of every world, as a mean over the stretch at its end; it is now
+> measured on the same checkpoint as the other six marks (the same measure, at
+> one moment, [Chapter 24](24-how-many-dimensions-does-a-world-have.md)). The
+> two agree for B2's worlds (half of them within 0.12) and swing for B1's,
+> whose networks change fast. Worlds that had no entry in the table, and the
+> batches finished since, are now counted too.
+
+A healthy network is not enough. Nine of the ten B2 worlds without old age
+meet every mark and have stopped: about 0.4 births an iteration in a world of
+3,800 agents, 86 to 95% of the agents holding three tokens or fewer, and
+nearly all of them of one age, the founders' generation that never dies (their
+ages fill 1.3 to 2.3 classes). Their diversity scores are among the lowest of
+all. Ranked by how diverse their agents are, the worlds that meet every mark
+are:
 
 <!-- table healthy/closest -->
-| world | group | marks (of 7) | diversity score | median tokens | agents with 3 tokens or fewer | dimension | agents |
-|---|---|---|---|---|---|---|---|
-| `Q/mix-s1` | B2 pil. | 7 | 0.64 | 5 | 37% | 3.5 | 908 |
-| `B2-5000-d6b607-s006` | B2 5k | 7 | 0.62 | 1 | 71% | 2.7 | 1,158 |
-| `B2-5000-s004` | B2 5k | 7 | 0.61 | 2 | 64% | 3.7 | 1,203 |
-| `B2-5000-s001` | B2 5k | 7 | 0.60 | 2 | 74% | 3.9 | 1,518 |
-| `A3k/gain-s1` | B1 pil. | 7 | 0.57 | 2 | 70% | 3.6 | 804 |
-| `A3k/ctrl-s2` | B1 pil. | 7 | 0.57 | 2 | 65% | 3.9 | 779 |
-| `Q/mix-s2` | B2 pil. | 7 | 0.55 | 11 | 20% | 3.6 | 659 |
-| `B2-5000-28aef0-s006` | B2 5k | 7 | 0.55 | 1 | 75% | 3.7 | 1,564 |
-| `B2-5000-d6b607-s007` | B2 5k | 7 | 0.53 | 1 | 67% | 2.9 | 880 |
-| `B2-5000-28aef0-s003` | B2 5k | 7 | 0.53 | 1 | 78% | 3.7 | 1,736 |
-| `S/G4-familysense-s2` | B2 pil. | 7 | 0.53 | 1 | 74% | 3.9 | 2,935 |
-| `B2-5000-5c8c75-s009` | B2 5k | 7 | 0.52 | 1 | 79% | 4.0 | 1,599 |
+| world | group | at iteration | marks (of 7) | diversity score | median tokens | agents with 3 tokens or fewer | dimension | agents |
+|---|---|---|---|---|---|---|---|---|
+| `LC/Q-mix-s2` | long runs | 4,500 | 7 | 0.67 | 13 | 15% | 3.6 | 514 |
+| `Y/mix-poorest-s1` | B2 pil. | 800 | 7 | 0.66 | 3 | 51% | 3.7 | 1,410 |
+| `Q/mix-s1` | B2 pil. | 2,000 | 7 | 0.64 | 5 | 37% | 3.5 | 908 |
+| `B2-5000-d6b607-s006` | B2 5k | 1,000 | 7 | 0.62 | 1 | 71% | 3.0 | 1,158 |
+| `B2-5000-s001` | B2 5k | 1,075 | 7 | 0.60 | 2 | 74% | 4.0 | 1,518 |
+| `LC/Q-mix-s1` | long runs | 2,500 | 7 | 0.60 | 3 | 52% | 3.4 | 1,380 |
+| `W/norev-linktoken-s1` | B2 pil. | 1,000 | 7 | 0.60 | 5 | 42% | 4.0 | 921 |
+| `A3k/gain-s1` | B1 pil. | 1,000 | 7 | 0.57 | 2 | 70% | 3.6 | 804 |
+| `A3k/ctrl-s2` | B1 pil. | 1,000 | 7 | 0.57 | 2 | 65% | 3.9 | 779 |
+| `B2-5000-28aef0-s006` | B2 5k | 1,000 | 7 | 0.55 | 1 | 75% | 3.9 | 1,564 |
+| `Q/mix-s2` | B2 pil. | 2,000 | 7 | 0.55 | 11 | 20% | 3.5 | 659 |
+| `B2-5000-28aef0-s003` | B2 5k | 1,000 | 7 | 0.53 | 1 | 78% | 3.8 | 1,736 |
 <!-- /table -->
 
-The closest of all are the two worlds whose **brains are mixed at birth**
-([Chapter 78](78-mixed-brains-costly-units.md)): every mark met, a dimension of
-3.5, and agents that are richer and more varied than in any other healthy world
-(the median agent holds 5 and 11 tokens; 37% and 20% hold three or fewer, and
-their wealth spreads over six doubling classes, wider than in any other world
-that meets every mark). They are smaller worlds — 660 to 910 agents for 10,000 tokens, where B2
-holds 3,400 — so each agent holds more. They are also among the worlds whose
-evolution went on most strongly. Two worlds are a pilot, not a result; the
-batches now running put mixing together with gifts, without revolutions, with
-handover, and into both screens of switches (Appendix C), which will say whether
-it holds.
+The closest of all are worlds whose **brains are mixed at birth**
+([Chapter 78](78-mixed-brains-costly-units.md)): four of the six at the top. The
+two of batch Q meet every mark at a dimension of 3.5, and their agents are
+richer and more varied than in any other healthy world: the median agent holds
+5 and 11 tokens, 37% and 20% hold three or fewer, and their wealth spreads over
+six doubling classes, wider than in any other world that meets every mark. They
+are smaller worlds — 660 to 910 agents for 10,000 tokens, where B2 holds 3,400
+— so each agent holds more. They are also among the worlds whose evolution went
+on most strongly. The other two are the long run of one of them, below, and a
+world of batch Y, mixing with estates left to the poorest, still running.
+
+## Candidates and long runs
+
+A world that comes this close is a **candidate**, and is played on to see
+whether it stays. The rule, with no line of its own
+(`research/oee/pilots/candidates.py`, list in `research/oee/candidates.md`):
+every mark of the health bar met, a diversity score above the median of
+Experiment 16's B2 worlds, and at least 10,000 tokens. Three worlds met it
+first — the two mixed worlds of batch Q and a world of batch S whose agents
+have an eye for a family tag and no revolutions — and each is being played on
+to 10,000 iterations in a copy of its own (`GraphOfLifeRuns/.pilots/LC/`). Where
+each was chosen, and where it is now:
+
+<!-- table healthy/long -->
+| world | group | at iteration | marks (of 7) | diversity score | median tokens | agents with 3 tokens or fewer | dimension | agents |
+|---|---|---|---|---|---|---|---|---|
+| `Q/mix-s1` | B2 pil. | 2,000 | 7 | 0.64 | 5 | 37% | 3.5 | 908 |
+| `LC/Q-mix-s1` | long runs | 2,500 | 7 | 0.60 | 3 | 52% | 3.4 | 1,380 |
+| `Q/mix-s2` | B2 pil. | 2,000 | 7 | 0.55 | 11 | 20% | 3.5 | 659 |
+| `LC/Q-mix-s2` | long runs | 4,500 | 7 | 0.67 | 13 | 15% | 3.6 | 514 |
+<!-- /table -->
+
+The first stretch already parts the two mixed worlds. One has grown poorer as
+it grew: half as many agents again, and half of them now hold three tokens or
+fewer, as in B2's worlds. The other has grown richer and smaller, and is now the world that comes
+closest of all: every mark met, a dimension of 3.6, the median agent holding 13
+tokens and only 15% holding three or fewer. The world with an eye for a family
+tag has not yet gone further than where it was chosen.
+
+The long runs are planned in three steps:
+
+1. **Every candidate to 10,000 iterations** (running). A candidate that falls
+   back towards B2's poverty, or loses a mark, says its rule does not hold.
+2. **More seeds for what holds.** One world can be luck; a rule whose candidate
+   is still healthy and diverse at 10,000 iterations gets five seeds more, from
+   the start, to 10,000.
+3. **A pre-registered lab experiment** for what holds in most seeds: ten seeds
+   to 10,000 iterations, and the best world on to a hundred thousand, as
+   [Chapter 69](69-a-hundred-thousand-iterations.md) plans for one world. Mixing
+   is a rule of the prototype today; it would first become an option of the
+   engine, off by default, so that the lab can run it.
+
+The batches still running (T to Y, [Appendix C](C-every-simulation.md)) and the
+search for settings by elimination (batch Z: worlds whose every setting is
+drawn at random, the values that make worlds worse dropped round after round,
+`research/oee/search.md`) add candidates as they finish.
 
 ## What this says
 
@@ -177,5 +235,5 @@ it holds.
 <!-- turns -->
 ---
 
-← [Chapter 76 · Meta VIII · Who helps whom](76-meta-8-who-helps-whom.md) · [Contents](../README.md) · [Appendix A · What a simulation costs](A-costs.md) →
+← [Chapter 77 · Meta IX · How alike the agents are](77-meta-9-how-alike.md) · [Contents](../README.md) · [Appendix A · What a simulation costs](A-costs.md) →
 <!-- /turns -->
