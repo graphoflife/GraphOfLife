@@ -274,7 +274,10 @@ def main():
                 r["kinds"] = kinds.get(r["id"])
                 r["bar"] = bar(r)
             results.append(r)
-    json.dump({"what": __doc__.strip().splitlines()[0], "bar": BAR, "worlds": results}, open(OUT, "w"), indent=1)
+    # Written whole and then moved into place: the search by elimination reads it while worlds run.
+    with open(OUT + ".tmp", "w") as f:
+        json.dump({"what": __doc__.strip().splitlines()[0], "bar": BAR, "worlds": results}, f, indent=1)
+    os.replace(OUT + ".tmp", OUT)
     met = [sum(1 for v in r["bar"].values() if v) for r in results if "bar" in r]
     print(f"{len(results)} worlds measured; health marks met: "
           + ", ".join(f"{k}: {met.count(k)}" for k in range(8)), flush=True)

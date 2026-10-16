@@ -357,7 +357,7 @@
      "1\u201310",
      "10,000",
      "1,000",
-     "58",
+     "60",
      [
       {
        "text": "49",
@@ -484,7 +484,7 @@
      "3",
      "13",
      "10,000",
-     "3,000, 8,000, 10,000, 40,000",
+     "3,000, 10,000",
      "12 done, 1 running",
      [
       {
@@ -538,7 +538,7 @@
      "12",
      "10,000",
      "2,000",
-     "8 done, 4 running",
+     "9 done, 3 running",
      []
     ],
     [
@@ -548,7 +548,7 @@
      "48",
      "10,000",
      "1,000",
-     "2 done, 4 running, 42 queued",
+     "9 done, 4 running, 35 queued",
      []
     ],
     [
@@ -578,7 +578,7 @@
      "48",
      "10,000",
      "1,000",
-     "0 done, 2 running, 46 queued",
+     "5 done, 2 running, 41 queued",
      []
     ],
     [
@@ -588,8 +588,43 @@
      "46",
      "10,000",
      "1,000",
-     "0 done, 2 running, 44 queued",
+     "5 done, 2 running, 39 queued",
      []
+    ],
+    [
+     "Y",
+     "Brains mixed at birth together with each other switch, on B2",
+     "23",
+     "46",
+     "10,000",
+     "1,000",
+     "2 done, 2 running, 42 queued",
+     []
+    ],
+    [
+     "Z",
+     "Settings drawn at random from every value the book has used, the values that make worlds worse dropped round after round (research/oee/search.md)",
+     "32",
+     "32",
+     "10,000",
+     "1,000",
+     "0 done, 4 running, 28 queued",
+     []
+    ],
+    [
+     "LC",
+     "The candidates, the worlds closest to the author's picture of one that might keep evolving, played on to 10,000 iterations",
+     "2",
+     "3",
+     "10,000",
+     "10,000",
+     "0 done, 3 running",
+     [
+      {
+       "text": "79",
+       "href": "chapters/79-meta-10-healthy-and-rich.md"
+      }
+     ]
     ]
    ]
   },
@@ -841,7 +876,7 @@
      "B2",
      "nothing: B2 itself",
      "1, 2, 3, 4, 5, 6, 7, 8, 9, 10",
-     "8,000"
+     "10,000"
     ],
     [
      "P",
@@ -989,9 +1024,65 @@
     ],
     [
      "T",
+     "gifts-came",
+     "B2",
+     "allow_gifting = on, inactive_window = iteration, prune_after = reproduction, came_from = on",
+     "1",
+     "1,000"
+    ],
+    [
+     "T",
+     "gifts-handover",
+     "B2",
+     "allow_gifting = on, allow_handover = on, inactive_window = iteration, prune_after = reproduction",
+     "1",
+     "1,000"
+    ],
+    [
+     "T",
+     "gifts-helped",
+     "B2",
+     "allow_gifting = on, inactive_window = iteration, prune_after = reproduction, helped_by = on",
+     "1",
+     "1,000"
+    ],
+    [
+     "T",
+     "gifts-linktoken",
+     "B2",
+     "allow_gifting = on, inactive_window = iteration, prune_after = reproduction, valence = 0, link_token = on",
+     "1",
+     "1,000"
+    ],
+    [
+     "T",
+     "gifts-mix",
+     "B2",
+     "allow_gifting = on, inactive_window = iteration, prune_after = reproduction, mix = on",
+     "1",
+     "1,000"
+    ],
+    [
+     "T",
      "gifts-newborns",
      "B2",
      "allow_gifting = on, inactive_window = iteration, prune_after = reproduction, redistribution = newborns",
+     "1",
+     "1,000"
+    ],
+    [
+     "T",
+     "gifts-noage",
+     "B2",
+     "allow_gifting = on, inactive_window = iteration, max_age = 0, prune_after = reproduction",
+     "1",
+     "1,000"
+    ],
+    [
+     "T",
+     "gifts-nodice",
+     "B2",
+     "allow_gifting = on, inactive_window = iteration, prune_after = reproduction, random_input_amount = 0",
      "1",
      "1,000"
     ],
@@ -1037,6 +1128,46 @@
     ],
     [
      "W",
+     "norev-helped",
+     "B2",
+     "allow_revolutions = off, helped_by = on",
+     "1",
+     "1,000"
+    ],
+    [
+     "W",
+     "norev-linktoken",
+     "B2",
+     "allow_revolutions = off, valence = 0, link_token = on",
+     "1",
+     "1,000"
+    ],
+    [
+     "W",
+     "norev-mix",
+     "B2",
+     "allow_revolutions = off, mix = on",
+     "1",
+     "1,000"
+    ],
+    [
+     "W",
+     "norev-newborns",
+     "B2",
+     "allow_revolutions = off, redistribution = newborns",
+     "1",
+     "1,000"
+    ],
+    [
+     "W",
+     "norev-parents",
+     "B2",
+     "allow_revolutions = off, redistribution = parents",
+     "1",
+     "1,000"
+    ],
+    [
+     "W",
      "norev-poorest",
      "B2",
      "allow_revolutions = off, redistribution = poorest",
@@ -1053,11 +1184,107 @@
     ],
     [
      "X",
+     "handover-helped",
+     "B2",
+     "allow_handover = on, helped_by = on",
+     "1",
+     "1,000"
+    ],
+    [
+     "X",
+     "handover-linktoken",
+     "B2",
+     "allow_handover = on, valence = 0, link_token = on",
+     "1",
+     "1,000"
+    ],
+    [
+     "X",
+     "handover-mix",
+     "B2",
+     "allow_handover = on, mix = on",
+     "1",
+     "1,000"
+    ],
+    [
+     "X",
+     "handover-newborns",
+     "B2",
+     "allow_handover = on, redistribution = newborns",
+     "1",
+     "1,000"
+    ],
+    [
+     "X",
+     "handover-parents",
+     "B2",
+     "allow_handover = on, redistribution = parents",
+     "1",
+     "1,000"
+    ],
+    [
+     "X",
      "handover-poorest",
      "B2",
      "allow_handover = on, redistribution = poorest",
      "1",
      "1,000"
+    ],
+    [
+     "Y",
+     "mix-bytokens",
+     "B2",
+     "redistribution = by_tokens, mix = on",
+     "1",
+     "1,000"
+    ],
+    [
+     "Y",
+     "mix-newborns",
+     "B2",
+     "redistribution = newborns, mix = on",
+     "1",
+     "1,000"
+    ],
+    [
+     "Y",
+     "mix-parents",
+     "B2",
+     "redistribution = parents, mix = on",
+     "1",
+     "1,000"
+    ],
+    [
+     "Y",
+     "mix-poorest",
+     "B2",
+     "redistribution = poorest, mix = on",
+     "1",
+     "1,000"
+    ],
+    [
+     "Z",
+     "every world its own",
+     "B2",
+     "each world its settings drawn at random from the values the book has used (research/oee/search.md)",
+     "1001 to 1004",
+     "1,000"
+    ],
+    [
+     "LC",
+     "Q-mix",
+     "B2",
+     "mix = on",
+     "1, 2",
+     "10,000"
+    ],
+    [
+     "LC",
+     "S-G4-familysense",
+     "B2",
+     "allow_revolutions = off, kin_sense = on, tag_rate = 0.05",
+     "2",
+     "10,000"
     ]
    ]
   },
@@ -1191,8 +1418,8 @@
     ],
     [
      "E15",
-     "58",
-     "19",
+     "60",
+     "23",
      "10",
      "25",
      "22",
@@ -1213,7 +1440,7 @@
      "0",
      "0",
      "0",
-     "0",
+     "5",
      "8"
     ],
     [
@@ -1222,7 +1449,7 @@
      "8",
      "4",
      "0",
-     "0",
+     "8",
      "8"
     ],
     [
@@ -1240,16 +1467,16 @@
      "3",
      "0",
      "0",
-     "0",
+     "8",
      "8"
     ],
     [
      "S",
      "26",
      "26",
-     "0",
+     "9",
      "26",
-     "6",
+     "26",
      "26"
     ],
     [
@@ -1282,7 +1509,7 @@
     [
      "R",
      "12",
-     "2",
+     "3",
      "0",
      "2",
      "0",
@@ -1290,7 +1517,7 @@
     ],
     [
      "T",
-     "6",
+     "13",
      "0",
      "0",
      "0",
@@ -1317,7 +1544,7 @@
     ],
     [
      "W",
-     "2",
+     "7",
      "0",
      "0",
      "0",
@@ -1326,7 +1553,34 @@
     ],
     [
      "X",
-     "2",
+     "7",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0"
+    ],
+    [
+     "Y",
+     "4",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0"
+    ],
+    [
+     "Z",
+     "4",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0"
+    ],
+    [
+     "LC",
+     "3",
      "0",
      "0",
      "0",
@@ -1337,9 +1591,9 @@
   },
   "totals": {
    "lab experiments": 15,
-   "lab runs on disk": 552,
-   "pilot batches": 14,
-   "pilot worlds": 275
+   "lab runs on disk": 554,
+   "pilot batches": 17,
+   "pilot worlds": 356
   }
  },
  "figures": {}

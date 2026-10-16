@@ -220,8 +220,19 @@ def _planned(batch: str) -> Dict[str, Tuple[int, int]]:
             name = os.path.basename(words[2].rstrip("/"))
             tokens = re.search(r"total_tokens=(\d+)", line)
             iters = re.search(r"--iters (\d+)", line)
-            out[name] = (int(tokens.group(1)) if tokens else 0, int(iters.group(1)) if iters else 0)
+            start = re.search(r"--from \S+:(\d+)", line)
+            # A world that goes on from a lab run's archive ends that much later; one that goes on
+            # from its own checkpoint says how long it is in its config.json, not here.
+            length = 0 if "--resume" in line or not iters else int(iters.group(1)) + (int(start.group(1)) if start else 0)
+            out[name] = (int(tokens.group(1)) if tokens else 0, length)
     return out
+
+
+def _length(meta: Dict[str, Any]) -> int:
+    """How many iterations a pilot world is to live, counting where it started and every time it went on."""
+    start = int(str(meta.get("from") or ":0").rsplit(":", 1)[1] or 0)
+    ends = [start + int(meta.get("iters") or 0)] + [int(r["at"]) + int(r["iters"]) for r in meta.get("resumes") or []]
+    return max(ends)
 
 
 def pilot_rows(chapters, done) -> Tuple[Dict[str, Any], Dict[str, Any], Dict[str, Any]]:
@@ -246,12 +257,12 @@ def pilot_rows(chapters, done) -> Tuple[Dict[str, Any], Dict[str, Any], Dict[str
             conditions.setdefault(re.sub(r"-s\d+$", "", name), []).append((name, d, meta))
         # A job that only goes on from a checkpoint names no size: it is the size it was.
         tokens = sorted(({int(m["cfg"].get("total_tokens") or 0) for _, _, m in worlds} | {t for t, _ in jobs.values()}) - {0})
-        iters = sorted({int(m.get("iters") or 0) for _, _, m in worlds if m.get("iters")} | {i for _, i in jobs.values()})
+        iters = sorted({_length(m) for _, _, m in worlds} | {i for _, i in jobs.values()} - {0})
         done_n = running_n = stopped_n = 0
         for name, d, m in worlds:
             if os.path.realpath(d) in busy:
                 running_n += 1
-            elif _last_iteration(d) >= int(m.get("iters") or 0) > 0:
+            elif _last_iteration(d) >= _length(m) > 0:
                 done_n += 1
             else:
                 stopped_n += 1
@@ -279,7 +290,7 @@ def pilot_rows(chapters, done) -> Tuple[Dict[str, Any], Dict[str, Any], Dict[str
             seeds = sorted(int(m["cfg"].get("seed") or 0) for _, _, m in members)
             details.append([batch, cond, on + ("" if engine else " (the prototype's own code)"),
                             ", ".join(changed) or f"nothing: {on} itself",
-                            ", ".join(str(s) for s in seeds), f"{int(meta.get('iters') or 0):,}"])
+                            ", ".join(str(s) for s in seeds), f"{_length(meta):,}"])
         rows.append([batch, BATCHES[batch][0], str(len({re.sub(r"-s\d+$", "", n) for n in names})), str(planned),
                      ", ".join(f"{t:,}" for t in tokens), ", ".join(f"{i:,}" for i in iters), status,
                      _cell_chapters(BATCHES[batch][1], chapters)])
