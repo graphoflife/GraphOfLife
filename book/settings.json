@@ -29,6 +29,7 @@
   "keep_home",
   "max_age",
   "min_child",
+  "mix_at_birth",
   "mutation_probability",
   "mutation_noise_std",
   "mutation_sparsity",
@@ -130,6 +131,9 @@
   },
   "keep_home": {
    "meaning": "The share of an agent's tokens — rounded up, never less than one — that stays on its own node whatever its brain says; a parent also keeps one. 0 is the old rule."
+  },
+  "mix_at_birth": {
+   "meaning": "Whether a newborn's brain is its parent's mixed with a mate's — one of the parent's neighbours, drawn at random — each hidden unit whole from one or the other by an even chance, before it mutates; off, a newborn has a copy of its parent's brain."
   }
  }
 }

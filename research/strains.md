@@ -52,9 +52,13 @@ which it is.
 | `keep_home` | `0.0` | at least this share of an agent's tokens (rounded up, at least one) stays home, and a parent keeps one: no agent can stake or breed itself to death |
 | `max_age` | `0` | agents die at this age (0 = never) |
 | `min_child` | `1` | the smallest endowment that makes a child |
+| `mix_at_birth` | `false` | a newborn's brain is its parent's mixed with a random neighbour's before it mutates: each hidden unit whole (weights in, bias, weights out) and each output bias from one or the other by an even chance; a new genotype unless it is the parent's brain again |
 
-The nine above were added together on 2026-10-12 for Part V of the book, from
-the pilots in `research/oee/` (`LOG.md` there says which failure each answers).
+The nine from `mutate_on_replication` to `min_child` were added together on
+2026-10-12 for Part V of the book, from the pilots in `research/oee/` (`LOG.md`
+there says which failure each answers). `mix_at_birth` followed on 2026-10-16,
+from the prototype's `mix` (`research/oee/pilots/proto.py`), the rule of the
+pilot worlds that came closest to a healthy and diverse one (the book's Meta X).
 
 ### What a new run is offered
 
@@ -145,6 +149,7 @@ On every store that can be found on its own:
 | `gol-1+allow_handover=false+birth_links=2+brain_kind=float16+incumbency=1.5+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8` | `allow_handover=false`, `birth_links=2`, `brain_kind=float16`, `incumbency=1.5`, `max_age=100`, `mend_on_death`, `message_prepass=false`, `min_child=10`, `mutate_on_replication`, `prune_needs=2`, `valence=8` | the book's lab | B2 or B1 with one rule of Part V changed: E15 · nothing kept. |
 | `gol-1+allow_handover=false+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8` | `allow_handover=false`, `brain_kind=float16`, `incumbency=1.5`, `keep_home=0.3`, `max_age=100`, `mend_on_death`, `message_prepass=false`, `min_child=10`, `mutate_on_replication`, `prune_needs=2`, `valence=8` | the book's lab | B2 or B1 with one rule of Part V changed: E14 · no links at birth. |
 | `gol-1+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mutate_on_replication+prune_needs=2+valence=8` | `birth_links=2`, `brain_kind=float16`, `incumbency=1.5`, `keep_home=0.3`, `max_age=100`, `mend_on_death`, `message_prepass=false`, `min_child=10`, `mutate_on_replication`, `prune_needs=2`, `valence=8` | the book's lab | B2 or B1 with one rule of Part V changed: E14 · handover. |
+| `gol-1+allow_handover=false+birth_links=2+brain_kind=float16+incumbency=1.5+keep_home=0.3+max_age=100+mend_on_death+message_prepass=false+min_child=10+mix_at_birth+mutate_on_replication+prune_needs=2+valence=8` | `allow_handover=false`, `birth_links=2`, `brain_kind=float16`, `incumbency=1.5`, `keep_home=0.3`, `max_age=100`, `mend_on_death`, `message_prepass=false`, `min_child=10`, `mix_at_birth`, `mutate_on_replication`, `prune_needs=2`, `valence=8` | the book's lab | B2 with every newborn's brain mixed from its parent's and a neighbour's (`mix_at_birth`): E17 · mixed at birth. |
 | `gol-1+brain_kind=float16+mutate_on_replication` | `brain_kind=float16`, `mutate_on_replication` | the book's lab | B2 or B1 with one rule of Part V changed: E13 · one hidden layer, change only when copied. |
 
 ---

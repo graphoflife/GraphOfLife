@@ -27,3 +27,14 @@ for extra in ({}, {"allow_revolutions": False}, {"allow_gifting": True, "prune_a
         for x, y in zip(fa, fb):
             assert x["ids"] == y["ids"] and x["tokens"] == y["tokens"] and x["brain_ids"] == y["brain_ids"] and x["edges"] == y["edges"], (extra, t)
     print("engine mode identical for 25 iterations with", extra or "B2", "; nodes", len(fa[1]["ids"]), "counters", b.c)
+
+# Brains mixed at birth: the engine's mix_at_birth, and the prototype's switch for it (mix),
+# which every pilot made with mixing names.
+s = {**B2, "seed": 11, "total_tokens": 3000}
+a = new_world(SimConfig.for_new_run(**s, mix_at_birth=True))
+b = make_world(SimConfig.for_new_run(**s), {"engine": True, "mix": True})
+for t in range(25):
+    fa = a.step(record_decisions=False); fb = b.step(record_decisions=False)
+    for x, y in zip(fa, fb):
+        assert x["ids"] == y["ids"] and x["tokens"] == y["tokens"] and x["brain_ids"] == y["brain_ids"] and x["edges"] == y["edges"], ("mix", t)
+print("engine mode identical for 25 iterations with mixing at birth; nodes", len(fa[1]["ids"]), "counters", b.c)

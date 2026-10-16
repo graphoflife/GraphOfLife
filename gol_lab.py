@@ -436,8 +436,13 @@ def run_lab() -> int:
         return 1
 
     asked = {"stop": False}
-    signal.signal(signal.SIGTERM, lambda *_: asked.update(stop=True))
-    signal.signal(signal.SIGINT, lambda *_: asked.update(stop=True))
+    # Put back when the lab stops. A process that goes on afterwards — a test,
+    # which analyses what the lab made — would otherwise hand these to the
+    # workers of every process pool it forks, and a pool stops its idle workers
+    # with SIGTERM: they would only note the request and wait on, and the pool
+    # with them.
+    previous = {sig: signal.signal(sig, lambda *_: asked.update(stop=True))
+                for sig in (signal.SIGTERM, signal.SIGINT)}
 
     running: Dict[str, Tuple[subprocess.Popen, Job, Dict[str, Any]]] = {}
     crashes: Dict[str, int] = {}
@@ -457,6 +462,8 @@ def run_lab() -> int:
     finally:
         _write_state({})
         lock.__exit__(None, None, None)
+        for sig, handler in previous.items():
+            signal.signal(sig, handler)
         _log("lab stopped")
     return 0
 

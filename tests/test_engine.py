@@ -2625,6 +2625,92 @@ def test_no_child_is_born_with_less_than_min_child():
     assert seen, "wanted some births"
 
 
+def test_a_mixed_brain_takes_each_unit_whole_from_one_brain_or_the_other():
+    """
+    mix_at_birth. With one hidden layer, a hidden unit's weights in, its bias
+    and its weights out travel together, and each output's bias is drawn on
+    its own; with more layers, each unit of every layer brings its weights in
+    and its bias. Both brains give some units, and the mixture keeps the first
+    brain's identity until the world gives it a new one.
+    """
+    import numpy as np
+
+    rng = np.random.RandomState(3)
+    for layers in ([9], [14, 12]):
+        cfg = small(hidden_layers=layers)
+        a, b = make_brain(cfg, 1, rng), make_brain(cfg, 2, rng)
+        for x in (a, b):
+            x.biases = [rng.normal(size=v.shape) for v in x.biases]   # founders' biases are all zero
+        child = a.mixed_with(b, np.random.RandomState(5))
+        assert child.brain_id == 1 and a.brain_id == 1 and b.brain_id == 2
+        if len(layers) == 1:
+            units = [lambda x, k=k: (x.weights[0][k], x.biases[0][k], x.weights[1][:, k])
+                     for k in range(layers[0])]
+            units += [lambda x, k=k: (x.biases[1][k],) for k in range(cfg.n_outputs())]
+        else:
+            units = [lambda x, i=i, k=k: (x.weights[i][k], x.biases[i][k])
+                     for i, W in enumerate(a.weights) for k in range(W.shape[0])]
+        sources = []
+        for unit in units:
+            from_a = all(np.array_equal(p, q) for p, q in zip(unit(child), unit(a)))
+            from_b = all(np.array_equal(p, q) for p, q in zip(unit(child), unit(b)))
+            assert from_a != from_b, "a unit is neither one brain's nor the other's, whole"
+            sources.append(from_b)
+        assert 0 < sum(sources) < len(sources), "one brain gave every unit"
+
+
+def test_mixing_at_birth_makes_a_new_genotype_only_from_two_different_brains():
+    """
+    The mate is one of the parent's neighbours. A mixture of two different
+    brains is a new genotype, the parent's its parent; with a mate of the
+    parent's own genotype it is the parent's brain again and keeps its id;
+    with no neighbour, and with mixing off, a birth copies without a draw.
+    """
+    import numpy as np
+
+    world = new_world(small(mix_at_birth=True))
+    parent, mate = sorted(world.G.nodes())[:2]
+    pid = world.brains[parent].brain_id
+
+    world.brains[mate] = world.brains[parent].copy()
+    before = world.next_brain_id
+    child = world._inherit(parent, [parent, mate])
+    assert child.brain_id == pid and world.next_brain_id == before
+    assert child.same_weights(world.brains[parent])
+
+    world.brains[mate] = world._new_brain()
+    before = world.next_brain_id
+    child = world._inherit(parent, [parent, mate])
+    assert child.brain_id == before and world.next_brain_id == before + 1
+    assert child.parent_brain_id == pid and not child.same_weights(world.brains[parent])
+
+    for w, candidates in ((world, [parent]), (new_world(small()), [parent, mate])):
+        state = w.rng.get_state()[1].copy()
+        copy = w._inherit(parent, candidates)
+        assert copy.same_weights(w.brains[parent]) and copy.brain_id == w.brains[parent].brain_id
+        assert np.array_equal(w.rng.get_state()[1], state), "a copy drew from the world's stream"
+
+
+def test_mixing_at_birth_conserves_tokens_in_every_brain_kind():
+    for kind in SimConfig.MODES["brain_kind"]:
+        for layers in ([16], [24, 20]):
+            world = new_world(small(mix_at_birth=True, brain_kind=kind, hidden_layers=layers, seed=13))
+            expected = sum(world.tokens.values())
+            for _ in range(6):
+                for frame in world.step(record_decisions=False):
+                    assert frame["summary"]["tokens"] == expected, f"{kind} {layers} lost tokens"
+            assert world.G.number_of_nodes() > 0, f"{kind} {layers} died out"
+
+
+def test_a_world_that_mixes_at_birth_resumes_to_the_same_run():
+    cfg = small(mix_at_birth=True, hidden_layers=[16], seed=41)
+    world = new_world(cfg)
+    _recorded(world, 4)
+    blob = {k: v.copy() for k, v in world.to_checkpoint().items()}
+    straight_on = _recorded(world, 4)
+    assert _recorded(GraphOfLife.from_checkpoint(blob, cfg), 4) == straight_on
+
+
 def test_a_tournament_plays_every_pair_home_and_away_and_rates_them():
     import gol_run
     import gol_store

@@ -78,6 +78,7 @@ MECHANICS: Dict[str, Any] = {
     "keep_home": 0.0,
     "max_age": 0,
     "min_child": 1,
+    "mix_at_birth": False,
 }
 
 # What the new-simulation form arrives filled in with.
@@ -346,9 +347,10 @@ class SimConfig:
     # ---- Open-ended evolution ----
     #
     # Nine rules, each the answer to a way a world was seen to fail when brains
-    # could see (research/oee/LOG.md, the book's Part V). Every one is off by
-    # default and local: it reads an agent, its links and its neighbours, and
-    # nothing further away.
+    # could see (research/oee/LOG.md, the book's Part V), and a tenth from the
+    # pilots that followed (mix_at_birth). Every one is off by default and
+    # local: it reads an agent, its links and its neighbours, and nothing
+    # further away.
 
     # Heredity. A brain changes only when it is copied — into a newborn, or into
     # a node its owner won — and no longer after every game wherever it sits.
@@ -394,6 +396,18 @@ class SimConfig:
     # The fewest tokens a child can be born with; a smaller endowment means no
     # birth. 1 is the old rule.
     min_child: int = 1
+
+    # Heredity of parts. A newborn's brain is its parent's mixed with a mate's
+    # — one of the parent's neighbours, drawn at random — before it mutates:
+    # each hidden unit, with the weights into it, its bias and the weights out
+    # of it, comes from one or the other by an even chance, and so does each
+    # output's bias (with more hidden layers, each unit of every layer, with
+    # its weights in and its bias). A unit that works can then spread without
+    # the rest of the brain it arose in. The mixture is a new genotype unless
+    # it is the parent's brain again, as it is with a mate of the same
+    # genotype; a parent without a neighbour has a copy. Off is the old rule.
+    # The pilots of the book's Chapter 78 found it.
+    mix_at_birth: bool = False
 
     # ---- Mutation ----
     mutation_probability: float = 0.5

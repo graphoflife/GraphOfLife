@@ -33,9 +33,10 @@ PHASE 1 — REPRODUCTION
      forward pass over all columns at once.
   3. The REPRO_FRACTION head decides what fraction of `u`'s tokens to endow a
      child with. Below one whole token, no child is born.
-  4. If a child is born it is a mutated copy of the parent's brain, and the
-     parent pays for it out of its own tokens. Reproduction is literally
-     splitting your own life force.
+  4. If a child is born it is a mutated copy of the parent's brain — under
+     `mix_at_birth`, of the parent's brain mixed unit by unit with a random
+     neighbour's — and the parent pays for it out of its own tokens.
+     Reproduction is literally splitting your own life force.
   5. The LINK head decides, per candidate, whether the newborn is wired to that
      candidate. LINK_MODE lets the agent choose whether LINK is read as a
      probability or as a hard argmax.
@@ -546,6 +547,40 @@ class Brain:
         clone.biases = [b.copy() for b in self.biases]
         clone.parent_brain_id = self.parent_brain_id
         return clone
+
+    def mixed_with(self, other: "Brain", rng: np.random.RandomState) -> "Brain":
+        """
+        A copy of this brain with each of its units, by an even chance, the
+        other brain's instead.
+
+        With one hidden layer a unit is a hidden unit whole — the weights into
+        it, its bias and the weights out of it — so a unit that works arrives
+        with everything it needs; then each output's bias is drawn the same
+        way. With more hidden layers a unit is a row of a layer, its weights in
+        and its bias, layer by layer up to the outputs.
+
+        The copy still carries this brain's identity. Whether the mixture is a
+        new genotype is for the world to say, which owns the ids.
+        """
+        child = self.copy()
+        if len(self.weights) == 2:
+            take = rng.random_sample(self.weights[0].shape[0]) < 0.5
+            child.weights[0][take] = other.weights[0][take]
+            child.biases[0][take] = other.biases[0][take]
+            child.weights[1][:, take] = other.weights[1][:, take]
+            take = rng.random_sample(self.biases[1].shape[0]) < 0.5
+            child.biases[1][take] = other.biases[1][take]
+        else:
+            for i, (W, b) in enumerate(zip(other.weights, other.biases)):
+                take = rng.random_sample(W.shape[0]) < 0.5
+                child.weights[i][take] = W[take]
+                child.biases[i][take] = b[take]
+        return child
+
+    def same_weights(self, other: "Brain") -> bool:
+        """Whether two brains hold exactly the same numbers: one genotype, whatever their ids."""
+        return all(np.array_equal(x, y) for x, y in zip(self.weights + self.biases,
+                                                         other.weights + other.biases))
 
     def mutate(self, brain_id: int, rng: np.random.RandomState) -> bool:
         """
@@ -1131,6 +1166,32 @@ class GraphOfLife:
         # No id is allocated: copying does not make a new genotype.
         return source.copy()
 
+    def _inherit(self, parent: int, candidates: List[int]) -> Brain:
+        """
+        The brain a newborn starts from, before it mutates: a copy of its
+        parent's, or under mix_at_birth its parent's mixed with a mate's — one
+        of the parent's neighbours, drawn at random. A parent without a
+        neighbour has a copy.
+        """
+        brain = self.brains[parent]
+        if self.cfg.mix_at_birth:
+            mates = [v for v in candidates[1:] if v != parent and self.G.has_node(v)]
+            if mates:
+                return self._mixed_brain(brain, self.brains[mates[self.rng.randint(len(mates))]])
+        return self._copy_brain(brain)
+
+    def _mixed_brain(self, brain: Brain, mate: Brain) -> Brain:
+        """
+        A brain mixed from `brain` and `mate`, a new genotype if the mixture
+        is anything but `brain` again — as it is whenever the mate is a clone.
+        """
+        child = brain.mixed_with(mate, self.rng)
+        if not child.same_weights(brain):
+            child.parent_brain_id = brain.brain_id
+            child.brain_id = self.next_brain_id
+            self.next_brain_id += 1
+        return child
+
     def _mutate_brain(self, brain: Brain) -> None:
         if brain.mutate(self.next_brain_id, self.rng):
             self.next_brain_id += 1
@@ -1527,8 +1588,9 @@ class GraphOfLife:
         self.next_agent_id += 1
         self.G.add_node(child_id)
 
-        # The child inherits a mutated copy; the parent pays the full price.
-        child_brain = self._copy_brain(self.brains[parent])
+        # The child inherits a mutated copy, or a mutated mixture; the parent
+        # pays the full price.
+        child_brain = self._inherit(parent, candidates)
         self._mutate_brain(child_brain)
 
         self._register_agent(child_id, child_tokens, child_brain, int(parent))

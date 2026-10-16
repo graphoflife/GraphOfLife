@@ -36,6 +36,7 @@ a time. The plan that defines B1 is the file `book/experiments/B1.json`.
 | [`keep_home`](#keep_home) | 0 | a share of the tokens stays at home |
 | [`max_age`](#max_age) | 0 | the longest life |
 | [`min_child`](#min_child) | 1 | the smallest child |
+| [`mix_at_birth`](#mix_at_birth) | off | a newborn's brain mixed from two |
 | [`mutation_probability`](#mutation_probability) | 0.2 | how often a brain changes |
 | [`mutation_noise_std`](#mutation_noise_std) | 0.2 | how big a change is |
 | [`mutation_sparsity`](#mutation_sparsity) | 0.1 | how many weights a change touches |
@@ -205,10 +206,11 @@ the dead. Baseline 0: the supply is fixed.
 ## Open-ended evolution
 
 Nine rules added for Part V, each the answer to one way a world was seen to
-fail once its brains could see. Every one is off in the baseline B1 and in
-every run before Part V, so the runs of Parts II–IV are unchanged by them.
-All are local: they read an agent, its connections and its neighbours, and
-nothing further away.
+fail once its brains could see, and a tenth, `mix_at_birth`, that came later
+from the pilots of [Chapter 78](../chapters/78-mixed-brains-costly-units.md).
+Every one is off in the baseline B1 and in every run before Part V, so the
+runs of Parts II–IV are unchanged by them. All are local: they read an agent,
+its connections and its neighbours, and nothing further away.
 
 ### mutate_on_replication
 
@@ -277,6 +279,22 @@ shared out like those of any other dead agent. Baseline 0.
 
 The fewest tokens a child can be born with. A parent whose brain would give a
 child less has no child. Baseline 1: any child at all.
+
+### mix_at_birth
+
+Whether a newborn's brain is mixed from two before it mutates: its parent's
+and a mate's, one of the parent's neighbours drawn at random. With one hidden
+layer each hidden unit comes whole — the weights into it, its bias and the
+weights out of it — from one brain or the other by an even chance, and so does
+each output's bias; with more layers, each unit of every layer, with its
+weights in and its bias. A unit that works can then spread without the rest
+of the brain it arose in. The mixture is a new genotype unless it is the
+parent's brain again, as it is when the mate is of the parent's genotype; a
+parent without a neighbour has a copy. Baseline off: a newborn has a copy of
+its parent's brain. In the pilots of
+[Chapter 78](../chapters/78-mixed-brains-costly-units.md) and the batches
+after it, worlds with it came closest to a healthy and diverse world
+([Meta X](../chapters/79-meta-10-healthy-and-rich.md)).
 
 ## Change
 

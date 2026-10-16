@@ -29,10 +29,13 @@ Mechanics (P keys):
                   counted exactly by the game's rule (research/oee/checks/rules.py):
                   above zero it helped me keep my node, below zero it attacked.
   mix      bool   a newborn's brain is mixed from its parent's and a mate's, a neighbour
-                  of the parent drawn at random: each hidden unit (its incoming weights,
-                  bias and outgoing weights together) and each output bias from one or
-                  the other with an even chance. The mixture is a new genotype, then
-                  mutated as any copy is.
+                  of the parent drawn at random: the engine's mix_at_birth since
+                  2026-10-16, which this switches on for the pilots that name it. Until
+                  then the prototype gave every mixture a new genotype, even one identical
+                  to the parent's brain (a mate of the same genotype), and drew a deeper
+                  brain's output biases twice; the engine does neither. With one hidden
+                  layer the worlds are the same draw for draw, only their genotype ids
+                  differ (equiv.py).
   took_kin bool   one input row per candidate: did it take, in the last game, a node held
                   by an agent of my genotype?
   unit_token bool (brain_kind=grow) every active hidden unit holds one token, as
@@ -127,6 +130,7 @@ Mechanics (P keys):
 """
 from __future__ import annotations
 
+import dataclasses
 import sys
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -231,13 +235,13 @@ class ProtoWorld(GraphOfLife):
         self.effect_on: Dict[Tuple[int, int], float] = {}
         # took_kin: taker's node -> the genotypes whose nodes it took in the last game.
         self.victims_of: Dict[int, set] = {}
-        # mix: the parent's and the mate's brains while a birth copies the parent's.
-        self._mating: Optional[Tuple[Any, Any]] = None
         # link_token: tokens of lapsed links waiting, during a cleanup, to pay for the
         # links that mend it or to be scattered with the estate.
         self._link_bank: Optional[int] = None
         # Each genotype's family tag (tag_rate > 0): a tag changes only when a brain mutates.
         self.tag_of: Dict[int, int] = {}
+        if P.get("mix") and not cfg.mix_at_birth:
+            cfg = dataclasses.replace(cfg, mix_at_birth=True)
         _BUILDING[0] += 1
         try:
             super().__init__(G_init, cfg, _empty=_empty)
@@ -289,40 +293,17 @@ class ProtoWorld(GraphOfLife):
                 if fresh:
                     self._count("new_families")
 
-    def _copy_brain(self, source):
-        if self._mating is not None and source is self._mating[0]:
-            mate = self._mating[1]
-            self._mating = None
-            return self._mixed(source, mate)
-        return super()._copy_brain(source)
-
-    def _mixed(self, a, b):
-        """A new genotype: each hidden unit, and each output bias, from brain a or brain b."""
-        child = a.copy()
-        if len(a.weights) == 2 and a.weights[0].shape == b.weights[0].shape:
-            H = a.weights[0].shape[0]
-            take = self.rng.random_sample(H) < 0.5
-            child.weights[0][take] = b.weights[0][take]
-            child.biases[0][take] = b.biases[0][take]
-            child.weights[1][:, take] = b.weights[1][:, take]
-        else:                                        # deeper brains: row by row, layer by layer
-            for i, (W, B) in enumerate(zip(b.weights, b.biases)):
-                take = self.rng.random_sample(W.shape[0]) < 0.5
-                child.weights[i][take] = W[take]
-                child.biases[i][take] = B[take]
-        out = child.biases[-1].shape[0]
-        take = self.rng.random_sample(out) < 0.5
-        child.biases[-1][take] = b.biases[-1][take]
-        old = a.brain_id
-        child.brain_id = self.next_brain_id
-        child.parent_brain_id = old
-        self.next_brain_id += 1
-        self.root_of[child.brain_id] = self.root_of.get(old, old)
-        self.brain_parent[child.brain_id] = old
-        self.brain_depth[child.brain_id] = self.brain_depth.get(old, 0) + 1
-        if P.get("tag_rate", 0) > 0:
-            self.tag_of[child.brain_id] = self.tag_of.get(old, old)
+    def _mixed_brain(self, brain, mate):
+        """The engine's mixture (mix_at_birth), entered in the family tree when it is a new genotype."""
+        child = super()._mixed_brain(brain, mate)
         self._count("mixed")
+        if child.brain_id != brain.brain_id:
+            old = brain.brain_id
+            self.root_of[child.brain_id] = self.root_of.get(old, old)
+            self.brain_parent[child.brain_id] = old
+            self.brain_depth[child.brain_id] = self.brain_depth.get(old, 0) + 1
+            if P.get("tag_rate", 0) > 0:
+                self.tag_of[child.brain_id] = self.tag_of.get(old, old)
         return child
 
     # ---- units that hold a token -----------------------------------------------
@@ -584,15 +565,7 @@ class ProtoWorld(GraphOfLife):
 
     # ---- reproduction, with the search for partners after it ----------------
     def _spawn_child(self, parent, parent_tokens, child_tokens, candidates, Y):
-        if P.get("mix"):
-            mates = [v for v in candidates[1:] if v != parent and self.G.has_node(v)]
-            if mates:
-                mate = mates[self.rng.randint(len(mates))]
-                self._mating = (self.brains[parent], self.brains[mate])
-        try:
-            child_id, linked = self._spawn_child_rules(parent, parent_tokens, child_tokens, candidates, Y)
-        finally:
-            self._mating = None
+        child_id, linked = self._spawn_child_rules(parent, parent_tokens, child_tokens, candidates, Y)
         if P.get("came_from"):
             self.came_from[int(child_id)] = int(parent)
         if P.get("birth_allies"):
@@ -635,7 +608,7 @@ class ProtoWorld(GraphOfLife):
         child_id = self.next_agent_id
         self.next_agent_id += 1
         self.G.add_node(child_id)
-        child_brain = self._copy_brain(self.brains[parent])
+        child_brain = self._inherit(parent, candidates)
         self._mutate_brain(child_brain)
         self._register_agent(child_id, child_tokens, child_brain, int(parent))
         self.tokens[parent] = parent_tokens - child_tokens
