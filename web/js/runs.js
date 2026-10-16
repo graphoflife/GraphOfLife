@@ -346,13 +346,27 @@ const RunsView = {
   syncDependentFields() {
     const messages = document.getElementById('cfg_exchange_messages');
     const prepass = document.getElementById('cfg_message_prepass');
-    if (!messages || !prepass) return;
-    prepass.disabled = !messages.checked;
-    if (prepass.disabled) prepass.checked = false;
-    prepass.closest('.field').classList.toggle('disabled', prepass.disabled);
-    prepass.title = prepass.disabled
-      ? 'Needs "Exchange messages": a pass that only sends messages has nothing to do without them.'
-      : '';
+    if (messages && prepass) {
+      prepass.disabled = !messages.checked;
+      if (prepass.disabled) prepass.checked = false;
+      prepass.closest('.field').classList.toggle('disabled', prepass.disabled);
+      prepass.title = prepass.disabled
+        ? 'Needs "Exchange messages": a pass that only sends messages has nothing to do without them.'
+        : '';
+    }
+    // How a search for strangers goes means nothing without a search, and the
+    // engine refuses it: the two choices wait, at their defaults, until there is one.
+    const search = document.getElementById('cfg_link_search');
+    if (!search) return;
+    const off = search.value === 'off';
+    for (const [id, fallback] of [['cfg_link_steering', 'random'], ['cfg_link_consent', 'mutual']]) {
+      const select = document.getElementById(id);
+      if (!select) continue;
+      select.disabled = off;
+      if (off) select.value = fallback;
+      select.closest('.field').classList.toggle('disabled', off);
+      select.title = off ? 'Needs a search: choose Jump or Walk above.' : '';
+    }
   },
 
   readConfig() {

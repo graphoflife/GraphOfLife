@@ -41,6 +41,10 @@ PHASE 1 — REPRODUCTION
      candidate. LINK_MODE lets the agent choose whether LINK is read as a
      probability or as a hard argmax.
   6. Apply the new edges, drop self-loops, then run cleanup (below).
+     Under `link_search`, agents may first pay a token a step to search beyond
+     their neighbours — in one jump, or with a scout that goes a step further
+     each iteration — and propose a link to the stranger they reach, which
+     `link_consent` says who must accept.
 
   Phase 1 does NOT move or create any other edges. No walker, no edge
   shifting, no reconnection.
@@ -196,12 +200,14 @@ def decision_keys(cfg: SimConfig) -> Dict[str, frozenset]:
     a test holds every frame to it. Every key is always written — an empty
     list when its mechanic is off, so whether a mechanic was on is the run's
     settings to say, not the frame's — with one exception: a stake's and a
-    conquest's `revolt` is left out when revolutions are off, so that "not
-    part of these rules" can be told from "allowed and unused".
+    conquest's `revolt` is left out when revolutions are off, and the
+    reproduction record's `proposals` when nobody may search for strangers, so
+    that "not part of these rules" can be told from "allowed and unused".
     """
     revolt = frozenset({"revolt"}) if cfg.allow_revolutions else frozenset()
+    search = frozenset({"proposals"}) if cfg.link_search != "off" else frozenset()
     return {
-        "reproduction": frozenset({"births", "gifts", "pruned_edges"}),
+        "reproduction": frozenset({"births", "gifts", "pruned_edges"}) | search,
         "birth": frozenset({"agent", "tokens_before", "invested", "child", "links",
                             "handed_over"}),
         "game": frozenset({"allocations", "winners", "pruned_edges"}),
@@ -972,6 +978,10 @@ class GraphOfLife:
         # newborn's links count as active and cannot be pruned before anyone
         # has had a chance to use them.
         self.edge_active_at: Dict[Tuple[int, int], int] = {}
+        # Under link_search "walk", the node each searching agent's scout stands
+        # on. Only agents whose scout is out are in it, which is why it is not
+        # one of the books.
+        self.scouts: Dict[int, int] = {}
 
         if _empty:
             return
@@ -1039,6 +1049,7 @@ class GraphOfLife:
         """The other half of _register_agent: leave nothing behind."""
         for book in self._books:
             book.pop(aid, None)
+        self.scouts.pop(aid, None)
 
     # ------------------------------------------------------------------------
     # Edge upkeep
@@ -1439,6 +1450,7 @@ class GraphOfLife:
         decisions: List[Dict[str, Any]] = []
         handovers: List[Tuple[int, int, int]] = []
         gifts: List[Tuple[int, int, int]] = []
+        searches: List[Tuple[int, int]] = []
         outbox: Dict[int, Dict[int, List[float]]] = {}
         self.phase_count += 1
         # Captured before anything changes, so the viewer can express births and
@@ -1497,6 +1509,9 @@ class GraphOfLife:
             # their ids.
             gifts.extend(self._choose_gifts(u, tokens_u - child_tokens,
                                             candidates, Y))
+            spend = self._choose_search(tokens_u - child_tokens, Y)
+            if spend:
+                searches.append((int(u), spend))
 
         # Hand the chosen edges over: the child gains the connection, the parent
         # loses it. If the newborn was already wired to that neighbour by the
@@ -1533,6 +1548,14 @@ class GraphOfLife:
             paid.append((int(giver), int(taker), amount))
         self._note("repro.gifts", lambda: {"gifts": [[g, t, a] for g, t, a in paid]})
 
+        # Searches go out once the gifts have landed, so a searcher spends only
+        # what it has left.
+        proposals: List[Tuple[int, int, bool]] = []
+        if self.cfg.link_search != "off":
+            proposals = self._search(searches)
+            self._note("repro.search", lambda: {
+                "proposals": [[u, w, int(made)] for u, w, made in proposals]})
+
         # The accounting may fall due here rather than after the game. When it
         # does, a gift paid moments ago is what keeps a connection standing.
         dead_edges = self._stale_edges() if self._prunes_after(1) else []
@@ -1553,6 +1576,8 @@ class GraphOfLife:
             payload = {
                 "births": decisions,
                 "gifts": [[g, t, a] for g, t, a in paid],
+                **({"proposals": [[int(u), int(w), bool(made)] for u, w, made in proposals]}
+                   if self.cfg.link_search != "off" else {}),
                 # The prune can run here now, so a reproduction frame says what
                 # it cut — an empty list on a run that settles up only after the
                 # game. Whether this phase prunes at all is the run's
@@ -1678,6 +1703,96 @@ class GraphOfLife:
         shares = _apportion(weights, budget)
         return [(int(u), int(candidates[col]), int(amount))
                 for col, amount in zip(cols, shares) if amount > 0]
+
+    def _choose_search(self, purse: int, Y: np.ndarray) -> int:
+        """
+        How many tokens an agent spends this iteration searching beyond its
+        neighbours (link_search): the SEEK head's share of what reproduction
+        left, read like the gift's fraction. A step costs one token, so in a
+        jump this is how far the walk goes at once; a scout goes one step at
+        most in an iteration, so there it says only whether to go on.
+        """
+        if self.cfg.link_search == "off" or purse < 1:
+            return 0
+        frac = np.mean(Y[self.heads["SEEK"], :], axis=1)
+        spend = int(np.floor(_share_of_first(frac[0], frac[1]) * purse))
+        if self.cfg.link_search == "walk":
+            spend = min(spend, 1)
+        return max(0, min(purse, spend))
+
+    def _search(self, searches: List[Tuple[int, int]]) -> List[Tuple[int, int, bool]]:
+        """
+        Walk, pay, propose, and link where the rule for consent allows.
+
+        Every searcher walks in turn, in the order of their ids: one token a
+        step, paid to the agent the step enters, and never its last token. In
+        a jump the walk starts from home and a link is proposed where it ends;
+        a scout (walk) goes on from where it stood, and may also be standing
+        on someone without having stepped this iteration. A searcher proposes
+        to a stranger only if its own ACCEPT head says yes to it; with mutual
+        consent the stranger's must say yes too, and nobody at its valence is
+        linked. A proposal, taken up or not, brings a scout home.
+        """
+        cfg = self.cfg
+        walkers = dict(searches)
+        if cfg.link_search == "walk":
+            for u in self.scouts:
+                walkers.setdefault(u, 0)
+        if not walkers:
+            return []
+        # Measured again, since the births and the gifts have changed the world.
+        features = self._precompute_features()
+        proposals: List[Tuple[int, int, bool]] = []
+        for u in sorted(walkers):
+            here = self.scouts.get(u, u) if cfg.link_search == "walk" else u
+            if not self.G.has_node(here):
+                here = u                         # the agent its scout stood on is gone
+            for _ in range(max(0, min(walkers[u], int(self.tokens[u]) - 1))):
+                step = self._step(u, here, features)
+                if step is None:
+                    break
+                here = step
+                self.tokens[u] -= 1
+                self.tokens[here] += 1
+            self.scouts.pop(u, None)
+            stranger = here != u and not self.G.has_edge(u, here)
+            if not stranger or not self._accepts(u, here, features):
+                if cfg.link_search == "walk" and here != u:
+                    self.scouts[u] = here        # nobody to propose to here: on next time
+                continue
+            agreed = cfg.link_consent == "forced" or self._accepts(here, u, features)
+            room = not cfg.valence or (self.G.degree(u) < cfg.valence
+                                       and self.G.degree(here) < cfg.valence)
+            if agreed and room:
+                self._add_edge(u, here)
+            proposals.append((u, here, agreed and room))
+        return proposals
+
+    def _step(self, u: int, here: int, features) -> Optional[int]:
+        """
+        One step of `u`'s search on from `here`: to a neighbour drawn at random,
+        or to the one `u` would most like a link with, ties drawn at random.
+        """
+        # Sorted, like every neighbourhood read here: a graph rebuilt from a
+        # checkpoint lists a node's neighbours in another order.
+        options = sorted(self.G.neighbors(here))
+        if not options:
+            return None
+        if self.cfg.link_steering == "random":
+            return options[self.rng.randint(len(options))]
+        log_deg, _, q_tok, q_deg, log_tok, at_risk = features
+        Y = self._observe(u, [u] + options, log_deg, q_tok, q_deg, log_tok, at_risk)
+        liking = Y[self.heads["ACCEPT"], 1:]
+        liking = liking[0] - liking[1]
+        best = np.flatnonzero(liking == liking.max())
+        return options[int(best[self.rng.randint(len(best))])]
+
+    def _accepts(self, u: int, w: int, features) -> bool:
+        """Whether `u`'s ACCEPT head says yes to a link with `w`, read like the link decision."""
+        log_deg, _, q_tok, q_deg, log_tok, at_risk = features
+        Y = self._observe(u, [u, w], log_deg, q_tok, q_deg, log_tok, at_risk)
+        accept, mode = Y[self.heads["ACCEPT"], 1], Y[self.heads["LINK_MODE"], 1]
+        return _choose_binary(accept[0], accept[1], mode[0], mode[1], self.rng)
 
     def _choose_handovers(self, parent: int, child: int,
                           candidates: List[int], Y: np.ndarray) -> List[int]:
@@ -2373,6 +2488,14 @@ class GraphOfLife:
         blob["msg_values"] = (np.array(payloads, dtype=np.float64)
                               if payloads else np.zeros((0, width), dtype=np.float64))
 
+        # Where each searching agent's scout stands is world state too. Written
+        # only under the rule that has scouts, so that every other world's
+        # checkpoint holds what it always held.
+        if self.cfg.link_search == "walk":
+            searching = sorted(self.scouts)
+            blob["scout_from"] = np.array(searching, dtype=np.int64)
+            blob["scout_at"] = np.array([self.scouts[u] for u in searching], dtype=np.int64)
+
         # Preserve the world's stream so a resumed run is not merely similar.
         state = self.rng.get_state()
         blob["rng_keys"] = state[1].astype(np.uint32)
@@ -2453,6 +2576,11 @@ class GraphOfLife:
             for i, recipient in enumerate(msg_to):
                 if recipient in world.messages:
                     world.messages[recipient][int(msg_from[i])] = values[i].tolist()
+
+        if "scout_from" in blob:
+            world.scouts = {int(u): int(v) for u, v in zip(blob["scout_from"].tolist(),
+                                                           blob["scout_at"].tolist())
+                            if u in world.tokens}
 
         counters = blob["counters"].tolist()
         world.next_agent_id, world.next_brain_id, world.iteration = (

@@ -15,6 +15,9 @@ Mechanics (P keys):
                   game, and what I staked on it (log1p tokens).
   seek     bool   edge proposals: two output rows SEEK (how much of my tokens to
                   spend searching) and two ACCEPT (yes/no to a proposed partner).
+                  The engine's link_search (2026-10-16) is the lab's version: its
+                  jump with mutual consent is this with toll "path" and no seek_max,
+                  searched before the cleanup rather than after.
                   A searcher walks `budget` random steps from its node, paying one
                   token per step; if it ends on a stranger and both accept, they
                   are joined.
@@ -242,6 +245,9 @@ class ProtoWorld(GraphOfLife):
         self.tag_of: Dict[int, int] = {}
         if P.get("mix") and not cfg.mix_at_birth:
             cfg = dataclasses.replace(cfg, mix_at_birth=True)
+        if P.get("seek") and cfg.link_search != "off":
+            raise ValueError("seek is the prototype's search for strangers and link_search the engine's: "
+                             "a world takes one of them")
         _BUILDING[0] += 1
         try:
             super().__init__(G_init, cfg, _empty=_empty)

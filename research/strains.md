@@ -53,10 +53,13 @@ which it is.
 | `max_age` | `0` | agents die at this age (0 = never) |
 | `min_child` | `1` | the smallest endowment that makes a child |
 | `mix_at_birth` | `false` | a newborn's brain is its parent's mixed with a random neighbour's before it mutates: each hidden unit whole (weights in, bias, weights out) and each output bias from one or the other by an even chance; a new genotype unless it is the parent's brain again |
+| `link_search` | `off` | agents may reach beyond their neighbours to propose links: `jump` (a walk of as many steps as tokens spent in one iteration) or `walk` (a scout one step further each iteration paid for); a step costs one token, paid to the agent it enters |
+| `link_steering` | `random` | which way a search steps: at random, or `looking` (to the neighbour the searcher would most like a link with) |
+| `link_consent` | `mutual` | who must agree to a link a search proposes: both ends, or `forced` (only the searcher); never to or from an agent at its valence |
 
 The nine from `mutate_on_replication` to `min_child` were added together on
 2026-10-12 for Part V of the book, from the pilots in `research/oee/` (`LOG.md`
-there says which failure each answers). `mix_at_birth` followed on 2026-10-16,
+there says which failure each answers). `mix_at_birth` and the three for links to strangers followed on 2026-10-16,
 from the prototype's `mix` (`research/oee/pilots/proto.py`), the rule of the
 pilot worlds that came closest to a healthy and diverse one (the book's Meta X).
 

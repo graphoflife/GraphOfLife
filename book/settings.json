@@ -30,6 +30,9 @@
   "max_age",
   "min_child",
   "mix_at_birth",
+  "link_search",
+  "link_steering",
+  "link_consent",
   "mutation_probability",
   "mutation_noise_std",
   "mutation_sparsity",
@@ -134,6 +137,15 @@
   },
   "mix_at_birth": {
    "meaning": "Whether a newborn's brain is its parent's mixed with a mate's — one of the parent's neighbours, drawn at random — each hidden unit whole from one or the other by an even chance, before it mutates; off, a newborn has a copy of its parent's brain."
+  },
+  "link_search": {
+   "meaning": "Whether an agent may reach beyond its neighbours to propose a link: off; jump, a walk as many steps long as the tokens it spends in one iteration, with a link proposed where it ends; or walk, a scout that goes one step further in every iteration it pays for. A step costs one token, paid to the agent it enters, and never the last."
+  },
+  "link_steering": {
+   "meaning": "Which way each step of a search goes: to a neighbour drawn at random, or to the one the searcher would most like a link with (looking)."
+  },
+  "link_consent": {
+   "meaning": "Who has to agree to a link a search proposes: both ends (mutual), or only the one who proposes (forced). Nobody at its valence gets a new link either way."
   }
  }
 }

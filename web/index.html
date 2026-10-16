@@ -396,6 +396,35 @@
           <small>A newborn's brain is its parent's mixed with a random neighbour's, each hidden unit whole from one or the other, before it mutates.</small>
         </div>
         </fieldset>
+        <fieldset>
+          <legend>Links to strangers</legend>
+          <small class='fieldset-note'>Off by default. An agent pays a token a step, to the agent it enters, to reach beyond its neighbours and propose a link where it arrives.</small>
+        <div class="field">
+          <label for="cfg_link_search">Search</label>
+          <select id="cfg_link_search" data-cfg="link_search">
+            <option value="off">Off: links only to the neighbourhood</option>
+            <option value="jump">Jump: as many steps as tokens spent, at once</option>
+            <option value="walk">Walk: a scout one step further each iteration</option>
+          </select>
+          <small>A jump goes as far as the agent pays in one iteration and proposes where it ends. A scout goes one step on in every iteration the agent pays for, and the agent proposes wherever it stands when it wants to; then the scout comes home.</small>
+        </div>
+        <div class="field">
+          <label for="cfg_link_steering">Each step goes</label>
+          <select id="cfg_link_steering" data-cfg="link_steering">
+            <option value="random">To a neighbour drawn at random</option>
+            <option value="looking">Where the searcher would most like a link</option>
+          </select>
+          <small>Looking: the searcher's brain sees every neighbour of where it stands and steps to the one it would most like a link with.</small>
+        </div>
+        <div class="field">
+          <label for="cfg_link_consent">A link needs</label>
+          <select id="cfg_link_consent" data-cfg="link_consent">
+            <option value="mutual">Both: the stranger has to agree</option>
+            <option value="forced">Only the one who proposes</option>
+          </select>
+          <small>Either way, nobody at its valence gets a new link.</small>
+        </div>
+        </fieldset>
       </div>
     </div>
 

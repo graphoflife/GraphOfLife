@@ -79,6 +79,11 @@ MECHANICS: Dict[str, Any] = {
     "max_age": 0,
     "min_child": 1,
     "mix_at_birth": False,
+
+    # ---- links to strangers ------------------------------------------------
+    "link_search": "off",
+    "link_steering": "random",
+    "link_consent": "mutual",
 }
 
 # What the new-simulation form arrives filled in with.
@@ -204,11 +209,19 @@ class SimConfig:
     # How the tokens of removed agents are shared among the survivors.
     REDISTRIBUTIONS: ClassVar[Tuple[str, ...]] = (
         "uniform", "by_tokens", "poorest", "newborns", "parents")
+    # How an agent reaches a stranger (link_search), which way it goes there
+    # (link_steering), and who has to agree to the link it proposes (link_consent).
+    LINK_SEARCHES: ClassVar[Tuple[str, ...]] = ("off", "jump", "walk")
+    LINK_STEERINGS: ClassVar[Tuple[str, ...]] = ("random", "looking")
+    LINK_CONSENTS: ClassVar[Tuple[str, ...]] = ("mutual", "forced")
     MODES: ClassVar[Dict[str, Tuple[str, ...]]] = {
         "brain_kind": tuple(BRAIN_PRESETS),
         "prune_after": tuple(PRUNE_AFTER),
         "inactive_window": tuple(INACTIVE_WINDOW),
         "redistribution": REDISTRIBUTIONS,
+        "link_search": LINK_SEARCHES,
+        "link_steering": LINK_STEERINGS,
+        "link_consent": LINK_CONSENTS,
     }
 
     # ---- Economy ----
@@ -408,6 +421,29 @@ class SimConfig:
     # genotype; a parent without a neighbour has a copy. Off is the old rule.
     # The pilots of the book's Chapter 78 found it.
     mix_at_birth: bool = False
+
+    # ---- Links to strangers ----
+    #
+    # Every link an agent can make is to its own neighbourhood: its newborn's,
+    # chosen from the parent's neighbours. With link_search an agent can reach
+    # further, paying one token for every step, to the agent a step enters, and
+    # never its last token. Off is the old rule.
+    #
+    #   jump   in one iteration a walk as many steps long as the tokens the
+    #          agent spends on it (a SEEK head's share of what reproduction
+    #          left), and a link proposed where it ends;
+    #   walk   a scout that goes one step further in every iteration the agent
+    #          pays for, and a link proposed wherever it stands when the agent
+    #          wants one; after a proposal the scout comes home.
+    link_search: str = "off"
+    # Which way each step goes: to a neighbour drawn at random, or to the one
+    # the searcher would most like a link with (its ACCEPT head, looking at
+    # every neighbour of where it stands).
+    link_steering: str = "random"
+    # Who has to say yes: both ends, each by its ACCEPT head, or only the one
+    # who proposes. Either way no link is made to or from an agent at its
+    # valence.
+    link_consent: str = "mutual"
 
     # ---- Mutation ----
     mutation_probability: float = 0.5
@@ -615,6 +651,13 @@ class SimConfig:
             layout["GIFT"] = [nxt + 2, nxt + 4]
             layout["GIFT_MODE"] = [nxt + 4, nxt + 6]
             nxt += 6
+        if self.link_search != "off":
+            # How much of what reproduction left to spend searching, read like
+            # the gift's fraction; and yes or no to a link with a stranger, read
+            # like the link decision (with LINK_MODE).
+            layout["SEEK"] = [nxt, nxt + 2]
+            layout["ACCEPT"] = [nxt + 2, nxt + 4]
+            nxt += 4
         layout["MESSAGE"] = [nxt, nxt + self.message_amount]
         return layout
 
@@ -725,6 +768,9 @@ class SimConfig:
         if self.message_prepass and not self.exchange_messages:
             raise ValueError("message_prepass needs exchange_messages: a pass that "
                              "exists only to send messages has nothing to do without them")
+        if self.link_search == "off" and (self.link_steering, self.link_consent) != ("random", "mutual"):
+            raise ValueError("link_steering and link_consent say how a search for strangers goes: "
+                             "they need link_search")
         if not 0.0 <= self.mutation_probability <= 1.0:
             raise ValueError("mutation_probability must be between 0 and 1")
         if not 0.0 <= self.mutation_sparsity <= 1.0:

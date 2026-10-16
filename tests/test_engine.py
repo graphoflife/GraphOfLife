@@ -2702,6 +2702,131 @@ def test_mixing_at_birth_conserves_tokens_in_every_brain_kind():
             assert world.G.number_of_nodes() > 0, f"{kind} {layers} died out"
 
 
+def _decided(world, agent, **heads):
+    """Make an agent's brain answer some heads the same way whatever it sees: (row values)."""
+    import numpy as np
+    brain = world.brains[agent].copy()
+    W, b = brain.weights[-1], brain.biases[-1]
+    for head, values in heads.items():
+        rows = world.heads[head]
+        W[rows] = 0
+        b[rows] = np.array(values, dtype=b.dtype).reshape(-1, 1)
+    world.brains[agent] = brain
+
+
+def _line(world, n, tokens):
+    """The world as a line of n agents, 0 - 1 - ... - n-1, each with these tokens."""
+    world.G.remove_edges_from(list(world.G.edges()))
+    for u in list(world.G.nodes()):
+        if u >= n:
+            world.G.remove_node(u)
+            world._forget_agent(u)
+    for u in range(n - 1):
+        world._add_edge(u, u + 1)
+    for u in range(n):
+        world.tokens[u] = tokens
+
+
+def test_a_search_pays_a_token_a_step_to_whom_it_enters_and_never_the_last():
+    """link_search: a jump of k steps costs k tokens, each paid to the agent the step enters."""
+    world = new_world(small(link_search="jump", hidden_layers=[16]))
+    _line(world, 6, 10)
+    total = sum(world.tokens.values())
+    world._search([(0, 4)])
+    assert sum(world.tokens.values()) == total, "a search made or lost tokens"
+    assert world.tokens[0] <= 10 - 1, "a walk of four steps cost nothing"
+    # A searcher with two tokens can pay for one step, whatever it asks for.
+    world = new_world(small(link_search="jump", hidden_layers=[16]))
+    _line(world, 6, 2)
+    world._search([(0, 5)])
+    assert world.tokens[0] == 1 and world.tokens[1] == 3, "the last token was spent"
+
+
+def test_a_link_to_a_stranger_needs_both_ends_unless_forced_and_room_at_both():
+    import numpy as np
+
+    def proposal(consent, target_says, valence=0):
+        world = new_world(small(link_search="jump", link_consent=consent, valence=valence,
+                                hidden_layers=[16]))
+        _line(world, 4, 50)
+        for u in range(4):
+            _decided(world, u, ACCEPT=[8, -8], LINK_MODE=[8, -8])
+        _decided(world, 2, ACCEPT=target_says, LINK_MODE=[8, -8])
+        world.scouts.clear()
+        # Two steps along the line can only end on 2, two links away, or back at 0.
+        for seed in range(20):
+            world.rng = np.random.RandomState(seed)
+            before = world.G.number_of_edges()
+            found = world._search([(0, 2)])
+            if found:
+                return found[0], world.G.number_of_edges() - before
+        raise AssertionError("no walk ended on the stranger")
+
+    (u, w, made), added = proposal("mutual", [8, -8])
+    assert (u, w, made, added) == (0, 2, True, 1)
+    (u, w, made), added = proposal("mutual", [-8, 8])
+    assert (made, added) == (False, 0), "a stranger that said no was linked"
+    (u, w, made), added = proposal("forced", [-8, 8])
+    assert (made, added) == (True, 1), "a forced link waited for the stranger"
+    (u, w, made), added = proposal("forced", [8, -8], valence=2)
+    assert (made, added) == (False, 0), "a link was made to an agent at its valence"
+
+
+def test_a_searcher_that_looks_steps_to_the_neighbour_it_likes_most():
+    import numpy as np
+    world = new_world(small(link_search="jump", link_steering="looking", hidden_layers=[16]))
+    _line(world, 5, 10)
+    features = world._precompute_features()
+    start = world.heads["ACCEPT"].start
+
+    def liking(scores):
+        def observe(u, candidates, *rest):
+            Y = np.zeros((world.output_rows, len(candidates)))
+            Y[start, 1:] = scores
+            return Y
+        return observe
+    world._observe = liking([0.5, 2.0])                       # 2's neighbours are 1 and 3
+    assert world._step(0, 2, features) == 3
+    world._observe = liking([2.0, 0.5])
+    assert world._step(0, 2, features) == 1
+
+
+def test_a_scout_goes_a_step_an_iteration_and_a_resumed_run_keeps_it():
+    """link_search walk: one step a paid iteration, on from where the scout stood, kept in checkpoints."""
+    world = new_world(small(link_search="walk", hidden_layers=[16]))
+    _line(world, 7, 10)
+    _decided(world, 0, ACCEPT=[-8, 8], LINK_MODE=[8, -8])     # never proposes: the scout walks on
+    world.scouts.clear()
+    world._search([(0, 1)])
+    assert world.scouts == {0: 1}, "a first step goes to the only neighbour"
+    for _ in range(6):
+        was = world.scouts.get(0, 0)                         # a scout that walked home is home
+        world._search([(0, 1)])
+        assert abs(world.scouts.get(0, 0) - was) == 1, "a scout went more than one step"
+    if 0 not in world.scouts:
+        world._search([(0, 1)])
+    was = world.scouts[0]
+    world._search([])
+    assert world.scouts[0] == was, "a scout moved in an iteration nobody paid for"
+
+    cfg = small(link_search="walk", hidden_layers=[16], seed=23)
+    world = new_world(cfg)
+    for _ in range(4):
+        world.step(record_decisions=False)
+    assert world.scouts, "nobody sent a scout out"
+    blob = {k: v.copy() for k, v in world.to_checkpoint().items()}
+    straight_on = _recorded(world, 3)
+    restored = GraphOfLife.from_checkpoint(blob, cfg)
+    assert _recorded(restored, 3) == straight_on, "a resumed run lost its scouts"
+
+
+def test_a_world_without_search_records_no_proposals():
+    repro, _ = new_world(small()).step(record_decisions=True)
+    assert "proposals" not in repro["decisions"]
+    repro, _ = new_world(small(link_search="jump", hidden_layers=[16])).step(record_decisions=True)
+    assert isinstance(repro["decisions"]["proposals"], list)
+
+
 def test_a_world_that_mixes_at_birth_resumes_to_the_same_run():
     cfg = small(mix_at_birth=True, hidden_layers=[16], seed=41)
     world = new_world(cfg)

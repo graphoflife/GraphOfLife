@@ -37,7 +37,10 @@
     "keep_home": 0.3,
     "max_age": 100,
     "min_child": 10,
-    "mix_at_birth": false
+    "mix_at_birth": false,
+    "link_search": "off",
+    "link_steering": "random",
+    "link_consent": "mutual"
   },
   "why": {
     "hidden_layers": "One hidden layer of 16: brains whose decisions follow what they see. Founders' gain about 0.2, against 0.0006 for the five layers of B1 (Chapter 47).",

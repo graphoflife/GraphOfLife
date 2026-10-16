@@ -37,6 +37,9 @@ a time. The plan that defines B1 is the file `book/experiments/B1.json`.
 | [`max_age`](#max_age) | 0 | the longest life |
 | [`min_child`](#min_child) | 1 | the smallest child |
 | [`mix_at_birth`](#mix_at_birth) | off | a newborn's brain mixed from two |
+| [`link_search`](#link_search) | off | links to strangers, found by a paid walk |
+| [`link_steering`](#link_steering) | random | which way a search steps |
+| [`link_consent`](#link_consent) | mutual | who must agree to a link found |
 | [`mutation_probability`](#mutation_probability) | 0.2 | how often a brain changes |
 | [`mutation_noise_std`](#mutation_noise_std) | 0.2 | how big a change is |
 | [`mutation_sparsity`](#mutation_sparsity) | 0.1 | how many weights a change touches |
@@ -295,6 +298,46 @@ its parent's brain. In the pilots of
 [Chapter 78](../chapters/78-mixed-brains-costly-units.md) and the batches
 after it, worlds with it came closest to a healthy and diverse world
 ([Meta X](../chapters/79-meta-10-healthy-and-rich.md)).
+
+## Links to strangers
+
+Every link an agent makes otherwise is to its own neighbourhood: a newborn's,
+to its parent's neighbours. These three let an agent reach further, at a
+price, and are off in every run of the book until they are turned on.
+
+### link_search
+
+Whether an agent may search beyond its neighbours for someone to link with.
+Every step of a search costs the searcher one token, paid to the agent the
+step enters, so a search moves tokens but never makes or destroys any, and no
+agent spends its last token on one. How much an agent spends is its brain's
+choice, a share of what reproduction left it (the SEEK head, read like a
+gift's). Baseline off.
+
+- **jump**: in one iteration, a walk as many steps long as the tokens spent,
+  from the agent's own node; a link is proposed to the agent it ends on, if
+  that is a stranger and the searcher wants it.
+- **walk**: a scout that goes one step further in every iteration its agent
+  pays for, on from where it stood, so that distance costs time as well as
+  tokens; the agent proposes a link to wherever the scout stands when it wants
+  one, and the scout then comes home.
+
+Whether a searcher wants a link with the stranger it found is its ACCEPT head,
+read like the link decision of a birth.
+
+### link_steering
+
+Which way each step of a search goes. Baseline random: to a neighbour of
+where the search stands, drawn at random. With **looking**, the searcher's
+brain looks at every neighbour of where it stands and steps to the one it
+would most like a link with (its ACCEPT head), ties drawn at random.
+
+### link_consent
+
+Who has to agree to a link a search proposes. Baseline mutual: the stranger's
+ACCEPT head has to say yes as well. With **forced**, the searcher's yes is
+enough. Either way no link is made to or from an agent at its
+[`valence`](#valence).
 
 ## Change
 
