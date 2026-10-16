@@ -1,0 +1,1346 @@
+{
+ "chapter": "catalogue",
+ "numbers": {
+  "table:baselines": {
+   "head": [
+    "setting",
+    "B1",
+    "B2",
+    "what it is"
+   ],
+   "rows": [
+    [
+     {
+      "text": "`hidden_layers`",
+      "href": "notes/settings.md#hidden_layers"
+     },
+     "50, 45, 40, 35, 30",
+     "16",
+     "The widths of the brain's hidden layers, in order from input to output."
+    ],
+    [
+     {
+      "text": "`message_amount`",
+      "href": "notes/settings.md#message_amount"
+     },
+     "30",
+     "8",
+     "How many numbers one message holds. Each agent sends one message to itself and one to each neighbour, every phase."
+    ],
+    [
+     {
+      "text": "`message_prepass`",
+      "href": "notes/settings.md#message_prepass"
+     },
+     "on",
+     "off",
+     "Whether every phase begins with an extra look in which agents only write messages, so the look that acts reads messages written this phase."
+    ],
+    [
+     {
+      "text": "`allow_handover`",
+      "href": "notes/settings.md#allow_handover"
+     },
+     "on",
+     "off",
+     "Whether a parent may move some of its own connections to its newborn child."
+    ],
+    [
+     {
+      "text": "`mutate_on_replication`",
+      "href": "notes/settings.md#mutate_on_replication"
+     },
+     "off",
+     "on",
+     "Whether a brain changes only when it is copied \u2014 into a newborn, or into a node its owner has just won \u2014 instead of also after every game, wherever it sits."
+    ],
+    [
+     {
+      "text": "`incumbency`",
+      "href": "notes/settings.md#incumbency"
+     },
+     "1.0",
+     "1.5",
+     "How many times over an agent's stake on its own node counts when the game decides who takes the node. 1 is the old rule."
+    ],
+    [
+     {
+      "text": "`birth_links`",
+      "href": "notes/settings.md#birth_links"
+     },
+     "0",
+     "2",
+     "How many of its parent's neighbours a newborn is joined to, drawn at random, besides its parent itself; 0 leaves every link to the brain's choice."
+    ],
+    [
+     {
+      "text": "`mend_on_death`",
+      "href": "notes/settings.md#mend_on_death"
+     },
+     "off",
+     "on",
+     "Whether the neighbours of an agent that dies are joined up where its death would leave them in separate pieces."
+    ],
+    [
+     {
+      "text": "`prune_needs`",
+      "href": "notes/settings.md#prune_needs"
+     },
+     "0",
+     "2",
+     "How many neighbours the two ends of an unused connection must share for it to be cut; 0 cuts every unused connection."
+    ],
+    [
+     {
+      "text": "`valence`",
+      "href": "notes/settings.md#valence"
+     },
+     "0",
+     "8",
+     "The most connections an agent's brain may choose to hold (0 = no limit). An agent at its limit cannot have a child."
+    ],
+    [
+     {
+      "text": "`keep_home`",
+      "href": "notes/settings.md#keep_home"
+     },
+     "0.0",
+     "0.3",
+     "The share of an agent's tokens \u2014 rounded up, never less than one \u2014 that stays on its own node whatever its brain says; a parent also keeps one. 0 is the old rule."
+    ],
+    [
+     {
+      "text": "`max_age`",
+      "href": "notes/settings.md#max_age"
+     },
+     "0",
+     "100",
+     "The age at which an agent dies (0 = never); its tokens are shared out like those of any other dead agent."
+    ],
+    [
+     {
+      "text": "`min_child`",
+      "href": "notes/settings.md#min_child"
+     },
+     "1",
+     "10",
+     "The fewest tokens a child can be born with; a parent that would give less has no child."
+    ]
+   ]
+  },
+  "table:lab": {
+   "head": [
+    "",
+    "question",
+    "on",
+    "conditions (and what each changes)",
+    "seeds",
+    "tokens",
+    "iterations",
+    "runs on disk",
+    "chapter"
+   ],
+   "rows": [
+    [
+     "E01",
+     "Is a run reproducible?",
+     "B1",
+     "*straight*; *stopped at 10*; *cut off at 15*; *all BLAS threads*",
+     "1\u20133",
+     "10,000",
+     "30",
+     "12",
+     [
+      {
+       "text": "8",
+       "href": "chapters/08-is-a-run-reproducible.md"
+      }
+     ]
+    ],
+    [
+     "E02",
+     "The life of a world",
+     "B1",
+     "*baseline*",
+     "1\u201330",
+     "10,000",
+     "3,000",
+     "30",
+     [
+      {
+       "text": "10",
+       "href": "chapters/10-a-worlds-life.md"
+      }
+     ]
+    ],
+    [
+     "E03",
+     "How much does the seed decide?",
+     "B1",
+     "the runs of E02; *baseline*",
+     "1\u201330",
+     "10,000",
+     "3,000",
+     "30",
+     [
+      {
+       "text": "14",
+       "href": "chapters/14-how-much-does-the-seed-decide.md"
+      }
+     ]
+    ],
+    [
+     "E04",
+     "Where do the tokens go?",
+     "B1",
+     "the runs of E02; *baseline*",
+     "1\u201330",
+     "10,000",
+     "3,000",
+     "30",
+     [
+      {
+       "text": "15",
+       "href": "chapters/15-where-do-the-tokens-go.md"
+      }
+     ]
+    ],
+    [
+     "E05",
+     "What shape does the graph take?",
+     "B1",
+     "the runs of E02; *baseline*",
+     "1\u201330",
+     "10,000",
+     "3,000",
+     "30",
+     [
+      {
+       "text": "17",
+       "href": "chapters/17-what-shape-does-the-network-take.md"
+      }
+     ]
+    ],
+    [
+     "E06",
+     "Who wins, and for how long?",
+     "B1",
+     "the runs of E02; *baseline*",
+     "1\u201330",
+     "10,000",
+     "3,000",
+     "30",
+     [
+      {
+       "text": "18",
+       "href": "chapters/18-genotypes-and-lineages.md"
+      }
+     ]
+    ],
+    [
+     "E07",
+     "Do the brains matter at all?",
+     "B1",
+     "*baseline*; *brains never change* (mutation_sparsity = 0); *decisions by chance* (random_decisions = on)",
+     "1\u201330",
+     "10,000",
+     "3,000",
+     "90",
+     [
+      {
+       "text": "41",
+       "href": "chapters/41-do-the-brains-matter.md"
+      }
+     ]
+    ],
+    [
+     "E08",
+     "How does a world's size follow its tokens?",
+     "B1",
+     "*baseline*; *stopped only when empty* (extinction_threshold = 0)",
+     "1\u20133",
+     "800\u2013409,600",
+     "600",
+     "42",
+     [
+      {
+       "text": "42",
+       "href": "chapters/42-how-does-a-worlds-size-follow-its-tokens.md"
+      }
+     ]
+    ],
+    [
+     "E09",
+     "How fast should brains change?",
+     "B2",
+     "*mutation 0.05* (mutation_probability = 0.05); *mutation 0.1* (mutation_probability = 0.1); *B2*; *mutation 0.4* (mutation_probability = 0.4); *mutation 0.8* (mutation_probability = 0.8)",
+     "1\u201310",
+     "10,000",
+     "1,500",
+     "50",
+     [
+      {
+       "text": "52",
+       "href": "chapters/52-how-fast-should-brains-change.md"
+      }
+     ]
+    ],
+    [
+     "E10",
+     "Worlds of 100,000 tokens",
+     "B1",
+     "*baseline*",
+     "1\u201330",
+     "100,000",
+     "1,500",
+     "30",
+     [
+      {
+       "text": "60",
+       "href": "chapters/60-worlds-of-100000-tokens.md"
+      }
+     ]
+    ],
+    [
+     "E12",
+     "Does the baseline keep improving?",
+     "B1",
+     "*baseline*",
+     "1\u201310",
+     "5,000",
+     "1,000",
+     "10",
+     [
+      {
+       "text": "46",
+       "href": "chapters/46-how-to-tell-a-world-that-keeps-evolving.md"
+      }
+     ]
+    ],
+    [
+     "E13",
+     "Brains that see, and worlds that break",
+     "B1",
+     "*baseline*; *one hidden layer* (hidden_layers = 16); *one hidden layer, change only when copied* (hidden_layers = 16, mutate_on_replication = on)",
+     "1\u201310",
+     "5,000",
+     "1,500",
+     "30",
+     [
+      {
+       "text": "47",
+       "href": "chapters/47-brains-that-see-and-worlds-that-break.md"
+      }
+     ]
+    ],
+    [
+     "E14",
+     "A world that cannot break",
+     "B2",
+     "*all the rules*; *no mending* (mend_on_death = off); *any unused link lapses* (prune_needs = 0); *no links at birth* (birth_links = 0); *no valence* (valence = 0); *handover* (allow_handover = on)",
+     "1\u201310",
+     "5,000",
+     "1,000",
+     "60",
+     [
+      {
+       "text": "48",
+       "href": "chapters/48-a-world-that-cannot-break.md"
+      }
+     ]
+    ],
+    [
+     "E15",
+     "Who dies, and why",
+     "B2",
+     "*B2*; *the last token kept* (keep_home = 0.01); *nothing kept* (keep_home = 0.0); *half kept* (keep_home = 0.5); *children of any size* (min_child = 1); *no old age* (max_age = 0)",
+     "1\u201310",
+     "10,000",
+     "1,000",
+     "58",
+     [
+      {
+       "text": "49",
+       "href": "chapters/49-who-dies-and-why.md"
+      }
+     ]
+    ],
+    [
+     "E16",
+     "Why evolution stops",
+     "B2",
+     "*B2*; *no random inputs* (random_input_amount = 0)",
+     "1\u201310",
+     "10,000",
+     "2,000",
+     "20",
+     [
+      {
+       "text": "50",
+       "href": "chapters/50-why-evolution-stops.md"
+      }
+     ]
+    ]
+   ]
+  },
+  "table:pilots": {
+   "head": [
+    "batch",
+    "what it asks",
+    "conditions",
+    "worlds",
+    "tokens",
+    "iterations",
+    "status",
+    "chapter"
+   ],
+   "rows": [
+    [
+     "A3k",
+     "Alliances, kin pooling and a stake gain, first tried at 3,000 tokens (kept only as hints: the book's worlds have at least 10,000 tokens since)",
+     "4",
+     "8",
+     "3,000",
+     "1,000",
+     "5 done, 3 stopped early",
+     [
+      {
+       "text": "56",
+       "href": "chapters/56-alliances.md"
+      }
+     ]
+    ],
+    [
+     "A10k",
+     "Cooperation with a surplus: alliances by mutual consent, sides pooled by kinship, support that counts twice, against a control",
+     "4",
+     "8",
+     "10,000",
+     "1,000",
+     "done",
+     [
+      {
+       "text": "56",
+       "href": "chapters/56-alliances.md"
+      }
+     ]
+    ],
+    [
+     "AL",
+     "Alliances over a long time and at 20,000 tokens",
+     "2",
+     "4",
+     "10,000, 20,000",
+     "2,000, 3,000",
+     "done",
+     [
+      {
+       "text": "56",
+       "href": "chapters/56-alliances.md"
+      }
+     ]
+    ],
+    [
+     "N",
+     "Rules without numbers (B3, with and without allies) and alliances without the home advantage",
+     "4",
+     "8",
+     "10,000",
+     "1,000",
+     "done",
+     [
+      {
+       "text": "56",
+       "href": "chapters/56-alliances.md"
+      },
+      {
+       "text": "57",
+       "href": "chapters/57-rules-without-numbers.md"
+      }
+     ]
+    ],
+    [
+     "S",
+     "The switches the world was built with (revolutions, gifts, lapsing links, estates by wealth) and other contests (a lottery, sides pooled by genotype or family, kin and family senses)",
+     "13",
+     "26",
+     "10,000",
+     "1,000",
+     "done",
+     [
+      {
+       "text": "54",
+       "href": "chapters/54-the-switches-the-world-was-built-with.md"
+      },
+      {
+       "text": "55",
+       "href": "chapters/55-another-game.md"
+      }
+     ]
+    ],
+    [
+     "L",
+     "Long runs: Experiment 16's B2 worlds played on to 10,000 iterations, B1 to 10,000, B1 without revolutions to 3,000",
+     "3",
+     "13",
+     "10,000",
+     "3,000, 8,000, 10,000, 40,000",
+     "12 done, 1 running",
+     [
+      {
+       "text": "50",
+       "href": "chapters/50-why-evolution-stops.md"
+      },
+      {
+       "text": "69",
+       "href": "chapters/69-a-hundred-thousand-iterations.md"
+      }
+     ]
+    ],
+    [
+     "P",
+     "Two inputs (where my brain came from, who helped me) and links that hold a token",
+     "6",
+     "12",
+     "10,000",
+     "2,000",
+     "done",
+     [
+      {
+       "text": "57",
+       "href": "chapters/57-rules-without-numbers.md"
+      },
+      {
+       "text": "58",
+       "href": "chapters/58-gliders-and-who-helps-whom.md"
+      }
+     ]
+    ],
+    [
+     "Q",
+     "Brains mixed at birth, brain units that hold a token, an eye for raids on kin, and links that hold a token without old age",
+     "5",
+     "10",
+     "10,000",
+     "2,000",
+     "done",
+     [
+      {
+       "text": "78",
+       "href": "chapters/78-mixed-brains-costly-units.md"
+      }
+     ]
+    ],
+    [
+     "R",
+     "Who inherits the estate of the dead: the poorest, the newborns, their parents",
+     "6",
+     "12",
+     "10,000",
+     "2,000",
+     "8 done, 4 running",
+     []
+    ],
+    [
+     "T",
+     "Gifts together with each other switch",
+     "24",
+     "48",
+     "10,000",
+     "1,000",
+     "2 done, 4 running, 42 queued",
+     []
+    ],
+    [
+     "U",
+     "Eight switches in combination on B2: a fractional factorial design",
+     "16",
+     "16",
+     "10,000",
+     "1,000",
+     "0 done, 16 queued",
+     []
+    ],
+    [
+     "V",
+     "Eight switches in combination on B1: a fractional factorial design",
+     "16",
+     "16",
+     "10,000",
+     "1,000",
+     "0 done, 16 queued",
+     []
+    ],
+    [
+     "W",
+     "No revolutions together with each other switch, on B2",
+     "24",
+     "48",
+     "10,000",
+     "1,000",
+     "0 done, 2 running, 46 queued",
+     []
+    ],
+    [
+     "X",
+     "Handover together with each other switch, on B2",
+     "23",
+     "46",
+     "10,000",
+     "1,000",
+     "0 done, 2 running, 44 queued",
+     []
+    ]
+   ]
+  },
+  "table:pilot_conditions": {
+   "head": [
+    "batch",
+    "condition",
+    "on",
+    "what it changes",
+    "seeds",
+    "iterations"
+   ],
+   "rows": [
+    [
+     "A3k",
+     "allies",
+     "B1 (the prototype's own code)",
+     "allow_handover = off, allow_revolutions = off, hidden_layers = 16, message_amount = 8, message_prepass = off, allies = on, birth_links = 2, incumbency = 1.5, keep_frac = 0.3, max_age = 100, memory = on, min_child = 10, mor = all, repair = on, safe_prune = 2, valence = 8, valence_mode = optional",
+     "1, 2",
+     "1,000"
+    ],
+    [
+     "A3k",
+     "ctrl",
+     "B1 (the prototype's own code)",
+     "allow_handover = off, allow_revolutions = off, hidden_layers = 16, message_amount = 8, message_prepass = off, birth_links = 2, incumbency = 1.5, keep_frac = 0.3, max_age = 100, memory = on, min_child = 10, mor = all, repair = on, safe_prune = 2, valence = 8, valence_mode = optional",
+     "1, 2",
+     "1,000"
+    ],
+    [
+     "A3k",
+     "gain",
+     "B1 (the prototype's own code)",
+     "allow_handover = off, allow_revolutions = off, hidden_layers = 16, message_amount = 8, message_prepass = off, birth_links = 2, incumbency = 1.5, keep_frac = 0.3, max_age = 100, memory = on, min_child = 10, mor = all, repair = on, safe_prune = 2, support = on, support_gain = 2.0, valence = 8, valence_mode = optional",
+     "1, 2",
+     "1,000"
+    ],
+    [
+     "A3k",
+     "kin",
+     "B1 (the prototype's own code)",
+     "allow_handover = off, allow_revolutions = off, hidden_layers = 16, message_amount = 8, message_prepass = off, birth_links = 2, incumbency = 1.5, keep_frac = 0.3, kin_pool = 2, max_age = 100, memory = on, min_child = 10, mor = all, repair = on, safe_prune = 2, valence = 8, valence_mode = optional",
+     "1, 2",
+     "1,000"
+    ],
+    [
+     "A10k",
+     "allies",
+     "B1 (the prototype's own code)",
+     "allow_handover = off, allow_revolutions = off, hidden_layers = 16, message_amount = 8, message_prepass = off, allies = on, birth_links = 2, incumbency = 1.5, keep_frac = 0.3, max_age = 100, memory = on, min_child = 10, mor = all, repair = on, safe_prune = 2, valence = 8, valence_mode = optional",
+     "1, 2",
+     "1,000"
+    ],
+    [
+     "A10k",
+     "ctrl",
+     "B1 (the prototype's own code)",
+     "allow_handover = off, allow_revolutions = off, hidden_layers = 16, message_amount = 8, message_prepass = off, birth_links = 2, incumbency = 1.5, keep_frac = 0.3, max_age = 100, memory = on, min_child = 10, mor = all, repair = on, safe_prune = 2, valence = 8, valence_mode = optional",
+     "1, 2",
+     "1,000"
+    ],
+    [
+     "A10k",
+     "gain",
+     "B1 (the prototype's own code)",
+     "allow_handover = off, allow_revolutions = off, hidden_layers = 16, message_amount = 8, message_prepass = off, birth_links = 2, incumbency = 1.5, keep_frac = 0.3, max_age = 100, memory = on, min_child = 10, mor = all, repair = on, safe_prune = 2, support = on, support_gain = 2.0, valence = 8, valence_mode = optional",
+     "1, 2",
+     "1,000"
+    ],
+    [
+     "A10k",
+     "kin",
+     "B1 (the prototype's own code)",
+     "allow_handover = off, allow_revolutions = off, hidden_layers = 16, message_amount = 8, message_prepass = off, birth_links = 2, incumbency = 1.5, keep_frac = 0.3, kin_pool = 2, max_age = 100, memory = on, min_child = 10, mor = all, repair = on, safe_prune = 2, valence = 8, valence_mode = optional",
+     "1, 2",
+     "1,000"
+    ],
+    [
+     "AL",
+     "allies10k",
+     "B1 (the prototype's own code)",
+     "allow_handover = off, allow_revolutions = off, hidden_layers = 16, message_amount = 8, message_prepass = off, allies = on, birth_links = 2, incumbency = 1.5, keep_frac = 0.3, max_age = 100, memory = on, min_child = 10, mor = all, repair = on, safe_prune = 2, valence = 8, valence_mode = optional",
+     "3, 4",
+     "3,000"
+    ],
+    [
+     "AL",
+     "allies20k",
+     "B1 (the prototype's own code)",
+     "allow_handover = off, allow_revolutions = off, hidden_layers = 16, message_amount = 8, message_prepass = off, allies = on, birth_links = 2, incumbency = 1.5, keep_frac = 0.3, max_age = 100, memory = on, min_child = 10, mor = all, repair = on, safe_prune = 2, valence = 8, valence_mode = optional",
+     "1, 2",
+     "2,000"
+    ],
+    [
+     "N",
+     "B3a",
+     "B1 (the prototype's own code)",
+     "allow_handover = off, allow_revolutions = off, hidden_layers = 16, message_amount = 8, message_prepass = off, allies = on, memory = on, mor = all, repair = on",
+     "1, 2",
+     "1,000"
+    ],
+    [
+     "N",
+     "B3b",
+     "B1 (the prototype's own code)",
+     "allow_handover = off, allow_revolutions = off, hidden_layers = 16, message_amount = 8, message_prepass = off, allies = on, birth_allies = on, memory = on, mor = all, repair = on",
+     "1, 2",
+     "1,000"
+    ],
+    [
+     "N",
+     "B3c",
+     "B1 (the prototype's own code)",
+     "allow_handover = off, allow_revolutions = off, hidden_layers = 16, message_amount = 8, message_prepass = off, memory = on, mor = all, repair = on",
+     "1, 2",
+     "1,000"
+    ],
+    [
+     "N",
+     "N0",
+     "B1 (the prototype's own code)",
+     "allow_handover = off, allow_revolutions = off, hidden_layers = 16, message_amount = 8, message_prepass = off, allies = on, birth_links = 2, incumbency = 1.0, keep_frac = 0.3, max_age = 100, memory = on, min_child = 10, mor = all, repair = on, safe_prune = 2, valence = 8, valence_mode = optional",
+     "1, 2",
+     "1,000"
+    ],
+    [
+     "S",
+     "G1-lottery",
+     "B2",
+     "allow_revolutions = off, contest = lottery",
+     "1, 2",
+     "1,000"
+    ],
+    [
+     "S",
+     "G2-genotype",
+     "B2",
+     "allow_revolutions = off, pool = genotype",
+     "1, 2",
+     "1,000"
+    ],
+    [
+     "S",
+     "G3-kinsense",
+     "B2",
+     "allow_revolutions = off, kin_sense = on",
+     "1, 2",
+     "1,000"
+    ],
+    [
+     "S",
+     "G4-familysense",
+     "B2",
+     "allow_revolutions = off, kin_sense = on, tag_rate = 0.05",
+     "1, 2",
+     "1,000"
+    ],
+    [
+     "S",
+     "G5-familypool",
+     "B2",
+     "allow_revolutions = off, pool = family, tag_rate = 0.05",
+     "1, 2",
+     "1,000"
+    ],
+    [
+     "S",
+     "S0-B2",
+     "B2",
+     "nothing: B2 itself",
+     "1, 2",
+     "1,000"
+    ],
+    [
+     "S",
+     "S1-norev",
+     "B2",
+     "allow_revolutions = off",
+     "1, 2",
+     "1,000"
+    ],
+    [
+     "S",
+     "S2-gifts",
+     "B2",
+     "allow_gifting = on, inactive_window = iteration, prune_after = reproduction",
+     "1, 2",
+     "1,000"
+    ],
+    [
+     "S",
+     "S3-giftslapse",
+     "B2",
+     "allow_gifting = on, inactive_window = iteration, prune_after = reproduction, prune_needs = 0",
+     "1, 2",
+     "1,000"
+    ],
+    [
+     "S",
+     "S4-lapse",
+     "B2",
+     "prune_needs = 0",
+     "1, 2",
+     "1,000"
+    ],
+    [
+     "S",
+     "S5-bytokens",
+     "B2",
+     "redistribution = by_tokens",
+     "1, 2",
+     "1,000"
+    ],
+    [
+     "S",
+     "S6-B1",
+     "B1",
+     "nothing: B1 itself",
+     "1, 2",
+     "1,000"
+    ],
+    [
+     "S",
+     "S7-B1norev",
+     "B1",
+     "allow_revolutions = off",
+     "1, 2",
+     "1,000"
+    ],
+    [
+     "L",
+     "B1-long",
+     "B1",
+     "nothing: B1 itself",
+     "1, 2",
+     "10,000"
+    ],
+    [
+     "L",
+     "B1norev-long",
+     "B1",
+     "allow_revolutions = off",
+     "3",
+     "3,000"
+    ],
+    [
+     "L",
+     "B2-long",
+     "B2",
+     "nothing: B2 itself",
+     "1, 2, 3, 4, 5, 6, 7, 8, 9, 10",
+     "8,000"
+    ],
+    [
+     "P",
+     "B2",
+     "B2",
+     "nothing: B2 itself",
+     "1, 2",
+     "2,000"
+    ],
+    [
+     "P",
+     "both",
+     "B2",
+     "came_from = on, helped_by = on",
+     "1, 2",
+     "2,000"
+    ],
+    [
+     "P",
+     "came",
+     "B2",
+     "came_from = on",
+     "1, 2",
+     "2,000"
+    ],
+    [
+     "P",
+     "helped",
+     "B2",
+     "helped_by = on",
+     "1, 2",
+     "2,000"
+    ],
+    [
+     "P",
+     "linkseek",
+     "B2",
+     "valence = 0, link_token = on, seek = on, seek_max = 0, toll = path",
+     "1, 2",
+     "2,000"
+    ],
+    [
+     "P",
+     "linktoken",
+     "B2",
+     "valence = 0, link_token = on",
+     "1, 2",
+     "2,000"
+    ],
+    [
+     "Q",
+     "grow",
+     "B2",
+     "brain_kind = grow, hidden_layers = 32",
+     "1, 2",
+     "2,000"
+    ],
+    [
+     "Q",
+     "linknoage",
+     "B2",
+     "max_age = 0, valence = 0, link_token = on",
+     "1, 2",
+     "2,000"
+    ],
+    [
+     "Q",
+     "mix",
+     "B2",
+     "mix = on",
+     "1, 2",
+     "2,000"
+    ],
+    [
+     "Q",
+     "tookkin",
+     "B2",
+     "took_kin = on",
+     "1, 2",
+     "2,000"
+    ],
+    [
+     "Q",
+     "unittoken",
+     "B2",
+     "brain_kind = grow, hidden_layers = 32, unit_token = on",
+     "1, 2",
+     "2,000"
+    ],
+    [
+     "R",
+     "B1-newborns",
+     "B1",
+     "redistribution = newborns",
+     "1, 2",
+     "2,000"
+    ],
+    [
+     "R",
+     "B1-parents",
+     "B1",
+     "redistribution = parents",
+     "1, 2",
+     "2,000"
+    ],
+    [
+     "R",
+     "B1-poorest",
+     "B1",
+     "redistribution = poorest",
+     "1, 2",
+     "2,000"
+    ],
+    [
+     "R",
+     "B2-newborns",
+     "B2",
+     "redistribution = newborns",
+     "1, 2",
+     "2,000"
+    ],
+    [
+     "R",
+     "B2-parents",
+     "B2",
+     "redistribution = parents",
+     "1, 2",
+     "2,000"
+    ],
+    [
+     "R",
+     "B2-poorest",
+     "B2",
+     "redistribution = poorest",
+     "1, 2",
+     "2,000"
+    ],
+    [
+     "T",
+     "gifts-bytokens",
+     "B2",
+     "allow_gifting = on, inactive_window = iteration, prune_after = reproduction, redistribution = by_tokens",
+     "1",
+     "1,000"
+    ],
+    [
+     "T",
+     "gifts-newborns",
+     "B2",
+     "allow_gifting = on, inactive_window = iteration, prune_after = reproduction, redistribution = newborns",
+     "1",
+     "1,000"
+    ],
+    [
+     "T",
+     "gifts-norev",
+     "B2",
+     "allow_gifting = on, allow_revolutions = off, inactive_window = iteration, prune_after = reproduction",
+     "1",
+     "1,000"
+    ],
+    [
+     "T",
+     "gifts-parents",
+     "B2",
+     "allow_gifting = on, inactive_window = iteration, prune_after = reproduction, redistribution = parents",
+     "1",
+     "1,000"
+    ],
+    [
+     "T",
+     "gifts-poorest",
+     "B2",
+     "allow_gifting = on, inactive_window = iteration, prune_after = reproduction, redistribution = poorest",
+     "1",
+     "1,000"
+    ],
+    [
+     "T",
+     "handover",
+     "B2",
+     "allow_handover = on",
+     "1",
+     "1,000"
+    ],
+    [
+     "W",
+     "norev-bytokens",
+     "B2",
+     "allow_revolutions = off, redistribution = by_tokens",
+     "1",
+     "1,000"
+    ],
+    [
+     "W",
+     "norev-poorest",
+     "B2",
+     "allow_revolutions = off, redistribution = poorest",
+     "1",
+     "1,000"
+    ],
+    [
+     "X",
+     "handover-bytokens",
+     "B2",
+     "allow_handover = on, redistribution = by_tokens",
+     "1",
+     "1,000"
+    ],
+    [
+     "X",
+     "handover-poorest",
+     "B2",
+     "allow_handover = on, redistribution = poorest",
+     "1",
+     "1,000"
+    ]
+   ]
+  },
+  "table:measures": {
+   "head": [
+    "",
+    "the record of every game",
+    "lifetime contests (T = 100)",
+    "games recorded and read again",
+    "flow modules",
+    "how different the agents are",
+    "the table of every world"
+   ],
+   "rows": [
+    [
+     "E01",
+     "12",
+     "0",
+     "0",
+     "0",
+     "0",
+     "12"
+    ],
+    [
+     "E02",
+     "30",
+     "0",
+     "10",
+     "10",
+     "10",
+     "30"
+    ],
+    [
+     "E03",
+     "30",
+     "0",
+     "10",
+     "10",
+     "10",
+     "30"
+    ],
+    [
+     "E04",
+     "30",
+     "0",
+     "10",
+     "10",
+     "10",
+     "30"
+    ],
+    [
+     "E05",
+     "30",
+     "0",
+     "10",
+     "10",
+     "10",
+     "30"
+    ],
+    [
+     "E06",
+     "30",
+     "0",
+     "10",
+     "10",
+     "10",
+     "30"
+    ],
+    [
+     "E07",
+     "90",
+     "0",
+     "10",
+     "20",
+     "13",
+     "90"
+    ],
+    [
+     "E08",
+     "42",
+     "0",
+     "0",
+     "37",
+     "4",
+     "42"
+    ],
+    [
+     "E09",
+     "50",
+     "30",
+     "10",
+     "25",
+     "22",
+     "50"
+    ],
+    [
+     "E10",
+     "30",
+     "0",
+     "0",
+     "5",
+     "3",
+     "30"
+    ],
+    [
+     "E12",
+     "10",
+     "10",
+     "0",
+     "5",
+     "3",
+     "10"
+    ],
+    [
+     "E13",
+     "30",
+     "10",
+     "0",
+     "15",
+     "3",
+     "30"
+    ],
+    [
+     "E14",
+     "60",
+     "0",
+     "0",
+     "30",
+     "18",
+     "60"
+    ],
+    [
+     "E15",
+     "58",
+     "19",
+     "10",
+     "25",
+     "22",
+     "55"
+    ],
+    [
+     "E16",
+     "20",
+     "10",
+     "10",
+     "10",
+     "13",
+     "20"
+    ],
+    [
+     "A3k",
+     "8",
+     "0",
+     "0",
+     "0",
+     "0",
+     "8"
+    ],
+    [
+     "A10k",
+     "8",
+     "8",
+     "4",
+     "0",
+     "0",
+     "8"
+    ],
+    [
+     "AL",
+     "4",
+     "2",
+     "2",
+     "0",
+     "0",
+     "4"
+    ],
+    [
+     "N",
+     "8",
+     "3",
+     "0",
+     "0",
+     "0",
+     "8"
+    ],
+    [
+     "S",
+     "26",
+     "26",
+     "0",
+     "26",
+     "6",
+     "26"
+    ],
+    [
+     "L",
+     "13",
+     "3",
+     "0",
+     "9",
+     "5",
+     "7"
+    ],
+    [
+     "P",
+     "12",
+     "12",
+     "12",
+     "12",
+     "12",
+     "12"
+    ],
+    [
+     "Q",
+     "10",
+     "10",
+     "10",
+     "10",
+     "10",
+     "10"
+    ],
+    [
+     "R",
+     "12",
+     "2",
+     "0",
+     "2",
+     "0",
+     "0"
+    ],
+    [
+     "T",
+     "6",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0"
+    ],
+    [
+     "U",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0"
+    ],
+    [
+     "V",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0"
+    ],
+    [
+     "W",
+     "2",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0"
+    ],
+    [
+     "X",
+     "2",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0"
+    ]
+   ]
+  },
+  "totals": {
+   "lab experiments": 15,
+   "lab runs on disk": 552,
+   "pilot batches": 14,
+   "pilot worlds": 275
+  }
+ },
+ "figures": {}
+}

@@ -217,6 +217,7 @@ everything can be checked with it.
 
 - [Appendix A · What a simulation costs](chapters/A-costs.md)
 - [Appendix B · What goes with what](chapters/B-what-goes-with-what.md)
+- [Appendix C · Every simulation: what was run, and what was measured](chapters/C-every-simulation.md)
 <!-- /contents -->
 
 ## How it is made

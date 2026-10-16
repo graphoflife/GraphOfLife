@@ -21,6 +21,7 @@ comment lines, which no reader shows:
     <!-- contents -->                 the chapters and notes, from book.json
     <!-- turns -->                    links to the chapter before and after
     <!-- costs -->                    what a simulation costs, as last fitted
+    <!-- table chapter/name -->       a table a chapter's code made from the records
 
 Everything between the opening and the closing line is replaced each time:
 write only outside them. An opening line alone is filled in the first time.
@@ -245,8 +246,31 @@ def costs(md: str, _: str) -> str:
     return "\n".join(lines)
 
 
+def table(md: str, name: str) -> str:
+    """
+    A table a chapter's code made from the records (`table chapter/name`): a head
+    and rows, each cell text or links to chapters ({text, href} relative to book/).
+    """
+    chapter, key = name.split("/")
+    made = read_json(f"results/{chapter}.json").get("numbers", {}).get(f"table:{key}")
+    if made is None:
+        raise KeyError(f"no table {name}: run `python3 book_figures.py {chapter}`")
+
+    def cell(value: Any) -> str:
+        if isinstance(value, list):
+            return ", ".join(cell(v) for v in value) or "—"
+        if isinstance(value, dict):
+            return f"[{value['text']}]({link(md, value['href'])})"
+        return str(value).replace("|", "\\|").replace("\n", " ") or "—"
+
+    head = made.get("head") or [""] * len(made["rows"][0])
+    lines = ["| " + " | ".join(head) + " |", "|" + "---|" * len(head)]
+    lines += ["| " + " | ".join(cell(v) for v in row) + " |" for row in made["rows"]]
+    return "\n".join(lines)
+
+
 MAKERS = {"figure": figure, "thesis": thesis, "runs": runs, "contents": contents, "turns": turns,
-          "costs": costs}
+          "costs": costs, "table": table}
 #: The blocks a page can ask for, and how they are found in it.
 KINDS = tuple(MAKERS)
 BLOCK = re.compile(r"^<!-- (%s)((?: [^\n]*?)?) -->\n(?:(?:(?!<!-- ).)*?^<!-- /\1 -->\n?)?"

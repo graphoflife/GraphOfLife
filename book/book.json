@@ -892,6 +892,12 @@
           "title": "What goes with what",
           "note": "An atlas of correlations: every quantity of an agent against every other, on linear and logarithmic axes, in twenty worlds; a world's statistics against each other over time; and thirty worlds against each other.",
           "file": "chapters/B-what-goes-with-what.md"
+        },
+        {
+          "id": "C",
+          "title": "Every simulation: what was run, and what was measured",
+          "note": "Every lab experiment and pilot batch with its settings, how far it ran, the chapter that reports it, and which measures have been taken on it — made from the records.",
+          "file": "chapters/C-every-simulation.md"
         }
       ]
     }
