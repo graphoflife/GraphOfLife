@@ -1361,6 +1361,20 @@ function test_a_run_that_died_out_says_so() {
   assert(html.includes('book-run-running') && html.includes('1 of 3000'), 'a living run lost its progress');
 }
 
+function test_a_plan_the_lab_cannot_read_says_why() {
+  // An invalid plan comes with a reason and nothing else — no runs, no
+  // estimate — and the panel used to read the estimate regardless and fail
+  // with "Cannot read properties of undefined", for every chapter whose plan
+  // a server with older settings could not read.
+  const Book = bookWith();
+  Book.chapters = () => [{ id: '80', experiment: 'E17', file: 'chapters/80.md', status: 'ready' }];
+  const lab = { lab: { workers: 3, cores: 8 }, disk: { free: 1 }, costs: { runs: 1 },
+                experiments: { E17: { state: 'invalid', reason: 'B2 names settings this lab does not know', runs: [] } } };
+  const html = Book.liveHtml('E17', lab.experiments.E17, lab);
+  assert(html.includes('B2 names settings this lab does not know'), html);
+  assert(html.includes('plan invalid'), html);
+}
+
 async function test_the_static_book_never_asks_the_lab() {
   // The published site has no lab. Asking would be a request to a server
   // that is not there, every five seconds, for as long as the book is open.

@@ -405,6 +405,11 @@ const Book = {
   liveHtml(name, status, lab) {
     const chapter = this.chapters().find(c => c.experiment === name) || {};
     const state = this.describe(chapter, lab);
+    // A plan the lab cannot carry out has no runs and no estimate: only its reason.
+    if (status.state === 'invalid') {
+      return `<div class="book-exp-head"><span class="book-chip book-chip-${state.state}">${state.label}</span></div>`
+        + `<p class="book-reason">${Markdown.escape(status.reason || 'the lab cannot read this plan')}</p>`;
+    }
     const share = status.total ? status.done / status.total : 0;
     const button = ['ready', 'stopped', 'paused'].includes(status.state)
       ? `<button class="primary small" data-lab="run:${name}">▶ ${status.done ? 'Continue' : 'Run'}</button>`
@@ -415,7 +420,7 @@ const Book = {
     const workers = Array.from({ length: lab.lab.cores || 8 }, (_, i) => i + 1)
       .map(n => `<option value="${n}"${n === lab.lab.workers ? ' selected' : ''}>${n}</option>`).join('');
     const own = status.workers ?? lab.lab.workers;
-    const estimate = status.state === 'finished' ? '' : `<p class="book-note">Estimated: ${
+    const estimate = status.state === 'finished' || !status.estimate ? '' : `<p class="book-note">Estimated: ${
       this.eta(status.estimate.seconds, '')} on ${own} worker${own === 1 ? '' : 's'} from the start, `
       + `${formatBytes(status.estimate.diskBytes)} of disk (${formatBytes(lab.disk.free)} free), `
       + `up to ${formatNumber(Math.round(status.estimate.peakMB))} MB of memory a run. `
