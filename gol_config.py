@@ -211,7 +211,7 @@ class SimConfig:
         "uniform", "by_tokens", "poorest", "newborns", "parents")
     # How an agent reaches a stranger (link_search), which way it goes there
     # (link_steering), and who has to agree to the link it proposes (link_consent).
-    LINK_SEARCHES: ClassVar[Tuple[str, ...]] = ("off", "jump", "walk")
+    LINK_SEARCHES: ClassVar[Tuple[str, ...]] = ("off", "jump", "walk", "reach")
     LINK_STEERINGS: ClassVar[Tuple[str, ...]] = ("random", "looking")
     LINK_CONSENTS: ClassVar[Tuple[str, ...]] = ("mutual", "forced")
     MODES: ClassVar[Dict[str, Tuple[str, ...]]] = {
@@ -426,15 +426,17 @@ class SimConfig:
     #
     # Every link an agent can make is to its own neighbourhood: its newborn's,
     # chosen from the parent's neighbours. With link_search an agent can reach
-    # further, paying one token for every step, to the agent a step enters, and
-    # never its last token. Off is the old rule.
+    # further, in jumps and walks paying one token for every step, to the agent
+    # a step enters, and never its last token. Off is the old rule.
     #
     #   jump   in one iteration a walk as many steps long as the tokens the
     #          agent spends on it (a SEEK head's share of what reproduction
     #          left), and a link proposed where it ends;
     #   walk   a scout that goes one step further in every iteration the agent
     #          pays for, and a link proposed wherever it stands when the agent
-    #          wants one; after a proposal the scout comes home.
+    #          wants one; after a proposal the scout comes home;
+    #   reach  a jump that costs nothing: as many steps as the SEEK head's share
+    #          of the tokens the agent holds, so a richer agent reaches further.
     link_search: str = "off"
     # Which way each step goes: to a neighbour drawn at random, or to the one
     # the searcher would most like a link with (its ACCEPT head, looking at

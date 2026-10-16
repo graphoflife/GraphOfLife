@@ -2732,14 +2732,27 @@ def test_a_search_pays_a_token_a_step_to_whom_it_enters_and_never_the_last():
     world = new_world(small(link_search="jump", hidden_layers=[16]))
     _line(world, 6, 10)
     total = sum(world.tokens.values())
-    world._search([(0, 4)])
+    world._search_strangers([(0, 4)])
     assert sum(world.tokens.values()) == total, "a search made or lost tokens"
     assert world.tokens[0] <= 10 - 1, "a walk of four steps cost nothing"
     # A searcher with two tokens can pay for one step, whatever it asks for.
     world = new_world(small(link_search="jump", hidden_layers=[16]))
     _line(world, 6, 2)
-    world._search([(0, 5)])
+    world._search_strangers([(0, 5)])
     assert world.tokens[0] == 1 and world.tokens[1] == 3, "the last token was spent"
+
+
+def test_a_reach_costs_nothing_and_goes_as_far_as_the_tokens_would_pay():
+    """link_search reach: a jump whose steps are free, as many as asked, the last token included."""
+    world = new_world(small(link_search="reach", hidden_layers=[16]))
+    _line(world, 8, 3)
+    before = dict(world.tokens)
+    for u in range(8):
+        _decided(world, u, ACCEPT=[8, -8], LINK_MODE=[8, -8])
+    found = world._search_strangers([(0, 3)])
+    assert world.tokens == before, "a reach moved tokens"
+    # Three free steps along the line end on 1 or 3: a stranger only at 3, which is linked.
+    assert found in ([], [(0, 3, True)]), found
 
 
 def test_a_link_to_a_stranger_needs_both_ends_unless_forced_and_room_at_both():
@@ -2757,7 +2770,7 @@ def test_a_link_to_a_stranger_needs_both_ends_unless_forced_and_room_at_both():
         for seed in range(20):
             world.rng = np.random.RandomState(seed)
             before = world.G.number_of_edges()
-            found = world._search([(0, 2)])
+            found = world._search_strangers([(0, 2)])
             if found:
                 return found[0], world.G.number_of_edges() - before
         raise AssertionError("no walk ended on the stranger")
@@ -2786,9 +2799,9 @@ def test_a_searcher_that_looks_steps_to_the_neighbour_it_likes_most():
             return Y
         return observe
     world._observe = liking([0.5, 2.0])                       # 2's neighbours are 1 and 3
-    assert world._step(0, 2, features) == 3
+    assert world._search_step(0, 2, features) == 3
     world._observe = liking([2.0, 0.5])
-    assert world._step(0, 2, features) == 1
+    assert world._search_step(0, 2, features) == 1
 
 
 def test_a_scout_goes_a_step_an_iteration_and_a_resumed_run_keeps_it():
@@ -2797,16 +2810,16 @@ def test_a_scout_goes_a_step_an_iteration_and_a_resumed_run_keeps_it():
     _line(world, 7, 10)
     _decided(world, 0, ACCEPT=[-8, 8], LINK_MODE=[8, -8])     # never proposes: the scout walks on
     world.scouts.clear()
-    world._search([(0, 1)])
+    world._search_strangers([(0, 1)])
     assert world.scouts == {0: 1}, "a first step goes to the only neighbour"
     for _ in range(6):
         was = world.scouts.get(0, 0)                         # a scout that walked home is home
-        world._search([(0, 1)])
+        world._search_strangers([(0, 1)])
         assert abs(world.scouts.get(0, 0) - was) == 1, "a scout went more than one step"
     if 0 not in world.scouts:
-        world._search([(0, 1)])
+        world._search_strangers([(0, 1)])
     was = world.scouts[0]
-    world._search([])
+    world._search_strangers([])
     assert world.scouts[0] == was, "a scout moved in an iteration nobody paid for"
 
     cfg = small(link_search="walk", hidden_layers=[16], seed=23)

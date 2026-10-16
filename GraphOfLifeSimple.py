@@ -41,10 +41,11 @@ PHASE 1 — REPRODUCTION
      candidate. LINK_MODE lets the agent choose whether LINK is read as a
      probability or as a hard argmax.
   6. Apply the new edges, drop self-loops, then run cleanup (below).
-     Under `link_search`, agents may first pay a token a step to search beyond
-     their neighbours — in one jump, or with a scout that goes a step further
-     each iteration — and propose a link to the stranger they reach, which
-     `link_consent` says who must accept.
+     Under `link_search`, agents may first search beyond their neighbours —
+     in one jump, paying a token a step, with a scout that goes a step
+     further each iteration, or in a free reach as far as their tokens — and
+     propose a link to the stranger they reach, which `link_consent` says who
+     must accept.
 
   Phase 1 does NOT move or create any other edges. No walker, no edge
   shifting, no reconnection.
@@ -1552,7 +1553,7 @@ class GraphOfLife:
         # what it has left.
         proposals: List[Tuple[int, int, bool]] = []
         if self.cfg.link_search != "off":
-            proposals = self._search(searches)
+            proposals = self._search_strangers(searches)
             self._note("repro.search", lambda: {
                 "proposals": [[u, w, int(made)] for u, w, made in proposals]})
 
@@ -1706,11 +1707,12 @@ class GraphOfLife:
 
     def _choose_search(self, purse: int, Y: np.ndarray) -> int:
         """
-        How many tokens an agent spends this iteration searching beyond its
-        neighbours (link_search): the SEEK head's share of what reproduction
-        left, read like the gift's fraction. A step costs one token, so in a
-        jump this is how far the walk goes at once; a scout goes one step at
-        most in an iteration, so there it says only whether to go on.
+        How many steps an agent searches beyond its neighbours this iteration
+        (link_search): the SEEK head's share of what reproduction left, read
+        like the gift's fraction. In a jump each step costs a token, so this is
+        also what it spends; a reach is a jump whose steps are free, as far as
+        the agent's tokens would pay for; a scout goes one step at most in an
+        iteration, so there it says only whether to go on.
         """
         if self.cfg.link_search == "off" or purse < 1:
             return 0
@@ -1720,13 +1722,14 @@ class GraphOfLife:
             spend = min(spend, 1)
         return max(0, min(purse, spend))
 
-    def _search(self, searches: List[Tuple[int, int]]) -> List[Tuple[int, int, bool]]:
+    def _search_strangers(self, searches: List[Tuple[int, int]]) -> List[Tuple[int, int, bool]]:
         """
         Walk, pay, propose, and link where the rule for consent allows.
 
         Every searcher walks in turn, in the order of their ids: one token a
-        step, paid to the agent the step enters, and never its last token. In
-        a jump the walk starts from home and a link is proposed where it ends;
+        step, paid to the agent the step enters, and never its last token —
+        except in a reach, whose steps are free. In a jump or a reach the walk
+        starts from home and a link is proposed where it ends;
         a scout (walk) goes on from where it stood, and may also be standing
         on someone without having stepped this iteration. A searcher proposes
         to a stranger only if its own ACCEPT head says yes to it; with mutual
@@ -1747,28 +1750,32 @@ class GraphOfLife:
             here = self.scouts.get(u, u) if cfg.link_search == "walk" else u
             if not self.G.has_node(here):
                 here = u                         # the agent its scout stood on is gone
-            for _ in range(max(0, min(walkers[u], int(self.tokens[u]) - 1))):
-                step = self._step(u, here, features)
+            paid = cfg.link_search != "reach"
+            steps = min(walkers[u], int(self.tokens[u]) - 1) if paid else walkers[u]
+            for _ in range(max(0, steps)):
+                step = self._search_step(u, here, features)
                 if step is None:
                     break
                 here = step
-                self.tokens[u] -= 1
-                self.tokens[here] += 1
+                if paid:
+                    self.tokens[u] -= 1
+                    self.tokens[here] += 1
             self.scouts.pop(u, None)
             stranger = here != u and not self.G.has_edge(u, here)
-            if not stranger or not self._accepts(u, here, features):
+            if not stranger or not self._would_link(u, here, features):
                 if cfg.link_search == "walk" and here != u:
                     self.scouts[u] = here        # nobody to propose to here: on next time
                 continue
-            agreed = cfg.link_consent == "forced" or self._accepts(here, u, features)
+            agreed = cfg.link_consent == "forced" or self._would_link(here, u, features)
             room = not cfg.valence or (self.G.degree(u) < cfg.valence
                                        and self.G.degree(here) < cfg.valence)
             if agreed and room:
                 self._add_edge(u, here)
-            proposals.append((u, here, agreed and room))
+            # Recorded as the graph has it, which a link that has to be paid for may not.
+            proposals.append((u, here, self.G.has_edge(u, here)))
         return proposals
 
-    def _step(self, u: int, here: int, features) -> Optional[int]:
+    def _search_step(self, u: int, here: int, features) -> Optional[int]:
         """
         One step of `u`'s search on from `here`: to a neighbour drawn at random,
         or to the one `u` would most like a link with, ties drawn at random.
@@ -1787,7 +1794,7 @@ class GraphOfLife:
         best = np.flatnonzero(liking == liking.max())
         return options[int(best[self.rng.randint(len(best))])]
 
-    def _accepts(self, u: int, w: int, features) -> bool:
+    def _would_link(self, u: int, w: int, features) -> bool:
         """Whether `u`'s ACCEPT head says yes to a link with `w`, read like the link decision."""
         log_deg, _, q_tok, q_deg, log_tok, at_risk = features
         Y = self._observe(u, [u, w], log_deg, q_tok, q_deg, log_tok, at_risk)

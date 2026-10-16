@@ -53,7 +53,7 @@ which it is.
 | `max_age` | `0` | agents die at this age (0 = never) |
 | `min_child` | `1` | the smallest endowment that makes a child |
 | `mix_at_birth` | `false` | a newborn's brain is its parent's mixed with a random neighbour's before it mutates: each hidden unit whole (weights in, bias, weights out) and each output bias from one or the other by an even chance; a new genotype unless it is the parent's brain again |
-| `link_search` | `off` | agents may reach beyond their neighbours to propose links: `jump` (a walk of as many steps as tokens spent in one iteration) or `walk` (a scout one step further each iteration paid for); a step costs one token, paid to the agent it enters |
+| `link_search` | `off` | agents may reach beyond their neighbours to propose links: `jump` (a walk of as many steps as tokens spent in one iteration), `walk` (a scout one step further each iteration paid for) or `reach` (a jump whose steps are free, as many as the tokens held would pay for); a paid step costs one token, paid to the agent it enters |
 | `link_steering` | `random` | which way a search steps: at random, or `looking` (to the neighbour the searcher would most like a link with) |
 | `link_consent` | `mutual` | who must agree to a link a search proposes: both ends, or `forced` (only the searcher); never to or from an agent at its valence |
 

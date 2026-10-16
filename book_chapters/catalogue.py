@@ -51,6 +51,7 @@ BATCHES: Dict[str, Tuple[str, List[str]]] = {
     "W": ("No revolutions together with each other switch, on B2", []),
     "X": ("Handover together with each other switch, on B2", []),
     "Y": ("Brains mixed at birth together with each other switch, on B2", []),
+    "K": ("Links to strangers on B2: every search (jump, walk, reach) with every steering and consent", []),
     "Z": ("Settings drawn at random from every value the book has used, the values that make worlds worse "
           "dropped round after round (research/oee/search.md)", []),
     "LC": ("The candidates, the worlds closest to the author's picture of one that might keep evolving, played on "

@@ -37,7 +37,7 @@ a time. The plan that defines B1 is the file `book/experiments/B1.json`.
 | [`max_age`](#max_age) | 0 | the longest life |
 | [`min_child`](#min_child) | 1 | the smallest child |
 | [`mix_at_birth`](#mix_at_birth) | off | a newborn's brain mixed from two |
-| [`link_search`](#link_search) | off | links to strangers, found by a paid walk |
+| [`link_search`](#link_search) | off | links to strangers, found by a walk |
 | [`link_steering`](#link_steering) | random | which way a search steps |
 | [`link_consent`](#link_consent) | mutual | who must agree to a link found |
 | [`mutation_probability`](#mutation_probability) | 0.2 | how often a brain changes |
@@ -308,9 +308,9 @@ price, and are off in every run of the book until they are turned on.
 ### link_search
 
 Whether an agent may search beyond its neighbours for someone to link with.
-Every step of a search costs the searcher one token, paid to the agent the
-step enters, so a search moves tokens but never makes or destroys any, and no
-agent spends its last token on one. How much an agent spends is its brain's
+Every step of a jump or a walk costs the searcher one token, paid to the agent
+the step enters, so a search moves tokens but never makes or destroys any, and
+no agent spends its last token on one; a reach is free. How much an agent spends is its brain's
 choice, a share of what reproduction left it (the SEEK head, read like a
 gift's). Baseline off.
 
@@ -321,6 +321,9 @@ gift's). Baseline off.
   pays for, on from where it stood, so that distance costs time as well as
   tokens; the agent proposes a link to wherever the scout stands when it wants
   one, and the scout then comes home.
+- **reach**: a jump whose steps cost nothing. The walk is as many steps long
+  as the share of its tokens the agent's brain chooses would pay for, so
+  wealth sets how far an agent can reach, without being spent.
 
 Whether a searcher wants a link with the stranger it found is its ACCEPT head,
 read like the link decision of a birth.

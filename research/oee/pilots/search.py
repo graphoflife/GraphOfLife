@@ -10,7 +10,11 @@ new: the thirteen on which B1 and B2 differ (B2's value first, then B1's), the
 other values the lab tried on B2 (Experiments 9, 14, 15 and 16), and the
 switches of the pilot batches. Two pairs that only work together are one
 setting each: a brain whose units cost a token is a growing brain, and links
-that hold a token have no cap on links.
+that hold a token have no cap on links. From round 2 the engine's links to
+strangers join (2026-10-16, at the author's request): the search (off, jump,
+walk, reach), and — only where there is a search — its steering and its
+consent. Where a setting does not apply it is not drawn, and the worlds
+without it say nothing about its values.
 
 A round. ROUND worlds of B2 at 10,000 tokens, each setting's value drawn
 uniformly and independently from the values still allowed, each world with a
@@ -34,6 +38,7 @@ worse: it is written down and drawn no more. Every setting keeps one value.
     python3 search.py sample [ROUND]     draw a round, step each world twice, write jobs_Z<ROUND>.txt
     python3 search.py judge              score every world so far, drop what is worse, write research/oee/search.md
     python3 search.py loop --rounds 4    sample, run, profile, judge; again
+    python3 search.py loop --wait PID    first let the round a queue PID is running finish, and judge it
 """
 from __future__ import annotations
 
@@ -102,17 +107,34 @@ SPACE: List[Tuple[str, List[Tuple[str, Dict[str, str], Dict[str, str]]]]] = [
                ("by family", {}, {"tag_rate": "0.05", "pool": "family"})]),
     ("eye for kin", [("none", {}, {}), ("kin", {}, {"kin_sense": "true"}),
                      ("family", {}, {"tag_rate": "0.05", "kin_sense": "true"})]),
+    # The engine's links to strangers, from round 2.
+    ("link search", [("off", {}, {})] + [(v, {"link_search": v}, {}) for v in ("jump", "walk", "reach")]),
+    ("link steering", [("random", {}, {}), ("looking", {"link_steering": "looking"}, {})]),
+    ("link consent", [("mutual", {}, {}), ("forced", {"link_consent": "forced"}, {})]),
 ]
 VALUES = {setting: {label: (s, p) for label, s, p in values} for setting, values in SPACE}
 FIRST = {setting: values[0][0] for setting, values in SPACE}
+#: Settings that mean something only where another does not have its first value: not drawn otherwise.
+NEEDS = {"link steering": "link search", "link consent": "link search"}
+
+
+def label_of(world: Dict[str, Any], setting: str) -> Optional[str]:
+    """A world's value of a setting; None where it does not apply. A world drawn before a setting
+    joined the space has the setting's first value, which is what it ran with, or none if that needs another."""
+    if setting in world["choice"]:
+        return world["choice"][setting]
+    return None if setting in NEEDS else FIRST[setting]
 
 
 def load_state() -> Dict[str, Any]:
+    state = {"allowed": {}, "dropped": [], "worlds": [], "unplayable": [], "rounds": 0}
     if os.path.exists(STATE):
         with open(STATE) as f:
-            return json.load(f)
-    return {"allowed": {setting: [label for label, _, _ in values] for setting, values in SPACE},
-            "dropped": [], "worlds": [], "unplayable": [], "rounds": 0}
+            state = json.load(f)
+    # A setting that joined the space since starts with every value allowed.
+    for setting, values in SPACE:
+        state["allowed"].setdefault(setting, [label for label, _, _ in values])
+    return state
 
 
 def save_state(state: Dict[str, Any]) -> None:
@@ -124,6 +146,8 @@ def save_state(state: Dict[str, Any]) -> None:
 def command(out: str, choice: Dict[str, str], seed: int, iters: int = ITERS, ckpt: int = 100, health: int = 50) -> str:
     sets, proto = _kv(B2.format(seed=seed)), {"engine": "true"}
     for setting, label in choice.items():
+        if label is None:
+            continue
         s, p = VALUES[setting][label]
         sets.update(s)
         proto.update(p)
@@ -143,8 +167,15 @@ def playable(name: str, choice: Dict[str, str], seed: int) -> Optional[str]:
 def sample(state: Dict[str, Any], round_no: int, n: int) -> List[str]:
     rng = random.Random(1000 + round_no)
     jobs, pending = [], [(f"r{round_no}-{i:02d}-s{round_no * 1000 + i}", round_no * 1000 + i) for i in range(1, n + 1)]
+    def draw():
+        choice = {s: rng.choice(state["allowed"][s]) for s, _ in SPACE}
+        for setting, parent in NEEDS.items():
+            if choice[parent] == FIRST[parent]:
+                choice[setting] = None
+        return choice
+
     while pending:
-        tries = [(name, seed, {s: rng.choice(state["allowed"][s]) for s, _ in SPACE}) for name, seed in pending]
+        tries = [(name, seed, draw()) for name, seed in pending]
         with ThreadPoolExecutor(4) as pool:
             errors = list(pool.map(lambda t: playable(t[0], t[2], t[1]), tries))
         if all(errors):
@@ -221,28 +252,36 @@ def effects(state: Dict[str, Any], score: Dict[str, float], resamples: int = 200
     members = {r: np.flatnonzero(rounds == r) for r in np.unique(rounds)}
     drawn = {r: m[rng.integers(0, len(m), (resamples, len(m)))] for r, m in members.items()}
 
-    def weighted(has, index):
-        """Within one round (or each resample of it): the difference of means times its weight, and the weight."""
+    def weighted(has, index, applies=None):
+        """Within one round (or each resample of it): the difference of means times its weight, and the weight.
+        A resampled world the setting does not apply to counts on neither side."""
         h = has[index]
         n1 = h.sum(-1)
-        n0 = h.shape[-1] - n1
+        if applies is None:
+            n0 = h.shape[-1] - n1
+            other = ~h
+        else:
+            other = applies[index] & ~h
+            n0 = other.sum(-1)
         with np.errstate(invalid="ignore", divide="ignore"):
-            diff = (y[index] * h).sum(-1) / n1 - (y[index] * ~h).sum(-1) / n0
-        weight = np.where((n1 > 0) & (n0 > 0), n1 * n0 / h.shape[-1], 0.0)
+            diff = (y[index] * h).sum(-1) / n1 - (y[index] * other).sum(-1) / n0
+        weight = np.where((n1 > 0) & (n0 > 0), n1 * n0 / np.maximum(1, n1 + n0), 0.0)
         return np.nan_to_num(diff) * weight, weight
 
     found = []
     for setting, values in SPACE:
-        labels = np.array([w["choice"][setting] for w in worlds])
+        labels = np.array([label_of(w, setting) or "" for w in worlds])
+        # Only the worlds the setting applies to are compared.
+        applies = labels != ""
         for label, _, _ in values:
             has = labels == label
-            if has.sum() < 2 or (~has).sum() < 2:
+            if has.sum() < 2 or (applies & ~has).sum() < 2:
                 continue
-            point = [weighted(has, m) for m in members.values()]
+            point = [weighted(has, m[applies[m]]) for m in members.values()]
             total = sum(w for _, w in point)
             if not total:
                 continue
-            boot = [weighted(has, m) for m in drawn.values()]
+            boot = [weighted(has, m, applies) for m in drawn.values()]
             with np.errstate(invalid="ignore", divide="ignore"):
                 dist = sum(d for d, _ in boot) / sum(w for _, w in boot)
             found.append({"setting": setting, "value": label, "worlds": int(has.sum()),
@@ -295,7 +334,7 @@ def write_log(state: Dict[str, Any], score: Dict[str, float], fate: Dict[str, st
     choice = {w["id"]: w["choice"] for w in state["worlds"]}
     lines += ["", "## The best worlds so far", "", "| world | score | what differs from B2 |", "|---|---|---|"]
     for wid, s in sorted(score.items(), key=lambda kv: -kv[1])[:12]:
-        differ = [f"{k}: {v}" for k, v in choice[wid].items() if v != FIRST[k]]
+        differ = [f"{k}: {v}" for k, v in choice[wid].items() if v is not None and v != FIRST[k]]
         lines.append(f"| `{wid}` | {s:.3f} | {'; '.join(differ) or 'nothing'} |")
     if state["unplayable"]:
         lines += ["", "## Combinations the code could not play", ""]
@@ -304,7 +343,23 @@ def write_log(state: Dict[str, Any], score: Dict[str, float], fate: Dict[str, st
         f.write("\n".join(lines) + "\n")
 
 
-def loop(rounds: int, n: int, slots: int) -> None:
+def profile_and_judge() -> None:
+    """Measure every world again and judge the round just run."""
+    subprocess.run(["nice", "-n", "10", "python3", os.path.join(ROOT, "research", "atlas", "profile.py"),
+                    "--jobs", "2"], cwd=ROOT)
+    state = load_state()
+    dropped = judge(state)
+    save_state(state)
+    print(f"round {state['rounds']} judged ({time.strftime('%Y-%m-%d %H:%M')}): dropped "
+          + (", ".join(f"{d['setting']} = {d['value']}" for d in dropped) or "nothing"), flush=True)
+
+
+def loop(rounds: int, n: int, slots: int, wait: Optional[int] = None) -> None:
+    if wait:
+        # A round already running under a queue of its own: let it finish, then judge it.
+        while subprocess.run(["kill", "-0", str(wait)], capture_output=True).returncode == 0:
+            time.sleep(120)
+        profile_and_judge()
     for _ in range(rounds):
         state = load_state()
         round_no = state["rounds"] + 1
@@ -314,13 +369,7 @@ def loop(rounds: int, n: int, slots: int) -> None:
         with open(os.path.join(HERE, f"jobq_Z{round_no}.log"), "w") as log:
             subprocess.run(["python3", "jobq.py", f"jobs_Z{round_no}.txt", str(slots)], cwd=HERE, stdout=log,
                            stderr=subprocess.STDOUT)
-        subprocess.run(["nice", "-n", "10", "python3", os.path.join(ROOT, "research", "atlas", "profile.py"),
-                        "--jobs", "2"], cwd=ROOT)
-        state = load_state()
-        dropped = judge(state)
-        save_state(state)
-        print(f"round {round_no} judged ({time.strftime('%Y-%m-%d %H:%M')}): dropped "
-              + (", ".join(f"{d['setting']} = {d['value']}" for d in dropped) or "nothing"), flush=True)
+        profile_and_judge()
     print("search done", flush=True)
 
 
@@ -331,9 +380,10 @@ def main():
     ap.add_argument("--n", type=int, default=ROUND)
     ap.add_argument("--rounds", type=int, default=4)
     ap.add_argument("--slots", type=int, default=SLOTS)
+    ap.add_argument("--wait", type=int, help="loop: the queue of a round already running, to finish and judge first")
     a = ap.parse_args()
     if a.what == "loop":
-        return loop(a.rounds, a.n, a.slots)
+        return loop(a.rounds, a.n, a.slots, a.wait)
     state = load_state()
     if a.what == "sample":
         sample(state, a.round or state["rounds"] + 1, a.n)

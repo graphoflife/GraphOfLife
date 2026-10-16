@@ -1,6 +1,7 @@
 """
-Batches T, U, V, W, X and Y (2026-10-16): gifts in combination, the switches in
-combination, revolutions, handover and brains mixed at birth in combination.
+Batches T, U, V, W, X, Y and K (2026-10-16): gifts in combination, the switches
+in combination, revolutions, handover and brains mixed at birth in combination,
+and links to strangers.
 
 The author asked for gifts combined with every other mechanism, and for the
 existing settings tested in combination. Every world is a pilot in the engine's
@@ -48,11 +49,19 @@ Y  brains mixed at birth in combination on B2 (asked for the same day, after
    two-by-two whose other three are B2, Q/mix and the switch's control. Gifts
    with mixing are in T, mixing without revolutions in W, with handover in X.
 
+K  links to strangers on B2 (asked for the same day, once the engine had them):
+   every search the engine knows (jump, walk, reach) with every steering
+   (random, looking) and every consent (mutual, forced), seeds 1 and 2. The
+   control is B2 itself (P/B2, S/S0-B2: the lab's own B2 worlds of the same
+   seeds), and each search with random steering and mutual consent is the
+   control of the other three of its kind.
+
 The order of the queue (jobs_TUV.txt): every T combination with seed 1, then
 U, then V, then T's seed 2 — a first look at everything before the second seeds.
 jobs_W.txt, jobs_X.txt and jobs_Y.txt: every combination with seed 1, then seed 2 (queues of their own).
 
-    python3 make_jobs_TU.py         writes jobs_T.txt, jobs_U.txt, jobs_V.txt, jobs_TUV.txt, jobs_W.txt and jobs_X.txt
+    python3 make_jobs_TU.py         writes jobs_T.txt, jobs_U.txt, jobs_V.txt, jobs_TUV.txt, jobs_W.txt, jobs_X.txt,
+                                    jobs_Y.txt and jobs_K.txt
 """
 import itertools
 import os
@@ -224,6 +233,15 @@ def main():
             lines.append(job(f"{OUT}/Y/mix-{name}-s{seed}", B2, "", "mix=true " + proto, seed))
     open(os.path.join(HERE, "jobs_Y.txt"), "w").write("\n".join(lines) + "\n")
     print(f"jobs_Y.txt: {len(lines) - 1} worlds")
+
+    lines = ["# Batch K: links to strangers on B2 (make_jobs_TU.py), every search, steering and consent, seed 1 then 2."]
+    for seed in (1, 2):
+        for search, steering, consent in itertools.product(("jump", "walk", "reach"), ("random", "looking"),
+                                                           ("mutual", "forced")):
+            sets = f"link_search={search} link_steering={steering} link_consent={consent}"
+            lines.append(job(f"{OUT}/K/{search}-{steering}-{consent}-s{seed}", B2, sets, "", seed))
+    open(os.path.join(HERE, "jobs_K.txt"), "w").write("\n".join(lines) + "\n")
+    print(f"jobs_K.txt: {len(lines) - 1} worlds")
 
 
 if __name__ == "__main__":
