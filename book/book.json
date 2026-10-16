@@ -244,8 +244,9 @@
         },
         {
           "id": "71",
-          "title": "Flow modules: groups that outlast their members",
-          "note": "Groups of agents a token tends to stay inside (the map equation), followed from game to game in every world: how many, how long they live, and whether they renew their members or trade them."
+          "title": "Flow modules: the groups tokens stay in",
+          "note": "The groups a token tends to stay inside (the map equation), in every world, set beside the same flow with every agent's partners dealt among its neighbours: B1's groups are its network's, B2's flow is pairs, and only B2's agents keep a partner longer than chance.",
+          "file": "chapters/71-flow-modules.md"
         },
         {
           "id": "72",

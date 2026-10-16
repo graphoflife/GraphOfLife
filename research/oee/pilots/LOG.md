@@ -624,3 +624,14 @@ Flow modules: "mutual" results were matched above the 0.3 floor too (track
 applies the floor first; the CLI defaults to 0.3); in rewired flow modules are
 pairs and one shared agent carries identity, so null lifetimes are LONGER (34 vs
 19 games in B1-100000-s001). Fix after the running flow jobs finish.
+
+## Pilots that replay lab worlds (2026-10-16, morning)
+18 pilot worlds have a lab run's settings and seed and no prototype rule beyond
+the engine's game: L/B1-long-s1,s2 (= B1-10000-s001,s002), L/B2-long-s001..s010
+(= B2-10000-s001..s010), P/B2-s1,s2 and S/S0-B2-s1,s2 (= B2-10000-s001,s002),
+S/S6-B1-s1,s2 (= B1-10000-s001,s002). They are those worlds game for game (B1
+lab 999 = pilot 1,000: 871 agents; B2: 3,598); only the long runs' later
+iterations are new. book_chapters/everyworld.replicas() finds them; Ch 71
+leaves them out. TODO at the next across.py write: mark them in worlds.json and
+leave them out of the group comparisons of Ch 72 and Meta VI (they were counted
+in "B1 pil." and "B2 pil."), with an Added-later note if a number moves.

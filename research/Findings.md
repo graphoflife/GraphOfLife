@@ -86,6 +86,31 @@ otherwise. Last consolidated: 2026-10-16.
   for shuffled kinds), in B1 31% of their log tokens (16%). Niches or
   families: untested.
 
+## Flow modules (Ch. 71; 183 worlds of every kind, 18 lab worlds in depth)
+
+- Tokens keep to groups (the map equation) in every world. B1-like worlds
+  (and every world with lapsing links): compression 0.36–0.48 against ~0 for
+  rewired flow, modules of ~4 agents, every agent in one, an eighth of the
+  members new each game. B2-like: compression 0.82–0.85, modules of 2.3–2.4
+  (all-in pairs), only 27–34% of agents in a module in a game, a third of the
+  members new each game.
+- The fair null keeps the network: every agent's stakes dealt among its own
+  neighbours (`flowmodules_cli.js --neighbours`). It leaves B1's modules as
+  they are (compression 0.388 vs 0.384; modules lasting ≥ 10 games 0.17 vs
+  0.13–0.14; pairs together a game later 0.64 vs 0.58): B1's modules are its
+  network's regions. In B2 pairs lasting ≥ 5 games are twice as common as under
+  the null (0.087 vs 0.038), pairs together a game later 0.53 vs 0.38, after 40
+  games 0.37 vs 0.33 — partners kept for a few games; most so without random
+  inputs (≥ 10 games 8–9× the null).
+- A fifth of B1's modules followed ≥ 10 games end with none of their first
+  members — as often under the null. Modules renew by exchange, not births
+  (12–15% of new members born in B1, 4% in B2).
+- Children of any size and no old age (E15), and link tokens without old age
+  (batch Q), leave almost nobody in a module (1–8%).
+- Method: the "mutual" matching was applied above the 0.3 floor (doc fixed);
+  rewired flow and size-preserving shuffles ignore the network, so only the
+  neighbour null says what the agents choose.
+
 ## Part V: engineering open-ended evolution
 
 **The yardstick (Ch. 46, E12; 10 worlds of 5,000 tokens)**

@@ -31,6 +31,52 @@ TABLE_TEXT = ("every simulation made so far, as `book/results/worlds.json` holds
               "checkpoint and summarised the same way")
 
 
+#: Settings that change how a world is kept, not what happens in it.
+BOOKKEEPING = {"extinction_threshold", "archive_every", "checkpoint_every"}
+
+
+def _settings(cfg: Dict[str, Any]) -> Optional[str]:
+    """A world's settings in full, bookkeeping aside, as one string to compare; None if they cannot be read."""
+    from gol_config import SimConfig
+    try:
+        full = SimConfig.from_dict(cfg).to_dict()
+    except (ValueError, TypeError, KeyError):
+        return None
+    return json.dumps({k: v for k, v in full.items() if k not in BOOKKEEPING}, sort_keys=True)
+
+
+def replicas() -> Dict[str, str]:
+    """
+    The pilot worlds that replay a lab world: the same settings and seed, and no
+    prototype rule beyond the engine's own game. Such a pilot is that lab world
+    again, game for game (a continuation from a lab archive is exact), so a
+    measure of both counts one world twice. Pilot id ("L/B2-long-s001") -> lab run.
+    """
+    runs = os.path.join(ROOT, "GraphOfLifeRuns")
+    lab: Dict[str, str] = {}
+    for d in sorted(os.listdir(runs)):
+        meta = os.path.join(runs, d, "meta.json")
+        if os.path.exists(meta) and os.path.exists(os.path.join(runs, d, "stats.jsonl")):
+            key = _settings(json.load(open(meta)).get("config") or {})
+            if key:
+                lab.setdefault(key, d)
+    out = {}
+    for batch in sorted(os.listdir(PILOTS)):
+        if not os.path.isdir(os.path.join(PILOTS, batch)):
+            continue
+        for name in sorted(os.listdir(os.path.join(PILOTS, batch))):
+            path = os.path.join(PILOTS, batch, name, "config.json")
+            if not os.path.exists(path):
+                continue
+            meta = json.load(open(path))
+            if (meta.get("proto") or {}) != {"engine": True}:
+                continue
+            key = _settings(meta.get("cfg") or {})
+            if key in lab:
+                out[f"{batch}/{name}"] = lab[key]
+    return out
+
+
 def _worlds() -> List[Dict[str, Any]]:
     return json.load(open(WORLDS))["worlds"] if os.path.exists(WORLDS) else []
 
@@ -62,8 +108,11 @@ GROUPS: List[Tuple[str, Any, int]] = [
     ("B2 var", lambda w: w["source"] == "lab" and w["family"].startswith("B2-10000"), CYAN),
     ("lapse", lambda w: _has(w, "E14 · any unused link lapses"), GREEN),
     ("B2 5k", lambda w: w["source"] == "lab" and w["family"].startswith("B2-5000"), VIOLET),
-    ("B2 pil.", lambda w: w["source"] == "pilot" and w.get("baseline") == "B2" and w.get("engine"), BLUE),
-    ("B1 pil.", lambda w: w["source"] == "pilot" and w.get("baseline") == "B1" and w.get("engine"), ORANGE),
+    # A pilot that replays a lab world (replica_of) is already counted as that world.
+    ("B2 pil.", lambda w: w["source"] == "pilot" and w.get("baseline") == "B2" and w.get("engine")
+     and not w.get("replica_of"), BLUE),
+    ("B1 pil.", lambda w: w["source"] == "pilot" and w.get("baseline") == "B1" and w.get("engine")
+     and not w.get("replica_of"), ORANGE),
 ]
 
 
@@ -73,7 +122,8 @@ GROUP_WORDS = ("B1 10k: the thirty B1 worlds of 10,000 tokens (Experiment 2); B1
                "(Experiments 12 and 13); B2 10k: the ten B2 worlds "
                "of Experiment 16; B2 var: B2 with one rule or rate changed (Experiments 9, 15 and 16); B2 5k: "
                "B2 at 5,000 tokens, with all its rules or with one taken away (Experiment 14) — except "
-               "lapse: the condition in which any unused link lapses; B1 pil. and B2 pil.: the pilot worlds that play the engine's game.")
+               "lapse: the condition in which any unused link lapses; B1 pil. and B2 pil.: the pilot worlds that play the engine's game, "
+               "except those that replay a lab world with its settings and seed.")
 
 
 def _grouped(worlds: List[Dict[str, Any]], stat: str, *windows: str) -> Dict[str, List[float]]:

@@ -6,7 +6,7 @@ actually go**. A *flow module* is a group of the third kind: a set of agents a
 token, wandering the flow from agent to agent, tends to stay inside. This note
 explains how such groups are found, followed through time, and checked
 against chance. The Research tab's **Flow modules** view and
-Chapter 71 use exactly this.
+[Chapter 71](../chapters/71-flow-modules.md) use exactly this.
 
 ## The flow of one game
 
@@ -114,7 +114,7 @@ Two more measures need no following at all, or ask what following finds:
 > An earlier version of this note said that the mutual matching needs no
 > floor and that real modules live longer than those of the rewired flow. The
 > first was not what the program did (it matched above the floor), and the
-> second is not a fair test. Chapter 71 uses the nulls above.
+> second is not a fair test. [Chapter 71](../chapters/71-flow-modules.md) uses the nulls above.
 
 <!-- turns -->
 [Contents](../README.md)

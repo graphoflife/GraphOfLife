@@ -150,7 +150,7 @@ that question was about. Gathered:
 | measure | lab worlds | pilot worlds |
 |---|---|---|
 | the ~95 recorded statistics, lightning among them | every run | the engine's pilots, from recorded games (new); the prototype's, their series |
-| flow modules (Chapter 71) | up to ten seeds of every condition (new) | the engine's pilots (new) |
+| flow modules ([Chapter 71](71-flow-modules.md)) | up to five seeds of every condition (new) | the engine's pilots (new) |
 | loops and the exact circulation, chains, help ([Chapter 58](58-gliders-and-who-helps-whom.md)) | ten B1 and ten B2 worlds | the alliance pilots, batches P and Q |
 | lifetime contests between eras ([Chapter 50](50-why-evolution-stops.md)) | B2, through the long runs that go on from its worlds | every pilot batch |
 | correlations among agents ([Appendix B](B-what-goes-with-what.md)) | ten B1 and ten B2 worlds; now any run, in the Research tab (new) | any run made on the server or in the browser (new) |

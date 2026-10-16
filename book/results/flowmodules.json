@@ -1,0 +1,557 @@
+{
+ "chapter": "flowmodules",
+ "numbers": {
+  "worlds": 183,
+  "compression:null:B1 fixed": -0.0,
+  "compression:null:B1 10k": -0.026,
+  "compression:null:B1 100k": 0.009,
+  "compression:null:B1 sizes": -0.003,
+  "compression:null:B2 var": 0.14,
+  "compression:null:B2 10k": 0.154,
+  "compression:null:B2 5k": 0.094,
+  "compression:null:lapse": -0.027,
+  "compression:null:B1 pil.": -0.007,
+  "compression:null:B2 pil.": 0.118,
+  "compression:B1 fixed": 0.36309963197040435,
+  "compression:B1 10k": 0.3875036118959779,
+  "compression:B1 100k": 0.48271571616362907,
+  "compression:B1 sizes": 0.42974503964237193,
+  "compression:B2 var": 0.8437878778136453,
+  "compression:B2 10k": 0.8512852138741822,
+  "compression:B2 5k": 0.8229603716034899,
+  "compression:lapse": 0.36217389755769147,
+  "compression:B1 pil.": 0.4321932437693516,
+  "compression:B2 pil.": 0.8353693219432436,
+  "size:B1 fixed": 3.5262212105783344,
+  "size:B1 10k": 3.864478881798845,
+  "size:B1 100k": 4.0151638932180385,
+  "size:B1 sizes": 4.221852098600933,
+  "size:B2 var": 2.350554636268922,
+  "size:B2 10k": 2.348537203409353,
+  "size:B2 5k": 2.411621741051701,
+  "size:lapse": 4.509910945130709,
+  "size:B1 pil.": 3.56870055927848,
+  "size:B2 pil.": 2.392756174937945,
+  "in_modules:B1 fixed": 1.0,
+  "in_modules:B1 10k": 1.0,
+  "in_modules:B1 100k": 1.0,
+  "in_modules:B1 sizes": 1.0,
+  "in_modules:B2 var": 0.2677327010380823,
+  "in_modules:B2 10k": 0.31786657859973577,
+  "in_modules:B2 5k": 0.31658649926626453,
+  "in_modules:lapse": 1.0,
+  "in_modules:B1 pil.": 1.0,
+  "in_modules:B2 pil.": 0.3447725815805963,
+  "turnover:B1 fixed": 0.0,
+  "turnover:B1 10k": 0.11483029400125999,
+  "turnover:B1 100k": 0.12543019064562455,
+  "turnover:B1 sizes": 0.12958379687586122,
+  "turnover:B2 var": 0.31278417775322054,
+  "turnover:B2 10k": 0.3141064603584237,
+  "turnover:B2 5k": 0.32347796207202467,
+  "turnover:lapse": 0.17551015337904163,
+  "turnover:B1 pil.": 0.2563011447638363,
+  "turnover:B2 pil.": 0.30853332199265393,
+  "lives:B1 10k:2": {
+   "flow": 0.639136690647482,
+   "neighbours": 0.5937764606265876,
+   "dealt": 0.09414254198370177
+  },
+  "lives:B1 10k:5": {
+   "flow": 0.3175859510264655,
+   "neighbours": 0.283657917019475,
+   "dealt": 0.0028000973946919893
+  },
+  "lives:B1 10k:10": {
+   "flow": 0.16992332426416026,
+   "neighbours": 0.1378069432684166,
+   "dealt": 4.502273648192337e-05
+  },
+  "lives:B1 10k:20": {
+   "flow": 0.08335394509027949,
+   "neighbours": 0.05863674851820491,
+   "dealt": 0.0
+  },
+  "lives:B1 10k:40": {
+   "flow": 0.030670294335889192,
+   "neighbours": 0.018628281117696866,
+   "dealt": 0.0
+  },
+  "lives:B1 100k:2": {
+   "flow": 0.6395738069138632,
+   "neighbours": 0.5640515904187857,
+   "dealt": 0.10005197075076797
+  },
+  "lives:B1 100k:5": {
+   "flow": 0.31568504847102513,
+   "neighbours": 0.2493977066329636,
+   "dealt": 0.0020774615447514237
+  },
+  "lives:B1 100k:10": {
+   "flow": 0.16954534904025798,
+   "neighbours": 0.12806667164485225,
+   "dealt": 6.933466455889286e-06
+  },
+  "lives:B1 100k:20": {
+   "flow": 0.07985290260944496,
+   "neighbours": 0.0576528505344453,
+   "dealt": 0.0
+  },
+  "lives:B1 100k:40": {
+   "flow": 0.02729057164653348,
+   "neighbours": 0.018884076703749104,
+   "dealt": 0.0
+  },
+  "lives:B1 fixed:2": {
+   "flow": 0.7566852367688022,
+   "neighbours": 0.5930144708059902,
+   "dealt": 0.07181365757647479
+  },
+  "lives:B1 fixed:5": {
+   "flow": 0.5589484679665738,
+   "neighbours": 0.2523811627124348,
+   "dealt": 0.0010993829986503134
+  },
+  "lives:B1 fixed:10": {
+   "flow": 0.5051183844011142,
+   "neighbours": 0.1371193000168265,
+   "dealt": 0.0
+  },
+  "lives:B1 fixed:20": {
+   "flow": 0.5,
+   "neighbours": 0.09753154972236244,
+   "dealt": 0.0
+  },
+  "lives:B1 fixed:40": {
+   "flow": 0.5,
+   "neighbours": 0.08125,
+   "dealt": 0.0
+  },
+  "lives:B2 10k:2": {
+   "flow": 0.5084546523193779,
+   "neighbours": 0.3784048736082907,
+   "dealt": 0.2845539370343022
+  },
+  "lives:B2 10k:5": {
+   "flow": 0.08680712541821141,
+   "neighbours": 0.037525197705070554,
+   "dealt": 0.042156138819896626
+  },
+  "lives:B2 10k:10": {
+   "flow": 0.007957319830002713,
+   "neighbours": 0.0014704852601358448,
+   "dealt": 0.0017183414269704893
+  },
+  "lives:B2 10k:20": {
+   "flow": 9.042408897730355e-05,
+   "neighbours": 0.0,
+   "dealt": 0.0
+  },
+  "lives:B2 10k:40": {
+   "flow": 0.0,
+   "neighbours": 0.0,
+   "dealt": 0.0
+  },
+  "lives:B2 var:2": {
+   "flow": 0.49718657652250026,
+   "neighbours": 0.3668879456984555,
+   "dealt": 0.27775370269695604
+  },
+  "lives:B2 var:5": {
+   "flow": 0.09530654512333356,
+   "neighbours": 0.037686938025227504,
+   "dealt": 0.03911633538662431
+  },
+  "lives:B2 var:10": {
+   "flow": 0.012417067212579362,
+   "neighbours": 0.0014343977941231188,
+   "dealt": 0.001763526048238062
+  },
+  "lives:B2 var:20": {
+   "flow": 0.000443478883989342,
+   "neighbours": 0.0,
+   "dealt": 0.0
+  },
+  "lives:B2 var:40": {
+   "flow": 0.0,
+   "neighbours": 0.0,
+   "dealt": 0.0
+  },
+  "lives:lapse:2": {
+   "flow": 0.6383515973873053,
+   "neighbours": 0.5990773086170831,
+   "dealt": 0.08636329439017187
+  },
+  "lives:lapse:5": {
+   "flow": 0.33143564906356227,
+   "neighbours": 0.30547284677123143,
+   "dealt": 0.004291606286924534
+  },
+  "lives:lapse:10": {
+   "flow": 0.17215791695363356,
+   "neighbours": 0.1550053793272324,
+   "dealt": 5.5735146583435515e-05
+  },
+  "lives:lapse:20": {
+   "flow": 0.05690622847748328,
+   "neighbours": 0.04578680150152262,
+   "dealt": 0.0
+  },
+  "lives:lapse:40": {
+   "flow": 0.0026437981826664594,
+   "neighbours": 0.0018690882756716343,
+   "dealt": 0.0
+  },
+  "together:B1 10k:1": {
+   "flow": 0.6356927823539231,
+   "neighbours": 0.5793718752589564,
+   "dealt": 0.003913966994934868
+  },
+  "together:B1 10k:2": {
+   "flow": 0.6215713870034858,
+   "neighbours": 0.581028839903753,
+   "dealt": 0.003848689312858695
+  },
+  "together:B1 10k:5": {
+   "flow": 0.603099173553719,
+   "neighbours": 0.5685720495544447,
+   "dealt": 0.0037187266192001737
+  },
+  "together:B1 10k:10": {
+   "flow": 0.5854305127538707,
+   "neighbours": 0.5569023472083264,
+   "dealt": 0.0035355502827259747
+  },
+  "together:B1 10k:20": {
+   "flow": 0.5494645405727311,
+   "neighbours": 0.5178244972577697,
+   "dealt": 0.0032504469364537623
+  },
+  "together:B1 10k:40": {
+   "flow": 0.4609615066908971,
+   "neighbours": 0.45065390749601275,
+   "dealt": 0.0032686311978276173
+  },
+  "together:B1 100k:1": {
+   "flow": 0.8297921453288737,
+   "neighbours": 0.7851411932474208,
+   "dealt": 0.0635318257242197
+  },
+  "together:B1 100k:2": {
+   "flow": 0.8164507362053564,
+   "neighbours": 0.7886366579551026,
+   "dealt": 0.06619668402679925
+  },
+  "together:B1 100k:5": {
+   "flow": 0.801274769492732,
+   "neighbours": 0.7825282256564188,
+   "dealt": 0.07099419373112976
+  },
+  "together:B1 100k:10": {
+   "flow": 0.786970274135648,
+   "neighbours": 0.7710461024278855,
+   "dealt": 0.07556924328984604
+  },
+  "together:B1 100k:20": {
+   "flow": 0.7624354222382567,
+   "neighbours": 0.7470561508320868,
+   "dealt": 0.07983574791509945
+  },
+  "together:B1 100k:40": {
+   "flow": 0.701806900299019,
+   "neighbours": 0.6653247940765421,
+   "dealt": 0.09346159772384231
+  },
+  "together:B1 fixed:1": {
+   "flow": 0.6921578708006249,
+   "neighbours": 0.6269456976418095,
+   "dealt": 0.007458620194247678
+  },
+  "together:B1 fixed:2": {
+   "flow": 0.6482322804073655,
+   "neighbours": 0.5905399815317733,
+   "dealt": 0.0076300587383356395
+  },
+  "together:B1 fixed:5": {
+   "flow": 0.5667551033832525,
+   "neighbours": 0.5141012018235644,
+   "dealt": 0.007342881759851172
+  },
+  "together:B1 fixed:10": {
+   "flow": 0.5135543738921906,
+   "neighbours": 0.46705323874728905,
+   "dealt": 0.007239194875309632
+  },
+  "together:B1 fixed:20": {
+   "flow": 0.5017361111111112,
+   "neighbours": 0.45298050487378155,
+   "dealt": 0.006846139777507415
+  },
+  "together:B2 10k:1": {
+   "flow": 0.525897641189875,
+   "neighbours": 0.3798266351457841,
+   "dealt": 0.0016423395126357496
+  },
+  "together:B2 10k:2": {
+   "flow": 0.5066118789689952,
+   "neighbours": 0.38382594417077176,
+   "dealt": 0.002017183414269705
+  },
+  "together:B2 10k:5": {
+   "flow": 0.4741736581421207,
+   "neighbours": 0.37515255064681474,
+   "dealt": 0.0018704363152404584
+  },
+  "together:B2 10k:10": {
+   "flow": 0.4527624309392265,
+   "neighbours": 0.3649176430633384,
+   "dealt": 0.002117863720073665
+  },
+  "together:B2 10k:20": {
+   "flow": 0.4211543105530065,
+   "neighbours": 0.3370504599944243,
+   "dealt": 0.002288510101010101
+  },
+  "together:B2 10k:40": {
+   "flow": 0.36816524908869985,
+   "neighbours": 0.3286624203821656,
+   "dealt": 0.002694380292532717
+  },
+  "together:B2 var:1": {
+   "flow": 0.5479880194881234,
+   "neighbours": 0.39206078877930833,
+   "dealt": 0.002714263430578967
+  },
+  "together:B2 var:2": {
+   "flow": 0.529679627851425,
+   "neighbours": 0.38699922635197714,
+   "dealt": 0.0028242394492910446
+  },
+  "together:B2 var:5": {
+   "flow": 0.4956643026031473,
+   "neighbours": 0.35919002899165753,
+   "dealt": 0.003136042860115173
+  },
+  "together:B2 var:10": {
+   "flow": 0.4721273088798267,
+   "neighbours": 0.3719649948161454,
+   "dealt": 0.0030499888528326188
+  },
+  "together:B2 var:20": {
+   "flow": 0.4243122597569548,
+   "neighbours": 0.36108286505286424,
+   "dealt": 0.0039382647083062074
+  },
+  "together:B2 var:40": {
+   "flow": 0.36644852941176476,
+   "neighbours": 0.32075423062547526,
+   "dealt": 0.005090686274509804
+  },
+  "together:lapse:1": {
+   "flow": 0.6588654394994184,
+   "neighbours": 0.6247372595864769,
+   "dealt": 0.005758906271622675
+  },
+  "together:lapse:2": {
+   "flow": 0.6274885636805796,
+   "neighbours": 0.6095678014437246,
+   "dealt": 0.0060166510443796645
+  },
+  "together:lapse:5": {
+   "flow": 0.5660166144729941,
+   "neighbours": 0.5520708713355283,
+   "dealt": 0.00578693556363444
+  },
+  "together:lapse:10": {
+   "flow": 0.4936838294903625,
+   "neighbours": 0.4825966112117518,
+   "dealt": 0.005446659099023589
+  },
+  "together:lapse:20": {
+   "flow": 0.36741477553785706,
+   "neighbours": 0.3555808895928216,
+   "dealt": 0.005872491465759073
+  },
+  "together:lapse:40": {
+   "flow": 0.15577235772357723,
+   "neighbours": 0.1556909075536424,
+   "dealt": 0.005489542074907929
+  },
+  "outlast:B1 10k:10": {
+   "flow": {
+    "modules": 516.0,
+    "renewed": 0.2066957787481805,
+    "stayed": 0.634443782806228
+   },
+   "neighbours": {
+    "modules": 482.0,
+    "renewed": 0.20890937019969277,
+    "stayed": 0.6159850266871856
+   }
+  },
+  "outlast:B1 10k:20": {
+   "flow": {
+    "modules": 201.0,
+    "renewed": 0.17210682492581603,
+    "stayed": 0.6612809956281767
+   },
+   "neighbours": {
+    "modules": 178.0,
+    "renewed": 0.16606498194945848,
+    "stayed": 0.6509092375945882
+   }
+  },
+  "outlast:B1 100k:10": {
+   "flow": {
+    "modules": 5058.0,
+    "renewed": 0.17462145781100252,
+    "stayed": 0.6475220381877199
+   },
+   "neighbours": {
+    "modules": 4695.0,
+    "renewed": 0.17017583015406934,
+    "stayed": 0.6530084308327654
+   }
+  },
+  "outlast:B1 100k:20": {
+   "flow": {
+    "modules": 2275.5,
+    "renewed": 0.14777474727796178,
+    "stayed": 0.670251995611604
+   },
+   "neighbours": {
+    "modules": 1970.5,
+    "renewed": 0.14777692495160832,
+    "stayed": 0.670970830322539
+   }
+  },
+  "outlast:B1 fixed:10": {
+   "flow": {
+    "modules": 214.0,
+    "renewed": 0.2891156462585034,
+    "stayed": 0.5798226433430514
+   },
+   "neighbours": {
+    "modules": 220.0,
+    "renewed": 0.3729166666666667,
+    "stayed": 0.49698918085975774
+   }
+  },
+  "outlast:B1 fixed:20": {
+   "flow": {
+    "modules": 140.5,
+    "renewed": 0.0,
+    "stayed": 1.0
+   },
+   "neighbours": {
+    "modules": 117.5,
+    "renewed": 0.5235042735042735,
+    "stayed": 0.45727738001171586
+   }
+  },
+  "outlast:B2 10k:10": {
+   "flow": {
+    "modules": 88.0,
+    "renewed": 0.5111111111111111,
+    "stayed": 0.30092592592592593
+   },
+   "neighbours": {
+    "modules": 21.0,
+    "renewed": 0.6071428571428571,
+    "stayed": 0.19841269841269837
+   }
+  },
+  "outlast:B2 10k:20": {
+   "flow": {
+    "modules": 1.0,
+    "renewed": 0.7777777777777778,
+    "stayed": 0.16666666666666666
+   },
+   "neighbours": {
+    "modules": 0.0,
+    "renewed": 0.0,
+    "stayed": 0.5
+   }
+  },
+  "outlast:B2 var:10": {
+   "flow": {
+    "modules": 97.0,
+    "renewed": 0.456813044882144,
+    "stayed": 0.29287751587557853
+   },
+   "neighbours": {
+    "modules": 13.0,
+    "renewed": 0.5813492063492063,
+    "stayed": 0.20673076923076922
+   }
+  },
+  "outlast:B2 var:20": {
+   "flow": {
+    "modules": 4.0,
+    "renewed": 0.5238095238095238,
+    "stayed": 0.27380952380952384
+   },
+   "neighbours": {
+    "modules": 0.0,
+    "renewed": 0.5,
+    "stayed": 0.25
+   }
+  },
+  "outlast:lapse:10": {
+   "flow": {
+    "modules": 294.5,
+    "renewed": 0.21031855262499374,
+    "stayed": 0.5092798274322862
+   },
+   "neighbours": {
+    "modules": 293.0,
+    "renewed": 0.2411437598736177,
+    "stayed": 0.4911513129203325
+   }
+  },
+  "outlast:lapse:20": {
+   "flow": {
+    "modules": 97.5,
+    "renewed": 0.23076923076923078,
+    "stayed": 0.4783599149388623
+   },
+   "neighbours": {
+    "modules": 86.5,
+    "renewed": 0.268975468975469,
+    "stayed": 0.4614235367806795
+   }
+  },
+  "born:B1 fixed": 0.0,
+  "born:B1 10k": 0.11740986661826575,
+  "born:B1 100k": 0.15173466811335026,
+  "born:B1 sizes": 0.15174382964171484,
+  "born:B2 var": 0.04355384978150625,
+  "born:B2 10k": 0.04441417357784067,
+  "born:B2 5k": 0.048300618198346454,
+  "born:lapse": 0.09732404570101065,
+  "born:B1 pil.": 0.5412435862817873,
+  "born:B2 pil.": 0.042402517578970914
+ },
+ "figures": {
+  "every_world": {
+   "title": "Flow modules in every world",
+   "caption": "Each dot is a world, over fifty games. Compression: how much shorter the modules make a description of a token wandering the flow (0: no group structure); the dashed bars are the same games' flow rewired at random, each agent's amounts kept. Size: agents per module. Who is in a module: the share of the agents that send or receive any flow, which is what puts an agent in a module. How fast members change: of a module followed from one game to the next, the share of its members that are new. B1 10k: the thirty B1 worlds of 10,000 tokens (Experiment 2); B1 fixed: the same with brains that never change (Experiment 7); B1 100k: B1 at 100,000 tokens (Experiment 10); B1 sizes: B1 at 800 to 409,600 tokens (Experiment 8) and at 5,000 with and without a hidden layer (Experiments 12 and 13); B2 10k: the ten B2 worlds of Experiment 16; B2 var: B2 with one rule or rate changed (Experiments 9, 15 and 16); B2 5k: B2 at 5,000 tokens, with all its rules or with one taken away (Experiment 14) \u2014 except lapse: the condition in which any unused link lapses; B1 pil. and B2 pil.: the pilot worlds that play the engine's game, except those that replay a lab world with its settings and seed.",
+   "recipe": "**Runs.** Fifty consecutive games of each world: a lab run's from its record, from iteration 950 when it lived that long (up to five seeds of every condition); a pilot's played on from its checkpoint at 1,000 (`python3 research/atlas/flowmodules.py lab`, `pilots`).\n\n**Data.** From `GraphOfLifeRuns/.pilots/atlas/flowmodules/*.json`.\n\n1. For every game, the flow between each pair of neighbours: the tokens staked either way.\n2. Group the agents by the map equation (web/js/flowmodules.js, through tools/flowmodules_cli.js).\n3. Follow the groups from game to game as the Research view does: best overlap first, above its floor of 0.3 of the members two modules share.\n4. Do the same on each game's flow rewired at random, every agent's amounts kept: the null.\n\n**To make it again:** `python3 book_figures.py flowmodules`."
+  },
+  "lives": {
+   "title": "How long modules live",
+   "caption": "Of all the modules fifty games hold, the share followed for at least so many games, as the Research view follows them (the median of each group's worlds; logarithmic axes, a share of 0 drawn at the bottom). The flow: as it was. Partners dealt: the same games with every agent's stakes on its neighbours dealt among the same neighbours at random \u2014 the network and every agent's amounts kept, its choice of whom to stake on undone. Members dealt: the real modules with their agents dealt among them at random, game by game \u2014 only the sizes kept. B1 fixed: two worlds whose brains never change, one frozen (every module lasts) and one teeming with births (almost none does), so their median lies between. B2 var: B2 without random inputs, at mutation rates 0.05 and 0.8, and at 5,000 tokens; lapse: B2 at 5,000 tokens where any unused link lapses.",
+   "recipe": "**Runs.** The same fifty games of eighteen lab worlds: B1 at 10,000 tokens (three seeds), B2 at 10,000 (three), B1 at 100,000 (two), B1 whose brains never change (two), B2 without random inputs (two), B2 at mutation rates 0.05 and 0.8 (one each), B2 at 5,000 tokens (two) and with lapsing links (two) (`python3 research/atlas/flowpersist.py`).\n\n**Data.** From `GraphOfLifeRuns/.pilots/atlas/flowpersist/*.json`.\n\n1. For every game, the flow between each pair of neighbours: the tokens staked either way.\n2. Group the agents by the map equation (web/js/flowmodules.js, through tools/flowmodules_cli.js).\n3. Follow the groups from game to game as the Research view does: best overlap first, above its floor of 0.3 of the members two modules share.\n4. Deal every agent's stakes on its neighbours among the same neighbours at random and do the same (`tools/flowmodules_cli.js --neighbours 1`).\n5. Deal each game's agents at random among modules of the sizes that game had, and follow those (`--shuffle 1`).\n\n**To make it again:** `python3 book_figures.py flowmodules`."
+  },
+  "together": {
+   "title": "Two agents of one module, games later",
+   "caption": "Of two agents in one module, the share still in one module so many games later, over the pairs whose agents are both in a module then (the median of each group's worlds). The flow: as it was; partners dealt: every agent's stakes dealt among its own neighbours at random; members dealt: the later game's agents dealt at random among modules of its sizes. No module is followed, so no rule for following one is needed.",
+   "recipe": "**Runs.** The same fifty games of eighteen lab worlds: B1 at 10,000 tokens (three seeds), B2 at 10,000 (three), B1 at 100,000 (two), B1 whose brains never change (two), B2 without random inputs (two), B2 at mutation rates 0.05 and 0.8 (one each), B2 at 5,000 tokens (two) and with lapsing links (two) (`python3 research/atlas/flowpersist.py`).\n\n**Data.** From `GraphOfLifeRuns/.pilots/atlas/flowpersist/*.json`.\n\n1. For every game, the flow between each pair of neighbours: the tokens staked either way.\n2. Group the agents by the map equation (web/js/flowmodules.js, through tools/flowmodules_cli.js).\n3. For every two games lag apart, the pairs of agents sharing a module in the first that are both in a module in the second; the share that share one there.\n4. The same on the flow with every agent's stakes dealt among its neighbours (`--neighbours 1`), and with the later game's agents dealt among modules of its sizes (three deals).\n\n**To make it again:** `python3 book_figures.py flowmodules`."
+  },
+  "renewal": {
+   "title": "Where a module's new members come from",
+   "caption": "Of the new members of modules followed from one game to the next, the share that had been born since (the rest were alive before, in another module or none). A module that renews itself from births regenerates; one that takes in agents from around it exchanges them. Each dot is a world. B1 10k: the thirty B1 worlds of 10,000 tokens (Experiment 2); B1 fixed: the same with brains that never change (Experiment 7); B1 100k: B1 at 100,000 tokens (Experiment 10); B1 sizes: B1 at 800 to 409,600 tokens (Experiment 8) and at 5,000 with and without a hidden layer (Experiments 12 and 13); B2 10k: the ten B2 worlds of Experiment 16; B2 var: B2 with one rule or rate changed (Experiments 9, 15 and 16); B2 5k: B2 at 5,000 tokens, with all its rules or with one taken away (Experiment 14) \u2014 except lapse: the condition in which any unused link lapses; B1 pil. and B2 pil.: the pilot worlds that play the engine's game, except those that replay a lab world with its settings and seed.",
+   "recipe": "**Runs.** Fifty consecutive games of each world: a lab run's from its record, from iteration 950 when it lived that long (up to five seeds of every condition); a pilot's played on from its checkpoint at 1,000 (`python3 research/atlas/flowmodules.py lab`, `pilots`).\n\n**Data.** From `GraphOfLifeRuns/.pilots/atlas/flowmodules/*.json`.\n\n1. For every game, the flow between each pair of neighbours: the tokens staked either way.\n2. Group the agents by the map equation (web/js/flowmodules.js, through tools/flowmodules_cli.js).\n3. Follow the groups from game to game as the Research view does: best overlap first, above its floor of 0.3 of the members two modules share.\n4. A new member is born if its id was not alive the game before.\n\n**To make it again:** `python3 book_figures.py flowmodules`."
+  }
+ }
+}

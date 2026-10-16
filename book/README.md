@@ -77,7 +77,7 @@ everything can be checked with it.
 - [Chapter 39 · Questioning the mechanics](chapters/39-questioning-the-mechanics.md)
 - [Chapter 40 · Meta II · What the measurements say about open-ended evolution](chapters/40-meta-2.md)
 - [Chapter 70 · How different are the agents?](chapters/70-how-different-are-the-agents.md)
-- Chapter 71 · Flow modules: groups that outlast their members — *not written yet*
+- [Chapter 71 · Flow modules: the groups tokens stay in](chapters/71-flow-modules.md)
 - [Chapter 72 · Lightning in every world](chapters/72-lightning-in-every-world.md)
 
 **Part IV · One change at a time**

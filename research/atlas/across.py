@@ -265,9 +265,14 @@ def rounded(v):
 
 
 def write():
+    from book_chapters.everyworld import replicas
+    repeated = replicas()
     worlds = [json.load(open(p)) for p in sorted(glob.glob(os.path.join(OUT, "*.json")))]
     for w in worlds:
         w["at"] = {name: {k: rounded(v) for k, v in stats.items()} for name, stats in w["at"].items()}
+        # A pilot that replays a lab world is that world again: say which, so a comparison counts it once.
+        if w["source"] == "pilot" and w["id"] in repeated:
+            w["replica_of"] = repeated[w["id"]]
     stats = sorted({k for w in worlds for s in w["at"].values() for k in s})
     table = {
         "what": "Every world the book has made, each over the same stretches of iterations "

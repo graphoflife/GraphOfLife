@@ -221,6 +221,9 @@ def legend_entries(fig: Dict[str, Any]) -> List[Tuple[str, str, str]]:
         if not s.get("label"):
             continue
         mark = "box" if s.get("kind") in ("bars", "area") else "dot" if s.get("points") else "line"
+        if mark == "line" and s.get("dash"):
+            # A dashed line is told from a solid one of the same colour by its dashes, in the legend too.
+            mark = "dash:" + " ".join(str(d) for d in s["dash"])
         out.append((s["label"], colour(s, i), mark))
     return out
 
@@ -291,9 +294,10 @@ class Chart:
             ly = y + h - 8 - (len(rows) - 1 - r) * LEGEND_ROW
             lx = left
             for label, c, mark in row:
-                if mark == "line":
+                if mark == "line" or mark.startswith("dash:"):
+                    dash = f' stroke-dasharray="{mark[5:]}"' if mark.startswith("dash:") else ""
                     out.append(f'<line x1="{f1(lx)}" y1="{f1(ly - 4)}" x2="{f1(lx + 18)}" y2="{f1(ly - 4)}" '
-                               f'stroke="{c}" stroke-width="2.5"/>')
+                               f'stroke="{c}" stroke-width="2.5"{dash}/>')
                 elif mark == "dot":
                     out.append(f'<circle cx="{f1(lx + 9)}" cy="{f1(ly - 4)}" r="4" fill="{c}"/>')
                 else:

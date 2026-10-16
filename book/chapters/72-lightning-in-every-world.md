@@ -222,8 +222,8 @@ The pilot worlds that play the engine's game are in the figures too (each was
 played on from its checkpoints and recorded as a lab run is): B2's pilots flow
 as B2 does (0.046 on loops, 0.95 left after cancelling), B1's as B1 does (0.20,
 0.26). Measures of
-the same flow from other angles are in Chapter 71, *Flow modules: groups that
-outlast their members* (who trades with whom, and for how long), and in
+the same flow from other angles are in [Chapter 71](71-flow-modules.md), *Flow modules: the groups
+tokens stay in* (who trades with whom, and for how long), and in
 Chapter 75, *Meta VII · Where tokens go*, which gathers what the book knows
 about flow.
 
@@ -237,5 +237,5 @@ about flow.
 <!-- turns -->
 ---
 
-← [Chapter 70 · How different are the agents?](70-how-different-are-the-agents.md) · [Contents](../README.md) · [Chapter 41 · Do the brains matter?](41-do-the-brains-matter.md) →
+← [Chapter 71 · Flow modules: the groups tokens stay in](71-flow-modules.md) · [Contents](../README.md) · [Chapter 41 · Do the brains matter?](41-do-the-brains-matter.md) →
 <!-- /turns -->
