@@ -1,5 +1,6 @@
 """
-Batches T, U and V (2026-10-16): gifts in combination, and the switches in combination.
+Batches T, U, V and W (2026-10-16): gifts in combination, the switches in
+combination, and revolutions in combination.
 
 The author asked for gifts combined with every other mechanism, and for the
 existing settings tested in combination. Every world is a pilot in the engine's
@@ -25,10 +26,19 @@ V  the same design on B1, where revolutions matter (they take most of the nodes
    D no random inputs, E estates to the newborns, F brains change only when
    copied (B2's rule), G brains mixed at birth, H links hold a token.
 
+W  revolutions in combination on B2 (asked for the same day): B2 without
+   revolutions together with one other switch, seeds 1 and 2, each world again
+   the fourth corner of a two-by-two whose other three exist (B2, S1-norev, and
+   the switch's control). The other contests of batch S (lottery, sides pooled
+   by genotype, kin sense, family sense, family pools) were only ever run
+   without revolutions; for them the missing corner is the same rule *with*
+   revolutions, and that is what W makes. Gifts without revolutions are in T.
+
 The order of the queue (jobs_TUV.txt): every T combination with seed 1, then
 U, then V, then T's seed 2 — a first look at everything before the second seeds.
+jobs_W.txt: every W combination with seed 1, then seed 2 (a queue of its own).
 
-    python3 make_jobs_TU.py         writes jobs_T.txt, jobs_U.txt, jobs_V.txt and jobs_TUV.txt
+    python3 make_jobs_TU.py         writes jobs_T.txt, jobs_U.txt, jobs_V.txt, jobs_TUV.txt and jobs_W.txt
 """
 import itertools
 import os
@@ -68,6 +78,37 @@ T = [
     ("B1", B1, "", "", "S/S6-B1"),
     ("B1norev", B1, "allow_revolutions=false", "", "S/S7-B1norev"),
 ]
+#: W: switches combined with B2 without revolutions — name, extra settings, extra proto keys, control (with revolutions).
+W_NOREV = [
+    ("bytokens", "redistribution=by_tokens", "", "S/S5-bytokens"),
+    ("poorest", "redistribution=poorest", "", "R/B2-poorest"),
+    ("newborns", "redistribution=newborns", "", "R/B2-newborns"),
+    ("parents", "redistribution=parents", "", "R/B2-parents"),
+    ("linktoken", "valence=0", "link_token=true", "P/linktoken"),
+    ("mix", "", "mix=true", "Q/mix"),
+    ("helped", "", "helped_by=true", "P/helped"),
+    ("came", "", "came_from=true", "P/came"),
+    ("handover", "allow_handover=true", "", "T/handover"),
+    ("nodice", "random_input_amount=0", "", "lab B2-10000-bad270"),
+    ("noage", "max_age=0", "", "lab B2-10000-3ec24f"),
+    ("anychild", "min_child=1", "", "lab B2-10000-185eb7"),
+    ("keephalf", "keep_home=0.5", "", "lab B2-10000-df2615"),
+    ("keepone", "keep_home=0.01", "", "lab B2-10000-054b50"),
+    ("grow", "brain_kind=grow hidden_layers=32", "", "Q/grow"),
+    ("unittoken", "brain_kind=grow hidden_layers=32", "unit_token=true", "Q/unittoken"),
+    ("mut05", "mutation_probability=0.05", "", "lab B2-10000-bf74a9"),
+    ("mut80", "mutation_probability=0.8", "", "lab B2-10000-fe3009"),
+    ("lapse", "prune_needs=0", "", "S/S4-lapse"),
+]
+#: W: batch S's other contests, run before only without revolutions, now with them — name, proto keys, control.
+W_REV = [
+    ("lottery", "contest=lottery", "S/G1-lottery"),
+    ("pool", "pool=genotype", "S/G2-genotype"),
+    ("kinsense", "kin_sense=true", "S/G3-kinsense"),
+    ("familysense", "tag_rate=0.05 kin_sense=true", "S/G4-familysense"),
+    ("familypool", "tag_rate=0.05 pool=family", "S/G5-familypool"),
+]
+
 #: Worlds without gifts that no batch has made at 10,000 tokens: the controls they need.
 T_CONTROLS = [("handover", B2, "allow_handover=true", "")]
 
@@ -136,6 +177,16 @@ def main():
     open(os.path.join(HERE, "jobs_TUV.txt"), "w").write("# Batches T, U, V in queue order (make_jobs_TU.py).\n"
                                                         + "\n".join(queue) + "\n")
     print(f"jobs_T.txt: {len(t)} worlds; jobs_U.txt, jobs_V.txt: 16 each; jobs_TUV.txt: {len(queue)}")
+
+    lines = ["# Batch W: revolutions in combination on B2 (make_jobs_TU.py), seed 1 then 2."]
+    for seed in (1, 2):
+        for name, sets, proto, _ in W_NOREV:
+            lines.append(job(f"{OUT}/W/norev-{name}-s{seed}", B2, " ".join(x for x in ("allow_revolutions=false", sets) if x),
+                             proto, seed))
+        for name, proto, _ in W_REV:
+            lines.append(job(f"{OUT}/W/rev-{name}-s{seed}", B2, "", proto, seed))
+    open(os.path.join(HERE, "jobs_W.txt"), "w").write("\n".join(lines) + "\n")
+    print(f"jobs_W.txt: {len(lines) - 1} worlds")
 
 
 if __name__ == "__main__":
