@@ -86,6 +86,26 @@ otherwise. Last consolidated: 2026-10-16.
   for shuffled kinds), in B1 31% of their log tokens (16%). Niches or
   families: untested.
 
+## How alike the agents are, in every kind of world (Meta IX; 127 worlds more)
+
+- The same measure in three seeds of every lab condition (58 worlds) and both
+  seeds of every pilot condition (69). Two agents' stakes against two fresh
+  founders' (1 = as different as random brains): B1 and its variants 0.10–0.26;
+  B2's variants 0.88–1.07 (mutation rate, keep_home, min_child, size, birth
+  links, valence, handover), no mending 0.69.
+- Every unused link lapsing (prune_needs = 0) is enough to make B2's agents as
+  alike as B1's: 0.22 (lab, E14), 0.12–0.13 (pilots S3, S4); one or two kinds of
+  staking, nine agents in ten of the largest in six of seven worlds; and in six
+  of seven the agents spread their stake in 95–100% of cases (B2: at most 4%,
+  B1: 94–99%). B2's brains and B2's way of changing brains are kept, so the
+  likeness comes from the stake the link rule selects.
+- Costs make agents somewhat more alike: links that hold a token 0.66–0.72,
+  growing brains 0.67, units that hold a token 0.47.
+- Kinds of staking against the mutation rate (E09 at 1,500): 4.5, 22.8, 18.5,
+  16.0, 61.6 at 0.05, 0.1, 0.2, 0.4, 0.8; genotypes per agent 0.21 → 0.90.
+- Without old age, the agents are as different as random brains (1.06) because
+  most of them are the founders.
+
 ## Flow modules (Ch. 71; 183 worlds of every kind, 18 lab worlds in depth)
 
 - Tokens keep to groups (the map equation) in every world. B1-like worlds

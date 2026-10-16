@@ -354,7 +354,7 @@ python3 research/oee/checks/diversity.py --persist B2-10000-s001:1000 B2-10000-s
 
 Two checks come with it. A world without random inputs (Experiment 16's second
 condition) must give chance a share of exactly 0, and does. And a kind the rules
-make — the even split — must come out as one kind, and does. Chapter 77,
+make — the even split — must come out as one kind, and does. [Chapter 77](77-meta-9-how-alike.md),
 *Meta IX · How alike the agents are*, applies the measure to every condition of
 every experiment and to the pilot worlds.
 
