@@ -33,6 +33,9 @@ TABLE_TEXT = ("every simulation made so far, as `book/results/worlds.json` holds
 
 #: Settings that change how a world is kept, not what happens in it.
 BOOKKEEPING = {"extinction_threshold", "archive_every", "checkpoint_every"}
+#: Prototype switches the engine has since taken in as settings: a pilot run with
+#: one is the engine's world with that setting, draw for draw (equiv.py checks it).
+ENGINE_NOW = {"mix": {"mix_at_birth": True}}
 
 
 def _settings(cfg: Dict[str, Any]) -> Optional[str]:
@@ -69,9 +72,13 @@ def replicas() -> Dict[str, str]:
             if not os.path.exists(path):
                 continue
             meta = json.load(open(path))
-            if (meta.get("proto") or {}) != {"engine": True}:
+            proto, cfg = dict(meta.get("proto") or {}), dict(meta.get("cfg") or {})
+            for flag, settings in ENGINE_NOW.items():
+                if proto.pop(flag, False):
+                    cfg.update(settings)
+            if proto != {"engine": True}:
                 continue
-            key = _settings(meta.get("cfg") or {})
+            key = _settings(cfg)
             if key in lab:
                 out[f"{batch}/{name}"] = lab[key]
     return out

@@ -2896,6 +2896,44 @@ def test_a_contest_cannot_change_a_brain():
     assert {contestant.brains[u].brain_id for u in contestant.G.nodes()} <= ids
 
 
+def test_a_contest_counts_a_brain_mixed_at_birth_for_its_parents_era():
+    """
+    Where brains are mixed at birth, a newborn's brain is new even in a contest,
+    with a fresh id below LABEL_B; it is of its parent's era. Here every brain
+    is B's, so B must hold the whole world at the end, newborns and all.
+    """
+    import numpy as np
+    import gol_tournament as tour
+    cfg = small(seed=67, mix_at_birth=True, hidden_layers=[16])
+    world = new_world(cfg)
+    for _ in range(3):
+        world.step(record_decisions=False)
+    state = world.to_checkpoint()
+    real = tour.mixed
+
+    def every_brain_b(*args):
+        blob = real(*args)
+        blob["brain_ids"] = np.where(blob["brain_ids"] < tour.LABEL_B, blob["brain_ids"] + tour.LABEL_B,
+                                     blob["brain_ids"])
+        return blob
+
+    tour.mixed = every_brain_b
+    try:
+        out = tour.contest(cfg.to_dict(), state, state, state, 8, 3)
+    finally:
+        tour.mixed = real
+    assert out["agents"] > 0 and out["share"] == 1.0
+    # The same contest played again shows that it had mixed newborns to count.
+    replay = GraphOfLife.from_checkpoint(every_brain_b(state, state, state, cfg.message_amount,
+                                                       np.random.RandomState(3)),
+                                         dataclasses.replace(cfg, mutation_probability=0.0, extinction_threshold=0))
+    replay.rng = np.random.RandomState(4)
+    for _ in range(8):
+        replay.step(record_decisions=False)
+    assert any(replay.brains[u].brain_id < tour.LABEL_B for u in replay.G.nodes()), \
+        "no brain was mixed at birth: the contest above tested nothing"
+
+
 # ---------------------------------------------------------------------------
 # Strains: which algorithm a run is
 # ---------------------------------------------------------------------------

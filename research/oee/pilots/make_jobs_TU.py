@@ -56,12 +56,30 @@ K  links to strangers on B2 (asked for the same day, once the engine had them):
    seeds), and each search with random steering and mutual consent is the
    control of the other three of its kind.
 
+M  steadying mixed worlds (2026-10-16, after Experiment 17 found mixed worlds rich
+   but unsteady — they swing between a few hundred and two thousand agents, and
+   one died out): B2 with brains mixed at birth together with each rule of the
+   engine that might keep a world's size — the estate of the dead to the
+   newborns, to the parents or to the poorest, half kept at home, links to
+   strangers by a free reach or by a scout — and a slower change of brains;
+   seeds 1 and 2, 5,000 iterations. Their twins without the rule are Experiment
+   17's worlds of the same seeds (B2-10000-4af4a3-s001, s002).
+
+SW mixing switched at a moment (2026-10-16, after Experiment 17 found that a mixed
+   world is rich because its agents put off having children — the agents that
+   could have one have it about fourteen times less often than in B2): the five
+   worlds of Experiment 17 that met every mark, taken from the lab at iteration
+   5,000 and played on without mixing; and five of B2's own worlds (Experiment
+   16), taken at iteration 2,000 and played on with mixing; 2,000 iterations, a
+   whole world every 250. Their twins without the switch are the lab's own worlds
+   from the same moment: Experiment 17's runs, and B2's continuations L/B2-long.
+
 The order of the queue (jobs_TUV.txt): every T combination with seed 1, then
 U, then V, then T's seed 2 — a first look at everything before the second seeds.
 jobs_W.txt, jobs_X.txt and jobs_Y.txt: every combination with seed 1, then seed 2 (queues of their own).
 
     python3 make_jobs_TU.py         writes jobs_T.txt, jobs_U.txt, jobs_V.txt, jobs_TUV.txt, jobs_W.txt, jobs_X.txt,
-                                    jobs_Y.txt and jobs_K.txt
+                                    jobs_Y.txt, jobs_K.txt, jobs_M.txt and jobs_SW.txt
 """
 import itertools
 import os
@@ -242,6 +260,28 @@ def main():
             lines.append(job(f"{OUT}/K/{search}-{steering}-{consent}-s{seed}", B2, sets, "", seed))
     open(os.path.join(HERE, "jobs_K.txt"), "w").write("\n".join(lines) + "\n")
     print(f"jobs_K.txt: {len(lines) - 1} worlds")
+
+    lines = ["# Batch M: steadying mixed worlds on B2 (make_jobs_TU.py), seeds 1 and 2, 5,000 iterations."]
+    steadying = [("newborns", "redistribution=newborns"), ("parents", "redistribution=parents"),
+                 ("poorest", "redistribution=poorest"), ("keephalf", "keep_home=0.5"),
+                 ("reach", "link_search=reach link_consent=forced"), ("walk", "link_search=walk"),
+                 ("mut05", "mutation_probability=0.05")]
+    for seed in (1, 2):
+        for name, sets in steadying:
+            lines.append(job(f"{OUT}/M/mix-{name}-s{seed}", B2, f"mix_at_birth=true {sets}", "", seed)
+                         .replace("--iters 1000", "--iters 5000").replace("--ckpt 100", "--ckpt 500"))
+    open(os.path.join(HERE, "jobs_M.txt"), "w").write("\n".join(lines) + "\n")
+    print(f"jobs_M.txt: {len(lines) - 1} worlds")
+
+    lines = ["# Batch SW: mixing switched off in five worlds of Experiment 17 at 5,000, on in five of B2's at 2,000 "
+             "(make_jobs_TU.py)."]
+    switches = ([(f"B2-10000-4af4a3-s{s:03d}", 5000, "false", f"mixoff-s{s:03d}") for s in (2, 4, 5, 6, 10)]
+                + [(f"B2-10000-s{s:03d}", 2000, "true", f"mixon-s{s:03d}") for s in (1, 2, 3, 4, 5)])
+    for run, at, mix, name in switches:
+        lines.append(f"python3 run.py {OUT}/SW/{name} --from {run}:{at} --copy-eras {at} --iters 2000 --ckpt 250 "
+                     f"--health 50 --set mix_at_birth={mix} --proto engine=true")
+    open(os.path.join(HERE, "jobs_SW.txt"), "w").write("\n".join(lines) + "\n")
+    print(f"jobs_SW.txt: {len(lines) - 1} worlds")
 
 
 if __name__ == "__main__":

@@ -123,6 +123,7 @@ everything can be checked with it.
 **Part VII · The long run**
 
 - [Chapter 69 · A hundred thousand iterations](chapters/69-a-hundred-thousand-iterations.md)
+- [Chapter 81 · Five mixed worlds, fifty thousand iterations](chapters/81-five-mixed-worlds-fifty-thousand-iterations.md)
 
 **Part VIII · Across all worlds**
 

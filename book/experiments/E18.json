@@ -1,0 +1,59 @@
+{
+  "id": "E18",
+  "title": "Five mixed worlds, fifty thousand iterations",
+  "thesis": {
+    "claim": "Over a long life, a world whose brains are mixed at birth stays mostly healthy and rich. The five worlds of Experiment 17 that met every mark of the health bar at iteration 10,000, played on to 50,000, meet every mark at half or more of the moments they are kept whole, and at 50,000 at most one of them has half its agents or more holding three tokens or fewer.",
+    "why": "Over Experiment 17's 10,000 iterations, these five worlds met every mark at 66 of the 100 moments they were kept whole (every 500 iterations from 500 on): 16, 17, 6, 11 and 16 of 20 each. A world that met every mark still did 500 iterations later four times in five (95 of 120 times, in all ten worlds), and one that missed a mark met them all again a third of the time (21 of 60): health comes back. At iteration 10,000 four of the five had fewer than half their agents at three tokens or fewer (6%, 20%, 42%, 15%) and one had 63%, where B2's worlds have 66% to 79% at every moment. But a mixed world's size drifts, and its health and its riches follow its size: worlds of 600 to 1,000 agents met every mark at 98% of their moments, worlds below 300 at 4% (their best-connected agent is joined to more than 5% of the others), worlds above 1,500 at 35% to 60% (their dimension rises above 4). And with 10,000 tokens, a world of 2,000 agents is a poor one. In ten worlds one shrank below 20 agents and died out, at iteration 5,376; two others fell below a hundred agents, to 40 and to 91, and came back. Forty thousand iterations more is time for every one of the five to drift through those sizes.",
+    "confirm": "From iteration 10,500 to 50,000, each world read every 500 iterations from its archive as research/atlas/profile.py reads every world (Meta X): at half or more of the five worlds' 400 moments together, a world meets all seven marks of Chapter 46's health bar (a world that has died out misses them at every moment after); and at iteration 50,000, at most one of the five worlds has died out or has half its agents or more holding three tokens or fewer.",
+    "refute": "Fewer than half the moments meet every mark, or two or more of the five worlds dead or with half their agents or more at three tokens or fewer at 50,000: the health and the riches of a mixed world do not last."
+  },
+  "runs": {
+    "baseline": "B2",
+    "world": {
+      "total_tokens": 10000
+    },
+    "seeds": "2,4,5,6,10",
+    "iterations": 50000,
+    "record": {
+      "heavy_every": 25,
+      "archive_every": 500
+    },
+    "conditions": [
+      {
+        "name": "mixed at birth",
+        "set": {
+          "mix_at_birth": true
+        }
+      }
+    ]
+  },
+  "analyse": {
+    "kind": "series",
+    "settledFrom": 10000,
+    "figures": [
+      {
+        "name": "agents",
+        "stat": "nodes",
+        "phase": 2,
+        "title": "Agents alive",
+        "y": "agents"
+      },
+      {
+        "name": "median",
+        "stat": "medianTokens",
+        "phase": 2,
+        "title": "The median agent's tokens",
+        "y": "tokens",
+        "min": 0
+      },
+      {
+        "name": "births",
+        "stat": "births/nodes_before",
+        "phase": 1,
+        "title": "Births per agent in a reproduction phase",
+        "y": "births per agent",
+        "min": 0
+      }
+    ]
+  }
+}

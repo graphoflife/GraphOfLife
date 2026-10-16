@@ -1,0 +1,156 @@
+# Five mixed worlds, fifty thousand iterations
+
+> [!question] Questions of this chapter
+> - A world whose brains are mixed at birth was healthy and rich for 10,000
+>   iterations. Is that a state it keeps, or one it passes through?
+> - What does such a world do over 50,000 iterations: does its size keep
+>   drifting, does it die out, does it end up as poor as B2?
+
+<!-- experiment E18 -->
+
+## Why ask
+
+The author's picture of a world that might keep evolving is a decentralised,
+resilient, nearly three-dimensional network of agents that differ in almost
+every way ([Meta X](79-meta-10-healthy-and-rich.md)). Whatever else such a
+world does, it has to *last*: a world that meets the picture for 10,000
+iterations and then shrinks to nothing, or fills up with agents holding a
+token each, is not a world that keeps evolving. The author asked for the most
+promising settings to be run for a long time, and this is that run.
+
+[Chapter 80](80-mixed-at-birth-ten-long-worlds.md) ran B2 with brains mixed at
+birth in ten worlds for 10,000 iterations. It found three things that make
+the question open:
+
+- **The worlds are rich because their agents put off having children.** An
+  agent that could have a child has one about fourteen times less often than
+  in B2, so the world never fills up to the point where almost nobody can
+  afford a child, as B2's does.
+- **Their size drifts, and their health and riches follow it.** With 10,000
+  tokens, a world of 2,000 agents is a poor one, and its network's dimension
+  rises above the bar's 4; a world below 300 agents has a best-connected agent
+  joined to more than 5% of the others. Worlds of 600 to 1,000 agents met
+  every mark of the health bar at 98% of the moments they were kept whole.
+- **One world in ten died out**, at iteration 5,376, after shrinking for
+  nearly three thousand iterations from 1,424 agents; two others fell below a
+  hundred agents — to 40 and to 91 — and came back.
+
+So whether a mixed world stays healthy and rich depends on where its drift
+takes it. Ten thousand iterations showed each world wandering through a
+range of sizes. Fifty thousand will show whether that range has edges.
+
+## The experiment
+
+Experiment 18 takes the five worlds of Experiment 17 that met every mark of
+the health bar at iteration 10,000 — seeds 2, 4, 5, 6 and 10 — and plays them
+on to iteration 50,000. They are the same runs: the lab goes on from each
+one's checkpoint at 10,000 with the engine that made it, and records as
+before, the graph statistics every 25 iterations and a whole world every 500.
+Nothing is changed, so the first 10,000 iterations are Chapter 80's.
+
+When the plan was written (16 October 2026), the five worlds stood like this
+at iteration 10,000:
+
+| world | agents | median tokens | 3 tokens or fewer | moments with every mark, of 20 (500 to 10,000) | its fewest and most agents, 500 to 10,000 |
+|---|---|---|---|---|---|
+| seed 2 | 744 | 11 | 6% | 16 | 337–1,437 |
+| seed 4 | 628 | 11 | 20% | 17 | 337–1,371 |
+| seed 5 | 2,257 | 2 | 63% | 6 | 1,032–2,257 |
+| seed 6 | 1,302 | 4 | 42% | 11 | 188–1,688 |
+| seed 10 | 618 | 10 | 15% | 16 | 296–1,649 |
+
+The worlds are read as [Meta X](79-meta-10-healthy-and-rich.md) reads every
+world, every 500 iterations, from the whole worlds the lab keeps. A run
+records every game, so the five runs will take about 16 GB more disk; on the
+lab's four workers, the panel's estimate says how long.
+
+## The thesis
+
+<!-- thesis E18 -->
+> [!quote] The thesis of Experiment 18, written down before any of its runs existed
+> **The claim.** Over a long life, a world whose brains are mixed at birth stays mostly healthy and rich. The five worlds of Experiment 17 that met every mark of the health bar at iteration 10,000, played on to 50,000, meet every mark at half or more of the moments they are kept whole, and at 50,000 at most one of them has half its agents or more holding three tokens or fewer.
+>
+> **Why it would be so.** Over Experiment 17's 10,000 iterations, these five worlds met every mark at 66 of the 100 moments they were kept whole (every 500 iterations from 500 on): 16, 17, 6, 11 and 16 of 20 each. A world that met every mark still did 500 iterations later four times in five (95 of 120 times, in all ten worlds), and one that missed a mark met them all again a third of the time (21 of 60): health comes back. At iteration 10,000 four of the five had fewer than half their agents at three tokens or fewer (6%, 20%, 42%, 15%) and one had 63%, where B2's worlds have 66% to 79% at every moment. But a mixed world's size drifts, and its health and its riches follow its size: worlds of 600 to 1,000 agents met every mark at 98% of their moments, worlds below 300 at 4% (their best-connected agent is joined to more than 5% of the others), worlds above 1,500 at 35% to 60% (their dimension rises above 4). And with 10,000 tokens, a world of 2,000 agents is a poor one. In ten worlds one shrank below 20 agents and died out, at iteration 5,376; two others fell below a hundred agents, to 40 and to 91, and came back. Forty thousand iterations more is time for every one of the five to drift through those sizes.
+>
+> **It holds if:** From iteration 10,500 to 50,000, each world read every 500 iterations from its archive as research/atlas/profile.py reads every world (Meta X): at half or more of the five worlds' 400 moments together, a world meets all seven marks of Chapter 46's health bar (a world that has died out misses them at every moment after); and at iteration 50,000, at most one of the five worlds has died out or has half its agents or more holding three tokens or fewer.
+>
+> **It fails if:** Fewer than half the moments meet every mark, or two or more of the five worlds dead or with half their agents or more at three tokens or fewer at 50,000: the health and the riches of a mixed world do not last.
+<!-- /thesis -->
+
+## The runs
+
+<!-- runs E18 -->
+> [!info] The runs behind this chapter
+> **5 runs.** Every condition below is run once for every seed (2, 4, 5, 6, 10), for 50,000 iterations — or until its world dies out. Every setting is that of the baseline **B2** (a world that cannot break) unless the condition changes it.
+>
+> - **mixed at birth** — changes `mix_at_birth` = on; 10,000 tokens. Runs `B2-10000-4af4a3-s002` … `B2-10000-4af4a3-s010`.
+>
+> To make these runs again: `python3 gol_lab.py run E18`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+
+> [!info]- Every setting of these runs
+> | setting | mixed at birth | what it is |
+> |---|---|---|
+> | [`total_tokens`](../notes/settings.md#total_tokens) | 10,000 | The number of tokens in the world, *T*. It never changes during a run. |
+> | [`n_nodes`](../notes/settings.md#n_nodes) | 0 | How many founders the world starts with. 0 means one founder per hundred tokens: *n* = ⌊*T* / 100⌋. |
+> | [`k_neighbors`](../notes/settings.md#k_neighbors) | 0 | How many neighbours each founder starts with in the ring. 0 means *k* = max(⌊*n* / 100⌋, 5); an odd *k* is wired as *k* − 1. |
+> | [`rewire_p`](../notes/settings.md#rewire_p) | 0.2 | In the starting ring, the probability that a connection is moved to a founder chosen at random (Watts–Strogatz). |
+> | [`hidden_layers`](../notes/settings.md#hidden_layers) | 16 | The widths of the brain's hidden layers, in order from input to output. |
+> | [`brain_kind`](../notes/settings.md#brain_kind) | float16 | How weights are stored: `float` (64-bit), `float16` (16-bit, computed in 64-bit) or `binary` (−1, 0, +1). |
+> | [`brain_bits`](../notes/settings.md#brain_bits) | 16 | Only for binary brains: how many input rows encode one number. Unused by float and float16 brains. |
+> | [`message_amount`](../notes/settings.md#message_amount) | 8 | How many numbers one message holds. Each agent sends one message to itself and one to each neighbour, every phase. |
+> | [`random_input_amount`](../notes/settings.md#random_input_amount) | 5 | How many random numbers, drawn uniformly from −2 to 2, a brain reads per neighbour, every time it looks. |
+> | [`exchange_messages`](../notes/settings.md#exchange_messages) | on | Whether agents send and read messages at all. |
+> | [`message_prepass`](../notes/settings.md#message_prepass) | off | Whether every phase begins with an extra look in which agents only write messages, so the look that acts reads messages written this phase. |
+> | [`allow_handover`](../notes/settings.md#allow_handover) | off | Whether a parent may move some of its own connections to its newborn child. |
+> | [`allow_revolutions`](../notes/settings.md#allow_revolutions) | on | Whether a coalition of smaller stakers can take a node from its largest staker (see the note *How a coalition takes a node*). |
+> | [`allow_gifting`](../notes/settings.md#allow_gifting) | off | Whether agents may give tokens to neighbours during reproduction. Off in every run of this book. |
+> | [`random_decisions`](../notes/settings.md#random_decisions) | off | The control: every number a brain would produce is replaced by a random draw from the standard normal distribution. |
+> | [`prune_after`](../notes/settings.md#prune_after) | blotto | After which phase connections that carried no tokens are cut: `blotto` (the game), `reproduction`, or `both`. |
+> | [`inactive_window`](../notes/settings.md#inactive_window) | phase | How long a connection may go unused: `phase` means it must carry tokens in the phase being judged; `iteration` allows the two last phases. |
+> | [`redistribution`](../notes/settings.md#redistribution) | uniform | How the tokens of removed agents are shared: `uniform` gives every survivor the same chance at each token; `by_tokens` weights by what a survivor holds; `poorest` raises the poorest to one common level first; `newborns` gives them to this iteration's children, `parents` to their parents, once per child (both `uniform` in an iteration without births). |
+> | [`tokens_created_per_phase`](../notes/settings.md#tokens_created_per_phase) | 0 | Tokens added to the world at every cleanup. 0 keeps the supply fixed. |
+> | [`mutate_on_replication`](../notes/settings.md#mutate_on_replication) | on | Whether a brain changes only when it is copied — into a newborn, or into a node its owner has just won — instead of also after every game, wherever it sits. |
+> | [`incumbency`](../notes/settings.md#incumbency) | 1.5 | How many times over an agent's stake on its own node counts when the game decides who takes the node. 1 is the old rule. |
+> | [`birth_links`](../notes/settings.md#birth_links) | 2 | How many of its parent's neighbours a newborn is joined to, drawn at random, besides its parent itself; 0 leaves every link to the brain's choice. |
+> | [`mend_on_death`](../notes/settings.md#mend_on_death) | on | Whether the neighbours of an agent that dies are joined up where its death would leave them in separate pieces. |
+> | [`prune_needs`](../notes/settings.md#prune_needs) | 2 | How many neighbours the two ends of an unused connection must share for it to be cut; 0 cuts every unused connection. |
+> | [`valence`](../notes/settings.md#valence) | 8 | The most connections an agent's brain may choose to hold (0 = no limit). An agent at its limit cannot have a child. |
+> | [`keep_home`](../notes/settings.md#keep_home) | 0.3 | The share of an agent's tokens — rounded up, never less than one — that stays on its own node whatever its brain says; a parent also keeps one. 0 is the old rule. |
+> | [`max_age`](../notes/settings.md#max_age) | 100 | The age at which an agent dies (0 = never); its tokens are shared out like those of any other dead agent. |
+> | [`min_child`](../notes/settings.md#min_child) | 10 | The fewest tokens a child can be born with; a parent that would give less has no child. |
+> | [`mix_at_birth`](../notes/settings.md#mix_at_birth) | **on** | Whether a newborn's brain is its parent's mixed with a mate's — one of the parent's neighbours, drawn at random — each hidden unit whole from one or the other by an even chance, before it mutates; off, a newborn has a copy of its parent's brain. |
+> | [`link_search`](../notes/settings.md#link_search) | off | Whether an agent may reach beyond its neighbours to propose a link: off; jump, a walk as many steps long as the tokens it spends in one iteration, with a link proposed where it ends; walk, a scout that goes one step further in every iteration it pays for; or reach, a jump whose steps are free, as many as the tokens it holds would pay for. A paid step costs one token, paid to the agent it enters, and never the last. |
+> | [`link_steering`](../notes/settings.md#link_steering) | random | Which way each step of a search goes: to a neighbour drawn at random, or to the one the searcher would most like a link with (looking). |
+> | [`link_consent`](../notes/settings.md#link_consent) | mutual | Who has to agree to a link a search proposes: both ends (mutual), or only the one who proposes (forced). Nobody at its valence gets a new link either way. |
+> | [`mutation_probability`](../notes/settings.md#mutation_probability) | 0.2 | The probability that a brain changes when it is copied to a child, and again, for every brain, after every game. |
+> | [`mutation_noise_std`](../notes/settings.md#mutation_noise_std) | 0.2 | How large a change to one weight is: a normal draw with standard deviation this times 1/√(fan-in) of its layer. |
+> | [`mutation_sparsity`](../notes/settings.md#mutation_sparsity) | 0.1 | The share of a brain's numbers a change touches; also the probability, for each weight matrix and bias vector, of a rarer reset that redraws that share of it. |
+> | [`extinction_threshold`](../notes/settings.md#extinction_threshold) | 20 | A run stops, as extinct, when an iteration ends (after its game) with this many agents or fewer. |
+> | seeds | 2, 4, 5, 6, 10 | one run per seed |
+> | iterations | 50,000 | how far each run goes, unless its world dies first |
+>
+> A value in **bold** differs from the baseline B2.
+<!-- /runs -->
+
+## What else will be read
+
+- **Does evolution go on?** The brains of 25,000 against those of 10,000, and
+  of 50,000 against those of 25,000, over an agent's lifetime, as
+  [Chapter 80](80-mixed-at-birth-ten-long-worlds.md#does-evolution-go-on) did
+  for the first 10,000 iterations.
+- **How eagerly the able breed** ([Chapter 80](80-mixed-at-birth-ten-long-worlds.md#why-a-mixed-world-is-rich)):
+  does it keep drifting, or settle?
+- **Where a world's drift goes:** the sizes each world passes through, how
+  long it stays in each, and whether a world that falls small comes back.
+
+**Related notes:** [Chapter 80 · Mixed at birth: ten long worlds](80-mixed-at-birth-ten-long-worlds.md) ·
+[Chapter 46 · How to tell a world that keeps evolving](46-how-to-tell-a-world-that-keeps-evolving.md) ·
+[Meta X · Healthy and rich](79-meta-10-healthy-and-rich.md) ·
+[Chapter 69 · A hundred thousand iterations](69-a-hundred-thousand-iterations.md) ·
+[Every setting](../notes/settings.md#mix_at_birth)
+
+<!-- turns -->
+---
+
+← [Chapter 69 · A hundred thousand iterations](69-a-hundred-thousand-iterations.md) · [Contents](../README.md) · [Chapter 74 · Meta VI · Every world side by side](74-meta-6-every-world.md) →
+<!-- /turns -->

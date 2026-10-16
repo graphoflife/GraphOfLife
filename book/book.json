@@ -472,6 +472,14 @@
           "file": "chapters/69-a-hundred-thousand-iterations.md",
           "experiment": "E11",
           "status": "draft"
+        },
+        {
+          "id": "81",
+          "title": "Five mixed worlds, fifty thousand iterations",
+          "note": "The five worlds of Experiment 17 that met every mark of the health bar, played on to 50,000 iterations: is a mixed world's health and riches a state it keeps, or one its drifting size passes through?",
+          "file": "chapters/81-five-mixed-worlds-fifty-thousand-iterations.md",
+          "experiment": "E18",
+          "status": "ready"
         }
       ]
     },

@@ -118,8 +118,8 @@ def main():
     ap.add_argument("--set", nargs="*", default=[])
     ap.add_argument("--proto", nargs="*", default=[])
     ap.add_argument("--from", dest="start", default="",
-                    help="RUN:ITERATION: go on from a lab run's archive instead of new founders "
-                         "(its own settings; --set is ignored)")
+                    help="RUN:ITERATION: go on from a lab run's archive instead of new founders, with "
+                         "its own settings and any --set on top (a rule switched at that moment)")
     ap.add_argument("--copy-eras", default="",
                     help="with --from: copy these archived iterations of the lab run in as checkpoints")
     ap.add_argument("--resume", default="",
@@ -150,7 +150,7 @@ def main():
         import gol_store as store
         from proto import ProtoConfig, ProtoWorld
         run, at = a.start.rsplit(":", 1)
-        cfg = ProtoConfig.from_dict(store.load_meta(run)["config"])
+        cfg = ProtoConfig.from_dict({**store.load_meta(run)["config"], **overrides})
         cfg.extinction_threshold = 0
         world = ProtoWorld.from_checkpoint(store.load_archive(run, int(at)), cfg)
         for era in [int(e) for e in a.copy_eras.split(",") if e]:

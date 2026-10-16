@@ -16,9 +16,11 @@ tokens, its ages — is given brains drawn from two eras, A and B: every agent
 tosses a coin and gets a brain drawn at random from A's agents or from B's.
 Messages in flight are cleared, so neither side is primed. The world then
 plays `T` iterations under its own rules, but with every mutation switched
-off, so no brain can change and every copy keeps its era's label. The score of
-B is the share of agents carrying a B brain at the end: 0.5 is a tie, above it
-B spreads better than A.
+off, so no brain can change and every copy keeps its era's label. (In a world
+whose brains are mixed at birth, a newborn's brain is new all the same, part
+its parent's and part a neighbour's; it counts for its parent's era.) The
+score of B is the share of agents carrying a B brain at the end: 0.5 is a tie,
+above it B spreads better than A.
 
 **A tournament** plays every pair of eras, on both eras' worlds (an era plays
 at home once and away once), with a few coins each. **Ratings** read the
@@ -81,6 +83,19 @@ def contest(config: Dict[str, Any], state: Dict[str, np.ndarray], A: Dict[str, n
     rng = np.random.RandomState(seed)
     world = GraphOfLife.from_checkpoint(mixed(state, A, B, cfg.message_amount, rng), cfg)
     world.rng = np.random.RandomState(seed + 1)
+    # A brain mixed at birth (mix_at_birth) is new even without mutation, and draws
+    # a fresh id, below LABEL_B whatever its side: it is of its parent's side, so
+    # that is noted as it is made. The world plays exactly as it would without.
+    side: Dict[int, bool] = {}
+    mix = world._mixed_brain
+
+    def mixed_brain(brain, mate):
+        child = mix(brain, mate)
+        if child.brain_id != brain.brain_id:
+            side[child.brain_id] = side.get(brain.brain_id, brain.brain_id >= LABEL_B)
+        return child
+
+    world._mixed_brain = mixed_brain
     for _ in range(T):
         world.step(record_decisions=False)
         if world.G.number_of_nodes() == 0:
@@ -88,7 +103,7 @@ def contest(config: Dict[str, Any], state: Dict[str, np.ndarray], A: Dict[str, n
     ids = list(world.G.nodes())
     if not ids:
         return {"share": None, "tokens": None, "agents": 0}
-    is_b = np.array([world.brains[u].brain_id >= LABEL_B for u in ids])
+    is_b = np.array([side.get(b, b >= LABEL_B) for b in (world.brains[u].brain_id for u in ids)])
     held = np.array([world.tokens[u] for u in ids], dtype=float)
     return {"share": float(is_b.mean()),
             "tokens": float(held[is_b].sum() / max(1.0, held.sum())),
