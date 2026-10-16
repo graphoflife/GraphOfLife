@@ -221,6 +221,11 @@ mutation probability per copy 0.05/0.1/0.2/0.4/0.8, 10 seeds each, to 1,500)**
   Gini ~0.5 throughout. Probes: no rate keeps brains less deaf.
 - No mutation–selection balance or error threshold in play up to 0.8. More
   variation, or larger families, do not find the better play of Ch. 51.
+- Re-judged a lifetime long (T = 100, 2026-10-16, five seeds a rate): 1,000
+  beats 500 in every world at every rate (medians 0.74, 0.67, 0.68 at B2's 0.2,
+  0.67, 0.64); 1,500 beats 1,000 everywhere, less the faster brains change
+  (0.70, 0.65, 0.62, 0.56, 0.59). Evolution stops at no rate; the slowest
+  keeps the largest late steps. Added to Ch. 52's note.
 
 **The yardstick was too short (2026-10-15, evening; the author's question)**
 - Contests of 20 iterations miss what pays over a lifetime (B2: everyone dies at

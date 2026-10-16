@@ -255,7 +255,17 @@ any single seed was 0.57.
 > 500 (0.73) where in contests of 20 they tied
 > ([Chapter 50](50-why-evolution-stops.md#would-we-notice-if-it-went-on)). Where
 > this chapter says that evolution stops, read: it stops *as far as a short
-> contest can see*. The longer contests are being played now.
+> contest can see*.
+>
+> Played a lifetime long (T = 100, once in each era's world; five seeds of each
+> rate, `research/oee/checks/lab_rejudge_worlds.txt`), the brains of iteration
+> 1,000 beat those of 500 in every world at every rate: 0.74 at a chance of
+> change of 0.05, 0.67 at 0.1, 0.68 at B2's own 0.2 (ten worlds), 0.67 at 0.4
+> and 0.64 at 0.8 (the medians). From 1,000 to 1,500 they still won in every
+> world, by less — and by less the faster brains change: 0.70, 0.65, 0.62, 0.56
+> and 0.59. So evolution does not stop at any rate, and the rate does not decide
+> whether it goes on; but the slowest change keeps the largest late steps, the
+> opposite of what more variation to choose from would give.
 
 The thesis holds on both counts. For all ten pairs of rates the median
 seed's score lay between 0.45 and 0.55 (0.49 to 0.52), and in all five
