@@ -3,7 +3,7 @@
  * Flow modules of a window of frames, worked out by the page's own arithmetic.
  *
  *     node tools/flowmodules_cli.js [--floor 0.3] [--mutual] [--null SEED] [--shuffle SEED]
- *                                   [--partitions FILE] < frames.jsonl
+ *                                   [--partitions FILE] [--outlast] < frames.jsonl
  *
  * Reads one frame per line — iteration, phase, ids and decisions.allocations,
  * the fields the Research tab's Flow modules view reads — follows the modules
@@ -25,6 +25,10 @@
  * `--partitions FILE` also writes every frame's modules, one line a frame
  * ({iteration, ids, module}: the module of each agent, -1 for none), for
  * measures that need the whole partition.
+ * `--outlast` adds, for the modules followed at least 5, 10, 20 and 40
+ * frames, how many there were, the share of them none of whose first members
+ * was still a member at its last frame, and the mean share of first members
+ * still there: whether a module outlasts the agents it began with.
  *
  * There is one implementation of the modules, the page's; this only loads it
  * the way tests/test_flowmodules.js does and hands it frames.
@@ -46,6 +50,7 @@ const mutual = !!option('--mutual', false);
 const nullSeed = option('--null', null);
 const shuffleSeed = option('--shuffle', null);
 const partitionsFile = option('--partitions', null);
+const outlast = !!option('--outlast', false);
 
 /** A seeded stream (mulberry32), so a null is the same null every time. */
 function stream(seed) {
@@ -115,7 +120,7 @@ if (nullSeed !== null) {
   frames = frames.map(frame => rewired(frame, random));
 }
 if (shuffleSeed !== null) shuffleModules(stream(Number(shuffleSeed)));
-const { history, withoutFlow } = FlowModules.follow(frames, { floor, mutual });
+const { history, withoutFlow } = FlowModules.follow(frames, { floor, mutual, keepMembers: outlast });
 const perFrame = new Map();
 for (const row of history) perFrame.set(row.iteration * 2 + row.phase, row.modules);
 // How many games each module lived, and how many agents it had, as counts.
@@ -135,6 +140,30 @@ if (partitionsFile !== null) {
   }
   fs.writeFileSync(partitionsFile, rows.join('\n') + '\n');
 }
+/** For modules followed at least so many frames: how many, how many lost every first member, how many stayed. */
+function outlasting(rows) {
+  const first = new Map(), last = new Map(), life = new Map();
+  for (const row of rows) {
+    if (!first.has(row.id)) first.set(row.id, new Set(row.members));
+    last.set(row.id, row.members);
+    life.set(row.id, (life.get(row.id) || 0) + 1);
+  }
+  const out = {};
+  for (const atLeast of [5, 10, 20, 40]) {
+    let modules = 0, renewed = 0, stayed = 0;
+    for (const [id, games] of life) {
+      if (games < atLeast) continue;
+      const began = first.get(id);
+      const still = last.get(id).filter(agent => began.has(agent)).length;
+      modules++;
+      if (still === 0) renewed++;
+      stayed += still / began.size;
+    }
+    out[atLeast] = { modules, renewed: modules ? renewed / modules : null, stayed: modules ? stayed / modules : null };
+  }
+  return out;
+}
+
 process.stdout.write(JSON.stringify({
   frames: frames.length,
   withoutFlow,
@@ -142,6 +171,7 @@ process.stdout.write(JSON.stringify({
   mutual,
   null: nullSeed !== null,
   shuffled: shuffleSeed !== null,
+  ...(outlast ? { outlast: outlasting(history) } : {}),
   modulesPerFrame: [...perFrame.values()],
   agentsPerFrame: frames.filter(f => (f.decisions || {}).allocations?.length).map(f => (f.ids || []).length),
   lives: lifeCounts,

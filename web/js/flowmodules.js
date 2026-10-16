@@ -365,8 +365,11 @@ const FlowModules = {
    * Births and deaths are read off the agent ids themselves — an id that was
    * not alive last frame was born, one that is gone has died — so this needs
    * nothing beyond what a frame always carries.
+   *
+   * `keepMembers` puts each module's members into its row, for measures of
+   * who stayed; the view does not need them and leaves them out.
    */
-  follow(frames, { floor = 0.3, mutual = false } = {}) {
+  follow(frames, { floor = 0.3, mutual = false, keepMembers = false } = {}) {
     const history = [];
     let previous = new Map();
     let alivePrev = null;
@@ -415,7 +418,8 @@ const FlowModules = {
           isNew: !match,
           codeLength: found.codeLength,
           baseline: found.baseline,
-          modules: found.modules
+          modules: found.modules,
+          ...(keepMembers ? { members: [...members] } : {})
         });
         now.set(id, members);
       }

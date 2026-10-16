@@ -91,4 +91,37 @@ function test_partitions_name_every_agents_module_in_every_frame() {
   }
 }
 
+function test_a_module_that_keeps_its_members_has_not_outlasted_them() {
+  const result = run(steadyGroups(), ['--outlast']);
+  const five = result.outlast['5'];
+  if (five.modules !== 4 || five.renewed !== 0 || five.stayed !== 1) {
+    throw new Error(`steady groups keep every first member: ${JSON.stringify(five)}`);
+  }
+}
+
+function test_a_module_whose_members_are_replaced_one_by_one_outlasts_them() {
+  // One group of six; each game its oldest member is gone and a newcomer joins.
+  // After six games none of the first six is left, and the group goes on.
+  const frames = [];
+  for (let t = 0; t < 8; t++) {
+    const members = Array.from({ length: 6 }, (_, i) => 100 + t + i);
+    const allocations = members.map(agent => {
+      const targets = members.filter(other => other !== agent);
+      return { agent, targets, alloc: targets.map(() => 1) };
+    });
+    frames.push({ iteration: 1000 + t, phase: 2, ids: members, decisions: { allocations } });
+  }
+  const result = run(frames, ['--outlast']);
+  if (result.lives['8'] !== 1) throw new Error(`the group should be followed all eight games: ${JSON.stringify(result.lives)}`);
+  const five = result.outlast['5'];
+  if (five.modules !== 1 || five.renewed !== 1 || five.stayed !== 0) {
+    throw new Error(`the group outlasted all its first members: ${JSON.stringify(five)}`);
+  }
+}
+
+function test_measures_are_only_added_when_asked_for() {
+  const result = run(steadyGroups(), []);
+  if ('outlast' in result) throw new Error('without --outlast the answer must be what it always was');
+}
+
 require('./harness').run(__filename, name => eval(name));

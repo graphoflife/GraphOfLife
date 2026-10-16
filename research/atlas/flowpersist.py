@@ -9,11 +9,17 @@ keeps the modules' sizes and deals their agents at random:
   them (best overlap first, above its floor of 0.3), against the same frames'
   modules with their agents shuffled (`--shuffle`): the share of modules
   followed for at least 2, 5, 10, 20 and 40 games.
-- **Likeness.** No following at all: how much one game's partition says about
-  another's, `lag` games later, as normalised mutual information over the
-  agents in both, against the same with the later partition's agents dealt at
-  random among modules of its sizes. Its chance level is not zero when modules
-  are small, which is why the null is measured rather than assumed.
+- **Together.** No following at all: of two agents in one module, the share
+  still in one module `lag` games later (over the pairs whose agents are both
+  in a module then), against the same with the later game's agents dealt at
+  random among modules of its sizes — the share chance alone keeps together.
+- **Likeness.** The same without pairs: how much one game's partition says
+  about another's, as normalised mutual information over the agents in both,
+  against the same null. When nearly every module is a pair it is close to 1
+  for any two partitions (the null too), so it is kept for large modules only.
+
+Each world's partitions and the command line's answers are kept, so a new
+measure needs no new partition.
 
     python3 research/atlas/flowpersist.py [RUN ...]
 
@@ -21,9 +27,11 @@ Writes GraphOfLifeRuns/.pilots/atlas/flowpersist/<run>.json.
 """
 from __future__ import annotations
 
+import gzip
 import json
 import os
 import re
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -93,20 +101,54 @@ def nmi(a: np.ndarray, b: np.ndarray) -> float:
     return 2.0 * (ha + hb - hab) / (ha + hb) if ha + hb > 0 else 1.0
 
 
+def _shared(a: Dict[str, Any], b: Dict[str, Any]) -> Tuple[np.ndarray, np.ndarray]:
+    """The modules of the agents in a module in both games: in the first, and in the second."""
+    where_b = {agent: i for i, agent in enumerate(b["ids"])}
+    pairs = [(la, b["module"][where_b[agent]]) for agent, la in zip(a["ids"], a["module"])
+             if la >= 0 and agent in where_b and b["module"][where_b[agent]] >= 0]
+    return np.array([p[0] for p in pairs], dtype=np.int64), np.array([p[1] for p in pairs], dtype=np.int64)
+
+
+def kept_together(la: np.ndarray, lb: np.ndarray) -> Tuple[int, int]:
+    """Of the pairs of agents sharing a module in the first labelling, how many share one in the second."""
+    pairs = together = 0
+    order = np.argsort(la, kind="stable")
+    la, lb = la[order], lb[order]
+    starts = np.flatnonzero(np.r_[True, la[1:] != la[:-1]])
+    for s, e in zip(starts, np.r_[starts[1:], len(la)]):
+        m = e - s
+        if m < 2:
+            continue
+        pairs += int(m * (m - 1) // 2)
+        counts = np.unique(lb[s:e], return_counts=True)[1]
+        together += int((counts * (counts - 1) // 2).sum())
+    return together, pairs
+
+
+def together(parts: List[Dict[str, Any]], rng: np.random.RandomState) -> Dict[str, Dict[str, float]]:
+    """The share of pairs in one module still in one lag games later, and what chance keeps together."""
+    out = {}
+    for lag in LAGS:
+        kept = possible = kept_null = 0
+        for t in range(len(parts) - lag):
+            la, lb = _shared(parts[t], parts[t + lag])
+            k, p = kept_together(la, lb)
+            kept, possible = kept + k, possible + p
+            kept_null += float(np.mean([kept_together(la, rng.permutation(lb))[0] for _ in range(SHUFFLES)]))
+        if possible:
+            out[str(lag)] = {"real": kept / possible, "null": kept_null / possible, "pairs": possible}
+    return out
+
+
 def likeness(parts: List[Dict[str, Any]], rng: np.random.RandomState) -> Dict[str, Dict[str, float]]:
     """Mean likeness of partitions lag games apart, and the same with the later one dealt at random."""
     out = {}
     for lag in LAGS:
         real, null = [], []
         for t in range(len(parts) - lag):
-            a, b = parts[t], parts[t + lag]
-            where_b = {agent: i for i, agent in enumerate(b["ids"])}
-            pairs = [(la, b["module"][where_b[agent]]) for agent, la in zip(a["ids"], a["module"])
-                     if la >= 0 and agent in where_b and b["module"][where_b[agent]] >= 0]
-            if len(pairs) < 2:
+            la, lb = _shared(parts[t], parts[t + lag])
+            if len(la) < 2:
                 continue
-            la = np.array([p[0] for p in pairs])
-            lb = np.array([p[1] for p in pairs])
             real.append(nmi(la, lb))
             null.append(float(np.mean([nmi(la, rng.permutation(lb)) for _ in range(SHUFFLES)])))
         if real:
@@ -115,43 +157,67 @@ def likeness(parts: List[Dict[str, Any]], rng: np.random.RandomState) -> Dict[st
 
 
 def measure(run: str) -> Dict[str, Any]:
-    start, frames = frames_of(run)
-    with tempfile.TemporaryDirectory() as tmp:
-        path = os.path.join(tmp, "partitions.jsonl")
-        real = cli(frames, ["--partitions", path])
-        parts = [json.loads(line) for line in open(path) if line.strip()]
-    dealt = cli(frames, ["--shuffle", "1"])
+    kept = os.path.join(OUT, "partitions", f"{run}.jsonl.gz")
+    answers = os.path.join(OUT, "partitions", f"{run}.cli.json")
+    cached = json.load(open(answers)) if os.path.exists(kept) and os.path.exists(answers) else None
+    if cached and "outlast" in cached[1]:
+        start, real, dealt = cached
+    else:
+        start, frames = frames_of(run)
+        os.makedirs(os.path.dirname(kept), exist_ok=True)
+        with tempfile.TemporaryDirectory() as tmp:
+            path = os.path.join(tmp, "partitions.jsonl")
+            real = cli(frames, ["--partitions", path, "--outlast"])
+            with open(path, "rb") as src, gzip.open(kept, "wb") as dst:
+                shutil.copyfileobj(src, dst)
+        dealt = cli(frames, ["--shuffle", "1", "--outlast"])
+        json.dump([start, real, dealt], open(answers, "w"))
+    parts = [json.loads(line) for line in gzip.open(kept, "rt") if line.strip()]
     result = {
-        "id": run, "family": re.sub(r"-s\d+$", "", run), "from": start, "games": len(frames),
+        "id": run, "family": re.sub(r"-s\d+$", "", run), "from": start, "games": real["frames"],
         "agents": float(np.mean(real["agentsPerFrame"])) if real["agentsPerFrame"] else None,
         "modules": real["summary"]["meanModules"] if real["summary"] else None,
         "compression": real["summary"]["compression"] if real["summary"] else None,
         "mean_size": (sum(int(k) * v for k, v in real["sizes"].items()) / sum(real["sizes"].values())
                       if real["sizes"] else None),
         "lives": {str(L): {"real": lived(real["lives"], L), "shuffled": lived(dealt["lives"], L)} for L in LIVES},
+        "outlast": {"real": real["outlast"], "shuffled": dealt["outlast"]},
+        "together": together(parts, np.random.RandomState(1)),
         "likeness": likeness(parts, np.random.RandomState(1)),
     }
     os.makedirs(OUT, exist_ok=True)
-    json.dump(result, open(os.path.join(OUT, f"{run}.json"), "w"), indent=1)
+    path = os.path.join(OUT, f"{run}.json")
+    with open(path + ".part", "w") as f:
+        json.dump(result, f, indent=1)
+    os.replace(path + ".part", path)
     return result
+
+
+def measured(path: str) -> bool:
+    """Whether a world's result is there whole and holds every measure (one cut short by an error is not)."""
+    try:
+        return "together" in json.load(open(path)) and "outlast" in json.load(open(path))
+    except (OSError, ValueError):
+        return False
 
 
 def main():
     runs = sys.argv[1:] or WORLDS
     for run in runs:
-        if os.path.exists(os.path.join(OUT, f"{run}.json")):
+        path = os.path.join(OUT, f"{run}.json")
+        if measured(path):
             continue
         try:
             r = measure(run)
         except Exception as e:  # noqa: BLE001 - one world that cannot be read stops no other
             print(f"{run}: not measured ({type(e).__name__}: {e})", flush=True)
             continue
-        like = r["likeness"]
+        tog = r["together"]
         print(f"{run}: {r['modules']:.0f} modules of {r['mean_size']:.1f}; lives >= 10 "
-              f"{r['lives']['10']['real']:.3f} (shuffled {r['lives']['10']['shuffled']:.3f}); likeness lag 1 "
-              f"{like.get('1', {}).get('real', float('nan')):.2f} (null {like.get('1', {}).get('null', float('nan')):.2f}), "
-              f"lag 40 {like.get('40', {}).get('real', float('nan')):.2f} "
-              f"(null {like.get('40', {}).get('null', float('nan')):.2f})", flush=True)
+              f"{r['lives']['10']['real']:.3f} (shuffled {r['lives']['10']['shuffled']:.3f}); together after 1 game "
+              f"{tog.get('1', {}).get('real', float('nan')):.2f} (chance {tog.get('1', {}).get('null', float('nan')):.3f}), "
+              f"after 40 {tog.get('40', {}).get('real', float('nan')):.2f} "
+              f"(chance {tog.get('40', {}).get('null', float('nan')):.3f})", flush=True)
     print("flow persistence measured", flush=True)
 
 
