@@ -64,8 +64,15 @@ decide "enough":
 
 - **above a floor**: the best overlaps first, each module used once, and
   none below 0.3 (the view's default, which you can move);
-- **mutually best**: a pair is matched only if each is the other's best
-  overlap — no floor to choose.
+- **mutually best**: of the pairs above the floor, only those in which each
+  module is the other's best overlap. With the floor at 0 this matches at any
+  overlap at all.
+
+A small module can be "followed" on very little: two modules of two agents
+that share one agent overlap by a third. On flows made mostly of pairs — as
+in B2's worlds, where an agent puts its whole stake on one neighbour — a
+matching at any overlap follows chance chains, so the book matches above the
+floor and checks the result against chance (below).
 
 Because identity is carried by overlap and not by membership, a module can
 keep going while its agents change. Its **turnover** is the share of its
@@ -81,13 +88,33 @@ sources, and the difference matters:
 ## Checking against chance
 
 Flow on any network has some group structure: neighbours trade with
-neighbours. To see how much is more than that, the same game's flow is
-**rewired**: every token that crossed a link is cut into two halves, one at
-each end, and the halves are paired again at random. Every agent keeps how
-much flow it sends and receives; who it sends to is shuffled. Groups found in
-the rewired flow, followed the same way, are what the amounts of flow alone
-would give. A real module structure compresses better than the rewired one
-and lives longer.
+neighbours. Two nulls answer two different questions.
+
+- **Is there group structure at all?** The same game's flow is **rewired**:
+  every token that crossed a link is cut into two halves, one at each end, and
+  the halves are paired again at random. Every agent keeps how much flow it
+  sends and receives; who it sends to is shuffled. A real module structure
+  compresses the flow better than the rewired one does.
+- **Do modules last longer than chance?** The rewired flow cannot say: its
+  modules are pairs and threes, which "live" long on single shared agents.
+  Instead each game's own modules are kept, with their sizes, and their agents
+  are **dealt among them at random**, game by game. Followed the same way,
+  they show what following finds when nothing but the sizes carries over.
+
+Two more measures need no following at all, or ask what following finds:
+
+- **Kept together**: of two agents in one module, the share still in one
+  module so many games later, against the same with the later game's agents
+  dealt at random — the share chance alone keeps together.
+- **Outlasting**: of the modules followed for many games, the share none of
+  whose first members is still in it at the end. That is the sense in which a
+  group can outlast its members.
+
+> [!info] Added later
+> An earlier version of this note said that the mutual matching needs no
+> floor and that real modules live longer than those of the rewired flow. The
+> first was not what the program did (it matched above the floor), and the
+> second is not a fair test. Chapter 71 uses the nulls above.
 
 <!-- turns -->
 [Contents](../README.md)

@@ -119,6 +119,41 @@ function test_a_module_whose_members_are_replaced_one_by_one_outlasts_them() {
   }
 }
 
+function test_dealing_among_neighbours_changes_nothing_where_everyone_splits_evenly() {
+  // Every agent stakes one token on each of its neighbours: dealing the
+  // amounts among the same neighbours gives the same flow, and the same modules.
+  const frames = steadyGroups();
+  const real = run(frames, []);
+  const dealt = run(frames, ['--neighbours', '3']);
+  for (const key of ['modulesPerFrame', 'sizes', 'lives']) {
+    if (JSON.stringify(dealt[key]) !== JSON.stringify(real[key])) {
+      throw new Error(`${key} changed: ${JSON.stringify(dealt[key])} against ${JSON.stringify(real[key])}`);
+    }
+  }
+  if (!dealt.neighbours) throw new Error('the output must say its stakes were dealt among neighbours');
+}
+
+function test_dealing_among_neighbours_undoes_a_choice_of_partner() {
+  // Two groups of four, each agent staking everything on one partner inside
+  // its group though it also neighbours the other group: dealt at random, the
+  // stakes cross between the groups, and the same seed deals them alike.
+  const ids = [1, 2, 3, 4, 5, 6, 7, 8];
+  const partner = { 1: 2, 2: 1, 3: 4, 4: 3, 5: 6, 6: 5, 7: 8, 8: 7 };
+  const frames = Array.from({ length: 6 }, (_, t) => ({
+    iteration: t, phase: 2, ids,
+    decisions: { allocations: ids.map(agent => {
+      const targets = [agent, ...ids.filter(other => other !== agent)];
+      return { agent, targets, alloc: targets.map(target => (target === partner[agent] ? 5 : 0)) };
+    }) }
+  }));
+  const real = run(frames, []);
+  const a = run(frames, ['--neighbours', '3']);
+  const b = run(frames, ['--neighbours', '3']);
+  if (JSON.stringify(a) !== JSON.stringify(b)) throw new Error('a null must be the same null every time');
+  if (real.lives['6'] !== 4) throw new Error(`the four chosen pairs last every game: ${JSON.stringify(real.lives)}`);
+  if ((a.lives['6'] || 0) >= 4) throw new Error(`partners drawn at random should not all last: ${JSON.stringify(a.lives)}`);
+}
+
 function test_measures_are_only_added_when_asked_for() {
   const result = run(steadyGroups(), []);
   if ('outlast' in result) throw new Error('without --outlast the answer must be what it always was');

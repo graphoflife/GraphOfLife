@@ -18,6 +18,11 @@ keeps the modules' sizes and deals their agents at random:
   against the same null. When nearly every module is a pair it is close to 1
   for any two partitions (the null too), so it is kept for large modules only.
 
+Every measure is also taken on the same games with each agent's stakes on
+its neighbours dealt among them at random (`--neighbours`): the network and
+every agent's amounts kept, only its choice of whom to stake on undone. What
+the real flow has beyond that is the agents' doing, not the network's.
+
 Each world's partitions and the command line's answers are kept, so a new
 measure needs no new partition.
 
@@ -173,6 +178,20 @@ def measure(run: str) -> Dict[str, Any]:
         dealt = cli(frames, ["--shuffle", "1", "--outlast"])
         json.dump([start, real, dealt], open(answers, "w"))
     parts = [json.loads(line) for line in gzip.open(kept, "rt") if line.strip()]
+    # The same games with every agent's choice of neighbours undone.
+    kept_n = os.path.join(OUT, "partitions", f"{run}.neighbours.jsonl.gz")
+    answers_n = os.path.join(OUT, "partitions", f"{run}.neighbours.cli.json")
+    if os.path.exists(kept_n) and os.path.exists(answers_n):
+        chosen = json.load(open(answers_n))
+    else:
+        _, frames = frames_of(run)
+        with tempfile.TemporaryDirectory() as tmp:
+            path = os.path.join(tmp, "partitions.jsonl")
+            chosen = cli(frames, ["--neighbours", "1", "--partitions", path, "--outlast"])
+            with open(path, "rb") as src, gzip.open(kept_n, "wb") as dst:
+                shutil.copyfileobj(src, dst)
+        json.dump(chosen, open(answers_n, "w"))
+    parts_n = [json.loads(line) for line in gzip.open(kept_n, "rt") if line.strip()]
     result = {
         "id": run, "family": re.sub(r"-s\d+$", "", run), "from": start, "games": real["frames"],
         "agents": float(np.mean(real["agentsPerFrame"])) if real["agentsPerFrame"] else None,
@@ -184,6 +203,13 @@ def measure(run: str) -> Dict[str, Any]:
         "outlast": {"real": real["outlast"], "shuffled": dealt["outlast"]},
         "together": together(parts, np.random.RandomState(1)),
         "likeness": likeness(parts, np.random.RandomState(1)),
+        "neighbours": {
+            "compression": chosen["summary"]["compression"] if chosen["summary"] else None,
+            "modules": chosen["summary"]["meanModules"] if chosen["summary"] else None,
+            "lives": {str(L): lived(chosen["lives"], L) for L in LIVES},
+            "outlast": chosen["outlast"],
+            "together": together(parts_n, np.random.RandomState(1)),
+        },
     }
     os.makedirs(OUT, exist_ok=True)
     path = os.path.join(OUT, f"{run}.json")
@@ -196,7 +222,7 @@ def measure(run: str) -> Dict[str, Any]:
 def measured(path: str) -> bool:
     """Whether a world's result is there whole and holds every measure (one cut short by an error is not)."""
     try:
-        return "together" in json.load(open(path)) and "outlast" in json.load(open(path))
+        return "neighbours" in json.load(open(path))
     except (OSError, ValueError):
         return False
 
@@ -212,12 +238,13 @@ def main():
         except Exception as e:  # noqa: BLE001 - one world that cannot be read stops no other
             print(f"{run}: not measured ({type(e).__name__}: {e})", flush=True)
             continue
-        tog = r["together"]
+        tog, ntog = r["together"], r["neighbours"]["together"]
         print(f"{run}: {r['modules']:.0f} modules of {r['mean_size']:.1f}; lives >= 10 "
-              f"{r['lives']['10']['real']:.3f} (shuffled {r['lives']['10']['shuffled']:.3f}); together after 1 game "
-              f"{tog.get('1', {}).get('real', float('nan')):.2f} (chance {tog.get('1', {}).get('null', float('nan')):.3f}), "
+              f"{r['lives']['10']['real']:.3f} (shuffled {r['lives']['10']['shuffled']:.3f}, neighbours "
+              f"{r['neighbours']['lives']['10']:.3f}); together after 1 game "
+              f"{tog.get('1', {}).get('real', float('nan')):.2f} (neighbours {ntog.get('1', {}).get('real', float('nan')):.2f}), "
               f"after 40 {tog.get('40', {}).get('real', float('nan')):.2f} "
-              f"(chance {tog.get('40', {}).get('null', float('nan')):.3f})", flush=True)
+              f"(neighbours {ntog.get('40', {}).get('real', float('nan')):.2f})", flush=True)
     print("flow persistence measured", flush=True)
 
 

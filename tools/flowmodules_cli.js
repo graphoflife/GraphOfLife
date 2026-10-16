@@ -2,8 +2,8 @@
 /*
  * Flow modules of a window of frames, worked out by the page's own arithmetic.
  *
- *     node tools/flowmodules_cli.js [--floor 0.3] [--mutual] [--null SEED] [--shuffle SEED]
- *                                   [--partitions FILE] [--outlast] < frames.jsonl
+ *     node tools/flowmodules_cli.js [--floor 0.3] [--mutual] [--null SEED] [--neighbours SEED]
+ *                                   [--shuffle SEED] [--partitions FILE] [--outlast] < frames.jsonl
  *
  * Reads one frame per line — iteration, phase, ids and decisions.allocations,
  * the fields the Research tab's Flow modules view reads — follows the modules
@@ -18,7 +18,11 @@
  * stub at both ends, the stubs are paired again at random, and the modules are
  * found in that. It says what the same amounts of flow give without their
  * structure — but its modules are pairs and threes, so it is no yardstick for
- * how long modules live. `--shuffle SEED` is: it keeps every frame's modules
+ * how long modules live, and its tokens cross between agents that are not
+ * neighbours, which no token can. `--neighbours SEED` keeps the network: every
+ * agent keeps its stake at home and its amounts, which are dealt at random
+ * among its own neighbours. What survives it is not the network's doing but
+ * the agents' choice of whom to stake on. `--shuffle SEED` is: it keeps every frame's modules
  * and their sizes, deals the agents among them at random, frame by frame, and
  * follows those. A module of the real flow that lives longer than shuffled
  * modules of its size lives on something other than chance overlaps.
@@ -48,6 +52,7 @@ const option = (name, fallback) => {
 const floor = Number(option('--floor', 0.3));
 const mutual = !!option('--mutual', false);
 const nullSeed = option('--null', null);
+const neighboursSeed = option('--neighbours', null);
 const shuffleSeed = option('--shuffle', null);
 const partitionsFile = option('--partitions', null);
 const outlast = !!option('--outlast', false);
@@ -113,11 +118,30 @@ function shuffleModules(random) {
   };
 }
 
+/** The same frame with each agent's stakes on its neighbours dealt among them at random. */
+function reassigned(frame, random) {
+  const allocations = ((frame.decisions || {}).allocations || []).map(record => {
+    const others = [];
+    record.targets.forEach((target, i) => { if (target !== record.agent) others.push(i); });
+    const alloc = record.alloc.slice();
+    for (let k = others.length - 1; k > 0; k--) {
+      const j = Math.floor(random() * (k + 1));
+      [alloc[others[k]], alloc[others[j]]] = [alloc[others[j]], alloc[others[k]]];
+    }
+    return { ...record, alloc };
+  });
+  return { ...frame, decisions: { ...frame.decisions, allocations } };
+}
+
 const lines = fs.readFileSync(0, 'utf8').split('\n').filter(line => line.trim());
 let frames = lines.map(line => JSON.parse(line));
 if (nullSeed !== null) {
   const random = stream(Number(nullSeed));
   frames = frames.map(frame => rewired(frame, random));
+}
+if (neighboursSeed !== null) {
+  const random = stream(Number(neighboursSeed));
+  frames = frames.map(frame => reassigned(frame, random));
 }
 if (shuffleSeed !== null) shuffleModules(stream(Number(shuffleSeed)));
 const { history, withoutFlow } = FlowModules.follow(frames, { floor, mutual, keepMembers: outlast });
@@ -171,6 +195,7 @@ process.stdout.write(JSON.stringify({
   mutual,
   null: nullSeed !== null,
   shuffled: shuffleSeed !== null,
+  ...(neighboursSeed !== null ? { neighbours: true } : {}),
   ...(outlast ? { outlast: outlasting(history) } : {}),
   modulesPerFrame: [...perFrame.values()],
   agentsPerFrame: frames.filter(f => (f.decisions || {}).allocations?.length).map(f => (f.ids || []).length),
