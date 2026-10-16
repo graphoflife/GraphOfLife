@@ -457,8 +457,11 @@ const FlowModules = {
     return {
       appearances: history.length,
       distinct: byId.size,
-      longestLife: Math.max(...lives.map(l => l.length)),
-      largest: Math.max(...history.map(r => r.size)),
+      // Folded rather than spread: a window of a large world holds a hundred
+      // thousand module appearances, and spreading that many arguments into
+      // Math.max overflows the stack.
+      longestLife: lives.reduce((most, l) => Math.max(most, l.length), 0),
+      largest: history.reduce((most, r) => Math.max(most, r.size), 0),
       meanModules: history.reduce((s, r) => s + r.modules, 0) / history.length,
       compression: saving,
       persistent: persistent.length,

@@ -258,4 +258,18 @@ function test_a_mutual_match_needs_each_to_be_the_others_best() {
   if (mutual.has('Y')) throw new Error('Y is not B\'s module: B is not Y\'s best overlap');
 }
 
+function test_a_summary_of_a_large_world_does_not_overflow() {
+  // A window of a 20,000-agent world holds well over a hundred thousand module
+  // appearances. The summary once spread them all into Math.max, which threw
+  // "Maximum call stack size exceeded" and left the view and the book blank.
+  const history = Array.from({ length: 300000 }, (_, i) => ({
+    iteration: i % 50, phase: 2, id: i % 40000, size: 1 + (i % 17), turnover: 0, regeneration: 0,
+    exchange: 0, mortality: 0, emigration: 0, born: 0, joined: 0, died: 0, left: 0, isNew: false,
+    codeLength: 1, baseline: 2, modules: 6000
+  }));
+  const s = FlowModules.summarise(history);
+  if (s.largest !== 17) throw new Error(`largest ${s.largest}, not 17`);
+  if (!(s.longestLife >= 7)) throw new Error(`longest life ${s.longestLife}`);
+}
+
 require('./harness').run(__filename, name => eval(name));
