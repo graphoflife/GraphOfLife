@@ -168,7 +168,8 @@ def main():
            "circulation": check("circulation").analyse(name, t0, t1, a.window),
            "kin": check("kin_flows").analyse(name, t0, t1),
            "alliances": alliances(frames, t0, t1),
-           "decisive": check("decisive").analyse(name, t0, t1, rules(a.pilot))}
+           "decisive": check("decisive").analyse(name, t0, t1, rules(a.pilot)),
+           "gifts": check("gifts").analyse(name, t0, t1)}
     res["gliders"].pop("examined_rows", None)
     for k in ("all", "gift", "take"):
         res["circulation"].pop(k + "_rows", None)

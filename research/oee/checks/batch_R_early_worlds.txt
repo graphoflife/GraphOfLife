@@ -1,0 +1,9 @@
+# Batch R worlds already finished (2026-10-16 06:10), judged early; analyse_batch.sh R skips them later.
+pilot GraphOfLifeRuns/.pilots/R/B2-poorest-s1 500:1000,1000:2000,500:2000
+pilot GraphOfLifeRuns/.pilots/R/B1-poorest-s1 500:1000,1000:2000,500:2000
+pilot GraphOfLifeRuns/.pilots/R/B2-newborns-s1 500:1000,1000:2000,500:2000
+pilot GraphOfLifeRuns/.pilots/R/B1-newborns-s1 500:1000,1000:2000,500:2000
+pilot GraphOfLifeRuns/.pilots/R/B2-parents-s1 500:1000,1000:2000,500:2000
+pilot GraphOfLifeRuns/.pilots/R/B2-poorest-s2 500:1000,1000:2000,500:2000
+pilot GraphOfLifeRuns/.pilots/L/B1-long-s1 500:1000,1000:2000,500:2000
+pilot GraphOfLifeRuns/.pilots/L/B1-long-s2 500:1000,1000:2000,500:2000

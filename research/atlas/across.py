@@ -244,6 +244,15 @@ def running():
             for line in out.splitlines() if line.startswith("python3 run.py ") and len(line.split()) > 2}
 
 
+def measured_pilot(item):
+    """pilot_world(item), or None with the reason printed: one pilot that cannot be read stops no other."""
+    try:
+        return pilot_world(item)
+    except Exception as e:  # noqa: BLE001 - reported, and the others go on
+        print(item[0], item[1], f"not measured ({type(e).__name__}: {e})", flush=True)
+        return None
+
+
 def measure_pilots(jobs, redo=False):
     os.makedirs(OUT, exist_ok=True)
     busy = running()
@@ -251,7 +260,9 @@ def measure_pilots(jobs, redo=False):
             and (redo or not os.path.exists(os.path.join(OUT, f"pilot_{p[0]}_{p[1]}.json")))]
     print(f"{len(todo)} pilots to measure", flush=True)
     with ProcessPoolExecutor(max_workers=jobs) as pool:
-        for item, world in zip(todo, pool.map(pilot_world, todo)):
+        for item, world in zip(todo, pool.map(measured_pilot, todo)):
+            if world is None:
+                continue
             json.dump(world, open(os.path.join(OUT, f"pilot_{item[0]}_{item[1]}.json"), "w"))
             print(item[0], item[1], sorted(world["at"]), flush=True)
 
