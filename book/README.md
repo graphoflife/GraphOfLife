@@ -105,6 +105,7 @@ everything can be checked with it.
 - [Chapter 58 · Gliders, and who helps whom](chapters/58-gliders-and-who-helps-whom.md)
 - Chapter 59 · Meta IV — *not written yet*
 - Chapter 73 · Who inherits? — *not written yet*
+- [Chapter 78 · Brains mixed at birth, units that cost, an eye for raids on kin](chapters/78-mixed-brains-costly-units.md)
 
 **Part VI · Towards a physics: space, scale and locality**
 

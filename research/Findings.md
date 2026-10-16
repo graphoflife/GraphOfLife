@@ -325,6 +325,21 @@ book/results/worlds.json; 2026-10-16)**
 - Meta VIII (Ch. 76): help exists only where a rule makes it possible; information alone does not make
   helping pay.
 
+**Costs and mixing (batches P and Q; Ch. 57 added later, Ch. 78; 2026-10-16; B2 at 10,000 tokens, two seeds,
+2,000 iterations, T = 100 contests: later era's share 1,000 vs 500 / 2,000 vs 1,000; B2 control 0.67–0.69 /
+0.65–0.76)**
+- Links that hold a token (no cap, valence 0): healthy network without the cap (one piece, nothing cut off,
+  2-core 1.0, dimension 4.1–4.2, 5.2–5.6 links, hub 2–3%), a third of the tokens in links, 1,100–1,500
+  agents; evolution stronger than B2: 0.83/0.93 and 0.73/0.84 (with search 0.81/0.87, 0.71/0.62).
+  Without old age as well: births and deaths nearly stop, the world freezes (0.49–0.63).
+- Units that hold a token (growable brains): brains shrink 4 -> 1.3 units by 200, far below the neutral
+  shadow (4.1/5.3); evolution 0.72/0.94 from 500 to 1,000 (free units 0.59/0.65), then like B2. Free
+  units grow above the shadow in one world (9.8 vs 3.9).
+- Brains mixed at birth: worlds a quarter of B2's size, twice the conquest; evolution 0.91/0.70, then
+  0.73/0.55 — the largest steps in one world. (A first count said later brains lose: every mixed child
+  was counted for the earlier side; tourney.contest now follows ancestry.)
+- An input for raids on kin: like B2 in everything.
+
 **Open (being tested)**
 - Rules without numbers (B3, Ch. 57): all seven of B2's numbers removed at once
   — s1: without alliances extinct, with alliances a peaceful near-tree.

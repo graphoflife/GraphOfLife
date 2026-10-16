@@ -206,6 +206,35 @@ come next:
 > to solve those problems too (`research/oee/pilots/LOG.md`, *Number-free
 > candidates*).
 
+> [!info] Added later: links that hold a token (batches P and Q, 2026-10-16)
+> A stronger form of links that cost was tried next (`link_token` in
+> research/oee/pilots/proto.py). Every link holds one token, paid by whoever
+> makes it — a newborn pays for its links at birth — and when a link lapses its
+> token goes back to one of its two ends. Tokens held plus links then always
+> equal the world's tokens, so the links can never outnumber the tokens and no
+> cap is needed. Tested in B2 at 10,000 tokens with the cap removed
+> (`valence = 0`), two seeds, 2,000 iterations, with links found only at birth
+> and with a search walk for new partners as well (`seek`):
+>
+> - **The network stays healthy without the cap**: one piece, no agent or link
+>   whose loss cuts anyone off, every agent in the 2-core, dimension 4.1–4.2,
+>   5.2–5.6 links per agent, and the best-connected agent joined to 2–3% of the
+>   world (B2, with its cap of 8: 1.5%).
+> - **The world is smaller**: about a third of the tokens sit in links, and the
+>   worlds hold 1,100–1,500 agents against B2's 3,200–3,650.
+> - **Evolution goes on more strongly than in B2.** In lifetime contests
+>   (T = 100) the brains of 1,000 hold 0.83 and 0.93 of the nodes against those
+>   of 500 (with the search, 0.81 and 0.87), and those of 2,000 hold 0.73 and
+>   0.84 against those of 1,000 (0.71 and 0.62), where B2 has 0.67–0.69 and
+>   0.65–0.76.
+> - **The age limit is still needed.** With links that hold a token and no age
+>   limit, births and deaths nearly stopped and the worlds froze
+>   ([Chapter 78](78-mixed-brains-costly-units.md)).
+>
+> So the cap on links can be replaced: a link that holds a token is a rule
+> without a number, and the worlds that use it are healthier in the ways the cap
+> was for, and evolve further.
+
 <!-- turns -->
 ---
 

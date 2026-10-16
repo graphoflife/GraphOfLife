@@ -391,6 +391,13 @@
           "id": "73",
           "title": "Who inherits?",
           "note": "Three new rules for the estate of the dead — to the poorest, to the newborns, to their parents — tested in B1 and B2 worlds and compared with every earlier world."
+        },
+        {
+          "id": "78",
+          "title": "Brains mixed at birth, units that cost, an eye for raids on kin",
+          "note": "Three more pilot ideas in B2: brains mixed from two parents at birth, brains whose every unit holds a token, an input for raids on one's own kind — and links that hold a token in a world without old age.",
+          "file": "chapters/78-mixed-brains-costly-units.md",
+          "status": "analysed"
         }
       ]
     },
