@@ -49,9 +49,21 @@ def modules(frames):
     text = "\n".join(json.dumps(cut(f), separators=(",", ":")) for f in frames)
     out = {}
     for name, args in (("floor", []), ("mutual", ["--mutual"]), ("null", ["--mutual", "--null", "1"])):
-        done = subprocess.run(["node", CLI] + args, input=text, capture_output=True, text=True, check=True)
+        done = subprocess.run(["node", CLI] + args, input=text, capture_output=True, text=True)
+        if done.returncode:
+            raise RuntimeError(f"flowmodules_cli.js {' '.join(args)}: {done.stderr.strip()[-600:]}")
         out[name] = json.loads(done.stdout)
     return out
+
+
+def safely(work):
+    """A world that fails is said and skipped, so one cannot stop the others."""
+    def run(item):
+        try:
+            return work(item)
+        except Exception as e:  # noqa: BLE001 - reported, and the run goes on
+            return (str(item if isinstance(item, str) else item[1]), f"failed: {type(e).__name__}: {e}")
+    return run
 
 
 def lab_world(run):
@@ -113,6 +125,14 @@ def lab_runs(per_family):
     return chosen
 
 
+def _safe_lab(run):
+    return safely(lab_world)(run)
+
+
+def _safe_pilot(item):
+    return safely(pilot_world)(item)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("what", choices=("lab", "pilots"))
@@ -132,8 +152,10 @@ def main():
         work = pilot_world
     print(f"{len(todo)} worlds", flush=True)
     with ProcessPoolExecutor(max_workers=a.jobs) as pool:
-        for name, summary in pool.map(work, todo):
-            if summary:
+        for name, summary in pool.map(_safe_lab if a.what == "lab" else _safe_pilot, todo):
+            if isinstance(summary, str):
+                print(f"{name}: {summary}", flush=True)
+            elif summary:
                 print(f"{name}: {summary['meanModules']:.0f} modules, compression {summary['compression']:.2f}, "
                       f"longest life {summary['longestLife']}, turnover {summary['meanTurnover']:.2f}", flush=True)
             else:
