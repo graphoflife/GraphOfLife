@@ -129,6 +129,7 @@ everything can be checked with it.
 - Chapter 75 · Meta VII · Where tokens go — *not written yet*
 - [Chapter 76 · Meta VIII · Who helps whom](chapters/76-meta-8-who-helps-whom.md)
 - Chapter 77 · Meta IX · How alike the agents are — *not written yet*
+- [Chapter 79 · Meta X · Healthy and rich](chapters/79-meta-10-healthy-and-rich.md)
 
 **Notes · the rules**
 

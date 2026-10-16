@@ -98,5 +98,5 @@ competition between groups goes on.
 <!-- turns -->
 ---
 
-← [Chapter 74 · Meta VI · Every world side by side](74-meta-6-every-world.md) · [Contents](../README.md) · [Appendix A · What a simulation costs](A-costs.md) →
+← [Chapter 74 · Meta VI · Every world side by side](74-meta-6-every-world.md) · [Contents](../README.md) · [Chapter 79 · Meta X · Healthy and rich](79-meta-10-healthy-and-rich.md) →
 <!-- /turns -->
