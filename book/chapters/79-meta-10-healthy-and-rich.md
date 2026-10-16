@@ -106,12 +106,13 @@ agents most diverse — is empty.
 
 ## The worlds that come closest
 
-Only 51 worlds meet all seven marks: 15 of Experiment 14's B2 worlds at 5,000
-tokens (smaller worlds, with a dimension of about 3.8); eleven of the lab's B2
-worlds at 10,000, nine of them without old age (Experiment 15), one of B2
-itself and one whose brains rarely change (Experiment 9); five alliance pilots,
-four of them at 3,000 tokens, below the book's rule of 10,000; and twenty pilot
-worlds built on B2, two of them long runs.
+Only 56 worlds meet all seven marks, when last counted: 15 of Experiment 14's
+B2 worlds at 5,000 tokens (smaller worlds, with a dimension of about 3.8);
+eleven of the lab's B2 worlds at 10,000, nine of them without old age
+(Experiment 15), one of B2 itself and one whose brains rarely change
+(Experiment 9); five alliance pilots, four of them at 3,000 tokens, below the
+book's rule of 10,000; and twenty-five pilot worlds built on B2, two of them
+long runs.
 
 > [!info] Added later (2026-10-16, the same day)
 > This section first counted 34 worlds. A world's dimension was then taken from
@@ -120,7 +121,11 @@ worlds built on B2, two of them long runs.
 > one moment, [Chapter 24](24-how-many-dimensions-does-a-world-have.md)). The
 > two agree for B2's worlds (half of them within 0.12) and swing for B1's,
 > whose networks change fast. Worlds that had no entry in the table, and the
-> batches finished since, are now counted too.
+> batches finished since, are now counted too. And the genotypes of worlds
+> whose brains are mixed at birth are counted by their weights: the
+> prototype's rule gave a mixture of two clones — the parent's brain again — a
+> number of its own, so those worlds looked richer in genotypes than they were
+> (the batch Y world below fell from a diversity score of 0.66 to 0.57).
 
 A healthy network is not enough. Nine of the ten B2 worlds without old age
 meet every mark and have stopped: about 0.4 births an iteration in a world of
@@ -133,30 +138,34 @@ are:
 <!-- table healthy/closest -->
 | world | group | at iteration | marks (of 7) | diversity score | median tokens | agents with 3 tokens or fewer | dimension | agents |
 |---|---|---|---|---|---|---|---|---|
-| `LC/Q-mix-s2` | long runs | 4,500 | 7 | 0.67 | 13 | 15% | 3.6 | 514 |
-| `Y/mix-poorest-s1` | B2 pil. | 800 | 7 | 0.66 | 3 | 51% | 3.7 | 1,410 |
-| `Q/mix-s1` | B2 pil. | 2,000 | 7 | 0.64 | 5 | 37% | 3.5 | 908 |
+| `W/norev-mix-s1` | B2 pil. | 1,000 | 7 | 0.69 | 2 | 67% | 3.7 | 2,245 |
+| `Q/mix-s1` | B2 pil. | 2,000 | 7 | 0.63 | 5 | 37% | 3.5 | 908 |
 | `B2-5000-d6b607-s006` | B2 5k | 1,000 | 7 | 0.62 | 1 | 71% | 3.0 | 1,158 |
-| `B2-5000-s001` | B2 5k | 1,075 | 7 | 0.60 | 2 | 74% | 4.0 | 1,518 |
-| `LC/Q-mix-s1` | long runs | 2,500 | 7 | 0.60 | 3 | 52% | 3.4 | 1,380 |
+| `B2-5000-s001` | B2 5k | 1,075 | 7 | 0.61 | 2 | 74% | 4.0 | 1,518 |
 | `W/norev-linktoken-s1` | B2 pil. | 1,000 | 7 | 0.60 | 5 | 42% | 4.0 | 921 |
-| `A3k/gain-s1` | B1 pil. | 1,000 | 7 | 0.57 | 2 | 70% | 3.6 | 804 |
+| `LC/Q-mix-s2` | long runs | 7,500 | 7 | 0.59 | 8 | 19% | 3.9 | 883 |
+| `A3k/gain-s1` | B1 pil. | 1,000 | 7 | 0.58 | 2 | 70% | 3.6 | 804 |
+| `Y/mix-poorest-s1` | B2 pil. | 1,000 | 7 | 0.57 | 3 | 51% | 3.4 | 1,455 |
 | `A3k/ctrl-s2` | B1 pil. | 1,000 | 7 | 0.57 | 2 | 65% | 3.9 | 779 |
-| `B2-5000-28aef0-s006` | B2 5k | 1,000 | 7 | 0.55 | 1 | 75% | 3.9 | 1,564 |
+| `B2-5000-28aef0-s006` | B2 5k | 1,000 | 7 | 0.56 | 1 | 75% | 3.9 | 1,564 |
 | `Q/mix-s2` | B2 pil. | 2,000 | 7 | 0.55 | 11 | 20% | 3.5 | 659 |
 | `B2-5000-28aef0-s003` | B2 5k | 1,000 | 7 | 0.53 | 1 | 78% | 3.8 | 1,736 |
 <!-- /table -->
 
-The closest of all are worlds whose **brains are mixed at birth**
-([Chapter 78](78-mixed-brains-costly-units.md)): four of the six at the top. The
-two of batch Q meet every mark at a dimension of 3.5, and their agents are
+The closest are worlds whose **brains are mixed at birth**
+([Chapter 78](78-mixed-brains-costly-units.md)): five of the twelve at the top,
+the first among them. The two of batch Q meet every mark at a dimension of 3.5,
+and their agents are
 richer and more varied than in any other healthy world: the median agent holds
 5 and 11 tokens, 37% and 20% hold three or fewer, and their wealth spreads over
 six doubling classes, wider than in any other world that meets every mark. They
 are smaller worlds — 660 to 910 agents for 10,000 tokens, where B2 holds 3,400
 — so each agent holds more. They are also among the worlds whose evolution went
-on most strongly. The other two are the long run of one of them, below, and a
-world of batch Y, mixing with estates left to the poorest, still running.
+on most strongly. The others are the long run of one of them, below; a world
+of batch Y, mixing with estates left to the poorest; and at the very top a
+world of batch W that mixes without revolutions — larger and poorer (2,245
+agents, two in three at three tokens or fewer), but spread widely in age,
+links and genotypes.
 
 ## Candidates and long runs
 
@@ -166,25 +175,32 @@ whether it stays. The rule, with no line of its own
 every mark of the health bar met, a diversity score above the median of
 Experiment 16's B2 worlds, and at least 10,000 tokens. Three worlds met it
 first — the two mixed worlds of batch Q and a world of batch S whose agents
-have an eye for a family tag and no revolutions — and each is being played on
-to 10,000 iterations in a copy of its own (`GraphOfLifeRuns/.pilots/LC/`). Where
+have an eye for a family tag and no revolutions — and three more as batches W
+and Y finished: mixing without revolutions, links that hold a token without
+revolutions, and mixing with estates left to the poorest. Each is played on to
+10,000 iterations in a copy of its own (`GraphOfLifeRuns/.pilots/LC/`). Where
 each was chosen, and where it is now:
 
 <!-- table healthy/long -->
 | world | group | at iteration | marks (of 7) | diversity score | median tokens | agents with 3 tokens or fewer | dimension | agents |
 |---|---|---|---|---|---|---|---|---|
-| `Q/mix-s1` | B2 pil. | 2,000 | 7 | 0.64 | 5 | 37% | 3.5 | 908 |
-| `LC/Q-mix-s1` | long runs | 2,500 | 7 | 0.60 | 3 | 52% | 3.4 | 1,380 |
+| `Q/mix-s1` | B2 pil. | 2,000 | 7 | 0.63 | 5 | 37% | 3.5 | 908 |
+| `LC/Q-mix-s1` | long runs | 5,500 | 7 | 0.51 | 6 | 38% | 3.8 | 1,037 |
 | `Q/mix-s2` | B2 pil. | 2,000 | 7 | 0.55 | 11 | 20% | 3.5 | 659 |
-| `LC/Q-mix-s2` | long runs | 4,500 | 7 | 0.67 | 13 | 15% | 3.6 | 514 |
+| `LC/Q-mix-s2` | long runs | 7,500 | 7 | 0.59 | 8 | 19% | 3.9 | 883 |
+| `S/G4-familysense-s2` | B2 pil. | 1,000 | 7 | 0.53 | 1 | 74% | 4.0 | 2,935 |
+| `LC/S-G4-familysense-s2` | long runs | 2,000 | 6 | 0.50 | 2 | 72% | 4.3 | 3,192 |
 <!-- /table -->
 
-The first stretch already parts the two mixed worlds. One has grown poorer as
-it grew: half as many agents again, and half of them now hold three tokens or
-fewer, as in B2's worlds. The other has grown richer and smaller, and is now the world that comes
-closest of all: every mark met, a dimension of 3.6, the median agent holding 13
-tokens and only 15% holding three or fewer. The world with an eye for a family
-tag has not yet gone further than where it was chosen.
+The two mixed worlds go on healthy, and richer than B2's. One swung towards
+B2's poverty at 2,500 iterations — half as many agents again, half of them at
+three tokens or fewer — and came back: at 5,500, 38% hold three or fewer and
+the median agent six. The other grew richer and smaller to 4,500 iterations
+(514 agents, the median holding 13 tokens), then larger again: at 7,500, 883
+agents, 19% at three tokens or fewer, the median holding eight, every mark met
+at a dimension of 3.9. The world with an eye for a family tag has fallen back:
+at 2,000 iterations 72% of its agents hold three tokens or fewer, as in B2, and
+a dimension of 4.3 has cost it a mark.
 
 The long runs are planned in three steps:
 
@@ -195,9 +211,12 @@ The long runs are planned in three steps:
    the start, to 10,000.
 3. **A pre-registered lab experiment** for what holds in most seeds: ten seeds
    to 10,000 iterations, and the best world on to a hundred thousand, as
-   [Chapter 69](69-a-hundred-thousand-iterations.md) plans for one world. Mixing
-   is a rule of the prototype today; it would first become an option of the
-   engine, off by default, so that the lab can run it.
+   [Chapter 69](69-a-hundred-thousand-iterations.md) plans for one world.
+   Mixing is now a setting of the engine,
+   [`mix_at_birth`](../notes/settings.md#mix_at_birth), off unless a run turns
+   it on, and its experiment is written and ready for the lab:
+   [Chapter 80](80-mixed-at-birth-ten-long-worlds.md), Experiment 17, ten worlds
+   of B2 with mixing for 10,000 iterations.
 
 The batches still running (T to Y, [Appendix C](C-every-simulation.md)) and the
 search for settings by elimination (batch Z: worlds whose every setting is

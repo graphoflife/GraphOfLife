@@ -380,6 +380,22 @@
        "href": "chapters/50-why-evolution-stops.md"
       }
      ]
+    ],
+    [
+     "E17",
+     "Mixed at birth: ten long worlds",
+     "B2",
+     "*mixed at birth* (mix_at_birth = on)",
+     "1\u201310",
+     "10,000",
+     "10,000",
+     "0",
+     [
+      {
+       "text": "80",
+       "href": "chapters/80-mixed-at-birth-ten-long-worlds.md"
+      }
+     ]
     ]
    ]
   },
@@ -484,8 +500,8 @@
      "3",
      "13",
      "10,000",
-     "3,000, 10,000",
-     "12 done, 1 running",
+     "3,000, 10,000, 50,000",
+     "10 done, 3 running",
      [
       {
        "text": "50",
@@ -538,7 +554,7 @@
      "12",
      "10,000",
      "2,000",
-     "9 done, 3 running",
+     "10 done, 2 running",
      []
     ],
     [
@@ -548,7 +564,7 @@
      "48",
      "10,000",
      "1,000",
-     "9 done, 4 running, 35 queued",
+     "13 done, 4 running, 31 queued",
      []
     ],
     [
@@ -578,7 +594,7 @@
      "48",
      "10,000",
      "1,000",
-     "5 done, 2 running, 41 queued",
+     "7 done, 2 running, 39 queued",
      []
     ],
     [
@@ -588,7 +604,7 @@
      "46",
      "10,000",
      "1,000",
-     "5 done, 2 running, 39 queued",
+     "8 done, 2 running, 36 queued",
      []
     ],
     [
@@ -598,7 +614,7 @@
      "46",
      "10,000",
      "1,000",
-     "2 done, 2 running, 42 queued",
+     "4 done, 2 running, 40 queued",
      []
     ],
     [
@@ -608,17 +624,17 @@
      "32",
      "10,000",
      "1,000",
-     "0 done, 4 running, 28 queued",
+     "5 done, 4 running, 23 queued",
      []
     ],
     [
      "LC",
      "The candidates, the worlds closest to the author's picture of one that might keep evolving, played on to 10,000 iterations",
-     "2",
-     "3",
+     "5",
+     "6",
      "10,000",
      "10,000",
-     "0 done, 3 running",
+     "0 done, 6 running",
      [
       {
        "text": "79",
@@ -876,7 +892,7 @@
      "B2",
      "nothing: B2 itself",
      "1, 2, 3, 4, 5, 6, 7, 8, 9, 10",
-     "10,000"
+     "50,000"
     ],
     [
      "P",
@@ -1016,6 +1032,14 @@
     ],
     [
      "T",
+     "gifts-anychild",
+     "B2",
+     "allow_gifting = on, inactive_window = iteration, min_child = 1, prune_after = reproduction",
+     "1",
+     "1,000"
+    ],
+    [
+     "T",
      "gifts-bytokens",
      "B2",
      "allow_gifting = on, inactive_window = iteration, prune_after = reproduction, redistribution = by_tokens",
@@ -1048,9 +1072,33 @@
     ],
     [
      "T",
+     "gifts-keephalf",
+     "B2",
+     "allow_gifting = on, inactive_window = iteration, keep_home = 0.5, prune_after = reproduction",
+     "1",
+     "1,000"
+    ],
+    [
+     "T",
+     "gifts-keepone",
+     "B2",
+     "allow_gifting = on, inactive_window = iteration, keep_home = 0.01, prune_after = reproduction",
+     "1",
+     "1,000"
+    ],
+    [
+     "T",
      "gifts-linktoken",
      "B2",
      "allow_gifting = on, inactive_window = iteration, prune_after = reproduction, valence = 0, link_token = on",
+     "1",
+     "1,000"
+    ],
+    [
+     "T",
+     "gifts-lottery",
+     "B2",
+     "allow_gifting = on, allow_revolutions = off, inactive_window = iteration, prune_after = reproduction, contest = lottery",
      "1",
      "1,000"
     ],
@@ -1128,6 +1176,22 @@
     ],
     [
      "W",
+     "norev-came",
+     "B2",
+     "allow_revolutions = off, came_from = on",
+     "1",
+     "1,000"
+    ],
+    [
+     "W",
+     "norev-handover",
+     "B2",
+     "allow_handover = on, allow_revolutions = off",
+     "1",
+     "1,000"
+    ],
+    [
+     "W",
      "norev-helped",
      "B2",
      "allow_revolutions = off, helped_by = on",
@@ -1184,6 +1248,14 @@
     ],
     [
      "X",
+     "handover-came",
+     "B2",
+     "allow_handover = on, came_from = on",
+     "1",
+     "1,000"
+    ],
+    [
+     "X",
      "handover-helped",
      "B2",
      "allow_handover = on, helped_by = on",
@@ -1216,6 +1288,22 @@
     ],
     [
      "X",
+     "handover-noage",
+     "B2",
+     "allow_handover = on, max_age = 0",
+     "1",
+     "1,000"
+    ],
+    [
+     "X",
+     "handover-nodice",
+     "B2",
+     "allow_handover = on, random_input_amount = 0",
+     "1",
+     "1,000"
+    ],
+    [
+     "X",
      "handover-parents",
      "B2",
      "allow_handover = on, redistribution = parents",
@@ -1235,6 +1323,22 @@
      "mix-bytokens",
      "B2",
      "redistribution = by_tokens, mix = on",
+     "1",
+     "1,000"
+    ],
+    [
+     "Y",
+     "mix-helped",
+     "B2",
+     "helped_by = on, mix = on",
+     "1",
+     "1,000"
+    ],
+    [
+     "Y",
+     "mix-linktoken",
+     "B2",
+     "valence = 0, link_token = on, mix = on",
      "1",
      "1,000"
     ],
@@ -1267,7 +1371,7 @@
      "every world its own",
      "B2",
      "each world its settings drawn at random from the values the book has used (research/oee/search.md)",
-     "1001 to 1004",
+     "1001 to 1009",
      "1,000"
     ],
     [
@@ -1284,6 +1388,30 @@
      "B2",
      "allow_revolutions = off, kin_sense = on, tag_rate = 0.05",
      "2",
+     "10,000"
+    ],
+    [
+     "LC",
+     "W-norev-linktoken",
+     "B2",
+     "allow_revolutions = off, valence = 0, link_token = on",
+     "1",
+     "10,000"
+    ],
+    [
+     "LC",
+     "W-norev-mix",
+     "B2",
+     "allow_revolutions = off, mix = on",
+     "1",
+     "10,000"
+    ],
+    [
+     "LC",
+     "Y-mix-poorest",
+     "B2",
+     "redistribution = poorest, mix = on",
+     "1",
      "10,000"
     ]
    ]
@@ -1435,6 +1563,15 @@
      "20"
     ],
     [
+     "E17",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0"
+    ],
+    [
      "A3k",
      "8",
      "0",
@@ -1474,7 +1611,7 @@
      "S",
      "26",
      "26",
-     "9",
+     "11",
      "26",
      "26",
      "26"
@@ -1509,7 +1646,7 @@
     [
      "R",
      "12",
-     "3",
+     "4",
      "0",
      "2",
      "0",
@@ -1517,11 +1654,11 @@
     ],
     [
      "T",
-     "13",
+     "17",
+     "2",
+     "3",
      "0",
-     "0",
-     "0",
-     "0",
+     "2",
      "0"
     ],
     [
@@ -1544,7 +1681,7 @@
     ],
     [
      "W",
-     "7",
+     "9",
      "0",
      "0",
      "0",
@@ -1553,7 +1690,7 @@
     ],
     [
      "X",
-     "7",
+     "10",
      "0",
      "0",
      "0",
@@ -1562,7 +1699,7 @@
     ],
     [
      "Y",
-     "4",
+     "6",
      "0",
      "0",
      "0",
@@ -1571,7 +1708,7 @@
     ],
     [
      "Z",
-     "4",
+     "9",
      "0",
      "0",
      "0",
@@ -1580,7 +1717,7 @@
     ],
     [
      "LC",
-     "3",
+     "6",
      "0",
      "0",
      "0",
@@ -1590,10 +1727,10 @@
    ]
   },
   "totals": {
-   "lab experiments": 15,
+   "lab experiments": 16,
    "lab runs on disk": 554,
    "pilot batches": 17,
-   "pilot worlds": 356
+   "pilot worlds": 359
   }
  },
  "figures": {}

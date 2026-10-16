@@ -415,6 +415,12 @@ book/results/worlds.json; 2026-10-16)**
 - Brains mixed at birth: worlds a quarter of B2's size, twice the conquest; evolution 0.91/0.70, then
   0.73/0.55 — the largest steps in one world. (A first count said later brains lose: every mixed child
   was counted for the earlier side; tourney.contest now follows ancestry.)
+- Mixing is an engine setting since 2026-10-16 (`mix_at_birth`; the prototype's `mix` switches it on).
+  Same worlds draw for draw with one hidden layer (equiv.py; 60 iterations of B2 compared array by
+  array). The prototype gave every mixture a new genotype id, even of two clones, so genotype counts in
+  mixed pilot worlds were too high: effective genotypes per agent 0.33 by id against 0.30 by weights in
+  Q/mix-s1, 0.41 against 0.23 in Y/mix-poorest-s1. The profile counts mixed worlds' genotypes by their
+  weights. Experiment 17 (Ch. 80) is planned: ten B2 worlds with mixing for 10,000 iterations.
 - An input for raids on kin: like B2 in everything.
 
 **Open (being tested)**

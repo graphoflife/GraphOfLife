@@ -153,8 +153,8 @@ def two_core(n: int, edges: np.ndarray) -> float:
     return float((~gone).sum() / n) if n else 0.0
 
 
-def worlds() -> List[Tuple[str, str, str]]:
-    """(world id, its checkpoint, its family) for every world, each once."""
+def worlds() -> List[Tuple[str, str, str, bool]]:
+    """(world id, its checkpoint, its family, whether its brains are mixed at birth) for every world, each once."""
     from book_chapters.everyworld import replicas
     repeated = replicas()
     out = []
@@ -165,7 +165,8 @@ def worlds() -> List[Tuple[str, str, str]]:
             continue
         if int(json.load(open(meta)).get("iteration") or 0) < SETTLED:
             continue
-        out.append((d, ckpt, re.sub(r"-s\d+$", "", d)))
+        cfg = json.load(open(meta)).get("config") or {}
+        out.append((d, ckpt, re.sub(r"-s\d+$", "", d), bool(cfg.get("mix_at_birth"))))
     for config in sorted(glob.glob(os.path.join(PILOTS, "*", "*", "config.json"))):
         d = os.path.dirname(config)
         batch, name = d.split(os.sep)[-2:]
@@ -186,7 +187,9 @@ def worlds() -> List[Tuple[str, str, str]]:
             original = glob.glob(os.path.join(PILOTS, *name.split("-", 1), "ckpt_*.npz"))
             if at <= max((int(re.search(r"ckpt_(\d+)", p).group(1)) for p in original), default=-1):
                 continue
-        out.append((pid, last, f"{batch}/{re.sub(r'-s[0-9]+$', '', name)}"))
+        meta = json.load(open(config))
+        mixes = bool((meta.get("proto") or {}).get("mix") or (meta.get("cfg") or {}).get("mix_at_birth"))
+        out.append((pid, last, f"{batch}/{re.sub(r'-s[0-9]+$', '', name)}", mixes))
     return out
 
 
@@ -204,9 +207,9 @@ def kinds_of() -> Dict[str, float]:
     return {k: v for k, (_, v) in out.items()}
 
 
-def measure(item: Tuple[str, str, str]) -> Optional[Dict[str, Any]]:
+def measure(item: Tuple[str, str, str, bool]) -> Optional[Dict[str, Any]]:
     from gol_series import _ball_growth
-    wid, ckpt, family = item
+    wid, ckpt, family, mixes = item
     try:
         with np.load(ckpt, allow_pickle=False) as z:
             ids = z["ids"]
@@ -215,6 +218,15 @@ def measure(item: Tuple[str, str, str]) -> Optional[Dict[str, Any]]:
             born = z["born_at"]
             edges = z["edges"]
             iteration = int(z["counters"][2])
+            # A genotype is a set of weights. Its id says so everywhere but in the
+            # worlds that mixed brains at birth with the prototype's rule (until
+            # 2026-10-16), which gave a mixture of two clones — the parent's brain
+            # again — an id of its own: there the weights are compared instead.
+            if mixes and len(ids):
+                layers = int(z["n_layers"][0])
+                flat = np.concatenate([z[f"{k}{i}"].reshape(len(ids), -1).astype(np.float64)
+                                       for i in range(layers) for k in ("W", "b")], axis=1)
+                brains = np.unique(flat, axis=0, return_inverse=True)[1].ravel()
     except (OSError, KeyError, ValueError) as e:
         return {"id": wid, "error": f"{type(e).__name__}: {e}"}
     n = len(ids)

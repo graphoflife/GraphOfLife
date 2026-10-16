@@ -400,6 +400,14 @@
           "note": "Three more pilot ideas in B2: brains mixed from two parents at birth, brains whose every unit holds a token, an input for raids on one's own kind — and links that hold a token in a world without old age.",
           "file": "chapters/78-mixed-brains-costly-units.md",
           "status": "analysed"
+        },
+        {
+          "id": "80",
+          "title": "Mixed at birth: ten long worlds",
+          "note": "Brains mixed at birth, now a setting of the engine, in ten worlds of B2 for 10,000 iterations: do they stay healthy and rich, as the pilots that came closest to the author's picture did?",
+          "file": "chapters/80-mixed-at-birth-ten-long-worlds.md",
+          "experiment": "E17",
+          "status": "ready"
         }
       ]
     },
