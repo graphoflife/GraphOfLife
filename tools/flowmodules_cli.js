@@ -2,7 +2,8 @@
 /*
  * Flow modules of a window of frames, worked out by the page's own arithmetic.
  *
- *     node tools/flowmodules_cli.js [--floor 0.3] [--mutual] [--null SEED] < frames.jsonl
+ *     node tools/flowmodules_cli.js [--floor 0.3] [--mutual] [--null SEED] [--shuffle SEED]
+ *                                   [--partitions FILE] < frames.jsonl
  *
  * Reads one frame per line — iteration, phase, ids and decisions.allocations,
  * the fields the Research tab's Flow modules view reads — follows the modules
@@ -10,13 +11,20 @@
  * object: the summary the view shows, the number of modules in every frame,
  * and how many frames had no flow.
  *
- * `--mutual` matches a module to the next frame's only when each is the
- * other's best overlap, at any overlap, instead of best-first above a floor.
+ * `--mutual` keeps, of the pairs above the floor, only those in which each
+ * module is the other's best overlap; with `--floor 0` that is at any overlap.
  * `--null SEED` first rewires every frame's flow at random, keeping how much
  * flow each agent sends and receives: each token that crossed a link is a
  * stub at both ends, the stubs are paired again at random, and the modules are
  * found in that. It says what the same amounts of flow give without their
- * structure.
+ * structure — but its modules are pairs and threes, so it is no yardstick for
+ * how long modules live. `--shuffle SEED` is: it keeps every frame's modules
+ * and their sizes, deals the agents among them at random, frame by frame, and
+ * follows those. A module of the real flow that lives longer than shuffled
+ * modules of its size lives on something other than chance overlaps.
+ * `--partitions FILE` also writes every frame's modules, one line a frame
+ * ({iteration, ids, module}: the module of each agent, -1 for none), for
+ * measures that need the whole partition.
  *
  * There is one implementation of the modules, the page's; this only loads it
  * the way tests/test_flowmodules.js does and hands it frames.
@@ -36,6 +44,8 @@ const option = (name, fallback) => {
 const floor = Number(option('--floor', 0.3));
 const mutual = !!option('--mutual', false);
 const nullSeed = option('--null', null);
+const shuffleSeed = option('--shuffle', null);
+const partitionsFile = option('--partitions', null);
 
 /** A seeded stream (mulberry32), so a null is the same null every time. */
 function stream(seed) {
@@ -68,12 +78,43 @@ function rewired(frame, random) {
   return { ...frame, decisions: { allocations } };
 }
 
+/**
+ * Every frame's modules with the agents dealt among them at random, the sizes
+ * kept: what following modules gives when nothing but their sizes carries over.
+ */
+function shuffleModules(random) {
+  const found = FlowModules.modulesOf.bind(FlowModules);
+  const dealt = new WeakMap();
+  FlowModules.modulesOf = frame => {
+    let known = dealt.get(frame);
+    if (!known) {
+      const real = found(frame);
+      const agents = [];
+      for (const members of real.groups.values()) for (const agent of members) agents.push(agent);
+      for (let i = agents.length - 1; i > 0; i--) {
+        const j = Math.floor(random() * (i + 1));
+        [agents[i], agents[j]] = [agents[j], agents[i]];
+      }
+      const groups = new Map();
+      let at = 0;
+      for (const [label, members] of real.groups) {
+        groups.set(label, new Set(agents.slice(at, at + members.size)));
+        at += members.size;
+      }
+      known = { ...real, groups };
+      dealt.set(frame, known);
+    }
+    return known;
+  };
+}
+
 const lines = fs.readFileSync(0, 'utf8').split('\n').filter(line => line.trim());
 let frames = lines.map(line => JSON.parse(line));
 if (nullSeed !== null) {
   const random = stream(Number(nullSeed));
   frames = frames.map(frame => rewired(frame, random));
 }
+if (shuffleSeed !== null) shuffleModules(stream(Number(shuffleSeed)));
 const { history, withoutFlow } = FlowModules.follow(frames, { floor, mutual });
 const perFrame = new Map();
 for (const row of history) perFrame.set(row.iteration * 2 + row.phase, row.modules);
@@ -83,12 +124,24 @@ for (const row of history) lives.set(row.id, (lives.get(row.id) || 0) + 1);
 const lifeCounts = {}, sizeCounts = {};
 for (const life of lives.values()) lifeCounts[life] = (lifeCounts[life] || 0) + 1;
 for (const row of history) sizeCounts[row.size] = (sizeCounts[row.size] || 0) + 1;
+if (partitionsFile !== null) {
+  const rows = [];
+  for (const frame of frames) {
+    const { ids, hasFlow, groups } = FlowModules.modulesOf(frame);
+    if (!hasFlow) continue;
+    const moduleOf = new Map();
+    for (const [label, members] of groups) for (const agent of members) moduleOf.set(agent, label);
+    rows.push(JSON.stringify({ iteration: frame.iteration, ids, module: ids.map(id => (moduleOf.has(id) ? moduleOf.get(id) : -1)) }));
+  }
+  fs.writeFileSync(partitionsFile, rows.join('\n') + '\n');
+}
 process.stdout.write(JSON.stringify({
   frames: frames.length,
   withoutFlow,
   floor: mutual ? null : floor,
   mutual,
   null: nullSeed !== null,
+  shuffled: shuffleSeed !== null,
   modulesPerFrame: [...perFrame.values()],
   agentsPerFrame: frames.filter(f => (f.decisions || {}).allocations?.length).map(f => (f.ids || []).length),
   lives: lifeCounts,

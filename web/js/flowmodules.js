@@ -261,9 +261,12 @@ const FlowModules = {
    * were not in it last time. A module with a long life and a high turnover is
    * a pattern being carried by different matter each iteration.
    *
-   * `mutual` matches a pair only if each is the other's best overlap, at any
-   * overlap at all: a matching with no floor to choose, which the book uses
-   * beside the floor the view offers.
+   * `mutual` keeps, of the pairs above the floor, only those in which each
+   * module is the other's best overlap; with a floor of 0 that is a matching at
+   * any overlap at all. On these worlds' flows a matching at any overlap mostly
+   * follows chance — small modules carried on by one shared agent — so the
+   * book matches above the floor and sets it beside the same modules with
+   * their agents dealt among them at random (tools/flowmodules_cli.js).
    */
   track(previous, current, { floor = 0.3, mutual = false } = {}) {
     // The modules of one frame are disjoint, so what each new module shares
