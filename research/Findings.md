@@ -59,6 +59,33 @@ otherwise. Last consolidated: 2026-10-16.
   fluctuations do not average out (one game can cut off half a 60,000-agent
   world); distances ∝ N^0.25–0.30.
 
+## How alike the agents are (Ch. 70; B1 and B2 at 10,000 tokens)
+
+- Every brain put into the same 200 situations with the same 8 draws of the
+  random inputs (research/oee/checks/diversity.py). The share kept at home
+  splits into situation 0.46, brain 0.02, brain-in-situation 0.23, chance 0.29
+  in B2; situation 0.71 in B1. Much of "situation" is the rules: half of B2's
+  agents hold one token, which keep_home keeps at home whatever the brain says;
+  B1's even split puts 1/(k+1) at home.
+- A child's share: situation 0.82 in B2 (valence and min_child refuse births),
+  brain 0.92 in B1 (a few brains would have one). Spreading and linking a
+  newborn are traits of the brain, in founders as much (0.87, 0.90).
+- B2's agents stake as differently as random brains (total variation 0.19 for
+  both, in the same situations) but steadily: 17.5 effective kinds of staking
+  (1.6–42.5) and 54 over every decision, from about 950 effective genotypes;
+  nine pairs of agents in ten differ beyond their own noise. B1's agents are
+  nearly seven times more alike than random brains (0.075 against 0.51); 3.2
+  kinds of staking, and in nine worlds of ten the largest kind is exactly the
+  agents that split evenly (to within 0.02).
+- B2's kinds turn over: found again among 200 agents 0.68 at the same moment
+  (the ceiling a sample allows), 0.49 after 100 iterations (every agent of the
+  first moment dead of age by then), 0.25 after 500, 0.22 after 1,000,
+  0.15–0.17 after 3,000–5,000 (long runs, ceiling 0.63). B1's long worlds keep
+  theirs: 0.47 after 3,000, 0.82 after 5,000 (ceiling 0.90).
+- Kinds sit apart: in B2 they explain 31% of their carriers' log degree (16%
+  for shuffled kinds), in B1 31% of their log tokens (16%). Niches or
+  families: untested.
+
 ## Part V: engineering open-ended evolution
 
 **The yardstick (Ch. 46, E12; 10 worlds of 5,000 tokens)**

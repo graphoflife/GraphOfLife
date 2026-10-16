@@ -76,7 +76,7 @@ everything can be checked with it.
 - [Chapter 38 · Do agents cooperate?](chapters/38-do-agents-cooperate.md)
 - [Chapter 39 · Questioning the mechanics](chapters/39-questioning-the-mechanics.md)
 - [Chapter 40 · Meta II · What the measurements say about open-ended evolution](chapters/40-meta-2.md)
-- Chapter 70 · How different are the agents? — *not written yet*
+- [Chapter 70 · How different are the agents?](chapters/70-how-different-are-the-agents.md)
 - Chapter 71 · Flow modules: groups that outlast their members — *not written yet*
 - [Chapter 72 · Lightning in every world](chapters/72-lightning-in-every-world.md)
 

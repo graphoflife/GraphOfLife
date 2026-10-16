@@ -589,3 +589,38 @@ linktoken-s1 1,000/500 0.83, 2,000/1,000 0.73; -s2 0.93, 0.84; linkseek-s1
 0.81, 0.71; -s2 0.87, 0.62. B2 control 0.69/0.67, 0.65/0.76. Networks healthy
 without the cap (hub 2-3%, dimension 4.1-4.2, nothing cut off), 1,100-1,500
 agents. Written into Ch. 57 (Added later) and Ch. 78.
+
+## How different are the agents? (2026-10-16, night)
+research/oee/checks/diversity.py: 200 situations (what living agents read, after
+one game), 8 shared draws of the random rows, the brains of 400 agents and 400
+founders in all of them, decisions by the engine's rules. E16's ten B2 worlds at
+0/100/500/1,000/2,000, E02's first ten B1 worlds at 3,000, the long pilots.
+- Variance split (median of ten): B2 home 0.46 situation, 0.02 brain, 0.23
+  brain-in-situation, 0.29 chance; child 0.82 situation (valence, min_child);
+  spread and link are traits (brain+interaction 0.86, 0.97) — founders too
+  (0.87, 0.90). B1 home 0.71 situation (even split = 1/(k+1)); child 0.92 brain.
+- B2 has 49–57% of its agents at ONE token: keep_home rounds up, so they keep it
+  at home whatever the brain says. B2 brains go all in (spread 0.1–4%); B1 spread.
+- Stake TV between two agents (same situation, same draw): B2 2,000 0.185 vs
+  own noise 0.129 vs founders 0.191 (no more alike than random); B1 0.075 vs
+  0.035 vs founders 0.51.
+- Kinds (noise floor = 95% quantile of brains' half-vs-half distance): B2 17.5
+  effective kinds of staking (1.6–42.5), 54 over all decisions, from ~950
+  effective genotypes; founders ~4 (half spread evenly = one kind). B1 3.2
+  (1.1–57); in 9 of 10 B1 worlds the largest kind = the share of agents whose
+  every stake score is <= 0 (Ch. 19's even split), within 0.02 — the test finds
+  what it should.
+- Persistence (share of A's agents whose kind is found among 200 of B): B2
+  500->1,000 0.25, 1,000->2,000 0.22, long 2,000->5,000 0.145, 5,000->10,000
+  0.17; B1-long 0.47, 0.82. Ceiling (same moment twice, diversity_gaps.sh): B2
+  at 1,000 0.68 (0.56-0.75), +100 0.49 (0.41-0.62); long B2 at 5,000 0.63;
+  B1-long at 5,000 0.90. So B2 keeps ~1/3 of its findable kinds over 500-1,000
+  iterations and ~1/4 over 5,000; B1 ~9/10.
+- Niches: B2 kinds explain 31% of carriers' log degree vs 16% shuffled (all ten
+  worlds above every shuffle), 22% vs 16% of tokens; B1 tokens 31% vs 16%,
+  degree no more than chance. Niche or kinship: untested.
+Next: diversity_across.sh — every lab condition (3 seeds) and every pilot.
+Flow modules: "mutual" results were matched above the 0.3 floor too (track
+applies the floor first; the CLI defaults to 0.3); in rewired flow modules are
+pairs and one shared agent carries identity, so null lifetimes are LONGER (34 vs
+19 games in B1-100000-s001). Fix after the running flow jobs finish.

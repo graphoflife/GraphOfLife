@@ -57,7 +57,7 @@ given in its own units: how far apart two agents in the same situation and
 draw are (the standard deviation over agents), against how far one brain is
 from itself over the draws.
 
-Chapter 70, *How different are the agents?*, uses this split.
+[Chapter 70](../chapters/70-how-different-are-the-agents.md), *How different are the agents?*, uses this split.
 
 <!-- turns -->
 [Contents](../README.md)

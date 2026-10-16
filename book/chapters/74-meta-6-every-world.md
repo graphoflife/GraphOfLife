@@ -154,7 +154,7 @@ that question was about. Gathered:
 | loops and the exact circulation, chains, help ([Chapter 58](58-gliders-and-who-helps-whom.md)) | ten B1 and ten B2 worlds | the alliance pilots, batches P and Q |
 | lifetime contests between eras ([Chapter 50](50-why-evolution-stops.md)) | B2, through the long runs that go on from its worlds | every pilot batch |
 | correlations among agents ([Appendix B](B-what-goes-with-what.md)) | ten B1 and ten B2 worlds; now any run, in the Research tab (new) | any run made on the server or in the browser (new) |
-| how different the agents are (Chapter 70) | B1 and B2, over a world's life (new) | the long runs (new) |
+| how different the agents are ([Chapter 70](70-how-different-are-the-agents.md)) | B1 and B2, over a world's life (new) | the long runs (new) |
 | exploitability ([Chapter 50](50-why-evolution-stops.md)) | Experiment 16 | — |
 
 What is still missing: the lifetime contests for the lab's B1 worlds, whose

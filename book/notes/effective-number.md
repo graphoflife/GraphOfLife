@@ -29,7 +29,7 @@ one, of order 2, weighs the common kinds most).
 
 Two genotypes one mutation apart may act exactly alike. Counting them as two
 kinds overstates diversity. That is why
-Chapter 70, *How different are the agents?*, groups brains into kinds **by what they do**, not by their weights: brains
+[Chapter 70](../chapters/70-how-different-are-the-agents.md), *How different are the agents?*, groups brains into kinds **by what they do**, not by their weights: brains
 whose decisions, in the same situations, differ no more than a brain differs
 from itself between two sets of random inputs, are one kind. The effective
 number of kinds of behaviour is then set beside the effective number of

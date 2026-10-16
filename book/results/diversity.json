@@ -1,0 +1,222 @@
+{
+ "chapter": "diversity",
+ "numbers": {
+  "B2 after 2,000 iterations:home:situation": 0.462,
+  "B2 after 2,000 iterations:home:brain": 0.024,
+  "B2 after 2,000 iterations:home:interaction": 0.227,
+  "B2 after 2,000 iterations:home:chance": 0.285,
+  "B2 after 2,000 iterations:child:situation": 0.817,
+  "B2 after 2,000 iterations:child:brain": 0.004,
+  "B2 after 2,000 iterations:child:interaction": 0.167,
+  "B2 after 2,000 iterations:child:chance": 0.011,
+  "B2 after 2,000 iterations:spread:situation": 0.003,
+  "B2 after 2,000 iterations:spread:brain": 0.418,
+  "B2 after 2,000 iterations:spread:interaction": 0.444,
+  "B2 after 2,000 iterations:spread:chance": 0.147,
+  "B2 after 2,000 iterations:link:situation": 0.003,
+  "B2 after 2,000 iterations:link:brain": 0.891,
+  "B2 after 2,000 iterations:link:interaction": 0.079,
+  "B2 after 2,000 iterations:link:chance": 0.03,
+  "B2 after 2,000 iterations:revolt:situation": 0.271,
+  "B2 after 2,000 iterations:revolt:brain": 0.108,
+  "B2 after 2,000 iterations:revolt:interaction": 0.343,
+  "B2 after 2,000 iterations:revolt:chance": 0.265,
+  "B1 after 3,000 iterations:home:situation": 0.71,
+  "B1 after 3,000 iterations:home:brain": 0.029,
+  "B1 after 3,000 iterations:home:interaction": 0.142,
+  "B1 after 3,000 iterations:home:chance": 0.103,
+  "B1 after 3,000 iterations:child:situation": 0.003,
+  "B1 after 3,000 iterations:child:brain": 0.919,
+  "B1 after 3,000 iterations:child:interaction": 0.078,
+  "B1 after 3,000 iterations:child:chance": 0.0,
+  "B1 after 3,000 iterations:spread:situation": 0.0,
+  "B1 after 3,000 iterations:spread:brain": 1.0,
+  "B1 after 3,000 iterations:spread:interaction": 0.0,
+  "B1 after 3,000 iterations:spread:chance": 0.0,
+  "B1 after 3,000 iterations:link:situation": 0.0,
+  "B1 after 3,000 iterations:link:brain": 1.0,
+  "B1 after 3,000 iterations:link:interaction": 0.0,
+  "B1 after 3,000 iterations:link:chance": 0.0,
+  "B1 after 3,000 iterations:revolt:situation": 0.357,
+  "B1 after 3,000 iterations:revolt:brain": 0.447,
+  "B1 after 3,000 iterations:revolt:interaction": 0.111,
+  "B1 after 3,000 iterations:revolt:chance": 0.062,
+  "Founder brains, in B2's situations:home:situation": 0.687,
+  "Founder brains, in B2's situations:home:brain": 0.021,
+  "Founder brains, in B2's situations:home:interaction": 0.118,
+  "Founder brains, in B2's situations:home:chance": 0.171,
+  "Founder brains, in B2's situations:child:situation": 0.349,
+  "Founder brains, in B2's situations:child:brain": 0.012,
+  "Founder brains, in B2's situations:child:interaction": 0.609,
+  "Founder brains, in B2's situations:child:chance": 0.026,
+  "Founder brains, in B2's situations:spread:situation": 0.0,
+  "Founder brains, in B2's situations:spread:brain": 0.87,
+  "Founder brains, in B2's situations:spread:interaction": 0.097,
+  "Founder brains, in B2's situations:spread:chance": 0.033,
+  "Founder brains, in B2's situations:link:situation": 0.0,
+  "Founder brains, in B2's situations:link:brain": 0.9,
+  "Founder brains, in B2's situations:link:interaction": 0.076,
+  "Founder brains, in B2's situations:link:chance": 0.024,
+  "Founder brains, in B2's situations:revolt:situation": 0.21,
+  "Founder brains, in B2's situations:revolt:brain": 0.236,
+  "Founder brains, in B2's situations:revolt:interaction": 0.405,
+  "Founder brains, in B2's situations:revolt:chance": 0.148,
+  "b2_stake_tv": {
+   "0": 0.45536102476795753,
+   "100": 0.2451480136547254,
+   "500": 0.21683209256176583,
+   "1000": 0.18799540182654365,
+   "2000": 0.18545262476294563
+  },
+  "b2_stake_noise": {
+   "0": 0.26301471670046905,
+   "100": 0.206671356533852,
+   "500": 0.15394010669773195,
+   "1000": 0.1300006506884993,
+   "2000": 0.12867209254481893
+  },
+  "b2_stake_kinds": {
+   "0": 3.902652698441212,
+   "100": 21.74903774340119,
+   "500": 15.851551647661124,
+   "1000": 29.697900665642607,
+   "2000": 17.50852853772382
+  },
+  "b2_pairs_apart": {
+   "0": 0.7459879104539737,
+   "100": 0.9473812500000002,
+   "500": 0.9130625000000001,
+   "1000": 0.9499656250000003,
+   "2000": 0.9042656250000002
+  },
+  "b2_genotypes_effective": {
+   "0": 94.89327002705238,
+   "100": 591.3316803057635,
+   "500": 782.4835520891045,
+   "1000": 868.8433839054185,
+   "2000": 950.4115048609203
+  },
+  "persist:B2 ceiling 1,000": {
+   "median": 0.6799999999999999,
+   "worlds": 10,
+   "range": [
+    0.555,
+    0.745
+   ]
+  },
+  "persist:B2 ceiling 5,000": {
+   "median": 0.63,
+   "worlds": 3,
+   "range": [
+    0.605,
+    0.735
+   ]
+  },
+  "persist:B2 +100": {
+   "median": 0.4875,
+   "worlds": 10,
+   "range": [
+    0.405,
+    0.62
+   ]
+  },
+  "persist:B2 +500": {
+   "median": 0.2525,
+   "worlds": 10,
+   "range": [
+    0.11,
+    0.445
+   ]
+  },
+  "persist:B2 +1,000": {
+   "median": 0.22,
+   "worlds": 10,
+   "range": [
+    0.05,
+    0.425
+   ]
+  },
+  "persist:B2 +3,000": {
+   "median": 0.145,
+   "worlds": 3,
+   "range": [
+    0.12,
+    0.22
+   ]
+  },
+  "persist:B2 +5,000": {
+   "median": 0.17,
+   "worlds": 3,
+   "range": [
+    0.165,
+    0.175
+   ]
+  },
+  "persist:B1 ceiling 5,000": {
+   "median": 0.9025000000000001,
+   "worlds": 2,
+   "range": [
+    0.89,
+    0.915
+   ]
+  },
+  "persist:B1 +3,000": {
+   "median": 0.47000000000000003,
+   "worlds": 2,
+   "range": [
+    0.395,
+    0.545
+   ]
+  },
+  "persist:B1 +5,000": {
+   "median": 0.8175,
+   "worlds": 2,
+   "range": [
+    0.685,
+    0.95
+   ]
+  },
+  "B2:niche_tokens": {
+   "eta2": 0.21764498192811887,
+   "shuffled": 0.16011663455433683,
+   "above": 0.9975
+  },
+  "B2:niche_degree": {
+   "eta2": 0.3120345460195413,
+   "shuffled": 0.16044920639601024,
+   "above": 1.0
+  },
+  "B1:niche_tokens": {
+   "eta2": 0.3101229635241215,
+   "shuffled": 0.1622350118921621,
+   "above": 1.0
+  },
+  "B1:niche_degree": {
+   "eta2": 0.14661888053507538,
+   "shuffled": 0.16319533567773353,
+   "above": 0.4
+  }
+ },
+ "figures": {
+  "split": {
+   "title": "Where, who and chance",
+   "caption": "How the variance of each decision splits: into where the agent is (the situation), who it is (its brain, wherever it is), who it is in that situation (how its brain answers that situation), and chance (its random inputs). The median over ten worlds of each part. A decision driven by where agents are is one they all take alike; one driven by who they are is a trait that differs between them.",
+   "recipe": "**Runs.** The ten B2 worlds of Experiment 16 at iteration 2,000 (their archives) and the first ten B1 worlds of Experiment 2 at the end of their 3,000 iterations.\n\n**Data.** From `GraphOfLifeRuns/.pilots/diversity/B2.json` and `B1.json` (`research/oee/checks/diversity.py`).\n\n1. Load the world and play one game, so its messages are fresh (`research/oee/checks/diversity.py`).\n2. Take what 200 living agents read, and draw their random input rows 8 times, the same draws for every brain.\n3. Put the brains of 400 agents drawn at random, and 400 fresh founder brains, into every situation and draw, and turn their outputs into decisions by the engine's rules.\n4. Split each decision's variance over brains, situations and draws into the four parts (the note *Where, who and chance*); take the median over worlds.\n\n**To make it again:** `python3 book_figures.py diversity`."
+  },
+  "life": {
+   "title": "Through a B2 world's life",
+   "caption": "Left: in the same situation and with the same random inputs, how far apart two agents' stakes are (the total variation: the share of tokens one would have to move to stake like the other), against how far one brain is from itself with other random inputs, and against two fresh founders. Right: how many kinds of staking the agents fall into, counted by the agents in each (an effective number), beside the same for founders. Medians of ten worlds.",
+   "recipe": "**Runs.** The ten B2 worlds of Experiment 16, from their archives at iterations 0, 100, 500, 1,000 and 2,000.\n\n**Data.** From `GraphOfLifeRuns/.pilots/diversity/B2.json` (`research/oee/checks/diversity.py`).\n\n1. Load the world and play one game, so its messages are fresh (`research/oee/checks/diversity.py`).\n2. Take what 200 living agents read, and draw their random input rows 8 times, the same draws for every brain.\n3. Put the brains of 400 agents drawn at random, and 400 fresh founder brains, into every situation and draw, and turn their outputs into decisions by the engine's rules.\n4. Two brains are of one kind while their stakes differ by no more than 95% of brains differ from themselves between two halves of the draws; count the kinds by their carriers (1 / sum of squared shares).\n\n**To make it again:** `python3 book_figures.py diversity`."
+  },
+  "kinds": {
+   "title": "Genotypes and kinds of behaviour",
+   "caption": "Each dot is a world at one moment: across, how many genotypes it holds, counted by their carriers; up, how many kinds of staking its agents fall into, counted the same way. Far more genotypes than kinds means most genetic differences change nothing an agent does.",
+   "recipe": "**Runs.** Every world measured: B2 over its life, B1 at its end, the long pilot worlds.\n\n**Data.** From `GraphOfLifeRuns/.pilots/diversity/*.json` (`research/oee/checks/diversity.py`).\n\n1. Load the world and play one game, so its messages are fresh (`research/oee/checks/diversity.py`).\n2. Take what 200 living agents read, and draw their random input rows 8 times, the same draws for every brain.\n3. Put the brains of 400 agents drawn at random, and 400 fresh founder brains, into every situation and draw, and turn their outputs into decisions by the engine's rules.\n\n**To make it again:** `python3 book_figures.py diversity`."
+  },
+  "persist": {
+   "title": "Do kinds of behaviour last?",
+   "caption": "For two moments of the same world: 200 agents drawn from each, their brains put into the situations of the first and grouped into kinds together, over the stake and every other decision. The share of the first moment's agents whose kind is found among the second's, +N iterations later. The *ceiling* draws the second 200 from the same world at the same moment (at iteration 1,000 in Experiment 16's worlds, 5,000 in the long runs): it is as much as a sample of 200 can find, since a rare kind can be missed. Each dot is a world.",
+   "recipe": "**Runs.** The ten B2 worlds of Experiment 16 at 1,000 (against themselves, and 100 iterations later), 500\u21921,000 and 1,000\u21922,000; three of them played on as pilots, at 5,000 against themselves, 2,000\u21925,000 and 5,000\u219210,000; and B1's two long pilot worlds, at 5,000 against themselves, 2,000\u21925,000 and 5,000\u219210,000.\n\n**Data.** From `GraphOfLifeRuns/.pilots/diversity/persist.json` and `persist_gaps.json` (`research/oee/checks/diversity.py --persist`).\n\n1. Load the world and play one game, so its messages are fresh (`research/oee/checks/diversity.py`).\n2. Take what 200 living agents read, and draw their random input rows 8 times, the same draws for every brain.\n3. Draw 200 agents from each moment and put their brains into the first moment's situations and draws.\n4. Group the brains of both moments together, over the stake and the five decisions; ask which kinds of the first are found in the second.\n\n**To make it again:** `python3 book_figures.py diversity`."
+  }
+ }
+}

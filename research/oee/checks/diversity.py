@@ -446,6 +446,15 @@ def persist(spec_a: str, spec_b: str, seed: int = 7) -> Dict[str, Any]:
             "b_agents_whose_kind_was_there": share(era == 1, in_a)}
 
 
+def measured(spec: str):
+    """measure(spec), or None with the reason printed: one world that cannot be read stops no other."""
+    try:
+        return measure(spec)
+    except Exception as e:  # noqa: BLE001 - a long batch reports and goes on
+        print(f"{spec}: not measured ({type(e).__name__}: {e})", flush=True)
+        return None
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("worlds", nargs="*")
@@ -456,8 +465,12 @@ def main():
     os.makedirs(OUT, exist_ok=True)
     path = os.path.join(OUT, f"{a.label}.json")
     done = json.load(open(path)) if os.path.exists(path) else {"worlds": [], "persist": []}
+    measured_before = {w["world"] for w in done["worlds"]}
+    todo = [w for w in a.worlds if w not in measured_before]
     with ProcessPoolExecutor(max_workers=a.jobs) as pool:
-        for result in pool.map(measure, a.worlds):
+        for result in pool.map(measured, todo):
+            if result is None:
+                continue
             done["worlds"].append(result)
             json.dump(done, open(path, "w"), indent=1)
             k = result["kinds"]

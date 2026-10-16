@@ -237,5 +237,5 @@ about flow.
 <!-- turns -->
 ---
 
-← [Chapter 40 · Meta II · What the measurements say about open-ended evolution](40-meta-2.md) · [Contents](../README.md) · [Chapter 41 · Do the brains matter?](41-do-the-brains-matter.md) →
+← [Chapter 70 · How different are the agents?](70-how-different-are-the-agents.md) · [Contents](../README.md) · [Chapter 41 · Do the brains matter?](41-do-the-brains-matter.md) →
 <!-- /turns -->
