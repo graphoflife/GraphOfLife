@@ -14,9 +14,8 @@ The network — the health bar of Chapter 46, whose numbers are the book's own:
   worst link cut      no single link's loss cuts off more than 1%
   hub                 the best-connected agent joined to at most 5% of the others
   links per agent     3 to 12
-  dimension           2.3 to 4 by balls (from the table of every world, the
-                      stretch at the world's end; the author's "almost three" is
-                      the distance from 3)
+  dimension           2.3 to 4 by balls (gol_series's, on the checkpoint itself;
+                      the author's "almost three" is the middle of the range)
 Diversity — how widely the agents spread, with no line to draw:
   tokens, links, ages the effective number of doubling classes the agents fill
                       (1, 2-3, 4-7, ...; for ages, age + 1): exp of the Shannon
@@ -47,7 +46,6 @@ ROOT = "/home/stefan/Documents/CodingProjects/GraphOfLife Claude"
 sys.path.insert(0, ROOT)
 RUNS = os.path.join(ROOT, "GraphOfLifeRuns")
 PILOTS = os.path.join(RUNS, ".pilots")
-ACROSS = os.path.join(PILOTS, "atlas", "across")
 DIVERSITY = os.path.join(PILOTS, "diversity")
 OUT = os.path.join(PILOTS, "atlas", "profile.json")
 #: The book's health bar (Chapter 46).
@@ -155,8 +153,8 @@ def two_core(n: int, edges: np.ndarray) -> float:
     return float((~gone).sum() / n) if n else 0.0
 
 
-def worlds() -> List[Tuple[str, str, str, Optional[str]]]:
-    """(world id, its checkpoint, its family, the table entry's file) for every world, each once."""
+def worlds() -> List[Tuple[str, str, str]]:
+    """(world id, its checkpoint, its family) for every world, each once."""
     from book_chapters.everyworld import replicas
     repeated = replicas()
     out = []
@@ -167,7 +165,7 @@ def worlds() -> List[Tuple[str, str, str, Optional[str]]]:
             continue
         if int(json.load(open(meta)).get("iteration") or 0) < SETTLED:
             continue
-        out.append((d, ckpt, re.sub(r"-s\d+$", "", d), os.path.join(ACROSS, f"lab_{d}.json")))
+        out.append((d, ckpt, re.sub(r"-s\d+$", "", d)))
     for config in sorted(glob.glob(os.path.join(PILOTS, "*", "*", "config.json"))):
         d = os.path.dirname(config)
         batch, name = d.split(os.sep)[-2:]
@@ -181,8 +179,7 @@ def worlds() -> List[Tuple[str, str, str, Optional[str]]]:
         last = have[-1]
         if int(re.search(r"ckpt_(\d+)", last).group(1)) < SETTLED:
             continue
-        out.append((pid, last, f"{batch}/{re.sub(r'-s[0-9]+$', '', name)}",
-                    os.path.join(ACROSS, f"pilot_{batch}_{name}.json")))
+        out.append((pid, last, f"{batch}/{re.sub(r'-s[0-9]+$', '', name)}"))
     return out
 
 
@@ -200,8 +197,9 @@ def kinds_of() -> Dict[str, float]:
     return {k: v for k, (_, v) in out.items()}
 
 
-def measure(item: Tuple[str, str, str, Optional[str]]) -> Optional[Dict[str, Any]]:
-    wid, ckpt, family, table = item
+def measure(item: Tuple[str, str, str]) -> Optional[Dict[str, Any]]:
+    from gol_series import _ball_growth
+    wid, ckpt, family = item
     try:
         with np.load(ckpt, allow_pickle=False) as z:
             ids = z["ids"]
@@ -230,10 +228,12 @@ def measure(item: Tuple[str, str, str, Optional[str]]) -> Optional[Dict[str, Any
         "genotypes_per_agent": float(len(carried) / n), "effective_genotypes_per_agent": float(1.0 / (shares ** 2).sum() / n),
     }
     out.update(cuts(n, pairs))
-    if table and os.path.exists(table):
-        end = (json.load(open(table)).get("at") or {}).get("end") or {}
-        if end.get("dimension") is not None:
-            out["dimension"] = float(end["dimension"])
+    adj: Dict[int, set] = {u: set() for u in range(n)}
+    for a, b in pairs:
+        if a != b:
+            adj[int(a)].add(int(b))
+            adj[int(b)].add(int(a))
+    out["dimension"] = _ball_growth(list(range(n)), adj)[0]
     return out
 
 

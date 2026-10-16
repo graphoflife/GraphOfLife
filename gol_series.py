@@ -158,6 +158,65 @@ def _ball_curvature(rs, log_r, log_shell) -> Optional[float]:
     return -6.0 * d * bend
 
 
+def _ball_growth(ids: List[int], adj: Dict[int, set]) -> Tuple[Optional[float], Optional[float]]:
+    """
+    The dimension by ball growth, and the curvature the same fit was discarding.
+
+    Balls of radius 1 to 5 around 24 sources spaced evenly through `ids`; the
+    shells' sizes grow as r**(d-1) until a ball holds half the graph. Lifted out
+    of _structure so that a world read from a checkpoint (research/atlas/
+    profile.py) is measured the same way as a lab frame.
+    """
+    n = len(ids)
+    dimension = ricci = None
+    if n < 8:
+        return dimension, ricci
+    seeds, max_radius = 24, 5
+    step = max(1, n // min(seeds, n))
+    volume = [0.0] * (max_radius + 1)
+    sampled = 0
+    for s_i in range(0, n, step):
+        seen = {ids[s_i]}
+        shell = [ids[s_i]]
+        volume[0] += 1
+        for r in range(1, max_radius + 1):
+            nxt_shell = []
+            for u in shell:
+                for v in adj.get(u, ()):
+                    if v not in seen:
+                        seen.add(v)
+                        nxt_shell.append(v)
+            shell = nxt_shell
+            volume[r] += len(seen)
+            if not shell:
+                for rr in range(r + 1, max_radius + 1):
+                    volume[rr] += len(seen)
+                break
+        sampled += 1
+
+    if sampled:
+        volumes = [v / sampled for v in volume]
+        rs, xs, ys = [], [], []
+        for r in range(1, max_radius + 1):
+            if volumes[r] > n * 0.5:
+                continue
+            shell_size = volumes[r] - volumes[r - 1]
+            if shell_size <= 0:
+                continue
+            rs.append(float(r))
+            xs.append(math.log(r))
+            ys.append(math.log(shell_size))
+        if len(xs) >= 2:
+            mx = sum(xs) / len(xs)
+            my = sum(ys) / len(ys)
+            num = sum((x - mx) * (y - my) for x, y in zip(xs, ys))
+            den = sum((x - mx) ** 2 for x in xs)
+            # The shell exponent is d - 1.
+            dimension = (num / den + 1) if den > 0 else None
+        ricci = _ball_curvature(rs, xs, ys)
+    return dimension, ricci
+
+
 def _structure(ids: List[int], edges: List[List[int]]) -> Dict[str, Any]:
     """
     Loops, triangles and dimension, mirroring web/js/graphstats.js.
@@ -309,51 +368,7 @@ def _structure(ids: List[int], edges: List[List[int]]) -> Dict[str, Any]:
         mean_path = (reached_sum / reached_count) if reached_count > 0 else 0.0
 
     # --- ball-growth dimension, and the curvature the same fit was discarding ---
-    dimension = ricci = None
-    if n >= 8:
-        seeds, max_radius = 24, 5
-        step = max(1, n // min(seeds, n))
-        volume = [0.0] * (max_radius + 1)
-        sampled = 0
-        for s_i in range(0, n, step):
-            seen = {ids[s_i]}
-            shell = [ids[s_i]]
-            volume[0] += 1
-            for r in range(1, max_radius + 1):
-                nxt_shell = []
-                for u in shell:
-                    for v in adj.get(u, ()):
-                        if v not in seen:
-                            seen.add(v)
-                            nxt_shell.append(v)
-                shell = nxt_shell
-                volume[r] += len(seen)
-                if not shell:
-                    for rr in range(r + 1, max_radius + 1):
-                        volume[rr] += len(seen)
-                    break
-            sampled += 1
-
-        if sampled:
-            volumes = [v / sampled for v in volume]
-            rs, xs, ys = [], [], []
-            for r in range(1, max_radius + 1):
-                if volumes[r] > n * 0.5:
-                    continue
-                shell_size = volumes[r] - volumes[r - 1]
-                if shell_size <= 0:
-                    continue
-                rs.append(float(r))
-                xs.append(math.log(r))
-                ys.append(math.log(shell_size))
-            if len(xs) >= 2:
-                mx = sum(xs) / len(xs)
-                my = sum(ys) / len(ys)
-                num = sum((x - mx) * (y - my) for x, y in zip(xs, ys))
-                den = sum((x - mx) ** 2 for x in xs)
-                # The shell exponent is d - 1.
-                dimension = (num / den + 1) if den > 0 else None
-            ricci = _ball_curvature(rs, xs, ys)
+    dimension, ricci = _ball_growth(ids, adj)
 
     return {
         "cycleRank": cycle_rank,
