@@ -1,6 +1,6 @@
 """
-Batches T, U, V and W (2026-10-16): gifts in combination, the switches in
-combination, and revolutions in combination.
+Batches T, U, V, W and X (2026-10-16): gifts in combination, the switches in
+combination, revolutions in combination, and handover in combination.
 
 The author asked for gifts combined with every other mechanism, and for the
 existing settings tested in combination. Every world is a pilot in the engine's
@@ -34,11 +34,18 @@ W  revolutions in combination on B2 (asked for the same day): B2 without
    without revolutions; for them the missing corner is the same rule *with*
    revolutions, and that is what W makes. Gifts without revolutions are in T.
 
+X  handover in combination on B2 (asked for the same day): B2 with handover (a
+   parent may move some of its links to its newborn; B1's rule, off in B2)
+   together with each switch of W and each of batch S's other contests (with
+   revolutions, as W makes them), seeds 1 and 2: the fourth corner of a
+   two-by-two whose other three are B2, T/handover and the switch's control.
+   Gifts with handover are in T, handover without revolutions in W.
+
 The order of the queue (jobs_TUV.txt): every T combination with seed 1, then
 U, then V, then T's seed 2 — a first look at everything before the second seeds.
-jobs_W.txt: every W combination with seed 1, then seed 2 (a queue of its own).
+jobs_W.txt and jobs_X.txt: every combination with seed 1, then seed 2 (queues of their own).
 
-    python3 make_jobs_TU.py         writes jobs_T.txt, jobs_U.txt, jobs_V.txt, jobs_TUV.txt and jobs_W.txt
+    python3 make_jobs_TU.py         writes jobs_T.txt, jobs_U.txt, jobs_V.txt, jobs_TUV.txt, jobs_W.txt and jobs_X.txt
 """
 import itertools
 import os
@@ -187,6 +194,18 @@ def main():
             lines.append(job(f"{OUT}/W/rev-{name}-s{seed}", B2, "", proto, seed))
     open(os.path.join(HERE, "jobs_W.txt"), "w").write("\n".join(lines) + "\n")
     print(f"jobs_W.txt: {len(lines) - 1} worlds")
+
+    lines = ["# Batch X: handover in combination on B2 (make_jobs_TU.py), seed 1 then 2."]
+    for seed in (1, 2):
+        for name, sets, proto, _ in W_NOREV:
+            if name == "handover":
+                continue
+            lines.append(job(f"{OUT}/X/handover-{name}-s{seed}", B2,
+                             " ".join(x for x in ("allow_handover=true", sets) if x), proto, seed))
+        for name, proto, _ in W_REV:
+            lines.append(job(f"{OUT}/X/handover-{name}-s{seed}", B2, "allow_handover=true", proto, seed))
+    open(os.path.join(HERE, "jobs_X.txt"), "w").write("\n".join(lines) + "\n")
+    print(f"jobs_X.txt: {len(lines) - 1} worlds")
 
 
 if __name__ == "__main__":

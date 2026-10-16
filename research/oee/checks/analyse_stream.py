@@ -17,7 +17,7 @@ research/atlas/flowmodules.py pilots (flow modules).
 
 (S, P, Q and R are the controls of T, measured at the same iteration.)
 
-It scans every few minutes and ends when the queue PID has ended and every
+It scans every few minutes and ends when every queue named has ended and every
 world is analysed. A world whose analysis fails twice is reported and left.
 """
 from __future__ import annotations
@@ -107,7 +107,8 @@ def main():
     ap.add_argument("batches", nargs="+")
     ap.add_argument("--at", type=int, default=1000)
     ap.add_argument("--label", required=True)
-    ap.add_argument("--queue", type=int, default=0)
+    ap.add_argument("--queue", type=int, action="append", default=[],
+                    help="a queue whose worlds are still to come (may be given more than once)")
     ap.add_argument("--workers", type=int, default=2)
     a = ap.parse_args()
     os.makedirs(DONE, exist_ok=True)
@@ -130,7 +131,7 @@ def main():
                          ["research/atlas/flowmodules.py", "pilots", "--jobs", "1"]):
                 call(NICE + tool, os.path.join(DONE, "sweeps.log"))
             continue
-        queue_alive = a.queue and subprocess.run(["kill", "-0", str(a.queue)], capture_output=True).returncode == 0
+        queue_alive = any(subprocess.run(["kill", "-0", str(q)], capture_output=True).returncode == 0 for q in a.queue)
         if not queue_alive and not running() & {os.path.realpath(d) for b in a.batches
                                                  for d in glob.glob(os.path.join(PILOTS, b, "*"))}:
             print("stream analysed", flush=True)
