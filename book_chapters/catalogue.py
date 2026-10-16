@@ -50,7 +50,14 @@ BATCHES: Dict[str, Tuple[str, List[str]]] = {
     "V": ("Eight switches in combination on B1: a fractional factorial design", []),
     "W": ("No revolutions together with each other switch, on B2", []),
     "X": ("Handover together with each other switch, on B2", []),
+    "Y": ("Brains mixed at birth together with each other switch, on B2", []),
+    "Z": ("Settings drawn at random from every value the book has used, the values that make worlds worse "
+          "dropped round after round (research/oee/search.md)", []),
+    "LC": ("The candidates, the worlds closest to the author's picture of one that might keep evolving, played on "
+           "to 10,000 iterations", ["79"]),
 }
+#: Batches whose every world draws settings of its own: one line in the table of conditions.
+DRAWN = {"Z": "each world its settings drawn at random from the values the book has used (research/oee/search.md)"}
 #: The measures, by what to call them; each finds the worlds it was taken on.
 MEASURES = ["the record of every game", "lifetime contests (T = 100)", "games recorded and read again",
             "flow modules", "how different the agents are", "the table of every world"]
@@ -256,6 +263,11 @@ def pilot_rows(chapters, done) -> Tuple[Dict[str, Any], Dict[str, Any], Dict[str
                 + ([f"{waiting} queued"] if waiting else []) + ([f"{stopped_n} stopped early"] if stopped_n else [])
             status = ", ".join(parts)
         planned = len(names)
+        if batch in DRAWN:
+            seeds = sorted(int(m["cfg"].get("seed") or 0) for _, _, m in worlds)
+            details.append([batch, "every world its own", "B2", DRAWN[batch],
+                            f"{seeds[0]} to {seeds[-1]}" if seeds else "", ", ".join(f"{i:,}" for i in iters)])
+            conditions = {}
         for cond, members in sorted(conditions.items()):
             meta = members[0][2]
             cfg, proto = meta["cfg"], {k: v for k, v in (meta.get("proto") or {}).items() if k != "engine"}

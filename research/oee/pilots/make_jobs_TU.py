@@ -1,6 +1,6 @@
 """
-Batches T, U, V, W and X (2026-10-16): gifts in combination, the switches in
-combination, revolutions in combination, and handover in combination.
+Batches T, U, V, W, X and Y (2026-10-16): gifts in combination, the switches in
+combination, revolutions, handover and brains mixed at birth in combination.
 
 The author asked for gifts combined with every other mechanism, and for the
 existing settings tested in combination. Every world is a pilot in the engine's
@@ -41,9 +41,16 @@ X  handover in combination on B2 (asked for the same day): B2 with handover (a
    two-by-two whose other three are B2, T/handover and the switch's control.
    Gifts with handover are in T, handover without revolutions in W.
 
+Y  brains mixed at birth in combination on B2 (asked for the same day, after
+   Meta X found mixed worlds the closest to the author's picture): B2 with
+   mix together with each switch of W except mixing itself, and each of batch
+   S's other contests with revolutions, seeds 1 and 2: the fourth corner of a
+   two-by-two whose other three are B2, Q/mix and the switch's control. Gifts
+   with mixing are in T, mixing without revolutions in W, with handover in X.
+
 The order of the queue (jobs_TUV.txt): every T combination with seed 1, then
 U, then V, then T's seed 2 — a first look at everything before the second seeds.
-jobs_W.txt and jobs_X.txt: every combination with seed 1, then seed 2 (queues of their own).
+jobs_W.txt, jobs_X.txt and jobs_Y.txt: every combination with seed 1, then seed 2 (queues of their own).
 
     python3 make_jobs_TU.py         writes jobs_T.txt, jobs_U.txt, jobs_V.txt, jobs_TUV.txt, jobs_W.txt and jobs_X.txt
 """
@@ -206,6 +213,17 @@ def main():
             lines.append(job(f"{OUT}/X/handover-{name}-s{seed}", B2, "allow_handover=true", proto, seed))
     open(os.path.join(HERE, "jobs_X.txt"), "w").write("\n".join(lines) + "\n")
     print(f"jobs_X.txt: {len(lines) - 1} worlds")
+
+    lines = ["# Batch Y: brains mixed at birth in combination on B2 (make_jobs_TU.py), seed 1 then 2."]
+    for seed in (1, 2):
+        for name, sets, proto, _ in W_NOREV:
+            if name == "mix":
+                continue
+            lines.append(job(f"{OUT}/Y/mix-{name}-s{seed}", B2, sets, " ".join(x for x in ("mix=true", proto) if x), seed))
+        for name, proto, _ in W_REV:
+            lines.append(job(f"{OUT}/Y/mix-{name}-s{seed}", B2, "", "mix=true " + proto, seed))
+    open(os.path.join(HERE, "jobs_Y.txt"), "w").write("\n".join(lines) + "\n")
+    print(f"jobs_Y.txt: {len(lines) - 1} worlds")
 
 
 if __name__ == "__main__":
