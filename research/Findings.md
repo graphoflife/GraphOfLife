@@ -177,12 +177,28 @@ otherwise. Last consolidated: 2026-10-16.
   25–434 cut off; no valence → 8.7 links (up to 17.7), dimension > 4 in 7;
   handover → 40% outside the 2-core.
 
-**Who dies (Ch. 49, E15 planned)**
+**Who dies (Ch. 49, E15 analysed 2026-10-16)**
 - Kamikaze children: with links at birth and mending, newborns with 1–2 tokens
   stake everything away (46% of the starving are age 0).
 - keep_one (last token home) makes all-in attacks free: 75% of agents end with
   exactly one token (zombies). keep_home 0.3 (a share) avoids it.
 - Without any keep rule worlds starve to one agent.
+- E15 (B2 at 10,000 tokens, ten seeds, 1,000 iterations, one rule of death
+  changed at a time): the thesis is refuted, narrowly, by B2 itself — its
+  worlds keep 43–57% of their agents at a single token (median 52%; only four
+  of ten below a half, seven needed). The other two parts held: the last token
+  kept 74–79% (all ten above two thirds); nothing kept, every world extinct by
+  iteration 26–47. The order holds: half kept 37%, B2 52%, the last token 77%;
+  no old age 84%, children of any size 97% (median share at one token, each
+  world's median game over iterations 300–1,000; research/oee/checks/
+  e15_thesis.py).
+- Over 300–1,000: agents 3,030 (B2), 3,690 (last token), 2,690 (half kept),
+  9,540 (children of any size), 3,940 (no old age); births 1.0 per 100 agents
+  an iteration wherever agents die at 100 (replacement), 0.03 without old age;
+  children of any size come and die in cohorts every 100 iterations (Gini 0.04).
+- Lifetime contests (T = 100, 1,000 vs 500, median world): half kept 0.75, B2
+  0.68, children of any size 0.61, the last token 0.54, no old age 0.52 —
+  evolution goes on most where agents keep most, and stops without old age.
 
 **Why evolution stops (Ch. 50; pilots, research/oee/pilots/LOG.md)**
 - Every depth mechanic tried plateaus within 100–200 iterations: memory inputs,

@@ -1,0 +1,93 @@
+{
+ "chapter": "whodies",
+ "numbers": {
+  "one_token:B2": {
+   "median": 0.5241440236036778,
+   "below_half": 4,
+   "above_two_thirds": 0
+  },
+  "evolution:B2": {
+   "median": 0.6819306236881428,
+   "low": 0.6418905598959261,
+   "high": 0.7576223200012386,
+   "worlds": 10
+  },
+  "one_token:the last token kept": {
+   "median": 0.7691016753654278,
+   "below_half": 0,
+   "above_two_thirds": 10
+  },
+  "evolution:the last token kept": {
+   "median": 0.5392130545256623,
+   "low": 0.4507995609647292,
+   "high": 0.5565031450365763,
+   "worlds": 5
+  },
+  "one_token:half kept": {
+   "median": 0.37487412935696135,
+   "below_half": 9,
+   "above_two_thirds": 0
+  },
+  "evolution:half kept": {
+   "median": 0.750696332091681,
+   "low": 0.6616935185455133,
+   "high": 0.8936800546527235,
+   "worlds": 5
+  },
+  "one_token:children of any size": {
+   "median": 0.9699498598795533,
+   "below_half": 0,
+   "above_two_thirds": 10
+  },
+  "evolution:children of any size": {
+   "median": 0.6118616916216001,
+   "low": 0.5922437013923381,
+   "high": 0.654319135618485,
+   "worlds": 5
+  },
+  "one_token:no old age": {
+   "median": 0.839861035793227,
+   "below_half": 0,
+   "above_two_thirds": 10
+  },
+  "evolution:no old age": {
+   "median": 0.5162588658646825,
+   "low": 0.4458648950107845,
+   "high": 0.5588135815413489,
+   "worlds": 5
+  },
+  "verdict": {
+   "B2 below 0.5 in at least 7": false,
+   "the last token kept above 0.67 in at least 7": true,
+   "nothing kept under 100 agents in at least 5": true,
+   "holds": false
+  }
+ },
+ "figures": {
+  "one_token": {
+   "title": "Agents holding a single token",
+   "caption": "Each dot is a world: the share of its agents holding exactly one token after each game, its median over iterations 300 to 1,000; the bar is the median world. The thesis asked B2's worlds to stay below a half and the worlds keeping only the last token to rise above two thirds, seven times in ten each.",
+   "recipe": "**Runs.** The 60 runs of Experiment 15 \u2014 B2 at 10,000 tokens, seeds 1 to 10, 1,000 iterations \u2014 in six conditions: B2, and B2 with one rule of death changed. The ten worlds with nothing kept died out within 50 iterations and are not drawn. They are made with `python3 gol_lab.py run E15`.\n\n**Data.** From Each run's game frames, `GraphOfLifeRuns/<run>/frames/` (`research/oee/checks/e15_thesis.py`).\n\n1. For every iteration from 300 to 1,000, read the frame after the game (frame 2t + 1) and count the agents holding exactly one token, as a share of all.\n2. Take each world's median over those 701 games.\n\n**To make it again:** `python3 book_figures.py whodies`."
+  },
+  "agents": {
+   "title": "Agents alive",
+   "caption": "Each band is ten worlds: the line their median, the shade the middle half and nine in ten. The worlds that kept nothing at home died out within 50 iterations and are not drawn.",
+   "recipe": "**Runs.** The 60 runs of Experiment 15 \u2014 B2 at 10,000 tokens, seeds 1 to 10, 1,000 iterations \u2014 in six conditions: B2, and B2 with one rule of death changed. The ten worlds with nothing kept died out within 50 iterations and are not drawn. They are made with `python3 gol_lab.py run E15`.\n\n**Data.** From From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, one row per recorded phase (see [What a run records](../notes/frames-and-stats.md)).\n\n1. Read `nodes` from the rows of phase 2, for iterations 0 to 1,000.\n2. At each iteration, the median of the ten worlds, the middle half and nine in ten.\n\n**To make it again:** `python3 book_figures.py whodies`."
+  },
+  "births": {
+   "title": "Births per hundred agents in a reproduction phase",
+   "caption": "Each band is ten worlds: the line their median, the shade the middle half and nine in ten. The worlds that kept nothing at home died out within 50 iterations and are not drawn. A logarithmic axis: births fall a hundredfold without old age.",
+   "recipe": "**Runs.** The 60 runs of Experiment 15 \u2014 B2 at 10,000 tokens, seeds 1 to 10, 1,000 iterations \u2014 in six conditions: B2, and B2 with one rule of death changed. The ten worlds with nothing kept died out within 50 iterations and are not drawn. They are made with `python3 gol_lab.py run E15`.\n\n**Data.** From From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, one row per recorded phase (see [What a run records](../notes/frames-and-stats.md)).\n\n1. Read `births` from the rows of phase 1, divided by the agents that faced the phase (`nodes_before`), times 100, for iterations 0 to 1,000.\n2. At each iteration, the median of the ten worlds, the middle half and nine in ten.\n\n**To make it again:** `python3 book_figures.py whodies`."
+  },
+  "median": {
+   "title": "The median agent's tokens",
+   "caption": "Each band is ten worlds: the line their median, the shade the middle half and nine in ten. The worlds that kept nothing at home died out within 50 iterations and are not drawn. From iteration 100, once the founders' first riches are spent.",
+   "recipe": "**Runs.** The 60 runs of Experiment 15 \u2014 B2 at 10,000 tokens, seeds 1 to 10, 1,000 iterations \u2014 in six conditions: B2, and B2 with one rule of death changed. The ten worlds with nothing kept died out within 50 iterations and are not drawn. They are made with `python3 gol_lab.py run E15`.\n\n**Data.** From From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, one row per recorded phase (see [What a run records](../notes/frames-and-stats.md)).\n\n1. Read `medianTokens` from the rows of phase 2, for iterations 100 to 1,000.\n2. At each iteration, the median of the ten worlds, the middle half and nine in ten.\n\n**To make it again:** `python3 book_figures.py whodies`."
+  },
+  "evolution": {
+   "title": "Do the brains of 1,000 beat those of 500?",
+   "caption": "Each dot is a world: the share of a world its brains of iteration 1,000 hold after 100 iterations against those of iteration 500, the mean of two contests, one in each era's world; the bar is the median world. B2 from its ten worlds, each other rule from five.",
+   "recipe": "**Runs.** The 60 runs of Experiment 15 \u2014 B2 at 10,000 tokens, seeds 1 to 10, 1,000 iterations \u2014 in six conditions: B2, and B2 with one rule of death changed. The ten worlds with nothing kept died out within 50 iterations and are not drawn. They are made with `python3 gol_lab.py run E15`.\n\n**Data.** From Each run's archive, `GraphOfLifeRuns/<run>/archive/` (`GraphOfLifeRuns/.pilots/lab_rejudge_T100.json`, `long_steps.json`).\n\n1. Seat the brains of iteration 500 and of iteration 1,000 on alternate agents of each era's world and play it on for 100 iterations, the length of an agent's life (`research/oee/checks/rejudge.py`).\n2. Count the agents the later era's brains hold at the end, as a share of all.\n\n**To make it again:** `python3 book_figures.py whodies`."
+  }
+ }
+}

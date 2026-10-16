@@ -224,9 +224,165 @@ nothing kept, half kept, children of any size, and no old age.
 > A value in **bold** differs from the baseline B2.
 <!-- /runs -->
 
-> [!warning] Waiting for the runs
-> The plan, the thesis and the method above were written before any run of
-> Experiment 15 existed; the results follow when they are done.
+## What the sixty worlds did
+
+The ten worlds that kept nothing at home did not last: every one died out
+within 26 to 47 iterations, its agents staking their last tokens away, as the
+pilots had. The other fifty lived their 1,000 iterations.
+
+<!-- figure whodies/agents -->
+![Agents alive](../figures/whodies/agents.svg)
+
+**Agents alive.** Each band is ten worlds: the line their median, the shade the middle half and nine in ten. The worlds that kept nothing at home died out within 50 iterations and are not drawn.
+
+> [!example]- How to make this figure
+> **Runs.** The 60 runs of Experiment 15 — B2 at 10,000 tokens, seeds 1 to 10, 1,000 iterations — in six conditions: B2, and B2 with one rule of death changed. The ten worlds with nothing kept died out within 50 iterations and are not drawn. They are made with `python3 gol_lab.py run E15`.
+>
+> **Data.** From From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, one row per recorded phase (see [What a run records](../notes/frames-and-stats.md)).
+>
+> 1. Read `nodes` from the rows of phase 2, for iterations 0 to 1,000.
+> 2. At each iteration, the median of the ten worlds, the middle half and nine in ten.
+>
+> **To make it again:** `python3 book_figures.py whodies`.
+<!-- /figure -->
+
+<!-- figure whodies/births -->
+![Births per hundred agents in a reproduction phase](../figures/whodies/births.svg)
+
+**Births per hundred agents in a reproduction phase.** Each band is ten worlds: the line their median, the shade the middle half and nine in ten. The worlds that kept nothing at home died out within 50 iterations and are not drawn. A logarithmic axis: births fall a hundredfold without old age.
+
+> [!example]- How to make this figure
+> **Runs.** The 60 runs of Experiment 15 — B2 at 10,000 tokens, seeds 1 to 10, 1,000 iterations — in six conditions: B2, and B2 with one rule of death changed. The ten worlds with nothing kept died out within 50 iterations and are not drawn. They are made with `python3 gol_lab.py run E15`.
+>
+> **Data.** From From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, one row per recorded phase (see [What a run records](../notes/frames-and-stats.md)).
+>
+> 1. Read `births` from the rows of phase 1, divided by the agents that faced the phase (`nodes_before`), times 100, for iterations 0 to 1,000.
+> 2. At each iteration, the median of the ten worlds, the middle half and nine in ten.
+>
+> **To make it again:** `python3 book_figures.py whodies`.
+<!-- /figure -->
+
+The births tell the rules apart most plainly. Wherever agents die at 100, a
+world settles where one agent in a hundred has a child in every iteration —
+what a life of 100 iterations needs to keep a world's size — whatever is kept
+at home. Without old age, births fall to about one in ten thousand by
+iteration 1,000: the founders hold every place and nobody has room for a
+child. With children of any size they come in waves a hundred iterations
+apart: a world fills at once with one-token children, they grow old together,
+die in the same iteration, and are replaced at once.
+
+<!-- figure whodies/median -->
+![The median agent's tokens](../figures/whodies/median.svg)
+
+**The median agent's tokens.** Each band is ten worlds: the line their median, the shade the middle half and nine in ten. The worlds that kept nothing at home died out within 50 iterations and are not drawn. From iteration 100, once the founders' first riches are spent.
+
+> [!example]- How to make this figure
+> **Runs.** The 60 runs of Experiment 15 — B2 at 10,000 tokens, seeds 1 to 10, 1,000 iterations — in six conditions: B2, and B2 with one rule of death changed. The ten worlds with nothing kept died out within 50 iterations and are not drawn. They are made with `python3 gol_lab.py run E15`.
+>
+> **Data.** From From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, one row per recorded phase (see [What a run records](../notes/frames-and-stats.md)).
+>
+> 1. Read `medianTokens` from the rows of phase 2, for iterations 100 to 1,000.
+> 2. At each iteration, the median of the ten worlds, the middle half and nine in ten.
+>
+> **To make it again:** `python3 book_figures.py whodies`.
+<!-- /figure -->
+
+| rule of death | agents | at a single token | the median agent's tokens | Gini | births per 100 agents an iteration | brains of 1,000 against 500 |
+|---|---|---|---|---|---|---|
+| B2: 30% kept at home, children of at least ten tokens, death at 100 | 3,030 | 52% | 1.2 | 0.52 | 1.02 | 0.68 |
+| the last token kept | 3,688 | 77% | 1.0 | 0.57 | 1.00 | 0.54 |
+| half kept | 2,688 | 37% | 2.3 | 0.48 | 1.01 | 0.75 |
+| children of any size | 9,543 | 97% | 1.0 | 0.04 | 1.04 | 0.61 |
+| no old age | 3,939 | 84% | 1.0 | 0.58 | 0.03 | 0.52 |
+
+Each number is the median of the ten worlds over iterations 300 to 1,000 —
+each world's mean, and for the share at a single token each world's median
+game, as the thesis asked; the last column is the share of a contested world
+that the brains of iteration 1,000 hold against those of 500 over an agent's
+lifetime (below). Keeping nothing is left out: those worlds were gone.
+
+<!-- figure whodies/one_token -->
+![Agents holding a single token](../figures/whodies/one_token.svg)
+
+**Agents holding a single token.** Each dot is a world: the share of its agents holding exactly one token after each game, its median over iterations 300 to 1,000; the bar is the median world. The thesis asked B2's worlds to stay below a half and the worlds keeping only the last token to rise above two thirds, seven times in ten each.
+
+> [!example]- How to make this figure
+> **Runs.** The 60 runs of Experiment 15 — B2 at 10,000 tokens, seeds 1 to 10, 1,000 iterations — in six conditions: B2, and B2 with one rule of death changed. The ten worlds with nothing kept died out within 50 iterations and are not drawn. They are made with `python3 gol_lab.py run E15`.
+>
+> **Data.** From Each run's game frames, `GraphOfLifeRuns/<run>/frames/` (`research/oee/checks/e15_thesis.py`).
+>
+> 1. For every iteration from 300 to 1,000, read the frame after the game (frame 2t + 1) and count the agents holding exactly one token, as a share of all.
+> 2. Take each world's median over those 701 games.
+>
+> **To make it again:** `python3 book_figures.py whodies`.
+<!-- /figure -->
+
+## The verdict
+
+The thesis asked three things of the share of agents holding a single token,
+each world's median game from iteration 300 to 1,000: below a half in at least
+seven of B2's ten worlds — four were; above two thirds in at least seven of
+the ten worlds keeping only the last token — all ten were; and at least five
+of the ten worlds keeping nothing below 100 agents after some game — all ten
+died out.
+
+**Strictly, the thesis is refuted** — by B2's own worlds, which keep about
+half their agents at a single token, not fewer than half: 43% to 57%, and only
+four of ten below the line. Everything else it said held. Keeping only the
+last token left more than two agents in three at one token in every world (74%
+to 79%), and every world that kept nothing died out. And the order it
+predicted holds across the rules: the more an agent keeps at home, the fewer
+agents hold a single token — 37% with half kept, 52% in B2, 77% with only the
+last token — while the two rules it did not name push the other way: 84%
+without old age, and 97% with children of any size.
+
+## Does evolution go on?
+
+What is left to play also decides how much evolution there is. Played a
+lifetime long, the brains of iteration 1,000 beat those of 500 in B2's worlds
+(0.68, ten worlds) and more clearly where half is kept at home (0.75, five
+worlds); less with children of any size (0.61); and hardly at all where only
+the last token is kept (0.54) or nobody dies of age (0.52).
+
+<!-- figure whodies/evolution -->
+![Do the brains of 1,000 beat those of 500?](../figures/whodies/evolution.svg)
+
+**Do the brains of 1,000 beat those of 500?** Each dot is a world: the share of a world its brains of iteration 1,000 hold after 100 iterations against those of iteration 500, the mean of two contests, one in each era's world; the bar is the median world. B2 from its ten worlds, each other rule from five.
+
+> [!example]- How to make this figure
+> **Runs.** The 60 runs of Experiment 15 — B2 at 10,000 tokens, seeds 1 to 10, 1,000 iterations — in six conditions: B2, and B2 with one rule of death changed. The ten worlds with nothing kept died out within 50 iterations and are not drawn. They are made with `python3 gol_lab.py run E15`.
+>
+> **Data.** From Each run's archive, `GraphOfLifeRuns/<run>/archive/` (`GraphOfLifeRuns/.pilots/lab_rejudge_T100.json`, `long_steps.json`).
+>
+> 1. Seat the brains of iteration 500 and of iteration 1,000 on alternate agents of each era's world and play it on for 100 iterations, the length of an agent's life (`research/oee/checks/rejudge.py`).
+> 2. Count the agents the later era's brains hold at the end, as a share of all.
+>
+> **To make it again:** `python3 book_figures.py whodies`.
+<!-- /figure -->
+
+## What it teaches
+
+- **What is kept at home decides who is left to play.** Keeping half makes
+  fewer and richer agents (2,688, the median holding 2.3 tokens) and the
+  strongest evolution of the five rules; keeping only the last token makes
+  more agents (3,688, 77% of them holding just that token), and evolution all
+  but stops. A world of paupers is a world where little happens — the author's
+  reading of B2 ([Meta X](79-meta-10-healthy-and-rich.md)), seen here in the
+  contests.
+- **Every agent has to die.** Without old age the founders keep their places,
+  births stop, and so does evolution — while the network stays as healthy as
+  any (Meta X's frozen worlds).
+- **A child has to be worth having.** With children of any size the world
+  fills with 9,543 agents, nearly all of one token (a Gini of 0.04: all
+  equally poor), born and dying in cohorts, and evolution is weaker than in
+  B2.
+- **Something has to stay home.** With nothing kept no world lived 50
+  iterations.
+
+B2's own choices hold up — but keeping half at home did better on both counts
+that matter here, richer agents and evolution that goes on. It is the first
+rule of death to try together with the rules that came closest in Meta X, such
+as brains mixed at birth ([Chapter 80](80-mixed-at-birth-ten-long-worlds.md)).
 
 <!-- turns -->
 ---
