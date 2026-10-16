@@ -64,7 +64,7 @@ using the table of every world (research/atlas/across.py; see
 <!-- figure lightning/every_world -->
 ![Loops of flow in every world](../figures/lightning/every_world.svg)
 
-**Loops of flow in every world.** Each dot is one world, over iterations 900–999 (400–499 for a world that did not live to 1,000), a column per kind of world; the bar is the median. Top left: how much of what agents stake on their neighbours a greedy search can put on closed loops, before a token one way and a token back cancel. Top right: what is left once they cancel. Bottom: the longest loop found, and how much of the net flow goes round. B1 10k: the thirty B1 worlds of 10,000 tokens (Experiment 2); B1 fixed: the same with brains that never change (Experiment 7); B1 100k: B1 at 100,000 tokens (Experiment 10); B1 sizes: B1 at 800 to 409,600 tokens (Experiment 8) and at 5,000 with and without a hidden layer (Experiments 12 and 13); B2 10k: the ten B2 worlds of Experiment 16; B2 var: B2 with one rule or rate changed (Experiments 9, 15 and 16); B2 5k: B2 at 5,000 tokens, with all its rules or with one taken away (Experiment 14) — except lapse: the condition in which any unused link lapses; B1 and B2 pilots: the pilot worlds that play the engine's game.
+**Loops of flow in every world.** Each dot is one world, over iterations 900–999 (400–499 for a world that did not live to 1,000), a column per kind of world; the bar is the median. Top left: how much of what agents stake on their neighbours a greedy search can put on closed loops, before a token one way and a token back cancel. Top right: what is left once they cancel. Bottom: the longest loop found, and how much of the net flow goes round. B1 10k: the thirty B1 worlds of 10,000 tokens (Experiment 2); B1 fixed: the same with brains that never change (Experiment 7); B1 100k: B1 at 100,000 tokens (Experiment 10); B1 sizes: B1 at 800 to 409,600 tokens (Experiment 8) and at 5,000 with and without a hidden layer (Experiments 12 and 13); B2 10k: the ten B2 worlds of Experiment 16; B2 var: B2 with one rule or rate changed (Experiments 9, 15 and 16); B2 5k: B2 at 5,000 tokens, with all its rules or with one taken away (Experiment 14) — except lapse: the condition in which any unused link lapses; B1 pil. and B2 pil.: the pilot worlds that play the engine's game.
 
 > [!example]- How to make this figure
 > **Runs.** every simulation made so far, as `book/results/worlds.json` holds it (`python3 research/atlas/across.py lab`, `pilots`, `write`): a lab run's statistics are the means of its record over a stretch of iterations; a pilot's, of 20 games recorded from its checkpoint and summarised the same way.
@@ -96,7 +96,10 @@ unless cutting it is safe for the network (`prune_needs = 2`), and so links no
 longer have to be used. Where a link must carry tokens to survive, agents stake
 on each other, and the flow goes round; where it need not, the flow runs one
 way. Nothing in the brains changed: one of the rules that make B2's network
-unbreakable also made its economy run one way.
+unbreakable also made its economy run one way. The pilot worlds say the same
+independently: of all the B2 pilots, the three whose flow goes round
+(0.21–0.28 of it on loops, a tenth left after cancelling) are exactly those in
+which unused links lapse ([Chapter 54](54-the-switches-the-world-was-built-with.md)).
 
 **Little goes round once the cancelling is done.** In every kind of world the
 net flow on loops is a fraction of a percent (bottom right). Within one game,
@@ -215,8 +218,10 @@ more than chance would; B2's barely do.
 - **No world builds circulation as it evolves.** For open-ended evolution,
   this is one more thing that settles early and stays.
 
-The pilot worlds will join the figures as the table of every world fills (each
-is played on from its checkpoints and recorded as a lab run is). Measures of
+The pilot worlds that play the engine's game are in the figures too (each was
+played on from its checkpoints and recorded as a lab run is): B2's pilots flow
+as B2 does (0.046 on loops, 0.95 left after cancelling), B1's as B1 does (0.20,
+0.26). Measures of
 the same flow from other angles are in Chapter 71, *Flow modules: groups that
 outlast their members* (who trades with whom, and for how long), and in
 Chapter 75, *Meta VII · Where tokens go*, which gathers what the book knows

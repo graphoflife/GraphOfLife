@@ -62,8 +62,8 @@ GROUPS: List[Tuple[str, Any, int]] = [
     ("B2 var", lambda w: w["source"] == "lab" and w["family"].startswith("B2-10000"), CYAN),
     ("lapse", lambda w: _has(w, "E14 · any unused link lapses"), GREEN),
     ("B2 5k", lambda w: w["source"] == "lab" and w["family"].startswith("B2-5000"), VIOLET),
-    ("B2 pilots", lambda w: w["source"] == "pilot" and w.get("baseline") == "B2" and w.get("engine"), BLUE),
-    ("B1 pilots", lambda w: w["source"] == "pilot" and w.get("baseline") == "B1" and w.get("engine"), ORANGE),
+    ("B2 pil.", lambda w: w["source"] == "pilot" and w.get("baseline") == "B2" and w.get("engine"), BLUE),
+    ("B1 pil.", lambda w: w["source"] == "pilot" and w.get("baseline") == "B1" and w.get("engine"), ORANGE),
 ]
 
 
@@ -73,7 +73,7 @@ GROUP_WORDS = ("B1 10k: the thirty B1 worlds of 10,000 tokens (Experiment 2); B1
                "(Experiments 12 and 13); B2 10k: the ten B2 worlds "
                "of Experiment 16; B2 var: B2 with one rule or rate changed (Experiments 9, 15 and 16); B2 5k: "
                "B2 at 5,000 tokens, with all its rules or with one taken away (Experiment 14) — except "
-               "lapse: the condition in which any unused link lapses; B1 and B2 pilots: the pilot worlds that play the engine's game.")
+               "lapse: the condition in which any unused link lapses; B1 pil. and B2 pil.: the pilot worlds that play the engine's game.")
 
 
 def _grouped(worlds: List[Dict[str, Any]], stat: str, *windows: str) -> Dict[str, List[float]]:
@@ -360,3 +360,4 @@ def side_by_side(ch: F.Chapter) -> None:
             recipe=recipe(f"{TABLE_TEXT}.", "each world's `spreadShare` and `births` ÷ `nodes`",
                           ["Take each world's mean over iterations 400–499.",
                            "Group the worlds as in the other figures; draw a dot per world and the median."]))
+
