@@ -66,6 +66,44 @@ of its size, the twin's only as the logarithm.
   to reach half of its 5,200 agents, its twin 4.7 — a typical distance of
   2.4, as wide as B1. Its twin's dimension climbs past 5.7 within four steps.
 
+## A world nine times larger
+
+> [!info] Added later (17 October 2026)
+> The world of this section was still being played when the chapter was
+> first written.
+
+A small world's rulers run out of room within a few steps, and a space only
+shows its dimension where it has room
+([Chapter 24](24-how-many-dimensions-does-a-world-have.md)). So a B2 world of
+100,000 tokens was played for 1,000 iterations (a pilot, seed 1,
+`GraphOfLifeRuns/.pilots/BIG/B2-100000-s1`): at the end it held 30,686
+agents, nine times B2's usual 3,400.
+
+<!-- figure spaces/size -->
+![Does a world fold the same way at every size?](../figures/spaces/size.svg)
+
+**Does a world fold the same way at every size?** Each dot is a world: its typical distance over its random twin's, against the agents in its largest piece, both on logarithmic axes. Blue: B1's worlds of 10,000, 100,000 and 409,600 tokens after their last game ([Chapter 24](24-how-many-dimensions-does-a-world-have.md)'s readings). Grey: B2's worlds of 5,000 tokens at iteration 1,000 (Experiment 14) and of 10,000 at 2,000 (Experiment 16), and one B2 world of 100,000 tokens at iteration 1,000 (a pilot). A space grows wider than its twin as it grows; a small world stays as near.
+
+> [!example]- How to make this figure
+> **Runs.** B1: Experiments 2, 10 and 8 (`B1-10000-…`, `B1-100000-…`, `B1-409600-…`); B2: Experiments 14 and 16, and the pilot world `GraphOfLifeRuns/.pilots/BIG/B2-100000-s1` (B2's settings at 100,000 tokens, seed 1, 1,000 iterations).
+>
+> **Data.** From [Chapter 24](24-how-many-dimensions-does-a-world-have.md)'s readings (`GraphOfLifeRuns/.book/<run>.dims2.json`) and `research/atlas/space.py` (`GraphOfLifeRuns/.pilots/atlas/space.json`).
+>
+> 1. Measure each world and its random twin as in the first figure.
+> 2. Divide the radius at which its typical ball holds half the world by its twin's.
+>
+> **To make it again:** `python3 book_figures.py spaces`.
+<!-- /figure -->
+
+**It is folded as B2 at 10,000 tokens is.** A typical agent's ball holds half
+of its 30,686 agents within 5.5 steps, its twin's within 4.8 — a typical
+distance of 1.14 — and its local dimension climbs from 2.9 to 5.5 to 7.1 in
+three steps, as its twin's does (3.1, 5.8, 7.8), with no plateau. B1's typical
+distance grows with its size, as a space's must: 2.3 at 1,500 agents, 3.7 at
+13,800, 5.1 at 64,000. B2's does not: 1.24 at 1,600 agents (5,000 tokens),
+1.18 at 3,400, 1.14 at 30,700. **At every size measured, B2 is a small
+world.**
+
 ## A world through its life
 
 Every one of these worlds starts the same way: the first hundred iterations
@@ -152,10 +190,10 @@ worlds that differ in so much cannot say; worlds without brains can
 <!-- figure spaces/every -->
 ![Every world at iteration 1,000](../figures/spaces/every.svg)
 
-**Every world at iteration 1,000.** Each dot is a world of the book read at iteration 1,000 — the pilot batches and the lab's B2 families at 10,000 tokens — its typical distance over its random twin's (logarithmic). Top, for the worlds whose agents die of age and are mended round: against the number of groups the neighbours of its agents within ten iterations of their death fall into — groups linked to one another directly, which mending joins in a ring. Middle: against its links per agent; bottom: against the share of its agents holding three tokens or fewer. Colours: what stands out in its rules.
+**Every world at iteration 1,000.** Each dot is a world of the book read at iteration 1,000 — the pilot batches, the search by elimination and the lab's B2 families at 10,000 tokens — its typical distance over its random twin's (logarithmic). Top, for the worlds whose agents die of age and are mended round: against the number of groups the neighbours of its agents within ten iterations of their death fall into — groups linked to one another directly, which mending joins in a ring. Middle: against its links per agent; bottom: against the share of its agents holding three tokens or fewer. Colours: what stands out in its rules.
 
 > [!example]- How to make this figure
-> **Runs.** Every world of `GraphOfLifeRuns/.pilots/atlas/at1000.json` (`research/atlas/at.py`): the pilot batches K, M, P, Q, R, S, T, U, W, X and Y, and the lab's B2 families of Experiments 15 to 17.
+> **Runs.** Every world of `GraphOfLifeRuns/.pilots/atlas/at1000.json` (`research/atlas/at.py`): the pilot batches K, M, P, Q, R, S, T, U, W, X, Y and YB, the search by elimination's worlds (Z), and the lab's B2 families of Experiments 15 to 17.
 >
 > **Data.** From each world's whole world kept at iteration 1,000 (`research/atlas/space.py --at 1000`, `GraphOfLifeRuns/.pilots/atlas/space_at1000.json`).
 >
@@ -166,41 +204,42 @@ worlds that differ in so much cannot say; worlds without brains can
 > **To make it again:** `python3 book_figures.py spaces`.
 <!-- /figure -->
 
-Read at iteration 1,000, 352 worlds — every pilot batch and the lab's B2
-families at 10,000 tokens — fall into two groups:
+Read at iteration 1,000, 395 worlds — every pilot batch, the first round of
+the search by elimination, and the lab's B2 families at 10,000 tokens — fall
+into two groups:
 
-- **Folded**: the 222 worlds of B2 with other rules (a median typical
-  distance of 1.26 times the twin's) and the 77 with brains mixed at birth
+- **Folded**: the 235 worlds of B2 with other rules (a median typical
+  distance of 1.26 times the twin's) and the 83 with brains mixed at birth
   (1.26).
-- **Spaces**: the 28 worlds whose estate goes to the newborns or the parents
-  (2.42), the 12 in which every unused link lapses (3.94), and the 13 on B1's
-  rules (2.33).
+- **Spaces**: the 37 worlds whose estate goes to the newborns or the parents
+  (2.22), the 14 in which every unused link lapses (3.80), and the 26 whose
+  deaths are not mended, on B1's rules or drawn so by the search (2.30).
 
 Across them all, the typical distance goes with fewer links per agent (a
 rank correlation of −0.58) and hardly at all with how poor the agents are
-(+0.15), how many they are (+0.09) or how many tokens each holds (−0.10).
+(+0.12), how many they are (+0.07) or how many tokens each holds (−0.09).
 Being a space is not a matter of poverty or size.
 
-**The ring a death closes tells it best.** In the 319 worlds whose agents
+**The ring a death closes tells it best.** In the 336 worlds whose agents
 die of age and are mended round, count, for every agent within ten
 iterations of its death, the groups its neighbours fall into — the groups
 mending will join in a ring (`research/atlas/rings.py`). The more groups,
-the more folded the world (a rank correlation of −0.70):
+the more folded the world (a rank correlation of −0.69):
 
 | groups of neighbours of the agents about to die | worlds | typical distance, over the twin's (median) |
 |---|---|---|
-| fewer than 5 | 45 | 2.04 |
-| 5 to 6 | 14 | 2.27 |
-| 6 to 7 | 53 | 1.34 |
-| 7 to 9 | 185 | 1.24 |
-| 9 or more | 22 | 1.08 |
+| fewer than 5 | 50 | 1.88 |
+| 5 to 6 | 15 | 2.12 |
+| 6 to 7 | 55 | 1.34 |
+| 7 to 9 | 193 | 1.24 |
+| 9 or more | 23 | 1.08 |
 
 The most folded worlds are those whose children may be of any size: there
 the parents are 60 iterations old at a birth (a median), and the dying hold
 12 to 14 links in as many groups. Where the old breed, they gather links till
 they die, and every death closes a wide ring.
 
-Experiment 14's worlds, at 5,000 tokens and not among the 319, follow the
+Experiment 14's worlds, at 5,000 tokens and not among the 336, follow the
 same rule. B2 there leaves rings of 6.7 to 7.5 groups and reads 1.25 to 1.33;
 with handover, which passes some of a parent's links to its newborn, the
 dying leave rings of 2 to 5 groups, and the world reads 1.50 to 1.84; without
@@ -252,10 +291,45 @@ mended in a ring, it folds; mended as little as it must be, it is a line.
 Three dimensions lie somewhere between, and the worlds whose young do the
 breeding come nearest.
 
+## With brains: only the young, or only the old
+
+The same rule was then given to worlds with brains (pilot batch YB, a switch
+of the prototype, `breeders`): only agents at the median age of the living
+or younger may have a child, or only those older than it — in B2, two seeds
+to 2,000 iterations, and in B2 with brains mixed at birth. Founders are all
+of one age, so in a world started afresh nobody is older than the median and
+nobody breeds; the old were therefore given B2's world of seed 1 at
+iteration 500 and played on from there, beside the young from the same
+world.
+
+| world | parents' age at a birth (median) | groups of neighbours of the dying | typical distance, over the twin's |
+|---|---|---|---|
+| B2, seed 1, at 1,000 / 1,500 / 2,000 | 16 / 15 / 18 | 7.5 / 7.3 / 7.6 | 1.22 / 1.15 / 1.27 |
+| from it at 500, only the old breed | 52 / 63 / 59 | 8.9 / 8.8 / 9.0 | 1.12 / 1.04 / 1.07 |
+| from it at 500, only the young breed | 16 / 17 / 18 | 7.4 / 7.3 / 7.6 | 1.30 / 1.26 / 1.34 |
+| B2 afresh, only the young, seeds 1 and 2, at 2,000 | 13; 14 | 6.7; 7.0 | 1.34; 1.23 (B2: 1.27; 1.17) |
+| mixed at birth, only the young, at 2,000 | 19; 26 | 7.5; 7.2 | 1.30; 1.30 (mixing alone: 1.36; 1.21) |
+
+**Let the old breed, and a world with brains folds as far as the brainless
+one**: the parents are 52 to 63 iterations old, the dying hold 9.3 to 9.6
+links, and the world reads 1.04 to 1.12 — smaller as well (1,300 to 1,650
+agents), and a little richer (59% at three tokens or fewer, against 77% to
+79%). **Let only the young breed, and almost nothing changes**, because in
+B2 the young already do most of the breeding: its parents are 15 to 28
+iterations old at a birth, and the rule leaves them 13 to 26. The dying
+still hold about eight links, gathered from their neighbours' children as
+much as from their own, and the worlds stay folded.
+
+What unfolds the worlds whose estate goes to the newborns or the parents is
+how young their parents are — two or three iterations — and how few links
+their dying hold: about six, in 5.4 groups, where the table of rings above
+puts the line between folded and not.
+
 ## What it teaches
 
-- **B2 is not a space.** Its worlds are nearly small worlds — a typical agent
-  is about as near to everyone as in a random network with the same links —
+- **B2 is not a space**, at any size measured, up to 30,700 agents. Its
+  worlds are nearly small worlds — a typical agent is about as near to
+  everyone as in a random network with the same links —
   which is why the health bar's dimension rose with their size and failed
   the large ones (Meta XI): a small world has no dimension to find, and the
   number read off its first few steps grows with the room it has.
@@ -264,7 +338,9 @@ breeding come nearest.
   generation dies — the more, the larger the ring each death closes, and the
   rings are largest where the old do the breeding. Worlds without old age,
   without mending, or whose unused links lapse keep their room. With no
-  brains at all, who breeds is enough to fold a world or to keep it a space.
+  brains at all, who breeds is enough to fold a world or to keep it a space;
+  with brains, letting only the old breed folds it further, and letting only
+  the young breed changes little, for B2's young already do.
 - **Room and resilience pull apart.** Mending is what keeps a death from
   splitting a world, and it is what folds it: mended in a ring, a world folds
   into a near small world; mended only where it would split, it stretches into
@@ -277,12 +353,12 @@ breeding come nearest.
   stops ([Chapter 73](73-who-inherits.md)). A world that is a
   three-dimensional space and rich, and that keeps evolving, is still to be
   found.
-- **Open**: whether a large B2 world folds the same way (a B2 world of
-  100,000 tokens is being played); and rules that would let the young breed
-  in a rich world, or keep a world whole without folding it — mending
-  would add nothing where a dying agent's neighbours are already linked to one
-  another, as on a surface of triangles, while B2's rule for unused links cuts
-  exactly those triangles.
+- **Open**: rules that would keep a world's dying
+  from gathering wide rings in a rich world, or keep a world whole without
+  folding it — mending would add nothing where a dying agent's neighbours are
+  already linked to one another, as on a surface of triangles, while B2's
+  rule for unused links cuts exactly those triangles. Letting only the young
+  breed is not enough with brains: B2's young already breed.
 
 **Related notes:** [Chapter 24 · How many dimensions does a world have?](24-how-many-dimensions-does-a-world-have.md) ·
 [Chapter 7 · Physical inspiration](07-physical-inspiration.md) ·

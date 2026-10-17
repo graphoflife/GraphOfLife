@@ -17,11 +17,11 @@
     "twin_half_reach": 4.221946321979102
    },
    "B2 mixed at birth": {
-    "worlds": 9,
-    "agents": 628.0,
-    "typical_distance": 1.2078434905643762,
-    "half_reach": 4.336884440705073,
-    "twin_half_reach": 3.6662475442994924
+    "worlds": 7,
+    "agents": 618.0,
+    "typical_distance": 1.1739421152521827,
+    "half_reach": 4.238625111191127,
+    "twin_half_reach": 3.590601327559933
    },
    "B2, estates to newborns or parents": {
     "worlds": 4,
@@ -119,61 +119,93 @@
     "1000": 1.6565266566726529
    }
   },
+  "size": {
+   "B1: 10,000": {
+    "worlds": 26,
+    "agents": 1476.5,
+    "typical_distance": 2.2577097553470966
+   },
+   "B1: 100,000": {
+    "worlds": 30,
+    "agents": 13759.0,
+    "typical_distance": 3.6965892020035196
+   },
+   "B1: 409,600": {
+    "worlds": 3,
+    "agents": 64370.0,
+    "typical_distance": 5.094008695843682
+   },
+   "B2: B2, 2,000 iterations (Experiment 16)": {
+    "worlds": 10,
+    "agents": 3422.5,
+    "typical_distance": 1.1818766725108953
+   },
+   "B2: B2 at 5,000 tokens (Experiment 14)": {
+    "worlds": 10,
+    "agents": 1575.0,
+    "typical_distance": 1.240604181040099
+   },
+   "B2: B2 at 100,000 tokens (pilot)": {
+    "worlds": 1,
+    "agents": 30686.0,
+    "typical_distance": 1.1391255147265174
+   }
+  },
   "rings": {
-   "worlds": 319,
+   "worlds": 336,
    "bins": {
     "0-5": {
-     "worlds": 45,
-     "median": 2.0396502613893075
+     "worlds": 50,
+     "median": 1.8810260492182258
     },
     "5-6": {
-     "worlds": 14,
-     "median": 2.2691401659463226
+     "worlds": 15,
+     "median": 2.118283575102391
     },
     "6-7": {
-     "worlds": 53,
-     "median": 1.3441593410520716
+     "worlds": 55,
+     "median": 1.3428782210185426
     },
     "7-9": {
-     "worlds": 185,
-     "median": 1.2368204938164
+     "worlds": 193,
+     "median": 1.23749434575933
     },
     "9-99": {
-     "worlds": 22,
-     "median": 1.07787707146624
+     "worlds": 23,
+     "median": 1.0797782896430796
     }
    },
-   "rank_correlation": -0.6965044064588632
+   "rank_correlation": -0.6936388426667004
   },
   "every": {
-   "worlds": 352,
+   "worlds": 395,
    "by_kind": {
     "B2": {
-     "worlds": 222,
-     "median": 1.2580420090164326
+     "worlds": 235,
+     "median": 1.2592499444346108
     },
     "mixed": {
-     "worlds": 77,
-     "median": 1.2579601634608815
+     "worlds": 83,
+     "median": 1.2590040378717815
     },
     "estates": {
-     "worlds": 28,
-     "median": 2.4199967567902547
+     "worlds": 37,
+     "median": 2.2180864436765777
     },
     "lapse": {
-     "worlds": 12,
-     "median": 3.9410143142877203
+     "worlds": 14,
+     "median": 3.7957594916443003
     },
     "B1": {
-     "worlds": 13,
-     "median": 2.3345025005210585
+     "worlds": 26,
+     "median": 2.2989578386615035
     }
    },
    "rank_correlation": {
-    "links_per_agent": -0.5815385826009054,
-    "share_at_most_three": 0.15299679074466607,
-    "agents": 0.09302905938883274,
-    "tokens_per_agent": -0.10187844890394464
+    "links_per_agent": -0.5801975937489656,
+    "share_at_most_three": 0.12013770033432054,
+    "agents": 0.06535722839134778,
+    "tokens_per_agent": -0.08922288489210034
    }
   }
  },
@@ -188,10 +220,15 @@
    "caption": "The typical distance of a world \u2014 the steps within which a typical agent's ball holds half of it \u2014 over the same for its random twin, at moments of its life; the median of two or three seeds of each kind. About 1: a small world, as near as its twin. Above: a space, wider than its twin. Above, worlds of 10,000 tokens: B2 itself (Experiment 16), without old age, with the estate of the dead to the newborns or to the parents (batch R), and with every unused link lapsing (batch S). Below, worlds of 5,000 tokens from Experiment 14, each without one of B2's rules, or with handover.",
    "recipe": "**Runs.** Experiment 16's B2 worlds and their sister experiment without old age (`B2-10000-s001` \u2026 `s003`, `B2-10000-3ec24f-s001` \u2026 `s003`), batch R's and batch S's pilot worlds, and Experiment 14's worlds at 5,000 tokens (`B2-5000-\u2026-s001` \u2026 `s003`).\n\n**Data.** From the whole worlds kept every 100 iterations (`research/atlas/space.py --life`, `GraphOfLifeRuns/.pilots/atlas/space_life.json`).\n\n1. Measure each world as in the figure above, at each moment.\n2. Divide the radius at which its typical ball holds half the world by its twin's.\n\n**To make it again:** `python3 book_figures.py spaces`."
   },
+  "size": {
+   "title": "Does a world fold the same way at every size?",
+   "caption": "Each dot is a world: its typical distance over its random twin's, against the agents in its largest piece, both on logarithmic axes. Blue: B1's worlds of 10,000, 100,000 and 409,600 tokens after their last game (Chapter 24's readings). Grey: B2's worlds of 5,000 tokens at iteration 1,000 (Experiment 14) and of 10,000 at 2,000 (Experiment 16), and one B2 world of 100,000 tokens at iteration 1,000 (a pilot). A space grows wider than its twin as it grows; a small world stays as near.",
+   "recipe": "**Runs.** B1: Experiments 2, 10 and 8 (`B1-10000-\u2026`, `B1-100000-\u2026`, `B1-409600-\u2026`); B2: Experiments 14 and 16, and the pilot world `GraphOfLifeRuns/.pilots/BIG/B2-100000-s1` (B2's settings at 100,000 tokens, seed 1, 1,000 iterations).\n\n**Data.** From Chapter 24's readings (`GraphOfLifeRuns/.book/<run>.dims2.json`) and `research/atlas/space.py` (`GraphOfLifeRuns/.pilots/atlas/space.json`).\n\n1. Measure each world and its random twin as in the first figure.\n2. Divide the radius at which its typical ball holds half the world by its twin's.\n\n**To make it again:** `python3 book_figures.py spaces`."
+  },
   "every": {
    "title": "Every world at iteration 1,000",
-   "caption": "Each dot is a world of the book read at iteration 1,000 \u2014 the pilot batches and the lab's B2 families at 10,000 tokens \u2014 its typical distance over its random twin's (logarithmic). Top, for the worlds whose agents die of age and are mended round: against the number of groups the neighbours of its agents within ten iterations of their death fall into \u2014 groups linked to one another directly, which mending joins in a ring. Middle: against its links per agent; bottom: against the share of its agents holding three tokens or fewer. Colours: what stands out in its rules.",
-   "recipe": "**Runs.** Every world of `GraphOfLifeRuns/.pilots/atlas/at1000.json` (`research/atlas/at.py`): the pilot batches K, M, P, Q, R, S, T, U, W, X and Y, and the lab's B2 families of Experiments 15 to 17.\n\n**Data.** From each world's whole world kept at iteration 1,000 (`research/atlas/space.py --at 1000`, `GraphOfLifeRuns/.pilots/atlas/space_at1000.json`).\n\n1. Measure each world and its twin as above.\n2. Split the neighbours of each agent within ten iterations of its death into groups linked directly (`research/atlas/rings.py`).\n3. Set its typical distance over the twin's against the mean number of groups, its links per agent and its share of poor agents.\n\n**To make it again:** `python3 book_figures.py spaces`."
+   "caption": "Each dot is a world of the book read at iteration 1,000 \u2014 the pilot batches, the search by elimination and the lab's B2 families at 10,000 tokens \u2014 its typical distance over its random twin's (logarithmic). Top, for the worlds whose agents die of age and are mended round: against the number of groups the neighbours of its agents within ten iterations of their death fall into \u2014 groups linked to one another directly, which mending joins in a ring. Middle: against its links per agent; bottom: against the share of its agents holding three tokens or fewer. Colours: what stands out in its rules.",
+   "recipe": "**Runs.** Every world of `GraphOfLifeRuns/.pilots/atlas/at1000.json` (`research/atlas/at.py`): the pilot batches K, M, P, Q, R, S, T, U, W, X, Y and YB, the search by elimination's worlds (Z), and the lab's B2 families of Experiments 15 to 17.\n\n**Data.** From each world's whole world kept at iteration 1,000 (`research/atlas/space.py --at 1000`, `GraphOfLifeRuns/.pilots/atlas/space_at1000.json`).\n\n1. Measure each world and its twin as above.\n2. Split the neighbours of each agent within ten iterations of its death into groups linked directly (`research/atlas/rings.py`).\n3. Set its typical distance over the twin's against the mean number of groups, its links per agent and its share of poor agents.\n\n**To make it again:** `python3 book_figures.py spaces`."
   }
  }
 }

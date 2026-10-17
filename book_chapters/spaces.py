@@ -67,7 +67,7 @@ def _kind(wid: str) -> str:
 
 KINDS = [("B2", "B2 with other rules", GREY), ("mixed", "brains mixed at birth", ORANGE),
          ("estates", "estates to the newborns or parents", VIOLET), ("lapse", "every unused link lapses", GREEN),
-         ("B1", "B1's rules (no mending)", BLUE)]
+         ("B1", "deaths not mended (B1's rules)", BLUE)]
 
 
 @chapter
@@ -180,9 +180,12 @@ def spaces(ch: F.Chapter) -> None:
                                                     "agents": float(np.median([n for n, _ in mine])),
                                                     "typical_distance": float(np.median([d for _, d in mine]))}
         ch.number("size", size_numbers)
+        ns = [n for n, _, _ in b1 + b2]
+        ds = [d for _, d, _ in b1 + b2 if np.isfinite(d)]
         ch.figure("size", title="Does a world fold the same way at every size?",
-                  x={"label": "agents (logarithmic)", "log": True},
-                  y={"label": "typical distance, over the twin's", "log": True},
+                  x={"label": "agents (logarithmic)", "log": True, "min": 0.8 * min(ns), "max": 1.25 * max(ns)},
+                  y={"label": "typical distance, over the twin's", "log": True, "min": 0.9 * min(ds),
+                     "max": 1.1 * max(ds)},
                   series=[{"label": "B1 (10,000, 100,000 and 409,600 tokens)", "x": [n for n, _, _ in b1],
                            "y": [d for _, d, _ in b1], "points": True, "size": 5, "colour": BLUE, "alpha": 0.8},
                           {"label": "B2 (5,000 and 10,000 tokens, and one world of 100,000)",
@@ -262,16 +265,17 @@ def spaces(ch: F.Chapter) -> None:
                         "rank_correlation": {k: rank_corr(k) for k in ("links_per_agent", "share_at_most_three",
                                                                        "agents", "tokens_per_agent")}})
     ch.grid("every", charts, columns=1, title="Every world at iteration 1,000",
-            caption=("Each dot is a world of the book read at iteration 1,000 — the pilot batches and the lab's "
-                     "B2 families at 10,000 tokens — its typical distance over its random twin's (logarithmic). "
+            caption=("Each dot is a world of the book read at iteration 1,000 — the pilot batches, the search by "
+                     "elimination and the lab's B2 families at 10,000 tokens — its typical distance over its random "
+                     "twin's (logarithmic). "
                      "Top, for the worlds whose agents die of age and are mended round: against the number of "
                      "groups the neighbours of its agents within ten iterations of their death fall into — groups "
                      "linked to one another directly, which mending joins in a ring. Middle: against its links per "
                      "agent; bottom: against the share of its agents holding three tokens or fewer. Colours: what "
                      "stands out in its rules."),
             recipe=recipe("Every world of `GraphOfLifeRuns/.pilots/atlas/at1000.json` (`research/atlas/at.py`): the "
-                          "pilot batches K, M, P, Q, R, S, T, U, W, X and Y, and the lab's B2 families of Experiments "
-                          "15 to 17.",
+                          "pilot batches K, M, P, Q, R, S, T, U, W, X, Y and YB, the search by elimination's worlds "
+                          "(Z), and the lab's B2 families of Experiments 15 to 17.",
                           "each world's whole world kept at iteration 1,000 (`research/atlas/space.py --at 1000`, "
                           "`GraphOfLifeRuns/.pilots/atlas/space_at1000.json`)",
                           ["Measure each world and its twin as above.", "Split the neighbours of each agent within ten "
