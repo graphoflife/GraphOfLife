@@ -110,6 +110,7 @@ everything can be checked with it.
 - [Chapter 83 · Links to strangers](chapters/83-links-to-strangers.md)
 - [Chapter 82 · Brains mixed at birth, with every other rule](chapters/82-mixing-with-every-other-rule.md)
 - [Chapter 85 · Mixed at birth, with parents as mates](chapters/85-mixed-at-birth-with-parents-as-mates.md)
+- [Chapter 86 · Eight switches at once](chapters/86-eight-switches-at-once.md)
 
 **Part VI · Towards a physics: space, scale and locality**
 
@@ -122,6 +123,7 @@ everything can be checked with it.
 - Chapter 66 · Particles — *not written yet*
 - Chapter 67 · One agent in a sea of average agents — *not written yet*
 - Chapter 68 · Meta V — *not written yet*
+- [Chapter 87 · What folds a world](chapters/87-what-folds-a-world.md)
 
 **Part VII · The long run**
 
@@ -219,6 +221,7 @@ everything can be checked with it.
 - [The power spectrum of a time series](notes/power-spectrum.md)
 - [Where, who and chance: splitting a decision's variance](notes/variance-split.md)
 - [Effective numbers: how many kinds there really are](notes/effective-number.md)
+- [Many switches in few worlds: fractional factorial designs](notes/fractional-factorial.md)
 
 **Appendices**
 

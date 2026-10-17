@@ -269,5 +269,5 @@ windows of cooperation and the gains, and decides the thesis.
 <!-- turns -->
 ---
 
-← [Chapter 60 · Worlds of 100,000 tokens](60-worlds-of-100000-tokens.md) · [Contents](../README.md) · [Chapter 81 · Five mixed worlds, fifty thousand iterations](81-five-mixed-worlds-fifty-thousand-iterations.md) →
+← [Chapter 87 · What folds a world](87-what-folds-a-world.md) · [Contents](../README.md) · [Chapter 81 · Five mixed worlds, fifty thousand iterations](81-five-mixed-worlds-fifty-thousand-iterations.md) →
 <!-- /turns -->

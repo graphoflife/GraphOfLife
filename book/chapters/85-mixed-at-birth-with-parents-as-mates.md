@@ -150,5 +150,5 @@ comparison.
 <!-- turns -->
 ---
 
-← [Chapter 82 · Brains mixed at birth, with every other rule](82-mixing-with-every-other-rule.md) · [Contents](../README.md) · [Chapter 60 · Worlds of 100,000 tokens](60-worlds-of-100000-tokens.md) →
+← [Chapter 82 · Brains mixed at birth, with every other rule](82-mixing-with-every-other-rule.md) · [Contents](../README.md) · [Chapter 86 · Eight switches at once](86-eight-switches-at-once.md) →
 <!-- /turns -->

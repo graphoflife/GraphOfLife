@@ -432,6 +432,13 @@
           "file": "chapters/85-mixed-at-birth-with-parents-as-mates.md",
           "experiment": "E19",
           "status": "ready"
+        },
+        {
+          "id": "86",
+          "title": "Eight switches at once",
+          "note": "Eight of the book's switches thrown together on B2 in sixteen worlds (batch U, a fractional factorial design): every unused link lapsing is the strongest switch, the estate to the newborns fills a world, mixing raises diversity; pairs of switches act together, and several switches do far less among the sixteen than alone in B2.",
+          "file": "chapters/86-eight-switches-at-once.md",
+          "status": "analysed"
         }
       ]
     },
@@ -484,6 +491,13 @@
           "id": "68",
           "title": "Meta V",
           "note": "What the measurements say about space, scale and matter, written once Chapters 60 to 67 are analysed."
+        },
+        {
+          "id": "87",
+          "title": "What folds a world",
+          "note": "Chapter 24's rulers on B2 and every world since: B2 is nearly a small world; every B2 world starts as a space and folds when its first generation dies, because death with mending folds it; without old age or mending, or with lapsing links, worlds keep their room, and the estates to the newborns or the parents make a space of about three dimensions.",
+          "file": "chapters/87-what-folds-a-world.md",
+          "status": "analysed"
         }
       ]
     },
@@ -932,6 +946,11 @@
           "id": "n-effective-number",
           "title": "Effective numbers: how many kinds there really are",
           "file": "notes/effective-number.md"
+        },
+        {
+          "id": "n-fractional-factorial",
+          "title": "Many switches in few worlds: fractional factorial designs",
+          "file": "notes/fractional-factorial.md"
         }
       ]
     },

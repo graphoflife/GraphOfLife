@@ -1,0 +1,485 @@
+{
+ "chapter": "eightswitches",
+ "numbers": {
+  "effects": {
+   "agents": {
+    "main": {
+     "A": -26.5,
+     "B": -300.25,
+     "C": -1752.75,
+     "D": -2.25,
+     "E": 983.25,
+     "F": -1244.5,
+     "G": 43.0,
+     "H": 110.0
+    },
+    "alone": {
+     "A": [
+      -316.0,
+      7.0
+     ],
+     "B": [
+      99.0,
+      -274.0
+     ],
+     "C": [
+      -2253.0,
+      -1970.0
+     ],
+     "D": [
+      -532.0,
+      -282.0
+     ],
+     "E": [
+      1397.0,
+      1944.0
+     ],
+     "F": [
+      -2475.0,
+      -2312.0
+     ],
+     "G": [
+      -2763.0,
+      -2419.0
+     ],
+     "H": [
+      -656.0,
+      -1044.0
+     ]
+    },
+    "pairs": {
+     "AB+CG+DH+EF": -241.25,
+     "AC+BG+DF+EH": 125.25,
+     "AD+BH+CF+EG": 1300.25,
+     "BC+AG+DE+FH": 312.0,
+     "BD+AH+CE+FG": -672.5,
+     "CD+AF+BE+GH": 71.0,
+     "AE+BF+CH+DG": -160.25
+    },
+    "seed_sd": 265.6799452975955
+   },
+   "share_at_most_three": {
+    "main": {
+     "A": 0.13328710030913482,
+     "B": -0.028329717059136228,
+     "C": -0.5845986251060306,
+     "D": 0.02106963511488108,
+     "E": 0.2552427327162049,
+     "F": -0.056336769900866224,
+     "G": -0.06867664692553077,
+     "H": 0.09441379838077879
+    },
+    "alone": {
+     "A": [
+      -0.01695081464108139,
+      -0.011245347886917556
+     ],
+     "B": [
+      0.011564820596541514,
+      -0.009321468791488652
+     ],
+     "C": [
+      -0.7612281502941536,
+      -0.6742098798275086
+     ],
+     "D": [
+      -0.036947213190483885,
+      -0.04168588613033053
+     ],
+     "E": [
+      0.13395402072444873,
+      0.1459569237347016
+     ],
+     "F": [
+      -0.2919666461579279,
+      -0.3291711837073712
+     ],
+     "G": [
+      -0.4875153528407333,
+      -0.3593502834488479
+     ],
+     "H": [
+      0.005512731032309204,
+      0.0278776292347116
+     ]
+    },
+    "pairs": {
+     "AB+CG+DH+EF": 0.08442582765771595,
+     "AC+BG+DF+EH": 0.03704946041743162,
+     "AD+BH+CF+EG": 0.15114598168607812,
+     "BC+AG+DE+FH": 0.06537015013161296,
+     "BD+AH+CE+FG": -0.03302259980812511,
+     "CD+AF+BE+GH": 0.09000210979617285,
+     "AE+BF+CH+DG": -0.004866122100471382
+    },
+    "seed_sd": 0.02878025293034742
+   },
+   "diversity": {
+    "main": {
+     "A": 0.007311698717948789,
+     "B": -0.02894631410256404,
+     "C": -0.0009014423076923461,
+     "D": 0.08303285256410264,
+     "E": -0.0035056089743589758,
+     "F": -0.003705929487179571,
+     "G": 0.2100360576923076,
+     "H": 0.04036458333333348
+    },
+    "alone": {
+     "A": [
+      -0.06650641025641024,
+      0.0452724358974359
+     ],
+     "B": [
+      0.059695512820512886,
+      0.12259615384615385
+     ],
+     "C": [
+      -0.22155448717948717,
+      -0.18910256410256412
+     ],
+     "D": [
+      -0.011217948717948678,
+      0.1530448717948718
+     ],
+     "E": [
+      -0.2219551282051282,
+      -0.11217948717948717
+     ],
+     "F": [
+      0.02644230769230782,
+      0.14903846153846145
+     ],
+     "G": [
+      0.19310897435897434,
+      0.17107371794871795
+     ],
+     "H": [
+      0.049278846153846145,
+      0.10496794871794879
+     ]
+    },
+    "pairs": {
+     "AB+CG+DH+EF": 0.06550480769230765,
+     "AC+BG+DF+EH": 0.05969551282051283,
+     "AD+BH+CF+EG": -0.03966346153846145,
+     "BC+AG+DE+FH": -0.006209935897435792,
+     "BD+AH+CE+FG": 0.2217548076923077,
+     "CD+AF+BE+GH": 0.06931089743589747,
+     "AE+BF+CH+DG": -0.04547275641025644
+    },
+    "seed_sd": 0.056883955988049524
+   },
+   "dimension": {
+    "main": {
+     "A": -0.04790359312718673,
+     "B": -0.012056742619447114,
+     "C": -1.3010236155215855,
+     "D": -0.228114714488596,
+     "E": -0.31115497715157625,
+     "F": -0.1787671393045196,
+     "G": -0.09484454979247925,
+     "H": -0.07732963723742481
+    },
+    "alone": {
+     "A": [
+      -0.03353944910926199,
+      -0.21915984349426232
+     ],
+     "B": [
+      0.093350044137269,
+      -0.21497927401089267
+     ],
+     "C": [
+      -2.514199644335011,
+      -2.7024111672762015
+     ],
+     "D": [
+      -0.5828694632902991,
+      -0.3267806612551851
+     ],
+     "E": [
+      -0.7440459440010017,
+      -1.024298374821496
+     ],
+     "F": [
+      -0.29463066893009504,
+      -0.4450101906085422
+     ],
+     "G": [
+      -0.8240357790569273,
+      -0.952559646758476
+     ],
+     "H": [
+      -0.23812582218208078,
+      -1.005862470219355
+     ]
+    },
+    "pairs": {
+     "AB+CG+DH+EF": 0.050360427185950574,
+     "AC+BG+DF+EH": -0.07446238471882838,
+     "AD+BH+CF+EG": 0.17047151703147012,
+     "BC+AG+DE+FH": -0.3003782351488229,
+     "BD+AH+CE+FG": 0.5857555675646706,
+     "CD+AF+BE+GH": 0.28425349229178964,
+     "AE+BF+CH+DG": 0.15868354243758587
+    },
+    "seed_sd": 0.19810855402066674
+   },
+   "links_per_agent": {
+    "main": {
+     "A": -0.04675096457449879,
+     "B": 0.3465084232688245,
+     "C": -0.8864383017682798,
+     "D": -0.038668145363467854,
+     "E": -0.4272100737931628,
+     "F": -0.10087295838547616,
+     "G": 0.09184713504763664,
+     "H": -1.0105787849050714
+    },
+    "alone": {
+     "A": [
+      0.4624717029130201,
+      0.04240650806929658
+     ],
+     "B": [
+      0.4814874010341148,
+      0.4358568977778985
+     ],
+     "C": [
+      -2.006494314272076,
+      -1.5645110171801666
+     ],
+     "D": [
+      -0.015574355108495475,
+      0.07632840410618247
+     ],
+     "E": [
+      -0.6465246792095041,
+      -0.6862273528940195
+     ],
+     "F": [
+      -0.25420573515414,
+      0.5895841086462905
+     ],
+     "G": [
+      -0.09930200743593431,
+      -0.135416124678021
+     ],
+     "H": [
+      -1.6706172966399868,
+      -2.3675386279287887
+     ]
+    },
+    "pairs": {
+     "AB+CG+DH+EF": 0.2757512501631538,
+     "AC+BG+DF+EH": -0.1511062569805781,
+     "AD+BH+CF+EG": 0.0077240642971685425,
+     "BC+AG+DE+FH": -0.04499058141562262,
+     "BD+AH+CE+FG": 0.15810696246470446,
+     "CD+AF+BE+GH": 0.16945135351332397,
+     "AE+BF+CH+DG": 1.0350430611553634
+    },
+    "seed_sd": 0.14478093679562978
+   },
+   "marks": {
+    "main": {
+     "A": -0.25,
+     "B": 0.25,
+     "C": -1.75,
+     "D": -0.25,
+     "E": -0.25,
+     "F": -0.25,
+     "G": 0.75,
+     "H": -1.25
+    },
+    "alone": {
+     "A": [
+      0.0,
+      0.0
+     ],
+     "B": [
+      0.0,
+      0.0
+     ],
+     "C": [
+      -2.0,
+      -2.0
+     ],
+     "D": [
+      1.0,
+      0.0
+     ],
+     "E": [
+      1.0,
+      0.0
+     ],
+     "F": [
+      0.0,
+      0.0
+     ],
+     "G": [
+      1.0,
+      1.0
+     ],
+     "H": [
+      -3.0,
+      -3.0
+     ]
+    },
+    "pairs": {
+     "AB+CG+DH+EF": 0.25,
+     "AC+BG+DF+EH": -0.75,
+     "AD+BH+CF+EG": -0.25,
+     "BC+AG+DE+FH": -0.25,
+     "BD+AH+CE+FG": -0.25,
+     "CD+AF+BE+GH": -0.25,
+     "AE+BF+CH+DG": 1.75
+    },
+    "seed_sd": 0.0
+   }
+  },
+  "worlds": {
+   "U/U-ABCDEFGH-s1": {
+    "agents": 1408,
+    "share_at_most_three": 0.5362215909090909,
+    "diversity": 0.8125,
+    "dimension": 2.136886685516303,
+    "links_per_agent": 3.4019886363636362,
+    "marks": 3
+   },
+   "U/U-ABCG-s1": {
+    "agents": 1023,
+    "share_at_most_three": 0.01857282502443793,
+    "diversity": 0.49038461538461536,
+    "dimension": 1.7330890343729037,
+    "links_per_agent": 3.608993157380254,
+    "marks": 4
+   },
+   "U/U-ABDH-s1": {
+    "agents": 3031,
+    "share_at_most_three": 0.8030353018805675,
+    "diversity": 0.5332532051282052,
+    "dimension": 3.9545805524247393,
+    "links_per_agent": 3.716265258990432,
+    "marks": 4
+   },
+   "U/U-ABEF-s1": {
+    "agents": 1945,
+    "share_at_most_three": 0.8534704370179949,
+    "diversity": 0.24439102564102563,
+    "dimension": 3.4568127378278994,
+    "links_per_agent": 5.276092544987146,
+    "marks": 7
+   },
+   "U/U-ACDF-s1": {
+    "agents": 1334,
+    "share_at_most_three": 0.17166416791604197,
+    "diversity": 0.358974358974359,
+    "dimension": 2.137851290277846,
+    "links_per_agent": 2.977511244377811,
+    "marks": 2
+   },
+   "U/U-ACEH-s1": {
+    "agents": 1470,
+    "share_at_most_three": 0.27755102040816326,
+    "diversity": 0.46314102564102566,
+    "dimension": 2.445962630360958,
+    "links_per_agent": 2.6952380952380954,
+    "marks": 3
+   },
+   "U/U-ADEG-s1": {
+    "agents": 5313,
+    "share_at_most_three": 0.93261810653115,
+    "diversity": 0.3894230769230769,
+    "dimension": 2.8601567178756975,
+    "links_per_agent": 4.601166948993036,
+    "marks": 7
+   },
+   "U/U-AFGH-s1": {
+    "agents": 1456,
+    "share_at_most_three": 0.6050824175824175,
+    "diversity": 0.7227564102564104,
+    "dimension": 3.6841836333613296,
+    "links_per_agent": 3.2403846153846154,
+    "marks": 4
+   },
+   "U/U-BCDE-s1": {
+    "agents": 1502,
+    "share_at_most_three": 0.16577896138482023,
+    "diversity": 0.5184294871794871,
+    "dimension": 2.2306785030417347,
+    "links_per_agent": 3.3009320905459387,
+    "marks": 3
+   },
+   "U/U-BCFH-s1": {
+    "agents": 1128,
+    "share_at_most_three": 0.016843971631205674,
+    "diversity": 0.09935897435897435,
+    "dimension": 1.9729974177525584,
+    "links_per_agent": 3.370567375886525,
+    "marks": 4
+   },
+   "U/U-BDFG-s1": {
+    "agents": 652,
+    "share_at_most_three": 0.2469325153374233,
+    "diversity": 0.6802884615384615,
+    "dimension": 3.669591307193689,
+    "links_per_agent": 5.365030674846626,
+    "marks": 7
+   },
+   "U/U-BEGH-s1": {
+    "agents": 5196,
+    "share_at_most_three": 0.9108929946112394,
+    "diversity": 0.4911858974358974,
+    "dimension": 3.398274445918807,
+    "links_per_agent": 3.0508083140877598,
+    "marks": 4
+   },
+   "U/U-CDGH-s1": {
+    "agents": 931,
+    "share_at_most_three": 0.011815252416756176,
+    "diversity": 0.6057692307692307,
+    "dimension": 2.305382672990543,
+    "links_per_agent": 3.6605800214822772,
+    "marks": 5
+   },
+   "U/U-CEFG-s1": {
+    "agents": 1279,
+    "share_at_most_three": 0.12822517591868648,
+    "diversity": 0.6334134615384616,
+    "dimension": 2.4341949581272333,
+    "links_per_agent": 3.1430805316653636,
+    "marks": 4
+   },
+   "U/U-DEFH-s1": {
+    "agents": 2906,
+    "share_at_most_three": 0.8812801101169994,
+    "diversity": 0.41907051282051283,
+    "dimension": 2.393551067251485,
+    "links_per_agent": 2.526496902959394,
+    "marks": 3
+   },
+   "U/U-none-s1": {
+    "agents": 3598,
+    "share_at_most_three": 0.7701500833796554,
+    "diversity": 0.5088141025641025,
+    "dimension": 4.388081654759118,
+    "links_per_agent": 5.474152306837132,
+    "marks": 6
+   }
+  }
+ },
+ "figures": {
+  "effects": {
+   "title": "What each switch does, among the sixteen and alone",
+   "caption": "Orange: each switch's main effect among the sixteen worlds of batch U \u2014 the mean of the eight worlds with it on, minus the mean of the eight with it off \u2014 at iteration 1,000. Grey: the same switch thrown alone in B2, the world with it minus its twin without it, seeds 1 and 2. The grey band round zero is the seed's own noise: one standard deviation of the measure over the lab's ten B2 worlds, twice the noise of a main effect.",
+   "recipe": "**Runs.** Batch U's sixteen pilot worlds (`GraphOfLifeRuns/.pilots/U/`): B2 at 10,000 tokens, seed 1, 1,000 iterations, with each of eight switches on in eight of them (`research/oee/pilots/make_jobs_TU.py`); each switch alone in B2, seeds 1 and 2, from the batch or lab experiment that made it; and the lab's ten B2 worlds (Experiment 16) for the seed's own noise.\n\n**Data.** From each world's checkpoint at iteration 1,000, or the lab's whole world kept then (`research/atlas/at.py --at 1000`, `GraphOfLifeRuns/.pilots/atlas/at1000.json`).\n\n1. Read each world as `research/atlas/profile.py` reads every world.\n2. A switch's main effect: the mean of the eight worlds with it on, minus the mean of the eight with it off.\n3. Thrown alone: the world with the switch minus its twin without it, each seed.\n4. The seed noise: the standard deviation of the lab's ten B2 worlds at iteration 1,000.\n\n**To make it again:** `python3 book_figures.py eightswitches`."
+  },
+  "pairs": {
+   "title": "Switches that act together",
+   "caption": "The seven chains of pairs of batch U (book/notes/fractional-factorial.md): for each, the mean of the eight worlds where the product of the pair's two switches is +1, minus the mean of the other eight \u2014 the sum of the four pairs' effects that one chain cannot tell apart. The grey band: the seed's own noise, as in the figure above.",
+   "recipe": "**Runs.** Batch U's sixteen pilot worlds (`GraphOfLifeRuns/.pilots/U/`): B2 at 10,000 tokens, seed 1, 1,000 iterations, with each of eight switches on in eight of them (`research/oee/pilots/make_jobs_TU.py`); each switch alone in B2, seeds 1 and 2, from the batch or lab experiment that made it; and the lab's ten B2 worlds (Experiment 16) for the seed's own noise.\n\n**Data.** From each world's checkpoint at iteration 1,000, or the lab's whole world kept then (`research/atlas/at.py --at 1000`, `GraphOfLifeRuns/.pilots/atlas/at1000.json`).\n\n1. Read each world as `research/atlas/profile.py` reads every world.\n2. A chain's effect: the mean of the eight worlds where the product of a pair's switches is +1, minus the mean of the other eight.\n\n**To make it again:** `python3 book_figures.py eightswitches`."
+  }
+ }
+}

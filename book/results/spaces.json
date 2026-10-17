@@ -1,0 +1,171 @@
+{
+ "chapter": "spaces",
+ "numbers": {
+  "side": {
+   "B1": {
+    "worlds": 26,
+    "agents": 1476.5,
+    "typical_distance": 2.2577097553470966,
+    "half_reach": 10.503063713202152,
+    "twin_half_reach": 4.544537040968285
+   },
+   "B2": {
+    "worlds": 10,
+    "agents": 3422.5,
+    "typical_distance": 1.1818766725108953,
+    "half_reach": 5.036611519000754,
+    "twin_half_reach": 4.221946321979102
+   },
+   "B2 mixed at birth": {
+    "worlds": 9,
+    "agents": 628.0,
+    "typical_distance": 1.2078434905643762,
+    "half_reach": 4.336884440705073,
+    "twin_half_reach": 3.6662475442994924
+   },
+   "B2, estates to newborns or parents": {
+    "worlds": 4,
+    "agents": 5203.5,
+    "typical_distance": 2.3767380653368138,
+    "half_reach": 11.208517625898386,
+    "twin_half_reach": 4.706875953487238
+   }
+  },
+  "life": {
+   "B2": {
+    "100": 1.6810385030278168,
+    "200": 1.4726013473688913,
+    "300": 1.2390169048057895,
+    "500": 1.180073437340137,
+    "700": 1.1816529493984,
+    "1000": 1.216801794375779,
+    "1500": 1.186046754511567,
+    "2000": 1.1657454787357293
+   },
+   "B2, no old age": {
+    "100": 1.6810385030278168,
+    "200": 1.7906394008220492,
+    "300": 1.7991979179465492,
+    "500": 1.831113303837954,
+    "700": 1.8322740292675215,
+    "1000": 1.8876527909503584
+   },
+   "B2, estates to the newborns": {
+    "100": 1.6846835879295354,
+    "200": 2.004559685694618,
+    "300": 1.857633245104433,
+    "500": 1.9947729329410167,
+    "700": 2.1922627213623374,
+    "1000": 2.099016117387615,
+    "1500": 2.0911401499028277,
+    "2000": 2.0141461214409055
+   },
+   "B2, estates to the parents": {
+    "100": 1.6846835879295354,
+    "200": 1.90978357581033,
+    "300": 2.0509566678306563,
+    "500": 2.201598529885254,
+    "700": 2.5295519220487925,
+    "1000": 2.520502204816644,
+    "1500": 2.431203731008746,
+    "2000": 2.6361952246421643
+   },
+   "B2, every unused link lapses": {
+    "100": 1.806020578352617,
+    "200": 4.705324692638072,
+    "300": 4.626500741793137,
+    "500": 4.269096775369295,
+    "700": 4.684952217985897,
+    "1000": 4.416316347164496
+   },
+   "B2 at 5,000 tokens": {
+    "100": 1.539742817919365,
+    "200": 1.368478064470609,
+    "300": 1.5288862916356487,
+    "500": 1.2405207998981729,
+    "700": 1.3117648096623202,
+    "1000": 1.2640179029017635
+   },
+   "B2 at 5,000, no mending": {
+    "100": 1.539742817919365,
+    "200": 1.7434259382759025,
+    "300": 1.703134329421699,
+    "500": 1.6229472156494824,
+    "700": 1.658707569882288,
+    "1000": 2.0443003364456294
+   },
+   "B2 at 5,000, no links at birth": {
+    "100": 1.8427673540130378,
+    "200": 1.4089229980161122,
+    "300": 1.4593106149421735,
+    "500": 1.411472835194249,
+    "700": 1.4266009604494199,
+    "1000": 1.3495322279367392
+   },
+   "B2 at 5,000, no cap on links": {
+    "100": 1.8711789501498666,
+    "200": 1.3558004879646457,
+    "300": 1.1343895555964039,
+    "500": 1.219823347803054,
+    "700": 1.2809170089141453,
+    "1000": 1.1388715846242774
+   },
+   "B2 at 5,000, handover": {
+    "100": 1.6535988018780745,
+    "200": 1.6908047268256645,
+    "300": 1.4684238806477468,
+    "500": 1.5121138454342085,
+    "700": 1.4823121077391752,
+    "1000": 1.6565266566726529
+   }
+  },
+  "every": {
+   "worlds": 322,
+   "by_kind": {
+    "B2": {
+     "worlds": 209,
+     "median": 1.2580197019800612
+    },
+    "mixed": {
+     "worlds": 63,
+     "median": 1.2611887309965386
+    },
+    "estates": {
+     "worlds": 27,
+     "median": 2.4199967567902547
+    },
+    "lapse": {
+     "worlds": 12,
+     "median": 3.9410143142877203
+    },
+    "B1": {
+     "worlds": 11,
+     "median": 2.457784206546463
+    }
+   },
+   "rank_correlation": {
+    "links_per_agent": -0.5882839972747799,
+    "share_at_most_three": 0.14741007932504252,
+    "agents": 0.07095654618056722,
+    "tokens_per_agent": -0.07979643877482986
+   }
+  }
+ },
+ "figures": {
+  "balls": {
+   "title": "B1 and B2 side by side",
+   "caption": "Left: the share of its world a typical agent's ball holds within r steps (the geometric mean over 40 agents drawn at random), the median of each kind of world, on logarithmic axes; dashed, the same for the worlds' random twins, which have exactly the links of their world at every agent, wired at random. Right: the local dimension the balls show, d(r) = ln(N(r+1)/N(r)) / ln((r+1)/r), until a ball holds a quarter of the world, the median of each kind; dashed, the twins.",
+   "recipe": "**Runs.** B1: the 26 worlds of 10,000 tokens of Experiment 2 that lived to the end, after their last game; B2: Experiment 16's ten worlds at iteration 2,000; mixed at birth: Experiment 17's worlds at 10,000; the estates to the newborns or the parents: batch R's B2 worlds (`R/B2-newborns-s1`, `-s2`, `R/B2-parents-s1`, `-s2`) at 2,000.\n\n**Data.** From each world's whole world kept then (`research/atlas/space.py`, `GraphOfLifeRuns/.pilots/atlas/space.json`).\n\n1. Build the network of the world's largest piece; make its random twin.\n2. From 40 agents drawn at random, a breadth-first search; N(r) the geometric mean of the number within r steps.\n3. Read the share N(r)/n and the local dimension d(r).\n\n**To make it again:** `python3 book_figures.py spaces`."
+  },
+  "life": {
+   "title": "A world through its life",
+   "caption": "The typical distance of a world \u2014 the steps within which a typical agent's ball holds half of it \u2014 over the same for its random twin, at moments of its life; the median of two or three seeds of each kind. About 1: a small world, as near as its twin. Above: a space, wider than its twin. Above, worlds of 10,000 tokens: B2 itself (Experiment 16), without old age, with the estate of the dead to the newborns or to the parents (batch R), and with every unused link lapsing (batch S). Below, worlds of 5,000 tokens from Experiment 14, each without one of B2's rules, or with handover.",
+   "recipe": "**Runs.** Experiment 16's B2 worlds and their sister experiment without old age (`B2-10000-s001` \u2026 `s003`, `B2-10000-3ec24f-s001` \u2026 `s003`), batch R's and batch S's pilot worlds, and Experiment 14's worlds at 5,000 tokens (`B2-5000-\u2026-s001` \u2026 `s003`).\n\n**Data.** From the whole worlds kept every 100 iterations (`research/atlas/space.py --life`, `GraphOfLifeRuns/.pilots/atlas/space_life.json`).\n\n1. Measure each world as in the figure above, at each moment.\n2. Divide the radius at which its typical ball holds half the world by its twin's.\n\n**To make it again:** `python3 book_figures.py spaces`."
+  },
+  "every": {
+   "title": "Every world at iteration 1,000",
+   "caption": "Each dot is a world of the book read at iteration 1,000 \u2014 the pilot batches and the lab's B2 families at 10,000 tokens \u2014 its typical distance over its random twin's (logarithmic), against its links per agent (left) and the share of its agents holding three tokens or fewer (right). Colours: what stands out in its rules.",
+   "recipe": "**Runs.** Every world of `GraphOfLifeRuns/.pilots/atlas/at1000.json` (`research/atlas/at.py`): the pilot batches K, M, P, Q, R, S, T, U, W, X and Y, and the lab's B2 families of Experiments 15 to 17.\n\n**Data.** From each world's whole world kept at iteration 1,000 (`research/atlas/space.py --at 1000`, `GraphOfLifeRuns/.pilots/atlas/space_at1000.json`).\n\n1. Measure each world and its twin as above.\n2. Set its typical distance over the twin's against its links per agent and its share of poor agents.\n\n**To make it again:** `python3 book_figures.py spaces`."
+  }
+ }
+}

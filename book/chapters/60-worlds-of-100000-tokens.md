@@ -376,5 +376,5 @@ To make every figure of this chapter: `python3 book_figures.py takeover`.
 <!-- turns -->
 ---
 
-← [Chapter 85 · Mixed at birth, with parents as mates](85-mixed-at-birth-with-parents-as-mates.md) · [Contents](../README.md) · [Chapter 69 · A hundred thousand iterations](69-a-hundred-thousand-iterations.md) →
+← [Chapter 86 · Eight switches at once](86-eight-switches-at-once.md) · [Contents](../README.md) · [Chapter 87 · What folds a world](87-what-folds-a-world.md) →
 <!-- /turns -->
