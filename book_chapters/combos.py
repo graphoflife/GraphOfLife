@@ -12,19 +12,20 @@ research/oee/checks/rejudge.py → GraphOfLifeRuns/.pilots/batch_TUV_T100.json,
 and rejudge_T100.json for batch S's worlds).
 
     mixcombos   Chapter 82 · Brains mixed at birth, with every other rule (batch Y)
+    norevcombos Chapter 88 · Revolutions, with every other rule (batch W)
 """
 from __future__ import annotations
 
 import json
 import os
 import sys
-from typing import Any, Callable, Dict, List, NamedTuple, Tuple
+from typing import Any, Callable, Dict, List, NamedTuple, Optional, Tuple
 
 import numpy as np
 
 import book_figures as F
 from book_figures import chapter, recipe
-from book_chapters.common import GREY, ORANGE
+from book_chapters.common import GREY, ORANGE, VIOLET
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PILOTS = os.path.join(ROOT, "GraphOfLifeRuns", ".pilots")
@@ -87,10 +88,12 @@ def _pairs(categories: List[str], alone: List[List[float]], both: List[List[floa
 
 
 def _contests() -> Dict[str, float]:
-    """Each pilot world's later-era share, 1,000 against 500: the mean of its contests."""
+    """Each pilot world's later-era share, 1,000 against 500: the mean of its contests, from every batch's file
+    of lifetime contests (a batch's later worlds may be judged into a file of their own)."""
+    import glob
     by: Dict[str, List[float]] = {}
-    for name in ("batch_TUV_T100.json", "rejudge_T100.json"):
-        path = os.path.join(PILOTS, name)
+    for path in sorted(glob.glob(os.path.join(PILOTS, "batch_*_T100.json"))) + [os.path.join(PILOTS,
+                                                                                         "rejudge_T100.json")]:
         for r in json.load(open(path)) if os.path.exists(path) else []:
             if (r["a"], r["b"]) == (500, 1000) and r.get("share") is not None:
                 by.setdefault(r["world"].split(".pilots/")[-1], []).append(r["share"])
@@ -192,12 +195,135 @@ def _combos(ch: F.Chapter, b: Batch) -> None:
     ch.number("references", {"B2": {k: value(b2, k) for k in KEYS}, "alone": {k: value(ref, k) for k in KEYS}})
 
 
+def _changes(ch: F.Chapter, b: Batch, fig: str) -> Optional[Dict[str, Any]]:
+    """A compact view of a batch: for each other rule, what adding the batch's rule changes in the share of poor
+    agents and in diversity (each seed a dot), and whether its brains of 1,000 beat those of 500 — one row per
+    rule, the rules in the order of the change in the poor share."""
+    measured, contests = _measured(), _contests()
+    rows = []
+    for name, control, with_both in b.rows():
+        pairs = [(measured.get(_alone(control, s)), measured.get(f"{with_both}-s{s}")) for s in (1, 2)]
+        pairs = [(a, w) for a, w in pairs if a and w]
+        if pairs:
+            judged = [contests[f"{with_both}-s{s}"] for s in (1, 2) if f"{with_both}-s{s}" in contests]
+            rows.append((name, pairs, judged))
+    if len(rows) < 20:
+        return None
+
+    def change(pairs, key):
+        return [float(w[key]) - float(a[key]) for a, w in pairs if a.get(key) is not None and w.get(key) is not None]
+
+    rows.sort(key=lambda r: np.mean(change(r[1], "share_at_most_three")))
+    cats = [WORDS[name] for name, _, _ in rows]
+    series = []
+    for key, colour, side, label in (("share_at_most_three", ORANGE, -0.15, "share with three tokens or fewer"),
+                                     ("diversity", VIOLET, 0.15, "diversity score")):
+        xs, ys = [], []
+        for k, (_, pairs, _) in enumerate(rows):
+            for v in change(pairs, key):
+                xs.append(v)
+                ys.append(k + side)
+        series.append({"label": label, "x": xs, "y": ys, "points": True, "size": 6, "colour": colour, "alpha": 0.85})
+    evolution = [{"label": None, "x": [v for _, _, c in rows for v in c],
+                  "y": [k for k, (_, _, c) in enumerate(rows) for _ in c], "points": True, "size": 6,
+                  "colour": ORANGE, "alpha": 0.85}]
+    b2_med = float(np.median(_lab_contests("B2-10000-s")))
+    height = 18 * len(rows)
+    spread = [v for sr in series for v in sr["x"]]
+    room = 0.05 * (max(spread) - min(spread)) if spread else 0.05
+    ch.grid(fig, [
+        {"title": f"What {b.words} changes", "x": {"label": "with it, minus without it",
+                                                    "min": min(spread) - room, "max": max(spread) + room},
+         "y": {"categories": cats}, "series": series, "height": height,
+         "guides": [{"axis": "x", "at": 0.0, "label": ""}]},
+        {"title": "Do the brains of 1,000 beat those of 500?", "x": {"label": "the later brains' share", "min": 0.2,
+                                                                    "max": 1.0},
+         "y": {"categories": cats}, "series": evolution, "height": height,
+         "guides": [{"axis": "x", "at": 0.5, "label": "no better"}, {"axis": "x", "at": b2_med, "label": "B2"}]}],
+        columns=1, title=f"Each rule, with {b.words} and without",
+        caption=(f"Each row is one other rule. Above: what adding {b.words} to a world of B2 with that rule changes "
+                 f"(batch {b.letter}), at iteration 1,000 — in orange, the share of the agents holding three tokens "
+                 f"or fewer; in violet, the diversity score; a dot for each seed, 1 and 2. Below: the share of a "
+                 f"contested world the brains of 1,000 of the world with both rules hold after 100 iterations "
+                 f"against those of 500, the mean of two contests, a dot for each seed; the dashed line marked B2 "
+                 f"is the median of the lab's ten B2 worlds, played the same way."),
+        recipe=recipe(f"Batch {b.letter}'s pilot worlds (B2 at 10,000 tokens, {b.words} and one other rule, seeds "
+                      f"1 and 2, `GraphOfLifeRuns/.pilots/{b.letter}/`) and their controls: the same rule alone, "
+                      f"from the batch or lab experiment that made it.",
+                      "each world's checkpoint at iteration 1,000 (`research/atlas/at.py --at 1000`, "
+                      "`GraphOfLifeRuns/.pilots/atlas/at1000.json`) and the contests in "
+                      "`GraphOfLifeRuns/.pilots/batch_TUV_T100.json` and `rejudge_T100.json`",
+                      ["Read each world as `research/atlas/profile.py` reads every world.",
+                       "Subtract the world with the rule alone from the world with both, seed by seed.",
+                       "Seat the brains of the two eras on alternate agents of each era's world, play 100 "
+                       "iterations, and count the agents the later brains hold."]))
+    out = {"rows": {name: {"poor": change(pairs, "share_at_most_three"), "diversity": change(pairs, "diversity"),
+                           "marks": change(pairs, "marks"), "agents": change(pairs, "agents"), "evolution": c}
+                    for name, pairs, c in rows}, "b2_median": b2_med}
+    ch.number(fig, out)
+    return out
+
+
 def _other_rules(prefix: str, skip: str) -> List[Tuple[str, str, str]]:
     """Every switch of batch W and every other contest of batch S, alone and with the batch's rule, as batches
     X and Y pair them: the contests of batch S alone are the worlds batch W made with revolutions."""
     from make_jobs_TU import W_NOREV, W_REV
     return ([(name, control, f"{prefix}-{name}") for name, _, _, control in W_NOREV if name != skip]
             + [(name, f"W/rev-{name}", f"{prefix}-{name}") for name, _, _ in W_REV])
+
+
+def _norev_rules() -> List[Tuple[str, str, str]]:
+    """Batch W: every switch with and without revolutions. For batch S's contests, which were only ever played
+    without revolutions, the world with the rule alone is the one batch W made with revolutions."""
+    from make_jobs_TU import W_NOREV, W_REV
+    return ([(name, control, f"W/norev-{name}") for name, _, _, control in W_NOREV]
+            + [(name, f"W/rev-{name}", control) for name, _, control in W_REV])
+
+
+NOREV = Batch("W", "no revolutions", "no revolutions alone", ("S/S1-norev-s1", "S/S1-norev-s2"), _norev_rules,
+              lambda: [v for w, v in _contests().items() if w.startswith("S/S1-norev-")],
+              "batch S's `S/S1-norev`", "batch S's two worlds without revolutions")
+HANDOVER = Batch("X", "handover", "handover alone", ("T/handover-s1", "T/handover-s2"),
+                 lambda: _other_rules("X/handover", "handover"),
+                 lambda: [v for w, v in _contests().items() if w.startswith("T/handover-")],
+                 "batch T's `T/handover`", "the two worlds of batch T with handover alone")
+
+
+def _revolution_rates() -> Dict[str, Dict[str, float]]:
+    """Revolutions per hundred agents an iteration, and their share of the nodes that changed hands, over
+    iterations 500 to 1,000 of each world of batch W's rules with revolutions on (pilot series, or a lab run's
+    rows of the game)."""
+    from make_jobs_TU import W_NOREV, W_REV
+    out: Dict[str, Dict[str, float]] = {}
+    worlds = [(name, _alone(c, s)) for name, _, _, c in W_NOREV for s in (1, 2)]
+    worlds += [(name, f"W/rev-{name}-s{s}") for name, _, _ in W_REV for s in (1, 2)]
+    for name, wid in worlds:
+        pilot = os.path.join(PILOTS, wid, "series.jsonl")
+        lab = os.path.join(ROOT, "GraphOfLifeRuns", wid, "stats.jsonl")
+        if os.path.exists(pilot):
+            # A pilot's row counts revolutions and conquests only in an iteration that had some.
+            rows = [r for r in map(json.loads, open(pilot)) if 500 <= r["it"] <= 1000]
+            counted = True
+        elif os.path.exists(lab):
+            rows = [r for r in map(json.loads, open(lab)) if r.get("phase") == 2 and 500 <= r["iteration"] <= 1000]
+            counted = bool(rows) and "revolutions" in rows[0]
+        else:
+            continue
+        if not rows or not counted:
+            continue
+        rev = float(np.mean([r.get("revolutions", 0) for r in rows]))
+        agents = float(np.mean([r["nodes"] for r in rows]))
+        conquests = (float(np.mean([r.get("conquests", 0) for r in rows]))
+                     if any("conquests" in r for r in rows) else float("nan"))
+        out[wid] = {"rule": name, "per_hundred_agents": 100 * rev / agents,
+                    "share_of_conquests": rev / conquests if conquests else float("nan")}
+    return out
+
+
+@chapter
+def norevcombos(ch: F.Chapter) -> None:
+    if _changes(ch, NOREV, "changes") is not None:
+        ch.number("revolution_rates", _revolution_rates())
 
 
 @chapter

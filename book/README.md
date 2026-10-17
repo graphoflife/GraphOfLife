@@ -111,6 +111,7 @@ everything can be checked with it.
 - [Chapter 82 · Brains mixed at birth, with every other rule](chapters/82-mixing-with-every-other-rule.md)
 - [Chapter 85 · Mixed at birth, with parents as mates](chapters/85-mixed-at-birth-with-parents-as-mates.md)
 - [Chapter 86 · Eight switches at once](chapters/86-eight-switches-at-once.md)
+- [Chapter 88 · Revolutions, with every other rule](chapters/88-revolutions-with-every-other-rule.md)
 
 **Part VI · Towards a physics: space, scale and locality**
 

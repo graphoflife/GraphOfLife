@@ -376,5 +376,5 @@ To make every figure of this chapter: `python3 book_figures.py takeover`.
 <!-- turns -->
 ---
 
-← [Chapter 86 · Eight switches at once](86-eight-switches-at-once.md) · [Contents](../README.md) · [Chapter 87 · What folds a world](87-what-folds-a-world.md) →
+← [Chapter 88 · Revolutions, with every other rule](88-revolutions-with-every-other-rule.md) · [Contents](../README.md) · [Chapter 87 · What folds a world](87-what-folds-a-world.md) →
 <!-- /turns -->

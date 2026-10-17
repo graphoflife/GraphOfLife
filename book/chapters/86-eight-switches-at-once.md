@@ -228,5 +228,5 @@ act together here too: three chains add 0.11 to 0.14.
 <!-- turns -->
 ---
 
-← [Chapter 85 · Mixed at birth, with parents as mates](85-mixed-at-birth-with-parents-as-mates.md) · [Contents](../README.md) · [Chapter 60 · Worlds of 100,000 tokens](60-worlds-of-100000-tokens.md) →
+← [Chapter 85 · Mixed at birth, with parents as mates](85-mixed-at-birth-with-parents-as-mates.md) · [Contents](../README.md) · [Chapter 88 · Revolutions, with every other rule](88-revolutions-with-every-other-rule.md) →
 <!-- /turns -->

@@ -540,6 +540,17 @@ each two-by-two read at 1,000 by research/atlas/at.py)**
   alone 0.84, B2 0.68); fastest with links that hold a token (0.93), half kept (0.91), units that hold a token
   (0.90); no better with stakes pooled by family (0.35), handover, slow brain change (0.47), no random inputs (0.50).
 
+**Revolutions, with every other rule (batch W, Ch. 88; 2026-10-17; B2 without revolutions and 24 other rules, seeds
+1 and 2, 1,000 iterations, against each rule alone; contests 1,000 vs 500)**
+- For most rules nothing changes: median change +0.002 in the share at <= 3 tokens, +0.008 in diversity (48 pairs);
+  marks hardly move. Revolutions are rare: median 0.24 per 100 agents an iteration, 3.7% of the nodes that change
+  hands (90% of worlds below 0.8 and 7.4%).
+- Mixing is the exception: revolutions are 5-10x as common (1.0/1.4 per 100, 7-8% of conquests) and without them
+  the worlds grow (+1,410/+360 agents) and get poorer (+0.39/+0.14). Without random inputs a little poorer (+0.07/
+  +0.06) and less diverse (-0.12/-0.11). Token-holding units/links: no consistent direction. One lapse world: 96%
+  of conquests are revolutions, yet without them it hardly changes.
+- Evolution goes on: later brains above half in 42 of 48 worlds, median 0.64 (B2 0.68).
+
 **Eight switches at once (batch U, Ch. 86; 2026-10-17; a 2^(8-4) design of resolution IV on B2, seed 1, 1,000
 iterations; main effects against the seed's noise from E16's ten worlds at 1,000)**
 - Every unused link lapsing is the strongest switch: -1,750 agents, -0.58 in the share at <= 3 tokens, -1.3 in

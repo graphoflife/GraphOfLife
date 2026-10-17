@@ -1,0 +1,10 @@
+# Worlds of batches T to X finished after batch_TUVWX_worlds.txt was made (2026-10-17): judged into batch_TUVWX2_T100.json.
+pilot GraphOfLifeRuns/.pilots/W/norev-lapse-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/W/norev-mut05-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/W/norev-mut80-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/W/norev-unittoken-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/W/rev-familypool-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/W/rev-familysense-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/W/rev-kinsense-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/W/rev-lottery-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/W/rev-pool-s2 500:1000

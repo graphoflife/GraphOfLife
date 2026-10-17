@@ -439,6 +439,13 @@
           "note": "Eight of the book's switches thrown together on B2 in sixteen worlds (batch U, a fractional factorial design): every unused link lapsing is the strongest switch, the estate to the newborns fills a world, mixing raises diversity; pairs of switches act together, and several switches do far less among the sixteen than alone in B2.",
           "file": "chapters/86-eight-switches-at-once.md",
           "status": "analysed"
+        },
+        {
+          "id": "88",
+          "title": "Revolutions, with every other rule",
+          "note": "B2 without revolutions together with each of 24 other rules (batch W): for nearly every rule nothing changes, as revolutions are rare in B2's kind of world; with brains mixed at birth, where they are common, they keep a world small and rich.",
+          "file": "chapters/88-revolutions-with-every-other-rule.md",
+          "status": "analysed"
         }
       ]
     },

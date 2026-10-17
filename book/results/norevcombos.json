@@ -1,0 +1,787 @@
+{
+ "chapter": "norevcombos",
+ "numbers": {
+  "changes": {
+   "rows": {
+    "unittoken": {
+     "poor": [
+      -0.4444236151841596,
+      -0.017195521257586388
+     ],
+     "diversity": [
+      -0.13266871165644173,
+      0.07246932515337412
+     ],
+     "marks": [
+      0.0,
+      0.0
+     ],
+     "agents": [
+      -918.0,
+      -345.0
+     ],
+     "evolution": [
+      0.7921107543301815,
+      0.8896843896843897
+     ]
+    },
+    "bytokens": {
+     "poor": [
+      -0.01593759996240962,
+      -0.13192836777863914
+     ],
+     "diversity": [
+      -0.04217791411042937,
+      0.12806748466257661
+     ],
+     "marks": [
+      0.0,
+      0.0
+     ],
+     "agents": [
+      -633.0,
+      -1071.0
+     ],
+     "evolution": [
+      0.6150584685965044,
+      0.6038301407785074
+     ]
+    },
+    "kinsense": {
+     "poor": [
+      -0.08314850556343834,
+      -0.011662481804338043
+     ],
+     "diversity": [
+      0.02108895705521474,
+      0.08473926380368108
+     ],
+     "marks": [
+      0.0,
+      0.0
+     ],
+     "agents": [
+      -180.0,
+      -193.0
+     ],
+     "evolution": [
+      0.7146764627777287,
+      0.8014895330112721
+     ]
+    },
+    "came": {
+     "poor": [
+      0.0030901758681209923,
+      -0.07584153807175387
+     ],
+     "diversity": [
+      -0.043328220858895705,
+      0.049079754601227044
+     ],
+     "marks": [
+      0.0,
+      0.0
+     ],
+     "agents": [
+      459.0,
+      -494.0
+     ],
+     "evolution": [
+      0.638771573303883,
+      0.8059573622702485
+     ]
+    },
+    "lapse": {
+     "poor": [
+      -0.0058661653238517445,
+      -0.050983663304454856
+     ],
+     "diversity": [
+      0.004984662576687171,
+      0.01955521472392638
+     ],
+     "marks": [
+      0.0,
+      0.0
+     ],
+     "agents": [
+      -36.0,
+      -270.0
+     ],
+     "evolution": [
+      0.5145298629521269,
+      0.7538251366120219
+     ]
+    },
+    "familysense": {
+     "poor": [
+      -0.03598423453345734,
+      -0.005481259417517204
+     ],
+     "diversity": [
+      0.10352760736196326,
+      0.04869631901840499
+     ],
+     "marks": [
+      0.0,
+      1.0
+     ],
+     "agents": [
+      -416.0,
+      -528.0
+     ],
+     "evolution": [
+      0.6170785812405339,
+      0.6725405614129937
+     ]
+    },
+    "mut80": {
+     "poor": [
+      0.023400609224283553,
+      -0.04793867937504892
+     ],
+     "diversity": [
+      -0.017638036809816127,
+      0.07553680981595101
+     ],
+     "marks": [
+      0.0,
+      0.0
+     ],
+     "agents": [
+      -174.0,
+      -270.0
+     ],
+     "evolution": [
+      0.6258738507597245,
+      0.6133646562638245
+     ]
+    },
+    "parents": {
+     "poor": [
+      -0.014583268450983122,
+      -0.006276578306843916
+     ],
+     "diversity": [
+      0.03680981595092028,
+      0.04754601226993865
+     ],
+     "marks": [
+      0.0,
+      0.0
+     ],
+     "agents": [
+      -108.0,
+      -206.0
+     ],
+     "evolution": [
+      0.6041539303904506,
+      0.4786331074903881
+     ]
+    },
+    "grow": {
+     "poor": [
+      0.056144388589425276,
+      -0.06183123905563914
+     ],
+     "diversity": [
+      -0.07055214723926378,
+      0.05214723926380371
+     ],
+     "marks": [
+      0.0,
+      0.0
+     ],
+     "agents": [
+      -54.0,
+      -214.0
+     ],
+     "evolution": [
+      0.7230248939224024,
+      0.848647205553032
+     ]
+    },
+    "anychild": {
+     "poor": [
+      -0.00010704202910372107,
+      0.0003016146256920038
+     ],
+     "diversity": [
+      -0.007668711656441729,
+      0.01457055214723929
+     ],
+     "marks": [
+      0.0,
+      0.0
+     ],
+     "agents": [
+      -123.0,
+      -209.0
+     ],
+     "evolution": [
+      0.6121198675722721,
+      0.6554304702474298
+     ]
+    },
+    "mut05": {
+     "poor": [
+      0.03191191057759968,
+      -0.024085283591754214
+     ],
+     "diversity": [
+      0.060582822085889554,
+      0.11733128834355827
+     ],
+     "marks": [
+      0.0,
+      0.0
+     ],
+     "agents": [
+      431.0,
+      -70.0
+     ],
+     "evolution": [
+      0.7180825366692489,
+      0.8525818908960783
+     ]
+    },
+    "keepone": {
+     "poor": [
+      0.011756791579885073,
+      -0.0014581867907076385
+     ],
+     "diversity": [
+      -0.06940184049079762,
+      0.046779141104294486
+     ],
+     "marks": [
+      0.0,
+      0.0
+     ],
+     "agents": [
+      326.0,
+      11.0
+     ],
+     "evolution": [
+      0.4485695105025299,
+      0.4863973694172553
+     ]
+    },
+    "noage": {
+     "poor": [
+      0.015091512094264403,
+      -0.0036785518288160457
+     ],
+     "diversity": [
+      -0.0015337423312883625,
+      -0.02070552147239263
+     ],
+     "marks": [
+      0.0,
+      0.0
+     ],
+     "agents": [
+      171.0,
+      -19.0
+     ],
+     "evolution": [
+      0.5199710751428737,
+      0.4765977997459834
+     ]
+    },
+    "newborns": {
+     "poor": [
+      0.0020971439458178365,
+      0.011895595381386292
+     ],
+     "diversity": [
+      0.03259202453987731,
+      -0.04792944785276071
+     ],
+     "marks": [
+      0.0,
+      1.0
+     ],
+     "agents": [
+      133.0,
+      120.0
+     ],
+     "evolution": [
+      0.5019090936520336,
+      0.586253167078942
+     ]
+    },
+    "poorest": {
+     "poor": [
+      -0.0017755921751462234,
+      0.02980228053612155
+     ],
+     "diversity": [
+      0.07668711656441718,
+      -0.0030674846625766694
+     ],
+     "marks": [
+      0.0,
+      1.0
+     ],
+     "agents": [
+      149.0,
+      353.0
+     ],
+     "evolution": [
+      0.7881278284569285,
+      0.7598323504774124
+     ]
+    },
+    "familypool": {
+     "poor": [
+      0.006818449724380837,
+      0.02228271493978573
+     ],
+     "diversity": [
+      -0.029524539877300582,
+      -0.12499999999999994
+     ],
+     "marks": [
+      0.0,
+      0.0
+     ],
+     "agents": [
+      224.0,
+      375.0
+     ],
+     "evolution": [
+      0.4562203121241845,
+      0.777638044888644
+     ]
+    },
+    "helped": {
+     "poor": [
+      0.0016931960971997562,
+      0.03206355050942378
+     ],
+     "diversity": [
+      -0.055598159509202494,
+      -0.12845092024539884
+     ],
+     "marks": [
+      0.0,
+      0.0
+     ],
+     "agents": [
+      94.0,
+      129.0
+     ],
+     "evolution": [
+      0.6185026651827554,
+      0.6744943328830755
+     ]
+    },
+    "keephalf": {
+     "poor": [
+      0.023005564246449728,
+      0.01718193580744798
+     ],
+     "diversity": [
+      -0.05598159509202455,
+      0.06748466257668717
+     ],
+     "marks": [
+      0.0,
+      0.0
+     ],
+     "agents": [
+      259.0,
+      405.0
+     ],
+     "evolution": [
+      0.7241180154133701,
+      0.8434128906954796
+     ]
+    },
+    "lottery": {
+     "poor": [
+      0.044111376667676505,
+      0.01605286245268589
+     ],
+     "diversity": [
+      -0.0053680981595091715,
+      0.011503067484662566
+     ],
+     "marks": [
+      0.0,
+      0.0
+     ],
+     "agents": [
+      496.0,
+      321.0
+     ],
+     "evolution": [
+      0.4695189434085324,
+      0.5568810565509348
+     ]
+    },
+    "handover": {
+     "poor": [
+      0.08212296416589315,
+      -0.01773518738992519
+     ],
+     "diversity": [
+      -0.15222392638036808,
+      0.014570552147239235
+     ],
+     "marks": [
+      0.0,
+      1.0
+     ],
+     "agents": [
+      -720.0,
+      585.0
+     ],
+     "evolution": [
+      0.7318324109074474,
+      0.562730561211513
+     ]
+    },
+    "linktoken": {
+     "poor": [
+      -0.05907377381238982,
+      0.14030581039755352
+     ],
+     "diversity": [
+      0.06019938650306755,
+      -0.07975460122699396
+     ],
+     "marks": [
+      1.0,
+      1.0
+     ],
+     "agents": [
+      -202.0,
+      185.0
+     ],
+     "evolution": [
+      0.648640251932032,
+      0.8852452847622113
+     ]
+    },
+    "pool": {
+     "poor": [
+      0.0329448950884198,
+      0.05545361148167405
+     ],
+     "diversity": [
+      -0.05904907975460122,
+      0.013803680981595068
+     ],
+     "marks": [
+      0.0,
+      1.0
+     ],
+     "agents": [
+      349.0,
+      756.0
+     ],
+     "evolution": [
+      0.5886608634822798,
+      0.6451250933538044
+     ]
+    },
+    "nodice": {
+     "poor": [
+      0.0665205046379378,
+      0.06394548918655552
+     ],
+     "diversity": [
+      -0.12116564417177922,
+      -0.10812883435582821
+     ],
+     "marks": [
+      -1.0,
+      0.0
+     ],
+     "agents": [
+      549.0,
+      406.0
+     ],
+     "evolution": [
+      0.5907258542073784,
+      0.5508237333651225
+     ]
+    },
+    "mix": {
+     "poor": [
+      0.3886347572116347,
+      0.14368917918842206
+     ],
+     "diversity": [
+      -0.023773006134969243,
+      0.04562883435582821
+     ],
+     "marks": [
+      0.0,
+      0.0
+     ],
+     "agents": [
+      1410.0,
+      360.0
+     ],
+     "evolution": [
+      0.7695809947803138,
+      0.7739456337863851
+     ]
+    }
+   },
+   "b2_median": 0.6819306236881428
+  },
+  "revolution_rates": {
+   "S/S5-bytokens-s1": {
+    "rule": "bytokens",
+    "per_hundred_agents": 0.21414600148384627,
+    "share_of_conquests": 0.025777829326992782
+   },
+   "S/S5-bytokens-s2": {
+    "rule": "bytokens",
+    "per_hundred_agents": 0.3104091258089284,
+    "share_of_conquests": 0.03549835678984471
+   },
+   "R/B2-poorest-s1": {
+    "rule": "poorest",
+    "per_hundred_agents": 0.3923313403964567,
+    "share_of_conquests": 0.05501648055966635
+   },
+   "R/B2-poorest-s2": {
+    "rule": "poorest",
+    "per_hundred_agents": 0.24279200610435525,
+    "share_of_conquests": 0.02729640739537757
+   },
+   "R/B2-newborns-s1": {
+    "rule": "newborns",
+    "per_hundred_agents": 0.18214685647628173,
+    "share_of_conquests": 0.03755791862594239
+   },
+   "R/B2-newborns-s2": {
+    "rule": "newborns",
+    "per_hundred_agents": 0.18816923283702452,
+    "share_of_conquests": 0.03895053899809765
+   },
+   "R/B2-parents-s1": {
+    "rule": "parents",
+    "per_hundred_agents": 0.19053588457870616,
+    "share_of_conquests": 0.042758275516896205
+   },
+   "R/B2-parents-s2": {
+    "rule": "parents",
+    "per_hundred_agents": 0.2620343979146873,
+    "share_of_conquests": 0.05428936452106434
+   },
+   "P/linktoken-s1": {
+    "rule": "linktoken",
+    "per_hundred_agents": 0.8330843515378339,
+    "share_of_conquests": 0.06204213347906988
+   },
+   "P/linktoken-s2": {
+    "rule": "linktoken",
+    "per_hundred_agents": 0.7697038738176465,
+    "share_of_conquests": 0.061438935912938336
+   },
+   "Q/mix-s1": {
+    "rule": "mix",
+    "per_hundred_agents": 1.3910467241897146,
+    "share_of_conquests": 0.07709696975924538
+   },
+   "Q/mix-s2": {
+    "rule": "mix",
+    "per_hundred_agents": 1.004646791124581,
+    "share_of_conquests": 0.06660626003465434
+   },
+   "P/helped-s1": {
+    "rule": "helped",
+    "per_hundred_agents": 0.36381675694266546,
+    "share_of_conquests": 0.0353968286754935
+   },
+   "P/helped-s2": {
+    "rule": "helped",
+    "per_hundred_agents": 0.2485626901375931,
+    "share_of_conquests": 0.025528866882710465
+   },
+   "P/came-s1": {
+    "rule": "came",
+    "per_hundred_agents": 0.23946338119533864,
+    "share_of_conquests": 0.026310690244909306
+   },
+   "P/came-s2": {
+    "rule": "came",
+    "per_hundred_agents": 0.31323878456073795,
+    "share_of_conquests": 0.033253579573068154
+   },
+   "T/handover-s1": {
+    "rule": "handover",
+    "per_hundred_agents": 0.44116952497776524,
+    "share_of_conquests": 0.05336680829148963
+   },
+   "T/handover-s2": {
+    "rule": "handover",
+    "per_hundred_agents": 0.24151890723379493,
+    "share_of_conquests": 0.026097031371532277
+   },
+   "B2-10000-bad270-s001": {
+    "rule": "nodice",
+    "per_hundred_agents": 0.3751684902008095,
+    "share_of_conquests": null
+   },
+   "B2-10000-bad270-s002": {
+    "rule": "nodice",
+    "per_hundred_agents": 0.3021050442591629,
+    "share_of_conquests": null
+   },
+   "B2-10000-3ec24f-s001": {
+    "rule": "noage",
+    "per_hundred_agents": 0.06029743752670875,
+    "share_of_conquests": null
+   },
+   "B2-10000-3ec24f-s002": {
+    "rule": "noage",
+    "per_hundred_agents": 0.04643004065044391,
+    "share_of_conquests": null
+   },
+   "B2-10000-185eb7-s001": {
+    "rule": "anychild",
+    "per_hundred_agents": 0.0035549347198972833,
+    "share_of_conquests": null
+   },
+   "B2-10000-185eb7-s002": {
+    "rule": "anychild",
+    "per_hundred_agents": 0.0033160401837749468,
+    "share_of_conquests": null
+   },
+   "B2-10000-df2615-s001": {
+    "rule": "keephalf",
+    "per_hundred_agents": 0.7732454680413876,
+    "share_of_conquests": null
+   },
+   "B2-10000-df2615-s002": {
+    "rule": "keephalf",
+    "per_hundred_agents": 0.509314236720963,
+    "share_of_conquests": null
+   },
+   "B2-10000-054b50-s001": {
+    "rule": "keepone",
+    "per_hundred_agents": 0.11729954454786218,
+    "share_of_conquests": null
+   },
+   "B2-10000-054b50-s002": {
+    "rule": "keepone",
+    "per_hundred_agents": 0.07344897305370936,
+    "share_of_conquests": null
+   },
+   "Q/grow-s1": {
+    "rule": "grow",
+    "per_hundred_agents": 0.08743676448282939,
+    "share_of_conquests": 0.015186398654033473
+   },
+   "Q/grow-s2": {
+    "rule": "grow",
+    "per_hundred_agents": 0.48176419796201153,
+    "share_of_conquests": 0.06349788631520106
+   },
+   "Q/unittoken-s1": {
+    "rule": "unittoken",
+    "per_hundred_agents": 0.7521135971997517,
+    "share_of_conquests": 0.12123425593240415
+   },
+   "Q/unittoken-s2": {
+    "rule": "unittoken",
+    "per_hundred_agents": 1.348727959157407,
+    "share_of_conquests": 0.10482442429926019
+   },
+   "B2-10000-bf74a9-s001": {
+    "rule": "mut05",
+    "per_hundred_agents": 0.27563526770264773,
+    "share_of_conquests": null
+   },
+   "B2-10000-bf74a9-s002": {
+    "rule": "mut05",
+    "per_hundred_agents": 0.19217986808235377,
+    "share_of_conquests": null
+   },
+   "B2-10000-fe3009-s001": {
+    "rule": "mut80",
+    "per_hundred_agents": 0.20820734837635615,
+    "share_of_conquests": null
+   },
+   "B2-10000-fe3009-s002": {
+    "rule": "mut80",
+    "per_hundred_agents": 0.13652491258335553,
+    "share_of_conquests": null
+   },
+   "S/S4-lapse-s1": {
+    "rule": "lapse",
+    "per_hundred_agents": 3.354030000656282,
+    "share_of_conquests": 0.9605311542390194
+   },
+   "S/S4-lapse-s2": {
+    "rule": "lapse",
+    "per_hundred_agents": 0.0,
+    "share_of_conquests": 0.0
+   },
+   "W/rev-lottery-s1": {
+    "rule": "lottery",
+    "per_hundred_agents": 0.0,
+    "share_of_conquests": 0.0
+   },
+   "W/rev-lottery-s2": {
+    "rule": "lottery",
+    "per_hundred_agents": 0.0,
+    "share_of_conquests": 0.0
+   },
+   "W/rev-pool-s1": {
+    "rule": "pool",
+    "per_hundred_agents": 0.09223926612923607,
+    "share_of_conquests": 0.0292326431181486
+   },
+   "W/rev-pool-s2": {
+    "rule": "pool",
+    "per_hundred_agents": 0.41580303410937086,
+    "share_of_conquests": 0.061978204380860165
+   },
+   "W/rev-kinsense-s1": {
+    "rule": "kinsense",
+    "per_hundred_agents": 0.4130774944111969,
+    "share_of_conquests": 0.04059982738780207
+   },
+   "W/rev-kinsense-s2": {
+    "rule": "kinsense",
+    "per_hundred_agents": 0.4741301775147929,
+    "share_of_conquests": 0.0463297603335348
+   },
+   "W/rev-familysense-s1": {
+    "rule": "familysense",
+    "per_hundred_agents": 0.08051524370335114,
+    "share_of_conquests": 0.01101066082377419
+   },
+   "W/rev-familysense-s2": {
+    "rule": "familysense",
+    "per_hundred_agents": 0.10661092421725597,
+    "share_of_conquests": 0.010483451245946455
+   },
+   "W/rev-familypool-s1": {
+    "rule": "familypool",
+    "per_hundred_agents": 0.029974513733560932,
+    "share_of_conquests": 0.026694915254237284
+   },
+   "W/rev-familypool-s2": {
+    "rule": "familypool",
+    "per_hundred_agents": 0.008310038151197708,
+    "share_of_conquests": 0.0032029669588671613
+   }
+  }
+ },
+ "figures": {
+  "changes": {
+   "title": "Each rule, with no revolutions and without",
+   "caption": "Each row is one other rule. Above: what adding no revolutions to a world of B2 with that rule changes (batch W), at iteration 1,000 \u2014 in orange, the share of the agents holding three tokens or fewer; in violet, the diversity score; a dot for each seed, 1 and 2. Below: the share of a contested world the brains of 1,000 of the world with both rules hold after 100 iterations against those of 500, the mean of two contests, a dot for each seed; the dashed line marked B2 is the median of the lab's ten B2 worlds, played the same way.",
+   "recipe": "**Runs.** Batch W's pilot worlds (B2 at 10,000 tokens, no revolutions and one other rule, seeds 1 and 2, `GraphOfLifeRuns/.pilots/W/`) and their controls: the same rule alone, from the batch or lab experiment that made it.\n\n**Data.** From each world's checkpoint at iteration 1,000 (`research/atlas/at.py --at 1000`, `GraphOfLifeRuns/.pilots/atlas/at1000.json`) and the contests in `GraphOfLifeRuns/.pilots/batch_TUV_T100.json` and `rejudge_T100.json`.\n\n1. Read each world as `research/atlas/profile.py` reads every world.\n2. Subtract the world with the rule alone from the world with both, seed by seed.\n3. Seat the brains of the two eras on alternate agents of each era's world, play 100 iterations, and count the agents the later brains hold.\n\n**To make it again:** `python3 book_figures.py norevcombos`."
+  }
+ }
+}
