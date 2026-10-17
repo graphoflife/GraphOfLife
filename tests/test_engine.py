@@ -2254,6 +2254,67 @@ def test_newborns_and_parents_inherit_only_from_this_iterations_births():
         assert a.tokens == b.tokens, f"{rule} without a birth should share out as uniform does"
 
 
+def test_a_life_past_max_age_is_bought_a_token_an_iteration():
+    """
+    Under buy_life an agent at max_age lives on by paying one token into the
+    estate of the dead, once an iteration — at the first cleanup, not the
+    second — and an agent that would have to give its last token dies.
+    """
+    world = new_world(small(max_age=5, buy_life=True))
+    nodes = sorted(world.G.nodes())
+    rich, poor = nodes[1], nodes[2]
+    world.born_at[rich] = world.born_at[poor] = world.iteration - 5
+    world.tokens[rich], world.tokens[poor] = 7, 1
+    total = sum(world.tokens.values())
+    report = world._cleanup_and_redistribute()
+    assert report["bought"] >= 1 and world.G.has_node(rich) and not world.G.has_node(poor)
+    assert world.tokens[rich] >= 6, "the old pay one token, and may receive a share of the estate"
+    assert sum(world.tokens.values()) == total, "a bought life moves a token, it does not destroy one"
+    held = world.tokens[rich]
+    report = world._cleanup_and_redistribute()                # the second cleanup of the same iteration
+    assert "bought" not in report and world.G.has_node(rich) and world.tokens[rich] >= held
+    world.iteration += 1
+    held = world.tokens[rich]
+    world._cleanup_and_redistribute()
+    assert world.G.has_node(rich) and world.tokens[rich] >= held - 1
+
+
+def test_mates_among_the_parents_are_neighbours_with_a_living_child():
+    """
+    Under mix_mates = parents a newborn's brain is mixed only with a neighbour
+    that has a living child of its own; with none, it is a copy of its parent's.
+    """
+    from GraphOfLifeSimple import NO_PARENT
+    world = new_world(small(mix_at_birth=True, mix_mates="parents", hidden_layers=[16]))
+    nodes = sorted(world.G.nodes())
+    parent, mate, child = nodes[0], nodes[1], nodes[2]
+    assert all(world.parent_of.get(u, NO_PARENT) == NO_PARENT for u in nodes), "founders have no parents"
+    copy = world._inherit(parent, [parent, mate])
+    assert copy.same_weights(world.brains[parent]), "with no parent among the neighbours, a copy"
+    world.parent_of[child] = mate
+    world._parents_at = -1                                  # the next phase works the parents out again
+    mixed = world._inherit(parent, [parent, mate])
+    assert not mixed.same_weights(world.brains[parent]), "a neighbour with a living child is a mate"
+
+
+def test_a_world_whose_mates_are_parents_resumes_to_the_same_run():
+    cfg = small(mix_at_birth=True, mix_mates="parents", hidden_layers=[16], seed=44)
+    world = new_world(cfg)
+    _recorded(world, 4)
+    blob = {k: v.copy() for k, v in world.to_checkpoint().items()}
+    straight_on = _recorded(world, 4)
+    assert _recorded(GraphOfLife.from_checkpoint(blob, cfg), 4) == straight_on
+
+
+def test_a_world_that_buys_lives_resumes_to_the_same_run():
+    cfg = small(max_age=3, buy_life=True, seed=43)
+    world = new_world(cfg)
+    _recorded(world, 5)
+    blob = {k: v.copy() for k, v in world.to_checkpoint().items()}
+    straight_on = _recorded(world, 5)
+    assert _recorded(GraphOfLife.from_checkpoint(blob, cfg), 5) == straight_on
+
+
 def test_children_inherit_their_own_parents_estate():
     """
     `children` leaves each dead agent's estate to its own living children,

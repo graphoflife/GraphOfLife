@@ -28,8 +28,10 @@
   "valence",
   "keep_home",
   "max_age",
+  "buy_life",
   "min_child",
   "mix_at_birth",
+  "mix_mates",
   "link_search",
   "link_steering",
   "link_consent",
@@ -146,6 +148,12 @@
   },
   "link_consent": {
    "meaning": "Who has to agree to a link a search proposes: both ends (mutual), or only the one who proposes (forced). Nobody at its valence gets a new link either way."
+  },
+  "buy_life": {
+   "meaning": "Whether an agent that has reached max_age may live on by paying one token an iteration into the estate of the dead — never its last, so one with a single token left dies. Needs max_age."
+  },
+  "mix_mates": {
+   "meaning": "Under mix_at_birth, who may be the mate: any neighbour of the parent, or only parents — a neighbour with a living child of its own (with none, the newborn's brain is a copy)."
   }
  }
 }

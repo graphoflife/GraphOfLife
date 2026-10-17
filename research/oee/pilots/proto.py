@@ -39,10 +39,12 @@ Mechanics (P keys):
                   brain's output biases twice; the engine does neither. With one hidden
                   layer the worlds are the same draw for draw, only their genotype ids
                   differ (equiv.py).
-  mates    str    with mix: who may be a mate. 'any' (the engine's rule): any neighbour.
-                  'parents': only a neighbour with a living child of its own, so that
-                  being a mate is no free ride for an agent that never breeds; with no
-                  such neighbour the newborn's brain is a copy of its parent's.
+  mates    str    with mix: who may be a mate — 'any' neighbour, or only 'parents', a
+                  neighbour with a living child of its own, so that being a mate is no
+                  free ride for an agent that never breeds (with no such neighbour the
+                  newborn's brain is a copy of its parent's): the engine's mix_mates
+                  since 2026-10-17, identical draw for draw to this switch's first
+                  version, which batch MP's first worlds were played with (equiv.py).
   took_kin bool   one input row per candidate: did it take, in the last game, a node held
                   by an agent of my genotype?
   unit_token bool (brain_kind=grow) every active hidden unit holds one token, as
@@ -147,7 +149,7 @@ sys.path.insert(0, "/home/stefan/Documents/CodingProjects/GraphOfLife Claude/res
 import numpy as np
 import networkx as nx
 
-from GraphOfLifeSimple import (GraphOfLife, NO_PARENT, _apportion, _share_of_first,
+from GraphOfLifeSimple import (GraphOfLife, _apportion, _share_of_first,
                                _choose_binary, stream_seed)
 from gol_config import SimConfig
 
@@ -247,10 +249,10 @@ class ProtoWorld(GraphOfLife):
         self._link_bank: Optional[int] = None
         # Each genotype's family tag (tag_rate > 0): a tag changes only when a brain mutates.
         self.tag_of: Dict[int, int] = {}
-        # mates = parents: the agents with a living child, as of this phase's start.
-        self._parents_at, self._parents_now = -1, set()
         if P.get("mix") and not cfg.mix_at_birth:
             cfg = dataclasses.replace(cfg, mix_at_birth=True)
+        if P.get("mates", "any") != "any" and cfg.mix_mates == "any":
+            cfg = dataclasses.replace(cfg, mix_mates=P["mates"])
         if P.get("seek") and cfg.link_search != "off":
             raise ValueError("seek is the prototype's search for strangers and link_search the engine's: "
                              "a world takes one of them")
@@ -304,24 +306,6 @@ class ProtoWorld(GraphOfLife):
                 self.tag_of[brain.brain_id] = brain.brain_id if fresh else self.tag_of.get(old, old)
                 if fresh:
                     self._count("new_families")
-
-    def _inherit(self, parent, candidates):
-        """
-        mates = parents: a newborn's brain is mixed only with a neighbour that has a
-        living child of its own — and a parent becomes one as its child is born —
-        else it is a copy of its parent's. Otherwise the engine's rule.
-        """
-        if not (self.cfg.mix_at_birth and P.get("mates", "any") == "parents"):
-            return super()._inherit(parent, candidates)
-        if self._parents_at != self.phase_count:
-            self._parents_now = {p for p in (self.parent_of.get(c, NO_PARENT) for c in self.G.nodes())
-                                 if p != NO_PARENT}
-            self._parents_at = self.phase_count
-        mates = [v for v in candidates[1:] if v != parent and self.G.has_node(v) and v in self._parents_now]
-        self._parents_now.add(parent)
-        if mates:
-            return self._mixed_brain(self.brains[parent], self.brains[mates[self.rng.randint(len(mates))]])
-        return self._copy_brain(self.brains[parent])
 
     def _mixed_brain(self, brain, mate):
         """The engine's mixture (mix_at_birth), entered in the family tree when it is a new genotype."""

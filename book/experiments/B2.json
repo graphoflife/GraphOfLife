@@ -36,8 +36,10 @@
     "valence": 8,
     "keep_home": 0.3,
     "max_age": 100,
+    "buy_life": false,
     "min_child": 10,
     "mix_at_birth": false,
+    "mix_mates": "any",
     "link_search": "off",
     "link_steering": "random",
     "link_consent": "mutual"

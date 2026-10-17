@@ -984,6 +984,14 @@ class GraphOfLife:
         # on. Only agents whose scout is out are in it, which is why it is not
         # one of the books.
         self.scouts: Dict[int, int] = {}
+        # Under mix_mates = parents, the agents with a living child as of the
+        # phase's first birth, and those who have had one since; worked out
+        # again in each phase from the world itself, so it is not kept.
+        self._parents_at, self._parents = -1, set()
+        # Under buy_life, the iteration whose life the old last paid for: they
+        # pay at the first cleanup of an iteration and are spared at the second.
+        # A world restored from a checkpoint begins an iteration, so it is not kept.
+        self._life_paid_at = -1
 
         if _empty:
             return
@@ -1190,15 +1198,28 @@ class GraphOfLife:
         """
         The brain a newborn starts from, before it mutates: a copy of its
         parent's, or under mix_at_birth its parent's mixed with a mate's — one
-        of the parent's neighbours, drawn at random. A parent without a
-        neighbour has a copy.
+        of the parent's neighbours, drawn at random; under mix_mates = parents,
+        one with a living child of its own. A parent without such a neighbour
+        has a copy.
         """
         brain = self.brains[parent]
         if self.cfg.mix_at_birth:
             mates = [v for v in candidates[1:] if v != parent and self.G.has_node(v)]
+            if self.cfg.mix_mates == "parents":
+                parents = self._parents_now()
+                mates = [v for v in mates if v in parents]
+                parents.add(parent)          # the child about to be born makes it one
             if mates:
                 return self._mixed_brain(brain, self.brains[mates[self.rng.randint(len(mates))]])
         return self._copy_brain(brain)
+
+    def _parents_now(self) -> set:
+        """The agents with a living child: worked out at the phase's first birth, then kept up."""
+        if self._parents_at != self.phase_count:
+            self._parents = {p for p in (self.parent_of.get(c, NO_PARENT) for c in self.G.nodes())
+                             if p != NO_PARENT}
+            self._parents_at = self.phase_count
+        return self._parents
 
     def _mixed_brain(self, brain: Brain, mate: Brain) -> Brain:
         """
@@ -2155,11 +2176,25 @@ class GraphOfLife:
         aged = ([u for u in self.G.nodes() if self.tokens.get(u, 0) > 0
                  and self.born_at.get(u, UNKNOWN_BIRTH) != UNKNOWN_BIRTH
                  and self._age_of(u) >= limit] if limit else [])
+        bought = 0
+        if aged and self.cfg.buy_life:
+            # A life past max_age is bought, a token an iteration, into the
+            # estate of the dead; whoever would have to give its last token dies.
+            if self._life_paid_at == self.iteration:
+                aged = []
+            else:
+                self._life_paid_at = self.iteration
+                paying = {u for u in aged if self.tokens.get(u, 0) >= 2}
+                for u in sorted(paying):
+                    self.tokens[u] -= 1
+                bought = len(paying)
+                report["bought"] = bought
+                aged = [u for u in aged if u not in paying]
         report["starved"] = len(starved)
         report["aged"] = len(aged)
         dying = starved + aged
 
-        global_pool = self.cfg.tokens_created_per_phase
+        global_pool = self.cfg.tokens_created_per_phase + bought
         # Each dead agent's estate, for the rule that leaves it to its children.
         estates: Dict[int, int] = {}
         if self.cfg.mend_on_death:

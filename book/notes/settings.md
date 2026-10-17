@@ -280,6 +280,15 @@ keeps agents from staking nearly everything on a single neighbour.
 The age at which an agent dies, in iterations; 0 means never. Its tokens are
 shared out like those of any other dead agent. Baseline 0.
 
+### buy_life
+
+Whether an agent that has reached `max_age` may live on by buying its life:
+one token an iteration, paid at the first cleanup of the iteration into the
+estate of the dead and shared out with it. An agent that would have to give
+its last token dies as before. A rich agent can live long, a poor one cannot;
+in a world whose agents are rich, fewer die each iteration, so fewer births
+replace them. Needs `max_age`. Baseline off.
+
 ### min_child
 
 The fewest tokens a child can be born with. A parent whose brain would give a
@@ -300,6 +309,16 @@ its parent's brain. In the pilots of
 [Chapter 78](../chapters/78-mixed-brains-costly-units.md) and the batches
 after it, worlds with it came closest to a healthy and diverse world
 ([Meta X](../chapters/79-meta-10-healthy-and-rich.md)).
+
+### mix_mates
+
+Under `mix_at_birth`, who may be the mate. `any`: any neighbour of the parent,
+drawn at random. `parents`: only a neighbour with a living child of its own —
+and a parent counts as one from the birth of its first child that lives. A
+mate passes half of its brain on and pays nothing for the child; with `any`,
+an agent that never breeds spreads its brain through other agents' children
+all the same, and with `parents` it cannot. A parent without such a neighbour
+gives its newborn a copy of its own brain. Baseline `any`.
 
 ## Links to strangers
 

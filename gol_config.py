@@ -79,6 +79,8 @@ MECHANICS: Dict[str, Any] = {
     "max_age": 0,
     "min_child": 1,
     "mix_at_birth": False,
+    "mix_mates": "any",
+    "buy_life": False,
 
     # ---- links to strangers ------------------------------------------------
     "link_search": "off",
@@ -214,11 +216,14 @@ class SimConfig:
     LINK_SEARCHES: ClassVar[Tuple[str, ...]] = ("off", "jump", "walk", "reach")
     LINK_STEERINGS: ClassVar[Tuple[str, ...]] = ("random", "looking")
     LINK_CONSENTS: ClassVar[Tuple[str, ...]] = ("mutual", "forced")
+    # Who may be a newborn's mate under mix_at_birth.
+    MIX_MATES: ClassVar[Tuple[str, ...]] = ("any", "parents")
     MODES: ClassVar[Dict[str, Tuple[str, ...]]] = {
         "brain_kind": tuple(BRAIN_PRESETS),
         "prune_after": tuple(PRUNE_AFTER),
         "inactive_window": tuple(INACTIVE_WINDOW),
         "redistribution": REDISTRIBUTIONS,
+        "mix_mates": MIX_MATES,
         "link_search": LINK_SEARCHES,
         "link_steering": LINK_STEERINGS,
         "link_consent": LINK_CONSENTS,
@@ -408,6 +413,10 @@ class SimConfig:
     # An agent dies when it reaches this age (0 = never). Its tokens are shared
     # out like any other estate.
     max_age: int = 0
+    # Under max_age, whether an agent that has reached it may live on by paying
+    # one token an iteration into the estate of the dead — never its last, so an
+    # agent with one token left dies. Off, every agent dies at max_age.
+    buy_life: bool = False
     # The fewest tokens a child can be born with; a smaller endowment means no
     # birth. 1 is the old rule.
     min_child: int = 1
@@ -423,6 +432,12 @@ class SimConfig:
     # genotype; a parent without a neighbour has a copy. Off is the old rule.
     # The pilots of the book's Chapter 78 found it.
     mix_at_birth: bool = False
+    # Under mix_at_birth, who may be the mate: `any` neighbour of the parent,
+    # or only `parents` — a neighbour with a living child of its own, so that
+    # an agent that never breeds does not spread half its brain for free
+    # through other agents' children. With no such neighbour the newborn's
+    # brain is a copy of its parent's.
+    mix_mates: str = "any"
 
     # ---- Links to strangers ----
     #
@@ -775,6 +790,10 @@ class SimConfig:
         if self.link_search == "off" and (self.link_steering, self.link_consent) != ("random", "mutual"):
             raise ValueError("link_steering and link_consent say how a search for strangers goes: "
                              "they need link_search")
+        if self.mix_mates != "any" and not self.mix_at_birth:
+            raise ValueError("mix_mates says who a newborn's brain is mixed with: it needs mix_at_birth")
+        if self.buy_life and not self.max_age:
+            raise ValueError("buy_life buys a life past max_age: it needs max_age")
         if not 0.0 <= self.mutation_probability <= 1.0:
             raise ValueError("mutation_probability must be between 0 and 1")
         if not 0.0 <= self.mutation_sparsity <= 1.0:

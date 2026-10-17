@@ -354,6 +354,24 @@ const RunsView = {
         ? 'Needs "Exchange messages": a pass that only sends messages has nothing to do without them.'
         : '';
     }
+    // Who may be a mate means nothing without mixing, and the engine refuses it.
+    const mix = document.getElementById('cfg_mix_at_birth');
+    const mates = document.getElementById('cfg_mix_mates');
+    if (mix && mates) {
+      mates.disabled = !mix.checked;
+      if (mates.disabled) mates.value = 'any';
+      mates.closest('.field').classList.toggle('disabled', mates.disabled);
+      mates.title = mates.disabled ? 'Needs "Mix brains at birth".' : '';
+    }
+    // A life past the longest life can only be bought where there is a longest life.
+    const age = document.getElementById('cfg_max_age');
+    const buy = document.getElementById('cfg_buy_life');
+    if (age && buy) {
+      buy.disabled = !(Number(age.value) > 0);
+      if (buy.disabled) buy.checked = false;
+      buy.closest('.field').classList.toggle('disabled', buy.disabled);
+      buy.title = buy.disabled ? 'Needs a longest life above 0.' : '';
+    }
     // How a search for strangers goes means nothing without a search, and the
     // engine refuses it: the two choices wait, at their defaults, until there is one.
     const search = document.getElementById('cfg_link_search');

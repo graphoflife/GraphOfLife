@@ -390,6 +390,12 @@
           <label for="cfg_max_age">Longest life <span class="hint">(0 = none)</span></label>
           <input type="number" id="cfg_max_age" data-cfg="max_age" min="0" step="1">
         </div>
+        <div class="field checkbox">
+          <label><input type="checkbox" id="cfg_buy_life" data-cfg="buy_life"> Buy a longer life</label>
+          <small>An agent that has reached the longest life may live on by paying one
+            token an iteration into the estate of the dead — never its last token,
+            so one that has a single token left dies.</small>
+        </div>
         <div class="field">
           <label for="cfg_min_child">Smallest child</label>
           <input type="number" id="cfg_min_child" data-cfg="min_child" min="1" step="1">
@@ -397,6 +403,16 @@
         <div class="field checkbox">
           <label><input type="checkbox" id="cfg_mix_at_birth" data-cfg="mix_at_birth"> Mix brains at birth</label>
           <small>A newborn's brain is its parent's mixed with a random neighbour's, each hidden unit whole from one or the other, before it mutates.</small>
+        </div>
+        <div class="field">
+          <label for="cfg_mix_mates">The mate is</label>
+          <select id="cfg_mix_mates" data-cfg="mix_mates">
+            <option value="any">Any neighbour</option>
+            <option value="parents">Only a neighbour with a living child</option>
+          </select>
+          <small>Only a parent may be a mate: an agent that never breeds then spreads
+            nothing of its brain through other agents' children. With no such
+            neighbour the newborn's brain is a copy.</small>
         </div>
         </fieldset>
         <fieldset>
