@@ -8,7 +8,9 @@ The measures are research/atlas/profile.py's (GraphOfLifeRuns/.pilots/atlas/
 profile.json): the health bar of Chapter 46 read from each world's checkpoint,
 and how widely the agents spread over doubling classes of tokens, links and
 ages, and over genotypes. A world's diversity score is the mean of its
-percentiles among all worlds on those four: no line is drawn anywhere.
+percentiles on those four among the worlds of the profile frozen on 17 October
+2026 (book/results/diversity_reference.json), so that a score stays put as
+worlds are added: no line is drawn anywhere.
 """
 from __future__ import annotations
 
@@ -73,18 +75,25 @@ def _group(w: Dict[str, Any]) -> Optional[str]:
     return None
 
 
+def _profile():
+    """research/atlas/profile.py, loaded by its path: a module named profile would hide Python's own."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("atlas_profile", os.path.join(ROOT, "research", "atlas",
+                                                                                "profile.py"))
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
 def _load() -> List[Dict[str, Any]]:
-    if not os.path.exists(PROFILE):
+    P = _profile()
+    if not os.path.exists(PROFILE) or not os.path.exists(P.REFERENCE):
         return []
     worlds = [w for w in json.load(open(PROFILE))["worlds"] if "bar" in w]
-    # Each world's percentile among all worlds on each spread, and their mean.
-    for key, _ in SPREADS:
-        values = np.array([w.get(key, np.nan) for w in worlds], float)
-        order = values.argsort().argsort()
-        for w, rank in zip(worlds, order):
-            w.setdefault("percentiles", {})[key] = float(rank / max(1, len(worlds) - 1))
+    # Each world's percentile on each spread among the frozen reference worlds, and their mean.
+    ref = P.reference()
     for w in worlds:
-        w["diversity"] = float(np.mean(list(w["percentiles"].values())))
+        w["percentiles"], w["diversity"] = P.diversity(w, ref)
         w["marks"] = sum(1 for v in w["bar"].values() if v)
         w["group"] = _group(w)
     return [w for w in worlds if w["group"]]

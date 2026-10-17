@@ -37,6 +37,7 @@ import json
 import os
 import re
 import sys
+import time
 from concurrent.futures import ProcessPoolExecutor
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -48,10 +49,45 @@ RUNS = os.path.join(ROOT, "GraphOfLifeRuns")
 PILOTS = os.path.join(RUNS, ".pilots")
 DIVERSITY = os.path.join(PILOTS, "diversity")
 OUT = os.path.join(PILOTS, "atlas", "profile.json")
+#: The worlds a diversity score is ranked among, frozen so that a score does not move as worlds are added:
+#: each spread's values over every world of profile.json on the day it was made (`--freeze`).
+REFERENCE = os.path.join(ROOT, "book", "results", "diversity_reference.json")
+#: The four spreads the diversity score is the mean percentile of.
+SPREADS = ("spread_tokens", "spread_links", "spread_ages", "effective_genotypes_per_agent")
 #: The book's health bar (Chapter 46).
 BAR = {"core": 0.8, "agent_cut": 0.02, "link_cut": 0.01, "hub": 0.05, "links": (3.0, 12.0), "dimension": (2.3, 4.0)}
 #: Before this a world has not settled (Chapter 10): its moment says little.
 SETTLED = 500
+
+
+def reference() -> Dict[str, np.ndarray]:
+    """Each spread's values over the frozen reference worlds, sorted."""
+    kept = json.load(open(REFERENCE))
+    return {key: np.array(values, float) for key, values in kept["spreads"].items()}
+
+
+def diversity(w: Dict[str, Any], ref: Dict[str, np.ndarray]) -> Tuple[Dict[str, float], Optional[float]]:
+    """A world's percentile on each spread among the reference worlds, and their mean: its diversity score."""
+    out = {}
+    for key, values in ref.items():
+        v = w.get(key)
+        if v is not None and np.isfinite(v):
+            out[key] = float(np.searchsorted(values, v) / max(1, len(values) - 1))
+    return out, (float(np.mean(list(out.values()))) if out else None)
+
+
+def freeze() -> None:
+    """Make the reference from the worlds profile.json holds now."""
+    worlds = [w for w in json.load(open(OUT))["worlds"] if "bar" in w]
+    spreads = {}
+    for key in SPREADS:
+        values = np.sort(np.array([w.get(key, np.nan) for w in worlds], float))
+        spreads[key] = [float(v) for v in values[np.isfinite(values)]]
+    with open(REFERENCE, "w") as f:
+        json.dump({"what": "The worlds a diversity score is ranked among (research/atlas/profile.py --freeze): each "
+                           "spread's values, sorted, over every world of the profile on the day it was frozen.",
+                   "frozen": time.strftime("%Y-%m-%d"), "worlds": len(worlds), "spreads": spreads}, f)
+        f.write("\n")
 
 
 def spread(values: np.ndarray) -> float:
@@ -273,7 +309,10 @@ def bar(w: Dict[str, Any]) -> Dict[str, bool]:
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--jobs", type=int, default=2)
+    ap.add_argument("--freeze", action="store_true", help="make the diversity reference from profile.json, and stop")
     a = ap.parse_args()
+    if a.freeze:
+        return freeze()
     items = worlds()
     print(f"{len(items)} worlds", flush=True)
     kinds = kinds_of()

@@ -6,8 +6,9 @@ Pilot worlds of the named batches are read at their checkpoint `ckpt_<AT>.npz`, 
 runs of the named families at their archive `archive/world_<AT>.npz`. Each world gets
 the seven marks of the health bar, the share of its agents holding three tokens or
 fewer, and a diversity score: the mean of its four spreads' percentiles among the
-worlds of the main profile (GraphOfLifeRuns/.pilots/atlas/profile.json), so that the
-scores read as Meta X's do.
+frozen reference worlds (book/results/diversity_reference.json, research/atlas/
+profile.py --freeze), so that the scores read as Meta X's do and stay put as worlds
+are added.
 
 A world already in the file, whose checkpoint is older than the file, is not
 read again (`--fresh` reads every world); the file holds the worlds named.
@@ -34,7 +35,6 @@ sys.path.insert(0, HERE)
 import profile as P  # noqa: E402  (research/atlas/profile.py)
 
 RUNS = os.path.join(ROOT, "GraphOfLifeRuns")
-SPREADS = ("spread_tokens", "spread_links", "spread_ages", "effective_genotypes_per_agent")
 
 
 def items(at: int, batches, families):
@@ -86,17 +86,12 @@ def main():
         fresh = {r["id"]: r for r in pool.map(one, [i for i in todo if i[0] not in done], chunksize=2) if r}
     rows = [done.get(i[0]) or fresh.get(i[0]) for i in todo]
     rows = [r for r in rows if r]
-    # Diversity on Meta X's scale: each spread's percentile among the main profile's worlds.
-    reference = [w for w in json.load(open(P.OUT))["worlds"] if "bar" in w]
-    for key in SPREADS:
-        ref = np.sort(np.array([w.get(key, np.nan) for w in reference], float))
-        ref = ref[np.isfinite(ref)]
-        for r in rows:
-            if r.get(key) is not None and np.isfinite(r[key]):
-                r.setdefault("percentiles", {})[key] = float(np.searchsorted(ref, r[key]) / max(1, len(ref) - 1))
+    # Diversity on Meta X's scale: each spread's percentile among the frozen reference worlds.
+    ref = P.reference()
     for r in rows:
-        if r.get("percentiles"):
-            r["diversity"] = float(np.mean(list(r["percentiles"].values())))
+        percentiles, score = P.diversity(r, ref)
+        if percentiles:
+            r["percentiles"], r["diversity"] = percentiles, score
     with open(out + ".tmp", "w") as f:
         json.dump({"at": a.at, "worlds": rows}, f, indent=1)
     os.replace(out + ".tmp", out)

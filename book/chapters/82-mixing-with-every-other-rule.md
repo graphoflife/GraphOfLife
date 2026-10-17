@@ -96,15 +96,22 @@ not show.
 
 Mixing raises the diversity score with nearly every rule — even with most of
 those that cancel its riches: with children of any size from 0.25 to 0.54,
-with only the last token kept from 0.43 to 0.65. Part of that is built in.
+with only the last token kept from 0.43 to 0.66. Part of that is built in.
 The score counts genotypes, and every mixed birth makes a new set of weights,
 so a mixed world always has more genotypes per agent. But tokens, links and
 ages spread wider too where the world is rich.
 
 The most diverse worlds of the batch are mixing with a faster change of brains
-(0.77 and 0.79, more than all but a few worlds built on B2's rules), with a
-sense of kin or family (0.69, 0.70), with an input saying where an agent came from
+(0.78 and 0.79, more than all but a few worlds built on B2's rules), with a
+sense of kin or family (0.70, 0.71), with an input saying where an agent came from
 (0.66), and mixing alone (0.70, 0.58).
+
+> [!info] Added later (17 October 2026)
+> Diversity scores are now ranked among a frozen set of worlds
+> ([Meta X](79-meta-10-healthy-and-rich.md#two-halves)), so that they stay put
+> as worlds are added; three figures in this paragraph moved by 0.01. The
+> figures now also hold the second seed of every rule alone that had only one
+> before (batch W's worlds with revolutions, and handover alone).
 
 ## Healthy?
 

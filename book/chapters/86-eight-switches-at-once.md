@@ -99,7 +99,7 @@ the agents by 270; it never moves the marks — all ten B2 worlds meet six.
 - **Handover (H) costs links and health**: a link per agent and 1.25 marks.
 - **Gifts (A) make worlds poorer** (0.13 more at three tokens or fewer), and no
   revolutions (B) leave them a third of a link richer per agent; no random
-  inputs (D) raise diversity by 0.08, just above the noise.
+  inputs (D) raise diversity by 0.09, just above the noise.
 
 ## Alone and together
 
@@ -109,7 +109,7 @@ seeds each. For several switches the two disagree:
 - **Mixing** alone takes about 2,600 agents off B2's world and 0.36 to 0.49
   off its share of poor agents ([Chapter 82](82-mixing-with-every-other-rule.md));
   among the sixteen, it takes 40 agents *on* and 0.07 off. Its rise in
-  diversity is the same alone (0.17 and 0.19) as among the sixteen (0.21),
+  diversity is the same alone (0.18 and 0.20) as among the sixteen (0.21),
   and so, nearly, is its gain in marks (one alone, 0.75 among the sixteen).
 - **Links that hold a token** alone take 0.29 and 0.33 off B2's share of
   the poor; among the sixteen, 0.06.
@@ -196,6 +196,12 @@ B2's own 0.69 (the lab's ten B2 worlds: a median of 0.68, with a spread of
 each speed evolution a little — 0.07 to 0.09, about twice the spread of B2's
 worlds — and the other four switches do nothing a contest can tell. Pairs
 act together here too: three chains add 0.11 to 0.14.
+
+> [!info] Added later (17 October 2026)
+> Diversity scores are now ranked among a frozen set of worlds
+> ([Meta X](79-meta-10-healthy-and-rich.md#two-halves)), so that they stay put
+> as worlds are added; two figures above moved by 0.01 (no random inputs: 0.08
+> to 0.09; mixing alone: 0.17 and 0.19 to 0.18 and 0.20).
 
 ## What it teaches
 

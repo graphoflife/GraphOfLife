@@ -36,6 +36,15 @@ three tokens fill at most two. Genotypes are counted as an effective number per
 agent. A world's **diversity score** is the mean of its percentiles among all
 worlds on these four.
 
+> [!info] Added later (17 October 2026)
+> Ranked among all worlds, a score moves whenever worlds are added — by up to
+> 0.01 between this chapter and the batches read since. The scores are now
+> ranked among a frozen set instead: the 653 worlds of the profile on 17
+> October 2026 (`book/results/diversity_reference.json`, made by
+> `research/atlas/profile.py --freeze`). A later world gets the percentile its
+> spreads would have among them, and no score moves unless the set is
+> deliberately made again.
+
 ## Every world on both halves
 
 <!-- figure healthy/map -->
