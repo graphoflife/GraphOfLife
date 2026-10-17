@@ -31,7 +31,10 @@ def target(cmd: str, d: str) -> int:
     if "--resume" in cmd:
         # A job that went on from a checkpoint names only the iterations to add.
         meta = json.load(open(os.path.join(d, "config.json")))
-        return max(r["at"] + r["iters"] for r in meta["resumes"])
+        if meta.get("resumes"):
+            return max(r["at"] + r["iters"] for r in meta["resumes"])
+        # Not gone on yet (a candidate's fresh copy): from its last checkpoint.
+        return iters + max(int(os.path.basename(p)[5:11]) for p in glob.glob(os.path.join(d, "ckpt_*.npz")))
     start = re.search(r"--from \S+:(\d+)", cmd)
     return iters + (int(start.group(1)) if start else 0)
 
