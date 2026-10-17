@@ -1140,14 +1140,21 @@ class GraphOfLife:
         """
         need = self.cfg.prune_needs
         adj = self.G.adj
+        # Each end's neighbours as a set, made once: the neighbours two ends
+        # share are an intersection, not a walk along one end's links.
+        neighbours: Dict[int, set] = {}
+
+        def of(u: int) -> set:
+            if u not in neighbours:
+                neighbours[u] = set(adj[u])
+            return neighbours[u]
+
         gone: set = set()
         out: List[Tuple[int, int]] = []
         for a, b in sorted(stale):
-            small, large = (adj[a], adj[b]) if len(adj[a]) <= len(adj[b]) else (adj[b], adj[a])
             shared = 0
-            for c in small:
-                if (c in large and self._edge_key(a, c) not in gone
-                        and self._edge_key(b, c) not in gone):
+            for c in of(a) & of(b):
+                if self._edge_key(a, c) not in gone and self._edge_key(b, c) not in gone:
                     shared += 1
                     if shared >= need:
                         break
