@@ -504,6 +504,13 @@ controls P/B2-s1, s2 and L/B1-long-s1, s2 to 2,000)**
   To the newborns or parents: a world of infants, 55-85 births per 100 agents an iteration, mean age ~3.
 - An estate that lands where a birth can follow from it fills a world; none of the three rules brings a
   world nearer the author's picture. The dimension does not simply follow size across B2's variants.
+- Added 2026-10-17, estate to the dead agent's own children (R/B2-children, R/B1-children): B2 changes little
+  (2,700/3,400 agents, 64%/77% poor, 6 marks, parents 26 its old at a birth as in B2, folded 1.18/1.19) and keeps
+  evolving at least as fast (0.80/0.74, then 0.74/0.61) - a test of the reading that estates timed to births
+  stop evolution. B1: larger and younger than its controls (1,800/1,300 agents, births 4.7/2.8 per 100, age
+  74/113), poorer (44%/35% vs 6%/19%), later brains lose (0.38/0.39, 0.49/0.39).
+- Correction: Ch. 73's table had B1-parents-s2 read at 1,600 (still running); at 2,000: 2,351 agents, 4 marks,
+  dimension 3.20, 58% poor, diversity 0.60. The table now comes from research/atlas/at.py --at 2000.
 
 **Links to strangers (batch K, Ch. 83; 2026-10-17; B2 at 10,000 tokens, 3 searches x 2 steerings x 2 consents x
 2 seeds, 1,000 iterations; 50 recorded games from 1,000, research/oee/checks/k_links.py)**

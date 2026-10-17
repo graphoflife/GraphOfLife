@@ -3,7 +3,9 @@
 Chapter 73 · Who inherits? The estate of the dead shared out three new ways —
 to the poorest, to the newborns, to their parents — in B1 and B2 worlds of
 10,000 tokens (pilot batch R), beside controls of the same settings and seeds,
-and each world among every world the book has made.
+and each world among every world the book has made. A fourth way, added on
+2026-10-17: each estate to the dead agent's own living children (batch H, the
+same worlds' form, in GraphOfLifeRuns/.pilots/R/ as well).
 
 Pilot worlds keep a row of statistics every iteration (series.jsonl); the
 lifetime contests between their eras are in GraphOfLifeRuns/.pilots/
@@ -25,7 +27,8 @@ from book_chapters.common import BLUE, GREEN, GREY, ORANGE, RED, VIOLET
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PILOTS = os.path.join(ROOT, "GraphOfLifeRuns", ".pilots")
 RULES = [("uniform", "evenly (control)", GREY), ("poorest", "to the poorest", GREEN),
-         ("newborns", "to the newborns", VIOLET), ("parents", "to the parents", RED)]
+         ("newborns", "to the newborns", VIOLET), ("parents", "to the parents", RED),
+         ("children", "to its own children", BLUE)]
 #: Each rule's worlds, by base: the control is the same settings and seeds with the estate shared evenly.
 WORLDS = {
     "B2": {"uniform": ["P/B2-s1", "P/B2-s2"],
@@ -34,9 +37,9 @@ WORLDS = {
            **{r: [f"R/B1-{r}-s1", f"R/B1-{r}-s2"] for r, _, _ in RULES[1:]}},
 }
 RUNS = ("Pilot worlds of 10,000 tokens, two seeds each: B2's settings (as in Experiment 16) and B1's, with "
-        "`redistribution` = `poorest`, `newborns` or `parents` (`GraphOfLifeRuns/.pilots/R/`); the controls are "
-        "the same settings and seeds with the estate shared evenly, `P/B2-s1`, `-s2` and the first 2,000 "
-        "iterations of `L/B1-long-s1`, `-s2`.")
+        "`redistribution` = `poorest`, `newborns`, `parents` or `children` (`GraphOfLifeRuns/.pilots/R/`); the "
+        "controls are the same settings and seeds with the estate shared evenly, `P/B2-s1`, `-s2` and the first "
+        "2,000 iterations of `L/B1-long-s1`, `-s2`.")
 
 
 def _series(world: str) -> List[Dict[str, Any]]:
@@ -116,7 +119,8 @@ def inherit(ch: F.Chapter) -> None:
         ch.grid(f"life_{base}", charts, columns=2, title=f"{base} worlds, by who inherits",
                 caption=(f"{base} worlds of 10,000 tokens, two seeds of each rule, through 2,000 iterations (means "
                          f"over blocks of 20 iterations). Grey: the estate shared evenly, the control; green: to the "
-                         f"poorest; violet: to the children born that iteration; red: to their parents."),
+                         f"poorest; violet: to the children born that iteration; red: to their parents; blue "
+                         f"(added later): each estate to the dead agent's own living children."),
                 recipe=recipe(RUNS, "each world's `series.jsonl`, one row per iteration",
                               ["Read agents, births, the Gini coefficient and mean age every iteration.",
                                "Average over blocks of 20 iterations and draw a line per world."]))
