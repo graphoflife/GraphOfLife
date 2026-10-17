@@ -57,24 +57,54 @@
   },
   "switch": {
    "mixoff-s002": {
-    "at": 6592,
-    "agents": 3258.0,
-    "twin": 988.0
+    "at": 6999,
+    "agents": 3341.0,
+    "twin": 1152.0
    },
    "mixoff-s004": {
-    "at": 6435,
-    "agents": 2374.0,
-    "twin": 774.0
+    "at": 6999,
+    "agents": 2797.0,
+    "twin": 1317.0
+   },
+   "mixoff-s005": {
+    "at": 6999,
+    "agents": 3243.0,
+    "twin": 1957.0
+   },
+   "mixoff-s006": {
+    "at": 6999,
+    "agents": 2137.0,
+    "twin": 230.0
+   },
+   "mixoff-s010": {
+    "at": 6999,
+    "agents": 2082.0,
+    "twin": 576.0
    },
    "mixon-s001": {
-    "at": 2719,
-    "agents": 1931.0,
-    "twin": 3441.0
+    "at": 3999,
+    "agents": 1781.0,
+    "twin": 3875.0
    },
    "mixon-s002": {
-    "at": 2719,
-    "agents": 2287.0,
-    "twin": 3104.0
+    "at": 3999,
+    "agents": 1543.0,
+    "twin": 3364.0
+   },
+   "mixon-s003": {
+    "at": 3999,
+    "agents": 1422.0,
+    "twin": 3335.0
+   },
+   "mixon-s004": {
+    "at": 3999,
+    "agents": 81.0,
+    "twin": 3324.0
+   },
+   "mixon-s005": {
+    "at": 3999,
+    "agents": 2156.0,
+    "twin": 3354.0
    }
   },
   "size": {

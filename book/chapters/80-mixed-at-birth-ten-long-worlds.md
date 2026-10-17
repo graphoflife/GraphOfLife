@@ -295,14 +295,22 @@ with its size).
 <!-- /figure -->
 
 Whatever the way, the switch says that mixing is what does it. Batch SW took
-worlds from the lab at a moment and played them on with the rule switched. Without mixing from
-iteration 5,000, seed 2's world grew from 893 agents to 2,753 within a
-thousand iterations, and seed 4's from 744 to 2,206, on their way to B2's size,
-while the same worlds with mixing stayed near a thousand. And the other way:
-with mixing from iteration 2,000, two of B2's worlds shrank from 3,535 and
-3,064 agents to 1,942 and 2,289 within 700 iterations, while the same worlds
-without it stayed above 3,000. (These are the first two worlds of each kind;
-the batch's other six are still being played.)
+worlds from the lab at a moment and played them on for 2,000 iterations with
+the rule switched, and all ten went the way the rule says:
+
+- **Without mixing from iteration 5,000**, all five of these worlds grew: from
+  893, 744, 2,039, 395 and 1,325 agents to 3,341, 2,797, 3,243, 2,137 and
+  2,082, on their way to B2's size, while the same worlds with mixing stayed
+  where they were.
+- **With mixing from iteration 2,000**, all five of B2's worlds shrank: from
+  3,064 to 3,535 agents to between 1,422 and 2,156 — and one, seed 4, to 81,
+  nearly dying out — while the same worlds without it stayed above 3,000.
+
+How eagerly the able breed moved first. Without mixing, it rose in four of the
+five worlds from 1.5–7 births per hundred per iteration to 14–35 within 1,500
+iterations (in seed 10 from 5 to 10 and back to 5); with mixing, in B2's worlds,
+it fell from 26–51 to 4–10. A rule that only five generations of agents have
+lived under sets how eagerly they breed, and the size of the world follows.
 
 ## The marks a world misses
 
@@ -390,7 +398,8 @@ of seed 4 played against itself gave 40% and 64%); the median of ten is not.
   rich by making their agents slow to have children: in B2 an agent that can
   afford a child has one within two or three iterations, in a mixed world
   after thirty or so. Switch mixing off and the riches go within a thousand
-  iterations; switch it on in B2 and its worlds begin to shrink at once.
+  iterations; switch it on in B2 and its worlds shrink at once, one of them
+  nearly to nothing.
 - **Nothing holds the size.** How eagerly agents breed drifts as their brains
   change, and the size, the riches and the marks of health drift with it; one
   world of ten shrank until it died. The riches of a world that keeps evolving
@@ -412,8 +421,6 @@ of seed 4 played against itself gave 40% and 64%); the median of ten is not.
 - **[Experiment 18](81-five-mixed-worlds-fifty-thousand-iterations.md)**
   plays the five worlds that met every mark on to 50,000 iterations: is their
   health a state they keep, or one their drifting size passes through?
-- **Batch SW** is still being played: mixing switched off in three more of
-  these worlds and on in three more of B2's.
 - **Batch M** tries each rule of the engine that might hold a mixed world's
   size: the estates of the dead to the newborns, to the parents or to the
   poorest, half of an agent's tokens kept at home, links to strangers, and a

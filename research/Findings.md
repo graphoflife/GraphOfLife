@@ -452,9 +452,10 @@ book/results/worlds.json; 2026-10-16)**
 - Brains spread mainly by taking nodes: 5.6 (B2) / 7.7 (mixed) nodes per 100 agents change hands per
   iteration vs 1 birth. Under mixing a child carries half its parent's brain, a taken node all of it.
   Not simply more fighting: the rate does not change with a mixed world's size (r -0.08).
-- Switch (batch SW): mixing off at 5,000 → seed 2's world 893 → 2,753 agents, seed 4's 744 → 2,206 within
-  ~1,000 iterations (twins with mixing stay near 1,000). Mixing on in B2 at 2,000: s001 3,535 → 1,942,
-  s002 3,064 → 2,289 within 700 iterations (twins above 3,000). Six more worlds running.
+- Switch (batch SW, 2,000 iterations after the switch, 10/10 as predicted): mixing off at 5,000 → all five
+  E17 worlds grow (893, 744, 2,039, 395, 1,325 → 3,341, 2,797, 3,243, 2,137, 2,082); mixing on in B2 at
+  2,000 → all five shrink (3,064–3,535 → 1,422–2,156; s004 to 81). Eagerness moves first: off, 1.5–7 →
+  14–35 per 100 able per iteration in four of five; on, 26–51 → 4–10, within ~5 generations.
 - Health is size in B2-type networks: 125 of 190 moments meet every mark; < 300 agents fail the hub (96%),
   > 1,500 the dimension (dimension vs log size r 0.78); 600–1,000 agents: 98% with every mark. B2 at
   5,000 tokens (1,200–1,800 agents): dimension 3.6–4.1, 6/10 with every mark, as poor as ever. B1's
