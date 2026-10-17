@@ -223,6 +223,9 @@ about 1,500 agents — and the one thing changed is who may have a child
 | deaths mended in a ring, only the old breed | 1.03 (1.02 to 1.06) | 7.4 | 0.2% |
 | deaths not mended, anyone breeds | 2.36 (2.09 to 2.52) | 1.2 | 37% |
 | Chapter 48's own model: agents die by chance, mended in a ring | 1.24 (1.13 to 1.31) | 7.4 | 1.5% |
+| only the pieces a death would split joined, anyone breeds | 5.1 to 5.6 (two seeds of five: beyond reach) | 1.9 | 47% |
+| the same, only the young breed | 3.95 (3.29 to 4.29) | 2.1 | 42% |
+| the same, only the old breed | beyond reach in all five | 1.8 | 47% |
 
 With anyone breeding, the brainless world folds as B2 does. Let only the
 young breed, and it stays a space; let only the old breed, and it folds
@@ -232,6 +235,20 @@ decides it, with nothing else changed**, through the ring a death closes:
 keeps a world whole: without it the brainless world is a space, but the
 loss of one agent can cut off a third of it, and the cull leaves half as
 many agents.
+
+**How much mending makes how much room.** The ring joins every group of a
+dying agent's neighbours that are not linked directly, even where they stay
+joined through others. The least mending that still keeps a world whole
+joins only the pieces a death would split it into — after most deaths, none
+(`--mend-split` in the model). With it the brainless world never breaks, and
+never folds: it grows into a string — in seed 1 of each, 126 steps from
+end to end where anyone breeds, 63 where the young do and 154 where the old
+do, at a dimension between 1.3 and 1.8 by the health bar's measure — and a typical
+agent's ball reaches half of it five times later than its twin's, or not
+within 40 steps at all ("beyond reach" above). Not mended, a world breaks;
+mended in a ring, it folds; mended as little as it must be, it is a line.
+Three dimensions lie somewhere between, and the worlds whose young do the
+breeding come nearest.
 
 ## What it teaches
 
@@ -247,8 +264,10 @@ many agents.
   without mending, or whose unused links lapse keep their room. With no
   brains at all, who breeds is enough to fold a world or to keep it a space.
 - **Room and resilience pull apart.** Mending is what keeps a death from
-  splitting a world, and it is what folds it; a world that is a space and
-  that no single loss can cut has to get both some other way.
+  splitting a world, and it is what folds it: mended in a ring, a world folds
+  into a near small world; mended only where it would split, it stretches into
+  a line. A world that is a three-dimensional space and that no single loss
+  can cut has to sit between the two.
 - **The three-dimensional worlds are the poor ones.** B2 with the estate to
   the newborns or the parents is a space of about three dimensions — the aim
   of [Part VI](60-worlds-of-100000-tokens.md) — but nine in ten of its

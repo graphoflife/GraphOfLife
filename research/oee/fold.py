@@ -38,6 +38,9 @@ CONDITIONS = [
     ("die at 100, mended in a ring, the old breed", dict(age=100, mend=True, ring=True, breeders="old")),
     ("die at 100, not mended, anyone breeds", dict(age=100, mend=False, ring=False, breeders="any")),
     ("die by chance, mended in a ring (Chapter 48)", dict(age=0, mend=True, ring=True, breeders="any")),
+    ("die at 100, only splits mended, anyone breeds", dict(age=100, mend=False, mend_split=True, breeders="any")),
+    ("die at 100, only splits mended, the young breed", dict(age=100, mend=False, mend_split=True, breeders="young")),
+    ("die at 100, only splits mended, the old breed", dict(age=100, mend=False, mend_split=True, breeders="old")),
 ]
 STEPS = 600
 

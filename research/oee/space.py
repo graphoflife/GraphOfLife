@@ -22,6 +22,10 @@ The rules that can be switched:
                    hangs on a single new link
   --mend-all       instead: join all its former neighbours in a chain, in a
                    random order (a stronger mending)
+  --mend-split     instead: join only the pieces the death would split the
+                   world into, one link between each piece and the next, through
+                   their least-linked former neighbours (the least mending that
+                   keeps a world whole)
   --cap K          an agent with K links has no child, and a newborn's random
                    links go only to neighbours below K (a valence)
   --age A          every agent dies at age A, as in B2, instead of by chance
@@ -76,9 +80,21 @@ def groups_of(G: nx.Graph, nbrs: List[int]) -> List[List[int]]:
     return [g for g in groups if g]
 
 
+def pieces_of(G: nx.Graph, nbrs: List[int]) -> List[List[int]]:
+    """The former neighbours of a dead agent, grouped by the piece of the world each is now in."""
+    left, out = set(nbrs), []
+    while left:
+        start = left.pop()
+        piece = nx.node_connected_component(G, start)
+        mine = [start] + [x for x in left if x in piece]
+        left -= set(mine)
+        out.append(mine)
+    return out
+
+
 def grow(links: int = 2, mend: bool = True, mend_all: bool = False, cap: int = 0, ring: bool = False,
          target: int = 1500, deaths: float = 0.02, steps: int = 300, seed: int = 0, age: int = 0,
-         breeders: str = "any") -> nx.Graph:
+         breeders: str = "any", mend_split: bool = False) -> nx.Graph:
     """The world's network after `steps` iterations of births, deaths and the cull."""
     rng = np.random.RandomState(seed)
     G = nx.watts_strogatz_graph(50, 6, 0.2, seed=seed)
@@ -117,6 +133,12 @@ def grow(links: int = 2, mend: bool = True, mend_all: bool = False, cap: int = 0
             if mend_all and len(nbrs) > 1:
                 order = [nbrs[i] for i in rng.permutation(len(nbrs))]
                 for a, b in zip(order, order[1:]):
+                    G.add_edge(a, b)
+            elif mend_split and len(nbrs) > 1:
+                parts = pieces_of(G, nbrs)
+                for g1, g2 in zip(parts, parts[1:]):
+                    a = min(g1, key=lambda z: (G.degree(z), z))
+                    b = min(g2, key=lambda z: (G.degree(z), z))
                     G.add_edge(a, b)
             elif mend:
                 parts = groups_of(G, nbrs)
@@ -159,6 +181,7 @@ def main() -> None:
     ap.add_argument("--links", type=int, default=2)
     ap.add_argument("--mend", action="store_true")
     ap.add_argument("--mend-all", action="store_true")
+    ap.add_argument("--mend-split", action="store_true")
     ap.add_argument("--ring", action="store_true")
     ap.add_argument("--cap", type=int, default=0)
     ap.add_argument("--target", type=int, default=1500)
@@ -169,7 +192,7 @@ def main() -> None:
     ap.add_argument("--breeders", choices=("any", "young", "old"), default="any")
     a = ap.parse_args()
     out = measure(grow(a.links, a.mend, a.mend_all, a.cap, a.ring, a.target, a.deaths, a.steps, a.seed, a.age,
-                       a.breeders))
+                       a.breeders, a.mend_split))
     print("  ".join(f"{k}={v:.3g}" for k, v in out.items()))
 
 
