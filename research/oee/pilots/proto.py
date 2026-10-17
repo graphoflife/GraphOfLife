@@ -78,6 +78,12 @@ Mechanics (P keys):
   valence  int    no agent may hold more than this many links (0 = no limit): a full
                   agent cannot have a child, and no new link is made to a full agent.
                   Mending after a death is exempt — it only replaces lost links.
+  breeders str    who may have a child (engine mode): 'any' agent, as in the engine;
+                  only the 'young', at the median age of the living or younger (so that
+                  founders all of one age may all breed); or only the 'old', older than
+                  the median. With no number of its own: the median is the world's.
+                  (2026-10-17, Chapter 87: where the old breed they gather links till
+                  they die, and each death mended in a ring folds the world.)
   valence_mode str  "all": the cap also limits a newborn's two physics links;
                   "optional": it limits only the links a brain chooses.
   keep_one bool   an agent's last token always stays on its own node: no agent can
@@ -163,7 +169,7 @@ DEFAULTS = {"mor": "off", "memory": False, "seek": False, "toll": "pool", "seek_
             "support": False, "fog": False, "support_gain": 1.0, "allies": False,
             "kin_pool": -1, "birth_allies": False, "ally_keep": False,
             "engine": False, "contest": "plurality", "pool": "", "kin_sense": False,
-            "fission": False, "tag_rate": 0.0}
+            "fission": False, "tag_rate": 0.0, "breeders": "any"}
 P: Dict[str, Any] = dict(DEFAULTS)
 
 
@@ -931,7 +937,21 @@ class ProtoWorld(GraphOfLife):
             self._count("pooled_contests")
         return {rep[g]: total for g, total in sides.items()}
 
+    def _may_breed(self, parent) -> bool:
+        """Whether this agent's age lets it have a child (breeders); the median age is taken once an iteration."""
+        who = P.get("breeders", "any")
+        if who == "any":
+            return True
+        if getattr(self, "_median_age_at", None) != self.iteration:
+            self._median_age_at = self.iteration
+            ages = [self._age_of(u) for u in self.G.nodes()]
+            self._median_age = float(np.median(ages)) if ages else 0.0
+        young = self._age_of(parent) <= self._median_age
+        return young if who == "young" else not young
+
     def _endowment(self, parent, tokens, wanted):
+        if not self._may_breed(parent):
+            return 0
         if not P.get("fission"):
             return super()._endowment(parent, tokens, wanted)
         half = tokens // 2

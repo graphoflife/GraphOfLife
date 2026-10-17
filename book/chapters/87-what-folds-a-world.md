@@ -144,7 +144,8 @@ its worlds fold as B2's do, to 1.18 and 1.19. The neighbours of the
 unfolded worlds are also more alike in age (a correlation of birth times
 across links of +0.8, against +0.45 in B2), and their links per agent a
 little fewer (4.7 to 4.9, against 5.4 to 5.7). Which of these is the cause,
-the worlds so far cannot say.
+worlds that differ in so much cannot say; worlds without brains can
+([below](#with-no-brains-at-all)).
 
 ## Every world at iteration 1,000
 
@@ -213,25 +214,26 @@ enough, the rules of space were played alone, as in
 [Chapter 48](48-a-world-that-cannot-break.md#space-alone):
 no brains, no tokens, a newborn joined to its parent and two of the parent's
 neighbours, every agent dying at age 100 as in B2, births balancing deaths at
-about 1,500 agents — and the one thing changed is who may have a child
-(`research/oee/fold.py`, five seeds, 600 iterations each):
+about 1,500 agents — and the one thing changed is who may have a child: any
+agent, only the young (at the median age of the living or younger), or only
+the old (`research/oee/fold.py`, five seeds, 600 iterations each):
 
 | rules | typical distance, over the twin's (median, and range) | groups of neighbours of the oldest tenth | worst cut by one agent's loss |
 |---|---|---|---|
 | deaths mended in a ring, anyone breeds | 1.16 (1.06 to 1.28) | 6.1 | 1% |
-| deaths mended in a ring, only the young breed | 1.73 (1.61 to 1.83) | 3.9 | 3% |
-| deaths mended in a ring, only the old breed | 1.03 (1.02 to 1.06) | 7.4 | 0.2% |
+| deaths mended in a ring, only the young breed | 1.71 (1.50 to 2.05) | 3.8 | 3% |
+| deaths mended in a ring, only the old breed | 1.02 (1.02 to 1.06) | 7.6 | 0.1% |
 | deaths not mended, anyone breeds | 2.36 (2.09 to 2.52) | 1.2 | 37% |
 | Chapter 48's own model: agents die by chance, mended in a ring | 1.24 (1.13 to 1.31) | 7.4 | 1.5% |
 | only the pieces a death would split joined, anyone breeds | 5.1 to 5.6 (two seeds of five: beyond reach) | 1.9 | 47% |
-| the same, only the young breed | 3.95 (3.29 to 4.29) | 2.1 | 42% |
-| the same, only the old breed | beyond reach in all five | 1.8 | 47% |
+| the same, only the young breed | 4.22 (3.62 to 4.83) | 2.0 | 48% |
+| the same, only the old breed | beyond reach in all five | 1.8 | 46% |
 
 With anyone breeding, the brainless world folds as B2 does. Let only the
 young breed, and it stays a space; let only the old breed, and it folds
 completely, as the worlds whose children may be of any size do. **Who breeds
 decides it, with nothing else changed**, through the ring a death closes:
-3.9 groups where the young breed, 7.4 where the old do. And mending is what
+3.8 groups where the young breed, 7.6 where the old do. And mending is what
 keeps a world whole: without it the brainless world is a space, but the
 loss of one agent can cut off a third of it, and the cull leaves half as
 many agents.
@@ -242,8 +244,8 @@ joined through others. The least mending that still keeps a world whole
 joins only the pieces a death would split it into — after most deaths, none
 (`--mend-split` in the model). With it the brainless world never breaks, and
 never folds: it grows into a string — in seed 1 of each, 126 steps from
-end to end where anyone breeds, 63 where the young do and 154 where the old
-do, at a dimension between 1.3 and 1.8 by the health bar's measure — and a typical
+end to end where anyone breeds, 54 where the young do and 175 where the old
+do, at a dimension between 1.3 and 1.9 by the health bar's measure — and a typical
 agent's ball reaches half of it five times later than its twin's, or not
 within 40 steps at all ("beyond reach" above). Not mended, a world breaks;
 mended in a ring, it folds; mended as little as it must be, it is a line.

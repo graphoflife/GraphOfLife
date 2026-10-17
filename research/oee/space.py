@@ -29,8 +29,8 @@ The rules that can be switched:
   --cap K          an agent with K links has no child, and a newborn's random
                    links go only to neighbours below K (a valence)
   --age A          every agent dies at age A, as in B2, instead of by chance
-  --breeders who   which agents may have a child: any, the young (younger than
-                   the median of the living) or the old (the median or older);
+  --breeders who   which agents may have a child: any, the young (at the median
+                   age of the living or younger) or the old (older than it);
                    those that may breed do so the more often for being fewer
 
 and the size and length of the run with --target, --deaths and --steps. It
@@ -109,7 +109,7 @@ def grow(links: int = 2, mend: bool = True, mend_all: bool = False, cap: int = 0
             may = list(G.nodes())
         else:
             middle = np.median([t - born[u] for u in G.nodes()])
-            may = [u for u in G.nodes() if (t - born[u] < middle) == (breeders == "young")]
+            may = [u for u in G.nodes() if (t - born[u] <= middle) == (breeders == "young")]
         birth = (died * target / max(n, 1) + (0.05 if n < target else 0.0)) * n / max(1, len(may))
         for u in may:
             if cap and G.degree(u) >= cap:
