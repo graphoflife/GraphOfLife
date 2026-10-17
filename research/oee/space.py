@@ -24,6 +24,10 @@ The rules that can be switched:
                    random order (a stronger mending)
   --cap K          an agent with K links has no child, and a newborn's random
                    links go only to neighbours below K (a valence)
+  --age A          every agent dies at age A, as in B2, instead of by chance
+  --breeders who   which agents may have a child: any, the young (younger than
+                   the median of the living) or the old (the median or older);
+                   those that may breed do so the more often for being fewer
 
 and the size and length of the run with --target, --deaths and --steps. It
 prints, for the world at the end: agents, mean links, the share of agents in
@@ -73,16 +77,25 @@ def groups_of(G: nx.Graph, nbrs: List[int]) -> List[List[int]]:
 
 
 def grow(links: int = 2, mend: bool = True, mend_all: bool = False, cap: int = 0, ring: bool = False,
-         target: int = 1500, deaths: float = 0.02, steps: int = 300, seed: int = 0) -> nx.Graph:
+         target: int = 1500, deaths: float = 0.02, steps: int = 300, seed: int = 0, age: int = 0,
+         breeders: str = "any") -> nx.Graph:
     """The world's network after `steps` iterations of births, deaths and the cull."""
     rng = np.random.RandomState(seed)
     G = nx.watts_strogatz_graph(50, 6, 0.2, seed=seed)
+    born = {u: -int(rng.randint(0, age)) if age else 0 for u in G.nodes()}
     nxt = 50
-    for _ in range(steps):
+    for t in range(steps):
         n = G.number_of_nodes()
-        # Births balance deaths at the target size, and fill it from below.
-        birth = deaths * target / max(n, 1) + (0.05 if n < target else 0.0)
-        for u in list(G.nodes()):
+        # Births balance deaths at the target size, and fill it from below; when only some agents may breed,
+        # each of them breeds the more often.
+        died = 1.0 / age if age else deaths
+        if breeders == "any":
+            may = list(G.nodes())
+        else:
+            middle = np.median([t - born[u] for u in G.nodes()])
+            may = [u for u in G.nodes() if (t - born[u] < middle) == (breeders == "young")]
+        birth = (died * target / max(n, 1) + (0.05 if n < target else 0.0)) * n / max(1, len(may))
+        for u in may:
             if cap and G.degree(u) >= cap:
                 continue
             if rng.random_sample() >= birth:
@@ -90,11 +103,14 @@ def grow(links: int = 2, mend: bool = True, mend_all: bool = False, cap: int = 0
             room = [v for v in G[u] if not cap or G.degree(v) < cap]
             child = nxt
             nxt += 1
+            born[child] = t
             G.add_edge(child, u)
             for v in rng.permutation(room)[:links]:
                 G.add_edge(child, int(v))
         for u in list(G.nodes()):
-            if u not in G or rng.random_sample() >= deaths:
+            if u not in G:
+                continue
+            if (t - born[u] < age) if age else (rng.random_sample() >= deaths):
                 continue
             nbrs = list(G[u])
             G.remove_node(u)
@@ -113,6 +129,9 @@ def grow(links: int = 2, mend: bool = True, mend_all: bool = False, cap: int = 0
                     G.add_edge(a, b)
         if G.number_of_nodes():
             G = G.subgraph(max(nx.connected_components(G), key=len)).copy()
+    # When each agent was born, and when the run ended, for whoever wants their ages.
+    G.graph["born"] = {u: born.get(u, 0) for u in G.nodes()}
+    G.graph["steps"] = steps
     return G
 
 
@@ -146,8 +165,11 @@ def main() -> None:
     ap.add_argument("--deaths", type=float, default=0.02)
     ap.add_argument("--steps", type=int, default=300)
     ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--age", type=int, default=0)
+    ap.add_argument("--breeders", choices=("any", "young", "old"), default="any")
     a = ap.parse_args()
-    out = measure(grow(a.links, a.mend, a.mend_all, a.cap, a.ring, a.target, a.deaths, a.steps, a.seed))
+    out = measure(grow(a.links, a.mend, a.mend_all, a.cap, a.ring, a.target, a.deaths, a.steps, a.seed, a.age,
+                       a.breeders))
     print("  ".join(f"{k}={v:.3g}" for k, v in out.items()))
 
 

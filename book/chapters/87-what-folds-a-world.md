@@ -206,6 +206,33 @@ dying leave rings of 2 to 5 groups, and the world reads 1.50 to 1.84; without
 the cap on links, rings of 10 to 24 groups, and two of the three worlds read
 1.14 — the third, at 2.40, is the one exception.
 
+## With no brains at all
+
+The worlds above differ in many things at once. To see whether who breeds is
+enough, the rules of space were played alone, as in
+[Chapter 48](48-a-world-that-cannot-break.md#space-alone):
+no brains, no tokens, a newborn joined to its parent and two of the parent's
+neighbours, every agent dying at age 100 as in B2, births balancing deaths at
+about 1,500 agents — and the one thing changed is who may have a child
+(`research/oee/fold.py`, five seeds, 600 iterations each):
+
+| rules | typical distance, over the twin's (median, and range) | groups of neighbours of the oldest tenth | worst cut by one agent's loss |
+|---|---|---|---|
+| deaths mended in a ring, anyone breeds | 1.16 (1.06 to 1.28) | 6.1 | 1% |
+| deaths mended in a ring, only the young breed | 1.73 (1.61 to 1.83) | 3.9 | 3% |
+| deaths mended in a ring, only the old breed | 1.03 (1.02 to 1.06) | 7.4 | 0.2% |
+| deaths not mended, anyone breeds | 2.36 (2.09 to 2.52) | 1.2 | 37% |
+| Chapter 48's own model: agents die by chance, mended in a ring | 1.24 (1.13 to 1.31) | 7.4 | 1.5% |
+
+With anyone breeding, the brainless world folds as B2 does. Let only the
+young breed, and it stays a space; let only the old breed, and it folds
+completely, as the worlds whose children may be of any size do. **Who breeds
+decides it, with nothing else changed**, through the ring a death closes:
+3.9 groups where the young breed, 7.4 where the old do. And mending is what
+keeps a world whole: without it the brainless world is a space, but the
+loss of one agent can cut off a third of it, and the cull leaves half as
+many agents.
+
 ## What it teaches
 
 - **B2 is not a space.** Its worlds are nearly small worlds — a typical agent
@@ -217,7 +244,11 @@ the cap on links, rings of 10 to 24 groups, and two of the three worlds read
   B2 world starts as one; death with mending folds it, once the first
   generation dies — the more, the larger the ring each death closes, and the
   rings are largest where the old do the breeding. Worlds without old age,
-  without mending, or whose unused links lapse keep their room.
+  without mending, or whose unused links lapse keep their room. With no
+  brains at all, who breeds is enough to fold a world or to keep it a space.
+- **Room and resilience pull apart.** Mending is what keeps a death from
+  splitting a world, and it is what folds it; a world that is a space and
+  that no single loss can cut has to get both some other way.
 - **The three-dimensional worlds are the poor ones.** B2 with the estate to
   the newborns or the parents is a space of about three dimensions — the aim
   of [Part VI](60-worlds-of-100000-tokens.md) — but nine in ten of its
@@ -226,9 +257,11 @@ the cap on links, rings of 10 to 24 groups, and two of the three worlds read
   three-dimensional space and rich, and that keeps evolving, is still to be
   found.
 - **Open**: whether a large B2 world folds the same way (a B2 world of
-  100,000 tokens is being played), and a test of the ring itself — a world
-  that mends a death with fewer links, or whose young must do the
-  breeding.
+  100,000 tokens is being played); and rules that would let the young breed
+  in a rich world, or keep a world whole without folding it — mending
+  would add nothing where a dying agent's neighbours are already linked to one
+  another, as on a surface of triangles, while B2's rule for unused links cuts
+  exactly those triangles.
 
 **Related notes:** [Chapter 24 · How many dimensions does a world have?](24-how-many-dimensions-does-a-world-have.md) ·
 [Chapter 7 · Physical inspiration](07-physical-inspiration.md) ·

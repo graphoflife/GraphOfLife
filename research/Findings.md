@@ -579,6 +579,10 @@ iterations; main effects against the seed's noise from E16's ten worlds at 1,000
 - 352 worlds at 1,000: folded B2 kinds 1.26 (222), mixed 1.26 (77); spaces: estates 2.42 (28), lapse 3.94 (12),
   B1 rules 2.33 (13). Rank correlation of typical distance with links per agent -0.58, poor share +0.15, agents
   +0.09: not poverty, not size. No triangles anywhere in B2 kinds (0.12 common neighbours per link).
+- With no brains (research/oee/fold.py on Ch. 48's model, die at 100, 1,500 agents, 5 seeds, 600 its): ring
+  mending + anyone breeds 1.16 (rings 6.1); only the young breed 1.73 (3.9); only the old 1.03 (7.4); not mended
+  2.36 but one loss cuts off up to 37-49% (750 agents after the cull); dying by chance (Ch. 48) 1.24. Who breeds
+  is enough to fold a world; mending keeps it whole and folds it.
 - None of the 23 long-run candidates (Meta X) is a space: typical distance 1.13-1.92, most < 1.5 (rings 6-11).
   Of 388 worlds at 1,000, spaces that are not poor: B1's, lapse worlds (rich, ~2-D, 3-4 marks), Y/mix-mut05-s1
   (2.38, 44% poor, 7 marks, dim 2.9, div 0.48), Z/r1-15 (3.40, 43%, 5 marks, div 0.73), Z/r1-22 (3.42, 27%, 3
