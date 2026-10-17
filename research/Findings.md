@@ -579,6 +579,10 @@ iterations; main effects against the seed's noise from E16's ten worlds at 1,000
 - 352 worlds at 1,000: folded B2 kinds 1.26 (222), mixed 1.26 (77); spaces: estates 2.42 (28), lapse 3.94 (12),
   B1 rules 2.33 (13). Rank correlation of typical distance with links per agent -0.58, poor share +0.15, agents
   +0.09: not poverty, not size. No triangles anywhere in B2 kinds (0.12 common neighbours per link).
+- None of the 23 long-run candidates (Meta X) is a space: typical distance 1.13-1.92, most < 1.5 (rings 6-11).
+  Of 388 worlds at 1,000, spaces that are not poor: B1's, lapse worlds (rich, ~2-D, 3-4 marks), Y/mix-mut05-s1
+  (2.38, 44% poor, 7 marks, dim 2.9, div 0.48), Z/r1-15 (3.40, 43%, 5 marks, div 0.73), Z/r1-22 (3.42, 27%, 3
+  marks, div 0.83).
 - Open: a B2 world of 100,000 tokens (pilot BIG/B2-100000-s1) - does it fold at ~35,000 agents?
 
 **Open (being tested)**

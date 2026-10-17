@@ -293,6 +293,21 @@ search for settings by elimination (batch Z: worlds whose every setting is
 drawn at random, the values that make worlds worse dropped round after round,
 `research/oee/search.md`) add candidates as they finish.
 
+> [!info] Added later (2026-10-17, Chapter 87)
+> The bar's dimension mark does not tell a space from a small world: a B2
+> world of 600 to 1,500 agents passes it because it is small
+> ([Chapter 87](87-what-folds-a-world.md)). Read with Chapter 87's stronger
+> test — the steps within which a typical agent's ball holds half the world,
+> over the same for its random twin — none of the 23 candidates is a space:
+> they read 1.13 to 1.92, most below 1.5, as folded as B2 (1.18), where B1
+> reads 2.3 at 1,500 agents. Of the 388 worlds read at iteration 1,000, those
+> that are spaces and not poor are B1's, those whose every unused link lapses
+> (rich, but about two-dimensional, and missing three or four marks), and a
+> few others: mixing with slow brain change (`Y/mix-mut05-s1`: 2.38, 44% at
+> three tokens or fewer, every mark met at a dimension of 2.9, a diversity
+> score of 0.48) and two worlds of the search (`Z/r1-15-s1015`: 3.40, 43%,
+> five marks, 0.73; `Z/r1-22-s1022`: 3.42, 27%, three marks, 0.83).
+
 ## What this says
 
 - **No world yet fits the picture.** The two rule sets each have half of it:
@@ -308,6 +323,9 @@ drawn at random, the values that make worlds worse dropped round after round,
   [Chapter 78](78-mixed-brains-costly-units.md)). Something between, a death
   that depends on what an agent does rather than on a fixed age, would let ages
   spread without stopping the world.
+- **A healthy network is not yet a space** (added later): the candidates'
+  networks are folded small worlds, and "almost three-dimensional" asks more
+  than the bar's mark does ([Chapter 87](87-what-folds-a-world.md)).
 - **A world might be judged by this map** before it is judged by its evolution:
   a rule that moves worlds towards the top right is a candidate for the long
   runs and the lifetime contests. The batches now running will be placed on it
@@ -319,7 +337,8 @@ drawn at random, the values that make worlds worse dropped round after round,
 [Chapter 48 · A world that cannot break](48-a-world-that-cannot-break.md) ·
 [Chapter 70 · How different are the agents?](70-how-different-are-the-agents.md) ·
 [Chapter 78 · Brains mixed at birth, units that cost, an eye for raids on kin](78-mixed-brains-costly-units.md) ·
-[Meta VI · Every world side by side](74-meta-6-every-world.md)
+[Meta VI · Every world side by side](74-meta-6-every-world.md) ·
+[Chapter 87 · What folds a world](87-what-folds-a-world.md)
 
 <!-- turns -->
 ---
