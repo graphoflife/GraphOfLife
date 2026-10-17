@@ -531,6 +531,38 @@ each two-by-two read at 1,000 by research/atlas/at.py)**
   alone 0.84, B2 0.68); fastest with links that hold a token (0.93), half kept (0.91), units that hold a token
   (0.90); no better with stakes pooled by family (0.35), handover, slow brain change (0.47), no random inputs (0.50).
 
+**Eight switches at once (batch U, Ch. 86; 2026-10-17; a 2^(8-4) design of resolution IV on B2, seed 1, 1,000
+iterations; main effects against the seed's noise from E16's ten worlds at 1,000)**
+- Every unused link lapsing is the strongest switch: -1,750 agents, -0.58 in the share at <= 3 tokens, -1.3 in
+  dimension, -0.9 links per agent, -1.75 marks. Estates to newborns +980 agents, +0.26 poor; links holding a
+  token -1,240 agents; mixing +0.21 diversity (the most), +0.75 marks; handover -1.0 links, -1.25 marks.
+- Switches do far less among the sixteen than alone in B2: mixing alone -0.36/-0.49 poor and ~-2,600 agents,
+  among the sixteen -0.07 and +40; link tokens alone -0.29/-0.33 poor, among -0.06; lapse alone -2.5/-2.7 in
+  dimension, among -1.3. Pair chains are large (AD+BH+CF+EG: +1,300 agents, +0.15 poor; BD+AH+CE+FG: +0.22
+  diversity, +0.59 dimension; AE+BF+CH+DG: +1.0 links, +1.75 marks). Batch Y names two: the estate to the
+  newborns cancels mixing's riches, and lapse leaves it nothing to add.
+- U-BDFG (no revolutions, no random inputs, link tokens, mixing): 7 marks, dim 3.67, 25% poor, diversity 0.68,
+  652 agents - the best of the sixteen; it is among the LC long-run candidates.
+
+**What folds a world (Ch. 87, Part VI; 2026-10-17; Ch. 24's rulers and random twins via research/atlas/space.py;
+"typical distance" = steps until a typical ball holds half the world, over the twin's)**
+- B1 is a space (local dimension 2.0-2.5 over radii 1-6, typical distance 2.3x its twin's). B2 is nearly a small
+  world: local dimension 2.4, 3.9, 5.0 until a quarter is reached at radius 4, typical distance 1.18. Mixed
+  worlds 1.21. B2 with estates to newborns or parents: a space of about three dimensions (local d 3.1-3.5 over
+  radii 3-5, 2.7 at 7; typical distance 2.4; twins climb past 5.7).
+- Every B2 world starts as a space (1.68 at iteration 100) and folds when the first generation dies (1.24 by
+  300, ~1.2 after). Without old age it keeps 1.8-1.9; estates to newborns/parents unfold it (2.0-2.2 / 2.4-2.6);
+  lapse opens it (4.3-4.7). Experiment 14 (5,000 tokens): B2 folds 1.54 -> 1.25; without mending it does not
+  (1.6-1.7, 2.0 at 1,000); without birth links 1.35-1.45, without the cap 1.13-1.28, handover ~1.5. Reading:
+  death with mending folds, birth unfolds. What the estates change: who breeds (median parent age at a birth 2-3
+  iterations vs 18/28 in B2; agents under 30 have 0.74-0.78 living children vs 0.30-0.38) and who dies (the old
+  hold 6 links in 5.4 neighbour groups vs 8.1-8.4 in 7.6-7.8: a death closes a ring of ~8 links in B2). Estates
+  to own children change neither (parent age 26) and fold like B2 (1.18, 1.19). Cause not settled.
+- 352 worlds at 1,000: folded B2 kinds 1.26 (222), mixed 1.26 (77); spaces: estates 2.42 (28), lapse 3.94 (12),
+  B1 rules 2.33 (13). Rank correlation of typical distance with links per agent -0.58, poor share +0.15, agents
+  +0.09: not poverty, not size. No triangles anywhere in B2 kinds (0.12 common neighbours per link).
+- Open: a B2 world of 100,000 tokens (pilot BIG/B2-100000-s1) - does it fold at ~35,000 agents?
+
 **Open (being tested)**
 - Rules without numbers (B3, Ch. 57): all seven of B2's numbers removed at once
   — s1: without alliances extinct, with alliances a peaceful near-tree.

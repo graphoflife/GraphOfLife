@@ -121,13 +121,30 @@ generation. One reading, consistent with everything above: **death with
 mending folds a world, and birth unfolds it.** Without old age nobody dies,
 and nothing folds; without mending a death leaves a hole, and the world
 keeps its room; and where every unused link lapses, the links mending makes
-are cut again as soon as nobody stakes on them. What the estates to the
-newborns and the parents change, that lets their worlds unfold although
-they mend as B2 does, this chapter does not find. Their neighbours are more
-alike in age (a correlation of birth times across links of +0.8, against
-+0.45 in B2), more of their agents have a living parent (nine in ten,
-against seven), and their links per agent are a little fewer (4.7 to 4.9,
-against 5.4 to 5.7); none of these is yet a cause.
+are cut again as soon as nobody stakes on them.
+
+What the estates to the newborns and the parents change, that lets their
+worlds unfold although they mend as B2 does, is not settled here, but two
+differences point one way:
+
+- **Who breeds.** With an estate in hand, a newborn has its first child
+  within a few iterations: at a birth, the median parent is two or three
+  iterations old, against 18 and 28 in B2, and agents under 30 have nearly
+  as many living children as the old (0.74 to 0.78 each, against 0.30 to
+  0.38 in B2). The world grows as chains of short generations.
+- **Who dies.** In B2 an agent gathers links all its life, from its children
+  and from its neighbours' children: at 90 or older it holds 8.1 to 8.4
+  links, in 7.6 to 7.8 groups of neighbours not linked to one another, and
+  its death closes a ring of about eight links among them. Where the estate
+  goes to births, the old hold about six links in 5.4 groups.
+
+The estate to an agent's own children, which reaches heirs of every age,
+changes neither — parents are 26 iterations old at a birth, as in B2 — and
+its worlds fold as B2's do, to 1.18 and 1.19. The neighbours of the
+unfolded worlds are also more alike in age (a correlation of birth times
+across links of +0.8, against +0.45 in B2), and their links per agent a
+little fewer (4.7 to 4.9, against 5.4 to 5.7). Which of these is the cause,
+the worlds so far cannot say.
 
 ## Every world at iteration 1,000
 
@@ -147,19 +164,19 @@ against 5.4 to 5.7); none of these is yet a cause.
 > **To make it again:** `python3 book_figures.py spaces`.
 <!-- /figure -->
 
-Read at iteration 1,000, 322 worlds — every pilot batch and the lab's B2
+Read at iteration 1,000, 352 worlds — every pilot batch and the lab's B2
 families at 10,000 tokens — fall into two groups:
 
-- **Folded**: the 209 worlds of B2 with other rules (a median typical
-  distance of 1.26 times the twin's) and the 63 with brains mixed at birth
+- **Folded**: the 222 worlds of B2 with other rules (a median typical
+  distance of 1.26 times the twin's) and the 77 with brains mixed at birth
   (1.26).
-- **Spaces**: the 27 worlds whose estate goes to the newborns or the parents
-  (2.42), the 12 in which every unused link lapses (3.94), and the 11 on B1's
-  rules (2.46).
+- **Spaces**: the 28 worlds whose estate goes to the newborns or the parents
+  (2.42), the 12 in which every unused link lapses (3.94), and the 13 on B1's
+  rules (2.33).
 
 Across them all, the typical distance goes with fewer links per agent (a
-rank correlation of −0.59) and hardly at all with how poor the agents are
-(+0.15), how many they are (+0.07) or how many tokens each holds (−0.08).
+rank correlation of −0.58) and hardly at all with how poor the agents are
+(+0.15), how many they are (+0.09) or how many tokens each holds (−0.10).
 Being a space is not a matter of poverty or size.
 
 ## What it teaches
@@ -181,8 +198,8 @@ Being a space is not a matter of poverty or size.
   three-dimensional space and rich, and that keeps evolving, is still to be
   found.
 - **Open**: whether a large B2 world folds the same way (a B2 world of
-  100,000 tokens is being played), and what in the estates to the newborns
-  and the parents unfolds a world.
+  100,000 tokens is being played), and whether it is breeding young, or
+  dying with fewer links, that unfolds a world.
 
 **Related notes:** [Chapter 24 · How many dimensions does a world have?](24-how-many-dimensions-does-a-world-have.md) ·
 [Chapter 7 · Physical inspiration](07-physical-inspiration.md) ·

@@ -120,18 +120,18 @@
    }
   },
   "every": {
-   "worlds": 322,
+   "worlds": 352,
    "by_kind": {
     "B2": {
-     "worlds": 209,
-     "median": 1.2580197019800612
+     "worlds": 222,
+     "median": 1.2580420090164326
     },
     "mixed": {
-     "worlds": 63,
-     "median": 1.2611887309965386
+     "worlds": 77,
+     "median": 1.2579601634608815
     },
     "estates": {
-     "worlds": 27,
+     "worlds": 28,
      "median": 2.4199967567902547
     },
     "lapse": {
@@ -139,15 +139,15 @@
      "median": 3.9410143142877203
     },
     "B1": {
-     "worlds": 11,
-     "median": 2.457784206546463
+     "worlds": 13,
+     "median": 2.3345025005210585
     }
    },
    "rank_correlation": {
-    "links_per_agent": -0.5882839972747799,
-    "share_at_most_three": 0.14741007932504252,
-    "agents": 0.07095654618056722,
-    "tokens_per_agent": -0.07979643877482986
+    "links_per_agent": -0.5815385826009054,
+    "share_at_most_three": 0.15299679074466607,
+    "agents": 0.09302905938883274,
+    "tokens_per_agent": -0.10187844890394464
    }
   }
  },
