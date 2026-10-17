@@ -497,7 +497,9 @@
         {
           "id": "75",
           "title": "Meta VII · Where tokens go",
-          "note": "What the book knows about flow: the even split, curvature, loops, circulation over time, modules, and the estate of the dead."
+          "note": "What the book knows about where tokens go: the budget of a game, the even split and where tokens come to rest, the downhill drain, how little goes round beyond chance, the groups tokens stay in, and the estate of the dead.",
+          "file": "chapters/75-meta-7-where-tokens-go.md",
+          "status": "analysed"
         },
         {
           "id": "76",

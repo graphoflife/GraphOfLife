@@ -128,7 +128,7 @@ everything can be checked with it.
 **Part VIII · Across all worlds**
 
 - [Chapter 74 · Meta VI · Every world side by side](chapters/74-meta-6-every-world.md)
-- Chapter 75 · Meta VII · Where tokens go — *not written yet*
+- [Chapter 75 · Meta VII · Where tokens go](chapters/75-meta-7-where-tokens-go.md)
 - [Chapter 76 · Meta VIII · Who helps whom](chapters/76-meta-8-who-helps-whom.md)
 - [Chapter 77 · Meta IX · How alike the agents are](chapters/77-meta-9-how-alike.md)
 - [Chapter 79 · Meta X · Healthy and rich](chapters/79-meta-10-healthy-and-rich.md)

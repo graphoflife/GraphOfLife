@@ -224,8 +224,8 @@ as B2 does (0.046 on loops, 0.95 left after cancelling), B1's as B1 does (0.20,
 0.26). Measures of
 the same flow from other angles are in [Chapter 71](71-flow-modules.md), *Flow modules: the groups
 tokens stay in* (who trades with whom, and for how long), and in
-Chapter 75, *Meta VII · Where tokens go*, which gathers what the book knows
-about flow.
+[Chapter 75](75-meta-7-where-tokens-go.md), *Meta VII · Where tokens go*,
+which gathers what the book knows about flow.
 
 **Related notes:** [Lightning](../notes/lightning.md) ·
 [Token flow](../notes/token-flow.md) · [Flows that go round](../notes/circulation.md) ·

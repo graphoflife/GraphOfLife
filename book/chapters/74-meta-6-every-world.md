@@ -184,5 +184,5 @@ longer makes.
 <!-- turns -->
 ---
 
-← [Chapter 81 · Five mixed worlds, fifty thousand iterations](81-five-mixed-worlds-fifty-thousand-iterations.md) · [Contents](../README.md) · [Chapter 76 · Meta VIII · Who helps whom](76-meta-8-who-helps-whom.md) →
+← [Chapter 81 · Five mixed worlds, fifty thousand iterations](81-five-mixed-worlds-fifty-thousand-iterations.md) · [Contents](../README.md) · [Chapter 75 · Meta VII · Where tokens go](75-meta-7-where-tokens-go.md) →
 <!-- /turns -->

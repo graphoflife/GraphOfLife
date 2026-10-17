@@ -98,5 +98,5 @@ competition between groups goes on.
 <!-- turns -->
 ---
 
-← [Chapter 74 · Meta VI · Every world side by side](74-meta-6-every-world.md) · [Contents](../README.md) · [Chapter 77 · Meta IX · How alike the agents are](77-meta-9-how-alike.md) →
+← [Chapter 75 · Meta VII · Where tokens go](75-meta-7-where-tokens-go.md) · [Contents](../README.md) · [Chapter 77 · Meta IX · How alike the agents are](77-meta-9-how-alike.md) →
 <!-- /turns -->
