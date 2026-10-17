@@ -446,5 +446,5 @@ of seed 4 played against itself gave 40% and 64%); the median of ten is not.
 <!-- turns -->
 ---
 
-← [Chapter 78 · Brains mixed at birth, units that cost, an eye for raids on kin](78-mixed-brains-costly-units.md) · [Contents](../README.md) · [Chapter 60 · Worlds of 100,000 tokens](60-worlds-of-100000-tokens.md) →
+← [Chapter 78 · Brains mixed at birth, units that cost, an eye for raids on kin](78-mixed-brains-costly-units.md) · [Contents](../README.md) · [Chapter 83 · Links to strangers](83-links-to-strangers.md) →
 <!-- /turns -->

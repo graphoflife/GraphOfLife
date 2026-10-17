@@ -1,0 +1,25 @@
+# Batch K: links to strangers on B2 (2026-10-16), every world 1,000 against 500 (T = 100).
+pilot GraphOfLifeRuns/.pilots/K/jump-looking-forced-s1 500:1000
+pilot GraphOfLifeRuns/.pilots/K/jump-looking-forced-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/K/jump-looking-mutual-s1 500:1000
+pilot GraphOfLifeRuns/.pilots/K/jump-looking-mutual-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/K/jump-random-forced-s1 500:1000
+pilot GraphOfLifeRuns/.pilots/K/jump-random-forced-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/K/jump-random-mutual-s1 500:1000
+pilot GraphOfLifeRuns/.pilots/K/jump-random-mutual-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/K/reach-looking-forced-s1 500:1000
+pilot GraphOfLifeRuns/.pilots/K/reach-looking-forced-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/K/reach-looking-mutual-s1 500:1000
+pilot GraphOfLifeRuns/.pilots/K/reach-looking-mutual-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/K/reach-random-forced-s1 500:1000
+pilot GraphOfLifeRuns/.pilots/K/reach-random-forced-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/K/reach-random-mutual-s1 500:1000
+pilot GraphOfLifeRuns/.pilots/K/reach-random-mutual-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/K/walk-looking-forced-s1 500:1000
+pilot GraphOfLifeRuns/.pilots/K/walk-looking-forced-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/K/walk-looking-mutual-s1 500:1000
+pilot GraphOfLifeRuns/.pilots/K/walk-looking-mutual-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/K/walk-random-forced-s1 500:1000
+pilot GraphOfLifeRuns/.pilots/K/walk-random-forced-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/K/walk-random-mutual-s1 500:1000
+pilot GraphOfLifeRuns/.pilots/K/walk-random-mutual-s2 500:1000

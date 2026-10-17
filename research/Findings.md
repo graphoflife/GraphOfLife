@@ -481,6 +481,29 @@ controls P/B2-s1, s2 and L/B1-long-s1, s2 to 2,000)**
 - An estate that lands where a birth can follow from it fills a world; none of the three rules brings a
   world nearer the author's picture. The dimension does not simply follow size across B2's variants.
 
+**Links to strangers (batch K, Ch. 83; 2026-10-17; B2 at 10,000 tokens, 3 searches x 2 steerings x 2 consents x
+2 seeds, 1,000 iterations; 50 recorded games from 1,000, research/oee/checks/k_links.py)**
+- Paid searches are almost never used: jump 0.01-0.04, walk 0.09-0.42 proposals per 100 agents an iteration.
+  The free reach is: 0.45-35 proposals, 0.1-3.1 links made (7-36% of proposals).
+- Strangers are near: the median proposal goes 2-3 steps; none went 20 or more.
+- Reach: 6.0-8.1 links per agent (B2 5.4-5.5), paths 4.4-5.5 (5.2-5.4), dimension unchanged (3.8-4.6).
+  Every searching world is smaller (median ~2,900 jump, 2,800 walk, 2,350 reach vs 3,350) and a little richer
+  (49-79% at <= 3 tokens vs 76-77%) - even where agents hardly propose: paid steps move tokens anyway.
+- Locality survives: searching does not make shortcuts.
+- Evolution faster than B2 in all 24 worlds (T = 100, 1,000 vs 500: 0.70-0.91; medians jump 0.79, walk 0.78,
+  reach 0.83; B2 0.68), even where agents hardly search - what they share is a smaller world and two more
+  outputs (mixed worlds, smaller still: 0.84).
+
+**Mixing with every other rule (batch Y, Ch. 82; 2026-10-17; 23 rules x 2 seeds, 1,000 iterations; every corner of
+each two-by-two read at 1,000 by research/atlas/at.py)**
+- Mixing keeps its riches with 16 rules of 23 (with a sense of family 18% at <= 3 tokens, who-helped 26%, no
+  random inputs 28%, grow 28%, units that hold a token 30%; mixing alone 34%, B2 77%). Seven cancel it (73-94%):
+  estates to newborns or parents, children of any size, no old age (rules that pay for or replace births), and
+  handover, the last token kept, stakes pooled by family (unexplained).
+- Mixing raises diversity with nearly every rule (partly built in: every mixed birth is a new genotype); the
+  most diverse: mixing with fast brain change (0.77/0.79), with a sense of kin or family (0.69/0.70).
+- The richest combinations are the smallest (270-370 agents at 1,000) - fragile, as E18 showed for mixing alone.
+
 **Open (being tested)**
 - Rules without numbers (B3, Ch. 57): all seven of B2's numbers removed at once
   — s1: without alliances extinct, with alliances a peaceful near-tree.

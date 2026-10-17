@@ -107,6 +107,7 @@ everything can be checked with it.
 - [Chapter 73 · Who inherits?](chapters/73-who-inherits.md)
 - [Chapter 78 · Brains mixed at birth, units that cost, an eye for raids on kin](chapters/78-mixed-brains-costly-units.md)
 - [Chapter 80 · Mixed at birth: ten long worlds](chapters/80-mixed-at-birth-ten-long-worlds.md)
+- [Chapter 83 · Links to strangers](chapters/83-links-to-strangers.md)
 
 **Part VI · Towards a physics: space, scale and locality**
 
