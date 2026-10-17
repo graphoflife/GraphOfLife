@@ -104,7 +104,7 @@ everything can be checked with it.
 - [Chapter 57 · Rules without numbers](chapters/57-rules-without-numbers.md)
 - [Chapter 58 · Gliders, and who helps whom](chapters/58-gliders-and-who-helps-whom.md)
 - Chapter 59 · Meta IV — *not written yet*
-- Chapter 73 · Who inherits? — *not written yet*
+- [Chapter 73 · Who inherits?](chapters/73-who-inherits.md)
 - [Chapter 78 · Brains mixed at birth, units that cost, an eye for raids on kin](chapters/78-mixed-brains-costly-units.md)
 - [Chapter 80 · Mixed at birth: ten long worlds](chapters/80-mixed-at-birth-ten-long-worlds.md)
 

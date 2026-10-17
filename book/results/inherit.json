@@ -1,0 +1,214 @@
+{
+ "chapter": "inherit",
+ "numbers": {
+  "B2:uniform:nodes": [
+   3651.2196,
+   3196.513
+  ],
+  "B2:poorest:nodes": [
+   3620.5868,
+   3679.7525
+  ],
+  "B2:newborns:nodes": [
+   5226.4132,
+   5171.5689
+  ],
+  "B2:parents:nodes": [
+   5169.1976,
+   5143.7784
+  ],
+  "B2:uniform:births_per_agent": [
+   0.01,
+   0.0099
+  ],
+  "B2:poorest:births_per_agent": [
+   0.0101,
+   0.01
+  ],
+  "B2:newborns:births_per_agent": [
+   0.01,
+   0.01
+  ],
+  "B2:parents:births_per_agent": [
+   0.01,
+   0.01
+  ],
+  "B2:uniform:gini": [
+   0.4929,
+   0.465
+  ],
+  "B2:poorest:gini": [
+   0.5103,
+   0.5133
+  ],
+  "B2:newborns:gini": [
+   0.4398,
+   0.4433
+  ],
+  "B2:parents:gini": [
+   0.4461,
+   0.4439
+  ],
+  "B2:uniform:meanAge": [
+   50.5298,
+   50.7707
+  ],
+  "B2:poorest:meanAge": [
+   50.3589,
+   50.5549
+  ],
+  "B2:newborns:meanAge": [
+   50.5844,
+   50.5484
+  ],
+  "B2:parents:meanAge": [
+   50.4922,
+   50.5032
+  ],
+  "B1:uniform:nodes": [
+   1369.5988,
+   787.8842
+  ],
+  "B1:poorest:nodes": [
+   2098.1776,
+   2291.5709
+  ],
+  "B1:newborns:nodes": [
+   2370.487,
+   2606.521
+  ],
+  "B1:parents:nodes": [
+   2404.3573,
+   2421.9281
+  ],
+  "B1:uniform:births_per_agent": [
+   0.02,
+   0.0149
+  ],
+  "B1:poorest:births_per_agent": [
+   0.0432,
+   0.07
+  ],
+  "B1:newborns:births_per_agent": [
+   0.8581,
+   0.6413
+  ],
+  "B1:parents:births_per_agent": [
+   0.5566,
+   0.6211
+  ],
+  "B1:uniform:gini": [
+   0.4362,
+   0.5453
+  ],
+  "B1:poorest:gini": [
+   0.4265,
+   0.4519
+  ],
+  "B1:newborns:gini": [
+   0.3289,
+   0.3691
+  ],
+  "B1:parents:gini": [
+   0.4759,
+   0.4744
+  ],
+  "B1:uniform:meanAge": [
+   118.8192,
+   214.0253
+  ],
+  "B1:poorest:meanAge": [
+   76.3622,
+   73.7467
+  ],
+  "B1:newborns:meanAge": [
+   2.6165,
+   3.4849
+  ],
+  "B1:parents:meanAge": [
+   2.7911,
+   3.0426
+  ],
+  "contest:B2:uniform:1000v500": [
+   0.692,
+   0.67
+  ],
+  "contest:B2:poorest:1000v500": [
+   0.641,
+   0.703
+  ],
+  "contest:B2:newborns:1000v500": [
+   0.514,
+   0.565
+  ],
+  "contest:B2:parents:1000v500": [
+   0.511,
+   0.438
+  ],
+  "contest:B1:uniform:1000v500": [
+   0.365,
+   0.678
+  ],
+  "contest:B1:poorest:1000v500": [
+   0.54,
+   0.474
+  ],
+  "contest:B1:newborns:1000v500": [
+   0.132,
+   0.616
+  ],
+  "contest:B1:parents:1000v500": [
+   0.881,
+   0.699
+  ],
+  "contest:B2:uniform:2000v1000": [
+   0.654,
+   0.762
+  ],
+  "contest:B2:poorest:2000v1000": [
+   0.631,
+   0.576
+  ],
+  "contest:B2:newborns:2000v1000": [
+   0.365,
+   0.527
+  ],
+  "contest:B2:parents:2000v1000": [
+   0.469,
+   0.533
+  ],
+  "contest:B1:uniform:2000v1000": [
+   0.464,
+   0.615
+  ],
+  "contest:B1:poorest:2000v1000": [
+   0.482,
+   0.338
+  ],
+  "contest:B1:newborns:2000v1000": [
+   0.843,
+   0.181
+  ],
+  "contest:B1:parents:2000v1000": [
+   0.503,
+   0.802
+  ]
+ },
+ "figures": {
+  "life_B2": {
+   "title": "B2 worlds, by who inherits",
+   "caption": "B2 worlds of 10,000 tokens, two seeds of each rule, through 2,000 iterations (means over blocks of 20 iterations). Grey: the estate shared evenly, the control; green: to the poorest; violet: to the children born that iteration; red: to their parents.",
+   "recipe": "**Runs.** Pilot worlds of 10,000 tokens, two seeds each: B2's settings (as in Experiment 16) and B1's, with `redistribution` = `poorest`, `newborns` or `parents` (`GraphOfLifeRuns/.pilots/R/`); the controls are the same settings and seeds with the estate shared evenly, `P/B2-s1`, `-s2` and the first 2,000 iterations of `L/B1-long-s1`, `-s2`.\n\n**Data.** From each world's `series.jsonl`, one row per iteration.\n\n1. Read agents, births, the Gini coefficient and mean age every iteration.\n2. Average over blocks of 20 iterations and draw a line per world.\n\n**To make it again:** `python3 book_figures.py inherit`."
+  },
+  "life_B1": {
+   "title": "B1 worlds, by who inherits",
+   "caption": "B1 worlds of 10,000 tokens, two seeds of each rule, through 2,000 iterations (means over blocks of 20 iterations). Grey: the estate shared evenly, the control; green: to the poorest; violet: to the children born that iteration; red: to their parents.",
+   "recipe": "**Runs.** Pilot worlds of 10,000 tokens, two seeds each: B2's settings (as in Experiment 16) and B1's, with `redistribution` = `poorest`, `newborns` or `parents` (`GraphOfLifeRuns/.pilots/R/`); the controls are the same settings and seeds with the estate shared evenly, `P/B2-s1`, `-s2` and the first 2,000 iterations of `L/B1-long-s1`, `-s2`.\n\n**Data.** From each world's `series.jsonl`, one row per iteration.\n\n1. Read agents, births, the Gini coefficient and mean age every iteration.\n2. Average over blocks of 20 iterations and draw a line per world.\n\n**To make it again:** `python3 book_figures.py inherit`."
+  },
+  "contests": {
+   "title": "Does evolution go on?",
+   "caption": "Lifetime contests (T = 100 iterations): the brains of a later moment against those of an earlier one, half and half on the same world, once in each moment's world; the share of nodes the later brains hold at the end, averaged over the two. Above a half, the later brains are better. Each dot is a world.",
+   "recipe": "**Runs.** Pilot worlds of 10,000 tokens, two seeds each: B2's settings (as in Experiment 16) and B1's, with `redistribution` = `poorest`, `newborns` or `parents` (`GraphOfLifeRuns/.pilots/R/`); the controls are the same settings and seeds with the estate shared evenly, `P/B2-s1`, `-s2` and the first 2,000 iterations of `L/B1-long-s1`, `-s2`.\n\n**Data.** From `GraphOfLifeRuns/.pilots/batch_R_T100.json` and `batch_P_T100.json` (`research/oee/checks/rejudge.py --T 100`).\n\n1. Load both moments' checkpoints; give half the agents of one world the brains of each moment.\n2. Play 100 iterations; count the nodes each side holds.\n3. Do it again in the other moment's world and average.\n\n**To make it again:** `python3 book_figures.py inherit`."
+  }
+ }
+}

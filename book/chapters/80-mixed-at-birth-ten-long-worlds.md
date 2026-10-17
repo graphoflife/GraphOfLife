@@ -356,6 +356,13 @@ rich the agents are: B2's worlds of 5,000 tokens are as poor as those of
 agents to 70,000 it stays between about 2.5 and 4. The rise belongs to B2's
 kind of network, not to the measure.)
 
+> [!info] Added later (2026-10-17, Chapter 73)
+> "B2's kind of network" says too much. The rise holds for B2 itself, at
+> 5,000 and 10,000 tokens, and for its mixed worlds; other rules move the
+> dimension at any size. B2 with the estate of the dead left to the newborns,
+> or to the parents, holds more than 5,000 agents at a dimension of 3.4 to 3.9
+> and meets every mark ([Chapter 73](73-who-inherits.md#healthy-and-diverse)).
+
 ## Does evolution go on?
 
 <!-- figure mixedlong/evolution -->

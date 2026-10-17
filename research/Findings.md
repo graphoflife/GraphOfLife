@@ -469,6 +469,18 @@ book/results/worlds.json; 2026-10-16)**
   (everyworld.replicas now maps the prototype's `mix` to mix_at_birth).
 - Next: E18 (Ch. 81), the five healthy worlds to 50,000 (running since 2026-10-16 22:52).
 
+**Who inherits (batch R, Ch. 73; 2026-10-17; B2 and B1 at 10,000 tokens, two seeds, 2,000 iterations;
+controls P/B2-s1, s2 and L/B1-long-s1, s2 to 2,000)**
+- B2, estate to the poorest: like B2 (3,600-3,700 agents, 80% at <= 3 tokens; contests 1,000 vs 500 0.64/0.70,
+  2,000 vs 1,000 0.63/0.58; control 0.69/0.67, 0.65/0.76). The pool is small (~70 tokens an iteration).
+- B2, estate to the newborns or the parents: worlds grow by half (5,100-5,300 agents), 91% at <= 3 tokens,
+  every mark met at a dimension of 3.4-3.9 (despite > 5,000 agents), diversity 0.19-0.28 (B2 0.48-0.52),
+  evolution stops (0.37-0.57 at both steps, all four worlds).
+- B1, to the poorest: bigger and younger (2,100-2,300 agents, mean age 74-76; control 800-1,400, 120-210).
+  To the newborns or parents: a world of infants, 55-85 births per 100 agents an iteration, mean age ~3.
+- An estate that lands where a birth can follow from it fills a world; none of the three rules brings a
+  world nearer the author's picture. The dimension does not simply follow size across B2's variants.
+
 **Open (being tested)**
 - Rules without numbers (B3, Ch. 57): all seven of B2's numbers removed at once
   — s1: without alliances extinct, with alliances a peaceful near-tree.

@@ -87,6 +87,12 @@ agents most diverse — is empty.
 > between worlds of different sizes has to be read with that in mind
 > ([Chapter 80](80-mixed-at-birth-ten-long-worlds.md#the-marks-a-world-misses)).
 
+> [!info] Added later (2026-10-17, Chapter 73)
+> The rise with size holds for B2 itself and for its mixed worlds, not for
+> every variant of B2: with the estate of the dead left to the newborns or to
+> the parents, B2's worlds hold more than 5,000 agents at a dimension of 3.4 to
+> 3.9 ([Chapter 73](73-who-inherits.md#healthy-and-diverse)).
+
 <!-- figure healthy/poor -->
 ![Agents with three tokens or fewer](../figures/healthy/poor.svg)
 
