@@ -127,8 +127,7 @@ a world's life, the estate goes with falling inequality
 pool is small — about seventy tokens an iteration among 3,600 agents — and
 where it goes matters more than how much it is: **an estate that pays for
 births fills a world**, to half as many agents again and poorer
-([Chapter 73](73-who-inherits.md),
-[Meta XI](84-meta-11-what-holds-a-worlds-size.md)).
+([Chapter 73](73-who-inherits.md)).
 
 ## What this says
 
@@ -156,7 +155,7 @@ births fills a world**, to half as many agents again and poorer
 [Chapter 71 · Flow modules](71-flow-modules.md) ·
 [Chapter 72 · Lightning in every world](72-lightning-in-every-world.md) ·
 [Appendix B · What goes with what](B-what-goes-with-what.md) ·
-[Meta XI · What holds a world's size](84-meta-11-what-holds-a-worlds-size.md)
+[Chapter 73 · Who inherits?](73-who-inherits.md)
 
 <!-- turns -->
 ---
