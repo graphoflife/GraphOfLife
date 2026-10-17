@@ -119,6 +119,32 @@
     "1000": 1.6565266566726529
    }
   },
+  "rings": {
+   "worlds": 319,
+   "bins": {
+    "0-5": {
+     "worlds": 45,
+     "median": 2.0396502613893075
+    },
+    "5-6": {
+     "worlds": 14,
+     "median": 2.2691401659463226
+    },
+    "6-7": {
+     "worlds": 53,
+     "median": 1.3441593410520716
+    },
+    "7-9": {
+     "worlds": 185,
+     "median": 1.2368204938164
+    },
+    "9-99": {
+     "worlds": 22,
+     "median": 1.07787707146624
+    }
+   },
+   "rank_correlation": -0.6965044064588632
+  },
   "every": {
    "worlds": 352,
    "by_kind": {
@@ -164,8 +190,8 @@
   },
   "every": {
    "title": "Every world at iteration 1,000",
-   "caption": "Each dot is a world of the book read at iteration 1,000 \u2014 the pilot batches and the lab's B2 families at 10,000 tokens \u2014 its typical distance over its random twin's (logarithmic), against its links per agent (left) and the share of its agents holding three tokens or fewer (right). Colours: what stands out in its rules.",
-   "recipe": "**Runs.** Every world of `GraphOfLifeRuns/.pilots/atlas/at1000.json` (`research/atlas/at.py`): the pilot batches K, M, P, Q, R, S, T, U, W, X and Y, and the lab's B2 families of Experiments 15 to 17.\n\n**Data.** From each world's whole world kept at iteration 1,000 (`research/atlas/space.py --at 1000`, `GraphOfLifeRuns/.pilots/atlas/space_at1000.json`).\n\n1. Measure each world and its twin as above.\n2. Set its typical distance over the twin's against its links per agent and its share of poor agents.\n\n**To make it again:** `python3 book_figures.py spaces`."
+   "caption": "Each dot is a world of the book read at iteration 1,000 \u2014 the pilot batches and the lab's B2 families at 10,000 tokens \u2014 its typical distance over its random twin's (logarithmic). Top, for the worlds whose agents die of age and are mended round: against the number of groups the neighbours of its agents within ten iterations of their death fall into \u2014 groups linked to one another directly, which mending joins in a ring. Middle: against its links per agent; bottom: against the share of its agents holding three tokens or fewer. Colours: what stands out in its rules.",
+   "recipe": "**Runs.** Every world of `GraphOfLifeRuns/.pilots/atlas/at1000.json` (`research/atlas/at.py`): the pilot batches K, M, P, Q, R, S, T, U, W, X and Y, and the lab's B2 families of Experiments 15 to 17.\n\n**Data.** From each world's whole world kept at iteration 1,000 (`research/atlas/space.py --at 1000`, `GraphOfLifeRuns/.pilots/atlas/space_at1000.json`).\n\n1. Measure each world and its twin as above.\n2. Split the neighbours of each agent within ten iterations of its death into groups linked directly (`research/atlas/rings.py`).\n3. Set its typical distance over the twin's against the mean number of groups, its links per agent and its share of poor agents.\n\n**To make it again:** `python3 book_figures.py spaces`."
   }
  }
 }

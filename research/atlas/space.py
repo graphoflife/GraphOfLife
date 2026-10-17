@@ -129,6 +129,16 @@ def life_worlds() -> List[Item]:
     return out
 
 
+def settings(wid: str) -> Dict[str, Any]:
+    """A world's settings: a pilot's config.json, merged with its prototype's switches, or a lab run's meta."""
+    pilot = os.path.join(PILOTS, wid, "config.json")
+    if os.path.exists(pilot):
+        meta = json.load(open(pilot))
+        return {**(meta.get("cfg") or {}), **(meta.get("proto") or {})}
+    meta = os.path.join(RUNS, wid, "meta.json")
+    return (json.load(open(meta)).get("config") or {}) if os.path.exists(meta) else {}
+
+
 def half_reach(balls: List[float], n: int) -> float:
     """The radius at which the typical ball first holds half the world, between whole steps by the
     logarithm of the ball."""

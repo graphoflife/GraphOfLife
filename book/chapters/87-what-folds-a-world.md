@@ -151,7 +151,7 @@ the worlds so far cannot say.
 <!-- figure spaces/every -->
 ![Every world at iteration 1,000](../figures/spaces/every.svg)
 
-**Every world at iteration 1,000.** Each dot is a world of the book read at iteration 1,000 — the pilot batches and the lab's B2 families at 10,000 tokens — its typical distance over its random twin's (logarithmic), against its links per agent (left) and the share of its agents holding three tokens or fewer (right). Colours: what stands out in its rules.
+**Every world at iteration 1,000.** Each dot is a world of the book read at iteration 1,000 — the pilot batches and the lab's B2 families at 10,000 tokens — its typical distance over its random twin's (logarithmic). Top, for the worlds whose agents die of age and are mended round: against the number of groups the neighbours of its agents within ten iterations of their death fall into — groups linked to one another directly, which mending joins in a ring. Middle: against its links per agent; bottom: against the share of its agents holding three tokens or fewer. Colours: what stands out in its rules.
 
 > [!example]- How to make this figure
 > **Runs.** Every world of `GraphOfLifeRuns/.pilots/atlas/at1000.json` (`research/atlas/at.py`): the pilot batches K, M, P, Q, R, S, T, U, W, X and Y, and the lab's B2 families of Experiments 15 to 17.
@@ -159,7 +159,8 @@ the worlds so far cannot say.
 > **Data.** From each world's whole world kept at iteration 1,000 (`research/atlas/space.py --at 1000`, `GraphOfLifeRuns/.pilots/atlas/space_at1000.json`).
 >
 > 1. Measure each world and its twin as above.
-> 2. Set its typical distance over the twin's against its links per agent and its share of poor agents.
+> 2. Split the neighbours of each agent within ten iterations of its death into groups linked directly (`research/atlas/rings.py`).
+> 3. Set its typical distance over the twin's against the mean number of groups, its links per agent and its share of poor agents.
 >
 > **To make it again:** `python3 book_figures.py spaces`.
 <!-- /figure -->
@@ -179,6 +180,25 @@ rank correlation of −0.58) and hardly at all with how poor the agents are
 (+0.15), how many they are (+0.09) or how many tokens each holds (−0.10).
 Being a space is not a matter of poverty or size.
 
+**The ring a death closes tells it best.** In the 319 worlds whose agents
+die of age and are mended round, count, for every agent within ten
+iterations of its death, the groups its neighbours fall into — the groups
+mending will join in a ring (`research/atlas/rings.py`). The more groups,
+the more folded the world (a rank correlation of −0.70):
+
+| groups of neighbours of the agents about to die | worlds | typical distance, over the twin's (median) |
+|---|---|---|
+| fewer than 5 | 45 | 2.04 |
+| 5 to 6 | 14 | 2.27 |
+| 6 to 7 | 53 | 1.34 |
+| 7 to 9 | 185 | 1.24 |
+| 9 or more | 22 | 1.08 |
+
+The most folded worlds are those whose children may be of any size: there
+the parents are 60 iterations old at a birth (a median), and the dying hold
+12 to 14 links in as many groups. Where the old breed, they gather links till
+they die, and every death closes a wide ring.
+
 ## What it teaches
 
 - **B2 is not a space.** Its worlds are nearly small worlds — a typical agent
@@ -188,8 +208,9 @@ Being a space is not a matter of poverty or size.
   number read off its first few steps grows with the room it has.
 - **Space is made and unmade by life and death.** Birth makes it, and every
   B2 world starts as one; death with mending folds it, once the first
-  generation dies. Worlds without old age, without mending, or whose unused
-  links lapse keep their room.
+  generation dies — the more, the larger the ring each death closes, and the
+  rings are largest where the old do the breeding. Worlds without old age,
+  without mending, or whose unused links lapse keep their room.
 - **The three-dimensional worlds are the poor ones.** B2 with the estate to
   the newborns or the parents is a space of about three dimensions — the aim
   of [Part VI](60-worlds-of-100000-tokens.md) — but nine in ten of its
@@ -198,8 +219,9 @@ Being a space is not a matter of poverty or size.
   three-dimensional space and rich, and that keeps evolving, is still to be
   found.
 - **Open**: whether a large B2 world folds the same way (a B2 world of
-  100,000 tokens is being played), and whether it is breeding young, or
-  dying with fewer links, that unfolds a world.
+  100,000 tokens is being played), and a test of the ring itself — a world
+  that mends a death with fewer links, or whose young must do the
+  breeding.
 
 **Related notes:** [Chapter 24 · How many dimensions does a world have?](24-how-many-dimensions-does-a-world-have.md) ·
 [Chapter 7 · Physical inspiration](07-physical-inspiration.md) ·

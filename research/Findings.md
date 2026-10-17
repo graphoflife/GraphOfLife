@@ -557,7 +557,11 @@ iterations; main effects against the seed's noise from E16's ten worlds at 1,000
   death with mending folds, birth unfolds. What the estates change: who breeds (median parent age at a birth 2-3
   iterations vs 18/28 in B2; agents under 30 have 0.74-0.78 living children vs 0.30-0.38) and who dies (the old
   hold 6 links in 5.4 neighbour groups vs 8.1-8.4 in 7.6-7.8: a death closes a ring of ~8 links in B2). Estates
-  to own children change neither (parent age 26) and fold like B2 (1.18, 1.19). Cause not settled.
+  to own children change neither (parent age 26) and fold like B2 (1.18, 1.19).
+- The ring a death closes predicts folding best (research/atlas/rings.py; 319 worlds that die of age and mend;
+  groups of the dying agents' neighbours, rank correlation -0.70 vs links per agent -0.53): < 5 groups 2.04,
+  5-6 2.27, 6-7 1.34, 7-9 1.24, >= 9 1.08 (children of any size: parents 60 its old, dying hold 12-14 links).
+  Where the old breed they gather links till they die and every death closes a wide ring.
 - 352 worlds at 1,000: folded B2 kinds 1.26 (222), mixed 1.26 (77); spaces: estates 2.42 (28), lapse 3.94 (12),
   B1 rules 2.33 (13). Rank correlation of typical distance with links per agent -0.58, poor share +0.15, agents
   +0.09: not poverty, not size. No triangles anywhere in B2 kinds (0.12 common neighbours per link).

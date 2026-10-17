@@ -49,19 +49,10 @@ def _load(name: str) -> List[Dict[str, Any]]:
     return json.load(open(path)) if os.path.exists(path) else []
 
 
-def _settings(wid: str) -> Dict[str, Any]:
-    """A world's settings: a pilot's config.json, merged with its prototype's switches, or a lab run's meta."""
-    pilot = os.path.join(PILOTS, wid, "config.json")
-    if os.path.exists(pilot):
-        meta = json.load(open(pilot))
-        return {**(meta.get("cfg") or {}), **(meta.get("proto") or {})}
-    meta = os.path.join(RUNS, wid, "meta.json")
-    return (json.load(open(meta)).get("config") or {}) if os.path.exists(meta) else {}
-
-
 def _kind(wid: str) -> str:
     """What makes a world of 1,000 iterations stand out, for its colour: its estates, its links, its brains."""
-    cfg = _settings(wid)
+    import space as S  # research/atlas/space.py
+    cfg = S.settings(wid)
     if not cfg.get("mend_on_death"):
         return "B1"
     if cfg.get("redistribution") in ("newborns", "parents"):
@@ -172,7 +163,20 @@ def spaces(ch: F.Chapter) -> None:
     at = {w["id"]: w for w in json.load(open(os.path.join(ATLAS, "at1000.json")))["worlds"]}
     rows = [r for r in every if r["id"] in at]
     kinds = {r["id"]: _kind(r["id"]) for r in rows}
+    rings = {r["id"]: r for r in _load("rings_at1000.json")}
     charts = []
+    # The ring a death closes, in the worlds whose agents die of age and are mended round (research/atlas/rings.py).
+    series = []
+    for kind, name, colour in KINDS:
+        mine = [r for r in rows if kinds[r["id"]] == kind and r["id"] in rings]
+        if mine:
+            series.append({"label": None, "x": [rings[r["id"]]["ring"] for r in mine],
+                           "y": [S.typical_distance(r) for r in mine], "points": True, "size": 5, "colour": colour,
+                           "alpha": 0.8})
+    charts.append({"title": "Against the ring a death closes",
+                   "x": {"label": "groups of neighbours of the agents about to die"},
+                   "y": {"label": "typical distance, over the twin's", "log": True}, "series": series,
+                   "guides": [{"axis": "y", "at": 1.0, "label": "as the twin"}]})
     for key, label, title in (("links_per_agent", "links per agent", "Against the links per agent"),
                               ("share_at_most_three", "share of the agents with three tokens or fewer",
                                "Against the share of the poor")):
@@ -195,6 +199,17 @@ def spaces(ch: F.Chapter) -> None:
         a, b = np.argsort(np.argsort(v[ok])), np.argsort(np.argsort(distance[ok]))
         return float(np.corrcoef(a, b)[0, 1])
 
+    ringed = [r for r in rows if r["id"] in rings and np.isfinite(S.typical_distance(r))]
+    ring_v = np.array([rings[r["id"]]["ring"] for r in ringed])
+    ring_d = np.array([S.typical_distance(r) for r in ringed])
+    bins = {}
+    for lo, hi in ((0, 5), (5, 6), (6, 7), (7, 9), (9, 99)):
+        m = (ring_v >= lo) & (ring_v < hi)
+        if m.any():
+            bins[f"{lo}-{hi}"] = {"worlds": int(m.sum()), "median": float(np.median(ring_d[m]))}
+    ch.number("rings", {"worlds": len(ringed), "bins": bins,
+                        "rank_correlation": float(np.corrcoef(np.argsort(np.argsort(ring_v)),
+                                                              np.argsort(np.argsort(ring_d)))[0, 1])})
     ch.number("every", {"worlds": len(rows), "by_kind": {k: {"worlds": sum(1 for r in rows if kinds[r["id"]] == k),
                                                               "median": float(np.nanmedian([d for r, d in
                                                                                             zip(rows, distance)
@@ -202,15 +217,20 @@ def spaces(ch: F.Chapter) -> None:
                                                           for k, _, _ in KINDS},
                         "rank_correlation": {k: rank_corr(k) for k in ("links_per_agent", "share_at_most_three",
                                                                        "agents", "tokens_per_agent")}})
-    ch.grid("every", charts, columns=2, title="Every world at iteration 1,000",
+    ch.grid("every", charts, columns=1, title="Every world at iteration 1,000",
             caption=("Each dot is a world of the book read at iteration 1,000 — the pilot batches and the lab's "
-                     "B2 families at 10,000 tokens — its typical distance over its random twin's (logarithmic), "
-                     "against its links per agent (left) and the share of its agents holding three tokens or fewer "
-                     "(right). Colours: what stands out in its rules."),
+                     "B2 families at 10,000 tokens — its typical distance over its random twin's (logarithmic). "
+                     "Top, for the worlds whose agents die of age and are mended round: against the number of "
+                     "groups the neighbours of its agents within ten iterations of their death fall into — groups "
+                     "linked to one another directly, which mending joins in a ring. Middle: against its links per "
+                     "agent; bottom: against the share of its agents holding three tokens or fewer. Colours: what "
+                     "stands out in its rules."),
             recipe=recipe("Every world of `GraphOfLifeRuns/.pilots/atlas/at1000.json` (`research/atlas/at.py`): the "
                           "pilot batches K, M, P, Q, R, S, T, U, W, X and Y, and the lab's B2 families of Experiments "
                           "15 to 17.",
                           "each world's whole world kept at iteration 1,000 (`research/atlas/space.py --at 1000`, "
                           "`GraphOfLifeRuns/.pilots/atlas/space_at1000.json`)",
-                          ["Measure each world and its twin as above.", "Set its typical distance over the twin's "
-                           "against its links per agent and its share of poor agents."]))
+                          ["Measure each world and its twin as above.", "Split the neighbours of each agent within ten "
+                           "iterations of its death into groups linked directly (`research/atlas/rings.py`).",
+                           "Set its typical distance over the twin's against the mean number of groups, its links "
+                           "per agent and its share of poor agents."]))
