@@ -5,9 +5,11 @@ Every whole world Experiment 17 kept (archive/world_<t>.npz, every 500
 iterations, ten worlds) read as research/atlas/profile.py reads a world at its
 end: the seven marks of the health bar, the share of agents holding three
 tokens or fewer, the diversity spreads. Writes
-GraphOfLifeRuns/.pilots/e17_health.json.
+GraphOfLifeRuns/.pilots/e17_health.json. Experiment 18 played five of the same
+runs on to 50,000; `--seeds 2,4,5,6,10 --from 10500 --to 50000 --out
+e18_health.json` reads that span.
 
-    python3 research/oee/checks/e17_health.py [--jobs 2]
+    python3 research/oee/checks/e17_health.py [--jobs 2] [--seeds 1..10 --from 500 --to 10000 --out e17_health.json]
 """
 from __future__ import annotations
 
@@ -27,8 +29,7 @@ import numpy as np  # noqa: E402
 import profile as P  # noqa: E402  (research/atlas/profile.py)
 
 RUNS = os.path.join(ROOT, "GraphOfLifeRuns")
-OUT = os.path.join(RUNS, ".pilots", "e17_health.json")
-WORLDS = [f"B2-10000-4af4a3-s{s:03d}" for s in range(1, 11)]
+FAMILY = "B2-10000-4af4a3"
 
 
 def one(item):
@@ -42,20 +43,27 @@ def one(item):
 
 
 def main():
+    from gol_plan import parse_seeds
     ap = argparse.ArgumentParser()
     ap.add_argument("--jobs", type=int, default=2)
+    ap.add_argument("--seeds", default="1..10")
+    ap.add_argument("--from", dest="start", type=int, default=P.SETTLED)
+    ap.add_argument("--to", type=int, default=10000)
+    ap.add_argument("--out", default="e17_health.json")
     a = ap.parse_args()
-    items = [(run, path, "B2-10000-4af4a3", True)
-             for run in WORLDS for path in sorted(glob.glob(os.path.join(RUNS, run, "archive", "world_*.npz")))
-             # Experiment 17's span: a later experiment may carry the runs further.
-             if P.SETTLED <= int(os.path.basename(path)[6:12]) <= 10000]
+    worlds = [f"{FAMILY}-s{s:03d}" for s in parse_seeds(a.seeds)]
+    out = os.path.join(RUNS, ".pilots", a.out)
+    # One experiment's span of these runs: another experiment may carry them further.
+    items = [(run, path, FAMILY, True)
+             for run in worlds for path in sorted(glob.glob(os.path.join(RUNS, run, "archive", "world_*.npz")))
+             if a.start <= int(os.path.basename(path)[6:12]) <= a.to]
     print(f"{len(items)} whole worlds", flush=True)
     with ProcessPoolExecutor(max_workers=a.jobs) as pool:
         rows = [r for r in pool.map(one, items, chunksize=2) if r]
-    with open(OUT + ".tmp", "w") as f:
+    with open(out + ".tmp", "w") as f:
         json.dump(rows, f, indent=1)
-    os.replace(OUT + ".tmp", OUT)
-    for run in WORLDS:
+    os.replace(out + ".tmp", out)
+    for run in worlds:
         mine = sorted((r for r in rows if r["id"] == run), key=lambda r: r["at"])
         print(run[-4:], " ".join(f"{r['at'] // 100:>3}:{r.get('marks', '-')}" for r in mine), flush=True)
 

@@ -165,5 +165,5 @@ a smaller world gives a later brain more room to win, this batch cannot say.
 <!-- turns -->
 ---
 
-← [Chapter 80 · Mixed at birth: ten long worlds](80-mixed-at-birth-ten-long-worlds.md) · [Contents](../README.md) · [Chapter 60 · Worlds of 100,000 tokens](60-worlds-of-100000-tokens.md) →
+← [Chapter 80 · Mixed at birth: ten long worlds](80-mixed-at-birth-ten-long-worlds.md) · [Contents](../README.md) · [Chapter 82 · Brains mixed at birth, with every other rule](82-mixing-with-every-other-rule.md) →
 <!-- /turns -->

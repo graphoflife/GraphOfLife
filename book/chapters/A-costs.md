@@ -89,5 +89,5 @@ about seven hours. The thirty worlds of 100,000 tokens that
 <!-- turns -->
 ---
 
-← [Chapter 79 · Meta X · Healthy and rich](79-meta-10-healthy-and-rich.md) · [Contents](../README.md) · [Appendix B · What goes with what](B-what-goes-with-what.md) →
+← [Chapter 84 · Meta XI · What holds a world's size](84-meta-11-what-holds-a-worlds-size.md) · [Contents](../README.md) · [Appendix B · What goes with what](B-what-goes-with-what.md) →
 <!-- /turns -->

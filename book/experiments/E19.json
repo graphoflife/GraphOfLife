@@ -1,0 +1,60 @@
+{
+  "id": "E19",
+  "title": "Mixed at birth, with parents as mates",
+  "thesis": {
+    "claim": "Mixed worlds die out because a mate spreads its brain for free. When only a neighbour with a living child of its own may be a mate, a world whose brains are mixed at birth does not breed itself to death: of ten worlds played for 20,000 iterations, none dies out, and the median world ends richer than any of B2's.",
+    "why": "In Experiment 17 one mixed world of ten died out by iteration 10,000, and in Experiment 18 three of the five that had met every mark died out between 17,078 and 37,722: births fell below the one per hundred agents an iteration that replaces the dead, while a third to three quarters of the agents could have had a child. A mate passes half of its brain to a child it pays nothing for, so an agent that never breeds still spreads through other agents' children, and selection rewards keeping tokens over spending them on children (Meta XI). With only parents as mates (batch MP: four pilot worlds, seeds 1 to 4, 5,000 iterations), the agents that could have a child had one at 3.5 to 7.5 per hundred an iteration, against 2.1 to 4.3 in Experiment 17's worlds of the same seeds; each world held its size more steadily than its twin (the spread of the logarithm of its size over iterations 500 to 5,000: 0.09, 0.29, 0.25 and 0.12, against 0.19, 0.34, 0.63 and 0.47), at 760 to 2,200 agents, and 23% to 54% of its agents held three tokens or fewer at 5,000, against 66% to 79% in B2. But one pilot world fell from 2,000 agents to 900, the eagerness rose only a little, and three of the four ended poorer than their twins: the free mate may be one cause among others, and taking it away costs some riches.",
+    "confirm": "No world of the ten ends before iteration 20,000 (the lab stops a world when 20 agents or fewer are left), and at iteration 20,000 the median of the ten worlds' shares of agents holding three tokens or fewer is below 0.66 — the least of B2's ten worlds at 10,000 iterations.",
+    "refute": "A world dies out, or the median share is 0.66 or more: taking away the free mate does not keep a mixed world alive and rich."
+  },
+  "runs": {
+    "baseline": "B2",
+    "world": {
+      "total_tokens": 10000
+    },
+    "seeds": "1..10",
+    "iterations": 20000,
+    "record": {
+      "heavy_every": 25,
+      "archive_every": 500
+    },
+    "conditions": [
+      {
+        "name": "mixed at birth, parents as mates",
+        "set": {
+          "mix_at_birth": true,
+          "mix_mates": "parents"
+        }
+      }
+    ]
+  },
+  "analyse": {
+    "kind": "series",
+    "settledFrom": 1000,
+    "figures": [
+      {
+        "name": "agents",
+        "stat": "nodes",
+        "phase": 2,
+        "title": "Agents alive",
+        "y": "agents"
+      },
+      {
+        "name": "median",
+        "stat": "medianTokens",
+        "phase": 2,
+        "title": "The median agent's tokens",
+        "y": "tokens",
+        "min": 0
+      },
+      {
+        "name": "births",
+        "stat": "births/nodes_before",
+        "phase": 1,
+        "title": "Births per agent in a reproduction phase",
+        "y": "births per agent",
+        "min": 0
+      }
+    ]
+  }
+}

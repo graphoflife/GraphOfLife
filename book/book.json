@@ -417,6 +417,21 @@
           "note": "Agents that can reach past their neighbours to propose a link — by a paid jump, a scout, or a free reach: they hardly pay for a search, and the free one finds friends of friends; the network grows denser, not wider, and every searching world evolves faster than B2.",
           "file": "chapters/83-links-to-strangers.md",
           "status": "analysed"
+        },
+        {
+          "id": "82",
+          "title": "Brains mixed at birth, with every other rule",
+          "note": "Mixing combined with 23 other rules (batch Y): it keeps its riches with sixteen, loses them to the rules that pay for or replace births, raises diversity nearly everywhere, and evolution goes on with nearly every one.",
+          "file": "chapters/82-mixing-with-every-other-rule.md",
+          "status": "analysed"
+        },
+        {
+          "id": "85",
+          "title": "Mixed at birth, with parents as mates",
+          "note": "Experiment 19: if only an agent with a living child may be a mate, does a mixed world stop breeding itself to death? Ten worlds for 20,000 iterations.",
+          "file": "chapters/85-mixed-at-birth-with-parents-as-mates.md",
+          "experiment": "E19",
+          "status": "ready"
         }
       ]
     },
@@ -485,10 +500,10 @@
         {
           "id": "81",
           "title": "Five mixed worlds, fifty thousand iterations",
-          "note": "The five worlds of Experiment 17 that met every mark of the health bar, played on to 50,000 iterations: is a mixed world's health and riches a state it keeps, or one its drifting size passes through?",
+          "note": "The five worlds of Experiment 17 that met every mark, played on to 50,000 iterations: three died out, the two that lived grew larger and poorer, and evolution faded — a mixed world is mortal.",
           "file": "chapters/81-five-mixed-worlds-fifty-thousand-iterations.md",
           "experiment": "E18",
-          "status": "ready"
+          "status": "analysed"
         }
       ]
     },
@@ -525,6 +540,13 @@
           "title": "Meta X · Healthy and rich",
           "note": "Every world against the author's picture of one that might keep evolving: a decentralised, resilient, nearly three-dimensional network and agents that differ in almost everything. B1's worlds are rich but fragile, B2's healthy but poor; brains mixed at birth come closest.",
           "file": "chapters/79-meta-10-healthy-and-rich.md"
+        },
+        {
+          "id": "84",
+          "title": "Meta XI · What holds a world's size",
+          "note": "Why B2's worlds are poor and the mixed ones rich and mortal: births must match deaths, so how eagerly agents breed sets a world's size, and its riches and health with it; the rules tried to hold a world rich and steady, and what is left to try.",
+          "file": "chapters/84-meta-11-what-holds-a-worlds-size.md",
+          "status": "analysed"
         }
       ]
     },

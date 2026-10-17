@@ -24,11 +24,13 @@ import glob
 import json
 import os
 import re
+import sys
 from typing import Dict, List
 
 import numpy as np
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+sys.path.insert(0, ROOT)
 RUNS = os.path.join(ROOT, "GraphOfLifeRuns")
 PILOTS = os.path.join(RUNS, ".pilots")
 OUT = os.path.join(PILOTS, "e17_breeding.json")
@@ -76,10 +78,10 @@ def _kept(pattern: str, every: int, start: int = 1) -> Dict[int, str]:
     return {t: p for t, p in found.items() if t >= start and t % every == 0}
 
 
-def mixed(run: str) -> List[Dict[str, float]]:
-    """One of Experiment 17's worlds, to its end at 10,000 (a later experiment may carry the run further)."""
-    worlds = _kept(os.path.join(RUNS, run, "archive", "world_*.npz"), 500)
-    return rows({t: p for t, p in worlds.items() if t < 10000}, lab_births(run))
+def mixed(run: str, start: int = 1, end: int = 10000) -> List[Dict[str, float]]:
+    """One of these runs from `start` to `end` — Experiment 17's span unless told otherwise."""
+    worlds = _kept(os.path.join(RUNS, run, "archive", "world_*.npz"), 500, start)
+    return rows({t: p for t, p in worlds.items() if t < end}, lab_births(run))
 
 
 def b2(seed: int) -> List[Dict[str, float]]:
@@ -97,13 +99,28 @@ def switched(d: str) -> List[Dict[str, float]]:
 
 
 def main():
-    out = {"mixed": {run: mixed(run) for run in MIXED}, "B2": {f"B2-10000-s{s:03d}": b2(s) for s in range(1, 11)},
-           "switched": {os.path.basename(d): switched(d) for d in sorted(glob.glob(os.path.join(PILOTS, "SW", "*")))
-                        if os.path.exists(os.path.join(d, "series.jsonl"))}}
-    with open(OUT + ".tmp", "w") as f:
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--seeds", default="", help="another span of these runs only, e.g. Experiment 18's: "
+                                               "--seeds 2,4,5,6,10 --from 10000 --to 50000 --out e18_breeding.json")
+    ap.add_argument("--from", dest="start", type=int, default=1)
+    ap.add_argument("--to", type=int, default=10000)
+    ap.add_argument("--out", default=OUT)
+    a = ap.parse_args()
+    if a.seeds:
+        from gol_plan import parse_seeds
+        out = {"mixed": {f"B2-10000-4af4a3-s{s:03d}": mixed(f"B2-10000-4af4a3-s{s:03d}", a.start, a.to)
+                         for s in parse_seeds(a.seeds)}}
+    else:
+        out = {"mixed": {run: mixed(run) for run in MIXED}, "B2": {f"B2-10000-s{s:03d}": b2(s) for s in range(1, 11)},
+               "switched": {os.path.basename(d): switched(d)
+                            for d in sorted(glob.glob(os.path.join(PILOTS, "SW", "*")))
+                            if os.path.exists(os.path.join(d, "series.jsonl"))}}
+    path = os.path.join(PILOTS, os.path.basename(a.out))
+    with open(path + ".tmp", "w") as f:
         json.dump(out, f, indent=1)
-    os.replace(OUT + ".tmp", OUT)
-    for kind in ("mixed", "B2", "switched"):
+    os.replace(path + ".tmp", path)
+    for kind in out:
         print(kind, "— iteration/100: agents / share able / births per 100 able per iteration")
         for name, rs in out[kind].items():
             print(f"  {name[-12:]:>12}", " ".join(f"{r['at'] // 100:>3}:{r['agents']:5d}/{r['able'] / r['agents']:.2f}/"

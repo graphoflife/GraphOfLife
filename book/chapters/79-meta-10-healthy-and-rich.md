@@ -133,6 +133,18 @@ eleven of the lab's B2 worlds at 10,000, nine of them without old age
 book's rule of 10,000; and twenty-five pilot worlds built on B2, two of them
 long runs.
 
+> [!info] Added later (2026-10-17, counted again)
+> With batches K, M, R, SW and Y in the count, and the two pilot worlds that
+> turned out to be Experiment 17's worlds counted once, 99 worlds of 624 meet
+> all seven marks: 26 of the lab's B2 worlds (nine without old age, fifteen of
+> B2 or its variants at 5,000 tokens, one of B2 itself, one whose brains
+> rarely change), 67 pilot worlds built on B2 — 28 of them with brains mixed
+> at birth and one other rule (batch Y,
+> [Chapter 82](82-mixing-with-every-other-rule.md)), 12 of batch W — five
+> alliance pilots of B1, four of them at 3,000 tokens, and one long run. The closest of all are now
+> brains mixed at birth with a faster change of brains (diversity 0.79 and 0.78,
+> about 40% of the agents at three tokens or fewer).
+
 > [!info] Added later (2026-10-16, the same day)
 > This section first counted 34 worlds. A world's dimension was then taken from
 > the table of every world, as a mean over the stretch at its end; it is now
@@ -157,18 +169,18 @@ are:
 <!-- table healthy/closest -->
 | world | group | at iteration | marks (of 7) | diversity score | median tokens | agents with 3 tokens or fewer | dimension | agents |
 |---|---|---|---|---|---|---|---|---|
-| `W/norev-mix-s1` | B2 pil. | 1,000 | 7 | 0.69 | 2 | 67% | 3.7 | 2,245 |
-| `Q/mix-s1` | B2 pil. | 2,000 | 7 | 0.63 | 5 | 37% | 3.5 | 908 |
-| `B2-5000-d6b607-s006` | B2 5k | 1,000 | 7 | 0.62 | 1 | 71% | 3.0 | 1,158 |
-| `B2-5000-s001` | B2 5k | 1,075 | 7 | 0.61 | 2 | 74% | 4.0 | 1,518 |
-| `W/norev-linktoken-s1` | B2 pil. | 1,000 | 7 | 0.60 | 5 | 42% | 4.0 | 921 |
-| `LC/Q-mix-s2` | long runs | 7,500 | 7 | 0.59 | 8 | 19% | 3.9 | 883 |
-| `A3k/gain-s1` | B1 pil. | 1,000 | 7 | 0.58 | 2 | 70% | 3.6 | 804 |
-| `Y/mix-poorest-s1` | B2 pil. | 1,000 | 7 | 0.57 | 3 | 51% | 3.4 | 1,455 |
-| `A3k/ctrl-s2` | B1 pil. | 1,000 | 7 | 0.57 | 2 | 65% | 3.9 | 779 |
-| `B2-5000-28aef0-s006` | B2 5k | 1,000 | 7 | 0.56 | 1 | 75% | 3.9 | 1,564 |
-| `Q/mix-s2` | B2 pil. | 2,000 | 7 | 0.55 | 11 | 20% | 3.5 | 659 |
-| `B2-5000-28aef0-s003` | B2 5k | 1,000 | 7 | 0.53 | 1 | 78% | 3.8 | 1,736 |
+| `Y/mix-mut80-s2` | B2 pil. | 1,000 | 7 | 0.79 | 5 | 36% | 3.8 | 1,238 |
+| `Y/mix-mut80-s1` | B2 pil. | 1,000 | 7 | 0.78 | 5 | 41% | 3.8 | 1,299 |
+| `Y/mix-keepone-s2` | B2 pil. | 1,000 | 7 | 0.70 | 1 | 77% | 3.4 | 1,537 |
+| `Y/mix-kinsense-s2` | B2 pil. | 1,000 | 7 | 0.70 | 8 | 32% | 3.7 | 821 |
+| `U/U-BDFG-s1` | B2 pil. | 1,000 | 7 | 0.68 | 8 | 25% | 3.7 | 652 |
+| `W/norev-mix-s1` | B2 pil. | 1,000 | 7 | 0.68 | 2 | 67% | 3.7 | 2,245 |
+| `Y/mix-linktoken-s1` | B2 pil. | 1,000 | 7 | 0.66 | 8 | 36% | 3.4 | 588 |
+| `Y/mix-came-s2` | B2 pil. | 1,000 | 7 | 0.66 | 3 | 53% | 3.7 | 1,521 |
+| `M/mix-children-s2` | B2 pil. | 5,000 | 7 | 0.65 | 10 | 23% | 3.3 | 486 |
+| `Y/mix-grow-s1` | B2 pil. | 1,000 | 7 | 0.65 | 12 | 23% | 3.3 | 366 |
+| `Y/mix-helped-s1` | B2 pil. | 1,000 | 7 | 0.63 | 5 | 38% | 3.7 | 1,075 |
+| `Y/mix-nodice-s2` | B2 pil. | 1,000 | 7 | 0.63 | 3 | 53% | 3.5 | 1,468 |
 <!-- /table -->
 
 The closest are worlds whose **brains are mixed at birth**
@@ -203,12 +215,14 @@ each was chosen, and where it is now:
 <!-- table healthy/long -->
 | world | group | at iteration | marks (of 7) | diversity score | median tokens | agents with 3 tokens or fewer | dimension | agents |
 |---|---|---|---|---|---|---|---|---|
-| `Q/mix-s1` | B2 pil. | 2,000 | 7 | 0.63 | 5 | 37% | 3.5 | 908 |
-| `LC/Q-mix-s1` | long runs | 5,500 | 7 | 0.51 | 6 | 38% | 3.8 | 1,037 |
-| `Q/mix-s2` | B2 pil. | 2,000 | 7 | 0.55 | 11 | 20% | 3.5 | 659 |
-| `LC/Q-mix-s2` | long runs | 7,500 | 7 | 0.59 | 8 | 19% | 3.9 | 883 |
 | `S/G4-familysense-s2` | B2 pil. | 1,000 | 7 | 0.53 | 1 | 74% | 4.0 | 2,935 |
-| `LC/S-G4-familysense-s2` | long runs | 2,000 | 6 | 0.50 | 2 | 72% | 4.3 | 3,192 |
+| `LC/S-G4-familysense-s2` | long runs | 10,000 | 6 | 0.51 | 2 | 69% | 4.5 | 3,097 |
+| `W/norev-linktoken-s1` | B2 pil. | 1,000 | 7 | 0.59 | 5 | 42% | 4.0 | 921 |
+| `LC/W-norev-linktoken-s1` | long runs | 10,000 | 6 | 0.45 | 3 | 51% | 4.1 | 1,359 |
+| `W/norev-mix-s1` | B2 pil. | 1,000 | 7 | 0.68 | 2 | 67% | 3.7 | 2,245 |
+| `LC/W-norev-mix-s1` | long runs | 10,000 | 6 | 0.61 | 2 | 64% | 4.1 | 2,221 |
+| `Y/mix-poorest-s1` | B2 pil. | 1,000 | 7 | 0.57 | 3 | 51% | 3.4 | 1,455 |
+| `LC/Y-mix-poorest-s1` | long runs | 10,000 | 7 | 0.28 | 1 | 69% | 3.2 | 2,288 |
 <!-- /table -->
 
 The two mixed worlds go on healthy, and richer than B2's. One swung towards
@@ -220,6 +234,18 @@ agents, 19% at three tokens or fewer, the median holding eight, every mark met
 at a dimension of 3.9. The world with an eye for a family tag has fallen back:
 at 2,000 iterations 72% of its agents hold three tokens or fewer, as in B2, and
 a dimension of 4.3 has cost it a mark.
+
+> [!info] Added later (2026-10-17, the long runs at 10,000)
+> The two mixed worlds of batch Q are Experiment 17's worlds of seeds 1 and 2,
+> agent for agent, and are read there now
+> ([Chapter 80](80-mixed-at-birth-ten-long-worlds.md)): at 10,000 iterations
+> one held 2,221 agents, 65% at three tokens or fewer, and the other 744, 6%.
+> The four other candidates all reached 10,000, and none held everything it
+> had at 1,000: three lost a mark as they grew — their dimension rose above 4,
+> at 1,359 to 3,097 agents — and the fourth, mixing with the estate to the
+> poorest, kept every mark but grew poor and alike (a diversity score of 0.28,
+> 69% at three tokens or fewer). Nineteen new candidates, most of them mixed
+> worlds of batch Y, are being played on to 10,000.
 
 The long runs are planned in three steps:
 
@@ -285,5 +311,5 @@ drawn at random, the values that make worlds worse dropped round after round,
 <!-- turns -->
 ---
 
-← [Chapter 77 · Meta IX · How alike the agents are](77-meta-9-how-alike.md) · [Contents](../README.md) · [Appendix A · What a simulation costs](A-costs.md) →
+← [Chapter 77 · Meta IX · How alike the agents are](77-meta-9-how-alike.md) · [Contents](../README.md) · [Chapter 84 · Meta XI · What holds a world's size](84-meta-11-what-holds-a-worlds-size.md) →
 <!-- /turns -->

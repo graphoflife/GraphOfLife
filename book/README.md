@@ -108,6 +108,8 @@ everything can be checked with it.
 - [Chapter 78 · Brains mixed at birth, units that cost, an eye for raids on kin](chapters/78-mixed-brains-costly-units.md)
 - [Chapter 80 · Mixed at birth: ten long worlds](chapters/80-mixed-at-birth-ten-long-worlds.md)
 - [Chapter 83 · Links to strangers](chapters/83-links-to-strangers.md)
+- [Chapter 82 · Brains mixed at birth, with every other rule](chapters/82-mixing-with-every-other-rule.md)
+- [Chapter 85 · Mixed at birth, with parents as mates](chapters/85-mixed-at-birth-with-parents-as-mates.md)
 
 **Part VI · Towards a physics: space, scale and locality**
 
@@ -133,6 +135,7 @@ everything can be checked with it.
 - [Chapter 76 · Meta VIII · Who helps whom](chapters/76-meta-8-who-helps-whom.md)
 - [Chapter 77 · Meta IX · How alike the agents are](chapters/77-meta-9-how-alike.md)
 - [Chapter 79 · Meta X · Healthy and rich](chapters/79-meta-10-healthy-and-rich.md)
+- [Chapter 84 · Meta XI · What holds a world's size](chapters/84-meta-11-what-holds-a-worlds-size.md)
 
 **Notes · the rules**
 

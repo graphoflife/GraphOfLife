@@ -1,0 +1,1003 @@
+{
+ "chapter": "mixcombos",
+ "numbers": {
+  "evolution": {
+   "worlds": {
+    "T/gifts-came-s1": 0.836571709147168,
+    "T/gifts-linktoken-s1": 0.6142481175802956,
+    "T/gifts-mix-s1": 0.9066991915519109,
+    "T/gifts-newborns-s1": 0.5467747174980844,
+    "T/gifts-parents-s1": 0.57443680051188,
+    "W/norev-bytokens-s1": 0.6150584685965044,
+    "T/handover-s1": 0.6323838080959521,
+    "W/norev-linktoken-s1": 0.648640251932032,
+    "W/norev-mix-s1": 0.7695809947803138,
+    "W/norev-newborns-s1": 0.5019090936520336,
+    "W/norev-parents-s1": 0.6620362229646563,
+    "W/norev-poorest-s1": 0.7881278284569285,
+    "X/handover-bytokens-s1": 0.5223773685930402,
+    "X/handover-linktoken-s1": 0.6457829860108484,
+    "X/handover-mix-s1": 0.46524355239711046,
+    "X/handover-parents-s1": 0.5723611460645024,
+    "Y/mix-bytokens-s1": 0.6549198543862413,
+    "Y/mix-poorest-s1": 0.894563923545844,
+    "Y/mix-anychild-s1": 0.6380543652653673,
+    "Y/mix-anychild-s2": 0.6089526469003652,
+    "Y/mix-bytokens-s2": 0.5893102500687002,
+    "Y/mix-came-s1": 0.8034799278818723,
+    "Y/mix-came-s2": 0.5942959029950592,
+    "Y/mix-familypool-s1": 0.7127930197048776,
+    "Y/mix-familypool-s2": 0.3494893003645017,
+    "Y/mix-familysense-s1": 0.7084145021645021,
+    "Y/mix-familysense-s2": 0.8326615831517792,
+    "Y/mix-grow-s1": 0.8896708062290557,
+    "Y/mix-grow-s2": 0.7659132508735926,
+    "Y/mix-handover-s1": 0.46524355239711046,
+    "Y/mix-handover-s2": 0.691336332273953,
+    "Y/mix-helped-s1": 0.8445575250873453,
+    "Y/mix-helped-s2": 0.789332784184514,
+    "Y/mix-keephalf-s1": 0.806392690138908,
+    "Y/mix-keephalf-s2": 0.9148649902281428,
+    "Y/mix-keepone-s1": 0.5592450951825952,
+    "Y/mix-keepone-s2": 0.5142579202492277,
+    "Y/mix-kinsense-s1": 0.7533601879486973,
+    "Y/mix-kinsense-s2": 0.8203255754425345,
+    "Y/mix-lapse-s1": 0.5123298320280765,
+    "Y/mix-lapse-s2": 0.621432010116761,
+    "Y/mix-linktoken-s1": 0.824199875797095,
+    "Y/mix-linktoken-s2": 0.9314722135335209,
+    "Y/mix-lottery-s1": 0.6924718937189454,
+    "Y/mix-lottery-s2": 0.609451422854602,
+    "Y/mix-mut05-s1": 0.767887909192257,
+    "Y/mix-mut05-s2": 0.46983883248141806,
+    "Y/mix-mut80-s1": 0.7611876008165246,
+    "Y/mix-mut80-s2": 0.637361977484045,
+    "Y/mix-newborns-s1": 0.6989038444485021,
+    "Y/mix-newborns-s2": 0.5332334955155235,
+    "Y/mix-noage-s1": 0.5440699137647376,
+    "Y/mix-noage-s2": 0.5657009433835305,
+    "Y/mix-nodice-s1": 0.6365728117892722,
+    "Y/mix-nodice-s2": 0.49864612765340866,
+    "Y/mix-parents-s1": 0.553741172539894,
+    "Y/mix-parents-s2": 0.500874551637891,
+    "Y/mix-pool-s1": 0.7321335044257058,
+    "Y/mix-pool-s2": 0.7427872847156372,
+    "Y/mix-poorest-s2": 0.5625289350133479,
+    "Y/mix-unittoken-s1": 0.9010806536636795,
+    "Y/mix-unittoken-s2": 0.8124352465253447
+   },
+   "b2_median": 0.6819306236881428,
+   "mixing_median": 0.8351108779611284
+  },
+  "rows": [
+   {
+    "rule": "lapse",
+    "alone": {
+     "share_at_most_three": [
+      0.008921933085501859,
+      0.08798882681564246
+     ],
+     "diversity": [
+      0.28297682709447414,
+      0.21880570409982178
+     ],
+     "marks": [
+      4.0,
+      4.0
+     ],
+     "agents": [
+      1345.0,
+      1432.0
+     ]
+    },
+    "with_mixing": {
+     "share_at_most_three": [
+      0.05636896046852123,
+      0.0350140056022409
+     ],
+     "diversity": [
+      0.39884135472370763,
+      0.4598930481283423
+     ],
+     "marks": [
+      5.0,
+      4.0
+     ],
+     "agents": [
+      1366.0,
+      1428.0
+     ]
+    }
+   },
+   {
+    "rule": "familysense",
+    "alone": {
+     "share_at_most_three": [
+      0.6916239316239317
+     ],
+     "diversity": [
+      0.4737076648841355
+     ],
+     "marks": [
+      6.0
+     ],
+     "agents": [
+      2925.0
+     ]
+    },
+    "with_mixing": {
+     "share_at_most_three": [
+      0.19801980198019803,
+      0.15925925925925927
+     ],
+     "diversity": [
+      0.5218360071301248,
+      0.7036541889483066
+     ],
+     "marks": [
+      7.0,
+      6.0
+     ],
+     "agents": [
+      707.0,
+      270.0
+     ]
+    }
+   },
+   {
+    "rule": "helped",
+    "alone": {
+     "share_at_most_three": [
+      0.7289808917197452,
+      0.6920178143199726
+     ],
+     "diversity": [
+      0.5459001782531194,
+      0.6541889483065955
+     ],
+     "marks": [
+      6.0,
+      6.0
+     ],
+     "agents": [
+      3140.0,
+      2919.0
+     ]
+    },
+    "with_mixing": {
+     "share_at_most_three": [
+      0.3776744186046512,
+      0.14798206278026907
+     ],
+     "diversity": [
+      0.6350267379679144,
+      0.5102495543672014
+     ],
+     "marks": [
+      7.0,
+      7.0
+     ],
+     "agents": [
+      1075.0,
+      669.0
+     ]
+    }
+   },
+   {
+    "rule": "nodice",
+    "alone": {
+     "share_at_most_three": [
+      0.7332028701891715,
+      0.7205128205128205
+     ],
+     "diversity": [
+      0.499554367201426,
+      0.5655080213903744
+     ],
+     "marks": [
+      7.0,
+      6.0
+     ],
+     "agents": [
+      3066.0,
+      3120.0
+     ]
+    },
+    "with_mixing": {
+     "share_at_most_three": [
+      0.020618556701030927,
+      0.5313351498637602
+     ],
+     "diversity": [
+      0.6011586452762923,
+      0.6287878787878789
+     ],
+     "marks": [
+      6.0,
+      7.0
+     ],
+     "agents": [
+      291.0,
+      1468.0
+     ]
+    }
+   },
+   {
+    "rule": "grow",
+    "alone": {
+     "share_at_most_three": [
+      0.7033492822966507,
+      0.7277263007840342
+     ],
+     "diversity": [
+      0.5588235294117647,
+      0.5102495543672014
+     ],
+     "marks": [
+      6.0,
+      6.0
+     ],
+     "agents": [
+      3135.0,
+      2806.0
+     ]
+    },
+    "with_mixing": {
+     "share_at_most_three": [
+      0.23497267759562843,
+      0.3333333333333333
+     ],
+     "diversity": [
+      0.6439393939393939,
+      0.5940285204991087
+     ],
+     "marks": [
+      7.0,
+      6.0
+     ],
+     "agents": [
+      366.0,
+      945.0
+     ]
+    }
+   },
+   {
+    "rule": "unittoken",
+    "alone": {
+     "share_at_most_three": [
+      0.5997490589711418,
+      0.49081803005008345
+     ],
+     "diversity": [
+      0.5797682709447416,
+      0.5245098039215687
+     ],
+     "marks": [
+      7.0,
+      7.0
+     ],
+     "agents": [
+      1594.0,
+      1198.0
+     ]
+    },
+    "with_mixing": {
+     "share_at_most_three": [
+      0.16,
+      0.42610364683301344
+     ],
+     "diversity": [
+      0.535204991087344,
+      0.5294117647058824
+     ],
+     "marks": [
+      6.0,
+      7.0
+     ],
+     "agents": [
+      325.0,
+      521.0
+     ]
+    }
+   },
+   {
+    "rule": "linktoken",
+    "alone": {
+     "share_at_most_three": [
+      0.4781834372217275,
+      0.43302752293577984
+     ],
+     "diversity": [
+      0.535650623885918,
+      0.5561497326203209
+     ],
+     "marks": [
+      6.0,
+      6.0
+     ],
+     "agents": [
+      1123.0,
+      1090.0
+     ]
+    },
+    "with_mixing": {
+     "share_at_most_three": [
+      0.3554421768707483,
+      0.2814814814814815
+     ],
+     "diversity": [
+      0.6595365418894831,
+      0.5066844919786095
+     ],
+     "marks": [
+      7.0,
+      7.0
+     ],
+     "agents": [
+      588.0,
+      405.0
+     ]
+    }
+   },
+   {
+    "rule": "lottery",
+    "alone": {
+     "share_at_most_three": [
+      0.8069815195071869
+     ],
+     "diversity": [
+      0.4206773618538324
+     ],
+     "marks": [
+      6.0
+     ],
+     "agents": [
+      3896.0
+     ]
+    },
+    "with_mixing": {
+     "share_at_most_three": [
+      0.34,
+      0.3227792436235708
+     ],
+     "diversity": [
+      0.6212121212121212,
+      0.5365418894830659
+     ],
+     "marks": [
+      6.0,
+      7.0
+     ],
+     "agents": [
+      1450.0,
+      1137.0
+     ]
+    }
+   },
+   {
+    "rule": "keephalf",
+    "alone": {
+     "share_at_most_three": [
+      0.7173845677099473,
+      0.6831716293074607
+     ],
+     "diversity": [
+      0.410873440285205,
+      0.3934937611408199
+     ],
+     "marks": [
+      6.0,
+      6.0
+     ],
+     "agents": [
+      3227.0,
+      2989.0
+     ]
+    },
+    "with_mixing": {
+     "share_at_most_three": [
+      0.4529008109794136,
+      0.23587570621468926
+     ],
+     "diversity": [
+      0.6515151515151515,
+      0.48573975044563283
+     ],
+     "marks": [
+      6.0,
+      6.0
+     ],
+     "agents": [
+      1603.0,
+      1416.0
+     ]
+    }
+   },
+   {
+    "rule": "mut80",
+    "alone": {
+     "share_at_most_three": [
+      0.6604754829123328,
+      0.7129501385041551
+     ],
+     "diversity": [
+      0.6836007130124777,
+      0.6524064171122994
+     ],
+     "marks": [
+      6.0,
+      6.0
+     ],
+     "agents": [
+      2692.0,
+      2888.0
+     ]
+    },
+    "with_mixing": {
+     "share_at_most_three": [
+      0.4133949191685912,
+      0.35864297253634897
+     ],
+     "diversity": [
+      0.7745098039215685,
+      0.7923351158645277
+     ],
+     "marks": [
+      7.0,
+      7.0
+     ],
+     "agents": [
+      1299.0,
+      1238.0
+     ]
+    }
+   },
+   {
+    "rule": "kinsense",
+    "alone": {
+     "share_at_most_three": [
+      0.7460774895933397
+     ],
+     "diversity": [
+      0.5080213903743316
+     ],
+     "marks": [
+      6.0
+     ],
+     "agents": [
+      3123.0
+     ]
+    },
+    "with_mixing": {
+     "share_at_most_three": [
+      0.4884526558891455,
+      0.31790499390986604
+     ],
+     "diversity": [
+      0.5040106951871658,
+      0.6911764705882353
+     ],
+     "marks": [
+      7.0,
+      7.0
+     ],
+     "agents": [
+      866.0,
+      821.0
+     ]
+    }
+   },
+   {
+    "rule": "pool",
+    "alone": {
+     "share_at_most_three": [
+      0.7850986933555741
+     ],
+     "diversity": [
+      0.35739750445632795
+     ],
+     "marks": [
+      6.0
+     ],
+     "agents": [
+      3597.0
+     ]
+    },
+    "with_mixing": {
+     "share_at_most_three": [
+      0.34068627450980393,
+      0.5630787037037037
+     ],
+     "diversity": [
+      0.6314616755793226,
+      0.44964349376114077
+     ],
+     "marks": [
+      7.0,
+      7.0
+     ],
+     "agents": [
+      816.0,
+      1728.0
+     ]
+    }
+   },
+   {
+    "rule": "came",
+    "alone": {
+     "share_at_most_three": [
+      0.7597902097902098,
+      0.7815315315315315
+     ],
+     "diversity": [
+      0.48930481283422456,
+      0.5013368983957219
+     ],
+     "marks": [
+      6.0,
+      6.0
+     ],
+     "agents": [
+      2860.0,
+      3552.0
+     ]
+    },
+    "with_mixing": {
+     "share_at_most_three": [
+      0.48364485981308414,
+      0.5332018408941486
+     ],
+     "diversity": [
+      0.5231729055258467,
+      0.6595365418894831
+     ],
+     "marks": [
+      7.0,
+      7.0
+     ],
+     "agents": [
+      1284.0,
+      1521.0
+     ]
+    }
+   },
+   {
+    "rule": "bytokens",
+    "alone": {
+     "share_at_most_three": [
+      0.6780669144981413,
+      0.7731497418244406
+     ],
+     "diversity": [
+      0.6105169340463458,
+      0.3890374331550802
+     ],
+     "marks": [
+      6.0,
+      6.0
+     ],
+     "agents": [
+      2690.0,
+      2905.0
+     ]
+    },
+    "with_mixing": {
+     "share_at_most_three": [
+      0.3101123595505618,
+      0.714872637633525
+     ],
+     "diversity": [
+      0.5418894830659536,
+      0.43226381461675584
+     ],
+     "marks": [
+      6.0,
+      7.0
+     ],
+     "agents": [
+      445.0,
+      1217.0
+     ]
+    }
+   },
+   {
+    "rule": "mut05",
+    "alone": {
+     "share_at_most_three": [
+      0.7852368497529788,
+      0.7761235180590019
+     ],
+     "diversity": [
+      0.22147950089126558,
+      0.29901960784313725
+     ],
+     "marks": [
+      6.0,
+      6.0
+     ],
+     "agents": [
+      3441.0,
+      3627.0
+     ]
+    },
+    "with_mixing": {
+     "share_at_most_three": [
+      0.4396617986164489,
+      0.8080433542498574
+     ],
+     "diversity": [
+      0.4754901960784314,
+      0.21791443850267378
+     ],
+     "marks": [
+      7.0,
+      7.0
+     ],
+     "agents": [
+      1301.0,
+      3506.0
+     ]
+    }
+   },
+   {
+    "rule": "poorest",
+    "alone": {
+     "share_at_most_three": [
+      0.7887723277573008,
+      0.8232452401250355
+     ],
+     "diversity": [
+      0.4603386809269162,
+      0.4590017825311943
+     ],
+     "marks": [
+      6.0,
+      6.0
+     ],
+     "agents": [
+      3527.0,
+      3519.0
+     ]
+    },
+    "with_mixing": {
+     "share_at_most_three": [
+      0.5099656357388316,
+      0.8201694452036076
+     ],
+     "diversity": [
+      0.5744206773618539,
+      0.39215686274509803
+     ],
+     "marks": [
+      7.0,
+      6.0
+     ],
+     "agents": [
+      1455.0,
+      3659.0
+     ]
+    }
+   },
+   {
+    "rule": "handover",
+    "alone": {
+     "share_at_most_three": [
+      0.7756628144119646
+     ],
+     "diversity": [
+      0.5592691622103387
+     ],
+     "marks": [
+      3.0
+     ],
+     "agents": [
+      2942.0
+     ]
+    },
+    "with_mixing": {
+     "share_at_most_three": [
+      0.7605764760576476,
+      0.7261652542372882
+     ],
+     "diversity": [
+      0.5601604278074866,
+      0.6666666666666667
+     ],
+     "marks": [
+      3.0,
+      3.0
+     ],
+     "agents": [
+      2151.0,
+      1888.0
+     ]
+    }
+   },
+   {
+    "rule": "keepone",
+    "alone": {
+     "share_at_most_three": [
+      0.8326753720012147,
+      0.8732063657709366
+     ],
+     "diversity": [
+      0.4523172905525846,
+      0.40418894830659535
+     ],
+     "marks": [
+      6.0,
+      6.0
+     ],
+     "agents": [
+      3293.0,
+      3833.0
+     ]
+    },
+    "with_mixing": {
+     "share_at_most_three": [
+      0.7906197654941374,
+      0.7722836694860117
+     ],
+     "diversity": [
+      0.6131907308377896,
+      0.6974153297682709
+     ],
+     "marks": [
+      7.0,
+      7.0
+     ],
+     "agents": [
+      1791.0,
+      1537.0
+     ]
+    }
+   },
+   {
+    "rule": "familypool",
+    "alone": {
+     "share_at_most_three": [
+      0.8109830840892376
+     ],
+     "diversity": [
+      0.2874331550802139
+     ],
+     "marks": [
+      6.0
+     ],
+     "agents": [
+      4079.0
+     ]
+    },
+    "with_mixing": {
+     "share_at_most_three": [
+      0.8176284392500609,
+      0.817900365887982
+     ],
+     "diversity": [
+      0.5013368983957219,
+      0.42647058823529416
+     ],
+     "marks": [
+      6.0,
+      6.0
+     ],
+     "agents": [
+      4107.0,
+      3553.0
+     ]
+    }
+   },
+   {
+    "rule": "noage",
+    "alone": {
+     "share_at_most_three": [
+      0.9279255319148936,
+      0.9381793478260869
+     ],
+     "diversity": [
+      0.232174688057041,
+      0.25267379679144386
+     ],
+     "marks": [
+      7.0,
+      7.0
+     ],
+     "agents": [
+      3760.0,
+      4416.0
+     ]
+    },
+    "with_mixing": {
+     "share_at_most_three": [
+      0.8622862286228623,
+      0.8915547024952015
+     ],
+     "diversity": [
+      0.31506238859180036,
+      0.30213903743315507
+     ],
+     "marks": [
+      7.0,
+      6.0
+     ],
+     "agents": [
+      2222.0,
+      2084.0
+     ]
+    }
+   },
+   {
+    "rule": "parents",
+    "alone": {
+     "share_at_most_three": [
+      0.9202578268876611,
+      0.9015414258188824
+     ],
+     "diversity": [
+      0.24019607843137253,
+      0.21746880570409982
+     ],
+     "marks": [
+      7.0,
+      7.0
+     ],
+     "agents": [
+      5430.0,
+      5190.0
+     ]
+    },
+    "with_mixing": {
+     "share_at_most_three": [
+      0.8894923751827867,
+      0.8808851224105462
+     ],
+     "diversity": [
+      0.3493761140819964,
+      0.39928698752228164
+     ],
+     "marks": [
+      7.0,
+      7.0
+     ],
+     "agents": [
+      4787.0,
+      4248.0
+     ]
+    }
+   },
+   {
+    "rule": "newborns",
+    "alone": {
+     "share_at_most_three": [
+      0.9041041041041041,
+      0.9081556303778526
+     ],
+     "diversity": [
+      0.28342245989304815,
+      0.2918894830659537
+     ],
+     "marks": [
+      7.0,
+      6.0
+     ],
+     "agents": [
+      4995.0,
+      5346.0
+     ]
+    },
+    "with_mixing": {
+     "share_at_most_three": [
+      0.9103893562903541,
+      0.90300736904999
+     ],
+     "diversity": [
+      0.3961675579322638,
+      0.36942959001782527
+     ],
+     "marks": [
+      7.0,
+      7.0
+     ],
+     "agents": [
+      5111.0,
+      5021.0
+     ]
+    }
+   },
+   {
+    "rule": "anychild",
+    "alone": {
+     "share_at_most_three": [
+      0.9997938569367141,
+      0.999489900020404
+     ],
+     "diversity": [
+      0.2450980392156863,
+      0.2464349376114082
+     ],
+     "marks": [
+      6.0,
+      6.0
+     ],
+     "agents": [
+      9702.0,
+      9802.0
+     ]
+    },
+    "with_mixing": {
+     "share_at_most_three": [
+      0.9061346458076991,
+      0.9402043269230769
+     ],
+     "diversity": [
+      0.587344028520499,
+      0.4830659536541889
+     ],
+     "marks": [
+      6.0,
+      6.0
+     ],
+     "agents": [
+      5689.0,
+      6656.0
+     ]
+    }
+   }
+  ],
+  "references": {
+   "B2": {
+    "share_at_most_three": [
+     0.7701500833796554,
+     0.762198706643151
+    ],
+    "diversity": [
+     0.5057932263814616,
+     0.41131907308377896
+    ],
+    "marks": [
+     6.0,
+     6.0
+    ],
+    "agents": [
+     3598.0,
+     3402.0
+    ]
+   },
+   "mixing": {
+    "share_at_most_three": [
+     0.28263473053892213,
+     0.40284842319430314
+    ],
+    "diversity": [
+     0.6983065953654188,
+     0.5770944741532976
+    ],
+    "marks": [
+     7.0,
+     7.0
+    ],
+    "agents": [
+     835.0,
+     983.0
+    ]
+   }
+  }
+ },
+ "figures": {
+  "riches": {
+   "title": "Agents holding three tokens or fewer",
+   "caption": "Each grey dot is a world of B2 with one other rule, each orange dot the same rule with brains mixed at birth as well (batch Y), seeds 1 and 2, read at iteration 1,000; the short bars are the means. The dashed lines are B2 itself and B2 with mixing alone, the means of the same seeds. The rules are in the order of the orange means.",
+   "recipe": "**Runs.** Batch Y's 46 pilot worlds (B2 at 10,000 tokens, brains mixed at birth and one other rule, seeds 1 and 2, `GraphOfLifeRuns/.pilots/Y/`) and their controls: the same rule alone, from the batch or lab experiment that made it, and the lab's B2 and mixed worlds of the same seeds (Experiments 16 and 17).\n\n**Data.** From Each world's checkpoint at iteration 1,000, or the lab's whole world kept then (`research/atlas/at.py --at 1000`, `GraphOfLifeRuns/.pilots/atlas/at1000.json`).\n\n1. Read each world as `research/atlas/profile.py` reads every world.\n2. Rank its four spreads among Meta X's worlds; the diversity score is the mean.\n\n**To make it again:** `python3 book_figures.py mixcombos`."
+  },
+  "diversity": {
+   "title": "How much the agents differ",
+   "caption": "Each grey dot is a world of B2 with one other rule, each orange dot the same rule with brains mixed at birth as well (batch Y), seeds 1 and 2, read at iteration 1,000; the short bars are the means. The dashed lines are B2 itself and B2 with mixing alone, the means of the same seeds. The rules are in the order of the orange means.",
+   "recipe": "**Runs.** Batch Y's 46 pilot worlds (B2 at 10,000 tokens, brains mixed at birth and one other rule, seeds 1 and 2, `GraphOfLifeRuns/.pilots/Y/`) and their controls: the same rule alone, from the batch or lab experiment that made it, and the lab's B2 and mixed worlds of the same seeds (Experiments 16 and 17).\n\n**Data.** From Each world's checkpoint at iteration 1,000, or the lab's whole world kept then (`research/atlas/at.py --at 1000`, `GraphOfLifeRuns/.pilots/atlas/at1000.json`).\n\n1. Read each world as `research/atlas/profile.py` reads every world.\n2. Rank its four spreads among Meta X's worlds; the diversity score is the mean.\n\n**To make it again:** `python3 book_figures.py mixcombos`."
+  },
+  "evolution": {
+   "title": "Do the brains of 1,000 beat those of 500?",
+   "caption": "Each dot is a world of batch Y: the share of a contested world its brains of iteration 1,000 hold after 100 iterations against those of 500, the mean of two contests, one in each era's world; the bars are the medians, the rules in the order of the figures above. The dashed lines are the medians of B2's ten lab worlds and of the ten mixed worlds of Experiment 17, played the same way.",
+   "recipe": "**Runs.** Batch Y's 46 pilot worlds (`GraphOfLifeRuns/.pilots/Y/`); B2: Experiment 16's ten runs; mixing alone: Experiment 17's ten runs.\n\n**Data.** From `GraphOfLifeRuns/.pilots/batch_TUV_T100.json`, `long_steps.json` and `e17_T100.json` (`research/oee/checks/rejudge.py`).\n\n1. Seat the brains of the two eras on alternate agents of each era's world and play 100 iterations.\n2. Count the agents the later era's brains hold, as a share of all.\n\n**To make it again:** `python3 book_figures.py mixcombos`."
+  }
+ }
+}

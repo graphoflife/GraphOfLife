@@ -469,6 +469,30 @@ book/results/worlds.json; 2026-10-16)**
   (everyworld.replicas now maps the prototype's `mix` to mix_at_birth).
 - Next: E18 (Ch. 81), the five healthy worlds to 50,000 (running since 2026-10-16 22:52).
 
+**Five mixed worlds to 50,000 (E18, Ch. 81; 2026-10-17; E17's seeds 2, 4, 5, 6, 10 from 10,000 to 50,000)**
+- Thesis refuted on both counts: every mark at 115 of 400 moments (29%; needed half), and at 50,000 three worlds dead
+  (seed 10 at 17,078, seed 2 at 21,288, seed 4 at 37,722) and seed 5 poor (56% at <= 3 tokens); only seed 6 (43%)
+  alive and richer than half.
+- Each death: births fell below 1 per 100 agents an iteration (0.39-0.51 in the last kept world) while a third to
+  three quarters of the agents could have had a child; ages spread evenly (not a cohort); seed 10's last world: 31
+  agents, all able, none breeding.
+- The survivors grew larger and poorer: 1,262-2,252 agents over their last 20,000 iterations, 37-61% poor, missing
+  only the dimension mark (3.8-4.3), at 50 of 80 moments each.
+- Evolution fades: 25,000 vs 10,000: 0.73 (s6), 0.56 (s5), 0.45 (s4); 50,000 vs 25,000: 0.55 (s5), 0.42 (s6).
+  Before collapses: seed 10's last brains beat those of 5,000 earlier (0.86, evolutionary suicide), seed 4's lost
+  (0.21), seed 2's tied (0.48).
+
+**Steadying a mixed world (batches M, H, MP, BL; Meta XI; 2026-10-17)**
+- Estates to newborns/parents: steady by filling (~5,500 agents, 92-94% poor). Estates to the poorest, half kept at
+  home: steady at 1,300-2,300 agents, ~60% poor. Searches, slower brain change: less steady than mixing alone.
+- Estates to the dead's own children (`redistribution=children`): with mixing one world shrank to 170-750 agents,
+  the other died (and was restarted by the engine); in B2 like B2.
+- A bought life (`buy_life`): with mixing smaller and unsteadier (100-1,100 agents), and one world became a single
+  immortal hoarder; in B2 smaller worlds (1,400, 2,450) held by a few rich old agents.
+- Mates among the parents (`mix_mates=parents`, batch MP): eagerness 3.5-7.5 vs 2.1-4.3 in E17's same seeds, every
+  world steadier than its twin (sd of log size 0.09-0.29 vs 0.19-0.63), 760-2,200 agents, 23-54% poor. Experiment
+  19 tests it: ten worlds, 20,000 iterations.
+
 **Who inherits (batch R, Ch. 73; 2026-10-17; B2 and B1 at 10,000 tokens, two seeds, 2,000 iterations;
 controls P/B2-s1, s2 and L/B1-long-s1, s2 to 2,000)**
 - B2, estate to the poorest: like B2 (3,600-3,700 agents, 80% at <= 3 tokens; contests 1,000 vs 500 0.64/0.70,
@@ -503,6 +527,9 @@ each two-by-two read at 1,000 by research/atlas/at.py)**
 - Mixing raises diversity with nearly every rule (partly built in: every mixed birth is a new genotype); the
   most diverse: mixing with fast brain change (0.77/0.79), with a sense of kin or family (0.69/0.70).
 - The richest combinations are the smallest (270-370 agents at 1,000) - fragile, as E18 showed for mixing alone.
+- Evolution goes on with nearly every rule (T = 100, 1,000 vs 500: 42 of 46 worlds above half, median 0.69; mixing
+  alone 0.84, B2 0.68); fastest with links that hold a token (0.93), half kept (0.91), units that hold a token
+  (0.90); no better with stakes pooled by family (0.35), handover, slow brain change (0.47), no random inputs (0.50).
 
 **Open (being tested)**
 - Rules without numbers (B3, Ch. 57): all seven of B2's numbers removed at once

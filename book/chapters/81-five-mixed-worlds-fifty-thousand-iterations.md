@@ -134,16 +134,157 @@ lab's four workers, the panel's estimate says how long.
 > A value in **bold** differs from the baseline B2.
 <!-- /runs -->
 
-## What else will be read
+## What the five worlds did
 
-- **Does evolution go on?** The brains of 25,000 against those of 10,000, and
-  of 50,000 against those of 25,000, over an agent's lifetime, as
-  [Chapter 80](80-mixed-at-birth-ten-long-worlds.md#does-evolution-go-on) did
-  for the first 10,000 iterations.
-- **How eagerly the able breed** ([Chapter 80](80-mixed-at-birth-ten-long-worlds.md#why-a-mixed-world-is-rich)):
-  does it keep drifting, or settle?
-- **Where a world's drift goes:** the sizes each world passes through, how
-  long it stays in each, and whether a world that falls small comes back.
+<!-- figure longmixed/sizes -->
+![Agents alive, world by world](../figures/longmixed/sizes.svg)
+
+**Agents alive, world by world.** Each line is one world, its agents after each game (means over 100 iterations), from its birth in Experiment 17 to iteration 50,000 or to the game after which 20 agents or fewer were left, where the lab stops a world.
+
+> [!example]- How to make this figure
+> **Runs.** The five runs of Experiment 18 — Experiment 17's worlds of seeds 2, 4, 5, 6 and 10 (B2 at 10,000 tokens with brains mixed at birth), played on by the lab from iteration 10,000 to 50,000 or until they died out (`python3 gol_lab.py run E18`); their first 10,000 iterations are Experiment 17's.
+>
+> **Data.** From Each run's `stats.jsonl`.
+>
+> 1. Read the agents after each game (`nodes`, phase 2).
+> 2. Average over stretches of 100 iterations.
+>
+> **To make it again:** `python3 book_figures.py longmixed`.
+<!-- /figure -->
+
+Three of the five worlds died out:
+
+- **Seed 10** grew from 620 agents to 1,450 by iteration 13,556 and died out
+  at 17,078, falling from 1,168 agents to 19 in the last thousand iterations.
+- **Seed 2** wandered between 230 and 740 agents for eight thousand iterations,
+  rose to 989 at 20,874, and was gone 413 iterations later, at 21,288.
+- **Seed 4** grew to 2,191 agents by 21,260 and stayed near two thousand until
+  28,000; then it fell to 123 by 34,000, came back to 345, and died out at
+  37,722.
+
+Two lived to 50,000, and both ended up larger and poorer than they began.
+**Seeds 5 and 6** grew past 2,000 agents within a few thousand iterations of
+10,000 and settled, over their last 20,000 iterations, between 1,262 and 2,252
+agents, with 37% to 61% of them holding three tokens or fewer — between the
+mixed worlds' riches and B2's poverty.
+
+## The verdict
+
+**The thesis is refuted, on both counts.** It asked that the worlds meet
+every mark at half or more of their moments from 10,500 to 50,000, a dead
+world missing them all: they met them at 115 of 400, 29%. And it allowed at
+most one world dead or with half its agents poor at 50,000: three had died
+out, and seed 5 ended with 56% of its agents at three tokens or fewer. Only
+seed 6, at 43%, ended alive and richer than half.
+
+## Health and riches
+
+<!-- figure longmixed/health -->
+![Health and riches, every 500 iterations](../figures/longmixed/health.svg)
+
+**Health and riches, every 500 iterations.** Each world read as Meta X reads every world, from the whole worlds the lab kept every 500 iterations from 10,500 on, while it lived. Left: how many of the seven marks of [Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md)'s health bar it meets (the dots of each world are set a little apart so that they do not hide each other). Right: the share of its agents holding three tokens or fewer.
+
+> [!example]- How to make this figure
+> **Runs.** The five runs of Experiment 18 — Experiment 17's worlds of seeds 2, 4, 5, 6 and 10 (B2 at 10,000 tokens with brains mixed at birth), played on by the lab from iteration 10,000 to 50,000 or until they died out (`python3 gol_lab.py run E18`); their first 10,000 iterations are Experiment 17's.
+>
+> **Data.** From Each run's `archive/world_<iteration>.npz` (`research/oee/checks/e17_health.py --seeds 2,4,5,6,10 --from 10500 --to 50000`).
+>
+> 1. Read each whole world as `research/atlas/profile.py` reads every world.
+> 2. Count the marks it meets and its agents at three tokens or fewer.
+>
+> **To make it again:** `python3 book_figures.py longmixed`.
+<!-- /figure -->
+
+The marks a world misses follow its size, as
+[Chapter 80](80-mixed-at-birth-ten-long-worlds.md#the-marks-a-world-misses)
+found: the worlds that died missed the hub mark while they were small, and the
+two that lived missed only the dimension, at every one of their moments that
+missed a mark — 50 of 80 each — with 1,300 to 2,300 agents and a dimension of
+3.8 to 4.3. The riches follow the size too: the dead worlds were rich to the
+end, the living ones poorer the larger they grew.
+
+## How a mixed world dies
+
+<!-- figure longmixed/collapse -->
+![The worlds that died out](../figures/longmixed/collapse.svg)
+
+**The worlds that died out.** Each line is a world that died out, read every 500 iterations up to its end: left, the share of its agents that could have a child (11 tokens or more and fewer than 8 links); right, how often they had one in the next 50 iterations, per hundred of them. Every agent dies at 100, so a world whose agents all could have a child dies out once they have fewer than one per hundred an iteration.
+
+> [!example]- How to make this figure
+> **Runs.** The five runs of Experiment 18 — Experiment 17's worlds of seeds 2, 4, 5, 6 and 10 (B2 at 10,000 tokens with brains mixed at birth), played on by the lab from iteration 10,000 to 50,000 or until they died out (`python3 gol_lab.py run E18`); their first 10,000 iterations are Experiment 17's.
+>
+> **Data.** From Each run's whole worlds and births (`research/oee/checks/e17_breeding.py --seeds 2,4,10 --from 10000 --to 50000`).
+>
+> 1. In each whole world, count the agents with 11 tokens or more and fewer than 8 links.
+> 2. Divide the births per iteration of the next 50 iterations by them.
+>
+> **To make it again:** `python3 book_figures.py longmixed`.
+<!-- /figure -->
+
+Not by a sudden blow. Every agent of these worlds lives out its hundred
+iterations, and a world keeps its size only while one agent in a hundred is
+born every iteration ([Chapter 80](80-mixed-at-birth-ten-long-worlds.md#why-a-mixed-world-is-rich)).
+The worlds that died had hovered near that line for thousands of iterations,
+and then fell below it and stayed below: in the last world kept before each
+end, births had fallen to 0.39, 0.51 and 0.47 per hundred agents an
+iteration, while a third to three quarters of the agents could have had a
+child. In seed 10's last world, 31 agents were left, every one of them able to
+have a child, and none had one. The ages were spread evenly — this was not a
+generation dying at once, but a world that stopped replacing its dead.
+
+## Did evolution go on?
+
+<!-- figure longmixed/contests -->
+![Later brains against earlier ones](../figures/longmixed/contests.svg)
+
+**Later brains against earlier ones.** Each dot is a contest between two of a world's moments: the brains of the later moment against those of the earlier, half and half on the same world, for 100 iterations, in each moment's world with two seeds; the bar is the median of the four. Above: the pairs the plan named, for the worlds alive then. Below: the brains of the last world kept before each collapse that still had a few hundred agents, against those of 5,000 iterations before.
+
+> [!example]- How to make this figure
+> **Runs.** The five runs of Experiment 18 — Experiment 17's worlds of seeds 2, 4, 5, 6 and 10 (B2 at 10,000 tokens with brains mixed at birth), played on by the lab from iteration 10,000 to 50,000 or until they died out (`python3 gol_lab.py run E18`); their first 10,000 iterations are Experiment 17's.
+>
+> **Data.** From `GraphOfLifeRuns/.pilots/e18_T100.json` (`research/oee/checks/rejudge.py --seeds 17,18`).
+>
+> 1. Seat the brains of the two moments on alternate agents of each moment's world and play 100 iterations, an agent's lifetime.
+> 2. Count the agents the later moment's brains hold at the end, as a share of all.
+>
+> **To make it again:** `python3 book_figures.py longmixed`.
+<!-- /figure -->
+
+**Hardly.** In the pairs the plan named, the brains of 25,000 beat those of
+10,000 in seed 6 (73% of a contested world) and narrowly in seed 5 (56%), and
+did no better in seed 4 (45%); the brains of 50,000 took 55% from those of
+25,000 in seed 5, and lost to them in seed 6 (42%). Over the first 10,000
+iterations the mixed worlds' later brains had won 84%, then 66%, then 54%
+([Chapter 80](80-mixed-at-birth-ten-long-worlds.md#does-evolution-go-on)):
+the steps shrink towards nothing, and in the long run a later era is as likely
+to lose as to win.
+
+Before the collapses the contests differ from world to world. In seed 10 the
+brains of the last good years beat those of 5,000 iterations before by 86% —
+the brains that let the world die out were winners: selection itself carried
+it to its end, what biologists call **evolutionary suicide**. In seed 4 the
+last brains lost to their forebears (21%), and in seed 2 they tied (48%). One
+world in three is not a law; it is enough to say that a mixed world can be
+led to extinction by the very brains that win in it.
+
+## What it teaches
+
+- **A mixed world is mortal.** Three of five worlds that had met every mark at
+  10,000 iterations died out before 40,000, each the same way: births fell
+  below the one per hundred agents that replaces the dead, while many of its
+  agents could have afforded a child. Nothing holds the reluctance to breed
+  that makes a mixed world rich, and a world that drifts too far towards it
+  dies.
+- **The survivors drift the other way.** The two worlds that lived ended
+  larger and poorer, missing the dimension mark at most of their moments —
+  closer to B2 than to the worlds that came closest in Meta X.
+- **Evolution fades.** Later brains beat earlier ones by less and less, and by
+  25,000 to 50,000 iterations an era is as likely to lose as to win against
+  the one before it.
+- **What next.** [Meta XI](84-meta-11-what-holds-a-worlds-size.md) gathers
+  what holds a world's size, and why mixing loosens it: a mate spreads its
+  brain for free, so having children pays less. Taking that free ride away is
+  [Experiment 19](85-mixed-at-birth-with-parents-as-mates.md)'s test.
 
 **Related notes:** [Chapter 80 · Mixed at birth: ten long worlds](80-mixed-at-birth-ten-long-worlds.md) ·
 [Chapter 46 · How to tell a world that keeps evolving](46-how-to-tell-a-world-that-keeps-evolving.md) ·
