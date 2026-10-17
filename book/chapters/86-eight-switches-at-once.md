@@ -165,6 +165,38 @@ rules one at a time, mostly vanish among the sixteen, where most worlds have
 four switches on: of the eight mixed worlds, four hold the estate to the
 newborns, which cancels it, and four the lapse, which leaves nothing to add.
 
+## Does evolution go on?
+
+> [!info] Added later (17 October 2026)
+> The contests below were played after this chapter was first published.
+
+<!-- figure eightswitches/evolution -->
+![Do the brains of 1,000 beat those of 500?](../figures/eightswitches/evolution.svg)
+
+**Do the brains of 1,000 beat those of 500?** Above: each world of batch U, the share of a contested world its brains of iteration 1,000 hold after 100 iterations against those of 500, the mean of two contests, one in each era's world; the dashed line marked B2 is the median of the lab's ten B2 worlds, played the same way. Below: each switch's main effect on that share; the grey band is the spread of the ten B2 worlds (one standard deviation), twice the noise of a main effect.
+
+> [!example]- How to make this figure
+> **Runs.** Batch U's sixteen pilot worlds (`GraphOfLifeRuns/.pilots/U/`): B2 at 10,000 tokens, seed 1, 1,000 iterations, with each of eight switches on in eight of them (`research/oee/pilots/make_jobs_TU.py`); each switch alone in B2, seeds 1 and 2, from the batch or lab experiment that made it; and the lab's ten B2 worlds (Experiment 16) for the seed's own noise.
+>
+> **Data.** From `GraphOfLifeRuns/.pilots/batch_TUV_T100.json` and, for B2, `long_steps.json` (`research/oee/checks/rejudge.py`).
+>
+> 1. Seat the brains of the two eras on alternate agents of each era's world and play 100 iterations.
+> 2. Count the agents the later era's brains hold, as a share of all.
+> 3. A switch's main effect: the mean of the eight worlds with it on, minus the other eight.
+>
+> **To make it again:** `python3 book_figures.py eightswitches`.
+<!-- /figure -->
+
+Played against the brains of iteration 500 for a lifetime, the brains of
+1,000 hold more than half of a contested world in fifteen of the sixteen
+worlds: from 0.47 (C, D, G and H on) to 1.0 (all eight on, where the later
+brains took the whole world in both eras' worlds). The median is 0.60, below
+B2's own 0.69 (the lab's ten B2 worlds: a median of 0.68, with a spread of
+0.04). Gifts, no revolutions, lapsing links and the estate to the newborns
+each speed evolution a little — 0.07 to 0.09, about twice the spread of B2's
+worlds — and the other four switches do nothing a contest can tell. Pairs
+act together here too: three chains add 0.11 to 0.14.
+
 ## What it teaches
 
 - **A switch measured alone tells what it does in B2, not what it does.**
@@ -180,9 +212,10 @@ newborns, which cancels it, and four the lapse, which leaves nothing to add.
   its 652 agents at three tokens or fewer, with a diversity score of 0.68.
   It is one world of one seed, and among the candidates that are being
   played on to 10,000 iterations ([Meta X](79-meta-10-healthy-and-rich.md)).
+- **Evolution goes on** in fifteen of the sixteen worlds, in most of them
+  more slowly than in B2 itself; four switches speed it a little.
 - **Next**: the same design on B1, where revolutions take most of the nodes
-  that change hands (batch V, queued), and lifetime contests of every world
-  of the sixteen.
+  that change hands (batch V, queued).
 
 **Related notes:** [Many switches in few worlds](../notes/fractional-factorial.md) ·
 [Every setting](../notes/settings.md) ·

@@ -468,6 +468,47 @@
     "links_per_agent": 5.474152306837132,
     "marks": 6
    }
+  },
+  "evolution": {
+   "worlds": {
+    "U/U-ABCDEFGH-s1": 1.0,
+    "U/U-ABCG-s1": 0.783248730964467,
+    "U/U-ABDH-s1": 0.5077179034819754,
+    "U/U-ABEF-s1": 0.6081823833081339,
+    "U/U-ACDF-s1": 0.5317615532569983,
+    "U/U-ACEH-s1": 0.8916868932038835,
+    "U/U-ADEG-s1": 0.5698712973530651,
+    "U/U-AFGH-s1": 0.6889959789139777,
+    "U/U-BCDE-s1": 0.7665711614507846,
+    "U/U-BCFH-s1": 0.5564365983633972,
+    "U/U-BDFG-s1": 0.6928578774167009,
+    "U/U-BEGH-s1": 0.5715885605208851,
+    "U/U-CDGH-s1": 0.46803327905690106,
+    "U/U-CEFG-s1": 0.5217099546949668,
+    "U/U-DEFH-s1": 0.5876717332246086,
+    "U/U-none-s1": 0.6923311103582956
+   },
+   "main": {
+    "A": 0.09053305817449508,
+    "B": 0.06681767693045593,
+    "C": 0.07502891580171944,
+    "D": -0.023711925635871656,
+    "E": 0.07448736899295183,
+    "F": -0.007929107151434356,
+    "G": 0.019243292784110855,
+    "H": 0.013199609745277008
+   },
+   "pairs": {
+    "AB+CG+DH+EF": -0.01260935317379297,
+    "AC+BG+DF+EH": 0.13295348779032978,
+    "AD+BH+CF+EG": -0.06697888243873418,
+    "BC+AG+DE+FH": 0.10644852571101882,
+    "BD+AH+CE+FG": 0.13563459293401603,
+    "CD+AF+BE+GH": 0.02703287977036406,
+    "AE+BF+CH+DG": 0.06501673281896425
+   },
+   "b2_median": 0.6819306236881428,
+   "seed_sd": 0.0408162742073832
   }
  },
  "figures": {
@@ -480,6 +521,11 @@
    "title": "Switches that act together",
    "caption": "The seven chains of pairs of batch U (book/notes/fractional-factorial.md): for each, the mean of the eight worlds where the product of the pair's two switches is +1, minus the mean of the other eight \u2014 the sum of the four pairs' effects that one chain cannot tell apart. The grey band: the seed's own noise, as in the figure above.",
    "recipe": "**Runs.** Batch U's sixteen pilot worlds (`GraphOfLifeRuns/.pilots/U/`): B2 at 10,000 tokens, seed 1, 1,000 iterations, with each of eight switches on in eight of them (`research/oee/pilots/make_jobs_TU.py`); each switch alone in B2, seeds 1 and 2, from the batch or lab experiment that made it; and the lab's ten B2 worlds (Experiment 16) for the seed's own noise.\n\n**Data.** From each world's checkpoint at iteration 1,000, or the lab's whole world kept then (`research/atlas/at.py --at 1000`, `GraphOfLifeRuns/.pilots/atlas/at1000.json`).\n\n1. Read each world as `research/atlas/profile.py` reads every world.\n2. A chain's effect: the mean of the eight worlds where the product of a pair's switches is +1, minus the mean of the other eight.\n\n**To make it again:** `python3 book_figures.py eightswitches`."
+  },
+  "evolution": {
+   "title": "Do the brains of 1,000 beat those of 500?",
+   "caption": "Above: each world of batch U, the share of a contested world its brains of iteration 1,000 hold after 100 iterations against those of 500, the mean of two contests, one in each era's world; the dashed line marked B2 is the median of the lab's ten B2 worlds, played the same way. Below: each switch's main effect on that share; the grey band is the spread of the ten B2 worlds (one standard deviation), twice the noise of a main effect.",
+   "recipe": "**Runs.** Batch U's sixteen pilot worlds (`GraphOfLifeRuns/.pilots/U/`): B2 at 10,000 tokens, seed 1, 1,000 iterations, with each of eight switches on in eight of them (`research/oee/pilots/make_jobs_TU.py`); each switch alone in B2, seeds 1 and 2, from the batch or lab experiment that made it; and the lab's ten B2 worlds (Experiment 16) for the seed's own noise.\n\n**Data.** From `GraphOfLifeRuns/.pilots/batch_TUV_T100.json` and, for B2, `long_steps.json` (`research/oee/checks/rejudge.py`).\n\n1. Seat the brains of the two eras on alternate agents of each era's world and play 100 iterations.\n2. Count the agents the later era's brains hold, as a share of all.\n3. A switch's main effect: the mean of the eight worlds with it on, minus the other eight.\n\n**To make it again:** `python3 book_figures.py eightswitches`."
   }
  }
 }

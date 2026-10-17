@@ -25,7 +25,7 @@ import numpy as np
 import book_figures as F
 from book_figures import chapter, recipe
 from book_chapters.common import GREY, ORANGE, VIOLET
-from book_chapters.combos import _contests, _measured
+from book_chapters.combos import _contests, _lab_contests, _measured
 
 #: The switches of batch U, by letter: their words, and the worlds that have each alone in B2 and their twins
 #: without it, seeds 1 and 2 (ids of at1000.json).
@@ -139,21 +139,30 @@ def eightswitches(ch: F.Chapter) -> None:
         ys = np.array([contests[w] for w in worlds])
         main = {k: _contrast(ys, cols[k]) for k in letters}
         pairs = {name: _contrast(ys, col) for name, col in chains.items()}
-        ch.number("evolution", {"worlds": {w: contests[w] for w in worlds}, "main": main, "pairs": pairs})
+        b2 = _lab_contests("B2-10000-s")
+        noise = float(np.std(b2, ddof=1))
+        band = {"kind": "area", "label": "seed noise", "x": [-0.5, 7.5], "lo": [-noise, -noise], "hi": [noise, noise],
+                "colour": GREY, "alpha": 0.25}
+        ch.number("evolution", {"worlds": {w: contests[w] for w in worlds}, "main": main, "pairs": pairs,
+                                "b2_median": float(np.median(b2)), "seed_sd": noise})
         ch.grid("evolution", [
             {"title": "Each world", "x": {"categories": ["sixteen worlds"]},
              "y": {"label": "the later brains' share", "min": 0.2, "max": 1},
              "series": F.dots(["sixteen worlds"], [list(ys)], [ORANGE]),
-             "guides": [{"axis": "y", "at": 0.5, "label": "no better"}]},
+             "guides": [{"axis": "y", "at": 0.5, "label": "no better"},
+                        {"axis": "y", "at": float(np.median(b2)), "label": "B2"}]},
             {"title": "Main effects", "x": {"categories": cats}, "y": {"label": "effect on the later brains' share"},
-             "series": [{"label": None, "x": list(range(8)), "y": [main[k] for k in letters], "points": True,
-                         "size": 8, "colour": ORANGE}],
+             "series": [band, {"label": None, "x": list(range(8)), "y": [main[k] for k in letters], "points": True,
+                                "size": 8, "colour": ORANGE}],
              "guides": [{"axis": "y", "at": 0.0, "label": ""}]}],
-            columns=2, title="Do the brains of 1,000 beat those of 500?",
-            caption=("Left: each world of batch U, the share of a contested world its brains of iteration 1,000 "
+            columns=1, title="Do the brains of 1,000 beat those of 500?",
+            caption=("Above: each world of batch U, the share of a contested world its brains of iteration 1,000 "
                      "hold after 100 iterations against those of 500, the mean of two contests, one in each era's "
-                     "world. Right: each switch's main effect on that share."),
-            recipe=recipe(RUNS, "`GraphOfLifeRuns/.pilots/batch_TUV_T100.json` (`research/oee/checks/rejudge.py`)",
+                     "world; the dashed line marked B2 is the median of the lab's ten B2 worlds, played the same "
+                     "way. Below: each switch's main effect on that share; the grey band is the spread of the ten "
+                     "B2 worlds (one standard deviation), twice the noise of a main effect."),
+            recipe=recipe(RUNS, "`GraphOfLifeRuns/.pilots/batch_TUV_T100.json` and, for B2, `long_steps.json` "
+                                "(`research/oee/checks/rejudge.py`)",
                           ["Seat the brains of the two eras on alternate agents of each era's world and play 100 "
                            "iterations.", "Count the agents the later era's brains hold, as a share of all.",
                            "A switch's main effect: the mean of the eight worlds with it on, minus the other eight."]))

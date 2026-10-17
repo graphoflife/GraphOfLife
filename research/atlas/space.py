@@ -81,6 +81,7 @@ def worlds() -> List[Item]:
          pilots("R/B2-newborns-s[12]", 2000) + pilots("R/B2-parents-s[12]", 2000)),
         ("B1 (Experiment 2)", "B1", [(os.path.basename(d), "frame")
                                      for d in sorted(glob.glob(os.path.join(RUNS, "B1-10000-s[0-9][0-9][0-9]")))]),
+        ("B2 at 100,000 tokens (pilot)", "B2", pilots("BIG/B2-100000-s[0-9]", 1000)),
     ]
     return [(g, base, wid, src, None) for g, base, items in groups for wid, src in items]
 

@@ -543,6 +543,9 @@ iterations; main effects against the seed's noise from E16's ten worlds at 1,000
   newborns cancels mixing's riches, and lapse leaves it nothing to add.
 - U-BDFG (no revolutions, no random inputs, link tokens, mixing): 7 marks, dim 3.67, 25% poor, diversity 0.68,
   652 agents - the best of the sixteen; it is among the LC long-run candidates.
+- Evolution (T = 100, 1,000 vs 500): above half in 15 of 16 worlds (0.47 to 1.0), median 0.60 vs B2 0.69 (lab B2
+  median 0.68, spread 0.04). Gifts +0.09, no revolutions +0.07, lapse +0.075, newborns' estates +0.074; the other
+  four ~0; chains AC.. +0.13, BD.. +0.14, BC.. +0.11.
 
 **What folds a world (Ch. 87, Part VI; 2026-10-17; Ch. 24's rulers and random twins via research/atlas/space.py;
 "typical distance" = steps until a typical ball holds half the world, over the twin's)**
