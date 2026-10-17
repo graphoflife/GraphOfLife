@@ -509,6 +509,8 @@ controls P/B2-s1, s2 and L/B1-long-s1, s2 to 2,000)**
   evolving at least as fast (0.80/0.74, then 0.74/0.61) - a test of the reading that estates timed to births
   stop evolution. B1: larger and younger than its controls (1,800/1,300 agents, births 4.7/2.8 per 100, age
   74/113), poorer (44%/35% vs 6%/19%), later brains lose (0.38/0.39, 0.49/0.39).
+- B2 with lives that can be bought (R/B2-buylife): evolution goes on as in B2 (1,000 vs 500: 0.67/0.64; 2,000 vs
+  1,000: 0.79/0.77).
 - Correction: Ch. 73's table had B1-parents-s2 read at 1,600 (still running); at 2,000: 2,351 agents, 4 marks,
   dimension 3.20, 58% poor, diversity 0.60. The table now comes from research/atlas/at.py --at 2000.
 
@@ -571,7 +573,9 @@ iterations; main effects against the seed's noise from E16's ten worlds at 1,000
 - The ring a death closes predicts folding best (research/atlas/rings.py; 319 worlds that die of age and mend;
   groups of the dying agents' neighbours, rank correlation -0.70 vs links per agent -0.53): < 5 groups 2.04,
   5-6 2.27, 6-7 1.34, 7-9 1.24, >= 9 1.08 (children of any size: parents 60 its old, dying hold 12-14 links).
-  Where the old breed they gather links till they die and every death closes a wide ring.
+  Where the old breed they gather links till they die and every death closes a wide ring. Out of sample (E14 at 5,000
+  tokens): B2 rings 6.7-7.5 -> 1.25-1.33; handover rings 2-5 -> 1.50-1.84; no cap rings 10-24 -> 1.14 (one
+  exception, 2.40).
 - 352 worlds at 1,000: folded B2 kinds 1.26 (222), mixed 1.26 (77); spaces: estates 2.42 (28), lapse 3.94 (12),
   B1 rules 2.33 (13). Rank correlation of typical distance with links per agent -0.58, poor share +0.15, agents
   +0.09: not poverty, not size. No triangles anywhere in B2 kinds (0.12 common neighbours per link).

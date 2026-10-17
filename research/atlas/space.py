@@ -196,7 +196,7 @@ def main():
     else:
         out, todo = OUT, worlds()
     # A world read before at the same moment is not read again.
-    done = {(r["id"], r.get("at", a.at)): r for r in json.load(open(out))} if out != OUT and os.path.exists(out) else {}
+    done = {(r["id"], r.get("at", a.at)): r for r in json.load(open(out))} if os.path.exists(out) else {}
     wanted = [t for t in todo if (t[2], t[4]) not in done]
     print(f"{len(todo)} worlds, {len(wanted)} to read", flush=True)
     with ProcessPoolExecutor(max_workers=a.jobs) as pool:

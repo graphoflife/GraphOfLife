@@ -148,7 +148,10 @@ Ways to build the pull, and the first of them tried:
    still — 100 to 1,100 agents, as unsteady as mixing alone — and in one world
    a single agent ended up holding every token, buying its life without end.
    In B2 the worlds hold fewer agents (about 1,400 and 2,450, against 3,300),
-   kept small by a few old agents rich enough to live on.
+   kept small by a few old agents rich enough to live on — and they keep
+   evolving as B2 does (added later: in lifetime contests the brains of 1,000
+   take 67% and 64% of a contested world from those of 500, those of 2,000
+   take 79% and 77% from those of 1,000; B2: 69% and 67%, then 65% and 76%).
 
 ## What it teaches
 

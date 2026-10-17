@@ -9,6 +9,7 @@ iteration 1,000, and a few worlds through their lives.
 """
 from __future__ import annotations
 
+import glob
 import json
 import os
 import sys
@@ -158,6 +159,49 @@ def spaces(ch: F.Chapter) -> None:
                           "`GraphOfLifeRuns/.pilots/atlas/space_life.json`)",
                           ["Measure each world as in the figure above, at each moment.",
                            "Divide the radius at which its typical ball holds half the world by its twin's."]))
+
+    # Does a world fold the same way at every size? B1 at three sizes (Chapter 24's readings), B2 at three.
+    big = [r for r in side if r["group"] == "B2 at 100,000 tokens (pilot)"]
+    if big:
+        b1 = []
+        for tokens, label in ((10000, "10,000"), (100000, "100,000"), (409600, "409,600")):
+            for path in sorted(glob.glob(os.path.join(RUNS, ".book", f"B1-{tokens}-s[0-9][0-9][0-9].dims2.json"))):
+                kept = json.load(open(path))
+                if kept.get("world") and kept.get("twin"):
+                    b1.append((kept["world"]["n"], S.typical_distance(kept), label))
+        b2 = [(r["world"]["n"], S.typical_distance(r), r["group"]) for r in side
+              if r["group"] in ("B2 at 5,000 tokens (Experiment 14)", "B2, 2,000 iterations (Experiment 16)",
+                                "B2 at 100,000 tokens (pilot)")]
+        size_numbers = {}
+        for name, rows_, colour in (("B1", b1, BLUE), ("B2", b2, GREY)):
+            for label in dict.fromkeys(g for _, _, g in rows_):
+                mine = [(n, d) for n, d, g in rows_ if g == label and np.isfinite(d)]
+                size_numbers[f"{name}: {label}"] = {"worlds": len(mine),
+                                                    "agents": float(np.median([n for n, _ in mine])),
+                                                    "typical_distance": float(np.median([d for _, d in mine]))}
+        ch.number("size", size_numbers)
+        ch.figure("size", title="Does a world fold the same way at every size?",
+                  x={"label": "agents (logarithmic)", "log": True},
+                  y={"label": "typical distance, over the twin's", "log": True},
+                  series=[{"label": "B1 (10,000, 100,000 and 409,600 tokens)", "x": [n for n, _, _ in b1],
+                           "y": [d for _, d, _ in b1], "points": True, "size": 5, "colour": BLUE, "alpha": 0.8},
+                          {"label": "B2 (5,000 and 10,000 tokens, and one world of 100,000)",
+                           "x": [n for n, _, _ in b2], "y": [d for _, d, _ in b2], "points": True, "size": 5,
+                           "colour": GREY, "alpha": 0.8}],
+                  guides=[{"axis": "y", "at": 1.0, "label": "as the twin"}],
+                  caption=("Each dot is a world: its typical distance over its random twin's, against the agents in "
+                           "its largest piece, both on logarithmic axes. Blue: B1's worlds of 10,000, 100,000 and "
+                           "409,600 tokens after their last game (Chapter 24's readings). Grey: B2's worlds of 5,000 "
+                           "tokens at iteration 1,000 (Experiment 14) and of 10,000 at 2,000 (Experiment 16), and "
+                           "one B2 world of 100,000 tokens at iteration 1,000 (a pilot). A space grows wider than "
+                           "its twin as it grows; a small world stays as near."),
+                  recipe=recipe("B1: Experiments 2, 10 and 8 (`B1-10000-…`, `B1-100000-…`, `B1-409600-…`); B2: "
+                                "Experiments 14 and 16, and the pilot world `GraphOfLifeRuns/.pilots/BIG/"
+                                "B2-100000-s1` (B2's settings at 100,000 tokens, seed 1, 1,000 iterations).",
+                                "Chapter 24's readings (`GraphOfLifeRuns/.book/<run>.dims2.json`) and "
+                                "`research/atlas/space.py` (`GraphOfLifeRuns/.pilots/atlas/space.json`)",
+                                ["Measure each world and its random twin as in the first figure.",
+                                 "Divide the radius at which its typical ball holds half the world by its twin's."]))
 
     # Every world at iteration 1,000.
     at = {w["id"]: w for w in json.load(open(os.path.join(ATLAS, "at1000.json")))["worlds"]}

@@ -199,6 +199,13 @@ the parents are 60 iterations old at a birth (a median), and the dying hold
 12 to 14 links in as many groups. Where the old breed, they gather links till
 they die, and every death closes a wide ring.
 
+Experiment 14's worlds, at 5,000 tokens and not among the 319, follow the
+same rule. B2 there leaves rings of 6.7 to 7.5 groups and reads 1.25 to 1.33;
+with handover, which passes some of a parent's links to its newborn, the
+dying leave rings of 2 to 5 groups, and the world reads 1.50 to 1.84; without
+the cap on links, rings of 10 to 24 groups, and two of the three worlds read
+1.14 — the third, at 2.40, is the one exception.
+
 ## What it teaches
 
 - **B2 is not a space.** Its worlds are nearly small worlds — a typical agent
