@@ -9,8 +9,11 @@ fewer, and a diversity score: the mean of its four spreads' percentiles among th
 worlds of the main profile (GraphOfLifeRuns/.pilots/atlas/profile.json), so that the
 scores read as Meta X's do.
 
+A world already in the file, whose checkpoint is older than the file, is not
+read again (`--fresh` reads every world); the file holds the worlds named.
+
     python3 research/atlas/at.py --at 1000 --batches T U V W X Y K S P Q R \
-        --lab B2-10000 B2-10000-4af4a3 [--jobs 2]        writes .pilots/atlas/at1000.json
+        --lab B2-10000 B2-10000-4af4a3 [--jobs 2] [--fresh]   writes .pilots/atlas/at1000.json
 """
 from __future__ import annotations
 
@@ -69,11 +72,20 @@ def main():
     ap.add_argument("--batches", nargs="*", default=[])
     ap.add_argument("--lab", nargs="*", default=[])
     ap.add_argument("--jobs", type=int, default=2)
+    ap.add_argument("--fresh", action="store_true", help="read every world again")
     a = ap.parse_args()
+    out = os.path.join(P.PILOTS, "atlas", f"at{a.at}.json")
     todo = items(a.at, a.batches, a.lab)
-    print(f"{len(todo)} worlds at {a.at}", flush=True)
+    done = {}
+    if os.path.exists(out) and not a.fresh:
+        written = os.path.getmtime(out)
+        done = {r["id"]: r for r in json.load(open(out))["worlds"]}
+        done = {i[0]: done[i[0]] for i in todo if i[0] in done and os.path.getmtime(i[1]) < written}
+    print(f"{len(todo)} worlds at {a.at}, {len(todo) - len(done)} to read", flush=True)
     with ProcessPoolExecutor(max_workers=a.jobs) as pool:
-        rows = [r for r in pool.map(one, todo, chunksize=2) if r]
+        fresh = {r["id"]: r for r in pool.map(one, [i for i in todo if i[0] not in done], chunksize=2) if r}
+    rows = [done.get(i[0]) or fresh.get(i[0]) for i in todo]
+    rows = [r for r in rows if r]
     # Diversity on Meta X's scale: each spread's percentile among the main profile's worlds.
     reference = [w for w in json.load(open(P.OUT))["worlds"] if "bar" in w]
     for key in SPREADS:
@@ -85,7 +97,6 @@ def main():
     for r in rows:
         if r.get("percentiles"):
             r["diversity"] = float(np.mean(list(r["percentiles"].values())))
-    out = os.path.join(P.PILOTS, "atlas", f"at{a.at}.json")
     with open(out + ".tmp", "w") as f:
         json.dump({"at": a.at, "worlds": rows}, f, indent=1)
     os.replace(out + ".tmp", out)

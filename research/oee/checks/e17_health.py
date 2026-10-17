@@ -7,9 +7,11 @@ end: the seven marks of the health bar, the share of agents holding three
 tokens or fewer, the diversity spreads. Writes
 GraphOfLifeRuns/.pilots/e17_health.json. Experiment 18 played five of the same
 runs on to 50,000; `--seeds 2,4,5,6,10 --from 10500 --to 50000 --out
-e18_health.json` reads that span.
+e18_health.json` reads that span. Another family of runs with whole worlds
+kept, such as Experiment 19's, is read with `--family`.
 
-    python3 research/oee/checks/e17_health.py [--jobs 2] [--seeds 1..10 --from 500 --to 10000 --out e17_health.json]
+    python3 research/oee/checks/e17_health.py [--jobs 2] [--family B2-10000-4af4a3]
+        [--seeds 1..10 --from 500 --to 10000 --out e17_health.json]
 """
 from __future__ import annotations
 
@@ -46,15 +48,16 @@ def main():
     from gol_plan import parse_seeds
     ap = argparse.ArgumentParser()
     ap.add_argument("--jobs", type=int, default=2)
+    ap.add_argument("--family", default=FAMILY)
     ap.add_argument("--seeds", default="1..10")
     ap.add_argument("--from", dest="start", type=int, default=P.SETTLED)
     ap.add_argument("--to", type=int, default=10000)
     ap.add_argument("--out", default="e17_health.json")
     a = ap.parse_args()
-    worlds = [f"{FAMILY}-s{s:03d}" for s in parse_seeds(a.seeds)]
+    worlds = [f"{a.family}-s{s:03d}" for s in parse_seeds(a.seeds)]
     out = os.path.join(RUNS, ".pilots", a.out)
     # One experiment's span of these runs: another experiment may carry them further.
-    items = [(run, path, FAMILY, True)
+    items = [(run, path, a.family, True)
              for run in worlds for path in sorted(glob.glob(os.path.join(RUNS, run, "archive", "world_*.npz")))
              if a.start <= int(os.path.basename(path)[6:12]) <= a.to]
     print(f"{len(items)} whole worlds", flush=True)

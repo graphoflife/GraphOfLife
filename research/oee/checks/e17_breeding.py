@@ -12,7 +12,11 @@ Worlds read: Experiment 17's ten (archives every 500 iterations); B2's ten
 (Experiment 16's archives to 2,000, their continuations' checkpoints
 L/B2-long-sNNN every 500 after); and the worlds of batch SW, where mixing was
 switched off or on at a moment (checkpoints every 250), when they exist.
-Writes GraphOfLifeRuns/.pilots/e17_breeding.json.
+Writes GraphOfLifeRuns/.pilots/e17_breeding.json. With `--seeds`, one span of
+one family's runs only: Experiment 18's (`--seeds 2,4,5,6,10 --from 10000
+--to 50000 --out e18_breeding.json`), or another family's, such as Experiment
+19's (`--family B2-10000-bcc1bc --seeds 1..10 --to 20000 --out
+e19_breeding.json`).
 
 A lab run's stats row of iteration t is the step from the world kept at t to
 the next; a pilot's series row `it` is the step that ends at it, so the same
@@ -35,7 +39,8 @@ RUNS = os.path.join(ROOT, "GraphOfLifeRuns")
 PILOTS = os.path.join(RUNS, ".pilots")
 OUT = os.path.join(PILOTS, "e17_breeding.json")
 AHEAD = 50
-MIXED = [f"B2-10000-4af4a3-s{s:03d}" for s in range(1, 11)]
+FAMILY = "B2-10000-4af4a3"
+MIXED = [f"{FAMILY}-s{s:03d}" for s in range(1, 11)]
 
 
 def able(path: str) -> Dict[str, int]:
@@ -101,6 +106,7 @@ def switched(d: str) -> List[Dict[str, float]]:
 def main():
     import argparse
     ap = argparse.ArgumentParser()
+    ap.add_argument("--family", default=FAMILY, help="with --seeds: whose runs (Experiment 17's unless told)")
     ap.add_argument("--seeds", default="", help="another span of these runs only, e.g. Experiment 18's: "
                                                "--seeds 2,4,5,6,10 --from 10000 --to 50000 --out e18_breeding.json")
     ap.add_argument("--from", dest="start", type=int, default=1)
@@ -109,7 +115,7 @@ def main():
     a = ap.parse_args()
     if a.seeds:
         from gol_plan import parse_seeds
-        out = {"mixed": {f"B2-10000-4af4a3-s{s:03d}": mixed(f"B2-10000-4af4a3-s{s:03d}", a.start, a.to)
+        out = {"mixed": {f"{a.family}-s{s:03d}": mixed(f"{a.family}-s{s:03d}", a.start, a.to)
                          for s in parse_seeds(a.seeds)}}
     else:
         out = {"mixed": {run: mixed(run) for run in MIXED}, "B2": {f"B2-10000-s{s:03d}": b2(s) for s in range(1, 11)},
