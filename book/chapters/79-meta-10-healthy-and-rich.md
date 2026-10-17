@@ -93,6 +93,19 @@ agents most diverse — is empty.
 > the parents, B2's worlds hold more than 5,000 agents at a dimension of 3.4 to
 > 3.9 ([Chapter 73](73-who-inherits.md#healthy-and-diverse)).
 
+> [!info] Added later (2026-10-17, Chapter 87)
+> Why the dimension rises with size in B2's kind of network: those networks
+> are nearly small worlds, not spaces. A typical agent's ball grows four to
+> six times a step and holds a quarter of a world of 3,400 agents within
+> four steps; a typical agent is about as near to everyone as in a random
+> network with the same links (1.18 times as far, against 2.3 in B1). A small
+> world has no dimension to find, and the number read off its first few
+> steps grows with the room it has. B2's worlds start as spaces and fold
+> once their first generation dies, as each death is mended with a ring of
+> links; the worlds whose estate goes to the newborns or the parents stay
+> spaces, of about three dimensions
+> ([Chapter 87](87-what-folds-a-world.md)).
+
 <!-- figure healthy/poor -->
 ![Agents with three tokens or fewer](../figures/healthy/poor.svg)
 

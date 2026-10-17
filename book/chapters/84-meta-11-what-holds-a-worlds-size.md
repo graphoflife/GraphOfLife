@@ -18,6 +18,12 @@ a small world fails the mark for hubs, a large one the dimension. And a world
 that grows too small dies. This chapter gathers what the book now knows about
 what sets that number.
 
+> [!info] Added later (2026-10-17)
+> Why a large world fails the dimension: B2's kind of network is nearly a
+> small world, folded by the deaths of its old agents, and a small world
+> reads a larger dimension the more room it has
+> ([Chapter 87](87-what-folds-a-world.md)).
+
 ## The ledger of a world
 
 In every world built on B2's rules, an agent lives out its hundred iterations

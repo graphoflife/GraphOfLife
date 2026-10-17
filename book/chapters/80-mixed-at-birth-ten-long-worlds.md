@@ -358,6 +358,13 @@ rich the agents are: B2's worlds of 5,000 tokens are as poor as those of
 agents to 70,000 it stays between about 2.5 and 4. The rise belongs to B2's
 kind of network, not to the measure.)
 
+> [!info] Added later (2026-10-17)
+> [Chapter 87](87-what-folds-a-world.md) finds why: B2's kind of network is
+> nearly a small world, with no dimension of its own to show — every B2
+> world starts as a space and folds once its first generation dies, each
+> death mended with a ring of links. A larger world then reads a larger
+> dimension off the same few steps.
+
 > [!info] Added later (2026-10-17, Chapter 73)
 > "B2's kind of network" says too much. The rise holds for B2 itself, at
 > 5,000 and 10,000 tokens, and for its mixed worlds; other rules move the

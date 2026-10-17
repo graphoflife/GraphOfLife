@@ -228,6 +228,8 @@ they die, and every death closes a wide ring.
 [Chapter 48 · A world that cannot break](48-a-world-that-cannot-break.md) ·
 [Chapter 73 · Who inherits?](73-who-inherits.md) ·
 [Meta XI · What holds a world's size](84-meta-11-what-holds-a-worlds-size.md) ·
+[Meta X · Healthy and rich](79-meta-10-healthy-and-rich.md) ·
+[Chapter 80 · Mixed at birth: ten long worlds](80-mixed-at-birth-ten-long-worlds.md#the-marks-a-world-misses) ·
 [Every setting](../notes/settings.md#mend_on_death)
 
 <!-- turns -->
