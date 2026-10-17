@@ -245,13 +245,16 @@
             <option value="poorest">To the poorest first, raised to one level</option>
             <option value="newborns">To the children born this iteration</option>
             <option value="parents">To this iteration's parents, once per child</option>
+            <option value="children">To the dead agent's own children</option>
           </select>
           <small>Evenly makes each cull a leveller. Weighted makes it the opposite —
             the largest holders take most of what the dead leave, and every cull
             concentrates rather than spreads. To the poorest fills the lowest
             holdings first, like water on an uneven floor. To the newborns or to
             their parents rewards having children; in an iteration without births
-            the estate is shared out evenly.</small>
+            the estate is shared out evenly. To the dead agent's own children keeps
+            an estate in the family; one without a living child is shared out
+            evenly.</small>
         </div>
         <div class="field checkbox">
           <label><input type="checkbox" id="cfg_random_decisions" data-cfg="random_decisions"> Random decisions</label>

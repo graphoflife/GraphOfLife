@@ -199,7 +199,9 @@ on an uneven floor fills the lowest places first. `newborns` deals the pool
 out evenly over the children born this iteration that are still alive;
 `parents` over their parents, once per child, which pays for having
 children. In an iteration without a birth these two deal it out as
-`uniform` does. Baseline: `uniform`.
+`uniform` does. `children` leaves each dead agent's estate to its own living
+children, evenly, and deals an estate that finds no living child out as
+`uniform` does: the estate stays in the family. Baseline: `uniform`.
 
 ### tokens_created_per_phase
 

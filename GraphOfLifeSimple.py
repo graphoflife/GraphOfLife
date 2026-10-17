@@ -82,7 +82,8 @@ CLEANUP (after both phases)
   3. All tokens from the dead are pooled and shared out over the survivors —
      uniformly at random by default; `redistribution` names the other rules
      (by holdings, to the poorest, to this iteration's newborns or to their
-     parents) — keeping the global count conserved.
+     parents, to the dead agent's own children) — keeping the global count
+     conserved.
   4. If the world empties completely, a single fresh agent is resurrected
      holding every token.
 
@@ -2159,12 +2160,15 @@ class GraphOfLife:
         dying = starved + aged
 
         global_pool = self.cfg.tokens_created_per_phase
+        # Each dead agent's estate, for the rule that leaves it to its children.
+        estates: Dict[int, int] = {}
         if self.cfg.mend_on_death:
             # Each death on its own, its neighbourhood mended before the next:
             # then no death can split the graph, and the cull below finds one
             # piece. Their estates join the pool like any other.
             for u in sorted(dying):
-                global_pool += max(0, self.tokens.get(u, 0))
+                estates[u] = max(0, self.tokens.get(u, 0))
+                global_pool += estates[u]
                 self._remove_and_mend(u)
             dying = []
 
@@ -2181,7 +2185,8 @@ class GraphOfLife:
         report["orphaned"] = len(orphaned)
 
         for u in doomed:
-            global_pool += max(0, self.tokens.get(u, 0))
+            estates[u] = max(0, self.tokens.get(u, 0))
+            global_pool += estates[u]
 
         if doomed:
             # Their connections go first, so the upkeep record loses them with
@@ -2198,7 +2203,7 @@ class GraphOfLife:
         # dropped, and the resurrection below mints a whole world's worth
         # instead. It was reported all the same, which put a number on a chart
         # for tokens that went nowhere.
-        report["redistributed"] = self._share_out(global_pool)
+        report["redistributed"] = self._share_out(global_pool, estates)
 
         if self.G.number_of_nodes() == 0:
             aid = self.next_agent_id
@@ -2217,10 +2222,11 @@ class GraphOfLife:
 
         return report
 
-    def _share_out(self, pool: int) -> int:
+    def _share_out(self, pool: int, estates: Optional[Dict[int, int]] = None) -> int:
         """
         Give `pool` tokens to the living by the rule `redistribution` names, and
         return how many were given: all of them, or none when nobody is alive.
+        `estates` says what each dead agent left, when the pool is theirs.
 
         - `uniform`: every survivor has the same chance at each token, which
           makes a death a leveller.
@@ -2235,8 +2241,12 @@ class GraphOfLife:
           still alive.
         - `parents`: an even chance for each such child's parent, once per
           child, which pays for having had children that lived.
+        - `children`: each dead agent's estate to its own living children, an
+          even chance for each; an estate without a living child, and anything
+          else in the pool, as `uniform`.
 
-        The last two fall back to `uniform` in an iteration without any heir.
+        `newborns` and `parents` fall back to `uniform` in an iteration without
+        any heir, and `children` for a pool that is no one's estate.
         A node keeps its id when it is taken, so "newborn" and "parent" are of
         the node — whoever holds it now. Every draw is a multinomial or a draw
         without replacement from the world's stream, so the count of tokens is
@@ -2249,6 +2259,12 @@ class GraphOfLife:
         if rule == "poorest":
             self._fill_from_the_bottom(survivors, pool)
             return int(pool)
+        given = pool
+        if rule == "children":
+            pool -= self._to_children(estates or {}, survivors)
+            rule = "uniform"
+            if pool <= 0:
+                return int(given)
         heirs = survivors
         if rule == "by_tokens":
             held = np.array([max(0, int(self.tokens.get(u, 0)))
@@ -2279,7 +2295,29 @@ class GraphOfLife:
         draws = self.rng.multinomial(pool, probs)
         for u, extra in zip(heirs, draws):
             self.tokens[u] = self.tokens.get(u, 0) + int(extra)
-        return int(pool)
+        return int(given)
+
+    def _to_children(self, estates: Dict[int, int], survivors: List[int]) -> int:
+        """
+        Each estate to the dead agent's living children, an even chance for each
+        of them at each token; return how many tokens found an heir. A child is
+        of the node, as for `parents`: whoever holds the node its parent's node
+        gave birth to.
+        """
+        heirs: Dict[int, List[int]] = {}
+        for c in survivors:
+            parent = self.parent_of.get(c, NO_PARENT)
+            if parent in estates:
+                heirs.setdefault(parent, []).append(c)
+        given = 0
+        for dead in sorted(heirs):
+            estate, kids = int(estates[dead]), heirs[dead]
+            if estate <= 0:
+                continue
+            for c, extra in zip(kids, self.rng.multinomial(estate, [1 / len(kids)] * len(kids))):
+                self.tokens[c] = self.tokens.get(c, 0) + int(extra)
+            given += estate
+        return given
 
     def _fill_from_the_bottom(self, survivors: List[int], pool: int) -> None:
         """

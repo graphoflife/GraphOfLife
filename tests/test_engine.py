@@ -2254,6 +2254,37 @@ def test_newborns_and_parents_inherit_only_from_this_iterations_births():
         assert a.tokens == b.tokens, f"{rule} without a birth should share out as uniform does"
 
 
+def test_children_inherit_their_own_parents_estate():
+    """
+    `children` leaves each dead agent's estate to its own living children,
+    whatever their age, and to nobody else; an estate with no living child, and
+    a pool that is nobody's estate, are shared out as `uniform` does, draw for
+    draw.
+    """
+    world = new_world(small(redistribution="children"))
+    nodes = sorted(world.G.nodes())
+    dead_a, dead_b, childless = 10 ** 9, 10 ** 9 + 1, 10 ** 9 + 2
+    for child in nodes[1:4]:
+        world.parent_of[child] = dead_a
+        world.born_at[child] = world.iteration - 50     # grown up, a child all the same
+    world.parent_of[nodes[4]] = dead_b
+    before = dict(world.tokens)
+    estates = {dead_a: 300, dead_b: 120, childless: 0}
+    assert world._share_out(420, estates) == 420
+    gained = {u: world.tokens[u] - before[u] for u in nodes if world.tokens[u] != before[u]}
+    assert set(gained) <= set(nodes[1:5]), f"only the dead agents' children may inherit: {gained}"
+    assert sum(gained[u] for u in nodes[1:4] if u in gained) == 300
+    assert gained.get(nodes[4]) == 120
+    assert sum(world.tokens.values()) == sum(before.values()) + 420
+
+    # What has no heir — a childless estate, or a pool that is no one's — goes as uniform.
+    for estates in ({childless: 500}, None):
+        a, b = new_world(small(redistribution="children")), new_world(small(redistribution="uniform"))
+        a._share_out(500, estates)
+        b._share_out(500)
+        assert a.tokens == b.tokens, "an estate without an heir should share out as uniform does"
+
+
 def test_the_frozen_upkeep_settings_reproduce_the_old_engine():
     """
     `gol-1` has to keep meaning what it meant.

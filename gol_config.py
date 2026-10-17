@@ -208,7 +208,7 @@ class SimConfig:
     INACTIVE_WINDOW: ClassVar[Dict[str, int]] = {"phase": 1, "iteration": 2}
     # How the tokens of removed agents are shared among the survivors.
     REDISTRIBUTIONS: ClassVar[Tuple[str, ...]] = (
-        "uniform", "by_tokens", "poorest", "newborns", "parents")
+        "uniform", "by_tokens", "poorest", "newborns", "parents", "children")
     # How an agent reaches a stranger (link_search), which way it goes there
     # (link_steering), and who has to agree to the link it proposes (link_consent).
     LINK_SEARCHES: ClassVar[Tuple[str, ...]] = ("off", "jump", "walk", "reach")
@@ -354,7 +354,9 @@ class SimConfig:
     # than a leveller; `poorest` raises the poorest to a common level, like
     # water filling the lowest places first; `newborns` gives it to the
     # children born this iteration, and `parents` to their parents, once per
-    # child. The last two fall back to `uniform` in an iteration without any.
+    # child; those two fall back to `uniform` in an iteration without any.
+    # `children` leaves each dead agent's estate to its own living children,
+    # and what has no heir goes as `uniform`.
     redistribution: str = "uniform"
 
     # ---- Open-ended evolution ----

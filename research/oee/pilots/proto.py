@@ -442,9 +442,11 @@ class ProtoWorld(GraphOfLife):
             self._count("aged", len(old))
             starved = sorted(set(starved) | set(old))
         pool = self.cfg.tokens_created_per_phase
+        estates = {}
         for u in starved:
             nbrs = list(self.G.neighbors(u))
-            pool += max(0, self.tokens.get(u, 0))
+            estates[u] = max(0, self.tokens.get(u, 0))
+            pool += estates[u]
             self._drop_edges([(u, v) for v in nbrs])
             self.G.remove_node(u)
             self._forget_agent(u)
@@ -455,7 +457,8 @@ class ProtoWorld(GraphOfLife):
             for c in comps[1:]:
                 orphaned.update(c)
         for u in orphaned:
-            pool += max(0, self.tokens.get(u, 0))
+            estates[u] = max(0, self.tokens.get(u, 0))
+            pool += estates[u]
         if orphaned:
             self._drop_edges([(u, v) for u in orphaned for v in self.G.neighbors(u)])
             self.G.remove_nodes_from(list(orphaned))
@@ -463,7 +466,7 @@ class ProtoWorld(GraphOfLife):
                 self._forget_agent(u)
         report["starved"] = len(starved)
         report["orphaned"] = len(orphaned)
-        report["redistributed"] = self._share_out(pool)
+        report["redistributed"] = self._share_out(pool, estates)
         if self.G.number_of_nodes() == 0:
             aid = self.next_agent_id
             self.next_agent_id += 1
