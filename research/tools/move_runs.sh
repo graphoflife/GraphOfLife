@@ -9,7 +9,9 @@
 # and the same total size — then swap the folder for a link to the copy and
 # remove the original. A run whose copy does not check out is left as it was.
 # First used 2026-10-16, with the author's agreement, to move the largest old
-# runs (Experiments 7, 8 and 10) to /media/stefan/Speicher2/GraphOfLifeRuns.
+# runs (Experiments 7, 8 and 10) to /media/stefan/Speicher2/GraphOfLifeRuns;
+# on 2026-10-18 Experiments 17 to 19 and the pilot batches R, T and V followed.
+# A pilot batch is named by its path under GraphOfLifeRuns, e.g. `.pilots/R`.
 set -u
 cd "/home/stefan/Documents/CodingProjects/GraphOfLife Claude/GraphOfLifeRuns" || exit 1
 DEST=$1
@@ -18,6 +20,7 @@ mkdir -p "$DEST" || exit 1
 for run in "$@"; do
     if [ -L "$run" ]; then echo "$run: already a link"; continue; fi
     if [ ! -d "$run" ]; then echo "$run: no such run"; continue; fi
+    mkdir -p "$DEST/$(dirname "$run")" || { echo "$run: no room made for it there, left in place"; continue; }
     if ! rsync -a "$run/" "$DEST/$run/"; then echo "$run: copy failed, left in place"; continue; fi
     differs=$(rsync -a --checksum --dry-run --itemize-changes "$run/" "$DEST/$run/" | grep -v '^\.d\.\.t')
     files_here=$(find "$run" -type f | wc -l)
