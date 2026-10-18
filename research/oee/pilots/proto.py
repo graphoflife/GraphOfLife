@@ -45,6 +45,12 @@ Mechanics (P keys):
                   newborn's brain is a copy of its parent's): the engine's mix_mates
                   since 2026-10-17, identical draw for draw to this switch's first
                   version, which batch MP's first worlds were played with (equiv.py).
+  mate_pays bool  with mix: a mate pays for the child that carries half its brain — as
+                  many tokens as the parent gives the child, as far as the mate can and
+                  never its last — once every birth of the phase is made, as gifts are,
+                  so that no agent's turn depends on whom an earlier one drew; the child
+                  keeps both. Being a mate is then no free ride, and a child's price is
+                  shared, not halved. (Meta XI's "a mate that pays its share", 2026-10-18.)
   took_kin bool   one input row per candidate: did it take, in the last game, a node held
                   by an agent of my genotype?
   unit_token bool (brain_kind=grow) every active hidden unit holds one token, as
@@ -169,7 +175,7 @@ DEFAULTS = {"mor": "off", "memory": False, "seek": False, "toll": "pool", "seek_
             "support": False, "fog": False, "support_gain": 1.0, "allies": False,
             "kin_pool": -1, "birth_allies": False, "ally_keep": False,
             "engine": False, "contest": "plurality", "pool": "", "kin_sense": False,
-            "fission": False, "tag_rate": 0.0, "breeders": "any"}
+            "fission": False, "tag_rate": 0.0, "breeders": "any", "mate_pays": False}
 P: Dict[str, Any] = dict(DEFAULTS)
 
 
@@ -255,6 +261,13 @@ class ProtoWorld(GraphOfLife):
         self._link_bank: Optional[int] = None
         # Each genotype's family tag (tag_rate > 0): a tag changes only when a brain mutates.
         self.tag_of: Dict[int, int] = {}
+        # mate_pays: (mate, child, tokens the parent gave) for each mixed birth of the phase,
+        # settled before its cleanup; the candidates of the birth under way, to find its mate.
+        self._mate_dues: List[Tuple[int, int, int]] = []
+        self._birth_candidates: Optional[List[int]] = None
+        self._birth_mate: Optional[int] = None
+        if P.get("mate_pays") and not (P.get("mix") or cfg.mix_at_birth):
+            raise ValueError("mate_pays is about a mate: it needs mix (or mix_at_birth)")
         if P.get("mix") and not cfg.mix_at_birth:
             cfg = dataclasses.replace(cfg, mix_at_birth=True)
         if P.get("mates", "any") != "any" and cfg.mix_mates == "any":
@@ -317,6 +330,9 @@ class ProtoWorld(GraphOfLife):
         """The engine's mixture (mix_at_birth), entered in the family tree when it is a new genotype."""
         child = super()._mixed_brain(brain, mate)
         self._count("mixed")
+        if self._birth_candidates is not None:
+            # The engine hands over the mate's brain, not the mate; each agent holds its own brain.
+            self._birth_mate = next((v for v in self._birth_candidates if self.brains.get(v) is mate), None)
         if child.brain_id != brain.brain_id:
             old = brain.brain_id
             self.root_of[child.brain_id] = self.root_of.get(old, old)
@@ -588,7 +604,13 @@ class ProtoWorld(GraphOfLife):
 
     # ---- reproduction, with the search for partners after it ----------------
     def _spawn_child(self, parent, parent_tokens, child_tokens, candidates, Y):
+        if P.get("mate_pays"):
+            self._birth_candidates, self._birth_mate = list(candidates), None
         child_id, linked = self._spawn_child_rules(parent, parent_tokens, child_tokens, candidates, Y)
+        if P.get("mate_pays"):
+            if self._birth_mate is not None:
+                self._mate_dues.append((int(self._birth_mate), int(child_id), int(child_tokens)))
+            self._birth_candidates, self._birth_mate = None, None
         if P.get("came_from"):
             self.came_from[int(child_id)] = int(parent)
         if P.get("birth_allies"):
@@ -902,7 +924,24 @@ class ProtoWorld(GraphOfLife):
         self._count("links_freed", len(seen))
         return super()._drop_edges(edges)
 
+    def _settle_mates(self) -> None:
+        """Each mate pays its child what the parent gave, as far as it can, never its last token."""
+        dues, self._mate_dues = self._mate_dues, []
+        for mate, child, wanted in dues:
+            if not (self.G.has_node(mate) and self.G.has_node(child)):
+                continue
+            amount = min(wanted, int(self.tokens.get(mate, 0)) - 1)
+            if amount < 1:
+                self._count("mates_unpaid")
+                continue
+            self.tokens[mate] = int(self.tokens[mate]) - amount
+            self.tokens[child] = int(self.tokens.get(child, 0)) + amount
+            self._count("mates_paid")
+            self._count("mate_tokens", amount)
+
     def _cleanup_and_redistribute(self):
+        if self._mate_dues:
+            self._settle_mates()
         if not P.get("link_token"):
             return self._cleanup_rules()
         self._link_bank = 0
