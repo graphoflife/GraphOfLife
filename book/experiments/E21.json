@@ -1,0 +1,31 @@
+{
+ "id": "E21",
+ "title": "Five more seeds for the rules that held",
+ "thesis": {
+  "claim": "A rule whose candidate held over 10,000 iterations holds again in new worlds: for each of three rules — brains mixed at birth with a fast change of brains (a mutation probability of 0.8), with no random inputs, and with no revolutions — at least four of five new worlds (seeds 3 to 7) live to iteration 10,000 and there meet every mark of the health bar, have a diversity score above that of B2's median world at 10,000 (0.49), and hold a smaller share of their agents at three tokens or fewer than the least poor of B2's ten worlds (0.66).",
+  "why": "Meta X's candidates were played on to 10,000 iterations as pilots (batch LC), and by Meta X's test — it lives, meets every mark, is more diverse than B2's median world and poorer than none of B2's — some held: mixing with a fast change of brains in both its seeds (1,244 agents, 25% at three tokens or fewer, a diversity score of 0.66; 407 agents, 2%, 0.75), mixing without random inputs in seed 2 (372 agents, 4%, 0.63), mixing without revolutions in seed 2 (948 agents, 24%, 0.61; its seed 1 fell back, 2,221 agents, 64%). Plain mixing held in five of Experiment 17's ten worlds, three of them among seeds 3 to 7. One world can be luck: Meta X's second step gives each rule that held five seeds more, from the start. Mixed worlds' size drifts, and their riches go with it (Meta XI), so a rule earns its place only if it holds more often than mixing alone. The control is Experiment 17's worlds of the same seeds.",
+  "confirm": "For a rule: at least four of its five worlds live to 10,000 and pass Meta X's test there.",
+  "refute": "For a rule: three or fewer pass — it does no better than mixing alone, which passed in three of the same five seeds."
+ },
+ "runs": {
+  "baseline": "B2",
+  "world": {"total_tokens": 10000},
+  "seeds": "3..7",
+  "iterations": 10000,
+  "record": {"heavy_every": 25, "archive_every": 500},
+  "conditions": [
+   {"name": "mixed at birth", "set": {"mix_at_birth": true}},
+   {"name": "mixed at birth, fast brain change", "set": {"mix_at_birth": true, "mutation_probability": 0.8}},
+   {"name": "mixed at birth, no random inputs", "set": {"mix_at_birth": true, "random_input_amount": 0}},
+   {"name": "mixed at birth, no revolutions", "set": {"mix_at_birth": true, "allow_revolutions": false}}
+  ]
+ },
+ "analyse": {
+  "kind": "series",
+  "settledFrom": 1000,
+  "figures": [
+   {"name": "agents", "stat": "nodes", "phase": 2, "title": "Agents alive", "y": "agents"},
+   {"name": "median", "stat": "medianTokens", "phase": 2, "title": "The median agent's tokens", "y": "tokens", "min": 0}
+  ]
+ }
+}

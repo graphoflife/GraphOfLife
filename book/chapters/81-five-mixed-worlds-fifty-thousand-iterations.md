@@ -295,5 +295,5 @@ led to extinction by the very brains that win in it.
 <!-- turns -->
 ---
 
-← [Chapter 69 · A hundred thousand iterations](69-a-hundred-thousand-iterations.md) · [Contents](../README.md) · [Chapter 74 · Meta VI · Every world side by side](74-meta-6-every-world.md) →
+← [Chapter 69 · A hundred thousand iterations](69-a-hundred-thousand-iterations.md) · [Contents](../README.md) · [Chapter 92 · The candidates, played on](92-the-candidates-played-on.md) →
 <!-- /turns -->

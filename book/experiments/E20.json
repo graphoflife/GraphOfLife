@@ -1,0 +1,29 @@
+{
+ "id": "E20",
+ "title": "The candidates, played on: two worlds of engine rules",
+ "thesis": {
+  "claim": "Played by the lab from iteration 0, these two worlds are the pilot worlds of batch LC, game for game: in each, the agents alive and the links between them after every game match the pilot's, iteration by iteration, up to where the pilot stopped (iteration 4,344 for links to strangers, 6,522 for mixing with the last token kept). Played on to 10,000, each is then read by Meta X's test of a long run.",
+  "why": "A pilot plays the engine's own game, so a pilot with a lab world's settings and seed is that lab world: the two mixed worlds of batch Q are Experiment 17's worlds of seeds 1 and 2, agent for agent. These two candidates of Meta X were being played on to 10,000 iterations as pilots when the computer was restarted on 18 October 2026; pilots now run only where they can be seen, and both use engine settings only, so the lab can finish them. At iteration 1,000 both met every mark of the health bar: links to strangers by a free reach, forced on the other end (batch K), with 1,931 agents, 49% of them at three tokens or fewer and a diversity score of 0.54; mixing with only the last token kept at home (batch Y), with 1,791 agents, 79% poor and 0.62. Read where the pilots stopped, they held 2,584 agents, 59% poor, at 4,000, and 2,066, 78% poor, at 6,500 — this plan was written after those readings, so the claim is only that the lab plays the same worlds.",
+  "confirm": "Both worlds' agents and links match their pilot's after every game up to where the pilot stopped.",
+  "refute": "A world's agents or links differ from its pilot's at some iteration: the lab plays another world than the pilot did, and the chapter says from where."
+ },
+ "runs": {
+  "baseline": "B2",
+  "world": {"total_tokens": 10000},
+  "seeds": "1",
+  "iterations": 10000,
+  "record": {"heavy_every": 25, "archive_every": 500},
+  "conditions": [
+   {"name": "links to strangers, a free reach, forced", "set": {"link_search": "reach", "link_consent": "forced"}},
+   {"name": "mixed at birth, the last token kept", "set": {"mix_at_birth": true, "keep_home": 0.01}}
+  ]
+ },
+ "analyse": {
+  "kind": "series",
+  "settledFrom": 1000,
+  "figures": [
+   {"name": "agents", "stat": "nodes", "phase": 2, "title": "Agents alive", "y": "agents"},
+   {"name": "median", "stat": "medianTokens", "phase": 2, "title": "The median agent's tokens", "y": "tokens", "min": 0}
+  ]
+ }
+}

@@ -539,6 +539,22 @@
           "file": "chapters/81-five-mixed-worlds-fifty-thousand-iterations.md",
           "experiment": "E18",
           "status": "analysed"
+        },
+        {
+          "id": "92",
+          "title": "The candidates, played on",
+          "note": "Meta X's candidates — worlds that met every mark with diverse agents at iteration 1,000 — played on to 10,000: which held, which fell back, which died out on the way. Experiment 20 plays the two unfinished ones of engine rules in the lab.",
+          "file": "chapters/92-the-candidates-played-on.md",
+          "experiment": "E20",
+          "status": "ready"
+        },
+        {
+          "id": "93",
+          "title": "Five more seeds for the rules that held",
+          "note": "Experiment 21: the rules whose candidate held over 10,000 iterations — mixing with a fast change of brains, with no random inputs, with no revolutions — in five new worlds each, beside plain mixing in the same seeds.",
+          "file": "chapters/93-five-more-seeds-for-the-rules-that-held.md",
+          "experiment": "E21",
+          "status": "ready"
         }
       ]
     },

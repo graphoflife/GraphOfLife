@@ -184,5 +184,5 @@ longer makes.
 <!-- turns -->
 ---
 
-← [Chapter 81 · Five mixed worlds, fifty thousand iterations](81-five-mixed-worlds-fifty-thousand-iterations.md) · [Contents](../README.md) · [Chapter 75 · Meta VII · Where tokens go](75-meta-7-where-tokens-go.md) →
+← [Chapter 93 · Five more seeds for the rules that held](93-five-more-seeds-for-the-rules-that-held.md) · [Contents](../README.md) · [Chapter 75 · Meta VII · Where tokens go](75-meta-7-where-tokens-go.md) →
 <!-- /turns -->

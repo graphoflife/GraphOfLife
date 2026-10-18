@@ -382,8 +382,11 @@ def main():
     ap.add_argument("--slots", type=int, default=SLOTS)
     ap.add_argument("--wait", type=int, help="loop: the queue of a round already running, to finish and judge first")
     a = ap.parse_args()
-    if a.what == "loop":
-        return loop(a.rounds, a.n, a.slots, a.wait)
+    if a.what in ("loop", "sample"):
+        # Retired on 18 October 2026: a round's worlds ran as pilots out of sight. A round is to
+        # become a lab experiment, started with ▶ in the Book tab; until then the search waits.
+        sys.exit(f"search.py {a.what} is retired: a round's worlds are to run as a lab experiment, "
+                 "started with ▶ in the Book tab (gol_lab.py). `judge` still reads the rounds played.")
     state = load_state()
     if a.what == "sample":
         sample(state, a.round or state["rounds"] + 1, a.n)

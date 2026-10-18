@@ -132,6 +132,8 @@ everything can be checked with it.
 
 - [Chapter 69 · A hundred thousand iterations](chapters/69-a-hundred-thousand-iterations.md)
 - [Chapter 81 · Five mixed worlds, fifty thousand iterations](chapters/81-five-mixed-worlds-fifty-thousand-iterations.md)
+- [Chapter 92 · The candidates, played on](chapters/92-the-candidates-played-on.md)
+- [Chapter 93 · Five more seeds for the rules that held](chapters/93-five-more-seeds-for-the-rules-that-held.md)
 
 **Part VIII · Across all worlds**
 
