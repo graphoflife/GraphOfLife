@@ -446,6 +446,13 @@
           "note": "B2 without revolutions together with each of 24 other rules (batch W): for nearly every rule nothing changes, as revolutions are rare in B2's kind of world; with brains mixed at birth, where they are common, they keep a world small and rich.",
           "file": "chapters/88-revolutions-with-every-other-rule.md",
           "status": "analysed"
+        },
+        {
+          "id": "89",
+          "title": "Handover, with every other rule",
+          "note": "B2 with handover together with each of 23 other rules (batch X): it costs two marks of the health bar with nearly every rule, thinning the network into trees; it cancels mixing's riches; it unfolds a world a little, since parents pass their links on.",
+          "file": "chapters/89-handover-with-every-other-rule.md",
+          "status": "analysed"
         }
       ]
     },

@@ -376,5 +376,5 @@ To make every figure of this chapter: `python3 book_figures.py takeover`.
 <!-- turns -->
 ---
 
-← [Chapter 88 · Revolutions, with every other rule](88-revolutions-with-every-other-rule.md) · [Contents](../README.md) · [Chapter 87 · What folds a world](87-what-folds-a-world.md) →
+← [Chapter 89 · Handover, with every other rule](89-handover-with-every-other-rule.md) · [Contents](../README.md) · [Chapter 87 · What folds a world](87-what-folds-a-world.md) →
 <!-- /turns -->

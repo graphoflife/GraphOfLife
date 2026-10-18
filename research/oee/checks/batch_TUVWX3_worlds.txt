@@ -1,0 +1,25 @@
+# Worlds of batches T to X finished after batch_TUVWX2_worlds.txt was made (2026-10-18): judged into batch_TUVWX3_T100.json.
+pilot GraphOfLifeRuns/.pilots/T/gifts-B1norev-s1 500:1000
+pilot GraphOfLifeRuns/.pilots/X/handover-anychild-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/X/handover-came-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/X/handover-familypool-s1 500:1000
+pilot GraphOfLifeRuns/.pilots/X/handover-familypool-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/X/handover-familysense-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/X/handover-grow-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/X/handover-helped-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/X/handover-keephalf-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/X/handover-keepone-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/X/handover-kinsense-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/X/handover-lapse-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/X/handover-linktoken-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/X/handover-lottery-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/X/handover-mix-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/X/handover-mut05-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/X/handover-mut80-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/X/handover-newborns-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/X/handover-noage-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/X/handover-nodice-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/X/handover-parents-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/X/handover-pool-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/X/handover-poorest-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/X/handover-unittoken-s2 500:1000

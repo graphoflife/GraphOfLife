@@ -29,7 +29,7 @@ for them batch W plays the missing corner, the same rule *with* revolutions.
 <!-- figure norevcombos/changes -->
 ![Each rule, with no revolutions and without](../figures/norevcombos/changes.svg)
 
-**Each rule, with no revolutions and without.** Each row is one other rule. Above: what adding no revolutions to a world of B2 with that rule changes (batch W), at iteration 1,000 — in orange, the share of the agents holding three tokens or fewer; in violet, the diversity score; a dot for each seed, 1 and 2. Below: the share of a contested world the brains of 1,000 of the world with both rules hold after 100 iterations against those of 500, the mean of two contests, a dot for each seed; the dashed line marked B2 is the median of the lab's ten B2 worlds, played the same way.
+**Each rule, with no revolutions and without.** Each row is one other rule. First: what adding no revolutions to a world of B2 with that rule changes (batch W), at iteration 1,000 — in orange, the share of the agents holding three tokens or fewer; in violet, the diversity score; a dot for each seed, 1 and 2. Last: the share of a contested world the brains of 1,000 of the world with both rules hold after 100 iterations against those of 500, the mean of two contests, a dot for each seed; the dashed line marked B2 is the median of the lab's ten B2 worlds, played the same way.
 
 > [!example]- How to make this figure
 > **Runs.** Batch W's pilot worlds (B2 at 10,000 tokens, no revolutions and one other rule, seeds 1 and 2, `GraphOfLifeRuns/.pilots/W/`) and their controls: the same rule alone, from the batch or lab experiment that made it.
@@ -100,5 +100,5 @@ change and brains that grow (0.72 and 0.85 each), half kept at home (0.72 and
 <!-- turns -->
 ---
 
-← [Chapter 86 · Eight switches at once](86-eight-switches-at-once.md) · [Contents](../README.md) · [Chapter 60 · Worlds of 100,000 tokens](60-worlds-of-100000-tokens.md) →
+← [Chapter 86 · Eight switches at once](86-eight-switches-at-once.md) · [Contents](../README.md) · [Chapter 89 · Handover, with every other rule](89-handover-with-every-other-rule.md) →
 <!-- /turns -->

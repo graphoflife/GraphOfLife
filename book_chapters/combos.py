@@ -13,6 +13,7 @@ and rejudge_T100.json for batch S's worlds).
 
     mixcombos   Chapter 82 · Brains mixed at birth, with every other rule (batch Y)
     norevcombos Chapter 88 · Revolutions, with every other rule (batch W)
+    handovercombos  Chapter 89 · Handover, with every other rule (batch X)
 """
 from __future__ import annotations
 
@@ -195,10 +196,11 @@ def _combos(ch: F.Chapter, b: Batch) -> None:
     ch.number("references", {"B2": {k: value(b2, k) for k in KEYS}, "alone": {k: value(ref, k) for k in KEYS}})
 
 
-def _changes(ch: F.Chapter, b: Batch, fig: str) -> Optional[Dict[str, Any]]:
+def _changes(ch: F.Chapter, b: Batch, fig: str, marks: bool = False) -> Optional[Dict[str, Any]]:
     """A compact view of a batch: for each other rule, what adding the batch's rule changes in the share of poor
-    agents and in diversity (each seed a dot), and whether its brains of 1,000 beat those of 500 — one row per
-    rule, the rules in the order of the change in the poor share."""
+    agents and in diversity (each seed a dot), with `marks` also in the marks of the health bar, and whether its
+    brains of 1,000 beat those of 500 — one row per rule, the rules in the order of the change in the poor
+    share."""
     measured, contests = _measured(), _contests()
     rows = []
     for name, control, with_both in b.rows():
@@ -229,24 +231,40 @@ def _changes(ch: F.Chapter, b: Batch, fig: str) -> Optional[Dict[str, Any]]:
                   "colour": ORANGE, "alpha": 0.85}]
     b2_med = float(np.median(_lab_contests("B2-10000-s")))
     height = 18 * len(rows)
+    health = []
+    if marks:
+        xs, ys = [], []
+        for k, (_, pairs, _) in enumerate(rows):
+            for v in change(pairs, "marks"):
+                xs.append(v)
+                ys.append(k)
+        health = [{"title": f"What {b.words} changes in health", "x": {"label": "marks of the health bar (of 7), "
+                                                                               "with it minus without it",
+                                                                      "min": min(xs + [0]) - 0.4,
+                                                                      "max": max(xs + [0]) + 0.4},
+                   "y": {"categories": cats}, "height": height,
+                   "series": [{"label": None, "x": xs, "y": ys, "points": True, "size": 6, "colour": GREY,
+                               "alpha": 0.85}],
+                   "guides": [{"axis": "x", "at": 0.0, "label": ""}]}]
     spread = [v for sr in series for v in sr["x"]]
     room = 0.05 * (max(spread) - min(spread)) if spread else 0.05
     ch.grid(fig, [
         {"title": f"What {b.words} changes", "x": {"label": "with it, minus without it",
                                                     "min": min(spread) - room, "max": max(spread) + room},
          "y": {"categories": cats}, "series": series, "height": height,
-         "guides": [{"axis": "x", "at": 0.0, "label": ""}]},
+         "guides": [{"axis": "x", "at": 0.0, "label": ""}]}] + health + [
         {"title": "Do the brains of 1,000 beat those of 500?", "x": {"label": "the later brains' share", "min": 0.2,
                                                                     "max": 1.0},
          "y": {"categories": cats}, "series": evolution, "height": height,
          "guides": [{"axis": "x", "at": 0.5, "label": "no better"}, {"axis": "x", "at": b2_med, "label": "B2"}]}],
         columns=1, title=f"Each rule, with {b.words} and without",
-        caption=(f"Each row is one other rule. Above: what adding {b.words} to a world of B2 with that rule changes "
+        caption=(f"Each row is one other rule. First: what adding {b.words} to a world of B2 with that rule changes "
                  f"(batch {b.letter}), at iteration 1,000 — in orange, the share of the agents holding three tokens "
-                 f"or fewer; in violet, the diversity score; a dot for each seed, 1 and 2. Below: the share of a "
-                 f"contested world the brains of 1,000 of the world with both rules hold after 100 iterations "
-                 f"against those of 500, the mean of two contests, a dot for each seed; the dashed line marked B2 "
-                 f"is the median of the lab's ten B2 worlds, played the same way."),
+                 f"or fewer; in violet, the diversity score; a dot for each seed, 1 and 2. "
+                 + ("Then: what it changes in the marks of the health bar the world meets. " if marks else "")
+                 + f"Last: the share of a contested world the brains of 1,000 of the world with both rules hold "
+                 f"after 100 iterations against those of 500, the mean of two contests, a dot for each seed; the "
+                 f"dashed line marked B2 is the median of the lab's ten B2 worlds, played the same way."),
         recipe=recipe(f"Batch {b.letter}'s pilot worlds (B2 at 10,000 tokens, {b.words} and one other rule, seeds "
                       f"1 and 2, `GraphOfLifeRuns/.pilots/{b.letter}/`) and their controls: the same rule alone, "
                       f"from the batch or lab experiment that made it.",
@@ -324,6 +342,11 @@ def _revolution_rates() -> Dict[str, Dict[str, float]]:
 def norevcombos(ch: F.Chapter) -> None:
     if _changes(ch, NOREV, "changes") is not None:
         ch.number("revolution_rates", _revolution_rates())
+
+
+@chapter
+def handovercombos(ch: F.Chapter) -> None:
+    _changes(ch, HANDOVER, "changes", marks=True)
 
 
 @chapter

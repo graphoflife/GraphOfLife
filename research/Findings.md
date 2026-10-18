@@ -540,6 +540,15 @@ each two-by-two read at 1,000 by research/atlas/at.py)**
   alone 0.84, B2 0.68); fastest with links that hold a token (0.93), half kept (0.91), units that hold a token
   (0.90); no better with stakes pooled by family (0.35), handover, slow brain change (0.47), no random inputs (0.50).
 
+**Handover, with every other rule (batch X, Ch. 89; 2026-10-18; B2 with handover and 23 other rules, seeds 1 and 2,
+1,000 iterations, against each rule alone)**
+- Costs health with nearly every rule: median -2 marks (up to -4; none in 5 of 46): the 2-core fails in 38 of 46
+  worlds, the link cut in 42, the agent cut in 36 (alone: 0, 2, 3); links per agent -1.8 (trees on single links).
+- Poor share +0.04, diversity +0.08 at the median; cancels mixing's riches (+0.48/+0.32 from 28%/40%) and those of
+  link/unit tokens (+0.14 to +0.22).
+- Unfolds a world a little: typical distance over the twin's +0.24 (higher in 41 of 46), rings -3.7 groups.
+- Evolution slower: later brains above half in 35 of 46, median 0.57 (B2 0.68; handover alone 0.60/0.60).
+
 **Revolutions, with every other rule (batch W, Ch. 88; 2026-10-17; B2 without revolutions and 24 other rules, seeds
 1 and 2, 1,000 iterations, against each rule alone; contests 1,000 vs 500)**
 - For most rules nothing changes: median change +0.002 in the share at <= 3 tokens, +0.008 in diversity (48 pairs);
