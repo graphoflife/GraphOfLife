@@ -45,17 +45,24 @@ BATCHES: Dict[str, Tuple[str, List[str]]] = {
     "Q": ("Brains mixed at birth, brain units that hold a token, an eye for raids on kin, and links that hold a "
           "token without old age", ["78"]),
     "R": ("Who inherits the estate of the dead: the poorest, the newborns, their parents", ["73"]),
-    "T": ("Gifts together with each other switch", []),
-    "U": ("Eight switches in combination on B2: a fractional factorial design", []),
-    "V": ("Eight switches in combination on B1: a fractional factorial design", []),
-    "W": ("No revolutions together with each other switch, on B2", []),
-    "X": ("Handover together with each other switch, on B2", []),
-    "Y": ("Brains mixed at birth together with each other switch, on B2", []),
-    "K": ("Links to strangers on B2: every search (jump, walk, reach) with every steering and consent", []),
+    "T": ("Gifts together with each other switch", ["90"]),
+    "U": ("Eight switches in combination on B2: a fractional factorial design", ["86"]),
+    "V": ("Eight switches in combination on B1: a fractional factorial design", ["86"]),
+    "W": ("No revolutions together with each other switch, on B2", ["88"]),
+    "X": ("Handover together with each other switch, on B2", ["89"]),
+    "Y": ("Brains mixed at birth together with each other switch, on B2", ["82"]),
+    "K": ("Links to strangers on B2: every search (jump, walk, reach) with every steering and consent", ["83"]),
     "Z": ("Settings drawn at random from every value the book has used, the values that make worlds worse "
           "dropped round after round (research/oee/search.md)", []),
     "LC": ("The candidates, the worlds closest to the author's picture of one that might keep evolving, played on "
            "to 10,000 iterations", ["79"]),
+    "SW": ("Mixing switched at a moment: off in the five worlds of Experiment 17 that met every mark, at 5,000; on "
+           "in five of B2's worlds, at 2,000", ["80"]),
+    "M": ("Steadying a mixed world: each rule of the engine that might hold its size (estates, half kept at home, "
+          "searches, a slower change of brains), and the estate to a dead agent's own children (H), parents as "
+          "mates (MP) and a bought life (BL)", ["84", "85"]),
+    "YB": ("Who breeds: only the young or only the old, in B2 and in B2 with brains mixed at birth", ["87"]),
+    "BIG": ("B2 at 100,000 tokens, one world to 1,000 iterations", ["87"]),
 }
 #: Batches whose every world draws settings of its own: one line in the table of conditions.
 DRAWN = {"Z": "each world its settings drawn at random from the values the book has used (research/oee/search.md)"}

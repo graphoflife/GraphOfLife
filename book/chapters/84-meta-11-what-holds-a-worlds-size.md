@@ -153,6 +153,17 @@ Ways to build the pull, and the first of them tried:
    take 67% and 64% of a contested world from those of 500, those of 2,000
    take 79% and 77% from those of 1,000; B2: 69% and 67%, then 65% and 76%).
 
+> [!info] Added later (18 October 2026): Experiment 19
+> Parents as mates kept every mixed world alive to 20,000 iterations, but not
+> rich. The ten worlds settled at about 2,000 agents, six in ten of them
+> holding three tokens or fewer, their agents breeding twice as eagerly as
+> with any mate and differing as much
+> ([Chapter 85](85-mixed-at-birth-with-parents-as-mates.md)). Taking the free
+> mate away holds a world's size, but at one size for every world — larger
+> than mixing's, smaller than B2's — and not at a rich one: the last point
+> below, that it did so "without making them poor", held for the pilots of
+> 5,000 iterations, not for the ten worlds of 20,000.
+
 ## What it teaches
 
 - **A world's size is set by how eagerly its agents breed**, and in these
@@ -171,5 +182,5 @@ Ways to build the pull, and the first of them tried:
 <!-- turns -->
 ---
 
-← [Chapter 79 · Meta X · Healthy and rich](79-meta-10-healthy-and-rich.md) · [Contents](../README.md) · [Appendix A · What a simulation costs](A-costs.md) →
+← [Chapter 79 · Meta X · Healthy and rich](79-meta-10-healthy-and-rich.md) · [Contents](../README.md) · [Chapter 91 · Meta XII · Rules in company](91-meta-12-rules-in-company.md) →
 <!-- /turns -->

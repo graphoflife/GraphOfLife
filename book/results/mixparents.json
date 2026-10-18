@@ -1,0 +1,177 @@
+{
+ "chapter": "mixparents",
+ "numbers": {
+  "verdict": {
+   "lived": 10,
+   "ended": {
+    "B2-10000-bcc1bc-s001": 20000,
+    "B2-10000-bcc1bc-s002": 20000,
+    "B2-10000-bcc1bc-s003": 20000,
+    "B2-10000-bcc1bc-s004": 20000,
+    "B2-10000-bcc1bc-s005": 20000,
+    "B2-10000-bcc1bc-s006": 20000,
+    "B2-10000-bcc1bc-s007": 20000,
+    "B2-10000-bcc1bc-s008": 20000,
+    "B2-10000-bcc1bc-s009": 20000,
+    "B2-10000-bcc1bc-s010": 20000
+   },
+   "shares": {
+    "B2-10000-bcc1bc-s001": 0.5784841075794621,
+    "B2-10000-bcc1bc-s002": 0.5544069640914037,
+    "B2-10000-bcc1bc-s003": 0.6020608439646713,
+    "B2-10000-bcc1bc-s004": 0.617632241813602,
+    "B2-10000-bcc1bc-s005": 0.6099647710115752,
+    "B2-10000-bcc1bc-s006": 0.573208722741433,
+    "B2-10000-bcc1bc-s007": 0.6068080907745437,
+    "B2-10000-bcc1bc-s008": 0.6576182136602452,
+    "B2-10000-bcc1bc-s009": 0.5964479526393686,
+    "B2-10000-bcc1bc-s010": 0.6123885499765368
+   },
+   "median_share": 0.6044344673696075,
+   "line": 0.66,
+   "marks": {
+    "B2-10000-bcc1bc-s001": 6,
+    "B2-10000-bcc1bc-s002": 6,
+    "B2-10000-bcc1bc-s003": 6,
+    "B2-10000-bcc1bc-s004": 6,
+    "B2-10000-bcc1bc-s005": 6,
+    "B2-10000-bcc1bc-s006": 6,
+    "B2-10000-bcc1bc-s007": 6,
+    "B2-10000-bcc1bc-s008": 6,
+    "B2-10000-bcc1bc-s009": 6,
+    "B2-10000-bcc1bc-s010": 6
+   }
+  },
+  "breeding": {
+   "any neighbour as mate": {
+    "able": 0.33180987202925044,
+    "per_100_able": 3.0313588850174216
+   },
+   "only parents as mates": {
+    "able": 0.15968847054495547,
+    "per_100_able": 6.352912223133716
+   }
+  },
+  "evolution": {
+   "1,000/500": {
+    "parents": [
+     0.782,
+     0.771,
+     0.884,
+     0.728,
+     0.755,
+     0.754,
+     0.84,
+     0.785,
+     0.682,
+     0.867
+    ],
+    "any": [
+     0.906,
+     0.719,
+     0.831,
+     0.839,
+     0.851,
+     0.741,
+     0.737,
+     0.85,
+     0.757,
+     0.907
+    ]
+   },
+   "5,000/2,000": {
+    "parents": [
+     0.648,
+     0.654,
+     0.765,
+     0.643,
+     0.546,
+     0.802,
+     0.536,
+     0.546,
+     0.772,
+     0.69
+    ],
+    "any": [
+     0.675,
+     0.617,
+     0.548,
+     0.581,
+     0.637,
+     0.778,
+     0.77,
+     0.852,
+     0.435,
+     0.682
+    ]
+   },
+   "10,000/5,000": {
+    "parents": [
+     0.576,
+     0.663,
+     0.476,
+     0.52,
+     0.644,
+     0.519,
+     0.557,
+     0.589,
+     0.442,
+     0.567
+    ],
+    "any": [
+     0.536,
+     0.715,
+     0.949,
+     0.776,
+     0.519,
+     0.406,
+     0.56,
+     0.51,
+     0.438
+    ]
+   },
+   "20,000/10,000": {
+    "parents": [
+     0.576,
+     0.546,
+     0.528,
+     0.601,
+     0.55,
+     0.567,
+     0.517,
+     0.558,
+     0.495,
+     0.622
+    ],
+    "any": []
+   }
+  }
+ },
+ "figures": {
+  "sizes": {
+   "title": "Agents alive, world by world",
+   "caption": "Each line is one world, its agents after each game (means over 50 iterations). Orange: the ten worlds of Experiment 19, whose mates are drawn only among neighbours with a living child; grey: Experiment 17's ten, any neighbour a mate, to 10,000 iterations, and the five of them Experiment 18 played on.",
+   "recipe": "**Runs.** The ten runs of Experiment 19 \u2014 B2 at 10,000 tokens with brains mixed at birth and the mate drawn only among neighbours with a living child (`mix_mates` = `parents`), seeds 1 to 10, 20,000 iterations (`python3 gol_lab.py run E19`) \u2014 beside Experiment 17's ten runs with any neighbour as mate, to 10,000 iterations, and the five of them Experiment 18 played on, read to 20,000.\n\n**Data.** From each run's `stats.jsonl`.\n\n1. Read the agents after each game (`nodes`, phase 2).\n2. Average over stretches of 50 iterations.\n\n**To make it again:** `python3 book_figures.py mixparents`."
+  },
+  "poor": {
+   "title": "Agents holding three tokens or fewer",
+   "caption": "Each band is the worlds of one experiment \u2014 the median, the middle half and nine in ten \u2014 every 500 iterations: the share of their agents holding one, two or three tokens. Grey: Experiment 17's ten worlds to 10,000, and the five Experiment 18 played on; a world that died out leaves the band when it does.",
+   "recipe": "**Runs.** The ten runs of Experiment 19 \u2014 B2 at 10,000 tokens with brains mixed at birth and the mate drawn only among neighbours with a living child (`mix_mates` = `parents`), seeds 1 to 10, 20,000 iterations (`python3 gol_lab.py run E19`) \u2014 beside Experiment 17's ten runs with any neighbour as mate, to 10,000 iterations, and the five of them Experiment 18 played on, read to 20,000.\n\n**Data.** From each run's whole worlds kept every 500 iterations (`archive/world_<iteration>.npz`).\n\n1. Read every agent's tokens in each whole world.\n2. Count those holding three or fewer, as a share of all.\n\n**To make it again:** `python3 book_figures.py mixparents`."
+  },
+  "verdict": {
+   "title": "Experiment 19 at iteration 20,000",
+   "caption": "Each dot is a world at iteration 20,000, read from the whole world kept then. Left: the share of its agents holding three tokens or fewer; the thesis asked that the median of the ten be below 0.66, the least of B2's ten worlds at 10,000 iterations. Right: how many of the seven marks of Chapter 46's health bar each world meets.",
+   "recipe": "**Runs.** The ten runs of Experiment 19 \u2014 B2 at 10,000 tokens with brains mixed at birth and the mate drawn only among neighbours with a living child (`mix_mates` = `parents`), seeds 1 to 10, 20,000 iterations (`python3 gol_lab.py run E19`) \u2014 beside Experiment 17's ten runs with any neighbour as mate, to 10,000 iterations, and the five of them Experiment 18 played on, read to 20,000.\n\n**Data.** From each run's whole world kept at 20,000 (`archive/world_020000.npz`) and `GraphOfLifeRuns/.pilots/e19_health.json` (`research/oee/checks/e17_health.py --family B2-10000-bcc1bc`).\n\n1. Count the agents holding three tokens or fewer, as a share of all.\n2. Measure the seven marks as `research/atlas/profile.py` does.\n\n**To make it again:** `python3 book_figures.py mixparents`."
+  },
+  "breeding": {
+   "title": "Who could have a child, and who has one",
+   "caption": "Left: the share of the agents that could have a child \u2014 11 tokens or more and fewer than 8 links. Right: the births of the next 50 iterations, per iteration, per hundred such agents, on a logarithmic axis. Each band is an experiment's worlds every 500 iterations \u2014 the median, the middle half and nine in ten.",
+   "recipe": "**Runs.** The ten runs of Experiment 19 \u2014 B2 at 10,000 tokens with brains mixed at birth and the mate drawn only among neighbours with a living child (`mix_mates` = `parents`), seeds 1 to 10, 20,000 iterations (`python3 gol_lab.py run E19`) \u2014 beside Experiment 17's ten runs with any neighbour as mate, to 10,000 iterations, and the five of them Experiment 18 played on, read to 20,000.\n\n**Data.** From each world kept whole every 500 iterations, and each run's births (`research/oee/checks/e17_breeding.py`, `GraphOfLifeRuns/.pilots/e17_breeding.json` and `e19_breeding.json`).\n\n1. In each whole world, count the agents with 11 tokens or more and fewer than 8 links.\n2. Read the births of the 50 reproduction phases that follow.\n3. Divide their mean per iteration by the agents counted.\n\n**To make it again:** `python3 book_figures.py mixparents`."
+  },
+  "evolution": {
+   "title": "Do later brains beat earlier ones?",
+   "caption": "Each dot is a world: the share of a world the later era's brains hold after 100 iterations against the earlier era's, the mean of two contests, one in each era's world; the bar is the median world. 1,000/500: the brains of iteration 1,000 against those of 500. Orange: Experiment 19; grey: Experiment 17, any neighbour a mate.",
+   "recipe": "**Runs.** The ten runs of Experiment 19 \u2014 B2 at 10,000 tokens with brains mixed at birth and the mate drawn only among neighbours with a living child (`mix_mates` = `parents`), seeds 1 to 10, 20,000 iterations (`python3 gol_lab.py run E19`) \u2014 beside Experiment 17's ten runs with any neighbour as mate, to 10,000 iterations, and the five of them Experiment 18 played on, read to 20,000.\n\n**Data.** From each run's whole worlds (`GraphOfLifeRuns/.pilots/e19_T100.json` and `e17_T100.json`).\n\n1. Seat the brains of the two eras on alternate agents of each era's world and play it on for 100 iterations (`research/oee/checks/rejudge.py`).\n2. Count the agents the later era's brains hold at the end, as a share of all.\n\n**To make it again:** `python3 book_figures.py mixparents`."
+  }
+ }
+}

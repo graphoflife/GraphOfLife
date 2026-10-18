@@ -428,15 +428,15 @@
         {
           "id": "85",
           "title": "Mixed at birth, with parents as mates",
-          "note": "Experiment 19: if only an agent with a living child may be a mate, does a mixed world stop breeding itself to death? Ten worlds for 20,000 iterations.",
+          "note": "Experiment 19: if only an agent with a living child may be a mate, does a mixed world stop breeding itself to death? All ten worlds lived to 20,000 iterations and settled at about 2,000 agents, six in ten of them poor: the agents breed twice as eagerly, the worlds keep mixing's diversity and B2's network, and evolution goes on.",
           "file": "chapters/85-mixed-at-birth-with-parents-as-mates.md",
           "experiment": "E19",
-          "status": "ready"
+          "status": "analysed"
         },
         {
           "id": "86",
           "title": "Eight switches at once",
-          "note": "Eight of the book's switches thrown together on B2 in sixteen worlds (batch U, a fractional factorial design): every unused link lapsing is the strongest switch, the estate to the newborns fills a world, mixing raises diversity; pairs of switches act together, and several switches do far less among the sixteen than alone in B2.",
+          "note": "Eight of the book's switches thrown together on B2 in sixteen worlds (batch U, a fractional factorial design): every unused link lapsing is the strongest switch, the estate to the newborns fills a world, mixing raises diversity; pairs of switches act together, and several switches do far less among the sixteen than alone in B2. On B1 (batch V) few switches stand out against the pairs, and none makes its evolution go on.",
           "file": "chapters/86-eight-switches-at-once.md",
           "status": "analysed"
         },
@@ -581,6 +581,13 @@
           "title": "Meta XI · What holds a world's size",
           "note": "Why B2's worlds are poor and the mixed ones rich and mortal: births must match deaths, so how eagerly agents breed sets a world's size, and its riches and health with it; the rules tried to hold a world rich and steady, and what is left to try.",
           "file": "chapters/84-meta-11-what-holds-a-worlds-size.md",
+          "status": "analysed"
+        },
+        {
+          "id": "91",
+          "title": "Meta XII · Rules in company",
+          "note": "What the book's rules do together rather than alone (batches Y, W, X, T, U and V): many rules change sign or size in company; revolutions and gifts are details in B2, handover and lapsing links reshape the network everywhere, the rules of birth set a world's size; evolution goes on in nearly every combination on B2, and no switch makes it go on in B1; and the worlds that are spaces pay for the room with poverty, flatness or cuts.",
+          "file": "chapters/91-meta-12-rules-in-company.md",
           "status": "analysed"
         }
       ]

@@ -133,14 +133,159 @@ comparison.
 > A value in **bold** differs from the baseline B2.
 <!-- /runs -->
 
-## What else will be read
+## What the ten worlds did
 
-- **How eagerly the able breed**, every 500 iterations, against Experiment 17's
-  worlds ([Chapter 80](80-mixed-at-birth-ten-long-worlds.md#why-a-mixed-world-is-rich)).
-- **The health bar** at every moment kept: do these worlds stay in the size
-  where every mark is met?
-- **Does evolution go on?** The brains of 10,000 and 20,000 iterations against
-  those before them, a lifetime long.
+<!-- figure mixparents/sizes -->
+![Agents alive, world by world](../figures/mixparents/sizes.svg)
+
+**Agents alive, world by world.** Each line is one world, its agents after each game (means over 50 iterations). Orange: the ten worlds of Experiment 19, whose mates are drawn only among neighbours with a living child; grey: Experiment 17's ten, any neighbour a mate, to 10,000 iterations, and the five of them Experiment 18 played on.
+
+> [!example]- How to make this figure
+> **Runs.** The ten runs of Experiment 19 — B2 at 10,000 tokens with brains mixed at birth and the mate drawn only among neighbours with a living child (`mix_mates` = `parents`), seeds 1 to 10, 20,000 iterations (`python3 gol_lab.py run E19`) — beside Experiment 17's ten runs with any neighbour as mate, to 10,000 iterations, and the five of them Experiment 18 played on, read to 20,000.
+>
+> **Data.** From each run's `stats.jsonl`.
+>
+> 1. Read the agents after each game (`nodes`, phase 2).
+> 2. Average over stretches of 50 iterations.
+>
+> **To make it again:** `python3 book_figures.py mixparents`.
+<!-- /figure -->
+
+**Every world lived, and settled.** None of the ten came near dying out. After
+their first 2,000 iterations they held between 760 and 2,670 agents, and from
+iteration 15,000 on each held 2,030 to 2,350 on average. Experiment 17's
+worlds, with any neighbour as a mate, wandered between 20 and 2,500 agents,
+and two of them had died out by iteration 20,000: one before 10,000, and one
+of the five that Experiment 18 played on. Two grey lines run with the orange
+ones from 10,000 on: the two worlds of Experiment 18 that lived to 50,000. By
+20,000 they held 2,170 and 1,880 agents, 62% and 54% of them poor — where
+these ten are. Parents as mates bring every world, and soon, to where only the
+survivors of Experiment 18 arrived.
+
+<!-- figure mixparents/poor -->
+![Agents holding three tokens or fewer](../figures/mixparents/poor.svg)
+
+**Agents holding three tokens or fewer.** Each band is the worlds of one experiment — the median, the middle half and nine in ten — every 500 iterations: the share of their agents holding one, two or three tokens. Grey: Experiment 17's ten worlds to 10,000, and the five Experiment 18 played on; a world that died out leaves the band when it does.
+
+> [!example]- How to make this figure
+> **Runs.** The ten runs of Experiment 19 — B2 at 10,000 tokens with brains mixed at birth and the mate drawn only among neighbours with a living child (`mix_mates` = `parents`), seeds 1 to 10, 20,000 iterations (`python3 gol_lab.py run E19`) — beside Experiment 17's ten runs with any neighbour as mate, to 10,000 iterations, and the five of them Experiment 18 played on, read to 20,000.
+>
+> **Data.** From each run's whole worlds kept every 500 iterations (`archive/world_<iteration>.npz`).
+>
+> 1. Read every agent's tokens in each whole world.
+> 2. Count those holding three or fewer, as a share of all.
+>
+> **To make it again:** `python3 book_figures.py mixparents`.
+<!-- /figure -->
+
+**Six in ten are poor.** At iteration 20,000, 55% to 66% of each world's
+agents hold three tokens or fewer. That is richer than any of B2's worlds —
+the least poor of its ten held 66% at 10,000 iterations — but far poorer
+than Experiment 17's mixed worlds, whose median world held 15% at 10,000,
+and as poor as only the poorest two of them.
+
+**As diverse as mixed worlds.** Their diversity score at 20,000 is 0.59 at
+the median (0.52 to 0.69) — as high as Experiment 17's worlds at 10,000
+(0.58), and above B2's ten worlds played on to 10,000 (0.49). Part of that is
+built in: every mixed birth makes a new genotype
+([Chapter 82](82-mixing-with-every-other-rule.md)).
+
+<!-- figure mixparents/breeding -->
+![Who could have a child, and who has one](../figures/mixparents/breeding.svg)
+
+**Who could have a child, and who has one.** Left: the share of the agents that could have a child — 11 tokens or more and fewer than 8 links. Right: the births of the next 50 iterations, per iteration, per hundred such agents, on a logarithmic axis. Each band is an experiment's worlds every 500 iterations — the median, the middle half and nine in ten.
+
+> [!example]- How to make this figure
+> **Runs.** The ten runs of Experiment 19 — B2 at 10,000 tokens with brains mixed at birth and the mate drawn only among neighbours with a living child (`mix_mates` = `parents`), seeds 1 to 10, 20,000 iterations (`python3 gol_lab.py run E19`) — beside Experiment 17's ten runs with any neighbour as mate, to 10,000 iterations, and the five of them Experiment 18 played on, read to 20,000.
+>
+> **Data.** From each world kept whole every 500 iterations, and each run's births (`research/oee/checks/e17_breeding.py`, `GraphOfLifeRuns/.pilots/e17_breeding.json` and `e19_breeding.json`).
+>
+> 1. In each whole world, count the agents with 11 tokens or more and fewer than 8 links.
+> 2. Read the births of the 50 reproduction phases that follow.
+> 3. Divide their mean per iteration by the agents counted.
+>
+> **To make it again:** `python3 book_figures.py mixparents`.
+<!-- /figure -->
+
+**More eager, fewer able.** With parents as mates, an agent that could
+afford a child had one 6.0 times per hundred an iteration over the first
+10,000 iterations (the median of every world and moment kept), against 3.0
+with any mate — the rise the pilots showed — and 6.5 over the next 10,000.
+And the eager fill their world: only a sixth of the agents could afford a
+child at the median moment, against a third with any mate. This is Meta XI's
+rule at work: how eagerly agents breed sets how full a world becomes, and a
+full world is a poor one.
+
+<!-- figure mixparents/evolution -->
+![Do later brains beat earlier ones?](../figures/mixparents/evolution.svg)
+
+**Do later brains beat earlier ones?** Each dot is a world: the share of a world the later era's brains hold after 100 iterations against the earlier era's, the mean of two contests, one in each era's world; the bar is the median world. 1,000/500: the brains of iteration 1,000 against those of 500. Orange: Experiment 19; grey: Experiment 17, any neighbour a mate.
+
+> [!example]- How to make this figure
+> **Runs.** The ten runs of Experiment 19 — B2 at 10,000 tokens with brains mixed at birth and the mate drawn only among neighbours with a living child (`mix_mates` = `parents`), seeds 1 to 10, 20,000 iterations (`python3 gol_lab.py run E19`) — beside Experiment 17's ten runs with any neighbour as mate, to 10,000 iterations, and the five of them Experiment 18 played on, read to 20,000.
+>
+> **Data.** From each run's whole worlds (`GraphOfLifeRuns/.pilots/e19_T100.json` and `e17_T100.json`).
+>
+> 1. Seat the brains of the two eras on alternate agents of each era's world and play it on for 100 iterations (`research/oee/checks/rejudge.py`).
+> 2. Count the agents the later era's brains hold at the end, as a share of all.
+>
+> **To make it again:** `python3 book_figures.py mixparents`.
+<!-- /figure -->
+
+**Evolution goes on, as it did with any mate.** Played for a lifetime, the
+brains of 1,000 beat those of 500 in every world (a median of 0.78 of a
+contested world, against 0.84 with any mate), those of 5,000 beat those of
+2,000 in every world (0.65, against 0.66), those of 10,000 beat those of 5,000
+in eight of the ten (0.56, against 0.54), and those of 20,000 beat those of
+10,000 in nine, the tenth all but tied at 0.495 (a median of 0.55): slowing,
+but not stopping.
+
+## The verdict
+
+<!-- figure mixparents/verdict -->
+![Experiment 19 at iteration 20,000](../figures/mixparents/verdict.svg)
+
+**Experiment 19 at iteration 20,000.** Each dot is a world at iteration 20,000, read from the whole world kept then. Left: the share of its agents holding three tokens or fewer; the thesis asked that the median of the ten be below 0.66, the least of B2's ten worlds at 10,000 iterations. Right: how many of the seven marks of [Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md)'s health bar each world meets.
+
+> [!example]- How to make this figure
+> **Runs.** The ten runs of Experiment 19 — B2 at 10,000 tokens with brains mixed at birth and the mate drawn only among neighbours with a living child (`mix_mates` = `parents`), seeds 1 to 10, 20,000 iterations (`python3 gol_lab.py run E19`) — beside Experiment 17's ten runs with any neighbour as mate, to 10,000 iterations, and the five of them Experiment 18 played on, read to 20,000.
+>
+> **Data.** From each run's whole world kept at 20,000 (`archive/world_020000.npz`) and `GraphOfLifeRuns/.pilots/e19_health.json` (`research/oee/checks/e17_health.py --family B2-10000-bcc1bc`).
+>
+> 1. Count the agents holding three tokens or fewer, as a share of all.
+> 2. Measure the seven marks as `research/atlas/profile.py` does.
+>
+> **To make it again:** `python3 book_figures.py mixparents`.
+<!-- /figure -->
+
+**The thesis holds.** No world ended before iteration 20,000, and at 20,000
+the median world holds 60% of its agents at three tokens or fewer, below the
+line of 0.66. Every world meets six of the seven marks of the health bar — and
+did at every moment kept, from 500 on, seven at nearly a quarter of them — and
+misses the one B2's own worlds miss: a dimension between 2.3 and 4 (they read
+4.1 to 4.3).
+
+Two things the thesis did not ask should be said beside it. Experiment 18's
+worlds died between iterations 17,078 and 37,722, so 20,000 iterations cover
+only the start of the span in which mixed worlds died; but none of these ten
+shows what came before those deaths — a world that shrinks while many of its
+agents could breed. And the riches the thesis's line asked for are B2's
+riches, not mixing's: these worlds are richer than any of B2's, not rich.
+
+## What it teaches
+
+- **The free mate was a cause.** Take it away, and agents breed twice as
+  eagerly as with any mate, and no world of ten breeds itself towards its
+  end in 20,000 iterations.
+- **But reluctance was also what made mixed worlds rich.** The eager fill
+  their world to about 2,000 agents, six in ten of them poor, and its network
+  becomes B2's, with six marks of the bar and a dimension above four — though
+  its agents still differ as much as in Experiment 17's worlds. Life and
+  riches pull apart again.
+- **What Meta XI asked for is still missing**: a pull that makes having a
+  child pay more when few have them and less when many do. Parents as mates
+  raise eagerness everywhere, at every size, and so set the world at one size
+  — larger than mixing's, smaller than B2's.
 
 **Related notes:** [Chapter 80 · Mixed at birth: ten long worlds](80-mixed-at-birth-ten-long-worlds.md) ·
 [Chapter 81 · Five mixed worlds, fifty thousand iterations](81-five-mixed-worlds-fifty-thousand-iterations.md) ·

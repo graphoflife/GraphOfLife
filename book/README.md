@@ -141,6 +141,7 @@ everything can be checked with it.
 - [Chapter 77 · Meta IX · How alike the agents are](chapters/77-meta-9-how-alike.md)
 - [Chapter 79 · Meta X · Healthy and rich](chapters/79-meta-10-healthy-and-rich.md)
 - [Chapter 84 · Meta XI · What holds a world's size](chapters/84-meta-11-what-holds-a-worlds-size.md)
+- [Chapter 91 · Meta XII · Rules in company](chapters/91-meta-12-rules-in-company.md)
 
 **Notes · the rules**
 

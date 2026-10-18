@@ -493,6 +493,24 @@ book/results/worlds.json; 2026-10-16)**
   world steadier than its twin (sd of log size 0.09-0.29 vs 0.19-0.63), 760-2,200 agents, 23-54% poor. Experiment
   19 tests it: ten worlds, 20,000 iterations.
 
+**Mixed at birth, parents as mates (E19, Ch. 85; 2026-10-17..18; B2 + mix_at_birth + mix_mates=parents, 10,000
+tokens, ten seeds, 20,000 iterations; lab engine 7fa9fe7aeefbf111)**
+- Thesis holds: no world ended before 20,000; median share at <= 3 tokens at 20,000 0.604 (0.554-0.658) < 0.66.
+- Sizes settle: 760-2,670 agents after 2,000; means over 15,000-20,000 2,030-2,350 (no shrinking trend). E17/E18
+  wandered 19-2,491 to 20,000 (s009 died 5,376, s010 17,078). E18's two survivors at 20,000 (s5 2,172 agents 62%
+  poor; s6 1,875, 54%) sit where all ten E19 worlds are.
+- Health: six marks at 20,000 in all ten, missing only the dimension mark (4.06-4.32), as B2's own worlds; never
+  fewer than six at any of the 400 moments kept (seven at 94).
+- Breeding: able share 0.16 vs E17 0.33; births per 100 able an iteration 6.0 (500-9,500; 6.5 for 10,000-19,500)
+  vs E17 3.0 (500-9,500).
+- Diversity score at 20,000 median 0.59 (0.52-0.69); E17 at 10,000 0.58; B2 (L/B2-long) at 10,000 0.49, poor
+  0.66-0.79, 2,890-3,660 agents.
+- Evolution (T = 100): 1,000 vs 500 0.78 (10/10; E17 0.84), 5,000 vs 2,000 0.65 (10/10; E17 0.66), 10,000 vs 5,000
+  0.56 (8/10; E17 0.54), 20,000 vs 10,000 0.55 (9/10, the tenth 0.495).
+- Reading: the free mate was a cause of mixed worlds' reluctance; without it, worlds live, but eager breeding fills
+  them to ~2,000 agents, six in ten poor - B2's network with mixing's diversity. The pull Meta XI asks for
+  (births paying more when few) is still missing.
+
 **Who inherits (batch R, Ch. 73; 2026-10-17; B2 and B1 at 10,000 tokens, two seeds, 2,000 iterations;
 controls P/B2-s1, s2 and L/B1-long-s1, s2 to 2,000)**
 - B2, estate to the poorest: like B2 (3,600-3,700 agents, 80% at <= 3 tokens; contests 1,000 vs 500 0.64/0.70,
@@ -592,6 +610,21 @@ iterations; main effects against the seed's noise from E16's ten worlds at 1,000
 - Evolution (T = 100, 1,000 vs 500): above half in 15 of 16 worlds (0.47 to 1.0), median 0.60 vs B2 0.69 (lab B2
   median 0.68, spread 0.04). Gifts +0.09, no revolutions +0.07, lapse +0.075, newborns' estates +0.074; the other
   four ~0; chains AC.. +0.13, BD.. +0.14, BC.. +0.11.
+- B1 evolution (batch V, T = 100, 1,000 vs 500, the 14 that lived): later brains above half in 6 of 14, median
+  0.46 (0.0 to 1.0; ABCDEFGH and BEGH 0.0 - the brains of 500 took the whole world in both eras' worlds; DEFH and
+  ABCG 1.0). B1 itself: Experiment 12's ten (5,000 tokens) median 0.49, L/B1-long 0.37 and 0.68. Yardstick
+  2·RMS(chains) = 0.48; every main effect within it (largest H -0.29, F +0.14; C -0.02). No switch, B2's own
+  rules among them, makes B1's evolution go on.
+
+**Rules in company (Meta XII, Ch. 91; 2026-10-18; batches Y, W, X, T, U, V; census via research/atlas/census.py)**
+- Space census at 1,000: 466 distinct worlds, 161 at >= 1.5x their twin's typical distance. By rule (medians):
+  estate paid to births 33 (90% poor, 7 marks, dim 3.5); no old age 22 (93%, 7, 3.4); handover 25 (79%, 4, 3.8);
+  every unused link lapsing 26 (7%, 4, 2.2); deaths not mended (B1 and kin) 44 (51%, 4, 2.6); 11 others.
+- Near the picture, one seed each: Y/mix-mut05-s1 (2.38, 44% poor, 7 marks, dim 2.9, div 0.48), Y/mix-poorest-s1
+  (1.92, 51%, 7, 3.4, 0.57), Y/mix-came-s1 (1.52, 48%, 7, 3.4, 0.52; s2 1.49, 53%), Y/mix-nodice-s2 (1.51, 53%,
+  7, 3.5, 0.63). Second seeds of mut05/poorest: 3,500+ agents, 81-82% poor; nodice-s1 291 agents, rich, 1.15.
+- Long runs to 10,000 (LC): mix-poorest-s1 2,288 agents, 69% poor, div 0.28, still 1.79; mix-nodice-s2 372 agents,
+  4% poor, 1.26, div 0.63; mix-came-s2 719 agents, 1.24. Room and riches pull apart.
 
 **What folds a world (Ch. 87, Part VI; 2026-10-17; Ch. 24's rulers and random twins via research/atlas/space.py;
 "typical distance" = steps until a typical ball holds half the world, over the twin's)**
