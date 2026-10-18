@@ -1,0 +1,15 @@
+# Worlds of batches T to X finished after batch_TUVWX4_worlds.txt was made (2026-10-18): judged into batch_TUVWX5_T100.json.
+pilot GraphOfLifeRuns/.pilots/V/V-ABCDEFGH-s1 500:1000
+pilot GraphOfLifeRuns/.pilots/V/V-ABCG-s1 500:1000
+pilot GraphOfLifeRuns/.pilots/V/V-ABDH-s1 500:1000
+pilot GraphOfLifeRuns/.pilots/V/V-ABEF-s1 500:1000
+pilot GraphOfLifeRuns/.pilots/V/V-ACDF-s1 500:1000
+pilot GraphOfLifeRuns/.pilots/V/V-ACEH-s1 500:1000
+pilot GraphOfLifeRuns/.pilots/V/V-ADEG-s1 500:1000
+pilot GraphOfLifeRuns/.pilots/V/V-AFGH-s1 500:1000
+pilot GraphOfLifeRuns/.pilots/V/V-BCDE-s1 500:1000
+pilot GraphOfLifeRuns/.pilots/V/V-BCFH-s1 500:1000
+pilot GraphOfLifeRuns/.pilots/V/V-BDFG-s1 500:1000
+pilot GraphOfLifeRuns/.pilots/V/V-BEGH-s1 500:1000
+pilot GraphOfLifeRuns/.pilots/V/V-CDGH-s1 500:1000
+pilot GraphOfLifeRuns/.pilots/V/V-CEFG-s1 500:1000

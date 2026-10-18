@@ -583,6 +583,12 @@ iterations; main effects against the seed's noise from E16's ten worlds at 1,000
   newborns cancels mixing's riches, and lapse leaves it nothing to add.
 - U-BDFG (no revolutions, no random inputs, link tokens, mixing): 7 marks, dim 3.67, 25% poor, diversity 0.68,
   652 agents - the best of the sixteen; it is among the LC long-run candidates.
+- On B1 (batch V, 2026-10-18; A gifts, B no revolutions, C no handover, D no dice, E newborns' estates, F brains
+  change when copied, G mixing, H link tokens): two worlds died out, mirror images (AFGH, BCDE) - every switch
+  keeps 7 vs 7, but one combination of main effects is lost. Yardstick: twice the RMS of the seven chains (B1's
+  two seeds differ by 0.34 in diversity). Beyond it: E +1,410 agents, +0.33 poor, -0.29 diversity (as alone);
+  C +2.1 links; A +1,040 agents, +0.25 poor; H -1,310 agents. No revolutions alone made B1 larger and poorer
+  (+990/+1,320 agents, +0.27/+0.41 poor); in company within the spread, if anything the other way.
 - Evolution (T = 100, 1,000 vs 500): above half in 15 of 16 worlds (0.47 to 1.0), median 0.60 vs B2 0.69 (lab B2
   median 0.68, spread 0.04). Gifts +0.09, no revolutions +0.07, lapse +0.075, newborns' estates +0.074; the other
   four ~0; chains AC.. +0.13, BD.. +0.14, BC.. +0.11.

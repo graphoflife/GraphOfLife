@@ -203,6 +203,84 @@ act together here too: three chains add 0.11 to 0.14.
 > as worlds are added; two figures above moved by 0.01 (no random inputs: 0.08
 > to 0.09; mixing alone: 0.17 and 0.19 to 0.18 and 0.20).
 
+## The same eight switches on B1
+
+> [!info] Added later (18 October 2026)
+> Batch V, promised below, has run.
+
+B1 is the world that can break: its revolutions take most of the nodes that
+change hands, a parent may pass links to its newborn, and pieces cut off are
+culled ([Chapter 54](54-the-switches-the-world-was-built-with.md)). Batch V
+plays the same design on it, sixteen worlds of 10,000 tokens, seed 1, 1,000
+iterations, with eight switches that mean something there: A gifts, B no
+revolutions, C no handover, D no random inputs, E estates to the newborns,
+F brains that change only when copied (B2's rule), G brains mixed at birth,
+H links that hold a token.
+
+| switches on | agents | agents with 3 tokens or fewer | diversity score | marks (of 7) | dimension | links per agent |
+|---|---|---|---|---|---|---|
+| none (B1) | 871 | 2% | 0.72 | 3 | 2.56 | 2.7 |
+| A, B, D, H | 264 | 9% | 0.67 | 2 | 1.65 | 2.2 |
+| B, C, F, H | 501 | 11% | 0.69 | 3 | 2.28 | 3.3 |
+| A, B, C, G | 1,374 | 21% | 0.56 | 4 | 2.25 | 6.8 |
+| C, D, G, H | 336 | 25% | 0.88 | 3 | 2.75 | 4.9 |
+| D, E, F, H | 1,560 | 36% | 0.31 | 3 | 2.49 | 2.3 |
+| B, D, F, G | 1,140 | 37% | 0.66 | 2 | 2.19 | 2.7 |
+| B, E, G, H | 1,718 | 40% | 0.35 | 3 | 2.35 | 2.4 |
+| all eight | 1,567 | 44% | 0.60 | 4 | 2.66 | 3.2 |
+| C, E, F, G | 2,584 | 57% | 0.68 | 3 | 2.14 | 3.2 |
+| A, B, E, F | 3,619 | 72% | 0.20 | 3 | 2.43 | 2.9 |
+| A, C, D, F | 2,933 | 75% | 0.62 | 4 | 3.02 | 9.6 |
+| A, C, E, H | 1,841 | 82% | 0.26 | 1 | 4.32 | 2.5 |
+| A, D, E, G | 4,413 | 84% | 0.35 | 6 | 2.44 | 3.7 |
+| A, F, G, H | died out by iteration 341, after at most 398 agents | | | | | |
+| B, C, D, E | died out after iteration 781, after 3,483 agents | | | | | |
+
+**Two worlds died out**, and they are each other's mirror: every switch on in
+one is off in the other. That has a use. Every switch still has seven
+living worlds with it and seven without, so a main effect is still the
+difference of two means of seven. And it has a cost a student should know:
+with a world and its mirror gone, one combination of the eight main effects
+can no longer be told apart from the rest — no fit can recover it.
+
+<!-- figure eightswitches/b1effects -->
+![The same eight switches on B1](../figures/eightswitches/b1effects.svg)
+
+**The same eight switches on B1.** Orange: each switch's main effect among the worlds of batch V that lived to iteration 1,000 (14 of 16; V-AFGH-s1 and V-BCDE-s1 died out, and are each other's mirror, so every switch keeps seven worlds on and seven off): the mean of the seven with it on, minus the mean of the seven with it off. Grey dots: the switch thrown alone in B1, the world with it minus its twin without it, seeds 1 and 2, where the book has them. The grey band round zero is twice the spread of the seven chains of pairs, read the same way: what a main effect would scatter by if pairs of switches did not act together.
+
+> [!example]- How to make this figure
+> **Runs.** Batch V's sixteen pilot worlds (`GraphOfLifeRuns/.pilots/V/`): B1 at 10,000 tokens, seed 1, 1,000 iterations, with each of eight switches on in eight of them (`research/oee/pilots/make_jobs_TU.py`): gifts, no revolutions, no handover, no random inputs, estates to the newborns, brains that change only when copied, brains mixed at birth, links that hold a token; and the switches the book has played alone in B1, seeds 1 and 2 (batches S, T and R).
+>
+> **Data.** From each world's checkpoint at iteration 1,000 (`research/atlas/at.py --at 1000`, `GraphOfLifeRuns/.pilots/atlas/at1000.json`).
+>
+> 1. Read each world as `research/atlas/profile.py` reads every world; leave out the worlds with fewer than 20 agents.
+> 2. A switch's main effect: the mean of the worlds with it on, minus the mean of those with it off.
+> 3. The band: twice the root mean square of the seven chains of pairs, read the same way.
+> 4. Thrown alone: the world with the switch minus its twin without it, each seed.
+>
+> **To make it again:** `python3 book_figures.py eightswitches`.
+<!-- /figure -->
+
+B1's worlds are far less alike than B2's — the two seeds of B1 itself differ
+in diversity by 0.34 — and on B1 pairs of switches act together more, so the
+yardstick here is the spread of the seven chains of pairs, which would
+scatter as the main effects do if no pair acted together. Against it, few
+switches stand out:
+
+- **The estate to the newborns moves B1 as it moves B2**: 1,410 more agents,
+  0.33 more of them at three tokens or fewer, a diversity score 0.29 lower —
+  as when thrown alone in B1 ([Chapter 73](73-who-inherits.md)).
+- **Without handover, a world keeps more links** — two more per agent — the
+  other side of what handover did in B2
+  ([Chapter 89](89-handover-with-every-other-rule.md)).
+- **Gifts make B1 larger and poorer** (1,040 more agents, 0.25 more of them
+  poor), and links that hold a token make it smaller (1,310 fewer).
+- **No revolutions does not do in company what it did alone.** Thrown alone,
+  B1 without revolutions became a world of mayflies, larger by 990 and 1,320
+  agents and poorer (0.27 and 0.41 more at three tokens or fewer); among the
+  fourteen its effect is within the chains' spread, and if anything the other
+  way (620 agents fewer, 0.18 fewer poor).
+
 ## What it teaches
 
 - **A switch measured alone tells what it does in B2, not what it does.**
@@ -220,8 +298,11 @@ act together here too: three chains add 0.11 to 0.14.
   played on to 10,000 iterations ([Meta X](79-meta-10-healthy-and-rich.md)).
 - **Evolution goes on** in fifteen of the sixteen worlds, in most of them
   more slowly than in B2 itself; four switches speed it a little.
-- **Next**: the same design on B1, where revolutions take most of the nodes
-  that change hands (batch V, queued).
+- **On B1** (added later) few switches stand out against how much pairs of
+  switches act together there: the estate to the newborns makes a world
+  larger, poorer and more alike, as on B2; no handover keeps more links;
+  and no revolutions, which alone made B1 a world of mayflies, does not in
+  company. Two of the sixteen worlds died out.
 
 **Related notes:** [Many switches in few worlds](../notes/fractional-factorial.md) ·
 [Every setting](../notes/settings.md) ·
