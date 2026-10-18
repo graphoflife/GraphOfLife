@@ -813,6 +813,62 @@
    "V/V-AFGH-s1",
    "V/V-BCDE-s1"
   ],
+  "b1_evolution": {
+   "worlds": {
+    "V/V-ABCDEFGH-s1": 0.0,
+    "V/V-ABCG-s1": 1.0,
+    "V/V-ABDH-s1": 0.49386680940273875,
+    "V/V-ABEF-s1": 0.23899664304364043,
+    "V/V-ACDF-s1": 0.5149745497098994,
+    "V/V-ACEH-s1": 0.36785471435149036,
+    "V/V-ADEG-s1": 0.5772135963071758,
+    "V/V-BCFH-s1": 0.4209016393442623,
+    "V/V-BDFG-s1": 0.7501807539228799,
+    "V/V-BEGH-s1": 0.0,
+    "V/V-CDGH-s1": 0.04972666105971407,
+    "V/V-CEFG-s1": 0.930733709594664,
+    "V/V-DEFH-s1": 1.0,
+    "V/V-none-s1": 0.3651776897834609
+   },
+   "main": {
+    "A": -0.04625916298429089,
+    "B": -0.12881929644184048,
+    "C": -0.02017774548569512,
+    "D": 0.008899710612127187,
+    "E": -0.06857563427514068,
+    "F": 0.1431354035301094,
+    "G": -0.013416760678722661,
+    "H": -0.292132445457645
+   },
+   "pairs": {
+    "AB+CG+DH+EF": 0.07129181350457592,
+    "AC+BG+DF+EH": 0.04786695367893373,
+    "AD+BH+CF+EG": -0.15493462946184566,
+    "BC+AG+DE+FH": 0.14225709077018817,
+    "BD+AH+CE+FG": 0.009408976659452506,
+    "CD+AF+BE+GH": -0.4977813122659489,
+    "AE+BF+CH+DG": -0.3103393825579724
+   },
+   "yardstick": 0.47557537077739614,
+   "b1": {
+    "B1, pilots": [
+     0.3651776897834609,
+     0.6779196932465639
+    ],
+    "B1 at 5,000 tokens, lab": [
+     0.6805868791776641,
+     0.591299773014539,
+     0.42358080210517013,
+     0.5455593837585019,
+     0.42473680340788467,
+     0.7713012874321139,
+     0.7701073439666739,
+     0.42491858755419654,
+     0.3091792130908948,
+     0.39579896293580613
+    ]
+   }
+  },
   "evolution": {
    "worlds": {
     "U/U-ABCDEFGH-s1": 1.0,
@@ -870,6 +926,11 @@
    "title": "The same eight switches on B1",
    "caption": "Orange: each switch's main effect among the worlds of batch V that lived to iteration 1,000 (14 of 16; V-AFGH-s1 and V-BCDE-s1 died out, and are each other's mirror, so every switch keeps seven worlds on and seven off): the mean of the seven with it on, minus the mean of the seven with it off. Grey dots: the switch thrown alone in B1, the world with it minus its twin without it, seeds 1 and 2, where the book has them. The grey band round zero is twice the spread of the seven chains of pairs, read the same way: what a main effect would scatter by if pairs of switches did not act together.",
    "recipe": "**Runs.** Batch V's sixteen pilot worlds (`GraphOfLifeRuns/.pilots/V/`): B1 at 10,000 tokens, seed 1, 1,000 iterations, with each of eight switches on in eight of them (`research/oee/pilots/make_jobs_TU.py`): gifts, no revolutions, no handover, no random inputs, estates to the newborns, brains that change only when copied, brains mixed at birth, links that hold a token; and the switches the book has played alone in B1, seeds 1 and 2 (batches S, T and R).\n\n**Data.** From each world's checkpoint at iteration 1,000 (`research/atlas/at.py --at 1000`, `GraphOfLifeRuns/.pilots/atlas/at1000.json`).\n\n1. Read each world as `research/atlas/profile.py` reads every world; leave out the worlds with fewer than 20 agents.\n2. A switch's main effect: the mean of the worlds with it on, minus the mean of those with it off.\n3. The band: twice the root mean square of the seven chains of pairs, read the same way.\n4. Thrown alone: the world with the switch minus its twin without it, each seed.\n\n**To make it again:** `python3 book_figures.py eightswitches`."
+  },
+  "b1evolution": {
+   "title": "On B1: do the brains of 1,000 beat those of 500?",
+   "caption": "Above, in orange: each world of batch V that lived, the share of a contested world its brains of iteration 1,000 hold after 100 iterations against those of 500, the mean of two contests, one in each era's world; in grey, B1 itself played the same way \u2014 two pilot worlds of 10,000 tokens, and the lab's ten worlds of 5,000. Below: each switch's main effect on that share, seven worlds with it against seven without; the grey band is twice the spread of the seven chains of pairs.",
+   "recipe": "**Runs.** Batch V's sixteen pilot worlds (`GraphOfLifeRuns/.pilots/V/`): B1 at 10,000 tokens, seed 1, 1,000 iterations, with each of eight switches on in eight of them (`research/oee/pilots/make_jobs_TU.py`): gifts, no revolutions, no handover, no random inputs, estates to the newborns, brains that change only when copied, brains mixed at birth, links that hold a token. For B1 itself: the pilots `GraphOfLifeRuns/.pilots/L/B1-long-s1` and `-s2` (10,000 tokens), and the lab's ten B1 worlds of 5,000 tokens (Experiment 12, `B1-5000-s001` \u2026 `-s010`).\n\n**Data.** From `GraphOfLifeRuns/.pilots/batch_TUV_T100.json`, `batch_TUVWX4_T100.json`, `batch_TUVWX5_T100.json` and `rejudge_T100.json` (`research/oee/checks/rejudge.py`).\n\n1. Seat the brains of the two eras on alternate agents of each era's world and play 100 iterations.\n2. Count the agents the later era's brains hold, as a share of all.\n3. A switch's main effect: the mean of the worlds with it on, minus those with it off.\n\n**To make it again:** `python3 book_figures.py eightswitches`."
   },
   "evolution": {
    "title": "Do the brains of 1,000 beat those of 500?",

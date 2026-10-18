@@ -281,6 +281,40 @@ switches stand out:
   fourteen its effect is within the chains' spread, and if anything the other
   way (620 agents fewer, 0.18 fewer poor).
 
+> [!info] Added later (18 October 2026)
+> The contests below were played after this section was first published.
+
+<!-- figure eightswitches/b1evolution -->
+![On B1: do the brains of 1,000 beat those of 500?](../figures/eightswitches/b1evolution.svg)
+
+**On B1: do the brains of 1,000 beat those of 500?** Above, in orange: each world of batch V that lived, the share of a contested world its brains of iteration 1,000 hold after 100 iterations against those of 500, the mean of two contests, one in each era's world; in grey, B1 itself played the same way — two pilot worlds of 10,000 tokens, and the lab's ten worlds of 5,000. Below: each switch's main effect on that share, seven worlds with it against seven without; the grey band is twice the spread of the seven chains of pairs.
+
+> [!example]- How to make this figure
+> **Runs.** Batch V's sixteen pilot worlds (`GraphOfLifeRuns/.pilots/V/`): B1 at 10,000 tokens, seed 1, 1,000 iterations, with each of eight switches on in eight of them (`research/oee/pilots/make_jobs_TU.py`): gifts, no revolutions, no handover, no random inputs, estates to the newborns, brains that change only when copied, brains mixed at birth, links that hold a token. For B1 itself: the pilots `GraphOfLifeRuns/.pilots/L/B1-long-s1` and `-s2` (10,000 tokens), and the lab's ten B1 worlds of 5,000 tokens (Experiment 12, `B1-5000-s001` … `-s010`).
+>
+> **Data.** From `GraphOfLifeRuns/.pilots/batch_TUV_T100.json`, `batch_TUVWX4_T100.json`, `batch_TUVWX5_T100.json` and `rejudge_T100.json` (`research/oee/checks/rejudge.py`).
+>
+> 1. Seat the brains of the two eras on alternate agents of each era's world and play 100 iterations.
+> 2. Count the agents the later era's brains hold, as a share of all.
+> 3. A switch's main effect: the mean of the worlds with it on, minus those with it off.
+>
+> **To make it again:** `python3 book_figures.py eightswitches`.
+<!-- /figure -->
+
+**Evolution goes on no better than in B1 itself.** Played against the
+brains of iteration 500 for a lifetime, the brains of 1,000 hold more than
+half of a contested world in six of the fourteen worlds that lived, with a
+median of 0.46 — as in B1, whose ten lab worlds of 5,000 tokens gave a
+median of 0.49 ([Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md))
+and whose two pilots of 10,000 tokens 0.37 and 0.68. But the fourteen scatter
+far more: from nothing at all — in two worlds the brains of 500 took the
+whole world in both eras' worlds, one of them the world with all eight
+switches on, where on B2 the brains of 1,000 had taken it all — to the whole
+world in two others. No switch moves the share beyond the spread of the
+chains of pairs; the largest effect, of links that hold a token (−0.29), is
+within it. Two of the eight are B2's own rules — no handover and brains that
+change only when copied — and neither does it either (−0.02 and +0.14).
+
 ## What it teaches
 
 - **A switch measured alone tells what it does in B2, not what it does.**
@@ -302,7 +336,9 @@ switches stand out:
   switches act together there: the estate to the newborns makes a world
   larger, poorer and more alike, as on B2; no handover keeps more links;
   and no revolutions, which alone made B1 a world of mayflies, does not in
-  company. Two of the sixteen worlds died out.
+  company. Two of the sixteen worlds died out. And no switch makes B1's
+  evolution go on: the later brains won in six of the fourteen worlds that
+  lived, about as often as in B1 itself.
 
 **Related notes:** [Many switches in few worlds](../notes/fractional-factorial.md) ·
 [Every setting](../notes/settings.md) ·

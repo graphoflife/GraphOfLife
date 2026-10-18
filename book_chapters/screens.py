@@ -253,3 +253,44 @@ def _b1_screen(ch: F.Chapter, measured: Dict[str, Dict[str, Any]]) -> None:
                            "it off.",
                            "The band: twice the root mean square of the seven chains of pairs, read the same way.",
                            "Thrown alone: the world with the switch minus its twin without it, each seed."]))
+
+    # Does evolution go on? The brains of 1,000 against those of 500, in the worlds that lived.
+    contests = _contests()
+    if all(w in contests for w in alive):
+        ys = np.array([contests[w] for w in alive])
+        main = {k: _contrast(ys, cols[k]) for k in letters}
+        pairs = {name: _contrast(ys, col) for name, col in chains.items()}
+        noise = float(2 * np.sqrt(np.mean(np.square(list(pairs.values())))))
+        # B1 itself: the two long pilots of 10,000 tokens, and the lab's ten worlds of 5,000.
+        own = {"B1, pilots": [contests[w] for w in ("L/B1-long-s1", "L/B1-long-s2") if w in contests],
+               "B1 at 5,000 tokens, lab": [contests[w] for w in (f"B1-5000-s{s:03d}" for s in range(1, 11))
+                                           if w in contests]}
+        ch.number("b1_evolution", {"worlds": {w: contests[w] for w in alive}, "main": main, "pairs": pairs,
+                                   "yardstick": noise, "b1": own})
+        groups = ["batch V"] + list(own)
+        ch.grid("b1evolution", [
+            {"title": "Each world", "x": {"categories": groups},
+             "y": {"label": "the later brains' share", "min": 0, "max": 1},
+             "series": F.dots(groups, [list(ys)] + list(own.values()), [ORANGE] + [GREY] * len(own)),
+             "guides": [{"axis": "y", "at": 0.5, "label": "no better"}]},
+            {"title": "Main effects", "x": {"categories": cats}, "y": {"label": "effect on the later brains' share"},
+             "series": [{"kind": "area", "label": "twice the chains' spread", "x": [-0.5, 7.5], "lo": [-noise, -noise],
+                         "hi": [noise, noise], "colour": GREY, "alpha": 0.25},
+                        {"label": None, "x": list(range(8)), "y": [main[k] for k in letters], "points": True,
+                         "size": 8, "colour": ORANGE}],
+             "guides": [{"axis": "y", "at": 0.0, "label": ""}]}],
+            columns=1, title="On B1: do the brains of 1,000 beat those of 500?",
+            caption=("Above, in orange: each world of batch V that lived, the share of a contested world its brains "
+                     "of iteration 1,000 hold after 100 iterations against those of 500, the mean of two contests, "
+                     "one in each era's world; in grey, B1 itself played the same way — two pilot worlds of 10,000 "
+                     "tokens, and the lab's ten worlds of 5,000. Below: each switch's main effect on that share, "
+                     "seven worlds with it against seven without; the grey band is twice the spread of the seven "
+                     "chains of pairs."),
+            recipe=recipe(RUNS_V.split("; and the switches")[0] + ". For B1 itself: the pilots "
+                          "`GraphOfLifeRuns/.pilots/L/B1-long-s1` and `-s2` (10,000 tokens), and the lab's ten B1 "
+                          "worlds of 5,000 tokens (Experiment 12, `B1-5000-s001` … `-s010`).",
+                          "`GraphOfLifeRuns/.pilots/batch_TUV_T100.json`, `batch_TUVWX4_T100.json`, "
+                          "`batch_TUVWX5_T100.json` and `rejudge_T100.json` (`research/oee/checks/rejudge.py`)",
+                          ["Seat the brains of the two eras on alternate agents of each era's world and play 100 "
+                           "iterations.", "Count the agents the later era's brains hold, as a share of all.",
+                           "A switch's main effect: the mean of the worlds with it on, minus those with it off."]))
