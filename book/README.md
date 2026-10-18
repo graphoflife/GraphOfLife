@@ -113,6 +113,7 @@ everything can be checked with it.
 - [Chapter 86 · Eight switches at once](chapters/86-eight-switches-at-once.md)
 - [Chapter 88 · Revolutions, with every other rule](chapters/88-revolutions-with-every-other-rule.md)
 - [Chapter 89 · Handover, with every other rule](chapters/89-handover-with-every-other-rule.md)
+- [Chapter 90 · Gifts, with every other rule](chapters/90-gifts-with-every-other-rule.md)
 
 **Part VI · Towards a physics: space, scale and locality**
 

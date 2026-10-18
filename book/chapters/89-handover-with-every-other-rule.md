@@ -92,5 +92,5 @@ and 0.75) and brains that grow (0.60 and 0.72).
 <!-- turns -->
 ---
 
-← [Chapter 88 · Revolutions, with every other rule](88-revolutions-with-every-other-rule.md) · [Contents](../README.md) · [Chapter 60 · Worlds of 100,000 tokens](60-worlds-of-100000-tokens.md) →
+← [Chapter 88 · Revolutions, with every other rule](88-revolutions-with-every-other-rule.md) · [Contents](../README.md) · [Chapter 90 · Gifts, with every other rule](90-gifts-with-every-other-rule.md) →
 <!-- /turns -->

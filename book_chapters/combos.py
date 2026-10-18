@@ -14,6 +14,7 @@ and rejudge_T100.json for batch S's worlds).
     mixcombos   Chapter 82 · Brains mixed at birth, with every other rule (batch Y)
     norevcombos Chapter 88 · Revolutions, with every other rule (batch W)
     handovercombos  Chapter 89 · Handover, with every other rule (batch X)
+    giftcombos  Chapter 90 · Gifts, with every other rule (batch T)
 """
 from __future__ import annotations
 
@@ -58,6 +59,7 @@ class Batch(NamedTuple):
     #                                          lab worlds"
     alone_judged: str                        # the worlds whose contests give its median: "the ten mixed worlds
     #                                          of Experiment 17"
+    act: str = ""                            # what is done to a world, for a title: "adding gifts"
 
 
 def _measured() -> Dict[str, Dict[str, Any]]:
@@ -238,7 +240,7 @@ def _changes(ch: F.Chapter, b: Batch, fig: str, marks: bool = False) -> Optional
             for v in change(pairs, "marks"):
                 xs.append(v)
                 ys.append(k)
-        health = [{"title": f"What {b.words} changes in health", "x": {"label": "marks of the health bar (of 7), "
+        health = [{"title": f"What {b.act or b.words} changes in health", "x": {"label": "marks of the health bar (of 7), "
                                                                                "with it minus without it",
                                                                       "min": min(xs + [0]) - 0.4,
                                                                       "max": max(xs + [0]) + 0.4},
@@ -249,7 +251,7 @@ def _changes(ch: F.Chapter, b: Batch, fig: str, marks: bool = False) -> Optional
     spread = [v for sr in series for v in sr["x"]]
     room = 0.05 * (max(spread) - min(spread)) if spread else 0.05
     ch.grid(fig, [
-        {"title": f"What {b.words} changes", "x": {"label": "with it, minus without it",
+        {"title": f"What {b.act or b.words} changes", "x": {"label": "with it, minus without it",
                                                     "min": min(spread) - room, "max": max(spread) + room},
          "y": {"categories": cats}, "series": series, "height": height,
          "guides": [{"axis": "x", "at": 0.0, "label": ""}]}] + health + [
@@ -300,11 +302,20 @@ def _norev_rules() -> List[Tuple[str, str, str]]:
 
 NOREV = Batch("W", "no revolutions", "no revolutions alone", ("S/S1-norev-s1", "S/S1-norev-s2"), _norev_rules,
               lambda: [v for w, v in _contests().items() if w.startswith("S/S1-norev-")],
-              "batch S's `S/S1-norev`", "batch S's two worlds without revolutions")
+              "batch S's `S/S1-norev`", "batch S's two worlds without revolutions", "turning revolutions off")
+def _gift_rules() -> List[Tuple[str, str, str]]:
+    """Batch T on B2: every switch with gifts and without; the worlds of B1 with gifts are read apart."""
+    from make_jobs_TU import B2, T
+    return [(name, control, f"T/gifts-{name}") for name, base, _, _, control in T if base == B2]
+
+
+GIFTS = Batch("T", "gifts", "gifts alone", ("S/S2-gifts-s1", "S/S2-gifts-s2"), _gift_rules,
+              lambda: [v for w, v in _contests().items() if w.startswith("S/S2-gifts-")],
+              "batch S's `S/S2-gifts`", "batch S's two worlds with gifts alone", "adding gifts")
 HANDOVER = Batch("X", "handover", "handover alone", ("T/handover-s1", "T/handover-s2"),
                  lambda: _other_rules("X/handover", "handover"),
                  lambda: [v for w, v in _contests().items() if w.startswith("T/handover-")],
-                 "batch T's `T/handover`", "the two worlds of batch T with handover alone")
+                 "batch T's `T/handover`", "the two worlds of batch T with handover alone", "adding handover")
 
 
 def _revolution_rates() -> Dict[str, Dict[str, float]]:
@@ -347,6 +358,32 @@ def norevcombos(ch: F.Chapter) -> None:
 @chapter
 def handovercombos(ch: F.Chapter) -> None:
     _changes(ch, HANDOVER, "changes", marks=True)
+
+
+@chapter
+def giftcombos(ch: F.Chapter) -> None:
+    if _changes(ch, GIFTS, "changes", marks=True) is None:
+        return
+    # Gifts on B1, with revolutions and without: each against the same B1 world without gifts.
+    measured, contests = _measured(), _contests()
+    keys = ("share_at_most_three", "diversity", "marks", "agents", "links_per_agent")
+    b1 = {}
+    for name, alone in (("B1", "S/S6-B1"), ("B1norev", "S/S7-B1norev")):
+        for seed in (1, 2):
+            a, w = measured.get(f"{alone}-s{seed}"), measured.get(f"T/gifts-{name}-s{seed}")
+            if a and w:
+                b1[f"{name}-s{seed}"] = {"alone": {k: a.get(k) for k in keys},
+                                         "with_gifts": {k: w.get(k) for k in keys},
+                                         "evolution": contests.get(f"T/gifts-{name}-s{seed}")}
+    ch.number("b1", b1)
+    # How much is given, where games were recorded (research/oee/checks/gifts.py on 200 iterations from 1,000).
+    import glob
+    volumes = {}
+    for path in sorted(glob.glob(os.path.join(PILOTS, "frames_T_gifts-*_1000.json"))):
+        kept = json.load(open(path))
+        if kept.get("gifts"):
+            volumes[os.path.basename(path)[len("frames_"):-len("_1000.json")]] = kept["gifts"]
+    ch.number("gift_volumes", volumes)
 
 
 @chapter

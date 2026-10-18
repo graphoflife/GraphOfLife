@@ -540,6 +540,17 @@ each two-by-two read at 1,000 by research/atlas/at.py)**
   alone 0.84, B2 0.68); fastest with links that hold a token (0.93), half kept (0.91), units that hold a token
   (0.90); no better with stakes pooled by family (0.35), handover, slow brain change (0.47), no random inputs (0.50).
 
+**Gifts, with every other rule (batch T, Ch. 90; 2026-10-18; B2 with gifts and 21 other rules, and B1 with gifts,
+seeds 1 and 2, 1,000 iterations; gift volumes from 200 recorded iterations of nine seed-1 worlds)**
+- Gifts are small: 0.12-0.35% of the tokens a game, by 0.16-0.52% of the agents (estates to newborns/parents: 1.2%/
+  1.6%); 1.2-2.2 tokens a gift; 64-87% downhill (richer to poorer); to clones as chance; returned less than
+  chance; 65-88% of gift tokens on links with no stake the game before.
+- Change little: median +0.002 poor, -0.03 diversity, 0 marks, +100 agents. Mixing: +0.11/+0.17 poor, +710/+540
+  agents. With handover +1 mark in both seeds. B1 without revolutions: 4,500/5,900 agents (2,200/1,800), 90%/94%
+  poor (43%/32%).
+- Evolution: above half in 40 of 42, median 0.64 (B2 0.68) - gifts alone had sped it (0.87/0.83): the speed-up
+  does not carry over. B1+gifts 0.64/0.46; B1norev+gifts 0.89/0.08.
+
 **Handover, with every other rule (batch X, Ch. 89; 2026-10-18; B2 with handover and 23 other rules, seeds 1 and 2,
 1,000 iterations, against each rule alone)**
 - Costs health with nearly every rule: median -2 marks (up to -4; none in 5 of 46): the 2-core fails in 38 of 46

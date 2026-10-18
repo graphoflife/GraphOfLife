@@ -1,0 +1,26 @@
+# Worlds of batches T to X finished after batch_TUVWX3_worlds.txt was made (2026-10-18): judged into batch_TUVWX4_T100.json.
+pilot GraphOfLifeRuns/.pilots/T/gifts-anychild-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/T/gifts-B1norev-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/T/gifts-B1-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/T/gifts-bytokens-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/T/gifts-came-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/T/gifts-grow-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/T/gifts-handover-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/T/gifts-helped-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/T/gifts-keephalf-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/T/gifts-keepone-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/T/gifts-linktoken-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/T/gifts-lottery-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/T/gifts-mix-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/T/gifts-mut05-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/T/gifts-mut80-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/T/gifts-newborns-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/T/gifts-noage-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/T/gifts-nodice-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/T/gifts-norev-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/T/gifts-parents-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/T/gifts-pool-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/T/gifts-poorest-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/T/gifts-unittoken-s2 500:1000
+pilot GraphOfLifeRuns/.pilots/V/V-DEFH-s1 500:1000
+pilot GraphOfLifeRuns/.pilots/V/V-none-s1 500:1000

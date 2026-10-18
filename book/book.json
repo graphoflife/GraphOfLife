@@ -453,6 +453,13 @@
           "note": "B2 with handover together with each of 23 other rules (batch X): it costs two marks of the health bar with nearly every rule, thinning the network into trees; it cancels mixing's riches; it unfolds a world a little, since parents pass their links on.",
           "file": "chapters/89-handover-with-every-other-rule.md",
           "status": "analysed"
+        },
+        {
+          "id": "90",
+          "title": "Gifts, with every other rule",
+          "note": "B2 with gifts together with each of 21 other rules, and B1 with gifts (batch T): gifts move a few thousandths of the tokens a game, mostly to the poorer, and change little whatever else the rules are; they cost mixing some of its riches, and in B1 without revolutions they fill the world with the poor.",
+          "file": "chapters/90-gifts-with-every-other-rule.md",
+          "status": "analysed"
         }
       ]
     },

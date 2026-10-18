@@ -1,0 +1,695 @@
+{
+ "chapter": "giftcombos",
+ "numbers": {
+  "changes": {
+   "rows": {
+    "unittoken": {
+     "poor": [
+      -0.14176910523174324,
+      0.04574855963428909
+     ],
+     "diversity": [
+      -0.03872699386503076,
+      0.07323619631901823
+     ],
+     "marks": [
+      -1.0,
+      0.0
+     ],
+     "agents": [
+      -297.0,
+      101.0
+     ],
+     "evolution": [
+      0.9486725795189493,
+      0.7963306245114687
+     ]
+    },
+    "came": {
+     "poor": [
+      -0.056355599486378916,
+      -0.02519439591682937
+     ],
+     "diversity": [
+      -0.019938650306748407,
+      -0.02722392638036808
+     ],
+     "marks": [
+      0.0,
+      0.0
+     ],
+     "agents": [
+      168.0,
+      -396.0
+     ],
+     "evolution": [
+      0.836571709147168,
+      0.7010741360915009
+     ]
+    },
+    "newborns": {
+     "poor": [
+      -0.05618412229005554,
+      -0.0040433715589089925
+     ],
+     "diversity": [
+      0.08512269938650308,
+      -0.016871165644171737
+     ],
+     "marks": [
+      -1.0,
+      1.0
+     ],
+     "agents": [
+      -596.0,
+      -215.0
+     ],
+     "evolution": [
+      0.5467747174980844,
+      0.44978995226906776
+     ]
+    },
+    "pool": {
+     "poor": [
+      -0.008613818016938946,
+      -0.05020817627246987
+     ],
+     "diversity": [
+      -0.044478527607361984,
+      -0.02262269938650302
+     ],
+     "marks": [
+      0.0,
+      -1.0
+     ],
+     "agents": [
+      105.0,
+      -598.0
+     ],
+     "evolution": [
+      0.6157873840476134,
+      0.5577853260869565
+     ]
+    },
+    "parents": {
+     "poor": [
+      -0.02734648936327355,
+      -0.012314402081816112
+     ],
+     "diversity": [
+      0.05368098159509202,
+      0.06786809815950917
+     ],
+     "marks": [
+      0.0,
+      0.0
+     ],
+     "agents": [
+      -817.0,
+      -261.0
+     ],
+     "evolution": [
+      0.57443680051188,
+      0.5165400879640796
+     ]
+    },
+    "noage": {
+     "poor": [
+      -0.016009910478177458,
+      -0.023611703058494138
+     ],
+     "diversity": [
+      0.02837423312883436,
+      -0.02108895705521474
+     ],
+     "marks": [
+      0.0,
+      0.0
+     ],
+     "agents": [
+      -252.0,
+      -565.0
+     ],
+     "evolution": [
+      0.44228923372260437,
+      0.5298287677624867
+     ]
+    },
+    "handover": {
+     "poor": [
+      0.012886535781221231,
+      -0.034418491612423385
+     ],
+     "diversity": [
+      -0.03834355828220859,
+      0.024923312883435522
+     ],
+     "marks": [
+      1.0,
+      1.0
+     ],
+     "agents": [
+      -95.0,
+      249.0
+     ],
+     "evolution": [
+      0.6348938106959533,
+      0.6595772327409112
+     ]
+    },
+    "grow": {
+     "poor": [
+      0.02418694958740719,
+      -0.032550111936959336
+     ],
+     "diversity": [
+      -0.06940184049079756,
+      -0.0015337423312883347
+     ],
+     "marks": [
+      0.0,
+      0.0
+     ],
+     "agents": [
+      -30.0,
+      117.0
+     ],
+     "evolution": [
+      0.772088732095666,
+      0.7778338128465447
+     ]
+    },
+    "lottery": {
+     "poor": [
+      -0.0055167403428990625,
+      -0.0011375312146642003
+     ],
+     "diversity": [
+      -0.029907975460122693,
+      -0.0015337423312883347
+     ],
+     "marks": [
+      0.0,
+      0.0
+     ],
+     "agents": [
+      -131.0,
+      -29.0
+     ],
+     "evolution": [
+      0.5276241207076865,
+      0.5856397310863344
+     ]
+    },
+    "anychild": {
+     "poor": [
+      0.00020614306328592402,
+      -0.00021777773694764413
+     ],
+     "diversity": [
+      -0.011503067484662566,
+      0.01418711656441718
+     ],
+     "marks": [
+      0.0,
+      0.0
+     ],
+     "agents": [
+      154.0,
+      -185.0
+     ],
+     "evolution": [
+      0.6981523165686889,
+      0.6142750171878976
+     ]
+    },
+    "poorest": {
+     "poor": [
+      0.007895206738924188,
+      0.00010040031802038829
+     ],
+     "diversity": [
+      -0.08167177914110424,
+      -0.1487730061349693
+     ],
+     "marks": [
+      0.0,
+      0.0
+     ],
+     "agents": [
+      314.0,
+      2.0
+     ],
+     "evolution": [
+      0.7135516882575809,
+      0.6348758401510557
+     ]
+    },
+    "mut80": {
+     "poor": [
+      0.03959338761108311,
+      -0.00693759700655272
+     ],
+     "diversity": [
+      -0.07055214723926395,
+      -0.054831288343558215
+     ],
+     "marks": [
+      0.0,
+      0.0
+     ],
+     "agents": [
+      212.0,
+      -177.0
+     ],
+     "evolution": [
+      0.646415058861485,
+      0.6226115511610704
+     ]
+    },
+    "mut05": {
+     "poor": [
+      0.004648447431588432,
+      0.029133992670611786
+     ],
+     "diversity": [
+      0.12921779141104295,
+      0.012653374233128845
+     ],
+     "marks": [
+      0.0,
+      0.0
+     ],
+     "agents": [
+      395.0,
+      101.0
+     ],
+     "evolution": [
+      0.8136366466508131,
+      0.7301139385777132
+     ]
+    },
+    "keepone": {
+     "poor": [
+      0.02999195571321267,
+      0.004557911264300385
+     ],
+     "diversity": [
+      -0.11388036809815955,
+      -0.055981595092024494
+     ],
+     "marks": [
+      0.0,
+      0.0
+     ],
+     "agents": [
+      741.0,
+      282.0
+     ],
+     "evolution": [
+      0.5751792966949154,
+      0.5048291228566398
+     ]
+    },
+    "bytokens": {
+     "poor": [
+      0.0862895211454231,
+      -0.035626636463997
+     ],
+     "diversity": [
+      -0.2354294478527607,
+      0.0908742331288343
+     ],
+     "marks": [
+      1.0,
+      0.0
+     ],
+     "agents": [
+      -165.0,
+      -200.0
+     ],
+     "evolution": [
+      0.5045548606753318,
+      0.7208982159398631
+     ]
+    },
+    "helped": {
+     "poor": [
+      0.03745461452158627,
+      0.032597086654563734
+     ],
+     "diversity": [
+      -0.02300613496932513,
+      -0.10506134969325154
+     ],
+     "marks": [
+      0.0,
+      0.0
+     ],
+     "agents": [
+      465.0,
+      262.0
+     ],
+     "evolution": [
+      0.6894073885232224,
+      0.7255309422330996
+     ]
+    },
+    "nodice": {
+     "poor": [
+      0.056329735464340946,
+      0.019420573371527028
+     ],
+     "diversity": [
+      -0.06173312883435589,
+      -0.0732361963190184
+     ],
+     "marks": [
+      -1.0,
+      0.0
+     ],
+     "agents": [
+      507.0,
+      183.0
+     ],
+     "evolution": [
+      0.536344381440175,
+      0.6525381377673398
+     ]
+    },
+    "norev": {
+     "poor": [
+      0.033130343901096926,
+      0.0527506933625117
+     ],
+     "diversity": [
+      -0.17906441717791405,
+      -0.07361963190184051
+     ],
+     "marks": [
+      0.0,
+      0.0
+     ],
+     "agents": [
+      -46.0,
+      710.0
+     ],
+     "evolution": [
+      0.5705015796784101,
+      0.6107547792326672
+     ]
+    },
+    "linktoken": {
+     "poor": [
+      0.10733764471940221,
+      -0.007386497294754213
+     ],
+     "diversity": [
+      -0.05023006134969321,
+      -0.0966257668711657
+     ],
+     "marks": [
+      0.0,
+      0.0
+     ],
+     "agents": [
+      134.0,
+      80.0
+     ],
+     "evolution": [
+      0.6142481175802956,
+      0.8770545378889284
+     ]
+    },
+    "keephalf": {
+     "poor": [
+      0.027405612135899093,
+      0.088719669072995
+     ],
+     "diversity": [
+      0.006134969325153339,
+      -0.04792944785276071
+     ],
+     "marks": [
+      0.0,
+      0.0
+     ],
+     "agents": [
+      276.0,
+      654.0
+     ],
+     "evolution": [
+      0.7232394349114025,
+      0.6829666826080025
+     ]
+    },
+    "mix": {
+     "poor": [
+      0.11126533435400454,
+      0.1659468368451965
+     ],
+     "diversity": [
+      -0.10237730061349692,
+      0.07400306748466245
+     ],
+     "marks": [
+      -1.0,
+      0.0
+     ],
+     "agents": [
+      706.0,
+      536.0
+     ],
+     "evolution": [
+      0.9066991915519109,
+      0.7046114798502988
+     ]
+    }
+   },
+   "b2_median": 0.6819306236881428
+  },
+  "b1": {
+   "B1-s1": {
+    "alone": {
+     "share_at_most_three": 0.016073478760045924,
+     "diversity": 0.7200920245398773,
+     "marks": 3,
+     "agents": 871,
+     "links_per_agent": 2.7233065442020665
+    },
+    "with_gifts": {
+     "share_at_most_three": 0.46799580272822666,
+     "diversity": 0.7177914110429447,
+     "marks": 4,
+     "agents": 1906,
+     "links_per_agent": 2.8268625393494227
+    },
+    "evolution": 0.6401328228398564
+   },
+   "B1-s2": {
+    "alone": {
+     "share_at_most_three": 0.050314465408805034,
+     "diversity": 0.38496932515337423,
+     "marks": 1,
+     "agents": 795,
+     "links_per_agent": 2.218867924528302
+    },
+    "with_gifts": {
+     "share_at_most_three": 0.10453648915187377,
+     "diversity": 0.8849693251533742,
+     "marks": 2,
+     "agents": 507,
+     "links_per_agent": 2.844181459566075
+    },
+    "evolution": 0.46498653081498187
+   },
+   "B1norev-s1": {
+    "alone": {
+     "share_at_most_three": 0.4303334856098675,
+     "diversity": 0.6503067484662577,
+     "marks": 2,
+     "agents": 2189,
+     "links_per_agent": 2.9730470534490636
+    },
+    "with_gifts": {
+     "share_at_most_three": 0.9033752481800132,
+     "diversity": 0.5329754601226994,
+     "marks": 3,
+     "agents": 4533,
+     "links_per_agent": 5.796602691374366
+    },
+    "evolution": 0.8858303840608206
+   },
+   "B1norev-s2": {
+    "alone": {
+     "share_at_most_three": 0.3213684800897364,
+     "diversity": 0.6062116564417177,
+     "marks": 2,
+     "agents": 1783,
+     "links_per_agent": 2.7111609646662926
+    },
+    "with_gifts": {
+     "share_at_most_three": 0.9363143631436315,
+     "diversity": 0.1495398773006135,
+     "marks": 5,
+     "agents": 5904,
+     "links_per_agent": 4.164972899728998
+    },
+    "evolution": 0.08111493892890698
+   }
+  },
+  "gift_volumes": {
+   "T_gifts-bytokens-s1": {
+    "games": 199,
+    "gifts": 3918,
+    "gift_share": 0.0028603015075376885,
+    "givers_share": 0.005166483479645924,
+    "tokens_per_gift": 1.4527820316488005,
+    "downhill": 0.8443429374560787,
+    "uphill": 0.12772312016865778,
+    "to_better_connected": 0.6003162333099087,
+    "to_less_connected": 0.26721714687280396,
+    "to_clone": 0.2752986647926915,
+    "to_clone_chance": 0.2927686779711593,
+    "returned": 0.13578356304236855,
+    "returned_chance": 0.22296284362600732,
+    "on_unused_links": 0.6489810260014055
+   },
+   "T_gifts-came-s1": {
+    "games": 199,
+    "gifts": 1833,
+    "gift_share": 0.0016718592964824121,
+    "givers_share": 0.0025164717651522993,
+    "tokens_per_gift": 1.8150572831423895,
+    "downhill": 0.737000300571085,
+    "uphill": 0.2058911932672077,
+    "to_better_connected": 0.4743011722272317,
+    "to_less_connected": 0.4192966636609558,
+    "to_clone": 0.10159302675082657,
+    "to_clone_chance": 0.12819842465389802,
+    "returned": 0.044189852700491,
+    "returned_chance": 0.13144724040734676,
+    "on_unused_links": 0.8815749924857229
+   },
+   "T_gifts-helped-s1": {
+    "games": 199,
+    "gifts": 2615,
+    "gift_share": 0.0015909547738693468,
+    "givers_share": 0.003229581023859848,
+    "tokens_per_gift": 1.2107074569789675,
+    "downhill": 0.8723941882501579,
+    "uphill": 0.08180669614655717,
+    "to_better_connected": 0.5777005685407455,
+    "to_less_connected": 0.32691092861655086,
+    "to_clone": 0.17561591914087177,
+    "to_clone_chance": 0.20353520141669137,
+    "returned": 0.06500956022944551,
+    "returned_chance": 0.19693002443169744,
+    "on_unused_links": 0.7741629816803538
+   },
+   "T_gifts-linktoken-s1": {
+    "games": 199,
+    "gifts": 1096,
+    "gift_share": 0.001189491065592044,
+    "givers_share": 0.0033790441780259485,
+    "tokens_per_gift": 1.436131386861314,
+    "downhill": 0.8074968233799238,
+    "uphill": 0.16264294790343076,
+    "to_better_connected": 0.5273189326556544,
+    "to_less_connected": 0.3710292249047014,
+    "to_clone": 0.1556543837357052,
+    "to_clone_chance": 0.15092230882111668,
+    "returned": 0.0812043795620438,
+    "returned_chance": 0.14566605839416055,
+    "on_unused_links": 0.818297331639136
+   },
+   "T_gifts-mix-s1": {
+    "games": 199,
+    "gifts": 1617,
+    "gift_share": 0.0017909547738693466,
+    "givers_share": 0.004261010922358223,
+    "tokens_per_gift": 2.204081632653061,
+    "downhill": 0.7401795735129069,
+    "uphill": 0.20763187429854096,
+    "to_better_connected": 0.37570145903479235,
+    "to_less_connected": 0.5171156004489338,
+    "to_clone": 0.11531986531986532,
+    "to_clone_chance": 0.10924899280492889,
+    "returned": 0.036487322201607914,
+    "returned_chance": 0.09642685356971073,
+    "on_unused_links": 0.8128507295173962
+   },
+   "T_gifts-newborns-s1": {
+    "games": 199,
+    "gifts": 11334,
+    "gift_share": 0.012286934673366834,
+    "givers_share": 0.010459190321961576,
+    "tokens_per_gift": 2.157314275630845,
+    "downhill": 0.6495030878082696,
+    "uphill": 0.25904870966422644,
+    "to_better_connected": 0.4009242975747413,
+    "to_less_connected": 0.41879677722792524,
+    "to_clone": 0.27442640382806427,
+    "to_clone_chance": 0.2608904769688192,
+    "returned": 0.13816834303864478,
+    "returned_chance": 0.4324925583703267,
+    "on_unused_links": 0.7607050836366611
+   },
+   "T_gifts-norev-s1": {
+    "games": 199,
+    "gifts": 1463,
+    "gift_share": 0.0012683417085427135,
+    "givers_share": 0.001582404829462275,
+    "tokens_per_gift": 1.7252221462747779,
+    "downhill": 0.8193343898573693,
+    "uphill": 0.11687797147385103,
+    "to_better_connected": 0.4469096671949287,
+    "to_less_connected": 0.40768621236133123,
+    "to_clone": 0.16798732171156894,
+    "to_clone_chance": 0.1778163568588834,
+    "returned": 0.03144224196855776,
+    "returned_chance": 0.15804656846766496,
+    "on_unused_links": 0.8137876386687797
+   },
+   "T_gifts-parents-s1": {
+    "games": 199,
+    "gifts": 21658,
+    "gift_share": 0.015816582914572865,
+    "givers_share": 0.015868268535701755,
+    "tokens_per_gift": 1.4532736171391634,
+    "downhill": 0.6433677521842732,
+    "uphill": 0.27050039714058777,
+    "to_better_connected": 0.46354249404289116,
+    "to_less_connected": 0.382462271644162,
+    "to_clone": 0.34783161239078636,
+    "to_clone_chance": 0.336318524888914,
+    "returned": 0.40816326530612246,
+    "returned_chance": 0.6479917533905402,
+    "on_unused_links": 0.6900397140587768
+   },
+   "T_gifts-poorest-s1": {
+    "games": 199,
+    "gifts": 3820,
+    "gift_share": 0.0035201005025125628,
+    "givers_share": 0.004260727664926112,
+    "tokens_per_gift": 1.8337696335078535,
+    "downhill": 0.742469664525339,
+    "uphill": 0.19186295503211992,
+    "to_better_connected": 0.4638115631691649,
+    "to_less_connected": 0.3240542469664525,
+    "to_clone": 0.27780157030692365,
+    "to_clone_chance": 0.2766862746587663,
+    "returned": 0.12094240837696335,
+    "returned_chance": 0.272573154204,
+    "on_unused_links": 0.7871520342612419
+   }
+  }
+ },
+ "figures": {
+  "changes": {
+   "title": "Each rule, with gifts and without",
+   "caption": "Each row is one other rule. First: what adding gifts to a world of B2 with that rule changes (batch T), at iteration 1,000 \u2014 in orange, the share of the agents holding three tokens or fewer; in violet, the diversity score; a dot for each seed, 1 and 2. Then: what it changes in the marks of the health bar the world meets. Last: the share of a contested world the brains of 1,000 of the world with both rules hold after 100 iterations against those of 500, the mean of two contests, a dot for each seed; the dashed line marked B2 is the median of the lab's ten B2 worlds, played the same way.",
+   "recipe": "**Runs.** Batch T's pilot worlds (B2 at 10,000 tokens, gifts and one other rule, seeds 1 and 2, `GraphOfLifeRuns/.pilots/T/`) and their controls: the same rule alone, from the batch or lab experiment that made it.\n\n**Data.** From each world's checkpoint at iteration 1,000 (`research/atlas/at.py --at 1000`, `GraphOfLifeRuns/.pilots/atlas/at1000.json`) and the contests in `GraphOfLifeRuns/.pilots/batch_TUV_T100.json` and `rejudge_T100.json`.\n\n1. Read each world as `research/atlas/profile.py` reads every world.\n2. Subtract the world with the rule alone from the world with both, seed by seed.\n3. Seat the brains of the two eras on alternate agents of each era's world, play 100 iterations, and count the agents the later brains hold.\n\n**To make it again:** `python3 book_figures.py giftcombos`."
+  }
+ }
+}
