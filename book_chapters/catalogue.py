@@ -55,7 +55,7 @@ BATCHES: Dict[str, Tuple[str, List[str]]] = {
     "Z": ("Settings drawn at random from every value the book has used, the values that make worlds worse "
           "dropped round after round (research/oee/search.md)", []),
     "LC": ("The candidates, the worlds closest to the author's picture of one that might keep evolving, played on "
-           "to 10,000 iterations", ["79"]),
+           "to 10,000 iterations", ["79", "92"]),
     "SW": ("Mixing switched at a moment: off in the five worlds of Experiment 17 that met every mark, at 5,000; on "
            "in five of B2's worlds, at 2,000", ["80"]),
     "M": ("Steadying a mixed world: each rule of the engine that might hold its size (estates, half kept at home, "

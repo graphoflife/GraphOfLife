@@ -1,0 +1,374 @@
+{
+ "chapter": "fiveseeds",
+ "numbers": {
+  "lines": {
+   "diversity": 0.4921395705521473,
+   "poor": 0.6560443366816765
+  },
+  "worlds": {
+   "B2-10000-4af4a3-s003": {
+    "rule": "mixing alone (Experiment 17)",
+    "seed": 3,
+    "died": null,
+    "agents": 152,
+    "poor": 0.006578947368421052,
+    "marks": 6,
+    "diversity": 0.5778374233128835,
+    "dimension": 3.033430103405701,
+    "missing": [
+     "no hub"
+    ],
+    "wide": 1.146349290744286,
+    "fate": "failed"
+   },
+   "B2-10000-4af4a3-s004": {
+    "rule": "mixing alone (Experiment 17)",
+    "seed": 4,
+    "died": null,
+    "agents": 628,
+    "poor": 0.20063694267515925,
+    "marks": 7,
+    "diversity": 0.6575920245398773,
+    "dimension": 3.5830103475582016,
+    "missing": [],
+    "wide": 1.2772244263113175,
+    "fate": "passed"
+   },
+   "B2-10000-4af4a3-s005": {
+    "rule": "mixing alone (Experiment 17)",
+    "seed": 5,
+    "died": null,
+    "agents": 2257,
+    "poor": 0.6331413380593709,
+    "marks": 7,
+    "diversity": 0.6042944785276074,
+    "dimension": 3.9845575822534607,
+    "missing": [],
+    "wide": 1.2639538114742916,
+    "fate": "passed"
+   },
+   "B2-10000-4af4a3-s006": {
+    "rule": "mixing alone (Experiment 17)",
+    "seed": 6,
+    "died": null,
+    "agents": 1302,
+    "poor": 0.4216589861751152,
+    "marks": 7,
+    "diversity": 0.5398773006134969,
+    "dimension": 3.910002634424443,
+    "missing": [],
+    "wide": 1.290613304835226,
+    "fate": "passed"
+   },
+   "B2-10000-4af4a3-s007": {
+    "rule": "mixing alone (Experiment 17)",
+    "seed": 7,
+    "died": null,
+    "agents": 346,
+    "poor": 0.017341040462427744,
+    "marks": 6,
+    "diversity": 0.5226226993865031,
+    "dimension": 3.782964467375169,
+    "missing": [
+     "no hub"
+    ],
+    "wide": 1.1739421152521827,
+    "fate": "failed"
+   },
+   "B2-10000-0df8be-s003": {
+    "rule": "fast brain change",
+    "seed": 3,
+    "died": null,
+    "agents": 1215,
+    "poor": 0.24526748971193416,
+    "marks": 7,
+    "diversity": 0.6407208588957055,
+    "dimension": 3.8828216739731376,
+    "missing": [],
+    "wide": 1.2048977853162437,
+    "fate": "passed"
+   },
+   "B2-10000-0df8be-s004": {
+    "rule": "fast brain change",
+    "seed": 4,
+    "died": null,
+    "agents": 1137,
+    "poor": 0.2726473175021988,
+    "marks": 6,
+    "diversity": 0.6706288343558282,
+    "dimension": 4.029537181553638,
+    "missing": [
+     "dimension"
+    ],
+    "wide": 1.155314469064965,
+    "fate": "failed"
+   },
+   "B2-10000-0df8be-s005": {
+    "rule": "fast brain change",
+    "seed": 5,
+    "died": null,
+    "agents": 445,
+    "poor": 0.035955056179775284,
+    "marks": 6,
+    "diversity": 0.6836656441717791,
+    "dimension": 3.538418545467711,
+    "missing": [
+     "no hub"
+    ],
+    "wide": 1.142205967846931,
+    "fate": "failed"
+   },
+   "B2-10000-0df8be-s006": {
+    "rule": "fast brain change",
+    "seed": 6,
+    "died": null,
+    "agents": 903,
+    "poor": 0.10299003322259136,
+    "marks": 7,
+    "diversity": 0.6077453987730062,
+    "dimension": 3.8555136568590798,
+    "missing": [],
+    "wide": 1.1341799998946243,
+    "fate": "passed"
+   },
+   "B2-10000-0df8be-s007": {
+    "rule": "fast brain change",
+    "seed": 7,
+    "died": null,
+    "agents": 1366,
+    "poor": 0.390190336749634,
+    "marks": 6,
+    "diversity": 0.691717791411043,
+    "dimension": 4.219442512889739,
+    "missing": [
+     "dimension"
+    ],
+    "wide": 1.1109099520293355,
+    "fate": "failed"
+   },
+   "B2-10000-1109f3-s003": {
+    "rule": "no random inputs",
+    "seed": 3,
+    "died": null,
+    "agents": 521,
+    "poor": 0.026871401151631478,
+    "marks": 7,
+    "diversity": 0.3776840490797546,
+    "dimension": 3.246564149018176,
+    "missing": [],
+    "wide": 1.1564484060082219,
+    "fate": "failed"
+   },
+   "B2-10000-1109f3-s004": {
+    "rule": "no random inputs",
+    "seed": 4,
+    "died": 3835,
+    "fate": "died"
+   },
+   "B2-10000-1109f3-s005": {
+    "rule": "no random inputs",
+    "seed": 5,
+    "died": null,
+    "agents": 393,
+    "poor": 0.05597964376590331,
+    "marks": 6,
+    "diversity": 0.6073619631901841,
+    "dimension": 3.501033950772678,
+    "missing": [
+     "no hub"
+    ],
+    "wide": 1.1522628156800154,
+    "fate": "failed"
+   },
+   "B2-10000-1109f3-s006": {
+    "rule": "no random inputs",
+    "seed": 6,
+    "died": null,
+    "agents": 1969,
+    "poor": 0.5485017775520569,
+    "marks": 7,
+    "diversity": 0.629601226993865,
+    "dimension": 3.9270147364170835,
+    "missing": [],
+    "wide": 1.6808738411051325,
+    "fate": "passed"
+   },
+   "B2-10000-1109f3-s007": {
+    "rule": "no random inputs",
+    "seed": 7,
+    "died": 3209,
+    "fate": "died"
+   },
+   "B2-10000-1f9b27-s003": {
+    "rule": "no revolutions",
+    "seed": 3,
+    "died": null,
+    "agents": 1968,
+    "poor": 0.6265243902439024,
+    "marks": 7,
+    "diversity": 0.49118098159509205,
+    "dimension": 3.7979297691859677,
+    "missing": [],
+    "wide": 1.164173316106923,
+    "fate": "failed"
+   },
+   "B2-10000-1f9b27-s004": {
+    "rule": "no revolutions",
+    "seed": 4,
+    "died": null,
+    "agents": 212,
+    "poor": 0.2971698113207547,
+    "marks": 6,
+    "diversity": 0.7124233128834356,
+    "dimension": 3.058752604988633,
+    "missing": [
+     "no hub"
+    ],
+    "wide": 1.2572507409024412,
+    "fate": "failed"
+   },
+   "B2-10000-1f9b27-s005": {
+    "rule": "no revolutions",
+    "seed": 5,
+    "died": null,
+    "agents": 539,
+    "poor": 0.055658627087198514,
+    "marks": 7,
+    "diversity": 0.4888803680981595,
+    "dimension": 3.5292799483097235,
+    "missing": [],
+    "wide": 1.0884270859489016,
+    "fate": "failed"
+   },
+   "B2-10000-1f9b27-s006": {
+    "rule": "no revolutions",
+    "seed": 6,
+    "died": null,
+    "agents": 1996,
+    "poor": 0.5901803607214429,
+    "marks": 7,
+    "diversity": 0.584355828220859,
+    "dimension": 3.9553996031839094,
+    "missing": [],
+    "wide": 1.397474079970572,
+    "fate": "passed"
+   },
+   "B2-10000-1f9b27-s007": {
+    "rule": "no revolutions",
+    "seed": 7,
+    "died": 9338,
+    "fate": "died"
+   }
+  },
+  "passed": {
+   "mixing alone (Experiment 17)": 3,
+   "fast brain change": 2,
+   "no random inputs": 1,
+   "no revolutions": 1
+  },
+  "evolution": {
+   "1,000/500": {
+    "mixing alone (Experiment 17)": [
+     0.8307820553108294,
+     0.8394397006114274,
+     0.851204128440367,
+     0.7414333596214511,
+     0.7374688424988316
+    ],
+    "fast brain change": [
+     0.7177847490347491,
+     0.8032278532006607,
+     0.6103420418446708,
+     0.7842238919394748,
+     0.8302393876311347
+    ],
+    "no random inputs": [
+     0.8533430693293483,
+     0.6610300263614737,
+     0.49679031257978623,
+     0.8001148127967619,
+     0.6836367142571816
+    ],
+    "no revolutions": [
+     0.6230433937194154,
+     0.8215250108911711,
+     0.8213285991208387,
+     0.7897942004261668,
+     0.6617203880653666
+    ]
+   },
+   "5,000/2,000": {
+    "mixing alone (Experiment 17)": [
+     0.5475600796321751,
+     0.5811551228455161,
+     0.6367626796994827,
+     0.7782440622440623,
+     0.7699929648781625
+    ],
+    "fast brain change": [
+     0.7082801456308269,
+     0.6186469717626988,
+     0.559883449532443,
+     0.5690079652425779,
+     0.4880696517412935
+    ],
+    "no random inputs": [
+     0.6263123359580053,
+     0.5549881895490616,
+     0.6412782560227906
+    ],
+    "no revolutions": [
+     0.6699846226205881,
+     0.6998171073237086,
+     0.5138613861386139,
+     0.5917680108100419,
+     0.501586097435135
+    ]
+   },
+   "10,000/5,000": {
+    "mixing alone (Experiment 17)": [
+     0.9492753623188406,
+     0.7760769963755662,
+     0.5191746235619725,
+     0.4063820238629505,
+     0.559517383182105
+    ],
+    "fast brain change": [
+     0.5229023478942756,
+     0.5560051240031851,
+     0.6658559056569007,
+     0.5609633600642864,
+     0.5387036518165687
+    ],
+    "no random inputs": [
+     0.4031668724048928,
+     0.4524330089964863,
+     0.5642065532223026
+    ],
+    "no revolutions": [
+     0.3986004495022238,
+     0.21929385713114083,
+     0.5737982052520527,
+     0.5007981210753187
+    ]
+   }
+  }
+ },
+ "figures": {
+  "verdict": {
+   "title": "Experiment 21 at iteration 10,000",
+   "caption": "Each dot is a world at iteration 10,000, seeds 3 to 7 from left to right within each rule: green if it passed Meta X's test of a long run \u2014 alive, every mark of the health bar met, more diverse than B2's median world and poorer than none of B2's ten worlds played on to 10,000 \u2014 violet if it failed it, red, at the top, if it died out before 10,000. Grey column: plain mixing, Experiment 17's worlds of the same seeds.",
+   "recipe": "**Runs.** The twenty runs of Experiment 21 \u2014 B2 at 10,000 tokens with brains mixed at birth, alone (Experiment 17's runs `B2-10000-4af4a3-s003` \u2026 `s007`) or with a mutation probability of 0.8 (`B2-10000-0df8be-\u2026`), no random inputs (`B2-10000-1109f3-\u2026`) or no revolutions (`B2-10000-1f9b27-\u2026`), seeds 3 to 7, 10,000 iterations (`python3 gol_lab.py run E21`) \u2014 and B2's ten worlds played on to 10,000 (`GraphOfLifeRuns/.pilots/L/B2-long-s001` \u2026 `s010`).\n\n**Data.** From each run's whole world kept at iteration 10,000 (`archive/world_010000.npz`, read by `research/atlas/at.py --at 10000`, `GraphOfLifeRuns/.pilots/atlas/at10000.json`).\n\n1. Read each world as `research/atlas/profile.py` reads every world.\n2. Rank its four spreads among the frozen reference worlds; the diversity score is their mean.\n3. A world that died out (20 agents or fewer) fails.\n\n**To make it again:** `python3 book_figures.py fiveseeds`."
+  },
+  "sizes": {
+   "title": "Agents alive, world by world",
+   "caption": "Each line is one world, its agents after each game (means over 50 iterations), on a logarithmic axis; a line that stops early is a world that died out.",
+   "recipe": "**Runs.** The twenty runs of Experiment 21 \u2014 B2 at 10,000 tokens with brains mixed at birth, alone (Experiment 17's runs `B2-10000-4af4a3-s003` \u2026 `s007`) or with a mutation probability of 0.8 (`B2-10000-0df8be-\u2026`), no random inputs (`B2-10000-1109f3-\u2026`) or no revolutions (`B2-10000-1f9b27-\u2026`), seeds 3 to 7, 10,000 iterations (`python3 gol_lab.py run E21`) \u2014 and B2's ten worlds played on to 10,000 (`GraphOfLifeRuns/.pilots/L/B2-long-s001` \u2026 `s010`).\n\n**Data.** From each run's `stats.jsonl`.\n\n1. Read the agents after each game (`nodes`, phase 2).\n2. Average over stretches of 50 iterations.\n\n**To make it again:** `python3 book_figures.py fiveseeds`."
+  },
+  "evolution": {
+   "title": "Do later brains beat earlier ones?",
+   "caption": "Each dot is a world: the share of a contested world the later moment's brains hold after 100 iterations against the earlier moment's, the mean of two contests, one in each moment's world; the bar is the median world. Mixing alone: Experiment 17's worlds of the same seeds. A world that died out has the steps before its death only.",
+   "recipe": "**Runs.** The twenty runs of Experiment 21 \u2014 B2 at 10,000 tokens with brains mixed at birth, alone (Experiment 17's runs `B2-10000-4af4a3-s003` \u2026 `s007`) or with a mutation probability of 0.8 (`B2-10000-0df8be-\u2026`), no random inputs (`B2-10000-1109f3-\u2026`) or no revolutions (`B2-10000-1f9b27-\u2026`), seeds 3 to 7, 10,000 iterations (`python3 gol_lab.py run E21`) \u2014 and B2's ten worlds played on to 10,000 (`GraphOfLifeRuns/.pilots/L/B2-long-s001` \u2026 `s010`).\n\n**Data.** From `GraphOfLifeRuns/.pilots/e21_T100.json` and `e17_T100.json` (`research/oee/checks/rejudge.py`, `research/oee/checks/e20_e21_rejudge_worlds.txt`).\n\n1. Seat the brains of the two moments on alternate agents of each moment's world and play 100 iterations.\n2. Count the agents the later moment's brains hold, as a share of all.\n\n**To make it again:** `python3 book_figures.py fiveseeds`."
+  }
+ }
+}

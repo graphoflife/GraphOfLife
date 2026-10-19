@@ -511,6 +511,25 @@ tokens, ten seeds, 20,000 iterations; lab engine 7fa9fe7aeefbf111)**
   them to ~2,000 agents, six in ten poor - B2's network with mixing's diversity. The pull Meta XI asks for
   (births paying more when few) is still missing.
 
+**The candidates played on (batch LC + E20, Ch. 92) and five more seeds (E21, Ch. 93); 2026-10-18..19**
+- E20 (lab replay from 0 of LC's two engine-rule worlds): agents and links after every game identical to the pilots
+  through 4,344 (K-reach-s1) and 6,522 (keepone-s1) iterations - thesis holds; pilots of engine rules are lab worlds.
+- LC at 10,000 (19 readable: 17 pilots + E20's two; Q-mix = E17; 4 proto worlds wait for E23): held 5 (mix+mut0.8
+  s1, s2; mix+nodice s2; mix+norev s2; mix+came s2), fell back 11 (7 into poverty >= 0.66, 4 by one mark), died 3
+  (fell to 1 agent and refilled: mix+children s2 at 4,043, mix+grow s1 3,158, mix+helped s1 4,271). Diversity fell in
+  16 of 19 (median 0.63 -> 0.56; poorest 0.28, pool 0.34). Rank corr agents vs poor 0.85; the 5 held: 372-1,244
+  agents; the 8 largest living all fell back. Typical distance at 10,000 1.09-1.44 except mix+poorest 1.79.
+  Contests (eras after a death dropped): 1,000/500 0.72 (17/18), 5,000/2,000 0.60 (15/16), 10,000/5,000 0.55
+  (11/16); E17 0.84, 0.66, 0.54.
+- E21 (seeds 3-7 to 10,000; test: alive, 7 marks, diversity > B2's median at 10,000 0.492, poor < B2's least
+  0.656): mixing alone (E17) 3/5; fast brain change 2/5 (all alive, poor 4-39%, diversity 0.61-0.69; failed on
+  dimension 4.03, 4.22 and a hub); no random inputs 1/5 (2 died: 3,835, 3,209); no revolutions 1/5 (1 died 9,338;
+  two missed diversity by 0.001-0.003). Thesis fails for all three. Rank corr agents vs poor (17 living) 0.86; only
+  the two passing large worlds are wide (1.68, 1.40). Contests: medians 1,000/500 0.68-0.83, 5,000/2,000
+  0.57-0.64, 10,000/5,000 0.56 (alone, fast) and 0.45 (nodice, norev).
+- Reading: a candidate that held was mostly its seed's luck; fast brain change is the steadiest (5/5 alive,
+  diverse, not poor) but misses single marks; Meta X's step 3 has no rule to take up.
+
 **Who inherits (batch R, Ch. 73; 2026-10-17; B2 and B1 at 10,000 tokens, two seeds, 2,000 iterations;
 controls P/B2-s1, s2 and L/B1-long-s1, s2 to 2,000)**
 - B2, estate to the poorest: like B2 (3,600-3,700 agents, 80% at <= 3 tokens; contests 1,000 vs 500 0.64/0.70,

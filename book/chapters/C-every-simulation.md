@@ -71,6 +71,8 @@ Experiment 2's).
 | E17 | Mixed at birth: ten long worlds | B2 | *mixed at birth* (mix_at_birth = on) | 1–10 | 10,000 | 10,000 | 10 | [80](80-mixed-at-birth-ten-long-worlds.md) |
 | E18 | Five mixed worlds, fifty thousand iterations | B2 | *mixed at birth* (mix_at_birth = on) | 2,4,5,6,10 | 10,000 | 50,000 | 5 | [81](81-five-mixed-worlds-fifty-thousand-iterations.md) |
 | E19 | Mixed at birth, with parents as mates | B2 | *mixed at birth, parents as mates* (mix_at_birth = on, mix_mates = parents) | 1–10 | 10,000 | 20,000 | 10 | [85](85-mixed-at-birth-with-parents-as-mates.md) |
+| E20 | The candidates, played on: two worlds of engine rules | B2 | *links to strangers, a free reach, forced* (link_search = reach, link_consent = forced); *mixed at birth, the last token kept* (mix_at_birth = on, keep_home = 0.01) | 1 | 10,000 | 10,000 | 2 | [92](92-the-candidates-played-on.md) |
+| E21 | Five more seeds for the rules that held | B2 | *mixed at birth* (mix_at_birth = on); *mixed at birth, fast brain change* (mix_at_birth = on, mutation_probability = 0.8); *mixed at birth, no random inputs* (mix_at_birth = on, random_input_amount = 0); *mixed at birth, no revolutions* (mix_at_birth = on, allow_revolutions = off) | 3–7 | 10,000 | 10,000 | 20 | [93](93-five-more-seeds-for-the-rules-that-held.md) |
 <!-- /table -->
 
 Experiment 11 — one world of 204,800 tokens for 100,000 iterations
@@ -106,10 +108,10 @@ prototype's own code. What each batch asked:
 | X | Handover together with each other switch, on B2 | 23 | 46 | 10,000 | 1,000 | done | [89](89-handover-with-every-other-rule.md) |
 | Y | Brains mixed at birth together with each other switch, on B2 | 23 | 46 | 10,000 | 1,000 | done | [82](82-mixing-with-every-other-rule.md) |
 | K | Links to strangers on B2: every search (jump, walk, reach) with every steering and consent | 12 | 24 | 10,000 | 1,000 | done | [83](83-links-to-strangers.md) |
-| Z | Settings drawn at random from every value the book has used, the values that make worlds worse dropped round after round (research/oee/search.md) | 64 | 64 | 10,000 | 1,000 | 62 done, 2 running | — |
-| LC | The candidates, the worlds closest to the author's picture of one that might keep evolving, played on to 10,000 iterations | 20 | 25 | 10,000 | 1,000, 10,000 | 24 done, 1 running | [79](79-meta-10-healthy-and-rich.md) |
+| Z | Settings drawn at random from every value the book has used, the values that make worlds worse dropped round after round (research/oee/search.md) | 64 | 64 | 10,000 | 1,000 | 62 done, 2 stopped early | — |
+| LC | The candidates, the worlds closest to the author's picture of one that might keep evolving, played on to 10,000 iterations | 20 | 25 | 10,000 | 1,000, 10,000 | 23 done, 2 stopped early | [79](79-meta-10-healthy-and-rich.md), [92](92-the-candidates-played-on.md) |
 | SW | Mixing switched at a moment: off in the five worlds of Experiment 17 that met every mark, at 5,000; on in five of B2's worlds, at 2,000 | 2 | 10 | 10,000 | 4,000, 7,000 | done | [80](80-mixed-at-birth-ten-long-worlds.md) |
-| M | Steadying a mixed world: each rule of the engine that might hold its size (estates, half kept at home, searches, a slower change of brains), and the estate to a dead agent's own children (H), parents as mates (MP) and a bought life (BL) | 10 | 24 | 10,000 | 5,000 | done | [84](84-meta-11-what-holds-a-worlds-size.md), [85](85-mixed-at-birth-with-parents-as-mates.md) |
+| M | Steadying a mixed world: each rule of the engine that might hold its size (estates, half kept at home, searches, a slower change of brains), and the estate to a dead agent's own children (H), parents as mates (MP) and a bought life (BL) | 11 | 28 | 10,000 | 5,000 | 24 done, 2 queued, 2 stopped early | [84](84-meta-11-what-holds-a-worlds-size.md), [85](85-mixed-at-birth-with-parents-as-mates.md) |
 | YB | Who breeds: only the young or only the old, in B2 and in B2 with brains mixed at birth | 5 | 7 | 10,000 | 2,000 | done | [87](87-what-folds-a-world.md) |
 | BIG | B2 at 100,000 tokens, one world to 1,000 iterations | 1 | 1 | 100,000 | 1,000 | done | [87](87-what-folds-a-world.md) |
 <!-- /table -->
@@ -315,7 +317,7 @@ settings that differ from B1 or B2, and the prototype's own switches:
 | K | walk-random-forced | B2 | link_consent = forced, link_search = walk | 1, 2 | 1,000 |
 | K | walk-random-mutual | B2 | link_search = walk | 1, 2 | 1,000 |
 | Z | every world its own | B2 | each world its settings drawn at random from the values the book has used (research/oee/search.md) | 1001 to 2032 | 1,000 |
-| LC | K-reach-random-forced | B2 | link_consent = forced, link_search = reach | 1 | 1,000 |
+| LC | K-reach-random-forced | B2 | link_consent = forced, link_search = reach | 1 | 10,000 |
 | LC | M-mix-children | B2 | mix_at_birth = on, redistribution = children | 2 | 10,000 |
 | LC | Q-mix | B2 | mix = on | 1, 2 | 10,000 |
 | LC | S-G4-familysense | B2 | allow_revolutions = off, kin_sense = on, tag_rate = 0.05 | 2 | 10,000 |
@@ -326,7 +328,7 @@ settings that differ from B1 or B2, and the prototype's own switches:
 | LC | Y-mix-familysense | B2 | kin_sense = on, mix = on, tag_rate = 0.05 | 1 | 1,000 |
 | LC | Y-mix-grow | B2 | brain_kind = grow, hidden_layers = 32, mix = on | 1 | 10,000 |
 | LC | Y-mix-helped | B2 | helped_by = on, mix = on | 1 | 10,000 |
-| LC | Y-mix-keepone | B2 | keep_home = 0.01, mix = on | 1, 2 | 1,000 |
+| LC | Y-mix-keepone | B2 | keep_home = 0.01, mix = on | 1, 2 | 10,000 |
 | LC | Y-mix-kinsense | B2 | kin_sense = on, mix = on | 2 | 10,000 |
 | LC | Y-mix-linktoken | B2 | valence = 0, link_token = on, mix = on | 1 | 10,000 |
 | LC | Y-mix-lottery | B2 | contest = lottery, mix = on | 2 | 1,000 |
@@ -341,6 +343,7 @@ settings that differ from B1 or B2, and the prototype's own switches:
 | M | mix-children | B2 | mix_at_birth = on, redistribution = children | 1, 2 | 5,000 |
 | M | mix-keephalf | B2 | keep_home = 0.5, mix_at_birth = on | 1, 2 | 5,000 |
 | M | mix-mateparents | B2 | mates = parents, mix = on | 1, 2, 3, 4 | 5,000 |
+| M | mix-matepays | B2 | mate_pays = on, mix = on | 1, 2 | 5,000 |
 | M | mix-mut05 | B2 | mix_at_birth = on, mutation_probability = 0.05 | 1, 2 | 5,000 |
 | M | mix-newborns | B2 | mix_at_birth = on, redistribution = newborns | 1, 2 | 5,000 |
 | M | mix-parents | B2 | mix_at_birth = on, redistribution = parents | 1, 2 | 5,000 |
@@ -397,6 +400,8 @@ worlds of that experiment or batch the measure has been taken on:
 | E17 | 10 | 10 | 0 | 0 | 0 | 0 |
 | E18 | 5 | 5 | 0 | 0 | 0 | 0 |
 | E19 | 10 | 10 | 0 | 0 | 0 | 0 |
+| E20 | 2 | 2 | 0 | 0 | 0 | 0 |
+| E21 | 20 | 20 | 0 | 0 | 0 | 0 |
 | A3k | 8 | 0 | 0 | 0 | 5 | 8 |
 | A10k | 8 | 8 | 4 | 0 | 8 | 8 |
 | AL | 4 | 2 | 2 | 0 | 0 | 4 |
@@ -414,9 +419,9 @@ worlds of that experiment or batch the measure has been taken on:
 | Y | 46 | 46 | 2 | 0 | 1 | 0 |
 | K | 24 | 24 | 0 | 0 | 0 | 0 |
 | Z | 64 | 0 | 0 | 0 | 0 | 0 |
-| LC | 25 | 15 | 0 | 0 | 0 | 0 |
+| LC | 25 | 17 | 0 | 0 | 0 | 0 |
 | SW | 10 | 0 | 0 | 0 | 0 | 0 |
-| M | 24 | 0 | 0 | 0 | 0 | 0 |
+| M | 26 | 0 | 0 | 0 | 0 | 0 |
 | YB | 7 | 0 | 0 | 0 | 0 | 0 |
 | BIG | 1 | 0 | 0 | 0 | 0 | 0 |
 <!-- /table -->

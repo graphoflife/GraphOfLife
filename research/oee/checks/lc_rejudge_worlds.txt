@@ -17,3 +17,4 @@ pilot GraphOfLifeRuns/.pilots/LC/Y-mix-mut80-s2 2000:5000,5000:10000
 pilot GraphOfLifeRuns/.pilots/LC/Y-mix-nodice-s2 2000:5000,5000:10000
 pilot GraphOfLifeRuns/.pilots/LC/Y-mix-poorest-s1 2000:5000,5000:10000
 pilot GraphOfLifeRuns/.pilots/LC/Y-mix-pool-s1 2000:5000,5000:10000
+pilot GraphOfLifeRuns/.pilots/LC/W-norev-mix-s2 2000:5000,5000:10000

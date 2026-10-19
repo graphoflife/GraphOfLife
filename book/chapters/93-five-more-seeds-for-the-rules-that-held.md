@@ -109,15 +109,127 @@ prototype; it joins this experiment once it is part of the engine.
 > A value in **bold** differs from the baseline B2.
 <!-- /runs -->
 
-## What else will be read
+## What the twenty worlds did
 
-- **Each world through its life**: its size and riches, and when it passes
-  Meta X's test and when it does not.
-- **Room**: the typical distance over the random twin's
-  ([Chapter 87](87-what-folds-a-world.md)) — whether any rule that holds a
-  world rich also keeps it a space.
-- **Does evolution go on?** The brains of 1,000, 5,000 and 10,000 iterations
-  against those before them, a lifetime long.
+<!-- figure fiveseeds/verdict -->
+![Experiment 21 at iteration 10,000](../figures/fiveseeds/verdict.svg)
+
+**Experiment 21 at iteration 10,000.** Each dot is a world at iteration 10,000, seeds 3 to 7 from left to right within each rule: green if it passed Meta X's test of a long run — alive, every mark of the health bar met, more diverse than B2's median world and poorer than none of B2's ten worlds played on to 10,000 — violet if it failed it, red, at the top, if it died out before 10,000. Grey column: plain mixing, Experiment 17's worlds of the same seeds.
+
+> [!example]- How to make this figure
+> **Runs.** The twenty runs of Experiment 21 — B2 at 10,000 tokens with brains mixed at birth, alone (Experiment 17's runs `B2-10000-4af4a3-s003` … `s007`) or with a mutation probability of 0.8 (`B2-10000-0df8be-…`), no random inputs (`B2-10000-1109f3-…`) or no revolutions (`B2-10000-1f9b27-…`), seeds 3 to 7, 10,000 iterations (`python3 gol_lab.py run E21`) — and B2's ten worlds played on to 10,000 (`GraphOfLifeRuns/.pilots/L/B2-long-s001` … `s010`).
+>
+> **Data.** From each run's whole world kept at iteration 10,000 (`archive/world_010000.npz`, read by `research/atlas/at.py --at 10000`, `GraphOfLifeRuns/.pilots/atlas/at10000.json`).
+>
+> 1. Read each world as `research/atlas/profile.py` reads every world.
+> 2. Rank its four spreads among the frozen reference worlds; the diversity score is their mean.
+> 3. A world that died out (20 agents or fewer) fails.
+>
+> **To make it again:** `python3 book_figures.py fiveseeds`.
+<!-- /figure -->
+
+**No rule held more often than mixing alone.** Plain mixing passed Meta X's
+test in three of its five worlds (seeds 4, 5 and 6). A fast change of brains
+passed in two (seeds 3 and 6), no random inputs in one (seed 6), and no
+revolutions in one (seed 6). Every rule needed four.
+
+**A fast change of brains: alive, diverse and not poor, but short of a mark.**
+All five of its worlds lived to 10,000, none of them poor — 4% to 39% of
+their agents at three tokens or fewer — and all five more diverse than B2's
+median world, with diversity scores of 0.61 to 0.69, where plain mixing's
+ranged from 0.52 to 0.66. What three of them missed was one mark each: two
+had a dimension just above the bar's limit of 4 (4.03 and 4.22), and the
+third, a small world of 445 agents, had an agent joined to more than 5% of
+the others.
+
+**Without random inputs, two of five worlds died out**, at iterations 3,835
+and 3,209. Of the three that lived, one passed (1,969 agents, 55% poor); one
+was small and rich but less diverse than any of B2's worlds (521 agents, a
+diversity score of 0.38); one small world had a hub.
+
+**Without revolutions, one world died out**, at iteration 9,338. Of the four
+that lived, one passed (1,996 agents, 59% poor); two missed B2's median
+diversity by a hair — 0.491 and 0.489, against 0.492 — and one small world
+of 212 agents had a hub.
+
+<!-- figure fiveseeds/sizes -->
+![Agents alive, world by world](../figures/fiveseeds/sizes.svg)
+
+**Agents alive, world by world.** Each line is one world, its agents after each game (means over 50 iterations), on a logarithmic axis; a line that stops early is a world that died out.
+
+> [!example]- How to make this figure
+> **Runs.** The twenty runs of Experiment 21 — B2 at 10,000 tokens with brains mixed at birth, alone (Experiment 17's runs `B2-10000-4af4a3-s003` … `s007`) or with a mutation probability of 0.8 (`B2-10000-0df8be-…`), no random inputs (`B2-10000-1109f3-…`) or no revolutions (`B2-10000-1f9b27-…`), seeds 3 to 7, 10,000 iterations (`python3 gol_lab.py run E21`) — and B2's ten worlds played on to 10,000 (`GraphOfLifeRuns/.pilots/L/B2-long-s001` … `s010`).
+>
+> **Data.** From each run's `stats.jsonl`.
+>
+> 1. Read the agents after each game (`nodes`, phase 2).
+> 2. Average over stretches of 50 iterations.
+>
+> **To make it again:** `python3 book_figures.py fiveseeds`.
+<!-- /figure -->
+
+**Each death was a slow shrinking.** The three worlds that died out had
+reached 1,614, 2,983 and 1,931 agents, and held 745, 685 and 188 five hundred
+iterations before the end: for hundreds of iterations fewer were born than
+died, as in the mixed worlds of [Chapter 81](81-five-mixed-worlds-fifty-thousand-iterations.md).
+
+**Size still sets riches.** Across the seventeen worlds alive at 10,000, the
+more agents a world held, the poorer they were (a rank correlation of 0.86):
+the small worlds are rich, and the large ones half poor
+([Meta XI](84-meta-11-what-holds-a-worlds-size.md)).
+
+**Room is rare.** Fifteen of the seventeen are folded, as near as B2's
+worlds to their random twins (a typical distance of 1.09 to 1.29 times the
+twin's). The two that are wider, 1.68 and 1.40, are the worlds without random
+inputs and without revolutions that passed — two of the largest, half of
+their agents poor — while other worlds as large are as folded as the small
+ones ([Chapter 87](87-what-folds-a-world.md)).
+
+<!-- figure fiveseeds/evolution -->
+![Do later brains beat earlier ones?](../figures/fiveseeds/evolution.svg)
+
+**Do later brains beat earlier ones?** Each dot is a world: the share of a contested world the later moment's brains hold after 100 iterations against the earlier moment's, the mean of two contests, one in each moment's world; the bar is the median world. Mixing alone: Experiment 17's worlds of the same seeds. A world that died out has the steps before its death only.
+
+> [!example]- How to make this figure
+> **Runs.** The twenty runs of Experiment 21 — B2 at 10,000 tokens with brains mixed at birth, alone (Experiment 17's runs `B2-10000-4af4a3-s003` … `s007`) or with a mutation probability of 0.8 (`B2-10000-0df8be-…`), no random inputs (`B2-10000-1109f3-…`) or no revolutions (`B2-10000-1f9b27-…`), seeds 3 to 7, 10,000 iterations (`python3 gol_lab.py run E21`) — and B2's ten worlds played on to 10,000 (`GraphOfLifeRuns/.pilots/L/B2-long-s001` … `s010`).
+>
+> **Data.** From `GraphOfLifeRuns/.pilots/e21_T100.json` and `e17_T100.json` (`research/oee/checks/rejudge.py`, `research/oee/checks/e20_e21_rejudge_worlds.txt`).
+>
+> 1. Seat the brains of the two moments on alternate agents of each moment's world and play 100 iterations.
+> 2. Count the agents the later moment's brains hold, as a share of all.
+>
+> **To make it again:** `python3 book_figures.py fiveseeds`.
+<!-- /figure -->
+
+**Evolution slows under every rule.** The brains of 1,000 beat those of 500
+in nearly every world, with a median share of a contested world of 0.68 to
+0.83; those of 5,000 beat those of 2,000 less clearly (0.57 to 0.64); and
+those of 10,000 against those of 5,000 hold 0.56 with mixing alone and with a
+fast change of brains — whose later brains won in all five of its worlds — but
+0.45 without random inputs and without revolutions, where the later brains
+won in only one of the three worlds and two of the four that lived.
+
+## The verdict
+
+**The thesis fails for all three rules.** No rule's worlds passed Meta X's
+test in four of five seeds; none did better than mixing alone, which passed
+in three of the same five. The candidates that held over 10,000 iterations
+held by their seed's luck as much as by their rule's.
+
+## What it teaches
+
+- **One world says little about a rule.** A candidate that held was one
+  draw from a wide spread: of the same rule's next five worlds, some held,
+  some fell back and some died.
+- **A fast change of brains is the steadiest of the three**: every one of its
+  worlds lived, and every one was diverse and not poor. What it misses are
+  single marks of the health bar, two of them by a dimension a little above
+  four. It stays a rule worth building on, beside mixing.
+- **Taking away the dice or the revolutions makes mixed worlds mortal**: three
+  of ten died out within 10,000 iterations, where plain mixing lost none of
+  the same seeds.
+- **Riches and room still pull apart**: the worlds that stay small are rich
+  and folded; the large ones are half poor, and only some of them wide.
 
 **Related notes:** [Chapter 92 · The candidates, played on](92-the-candidates-played-on.md) ·
 [Meta X · Healthy and rich](79-meta-10-healthy-and-rich.md) ·

@@ -428,6 +428,38 @@
        "href": "chapters/85-mixed-at-birth-with-parents-as-mates.md"
       }
      ]
+    ],
+    [
+     "E20",
+     "The candidates, played on: two worlds of engine rules",
+     "B2",
+     "*links to strangers, a free reach, forced* (link_search = reach, link_consent = forced); *mixed at birth, the last token kept* (mix_at_birth = on, keep_home = 0.01)",
+     "1",
+     "10,000",
+     "10,000",
+     "2",
+     [
+      {
+       "text": "92",
+       "href": "chapters/92-the-candidates-played-on.md"
+      }
+     ]
+    ],
+    [
+     "E21",
+     "Five more seeds for the rules that held",
+     "B2",
+     "*mixed at birth* (mix_at_birth = on); *mixed at birth, fast brain change* (mix_at_birth = on, mutation_probability = 0.8); *mixed at birth, no random inputs* (mix_at_birth = on, random_input_amount = 0); *mixed at birth, no revolutions* (mix_at_birth = on, allow_revolutions = off)",
+     "3\u20137",
+     "10,000",
+     "10,000",
+     "20",
+     [
+      {
+       "text": "93",
+       "href": "chapters/93-five-more-seeds-for-the-rules-that-held.md"
+      }
+     ]
     ]
    ]
   },
@@ -706,7 +738,7 @@
      "64",
      "10,000",
      "1,000",
-     "62 done, 2 running",
+     "62 done, 2 stopped early",
      []
     ],
     [
@@ -716,11 +748,15 @@
      "25",
      "10,000",
      "1,000, 10,000",
-     "24 done, 1 running",
+     "23 done, 2 stopped early",
      [
       {
        "text": "79",
        "href": "chapters/79-meta-10-healthy-and-rich.md"
+      },
+      {
+       "text": "92",
+       "href": "chapters/92-the-candidates-played-on.md"
       }
      ]
     ],
@@ -742,11 +778,11 @@
     [
      "M",
      "Steadying a mixed world: each rule of the engine that might hold its size (estates, half kept at home, searches, a slower change of brains), and the estate to a dead agent's own children (H), parents as mates (MP) and a bought life (BL)",
-     "10",
-     "24",
+     "11",
+     "28",
      "10,000",
      "5,000",
-     "done",
+     "24 done, 2 queued, 2 stopped early",
      [
       {
        "text": "84",
@@ -2318,7 +2354,7 @@
      "B2",
      "link_consent = forced, link_search = reach",
      "1",
-     "1,000"
+     "10,000"
     ],
     [
      "LC",
@@ -2406,7 +2442,7 @@
      "B2",
      "keep_home = 0.01, mix = on",
      "1, 2",
-     "1,000"
+     "10,000"
     ],
     [
      "LC",
@@ -2518,6 +2554,14 @@
      "B2",
      "mates = parents, mix = on",
      "1, 2, 3, 4",
+     "5,000"
+    ],
+    [
+     "M",
+     "mix-matepays",
+     "B2",
+     "mate_pays = on, mix = on",
+     "1, 2",
      "5,000"
     ],
     [
@@ -2792,6 +2836,24 @@
      "0"
     ],
     [
+     "E20",
+     "2",
+     "2",
+     "0",
+     "0",
+     "0",
+     "0"
+    ],
+    [
+     "E21",
+     "20",
+     "20",
+     "0",
+     "0",
+     "0",
+     "0"
+    ],
+    [
      "A3k",
      "8",
      "0",
@@ -2947,7 +3009,7 @@
     [
      "LC",
      "25",
-     "15",
+     "17",
      "0",
      "0",
      "0",
@@ -2964,7 +3026,7 @@
     ],
     [
      "M",
-     "24",
+     "26",
      "0",
      "0",
      "0",
@@ -2992,10 +3054,10 @@
    ]
   },
   "totals": {
-   "lab experiments": 18,
-   "lab runs on disk": 579,
+   "lab experiments": 20,
+   "lab runs on disk": 601,
    "pilot batches": 22,
-   "pilot worlds": 482
+   "pilot worlds": 486
   }
  },
  "figures": {}

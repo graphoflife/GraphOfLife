@@ -114,17 +114,142 @@ rules are part of the engine.
 > A value in **bold** differs from the baseline B2.
 <!-- /runs -->
 
-## What else will be read
+## The twin check
 
-- **Where each candidate went**, from iteration 1,000 to 10,000, on the map
-  of riches and diversity, beside B2's worlds and Experiment 17's.
-- **Which candidates held**, which fell back, and which died out on the way —
-  three of the nineteen finished pilots fell to a single agent and refilled
-  their world from it, which the lab would have stopped as extinct.
-- **Room**: the typical distance over the random twin's at 1,000 and at
-  10,000 ([Chapter 87](87-what-folds-a-world.md)).
-- **Does evolution go on?** The brains of 5,000 against those of 2,000, and
-  of 10,000 against those of 5,000, a lifetime long.
+**The thesis holds.** Both of the lab's worlds match their pilots: the agents
+alive and the links between them after every game are the same, through all
+4,344 games the pilot of links to strangers had played and all 6,522 of the
+pilot of mixing with the last token kept — though both pilots had been
+resumed from a checkpoint at iteration 1,000. A pilot of engine rules
+is the lab's world, so the long runs read below stand as if the lab had made
+them. The four candidates with pilot rules cannot be checked this way yet;
+Experiment 23 is to play them.
+
+## Where the candidates went
+
+<!-- figure candidates/paths -->
+![From 1,000 iterations to 10,000](../figures/candidates/paths.svg)
+
+**From 1,000 iterations to 10,000.** Each line is a candidate, from where it stood at iteration 1,000 (small grey dot) to where it stood at 10,000 (large dot): green if it still met every mark of the health bar, was more diverse than B2's median world and poorer than none of B2's worlds — Meta X's test of a long run — violet if it fell back, red if it had died out on the way (20 agents or fewer, the lab's line) and was refilled from its last agents. Yellow: B2's ten worlds played on to 10,000; blue: Experiment 17's mixed worlds that lived to 10,000. The author's picture is the top left: agents that differ, and few of them poor.
+
+> [!example]- How to make this figure
+> **Runs.** Batch LC's long runs (`GraphOfLifeRuns/.pilots/LC/`): each candidate of Meta X, B2 at 10,000 tokens with the rules of the batch it came from, played on in a copy of its own from its checkpoint to 10,000 iterations (`research/oee/pilots/run.py --resume`), two of them finished by the lab from iteration 0 (Experiment 20: `B2-10000-e10e0d-s001`, `B2-10000-82bd1e-s001`); Experiment 17's ten mixed worlds (`B2-10000-4af4a3-s001` … `s010`) and B2's ten worlds played on to 10,000 (`GraphOfLifeRuns/.pilots/L/B2-long-s001` … `s010`).
+>
+> **Data.** From each world's checkpoint at 1,000 and at 10,000 (`research/atlas/at.py --at 1000` and `--at 10000`, `GraphOfLifeRuns/.pilots/atlas/at1000.json` and `at10000.json`).
+>
+> 1. Read each world as `research/atlas/profile.py` reads every world.
+> 2. Rank its four spreads among the frozen reference worlds; the diversity score is their mean.
+>
+> **To make it again:** `python3 book_figures.py candidates`.
+<!-- /figure -->
+
+**Five of nineteen held.** Nineteen long runs can be read at iteration
+10,000: seventeen pilots, and the two of Experiment 20 in place of their
+unfinished pilots. Five passed Meta X's test there, all of them mixed at
+birth: with a fast change of brains (a mutation probability of 0.8) in both
+its seeds, and in one seed each without random inputs, without revolutions,
+and with an input that tells an agent where its brain came from. Eleven fell
+back — seven of them into B2's poverty, two thirds of their agents or more at
+three tokens or fewer, and four by a single mark of the health bar: a
+dimension above four in two large worlds, an agent joined to more than 5% of
+the others in two small ones. **Three died out on the way**: mixing with the
+estate of a dead agent left to its own children (at iteration 4,043), with
+brains that grow (3,158) and with an input that tells who helped (4,271).
+Each fell to a single agent, from which the pilot, which plays on where the
+lab would stop, filled its world again.
+
+**Diversity fell in sixteen of the nineteen.** What a candidate had at
+iteration 1,000 — agents that differ in tokens, links, ages and genotypes —
+mostly wore off: the median diversity score fell from 0.63 to 0.56, and the
+two worlds that fell furthest, mixing with the estate to the poorest and
+with stakes pooled by genotype, ended less diverse than any of B2's worlds
+(0.28 and 0.34).
+
+<!-- figure candidates/sizes -->
+![How large each candidate grew](../figures/candidates/sizes.svg)
+
+**How large each candidate grew.** Each line is a candidate: its agents after each game, means over 50 iterations, on a logarithmic axis. Green: the candidates that held at 10,000 iterations; violet: those that fell back; red: those that died out on the way and were refilled from their last agents.
+
+> [!example]- How to make this figure
+> **Runs.** Batch LC's long runs (`GraphOfLifeRuns/.pilots/LC/`): each candidate of Meta X, B2 at 10,000 tokens with the rules of the batch it came from, played on in a copy of its own from its checkpoint to 10,000 iterations (`research/oee/pilots/run.py --resume`), two of them finished by the lab from iteration 0 (Experiment 20: `B2-10000-e10e0d-s001`, `B2-10000-82bd1e-s001`); Experiment 17's ten mixed worlds (`B2-10000-4af4a3-s001` … `s010`) and B2's ten worlds played on to 10,000 (`GraphOfLifeRuns/.pilots/L/B2-long-s001` … `s010`).
+>
+> **Data.** From each long run's `series.jsonl`.
+>
+> 1. Read the agents after each game.
+> 2. Average over stretches of 50 iterations.
+>
+> **To make it again:** `python3 book_figures.py candidates`.
+<!-- /figure -->
+
+**Rich and small, or large and poor.** Sizes wandered — several worlds shrank
+to a few hundred agents and grew back — and where a world ended, its riches
+went with its size: across the nineteen at 10,000, the more agents, the
+poorer they were (a rank correlation of 0.85). The five that held had 372 to
+1,244 agents; the eight largest that lived (1,846 to 3,097) all fell back,
+seven of them into poverty. It is Meta XI's finding again: a world's size is set
+by how eagerly its agents breed, and a full world is a poor one
+([Meta XI](84-meta-11-what-holds-a-worlds-size.md)).
+
+<!-- figure candidates/space -->
+![Room, at 1,000 iterations and at 10,000](../figures/candidates/space.svg)
+
+**Room, at 1,000 iterations and at 10,000.** Each line is a candidate: the steps within which a typical agent's ball holds half its world, over the same for its random twin ([Chapter 87](87-what-folds-a-world.md)), at iteration 1,000 and at 10,000. Green: the candidates that held; violet: those that fell back; red: those that died out on the way. Beside the right end: B2's ten worlds played on to 10,000 (yellow) and Experiment 17's (blue).
+
+> [!example]- How to make this figure
+> **Runs.** Batch LC's long runs (`GraphOfLifeRuns/.pilots/LC/`): each candidate of Meta X, B2 at 10,000 tokens with the rules of the batch it came from, played on in a copy of its own from its checkpoint to 10,000 iterations (`research/oee/pilots/run.py --resume`), two of them finished by the lab from iteration 0 (Experiment 20: `B2-10000-e10e0d-s001`, `B2-10000-82bd1e-s001`); Experiment 17's ten mixed worlds (`B2-10000-4af4a3-s001` … `s010`) and B2's ten worlds played on to 10,000 (`GraphOfLifeRuns/.pilots/L/B2-long-s001` … `s010`).
+>
+> **Data.** From each world's checkpoint at 1,000 and 10,000 (`research/atlas/space.py --at 1000` and `--at 10000`).
+>
+> 1. Count, from a sample of agents, how many others lie within each number of steps.
+> 2. Find the steps within which the typical ball holds half the world, between whole steps by the logarithm of the ball.
+> 3. Do the same on a random network with every agent's links kept; divide.
+>
+> **To make it again:** `python3 book_figures.py candidates`.
+<!-- /figure -->
+
+**None became a space.** At iteration 1,000 a few candidates were wider than
+their random twins by half or more; by 10,000 all but one were folded, at
+1.09 to 1.44 times the twin's typical distance, as B2's own worlds are. The
+exception, mixing with the estate to the poorest (1.79), is one of the poor
+worlds ([Chapter 87](87-what-folds-a-world.md)).
+
+<!-- figure candidates/evolution -->
+![Do later brains beat earlier ones?](../figures/candidates/evolution.svg)
+
+**Do later brains beat earlier ones?** Each dot is a world: the share of a contested world the later moment's brains hold after 100 iterations against the earlier moment's, the mean of two contests, one in each moment's world; the bar is the median world. 5,000/2,000: the brains of iteration 5,000 against those of 2,000. Orange: the candidates (the first step judged on the world each came from; a world that died out on the way has the steps before its death only); grey: Experiment 17's mixed worlds.
+
+> [!example]- How to make this figure
+> **Runs.** Batch LC's long runs (`GraphOfLifeRuns/.pilots/LC/`): each candidate of Meta X, B2 at 10,000 tokens with the rules of the batch it came from, played on in a copy of its own from its checkpoint to 10,000 iterations (`research/oee/pilots/run.py --resume`), two of them finished by the lab from iteration 0 (Experiment 20: `B2-10000-e10e0d-s001`, `B2-10000-82bd1e-s001`); Experiment 17's ten mixed worlds (`B2-10000-4af4a3-s001` … `s010`) and B2's ten worlds played on to 10,000 (`GraphOfLifeRuns/.pilots/L/B2-long-s001` … `s010`).
+>
+> **Data.** From `GraphOfLifeRuns/.pilots/lc_T100.json` (`research/oee/checks/lc_rejudge_worlds.txt`), the batches' own contests for 1,000/500, and `e17_T100.json`.
+>
+> 1. Seat the brains of the two moments on alternate agents of each moment's world and play 100 iterations (`research/oee/checks/rejudge.py`).
+> 2. Count the agents the later moment's brains hold, as a share of all.
+>
+> **To make it again:** `python3 book_figures.py candidates`.
+<!-- /figure -->
+
+**Evolution goes on, slowing, as in Experiment 17.** Played for a lifetime,
+the brains of 1,000 beat those of 500 in seventeen of eighteen worlds (a
+median share of a contested world of 0.72), those of 5,000 beat those of 2,000
+in fifteen of sixteen (0.60), and those of 10,000 beat those of 5,000 in
+eleven of sixteen (0.55); Experiment 17's mixed worlds held 0.84, 0.66 and
+0.54. Ten worlds won both of the late steps; none ran away.
+
+## What it teaches
+
+- **A pilot of engine rules is the lab's world.** The twin check shows it
+  game for game, so what the pilots found stands, and the lab can take up
+  where a pilot stopped by playing it again.
+- **Most candidates do not stay candidates.** Of nineteen, five held over
+  10,000 iterations, eleven fell back and three died out — and the five that
+  held did not hold again in new seeds
+  ([Chapter 93](93-five-more-seeds-for-the-rules-that-held.md)).
+- **What lasts is what Meta XI predicts**: small worlds rich, large worlds
+  poor, diversity wearing off, and, in the small rich worlds, no room — every
+  rich candidate folded.
+- **Evolution never stops, and never speeds up.** The later brains keep
+  winning, by less and less, in every kind of world played this long.
 
 **Related notes:** [Meta X · Healthy and rich](79-meta-10-healthy-and-rich.md) ·
 [Meta XI · What holds a world's size](84-meta-11-what-holds-a-worlds-size.md) ·

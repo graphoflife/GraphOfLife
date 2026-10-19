@@ -1,0 +1,727 @@
+{
+ "chapter": "candidates",
+ "numbers": {
+  "fate": {
+   "K-reach-random-forced-s1": "fell back",
+   "M-mix-children-s2": "died",
+   "S-G4-familysense-s2": "fell back",
+   "U-U-BDFG-s1": "fell back",
+   "W-norev-linktoken-s1": "fell back",
+   "W-norev-mix-s1": "fell back",
+   "W-norev-mix-s2": "held",
+   "Y-mix-came-s2": "held",
+   "Y-mix-grow-s1": "died",
+   "Y-mix-helped-s1": "died",
+   "Y-mix-keepone-s1": "fell back",
+   "Y-mix-keepone-s2": "fell back",
+   "Y-mix-kinsense-s2": "fell back",
+   "Y-mix-linktoken-s1": "fell back",
+   "Y-mix-mut80-s1": "held",
+   "Y-mix-mut80-s2": "held",
+   "Y-mix-nodice-s2": "held",
+   "Y-mix-pool-s1": "fell back",
+   "Y-mix-poorest-s1": "fell back"
+  },
+  "twins": {
+   "K-reach-random-forced-s1": {
+    "compared": 4344,
+    "pilot_end": 4344,
+    "first_difference": null
+   },
+   "Y-mix-keepone-s1": {
+    "compared": 6522,
+    "pilot_end": 6522,
+    "first_difference": null
+   }
+  },
+  "pending": [
+   "Y-mix-came-s1",
+   "Y-mix-familysense-s1",
+   "Y-mix-lottery-s2",
+   "Y-mix-unittoken-s2"
+  ],
+  "died_at": {
+   "M-mix-children-s2": 4043,
+   "Y-mix-grow-s1": 3158,
+   "Y-mix-helped-s1": 4271
+  },
+  "worlds": {
+   "K-reach-random-forced-s1": {
+    "rules": "links to strangers",
+    "at_1000": {
+     "agents": 1931,
+     "share_at_most_three": 0.4904194717762817,
+     "marks": 7,
+     "diversity": 0.5360429447852761,
+     "dimension": 3.9778170768097523
+    },
+    "at_10000": {
+     "agents": 3026,
+     "share_at_most_three": 0.6939854593522803,
+     "marks": 6,
+     "diversity": 0.6733128834355828,
+     "dimension": 4.350598625503413
+    },
+    "wide": [
+     1.2754278509469879,
+     1.1884139436943124
+    ]
+   },
+   "M-mix-children-s2": {
+    "rules": "mixing, estates to own children",
+    "at_1000": {
+     "agents": 129,
+     "share_at_most_three": 0.05426356589147287,
+     "marks": 6,
+     "diversity": 0.5023006134969326,
+     "dimension": 2.6143567578973013
+    },
+    "at_10000": {
+     "agents": 457,
+     "share_at_most_three": 0.04814004376367615,
+     "marks": 7,
+     "diversity": 0.5943251533742331,
+     "dimension": 3.5951789876260967
+    },
+    "wide": [
+     1.1787034662377527,
+     1.0975240376741446
+    ]
+   },
+   "S-G4-familysense-s2": {
+    "rules": "a sense of family, no revolutions",
+    "at_1000": {
+     "agents": 2935,
+     "share_at_most_three": 0.7386712095400341,
+     "marks": 7,
+     "diversity": 0.5253067484662577,
+     "dimension": 3.9877845271015357
+    },
+    "at_10000": {
+     "agents": 3097,
+     "share_at_most_three": 0.6932515337423313,
+     "marks": 6,
+     "diversity": 0.504217791411043,
+     "dimension": 4.481934458971557
+    },
+    "wide": [
+     1.4993963530996146,
+     1.198765601546458
+    ]
+   },
+   "U-U-BDFG-s1": {
+    "rules": "no revolutions, no random inputs, links hold a token, mixing",
+    "at_1000": {
+     "agents": 652,
+     "share_at_most_three": 0.2469325153374233,
+     "marks": 7,
+     "diversity": 0.6825153374233129,
+     "dimension": 3.669591307193689
+    },
+    "at_10000": {
+     "agents": 399,
+     "share_at_most_three": 0.03508771929824561,
+     "marks": 6,
+     "diversity": 0.6598926380368099,
+     "dimension": 3.5619690273105555
+    },
+    "wide": [
+     1.1857353315526291,
+     1.115571232071262
+    ]
+   },
+   "W-norev-linktoken-s1": {
+    "rules": "links hold a token, no revolutions",
+    "at_1000": {
+     "agents": 921,
+     "share_at_most_three": 0.4191096634093377,
+     "marks": 7,
+     "diversity": 0.5920245398773006,
+     "dimension": 3.9908675424598474
+    },
+    "at_10000": {
+     "agents": 1359,
+     "share_at_most_three": 0.5114054451802796,
+     "marks": 6,
+     "diversity": 0.44670245398773,
+     "dimension": 4.0840291129973485
+    },
+    "wide": [
+     1.1807733992232887,
+     1.0871598697587674
+    ]
+   },
+   "W-norev-mix-s1": {
+    "rules": "mixing, no revolutions",
+    "at_1000": {
+     "agents": 2245,
+     "share_at_most_three": 0.6712694877505568,
+     "marks": 7,
+     "diversity": 0.67829754601227,
+     "dimension": 3.719660372306734
+    },
+    "at_10000": {
+     "agents": 2221,
+     "share_at_most_three": 0.6357496623142729,
+     "marks": 6,
+     "diversity": 0.6104294478527608,
+     "dimension": 4.115568064037049
+    },
+    "wide": [
+     1.5795051434368008,
+     1.3303930641009896
+    ]
+   },
+   "W-norev-mix-s2": {
+    "rules": "mixing, no revolutions",
+    "at_1000": {
+     "agents": 1343,
+     "share_at_most_three": 0.5465376023827252,
+     "marks": 7,
+     "diversity": 0.6242331288343559,
+     "dimension": 3.932477234488331
+    },
+    "at_10000": {
+     "agents": 948,
+     "share_at_most_three": 0.23628691983122363,
+     "marks": 7,
+     "diversity": 0.6077453987730062,
+     "dimension": 3.9047527903106625
+    },
+    "wide": [
+     1.1597377518783933,
+     1.1674301269743517
+    ]
+   },
+   "Y-mix-came-s2": {
+    "rules": "mixing, input: came from",
+    "at_1000": {
+     "agents": 1521,
+     "share_at_most_three": 0.5332018408941486,
+     "marks": 7,
+     "diversity": 0.6591257668711656,
+     "dimension": 3.726504516399467
+    },
+    "at_10000": {
+     "agents": 719,
+     "share_at_most_three": 0.19749652294853964,
+     "marks": 7,
+     "diversity": 0.5276073619631902,
+     "dimension": 3.496005731388178
+    },
+    "wide": [
+     1.4906020134031928,
+     1.2363429014316865
+    ]
+   },
+   "Y-mix-grow-s1": {
+    "rules": "mixing, brains that grow",
+    "at_1000": {
+     "agents": 366,
+     "share_at_most_three": 0.23497267759562843,
+     "marks": 7,
+     "diversity": 0.6460889570552149,
+     "dimension": 3.305350941821239
+    },
+    "at_10000": {
+     "agents": 319,
+     "share_at_most_three": 0.15047021943573669,
+     "marks": 6,
+     "diversity": 0.48849693251533743,
+     "dimension": 3.373899429998492
+    },
+    "wide": [
+     1.2345697200351144,
+     1.1825721320693185
+    ]
+   },
+   "Y-mix-helped-s1": {
+    "rules": "mixing, input: who helped",
+    "at_1000": {
+     "agents": 1075,
+     "share_at_most_three": 0.3776744186046512,
+     "marks": 7,
+     "diversity": 0.633819018404908,
+     "dimension": 3.735547621895339
+    },
+    "at_10000": {
+     "agents": 2607,
+     "share_at_most_three": 0.6935174530111239,
+     "marks": 7,
+     "diversity": 0.5486963190184049,
+     "dimension": 3.9971961622839767
+    },
+    "wide": [
+     1.18422126397736,
+     1.2938172984624754
+    ]
+   },
+   "Y-mix-keepone-s1": {
+    "rules": "mixing, last token kept",
+    "at_1000": {
+     "agents": 1791,
+     "share_at_most_three": 0.7906197654941374,
+     "marks": 7,
+     "diversity": 0.6150306748466258,
+     "dimension": 3.6892299821654198
+    },
+    "at_10000": {
+     "agents": 1846,
+     "share_at_most_three": 0.7632719393282773,
+     "marks": 6,
+     "diversity": 0.6023773006134969,
+     "dimension": 4.393444863923232
+    },
+    "wide": [
+     1.3748953741152512,
+     1.1423198660164677
+    ]
+   },
+   "Y-mix-keepone-s2": {
+    "rules": "mixing, last token kept",
+    "at_1000": {
+     "agents": 1537,
+     "share_at_most_three": 0.7722836694860117,
+     "marks": 7,
+     "diversity": 0.69670245398773,
+     "dimension": 3.4303725336469117
+    },
+    "at_10000": {
+     "agents": 2379,
+     "share_at_most_three": 0.8049600672551492,
+     "marks": 7,
+     "diversity": 0.5456288343558282,
+     "dimension": 3.9279677574979766
+    },
+    "wide": [
+     1.4673537717552518,
+     1.3411292955220726
+    ]
+   },
+   "Y-mix-kinsense-s2": {
+    "rules": "mixing, a sense of kin",
+    "at_1000": {
+     "agents": 821,
+     "share_at_most_three": 0.31790499390986604,
+     "marks": 7,
+     "diversity": 0.6951687116564418,
+     "dimension": 3.6880929446423503
+    },
+    "at_10000": {
+     "agents": 2526,
+     "share_at_most_three": 0.6884402216943785,
+     "marks": 7,
+     "diversity": 0.5601993865030674,
+     "dimension": 3.85701048574689
+    },
+    "wide": [
+     1.1838081295924339,
+     1.4384537021643722
+    ]
+   },
+   "Y-mix-linktoken-s1": {
+    "rules": "mixing, links hold a token",
+    "at_1000": {
+     "agents": 588,
+     "share_at_most_three": 0.3554421768707483,
+     "marks": 7,
+     "diversity": 0.661042944785276,
+     "dimension": 3.431950230961536
+    },
+    "at_10000": {
+     "agents": 172,
+     "share_at_most_three": 0.005813953488372093,
+     "marks": 6,
+     "diversity": 0.5387269938650306,
+     "dimension": 2.9639390261056
+    },
+    "wide": [
+     1.1325570858558285,
+     1.1175016769201251
+    ]
+   },
+   "Y-mix-mut80-s1": {
+    "rules": "mixing, fast brain change",
+    "at_1000": {
+     "agents": 1299,
+     "share_at_most_three": 0.4133949191685912,
+     "marks": 7,
+     "diversity": 0.7760736196319018,
+     "dimension": 3.7755877125214856
+    },
+    "at_10000": {
+     "agents": 1244,
+     "share_at_most_three": 0.2540192926045016,
+     "marks": 7,
+     "diversity": 0.660659509202454,
+     "dimension": 3.9596798191230453
+    },
+    "wide": [
+     1.335474568056821,
+     1.1488966800740776
+    ]
+   },
+   "Y-mix-mut80-s2": {
+    "rules": "mixing, fast brain change",
+    "at_1000": {
+     "agents": 1238,
+     "share_at_most_three": 0.35864297253634897,
+     "marks": 7,
+     "diversity": 0.7925613496932515,
+     "dimension": 3.8424732956127094
+    },
+    "at_10000": {
+     "agents": 407,
+     "share_at_most_three": 0.02457002457002457,
+     "marks": 7,
+     "diversity": 0.7538343558282208,
+     "dimension": 3.411037094063067
+    },
+    "wide": [
+     1.1687444396716211,
+     1.1784668228623532
+    ]
+   },
+   "Y-mix-nodice-s2": {
+    "rules": "mixing, no random inputs",
+    "at_1000": {
+     "agents": 1468,
+     "share_at_most_three": 0.5313351498637602,
+     "marks": 7,
+     "diversity": 0.629217791411043,
+     "dimension": 3.5407211519976944
+    },
+    "at_10000": {
+     "agents": 372,
+     "share_at_most_three": 0.03763440860215054,
+     "marks": 7,
+     "diversity": 0.6299846625766872,
+     "dimension": 3.1488084370950045
+    },
+    "wide": [
+     1.5077261057870024,
+     1.2590008857650843
+    ]
+   },
+   "Y-mix-pool-s1": {
+    "rules": "mixing, pooled by genotype",
+    "at_1000": {
+     "agents": 816,
+     "share_at_most_three": 0.34068627450980393,
+     "marks": 7,
+     "diversity": 0.6330521472392638,
+     "dimension": 3.278644209322464
+    },
+    "at_10000": {
+     "agents": 2097,
+     "share_at_most_three": 0.7439198855507868,
+     "marks": 7,
+     "diversity": 0.34125766871165647,
+     "dimension": 3.70906596785504
+    },
+    "wide": [
+     1.3109483375086621,
+     1.3954792058383838
+    ]
+   },
+   "Y-mix-poorest-s1": {
+    "rules": "mixing, estates to the poorest",
+    "at_1000": {
+     "agents": 1455,
+     "share_at_most_three": 0.5099656357388316,
+     "marks": 7,
+     "diversity": 0.5728527607361963,
+     "dimension": 3.43375070404404
+    },
+    "at_10000": {
+     "agents": 2288,
+     "share_at_most_three": 0.6914335664335665,
+     "marks": 7,
+     "diversity": 0.2787576687116564,
+     "dimension": 3.2149762941812785
+    },
+    "wide": [
+     1.9243054937000466,
+     1.792256953900109
+    ]
+   }
+  },
+  "sizes": {
+   "K-reach-random-forced-s1": [
+    1931,
+    3026
+   ],
+   "M-mix-children-s2": [
+    129,
+    457
+   ],
+   "S-G4-familysense-s2": [
+    2935,
+    3097
+   ],
+   "U-U-BDFG-s1": [
+    652,
+    399
+   ],
+   "W-norev-linktoken-s1": [
+    921,
+    1359
+   ],
+   "W-norev-mix-s1": [
+    2245,
+    2221
+   ],
+   "W-norev-mix-s2": [
+    1343,
+    948
+   ],
+   "Y-mix-came-s2": [
+    1521,
+    719
+   ],
+   "Y-mix-grow-s1": [
+    366,
+    319
+   ],
+   "Y-mix-helped-s1": [
+    1075,
+    2607
+   ],
+   "Y-mix-keepone-s1": [
+    1791,
+    1846
+   ],
+   "Y-mix-keepone-s2": [
+    1537,
+    2379
+   ],
+   "Y-mix-kinsense-s2": [
+    821,
+    2526
+   ],
+   "Y-mix-linktoken-s1": [
+    588,
+    172
+   ],
+   "Y-mix-mut80-s1": [
+    1299,
+    1244
+   ],
+   "Y-mix-mut80-s2": [
+    1238,
+    407
+   ],
+   "Y-mix-nodice-s2": [
+    1468,
+    372
+   ],
+   "Y-mix-pool-s1": [
+    816,
+    2097
+   ],
+   "Y-mix-poorest-s1": [
+    1455,
+    2288
+   ]
+  },
+  "space": {
+   "K-reach-random-forced-s1": [
+    1.2754278509469879,
+    1.1884139436943124
+   ],
+   "M-mix-children-s2": [
+    1.1787034662377527,
+    1.0975240376741446
+   ],
+   "S-G4-familysense-s2": [
+    1.4993963530996146,
+    1.198765601546458
+   ],
+   "U-U-BDFG-s1": [
+    1.1857353315526291,
+    1.115571232071262
+   ],
+   "W-norev-linktoken-s1": [
+    1.1807733992232887,
+    1.0871598697587674
+   ],
+   "W-norev-mix-s1": [
+    1.5795051434368008,
+    1.3303930641009896
+   ],
+   "W-norev-mix-s2": [
+    1.1597377518783933,
+    1.1674301269743517
+   ],
+   "Y-mix-came-s2": [
+    1.4906020134031928,
+    1.2363429014316865
+   ],
+   "Y-mix-grow-s1": [
+    1.2345697200351144,
+    1.1825721320693185
+   ],
+   "Y-mix-helped-s1": [
+    1.18422126397736,
+    1.2938172984624754
+   ],
+   "Y-mix-keepone-s1": [
+    1.3748953741152512,
+    1.1423198660164677
+   ],
+   "Y-mix-keepone-s2": [
+    1.4673537717552518,
+    1.3411292955220726
+   ],
+   "Y-mix-kinsense-s2": [
+    1.1838081295924339,
+    1.4384537021643722
+   ],
+   "Y-mix-linktoken-s1": [
+    1.1325570858558285,
+    1.1175016769201251
+   ],
+   "Y-mix-mut80-s1": [
+    1.335474568056821,
+    1.1488966800740776
+   ],
+   "Y-mix-mut80-s2": [
+    1.1687444396716211,
+    1.1784668228623532
+   ],
+   "Y-mix-nodice-s2": [
+    1.5077261057870024,
+    1.2590008857650843
+   ],
+   "Y-mix-pool-s1": [
+    1.3109483375086621,
+    1.3954792058383838
+   ],
+   "Y-mix-poorest-s1": [
+    1.9243054937000466,
+    1.792256953900109
+   ]
+  },
+  "evolution": {
+   "1,000/500": {
+    "candidates": [
+     0.7022099390339342,
+     0.6725405614129937,
+     0.6928578774167009,
+     0.648640251932032,
+     0.7695809947803138,
+     0.7739456337863851,
+     0.5942959029950592,
+     0.8896708062290557,
+     0.8445575250873453,
+     0.5592450951825952,
+     0.5142579202492277,
+     0.8203255754425345,
+     0.824199875797095,
+     0.7611876008165246,
+     0.637361977484045,
+     0.49864612765340866,
+     0.7321335044257058,
+     0.894563923545844
+    ],
+    "E17": [
+     0.9058956916099773,
+     0.7189593049974089,
+     0.8307820553108294,
+     0.8394397006114274,
+     0.851204128440367,
+     0.7414333596214511,
+     0.7374688424988316,
+     0.8501117162463023,
+     0.7572325078001969,
+     0.9072352400888586
+    ]
+   },
+   "5,000/2,000": {
+    "candidates": [
+     0.7229679666647556,
+     0.780809526342626,
+     0.7583724202626642,
+     0.6105258967402817,
+     0.5442537803398266,
+     0.51845078549624,
+     0.4680893586782732,
+     0.5246561853749077,
+     0.5833023737876959,
+     0.6034331764360897,
+     0.8849103991311431,
+     0.5924507658643325,
+     0.6317053527251189,
+     0.5460534546588689,
+     0.522424508661688,
+     0.7040640534284521
+    ],
+    "E17": [
+     0.6748085242654538,
+     0.6174509030046558,
+     0.5475600796321751,
+     0.5811551228455161,
+     0.6367626796994827,
+     0.7782440622440623,
+     0.7699929648781625,
+     0.8521520803443328,
+     0.4353710550832654,
+     0.6817069293798733
+    ]
+   },
+   "10,000/5,000": {
+    "candidates": [
+     0.603935622104605,
+     0.627836830920192,
+     0.8057055985284731,
+     0.8318086370680864,
+     0.5578916314745386,
+     0.7207468514546554,
+     0.534933574879227,
+     0.46913625066055553,
+     0.5360602270478267,
+     0.45044931282326167,
+     0.3378489326765189,
+     0.55866683991684,
+     0.5355215190537386,
+     0.372075919504292,
+     0.3841321891295551,
+     0.7542110889752096
+    ],
+    "E17": [
+     0.5355697154591781,
+     0.7148645013110186,
+     0.9492753623188406,
+     0.7760769963755662,
+     0.5191746235619725,
+     0.4063820238629505,
+     0.559517383182105,
+     0.5104581673306773,
+     0.4382413418883156
+    ]
+   }
+  }
+ },
+ "figures": {
+  "paths": {
+   "title": "From 1,000 iterations to 10,000",
+   "caption": "Each line is a candidate, from where it stood at iteration 1,000 (small grey dot) to where it stood at 10,000 (large dot): green if it still met every mark of the health bar, was more diverse than B2's median world and poorer than none of B2's worlds \u2014 Meta X's test of a long run \u2014 violet if it fell back, red if it had died out on the way (20 agents or fewer, the lab's line) and was refilled from its last agents. Yellow: B2's ten worlds played on to 10,000; blue: Experiment 17's mixed worlds that lived to 10,000. The author's picture is the top left: agents that differ, and few of them poor.",
+   "recipe": "**Runs.** Batch LC's long runs (`GraphOfLifeRuns/.pilots/LC/`): each candidate of Meta X, B2 at 10,000 tokens with the rules of the batch it came from, played on in a copy of its own from its checkpoint to 10,000 iterations (`research/oee/pilots/run.py --resume`), two of them finished by the lab from iteration 0 (Experiment 20: `B2-10000-e10e0d-s001`, `B2-10000-82bd1e-s001`); Experiment 17's ten mixed worlds (`B2-10000-4af4a3-s001` \u2026 `s010`) and B2's ten worlds played on to 10,000 (`GraphOfLifeRuns/.pilots/L/B2-long-s001` \u2026 `s010`).\n\n**Data.** From each world's checkpoint at 1,000 and at 10,000 (`research/atlas/at.py --at 1000` and `--at 10000`, `GraphOfLifeRuns/.pilots/atlas/at1000.json` and `at10000.json`).\n\n1. Read each world as `research/atlas/profile.py` reads every world.\n2. Rank its four spreads among the frozen reference worlds; the diversity score is their mean.\n\n**To make it again:** `python3 book_figures.py candidates`."
+  },
+  "sizes": {
+   "title": "How large each candidate grew",
+   "caption": "Each line is a candidate: its agents after each game, means over 50 iterations, on a logarithmic axis. Green: the candidates that held at 10,000 iterations; violet: those that fell back; red: those that died out on the way and were refilled from their last agents.",
+   "recipe": "**Runs.** Batch LC's long runs (`GraphOfLifeRuns/.pilots/LC/`): each candidate of Meta X, B2 at 10,000 tokens with the rules of the batch it came from, played on in a copy of its own from its checkpoint to 10,000 iterations (`research/oee/pilots/run.py --resume`), two of them finished by the lab from iteration 0 (Experiment 20: `B2-10000-e10e0d-s001`, `B2-10000-82bd1e-s001`); Experiment 17's ten mixed worlds (`B2-10000-4af4a3-s001` \u2026 `s010`) and B2's ten worlds played on to 10,000 (`GraphOfLifeRuns/.pilots/L/B2-long-s001` \u2026 `s010`).\n\n**Data.** From each long run's `series.jsonl`.\n\n1. Read the agents after each game.\n2. Average over stretches of 50 iterations.\n\n**To make it again:** `python3 book_figures.py candidates`."
+  },
+  "space": {
+   "title": "Room, at 1,000 iterations and at 10,000",
+   "caption": "Each line is a candidate: the steps within which a typical agent's ball holds half its world, over the same for its random twin (Chapter 87), at iteration 1,000 and at 10,000. Green: the candidates that held; violet: those that fell back; red: those that died out on the way. Beside the right end: B2's ten worlds played on to 10,000 (yellow) and Experiment 17's (blue).",
+   "recipe": "**Runs.** Batch LC's long runs (`GraphOfLifeRuns/.pilots/LC/`): each candidate of Meta X, B2 at 10,000 tokens with the rules of the batch it came from, played on in a copy of its own from its checkpoint to 10,000 iterations (`research/oee/pilots/run.py --resume`), two of them finished by the lab from iteration 0 (Experiment 20: `B2-10000-e10e0d-s001`, `B2-10000-82bd1e-s001`); Experiment 17's ten mixed worlds (`B2-10000-4af4a3-s001` \u2026 `s010`) and B2's ten worlds played on to 10,000 (`GraphOfLifeRuns/.pilots/L/B2-long-s001` \u2026 `s010`).\n\n**Data.** From each world's checkpoint at 1,000 and 10,000 (`research/atlas/space.py --at 1000` and `--at 10000`).\n\n1. Count, from a sample of agents, how many others lie within each number of steps.\n2. Find the steps within which the typical ball holds half the world, between whole steps by the logarithm of the ball.\n3. Do the same on a random network with every agent's links kept; divide.\n\n**To make it again:** `python3 book_figures.py candidates`."
+  },
+  "evolution": {
+   "title": "Do later brains beat earlier ones?",
+   "caption": "Each dot is a world: the share of a contested world the later moment's brains hold after 100 iterations against the earlier moment's, the mean of two contests, one in each moment's world; the bar is the median world. 5,000/2,000: the brains of iteration 5,000 against those of 2,000. Orange: the candidates (the first step judged on the world each came from; a world that died out on the way has the steps before its death only); grey: Experiment 17's mixed worlds.",
+   "recipe": "**Runs.** Batch LC's long runs (`GraphOfLifeRuns/.pilots/LC/`): each candidate of Meta X, B2 at 10,000 tokens with the rules of the batch it came from, played on in a copy of its own from its checkpoint to 10,000 iterations (`research/oee/pilots/run.py --resume`), two of them finished by the lab from iteration 0 (Experiment 20: `B2-10000-e10e0d-s001`, `B2-10000-82bd1e-s001`); Experiment 17's ten mixed worlds (`B2-10000-4af4a3-s001` \u2026 `s010`) and B2's ten worlds played on to 10,000 (`GraphOfLifeRuns/.pilots/L/B2-long-s001` \u2026 `s010`).\n\n**Data.** From `GraphOfLifeRuns/.pilots/lc_T100.json` (`research/oee/checks/lc_rejudge_worlds.txt`), the batches' own contests for 1,000/500, and `e17_T100.json`.\n\n1. Seat the brains of the two moments on alternate agents of each moment's world and play 100 iterations (`research/oee/checks/rejudge.py`).\n2. Count the agents the later moment's brains hold, as a share of all.\n\n**To make it again:** `python3 book_figures.py candidates`."
+  }
+ }
+}

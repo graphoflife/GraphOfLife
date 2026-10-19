@@ -543,18 +543,18 @@
         {
           "id": "92",
           "title": "The candidates, played on",
-          "note": "Meta X's candidates — worlds that met every mark with diverse agents at iteration 1,000 — played on to 10,000: which held, which fell back, which died out on the way. Experiment 20 plays the two unfinished ones of engine rules in the lab.",
+          "note": "Meta X's candidates — worlds that met every mark with diverse agents at iteration 1,000 — played on to 10,000: five of nineteen held, eleven fell back (most into B2's poverty), three died out on the way; diversity wore off, no rich world stayed a space, evolution slowed. Experiment 20 shows the lab plays a pilot's world game for game.",
           "file": "chapters/92-the-candidates-played-on.md",
           "experiment": "E20",
-          "status": "ready"
+          "status": "analysed"
         },
         {
           "id": "93",
           "title": "Five more seeds for the rules that held",
-          "note": "Experiment 21: the rules whose candidate held over 10,000 iterations — mixing with a fast change of brains, with no random inputs, with no revolutions — in five new worlds each, beside plain mixing in the same seeds.",
+          "note": "Experiment 21: the rules whose candidate held over 10,000 iterations, in five new worlds each. None held more often than mixing alone (fast brain change two of five, no random inputs and no revolutions one each, against three); without random inputs or revolutions, three worlds died out.",
           "file": "chapters/93-five-more-seeds-for-the-rules-that-held.md",
           "experiment": "E21",
-          "status": "ready"
+          "status": "analysed"
         }
       ]
     },

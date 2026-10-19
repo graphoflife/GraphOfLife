@@ -297,6 +297,15 @@ The long runs are planned in three steps:
 > `Q/mix-s1` and `s2` and their long runs count as Experiment 17's worlds s001
 > and s002 from the next count on, and leave the tables above.
 
+> [!info] Added later (19 October 2026): steps 1 and 2
+> Every candidate that can be read at 10,000 iterations now has been
+> ([Chapter 92](92-the-candidates-played-on.md)): of nineteen, five held,
+> eleven fell back — most of them into B2's poverty — and three died out on
+> the way; four whose rules exist only in the pilots' prototype wait for
+> Experiment 23. Step 2 gave each rule that held five new seeds (Experiment 21,
+> [Chapter 93](93-five-more-seeds-for-the-rules-that-held.md)): none held more
+> often than mixing alone, so step 3 has no rule to take up yet.
+
 The batches still running (T to Y, [Appendix C](C-every-simulation.md)) and the
 search for settings by elimination (batch Z: worlds whose every setting is
 drawn at random, the values that make worlds worse dropped round after round,
