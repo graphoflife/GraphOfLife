@@ -198,12 +198,15 @@ def test_the_engine_a_lab_freezes_is_exactly_what_its_worker_imports():
     worker reaches makes every edit to it look like a new engine.
     """
     from closure import closure
-    workers = ("gol_worker.py", "gol_trial.py")
+    workers = ("gol_worker.py", "gol_trial.py", "gol_pilot.py")
+    # The prototype's files sit in research/ in the repository and flat beside the engine in a snapshot.
+    search = [runner.ROOT, os.path.join(runner.ROOT, "research", "oee", "pilots"),
+              os.path.join(runner.ROOT, "research", "oee", "checks")]
     reached = {}
     for worker in workers:
-        reached.update(closure(os.path.join(runner.ROOT, worker), [runner.ROOT]))
+        reached.update(closure(os.path.join(runner.ROOT, worker), search))
     needed = {os.path.basename(path) for path in reached.values()} | set(workers)
-    listed = set(gol_lab.ENGINE_FILES)
+    listed = {os.path.basename(name) for name in gol_lab.ENGINE_FILES}
     assert needed == listed, (
         f"the worker imports {sorted(needed - listed)} that ENGINE_FILES leaves out, "
         f"and ENGINE_FILES lists {sorted(listed - needed)} that the worker never imports")
@@ -564,6 +567,54 @@ def test_a_trial_can_start_from_a_pilot_of_the_engines_own_rules():
             except ValueError:
                 continue
             raise AssertionError(f"accepted {bad}")
+
+
+def _prototype_rows(config, iterations):
+    """The series the prototype's own runner writes for these settings, in this process."""
+    pilots = os.path.join(runner.ROOT, "research", "oee", "pilots")
+    if pilots not in sys.path:
+        sys.path.insert(0, pilots)
+    import proto as P
+    import run as R
+    from types import SimpleNamespace
+    rules = {"engine": True, **config["proto"]}
+    P.set_proto(rules)
+    cfg = P.ProtoConfig.from_dict({**config, "proto": {}}, stored=False)
+    cfg.extinction_threshold = 0
+    world = P.make_world(cfg, rules)
+    with tempfile.TemporaryDirectory() as out:
+        path = os.path.join(out, "series.jsonl")
+        R.run_loop(world, SimpleNamespace(out=out, iters=iterations, ckpt=0, health=10), path, "w", False)
+        return [{k: v for k, v in json.loads(line).items() if k != "secs"} for line in open(path)]
+
+
+def test_the_lab_plays_the_pilots_rules_as_the_prototype_does():
+    """
+    Settings that ask for rules only the research prototype knows are not the
+    engine's to play: the lab hands them to the prototype, frozen beside the
+    engine, which plays the world draw for draw as a pilot started by hand
+    with the same settings and seed. Stopped on the way and taken up again, it
+    goes on from its checkpoint to the same world.
+    """
+    rules = {"proto": {"came_from": True, "contest": "lottery"}}
+    with lab(plan("E91", [{"name": "straight", "set": rules}, {"name": "stopped", "set": rules, "stops": [3]}],
+                  seeds="1", iterations=6)):
+        gol_lab.request(run="E91", workers=2)
+        with contextlib.redirect_stdout(io.StringIO()):
+            assert gol_lab.run_lab() == 0
+        status = gol_lab.status()["experiments"]["E91"]
+        assert status["state"] == "finished", status
+
+        def rows(spec, resumed=False):
+            # The prototype's kin statistics read its tree of genotypes, which a checkpoint
+            # does not keep: they start again after one, and nothing an agent sees uses them.
+            with open(os.path.join(gol_store.run_dir(spec.run_id), "series.jsonl")) as f:
+                return [{k: v for k, v in json.loads(line).items()
+                         if k != "secs" and not (resumed and k.startswith("kin"))} for line in f]
+        straight, stopped = gol_plan.experiment_runs("E91")
+        assert rows(straight, True) == rows(stopped, True), "a pilot taken up again went another way"
+        assert rows(straight) == _prototype_rows(straight.config, 6), "the lab's pilot is not the prototype's"
+        assert len(rows(straight)) == 6 and gol_store.load_meta(straight.run_id)["checkpoint_iteration"] == 6
 
 
 def test_the_lab_plays_trials_as_it_advances_runs():

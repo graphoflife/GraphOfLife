@@ -152,11 +152,17 @@ Mechanics (P keys):
 from __future__ import annotations
 
 import dataclasses
+import os
 import sys
 from typing import Any, Dict, List, Optional, Tuple
 
-sys.path.insert(0, "/home/stefan/Documents/CodingProjects/GraphOfLife Claude")
-sys.path.insert(0, "/home/stefan/Documents/CodingProjects/GraphOfLife Claude/research/oee/checks")
+# Its own folder first, then the repository's root and the checks beside it: a copy of these files
+# frozen beside the engine (the lab's snapshot, gol_pilot.py) then imports the copies it sits with.
+_HERE = os.path.dirname(os.path.abspath(__file__))
+for _path in (os.path.join(_HERE, "..", "checks"), os.path.join(_HERE, "..", "..", "..")):
+    if os.path.exists(os.path.join(_path, "rules.py")) or os.path.exists(os.path.join(_path, "GraphOfLifeSimple.py")):
+        sys.path.insert(0, os.path.abspath(_path))
+sys.path.insert(0, _HERE)
 
 import numpy as np
 import networkx as nx
@@ -1216,6 +1222,24 @@ def make_world(cfg: SimConfig, proto: Dict[str, Any]) -> ProtoWorld:
     G0 = nx.watts_strogatz_graph(n=cfg.resolved_n(), k=cfg.resolved_k(),
                                  p=cfg.rewire_p, seed=stream_seed(cfg))
     return ProtoWorld(G0, cfg)
+
+
+def restore_state(world: "ProtoWorld", blob: Dict[str, Any]) -> None:
+    """
+    What a checkpoint keeps of the prototype's own state beyond the engine's: family tags,
+    each genotype's founder line (`roots`), and where each node's brain came from
+    (`came_from`, node and source in pairs), which the came_from input reads in the very
+    next game — without it a world taken up from a checkpoint plays its first game blind
+    to it and goes another way. The tree of genotypes is not kept: the statistics read from
+    it (kin_conquests, kin4Mean, kin4Largest, kin4Domains) start again from a checkpoint,
+    and nothing an agent sees depends on it.
+    """
+    restore_tags(world, blob)
+    if "roots" in blob:
+        for bid, root in zip(blob["brain_ids"].tolist(), blob["roots"].tolist()):
+            world.root_of[int(bid)] = int(root)
+    if "came_from" in blob:
+        world.came_from = {int(v): int(w) for v, w in blob["came_from"].reshape(-1, 2).tolist()}
 
 
 def restore_tags(world: "ProtoWorld", blob: Dict[str, Any]) -> None:

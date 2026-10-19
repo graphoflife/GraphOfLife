@@ -7,8 +7,15 @@ voice) or switch the last one off. `active` is inherited with the weights.
 Registered as brain_kind "grow"; the number of units H is hidden_layers[0], and
 the starting number of active units is GROW_START.
 """
+import os
 import sys
-sys.path.insert(0, "/home/stefan/Documents/CodingProjects/GraphOfLife Claude")
+# Its own folder first, then the repository's root and the checks beside it: a copy of these files
+# frozen beside the engine (the lab's snapshot, gol_pilot.py) then imports the copies it sits with.
+_HERE = os.path.dirname(os.path.abspath(__file__))
+for _path in (os.path.join(_HERE, "..", "checks"), os.path.join(_HERE, "..", "..", "..")):
+    if os.path.exists(os.path.join(_path, "rules.py")) or os.path.exists(os.path.join(_path, "GraphOfLifeSimple.py")):
+        sys.path.insert(0, os.path.abspath(_path))
+sys.path.insert(0, _HERE)
 import numpy as np
 
 import GraphOfLifeSimple as E

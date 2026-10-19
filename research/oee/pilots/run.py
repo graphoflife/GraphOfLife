@@ -15,8 +15,13 @@ import os
 import sys
 import time
 
-sys.path.insert(0, "/home/stefan/Documents/CodingProjects/GraphOfLife Claude")
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+# Its own folder first, then the repository's root and the checks beside it: a copy of these files
+# frozen beside the engine (the lab's snapshot, gol_pilot.py) then imports the copies it sits with.
+_HERE = os.path.dirname(os.path.abspath(__file__))
+for _path in (os.path.join(_HERE, "..", "checks"), os.path.join(_HERE, "..", "..", "..")):
+    if os.path.exists(os.path.join(_path, "rules.py")) or os.path.exists(os.path.join(_path, "GraphOfLifeSimple.py")):
+        sys.path.insert(0, os.path.abspath(_path))
+sys.path.insert(0, _HERE)
 
 import numpy as np
 import networkx as nx
@@ -167,14 +172,20 @@ def main():
     run_loop(world, a, os.path.join(a.out, "series.jsonl"), mode="w", first_ckpt_done=bool(a.start))
 
 
-def run_loop(world, a, path, mode, first_ckpt_done):
-    """Step the world a.iters times: a row of the series each iteration, a checkpoint every a.ckpt."""
+def run_loop(world, a, path, mode, first_ckpt_done, stop=None):
+    """
+    Step the world a.iters times: a row of the series each iteration, a checkpoint every a.ckpt.
+    `stop(world)`, asked before each iteration, ends the loop early with a checkpoint where it
+    stands, as the lab pauses a pilot it plays (gol_pilot.py); the iterations are the same.
+    """
     rows = open(path, mode)
     t0 = time.time()
     first = world.iteration
     for it in range(first, first + a.iters):
         if a.ckpt and it % a.ckpt == 0 and not (first_ckpt_done and it == first):
             save_ckpt(world, a.out, it)
+        if stop is not None and it > first and stop(world):
+            break
         world.c = {}
         world.step(record_decisions=False)
         G = world.G
@@ -220,7 +231,7 @@ def run_loop(world, a, path, mode, first_ckpt_done):
 def resume(a):
     """Go on with a pilot world from one of its own checkpoints, for a.iters more iterations."""
     import glob
-    from proto import ProtoConfig, ProtoWorld, restore_tags, set_proto
+    from proto import ProtoConfig, ProtoWorld, restore_state, set_proto
     meta = json.load(open(os.path.join(a.out, "config.json")))
     set_proto(meta.get("proto", {}))
     if meta["cfg"].get("brain_kind") == "grow":
@@ -235,7 +246,7 @@ def resume(a):
     with np.load(os.path.join(a.out, f"ckpt_{at:06d}.npz"), allow_pickle=False) as z:
         blob = {k: z[k] for k in z.files}
     world = ProtoWorld.from_checkpoint(blob, cfg)
-    restore_tags(world, blob)
+    restore_state(world, blob)
     import grow
     grow.restore_active(world, blob)
     meta.setdefault("resumes", []).append({"at": at, "iters": a.iters})
@@ -254,6 +265,9 @@ def save_ckpt(world, out, it):
     blob = world.to_checkpoint()
     nodes = sorted(world.G.nodes())
     blob["roots"] = np.array([world.root(u) for u in nodes], dtype=np.int64)
+    present = set(nodes)
+    blob["came_from"] = np.array([[v, w] for v, w in sorted(getattr(world, "came_from", {}).items())
+                                  if v in present], dtype=np.int64).reshape(-1, 2)
     from proto import P
     if P.get("tag_rate", 0) > 0:
         blob["tags"] = np.array([world.family(world.brains[u].brain_id) for u in nodes], dtype=np.int64)
