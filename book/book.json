@@ -476,6 +476,14 @@
           "file": "chapters/99-a-mate-that-pays-its-share.md",
           "experiment": "E22",
           "status": "ready"
+        },
+        {
+          "id": "100",
+          "title": "Room for the steadiest world",
+          "note": "Experiment 31: Experiment 19's world (mixed at birth, parents as mates: steady, diverse, uneven, but folded) given each rule that keeps a world's room (estate to the newborns, to the parents, no old age, no mending), two seeds each for 3,000 iterations: can it become a space without losing the rest?",
+          "file": "chapters/100-room-for-the-steadiest-world.md",
+          "experiment": "E31",
+          "status": "ready"
         }
       ]
     },

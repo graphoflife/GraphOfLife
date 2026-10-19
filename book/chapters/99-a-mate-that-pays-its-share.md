@@ -112,5 +112,5 @@ again, game for game.
 <!-- turns -->
 ---
 
-← [Chapter 98 · The search's best world, in new seeds](98-the-searchs-best-world-in-new-seeds.md) · [Contents](../README.md) · [Chapter 60 · Worlds of 100,000 tokens](60-worlds-of-100000-tokens.md) →
+← [Chapter 98 · The search's best world, in new seeds](98-the-searchs-best-world-in-new-seeds.md) · [Contents](../README.md) · [Chapter 100 · Room for the steadiest world](100-room-for-the-steadiest-world.md) →
 <!-- /turns -->

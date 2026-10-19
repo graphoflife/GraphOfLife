@@ -378,5 +378,5 @@ To make every figure of this chapter: `python3 book_figures.py takeover`.
 <!-- turns -->
 ---
 
-← [Chapter 99 · A mate that pays its share](99-a-mate-that-pays-its-share.md) · [Contents](../README.md) · [Chapter 87 · What folds a world](87-what-folds-a-world.md) →
+← [Chapter 100 · Room for the steadiest world](100-room-for-the-steadiest-world.md) · [Contents](../README.md) · [Chapter 87 · What folds a world](87-what-folds-a-world.md) →
 <!-- /turns -->

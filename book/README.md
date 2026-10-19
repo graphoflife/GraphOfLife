@@ -116,6 +116,7 @@ everything can be checked with it.
 - [Chapter 90 · Gifts, with every other rule](chapters/90-gifts-with-every-other-rule.md)
 - [Chapter 98 · The search's best world, in new seeds](chapters/98-the-searchs-best-world-in-new-seeds.md)
 - [Chapter 99 · A mate that pays its share](chapters/99-a-mate-that-pays-its-share.md)
+- [Chapter 100 · Room for the steadiest world](chapters/100-room-for-the-steadiest-world.md)
 
 **Part VI · Towards a physics: space, scale and locality**
 

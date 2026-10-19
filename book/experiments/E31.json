@@ -1,0 +1,56 @@
+{
+ "id": "E31",
+ "title": "Room for the steadiest world",
+ "thesis": {
+  "claim": "Experiment 19's world, brains mixed at birth with only parents as mates, is steady, diverse and uneven, but folded. One of the rules that keep a world's room unfolds it without costing the rest. For at least one of four rules (the estate of the dead paid to the newborns, or to the parents, no old age, or deaths not mended) both of its worlds, at iteration 3,000, meet every mark of the health bar, are more diverse than B2's median world, are at least 1.5 times as wide as their random twins, and are no more even than B2's least even world, B2's ten worlds played on being read at the same iteration.",
+  "why": "All ten of Experiment 19's worlds lived to 20,000 iterations. At 10,000 they held 1,429 to 2,385 agents, with diversity scores of 0.55 to 0.65 against B2's median of 0.49 and Ginis of 0.47 to 0.57 against B2's least of 0.47. Yet a typical agent reached half its world in 1.13 to 1.31 times the steps its random twin needs, and nine of ten missed the dimension mark: they are folded small worlds, not spaces. Chapter 87 found what folds a world, a death mended with a ring of links, and what keeps a world's room: the estate paid to births (2.0 to 2.6 times the twin), no old age (1.8 to 1.9) and no mending (2.0). Each pays for the room in its own coin (Meta XII): estates fill a world with alike, poor agents, no old age all but stops births, and without mending one loss can cut a world. With plain mixing, the estates gave spaces of about 5,000 agents with diversity scores of only 0.35 to 0.40. With parents as mates a mixed world held its size, which may keep the diversity the estates cost.",
+  "confirm": "For at least one rule, both worlds (seeds 1 and 2) at iteration 3,000 meet every mark, have a diversity score above the median of B2's ten worlds played on and read at 3,000, a typical distance at least 1.5 times their twin's, and a Gini of their agents' tokens no lower than the least of those ten worlds'.",
+  "refute": "No rule has both its worlds pass all four at 3,000: the room and the rest pull apart even in the steadiest mixed world, and the chapter says what each rule cost."
+ },
+ "runs": {
+  "baseline": "B2",
+  "world": {
+   "total_tokens": 10000
+  },
+  "seeds": "1..2",
+  "iterations": 3000,
+  "record": {
+   "heavy_every": 25,
+   "archive_every": 500
+  },
+  "conditions": [
+   {
+    "name": "estate to the newborns",
+    "set": {
+     "mix_at_birth": true,
+     "mix_mates": "parents",
+     "redistribution": "newborns"
+    }
+   },
+   {
+    "name": "estate to the parents",
+    "set": {
+     "mix_at_birth": true,
+     "mix_mates": "parents",
+     "redistribution": "parents"
+    }
+   },
+   {
+    "name": "no old age",
+    "set": {
+     "mix_at_birth": true,
+     "mix_mates": "parents",
+     "max_age": 0
+    }
+   },
+   {
+    "name": "deaths not mended",
+    "set": {
+     "mix_at_birth": true,
+     "mix_mates": "parents",
+     "mend_on_death": false
+    }
+   }
+  ]
+ }
+}
