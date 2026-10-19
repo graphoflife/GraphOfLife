@@ -198,11 +198,13 @@ def costs() -> Dict[str, Any]:
 
 
 def predict(config: Dict[str, Any], iterations: int,
-            known: Optional[Dict[str, Any]] = None) -> Dict[str, float]:
+            known: Optional[Dict[str, Any]] = None, frames: bool = True) -> Dict[str, float]:
     """
     What `iterations` more of a run with this configuration will cost: from
     runs of its own kind where some have been measured, otherwise from all
     runs scaled by the size of its brains, otherwise from the calibration.
+    A trial (gol_trial.py) plays as long and holds as much, and keeps no
+    frames (`frames` False).
     """
     known = known or costs()
     weights, width = weights_of(config)
@@ -212,8 +214,9 @@ def predict(config: Dict[str, Any], iterations: int,
     return {
         "agents": agents,
         "seconds": iterations * agents * per_agent,
-        # The frames, and the checkpoint beside them, which holds every brain.
-        "diskBytes": iterations * agents * known["bytesPerAgentIteration"] + agents * weights * width,
+        # The frames, unless it keeps none, and the checkpoint beside them, which holds every brain.
+        "diskBytes": (iterations * agents * known["bytesPerAgentIteration"] if frames else 0)
+                     + agents * weights * width,
         "peakMB": known["baseMB"] + agents * weights * width
                   * known["peakBytesPerWeightByte"] / 2**20,
     }

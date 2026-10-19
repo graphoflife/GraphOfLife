@@ -414,6 +414,16 @@
             nothing of its brain through other agents' children. With no such
             neighbour the newborn's brain is a copy.</small>
         </div>
+        <div class="field">
+          <label for="cfg_self_message">What an agent writes to itself</label>
+          <select id="cfg_self_message" data-cfg="self_message">
+            <option value="own">What its own column says</option>
+            <option value="largest">The largest of what it writes to anyone</option>
+          </select>
+          <small>Every neighbour reads what an agent wrote to itself. The largest of
+            what it writes to anyone lets a mark one column makes — a stranger
+            next door — reach every neighbour a phase later.</small>
+        </div>
         </fieldset>
         <fieldset>
           <legend>Links to strangers</legend>

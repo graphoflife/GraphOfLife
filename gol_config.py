@@ -81,6 +81,7 @@ MECHANICS: Dict[str, Any] = {
     "mix_at_birth": False,
     "mix_mates": "any",
     "buy_life": False,
+    "self_message": "own",
 
     # ---- links to strangers ------------------------------------------------
     "link_search": "off",
@@ -241,12 +242,16 @@ class SimConfig:
     LINK_CONSENTS: ClassVar[Tuple[str, ...]] = ("mutual", "forced")
     # Who may be a newborn's mate under mix_at_birth.
     MIX_MATES: ClassVar[Tuple[str, ...]] = ("any", "parents")
+    # What an agent writes to itself: what its own column says, or the largest of
+    # what it writes to anyone.
+    SELF_MESSAGES: ClassVar[Tuple[str, ...]] = ("own", "largest")
     MODES: ClassVar[Dict[str, Tuple[str, ...]]] = {
         "brain_kind": tuple(BRAIN_PRESETS),
         "prune_after": tuple(PRUNE_AFTER),
         "inactive_window": tuple(INACTIVE_WINDOW),
         "redistribution": REDISTRIBUTIONS,
         "mix_mates": MIX_MATES,
+        "self_message": SELF_MESSAGES,
         "link_search": LINK_SEARCHES,
         "link_steering": LINK_STEERINGS,
         "link_consent": LINK_CONSENTS,
@@ -461,6 +466,16 @@ class SimConfig:
     # through other agents' children. With no such neighbour the newborn's
     # brain is a copy of its parent's.
     mix_mates: str = "any"
+
+    # Reach beyond a pair. A brain scores each candidate from that candidate's
+    # column alone, so what it writes to one neighbour can never carry news of
+    # another, and no message ever says "a stranger is next door to me"
+    # (Chapter 94). With `largest`, what an agent writes to itself — which each
+    # of its neighbours reads as one of its inputs — is the largest, number by
+    # number, of what it writes to all its candidates, itself included: what one
+    # column marks reaches every neighbour a phase later. `own`, the old rule,
+    # is what its own column says.
+    self_message: str = "own"
 
     # ---- Links to strangers ----
     #

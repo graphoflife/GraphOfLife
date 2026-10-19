@@ -101,6 +101,7 @@ rules are part of the engine.
 > | [`min_child`](../notes/settings.md#min_child) | 10 | 10 | The fewest tokens a child can be born with; a parent that would give less has no child. |
 > | [`mix_at_birth`](../notes/settings.md#mix_at_birth) | off | **on** | Whether a newborn's brain is its parent's mixed with a mate's — one of the parent's neighbours, drawn at random — each hidden unit whole from one or the other by an even chance, before it mutates; off, a newborn has a copy of its parent's brain. |
 > | [`mix_mates`](../notes/settings.md#mix_mates) | any | any | Under mix_at_birth, who may be the mate: any neighbour of the parent, or only parents — a neighbour with a living child of its own (with none, the newborn's brain is a copy). |
+> | [`self_message`](../notes/settings.md#self_message) | own | own | What an agent writes to itself, which each neighbour reads: what its own column says (own), or the largest, number by number, of what it writes to anyone (largest), so that news one column marks reaches every neighbour. |
 > | [`link_search`](../notes/settings.md#link_search) | **reach** | off | Whether an agent may reach beyond its neighbours to propose a link: off; jump, a walk as many steps long as the tokens it spends in one iteration, with a link proposed where it ends; walk, a scout that goes one step further in every iteration it pays for; or reach, a jump whose steps are free, as many as the tokens it holds would pay for. A paid step costs one token, paid to the agent it enters, and never the last. |
 > | [`link_steering`](../notes/settings.md#link_steering) | random | random | Which way each step of a search goes: to a neighbour drawn at random, or to the one the searcher would most like a link with (looking). |
 > | [`link_consent`](../notes/settings.md#link_consent) | **forced** | mutual | Who has to agree to a link a search proposes: both ends (mutual), or only the one who proposes (forced). Nobody at its valence gets a new link either way. |
@@ -158,6 +159,32 @@ estate of a dead agent left to its own children (at iteration 4,043), with
 brains that grow (3,158) and with an input that tells who helped (4,271).
 Each fell to a single agent, from which the pilot, which plays on where the
 lab would stop, filled its world again.
+
+> [!info] Added later (19 October 2026): too even, not too poor
+> The author's worry was a world whose agents hold their tokens too evenly,
+> not one with many poor; the share at three tokens or fewer only stood in for
+> it ([Meta X](79-meta-10-healthy-and-rich.md)). Read with the
+> [Gini coefficient](../notes/gini-coefficient.md) of the agents' tokens instead, the verdict turns round:
+> - **Four of the five that held are more even than every one of B2's
+>   worlds**, with a Gini of 0.37 to 0.44 against B2's 0.47 to 0.51. They
+>   are fast brain change in both seeds, no random inputs and no
+>   revolutions: rich worlds of 8 to 27 tokens per agent, spread more evenly
+>   than a random exchange of tokens would leave them (0.47 to 0.49).
+> - **Two that fell back did so on the share of the poor alone.** They meet
+>   every other count, with tokens less even than B2's: mixing with only the
+>   last token kept at home, seed 2 (80% at three or fewer, a Gini of 0.66),
+>   and with an input that tells which neighbours carry the agent's own
+>   brain, seed 2 (69%, 0.56).
+> - **Only the input of where a brain came from (seed 2) passes both
+>   readings.**
+>
+> Under the clarified test — alive, every mark, more diverse than B2's
+> median world, and no more even than B2 — **three of nineteen held**:
+> where a brain came from, the last token kept, and the sense of kin, each in
+> one seed. Across the nineteen, a world's size goes with its share of poor
+> agents (a rank correlation of 0.85) far more than with how evenly its
+> tokens are spread (0.46 with the Gini). The small rich worlds are the even
+> ones; the large poor ones are not.
 
 **Diversity fell in sixteen of the nineteen.** What a candidate had at
 iteration 1,000 — agents that differ in tokens, links, ages and genotypes —

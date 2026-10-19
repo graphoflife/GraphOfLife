@@ -96,6 +96,7 @@ prototype; it joins this experiment once it is part of the engine.
 > | [`min_child`](../notes/settings.md#min_child) | 10 | 10 | 10 | 10 | The fewest tokens a child can be born with; a parent that would give less has no child. |
 > | [`mix_at_birth`](../notes/settings.md#mix_at_birth) | **on** | **on** | **on** | **on** | Whether a newborn's brain is its parent's mixed with a mate's — one of the parent's neighbours, drawn at random — each hidden unit whole from one or the other by an even chance, before it mutates; off, a newborn has a copy of its parent's brain. |
 > | [`mix_mates`](../notes/settings.md#mix_mates) | any | any | any | any | Under mix_at_birth, who may be the mate: any neighbour of the parent, or only parents — a neighbour with a living child of its own (with none, the newborn's brain is a copy). |
+> | [`self_message`](../notes/settings.md#self_message) | own | own | own | own | What an agent writes to itself, which each neighbour reads: what its own column says (own), or the largest, number by number, of what it writes to anyone (largest), so that news one column marks reaches every neighbour. |
 > | [`link_search`](../notes/settings.md#link_search) | off | off | off | off | Whether an agent may reach beyond its neighbours to propose a link: off; jump, a walk as many steps long as the tokens it spends in one iteration, with a link proposed where it ends; walk, a scout that goes one step further in every iteration it pays for; or reach, a jump whose steps are free, as many as the tokens it holds would pay for. A paid step costs one token, paid to the agent it enters, and never the last. |
 > | [`link_steering`](../notes/settings.md#link_steering) | random | random | random | random | Which way each step of a search goes: to a neighbour drawn at random, or to the one the searcher would most like a link with (looking). |
 > | [`link_consent`](../notes/settings.md#link_consent) | mutual | mutual | mutual | mutual | Who has to agree to a link a search proposes: both ends (mutual), or only the one who proposes (forced). Nobody at its valence gets a new link either way. |
@@ -216,6 +217,24 @@ won in only one of the three worlds and two of the four that lived.
 test in four of five seeds; none did better than mixing alone, which passed
 in three of the same five. The candidates that held over 10,000 iterations
 held by their seed's luck as much as by their rule's.
+
+> [!info] Added later (19 October 2026): too even, not too poor
+> The author's worry was a world too even, not one with many poor
+> ([Meta X](79-meta-10-healthy-and-rich.md)). No world here failed on the
+> share of the poor alone, so leaving it out changes nothing. Asking instead
+> that a world be no more even than B2 (a [Gini coefficient](../notes/gini-coefficient.md) of its agents' tokens of at
+> least 0.47, the least of B2's ten worlds at 10,000) changes one rule.
+> Fast brain change passes in none of five:
+> - its two worlds that passed are more even than any of B2's (0.38 and
+>   0.34);
+> - four of its five are, at 8 to 22 tokens per agent.
+>
+> Its "not poor" was evenness. Plain mixing still passes in three, no random
+> inputs and no revolutions in one each (Gini 0.52 to 0.55), so the verdict
+> stands. The author also counts a configuration that shows open-ended
+> evolution in a few seeds as enough, which is a claim about what a
+> configuration can do. This test asked how often a rule's worlds stay
+> healthy, which is not that, and its answer stays as it was.
 
 ## What it teaches
 

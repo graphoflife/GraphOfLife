@@ -320,6 +320,22 @@ an agent that never breeds spreads its brain through other agents' children
 all the same, and with `parents` it cannot. A parent without such a neighbour
 gives its newborn a copy of its own brain. Baseline `any`.
 
+### self_message
+
+What an agent writes to itself, which every neighbour reads as one of the
+four messages in its column. `own`: what the agent's own column says, the
+old rule. `largest`: the largest, number by number, of what it writes to all
+its candidates, itself included. A brain scores each candidate from that
+candidate's column alone, so under `own` no message can carry news of a
+third agent: whether a stranger is next door reaches a teammate only through
+what the agent does
+([Chapter 94](../chapters/94-what-a-brain-can-compute.md)). Under `largest` a
+mark one column makes ("this neighbour is a stranger") reaches every
+neighbour a phase later, and over a few phases a team can hold a field such
+as each member's nearness to its frontier. It adds no weights and no inputs,
+but an agent's message to itself is then at least what it tells any
+neighbour. Baseline `own`.
+
 ## Links to strangers
 
 Every link an agent makes otherwise is to its own neighbourhood: a newborn's,

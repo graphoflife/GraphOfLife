@@ -162,6 +162,10 @@ def lab_rows(chapters, done) -> Tuple[Dict[str, Any], Dict[str, Any]]:
     for path in sorted(glob.glob(os.path.join(BOOK, "experiments", "E*.json")), key=lambda p: int(re.sub(r"\D", "", os.path.basename(p)))):
         plan = _json(path)
         name = plan["id"]
+        if "trials" in plan:
+            rows.append(_trial_row(plan, chapters, by_experiment))
+            measures.append([name] + ["" for _ in MEASURES])
+            continue
         spec, borrowed = plan.get("runs"), None
         while isinstance(spec, str):
             borrowed = spec.replace("same as ", "")
@@ -187,6 +191,22 @@ def lab_rows(chapters, done) -> Tuple[Dict[str, Any], Dict[str, Any]]:
             "runs on disk", "chapter"]
     return ({"head": head, "rows": rows},
             {"rows": measures})
+
+
+def _trial_row(plan, chapters, by_experiment) -> List[str]:
+    """A plan of trials (gol_trial.py): its sets, its worlds, how many trials have a result."""
+    import gol_plan
+    name, trials = plan["id"], plan["trials"]
+    found = gol_plan.trials_of(name)
+    played = sum(os.path.exists(os.path.join(RUNS, gol_plan.trial_id_for(f["trial"]), "result.json"))
+                 for f in found)
+    sets = gol_plan.trial_sets(name)
+    worlds = sorted({w for fields in sets.values() for w in fields.get("run", [])})
+    return [name, plan["title"], "trials",
+            f"{len(found):,} {trials['kind']}s from {len(worlds)} worlds: "
+            + "; ".join(f"*{label}*" for label in sets), "—", "as their worlds",
+            f"{trials['T']:,} each", f"{played} played",
+            _cell_chapters([by_experiment[name]] if name in by_experiment else [], chapters)]
 
 
 # ---------------------------------------------------------------------------

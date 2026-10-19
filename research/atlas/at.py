@@ -5,7 +5,8 @@ same moment in every world, so that worlds played for different lengths compare.
 Pilot worlds of the named batches are read at their checkpoint `ckpt_<AT>.npz`, lab
 runs of the named families at their archive `archive/world_<AT>.npz`. Each world gets
 the seven marks of the health bar, the share of its agents holding three tokens or
-fewer, and a diversity score: the mean of its four spreads' percentiles among the
+fewer, how evenly it shares its tokens (the Gini and the richest tenth's share,
+profile.evenness), and a diversity score: the mean of its four spreads' percentiles among the
 frozen reference worlds (book/results/diversity_reference.json, research/atlas/
 profile.py --freeze), so that the scores read as Meta X's do and stay put as worlds
 are added.

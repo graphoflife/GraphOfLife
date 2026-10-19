@@ -122,9 +122,57 @@ def seeds_text(seeds: str) -> tuple:
     return ", ".join(listed), len(listed)
 
 
+def trials(md: str, name: str, plan: Dict[str, Any]) -> str:
+    """The trials behind a chapter: how many, of what kind, and what each set varies."""
+    import gol_plan
+    found = gol_plan.trials_of(name)
+    kind, T = plan["trials"]["kind"], plan["trials"]["T"]
+    what = ("contests: the world of one era, its agents given brains drawn by coin from two eras, "
+            "every mutation off, and the later era's share of the agents counted at the end"
+            if kind == "contest" else
+            "invasions: a patch of the world of one era given a strategy written by hand, and "
+            "its agents counted after every iteration")
+    lines = [f"**{number(len(found))} trials**, {what}; each plays {number(T)} iterations, from a "
+             "world another run kept in its archive.\n"]
+    def sizes(values: List[Any]) -> str:
+        """Patches of so many agents, then patches of a share of the world."""
+        agents = [number(int(v)) for v in values if v >= 1]
+        shares = [f"{v:.0%}" for v in values if v < 1]
+        return "; ".join(([", ".join(agents) + " agents"] if agents else [])
+                         + ([", ".join(shares) + " of the world"] if shares else []))
+
+    def span(values: List[Any]) -> str:
+        """Numbers as a run when they are evenly spaced and many, else listed."""
+        steps = {b - a for a, b in zip(values, values[1:])} if all(isinstance(v, int) for v in values) else set()
+        if len(values) > 4 and len(steps) == 1:
+            return f"{number(values[0])} to {number(values[-1])}, every {number(steps.pop())}"
+        return ", ".join(show(v) for v in values)
+
+    words = [("run", "worlds"), ("eras", "eras"), ("era", "at iteration"), ("strategy", "strategies"),
+             ("size", "patches of"), ("place", "places"), ("background", "in a world of"),
+             ("settle", "settled for"), ("seed", "coins")]
+    for label, fields in gol_plan.trial_sets(name).items():
+        count = sum(1 for f in found if f["set"] == label)
+        if "a" in fields:
+            fields["eras"] = sorted(set(fields.pop("a")) | set(fields.pop("b")))
+            fields.pop("home", None)                   # every pair is played on both its eras' worlds
+        said = "; ".join(f"{word} " + (", ".join(f"`{v}`" for v in fields[key]) if key == "run"
+                                       else sizes(fields[key]) if key == "size"
+                                       else span(fields[key]))
+                         for key, word in words if key in fields)
+        lines.append(f"- **{label}** — {number(count)} trials: {said}.")
+    lines.append("")
+    lines.append(f"To play these trials again: `python3 gol_lab.py run {name}`, or ▶ in the Book tab "
+                 "of a computer running `gol_server.py`. Each writes its settings and engine beside "
+                 "its result, in `GraphOfLifeRuns/<trial>/meta.json` and `result.json`.")
+    return quote("\n".join(lines), "[!info] The trials behind this chapter")
+
+
 def runs(md: str, name: str) -> str:
     import gol_plan                                    # only here: it reads the runs folder
     plan, borrowed = resolve(name)
+    if "trials" in plan:
+        return trials(md, borrowed or name, plan)
     spec = plan["runs"]
     base = read_json(f"experiments/{spec['baseline']}.json")
     glossary = read_json("settings.json")

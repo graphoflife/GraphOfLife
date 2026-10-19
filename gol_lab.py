@@ -71,7 +71,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 #: What a run is made and advanced by, copied whole into each snapshot.
 ENGINE_FILES = ("GraphOfLifeSimple.py", "gol_config.py", "gol_series.py", "gol_spectral.py",
                 "gol_lightning.py", "gol_store.py", "gol_run.py", "gol_record.py",
-                "gol_worker.py")
+                "gol_worker.py", "gol_strategies.py", "gol_tournament.py", "gol_trial.py")
 
 DEFAULT_WORKERS = 4
 CHECKPOINT_SECONDS = 600          # about how often a run saves itself
@@ -384,7 +384,7 @@ def jobs(queue: Iterable[str], engine: Optional[str]) -> List[Job]:
             found.append(state["job"])
 
     def seconds(job: Job) -> float:
-        return predict(job.spec.config, job.until - job.progress, known)["seconds"]
+        return predict(job.spec.config, job.until - job.progress, known, frames=not job.spec.trial)["seconds"]
 
     ordered = sorted(found, key=lambda j: -seconds(j))
     for name, cap in _caps(queue).items():
@@ -547,7 +547,7 @@ def decide(waiting: List[Job], running: List[Tuple[Job, Dict[str, Any]]], worker
             break
         if _at_cap(job, busy, caps):
             continue
-        cost = predict(job.spec.config, job.until - job.progress, known)
+        cost = predict(job.spec.config, job.until - job.progress, known, frames=not job.spec.trial)
         if busy and used + cost["peakMB"] > budget:
             continue
         if cost["diskBytes"] > free - DISK_MARGIN:
@@ -614,9 +614,11 @@ def _start(job: Job) -> subprocess.Popen:
         if not config["checkpoint_every"]:
             config["checkpoint_every"] = _planned_checkpoints(config, costs())
         made = {"name": spec.name, "config": config, "record": spec.record,
-                "lab": {**spec.lab, "engine": job.engine, "commit": _engine_commit(job.engine)}}
+                "lab": {**spec.lab, "engine": job.engine, "commit": _engine_commit(job.engine)},
+                "trial": spec.trial}
     command = gol_worker.command(engine_dir(job.engine), spec.run_id, job.until,
-                                 spec=made, fault_at=job.fault_at)
+                                 spec=made, fault_at=job.fault_at,
+                                 script="gol_trial.py" if spec.trial else "gol_worker.py")
     env = {k: v for k, v in os.environ.items()
            if k not in ("OPENBLAS_NUM_THREADS", "OMP_NUM_THREADS", "MKL_NUM_THREADS")}
     env.update(GOL_RUNS_DIR=store.BASE_DIR, **_thread_settings(spec.threads))
@@ -703,12 +705,13 @@ def experiment_status(name: str, control: Dict[str, Any], known: Dict[str, Any],
         remaining = 0 if state["state"] in ("done", "blocked") else spec.until - iteration
         if remaining:
             pending.append((remaining, guess, rate))
-        whole.append(predict(spec.config, spec.until, known))
+        whole.append(predict(spec.config, spec.until, known, frames=not spec.trial))
         runs.append({"id": spec.run_id, "name": spec.name, "condition": spec.condition,
                      "seed": spec.lab["seed"], "iteration": iteration, "until": spec.until,
                      "state": state["state"], "reason": state.get("reason"),
                      "diedAt": state["iteration"] if state.get("status") == "extinct" else None,
-                     "secondsPerIteration": rate, "sharedWith": shared.get(spec.run_id, [])})
+                     "secondsPerIteration": rate, "sharedWith": shared.get(spec.run_id, []),
+                     "trial": bool(spec.trial)})
 
     # A run that is going is timed by its own pace. One that has not started is timed by
     # the cost model, corrected by how much faster or slower than the model this
@@ -817,8 +820,8 @@ def main() -> int:
         return 0
     if args.command == "verify":
         engine = snapshot()
-        specs = [s for s in experiment_runs(args.experiment)
-                 if os.path.exists(os.path.join(store.run_dir(s.run_id), "meta.json"))]
+        specs = [s for s in experiment_runs(args.experiment) if not s.trial
+                 and os.path.exists(os.path.join(store.run_dir(s.run_id), "meta.json"))]
         for spec in specs[:args.runs]:
             made_by = store.load_meta(spec.run_id)["lab"]["engine"]
             same = reproduce(spec.run_id, made_by, args.iterations)

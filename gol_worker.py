@@ -114,13 +114,14 @@ def read_provenance(run_id: str) -> Dict[str, Any]:
 
 
 def command(worker_dir: str, run_id: str, until: int, spec: Optional[Dict[str, Any]] = None,
-            fault_at: Optional[int] = None) -> List[str]:
+            fault_at: Optional[int] = None, script: str = "gol_worker.py") -> List[str]:
     """
     The command that starts the worker of the snapshot in `worker_dir` on one
     run: the command line at the top of this file, which every snapshot ever
-    taken answers to, written down once for everyone who starts a worker.
+    taken answers to, written down once for everyone who starts a worker. A
+    trial's worker, gol_trial.py, answers to the same line.
     """
-    argv = [sys.executable, "-B", os.path.join(worker_dir, "gol_worker.py"),
+    argv = [sys.executable, "-B", os.path.join(worker_dir, script),
             run_id, "--until", str(until)]
     if spec is not None:
         argv += ["--spec", json.dumps(spec)]

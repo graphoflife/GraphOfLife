@@ -39,6 +39,7 @@
     "buy_life": false,
     "min_child": 10,
     "mix_at_birth": false,
+    "self_message": "own",
     "mix_mates": "any",
     "link_search": "off",
     "link_steering": "random",

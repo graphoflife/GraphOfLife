@@ -609,6 +609,42 @@
       ]
     },
     {
+      "title": "Part IX · A ladder of strategies",
+      "chapters": [
+        {
+          "id": "94",
+          "title": "What a brain can compute",
+          "note": "Chapter 51's raider set by hand into the weights of a B2 brain: 12 of its 16 units play the rule in every decision of 62,114 situations but eight, and planted in the raider's place the brain takes the same worlds. A proof that no B2 brain of any size can pass news of a third agent in a message, so the factory's pipeline is out of reach, and the smallest change that would open it: a message to itself that pools what it says to everyone.",
+          "file": "chapters/94-what-a-brain-can-compute.md",
+          "status": "analysed"
+        },
+        {
+          "id": "95",
+          "title": "Every era against three",
+          "note": "Experiment 28: every 2,500th era of Experiment 18's two longest worlds against the brains of 2,500, 10,000 and 25,000, in lifetime contests on both worlds, to tell a plateau, a slow climb and a circle apart.",
+          "file": "chapters/95-every-era-against-three.md",
+          "experiment": "E28",
+          "status": "ready"
+        },
+        {
+          "id": "96",
+          "title": "How large a crowd a raider needs",
+          "note": "Experiment 29: patches of 1 to 100 raiders and of 5% of a world, ten places each in the two evolved worlds where raiders took hold, and 5% in five places in all ten, each with a control: how large a crowd the raid needs, and whether the world or the place decides.",
+          "file": "chapters/96-how-large-a-crowd-a-raider-needs.md",
+          "experiment": "E29",
+          "status": "ready"
+        },
+        {
+          "id": "97",
+          "title": "Does evolution close the door?",
+          "note": "Experiment 30: raiders planted in B2's five worlds played on to 10,000 iterations, at 500, 2,000, 5,000 and 10,000: does a longer-evolved world resist a raid it has never met?",
+          "file": "chapters/97-does-evolution-close-the-door.md",
+          "experiment": "E30",
+          "status": "ready"
+        }
+      ]
+    },
+    {
       "title": "Notes · the rules",
       "chapters": [
         {
@@ -880,6 +916,11 @@
           "id": "n-map-equation",
           "title": "Flow modules and the map equation",
           "file": "notes/map-equation.md"
+        },
+        {
+          "id": "n-open-ended-test",
+          "title": "What would count as open-ended evolution",
+          "file": "notes/open-ended-test.md"
         }
       ]
     },

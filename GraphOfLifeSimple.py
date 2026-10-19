@@ -1433,6 +1433,12 @@ class GraphOfLife:
         rows = self.kind.speak(Y[start:start + cfg.message_amount, :])
         for j, v in enumerate(targets):
             outbox.setdefault(u, {})[int(v)] = rows[:, j].astype(float).tolist()
+        # Under self_message = largest, what an agent writes to itself is the
+        # largest, number by number, of what it writes to any of its candidates
+        # (its own column is the first of them): news one column marks reaches
+        # every neighbour, which reads what the agent wrote to itself.
+        if cfg.self_message == "largest" and targets:
+            outbox[u][int(u)] = rows.max(axis=1).astype(float).tolist()
 
     def _message_prepass(self, step: str, features) -> None:
         """

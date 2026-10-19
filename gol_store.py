@@ -190,9 +190,13 @@ def list_runs() -> List[Dict[str, Any]]:
         if not os.path.isdir(os.path.join(BASE_DIR, name)):
             continue
         try:
-            runs.append(load_meta(name))
+            meta = load_meta(name)
         except (OSError, ValueError, json.JSONDecodeError):
             continue
+        # A trial (gol_trial.py) is a short play from another run's world, with
+        # no frames to show: the lab's to count, not a run to open.
+        if not meta.get("trial"):
+            runs.append(meta)
     runs.sort(key=lambda m: m.get("created_at", 0), reverse=True)
     return runs
 
@@ -599,3 +603,45 @@ def truncate_archive_after(run_id: str, iteration: int) -> int:
                 os.remove(archive_path(run_id, it))
                 removed += 1
     return removed
+
+
+# ---------------------------------------------------------------------------
+# Kept worlds a trial can start from: a run's archive, or a pilot's checkpoint
+# ---------------------------------------------------------------------------
+#
+# A trial (gol_trial.py) plays from a world another simulation kept. Most are
+# lab runs, named by their id. Some long worlds exist only as pilots of the
+# research prototype played under the engine's own rules — B2's worlds played
+# on to 10,000 iterations, say — and those are named `pilot:<batch>/<world>`,
+# their folder under .pilots, where every checkpoint is a whole world in the
+# same arrays a run's archive holds.
+
+PILOT = "pilot:"
+
+
+def _pilot_dir(source: str) -> str:
+    rest = source[len(PILOT):]
+    parts = rest.split("/")
+    if len(parts) != 2 or not all(RUN_ID_RE.match(p) for p in parts):
+        raise ValueError(f"a pilot is named pilot:<batch>/<world>, not {source!r}")
+    return os.path.join(BASE_DIR, ".pilots", *parts)
+
+
+def source_config(source: str) -> Dict[str, Any]:
+    """The settings a kept world was played under: a run's, or a pilot's of engine rules only."""
+    if not source.startswith(PILOT):
+        return load_meta(source)["config"]
+    with open(os.path.join(_pilot_dir(source), "config.json")) as f:
+        made = json.load(f)
+    rules = {k: v for k, v in (made.get("proto") or {}).items() if k != "engine"}
+    if rules:
+        raise ValueError(f"{source} plays rules only the prototype knows ({', '.join(sorted(rules))})")
+    return made["cfg"]
+
+
+def kept_world(source: str, iteration: int) -> Dict[str, np.ndarray]:
+    """The whole world a run kept at `iteration` in its archive, or a pilot in its checkpoint."""
+    if not source.startswith(PILOT):
+        return load_archive(source, iteration)
+    with np.load(os.path.join(_pilot_dir(source), f"ckpt_{int(iteration):06d}.npz")) as blob:
+        return {key: blob[key] for key in blob.files}
