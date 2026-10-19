@@ -190,9 +190,13 @@ def list_runs() -> List[Dict[str, Any]]:
         if not os.path.isdir(os.path.join(BASE_DIR, name)):
             continue
         try:
-            runs.append(load_meta(name))
+            meta = load_meta(name)
         except (OSError, ValueError, json.JSONDecodeError):
             continue
+        # A trial (gol_trial.py) is a short play from another run's world, with
+        # no frames to show: the lab's to count, not a run to open.
+        if not meta.get("trial"):
+            runs.append(meta)
     runs.sort(key=lambda m: m.get("created_at", 0), reverse=True)
     return runs
 

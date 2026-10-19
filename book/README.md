@@ -148,6 +148,7 @@ everything can be checked with it.
 **Part IX · A ladder of strategies**
 
 - [Chapter 94 · What a brain can compute](chapters/94-what-a-brain-can-compute.md)
+- [Chapter 95 · Every era against three](chapters/95-every-era-against-three.md)
 
 **Notes · the rules**
 

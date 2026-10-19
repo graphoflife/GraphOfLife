@@ -295,5 +295,5 @@ physics, asks for exactly that kind of thing.
 <!-- turns -->
 ---
 
-← [Chapter 91 · Meta XII · Rules in company](91-meta-12-rules-in-company.md) · [Contents](../README.md) · [Appendix A · What a simulation costs](A-costs.md) →
+← [Chapter 91 · Meta XII · Rules in company](91-meta-12-rules-in-company.md) · [Contents](../README.md) · [Chapter 95 · Every era against three](95-every-era-against-three.md) →
 <!-- /turns -->

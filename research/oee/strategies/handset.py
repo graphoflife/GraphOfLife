@@ -1,37 +1,18 @@
 """
-A raider written in a brain's own weights (Chapter 94).
+A raider written in a brain's own weights (Chapter 94): the checks.
 
 manual.py's raider is a rule in Python: it reads the input rows an evolved brain reads and writes the
-output rows it writes. Here the same rule is set by hand into a B2 brain — 66 inputs, one hidden layer
-of 16 sigmoid units, 19 linear outputs, the weights stored in float16 — and checked against the rule
-on situations a raider actually met. If they decide alike, the raider is a brain B2 could grow.
-
-The hidden units (four are left at zero):
-  0      this column is the agent itself                       (the `self` row)
-  1-8    the password: for each of the first four numbers a neighbour wrote, a wall at s - eps and one
-         at s + eps; the lower minus the upper is 1 inside the band and 0 outside, so the four bands
-         add to 4 for a teammate and to about 0 for anyone else. The self row shuts every wall, so the
-         agent's own column never counts as a teammate: what it heard from itself is a phase old, and
-         a node just won or an agent just born has not spoken yet
-  9      the neighbour can be taken: log1p(own tokens) - log1p(its tokens) beyond a margin
-  10     how weak the neighbour is: falling with its tokens
-  11     rich enough for a child: 30 tokens or more
-The outputs:
-  BLOTTO        A * takeable + D * weak - P * password + Q * self, read all-in (BLOTTO_MODE 0, 1): the
-                weakest stranger that can be taken, else home, never a teammate
-  REPRO         (r * rich, 1 - r * rich): a third of the tokens to a child when rich (r a hair above 1/3,
-                so that float16 rounding does not take a token off the child)
-  LINK          yes = self + password / 4 against no = 1/2, decided (LINK_MODE 0, 1): the child joins
-                its parent's teammates
-  REV_FRACTION  (0, 1): no revolution tokens
-  MESSAGE       atanh of the signature, then zeros: the password
+output rows it writes. gol_strategies.raider_weights sets the same rule by hand into a brain of B2's
+shape — 66 inputs, one hidden layer of 16 sigmoid units, 19 linear outputs, the weights in float16 —
+and says unit by unit how. This file checks it against the rule on situations a raider actually met,
+and plants it in the rule's place.
 
     python3 handset.py record B2-10000-s002 --era 2000 --T 40 --seed 1      a short trial: plants
         manual.py's raiders as manual.py does and keeps every situation a raider met
-    python3 handset.py check FILES...                                        decision by decision
+    python3 handset.py check FILES... [--out agreement.json]                 decision by decision
     python3 handset.py save                                                  writes raider_B2.npz here
-    python3 handset.py invade B2-10000-s002 --seeds 1,2 --T 300 [--manual]   manual.py's invasion with
-        the weight-file raider (frozen, as manual.py's strategies are) or, with --manual, the rule
+    python3 handset.py invade B2-10000-s002 --seeds 1,2 --T 300              manual.py's invasion with
+        the weight-file raider and with the rule, on the same seeds
 """
 from __future__ import annotations
 
@@ -50,72 +31,12 @@ import manual as M  # noqa: E402  (research/oee/pilots/manual.py)
 
 OUT = os.path.join(ROOT, "GraphOfLifeRuns", ".pilots", "strategies")
 EPS = 0.02                      # manual.py's password band
-WALL = 10000.0                  # steepness of the password walls: 200 steps inside the band, and no
-                                # remainder outside it that could tip a choice between equal targets
-STEEP = 1500.0                  # steepness of the rich unit: 29 and 30 tokens lie 0.033 apart in log1p
-TAKE = 6000.0                   # steepness of the takeable unit: 3 against 1 lies 0.003 past the margin
-#: the score's weights: takeable, weak, password, self (see the conditions in `raider_brain`)
-A, D, P, Q = 40.0, 1.0, 10.0, 5.0
-SHUT = 30000.0                  # what the self row takes off every password wall
 
 
 def raider_brain(cfg, margin: float = 0.69):
-    """
-    The raider as a B2 brain. `margin` is where "can be taken" falls in log1p space: the rule's own
-    line, 0.7 * mine > 1.5 * theirs, is log(15/7) = 0.762 for large holdings and lower for small ones,
-    and no straight line in log1p space draws it exactly (13 against 6 is taken, 15 against 7 is not,
-    and both differ by log 2). Just below log 2 it matches every pair the recorded raiders met, since
-    they hold one to a few tokens: 3 against 1 is taken, 2 against 1 and 6 against 3 are not.
-
-    The score keeps three orders with the margins chosen: a stranger that can be taken above home even
-    when its messages happen to match three of the password's four numbers (A - 3P > Q + D), home above
-    a stranger that cannot be taken (Q > D), home above any teammate (Q + 4P > A + D).
-    """
-    from GraphOfLifeSimple import BRAIN_KINDS, build_heads
-    lay = cfg.input_layout()
-    heads = build_heads(cfg)
-    brain = BRAIN_KINDS[cfg.brain_kind](cfg, M.MANUAL_ID)
-    n_in, n_hid, n_out = cfg.n_inputs(), cfg.hidden_layers[0], cfg.n_outputs()
-    W1, b1 = np.zeros((n_hid, n_in)), np.zeros((n_hid, 1))
-    W2, b2 = np.zeros((n_out, n_hid)), np.zeros((n_out, 1))
-
-    self_row, own, its = lay["self"][0], lay["own_tokens"][0], lay["its_tokens"][0]
-    heard = lay["message_from_it"][0]
-    W1[0, self_row], b1[0] = 40.0, -20.0
-    for i, s in enumerate(M.SIGNATURE):
-        lo, hi = 1 + 2 * i, 2 + 2 * i
-        W1[lo, heard + i], b1[lo] = WALL, -WALL * (s - EPS)
-        W1[hi, heard + i], b1[hi] = WALL, -WALL * (s + EPS)
-        W1[lo, self_row] = W1[hi, self_row] = -SHUT
-    W1[9, own], W1[9, its], b1[9] = TAKE, -TAKE, -TAKE * margin
-    W1[10, its], b1[10] = -1.0, 3.0
-    W1[11, own], b1[11] = STEEP, -STEEP * 0.5 * (np.log1p(29) + np.log1p(30))
-
-    blotto = heads["BLOTTO"]
-    W2[blotto, 9], W2[blotto, 10], W2[blotto, 0] = A, D, Q
-    for i in range(4):
-        W2[blotto, 1 + 2 * i], W2[blotto, 2 + 2 * i] = -P, P
-    mode = heads["BLOTTO_MODE"]
-    b2[mode.start + 1] = 1.0                            # all-in on the best
-    rf = heads["REPRO_FRACTION"]
-    third = float(np.float16(1 / 3) + np.float16(2 ** -12))   # the float16 just above a third
-    W2[rf.start, 11], W2[rf.start + 1, 11], b2[rf.start + 1] = third, -third, 1.0
-    link, lmode = heads["LINK"], heads["LINK_MODE"]
-    W2[link.start, 0] = 1.0
-    for i in range(4):
-        W2[link.start, 1 + 2 * i], W2[link.start, 2 + 2 * i] = 0.25, -0.25
-    b2[link.start + 1] = 0.5
-    b2[lmode.start + 1] = 1.0                           # decide, do not draw
-    if "REV_FRACTION" in heads:
-        b2[heads["REV_FRACTION"].start + 1] = 1.0
-    start = heads["MESSAGE_START"]
-    b2[start:start + M.SIGN, 0] = M.atanh(M.SIGNATURE)
-
-    brain.weights = [W1.astype(brain.dtype), W2.astype(brain.dtype)]
-    brain.biases = [b1.astype(brain.dtype), b2.astype(brain.dtype)]
-    for w in brain.weights + brain.biases:
-        assert np.all(np.isfinite(w)), "a weight float16 cannot hold"
-    return brain
+    """The raider's weights, as the engine sets them (gol_strategies.raider_weights)."""
+    import gol_strategies
+    return gol_strategies.raider_weights(cfg, margin)
 
 
 # ---------------------------------------------------------------------------
@@ -253,19 +174,14 @@ def invade(task) -> Dict[str, object]:
     """manual.invade with the weight-file raider, frozen (it never mutates), or with the rule itself."""
     run, era, seed, T, share, rule = task
     import gol_store as store
+    import gol_strategies
     from gol_config import SimConfig
     from GraphOfLifeSimple import GraphOfLife
     cfg = SimConfig.from_dict(store.load_meta(run)["config"])
     cfg.extinction_threshold = 0
     world = GraphOfLife.from_checkpoint(store.load_archive(run, era), cfg)
     world.rng = np.random.RandomState(seed)
-    rng = np.random.RandomState(1000 + seed)
-    patch = M.patch_of(world, share, rng)
-    rng.randint(len(patch))                         # manual.invade draws its control's brain here
-    brain = None if rule else raider_brain(cfg)
-    for u in patch:
-        world.brains[u] = (M.ManualBrain(cfg, M.MANUAL_ID, policy=M.raider) if rule
-                           else M.ManualBrain(cfg, M.MANUAL_ID, frozen=brain))
+    patch = gol_strategies.plant(world, "raider" if rule else "raider-weights", share, seed)
     series = []
     for t in range(T + 1):
         if t:

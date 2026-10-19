@@ -137,6 +137,9 @@ def test_every_strain_an_experiment_uses_is_registered():
     """Every algorithm an experiment runs is named in research/strains.md, as the scheme asks."""
     registered = set(gol_plan.registered_strains())
     for name in gol_plan.experiments():
+        if "trials" in gol_plan.read_plan(name):
+            gol_plan.trials_of(name)              # trials replay runs that exist: no new algorithm
+            continue
         for spec in gol_plan.experiment_runs(name):
             strain = SimConfig.from_dict(spec.config).strain_id()
             assert strain in registered, f"{name} runs {strain}, which strains.md does not list"
@@ -145,16 +148,19 @@ def test_every_strain_an_experiment_uses_is_registered():
 def test_the_engine_a_lab_freezes_is_exactly_what_its_worker_imports():
     """
     ENGINE_FILES decides an engine's hash, the check for uncommitted changes
-    and what is copied into a snapshot, so it has to be the worker's whole
-    import closure. A module the list left out is not frozen: a worker started
-    from its snapshot fails to import it — or, with the repository on its path,
-    quietly imports today's copy under a hash that does not cover it. A module
-    the list has and the worker never reaches makes every edit to it look like
-    a new engine.
+    and what is copied into a snapshot, so it has to be the whole import
+    closure of the lab's two workers, the run's and the trial's. A module the
+    list left out is not frozen: a worker started from its snapshot fails to
+    import it — or, with the repository on its path, quietly imports today's
+    copy under a hash that does not cover it. A module the list has and no
+    worker reaches makes every edit to it look like a new engine.
     """
     from closure import closure
-    reached = closure(os.path.join(runner.ROOT, "gol_worker.py"), [runner.ROOT])
-    needed = {os.path.basename(path) for path in reached.values()} | {"gol_worker.py"}
+    workers = ("gol_worker.py", "gol_trial.py")
+    reached = {}
+    for worker in workers:
+        reached.update(closure(os.path.join(runner.ROOT, worker), [runner.ROOT]))
+    needed = {os.path.basename(path) for path in reached.values()} | set(workers)
     listed = set(gol_lab.ENGINE_FILES)
     assert needed == listed, (
         f"the worker imports {sorted(needed - listed)} that ENGINE_FILES leaves out, "
@@ -434,6 +440,95 @@ def test_a_plan_can_grow_but_not_change():
             json.dump({"id": "B9", "settings": {**TINY, "mutation_probability": 0.3}}, f)
         state = gol_lab.run_state(gol_plan.experiment_runs("E91")[0], None)
         assert state["state"] == "blocked" and "other settings" in state["reason"], state
+
+
+# ---------------------------------------------------------------------------
+# Trials
+# ---------------------------------------------------------------------------
+
+ARCHIVED = {"checkpoint_every": 2, "heavy_every": 2, "archive_every": 2}
+
+
+def trials_plan(name, kind, sets, T=3):
+    return {"id": name, "title": name, "thesis": {}, "trials": {"kind": kind, "T": T, "sets": sets}}
+
+
+CONTESTS = [{"name": "both worlds", "grid": {"run": "B9-400-s001", "pair": [[2, 4]], "home": ["a", "b"],
+                                             "seed": [17]}}]
+CONTROLS = [{"name": "control", "grid": {"run": "B9-400-s001", "era": 4, "strategy": "resident",
+                                          "size": 0.2, "place": "1..2"}}]
+
+
+def test_a_trial_is_named_for_what_it_is_and_checked_when_its_plan_is_read():
+    """
+    A plan of trials lists them one by one or as a grid of every combination.
+    Each is named for everything it says, so two plans that ask for the same
+    trial share it; one that names no strategy there is, plays a contest on
+    neither of its eras' worlds, or starts from a world not on this machine is
+    refused when the plan is read, not when the trial would run.
+    """
+    with lab(plan("E91", seeds="1", iterations=4, record=ARCHIVED)) as tmp:
+        assert work(gol_plan.experiment_runs("E91")[0], 4) == 0
+
+        def write(p):
+            with open(os.path.join(tmp, "plans", f"{p['id']}.json"), "w") as f:
+                json.dump(p, f)
+
+        write(trials_plan("E92", "contest", CONTESTS))
+        write(trials_plan("E93", "contest", [{"name": "one", "items": [
+            {"run": "B9-400-s001", "home": 4, "a": 2, "b": 4, "seed": 17}]}]))
+        specs = gol_plan.experiment_runs("E92")
+        assert [s.trial["home"] for s in specs] == [2, 4], [s.trial for s in specs]
+        assert all(s.run_id.startswith("trial-") and s.until == 3 for s in specs)
+        assert specs == gol_plan.experiment_runs("E92")            # the same names every time
+        merged = gol_plan.wanted(["E92", "E93"])
+        assert len(merged) == 2 and merged[specs[1].run_id].experiments == ["E92", "E93"]
+
+        for sets, words in (
+                ([{"name": "x", "items": [{"run": "B9-400-s001", "era": 4, "strategy": "dragon",
+                                           "size": 1, "place": 1}]}], ("no strategy called",)),
+                ([{"name": "x", "items": [{"run": "B9-400-s001", "home": 3, "a": 2, "b": 4,
+                                           "seed": 1}]}], ("one of its two eras",)),
+                ([{"name": "x", "items": [{"run": "B9-400-s009", "home": 2, "a": 2, "b": 4,
+                                           "seed": 1}]}], ("no run B9-400-s009",))):
+            kind = "invasion" if "strategy" in sets[0]["items"][0] else "contest"
+            write(trials_plan("E94", kind, sets))
+            refused(lambda: gol_plan.experiment_runs("E94"), *words)
+
+
+def test_the_lab_plays_trials_as_it_advances_runs():
+    """
+    Queued and left alone, every trial of a plan is played on the frozen
+    engine and leaves its result beside its settings; the experiment counts as
+    finished when every trial has one. Trials keep no frames and are no runs
+    to open, so the list of runs leaves them out.
+    """
+    with lab(plan("E91", seeds="1", iterations=4, record=ARCHIVED)) as tmp:
+        assert work(gol_plan.experiment_runs("E91")[0], 4) == 0
+        for p in (trials_plan("E92", "contest", CONTESTS), trials_plan("E93", "invasion", CONTROLS)):
+            with open(os.path.join(tmp, "plans", f"{p['id']}.json"), "w") as f:
+                json.dump(p, f)
+        gol_lab.request(run="E92", workers=2)
+        gol_lab.request(run="E93")
+        with contextlib.redirect_stdout(io.StringIO()):
+            assert gol_lab.run_lab() == 0
+
+        status = gol_lab.status()["experiments"]
+        for name in ("E92", "E93"):
+            assert status[name]["state"] == "finished", status[name]
+            assert all(r["trial"] for r in status[name]["runs"])
+        for spec in gol_plan.experiment_runs("E92"):
+            with open(os.path.join(gol_store.run_dir(spec.run_id), "result.json")) as f:
+                result = json.load(f)
+            assert result["trial"] == spec.trial and result["engine"]["hash"]
+            share = result["result"]["share"]
+            assert share is None or 0.0 <= share <= 1.0, result
+        for spec in gol_plan.experiment_runs("E93"):
+            with open(os.path.join(gol_store.run_dir(spec.run_id), "result.json")) as f:
+                series = json.load(f)["result"]["series"]
+            assert series[0]["t"] == 0 and series[0]["mine"] > 0, series
+        listed = {m["id"] for m in gol_store.list_runs()}
+        assert listed == {"B9-400-s001"}, listed
 
 
 # ---------------------------------------------------------------------------

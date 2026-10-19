@@ -1,0 +1,313 @@
+{
+ "id": "E28",
+ "title": "Every era against three",
+ "thesis": {
+  "claim": "Evolution in Experiment 18's two longest worlds had stopped climbing by iteration 25,000. Against the brains of 25,000, the brains of the ten eras after it (27,500 to 50,000) do no better than a contest's own noise: their median score lies within the band an era scores against itself. Against the brains of 2,500, every era from 5,000 on still wins, beyond that band.",
+  "why": "The two worlds' own contests (Chapter 81), 100 iterations each on both eras' worlds with two coins: in seed 5 the brains of 25,000 scored a median of 0.56 against those of 10,000, and those of 50,000 scored 0.54 against those of 25,000; in seed 6, 0.72 and then 0.42. Later brains beat earlier ones by less and less in every long world the book has played (Chapter 92; Experiment 19, 0.78 falling to 0.55). If the game these brains play still had room within their reach, the eras after 25,000 would pull ahead of 25,000 as the eras before it pulled ahead of 2,500.",
+  "confirm": "In both worlds the median score of the eras 27,500 to 50,000 against 25,000 (each era's score the mean of its two contests) lies within the noise band, 0.5 plus or minus twice the standard deviation of the world's twelve contests of an era against itself (2,500, 10,000 and 25,000, four coins each); and every era from 5,000 to 50,000 scores above that band against 2,500.",
+  "refute": "In either world the median score of the eras 27,500 to 50,000 against 25,000 lies above the band (evolution was still climbing) or below it (it went back), or some era from 5,000 on fails to score above the band against 2,500."
+ },
+ "trials": {
+  "kind": "contest",
+  "T": 100,
+  "sets": [
+   {
+    "name": "against 2,500",
+    "grid": {
+     "run": [
+      "B2-10000-4af4a3-s005",
+      "B2-10000-4af4a3-s006"
+     ],
+     "pair": [
+      [
+       2500,
+       5000
+      ],
+      [
+       2500,
+       7500
+      ],
+      [
+       2500,
+       10000
+      ],
+      [
+       2500,
+       12500
+      ],
+      [
+       2500,
+       15000
+      ],
+      [
+       2500,
+       17500
+      ],
+      [
+       2500,
+       20000
+      ],
+      [
+       2500,
+       22500
+      ],
+      [
+       2500,
+       25000
+      ],
+      [
+       2500,
+       27500
+      ],
+      [
+       2500,
+       30000
+      ],
+      [
+       2500,
+       32500
+      ],
+      [
+       2500,
+       35000
+      ],
+      [
+       2500,
+       37500
+      ],
+      [
+       2500,
+       40000
+      ],
+      [
+       2500,
+       42500
+      ],
+      [
+       2500,
+       45000
+      ],
+      [
+       2500,
+       47500
+      ],
+      [
+       2500,
+       50000
+      ]
+     ],
+     "home": [
+      "a",
+      "b"
+     ],
+     "seed": [
+      17
+     ]
+    }
+   },
+   {
+    "name": "against 10,000",
+    "grid": {
+     "run": [
+      "B2-10000-4af4a3-s005",
+      "B2-10000-4af4a3-s006"
+     ],
+     "pair": [
+      [
+       5000,
+       10000
+      ],
+      [
+       7500,
+       10000
+      ],
+      [
+       10000,
+       12500
+      ],
+      [
+       10000,
+       15000
+      ],
+      [
+       10000,
+       17500
+      ],
+      [
+       10000,
+       20000
+      ],
+      [
+       10000,
+       22500
+      ],
+      [
+       10000,
+       25000
+      ],
+      [
+       10000,
+       27500
+      ],
+      [
+       10000,
+       30000
+      ],
+      [
+       10000,
+       32500
+      ],
+      [
+       10000,
+       35000
+      ],
+      [
+       10000,
+       37500
+      ],
+      [
+       10000,
+       40000
+      ],
+      [
+       10000,
+       42500
+      ],
+      [
+       10000,
+       45000
+      ],
+      [
+       10000,
+       47500
+      ],
+      [
+       10000,
+       50000
+      ]
+     ],
+     "home": [
+      "a",
+      "b"
+     ],
+     "seed": [
+      17
+     ]
+    }
+   },
+   {
+    "name": "against 25,000",
+    "grid": {
+     "run": [
+      "B2-10000-4af4a3-s005",
+      "B2-10000-4af4a3-s006"
+     ],
+     "pair": [
+      [
+       5000,
+       25000
+      ],
+      [
+       7500,
+       25000
+      ],
+      [
+       12500,
+       25000
+      ],
+      [
+       15000,
+       25000
+      ],
+      [
+       17500,
+       25000
+      ],
+      [
+       20000,
+       25000
+      ],
+      [
+       22500,
+       25000
+      ],
+      [
+       25000,
+       27500
+      ],
+      [
+       25000,
+       30000
+      ],
+      [
+       25000,
+       32500
+      ],
+      [
+       25000,
+       35000
+      ],
+      [
+       25000,
+       37500
+      ],
+      [
+       25000,
+       40000
+      ],
+      [
+       25000,
+       42500
+      ],
+      [
+       25000,
+       45000
+      ],
+      [
+       25000,
+       47500
+      ],
+      [
+       25000,
+       50000
+      ]
+     ],
+     "home": [
+      "a",
+      "b"
+     ],
+     "seed": [
+      17
+     ]
+    }
+   },
+   {
+    "name": "each against itself",
+    "grid": {
+     "run": [
+      "B2-10000-4af4a3-s005",
+      "B2-10000-4af4a3-s006"
+     ],
+     "pair": [
+      [
+       2500,
+       2500
+      ],
+      [
+       10000,
+       10000
+      ],
+      [
+       25000,
+       25000
+      ]
+     ],
+     "home": [
+      "a"
+     ],
+     "seed": "17..20"
+    }
+   }
+  ]
+ }
+}

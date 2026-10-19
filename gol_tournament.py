@@ -41,7 +41,7 @@ import argparse
 import json
 import os
 from concurrent.futures import ProcessPoolExecutor
-from typing import Any, Dict, List, Optional, Sequence, Tuple
+from typing import Any, Callable, Dict, List, Optional, Sequence, Tuple
 
 import numpy as np
 
@@ -72,8 +72,13 @@ def mixed(state: Dict[str, np.ndarray], A: Dict[str, np.ndarray], B: Dict[str, n
 
 
 def contest(config: Dict[str, Any], state: Dict[str, np.ndarray], A: Dict[str, np.ndarray],
-            B: Dict[str, np.ndarray], T: int, seed: int) -> Dict[str, Any]:
-    """One contest: B's share of the agents (and of the tokens) after T iterations."""
+            B: Dict[str, np.ndarray], T: int, seed: int,
+            on_step: Optional[Callable[[Any, int], bool]] = None) -> Dict[str, Any]:
+    """
+    One contest: B's share of the agents (and of the tokens) after T iterations.
+    `on_step(world, t)` is told after each iteration, and a True from it ends the
+    contest there with no result (None), as the lab's trials are stopped.
+    """
     from gol_config import SimConfig
     from GraphOfLifeSimple import GraphOfLife
 
@@ -96,8 +101,10 @@ def contest(config: Dict[str, Any], state: Dict[str, np.ndarray], A: Dict[str, n
         return child
 
     world._mixed_brain = mixed_brain
-    for _ in range(T):
+    for t in range(1, T + 1):
         world.step(record_decisions=False)
+        if on_step is not None and on_step(world, t):
+            return None
         if world.G.number_of_nodes() == 0:
             break
     ids = list(world.G.nodes())

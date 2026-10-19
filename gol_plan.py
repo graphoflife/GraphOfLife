@@ -136,6 +136,8 @@ class RunSpec:
     threads: Optional[str] = None
     fault_at: Optional[int] = None
     experiments: List[str] = dataclasses.field(default_factory=list)
+    #: A trial's own settings (gol_trial.py) when this is a trial and not a run.
+    trial: Optional[Dict[str, Any]] = None
 
     @property
     def until(self) -> int:
@@ -178,6 +180,8 @@ def experiment_runs(name: str) -> List[RunSpec]:
 
 def _experiment_runs(name: str) -> List[RunSpec]:
     plan = read_plan(name)
+    if "trials" in plan:
+        return _experiment_trials(name)
     runs = plan.get("runs")
     if isinstance(runs, str):
         other = re.fullmatch(r"same as (E\d+)", runs.strip())
@@ -248,6 +252,120 @@ def _experiment_runs(name: str) -> List[RunSpec]:
     return specs
 
 
+# ----------------------------------------------------------------------------
+# Trials
+# ----------------------------------------------------------------------------
+#
+# A plan may ask for trials instead of runs: short plays from a world another
+# run kept (gol_trial.py). Its `trials` name the kind — contest or invasion —
+# and how long each plays, and list them in sets, each a condition of its own,
+# either one by one (`items`) or as every combination of some lists (`grid`).
+# A contest's `pair` in a grid gives its two eras, and its `home` says on whose
+# world it plays, "a" or "b". A trial is named for what it is, like a run, so
+# two plans that ask for the same trial share it.
+
+TRIAL_PLAN = ("kind", "T", "sets", "workers")
+TRIAL_SET = ("name", "items", "grid")
+
+
+def trial_id_for(trial: Dict[str, Any]) -> str:
+    """A trial's name, from everything it says: `trial-` and a short hash."""
+    return "trial-" + hashlib.sha1(json.dumps(trial, sort_keys=True).encode()).hexdigest()[:12]
+
+
+def _grid(name: str, label: str, grid: Dict[str, Any]) -> List[Dict[str, Any]]:
+    """Every combination of a grid's lists; a `pair` is two eras, `home` "a" or "b" one of them."""
+    import itertools
+    keys = sorted(grid)
+    values = [parse_seeds(grid[k]) if k in ("seed", "place") and isinstance(grid[k], str)
+              else grid[k] if isinstance(grid[k], list) else [grid[k]] for k in keys]
+    items = []
+    for combo in itertools.product(*values):
+        item = dict(zip(keys, combo))
+        if "pair" in item:
+            item["a"], item["b"] = (int(e) for e in item.pop("pair"))
+        if item.get("home") in ("a", "b"):
+            item["home"] = item[item["home"]]
+        items.append(item)
+    if not items:
+        raise LabError(f"{name} trials {label!r}: the grid makes no trial")
+    return items
+
+
+def trials_of(name: str) -> List[Dict[str, Any]]:
+    """
+    Every trial a plan asks for, each with its set's name, checked as the trial itself
+    will check it: what the plan says, read without any run, so the book can show it
+    on a machine that has none.
+    """
+    trials = read_plan(name)["trials"]
+    _check_keys(f"{name} trials", trials, TRIAL_PLAN)
+    kind, T = trials.get("kind"), trials.get("T")
+    if not isinstance(T, int) or isinstance(T, bool) or T < 1:
+        raise LabError(f"{name} trials: T is how many iterations each plays, not {T!r}")
+    import gol_strategies
+    found, seen = [], set()
+    for trial_set in trials.get("sets", []):
+        label = trial_set.get("name")
+        _check_keys(f"{name} trials {label!r}", trial_set, TRIAL_SET)
+        items = list(trial_set.get("items", [])) + (_grid(name, label, trial_set["grid"])
+                                                    if "grid" in trial_set else [])
+        for item in items:
+            trial = {"kind": kind, "T": T, **item}
+            try:
+                gol_strategies.check_trial(trial)
+            except ValueError as exc:
+                raise LabError(f"{name} trials {label!r}: {exc}") from None
+            if trial_id_for(trial) not in seen:
+                seen.add(trial_id_for(trial))
+                found.append({"set": label, "trial": trial})
+    if not found:
+        raise LabError(f"{name} trials: no sets, so no trials")
+    return found
+
+
+def _experiment_trials(name: str) -> List[RunSpec]:
+    """Every trial an experiment asks for, as the lab plays it: from a run on this machine."""
+    import gol_store as store
+    specs: List[RunSpec] = []
+    for found in trials_of(name):
+        trial, label = found["trial"], found["set"]
+        try:
+            source = store.load_meta(trial["run"])["config"]
+        except (OSError, ValueError):
+            raise LabError(f"{name} trials {label!r}: there is no run {trial['run']} on this "
+                           f"machine to play from") from None
+        era = trial.get("home", trial.get("era"))
+        what = (f"era {trial['b']:,} against {trial['a']:,} on the world of {era:,}, coin {trial['seed']}"
+                if trial["kind"] == "contest" else
+                f"{trial['strategy']} in a patch of {trial['size']:g} at {era:,}, place {trial['place']}"
+                + (f", in a world of {trial['background']}" if trial.get("background") else ""))
+        specs.append(RunSpec(
+            run_id=trial_id_for(trial),
+            name=f"{trial['kind']} · {trial['run']} · {what}",
+            config={**source, "export_decisions": False, "checkpoint_every": 0, "archive_every": 0},
+            lab={"seed": trial.get("seed", trial.get("place")), "trial": trial["kind"]},
+            record={"heavy_every": 0},
+            targets=[trial["T"]],
+            condition=label,
+            experiments=[name],
+            trial=trial))
+    return specs
+
+
+def trial_sets(name: str) -> Dict[str, Dict[str, List[Any]]]:
+    """Each set of a plan's trials, by name: every value each of its trials' fields takes, in order."""
+    sets: Dict[str, Dict[str, List[Any]]] = {}
+    for found in trials_of(name):
+        fields = sets.setdefault(found["set"], {})
+        for key, value in found["trial"].items():
+            if key not in ("kind", "T") and value not in fields.setdefault(key, []):
+                fields[key].append(value)
+    def order(v: Any) -> Any:
+        return (0, v) if isinstance(v, (int, float)) and not isinstance(v, bool) else (1, str(v))
+    return {label: {k: sorted(v, key=order) for k, v in fields.items()} for label, fields in sets.items()}
+
+
 def _sizes(name: str, label: str, condition: Dict[str, Any], world: Dict[str, Any]) -> List[int]:
     """
     The token supplies a condition runs at: the plan's world, which may list
@@ -264,7 +382,8 @@ def _sizes(name: str, label: str, condition: Dict[str, Any], world: Dict[str, An
 
 def workers_cap(name: str) -> Optional[int]:
     """The most of an experiment's runs its plan lets run at once, if it says."""
-    runs = read_plan(name).get("runs")
+    plan = read_plan(name)
+    runs = plan.get("trials", plan.get("runs"))
     cap = runs.get("workers") if isinstance(runs, dict) else None
     if cap is not None and (not isinstance(cap, int) or isinstance(cap, bool) or cap < 1):
         raise LabError(f"{name}: workers is how many of its runs may run at once, not {cap!r}")

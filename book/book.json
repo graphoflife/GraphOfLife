@@ -617,6 +617,14 @@
           "note": "Chapter 51's raider set by hand into the weights of a B2 brain: 12 of its 16 units play the rule in every decision of 62,114 situations but eight, and planted in the raider's place the brain takes the same worlds. A proof that no B2 brain of any size can pass news of a third agent in a message, so the factory's pipeline is out of reach, and the smallest change that would open it: a message to itself that pools what it says to everyone.",
           "file": "chapters/94-what-a-brain-can-compute.md",
           "status": "analysed"
+        },
+        {
+          "id": "95",
+          "title": "Every era against three",
+          "note": "Experiment 28: every 2,500th era of Experiment 18's two longest worlds against the brains of 2,500, 10,000 and 25,000, in lifetime contests on both worlds, to tell a plateau, a slow climb and a circle apart.",
+          "file": "chapters/95-every-era-against-three.md",
+          "experiment": "E28",
+          "status": "ready"
         }
       ]
     },
