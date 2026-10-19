@@ -378,5 +378,5 @@ To make every figure of this chapter: `python3 book_figures.py takeover`.
 <!-- turns -->
 ---
 
-← [Chapter 90 · Gifts, with every other rule](90-gifts-with-every-other-rule.md) · [Contents](../README.md) · [Chapter 87 · What folds a world](87-what-folds-a-world.md) →
+← [Chapter 99 · A mate that pays its share](99-a-mate-that-pays-its-share.md) · [Contents](../README.md) · [Chapter 87 · What folds a world](87-what-folds-a-world.md) →
 <!-- /turns -->

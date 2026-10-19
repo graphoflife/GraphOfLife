@@ -1,0 +1,33 @@
+{
+ "id": "E22",
+ "title": "A mate that pays its share",
+ "thesis": {
+  "claim": "A mate that pays its share holds a mixed world's size more steadily. In four worlds of B2 with brains mixed at birth, where the mate pays the child as many tokens as the parent gives, as far as it can and never its last, the spread of the logarithm of the number of agents from iteration 500 to 5,000 is smaller than in Experiment 17's world of the same seed, where the mate pays nothing, in at least three of the four, and no world falls to 20 agents. And the lab plays the two pilots of this rule that were stopped on 18 October 2026 as they went, game for game, as far as they got.",
+  "why": "A mixed world's size drifts, because being a mate is free: an agent that never breeds still spreads half its brain through other agents' children, and how eagerly agents breed sets a world's size (Meta XI). A mate that pays ends the free ride, though a child that two pay for is cheaper to each, which pushes the other way. Meta XI proposed it and nothing tested it: its pilots (batch MPay) were stopped at iterations 1,000 and 1,500 when the computer was restarted. Mates among the parents only, the other way to end the free ride, held four pilot worlds steadier than Experiment 17's and kept all ten worlds of Experiment 19 alive.",
+  "confirm": "In at least three of the four seeds the standard deviation of the logarithm of the agents after each game, from 500 to 5,000, is below that of Experiment 17's world of the same seed; no world falls to 20 agents or fewer; and the worlds of seeds 1 and 2 match the pilots' agents and links after every game to 1,000 and 1,500.",
+  "refute": "Two or fewer are steadier than their Experiment 17 world, a world falls to 20 agents or fewer, or a world differs from its pilot."
+ },
+ "runs": {
+  "baseline": "B2",
+  "world": {
+   "total_tokens": 10000
+  },
+  "seeds": "1..4",
+  "iterations": 5000,
+  "record": {
+   "checkpoint_every": 100
+  },
+  "conditions": [
+   {
+    "name": "mixed at birth, the mate pays",
+    "set": {
+     "mix_at_birth": true,
+     "extinction_threshold": 0,
+     "proto": {
+      "mate_pays": true
+     }
+    }
+   }
+  ]
+ }
+}

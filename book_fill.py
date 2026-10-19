@@ -216,6 +216,11 @@ def runs(md: str, name: str) -> str:
                  "the Book tab of a computer running `gol_server.py`. Each run writes its "
                  "settings, seed and engine version beside its frames, in "
                  "`GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.")
+    if any((c.get("set") or {}).get("proto") for c in conditions):
+        lines.append("")
+        lines.append("Runs that ask for the pilots' rules are played by the research prototype, frozen beside "
+                     "the engine (`gol_pilot.py`): they keep no frames, but one row of the world's statistics "
+                     "every iteration (`series.jsonl`) and a whole world at every checkpoint.")
     summary = quote("\n".join(lines), "[!info] The runs behind this chapter")
 
     head = "| setting | " + " | ".join(c["name"] for c in conditions) + " | what it is |"

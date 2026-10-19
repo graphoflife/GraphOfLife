@@ -1,0 +1,80 @@
+{
+ "id": "E24",
+ "title": "The search's best world, in new seeds",
+ "thesis": {
+  "claim": "The random search's best world was a configuration, not a winner's curse. Played from five new seeds, at least three of the five worlds meet every mark of the health bar at iteration 1,000, have a diversity score above that of B2's median world (0.49) and are spaces: a typical agent reaches half the world in at least 1.5 times the steps its random twin needs. And the lab plays the search's own world, seed 2025, as the pilot did: its agents and links after every game match the pilot's to iteration 1,000.",
+  "why": "In the search's second round, the world of Z/r2-25 met every mark at iteration 1,000 with a diversity score of 0.90 and was twice as wide as its random twin: the most promising of 63 worlds whose every setting was drawn at random. It plays with brains that can grow, a lottery for each node, stakes pooled by genotype, an input that tells an agent where its brain came from, no mending, every unused link lapsing, no old age, gifts and a walk to find strangers. The best of 63 draws is also the luckiest, and in Chapter 93 rules whose single world held did not hold in new seeds; only new seeds can tell. The lab now plays the pilots' rules with the prototype itself, frozen beside the engine, so its world of seed 2025 should be the pilot's again. Read by Meta X's clarified test the world is more even than any of B2's (a Gini of 0.44 against 0.49 and more): even a configuration that holds would not yet be the author's picture, and the chapter says how even each new world is.",
+  "confirm": "At least three of the five new worlds (seeds 1 to 5) pass at iteration 1,000 — every mark, a diversity score above 0.49, a typical distance at least 1.5 times the twin's — and the world of seed 2025 matches the pilot's agents and links after every game to iteration 1,000.",
+  "refute": "Two or fewer of the five pass, or the world of seed 2025 differs from the pilot's."
+ },
+ "runs": {
+  "baseline": "B2",
+  "world": {
+   "total_tokens": 10000
+  },
+  "seeds": "1..5",
+  "iterations": 2000,
+  "record": {
+   "checkpoint_every": 100
+  },
+  "conditions": [
+   {
+    "name": "the search's configuration",
+    "set": {
+     "hidden_layers": [
+      32
+     ],
+     "random_input_amount": 0,
+     "message_prepass": true,
+     "allow_gifting": true,
+     "prune_after": "reproduction",
+     "inactive_window": "iteration",
+     "incumbency": 1.0,
+     "birth_links": 0,
+     "mend_on_death": false,
+     "prune_needs": 0,
+     "keep_home": 0.0,
+     "max_age": 0,
+     "link_search": "walk",
+     "mutation_probability": 0.4,
+     "extinction_threshold": 0,
+     "proto": {
+      "came_from": true,
+      "contest": "lottery",
+      "pool": "genotype",
+      "grow": true
+     }
+    }
+   },
+   {
+    "name": "the search's own world",
+    "set": {
+     "hidden_layers": [
+      32
+     ],
+     "random_input_amount": 0,
+     "message_prepass": true,
+     "allow_gifting": true,
+     "prune_after": "reproduction",
+     "inactive_window": "iteration",
+     "incumbency": 1.0,
+     "birth_links": 0,
+     "mend_on_death": false,
+     "prune_needs": 0,
+     "keep_home": 0.0,
+     "max_age": 0,
+     "link_search": "walk",
+     "mutation_probability": 0.4,
+     "extinction_threshold": 0,
+     "proto": {
+      "came_from": true,
+      "contest": "lottery",
+      "pool": "genotype",
+      "grow": true
+     }
+    },
+    "seeds": "2025"
+   }
+  ]
+ }
+}

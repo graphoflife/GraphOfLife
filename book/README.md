@@ -114,6 +114,8 @@ everything can be checked with it.
 - [Chapter 88 · Revolutions, with every other rule](chapters/88-revolutions-with-every-other-rule.md)
 - [Chapter 89 · Handover, with every other rule](chapters/89-handover-with-every-other-rule.md)
 - [Chapter 90 · Gifts, with every other rule](chapters/90-gifts-with-every-other-rule.md)
+- [Chapter 98 · The search's best world, in new seeds](chapters/98-the-searchs-best-world-in-new-seeds.md)
+- [Chapter 99 · A mate that pays its share](chapters/99-a-mate-that-pays-its-share.md)
 
 **Part VI · Towards a physics: space, scale and locality**
 

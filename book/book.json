@@ -460,6 +460,22 @@
           "note": "B2 with gifts together with each of 21 other rules, and B1 with gifts (batch T): gifts move a few thousandths of the tokens a game, mostly to the poorer, and change little whatever else the rules are; they cost mixing some of its riches, and in B1 without revolutions they fill the world with the poor.",
           "file": "chapters/90-gifts-with-every-other-rule.md",
           "status": "analysed"
+        },
+        {
+          "id": "98",
+          "title": "The search's best world, in new seeds",
+          "note": "Experiment 24: the settings of the random search's best world (Z/r2-25: brains that grow, lottery contests, stakes pooled by genotype, an input of where a brain came from, gifts, a walk to strangers) in five new seeds, and its own seed played again in the lab: a configuration, or a lucky draw?",
+          "file": "chapters/98-the-searchs-best-world-in-new-seeds.md",
+          "experiment": "E24",
+          "status": "ready"
+        },
+        {
+          "id": "99",
+          "title": "A mate that pays its share",
+          "note": "Experiment 22: brains mixed at birth with a mate that pays the child as much as the parent, in four worlds to 5,000 iterations, against Experiment 17's free mates: does the world's size hold steadier? The pilots stopped on 18 October, played again in the lab.",
+          "file": "chapters/99-a-mate-that-pays-its-share.md",
+          "experiment": "E22",
+          "status": "ready"
         }
       ]
     },
