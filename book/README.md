@@ -149,6 +149,8 @@ everything can be checked with it.
 
 - [Chapter 94 · What a brain can compute](chapters/94-what-a-brain-can-compute.md)
 - [Chapter 95 · Every era against three](chapters/95-every-era-against-three.md)
+- [Chapter 96 · How large a crowd a raider needs](chapters/96-how-large-a-crowd-a-raider-needs.md)
+- [Chapter 97 · Does evolution close the door?](chapters/97-does-evolution-close-the-door.md)
 
 **Notes · the rules**
 

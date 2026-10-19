@@ -331,10 +331,11 @@ def _experiment_trials(name: str) -> List[RunSpec]:
     for found in trials_of(name):
         trial, label = found["trial"], found["set"]
         try:
-            source = store.load_meta(trial["run"])["config"]
-        except (OSError, ValueError):
-            raise LabError(f"{name} trials {label!r}: there is no run {trial['run']} on this "
-                           f"machine to play from") from None
+            source = store.source_config(trial["run"])
+        except (OSError, ValueError) as exc:
+            reason = str(exc) if isinstance(exc, ValueError) and "prototype" in str(exc) else \
+                f"there is no run {trial['run']} on this machine to play from"
+            raise LabError(f"{name} trials {label!r}: {reason}") from None
         era = trial.get("home", trial.get("era"))
         what = (f"era {trial['b']:,} against {trial['a']:,} on the world of {era:,}, coin {trial['seed']}"
                 if trial["kind"] == "contest" else

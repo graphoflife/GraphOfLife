@@ -132,6 +132,13 @@ def trials(md: str, name: str, plan: Dict[str, Any]) -> str:
             "its agents counted after every iteration")
     lines = [f"**{number(len(found))} trials**, {what}; each plays {number(T)} iterations, from a "
              "world another run kept in its archive.\n"]
+    def sizes(values: List[Any]) -> str:
+        """Patches of so many agents, then patches of a share of the world."""
+        agents = [number(int(v)) for v in values if v >= 1]
+        shares = [f"{v:.0%}" for v in values if v < 1]
+        return "; ".join(([", ".join(agents) + " agents"] if agents else [])
+                         + ([", ".join(shares) + " of the world"] if shares else []))
+
     def span(values: List[Any]) -> str:
         """Numbers as a run when they are evenly spaced and many, else listed."""
         steps = {b - a for a, b in zip(values, values[1:])} if all(isinstance(v, int) for v in values) else set()
@@ -148,6 +155,7 @@ def trials(md: str, name: str, plan: Dict[str, Any]) -> str:
             fields["eras"] = sorted(set(fields.pop("a")) | set(fields.pop("b")))
             fields.pop("home", None)                   # every pair is played on both its eras' worlds
         said = "; ".join(f"{word} " + (", ".join(f"`{v}`" for v in fields[key]) if key == "run"
+                                       else sizes(fields[key]) if key == "size"
                                        else span(fields[key]))
                          for key, word in words if key in fields)
         lines.append(f"- **{label}** — {number(count)} trials: {said}.")

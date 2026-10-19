@@ -1,0 +1,94 @@
+{
+ "id": "E29",
+ "title": "How large a crowd a raider needs",
+ "thesis": {
+  "claim": "A raider needs a crowd. In worlds 2 and 3 of Experiment 16 at iteration 2,000, the share of plantings in which a patch of raiders takes hold rises with the patch: none of the 20 single raiders takes hold, and at least half of the 20 patches of 5% do. A planting takes hold when, after 300 iterations, its raiders are alive, more than the patch began with, and more than the control holds there: the same patch given frozen copies of one resident's brain.",
+  "why": "In Chapter 51 a patch of 5% of raiders took 40% and 50% of world 2 and 62% of world 3, while a single raider died out in all 20 plantings in world 2, with peaks of up to 28 agents. Its play pays only with three things at once: the raid, the password and enough teammates (the green beard). Chapter 94's replay of the same patches lost one of four in worlds 2 and 3 to chance. Twenty plantings of each size, ten places in each world, bound how often a size could take hold and be missed: none in 20 still allows up to 14% at 95% confidence.",
+  "confirm": "No single raider of 20 takes hold, at least 10 of the 20 patches of 5% do, and no smaller patch takes hold in three or more plantings in twenty more than a larger one.",
+  "refute": "A single raider takes hold, fewer than 10 of the 20 patches of 5% do, or a smaller patch takes hold in three or more plantings in twenty more than a larger one."
+ },
+ "trials": {
+  "kind": "invasion",
+  "T": 300,
+  "sets": [
+   {
+    "name": "raiders, worlds 2 and 3",
+    "grid": {
+     "run": [
+      "B2-10000-s002",
+      "B2-10000-s003"
+     ],
+     "era": 2000,
+     "strategy": "raider",
+     "size": [
+      1,
+      3,
+      10,
+      30,
+      100,
+      0.05
+     ],
+     "place": "1..10"
+    }
+   },
+   {
+    "name": "controls, worlds 2 and 3",
+    "grid": {
+     "run": [
+      "B2-10000-s002",
+      "B2-10000-s003"
+     ],
+     "era": 2000,
+     "strategy": "resident",
+     "size": [
+      1,
+      3,
+      10,
+      30,
+      100,
+      0.05
+     ],
+     "place": "1..10"
+    }
+   },
+   {
+    "name": "raiders, the other eight worlds",
+    "grid": {
+     "run": [
+      "B2-10000-s001",
+      "B2-10000-s004",
+      "B2-10000-s005",
+      "B2-10000-s006",
+      "B2-10000-s007",
+      "B2-10000-s008",
+      "B2-10000-s009",
+      "B2-10000-s010"
+     ],
+     "era": 2000,
+     "strategy": "raider",
+     "size": 0.05,
+     "place": "1..5"
+    }
+   },
+   {
+    "name": "controls, the other eight worlds",
+    "grid": {
+     "run": [
+      "B2-10000-s001",
+      "B2-10000-s004",
+      "B2-10000-s005",
+      "B2-10000-s006",
+      "B2-10000-s007",
+      "B2-10000-s008",
+      "B2-10000-s009",
+      "B2-10000-s010"
+     ],
+     "era": 2000,
+     "strategy": "resident",
+     "size": 0.05,
+     "place": "1..5"
+    }
+   }
+  ]
+ }
+}

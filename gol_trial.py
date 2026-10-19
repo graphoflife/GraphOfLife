@@ -5,7 +5,9 @@ One trial, run by one process of the lab, on the frozen engine beside it.
 
     python3 -B <snapshot>/gol_trial.py TRIAL_ID --until T [--spec JSON]
 
-A trial is short, and starts from a world another run kept in its archive:
+A trial is short, and starts from a world another simulation kept: a lab run
+in its archive, or a pilot of the engine's own rules in its checkpoint
+(`pilot:<batch>/<world>`, gol_store.kept_world):
 
   contest    the world of one era, its agents given brains drawn by coin from
              two eras, with mutation off (gol_tournament.contest); its result
@@ -48,19 +50,17 @@ EVERY = 10
 
 
 def contest(trial: Dict[str, Any], stop: Callable[[Any, int], bool]) -> Optional[Dict[str, Any]]:
-    config = store.load_meta(trial["run"])["config"]
-    return gol_tournament.contest(config, store.load_archive(trial["run"], trial["home"]),
-                                  store.load_archive(trial["run"], trial["a"]),
-                                  store.load_archive(trial["run"], trial["b"]),
+    source = trial["run"]
+    return gol_tournament.contest(store.source_config(source), store.kept_world(source, trial["home"]),
+                                  store.kept_world(source, trial["a"]), store.kept_world(source, trial["b"]),
                                   int(trial["T"]), int(trial["seed"]), on_step=stop)
 
 
 def invasion(trial: Dict[str, Any], stop: Callable[[Any, int], bool]) -> Optional[Dict[str, Any]]:
     """Chapter 51's invasion test, with the patch's strategy counted after every iteration."""
-    cfg = SimConfig.from_dict(store.load_meta(trial["run"])["config"])
+    cfg = SimConfig.from_dict(store.source_config(trial["run"]))
     cfg.extinction_threshold = 0
-    world = GraphOfLifeSimple.GraphOfLife.from_checkpoint(
-        store.load_archive(trial["run"], int(trial["era"])), cfg)
+    world = GraphOfLifeSimple.GraphOfLife.from_checkpoint(store.kept_world(trial["run"], int(trial["era"])), cfg)
     world.rng = np.random.RandomState(int(trial["place"]))
     background = trial.get("background")
     if background:

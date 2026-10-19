@@ -496,6 +496,34 @@ def test_a_trial_is_named_for_what_it_is_and_checked_when_its_plan_is_read():
             refused(lambda: gol_plan.experiment_runs("E94"), *words)
 
 
+def test_a_trial_can_start_from_a_pilot_of_the_engines_own_rules():
+    """
+    Some long worlds exist only as pilots: a trial names one pilot:<batch>/<world>
+    and starts from its checkpoint, the same arrays a run's archive holds. A pilot
+    that plays rules only the prototype knows is refused, and so is a name that
+    would leave the pilots' folder.
+    """
+    with lab(plan("E91", seeds="1", iterations=4, record=ARCHIVED)):
+        assert work(gol_plan.experiment_runs("E91")[0], 4) == 0
+        folder = os.path.join(gol_store.BASE_DIR, ".pilots", "P", "w1")
+        os.makedirs(folder)
+        shutil.copy(gol_store.archive_path("B9-400-s001", 4), os.path.join(folder, "ckpt_000004.npz"))
+        config = gol_store.load_meta("B9-400-s001")["config"]
+        with open(os.path.join(folder, "config.json"), "w") as f:
+            json.dump({"cfg": config, "proto": {"engine": True}}, f)
+        assert gol_store.source_config("pilot:P/w1") == config
+        kept = gol_store.kept_world("pilot:P/w1", 4)
+        assert (kept["ids"] == gol_store.load_archive("B9-400-s001", 4)["ids"]).all()
+        with open(os.path.join(folder, "config.json"), "w") as f:
+            json.dump({"cfg": config, "proto": {"engine": True, "contest": "lottery"}}, f)
+        for bad in ("pilot:P/w1", "pilot:../w1", "pilot:P"):
+            try:
+                gol_store.source_config(bad)
+            except ValueError:
+                continue
+            raise AssertionError(f"accepted {bad}")
+
+
 def test_the_lab_plays_trials_as_it_advances_runs():
     """
     Queued and left alone, every trial of a plan is played on the frozen

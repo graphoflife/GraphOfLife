@@ -36,6 +36,56 @@ Playing every era against the same few fixed eras tells the three apart:
 This experiment plays every 2,500th era of the two worlds against three
 fixed ones: 2,500, 10,000 and 25,000.
 
+## How much room is left
+
+One thing can be measured before any contest: how far each era's play is
+from an equilibrium. At an equilibrium no agent could do better by playing
+differently while the rest keep their play. So the distance is how much an
+agent *would* gain by its best reply to the others, its **exploitability**
+([Chapter 50](50-why-evolution-stops.md)). A population that evolution
+drives towards a top becomes less exploitable era after era.
+
+<!-- figure eras/room -->
+![What a best reply would gain, era by era](../figures/eras/room.svg)
+
+**What a best reply would gain, era by era.** Each line is a family of long worlds: for a sample of up to 300 agents of each world holding three tokens or more, the nodes it would hold after one game by its best reply to the others' play, less what its own play holds, averaged. A shaded band, where a family has several worlds, runs from its lowest world to its highest; the line is the median. A population at an equilibrium would score 0.
+
+> [!example]- How to make this figure
+> **Runs.** The lab's long worlds: Experiment 18's two worlds played to 50,000 iterations (`B2-10000-4af4a3-s005`, `-s006`, every 2,500), Experiment 19's ten to 20,000 (`B2-10000-bcc1bc-s001` … `-s010`), Experiment 17's to 10,000 (`B2-10000-4af4a3-s001` … `-s010` but the two above) and Experiment 16's B2 worlds to 2,000 (`B2-10000-s001` … `-s010`), at the iterations their archives keep.
+>
+> **Data.** From the worlds the archives keep.
+>
+> 1. Load the world at the iteration and play one game, so its messages are fresh.
+> 2. Draw the random inputs 8 times and turn every brain's outputs into stakes as the engine does: the others' play, as 8 draws.
+> 3. For up to 300 agents with three tokens or more, score its own play and the best of a set of replies (everything home; the cheapest way to keep its node and take the cheapest neighbours; taking without defending) by the nodes it holds after the game, averaged over the 8 draws (`python3 research/oee/checks/exploitability.py RUN:ITERATION … --draws 8 --sample 300`).
+> 4. The gain is the best reply's score less the own play's, averaged over the agents.
+>
+> **To make it again:** `python3 book_figures.py eras`.
+<!-- /figure -->
+
+**No long world closes in on an equilibrium.**
+- **A best reply gains about a node a game.** At every era of every long
+  world, an agent's best reply to the rest would hold about one node more
+  after a game than its own play does: 1.0 to 1.1 in Experiment 19's ten
+  worlds from 5,000 to 20,000 iterations, and about 1 in both of
+  Experiment 18's worlds from 10,000 to 50,000.
+- **The room does not shrink with time.** It is no smaller at 50,000 than
+  at 10,000.
+- **Where it was smaller, the world was.** Experiment 17's worlds fell from
+  1.3 to 0.6 between 1,000 and 10,000 as they shrank, to a median of 620
+  agents. Experiment 18's world of seed 6 read 0.5 at 5,000 and 7,500, when
+  it held 300 to 400 agents. A small world has less to take.
+
+So evolution in these worlds is not approaching a top that would leave
+nothing to gain. Better play lies a single step away from every agent, at
+every era. Whether later brains still find any of it is the contests'
+question.
+
+The best reply here is the best of a few simple replies (everything home,
+or the cheapest way to hold one's node and take the cheapest neighbours).
+It is scored over eight draws of the others' play, so it does not need to
+know which draw comes. The true best reply can only gain more.
+
 ## The thesis
 
 <!-- thesis E28 -->
@@ -80,5 +130,5 @@ plays them when ▶ is pressed: 240 contests of about a minute each.
 <!-- turns -->
 ---
 
-← [Chapter 94 · What a brain can compute](94-what-a-brain-can-compute.md) · [Contents](../README.md) · [Appendix A · What a simulation costs](A-costs.md) →
+← [Chapter 94 · What a brain can compute](94-what-a-brain-can-compute.md) · [Contents](../README.md) · [Chapter 96 · How large a crowd a raider needs](96-how-large-a-crowd-a-raider-needs.md) →
 <!-- /turns -->
