@@ -936,7 +936,14 @@ def stream_seed(cfg: SimConfig) -> Optional[int]:
 
 
 class GraphOfLife:
+    #: Whether this world plays the pilots' rules (SimConfig.proto). This one does not:
+    #: gol_proto's world does, and a run that asks for them is refused here, not run without.
+    PLAYS_PROTO = False
+
     def __init__(self, G_init: nx.Graph | None, cfg: SimConfig, _empty: bool = False) -> None:
+        if cfg.proto and not self.PLAYS_PROTO:
+            raise ValueError(f"this world does not play the pilots' rules ({', '.join(sorted(cfg.proto))}): "
+                             "gol_proto's does")
         self.cfg = cfg
         # Every draw this world makes comes from here and from nowhere else.
         # It used to be numpy's one global stream, which every world in a

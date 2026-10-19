@@ -164,6 +164,13 @@ def run_id_for(base: str, world: Dict[str, Any], changed: Dict[str, Any], seed: 
     return f"{run_id}-{_slug(replicate)}" if replicate else run_id
 
 
+def _spelt(value: Any) -> str:
+    """A setting's value for a run's name: the pilots' rules as `came_from, contest=lottery`."""
+    if isinstance(value, dict):
+        return ", ".join(k if v is True else f"{k}={v}" for k, v in sorted(value.items())) or "none"
+    return str(value)
+
+
 def _check_keys(where: str, given: Iterable[str], allowed: Iterable[str]) -> None:
     unknown = sorted(set(given) - set(allowed))
     if unknown:
@@ -203,7 +210,7 @@ def _experiment_runs(name: str) -> List[RunSpec]:
     for condition in runs["conditions"]:
         label = condition.get("name")
         _check_keys(f"{name} condition {label!r}", condition,
-                    ("name", "set", "sizes", "stops", "fault_at", "threads", "replicate"))
+                    ("name", "set", "seeds", "sizes", "stops", "fault_at", "threads", "replicate"))
         changed = dict(condition.get("set", {}))
         forbidden = sorted(set(changed) & ({"seed"} | set(INFRASTRUCTURE)))
         if forbidden:
@@ -211,14 +218,22 @@ def _experiment_runs(name: str) -> List[RunSpec]:
                            f"condition cannot: the seed belongs to the seeds, and what is "
                            f"recorded to the lab")
         _check_keys(f"{name} condition {label!r} set", changed, SETTABLE - set(WORLD))
+        # A setting at the baseline's own value changes nothing but the run's name: the same
+        # world would answer to two names, and a plan that shares runs would not share them.
+        same = sorted(k for k, v in changed.items() if k in base and v == base[k])
+        if same:
+            raise LabError(f"{name} condition {label!r} sets {', '.join(same)} to the baseline's own "
+                           f"value: leave it out")
         # A run made again on purpose — to be stopped, cut off, run on other
         # threads, or simply kept apart from anyone else's — has a run of its
         # own, named for its condition, rather than sharing one.
         replicate = (label if condition.get("replicate")
                      or any(k in condition for k in ("stops", "fault_at", "threads")) else None)
 
+        # A condition may have seeds of its own: a world found by one seed, played again.
+        seeds = parse_seeds(condition.get("seeds", runs["seeds"]))
         for size, seed in ((size, seed) for size in _sizes(name, label, condition, world)
-                           for seed in parse_seeds(runs["seeds"])):
+                           for seed in seeds):
             here = {**world, "total_tokens": size}
             config = {**base, **here, **changed, "seed": seed, "export_every": 1,
                       "export_decisions": True,
@@ -230,7 +245,7 @@ def _experiment_runs(name: str) -> List[RunSpec]:
                 raise LabError(f"{name} condition {label!r} at {size:,} tokens cannot be run: "
                                f"{exc}") from None
             run_id = run_id_for(base_name, here, changed, seed, replicate)
-            differs = "".join(f" · {k}={v}" for k, v in {**here, **changed}.items()
+            differs = "".join(f" · {k}={_spelt(v)}" for k, v in {**here, **changed}.items()
                               if k != "total_tokens")
             specs.append(RunSpec(
                 run_id=run_id,

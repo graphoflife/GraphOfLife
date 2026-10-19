@@ -363,6 +363,42 @@ ACCEPT head has to say yes as well. With **forced**, the searcher's yes is
 enough. Either way no link is made to or from an agent at its
 [`valence`](#valence).
 
+## The pilots' rules
+
+### proto
+
+Rules the pilot worlds played before the engine had them
+([pilot worlds](pilot-worlds.md)), carried into the engine so that the lab can
+play them where they can be seen. Each is switched on by name; a run that names
+none — every run of the book's experiments until October 2026 — plays none.
+
+- **came_from** — one input row for each candidate: is this the node my brain
+  came from, the node whose holder took mine, or my parent if I was born here?
+- **helped_by** — one input row for each candidate: what its stake on my node
+  did in the last game, the chance I kept my node with every stake minus the
+  chance without its stake.
+- **contest = lottery** — a node goes to a staker drawn in proportion to its
+  stake as the game weighs it (Tullock's contest), instead of to the largest.
+- **pool = genotype** or **family** — the stakes on a node of agents with one
+  brain (or one family tag) count as one side's; the side with most takes the
+  node, and the owner keeps it if its side wins. Adds an input row: is this
+  candidate on my side?
+- **kin_sense** — the same input row without the pooling: is this candidate's
+  brain mine (with a tag_rate, my family)?
+- **tag_rate** — a family tag carried with every brain: a copy keeps its
+  parent's tag, and a brain that mutates takes a new one with this
+  probability, so a family is all the genotypes descended from one tag.
+- **mate_pays** — under [`mix_at_birth`](#mix_at_birth), the mate pays the
+  child as many tokens as the parent gave it, as far as it can and never its
+  last, once every birth of the phase is made.
+- **grow** — a brain of one hidden layer of which only the first units take
+  part; a mutation may switch the next one on or the last one off.
+- **unit_token** — under grow, every unit that takes part holds a token, paid
+  by the node it is in.
+- **link_token** — every link holds a token: its maker pays for it, and a link
+  that lapses gives its token back to one of its ends. Needs
+  [`valence`](#valence) 0: the tokens are the limit.
+
 ## Change
 
 ### mutation_probability

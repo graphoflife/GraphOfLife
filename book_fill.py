@@ -107,6 +107,8 @@ def show(value: Any) -> str:
         return "on" if value else "off"
     if isinstance(value, list):
         return ", ".join(show(v) for v in value)
+    if isinstance(value, dict):                        # the pilots' rules: came_from, contest = lottery
+        return ", ".join(k if v is True else f"{k} = {show(v)}" for k, v in sorted(value.items())) or "none"
     if isinstance(value, int):
         return number(value)
     return str(value)
@@ -133,6 +135,12 @@ def runs(md: str, name: str) -> str:
         return list(c.get("sizes") or (world if isinstance(world, list) else [world]))
 
     seeds, count = seeds_text(spec["seeds"])
+    # A condition may have seeds of its own (gol_plan): a world found by one seed, played again.
+    own = any("seeds" in c for c in conditions)
+
+    def seeds_of(c: Dict[str, Any]) -> tuple:
+        return seeds_text(c.get("seeds", spec["seeds"]))
+
     ids: Dict[str, List[str]] = {}
     for r in gol_plan.experiment_runs(borrowed or name):
         ids.setdefault(r.condition, []).append(r.run_id)
@@ -141,9 +149,10 @@ def runs(md: str, name: str) -> str:
     if borrowed:
         lines.append(f"These are the runs of Experiment {int(borrowed[1:])}; nothing new was run for "
                      "this chapter.\n")
-    worlds = sum(len(sizes(c)) * count for c in conditions)
-    lines.append(f"**{number(worlds)} runs.** Every condition below is run once for every seed "
-                 f"({seeds})" + (" and every number of tokens it lists" if any(len(sizes(c)) > 1 for c in conditions)
+    worlds = sum(len(sizes(c)) * seeds_of(c)[1] for c in conditions)
+    lines.append(f"**{number(worlds)} runs.** Every condition below is run once for "
+                 + ("each of its seeds" if own else f"every seed ({seeds})")
+                 + (" and every number of tokens it lists" if any(len(sizes(c)) > 1 for c in conditions)
                                  else "") + f", for {number(spec['iterations'])} iterations — or "
                  "until its world dies out. Every setting is that of the baseline "
                  f"**{base['id']}** ({base['title'].lower()}) unless the condition changes it.\n")
@@ -153,7 +162,7 @@ def runs(md: str, name: str) -> str:
         named = ids.get(c["name"], [])
         where = f" Runs `{named[0]}` … `{named[-1]}`." if named else ""
         lines.append(f"- **{c['name']}** — changes {changed}; {', '.join(number(s) for s in sizes(c))} "
-                     f"tokens.{where}")
+                     f"tokens" + (f"; seeds {seeds_of(c)[0]}" if own else "") + f".{where}")
     lines.append("")
     lines.append(f"To make these runs again: `python3 gol_lab.py run {borrowed or name}`, or ▶ in "
                  "the Book tab of a computer running `gol_server.py`. Each run writes its "
@@ -179,7 +188,7 @@ def runs(md: str, name: str) -> str:
         meaning = (glossary["settings"].get(key) or {}).get("meaning", "")
         rows.append(f"| [`{key}`]({link(md, 'notes/settings.md')}#{key}) | " + " | ".join(cells)
                     + f" | {meaning} |")
-    rows.append("| seeds | " + " | ".join(seeds for _ in conditions) + " | one run per seed |")
+    rows.append("| seeds | " + " | ".join(seeds_of(c)[0] for c in conditions) + " | one run per seed |")
     rows.append("| iterations | " + " | ".join(number(spec["iterations"]) for _ in conditions)
                 + " | how far each run goes, unless its world dies first |")
     table = "\n".join([head, rule, *rows])

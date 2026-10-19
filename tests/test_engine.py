@@ -3057,6 +3057,49 @@ def test_every_setting_is_classified_as_one_of_the_three_kinds():
     assert not overlap, f"classified twice: {sorted(overlap)}"
 
 
+def test_the_engines_world_refuses_the_pilots_rules():
+    """
+    Only the prototype's world plays SimConfig.proto. The engine's own, asked
+    for one, refuses — a world run without the rule its run names would be
+    another world under that world's name.
+    """
+    cfg = small(proto={"came_from": True})
+    try:
+        GraphOfLife(None, cfg, _empty=True)
+    except ValueError as exc:
+        assert "came_from" in str(exc)
+    else:
+        raise AssertionError("the engine's world ran a rule it does not play")
+
+
+def test_the_pilots_rules_are_checked_and_named():
+    """Only known rules, each at a value it may take, with what it needs; named one by one."""
+    for bad, why in (({"came_from": False}, "default"), ({"mix": True}, "none of"),
+                     ({"tag_rate": 2}, "probability"), ({"mate_pays": True}, "mix_at_birth"),
+                     ({"pool": "family"}, "tag_rate"), ({"unit_token": True}, "grow"),
+                     ({"link_token": True}, "valence"), ({"grow": True}, "one hidden layer")):
+        try:
+            small(proto=bad, valence=8).validate()
+        except ValueError as exc:
+            assert why in str(exc), (bad, str(exc))
+        else:
+            raise AssertionError(f"accepted {bad}")
+    cfg = small(proto={"contest": "lottery", "came_from": True})
+    assert cfg.strain_id().endswith("+proto.came_from+proto.contest=lottery")
+
+
+def test_the_pilots_rules_add_their_rows_after_the_noise():
+    """
+    What a pilot's rule lets an agent see comes after the noise, in the
+    prototype's order, so a pilot's brain reads its rows where the lab's does.
+    """
+    plain = small().input_layout()
+    seeing = small(proto={"helped_by": True, "came_from": True, "kin_sense": True}).input_layout()
+    assert list(seeing)[:len(plain)] == list(plain)
+    assert list(seeing)[len(plain):] == ["same_side", "came_from", "helped_by"]
+    assert small(proto={"helped_by": True}).n_inputs() == small().n_inputs() + 1
+
+
 def test_a_default_world_is_the_baseline_strain():
     assert SimConfig().strain_id() == "gol-1"
     # Parameters are not part of the algorithm's name; otherwise every seed

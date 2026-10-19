@@ -121,6 +121,48 @@ def test_a_condition_may_not_set_seed_or_infrastructure():
         refused(lambda: gol_plan.experiment_runs("E93"), "total_tokens")
 
 
+def test_no_run_of_the_books_plans_changes_its_name():
+    """
+    A run is found again by its name. The ids every plan of the book gave on
+    19 October 2026 (tests/golden_run_ids.json) are what its runs folder holds,
+    so a change to how plans are read — a new setting, a new key — must leave
+    every one of them as it was. New plans are free to add names.
+    """
+    with open(os.path.join(runner.ROOT, "tests", "golden_run_ids.json")) as f:
+        golden = json.load(f)
+    for name, ids in golden.items():
+        assert [s.run_id for s in gol_plan.experiment_runs(name)] == ids, f"{name}'s runs changed their names"
+
+
+def test_a_condition_may_have_seeds_of_its_own():
+    """A world one seed found is played again with that seed, beside conditions on the plan's seeds."""
+    with lab(plan("E91", [{"name": "a"}, {"name": "b", "set": {"keep_home": 0.5}, "seeds": "7"}])):
+        assert sorted((s.condition, s.lab["seed"]) for s in gol_plan.experiment_runs("E91")) == \
+            [("a", 1), ("a", 2), ("b", 7)]
+
+
+def test_a_condition_may_not_set_what_the_baseline_already_has():
+    """A setting at the baseline's own value changes only the run's name: one world, two names."""
+    with lab(plan("E91", [{"name": "a", "set": {"keep_home": TINY["keep_home"]}}]),
+             plan("E92", [{"name": "a", "set": {"proto": {}}}])):
+        refused(lambda: gol_plan.experiment_runs("E91"), "keep_home")
+        refused(lambda: gol_plan.experiment_runs("E92"), "proto")
+
+
+def test_the_pilots_rules_name_runs_and_strains_of_their_own():
+    """
+    A rule of the pilots' prototype makes another world, so it makes another
+    run and another strain, both spelt so a reader sees which rule it is.
+    """
+    with lab(plan("E91", [{"name": "a"}, {"name": "b", "set": {"proto": {"came_from": True}}}], seeds="1")):
+        a, b = sorted(gol_plan.experiment_runs("E91"), key=lambda s: s.condition)
+        assert a.run_id != b.run_id
+        assert "proto=came_from" in b.name
+        assert SimConfig.from_dict(b.config).strain_id().endswith("+proto.came_from")
+    with lab(plan("E92", [{"name": "a", "set": {"proto": {"lottery": True}}}])):
+        refused(lambda: gol_plan.experiment_runs("E92"), "lottery")
+
+
 def test_a_baseline_names_every_mechanic_and_parameter():
     """
     A baseline that left a setting out would inherit whatever the code's

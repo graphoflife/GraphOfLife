@@ -86,6 +86,29 @@ MECHANICS: Dict[str, Any] = {
     "link_search": "off",
     "link_steering": "random",
     "link_consent": "mutual",
+
+    # ---- the pilots' rules ---------------------------------------------------
+    #
+    # Rules first played in the pilots' prototype (research/oee/pilots/proto.py)
+    # and carried into the engine for the lab, one dict of switches rather than
+    # a field each: see PROTO_SWITCHES. Empty, so no strain gains a name.
+    "proto": {},
+}
+
+# The pilots' rules a run may switch on in `proto`, each with the values it may
+# take. A switch at its default is left out rather than spelt, so one world has
+# one name. What each does is told at the field, SimConfig.proto.
+PROTO_SWITCHES: Dict[str, Tuple[Any, ...]] = {
+    "came_from": (True,),
+    "helped_by": (True,),
+    "contest": ("lottery",),
+    "pool": ("genotype", "family"),
+    "kin_sense": (True,),
+    "tag_rate": (float,),
+    "mate_pays": (True,),
+    "grow": (True,),
+    "unit_token": (True,),
+    "link_token": (True,),
 }
 
 # What the new-simulation form arrives filled in with.
@@ -464,6 +487,45 @@ class SimConfig:
     # valence.
     link_consent: str = "mutual"
 
+    # ---- The pilots' rules ----
+    #
+    # Rules the pilot worlds of research/oee/pilots/ played before the engine
+    # had them, switched on by name (PROTO_SWITCHES lists the values). Only the
+    # prototype's world (gol_proto) plays them; the engine's own refuses a run
+    # that asks for one.
+    #
+    #   came_from   one input row per candidate: is this the node my brain
+    #               came from — the node whose holder took mine, or my parent
+    #               if I was born here?
+    #   helped_by   one input row per candidate: what its stake on my node did
+    #               in the last game — the chance I kept my node with every
+    #               stake, minus the chance without its stake.
+    #   contest     "lottery": a node goes to a staker drawn in proportion to
+    #               its stake as the game weighs it (Tullock's contest), not to
+    #               the largest.
+    #   pool        "genotype": the stakes on a node of agents with one brain
+    #               count as one side's, the side with most takes the node, and
+    #               the owner keeps it if its side wins; "family" pools by
+    #               family tag instead. Adds an input row: is this candidate on
+    #               my side?
+    #   kin_sense   the same input row without the pooling: is this
+    #               candidate's brain mine (with tag_rate, my family)?
+    #   tag_rate    a family tag carried with every brain: a copy keeps its
+    #               parent's tag, and a brain that mutates takes a new tag with
+    #               this probability, so a family is all the genotypes
+    #               descended from one tag (a mutation parameter).
+    #   mate_pays   under mix_at_birth, the mate pays the child as many tokens
+    #               as the parent gave it, as far as it can and never its last,
+    #               once every birth of the phase is made.
+    #   grow        a brain of one hidden layer of which only the first units
+    #               take part; a mutation may switch the next one on or the
+    #               last one off.
+    #   unit_token  under grow, every unit that takes part holds a token, paid
+    #               by the node it is in.
+    #   link_token  every link holds a token: its maker pays for it, and a link
+    #               that lapses returns its token to one of its ends.
+    proto: Dict[str, Any] = field(default_factory=dict)
+
     # ---- Mutation ----
     mutation_probability: float = 0.5
     mutation_noise_std: float = 0.2
@@ -556,6 +618,14 @@ class SimConfig:
             ("message_from_it", m, "bit"), ("message_its_own", m, "bit"),
             ("noise", noise, "bit"),
         ]
+        # What the pilots' rules let an agent see more of, after the noise and
+        # in the prototype's order, so that a pilot's brain and the lab's read
+        # the same rows in the same places.
+        if self.proto.get("pool") or self.proto.get("kin_sense"):
+            blocks.append(("same_side", 1, "bit"))
+        for name in ("came_from", "helped_by"):
+            if self.proto.get(name):
+                blocks.append((name, 1, "bit"))
         layout, row = {}, 0
         for name, width, kind in blocks:
             layout[name] = (row, row + width, kind)
@@ -715,6 +785,11 @@ class SimConfig:
             value = getattr(self, name)
             if value == MECHANICS[name]:
                 continue
+            if name == "proto":
+                # Each of the pilots' rules is named as a mechanic of its own would be.
+                named.extend(f"proto.{k}" if v is True else f"proto.{k}={_spell(v)}"
+                             for k, v in sorted(value.items()))
+                continue
             named.append(name if value is True else f"{name}={_spell(value)}")
         return f"gol-{SPEC}" + "".join(f"+{part}" for part in named)
 
@@ -824,3 +899,33 @@ class SimConfig:
             raise ValueError("min_child must be at least 1: a child is born with something")
         if self.valence == 1:
             raise ValueError("valence 1 would let no agent choose a second link; use 0 for no limit")
+        self._validate_proto()
+
+    def _validate_proto(self) -> None:
+        """The pilots' rules: known ones, each at a value it may take, and what each needs."""
+        proto = self.proto
+        if not isinstance(proto, dict):
+            raise ValueError("proto is a table of the pilots' rules, {} for none")
+        unknown = sorted(set(proto) - set(PROTO_SWITCHES))
+        if unknown:
+            raise ValueError(f"proto: {', '.join(unknown)} is none of the pilots' rules "
+                             f"({', '.join(PROTO_SWITCHES)})")
+        for name, value in proto.items():
+            allowed = PROTO_SWITCHES[name]
+            if allowed == (float,):
+                if isinstance(value, bool) or not isinstance(value, (int, float)) or not 0 < value <= 1:
+                    raise ValueError(f"proto.{name} is a probability above 0 and at most 1")
+            elif type(value) is not type(allowed[0]) or value not in allowed:
+                raise ValueError(f"proto.{name} may be {' or '.join(_spell(v) for v in allowed)}; "
+                                 f"a rule at its default is left out")
+        if proto.get("mate_pays") and not self.mix_at_birth:
+            raise ValueError("proto.mate_pays makes a mate pay for its child: it needs mix_at_birth")
+        if proto.get("pool") == "family" and not proto.get("tag_rate"):
+            raise ValueError("proto.pool=family pools stakes by family tag: it needs proto.tag_rate")
+        if proto.get("unit_token") and not proto.get("grow"):
+            raise ValueError("proto.unit_token makes a growing brain's units hold a token: it needs proto.grow")
+        if proto.get("link_token") and self.valence:
+            raise ValueError("proto.link_token lets the tokens limit the links: it needs valence 0")
+        if proto.get("grow") and (self.brain_kind != "float16" or len(self.hidden_layers) != 1):
+            raise ValueError("proto.grow grows one hidden layer of half-precision weights: it needs "
+                             "brain_kind float16 and one hidden layer")

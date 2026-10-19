@@ -175,7 +175,14 @@ const RunsView = {
     if (Array.isArray(value)) return value.join(separator);
     if (typeof value === 'boolean') return value ? 'yes' : 'no';
     if (typeof value === 'number') return formatNumber(value);
+    if (typeof value === 'object') return this.rulesText(value) || 'none';
     return value;
+  },
+
+  /** The pilots' rules a run plays, as gol_plan names them: `came_from, contest=lottery`. */
+  rulesText(rules) {
+    return Object.keys(rules || {}).sort()
+      .map(key => rules[key] === true ? key : `${key}=${rules[key]}`).join(', ');
   },
 
   /**
@@ -300,7 +307,11 @@ const RunsView = {
     for (const input of this.form.querySelectorAll('[data-cfg]')) {
       const value = cfg[input.dataset.cfg];
       if (input.type === 'checkbox') input.checked = Boolean(value);
-      else if (Array.isArray(value)) input.value = value.join(', ');
+      else if (input.dataset.cfg === 'proto') {
+        // Shown in words, carried as it is: a copy of a run keeps the rules it played.
+        input.dataset.rules = JSON.stringify(value || {});
+        input.value = this.rulesText(value);
+      } else if (Array.isArray(value)) input.value = value.join(', ');
       else input.value = (value === null || value === undefined) ? '' : value;
     }
     this.syncDependentFields();
@@ -394,6 +405,8 @@ const RunsView = {
 
       if (input.type === 'checkbox') {
         config[key] = input.checked;
+      } else if (key === 'proto') {
+        config[key] = JSON.parse(input.dataset.rules || '{}');
       } else if (key === 'hidden_layers') {
         config[key] = input.value.split(',')
           .map(s => parseInt(s.trim(), 10))
