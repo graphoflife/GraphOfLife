@@ -609,6 +609,18 @@
       ]
     },
     {
+      "title": "Part IX · A ladder of strategies",
+      "chapters": [
+        {
+          "id": "94",
+          "title": "What a brain can compute",
+          "note": "Chapter 51's raider set by hand into the weights of a B2 brain: 12 of its 16 units play the rule in every decision of 62,114 situations but eight, and planted in the raider's place the brain takes the same worlds. A proof that no B2 brain of any size can pass news of a third agent in a message, so the factory's pipeline is out of reach, and the smallest change that would open it: a message to itself that pools what it says to everyone.",
+          "file": "chapters/94-what-a-brain-can-compute.md",
+          "status": "analysed"
+        }
+      ]
+    },
+    {
       "title": "Notes · the rules",
       "chapters": [
         {
@@ -880,6 +892,11 @@
           "id": "n-map-equation",
           "title": "Flow modules and the map equation",
           "file": "notes/map-equation.md"
+        },
+        {
+          "id": "n-open-ended-test",
+          "title": "What would count as open-ended evolution",
+          "file": "notes/open-ended-test.md"
         }
       ]
     },

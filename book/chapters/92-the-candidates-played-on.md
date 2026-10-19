@@ -161,8 +161,8 @@ lab would stop, filled its world again.
 > [!info] Added later (19 October 2026): too even, not too poor
 > The author's worry was a world whose agents hold their tokens too evenly,
 > not one with many poor; the share at three tokens or fewer only stood in for
-> it ([Meta X](79-meta-10-healthy-and-rich.md)). Read with the Gini
-> coefficient of the agents' tokens instead, the verdict turns round:
+> it ([Meta X](79-meta-10-healthy-and-rich.md)). Read with the
+> [Gini coefficient](../notes/gini-coefficient.md) of the agents' tokens instead, the verdict turns round:
 > - **Four of the five that held are more even than every one of B2's
 >   worlds**, with a Gini of 0.37 to 0.44 against B2's 0.47 to 0.51. They
 >   are fast brain change in both seeds, no random inputs and no

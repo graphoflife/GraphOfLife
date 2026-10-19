@@ -145,6 +145,10 @@ everything can be checked with it.
 - [Chapter 84 · Meta XI · What holds a world's size](chapters/84-meta-11-what-holds-a-worlds-size.md)
 - [Chapter 91 · Meta XII · Rules in company](chapters/91-meta-12-rules-in-company.md)
 
+**Part IX · A ladder of strategies**
+
+- [Chapter 94 · What a brain can compute](chapters/94-what-a-brain-can-compute.md)
+
 **Notes · the rules**
 
 - [Every setting](notes/settings.md)
@@ -203,6 +207,7 @@ everything can be checked with it.
 - [Flows that go round](notes/circulation.md)
 - [Help](notes/help.md)
 - [Flow modules and the map equation](notes/map-equation.md)
+- [What would count as open-ended evolution](notes/open-ended-test.md)
 
 **Notes · statistics**
 

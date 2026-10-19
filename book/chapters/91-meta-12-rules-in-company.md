@@ -143,7 +143,7 @@ waits its turn.
 > The author's worry was a world whose agents hold their tokens too evenly —
 > almost everyone the same few — and the share at three tokens or fewer only
 > stood in for it ([Meta X](79-meta-10-healthy-and-rich.md)). Read with the
-> Gini coefficient of the agents' tokens, the census turns round.
+> [Gini coefficient](../notes/gini-coefficient.md) of the agents' tokens, the census turns round.
 > - **The spaces that "pay with poverty" hold their tokens unevenly.** Their
 >   median Gini is 0.45 with the estate paid to births, 0.58 without old age
 >   and 0.60 with handover. B2's worlds read 0.49 to 0.56, and a random
@@ -197,5 +197,5 @@ waits its turn.
 <!-- turns -->
 ---
 
-← [Chapter 84 · Meta XI · What holds a world's size](84-meta-11-what-holds-a-worlds-size.md) · [Contents](../README.md) · [Appendix A · What a simulation costs](A-costs.md) →
+← [Chapter 84 · Meta XI · What holds a world's size](84-meta-11-what-holds-a-worlds-size.md) · [Contents](../README.md) · [Chapter 94 · What a brain can compute](94-what-a-brain-can-compute.md) →
 <!-- /turns -->

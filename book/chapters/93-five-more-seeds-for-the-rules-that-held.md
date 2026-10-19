@@ -220,7 +220,7 @@ held by their seed's luck as much as by their rule's.
 > The author's worry was a world too even, not one with many poor
 > ([Meta X](79-meta-10-healthy-and-rich.md)). No world here failed on the
 > share of the poor alone, so leaving it out changes nothing. Asking instead
-> that a world be no more even than B2 (a Gini of its agents' tokens of at
+> that a world be no more even than B2 (a [Gini coefficient](../notes/gini-coefficient.md) of its agents' tokens of at
 > least 0.47, the least of B2's ten worlds at 10,000) changes one rule.
 > Fast brain change passes in none of five:
 > - its two worlds that passed are more even than any of B2's (0.38 and

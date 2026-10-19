@@ -89,5 +89,5 @@ about seven hours. The thirty worlds of 100,000 tokens that
 <!-- turns -->
 ---
 
-← [Chapter 91 · Meta XII · Rules in company](91-meta-12-rules-in-company.md) · [Contents](../README.md) · [Appendix B · What goes with what](B-what-goes-with-what.md) →
+← [Chapter 94 · What a brain can compute](94-what-a-brain-can-compute.md) · [Contents](../README.md) · [Appendix B · What goes with what](B-what-goes-with-what.md) →
 <!-- /turns -->

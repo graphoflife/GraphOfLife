@@ -135,7 +135,7 @@ agents most diverse — is empty.
 > agents hold few tokens but that they hold them **evenly** — almost everyone
 > the same few. The share at three tokens or fewer only stood in for that,
 > and measured directly it stands in badly. Every world read so far now also
-> carries the Gini coefficient of its agents' tokens (0 when all hold the
+> carries the [Gini coefficient](../notes/gini-coefficient.md) of its agents' tokens (0 when all hold the
 > same) and the share its richest tenth hold
 > (`research/atlas/evenness.py`). Across the 502 worlds read at iteration
 > 1,000, the share at three or fewer follows the tokens per agent (a
