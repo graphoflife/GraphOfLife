@@ -26,6 +26,11 @@ Diversity — how widely the agents spread, with no line to draw:
                       (1 / sum of squared shares) per agent
   kinds               where Chapter 70's measure was taken on the world: its
                       effective kinds of staking
+Evenness — the author's worry (2026-10-19) was a world too even, almost
+everyone holding a few tokens; the share holding three or fewer only stood in
+for it:
+  gini_tokens         the Gini coefficient of the agents' tokens
+  richest_tenth       the share of all tokens the richest tenth hold
 
     python3 research/atlas/profile.py [--jobs 2]     writes GraphOfLifeRuns/.pilots/atlas/profile.json
 """
@@ -88,6 +93,23 @@ def freeze() -> None:
                            "spread's values, sorted, over every world of the profile on the day it was frozen.",
                    "frozen": time.strftime("%Y-%m-%d"), "worlds": len(worlds), "spreads": spreads}, f)
         f.write("\n")
+
+
+def evenness(tokens: np.ndarray) -> Dict[str, float]:
+    """
+    How unevenly the tokens are shared, with no line drawn and nothing that grows with the world:
+    the Gini coefficient (0 when everyone holds the same) and the share of all tokens held by the
+    richest tenth of the agents (a tenth when everyone holds the same). The author (2026-10-19):
+    the share holding three tokens or fewer only stood in for a world too even — almost
+    everyone holding a few.
+    """
+    x = np.sort(np.asarray(tokens, dtype=float))
+    n, total = x.size, x.sum()
+    if n == 0 or total <= 0:
+        return {"gini_tokens": 0.0, "richest_tenth": 0.0}
+    gini = 2.0 * np.sum(np.arange(1, n + 1) * x) / (n * total) - (n + 1) / n
+    tenth = max(1, int(np.ceil(n / 10)))
+    return {"gini_tokens": float(gini), "richest_tenth": float(x[-tenth:].sum() / total)}
 
 
 def spread(values: np.ndarray) -> float:
@@ -282,6 +304,7 @@ def measure(item: Tuple[str, str, str, bool]) -> Optional[Dict[str, Any]]:
         "spread_tokens": spread(tokens), "spread_links": spread(degree), "spread_ages": spread(iteration - born + 1),
         "genotypes_per_agent": float(len(carried) / n), "effective_genotypes_per_agent": float(1.0 / (shares ** 2).sum() / n),
     }
+    out.update(evenness(tokens))
     out.update(cuts(n, pairs))
     adj: Dict[int, set] = {u: set() for u in range(n)}
     for a, b in pairs:

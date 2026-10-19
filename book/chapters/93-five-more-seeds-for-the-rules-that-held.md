@@ -216,6 +216,24 @@ test in four of five seeds; none did better than mixing alone, which passed
 in three of the same five. The candidates that held over 10,000 iterations
 held by their seed's luck as much as by their rule's.
 
+> [!info] Added later (19 October 2026): too even, not too poor
+> The author's worry was a world too even, not one with many poor
+> ([Meta X](79-meta-10-healthy-and-rich.md)). No world here failed on the
+> share of the poor alone, so leaving it out changes nothing. Asking instead
+> that a world be no more even than B2 (a Gini of its agents' tokens of at
+> least 0.47, the least of B2's ten worlds at 10,000) changes one rule.
+> Fast brain change passes in none of five:
+> - its two worlds that passed are more even than any of B2's (0.38 and
+>   0.34);
+> - four of its five are, at 8 to 22 tokens per agent.
+>
+> Its "not poor" was evenness. Plain mixing still passes in three, no random
+> inputs and no revolutions in one each (Gini 0.52 to 0.55), so the verdict
+> stands. The author also counts a configuration that shows open-ended
+> evolution in a few seeds as enough, which is a claim about what a
+> configuration can do. This test asked how often a rule's worlds stay
+> healthy, which is not that, and its answer stays as it was.
+
 ## What it teaches
 
 - **One world says little about a rule.** A candidate that held was one

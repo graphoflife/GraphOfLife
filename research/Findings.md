@@ -530,6 +530,23 @@ tokens, ten seeds, 20,000 iterations; lab engine 7fa9fe7aeefbf111)**
 - Reading: a candidate that held was mostly its seed's luck; fast brain change is the steadiest (5/5 alive,
   diverse, not poor) but misses single marks; Meta X's step 3 has no rule to take up.
 
+**Too even, not too poor (2026-10-19; research/atlas/evenness.py adds gini_tokens and richest_tenth to every
+reading; notes in Ch. 79, 91, 92, 93)**
+- The author: the worry was evenness (almost everyone holding the same few), the <= 3 share only a proxy. The
+  proxy tracks tokens per agent (corr -0.77 over 502 worlds at 1,000, -0.92 over 54 at 10,000), not the Gini
+  (0.01; 0.52). Reference without a line: random exchange leaves a geometric spread, Gini (m-1)/(2m-1) at m
+  tokens per agent (0.40 at 3, 0.46 at 7, -> 0.5).
+- B2 is poor but not even: Gini 0.49-0.56 at 1,000 (E16), 0.47-0.51 at 10,000 (B2-long), above random exchange
+  (0.40). Evenest: lapse worlds (median 0.26 over 29 at 7.2 tokens/agent; random 0.46), E15 children of any size
+  (one token each, 0.02), B1 varies (0.14-0.77). At 10,000 the rich small worlds are even: 4 of the 5 LC worlds
+  that held (mut80 s1/s2, nodice s2, norev-mix s2: 0.37-0.44 at 8-27 tokens/agent) and 4 of 5 fast-brain-change
+  worlds of E21 (0.34-0.43). Size ~ poor share rank 0.85, size ~ Gini 0.46 (LC, 19 worlds).
+- Clarified test from now on: no more even than B2 (Gini >= the least of B2's worlds at the same iteration), the
+  poor share no longer counted. Ch. 92: 3 of 19 hold (mix+came s2 0.51, mix+keepone s2 0.66 [80% poor], mix+
+  kinsense s2 0.56 [69% poor]). Ch. 93: alone 3/5, fast brain 0/5 (was 2/5), nodice 1/5, norev 1/5 - verdict
+  stands. Census (Meta XII): spaces of births/no old age/handover are uneven (0.45/0.58/0.60), lapse spaces even
+  (0.25), not mended 0.39; the four mixed worlds near the picture 0.55-0.60.
+
 **Who inherits (batch R, Ch. 73; 2026-10-17; B2 and B1 at 10,000 tokens, two seeds, 2,000 iterations;
 controls P/B2-s1, s2 and L/B1-long-s1, s2 to 2,000)**
 - B2, estate to the poorest: like B2 (3,600-3,700 agents, 80% at <= 3 tokens; contests 1,000 vs 500 0.64/0.70,

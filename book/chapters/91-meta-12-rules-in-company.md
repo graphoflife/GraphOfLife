@@ -139,6 +139,30 @@ to 370 agents, rich and folded (1.26), its diversity kept (0.63). The
 came-from world's second seed shrank too, to 720 agents and 1.24; its first
 waits its turn.
 
+> [!info] Added later (19 October 2026): too even, not too poor
+> The author's worry was a world whose agents hold their tokens too evenly —
+> almost everyone the same few — and the share at three tokens or fewer only
+> stood in for it ([Meta X](79-meta-10-healthy-and-rich.md)). Read with the
+> Gini coefficient of the agents' tokens, the census turns round.
+> - **The spaces that "pay with poverty" hold their tokens unevenly.** Their
+>   median Gini is 0.45 with the estate paid to births, 0.58 without old age
+>   and 0.60 with handover. B2's worlds read 0.49 to 0.56, and a random
+>   exchange of tokens would leave 0.33 to 0.42 at their two to four tokens per
+>   agent.
+> - **The rich spaces are the even ones.** With every unused link lapsing the
+>   median Gini is 0.25, at seven tokens per agent where random exchange
+>   would leave 0.46; where deaths are not mended it is 0.39.
+> - **The four mixed worlds that came nearer are no more even than B2** (0.55
+>   to 0.60): the half of their agents at three tokens or fewer no longer
+>   counts against them.
+>
+> So room costs evenness only where links lapse. What the spaces of births,
+> no old age and handover still miss is diversity, or marks. At 10,000
+> iterations it is the small rich worlds that grew even
+> ([Chapter 92](92-the-candidates-played-on.md)), the second seed without
+> random inputs among them (291 agents, 34 tokens per agent and a Gini of
+> 0.39 already at 1,000).
+
 ## What this says
 
 - **Measure rules in company.** A rule's effect alone is one corner of a

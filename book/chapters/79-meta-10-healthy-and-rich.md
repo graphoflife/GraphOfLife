@@ -130,6 +130,38 @@ agents most diverse — is empty.
 > **To make it again:** `python3 book_figures.py healthy`.
 <!-- /figure -->
 
+> [!info] Added later (19 October 2026): too even, not too poor
+> The author made the picture more precise: what looks unhealthy is not that
+> agents hold few tokens but that they hold them **evenly** — almost everyone
+> the same few. The share at three tokens or fewer only stood in for that,
+> and measured directly it stands in badly. Every world read so far now also
+> carries the Gini coefficient of its agents' tokens (0 when all hold the
+> same) and the share its richest tenth hold
+> (`research/atlas/evenness.py`). Across the 502 worlds read at iteration
+> 1,000, the share at three or fewer follows the tokens per agent (a
+> correlation of −0.77; −0.92 across the 54 read at 10,000) and not the Gini
+> (0.01; 0.52 at 10,000). It counts how many agents share the tokens, not
+> how evenly they share them.
+>
+> **B2 is poor but not even.** Its Gini is 0.49 to 0.56 at iteration 1,000
+> and 0.47 to 0.51 at 10,000, above the 0.40 that a random exchange of
+> tokens would leave at its three tokens per agent. That reference is the
+> spread of greatest entropy at a mean of m tokens, a geometric one, whose
+> Gini is (m − 1)/(2m − 1); it draws no line of its own. The evenest worlds
+> are others:
+> - where every unused link lapses: a median Gini of 0.26 over 29 worlds, at
+>   seven tokens per agent, where random exchange would leave 0.46;
+> - Experiment 15's children of any size: every agent holds one token, a Gini
+>   of 0.02;
+> - at 10,000 iterations, four of the five candidates that held: rich worlds
+>   with a Gini of 0.37 to 0.44
+>   ([Chapter 92](92-the-candidates-played-on.md)).
+>
+> From now on a thesis no longer counts a world's poor. It asks instead that
+> the world be **no more even than B2**: a Gini no lower than the least of
+> B2's worlds read at the same iteration. Old theses keep their wording;
+> Chapters 92 and 93 and Meta XII say what the clarified reading changes.
+
 <!-- figure healthy/spreads -->
 ![How widely the agents spread](../figures/healthy/spreads.svg)
 
