@@ -30,6 +30,7 @@ import sys
 import runner  # first: the repository on the path, and a runs folder of the tests' own
 
 import networkx as nx
+import numpy as np
 
 import gol_series
 from gol_config import SimConfig
@@ -1765,6 +1766,40 @@ def test_a_phase_looks_exactly_as_often_as_it_was_asked_to():
                 assert len(calls) > present, (
                     f"the {name} phase made {len(calls)} forward passes for "
                     f"{present} agents, which is not enough for a pre-pass")
+
+
+def test_a_message_to_itself_can_carry_what_any_column_marked():
+    """
+    Under self_message = largest, what an agent writes to itself is the largest,
+    number by number, of what it writes to any candidate, itself included; its
+    neighbours read it as what it wrote to itself, so a mark one column makes
+    reaches all of them. Under the old rule, own, some agent somewhere writes
+    to itself less than it writes to a neighbour, or the option would change
+    nothing. Either way the world keeps the same inputs and the same brains.
+    """
+    def messages(rule):
+        world = new_world(small(seed=5, self_message=rule))
+        for _ in range(3):
+            world.step(record_decisions=False)
+        # Read straight after a game, before anything is pruned: every agent's
+        # notes as they were written.
+        outbox_seen = {}
+        deliver = world._deliver_messages
+
+        def keep(outbox):
+            outbox_seen.update({u: dict(notes) for u, notes in outbox.items()})
+            deliver(outbox)
+        world._deliver_messages = keep
+        world.blotto_phase(record_decisions=False)
+        return outbox_seen
+
+    largest, own = messages("largest"), messages("own")
+    assert largest and own
+    for u, notes in largest.items():
+        top = np.max(np.array(list(notes.values())), axis=0)
+        assert np.allclose(notes[u], top), (u, notes[u], top)
+    assert any(np.any(np.array(notes[u]) < np.max(np.array(list(notes.values())), axis=0) - 1e-9)
+               for u, notes in own.items()), "under own every agent already wrote itself the largest"
 
 
 def test_the_message_prepass_gives_the_acting_pass_messages_from_this_graph():
