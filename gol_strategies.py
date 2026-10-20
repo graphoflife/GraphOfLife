@@ -13,7 +13,7 @@ brain could not.
 There are two kinds:
 
   rules     a policy in Python: `turtle`, `raider`, `lone`, `factory`, what
-            Chapter 51 planted
+            Chapter 51 planted, and `crew`, the raider of a crowd (Chapter 102)
   weights   a brain of the world's own shape whose weights were set by hand:
             `raider-weights`, Chapter 94's raider, 12 of B2's 16 units
 
@@ -196,7 +196,31 @@ def factory(cfg, X):
     return w.Y
 
 
-RULES: Dict[str, Callable] = {"turtle": turtle, "raider": raider, "lone": lone, "factory": factory}
+def crew(cfg, X):
+    """
+    The raider of a crowd. A node goes to the largest single stake unless a mob of
+    revolutionaries outweighs it (How a coalition takes a node), so stakes from
+    several agents add up only as revolution tokens. The crew stakes all it can on
+    the weakest stranger next door that is no richer than itself, every token of it
+    a revolution token: raiders that border the same stranger, each seeing it as
+    the weakest, become one mob without a word passing. Otherwise everything at
+    home; children and their links as the raider's.
+    """
+    v, w = View(cfg, X), Writer(cfg, X.shape[1])
+    target = None
+    if v.enemy.any():
+        j = int(np.argmin(np.where(v.enemy, v.tokens, np.inf)))
+        if v.tokens[j] <= v.me_tokens:
+            target = j
+    w.stake(np.eye(v.n)[target if target is not None else 0])
+    w.revolt(1.0)
+    if v.me_tokens >= 30:
+        w.child(1 / 3)
+        w.link(np.flatnonzero(v.mate | v.is_self))
+    return w.Y
+
+
+RULES: Dict[str, Callable] = {"turtle": turtle, "raider": raider, "lone": lone, "factory": factory, "crew": crew}
 
 
 # ---------------------------------------------------------------------------
@@ -281,9 +305,11 @@ def raider_weights(cfg, margin: float = MARGIN):
 
 WEIGHTS: Dict[str, Callable] = {"raider-weights": raider_weights}
 
-#: Every strategy's own brain id; `resident` is the control, a frozen evolved brain.
-STRATEGY_IDS: Dict[str, int] = {name: STRATEGY_BASE + k for k, name in
-                                enumerate(["resident", *RULES, *WEIGHTS])}
+#: Every strategy's own brain id; `resident` is the control, a frozen evolved brain. The order only
+#: ever grows at its end, so a strategy keeps its id whatever is added after it.
+STRATEGY_ORDER = ["resident", "turtle", "raider", "lone", "factory", "raider-weights", "crew"]
+assert set(STRATEGY_ORDER) == {"resident", *RULES, *WEIGHTS}, "a strategy without an id"
+STRATEGY_IDS: Dict[str, int] = {name: STRATEGY_BASE + k for k, name in enumerate(STRATEGY_ORDER)}
 
 
 def is_strategy(brain_id: int) -> bool:

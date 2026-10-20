@@ -78,6 +78,7 @@ MECHANICS: Dict[str, Any] = {
     "keep_home": 0.0,
     "max_age": 0,
     "min_child": 1,
+    "child_floor": "fixed",
     "mix_at_birth": False,
     "mix_mates": "any",
     "buy_life": False,
@@ -245,6 +246,9 @@ class SimConfig:
     # What an agent writes to itself: what its own column says, or the largest of
     # what it writes to anyone.
     SELF_MESSAGES: ClassVar[Tuple[str, ...]] = ("own", "largest")
+    # The least a child may start with: min_child alone, or also the median
+    # holding of its parent's neighbours.
+    CHILD_FLOORS: ClassVar[Tuple[str, ...]] = ("fixed", "neighbours")
     MODES: ClassVar[Dict[str, Tuple[str, ...]]] = {
         "brain_kind": tuple(BRAIN_PRESETS),
         "prune_after": tuple(PRUNE_AFTER),
@@ -252,6 +256,7 @@ class SimConfig:
         "redistribution": REDISTRIBUTIONS,
         "mix_mates": MIX_MATES,
         "self_message": SELF_MESSAGES,
+        "child_floor": CHILD_FLOORS,
         "link_search": LINK_SEARCHES,
         "link_steering": LINK_STEERINGS,
         "link_consent": LINK_CONSENTS,
@@ -448,6 +453,12 @@ class SimConfig:
     # The fewest tokens a child can be born with; a smaller endowment means no
     # birth. 1 is the old rule.
     min_child: int = 1
+    # With `neighbours`, a child must also start with at least the median holding
+    # of its parent's neighbours: a world whose births are cheap (an estate paid
+    # to the newborns, say) can then grow only as rich as it is, rather than
+    # filling with paupers (Chapter 100). Local and without a number of its own.
+    # `fixed`, the old rule, asks only min_child.
+    child_floor: str = "fixed"
 
     # Heredity of parts. A newborn's brain is its parent's mixed with a mate's
     # — one of the parent's neighbours, drawn at random — before it mutates:

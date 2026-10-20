@@ -1,0 +1,76 @@
+{
+ "id": "E33",
+ "title": "A crew of raiders",
+ "thesis": {
+  "claim": "Raiders that pool their stakes take hold where lone raiders cannot. In B2's worlds played on, at iterations 5,000 and 10,000, where patches of 5% of lone raiders took hold in none of 30 plantings, patches of 5% of crew raiders — raiders that stake on the weakest stranger next door no richer than themselves, every token of it a revolution token, so that raiders bordering the same stranger become one mob — take hold in at least 5 of the same 30 plantings.",
+  "why": "In Experiment 30 the lone raider's door closed because the patches it started from grew poor: it needs three tokens to take even a neighbour of one, and by iteration 5,000 a patch held two tokens an agent. In that game a node goes to the largest single stake, the holder's own counting one and a half times, unless revolutionaries together outweigh it. Two raiders of two tokens, each staking one as a revolution token, take a stranger of one token that neither could take alone. Raiders that each see the same stranger as the weakest next door join without any message. A world of many small agents shuts out lone raiders, not crews: if that is so, the poorer the world, the more a group is worth.",
+  "confirm": "At least 5 of the 30 crew plantings at 5,000 and 10,000 take hold: alive after 300 iterations, more than the patch began with, and more than the control planted in the same place.",
+  "refute": "Four or fewer take hold: pooling stakes does not open the door, and the chapter says what the crews met instead."
+ },
+ "trials": {
+  "kind": "invasion",
+  "T": 300,
+  "sets": [
+   {
+    "name": "crews",
+    "grid": {
+     "run": [
+      "pilot:L/B2-long-s001",
+      "pilot:L/B2-long-s002",
+      "pilot:L/B2-long-s003",
+      "pilot:L/B2-long-s004",
+      "pilot:L/B2-long-s005"
+     ],
+     "era": [
+      2000,
+      5000,
+      10000
+     ],
+     "strategy": "crew",
+     "size": 0.05,
+     "place": "1..3"
+    }
+   },
+   {
+    "name": "lone raiders",
+    "grid": {
+     "run": [
+      "pilot:L/B2-long-s001",
+      "pilot:L/B2-long-s002",
+      "pilot:L/B2-long-s003",
+      "pilot:L/B2-long-s004",
+      "pilot:L/B2-long-s005"
+     ],
+     "era": [
+      2000,
+      5000,
+      10000
+     ],
+     "strategy": "raider",
+     "size": 0.05,
+     "place": "1..3"
+    }
+   },
+   {
+    "name": "controls",
+    "grid": {
+     "run": [
+      "pilot:L/B2-long-s001",
+      "pilot:L/B2-long-s002",
+      "pilot:L/B2-long-s003",
+      "pilot:L/B2-long-s004",
+      "pilot:L/B2-long-s005"
+     ],
+     "era": [
+      2000,
+      5000,
+      10000
+     ],
+     "strategy": "resident",
+     "size": 0.05,
+     "place": "1..3"
+    }
+   }
+  ]
+ }
+}

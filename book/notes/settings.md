@@ -294,6 +294,19 @@ replace them. Needs `max_age`. Baseline off.
 The fewest tokens a child can be born with. A parent whose brain would give a
 child less has no child. Baseline 1: any child at all.
 
+### child_floor
+
+The least a child may start with. `fixed`, the old rule: [`min_child`](#min_child)
+alone. `neighbours`: also at least the median holding of its parent's
+neighbours, at the moment of the birth; a parent that would give less has no
+child. Where births are cheap — the estate of the dead paid to the newborns,
+say — a world fills with children, each with a token or two, until almost
+every agent holds the same few
+([Chapter 100](../chapters/100-room-for-the-steadiest-world.md)). Under
+`neighbours` a child is never poorer than the agents it is born among, so a
+world can grow only as rich as it is. It reads the parent's neighbourhood and
+nothing further, and has no number of its own. Baseline `fixed`.
+
 ### mix_at_birth
 
 Whether a newborn's brain is mixed from two before it mutates: its parent's

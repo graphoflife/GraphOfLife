@@ -1638,13 +1638,20 @@ class GraphOfLife:
         Under the old rules, whatever was asked for: anything from one token up
         is a child. The rules of Part V can refuse a birth outright — a parent
         at its valence is crowded, and an endowment below min_child is no
-        child — and keep_home leaves the parent its last token.
+        child — and keep_home leaves the parent its last token. Under
+        child_floor = neighbours, neither is a child that would start poorer
+        than the median holding of its parent's neighbours: a world grows only
+        as rich as it is.
         """
         cfg = self.cfg
         if cfg.keep_home > 0:
             wanted = min(wanted, tokens - 1)
         if wanted < cfg.min_child:
             return 0
+        if cfg.child_floor == "neighbours":
+            held = [self.tokens.get(v, 0) for v in self.G.neighbors(parent)]
+            if held and wanted < np.median(held):
+                return 0
         if cfg.valence and self.G.degree(parent) >= cfg.valence:
             return 0
         return wanted

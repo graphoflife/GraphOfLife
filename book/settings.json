@@ -30,6 +30,7 @@
   "max_age",
   "buy_life",
   "min_child",
+  "child_floor",
   "mix_at_birth",
   "mix_mates",
   "self_message",
@@ -162,6 +163,9 @@
   },
   "proto": {
    "meaning": "Rules first played in the pilots' prototype, by name: came_from and helped_by (an input row each), contest = lottery, pool by genotype or family, kin_sense, tag_rate, mate_pays, grow, unit_token, link_token. Empty in every run but those that ask for one; only the prototype's world plays them (see the settings note)."
+  },
+  "child_floor": {
+   "meaning": "The least a child may start with: min_child alone (fixed), or also the median holding of its parent's neighbours (neighbours), so that a world grows only as rich as it is."
   }
  }
 }

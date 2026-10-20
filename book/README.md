@@ -117,6 +117,7 @@ everything can be checked with it.
 - [Chapter 98 · The search's best world, in new seeds](chapters/98-the-searchs-best-world-in-new-seeds.md)
 - [Chapter 99 · A mate that pays its share](chapters/99-a-mate-that-pays-its-share.md)
 - [Chapter 100 · Room for the steadiest world](chapters/100-room-for-the-steadiest-world.md)
+- [Chapter 101 · Births as rich as the neighbours](chapters/101-births-as-rich-as-the-neighbours.md)
 
 **Part VI · Towards a physics: space, scale and locality**
 
@@ -154,6 +155,7 @@ everything can be checked with it.
 - [Chapter 95 · Every era against three](chapters/95-every-era-against-three.md)
 - [Chapter 96 · How large a crowd a raider needs](chapters/96-how-large-a-crowd-a-raider-needs.md)
 - [Chapter 97 · Does evolution close the door?](chapters/97-does-evolution-close-the-door.md)
+- [Chapter 102 · A crew of raiders](chapters/102-a-crew-of-raiders.md)
 
 **Notes · the rules**
 

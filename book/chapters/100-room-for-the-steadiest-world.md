@@ -118,6 +118,7 @@ Room has to come from a rule.
 > | [`max_age`](../notes/settings.md#max_age) | 100 | 100 | **0** | 100 | The age at which an agent dies (0 = never); its tokens are shared out like those of any other dead agent. |
 > | [`buy_life`](../notes/settings.md#buy_life) | off | off | off | off | Whether an agent that has reached max_age may live on by paying one token an iteration into the estate of the dead — never its last, so one with a single token left dies. Needs max_age. |
 > | [`min_child`](../notes/settings.md#min_child) | 10 | 10 | 10 | 10 | The fewest tokens a child can be born with; a parent that would give less has no child. |
+> | [`child_floor`](../notes/settings.md#child_floor) | fixed | fixed | fixed | fixed | The least a child may start with: min_child alone (fixed), or also the median holding of its parent's neighbours (neighbours), so that a world grows only as rich as it is. |
 > | [`mix_at_birth`](../notes/settings.md#mix_at_birth) | **on** | **on** | **on** | **on** | Whether a newborn's brain is its parent's mixed with a mate's — one of the parent's neighbours, drawn at random — each hidden unit whole from one or the other by an even chance, before it mutates; off, a newborn has a copy of its parent's brain. |
 > | [`mix_mates`](../notes/settings.md#mix_mates) | **parents** | **parents** | **parents** | **parents** | Under mix_at_birth, who may be the mate: any neighbour of the parent, or only parents — a neighbour with a living child of its own (with none, the newborn's brain is a copy). |
 > | [`self_message`](../notes/settings.md#self_message) | own | own | own | own | What an agent writes to itself, which each neighbour reads: what its own column says (own), or the largest, number by number, of what it writes to anyone (largest), so that news one column marks reaches every neighbour. |
@@ -238,5 +239,5 @@ apart, even in the steadiest mixed world. What each rule pays is now known:
 <!-- turns -->
 ---
 
-← [Chapter 99 · A mate that pays its share](99-a-mate-that-pays-its-share.md) · [Contents](../README.md) · [Chapter 60 · Worlds of 100,000 tokens](60-worlds-of-100000-tokens.md) →
+← [Chapter 99 · A mate that pays its share](99-a-mate-that-pays-its-share.md) · [Contents](../README.md) · [Chapter 101 · Births as rich as the neighbours](101-births-as-rich-as-the-neighbours.md) →
 <!-- /turns -->

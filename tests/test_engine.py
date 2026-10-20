@@ -1768,6 +1768,21 @@ def test_a_phase_looks_exactly_as_often_as_it_was_asked_to():
                     f"{present} agents, which is not enough for a pre-pass")
 
 
+def test_a_child_is_never_poorer_than_the_neighbours_it_is_born_among():
+    """
+    Under child_floor = neighbours, an endowment below the median holding of the
+    parent's neighbours is no child, however much above min_child it is; under the
+    old rule, fixed, only min_child counts.
+    """
+    for rule, given in (("neighbours", (0, 9)), ("fixed", (8, 9))):
+        world = new_world(small(seed=7, child_floor=rule, min_child=1, keep_home=0.0, valence=0))
+        parent = next(u for u in world.G.nodes() if world.G.degree(u) >= 3)
+        neighbours = sorted(world.G.neighbors(parent))
+        for v, held in zip(neighbours, [5, 9, 20] + [9] * (len(neighbours) - 3)):
+            world.tokens[v] = held
+        assert (world._endowment(parent, 100, 8), world._endowment(parent, 100, 9)) == given, rule
+
+
 def test_a_message_to_itself_can_carry_what_any_column_marked():
     """
     Under self_message = largest, what an agent writes to itself is the largest,

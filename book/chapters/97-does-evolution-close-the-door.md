@@ -177,5 +177,5 @@ tokens a raider cannot start among agents that hold two.
 <!-- turns -->
 ---
 
-← [Chapter 96 · How large a crowd a raider needs](96-how-large-a-crowd-a-raider-needs.md) · [Contents](../README.md) · [Appendix A · What a simulation costs](A-costs.md) →
+← [Chapter 96 · How large a crowd a raider needs](96-how-large-a-crowd-a-raider-needs.md) · [Contents](../README.md) · [Chapter 102 · A crew of raiders](102-a-crew-of-raiders.md) →
 <!-- /turns -->

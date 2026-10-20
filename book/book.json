@@ -484,6 +484,14 @@
           "file": "chapters/100-room-for-the-steadiest-world.md",
           "experiment": "E31",
           "status": "analysed"
+        },
+        {
+          "id": "101",
+          "title": "Births as rich as the neighbours",
+          "note": "Experiment 32: Experiment 31's estate worlds (healthy three-dimensional spaces of poor, alike agents) with a child that must start with at least the median holding of its parent's neighbours: does the space stay and the diversity come back?",
+          "file": "chapters/101-births-as-rich-as-the-neighbours.md",
+          "experiment": "E32",
+          "status": "ready"
         }
       ]
     },
@@ -665,6 +673,14 @@
           "file": "chapters/97-does-evolution-close-the-door.md",
           "experiment": "E30",
           "status": "analysed"
+        },
+        {
+          "id": "102",
+          "title": "A crew of raiders",
+          "note": "Experiment 33: raiders that pool their stakes as revolution tokens, planted where lone raiders could no longer take hold (B2's worlds at 5,000 and 10,000): does the game reward groups where the world is poor?",
+          "file": "chapters/102-a-crew-of-raiders.md",
+          "experiment": "E33",
+          "status": "ready"
         }
       ]
     },
