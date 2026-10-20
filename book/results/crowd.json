@@ -1,0 +1,67 @@
+{
+ "chapter": "crowd",
+ "numbers": {
+  "crowd": {
+   "sizes": [
+    "1",
+    "3",
+    "10",
+    "30",
+    "100",
+    "5%"
+   ],
+   "took_hold": [
+    0,
+    0,
+    0,
+    0,
+    4,
+    12
+   ],
+   "controls_alive": [
+    0,
+    1,
+    5,
+    8,
+    13,
+    16
+   ],
+   "controls_grew": [
+    0,
+    1,
+    3,
+    5,
+    5,
+    7
+   ]
+  },
+  "worlds": {
+   "held_in_places_1_to_5": {
+    "B2-10000-s001": 0,
+    "B2-10000-s002": 5,
+    "B2-10000-s003": 2,
+    "B2-10000-s004": 0,
+    "B2-10000-s005": 0,
+    "B2-10000-s006": 3,
+    "B2-10000-s007": 0,
+    "B2-10000-s008": 1,
+    "B2-10000-s009": 1,
+    "B2-10000-s010": 1
+   },
+   "held_world_2": 10,
+   "held_world_3": 2
+  }
+ },
+ "figures": {
+  "crowd": {
+   "title": "How many plantings took hold, by the size of the patch",
+   "caption": "Bars: of the 20 plantings of each size (ten places in each of worlds 2 and 3), how many raider patches took hold: alive after 300 iterations, more than they began with, and more than the control planted in the same place. Grey dots: how many of the controls, frozen copies of one resident's brain, were larger after 300 iterations than they began.",
+   "recipe": "**Runs.** Experiment 29's 320 invasions (`python3 gol_lab.py run E29`): the ten B2 worlds of Experiment 16, `B2-10000-s001` \u2026 `-s010`, as their archives keep them at iteration 2,000. In worlds 2 and 3, patches of 1, 3, 10, 30 and 100 agents and of 5% of the world on places 1 to 10; in the other eight, 5% on places 1 to 5. Every patch once with the raider's rule and once as a control, frozen copies of one patch member's brain (`gol_strategies.plant`).\n\n**Data.** From each trial's `result.json`.\n\n1. Load the world of iteration 2,000; on place p, draw an agent at random and take its nearest neighbours, step by step, until the patch has its size.\n2. Give the patch the raider (Chapter 51's rule), or the control; neither ever mutates.\n3. Play 300 iterations under the world's own rules, counting the patch's agents after every iteration.\n4. A planting takes hold when, after 300 iterations, its raiders are alive, more than the patch began with, and more than the control holds there.\n\n**To make it again:** `python3 book_figures.py crowd`."
+  },
+  "worlds": {
+   "title": "A patch of 5% in every world",
+   "caption": "Each dot is one planting of a patch of 5% of the world at iteration 2,000: left of each world, the raiders (filled where they took hold), right of it, the control planted in the same place. Worlds 2 and 3 have ten places, the others five.",
+   "recipe": "**Runs.** Experiment 29's 320 invasions (`python3 gol_lab.py run E29`): the ten B2 worlds of Experiment 16, `B2-10000-s001` \u2026 `-s010`, as their archives keep them at iteration 2,000. In worlds 2 and 3, patches of 1, 3, 10, 30 and 100 agents and of 5% of the world on places 1 to 10; in the other eight, 5% on places 1 to 5. Every patch once with the raider's rule and once as a control, frozen copies of one patch member's brain (`gol_strategies.plant`).\n\n**Data.** From each trial's `result.json`.\n\n1. Load the world of iteration 2,000; on place p, draw an agent at random and take its nearest neighbours, step by step, until the patch has its size.\n2. Give the patch the raider (Chapter 51's rule), or the control; neither ever mutates.\n3. Play 300 iterations under the world's own rules, counting the patch's agents after every iteration.\n4. A planting takes hold when, after 300 iterations, its raiders are alive, more than the patch began with, and more than the control holds there.\n\n**To make it again:** `python3 book_figures.py crowd`."
+  }
+ }
+}

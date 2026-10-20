@@ -65,6 +65,115 @@ The test is the invasion test of [Chapter 96](96-how-large-a-crowd-a-raider-need
 > To play these trials again: `python3 gol_lab.py run E30`, or ▶ in the Book tab of a computer running `gol_server.py`. Each writes its settings and engine beside its result, in `GraphOfLifeRuns/<trial>/meta.json` and `result.json`.
 <!-- /runs -->
 
+## What the raiders did
+
+<!-- figure door/door -->
+![The same raid, planted in older worlds](../figures/door/door.svg)
+
+**The same raid, planted in older worlds.** Left: of the fifteen plantings at each era (five worlds, three places), how many took hold. Right: each planting's raiders as a share of the world after 300 iterations (0 where they died out).
+
+> [!example]- How to make this figure
+> **Runs.** Experiment 30's 120 invasions (`python3 gol_lab.py run E30`): B2's worlds of Experiment 16 played on to 10,000 iterations as pilots of the engine's own rules (`GraphOfLifeRuns/.pilots/L/B2-long-s001` … `s005`), at iterations 500, 2,000, 5,000 and 10,000, a patch of 5% on places 1 to 3, once with the raider's rule and once as a control; and, in the second chart, every patch of 5% of Experiment 29 too (Experiment 16's ten worlds at 2,000).
+>
+> **Data.** From each trial's `result.json`.
+>
+> 1. Load the world of the era; on place p, draw an agent at random and take its nearest neighbours, step by step, until the patch holds 5% of the world.
+> 2. Give the patch the raider ([Chapter 51](51-strategies-written-by-hand.md)'s rule), or the control, frozen copies of one patch member's brain.
+> 3. Play 300 iterations under the world's own rules; a planting takes hold when its raiders are then alive, more than the patch began with, and more than the control holds.
+> 4. A patch's wealth is its tokens over its agents when it is planted.
+>
+> **To make it again:** `python3 book_figures.py door`.
+<!-- /figure -->
+
+**The door closed.**
+- **At iteration 500,** all fifteen plantings took hold. The raiders held
+  37% to 79% of their world 300 iterations later.
+- **At 2,000,** four of fifteen took hold: worlds 2 and 3 again, as in
+  [Chapter 96](96-how-large-a-crowd-a-raider-needs.md).
+- **At 5,000 and at 10,000,** none of fifteen did. Every patch grew a
+  little in its first five iterations, shrank from then on, and was gone by
+  about iteration 150.
+
+**But not by a defence.** One planting at iteration 500 and one at 10,000,
+in the same world and place, were played again with every decision kept.
+Over 120 iterations:
+- **At 500,** residents took 3,233 nodes from the raiders and the raiders
+  took 7,123 from residents.
+- **At 10,000,** residents took 29 nodes from the raiders. The raiders
+  rarely raided at all: 470 raids against 11,226 at 500. They had no
+  children, and died where they stood, of age.
+
+**What changed is what a raid starts from.**
+
+<!-- figure door/wealth -->
+![What a raid starts from](../figures/door/wealth.svg)
+
+**What a raid starts from.** Each dot is one planting of 5% of a world, from Experiments 29 and 30, by the patch's tokens per agent when it was planted and the raiders' share of the world 300 iterations later.
+
+> [!example]- How to make this figure
+> **Runs.** Experiment 30's 120 invasions (`python3 gol_lab.py run E30`): B2's worlds of Experiment 16 played on to 10,000 iterations as pilots of the engine's own rules (`GraphOfLifeRuns/.pilots/L/B2-long-s001` … `s005`), at iterations 500, 2,000, 5,000 and 10,000, a patch of 5% on places 1 to 3, once with the raider's rule and once as a control; and, in the second chart, every patch of 5% of Experiment 29 too (Experiment 16's ten worlds at 2,000).
+>
+> **Data.** From each trial's `result.json`.
+>
+> 1. Load the world of the era; on place p, draw an agent at random and take its nearest neighbours, step by step, until the patch holds 5% of the world.
+> 2. Give the patch the raider ([Chapter 51](51-strategies-written-by-hand.md)'s rule), or the control, frozen copies of one patch member's brain.
+> 3. Play 300 iterations under the world's own rules; a planting takes hold when its raiders are then alive, more than the patch began with, and more than the control holds.
+> 4. A patch's wealth is its tokens over its agents when it is planted.
+>
+> **To make it again:** `python3 book_figures.py door`.
+<!-- /figure -->
+
+The raider stakes only where it is sure to win: 70% of its tokens has to
+come to more than one and a half times the neighbour's. Against a neighbour
+of one token it needs three tokens to raid at all. How often a patch of 5%
+took hold, by its tokens per agent when planted, over all 120 such
+plantings of Experiments 29 and 30:
+
+| tokens per agent | took hold |
+|---|---|
+| under 2 | 0 of 24 |
+| 2 to 2.5 | 8 of 58 |
+| 2.5 to 3 | 7 of 16 |
+| 3 to 4 | 16 of 16 |
+| 4 or more | 6 of 6 |
+
+A patch planted at 500 held a median of 3.85 tokens per agent, at 2,000
+2.35, and at 5,000 and 10,000 2.0. The worlds hold about as many tokens per
+agent at 10,000 as at 1,000, 2.7 to 3.3. But a patch, an agent and its
+nearest neighbours, is poorer than the average agent, and it got poorer as
+the worlds aged. Whether the residents also learned something these
+plantings cannot say. Only five late patches were as rich as the 30 at
+2,000 that took hold nine times, and none of the five did.
+
+## The verdict
+
+**The thesis fails.** The plantings at 5,000 and 10,000 took hold 0 times
+in 30, against 19 times in 30 at 500 and 2,000. By a one-sided Fisher exact
+test that is fewer beyond any doubt (p below 0.0001). The door closed.
+
+It closed because the patches got poorer, not, as far as can be told,
+because the residents learned to resist a raid. A raid that needs three
+tokens a raider cannot start among agents that hold two.
+
+## What it teaches
+
+- **A world of many small agents shuts out every lone raider.** A node goes
+  to the largest stake, and a holder's own stake counts one and a half
+  times. With a token or two each, no single agent can take anything that
+  holds as much as it does.
+- **What it does not shut out is a group.** Several raiders who stake on
+  the same neighbour add their stakes up. Raiders that each see the same
+  stranger as the weakest next door would raid it together without a word
+  passing. The poorer the world, the more such a group is worth. This is a
+  reason for groups that comes from the game itself, and the next rung of
+  the ladder: a crew of raiders against a lone one, in worlds too poor for
+  either alone.
+- **The door has to be tested with the world's own wealth.** A strategy
+  written by hand carries its own thresholds, the raider's three tokens
+  among them. Before saying that evolution closed a door, the next tests
+  will plant patches of the same wealth at every era.
+
+
 <!-- turns -->
 ---
 

@@ -1,0 +1,310 @@
+{
+ "chapter": "matepays",
+ "numbers": {
+  "steadiness": {
+   "1": {
+    "paying_sd_log": 0.12066904807871355,
+    "free_sd_log": 0.1883017381115713,
+    "paying_min": 1685.0,
+    "free_min": 648.0,
+    "paying_median": 2048.0,
+    "free_median": 1051.0
+   },
+   "2": {
+    "paying_sd_log": 0.09344641356330433,
+    "free_sd_log": 0.34217656811792657,
+    "paying_min": 1414.0,
+    "free_min": 245.0,
+    "paying_median": 1762.0,
+    "free_median": 586.0
+   },
+   "3": {
+    "paying_sd_log": 0.15548360711549614,
+    "free_sd_log": 0.6302992206096875,
+    "paying_min": 1127.0,
+    "free_min": 40.0,
+    "paying_median": 1761.0,
+    "free_median": 722.0
+   },
+   "4": {
+    "paying_sd_log": 0.1187075594021211,
+    "free_sd_log": 0.466044405077048,
+    "paying_min": 1012.0,
+    "free_min": 316.0,
+    "paying_median": 1394.0,
+    "free_median": 785.0
+   }
+  },
+  "twins": {
+   "1": {
+    "compared": 1311,
+    "first_difference": null
+   },
+   "2": {
+    "compared": 1719,
+    "first_difference": null
+   }
+  },
+  "health": [
+   {
+    "id": "L/B2-long-s001",
+    "at": 3000,
+    "agents": 3455,
+    "marks": 6,
+    "diversity": 0.43980061349693256,
+    "wide": 1.2304381654476648,
+    "gini_tokens": 0.4983772503617945
+   },
+   {
+    "id": "L/B2-long-s001",
+    "at": 5000,
+    "agents": 3465,
+    "marks": 6,
+    "diversity": 0.508819018404908,
+    "wide": 1.180415513661204,
+    "gini_tokens": 0.4825697546897547
+   },
+   {
+    "id": "L/B2-long-s002",
+    "at": 3000,
+    "agents": 3179,
+    "marks": 6,
+    "diversity": 0.5555981595092025,
+    "wide": 1.188892351915254,
+    "gini_tokens": 0.48206838628499527
+   },
+   {
+    "id": "L/B2-long-s002",
+    "at": 5000,
+    "agents": 3497,
+    "marks": 6,
+    "diversity": 0.4815950920245399,
+    "wide": 1.1573999191182878,
+    "gini_tokens": 0.48182407778095504
+   },
+   {
+    "id": "L/B2-long-s003",
+    "at": 3000,
+    "agents": 3464,
+    "marks": 6,
+    "diversity": 0.4988496932515337,
+    "wide": 1.2230013276280682,
+    "gini_tokens": 0.4903130484988454
+   },
+   {
+    "id": "L/B2-long-s003",
+    "at": 5000,
+    "agents": 3352,
+    "marks": 6,
+    "diversity": 0.5126533742331288,
+    "wide": 1.1619512969706627,
+    "gini_tokens": 0.4677786992840094
+   },
+   {
+    "id": "L/B2-long-s004",
+    "at": 3000,
+    "agents": 3359,
+    "marks": 6,
+    "diversity": 0.5617331288343559,
+    "wide": 1.1721319082818902,
+    "gini_tokens": 0.4742819291455791
+   },
+   {
+    "id": "L/B2-long-s004",
+    "at": 5000,
+    "agents": 3318,
+    "marks": 6,
+    "diversity": 0.4934815950920246,
+    "wide": 1.1911086878835804,
+    "gini_tokens": 0.5003301989150091
+   },
+   {
+    "id": "L/B2-long-s005",
+    "at": 3000,
+    "agents": 3310,
+    "marks": 6,
+    "diversity": 0.5429447852760736,
+    "wide": 1.2238803120135158,
+    "gini_tokens": 0.49647148036253785
+   },
+   {
+    "id": "L/B2-long-s005",
+    "at": 5000,
+    "agents": 3471,
+    "marks": 6,
+    "diversity": 0.4842791411042945,
+    "wide": 1.2585943498368366,
+    "gini_tokens": 0.5020106597522329
+   },
+   {
+    "id": "L/B2-long-s006",
+    "at": 3000,
+    "agents": 3710,
+    "marks": 6,
+    "diversity": 0.44440184049079756,
+    "wide": 1.105339691469192,
+    "gini_tokens": 0.4655045283018868
+   },
+   {
+    "id": "L/B2-long-s006",
+    "at": 5000,
+    "agents": 3166,
+    "marks": 6,
+    "diversity": 0.5525306748466259,
+    "wide": 1.217970772149764,
+    "gini_tokens": 0.45993834491471874
+   },
+   {
+    "id": "L/B2-long-s007",
+    "at": 3000,
+    "agents": 3536,
+    "marks": 6,
+    "diversity": 0.4344325153374233,
+    "wide": 1.2141264131230238,
+    "gini_tokens": 0.46840333710407234
+   },
+   {
+    "id": "L/B2-long-s007",
+    "at": 5000,
+    "agents": 3576,
+    "marks": 6,
+    "diversity": 0.44670245398773006,
+    "wide": 1.1918482803643198,
+    "gini_tokens": 0.4713991610738255
+   },
+   {
+    "id": "L/B2-long-s008",
+    "at": 3000,
+    "agents": 3344,
+    "marks": 6,
+    "diversity": 0.5433282208588956,
+    "wide": 1.1295270670401132,
+    "gini_tokens": 0.48797673444976075
+   },
+   {
+    "id": "L/B2-long-s008",
+    "at": 5000,
+    "agents": 3757,
+    "marks": 6,
+    "diversity": 0.495398773006135,
+    "wide": 1.1445509673986518,
+    "gini_tokens": 0.4754943305829118
+   },
+   {
+    "id": "L/B2-long-s009",
+    "at": 3000,
+    "agents": 3429,
+    "marks": 6,
+    "diversity": 0.5429447852760736,
+    "wide": 1.1982196116567214,
+    "gini_tokens": 0.47957841936424606
+   },
+   {
+    "id": "L/B2-long-s009",
+    "at": 5000,
+    "agents": 3407,
+    "marks": 6,
+    "diversity": 0.5268404907975459,
+    "wide": 1.2366684275881916,
+    "gini_tokens": 0.47470020545934855
+   },
+   {
+    "id": "L/B2-long-s010",
+    "at": 3000,
+    "agents": 3022,
+    "marks": 6,
+    "diversity": 0.5605828220858896,
+    "wide": 1.1463504316179964,
+    "gini_tokens": 0.5201467240238251
+   },
+   {
+    "id": "L/B2-long-s010",
+    "at": 5000,
+    "agents": 3428,
+    "marks": 6,
+    "diversity": 0.41411042944785276,
+    "wide": 1.2187678127410935,
+    "gini_tokens": 0.5187164527421237
+   },
+   {
+    "id": "B2-10000-8ff8c5-s001",
+    "at": 1000,
+    "agents": 2056,
+    "marks": 7,
+    "diversity": 0.6660276073619632,
+    "wide": 1.6173244285904527,
+    "gini_tokens": 0.605696206225681
+   },
+   {
+    "id": "B2-10000-8ff8c5-s001",
+    "at": 5000,
+    "agents": 1702,
+    "marks": 6,
+    "diversity": 0.6372699386503068,
+    "wide": 1.2803217079733191,
+    "gini_tokens": 0.45852408930669797
+   },
+   {
+    "id": "B2-10000-8ff8c5-s002",
+    "at": 1000,
+    "agents": 1734,
+    "marks": 7,
+    "diversity": 0.5881901840490797,
+    "wide": 1.2055779165255276,
+    "gini_tokens": 0.554967012687428
+   },
+   {
+    "id": "B2-10000-8ff8c5-s002",
+    "at": 5000,
+    "agents": 1706,
+    "marks": 7,
+    "diversity": 0.6357361963190183,
+    "wide": 1.2235049367374904,
+    "gini_tokens": 0.48041969519343497
+   },
+   {
+    "id": "B2-10000-8ff8c5-s003",
+    "at": 1000,
+    "agents": 1365,
+    "marks": 7,
+    "diversity": 0.6541411042944786,
+    "wide": 1.2862490111539076,
+    "gini_tokens": 0.6031265934065935
+   },
+   {
+    "id": "B2-10000-8ff8c5-s003",
+    "at": 5000,
+    "agents": 1862,
+    "marks": 6,
+    "diversity": 0.5966257668711656,
+    "wide": 1.1585858744492785,
+    "gini_tokens": 0.46041600429645557
+   },
+   {
+    "id": "B2-10000-8ff8c5-s004",
+    "at": 1000,
+    "agents": 1341,
+    "marks": 7,
+    "diversity": 0.616180981595092,
+    "wide": 1.1470937501462926,
+    "gini_tokens": 0.5793498881431767
+   },
+   {
+    "id": "B2-10000-8ff8c5-s004",
+    "at": 5000,
+    "agents": 1369,
+    "marks": 7,
+    "diversity": 0.5199386503067485,
+    "wide": 1.2194900322212916,
+    "gini_tokens": 0.42906501095690297
+   }
+  ]
+ },
+ "figures": {
+  "sizes": {
+   "title": "Agents alive, with a mate that pays and with a free mate",
+   "caption": "Each line is one world, its agents after each game in means over 50 iterations, on a logarithmic axis. Orange: brains mixed at birth with a mate that pays the child as much as the parent (seeds 1 to 4); grey: Experiment 17's worlds of the same seeds, whose mates pay nothing.",
+   "recipe": "**Runs.** Experiment 22's four runs (`python3 gol_lab.py run E22`): B2 at 10,000 tokens with brains mixed at birth and the pilots' rule `mate_pays`, seeds 1 to 4, to 5,000 iterations, played by the research prototype in the lab (`B2-10000-8ff8c5-s001` \u2026 `-s004`); against Experiment 17's runs of the same seeds (`B2-10000-4af4a3-s001` \u2026 `-s004`), mixing with a mate that pays nothing.\n\n**Data.** From the pilots' `series.jsonl` and the lab runs' `stats.jsonl`.\n\n1. Read the agents after each game: a pilot's row of each iteration, a lab run's row of phase 2.\n2. Average over stretches of 50 iterations.\n\n**To make it again:** `python3 book_figures.py matepays`."
+  }
+ }
+}

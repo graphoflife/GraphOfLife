@@ -124,8 +124,111 @@ those self-contests do is noise.
 > To play these trials again: `python3 gol_lab.py run E28`, or ▶ in the Book tab of a computer running `gol_server.py`. Each writes its settings and engine beside its result, in `GraphOfLifeRuns/<trial>/meta.json` and `result.json`.
 <!-- /runs -->
 
-The trials are played in the lab, which shows them beside this chapter and
-plays them when ▶ is pressed: 240 contests of about a minute each.
+## What the contests said
+
+<!-- figure eras/scores -->
+![Every era against three fixed eras](../figures/eras/scores.svg)
+
+**Every era against three fixed eras.** Each line is one fixed era: the share every other era's brains held against its brains, the mean of two contests of 100 iterations, one on each era's world. The grey band is 0.5 plus or minus twice the spread of the fixed eras played against themselves: a score inside it could be noise.
+
+> [!example]- How to make this figure
+> **Runs.** Experiment 28's 240 contests (`python3 gol_lab.py run E28`): every 2,500th era of Experiment 18's two worlds played to 50,000 iterations (`B2-10000-4af4a3-s005`, `-s006`) against the eras of 2,500, 10,000 and 25,000, each pair once on each era's world (coin 17), and each of those three eras against itself four times (coins 17 to 20).
+>
+> **Data.** From each trial's `result.json`.
+>
+> 1. For each pair of eras, the later era's share of the agents after 100 iterations, the mean of its two contests; an earlier era's score against a later one is 1 less that.
+> 2. The band: the standard deviation of the twelve contests of an era against itself, twice on either side of 0.5.
+>
+> **To make it again:** `python3 book_figures.py eras`.
+<!-- /figure -->
+
+**Climbing stopped by about 25,000, in both worlds.** Against the brains of
+25,000, the ten eras after it scored a median of 0.55 in seed 5 and 0.46 in
+seed 6. Both lie inside their world's noise band, 0.40 to 0.60 and 0.36 to
+0.64. Later brains did not pull ahead of the brains of 25,000 as those had
+pulled ahead of the brains of 2,500.
+
+<!-- figure eras/ratings -->
+![Each era's rating, from every contest](../figures/eras/ratings.svg)
+
+**Each era's rating, from every contest.** One rating per era and world, fitted to every contest of that world by least squares on the log-odds of the scores (Bradley–Terry): +100 means the era's brains beat the brains of 2,500 about 64 times in a hundred.
+
+> [!example]- How to make this figure
+> **Runs.** Experiment 28's 240 contests (`python3 gol_lab.py run E28`): every 2,500th era of Experiment 18's two worlds played to 50,000 iterations (`B2-10000-4af4a3-s005`, `-s006`) against the eras of 2,500, 10,000 and 25,000, each pair once on each era's world (coin 17), and each of those three eras against itself four times (coins 17 to 20).
+>
+> **Data.** From each trial's `result.json`.
+>
+> 1. For each pair of eras, the mean share of the later era over its two contests.
+> 2. Fit one rating per era so that the log-odds of every score is the difference of the two ratings, the era of 2,500 at 0 (`gol_tournament.ratings`); shown in Elo points.
+>
+> **To make it again:** `python3 book_figures.py eras`.
+<!-- /figure -->
+
+The ratings, fitted to every contest of a world, say the same.
+- **Seed 5** rose from 0 at 2,500 to about +105 Elo points at 22,500. From
+  30,000 to 50,000 it wandered between +55 and +110.
+- **Seed 6** rose to +155 at 25,000 and 27,500, then wandered between +55
+  and +145.
+
+Neither world's brains of 50,000 are better than its best brains of 20,000
+to 30,000.
+
+**Not every era beat the brains of 2,500.**
+- **Seed 5:** 11 of the 19 eras from 5,000 on scored above the noise band
+  against them. The eras of 5,000 to 12,500 did not (0.49 to 0.58), nor did
+  30,000 (0.58), nor the last three (0.53 to 0.55).
+- **Seed 6:** 8 of 19. Its world shrank to 273 and 394 agents around
+  iterations 5,000 to 7,500. The brains that came out of that, at 10,000,
+  scored 0.40 against the brains of 2,500, worse than their ancestors.
+  Evolution there went back before it went on.
+
+**Seed 5 went round; seed 6 went back.**
+- **Seed 5 went round.** The eras after 25,000 beat the brains of 25,000
+  (0.55), and those had beaten the brains of 2,500 (0.67). Chained, the two
+  predict how the later eras should do against 2,500. They did worse in all
+  ten eras, by 0.12 on average. They gained against the play of 25,000 and
+  lost part of what that play had over the old one: a step round a circle,
+  not up a ladder.
+- **Seed 6 went back.** Its eras after 25,000 lost a little to the brains of
+  25,000 (0.46) and won less against 2,500 (a median of 0.64, against 0.70
+  for the brains of 25,000). There the chain holds, 0.02 off.
+
+**The noise is wide.** Each fixed era played against itself spread its
+scores with a standard deviation of 0.05 in seed 5 and 0.07 in seed 6, so
+the band is 0.10 and 0.14 either side of 0.5. An era's score here is the
+mean of two contests, and a contest of 100 iterations is short. The next
+contests will play each pair with more coins.
+
+## The verdict
+
+**The thesis fails.** Its first part holds: in both worlds the eras after
+25,000 do no better than noise against the brains of 25,000. Its second
+part does not: not every era from 5,000 on beats the brains of 2,500 beyond
+the noise. In seed 5, 8 of 19 failed; in seed 6, 11 of 19.
+
+What the contests show is more than a plateau. Evolution climbed for about
+20,000 to 25,000 iterations. Then it stopped climbing and wandered: back a
+little in one world, round a circle in the other.
+
+## What it teaches
+
+- **A plateau that is not a top.** The ratings stop rising by 25,000, yet a
+  best reply would still gain about a node a game at every era. Better play
+  is there and is not found, which is what a valley between the play
+  evolution has and better play would do
+  ([Chapter 51](51-strategies-written-by-hand.md),
+  [Chapter 94](94-what-a-brain-can-compute.md)).
+- **A chain of contests hides circles.** Contests between neighbours in time
+  ([Chapter 81](81-five-mixed-worlds-fifty-thousand-iterations.md)) said
+  later brains win by less and less. Fixed eras show that later brains can
+  win against their parents and still lose ground against their ancestors.
+  The test of open-ended evolution asks for wins against the best mix of
+  all the past for that reason
+  ([What would count as open-ended evolution](../notes/open-ended-test.md)).
+- **What comes next.** A world that is to keep climbing needs a way across
+  the valley: a crowd for a new strategy to start from
+  ([Chapter 96](96-how-large-a-crowd-a-raider-needs.md)), or a rule that
+  makes the better play reachable in small steps.
 
 <!-- turns -->
 ---

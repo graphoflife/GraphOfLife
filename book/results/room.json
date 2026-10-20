@@ -1,0 +1,325 @@
+{
+ "chapter": "room",
+ "numbers": {
+  "worlds": [
+   {
+    "id": "B2-10000-06b876-s001",
+    "agents": 5386,
+    "marks": 7,
+    "diversity": 0.34164110429447847,
+    "wide": 2.0241573515891944,
+    "gini_tokens": 0.43398585220943175,
+    "tokens_per_agent": 1.856665428889714,
+    "dimension": 3.6184985962962894,
+    "group": "estate to the newborns",
+    "parts": {
+     "spread_tokens": 0.05674846625766871,
+     "spread_links": 0.10889570552147239,
+     "spread_ages": 0.6595092024539877,
+     "effective_genotypes_per_agent": 0.5414110429447853
+    }
+   },
+   {
+    "id": "B2-10000-06b876-s002",
+    "agents": 5036,
+    "marks": 7,
+    "diversity": 0.3822852760736196,
+    "wide": 2.426808225740304,
+    "gini_tokens": 0.44893208895949166,
+    "tokens_per_agent": 1.9857029388403495,
+    "dimension": 3.457836736613823,
+    "group": "estate to the newborns",
+    "parts": {
+     "spread_tokens": 0.11349693251533742,
+     "spread_links": 0.21625766871165644,
+     "spread_ages": 0.48006134969325154,
+     "effective_genotypes_per_agent": 0.7193251533742331
+    }
+   },
+   {
+    "id": "B2-10000-b8e9fc-s001",
+    "agents": 5445,
+    "marks": 7,
+    "diversity": 0.40605828220858897,
+    "wide": 2.648167859577174,
+    "gini_tokens": 0.4240225160697888,
+    "tokens_per_agent": 1.8365472910927456,
+    "dimension": 3.5044513868509855,
+    "group": "estate to the parents",
+    "parts": {
+     "spread_tokens": 0.06441717791411043,
+     "spread_links": 0.10889570552147239,
+     "spread_ages": 0.6978527607361963,
+     "effective_genotypes_per_agent": 0.7530674846625767
+    }
+   },
+   {
+    "id": "B2-10000-b8e9fc-s002",
+    "agents": 5175,
+    "marks": 7,
+    "diversity": 0.32246932515337423,
+    "wide": 2.0224608636553154,
+    "gini_tokens": 0.4467924251207729,
+    "tokens_per_agent": 1.932367149758454,
+    "dimension": 3.8287238943845834,
+    "group": "estate to the parents",
+    "parts": {
+     "spread_tokens": 0.08128834355828221,
+     "spread_links": 0.13957055214723926,
+     "spread_ages": 0.3067484662576687,
+     "effective_genotypes_per_agent": 0.7622699386503068
+    }
+   },
+   {
+    "id": "B2-10000-89f5b1-s001",
+    "agents": 2594,
+    "marks": 7,
+    "diversity": 0.30253067484662577,
+    "wide": 1.848213503425541,
+    "gini_tokens": 0.7000691595990749,
+    "tokens_per_agent": 3.8550501156515034,
+    "dimension": 3.1034160365282966,
+    "group": "no old age",
+    "parts": {
+     "spread_tokens": 0.15030674846625766,
+     "spread_links": 0.14570552147239263,
+     "spread_ages": 0.05828220858895705,
+     "effective_genotypes_per_agent": 0.8558282208588958
+    }
+   },
+   {
+    "id": "B2-10000-89f5b1-s002",
+    "agents": 2366,
+    "marks": 7,
+    "diversity": 0.29332822085889565,
+    "wide": 1.6948446038596852,
+    "gini_tokens": 0.7290022823330515,
+    "tokens_per_agent": 4.22654268808115,
+    "dimension": 3.117386538203983,
+    "group": "no old age",
+    "parts": {
+     "spread_tokens": 0.13496932515337423,
+     "spread_links": 0.1411042944785276,
+     "spread_ages": 0.04294478527607362,
+     "effective_genotypes_per_agent": 0.8542944785276073
+    }
+   },
+   {
+    "id": "B2-10000-c58a16-s001",
+    "agents": 1443,
+    "marks": 6,
+    "diversity": 0.57170245398773,
+    "wide": 1.8934724023282437,
+    "gini_tokens": 0.47604005544005545,
+    "tokens_per_agent": 6.93000693000693,
+    "dimension": 2.54927150763198,
+    "group": "deaths not mended",
+    "parts": {
+     "spread_tokens": 0.9095092024539877,
+     "spread_links": 0.6947852760736196,
+     "spread_ages": 0.147239263803681,
+     "effective_genotypes_per_agent": 0.5352760736196319
+    }
+   },
+   {
+    "id": "B2-10000-c58a16-s002",
+    "agents": 1119,
+    "marks": 5,
+    "diversity": 0.3907208588957055,
+    "wide": 1.5540205070690292,
+    "gini_tokens": 0.3485524575513852,
+    "tokens_per_agent": 8.936550491510276,
+    "dimension": 3.027521172911756,
+    "group": "deaths not mended",
+    "parts": {
+     "spread_tokens": 0.74079754601227,
+     "spread_links": 0.2223926380368098,
+     "spread_ages": 0.12883435582822086,
+     "effective_genotypes_per_agent": 0.4708588957055215
+    }
+   },
+   {
+    "id": "B2-10000-bcc1bc-s001",
+    "agents": 1501,
+    "marks": 7,
+    "diversity": 0.6062116564417177,
+    "wide": 1.2641280845043075,
+    "gini_tokens": 0.44571472351765484,
+    "tokens_per_agent": 6.662225183211192,
+    "dimension": 3.93678074741154,
+    "group": "parents as mates (Experiment 19)",
+    "parts": {
+     "spread_tokens": 0.8987730061349694,
+     "spread_links": 0.24386503067484663,
+     "spread_ages": 0.5015337423312883,
+     "effective_genotypes_per_agent": 0.7806748466257669
+    }
+   },
+   {
+    "id": "B2-10000-bcc1bc-s002",
+    "agents": 905,
+    "marks": 7,
+    "diversity": 0.6188650306748466,
+    "wide": 1.161575424069974,
+    "gini_tokens": 0.4425299447513813,
+    "tokens_per_agent": 11.049723756906078,
+    "dimension": 3.640599968038951,
+    "group": "parents as mates (Experiment 19)",
+    "parts": {
+     "spread_tokens": 0.9325153374233128,
+     "spread_links": 0.21012269938650308,
+     "spread_ages": 0.7177914110429447,
+     "effective_genotypes_per_agent": 0.6150306748466258
+    }
+   },
+   {
+    "id": "B2-10000-bcc1bc-s003",
+    "agents": 1664,
+    "marks": 6,
+    "diversity": 0.5812883435582823,
+    "wide": 1.1741600265738643,
+    "gini_tokens": 0.5041037259615386,
+    "tokens_per_agent": 6.009615384615385,
+    "dimension": 4.041123859695505,
+    "group": "parents as mates (Experiment 19)",
+    "parts": {
+     "spread_tokens": 0.9156441717791411,
+     "spread_links": 0.21779141104294478,
+     "spread_ages": 0.4785276073619632,
+     "effective_genotypes_per_agent": 0.7131901840490797
+    }
+   },
+   {
+    "id": "B2-10000-bcc1bc-s004",
+    "agents": 2134,
+    "marks": 6,
+    "diversity": 0.5843558282208589,
+    "wide": 1.2497694064459048,
+    "gini_tokens": 0.4504036551077788,
+    "tokens_per_agent": 4.686035613870666,
+    "dimension": 4.114136571583617,
+    "group": "parents as mates (Experiment 19)",
+    "parts": {
+     "spread_tokens": 0.8466257668711656,
+     "spread_links": 0.3834355828220859,
+     "spread_ages": 0.3619631901840491,
+     "effective_genotypes_per_agent": 0.745398773006135
+    }
+   },
+   {
+    "id": "B2-10000-bcc1bc-s005",
+    "agents": 1865,
+    "marks": 7,
+    "diversity": 0.5440950920245399,
+    "wide": 1.286341857766074,
+    "gini_tokens": 0.5221457372654155,
+    "tokens_per_agent": 5.361930294906166,
+    "dimension": 3.841314612198241,
+    "group": "parents as mates (Experiment 19)",
+    "parts": {
+     "spread_tokens": 0.8987730061349694,
+     "spread_links": 0.24233128834355827,
+     "spread_ages": 0.5,
+     "effective_genotypes_per_agent": 0.5352760736196319
+    }
+   },
+   {
+    "id": "B2-10000-bcc1bc-s006",
+    "agents": 1761,
+    "marks": 6,
+    "diversity": 0.6687116564417178,
+    "wide": 1.2038605551210155,
+    "gini_tokens": 0.46941885292447494,
+    "tokens_per_agent": 5.6785917092561045,
+    "dimension": 4.0877145417355525,
+    "group": "parents as mates (Experiment 19)",
+    "parts": {
+     "spread_tokens": 0.8987730061349694,
+     "spread_links": 0.696319018404908,
+     "spread_ages": 0.3052147239263804,
+     "effective_genotypes_per_agent": 0.7745398773006135
+    }
+   },
+   {
+    "id": "B2-10000-bcc1bc-s007",
+    "agents": 2460,
+    "marks": 7,
+    "diversity": 0.6506901840490797,
+    "wide": 1.2943251050200688,
+    "gini_tokens": 0.5656091056910568,
+    "tokens_per_agent": 4.065040650406504,
+    "dimension": 3.8532940937894833,
+    "group": "parents as mates (Experiment 19)",
+    "parts": {
+     "spread_tokens": 0.7315950920245399,
+     "spread_links": 0.4616564417177914,
+     "spread_ages": 0.6993865030674846,
+     "effective_genotypes_per_agent": 0.7101226993865031
+    }
+   },
+   {
+    "id": "B2-10000-bcc1bc-s008",
+    "agents": 1791,
+    "marks": 6,
+    "diversity": 0.6706288343558282,
+    "wide": 1.2061792448126674,
+    "gini_tokens": 0.5240637632607481,
+    "tokens_per_agent": 5.583472920156337,
+    "dimension": 4.206660889872355,
+    "group": "parents as mates (Experiment 19)",
+    "parts": {
+     "spread_tokens": 0.8926380368098159,
+     "spread_links": 0.34662576687116564,
+     "spread_ages": 0.6733128834355828,
+     "effective_genotypes_per_agent": 0.7699386503067485
+    }
+   },
+   {
+    "id": "B2-10000-bcc1bc-s009",
+    "agents": 2251,
+    "marks": 7,
+    "diversity": 0.7473159509202454,
+    "wide": 1.2626440528770095,
+    "gini_tokens": 0.5176223011994667,
+    "tokens_per_agent": 4.44247001332741,
+    "dimension": 3.898952198673235,
+    "group": "parents as mates (Experiment 19)",
+    "parts": {
+     "spread_tokens": 0.8542944785276073,
+     "spread_links": 0.6319018404907976,
+     "spread_ages": 0.7055214723926381,
+     "effective_genotypes_per_agent": 0.7975460122699386
+    }
+   },
+   {
+    "id": "B2-10000-bcc1bc-s010",
+    "agents": 1663,
+    "marks": 6,
+    "diversity": 0.5973926380368098,
+    "wide": 1.157187570089636,
+    "gini_tokens": 0.486855441972339,
+    "tokens_per_agent": 6.013229104028864,
+    "dimension": 4.1488543055562905,
+    "group": "parents as mates (Experiment 19)",
+    "parts": {
+     "spread_tokens": 0.9141104294478528,
+     "spread_links": 0.25920245398773006,
+     "spread_ages": 0.4125766871165644,
+     "effective_genotypes_per_agent": 0.803680981595092
+    }
+   }
+  ]
+ },
+ "figures": {
+  "measures": {
+   "title": "Experiment 19's world, given room",
+   "caption": "Each dot is one world at iteration 3,000: Experiment 19's ten (grey) and Experiment 31's two for each rule. The dashed line is what the author's picture asks: every mark, a diversity score above B2's median world at 3,000 (0.54), a typical distance at least 1.5 times the random twin's, a Gini no lower than B2's least even world at 3,000 (0.47).",
+   "recipe": "**Runs.** Experiment 31's eight runs (`python3 gol_lab.py run E31`): B2 at 10,000 tokens with brains mixed at birth and parents as mates, and the estate of the dead paid to the newborns (`B2-10000-06b876-\u2026`) or to the parents (`-b8e9fc-\u2026`), no old age (`-89f5b1-\u2026`) or deaths not mended (`-c58a16-\u2026`), seeds 1 and 2, to 3,000 iterations; and Experiment 19's ten worlds (`B2-10000-bcc1bc-s001` \u2026 `-s010`), all read at iteration 3,000 from their archives.\n\n**Data.** From each world's archive at iteration 3,000.\n\n1. Read each world as `research/atlas/profile.py` reads every world: the seven marks, the four spreads ranked among the frozen reference worlds (their mean is the diversity score), the Gini of the tokens.\n2. Its typical distance over its random twin's, as `research/atlas/space.py` measures it.\n3. The lines: every mark; the median diversity, and the least Gini, of B2's ten worlds played on and read at 3,000; a typical distance of 1.5 times the twin's.\n\n**To make it again:** `python3 book_figures.py room`."
+  },
+  "parts": {
+   "title": "What each rule costs of the diversity",
+   "caption": "The four parts of the diversity score, each world's percentile among the frozen reference worlds: how many doubling classes its agents' tokens, links and ages fill, and its effective number of genotypes per agent. Each dot is one world at iteration 3,000.",
+   "recipe": "**Runs.** Experiment 31's eight runs (`python3 gol_lab.py run E31`): B2 at 10,000 tokens with brains mixed at birth and parents as mates, and the estate of the dead paid to the newborns (`B2-10000-06b876-\u2026`) or to the parents (`-b8e9fc-\u2026`), no old age (`-89f5b1-\u2026`) or deaths not mended (`-c58a16-\u2026`), seeds 1 and 2, to 3,000 iterations; and Experiment 19's ten worlds (`B2-10000-bcc1bc-s001` \u2026 `-s010`), all read at iteration 3,000 from their archives.\n\n**Data.** From each world's archive at iteration 3,000.\n\n1. Read each world as `research/atlas/profile.py` reads every world: the seven marks, the four spreads ranked among the frozen reference worlds (their mean is the diversity score), the Gini of the tokens.\n\n**To make it again:** `python3 book_figures.py room`."
+  }
+ }
+}

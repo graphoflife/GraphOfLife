@@ -135,6 +135,106 @@ Room has to come from a rule.
 > A value in **bold** differs from the baseline B2.
 <!-- /runs -->
 
+## What the worlds did
+
+<!-- figure room/measures -->
+![Experiment 19's world, given room](../figures/room/measures.svg)
+
+**Experiment 19's world, given room.** Each dot is one world at iteration 3,000: Experiment 19's ten (grey) and Experiment 31's two for each rule. The dashed line is what the author's picture asks: every mark, a diversity score above B2's median world at 3,000 (0.54), a typical distance at least 1.5 times the random twin's, a Gini no lower than B2's least even world at 3,000 (0.47).
+
+> [!example]- How to make this figure
+> **Runs.** Experiment 31's eight runs (`python3 gol_lab.py run E31`): B2 at 10,000 tokens with brains mixed at birth and parents as mates, and the estate of the dead paid to the newborns (`B2-10000-06b876-…`) or to the parents (`-b8e9fc-…`), no old age (`-89f5b1-…`) or deaths not mended (`-c58a16-…`), seeds 1 and 2, to 3,000 iterations; and Experiment 19's ten worlds (`B2-10000-bcc1bc-s001` … `-s010`), all read at iteration 3,000 from their archives.
+>
+> **Data.** From each world's archive at iteration 3,000.
+>
+> 1. Read each world as `research/atlas/profile.py` reads every world: the seven marks, the four spreads ranked among the frozen reference worlds (their mean is the diversity score), the Gini of the tokens.
+> 2. Its typical distance over its random twin's, as `research/atlas/space.py` measures it.
+> 3. The lines: every mark; the median diversity, and the least Gini, of B2's ten worlds played on and read at 3,000; a typical distance of 1.5 times the twin's.
+>
+> **To make it again:** `python3 book_figures.py room`.
+<!-- /figure -->
+
+**Every rule gave the world room, and every rule took something else.**
+At iteration 3,000:
+- **Experiment 19's own worlds** are as before:
+  - 6 or 7 marks;
+  - diverse, 0.54 to 0.75;
+  - uneven, Ginis of 0.44 to 0.57;
+  - folded, 1.16 to 1.29 times their twins.
+- **The estate to the newborns, or to the parents,** made true spaces:
+  - 2.0 to 2.65 times as wide as their twins, at a dimension of about 3.5;
+  - every mark of the health bar;
+  - about 5,000 agents.
+
+  But the diversity scores fell to 0.32 to 0.41, and the Ginis to 0.42 to
+  0.45, a little more even than B2's least even world.
+- **No old age** made spaces too, 1.7 to 1.9 times their twins, with every
+  mark and very uneven tokens (Ginis of 0.70 and 0.73). Diversity fell to
+  0.29 and 0.30.
+- **Deaths not mended** went two ways.
+  - **Seed 1** came nearest of all: 1.89 times its twin, a diversity score
+    of 0.57, a Gini of 0.48. It missed one mark: one agent's loss could cut
+    off too much.
+  - **Seed 2** missed two marks (a cut and a hub), its diversity (0.39) and
+    its unevenness (0.35).
+
+<!-- figure room/parts -->
+![What each rule costs of the diversity](../figures/room/parts.svg)
+
+**What each rule costs of the diversity.** The four parts of the diversity score, each world's percentile among the frozen reference worlds: how many doubling classes its agents' tokens, links and ages fill, and its effective number of genotypes per agent. Each dot is one world at iteration 3,000.
+
+> [!example]- How to make this figure
+> **Runs.** Experiment 31's eight runs (`python3 gol_lab.py run E31`): B2 at 10,000 tokens with brains mixed at birth and parents as mates, and the estate of the dead paid to the newborns (`B2-10000-06b876-…`) or to the parents (`-b8e9fc-…`), no old age (`-89f5b1-…`) or deaths not mended (`-c58a16-…`), seeds 1 and 2, to 3,000 iterations; and Experiment 19's ten worlds (`B2-10000-bcc1bc-s001` … `-s010`), all read at iteration 3,000 from their archives.
+>
+> **Data.** From each world's archive at iteration 3,000.
+>
+> 1. Read each world as `research/atlas/profile.py` reads every world: the seven marks, the four spreads ranked among the frozen reference worlds (their mean is the diversity score), the Gini of the tokens.
+>
+> **To make it again:** `python3 book_figures.py room`.
+<!-- /figure -->
+
+**What each rule cost.** The diversity score is the mean of four parts,
+and each rule took a different one:
+- **The estates take the tokens.** Paying the estate to births fills the
+  world with children, about 5,000 agents for 10,000 tokens, 1.9 tokens
+  each. The agents' tokens fill about two doubling classes, against four or
+  five in Experiment 19's world, and their links vary little. Almost every
+  agent holds the same few tokens: the case the author called unhealthy.
+- **No old age takes the ages.** With no deaths of age there are few births,
+  and almost every agent is old.
+- **No mending takes the ages too,** and leaves the world cuttable, but
+  keeps its tokens as spread as Experiment 19's.
+
+## The verdict
+
+**The thesis fails.** No rule had both its worlds meet all four at 3,000.
+One world without mending missed by one mark. Room and the rest still pull
+apart, even in the steadiest mixed world. What each rule pays is now known:
+- the estates pay with poor, alike agents;
+- no old age pays with one age;
+- no mending pays with cuts.
+
+## What it teaches
+
+- **Half the picture is solved.** With the estates to births, a world of
+  mixed brains and parents as mates is a healthy space of about three
+  dimensions, with every mark: the network the author's picture asks for.
+  What it lacks is in its agents. There are too many of them, each too poor
+  for its tokens to differ.
+- **The cost is the price of a child.** An estate paid to the newborns makes
+  children cheap to have and the world fills with them. The next rule to
+  try keeps the estate but asks more of a birth, without a number: a child
+  must be born with at least what its parent's neighbours hold, so a world
+  can grow only as rich as it is. It is local, needs no constant, and is
+  Meta XI's missing pull — births that pay more when they would make the
+  world poorer.
+- **The nearest world is one without mending.** Seed 1 missed only a cut. A
+  world whose deaths are not mended keeps its tokens and its room; what it
+  needs is to stay whole. Mending without folding is a second rule to try
+  ([Chapter 87](87-what-folds-a-world.md) traced the folding to the rings a
+  death closes).
+
+
 <!-- turns -->
 ---
 

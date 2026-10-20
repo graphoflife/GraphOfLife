@@ -1,0 +1,174 @@
+{
+ "chapter": "searchbest",
+ "numbers": {
+  "twin": {
+   "compared": 1000,
+   "first_difference": null
+  },
+  "readings": [
+   {
+    "id": "B2-10000-d2b0d2-s001",
+    "at": 1000,
+    "agents": 888,
+    "marks": 4,
+    "diversity": 0.8232361963190185,
+    "wide": 2.7317453141223265,
+    "gini_tokens": 0.35681801801801805,
+    "tokens_per_agent": 11.26126126126126,
+    "dimension": 2.082652671828729,
+    "agent_cut": 0.19144144144144143,
+    "link_cut": 0.04054054054054054
+   },
+   {
+    "id": "B2-10000-d2b0d2-s001",
+    "at": 2000,
+    "agents": 649,
+    "marks": 4,
+    "diversity": 0.879601226993865,
+    "wide": 2.332837158744372,
+    "gini_tokens": 0.3654021571648689,
+    "tokens_per_agent": 15.408320493066256,
+    "dimension": 2.1612072590190805,
+    "agent_cut": 0.18798151001540833,
+    "link_cut": 0.1325115562403698
+   },
+   {
+    "id": "B2-10000-d2b0d2-s002",
+    "at": 1000,
+    "agents": 795,
+    "marks": 4,
+    "diversity": 0.8362730061349694,
+    "wide": 2.708072846037496,
+    "gini_tokens": 0.3626488050314465,
+    "tokens_per_agent": 12.578616352201259,
+    "dimension": 2.1133355183405067,
+    "agent_cut": 0.47044025157232705,
+    "link_cut": 0.18742138364779873
+   },
+   {
+    "id": "B2-10000-d2b0d2-s002",
+    "at": 2000,
+    "agents": 919,
+    "marks": 4,
+    "diversity": 0.8121165644171779,
+    "wide": 2.7683300157835946,
+    "gini_tokens": 0.31812339499455944,
+    "tokens_per_agent": 10.88139281828074,
+    "dimension": 2.240435951910734,
+    "agent_cut": 0.1294885745375408,
+    "link_cut": 0.060935799782372145
+   },
+   {
+    "id": "B2-10000-d2b0d2-s003",
+    "at": 1000,
+    "agents": 882,
+    "marks": 4,
+    "diversity": 0.8044478527607362,
+    "wide": 2.7451782307451578,
+    "gini_tokens": 0.3318374149659864,
+    "tokens_per_agent": 11.337868480725623,
+    "dimension": 2.127928981829543,
+    "agent_cut": 0.42517006802721086,
+    "link_cut": 0.42517006802721086
+   },
+   {
+    "id": "B2-10000-d2b0d2-s003",
+    "at": 2000,
+    "agents": 593,
+    "marks": 5,
+    "diversity": 0.8121165644171779,
+    "wide": 2.427984129732727,
+    "gini_tokens": 0.34358583473861715,
+    "tokens_per_agent": 16.863406408094434,
+    "dimension": 2.0546839637523275,
+    "agent_cut": 0.1315345699831366,
+    "link_cut": 0.003372681281618887
+   },
+   {
+    "id": "B2-10000-d2b0d2-s004",
+    "at": 1000,
+    "agents": 691,
+    "marks": 4,
+    "diversity": 0.8059815950920245,
+    "wide": 2.672994315621021,
+    "gini_tokens": 0.3849366136034731,
+    "tokens_per_agent": 14.47178002894356,
+    "dimension": 2.0040079547533685,
+    "agent_cut": 0.3227206946454414,
+    "link_cut": 0.3227206946454414
+   },
+   {
+    "id": "B2-10000-d2b0d2-s004",
+    "at": 2000,
+    "agents": 501,
+    "marks": 4,
+    "diversity": 0.8976226993865031,
+    "wide": 2.0471617781347815,
+    "gini_tokens": 0.36565189620758476,
+    "tokens_per_agent": 19.960079840319363,
+    "dimension": 2.2349270256055567,
+    "agent_cut": 0.14171656686626746,
+    "link_cut": 0.03792415169660679
+   },
+   {
+    "id": "B2-10000-d2b0d2-s005",
+    "at": 1000,
+    "agents": 576,
+    "marks": 4,
+    "diversity": 0.8903374233128835,
+    "wide": 2.5803222666682015,
+    "gini_tokens": 0.3671715277777776,
+    "tokens_per_agent": 17.36111111111111,
+    "dimension": 2.1662436655811668,
+    "agent_cut": 0.3524305555555556,
+    "link_cut": 0.3524305555555556
+   },
+   {
+    "id": "B2-10000-d2b0d2-s005",
+    "at": 2000,
+    "agents": 618,
+    "marks": 4,
+    "diversity": 0.8443251533742331,
+    "wide": 2.340122312990021,
+    "gini_tokens": 0.3424501618122977,
+    "tokens_per_agent": 16.181229773462782,
+    "dimension": 2.0504531438924944,
+    "agent_cut": 0.255663430420712,
+    "link_cut": 0.04854368932038835
+   },
+   {
+    "id": "B2-10000-d2b0d2-s2025",
+    "at": 1000,
+    "agents": 416,
+    "marks": 7,
+    "diversity": 0.9014570552147239,
+    "wide": 2.01548208428423,
+    "gini_tokens": 0.4374817307692307,
+    "tokens_per_agent": 24.03846153846154,
+    "dimension": 2.39932183598735,
+    "agent_cut": 0.019230769230769232,
+    "link_cut": 0.007211538461538462
+   },
+   {
+    "id": "B2-10000-d2b0d2-s2025",
+    "at": 2000,
+    "agents": 500,
+    "marks": 4,
+    "diversity": 0.8178680981595092,
+    "wide": 2.436292083816189,
+    "gini_tokens": 0.3253728,
+    "tokens_per_agent": 20.0,
+    "dimension": 2.15456478007279,
+    "agent_cut": 0.252,
+    "link_cut": 0.046
+   }
+  ]
+ },
+ "figures": {
+  "measures": {
+   "title": "The search's best settings, in six worlds",
+   "caption": "Each dot is one world at iteration 1,000 (orange) or 2,000 (violet): the five new seeds small, the search's own seed large. The dashed line is what the author's picture asks: every mark of the health bar, a diversity score above B2's median world (0.49), a typical distance at least 1.5 times the random twin's, and a Gini no lower than B2's least even world (0.47).",
+   "recipe": "**Runs.** Experiment 24's six runs (`python3 gol_lab.py run E24`): the settings of `Z/r2-25` played by the research prototype in the lab (`gol_pilot.py`), seeds 1 to 5 (`B2-10000-d2b0d2-s001` \u2026 `-s005`) and the search's own seed (`B2-10000-d2b0d2-s2025`), each to 2,000 iterations, with a whole world kept every 100.\n\n**Data.** From each run's checkpoints at 1,000 and 2,000 (`ckpt_001000.npz`, `ckpt_002000.npz`).\n\n1. Read each world as `research/atlas/profile.py` reads every world: the seven marks, the four spreads ranked among the frozen reference worlds, the Gini of the tokens.\n2. Its typical distance over its random twin's as `research/atlas/space.py` measures it.\n\n**To make it again:** `python3 book_figures.py searchbest`."
+  }
+ }
+}

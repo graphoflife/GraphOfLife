@@ -464,26 +464,26 @@
         {
           "id": "98",
           "title": "The search's best world, in new seeds",
-          "note": "Experiment 24: the settings of the random search's best world (Z/r2-25: brains that grow, lottery contests, stakes pooled by genotype, an input of where a brain came from, gifts, a walk to strangers) in five new seeds, and its own seed played again in the lab: a configuration, or a lucky draw?",
+          "note": "Experiment 24: the random search's best settings (Z/r2-25) in five new seeds. Every world was diverse (0.80 to 0.89), a wide space (2.6 to 2.75 times its twin) and rich; none met more than four marks (cut by one loss, about two-dimensional) and all were too even. The search's own world, played again game for game, met every mark only at its lucky moment.",
           "file": "chapters/98-the-searchs-best-world-in-new-seeds.md",
           "experiment": "E24",
-          "status": "ready"
+          "status": "analysed"
         },
         {
           "id": "99",
           "title": "A mate that pays its share",
-          "note": "Experiment 22: brains mixed at birth with a mate that pays the child as much as the parent, in four worlds to 5,000 iterations, against Experiment 17's free mates: does the world's size hold steadier? The pilots stopped on 18 October, played again in the lab.",
+          "note": "Experiment 22: brains mixed at birth with a mate that pays the child as much as the parent, in four worlds to 5,000. Every world held its size far steadier than Experiment 17's of the same seed (spread 0.09 to 0.16 against 0.19 to 0.63) and none came near dying; healthy and diverse, but folded. The lab played the stopped pilots game for game.",
           "file": "chapters/99-a-mate-that-pays-its-share.md",
           "experiment": "E22",
-          "status": "ready"
+          "status": "analysed"
         },
         {
           "id": "100",
           "title": "Room for the steadiest world",
-          "note": "Experiment 31: Experiment 19's world (mixed at birth, parents as mates: steady, diverse, uneven, but folded) given each rule that keeps a world's room (estate to the newborns, to the parents, no old age, no mending), two seeds each for 3,000 iterations: can it become a space without losing the rest?",
+          "note": "Experiment 31: Experiment 19's world given each rule that keeps a world's room. Every rule unfolded it, and each paid in its own coin: the estates to births made healthy three-dimensional spaces of poor, alike agents; no old age made agents of one age; no mending kept the riches but left cuts (one world missed only that). Half the picture solved; the next rule asks more of a birth.",
           "file": "chapters/100-room-for-the-steadiest-world.md",
           "experiment": "E31",
-          "status": "ready"
+          "status": "analysed"
         }
       ]
     },
@@ -645,26 +645,26 @@
         {
           "id": "95",
           "title": "Every era against three",
-          "note": "Experiment 28: every 2,500th era of Experiment 18's two longest worlds against the brains of 2,500, 10,000 and 25,000, in lifetime contests on both worlds, to tell a plateau, a slow climb and a circle apart.",
+          "note": "Experiment 28: every 2,500th era of Experiment 18's two longest worlds against the brains of 2,500, 10,000 and 25,000. Climbing stopped by about 25,000 in both; afterwards one world went round a circle (later brains beat the brains of 25,000 and lost ground against those of 2,500) and the other went a little back. The thesis fails by its second part. A best reply still gains a node a game at every era: a plateau, not a top.",
           "file": "chapters/95-every-era-against-three.md",
           "experiment": "E28",
-          "status": "ready"
+          "status": "analysed"
         },
         {
           "id": "96",
           "title": "How large a crowd a raider needs",
-          "note": "Experiment 29: patches of 1 to 100 raiders and of 5% of a world, ten places each in the two evolved worlds where raiders took hold, and 5% in five places in all ten, each with a control: how large a crowd the raid needs, and whether the world or the place decides.",
+          "note": "Experiment 29: raider patches of 1 to 100 agents and of 5% in two evolved worlds, and 5% in all ten, each with a control. No patch of up to 30 raiders took hold; 100 did in 4 of 20 and 5% in 12 of 20. The valley evolution would have to cross is about a hundred agents wide; and the world decides as much as the crowd (13 of 50 places across ten worlds).",
           "file": "chapters/96-how-large-a-crowd-a-raider-needs.md",
           "experiment": "E29",
-          "status": "ready"
+          "status": "analysed"
         },
         {
           "id": "97",
           "title": "Does evolution close the door?",
-          "note": "Experiment 30: raiders planted in B2's five worlds played on to 10,000 iterations, at 500, 2,000, 5,000 and 10,000: does a longer-evolved world resist a raid it has never met?",
+          "note": "Experiment 30: raiders planted in B2's five worlds played on, at 500, 2,000, 5,000 and 10,000. The door closed (15, 4, 0 and 0 of 15 took hold) but not by a defence: residents hardly fought the late raiders, which could not raid at all, because the patches they started from had grown poorer than the three tokens a raid needs. A world of many small agents shuts out lone raiders, not groups.",
           "file": "chapters/97-does-evolution-close-the-door.md",
           "experiment": "E30",
-          "status": "ready"
+          "status": "analysed"
         }
       ]
     },

@@ -109,6 +109,77 @@ again, game for game.
 > A value in **bold** differs from the baseline B2.
 <!-- /runs -->
 
+## What the worlds did
+
+**The lab plays the stopped pilots as they went.** The worlds of seeds 1
+and 2 matched the pilots' agents and links after every game, as far as the
+pilots had gone: 1,311 and 1,719 iterations.
+
+<!-- figure matepays/sizes -->
+![Agents alive, with a mate that pays and with a free mate](../figures/matepays/sizes.svg)
+
+**Agents alive, with a mate that pays and with a free mate.** Each line is one world, its agents after each game in means over 50 iterations, on a logarithmic axis. Orange: brains mixed at birth with a mate that pays the child as much as the parent (seeds 1 to 4); grey: Experiment 17's worlds of the same seeds, whose mates pay nothing.
+
+> [!example]- How to make this figure
+> **Runs.** Experiment 22's four runs (`python3 gol_lab.py run E22`): B2 at 10,000 tokens with brains mixed at birth and the pilots' rule `mate_pays`, seeds 1 to 4, to 5,000 iterations, played by the research prototype in the lab (`B2-10000-8ff8c5-s001` … `-s004`); against Experiment 17's runs of the same seeds (`B2-10000-4af4a3-s001` … `-s004`), mixing with a mate that pays nothing.
+>
+> **Data.** From the pilots' `series.jsonl` and the lab runs' `stats.jsonl`.
+>
+> 1. Read the agents after each game: a pilot's row of each iteration, a lab run's row of phase 2.
+> 2. Average over stretches of 50 iterations.
+>
+> **To make it again:** `python3 book_figures.py matepays`.
+<!-- /figure -->
+
+**A mate that pays holds a mixed world's size.** From iteration 500 to
+5,000:
+
+| seed | spread of the logarithm of the agents, paying mate | free mate | fewest agents, paying mate | free mate |
+|---|---|---|---|---|
+| 1 | 0.12 | 0.19 | 1,685 | 648 |
+| 2 | 0.09 | 0.34 | 1,414 | 245 |
+| 3 | 0.16 | 0.63 | 1,127 | 40 |
+| 4 | 0.12 | 0.47 | 1,012 | 316 |
+
+Every world with a paying mate was steadier than Experiment 17's world of
+the same seed, and none came near dying out. Their medians were 1,394 to
+2,048 agents, where the free mates' worlds wandered between 40 and 1,700
+around medians of 586 to 1,051.
+
+**Healthy and diverse, but folded.** At 5,000 iterations, read as every
+world is read:
+- **Marks:** six or seven of the health bar.
+- **Diversity:** scores of 0.52 to 0.64 against B2's median at 5,000 of
+  0.49.
+- **Width:** 1.16 to 1.28 times their twins. These are folded small worlds,
+  as Experiment 19's are.
+- **Evenness:** Ginis of 0.43 to 0.48, about as even as B2's least even
+  world (0.46).
+
+## The verdict
+
+**The thesis holds.**
+- All four worlds were steadier than their Experiment 17 world.
+- None fell to 20 agents.
+- The lab's worlds of seeds 1 and 2 are the stopped pilots, game for game.
+
+## What it teaches
+
+- **A mate that pays is the second rule that steadies a mixed world**,
+  beside mates among the parents
+  ([Experiment 19](85-mixed-at-birth-with-parents-as-mates.md)). Meta XI
+  traced the drift of a mixed world's size to a free ride: a mate passes
+  half its brain into a child it pays nothing for. Both ways of ending the
+  free ride steady the world. The free ride was the cause.
+- **A child that two pay for is cheaper to each, and the world fills
+  more.** The paying mates' worlds held more agents than the free mates'
+  worlds of the same seeds. So paying for a child raises how many
+  children there are; it does not lower it.
+- **Steady is not yet a space.** Like Experiment 19's, these worlds are
+  folded. Room is the one thing the steadiest mixed worlds still lack
+  ([Chapter 100](100-room-for-the-steadiest-world.md)).
+
+
 <!-- turns -->
 ---
 

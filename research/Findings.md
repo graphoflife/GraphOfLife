@@ -530,6 +530,33 @@ tokens, ten seeds, 20,000 iterations; lab engine 7fa9fe7aeefbf111)**
 - Reading: a candidate that held was mostly its seed's luck; fast brain change is the steadiest (5/5 alive,
   diverse, not poor) but misses single marks; Meta X's step 3 has no rule to take up.
 
+**Six lab experiments of the strategy-ladder plan (2026-10-20; Ch. 95-100)**
+- E28 (Ch. 95, 240 contests T=100, E18 s005/s006 every 2,500 vs 2,500/10,000/25,000): climbing stopped by ~25,000 in
+  both (eras after 25k vs 25k: median 0.55 and 0.46, inside the self-contest band 0.40-0.60 / 0.36-0.64); ratings peak
+  +105 (22.5k) and +155 (25-27.5k) Elo, then wander. Thesis fails by part 2 (11/19 and 8/19 eras beat 2,500 beyond the
+  band). s005 circles: eras after 25k beat 25k but score 0.12 below the chain against 2,500 (10/10); s006 goes back.
+  Exploitability (one-game best reply) ~1 node/game at every era to 50,000: a plateau, not a top.
+- E29 (Ch. 96, 320 invasions): raider patches of 1/3/10/30/100/5% in E16 worlds 2, 3 (10 places): took hold 0, 0, 0, 0,
+  4, 12 of 20; 5% in all ten worlds (5 places): 13 of 50 (world 2 10/10, world 3 2/10, worlds 1, 4, 5, 7 none). Thesis
+  holds. The valley is ~100 agents wide; 30 distinct single raiders have died (Ch. 51's world-2 seeds = E29 places).
+- E30 (Ch. 97, 120 invasions in L/B2-long s001-s005 at 500/2,000/5,000/10,000): took hold 15, 4, 0, 0 of 15 (Fisher
+  p < 0.0001): thesis fails, the door closed - but by wealth, not defence: late raiders lost 29 nodes to residents
+  in 120 iterations (3,233 at 500) and rarely raided (470 vs 11,226); success follows the patch's tokens per agent
+  (under 2: 0/24; 2-2.5: 8/58; 2.5-3: 7/16; 3-4: 16/16; 4+: 6/6), and patches grow poorer with age (3.85, 2.35, 2.0).
+  The raider needs 3 tokens to take a 1-token neighbour; poor worlds shut out lone raiders, not crews.
+- E24 (Ch. 98, Z/r2-25 in seeds 1-5 + 2025, prototype in the lab): seed 2025 = the pilot for all 1,000 games. New
+  worlds: diversity 0.80-0.89, spaces 2.6-2.75x, 11-17 tokens/agent, but 4 marks (one agent's loss cuts 19-47%,
+  dimension 2.0-2.2) and Gini 0.33-0.38. The search's world met 7 marks only at its lucky moment (4 by 2,000).
+- E22 (Ch. 99, mix + mate_pays, seeds 1-4 to 5,000): twins match the stopped pilots (1,311 and 1,719 games). Sd of log
+  agents 500-5,000: 0.09-0.16 vs E17's 0.19-0.63, all four steadier, fewest agents 1,012-1,685 (E17 down to 40).
+  Thesis holds. Healthy and diverse at 5,000 but folded (1.16-1.28x), Gini 0.43-0.48.
+- E31 (Ch. 100, E19 + a room rule, seeds 1-2 to 3,000): estates to newborns/parents: 7 marks, spaces 2.0-2.65x at
+  dimension ~3.5, ~5,000 agents at 1.9 tokens each, diversity 0.32-0.41 (token spread ~2 classes), Gini 0.42-0.45;
+  no old age: spaces 1.7-1.9x, 7 marks, Gini 0.70-0.73, diversity 0.29-0.30 (one age); not mended: s1 1.89x, div
+  0.57, Gini 0.48, one mark short (agent cut), s2 fails. E19 itself at 3,000: 6-7 marks, div 0.54-0.75, 1.16-1.29x.
+  Thesis fails; each rule pays in its own coin. Healthy 3-D networks exist (estates); their agents are too many and
+  too poor. Next: a birth that asks at least the neighbours' median; mending without folding; crews of raiders.
+
 **Too even, not too poor (2026-10-19; research/atlas/evenness.py adds gini_tokens and richest_tenth to every
 reading; notes in Ch. 79, 91, 92, 93)**
 - The author: the worry was evenness (almost everyone holding the same few), the <= 3 share only a proxy. The

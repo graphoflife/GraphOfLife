@@ -121,6 +121,81 @@ reports how even each new world is.
 > A value in **bold** differs from the baseline B2.
 <!-- /runs -->
 
+## What the worlds did
+
+**The lab plays the pilots' rules as the pilots did.** The world of seed
+2025, played by the prototype frozen beside the engine, matched the pilot's
+agents and links after every one of its 1,000 games. Every world of the
+pilots' rules the lab plays from now on is the world a pilot would have
+been.
+
+<!-- figure searchbest/measures -->
+![The search's best settings, in six worlds](../figures/searchbest/measures.svg)
+
+**The search's best settings, in six worlds.** Each dot is one world at iteration 1,000 (orange) or 2,000 (violet): the five new seeds small, the search's own seed large. The dashed line is what the author's picture asks: every mark of the health bar, a diversity score above B2's median world (0.49), a typical distance at least 1.5 times the random twin's, and a Gini no lower than B2's least even world (0.47).
+
+> [!example]- How to make this figure
+> **Runs.** Experiment 24's six runs (`python3 gol_lab.py run E24`): the settings of `Z/r2-25` played by the research prototype in the lab (`gol_pilot.py`), seeds 1 to 5 (`B2-10000-d2b0d2-s001` … `-s005`) and the search's own seed (`B2-10000-d2b0d2-s2025`), each to 2,000 iterations, with a whole world kept every 100.
+>
+> **Data.** From each run's checkpoints at 1,000 and 2,000 (`ckpt_001000.npz`, `ckpt_002000.npz`).
+>
+> 1. Read each world as `research/atlas/profile.py` reads every world: the seven marks, the four spreads ranked among the frozen reference worlds, the Gini of the tokens.
+> 2. Its typical distance over its random twin's as `research/atlas/space.py` measures it.
+>
+> **To make it again:** `python3 book_figures.py searchbest`.
+<!-- /figure -->
+
+**The new worlds are what the search's world was, except for its marks.**
+At iteration 1,000 every one of the five new worlds was:
+- **diverse,** with diversity scores of 0.80 to 0.89 against B2's 0.49,
+  among the highest the book has measured;
+- **a wide space,** 2.6 to 2.75 times as wide as its random twin;
+- **rich,** with 11 to 17 tokens per agent.
+
+None met more than four marks of the health bar:
+- **One agent's loss** cut off 19% to 47% of the world, and one link's
+  loss up to 43%.
+- **Their dimension** was 2.0 to 2.2, below the bar's 2.3: thin, about
+  two-dimensional networks.
+- **Their tokens** were too even, with Ginis of 0.33 to 0.38, against B2's
+  least even world at 0.47.
+
+At 2,000 the picture was much the same; one world met five marks.
+
+**The search's own world was a lucky moment of the same thing.** At 1,000
+it met every mark, as the search found. By 2,000 it met four, with a
+dimension of 2.15. An agent's loss could cut off a quarter of it, and its
+Gini fell to 0.33. It is one of these worlds, caught in a moment when it
+happened to have no bottleneck.
+
+## The verdict
+
+**The thesis fails.** None of the five new worlds passed at 1,000; three
+were asked for. Every one missed the marks of cuts and dimension. Its
+second part holds: the lab's world of seed 2025 is the pilot's, game for
+game.
+
+## What it teaches
+
+- **A search judged at one moment finds lucky moments.** The best of 63
+  worlds was best at iteration 1,000 by a bottleneck that happened to be
+  missing. Its settings make diverse, wide, rich worlds every time. They
+  also make thin, cuttable and even ones every time, and the search's
+  measure at one moment could not see that.
+- **These settings give exactly what Experiment 19's world lacks.** The
+  world of mixing with parents as mates is healthy, diverse and uneven, but
+  folded. This one is a wide space, but thin and even. Among its settings,
+  every unused link lapsing is the one Meta XII found to make worlds rich,
+  about two-dimensional and short of marks
+  ([Meta XII](91-meta-12-rules-in-company.md)). That is where the two
+  configurations meet, and where [Chapter 100](100-room-for-the-steadiest-world.md)
+  looks for room.
+- **The lab now plays the pilots' rules.** Rules that so far lived only in
+  the prototype — a lottery for each node, stakes pooled by genotype,
+  brains that grow, an input of where a brain came from — can be put to
+  the test like any other, beside the chapters that ask for them.
+
+
 <!-- turns -->
 ---
 
