@@ -13,7 +13,9 @@ brain could not.
 There are two kinds:
 
   rules     a policy in Python: `turtle`, `raider`, `lone`, `factory`, what
-            Chapter 51 planted, and `crew`, the raider of a crowd (Chapter 102)
+            Chapter 51 planted; `crew`, the raider of a crowd (Chapter 102);
+            and `breeding-turtle` and `breeding-raider`, which have a child as
+            the world's own agents can (Chapter 103)
   weights   a brain of the world's own shape whose weights were set by hand:
             `raider-weights`, Chapter 94's raider, 12 of B2's 16 units
 
@@ -131,9 +133,8 @@ def turtle(cfg, X):
     return w.Y
 
 
-def raider(cfg, X):
+def _raid(v: View, w: Writer) -> None:
     """All on the weakest stranger next door if that can take it, else everything at home."""
-    v, w = View(cfg, X), Writer(cfg, X.shape[1])
     staked = 0.7 * v.me_tokens                     # B2 keeps at least 30% at home anyway
     target = None
     if v.enemy.any():
@@ -141,6 +142,21 @@ def raider(cfg, X):
         if staked > 1.5 * v.tokens[j]:
             target = j
     w.stake(np.eye(v.n)[target if target is not None else 0])
+
+
+def _breed(cfg, v: View, w: Writer) -> bool:
+    """A child of the least the world allows (min_child) whenever the agent holds more; True if it asks."""
+    least, held = max(1, int(cfg.min_child)), int(round(v.me_tokens))
+    if held <= least:
+        return False
+    w.child((least + 0.5) / held)                  # the engine floors it to exactly `least`
+    return True
+
+
+def raider(cfg, X):
+    """All on the weakest stranger next door if that can take it, else everything at home."""
+    v, w = View(cfg, X), Writer(cfg, X.shape[1])
+    _raid(v, w)
     if v.me_tokens >= 30:
         w.child(1 / 3)
         w.link(np.flatnonzero(v.mate | v.is_self))
@@ -220,7 +236,30 @@ def crew(cfg, X):
     return w.Y
 
 
-RULES: Dict[str, Callable] = {"turtle": turtle, "raider": raider, "lone": lone, "factory": factory, "crew": crew}
+def breeding_turtle(cfg, X):
+    """
+    The turtle, breeding as the world's own agents can (Chapter 103): everything at home,
+    and a child of the least the world allows whenever it holds more. The rules above
+    wait for 30 tokens before a child, which almost no agent of a late world holds
+    (Chapter 102).
+    """
+    v, w = View(cfg, X), Writer(cfg, X.shape[1])
+    w.stake(np.eye(v.n)[0])
+    _breed(cfg, v, w)
+    return w.Y
+
+
+def breeding_raider(cfg, X):
+    """The raider, breeding as the world's own agents can (Chapter 103); its children joined as the raider's."""
+    v, w = View(cfg, X), Writer(cfg, X.shape[1])
+    _raid(v, w)
+    if _breed(cfg, v, w):
+        w.link(np.flatnonzero(v.mate | v.is_self))
+    return w.Y
+
+
+RULES: Dict[str, Callable] = {"turtle": turtle, "raider": raider, "lone": lone, "factory": factory, "crew": crew,
+                              "breeding-turtle": breeding_turtle, "breeding-raider": breeding_raider}
 
 
 # ---------------------------------------------------------------------------
@@ -307,7 +346,8 @@ WEIGHTS: Dict[str, Callable] = {"raider-weights": raider_weights}
 
 #: Every strategy's own brain id; `resident` is the control, a frozen evolved brain. The order only
 #: ever grows at its end, so a strategy keeps its id whatever is added after it.
-STRATEGY_ORDER = ["resident", "turtle", "raider", "lone", "factory", "raider-weights", "crew"]
+STRATEGY_ORDER = ["resident", "turtle", "raider", "lone", "factory", "raider-weights", "crew", "breeding-turtle",
+                  "breeding-raider"]
 assert set(STRATEGY_ORDER) == {"resident", *RULES, *WEIGHTS}, "a strategy without an id"
 STRATEGY_IDS: Dict[str, int] = {name: STRATEGY_BASE + k for k, name in enumerate(STRATEGY_ORDER)}
 

@@ -219,5 +219,5 @@ raiders, and the poorer the world, the less a mob was worth, not the more:
 <!-- turns -->
 ---
 
-← [Chapter 97 · Does evolution close the door?](97-does-evolution-close-the-door.md) · [Contents](../README.md) · [Appendix A · What a simulation costs](A-costs.md) →
+← [Chapter 97 · Does evolution close the door?](97-does-evolution-close-the-door.md) · [Contents](../README.md) · [Chapter 103 · Raiders that breed](103-raiders-that-breed.md) →
 <!-- /turns -->

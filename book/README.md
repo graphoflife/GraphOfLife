@@ -156,6 +156,7 @@ everything can be checked with it.
 - [Chapter 96 · How large a crowd a raider needs](chapters/96-how-large-a-crowd-a-raider-needs.md)
 - [Chapter 97 · Does evolution close the door?](chapters/97-does-evolution-close-the-door.md)
 - [Chapter 102 · A crew of raiders](chapters/102-a-crew-of-raiders.md)
+- [Chapter 103 · Raiders that breed](chapters/103-raiders-that-breed.md)
 
 **Notes · the rules**
 

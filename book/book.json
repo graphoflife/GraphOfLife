@@ -681,6 +681,14 @@
           "file": "chapters/102-a-crew-of-raiders.md",
           "experiment": "E33",
           "status": "analysed"
+        },
+        {
+          "id": "103",
+          "title": "Raiders that breed",
+          "note": "Experiment 34: the raider and the turtle given a child of ten tokens whenever they hold more, as the world's own agents breed, planted where the barren raiders failed (B2's worlds at 2,000, 5,000 and 10,000): does breeding open the door, and is it the raid that does it?",
+          "file": "chapters/103-raiders-that-breed.md",
+          "experiment": "E34",
+          "status": "ready"
         }
       ]
     },
