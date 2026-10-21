@@ -488,10 +488,10 @@
         {
           "id": "101",
           "title": "Births as rich as the neighbours",
-          "note": "Experiment 32: Experiment 31's estate worlds (healthy three-dimensional spaces of poor, alike agents) with a child that must start with at least the median holding of its parent's neighbours: does the space stay and the diversity come back?",
+          "note": "Experiment 32: Experiment 31's estate worlds with a child that must start with at least the median holding of its parent's neighbours. The floor changed nothing: in a world of paupers the neighbours hold a token, below the ten every child gets. The paupers are made by the game within twenty iterations, not at birth; a world's size is a hundred times its births; and the estate worlds are spaces because their young are the parents.",
           "file": "chapters/101-births-as-rich-as-the-neighbours.md",
           "experiment": "E32",
-          "status": "ready"
+          "status": "analysed"
         }
       ]
     },
@@ -669,7 +669,7 @@
         {
           "id": "97",
           "title": "Does evolution close the door?",
-          "note": "Experiment 30: raiders planted in B2's five worlds played on, at 500, 2,000, 5,000 and 10,000. The door closed (15, 4, 0 and 0 of 15 took hold) but not by a defence: residents hardly fought the late raiders, which could not raid at all, because the patches they started from had grown poorer than the three tokens a raid needs. A world of many small agents shuts out lone raiders, not groups.",
+          "note": "Experiment 30: raiders planted in B2's five worlds played on, at 500, 2,000, 5,000 and 10,000. The door closed (15, 4, 0 and 0 of 15 took hold) but not by a defence: residents hardly fought the late raiders, which could not raid at all, because the patches they started from had grown poorer than the three tokens a raid needs. A world of many small agents shuts out lone raiders (and, Chapter 102 found later, crews too).",
           "file": "chapters/97-does-evolution-close-the-door.md",
           "experiment": "E30",
           "status": "analysed"
@@ -677,10 +677,10 @@
         {
           "id": "102",
           "title": "A crew of raiders",
-          "note": "Experiment 33: raiders that pool their stakes as revolution tokens, planted where lone raiders could no longer take hold (B2's worlds at 5,000 and 10,000): does the game reward groups where the world is poor?",
+          "note": "Experiment 33: raiders that pool their stakes as revolution tokens, planted where lone raiders could no longer take hold. No crew took hold anywhere, and crews died before the lone raiders in 42 of 45 places: most of a late patch holds one token and cannot stake, a stranger borders 1.6 of its agents so mobs hardly form, and a stake without a partner goes to the stranger. Neither raider breeds in a poor world.",
           "file": "chapters/102-a-crew-of-raiders.md",
           "experiment": "E33",
-          "status": "ready"
+          "status": "analysed"
         }
       ]
     },

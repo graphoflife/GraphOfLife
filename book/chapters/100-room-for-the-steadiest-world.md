@@ -229,6 +229,17 @@ apart, even in the steadiest mixed world. What each rule pays is now known:
   can grow only as rich as it is. It is local, needs no constant, and is
   Meta XI's missing pull — births that pay more when they would make the
   world poorer.
+
+> [!info] Added later (2026-10-21, Chapter 101)
+> The price of a child was not the cost. With the floor, the estate worlds
+> were the same ([Chapter 101](101-births-as-rich-as-the-neighbours.md)):
+> in a world of paupers a parent's neighbours hold a token or two, so the
+> floor asked no more than the ten tokens every child already gets. The
+> paupers are not born poor. Children start with ten tokens or more, and
+> the game takes most of it within twenty iterations. A world's size is a
+> hundred times its births an iteration, and the estates pay for three
+> times as many births.
+
 - **The nearest world is one without mending.** Seed 1 missed only a cut. A
   world whose deaths are not mended keeps its tokens and its room; what it
   needs is to stay whole. Mending without folding is a second rule to try

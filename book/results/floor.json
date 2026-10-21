@@ -1,0 +1,533 @@
+{
+ "chapter": "floor",
+ "numbers": {
+  "worlds": [
+   {
+    "id": "B2-10000-06b876-s001",
+    "agents": 5386,
+    "marks": 7,
+    "diversity": 0.34164110429447847,
+    "wide": 2.0241573515891944,
+    "gini_tokens": 0.43398585220943175,
+    "tokens_per_agent": 1.856665428889714,
+    "dimension": 3.6184985962962894,
+    "group": "an estate, no floor"
+   },
+   {
+    "id": "B2-10000-06b876-s002",
+    "agents": 5036,
+    "marks": 7,
+    "diversity": 0.3822852760736196,
+    "wide": 2.426808225740304,
+    "gini_tokens": 0.44893208895949166,
+    "tokens_per_agent": 1.9857029388403495,
+    "dimension": 3.457836736613823,
+    "group": "an estate, no floor"
+   },
+   {
+    "id": "B2-10000-b8e9fc-s001",
+    "agents": 5445,
+    "marks": 7,
+    "diversity": 0.40605828220858897,
+    "wide": 2.648167859577174,
+    "gini_tokens": 0.4240225160697888,
+    "tokens_per_agent": 1.8365472910927456,
+    "dimension": 3.5044513868509855,
+    "group": "an estate, no floor"
+   },
+   {
+    "id": "B2-10000-b8e9fc-s002",
+    "agents": 5175,
+    "marks": 7,
+    "diversity": 0.32246932515337423,
+    "wide": 2.0224608636553154,
+    "gini_tokens": 0.4467924251207729,
+    "tokens_per_agent": 1.932367149758454,
+    "dimension": 3.8287238943845834,
+    "group": "an estate, no floor"
+   },
+   {
+    "id": "B2-10000-bcc1bc-s001",
+    "agents": 1501,
+    "marks": 7,
+    "diversity": 0.6062116564417177,
+    "wide": 1.2641280845043075,
+    "gini_tokens": 0.44571472351765484,
+    "tokens_per_agent": 6.662225183211192,
+    "dimension": 3.93678074741154,
+    "group": "parents as mates, no floor"
+   },
+   {
+    "id": "B2-10000-bcc1bc-s002",
+    "agents": 905,
+    "marks": 7,
+    "diversity": 0.6188650306748466,
+    "wide": 1.161575424069974,
+    "gini_tokens": 0.4425299447513813,
+    "tokens_per_agent": 11.049723756906078,
+    "dimension": 3.640599968038951,
+    "group": "parents as mates, no floor"
+   },
+   {
+    "id": "B2-10000-bcc1bc-s003",
+    "agents": 1664,
+    "marks": 6,
+    "diversity": 0.5812883435582823,
+    "wide": 1.1741600265738643,
+    "gini_tokens": 0.5041037259615386,
+    "tokens_per_agent": 6.009615384615385,
+    "dimension": 4.041123859695505,
+    "group": "parents as mates, no floor"
+   },
+   {
+    "id": "B2-10000-bcc1bc-s004",
+    "agents": 2134,
+    "marks": 6,
+    "diversity": 0.5843558282208589,
+    "wide": 1.2497694064459048,
+    "gini_tokens": 0.4504036551077788,
+    "tokens_per_agent": 4.686035613870666,
+    "dimension": 4.114136571583617,
+    "group": "parents as mates, no floor"
+   },
+   {
+    "id": "B2-10000-bcc1bc-s005",
+    "agents": 1865,
+    "marks": 7,
+    "diversity": 0.5440950920245399,
+    "wide": 1.286341857766074,
+    "gini_tokens": 0.5221457372654155,
+    "tokens_per_agent": 5.361930294906166,
+    "dimension": 3.841314612198241,
+    "group": "parents as mates, no floor"
+   },
+   {
+    "id": "B2-10000-bcc1bc-s006",
+    "agents": 1761,
+    "marks": 6,
+    "diversity": 0.6687116564417178,
+    "wide": 1.2038605551210155,
+    "gini_tokens": 0.46941885292447494,
+    "tokens_per_agent": 5.6785917092561045,
+    "dimension": 4.0877145417355525,
+    "group": "parents as mates, no floor"
+   },
+   {
+    "id": "B2-10000-bcc1bc-s007",
+    "agents": 2460,
+    "marks": 7,
+    "diversity": 0.6506901840490797,
+    "wide": 1.2943251050200688,
+    "gini_tokens": 0.5656091056910568,
+    "tokens_per_agent": 4.065040650406504,
+    "dimension": 3.8532940937894833,
+    "group": "parents as mates, no floor"
+   },
+   {
+    "id": "B2-10000-bcc1bc-s008",
+    "agents": 1791,
+    "marks": 6,
+    "diversity": 0.6706288343558282,
+    "wide": 1.2061792448126674,
+    "gini_tokens": 0.5240637632607481,
+    "tokens_per_agent": 5.583472920156337,
+    "dimension": 4.206660889872355,
+    "group": "parents as mates, no floor"
+   },
+   {
+    "id": "B2-10000-bcc1bc-s009",
+    "agents": 2251,
+    "marks": 7,
+    "diversity": 0.7473159509202454,
+    "wide": 1.2626440528770095,
+    "gini_tokens": 0.5176223011994667,
+    "tokens_per_agent": 4.44247001332741,
+    "dimension": 3.898952198673235,
+    "group": "parents as mates, no floor"
+   },
+   {
+    "id": "B2-10000-bcc1bc-s010",
+    "agents": 1663,
+    "marks": 6,
+    "diversity": 0.5973926380368098,
+    "wide": 1.157187570089636,
+    "gini_tokens": 0.486855441972339,
+    "tokens_per_agent": 6.013229104028864,
+    "dimension": 4.1488543055562905,
+    "group": "parents as mates, no floor"
+   },
+   {
+    "id": "B2-10000-12215f-s001",
+    "agents": 5547,
+    "marks": 7,
+    "diversity": 0.39417177914110424,
+    "wide": 2.2172462745990367,
+    "gini_tokens": 0.4140106724355508,
+    "tokens_per_agent": 1.802776275464215,
+    "dimension": 3.435846899506964,
+    "group": "an estate, the floor"
+   },
+   {
+    "id": "B2-10000-12215f-s002",
+    "agents": 5735,
+    "marks": 7,
+    "diversity": 0.3684815950920245,
+    "wide": 2.5391306436679764,
+    "gini_tokens": 0.3983996163905843,
+    "tokens_per_agent": 1.7436791630340018,
+    "dimension": 3.4183961311006943,
+    "group": "an estate, the floor"
+   },
+   {
+    "id": "B2-10000-86df9e-s001",
+    "agents": 5229,
+    "marks": 7,
+    "diversity": 0.34662576687116564,
+    "wide": 2.6614217594353193,
+    "gini_tokens": 0.4515334098297954,
+    "tokens_per_agent": 1.9124115509657678,
+    "dimension": 3.1509920091294426,
+    "group": "an estate, the floor"
+   },
+   {
+    "id": "B2-10000-86df9e-s002",
+    "agents": 5063,
+    "marks": 7,
+    "diversity": 0.3646472392638037,
+    "wide": 2.845472307422626,
+    "gini_tokens": 0.45892877740470084,
+    "tokens_per_agent": 1.9751135690302193,
+    "dimension": 3.1050116223624284,
+    "group": "an estate, the floor"
+   },
+   {
+    "id": "B2-10000-b289dd-s001",
+    "agents": 2100,
+    "marks": 6,
+    "diversity": 0.6016104294478528,
+    "wide": 1.2656903637499237,
+    "gini_tokens": 0.5070968571428571,
+    "tokens_per_agent": 4.761904761904762,
+    "dimension": 4.205957886979526,
+    "group": "parents as mates, the floor"
+   },
+   {
+    "id": "B2-10000-b289dd-s002",
+    "agents": 1876,
+    "marks": 6,
+    "diversity": 0.6871165644171778,
+    "wide": 1.224959965191534,
+    "gini_tokens": 0.5394869936034115,
+    "tokens_per_agent": 5.330490405117271,
+    "dimension": 4.085668443555479,
+    "group": "parents as mates, the floor"
+   }
+  ],
+  "by_age": {
+   "parents as mates, no floor": [
+    7.091910206337066,
+    6.8482372746084526,
+    6.684508631377054,
+    6.472827480541573,
+    6.104308980516084,
+    5.859271952759526,
+    5.8805265797736315,
+    5.336424423625808,
+    4.875672932418885,
+    4.369634759299691
+   ],
+   "parents as mates, the floor": [
+    7.590516220696188,
+    6.159653465346535,
+    5.252679209335556,
+    5.218961883818949,
+    5.263800129665649,
+    4.8282838218899595,
+    4.545418516169943,
+    4.027980655349388,
+    3.367369589345172,
+    3.5303858613907204
+   ],
+   "an estate, no floor": [
+    4.76751053338074,
+    2.142729982874496,
+    1.758858553305834,
+    1.5688246365922647,
+    1.4955409375327822,
+    1.3843243310917417,
+    1.3409311038248137,
+    1.5282334390281709,
+    1.51533269966703,
+    1.4370535511070344
+   ],
+   "an estate, the floor": [
+    4.864941298049052,
+    2.12774025425018,
+    1.644707158538649,
+    1.4079645807776056,
+    1.42652467988581,
+    1.3507459655093035,
+    1.3920832255273978,
+    1.3384795115933543,
+    1.5636462131902673,
+    1.4322230590685403
+   ]
+  },
+  "ledger": {
+   "B2-10000-bcc1bc-s001": {
+    "births": 15.7,
+    "agents": 1570,
+    "agents_per_birth": 100.3
+   },
+   "B2-10000-bcc1bc-s002": {
+    "births": 11.8,
+    "agents": 1210,
+    "agents_per_birth": 102.3
+   },
+   "B2-10000-b289dd-s001": {
+    "births": 19.8,
+    "agents": 1962,
+    "agents_per_birth": 99.1
+   },
+   "B2-10000-b289dd-s002": {
+    "births": 17.7,
+    "agents": 1762,
+    "agents_per_birth": 99.3
+   },
+   "B2-10000-06b876-s001": {
+    "births": 50.7,
+    "agents": 5004,
+    "agents_per_birth": 98.7
+   },
+   "B2-10000-06b876-s002": {
+    "births": 52.6,
+    "agents": 5294,
+    "agents_per_birth": 100.6
+   },
+   "B2-10000-12215f-s001": {
+    "births": 54.3,
+    "agents": 5418,
+    "agents_per_birth": 99.9
+   },
+   "B2-10000-12215f-s002": {
+    "births": 57.9,
+    "agents": 5789,
+    "agents_per_birth": 99.9
+   },
+   "B2-10000-b8e9fc-s001": {
+    "births": 51.7,
+    "agents": 5110,
+    "agents_per_birth": 98.9
+   },
+   "B2-10000-b8e9fc-s002": {
+    "births": 51.1,
+    "agents": 5136,
+    "agents_per_birth": 100.5
+   },
+   "B2-10000-86df9e-s001": {
+    "births": 53.5,
+    "agents": 5354,
+    "agents_per_birth": 100.0
+   },
+   "B2-10000-86df9e-s002": {
+    "births": 46.3,
+    "agents": 4576,
+    "agents_per_birth": 98.9
+   },
+   "B2-10000-bcc1bc-s003": {
+    "births": 15.5,
+    "agents": 1544,
+    "agents_per_birth": 99.4
+   },
+   "B2-10000-bcc1bc-s004": {
+    "births": 20.0,
+    "agents": 1979,
+    "agents_per_birth": 98.8
+   },
+   "B2-10000-bcc1bc-s005": {
+    "births": 16.8,
+    "agents": 1671,
+    "agents_per_birth": 99.4
+   },
+   "B2-10000-bcc1bc-s006": {
+    "births": 17.6,
+    "agents": 1752,
+    "agents_per_birth": 99.4
+   },
+   "B2-10000-bcc1bc-s007": {
+    "births": 22.7,
+    "agents": 2267,
+    "agents_per_birth": 99.7
+   },
+   "B2-10000-bcc1bc-s008": {
+    "births": 16.5,
+    "agents": 1640,
+    "agents_per_birth": 99.4
+   },
+   "B2-10000-bcc1bc-s009": {
+    "births": 22.1,
+    "agents": 2223,
+    "agents_per_birth": 100.4
+   },
+   "B2-10000-bcc1bc-s010": {
+    "births": 16.5,
+    "agents": 1655,
+    "agents_per_birth": 100.1
+   }
+  },
+  "floor_binds": {
+   "B2-10000-bcc1bc-s001": {
+    "able": 367,
+    "floor_above_min_child": 92,
+    "median_neighbours": 5.0,
+    "able_median_age": 41.0,
+    "able_aged_10_or_less": 0.12806539509536785
+   },
+   "B2-10000-bcc1bc-s002": {
+    "able": 381,
+    "floor_above_min_child": 180,
+    "median_neighbours": 9.0,
+    "able_median_age": 45.0,
+    "able_aged_10_or_less": 0.12335958005249344
+   },
+   "B2-10000-b289dd-s001": {
+    "able": 302,
+    "floor_above_min_child": 6,
+    "median_neighbours": 2.0,
+    "able_median_age": 36.0,
+    "able_aged_10_or_less": 0.1986754966887417
+   },
+   "B2-10000-b289dd-s002": {
+    "able": 308,
+    "floor_above_min_child": 55,
+    "median_neighbours": 3.0,
+    "able_median_age": 32.0,
+    "able_aged_10_or_less": 0.21428571428571427
+   },
+   "B2-10000-06b876-s001": {
+    "able": 129,
+    "floor_above_min_child": 8,
+    "median_neighbours": 1.0,
+    "able_median_age": 4.0,
+    "able_aged_10_or_less": 0.6201550387596899
+   },
+   "B2-10000-06b876-s002": {
+    "able": 139,
+    "floor_above_min_child": 6,
+    "median_neighbours": 1.0,
+    "able_median_age": 8.0,
+    "able_aged_10_or_less": 0.5539568345323741
+   },
+   "B2-10000-12215f-s001": {
+    "able": 116,
+    "floor_above_min_child": 6,
+    "median_neighbours": 1.0,
+    "able_median_age": 6.5,
+    "able_aged_10_or_less": 0.5775862068965517
+   },
+   "B2-10000-12215f-s002": {
+    "able": 109,
+    "floor_above_min_child": 1,
+    "median_neighbours": 1.0,
+    "able_median_age": 5.0,
+    "able_aged_10_or_less": 0.6422018348623854
+   },
+   "B2-10000-b8e9fc-s001": {
+    "able": 132,
+    "floor_above_min_child": 11,
+    "median_neighbours": 1.0,
+    "able_median_age": 5.0,
+    "able_aged_10_or_less": 0.6363636363636364
+   },
+   "B2-10000-b8e9fc-s002": {
+    "able": 114,
+    "floor_above_min_child": 7,
+    "median_neighbours": 1.0,
+    "able_median_age": 9.0,
+    "able_aged_10_or_less": 0.5263157894736842
+   },
+   "B2-10000-86df9e-s001": {
+    "able": 126,
+    "floor_above_min_child": 8,
+    "median_neighbours": 1.0,
+    "able_median_age": 6.0,
+    "able_aged_10_or_less": 0.5634920634920635
+   },
+   "B2-10000-86df9e-s002": {
+    "able": 157,
+    "floor_above_min_child": 10,
+    "median_neighbours": 1.0,
+    "able_median_age": 10.0,
+    "able_aged_10_or_less": 0.5095541401273885
+   },
+   "B2-10000-bcc1bc-s003": {
+    "able": 357,
+    "floor_above_min_child": 40,
+    "median_neighbours": 4.0,
+    "able_median_age": 42.0,
+    "able_aged_10_or_less": 0.07563025210084033
+   },
+   "B2-10000-bcc1bc-s004": {
+    "able": 219,
+    "floor_above_min_child": 5,
+    "median_neighbours": 3.0,
+    "able_median_age": 37.0,
+    "able_aged_10_or_less": 0.1324200913242009
+   },
+   "B2-10000-bcc1bc-s005": {
+    "able": 318,
+    "floor_above_min_child": 16,
+    "median_neighbours": 3.0,
+    "able_median_age": 37.0,
+    "able_aged_10_or_less": 0.15723270440251572
+   },
+   "B2-10000-bcc1bc-s006": {
+    "able": 317,
+    "floor_above_min_child": 18,
+    "median_neighbours": 4.0,
+    "able_median_age": 39.0,
+    "able_aged_10_or_less": 0.14195583596214512
+   },
+   "B2-10000-bcc1bc-s007": {
+    "able": 304,
+    "floor_above_min_child": 33,
+    "median_neighbours": 2.0,
+    "able_median_age": 27.0,
+    "able_aged_10_or_less": 0.26973684210526316
+   },
+   "B2-10000-bcc1bc-s008": {
+    "able": 365,
+    "floor_above_min_child": 47,
+    "median_neighbours": 3.0,
+    "able_median_age": 35.0,
+    "able_aged_10_or_less": 0.16164383561643836
+   },
+   "B2-10000-bcc1bc-s009": {
+    "able": 259,
+    "floor_above_min_child": 29,
+    "median_neighbours": 2.5,
+    "able_median_age": 32.0,
+    "able_aged_10_or_less": 0.18532818532818532
+   },
+   "B2-10000-bcc1bc-s010": {
+    "able": 356,
+    "floor_above_min_child": 72,
+    "median_neighbours": 4.0,
+    "able_median_age": 38.5,
+    "able_aged_10_or_less": 0.11235955056179775
+   }
+  }
+ },
+ "figures": {
+  "measures": {
+   "title": "The floor, with each estate and without",
+   "caption": "Each dot is one world at iteration 3,000, without the floor (grey: Experiment 19's ten worlds for parents as mates alone, Experiment 31's two for each estate) and with it (orange: Experiment 32's two for each). The dashed line is what the author's picture asks: every mark, a diversity score above B2's median world at 3,000 (0.54), a typical distance at least 1.5 times the random twin's, a Gini no lower than B2's least even world at 3,000 (0.47).",
+   "recipe": "**Runs.** Experiment 32's six runs (`python3 gol_lab.py run E32`): B2 at 10,000 tokens with brains mixed at birth, parents as mates and a child never poorer than the median holding of its parent's neighbours, with the estate of the dead paid to the newborns (`B2-10000-12215f-\u2026`), to the parents (`-86df9e-\u2026`) or neither (`-b289dd-\u2026`), seeds 1 and 2, to 3,000 iterations; against Experiment 31's estate worlds of the same seeds (`B2-10000-06b876-\u2026`, `-b8e9fc-\u2026`) and Experiment 19's ten worlds (`B2-10000-bcc1bc-s001` \u2026 `-s010`), which have no floor.\n\n**Data.** From each world's archive at iteration 3,000.\n\n1. Read each world as `research/atlas/profile.py` reads every world: the seven marks, the four spreads ranked among the frozen reference worlds (their mean is the diversity score), the Gini of the tokens; and its typical distance over its random twin's, as `research/atlas/space.py` measures it (`research/atlas/readings.py` does both).\n2. The lines: every mark; the median diversity, and the least Gini, of B2's ten worlds played on and read at 3,000; a typical distance of 1.5 times the twin's.\n\n**To make it again:** `python3 book_figures.py floor`."
+  },
+  "paupers": {
+   "title": "Where the poor agents come from",
+   "caption": "Left: the mean tokens of the agents of each age, in tens of iterations, at iteration 3,000, averaged over the worlds of each kind: Experiment 19's ten, and seeds 1 and 2 of the others. Right: each world's births an iteration and agents alive, both averaged over iterations 2,000 to 3,000; the dashed line is a hundred agents for every birth an iteration, which a world keeps when everyone lives out a hundred iterations.",
+   "recipe": "**Runs.** Experiment 32's six runs (`python3 gol_lab.py run E32`): B2 at 10,000 tokens with brains mixed at birth, parents as mates and a child never poorer than the median holding of its parent's neighbours, with the estate of the dead paid to the newborns (`B2-10000-12215f-\u2026`), to the parents (`-86df9e-\u2026`) or neither (`-b289dd-\u2026`), seeds 1 and 2, to 3,000 iterations; against Experiment 31's estate worlds of the same seeds (`B2-10000-06b876-\u2026`, `-b8e9fc-\u2026`) and Experiment 19's ten worlds (`B2-10000-bcc1bc-s001` \u2026 `-s010`), which have no floor.\n\n**Data.** From each world's archive at iteration 3,000 and its `stats.jsonl`.\n\n1. Left: each agent's age is the iteration less the one it was born in; average the tokens of the agents aged 1 to 10, 11 to 20, and so on.\n2. Right: the births and the agents of each iteration's first phase, averaged over the iterations 2,000 to 2,999.\n\n**To make it again:** `python3 book_figures.py floor`."
+  }
+ }
+}

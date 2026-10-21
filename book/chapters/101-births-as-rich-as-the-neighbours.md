@@ -111,6 +111,141 @@ The world can grow only as rich as it is.
 > A value in **bold** differs from the baseline B2.
 <!-- /runs -->
 
+## What the worlds did
+
+<!-- figure floor/measures -->
+![The floor, with each estate and without](../figures/floor/measures.svg)
+
+**The floor, with each estate and without.** Each dot is one world at iteration 3,000, without the floor (grey: Experiment 19's ten worlds for parents as mates alone, Experiment 31's two for each estate) and with it (orange: Experiment 32's two for each). The dashed line is what the author's picture asks: every mark, a diversity score above B2's median world at 3,000 (0.54), a typical distance at least 1.5 times the random twin's, a Gini no lower than B2's least even world at 3,000 (0.47).
+
+> [!example]- How to make this figure
+> **Runs.** Experiment 32's six runs (`python3 gol_lab.py run E32`): B2 at 10,000 tokens with brains mixed at birth, parents as mates and a child never poorer than the median holding of its parent's neighbours, with the estate of the dead paid to the newborns (`B2-10000-12215f-…`), to the parents (`-86df9e-…`) or neither (`-b289dd-…`), seeds 1 and 2, to 3,000 iterations; against Experiment 31's estate worlds of the same seeds (`B2-10000-06b876-…`, `-b8e9fc-…`) and Experiment 19's ten worlds (`B2-10000-bcc1bc-s001` … `-s010`), which have no floor.
+>
+> **Data.** From each world's archive at iteration 3,000.
+>
+> 1. Read each world as `research/atlas/profile.py` reads every world: the seven marks, the four spreads ranked among the frozen reference worlds (their mean is the diversity score), the Gini of the tokens; and its typical distance over its random twin's, as `research/atlas/space.py` measures it (`research/atlas/readings.py` does both).
+> 2. The lines: every mark; the median diversity, and the least Gini, of B2's ten worlds played on and read at 3,000; a typical distance of 1.5 times the twin's.
+>
+> **To make it again:** `python3 book_figures.py floor`.
+<!-- /figure -->
+
+**The floor changed nothing the measures can see.** At iteration 3,000:
+- **With an estate,** the four worlds with the floor are Chapter 100's
+  estate worlds again:
+
+  | | with the floor | without it (Chapter 100) |
+  |---|---|---|
+  | marks of the health bar | 7 | 7 |
+  | width over the twin | 2.2 to 2.85 | 2.0 to 2.65 |
+  | agents | 5,063 to 5,735 | 5,036 to 5,445 |
+  | tokens per agent | 1.74 to 1.98 | 1.84 to 1.99 |
+  | diversity score | 0.35 to 0.39 | 0.32 to 0.41 |
+  | Gini of the tokens | 0.40 to 0.46 | 0.42 to 0.45 |
+
+- **Alone,** the floor left Experiment 19's world as it was. Its two worlds
+  lie among Experiment 19's ten in every measure:
+  - diverse, 0.60 and 0.69 (Experiment 19: 0.54 to 0.75);
+  - uneven, Ginis of 0.51 and 0.54 (0.44 to 0.57);
+  - folded, 1.27 and 1.22 times their twins (1.16 to 1.29);
+  - each missing the mark for dimension, 4.2 and 4.1, as five of
+    Experiment 19's ten do.
+
+## Why the floor did nothing
+
+**It could not bind.** Every child already starts with at least ten tokens
+(B2's `min_child`). So the floor asks more only of a parent whose
+neighbours' median holding is above ten.
+- **In the estate worlds with the floor,** at 3,000, the median agent's
+  neighbours held a median of one token. Of the 109 to 157 agents rich
+  enough to have a child, the floor asked more of 1 to 10.
+- **Alone,** it asked more of 6 and of 55, of about 300.
+
+<!-- figure floor/paupers -->
+![Where the poor agents come from](../figures/floor/paupers.svg)
+
+**Where the poor agents come from.** Left: the mean tokens of the agents of each age, in tens of iterations, at iteration 3,000, averaged over the worlds of each kind: Experiment 19's ten, and seeds 1 and 2 of the others. Right: each world's births an iteration and agents alive, both averaged over iterations 2,000 to 3,000; the dashed line is a hundred agents for every birth an iteration, which a world keeps when everyone lives out a hundred iterations.
+
+> [!example]- How to make this figure
+> **Runs.** Experiment 32's six runs (`python3 gol_lab.py run E32`): B2 at 10,000 tokens with brains mixed at birth, parents as mates and a child never poorer than the median holding of its parent's neighbours, with the estate of the dead paid to the newborns (`B2-10000-12215f-…`), to the parents (`-86df9e-…`) or neither (`-b289dd-…`), seeds 1 and 2, to 3,000 iterations; against Experiment 31's estate worlds of the same seeds (`B2-10000-06b876-…`, `-b8e9fc-…`) and Experiment 19's ten worlds (`B2-10000-bcc1bc-s001` … `-s010`), which have no floor.
+>
+> **Data.** From each world's archive at iteration 3,000 and its `stats.jsonl`.
+>
+> 1. Left: each agent's age is the iteration less the one it was born in; average the tokens of the agents aged 1 to 10, 11 to 20, and so on.
+> 2. Right: the births and the agents of each iteration's first phase, averaged over the iterations 2,000 to 2,999.
+>
+> **To make it again:** `python3 book_figures.py floor`.
+<!-- /figure -->
+
+**The poor agents are not born poor.** In the estate worlds, every child
+starts with ten tokens or more, as in any world.
+- Agents aged 1 to 10 hold 4.8 on average.
+- Aged 11 to 20, 2.1.
+- From 30 on, about 1.5.
+
+The game strips the young within twenty iterations. In Experiment 19's
+worlds, agents hold 7 in their first ten iterations and still 4.4 in their
+last ten.
+
+**And the young are the parents.** The agents that can have a child, with
+eleven tokens or more, are young in the estate worlds and middle-aged in
+the others, at 3,000:
+
+| | median age of the agents able to have a child | share of them aged 10 or less |
+|---|---|---|
+| an estate, with or without the floor | 4 to 10 | 51% to 64% |
+| Experiment 19, and the floor alone | 27 to 45 | 8% to 27% |
+
+In a world where most agents hold a token or two, the only agents rich
+enough are those just born, with their ten tokens or more, and those just
+paid by the estate, and the game takes it from them within twenty
+iterations. [Chapter 87](87-what-folds-a-world.md) found why young parents
+make a space: a death closes a ring round the gap it leaves, and the ring
+is largest where the old do the breeding. Here the young do, so the rings
+stay small and the world keeps its room.
+
+**A world's size is its births.** Every world here held 99 to 102 agents for
+each birth an iteration, averaged over iterations 2,000 to 3,000. Its
+agents live out their hundred iterations and almost none die sooner, as
+[Meta XI](84-meta-11-what-holds-a-worlds-size.md) found in 454 moments of
+other worlds. So:
+- a world's size is a hundred times its births an iteration;
+- its riches are its 10,000 tokens shared among them.
+
+| | births an iteration | agents |
+|---|---|---|
+| Experiment 19's ten worlds | 12 to 23 | 1,210 to 2,267 |
+| the floor alone | 18 and 20 | 1,762 and 1,962 |
+| an estate, without the floor | 51 to 53 | 5,004 to 5,294 |
+| an estate, with the floor | 46 to 58 | 4,576 to 5,789 |
+
+## The verdict
+
+**The thesis fails.** With either estate and the floor, both worlds met
+every mark and were spaces, as without the floor. None was diverse enough
+(0.35 to 0.39, against 0.54) or uneven enough (Ginis of 0.40 to 0.46,
+against 0.47). The floor changed nothing measurable, because in a world of
+paupers a child's neighbours are paupers too.
+
+## What it teaches
+
+- **A rule that measures a world against itself follows it down.** The floor
+  asked a child to be as rich as its neighbours. In a poor world the
+  neighbours are poor, so the floor fell with the world, below the ten
+  tokens every child already gets. A pull has to measure against something
+  a poor world does not drag down with it.
+- **The paupers are made by the game, not at birth.** A rule on what a
+  child starts with cannot reach them. Under old age, only two things can:
+  - fewer births, since the world's size is a hundred times its births;
+  - or a game that strips the young less.
+- **Room and riches come from the same coin.** The estate worlds are spaces
+  because their young are the parents, and their young are the parents
+  because in a world of paupers only the newly born and the newly paid are
+  rich enough. Under these rules a world gets young parents only by paying
+  for births, and paying for births fills it with paupers. A world that is both a space and rich
+  needs its young to breed without the world filling up. Or it needs deaths
+  that do not fold it when the old breed: the open question of
+  [Chapter 87](87-what-folds-a-world.md), mending without folding.
+
 <!-- turns -->
 ---
 

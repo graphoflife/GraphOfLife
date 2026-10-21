@@ -1,0 +1,132 @@
+{
+ "chapter": "crews",
+ "numbers": {
+  "held": {
+   "raider": {
+    "2000": 4,
+    "5000": 0,
+    "10000": 0
+   },
+   "crew": {
+    "2000": 0,
+    "5000": 0,
+    "10000": 0
+   }
+  },
+  "life": {
+   "2000": {
+    "raider": 206.0,
+    "crew": 107.0,
+    "resident": 300.0
+   },
+   "5000": {
+    "raider": 151.0,
+    "crew": 100.0,
+    "resident": 300.0
+   },
+   "10000": {
+    "raider": 155.0,
+    "crew": 108.0,
+    "resident": 297.0
+   }
+  },
+  "crew_died_first": {
+   "2000": 15,
+   "5000": 14,
+   "10000": 13
+  },
+  "wealth_at_10": {
+   "raider": 1.6461022783892738,
+   "crew": 1.33418652271035,
+   "resident": 1.8454792542574427
+  },
+  "first_game": {
+   "patch_agents": {
+    "2000": 2499,
+    "5000": 2568,
+    "10000": 2520
+   },
+   "one_token": {
+    "2000": 1648,
+    "5000": 1844,
+    "10000": 1848
+   },
+   "can_breed": {
+    "2000": 3,
+    "5000": 1,
+    "10000": 0
+   },
+   "crew_staking": {
+    "2000": 657,
+    "5000": 549,
+    "10000": 454
+   },
+   "lone_staking": {
+    "2000": 466,
+    "5000": 353,
+    "10000": 292
+   },
+   "targets": {
+    "2000": 597,
+    "5000": 497,
+    "10000": 402
+   },
+   "mob_sizes": {
+    "2000": {
+     "1": 544,
+     "2": 48,
+     "3": 5
+    },
+    "5000": {
+     "1": 454,
+     "2": 37,
+     "3": 6
+    },
+    "10000": {
+     "1": 361,
+     "2": 32,
+     "3": 9
+    }
+   },
+   "outcome": {
+    "2000": {
+     "sure": 433,
+     "maybe": 16,
+     "lost": 148
+    },
+    "5000": {
+     "sure": 323,
+     "maybe": 23,
+     "lost": 151
+    },
+    "10000": {
+     "sure": 261,
+     "maybe": 12,
+     "lost": 129
+    }
+   },
+   "agents_per_stranger": {
+    "2000": 1.5740095942593642,
+    "5000": 1.6159193793278381,
+    "10000": 1.6003275092388016
+   }
+  }
+ },
+ "figures": {
+  "hold": {
+   "title": "Crews and lone raiders, planted in the same places",
+   "caption": "Left: of the fifteen plantings at each era (five worlds, three places), how many took hold, lone raiders (violet) and crews (orange). Right: each place once, by the iteration the lone raiders' last agent died in and the crew's (300: still alive at the end). Below the dashed line the crew died first.",
+   "recipe": "**Runs.** Experiment 33's 135 invasions (`python3 gol_lab.py run E33`): B2's worlds of Experiment 16 played on to 10,000 iterations as pilots of the engine's own rules (`GraphOfLifeRuns/.pilots/L/B2-long-s001` \u2026 `s005`), at iterations 2,000, 5,000 and 10,000, a patch of 5% on places 1 to 3, given the crew's rule, the lone raider's (Chapter 51's) or frozen copies of one patch member's brain (the control); the lone raiders' and the controls' plantings are Experiment 30's own.\n\n**Data.** From each trial's `result.json`.\n\n1. Load the world of the era; on place p, draw an agent at random and take its nearest neighbours, step by step, until the patch holds 5% of the world.\n2. Give the patch the rule, or the control; play 300 iterations under the world's own rules, counting the patch's strategy and its tokens after every iteration.\n3. A planting takes hold when its strategy is then alive, holds more agents than the patch began with, and more than the control planted in the same place.\n\n**To make it again:** `python3 book_figures.py crews`."
+  },
+  "wealth": {
+   "title": "What became of the patches planted at 5,000 and 10,000",
+   "caption": "The median over the thirty plantings at 5,000 and 10,000 of each kind: crews (orange), lone raiders (violet), controls (grey). Left: the patch's strategy's agents as a share of the patch planted (0 once it has died out). Right: their tokens per agent, over the plantings still alive.",
+   "recipe": "**Runs.** Experiment 33's 135 invasions (`python3 gol_lab.py run E33`): B2's worlds of Experiment 16 played on to 10,000 iterations as pilots of the engine's own rules (`GraphOfLifeRuns/.pilots/L/B2-long-s001` \u2026 `s005`), at iterations 2,000, 5,000 and 10,000, a patch of 5% on places 1 to 3, given the crew's rule, the lone raider's (Chapter 51's) or frozen copies of one patch member's brain (the control); the lone raiders' and the controls' plantings are Experiment 30's own.\n\n**Data.** From each trial's `result.json`.\n\n1. Load the world of the era; on place p, draw an agent at random and take its nearest neighbours, step by step, until the patch holds 5% of the world.\n2. Give the patch the rule, or the control; play 300 iterations under the world's own rules, counting the patch's strategy and its tokens after every iteration.\n\n**To make it again:** `python3 book_figures.py crews`."
+  },
+  "mobs": {
+   "title": "A crew's first game, as planted",
+   "caption": "Every stranger a crew raider would stake on in its first game, over the fifteen plantings of each era. Left: how many raiders of the crew chose it. Right: whether the raiders that chose it outweigh it even if it keeps everything at home (sure to win), only if it keeps no more than it must (might win), or not even then (sure to lose: their tokens go to the stranger).",
+   "recipe": "**Runs.** No world is played: the worlds and places of Experiment 33's crews, read as they were planted \u2014 B2's worlds played on (`GraphOfLifeRuns/.pilots/L/B2-long-s001` \u2026 `s005`) at iterations 2,000, 5,000 and 10,000, places 1 to 3.\n\n**Data.** From the worlds' checkpoints at each era, read by `research/oee/strategies/mobs.py`.\n\n1. Draw each patch as the planting draws it.\n2. For every patch agent with a stranger next door: the weakest such stranger (the first, where several are as weak); if the agent holds at least as much and has more than its home share, it stakes all but that share there.\n3. Raiders that chose the same stranger are one mob. Weigh the mob against the stranger's stake at home, counted one and a half times: everything it holds (sure to win), or only what B2 makes it keep, 30% rounded up and at least one token (might win). What other neighbours stake on it is left out.\n\n**To make it again:** `python3 book_figures.py crews`."
+  }
+ }
+}

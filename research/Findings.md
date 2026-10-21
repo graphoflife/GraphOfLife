@@ -557,6 +557,26 @@ tokens, ten seeds, 20,000 iterations; lab engine 7fa9fe7aeefbf111)**
   Thesis fails; each rule pays in its own coin. Healthy 3-D networks exist (estates); their agents are too many and
   too poor. Next: a birth that asks at least the neighbours' median; mending without folding; crews of raiders.
 
+**A child as rich as its neighbours; a crew of raiders (2026-10-21; Ch. 101-102)**
+- E32 (Ch. 101, E19 + child_floor=neighbours with estate to newborns / parents / none, seeds 1-2 to 3,000;
+  research/atlas/readings.py -> .pilots/atlas/e32_readings.json): estates + floor = E31's estates (7 marks, 2.2-2.85x,
+  5,063-5,735 agents at 1.74-1.98 tokens, diversity 0.35-0.39, Gini 0.40-0.46); floor alone inside E19's ten (div
+  0.60/0.69, Gini 0.51/0.54, 1.27/1.22x, dimension 4.2/4.1 = 6 marks). Thesis fails. The floor cannot bind: the
+  median agent's neighbours hold a median of 1 token, below min_child 10 (asked more of 1-10 of 109-157 able agents).
+- Paupers are made, not born: estate worlds' agents hold 4.8 tokens aged 1-10, 2.1 aged 11-20, ~1.5 from 30 (E19's
+  ten: 7.1 -> 4.4). Size = births x 100: 99-102 agents per birth an iteration in all 20 worlds (E19 12-23 births,
+  estates 46-58). The estate worlds are spaces because the young are the parents (able agents' median age 4-10, 51-64%
+  aged <= 10; E19 and floor alone 27-45, 8-27%): Ch. 87's small rings. Room and riches from one coin.
+- E33 (Ch. 102, 45 crew invasions + E30's raider and control trials at 2,000/5,000/10,000): crews took hold 0/15 at
+  every era (lone raiders 4, 0, 0); thesis fails (0/30). Crews died before the lone raiders in 42 of 45 places (median
+  last iteration 100-108 vs 151-206; controls ~300); tokens per agent at t=10: crew 1.33, raider 1.65, control 1.85.
+  First game read off the planted worlds (research/oee/strategies/mobs.py -> .pilots/atlas/e33_mobs.json): 72% of
+  late patch agents hold 1 token (cannot stake); a stranger borders 1.6 patch agents; 9-10% of chosen strangers drew
+  2+ raiders; 30% were sure losses (266 of 280 such raiders: 2 tokens staking 1 on a 1-token stranger). 4 of 7,587
+  planted agents held the 30 tokens the crafted rules need for a child: the raiders are barren in late worlds.
+- Reading: the game rewards a group only where it can gather; choosing a target together needs third-party news
+  (Ch. 94). Next rungs must breed as residents do (a child at min_child, keeping the home share).
+
 **Too even, not too poor (2026-10-19; research/atlas/evenness.py adds gini_tokens and richest_tenth to every
 reading; notes in Ch. 79, 91, 92, 93)**
 - The author: the worry was evenness (almost everyone holding the same few), the <= 3 share only a proxy. The

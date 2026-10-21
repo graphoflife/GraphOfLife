@@ -168,6 +168,16 @@ tokens a raider cannot start among agents that hold two.
   reason for groups that comes from the game itself, and the next rung of
   the ladder: a crew of raiders against a lone one, in worlds too poor for
   either alone.
+
+> [!info] Added later (2026-10-21, Chapter 102)
+> It shut out the group too. Crews planted in the same places took hold
+> nowhere, at 2,000, 5,000 or 10,000, and died before the lone raiders in
+> 42 of 45 places ([Chapter 102](102-a-crew-of-raiders.md)). Seven agents
+> in ten of a late patch hold a single token and can stake nothing, a
+> stranger borders 1.6 agents of a patch, and a stake that finds no partner
+> goes to the stranger. Neither raider can have a child in a late world:
+> its rule waits for 30 tokens, which almost no agent there holds.
+
 - **The door has to be tested with the world's own wealth.** A strategy
   written by hand carries its own thresholds, the raider's three tokens
   among them. Before saying that evolution closed a door, the next tests
