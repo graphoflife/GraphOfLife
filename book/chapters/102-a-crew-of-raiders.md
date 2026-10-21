@@ -195,6 +195,17 @@ raiders, and the poorer the world, the less a mob was worth, not the more:
 - the fewer bordered the same stranger;
 - and a stake that found no partner went to the stranger.
 
+> [!info] What these results cover (added 2026-10-21)
+> Every planting of this chapter was in B2's worlds, and three of the
+> reasons the crews failed are B2's own rules: a home share that keeps a
+> one-token agent from staking (`keep_home`), a holder's stake that counts
+> one and a half times (`incumbency`), and old age at 100 (`max_age`), with
+> which a patch that cannot breed dies with its founders. The raiders also
+> carried B2's numbers, staking 70% and asking more than one and a half times
+> their target's tokens, until Chapter 104 made them read each world's own.
+> [Chapter 104](104-hand-written-strategies-in-b1.md) plants the same
+> strategies in B1, which has none of those rules.
+
 ## What it teaches
 
 - **The game rewards a group only where a group can gather.** On B2's

@@ -118,6 +118,7 @@ everything can be checked with it.
 - [Chapter 99 · A mate that pays its share](chapters/99-a-mate-that-pays-its-share.md)
 - [Chapter 100 · Room for the steadiest world](chapters/100-room-for-the-steadiest-world.md)
 - [Chapter 101 · Births as rich as the neighbours](chapters/101-births-as-rich-as-the-neighbours.md)
+- [Chapter 105 · The floor in plain B2 and in B1](chapters/105-the-floor-in-plain-b2-and-in-b1.md)
 
 **Part VI · Towards a physics: space, scale and locality**
 
@@ -157,6 +158,7 @@ everything can be checked with it.
 - [Chapter 97 · Does evolution close the door?](chapters/97-does-evolution-close-the-door.md)
 - [Chapter 102 · A crew of raiders](chapters/102-a-crew-of-raiders.md)
 - [Chapter 103 · Raiders that breed](chapters/103-raiders-that-breed.md)
+- [Chapter 104 · Hand-written strategies in B1](chapters/104-hand-written-strategies-in-b1.md)
 
 **Notes · the rules**
 

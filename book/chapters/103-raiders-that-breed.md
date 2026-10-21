@@ -40,6 +40,10 @@ five worlds played on, at 2,000, 5,000 and 10,000, in the same three places,
 beside the lone raiders' and the controls' plantings, which they share with
 those chapters.
 
+Like those chapters, this one plays B2's rules only, and its least child of
+ten tokens is B2's. [Chapter 104](104-hand-written-strategies-in-b1.md)
+plants the same strategies in B1, whose least child is a single token.
+
 ## The thesis
 
 <!-- thesis E34 -->
@@ -70,5 +74,5 @@ those chapters.
 <!-- turns -->
 ---
 
-← [Chapter 102 · A crew of raiders](102-a-crew-of-raiders.md) · [Contents](../README.md) · [Appendix A · What a simulation costs](A-costs.md) →
+← [Chapter 102 · A crew of raiders](102-a-crew-of-raiders.md) · [Contents](../README.md) · [Chapter 104 · Hand-written strategies in B1](104-hand-written-strategies-in-b1.md) →
 <!-- /turns -->

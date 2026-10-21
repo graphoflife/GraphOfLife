@@ -226,6 +226,16 @@ every mark and were spaces, as without the floor. None was diverse enough
 against 0.47). The floor changed nothing measurable, because in a world of
 paupers a child's neighbours are paupers too.
 
+> [!info] What these results cover (added 2026-10-21)
+> Every world of this chapter was played under B2's rules, with brains mixed
+> at birth and parents as mates, at 10,000 tokens, two seeds each. The floor
+> failed because of one of those rules: every B2 child already starts with
+> ten tokens (`min_child`), more than a poor world's neighbours hold. A world
+> whose least child is a single token, such as B1, is another matter;
+> [Chapter 105](105-the-floor-in-plain-b2-and-in-b1.md) plays the same floor
+> in plain B2 and in B1. The ledger of births, a hundred agents for each birth
+> an iteration, holds only where every agent dies at a fixed age, as in B2.
+
 ## What it teaches
 
 - **A rule that measures a world against itself follows it down.** The floor
@@ -249,5 +259,5 @@ paupers a child's neighbours are paupers too.
 <!-- turns -->
 ---
 
-← [Chapter 100 · Room for the steadiest world](100-room-for-the-steadiest-world.md) · [Contents](../README.md) · [Chapter 60 · Worlds of 100,000 tokens](60-worlds-of-100000-tokens.md) →
+← [Chapter 100 · Room for the steadiest world](100-room-for-the-steadiest-world.md) · [Contents](../README.md) · [Chapter 105 · The floor in plain B2 and in B1](105-the-floor-in-plain-b2-and-in-b1.md) →
 <!-- /turns -->

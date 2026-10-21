@@ -15,7 +15,9 @@ There are two kinds:
   rules     a policy in Python: `turtle`, `raider`, `lone`, `factory`, what
             Chapter 51 planted; `crew`, the raider of a crowd (Chapter 102);
             and `breeding-turtle` and `breeding-raider`, which have a child as
-            the world's own agents can (Chapter 103)
+            the world's own agents can (Chapter 103). A raid reads the world's
+            home share and holder's bonus (keep_home, incumbency), so a rule
+            plays each world by its own rules (Chapter 104)
   weights   a brain of the world's own shape whose weights were set by hand:
             `raider-weights`, Chapter 94's raider, 12 of B2's 16 units
 
@@ -133,13 +135,22 @@ def turtle(cfg, X):
     return w.Y
 
 
-def _raid(v: View, w: Writer) -> None:
+def _takes(cfg, mine: float, theirs: float) -> bool:
+    """
+    Whether all an agent may stake outweighs everything a neighbour holds, as the
+    world's own rules weigh them: what keep_home leaves free to stake against the
+    neighbour's stake at home counted `incumbency` times (in B2, 70% against one and a
+    half times; in B1, everything against once).
+    """
+    return (1.0 - cfg.keep_home) * mine > cfg.incumbency * theirs
+
+
+def _raid(cfg, v: View, w: Writer) -> None:
     """All on the weakest stranger next door if that can take it, else everything at home."""
-    staked = 0.7 * v.me_tokens                     # B2 keeps at least 30% at home anyway
     target = None
     if v.enemy.any():
         j = int(np.argmin(np.where(v.enemy, v.tokens, np.inf)))
-        if staked > 1.5 * v.tokens[j]:
+        if _takes(cfg, v.me_tokens, v.tokens[j]):
             target = j
     w.stake(np.eye(v.n)[target if target is not None else 0])
 
@@ -156,7 +167,7 @@ def _breed(cfg, v: View, w: Writer) -> bool:
 def raider(cfg, X):
     """All on the weakest stranger next door if that can take it, else everything at home."""
     v, w = View(cfg, X), Writer(cfg, X.shape[1])
-    _raid(v, w)
+    _raid(cfg, v, w)
     if v.me_tokens >= 30:
         w.child(1 / 3)
         w.link(np.flatnonzero(v.mate | v.is_self))
@@ -171,7 +182,7 @@ def lone(cfg, X):
     target = None
     if others.any():
         j = int(np.argmin(np.where(others, v.tokens, np.inf)))
-        if 0.7 * v.me_tokens > 1.5 * v.tokens[j]:
+        if _takes(cfg, v.me_tokens, v.tokens[j]):
             target = j
     w.stake(np.eye(v.n)[target if target is not None else 0])
     if v.me_tokens >= 30:
@@ -196,11 +207,10 @@ def factory(cfg, X):
         heard = v.word[v.mate]
         d = int(min(CAP, (heard.min() if heard.size else CAP - 1) + 1))
     w.say(d)
-    staked = 0.7 * v.me_tokens
     amounts = np.zeros(v.n)
     if frontier:
         j = int(np.argmin(np.where(v.enemy, v.tokens, np.inf)))
-        if staked > 1.5 * v.tokens[j]:
+        if _takes(cfg, v.me_tokens, v.tokens[j]):
             amounts[j] = 1.0
     elif v.mate.any():
         nearest = np.where(v.mate, v.word, np.inf)
@@ -252,7 +262,7 @@ def breeding_turtle(cfg, X):
 def breeding_raider(cfg, X):
     """The raider, breeding as the world's own agents can (Chapter 103); its children joined as the raider's."""
     v, w = View(cfg, X), Writer(cfg, X.shape[1])
-    _raid(v, w)
+    _raid(cfg, v, w)
     if _breed(cfg, v, w):
         w.link(np.flatnonzero(v.mate | v.is_self))
     return w.Y

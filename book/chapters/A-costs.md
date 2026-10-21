@@ -89,5 +89,5 @@ about seven hours. The thirty worlds of 100,000 tokens that
 <!-- turns -->
 ---
 
-← [Chapter 103 · Raiders that breed](103-raiders-that-breed.md) · [Contents](../README.md) · [Appendix B · What goes with what](B-what-goes-with-what.md) →
+← [Chapter 104 · Hand-written strategies in B1](104-hand-written-strategies-in-b1.md) · [Contents](../README.md) · [Appendix B · What goes with what](B-what-goes-with-what.md) →
 <!-- /turns -->

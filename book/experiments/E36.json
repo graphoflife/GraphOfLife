@@ -1,0 +1,30 @@
+{
+ "id": "E36",
+ "title": "The floor in plain B2",
+ "thesis": {
+  "claim": "Where every child already starts with ten tokens, a floor at the neighbours' median changes nothing. In plain B2, with a child never poorer than the median holding of its parent's neighbours, the floor asks more than B2's ten tokens of fewer than one in twenty of the agents able to have a child, at iterations 1,000, 2,000 and 3,000, and over iterations 1,000 to 2,000 children start with 11 to 13 tokens on average, as in B2's ten worlds of Experiment 16 (11.2 to 12.1).",
+  "why": "In Chapter 101 the floor changed nothing in the estate worlds and nothing beyond seed-to-seed scatter in Experiment 19's world: in a world of poor agents a parent's neighbours hold a token or two, and every B2 child already starts with ten (min_child). Plain B2 is such a world: three agents in four hold three tokens or fewer. If the floor cannot bind there either, its failure is B2's least child, not the estates or mixed brains; Experiment 37 plays the same floor in B1, whose least child is a single token.",
+  "confirm": "In both worlds, at 1,000, 2,000 and 3,000, fewer than one in twenty of the agents holding eleven tokens or more have neighbours whose median holding is above ten; and over iterations 1,000 to 2,000 both worlds' children start with 11 to 13 tokens on average.",
+  "refute": "In either world the floor asks more than ten tokens of one in twenty able agents or more at one of those iterations, or its children start with fewer than 11 or more than 13 tokens on average: the floor binds in plain B2, and the chapter says what it changed."
+ },
+ "runs": {
+  "baseline": "B2",
+  "world": {
+   "total_tokens": 10000
+  },
+  "seeds": "1..2",
+  "iterations": 3000,
+  "record": {
+   "heavy_every": 25,
+   "archive_every": 500
+  },
+  "conditions": [
+   {
+    "name": "a child as rich as its neighbours",
+    "set": {
+     "child_floor": "neighbours"
+    }
+   }
+  ]
+ }
+}

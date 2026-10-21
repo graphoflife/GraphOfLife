@@ -379,5 +379,5 @@ To make every figure of this chapter: `python3 book_figures.py takeover`.
 <!-- turns -->
 ---
 
-← [Chapter 101 · Births as rich as the neighbours](101-births-as-rich-as-the-neighbours.md) · [Contents](../README.md) · [Chapter 87 · What folds a world](87-what-folds-a-world.md) →
+← [Chapter 105 · The floor in plain B2 and in B1](105-the-floor-in-plain-b2-and-in-b1.md) · [Contents](../README.md) · [Chapter 87 · What folds a world](87-what-folds-a-world.md) →
 <!-- /turns -->

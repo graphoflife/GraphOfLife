@@ -1,0 +1,30 @@
+{
+ "id": "E37",
+ "title": "The floor in B1",
+ "thesis": {
+  "claim": "Where a child may start with a single token, a floor at the neighbours' median binds and makes a world of fewer, richer agents. In B1, with a child never poorer than the median holding of its parent's neighbours, both worlds live to iteration 3,000; over iterations 2,000 to 3,000 their children start with more tokens on average than in any of B1's 26 worlds that lived to 3,000 (more than 5.1), and both hold fewer agents on average than B1's median world (1,462).",
+  "why": "B1's children start with 2.0 to 5.1 tokens on average over iterations 2,000 to 3,000 (a median of 2.6, over the 26 of Experiment 2's 30 worlds that lived to 3,000), while the median agent of B1's long worlds holds 4 to 15 tokens. A floor at the neighbours' median asks more than most B1 parents give: births should become fewer and larger, and the world smaller and richer. In B2 every child already starts with ten tokens and the floor never bound (Chapter 101, Experiment 36).",
+  "confirm": "Both worlds live to 3,000; over iterations 2,000 to 3,000 both worlds' children start with more than 5.1 tokens on average, and both worlds hold fewer than 1,462 agents on average.",
+  "refute": "Either world dies before 3,000, or its children start with 5.1 tokens or fewer on average, or it holds 1,462 agents or more on average: the floor does not bind in B1 either, or binding does not leave a smaller, richer world; the chapter says which."
+ },
+ "runs": {
+  "baseline": "B1",
+  "world": {
+   "total_tokens": 10000
+  },
+  "seeds": "1..2",
+  "iterations": 3000,
+  "record": {
+   "heavy_every": 25,
+   "archive_every": 500
+  },
+  "conditions": [
+   {
+    "name": "a child as rich as its neighbours",
+    "set": {
+     "child_floor": "neighbours"
+    }
+   }
+  ]
+ }
+}
