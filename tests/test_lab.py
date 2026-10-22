@@ -827,6 +827,29 @@ def test_a_value_that_spoils_every_world_is_set_aside():
     assert got["forced_next"] == {"valence": [0]}
 
 
+def test_an_experiment_that_cannot_be_read_holds_up_no_other():
+    """
+    Trials whose world sits on a disk that is not mounted cannot be read: the lab passes that
+    experiment over, says why in its panel and its log, and plays the rest of the queue.
+    """
+    with lab(plan("E90", seeds="1", iterations=4, record=ARCHIVED), plan("E91", seeds="2", iterations=2),
+             trials_plan("E92", "invasion", CONTROLS)) as tmp:
+        assert work(gol_plan.experiment_runs("E90")[0], 4) == 0
+        gol_lab.request(run="E92")
+        gol_lab.request(run="E91")
+        # Then its world is moved to another disk, which is not mounted when the lab starts.
+        source = gol_store.run_dir("B9-400-s001")
+        shutil.move(source, os.path.join(tmp, "unplugged"))
+        os.symlink(os.path.join(tmp, "elsewhere", "B9-400-s001"), source)
+        said = io.StringIO()
+        with contextlib.redirect_stdout(said):
+            assert gol_lab.run_lab() == 0
+        status = gol_lab.status()["experiments"]
+        assert status["E91"]["state"] == "finished", status["E91"]
+        assert status["E92"]["state"] == "invalid" and "not mounted" in status["E92"]["reason"], status["E92"]
+        assert "passed over E92" in said.getvalue(), said.getvalue()
+
+
 def test_a_screens_worlds_are_listed_in_its_chapter():
     """The book lists every world a screen draws, what differs from B1, and what was forced off."""
     import book_fill

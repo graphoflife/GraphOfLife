@@ -393,6 +393,16 @@ def run_state(spec: RunSpec, engine: Optional[str]) -> Dict[str, Any]:
             "job": Job(spec, next_target, made_by, True, fault, progress)}
 
 
+_SKIPPED: Dict[str, str] = {}
+
+
+def _note_skipped(name: str, reason: str) -> None:
+    """Log a queued experiment passed over, once for each reason, not on every tick."""
+    if _SKIPPED.get(name) != reason:
+        _SKIPPED[name] = reason
+        _log(f"passed over {name}: {reason}")
+
+
 def jobs(queue: Iterable[str], engine: Optional[str]) -> List[Job]:
     """
     What is waiting to be done for the queued experiments, longest first, so
@@ -404,7 +414,17 @@ def jobs(queue: Iterable[str], engine: Optional[str]) -> List[Job]:
     queue = list(queue)
     known = costs()
     found = []
-    for spec in wanted(queue).values():
+    # A queued experiment that cannot be read now — its plan is wrong, or the runs its
+    # trials play from sit on a disk that is not mounted — is passed over, and shows
+    # as invalid in its own panel with the reason; it does not hold up the others.
+    readable = []
+    for name in queue:
+        try:
+            experiment_runs(name)
+            readable.append(name)
+        except LabError as exc:
+            _note_skipped(name, str(exc))
+    for spec in wanted(readable).values():
         state = run_state(spec, engine)
         if state.get("job"):
             found.append(state["job"])

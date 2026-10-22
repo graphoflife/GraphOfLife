@@ -364,7 +364,10 @@ def _experiment_trials(name: str) -> List[RunSpec]:
         try:
             source = store.source_config(trial["run"])
         except (OSError, ValueError) as exc:
+            folder = store.run_dir(trial["run"]) if not trial["run"].startswith(store.PILOT) else ""
             reason = str(exc) if isinstance(exc, ValueError) and "prototype" in str(exc) else \
+                f"the run {trial['run']} is on {os.readlink(folder)}, which is not mounted" \
+                if folder and os.path.islink(folder) and not os.path.exists(folder) else \
                 f"there is no run {trial['run']} on this machine to play from"
             raise LabError(f"{name} trials {label!r}: {reason}") from None
         era = trial.get("home", trial.get("era"))
