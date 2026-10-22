@@ -15,6 +15,7 @@ can step it at the same time, and anybody can ask whether it is going.
 """
 from __future__ import annotations
 
+import time
 import traceback
 from typing import Any, Callable, Optional
 
@@ -23,11 +24,12 @@ from gol_record import Recorder
 
 
 def advance(run_id: str, should_stop: Callable[[Any], bool] = lambda world: False,
-            until: Optional[int] = None) -> str:
+            until: Optional[int] = None, deadline: Optional[float] = None) -> str:
     """
     Step a run from wherever it was left until it is told to stop, reaches
-    `until`, or dies out, and return how it ended: "stopped", "extinct" or
-    "error".
+    `until`, dies out, or passes `deadline` (a time.monotonic() reading: a
+    screen's world may take no longer than its budget), and return how it
+    ended: "stopped", "extinct", "too_slow" or "error".
 
     A run with no checkpoint starts from nothing, and anything it recorded
     before is thrown away. A run with one resumes from it, and every frame
@@ -42,13 +44,14 @@ def advance(run_id: str, should_stop: Callable[[Any], bool] = lambda world: Fals
     """
     with store.hold(run_id):
         try:
-            return _advance(run_id, should_stop, until)
+            return _advance(run_id, should_stop, until, deadline)
         except Exception:
             store.update_meta(run_id, status="error", error=traceback.format_exc(limit=4))
             raise
 
 
-def _advance(run_id: str, should_stop: Callable[[Any], bool], until: Optional[int]) -> str:
+def _advance(run_id: str, should_stop: Callable[[Any], bool], until: Optional[int],
+             deadline: Optional[float] = None) -> str:
     from GraphOfLifeSimple import new_world
 
     cfg = store.load_config(run_id)
@@ -86,6 +89,9 @@ def _advance(run_id: str, should_stop: Callable[[Any], bool], until: Optional[in
         # No ceiling of its own: a run ends when it is stopped, reaches what
         # it was asked to, or dies out, and nothing else.
         while not should_stop(world) and (until is None or world.iteration < until):
+            if deadline is not None and time.monotonic() >= deadline:
+                status = "too_slow"
+                break
             record = cfg.records(world.iteration)
             frames = world.step(record_decisions=cfg.export_decisions and record)
 

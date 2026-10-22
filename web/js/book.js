@@ -436,10 +436,12 @@ const Book = {
     const runs = status.runs.map(r => {
       const done = r.until ? Math.min(1, r.iteration / r.until) : 0;
       const where = r.diedAt != null ? `died out at iteration ${formatNumber(r.diedAt)}`
+        : r.slowAt != null ? `stopped as too slow at iteration ${formatNumber(r.slowAt)}`
         : `${formatNumber(r.iteration)} of ${formatNumber(r.until)}`;
       // A trial keeps no frames, so there is nothing to open (gol_trial.py).
       const opens = r.iteration > 0 && !r.trial;
-      return `<span class="book-run book-run-${r.diedAt != null ? 'extinct' : r.state}" data-run="${r.id}" data-started="${
+      const look = r.diedAt != null ? 'extinct' : r.slowAt != null ? 'slow' : r.state;
+      return `<span class="book-run book-run-${look}" data-run="${r.id}" data-started="${
         opens ? 'yes' : 'no'}" title="${Markdown.escape(r.name)} — ${where}${
         opens ? ' · click to open' : ''}">`
         + `<span style="width:${(100 * done).toFixed(1)}%"></span></span>`;

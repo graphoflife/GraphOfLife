@@ -156,7 +156,12 @@ def main() -> int:
             return EXIT_REFUSED
 
     run_id = args.run_id
-    if not os.path.exists(os.path.join(store.run_dir(run_id), "meta.json")):
+    folder = store.run_dir(run_id)
+    if os.path.islink(folder) and not os.path.exists(folder):
+        print(f"refusing: {run_id} is on {os.readlink(folder)}, which is not there now",
+              file=sys.stderr)
+        return EXIT_REFUSED
+    if not os.path.exists(os.path.join(folder, "meta.json")):
         spec = json.loads(args.spec)
         cfg = SimConfig.from_dict(spec["config"], stored=False)
         store.create_run(spec["name"], cfg, run_id=run_id,
@@ -178,6 +183,14 @@ def main() -> int:
     session = {"started": time.strftime("%Y-%m-%dT%H:%M:%S%z"), "pid": os.getpid(),
                "from": started_at, "until": args.until, "engine": _engine(),
                "environment": env}
+    # A screen's world may take no longer than its budget, over every session:
+    # the time already spent is what its own record clocked iteration by iteration.
+    deadline = None
+    budget = os.environ.get("GOL_BUDGET_SECONDS")
+    if budget:
+        spent = sum(row.get("_seconds") or 0.0 for row in gol_record.read_stats(run_id))
+        deadline = time.monotonic() + float(budget) - spent
+        session.update(budget=float(budget), spent=round(spent, 1))
     sessions.append(session)
     store.write_json(provenance_path(run_id), provenance, indent=1)
     clock = (time.time(), time.process_time())
@@ -206,12 +219,12 @@ def main() -> int:
         return asked["stop"] or os.getppid() != parent
 
     try:
-        status = gol_run.advance(run_id, should_stop, args.until)
+        status = gol_run.advance(run_id, should_stop, args.until, deadline=deadline)
     except Exception:
         close("error")
         raise
     reached = store.load_meta(run_id).get("iteration", 0) >= args.until
-    close("extinct" if status == "extinct" else "target" if reached
+    close("extinct" if status == "extinct" else "too slow" if status == "too_slow" else "target" if reached
           else "orphaned" if os.getppid() != parent else "paused")
     return 0
 

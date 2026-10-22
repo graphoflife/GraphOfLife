@@ -168,11 +168,55 @@ def trials(md: str, name: str, plan: Dict[str, Any]) -> str:
     return quote("\n".join(lines), "[!info] The trials behind this chapter")
 
 
+def screen(md: str, name: str, plan: Dict[str, Any]) -> str:
+    """The worlds of a screen: how their settings were drawn, and each one's, world by world."""
+    import gol_plan
+    import gol_screen
+    sc = plan["screen"]
+    found = gol_plan.screen_draws(name)
+    ids = {s.lab["seed"]: s.run_id for s in gol_plan.experiment_runs(name)}
+    budget = (f", or until {sc['budget_hours']:g} hours of playing have gone by: a world that slow stops "
+              "as too slow" if sc.get("budget_hours") else "")
+    lines = [f"**{number(len(found))} worlds**, each with its settings drawn at random (sampler "
+             f"{sc['sampler']}, round seed {sc['seed']}): B1's rules, changed as the draw says, at "
+             f"{number(sc['tokens'])} tokens, played for {number(sc['iterations'])} iterations — or until "
+             f"the world dies out{budget}.\n",
+             "- **How a setting is drawn:** an on/off switch is on in half the worlds, and a choice among "
+             "several options takes each equally often; a number keeps its default in three worlds of "
+             "four, and otherwise takes one of a few levels; the size of a message and the number of noise "
+             "inputs are 0 in one world of ten (`gol_screen.py`).",
+             "- **Only where it can matter:** buying life only with old age, the mate's kind only with "
+             "mixing, a search's steering and consent only with a search, messages before the game and "
+             "the pooled self-message only with messages."]
+    refs = gol_screen.references(sc)
+    if refs:
+        lines.append(f"- **Beside them, for reference:** " + ", ".join(
+            f"{base} at seed {seed} (`{ids[seed]}`)" for base, seed in refs) + ".")
+    forced = sc.get("forced") or {}
+    if forced:
+        lines.append("- **Forced off in this round:** " + "; ".join(
+            f"`{key}` = {', '.join(show(v) for v in values)}" for key, values in sorted(forced.items())) + ".")
+    lines.append("")
+    lines.append(f"To make these worlds again: `python3 gol_lab.py run {name}`, or ▶ in the Book tab of a "
+                 "computer running `gol_server.py`. Each run writes its settings, seed and engine version "
+                 "beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.")
+    summary = quote("\n".join(lines), "[!info] The worlds behind this chapter")
+    rows = ["| world | seed | run | what differs from B1 |", "|---|---|---|---|"]
+    for d in found:
+        what = ", ".join(f"[`{k}`]({link(md, 'notes/settings.md')}#{k}) = {show(v)}"
+                         for k, v in sorted(d["set"].items()))
+        rows.append(f"| {d['world']} | {d['seed']} | `{ids[d['seed']]}` | {what} |")
+    every = quote("\n".join(rows), "[!info]- Every world's settings")
+    return f"{summary}\n\n{every}"
+
+
 def runs(md: str, name: str) -> str:
     import gol_plan                                    # only here: it reads the runs folder
     plan, borrowed = resolve(name)
     if "trials" in plan:
         return trials(md, borrowed or name, plan)
+    if "screen" in plan:
+        return screen(md, borrowed or name, plan)
     spec = plan["runs"]
     base = read_json(f"experiments/{spec['baseline']}.json")
     glossary = read_json("settings.json")

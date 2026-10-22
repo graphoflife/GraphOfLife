@@ -1190,6 +1190,7 @@ details.control-group > summary:hover h3 { color: var(--text); }
 .book-run-running span { background: var(--ok); }
 .book-run-done span { background: var(--accent); }
 .book-run-extinct span { background: var(--muted-2); }
+.book-run-slow span { background: var(--muted-2); opacity: 0.6; }
 .book-run-blocked { outline: 1px solid var(--danger); }
 
 /* A figure or diagram: an SVG drawn on its own dark card, as wide as the text. */

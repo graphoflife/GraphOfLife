@@ -357,7 +357,13 @@ def run_state(spec: RunSpec, engine: Optional[str]) -> Dict[str, Any]:
     exists is continued by the engine that made it; one that does not is made
     by `engine`, the snapshot of today's, which is None while there is none.
     """
-    path = os.path.join(store.run_dir(spec.run_id), "meta.json")
+    folder = store.run_dir(spec.run_id)
+    if os.path.islink(folder) and not os.path.exists(folder):
+        # Moved to another disk (research/tools/move_runs.sh) that is not mounted now:
+        # the run exists, and making it again would lose it.
+        return {"state": "blocked", "iteration": 0,
+                "reason": f"{spec.run_id} is on {os.readlink(folder)}, which is not mounted"}
+    path = os.path.join(folder, "meta.json")
     if not os.path.exists(path):
         return {"state": "waiting", "iteration": 0, "engine": engine,
                 "job": Job(spec, spec.targets[0], engine, False, spec.fault_at, 0)}
@@ -372,7 +378,7 @@ def run_state(spec: RunSpec, engine: Optional[str]) -> Dict[str, Any]:
     blocked = meta.get("lab_blocked") or _blocked().get(spec.run_id)
     if blocked:
         return {**state, "state": "blocked", "reason": blocked}
-    if meta.get("status") == "extinct":
+    if meta.get("status") in ("extinct", "too_slow"):
         return {**state, "state": "done"}
     made_by = (meta.get("lab") or {}).get("engine")
     state["engine"] = made_by
@@ -526,6 +532,12 @@ def _tick(running: Dict[str, Tuple[subprocess.Popen, Job, Dict[str, Any]]], cras
             _log(f"started {job.spec.run_id} at {job.progress} → {job.until}")
         if short:
             _pause(short)
+        # What runs already going will still write is not in anyone's estimate: a world
+        # with hubs can write several times what the model expects of it.
+        free = shutil.disk_usage(_made(store.BASE_DIR)).free
+        if running and free < DISK_MARGIN // 2:
+            _pause(f"the disk has only {free / 2**30:.1f} GB left; move finished runs to another disk "
+                   f"(research/tools/move_runs.sh) before going on")
 
     for run_id, (proc, job, _cost) in list(running.items()):
         code = proc.poll()
@@ -641,6 +653,9 @@ def _start(job: Job) -> subprocess.Popen:
     env = {k: v for k, v in os.environ.items()
            if k not in ("OPENBLAS_NUM_THREADS", "OMP_NUM_THREADS", "MKL_NUM_THREADS")}
     env.update(GOL_RUNS_DIR=store.BASE_DIR, **_thread_settings(spec.threads))
+    env.pop("GOL_BUDGET_SECONDS", None)
+    if spec.budget:
+        env["GOL_BUDGET_SECONDS"] = str(spec.budget)
     log = open(os.path.join(_made(os.path.join(lab_dir(), "logs")), f"{spec.run_id}.log"), "a")
     proc = subprocess.Popen(command, cwd=engine_dir(job.engine), env=env,
                             stdin=subprocess.DEVNULL, stdout=log, stderr=subprocess.STDOUT)
@@ -675,8 +690,20 @@ def _recent_rate(run_id: str) -> Optional[float]:
     return median(rows[-20:])
 
 
+def _shared_runs() -> Dict[str, List[str]]:
+    """Every run id of every plan, with the plans that need it."""
+    shared: Dict[str, List[str]] = {}
+    for other in experiments():
+        try:
+            for spec in experiment_runs(other):
+                shared.setdefault(spec.run_id, []).append(other)
+        except LabError:
+            pass
+    return shared
+
+
 def experiment_status(name: str, control: Dict[str, Any], known: Dict[str, Any],
-                      alive: bool) -> Dict[str, Any]:
+                      alive: bool, everyone: Optional[Dict[str, List[str]]] = None) -> Dict[str, Any]:
     """
     One experiment: its runs, how far each is, what is left, and how long that
     will take. Its state is one of ready (not asked for), queued (asked for,
@@ -689,14 +716,8 @@ def experiment_status(name: str, control: Dict[str, Any], known: Dict[str, Any],
         workers = min(control["workers"], workers_cap(name) or control["workers"])
     except LabError as exc:
         return {"state": "invalid", "reason": str(exc), "runs": []}
-    shared = {}
-    for other in experiments():
-        if other != name:
-            try:
-                for spec in experiment_runs(other):
-                    shared.setdefault(spec.run_id, []).append(other)
-            except LabError:
-                pass
+    everyone = _shared_runs() if everyone is None else everyone
+    shared = {run_id: [e for e in names if e != name] for run_id, names in everyone.items()}
 
     runs, total_iterations, done_iterations = [], 0, 0
     whole, engines, pending = [], {}, []
@@ -709,17 +730,18 @@ def experiment_status(name: str, control: Dict[str, Any], known: Dict[str, Any],
         state.pop("job", None)
         if state.get("engine"):
             engines[state["engine"]] = engines.get(state["engine"], 0) + 1
-        iteration = min(state.get("iteration", 0), spec.until)
-        if state["state"] == "done":
-            iteration = spec.until
+        lived = min(state.get("iteration", 0), spec.until)
+        # A world that died out, or stopped as too slow, is finished: it counts as complete,
+        # but only the iterations it played count towards the pace.
+        iteration = spec.until if state["state"] == "done" else lived
         total_iterations += spec.until
         done_iterations += iteration
         guess = predict(spec.config, 1, known)["seconds"]
         model_all += spec.until * guess
-        measured = _recent_rate(spec.run_id) if iteration and state["state"] in ("running", "done") else None
+        measured = _recent_rate(spec.run_id) if lived and state["state"] in ("running", "done") else None
         if measured:
-            model_done += iteration * guess
-            measured_done += iteration * measured
+            model_done += lived * guess
+            measured_done += lived * measured
         rate = measured if state["state"] == "running" else None
         remaining = 0 if state["state"] in ("done", "blocked") else spec.until - iteration
         if remaining:
@@ -729,6 +751,7 @@ def experiment_status(name: str, control: Dict[str, Any], known: Dict[str, Any],
                      "seed": spec.lab["seed"], "iteration": iteration, "until": spec.until,
                      "state": state["state"], "reason": state.get("reason"),
                      "diedAt": state["iteration"] if state.get("status") == "extinct" else None,
+                     "slowAt": state["iteration"] if state.get("status") == "too_slow" else None,
                      "secondsPerIteration": rate, "sharedWith": shared.get(spec.run_id, []),
                      "trial": bool(spec.trial)})
 
@@ -774,6 +797,7 @@ def _status() -> Dict[str, Any]:
     known = costs()
     alive = lab_alive()
     disk = shutil.disk_usage(_made(store.BASE_DIR))
+    everyone = _shared_runs()
     return {
         "lab": {"alive": alive, "paused": control["paused"], "reason": control["reason"],
                 "queue": control["queue"], "workers": control["workers"],
@@ -781,7 +805,7 @@ def _status() -> Dict[str, Any]:
         "disk": {"free": disk.free, "total": disk.total},
         "memory": {"total": _memory_bytes()},
         "costs": known,
-        "experiments": {name: experiment_status(name, control, known, alive)
+        "experiments": {name: experiment_status(name, control, known, alive, everyone)
                         for name in experiments()},
     }
 
@@ -818,6 +842,7 @@ def main() -> int:
         for r in state["runs"]:
             shared = f"  (also {', '.join(r['sharedWith'])})" if r["sharedWith"] else ""
             where = (f"died out at {r['diedAt']}" if r["diedAt"] is not None
+                     else f"too slow at {r['slowAt']}" if r.get("slowAt") is not None
                      else f"{r['iteration']:>6} / {r['until']:<6}")
             print(f"  {r['id']:<32} {r['state']:<8} {where}{shared}")
         e = state["estimate"]

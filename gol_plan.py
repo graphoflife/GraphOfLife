@@ -138,6 +138,8 @@ class RunSpec:
     experiments: List[str] = dataclasses.field(default_factory=list)
     #: A trial's own settings (gol_trial.py) when this is a trial and not a run.
     trial: Optional[Dict[str, Any]] = None
+    #: The most seconds the run may take, over all its sessions, before it stops as too slow (screens).
+    budget: Optional[float] = None
 
     @property
     def until(self) -> int:
@@ -189,6 +191,8 @@ def _experiment_runs(name: str) -> List[RunSpec]:
     plan = read_plan(name)
     if "trials" in plan:
         return _experiment_trials(name)
+    if "screen" in plan:
+        return _experiment_screen(name)
     runs = plan.get("runs")
     if isinstance(runs, str):
         other = re.fullmatch(r"same as (E\d+)", runs.strip())
@@ -198,6 +202,8 @@ def _experiment_runs(name: str) -> List[RunSpec]:
         for spec in specs:
             spec.experiments = [name]
         return specs
+    if not isinstance(runs, dict):
+        raise LabError(f"{name}: a plan says its runs, its trials or its screen, and this one says none")
 
     _check_keys(f"{name} runs", runs,
                 ("baseline", "world", "seeds", "iterations", "conditions", "record", "workers"))
@@ -212,58 +218,68 @@ def _experiment_runs(name: str) -> List[RunSpec]:
 
     specs: List[RunSpec] = []
     for condition in runs["conditions"]:
-        label = condition.get("name")
-        _check_keys(f"{name} condition {label!r}", condition,
-                    ("name", "set", "seeds", "sizes", "stops", "fault_at", "threads", "replicate"))
-        changed = dict(condition.get("set", {}))
-        forbidden = sorted(set(changed) & ({"seed"} | set(INFRASTRUCTURE)))
-        if forbidden:
-            raise LabError(f"{name} condition {label!r} sets {', '.join(forbidden)}, which a "
-                           f"condition cannot: the seed belongs to the seeds, and what is "
-                           f"recorded to the lab")
-        _check_keys(f"{name} condition {label!r} set", changed, SETTABLE - set(WORLD))
-        # A setting at the baseline's own value changes nothing but the run's name: the same
-        # world would answer to two names, and a plan that shares runs would not share them.
-        same = sorted(k for k, v in changed.items() if k in base and v == base[k])
-        if same:
-            raise LabError(f"{name} condition {label!r} sets {', '.join(same)} to the baseline's own "
-                           f"value: leave it out")
-        # A run made again on purpose — to be stopped, cut off, run on other
-        # threads, or simply kept apart from anyone else's — has a run of its
-        # own, named for its condition, rather than sharing one.
-        replicate = (label if condition.get("replicate")
-                     or any(k in condition for k in ("stops", "fault_at", "threads")) else None)
+        specs.extend(_condition_runs(name, base_name, base, world, record, iterations, condition,
+                                     runs.get("seeds")))
+    return specs
 
-        # A condition may have seeds of its own: a world found by one seed, played again.
-        seeds = parse_seeds(condition.get("seeds", runs["seeds"]))
-        for size, seed in ((size, seed) for size in _sizes(name, label, condition, world)
-                           for seed in seeds):
-            here = {**world, "total_tokens": size}
-            config = {**base, **here, **changed, "seed": seed, "export_every": 1,
-                      "export_decisions": True,
-                      "checkpoint_every": int(record.get("checkpoint_every", 0)),
-                      "archive_every": int(record.get("archive_every", 0))}
-            try:
-                SimConfig.from_dict(config, stored=False)        # refuses what it cannot run
-            except ValueError as exc:
-                raise LabError(f"{name} condition {label!r} at {size:,} tokens cannot be run: "
-                               f"{exc}") from None
-            run_id = run_id_for(base_name, here, changed, seed, replicate)
-            differs = "".join(f" · {k}={_spelt(v)}" for k, v in {**here, **changed}.items()
-                              if k != "total_tokens")
-            specs.append(RunSpec(
-                run_id=run_id,
-                name=(f"{base_name} · {size:,} tokens{differs}"
-                      f" · seed {seed}" + (f" · {replicate}" if replicate else "")),
-                config=config,
-                lab={"baseline": base_name, "world": here, "set": changed, "seed": seed,
-                     "replicate": replicate},
-                record={"heavy_every": int(record.get("heavy_every", HEAVY_EVERY))},
-                targets=sorted(set(int(s) for s in condition.get("stops", [])) | {iterations}),
-                condition=label,
-                threads=condition.get("threads"),
-                fault_at=condition.get("fault_at"),
-                experiments=[name]))
+
+def _condition_runs(name: str, base_name: str, base: Dict[str, Any], world: Dict[str, Any],
+                    record: Dict[str, Any], iterations: int, condition: Dict[str, Any], seeds: Any,
+                    budget: Optional[float] = None) -> List[RunSpec]:
+    """The runs of one condition: the baseline changed as it says, at each size and seed."""
+    label = condition.get("name")
+    _check_keys(f"{name} condition {label!r}", condition,
+                ("name", "set", "seeds", "sizes", "stops", "fault_at", "threads", "replicate"))
+    changed = dict(condition.get("set", {}))
+    forbidden = sorted(set(changed) & ({"seed"} | set(INFRASTRUCTURE)))
+    if forbidden:
+        raise LabError(f"{name} condition {label!r} sets {', '.join(forbidden)}, which a "
+                       f"condition cannot: the seed belongs to the seeds, and what is "
+                       f"recorded to the lab")
+    _check_keys(f"{name} condition {label!r} set", changed, SETTABLE - set(WORLD))
+    # A setting at the baseline's own value changes nothing but the run's name: the same
+    # world would answer to two names, and a plan that shares runs would not share them.
+    same = sorted(k for k, v in changed.items() if k in base and v == base[k])
+    if same:
+        raise LabError(f"{name} condition {label!r} sets {', '.join(same)} to the baseline's own "
+                       f"value: leave it out")
+    # A run made again on purpose — to be stopped, cut off, run on other
+    # threads, or simply kept apart from anyone else's — has a run of its
+    # own, named for its condition, rather than sharing one.
+    replicate = (label if condition.get("replicate")
+                 or any(k in condition for k in ("stops", "fault_at", "threads")) else None)
+
+    # A condition may have seeds of its own: a world found by one seed, played again.
+    specs: List[RunSpec] = []
+    for size, seed in ((size, seed) for size in _sizes(name, label, condition, world)
+                       for seed in parse_seeds(condition.get("seeds", seeds))):
+        here = {**world, "total_tokens": size}
+        config = {**base, **here, **changed, "seed": seed, "export_every": 1,
+                  "export_decisions": True,
+                  "checkpoint_every": int(record.get("checkpoint_every", 0)),
+                  "archive_every": int(record.get("archive_every", 0))}
+        try:
+            SimConfig.from_dict(config, stored=False)        # refuses what it cannot run
+        except ValueError as exc:
+            raise LabError(f"{name} condition {label!r} at {size:,} tokens cannot be run: "
+                           f"{exc}") from None
+        run_id = run_id_for(base_name, here, changed, seed, replicate)
+        differs = "".join(f" · {k}={_spelt(v)}" for k, v in {**here, **changed}.items()
+                          if k != "total_tokens")
+        specs.append(RunSpec(
+            run_id=run_id,
+            name=(f"{base_name} · {size:,} tokens{differs}"
+                  f" · seed {seed}" + (f" · {replicate}" if replicate else "")),
+            config=config,
+            lab={"baseline": base_name, "world": here, "set": changed, "seed": seed,
+                 "replicate": replicate},
+            record={"heavy_every": int(record.get("heavy_every", HEAVY_EVERY))},
+            targets=sorted(set(int(s) for s in condition.get("stops", [])) | {iterations}),
+            condition=label,
+            threads=condition.get("threads"),
+            fault_at=condition.get("fault_at"),
+            experiments=[name],
+            budget=budget))
     return specs
 
 
@@ -382,6 +398,52 @@ def trial_sets(name: str) -> Dict[str, Dict[str, List[Any]]]:
     return {label: {k: sorted(v, key=order) for k, v in fields.items()} for label, fields in sets.items()}
 
 
+# ----------------------------------------------------------------------------
+# Screens
+# ----------------------------------------------------------------------------
+#
+# A plan may ask for a screen instead: a round of worlds whose settings are
+# drawn at random (gol_screen.py), each played as an ordinary run of B1's
+# baseline changed as its draw says, beside a few reference worlds of other
+# baselines. A world that takes longer than the plan's budget stops as too
+# slow. The draws come from the plan alone, so the book can show them on a
+# machine that has no runs.
+
+SCREEN_RECORD = ("heavy_every", "checkpoint_every", "archive_every")
+
+
+def screen_draws(name: str) -> List[Dict[str, Any]]:
+    """Every world of a screen plan: its number, seed and settings, read without any run."""
+    import gol_screen
+    screen = read_plan(name)["screen"]
+    try:
+        return gol_screen.draws(screen)
+    except ValueError as exc:
+        raise LabError(f"{name} screen: {exc}") from None
+
+
+def _experiment_screen(name: str) -> List[RunSpec]:
+    import gol_screen
+    screen = read_plan(name)["screen"]
+    found = screen_draws(name)
+    record = dict(screen.get("record", {}))
+    _check_keys(f"{name} screen record", record, SCREEN_RECORD)
+    world = {"total_tokens": int(screen["tokens"])}
+    iterations = int(screen["iterations"])
+    budget = float(screen["budget_hours"]) * 3600 if screen.get("budget_hours") else None
+    workers_cap(name)
+    base = baseline("B1")
+    specs: List[RunSpec] = []
+    for draw in found:
+        condition = {"name": f"world {draw['world']}", "set": draw["set"], "seeds": [draw["seed"]]}
+        specs.extend(_condition_runs(name, "B1", base, world, record, iterations, condition, None, budget))
+    for ref, seed in gol_screen.references(screen):
+        condition = {"name": f"{ref}, for reference", "seeds": [seed]}
+        specs.extend(_condition_runs(name, ref, baseline(ref), world, record, iterations, condition, None,
+                                     budget))
+    return specs
+
+
 def _sizes(name: str, label: str, condition: Dict[str, Any], world: Dict[str, Any]) -> List[int]:
     """
     The token supplies a condition runs at: the plan's world, which may list
@@ -399,7 +461,7 @@ def _sizes(name: str, label: str, condition: Dict[str, Any], world: Dict[str, An
 def workers_cap(name: str) -> Optional[int]:
     """The most of an experiment's runs its plan lets run at once, if it says."""
     plan = read_plan(name)
-    runs = plan.get("trials", plan.get("runs"))
+    runs = plan.get("trials", plan.get("screen", plan.get("runs")))
     cap = runs.get("workers") if isinstance(runs, dict) else None
     if cap is not None and (not isinstance(cap, int) or isinstance(cap, bool) or cap < 1):
         raise LabError(f"{name}: workers is how many of its runs may run at once, not {cap!r}")

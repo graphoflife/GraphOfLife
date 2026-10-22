@@ -176,11 +176,21 @@ def test_a_baseline_names_every_mechanic_and_parameter():
 
 
 def test_every_strain_an_experiment_uses_is_registered():
-    """Every algorithm an experiment runs is named in research/strains.md, as the scheme asks."""
+    """
+    Every algorithm an experiment runs is named in research/strains.md, as the scheme asks. A
+    screen draws a strain for each of its worlds: strains.md names the round, and its plan holds
+    every draw.
+    """
     registered = set(gol_plan.registered_strains())
+    with open(gol_plan.STRAINS) as f:
+        strains = f.read()
     for name in gol_plan.experiments():
         if "trials" in gol_plan.read_plan(name):
             gol_plan.trials_of(name)              # trials replay runs that exist: no new algorithm
+            continue
+        if "screen" in gol_plan.read_plan(name):
+            gol_plan.screen_draws(name)
+            assert f"`{name}`" in strains, f"strains.md does not name the screen {name}"
             continue
         for spec in gol_plan.experiment_runs(name):
             strain = SimConfig.from_dict(spec.config).strain_id()
@@ -650,6 +660,140 @@ def test_the_lab_plays_trials_as_it_advances_runs():
             assert series[0]["t"] == 0 and series[0]["mine"] > 0, series
         listed = {m["id"] for m in gol_store.list_runs()}
         assert listed == {"B9-400-s001"}, listed
+
+
+# ---------------------------------------------------------------------------
+# Screens
+# ---------------------------------------------------------------------------
+
+def screen_plan(name, worlds=4, budget_hours=None, forced=None, references=None, iterations=3):
+    """A screen of tiny worlds, drawn on the tiny baseline written as B1 (screen_lab)."""
+    screen = {"sampler": 1, "seed": 1, "worlds": worlds, "tokens": 400, "iterations": iterations,
+              "record": {"checkpoint_every": 1, "heavy_every": 1}}
+    if budget_hours is not None:
+        screen["budget_hours"] = budget_hours
+    if forced:
+        screen["forced"] = forced
+    if references:
+        screen["references"] = references
+    return {"id": name, "title": name, "thesis": {}, "screen": screen}
+
+
+@contextlib.contextmanager
+def screen_lab(*plans):
+    """A lab whose B1 is the tiny baseline, as a screen's worlds are B1 changed as drawn."""
+    with lab(*plans) as tmp:
+        with open(os.path.join(tmp, "plans", "B1.json"), "w") as f:
+            json.dump({"id": "B1", "settings": TINY}, f)
+        yield tmp
+
+
+def test_a_screen_draws_its_worlds_by_its_rules():
+    """
+    Switches on in half the worlds, numbers at their default in three of four, messages and noise
+    absent in one of ten; every draw a world the engine plays, as plain values of B1's own types,
+    none restating B1, none forced off, and no two the same world.
+    """
+    import gol_screen
+    base = gol_plan.baseline("B1")
+    forced = {"keep_home": [0.5], "allow_gifting": [True]}
+    n = 2000
+    worlds = [gol_screen.draw(1, 7, i, forced)[0] for i in range(1, n + 1)]
+    full = [gol_screen.full(w) for w in worlds]
+    share = lambda key, test: sum(1 for w in full if test(w[key])) / n
+    assert 0.45 < share("allow_revolutions", lambda v: v) < 0.55
+    assert 0.45 < share("mend_on_death", lambda v: v) < 0.55
+    assert 0.70 < share("incumbency", lambda v: v == 1.0) < 0.80
+    assert 0.70 < share("hidden_layers", lambda v: v == [16]) < 0.80
+    assert 0.07 < share("message_amount", lambda v: v == 0) < 0.13
+    assert 0.07 < share("random_input_amount", lambda v: v == 0) < 0.13
+    assert 0.13 < share("redistribution", lambda v: v == "uniform") < 0.20
+    assert not any(w["keep_home"] == 0.5 or w["allow_gifting"] for w in full)
+    for w in worlds:
+        assert not any(k in base and v == base[k] for k, v in w.items()), w
+        for k, v in w.items():
+            assert type(v) is type(base[k]), (k, v)
+        SimConfig.from_dict({**base, **w, "seed": 1}, stored=False)
+    # Dependent settings only where they matter: no two names for one world.
+    assert all(not w.get("buy_life") for w in full if w["max_age"] == 0)
+    assert all(w["mix_mates"] == "any" for w in full if not w["mix_at_birth"])
+    assert all(w["link_steering"] == "random" and w["link_consent"] == "mutual"
+               for w in full if w["link_search"] == "off")
+    assert all(not w["message_prepass"] and w["self_message"] == "own"
+               for w in full if w["message_amount"] == 0)
+    assert len({json.dumps(w, sort_keys=True) for w in worlds}) == n
+
+
+def test_a_screen_keeps_its_worlds_as_it_grows_and_names_them_for_what_they_are():
+    """
+    Each world is drawn from its own hash, so a round grown by more worlds keeps the ones it had,
+    with the same names; a round's worlds are runs of B1 changed as drawn, its references runs of
+    their own baselines, and every one carries the round's budget.
+    """
+    with screen_lab(screen_plan("E91", worlds=5, budget_hours=2, references={"B9": 1}),
+                    screen_plan("E92", worlds=8)):
+        five = gol_plan.experiment_runs("E91")
+        eight = gol_plan.experiment_runs("E92")
+        assert [s.run_id for s in five[:5]] == [s.run_id for s in eight[:5]]
+        assert [s.lab["seed"] for s in eight] == list(range(1001, 1009))
+        assert all(s.run_id.startswith("B1-400-") and s.lab["baseline"] == "B1" for s in five[:5])
+        assert five[5].run_id == "B9-400-s1901" and five[5].lab["baseline"] == "B9"
+        assert all(s.budget == 7200.0 for s in five) and all(s.budget is None for s in eight)
+        draws = gol_plan.screen_draws("E91")
+        assert [s.lab["set"] for s in five[:5]] == [d["set"] for d in draws]
+
+
+def test_a_screen_that_says_what_no_screen_reads_is_refused():
+    with screen_lab({"id": "E91", "title": "E91", "thesis": {},
+                     "screen": {**screen_plan("E91")["screen"], "worldz": 3}},
+                    {"id": "E92", "title": "E92", "thesis": {}},
+                    screen_plan("E93", forced={"no_such_setting": [1]})):
+        refused(lambda: gol_plan.experiment_runs("E91"), "worldz")
+        refused(lambda: gol_plan.experiment_runs("E92"), "runs, its trials or its screen")
+        refused(lambda: gol_plan.experiment_runs("E93"), "no_such_setting")
+
+
+def test_a_world_past_its_budget_stops_as_too_slow_and_is_finished():
+    """
+    A screen's world may take no longer than its budget: past it, the worker stops it as too slow,
+    the lab counts it finished and never plays it again, and the Book tab says so.
+    """
+    with screen_lab(screen_plan("E91", worlds=1, budget_hours=1e-9)):
+        gol_lab.request(run="E91")
+        with contextlib.redirect_stdout(io.StringIO()):
+            assert gol_lab.run_lab() == 0
+        spec = gol_plan.experiment_runs("E91")[0]
+        assert gol_store.load_meta(spec.run_id)["status"] == "too_slow"
+        sessions = json.load(open(os.path.join(gol_store.run_dir(spec.run_id), "provenance.json")))["sessions"]
+        assert sessions[-1]["exit"] == "too slow" and sessions[-1]["budget"] > 0
+        status = gol_lab.status()["experiments"]["E91"]
+        assert status["state"] == "finished", status
+        assert status["runs"][0]["slowAt"] is not None and status["done"] == status["total"]
+        gol_lab.request(run="E91")
+        with contextlib.redirect_stdout(io.StringIO()):
+            assert gol_lab.run_lab() == 0
+        again = json.load(open(os.path.join(gol_store.run_dir(spec.run_id), "provenance.json")))["sessions"]
+        assert len(again) == len(sessions)
+
+
+def test_a_run_moved_to_a_disk_that_is_not_there_is_blocked_not_made_again():
+    """A run whose folder is a link to a disk that is not mounted is blocked, and the worker refuses it."""
+    with lab(plan("E91", seeds="1")) as tmp:
+        spec = gol_plan.experiment_runs("E91")[0]
+        os.symlink(os.path.join(tmp, "elsewhere", spec.run_id), gol_store.run_dir(spec.run_id))
+        state = gol_lab.run_state(spec, None)
+        assert state["state"] == "blocked" and "not mounted" in state["reason"], state
+        assert gol_lab.jobs(["E91"], "x") == []
+        assert work(spec, 2) == gol_lab.EXIT_REFUSED
+
+
+def test_a_screens_worlds_are_listed_in_its_chapter():
+    """The book lists every world a screen draws, what differs from B1, and what was forced off."""
+    import book_fill
+    with screen_lab(screen_plan("E91", worlds=3, forced={"allow_gifting": [True]})):
+        text = book_fill.screen("chapters/x.md", "E91", gol_plan.read_plan("E91"))
+        assert "**3 worlds**" in text and "Forced off in this round" in text
+        assert text.count("| `B1-400-") == 3, text
 
 
 # ---------------------------------------------------------------------------

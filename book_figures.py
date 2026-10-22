@@ -131,8 +131,17 @@ def _listed_in(experiment: str) -> str:
 def _runs_of(experiment: str, condition: str) -> str:
     """'30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at …', to the end."""
     import book_fill
+    whole = gol_plan.read_plan(experiment)
+    if "screen" in whole:
+        sc = whole["screen"]
+        specs = gol_plan.experiment_runs(experiment)
+        return (f"{len(specs)} worlds of {experiment}, each with its settings drawn at random (sampler "
+                f"{sc['sampler']}, round seed {sc['seed']}): B1's rules changed as drawn, at "
+                f"{book_fill.number(int(sc['tokens']))} tokens, {book_fill.number(int(sc['iterations']))} "
+                f"iterations each (every world's settings are listed in {_listed_in(experiment)}). They are "
+                f"made with `python3 gol_lab.py run {experiment}`.")
     specs = runs_of(experiment, condition)
-    plan = gol_plan.read_plan(experiment)["runs"]
+    plan = whole["runs"]
     seeds, _ = book_fill.seeds_text(plan["seeds"])
     return (f"{len(specs)} {condition} runs `{specs[0].run_id}` … `{specs[-1].run_id}`: the "
             f"baseline {plan['baseline']} at {book_fill.number(specs[0].config['total_tokens'])} "
