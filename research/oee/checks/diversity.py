@@ -41,6 +41,8 @@ For one world, after one game so that its messages are fresh:
     python3 research/oee/checks/diversity.py pilot:DIR:AT ... --label P            a pilot's checkpoint
     python3 research/oee/checks/diversity.py --persist A B --label B2-long         kinds of world A still alive in world B
 
+measure(spec, game=False) reads a lab run's archive as kept, with no game played first.
+
 Writes GraphOfLifeRuns/.pilots/diversity/<label>.json.
 """
 from __future__ import annotations
@@ -80,8 +82,12 @@ DECISIONS = ("home", "child", "spread", "link", "revolt")
 # A world, and the situations its agents are in
 # ---------------------------------------------------------------------------
 
-def load(spec: str):
-    """A world from 'RUN', 'RUN:ITERATION' (a lab run's archive) or 'pilot:DIR:AT', one game on."""
+def load(spec: str, game: bool = True):
+    """
+    A world from 'RUN', 'RUN:ITERATION' (a lab run's archive) or 'pilot:DIR:AT', one game on. Without
+    the game (`game=False`) it is the world as kept: an archive holds the messages its agents would
+    read next, so nothing is played, as the screen's judge reads its worlds (research/screen/judge.py).
+    """
     if spec.startswith("pilot:"):
         import pilot_frames
         _, d, at = spec.split(":")
@@ -94,7 +100,8 @@ def load(spec: str):
         cfg = SimConfig.from_dict(store.load_meta(run)["config"])
         world = (GraphOfLife.from_checkpoint(store.load_archive(run, int(it)), cfg) if it
                  else store.load_checkpoint(run, cfg))
-    world.step(record_decisions=False)
+    if game:
+        world.step(record_decisions=False)
     return world
 
 
@@ -350,9 +357,9 @@ def niche(values: np.ndarray, label: np.ndarray, rng: np.random.RandomState, shu
             "above_shuffled": float(np.mean([observed > x for x in null]))}
 
 
-def measure(spec: str, seed: int = 7) -> Dict[str, Any]:
+def measure(spec: str, seed: int = 7, game: bool = True) -> Dict[str, Any]:
     from GraphOfLifeSimple import make_brain
-    w = load(spec)
+    w = load(spec, game)
     rng = np.random.RandomState(seed)
     sits = situations(w, rng, SITUATIONS)
     S = len(sits)

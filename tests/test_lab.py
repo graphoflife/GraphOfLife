@@ -787,6 +787,46 @@ def test_a_run_moved_to_a_disk_that_is_not_there_is_blocked_not_made_again():
         assert work(spec, 2) == gol_lab.EXIT_REFUSED
 
 
+def _judge():
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(
+        "screen_judge", os.path.join(runner.ROOT, "research", "screen", "judge.py"))
+    judge = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(judge)
+    return judge
+
+
+def test_chance_alone_rarely_sets_a_value_aside():
+    """Rounds whose worlds are healthy at random, whatever their values: hardly ever is a value forced off."""
+    got = _judge().null(rounds=20, share=0.2)
+    assert got["forcings_per_round"] <= 0.1, got
+
+
+def test_a_value_that_spoils_every_world_is_set_aside():
+    """
+    Worlds without a cap on links never healthy and always grown into hubs, the others healthy in two
+    of five: by the line of the network, the uncapped value is forced off within a round, and nothing
+    else is; a setting always keeps a value.
+    """
+    import gol_screen
+    judge = _judge()
+    rng = __import__("numpy").random.default_rng(3)
+    worlds = []
+    for i in range(1, 51):
+        changed, _ = gol_screen.draw(1, 77, i)
+        capped = gol_screen.full(changed)["valence"] != 0
+        healthy = capped and rng.random() < 0.4
+        ok = {line: True for line in judge.LINES} if healthy else \
+            {"alive": True, "network": capped and rng.random() < 0.8, "space": rng.random() < 0.5,
+             "diverse": rng.random() < 0.5, "uneven": rng.random() < 0.5}
+        worlds.append({"round": "R1", "drawn": True, "fate": "lived", "set": changed, "sampler": 1,
+                       "moments": {"2000": {"lines": ok, "healthy": healthy}}})
+    got = judge.forcing(worlds, {})
+    forced = {(v["setting"], json.dumps(v["value"])) for v in got["values"] if v["force"]}
+    assert forced == {("valence", "0")}, forced
+    assert got["forced_next"] == {"valence": [0]}
+
+
 def test_a_screens_worlds_are_listed_in_its_chapter():
     """The book lists every world a screen draws, what differs from B1, and what was forced off."""
     import book_fill

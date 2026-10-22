@@ -1,0 +1,26 @@
+{
+ "id": "E38",
+ "title": "A screen of random worlds, round 1",
+ "thesis": {
+  "claim": "Among fifty worlds whose settings are drawn at random — every on/off rule on in half of them, every number at its default in three of four, messages and noise absent in one of ten — at least one is healthy at iteration 2,000: alive; decentralised and resilient by every mark of the health bar but the dimension; a true space, of 2 to 4 dimensions and at least 1.5 times as wide as its random twin; as diverse as B2's median world in its agents and in its decisions; and no more even than B2's least even world.",
+  "why": "Every healthy-looking world so far was found by changing B2 one rule at a time, and each paid for one line with another: the estates make spaces of paupers, mixed brains rich worlds that fold, no mending worlds that can be cut (Chapters 100 and 101). Settings drawn together reach combinations no single change would, and the round is judged by every line at once. B2's own rules come together too rarely for a random draw to meet them, so two worlds of B2 at 20,000 tokens are played beside the fifty for reference. A healthy world is rare: of 45 worlds of B2's kind read at 2,000, ten met the health bar's marks at a dimension of 2 to 4, before width, diversity and evenness were asked for. The thesis asks for one in fifty.",
+  "confirm": "At least one of the fifty drawn worlds meets all five lines at 2,000 (research/screen/judge.py, with B2's lines from Experiment 16's ten worlds).",
+  "refute": "None does: the chapter says which lines the worlds missed, and which values the next round forces off because every world they appeared in was unhealthy, beyond what chance would explain."
+ },
+ "screen": {
+  "sampler": 1,
+  "seed": 1,
+  "worlds": 50,
+  "tokens": 20000,
+  "iterations": 2000,
+  "budget_hours": 4,
+  "references": {
+   "B2": 2
+  },
+  "record": {
+   "archive_every": 500,
+   "checkpoint_every": 100,
+   "heavy_every": 25
+  }
+ }
+}

@@ -709,6 +709,19 @@
       ]
     },
     {
+      "title": "Part X · A screen of random worlds",
+      "chapters": [
+        {
+          "id": "106",
+          "title": "A screen of random worlds",
+          "note": "The author's plan of 22 October 2026: rounds of fifty worlds whose settings are all drawn at random (switches on in half, numbers at their default in three of four, messages and noise absent in one of ten), each judged by five lines of health at 2,000; values that made every world unhealthy, beyond chance, are set aside round by round, until a healthy configuration is found. Round 1 is Experiment 38.",
+          "file": "chapters/106-a-screen-of-random-worlds.md",
+          "experiment": "E38",
+          "status": "ready"
+        }
+      ]
+    },
+    {
       "title": "Notes · the rules",
       "chapters": [
         {

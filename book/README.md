@@ -160,6 +160,10 @@ everything can be checked with it.
 - [Chapter 103 · Raiders that breed](chapters/103-raiders-that-breed.md)
 - [Chapter 104 · Hand-written strategies in B1](chapters/104-hand-written-strategies-in-b1.md)
 
+**Part X · A screen of random worlds**
+
+- [Chapter 106 · A screen of random worlds](chapters/106-a-screen-of-random-worlds.md)
+
 **Notes · the rules**
 
 - [Every setting](notes/settings.md)

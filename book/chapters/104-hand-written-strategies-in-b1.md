@@ -90,5 +90,5 @@ The plantings are those of Chapters 97 and 102 in kind: patches of 5% at
 <!-- turns -->
 ---
 
-← [Chapter 103 · Raiders that breed](103-raiders-that-breed.md) · [Contents](../README.md) · [Appendix A · What a simulation costs](A-costs.md) →
+← [Chapter 103 · Raiders that breed](103-raiders-that-breed.md) · [Contents](../README.md) · [Chapter 106 · A screen of random worlds](106-a-screen-of-random-worlds.md) →
 <!-- /turns -->
