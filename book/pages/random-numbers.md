@@ -60,6 +60,6 @@ Three kinds of draw appear in the rules:
 
 ← [The starting ring](starting-ring.md) · [How the simulation works](../README.md#how-the-simulation-works) · [The share function f(a, b)](share-function.md) →
 
-> [!info]- Pages that link here (13)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [The world: tokens, agents and a network](the-world.md) · [Is a run reproducible?](is-a-run-reproducible.md) · [Every setting](settings.md) · [The starting ring](starting-ring.md) · [A yes-or-no decision](binary-decision.md) · [How a brain changes](mutation.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Births and the four ways to die](births-and-deaths.md) · [Gains, losses and the share-out](gains-losses-and-the-share-out.md) · [Physical inspiration](physical-inspiration.md) · [The lab, the engine and pilots](the-lab.md)
+> [!info]- Pages that link here (12)
+> [Glossary](glossary.md) · [The world: tokens, agents and a network](the-world.md) · [Is a run reproducible?](is-a-run-reproducible.md) · [Every setting](settings.md) · [The starting ring](starting-ring.md) · [A yes-or-no decision](binary-decision.md) · [How a brain changes](mutation.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Births and the four ways to die](births-and-deaths.md) · [Gains, losses and the share-out](gains-losses-and-the-share-out.md) · [Physical inspiration](physical-inspiration.md) · [The lab, the engine and pilots](the-lab.md)
 <!-- /turns -->

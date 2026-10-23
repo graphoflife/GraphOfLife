@@ -513,11 +513,12 @@ def link_terms(md: str, text: str) -> str:
     """
     A page with the first use of every term linked to the page that explains it.
     Its own earlier term links are undone first, so linking twice changes
-    nothing. Only words outside code, formulas, links, headings, callouts' titles
-    and the blocks made here are linked; the longest term first, so that "spectral
-    dimension" is not taken for "dimension"; never on the term's own page, nor
-    where the page links to it already, nor in the phrases a term lists as `not`
-    ("game theory" is no game), nor for a term the page opts out of (`skip`).
+    nothing. Only words outside code, formulas, links, headings, callouts'
+    titles, lists of references and the blocks made here are linked; the
+    longest term first, so that "spectral dimension" is not taken for
+    "dimension"; never on the term's own page, nor where the page links to it
+    already, nor in the phrases a term lists as `not` ("game theory" is no
+    game), nor for a term the page opts out of (`skip`).
     """
     text = TERM_LINK.sub(r"\1", text)
     index = read_json("terms.json")
@@ -525,6 +526,8 @@ def link_terms(md: str, text: str) -> str:
     linked = links_from(md, text)
     out = text
     kept = protected_spans(out) + [m.span() for m in re.finditer(r"^(?:#{1,6} |> \[!)[^\n]*", out, re.M)]
+    # A list of references names papers, in their own words.
+    kept += [m.span() for m in re.finditer(r"^## (?:References|Literature)\b.*?(?=^## |\Z)", out, re.M | re.S)]
 
     def free(start: int, end: int, spans: List[Tuple[int, int]]) -> bool:
         return not any(a < end and start < b for a, b in spans)

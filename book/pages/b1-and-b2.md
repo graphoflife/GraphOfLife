@@ -123,6 +123,6 @@ B2's healthy but poor.
 
 **Also about:** [How the simulation works](../README.md#how-the-simulation-works).
 
-> [!info]- Pages that link here (6)
-> [Glossary](glossary.md) · [How this notebook is written](how-this-notebook-is-written.md) · [The estate of the dead](estate.md) · [The even split](even-split.md) · [Eras and contests: does a world keep getting better?](eras-and-contests.md) · [The lab, the engine and pilots](the-lab.md)
+> [!info]- Pages that link here (7)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [How this notebook is written](how-this-notebook-is-written.md) · [The estate of the dead](estate.md) · [The even split](even-split.md) · [Eras and contests: does a world keep getting better?](eras-and-contests.md) · [The lab, the engine and pilots](the-lab.md)
 <!-- /turns -->

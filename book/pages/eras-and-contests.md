@@ -116,6 +116,6 @@ their contests; [Pilot worlds](pilot-worlds.md) plays the eras of pilots.
 
 **Also about:** [Methods and statistics](../README.md#methods-and-statistics).
 
-> [!info]- Pages that link here (3)
-> [Glossary](glossary.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [The lab, the engine and pilots](the-lab.md)
+> [!info]- Pages that link here (5)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [The lab, the engine and pilots](the-lab.md)
 <!-- /turns -->

@@ -84,10 +84,31 @@ are there for whoever wants to make it again.
 - **The dead are counted apart.** A world that dies out is an outcome of its
   own, not a world that ended up somewhere
   ([When a world ends](extinction.md)).
+- **A run is measured over its settled life**, from [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") 500 to its end
+  ([The settled life of a world](settled-life.md)).
+- **Runs are shared.** A run is named for what it is — baseline, world size,
+  what differs, seed — so an experiment that needs runs which already exist
+  uses them.
 - **No tuned constants in new rules.** A rule added to the engine carries no
   hand-set factor beyond the [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") and the [mutation](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.")'s parameters: what a
   world does should emerge. ([Rules without numbers](rules-without-numbers.md)
   shows what the numbers B2 was built with do.)
+
+## Where things are
+
+- `book/pages/` — every page, named by what it is about;
+- `book/figures/`, `book/diagrams/` — every figure and diagram, as SVG;
+- `book/results/` — every number a page quotes, written by the analysis;
+- `book/experiments/` — the baselines and each experiment's plan;
+- `book/book.json` — the topics, and every page with its topics, kind and
+  summary, from which the contents are made;
+- `book/terms.json` — the terms, linked where a page first uses them;
+- `book/legacy.json` — the chapter numbers the notebook had until
+  23 October 2026, and the page each became;
+- `GraphOfLifeRuns/` — the runs themselves, on the machine that ran them.
+
+The programme the notebook follows, and what is already known, is in
+`research/Research.md` — the *Findings* page under Research.
 
 ## How mistakes are corrected
 
@@ -109,4 +130,7 @@ and the page that changed it. Nothing is quietly deleted.
 ← [Glossary](glossary.md) · [Start here](../README.md#start-here) · [The ideas this builds on](the-ideas-this-builds-on.md) →
 
 **Also about:** [Methods and statistics](../README.md#methods-and-statistics).
+
+> [!info]- Pages that link here (2)
+> [Welcome](../README.md) · [What this notebook is about](what-this-notebook-is-about.md)
 <!-- /turns -->

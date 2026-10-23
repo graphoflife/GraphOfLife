@@ -215,6 +215,6 @@ The limits that remain:
 
 **Also about:** [Methods and statistics](../README.md#methods-and-statistics).
 
-> [!info]- Pages that link here (9)
-> [How to read this notebook](../README.md) · [What this notebook is about](what-this-notebook-is-about.md) · [How this notebook is written](how-this-notebook-is-written.md) · [The world: tokens, agents and a network](the-world.md) · [Seeds and the random stream](random-numbers.md) · [What the baseline world is](what-the-baseline-world-is.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [The lab, the engine and pilots](the-lab.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (8)
+> [What this notebook is about](what-this-notebook-is-about.md) · [How this notebook is written](how-this-notebook-is-written.md) · [The world: tokens, agents and a network](the-world.md) · [Seeds and the random stream](random-numbers.md) · [What the baseline world is](what-the-baseline-world-is.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [The lab, the engine and pilots](the-lab.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

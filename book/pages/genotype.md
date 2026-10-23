@@ -58,6 +58,6 @@ Its lifetime is from the first game after which it is alive to the last
 
 **Also about:** [How the simulation works](../README.md#how-the-simulation-works).
 
-> [!info]- Pages that link here (16)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [The world: tokens, agents and a network](the-world.md) · [The brain](the-brain.md) · [How a brain changes](mutation.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [How different are the agents?](how-different-are-the-agents.md) · [Brain diversity](brain-diversity.md) · [Families](families.md) · [The common ancestor of the living](common-ancestor.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) · [The diversity score](diversity-score.md) · [What a run records](frames-and-stats.md) · [What the viewer can colour by](viewer-colours.md) · [Muller plots](muller-plot.md)
+> [!info]- Pages that link here (15)
+> [Glossary](glossary.md) · [The world: tokens, agents and a network](the-world.md) · [The brain](the-brain.md) · [How a brain changes](mutation.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [How different are the agents?](how-different-are-the-agents.md) · [Brain diversity](brain-diversity.md) · [Families](families.md) · [The common ancestor of the living](common-ancestor.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) · [The diversity score](diversity-score.md) · [What a run records](frames-and-stats.md) · [What the viewer can colour by](viewer-colours.md) · [Muller plots](muller-plot.md)
 <!-- /turns -->

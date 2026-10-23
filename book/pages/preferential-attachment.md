@@ -51,7 +51,7 @@ the heavy tail of the connections.
   attachment in evolving networks. *Europhysics Letters* 61, 567–572.
 - Krapivsky, P. L., Redner, S. and Leyvraz, F. (2000). Connectivity of
   growing random networks. *Physical Review Letters* 85, 4629–4632.
-- Newman, M. E. J. (2001). [Clustering](clustering.md "How often an agent's neighbours are also each other's neighbours.") and preferential attachment in growing
+- Newman, M. E. J. (2001). Clustering and preferential attachment in growing
   networks. *Physical Review E* 64, 025102.
 - Price, D. de S. (1976). A general theory of bibliometric and other
   cumulative advantage processes. *Journal of the American Society for

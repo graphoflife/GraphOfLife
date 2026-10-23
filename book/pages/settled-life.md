@@ -51,6 +51,6 @@ when ([When a world ends](extinction.md)).
 
 ← [Bands: many worlds in one figure](bands.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Spread between worlds](spread-between-worlds.md) →
 
-> [!info]- Pages that link here (11)
-> [How to read this notebook](../README.md) · [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [When a world ends](extinction.md) · [What the baseline world is](what-the-baseline-world-is.md) · [A world's life](a-worlds-life.md) · [Stars and hubs](stars-and-hubs.md) · [How worlds are measured](how-worlds-are-measured.md) · [Spread between worlds](spread-between-worlds.md) · [Autocorrelation: how long a world remembers](autocorrelation.md) · [How many seeds an experiment needs](seeds-needed.md)
+> [!info]- Pages that link here (10)
+> [Glossary](glossary.md) · [How this notebook is written](how-this-notebook-is-written.md) · [When a world ends](extinction.md) · [What the baseline world is](what-the-baseline-world-is.md) · [A world's life](a-worlds-life.md) · [Stars and hubs](stars-and-hubs.md) · [How worlds are measured](how-worlds-are-measured.md) · [Spread between worlds](spread-between-worlds.md) · [Autocorrelation: how long a world remembers](autocorrelation.md) · [How many seeds an experiment needs](seeds-needed.md)
 <!-- /turns -->

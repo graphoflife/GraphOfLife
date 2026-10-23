@@ -53,6 +53,6 @@ last to run, and it ended with 20 agents or fewer.
 
 ← [How a brain changes](mutation.md) · [How the simulation works](../README.md#how-the-simulation-works)
 
-> [!info]- Pages that link here (11)
-> [How to read this notebook](../README.md) · [Glossary](glossary.md) · [How this notebook is written](how-this-notebook-is-written.md) · [One iteration, step by step](one-iteration.md) · [Every setting](settings.md) · [What the baseline world is](what-the-baseline-world-is.md) · [Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md) · [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [The lab, the engine and pilots](the-lab.md) · [The settled life of a world](settled-life.md)
+> [!info]- Pages that link here (10)
+> [Glossary](glossary.md) · [How this notebook is written](how-this-notebook-is-written.md) · [One iteration, step by step](one-iteration.md) · [Every setting](settings.md) · [What the baseline world is](what-the-baseline-world-is.md) · [Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md) · [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [The lab, the engine and pilots](the-lab.md) · [The settled life of a world](settled-life.md)
 <!-- /turns -->

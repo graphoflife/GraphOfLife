@@ -87,6 +87,9 @@ On a computer running `gol_server.py`, press ▶ on the experiment's page in
 the Research Notebook tab; the lab says how long is left. Or type
 `python3 gol_lab.py run E14` in a terminal, and
 `python3 gol_lab.py analyse E14` once the runs are done.
+`python3 gol_lab.py verify E14` plays a few of the runs again and checks them
+against what was recorded, and `python3 book_figures.py` draws every figure
+again and writes it, with its caption and recipe, into the pages.
 
 ## Where it is used
 
@@ -109,6 +112,6 @@ does.
 
 **Also about:** [How the simulation works](../README.md#how-the-simulation-works).
 
-> [!info]- Pages that link here (3)
-> [Glossary](glossary.md) · [How this notebook is written](how-this-notebook-is-written.md) · [B1 and B2: the two baselines](b1-and-b2.md)
+> [!info]- Pages that link here (5)
+> [Welcome](../README.md) · [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [How this notebook is written](how-this-notebook-is-written.md) · [B1 and B2: the two baselines](b1-and-b2.md)
 <!-- /turns -->

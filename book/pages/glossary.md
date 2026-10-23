@@ -105,6 +105,6 @@ there.
 
 ← [What this notebook is about](what-this-notebook-is-about.md) · [Start here](../README.md#start-here) · [How this notebook is written](how-this-notebook-is-written.md) →
 
-> [!info]- Pages that link here (1)
-> [How this notebook is written](how-this-notebook-is-written.md)
+> [!info]- Pages that link here (3)
+> [Welcome](../README.md) · [What this notebook is about](what-this-notebook-is-about.md) · [How this notebook is written](how-this-notebook-is-written.md)
 <!-- /turns -->

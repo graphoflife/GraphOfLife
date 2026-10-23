@@ -1,32 +1,26 @@
 # Graph of Life — the Research Notebook
 
-This notebook is a research programme, written down while it is carried out. It
-asks what the Graph of Life algorithm actually does — and whether it can be
-made to keep producing new things without end, which is what *[open-ended
-evolution](pages/open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.")* means. [What this notebook is about](pages/what-this-notebook-is-about.md)
-says why.
+This notebook is a research programme, written down while it is carried out:
+what the Graph of Life algorithm does, and whether a world of it can keep
+producing new things without end — what is called *[open-ended evolution](pages/open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.")*.
 
-It is written to be **read on its own**, from any page. The pages are sorted
-by topic, and a word that needs explaining links to the page that explains it.
-[How the simulation works](#how-the-simulation-works) explains the algorithm
-completely, rule by rule. Every measurement, statistic and method the notebook
-uses has a short page of its own that defines it exactly and works an example
-by hand. Every figure says what it shows and, folded under it, how to make it
-again from the runs. Nothing needs the program to be understood — and
-everything can be checked with it.
+Start anywhere. Every page says what it asks, and every word that needs
+explaining links to the page that explains it. If you want a beginning, read
+[What this notebook is about](pages/what-this-notebook-is-about.md), then the
+pages on [how the simulation works](#how-the-simulation-works).
 
-## How to read it
+- [What this notebook is about](pages/what-this-notebook-is-about.md): the
+  question, the world in one paragraph, and how to read and check a page.
+- [Glossary](pages/glossary.md): every term in one line.
+- [How this notebook is written](pages/how-this-notebook-is-written.md): the
+  rules of the research, and of its pages.
+- [The lab, the engine and pilots](pages/the-lab.md): how an experiment is run
+  and made again.
 
-- **By topic**: the contents below list every page under its topic, in the
-  order that reads best; every page ends with the pages before and after it
-  in its topic.
-- **From anywhere**: start with any page and follow a link whenever a word
-  is new.
-- **By question**: every page starts with the questions it asks.
-- **In Obsidian**: open the folder `book/` as a vault. Every link, figure
-  and formula works there, and the graph view shows how the pages hang
-  together. The same files read in the Research Notebook tab of the Graph of
-  Life app and on GitHub.
+In the Research Notebook tab the contents can also be sorted by date, by title
+or by kind, filtered, and searched. In **Obsidian**, open the folder `book/` as
+a vault: every link, figure and formula works there, and the graph view shows
+how the pages hang together.
 
 ## Contents
 
@@ -305,74 +299,3 @@ How runs are recorded and measured, the statistics the notebook uses, and every 
 - [Effective numbers: how many kinds there really are](pages/effective-number.md)
 - [Many switches in few worlds: fractional factorial designs](pages/fractional-factorial.md)
 <!-- /contents -->
-
-## How it is made
-
-Three steps, over and over.
-
-1. **A plan.** An experiment's plan (`book/experiments/E…json`) fixes the
-   settings, the size of the world, the [seeds](pages/random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") and how long each run goes —
-   and a **thesis**: what is expected, why, and what would show it wrong. The
-   thesis is written down before any of its runs exist, and the page
-   quotes it from the plan, so it cannot be reworded once the results are
-   in.
-2. **The runs.** On a computer running `gol_server.py`, the page has a ▶
-   button in the Research Notebook tab. The [lab](pages/the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") then runs the experiment's simulations,
-   several at a time, each in a process of its own, and says how long is
-   left. It can be paused and continued at any time.
-3. **The results.** The finished runs are analysed, the figures drawn, and
-   the page written: what was found, whether the thesis held, and what to
-   try next.
-
-Some pages only ask, without a thesis: they look at runs that already exist
-from another side.
-
-## The rules
-
-- **One change at a time.** Every experiment changes one setting of a stated
-  [baseline](pages/b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") ([Every setting](pages/settings.md)) and keeps everything else.
-- **The thesis comes first.** It is fixed in the plan before the runs start.
-- **Enough seeds.** A difference seen in fewer than thirty seeds per
-  condition is called *indicative*, not an effect: results in this project
-  have reversed between six seeds and twenty
-  ([How many seeds](pages/seeds-needed.md)).
-- **No number without its null.** A measurement is reported next to what it
-  would be by chance.
-- **Every run can be made again.** Each simulation records its seed, the
-  frozen copy of the engine it ran on and the commit it came from, and the
-  versions of Python, numpy and networkx, beside it in `provenance.json`
-  ([Is a run reproducible?](pages/is-a-run-reproducible.md)).
-- **The dead are counted apart.** A world that dies out did not end up
-  anywhere, so where the worlds of a condition end up is measured over the
-  worlds that lived to the end, and the dead are reported beside them as an
-  outcome of their own ([When a world ends](pages/extinction.md)).
-- **A run is measured over its settled life**, from [iteration](pages/one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") 500 to its end
-  ([The settled life](pages/settled-life.md)).
-- **Runs are shared.** A run is named for what it is — baseline, world size,
-  what differs, seed — so an experiment that needs runs which already exist
-  uses them.
-
-## Making a result again
-
-Every page that reads runs says, in a box at its top, which runs they are,
-every setting they were made with, and the command that makes them:
-`python3 gol_lab.py run E…`. `python3 gol_lab.py verify E…` checks a few of
-them against what was recorded; `python3 gol_lab.py analyse E…` computes an
-experiment's results; `python3 book_figures.py` draws every figure again and
-writes it, with its caption and recipe, into the pages. On the same kind
-of machine with the same libraries everything comes out identical.
-
-## Where things are
-
-- `book/pages/` — every page, named by what it is about;
-- `book/figures/`, `book/diagrams/` — every figure and diagram, as SVG;
-- `book/results/` — every number a page quotes, written by the analysis;
-- `book/experiments/` — the baseline and each experiment's plan;
-- `book/book.json` — the topics, and every page with its topics, kind and
-  summary, from which the contents above are made;
-- `book/legacy.json` — the chapter numbers the notebook had until
-  23 October 2026, and the page each became;
-- `GraphOfLifeRuns/` — the runs themselves, on the machine that ran them.
-
-The programme the notebook follows, and what is already known, is in
-`research/Research.md` — the *Findings* page under Research.

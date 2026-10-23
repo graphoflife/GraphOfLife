@@ -1,53 +1,66 @@
 # The ideas this builds on
 
+> [!question] Questions of this page
+> - What has been tried before, and what would [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.") mean?
+> - Which ideas from game theory, network science, population genetics and
+>   statistics does this world use?
+
+## In short
+
 Graph of Life puts together ideas from several fields: artificial life, game
 theory, network science, population genetics and statistics. This page
-introduces each one far enough to read the rest of the notebook, and says where
-it shows up in this world. Full references are at the end; the project's
-longer reading notes are in `research/Literature.md`.
+introduces each one far enough to read the rest of the notebook, and says
+where it shows up in this world. There is no agreed definition of open-ended
+evolution, but there are good tests. The most useful is old: bring a
+population's ancestors back, and see whether the descendants beat them. The
+full references are at the end. The project's longer reading notes are in
+`research/Literature.md`.
 
 ## Open-ended evolution: what it would mean
 
-There is no single definition. The main attempts, each of which this project
-will eventually have to face:
+There is no single definition. These are the main attempts, and this project
+will have to face each of them:
 
 - **Evolutionary activity** (Bedau and Packard 1992; Bedau, Snyder, Brown and
   Packard 1997; Bedau, Snyder and Packard 1998). Give every component — a
-  gene, a [genotype](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.") — a counter that grows while it is present and in use, and
-  watch three numbers: how many components there are, how much *new*
-  activity appears, and how much activity accumulates. Systems fall into
-  three classes: no adaptive activity; unbounded new activity but bounded
-  diversity; and both unbounded, which is what the fossil record shows. The
-  lasting lesson is the **neutral shadow**: activity counts only above what an
-  identical system without adaptation produces. [Do the brains matter?](do-the-brains-matter.md) builds a shadow of
-  this kind for [lineages](families.md "A line of descent: the agents whose genotypes go back to one ancestor."), and finds it hard.
-- **MODES** (Dolson, Vostinar, Wiser and Ofria 2019) splits open-endedness
-  into four measurable kinds of growth — change, novelty, complexity and
-  ecology — and adds a **persistence filter**: count a component only once it
-  has survived for a while, or random [mutation](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") will look like novelty. In
-  this world, where a genotype typically lasts two iterations ([Genotypes and lineages](genotypes-and-lineages.md)),
-  that filter decides almost everything.
-- **Three kinds of open-endedness** (Taylor 2019): *exploratory* — new
-  combinations within a fixed space; *expansive* — new opportunities
-  discovered; *transformational* — new spaces altogether. Taylor argues that
-  ordinary evolution gives only the first, and names what the others need:
-  several domains of behaviour and bridges between them.
-- **Four necessary conditions** (Soros and Stanley 2014): reproduction must
-  require meeting a minimal criterion; evolution must create new
-  opportunities to meet it; individuals must decide for themselves how they
-  interact; and the representation must not limit how complex an individual
-  can become. Graph of Life meets the first (a child costs at least one token)
-  and the third more fully than most systems (every action is a [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") output);
-  the second only partly; and the fourth not at all, since a brain's size is
-  fixed.
+  gene, a [genotype](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.") — a counter that grows while it is present and in use. Then
+  watch three numbers: how many components there are, how much *new* activity
+  appears, and how much activity accumulates. Systems fall into three classes:
+  no adaptive activity; unbounded new activity but bounded diversity; and both
+  unbounded, which is what the fossil record shows. The lasting lesson is the
+  **neutral shadow**: activity counts only above what an identical system
+  without adaptation produces. [Do the brains matter?](do-the-brains-matter.md)
+  builds a shadow of this kind for [lineages](families.md "A line of descent: the agents whose genotypes go back to one ancestor."), and finds it hard.
+- **MODES** (Dolson, Vostinar, Wiser and Ofria 2019) splits open-endedness into
+  four kinds of growth that can be measured: change, novelty, complexity and
+  ecology. It adds a **persistence filter**: a component counts only once it
+  has survived for a while, or random [mutation](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") would look like novelty. In
+  this world a genotype typically lasts two iterations
+  ([Genotypes and lineages](genotypes-and-lineages.md)), so that filter decides
+  almost everything.
+- **Three kinds of open-endedness** (Taylor 2019). *Exploratory*: new
+  combinations within a fixed space. *Expansive*: new opportunities discovered.
+  *Transformational*: new spaces altogether. Taylor argues that ordinary
+  evolution gives only the first. The others need several domains of behaviour,
+  and bridges between them.
+- **Four necessary conditions** (Soros and Stanley 2014):
+  1. reproduction must require meeting a minimal criterion;
+  2. evolution must create new opportunities to meet it;
+  3. individuals must decide for themselves how they interact;
+  4. the representation must not limit how complex an individual can become.
+
+  Graph of Life meets the first: a child costs at least one token. It meets
+  the third more fully than most systems, since every action is a [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.")'s
+  output. It meets the second only partly. And it does not meet the fourth at
+  all, since a brain's size is fixed.
 - **Unbounded evolution as a property of dynamical systems** (Adams, Zenil,
-  Davies and Walker 2017): a system evolves without bound when its patterns do
+  Davies and Walker 2017). A system evolves without bound when its patterns do
   not recur within the time a closed system would take to repeat itself. In
   their models of evolving rules, only rules that depend on the system's own
   state produced open-ended behaviour in a way that scaled.
-- **Size is not complexity** (Standish 2003): in a run of the Tierra system,
-  organisms grew larger without becoming more complex. Growth in anything
-  this notebook measures will have to be checked against that.
+- **Size is not complexity** (Standish 2003). In a run of the Tierra system,
+  organisms grew larger without becoming more complex. Growth in anything this
+  notebook measures will have to be checked against that.
 
 ## Artificial worlds that came before
 
@@ -62,114 +75,139 @@ will eventually have to face:
 
 Graph of Life differs from all of them in one respect: the agents rebuild the
 **network** they live on, through every birth, handover and stake. It has no
-reward of any kind; and, unlike Tierra or Geb, its genomes cannot grow.
+reward of any kind. And unlike Tierra or Geb, its genomes cannot grow.
 
 ## The game: Colonel Blotto
 
 In **Colonel Blotto** (Borel 1921), two commanders divide a fixed force
-between several battlefields without seeing each other's division, and each
-battlefield goes to whoever sent more. Every fixed division can be beaten by
-one that gives up a little where it is strong and concentrates where the
-other is weak, so there is no single best division — only a mixture of
-divisions played at random can be optimal; Roberson (2006) worked out that
-mixture for two players. The game of [One iteration, step by step](one-iteration.md) is a Blotto game with three
-differences that the theory does not cover: there are many players; each can
-reach only the battlefields of its neighbourhood, which change; and what is
-won — tokens — is next game's force, so success compounds.
+between several battlefields, without seeing each other's division. Each
+battlefield goes to whoever sent more. Every fixed division can be beaten: give
+up a little where the other is strong, and send more where it is weak. So there
+is no single best division. Only a mixture of divisions, played at random, can
+be optimal; Roberson (2006) worked out that mixture for two players.
 
-Two further ideas belong here. Games without a best strategy keep a
-population moving: **rock–paper–scissors** among three strains of *E. coli*
-keeps all three alive when they interact **locally**, and only then (Kerr,
-Riley, Feldman and Bohannan 2002). And the **Red Queen** (Van Valen 1973):
-when an organism's environment is mostly other organisms, all of them
-changing, no improvement buys a lasting advantage. A fixed supply of tokens
-fought over by neighbours is such a setting.
+The game of [One iteration, step by step](one-iteration.md#phase-2-the-game) is
+a Blotto game with three differences that the theory does not cover:
 
-> [!info] Added later: a game with an answer
-> Here the game has not kept the population moving. Played against the
-> brains of earlier [eras](eras-and-contests.md "Brains of a world at two moments, its eras, played against each other: do the later ones win?"), the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.")'s brains stop improving within their
-> first hundred iterations, and later eras neither beat the ones before them
-> nor run in place: they tie
-> ([How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)).
-> [Why evolution stops](why-evolution-stops.md) proposed why: like Blotto, the
-> game has a mixed-strategy answer — be unpredictable — and evolution finds
-> it quickly, using the brains' random inputs as dice. Experiment 16 found
-> that evolution does stop in a world that cannot break, but the reason did
-> not survive the tests that followed. Random [founder](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.") brains already roll
-> those dice, and a strategy written by hand took half of an evolved world
-> ([Strategies written by hand](strategies-written-by-hand.md)). The game is not solved;
-> evolution stops short of better play that needs several agents acting
-> together.
+1. there are many players;
+2. each can reach only the battlefields of its neighbourhood, and they change;
+3. what is won — tokens — is the next game's force, so success compounds.
+
+Two more ideas belong here. Games without a best strategy can keep a
+population moving. Rock–paper–scissors among three strains of *E. coli* keeps
+all three alive when they meet **locally**, and only then (Kerr, Riley, Feldman
+and Bohannan 2002). And the **Red Queen** (Van Valen 1973): when an organism's
+surroundings are mostly other organisms, all of them changing, no improvement
+buys a lasting advantage. A fixed supply of tokens fought over by neighbours is
+such a setting.
+
+In this world the game has not kept the population moving. Played against the
+brains of earlier eras, the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.")'s brains stop improving within their first
+hundred iterations. Later brains neither beat the ones before them nor go round
+in a circle: they tie
+([How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)).
+Experiment 16 found the same in [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death."), a world built so that it cannot break
+([Why evolution stops](why-evolution-stops.md)). Why is still open. It is not
+that the game has been solved: a strategy written by hand took half of an
+evolved world ([Strategies written by hand](strategies-written-by-hand.md)).
+Evolution stops short of better play, and the better play found so far needs
+several agents acting together.
 
 ## Networks
 
-- **Small worlds** (Watts and Strogatz 1998): a ring lattice with a few
-  random shortcuts is both clustered and short — the founders' ring of
-  [The world: tokens, agents and a network](the-world.md).
+- **Small worlds** (Watts and Strogatz 1998). A ring of nodes, each joined to
+  its nearest few, with a few random shortcuts, is both clustered and short.
+  It is the [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.")' ring of [The world: tokens, agents and a network](the-world.md).
 - **Measures of a network** — degree, clustering, distances, bridges, the
-  2-core — are standard (Newman 2003); the notes [Degree](degree.md),
+  2-core — are standard (Newman 2003). [Degree](degree.md),
   [Clustering](clustering.md), [Path length](path-length.md),
   [Bridges](bridges.md) and [Core, trees and leaves](core-trees-leaves.md)
-  define each. The bridges are found by
-  depth-first search (Tarjan 1974), the core by peeling (Seidman 1983).
+  define each. The bridges are found by depth-first search (Tarjan 1974), the
+  core by peeling (Seidman 1983).
 - **Evolution on graphs.** Where individuals sit in a network changes what
-  selection does. On a lattice, cooperators survive in clusters where in a
-  mixed population they die out (Nowak and May 1992); some graphs amplify
-  selection and others suppress it (Lieberman, Hauert and Nowak 2005);
-  cooperation spreads when its benefit divided by its cost exceeds the
-  average number of neighbours (Ohtsuki, Hauert, Lieberman and Nowak 2006).
-  In these results the graph is given. In Graph of Life the agents build it.
+  selection does. On a lattice, cooperators survive in clusters, where in a
+  mixed population they die out (Nowak and May 1992). Some graphs amplify
+  selection, and others suppress it (Lieberman, Hauert and Nowak 2005).
+  Cooperation spreads when its benefit, divided by its cost, exceeds the
+  average number of neighbours (Ohtsuki, Hauert, Lieberman and Nowak 2006). In
+  these results the graph is given. In Graph of Life the agents build it.
 
 ## Genealogy and chance
 
 - **Neutral evolution** (Kimura 1968): many changes spread not because they
-  are better but by chance. The discipline it taught is that a story of
-  selection has to beat a model of chance alone.
+  are better, but by chance. The discipline it taught: a story of selection
+  has to beat a model of chance alone.
 - **The Moran model** (Moran 1958): in a population of fixed size, one
   individual at a time is copied and one replaced, at random. Even with no
   differences between them, one lineage eventually takes over.
 - **The coalescent** (Kingman 1982): followed backwards, the lineages of the
   living merge, two by two, until all meet in one **[common ancestor](common-ancestor.md "The genotype every living agent descends from, and how far back it lies.")**. In a
-  population of fixed size *N* replaced by chance alone, that ancestor lived
-  a number of generations back proportional to *N*. [Genotypes and lineages](genotypes-and-lineages.md) finds the
-  common ancestor of each world's living agents, and [Do the brains matter?](do-the-brains-matter.md) compares its
-  movements with those of a world in which no brain is better than another.
-- **Muller plots** (after Muller 1932) draw the share of a population
-  descending from each of several ancestors, stacked over time, so that a
-  lineage taking over appears as a band that widens until it fills the
-  picture ([The first hundred iterations](the-first-hundred-iterations.md),
+  population of fixed size *N*, replaced by chance alone, that ancestor lived a
+  number of generations back proportional to *N*.
+  [Genotypes and lineages](genotypes-and-lineages.md) finds the common ancestor
+  of each world's living agents. [Do the brains matter?](do-the-brains-matter.md)
+  compares its movements with those in a world where no brain is better than
+  another.
+- **Muller plots** (after Muller 1932) draw, stacked over time, the share of a
+  population that descends from each of several ancestors. A lineage taking
+  over appears as a band that widens until it fills the picture
+  ([The first hundred iterations](the-first-hundred-iterations.md),
   [Genotypes and lineages](genotypes-and-lineages.md); [Muller plots](muller-plot.md)).
 
 ## Measuring
 
 - **Inequality**: the **Lorenz curve** (Lorenz 1905) and the **Gini
-  coefficient** (Gini 1912): [Where do the tokens go?](where-do-the-tokens-go.md) and
-  [the note](gini-coefficient.md).
+  coefficient** (Gini 1912): [Where do the tokens go?](where-do-the-tokens-go.md)
+  and [The Gini coefficient and the Lorenz curve](gini-coefficient.md).
 - **[Lifetimes](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death.") with censoring**: the Kaplan–Meier estimate (Kaplan and Meier
   1958): [Survival curves](kaplan-meier.md).
 - **Intervals by resampling**: the [bootstrap](bootstrap.md "How sure a number is, found by redrawing the worlds it came from many times.") (Efron 1979). **Intervals for
-  proportions**: Wilson (1927). **[Correlations](correlation.md "Whether two quantities go up and down together, from −1 to 1.") of a series with itself**, and
-  the bias of measuring them against the series' own mean: Bartlett (1946),
-  Marriott and Pope (1954), Kendall (1954) — see [Autocorrelation](autocorrelation.md).
+  proportions**: Wilson (1927).
+- **[Correlations](correlation.md "Whether two quantities go up and down together, from −1 to 1.") of a series with itself**, and the bias of measuring them
+  against the series' own mean: Bartlett (1946), Marriott and Pope (1954),
+  Kendall (1954). See [Autocorrelation](autocorrelation.md).
 - **[Power laws](power-law-fit.md "A quantity whose frequency falls as a power of its size: few huge values, many small ones.")**, and why a straight stretch on log–log axes is weak evidence
-  of one: Clauset, Shalizi and Newman (2009); see [Logarithmic axes](logarithmic-axes.md).
-- **Testing by shuffling**: the permutation test goes back to Fisher (1935);
-  see [Permutation tests](permutation-test.md).
-- **Pictures of networks**: the ForceAtlas2 layout (Jacomy, Venturini,
-  Heymann and Bastian 2014) places joined nodes near each other.
-- **Progress against the past**: comparing a population with its own
-  ancestors, brought back to compete, shows whether it is getting better or
-  only going round in circles (Cliff and Miller 1995). The Lenski experiment,
-  twelve *E. coli* populations followed for tens of thousands of generations
-  with frozen samples of their ancestors, is the standing example (Lenski,
+  of one: Clauset, Shalizi and Newman (2009). See
+  [Logarithmic axes](logarithmic-axes.md).
+- **Testing by shuffling**: the permutation test goes back to Fisher (1935).
+  See [Permutation tests](permutation-test.md).
+- **Pictures of networks**: the ForceAtlas2 layout (Jacomy, Venturini, Heymann
+  and Bastian 2014) places joined nodes near each other.
+- **Progress against the past**: compare a population with its own ancestors,
+  brought back to compete. That shows whether it is getting better, or only
+  going round in circles (Cliff and Miller 1995). The standing example is the
+  Lenski experiment: twelve *E. coli* populations followed for tens of
+  thousands of generations, with frozen samples of their ancestors (Lenski,
   Rose, Simpson and Tadler 1991; Blount, Borland and Lenski 2008). It is the
-  test for the second rung of the ladder in [What this notebook is about](what-this-notebook-is-about.md);
-  [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) runs it on the
-  baseline.
+  test for the second rung of the ladder in
+  [What this notebook is about](what-this-notebook-is-about.md).
+  [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)
+  runs it on the baseline.
+
+## Where to go next
+
+- [What this notebook is about](what-this-notebook-is-about.md): the ladder of
+  four claims these ideas are tested against.
+- [Eras and contests: does a world keep getting better?](eras-and-contests.md):
+  the test of bringing ancestors back, as this notebook plays it.
+- [Why evolution stops](why-evolution-stops.md): what the game and the rules
+  do to evolution here.
+
+## How our view changed
+
+- **14 October 2026.** A note added here said that, like Blotto, the game has
+  an answer: play unpredictably. Evolution finds it quickly, the note said,
+  using the brains' random inputs as dice, and that is why the baseline stops
+  improving ([Why evolution stops](why-evolution-stops.md)).
+- **15 October 2026.** The reason did not survive the tests that followed.
+  Random founder brains already roll those dice, and a strategy written by hand
+  took half of an evolved world
+  ([Strategies written by hand](strategies-written-by-hand.md)). The game is
+  not solved. The text above now says what is known.
 
 ## References
 
-- Adams, A., Zenil, H., Davies, P. C. W. and Walker, S. I. (2017). Formal definitions of unbounded evolution and innovation reveal universal mechanisms for [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.") in dynamical systems. *Scientific Reports* 7, 997.
+- Adams, A., Zenil, H., Davies, P. C. W. and Walker, S. I. (2017). Formal definitions of unbounded evolution and innovation reveal universal mechanisms for open-ended evolution in dynamical systems. *Scientific Reports* 7, 997.
 - Bartlett, M. S. (1946). On the theoretical specification and sampling properties of autocorrelated time-series. *Supplement to the Journal of the Royal Statistical Society* 8(1), 27–41.
 - Bedau, M. A. and Packard, N. H. (1992). Measurement of evolutionary activity, teleology, and life. In *Artificial Life II*, 431–461. Addison-Wesley.
 - Bedau, M. A., Snyder, E., Brown, C. T. and Packard, N. H. (1997). A comparison of evolutionary activity in artificial evolving systems and in the biosphere. In *Proceedings of the Fourth European Conference on Artificial Life*, 125–134. MIT Press.

@@ -85,7 +85,7 @@
   "pages": [
     {
       "id": "README",
-      "title": "How to read this notebook",
+      "title": "Welcome",
       "file": "README.md",
       "topics": [
         "start"
@@ -93,7 +93,7 @@
       "kind": "overview",
       "status": "written",
       "added": "2026-10-02",
-      "summary": "This notebook is a research programme, written down while it is carried out."
+      "summary": "The front page: what the notebook asks, where to begin, and every page by topic."
     },
     {
       "id": "what-this-notebook-is-about",
