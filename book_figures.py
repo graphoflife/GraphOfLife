@@ -25,7 +25,6 @@ the same figures.
 """
 from __future__ import annotations
 
-import functools
 import math
 import os
 import sys
@@ -117,15 +116,10 @@ def recipe(runs: str, data: str, steps: Iterable[str]) -> str:
 # says forty, or 26 survivors where 25 lived. Most of Parts II and III read the
 # baseline runs of Experiment 2, which is what they default to.
 
-@functools.lru_cache(maxsize=None)
 def _listed_in(experiment: str) -> str:
-    """The first chapter, in the book's order, that lists the experiment's runs and settings."""
+    """The page that reports the experiment, and with it every setting of its runs."""
     import book_fill
-    for c in book_fill.chapters():
-        path = os.path.join(BOOK, c.get("file") or "")
-        if c.get("file") and f"<!-- runs {experiment} -->" in open(path, encoding="utf-8").read():
-            return f"Chapter {c['id']}"
-    raise LookupError(f"no chapter lists the runs of {experiment}")
+    return f"Chapter {book_fill.home_of(experiment)['id']}"
 
 
 def _runs_of(experiment: str, condition: str) -> str:

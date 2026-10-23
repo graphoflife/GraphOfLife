@@ -77,12 +77,9 @@ def _json(path: str) -> Any:
 
 
 def _chapters() -> Dict[str, Dict[str, Any]]:
-    """Every written chapter, by id."""
-    out = {}
-    for part in _json(os.path.join(BOOK, "book.json"))["parts"]:
-        for c in part["chapters"]:
-            out[c["id"]] = c
-    return out
+    """Every page of the notebook's index, by id, in reading order."""
+    import book_fill
+    return {c["id"]: c for c in book_fill.pages()}
 
 
 def _cell_chapters(ids: List[str], chapters: Dict[str, Dict[str, Any]]) -> List[Dict[str, str]]:
@@ -156,7 +153,10 @@ def measured() -> Dict[str, Set[str]]:
 
 def lab_rows(chapters, done) -> Tuple[Dict[str, Any], Dict[str, Any]]:
     import gol_plan
-    by_experiment = {c.get("experiment"): c["id"] for c in chapters.values() if c.get("experiment")}
+    by_experiment: Dict[str, str] = {}
+    for c in chapters.values():                        # an experiment's home is the first page to list it
+        for name in c.get("experiments", []):
+            by_experiment.setdefault(name, c["id"])
     base = {b: _json(os.path.join(BOOK, "experiments", f"{b}.json"))["settings"] for b in ("B1", "B2")}
     rows, measures = [], []
     for path in sorted(glob.glob(os.path.join(BOOK, "experiments", "E*.json")), key=lambda p: int(re.sub(r"\D", "", os.path.basename(p)))):

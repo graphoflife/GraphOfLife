@@ -110,12 +110,13 @@ const Book = {
     return parts.join('/');
   },
 
-  chapters() {
+  /** Every page of the index, written or not, in reading order. */
+  pages() {
     return this.index ? this.index.parts.flatMap(part => part.chapters) : [];
   },
 
   chapter(id) {
-    return this.chapters().find(c => c.id === id);
+    return this.pages().find(c => c.id === id);
   },
 
   /**
@@ -143,7 +144,7 @@ const Book = {
     }
     let remembered = null;
     try { remembered = localStorage.getItem(this.STORE); } catch (err) { /* private window */ }
-    const first = this.chapters().find(c => c.file);
+    const first = this.pages().find(c => c.file);
     await this.open(this.chapter(remembered)?.file ? remembered : first.id);
     return true;
   },
@@ -175,7 +176,7 @@ const Book = {
 
   /** Any Markdown file of the book, by its path under book/, scrolled to `part` if given. */
   async show(file, part = '') {
-    const chapter = this.chapters().find(c => c.file === file) || null;
+    const chapter = this.pages().find(c => c.file === file) || null;
     this.current = chapter ? chapter.id : null;
     this.file = file;
     if (chapter) {
@@ -241,7 +242,9 @@ const Book = {
 
   /** Which chapter this is, above its title: a number, an appendix letter, or nothing. */
   kicker(chapter) {
-    const what = chapter.experiment ? ` · Experiment ${Number(chapter.experiment.slice(1))}` : '';
+    const numbers = (chapter.experiments || []).map(name => Number(name.slice(1)));
+    const what = numbers.length ? ` · Experiment${numbers.length > 1 ? 's' : ''} ${
+      numbers.length > 1 ? `${numbers.slice(0, -1).join(', ')} and ${numbers.at(-1)}` : numbers[0]}` : '';
     const number = /^\d+$/.test(chapter.id) ? `Chapter ${chapter.id}`
       : /^[A-Z]$/.test(chapter.id) ? `Appendix ${chapter.id}` : '';
     return number ? `<p class="book-kicker">${number}${what}</p>` : '';
@@ -264,7 +267,7 @@ const Book = {
   /** The drawer's button names the chapter that is open. */
   labelToggle() {
     if (!this.toggle || !this.index) return;
-    const chapter = this.chapters().find(c => c.id === this.current);
+    const chapter = this.pages().find(c => c.id === this.current);
     const text = this.toggle.querySelector('.book-toc-toggle-text');
     if (!chapter) { text.textContent = 'Contents'; return; }
     const number = /^\d+$/.test(chapter.id) ? `${chapter.id} · ` : /^[A-Z]$/.test(chapter.id) ? `${chapter.id} · ` : '';
@@ -291,12 +294,12 @@ const Book = {
 
   /**
    * What a chapter's chip says. An analysed chapter is analysed whatever the
-   * lab says; otherwise an experiment is where the lab says it is, and a
+   * lab says; otherwise its experiments are where the lab says they are, and a
    * chapter without one is just written or not.
    */
   describe(chapter, lab = this.lab) {
     if (chapter.status === 'analysed') return { state: 'analysed', label: 'analysed' };
-    const live = chapter.experiment && lab && lab.experiments[chapter.experiment];
+    const live = lab && this.together((chapter.experiments || []).map(name => lab.experiments[name]).filter(Boolean));
     if (live) {
       const share = live.total ? Math.floor(100 * live.done / live.total) : 0;
       const labels = {
@@ -311,6 +314,21 @@ const Book = {
     if (chapter.status === 'ready') return { state: 'ready', label: 'ready to run' };
     if (chapter.status === 'draft') return { state: 'draft', label: 'draft' };
     return { state: 'written', label: '' };
+  },
+
+  /**
+   * Several experiments of one page as one: their runs added up, and the state of
+   * the one furthest from done or most in need of a look — a page is running while
+   * any of its experiments runs, and finished only when all are.
+   */
+  together(states) {
+    if (!states.length) return null;
+    if (states.length === 1) return states[0];
+    const order = ['invalid', 'blocked', 'running', 'queued', 'paused', 'stopped', 'ready', 'finished'];
+    const rank = s => (order.includes(s.state) ? order.indexOf(s.state) : order.length);
+    const first = states.reduce((a, b) => (rank(b) < rank(a) ? b : a));
+    return { state: first.state, done: states.reduce((n, s) => n + (s.done || 0), 0),
+             total: states.reduce((n, s) => n + (s.total || 0), 0) };
   },
 
   // ---- the lab ----------------------------------------------------------
@@ -428,8 +446,8 @@ const Book = {
 
   /** Progress, the time left, the buttons and every run's bar: only where there is a lab. */
   liveHtml(name, status, lab) {
-    const chapter = this.chapters().find(c => c.experiment === name) || {};
-    const state = this.describe(chapter, lab);
+    const chapter = this.pages().find(c => (c.experiments || []).includes(name)) || {};
+    const state = this.describe({ ...chapter, experiments: [name] }, lab);
     // A plan the lab cannot carry out has no runs and no estimate: only its reason.
     if (status.state === 'invalid') {
       return `<div class="book-exp-head"><span class="book-chip book-chip-${state.state}">${state.label}</span></div>`

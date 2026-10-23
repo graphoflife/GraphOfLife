@@ -1251,11 +1251,16 @@ function bookWith(api = {}) {
 function test_markdown_headings_get_ids() {
   // A chapter points at its own sections, so its headings need names, each
   // one unique on the page, and a link to one must stay on the page.
+  // The ids are GitHub's, so that a link written for the file on GitHub finds
+  // its heading here too.
   const html = Markdown.render('# The goal\n\n## The goal\n\n### What *P1* asks\n\n'
+    + '## Added later: to the dead agent\'s own children\n\n## `k_neighbors` — 1.5 times & more\n\n'
     + 'See [above](#the-goal) or [a paper](https://example.org).');
   assert(html.includes('<h2 id="the-goal">The goal</h2>'), html);
-  assert(html.includes('<h3 id="the-goal-2">The goal</h3>'), 'a second heading of the same name kept the first one\'s id');
+  assert(html.includes('<h3 id="the-goal-1">The goal</h3>'), 'a second heading of the same name kept the first one\'s id');
   assert(html.includes('<h4 id="what-p1-asks">'), html);
+  assert(html.includes('id="added-later-to-the-dead-agents-own-children"'), 'an apostrophe made its own dash');
+  assert(html.includes('id="k_neighbors--15-times--more"'), 'punctuation was not dropped as GitHub drops it');
   assert(html.includes('<a href="#the-goal">above</a>'), 'a link within the page opened a new tab');
   assert(html.includes('<a href="https://example.org" target="_blank" rel="noopener">'), html);
 }
@@ -1329,7 +1334,7 @@ function test_book_progress_of_an_experiment() {
   // that an analysed chapter stays analysed, and without a lab, what the book
   // itself says.
   const Book = bookWith();
-  const chapter = { id: '3', title: 'x', file: 'x.md', experiment: 'E02', status: 'ready' };
+  const chapter = { id: '3', title: 'x', file: 'x.md', experiments: ['E02'], status: 'ready' };
   const lab = { experiments: { E02: { state: 'running', done: 61, total: 360 } } };
   assert(Book.describe(chapter, lab).label === 'running · 16%', Book.describe(chapter, lab).label);
   lab.experiments.E02.state = 'paused';
@@ -1340,6 +1345,16 @@ function test_book_progress_of_an_experiment() {
   assert(Book.describe(chapter, null).label === 'ready to run');
   assert(Book.describe({ id: '9', title: 'y' }, null).state === 'planned');
   assert(Book.describe({ id: '9', title: 'y' }, null).label === '', 'a chapter not written yet got a chip');
+
+  // A page of two experiments is running while either runs, and counts both one's runs.
+  const two = { ...chapter, experiments: ['E36', 'E37'] };
+  const both = { experiments: { E36: { state: 'finished', done: 10, total: 10 },
+                                E37: { state: 'running', done: 0, total: 10 } } };
+  assert(Book.describe(two, both).label === 'running · 50%', Book.describe(two, both).label);
+  both.experiments.E37 = { state: 'finished', done: 10, total: 10 };
+  assert(Book.describe(two, both).label === 'finished · to analyse', 'a page finished before its last experiment');
+  assert(Book.kicker({ id: '105', experiments: ['E36', 'E37'] }).includes('Experiments 36 and 37'),
+    Book.kicker({ id: '105', experiments: ['E36', 'E37'] }));
 
   assert(Book.eta(30) === 'under 2 min left');
   assert(Book.eta(600) === 'about 10 min left');
@@ -1352,7 +1367,7 @@ function test_a_run_that_died_out_says_so() {
   // A world that died out is done, but it did not reach its target: its cell
   // says when it died rather than claiming the whole run.
   const Book = bookWith();
-  Book.chapters = () => [];
+  Book.pages = () => [];
   const status = { state: 'running', done: 3001, total: 6000, secondsLeft: 60, estimate: { seconds: 60, diskBytes: 1, peakMB: 1 },
     runs: [{ id: 'B1-10000-s014', name: 'baseline · seed 14', iteration: 3000, until: 3000, state: 'done', diedAt: 313, sharedWith: [] },
            { id: 'B1-10000-s015', name: 'baseline · seed 15', iteration: 1, until: 3000, state: 'running', diedAt: null, sharedWith: [] }] };
@@ -1371,7 +1386,7 @@ function test_a_plan_the_lab_cannot_read_says_why() {
   // with "Cannot read properties of undefined", for every chapter whose plan
   // a server with older settings could not read.
   const Book = bookWith();
-  Book.chapters = () => [{ id: '80', experiment: 'E17', file: 'chapters/80.md', status: 'ready' }];
+  Book.pages = () => [{ id: '80', experiments: ['E17'], file: 'chapters/80.md', status: 'ready' }];
   const lab = { lab: { workers: 3, cores: 8 }, disk: { free: 1 }, costs: { runs: 1 },
                 experiments: { E17: { state: 'invalid', reason: 'B2 names settings this lab does not know', runs: [] } } };
   const html = Book.liveHtml('E17', lab.experiments.E17, lab);

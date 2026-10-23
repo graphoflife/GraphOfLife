@@ -89,10 +89,16 @@ const Markdown = {
       + '</table></div>';
   },
 
-  /** An id for a heading: its words, lower case, joined by dashes. */
+  /**
+   * An id for a heading, made as GitHub makes it, so that a link written for the
+   * file on GitHub (`settings.md#k_neighbors`, `#an-agents-own-children`) finds
+   * the same heading here: the text without markup, in lower case, every
+   * character but a letter, a digit, `_`, `-` or a space dropped, each space a
+   * dash. A second heading of the same name gets `-1`, a third `-2`.
+   */
   slug(text) {
-    return String(text).toLowerCase().replace(/<[^>]*>/g, '').replace(/&[a-z]+;/g, '')
-      .replace(/[^a-z0-9À-ɏ]+/g, '-').replace(/^-+|-+$/g, '') || 'section';
+    return String(text).replace(/<[^>]*>/g, '').replace(/&(?:[a-z]+|#\d+);/gi, '').trim().toLowerCase()
+      .replace(/[^\p{L}\p{M}\p{N}\p{Pc}\- ]/gu, '').replace(/ /g, '-') || 'section';
   },
 
   /**
@@ -200,7 +206,7 @@ const Markdown = {
         const base = this.slug(html);
         const seen = ids.get(base) || 0;
         ids.set(base, seen + 1);
-        const id = seen ? `${base}-${seen + 1}` : base;
+        const id = seen ? `${base}-${seen}` : base;
         out.push(`<h${level} id="${id}">${html}</h${level}>`);
         continue;
       }

@@ -241,6 +241,39 @@ def test_every_link_between_the_books_pages_arrives():
     assert not broken, "links to pages that are not there:\n  " + "\n  ".join(broken)
 
 
+def test_every_link_to_a_section_or_a_picture_arrives():
+    # A link to a section (`settings.md#k_neighbors`, `#what-is-set-aside`) names
+    # a heading by the id GitHub gives it, which the notebook's tab gives it too
+    # (markdown.js); a heading reworded, or a picture moved, leaves a link that
+    # scrolls nowhere or an empty frame.
+    import glob
+    import re
+    from urllib.parse import unquote
+    import book_fill
+    book = os.path.join(runner.ROOT, "book")
+    pages = glob.glob(os.path.join(book, "**", "*.md"), recursive=True)
+    ids = {}
+
+    def headings(path):
+        if path not in ids:
+            with open(path, encoding="utf-8") as f:
+                ids[path] = set(book_fill.anchors(f.read()))
+        return ids[path]
+
+    broken = []
+    for page in pages:
+        with open(page, encoding="utf-8") as f:
+            text = re.sub(r"^```.*?^```", "", f.read(), flags=re.S | re.M)
+        for href, part in re.findall(r"\]\(([^)#\s:]*\.md|)#([^)\s]+)\)", text):
+            target = os.path.normpath(os.path.join(os.path.dirname(page), href)) if href else page
+            if os.path.exists(target) and unquote(part) not in headings(target):
+                broken.append(f"{os.path.relpath(page, book)} -> {href}#{part}")
+        for src in re.findall(r"!\[[^\]]*\]\(([^)\s:]+)\)", text):
+            if not os.path.exists(os.path.normpath(os.path.join(os.path.dirname(page), unquote(src)))):
+                broken.append(f"{os.path.relpath(page, book)} -> picture {src}")
+    assert not broken, "links to sections or pictures that are not there:\n  " + "\n  ".join(broken)
+
+
 # ---------------------------------------------------------------------------
 # Drawing
 # ---------------------------------------------------------------------------

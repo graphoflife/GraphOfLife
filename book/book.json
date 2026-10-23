@@ -53,7 +53,9 @@
           "id": "8",
           "title": "Is a run reproducible?",
           "file": "chapters/08-is-a-run-reproducible.md",
-          "experiment": "E01",
+          "experiments": [
+            "E01"
+          ],
           "status": "analysed"
         }
       ]
@@ -70,7 +72,9 @@
           "id": "10",
           "title": "A world's life",
           "file": "chapters/10-a-worlds-life.md",
-          "experiment": "E02",
+          "experiments": [
+            "E02"
+          ],
           "status": "analysed"
         },
         {
@@ -92,14 +96,18 @@
           "id": "14",
           "title": "How much does the seed decide?",
           "file": "chapters/14-how-much-does-the-seed-decide.md",
-          "experiment": "E03",
+          "experiments": [
+            "E03"
+          ],
           "status": "analysed"
         },
         {
           "id": "15",
           "title": "Where do the tokens go?",
           "file": "chapters/15-where-do-the-tokens-go.md",
-          "experiment": "E04",
+          "experiments": [
+            "E04"
+          ],
           "status": "analysed"
         },
         {
@@ -111,14 +119,18 @@
           "id": "17",
           "title": "What shape does the network take?",
           "file": "chapters/17-what-shape-does-the-network-take.md",
-          "experiment": "E05",
+          "experiments": [
+            "E05"
+          ],
           "status": "analysed"
         },
         {
           "id": "18",
           "title": "Genotypes and lineages",
           "file": "chapters/18-genotypes-and-lineages.md",
-          "experiment": "E06",
+          "experiments": [
+            "E06"
+          ],
           "status": "analysed"
         },
         {
@@ -263,14 +275,18 @@
           "id": "41",
           "title": "Do the brains matter?",
           "file": "chapters/41-do-the-brains-matter.md",
-          "experiment": "E07",
+          "experiments": [
+            "E07"
+          ],
           "status": "analysed"
         },
         {
           "id": "42",
           "title": "How does a world's size follow its tokens?",
           "file": "chapters/42-how-does-a-worlds-size-follow-its-tokens.md",
-          "experiment": "E08",
+          "experiments": [
+            "E08"
+          ],
           "status": "analysed"
         },
         {
@@ -297,14 +313,18 @@
           "id": "46",
           "title": "How to tell a world that keeps evolving",
           "file": "chapters/46-how-to-tell-a-world-that-keeps-evolving.md",
-          "experiment": "E12",
+          "experiments": [
+            "E12"
+          ],
           "status": "analysed"
         },
         {
           "id": "47",
           "title": "Brains that see, and worlds that break",
           "file": "chapters/47-brains-that-see-and-worlds-that-break.md",
-          "experiment": "E13",
+          "experiments": [
+            "E13"
+          ],
           "status": "analysed"
         },
         {
@@ -312,7 +332,9 @@
           "title": "A world that cannot break",
           "note": "The rules of space: a newborn joins its parent and two of its neighbours; a death is mended; only redundant links lapse; a brain may choose only so many links; no handover. Space alone (no brains) and space under the game: the health bar of Chapter 46.",
           "file": "chapters/48-a-world-that-cannot-break.md",
-          "experiment": "E14",
+          "experiments": [
+            "E14"
+          ],
           "status": "analysed"
         },
         {
@@ -320,14 +342,18 @@
           "title": "Who dies, and why",
           "note": "The rules of demography and the exploits they invite: children spent as missiles, a hoarding queen with half the tokens, worlds of one-token agents; the last token kept at home, a longest life, a smallest child, a home share.",
           "file": "chapters/49-who-dies-and-why.md",
-          "experiment": "E15",
+          "experiments": [
+            "E15"
+          ],
           "status": "analysed"
         },
         {
           "id": "50",
           "title": "Why evolution stops",
           "file": "chapters/50-why-evolution-stops.md",
-          "experiment": "E16",
+          "experiments": [
+            "E16"
+          ],
           "status": "analysed"
         },
         {
@@ -341,7 +367,9 @@
           "id": "52",
           "title": "How fast should brains change?",
           "file": "chapters/52-how-fast-should-brains-change.md",
-          "experiment": "E09",
+          "experiments": [
+            "E09"
+          ],
           "status": "analysed"
         },
         {
@@ -408,7 +436,9 @@
           "title": "Mixed at birth: ten long worlds",
           "note": "Brains mixed at birth in ten worlds of B2 for 10,000 iterations: rich, because their agents put off having children, but only half of them healthy, since health follows a size that drifts; evolution goes on.",
           "file": "chapters/80-mixed-at-birth-ten-long-worlds.md",
-          "experiment": "E17",
+          "experiments": [
+            "E17"
+          ],
           "status": "analysed"
         },
         {
@@ -430,7 +460,9 @@
           "title": "Mixed at birth, with parents as mates",
           "note": "Experiment 19: if only an agent with a living child may be a mate, does a mixed world stop breeding itself to death? All ten worlds lived to 20,000 iterations and settled at about 2,000 agents, six in ten of them poor: the agents breed twice as eagerly, the worlds keep mixing's diversity and B2's network, and evolution goes on.",
           "file": "chapters/85-mixed-at-birth-with-parents-as-mates.md",
-          "experiment": "E19",
+          "experiments": [
+            "E19"
+          ],
           "status": "analysed"
         },
         {
@@ -466,7 +498,9 @@
           "title": "The search's best world, in new seeds",
           "note": "Experiment 24: the random search's best settings (Z/r2-25) in five new seeds. Every world was diverse (0.80 to 0.89), a wide space (2.6 to 2.75 times its twin) and rich; none met more than four marks (cut by one loss, about two-dimensional) and all were too even. The search's own world, played again game for game, met every mark only at its lucky moment.",
           "file": "chapters/98-the-searchs-best-world-in-new-seeds.md",
-          "experiment": "E24",
+          "experiments": [
+            "E24"
+          ],
           "status": "analysed"
         },
         {
@@ -474,7 +508,9 @@
           "title": "A mate that pays its share",
           "note": "Experiment 22: brains mixed at birth with a mate that pays the child as much as the parent, in four worlds to 5,000. Every world held its size far steadier than Experiment 17's of the same seed (spread 0.09 to 0.16 against 0.19 to 0.63) and none came near dying; healthy and diverse, but folded. The lab played the stopped pilots game for game.",
           "file": "chapters/99-a-mate-that-pays-its-share.md",
-          "experiment": "E22",
+          "experiments": [
+            "E22"
+          ],
           "status": "analysed"
         },
         {
@@ -482,7 +518,9 @@
           "title": "Room for the steadiest world",
           "note": "Experiment 31: Experiment 19's world given each rule that keeps a world's room. Every rule unfolded it, and each paid in its own coin: the estates to births made healthy three-dimensional spaces of poor, alike agents; no old age made agents of one age; no mending kept the riches but left cuts (one world missed only that). Half the picture solved; the next rule asks more of a birth.",
           "file": "chapters/100-room-for-the-steadiest-world.md",
-          "experiment": "E31",
+          "experiments": [
+            "E31"
+          ],
           "status": "analysed"
         },
         {
@@ -490,7 +528,9 @@
           "title": "Births as rich as the neighbours",
           "note": "Experiment 32: Experiment 31's estate worlds with a child that must start with at least the median holding of its parent's neighbours. The floor changed nothing: in a world of paupers the neighbours hold a token, below the ten every child gets. The paupers are made by the game within twenty iterations, not at birth; a world's size is a hundred times its births; and the estate worlds are spaces because their young are the parents.",
           "file": "chapters/101-births-as-rich-as-the-neighbours.md",
-          "experiment": "E32",
+          "experiments": [
+            "E32"
+          ],
           "status": "analysed"
         },
         {
@@ -498,7 +538,10 @@
           "title": "The floor in plain B2 and in B1",
           "note": "Experiments 36 and 37: the floor of Chapter 101 (a child never poorer than its parent's neighbours' median) in plain B2, whose least child is ten tokens, and in B1, whose least child is one: idle in one, binding in the other?",
           "file": "chapters/105-the-floor-in-plain-b2-and-in-b1.md",
-          "experiment": "E36",
+          "experiments": [
+            "E36",
+            "E37"
+          ],
           "status": "ready"
         }
       ]
@@ -510,7 +553,9 @@
           "id": "60",
           "title": "Worlds of 100,000 tokens",
           "file": "chapters/60-worlds-of-100000-tokens.md",
-          "experiment": "E10",
+          "experiments": [
+            "E10"
+          ],
           "status": "analysed"
         },
         {
@@ -569,7 +614,9 @@
           "id": "69",
           "title": "A hundred thousand iterations",
           "file": "chapters/69-a-hundred-thousand-iterations.md",
-          "experiment": "E11",
+          "experiments": [
+            "E11"
+          ],
           "status": "draft"
         },
         {
@@ -577,7 +624,9 @@
           "title": "Five mixed worlds, fifty thousand iterations",
           "note": "The five worlds of Experiment 17 that met every mark, played on to 50,000 iterations: three died out, the two that lived grew larger and poorer, and evolution faded — a mixed world is mortal.",
           "file": "chapters/81-five-mixed-worlds-fifty-thousand-iterations.md",
-          "experiment": "E18",
+          "experiments": [
+            "E18"
+          ],
           "status": "analysed"
         },
         {
@@ -585,7 +634,9 @@
           "title": "The candidates, played on",
           "note": "Meta X's candidates — worlds that met every mark with diverse agents at iteration 1,000 — played on to 10,000: five of nineteen held, eleven fell back (most into B2's poverty), three died out on the way; diversity wore off, no rich world stayed a space, evolution slowed. Experiment 20 shows the lab plays a pilot's world game for game.",
           "file": "chapters/92-the-candidates-played-on.md",
-          "experiment": "E20",
+          "experiments": [
+            "E20"
+          ],
           "status": "analysed"
         },
         {
@@ -593,7 +644,9 @@
           "title": "Five more seeds for the rules that held",
           "note": "Experiment 21: the rules whose candidate held over 10,000 iterations, in five new worlds each. None held more often than mixing alone (fast brain change two of five, no random inputs and no revolutions one each, against three); without random inputs or revolutions, three worlds died out.",
           "file": "chapters/93-five-more-seeds-for-the-rules-that-held.md",
-          "experiment": "E21",
+          "experiments": [
+            "E21"
+          ],
           "status": "analysed"
         }
       ]
@@ -663,7 +716,9 @@
           "title": "Every era against three",
           "note": "Experiment 28: every 2,500th era of Experiment 18's two longest worlds against the brains of 2,500, 10,000 and 25,000. Climbing stopped by about 25,000 in both; afterwards one world went round a circle (later brains beat the brains of 25,000 and lost ground against those of 2,500) and the other went a little back. The thesis fails by its second part. A best reply still gains a node a game at every era: a plateau, not a top.",
           "file": "chapters/95-every-era-against-three.md",
-          "experiment": "E28",
+          "experiments": [
+            "E28"
+          ],
           "status": "analysed"
         },
         {
@@ -671,7 +726,9 @@
           "title": "How large a crowd a raider needs",
           "note": "Experiment 29: raider patches of 1 to 100 agents and of 5% in two evolved worlds, and 5% in all ten, each with a control. No patch of up to 30 raiders took hold; 100 did in 4 of 20 and 5% in 12 of 20. The valley evolution would have to cross is about a hundred agents wide; and the world decides as much as the crowd (13 of 50 places across ten worlds).",
           "file": "chapters/96-how-large-a-crowd-a-raider-needs.md",
-          "experiment": "E29",
+          "experiments": [
+            "E29"
+          ],
           "status": "analysed"
         },
         {
@@ -679,7 +736,9 @@
           "title": "Does evolution close the door?",
           "note": "Experiment 30: raiders planted in B2's five worlds played on, at 500, 2,000, 5,000 and 10,000. The door closed (15, 4, 0 and 0 of 15 took hold) but not by a defence: residents hardly fought the late raiders, which could not raid at all, because the patches they started from had grown poorer than the three tokens a raid needs. A world of many small agents shuts out lone raiders (and, Chapter 102 found later, crews too).",
           "file": "chapters/97-does-evolution-close-the-door.md",
-          "experiment": "E30",
+          "experiments": [
+            "E30"
+          ],
           "status": "analysed"
         },
         {
@@ -687,7 +746,9 @@
           "title": "A crew of raiders",
           "note": "Experiment 33: raiders that pool their stakes as revolution tokens, planted where lone raiders could no longer take hold. No crew took hold anywhere, and crews died before the lone raiders in 42 of 45 places: most of a late patch holds one token and cannot stake, a stranger borders 1.6 of its agents so mobs hardly form, and a stake without a partner goes to the stranger. Neither raider breeds in a poor world.",
           "file": "chapters/102-a-crew-of-raiders.md",
-          "experiment": "E33",
+          "experiments": [
+            "E33"
+          ],
           "status": "analysed"
         },
         {
@@ -695,7 +756,9 @@
           "title": "Raiders that breed",
           "note": "Experiment 34: the raider and the turtle given a child of ten tokens whenever they hold more, as the world's own agents breed, planted where the barren raiders failed (B2's worlds at 2,000, 5,000 and 10,000): does breeding open the door, and is it the raid that does it?",
           "file": "chapters/103-raiders-that-breed.md",
-          "experiment": "E34",
+          "experiments": [
+            "E34"
+          ],
           "status": "ready"
         },
         {
@@ -703,7 +766,9 @@
           "title": "Hand-written strategies in B1",
           "note": "Experiment 35: the raiders failed in B2's late worlds for reasons that are B2's rules (a home share, a holder's bonus, old age, a least child of ten). Lone raiders, crews, breeding raiders and turtles, their rules now reading each world's own, planted in B1's two long worlds, which have none of them, counted by the tokens they hold.",
           "file": "chapters/104-hand-written-strategies-in-b1.md",
-          "experiment": "E35",
+          "experiments": [
+            "E35"
+          ],
           "status": "ready"
         }
       ]
@@ -716,7 +781,9 @@
           "title": "A screen of random worlds",
           "note": "The author's plan of 22 October 2026: rounds of fifty worlds whose settings are all drawn at random (switches on in half, numbers at their default in three of four, messages and noise absent in one of ten), each judged by five lines of health at 2,000; values that made every world unhealthy, beyond chance, are set aside round by round, until a healthy configuration is found. Round 1 is Experiment 38.",
           "file": "chapters/106-a-screen-of-random-worlds.md",
-          "experiment": "E38",
+          "experiments": [
+            "E38"
+          ],
           "status": "ready"
         }
       ]

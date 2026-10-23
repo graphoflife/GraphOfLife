@@ -58,13 +58,37 @@ def number(n: int) -> str:
     return f"{n:,}"
 
 
+def slug(heading: str) -> str:
+    """
+    A heading's id as GitHub makes it, and the notebook's tab with it (markdown.js):
+    the text a reader sees, in lower case, every character but a letter, a digit,
+    `_`, `-` or a space dropped, each space a dash.
+    """
+    text = re.sub(r"!\[[^\]]*\]\([^)]*\)", "", heading)
+    text = re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", text)
+    text = re.sub(r"<[^>]*>|[*`$]|(?<!\w)_|_(?!\w)", "", text)
+    return re.sub(r"[^\w\- ]", "", text.strip().lower()).replace(" ", "-") or "section"
+
+
+def anchors(md_text: str) -> List[str]:
+    """The ids of a page's headings, in order; a second of the same name gets `-1`, as on GitHub."""
+    text = re.sub(r"^```.*?^```", "", md_text, flags=re.S | re.M)
+    seen: Dict[str, int] = {}
+    out = []
+    for heading in re.findall(r"^#{1,6}\s+(.*?)\s*$", text, re.M):
+        base = slug(heading)
+        out.append(f"{base}-{seen[base]}" if base in seen else base)
+        seen[base] = seen.get(base, 0) + 1
+    return out
+
+
 # ---------------------------------------------------------------------------
 # The blocks
 # ---------------------------------------------------------------------------
 
 def linked(md: str, text: str) -> str:
     """Every "Chapter 13" in a text made by code, as a link to that chapter."""
-    files = {c["id"]: c["file"] for c in chapters() if c.get("file")}
+    files = {c["id"]: c["file"] for c in pages() if c.get("file")}
 
     def to(match: "re.Match[str]") -> str:
         target = files.get(match.group(1))
@@ -294,8 +318,25 @@ def runs(md: str, name: str) -> str:
     return f"{summary}\n\n{every}"
 
 
-def chapters() -> List[Dict[str, Any]]:
+def pages() -> List[Dict[str, Any]]:
+    """Every page of the notebook's index, written or not, in reading order."""
     return [c for part in read_json("book.json")["parts"] for c in part["chapters"]]
+
+
+def page_file(page: str) -> str:
+    """The file of a written page, by its id, as a path under book/."""
+    for c in pages():
+        if c["id"] == page and c.get("file"):
+            return c["file"]
+    raise KeyError(f"no written page {page!r} in book.json")
+
+
+def home_of(experiment: str) -> Dict[str, Any]:
+    """The page that reports an experiment: the first, in reading order, that lists it."""
+    for c in pages():
+        if experiment in c.get("experiments", []) and c.get("file"):
+            return c
+    raise LookupError(f"no page of book.json reports {experiment}")
 
 
 def heading(c: Dict[str, Any]) -> str:
@@ -322,7 +363,7 @@ def contents(md: str, _: str) -> str:
 
 def turns(md: str, _: str) -> str:
     """The chapters before and after this one, in the order of book.json."""
-    written = [c for c in chapters() if c.get("file") and re.fullmatch(r"\d+|[A-Z]", c["id"])]
+    written = [c for c in pages() if c.get("file") and re.fullmatch(r"\d+|[A-Z]", c["id"])]
     files = [c["file"] for c in written]
     if md not in files:
         return f"[Contents]({link(md, 'README.md')})"
