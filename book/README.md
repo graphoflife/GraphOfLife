@@ -3,7 +3,7 @@
 This book is a research programme, written down while it is carried out. It
 asks what the Graph of Life algorithm actually does — and, later, whether it
 can be made to keep producing new things without end, which is what
-*open-ended evolution* means. [Chapter 1](chapters/01-what-this-book-is-about.md)
+*open-ended evolution* means. [Chapter 1](pages/what-this-notebook-is-about.md)
 says why, and where to start.
 
 It is written to be **read on its own**. Part I explains the algorithm
@@ -15,7 +15,7 @@ everything can be checked with it.
 
 ## How to read it
 
-- **In order**, from [Chapter 1](chapters/01-what-this-book-is-about.md): each
+- **In order**, from [Chapter 1](pages/what-this-notebook-is-about.md): each
   chapter ends with a link to the next.
 - **By question**: every chapter starts with the questions it asks.
 - **By idea**: the notes below are short and linked from wherever they are
@@ -281,24 +281,24 @@ already exist from another side.
 ## The rules
 
 - **One change at a time.** Every experiment changes one setting of a stated
-  baseline ([Every setting](notes/settings.md)) and keeps everything else.
+  baseline ([Every setting](pages/settings.md)) and keeps everything else.
 - **The thesis comes first.** It is fixed in the plan before the runs start.
 - **Enough seeds.** A difference seen in fewer than thirty seeds per
   condition is called *indicative*, not an effect: results in this project
   have reversed between six seeds and twenty
-  ([How many seeds](notes/seeds-needed.md)).
+  ([How many seeds](pages/seeds-needed.md)).
 - **No number without its null.** A measurement is reported next to what it
   would be by chance.
 - **Every run can be made again.** Each simulation records its seed, the
   frozen copy of the engine it ran on and the commit it came from, and the
   versions of Python, numpy and networkx, beside it in `provenance.json`
-  ([Chapter 8](chapters/08-is-a-run-reproducible.md)).
+  ([Chapter 8](pages/is-a-run-reproducible.md)).
 - **The dead are counted apart.** A world that dies out did not end up
   anywhere, so where the worlds of a condition end up is measured over the
   worlds that lived to the end, and the dead are reported beside them as an
-  outcome of their own ([When a world ends](notes/extinction.md)).
+  outcome of their own ([When a world ends](pages/extinction.md)).
 - **A run is measured over its settled life**, from iteration 500 to its end
-  ([The settled life](notes/settled-life.md)).
+  ([The settled life](pages/settled-life.md)).
 - **Runs are shared.** A run is named for what it is — baseline, world size,
   what differs, seed — so an experiment that needs runs which already exist
   uses them.
