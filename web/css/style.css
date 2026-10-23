@@ -1833,7 +1833,10 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   border-radius: 12px;
   background: var(--panel);
   color: var(--text);
-  overflow: hidden;
+  /* clip, not hidden: a box that hides its overflow can still be scrolled by
+     script, and focusing a button far out to the right once scrolled a whole
+     dialog sideways, its contents out of view. */
+  overflow: clip;
 }
 .sim-dialog::backdrop { background: rgba(3, 6, 10, 0.66); backdrop-filter: blur(2px); }
 /* A dialog is display:block when open and display:none when closed, so the
@@ -1867,6 +1870,16 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   border-bottom: 1px solid var(--border);
 }
 .sim-dialog-head h2 { margin: 0; font-size: 17px; flex: 0 0 auto; }
+/* A run's settings are headed by its name, which can be hundreds of characters
+   long: the title shrinks to what fits, so the close button and the settings
+   below stay on screen. */
+.settings-dialog .sim-dialog-head h2 {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 /* What it will be called sits with the title, not as the first of twenty-two
    settings — and it buys the settings the room to all be on screen at once. */
 .name-in-head { flex: 1 1 auto; max-width: 340px; }
@@ -1901,12 +1914,12 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
 }
 .sim-dialog .form-error { flex: 1 1 auto; min-width: 0; }
 
-.settings-dialog { width: min(760px, calc(100vw - 40px)); }
+.settings-dialog { width: min(980px, calc(100vw - 40px)); }
 .settings-body {
   padding: 14px 18px 18px;
   overflow-y: auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(216px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
   gap: 8px 22px;
   align-content: start;
 }
@@ -1926,6 +1939,19 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   font-size: 11.5px;
 }
 .settings-body dt { color: var(--muted); min-width: 0; }
+/* The settings this run changed from its baseline. */
+.settings-body dt.is-changed { color: var(--accent); }
+.settings-body dt.is-changed::before { content: '● '; font-size: 8px; vertical-align: 1px; }
+.settings-body dd.setting-meaning {
+  grid-column: 1 / -1;
+  margin: 0 0 6px;
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 10.5px;
+  line-height: 1.4;
+  text-align: left;
+}
+.settings-body .setting-more { color: var(--accent); white-space: nowrap; }
 .settings-body dd {
   margin: 0;
   color: var(--text);

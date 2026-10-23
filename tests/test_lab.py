@@ -796,35 +796,60 @@ def _judge():
     return judge
 
 
-def test_chance_alone_rarely_sets_a_value_aside():
-    """Rounds whose worlds are healthy at random, whatever their values: hardly ever is a value forced off."""
-    got = _judge().null(rounds=20, share=0.2)
-    assert got["forcings_per_round"] <= 0.1, got
+def _world(changed, fate="lived", interesting=False, healthy=False):
+    return {"round": "R1", "drawn": True, "fate": fate, "set": changed, "sampler": 1,
+            "moments": {"2000": {"interesting": interesting, "healthy": healthy}}}
 
 
-def test_a_value_that_spoils_every_world_is_set_aside():
-    """
-    Worlds without a cap on links never healthy and always grown into hubs, the others healthy in two
-    of five: by the line of the network, the uncapped value is forced off within a round, and nothing
-    else is; a setting always keeps a value.
-    """
+def _drawn(n, seed=77, **wanted):
+    """n drawn worlds (in order) whose settings have the values asked for."""
     import gol_screen
+    found, i = [], 0
+    while len(found) < n:
+        i += 1
+        changed, _ = gol_screen.draw(1, seed, i)
+        full = gol_screen.full(changed)
+        if all(full[k] == v for k, v in wanted.items()):
+            found.append(changed)
+    return found
+
+
+def test_a_world_that_misses_one_criterion_is_still_interesting():
+    """The author's room for variability: alive, and at most one of the other criteria missed."""
+    C = _judge().C
+    everything = {key: True for key in C.KEYS}
+    assert C.healthy(everything) and C.interesting(everything)
+    one_off = {**everything, "space": False}
+    assert not C.healthy(one_off) and C.interesting(one_off)
+    two_off = {**one_off, "uneven": False}
+    assert not C.interesting(two_off)
+    assert not C.interesting({**everything, "alive": False})
+
+
+def test_a_value_is_marked_bad_only_after_ten_worlds_that_all_died_or_were_all_dull():
+    """
+    The author's rule: tried in at least ten worlds where it could matter, and every one died, or
+    none was interesting. Nine are not enough, and one interesting world among ten saves a value.
+    """
     judge = _judge()
-    rng = __import__("numpy").random.default_rng(3)
-    worlds = []
-    for i in range(1, 51):
-        changed, _ = gol_screen.draw(1, 77, i)
-        capped = gol_screen.full(changed)["valence"] != 0
-        healthy = capped and rng.random() < 0.4
-        ok = {line: True for line in judge.LINES} if healthy else \
-            {"alive": True, "network": capped and rng.random() < 0.8, "space": rng.random() < 0.5,
-             "diverse": rng.random() < 0.5, "uneven": rng.random() < 0.5}
-        worlds.append({"round": "R1", "drawn": True, "fate": "lived", "set": changed, "sampler": 1,
-                       "moments": {"2000": {"lines": ok, "healthy": healthy}}})
-    got = judge.forcing(worlds, {})
-    forced = {(v["setting"], json.dumps(v["value"])) for v in got["values"] if v["force"]}
-    assert forced == {("valence", "0")}, forced
-    assert got["forced_next"] == {"valence": [0]}
+    # Worlds without a cap on links, every one dead; the others interesting.
+    dead = [_world(c, fate="died") for c in _drawn(10, valence=0)]
+    living = [_world(c, interesting=True) for c in _drawn(12, seed=78, valence=4)]
+    got = judge.marking(dead + living, {})
+    bad = {(v["setting"], json.dumps(v["value"])) for v in got["values"] if v["bad"]}
+    assert ("valence", "0") in bad, bad
+    assert got["forced_next"]["valence"] == [0]
+    assert not any(s == "valence" and v != "0" for s, v in bad)
+    # Nine dead worlds: not yet.
+    got = judge.marking(dead[:9] + living, {})
+    assert not any(v["bad"] for v in got["values"] if v["setting"] == "valence" and v["value"] == 0)
+    # Ten worlds, none dead but none interesting: marked. One of them interesting: saved.
+    dull = [_world(c) for c in _drawn(10, valence=0)]
+    got = judge.marking(dull + living, {})
+    assert any(v["bad"] for v in got["values"] if v["setting"] == "valence" and v["value"] == 0)
+    saved = dull[:9] + [_world(dull[9]["set"], interesting=True)]
+    got = judge.marking(saved + living, {})
+    assert not any(v["bad"] for v in got["values"] if v["setting"] == "valence" and v["value"] == 0)
 
 
 def test_an_experiment_that_cannot_be_read_holds_up_no_other():

@@ -1,41 +1,28 @@
 """
 Judging a round of the screen of random worlds (the author's plan of
-2026-10-22): every world read at 1,000 and 2,000 by the five lines of health,
-how often each drawn value came with a healthy world, and the values the next
-round forces off. No world is played: every reading comes from the worlds'
-archives.
+2026-10-22 and rule of 2026-10-23): every world read at 1,000 and 2,000 by the
+criteria of research/screen/criteria.py, and the drawn values marked bad. No
+world is played: every reading comes from the worlds' archives.
 
-The five lines, all of which a healthy world meets:
-
-  alive      more than 20 agents at 2,000, and not stopped as too slow
-  network    the health bar's marks besides dimension: one piece, at least 80%
-             in the 2-core, no agent's loss cutting off more than 2% and no
-             link's more than 1%, no agent linked to more than 5% of the
-             others, 3 to 12 links per agent
-  space      a dimension of 2 to 4 by ball growth, and a typical distance at
-             least 1.5 times its random twin's: a true space, not a small world
-  diverse    a diversity score (tokens, links, ages, genotypes) above B2's
-             median world at the same iteration, and decisions as varied: the
-             effective kinds of staking (research/oee/checks/diversity.py, read
-             from the archive with no game played) above B2's median, both as a
-             mean over the iteration and the one 500 before it, since the kinds
-             swing from one moment to the next
-  uneven     a Gini of the tokens no lower than B2's least even world
+A world is healthy when it meets every criterion, and interesting when it is
+alive and misses at most one of the others. The criteria are listed, with what
+each asks, in research/screen/criteria.py; the judge supplies the readings: the
+health bar, width, diversity score and Gini from research/atlas/readings.py, and
+the effective kinds of staking (research/oee/checks/diversity.py, read from the
+archive with no game played) as a mean over the moment and the one 500 before
+it, since the kinds swing from one moment to the next.
 
 B2's lines are Experiment 16's ten worlds, read the same way (--reference).
 
-Forcing values off: the author's rule, that a value which made every world it
-appeared in unhealthy is drawn no more, kept from chance. A value is forced off
-when every world it appeared in was unhealthy and the chance of that, were the
-round's healthy worlds spread among its worlds at random, is below 0.05 divided
-by the number of values judged (the chance is exact, a ratio of binomial
-coefficients, and rounds multiply). The same is asked line by line, among the
-worlds alive for every line but the first. A value is judged only among the
-worlds where it could vary; a setting keeps at least one value.
+Marking a value bad: the author's rule. A value is marked bad when it was drawn
+in at least ten worlds where it could matter, and every one of them died, or
+none of them was interesting. Beside each, the report gives how likely that
+would be by chance alone (the exact chance were the interesting worlds spread
+at random): a warning when a marking may be luck, not a gate. A setting keeps
+at least one value.
 
     python3 research/screen/judge.py --reference                 B2's lines (research/screen/reference.json)
     python3 research/screen/judge.py E38 [E39 ...] [--jobs 4]    every round so far, read and judged
-    python3 research/screen/judge.py --null                      how often chance alone would force a value off
 
 Writes GraphOfLifeRuns/.pilots/screen/readings.json (every reading, kept between calls),
 research/screen/<last round>.json (the judgement) and prints the next round's `forced`.
@@ -61,14 +48,14 @@ import gol_plan  # noqa: E402
 import gol_screen  # noqa: E402
 import gol_store  # noqa: E402
 
+sys.path.insert(0, HERE)
+import criteria as C  # noqa: E402
+
 READINGS = os.path.join(gol_store.BASE_DIR, ".pilots", "screen", "readings.json")
 REFERENCE = os.path.join(HERE, "reference.json")
 REFERENCE_RUNS = [f"B2-10000-s{s:03d}" for s in range(1, 11)]
 MOMENTS = (1000, 2000)
 EARLIER = 500                       # the decisions are a mean over the moment and the one this much before
-LINES = ("alive", "network", "space", "diverse", "uneven")
-NETWORK_MARKS = ("one piece", "2-core", "agent cut", "link cut", "no hub", "links")
-ALPHA = 0.05
 SMALL = 30                          # fewer agents than this: no decisions are read
 
 
@@ -148,21 +135,6 @@ def kinds_at(have: Dict[Tuple[str, int], Dict[str, Any]], run_id: str, at: int) 
     return float(np.mean(values)) if values else None
 
 
-def lines(r: Optional[Dict[str, Any]], kinds: Optional[float], alive: bool, ref: Dict[str, float]) -> Dict[str, bool]:
-    """Which of the five lines a world meets at one moment."""
-    if not alive or r is None or r.get("dead") or r.get("error"):
-        return {line: False for line in LINES}
-    bar = r.get("bar") or {}
-    dim = r.get("dimension")
-    return {
-        "alive": True,
-        "network": all(bool(bar.get(mark)) for mark in NETWORK_MARKS),
-        "space": dim is not None and 2.0 <= dim <= 4.0 and (r.get("wide") or 0.0) >= 1.5,
-        "diverse": (r.get("diversity") or 0.0) > ref["diversity"] and kinds is not None and kinds > ref["kinds"],
-        "uneven": (r.get("gini_tokens") or 0.0) >= ref["gini"],
-    }
-
-
 def reference(jobs: int) -> Dict[str, Dict[str, float]]:
     """B2's lines at each moment: Experiment 16's ten worlds read as every screened world is."""
     items = [(run, it) for run in REFERENCE_RUNS for at in MOMENTS for it in (at - EARLIER, at)]
@@ -213,9 +185,10 @@ def judge_worlds(worlds: List[Dict[str, Any]], ref: Dict[str, Dict[str, float]],
             alive = (w["fate"] == "lived" or w["ended_at"] > at) and r is not None and r.get("agents", 0) > 20
             if at == MOMENTS[-1]:
                 alive = alive and w["fate"] == "lived"
-            got = lines(r, kinds_at(have, w["id"], at), alive, ref[str(at)])
-            w["moments"][str(at)] = {"lines": got, "healthy": all(got.values()),
-                                     "score": sum(got.values()) / len(LINES),
+            got = C.meets(r, kinds_at(have, w["id"], at), alive, ref[str(at)])
+            w["moments"][str(at)] = {"criteria": got, "healthy": C.healthy(got),
+                                     "interesting": C.interesting(got),
+                                     "score": sum(got.values()) / len(C.KEYS),
                                      "reading": {k: (r or {}).get(k) for k in
                                                  ("agents", "marks", "dimension", "wide", "diversity",
                                                   "gini_tokens", "tokens_per_agent", "hub", "agent_cut")},
@@ -233,65 +206,47 @@ def applies(setting: gol_screen.Setting, full: Dict[str, Any]) -> bool:
     return gol_screen._applies(setting[3], full)
 
 
-def forcing(worlds: List[Dict[str, Any]], forced: Dict[str, List[Any]], at: int = MOMENTS[-1]) -> Dict[str, Any]:
+def marking(worlds: List[Dict[str, Any]], forced: Dict[str, List[Any]], at: int = MOMENTS[-1]) -> Dict[str, Any]:
     """
-    Every drawn value's record, and the values chance cannot explain: healthy never, or one line never,
-    among enough worlds. Only drawn worlds that finished count; a value only where its setting applies.
+    Every drawn value's record, and the values marked bad by the author's rule: tried in at least
+    C.TRIED_AT_LEAST worlds where it could matter, and every one died, or none was interesting.
+    Only drawn worlds that finished count, over every round judged.
     """
     judged = [w for w in worlds if w["drawn"] and w["fate"] in ("lived", "died", "too slow")]
     version = judged[0]["sampler"] if judged else 1
     space = gol_screen.space(version)
     fulls = [gol_screen.full(w["set"], version) for w in judged]
-    rounds = sorted({w["round"] for w in judged})
     records = []
     for setting in space:
         name = setting[0]
+        eligible = [(w, f) for w, f in zip(judged, fulls) if applies(setting, f)]
+        died_all = sum(1 for w, _ in eligible if w["fate"] == "died")
+        good_all = sum(1 for w, _ in eligible if w["moments"][str(at)]["interesting"])
         for value in gol_screen.values_of(setting):
             if value in forced.get(name, []):
                 continue
-            eligible = [(w, f) for w, f in zip(judged, fulls) if applies(setting, f)]
-            if not any(f[name] == value for _, f in eligible):
+            mine = [w for w, f in eligible if f[name] == value]
+            if not mine:
                 continue
-            rec = {"setting": name, "value": value, "worlds": 0, "healthy": 0, "lines": {}}
-            for test in ("healthy",) + LINES:
-                chance, seen, good_with = 1.0, 0, 0
-                for rnd in rounds:
-                    pool = [(w, f) for w, f in eligible if w["round"] == rnd]
-                    if test not in ("healthy", "alive"):
-                        pool = [(w, f) for w, f in pool if w["moments"][str(at)]["lines"]["alive"]]
-                    meets = [w["moments"][str(at)]["healthy"] if test == "healthy"
-                             else w["moments"][str(at)]["lines"][test] for w, _ in pool]
-                    with_value = [m for (w, f), m in zip(pool, meets) if f[name] == value]
-                    seen += len(with_value)
-                    good_with += sum(with_value)
-                    chance *= exact_chance(len(pool), sum(meets), len(with_value)) if not any(with_value) else 1.0
-                if test == "healthy":
-                    rec["worlds"], rec["healthy"], rec["chance"] = seen, good_with, chance if good_with == 0 else 1.0
-                else:
-                    rec["lines"][test] = {"worlds": seen, "met": good_with,
-                                          "chance": chance if good_with == 0 else 1.0}
-            records.append(rec)
-    m = len(records)
-    line_tests = m * len(LINES)
-    out = []
-    for rec in records:
-        reasons = []
-        if rec["healthy"] == 0 and rec["chance"] < ALPHA / max(1, m):
-            reasons.append(f"no healthy world among {rec['worlds']} (chance {rec['chance']:.2g})")
-        for line, got in rec["lines"].items():
-            if got["met"] == 0 and got["worlds"] and got["chance"] < ALPHA / max(1, line_tests):
-                reasons.append(f"line {line} met by none of {got['worlds']} (chance {got['chance']:.2g})")
-        rec["force"] = reasons
-        out.append(rec)
-    # A setting keeps at least one value.
+            died = sum(1 for w in mine if w["fate"] == "died")
+            good = sum(1 for w in mine if w["moments"][str(at)]["interesting"])
+            healthy = sum(1 for w in mine if w["moments"][str(at)]["healthy"])
+            reasons = []
+            if len(mine) >= C.TRIED_AT_LEAST:
+                if died == len(mine):
+                    reasons.append(f"all {len(mine)} worlds died (chance {exact_chance(len(eligible), len(eligible) - died_all, len(mine)):.2g})")
+                elif good == 0:
+                    reasons.append(f"none of {len(mine)} worlds was interesting (chance {exact_chance(len(eligible), good_all, len(mine)):.2g})")
+            records.append({"setting": name, "value": value, "worlds": len(mine), "died": died,
+                            "interesting": good, "healthy": healthy, "bad": reasons})
     proposal: Dict[str, List[Any]] = {k: list(v) for k, v in forced.items()}
     for setting in space:
         name = setting[0]
-        to_force = [r["value"] for r in out if r["setting"] == name and r["force"]]
-        left = [v for v in gol_screen.values_of(setting) if v not in proposal.get(name, []) and v not in to_force]
-        if to_force and left:
-            proposal[name] = proposal.get(name, []) + to_force
-    return {"values": out, "judged": len(judged), "values_judged": m, "forced_next": proposal}
+        bad = [r["value"] for r in records if r["setting"] == name and r["bad"]]
+        left = [v for v in gol_screen.values_of(setting) if v not in proposal.get(name, []) and v not in bad]
+        if bad and left:
+            proposal[name] = proposal.get(name, []) + bad
+    return {"values": records, "judged": len(judged), "forced_next": proposal}
 
 
 def judge(rounds: List[str], jobs: int) -> Dict[str, Any]:
@@ -301,63 +256,39 @@ def judge(rounds: List[str], jobs: int) -> Dict[str, Any]:
     worlds = worlds_of(rounds)
     judge_worlds(worlds, ref, jobs)
     forced = gol_plan.read_plan(rounds[-1])["screen"].get("forced") or {}
-    verdict = forcing(worlds, forced)
-    healthy = [w["id"] for w in worlds if w["moments"][str(MOMENTS[-1])]["healthy"]]
-    out = {"rounds": rounds, "reference": ref, "worlds": worlds, "healthy": healthy, **verdict}
+    verdict = marking(worlds, forced)
+    at = str(MOMENTS[-1])
+    healthy = [w["id"] for w in worlds if w["moments"][at]["healthy"]]
+    interesting = [w["id"] for w in worlds if w["moments"][at]["interesting"]]
+    out = {"rounds": rounds, "reference": ref, "criteria": C.CRITERIA, "worlds": worlds, "healthy": healthy,
+           "interesting": interesting, **verdict}
     with open(os.path.join(HERE, f"{rounds[-1]}.json"), "w") as f:
         json.dump(out, f, indent=1, default=str)
     return out
-
-
-# ---------------------------------------------------------------------------
-# How often chance alone forces a value off
-# ---------------------------------------------------------------------------
-
-def null(rounds: int = 200, worlds: int = 50, share: float = 0.2, seed: int = 1) -> Dict[str, float]:
-    """Rounds of drawn worlds made healthy at random, whatever their values: how often a value is forced."""
-    rng = np.random.default_rng(seed)
-    forced_rounds, forcings = 0, 0
-    for r in range(rounds):
-        fake = []
-        for i in range(1, worlds + 1):
-            changed, _ = gol_screen.draw(1, 10_000 + r, i)
-            lines_ok = {line: bool(rng.random() < (1.0 if line == "alive" else 0.6)) for line in LINES}
-            healthy = bool(rng.random() < share)
-            if healthy:
-                lines_ok = {line: True for line in LINES}
-            fake.append({"round": "N", "drawn": True, "fate": "lived", "set": changed, "sampler": 1,
-                         "moments": {str(MOMENTS[-1]): {"lines": lines_ok, "healthy": healthy}}})
-        got = forcing(fake, {})
-        n = sum(1 for v in got["values"] if v["force"])
-        forcings += n
-        forced_rounds += n > 0
-    return {"rounds": rounds, "rounds_with_a_forcing": forced_rounds / rounds, "forcings_per_round": forcings / rounds}
 
 
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("rounds", nargs="*")
     ap.add_argument("--reference", action="store_true")
-    ap.add_argument("--null", action="store_true")
     ap.add_argument("--jobs", type=int, default=4)
     a = ap.parse_args()
     if a.reference:
         print(json.dumps(reference(a.jobs), indent=1))
-    if a.null:
-        print(json.dumps(null(), indent=1))
     if a.rounds:
         out = judge(a.rounds, a.jobs)
         at = str(MOMENTS[-1])
         fates = {}
         for w in out["worlds"]:
             fates[w["fate"]] = fates.get(w["fate"], 0) + 1
-        print("worlds:", len(out["worlds"]), fates, "healthy at 2,000:", out["healthy"])
-        for line in LINES:
-            met = sum(1 for w in out["worlds"] if w["moments"][at]["lines"][line])
-            print(f"  line {line}: {met} worlds")
+        print("worlds:", len(out["worlds"]), fates, "healthy at 2,000:", out["healthy"],
+              "interesting:", len(out["interesting"]))
+        for c in C.CRITERIA:
+            met = sum(1 for w in out["worlds"] if w["moments"][at]["criteria"][c["key"]])
+            print(f"  {c['name']}: {met} worlds")
         for v in out["values"]:
-            if v["force"]:
-                print("force off:", v["setting"], v["value"], "—", "; ".join(v["force"]))
+            if v["bad"]:
+                print("bad:", v["setting"], v["value"], "—", "; ".join(v["bad"]))
         print("forced next round:", json.dumps(out["forced_next"]))
 
 

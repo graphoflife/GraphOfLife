@@ -84,6 +84,7 @@ declare -A stamp_in=(
   ["${out}/js/home.js"]="data/home-run.bin"
   ["${out}/js/docpage.js"]="data/Research.md|data/Literature.md|data/Graphs.md"
   ["${out}/js/book.js"]="book/book.json"
+  ["${out}/js/runs.js"]="book/settings.json"
 )
 for file in "${!stamp_in[@]}"; do
   IFS='|' read -ra names <<< "${stamp_in[$file]}"

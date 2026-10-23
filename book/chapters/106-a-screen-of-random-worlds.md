@@ -22,7 +22,9 @@ time, and each paid for one line with another:
 The settings decide what grows, and one at a time is slow. This chapter
 follows the author's plan of 22 October 2026 instead: rounds of fifty worlds
 whose settings are all drawn at random, each judged for health. After each
-round, a value that made every world it appeared in unhealthy is set aside,
+round, a value that made every world it appeared in unhealthy is set aside
+(by a rule the author changed before round 1 was judged; see
+[What makes a world interesting](../notes/what-makes-a-world-interesting.md)),
 and the next fifty are drawn. Rounds go on until some configuration is
 healthy. Only then are strategies tested in it: hand-written ones, and the
 growth of groups ([Part IX](94-what-a-brain-can-compute.md)).
@@ -96,6 +98,19 @@ be by chance.
   other worlds do not, is set aside too.
 - **Like with like:** a value is judged only among the worlds where it could
   have made a difference.
+
+> [!info] Added later (2026-10-23): the author's rule
+> Before round 1 was judged, the author set a simpler rule, and it replaces the
+> one above. A value is marked bad, and drawn no more, only when it was tried in
+> at least ten worlds where it could matter and every one of them died, or none
+> of them was interesting. A world is interesting when it is alive and misses at
+> most one of the other criteria; the five lines became six, the network line
+> split into *decentralised* and *resilient*. The criteria, the lines of B2 they
+> are measured against, and the rule are on their own page,
+> [What makes a world interesting](../notes/what-makes-a-world-interesting.md).
+> The judge still prints, beside each value marked bad, how likely that would be
+> by chance alone. The thesis of round 1 is unchanged: it asks for one healthy
+> world, one that meets every criterion.
 
 ## The thesis of round 1
 

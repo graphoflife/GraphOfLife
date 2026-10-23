@@ -222,6 +222,7 @@ everything can be checked with it.
 - [Flows that go round](notes/circulation.md)
 - [Help](notes/help.md)
 - [Flow modules and the map equation](notes/map-equation.md)
+- [What makes a world interesting](notes/what-makes-a-world-interesting.md)
 - [What would count as open-ended evolution](notes/open-ended-test.md)
 
 **Notes · statistics**

@@ -118,19 +118,44 @@ const Book = {
     return this.chapters().find(c => c.id === id);
   },
 
-  async load() {
-    if (this.index) return;
+  /**
+   * The index, read once, and the page last open. Callers that arrive while it is
+   * being read share the one reading, so a page opened from elsewhere (a setting's
+   * explanation) is not overwritten by the page the reading then opens.
+   */
+  load() {
+    if (!this.loading) {
+      this.loading = this.readIndex().then(read => {
+        if (!read) this.loading = null;           // read again next time
+      });
+    }
+    return this.loading;
+  },
+
+  async readIndex() {
+    if (this.index) return true;
     try {
       this.index = await this.json('book.json');
     } catch (err) {
       this.page.innerHTML = `<p class="md-status">Could not read the book: ${
         Markdown.escape(String(err.message))}</p>`;
-      return;
+      return false;
     }
     let remembered = null;
     try { remembered = localStorage.getItem(this.STORE); } catch (err) { /* private window */ }
     const first = this.chapters().find(c => c.file);
     await this.open(this.chapter(remembered)?.file ? remembered : first.id);
+    return true;
+  },
+
+  /** The page that explains every setting. */
+  SETTINGS: 'notes/settings.md',
+
+  /** The notebook opened at one setting's explanation, as a run's settings link to it. */
+  async openSetting(key) {
+    App.showView('book');
+    await this.load();
+    await this.show(this.SETTINGS, key);
   },
 
   /** A chapter or note of book.json, by its id. */

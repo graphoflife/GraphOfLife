@@ -143,6 +143,7 @@ Object.assign(Viewer, {
       document.addEventListener(event, () => this.syncFullscreen());
     }
     document.getElementById('btnReloadFrames').addEventListener('click', () => this.reload());
+    document.getElementById('btnRunSettings').addEventListener('click', () => this.showSettings());
 
     document.getElementById('runPicker').addEventListener('change', e => {
       if (e.target.value) this.load(e.target.value);

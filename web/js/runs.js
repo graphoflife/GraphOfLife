@@ -213,10 +213,12 @@ const RunsView = {
    * number here — one is drawn and written down when a run is created, so
    * "blank means random" no longer means "nobody will ever know which".
    */
-  showSettings(run) {
-    const cfg = run.config || {};
+  async showSettings(run, { onRename = null } = {}) {
     const body = document.getElementById('settingsList');
-    document.getElementById('settingsDialogTitle').textContent = `Settings — ${run.name}`;
+    const heading = document.getElementById('settingsDialogTitle');
+    heading.textContent = `Settings — ${RunInfo.shortTitle(run)}`;
+    heading.title = run.name;
+    const glossary = await this.glossary();
 
     // The name is the one thing here that can be changed after the fact — it
     // names nothing the engine reads, and a run called "test 3" is a run
@@ -248,7 +250,9 @@ const RunsView = {
         await API.renameRun(run.id, name);
         run.name = name;
         said.textContent = 'Renamed.';
-        document.getElementById('settingsDialogTitle').textContent = `Settings — ${name}`;
+        heading.textContent = `Settings — ${RunInfo.shortTitle(run)}`;
+        heading.title = name;
+        if (onRename) onRename(name);
         // The card behind the dialog still shows the old name, so the list is
         // read again rather than left disagreeing with the dialog on top of it.
         await this.refresh();
@@ -264,20 +268,56 @@ const RunsView = {
     field.append(input, save, said);
     rename.append(field);
 
-    const groups = this.settingGroups().map(([heading, rows]) => {
+    // Each setting with what it means, and the settings this run changed from its
+    // baseline marked: a world of the screen differs from B1 in a dozen of them.
+    const rows = RunInfo.rows(run, this.settingGroups(), glossary, v => String(this.settingText(v)));
+    const groups = rows.map(([title, settings]) => {
       const group = document.createElement('section');
-      group.append(Object.assign(document.createElement('h3'), { textContent: heading }));
+      group.append(Object.assign(document.createElement('h3'), { textContent: title }));
       const list = document.createElement('dl');
-      for (const [key, label] of rows) {
-        list.append(Object.assign(document.createElement('dt'), { textContent: label }),
-                    Object.assign(document.createElement('dd'),
-                                  { textContent: String(this.settingText(cfg[key])) }));
+      for (const row of settings) {
+        const term = Object.assign(document.createElement('dt'), { textContent: row.label });
+        if (row.changed) {
+          term.classList.add('is-changed');
+          term.title = `This run changed it from its baseline, ${run.lab.baseline}`;
+        }
+        const value = Object.assign(document.createElement('dd'), { textContent: row.value });
+        list.append(term, value);
+        if (row.meaning) {
+          // A second description of the same term, across the whole row.
+          const meaning = document.createElement('dd');
+          meaning.className = 'setting-meaning';
+          meaning.innerHTML = Markdown.inline(row.meaning);
+          const more = Object.assign(document.createElement('a'), {
+            href: '#', className: 'setting-more', textContent: 'more',
+            title: 'What this setting is, in the Research Notebook' });
+          more.addEventListener('click', e => {
+            e.preventDefault();
+            document.getElementById('settingsDialog').close();
+            Book.openSetting(row.key);
+          });
+          meaning.append(' ', more);
+          list.append(meaning);
+        }
       }
       group.append(list);
       return group;
     });
     body.replaceChildren(rename, ...groups);
     document.getElementById('settingsDialog').showModal();
+  },
+
+  /** What every setting means (book/settings.json), read once. */
+  async glossary() {
+    if (this._glossary === undefined) {
+      try {
+        const reply = await fetch('book/settings.json');
+        this._glossary = reply.ok ? await reply.json() : null;
+      } catch (err) {
+        this._glossary = null;
+      }
+    }
+    return this._glossary;
   },
 
   /**
@@ -542,7 +582,7 @@ const RunsView = {
     const title = document.createElement('div');
     title.className = 'sim-title';
     const h3 = document.createElement('h3');
-    h3.textContent = run.name;
+    h3.textContent = RunInfo.shortTitle(run);
     h3.title = run.name;
     title.append(h3);
     if (run.name !== run.id) {
@@ -563,7 +603,7 @@ const RunsView = {
     menuButton.type = 'button';
     menuButton.className = 'icon-button sim-menu-button';
     menuButton.title = 'More';
-    menuButton.setAttribute('aria-label', `More actions for ${run.name}`);
+    menuButton.setAttribute('aria-label', `More actions for ${RunInfo.shortTitle(run)}`);
     menuButton.append(icon('<circle cx="12" cy="5" r="1.6" FILL/>'
                          + '<circle cx="12" cy="12" r="1.6" FILL/>'
                          + '<circle cx="12" cy="19" r="1.6" FILL/>'));

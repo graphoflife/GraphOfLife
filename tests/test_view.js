@@ -43,6 +43,10 @@ const SERIES_SOURCE = fs.readFileSync(path.join(root, 'web', 'js', 'seriesload.j
 const loaderFor = api => new Function('API', 'RunStats',
   `${SERIES_SOURCE}; return SeriesLoad;`)(api, RunStats);
 
+// What a run is, in words: data and strings only, so it loads bare too.
+const RunInfo = new Function(
+  `${fs.readFileSync(path.join(root, 'web', 'js', 'runinfo.js'), 'utf8')}; return RunInfo;`)();
+
 // presets.js needs nothing from the page, so it loads the same bare way.
 const Presets = new Function(
   `${fs.readFileSync(path.join(root, 'web', 'js', 'presets.js'), 'utf8')}; return Presets;`)();
@@ -1524,6 +1528,45 @@ function test_the_worker_cuts_frames_the_way_the_server_does() {
     'decisions.allocations did not arrive where the page reads it');
   assert(!('winners' in cut.decisions), 'the rest of decisions came along too');
   assert(!('tokens' in cut) && !('missing' in cut), 'fields nobody asked for came along');
+}
+
+
+function test_a_lab_run_is_titled_by_its_baseline_tokens_and_seed() {
+  // A world of the screen changes a dozen settings, and its name lists them all:
+  // the title shows what tells it apart, and the settings say the rest.
+  const run = { id: 'B1-20000-7a52ea-s1036', config: {},
+                name: 'B1 · 20,000 tokens · message_amount=8 · hidden_layers=[8] · max_age=50 · seed 1036',
+                lab: { baseline: 'B1', world: { total_tokens: 20000 }, seed: 1036,
+                       set: { message_amount: 8, hidden_layers: [8], max_age: 50 }, replicate: null } };
+  assert(RunInfo.shortTitle(run) === 'B1 · 20,000 tokens · seed 1036', RunInfo.shortTitle(run));
+  // Named by hand, or made by hand: the run's own name.
+  assert(RunInfo.shortTitle({ ...run, name: 'my favourite world' }) === 'my favourite world');
+  assert(RunInfo.shortTitle({ id: 'x', name: 'test 3', config: {} }) === 'test 3');
+  const replicate = { ...run, lab: { ...run.lab, replicate: 'stopped at 10' } };
+  assert(RunInfo.shortTitle(replicate) === 'B1 · 20,000 tokens · seed 1036 · stopped at 10');
+}
+
+function test_a_runs_settings_say_what_they_mean_and_which_it_changed() {
+  const run = { config: { max_age: 50, keep_home: 0.0 },
+                lab: { baseline: 'B1', world: { total_tokens: 20000 }, seed: 1, set: { max_age: 50 } } };
+  const glossary = { settings: { max_age: { meaning: 'The age at which an agent dies (0 = never).' } } };
+  const rows = RunInfo.rows(run, [['Life', [['max_age', 'Old age'], ['keep_home', 'Kept at home']]]],
+                            glossary, v => String(v));
+  const [heading, settings] = rows[0];
+  assert(heading === 'Life' && settings.length === 2);
+  assert(settings[0].value === '50' && settings[0].changed && settings[0].meaning.startsWith('The age'));
+  assert(settings[1].value === '0' && !settings[1].changed && settings[1].meaning === '');
+}
+
+function test_the_settings_dialog_lets_its_title_shrink() {
+  // A title that could not shrink pushed the close button thousands of pixels to
+  // the right; focusing it scrolled the whole dialog sideways, settings and all.
+  const css = fs.readFileSync(path.join(root, 'web', 'css', 'style.css'), 'utf8');
+  const rule = css.match(/\.settings-dialog \.sim-dialog-head h2 \{([^}]*)\}/);
+  assert(rule, 'the settings dialog has no rule of its own for its title');
+  assert(/flex:\s*1 1 auto/.test(rule[1]) && /min-width:\s*0/.test(rule[1]), rule[1]);
+  const dialog = css.match(/\.sim-dialog \{([^}]*)\}/);
+  assert(dialog && /overflow:\s*clip/.test(dialog[1]), 'a dialog that hides its overflow can be scrolled by focus');
 }
 
 require('./harness').run(__filename, name => eval(name));

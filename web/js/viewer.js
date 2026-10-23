@@ -422,14 +422,15 @@ const Viewer = {
     SeriesLoad.noteSize(runId, this.frameCount);
     this.rebuildVisible();
 
-    document.getElementById('activeRunLabel').textContent = this.meta.name;
+    this.showName();
+    document.getElementById('btnRunSettings').disabled = false;
     document.getElementById('runPicker').value = runId;
 
     if (!this.visible.length) {
       this.frame = null;
       this.emptyEl.textContent = this.frameCount
         ? 'No frames match the current phase filter.'
-        : 'This run has no recorded frames yet. Start it from the Runs tab.';
+        : 'This run has no recorded frames yet. Start it from the Simulations tab.';
       this.emptyEl.style.display = '';
       this.updateSlider();
       return;
@@ -438,6 +439,25 @@ const Viewer = {
     this.emptyEl.style.display = 'none';
     await this.goToPosition(Math.min(this.position, this.visible.length - 1), true);
     this.renderer.fitToContent(this.layout, undefined, switching);
+  },
+
+  /** The run's short name above the picture; the whole name on hover. */
+  showName() {
+    const label = document.getElementById('activeRunLabel');
+    label.textContent = RunInfo.shortTitle(this.meta);
+    label.title = this.meta.name;
+  },
+
+  /** Every setting of the run on screen, with what each means (the Simulations tab's own view). */
+  showSettings() {
+    if (!this.meta) return;
+    RunsView.showSettings(this.meta, {
+      onRename: name => {
+        this.showName();
+        const option = [...document.getElementById('runPicker').options].find(o => o.value === this.runId);
+        if (option) option.textContent = `${name} (${formatNumber(this.frameCount)} frames)`;
+      },
+    });
   },
 
   async reload() {

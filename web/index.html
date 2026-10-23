@@ -486,8 +486,8 @@
   </form>
 </dialog>
 
-<!-- Every setting a run was made with, as a list. No explanations: this is
-     for reading off what a run is, next to another run. -->
+<!-- Every setting a run was made with, as a list, each with what it means and
+     the ones the run changed from its baseline marked (RunsView.showSettings). -->
 <dialog id="settingsDialog" class="sim-dialog settings-dialog">
   <div class="sim-dialog-head">
     <h2 id="settingsDialogTitle">Settings</h2>
@@ -505,7 +505,7 @@
     <div class="canvas-column">
       <div class="canvas-wrap">
         <canvas id="graphCanvas"></canvas>
-        <div id="canvasEmpty" class="canvas-empty">Select a run from the Runs tab.</div>
+        <div id="canvasEmpty" class="canvas-empty">Select a run from the Simulations tab.</div>
         <div id="hoverCard" class="hover-card hidden"></div>
       </div>
 
@@ -573,6 +573,7 @@
         <div class="run-inline">
           <select id="runPicker" title="Which run to inspect"></select>
           <button id="btnReloadFrames" class="seg-btn standalone" title="Re-read frames from disk">Reload</button>
+          <button id="btnRunSettings" class="seg-btn standalone" title="Every setting of the run on screen, and what each means" disabled>Settings</button>
         </div>
         <span class="hint" id="dimHint">Drag to pan · alt-drag or middle-drag to orbit · scroll to zoom</span>
       </div>
@@ -1000,6 +1001,7 @@
 <script src="js/emblems.js"></script>
 <script src="js/explain.js"></script>
 <script src="js/home.js"></script>
+<script src="js/runinfo.js"></script>
 <script src="js/runs.js"></script>
 <script src="js/flowmodules.js"></script>
 <script src="js/framewindow.js"></script>
