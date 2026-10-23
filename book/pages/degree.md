@@ -75,5 +75,7 @@ more; and the largest hub had 10,735
 tokens, 37%, 23%, 4% and 1,399).
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [How a world breaks](how-a-world-breaks.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Preferential attachment and its kernel](preferential-attachment.md) →
 <!-- /turns -->

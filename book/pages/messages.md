@@ -58,5 +58,7 @@ outputs, 30 are. Most of a brain's first layer, 120 × 50 = 6,000 of its
 an open question for this book.
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [What a brain says](brain-outputs.md) · [How the simulation works](../README.md#how-the-simulation-works) · [How a coalition takes a node](revolution.md) →
 <!-- /turns -->

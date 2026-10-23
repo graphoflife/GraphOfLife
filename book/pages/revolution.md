@@ -108,5 +108,7 @@ With [`allow_revolutions`](settings.md#allow_revolutions) off, nobody marks
 anything revolutionary and the hegemon always wins.
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [Messages](messages.md) · [How the simulation works](../README.md#how-the-simulation-works) · [How a brain changes](mutation.md) →
 <!-- /turns -->

@@ -44,5 +44,7 @@ every bridge costs nothing extra (`bridge_splits` and `worst_cut_share` in
 `GraphOfLifeSimple.py`).
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [Loops](loops.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Radius and diameter](radius-and-diameter.md) →
 <!-- /turns -->

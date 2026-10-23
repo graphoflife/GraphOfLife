@@ -91,5 +91,7 @@ the deeper cores, the trees and the dimension of the core are measured in
 [Chapter 25](the-core-of-a-world.md).
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [Path length](path-length.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Bridges](bridges.md) →
 <!-- /turns -->

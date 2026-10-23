@@ -294,5 +294,5 @@ failed the health bar only on its last line: their ball dimension was 4.1 to
 <!-- turns -->
 ---
 
-← [Chapter 55 · Another game](55-another-game.md) · [Contents](../README.md) · [Chapter 57 · Rules without numbers](57-rules-without-numbers.md) →
+← [Another game](another-game.md) · [Groups and cooperation](../README.md#groups-and-cooperation) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) →
 <!-- /turns -->

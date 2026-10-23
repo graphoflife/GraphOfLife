@@ -47,5 +47,7 @@ reported beside the living, as an outcome of their own — how many died, and
 when ([When a world ends](extinction.md)).
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [Bands: many worlds in one figure](bands.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Spread between worlds](spread-between-worlds.md) →
 <!-- /turns -->

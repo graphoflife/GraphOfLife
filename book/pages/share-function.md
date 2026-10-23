@@ -59,5 +59,7 @@ is one half.
 In the code it is `_share_of_first(a, b)` in `GraphOfLifeSimple.py`.
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [Seeds and the random stream](random-numbers.md) · [How the simulation works](../README.md#how-the-simulation-works) · [A yes-or-no decision](binary-decision.md) →
 <!-- /turns -->

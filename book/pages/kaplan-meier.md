@@ -63,5 +63,7 @@ all lives end by then.
 iteration, last iteration, still going).
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [How many directions a cloud of points uses](participation-ratio.md) · [Methods and statistics](../README.md#methods-and-statistics) · [The bootstrap](bootstrap.md) →
 <!-- /turns -->

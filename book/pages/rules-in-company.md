@@ -197,5 +197,5 @@ waits its turn.
 <!-- turns -->
 ---
 
-← [Chapter 84 · Meta XI · What holds a world's size](84-meta-11-what-holds-a-worlds-size.md) · [Contents](../README.md) · [Chapter 94 · What a brain can compute](94-what-a-brain-can-compute.md) →
+[Changing the rules](../README.md#changing-the-rules) · [The switches the world was built with](the-switches-the-world-was-built-with.md) →
 <!-- /turns -->

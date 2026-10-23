@@ -44,5 +44,7 @@ largest share of the world a single cut can sever ([Cut risk](cut-risk.md)).
 foretells how many agents a game cuts off.
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [Core, trees and leaves](core-trees-leaves.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Loops](loops.md) →
 <!-- /turns -->

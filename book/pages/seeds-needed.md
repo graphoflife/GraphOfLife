@@ -67,5 +67,7 @@ and 19 seeds are enough ([Chapter 14](how-much-does-the-seed-decide.md)).
 [Chapter 14](how-much-does-the-seed-decide.md) draws *n* against Δ.
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [Permutation tests](permutation-test.md) · [Methods and statistics](../README.md#methods-and-statistics) · [The Wilson interval](wilson-interval.md) →
 <!-- /turns -->

@@ -49,5 +49,7 @@ iterations; of the 30 of 100,000 tokens, none
 last to run, and it ended with 20 agents or fewer.
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [How a brain changes](mutation.md) · [How the simulation works](../README.md#how-the-simulation-works)
 <!-- /turns -->

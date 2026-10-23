@@ -288,5 +288,5 @@ fifths.
 <!-- turns -->
 ---
 
-← [Chapter 70 · How different are the agents?](70-how-different-are-the-agents.md) · [Contents](../README.md) · [Chapter 72 · Lightning in every world](72-lightning-in-every-world.md) →
+← [What crosses a connection](what-crosses-a-connection.md) · [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens) · [Lightning in every world](lightning-in-every-world.md) →
 <!-- /turns -->

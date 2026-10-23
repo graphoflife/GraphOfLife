@@ -49,5 +49,7 @@ connections make an agent rich, riches bring connections, or something else
 brings both.
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [Spread between worlds](spread-between-worlds.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Autocorrelation: how long a world remembers](autocorrelation.md) →
 <!-- /turns -->

@@ -47,3 +47,9 @@ same place on the same seed.
 A strategy that dies out says only that *this* strategy is worse, never that
 nothing better exists: an invasion test can show that a game is not solved,
 but not that it is.
+
+<!-- turns -->
+---
+
+← [Hand-written strategies in B1](hand-written-strategies-in-b1.md) · [Strategies written by hand](../README.md#strategies-written-by-hand)
+<!-- /turns -->

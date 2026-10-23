@@ -124,3 +124,9 @@ flow from $a$ to $b$, spread over every way between them, and its energy is
 the effective resistance between $a$ and $b$, which on a network with many
 loops is far less than $L$. The rest is circulation. So coherent routes, not
 only closed rings, raise the share.
+
+<!-- turns -->
+---
+
+← [Token curvature](token-curvature.md) · [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens) · [Flow modules and the map equation](map-equation.md) →
+<!-- /turns -->

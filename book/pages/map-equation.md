@@ -117,5 +117,7 @@ Two more measures need no following at all, or ask what following finds:
 > second is not a fair test. [Chapter 71](flow-modules.md) uses the nulls above.
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [Flows that go round](circulation.md) · [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens)
 <!-- /turns -->

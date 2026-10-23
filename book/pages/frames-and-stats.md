@@ -104,5 +104,7 @@ recomputed from the frames, and `python3 -c "import gol_record;
 gol_record.record_stored('<run>')"` rebuilds a run's whole statistics file.
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [Every simulation: what was run, and what was measured](every-simulation.md) · [Methods and statistics](../README.md#methods-and-statistics) · [What the viewer can colour by](viewer-colours.md) →
 <!-- /turns -->

@@ -212,7 +212,7 @@ def extremes(ch: F.Chapter) -> None:
                 f"world or more (one line each), and in the other worlds ({BAND_WORDS[0].lower()}{BAND_WORDS[1:]}). "
                 f"Right: one dot "
                 f"per world, its mean over the settled life of that share and of the share of agents in the core "
-                f"([Core, trees and leaves](../notes/core-trees-leaves.md)), for the worlds of {W.tokens:,} tokens"
+                f"([Core, trees and leaves](core-trees-leaves.md)), for the worlds of {W.tokens:,} tokens"
                 + (f" (blue) and of {small.tokens:,} (yellow, over iterations {small.span})." if small else "."),
         recipe=recipe(W.runs_text() + (" " + small.surviving_text() if small else ""), STATS_FILE,
                       ["Take the rows with `phase` = 2: `maxDegree` / `nodes`, and `coreShare` (every 25 iterations).",

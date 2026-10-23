@@ -4,7 +4,7 @@ Part II, the core of a world: what is left when its hanging trees are peeled
 away, how many dimensions that core has, and how it holds a world's loops.
 
 Peeling removes every agent with one connection or none, again and again, until
-none is left ([Core, trees and leaves](../notes/core-trees-leaves.md)). What
+none is left ([Core, trees and leaves](core-trees-leaves.md)). What
 remains is the 2-core: every agent on it lies on a loop or on a path between
 loops. Everything peeled hangs off the core in trees, each joined to it at one
 agent. Peeling the core again, now removing agents with fewer than three
@@ -339,7 +339,7 @@ def core(ch: F.Chapter) -> None:
                 F.band_series(per_core, "independent loops per core agent", BLUE),
                 F.band_series(core_degree, "connections inside the core, per core agent", CYAN)],
         caption="Every 25 iterations at the start of the game: the number of independent loops of a world — "
-                "connections minus agents plus one, its cycle rank ([Loops](../notes/loops.md)) — divided by its "
+                "connections minus agents plus one, its cycle rank ([Loops](loops.md)) — divided by its "
                 "agents and by the agents of its core, which holds every loop; and the mean number of connections "
                 f"a core agent has to other core agents. {BAND_WORDS}.",
         recipe=recipe(W.runs_text(), CORE_DATA,

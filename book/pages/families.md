@@ -63,5 +63,7 @@ beside the differences between seeds, but it also made the count depend on
 when a run had last been paused.
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [Brain diversity](brain-diversity.md) · [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are) · [The common ancestor of the living](common-ancestor.md) →
 <!-- /turns -->

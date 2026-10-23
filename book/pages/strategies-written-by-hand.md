@@ -221,5 +221,5 @@ them made evolution find the raiders' play, or go on improving.
 <!-- turns -->
 ---
 
-← [Chapter 50 · Why evolution stops](50-why-evolution-stops.md) · [Contents](../README.md) · [Chapter 52 · How fast should brains change?](52-how-fast-should-brains-change.md) →
+[Strategies written by hand](../README.md#strategies-written-by-hand) · [What a brain can compute](what-a-brain-can-compute.md) →
 <!-- /turns -->

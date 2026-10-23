@@ -95,3 +95,9 @@ keeping a node. The tokens a helper hands over count too, but later, and they
 are a transfer that the helper loses. And a stake with a positive effect may
 also have been a bid that could have won the node for its owner; help is what
 it did, not what it was for.
+
+<!-- turns -->
+---
+
+← [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Groups and cooperation](../README.md#groups-and-cooperation)
+<!-- /turns -->

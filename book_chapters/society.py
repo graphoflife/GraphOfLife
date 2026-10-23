@@ -63,7 +63,7 @@ def tokens(ch: F.Chapter) -> None:
                 "is the median over the worlds at each x; the dashed diagonal is a world where "
                 "everyone holds the same. The further a curve sags below the diagonal, the more "
                 "unequal the world (the diagram above; [The Gini coefficient]"
-                "(../notes/gini-coefficient.md)).",
+                "(gini-coefficient.md)).",
         recipe=recipe(W.surviving_text(), FRAMES,
                       [f"Read each run's last frame (iteration {W.last:,}, `phase` 2) and its `tokens`.",
                        "Sort the tokens from smallest to largest; the curve passes through the "
@@ -100,7 +100,7 @@ def tokens(ch: F.Chapter) -> None:
                   series=[b],
                   caption=f"After every game. {BAND_WORDS}.",
                   recipe=recipe(W.runs_text(), STATS_FILE,
-                                [f"Take every run's rows with `phase` = 2 and the statistic `{stat}` ([What a run records](../notes/frames-and-stats.md)).",
+                                [f"Take every run's rows with `phase` = 2 and the statistic `{stat}` ([What a run records](frames-and-stats.md)).",
                                  *BAND_STEPS]))
         ch.number(f"{name}_settled", describe([mean_over(s.run_id, stat, *W.window) for s in alive]))
         # The first five iterations, in the median world.
@@ -243,7 +243,7 @@ def game(ch: F.Chapter) -> None:
                 "it (green and cyan) or one of its neighbours (orange and violet), and whether the "
                 "winner was the largest single staker (green, orange) or the member of a coalition "
                 "that outweighed the largest staker (cyan, violet; see [How a coalition takes a "
-                "node](../notes/revolution.md)). Each column adds up to 1. Left: the game of "
+                "node](revolution.md)). Each column adds up to 1. Left: the game of "
                 f"iteration 0; right: the game of iteration {W.last:,}.",
         recipe=recipe(W.runs_text(), FRAMES,
                       [f"Read frame 1 of each of the {len(specs)} runs (the game of iteration 0) and frame "
@@ -280,12 +280,12 @@ def game(ch: F.Chapter) -> None:
         ch.figure(name, title=title, x={"label": "iteration"}, y={"label": ylabel, "min": 0, "max": 1},
                   series=out,
                   caption=f"After every game of the {len(specs)} baseline worlds. {words} For each, "
-                          f"{BAND_WORDS[0].lower()}{BAND_WORDS[1:]} ([Bands](../notes/bands.md)).",
+                          f"{BAND_WORDS[0].lower()}{BAND_WORDS[1:]} ([Bands](bands.md)).",
                   recipe=recipe(W.runs_text(), STATS_FILE,
                                 ["Take the rows with `phase` = 2 and the statistics "
                                  + ", ".join(f"`{s}`" for s, _ in stats)
                                  + " (`a/b` is the row's `a` divided by its `b`; "
-                                 "[Staking at home](../notes/home-stake.md) defines each).", *BAND_STEPS]))
+                                 "[Staking at home](home-stake.md) defines each).", *BAND_STEPS]))
 
     # Where each world settles, statistic by statistic.
     order = ["spreadShare", "revoltShare", "heldHomeShare", "revolutions/nodes_before", "selfAllocationShare"]
@@ -348,7 +348,7 @@ def roles(ids: List[int], edges: List[List[int]]) -> Dict[int, int]:
 
 ROLE_WORDS = ("Blue: agents in the core, which is what is left when agents with one connection or "
               "none are removed again and again until none remains ([Core, trees and leaves]"
-              "(../notes/core-trees-leaves.md)); yellow: the rest of the hanging trees; red: leaves, "
+              "(core-trees-leaves.md)); yellow: the rest of the hanging trees; red: leaves, "
               "agents with a single connection. Where a dot is drawn means nothing in itself: a "
               "layout (networkx's ForceAtlas2, seed 1) pulls joined agents together and pushes the "
               "rest apart.")
@@ -464,7 +464,7 @@ def shape(ch: F.Chapter) -> None:
         caption=f"Of all agents alive after the last game of {W.lived}, the share "
                 f"that have at least d connections, for every d. At the start a founder had {founders_degree} "
                 "on average (the grey line) — every one of them exactly that many before the ring's rewiring "
-                "([The starting ring](../notes/starting-ring.md)).",
+                "([The starting ring](starting-ring.md)).",
         recipe=recipe(W.surviving_text(), FRAMES,
                       [f"Count every agent's connections in the last frame's `edges`; pool the {n} runs.",
                        "For d = 1, 2, …, the share of agents with at least d."]))
@@ -484,22 +484,22 @@ def shape(ch: F.Chapter) -> None:
     ch.grid(
         "structure", panels, columns=3, title="Core, leaves and bridges",
         caption=f"Three shares, after every game of the {len(specs)} baseline worlds. Left: the share of agents "
-                "in the core ([Core, trees and leaves](../notes/core-trees-leaves.md)), measured every "
+                "in the core ([Core, trees and leaves](core-trees-leaves.md)), measured every "
                 "25 iterations. Middle: the share of agents with exactly one connection, after every "
-                "game. Right: the share of connections that are bridges ([Bridges](../notes/bridges.md)), "
+                "game. Right: the share of connections that are bridges ([Bridges](bridges.md)), "
                 f"every 25 iterations. In each, {BAND_WORDS[0].lower()}{BAND_WORDS[1:]}.",
         recipe=recipe(W.runs_text(), STATS_FILE,
                       ["Take the rows with `phase` = 2 and the statistics `coreShare`, `leaves/nodes` and "
                        "`bridges/edges` (`a/b` is the row's `a` divided by its `b`).",
                        "For `leaves/nodes`, make the band as for every other band "
-                       f"([Bands](../notes/bands.md)): {BAND_STEPS[0][0].lower()}{BAND_STEPS[0][1:]}",
+                       f"([Bands](bands.md)): {BAND_STEPS[0][0].lower()}{BAND_STEPS[0][1:]}",
                        "For `coreShare` and `bridges/edges`, which are measured every 25 iterations, "
                        "use stretches of 25."]))
     clus = band_series([series(s.run_id, "transitivity") for s in specs], "clustering (transitivity)", GREEN)
     ch.figure("clustering", title="Clustering", x={"label": "iteration"}, y={"label": "transitivity", "min": 0},
               series=[clus],
               caption="Three times the number of triangles divided by the number of connected triples "
-                      "([Clustering](../notes/clustering.md)), every 25 iterations. The founders' ring starts at "
+                      "([Clustering](clustering.md)), every 25 iterations. The founders' ring starts at "
                       f"{ch.numbers['ring']['transitivity']['median']:.2f} in the median world. {BAND_WORDS}.",
               recipe=recipe(W.runs_text(), STATS_FILE,
                             ["Take the rows with `phase` = 2 and the statistic `transitivity`.",
@@ -534,7 +534,7 @@ def shape(ch: F.Chapter) -> None:
         recipe=recipe(W.surviving_text(), STATS_FILE,
                       ["Average `nodes`, `meanDegree` and `meanPathLength` over the rows with "
                        f"`phase` = 2 and {W.settled} ≤ `iteration` ≤ {W.last:,} (`meanPathLength` is measured every "
-                       "25 iterations, from breadth-first searches out of 8 to 16 evenly spread agents; [Path length](../notes/path-length.md)).",
+                       "25 iterations, from breadth-first searches out of 8 to 16 evenly spread agents; [Path length](path-length.md)).",
                        "Plot one dot per run, and ln N / ln k for the same run."]))
     hubs = np.array([mean_over(s.run_id, "maxDegree/nodes", *W.window) for s in alive])
     plain = hubs < STAR
@@ -631,7 +631,7 @@ def lineage(ch: F.Chapter) -> None:
               caption=f"Every 25 iterations, for three worlds (seeds {seeds[0]}, {seeds[1]} and {seeds[2]}, one "
                       "colour each): how "
                       "many iterations earlier the newest genotype lived from which every living agent "
-                      "descends ([The common ancestor](../notes/common-ancestor.md)). While a line rises "
+                      "descends ([The common ancestor](common-ancestor.md)). While a line rises "
                       "by 25 every 25 iterations, that ancestor stays the same and simply grows older; "
                       "each drop is a moment when it moves forward to a younger genotype, because all "
                       "the other branches of the family tree have died out. Before the first drop the "
@@ -642,7 +642,7 @@ def lineage(ch: F.Chapter) -> None:
                              "iteration it first appeared.",
                              "Every 25 iterations, after the game, count the agents per living genotype "
                              "and climb the family tree from them, newest genotype first, adding each "
-                             "genotype's count to its parent's ([The common ancestor](../notes/common-ancestor.md)).",
+                             "genotype's count to its parent's ([The common ancestor](common-ancestor.md)).",
                              "The first genotype reached that carries all agents is their newest common "
                              "ancestor; plot the iterations since it first appeared."]))
 

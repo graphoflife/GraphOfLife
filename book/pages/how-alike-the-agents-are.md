@@ -85,7 +85,7 @@ run (58 worlds), and in both seeds of every pilot condition (69).
 > 1. Load the world and play one game, so its messages are fresh (`research/oee/checks/diversity.py`).
 > 2. Take what 200 living agents read, and draw their random input rows 8 times, the same draws for every brain.
 > 3. Put the brains of 400 agents drawn at random, and 400 fresh founder brains, into every situation and draw, and turn their outputs into decisions by the engine's rules.
-> 4. Count the kinds of staking as in [Chapter 70](70-how-different-are-the-agents.md); divide the agents' total variation by the founders'.
+> 4. Count the kinds of staking as in [Chapter 70](how-different-are-the-agents.md); divide the agents' total variation by the founders'.
 >
 > **To make it again:** `python3 book_figures.py how_alike`.
 <!-- /figure -->
@@ -227,5 +227,5 @@ they only differ, it is drift, and variety without direction.
 <!-- turns -->
 ---
 
-← [Chapter 76 · Meta VIII · Who helps whom](76-meta-8-who-helps-whom.md) · [Contents](../README.md) · [Chapter 79 · Meta X · Healthy and rich](79-meta-10-healthy-and-rich.md) →
+[Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are) · [Genotypes and lineages](genotypes-and-lineages.md) →
 <!-- /turns -->

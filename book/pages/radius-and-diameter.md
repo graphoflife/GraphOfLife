@@ -47,5 +47,7 @@ steps, the radius about 36 and the mean path length about 18; in one of
 10,000 tokens, 29, 17 and 10 ([Chapter 35](the-geometry-of-a-world.md)).
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [Cut risk](cut-risk.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [The spectral gap](spectral-gap.md) →
 <!-- /turns -->

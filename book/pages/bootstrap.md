@@ -44,5 +44,7 @@ reconcile with "no difference" — which is then tested directly with a
 `bootstrap` and `compare_conditions` in `gol_analysis.py`.
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [Survival curves (Kaplan–Meier)](kaplan-meier.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Permutation tests](permutation-test.md) →
 <!-- /turns -->

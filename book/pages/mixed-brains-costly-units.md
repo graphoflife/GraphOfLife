@@ -179,5 +179,5 @@ rule keeps a healthy world whose evolution goes on more strongly than B2's
 <!-- turns -->
 ---
 
-← [Chapter 73 · Who inherits?](73-who-inherits.md) · [Contents](../README.md) · [Chapter 80 · Mixed at birth: ten long worlds](80-mixed-at-birth-ten-long-worlds.md) →
+← [Who inherits?](who-inherits.md) · [Changing the rules](../README.md#changing-the-rules) · [Links to strangers](links-to-strangers.md) →
 <!-- /turns -->

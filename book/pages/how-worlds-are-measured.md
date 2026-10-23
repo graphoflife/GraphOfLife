@@ -51,7 +51,7 @@ where *m* is the number of rows in the stretch that hold the statistic.
 > [!example]- How to make this figure
 > **Runs.** `B1-10000-s001`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
 >
 > 1. Plot `nodes` of the rows with `phase` = 2.
 > 2. For a = 100, 200, …, 2,900, average `nodes` over a ≤ `iteration` ≤ a + 99.
@@ -80,9 +80,9 @@ condition in Part V). Drawn one line per world, they look like this:
 **30 worlds, each a line.** The number of agents of each of the 30 baseline worlds, every line one world, averaged over stretches of 25 iterations so that the lines stay legible.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 10](10-a-worlds-life.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 10](a-worlds-life.md)). They are made with `python3 gol_lab.py run E02`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
 >
 > 1. Take every run's rows with `phase` = 2 and `nodes`; average them in stretches of 25 iterations; draw one line per run.
 >
@@ -100,9 +100,9 @@ band ([Bands](bands.md); [Median and quantiles](median-and-quantiles.md)).
 **The same 30 worlds, as a band.** The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 10](10-a-worlds-life.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 10](a-worlds-life.md)). They are made with `python3 gol_lab.py run E02`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
 >
 > 1. Take every run's rows with `phase` = 2 and `nodes`.
 > 2. Cut the 3,000 iterations into 600 stretches of 5 and take each world's mean in each stretch.
@@ -177,5 +177,5 @@ the figures (`book_figures.py`, with the package `book_chapters/`, drawing with
 <!-- turns -->
 ---
 
-← [Chapter 4 · The brain](04-the-brain.md) · [Contents](../README.md) · [Chapter 6 · The ideas this builds on](06-the-ideas-this-builds-on.md) →
+← [Every world side by side](every-world-side-by-side.md) · [Methods and statistics](../README.md#methods-and-statistics) · [One world, many colours](one-world-many-colours.md) →
 <!-- /turns -->

@@ -59,5 +59,7 @@ one look for a single stretch at the end. That is why the book measures
 worlds over their settled life ([The settled life of a world](settled-life.md)).
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [Correlation](correlation.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Mobility](mobility.md) →
 <!-- /turns -->

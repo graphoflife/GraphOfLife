@@ -51,3 +51,9 @@ neuroscience for the dimension of neural activity (Gao et al. 2017).
 - Gao, P., Trautmann, E., Yu, B., Santhanam, G., Ryu, S., Shenoy, K. and
   Ganguli, S. (2017). A theory of multineuronal dimensionality, dynamics and
   measurement. *bioRxiv* 214262.
+
+<!-- turns -->
+---
+
+← [Between worlds and within them](between-and-within.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Survival curves (Kaplan–Meier)](kaplan-meier.md) →
+<!-- /turns -->

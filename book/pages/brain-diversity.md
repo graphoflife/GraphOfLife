@@ -40,5 +40,7 @@ names; whether different names are different brains has to be checked
 separately ([Chapter 41](do-the-brains-matter.md)).
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [How a signal fades through layers](vanishing-signal.md) · [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are) · [Families](families.md) →
 <!-- /turns -->

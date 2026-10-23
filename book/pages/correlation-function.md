@@ -66,3 +66,9 @@ tokens, age and connections, and the share of kin at each distance.
 
 - Chaikin, P. M. and Lubensky, T. C. (1995). *Principles of Condensed Matter
   Physics*. Cambridge University Press.
+
+<!-- turns -->
+---
+
+← [What folds a world](what-folds-a-world.md) · [Space and dimension](../README.md#space-and-dimension) · [Dimension and curvature from ball growth](ball-dimension-and-curvature.md) →
+<!-- /turns -->

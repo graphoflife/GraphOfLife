@@ -196,9 +196,9 @@ alive at the start of the phase:
 **What one iteration does to a settled world.** Agents added (above zero) and removed (below), per 100 agents alive at the start of an iteration, averaged over iterations 500 to 2,999 of the 26 worlds that lived to the end, pooled: every iteration of every world counts once. The bars add up to 0.00: the population hardly changes from one iteration to the next, while about three in a hundred agents are replaced.
 
 > [!example]- How to make this figure
-> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 10](10-a-worlds-life.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 10](a-worlds-life.md)). They are made with `python3 gol_lab.py run E02`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](../notes/frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
 >
 > 1. For every iteration 500 ≤ t ≤ 2,999 of every run, take from the row with `phase` = 1: `nodes_before`, `births`, `orphaned`, `starved`; from the row with `phase` = 2: `starved`, `orphaned`.
 > 2. Sum each over all iterations and runs; divide by the sum of `nodes_before` of the rows with `phase` = 1, and multiply by 100.
@@ -231,5 +231,5 @@ world stay; their brains are replaced all the time.
 <!-- turns -->
 ---
 
-← [Chapter 2 · The world: tokens, agents and a network](02-the-world.md) · [Contents](../README.md) · [Chapter 4 · The brain](04-the-brain.md) →
+← [The world: tokens, agents and a network](the-world.md) · [How the simulation works](../README.md#how-the-simulation-works) · [The brain](the-brain.md) →
 <!-- /turns -->

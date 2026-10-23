@@ -73,7 +73,7 @@ def entropy(ch: F.Chapter) -> None:
     ch.grid(
         "evenness", panels, columns=3, title="How even a world is, in three respects",
         caption=f"Evenness after every game of the {len(specs)} baseline worlds, from 0 (everything in one hand) "
-                "to 1 (as even as it can be; [Entropy and evenness](../notes/entropy-and-evenness.md)). "
+                "to 1 (as even as it can be; [Entropy and evenness](entropy-and-evenness.md)). "
                 "Left: of the tokens over the agents (`tokenEvenness`). Middle: of the agents over the "
                 "numbers of connections that occur (`degreeEvenness`). Right: of the agents over the "
                 "genotypes they carry — the entropy of the genotypes' shares divided by log₂ of the "
@@ -244,7 +244,7 @@ def gains(ch: F.Chapter) -> None:
                      (0, 0.38))],
         guides=[{"axis": "y", "at": 0}],
         caption="The token curvature of an agent is the sum, over its neighbours, of how many more tokens "
-                "the neighbour holds than it does ([Token curvature](../notes/token-curvature.md)): "
+                "the neighbour holds than it does ([Token curvature](token-curvature.md)): "
                 "negative for an agent richer than its neighbourhood, positive for one poorer. For each "
                 "class of curvature, the mean change of an agent's tokens over the game divided by the "
                 "tokens it held at the start, over the agents that survived the game. Yellow: all agents; "
@@ -344,7 +344,7 @@ def flow(ch: F.Chapter) -> None:
         caption="Every token is staked in every game. Yellow: the share staked by agents on their own node. "
                 "Cyan: staked on a neighbour's node, but cancelled by what that neighbour staked back — if A "
                 "puts 5 on B's node and B puts 3 on A's, 3 tokens each way cancel. Red: what is left after "
-                "cancelling, flow with a direction ([Token flow](../notes/token-flow.md)). Left: the game of "
+                "cancelling, flow with a direction ([Token flow](token-flow.md)). Left: the game of "
                 f"iteration 0, pooled over the {len(specs)} worlds; right: every game from iteration 500 on of "
                 f"{W.lived}, pooled. Exactly {W.tokens:,} tokens are staked in each game.",
         recipe=recipe(W.runs_text(), STATS_FILE,
@@ -404,7 +404,7 @@ def flow(ch: F.Chapter) -> None:
                 "Yellow: the share of their tokens they staked on their own node. White dots: the home share "
                 "an agent would have if it split its tokens evenly over all its candidates, 1/(d + 1), "
                 "averaged over the class. Red dots: the same even split dealt out in whole tokens by the "
-                "rules' own rounding ([Splitting tokens into whole numbers](../notes/largest-remainder.md)), "
+                "rules' own rounding ([Splitting tokens into whole numbers](largest-remainder.md)), "
                 "which gives the tokens left over to the largest remainders, and, when all remainders tie, "
                 "to the agent's own node first. From the games of every 100th iteration from 500 on, in "
                 f"{W.lived}.",
@@ -460,7 +460,7 @@ def flow(ch: F.Chapter) -> None:
                 "half. The dashed line is y = x. Over all "
                 f"{len(predicted):,} agents (the games of every 250th iteration from 500 on, {len(alive)} worlds), "
                 f"the straight line fitted to the points has slope {slope:.2f}, and the even split accounts "
-                f"for {100 * r2:.0f}% of the variance (R², [Fitting a straight line](../notes/least-squares.md))"
+                f"for {100 * r2:.0f}% of the variance (R², [Fitting a straight line](least-squares.md))"
                 + (f"; over the {without['worlds']} worlds that are not held together by a single hub (Chapter "
                    f"33), slope {without['slope']:.2f} and {100 * without['r2']:.0f}%."
                    if without["worlds"] < len(alive) else "."),
@@ -509,7 +509,7 @@ def flow(ch: F.Chapter) -> None:
     ch.grid(
         "circulation", panels, columns=2, title="Do tokens go round?",
         caption="Left, on the flow as staked: the share of all tokens staked on neighbours that a greedy search "
-                "could place in closed loops (blue; [Lightning](../notes/lightning.md)), and the share that "
+                "could place in closed loops (blue; [Lightning](lightning.md)), and the share that "
                 "conservation forbids from ever going round, because some agents receive more than they send "
                 "(red) — so at most 1 − red can circulate. Right, after cancelling every stake against the one "
                 "coming back: the share of the flow left (cyan), and of that, the share found in loops "
@@ -633,7 +633,7 @@ def children(ch: F.Chapter) -> None:
     ch.grid(
         "over-time", panels, columns=2, title="Reproduction over a world's life",
         caption=f"After every reproduction phase of the {len(specs)} baseline worlds ([Reproduction statistics]"
-                "(../notes/reproduction-statistics.md)): the mean share of its tokens a parent gave its child "
+                "(reproduction-statistics.md)): the mean share of its tokens a parent gave its child "
                 "(`meanInvestedShare`); the tokens given to all children as a share of all tokens "
                 "(`reproTokenShare`); the mean number of connections a child was born with (`meanChildLinks`); "
                 f"and the connections handed over per birth (`handovers` / `births`). {BAND_WORDS}.",
@@ -716,7 +716,7 @@ def powerlaws(ch: F.Chapter) -> None:
                 "least squares fits through all the dots, whose slope is 1 − γ for a power law of exponent γ "
                 "(the viewer's `degreeExponent`). Red: the power law fitted by maximum likelihood to the "
                 f"tail from the k that fits best, k = {mle['kMin']:.0f} (`degreeGamma`, `degreeKMin`), which "
-                f"holds {100 * tail:.1f}% of the agents ([Fitting a power law](../notes/power-law-fit.md)).",
+                f"holds {100 * tail:.1f}% of the agents ([Fitting a power law](power-law-fit.md)).",
         recipe=recipe(f"`{W.run(1)}`.", FRAMES,
                       [f"Read the last frame after a game (`{W.frame(W.last)}`) and count every agent's connections in `edges`.",
                        "Dots: for each distinct count k, the share of agents with at least k.",
@@ -859,7 +859,7 @@ def powerlaws(ch: F.Chapter) -> None:
         series=[line(fx, fy, f"number of agents, {len(alive)} worlds", BLUE, width=2),
                 line(fx[fitm], np.exp(a1) * fx[fitm] ** b1, f"a power law, slope {b1:.2f}", RED, width=1.5,
                      dash=[5, 4])],
-        caption="The power spectrum of the number of agents ([The power spectrum](../notes/power-spectrum.md)): "
+        caption="The power spectrum of the number of agents ([The power spectrum](power-spectrum.md)): "
                 "for each frequency, how much of a world's up-and-down motion happens at that rhythm — slow "
                 "wanders on the left, iteration-to-iteration jitter on the right. Each world's series from "
                 f"iteration {W.stretch}, with its straight-line trend removed and a Hann window applied, "

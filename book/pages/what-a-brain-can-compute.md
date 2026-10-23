@@ -147,10 +147,10 @@ the same seeds and in the same places. Neither ever mutates.
 <!-- figure computable/replays -->
 ![The rule and the brain, planted in the same places](../figures/computable/replays.svg)
 
-**The rule and the brain, planted in the same places.** One line per planting: three evolved worlds, two seeds each (seed 1 solid, seed 2 dashed). Orange: a patch of raiders that follow the rule of [Chapter 51](51-strategies-written-by-hand.md); blue: the same patch given a B2 brain whose weights were set by hand to play the same rule. Neither ever mutates. A line that stops early is a patch that died out.
+**The rule and the brain, planted in the same places.** One line per planting: three evolved worlds, two seeds each (seed 1 solid, seed 2 dashed). Orange: a patch of raiders that follow the rule of [Chapter 51](strategies-written-by-hand.md); blue: the same patch given a B2 brain whose weights were set by hand to play the same rule. Neither ever mutates. A line that stops early is a patch that died out.
 
 > [!example]- How to make this figure
-> **Runs.** Three B2 worlds of Experiment 16, `B2-10000-s001` … `-s003`, as their archives keep them at iteration 2,000 (`GraphOfLifeRuns/<run>/archive/`), each with a patch of raiders planted as in [Chapter 51](51-strategies-written-by-hand.md) (`research/oee/pilots/manual.py`: the agent drawn on seed *s* and its nearest neighbours, step by step, until the patch holds 5% of the world).
+> **Runs.** Three B2 worlds of Experiment 16, `B2-10000-s001` … `-s003`, as their archives keep them at iteration 2,000 (`GraphOfLifeRuns/<run>/archive/`), each with a patch of raiders planted as in [Chapter 51](strategies-written-by-hand.md) (`research/oee/pilots/manual.py`: the agent drawn on seed *s* and its nearest neighbours, step by step, until the patch holds 5% of the world).
 >
 > **Data.** From the worlds the archives keep.
 >
@@ -295,5 +295,5 @@ physics, asks for exactly that kind of thing.
 <!-- turns -->
 ---
 
-← [Chapter 91 · Meta XII · Rules in company](91-meta-12-rules-in-company.md) · [Contents](../README.md) · [Chapter 95 · Every era against three](95-every-era-against-three.md) →
+← [Strategies written by hand](strategies-written-by-hand.md) · [Strategies written by hand](../README.md#strategies-written-by-hand) · [How large a crowd a raider needs](how-large-a-crowd-a-raider-needs.md) →
 <!-- /turns -->

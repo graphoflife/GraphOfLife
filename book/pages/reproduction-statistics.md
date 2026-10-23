@@ -38,5 +38,7 @@ cleanup that ends the phase ([Births and the four ways to die](births-and-deaths
 loses them, the child gains them. They never add a connection to the world.
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [Age and lifetime](age-and-lifetime.md) · [Agents' lives: births, deaths, ages](../README.md#agents-lives-births-deaths-ages)
 <!-- /turns -->

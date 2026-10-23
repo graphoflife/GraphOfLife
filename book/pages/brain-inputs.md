@@ -85,5 +85,7 @@ listens to them is set by its weights, how random an agent's behaviour is can
 itself evolve.
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [Splitting tokens into whole numbers](largest-remainder.md) · [How the simulation works](../README.md#how-the-simulation-works) · [What a brain says](brain-outputs.md) →
 <!-- /turns -->

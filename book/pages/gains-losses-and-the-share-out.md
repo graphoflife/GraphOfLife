@@ -51,5 +51,7 @@ statistics by `gol_series.frame_stats`; `redistributed` comes from the
 cleanup report of each frame.
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [Entropy and evenness](entropy-and-evenness.md) · [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens)
 <!-- /turns -->

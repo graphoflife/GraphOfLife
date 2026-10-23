@@ -143,7 +143,7 @@ def rich(ch: F.Chapter) -> None:
         columns=2, title="How long wealth lasts",
         caption="Left: the agents alive after the game of an iteration t, and the same agents k games later, if "
                 "they are still alive: Spearman's rank correlation of their tokens then and later "
-                "([Correlation](../notes/correlation.md)) — 1 if every agent kept its place in the order of "
+                "([Correlation](correlation.md)) — 1 if every agent kept its place in the order of "
                 "wealth, 0 if the later order has nothing to do with the earlier. Right: the share of the "
                 f"agents still alive k games later. For each world, the mean over {len(STARTS)} moments {MOMENT_WORDS} "
                 "(leaving out, for the correlation, the few moments after which fewer than three of the "

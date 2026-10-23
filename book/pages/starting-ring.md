@@ -65,5 +65,7 @@ the ring is forgotten within a few iterations. It matters mainly as a fair,
 connected start: every founder can reach every other.
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [Every setting](settings.md) · [How the simulation works](../README.md#how-the-simulation-works) · [Seeds and the random stream](random-numbers.md) →
 <!-- /turns -->

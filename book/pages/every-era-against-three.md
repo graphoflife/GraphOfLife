@@ -233,5 +233,5 @@ little in one world, round a circle in the other.
 <!-- turns -->
 ---
 
-← [Chapter 94 · What a brain can compute](94-what-a-brain-can-compute.md) · [Contents](../README.md) · [Chapter 96 · How large a crowd a raider needs](96-how-large-a-crowd-a-raider-needs.md) →
+← [How fast should brains change?](how-fast-should-brains-change.md) · [Does evolution keep going?](../README.md#does-evolution-keep-going) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) →
 <!-- /turns -->

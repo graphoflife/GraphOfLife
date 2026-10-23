@@ -66,5 +66,7 @@ iterations. In the small worlds 70% of the variance lies at periods of 500
 iterations or more, and 0.4% at periods shorter than 10.
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [Fitting a power law properly](power-law-fit.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Where, who and chance: splitting a decision's variance](variance-split.md) →
 <!-- /turns -->

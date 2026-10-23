@@ -50,5 +50,7 @@ reshuffled. [Chapter 29](where-the-tokens-flow.md) shows where
 it goes.
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [Staking at home, and keeping one's node](home-stake.md) · [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens) · [Lightning: tokens that go round](lightning.md) →
 <!-- /turns -->

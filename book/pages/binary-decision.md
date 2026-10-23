@@ -56,5 +56,7 @@ In the code it is `_choose_binary(yes, no, mode_yes, mode_no, rng)` in
 stream ([Seeds and the random stream](random-numbers.md)).
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [The share function f(a, b)](share-function.md) · [How the simulation works](../README.md#how-the-simulation-works) · [Splitting tokens into whole numbers](largest-remainder.md) →
 <!-- /turns -->

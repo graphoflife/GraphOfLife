@@ -215,5 +215,5 @@ fought over by neighbours is such a setting.
 <!-- turns -->
 ---
 
-← [Chapter 5 · How worlds are measured](05-how-worlds-are-measured.md) · [Contents](../README.md) · [Chapter 7 · Physical inspiration](07-physical-inspiration.md) →
+← [What this book is about](what-this-notebook-is-about.md) · [Start here](../README.md#start-here)
 <!-- /turns -->

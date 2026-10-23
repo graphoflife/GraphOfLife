@@ -245,5 +245,5 @@ and finds no better play either
 <!-- turns -->
 ---
 
-← [Chapter 54 · The switches the world was built with](54-the-switches-the-world-was-built-with.md) · [Contents](../README.md) · [Chapter 56 · Alliances](56-alliances.md) →
+← [Do agents cooperate?](do-agents-cooperate.md) · [Groups and cooperation](../README.md#groups-and-cooperation) · [Alliances](alliances.md) →
 <!-- /turns -->

@@ -79,3 +79,9 @@ whose dimension is known.
   universe is scale dependent. *Physical Review Letters* 95, 171301.
 - Durhuus, B., Jonsson, T. and Wheater, J. F. (2007). The spectral dimension
   of generic trees. *Journal of Statistical Physics* 128, 1237–1260.
+
+<!-- turns -->
+---
+
+← [Dimension and curvature from ball growth](ball-dimension-and-curvature.md) · [Space and dimension](../README.md#space-and-dimension) · [Box dimension](box-dimension.md) →
+<!-- /turns -->

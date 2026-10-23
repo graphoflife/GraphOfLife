@@ -182,5 +182,5 @@ Ways to build the pull, and the first of them tried:
 <!-- turns -->
 ---
 
-← [Chapter 79 · Meta X · Healthy and rich](79-meta-10-healthy-and-rich.md) · [Contents](../README.md) · [Chapter 91 · Meta XII · Rules in company](91-meta-12-rules-in-company.md) →
+[Size and riches of a world](../README.md#size-and-riches-of-a-world) · [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) →
 <!-- /turns -->

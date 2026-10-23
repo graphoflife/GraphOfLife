@@ -286,5 +286,5 @@ whole worlds; the tables are in `GraphOfLifeRuns/.pilots/atlas/`.
 <!-- turns -->
 ---
 
-← [Appendix A · What a simulation costs](A-costs.md) · [Contents](../README.md) · [Appendix C · Every simulation: what was run, and what was measured](C-every-simulation.md) →
+← [What a simulation costs](what-a-simulation-costs.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Every simulation: what was run, and what was measured](every-simulation.md) →
 <!-- /turns -->

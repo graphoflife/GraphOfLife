@@ -51,5 +51,7 @@ With thirty worlds, nine in ten leaves out the lowest one or two and the
 highest one or two. See [Bands](bands.md) for how this is drawn over time.
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [Pilot worlds](pilot-worlds.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Bands: many worlds in one figure](bands.md) →
 <!-- /turns -->

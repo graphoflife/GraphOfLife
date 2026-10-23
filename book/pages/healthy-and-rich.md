@@ -50,7 +50,7 @@ worlds on these four.
 <!-- figure healthy/map -->
 ![Healthy, and diverse?](../figures/healthy/map.svg)
 
-**Healthy, and diverse?** Each dot is a world at its last checkpoint. Across: how many of the seven marks of [Chapter 46](46-how-to-tell-a-world-that-keeps-evolving.md)'s health bar it meets — one piece, a 2-core of at least 0.8, no agent whose loss cuts off more than 2%, no link more than 1%, no agent joined to more than 5% of the others, 3 to 12 links per agent, a dimension of 2.3 to 4 (the dots are spread sideways within each count only so that they do not hide each other). Up: how widely its agents spread over tokens, links, ages and genotypes, as the mean of its percentiles among all worlds. The author's picture of a world that might keep evolving is the top right. B1: B1 at every size and its variants (Experiments 2, 8, 10, 12, 13); brains fixed: Experiment 7; B2: B2 and its variants (Experiments 9, 14, 15, 16), except lapse, where any unused link lapses; long runs: the pilot worlds played to 10,000 iterations; pilots: the other pilot worlds, by the rule set they start from.
+**Healthy, and diverse?** Each dot is a world at its last checkpoint. Across: how many of the seven marks of [Chapter 46](how-to-tell-a-world-that-keeps-evolving.md)'s health bar it meets — one piece, a 2-core of at least 0.8, no agent whose loss cuts off more than 2%, no link more than 1%, no agent joined to more than 5% of the others, 3 to 12 links per agent, a dimension of 2.3 to 4 (the dots are spread sideways within each count only so that they do not hide each other). Up: how widely its agents spread over tokens, links, ages and genotypes, as the mean of its percentiles among all worlds. The author's picture of a world that might keep evolving is the top right. B1: B1 at every size and its variants (Experiments 2, 8, 10, 12, 13); brains fixed: Experiment 7; B2: B2 and its variants (Experiments 9, 14, 15, 16), except lapse, where any unused link lapses; long runs: the pilot worlds played to 10,000 iterations; pilots: the other pilot worlds, by the rule set they start from.
 
 > [!example]- How to make this figure
 > **Runs.** Every world the book has made that settled (500 iterations or more), each once, at its last checkpoint: the lab's runs at their end, the pilot worlds at theirs, the long runs at 10,000 iterations; pilots that replay a lab world are counted as that world (`python3 research/atlas/profile.py`).
@@ -393,5 +393,5 @@ drawn at random, the values that make worlds worse dropped round after round,
 <!-- turns -->
 ---
 
-← [Chapter 77 · Meta IX · How alike the agents are](77-meta-9-how-alike.md) · [Contents](../README.md) · [Chapter 84 · Meta XI · What holds a world's size](84-meta-11-what-holds-a-worlds-size.md) →
+[Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world) · [What makes a world interesting](what-makes-a-world-interesting.md) →
 <!-- /turns -->

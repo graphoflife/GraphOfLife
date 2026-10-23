@@ -84,5 +84,7 @@ can have different evenness ([Chapter 27](how-even-is-a-world.md)).
 histogram of degrees.
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [Tokens per agent: mean, median, extremes](tokens-per-agent.md) · [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens) · [Gains, losses and the share-out](gains-losses-and-the-share-out.md) →
 <!-- /turns -->

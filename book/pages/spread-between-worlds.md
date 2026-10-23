@@ -49,5 +49,7 @@ average world, and a column's height shows the spread
   ([How many seeds an experiment needs](seeds-needed.md)).
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [The settled life of a world](settled-life.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Correlation](correlation.md) →
 <!-- /turns -->

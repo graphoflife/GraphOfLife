@@ -124,5 +124,7 @@ at least 100 iterations before the end can be measured by it in full
 ([Chapter 13](how-ages-change.md)).
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [Births and the four ways to die](births-and-deaths.md) · [Agents' lives: births, deaths, ages](../README.md#agents-lives-births-deaths-ages) · [Reproduction statistics](reproduction-statistics.md) →
 <!-- /turns -->

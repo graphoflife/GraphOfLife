@@ -82,5 +82,7 @@ stored digit can be lost in the rounding.
 from the world's random stream ([Seeds and the random stream](random-numbers.md)).
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [How a coalition takes a node](revolution.md) · [How the simulation works](../README.md#how-the-simulation-works) · [When a world ends](extinction.md) →
 <!-- /turns -->

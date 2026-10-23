@@ -20,7 +20,7 @@ WORLDS = ["B2-10000-s001", "B2-10000-s002", "B2-10000-s003"]
 REPLAYS = ["replay_s001.json", "replay_s002_s003_seed1.json", "replay_s002_s003_seed2.json"]
 RUNS = ("Three B2 worlds of Experiment 16, `B2-10000-s001` … `-s003`, as their archives keep them at "
         "iteration 2,000 (`GraphOfLifeRuns/<run>/archive/`), each with a patch of raiders planted as in "
-        "[Chapter 51](51-strategies-written-by-hand.md) (`research/oee/pilots/manual.py`: the agent drawn on "
+        "[Chapter 51](strategies-written-by-hand.md) (`research/oee/pilots/manual.py`: the agent drawn on "
         "seed *s* and its nearest neighbours, step by step, until the patch holds 5% of the world).")
 
 

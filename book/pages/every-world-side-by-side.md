@@ -184,5 +184,5 @@ longer makes.
 <!-- turns -->
 ---
 
-← [Chapter 93 · Five more seeds for the rules that held](93-five-more-seeds-for-the-rules-that-held.md) · [Contents](../README.md) · [Chapter 75 · Meta VII · Where tokens go](75-meta-7-where-tokens-go.md) →
+[Methods and statistics](../README.md#methods-and-statistics) · [How worlds are measured](how-worlds-are-measured.md) →
 <!-- /turns -->

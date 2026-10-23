@@ -473,5 +473,7 @@ cross-time tournament of [Chapter 46](how-to-tell-a-world-that-keeps-evolving.md
 A plan asks for it in its `record` block.
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [Is a run reproducible?](is-a-run-reproducible.md) · [How the simulation works](../README.md#how-the-simulation-works) · [The starting ring](starting-ring.md) →
 <!-- /turns -->

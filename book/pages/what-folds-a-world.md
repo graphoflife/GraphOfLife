@@ -82,12 +82,12 @@ agents, nine times B2's usual 3,400.
 <!-- figure spaces/size -->
 ![Does a world fold the same way at every size?](../figures/spaces/size.svg)
 
-**Does a world fold the same way at every size?** Each dot is a world: its typical distance over its random twin's, against the agents in its largest piece, both on logarithmic axes. Blue: B1's worlds of 10,000, 100,000 and 409,600 tokens after their last game ([Chapter 24](24-how-many-dimensions-does-a-world-have.md)'s readings). Grey: B2's worlds of 5,000 tokens at iteration 1,000 (Experiment 14) and of 10,000 at 2,000 (Experiment 16), and one B2 world of 100,000 tokens at iteration 1,000 (a pilot). A space grows wider than its twin as it grows; a small world stays as near.
+**Does a world fold the same way at every size?** Each dot is a world: its typical distance over its random twin's, against the agents in its largest piece, both on logarithmic axes. Blue: B1's worlds of 10,000, 100,000 and 409,600 tokens after their last game ([Chapter 24](how-many-dimensions-does-a-world-have.md)'s readings). Grey: B2's worlds of 5,000 tokens at iteration 1,000 (Experiment 14) and of 10,000 at 2,000 (Experiment 16), and one B2 world of 100,000 tokens at iteration 1,000 (a pilot). A space grows wider than its twin as it grows; a small world stays as near.
 
 > [!example]- How to make this figure
 > **Runs.** B1: Experiments 2, 10 and 8 (`B1-10000-…`, `B1-100000-…`, `B1-409600-…`); B2: Experiments 14 and 16, and the pilot world `GraphOfLifeRuns/.pilots/BIG/B2-100000-s1` (B2's settings at 100,000 tokens, seed 1, 1,000 iterations).
 >
-> **Data.** From [Chapter 24](24-how-many-dimensions-does-a-world-have.md)'s readings (`GraphOfLifeRuns/.book/<run>.dims2.json`) and `research/atlas/space.py` (`GraphOfLifeRuns/.pilots/atlas/space.json`).
+> **Data.** From [Chapter 24](how-many-dimensions-does-a-world-have.md)'s readings (`GraphOfLifeRuns/.book/<run>.dims2.json`) and `research/atlas/space.py` (`GraphOfLifeRuns/.pilots/atlas/space.json`).
 >
 > 1. Measure each world and its random twin as in the first figure.
 > 2. Divide the radius at which its typical ball holds half the world by its twin's.
@@ -372,5 +372,5 @@ puts the line between folded and not.
 <!-- turns -->
 ---
 
-← [Chapter 60 · Worlds of 100,000 tokens](60-worlds-of-100000-tokens.md) · [Contents](../README.md) · [Chapter 69 · A hundred thousand iterations](69-a-hundred-thousand-iterations.md) →
+← [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) · [Space and dimension](../README.md#space-and-dimension) · [How alike at a distance](correlation-function.md) →
 <!-- /turns -->

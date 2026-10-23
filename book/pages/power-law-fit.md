@@ -73,5 +73,7 @@ of it: a power law there says nothing about the rest. [Chapter 32](power-laws-re
 fits both methods to the baseline worlds.
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [Fitting a straight line, and R²](least-squares.md) · [Methods and statistics](../README.md#methods-and-statistics) · [The power spectrum of a time series](power-spectrum.md) →
 <!-- /turns -->

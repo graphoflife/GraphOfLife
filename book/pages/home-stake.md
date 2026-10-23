@@ -46,5 +46,7 @@ node in about 45% of games, and about half of all nodes are won by a
 coalition rather than by their largest staker ([Chapter 16](how-the-game-is-played.md)).
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [Lightning in every world](lightning-in-every-world.md) · [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens) · [Token flow](token-flow.md) →
 <!-- /turns -->

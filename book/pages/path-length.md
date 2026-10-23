@@ -48,5 +48,7 @@ is: in a lattice they grow like a power of the number of agents, in a
 "small world" like its logarithm.
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [Clustering](clustering.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Core, trees and leaves](core-trees-leaves.md) →
 <!-- /turns -->

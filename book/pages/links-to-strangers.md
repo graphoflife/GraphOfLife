@@ -165,5 +165,5 @@ a smaller world gives a later brain more room to win, this batch cannot say.
 <!-- turns -->
 ---
 
-← [Chapter 80 · Mixed at birth: ten long worlds](80-mixed-at-birth-ten-long-worlds.md) · [Contents](../README.md) · [Chapter 82 · Brains mixed at birth, with every other rule](82-mixing-with-every-other-rule.md) →
+← [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) · [Changing the rules](../README.md#changing-the-rules) · [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) →
 <!-- /turns -->

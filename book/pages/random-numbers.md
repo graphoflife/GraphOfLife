@@ -56,5 +56,7 @@ Three kinds of draw appear in the rules:
   dead this way, with *q*ⱼ = 1/*N*.
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [The starting ring](starting-ring.md) · [How the simulation works](../README.md#how-the-simulation-works) · [The share function f(a, b)](share-function.md) →
 <!-- /turns -->

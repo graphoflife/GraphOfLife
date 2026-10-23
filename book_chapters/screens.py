@@ -3,7 +3,7 @@
 Eight switches at once (pilot batch U, 2026-10-16): a two-level fractional
 factorial design of resolution IV over eight of the book's switches on B2,
 sixteen worlds of 10,000 tokens, seed 1, 1,000 iterations
-(research/oee/pilots/make_jobs_TU.py; the design in book/notes/
+(research/oee/pilots/make_jobs_TU.py; the design in book/pages/
 fractional-factorial.md).
 
 Every world is read at iteration 1,000 as Meta X reads every world
@@ -53,7 +53,7 @@ V = {
 }
 #: Below this many agents a world has died out, as the lab counts it.
 EXTINCT = 20
-#: The seven chains of pairs the sixteen worlds cannot tell apart (book/notes/fractional-factorial.md).
+#: The seven chains of pairs the sixteen worlds cannot tell apart (book/pages/fractional-factorial.md).
 CHAINS = [("AB", "CG", "DH", "EF"), ("AC", "BG", "DF", "EH"), ("AD", "BH", "CF", "EG"), ("BC", "AG", "DE", "FH"),
           ("BD", "AH", "CE", "FG"), ("CD", "AF", "BE", "GH"), ("AE", "BF", "CH", "DG")]
 #: What is read, its axis label, and how many decimals the chapter quotes.
@@ -143,7 +143,7 @@ def eightswitches(ch: F.Chapter) -> None:
                      "the lab's ten B2 worlds, twice the noise of a main effect."),
             recipe=recipe(RUNS, data, steps))
     ch.grid("pairs", pair_charts, columns=1, title="Switches that act together",
-            caption=("The seven chains of pairs of batch U (book/notes/fractional-factorial.md): for each, the mean "
+            caption=("The seven chains of pairs of batch U (book/pages/fractional-factorial.md): for each, the mean "
                      "of the eight worlds where the product of the pair's two switches is +1, minus the mean of the "
                      "other eight — the sum of the four pairs' effects that one chain cannot tell apart. The grey "
                      "band: the seed's own noise, as in the figure above."),

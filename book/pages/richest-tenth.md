@@ -36,5 +36,7 @@ of *m*). The Gini coefficient sums up the whole curve; this share reads one
 point of it, the one people most often ask about.
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [The Gini coefficient and the Lorenz curve](gini-coefficient.md) · [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens) · [Tokens per agent: mean, median, extremes](tokens-per-agent.md) →
 <!-- /turns -->

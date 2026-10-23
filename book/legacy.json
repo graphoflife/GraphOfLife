@@ -1,0 +1,281 @@
+{
+ "about": "The notebook's chapter numbers and note ids until 23 October 2026, and the page each became. A thesis is quoted word for word, so it keeps the numbers of its day: `theses` says, for each, which page every number it cites meant when it was written.",
+ "pages": {
+  "about": "README",
+  "1": "what-this-notebook-is-about",
+  "2": "the-world",
+  "3": "one-iteration",
+  "4": "the-brain",
+  "5": "how-worlds-are-measured",
+  "6": "the-ideas-this-builds-on",
+  "7": "physical-inspiration",
+  "8": "is-a-run-reproducible",
+  "9": "thirty-worlds",
+  "10": "a-worlds-life",
+  "11": "the-first-hundred-iterations",
+  "12": "births-deaths-and-ages",
+  "13": "how-ages-change",
+  "14": "how-much-does-the-seed-decide",
+  "15": "where-do-the-tokens-go",
+  "16": "how-the-game-is-played",
+  "17": "what-shape-does-the-network-take",
+  "18": "genotypes-and-lineages",
+  "19": "what-the-brains-are-like",
+  "20": "what-agents-say-to-each-other",
+  "21": "do-the-rich-stay-rich",
+  "22": "how-the-network-grows",
+  "23": "like-next-to-like",
+  "24": "how-many-dimensions-does-a-world-have",
+  "25": "the-core-of-a-world",
+  "26": "what-the-baseline-world-is",
+  "27": "how-even-is-a-world",
+  "28": "gains-and-losses",
+  "29": "where-the-tokens-flow",
+  "30": "what-crosses-a-connection",
+  "31": "how-agents-have-children",
+  "32": "power-laws-real-and-apparent",
+  "33": "the-largest-and-the-smallest",
+  "34": "how-properties-scale-together",
+  "35": "the-geometry-of-a-world",
+  "36": "how-a-world-breaks",
+  "37": "one-world-many-colours",
+  "38": "do-agents-cooperate",
+  "39": "questioning-the-mechanics",
+  "40": "what-the-measurements-say-about-open-ended-evolution",
+  "70": "how-different-are-the-agents",
+  "71": "flow-modules",
+  "72": "lightning-in-every-world",
+  "41": "do-the-brains-matter",
+  "42": "how-does-a-worlds-size-follow-its-tokens",
+  "43": "brains-replaced-by-their-average",
+  "44": "what-keeps-wealth-spread",
+  "45": null,
+  "46": "how-to-tell-a-world-that-keeps-evolving",
+  "47": "brains-that-see-and-worlds-that-break",
+  "48": "a-world-that-cannot-break",
+  "49": "who-dies-and-why",
+  "50": "why-evolution-stops",
+  "51": "strategies-written-by-hand",
+  "52": "how-fast-should-brains-change",
+  "53": "how-big-should-a-brain-be",
+  "54": "the-switches-the-world-was-built-with",
+  "55": "another-game",
+  "56": "alliances",
+  "57": "rules-without-numbers",
+  "58": "gliders-and-who-helps-whom",
+  "59": null,
+  "73": "who-inherits",
+  "78": "mixed-brains-costly-units",
+  "80": "mixed-at-birth-ten-long-worlds",
+  "83": "links-to-strangers",
+  "82": "mixing-with-every-other-rule",
+  "85": "mixed-at-birth-with-parents-as-mates",
+  "86": "eight-switches-at-once",
+  "88": "revolutions-with-every-other-rule",
+  "89": "handover-with-every-other-rule",
+  "90": "gifts-with-every-other-rule",
+  "98": "the-searchs-best-world-in-new-seeds",
+  "99": "a-mate-that-pays-its-share",
+  "100": "room-for-the-steadiest-world",
+  "101": "births-as-rich-as-the-neighbours",
+  "105": "the-floor-in-plain-b2-and-in-b1",
+  "60": "worlds-of-100000-tokens",
+  "61": "dimensions-at-scale",
+  "62": "which-properties-have-no-scale",
+  "63": "local-rules-only",
+  "64": "how-far-does-a-difference-travel",
+  "65": "a-source-and-a-sink",
+  "66": "particles",
+  "67": "one-agent-in-a-sea-of-average-agents",
+  "68": null,
+  "87": "what-folds-a-world",
+  "69": "a-hundred-thousand-iterations",
+  "81": "five-mixed-worlds-fifty-thousand-iterations",
+  "92": "the-candidates-played-on",
+  "93": "five-more-seeds-for-the-rules-that-held",
+  "74": "every-world-side-by-side",
+  "75": "where-tokens-go",
+  "76": "who-helps-whom",
+  "77": "how-alike-the-agents-are",
+  "79": "healthy-and-rich",
+  "84": "what-holds-a-worlds-size",
+  "91": "rules-in-company",
+  "94": "what-a-brain-can-compute",
+  "95": "every-era-against-three",
+  "96": "how-large-a-crowd-a-raider-needs",
+  "97": "does-evolution-close-the-door",
+  "102": "a-crew-of-raiders",
+  "103": "raiders-that-breed",
+  "104": "hand-written-strategies-in-b1",
+  "106": "a-screen-of-random-worlds",
+  "n-settings": "settings",
+  "n-starting-ring": "starting-ring",
+  "n-random-numbers": "random-numbers",
+  "n-share-function": "share-function",
+  "n-binary-decision": "binary-decision",
+  "n-largest-remainder": "largest-remainder",
+  "n-brain-inputs": "brain-inputs",
+  "n-brain-outputs": "brain-outputs",
+  "n-vanishing-signal": "vanishing-signal",
+  "n-messages": "messages",
+  "n-revolution": "revolution",
+  "n-mutation": "mutation",
+  "n-genotype": "genotype",
+  "n-extinction": "extinction",
+  "n-frames-and-stats": "frames-and-stats",
+  "n-births-and-deaths": "births-and-deaths",
+  "n-age-and-lifetime": "age-and-lifetime",
+  "n-degree": "degree",
+  "n-preferential-attachment": "preferential-attachment",
+  "n-clustering": "clustering",
+  "n-path-length": "path-length",
+  "n-core-trees-leaves": "core-trees-leaves",
+  "n-bridges": "bridges",
+  "n-gini-coefficient": "gini-coefficient",
+  "n-richest-tenth": "richest-tenth",
+  "n-home-stake": "home-stake",
+  "n-families": "families",
+  "n-common-ancestor": "common-ancestor",
+  "n-tokens-per-agent": "tokens-per-agent",
+  "n-entropy-and-evenness": "entropy-and-evenness",
+  "n-gains-and-losses": "gains-losses-and-the-share-out",
+  "n-brain-diversity": "brain-diversity",
+  "n-reproduction-statistics": "reproduction-statistics",
+  "n-token-flow": "token-flow",
+  "n-lightning": "lightning",
+  "n-token-curvature": "token-curvature",
+  "n-loops": "loops",
+  "n-cut-risk": "cut-risk",
+  "n-radius-and-diameter": "radius-and-diameter",
+  "n-spectral-gap": "spectral-gap",
+  "n-ball-dimension-and-curvature": "ball-dimension-and-curvature",
+  "n-spectral-dimension": "spectral-dimension",
+  "n-box-dimension": "box-dimension",
+  "n-scaling-relations": "scaling-relations",
+  "n-assortativity": "assortativity",
+  "n-correlation-function": "correlation-function",
+  "n-viewer-colours": "viewer-colours",
+  "n-pilot-worlds": "pilot-worlds",
+  "n-invasion-test": "invasion-test",
+  "n-exploitability": "exploitability",
+  "n-circulation": "circulation",
+  "n-help": "help",
+  "n-map-equation": "map-equation",
+  "n-what-makes-a-world-interesting": "what-makes-a-world-interesting",
+  "n-open-ended-test": "open-ended-test",
+  "n-median-and-quantiles": "median-and-quantiles",
+  "n-bands": "bands",
+  "n-settled-life": "settled-life",
+  "n-spread-between-worlds": "spread-between-worlds",
+  "n-correlation": "correlation",
+  "n-autocorrelation": "autocorrelation",
+  "n-mobility": "mobility",
+  "n-between-and-within": "between-and-within",
+  "n-participation-ratio": "participation-ratio",
+  "n-kaplan-meier": "kaplan-meier",
+  "n-bootstrap": "bootstrap",
+  "n-permutation-test": "permutation-test",
+  "n-seeds-needed": "seeds-needed",
+  "n-wilson-interval": "wilson-interval",
+  "n-logarithmic-axes": "logarithmic-axes",
+  "n-muller-plot": "muller-plot",
+  "n-least-squares": "least-squares",
+  "n-power-law-fit": "power-law-fit",
+  "n-power-spectrum": "power-spectrum",
+  "n-variance-split": "variance-split",
+  "n-effective-number": "effective-number",
+  "n-fractional-factorial": "fractional-factorial",
+  "A": "what-a-simulation-costs",
+  "B": "what-goes-with-what",
+  "C": "every-simulation"
+ },
+ "theses": {
+  "E06": {
+   "Part II": "topic:evolution"
+  },
+  "E07": {
+   "Chapter 4": "how-much-does-the-seed-decide"
+  },
+  "E08": {
+   "Chapter 3": "a-worlds-life"
+  },
+  "E09": {
+   "Chapter 53": "why-evolution-stops",
+   "Chapter 43": "how-fast-should-brains-change",
+   "Chapter 52": "who-dies-and-why"
+  },
+  "E10": {
+   "Chapter 6": "the-ideas-this-builds-on",
+   "Chapter 23": "how-many-dimensions-does-a-world-have",
+   "Chapter 38": "how-does-a-worlds-size-follow-its-tokens",
+   "Chapter 3": "one-iteration"
+  },
+  "E13": {
+   "Chapter 19": "what-the-brains-are-like"
+  },
+  "E14": {
+   "Chapter 49": "how-to-tell-a-world-that-keeps-evolving"
+  },
+  "E16": {
+   "Chapter 49": "how-to-tell-a-world-that-keeps-evolving"
+  },
+  "E17": {
+   "Meta X": "healthy-and-rich",
+   "Chapter 46": "how-to-tell-a-world-that-keeps-evolving"
+  },
+  "E18": {
+   "Meta X": "healthy-and-rich",
+   "Chapter 46": "how-to-tell-a-world-that-keeps-evolving"
+  },
+  "E19": {
+   "Meta XI": "what-holds-a-worlds-size"
+  },
+  "E20": {
+   "Meta X": "healthy-and-rich"
+  },
+  "E21": {
+   "Meta X": "healthy-and-rich",
+   "Meta XI": "what-holds-a-worlds-size"
+  },
+  "E22": {
+   "Meta XI": "what-holds-a-worlds-size"
+  },
+  "E24": {
+   "Chapter 93": "five-more-seeds-for-the-rules-that-held",
+   "Meta X": "healthy-and-rich"
+  },
+  "E28": {
+   "Chapter 81": "five-mixed-worlds-fifty-thousand-iterations",
+   "Chapter 92": "the-candidates-played-on"
+  },
+  "E29": {
+   "Chapter 51": "strategies-written-by-hand",
+   "Chapter 94": "what-a-brain-can-compute"
+  },
+  "E30": {
+   "Chapter 95": "every-era-against-three"
+  },
+  "E31": {
+   "Chapter 87": "what-folds-a-world",
+   "Meta XII": "rules-in-company"
+  },
+  "E34": {
+   "Chapter 51": "strategies-written-by-hand"
+  },
+  "E35": {
+   "Chapter 97": "does-evolution-close-the-door",
+   "Chapter 102": "a-crew-of-raiders",
+   "Chapter 103": "raiders-that-breed"
+  },
+  "E36": {
+   "Chapter 101": "births-as-rich-as-the-neighbours"
+  },
+  "E37": {
+   "Chapter 101": "births-as-rich-as-the-neighbours"
+  },
+  "E38": {
+   "Chapter 100": "room-for-the-steadiest-world",
+   "Chapter 101": "births-as-rich-as-the-neighbours"
+  }
+ }
+}

@@ -112,7 +112,12 @@ const Book = {
 
   /** Every page of the index, written or not, in reading order. */
   pages() {
-    return this.index ? this.index.parts.flatMap(part => part.chapters) : [];
+    return this.index ? this.index.pages : [];
+  },
+
+  /** A topic of the index, by its id. A page's first topic is its home. */
+  topic(id) {
+    return ((this.index && this.index.topics) || []).find(t => t.id === id);
   },
 
   chapter(id) {
@@ -150,7 +155,7 @@ const Book = {
   },
 
   /** The page that explains every setting. */
-  SETTINGS: 'notes/settings.md',
+  SETTINGS: 'pages/settings.md',
 
   /** The notebook opened at one setting's explanation, as a run's settings link to it. */
   async openSetting(key) {
@@ -168,7 +173,7 @@ const Book = {
       this.file = null;
       this.renderToc();
       this.page.innerHTML = `${this.kicker(chapter)}<h2>${Markdown.inline(chapter.title)}</h2>`
-        + `<p class="md-status">Not written yet. ${Markdown.inline(chapter.note || '')}</p>`;
+        + `<p class="md-status">Not written yet. ${Markdown.inline(chapter.summary || '')}</p>`;
       return;
     }
     await this.show(chapter.file, part);
@@ -240,14 +245,13 @@ const Book = {
     return text;
   },
 
-  /** Which chapter this is, above its title: a number, an appendix letter, or nothing. */
+  /** Where a page belongs, above its title: its topic, and the experiments it reports. */
   kicker(chapter) {
     const numbers = (chapter.experiments || []).map(name => Number(name.slice(1)));
     const what = numbers.length ? ` · Experiment${numbers.length > 1 ? 's' : ''} ${
       numbers.length > 1 ? `${numbers.slice(0, -1).join(', ')} and ${numbers.at(-1)}` : numbers[0]}` : '';
-    const number = /^\d+$/.test(chapter.id) ? `Chapter ${chapter.id}`
-      : /^[A-Z]$/.test(chapter.id) ? `Appendix ${chapter.id}` : '';
-    return number ? `<p class="book-kicker">${number}${what}</p>` : '';
+    const topic = this.topic((chapter.topics || [])[0]);
+    return topic ? `<p class="book-kicker">${Markdown.escape(topic.title)}${what}</p>` : '';
   },
 
   // ---- the chapter list -------------------------------------------------
@@ -270,26 +274,25 @@ const Book = {
     const chapter = this.pages().find(c => c.id === this.current);
     const text = this.toggle.querySelector('.book-toc-toggle-text');
     if (!chapter) { text.textContent = 'Contents'; return; }
-    const number = /^\d+$/.test(chapter.id) ? `${chapter.id} · ` : /^[A-Z]$/.test(chapter.id) ? `${chapter.id} · ` : '';
-    text.textContent = `${number}${chapter.title.replace(/[*_`]/g, '')}`;
+    text.textContent = chapter.title.replace(/[*_`]/g, '');
   },
 
+  /** The contents: every page under its home topic, in reading order. */
   renderToc() {
     if (!this.index) return;
     this.labelToggle();
-    const parts = this.index.parts.map(part => {
-      const items = part.chapters.map(c => {
+    const topics = this.index.topics.map(topic => {
+      const items = this.pages().filter(c => c.topics[0] === topic.id).map(c => {
         const state = this.describe(c);
         return `<a href="#" data-chapter="${c.id}" class="book-toc-item${
           c.id === this.current ? ' active' : ''}${c.file ? '' : ' unwritten'}">`
-          + `<span class="book-toc-num">${/^(\d+|[A-Z])$/.test(c.id) ? c.id : ''}</span>`
           + `<span class="book-toc-title">${Markdown.inline(c.title)}</span>`
           + (state.label ? `<span class="book-chip book-chip-${state.state}">${state.label}</span>` : '')
           + '</a>';
       }).join('');
-      return `<div class="book-part"><h3>${Markdown.inline(part.title)}</h3>${items}</div>`;
+      return `<div class="book-part"><h3>${Markdown.inline(topic.title)}</h3>${items}</div>`;
     }).join('');
-    this.toc.innerHTML = `<div class="book-title">${Markdown.inline(this.index.title)}</div>${parts}`;
+    this.toc.innerHTML = `<div class="book-title">${Markdown.inline(this.index.title)}</div>${topics}`;
   },
 
   /**

@@ -52,5 +52,7 @@ Its lifetime is from the first game after which it is alive to the last
 ([Age and lifetime](age-and-lifetime.md); [Chapter 18](genotypes-and-lineages.md)).
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [How different are the agents?](how-different-are-the-agents.md) · [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are) · [How a signal fades through layers](vanishing-signal.md) →
 <!-- /turns -->

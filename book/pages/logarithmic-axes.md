@@ -60,5 +60,7 @@ power law only when it holds over a wide range and a bent alternative fits
 no better.
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [The Wilson interval](wilson-interval.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Muller plots](muller-plot.md) →
 <!-- /turns -->

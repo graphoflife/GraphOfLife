@@ -351,5 +351,5 @@ change only when copied — and neither does it either (−0.02 and +0.14).
 <!-- turns -->
 ---
 
-← [Chapter 85 · Mixed at birth, with parents as mates](85-mixed-at-birth-with-parents-as-mates.md) · [Contents](../README.md) · [Chapter 88 · Revolutions, with every other rule](88-revolutions-with-every-other-rule.md) →
+← [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) · [Changing the rules](../README.md#changing-the-rules) · [Revolutions, with every other rule](revolutions-with-every-other-rule.md) →
 <!-- /turns -->

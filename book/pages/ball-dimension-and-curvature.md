@@ -62,5 +62,7 @@ geometry. [Chapter 35](the-geometry-of-a-world.md) reads them on
 the baseline worlds, beside a picture of the ball growth itself.
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [How alike at a distance](correlation-function.md) · [Space and dimension](../README.md#space-and-dimension) · [The spectral dimension](spectral-dimension.md) →
 <!-- /turns -->

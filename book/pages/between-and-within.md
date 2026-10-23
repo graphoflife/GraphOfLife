@@ -51,5 +51,7 @@ decides. The sharper test is whether a world's first half predicts its
 second half, across worlds ([Correlation](correlation.md)).
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [Mobility](mobility.md) · [Methods and statistics](../README.md#methods-and-statistics) · [How many directions a cloud of points uses](participation-ratio.md) →
 <!-- /turns -->

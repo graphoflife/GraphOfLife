@@ -99,7 +99,7 @@ def whodies(ch: F.Chapter) -> None:
                                        else " From iteration 100, once the founders' first riches are spent."
                                        if start else "")),
                   recipe=recipe(RUNS, "From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, one row per recorded "
-                                      "phase (see [What a run records](../notes/frames-and-stats.md))",
+                                      "phase (see [What a run records](frames-and-stats.md))",
                                 [f"Read `{stat}` from the rows of phase {phase}"
                                  + (", divided by the agents that faced the phase (`nodes_before`), times 100"
                                     if rate else "") + f", for iterations {start:,} to 1,000.",

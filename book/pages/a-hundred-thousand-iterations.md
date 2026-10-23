@@ -269,5 +269,5 @@ windows of cooperation and the gains, and decides the thesis.
 <!-- turns -->
 ---
 
-← [Chapter 87 · What folds a world](87-what-folds-a-world.md) · [Contents](../README.md) · [Chapter 81 · Five mixed worlds, fifty thousand iterations](81-five-mixed-worlds-fifty-thousand-iterations.md) →
+← [Every era against three](every-era-against-three.md) · [Does evolution keep going?](../README.md#does-evolution-keep-going) · [What would count as open-ended evolution](open-ended-test.md) →
 <!-- /turns -->

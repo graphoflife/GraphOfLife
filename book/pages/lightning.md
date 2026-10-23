@@ -73,5 +73,7 @@ C received 3, sent 3 (0); half of 2 + 2 is 2, so `flowImbalance` = 2/11 and the
 ceiling 9/11 — the greedy peel found everything there was.
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [Token flow](token-flow.md) · [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens) · [Token curvature](token-curvature.md) →
 <!-- /turns -->

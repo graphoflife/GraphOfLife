@@ -42,5 +42,7 @@ per iteration while no line takes over, and drops when one does
 ([Chapter 18](genotypes-and-lineages.md)).
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [Families](families.md) · [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are)
 <!-- /turns -->

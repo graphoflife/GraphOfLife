@@ -216,20 +216,21 @@ def test_the_book_explains_every_setting_a_plan_can_set():
         f"and misses {sorted(gol_plan.SETTABLE - set(order))}")
     missing = [k for k in order if not (glossary["settings"].get(k) or {}).get("meaning")]
     assert not missing, f"no meaning for {missing}"
-    with open(os.path.join(book, "notes", "settings.md"), encoding="utf-8") as f:
+    import book_fill
+    with open(os.path.join(book, book_fill.page_file("settings")), encoding="utf-8") as f:
         headings = set(re.findall(r"^### (\w+)$", f.read(), re.M))
     assert set(order) <= headings, f"the settings note has no heading for {sorted(set(order) - headings)}"
 
 
 def test_every_link_between_the_books_pages_arrives():
-    # The chapters and notes are research notes that point at one another; a
-    # link to a page that is not there (renamed, renumbered, not written yet)
-    # is a click that leads nowhere. Every relative link to a Markdown page,
-    # from a chapter, a note or the contents, has to name a file that exists.
+    # The pages are research notes that point at one another; a link to a page
+    # that is not there (renamed, merged, not written yet) is a click that leads
+    # nowhere. Every relative link to a Markdown page, from a page or the
+    # contents, has to name a file that exists.
     import glob
     import re
     book = os.path.join(runner.ROOT, "book")
-    pages = glob.glob(os.path.join(book, "chapters", "*.md")) + glob.glob(os.path.join(book, "notes", "*.md"))
+    pages = glob.glob(os.path.join(book, "pages", "*.md"))
     pages.append(os.path.join(book, "README.md"))
     broken = []
     for page in pages:

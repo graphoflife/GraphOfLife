@@ -51,5 +51,7 @@ exponential looks respectable on log–log axes. A high R² is necessary for the
 dimension to mean something, but not sufficient.
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [The spectral dimension](spectral-dimension.md) · [Space and dimension](../README.md#space-and-dimension)
 <!-- /turns -->

@@ -95,10 +95,10 @@ def scaling(ch: F.Chapter) -> None:
                 f"({len(deg):,} agents), counted in cells of connections k and tokens, both in classes of "
                 "growing width; a cell's colour is how many agents it holds, on a logarithmic scale. White: the "
                 "median tokens in each class of k. Red: the straight line least squares fits through ln(tokens) "
-                "against ln(k) over all agents ([Scaling relations](../notes/scaling-relations.md)). Cyan: "
+                "against ln(k) over all agents ([Scaling relations](scaling-relations.md)). Cyan: "
                 "tokens proportional to k + 1, through the median at k = 1 — where an even split of every "
                 "stake would leave the tokens on a network that held still "
-                "([Chapter 29](29-where-the-tokens-flow.md)).",
+                "([Chapter 29](where-the-tokens-flow.md)).",
         recipe=recipe(W.surviving_text(), FRAMES,
                       [f"Read frame `{W.frame(LAST)}` of every run: each agent's tokens and its connections in `edges`.",
                        "Count the agents in each cell of the classes shown; colour by the count.",
@@ -176,7 +176,7 @@ def scaling(ch: F.Chapter) -> None:
         caption=f"For the agents alive after the last game of {W.lived}, in classes of "
                 "their connections k: the mean, over the class, of the average number of connections of an "
                 "agent's neighbours. A falling line means the well-connected are joined mostly to the poorly "
-                "connected ([Assortativity](../notes/assortativity.md)).",
+                "connected ([Assortativity](assortativity.md)).",
         recipe=recipe(W.surviving_text(), FRAMES,
                       [f"Read frame `{W.frame(LAST)}` of every run; for every agent, the mean degree of its neighbours.",
                        "Average by class of the agent's own degree."]))
@@ -200,7 +200,7 @@ def scaling(ch: F.Chapter) -> None:
                 "from 500 on, of four slopes fitted by least squares on the logarithms of the agents of a frame, "
                 "and of their R². Tokens and triangles against connections, clustering against connections, and "
                 "the size of an agent's change in tokens over the game against the tokens it holds "
-                "([Scaling relations](../notes/scaling-relations.md)).",
+                "([Scaling relations](scaling-relations.md)).",
         recipe=recipe(W.surviving_text(), STATS_FILE,
                       ["Average `tokensVsDegree`, `trianglesVsDegree`, `clusteringVsDegree` and "
                        "`changeVsTokens`, and the same with `R2` appended, over the rows with `phase` = 2 and "
@@ -356,7 +356,7 @@ def geometry(ch: F.Chapter) -> None:
                 "d-dimensional space — is a straight line of slope d; red is the line least squares fits up to "
                 "the radius where half the world is reached. Right, only the vertical axis logarithmic: "
                 "exponential growth, as in a tree or a random network, would be a straight line there "
-                "([Dimension and curvature](../notes/ball-dimension-and-curvature.md)).",
+                "([Dimension and curvature](ball-dimension-and-curvature.md)).",
         recipe=recipe(f"`{W.run(1)}`.", FRAMES,
                       [f"Read frame `{W.frame(LAST)}`; build the network from `edges`.",
                        "From every ⌊n/24⌋-th agent of the id-sorted list, breadth-first search; count the agents "
@@ -381,9 +381,9 @@ def geometry(ch: F.Chapter) -> None:
     ch.grid(
         "measures", panels, columns=2, title="Four measures of a world's geometry",
         caption=f"Every 25 iterations, in the {len(specs)} baseline worlds: the dimension and the curvature read off how "
-                "balls grow ([Dimension and curvature](../notes/ball-dimension-and-curvature.md)), the box "
-                "dimension ([Box dimension](../notes/box-dimension.md)), and the spectral gap, on a logarithmic "
-                f"axis ([The spectral gap](../notes/spectral-gap.md)). In each, {BAND_WORDS[0].lower()}"
+                "balls grow ([Dimension and curvature](ball-dimension-and-curvature.md)), the box "
+                "dimension ([Box dimension](box-dimension.md)), and the spectral gap, on a logarithmic "
+                f"axis ([The spectral gap](spectral-gap.md)). In each, {BAND_WORDS[0].lower()}"
                 f"{BAND_WORDS[1:]}.",
         recipe=recipe(W.runs_text(), STATS_FILE,
                       ["Take `dimension`, `ricciCurvature`, `boxDimension` and `spectralGap` of the rows with "
@@ -406,7 +406,7 @@ def geometry(ch: F.Chapter) -> None:
                 "within (ℓ − 1)/2 steps of a centre, and centres are taken greedily, best-connected first, among "
                 "the agents no box holds yet. Dots: how many boxes it takes for ℓ = 1, 3, 5, 9, 17 and 33; red: "
                 "the least-squares line on logarithmic axes, whose slope is minus the box dimension "
-                "([Box dimension](../notes/box-dimension.md)).",
+                "([Box dimension](box-dimension.md)).",
         recipe=recipe(f"`{W.run(1)}`.", FRAMES,
                       [f"Read frame `{W.frame(LAST)}`; order the agents by degree, highest first.",
                        "For each ℓ: go down the order; every agent not yet in a box starts a new box, which takes "
@@ -423,7 +423,7 @@ def geometry(ch: F.Chapter) -> None:
         series=lines_,
         caption=f"Every 25 iterations, in the {len(specs)} baseline worlds: the diameter, the radius and the mean path "
                 "length, all estimated from breadth-first searches out of 8 to 16 spread agents "
-                f"([Radius and diameter](../notes/radius-and-diameter.md)). For each, {BAND_WORDS[0].lower()}"
+                f"([Radius and diameter](radius-and-diameter.md)). For each, {BAND_WORDS[0].lower()}"
                 f"{BAND_WORDS[1:]}.",
         recipe=recipe(W.runs_text(), STATS_FILE,
                       ["Take `diameter`, `radius` and `meanPathLength` of the rows with `phase` = 2.",
@@ -440,7 +440,7 @@ def geometry(ch: F.Chapter) -> None:
         series=[line(lx, ly, "the world of seed 1 after its last game", GREEN, width=2)],
         caption="A breadth-first spanning tree of the world with seed 1 after its last game leaves "
                 f"{int(len(frame['edges']) - n + 1):,} connections over, each closing one loop of a cycle basis "
-                "([Loops](../notes/loops.md)). For every count x, the share of agents that at least x of those "
+                "([Loops](loops.md)). For every count x, the share of agents that at least x of those "
                 f"loops pass through. {100 * np.mean(through == 0):.0f}% of the agents lie on none of them.",
         recipe=recipe(f"`{W.run(1)}`.", FRAMES,
                       [f"Read frame `{W.frame(LAST)}`; build a breadth-first spanning tree.",
@@ -523,7 +523,7 @@ def breaking(ch: F.Chapter) -> None:
                 line([0, 0.5], [0, 0.5], "the whole worst cut lost", BLUE, width=1, dash=[4, 4])],
         caption=f"Every game from iteration 500 on of {W.lived}. x: before the game, "
                 "the largest share of the world that one bridge held to the rest — if that one connection were "
-                "cut, that many would be cut off ([Cut risk](../notes/cut-risk.md)). y: the share of agents the "
+                "cut, that many would be cut off ([Cut risk](cut-risk.md)). y: the share of agents the "
                 "game really cut off. White: the mean of y in classes of x 0.05 wide; dashed: y = x.",
         recipe=recipe(W.surviving_text(), STATS_FILE,
                       [f"Take the rows with `phase` = 2 and 500 ≤ `iteration` ≤ {LAST:,}: `cutRiskBefore`, and "
@@ -685,7 +685,7 @@ def colours(ch: F.Chapter) -> None:
                 "connection between two of them a faint line, and the dots sit in the same places in all six pictures (a "
                 "ForceAtlas2 layout, seed 1, which pulls joined agents together). Each picture colours the "
                 "dots by one of the quantities the viewer offers ([What the viewer can colour by]"
-                "(../notes/viewer-colours.md)): tokens and age on logarithmic scales; the change of tokens in "
+                "(viewer-colours.md)): tokens and age on logarithmic scales; the change of tokens in "
                 "the last game and the token curvature at its start on a signed scale, blue below zero, red "
                 "above, dark at zero (both stretched logarithmically, the curvature cut at its 1st and 99th "
                 "percentile); the family — which of the genotypes alive 100 iterations earlier each agent's "
@@ -698,7 +698,7 @@ def colours(ch: F.Chapter) -> None:
                        f"Families: read frames {W.frame(LAST - 100)} to {W.frame(LAST)}, note each genotype's parent, "
                        "and climb from each "
                        f"living genotype to one alive after the game of iteration {LAST - 100:,}.",
-                       "Loops: as in [Chapter 35](35-the-geometry-of-a-world.md).",
+                       "Loops: as in [Chapter 35](the-geometry-of-a-world.md).",
                        "Which agents are drawn: as in Chapter 17 (`book_chapters.society.shown`).",
                        "Lay out with `networkx.forceatlas2_layout(G, max_iter=200, seed=1)` and colour."]))
     ch.number("six_views", {"agents": len(ids), "drawn": len(drawn), "piece": info,

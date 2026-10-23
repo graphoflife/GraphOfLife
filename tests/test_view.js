@@ -1353,8 +1353,11 @@ function test_book_progress_of_an_experiment() {
   assert(Book.describe(two, both).label === 'running · 50%', Book.describe(two, both).label);
   both.experiments.E37 = { state: 'finished', done: 10, total: 10 };
   assert(Book.describe(two, both).label === 'finished · to analyse', 'a page finished before its last experiment');
-  assert(Book.kicker({ id: '105', experiments: ['E36', 'E37'] }).includes('Experiments 36 and 37'),
-    Book.kicker({ id: '105', experiments: ['E36', 'E37'] }));
+  // Above its title a page says where it belongs: its topic, and what it reports.
+  Book.index = { topics: [{ id: 'size', title: 'Size and riches of a world' }], pages: [] };
+  const floor = { id: 'the-floor', topics: ['size'], experiments: ['E36', 'E37'] };
+  assert(Book.kicker(floor) === '<p class="book-kicker">Size and riches of a world · Experiments 36 and 37</p>',
+    Book.kicker(floor));
 
   assert(Book.eta(30) === 'under 2 min left');
   assert(Book.eta(600) === 'about 10 min left');

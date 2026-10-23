@@ -51,5 +51,7 @@ over its candidates by their stake scores ([Chapter 3](one-iteration.md)).
 In the code it is `_apportion(weights, total)` in `GraphOfLifeSimple.py`.
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [A yes-or-no decision](binary-decision.md) · [How the simulation works](../README.md#how-the-simulation-works) · [What a brain sees](brain-inputs.md) →
 <!-- /turns -->

@@ -59,5 +59,7 @@ iteration of a settled world does;
 world's life.
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [How agents have children](how-agents-have-children.md) · [Agents' lives: births, deaths, ages](../README.md#agents-lives-births-deaths-ages) · [Age and lifetime](age-and-lifetime.md) →
 <!-- /turns -->

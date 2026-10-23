@@ -18,8 +18,8 @@ comment lines, which no reader shows:
     <!-- thesis E04 -->               an experiment's claim, quoted from its plan
     <!-- runs E02 -->                 what was run: every setting, the seeds, the
                                       command that runs it again
-    <!-- contents -->                 the chapters and notes, from book.json
-    <!-- turns -->                    links to the chapter before and after
+    <!-- contents -->                 every page, under its topic, from book.json
+    <!-- turns -->                    the page's topic, and the pages before and after it there
     <!-- costs -->                    what a simulation costs, as last fitted
     <!-- table chapter/name -->       a table a chapter's code made from the records
 
@@ -87,11 +87,12 @@ def anchors(md_text: str) -> List[str]:
 # ---------------------------------------------------------------------------
 
 def linked(md: str, text: str) -> str:
-    """Every "Chapter 13" in a text made by code, as a link to that chapter."""
+    """Every "Chapter 13" in a text made by code, as a link to the page that chapter became."""
+    became = read_json("legacy.json")["pages"]
     files = {c["id"]: c["file"] for c in pages() if c.get("file")}
 
     def to(match: "re.Match[str]") -> str:
-        target = files.get(match.group(1))
+        target = files.get(became.get(match.group(1)) or "")
         return f"[{match.group(0)}]({link(md, target)})" if target else match.group(0)
     return re.sub(r"(?<!\[)\bChapter (\d+)\b(?!\]\()", to, text)
 
@@ -227,7 +228,7 @@ def screen(md: str, name: str, plan: Dict[str, Any]) -> str:
     summary = quote("\n".join(lines), "[!info] The worlds behind this chapter")
     rows = ["| world | seed | run | what differs from B1 |", "|---|---|---|---|"]
     for d in found:
-        what = ", ".join(f"[`{k}`]({link(md, 'notes/settings.md')}#{k}) = {show(v)}"
+        what = ", ".join(f"[`{k}`]({link(md, page_file('settings'))}#{k}) = {show(v)}"
                          for k, v in sorted(d["set"].items()))
         rows.append(f"| {d['world']} | {d['seed']} | `{ids[d['seed']]}` | {what} |")
     every = quote("\n".join(rows), "[!info]- Every world's settings")
@@ -307,7 +308,7 @@ def runs(md: str, name: str) -> str:
             text = show(value)
             cells.append(f"**{text}**" if value != base["settings"][key] else text)
         meaning = (glossary["settings"].get(key) or {}).get("meaning", "")
-        rows.append(f"| [`{key}`]({link(md, 'notes/settings.md')}#{key}) | " + " | ".join(cells)
+        rows.append(f"| [`{key}`]({link(md, page_file('settings'))}#{key}) | " + " | ".join(cells)
                     + f" | {meaning} |")
     rows.append("| seeds | " + " | ".join(seeds_of(c)[0] for c in conditions) + " | one run per seed |")
     rows.append("| iterations | " + " | ".join(number(spec["iterations"]) for _ in conditions)
@@ -320,7 +321,12 @@ def runs(md: str, name: str) -> str:
 
 def pages() -> List[Dict[str, Any]]:
     """Every page of the notebook's index, written or not, in reading order."""
-    return [c for part in read_json("book.json")["parts"] for c in part["chapters"]]
+    return read_json("book.json")["pages"]
+
+
+def topics() -> List[Dict[str, Any]]:
+    """The topics, in the order the contents list them. A page's first topic is its home."""
+    return read_json("book.json")["topics"]
 
 
 def page_file(page: str) -> str:
@@ -339,41 +345,38 @@ def home_of(experiment: str) -> Dict[str, Any]:
     raise LookupError(f"no page of book.json reports {experiment}")
 
 
-def heading(c: Dict[str, Any]) -> str:
-    if c["id"].isdigit():
-        return f"Chapter {c['id']} · {c['title']}"
-    if re.fullmatch(r"[A-Z]", c["id"]):
-        return f"Appendix {c['id']} · {c['title']}"
-    return c["title"]
+def at_home(topic: str) -> List[Dict[str, Any]]:
+    """The pages whose home is a topic, in reading order."""
+    return [c for c in pages() if c["topics"][0] == topic]
 
 
 def contents(md: str, _: str) -> str:
+    """Every page under its home topic, in reading order: the front page's list."""
     out = []
-    for part in read_json("book.json")["parts"]:
-        if all(c.get("file") == md for c in part["chapters"]):
-            continue                        # the part that is only this page
-        out.append(f"\n**{part['title']}**\n")
-        for c in part["chapters"]:
+    for topic in topics():
+        out.append(f"\n### {topic['title']}\n\n{topic['about']}\n")
+        for c in at_home(topic["id"]):
             if c.get("file") and c["file"] != md:
-                out.append(f"- [{heading(c)}]({link(md, c['file'])})")
+                out.append(f"- [{c['title']}]({link(md, c['file'])})")
             elif not c.get("file"):
-                out.append(f"- {heading(c)} — *not written yet*")
+                out.append(f"- {c['title']} — *not written yet*")
     return "\n".join(out).strip("\n")
 
 
 def turns(md: str, _: str) -> str:
-    """The chapters before and after this one, in the order of book.json."""
-    written = [c for c in pages() if c.get("file") and re.fullmatch(r"\d+|[A-Z]", c["id"])]
-    files = [c["file"] for c in written]
-    if md not in files:
+    """The page's home topic, with the pages before and after it there."""
+    here = next((c for c in pages() if c.get("file") == md), None)
+    if here is None or md == "README.md":
         return f"[Contents]({link(md, 'README.md')})"
-    at = files.index(md)
+    topic = next(t for t in topics() if t["id"] == here["topics"][0])
+    written = [c for c in at_home(topic["id"]) if c.get("file")]
+    at = written.index(here)
     parts = []
     if at > 0:
-        parts.append(f"← [{heading(written[at - 1])}]({link(md, files[at - 1])})")
-    parts.append(f"[Contents]({link(md, 'README.md')})")
+        parts.append(f"← [{written[at - 1]['title']}]({link(md, written[at - 1]['file'])})")
+    parts.append(f"[{topic['title']}]({link(md, 'README.md')}#{slug(topic['title'])})")
     if at + 1 < len(written):
-        parts.append(f"[{heading(written[at + 1])}]({link(md, files[at + 1])}) →")
+        parts.append(f"[{written[at + 1]['title']}]({link(md, written[at + 1]['file'])}) →")
     return "---\n\n" + " · ".join(parts)
 
 

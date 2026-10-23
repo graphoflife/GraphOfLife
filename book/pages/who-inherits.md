@@ -263,5 +263,5 @@ other worlds tie or swing.
 <!-- turns -->
 ---
 
-← [Chapter 58 · Gliders, and who helps whom](58-gliders-and-who-helps-whom.md) · [Contents](../README.md) · [Chapter 78 · Brains mixed at birth, units that cost, an eye for raids on kin](78-mixed-brains-costly-units.md) →
+← [Rules without numbers](rules-without-numbers.md) · [Changing the rules](../README.md#changing-the-rules) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) →
 <!-- /turns -->

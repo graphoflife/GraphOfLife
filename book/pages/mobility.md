@@ -61,3 +61,9 @@ the baseline worlds.
   States. *Quarterly Journal of Economics* 129, 1553–1623.
 - Shorrocks, A. F. (1978). The measurement of mobility. *Econometrica* 46,
   1013–1024.
+
+<!-- turns -->
+---
+
+← [Autocorrelation: how long a world remembers](autocorrelation.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Between worlds and within them](between-and-within.md) →
+<!-- /turns -->

@@ -100,5 +100,5 @@ change and brains that grow (0.72 and 0.85 each), half kept at home (0.72 and
 <!-- turns -->
 ---
 
-← [Chapter 86 · Eight switches at once](86-eight-switches-at-once.md) · [Contents](../README.md) · [Chapter 89 · Handover, with every other rule](89-handover-with-every-other-rule.md) →
+← [Eight switches at once](eight-switches-at-once.md) · [Changing the rules](../README.md#changing-the-rules) · [Handover, with every other rule](handover-with-every-other-rule.md) →
 <!-- /turns -->

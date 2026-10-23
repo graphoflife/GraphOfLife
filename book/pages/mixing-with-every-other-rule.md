@@ -186,5 +186,5 @@ it most where the agents stay rich.
 <!-- turns -->
 ---
 
-← [Chapter 83 · Links to strangers](83-links-to-strangers.md) · [Contents](../README.md) · [Chapter 85 · Mixed at birth, with parents as mates](85-mixed-at-birth-with-parents-as-mates.md) →
+← [Links to strangers](links-to-strangers.md) · [Changing the rules](../README.md#changing-the-rules) · [Eight switches at once](eight-switches-at-once.md) →
 <!-- /turns -->

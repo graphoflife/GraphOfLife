@@ -162,5 +162,5 @@ births fills a world**, to half as many agents again and poorer
 <!-- turns -->
 ---
 
-← [Chapter 74 · Meta VI · Every world side by side](74-meta-6-every-world.md) · [Contents](../README.md) · [Chapter 76 · Meta VIII · Who helps whom](76-meta-8-who-helps-whom.md) →
+[The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens) · [How the game is played](how-the-game-is-played.md) →
 <!-- /turns -->

@@ -83,3 +83,9 @@ Each part closes a way to be fooled:
 **Related notes:** [Chapter 46 · How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) ·
 [Chapter 94 · What a brain can compute](what-a-brain-can-compute.md) ·
 [Meta X · Healthy and rich](healthy-and-rich.md)
+
+<!-- turns -->
+---
+
+← [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Does evolution keep going?](../README.md#does-evolution-keep-going) · [Exploitability](exploitability.md) →
+<!-- /turns -->

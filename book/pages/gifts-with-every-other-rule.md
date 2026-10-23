@@ -110,5 +110,5 @@ gifts and revolutions, and 0.89 and 0.08 with gifts and no revolutions.
 <!-- turns -->
 ---
 
-← [Chapter 89 · Handover, with every other rule](89-handover-with-every-other-rule.md) · [Contents](../README.md) · [Chapter 98 · The search's best world, in new seeds](98-the-searchs-best-world-in-new-seeds.md) →
+← [Handover, with every other rule](handover-with-every-other-rule.md) · [Changing the rules](../README.md#changing-the-rules)
 <!-- /turns -->

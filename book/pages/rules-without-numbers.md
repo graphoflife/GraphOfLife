@@ -238,5 +238,5 @@ come next:
 <!-- turns -->
 ---
 
-← [Chapter 56 · Alliances](56-alliances.md) · [Contents](../README.md) · [Chapter 58 · Gliders, and who helps whom](58-gliders-and-who-helps-whom.md) →
+← [The switches the world was built with](the-switches-the-world-was-built-with.md) · [Changing the rules](../README.md#changing-the-rules) · [Who inherits?](who-inherits.md) →
 <!-- /turns -->

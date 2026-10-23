@@ -81,7 +81,7 @@ played by the lab:
 > **Data.** From each trial's `result.json`.
 >
 > 1. Load the world of iteration 2,000; on place p, draw an agent at random and take its nearest neighbours, step by step, until the patch has its size.
-> 2. Give the patch the raider ([Chapter 51](51-strategies-written-by-hand.md)'s rule), or the control; neither ever mutates.
+> 2. Give the patch the raider ([Chapter 51](strategies-written-by-hand.md)'s rule), or the control; neither ever mutates.
 > 3. Play 300 iterations under the world's own rules, counting the patch's agents after every iteration.
 > 4. A planting takes hold when, after 300 iterations, its raiders are alive, more than the patch began with, and more than the control holds there.
 >
@@ -119,7 +119,7 @@ A raid is either joined by enough raiders or it dies.
 > **Data.** From each trial's `result.json`.
 >
 > 1. Load the world of iteration 2,000; on place p, draw an agent at random and take its nearest neighbours, step by step, until the patch has its size.
-> 2. Give the patch the raider ([Chapter 51](51-strategies-written-by-hand.md)'s rule), or the control; neither ever mutates.
+> 2. Give the patch the raider ([Chapter 51](strategies-written-by-hand.md)'s rule), or the control; neither ever mutates.
 > 3. Play 300 iterations under the world's own rules, counting the patch's agents after every iteration.
 > 4. A planting takes hold when, after 300 iterations, its raiders are alive, more than the patch began with, and more than the control holds there.
 >
@@ -166,5 +166,5 @@ A raid is either joined by enough raiders or it dies.
 <!-- turns -->
 ---
 
-← [Chapter 95 · Every era against three](95-every-era-against-three.md) · [Contents](../README.md) · [Chapter 97 · Does evolution close the door?](97-does-evolution-close-the-door.md) →
+← [What a brain can compute](what-a-brain-can-compute.md) · [Strategies written by hand](../README.md#strategies-written-by-hand) · [Does evolution close the door?](does-evolution-close-the-door.md) →
 <!-- /turns -->

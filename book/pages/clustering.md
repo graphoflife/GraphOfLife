@@ -55,5 +55,7 @@ stretches hanging off its clustered core
 ([Chapter 17](what-shape-does-the-network-take.md)).
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [Preferential attachment and its kernel](preferential-attachment.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Path length](path-length.md) →
 <!-- /turns -->

@@ -69,5 +69,7 @@ Two things to keep in mind:
   instead.
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [Muller plots](muller-plot.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Fitting a power law properly](power-law-fit.md) →
 <!-- /turns -->

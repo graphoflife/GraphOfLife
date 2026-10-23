@@ -165,5 +165,5 @@ about 300 megabytes on disk; one of 100,000 tokens and 1,500 iterations writes
 <!-- turns -->
 ---
 
-← [Chapter 1 · What this book is about](01-what-this-book-is-about.md) · [Contents](../README.md) · [Chapter 3 · One iteration, step by step](03-one-iteration.md) →
+[How the simulation works](../README.md#how-the-simulation-works) · [One iteration, step by step](one-iteration.md) →
 <!-- /turns -->

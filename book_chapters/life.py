@@ -239,7 +239,7 @@ def youth(ch: F.Chapter) -> None:
                 f"{BAND_WORDS}, at every iteration.",
         recipe=recipe(W.runs_text(), STATS_FILE,
                       ["Take the rows with `phase` = 2 and 0 ≤ `iteration` ≤ 150, and the statistic "
-                       "`cladesInWindow` ([Families](../notes/families.md): for every living agent, follow its genotype's "
+                       "`cladesInWindow` ([Families](families.md): for every living agent, follow its genotype's "
                        "parents back to the newest one born at or before iteration t − 8, or to a "
                        "founder's; count the distinct ones).",
                        "At each iteration take the median, quartiles and 5th and 95th percentiles over the runs."]))
@@ -554,7 +554,7 @@ def seed(ch: F.Chapter) -> None:
                       [f"For {' and '.join(said)}, average over the rows with `phase` = 2 and "
                        f"100 ≤ `iteration` ≤ {half - 1:,}, and over {half:,} ≤ `iteration` ≤ {W.last:,}.",
                        "Plot the second against the first, one dot per run; r is their Pearson "
-                       "correlation ([correlation](../notes/correlation.md))."]))
+                       "correlation ([correlation](correlation.md))."]))
 
     lengths = list(range(100, W.until - 100 + 1, 100))
     curves = []

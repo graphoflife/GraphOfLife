@@ -320,5 +320,5 @@ size.
 <!-- turns -->
 ---
 
-← [Chapter 25 · The core of a world](25-the-core-of-a-world.md) · [Contents](../README.md) · [Chapter 27 · How even is a world?](27-how-even-is-a-world.md) →
+[The baselines B1 and B2](../README.md#the-baselines-b1-and-b2) · [Thirty worlds](thirty-worlds.md) →
 <!-- /turns -->

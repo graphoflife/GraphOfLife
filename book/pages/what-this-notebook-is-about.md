@@ -222,5 +222,5 @@ tab of the Graph of Life app, on GitHub, and in **Obsidian**: open the folder
 <!-- turns -->
 ---
 
-[Contents](../README.md) · [Chapter 2 · The world: tokens, agents and a network](02-the-world.md) →
+← [How to read this book](../README.md) · [Start here](../README.md#start-here) · [The ideas this builds on](the-ideas-this-builds-on.md) →
 <!-- /turns -->

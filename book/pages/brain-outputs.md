@@ -46,5 +46,7 @@ The layout shrinks with the rules: without revolutions there are no rows
 every run of this book both are on and the layout is the one above.
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [What a brain sees](brain-inputs.md) · [How the simulation works](../README.md#how-the-simulation-works) · [Messages](messages.md) →
 <!-- /turns -->

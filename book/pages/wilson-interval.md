@@ -32,5 +32,7 @@ and for small counts it is badly wrong: with *k* = 0 it gives the "interval"
 the true share about as often as it promises.
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [How many seeds an experiment needs](seeds-needed.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Logarithmic axes and power laws](logarithmic-axes.md) →
 <!-- /turns -->

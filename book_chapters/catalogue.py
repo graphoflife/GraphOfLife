@@ -29,40 +29,45 @@ JOBS = os.path.join(ROOT, "research", "oee", "pilots")
 BOOKKEEPING = {"seed", "total_tokens", "extinction_threshold", "archive_every", "checkpoint_every", "export_every",
                "export_decisions"}
 
-#: What each pilot batch asked, and where the book answers it.
+#: What each pilot batch asked, and the pages that answer it.
 BATCHES: Dict[str, Tuple[str, List[str]]] = {
     "A3k": ("Alliances, kin pooling and a stake gain, first tried at 3,000 tokens (kept only as hints: the book's "
-            "worlds have at least 10,000 tokens since)", ["56"]),
+            "worlds have at least 10,000 tokens since)", ["alliances"]),
     "A10k": ("Cooperation with a surplus: alliances by mutual consent, sides pooled by kinship, support that counts "
-             "twice, against a control", ["56"]),
-    "AL": ("Alliances over a long time and at 20,000 tokens", ["56"]),
-    "N": ("Rules without numbers (B3, with and without allies) and alliances without the home advantage", ["56", "57"]),
+             "twice, against a control", ["alliances"]),
+    "AL": ("Alliances over a long time and at 20,000 tokens", ["alliances"]),
+    "N": ("Rules without numbers (B3, with and without allies) and alliances without the home advantage",
+          ["alliances", "rules-without-numbers"]),
     "S": ("The switches the world was built with (revolutions, gifts, lapsing links, estates by wealth) and other "
-          "contests (a lottery, sides pooled by genotype or family, kin and family senses)", ["54", "55"]),
+          "contests (a lottery, sides pooled by genotype or family, kin and family senses)",
+          ["the-switches-the-world-was-built-with", "another-game"]),
     "L": ("Long runs: Experiment 16's B2 worlds played on to 10,000 iterations, B1 to 10,000, B1 without "
-          "revolutions to 3,000", ["50", "69"]),
-    "P": ("Two inputs (where my brain came from, who helped me) and links that hold a token", ["57", "58"]),
+          "revolutions to 3,000", ["why-evolution-stops", "a-hundred-thousand-iterations"]),
+    "P": ("Two inputs (where my brain came from, who helped me) and links that hold a token",
+          ["rules-without-numbers", "gliders-and-who-helps-whom"]),
     "Q": ("Brains mixed at birth, brain units that hold a token, an eye for raids on kin, and links that hold a "
-          "token without old age", ["78"]),
-    "R": ("Who inherits the estate of the dead: the poorest, the newborns, their parents", ["73"]),
-    "T": ("Gifts together with each other switch", ["90"]),
-    "U": ("Eight switches in combination on B2: a fractional factorial design", ["86"]),
-    "V": ("Eight switches in combination on B1: a fractional factorial design", ["86"]),
-    "W": ("No revolutions together with each other switch, on B2", ["88"]),
-    "X": ("Handover together with each other switch, on B2", ["89"]),
-    "Y": ("Brains mixed at birth together with each other switch, on B2", ["82"]),
-    "K": ("Links to strangers on B2: every search (jump, walk, reach) with every steering and consent", ["83"]),
+          "token without old age", ["mixed-brains-costly-units"]),
+    "R": ("Who inherits the estate of the dead: the poorest, the newborns, their parents", ["who-inherits"]),
+    "T": ("Gifts together with each other switch", ["gifts-with-every-other-rule"]),
+    "U": ("Eight switches in combination on B2: a fractional factorial design", ["eight-switches-at-once"]),
+    "V": ("Eight switches in combination on B1: a fractional factorial design", ["eight-switches-at-once"]),
+    "W": ("No revolutions together with each other switch, on B2", ["revolutions-with-every-other-rule"]),
+    "X": ("Handover together with each other switch, on B2", ["handover-with-every-other-rule"]),
+    "Y": ("Brains mixed at birth together with each other switch, on B2", ["mixing-with-every-other-rule"]),
+    "K": ("Links to strangers on B2: every search (jump, walk, reach) with every steering and consent",
+          ["links-to-strangers"]),
     "Z": ("Settings drawn at random from every value the book has used, the values that make worlds worse "
           "dropped round after round (research/oee/search.md)", []),
     "LC": ("The candidates, the worlds closest to the author's picture of one that might keep evolving, played on "
-           "to 10,000 iterations", ["79", "92"]),
+           "to 10,000 iterations", ["healthy-and-rich", "the-candidates-played-on"]),
     "SW": ("Mixing switched at a moment: off in the five worlds of Experiment 17 that met every mark, at 5,000; on "
-           "in five of B2's worlds, at 2,000", ["80"]),
+           "in five of B2's worlds, at 2,000", ["mixed-at-birth-ten-long-worlds"]),
     "M": ("Steadying a mixed world: each rule of the engine that might hold its size (estates, half kept at home, "
           "searches, a slower change of brains), and the estate to a dead agent's own children (H), parents as "
-          "mates (MP) and a bought life (BL)", ["84", "85"]),
-    "YB": ("Who breeds: only the young or only the old, in B2 and in B2 with brains mixed at birth", ["87"]),
-    "BIG": ("B2 at 100,000 tokens, one world to 1,000 iterations", ["87"]),
+          "mates (MP) and a bought life (BL)", ["what-holds-a-worlds-size", "mixed-at-birth-with-parents-as-mates"]),
+    "YB": ("Who breeds: only the young or only the old, in B2 and in B2 with brains mixed at birth",
+           ["what-folds-a-world"]),
+    "BIG": ("B2 at 100,000 tokens, one world to 1,000 iterations", ["what-folds-a-world"]),
 }
 #: Batches whose every world draws settings of its own: one line in the table of conditions.
 DRAWN = {"Z": "each world its settings drawn at random from the values the book has used (research/oee/search.md)"}
@@ -83,7 +88,8 @@ def _chapters() -> Dict[str, Dict[str, Any]]:
 
 
 def _cell_chapters(ids: List[str], chapters: Dict[str, Dict[str, Any]]) -> List[Dict[str, str]]:
-    return [{"text": i, "href": chapters[i]["file"]} for i in ids if i in chapters and chapters[i].get("file")]
+    return [{"text": chapters[i]["title"], "href": chapters[i]["file"]} for i in ids
+            if i in chapters and chapters[i].get("file")]
 
 
 def _show(value: Any) -> str:
@@ -188,7 +194,7 @@ def lab_rows(chapters, done) -> Tuple[Dict[str, Any], Dict[str, Any]]:
                      _cell_chapters([by_experiment[name]] if name in by_experiment else [], chapters)])
         measures.append([name] + [str(sum(i in done[m] for i in present)) for m in MEASURES])
     head = ["", "question", "on", "conditions (and what each changes)", "seeds", "tokens", "iterations",
-            "runs on disk", "chapter"]
+            "runs on disk", "page"]
     return ({"head": head, "rows": rows},
             {"rows": measures})
 
@@ -324,7 +330,7 @@ def pilot_rows(chapters, done) -> Tuple[Dict[str, Any], Dict[str, Any], Dict[str
                      _cell_chapters(BATCHES[batch][1], chapters)])
         ids = [f"{batch}/{name}" for name, _, _ in worlds]
         measures.append([batch] + [str(sum(i in done[m] for i in ids)) for m in MEASURES])
-    return ({"head": ["batch", "what it asks", "conditions", "worlds", "tokens", "iterations", "status", "chapter"],
+    return ({"head": ["batch", "what it asks", "conditions", "worlds", "tokens", "iterations", "status", "page"],
              "rows": rows},
             {"head": ["batch", "condition", "on", "what it changes", "seeds", "iterations"], "rows": details},
             {"rows": measures})
@@ -340,7 +346,7 @@ def baselines() -> Dict[str, Any]:
     for key in order:
         if key in BOOKKEEPING or b1.get(key) == b2.get(key):
             continue
-        rows.append([{"text": f"`{key}`", "href": f"notes/settings.md#{key}"}, _show(b1.get(key)), _show(b2.get(key)),
+        rows.append([{"text": f"`{key}`", "href": f"pages/settings.md#{key}"}, _show(b1.get(key)), _show(b2.get(key)),
                      (glossary["settings"].get(key) or {}).get("meaning", "")])
     return {"head": ["setting", "B1", "B2", "what it is"], "rows": rows}
 

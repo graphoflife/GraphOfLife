@@ -174,7 +174,7 @@ into a part that runs downhill and a part that circulates.
 <!-- figure lightning/exact -->
 ![A greedy count and an exact one](../figures/lightning/exact.svg)
 
-**A greedy count and an exact one.** Each dot is a world: across, the exact share of the flow over 50 games that circulates (the Helmholtz–Hodge decomposition of [Chapter 58](58-gliders-and-who-helps-whom.md)); up, the greedy loop count of a single game, averaged over the same thousand iterations.
+**A greedy count and an exact one.** Each dot is a world: across, the exact share of the flow over 50 games that circulates (the Helmholtz–Hodge decomposition of [Chapter 58](gliders-and-who-helps-whom.md)); up, the greedy loop count of a single game, averaged over the same thousand iterations.
 
 > [!example]- How to make this figure
 > **Runs.** The ten B2 worlds of Experiment 16 and the first ten B1 worlds of Experiment 2, iterations 1,000 to 2,000.
@@ -237,5 +237,5 @@ which gathers what the book knows about flow.
 <!-- turns -->
 ---
 
-← [Chapter 71 · Flow modules: the groups tokens stay in](71-flow-modules.md) · [Contents](../README.md) · [Chapter 41 · Do the brains matter?](41-do-the-brains-matter.md) →
+← [Flow modules: the groups tokens stay in](flow-modules.md) · [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens) · [Staking at home, and keeping one's node](home-stake.md) →
 <!-- /turns -->

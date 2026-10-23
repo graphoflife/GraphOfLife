@@ -517,5 +517,5 @@ part of the book (see [the contents](../README.md)):
 <!-- turns -->
 ---
 
-← [Chapter 6 · The ideas this builds on](06-the-ideas-this-builds-on.md) · [Contents](../README.md) · [Chapter 8 · Is a run reproducible?](08-is-a-run-reproducible.md) →
+[Space and dimension](../README.md#space-and-dimension) · [Like next to like](like-next-to-like.md) →
 <!-- /turns -->

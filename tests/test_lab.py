@@ -879,7 +879,7 @@ def test_a_screens_worlds_are_listed_in_its_chapter():
     """The book lists every world a screen draws, what differs from B1, and what was forced off."""
     import book_fill
     with screen_lab(screen_plan("E91", worlds=3, forced={"allow_gifting": [True]})):
-        text = book_fill.screen("chapters/x.md", "E91", gol_plan.read_plan("E91"))
+        text = book_fill.screen("pages/x.md", "E91", gol_plan.read_plan("E91"))
         assert "**3 worlds**" in text and "Forced off in this round" in text
         assert text.count("| `B1-400-") == 3, text
 

@@ -7,7 +7,7 @@ are cut.
 
 In the baseline every connection that no token crossed in a game is cut at the
 end of that game (`prune_after` = `blotto`, `inactive_window` = `phase`;
-[Every setting](../notes/settings.md)): the viewer counts them as
+[Every setting](settings.md)): the viewer counts them as
 `prunedEdges`. So a connection lives exactly as long as tokens keep crossing
 it, and the flow on the connections is also their survival.
 """
@@ -116,7 +116,7 @@ def connections(ch: F.Chapter) -> None:
         caption="Every connection at the start of the games of every 25th iteration from 500 on, in "
                 f"{W.lived}, pooled: how many tokens its two agents staked on each other in that game, both directions "
                 "added (blue), and what is left when the smaller direction is cancelled against the larger (cyan; "
-                "[Token flow](../notes/token-flow.md)). A connection in the first class carried nothing and is cut "
+                "[Token flow](token-flow.md)). A connection in the first class carried nothing and is cut "
                 "at the end of the game.",
         recipe=recipe(W.surviving_text(), FLOW_DATA,
                       ["For every connection (a, b) of frame `2·t`: the tokens a staked on b and b on a, from "
@@ -170,7 +170,7 @@ def connections(ch: F.Chapter) -> None:
         caption=f"After every game of the {n} worlds. Left: the viewer's `meanEdgeFlow` — the tokens staked across "
                 "a connection, over the connections something crossed — and `maxEdgeFlow`, the most across one, on a "
                 "logarithmic axis. Right, every 25 iterations: the longest closed loop of flow the greedy peel of "
-                "[Lightning](../notes/lightning.md) found in the flow as staked (`lightningLongest`) and in what is "
+                "[Lightning](lightning.md) found in the flow as staked (`lightningLongest`) and in what is "
                 f"left after cancelling (`netLightningLongest`). {BAND_WORDS}.",
         recipe=recipe(W.runs_text(), STATS_FILE,
                       ["Take the rows with `phase` = 2: `meanEdgeFlow`, `maxEdgeFlow`, `lightningLongest` and "

@@ -78,5 +78,7 @@ colour by family instead, as [Chapter 37](one-world-many-colours.md) does.
 | minimal | one colour | one size | one colour |
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [What a run records](frames-and-stats.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Pilot worlds](pilot-worlds.md) →
 <!-- /turns -->

@@ -50,5 +50,7 @@ loops run rather than a canonical count. An agent on no loop at all hangs on
 a tree ([Core, trees and leaves](core-trees-leaves.md)).
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [Bridges](bridges.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Cut risk](cut-risk.md) →
 <!-- /turns -->

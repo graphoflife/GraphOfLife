@@ -60,5 +60,7 @@ from itself over the draws.
 [Chapter 70](how-different-are-the-agents.md), *How different are the agents?*, uses this split.
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [The power spectrum of a time series](power-spectrum.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Effective numbers: how many kinds there really are](effective-number.md) →
 <!-- /turns -->

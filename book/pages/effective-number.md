@@ -45,5 +45,7 @@ and n for n equally common ones; on a population with many rare kinds, 2^H is
 the larger. Where the book gives an effective number it says which.
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [Where, who and chance: splitting a decision's variance](variance-split.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Many switches in few worlds: fractional factorial designs](fractional-factorial.md) →
 <!-- /turns -->

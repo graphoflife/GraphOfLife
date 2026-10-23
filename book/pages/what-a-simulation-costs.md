@@ -89,5 +89,5 @@ about seven hours. The thirty worlds of 100,000 tokens that
 <!-- turns -->
 ---
 
-← [Chapter 106 · A screen of random worlds](106-a-screen-of-random-worlds.md) · [Contents](../README.md) · [Appendix B · What goes with what](B-what-goes-with-what.md) →
+← [One world, many colours](one-world-many-colours.md) · [Methods and statistics](../README.md#methods-and-statistics) · [What goes with what](what-goes-with-what.md) →
 <!-- /turns -->

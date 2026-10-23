@@ -482,5 +482,5 @@ be changed and tested on its own.
 <!-- turns -->
 ---
 
-← [Chapter 39 · Questioning the mechanics](39-questioning-the-mechanics.md) · [Contents](../README.md) · [Chapter 70 · How different are the agents?](70-how-different-are-the-agents.md) →
+[Does evolution keep going?](../README.md#does-evolution-keep-going) · [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) →
 <!-- /turns -->

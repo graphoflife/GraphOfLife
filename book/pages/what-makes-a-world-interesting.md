@@ -124,5 +124,7 @@ page and the judge always agree.
   healthy world's long run will face.
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [Healthy and rich](healthy-and-rich.md) · [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world) · [Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md) →
 <!-- /turns -->

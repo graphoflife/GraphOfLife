@@ -78,7 +78,7 @@ The test is the invasion test of [Chapter 96](how-large-a-crowd-a-raider-needs.m
 > **Data.** From each trial's `result.json`.
 >
 > 1. Load the world of the era; on place p, draw an agent at random and take its nearest neighbours, step by step, until the patch holds 5% of the world.
-> 2. Give the patch the raider ([Chapter 51](51-strategies-written-by-hand.md)'s rule), or the control, frozen copies of one patch member's brain.
+> 2. Give the patch the raider ([Chapter 51](strategies-written-by-hand.md)'s rule), or the control, frozen copies of one patch member's brain.
 > 3. Play 300 iterations under the world's own rules; a planting takes hold when its raiders are then alive, more than the patch began with, and more than the control holds.
 > 4. A patch's wealth is its tokens over its agents when it is planted.
 >
@@ -116,7 +116,7 @@ Over 120 iterations:
 > **Data.** From each trial's `result.json`.
 >
 > 1. Load the world of the era; on place p, draw an agent at random and take its nearest neighbours, step by step, until the patch holds 5% of the world.
-> 2. Give the patch the raider ([Chapter 51](51-strategies-written-by-hand.md)'s rule), or the control, frozen copies of one patch member's brain.
+> 2. Give the patch the raider ([Chapter 51](strategies-written-by-hand.md)'s rule), or the control, frozen copies of one patch member's brain.
 > 3. Play 300 iterations under the world's own rules; a planting takes hold when its raiders are then alive, more than the patch began with, and more than the control holds.
 > 4. A patch's wealth is its tokens over its agents when it is planted.
 >
@@ -187,5 +187,5 @@ tokens a raider cannot start among agents that hold two.
 <!-- turns -->
 ---
 
-← [Chapter 96 · How large a crowd a raider needs](96-how-large-a-crowd-a-raider-needs.md) · [Contents](../README.md) · [Chapter 102 · A crew of raiders](102-a-crew-of-raiders.md) →
+← [How large a crowd a raider needs](how-large-a-crowd-a-raider-needs.md) · [Strategies written by hand](../README.md#strategies-written-by-hand) · [A crew of raiders](a-crew-of-raiders.md) →
 <!-- /turns -->

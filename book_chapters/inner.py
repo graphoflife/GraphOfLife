@@ -415,7 +415,7 @@ def minds(ch: F.Chapter) -> None:
         caption="One dot per world: the mean, over its agents and their columns, of each of the brain's outputs "
                 "that make decisions (Chapter 4). A founder's brain averages 0 on every one of them (the dashed "
                 "line). A child's share is f(a, b), the share of the positive part of a in the positive parts "
-                "of a and b ([The share function](../notes/share-function.md)): a below 0 and b above it means no child. "
+                "of a and b ([The share function](share-function.md)): a below 0 and b above it means no child. "
                 "Likewise for the revolutionary part of a stake; spread or all in follows whichever of its two "
                 "outputs is larger.",
         recipe=recipe(W.lived_text(short=True), FINAL,
@@ -460,13 +460,13 @@ def minds(ch: F.Chapter) -> None:
         series=dots(gnames, [[w["groups"][g] for w in kept.values()] for g in gnames], [BLUE] * len(gnames)),
         guides=[{"axis": "y", "at": float(np.mean(list(fgroups.values()))), "label": "founders"},
                 {"axis": "y", "at": neutral, "label": "mutation alone, at its balance"}], legend=False,
-        caption="For each group of the brain's inputs ([What a brain sees](../notes/brain-inputs.md)) — whether "
+        caption="For each group of the brain's inputs ([What a brain sees](brain-inputs.md)) — whether "
                 "the candidate is the agent itself; the agent's and the candidate's tokens and connections; the "
                 "summaries of both neighbourhoods (around); the four messages, from writer to reader (I→me is what "
                 "the agent wrote to itself, it→me what the candidate wrote to it, and so on); and the random "
                 "numbers — the size of the first layer's weights that read it: for each input, the length of its column of 50 weights, averaged over the inputs of "
                 "the group and the agents of the world; one dot per world. Lower dashed line: the same for "
-                "founders' brains. Upper: what the changes of [How a brain changes](../notes/mutation.md) alone "
+                "founders' brains. Upper: what the changes of [How a brain changes](mutation.md) alone "
                 "would bring every weight to, whatever it reads — its jitters adding variance, its resets "
                 "drawing weights back — at the balance of the two.",
         recipe=recipe(W.lived_text(short=True), FINAL,

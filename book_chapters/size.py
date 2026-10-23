@@ -92,7 +92,7 @@ def size(ch: F.Chapter) -> None:
         caption="Every run that lived to iteration 600 is a dot: the tokens of its world, and the number of agents "
                 "alive after each game, averaged over iterations 500 to 599 — both on logarithmic axes, on which "
                 "a power law, agents = a · tokens^b, is a straight line of slope b "
-                "([Logarithmic axes](../notes/logarithmic-axes.md)). Blue: the baseline, three seeds per size "
+                "([Logarithmic axes](logarithmic-axes.md)). Blue: the baseline, three seeds per size "
                 "(at 1,600 tokens only one of three lived through its first iteration, and its dot lies under the "
                 "orange one of the same world; at 800 none did). Orange: "
                 "the same worlds of 800 and 1,600 tokens with the stopping rule switched off. Grey: the "
@@ -319,7 +319,7 @@ def size(ch: F.Chapter) -> None:
                 "Chapter 10: the mean number of agents over iterations 500 to 599, and over the same iterations "
                 "the mean distance between two agents (left) and the largest distance found (right), both "
                 "estimated by the viewer from breadth-first searches out of 8 to 16 agents every 25 iterations "
-                "([Radius and diameter](../notes/radius-and-diameter.md)). Red: a power law fitted to the "
+                "([Radius and diameter](radius-and-diameter.md)). Red: a power law fitted to the "
                 "dots. Dashed: what a small world would do — distances growing in proportion to the logarithm "
                 "of the number of agents — drawn through the runs of 3,200 tokens.",
         recipe=recipe(E08_RUNS + WITH_E02, STATS_FILE,

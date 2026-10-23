@@ -12,7 +12,7 @@
     [
      {
       "text": "`hidden_layers`",
-      "href": "notes/settings.md#hidden_layers"
+      "href": "pages/settings.md#hidden_layers"
      },
      "50, 45, 40, 35, 30",
      "16",
@@ -21,7 +21,7 @@
     [
      {
       "text": "`message_amount`",
-      "href": "notes/settings.md#message_amount"
+      "href": "pages/settings.md#message_amount"
      },
      "30",
      "8",
@@ -30,7 +30,7 @@
     [
      {
       "text": "`message_prepass`",
-      "href": "notes/settings.md#message_prepass"
+      "href": "pages/settings.md#message_prepass"
      },
      "on",
      "off",
@@ -39,7 +39,7 @@
     [
      {
       "text": "`allow_handover`",
-      "href": "notes/settings.md#allow_handover"
+      "href": "pages/settings.md#allow_handover"
      },
      "on",
      "off",
@@ -48,7 +48,7 @@
     [
      {
       "text": "`mutate_on_replication`",
-      "href": "notes/settings.md#mutate_on_replication"
+      "href": "pages/settings.md#mutate_on_replication"
      },
      "off",
      "on",
@@ -57,7 +57,7 @@
     [
      {
       "text": "`incumbency`",
-      "href": "notes/settings.md#incumbency"
+      "href": "pages/settings.md#incumbency"
      },
      "1.0",
      "1.5",
@@ -66,7 +66,7 @@
     [
      {
       "text": "`birth_links`",
-      "href": "notes/settings.md#birth_links"
+      "href": "pages/settings.md#birth_links"
      },
      "0",
      "2",
@@ -75,7 +75,7 @@
     [
      {
       "text": "`mend_on_death`",
-      "href": "notes/settings.md#mend_on_death"
+      "href": "pages/settings.md#mend_on_death"
      },
      "off",
      "on",
@@ -84,7 +84,7 @@
     [
      {
       "text": "`prune_needs`",
-      "href": "notes/settings.md#prune_needs"
+      "href": "pages/settings.md#prune_needs"
      },
      "0",
      "2",
@@ -93,7 +93,7 @@
     [
      {
       "text": "`valence`",
-      "href": "notes/settings.md#valence"
+      "href": "pages/settings.md#valence"
      },
      "0",
      "8",
@@ -102,7 +102,7 @@
     [
      {
       "text": "`keep_home`",
-      "href": "notes/settings.md#keep_home"
+      "href": "pages/settings.md#keep_home"
      },
      "0.0",
      "0.3",
@@ -111,7 +111,7 @@
     [
      {
       "text": "`max_age`",
-      "href": "notes/settings.md#max_age"
+      "href": "pages/settings.md#max_age"
      },
      "0",
      "100",
@@ -120,7 +120,7 @@
     [
      {
       "text": "`min_child`",
-      "href": "notes/settings.md#min_child"
+      "href": "pages/settings.md#min_child"
      },
      "1",
      "10",
@@ -153,7 +153,7 @@
      [
       {
        "text": "8",
-       "href": "chapters/08-is-a-run-reproducible.md"
+       "href": "pages/is-a-run-reproducible.md"
       }
      ]
     ],
@@ -169,7 +169,7 @@
      [
       {
        "text": "10",
-       "href": "chapters/10-a-worlds-life.md"
+       "href": "pages/a-worlds-life.md"
       }
      ]
     ],
@@ -185,7 +185,7 @@
      [
       {
        "text": "14",
-       "href": "chapters/14-how-much-does-the-seed-decide.md"
+       "href": "pages/how-much-does-the-seed-decide.md"
       }
      ]
     ],
@@ -201,7 +201,7 @@
      [
       {
        "text": "15",
-       "href": "chapters/15-where-do-the-tokens-go.md"
+       "href": "pages/where-do-the-tokens-go.md"
       }
      ]
     ],
@@ -217,7 +217,7 @@
      [
       {
        "text": "17",
-       "href": "chapters/17-what-shape-does-the-network-take.md"
+       "href": "pages/what-shape-does-the-network-take.md"
       }
      ]
     ],
@@ -233,7 +233,7 @@
      [
       {
        "text": "18",
-       "href": "chapters/18-genotypes-and-lineages.md"
+       "href": "pages/genotypes-and-lineages.md"
       }
      ]
     ],
@@ -249,7 +249,7 @@
      [
       {
        "text": "41",
-       "href": "chapters/41-do-the-brains-matter.md"
+       "href": "pages/do-the-brains-matter.md"
       }
      ]
     ],
@@ -265,7 +265,7 @@
      [
       {
        "text": "42",
-       "href": "chapters/42-how-does-a-worlds-size-follow-its-tokens.md"
+       "href": "pages/how-does-a-worlds-size-follow-its-tokens.md"
       }
      ]
     ],
@@ -281,7 +281,7 @@
      [
       {
        "text": "52",
-       "href": "chapters/52-how-fast-should-brains-change.md"
+       "href": "pages/how-fast-should-brains-change.md"
       }
      ]
     ],
@@ -297,7 +297,7 @@
      [
       {
        "text": "60",
-       "href": "chapters/60-worlds-of-100000-tokens.md"
+       "href": "pages/worlds-of-100000-tokens.md"
       }
      ]
     ],
@@ -313,7 +313,7 @@
      [
       {
        "text": "46",
-       "href": "chapters/46-how-to-tell-a-world-that-keeps-evolving.md"
+       "href": "pages/how-to-tell-a-world-that-keeps-evolving.md"
       }
      ]
     ],
@@ -329,7 +329,7 @@
      [
       {
        "text": "47",
-       "href": "chapters/47-brains-that-see-and-worlds-that-break.md"
+       "href": "pages/brains-that-see-and-worlds-that-break.md"
       }
      ]
     ],
@@ -345,7 +345,7 @@
      [
       {
        "text": "48",
-       "href": "chapters/48-a-world-that-cannot-break.md"
+       "href": "pages/a-world-that-cannot-break.md"
       }
      ]
     ],
@@ -361,7 +361,7 @@
      [
       {
        "text": "49",
-       "href": "chapters/49-who-dies-and-why.md"
+       "href": "pages/who-dies-and-why.md"
       }
      ]
     ],
@@ -377,7 +377,7 @@
      [
       {
        "text": "50",
-       "href": "chapters/50-why-evolution-stops.md"
+       "href": "pages/why-evolution-stops.md"
       }
      ]
     ],
@@ -393,7 +393,7 @@
      [
       {
        "text": "80",
-       "href": "chapters/80-mixed-at-birth-ten-long-worlds.md"
+       "href": "pages/mixed-at-birth-ten-long-worlds.md"
       }
      ]
     ],
@@ -409,7 +409,7 @@
      [
       {
        "text": "81",
-       "href": "chapters/81-five-mixed-worlds-fifty-thousand-iterations.md"
+       "href": "pages/five-mixed-worlds-fifty-thousand-iterations.md"
       }
      ]
     ],
@@ -425,7 +425,7 @@
      [
       {
        "text": "85",
-       "href": "chapters/85-mixed-at-birth-with-parents-as-mates.md"
+       "href": "pages/mixed-at-birth-with-parents-as-mates.md"
       }
      ]
     ],
@@ -441,7 +441,7 @@
      [
       {
        "text": "92",
-       "href": "chapters/92-the-candidates-played-on.md"
+       "href": "pages/the-candidates-played-on.md"
       }
      ]
     ],
@@ -457,7 +457,7 @@
      [
       {
        "text": "93",
-       "href": "chapters/93-five-more-seeds-for-the-rules-that-held.md"
+       "href": "pages/five-more-seeds-for-the-rules-that-held.md"
       }
      ]
     ]
@@ -486,7 +486,7 @@
      [
       {
        "text": "56",
-       "href": "chapters/56-alliances.md"
+       "href": "pages/alliances.md"
       }
      ]
     ],
@@ -501,7 +501,7 @@
      [
       {
        "text": "56",
-       "href": "chapters/56-alliances.md"
+       "href": "pages/alliances.md"
       }
      ]
     ],
@@ -516,7 +516,7 @@
      [
       {
        "text": "56",
-       "href": "chapters/56-alliances.md"
+       "href": "pages/alliances.md"
       }
      ]
     ],
@@ -531,11 +531,11 @@
      [
       {
        "text": "56",
-       "href": "chapters/56-alliances.md"
+       "href": "pages/alliances.md"
       },
       {
        "text": "57",
-       "href": "chapters/57-rules-without-numbers.md"
+       "href": "pages/rules-without-numbers.md"
       }
      ]
     ],
@@ -550,11 +550,11 @@
      [
       {
        "text": "54",
-       "href": "chapters/54-the-switches-the-world-was-built-with.md"
+       "href": "pages/the-switches-the-world-was-built-with.md"
       },
       {
        "text": "55",
-       "href": "chapters/55-another-game.md"
+       "href": "pages/another-game.md"
       }
      ]
     ],
@@ -569,11 +569,11 @@
      [
       {
        "text": "50",
-       "href": "chapters/50-why-evolution-stops.md"
+       "href": "pages/why-evolution-stops.md"
       },
       {
        "text": "69",
-       "href": "chapters/69-a-hundred-thousand-iterations.md"
+       "href": "pages/a-hundred-thousand-iterations.md"
       }
      ]
     ],
@@ -588,11 +588,11 @@
      [
       {
        "text": "57",
-       "href": "chapters/57-rules-without-numbers.md"
+       "href": "pages/rules-without-numbers.md"
       },
       {
        "text": "58",
-       "href": "chapters/58-gliders-and-who-helps-whom.md"
+       "href": "pages/gliders-and-who-helps-whom.md"
       }
      ]
     ],
@@ -607,7 +607,7 @@
      [
       {
        "text": "78",
-       "href": "chapters/78-mixed-brains-costly-units.md"
+       "href": "pages/mixed-brains-costly-units.md"
       }
      ]
     ],
@@ -622,7 +622,7 @@
      [
       {
        "text": "73",
-       "href": "chapters/73-who-inherits.md"
+       "href": "pages/who-inherits.md"
       }
      ]
     ],
@@ -637,7 +637,7 @@
      [
       {
        "text": "90",
-       "href": "chapters/90-gifts-with-every-other-rule.md"
+       "href": "pages/gifts-with-every-other-rule.md"
       }
      ]
     ],
@@ -652,7 +652,7 @@
      [
       {
        "text": "86",
-       "href": "chapters/86-eight-switches-at-once.md"
+       "href": "pages/eight-switches-at-once.md"
       }
      ]
     ],
@@ -667,7 +667,7 @@
      [
       {
        "text": "86",
-       "href": "chapters/86-eight-switches-at-once.md"
+       "href": "pages/eight-switches-at-once.md"
       }
      ]
     ],
@@ -682,7 +682,7 @@
      [
       {
        "text": "88",
-       "href": "chapters/88-revolutions-with-every-other-rule.md"
+       "href": "pages/revolutions-with-every-other-rule.md"
       }
      ]
     ],
@@ -697,7 +697,7 @@
      [
       {
        "text": "89",
-       "href": "chapters/89-handover-with-every-other-rule.md"
+       "href": "pages/handover-with-every-other-rule.md"
       }
      ]
     ],
@@ -712,7 +712,7 @@
      [
       {
        "text": "82",
-       "href": "chapters/82-mixing-with-every-other-rule.md"
+       "href": "pages/mixing-with-every-other-rule.md"
       }
      ]
     ],
@@ -727,7 +727,7 @@
      [
       {
        "text": "83",
-       "href": "chapters/83-links-to-strangers.md"
+       "href": "pages/links-to-strangers.md"
       }
      ]
     ],
@@ -752,11 +752,11 @@
      [
       {
        "text": "79",
-       "href": "chapters/79-meta-10-healthy-and-rich.md"
+       "href": "pages/healthy-and-rich.md"
       },
       {
        "text": "92",
-       "href": "chapters/92-the-candidates-played-on.md"
+       "href": "pages/the-candidates-played-on.md"
       }
      ]
     ],
@@ -771,7 +771,7 @@
      [
       {
        "text": "80",
-       "href": "chapters/80-mixed-at-birth-ten-long-worlds.md"
+       "href": "pages/mixed-at-birth-ten-long-worlds.md"
       }
      ]
     ],
@@ -786,11 +786,11 @@
      [
       {
        "text": "84",
-       "href": "chapters/84-meta-11-what-holds-a-worlds-size.md"
+       "href": "pages/what-holds-a-worlds-size.md"
       },
       {
        "text": "85",
-       "href": "chapters/85-mixed-at-birth-with-parents-as-mates.md"
+       "href": "pages/mixed-at-birth-with-parents-as-mates.md"
       }
      ]
     ],
@@ -805,7 +805,7 @@
      [
       {
        "text": "87",
-       "href": "chapters/87-what-folds-a-world.md"
+       "href": "pages/what-folds-a-world.md"
       }
      ]
     ],
@@ -820,7 +820,7 @@
      [
       {
        "text": "87",
-       "href": "chapters/87-what-folds-a-world.md"
+       "href": "pages/what-folds-a-world.md"
       }
      ]
     ]

@@ -86,5 +86,7 @@ running sums of the sorted values — the same number as the formula above,
 rearranged. It is recorded as `gini` after every phase.
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [The largest and the smallest](the-largest-and-the-smallest.md) · [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens) · [The richest tenth's share](richest-tenth.md) →
 <!-- /turns -->

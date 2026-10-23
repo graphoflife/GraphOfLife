@@ -218,7 +218,7 @@ def brains(ch: F.Chapter) -> None:
         series=two_columns(base_m, fixed_m, True),
         caption="For each world that lived to the end, coloured as above: how many times after "
                 "iteration 100 the newest common ancestor of all the living moved forward to a younger "
-                "genotype ([The common ancestor](../notes/common-ancestor.md)). In a world whose "
+                "genotype ([The common ancestor](common-ancestor.md)). In a world whose "
                 "brains never change, every genotype is a renamed copy of one founder's brain once "
                 "that founder's line fills the world, so which branch wins is chance.",
         recipe=recipe(E07_RUNS, "the lineage analysis of Experiment 7, `book/results/E07.json` "

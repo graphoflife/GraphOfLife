@@ -71,3 +71,9 @@ An effect several times σ/2 is not the seed. The chains give a second check:
 if every pair added nothing, the seven chains would scatter like chance too.
 
 [Chapter 86](eight-switches-at-once.md), *Eight switches at once*, uses this design.
+
+<!-- turns -->
+---
+
+← [Effective numbers: how many kinds there really are](effective-number.md) · [Methods and statistics](../README.md#methods-and-statistics)
+<!-- /turns -->

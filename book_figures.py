@@ -50,7 +50,7 @@ COMMAND = "python3 book_figures.py"
 STATS_FILE = ("each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per "
               "recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just "
               "after the game, and every statistic is a field of the row (see [What a run records]"
-              "(../notes/frames-and-stats.md))")
+              "(frames-and-stats.md))")
 FRAMES = ("each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with "
           "`gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after "
           "reproduction and frame `2·t + 1` after the game")
@@ -117,9 +117,14 @@ def recipe(runs: str, data: str, steps: Iterable[str]) -> str:
 # baseline runs of Experiment 2, which is what they default to.
 
 def _listed_in(experiment: str) -> str:
-    """The page that reports the experiment, and with it every setting of its runs."""
+    """
+    The page that reports the experiment, and with it every setting of its runs, as a
+    link. Like every link in a caption or a recipe, it is written as a page in
+    book/pages/ writes it.
+    """
     import book_fill
-    return f"Chapter {book_fill.home_of(experiment)['id']}"
+    page = book_fill.home_of(experiment)
+    return f"[{page['title']}]({os.path.basename(page['file'])})"
 
 
 def _runs_of(experiment: str, condition: str) -> str:

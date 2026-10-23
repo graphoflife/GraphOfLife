@@ -89,3 +89,9 @@ is to try the remedies.
   Diploma thesis, Technische Universität München.
 - Nair, V. and Hinton, G. E. (2010). Rectified linear units improve
   restricted Boltzmann machines. *Proceedings of ICML*, 807–814.
+
+<!-- turns -->
+---
+
+← [Genotypes and the family tree](genotype.md) · [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are) · [Brain diversity](brain-diversity.md) →
+<!-- /turns -->

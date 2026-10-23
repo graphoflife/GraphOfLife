@@ -48,5 +48,7 @@ Each is reported with its R² (`tokensVsDegreeR2`, …).
   shows the agents behind each fit.
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [Assortativity](assortativity.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network)
 <!-- /turns -->

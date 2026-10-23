@@ -40,5 +40,7 @@ Five agents with 1, 2, 2, 5 and 40 tokens: the mean is 50/5 = 10, the median
 mean is five times the median.
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [The richest tenth's share](richest-tenth.md) · [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens) · [Entropy and evenness](entropy-and-evenness.md) →
 <!-- /turns -->

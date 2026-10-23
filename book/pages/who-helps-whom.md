@@ -98,5 +98,5 @@ competition between groups goes on.
 <!-- turns -->
 ---
 
-← [Chapter 75 · Meta VII · Where tokens go](75-meta-7-where-tokens-go.md) · [Contents](../README.md) · [Chapter 77 · Meta IX · How alike the agents are](77-meta-9-how-alike.md) →
+[Groups and cooperation](../README.md#groups-and-cooperation) · [Do agents cooperate?](do-agents-cooperate.md) →
 <!-- /turns -->

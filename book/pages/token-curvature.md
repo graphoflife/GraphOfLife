@@ -45,5 +45,7 @@ against the change the phase then produced. On a signed colour scale, blue is
 a peak and red a valley.
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [Lightning: tokens that go round](lightning.md) · [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens) · [Flows that go round](circulation.md) →
 <!-- /turns -->

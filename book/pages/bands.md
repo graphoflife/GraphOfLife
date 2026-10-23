@@ -44,5 +44,7 @@ In the code: `bands` in `gol_analysis.py`.
   of 26; in the baseline of 100,000 tokens none died.
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [Median and quantiles](median-and-quantiles.md) · [Methods and statistics](../README.md#methods-and-statistics) · [The settled life of a world](settled-life.md) →
 <!-- /turns -->

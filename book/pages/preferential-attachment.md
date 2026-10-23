@@ -58,3 +58,9 @@ the heavy tail of the connections.
   Information Science* 27, 292–306.
 - Simon, H. A. (1955). On a class of skew distribution functions.
   *Biometrika* 42, 425–440.
+
+<!-- turns -->
+---
+
+← [Degree](degree.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Clustering](clustering.md) →
+<!-- /turns -->

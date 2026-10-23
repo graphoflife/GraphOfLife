@@ -23,19 +23,19 @@ and in no other:
 <!-- table catalogue/baselines -->
 | setting | B1 | B2 | what it is |
 |---|---|---|---|
-| [`hidden_layers`](../notes/settings.md#hidden_layers) | 50, 45, 40, 35, 30 | 16 | The widths of the brain's hidden layers, in order from input to output. |
-| [`message_amount`](../notes/settings.md#message_amount) | 30 | 8 | How many numbers one message holds. Each agent sends one message to itself and one to each neighbour, every phase. |
-| [`message_prepass`](../notes/settings.md#message_prepass) | on | off | Whether every phase begins with an extra look in which agents only write messages, so the look that acts reads messages written this phase. |
-| [`allow_handover`](../notes/settings.md#allow_handover) | on | off | Whether a parent may move some of its own connections to its newborn child. |
-| [`mutate_on_replication`](../notes/settings.md#mutate_on_replication) | off | on | Whether a brain changes only when it is copied — into a newborn, or into a node its owner has just won — instead of also after every game, wherever it sits. |
-| [`incumbency`](../notes/settings.md#incumbency) | 1.0 | 1.5 | How many times over an agent's stake on its own node counts when the game decides who takes the node. 1 is the old rule. |
-| [`birth_links`](../notes/settings.md#birth_links) | 0 | 2 | How many of its parent's neighbours a newborn is joined to, drawn at random, besides its parent itself; 0 leaves every link to the brain's choice. |
-| [`mend_on_death`](../notes/settings.md#mend_on_death) | off | on | Whether the neighbours of an agent that dies are joined up where its death would leave them in separate pieces. |
-| [`prune_needs`](../notes/settings.md#prune_needs) | 0 | 2 | How many neighbours the two ends of an unused connection must share for it to be cut; 0 cuts every unused connection. |
-| [`valence`](../notes/settings.md#valence) | 0 | 8 | The most connections an agent's brain may choose to hold (0 = no limit). An agent at its limit cannot have a child. |
-| [`keep_home`](../notes/settings.md#keep_home) | 0.0 | 0.3 | The share of an agent's tokens — rounded up, never less than one — that stays on its own node whatever its brain says; a parent also keeps one. 0 is the old rule. |
-| [`max_age`](../notes/settings.md#max_age) | 0 | 100 | The age at which an agent dies (0 = never); its tokens are shared out like those of any other dead agent. |
-| [`min_child`](../notes/settings.md#min_child) | 1 | 10 | The fewest tokens a child can be born with; a parent that would give less has no child. |
+| [`hidden_layers`](settings.md#hidden_layers) | 50, 45, 40, 35, 30 | 16 | The widths of the brain's hidden layers, in order from input to output. |
+| [`message_amount`](settings.md#message_amount) | 30 | 8 | How many numbers one message holds. Each agent sends one message to itself and one to each neighbour, every phase. |
+| [`message_prepass`](settings.md#message_prepass) | on | off | Whether every phase begins with an extra look in which agents only write messages, so the look that acts reads messages written this phase. |
+| [`allow_handover`](settings.md#allow_handover) | on | off | Whether a parent may move some of its own connections to its newborn child. |
+| [`mutate_on_replication`](settings.md#mutate_on_replication) | off | on | Whether a brain changes only when it is copied — into a newborn, or into a node its owner has just won — instead of also after every game, wherever it sits. |
+| [`incumbency`](settings.md#incumbency) | 1.0 | 1.5 | How many times over an agent's stake on its own node counts when the game decides who takes the node. 1 is the old rule. |
+| [`birth_links`](settings.md#birth_links) | 0 | 2 | How many of its parent's neighbours a newborn is joined to, drawn at random, besides its parent itself; 0 leaves every link to the brain's choice. |
+| [`mend_on_death`](settings.md#mend_on_death) | off | on | Whether the neighbours of an agent that dies are joined up where its death would leave them in separate pieces. |
+| [`prune_needs`](settings.md#prune_needs) | 0 | 2 | How many neighbours the two ends of an unused connection must share for it to be cut; 0 cuts every unused connection. |
+| [`valence`](settings.md#valence) | 0 | 8 | The most connections an agent's brain may choose to hold (0 = no limit). An agent at its limit cannot have a child. |
+| [`keep_home`](settings.md#keep_home) | 0.0 | 0.3 | The share of an agent's tokens — rounded up, never less than one — that stays on its own node whatever its brain says; a parent also keeps one. 0 is the old rule. |
+| [`max_age`](settings.md#max_age) | 0 | 100 | The age at which an agent dies (0 = never); its tokens are shared out like those of any other dead agent. |
+| [`min_child`](settings.md#min_child) | 1 | 10 | The fewest tokens a child can be born with; a parent that would give less has no child. |
 <!-- /table -->
 
 Every other setting, and what each one means, is in the note
@@ -53,26 +53,26 @@ Experiment 2's).
 <!-- table catalogue/lab -->
 |  | question | on | conditions (and what each changes) | seeds | tokens | iterations | runs on disk | chapter |
 |---|---|---|---|---|---|---|---|---|
-| E01 | Is a run reproducible? | B1 | *straight*; *stopped at 10*; *cut off at 15*; *all BLAS threads* | 1–3 | 10,000 | 30 | 12 | [8](08-is-a-run-reproducible.md) |
-| E02 | The life of a world | B1 | *baseline* | 1–30 | 10,000 | 3,000 | 30 | [10](10-a-worlds-life.md) |
-| E03 | How much does the seed decide? | B1 | the runs of E02; *baseline* | 1–30 | 10,000 | 3,000 | 30 | [14](14-how-much-does-the-seed-decide.md) |
-| E04 | Where do the tokens go? | B1 | the runs of E02; *baseline* | 1–30 | 10,000 | 3,000 | 30 | [15](15-where-do-the-tokens-go.md) |
-| E05 | What shape does the graph take? | B1 | the runs of E02; *baseline* | 1–30 | 10,000 | 3,000 | 30 | [17](17-what-shape-does-the-network-take.md) |
-| E06 | Who wins, and for how long? | B1 | the runs of E02; *baseline* | 1–30 | 10,000 | 3,000 | 30 | [18](18-genotypes-and-lineages.md) |
-| E07 | Do the brains matter at all? | B1 | *baseline*; *brains never change* (mutation_sparsity = 0); *decisions by chance* (random_decisions = on) | 1–30 | 10,000 | 3,000 | 90 | [41](41-do-the-brains-matter.md) |
-| E08 | How does a world's size follow its tokens? | B1 | *baseline*; *stopped only when empty* (extinction_threshold = 0) | 1–3 | 800–409,600 | 600 | 42 | [42](42-how-does-a-worlds-size-follow-its-tokens.md) |
-| E09 | How fast should brains change? | B2 | *mutation 0.05* (mutation_probability = 0.05); *mutation 0.1* (mutation_probability = 0.1); *B2*; *mutation 0.4* (mutation_probability = 0.4); *mutation 0.8* (mutation_probability = 0.8) | 1–10 | 10,000 | 1,500 | 50 | [52](52-how-fast-should-brains-change.md) |
-| E10 | Worlds of 100,000 tokens | B1 | *baseline* | 1–30 | 100,000 | 1,500 | 30 | [60](60-worlds-of-100000-tokens.md) |
-| E12 | Does the baseline keep improving? | B1 | *baseline* | 1–10 | 5,000 | 1,000 | 10 | [46](46-how-to-tell-a-world-that-keeps-evolving.md) |
-| E13 | Brains that see, and worlds that break | B1 | *baseline*; *one hidden layer* (hidden_layers = 16); *one hidden layer, change only when copied* (hidden_layers = 16, mutate_on_replication = on) | 1–10 | 5,000 | 1,500 | 30 | [47](47-brains-that-see-and-worlds-that-break.md) |
-| E14 | A world that cannot break | B2 | *all the rules*; *no mending* (mend_on_death = off); *any unused link lapses* (prune_needs = 0); *no links at birth* (birth_links = 0); *no valence* (valence = 0); *handover* (allow_handover = on) | 1–10 | 5,000 | 1,000 | 60 | [48](48-a-world-that-cannot-break.md) |
-| E15 | Who dies, and why | B2 | *B2*; *the last token kept* (keep_home = 0.01); *nothing kept* (keep_home = 0.0); *half kept* (keep_home = 0.5); *children of any size* (min_child = 1); *no old age* (max_age = 0) | 1–10 | 10,000 | 1,000 | 60 | [49](49-who-dies-and-why.md) |
-| E16 | Why evolution stops | B2 | *B2*; *no random inputs* (random_input_amount = 0) | 1–10 | 10,000 | 2,000 | 20 | [50](50-why-evolution-stops.md) |
-| E17 | Mixed at birth: ten long worlds | B2 | *mixed at birth* (mix_at_birth = on) | 1–10 | 10,000 | 10,000 | 10 | [80](80-mixed-at-birth-ten-long-worlds.md) |
-| E18 | Five mixed worlds, fifty thousand iterations | B2 | *mixed at birth* (mix_at_birth = on) | 2,4,5,6,10 | 10,000 | 50,000 | 5 | [81](81-five-mixed-worlds-fifty-thousand-iterations.md) |
-| E19 | Mixed at birth, with parents as mates | B2 | *mixed at birth, parents as mates* (mix_at_birth = on, mix_mates = parents) | 1–10 | 10,000 | 20,000 | 10 | [85](85-mixed-at-birth-with-parents-as-mates.md) |
-| E20 | The candidates, played on: two worlds of engine rules | B2 | *links to strangers, a free reach, forced* (link_search = reach, link_consent = forced); *mixed at birth, the last token kept* (mix_at_birth = on, keep_home = 0.01) | 1 | 10,000 | 10,000 | 2 | [92](92-the-candidates-played-on.md) |
-| E21 | Five more seeds for the rules that held | B2 | *mixed at birth* (mix_at_birth = on); *mixed at birth, fast brain change* (mix_at_birth = on, mutation_probability = 0.8); *mixed at birth, no random inputs* (mix_at_birth = on, random_input_amount = 0); *mixed at birth, no revolutions* (mix_at_birth = on, allow_revolutions = off) | 3–7 | 10,000 | 10,000 | 20 | [93](93-five-more-seeds-for-the-rules-that-held.md) |
+| E01 | Is a run reproducible? | B1 | *straight*; *stopped at 10*; *cut off at 15*; *all BLAS threads* | 1–3 | 10,000 | 30 | 12 | [8](is-a-run-reproducible.md) |
+| E02 | The life of a world | B1 | *baseline* | 1–30 | 10,000 | 3,000 | 30 | [10](a-worlds-life.md) |
+| E03 | How much does the seed decide? | B1 | the runs of E02; *baseline* | 1–30 | 10,000 | 3,000 | 30 | [14](how-much-does-the-seed-decide.md) |
+| E04 | Where do the tokens go? | B1 | the runs of E02; *baseline* | 1–30 | 10,000 | 3,000 | 30 | [15](where-do-the-tokens-go.md) |
+| E05 | What shape does the graph take? | B1 | the runs of E02; *baseline* | 1–30 | 10,000 | 3,000 | 30 | [17](what-shape-does-the-network-take.md) |
+| E06 | Who wins, and for how long? | B1 | the runs of E02; *baseline* | 1–30 | 10,000 | 3,000 | 30 | [18](genotypes-and-lineages.md) |
+| E07 | Do the brains matter at all? | B1 | *baseline*; *brains never change* (mutation_sparsity = 0); *decisions by chance* (random_decisions = on) | 1–30 | 10,000 | 3,000 | 90 | [41](do-the-brains-matter.md) |
+| E08 | How does a world's size follow its tokens? | B1 | *baseline*; *stopped only when empty* (extinction_threshold = 0) | 1–3 | 800–409,600 | 600 | 42 | [42](how-does-a-worlds-size-follow-its-tokens.md) |
+| E09 | How fast should brains change? | B2 | *mutation 0.05* (mutation_probability = 0.05); *mutation 0.1* (mutation_probability = 0.1); *B2*; *mutation 0.4* (mutation_probability = 0.4); *mutation 0.8* (mutation_probability = 0.8) | 1–10 | 10,000 | 1,500 | 50 | [52](how-fast-should-brains-change.md) |
+| E10 | Worlds of 100,000 tokens | B1 | *baseline* | 1–30 | 100,000 | 1,500 | 30 | [60](worlds-of-100000-tokens.md) |
+| E12 | Does the baseline keep improving? | B1 | *baseline* | 1–10 | 5,000 | 1,000 | 10 | [46](how-to-tell-a-world-that-keeps-evolving.md) |
+| E13 | Brains that see, and worlds that break | B1 | *baseline*; *one hidden layer* (hidden_layers = 16); *one hidden layer, change only when copied* (hidden_layers = 16, mutate_on_replication = on) | 1–10 | 5,000 | 1,500 | 30 | [47](brains-that-see-and-worlds-that-break.md) |
+| E14 | A world that cannot break | B2 | *all the rules*; *no mending* (mend_on_death = off); *any unused link lapses* (prune_needs = 0); *no links at birth* (birth_links = 0); *no valence* (valence = 0); *handover* (allow_handover = on) | 1–10 | 5,000 | 1,000 | 60 | [48](a-world-that-cannot-break.md) |
+| E15 | Who dies, and why | B2 | *B2*; *the last token kept* (keep_home = 0.01); *nothing kept* (keep_home = 0.0); *half kept* (keep_home = 0.5); *children of any size* (min_child = 1); *no old age* (max_age = 0) | 1–10 | 10,000 | 1,000 | 60 | [49](who-dies-and-why.md) |
+| E16 | Why evolution stops | B2 | *B2*; *no random inputs* (random_input_amount = 0) | 1–10 | 10,000 | 2,000 | 20 | [50](why-evolution-stops.md) |
+| E17 | Mixed at birth: ten long worlds | B2 | *mixed at birth* (mix_at_birth = on) | 1–10 | 10,000 | 10,000 | 10 | [80](mixed-at-birth-ten-long-worlds.md) |
+| E18 | Five mixed worlds, fifty thousand iterations | B2 | *mixed at birth* (mix_at_birth = on) | 2,4,5,6,10 | 10,000 | 50,000 | 5 | [81](five-mixed-worlds-fifty-thousand-iterations.md) |
+| E19 | Mixed at birth, with parents as mates | B2 | *mixed at birth, parents as mates* (mix_at_birth = on, mix_mates = parents) | 1–10 | 10,000 | 20,000 | 10 | [85](mixed-at-birth-with-parents-as-mates.md) |
+| E20 | The candidates, played on: two worlds of engine rules | B2 | *links to strangers, a free reach, forced* (link_search = reach, link_consent = forced); *mixed at birth, the last token kept* (mix_at_birth = on, keep_home = 0.01) | 1 | 10,000 | 10,000 | 2 | [92](the-candidates-played-on.md) |
+| E21 | Five more seeds for the rules that held | B2 | *mixed at birth* (mix_at_birth = on); *mixed at birth, fast brain change* (mix_at_birth = on, mutation_probability = 0.8); *mixed at birth, no random inputs* (mix_at_birth = on, random_input_amount = 0); *mixed at birth, no revolutions* (mix_at_birth = on, allow_revolutions = off) | 3–7 | 10,000 | 10,000 | 20 | [93](five-more-seeds-for-the-rules-that-held.md) |
 <!-- /table -->
 
 Experiment 11 — one world of 204,800 tokens for 100,000 iterations
@@ -92,28 +92,28 @@ prototype's own code. What each batch asked:
 <!-- table catalogue/pilots -->
 | batch | what it asks | conditions | worlds | tokens | iterations | status | chapter |
 |---|---|---|---|---|---|---|---|
-| A3k | Alliances, kin pooling and a stake gain, first tried at 3,000 tokens (kept only as hints: the book's worlds have at least 10,000 tokens since) | 4 | 8 | 3,000 | 1,000 | 5 done, 3 stopped early | [56](56-alliances.md) |
-| A10k | Cooperation with a surplus: alliances by mutual consent, sides pooled by kinship, support that counts twice, against a control | 4 | 8 | 10,000 | 1,000 | done | [56](56-alliances.md) |
-| AL | Alliances over a long time and at 20,000 tokens | 2 | 4 | 10,000, 20,000 | 2,000, 3,000 | done | [56](56-alliances.md) |
-| N | Rules without numbers (B3, with and without allies) and alliances without the home advantage | 4 | 8 | 10,000 | 1,000 | done | [56](56-alliances.md), [57](57-rules-without-numbers.md) |
-| S | The switches the world was built with (revolutions, gifts, lapsing links, estates by wealth) and other contests (a lottery, sides pooled by genotype or family, kin and family senses) | 13 | 26 | 10,000 | 1,000 | done | [54](54-the-switches-the-world-was-built-with.md), [55](55-another-game.md) |
-| L | Long runs: Experiment 16's B2 worlds played on to 10,000 iterations, B1 to 10,000, B1 without revolutions to 3,000 | 3 | 13 | 10,000 | 3,000, 10,000, 50,000 | 10 done, 3 stopped early | [50](50-why-evolution-stops.md), [69](69-a-hundred-thousand-iterations.md) |
-| P | Two inputs (where my brain came from, who helped me) and links that hold a token | 6 | 12 | 10,000 | 2,000 | done | [57](57-rules-without-numbers.md), [58](58-gliders-and-who-helps-whom.md) |
-| Q | Brains mixed at birth, brain units that hold a token, an eye for raids on kin, and links that hold a token without old age | 5 | 10 | 10,000 | 2,000 | done | [78](78-mixed-brains-costly-units.md) |
-| R | Who inherits the estate of the dead: the poorest, the newborns, their parents | 9 | 18 | 10,000 | 2,000 | done | [73](73-who-inherits.md) |
-| T | Gifts together with each other switch | 24 | 48 | 10,000 | 1,000 | done | [90](90-gifts-with-every-other-rule.md) |
-| U | Eight switches in combination on B2: a fractional factorial design | 16 | 16 | 10,000 | 1,000 | done | [86](86-eight-switches-at-once.md) |
-| V | Eight switches in combination on B1: a fractional factorial design | 16 | 16 | 10,000 | 1,000 | done | [86](86-eight-switches-at-once.md) |
-| W | No revolutions together with each other switch, on B2 | 24 | 48 | 10,000 | 1,000 | done | [88](88-revolutions-with-every-other-rule.md) |
-| X | Handover together with each other switch, on B2 | 23 | 46 | 10,000 | 1,000 | done | [89](89-handover-with-every-other-rule.md) |
-| Y | Brains mixed at birth together with each other switch, on B2 | 23 | 46 | 10,000 | 1,000 | done | [82](82-mixing-with-every-other-rule.md) |
-| K | Links to strangers on B2: every search (jump, walk, reach) with every steering and consent | 12 | 24 | 10,000 | 1,000 | done | [83](83-links-to-strangers.md) |
+| A3k | Alliances, kin pooling and a stake gain, first tried at 3,000 tokens (kept only as hints: the book's worlds have at least 10,000 tokens since) | 4 | 8 | 3,000 | 1,000 | 5 done, 3 stopped early | [56](alliances.md) |
+| A10k | Cooperation with a surplus: alliances by mutual consent, sides pooled by kinship, support that counts twice, against a control | 4 | 8 | 10,000 | 1,000 | done | [56](alliances.md) |
+| AL | Alliances over a long time and at 20,000 tokens | 2 | 4 | 10,000, 20,000 | 2,000, 3,000 | done | [56](alliances.md) |
+| N | Rules without numbers (B3, with and without allies) and alliances without the home advantage | 4 | 8 | 10,000 | 1,000 | done | [56](alliances.md), [57](rules-without-numbers.md) |
+| S | The switches the world was built with (revolutions, gifts, lapsing links, estates by wealth) and other contests (a lottery, sides pooled by genotype or family, kin and family senses) | 13 | 26 | 10,000 | 1,000 | done | [54](the-switches-the-world-was-built-with.md), [55](another-game.md) |
+| L | Long runs: Experiment 16's B2 worlds played on to 10,000 iterations, B1 to 10,000, B1 without revolutions to 3,000 | 3 | 13 | 10,000 | 3,000, 10,000, 50,000 | 10 done, 3 stopped early | [50](why-evolution-stops.md), [69](a-hundred-thousand-iterations.md) |
+| P | Two inputs (where my brain came from, who helped me) and links that hold a token | 6 | 12 | 10,000 | 2,000 | done | [57](rules-without-numbers.md), [58](gliders-and-who-helps-whom.md) |
+| Q | Brains mixed at birth, brain units that hold a token, an eye for raids on kin, and links that hold a token without old age | 5 | 10 | 10,000 | 2,000 | done | [78](mixed-brains-costly-units.md) |
+| R | Who inherits the estate of the dead: the poorest, the newborns, their parents | 9 | 18 | 10,000 | 2,000 | done | [73](who-inherits.md) |
+| T | Gifts together with each other switch | 24 | 48 | 10,000 | 1,000 | done | [90](gifts-with-every-other-rule.md) |
+| U | Eight switches in combination on B2: a fractional factorial design | 16 | 16 | 10,000 | 1,000 | done | [86](eight-switches-at-once.md) |
+| V | Eight switches in combination on B1: a fractional factorial design | 16 | 16 | 10,000 | 1,000 | done | [86](eight-switches-at-once.md) |
+| W | No revolutions together with each other switch, on B2 | 24 | 48 | 10,000 | 1,000 | done | [88](revolutions-with-every-other-rule.md) |
+| X | Handover together with each other switch, on B2 | 23 | 46 | 10,000 | 1,000 | done | [89](handover-with-every-other-rule.md) |
+| Y | Brains mixed at birth together with each other switch, on B2 | 23 | 46 | 10,000 | 1,000 | done | [82](mixing-with-every-other-rule.md) |
+| K | Links to strangers on B2: every search (jump, walk, reach) with every steering and consent | 12 | 24 | 10,000 | 1,000 | done | [83](links-to-strangers.md) |
 | Z | Settings drawn at random from every value the book has used, the values that make worlds worse dropped round after round (research/oee/search.md) | 64 | 64 | 10,000 | 1,000 | 62 done, 2 stopped early | — |
-| LC | The candidates, the worlds closest to the author's picture of one that might keep evolving, played on to 10,000 iterations | 20 | 25 | 10,000 | 1,000, 10,000 | 23 done, 2 stopped early | [79](79-meta-10-healthy-and-rich.md), [92](92-the-candidates-played-on.md) |
-| SW | Mixing switched at a moment: off in the five worlds of Experiment 17 that met every mark, at 5,000; on in five of B2's worlds, at 2,000 | 2 | 10 | 10,000 | 4,000, 7,000 | done | [80](80-mixed-at-birth-ten-long-worlds.md) |
-| M | Steadying a mixed world: each rule of the engine that might hold its size (estates, half kept at home, searches, a slower change of brains), and the estate to a dead agent's own children (H), parents as mates (MP) and a bought life (BL) | 11 | 28 | 10,000 | 5,000 | 24 done, 2 queued, 2 stopped early | [84](84-meta-11-what-holds-a-worlds-size.md), [85](85-mixed-at-birth-with-parents-as-mates.md) |
-| YB | Who breeds: only the young or only the old, in B2 and in B2 with brains mixed at birth | 5 | 7 | 10,000 | 2,000 | done | [87](87-what-folds-a-world.md) |
-| BIG | B2 at 100,000 tokens, one world to 1,000 iterations | 1 | 1 | 100,000 | 1,000 | done | [87](87-what-folds-a-world.md) |
+| LC | The candidates, the worlds closest to the author's picture of one that might keep evolving, played on to 10,000 iterations | 20 | 25 | 10,000 | 1,000, 10,000 | 23 done, 2 stopped early | [79](healthy-and-rich.md), [92](the-candidates-played-on.md) |
+| SW | Mixing switched at a moment: off in the five worlds of Experiment 17 that met every mark, at 5,000; on in five of B2's worlds, at 2,000 | 2 | 10 | 10,000 | 4,000, 7,000 | done | [80](mixed-at-birth-ten-long-worlds.md) |
+| M | Steadying a mixed world: each rule of the engine that might hold its size (estates, half kept at home, searches, a slower change of brains), and the estate to a dead agent's own children (H), parents as mates (MP) and a bought life (BL) | 11 | 28 | 10,000 | 5,000 | 24 done, 2 queued, 2 stopped early | [84](what-holds-a-worlds-size.md), [85](mixed-at-birth-with-parents-as-mates.md) |
+| YB | Who breeds: only the young or only the old, in B2 and in B2 with brains mixed at birth | 5 | 7 | 10,000 | 2,000 | done | [87](what-folds-a-world.md) |
+| BIG | B2 at 100,000 tokens, one world to 1,000 iterations | 1 | 1 | 100,000 | 1,000 | done | [87](what-folds-a-world.md) |
 <!-- /table -->
 
 Batch L's iterations are those each job ran: B2's worlds were played on from
@@ -436,5 +436,5 @@ in the Research tab).
 <!-- turns -->
 ---
 
-← [Appendix B · What goes with what](B-what-goes-with-what.md) · [Contents](../README.md)
+← [What goes with what](what-goes-with-what.md) · [Methods and statistics](../README.md#methods-and-statistics) · [What a run records](frames-and-stats.md) →
 <!-- /turns -->

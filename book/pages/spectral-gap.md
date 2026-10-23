@@ -63,5 +63,7 @@ networks and, on nearly divided ones, a small number whose smallness matters
 more than its last digit.
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [Radius and diameter](radius-and-diameter.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Assortativity](assortativity.md) →
 <!-- /turns -->

@@ -90,3 +90,9 @@ later is meant to be tested again as an experiment of the lab.
 Pilot worlds are kept in `GraphOfLifeRuns/.pilots`, outside the repository
 like every run. The command lines that made them are in each chapter's
 recipes and in `research/oee/pilots/LOG.md`.
+
+<!-- turns -->
+---
+
+← [What the viewer can colour by](viewer-colours.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Median and quantiles](median-and-quantiles.md) →
+<!-- /turns -->

@@ -1109,8 +1109,7 @@ details.control-group > summary:hover h3 { color: var(--text); }
 .book-part h3 { margin: 0 0 6px; }
 .book-toc-item {
   display: grid;
-  grid-template-columns: 22px minmax(0, 1fr);
-  column-gap: 6px;
+  grid-template-columns: minmax(0, 1fr);
   padding: 5px 8px;
   border-radius: 6px;
   color: var(--text-soft);
@@ -1120,8 +1119,7 @@ details.control-group > summary:hover h3 { color: var(--text); }
 .book-toc-item:hover { background: var(--panel); }
 .book-toc-item.active { background: var(--panel-2); color: var(--text); }
 .book-toc-item.unwritten { color: var(--muted-2); }
-.book-toc-num { color: var(--muted); text-align: right; }
-.book-toc-item .book-chip { grid-column: 2; justify-self: start; margin-top: 3px; }
+.book-toc-item .book-chip { justify-self: start; margin-top: 3px; }
 
 .book-chip {
   display: inline-block;

@@ -53,5 +53,7 @@ thirty seeds per condition went into it.
 `compare_conditions` and `wandering` in `gol_analysis.py`.
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [The bootstrap](bootstrap.md) · [Methods and statistics](../README.md#methods-and-statistics) · [How many seeds an experiment needs](seeds-needed.md) →
 <!-- /turns -->

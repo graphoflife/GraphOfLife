@@ -40,5 +40,7 @@ does not tell them apart.
   the genotypes alive at a later moment, in two worlds.
 
 <!-- turns -->
-[Contents](../README.md)
+---
+
+← [Logarithmic axes and power laws](logarithmic-axes.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Fitting a straight line, and R²](least-squares.md) →
 <!-- /turns -->

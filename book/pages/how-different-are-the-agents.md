@@ -403,5 +403,5 @@ every experiment and to the pilot worlds.
 <!-- turns -->
 ---
 
-← [Chapter 40 · Meta II · What the measurements say about open-ended evolution](40-meta-2.md) · [Contents](../README.md) · [Chapter 71 · Flow modules: the groups tokens stay in](71-flow-modules.md) →
+← [Do the brains matter?](do-the-brains-matter.md) · [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are) · [Genotypes and the family tree](genotype.md) →
 <!-- /turns -->
