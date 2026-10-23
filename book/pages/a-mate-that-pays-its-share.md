@@ -1,9 +1,9 @@
 # A mate that pays its share
 
 > [!question] Questions of this page
-> - When brains are mixed at birth, does a mate that pays for the child hold
+> - When [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") are mixed at birth, does a mate that pays for the child hold
 >   a world's size steadier?
-> - Does the lab play the pilots stopped on 18 October as they went?
+> - Does the [lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") play the [pilots](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") stopped on 18 October as they went?
 
 <!-- experiment E22 -->
 
@@ -11,7 +11,7 @@
 
 Brains mixed at birth make worlds rich and diverse and then let them drift:
 - their size wanders;
-- many shrink to a few hundred agents;
+- many shrink to a few hundred [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.");
 - some die out
   ([Five mixed worlds, fifty thousand iterations](five-mixed-worlds-fifty-thousand-iterations.md)).
 
@@ -25,12 +25,12 @@ half its brain through other agents' children.
   [Experiment 19](mixed-at-birth-with-parents-as-mates.md) every world
   lived and held about 2,000 agents.
 - **A mate that pays its share**, the rule this page tests. The mate
-  gives the child as many tokens as the parent does, as far as it can and
+  gives the child as many [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") as the parent does, as far as it can and
   never its last. A child that two pay for is cheaper to each, which pushes
   the other way.
 
 The second was played in four pilot worlds (batch MPay). They were stopped
-at iterations 1,000 and 1,500 when the computer was restarted on 18 October
+at [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") 1,000 and 1,500 when the computer was restarted on 18 October
 2026. The lab now plays the prototype's rules itself, so it starts them
 again from the beginning, and the first two should be the pilots' worlds
 again, game for game.
@@ -114,8 +114,8 @@ again, game for game.
 
 ## What the worlds did
 
-**The lab plays the stopped pilots as they went.** The worlds of seeds 1
-and 2 matched the pilots' agents and links after every game, as far as the
+**The lab plays the stopped pilots as they went.** The worlds of [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1
+and 2 matched the pilots' agents and links after every [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."), as far as the
 pilots had gone: 1,311 and 1,719 iterations.
 
 <!-- figure matepays/sizes -->
@@ -145,18 +145,18 @@ pilots had gone: 1,311 and 1,719 iterations.
 | 4 | 0.12 | 0.47 | 1,012 | 316 |
 
 Every world with a paying mate was steadier than Experiment 17's world of
-the same seed, and none came near dying out. Their medians were 1,394 to
+the same seed, and none came near dying out. Their [medians](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") were 1,394 to
 2,048 agents, where the free mates' worlds wandered between 40 and 1,700
 around medians of 586 to 1,051.
 
 **Healthy and diverse, but folded.** At 5,000 iterations, read as every
 world is read:
-- **Marks:** six or seven of the health bar.
-- **Diversity:** scores of 0.52 to 0.64 against B2's median at 5,000 of
+- **Marks:** six or seven of the [health bar](health-bar.md "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.").
+- **Diversity:** scores of 0.52 to 0.64 against [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.")'s median at 5,000 of
   0.49.
 - **Width:** 1.16 to 1.28 times their twins. These are folded small worlds,
   as Experiment 19's are.
-- **Evenness:** Ginis of 0.43 to 0.48, about as even as B2's least even
+- **[Evenness](entropy-and-evenness.md "How evenly something is shared out among the agents, from all in one place to spread perfectly evenly."):** [Ginis](gini-coefficient.md "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") of 0.43 to 0.48, about as even as B2's least even
   world (0.46).
 
 ## The verdict

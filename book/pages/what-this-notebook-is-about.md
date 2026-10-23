@@ -5,7 +5,7 @@
 Life on Earth has been producing new kinds of things for about four billion
 years: new molecules, cells, bodies, ways of living together. It has not run
 out of novelty, and nothing suggests it will. Biologists and computer
-scientists call this property **open-ended evolution**. Many artificial
+scientists call this property **[open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.")**. Many artificial
 worlds have been built in which simple programs copy themselves, change and
 compete — Tierra, Avida, Polyworld and others
 ([The ideas this builds on](the-ideas-this-builds-on.md)). They produce surprising things
@@ -22,7 +22,7 @@ this notebook is that groundwork.
 
 There is a second aim, which shaped the rules from the start: that a world of
 very simple, local, conserving rules might grow by itself the kinds of thing
-physics describes — a space of a few dimensions, stable things that persist in
+physics describes — a space of a few [dimensions](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space."), stable things that persist in
 it, places where something can live. [Physical inspiration](physical-inspiration.md)
 explains the physical ideas behind the rules, and why the two aims keep
 meeting.
@@ -37,7 +37,7 @@ tokens in the world never changes. In every **iteration** each agent may give
 some of its tokens to a child, which appears on a new node next to it and
 inherits a copy of its brain, sometimes slightly changed. Then every agent
 stakes all of its tokens on itself and its neighbours, and every node goes to
-whoever staked most on it — or to a coalition of smaller stakers. The
+whoever staked most on it — or to a [coalition](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.") of smaller stakers. The
 winner's brain is copied into the node, and the node keeps every token staked
 on it. Agents left without tokens die, and so does every part of the network
 cut off from the rest. Nothing is scored and nothing is optimised: whatever
@@ -71,7 +71,7 @@ There is no single agreed definition ([The ideas this builds on](the-ideas-this-
 lists the main ones). This project uses a ladder of four claims, each needed
 before the next:
 
-1. **P1 — there is evolution:** lineages — a brain and its descendants — last
+1. **P1 — there is evolution:** [lineages](families.md "A line of descent: the agents whose genotypes go back to one ancestor.") — a brain and its descendants — last
    long enough for selection to act on them.
 2. **P2 — adaptation accumulates:** a late population would beat its own
    ancestors, if they were brought back and made to compete.
@@ -80,10 +80,10 @@ before the next:
 4. **P4 — the space of organisations keeps growing:** new kinds keep
    appearing, without a ceiling.
 
-The first pages answer questions that lie underneath P1: what the baseline
+The first pages answer questions that lie underneath P1: what the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.")
 world does, and what one changed setting does to it. Then the notebook turns
 from watching the rules to building them: a yardstick for evolution that keeps
-going and a health bar for the network
+going and a [health bar](health-bar.md "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.") for the network
 ([How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)), then rules
 meant to pass them, starting from the obstacles [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md)
 lists.
@@ -95,8 +95,8 @@ lists.
 > brains — but only their constant tendencies, since they are nearly blind
 > to what they see.
 > [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) ran the test
-> of P2, playing the brains of each era against earlier ones: the baseline's
-> brains beat their founders by iteration 50 (+361 Elo in the median world)
+> of P2, playing the brains of each [era](eras-and-contests.md "Brains of a world at two moments, its eras, played against each other: do the later ones win?") against earlier ones: the baseline's
+> brains beat their [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.") by iteration 50 (+361 Elo in the median world)
 > and gain nothing after iteration 100 — those of iteration 1,000 score
 > 0.483 against those of iteration 300.
 
@@ -111,7 +111,7 @@ every one of them.
   ([The brain](the-brain.md)), every setting ([Every setting](settings.md)), and
   whether a run can be made again exactly
   ([Is a run reproducible?](is-a-run-reproducible.md)).
-- **The baselines B1 and B2.** Thirty worlds of one fixed setting — the
+- **The baselines [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") and [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.").** Thirty worlds of one fixed setting — the
   *baseline*, called B1, at 100,000 tokens, about 14,000 agents each — looked
   at from every side ([Thirty worlds](thirty-worlds.md),
   [What the baseline world is](what-the-baseline-world-is.md)); and B2, a second
@@ -207,8 +207,8 @@ tab of the Graph of Life app, on GitHub, and in **Obsidian**: open the folder
 <!-- turns -->
 ---
 
-← [How to read this notebook](../README.md) · [Start here](../README.md#start-here) · [The ideas this builds on](the-ideas-this-builds-on.md) →
+← [How to read this notebook](../README.md) · [Start here](../README.md#start-here) · [Glossary](glossary.md) →
 
-> [!info]- Pages that link here (11)
-> [How to read this notebook](../README.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [How a brain changes](mutation.md) · [What the baseline world is](what-the-baseline-world-is.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [Physical inspiration](physical-inspiration.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md)
+> [!info]- Pages that link here (12)
+> [How to read this notebook](../README.md) · [How this notebook is written](how-this-notebook-is-written.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [How a brain changes](mutation.md) · [What the baseline world is](what-the-baseline-world-is.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [Physical inspiration](physical-inspiration.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md)
 <!-- /turns -->

@@ -1,7 +1,7 @@
 # The power spectrum of a time series
 
-A world's number of agents goes up and down. Is that a slow drift over
-hundreds of iterations, or a quick jitter from one iteration to the next?
+A world's number of [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") goes up and down. Is that a slow drift over
+hundreds of [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."), or a quick jitter from one iteration to the next?
 The **power spectrum** splits the motion into rhythms and says how much of it
 happens at each.
 
@@ -57,7 +57,7 @@ factor *e*. Its autocorrelation after a time *s* is *e*^(−*s*/τ)
 
 ## In the baseline
 
-The number of agents of the baseline worlds of 10,000 tokens has β ≈ −2.1
+The number of agents of the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") worlds of 10,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") has β ≈ −2.1
 for periods between 4 and 500 iterations, and a spectrum that levels off for
 periods of 800 iterations and more; in the worlds of 100,000 tokens, β ≈ −1.8
 ([Power laws, real and apparent](power-laws-real-and-apparent.md)): a random walk
@@ -70,6 +70,6 @@ iterations or more, and 0.4% at periods shorter than 10.
 
 ← [Fitting a power law properly](power-law-fit.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Where, who and chance: splitting a decision's variance](variance-split.md) →
 
-> [!info]- Pages that link here (2)
-> [Power laws, real and apparent](power-laws-real-and-apparent.md) · [Physical inspiration](physical-inspiration.md)
+> [!info]- Pages that link here (3)
+> [Glossary](glossary.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [Physical inspiration](physical-inspiration.md)
 <!-- /turns -->

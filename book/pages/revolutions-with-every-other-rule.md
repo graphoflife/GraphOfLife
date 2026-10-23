@@ -1,26 +1,26 @@
 # Revolutions, with every other rule
 
 > [!question] Questions of this page
-> - In a game, smaller stakers may band together and take a node from its
+> - In a [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."), smaller stakers may band together and take a [node](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") from its
 >   largest staker — a revolution. What becomes of a world without them,
 >   whatever its other rules?
-> - Are there rules with which revolutions matter, where in B2 itself they do
+> - Are there rules with which revolutions matter, where in [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.") itself they do
 >   not?
 
 A **revolution** lets a coalition of smaller stakers take a node that the
 largest single staker would otherwise win
 ([How a coalition takes a node](revolution.md),
-[`allow_revolutions`](settings.md#allow_revolutions)). In B1
+[`allow_revolutions`](settings.md#allow_revolutions)). In [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.")
 revolutions take most of the nodes that change hands, and without them B1
 becomes a world of mayflies; in B2 they won about one node in three hundred a
 game, and B2 with and without them were the same world
 ([The switches the world was built with](the-switches-the-world-was-built-with.md)). But B2 itself is
 one world among many the notebook now plays. The author asked for revolutions in
 combination (16 October 2026): batch W plays B2 without revolutions together
-with each of the other switches, two seeds each, 1,000 iterations — every
+with each of the other switches, two [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") each, 1,000 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") — every
 world the fourth corner of a two-by-two whose other corners are B2, B2
 without revolutions, and B2 with the other switch alone. Batch S's other ways
-of deciding a node — a lottery, sides pooled by genotype or by family, a
+of deciding a node — a lottery, sides pooled by [genotype](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.") or by family, a
 sense of kin or of family — had only ever been played without revolutions;
 for them batch W plays the missing corner, the same rule *with* revolutions.
 
@@ -43,14 +43,14 @@ for them batch W plays the missing corner, the same rule *with* revolutions.
 > **To make it again:** `python3 book_figures.py norevcombos`.
 <!-- /figure -->
 
-**For most rules, nothing.** Over the 24 rules and two seeds, the median
-change is +0.002 in the share of agents holding three tokens or fewer and
-+0.008 in the diversity score, and the marks of the health bar hardly move.
+**For most rules, nothing.** Over the 24 rules and two seeds, the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.")
+change is +0.002 in the share of agents holding three [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") or fewer and
++0.008 in the [diversity score](diversity-score.md "How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes."), and the marks of the [health bar](health-bar.md "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.") hardly move.
 Revolutions are rare in most of these worlds: a median of 0.24 per hundred
 agents an iteration in the worlds that have them, and 3.7 in a hundred of the
 nodes that change hands; nine worlds in ten stay below 0.8 and 7.4.
 
-**With brains mixed at birth, revolutions keep a world small and rich.**
+**With [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") mixed at birth, revolutions keep a world small and rich.**
 Mixed worlds are small, and in them revolutions are five to ten times as
 common as in B2 — 1.0 and 1.4 per hundred agents an iteration, seven or eight
 in a hundred of the nodes that change hands. Without them, the two mixed
@@ -71,7 +71,7 @@ lower by 0.11 and 0.12, in both seeds.
 of 1,000 take more than half of a contested world from those of 500 in 42 of
 the 48 worlds, with a median of 0.64 (B2's ten worlds: 0.68). The six at a
 half or below are the worlds with the last token kept at home (0.45 and
-0.49), and one seed each with no old age (0.48), with the estate to the
+0.49), and one seed each with no old age (0.48), with the [estate](estate.md "The tokens a dead agent leaves, and who gets them.") to the
 parents (0.48), with nodes by lottery (0.47) and with sides pooled by family
 (0.46). The fastest: units that hold a token (0.79 and 0.89), slow brain
 change and brains that grow (0.72 and 0.85 each), half kept at home (0.72 and

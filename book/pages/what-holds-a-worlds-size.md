@@ -1,20 +1,20 @@
 # What holds a world's size
 
 > [!question] Questions of this page
-> - Why are B2's worlds so poor, and why were the mixed worlds rich — and
+> - Why are [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.")'s worlds so poor, and why were the mixed worlds rich — and
 >   mortal?
-> - What sets how many agents a world holds, and what would hold a world at a
+> - What sets how many [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") a world holds, and what would hold a world at a
 >   size where its agents are neither all poor nor in danger of dying out?
 
 The author's picture of a world that might keep evolving has two halves
 ([Healthy and rich](healthy-and-rich.md)): a healthy network, and agents
-that differ — not a world where everyone holds one to three tokens. Across
+that differ — not a world where everyone holds one to three [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes."). Across
 the last pages, one quantity decided both halves more than any rule did:
 **how many agents a world holds.** With the tokens fixed, a world's riches
 are its size: 10,000 tokens among 3,300 agents are three each, among 700
 fourteen. Its health follows its size too, in B2's networks
 ([Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md#the-marks-a-world-misses)):
-a small world fails the mark for hubs, a large one the dimension. And a world
+a small world fails the mark for [hubs](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub."), a large one the [dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space."). And a world
 that grows too small dies. This page gathers what the notebook now knows about
 what sets that number.
 
@@ -26,12 +26,12 @@ what sets that number.
 
 ## The ledger of a world
 
-In every world built on B2's rules, an agent lives out its hundred iterations
+In every world built on B2's rules, an agent lives out its hundred [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.")
 and dies of age; nearly nobody dies sooner
 ([Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md#why-a-mixed-world-is-rich)).
 So a world that keeps its size must have one birth per hundred agents every
 iteration — and it does: in the 454 moments measured, in B2's worlds, the
-mixed worlds and the worlds whose rule was switched, the median is 1.00
+mixed worlds and the worlds whose rule was switched, the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") is 1.00
 births per hundred agents an iteration.
 
 Those births come from the agents that *can* have a child — 11 tokens or
@@ -53,7 +53,7 @@ size, and the size sets the riches.
   one, and three agents in four hold three tokens or fewer. Nothing drifts:
   the world is held at that size by its tokens, as a jar is filled by what is
   poured in.
-- **Reluctant: brains mixed at birth.** The able have a child at 3 per hundred
+- **Reluctant: [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") mixed at birth.** The able have a child at 3 per hundred
   an iteration, so the world settles where a third can afford one — small and
   rich. But nothing holds the reluctance where it is: it drifts as the brains
   change, the size follows, the marks of health follow the size, and when
@@ -64,7 +64,7 @@ size, and the size sets the riches.
   last world kept before each end, a third to three quarters of the agents
   could have had a child, and births had fallen to 0.4 to 0.5 per hundred
   agents an iteration, against the 1.0 that replaces the dead.
-- **Paid: rules that pay for births.** The estate of the dead to the newborns
+- **Paid: rules that pay for births.** The [estate](estate.md "The tokens a dead agent leaves, and who gets them.") of the dead to the newborns
   or to the parents, or a child for any number of tokens, make every birth
   easier or more rewarding; the worlds fill to more agents than B2's and are
   poorer still ([Who inherits?](who-inherits.md)), with mixing as without it
@@ -79,9 +79,9 @@ worlds, it fell three- to tenfold, and the worlds shrank — one to 81 agents
 ## Why mixing makes agents reluctant
 
 A brain spreads in two ways: through its agent's children, and through every
-node its agent takes in the game, which gets a copy of the winner's brain. In
+node its agent takes in the [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."), which gets a copy of the winner's brain. In
 B2 a child carries all of its parent's brain. With mixing it carries about
-half, and the other half comes from a neighbour — the **mate**, who pays
+half, and the other half comes from a [neighbour](the-world.md#the-network "An agent joined to another by a connection.") — the **mate**, who pays
 nothing for it. Having a child then spreads half as much of a brain for the
 same price, while a mate's brain spreads for free, whether its agent breeds
 or not. Selection keeps working in the mixed worlds — later brains beat
@@ -103,12 +103,12 @@ a warning.
 
 A world held at a middle size — rich enough that its agents differ, large
 enough not to die out, and, in B2's networks, at the size where every mark of
-the health bar is met — needs something that pulls eagerness back: **having a
+the [health bar](health-bar.md "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.") is met — needs something that pulls eagerness back: **having a
 child must pay more when few have them, and less when many do.** B2 has such
 a pull, but only at the top, where the tokens run out. The rules tried so far
 either pull too hard — an estate shared among the newborns pays each newborn
 more when there are fewer of them, and fills the world — or not at all.
-Batch M added each rule of the engine that might steady a mixed world: the
+Batch M added each rule of the [engine](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") that might steady a mixed world: the
 estates to the poorest and half kept at home held their worlds steady at
 1,300 to 2,300 agents, but six agents in ten were poor; the searches for
 strangers and a slower change of brains left them unsteadier than mixing
@@ -121,7 +121,7 @@ Ways to build the pull, and the first of them tried:
    on 17 October 2026): breeding pays late, at the parent's death, and only
    within its own line — a line that does not breed loses its wealth to
    everyone else. **With mixing it did not hold the size** (batch H, two
-   seeds, 5,000 iterations): one world shrank to between 170 and 750 agents,
+   [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world."), 5,000 iterations): one world shrank to between 170 and 750 agents,
    the other fell to two agents by iteration 4,200 and died out — the engine
    started it again from one agent holding every token, which filled the
    world within a hundred iterations. A late reward for a line does nothing
@@ -133,7 +133,7 @@ Ways to build the pull, and the first of them tried:
    child of its own
    ([`mix_mates`](settings.md#mix_mates) = `parents`, new on 17
    October 2026) turns being a mate from a free gift into something only
-   breeders have. In four pilot worlds (batch MP) the agents that could have a
+   breeders have. In four [pilot](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds (batch MP) the agents that could have a
    child had one a little more eagerly than with any mate — 3.5 to 6 per
    hundred an iteration, against about 3 — and each world held its size more
    steadily than Experiment 17's world of the same seed, at 760 to 2,000
@@ -186,6 +186,6 @@ Ways to build the pull, and the first of them tried:
 
 **Also about:** [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world).
 
-> [!info]- Pages that link here (13)
-> [Where tokens go](where-tokens-go.md) · [What folds a world](what-folds-a-world.md) · [Births as rich as the neighbours](births-as-rich-as-the-neighbours.md) · [The floor in plain B2 and in B1](the-floor-in-plain-b2-and-in-b1.md) · [Rules in company](rules-in-company.md) · [Eight switches at once](eight-switches-at-once.md) · [Five mixed worlds, fifty thousand iterations](five-mixed-worlds-fifty-thousand-iterations.md) · [Mixed at birth, with parents as mates](mixed-at-birth-with-parents-as-mates.md) · [A mate that pays its share](a-mate-that-pays-its-share.md) · [The candidates, played on](the-candidates-played-on.md) · [Five more seeds for the rules that held](five-more-seeds-for-the-rules-that-held.md) · [Room for the steadiest world](room-for-the-steadiest-world.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (14)
+> [The estate of the dead](estate.md) · [Where tokens go](where-tokens-go.md) · [What folds a world](what-folds-a-world.md) · [Births as rich as the neighbours](births-as-rich-as-the-neighbours.md) · [The floor in plain B2 and in B1](the-floor-in-plain-b2-and-in-b1.md) · [Rules in company](rules-in-company.md) · [Eight switches at once](eight-switches-at-once.md) · [Five mixed worlds, fifty thousand iterations](five-mixed-worlds-fifty-thousand-iterations.md) · [Mixed at birth, with parents as mates](mixed-at-birth-with-parents-as-mates.md) · [A mate that pays its share](a-mate-that-pays-its-share.md) · [The candidates, played on](the-candidates-played-on.md) · [Five more seeds for the rules that held](five-more-seeds-for-the-rules-that-held.md) · [Room for the steadiest world](room-for-the-steadiest-world.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

@@ -1,6 +1,6 @@
 # The Wilson interval
 
-Four of the thirty baseline worlds of 10,000 tokens died out: 13%. With only thirty worlds, the
+Four of the thirty [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") worlds of 10,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") died out: 13%. With only thirty worlds, the
 true rate could easily be lower or higher. The **Wilson interval** (Wilson
 1927) gives a range for a share estimated from a count.
 
@@ -36,6 +36,6 @@ the true share about as often as it promises.
 
 ← [How many seeds an experiment needs](seeds-needed.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Logarithmic axes and power laws](logarithmic-axes.md) →
 
-> [!info]- Pages that link here (1)
-> [How worlds are measured](how-worlds-are-measured.md)
+> [!info]- Pages that link here (2)
+> [Glossary](glossary.md) · [How worlds are measured](how-worlds-are-measured.md)
 <!-- /turns -->

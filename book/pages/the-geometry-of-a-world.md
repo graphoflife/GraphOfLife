@@ -1,11 +1,11 @@
 # The geometry of a world
 
-A network has no space around it: agents are not anywhere, they are only
+A network has no space around it: [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") are not anywhere, they are only
 joined. Still, a network has a **geometry** — distances between its agents, a
 way of growing outward from any one of them, places where it is thin and could
 be cut. The viewer measures it in nine ways. This page reads them on the
-baseline worlds, and holds the most telling ones against a **null**: a random
-network with exactly the same number of connections at every agent. What the
+[baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") worlds, and holds the most telling ones against a **null**: a random
+network with exactly the same number of [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") at every agent. What the
 world has and the random network lacks is what the rules built.
 
 > [!question] Questions of this page
@@ -13,7 +13,7 @@ world has and the random network lacks is what the rules built.
 >   network of its kind?
 > - What kind of space is it: a line, a sheet, a tree?
 > - How easily could it be cut in two? How long would a random walk — or a
->   token — need to cross it?
+>   [token](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") — need to cross it?
 > - How many loops does it have, and where do they run?
 
 The worlds are the thirty of 100,000 tokens of [Thirty worlds](thirty-worlds.md);
@@ -103,10 +103,10 @@ to reach to touch everyone.
 > **To make it again:** `python3 book_figures.py geometry`.
 <!-- /figure -->
 
-Over the settled life the median world has a mean path length of 17.7
+Over the [settled life](settled-life.md "A world from iteration 500 to its end, after its youth, where it is measured.") the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world has a mean path length of 17.7
 steps, a radius of 36 and a diameter of 60 — about twice those of the worlds
-of 10,000 tokens (9.8, 17 and 29). Are those long? Take the world of seed 1
-after its last game, 14,870 agents, and compute every distance exactly: a
+of 10,000 tokens (9.8, 17 and 29). Are those long? Take the world of [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1
+after its last [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."), 14,870 agents, and compute every distance exactly: a
 mean path of 27.9, a radius of 48, a diameter of 96. Now keep every agent's
 number of connections and wire them at random (five times, a "configuration
 model"): the mean path falls to **6.0**, the radius to 8.6, the diameter to
@@ -143,12 +143,12 @@ Stand on an agent and count the agents within *r* steps.
 <!-- /figure -->
 
 Within one step there are, on average, 6 agents (the agent and its
-neighbours). Within two, 21; within three, 62; within five, 200; within ten,
+[neighbours](the-world.md#the-network "An agent joined to another by a connection.")). Within two, 21; within three, 62; within five, 200; within ten,
 1,270. The count grows as *r*^2.38, until half the world is reached at 24
 steps, and then flattens as the balls run into the edges of the world. In the
 world of seed 1 at 10,000 tokens, two steps already held 70 agents — most
-agents were two steps from a hub — and half the world lay within seven. The
-growth is closer to a power law here (the left panel would show a straight
+agents were two steps from a [hub](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.") — and half the world lay within seven. The
+growth is closer to a [power law](power-law-fit.md "A quantity whose frequency falls as a power of its size: few huge values, many small ones.") here (the left panel would show a straight
 line) than to an exponential (the right one would), and
 [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) reads it as a
 dimension.
@@ -156,7 +156,7 @@ dimension.
 ## Four measures of a world's shape
 
 From ball growth and from coverings come four numbers that the viewer
-records every 25 iterations ([Dimension and curvature](ball-dimension-and-curvature.md),
+records every 25 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") ([Dimension and curvature](ball-dimension-and-curvature.md),
 [Box dimension](box-dimension.md), [The spectral gap](spectral-gap.md)):
 
 <!-- figure geometry/measures -->
@@ -176,7 +176,7 @@ records every 25 iterations ([Dimension and curvature](ball-dimension-and-curvat
 <!-- /figure -->
 
 - **Dimension from ball growth**: 3.4 in the median world (the worlds: 2.9 to
-  6.9; 3.0 at 10,000 tokens), against 3.7 in the founders' ring after the
+  6.9; 3.0 at 10,000 tokens), against 3.7 in the [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.")' ring after the
   first game. Balls grow, over their first few steps, about as fast as in
   three-dimensional space, or faster.
 - **Curvature**: +1.4 (0.1 to 23), from −1.7 at the start. Positive
@@ -185,7 +185,7 @@ records every 25 iterations ([Dimension and curvature](ball-dimension-and-curvat
   the first steps of a ball, and in a star the whole world is two steps from
   everywhere (the 23). Read it as "the growth slows", not as a sphere.
 - **Box dimension**: 1.88 (1.66 to 2.58; 1.85 at 10,000 tokens), from 2.48 in
-  the ring, with R² = 0.96.
+  the ring, with [R²](least-squares.md "The straight line that fits a cloud of points best, and how much of their spread it explains.") = 0.96.
 - **Spectral gap**: 0.0012 (0.0010 to 0.0019), half that of the worlds of
   10,000 tokens (0.0026), down from 0.080 in the ring.
 
@@ -228,7 +228,7 @@ The **spectral gap** λ₂ measures, in one number, how hard a network is to cut
 into two large parts, and how quickly a random walk on it forgets where it
 started — after about 1/λ₂ steps ([The spectral gap](spectral-gap.md)).
 
-The world of seed 1 has λ₂ = 0.00095. Its random twin, with the same
+The world of seed 1 has λ₂ = 0.00095. Its [random twin](random-twin.md "A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all."), with the same
 connections per agent, has 0.031: **thirty-three times larger** (thirty-two
 at 10,000 tokens). By Cheeger's
 inequality, a small λ₂ guarantees a bottleneck — a large part of the world
@@ -240,7 +240,7 @@ showed that a game moves tokens almost like a random walk. On this network, a
 random walk needs about a thousand steps to forget its start — so tokens could
 spread evenly across a whole world only over a thousand games, as long as the
 whole run. Meanwhile the network changes every game: about 2,300 connections
-are made and 1,600 cut per iteration, and the hubs change brains every
+are made and 1,600 cut per iteration, and the hubs change [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") every
 game. **Locally**, tokens settle
 in a few games, which is why every agent's tokens follow its connections
 ([How properties scale together](how-properties-scale-together.md)). **Globally**, the world is
@@ -307,6 +307,6 @@ To make every figure of this page: `python3 book_figures.py geometry`.
 
 **Also about:** [Space and dimension](../README.md#space-and-dimension).
 
-> [!info]- Pages that link here (13)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [Where the tokens flow](where-the-tokens-flow.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [Radius and diameter](radius-and-diameter.md) · [The spectral gap](spectral-gap.md) · [Physical inspiration](physical-inspiration.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) · [Dimension and curvature from ball growth](ball-dimension-and-curvature.md) · [Box dimension](box-dimension.md) · [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [One world, many colours](one-world-many-colours.md)
+> [!info]- Pages that link here (14)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [Where the tokens flow](where-the-tokens-flow.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [Radius and diameter](radius-and-diameter.md) · [The spectral gap](spectral-gap.md) · [Physical inspiration](physical-inspiration.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [The random twin: is a world a space?](random-twin.md) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) · [Dimension and curvature from ball growth](ball-dimension-and-curvature.md) · [Box dimension](box-dimension.md) · [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [One world, many colours](one-world-many-colours.md)
 <!-- /turns -->

@@ -1,19 +1,19 @@
 # Lightning in every world
 
 > [!question] Questions of this page
-> - When agents stake tokens on their neighbours, do the tokens go round in
->   closed loops, or do they run one way, from some agents to others?
+> - When [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") stake [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") on their [neighbours](the-world.md#the-network "An agent joined to another by a connection."), do the tokens go round in
+>   closed [loops](loops.md "A path through the network that comes back to where it started without using a connection twice."), or do they run one way, from some agents to others?
 > - Is that the same in every world the notebook has made: both rule sets, every
->   size, every setting an experiment changed?
+>   size, every [setting](settings.md "One number or switch of a run's rules, fixed before it starts.") an experiment changed?
 > - How long are the loops, and do they grow with the world?
-> - The loops are counted with a quick, greedy search, game by game. Does it
+> - The loops are counted with a quick, greedy search, [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") by game. Does it
 >   agree with the exact decomposition of [Gliders, and who helps whom](gliders-and-who-helps-whom.md)?
 
 ## What a lightning is
 
 In every game each agent splits its tokens over its own node and its
 neighbours' nodes. A token staked on a neighbour's node is a token that
-**flows** along that connection, from the agent to the neighbour. Draw an
+**flows** along that [connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes."), from the agent to the neighbour. Draw an
 arrow for every such token and a game becomes a network of arrows: the flow.
 
 A **lightning** is what the viewer calls a closed loop in that flow: A stakes
@@ -36,12 +36,12 @@ explains the definition with a worked example. Why it matters:
   other have cancelled (*net*).
 
 Finding the largest set of loops in a flow is as hard as some of the hardest
-problems in computing, so the engine (`gol_lightning.py`) does not try. It
+problems in computing, so the [engine](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") (`gol_lightning.py`) does not try. It
 peels loops off greedily — walk along arrows until an agent repeats, take the
 loop, remove one token from each of its arrows, repeat — and reports what it
 found. Every count is therefore a **lower bound**: there are at least this many
 tokens on loops, perhaps more. A run records eight numbers, every 25th
-iteration:
+[iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."):
 
 | statistic | what it is |
 |---|---|
@@ -54,7 +54,7 @@ iteration:
 | `flowImbalance` | half the sum over agents of (flow in − flow out), over the total: how much of the flow *must* run one way, whatever the loops are |
 
 [Where the tokens flow](where-the-tokens-flow.md) measured these in the thirty
-baseline worlds; [What crosses a connection](what-crosses-a-connection.md) looked at single
+[baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") worlds; [What crosses a connection](what-crosses-a-connection.md) looked at single
 connections. This page measures them in **every world the notebook has made**,
 using the table of every world (research/atlas/across.py; see
 [Every world side by side](every-world-side-by-side.md)).
@@ -80,13 +80,13 @@ using the table of every world (research/atlas/across.py; see
 
 Three things stand out.
 
-**The two rule sets are opposites.** In the B1 worlds a sixth of the staked
-flow can be put on loops (median 0.17 at 10,000 tokens), and three quarters
+**The two rule sets are opposites.** In the [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") worlds a sixth of the staked
+flow can be put on loops ([median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") 0.17 at 10,000 tokens), and three quarters
 of it cancels: the net flow is a quarter of the staked flow. In the worlds of
 [B2](a-world-that-cannot-break.md), at every setting an experiment
 changed, the loops hold about a twentieth (0.045), and almost nothing cancels:
 the net flow is 95% of the flow. B1's flow is mostly agents staking on each
-other; B2's is mostly agents staking on others who do not stake back.
+other; [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.")'s is mostly agents staking on others who do not stake back.
 
 **One rule of B2 decides it.** A single kind of B2 world flows like B1: the
 condition of [Experiment 14](a-world-that-cannot-break.md) in which *any
@@ -95,8 +95,8 @@ connection that carries no tokens is cut after the game. B2 keeps a link alive
 unless cutting it is safe for the network (`prune_needs = 2`), and so links no
 longer have to be used. Where a link must carry tokens to survive, agents stake
 on each other, and the flow goes round; where it need not, the flow runs one
-way. Nothing in the brains changed: one of the rules that make B2's network
-unbreakable also made its economy run one way. The pilot worlds say the same
+way. Nothing in the [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") changed: one of the rules that make B2's network
+unbreakable also made its economy run one way. The [pilot](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds say the same
 independently: of all the B2 pilots, the three whose flow goes round
 (0.21–0.28 of it on loops, a tenth left after cancelling) are exactly those in
 which unused links lapse ([The switches the world was built with](the-switches-the-world-was-built-with.md)).
@@ -108,7 +108,7 @@ loops are there, but they carry little.
 
 The B1 worlds whose brains never change (yellow) spread over the whole range:
 some put 70% of their flow on loops, others almost nothing. Each of those
-worlds is frozen in whatever play its founders had ([Do the brains matter?](do-the-brains-matter.md)),
+worlds is frozen in whatever play its [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.") had ([Do the brains matter?](do-the-brains-matter.md)),
 and the founders differ.
 
 ## The longest loop grows with the world
@@ -132,7 +132,7 @@ and the founders differ.
 The longest loop grows with the size of the world as the tokens to the power
 0.31. That number is not new. The distances across these worlds grow as the
 number of agents to the power 0.25–0.30 ([How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)),
-and agents are proportional to tokens. A dimension of about 3.3
+and agents are proportional to tokens. A [dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") of about 3.3
 ([How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)) means a world's
 width grows as its size to the power 1/3.3 = 0.30. **So the longest loop is as
 long as the world is wide**: the greedy search finds loops that go across the
@@ -215,7 +215,7 @@ more than chance would; B2's barely do.
 - **Within a game, almost all circulation is two agents staking on each
   other.** Over fifty games much more circulates, but in B2 hardly more than
   random flow would.
-- **No world builds circulation as it evolves.** For open-ended evolution,
+- **No world builds circulation as it evolves.** For [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau."),
   this is one more thing that settles early and stays.
 
 The pilot worlds that play the engine's game are in the figures too (each was

@@ -1,10 +1,10 @@
 # How even is a world?
 
-[Where do the tokens go?](where-do-the-tokens-go.md) measured how unequally tokens are
-held with the Gini coefficient. This page measures the same thing with a
+[Where do the tokens go?](where-do-the-tokens-go.md) measured how unequally [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") are
+held with the [Gini coefficient](gini-coefficient.md "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all."). This page measures the same thing with a
 second tool, **entropy** — and then uses that tool on two things a Gini cannot
-measure at all, because they are not amounts: how the agents are spread over
-the numbers of connections, and over the genotypes. The measurements of the baseline begin here: a
+measure at all, because they are not amounts: how the [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") are spread over
+the numbers of [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes."), and over the [genotypes](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was."). The measurements of the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") begin here: a
 page for every statistic the viewer shows, read on the thirty baseline
 worlds of 100,000 tokens of [Thirty worlds](thirty-worlds.md), with the thirty
 of 10,000 tokens it was first written from beside them where they differ.
@@ -97,7 +97,7 @@ Two readings of *H* follow ([Entropy and evenness](entropy-and-evenness.md)):
 
 - the **evenness** *J* = *H* / log₂ *n* puts it on a scale from 0 (one holds
   everything) to 1 (all hold the same): here 1.75/2 = 0.875;
-- the **effective number** 2^*H* is how many agents, holding equal shares,
+- the **[effective number](effective-number.md "How many kinds there really are, when kinds are counted by how much of the population they hold.")** 2^*H* is how many agents, holding equal shares,
   would leave you exactly as uncertain: here 2^1.75 ≈ 3.4 agents.
 
 The same arithmetic works for anything that falls into categories. For the
@@ -127,18 +127,18 @@ many connections does it have? which genotype does it carry?*
 > **To make it again:** `python3 book_figures.py entropy`.
 <!-- /figure -->
 
-The founders hold equal shares: a token evenness of exactly 1. The first
-reproduction phase ends that, and after the first game the median world is at
-0.96. Then it falls, and settles a little lower: over the settled life the
+The [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.") hold equal shares: a token evenness of exactly 1. The first
+reproduction phase ends that, and after the first [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world is at
+0.96. Then it falls, and settles a little lower: over the [settled life](settled-life.md "A world from iteration 500 to its end, after its youth, where it is measured.") the
 median world's **token evenness** is 0.91, and the thirty worlds lie between
 0.84 and 0.95 (0.88 at 10,000 tokens). In bits, the median world has a token
 entropy of 12.6 bits — some 12.6 questions to find a token's owner among about
 14,000 agents, where perfect equality would need 13.8.
 
-The **degree evenness** is far lower, 0.47 (0.27 to 0.54; 0.59 at 10,000
+The **[degree](degree.md "The number of an agent's connections: how many neighbours it has.") evenness** is far lower, 0.47 (0.27 to 0.54; 0.59 at 10,000
 tokens): agents are piled onto a few numbers of connections — 35% have
 exactly one, 23% exactly two ([What shape does the network take?](what-shape-does-the-network-take.md)) —
-while the hubs make the list of numbers that occur long, and longer in a
+while the [hubs](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.") make the list of numbers that occur long, and longer in a
 larger world. Read this one with care: its ceiling is
 log₂ of the number of *distinct* degrees in the world, so a single new hub of
 an unusual size raises the ceiling and lowers the evenness, without anything
@@ -176,7 +176,7 @@ the units of the things counted. Per agent, over the settled life:
   [Genotypes and lineages](genotypes-and-lineages.md) found — and this is the tightest
   number in the whole notebook so far: the thirty worlds lie between 0.61 and
   0.66, a standard deviation of 0.012, and the worlds of 10,000 tokens had the
-  same 0.63. Whatever their seed, their history and their size, the worlds
+  same 0.63. Whatever their [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world."), their history and their size, the worlds
   keep almost exactly five genotypes for every eight agents.
 - **Effective genotypes.** Weighted by how many agents carry them, the
   genotypes are worth 0.45 per agent (0.22 to 0.51; 0.49 at 10,000 tokens):
@@ -189,7 +189,7 @@ equally common kinds would be as varied (Hill 1973; Jost 2006). A world could
 have many genotypes and still be dominated by one; this one is not.
 
 Why is the distinct count so tight? Something in the rules must set it. Every
-brain may change after every game (with probability 0.2,
+[brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") may change after every game (with probability 0.2,
 [How a brain changes](mutation.md)), which makes a new genotype; and
 every game, about half the nodes take a copy of a winner's brain
 ([How the game is played](how-the-game-is-played.md)), which makes genotypes common
@@ -217,7 +217,7 @@ genotypes are made.
 <!-- /figure -->
 
 Across 1,200 looks at the 30 worlds, the Gini coefficient and the token
-evenness move against each other with a correlation of −0.72 (−0.90 at 10,000
+evenness move against each other with a [correlation](correlation.md "Whether two quantities go up and down together, from −1 to 1.") of −0.72 (−0.90 at 10,000
 tokens) — as they should, since both measure inequality. But they do not lie on one curve: the same
 Gini comes with token evenness that differs by several hundredths. They weigh
 inequality differently, and the difference can be stated exactly. Move a small
@@ -246,17 +246,17 @@ falls off smoothly can have the same Gini and different evenness.
   Neither drifts over the settled life.
 - **High diversity is not the same as novelty.** A genotype evenness of 0.9
   sounds like a world full of variety. But [Genotypes and lineages](genotypes-and-lineages.md)
-  found that a genotype lasts about two iterations: the variety is churn — new
+  found that a genotype lasts about two [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."): the variety is churn — new
   numbers made by small changes, lost as fast as they are made. Entropy counts
   how many kinds there are *now*; it cannot say whether any of them is new in a
-  way that matters. Measures of open-ended evolution have to look across time
+  way that matters. Measures of [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.") have to look across time
   ([What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md));
   [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) builds one,
-  playing the brains of different eras against each other.
+  playing the brains of different [eras](eras-and-contests.md "Brains of a world at two moments, its eras, played against each other: do the later ones win?") against each other.
 - **One number is set by the rules.** Five genotypes for every eight agents,
   in every world: a balance of making and copying. If a change of the rules
   moves it, the change has altered how often brains are changed or copied:
-  in the pilots of [How fast should brains change?](how-fast-should-brains-change.md) it went
+  in the [pilots](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") of [How fast should brains change?](how-fast-should-brains-change.md) it went
   from 0.32 to 0.98 as the probability of a change rose from 0.05 to 0.8.
 
 To make every figure of this page: `python3 book_figures.py entropy`.

@@ -1,6 +1,6 @@
 # Splitting tokens into whole numbers
 
-Tokens are whole: an agent cannot stake 3.7 tokens. When an agent spreads
+[Tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") are whole: an [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") cannot stake 3.7 tokens. When an agent spreads
 its τ tokens over several candidates in proportion to scores, the shares
 have to be rounded — and rounded so that **no token is lost or made**. The
 rule used is the **largest-remainder method**, known from apportioning seats
@@ -55,6 +55,6 @@ In the code it is `_apportion(weights, total)` in `GraphOfLifeSimple.py`.
 
 ← [A yes-or-no decision](binary-decision.md) · [How the simulation works](../README.md#how-the-simulation-works) · [What a brain sees](brain-inputs.md) →
 
-> [!info]- Pages that link here (5)
-> [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Where the tokens flow](where-the-tokens-flow.md) · [What the brains are like](what-the-brains-are-like.md) · [How different are the agents?](how-different-are-the-agents.md)
+> [!info]- Pages that link here (7)
+> [Glossary](glossary.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [The even split](even-split.md) · [Where the tokens flow](where-the-tokens-flow.md) · [What the brains are like](what-the-brains-are-like.md) · [How different are the agents?](how-different-are-the-agents.md)
 <!-- /turns -->

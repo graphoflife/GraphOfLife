@@ -1,6 +1,6 @@
 # Effective numbers: how many kinds there really are
 
-A world has 1,600 genotypes. Does it have 1,600 kinds of agents? Not if one
+A world has 1,600 [genotypes](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was."). Does it have 1,600 kinds of [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.")? Not if one
 genotype is carried by half the agents and the rest by one agent each. The
 **effective number** of kinds counts kinds by how much of the population
 they hold.
@@ -27,9 +27,9 @@ one, of order 2, weighs the common kinds most).
 
 ## Kinds that are similar
 
-Two genotypes one mutation apart may act exactly alike. Counting them as two
+Two genotypes one [mutation](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") apart may act exactly alike. Counting them as two
 kinds overstates diversity. That is why
-[How different are the agents?](how-different-are-the-agents.md) groups brains into kinds **by what they do**, not by their weights: brains
+[How different are the agents?](how-different-are-the-agents.md) groups [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") into kinds **by what they do**, not by their weights: brains
 whose decisions, in the same situations, differ no more than a brain differs
 from itself between two sets of random inputs, are one kind. The effective
 number of kinds of behaviour is then set beside the effective number of
@@ -39,7 +39,7 @@ nothing an agent does.
 ## Two effective numbers
 
 [Brain diversity](brain-diversity.md) uses a sibling of this count, 2^H with H
-the entropy of the shares — the Hill number of order 1, which weighs rare kinds
+the [entropy](entropy-and-evenness.md "How evenly something is shared out among the agents, from all in one place to spread perfectly evenly.") of the shares — the Hill number of order 1, which weighs rare kinds
 a little more than the one above (order 2) does. Both are 1 for a single kind
 and n for n equally common ones; on a population with many rare kinds, 2^H is
 the larger. Where the notebook gives an effective number it says which.
@@ -51,6 +51,6 @@ the larger. Where the notebook gives an effective number it says which.
 
 **Also about:** [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are).
 
-> [!info]- Pages that link here (3)
-> [How alike the agents are](how-alike-the-agents-are.md) · [How different are the agents?](how-different-are-the-agents.md) · [Healthy and rich](healthy-and-rich.md)
+> [!info]- Pages that link here (5)
+> [Glossary](glossary.md) · [How alike the agents are](how-alike-the-agents-are.md) · [How different are the agents?](how-different-are-the-agents.md) · [Healthy and rich](healthy-and-rich.md) · [The diversity score](diversity-score.md)
 <!-- /turns -->

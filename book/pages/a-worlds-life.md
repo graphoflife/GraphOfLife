@@ -1,13 +1,13 @@
 # A world's life
 
 > [!question] Questions of this page
-> - What does a world do over its 1,500 iterations? Does it grow to some size
+> - What does a world do over its 1,500 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.")? Does it grow to some size
 >   and stay there, or does it keep changing?
-> - Is "the" baseline world even a thing — do thirty worlds do the same?
+> - Is "the" [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") world even a thing — do thirty worlds do the same?
 > - Do worlds die, and how close do they come?
 
 The worlds are the thirty of [Thirty worlds](thirty-worlds.md): the baseline
-B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each. Where the thirty
+[B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") at 100,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes."), [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1 to 30, 1,500 iterations each. Where the thirty
 worlds of 10,000 tokens that this page was first written from behave
 differently, both are given.
 
@@ -72,7 +72,7 @@ differently, both are given.
 ## One world at a time
 
 Here are six of the thirty worlds — seeds 1 to 6 — each drawn alone, all on
-the same scale. Each line is the number of agents alive after every game.
+the same scale. Each line is the number of [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") alive after every [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.").
 
 <!-- figure life/worlds -->
 ![Six worlds, one at a time](../figures/life/worlds.svg)
@@ -92,8 +92,8 @@ the same scale. Each line is the number of agents alive after every game.
 
 Three things are visible in every one of them:
 
-- **A youth.** Within the first twenty or so iterations, the 1,000 founders
-  become well over ten thousand agents — the median of the thirty worlds peaks
+- **A youth.** Within the first twenty or so iterations, the 1,000 [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.")
+  become well over ten thousand agents — the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") of the thirty worlds peaks
   at about 17,400 around iteration 39 — and the line jumps up and down before
   it settles into a calmer motion. [The first hundred iterations](the-first-hundred-iterations.md)
   zooms in on this.
@@ -191,8 +191,8 @@ measures the wandering and asks how much of it the seed decides.
 > **To make it again:** `python3 book_figures.py life`.
 <!-- /figure -->
 
-The number of connections follows the number of agents, at about 1.7
-connections per agent (a mean degree of 3.5: every agent is joined to three or
+The number of [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") follows the number of agents, at about 1.7
+connections per agent (a mean [degree](degree.md "The number of an agent's connections: how many neighbours it has.") of 3.5: every agent is joined to three or
 four others on average, [What shape does the network take?](what-shape-does-the-network-take.md)).
 Its median over iterations 100 to 200 was 24,730, over the last two hundred
 22,570 — 9% fewer, where the worlds of 10,000 tokens had 6% more.

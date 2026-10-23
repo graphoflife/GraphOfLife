@@ -16,7 +16,7 @@ things come at once:
 - a password, so that raiders never raid each other;
 - enough teammates who know the password.
 
-Evolution makes new play one agent at a time, and the raider is a brain B2
+Evolution makes new play one [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") at a time, and the raider is a [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.")
 can grow ([What a brain can compute](what-a-brain-can-compute.md)). So how large a
 crowd it needs says how deep the valley is between the play evolution has
 and the raider's.
@@ -50,13 +50,13 @@ each of the other eight worlds.
 ## The trials
 
 Each trial is an [invasion test](invasion-test.md), as in
-[Strategies written by hand](strategies-written-by-hand.md), played by the lab:
-- The world as it stood at iteration 2,000 is loaded.
+[Strategies written by hand](strategies-written-by-hand.md), played by the [lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world."):
+- The world as it stood at [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") 2,000 is loaded.
 - A patch is chosen on the trial's place: an agent drawn at random, then
-  its nearest neighbours, step by step, until the patch has its size.
+  its nearest [neighbours](the-world.md#the-network "An agent joined to another by a connection."), step by step, until the patch has its size.
 - The patch is given the strategy, which never mutates.
 - The world plays 300 iterations under its own rules, and the strategy's
-  agents and tokens are counted after every iteration.
+  agents and [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") are counted after every iteration.
 
 <!-- runs E29 -->
 > [!info] The trials behind this page
@@ -150,7 +150,7 @@ A raid is either joined by enough raiders or it dies.
 
 - **The valley is about a hundred agents wide.** The raider pays only in
   company: it needs about a hundred neighbours playing it at once before it
-  takes hold. Mutation changes one brain at a time, and a hundred
+  takes hold. [Mutation](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") changes one brain at a time, and a hundred
   neighbours changing the same way at once does not happen. So evolution
   cannot reach the raider by mutation alone, though a B2 brain can play it
   ([What a brain can compute](what-a-brain-can-compute.md)). [Strategies written by hand](strategies-written-by-hand.md) named this the

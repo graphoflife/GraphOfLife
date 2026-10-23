@@ -1,6 +1,6 @@
 # Gains, losses and the share-out
 
-Every frame records, for every agent alive at its end, its change of tokens
+Every [frame](frames-and-stats.md "A whole world as a run records it after one phase: every agent, its tokens and connections.") records, for every [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") alive at its end, its change of [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.")
 over the phase: `delta` = tokens now − tokens when the phase began (a newborn
 counts its whole endowment as gained). Five statistics summarise it.
 
@@ -12,7 +12,7 @@ counts its whole endowment as gained). Five statistics summarise it.
 | `losers` | agents alive at the end with `delta` < 0 |
 | `maxTokenAdded` | the largest `delta` |
 | `maxTokenLost` | minus the smallest `delta`, as a positive number |
-| `redistributed` | the tokens the cleanup dealt out among the survivors |
+| `redistributed` | the tokens the [cleanup](one-iteration.md#cleanup "The end of every phase: only the largest connected piece of the network lives on, and the tokens of the dead are shared out.") dealt out among the survivors |
 
 The agents with `delta` = 0 are not counted by either: they are
 `nodes` − `gainers` − `losers`.
@@ -46,7 +46,7 @@ to the poor ([Gains and losses](gains-and-losses.md)).
 
 ## In the code
 
-`delta` is computed by the engine (`GraphOfLifeSimple.py`, `_frame`); the
+`delta` is computed by the [engine](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") (`GraphOfLifeSimple.py`, `_frame`); the
 statistics by `gol_series.frame_stats`; `redistributed` comes from the
 cleanup report of each frame.
 
@@ -57,6 +57,6 @@ cleanup report of each frame.
 
 **Also about:** [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens).
 
-> [!info]- Pages that link here (2)
-> [Gains and losses](gains-and-losses.md) · [What a run records](frames-and-stats.md)
+> [!info]- Pages that link here (3)
+> [Glossary](glossary.md) · [Gains and losses](gains-and-losses.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

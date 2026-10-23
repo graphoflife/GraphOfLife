@@ -1,7 +1,7 @@
 # Brains that see, and worlds that break
 
 > [!question] Questions of this page
-> - What happens to a world when its agents' decisions follow what they see?
+> - What happens to a world when its [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.")' decisions follow what they see?
 > - Why does a world of seeing agents fall apart — what, exactly, breaks?
 > - What does that teach about the rules a world needs before evolution can
 >   build anything in it?
@@ -10,25 +10,25 @@
 
 ## Why ask
 
-The baseline's brains barely see. A change in what one of them sees reaches
+The [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.")'s [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") barely see. A change in what one of them sees reaches
 what it does reduced about a thousandfold — a **gain** of 0.0015 in the
-evolved worlds and 0.0006 in a founder ([What the brains are like](what-the-brains-are-like.md)).
+evolved worlds and 0.0006 in a [founder](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.") ([What the brains are like](what-the-brains-are-like.md)).
 Each of the brain's five hidden layers ends in a sigmoid that passes on about
 a quarter of a change, and five quarters multiply to a thousandth
 ([How a signal fades through layers](vanishing-signal.md)). Whatever
 evolution has done in the baseline, it has done to a brain that responds to
 almost nothing; its decisions are near enough constants.
 
-Open-ended evolution needs agents whose behaviour can depend on their world:
+[Open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.") needs agents whose behaviour can depend on their world:
 kin recognised, partners answered, threats met. The first step towards open-ended evolution is
 therefore to give the brains sight, and the cheapest way is to take layers
 away. With one hidden layer of 16 units, a founder's gain is about 0.2 — some
 three hundred times the baseline founders' 0.0006 — and with no hidden layer
 at all it is about 1:
 
-| hidden layers | founders' gain (median of 30 brains) |
+| hidden layers | founders' gain ([median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") of 30 brains) |
 |---|---|
-| 50, 45, 40, 35, 30 (B1) | 0.0006 |
+| 50, 45, 40, 35, 30 ([B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.")) | 0.0006 |
 | 16, 16 | 0.04 |
 | 16 | 0.2 |
 | none | 1.0 |
@@ -42,7 +42,7 @@ into a node its owner has won.
 
 ## What the pilots showed
 
-Pilots of two seeds each, at 5,000 tokens for 1,500 iterations, compared the
+[Pilots](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") of two [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") each, at 5,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") for 1,500 iterations, compared the
 baseline with brains of one hidden layer, with and without change only when
 copied.
 
@@ -54,12 +54,12 @@ to 84. With one hidden layer and change only when copied, one world fell to 15
 and dwindled to 25 by the end, the other to a single agent for good.
 
 **What breaks is the network.** An agent whose stake follows what it sees
-puts it where it matters — on one neighbour, or two — and a connection that
+puts it where it matters — on one [neighbour](the-world.md#the-network "An agent joined to another by a connection."), or two — and a [connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") that
 carries no tokens in a game is cut at its end ([One iteration, step by step](one-iteration.md)).
 So the seeing worlds kept few connections: as few as 1.3 to 1.9 per agent in
 the worlds that crashed, against 3.2 in the baseline, and only 27–39% of
 their agents in the [2-core](core-trees-leaves.md), against 54–55%.
-A network that is mostly trees is a network of bridges. When one of them is
+A network that is mostly trees is a network of [bridges](bridges.md "A connection that lies on no loop: cut it and the network falls into two pieces."). When one of them is
 cut, everything beyond it is no longer joined to the largest piece, and the
 cull removes it whole: in one pilot world a single game cut off 1,195
 agents — that iteration's newborns among them — and left 562.
@@ -67,14 +67,14 @@ agents — that iteration's newborns among them — and left 562.
 **And what is left is ruled by a few.** The best-connected agent in a seeing
 world was joined to 15–35% of the others — more than in the baseline's two
 pilot worlds (9–12%), though the ten worlds below show that the baseline can
-grow such hubs too (one of its worlds 55%; the stars of
+grow such [hubs](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.") too (one of its worlds 55%; the stars of
 [The largest and the smallest](the-largest-and-the-smallest.md)).
 
 **Change only when copied made it worse, not better** — its two worlds were
 the two that fell furthest. And a stricter variant of it, which changed a
 brain only when it was copied into a newborn and never into a won node, shows
 what heredity alone cannot do: in one of its worlds births stopped, so change
-stopped, and the world froze into a single genotype, its agents ageing by one
+stopped, and the world froze into a single [genotype](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was."), its agents ageing by one
 every iteration, every node taken by its own kin each game. Longer lives, for
 once, meant that nothing was happening.
 
@@ -82,7 +82,7 @@ once, meant that nothing was happening.
 
 The baseline holds together because its agents are blind. Their stakes are
 spread evenly over every neighbour, every connection carries tokens, and the
-network keeps its loops. Sight is the precondition of anything evolution
+network keeps its [loops](loops.md "A path through the network that comes back to where it started without using a connection twice."). Sight is the precondition of anything evolution
 might build — and the first thing it does, the pilots suggested, is break
 the world it lives in. Experiment 13 asks whether that holds in ten worlds,
 and the results below say what, exactly, kills them.
@@ -191,7 +191,7 @@ and 619; the other six fell as low as 84 to 231. With one hidden layer and
 change only when copied, eight of ten died out, at iterations 219, 292, 415,
 454, 674, 820, 975 and 1,018; the two that lived fell to 96 and 181.
 
-"Died out" here means fell to twenty agents, where the lab stops a run — a
+"Died out" here means fell to twenty agents, where the [lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") stops a run — a
 rule that ends some worlds that would have lived
 ([How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)). The pilot of
 the world with one hidden layer and seed 1, run on without the rule, fell to a
@@ -234,7 +234,7 @@ boom ended ([The first hundred iterations](the-first-hundred-iterations.md)). Th
 worlds had such early culls too. But the worlds that died out did not die of
 one of them: each shrank over a hundred iterations or more.
 
-**The network kills every iteration — in every world.** By the health bar of
+**The network kills every iteration — in every world.** By the [health bar](health-bar.md "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.") of
 [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md#the-network-that-holds-in-numbers),
 no world of any condition holds. The baseline's median world had 51% of its
 agents in the 2-core and a link whose loss cut off 8% of it; the seeing worlds
@@ -289,7 +289,7 @@ shrinks to a few dozen agents is a few unlucky games from the end.
 agent has a child is close to a constant of its brain — the brains barely see
 ([What the brains are like](what-the-brains-are-like.md)). With one hidden layer it is a
 decision that depends on what the agent sees, and evolution can change it a
-great deal. To see what it did, every era's brains were put back into the same
+great deal. To see what it did, every [era](eras-and-contests.md "Brains of a world at two moments, its eras, played against each other: do the later ones win?")'s brains were put back into the same
 world — their own run's founders' world, 50 agents with 100 tokens each — and
 played ten iterations with mutation off. The founders' own brains had a child
 in about three agent-iterations in four there (73–75% in the median world of
@@ -320,7 +320,7 @@ median, against 3 for the baseline's last brains (0 to 13).
 A brain spreads mostly by winning nodes, not by having children — seventeen
 times more in the baseline ([Questioning the mechanics](questioning-the-mechanics.md#two-roads-of-inheritance))
 — and tokens given to a child are tokens not staked. Whether that is why some worlds' brains gave up their
-children — selected, as a lineage gains from keeping its tokens while the world
+children — selected, as a [lineage](families.md "A line of descent: the agents whose genotypes go back to one ancestor.") gains from keeping its tokens while the world
 it lives in drains — or whether a decision that has become easy to change simply
 drifted to zero in a world already small, these runs cannot say. Biologists
 know both roads to extinction: selection that is good for each lineage and
@@ -354,6 +354,6 @@ why: the subject of [Who dies, and why](who-dies-and-why.md).
 
 **Also about:** [Changing the rules](../README.md#changing-the-rules).
 
-> [!info]- Pages that link here (15)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [What the baseline world is](what-the-baseline-world-is.md) · [A world that cannot break](a-world-that-cannot-break.md) · [Who dies, and why](who-dies-and-why.md) · [How agents have children](how-agents-have-children.md) · [Where the tokens flow](where-the-tokens-flow.md) · [How a world breaks](how-a-world-breaks.md) · [How alike the agents are](how-alike-the-agents-are.md) · [What the brains are like](what-the-brains-are-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) · [Why evolution stops](why-evolution-stops.md) · [Do agents cooperate?](do-agents-cooperate.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (17)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [What the baseline world is](what-the-baseline-world-is.md) · [A world that cannot break](a-world-that-cannot-break.md) · [Who dies, and why](who-dies-and-why.md) · [How agents have children](how-agents-have-children.md) · [Where the tokens flow](where-the-tokens-flow.md) · [How a world breaks](how-a-world-breaks.md) · [How alike the agents are](how-alike-the-agents-are.md) · [What the brains are like](what-the-brains-are-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) · [Why evolution stops](why-evolution-stops.md) · [Do agents cooperate?](do-agents-cooperate.md) · [The health bar](health-bar.md) · [The lab, the engine and pilots](the-lab.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

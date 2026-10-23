@@ -1,9 +1,9 @@
 # Flow modules: the groups tokens stay in
 
 > [!question] Questions of this page
-> - When agents stake tokens on one another, do the tokens stay inside
+> - When [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") stake [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") on one another, do the tokens stay inside
 >   groups? How large are the groups, and who belongs to one?
-> - Do the groups last from game to game — longer than chance would make them,
+> - Do the groups last from [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") to game — longer than chance would make them,
 >   and longer than the network alone would?
 > - Can a group outlast the agents it began with?
 > - Is it the same in every world the notebook has made?
@@ -11,7 +11,7 @@
 ## What a flow module is
 
 In every game each agent splits its tokens over its own node and its
-neighbours' nodes ([How the game is played](how-the-game-is-played.md)). A token staked
+[neighbours](the-world.md#the-network "An agent joined to another by a connection.")' nodes ([How the game is played](how-the-game-is-played.md)). A token staked
 on a neighbour's node is a token that **flows** along that link. Add up, for
 each pair of neighbours, what crossed between them in either direction, and a
 game becomes a weighted network: the flow.
@@ -33,10 +33,10 @@ sharing less than 0.3 of their agents (the Jaccard index, shared agents over
 all agents of either) — the view's rule. Identity is carried by overlap, not
 by membership, so a module can go on while its members change.
 
-Every world was read for fifty consecutive games: a lab run's from its
-record, from iteration 950; a pilot's played on from its checkpoint at 1,000 —
+Every world was read for fifty consecutive games: a [lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") run's from its
+record, from [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") 950; a [pilot](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.")'s played on from its checkpoint at 1,000 —
 183 worlds of every kind the notebook has made, each counted once. (Eighteen pilot
-worlds replay a lab world, with its settings and seed, game for game; they are
+worlds replay a lab world, with its [settings](settings.md "One number or switch of a run's rules, fixed before it starts.") and [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world."), game for game; they are
 left out.)
 
 ## Groups in every world
@@ -61,8 +61,8 @@ left out.)
 
 The worlds fall into the same two kinds as everywhere else in the notebook.
 
-**In B1's worlds** — and in every world where unused links lapse — the flow is
-grouped, but loosely. The modules compress it by 0.36–0.48 (the medians of the
+**In [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.")'s worlds** — and in every world where unused links lapse — the flow is
+grouped, but loosely. The modules compress it by 0.36–0.48 (the [medians](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") of the
 groups of worlds), where the same flow rewired at random compresses by about
 0. A module holds about four agents, and every agent is in one: B1's agents
 spread their stake over all their neighbours
@@ -70,7 +70,7 @@ spread their stake over all their neighbours
 receives. From one game to the next a module changes about an eighth of its
 members (0.11–0.13).
 
-**In B2's worlds** the flow falls apart into pairs. The modules compress it by
+**In [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.")'s worlds** the flow falls apart into pairs. The modules compress it by
 0.82–0.85 and hold 2.3–2.4 agents, and only about three agents in ten are in a
 module at all. A B2 agent puts its whole stake on one node — its own in about
 two games of three — and half of B2's agents hold a single token, which stays
@@ -81,7 +81,7 @@ pairs are groups of a kind. A module changes a third of its members every game.
 
 Some worlds stand apart within their kind:
 
-- Where **brains never change** (Experiment 7), the modules never change
+- Where **[brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") never change** (Experiment 7), the modules never change
   either, in four worlds of five: these are the frozen worlds of
   [Do the brains matter?](do-the-brains-matter.md), the same agents playing the same
   game, game after game.
@@ -92,7 +92,7 @@ Some worlds stand apart within their kind:
   a neighbour.
 - Batch S's two pilot worlds with **lapsing links**, with and without gifts,
   are B1-like, as the lab's world with lapsing links is — the split
-  [Lightning in every world](lightning-in-every-world.md) found for loops of flow.
+  [Lightning in every world](lightning-in-every-world.md) found for [loops](loops.md "A path through the network that comes back to where it started without using a connection twice.") of flow.
 
 ## What the network makes, and what the agents make
 
@@ -243,7 +243,7 @@ born since the game before (the medians of the groups of B1 worlds); of a B2
 module's, 4%. Only where agents are born and die often does a module renew
 from births: in the B1 world whose modules lose 4.5% of their members to death
 every game, three new members in four were born, and in the pilot worlds of B1
-without revolutions, where agents come and go faster, between a third and four
+without [revolutions](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake."), where agents come and go faster, between a third and four
 fifths.
 
 ## What this says
@@ -264,7 +264,7 @@ fifths.
   same happens when every agent's partners are dealt at random.
 - **Some rules leave almost no flow at all.** Where children may be of any size,
   or nobody dies of age, almost no agent stakes on a neighbour.
-- **For open-ended evolution**, a group that holds together while its members
+- **For [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.")**, a group that holds together while its members
   change is what a higher level of individual would be built from — the step
   from single cells to organisms that Maynard Smith and Szathmáry call a major
   transition. These worlds make no such group beyond the regions of their

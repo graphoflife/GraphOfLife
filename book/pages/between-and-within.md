@@ -1,6 +1,6 @@
 # Between worlds and within them
 
-The worlds of thirty seeds differ, and each world also changes over time.
+The worlds of thirty [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") differ, and each world also changes over time.
 How much of all the variation is **between** the worlds — something each seed
 fixes — and how much is **within** each world, its wander over time? This
 note splits it.
@@ -8,7 +8,7 @@ note splits it.
 ## The split
 
 As for the [autocorrelation](autocorrelation.md), cut each of *N* worlds'
-lives (iterations 100 to 2,999) into *m* = 29 stretches of 100 iterations
+lives ([iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") 100 to 2,999) into *m* = 29 stretches of 100 iterations
 and take the mean of the statistic in each: levels *x*ᵢⱼ for world *i* and
 stretch *j*. Let *x̄*ᵢ be world *i*'s own average of its 29 levels.
 
@@ -36,8 +36,8 @@ The **share between** is *B* / (*B* + *W*).
 - Close to 0: every world covers much the same range over time. The seed
   tells you little.
 
-In the baseline worlds of 100,000 tokens the share between is a fifth to a
-quarter for most statistics — 21% for the number of agents — and half for
+In the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") worlds of 100,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") the share between is a fifth to a
+quarter for most statistics — 21% for the number of [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") — and half for
 the share of agents in the core; at 10,000 tokens, a tenth to a quarter, 17%
 for the number of agents ([How much does the seed decide?](how-much-does-the-seed-decide.md)).
 So most of the variation is time, not seed.

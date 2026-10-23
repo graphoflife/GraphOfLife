@@ -1,8 +1,8 @@
 # Reproduction statistics
 
-Every reproduction phase records every birth: the parent, the tokens it held,
+Every reproduction phase records every birth: the parent, the [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") it held,
 the tokens it gave, the candidates the child was joined to, and the
-connections the parent handed over ([One iteration, step by step](one-iteration.md)).
+[connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") the parent handed over ([One iteration, step by step](one-iteration.md)).
 The statistics of a phase-1 row summarise them.
 
 ## The fields
@@ -20,7 +20,7 @@ The statistics of a phase-1 row summarise them.
 
 `meanInvestedShare` is **per parent**: how much of itself a typical parent
 gives. `reproTokenShare` is **per world**: how much of all the tokens went
-into children. A world in which a few poor agents each give everything they
+into children. A world in which a few poor [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") each give everything they
 have has a high per-parent share and a tiny world share.
 
 **Example.** Three parents holding 2, 4 and 100 tokens give 1, 2 and 10:

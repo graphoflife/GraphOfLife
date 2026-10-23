@@ -1,6 +1,6 @@
 # How agents have children
 
-Every iteration begins with a reproduction phase, in which any agent may have
+Every iteration begins with a reproduction phase, in which any [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") may have
 one child ([One iteration, step by step](one-iteration.md)). [Births, deaths and ages](births-deaths-and-ages.md)
 counted the births. This page looks at the decisions behind them: who has
 a child, how much it gives, how the child is joined to the world — and what
@@ -8,7 +8,7 @@ births do for the world besides adding agents.
 
 > [!question] Questions of this page
 > - Which agents have children: the rich, the well connected, anyone?
-> - How much of its tokens does a parent give, and why do some shares come up
+> - How much of its [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") does a parent give, and why do some shares come up
 >   again and again?
 > - How is a child joined to the world, and how often is it born cut off?
 > - What would the world look like without births?
@@ -77,8 +77,8 @@ both are given.
 
 ## A birth, decision by decision
 
-Recall how agent *u*, holding τ tokens, has a child. Its brain gives one
-column of outputs for each of its candidates (itself and its neighbours).
+Recall how agent *u*, holding τ tokens, has a child. Its [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") gives one
+column of outputs for each of its candidates (itself and its [neighbours](the-world.md#the-network "An agent joined to another by a connection.")).
 
 1. **How much.** Two of the outputs, averaged over all the columns, give
    (*ā*, *b̄*), and the child gets *c* = ⌊*f*(*ā*, *b̄*) · τ⌋ tokens, where *f*
@@ -86,10 +86,10 @@ column of outputs for each of its candidates (itself and its neighbours).
    parts of both, or ½ if neither is positive
    ([The share function](share-function.md)). If *c* = 0 there is no
    child.
-2. **Whom it joins.** For every candidate, the parent included, a yes-or-no
-   decision: join the child to it or not.
+2. **Whom it joins.** For every candidate, the parent included, a [yes-or-no
+   decision](binary-decision.md "A decision a brain makes from two numbers: yes when the first is larger."): join the child to it or not.
 3. **What it is handed.** For every neighbour of the parent, a yes-or-no
-   decision: move the parent's connection to that neighbour over to the child.
+   decision: move the parent's [connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") to that neighbour over to the child.
 
 Two consequences follow from the arithmetic alone, before any data:
 
@@ -121,13 +121,13 @@ Two consequences follow from the arithmetic alone, before any data:
 > **To make it again:** `python3 book_figures.py children`.
 <!-- /figure -->
 
-In the first reproduction phase, three founders in four (74.7%) had a child.
+In the first reproduction phase, three [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.") in four (74.7%) had a child.
 In a settled world, only a few agents in a hundred do in any one phase:
 
 | tokens | 1 | 2 | 3–4 | 5–9 | 10–19 | 20–49 | 50–99 | 100+ |
 |---|---|---|---|---|---|---|---|---|
 | had a child | 0.4% | 3.1% | 2.8% | 3.9% | 5.2% | 7.7% | 8.4% | 5.2% |
-| median share given | 1 | ½ | ⅓ | ¼ | 0.2 | 0.2 | 0.19 | 0.18 |
+| [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") share given | 1 | ½ | ⅓ | ¼ | 0.2 | 0.2 | 0.19 | 0.18 |
 
 The 1-token parents all give their only token — and starve for it. The
 2-token parents mostly give half. From 3 tokens on, the median share falls to
@@ -193,7 +193,7 @@ fewer connections to pass on).
 
 Most parents hand over nothing (75%); 11% hand over one connection, 6% two
 and 8% three or more — about three for every four births on average. Rare as
-it is, a handover can be enormous: the centre of a star hands nearly all its
+it is, a handover can be enormous: the centre of a [star](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.") hands nearly all its
 connections to a newborn child ([The largest and the smallest](the-largest-and-the-smallest.md)).
 
 ## Reproduction over a world's life
@@ -215,7 +215,7 @@ connections to a newborn child ([The largest and the smallest](the-largest-and-t
 > **To make it again:** `python3 book_figures.py children`.
 <!-- /figure -->
 
-Over the settled life, the median world's parents give 36% of what they hold;
+Over the [settled life](settled-life.md "A world from iteration 500 to its end, after its youth, where it is measured."), the median world's parents give 36% of what they hold;
 all the tokens given to children in one phase are 1.3% of the world's tokens;
 and its children are born with 4.8 connections on average. Births move little
 wealth.
@@ -243,7 +243,7 @@ without births could only lose connections, never gain one.
 > and then their worlds die out
 > ([Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md)). And since a
 > newborn is joined only to agents at most two steps apart, a birth closes
-> only small loops: a network grown by births alone is, at large scale, a
+> only small [loops](loops.md "A path through the network that comes back to where it started without using a connection twice."): a network grown by births alone is, at large scale, a
 > tree of dense blobs joined by necks that one death can cut
 > ([A world that cannot break](a-world-that-cannot-break.md)).
 
@@ -262,8 +262,8 @@ without births could only lose connections, never gain one.
   game ([Questioning the mechanics](questioning-the-mechanics.md)). A brain spreads by
   conquest seventeen times more than by birth. In most models of evolution,
   reproduction is where heredity and variation happen; here, it is a side
-  road. [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) asks what that means for open-ended
-  evolution.
+  road. [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) asks what that means for [open-ended
+  evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.").
 
 To make every figure of this page: `python3 book_figures.py children`.
 
@@ -274,6 +274,6 @@ To make every figure of this page: `python3 book_figures.py children`.
 
 **Also about:** [The shape and health of the network](../README.md#the-shape-and-health-of-the-network).
 
-> [!info]- Pages that link here (9)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [How ages change over a world's life](how-ages-change.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [How the network grows](how-the-network-grows.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [The geometry of a world](the-geometry-of-a-world.md) · [Do the brains matter?](do-the-brains-matter.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [Do agents cooperate?](do-agents-cooperate.md)
+> [!info]- Pages that link here (10)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [How ages change over a world's life](how-ages-change.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [How the network grows](how-the-network-grows.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [The geometry of a world](the-geometry-of-a-world.md) · [Stars and hubs](stars-and-hubs.md) · [Do the brains matter?](do-the-brains-matter.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [Do agents cooperate?](do-agents-cooperate.md)
 <!-- /turns -->

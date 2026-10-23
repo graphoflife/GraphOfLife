@@ -1,9 +1,9 @@
 # Brains mixed at birth, units that cost, an eye for raids on kin
 
 > [!question] Questions of this page
-> - If a newborn's brain is mixed from its parent's and a neighbour's, the way
+> - If a newborn's [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") is mixed from its parent's and a [neighbour](the-world.md#the-network "An agent joined to another by a connection.")'s, the way
 >   sexual reproduction mixes genes, does evolution find more?
-> - If every unit of a brain has to hold one of its agent's tokens, how large do
+> - If every unit of a brain has to hold one of its [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.")'s [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes."), how large do
 >   brains become, and does evolution go on?
 > - Does an input that says *this neighbour took a node from my own kind*
 >   change who attacks whom?
@@ -12,8 +12,8 @@
 
 [Why evolution stops](why-evolution-stops.md) asked why evolution slows down in these
 worlds, and the lifetime contests of
-[The switches the world was built with](the-switches-the-world-was-built-with.md) showed that in B2's family of worlds it does not quite stop: brains of 1,000
-iterations still beat those of 500 two times out of three. This page tries
+[The switches the world was built with](the-switches-the-world-was-built-with.md) showed that in [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.")'s family of worlds it does not quite stop: brains of 1,000
+[iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") still beat those of 500 two times out of three. This page tries
 three more changes, each aimed at a different part of how evolution works:
 
 - **how variation is made** — brains mixed at birth;
@@ -22,14 +22,14 @@ three more changes, each aimed at a different part of how evolution works:
 
 ## What was built
 
-Every world is B2 at 10,000 tokens (Experiment 16's settings), played for
-2,000 iterations, two seeds each, as pilot worlds (research/oee/pilots,
+Every world is B2 at 10,000 tokens (Experiment 16's [settings](settings.md "One number or switch of a run's rules, fixed before it starts.")), played for
+2,000 iterations, two [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") each, as [pilot](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds (research/oee/pilots,
 `jobs_Q.txt`):
 
 | switch | what it does | compared with |
 |---|---|---|
 | `mix` | A newborn's brain is mixed from its parent's and a mate's — a neighbour of the parent, drawn at random. Each hidden unit (its incoming weights, its bias and its outgoing weights together) and each output bias comes from one or the other, with an even chance. The mixture is a new genotype, then mutated as any copy is. | B2 |
-| `took_kin` | One more input per neighbour: did it, in the last game, take a node held by an agent of my genotype? | B2 |
+| `took_kin` | One more input per neighbour: did it, in the last [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."), take a node held by an agent of my genotype? | B2 |
 | `unit_token` | Brains that can grow (up to 32 hidden units, switched on and off by mutation), where every active unit holds one of its agent's tokens. A unit switched on is paid for, one switched off pays its token back, and what an agent cannot pay for stays off. | the same growable brains with units free |
 | `link_token`, no old age | Every link holds a token, paid by whoever makes it; no cap on links (valence 0) and no age limit. | — |
 
@@ -86,7 +86,7 @@ pilot world so far. The second world moves like B2 (0.70, then 0.55; B2
 Why would mixing help? A mixed child inherits whole units from two unrelated
 brains. A unit that does something useful can spread through the population
 without carrying the rest of the brain it arose in, and two useful units that
-arose in different lineages can meet in one child. That is the classical
+arose in different [lineages](families.md "A line of descent: the agents whose genotypes go back to one ancestor.") can meet in one child. That is the classical
 argument for sex. Here it is a hypothesis: two seeds, small and combative
 worlds, and no test yet of which of these does the work.
 
@@ -146,7 +146,7 @@ taken per 100 agents a game), and the contests are near a tie or a little above
 (0.49–0.63, the mean of each pair of moments), since the only way a brain can
 spread is to take a node. The network is fine — one piece, nothing cut off,
 6.1–6.9 links per agent — but little happens in it. With the age limit, the same
-rule keeps a healthy world whose evolution goes on more strongly than B2's
+rule keeps a [healthy world](what-makes-a-world-interesting.md "A world that meets the six criteria of the screen of random worlds; an interesting one misses at most one.") whose evolution goes on more strongly than B2's
 (the brains of 1,000 hold 0.83 and 0.93 of the nodes against those of 500;
 [Rules without numbers](rules-without-numbers.md)).
 
@@ -166,7 +166,7 @@ rule keeps a healthy world whose evolution goes on more strongly than B2's
   only as useful as the rules make acting on it.
 - **A world without death freezes**, even with a healthy network: turnover is
   what selection works on.
-- Two seeds each are pilots. Mixing and costly units are candidates for an
+- Two seeds each are pilots. Mixing and costly units are [candidates](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides.") for an
   experiment of ten worlds, run longer, beside B2.
 
 **Related notes:** [How a brain changes](mutation.md) ·

@@ -1,7 +1,7 @@
 # Radius and diameter
 
-Three numbers describe how far apart the agents of a world are. All three
-start from the **distance** d(*u*, *v*): the fewest connections on a path from
+Three numbers describe how far apart the [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") of a world are. All three
+start from the **distance** d(*u*, *v*): the fewest [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") on a path from
 *u* to *v* ([Path length](path-length.md)).
 
 ## Eccentricity
@@ -32,7 +32,7 @@ other through the most central one takes at most twice the radius.
 ## How the viewer estimates them
 
 Exact values need a breadth-first search from every agent — too slow for a
-world of thousands, every 25 iterations. The program searches from 8 to 16
+world of thousands, every 25 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."). The program searches from 8 to 16
 agents spread through the list (the same searches as for the mean path
 length), then once more from the furthest agent any of them reached — the
 "double sweep", which is exact on a tree. So:
@@ -42,7 +42,7 @@ length), then once more from the furthest agent any of them reached — the
 - `radius` can only **over**-report: a more central agent might never have
   been tried.
 
-In a settled baseline world of 100,000 tokens the diameter is about 60
+In a settled [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") world of 100,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") the diameter is about 60
 steps, the radius about 36 and the mean path length about 18; in one of
 10,000 tokens, 29, 17 and 10 ([The geometry of a world](the-geometry-of-a-world.md)).
 
@@ -53,6 +53,6 @@ steps, the radius about 36 and the mean path length about 18; in one of
 
 **Also about:** [Space and dimension](../README.md#space-and-dimension).
 
-> [!info]- Pages that link here (3)
-> [The geometry of a world](the-geometry-of-a-world.md) · [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) · [What a run records](frames-and-stats.md)
+> [!info]- Pages that link here (4)
+> [Glossary](glossary.md) · [The geometry of a world](the-geometry-of-a-world.md) · [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

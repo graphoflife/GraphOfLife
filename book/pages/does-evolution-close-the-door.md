@@ -9,12 +9,12 @@
 
 ## Why ask
 
-A raid written by hand took half of some evolved B2 worlds at iteration
+A raid written by hand took half of some evolved [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.") worlds at [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.")
 2,000 ([Strategies written by hand](strategies-written-by-hand.md)). Those worlds had
 never met a raider. Do worlds that evolve longer get harder to raid?
 
 Three answers are possible, and each says something different about
-open-ended evolution:
+[open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau."):
 - **The door stays open.** Later worlds are raided as easily as early ones.
   Evolution does not find the defence any more than it found the raid, so
   better play lies across a valley it does not cross. The next step is to
@@ -23,12 +23,12 @@ open-ended evolution:
   lose to others. That is an arms race, which may go round in circles or
   climb.
 - **The door closes, and nothing opens.** Later worlds resist every raid
-  tried: a top, at least for these brains.
+  tried: a top, at least for these [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.").
 
 The way evolution's own contests fade
 ([Every era against three](every-era-against-three.md)) says which of these to
-expect. So does how much a single agent could gain by its best reply,
-which stays about one node a game at every era from 2,500 to 50,000 in
+expect. So does how much a single [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") could gain by its [best reply](exploitability.md "How much better than a world's brains the best reply to them would do: zero only at the top."),
+which stays about one node a [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") at every [era](eras-and-contests.md "Brains of a world at two moments, its eras, played against each other: do the later ones win?") from 2,500 to 50,000 in
 every long world.
 
 This experiment plants raiders, 5% of a world in three places each, in
@@ -53,9 +53,9 @@ B2's five worlds played on to 10,000 iterations, at iterations 500,
 ## The trials
 
 The worlds are B2's own: Experiment 16's worlds, played on to 10,000
-iterations as pilots of the engine's own rules. Each trial plays from a
+iterations as [pilots](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") of the [engine](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s own rules. Each trial plays from a
 pilot's checkpoint, which holds a whole world, as a run's archive does.
-The test is the invasion test of [How large a crowd a raider needs](how-large-a-crowd-a-raider-needs.md).
+The test is the [invasion test](invasion-test.md "A strategy planted as a patch in an evolved world: does it spread, or die out?") of [How large a crowd a raider needs](how-large-a-crowd-a-raider-needs.md).
 
 <!-- runs E30 -->
 > [!info] The trials behind this page
@@ -125,8 +125,8 @@ Over 120 iterations:
 > **To make it again:** `python3 book_figures.py door`.
 <!-- /figure -->
 
-The raider stakes only where it is sure to win: 70% of its tokens has to
-come to more than one and a half times the neighbour's. Against a neighbour
+The raider stakes only where it is sure to win: 70% of its [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") has to
+come to more than one and a half times the [neighbour](the-world.md#the-network "An agent joined to another by a connection.")'s. Against a neighbour
 of one token it needs three tokens to raid at all. How often a patch of 5%
 took hold, by its tokens per agent when planted, over all 120 such
 plantings of Experiments 29 and 30:
@@ -139,7 +139,7 @@ plantings of Experiments 29 and 30:
 | 3 to 4 | 16 of 16 |
 | 4 or more | 6 of 6 |
 
-A patch planted at 500 held a median of 3.85 tokens per agent, at 2,000
+A patch planted at 500 held a [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") of 3.85 tokens per agent, at 2,000
 2.35, and at 5,000 and 10,000 2.0. The worlds hold about as many tokens per
 agent at 10,000 as at 1,000, 2.7 to 3.3. But a patch, an agent and its
 nearest neighbours, is poorer than the average agent, and it got poorer as

@@ -4,8 +4,8 @@
 **youth** unlike the rest of its life. This page looks at it closely.
 
 > [!question] Questions of this page
-> - How do a thousand founders, each with a random brain and a hundred tokens,
->   become a world of more than ten thousand agents?
+> - How do a thousand [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts."), each with a random brain and a hundred [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes."),
+>   become a world of more than ten thousand [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.")?
 > - Where do the agents come from in the youth, and how do they die?
 > - Whose descendants are the agents of a settled world?
 
@@ -34,7 +34,7 @@ written from, ten times over and a little faster; where it differs, it says so.
 
 At the start every founder holds a hundred tokens and has a brain nobody has
 selected. In the first reproduction phase most of them give a large part of
-their tokens to a child ([The brain](the-brain.md): a median of half). The
+their tokens to a child ([The brain](the-brain.md): a [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") of half). The
 children give in turn, and the median world grows from 1,000 founders to 1,370
 agents after the first game (that of iteration 0), 4,050 after the game of
 iteration 5, 12,480 after that of iteration 10 and 16,200 after that of
@@ -72,8 +72,8 @@ Deaths follow: agents cut off in the game peak at 6,390 per iteration in the
 same iteration, starvation at 1,670. So the crash is mostly the network
 breaking apart: at the peak, nearly four agents are cut off for every one that
 starves (five at 10,000 tokens). A newborn is joined to those of its parent's
-candidates — the parent itself and its neighbours — that the parent's brain
-picks ([One iteration, step by step](one-iteration.md)), and every one of those connections
+candidates — the parent itself and its [neighbours](the-world.md#the-network "An agent joined to another by a connection.") — that the parent's brain
+picks ([One iteration, step by step](one-iteration.md)), and every one of those [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.")
 is cut at the end of the game unless tokens cross it. In the boom, most agents
 hold a few tokens and many new connections carry nothing; whole branches of
 the network lose their link to the largest piece and are removed, with
@@ -125,7 +125,7 @@ agent of a settled world holds about 4.5 ([Where do the tokens go?](where-do-the
 > **To make it again:** `python3 book_figures.py youth`.
 <!-- /figure -->
 
-The number of **families** counts the different genotypes of eight
+The number of **families** counts the different [genotypes](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.") of eight
 iterations earlier that the living descend from ([Families](families.md)).
 Before iteration 8, "eight iterations earlier" is before the world began, so
 it counts how many of the 1,000 founders still have descendants. It falls
@@ -161,7 +161,7 @@ takes over:
 > **To make it again:** `python3 book_figures.py youth`.
 <!-- /figure -->
 
-In the world with seed 1, no founder's descendants hold more than 8% of the
+In the world with [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1, no founder's descendants hold more than 8% of the
 world at iteration 10; one line holds 38% at iteration 50, 74% at iteration
 100, 86% at iteration 200 and 93% at iteration 300, with three other lines
 still alive beside it. In the smaller world of the same seed one line held
@@ -221,7 +221,7 @@ it has made since.
 
 > [!info] Added later: the youth is when the brains learn
 > [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) played the
-> brains of different eras of ten worlds of 5,000 tokens against each other.
+> brains of different [eras](eras-and-contests.md "Brains of a world at two moments, its eras, played against each other: do the later ones win?") of ten worlds of 5,000 tokens against each other.
 > By iteration 50 the brains of every world beat their founders' — they hold
 > nine tenths of a world contested with them — and every later era ties with
 > the one before it. Whatever the brains of a world learn, they learn in its

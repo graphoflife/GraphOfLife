@@ -1,10 +1,10 @@
 # Mixed at birth: ten long worlds
 
 > [!question] Questions of this page
-> - Do brains mixed at birth keep a world healthy and rich for 10,000
->   iterations, or was that the luck of a few pilot worlds?
+> - Do [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") mixed at birth keep a world healthy and rich for 10,000
+>   [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."), or was that the luck of a few [pilot](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds?
 > - What does a world of mixed brains look like after a long life: how many
->   agents, how rich, how well knit?
+>   [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions."), how rich, how well knit?
 
 <!-- experiment E17 -->
 
@@ -13,17 +13,17 @@
 [Healthy and rich](healthy-and-rich.md) read every world the notebook has made
 against the author's picture of a world that might keep evolving: a network
 that is decentralised, resilient and nearly three-dimensional, and agents that
-differ in almost every statistic. B2's worlds have the network but not the
-agents — three in four hold three tokens or fewer. The worlds that came closest
+differ in almost every statistic. [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.")'s worlds have the network but not the
+agents — three in four hold three [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") or fewer. The worlds that came closest
 were those whose **brains are mixed at birth**
 ([Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md)): a newborn's brain is its
 parent's, with each hidden unit, by an even chance, taken whole from the brain
-of one of the parent's neighbours instead.
+of one of the parent's [neighbours](the-world.md#the-network "An agent joined to another by a connection.") instead.
 
 Those were pilots: two worlds of batch Q, mixing combined with other rules in
 the batches after it, and the two worlds of batch Q played on
 ([Healthy and rich](healthy-and-rich.md#candidates-and-long-runs)). Mixing is
-now a setting of the engine, [`mix_at_birth`](settings.md#mix_at_birth),
+now a setting of the [engine](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world."), [`mix_at_birth`](settings.md#mix_at_birth),
 off unless a run turns it on, so the lab can run it, and for longer than any
 B2 world has lived in the lab: 10,000 iterations, five times Experiment 16.
 
@@ -32,18 +32,18 @@ B2 world has lived in the lab: 10,000 iterations, five times Experiment 16.
 When this plan was written (16 October 2026), each world read at the
 iteration named as [Healthy and rich](healthy-and-rich.md) reads every world:
 
-| world | iteration | agents | median tokens | 3 tokens or fewer | marks of the health bar (of 7) | dimension |
+| world | iteration | agents | [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") tokens | 3 tokens or fewer | marks of the [health bar](health-bar.md "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.") (of 7) | [dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") |
 |---|---|---|---|---|---|---|
 | B2, ten worlds (Experiment 16) | 2,000 | 3,064–3,699 | 1–2 | 70–78% | 6 (one world 7) | 3.9–4.8 |
 | the same worlds played on (pilots) | 9,500–10,000 | 2,887–3,661 | 1–2 | 66–79% | 6 | 4.3–4.5 |
-| mixed, seed 1 (batch Q) | 2,000 | 908 | 5 | 37% | 7 | 3.5 |
+| mixed, [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1 (batch Q) | 2,000 | 908 | 5 | 37% | 7 | 3.5 |
 | mixed, seed 2 (batch Q) | 2,000 | 659 | 11 | 20% | 7 | 3.5 |
 | seed 1, played on | 2,500 | 1,380 | 3 | 52% | 7 | 3.4 |
 | … and on | 5,500 | 1,037 | 6 | 38% | 7 | 3.8 |
 | seed 2, played on | 4,500 | 514 | 13 | 15% | 7 | 3.6 |
 | … and on | 7,500 | 883 | 8 | 19% | 7 | 3.9 |
 | mixed, with gifts (batch T) | 1,000 | 1,541 | 4 | 39% | 6 | 4.1 |
-| mixed, estates by wealth (batch Y) | 1,000 | 445 | 8 | 31% | 6 | 3.4 |
+| mixed, [estates](estate.md "The tokens a dead agent leaves, and who gets them.") by wealth (batch Y) | 1,000 | 445 | 8 | 31% | 6 | 3.4 |
 
 Two things stand out. A mixed world is a quarter to a third of B2's size for
 the same tokens, so each agent holds more, and the plain mixed worlds meet the
@@ -57,11 +57,11 @@ which is the rule.
 Experiment 17 runs B2 at 10,000 tokens with brains mixed at birth, ten seeds,
 for 10,000 iterations each, recording as the lab records every run, the graph
 statistics every 25 iterations and a whole world every 500 — for contests
-between eras, and for reading each world at any of those moments as [Healthy and rich](healthy-and-rich.md)
+between [eras](eras-and-contests.md "Brains of a world at two moments, its eras, played against each other: do the later ones win?"), and for reading each world at any of those moments as [Healthy and rich](healthy-and-rich.md)
 reads them. B2's own worlds are not run again: Experiment 16 ran them to
 2,000 iterations, and their continuations to 10,000 are the comparison.
 
-A lab run records every game, so the ten runs will take about 9 GB of disk;
+A lab run records every [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."), so the ten runs will take about 9 GB of disk;
 mixed worlds are small, so each costs less time than a B2 world of the same
 length.
 
@@ -214,7 +214,7 @@ The thesis asked two things of the worlds at iteration 10,000, and got one.
   to 79%. Seven of the ten are below 25%. The two exceptions, seeds 1 and 5,
   at 65% and 63%, are the two largest worlds, with 2,221 and 2,257 agents.
 - **Healthy: five worlds of ten, where seven were needed.** Seeds 2, 4, 5, 6
-  and 10 meet every mark. Three small worlds miss one mark, the hub: in seed
+  and 10 meet every mark. Three small worlds miss one mark, the [hub](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub."): in seed
   3's 152 agents the best-connected agent is joined to 12 others, 7.9% of the
   world; in seed 8's 173, to 17 (9.9%); in seed 7's 346, to 47 (13.6%). Seed 1
   misses the dimension by a hair, 4.05 against the bar's 4. Seed 9 died out.
@@ -268,7 +268,7 @@ And it is why the size drifts. How eagerly an agent breeds is a matter of its
 brain. Where the brains are eager, a world grows until few are able; where they
 are reluctant, it shrinks until many are. The mixed worlds' eagerness wanders,
 from under 1 to 10 per hundred, and the size follows it: across the 181
-moments, the two go together with a correlation of 0.87, on logarithms. B2's
+moments, the two go together with a [correlation](correlation.md "Whether two quantities go up and down together, from −1 to 1.") of 0.87, on logarithms. B2's
 brains are eager in every world at every moment.
 
 Why should mixing make agents put children off? A brain spreads in two
@@ -359,7 +359,7 @@ So half of what the thesis asked, every mark of the health bar, was a
 question of size: mixing makes a world smaller, and at that size a network of
 B2's kind meets the bar. What mixing changes that size does not change is how
 rich the agents are: B2's worlds of 5,000 tokens are as poor as those of
-10,000. (The dimension of B1's worlds does not grow with their size: from 40
+10,000. (The dimension of [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.")'s worlds does not grow with their size: from 40
 agents to 70,000 it stays between about 2.5 and 4. The rise belongs to B2's
 kind of network, not to the measure.)
 
@@ -396,7 +396,7 @@ kind of network, not to the measure.)
 <!-- /figure -->
 
 Yes, and at first faster than in B2. In each world the brains of a later
-moment met those of an earlier one over an agent's lifetime, 100 iterations,
+moment met those of an earlier one over an agent's [lifetime](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death."), 100 iterations,
 once in each era's world, as
 [Why evolution stops](why-evolution-stops.md#would-we-notice-if-it-went-on) did for
 B2; a newborn whose brain is mixed counts for its parent's era. The brains of
@@ -433,7 +433,7 @@ of seed 4 played against itself gave 40% and 64%); the median of ten is not.
   compared at one size.
 - **A count has to follow every way its labels are made.** The lab's contests
   told the two eras apart by the number each brain carries. Mixing makes new
-  brains even where mutation is switched off, and the numbers they drew
+  brains even where [mutation](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") is switched off, and the numbers they drew
   counted for the earlier era, so the first count of these contests said that
   evolution stops in mixed worlds. Counted by the parent's era, it goes on.
 
@@ -447,8 +447,8 @@ of seed 4 played against itself gave 40% and 64%); the median of ten is not.
   poorest, half of an agent's tokens kept at home, links to strangers, and a
   slower change of brains.
 - Not yet read: the kinds of behaviour of
-  [How different are the agents?](how-different-are-the-agents.md), the flow modules of
-  [Flow modules: the groups tokens stay in](flow-modules.md) and the circulation of
+  [How different are the agents?](how-different-are-the-agents.md), the [flow modules](map-equation.md "A group of agents that a token, following the flow, tends to stay inside.") of
+  [Flow modules: the groups tokens stay in](flow-modules.md) and the [circulation](circulation.md "The part of a flow that goes round in loops, as against the part that runs from sources to sinks.") of
   [Gliders, and who helps whom](gliders-and-who-helps-whom.md), which mixing doubled in the
   pilots.
 
@@ -460,8 +460,8 @@ of seed 4 played against itself gave 40% and 64%); the median of ten is not.
 <!-- turns -->
 ---
 
-← [What makes a world interesting](what-makes-a-world-interesting.md) · [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world) · [Five mixed worlds, fifty thousand iterations](five-mixed-worlds-fifty-thousand-iterations.md) →
+← [The diversity score](diversity-score.md) · [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world) · [Five mixed worlds, fifty thousand iterations](five-mixed-worlds-fifty-thousand-iterations.md) →
 
-> [!info]- Pages that link here (12)
-> [Who dies, and why](who-dies-and-why.md) · [What folds a world](what-folds-a-world.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [Who inherits?](who-inherits.md) · [Links to strangers](links-to-strangers.md) · [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) · [Healthy and rich](healthy-and-rich.md) · [Five mixed worlds, fifty thousand iterations](five-mixed-worlds-fifty-thousand-iterations.md) · [Mixed at birth, with parents as mates](mixed-at-birth-with-parents-as-mates.md) · [The candidates, played on](the-candidates-played-on.md) · [Five more seeds for the rules that held](five-more-seeds-for-the-rules-that-held.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (13)
+> [Who dies, and why](who-dies-and-why.md) · [What folds a world](what-folds-a-world.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [Who inherits?](who-inherits.md) · [Links to strangers](links-to-strangers.md) · [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) · [Healthy and rich](healthy-and-rich.md) · [The health bar](health-bar.md) · [Five mixed worlds, fifty thousand iterations](five-mixed-worlds-fifty-thousand-iterations.md) · [Mixed at birth, with parents as mates](mixed-at-birth-with-parents-as-mates.md) · [The candidates, played on](the-candidates-played-on.md) · [Five more seeds for the rules that held](five-more-seeds-for-the-rules-that-held.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

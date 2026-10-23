@@ -8,21 +8,21 @@ organisms, organisms into colonies and societies — the "major transitions"
 (Maynard Smith and Szathmáry 1995), in which units that once competed came to
 reproduce as one. A world in which evolution keeps producing new kinds of
 things will, very likely, have to produce new kinds of **togetherness**. So for
-the aim of this notebook, open-ended evolution, cooperation is not a side topic.
+the aim of this notebook, [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau."), cooperation is not a side topic.
 
 This page does three things: it says what cooperation would mean in Graph of
 Life, measures what is there, and sets out how cooperation could be found and
 counted as the notebook goes on.
 
 > [!question] Questions of this page
-> - What does an agent give in this world, at what cost, and to whom?
-> - Are neighbours related? Do agents treat their relatives differently?
+> - What does an [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") give in this world, at what cost, and to whom?
+> - Are [neighbours](the-world.md#the-network "An agent joined to another by a connection.") related? Do agents treat their relatives differently?
 > - When a node changes hands, does it stay in the family?
 > - Do agents answer a stake with a stake?
 > - How long do the same two agents face each other — long enough for
 >   anything like trust?
 
-The worlds are the thirty of 100,000 tokens of [Thirty worlds](thirty-worlds.md);
+The worlds are the thirty of 100,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") of [Thirty worlds](thirty-worlds.md);
 where the thirty of 10,000 tokens this page was first written from differ,
 both are given.
 
@@ -114,12 +114,12 @@ with its **cost** *C* to the helper.
 What can an agent of Graph of Life give, and at what cost?
 
 - **A stake on a neighbour's node.** Every token staked on a neighbour ends the
-  game on the neighbour's node ([Gains and losses](gains-and-losses.md)): a pure
+  [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") on the neighbour's node ([Gains and losses](gains-and-losses.md)): a pure
   gift of tokens, cost *C* to the staker, benefit *B* = *C* to the node. But a
   stake is also a **bid** for that node: if it wins, the node takes the
-  staker's brain. For the brain, every gift is also an attack. This
+  staker's [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions."). For the brain, every gift is also an attack. This
   double meaning is built into the game.
-- **A child's endowment.** The tokens and connections a parent gives its child
+- **A child's endowment.** The tokens and [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") a parent gives its child
   ([How agents have children](how-agents-have-children.md)).
 - **Keeping a connection alive.** A connection survives only if a token crosses
   it ([How a world breaks](how-a-world-breaks.md)). Paying that token keeps open a
@@ -150,8 +150,8 @@ Kin selection needs relatives to meet. Do they?
 > **To make it again:** `python3 book_figures.py cooperation`.
 <!-- /figure -->
 
-Yes, strongly. In the median world, **9.6%** of neighbours carry the same
-genotype, against **0.05%** of two agents drawn at random — 200 times as
+Yes, strongly. In the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world, **9.6%** of neighbours carry the same
+[genotype](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was."), against **0.05%** of two agents drawn at random — 200 times as
 often (at 10,000 tokens, 10.6% against 0.28%: 38 times). Counted over all
 pairs of a world rather than a sample of them, chance is rarer still, 0.03%,
 and [Like next to like](like-next-to-like.md) puts the ratio near 290. Counting
@@ -193,9 +193,9 @@ And they mark 99.7% of what they stake on either kind as revolutionary — as at
 
 That is not surprising once one looks at what a brain can see
 ([What a brain sees](brain-inputs.md)): tokens and connections — its
-own, the candidate's, and their neighbourhoods' — messages, and random numbers.
+own, the [candidate](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides.")'s, and their neighbourhoods' — messages, and random numbers.
 **Not genotypes.** A brain cannot tell kin from stranger, except through
-messages: a lineage could, in principle, evolve a "password" — send a
+messages: a [lineage](families.md "A line of descent: the agents whose genotypes go back to one ancestor.") could, in principle, evolve a "password" — send a
 particular pattern and treat those who send it back differently, a
 **green-beard** (Hamilton 1964; Dawkins 1976). Nothing in the stakes says that
 this has happened.
@@ -204,7 +204,7 @@ this has happened.
 > [What agents say to each other](what-agents-say-to-each-other.md) found that every message
 > already names its writer's genotype: two agents of one genotype write
 > exactly the same message. Kin could tell each other by it; what is missing
-> is a brain that compares what it reads, and the baseline's brains barely
+> is a brain that compares what it reads, and the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.")'s brains barely
 > see ([What the brains are like](what-the-brains-are-like.md)).
 
 ## When a node changes hands, does it stay in the family?
@@ -251,14 +251,14 @@ staked on the node. Takeovers do not spare kin, nor seek them out.
 
 Of pairs of neighbours that staked on each other in a game, 82% (median world)
 staked **exactly the same** amount on each other, and **66%** of all such pairs
-exchanged exactly one token each way. The correlation of the logarithms of the
+exchanged exactly one token each way. The [correlation](correlation.md "Whether two quantities go up and down together, from −1 to 1.") of the logarithms of the
 two stakes is 0.57. (At 10,000 tokens: 79%, 58% and 0.63.)
 
 Is that reciprocity? Two observations say: not in the sense of the theory.
 An equal exchange cancels: it changes neither balance
 ([Where the tokens flow](where-the-tokens-flow.md)). What it does is keep the
-connection alive at its minimum price, paid by both. And it is what the even
-split gives: two poor agents splitting a few tokens evenly over a few
+connection alive at its minimum price, paid by both. And it is what the [even
+split](even-split.md "What the rules do when a brain scores no candidate above zero: the stake is spread evenly.") gives: two poor agents splitting a few tokens evenly over a few
 candidates put one token on each other. It is a **handshake**, not a favour
 returned.
 
@@ -290,7 +290,7 @@ there a game later, 60% sixteen games later. But the **brains** at their ends
 do not. In only **4%** of connections do the same two brains face each other
 one game later (neither end won by a neighbour in between); after two games,
 0.8%; after four, 0.2%. The stage stays; the actors change almost every game —
-because about half of all nodes, and nearly every hub, are taken over in every
+because about half of all nodes, and nearly every [hub](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub."), are taken over in every
 game ([How the game is played](how-the-game-is-played.md),
 [Where the tokens flow](where-the-tokens-flow.md)).
 
@@ -302,7 +302,7 @@ anybody twice.
 
 Nothing measured here shows cooperation beyond what the even split and kinship
 by proximity produce. But "not found" depends on where one looks. These are
-measures the notebook can use from here on, each computable from the frames
+measures the notebook can use from here on, each computable from the [frames](frames-and-stats.md "A whole world as a run records it after one phase: every agent, its tokens and connections.")
 every run already writes:
 
 1. **Kin discrimination.** The ratio of stakes on kin to stakes on others,
@@ -328,9 +328,9 @@ every run already writes:
 
 > [!info] Added later: not yet used
 > None of the six has been computed since. The work on open-ended evolution judged progress by playing
-> a world's eras against each other instead
+> a world's [eras](eras-and-contests.md "Brains of a world at two moments, its eras, played against each other: do the later ones win?") against each other instead
 > ([How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)). In the
-> pilots for B2, connected groups of one genotype and of close kin shrank
+> [pilots](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") for [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death."), connected groups of one genotype and of close kin shrank
 > over time in every world.
 
 ## What this means

@@ -1,8 +1,8 @@
 # Genotypes and lineages
 
 Evolution needs something that lasts long enough to be selected. In Graph of
-Life a brain is copied — into a child, or into a conquered node — and
-changes with probability 0.2 at every birth and after every game. Every
+Life a [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") is copied — into a child, or into a conquered [node](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") — and
+changes with probability 0.2 at every birth and after every [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."). Every
 change gives a new **genotype**, and every genotype remembers the one it came
 from, so the genotypes of a world form one family tree
 ([Genotypes and the family tree](genotype.md)).
@@ -12,7 +12,7 @@ from, so the genotypes of a world form one family tree
 > - Does any single genotype ever hold a large part of the world?
 > - Does any *line of descent* take the world over — and how often?
 
-The worlds are the thirty of 100,000 tokens of [Thirty worlds](thirty-worlds.md);
+The worlds are the thirty of 100,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") of [Thirty worlds](thirty-worlds.md);
 the thirty of 10,000 tokens this page was first written from are given
 beside them.
 
@@ -95,7 +95,7 @@ beside them.
 
 The two curves are [survival curves](kaplan-meier.md) on
 logarithmic axes: of every genotype that some agent carried after a game, and
-every agent alive after a game, from iteration 500 on in the thirty worlds,
+every agent alive after a game, from [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") 500 on in the thirty worlds,
 the share that lasted at least *L* iterations.
 
 - **Genotypes** (violet) are short-lived: 57% last at least 2 iterations, 20%
@@ -115,7 +115,7 @@ a genotype has little time.
 
 At any moment, a settled world holds about one genotype for every 1.6
 agents (`distinctBrains/nodes`, averaged over iterations 500 to 1,499: 0.63
-in the median world, between 0.61 and 0.66 across the thirty — and 0.63 at
+in the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world, between 0.61 and 0.66 across the thirty — and 0.63 at
 10,000 tokens too).
 
 ## But some genotypes get big
@@ -142,7 +142,7 @@ median of 0.6% after iteration 100 (1.6% at 10,000 tokens). But not always.
 After iteration 100, a single genotype held more than a tenth of the world at
 some moment in 10 of the 30 worlds, more than a fifth in 7, more than a third
 in 2, and more than half in one — 56% of all agents, at iteration 1,408 in
-the world with seed 28 (the yellow line), the star of
+the world with [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 28 (the yellow line), the [star](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.") of
 [The largest and the smallest](the-largest-and-the-smallest.md), when its collapse
 ([A world's life](a-worlds-life.md)) had left it some 2,100 agents. At 10,000
 tokens it was more common: a tenth in 21 of 26 worlds, a fifth in 17. Since
@@ -172,7 +172,7 @@ How far back do all the living share one ancestor
 <!-- /figure -->
 
 Each line is one world. It starts by rising with the age of the world: the
-living still descend from more than one founder. The first drop is the
+living still descend from more than one [founder](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts."). The first drop is the
 moment everyone alive descends from one founder — in the median world at
 iteration 1,000 among the 27 that got there, and never in three
 ([Worlds of 100,000 tokens](worlds-of-100000-tokens.md) counts it, and finds it 5.9
@@ -360,7 +360,7 @@ a single founder by iteration 1,500 — but slowly, about once a run.
 - **The unit of evolution here is the line, not the genotype.** A genotype
   lasts a couple of iterations, far too short for selection to act on it. A
   line that takes over the world lasts hundreds. The first rung of the ladder
-  in [What this notebook is about](what-this-notebook-is-about.md) — lineages lasting long
+  in [What this notebook is about](what-this-notebook-is-about.md) — [lineages](families.md "A line of descent: the agents whose genotypes go back to one ancestor.") lasting long
   enough for selection to act — can only be met by lines.
 - **Is it selection, or chance?** In any population that reproduces, all
   lines but one die out sooner or later by chance alone (the
@@ -372,10 +372,10 @@ a single founder by iteration 1,500 — but slowly, about once a run.
   often agents are born and die.
 
 > [!info] Added later: no better brains
-> None of the worlds of [Do the brains matter?](do-the-brains-matter.md) is born and dies as the baseline does, so
+> None of the worlds of [Do the brains matter?](do-the-brains-matter.md) is born and dies as the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") does, so
 > they could not settle the question.
 > [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) asked the
-> brains themselves, playing the brains of different eras of ten worlds of
+> brains themselves, playing the brains of different [eras](eras-and-contests.md "Brains of a world at two moments, its eras, played against each other: do the later ones win?") of ten worlds of
 > 5,000 tokens against each other: the brains of iteration 50 already beat
 > their founders' (+361 Elo), and every later era ties with the one before
 > it (iteration 1,000 against 300: 0.483). The lines that take a settled

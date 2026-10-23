@@ -1,15 +1,15 @@
 # Genotypes and the family tree
 
-Every brain carries a whole number, its **genotype**. Two agents with the
+Every [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") carries a whole number, its **genotype**. Two [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") with the
 same genotype have brains with exactly the same weights, because they hold
 copies of one brain. This note says how genotypes are numbered, how they form
 a family tree, and what the notebook counts with them.
 
 ## How genotypes are numbered
 
-- The founders' brains get the genotypes 1, 2, …, *n*.
+- The [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.")' brains get the genotypes 1, 2, …, *n*.
 - **Copying keeps the number.** A child's brain before it changes, and the
-  brain a node takes on from the winner of the game, are copies: same
+  brain a node takes on from the winner of the [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."), are copies: same
   weights, same genotype.
 - **Changing gives a new number.** When a brain changes
   ([How a brain changes](mutation.md)), it gets the next unused number, and
@@ -31,10 +31,10 @@ Two different counts follow:
 ## The family tree
 
 Following parent genotypes back gives a **tree**: every genotype has one
-parent, back to a founder's genotype, which has none. The frames record, for
+parent, back to a founder's genotype, which has none. The [frames](frames-and-stats.md "A whole world as a run records it after one phase: every agent, its tokens and connections.") record, for
 every living agent, its genotype and that genotype's parent, so the tree can
 be rebuilt from a run. Every genotype first appears in some frame; the
-iteration of that frame is the genotype's **birth**.
+[iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") of that frame is the genotype's **birth**.
 
 The notebook uses the tree in three ways:
 
@@ -58,6 +58,6 @@ Its lifetime is from the first game after which it is alive to the last
 
 **Also about:** [How the simulation works](../README.md#how-the-simulation-works).
 
-> [!info]- Pages that link here (14)
-> [What this notebook is about](what-this-notebook-is-about.md) · [The world: tokens, agents and a network](the-world.md) · [The brain](the-brain.md) · [How a brain changes](mutation.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [How different are the agents?](how-different-are-the-agents.md) · [Brain diversity](brain-diversity.md) · [Families](families.md) · [The common ancestor of the living](common-ancestor.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) · [What a run records](frames-and-stats.md) · [What the viewer can colour by](viewer-colours.md) · [Muller plots](muller-plot.md)
+> [!info]- Pages that link here (16)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [The world: tokens, agents and a network](the-world.md) · [The brain](the-brain.md) · [How a brain changes](mutation.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [How different are the agents?](how-different-are-the-agents.md) · [Brain diversity](brain-diversity.md) · [Families](families.md) · [The common ancestor of the living](common-ancestor.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) · [The diversity score](diversity-score.md) · [What a run records](frames-and-stats.md) · [What the viewer can colour by](viewer-colours.md) · [Muller plots](muller-plot.md)
 <!-- /turns -->

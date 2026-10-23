@@ -33,7 +33,7 @@ three picks the 2) to 9, and the middle 95% of them form the interval.
 ## For a difference
 
 To compare two conditions, the notebook bootstraps the **difference** of their
-means. If the runs are paired by seed, it resamples the paired differences
+means. If the runs are paired by [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world."), it resamples the paired differences
 *dᵢ* = *yᵢ* − *xᵢ*; otherwise it resamples each condition separately and
 subtracts. An interval that does not contain 0 means the data are hard to
 reconcile with "no difference" — which is then tested directly with a
@@ -48,6 +48,6 @@ reconcile with "no difference" — which is then tested directly with a
 
 ← [Survival curves (Kaplan–Meier)](kaplan-meier.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Permutation tests](permutation-test.md) →
 
-> [!info]- Pages that link here (4)
-> [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) · [Do the brains matter?](do-the-brains-matter.md) · [How worlds are measured](how-worlds-are-measured.md) · [Permutation tests](permutation-test.md)
+> [!info]- Pages that link here (5)
+> [Glossary](glossary.md) · [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) · [Do the brains matter?](do-the-brains-matter.md) · [How worlds are measured](how-worlds-are-measured.md) · [Permutation tests](permutation-test.md)
 <!-- /turns -->

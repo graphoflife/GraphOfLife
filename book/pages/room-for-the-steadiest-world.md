@@ -13,41 +13,41 @@
 The author's picture of a world that might keep evolving
 ([Healthy and rich](healthy-and-rich.md)) asks four things of it at
 once:
-- **Healthy:** it meets every mark of the health bar.
-- **Diverse:** its agents differ, more than B2's do.
+- **Healthy:** it meets every mark of the [health bar](health-bar.md "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.").
+- **Diverse:** its [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") differ, more than [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.")'s do.
 - **A space:** it is wide, at least half again as wide as a random network
   with the same links ([What folds a world](what-folds-a-world.md)).
-- **Uneven:** its tokens are no more even than B2's
+- **Uneven:** its [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") are no more even than B2's
   ([Healthy and rich](healthy-and-rich.md), added later).
 
 Read by all four, few worlds pass even for a moment:
-- **At 1,000 iterations:** three of the 466 worlds measured, each with
-  brains mixed at birth and one other rule.
+- **At 1,000 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."):** three of the 466 worlds measured, each with
+  [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") mixed at birth and one other rule.
 - **At 10,000:** one of 64. This is Experiment 21's world without random
-  inputs, seed 6. The same rule's other worlds failed, and two of them died.
+  inputs, [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 6. The same rule's other worlds failed, and two of them died.
 
 The steadiest configuration the notebook has is
 [Experiment 19](mixed-at-birth-with-parents-as-mates.md)'s: brains mixed
 at birth, with only parents as mates.
 - **What it has:** all ten of its worlds lived to 20,000 iterations, at
   about 2,000 agents each. They stay diverse (0.52 to 0.69 against B2's
-  0.49) and uneven (Ginis of 0.47 to 0.57), and evolution goes on in them,
+  0.49) and uneven ([Ginis](gini-coefficient.md "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") of 0.47 to 0.57), and evolution goes on in them,
   later brains beating earlier ones by less and less.
 - **What it misses:** room. A typical agent reaches half its world in 1.13
-  to 1.32 times the steps its random twin needs. Nine of the ten miss the
-  dimension mark, which a folded world of 2,000 agents does. These are
+  to 1.32 times the steps its [random twin](random-twin.md "A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all.") needs. Nine of the ten miss the
+  [dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") mark, which a folded world of 2,000 agents does. These are
   small worlds, not spaces.
 
 [What folds a world](what-folds-a-world.md) found what folds a world: a death
 mended with a ring of links. It also found what keeps a world's room:
-- the estate of the dead paid to births;
+- the [estate](estate.md "The tokens a dead agent leaves, and who gets them.") of the dead paid to births;
 - no old age;
 - no mending.
 
 Each pays for the room in its own coin
 ([Rules in company](rules-in-company.md)):
 - **The estates** fill a world with alike agents. With plain mixing they
-  gave spaces of about 5,000 agents whose diversity scores fell to 0.35 to
+  gave spaces of about 5,000 agents whose [diversity scores](diversity-score.md "How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes.") fell to 0.35 to
   0.40.
 - **No old age** all but stops births.
 - **No mending** lets one loss cut a world.
@@ -178,7 +178,7 @@ At iteration 3,000:
   - **Seed 1** came nearest of all: 1.89 times its twin, a diversity score
     of 0.57, a Gini of 0.48. It missed one mark: one agent's loss could cut
     off too much.
-  - **Seed 2** missed two marks (a cut and a hub), its diversity (0.39) and
+  - **Seed 2** missed two marks (a cut and a [hub](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.")), its diversity (0.39) and
     its unevenness (0.35).
 
 <!-- figure room/parts -->
@@ -227,7 +227,7 @@ apart, even in the steadiest mixed world. What each rule pays is now known:
 - **The cost is the price of a child.** An estate paid to the newborns makes
   children cheap to have and the world fills with them. The next rule to
   try keeps the estate but asks more of a birth, without a number: a child
-  must be born with at least what its parent's neighbours hold, so a world
+  must be born with at least what its parent's [neighbours](the-world.md#the-network "An agent joined to another by a connection.") hold, so a world
   can grow only as rich as it is. It is local, needs no constant, and is
   [What holds a world's size](what-holds-a-worlds-size.md)'s missing pull — births that pay more when they would make the
   world poorer.
@@ -238,7 +238,7 @@ apart, even in the steadiest mixed world. What each rule pays is now known:
 > in a world of paupers a parent's neighbours hold a token or two, so the
 > floor asked no more than the ten tokens every child already gets. The
 > paupers are not born poor. Children start with ten tokens or more, and
-> the game takes most of it within twenty iterations. A world's size is a
+> the [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") takes most of it within twenty iterations. A world's size is a
 > hundred times its births an iteration, and the estates pay for three
 > times as many births.
 
@@ -256,6 +256,6 @@ apart, even in the steadiest mixed world. What each rule pays is now known:
 
 **Also about:** [Space and dimension](../README.md#space-and-dimension).
 
-> [!info]- Pages that link here (5)
-> [Every setting](settings.md) · [Births as rich as the neighbours](births-as-rich-as-the-neighbours.md) · [A mate that pays its share](a-mate-that-pays-its-share.md) · [The search's best world, in new seeds](the-searchs-best-world-in-new-seeds.md) · [A screen of random worlds](a-screen-of-random-worlds.md)
+> [!info]- Pages that link here (9)
+> [Every setting](settings.md) · [The estate of the dead](estate.md) · [The random twin: is a world a space?](random-twin.md) · [Births as rich as the neighbours](births-as-rich-as-the-neighbours.md) · [The health bar](health-bar.md) · [The diversity score](diversity-score.md) · [A mate that pays its share](a-mate-that-pays-its-share.md) · [The search's best world, in new seeds](the-searchs-best-world-in-new-seeds.md) · [A screen of random worlds](a-screen-of-random-worlds.md)
 <!-- /turns -->

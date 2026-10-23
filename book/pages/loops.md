@@ -1,8 +1,8 @@
 # Loops
 
 A **loop** (cycle) is a path through the network that returns to where it
-started without using a connection twice. Loops are what make a network
-robust: along a loop there are always two ways between any two of its agents.
+started without using a [connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") twice. Loops are what make a network
+robust: along a loop there are always two ways between any two of its [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.").
 Counting them needs care, because the number of different loops in a network
 can be astronomically large.
 
@@ -19,8 +19,8 @@ $$
 \text{cycle rank} = |E| - |V| + c ,
 $$
 
-with *c* the number of connected pieces (1 in every recorded frame, after the
-cleanup). This is `cycleRank` in the viewer.
+with *c* the number of connected pieces (1 in every recorded [frame](frames-and-stats.md "A whole world as a run records it after one phase: every agent, its tokens and connections."), after the
+[cleanup](one-iteration.md#cleanup "The end of every phase: only the largest connected piece of the network lives on, and the tokens of the dead are shared out.")). This is `cycleRank` in the viewer.
 
 **Example.** A square of four agents with one diagonal: |*E*| = 5,
 |*V*| = 4, *c* = 1, so 2 independent loops — the two triangles. The square
@@ -30,8 +30,8 @@ itself is their combination.
 
 `loopDensity` = `cycleRank` / |*E*|: the share of connections that are
 "spare", beyond what a tree would need. 0 is a tree; values near 1 a densely
-interwoven network. A settled baseline world has about 0.42 at 100,000
-tokens, 0.38 at 10,000.
+interwoven network. A settled [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") world has about 0.42 at 100,000
+[tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes."), 0.38 at 10,000.
 
 ## Pieces
 
@@ -54,6 +54,6 @@ a tree ([Core, trees and leaves](core-trees-leaves.md)).
 
 ← [Bridges](bridges.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Cut risk](cut-risk.md) →
 
-> [!info]- Pages that link here (4)
-> [The core of a world](the-core-of-a-world.md) · [The geometry of a world](the-geometry-of-a-world.md) · [What a run records](frames-and-stats.md) · [What the viewer can colour by](viewer-colours.md)
+> [!info]- Pages that link here (6)
+> [Glossary](glossary.md) · [The core of a world](the-core-of-a-world.md) · [The geometry of a world](the-geometry-of-a-world.md) · [The health bar](health-bar.md) · [What a run records](frames-and-stats.md) · [What the viewer can colour by](viewer-colours.md)
 <!-- /turns -->

@@ -56,12 +56,17 @@ const Markdown = {
       .replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g,
         (_, alt, src) => keep(`<img src="${src}" alt="${alt.replace(/"/g, '&quot;')}" loading="lazy">`));
 
+    // A link may carry a title, `[Gini](gini-coefficient.md "How unequal…")`, shown
+    // on hover: the notebook's links to its terms say in a line what the term is.
     out = out
-      .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (_, label, href) => href.startsWith('#')
-        ? `<a href="${href}">${label}</a>`
-        : /^[a-z]+:/i.test(href)
-          ? `<a href="${href}" target="_blank" rel="noopener">${label}</a>`
-          : `<a href="${href}" data-md="${href}">${label}</a>`)
+      .replace(/\[([^\]]+)\]\(([^)\s]+)(?:\s+"([^"]*)")?\)/g, (_, label, href, title) => {
+        const said = title ? ` title="${title}"` : '';
+        return href.startsWith('#')
+          ? `<a href="${href}"${said}>${label}</a>`
+          : /^[a-z]+:/i.test(href)
+            ? `<a href="${href}" target="_blank" rel="noopener"${said}>${label}</a>`
+            : `<a href="${href}" data-md="${href}"${said}>${label}</a>`;
+      })
       .replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>')
       .replace(/(^|[^*])\*([^*\n]+)\*(?!\*)/g, '$1<em>$2</em>');
 

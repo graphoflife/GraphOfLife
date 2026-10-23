@@ -1,10 +1,10 @@
 # Who dies, and why
 
 > [!question] Questions of this page
-> - In how many ways can an agent die, and which of them does a world need?
+> - In how many ways can an [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") die, and which of them does a world need?
 > - What happens when agents can stake themselves to death — and when they
 >   cannot?
-> - What does protecting an agent's last token do to who is left to play?
+> - What does protecting an agent's last [token](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") do to who is left to play?
 > - Why should every agent die of age?
 
 <!-- experiment E15 -->
@@ -16,15 +16,15 @@ lives as long as its births replace its deaths, and that most of its deaths
 were agents cut off by the cull. [A world that cannot break](a-world-that-cannot-break.md)
 built rules under which nobody is cut off. What is left is the other way to
 die — starving, by staking one's last token away — and a question the
-baseline never had to ask: which deaths does a world *need*?
+[baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") never had to ask: which deaths does a world *need*?
 
 Deaths matter twice. They make room: a world of fixed tokens has new agents
 only where old ones have gone. And they are where selection can act on whole
-agents rather than on the brains they carry. But a death can also carry no
+agents rather than on the [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") they carry. But a death can also carry no
 information at all — an agent that dies because a link lapsed somewhere, or
 because it was born with one token and spent it — and such deaths only add
-noise. This page asks what each rule of death does, using the pilots that
-led to B2, and plans Experiment 15 to test it.
+noise. This page asks what each rule of death does, using the [pilots](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") that
+led to [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death."), and plans Experiment 15 to test it.
 
 ## Ways to die
 
@@ -32,7 +32,7 @@ In the baseline an agent dies in one of four ways
 ([Births and the four ways to die](births-and-deaths.md)): it
 **starves** — holds no tokens — or it is **cut off** from the largest piece,
 after either of the two phases. B2 adds a fifth: it dies of **age**, when it
-has lived [`max_age`](settings.md#max_age) iterations. Winning a
+has lived [`max_age`](settings.md#max_age) [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."). Winning a
 node does not kill anyone. It replaces the node's brain; the agent, its age
 and its links stay
 ([Questioning the mechanics](questioning-the-mechanics.md#two-roads-of-inheritance) calls
@@ -41,17 +41,17 @@ agents bodies and brains what moves between them).
 ## Children as missiles
 
 The first pilots of [A world that cannot break](a-world-that-cannot-break.md)'s rules joined every newborn to its parent and
-two of its neighbours and mended every death. The worlds never split — and
-still shrank, with 30 to 60% of their agents starving in a single game. The
+two of its [neighbours](the-world.md#the-network "An agent joined to another by a connection.") and mended every death. The worlds never split — and
+still shrank, with 30 to 60% of their agents starving in a single [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."). The
 starving were children: 46% of them were born that very iteration, 83% at
 most two iterations before, and they held one or two tokens, which they staked
 in full on a neighbour.
 
 A parent that gives a child one token and lets it stake everything spends the
 child as a **missile**. If the stake wins the neighbour's node, the node goes
-to the child's brain — which is the parent's lineage. If it loses, the lineage
+to the child's brain — which is the parent's [lineage](families.md "A line of descent: the agents whose genotypes go back to one ancestor."). If it loses, the lineage
 has lost a token. It is a cheap attack, and evolution found it. Mending made
-it worse: every starved child's neighbours were joined up, so degrees climbed
+it worse: every starved child's neighbours were joined up, so [degrees](degree.md "The number of an agent's connections: how many neighbours it has.") climbed
 to 11–14 links, every agent's stake was split over more neighbours, and more
 of them starved. Letting a newborn keep everything at home in its first game
 only delayed the missile by a game.
@@ -75,7 +75,7 @@ lose nothing that matters to it; seeing brains do exactly that, and the
 agents they attack are left with the token they could not lose. Such
 **zombies** cannot have children, and still each take a place.
 
-Without the rule, the same worlds starved: both pilot seeds were down to a
+Without the rule, the same worlds starved: both pilot [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") were down to a
 single agent holding all 5,000 tokens by iteration 300.
 
 ## A share kept at home
@@ -109,7 +109,7 @@ way brains spread. But the worlds found an exploit: one agent gathered 57% of
 all the tokens, staked all of them at home where nobody could outbid them, and
 had child after child, while everyone else held a single token — a **queen**.
 With *h* = 1.5, as in B2, and a share kept at home, no queen formed in the
-pilots (the Gini coefficient of tokens stayed near 0.5), and conquest settled
+pilots (the [Gini coefficient](gini-coefficient.md "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") of tokens stayed near 0.5), and conquest settled
 between a few and about ten per cent of the nodes a game.
 
 ## Old age
@@ -121,7 +121,7 @@ world of fixed tokens, a world without deaths has no room for births.
 
 So in B2 every agent dies when it reaches age 100
 ([`max_age`](settings.md#max_age)); its tokens are shared out like any
-estate and its neighbourhood is mended. That makes a world's demography
+[estate](estate.md "The tokens a dead agent leaves, and who gets them.") and its neighbourhood is mended. That makes a world's demography
 simple. Every agent lives exactly 100 iterations, so a world keeps its size
 only if one agent in a hundred has a child in every iteration — and in the ten
 B2 worlds of Experiment 14, from iteration 200 to 1,000, births ran at 1.00
@@ -271,7 +271,7 @@ The births tell the rules apart most plainly. Wherever agents die at 100, a
 world settles where one agent in a hundred has a child in every iteration —
 what a life of 100 iterations needs to keep a world's size — whatever is kept
 at home. Without old age, births fall to about one in ten thousand by
-iteration 1,000: the founders hold every place and nobody has room for a
+iteration 1,000: the [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.") hold every place and nobody has room for a
 child. With children of any size they come in waves a hundred iterations
 apart: a world fills at once with one-token children, they grow old together,
 die in the same iteration, and are replaced at once.
@@ -292,7 +292,7 @@ die in the same iteration, and are replaced at once.
 > **To make it again:** `python3 book_figures.py whodies`.
 <!-- /figure -->
 
-| rule of death | agents | at a single token | the median agent's tokens | Gini | births per 100 agents an iteration | brains of 1,000 against 500 |
+| rule of death | agents | at a single token | the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") agent's tokens | Gini | births per 100 agents an iteration | brains of 1,000 against 500 |
 |---|---|---|---|---|---|---|
 | B2: 30% kept at home, children of at least ten tokens, death at 100 | 3,030 | 52% | 1.2 | 0.52 | 1.02 | 0.68 |
 | the last token kept | 3,688 | 77% | 1.0 | 0.57 | 1.00 | 0.54 |
@@ -304,7 +304,7 @@ Each number is the median of the ten worlds over iterations 300 to 1,000 —
 each world's mean, and for the share at a single token each world's median
 game, as the thesis asked; the last column is the share of a contested world
 that the brains of iteration 1,000 hold against those of 500 over an agent's
-lifetime (below). Keeping nothing is left out: those worlds were gone.
+[lifetime](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death.") (below). Keeping nothing is left out: those worlds were gone.
 
 <!-- figure whodies/one_token -->
 ![Agents holding a single token](../figures/whodies/one_token.svg)
@@ -396,6 +396,6 @@ as brains mixed at birth ([Mixed at birth: ten long worlds](mixed-at-birth-ten-l
 
 **Also about:** [Agents' lives: births, deaths, ages](../README.md#agents-lives-births-deaths-ages).
 
-> [!info]- Pages that link here (14)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [What the baseline world is](what-the-baseline-world-is.md) · [Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md) · [A world that cannot break](a-world-that-cannot-break.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Where the tokens flow](where-the-tokens-flow.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [Why evolution stops](why-evolution-stops.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [Do agents cooperate?](do-agents-cooperate.md) · [Alliances](alliances.md) · [Rules without numbers](rules-without-numbers.md) · [Who inherits?](who-inherits.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (17)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [What the baseline world is](what-the-baseline-world-is.md) · [Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md) · [A world that cannot break](a-world-that-cannot-break.md) · [The estate of the dead](estate.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Where the tokens flow](where-the-tokens-flow.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [Eras and contests: does a world keep getting better?](eras-and-contests.md) · [Why evolution stops](why-evolution-stops.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [Do agents cooperate?](do-agents-cooperate.md) · [Alliances](alliances.md) · [Rules without numbers](rules-without-numbers.md) · [Who inherits?](who-inherits.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

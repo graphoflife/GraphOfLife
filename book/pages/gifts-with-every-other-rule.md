@@ -1,35 +1,35 @@
 # Gifts, with every other rule
 
 > [!question] Questions of this page
-> - With gifts, an agent may hand tokens to its neighbours. What do gifts do
+> - With gifts, an [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") may hand [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") to its [neighbours](the-world.md#the-network "An agent joined to another by a connection."). What do gifts do
 >   to a world, whatever its other rules?
 > - Are gifts given much, to whom, and do they come back?
 
 With [`allow_gifting`](settings.md#allow_gifting) an agent may, in
 the reproduction phase, hand some of what its child left it to its
 neighbours; with it here, as in batch S, unused links are cut after
-reproduction once unused for an iteration, so that a gift can keep a link
+reproduction once unused for an [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."), so that a gift can keep a link
 alive ([The switches the world was built with](the-switches-the-world-was-built-with.md)). (These are
 gifts an agent chooses to make — not the failed stakes that
 [Gliders, and who helps whom](gliders-and-who-helps-whom.md) calls gifts, which end up with
-a node's holder.) In B2 alone, [The switches the world was built with](the-switches-the-world-was-built-with.md) found gifts changing nothing the
+a node's holder.) In [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.") alone, [The switches the world was built with](the-switches-the-world-was-built-with.md) found gifts changing nothing the
 network shows, and the author asked for gifts combined with every other
 mechanism (16 October 2026): batch T plays B2 with gifts together with each
-of 21 other rules — and B1 with gifts, with revolutions and without — two
-seeds each, 1,000 iterations, every world the fourth corner of a two-by-two
+of 21 other rules — and [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") with gifts, with [revolutions](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.") and without — two
+[seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") each, 1,000 iterations, every world the fourth corner of a two-by-two
 whose other corners are B2, B2 with gifts alone, and B2 with the other rule
 alone.
 
 ## How much is given
 
-In nine worlds of seed 1 the games were recorded over 200 iterations from
+In nine worlds of seed 1 the [games](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") were recorded over 200 iterations from
 iteration 1,000 (`research/oee/checks/gifts.py`). **Gifts are small.** In a
 game, 0.12% to 0.35% of the world's tokens change hands as gifts, given by
-0.16% to 0.52% of the agents — except where the estate of the dead goes to
+0.16% to 0.52% of the agents — except where the [estate](estate.md "The tokens a dead agent leaves, and who gets them.") of the dead goes to
 the newborns or the parents, where 1.2% and 1.6% of the tokens are given, by
 1.1% and 1.6% of the agents. A gift is 1.2 to 2.2 tokens on average. Gifts run downhill,
 64% to 87% of them from the richer of the two agents to the poorer; they go to
-an agent of the giver's own genotype no more often than to anyone else (10%
+an agent of the giver's own [genotype](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.") no more often than to anyone else (10%
 to 35% of gift tokens, against 11% to 34% by chance); and they come back less
 often than chance would have them (3% to 41% of gifts answered within ten
 games, against 10% to 65%). Two thirds to nine tenths of gift tokens go
@@ -55,12 +55,12 @@ keeping alive.
 > **To make it again:** `python3 book_figures.py giftcombos`.
 <!-- /figure -->
 
-**For most rules, nothing much.** Over the 21 rules and two seeds, the median
+**For most rules, nothing much.** Over the 21 rules and two seeds, the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.")
 change is +0.002 in the share of agents holding three tokens or fewer, −0.03
-in the diversity score, no mark of the health bar, and about a hundred agents
+in the [diversity score](diversity-score.md "How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes."), no mark of the [health bar](health-bar.md "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4."), and about a hundred agents
 more.
 
-**With brains mixed at birth, gifts cost riches**: 11 and 17 more of every
+**With [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") mixed at birth, gifts cost riches**: 11 and 17 more of every
 hundred agents hold three tokens or fewer, and the worlds hold 710 and 540
 agents more. A gift from a rich agent to a poor one is a little of what makes
 a mixed world rich spread back out.

@@ -2,8 +2,8 @@
 
 This notebook is a research programme, written down while it is carried out. It
 asks what the Graph of Life algorithm actually does — and whether it can be
-made to keep producing new things without end, which is what *open-ended
-evolution* means. [What this notebook is about](pages/what-this-notebook-is-about.md)
+made to keep producing new things without end, which is what *[open-ended
+evolution](pages/open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.")* means. [What this notebook is about](pages/what-this-notebook-is-about.md)
 says why.
 
 It is written to be **read on its own**, from any page. The pages are sorted
@@ -36,6 +36,8 @@ everything can be checked with it.
 What this notebook is about, how to read it, and the question behind it: can evolution in a simulated world go on without end?
 
 - [What this notebook is about](pages/what-this-notebook-is-about.md)
+- [Glossary](pages/glossary.md)
+- [How this notebook is written](pages/how-this-notebook-is-written.md)
 - [The ideas this builds on](pages/the-ideas-this-builds-on.md)
 
 ### How the simulation works
@@ -64,6 +66,7 @@ The rules of a world, step by step: tokens, agents and links, the game, births a
 
 The two standard worlds every experiment starts from: B1, the original rules, and B2, a world that cannot break, and how it was built.
 
+- [B1 and B2: the two baselines](pages/b1-and-b2.md)
 - [What the baseline world is](pages/what-the-baseline-world-is.md)
 - [Thirty worlds](pages/thirty-worlds.md)
 - [A world's life](pages/a-worlds-life.md)
@@ -81,6 +84,7 @@ Who is born, who dies and when, how old agents get, and how a world's ages chang
 - [How ages change over a world's life](pages/how-ages-change.md)
 - [How agents have children](pages/how-agents-have-children.md)
 - [Births and the four ways to die](pages/births-and-deaths.md)
+- [The estate of the dead](pages/estate.md)
 - [Age and lifetime](pages/age-and-lifetime.md)
 - [Reproduction statistics](pages/reproduction-statistics.md)
 
@@ -106,6 +110,7 @@ How the game is played, where tokens flow, which loops they go round, and the gr
 
 - [Where tokens go](pages/where-tokens-go.md)
 - [How the game is played](pages/how-the-game-is-played.md)
+- [The even split](pages/even-split.md)
 - [Where the tokens flow](pages/where-the-tokens-flow.md)
 - [What crosses a connection](pages/what-crosses-a-connection.md)
 - [Flow modules: the groups tokens stay in](pages/flow-modules.md)
@@ -129,6 +134,7 @@ Degrees, cores, bridges, power laws and cuts: what shape the links take, and how
 - [The geometry of a world](pages/the-geometry-of-a-world.md)
 - [How a world breaks](pages/how-a-world-breaks.md)
 - [Degree](pages/degree.md)
+- [Stars and hubs](pages/stars-and-hubs.md)
 - [Preferential attachment and its kernel](pages/preferential-attachment.md)
 - [Clustering](pages/clustering.md)
 - [Path length](pages/path-length.md)
@@ -148,6 +154,7 @@ Whether a world is a space, of how many dimensions, what folds it, and the physi
 - [Physical inspiration](pages/physical-inspiration.md)
 - [Like next to like](pages/like-next-to-like.md)
 - [How many dimensions does a world have?](pages/how-many-dimensions-does-a-world-have.md)
+- [The random twin: is a world a space?](pages/random-twin.md)
 - [Worlds of 100,000 tokens](pages/worlds-of-100000-tokens.md)
 - [What folds a world](pages/what-folds-a-world.md)
 - Dimensions at scale — *not written yet*
@@ -193,6 +200,7 @@ What the brains are and compute, the families they make, and how different agent
 How to tell whether evolution goes on, why it stops, and what would count as open-ended evolution.
 
 - [What the measurements say about open-ended evolution](pages/what-the-measurements-say-about-open-ended-evolution.md)
+- [Eras and contests: does a world keep getting better?](pages/eras-and-contests.md)
 - [How to tell a world that keeps evolving](pages/how-to-tell-a-world-that-keeps-evolving.md)
 - [Why evolution stops](pages/why-evolution-stops.md)
 - [How fast should brains change?](pages/how-fast-should-brains-change.md)
@@ -248,6 +256,8 @@ The search for a world that is decentralised, resilient, about three-dimensional
 
 - [Healthy and rich](pages/healthy-and-rich.md)
 - [What makes a world interesting](pages/what-makes-a-world-interesting.md)
+- [The health bar](pages/health-bar.md)
+- [The diversity score](pages/diversity-score.md)
 - [Mixed at birth: ten long worlds](pages/mixed-at-birth-ten-long-worlds.md)
 - [Five mixed worlds, fifty thousand iterations](pages/five-mixed-worlds-fifty-thousand-iterations.md)
 - [Mixed at birth, with parents as mates](pages/mixed-at-birth-with-parents-as-mates.md)
@@ -263,6 +273,7 @@ The search for a world that is decentralised, resilient, about three-dimensional
 How runs are recorded and measured, the statistics the notebook uses, and every simulation made.
 
 - [Every world side by side](pages/every-world-side-by-side.md)
+- [The lab, the engine and pilots](pages/the-lab.md)
 - [How worlds are measured](pages/how-worlds-are-measured.md)
 - [One world, many colours](pages/one-world-many-colours.md)
 - [What a simulation costs](pages/what-a-simulation-costs.md)
@@ -300,13 +311,13 @@ How runs are recorded and measured, the statistics the notebook uses, and every 
 Three steps, over and over.
 
 1. **A plan.** An experiment's plan (`book/experiments/E…json`) fixes the
-   settings, the size of the world, the seeds and how long each run goes —
+   settings, the size of the world, the [seeds](pages/random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") and how long each run goes —
    and a **thesis**: what is expected, why, and what would show it wrong. The
    thesis is written down before any of its runs exist, and the page
    quotes it from the plan, so it cannot be reworded once the results are
    in.
 2. **The runs.** On a computer running `gol_server.py`, the page has a ▶
-   button in the Research Notebook tab. The lab then runs the experiment's simulations,
+   button in the Research Notebook tab. The [lab](pages/the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") then runs the experiment's simulations,
    several at a time, each in a process of its own, and says how long is
    left. It can be paused and continued at any time.
 3. **The results.** The finished runs are analysed, the figures drawn, and
@@ -319,7 +330,7 @@ from another side.
 ## The rules
 
 - **One change at a time.** Every experiment changes one setting of a stated
-  baseline ([Every setting](pages/settings.md)) and keeps everything else.
+  [baseline](pages/b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") ([Every setting](pages/settings.md)) and keeps everything else.
 - **The thesis comes first.** It is fixed in the plan before the runs start.
 - **Enough seeds.** A difference seen in fewer than thirty seeds per
   condition is called *indicative*, not an effect: results in this project
@@ -335,7 +346,7 @@ from another side.
   anywhere, so where the worlds of a condition end up is measured over the
   worlds that lived to the end, and the dead are reported beside them as an
   outcome of their own ([When a world ends](pages/extinction.md)).
-- **A run is measured over its settled life**, from iteration 500 to its end
+- **A run is measured over its settled life**, from [iteration](pages/one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") 500 to its end
   ([The settled life](pages/settled-life.md)).
 - **Runs are shared.** A run is named for what it is — baseline, world size,
   what differs, seed — so an experiment that needs runs which already exist

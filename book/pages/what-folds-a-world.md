@@ -1,24 +1,24 @@
 # What folds a world
 
 > [!question] Questions of this page
-> - [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) found B1's
->   worlds to be spaces, with a dimension of their own. Are B2's worlds, and
+> - [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) found [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.")'s
+>   worlds to be spaces, with a [dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") of their own. Are [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.")'s worlds, and
 >   the others the notebook has made since, spaces too?
 > - When does a world become a space, and when does it lose it?
 > - Which rules decide it?
 
 One aim of this notebook is a world that makes its own space: a network in which
-every agent has neighbours, the neighbours have neighbours, and the whole is
+every [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") has [neighbours](the-world.md#the-network "An agent joined to another by a connection."), the neighbours have neighbours, and the whole is
 a space of a few dimensions — three, if it can be
 ([Physical inspiration](physical-inspiration.md)). [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) measured B1's worlds
 with two rulers and found them spaces: the number of agents within *r* steps
 of a typical agent grows as a power of *r*, about *r*² to *r*³, and a
-**random twin** of each world — exactly the same number of links at every
+**[random twin](random-twin.md "A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all.")** of each world — exactly the same number of links at every
 agent, wired at random — does not: its balls grow by a factor every step,
 the mark of a small world, which has no dimension at all. B2, the world that
 cannot break ([A world that cannot break](a-world-that-cannot-break.md)), has been the
-baseline of everything since. Its network has only been read through one
-number on the health bar, a dimension by ball growth over radii 1 to 5 —
+[baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") of everything since. Its network has only been read through one
+number on the [health bar](health-bar.md "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4."), a dimension by ball growth over radii 1 to 5 —
 and that number rose with a world's size
 ([What holds a world's size](what-holds-a-worlds-size.md)), as a small world's would.
 
@@ -57,9 +57,9 @@ of its size, the twin's only as the logarithm.
   the world's 3,400 agents. It needs 5.0 steps to reach half the world, its
   twin 4.2: a typical distance of 1.18. Each step multiplies its ball by
   four to six, its twin's by five to seven.
-- **Brains mixed at birth do not change that**: Experiment 17's worlds read
+- **[Brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") mixed at birth do not change that**: Experiment 17's worlds read
   1.21, at 630 agents.
-- **But B2 with the estate of the dead going to the newborns or to the
+- **But B2 with the [estate](estate.md "The tokens a dead agent leaves, and who gets them.") of the dead going to the newborns or to the
   parents** ([Who inherits?](who-inherits.md)) **is a space, and one of about
   three dimensions.** Its local dimension rises to 3.1 at radius 3, 3.5 at 4
   to 5, and falls back to 2.7 by radius 7; a typical agent needs 11.2 steps
@@ -75,7 +75,7 @@ of its size, the twin's only as the logarithm.
 A small world's rulers run out of room within a few steps, and a space only
 shows its dimension where it has room
 ([How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)). So a B2 world of
-100,000 tokens was played for 1,000 iterations (a pilot, seed 1,
+100,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") was played for 1,000 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") (a [pilot](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds."), [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1,
 `GraphOfLifeRuns/.pilots/BIG/B2-100000-s1`): at the end it held 30,686
 agents, nine times B2's usual 3,400.
 
@@ -166,7 +166,7 @@ worlds unfold although they mend as B2 does, is not settled here, but two
 differences point one way:
 
 - **Who breeds.** With an estate in hand, a newborn has its first child
-  within a few iterations: at a birth, the median parent is two or three
+  within a few iterations: at a birth, the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") parent is two or three
   iterations old, against 18 and 28 in B2, and agents under 30 have nearly
   as many living children as the old (0.74 to 0.78 each, against 0.30 to
   0.38 in B2). The world grows as chains of short generations.
@@ -179,7 +179,7 @@ differences point one way:
 The estate to an agent's own children, which reaches heirs of every age,
 changes neither — parents are 26 iterations old at a birth, as in B2 — and
 its worlds fold as B2's do, to 1.18 and 1.19. The neighbours of the
-unfolded worlds are also more alike in age (a correlation of birth times
+unfolded worlds are also more alike in age (a [correlation](correlation.md "Whether two quantities go up and down together, from −1 to 1.") of birth times
 across links of +0.8, against +0.45 in B2), and their links per agent a
 little fewer (4.7 to 4.9, against 5.4 to 5.7). Which of these is the cause,
 worlds that differ in so much cannot say; worlds without brains can
@@ -205,7 +205,7 @@ worlds that differ in so much cannot say; worlds without brains can
 <!-- /figure -->
 
 Read at iteration 1,000, 395 worlds — every pilot batch, the first round of
-the search by elimination, and the lab's B2 families at 10,000 tokens — fall
+the search by elimination, and the [lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s B2 families at 10,000 tokens — fall
 into two groups:
 
 - **Folded**: the 235 worlds of B2 with other rules (a median typical
@@ -296,7 +296,7 @@ breeding come nearest.
 The same rule was then given to worlds with brains (pilot batch YB, a switch
 of the prototype, `breeders`): only agents at the median age of the living
 or younger may have a child, or only those older than it — in B2, two seeds
-to 2,000 iterations, and in B2 with brains mixed at birth. Founders are all
+to 2,000 iterations, and in B2 with brains mixed at birth. [Founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.") are all
 of one age, so in a world started afresh nobody is older than the median and
 nobody breeds; the old were therefore given B2's world of seed 1 at
 iteration 500 and played on from there, beside the young from the same
@@ -376,6 +376,6 @@ puts the line between folded and not.
 
 **Also about:** [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world).
 
-> [!info]- Pages that link here (13)
-> [What holds a world's size](what-holds-a-worlds-size.md) · [Births as rich as the neighbours](births-as-rich-as-the-neighbours.md) · [Rules in company](rules-in-company.md) · [Who inherits?](who-inherits.md) · [Handover, with every other rule](handover-with-every-other-rule.md) · [Healthy and rich](healthy-and-rich.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md) · [The candidates, played on](the-candidates-played-on.md) · [Five more seeds for the rules that held](five-more-seeds-for-the-rules-that-held.md) · [Room for the steadiest world](room-for-the-steadiest-world.md) · [A screen of random worlds](a-screen-of-random-worlds.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (15)
+> [The random twin: is a world a space?](random-twin.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [Births as rich as the neighbours](births-as-rich-as-the-neighbours.md) · [Rules in company](rules-in-company.md) · [Who inherits?](who-inherits.md) · [Handover, with every other rule](handover-with-every-other-rule.md) · [Healthy and rich](healthy-and-rich.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The health bar](health-bar.md) · [Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md) · [The candidates, played on](the-candidates-played-on.md) · [Five more seeds for the rules that held](five-more-seeds-for-the-rules-that-held.md) · [Room for the steadiest world](room-for-the-steadiest-world.md) · [A screen of random worlds](a-screen-of-random-worlds.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

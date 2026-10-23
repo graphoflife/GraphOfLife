@@ -1,21 +1,21 @@
 # Five mixed worlds, fifty thousand iterations
 
 > [!question] Questions of this page
-> - A world whose brains are mixed at birth was healthy and rich for 10,000
->   iterations. Is that a state it keeps, or one it passes through?
+> - A world whose [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") are mixed at birth was healthy and rich for 10,000
+>   [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."). Is that a state it keeps, or one it passes through?
 > - What does such a world do over 50,000 iterations: does its size keep
->   drifting, does it die out, does it end up as poor as B2?
+>   drifting, does it die out, does it end up as poor as [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.")?
 
 <!-- experiment E18 -->
 
 ## Why ask
 
 The author's picture of a world that might keep evolving is a decentralised,
-resilient, nearly three-dimensional network of agents that differ in almost
+resilient, nearly three-dimensional network of [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") that differ in almost
 every way ([Healthy and rich](healthy-and-rich.md)). Whatever else such a
 world does, it has to *last*: a world that meets the picture for 10,000
 iterations and then shrinks to nothing, or fills up with agents holding a
-token each, is not a world that keeps evolving. The author asked for the most
+[token](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") each, is not a world that keeps evolving. The author asked for the most
 promising settings to be run for a long time, and this is that run.
 
 [Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md) ran B2 with brains mixed at
@@ -27,10 +27,10 @@ the question open:
   in B2, so the world never fills up to the point where almost nobody can
   afford a child, as B2's does.
 - **Their size drifts, and their health and riches follow it.** With 10,000
-  tokens, a world of 2,000 agents is a poor one, and its network's dimension
+  tokens, a world of 2,000 agents is a poor one, and its network's [dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.")
   rises above the bar's 4; a world below 300 agents has a best-connected agent
   joined to more than 5% of the others. Worlds of 600 to 1,000 agents met
-  every mark of the health bar at 98% of the moments they were kept whole.
+  every mark of the [health bar](health-bar.md "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.") at 98% of the moments they were kept whole.
 - **One world in ten died out**, at iteration 5,376, after shrinking for
   nearly three thousand iterations from 1,424 agents; two others fell below a
   hundred agents — to 40 and to 91 — and came back.
@@ -42,8 +42,8 @@ range of sizes. Fifty thousand will show whether that range has edges.
 ## The experiment
 
 Experiment 18 takes the five worlds of Experiment 17 that met every mark of
-the health bar at iteration 10,000 — seeds 2, 4, 5, 6 and 10 — and plays them
-on to iteration 50,000. They are the same runs: the lab goes on from each
+the health bar at iteration 10,000 — [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 2, 4, 5, 6 and 10 — and plays them
+on to iteration 50,000. They are the same runs: the [lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") goes on from each
 one's checkpoint at 10,000 with the engine that made it, and records as
 before, the graph statistics every 25 iterations and a whole world every 500.
 Nothing is changed, so the first 10,000 iterations are [Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md)'s.
@@ -51,7 +51,7 @@ Nothing is changed, so the first 10,000 iterations are [Mixed at birth: ten long
 When the plan was written (16 October 2026), the five worlds stood like this
 at iteration 10,000:
 
-| world | agents | median tokens | 3 tokens or fewer | moments with every mark, of 20 (500 to 10,000) | its fewest and most agents, 500 to 10,000 |
+| world | agents | [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") tokens | 3 tokens or fewer | moments with every mark, of 20 (500 to 10,000) | its fewest and most agents, 500 to 10,000 |
 |---|---|---|---|---|---|
 | seed 2 | 744 | 11 | 6% | 16 | 337–1,437 |
 | seed 4 | 628 | 11 | 20% | 17 | 337–1,371 |
@@ -61,7 +61,7 @@ at iteration 10,000:
 
 The worlds are read as [Healthy and rich](healthy-and-rich.md) reads every
 world, every 500 iterations, from the whole worlds the lab keeps. A run
-records every game, so the five runs will take about 16 GB more disk; on the
+records every [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."), so the five runs will take about 16 GB more disk; on the
 lab's four workers, the panel's estimate says how long.
 
 ## The thesis
@@ -202,7 +202,7 @@ seed 6, at 43%, ended alive and richer than half.
 
 The marks a world misses follow its size, as
 [Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md#the-marks-a-world-misses)
-found: the worlds that died missed the hub mark while they were small, and the
+found: the worlds that died missed the [hub](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.") mark while they were small, and the
 two that lived missed only the dimension, at every one of their moments that
 missed a mark — 50 of 80 each — with 1,300 to 2,300 agents and a dimension of
 3.8 to 4.3. The riches follow the size too: the dead worlds were rich to the
@@ -261,7 +261,7 @@ did no better in seed 4 (45%); the brains of 50,000 took 55% from those of
 25,000 in seed 5, and lost to them in seed 6 (42%). Over the first 10,000
 iterations the mixed worlds' later brains had won 84%, then 66%, then 54%
 ([Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md#does-evolution-go-on)):
-the steps shrink towards nothing, and in the long run a later era is as likely
+the steps shrink towards nothing, and in the long run a later [era](eras-and-contests.md "Brains of a world at two moments, its eras, played against each other: do the later ones win?") is as likely
 to lose as to win.
 
 Before the collapses the contests differ from world to world. In seed 10 the
@@ -270,7 +270,7 @@ the brains that let the world die out were winners: selection itself carried
 it to its end, what biologists call **evolutionary suicide**. In seed 4 the
 last brains lost to their forebears (21%), and in seed 2 they tied (48%). One
 world in three is not a law; it is enough to say that a mixed world can be
-led to extinction by the very brains that win in it.
+led to [extinction](extinction.md "A world's end before its last iteration: it has dropped to its threshold of agents or fewer.") by the very brains that win in it.
 
 ## What it teaches
 

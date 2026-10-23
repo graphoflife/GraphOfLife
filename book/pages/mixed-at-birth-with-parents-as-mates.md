@@ -1,8 +1,8 @@
 # Mixed at birth, with parents as mates
 
 > [!question] Questions of this page
-> - Mixed worlds die out because their agents stop having children. Is that
->   because a mate spreads its brain for free?
+> - Mixed worlds die out because their [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") stop having children. Is that
+>   because a mate spreads its [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") for free?
 > - If only an agent that has a child of its own may be a mate, does a mixed
 >   world stay alive — and stay rich?
 
@@ -10,9 +10,9 @@
 
 ## Why ask
 
-Brains mixed at birth made the richest healthy worlds the notebook has found
+Brains mixed at birth made the richest [healthy worlds](what-makes-a-world-interesting.md "A world that meets the six criteria of the screen of random worlds; an interesting one misses at most one.") the notebook has found
 ([Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md)) — and mortal ones: three
-of the five that met every mark at 10,000 iterations died out before 40,000
+of the five that met every mark at 10,000 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") died out before 40,000
 ([Five mixed worlds, fifty thousand iterations](five-mixed-worlds-fifty-thousand-iterations.md)). Each died
 the same way. Every agent lives its hundred iterations, a world has to see one
 birth per hundred agents every iteration to keep its size, and these worlds
@@ -20,11 +20,11 @@ fell below that line and stayed below, though many of their agents could have
 afforded a child.
 
 [What holds a world's size](what-holds-a-worlds-size.md) offers a reason. A newborn's
-mixed brain is half its parent's and half a mate's — a neighbour, drawn at
+mixed brain is half its parent's and half a mate's — a [neighbour](the-world.md#the-network "An agent joined to another by a connection."), drawn at
 random, who pays nothing for the child. So an agent that never breeds still
 spreads its brain through other agents' children, while the parent pays the
 whole price for half a brain's worth of offspring. Selection then rewards
-keeping tokens over spending them on children, and nothing stops the
+keeping [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") over spending them on children, and nothing stops the
 reluctance at the point where the world can no longer replace its dead.
 
 If that is the reason, it can be taken away: let only a parent — a neighbour
@@ -33,9 +33,9 @@ for an agent that never breeds.
 
 ## What the pilots found
 
-The engine's setting [`mix_mates`](settings.md#mix_mates) = `parents`
+The [engine](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s setting [`mix_mates`](settings.md#mix_mates) = `parents`
 does this; a parent with no such neighbour gives its newborn a copy of its own
-brain. Four pilot worlds of batch MP played it, seeds 1 to 4, beside
+brain. Four [pilot](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds of batch MP played it, [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1 to 4, beside
 Experiment 17's mixed worlds of the same seeds:
 
 | seed | agents at 5,000, any mate / parents | 3 tokens or fewer at 5,000 | births per hundred able agents an iteration | spread of the logarithm of the size, 500 to 5,000 |
@@ -54,12 +54,12 @@ iterations, four pilots of 5,000 cannot say.
 
 ## The experiment
 
-Experiment 19 runs B2 at 10,000 tokens with brains mixed at birth and parents
+Experiment 19 runs [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.") at 10,000 tokens with brains mixed at birth and parents
 as mates, ten seeds, for 20,000 iterations each — twice as long as Experiment
 17, long enough for the deaths of Experiment 18 to have begun. It records as
 the lab records every run: the graph statistics every 25 iterations and a
 whole world every 500, so that each world can be read at any of those moments
-as [Healthy and rich](healthy-and-rich.md) reads every world, and its brains of one era played against those of
+as [Healthy and rich](healthy-and-rich.md) reads every world, and its brains of one [era](eras-and-contests.md "Brains of a world at two moments, its eras, played against each other: do the later ones win?") played against those of
 another. Experiment 17's ten worlds, with any neighbour as a mate, are the
 comparison.
 
@@ -186,13 +186,13 @@ survivors of Experiment 18 arrived.
 **Six in ten are poor.** At iteration 20,000, 55% to 66% of each world's
 agents hold three tokens or fewer. That is richer than any of B2's worlds —
 the least poor of its ten held 66% at 10,000 iterations — but far poorer
-than Experiment 17's mixed worlds, whose median world held 15% at 10,000,
+than Experiment 17's mixed worlds, whose [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world held 15% at 10,000,
 and as poor as only the poorest two of them.
 
-**As diverse as mixed worlds.** Their diversity score at 20,000 is 0.59 at
+**As diverse as mixed worlds.** Their [diversity score](diversity-score.md "How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes.") at 20,000 is 0.59 at
 the median (0.52 to 0.69) — as high as Experiment 17's worlds at 10,000
 (0.58), and above B2's ten worlds played on to 10,000 (0.49). Part of that is
-built in: every mixed birth makes a new genotype
+built in: every mixed birth makes a new [genotype](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.")
 ([Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md)).
 
 <!-- figure mixparents/breeding -->
@@ -237,7 +237,7 @@ full world is a poor one.
 > **To make it again:** `python3 book_figures.py mixparents`.
 <!-- /figure -->
 
-**Evolution goes on, as it did with any mate.** Played for a lifetime, the
+**Evolution goes on, as it did with any mate.** Played for a [lifetime](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death."), the
 brains of 1,000 beat those of 500 in every world (a median of 0.78 of a
 contested world, against 0.84 with any mate), those of 5,000 beat those of
 2,000 in every world (0.65, against 0.66), those of 10,000 beat those of 5,000
@@ -265,9 +265,9 @@ but not stopping.
 
 **The thesis holds.** No world ended before iteration 20,000, and at 20,000
 the median world holds 60% of its agents at three tokens or fewer, below the
-line of 0.66. Every world meets six of the seven marks of the health bar — and
+line of 0.66. Every world meets six of the seven marks of the [health bar](health-bar.md "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.") — and
 did at every moment kept, from 500 on, seven at nearly a quarter of them — and
-misses the one B2's own worlds miss: a dimension between 2.3 and 4 (they read
+misses the one B2's own worlds miss: a [dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") between 2.3 and 4 (they read
 4.1 to 4.3).
 
 Two things the thesis did not ask should be said beside it. Experiment 18's

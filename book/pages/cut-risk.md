@@ -1,8 +1,8 @@
 # Cut risk
 
-Counting [bridges](bridges.md) says how many connections lie on no loop. It
+Counting [bridges](bridges.md) says how many [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") lie on no [loop](loops.md "A path through the network that comes back to where it started without using a connection twice."). It
 does not say how badly the network would break if one were cut: a bridge to a
-single leaf costs one agent, a bridge between two halves costs half the world.
+single leaf costs one [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions."), a bridge between two halves costs half the world.
 The **cut risk** measures the worst case.
 
 ## Definition
@@ -21,7 +21,7 @@ connection.
 
 ## Before and after
 
-- `cutRisk` is measured on the frame, after the phase.
+- `cutRisk` is measured on the [frame](frames-and-stats.md "A whole world as a run records it after one phase: every agent, its tokens and connections."), after the phase.
 - `cutRiskBefore` is measured on the network as it stood **before** the
   phase's cleanup removed anybody. A frame shows the world after the cull, so
   a cut that removes a whole side changes the network and the death toll at
@@ -32,7 +32,7 @@ connection.
 
 The cleanup keeps only the largest piece of the network
 ([One iteration, step by step](one-iteration.md)). A bridge with a tenth of the
-world behind it is a tenth of the world that dies the moment no token crosses
+world behind it is a tenth of the world that dies the moment no [token](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") crosses
 that one connection in a game. [How a world breaks](how-a-world-breaks.md)
 asks how often that happens.
 
@@ -48,6 +48,6 @@ every bridge costs nothing extra (`bridge_splits` and `worst_cut_share` in
 
 ← [Loops](loops.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Radius and diameter](radius-and-diameter.md) →
 
-> [!info]- Pages that link here (6)
-> [A world's life](a-worlds-life.md) · [How a world breaks](how-a-world-breaks.md) · [Bridges](bridges.md) · [Physical inspiration](physical-inspiration.md) · [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) · [What a run records](frames-and-stats.md)
+> [!info]- Pages that link here (8)
+> [Glossary](glossary.md) · [A world's life](a-worlds-life.md) · [How a world breaks](how-a-world-breaks.md) · [Bridges](bridges.md) · [Physical inspiration](physical-inspiration.md) · [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) · [The health bar](health-bar.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

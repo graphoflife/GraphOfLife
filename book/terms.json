@@ -1,0 +1,553 @@
+{
+  "about": "The notebook's terms, as an encyclopedia links its words: each with the names it goes by, the page (and section) that explains it, and a line that says what it is, shown when the pointer rests on a link to it. book_fill links the first use of every term on every page (book_fill.link_terms) and lists them all on the glossary page. A name in lower case matches with either case of its first letter, one with capitals only as written; plurals match too. `skip` names, page by page, the terms a page uses in another sense.",
+  "terms": [
+    {
+      "name": "token",
+      "page": "the-world",
+      "anchor": "agents-and-tokens",
+      "says": "The one thing of value in a world: every agent holds a whole number of them, and their total never changes."
+    },
+    {
+      "name": "agent",
+      "also": [
+        "node"
+      ],
+      "page": "the-world",
+      "anchor": "agents-and-tokens",
+      "says": "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions."
+    },
+    {
+      "name": "connection",
+      "page": "the-world",
+      "anchor": "the-network",
+      "says": "A link between two agents of the network: they are neighbours, and can stake on each other's nodes."
+    },
+    {
+      "name": "neighbour",
+      "page": "the-world",
+      "anchor": "the-network",
+      "says": "An agent joined to another by a connection."
+    },
+    {
+      "name": "founder",
+      "page": "starting-ring",
+      "says": "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts."
+    },
+    {
+      "name": "iteration",
+      "page": "one-iteration",
+      "says": "One step of a world's time: a phase of reproduction, then a phase of the game."
+    },
+    {
+      "name": "game",
+      "page": "one-iteration",
+      "anchor": "phase-2-the-game",
+      "says": "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.",
+      "not": [
+        "game theory",
+        "game for game",
+        "Game of Life",
+        "Blotto game"
+      ]
+    },
+    {
+      "name": "candidate",
+      "page": "one-iteration",
+      "anchor": "phase-1-reproduction",
+      "says": "An agent itself and each of its neighbours, the ones its brain looks at when it decides.",
+      "not": [
+        "candidate world",
+        "candidate cause",
+        "candidates that",
+        "candidate for",
+        "One candidate",
+        "five candidates",
+        "the candidates",
+        "nineteen candidates",
+        "candidates of"
+      ]
+    },
+    {
+      "name": "cleanup",
+      "page": "one-iteration",
+      "anchor": "cleanup",
+      "says": "The end of every phase: only the largest connected piece of the network lives on, and the tokens of the dead are shared out."
+    },
+    {
+      "name": "hegemon",
+      "page": "revolution",
+      "says": "The agent that made the largest single stake on a node; it wins the node unless a coalition outbids it."
+    },
+    {
+      "name": "revolution",
+      "also": [
+        "coalition"
+      ],
+      "page": "revolution",
+      "says": "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake."
+    },
+    {
+      "name": "brain",
+      "page": "the-brain",
+      "says": "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions."
+    },
+    {
+      "name": "message",
+      "page": "messages",
+      "says": "Numbers an agent writes to itself and to each neighbour every phase, which their brains read."
+    },
+    {
+      "name": "share function",
+      "page": "share-function",
+      "says": "How a brain's two numbers become one share between 0 and 1: of tokens for a child, or of a stake marked revolutionary."
+    },
+    {
+      "name": "yes-or-no decision",
+      "page": "binary-decision",
+      "says": "A decision a brain makes from two numbers: yes when the first is larger."
+    },
+    {
+      "name": "largest remainder",
+      "page": "largest-remainder",
+      "says": "How tokens are split into whole numbers: each gets the whole part of its share, and the tokens left over go to the largest fractions."
+    },
+    {
+      "name": "mutation",
+      "page": "mutation",
+      "says": "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype."
+    },
+    {
+      "name": "genotype",
+      "also": [
+        "family tree"
+      ],
+      "page": "genotype",
+      "says": "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was."
+    },
+    {
+      "name": "seed",
+      "page": "random-numbers",
+      "says": "The number that fixes every random choice of a run: the same settings and the same seed make the same world."
+    },
+    {
+      "name": "setting",
+      "page": "settings",
+      "says": "One number or switch of a run's rules, fixed before it starts.",
+      "not": [
+        "Setting the",
+        "classic setting",
+        "such a setting"
+      ]
+    },
+    {
+      "name": "extinction",
+      "also": [
+        "extinct"
+      ],
+      "page": "extinction",
+      "says": "A world's end before its last iteration: it has dropped to its threshold of agents or fewer."
+    },
+    {
+      "name": "lifetime",
+      "page": "age-and-lifetime",
+      "says": "How many iterations an agent lives, from its birth to its death.",
+      "not": [
+        "lifetime contest"
+      ]
+    },
+    {
+      "name": "B1",
+      "page": "b1-and-b2",
+      "says": "The first baseline: the algorithm exactly as a new run is offered it."
+    },
+    {
+      "name": "B2",
+      "page": "b1-and-b2",
+      "says": "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death."
+    },
+    {
+      "name": "baseline",
+      "page": "b1-and-b2",
+      "says": "The stated rules an experiment starts from and changes one thing of: B1 or B2."
+    },
+    {
+      "name": "health bar",
+      "page": "health-bar",
+      "says": "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4."
+    },
+    {
+      "name": "diversity score",
+      "page": "diversity-score",
+      "says": "How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes."
+    },
+    {
+      "name": "effective kinds of staking",
+      "page": "how-different-are-the-agents",
+      "says": "How many different ways of staking a world's brains have, when all are put in the same situations, counted by how many agents use each."
+    },
+    {
+      "name": "random twin",
+      "page": "random-twin",
+      "says": "A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all."
+    },
+    {
+      "name": "even split",
+      "page": "even-split",
+      "says": "What the rules do when a brain scores no candidate above zero: the stake is spread evenly."
+    },
+    {
+      "name": "estate",
+      "page": "estate",
+      "says": "The tokens a dead agent leaves, and who gets them."
+    },
+    {
+      "name": "hub",
+      "also": [
+        "star"
+      ],
+      "page": "stars-and-hubs",
+      "says": "An agent joined to far more agents than most; a star is a world held together by a single hub."
+    },
+    {
+      "name": "lab",
+      "also": [
+        "engine"
+      ],
+      "page": "the-lab",
+      "says": "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world."
+    },
+    {
+      "name": "pilot",
+      "page": "pilot-worlds",
+      "says": "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds."
+    },
+    {
+      "name": "cross-time tournament",
+      "also": [
+        "era"
+      ],
+      "page": "eras-and-contests",
+      "says": "Brains of a world at two moments, its eras, played against each other: do the later ones win?"
+    },
+    {
+      "name": "invasion test",
+      "page": "invasion-test",
+      "says": "A strategy planted as a patch in an evolved world: does it spread, or die out?"
+    },
+    {
+      "name": "exploitability",
+      "also": [
+        "best reply"
+      ],
+      "page": "exploitability",
+      "says": "How much better than a world's brains the best reply to them would do: zero only at the top."
+    },
+    {
+      "name": "open-ended evolution",
+      "page": "open-ended-test",
+      "says": "Evolution that keeps producing new things without end, not only up to a plateau."
+    },
+    {
+      "name": "healthy world",
+      "also": [
+        "interesting world"
+      ],
+      "page": "what-makes-a-world-interesting",
+      "says": "A world that meets the six criteria of the screen of random worlds; an interesting one misses at most one."
+    },
+    {
+      "name": "Gini coefficient",
+      "also": [
+        "Gini",
+        "Lorenz curve"
+      ],
+      "page": "gini-coefficient",
+      "says": "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all."
+    },
+    {
+      "name": "richest tenth",
+      "page": "richest-tenth",
+      "says": "The share of all tokens held by the richest tenth of the agents."
+    },
+    {
+      "name": "entropy",
+      "also": [
+        "evenness"
+      ],
+      "page": "entropy-and-evenness",
+      "says": "How evenly something is shared out among the agents, from all in one place to spread perfectly evenly."
+    },
+    {
+      "name": "share-out",
+      "page": "gains-losses-and-the-share-out",
+      "says": "How a cleanup deals the tokens of the dead out among the living: in the baseline, each token to a survivor drawn at random."
+    },
+    {
+      "name": "home stake",
+      "page": "home-stake",
+      "says": "The tokens an agent stakes on its own node, to keep it."
+    },
+    {
+      "name": "degree",
+      "page": "degree",
+      "says": "The number of an agent's connections: how many neighbours it has."
+    },
+    {
+      "name": "preferential attachment",
+      "page": "preferential-attachment",
+      "says": "The well connected gaining new connections faster than the poorly connected."
+    },
+    {
+      "name": "clustering",
+      "page": "clustering",
+      "says": "How often an agent's neighbours are also each other's neighbours."
+    },
+    {
+      "name": "path length",
+      "page": "path-length",
+      "says": "How many connections the shortest way between two agents crosses."
+    },
+    {
+      "name": "2-core",
+      "also": [
+        "hanging tree"
+      ],
+      "page": "core-trees-leaves",
+      "says": "What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them."
+    },
+    {
+      "name": "bridge",
+      "page": "bridges",
+      "says": "A connection that lies on no loop: cut it and the network falls into two pieces."
+    },
+    {
+      "name": "loop",
+      "page": "loops",
+      "says": "A path through the network that comes back to where it started without using a connection twice."
+    },
+    {
+      "name": "cut risk",
+      "page": "cut-risk",
+      "says": "The share of a world that the worst single cut, of one agent or one connection, would cut off."
+    },
+    {
+      "name": "diameter",
+      "page": "radius-and-diameter",
+      "says": "The longest of the shortest paths between two agents of a world."
+    },
+    {
+      "name": "spectral gap",
+      "page": "spectral-gap",
+      "says": "How hard a network is to cut into two halves, and how fast a walker on it forgets where it began."
+    },
+    {
+      "name": "dimension",
+      "also": [
+        "ball dimension"
+      ],
+      "page": "ball-dimension-and-curvature",
+      "says": "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space."
+    },
+    {
+      "name": "spectral dimension",
+      "page": "spectral-dimension",
+      "says": "A network's dimension read from how a random walker spreads over it."
+    },
+    {
+      "name": "box dimension",
+      "page": "box-dimension",
+      "says": "A network's dimension read from how many boxes of a given size it takes to cover it."
+    },
+    {
+      "name": "scaling relation",
+      "page": "scaling-relations",
+      "says": "How one property of an agent grows with another, as a power."
+    },
+    {
+      "name": "assortativity",
+      "page": "assortativity",
+      "says": "Whether agents tend to be joined to agents like them: the well connected to the well connected."
+    },
+    {
+      "name": "correlation length",
+      "also": [
+        "correlation function"
+      ],
+      "page": "correlation-function",
+      "says": "How far apart two agents can be and still be alike: how fast likeness fades with distance."
+    },
+    {
+      "name": "token flow",
+      "also": [
+        "net flow"
+      ],
+      "page": "token-flow",
+      "says": "The tokens a game moves along each connection, from the agent who stakes to the node staked on."
+    },
+    {
+      "name": "lightning",
+      "page": "lightning",
+      "says": "A closed loop of the flow of a game: tokens that go round and come back where they started."
+    },
+    {
+      "name": "token curvature",
+      "page": "token-curvature",
+      "says": "How much richer an agent's neighbourhood is than the agent itself."
+    },
+    {
+      "name": "circulation",
+      "page": "circulation",
+      "says": "The part of a flow that goes round in loops, as against the part that runs from sources to sinks."
+    },
+    {
+      "name": "flow module",
+      "also": [
+        "map equation"
+      ],
+      "page": "map-equation",
+      "says": "A group of agents that a token, following the flow, tends to stay inside."
+    },
+    {
+      "name": "lineage",
+      "page": "families",
+      "says": "A line of descent: the agents whose genotypes go back to one ancestor."
+    },
+    {
+      "name": "common ancestor",
+      "page": "common-ancestor",
+      "says": "The genotype every living agent descends from, and how far back it lies."
+    },
+    {
+      "name": "brain diversity",
+      "page": "brain-diversity",
+      "says": "How many different brains, or genotypes, a world holds."
+    },
+    {
+      "name": "frame",
+      "page": "frames-and-stats",
+      "says": "A whole world as a run records it after one phase: every agent, its tokens and connections.",
+      "not": [
+        "preferred frame"
+      ]
+    },
+    {
+      "name": "settled life",
+      "page": "settled-life",
+      "says": "A world from iteration 500 to its end, after its youth, where it is measured."
+    },
+    {
+      "name": "median",
+      "also": [
+        "quantile"
+      ],
+      "page": "median-and-quantiles",
+      "says": "The middle value: half of the numbers lie below it and half above."
+    },
+    {
+      "name": "correlation",
+      "page": "correlation",
+      "says": "Whether two quantities go up and down together, from −1 to 1."
+    },
+    {
+      "name": "autocorrelation",
+      "page": "autocorrelation",
+      "says": "How much a world's value now still says about its value some iterations later."
+    },
+    {
+      "name": "mobility",
+      "page": "mobility",
+      "says": "Whether the rich stay rich, or who holds the wealth keeps changing."
+    },
+    {
+      "name": "participation ratio",
+      "page": "participation-ratio",
+      "says": "How many directions a cloud of points really uses."
+    },
+    {
+      "name": "survival curve",
+      "also": [
+        "Kaplan–Meier"
+      ],
+      "page": "kaplan-meier",
+      "says": "The share of lives that last at least so long, counted fairly when some are cut short by the end of a run."
+    },
+    {
+      "name": "bootstrap",
+      "page": "bootstrap",
+      "says": "How sure a number is, found by redrawing the worlds it came from many times."
+    },
+    {
+      "name": "permutation test",
+      "page": "permutation-test",
+      "says": "Whether a difference could be chance, found by shuffling which world belongs to which condition."
+    },
+    {
+      "name": "Wilson interval",
+      "page": "wilson-interval",
+      "says": "The range a share probably lies in, when it was counted in only a few worlds."
+    },
+    {
+      "name": "logarithmic axis",
+      "page": "logarithmic-axes",
+      "says": "An axis on which each step multiplies by the same factor, so that numbers of very different sizes fit on one chart."
+    },
+    {
+      "name": "Muller plot",
+      "page": "muller-plot",
+      "says": "A chart of how lines of descent grow, shrink and replace each other over time."
+    },
+    {
+      "name": "least squares",
+      "also": [
+        "R²"
+      ],
+      "page": "least-squares",
+      "says": "The straight line that fits a cloud of points best, and how much of their spread it explains."
+    },
+    {
+      "name": "power law",
+      "page": "power-law-fit",
+      "says": "A quantity whose frequency falls as a power of its size: few huge values, many small ones."
+    },
+    {
+      "name": "power spectrum",
+      "page": "power-spectrum",
+      "says": "How much of a series' wandering comes at each speed, from slow to fast."
+    },
+    {
+      "name": "effective number",
+      "page": "effective-number",
+      "says": "How many kinds there really are, when kinds are counted by how much of the population they hold."
+    },
+    {
+      "name": "fractional factorial",
+      "page": "fractional-factorial",
+      "says": "A design that tests many switches together in few worlds, so that each one's effect can still be told apart."
+    }
+  ],
+  "skip": {
+    "a-hundred-thousand-iterations": [
+      "loop"
+    ],
+    "participation-ratio": [
+      "dimension"
+    ],
+    "what-the-brains-are-like": [
+      "dimension"
+    ],
+    "one-world-many-colours": [
+      "dimension"
+    ],
+    "physical-inspiration": [
+      "entropy",
+      "correlation",
+      "hub"
+    ],
+    "every-world-side-by-side": [
+      "correlation"
+    ],
+    "power-laws-real-and-apparent": [
+      "extinction"
+    ]
+  }
+}

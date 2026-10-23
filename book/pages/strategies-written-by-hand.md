@@ -3,14 +3,14 @@
 > [!question] Questions of this page
 > - Is the play evolution found the best there is, or only the best it could
 >   reach?
-> - Can a strategy written by hand, for one agent or for a team, beat evolved
->   brains in their own world?
+> - Can a strategy written by hand, for one [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") or for a team, beat evolved
+>   [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") in their own world?
 > - What would a team need in order to grow?
 
 ## Why ask
 
 [Why evolution stops](why-evolution-stops.md) read the end of evolution as the end of
-the game: a Colonel Blotto contest has a best way to play, to be
+the [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."): a Colonel Blotto contest has a best way to play, to be
 unpredictable, and once evolution has found it there is nothing better left
 to find. That reading makes a prediction that can be tested without waiting
 for evolution at all. If the evolved play is the answer, then no strategy
@@ -22,9 +22,9 @@ There is a second reason to write strategies by hand. Evolution finds what is
 one small step from what it has. A strategy that needs many agents to act
 together — some to hold a frontier, others to feed it, all knowing which is
 which — may be far better and still never be found, because no single
-mutation makes it. The author of the simulation suggested exactly such a
+[mutation](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") makes it. The author of the simulation suggested exactly such a
 strategy: a *factory*, a structured group in which every agent has its job in
-the pipeline of token flow, extracting tokens from its surroundings like a
+the pipeline of [token flow](token-flow.md "The tokens a game moves along each connection, from the agent who stakes to the node staked on."), extracting [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") from its surroundings like a
 colony of parasites. If a factory written by hand can grow in an evolved
 world, the game rewards organisation, and the question becomes how evolution
 could get there.
@@ -32,9 +32,9 @@ could get there.
 ## The invasion test
 
 The method has a note of its own ([The invasion test](invasion-test.md)).
-Take an evolved world: one of the B2 worlds of
+Take an evolved world: one of the [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.") worlds of
 [Experiment 16](why-evolution-stops.md#the-runs), 10,000 tokens, as it
-stood at iteration 2,000. Choose a **patch**: an agent at random and the
+stood at [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") 2,000. Choose a **patch**: an agent at random and the
 agents nearest to it, step by step, until the patch holds 5% of the world.
 Give every agent of the patch a strategy instead of its brain, and play on
 under the world's own rules. Follow the share of the world's agents that carry
@@ -47,19 +47,19 @@ played as a **control**. The same agents are given a copy of one resident's
 brain, the brain of an agent of the patch drawn at random. The copy is marked
 so it can be counted, and it never mutates. A strategy beats the residents if
 it holds more of the world than the resident patch played from the same place
-on the same seed.
+on the same [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.").
 
 A strategy reads exactly what a brain reads and writes exactly what a brain
-writes (`research/oee/pilots/manual.py`). It sees each candidate's tokens, its
-connections and its messages. Its decisions go through the same output rows
-the engine turns into a child, its links, the stakes and the messages. It can
+writes (`research/oee/pilots/manual.py`). It sees each [candidate](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides.")'s tokens, its
+[connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") and its [messages](messages.md "Numbers an agent writes to itself and to each neighbour every phase, which their brains read."). Its decisions go through the same output rows
+the [engine](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") turns into a child, its links, the stakes and the messages. It can
 do nothing an evolved brain could not do.
 
 ## Three strategies
 
 - **The turtle** keeps everything at home. When it has 30 tokens or more it
   has a child with a third of them.
-- **The raider** looks for the poorest neighbour that is not a teammate.
+- **The raider** looks for the poorest [neighbour](the-world.md#the-network "An agent joined to another by a connection.") that is not a teammate.
   Under B2 it can stake at most 70% of its tokens, since 30% stay home. If
   that is more than one and a half times the neighbour's tokens, it is enough
   to take the node even if the neighbour kept everything at home, and the
@@ -186,7 +186,7 @@ planted the same way.
 
 The single raider died out every time. It grew larger than the single
 resident before it went, with peaks of up to 28 agents against at most 5, and
-it lived longer, a median of about 34 iterations against 21. But it never
+it lived longer, a [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") of about 34 iterations against 21. But it never
 took hold. The single resident never did either: one brain in three thousand
 is easily lost.
 
@@ -212,7 +212,7 @@ beard**, a gene that would have to make its bearers both show a sign and
 favour those who show it.
 
 **What would let evolution get there** is what the following pages try: a
-sense of one's own given for free, stakes that count together by lineage,
+sense of one's own given for free, stakes that count together by [lineage](families.md "A line of descent: the agents whose genotypes go back to one ancestor."),
 families that carry a password of their own
 ([Another game](another-game.md)), and alliances, where knowing one's own is
 a decision two agents make together ([Alliances](alliances.md)). None of

@@ -1,16 +1,16 @@
 # Alliances
 
 > [!question] Questions of this page
-> - Can cooperation pay in a game in which tokens are only ever moved, never
+> - Can cooperation pay in a [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") in which [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") are only ever moved, never
 >   made?
 > - What is an alliance here, and what does it change in the game?
-> - What do alliances do to a world over thousands of iterations?
+> - What do alliances do to a world over thousands of [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.")?
 > - Does a world of allies keep evolving?
 
 ## Why ask
 
 [Why evolution stops](why-evolution-stops.md) ended on a diagnosis. The contest for
-nodes is a Colonel Blotto game, its best play is to be unpredictable, and
+[nodes](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") is a Colonel Blotto game, its best play is to be unpredictable, and
 evolution finds that in a few hundred iterations and then has nothing left to
 find. A game that does not run out of answers is one whose payoffs depend on
 what the others have become, and the richest of those are games in which
@@ -36,8 +36,8 @@ way to reach.
 The pilots of this page add one decision and one thing to see
 (`research/oee/pilots/proto.py`, `allies=true`).
 
-**The decision.** In every game, an agent says of each neighbour whether it
-wants it as an ally: two more output rows per candidate, and *yes* when the
+**The decision.** In every game, an agent says of each [neighbour](the-world.md#the-network "An agent joined to another by a connection.") whether it
+wants it as an ally: two more output rows per [candidate](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides."), and *yes* when the
 first is larger than the second. Two neighbours that both say yes are
 **allied** for that game. Nobody can be made an ally against its will, and an
 alliance lasts one game; it is renewed, or not, in the next.
@@ -48,22 +48,22 @@ being allied with each other: two bidders allied with each other, or joined
 through a chain of bidders who are, are one side. The side with the largest
 total takes the node. If that is the owner's side, the owner keeps it;
 otherwise the largest bidder of the winning side takes it. The owner's own
-stake still counts one and a half times, as in B2. The tokens go where they
+stake still counts one and a half times, as in [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death."). The tokens go where they
 always went, to the node they were staked on. So a stake on an ally's node is
 a gift, but one that defends.
 
 **What an agent sees.** One more input row per candidate: was it my ally in
 the last game?
 
-Revolutions are off in these worlds. Sides replace them: a revolution was the
+[Revolutions](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.") are off in these worlds. Sides replace them: a revolution was the
 one way smaller stakers could count together, and an alliance is a way to do
 it by choice.
 
 Two other ways to cooperate ran beside it, as controls:
 
 - **Kin pooled** (`kin_pool=2`): sides are made by descent instead of by
-  choice. Two bidders are on one side if their brains are within two mutations
-  of each other in the family tree. Nobody decides anything.
+  choice. Two bidders are on one side if their [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") are within two [mutations](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.")
+  of each other in the [family tree](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was."). Nobody decides anything.
 - **Support counted twice** (`support=true`, `support_gain=2`): a stake on a
   neighbour can be marked, in part, as support. Support adds to the owner's
   defence and counts twice, which makes it a better use of a token than a
@@ -71,7 +71,7 @@ Two other ways to cooperate ran beside it, as controls:
 
 ## The worlds
 
-All of these are pilots: two seeds per kind where an experiment would have
+All of these are pilots: two [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") per kind where an experiment would have
 ten, so they show a lead and not a law. Every world runs under B2's rules as
 the pilots' prototype states them: births joined to their parent and two of
 its neighbours, deaths mended, only redundant links lapse, a valence of 8, a
@@ -105,8 +105,8 @@ of 16 and a memory of the last game's stakes. Revolutions are off.
 > **To make it again:** `python3 book_figures.py allies`.
 <!-- /figure -->
 
-The founders have random brains, so each wants about half of its neighbours as
-allies, and a quarter to two fifths of all connections are alliances in the
+The [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.") have random brains, so each wants about half of its neighbours as
+allies, and a quarter to two fifths of all [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") are alliances in the
 first game. That is enough to join much of a world into one alliance by chance
 alone: at iteration 60, the largest alliance held between 16 and 62% of the
 agents.
@@ -125,7 +125,7 @@ connection is an alliance: 98% of them at iteration 2,000 in the longest
 world.
 
 **The alliance spreads as a habit, not as a family.** One might expect it to be
-one lineage that took the world, allying only with its own. It is not. In the
+one [lineage](families.md "A line of descent: the agents whose genotypes go back to one ancestor.") that took the world, allying only with its own. It is not. In the
 longest world at iteration 3,000 the alliance held 99% of the agents. The
 largest group of near relatives held 2%: agents joined to neighbours whose
 brains are within four mutations of their own. A world whose agents nearly
@@ -190,7 +190,7 @@ agents changed hands in a game from iteration 500 without it, against 2.2 and
 > contest can see*.
 >
 > The longer contests have since been played, 100 iterations each, once in
-> each era's world (`research/oee/checks/rejudge.py`, seed 17). In every one of
+> each [era](eras-and-contests.md "Brains of a world at two moments, its eras, played against each other: do the later ones win?")'s world (`research/oee/checks/rejudge.py`, seed 17). In every one of
 > these worlds the brains of iteration 1,000 held more than half of the world
 > against those of 500: 0.62 and 0.59 with alliances, 0.70 and 0.62 without,
 > 0.80 and 0.59 with kin pooled, 0.69 and 0.97 with support counted twice. In
@@ -252,7 +252,7 @@ Whatever they had become, it was not better at war, alone or together.
 
 ## What it teaches
 
-**A rising number is not open-ended evolution.** The share of the largest
+**A rising number is not [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.").** The share of the largest
 alliance rises for a thousand iterations and more, and its ceiling is the
 world, so a larger world has further to go. On paper that is the statistic
 this part of the notebook has been looking for. It is the wrong kind of rise. It
@@ -276,10 +276,10 @@ a while, a cost to being in one, or a limit to how far one can reach, so that
 alliances compete with each other instead of merging into one.
 
 **The network holds.** In the last 500 iterations of every world of
-alliances, every agent was in the 2-core. In the median frame no agent or
+alliances, every agent was in the [2-core](core-trees-leaves.md "What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them."). In the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") [frame](frames-and-stats.md "A whole world as a run records it after one phase: every agent, its tokens and connections.") no agent or
 connection could cut off anyone at all, no agent held more than 2% of the
 others, and an agent held about five connections (4.9 to 5.5). The worlds
-failed the health bar only on its last line: their ball dimension was 4.1 to
+failed the [health bar](health-bar.md "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.") only on its last line: their [ball dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") was 4.1 to
 4.8, a little above the bar's 4, and highest in the worlds of 20,000 tokens.
 
 > [!info] Kept as a lead

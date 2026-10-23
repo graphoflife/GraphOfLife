@@ -33,14 +33,14 @@ spreads heat exactly as the walker's probability spreads.
 ## The walk used here
 
 - **Lazy:** at every step the walker stays where it is with probability ½,
-  and otherwise moves to a neighbour drawn at random. Without the laziness,
+  and otherwise moves to a [neighbour](the-world.md#the-network "An agent joined to another by a connection.") drawn at random. Without the laziness,
   a walk on a network whose points fall into two alternating classes — a
   grid, a tree — could return only at even steps, and *P*(*t*) would jump
   between zero and twice its value.
 - **Exact:** instead of simulating walkers, the notebook propagates the whole
   probability distribution, step by step, from a few dozen starting points.
 - **Minus the resting state:** in a finite world, the walker ends up spread
-  over the whole world, at each point in proportion to its connections. The
+  over the whole world, at each point in proportion to its [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes."). The
   notebook subtracts that resting probability from *P*(*t*), so that only the
   approach to rest is measured, and stops when what is left falls below 5/*n*
   for a world of *n* points.
@@ -85,6 +85,6 @@ whose dimension is known.
 
 ← [Dimension and curvature from ball growth](ball-dimension-and-curvature.md) · [Space and dimension](../README.md#space-and-dimension) · [Box dimension](box-dimension.md) →
 
-> [!info]- Pages that link here (1)
-> [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)
+> [!info]- Pages that link here (2)
+> [Glossary](glossary.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)
 <!-- /turns -->

@@ -1,10 +1,10 @@
 # What the baseline world is
 
-The pages on the baseline look at thirty baseline worlds from every side. This page puts
+The pages on the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") look at thirty baseline worlds from every side. This page puts
 the pieces together: what the theses predicted, what was found instead, what
 seems to hold across the pages, and what that changed in how the notebook
 measures. It was first written after Experiments 1 to 5, on worlds of 10,000
-tokens, and brought up to date as more were written. In this second edition they
+[tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes."), and brought up to date as more were written. In this second edition they
 read thirty worlds of 100,000 tokens ([Thirty worlds](thirty-worlds.md)), and
 two of the pages are new: how ages change over a world's life
 ([How ages change over a world's life](how-ages-change.md)) and the core of a world
@@ -31,14 +31,14 @@ the second edition tests it again on the worlds of 100,000.
   at 100,000 none died, the typical world held its size, and only the fall of
   births (28%) broke the thesis.
 - [How much does the seed decide?](how-much-does-the-seed-decide.md) — thesis **refuted, narrowly**, at both sizes. Little: worlds
-  differ mostly because each one wanders, not because of their seeds.
+  differ mostly because each one wanders, not because of their [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.").
 - [Where do the tokens go?](where-do-the-tokens-go.md) —
-  thesis **refuted** at both sizes. Inequality is moderate (a Gini just under
-  0.5) and steady, and agents stake 70% of their tokens on their neighbours.
+  thesis **refuted** at both sizes. Inequality is moderate (a [Gini](gini-coefficient.md "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") just under
+  0.5) and steady, and [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") stake 70% of their tokens on their [neighbours](the-world.md#the-network "An agent joined to another by a connection.").
 - [What shape does the network take?](what-shape-does-the-network-take.md) — thesis **refuted**, narrowly at 10,000 tokens (a core of
   53%), more clearly at 100,000 (57%). Part tree, part web.
 - [Genotypes and lineages](genotypes-and-lineages.md) —
-  thesis **refuted** at both sizes. Genotypes last two iterations; lines take
+  thesis **refuted** at both sizes. [Genotypes](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.") last two [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."); lines take
   the world over — again and again in a small world, about once a run in a
   large one.
 
@@ -48,38 +48,38 @@ is something about the world that was not known before.
 
 ## The baseline world in numbers
 
-A settled baseline world of 100,000 tokens — each number the median over the
+A settled baseline world of 100,000 tokens — each number the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") over the
 thirty worlds of each world's mean over iterations 500 to 1,499, with the
 worlds of 10,000 tokens in brackets where they differ:
 
-- **about 14,400 agents** (1,300) with **3.5 connections** each (3.3)
+- **about 14,400 agents** (1,300) with **3.5 [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.")** each (3.3)
   ([A world's life](a-worlds-life.md), [What shape does the network take?](what-shape-does-the-network-take.md));
 - **3.5 births** per hundred agents per iteration (3.1), and as many deaths,
   three in four of them agents cut off from the network
   ([Births, deaths and ages](births-deaths-and-ages.md));
 - ages that **settle by iteration 500**: 2.4% of the living are newborns, half
   are younger than 55 iterations, and the risk of dying falls with age to
-  about one game in a hundred, with no ageing; the ages of the living follow
-  from the lifetimes as in a stationary population
+  about one [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") in a hundred, with no ageing; the ages of the living follow
+  from the [lifetimes](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death.") as in a stationary population
   ([How ages change over a world's life](how-ages-change.md));
-- a **Gini coefficient** of wealth of **0.47** (0.49), the richest tenth
+- a **Gini coefficient** of wealth of **0.47** (0.49), the [richest tenth](richest-tenth.md "The share of all tokens held by the richest tenth of the agents.")
   holding **42%** (44%) ([Where do the tokens go?](where-do-the-tokens-go.md));
 - **44%** of agents keep their node in a game (45%); **half** of all nodes are
-  won by coalitions ([How the game is played](how-the-game-is-played.md));
-- **26%** of connections bridges (31%), **35%** of agents leaves (36%), **57%**
-  in a core of loops (54%), **18 steps** from one agent to another (10)
+  won by [coalitions](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.") ([How the game is played](how-the-game-is-played.md));
+- **26%** of connections [bridges](bridges.md "A connection that lies on no loop: cut it and the network falls into two pieces.") (31%), **35%** of agents leaves (36%), **57%**
+  in a core of [loops](loops.md "A path through the network that comes back to where it started without using a connection twice.") (54%), **18 steps** from one agent to another (10)
   ([What shape does the network take?](what-shape-does-the-network-take.md));
 - a genotype for every **1.6 agents**, each lasting a couple of iterations;
-  lines that bring a whole world down to one founder's descendants by about
+  lines that bring a whole world down to one [founder](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.")'s descendants by about
   iteration 1,000 (175 at 10,000 tokens)
   ([Genotypes and lineages](genotypes-and-lineages.md));
-- brains with a **gain of 0.0015**: a change in what a brain sees reaches
+- [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") with a **gain of 0.0015**: a change in what a brain sees reaches
   what it does at a seven-hundredth of its size. Selection has set their
   constants alike in every world — a child in 3.6% of cases, the stake
   spread in 98% — and in the median world 42% of agents score every
-  candidate at zero or below, so the rules split their tokens evenly
+  [candidate](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides.") at zero or below, so the rules split their tokens evenly
   ([What the brains are like](what-the-brains-are-like.md));
-- messages that are **names**: one agent's messages to two readers differ
+- [messages](messages.md "Numbers an agent writes to itself and to each neighbour every phase, which their brains read.") that are **names**: one agent's messages to two readers differ
   by 0.0005, two agents' by 0.6, and agents of one genotype write the same
   ([What agents say to each other](what-agents-say-to-each-other.md));
 - an order of wealth that is **half forgotten in fifty to a hundred games**,
@@ -90,7 +90,7 @@ worlds of 10,000 tokens in brackets where they differ:
   bringing two agents closer** ([How the network grows](how-the-network-grows.md));
 - likeness that fades within **two or three steps** — tokens, age,
   connections and kin alike ([Like next to like](like-next-to-like.md));
-- a **finite dimension**: 2.8 by the room within *r* steps (2.3 at 10,000
+- a **finite [dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.")**: 2.8 by the room within *r* steps (2.3 at 10,000
   tokens, 3.3 in worlds of 60,000 agents), about 1.9 by how a walker spreads,
   where random networks with the same connections have none
   ([How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md));
@@ -106,7 +106,7 @@ worlds of 10,000 tokens in brackets where they differ:
 [How much does the seed decide?](how-much-does-the-seed-decide.md) measured how long a world
 remembers its level, statistic by statistic. They forget at much the same
 pace: a hundred iterations later, a world's level is still clearly alike
-(correlations of 0.52 to 0.69 for the number of agents, connections,
+([correlations](correlation.md "Whether two quantities go up and down together, from −1 to 1.") of 0.52 to 0.69 for the number of agents, connections,
 inequality, families and the core; 0.36 for births); three hundred later,
 nothing is left (−0.06 to 0.08). Size, wealth and shape do not seem to wander
 each on its own schedule; they look like one slow process seen through many
@@ -135,7 +135,7 @@ barely moved (25% to 30%) while defence got better all the same, so staking
 more at home is not what changed.
 
 > [!info] Added later: why defence got better
-> [Where the tokens flow](where-the-tokens-flow.md) answers it. Under an even split
+> [Where the tokens flow](where-the-tokens-flow.md) answers it. Under an [even split](even-split.md "What the rules do when a brain scores no candidate above zero: the stake is spread evenly.")
 > the agent on a node with *d* connections is one of *d* + 1 nearly equal
 > stakers there, and it keeps its node about one game in *d* + 1 — 74% of
 > games with one connection, 2% with fifty or more, as measured. The
@@ -163,7 +163,7 @@ adaptation that accumulates. The demography of a world is finished early.
 > worlds of 5,000 tokens. Every world learned fast — by iteration 50 its
 > brains beat the founders' (+361 Elo in the median world, +400 by iteration
 > 100) — and then nothing: the brains of iteration 1,000 held 0.483 of a
-> world contested with those of iteration 300, every era tied with the one
+> world contested with those of iteration 300, every [era](eras-and-contests.md "Brains of a world at two moments, its eras, played against each other: do the later ones win?") tied with the one
 > before (0.47 to 0.52), and a dominance tournament crowned no more champions
 > than chance. The baseline does not climb the second rung.
 
@@ -176,7 +176,7 @@ after them, found follows from that one number:
 
 - the stakes are nearly even, and the game moves tokens almost as a random
   walk would ([Where the tokens flow](where-the-tokens-flow.md)), down to the
-  two-game rhythm of wealth that a random walk shows on hubs and leaves
+  two-game rhythm of wealth that a random walk shows on [hubs](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.") and leaves
   ([Do the rich stay rich?](do-the-rich-stay-rich.md));
 - an agent's tokens are set by its place, connections plus one, and not by
   how it plays ([How properties scale together](how-properties-scale-together.md)); the rich
@@ -189,7 +189,7 @@ after them, found follows from that one number:
   few children, spread the stake, make every token revolutionary.
 
 Evolution so far is the evolution of a few constants. That is the first
-obstacle to open-ended evolution, and it sits in the architecture, not in
+obstacle to [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau."), and it sits in the architecture, not in
 the world.
 
 > [!info] Added later: sight was not enough
@@ -199,7 +199,7 @@ the world.
 > worlds died out, and eight of ten when brains change only when copied,
 > against none of the baseline's: a brain that sees can stop having children,
 > and in six of the twelve dead worlds the last brains had none at all. In
-> pilot worlds that cannot break, seeing brains — with memory, with brains
+> [pilot](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds that cannot break, seeing brains — with memory, with brains
 > that can grow — stopped improving within a few hundred iterations too.
 > [Why evolution stops](why-evolution-stops.md) proposes why: a contest like this
 > game is best played unpredictably, the evolved brains use their random
@@ -244,7 +244,7 @@ the thirty, the share of agents in the core follows the share joined to the
 largest hub almost exactly ([How much does the seed decide?](how-much-does-the-seed-decide.md)).
 
 > [!info] Added later: stars as a fault
-> B2 counts a star as a fault of the network: the health bar of
+> [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.") counts a star as a fault of the network: the [health bar](health-bar.md "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.") of
 > [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) allows no agent
 > to be joined to more than 5% of the others, and
 > [A world that cannot break](a-world-that-cannot-break.md) keeps hubs down by drawing a
@@ -274,7 +274,7 @@ largest hub almost exactly ([How much does the seed decide?](how-much-does-the-s
   their starting ring and little else.
 - **Lines, not genotypes.** A genotype lasts two iterations; what lasts,
   spreads and takes over is a line, and the pages to come follow lines.
-- **Size is a setting like any other.** The per-agent numbers of a world
+- **Size is a [setting](settings.md "One number or switch of a run's rules, fixed before it starts.") like any other.** The per-agent numbers of a world
   hardly change from 10,000 tokens to 100,000; its shape, its distances, its
   extremes and the pace of its lines do ([Worlds of 100,000 tokens](worlds-of-100000-tokens.md)).
   A finding at one size is checked at another before it is trusted.
@@ -282,8 +282,8 @@ largest hub almost exactly ([How much does the seed decide?](how-much-does-the-s
 ## What came next
 
 The measurements of the baseline then read the same thirty worlds through every statistic the
-viewer offers — entropy, gains and losses, the flow of tokens, what crosses
-a connection, children, power laws, the largest and the smallest, scaling,
+viewer offers — [entropy](entropy-and-evenness.md "How evenly something is shared out among the agents, from all in one place to spread perfectly evenly."), gains and losses, the flow of tokens, what crosses
+a connection, children, [power laws](power-law-fit.md "A quantity whose frequency falls as a power of its size: few huge values, many small ones."), the largest and the smallest, scaling,
 geometry, how worlds break, pictures, cooperation — and closed with a page
 questioning the rules themselves and a second meta page,
 [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md), on what all of it means for open-ended evolution.
@@ -296,7 +296,7 @@ difference. So the control came first:
 change, and worlds in which every decision is drawn at random.
 [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) then asks, at
 the author's request, how a world's size follows its tokens. The pages
-planned after them — the rate of mutation, coalitions switched off, the size
+planned after them — the rate of [mutation](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype."), coalitions switched off, the size
 of a brain — are listed in [the contents](../README.md). After
 [What the brains are like](what-the-brains-are-like.md), the size and shape of a brain
 moves up: a brain that cannot see is the first thing to change.
@@ -318,8 +318,8 @@ size.
 <!-- turns -->
 ---
 
-[The baselines B1 and B2](../README.md#the-baselines-b1-and-b2) · [Thirty worlds](thirty-worlds.md) →
+← [B1 and B2: the two baselines](b1-and-b2.md) · [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2) · [Thirty worlds](thirty-worlds.md) →
 
-> [!info]- Pages that link here (3)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Thirty worlds](thirty-worlds.md) · [Do the brains matter?](do-the-brains-matter.md)
+> [!info]- Pages that link here (4)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Thirty worlds](thirty-worlds.md) · [The estate of the dead](estate.md) · [Do the brains matter?](do-the-brains-matter.md)
 <!-- /turns -->

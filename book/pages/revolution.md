@@ -1,6 +1,6 @@
 # How a coalition takes a node
 
-In the game every node goes to someone. Usually that is whoever staked the
+In the game every [node](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") goes to someone. Usually that is whoever staked the
 most on it. But a **coalition** of smaller stakers can take a node from the
 largest one, if together they marked enough of their stakes as
 **revolutionary**. This note gives the rule exactly, shows that it is the
@@ -9,14 +9,14 @@ same as a simpler statement, and works an example.
 ## What each staker brings
 
 For a node *v*, collect every stake placed on it — by its own agent and by
-its neighbours. A staker *i* who put *a*ᵢ tokens on *v* also marked a part of
+its [neighbours](the-world.md#the-network "An agent joined to another by a connection."). A staker *i* who put *a*ᵢ [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") on *v* also marked a part of
 them revolutionary:
 
 $$
 \rho_i = \bigl\lfloor f(r_{i,1}, r_{i,2}) \cdot a_i \bigr\rfloor ,
 $$
 
-where *r*ᵢ,₁ and *r*ᵢ,₂ are rows 9 and 10 of *i*'s brain output for the
+where *r*ᵢ,₁ and *r*ᵢ,₂ are rows 9 and 10 of *i*'s [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") output for the
 candidate *v* and *f* is [the share function](share-function.md).
 
 ## The rule
@@ -62,7 +62,7 @@ $$
 **The coalition wins if and only if its revolutionary tokens together exceed
 the largest single stake.** And the member who wins is the one at whose rung
 the running sum first passes the halfway mark (*R* + *H*)/2 — a kind of
-weighted median of the coalition, shifted up by the hegemon's weight.
+weighted [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") of the coalition, shifted up by the hegemon's weight.
 
 Note the asymmetry: the hegemon is weighed with its **whole** stake *H*, the
 coalition only with the parts its members marked revolutionary.
@@ -112,6 +112,6 @@ anything revolutionary and the hegemon always wins.
 
 ← [Messages](messages.md) · [How the simulation works](../README.md#how-the-simulation-works) · [How a brain changes](mutation.md) →
 
-> [!info]- Pages that link here (15)
-> [One iteration, step by step](one-iteration.md) · [Every setting](settings.md) · [Seeds and the random stream](random-numbers.md) · [The share function f(a, b)](share-function.md) · [Gains and losses](gains-and-losses.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [How the game is played](how-the-game-is-played.md) · [Where the tokens flow](where-the-tokens-flow.md) · [Staking at home, and keeping one's node](home-stake.md) · [How different are the agents?](how-different-are-the-agents.md) · [A crew of raiders](a-crew-of-raiders.md) · [Do agents cooperate?](do-agents-cooperate.md) · [The switches the world was built with](the-switches-the-world-was-built-with.md) · [Revolutions, with every other rule](revolutions-with-every-other-rule.md) · [What a run records](frames-and-stats.md)
+> [!info]- Pages that link here (17)
+> [Glossary](glossary.md) · [One iteration, step by step](one-iteration.md) · [Every setting](settings.md) · [Seeds and the random stream](random-numbers.md) · [The share function f(a, b)](share-function.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Gains and losses](gains-and-losses.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [How the game is played](how-the-game-is-played.md) · [Where the tokens flow](where-the-tokens-flow.md) · [Staking at home, and keeping one's node](home-stake.md) · [How different are the agents?](how-different-are-the-agents.md) · [A crew of raiders](a-crew-of-raiders.md) · [Do agents cooperate?](do-agents-cooperate.md) · [The switches the world was built with](the-switches-the-world-was-built-with.md) · [Revolutions, with every other rule](revolutions-with-every-other-rule.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

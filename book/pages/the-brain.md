@@ -1,9 +1,9 @@
 # The brain
 
 Every decision of [One iteration, step by step](one-iteration.md) — how much to give a child,
-whom it joins, which connections to hand over, where to stake and how much of
-it to mark revolutionary, what to say to each neighbour — is taken by the
-agent's **brain**. This page describes the brain of the baseline B1
+whom it joins, which [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") to hand over, where to stake and how much of
+it to mark revolutionary, what to say to each [neighbour](the-world.md#the-network "An agent joined to another by a connection.") — is taken by the
+[agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.")'s **brain**. This page describes the brain of the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.")
 completely: what it reads, how it computes, how its outputs become decisions,
 and how it changes from one generation to the next.
 
@@ -26,10 +26,10 @@ worked example, is in [What a brain sees](brain-inputs.md)):
 - **1** — whether the candidate is the agent itself: 1 for the first column,
   0 for the others.
 - **4** — ln(1 + τ) of the agent and of the candidate, and ln(1 + deg) of
-  both: tokens and connections on a logarithmic scale, so that 10 against 100
+  both: [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") and connections on a logarithmic scale, so that 10 against 100
   tokens looks as different as 100 against 1,000.
 - **24** — summaries of the two neighbourhoods: for the agent and for the
-  candidate, six quantiles (the smallest, the 20th, 40th, 60th and 80th
+  candidate, six [quantiles](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") (the smallest, the 20th, 40th, 60th and 80th
   percentiles, and the largest) of ln(1 + τ) over their neighbours, and the
   same for ln(1 + deg). That is 6 × 2 × 2 = 24 numbers.
 - **120** — four messages of 30 numbers each: what the agent last wrote to
@@ -73,7 +73,7 @@ $$
 15,795 numbers in all. They are the brain's **genome**: nothing else about an
 agent is inherited.
 
-**A founder's brain** gets every weight drawn from a normal distribution with
+**A [founder](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.")'s brain** gets every weight drawn from a normal distribution with
 mean 0 and standard deviation 1/√*k*, where *k* — the layer's **fan-in** — is
 the number of units feeding it (154 for the first layer, 50 for the second,
 and so on); every bias starts at 0. The scale 1/√*k* keeps the sums *z* of a
@@ -220,6 +220,6 @@ what becomes of a world run that way.
 
 ← [One iteration, step by step](one-iteration.md) · [How the simulation works](../README.md#how-the-simulation-works) · [Questioning the mechanics](questioning-the-mechanics.md) →
 
-> [!info]- Pages that link here (12)
-> [What this notebook is about](what-this-notebook-is-about.md) · [The world: tokens, agents and a network](the-world.md) · [One iteration, step by step](one-iteration.md) · [Every setting](settings.md) · [The starting ring](starting-ring.md) · [The share function f(a, b)](share-function.md) · [What a brain says](brain-outputs.md) · [How a brain changes](mutation.md) · [The first hundred iterations](the-first-hundred-iterations.md) · [What the brains are like](what-the-brains-are-like.md) · [How different are the agents?](how-different-are-the-agents.md) · [How a signal fades through layers](vanishing-signal.md)
+> [!info]- Pages that link here (17)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [The world: tokens, agents and a network](the-world.md) · [One iteration, step by step](one-iteration.md) · [Every setting](settings.md) · [The starting ring](starting-ring.md) · [The share function f(a, b)](share-function.md) · [What a brain says](brain-outputs.md) · [How a brain changes](mutation.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [The first hundred iterations](the-first-hundred-iterations.md) · [The even split](even-split.md) · [What the brains are like](what-the-brains-are-like.md) · [How different are the agents?](how-different-are-the-agents.md) · [How a signal fades through layers](vanishing-signal.md) · [Eras and contests: does a world keep getting better?](eras-and-contests.md) · [The lab, the engine and pilots](the-lab.md)
 <!-- /turns -->

@@ -1,7 +1,7 @@
 # Where, who and chance: splitting a decision's variance
 
-Agents decide differently from one another. Is that because they are in
-different situations (where), because their brains differ (who), because
+[Agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") decide differently from one another. Is that because they are in
+different situations (where), because their [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") differ (who), because
 each brain reacts differently to the situation it is in (who, there), or
 because of the random inputs every brain reads (chance)? This note shows how
 the variance of a decision splits into those four parts.
@@ -11,7 +11,7 @@ the variance of a decision splits into those four parts.
 Take B brains and S situations, and put every brain into every situation K
 times, each time with fresh random inputs — but the *same* K draws for every
 brain, so that the brains meet exactly the same inputs. Write d_{bsk} for
-what brain b decides in situation s on draw k (a share of tokens, a yes or
+what brain b decides in situation s on draw k (a share of [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes."), a yes or
 no as 1 or 0). Then the averages
 
 - \bar d_b — brain b over all situations and draws,

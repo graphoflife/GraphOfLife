@@ -4,15 +4,15 @@
 > - What does every simulation made so far look like when all of them are
 >   measured the same way?
 > - Along which directions do the worlds differ most?
-> - Which statistics do the settings decide, and which does the seed — the
+> - Which statistics do the [settings](settings.md "One number or switch of a run's rules, fixed before it starts.") decide, and which does the [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") — the
 >   chance a world is born with?
 > - Which measures has the notebook applied to which kinds of world, and which
 >   not yet?
 
 Until now each page measured the worlds of one experiment, or of a few. That
 is how experiments are read: one change against its control. But the notebook has
-by now made **369 lab worlds** in fifteen experiments, and about a hundred
-pilot worlds besides, and each was measured only for what its own page
+by now made **369 [lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") worlds** in fifteen experiments, and about a hundred
+[pilot](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds besides, and each was measured only for what its own page
 asked. This page puts them all in one table and looks at them together. It
 is a meta page: it builds nothing new into the worlds, it gathers what is
 there.
@@ -20,7 +20,7 @@ there.
 ## One table for every world
 
 A lab run records about ninety-five statistics after every phase of every
-iteration (the note [What a run records](frames-and-stats.md)). A
+[iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") (the note [What a run records](frames-and-stats.md)). A
 pilot world keeps only a few of them, and its checkpoints. To compare them,
 `research/atlas/across.py` takes every world over the same stretches of
 iterations — 400–499, 900–999, 1,900–1,999, and the last fifth of its life —
@@ -28,7 +28,7 @@ and makes one row of means for each:
 
 - a **lab world's** row is the means of its own record over the stretch;
 - a **pilot's** is made the same way from frames: the world is played on from
-  its checkpoint at 1,000 and from its last, twenty games are recorded as the
+  its checkpoint at 1,000 and from its last, twenty [games](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") are recorded as the
   lab records its own, and each game is summarised by the same function the
   lab uses (`gol_series.frame_stats`). So every pilot that plays the engine's
   game gets the lab's statistics too. The older pilots that play the
@@ -43,7 +43,7 @@ each world a dot, coloured by its rule set and named when you point at it.
 
 Which directions do the worlds differ in most? Take the statistics that do
 not grow with the size of a world (shares, means, ratios; the counts of
-births, deaths and revolutions divided by the agents), standardise each, and
+births, deaths and [revolutions](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.") divided by the [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.")), standardise each, and
 find the principal components: the directions along which the cloud of
 worlds is longest. (The note [How many directions a cloud has](participation-ratio.md)
 explains the idea.)
@@ -66,7 +66,7 @@ explains the idea.)
 <!-- /figure -->
 
 The first component holds a third of all the differences, and it splits the
-worlds into **two clouds**: B1 on the right, B2 on the left, with nothing in
+worlds into **two clouds**: [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") on the right, [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.") on the left, with nothing in
 between. It is made of how agents play:
 
 - whether they spread their stake over several nodes or go all in
@@ -76,19 +76,19 @@ between. It is made of how agents play:
   (`selfAllocationShare`, `heldHomeShare`);
 - how many revolutions there are, and how much of the world sits in its core.
 
-Every one of the many settings an experiment changed in B2 — mutation rates,
+Every one of the many settings an experiment changed in B2 — [mutation](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") rates,
 what a parent keeps, old age, random inputs, valence, mending, links at birth,
 handing links over — moved its worlds only within the left cloud. Without
 mending, and with handover, the worlds moved furthest, about a third of the way
 towards the middle. One setting crossed over: the worlds of Experiment 14 in
 which **any unused link lapses** (green) sit with B1. [Lightning in every world](lightning-in-every-world.md) found the same
-in the flow: where a link must carry tokens to survive, agents stake on each
+in the flow: where a link must carry [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") to survive, agents stake on each
 other and play the way B1's agents play.
 
 The second component (14%) is how much a world breeds: births, the share of
-tokens given to children, handovers, and the long tail of degrees that
+tokens given to children, handovers, and the long tail of [degrees](degree.md "The number of an agent's connections: how many neighbours it has.") that
 breeding builds. It is spread wide only in one kind of world: the B1 worlds
-whose brains never change (yellow), some of which breed every agent every
+whose [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") never change (yellow), some of which breed every agent every
 iteration and others not at all ([Do the brains matter?](do-the-brains-matter.md)).
 
 ## What the settings decide, and what the seed does
@@ -120,12 +120,12 @@ within them](between-and-within.md) explains; here the groups are the
 | spread or all in (`spreadShare`) | 0.99 | tokens given to children (`reproTokenShare`) | 0.29 |
 | the fewest links (`minDegree`) | 0.96 | agents cut off (`orphaned`) | 0.27 |
 | kept at home (`selfAllocationShare`) | 0.95 | tokens per agent (`meanTokens`) | 0.24 |
-| brains per agent (`brainDiversity`) | 0.94 | its median (`medianTokens`) | 0.22 |
+| brains per agent (`brainDiversity`) | 0.94 | its [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") (`medianTokens`) | 0.22 |
 | own node held (`heldHomeShare`) | 0.91 | curvature of the network (`ricciCurvature`) | 0.22 |
 | flow that runs one way (`flowImbalance`) | 0.88 | flow per link (`meanEdgeFlow`) | 0.19 |
-| net ÷ staked flow (`netFlowShare`) | 0.87 | net flow on loops (`netCyclingShare`) | 0.16 |
+| net ÷ staked flow (`netFlowShare`) | 0.87 | [net flow](token-flow.md "The tokens a game moves along each connection, from the agent who stakes to the node staked on.") on [loops](loops.md "A path through the network that comes back to where it started without using a connection twice.") (`netCyclingShare`) | 0.16 |
 | revolutions per agent | 0.87 | the poorest agent (`minTokens`) | 0.15 |
-| evenness of wealth (`tokenEntropy`) | 0.82 | starved per agent | 0.14 |
+| [evenness](entropy-and-evenness.md "How evenly something is shared out among the agents, from all in one place to spread perfectly evenly.") of wealth (`tokenEntropy`) | 0.82 | starved per agent | 0.14 |
 | agents in the core (`coreShare`) | 0.81 | fit of the degree law (`degreeGammaR2`) | 0.13 |
 
 The settings decide **how agents play**: whether they spread or go all in,
@@ -136,9 +136,9 @@ the starved) and how much a world breeds. Two worlds of the same rules can
 differ in these as much as two worlds of different rules, because they are
 set by what happens early and by chance. The same was seen inside one
 condition in [What goes with what](what-goes-with-what.md): half the differences
-between thirty baseline worlds are the size of their largest hub.
+between thirty [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") worlds are the size of their largest [hub](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.").
 
-For open-ended evolution this is worth keeping in mind. The things
+For [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.") this is worth keeping in mind. The things
 evolution could change — how agents play — are pinned by the rules. The
 things left free are decided by chance, early, and then stay.
 
@@ -149,13 +149,13 @@ that question was about. Gathered:
 
 | measure | lab worlds | pilot worlds |
 |---|---|---|
-| the ~95 recorded statistics, lightning among them | every run | the engine's pilots, from recorded games (new); the prototype's, their series |
-| flow modules ([Flow modules: the groups tokens stay in](flow-modules.md)) | up to five seeds of every condition (new) | the engine's pilots (new) |
-| loops and the exact circulation, chains, help ([Gliders, and who helps whom](gliders-and-who-helps-whom.md)) | ten B1 and ten B2 worlds | the alliance pilots, batches P and Q |
-| lifetime contests between eras ([Why evolution stops](why-evolution-stops.md)) | B2, through the long runs that go on from its worlds | every pilot batch |
+| the ~95 recorded statistics, [lightning](lightning.md "A closed loop of the flow of a game: tokens that go round and come back where they started.") among them | every run | the engine's pilots, from recorded games (new); the prototype's, their series |
+| [flow modules](map-equation.md "A group of agents that a token, following the flow, tends to stay inside.") ([Flow modules: the groups tokens stay in](flow-modules.md)) | up to five seeds of every condition (new) | the engine's pilots (new) |
+| loops and the exact [circulation](circulation.md "The part of a flow that goes round in loops, as against the part that runs from sources to sinks."), chains, help ([Gliders, and who helps whom](gliders-and-who-helps-whom.md)) | ten B1 and ten B2 worlds | the alliance pilots, batches P and Q |
+| lifetime contests between [eras](eras-and-contests.md "Brains of a world at two moments, its eras, played against each other: do the later ones win?") ([Why evolution stops](why-evolution-stops.md)) | B2, through the long runs that go on from its worlds | every pilot batch |
 | correlations among agents ([What goes with what](what-goes-with-what.md)) | ten B1 and ten B2 worlds; now any run, in the Research tab (new) | any run made on the server or in the browser (new) |
 | how different the agents are ([How different are the agents?](how-different-are-the-agents.md)) | B1 and B2, over a world's life (new) | the long runs (new) |
-| exploitability ([Why evolution stops](why-evolution-stops.md)) | Experiment 16 | — |
+| [exploitability](exploitability.md "How much better than a world's brains the best reply to them would do: zero only at the top.") ([Why evolution stops](why-evolution-stops.md)) | Experiment 16 | — |
 
 What is still missing: the lifetime contests for the lab's B1 worlds, whose
 runs keep no archives of their brains, and every measure for the worlds of
@@ -184,7 +184,7 @@ longer makes.
 <!-- turns -->
 ---
 
-[Methods and statistics](../README.md#methods-and-statistics) · [How worlds are measured](how-worlds-are-measured.md) →
+[Methods and statistics](../README.md#methods-and-statistics) · [The lab, the engine and pilots](the-lab.md) →
 
 > [!info]- Pages that link here (3)
 > [Lightning in every world](lightning-in-every-world.md) · [Healthy and rich](healthy-and-rich.md) · [Every simulation: what was run, and what was measured](every-simulation.md)

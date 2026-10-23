@@ -1,16 +1,16 @@
 # Who inherits?
 
 > [!question] Questions of this page
-> - When an agent dies, its tokens go back to the world. Does it matter who
+> - When an [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") dies, its [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") go back to the world. Does it matter who
 >   gets them?
-> - What happens if the estate goes to the poorest, to the children just
+> - What happens if the [estate](estate.md "The tokens a dead agent leaves, and who gets them.") goes to the poorest, to the children just
 >   born, or to the agents that have just had children?
 > - And if it stays in the family — each estate to the dead agent's own
 >   children? (Added later.)
 
-When an agent dies — of age in B2, or in B1 when it loses its node or the
+When an agent dies — of age in [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death."), or in [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") when it loses its node or the
 piece of the world it is on is cut off — its tokens do not vanish: the
-cleanup pools them and shares them out among the survivors. Until now every
+[cleanup](one-iteration.md#cleanup "The end of every phase: only the largest connected piece of the network lives on, and the tokens of the dead are shared out.") pools them and shares them out among the survivors. Until now every
 world of this notebook shared them out **evenly**: every survivor had the same
 chance at every token ([`redistribution`](settings.md#redistribution)
 = `uniform`). The author asked for other ways, and each has a reading of its
@@ -20,7 +20,7 @@ own:
   one common level, as far as it reaches, like water poured on an uneven
   floor;
 - **to the newborns** — an inheritance for the young: the pool is shared
-  evenly among the children born that iteration;
+  evenly among the children born that [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.");
 - **to the parents** — a reward for having children: the pool is shared among
   the agents that had a child that iteration, once per child.
 
@@ -37,12 +37,12 @@ last two share the pool out evenly, as before.
 
 ## The worlds
 
-Each rule was played in pilot worlds of 10,000 tokens for 2,000 iterations,
-two seeds each (batch R), on both of the notebook's baselines: B2, the world that
+Each rule was played in [pilot](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds of 10,000 tokens for 2,000 iterations,
+two [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") each (batch R), on both of the notebook's [baselines](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2."): B2, the world that
 cannot break, with Experiment 16's settings, and B1, where worlds break and
 cut-off pieces are culled. The controls are the same settings and seeds with
 the estate shared evenly: for B2 the pilot worlds `P/B2-s1` and `-s2` (the
-lab's Experiment 16 worlds again, game for game), for B1 the first 2,000
+[lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s Experiment 16 worlds again, game for game), for B1 the first 2,000
 iterations of the long runs `L/B1-long-s1` and `-s2`.
 
 ## B2: bigger and poorer, or no change
@@ -65,7 +65,7 @@ iterations of the long runs `L/B1-long-s1` and `-s2`.
 
 **To the poorest, nothing much changes.** The worlds hold 3,600 to 3,700
 agents, as B2's do; four agents in five still hold three tokens or fewer, the
-median agent one. The pool is small: in B2 the dead leave about seventy
+[median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") agent one. The pool is small: in B2 the dead leave about seventy
 tokens an iteration among 3,600 agents, and raising the poorest by that much
 lifts a few of them by a token.
 
@@ -134,7 +134,7 @@ almost as fast as they come.
 
 Lifetime contests (T = 100, as in
 [Why evolution stops](why-evolution-stops.md#would-we-notice-if-it-went-on)): the
-brains of a later moment against those of an earlier one, once in each
+[brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") of a later moment against those of an earlier one, once in each
 moment's world.
 
 - **B2 with the estate to the poorest evolves as B2 does:** the brains of
@@ -161,7 +161,7 @@ Each world at iteration 2,000, read as
 [Healthy and rich](healthy-and-rich.md) reads every world (16 October
 2026):
 
-| world | agents | marks of the health bar (of 7) | dimension | agents with 3 tokens or fewer | diversity score |
+| world | agents | marks of the [health bar](health-bar.md "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.") (of 7) | [dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") | agents with 3 tokens or fewer | [diversity score](diversity-score.md "How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes.") |
 |---|---|---|---|---|---|
 | B2, the control (lab, seeds 1, 2) | 3,546; 3,064 | 6; 6 | 4.54; 4.35 | 78%; 70% | 0.53; 0.48 |
 | B2, to the poorest | 3,753; 3,728 | 6; 7 | 4.42; 3.95 | 80%; 82% | 0.45; 0.46 |
@@ -220,7 +220,7 @@ the controls — 44% and 35% of their agents at three tokens or fewer, against
 6% and 19% — about as diverse, and they meet four and five marks of seven
 where the controls meet three.
 
-**In B2 evolution goes on, at least as fast as in B2 itself.** In lifetime
+**In B2 evolution goes on, at least as fast as in B2 itself.** In [lifetime](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death.")
 contests the brains of 1,000 take 80% and 74% of a contested world from
 those of 500, and the brains of 2,000 take 74% and 61% from those of 1,000
 (the control: 69% and 67%, then 65% and 76%; the blue dots of the contests
@@ -267,6 +267,6 @@ other worlds tie or swing.
 
 **Also about:** [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world).
 
-> [!info]- Pages that link here (10)
-> [Where tokens go](where-tokens-go.md) · [What folds a world](what-folds-a-world.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [The floor in plain B2 and in B1](the-floor-in-plain-b2-and-in-b1.md) · [Rules in company](rules-in-company.md) · [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) · [Eight switches at once](eight-switches-at-once.md) · [Healthy and rich](healthy-and-rich.md) · [Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (12)
+> [The estate of the dead](estate.md) · [Where tokens go](where-tokens-go.md) · [What folds a world](what-folds-a-world.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [The floor in plain B2 and in B1](the-floor-in-plain-b2-and-in-b1.md) · [Rules in company](rules-in-company.md) · [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) · [Eight switches at once](eight-switches-at-once.md) · [Healthy and rich](healthy-and-rich.md) · [The diversity score](diversity-score.md) · [Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

@@ -2,7 +2,7 @@
 
 Brains change — this is the **variation** evolution needs
 ([What this notebook is about](what-this-notebook-is-about.md)). This note gives the
-exact rule, with the baseline's numbers.
+exact rule, with the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.")'s numbers.
 
 ## When
 
@@ -10,14 +10,14 @@ A brain is offered a change at two moments:
 
 1. **At birth.** A child's brain is a copy of its parent's, and the copy is
    offered a change.
-2. **After every game.** Every brain in the world — after the cleanup, so
+2. **After every [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.").** Every brain in the world — after the [cleanup](one-iteration.md#cleanup "The end of every phase: only the largest connected piece of the network lives on, and the tokens of the dead are shared out."), so
    only the survivors' — is offered a change, each independently.
 
 Each time, the brain changes **with probability** *p* = 0.2
 ([`mutation_probability`](settings.md#mutation_probability)): a uniform
 random number *U* is drawn, and the brain changes if *U* ≤ *p*.
 
-So in one iteration, an agent's brain is offered at least one change (after
+So in one [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."), an [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.")'s brain is offered at least one change (after
 the game), and a newborn's two (at birth and after the game). The chance
 that a given brain is changed at least once in an iteration is
 1 − 0.8 = 0.2 for an old agent and 1 − 0.8² = 0.36 for a newborn.
@@ -40,7 +40,7 @@ $$
 
 **Step 2 — a rare reset.** With probability *s*, the matrix is also reset in
 part: every number of it is, independently with probability *s*, replaced by
-a fresh draw — for a weight matrix from the distribution the founders' weights
+a fresh draw — for a weight matrix from the distribution the [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.")' weights
 were drawn from, 𝒩(0, (1/√*k*)²), for a bias vector from 𝒩(0, (σ/√*k*)²).
 
 So a change moves about one number in ten by a little, and now and then
@@ -88,6 +88,6 @@ from the world's random stream ([Seeds and the random stream](random-numbers.md)
 
 **Also about:** [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are).
 
-> [!info]- Pages that link here (13)
-> [What this notebook is about](what-this-notebook-is-about.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md) · [How even is a world?](how-even-is-a-world.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [Genotypes and the family tree](genotype.md) · [Brain diversity](brain-diversity.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md)
+> [!info]- Pages that link here (16)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md) · [How even is a world?](how-even-is-a-world.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [Genotypes and the family tree](genotype.md) · [Brain diversity](brain-diversity.md) · [Eras and contests: does a world keep getting better?](eras-and-contests.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md)
 <!-- /turns -->

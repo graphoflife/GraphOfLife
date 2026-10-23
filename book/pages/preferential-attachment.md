@@ -1,8 +1,8 @@
 # Preferential attachment and its kernel
 
-In many growing networks the well connected gain new connections faster
+In many growing networks the well connected gain new [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") faster
 than the poorly connected: popular web pages are linked to more, much-cited
-papers are cited more. If the rate at which an agent gains connections is
+papers are cited more. If the rate at which an [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") gains connections is
 proportional to the connections it has, the network grows by **preferential
 attachment** (Barabási and Albert 1999; the same idea as Price's cumulative
 advantage, Price 1976, and Simon's model of word frequencies, Simon 1955).
@@ -16,7 +16,7 @@ count the connections each class gains during the step, and divide by the
 number of agents in the class (Newman 2001; Jeong, Néda and Barabási 2003).
 On logarithmic axes, a kernel Π(*k*) ∝ *k*^α is a straight line of slope α:
 
-- α = 0: every agent gains alike, whatever it has. The degrees stay narrow,
+- α = 0: every agent gains alike, whatever it has. The [degrees](degree.md "The number of an agent's connections: how many neighbours it has.") stay narrow,
   as in a random network.
 - α = 1: **linear** preferential attachment. A growing network gets a
   power-law tail of degrees, with exponent 3 if nothing is ever lost
@@ -39,7 +39,7 @@ from vanishing.
 ## Where it is used
 
 [How the network grows](how-the-network-grows.md) measures both kernels
-in the baseline worlds. [Power laws, real and apparent](power-laws-real-and-apparent.md)
+in the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") worlds. [Power laws, real and apparent](power-laws-real-and-apparent.md)
 had proposed preferential attachment, reached by copying, as the source of
 the heavy tail of the connections.
 
@@ -51,7 +51,7 @@ the heavy tail of the connections.
   attachment in evolving networks. *Europhysics Letters* 61, 567–572.
 - Krapivsky, P. L., Redner, S. and Leyvraz, F. (2000). Connectivity of
   growing random networks. *Physical Review Letters* 85, 4629–4632.
-- Newman, M. E. J. (2001). Clustering and preferential attachment in growing
+- Newman, M. E. J. (2001). [Clustering](clustering.md "How often an agent's neighbours are also each other's neighbours.") and preferential attachment in growing
   networks. *Physical Review E* 64, 025102.
 - Price, D. de S. (1976). A general theory of bibliometric and other
   cumulative advantage processes. *Journal of the American Society for
@@ -62,10 +62,10 @@ the heavy tail of the connections.
 <!-- turns -->
 ---
 
-← [Degree](degree.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Clustering](clustering.md) →
+← [Stars and hubs](stars-and-hubs.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Clustering](clustering.md) →
 
 **Also about:** [Agents' lives: births, deaths, ages](../README.md#agents-lives-births-deaths-ages).
 
-> [!info]- Pages that link here (2)
-> [A world that cannot break](a-world-that-cannot-break.md) · [How the network grows](how-the-network-grows.md)
+> [!info]- Pages that link here (3)
+> [Glossary](glossary.md) · [A world that cannot break](a-world-that-cannot-break.md) · [How the network grows](how-the-network-grows.md)
 <!-- /turns -->

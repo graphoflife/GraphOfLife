@@ -1,7 +1,7 @@
 # Power laws, real and apparent
 
 Power laws have a special place in the study of complex systems. Networks
-whose numbers of connections follow one are called **scale-free** (Barabási
+whose numbers of [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") follow one are called **scale-free** (Barabási
 and Albert 1999); Pareto (1896) found one in incomes; sandpiles, earthquakes
 and — in a famous model — extinctions come in avalanches of every size with no
 typical one (Bak, Tang and Wiesenfeld 1987; Bak and Sneppen 1993); and noise
@@ -11,15 +11,15 @@ point, or growing by "the rich get richer".
 
 Most claimed power laws do not survive a careful test (Clauset, Shalizi and
 Newman 2009), and scale-free networks turn out to be rare (Broido and Clauset
-2019). This page fits power laws to four things in the baseline worlds —
-connections, tokens, the deaths of one game, and the rhythm of a world's
+2019). This page fits power laws to four things in the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") worlds —
+connections, [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes."), the deaths of one [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."), and the rhythm of a world's
 wander — and teaches, on the way, how a real one is told from an apparent one.
 
 > [!question] Questions of this page
 > - Are the numbers of connections distributed as a power law? Does it matter
 >   how the exponent is fitted?
 > - Are the tokens?
-> - How many agents does one game remove — is there a typical number, or do
+> - How many [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") does one game remove — is there a typical number, or do
 >   removals come in avalanches of every size?
 > - What rhythm does a world's wander have?
 
@@ -96,7 +96,7 @@ least** *k* — the complementary cumulative distribution — then falls as
 
 The viewer offers two ways of finding γ ([Fitting a power law](power-law-fit.md)):
 
-- **Least squares** through the whole cumulative distribution on log–log
+- **[Least squares](least-squares.md "The straight line that fits a cloud of points best, and how much of their spread it explains.")** through the whole cumulative distribution on log–log
   axes (`degreeExponent`, `tokenExponent`): the obvious method, and a biased
   one.
 - **Maximum likelihood** on the tail, from the *k*_min whose fitted law sits
@@ -131,7 +131,7 @@ too).
 > **To make it again:** `python3 book_figures.py powerlaws`.
 <!-- /figure -->
 
-The world of seed 1 has 14,870 agents after its last game. The dashed line,
+The world of [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1 has 14,870 agents after its last game. The dashed line,
 least squares through every point, has the exponent 3.15 — but it is drawn
 through points that are not on a line: below about twenty connections the
 distribution bends. The maximum-likelihood fit chooses the tail from
@@ -161,7 +161,7 @@ of this world. What it does not say is anything about the other 99%.
 > **To make it again:** `python3 book_figures.py powerlaws`.
 <!-- /figure -->
 
-Across the worlds, over their settled life:
+Across the worlds, over their [settled life](settled-life.md "A world from iteration 500 to its end, after its youth, where it is measured."):
 
 - maximum likelihood finds the tail from about 21 connections, holding 1.1%
   of the agents (0.7% to 1.6%), with γ = 3.04 (2.40 to 4.11);
@@ -178,12 +178,12 @@ reports depends on the method by a quarter to half a unit. "The network is scale
 more than this.
 
 Where would a tail like this come from? The rules contain a known mechanism.
-A child is joined to some of its parent's candidates — in effect it **copies**
+A child is joined to some of its parent's [candidates](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides.") — in effect it **copies**
 part of its parent's neighbourhood ([How agents have children](how-agents-have-children.md)).
-An agent gains a connection whenever one of its neighbours has a child that is
+An agent gains a connection whenever one of its [neighbours](the-world.md#the-network "An agent joined to another by a connection.") has a child that is
 joined to it; an agent with twice the neighbours has about twice the chances.
 The well connected gain connections in proportion to their connections:
-preferential attachment (Barabási and Albert 1999), reached by copying, as in
+[preferential attachment](preferential-attachment.md "The well connected gaining new connections faster than the poorly connected.") (Barabási and Albert 1999), reached by copying, as in
 the "duplication" models of protein networks (Vázquez, Flammini, Maritan and
 Vespignani 2003; Chung, Lu, Dewey and Galas 2003). Preferential attachment on
 its own gives γ = 3. [How the network grows](how-the-network-grows.md) has measured
@@ -194,10 +194,10 @@ an experiment that joined children to random agents instead would test it.
 
 > [!info] Added later: preferential attachment, capped
 > [A world that cannot break](a-world-that-cannot-break.md) meets the same mechanism when
-> brains can see: whatever a brain favours, the well connected are offered as
-> candidates more often, and in pilots in which the brains chose a newborn's
+> [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") can see: whatever a brain favours, the well connected are offered as
+> candidates more often, and in [pilots](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") in which the brains chose a newborn's
 > links the best-connected agent was joined to 30% of the world. The second
-> baseline, B2, draws two of a newborn's links at random and caps the links a
+> baseline, [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death."), draws two of a newborn's links at random and caps the links a
 > brain may choose at eight.
 
 ## The tokens: a power law in the tail
@@ -222,7 +222,7 @@ an experiment that joined children to random agents instead would test it.
 
 The tokens of 394,056 agents, pooled over the thirty worlds after their last
 game, tell a clearer story. The **log-normal** distribution with the mean and
-spread of ln *x* (μ = 1.59, σ = 0.73: a median of *e*^1.59 ≈ 4.9 tokens) fits
+spread of ln *x* (μ = 1.59, σ = 0.73: a [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") of *e*^1.59 ≈ 4.9 tokens) fits
 the body up to about 20 tokens — and then falls far below the data. From 49
 tokens on, the data follow a straight line for two decades, to about 5,000
 tokens, before the few richest fall a little below it: a power law with
@@ -234,7 +234,7 @@ heavier tail than Pareto's incomes, which fell about as *x*^−1.5. (At 10,000
 tokens: γ = 2.29 from 33 tokens on, plausible in 92% of samples, over a
 range ten times shorter.)
 
-Are the richest rich because they are hubs? If tokens were a fixed function of
+Are the richest rich because they are [hubs](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.")? If tokens were a fixed function of
 connections, the two tails would be tied together, and a token tail heavier
 than the connection tail would need the hubs to hold *more* tokens per
 connection than everyone else. They do not: among the 3,358 agents in the
@@ -247,7 +247,7 @@ and a rich agent with one or two connections dies in one game in ten.
 That suggests a different mechanism, also a classic. An agent's tokens are
 multiplied, game after game, by a random factor — sometimes a big gain, more
 often a loss — while a floor holds up the poorest (a node with nothing dies,
-and the share-out tops up the poor). Random multiplication with a floor
+and the [share-out](gains-losses-and-the-share-out.md "How a cleanup deals the tokens of the dead out among the living: in the baseline, each token to a survivor drawn at random.") tops up the poor). Random multiplication with a floor
 produces a power-law tail (Champernowne 1953; Kesten 1973; Levy and Solomon
 1996; Gabaix 1999 for the sizes of cities). Again a hypothesis, which the
 simplest test would be to look for.
@@ -311,7 +311,7 @@ splits the movement into rhythms and says how much of it happens at each
 > **To make it again:** `python3 book_figures.py powerlaws`.
 <!-- /figure -->
 
-Between periods of 4 and 500 iterations, the power falls as *f*^−1.80 —
+Between periods of 4 and 500 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."), the power falls as *f*^−1.80 —
 close to the *f*^−2 of a **random walk**, in which every step is added to the
 last (*f*^−2.11 at 10,000 tokens). At the slowest end, periods near a
 thousand iterations, the spectrum flattens a little: the world does not keep
@@ -333,7 +333,7 @@ scale. The world forgets.
 
 - **One real power law, one plausible, two apparent.** The token tail is a
   power law over two decades. The tail of the connections is plausibly one,
-  for the top 1% (the top 5% at 10,000 tokens). The degree distribution as a whole is not, and neither are
+  for the top 1% (the top 5% at 10,000 tokens). The [degree](degree.md "The number of an agent's connections: how many neighbours it has.") distribution as a whole is not, and neither are
   the lumps of death.
 - **The rules contain two textbook mechanisms for heavy tails** — copying
   neighbourhoods at birth, and multiplying tokens by chance with a floor below.
@@ -341,7 +341,7 @@ scale. The world forgets.
   experiment.
 - **No sign of a critical state.** No avalanches of every size, no 1/*f*
   noise: disturbances die out within a few hundred iterations, and the world
-  is pulled back to its level. Some theories tie open-ended evolution to
+  is pulled back to its level. Some theories tie [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.") to
   criticality — to systems on the edge between order and chaos, where small
   causes can have effects of every size. Whatever the truth of that, this
   world is not on such an edge; it is a world that wanders and returns

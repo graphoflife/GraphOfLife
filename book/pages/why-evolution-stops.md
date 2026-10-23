@@ -1,52 +1,52 @@
 # Why evolution stops
 
 > [!question] Questions of this page
-> - Does a world that cannot break keep evolving, now that its brains can see?
+> - Does a world that cannot break keep evolving, now that its [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") can see?
 > - Which of the changes that should give evolution more to work with —
 >   memory, larger brains, a reward for cooperating, hidden information — keep
 >   it going?
-> - What is it about the game that lets evolution finish so soon?
+> - What is it about the [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") that lets evolution finish so soon?
 > - What would it take to give evolution room to go on?
 
 <!-- experiment E16 -->
 
 ## Why ask
 
-The baseline learns what it learns in its first fifty to a hundred iterations
+The [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") learns what it learns in its first fifty to a hundred [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.")
 and then stops ([How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)).
 Its brains are nearly blind, so that was no surprise: evolution could only set
 a few constants. [Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md),
 [A world that cannot break](a-world-that-cannot-break.md) and [Who dies, and why](who-dies-and-why.md)
 then built a world in which brains can see
-without the world breaking — B2. The question now is the one B2 was built
+without the world breaking — [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death."). The question now is the one B2 was built
 for: in such a world, does evolution keep going?
 
 ## What the pilots tried
 
-Every pilot below played its eras against each other as in [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) — the
+Every [pilot](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") below played its [eras](eras-and-contests.md "Brains of a world at two moments, its eras, played against each other: do the later ones win?") against each other as in [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) — the
 brains of iterations 0, 100, 200, 500 and 1,000, two contests per pair — and
-reports the rating of each era against the founders and the **step score**,
+reports the rating of each era against the [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.") and the **step score**,
 each era against the one before it. A world still improving keeps its step
 scores above one half.
 
 | the world (pilot) | rating against the founders | step scores after iteration 100 |
 |---|---|---|
-| B1, the baseline (5,000 tokens) | +283 at 100, then +320 to +345 to 600 | 0.45–0.59 |
+| [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it."), the baseline (5,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.")) | +283 at 100, then +320 to +345 to 600 | 0.45–0.59 |
 | B2's rules, the last token kept (5,000) | +133 at 100, then +137 to +171 to 1,000 | a plateau from 200 |
 | the same, with brains that can grow | +113 to +130 throughout | a plateau from 100 |
 | 30% kept at home, memory of the last game's stakes (3,000) | +176 to +210 from 100 | 0.44–0.54 |
 | … and a memory of six games, with brains that can grow | +87 to +246 | 0.48–0.69 |
 | … and a yield on stakes returned (3,000) | +161 to +212 from 100 | 0.43–0.76 |
-| … and fog: neighbours' tokens hidden (3,000) | +43 to +100 | 0.53–0.63 |
-| … with support stakes (5,000) | +155, +194, +319, +337 (seed 1); +332 to +368 from 100 (seed 2) | 0.59–0.72; 0.47–0.52 |
+| … and fog: [neighbours](the-world.md#the-network "An agent joined to another by a connection.")' tokens hidden (3,000) | +43 to +100 | 0.53–0.63 |
+| … with support stakes (5,000) | +155, +194, +319, +337 ([seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1); +332 to +368 from 100 (seed 2) | 0.59–0.72; 0.47–0.52 |
 | … without random inputs (5,000) | +134 at 100, then +166 to +184 | 0.49–0.63 |
 
 Two lines stand out, and neither survives a second look. One world with
 support stakes kept beating its predecessors to iteration 1,000; its twin seed
 stopped at once. And the hidden-information worlds kept their step scores a
 little above a half because they barely evolved at all: with neighbours' tokens
-hidden, attacks stopped — 0.2 to 0.4% of the nodes changed hands in a game —
-and with them nearly every copying of a brain, and so nearly every mutation.
+hidden, attacks stopped — 0.2 to 0.4% of the [nodes](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") changed hands in a game —
+and with them nearly every copying of a brain, and so nearly every [mutation](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.").
 
 Two more things were measured along the way.
 
@@ -60,7 +60,7 @@ because larger brains won.
 
 **Support was given up.** A stake marked as support adds to its target's
 defence instead of contesting the node. It is a gift — the tokens go to the
-node's owner — and it buys nothing a home stake would not buy better, since a
+node's owner — and it buys nothing a [home stake](home-stake.md "The tokens an agent stakes on its own node, to keep it.") would not buy better, since a
 home stake counts one and a half times and support once. Evolution gave it
 up: support fell from 200–300 tokens a game to about 20 by iteration 600.
 
@@ -96,7 +96,7 @@ Evolution finds that. In pilot worlds under B2's rules, the brains' decisions we
 input by input: take an evolved agent with at least three tokens to divide,
 redraw one kind of its inputs, and see whether its division changes. Redrawing
 its **random inputs** changed 25 to 58% of the divisions; its own state, 2 to
-7%; the neighbour's state, 4 to 23%; the messages it read, 2 to 23%; its
+7%; the neighbour's state, 4 to 23%; the [messages](messages.md "Numbers an agent writes to itself and to each neighbour every phase, which their brains read.") it read, 2 to 23%; its
 memory of the last game's stakes, 11 to 24%. The evolved brains use their
 random inputs as dice. And once a population plays a good mixed strategy,
 there is nothing left to select: a better strategy against it does not exist.
@@ -130,7 +130,7 @@ become questions with answers that change as the population changes. Two
 things the pilots tried were meant to be such games, and both lacked the one
 thing cooperation needs, a **surplus**: support counted less than a home
 stake, and the yield on returned stakes went to whoever had most partners, so
-it built stars rather than partnerships. What a surplus could look like is
+it built [stars](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.") rather than partnerships. What a surplus could look like is
 the subject of [Alliances](alliances.md), and other contests are that of
 [Another game](another-game.md).
 
@@ -255,7 +255,7 @@ and none went on improving.
 <!-- /figure -->
 
 **The first hundred iterations do almost everything.** Against the founders,
-the brains of iteration 100 held 0.68 of a contested world in the median B2
+the brains of iteration 100 held 0.68 of a contested world in the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") B2
 world, and 0.69 without random inputs. A little more came between 100 and 200:
 the step score there was 0.56 in both conditions. From 200 to 500 it was
 0.52, and after that a tie: 0.49, 0.50 and 0.50 for the steps from 500 to
@@ -266,7 +266,7 @@ at 1,000 and +120 at 1,500 and 2,000. Without random inputs it stood at +86,
 
 > [!info] Added later: the third colour
 > The green dots were added after the rest of this page was written: the
-> same steps in contests a lifetime long, 100 iterations. None of them is a
+> same steps in contests a [lifetime](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death.") long, 100 iterations. None of them is a
 > tie. See [Would we notice if it went on?](#would-we-notice-if-it-went-on)
 > below.
 
@@ -362,7 +362,7 @@ contests of 100 see evolution going on all the way, more slowly as it goes.
 
 How far it goes was measured by going on: three of the ten worlds were
 continued from iteration 2,000 to 10,000 under the same rules, exactly as the
-lab would have run them (`research/oee/pilots/run.py --from`), and their eras
+[lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") would have run them (`research/oee/pilots/run.py --from`), and their eras
 played against each other the same way. All three kept improving to iteration
 5,000: its brains held 0.69, 0.59 and 0.63 of the world against those of
 2,000. After that the gains all but stopped. The brains of 10,000 held 0.51,
@@ -431,7 +431,7 @@ neighbour's state from 13–20% to 5–10%, and to messages from 34–48% to
 (`research/oee/pilots/sense.py`; `LOG.md`, *The dice were there from the
 start*). And in a contest where dice are worthless, a lottery, evolved brains
 roll them as much as under Blotto: 48 to 67%, against 59% in the same world
-under Blotto, both without revolutions ([Another game](another-game.md)). The
+under Blotto, both without [revolutions](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.") ([Another game](another-game.md)). The
 brains keep the founders' dice because nothing selects against them, not
 because the game rewards them.
 
@@ -457,6 +457,6 @@ they are (*How big should a brain be?*), what the game asks of them
 
 ← [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) · [Does evolution keep going?](../README.md#does-evolution-keep-going) · [How fast should brains change?](how-fast-should-brains-change.md) →
 
-> [!info]- Pages that link here (29)
-> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [What the baseline world is](what-the-baseline-world-is.md) · [What crosses a connection](what-crosses-a-connection.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [How alike the agents are](how-alike-the-agents-are.md) · [What the brains are like](what-the-brains-are-like.md) · [How different are the agents?](how-different-are-the-agents.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [Every era against three](every-era-against-three.md) · [Strategies written by hand](strategies-written-by-hand.md) · [What a brain can compute](what-a-brain-can-compute.md) · [Who helps whom](who-helps-whom.md) · [Do agents cooperate?](do-agents-cooperate.md) · [Another game](another-game.md) · [Alliances](alliances.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [The switches the world was built with](the-switches-the-world-was-built-with.md) · [Rules without numbers](rules-without-numbers.md) · [Who inherits?](who-inherits.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) · [Eight switches at once](eight-switches-at-once.md) · [Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md) · [Every world side by side](every-world-side-by-side.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (31)
+> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [What the baseline world is](what-the-baseline-world-is.md) · [What crosses a connection](what-crosses-a-connection.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [How alike the agents are](how-alike-the-agents-are.md) · [What the brains are like](what-the-brains-are-like.md) · [How different are the agents?](how-different-are-the-agents.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [Eras and contests: does a world keep getting better?](eras-and-contests.md) · [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [Every era against three](every-era-against-three.md) · [Strategies written by hand](strategies-written-by-hand.md) · [What a brain can compute](what-a-brain-can-compute.md) · [Who helps whom](who-helps-whom.md) · [Do agents cooperate?](do-agents-cooperate.md) · [Another game](another-game.md) · [Alliances](alliances.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [The switches the world was built with](the-switches-the-world-was-built-with.md) · [Rules without numbers](rules-without-numbers.md) · [Who inherits?](who-inherits.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) · [Eight switches at once](eight-switches-at-once.md) · [Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md) · [Every world side by side](every-world-side-by-side.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

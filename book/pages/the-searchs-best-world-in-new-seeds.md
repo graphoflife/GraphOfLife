@@ -1,10 +1,10 @@
 # The search's best world, in new seeds
 
 > [!question] Questions of this page
-> - The random search over settings found one world that met every mark,
->   with agents more diverse than any other world's. Was it the settings, or
+> - The random search over [settings](settings.md "One number or switch of a run's rules, fixed before it starts.") found one world that met every mark,
+>   with [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") more diverse than any other world's. Was it the settings, or
 >   the luck of one draw?
-> - Can the lab now play the pilots' rules, and play them as the pilots did?
+> - Can the [lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") now play the [pilots](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.")' rules, and play them as the pilots did?
 
 <!-- experiment E24 -->
 
@@ -14,15 +14,15 @@ The search by elimination drew every setting at random, round after round,
 and kept the values that did not make worlds worse
 (`research/oee/search.md`). In its second round one world stood out,
 `Z/r2-25`:
-- At iteration 1,000 it met every mark of the health bar.
+- At [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") 1,000 it met every mark of the [health bar](health-bar.md "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.").
 - Its agents were more diverse than in any world the notebook had measured, a
-  diversity score of 0.90 against 0.49 for B2's median world.
-- It was a space, twice as wide as its random twin.
+  [diversity score](diversity-score.md "How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes.") of 0.90 against 0.49 for [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.")'s [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world.
+- It was a space, twice as wide as its [random twin](random-twin.md "A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all.").
 
 It plays with:
-- brains that can grow;
+- [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") that can grow;
 - a lottery for each node;
-- stakes pooled by genotype;
+- stakes pooled by [genotype](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.");
 - an input that tells an agent where its brain came from;
 - no mending and no old age;
 - every unused link lapsing;
@@ -32,7 +32,7 @@ It plays with:
 The best of 63 draws is also the luckiest. In
 [Five more seeds for the rules that held](five-more-seeds-for-the-rules-that-held.md), rules whose
 single world had held over 10,000 iterations held no more often than mixing
-alone when they were given new seeds. Only new seeds can tell a
+alone when they were given new [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world."). Only new seeds can tell a
 configuration from a lucky draw.
 
 Four of these rules exist only in the research prototype. The lab could not
@@ -42,7 +42,7 @@ should be the pilot's again, game for game.
 
 Read by [Healthy and rich](healthy-and-rich.md)'s clarified test
 ([Healthy and rich](healthy-and-rich.md)), the world is more even than
-any of B2's, with a Gini of 0.44 against 0.49 and more. So even if the
+any of B2's, with a [Gini](gini-coefficient.md "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") of 0.44 against 0.49 and more. So even if the
 configuration holds, it is not yet the author's picture. This page
 reports how even each new world is.
 
@@ -128,7 +128,7 @@ reports how even each new world is.
 
 **The lab plays the pilots' rules as the pilots did.** The world of seed
 2025, played by the prototype frozen beside the engine, matched the pilot's
-agents and links after every one of its 1,000 games. Every world of the
+agents and links after every one of its 1,000 [games](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."). Every world of the
 pilots' rules the lab plays from now on is the world a pilot would have
 been.
 
@@ -153,12 +153,12 @@ At iteration 1,000 every one of the five new worlds was:
 - **diverse,** with diversity scores of 0.80 to 0.89 against B2's 0.49,
   among the highest the notebook has measured;
 - **a wide space,** 2.6 to 2.75 times as wide as its random twin;
-- **rich,** with 11 to 17 tokens per agent.
+- **rich,** with 11 to 17 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") per agent.
 
 None met more than four marks of the health bar:
 - **One agent's loss** cut off 19% to 47% of the world, and one link's
   loss up to 43%.
-- **Their dimension** was 2.0 to 2.2, below the bar's 2.3: thin, about
+- **Their [dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.")** was 2.0 to 2.2, below the bar's 2.3: thin, about
   two-dimensional networks.
 - **Their tokens** were too even, with Ginis of 0.33 to 0.38, against B2's
   least even world at 0.47.
@@ -203,4 +203,7 @@ game.
 ---
 
 ← [Five more seeds for the rules that held](five-more-seeds-for-the-rules-that-held.md) · [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world) · [Room for the steadiest world](room-for-the-steadiest-world.md) →
+
+> [!info]- Pages that link here (2)
+> [The random twin: is a world a space?](random-twin.md) · [The diversity score](diversity-score.md)
 <!-- /turns -->

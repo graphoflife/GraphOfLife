@@ -68,7 +68,7 @@ least one token, a world can never hold more than *T* agents.
 
 A world is fixed by its **settings** and its **seed**. The settings are 32
 numbers and switches; [Every setting](settings.md) lists them all,
-with the values of the baseline **B1**. Nine of them, added for open-ended evolution, keep
+with the values of the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") **[B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.")**. Nine of them, added for [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau."), keep
 their old rule in B1, so the rules are exactly as these pages describe them.
 The ones that shape the start are the number of tokens *T*, the number of
 founders and their ring. These pages teach with worlds of
@@ -135,7 +135,7 @@ distance 4.4 steps.
 **3. The random stream.** The ring is drawn by the networkx library from a
 random generator of its own, started from the seed. Every other random choice
 a world ever makes — the founders' brains, every probabilistic decision,
-every random input of a brain, every share-out of tokens — is drawn from one
+every random input of a brain, every [share-out](gains-losses-and-the-share-out.md "How a cleanup deals the tokens of the dead out among the living: in the baseline, each token to a survivor drawn at random.") of tokens — is drawn from one
 stream of pseudo-random numbers, started from the same seed. A run therefore
 depends on its settings and its seed and on nothing else
 ([Seeds and the random stream](random-numbers.md));
@@ -167,6 +167,6 @@ about 300 megabytes on disk; one of 100,000 tokens and 1,500 iterations writes
 
 [How the simulation works](../README.md#how-the-simulation-works) · [One iteration, step by step](one-iteration.md) →
 
-> [!info]- Pages that link here (6)
-> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [The starting ring](starting-ring.md) · [Thirty worlds](thirty-worlds.md) · [How the game is played](how-the-game-is-played.md) · [What shape does the network take?](what-shape-does-the-network-take.md)
+> [!info]- Pages that link here (10)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [The starting ring](starting-ring.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Thirty worlds](thirty-worlds.md) · [How the game is played](how-the-game-is-played.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [Eras and contests: does a world keep getting better?](eras-and-contests.md) · [The lab, the engine and pilots](the-lab.md)
 <!-- /turns -->

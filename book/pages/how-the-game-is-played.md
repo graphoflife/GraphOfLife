@@ -1,11 +1,11 @@
 # How the game is played
 
-The game is where tokens and brains change hands. Every agent stakes all its
+The game is where tokens and [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") change hands. Every agent stakes all its
 tokens on itself and its neighbours, every node goes to the largest staker or
 to a coalition, and the winner's brain is copied into the node
 ([One iteration, step by step](one-iteration.md)). The rules leave everything else to the
 brains: how much to stake at home, whether to spread or go all in, how much
-to mark revolutionary. This page looks at what the brains of the baseline
+to mark revolutionary. This page looks at what the brains of the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.")
 actually do.
 
 > [!question] Questions of this page
@@ -13,7 +13,7 @@ actually do.
 > - Do they spread their stakes or put everything on one candidate?
 > - Who wins the nodes — the agent living there, or a neighbour; the largest
 >   staker, or a coalition?
-> - Do the answers change between the founders' first game and a settled
+> - Do the answers change between the [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.")' first game and a settled
 >   world, and do the worlds agree?
 
 The worlds are the thirty of 100,000 tokens of [Thirty worlds](thirty-worlds.md);
@@ -154,7 +154,7 @@ only 0, ½ or all. So the shares cluster at simple fractions.
 Three shares, over the life of the worlds:
 
 - **Spreading** becomes the rule. In the first game 50% of the agents that
-  staked (in the median world) spread their tokens over several candidates —
+  staked (in the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world) spread their tokens over several candidates —
   about what random brains give, since the choice turns on which of two
   random outputs is larger; from iteration 500 on, 98%.
 - **Nearly every token is revolutionary.** The share of staked tokens marked
@@ -232,7 +232,7 @@ connections: an agent with one connection keeps its node in 74% of games, an
 agent with fifty or more in only 2%. On a node with *d* connections, the agent
 living there is one of *d* + 1 stakers, and it wins about as often as one of
 them would — because agents spread their stakes almost evenly over everyone
-they can reach. **Hubs are places, not individuals**: the brain on a hub is
+they can reach. **[Hubs](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.") are places, not individuals**: the brain on a hub is
 replaced in nearly every game.
 
 ## Do the worlds agree?
@@ -253,13 +253,13 @@ replaced in nearly every game.
 > **To make it again:** `python3 book_figures.py game`.
 <!-- /figure -->
 
-Remarkably well — with one kind of exception. Over the settled life, 23 of
+Remarkably well — with one kind of exception. Over the [settled life](settled-life.md "A world from iteration 500 to its end, after its youth, where it is measured."), 23 of
 the 30 worlds have between 96% and 99% of their stakers spreading; their
 agents keep their node in 37% to 48% of games, coalitions win nodes numbering
 47% to 61% of the agents, and 26% to 31% of the staked tokens go home. The
 other seven are the worlds in which one agent became a hub joined to a tenth
 of the world or more ([How much does the seed decide?](how-much-does-the-seed-decide.md)), and
-they lie apart in the order of their hubs: in the world with seed 28, whose
+they lie apart in the order of their hubs: in the world with [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 28, whose
 hub is joined to 58% of all agents, agents keep their node in 67% of games,
 coalitions win nodes numbering only 16% of the agents, 45% of the staked
 tokens go home, and 90% of stakers spread. A leaf of a star has two
@@ -283,7 +283,7 @@ game in much the same way, whatever its founders started with.
   revolutionary, a node on which the other stakers together put more than its
   largest single staker did is, nearly always, won by one of them — which may
   be the agent living on it.
-- **The stakes are nearly an even split.** [Where the tokens flow](where-the-tokens-flow.md)
+- **The stakes are nearly an [even split](even-split.md "What the rules do when a brain scores no candidate above zero: the stake is spread evenly.").** [Where the tokens flow](where-the-tokens-flow.md)
   shows that agents stake on almost all of their candidates and keep a little
   more than an even share at home — which is the rules' rounding of whole
   tokens, not the brains; a game moves tokens almost as a random walk would.
@@ -298,7 +298,7 @@ game in much the same way, whatever its founders started with.
 > shares: it set the brains' constants — few children, the stake spread,
 > every token revolutionary — alike in every world.
 > [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) plays the
-> brains of each era against their founders' in ten worlds of 5,000 tokens:
+> brains of each [era](eras-and-contests.md "Brains of a world at two moments, its eras, played against each other: do the later ones win?") against their founders' in ten worlds of 5,000 tokens:
 > by iteration 50 they hold nine tenths of a contested world, and no later
 > era does better than the one before it.
 
@@ -307,8 +307,8 @@ To make every figure of this page: `python3 book_figures.py game`.
 <!-- turns -->
 ---
 
-← [Where tokens go](where-tokens-go.md) · [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens) · [Where the tokens flow](where-the-tokens-flow.md) →
+← [Where tokens go](where-tokens-go.md) · [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens) · [The even split](even-split.md) →
 
-> [!info]- Pages that link here (20)
-> [The world: tokens, agents and a network](the-world.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [What the baseline world is](what-the-baseline-world-is.md) · [Thirty worlds](thirty-worlds.md) · [Where do the tokens go?](where-do-the-tokens-go.md) · [How even is a world?](how-even-is-a-world.md) · [Gains and losses](gains-and-losses.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [Staking at home, and keeping one's node](home-stake.md) · [The core of a world](the-core-of-a-world.md) · [Like next to like](like-next-to-like.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [Why evolution stops](why-evolution-stops.md) · [Do agents cooperate?](do-agents-cooperate.md) · [Muller plots](muller-plot.md)
+> [!info]- Pages that link here (21)
+> [The world: tokens, agents and a network](the-world.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [What the baseline world is](what-the-baseline-world-is.md) · [Thirty worlds](thirty-worlds.md) · [Where do the tokens go?](where-do-the-tokens-go.md) · [How even is a world?](how-even-is-a-world.md) · [Gains and losses](gains-and-losses.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [Staking at home, and keeping one's node](home-stake.md) · [The core of a world](the-core-of-a-world.md) · [Stars and hubs](stars-and-hubs.md) · [Like next to like](like-next-to-like.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [Why evolution stops](why-evolution-stops.md) · [Do agents cooperate?](do-agents-cooperate.md) · [Muller plots](muller-plot.md)
 <!-- /turns -->

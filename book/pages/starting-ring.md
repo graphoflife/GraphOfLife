@@ -29,7 +29,7 @@ Let *T* be the number of tokens ([`total_tokens`](settings.md#total_tokens)).
    multinomial draw in which every founder has the same chance at every
    token.
 5. **Brains.** Every founder gets a brain whose weights are drawn at random
-   ([The brain](the-brain.md)), each a genotype of its own,
+   ([The brain](the-brain.md)), each a [genotype](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.") of its own,
    numbered 1 to *n*.
 
 Steps 1–3 are done by the networkx function `watts_strogatz_graph(n, k, p,
@@ -40,7 +40,7 @@ run's seed. Steps 4–5 draw from the world's random stream
 ## The baseline's ring
 
 With *T* = 10,000: *n* = 100 founders of 100 tokens each, *k* = 5, so every
-founder is joined to 2 on each side — degree 4 — and the ring has
+founder is joined to 2 on each side — [degree](degree.md "The number of an agent's connections: how many neighbours it has.") 4 — and the ring has
 100 · 2 = 200 connections. On average 0.2 · 200 = 40 of them are rewired.
 
 ![The founders' ring](../diagrams/ring.svg)
@@ -60,8 +60,8 @@ enough to make every distance short. In the real ring of the run with seed 1,
 37 of the 200 connections were rewired: the clustering fell to 0.27, the
 average distance to 4.4 steps ([The world: tokens, agents and a network](the-world.md)).
 
-The first games of a world cut every connection that carries no tokens, so
-the ring is forgotten within a few iterations. It matters mainly as a fair,
+The first [games](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") of a world cut every connection that carries no tokens, so
+the ring is forgotten within a few [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."). It matters mainly as a fair,
 connected start: every founder can reach every other.
 
 <!-- turns -->
@@ -69,6 +69,6 @@ connected start: every founder can reach every other.
 
 ← [Every setting](settings.md) · [How the simulation works](../README.md#how-the-simulation-works) · [Seeds and the random stream](random-numbers.md) →
 
-> [!info]- Pages that link here (7)
-> [The world: tokens, agents and a network](the-world.md) · [Every setting](settings.md) · [Seeds and the random stream](random-numbers.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [Clustering](clustering.md) · [Path length](path-length.md) · [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)
+> [!info]- Pages that link here (11)
+> [Glossary](glossary.md) · [The world: tokens, agents and a network](the-world.md) · [Every setting](settings.md) · [Seeds and the random stream](random-numbers.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [Clustering](clustering.md) · [Path length](path-length.md) · [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) · [Eras and contests: does a world keep getting better?](eras-and-contests.md) · [The lab, the engine and pilots](the-lab.md)
 <!-- /turns -->

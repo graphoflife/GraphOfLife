@@ -1,7 +1,7 @@
 # Eight switches at once
 
 > [!question] Questions of this page
-> - The notebook has thrown its switches into B2 one at a time. What does each
+> - The notebook has thrown its switches into [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.") one at a time. What does each
 >   do when several are thrown together?
 > - Which switches move a world's riches, its diversity, its size and its
 >   network the most?
@@ -23,23 +23,23 @@ The eight switches, each one the notebook has played alone in B2 before:
 
 | | switch | the setting | alone in |
 |---|---|---|---|
-| A | gifts | [`allow_gifting`](settings.md#allow_gifting), with unused links cut after reproduction once unused for an iteration | batch S ([The switches the world was built with](the-switches-the-world-was-built-with.md)) |
-| B | no revolutions | [`allow_revolutions`](settings.md#allow_revolutions) off | batch S ([The switches the world was built with](the-switches-the-world-was-built-with.md)) |
+| A | gifts | [`allow_gifting`](settings.md#allow_gifting), with unused links cut after reproduction once unused for an [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") | batch S ([The switches the world was built with](the-switches-the-world-was-built-with.md)) |
+| B | no [revolutions](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.") | [`allow_revolutions`](settings.md#allow_revolutions) off | batch S ([The switches the world was built with](the-switches-the-world-was-built-with.md)) |
 | C | every unused link lapses | [`prune_needs`](settings.md#prune_needs) = 0 | batch S ([The switches the world was built with](the-switches-the-world-was-built-with.md)) |
 | D | no random inputs | [`random_input_amount`](settings.md#random_input_amount) = 0 | Experiment 16 ([Why evolution stops](why-evolution-stops.md)) |
-| E | estates to the newborns | [`redistribution`](settings.md#redistribution) = `newborns` | [Who inherits?](who-inherits.md) |
-| F | links hold a token | a link costs a token to keep, with no cap on links | batch P ([Rules without numbers](rules-without-numbers.md)) |
-| G | brains mixed at birth | a newborn's brain mixed from its parent's and a neighbour's | [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) |
+| E | [estates](estate.md "The tokens a dead agent leaves, and who gets them.") to the newborns | [`redistribution`](settings.md#redistribution) = `newborns` | [Who inherits?](who-inherits.md) |
+| F | links hold a [token](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") | a link costs a token to keep, with no cap on links | batch P ([Rules without numbers](rules-without-numbers.md)) |
+| G | [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") mixed at birth | a newborn's brain mixed from its parent's and a [neighbour](the-world.md#the-network "An agent joined to another by a connection.")'s | [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) |
 | H | handover | [`allow_handover`](settings.md#allow_handover): a parent may pass links to its newborn | batch T's control (`T/handover`) |
 
 A, B, C and D are on and off in all sixteen combinations; E, F, G and H are
 set from them (E = BCD, F = ACD, G = ABC, H = ABD — on where the product of
-the three is +1). Each world is B2 at 10,000 tokens, seed 1, played for
-1,000 iterations (pilot batch U), and read at iteration 1,000 as
+the three is +1). Each world is B2 at 10,000 tokens, [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1, played for
+1,000 iterations ([pilot](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") batch U), and read at iteration 1,000 as
 [Healthy and rich](healthy-and-rich.md) reads every world. The world with
 no switch on is B2's own world of seed 1, game for game.
 
-| switches on | agents | agents with 3 tokens or fewer | diversity score | marks (of 7) | dimension | links per agent |
+| switches on | [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") | agents with 3 tokens or fewer | [diversity score](diversity-score.md "How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes.") | marks (of 7) | [dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") | links per agent |
 |---|---|---|---|---|---|---|
 | C, D, G, H | 931 | 1% | 0.61 | 5 | 2.31 | 3.7 |
 | B, C, F, H | 1,128 | 2% | 0.10 | 4 | 1.97 | 3.4 |
@@ -79,7 +79,7 @@ no switch on is B2's own world of seed 1, game for game.
 <!-- /figure -->
 
 A switch's **main effect** is the mean of the eight worlds with it on minus
-the mean of the eight with it off. How large is large: the lab's ten B2
+the mean of the eight with it off. How large is large: the [lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s ten B2
 worlds at iteration 1,000 differ only in their seed, and their spread (the
 grey band) is twice the noise of a main effect. The seed moves the share of
 poor agents by 0.03, the diversity score by 0.06, the dimension by 0.2 and
@@ -88,7 +88,7 @@ the agents by 270; it never moves the marks — all ten B2 worlds meet six.
 - **Every unused link lapsing (C) is the strongest switch.** It takes 1,750
   agents off a world, 0.58 off the share of agents holding three tokens or
   fewer, 1.3 off the dimension, 0.9 links off each agent and 1.75 marks off
-  the health bar. Seven of the eight worlds with it hold less than a third of
+  the [health bar](health-bar.md "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4."). Seven of the eight worlds with it hold less than a third of
   their agents at three tokens or fewer; seven of the eight without it, more
   than three fifths.
 - **The estate to the newborns (E) fills a world**: 980 agents more, and 0.26
@@ -187,10 +187,10 @@ newborns, which cancels it, and four the lapse, which leaves nothing to add.
 > **To make it again:** `python3 book_figures.py eightswitches`.
 <!-- /figure -->
 
-Played against the brains of iteration 500 for a lifetime, the brains of
+Played against the brains of iteration 500 for a [lifetime](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death."), the brains of
 1,000 hold more than half of a contested world in fifteen of the sixteen
 worlds: from 0.47 (C, D, G and H on) to 1.0 (all eight on, where the later
-brains took the whole world in both eras' worlds). The median is 0.60, below
+brains took the whole world in both [eras](eras-and-contests.md "Brains of a world at two moments, its eras, played against each other: do the later ones win?")' worlds). The [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") is 0.60, below
 B2's own 0.69 (the lab's ten B2 worlds: a median of 0.68, with a spread of
 0.04). Gifts, no revolutions, lapsing links and the estate to the newborns
 each speed evolution a little — 0.07 to 0.09, about twice the spread of B2's
@@ -208,7 +208,7 @@ act together here too: three chains add 0.11 to 0.14.
 > [!info] Added later (18 October 2026)
 > Batch V, promised below, has run.
 
-B1 is the world that can break: its revolutions take most of the nodes that
+[B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") is the world that can break: its revolutions take most of the nodes that
 change hands, a parent may pass links to its newborn, and pieces cut off are
 culled ([The switches the world was built with](the-switches-the-world-was-built-with.md)). Batch V
 plays the same design on it, sixteen worlds of 10,000 tokens, seed 1, 1,000

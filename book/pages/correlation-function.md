@@ -1,6 +1,6 @@
 # How alike at a distance
 
-In a magnet, a spin pointing up makes its neighbours more likely to point up,
+In a magnet, a spin pointing up makes its [neighbours](the-world.md#the-network "An agent joined to another by a connection.") more likely to point up,
 and their neighbours a little more likely, and so on, fading with distance.
 How fast it fades is one of the most telling facts about a physical system.
 The tool that measures it is the **correlation function** (Chaikin and
@@ -9,8 +9,8 @@ tool applies.
 
 ## The definition
 
-Give every agent *u* a value *x*(*u*), such as its tokens, its age or its
-connections, standardised within its world: minus the mean, divided by the
+Give every [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") *u* a value *x*(*u*), such as its [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes."), its age or its
+[connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes."), standardised within its world: minus the mean, divided by the
 standard deviation. For every pair of agents exactly *r* steps apart, take
 the two values. The correlation function is the correlation
 ([Correlation](correlation.md)) over all such pairs:
@@ -47,7 +47,7 @@ uniform.
 ## A trap: place versus closeness
 
 On a network, a correlation at distance *r* can arise without any agent
-influencing another. Suppose tokens follow connections — hubs rich, leaves
+influencing another. Suppose tokens follow connections — [hubs](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.") rich, leaves
 poor — and hubs sit among leaves. Then neighbours have *unlike* tokens, and
 two leaves of one hub (two steps apart) have *like* tokens, purely because
 of where hubs and leaves sit.
@@ -74,6 +74,6 @@ tokens, age and connections, and the share of kin at each distance.
 
 **Also about:** [The shape and health of the network](../README.md#the-shape-and-health-of-the-network).
 
-> [!info]- Pages that link here (1)
-> [Like next to like](like-next-to-like.md)
+> [!info]- Pages that link here (2)
+> [Glossary](glossary.md) · [Like next to like](like-next-to-like.md)
 <!-- /turns -->

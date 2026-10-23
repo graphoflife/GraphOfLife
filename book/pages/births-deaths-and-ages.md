@@ -4,12 +4,12 @@ A settled world keeps its size ([A world's life](a-worlds-life.md)), but its
 members come and go.
 
 > [!question] Questions of this page
-> - How often is an agent born?
+> - How often is an [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") born?
 > - How do agents die, and which way of dying is the most common?
 > - How long do agents live?
 > - How old are the living — and why is that a different question?
 
-The worlds are the thirty of 100,000 tokens of [Thirty worlds](thirty-worlds.md);
+The worlds are the thirty of 100,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") of [Thirty worlds](thirty-worlds.md);
 where the thirty of 10,000 tokens this page was first written from differ,
 both are given.
 
@@ -78,7 +78,7 @@ in one of four ways ([One iteration, step by step](one-iteration.md)): it is **c
 newborn joined to no one —; it **starves in reproduction**, a parent that gave
 its last token to its child; it **starves in the game**, when no one, not even
 itself, staked a token on its node; or it is **cut off in the game**, when the
-connections that tied its part of the network to the rest are cut
+[connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") that tied its part of the network to the rest are cut
 ([Births and the four ways to die](births-and-deaths.md)). Each is
 counted per hundred agents alive when its phase began:
 
@@ -99,13 +99,13 @@ counted per hundred agents alive when its phase began:
 > **To make it again:** `python3 book_figures.py births`.
 <!-- /figure -->
 
-From iteration 500 on, the median world sees 3.5 births per hundred agents in
+From iteration 500 on, the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world sees 3.5 births per hundred agents in
 every reproduction phase, and loses 0.4 per hundred to cutting off in
 reproduction, 0.7 to starvation in the game and 2.1 to cutting off in the
 game. (Starving in reproduction is rarer still, 0.15; it is not drawn.) Of
 every four agents who die, three die because the network around them came
 apart, and one because nobody staked on its node. Each world counts once
-here: the rates are each world's mean over its settled life, and the typical
+here: the rates are each world's mean over its [settled life](settled-life.md "A world from iteration 500 to its end, after its youth, where it is measured."), and the typical
 world is the median one.
 
 The rates are steady from about iteration 500 on, after falling from the
@@ -169,7 +169,7 @@ The worlds of 10,000 tokens drew almost the same curve up to a hundred
 iterations (48% at least 10, 15% at least 100) and a longer tail beyond it:
 0.6% of their agents lived 500 iterations or more.
 
-A curve that fell along a straight line on these axes would be a power law;
+A curve that fell along a straight line on these axes would be a [power law](power-law-fit.md "A quantity whose frequency falls as a power of its size: few huge values, many small ones.");
 this one bends. Early deaths are common; long lives exist, but not without
 limit.
 

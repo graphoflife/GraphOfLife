@@ -287,6 +287,42 @@ def test_no_page_is_named_by_a_number():
     assert not found, "pages named by a number:\n  " + "\n  ".join(found[:40])
 
 
+def test_every_term_has_a_page_that_explains_it():
+    # A term links to the page, and the section, that explains it, with a line
+    # that says what it is as the link's title; a name two terms share would be
+    # linked to whichever came first.
+    import book_fill
+    names = {}
+    for term in book_fill.terms():
+        home = book_fill.page_file(term["page"])
+        with open(os.path.join(runner.ROOT, "book", home), encoding="utf-8") as f:
+            ids = book_fill.anchors(f.read())
+        assert not term.get("anchor") or term["anchor"] in ids, f"{term['name']}: no section {term['anchor']} in {home}"
+        assert term["says"] and '"' not in term["says"] and "\n" not in term["says"], term["name"]
+        for name in [term["name"], *term.get("also", [])]:
+            assert name.lower() not in names, f"{name} names both {names[name.lower()]} and {term['name']}"
+            names[name.lower()] = term["name"]
+
+
+def test_a_term_is_linked_where_it_is_first_used():
+    # Once per page, at its first use outside headings, code and links; the
+    # longest name first; never where the page links to the term already; and
+    # linking a page twice changes nothing.
+    import book_fill
+    md = "pages/x.md"
+    text = ("# Degree and dimension\n\nThe spectral dimension of a world, its dimension by balls, and the degree\n"
+            "of each; their degrees again, `degree` in code, and [the Gini](gini-coefficient.md) and the Gini again.\n")
+    once = book_fill.link_terms(md, text)
+    assert book_fill.link_terms(md, once) == once, "linking twice changed the page"
+    assert once.startswith("# Degree and dimension\n"), "a heading was linked"
+    assert '[spectral dimension](spectral-dimension.md "' in once, once
+    assert '[dimension](ball-dimension-and-curvature.md "' in once, "a shorter name took the longer one's words"
+    assert once.count("](degree.md") == 1 and "`degree`" in once, once
+    assert once.count("gini-coefficient.md") == 1, "a term the page links already was linked again"
+    assert book_fill.link_terms("pages/degree.md", "the degree of an agent").count("degree.md") == 0, \
+        "a term was linked on its own page"
+
+
 def test_every_page_is_filled_as_the_notebook_says():
     # The blocks of a page — figures, theses, runs, contents, and the foot that
     # names its topic and the pages that link to it — are made from book.json,

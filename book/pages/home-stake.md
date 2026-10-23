@@ -1,7 +1,7 @@
 # Staking at home, and keeping one's node
 
-In the game every agent stakes all its tokens on its **candidates**: its own
-node and its neighbours' nodes ([One iteration, step by step](one-iteration.md)).
+In the game every [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") stakes all its [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") on its **candidates**: its own
+node and its [neighbours](the-world.md#the-network "An agent joined to another by a connection.")' nodes ([One iteration, step by step](one-iteration.md)).
 Two questions about this: how much do agents stake **at home**, on their own
 node? And how often does an agent **keep** its node — win it itself? This
 note defines the statistics that answer them.
@@ -28,7 +28,7 @@ frames ([What a run records](frames-and-stats.md)).
 `heldHomeShare`, in every game row: of all nodes on which anyone staked
 anything, the share won by **their own agent**. A node that is not kept was
 won by a neighbour (alone or with a coalition), and its agent now carries a
-copy of that neighbour's brain.
+copy of that neighbour's [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.").
 
 ## How often a coalition wins
 
@@ -41,7 +41,7 @@ number of agents at the start of the game, `revolutions/nodes_before`.
 Together they say what kind of contest the game is. If agents staked
 everything at home and always kept their nodes, the game would change
 nothing; brains would be passed on only to children. In fact, in a settled
-baseline world agents stake about 30% of their tokens at home, keep their
+[baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") world agents stake about 30% of their tokens at home, keep their
 node in about 45% of games, and about half of all nodes are won by a
 coalition rather than by their largest staker ([How the game is played](how-the-game-is-played.md)).
 
@@ -52,6 +52,6 @@ coalition rather than by their largest staker ([How the game is played](how-the-
 
 **Also about:** [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens).
 
-> [!info]- Pages that link here (3)
-> [How the game is played](how-the-game-is-played.md) · [How different are the agents?](how-different-are-the-agents.md) · [What a run records](frames-and-stats.md)
+> [!info]- Pages that link here (4)
+> [Glossary](glossary.md) · [How the game is played](how-the-game-is-played.md) · [How different are the agents?](how-different-are-the-agents.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

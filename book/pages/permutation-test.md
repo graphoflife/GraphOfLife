@@ -8,7 +8,7 @@ distributions.
 
 ## The logic
 
-Suppose a setting changes nothing. Then the label "condition A" or
+Suppose a [setting](settings.md "One number or switch of a run's rules, fixed before it starts.") changes nothing. Then the label "condition A" or
 "condition B" on each world is arbitrary: any relabelling of the worlds is as
 likely as the one we have. So relabel at random many times, recompute the
 difference each time, and see where the real one falls among the shuffled
@@ -31,7 +31,7 @@ possibilities, so *p* is never exactly 0.
   at random into two groups of the original sizes, and take the difference of
   the means.
 - **Pairs.** If each world of condition B has a partner in A with the same
-  seed, take the differences *dᵢ* of the pairs. Under "no difference", each
+  [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world."), take the differences *dᵢ* of the pairs. Under "no difference", each
   *dᵢ* is as likely to be +*dᵢ* as −*dᵢ*: so flip the sign of each at random
   and take the mean.
 - **A correlation.** To test whether a world's first half predicts its
@@ -57,6 +57,6 @@ thirty seeds per condition went into it.
 
 ← [The bootstrap](bootstrap.md) · [Methods and statistics](../README.md#methods-and-statistics) · [How many seeds an experiment needs](seeds-needed.md) →
 
-> [!info]- Pages that link here (6)
-> [The ideas this builds on](the-ideas-this-builds-on.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [Do the brains matter?](do-the-brains-matter.md) · [How worlds are measured](how-worlds-are-measured.md) · [Correlation](correlation.md) · [The bootstrap](bootstrap.md)
+> [!info]- Pages that link here (7)
+> [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [Do the brains matter?](do-the-brains-matter.md) · [How worlds are measured](how-worlds-are-measured.md) · [Correlation](correlation.md) · [The bootstrap](bootstrap.md)
 <!-- /turns -->

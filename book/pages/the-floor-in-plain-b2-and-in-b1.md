@@ -1,10 +1,10 @@
 # The floor in plain B2 and in B1
 
 > [!question] Questions of this page
-> - The floor of [Births as rich as the neighbours](births-as-rich-as-the-neighbours.md) never bound in B2's mixed worlds, because every
->   B2 child already starts with ten tokens. Is it as idle in plain B2?
-> - In B1, where a child may start with a single token, does the floor bind,
->   and does it make a world of fewer, richer agents?
+> - The floor of [Births as rich as the neighbours](births-as-rich-as-the-neighbours.md) never bound in [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.")'s mixed worlds, because every
+>   B2 child already starts with ten [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes."). Is it as idle in plain B2?
+> - In [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it."), where a child may start with a single token, does the floor bind,
+>   and does it make a world of fewer, richer [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.")?
 
 <!-- experiment E36 -->
 
@@ -13,16 +13,16 @@
 ## Why ask
 
 In [Births as rich as the neighbours](births-as-rich-as-the-neighbours.md) the floor, a child
-never poorer than the median holding of its parent's neighbours
+never poorer than the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") holding of its parent's [neighbours](the-world.md#the-network "An agent joined to another by a connection.")
 ([`child_floor`](settings.md#child_floor) = `neighbours`), changed
-nothing in worlds of B2's rules with brains mixed at birth. In a world of
+nothing in worlds of B2's rules with [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") mixed at birth. In a world of
 poor agents the neighbours hold a token or two, and every B2 child already
 starts with ten ([`min_child`](settings.md#min_child)). That leaves
 two questions.
-- **Plain B2.** Is the floor as idle without mixed brains and estates? Plain
+- **Plain B2.** Is the floor as idle without mixed brains and [estates](estate.md "The tokens a dead agent leaves, and who gets them.")? Plain
   B2 is poor too: about three agents in four hold three tokens or fewer
   ([Who inherits?](who-inherits.md)). Its children start with 11.2 to 12.1
-  tokens on average, in Experiment 16's ten worlds over iterations 1,000 to
+  tokens on average, in Experiment 16's ten worlds over [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") 1,000 to
   2,000.
 - **B1.** Its least child is a single token. Its children start with 2.0 to
   5.1 tokens on average, a median of 2.6, in the 26 of Experiment 2's 30

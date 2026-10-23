@@ -1,7 +1,7 @@
 # Logarithmic axes and power laws
 
 Many quantities in Graph of Life range over several orders of magnitude: an
-agent may hold 1 token or 3,000; a life may last 1 iteration or 1,500.
+[agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") may hold 1 [token](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") or 3,000; a life may last 1 [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") or 1,500.
 On an ordinary axis, everything below a few hundred is squeezed into a
 sliver. A **logarithmic axis** gives every factor of ten the same room.
 
@@ -22,7 +22,7 @@ Two consequences:
 
 ## Log–log plots and power laws
 
-When **both** axes are logarithmic, a **power law**
+When **both** axes are logarithmic, a **[power law](power-law-fit.md "A quantity whose frequency falls as a power of its size: few huge values, many small ones.")**
 
 $$
 y = a\, x^{b}
@@ -45,7 +45,7 @@ log–log axes, and its exponent read off as the slope. Examples:
 
 ## Distributions on log–log axes
 
-To see the shape of a wide distribution — of degrees, tokens or lifetimes —
+To see the shape of a wide distribution — of [degrees](degree.md "The number of an agent's connections: how many neighbours it has."), tokens or [lifetimes](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death.") —
 the notebook draws its **complementary cumulative distribution**: the share of
 values at least *x*, against *x*, both axes logarithmic. If the share of
 values equal to *x* follows a power law with exponent −γ, the share at least
@@ -64,6 +64,6 @@ no better.
 
 ← [The Wilson interval](wilson-interval.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Muller plots](muller-plot.md) →
 
-> [!info]- Pages that link here (10)
-> [The ideas this builds on](the-ideas-this-builds-on.md) · [Lightning in every world](lightning-in-every-world.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [Degree](degree.md) · [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) · [How worlds are measured](how-worlds-are-measured.md) · [Survival curves (Kaplan–Meier)](kaplan-meier.md) · [Fitting a straight line, and R²](least-squares.md) · [Fitting a power law properly](power-law-fit.md)
+> [!info]- Pages that link here (11)
+> [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [Lightning in every world](lightning-in-every-world.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [Degree](degree.md) · [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) · [How worlds are measured](how-worlds-are-measured.md) · [Survival curves (Kaplan–Meier)](kaplan-meier.md) · [Fitting a straight line, and R²](least-squares.md) · [Fitting a power law properly](power-law-fit.md)
 <!-- /turns -->

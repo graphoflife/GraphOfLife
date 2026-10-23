@@ -1,10 +1,10 @@
 # Births as rich as the neighbours
 
 > [!question] Questions of this page
-> - The estates of the dead paid to births make a world a healthy space but
+> - The [estates](estate.md "The tokens a dead agent leaves, and who gets them.") of the dead paid to births make a world a healthy space but
 >   fill it with paupers. Can a rule of birth keep the space and stop the
 >   paupers?
-> - What does a world do when a child may never be poorer than the agents it
+> - What does a world do when a child may never be poorer than the [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") it
 >   is born among?
 
 <!-- experiment E32 -->
@@ -15,20 +15,20 @@
 world each rule that keeps a world's room. The estates of the dead, paid to
 the newborns or to the parents, came nearest the network the author's
 picture asks for:
-- every mark of the health bar;
+- every mark of the [health bar](health-bar.md "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.");
 - a space 2.0 to 2.65 times as wide as its twin, at about three
-  dimensions.
+  [dimensions](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.").
 
-But they filled it with children: about 5,000 agents for 10,000 tokens,
+But they filled it with children: about 5,000 agents for 10,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes."),
 1.9 tokens each. Almost every agent held the same few tokens, and the
-diversity score fell from Experiment 19's 0.54 to 0.75 to 0.32 to 0.41.
+[diversity score](diversity-score.md "How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes.") fell from Experiment 19's 0.54 to 0.75 to 0.32 to 0.41.
 
 An estate paid to births makes a birth cheap, and nothing stops a world
 from making paupers.
 [What holds a world's size](what-holds-a-worlds-size.md) asked for a pull: births
 that cost more when they would make the world poorer. The rule tried here
 is that pull, with no number of its own. A child must start with at least
-the median holding of its parent's neighbours
+the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") holding of its parent's [neighbours](the-world.md#the-network "An agent joined to another by a connection.")
 ([`child_floor`](settings.md#child_floor) = `neighbours`).
 - A parent among rich agents can have a child only by giving it as much as
   they hold.
@@ -129,7 +129,7 @@ The world can grow only as rich as it is.
 > **To make it again:** `python3 book_figures.py floor`.
 <!-- /figure -->
 
-**The floor changed nothing the measures can see.** At iteration 3,000:
+**The floor changed nothing the measures can see.** At [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") 3,000:
 - **With an estate,** the four worlds with the floor are [Room for the steadiest world](room-for-the-steadiest-world.md)'s
   estate worlds again:
 
@@ -140,7 +140,7 @@ The world can grow only as rich as it is.
   | agents | 5,063 to 5,735 | 5,036 to 5,445 |
   | tokens per agent | 1.74 to 1.98 | 1.84 to 1.99 |
   | diversity score | 0.35 to 0.39 | 0.32 to 0.41 |
-  | Gini of the tokens | 0.40 to 0.46 | 0.42 to 0.45 |
+  | [Gini](gini-coefficient.md "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") of the tokens | 0.40 to 0.46 | 0.42 to 0.45 |
 
 - **Alone,** the floor left Experiment 19's world as it was. Its two worlds
   lie among Experiment 19's ten in every measure:
@@ -153,7 +153,7 @@ The world can grow only as rich as it is.
 ## Why the floor did nothing
 
 **It could not bind.** Every child already starts with at least ten tokens
-(B2's `min_child`). So the floor asks more only of a parent whose
+([B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.")'s `min_child`). So the floor asks more only of a parent whose
 neighbours' median holding is above ten.
 - **In the estate worlds with the floor,** at 3,000, the median agent's
   neighbours held a median of one token. Of the 109 to 157 agents rich
@@ -182,7 +182,7 @@ starts with ten tokens or more, as in any world.
 - Aged 11 to 20, 2.1.
 - From 30 on, about 1.5.
 
-The game strips the young within twenty iterations. In Experiment 19's
+The [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") strips the young within twenty iterations. In Experiment 19's
 worlds, agents hold 7 in their first ten iterations and still 4.4 in their
 last ten.
 
@@ -227,11 +227,11 @@ against 0.47). The floor changed nothing measurable, because in a world of
 paupers a child's neighbours are paupers too.
 
 > [!info] What these results cover (added 2026-10-21)
-> Every world of this page was played under B2's rules, with brains mixed
-> at birth and parents as mates, at 10,000 tokens, two seeds each. The floor
+> Every world of this page was played under B2's rules, with [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") mixed
+> at birth and parents as mates, at 10,000 tokens, two [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") each. The floor
 > failed because of one of those rules: every B2 child already starts with
 > ten tokens (`min_child`), more than a poor world's neighbours hold. A world
-> whose least child is a single token, such as B1, is another matter;
+> whose least child is a single token, such as [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it."), is another matter;
 > [The floor in plain B2 and in B1](the-floor-in-plain-b2-and-in-b1.md) plays the same floor
 > in plain B2 and in B1. The ledger of births, a hundred agents for each birth
 > an iteration, holds only where every agent dies at a fixed age, as in B2.
@@ -263,6 +263,6 @@ paupers a child's neighbours are paupers too.
 
 **Also about:** [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world).
 
-> [!info]- Pages that link here (3)
-> [The floor in plain B2 and in B1](the-floor-in-plain-b2-and-in-b1.md) · [Room for the steadiest world](room-for-the-steadiest-world.md) · [A screen of random worlds](a-screen-of-random-worlds.md)
+> [!info]- Pages that link here (6)
+> [The estate of the dead](estate.md) · [The random twin: is a world a space?](random-twin.md) · [The floor in plain B2 and in B1](the-floor-in-plain-b2-and-in-b1.md) · [The diversity score](diversity-score.md) · [Room for the steadiest world](room-for-the-steadiest-world.md) · [A screen of random worlds](a-screen-of-random-worlds.md)
 <!-- /turns -->

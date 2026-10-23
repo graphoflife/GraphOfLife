@@ -1,17 +1,17 @@
 # How properties scale together
 
-An agent has several measurable properties: its tokens, its connections, the
+An [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") has several measurable properties: its [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes."), its [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes."), the
 triangles it is a corner of, how closely knit its neighbourhood is, how much
-its tokens change in a game. How does one grow with another? Every 25
-iterations, the viewer fits four **scaling relations** of the form *y* ≈ *a xᵇ*
-by least squares on the logarithms of all agents
+its tokens change in a [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."). How does one grow with another? Every 25
+[iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."), the viewer fits four **scaling relations** of the form *y* ≈ *a xᵇ*
+by [least squares](least-squares.md "The straight line that fits a cloud of points best, and how much of their spread it explains.") on the logarithms of all agents
 ([Scaling relations](scaling-relations.md)). This page shows the
 agents behind the four fits — and finds that one of the exponents means
 something quite different from what it seems to say.
 
 > [!question] Questions of this page
 > - How do an agent's tokens grow with its connections? Is that the resting
->   state of the even split ([Where the tokens flow](where-the-tokens-flow.md))?
+>   state of the [even split](even-split.md "What the rules do when a brain scores no candidate above zero: the stake is spread evenly.") ([Where the tokens flow](where-the-tokens-flow.md))?
 > - How closely knit is the neighbourhood of a well-connected agent?
 > - To whom are the well-connected joined?
 > - Does the size of an agent's gains and losses grow with its wealth?
@@ -101,13 +101,13 @@ The cells show the 394,056 agents alive after the last game of the thirty
 worlds. Tokens rise with connections, with a wide scatter: in every class of
 connections, the agents' tokens span two decades. Least squares through all
 of them gives **tokens ∝ k^0.58**, and in single worlds, measured every 25
-iterations over the settled life, 0.59 (0.51 to 0.64) with R² = 0.42 — as at
+iterations over the [settled life](settled-life.md "A world from iteration 500 to its end, after its youth, where it is measured."), 0.59 (0.51 to 0.64) with R² = 0.42 — as at
 10,000 tokens (0.58 pooled, 0.61 in single worlds). Ten
 times the connections, about four times the tokens?
 
-Now compare the white line, the median of each class, with the cyan line,
+Now compare the white line, the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") of each class, with the cyan line,
 tokens ∝ *k* + 1 — the resting state of the even split, where every agent
-holds the same number of tokens for each of its candidates. From about five
+holds the same number of tokens for each of its [candidates](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides."). From about five
 connections on, the two run parallel. Count tokens per candidate, τ/(*k* + 1),
 in each class:
 
@@ -132,13 +132,13 @@ poorly connected holding a little more than their share (1.5 tokens per
 candidate at one connection, against 1.0 from five on).
 
 This is the most useful lesson of the page: **an exponent fitted to a
-relation that is not a power law reports where most of the points are**, not
+relation that is not a [power law](power-law-fit.md "A quantity whose frequency falls as a power of its size: few huge values, many small ones.") reports where most of the points are**, not
 a law. Here the law is simple — tokens proportional to connections plus one —
 and the exponent 0.6 is what it looks like through a log–log fit.
 
 ## How closely knit a neighbourhood is
 
-The **clustering coefficient** of an agent with *k* ≥ 2 neighbours is the
+The **clustering coefficient** of an agent with *k* ≥ 2 [neighbours](the-world.md#the-network "An agent joined to another by a connection.") is the
 share of the *k*(*k* − 1)/2 pairs of its neighbours that are joined to each
 other ([Clustering](clustering.md)); its **triangles** are those
 joined pairs.
@@ -169,7 +169,7 @@ share of joined neighbour pairs is a few in a thousand.
 
 A falling *C*(*k*) ∝ 1/*k* is the signature Ravasz and Barabási (2003) gave
 for **hierarchical** networks: small, tight groups inside larger, looser ones.
-The rules suggest how it comes about here. A hub gains connections through
+The rules suggest how it comes about here. A [hub](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.") gains connections through
 the children of its neighbours ([Power laws, real and apparent](power-laws-real-and-apparent.md)):
 a child born to a neighbour *v* of the hub *h* and joined to both *v* and *h*
 closes the triangle (child, *v*, *h*). So each connection a hub gains this way
@@ -204,7 +204,7 @@ at 10,000 tokens a leaf's neighbour had 163 connections on average. **Leaves
 hang on hubs, and hubs are surrounded by leaves**: the world is built of
 stars.
 
-The single number for this, the **assortativity** *r* — the correlation of
+The single number for this, the **assortativity** *r* — the [correlation](correlation.md "Whether two quantities go up and down together, from −1 to 1.") of
 the connections at the two ends of a connection ([Assortativity](assortativity.md)) —
 is −0.07 in the median world (−0.47 to +0.02; −0.11 at 10,000 tokens). Mildly negative; and as the note
 explains, a world with a few large hubs comes out negative anyway, because
@@ -258,7 +258,7 @@ world's history.
 - **These relations belong to the rules.** They are nearly the same in every
   world, and they follow from two mechanisms — splitting stakes evenly and
   joining children to their parents' neighbours — that say nothing about what
-  a brain computes. Structure that the rules alone fix is not where to look
+  a [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") computes. Structure that the rules alone fix is not where to look
   for evolution; [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) asks where to look instead.
 
 To make every figure of this page: `python3 book_figures.py scaling`.
@@ -268,6 +268,6 @@ To make every figure of this page: `python3 book_figures.py scaling`.
 
 ← [Power laws, real and apparent](power-laws-real-and-apparent.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [The geometry of a world](the-geometry-of-a-world.md) →
 
-> [!info]- Pages that link here (12)
-> [What the baseline world is](what-the-baseline-world-is.md) · [How ages change over a world's life](how-ages-change.md) · [Where do the tokens go?](where-do-the-tokens-go.md) · [Do the rich stay rich?](do-the-rich-stay-rich.md) · [Where the tokens flow](where-the-tokens-flow.md) · [What crosses a connection](what-crosses-a-connection.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [The geometry of a world](the-geometry-of-a-world.md) · [Assortativity](assortativity.md) · [Scaling relations between agents' properties](scaling-relations.md) · [Like next to like](like-next-to-like.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md)
+> [!info]- Pages that link here (13)
+> [What the baseline world is](what-the-baseline-world-is.md) · [How ages change over a world's life](how-ages-change.md) · [Where do the tokens go?](where-do-the-tokens-go.md) · [Do the rich stay rich?](do-the-rich-stay-rich.md) · [The even split](even-split.md) · [Where the tokens flow](where-the-tokens-flow.md) · [What crosses a connection](what-crosses-a-connection.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [The geometry of a world](the-geometry-of-a-world.md) · [Assortativity](assortativity.md) · [Scaling relations between agents' properties](scaling-relations.md) · [Like next to like](like-next-to-like.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md)
 <!-- /turns -->

@@ -25,7 +25,7 @@ $$
 The slope of the sigmoid is at most ¼, at *z* = 0, and falls off on both
 sides: it is 0.10 at *z* = ±2 and 0.018 at *z* = ±4.
 
-With weights drawn as a founder's are, normal with standard deviation
+With weights drawn as a [founder](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.")'s are, normal with standard deviation
 1/√*k* for a fan-in of *k*, the product *W* δ*x* is about as large as δ*x*
 itself. That is what the scale 1/√*k* is chosen for. So one sigmoid layer
 passes a change on at most about **a quarter** as large. This ratio is the
@@ -55,9 +55,9 @@ something. It just computes nearly the same thing for every input.
 
 Selection can only favour a brain that reacts to its situation if its
 reactions differ enough to matter. Two candidates whose scores differ by a
-thousandth of a token's worth are, for every decision of
-[One iteration, step by step](one-iteration.md), the same candidate. A mutation
-that makes a brain attend to a neighbour's wealth has almost no effect to be
+thousandth of a [token](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.")'s worth are, for every decision of
+[One iteration, step by step](one-iteration.md), the same candidate. A [mutation](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.")
+that makes a brain attend to a [neighbour](the-world.md#the-network "An agent joined to another by a connection.")'s wealth has almost no effect to be
 selected for. Only mutations that move what the brain does *whatever it sees*
 have any.
 
@@ -97,6 +97,6 @@ is to try the remedies.
 
 **Also about:** [How the simulation works](../README.md#how-the-simulation-works).
 
-> [!info]- Pages that link here (3)
-> [Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md) · [What the brains are like](what-the-brains-are-like.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md)
+> [!info]- Pages that link here (4)
+> [B1 and B2: the two baselines](b1-and-b2.md) · [Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md) · [What the brains are like](what-the-brains-are-like.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md)
 <!-- /turns -->

@@ -3,14 +3,14 @@
 > [!question] Questions of this page
 > - The original algorithm came with switches of its own. Does any of them
 >   keep evolution going?
-> - What do revolutions do, in a world of nearly blind brains and in one of
+> - What do revolutions do, in a world of nearly blind [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") and in one of
 >   brains that see?
-> - Can gifts, tokens paid to keep a connection alive, make the shape of the
+> - Can gifts, [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") paid to keep a [connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") alive, make the shape of the
 >   network a decision instead of a rule with a number in it?
 
 ## Why ask
 
-The rules made for B2 have been judged by the tournaments of
+The rules made for [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.") have been judged by the tournaments of
 [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md): does a world keep
 beating its own past? The switches the algorithm was built with were never
 judged that way. Some were set for other reasons. Handover was taken out
@@ -18,23 +18,23 @@ because it breaks the network ([A world that cannot break](a-world-that-cannot-b
 Revolutions are planned in
 *What keeps wealth spread?*, for what they do to wealth.
 Gifts have been off in every run of the notebook. The author asked whether they
-had been tested for open-ended evolution. They had not, and each has a reason
+had been tested for [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau."). They had not, and each has a reason
 it might matter.
 
 **Revolutions** ([How a coalition takes a node](revolution.md)) are
-the one form of collective action the original game has. Stakers who mark
-part of their stakes as revolutionary can, together, take a node from the
+the one form of collective action the original [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") has. Stakers who mark
+part of their stakes as revolutionary can, together, take a [node](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") from the
 single largest staker if they outweigh it. A rule that rewards standing
 together is the kind of rule [Why evolution stops](why-evolution-stops.md) said
 evolution needs, and B2 has had it on all along.
 
-**Gifts** let an agent hand tokens to a neighbour during reproduction, as a
+**Gifts** let an agent hand tokens to a [neighbour](the-world.md#the-network "An agent joined to another by a connection.") during reproduction, as a
 gift rather than a stake. A gift is a real transfer and it crosses a
 connection, so it keeps that connection alive. The author built it to make
 upkeep a decision. In the original algorithm a connection that carried no
 tokens lapsed, so an agent could keep a neighbour only by staking on it.
 With gifts, and with the accounting done after reproduction over a whole
-iteration (`prune_after = reproduction`, `inactive_window = iteration`, the
+[iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") (`prune_after = reproduction`, `inactive_window = iteration`, the
 form's default until 2026-10-02), an agent sees which of its connections are
 about to lapse and can pay to keep them. B2 made upkeep a rule instead: a link
 lapses only if its two ends share two other neighbours (`prune_needs = 2`).
@@ -43,20 +43,20 @@ That rule has a number in it. Gifts with every unused link lapsing
 is the kind of replacement for a number that
 [Rules without numbers](rules-without-numbers.md) looks for.
 
-**Sharing the estate by wealth** (`redistribution = by_tokens`) gives the
+**Sharing the [estate](estate.md "The tokens a dead agent leaves, and who gets them.") by wealth** (`redistribution = by_tokens`) gives the
 tokens of the dead to the survivors in proportion to what they hold, which
 makes the cull concentrate wealth instead of spreading it. A world of rich
 and poor plays a different game.
 
 ## The worlds
 
-Pilots, two seeds each, in the engine's own code (`--proto engine=true`, see
+Pilots, two [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") each, in the [engine](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s own code (`--proto engine=true`, see
 [Pilot worlds](pilot-worlds.md)), at 10,000 tokens for 1,000
 iterations, with a whole world kept every 100 iterations:
 
 | world | what it changes |
 |---|---|
-| B1 | the baseline: brains of five layers, revolutions on |
+| [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") | the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2."): brains of five layers, revolutions on |
 | B1, no revolutions | `allow_revolutions = false` |
 | B2 | a world that cannot break ([A world that cannot break](a-world-that-cannot-break.md)), revolutions on |
 | B2, no revolutions | `allow_revolutions = false` |
@@ -105,12 +105,12 @@ token: the pilots in the engine's code reproduce the lab exactly.
 in every game, revolutions took 28 to 39 nodes per hundred agents, most of the
 46 to 55 that changed hands. The world they make is calm and old. The average agent was 116 to 137 iterations
 old, 3 agents in a hundred were born in an iteration, and the network grew
-stars, one agent joined to 9 to 32% of the others. Take revolutions away and
+[stars](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub."), one agent joined to 9 to 32% of the others. Take revolutions away and
 B1 becomes a world of mayflies. Nodes changed hands 71 to 84 times per hundred
 agents a game, 14 to 28 agents in a hundred were born in every iteration, and
 the average agent was 7 to 13 iterations old. Its network had no stars (no
 agent held more than 1% of the others), but it was stretched and fragile: a
-ball dimension of 2.1 to 2.2, and a single agent whose loss would cut off 36
+[ball dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") of 2.1 to 2.2, and a single agent whose loss would cut off 36
 to 37% of the world. In B2, revolutions won about one node in three hundred a
 game, and B2 with and without them were the same world in every measure.
 
@@ -140,7 +140,7 @@ against 3,400, and otherwise left it as it was.
 > contest can see*.
 >
 > The longer contests have since been played, 100 iterations each, once in
-> each era's world (`research/oee/checks/rejudge.py`, seed 17); eras played
+> each [era](eras-and-contests.md "Brains of a world at two moments, its eras, played against each other: do the later ones win?")'s world (`research/oee/checks/rejudge.py`, seed 17); eras played
 > against themselves that way hold 0.44 to 0.58. The brains of iteration 1,000
 > against those of 500, in the two seeds: B2 itself 0.69 and 0.67; without
 > revolutions 0.76 and 0.61; with gifts 0.87 and 0.83; with every unused link
@@ -171,7 +171,7 @@ against 3,400, and otherwise left it as it was.
 held between 0.47 and 0.57 of a world contested with those of iteration 500;
 B2 itself held 0.50 in both worlds. Some switches give evolution more to learn
 at first. With gifts, the brains of iteration 100 rated +263 and +157 against
-the founders, against +102 and +85 in B2. With every unused link lapsing they
+the [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts."), against +102 and +85 in B2. With every unused link lapsing they
 rated +520 and +256: in a world whose links break, the founders' careless play
 is costly, so the first improvements are large. Then evolution stops as it
 does in B2.
@@ -196,7 +196,7 @@ they lost ground: iteration 1,000 held 0.32 against iteration 500, and
 iteration 1,500 held 0.11. Meanwhile the world shrank, from about a thousand
 agents between iterations 1,000 and 1,750 to a few dozen after 2,000: 13 at
 its smallest and 44 at iteration 3,000. A lab run would have counted it as
-extinct. Contests played in its later eras' worlds often ended with fewer
+[extinct](extinction.md "A world's end before its last iteration: it has dropped to its threshold of agents or fewer."). Contests played in its later eras' worlds often ended with fewer
 than 50 agents, so their scores say nothing.
 
 ## What it teaches
@@ -218,7 +218,7 @@ lasts in can also die, as the world of 3,000 iterations nearly did.
 **Gifts do not make the network a decision.** The author built gifts so that
 an agent could pay to keep a connection it values. With every unused link
 lapsing, the brains did not pay for the links that held their world together,
-and the network broke as it does without gifts. So the candidate of
+and the network broke as it does without gifts. So the [candidate](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides.") of
 [Rules without numbers](rules-without-numbers.md), links that cost, does not replace
 B2's rule for lapsing links, at least not as gifts stand.
 
@@ -229,6 +229,6 @@ B2's rule for lapsing links, at least not as gifts stand.
 
 ← [Rules in company](rules-in-company.md) · [Changing the rules](../README.md#changing-the-rules) · [Rules without numbers](rules-without-numbers.md) →
 
-> [!info]- Pages that link here (10)
-> [Lightning in every world](lightning-in-every-world.md) · [Why evolution stops](why-evolution-stops.md) · [Another game](another-game.md) · [Rules without numbers](rules-without-numbers.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) · [Eight switches at once](eight-switches-at-once.md) · [Revolutions, with every other rule](revolutions-with-every-other-rule.md) · [Gifts, with every other rule](gifts-with-every-other-rule.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Pilot worlds](pilot-worlds.md)
+> [!info]- Pages that link here (12)
+> [The estate of the dead](estate.md) · [Lightning in every world](lightning-in-every-world.md) · [Why evolution stops](why-evolution-stops.md) · [Another game](another-game.md) · [Rules without numbers](rules-without-numbers.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) · [Eight switches at once](eight-switches-at-once.md) · [Revolutions, with every other rule](revolutions-with-every-other-rule.md) · [Gifts, with every other rule](gifts-with-every-other-rule.md) · [The lab, the engine and pilots](the-lab.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Pilot worlds](pilot-worlds.md)
 <!-- /turns -->

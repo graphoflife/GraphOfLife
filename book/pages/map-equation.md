@@ -1,7 +1,7 @@
 # Flow modules and the map equation
 
-Which agents form groups? There are many ways to ask. Agents joined to each
-other, agents related to each other — or agents **between whom the tokens
+Which [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") form groups? There are many ways to ask. Agents joined to each
+other, agents related to each other — or agents **between whom the [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.")
 actually go**. A *flow module* is a group of the third kind: a set of agents a
 token, wandering the flow from agent to agent, tends to stay inside. This note
 explains how such groups are found, followed through time, and checked
@@ -10,7 +10,7 @@ against chance. The Research tab's **Flow modules** view and
 
 ## The flow of one game
 
-In a game every agent stakes tokens on neighbours' nodes. Add up, for each
+In a [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") every agent stakes tokens on [neighbours](the-world.md#the-network "An agent joined to another by a connection.")' nodes. Add up, for each
 pair of neighbours, the tokens that crossed between them in either direction:
 that is the weight of the link between them in this game. Tokens an agent
 kept on its own node say nothing about who it is grouped with and are left
@@ -38,7 +38,7 @@ $$
 
 with p_i the share of time inside group i, q_i the share of steps that leave
 it, and q the sum of the q_i. The best grouping is the one with the smallest
-L. One group holding everyone is the baseline L₀ (no structure at all), and
+L. One group holding everyone is the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") L₀ (no structure at all), and
 
 $$
 \text{compression} = \frac{L_0 - L}{L_0}
@@ -70,7 +70,7 @@ decide "enough":
 
 A small module can be "followed" on very little: two modules of two agents
 that share one agent overlap by a third. On flows made mostly of pairs — as
-in B2's worlds, where an agent puts its whole stake on one neighbour — a
+in [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.")'s worlds, where an agent puts its whole stake on one neighbour — a
 matching at any overlap follows chance chains, so the notebook matches above the
 floor and checks the result against chance (below).
 
@@ -123,6 +123,6 @@ Two more measures need no following at all, or ask what following finds:
 
 **Also about:** [Groups and cooperation](../README.md#groups-and-cooperation).
 
-> [!info]- Pages that link here (1)
-> [Flow modules: the groups tokens stay in](flow-modules.md)
+> [!info]- Pages that link here (2)
+> [Glossary](glossary.md) · [Flow modules: the groups tokens stay in](flow-modules.md)
 <!-- /turns -->

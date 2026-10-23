@@ -1,13 +1,13 @@
 # Do the brains matter?
 
-Everything the study of the baseline found is a fact about it, with nothing to hold
-it against ([What the baseline world is](what-the-baseline-world-is.md)). This page takes the brains away,
+Everything the study of the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") found is a fact about it, with nothing to hold
+it against ([What the baseline world is](what-the-baseline-world-is.md)). This page takes the [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") away,
 in two different ways, and compares.
 
 > [!question] Questions of this page
-> - Can a world live if its agents decide by pure chance?
+> - Can a world live if its [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") decide by pure chance?
 > - What happens to a world whose brains never change — whose agents keep
->   the founders' brains, copied, forever?
+>   the [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.")' brains, copied, forever?
 > - Do the worlds that evolve and the worlds that do not differ on average,
 >   or in how alike they are?
 > - Do lines still take over a world in which no brain is better than
@@ -75,13 +75,13 @@ in two different ways, and compares.
 
 ## The three conditions
 
-Each changes one setting of the baseline B1, for the same thirty seeds:
+Each changes one setting of the baseline [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it."), for the same thirty [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world."):
 
-- **baseline** — the thirty runs of 10,000 tokens of [A world's life](a-worlds-life.md),
+- **baseline** — the thirty runs of 10,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") of [A world's life](a-worlds-life.md),
   reused.
 - **brains never change** — [`mutation_sparsity`](settings.md#mutation_sparsity)
   = 0. A brain still "changes" with probability one in five, at birth and
-  after every game, and gets a new genotype number when it does — but not
+  after every game, and gets a new [genotype](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.") number when it does — but not
   one of its weights moves ([How a brain changes](mutation.md)). So
   the only brains a world ever has are its founders', copied; the family tree
   still branches exactly as often as in the baseline, which keeps it
@@ -110,8 +110,8 @@ Each changes one setting of the baseline B1, for the same thirty seeds:
 <!-- /figure -->
 
 All thirty worlds deciding by chance died: 25 after their second iteration,
-5 after their third. In the last game of the median one, 62% of the agents
-were cut off and another 15% starved. Random stakes leave connections
+5 after their third. In the last game of the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") one, 62% of the agents
+were cut off and another 15% starved. Random stakes leave [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.")
 without tokens; a connection that carries no tokens in a game is cut at its
 end, and anything no longer joined to the largest piece of the world is
 removed ([One iteration, step by step](one-iteration.md)).
@@ -180,7 +180,7 @@ worlds whose brains never change fall into kinds the baseline never shows:
   its last child, the last of them at iteration 1,363, and ended with 2,252.
   The fifteenth, seed 20, lost agents without ever replacing them, from 1,165
   at iteration 300 to 23 by iteration 2,024, and then sat at 23, three above
-  the line at which a run counts as extinct.
+  the line at which a run counts as [extinct](extinction.md "A world's end before its last iteration: it has dropped to its threshold of agents or fewer.").
 - **nearly frozen** — 2 worlds, with a birth in about one iteration in ten.
 - **breeding** — 3 worlds, with 8 to 24 births per hundred agents per
   iteration.
@@ -223,7 +223,7 @@ without change are coloured by their kind:
 - **Births.** The evolving worlds all sit near 3 per hundred agents (between
   2.3 and 4.3); the worlds without change range from none at all to one per
   agent — a spread of 1.33, against 0.15.
-- **Inequality.** Wealth is more evenly spread without change: a median Gini
+- **Inequality.** Wealth is more evenly spread without change: a median [Gini](gini-coefficient.md "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.")
   of 0.32 against 0.49 (paired by seed, a difference of 0.17, 95% interval
   0.11 to 0.23, by the [bootstrap](bootstrap.md)), and most evenly in
   the teeming worlds.
@@ -232,7 +232,7 @@ without change are coloured by their kind:
 
 The same holds for every other statistic of the baseline's study: the share of stakes put
 at home (30% in both, 4% to 51% without change), the nodes taken by
-coalitions, the core, the bridges, the clustering. On average a world without
+[coalitions](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake."), the core, the [bridges](bridges.md "A connection that lies on no loop: cut it and the network falls into two pieces."), the [clustering](clustering.md "How often an agent's neighbours are also each other's neighbours."). On average a world without
 change looks much like an evolving one. But the evolving worlds sit close
 together, and the worlds without change spread over almost everything each
 statistic can be.
@@ -358,14 +358,14 @@ change (it asked for more than half).
 > [!info] Where everything came from
 > - **Survived to iteration 3,000:** baseline 26, brains never change 30,
 >   decisions by chance 0 (25 died after 2 iterations, 5 after 3).
-> - **Engine:** snapshot `f820369a1583af53`, commit `4bc7165`, for all 90 runs.
+> - **[Engine](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world."):** snapshot `f820369a1583af53`, commit `4bc7165`, for all 90 runs.
 > - **Cost:** the new runs took 35 hours of computing, done in 9.1 hours on
 >   four workers; 11 GB on disk; at most 746 MB of memory for one run.
 > - **Comparisons:** paired by seed; intervals by resampling the
 >   differences, *p* by flipping their signs at random, 10,000 times each
 >   ([Permutation tests](permutation-test.md)).
 > - **Results:** `book/results/E07.json`, made with `python3 gol_lab.py analyse E07`
->   (about 14 minutes: the lineages read every frame of every run); the
+>   (about 14 minutes: the [lineages](families.md "A line of descent: the agents whose genotypes go back to one ancestor.") read every frame of every run); the
 >   figures with `python3 book_figures.py brains`.
 
 <!-- turns -->

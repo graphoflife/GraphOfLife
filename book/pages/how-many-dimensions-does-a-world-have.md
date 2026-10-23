@@ -1,7 +1,7 @@
 # How many dimensions does a world have?
 
-A network has no space around it. Its agents have no coordinates, only
-connections. And yet a network can be shaped like a line, a sheet or a
+A network has no space around it. Its [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") have no coordinates, only
+[connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes."). And yet a network can be shaped like a line, a sheet or a
 solid, or like nothing of the kind: a tangle in which everything is a few
 steps from everything. [Physical inspiration](physical-inspiration.md) set the hope
 that a world of Graph of Life might grow into something like the space we
@@ -16,9 +16,9 @@ into.
 >   scale, and by every ruler?
 > - Is the dimension made by how the worlds are wired, or would any network
 >   with the same numbers of connections have it?
-> - Does it change as a world grows from its first iterations?
+> - Does it change as a world grows from its first [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.")?
 
-The worlds are the thirty of 100,000 tokens of [Thirty worlds](thirty-worlds.md).
+The worlds are the thirty of 100,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") of [Thirty worlds](thirty-worlds.md).
 
 <!-- runs E10 -->
 > [!info] The runs behind this page
@@ -83,7 +83,7 @@ Besides them, the page measures the three worlds of 409,600 tokens of
 agents each after 600 iterations (`B1-409600-s001` … `-s003`,
 `python3 gol_lab.py run E08`), and the worlds of 10,000 tokens it was first
 written from — the 26 of thirty that lived to the end, about 1,500 agents
-each at their end (1,300 over their settled life): three sizes, each four to
+each at their end (1,300 over their [settled life](settled-life.md "A world from iteration 500 to its end, after its youth, where it is measured.")): three sizes, each four to
 ten times the one before.
 
 ## Two rulers
@@ -149,7 +149,7 @@ the rulers.
 - A **tree** drawn at random reads 1.7 by balls and 1.2 by walks. Theory
   says 2 and 4/3 (Aldous 1991; Durhuus, Jonsson and Wheater 2007): a tree
   has room, but a walker keeps running into its dead ends.
-- A **random network**, in which every point has three neighbours, has no
+- A **random network**, in which every point has three [neighbours](the-world.md#the-network "An agent joined to another by a connection."), has no
   finite dimension. Its readings never settle: by balls they climb past 4
   within six steps, by walks past 4 within forty.
 
@@ -176,7 +176,7 @@ rising is the mark of a network that is not a space at all.
 <!-- /figure -->
 
 **The worlds of 100,000 tokens** (blue) read **2.8** by balls, between radii
-3 and 10 in the median world, and **1.9** by walks, flat from 4 to 160 steps.
+3 and 10 in the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world, and **1.9** by walks, flat from 4 to 160 steps.
 Their reading by balls rises to about 3 at radius 5 and holds there until
 the balls near a quarter of the world, at about 12 steps. **The worlds of
 10,000 tokens** (green dots) read less, 2.3 by balls between radii 2 and 6
@@ -184,7 +184,7 @@ and 1.8 by walks: a world of 1,500 agents gives the balls little room, and in
 the median world a quarter of it lies within about seven steps, where the
 reading stops.
 
-**Their random twins** (red) are the decisive comparison. A twin has exactly
+**Their [random twins](random-twin.md "A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all.")** (red) are the decisive comparison. A twin has exactly
 the connections of its world at every agent, wired at random instead. If
 the dimension came from the numbers of connections, the twins would read
 the same. They do not. By balls they read 6.5 and are still climbing when a
@@ -234,7 +234,7 @@ three sizes cannot tell.
 A word on the viewer's own dimension, which [The geometry of a world](the-geometry-of-a-world.md)
 finds to be about 3.4 in these worlds (3.0 at 10,000 tokens). It is fitted to the **mean** ball
 over radii 1 to 5, and the mean is pulled up by the few agents next to a
-hub. The rulers here use the **typical** ball, the geometric mean over 40 to
+[hub](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub."). The rulers here use the **typical** ball, the geometric mean over 40 to
 100 agents, which grows more slowly at small radii. The two answer slightly
 different questions: how much lies around the average agent, and how much
 around a typical one.
@@ -261,11 +261,11 @@ its agents. In these worlds the core reads 2.5 by balls and 1.9 by walks,
 against 2.8 and 1.9 for the whole: the trees that hang off the core add room,
 not ways round. In the worlds of 409,600 tokens the core reads 3.1 by balls
 and 2.0 by walks at short range (radii 3 to 6, walks up to 64 steps), but
-2.7 and 1.5 over the whole range of scales: its loops close at short range,
+2.7 and 1.5 over the whole range of scales: its [loops](loops.md "A path through the network that comes back to where it started without using a connection twice.") close at short range,
 and over long distances it seems to branch more than it meshes.
 [The core of a world](the-core-of-a-world.md) takes the core apart.
 
-This matters beyond geometry. In the game, tokens move almost as a random
+This matters beyond geometry. In the [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."), tokens move almost as a random
 walk would ([Where the tokens flow](where-the-tokens-flow.md)). On these worlds that
 walk is slow. A difference in tokens spreads through a world more slowly than
 it would through a grid of the same size, and much more slowly than through
@@ -311,7 +311,7 @@ balls and 1.6 to 1.9 by walks throughout.)
 - **About three dimensions of room.** At 14,000 agents the worlds hold
   about as much within *r* steps as a three-dimensional body does, from 5 to
   10 steps; at 60,000 agents somewhat more, 3.3, steady from 3 to 14 steps.
-  Together with the diameters of
+  Together with the [diameters](radius-and-diameter.md "The longest of the shortest paths between two agents of a world.") of
   [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md), which grow as
   agents^0.30, this is the first sign that something like three-dimensional
   space can emerge from these rules with no geometry put in.
@@ -325,7 +325,7 @@ balls and 1.6 to 1.9 by walks throughout.)
   worlds, and ask whether it depends on the scale, as it does in the causal
   dynamical triangulations of quantum gravity (Ambjørn, Jurkiewicz and Loll
   2005).
-- **Room for open-ended evolution.** In a space, distant places are far
+- **Room for [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.").** In a space, distant places are far
   apart: the diameter of a world grows with its size, unlike a small world's.
   So a large world has room for regions that evolve apart — if anything held
   them apart. [Like next to like](like-next-to-like.md) found that so far nothing
@@ -335,10 +335,10 @@ balls and 1.6 to 1.9 by walks throughout.)
 > [A world that cannot break](a-world-that-cannot-break.md) builds rules of this kind, to
 > keep a world from breaking: a newborn joined to two of its parent's
 > neighbours, a dead agent's neighbours joined in a ring, unused links lapsing
-> only where their ends share two neighbours, and at most 8 links a brain may
+> only where their ends share two neighbours, and at most 8 links a [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") may
 > choose. In a model without brains the first two alone put 97% of agents in
 > the 2-core, with a ball dimension of 3.7; in a first run of the second
-> baseline, B2, with all four, every agent was in the 2-core — no dead ends
+> [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2."), [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death."), with all four, every agent was in the 2-core — no dead ends
 > at all — with a ball dimension of 3.1 to 3.7. Whether the walker's reading
 > rises to meet the balls' there has not been measured yet.
 
@@ -354,8 +354,8 @@ To make every figure of this page: `python3 book_figures.py dimensions`.
 <!-- turns -->
 ---
 
-← [Like next to like](like-next-to-like.md) · [Space and dimension](../README.md#space-and-dimension) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) →
+← [Like next to like](like-next-to-like.md) · [Space and dimension](../README.md#space-and-dimension) · [The random twin: is a world a space?](random-twin.md) →
 
-> [!info]- Pages that link here (14)
-> [What the baseline world is](what-the-baseline-world-is.md) · [Thirty worlds](thirty-worlds.md) · [Lightning in every world](lightning-in-every-world.md) · [How the network grows](how-the-network-grows.md) · [The core of a world](the-core-of-a-world.md) · [The geometry of a world](the-geometry-of-a-world.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like](like-next-to-like.md) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) · [What folds a world](what-folds-a-world.md) · [The spectral dimension](spectral-dimension.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [Links to strangers](links-to-strangers.md) · [Healthy and rich](healthy-and-rich.md)
+> [!info]- Pages that link here (15)
+> [What the baseline world is](what-the-baseline-world-is.md) · [Thirty worlds](thirty-worlds.md) · [Lightning in every world](lightning-in-every-world.md) · [How the network grows](how-the-network-grows.md) · [The core of a world](the-core-of-a-world.md) · [The geometry of a world](the-geometry-of-a-world.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like](like-next-to-like.md) · [The random twin: is a world a space?](random-twin.md) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) · [What folds a world](what-folds-a-world.md) · [The spectral dimension](spectral-dimension.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [Links to strangers](links-to-strangers.md) · [Healthy and rich](healthy-and-rich.md)
 <!-- /turns -->

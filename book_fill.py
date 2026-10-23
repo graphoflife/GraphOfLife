@@ -22,6 +22,10 @@ comment lines, which no reader shows:
     <!-- turns -->                    the page's topic, and the pages before and after it there
     <!-- costs -->                    what a simulation costs, as last fitted
     <!-- table chapter/name -->       a table a page's code made from the records
+    <!-- glossary -->                 every term of terms.json, what it is, and its page
+
+The first use of every term of book/terms.json on a page is linked to the page
+that explains it (link_terms), with what it is as the link's title.
 
 Everything between the opening and the closing line is replaced each time:
 write only outside them. An opening line alone is filled in the first time.
@@ -477,8 +481,85 @@ def table(md: str, name: str) -> str:
     return "\n".join(lines)
 
 
+# ---------------------------------------------------------------------------
+# Terms, linked as an encyclopedia links its words
+# ---------------------------------------------------------------------------
+
+def terms() -> List[Dict[str, Any]]:
+    """The notebook's terms (book/terms.json): names, the page that explains each, and a line that says it."""
+    return read_json("terms.json")["terms"]
+
+
+#: A link to a term, as link_terms writes it: titled with what the term is. No other link has a title.
+TERM_LINK = re.compile(r'\[([^\[\]]+)\]\([^)\s]+ "[^"]*"\)')
+
+
+def names_of(term: Dict[str, Any]) -> "re.Pattern[str]":
+    """
+    Every name of a term in running text: on word edges, its words across line
+    breaks, with its plural; a name in lower case with either case of its first
+    letter, one with capitals only as written.
+    """
+    alternatives = []
+    for name in sorted([term["name"], *term.get("also", [])], key=len, reverse=True):
+        words = [re.escape(word) for word in name.split()]
+        if name[0].islower():
+            words[0] = f"[{name[0].upper()}{name[0]}]{words[0][1:]}"
+        alternatives.append(r"\s+".join(words))
+    return re.compile(rf"(?<![\w\-/.#])(?:{'|'.join(alternatives)})(?:e?s)?(?![\w\-])")
+
+
+def link_terms(md: str, text: str) -> str:
+    """
+    A page with the first use of every term linked to the page that explains it.
+    Its own earlier term links are undone first, so linking twice changes
+    nothing. Only words outside code, formulas, links, headings, callouts' titles
+    and the blocks made here are linked; the longest term first, so that "spectral
+    dimension" is not taken for "dimension"; never on the term's own page, nor
+    where the page links to it already, nor in the phrases a term lists as `not`
+    ("game theory" is no game), nor for a term the page opts out of (`skip`).
+    """
+    text = TERM_LINK.sub(r"\1", text)
+    index = read_json("terms.json")
+    here = next((c["id"] for c in pages() if c.get("file") == md), None)
+    linked = links_from(md, text)
+    out = text
+    kept = protected_spans(out) + [m.span() for m in re.finditer(r"^(?:#{1,6} |> \[!)[^\n]*", out, re.M)]
+
+    def free(start: int, end: int, spans: List[Tuple[int, int]]) -> bool:
+        return not any(a < end and start < b for a, b in spans)
+
+    ordered = sorted(index["terms"], key=lambda t: -max(len(n) for n in [t["name"], *t.get("also", [])]))
+    for term in ordered:
+        home = page_file(term["page"])
+        if home == md or home in linked or term["name"] in index.get("skip", {}).get(here, []):
+            continue
+        spans = kept + [m.span() for phrase in term.get("not", [])
+                        for m in re.finditer(re.escape(phrase), out, re.I)]
+        found = next((m for m in names_of(term).finditer(out) if free(m.start(), m.end(), spans)), None)
+        if found is None:
+            continue
+        target = link(md, home) + (f"#{term['anchor']}" if term.get("anchor") else "")
+        made = f'[{found.group(0)}]({target} "{term["says"]}")'
+        out = out[:found.start()] + made + out[found.end():]
+        shift = len(made) - (found.end() - found.start())
+        kept = [(a + shift, b + shift) if a >= found.end() else (a, b) for a, b in kept]
+        kept.append((found.start(), found.start() + len(made)))
+    return out
+
+
+def glossary(md: str, _: str) -> str:
+    """Every term of book/terms.json, A to Z: its names, what it is, and the page that explains it."""
+    rows = []
+    for term in sorted(terms(), key=lambda t: t["name"].lower()):
+        target = link(md, page_file(term["page"])) + (f"#{term['anchor']}" if term.get("anchor") else "")
+        also = f" (also {', '.join(term['also'])})" if term.get("also") else ""
+        rows.append(f"- **[{term['name']}]({target})**{also} — {term['says']}")
+    return "\n".join(rows)
+
+
 MAKERS = {"figure": figure, "thesis": thesis, "runs": runs, "contents": contents, "turns": turns,
-          "costs": costs, "table": table}
+          "costs": costs, "table": table, "glossary": glossary}
 #: The blocks a page can ask for, and how they are found in it.
 KINDS = tuple(MAKERS)
 BLOCK = re.compile(r"^<!-- (%s)((?: [^\n]*?)?) -->\n(?:(?:(?!<!-- ).)*?^<!-- /\1 -->\n?)?"
@@ -497,7 +578,7 @@ def protected_spans(text: str, links: bool = True) -> List[Tuple[int, int]]:
     Sorted, and merged where they touch.
     """
     patterns = [r"<!--.*?-->", r"^```.*?^```", r"\$\$.*?\$\$", r"`[^`\n]*`", r"(?<![$\\])\$[^$\n]+\$",
-                r"!?\[[^\]]*\]\([^)\s]*\)" if links else r"\]\([^)\s]*\)"]
+                r'!?\[[^\]]*\]\([^)\s]*(?: "[^"]*")?\)' if links else r'\]\([^)\s]*(?: "[^"]*")?\)']
     spans = [m.span() for m in BLOCK.finditer(text)]
     for pattern in patterns:
         spans += [m.span() for m in re.finditer(pattern, text, re.S | re.M)]
@@ -555,7 +636,7 @@ def fill(only: Optional[List[str]] = None, write: bool = True) -> int:
     asked = only or list(texts)
     after = dict(texts)
     for md in asked:
-        after[md] = fill_text(md, texts[md], tuple(k for k in KINDS if k != "turns"))
+        after[md] = link_terms(md, fill_text(md, texts[md], tuple(k for k in KINDS if k != "turns")))
     BACKLINKS.clear()
     BACKLINKS.update(backlinks(after))
     changed = 0

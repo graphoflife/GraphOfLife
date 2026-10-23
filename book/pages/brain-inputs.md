@@ -1,9 +1,9 @@
 # What a brain sees
 
-Every time an agent decides anything, its brain **looks** at a list of
-**candidates**: the agent itself first, then each of its neighbours in
+Every time an [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") decides anything, its [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") **looks** at a list of
+**[candidates](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides.")**: the agent itself first, then each of its [neighbours](the-world.md#the-network "An agent joined to another by a connection.") in
 increasing order of id. For each candidate the brain gets one column of
-**154 numbers** (in the baseline), and it computes one column of outputs
+**154 numbers** (in the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.")), and it computes one column of outputs
 from it ([What a brain says](brain-outputs.md)). The brain is the same for
 every column; only the inputs differ.
 
@@ -16,9 +16,9 @@ code.
 | rows | how many | what |
 |---|---|---|
 | 0 | 1 | 1 if *v* is *u* itself, 0 otherwise |
-| 1 | 1 | ln(1 + τ(*u*)): the agent's own tokens |
+| 1 | 1 | ln(1 + τ(*u*)): the agent's own [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") |
 | 2 | 1 | ln(1 + τ(*v*)): the candidate's tokens |
-| 3 | 1 | ln(1 + deg(*u*)): the agent's own number of connections |
+| 3 | 1 | ln(1 + deg(*u*)): the agent's own number of [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") |
 | 4 | 1 | ln(1 + deg(*v*)): the candidate's |
 | 5–10 | 6 | six quantiles of ln(1 + τ) over *u*'s neighbours |
 | 11–16 | 6 | six quantiles of ln(1 + τ) over *v*'s neighbours |
@@ -70,7 +70,7 @@ The six inputs are (0.693, 1.248, 1.386, 1.791, 2.661, 3.714).
 ## When the inputs are measured
 
 At the **start of each phase**, before anyone acts: every agent's tokens and
-degree, and every neighbourhood's quantiles, are measured once and then read
+[degree](degree.md "The number of an agent's connections: how many neighbours it has."), and every neighbourhood's quantiles, are measured once and then read
 by everyone. So the order in which agents act does not change what they see.
 The messages are those delivered last (see [Messages](messages.md)), and the
 random numbers are drawn fresh for every look, column by column, from the

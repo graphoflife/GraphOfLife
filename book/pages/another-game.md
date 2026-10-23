@@ -2,16 +2,16 @@
 
 > [!question] Questions of this page
 > - Is it the Colonel Blotto contest that makes evolution stop, or would any
->   contest for nodes?
+>   contest for [nodes](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.")?
 > - What changes when chance decides who takes a node, so that being
 >   unpredictable is worth nothing?
-> - What changes when agents with the same brain fight as one, so that a
->   lineage can act as a body?
+> - What changes when agents with the same [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") fight as one, so that a
+>   [lineage](families.md "A line of descent: the agents whose genotypes go back to one ancestor.") can act as a body?
 
 ## Why ask
 
 [Why evolution stops](why-evolution-stops.md) blamed the contest. A node goes to
-whoever stakes most on it, which makes the agents' game a Colonel Blotto game,
+whoever stakes most on it, which makes the agents' [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") a Colonel Blotto game,
 and the best play in such a game is to be unpredictable. Evolution finds that
 quickly, through the random inputs every brain reads, and then nothing better
 is left to select.
@@ -22,10 +22,10 @@ since this page's predecessors is a rule of its own
 ([Rules without numbers](rules-without-numbers.md)).
 
 **A contest without a mixed answer.** Let chance decide instead of the largest
-stake. In a **lottery contest** every staked token is a ticket: the node goes
+stake. In a **lottery contest** every staked [token](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") is a ticket: the node goes
 to one of its stakers drawn at random, with a chance in proportion to what it
 staked, as the game weighs it. An owner's own stake still counts one and a
-half times, as in B2. This is Tullock's contest (1980), the economist's model
+half times, as in [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death."). This is Tullock's contest (1980), the economist's model
 of rent seeking and lobbying. Its best play is a plain amount, not a gamble.
 Two contestants valuing a prize equally each stake a quarter of its value,
 and neither gains by staking otherwise, nor by surprising the other. If evolution stops under Blotto because the answer is to roll dice,
@@ -33,17 +33,17 @@ then under a lottery the brains should stop using their random inputs. If
 evolution still stops, the reason is more general than Blotto: any contest
 whose best play can be found will be found.
 
-**A contest that lets a lineage act as one.** Let stakes count by **genotype**.
+**A contest that lets a lineage act as one.** Let stakes count by **[genotype](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.")**.
 Every stake on a node made by agents with exactly the same brain counts as one
 side's. The side with the largest total takes the node, and the owner keeps it
-if its own genotype wins. Each agent also sees, for every candidate, whether it
+if its own genotype wins. Each agent also sees, for every [candidate](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides."), whether it
 carries the same brain. Under B2 a brain is copied whole into a newborn or into
 a won node, and changes with probability 0.2 when it is. So a lineage lives as
 a patch of identical agents with mutants at its edges. With stakes pooled by
 genotype, such a patch is one body: a stake on a clone's node defends it, and
 the clones' stakes on a stranger's node are added together. This is the rule
 the factories of [Strategies written by hand](strategies-written-by-hand.md) would need,
-since in the engine as it is a stake on a teammate's node counts against the
+since in the [engine](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") as it is a stake on a teammate's node counts against the
 teammate. It is also kin pooling at its narrowest
 ([Alliances](alliances.md)): no alliance to agree, and no threshold of
 relatedness to choose.
@@ -51,8 +51,8 @@ relatedness to choose.
 ## The worlds
 
 Pilots in the engine's own code (`--proto engine=true`, see
-[Pilot worlds](pilot-worlds.md)): B2 at 10,000 tokens, revolutions
-off, 1,000 iterations, two seeds, with a whole world kept every 100
+[Pilot worlds](pilot-worlds.md)): B2 at 10,000 tokens, [revolutions](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.")
+off, 1,000 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."), two [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world."), with a whole world kept every 100
 iterations. The control is B2 without revolutions from the pilots of
 [The switches the world was built with](the-switches-the-world-was-built-with.md). Revolutions are off
 in all three because a revolution is itself a rule about who takes a node, and
@@ -117,8 +117,8 @@ would mix with the rule under test.
 
 
 **The lottery leaves almost nothing to learn.** Under a lottery the brains of
-iteration 1,000 rated +23 and +14 against the founders, against +139 and +100
-under Blotto. Each era tied with the one before it almost from the start,
+iteration 1,000 rated +23 and +14 against the [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts."), against +139 and +100
+under Blotto. Each [era](eras-and-contests.md "Brains of a world at two moments, its eras, played against each other: do the later ones win?") tied with the one before it almost from the start,
 with step scores of 0.47 to 0.56. Every staked token is a ticket, so where it
 is staked matters less. More nodes changed hands, 10 and 12 per hundred agents
 a game against 9 and 7. The worlds held more agents, about 4,300 against
@@ -156,7 +156,7 @@ slowly to the end, the only steady climb in this page. Its steps were 0.70,
 0.57, 0.54 and 0.53, and the brains of iteration 1,000 held 0.67 against those
 of iteration 100, against 0.54 and 0.55 under Blotto. In the other world they
 stopped as under Blotto, with steps of 0.69, 0.55, 0.48 and 0.50. The brains
-made little use of the sense. Flipping which neighbours are clones changed 12
+made little use of the sense. Flipping which [neighbours](the-world.md#the-network "An agent joined to another by a connection.") are clones changed 12
 to 16% of their divisions, less than it changed the founders' (26%).
 
 ## A password and a crowd, for free
@@ -167,7 +167,7 @@ but clones seldom sit together, so it brings no crowd. The last pilots give
 both. Every brain carries a **family tag**. A copy keeps its parent's tag; a
 brain that mutates takes a new tag with probability 0.05 (`tag_rate`), so one
 copy in a hundred starts a new family. That probability is a parameter of
-mutation, the kind of number the author's rule allows. A family is then every
+[mutation](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype."), the kind of number the author's rule allows. A family is then every
 genotype descended from one tag. It is far larger than a group of clones and
 far smaller than a founder's whole line. Two more pairs of worlds ran:
 
@@ -216,8 +216,8 @@ them, and that is the part evolution would still have to find.
 **Another contest moves where evolution stops, not whether it does.** A
 lottery stops it almost where it starts. Pooling by genotype and a sense of
 kin stop it where Blotto does. Every one of these worlds kept a network that
-holds, with no cut and five or six links per agent. As in B2, their ball
-dimension, 4.1 to 4.4, is a little above the bar's 4.
+holds, with no cut and five or six links per agent. As in B2, their [ball
+dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space."), 4.1 to 4.4, is a little above the bar's 4.
 
 **The mixed strategy was not the reason.** Where dice are worthless, the
 brains keep them. Whatever stops evolution in these worlds, it is not that

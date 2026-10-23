@@ -1,7 +1,7 @@
 # How much does the seed decide?
 
-Thirty worlds of the same settings differ only in their seed — and therefore
-in their starting ring, their founders' brains and every random choice they
+Thirty worlds of the same [settings](settings.md "One number or switch of a run's rules, fixed before it starts.") differ only in their [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") — and therefore
+in their starting ring, their [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.")' [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") and every random choice they
 ever make.
 
 > [!question] Questions of this page
@@ -11,7 +11,7 @@ ever make.
 > - How many seeds does an experiment need to see that a change of setting
 >   changed something?
 
-The worlds are the thirty of 100,000 tokens of [Thirty worlds](thirty-worlds.md),
+The worlds are the thirty of 100,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") of [Thirty worlds](thirty-worlds.md),
 all of which lived to the end; the thirty of 10,000 tokens this page was
 first written from are given beside them.
 
@@ -75,7 +75,7 @@ first written from are given beside them.
 
 ## Where the worlds settle
 
-Measure each world by its mean over its settled life, iterations 500 to 1,499,
+Measure each world by its mean over its [settled life](settled-life.md "A world from iteration 500 to its end, after its youth, where it is measured."), [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") 500 to 1,499,
 and divide by the mean of the thirty, so that 1 is the average world:
 
 <!-- figure seed/dots-1 -->
@@ -112,11 +112,11 @@ and divide by the mean of the thirty, so that 1 is the average world:
 > **To make it again:** `python3 book_figures.py seed`.
 <!-- /figure -->
 
-The columns differ a great deal in height. The share of agents that are
-distinct genotypes is almost the same in every world (a
+The columns differ a great deal in height. The share of [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") that are
+distinct [genotypes](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.") is almost the same in every world (a
 [spread](spread-between-worlds.md), sd ÷ mean, of 0.02); inequality
-(Gini, 0.06), connections per agent (0.08) and the share held by the richest
-tenth (0.09) vary little; the number of agents (0.11) and connections (0.12)
+([Gini](gini-coefficient.md "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all."), 0.06), [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") per agent (0.08) and the share held by the [richest
+tenth](richest-tenth.md "The share of all tokens held by the richest tenth of the agents.") (0.09) vary little; the number of agents (0.11) and connections (0.12)
 vary more, families (0.20) and births (0.22) more still. These counts vary
 *less* than in the worlds of 10,000 tokens — the number of agents had a spread
 of 0.17 there, connections 0.19 — as larger worlds average more of their own
@@ -124,13 +124,13 @@ accidents away.
 
 The shape of the network does the opposite. The share of agents that are
 leaves varies with a spread of 0.25 (0.12 at 10,000 tokens), the share of
-connections that are bridges 0.35 (0.24), the share of agents in the core 0.17
-(0.13) and clustering 0.62 (0.34). And these columns are not one even spread:
+connections that are [bridges](bridges.md "A connection that lies on no loop: cut it and the network falls into two pieces.") 0.35 (0.24), the share of agents in the core 0.17
+(0.13) and [clustering](clustering.md "How often an agent's neighbours are also each other's neighbours.") 0.62 (0.34). And these columns are not one even spread:
 most worlds sit together, and a few lie far out — the same few for leaves,
 bridges and the core, and among the lowest for clustering. They are the worlds
-in which a single agent became a **hub** joined to a sixth of the world or
+in which a single agent became a **[hub](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.")** joined to a sixth of the world or
 more: in the world with seed 28, on average 58% of
-all agents were neighbours of one agent over its settled life, and 72% of its
+all agents were [neighbours](the-world.md#the-network "An agent joined to another by a connection.") of one agent over its settled life, and 72% of its
 connections were bridges. Seven of the thirty worlds had a hub that held, on
 average, a tenth of the world or more, and across all thirty the share of
 agents in the core goes with the share joined to the largest hub almost
@@ -416,6 +416,6 @@ To make every figure of this page: `python3 book_figures.py seed`.
 
 **Also about:** [Methods and statistics](../README.md#methods-and-statistics).
 
-> [!info]- Pages that link here (15)
-> [What the baseline world is](what-the-baseline-world-is.md) · [Thirty worlds](thirty-worlds.md) · [A world's life](a-worlds-life.md) · [How the game is played](how-the-game-is-played.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [Like next to like](like-next-to-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [How worlds are measured](how-worlds-are-measured.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [The settled life of a world](settled-life.md) · [Spread between worlds](spread-between-worlds.md) · [Correlation](correlation.md) · [Autocorrelation: how long a world remembers](autocorrelation.md) · [Between worlds and within them](between-and-within.md) · [How many seeds an experiment needs](seeds-needed.md)
+> [!info]- Pages that link here (16)
+> [What the baseline world is](what-the-baseline-world-is.md) · [Thirty worlds](thirty-worlds.md) · [A world's life](a-worlds-life.md) · [How the game is played](how-the-game-is-played.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [Stars and hubs](stars-and-hubs.md) · [Like next to like](like-next-to-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [How worlds are measured](how-worlds-are-measured.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [The settled life of a world](settled-life.md) · [Spread between worlds](spread-between-worlds.md) · [Correlation](correlation.md) · [Autocorrelation: how long a world remembers](autocorrelation.md) · [Between worlds and within them](between-and-within.md) · [How many seeds an experiment needs](seeds-needed.md)
 <!-- /turns -->

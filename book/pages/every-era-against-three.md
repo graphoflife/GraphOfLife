@@ -1,7 +1,7 @@
 # Every era against three
 
 > [!question] Questions of this page
-> - In the longest worlds the notebook has, do later brains still get better at
+> - In the longest worlds the notebook has, do later [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") still get better at
 >   the end, or had evolution stopped climbing?
 > - Do later brains lose again to early ones, as they would if evolution
 >   went round in circles?
@@ -12,12 +12,12 @@
 
 Every long world the notebook has played says the same thing in its contests:
 later brains beat earlier ones, by less and less. In Experiment 18's two
-longest worlds, brains mixed at birth and played to 50,000 iterations
+longest worlds, brains mixed at birth and played to 50,000 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.")
 ([Five mixed worlds, fifty thousand iterations](five-mixed-worlds-fifty-thousand-iterations.md)), the
 brains of 25,000 beat those of 10,000, and those of 50,000 then scored
 0.54 and 0.42 against those of 25,000.
 
-Contests between neighbours in time cannot tell three different stories
+Contests between [neighbours](the-world.md#the-network "An agent joined to another by a connection.") in time cannot tell three different stories
 apart:
 - **a plateau**, where evolution has stopped;
 - **a slow climb**, where each step gains a little and many little steps add
@@ -28,7 +28,7 @@ apart:
 Rock, paper and scissors each beat the one before, for ever, and get
 nowhere ([What would count as open-ended evolution](open-ended-test.md)).
 
-Playing every era against the same few fixed eras tells the three apart:
+Playing every [era](eras-and-contests.md "Brains of a world at two moments, its eras, played against each other: do the later ones win?") against the same few fixed eras tells the three apart:
 - **On a plateau**, the scores against a fixed era stop rising.
 - **On a slow climb**, they keep rising, however little each step gained.
 - **In a circle**, they rise and fall again as the eras go round.
@@ -39,9 +39,9 @@ fixed ones: 2,500, 10,000 and 25,000.
 ## How much room is left
 
 One thing can be measured before any contest: how far each era's play is
-from an equilibrium. At an equilibrium no agent could do better by playing
+from an equilibrium. At an equilibrium no [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") could do better by playing
 differently while the rest keep their play. So the distance is how much an
-agent *would* gain by its best reply to the others, its **exploitability**
+agent *would* gain by its [best reply](exploitability.md "How much better than a world's brains the best reply to them would do: zero only at the top.") to the others, its **exploitability**
 ([Why evolution stops](why-evolution-stops.md)). A population that evolution
 drives towards a top becomes less exploitable era after era.
 
@@ -64,7 +64,7 @@ drives towards a top becomes less exploitable era after era.
 <!-- /figure -->
 
 **No long world closes in on an equilibrium.**
-- **A best reply gains about a node a game.** At every era of every long
+- **A best reply gains about a node a [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.").** At every era of every long
   world, an agent's best reply to the rest would hold about one node more
   after a game than its own play does: 1.0 to 1.1 in Experiment 19's ten
   worlds from 5,000 to 20,000 iterations, and about 1 in both of
@@ -72,8 +72,8 @@ drives towards a top becomes less exploitable era after era.
 - **The room does not shrink with time.** It is no smaller at 50,000 than
   at 10,000.
 - **Where it was smaller, the world was.** Experiment 17's worlds fell from
-  1.3 to 0.6 between 1,000 and 10,000 as they shrank, to a median of 620
-  agents. Experiment 18's world of seed 6 read 0.5 at 5,000 and 7,500, when
+  1.3 to 0.6 between 1,000 and 10,000 as they shrank, to a [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") of 620
+  agents. Experiment 18's world of [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 6 read 0.5 at 5,000 and 7,500, when
   it held 300 to 400 agents. A small world has less to take.
 
 So evolution in these worlds is not approaching a top that would leave
@@ -106,7 +106,7 @@ know which draw comes. The true best reply can only gain more.
 Each contest is the notebook's lifetime contest
 ([How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)):
 - The world of one era is given brains drawn by coin from two eras.
-- Every mutation is off, so no brain changes and every copy keeps its era.
+- Every [mutation](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") is off, so no brain changes and every copy keeps its era.
 - The world plays 100 iterations, and the later era's share of the agents
   is its score.
 
@@ -239,6 +239,6 @@ little in one world, round a circle in the other.
 
 **Also about:** [Strategies written by hand](../README.md#strategies-written-by-hand).
 
-> [!info]- Pages that link here (1)
-> [Does evolution close the door?](does-evolution-close-the-door.md)
+> [!info]- Pages that link here (2)
+> [Eras and contests: does a world keep getting better?](eras-and-contests.md) · [Does evolution close the door?](does-evolution-close-the-door.md)
 <!-- /turns -->

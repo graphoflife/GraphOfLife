@@ -1,7 +1,7 @@
 # Hand-written strategies in B1
 
 > [!question] Questions of this page
-> - The hand-written raiders failed in B2's late worlds for reasons that are
+> - The hand-written raiders failed in [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.")'s late worlds for reasons that are
 >   B2's own rules. Do they fail in a world without those rules?
 > - Is the crews' failure a property of pooling stakes, or of B2?
 
@@ -16,24 +16,24 @@ Every hand-written strategy so far was planted in B2's worlds only
 [A crew of raiders](a-crew-of-raiders.md) and
 [Raiders that breed](raiders-that-breed.md)). And the reasons they failed there are B2's
 own rules:
-- **A home share.** B2 keeps 30% of an agent's tokens at home, and at least
+- **A home share.** B2 keeps 30% of an [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.")'s [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") at home, and at least
   one ([`keep_home`](settings.md#keep_home)). Seven in ten agents of
   a late patch held a single token and could stake nothing.
 - **A holder's bonus.** A holder's own stake counts one and a half times
   ([`incumbency`](settings.md#incumbency)). A raider needs three
-  tokens to take a neighbour of one, and a crew's stake that finds no partner
+  tokens to take a [neighbour](the-world.md#the-network "An agent joined to another by a connection.") of one, and a crew's stake that finds no partner
   is lost.
 - **Old age.** Every agent dies at age 100
   ([`max_age`](settings.md#max_age)), so a patch that cannot breed
-  dies with its founders.
+  dies with its [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.").
 - **A least child of ten tokens**
   ([`min_child`](settings.md#min_child)), which the breeding
   strategies of [Raiders that breed](raiders-that-breed.md) give.
 
-B1, the notebook's first baseline, has none of them. An agent may stake
+[B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it."), the notebook's first [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2."), has none of them. An agent may stake
 everything, a holder's stake counts once, a child may start with a single
 token, and nobody dies of age. Its worlds stay rich: at 2,000, 5,000 and
-10,000 iterations the median agent of its two long worlds holds 4 to 15
+10,000 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") agent of its two long worlds holds 4 to 15
 tokens, and almost none holds a single token.
 
 **The rules now read the world's rules.** Until now the raiders carried B2's
@@ -44,7 +44,7 @@ views). In B1:
 - a raider stakes everything it holds, and needs only more than its target
   holds, so a raid moves it onto the node it takes and leaves its home
   empty; it grows only by its children;
-- a crew raider stakes everything as revolution tokens on the weakest
+- a crew raider stakes everything as [revolution](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.") tokens on the weakest
   stranger no richer than itself, and one as rich as its target ties with it
   when the target keeps everything at home;
 - the breeding raider and the breeding turtle have a child of B1's least

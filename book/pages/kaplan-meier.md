@@ -1,6 +1,6 @@
 # Survival curves (Kaplan–Meier)
 
-*What share of agents live at least L iterations?* If every life had ended
+*What share of [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") live at least L [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.")?* If every life had ended
 by the end of the run, the answer would be a simple count. But some are
 still going, and for them we know only that they lasted **at least** so
 long. The **Kaplan–Meier estimate** (Kaplan and Meier 1958) uses exactly that
@@ -54,7 +54,7 @@ and the few long ones are visible ([Births, deaths and ages](births-deaths-and-a
 
 ## The median lifetime
 
-The **median lifetime** is the smallest *L* with *S*(*L* + 1) ≤ ½: half of
+The **[median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") [lifetime](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death.")** is the smallest *L* with *S*(*L* + 1) ≤ ½: half of
 all lives end by then.
 
 ## In the code
@@ -69,6 +69,6 @@ iteration, last iteration, still going).
 
 **Also about:** [Agents' lives: births, deaths, ages](../README.md#agents-lives-births-deaths-ages).
 
-> [!info]- Pages that link here (7)
-> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [Age and lifetime](age-and-lifetime.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [How worlds are measured](how-worlds-are-measured.md) · [Logarithmic axes and power laws](logarithmic-axes.md)
+> [!info]- Pages that link here (8)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [Age and lifetime](age-and-lifetime.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [How worlds are measured](how-worlds-are-measured.md) · [Logarithmic axes and power laws](logarithmic-axes.md)
 <!-- /turns -->

@@ -1,6 +1,6 @@
 # Box dimension
 
-A second way to give a network a dimension: cover it with boxes and count
+A second way to give a network a [dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space."): cover it with boxes and count
 them (Song, Havlin and Makse 2005). It is the network version of the
 box-counting dimension of fractals.
 
@@ -19,13 +19,13 @@ whole number.
 
 ## On a network
 
-A **box of size ℓ** is a set of agents no two of which are more than ℓ − 1
+A **box of size ℓ** is a set of [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") no two of which are more than ℓ − 1
 steps apart. The viewer builds boxes as balls: a centre and every agent within
 (ℓ − 1)/2 steps of it — two agents in such a ball are at most ℓ − 1 apart.
 Covering a network with the fewest boxes is a hard problem, so it is done
 greedily:
 
-1. Order the agents by number of connections, most first.
+1. Order the agents by number of [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes."), most first.
 2. Go down the list; every agent not yet in a box becomes the centre of a new
    box, which takes every agent within (ℓ − 1)/2 steps of it that no box holds
    yet.
@@ -38,7 +38,7 @@ $$
 \texttt{boxDimension} = -\text{slope}, \qquad \texttt{boxDimensionR2} = R^2 .
 $$
 
-**Example.** In the world of seed 1 after its last game: 1,336 boxes of size 1
+**Example.** In the world of [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1 after its last [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."): 1,336 boxes of size 1
 (every agent alone), 460 of size 3, 122 of size 5, 41 of size 9, 5 of size 17,
 2 of size 33 — a slope of about −2, a box dimension of about 2
 ([The geometry of a world](the-geometry-of-a-world.md)).
@@ -55,6 +55,6 @@ dimension to mean something, but not sufficient.
 
 ← [The spectral dimension](spectral-dimension.md) · [Space and dimension](../README.md#space-and-dimension)
 
-> [!info]- Pages that link here (3)
-> [The geometry of a world](the-geometry-of-a-world.md) · [Physical inspiration](physical-inspiration.md) · [What a run records](frames-and-stats.md)
+> [!info]- Pages that link here (4)
+> [Glossary](glossary.md) · [The geometry of a world](the-geometry-of-a-world.md) · [Physical inspiration](physical-inspiration.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

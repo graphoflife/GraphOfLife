@@ -1,9 +1,9 @@
 # A world that cannot break
 
 > [!question] Questions of this page
-> - What network do births and deaths make by themselves, with no brains at
+> - What network do births and deaths make by themselves, with no [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") at
 >   all — and why is it fragile?
-> - Which rules, each acting on one agent and its neighbours, make a network
+> - Which rules, each acting on one [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") and its [neighbours](the-world.md#the-network "An agent joined to another by a connection."), make a network
 >   with no single point of failure?
 > - What does each rule do, and what does it cost?
 > - Does a world under all these rules keep a network that holds, however its
@@ -15,7 +15,7 @@
 
 [Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md) gave the brains
 sight, and the worlds broke — not in one great cut, but by bleeding. Every
-world of 5,000 tokens, blind or seeing, lost agents to the cull in every
+world of 5,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes."), blind or seeing, lost agents to the cull in every
 iteration — 1.9 in a hundred without sight, 5.3 with it — and a seeing world
 died when its births stopped keeping up. Nothing can evolve for long in a
 world that bleeds like that, and a world that holds only while its brains
@@ -23,12 +23,12 @@ keep breeding is at the mercy of what evolution does to their breeding.
 
 So before asking evolution to build anything, this page builds the ground it
 stands on: rules that keep the network whole *however the agents play*. The
-target is the health bar of
+target is the [health bar](health-bar.md "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.") of
 [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md#the-network-that-holds-in-numbers):
-one piece, at least 80% of agents in the 2-core, no agent whose loss cuts off
-more than 2% of the others and no connection whose loss cuts off more than
+one piece, at least 80% of agents in the [2-core](core-trees-leaves.md "What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them."), no agent whose loss cuts off
+more than 2% of the others and no [connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") whose loss cuts off more than
 1%, no agent joined to more than 5% of the others, 3 to 12 connections per
-agent, a ball dimension between 2.3 and 4. And every rule has to be **local**:
+agent, a [ball dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") between 2.3 and 4. And every rule has to be **local**:
 it may only look at an agent and its neighbours.
 
 ## Space alone
@@ -44,9 +44,9 @@ every iteration, has a child with the same probability and then dies with the
 same probability, 0.02; the probability of a child is set so that births
 balance deaths at about 1,500 agents (and 0.05 higher while there are fewer,
 so that the world fills quickly). The world starts as a ring of 50 agents and runs 300 iterations — six
-lifetimes, so that nothing of the start is left. What the network looks like
+[lifetimes](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death."), so that nothing of the start is left. What the network looks like
 then is what the rules of space make by themselves. A run takes six seconds;
-each set of rules below was run with ten seeds.
+each set of rules below was run with ten [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.").
 
 <!-- figure unbreakable/space -->
 ![What the rules of space make, with no brains](../figures/unbreakable/space.svg)
@@ -68,11 +68,11 @@ each set of rules below was run with ten seeds.
 
 In the simplest rule a newborn is joined to its parent and nothing else. Then
 every birth adds one agent and one link, and a network that only ever gains an
-agent with one link is a **tree**: no loops at all (the first column of the
+agent with one link is a **tree**: no [loops](loops.md "A path through the network that comes back to where it started without using a connection twice.") at all (the first column of the
 figure: 2.0 links per agent, nobody in the 2-core). In a tree every agent with
 two or more neighbours is a single point of failure, and random deaths hit
 them all the time. One agent's loss could cut off 41% of the world (the
-median of ten), and the cull, which throws away everything not in the largest
+[median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") of ten), and the cull, which throws away everything not in the largest
 piece, kept these worlds at about 420 agents instead of 1,500.
 
 The obvious repair is to close loops at birth: join the newborn also to two
@@ -167,7 +167,7 @@ has nothing left to do.
 Mending in a **chain** — the same rule without the link back to the first
 group — keeps the world in one piece just as well, by the same argument, but
 the network it makes is different: its dimension falls to 2.3 and its
-diameter doubles to 38 steps. Every death replaces a star (*u* and its
+[diameter](radius-and-diameter.md "The longest of the shortest paths between two agents of a world.") doubles to 38 steps. Every death replaces a [star](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.") (*u* and its
 groups) with a path through the groups, and a world in which stars keep
 turning into paths is stretched thin, towards a line. The ring replaces the
 star with a cycle instead: every two groups are at most half the ring apart,
@@ -225,7 +225,7 @@ it ranks its candidates by what it sees of them, and whatever it favours,
 agents that already have many links are offered as candidates more often —
 they are the neighbours of more agents. That is preferential attachment, and
 it grows hubs ([Preferential attachment](preferential-attachment.md)):
-in pilots where the brains chose a newborn's two extra links, the
+in [pilots](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") where the brains chose a newborn's two extra links, the
 best-connected agent was joined to 30% of the world. Two rules answer it. The newborn's
 [`birth_links`](settings.md#birth_links) are drawn at random rather
 than chosen, and [`valence`](settings.md#valence) = 8 caps the links a
@@ -239,8 +239,8 @@ lost.
 its links to its newborn, and a parent that hands over all but one hangs on
 that one. Switched off.
 
-**B2** is the second baseline, built for open-ended evolution: B1 with brains of one hidden layer of
-16 that change only when copied ([Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md)), shorter messages (8 numbers, no
+**[B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.")** is the second [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2."), built for [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau."): [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") with brains of one hidden layer of
+16 that change only when copied ([Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md)), shorter [messages](messages.md "Numbers an agent writes to itself and to each neighbour every phase, which their brains read.") (8 numbers, no
 extra look before acting), an agent's stake on its own node counting 1.5
 times ([`incumbency`](settings.md#incumbency)), the rules of this
 page — links at birth 2, mending in a ring, `prune_needs` 2, valence 8, no
@@ -252,7 +252,7 @@ means — a brain that is not copied stays itself — and the harm it did there
 was the drain of worlds whose births fell short of the cull, which B2's other
 rules remove. Every setting is listed in the box under the thesis.
 
-In a first engine run of B2 (5,000 tokens, seed 1) every agent was in the
+In a first [engine](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") run of B2 (5,000 tokens, seed 1) every agent was in the
 2-core and no single agent or link could cut anyone off, with 5.1 to 5.3
 links per agent and a dimension of 3.1 to 3.7, through iteration 400.
 Prototype worlds under the same rules of space, from 1,250 to 10,000 tokens
@@ -498,6 +498,6 @@ evolution's — [Who dies, and why](who-dies-and-why.md) asks who dies, and why.
 
 **Also about:** [The shape and health of the network](../README.md#the-shape-and-health-of-the-network).
 
-> [!info]- Pages that link here (26)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [What the baseline world is](what-the-baseline-world-is.md) · [Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md) · [Who dies, and why](who-dies-and-why.md) · [How agents have children](how-agents-have-children.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Where the tokens flow](where-the-tokens-flow.md) · [What crosses a connection](what-crosses-a-connection.md) · [Lightning in every world](lightning-in-every-world.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [How a world breaks](how-a-world-breaks.md) · [Physical inspiration](physical-inspiration.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) · [What folds a world](what-folds-a-world.md) · [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [Why evolution stops](why-evolution-stops.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [The switches the world was built with](the-switches-the-world-was-built-with.md) · [Rules without numbers](rules-without-numbers.md) · [Handover, with every other rule](handover-with-every-other-rule.md) · [Healthy and rich](healthy-and-rich.md) · [Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (29)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [What the baseline world is](what-the-baseline-world-is.md) · [Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md) · [Who dies, and why](who-dies-and-why.md) · [How agents have children](how-agents-have-children.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Where the tokens flow](where-the-tokens-flow.md) · [What crosses a connection](what-crosses-a-connection.md) · [Lightning in every world](lightning-in-every-world.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [How a world breaks](how-a-world-breaks.md) · [Stars and hubs](stars-and-hubs.md) · [Physical inspiration](physical-inspiration.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) · [What folds a world](what-folds-a-world.md) · [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [Why evolution stops](why-evolution-stops.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [The switches the world was built with](the-switches-the-world-was-built-with.md) · [Rules without numbers](rules-without-numbers.md) · [Handover, with every other rule](handover-with-every-other-rule.md) · [Healthy and rich](healthy-and-rich.md) · [The health bar](health-bar.md) · [Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

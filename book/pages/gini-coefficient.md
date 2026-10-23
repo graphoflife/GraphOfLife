@@ -1,7 +1,7 @@
 # The Gini coefficient and the Lorenz curve
 
-How unequal is the wealth of a world? The founders start equal; later, some
-agents hold one token and some hold thousands. Two standard tools measure
+How unequal is the wealth of a world? The [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.") start equal; later, some
+[agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") hold one [token](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") and some hold thousands. Two standard tools measure
 this: the **Lorenz curve**, a picture, and the **Gini coefficient**, one
 number (Lorenz 1905; Gini 1912).
 
@@ -90,6 +90,6 @@ rearranged. It is recorded as `gini` after every phase.
 
 ← [The largest and the smallest](the-largest-and-the-smallest.md) · [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens) · [The richest tenth's share](richest-tenth.md) →
 
-> [!info]- Pages that link here (13)
-> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [Where do the tokens go?](where-do-the-tokens-go.md) · [The richest tenth's share](richest-tenth.md) · [Entropy and evenness](entropy-and-evenness.md) · [What would count as open-ended evolution](open-ended-test.md) · [Rules in company](rules-in-company.md) · [Healthy and rich](healthy-and-rich.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The candidates, played on](the-candidates-played-on.md) · [Five more seeds for the rules that held](five-more-seeds-for-the-rules-that-held.md) · [What a run records](frames-and-stats.md) · [Mobility](mobility.md)
+> [!info]- Pages that link here (16)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [The estate of the dead](estate.md) · [Where do the tokens go?](where-do-the-tokens-go.md) · [The richest tenth's share](richest-tenth.md) · [Entropy and evenness](entropy-and-evenness.md) · [What would count as open-ended evolution](open-ended-test.md) · [Rules in company](rules-in-company.md) · [Healthy and rich](healthy-and-rich.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The diversity score](diversity-score.md) · [The candidates, played on](the-candidates-played-on.md) · [Five more seeds for the rules that held](five-more-seeds-for-the-rules-that-held.md) · [What a run records](frames-and-stats.md) · [Mobility](mobility.md)
 <!-- /turns -->

@@ -1,11 +1,11 @@
 # What crosses a connection
 
-In every game each agent stakes all its tokens on itself and its neighbours,
-and whatever two agents stake on each other crosses the connection between
+In every [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") each [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") stakes all its [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") on itself and its [neighbours](the-world.md#the-network "An agent joined to another by a connection."),
+and whatever two agents stake on each other crosses the [connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") between
 them. [Where the tokens flow](where-the-tokens-flow.md) followed the tokens through a
 whole world. This page looks at the connections one at a time: how much
 crosses each one, how much of that is cancelled by what comes back, how far
-tokens travel in loops — the viewer's **lightning** — and which connections
+tokens travel in [loops](loops.md "A path through the network that comes back to where it started without using a connection twice.") — the viewer's **lightning** — and which connections
 carry nothing at all.
 
 > [!question] Questions of this page
@@ -75,7 +75,7 @@ carry nothing at all.
 ## Why ask
 
 A connection lives exactly as long as tokens keep crossing it. In the
-baseline, every connection that no token crossed in a game is cut at the end
+[baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2."), every connection that no token crossed in a game is cut at the end
 of that game ([Every setting](settings.md), `prune_after` and
 `inactive_window`; the viewer counts these as `prunedEdges`). So the flow on
 the connections is not only how tokens move; it is what keeps the network
@@ -84,7 +84,7 @@ it, perhaps, the only path between two parts of a world.
 
 > [!info] Added later: links that may not lapse
 > [A world that cannot break](a-world-that-cannot-break.md) changes this rule for the
-> second baseline, B2: there an unused connection lapses only if its two ends
+> second baseline, [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death."): there an unused connection lapses only if its two ends
 > share at least two neighbours
 > ([`prune_needs`](settings.md#prune_needs)), so no lapse can cut a
 > world in two.
@@ -98,7 +98,7 @@ the most organised flow there can be.
 
 ## How much crosses a connection
 
-Every 25 iterations from 500 on, take every connection at the start of the
+Every 25 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") from 500 on, take every connection at the start of the
 game and add up what its two agents staked on each other in that game — both
 directions together — and, separately, what is left when the smaller
 direction is cancelled against the larger:
@@ -133,7 +133,7 @@ that carried two tokens carried one each way. Where something is left, it is
 mostly a single token: 28% of the connections moved one token net, and only
 2% moved more. This is what [Do agents cooperate?](do-agents-cooperate.md) will call
 a **handshake**, seen here from the connections: two neighbours, each
-splitting a few tokens evenly over a few candidates, put one token on each
+splitting a few tokens evenly over a few [candidates](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides."), put one token on each
 other.
 
 ## Which connections carry nothing
@@ -174,7 +174,7 @@ one side or the other — what [How a world breaks](how-a-world-breaks.md) will 
 the price of a connection, paid here connection by connection.
 
 The viewer counts the cut connections after every game as `prunedEdges`:
-6.7% of all connections in the median world (5.3% at 10,000 tokens) — a
+6.7% of all connections in the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world (5.3% at 10,000 tokens) — a
 little more than the empty share at the start of a game, since connections
 also die with their agents.
 
@@ -238,16 +238,16 @@ not circulate.
 - **Big flows are rare.** A few connections carry hundreds or thousands of
   tokens in a game; only an agent holding that many can send them, and the
   rich are the well connected ([How properties scale together](how-properties-scale-together.md)).
-- **No circulation.** Tokens do not go round: what is not exchanged moves
-  downhill. For open-ended evolution this means the connections carry no
+- **No [circulation](circulation.md "The part of a flow that goes round in loops, as against the part that runs from sources to sinks.").** Tokens do not go round: what is not exchanged moves
+  downhill. For [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.") this means the connections carry no
   economy of their own — nothing like a trade route along which one part of a
   world could feed another. A rule that made flows along loops pay, or that
   let a connection store what crosses it, would be a way to give them one.
 
 > [!info] Added later: a yield on exchanges
-> [Why evolution stops](why-evolution-stops.md) pilots a rule of this kind: a yield
+> [Why evolution stops](why-evolution-stops.md) [pilots](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") a rule of this kind: a yield
 > on stakes that are returned across a connection. The yield went to whoever
-> had the most partners, and it built stars rather than partnerships.
+> had the most partners, and it built [stars](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.") rather than partnerships.
 
 To make every figure of this page: `python3 book_figures.py connections`.
 

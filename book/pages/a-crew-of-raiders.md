@@ -3,21 +3,21 @@
 > [!question] Questions of this page
 > - Where the world is too poor for any lone raider, can raiders that pool
 >   their stakes take hold?
-> - Does the game itself reward groups, and the poorer the world, the more?
+> - Does the [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") itself reward groups, and the poorer the world, the more?
 
 <!-- experiment E33 -->
 
 ## Why ask
 
 The raider of [Strategies written by hand](strategies-written-by-hand.md) took half of
-some evolved worlds. In B2's worlds played on, its door then closed
+some evolved worlds. In [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.")'s worlds played on, its door then closed
 ([Does evolution close the door?](does-evolution-close-the-door.md)).
-- **Early:** at iteration 500 every patch of 5% took hold.
+- **Early:** at [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") 500 every patch of 5% took hold.
 - **Late:** at 5,000 and 10,000 none did, in 30 plantings.
 
 No defence closed the door. The raider stakes only where it is sure to win,
-and against a neighbour of one token that needs three tokens. By 5,000 the
-patches it started from held two tokens an agent.
+and against a [neighbour](the-world.md#the-network "An agent joined to another by a connection.") of one [token](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") that needs three tokens. By 5,000 the
+patches it started from held two tokens an [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.").
 
 Stakes from several agents do not simply add up. A node goes to the largest
 single stake, the holder's own counting one and a half times, unless
@@ -86,7 +86,7 @@ plantings, which it shares with that experiment.
 > **To make it again:** `python3 book_figures.py crews`.
 <!-- /figure -->
 
-**No crew took hold, at any era.**
+**No crew took hold, at any [era](eras-and-contests.md "Brains of a world at two moments, its eras, played against each other: do the later ones win?").**
 - **At 2,000,** where four of the fifteen lone raiders' plantings took hold
   (worlds 2 and 3, as in
   [Does evolution close the door?](does-evolution-close-the-door.md)), no crew did, not even
@@ -97,7 +97,7 @@ plantings, which it shares with that experiment.
 before the lone raiders planted there: in 15 of 15 at 2,000, 14 at 5,000,
 13 at 10,000.
 
-| planted at | the crew's last agent died, median | the lone raiders' | the control's |
+| planted at | the crew's last agent died, [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") | the lone raiders' | the control's |
 |---|---|---|---|
 | 2,000 | 107 iterations later | 206 | still alive at 300 |
 | 5,000 | 100 | 151 | still alive at 300 |
@@ -200,11 +200,11 @@ raiders, and the poorer the world, the less a mob was worth, not the more:
 > reasons the crews failed are B2's own rules: a home share that keeps a
 > one-token agent from staking (`keep_home`), a holder's stake that counts
 > one and a half times (`incumbency`), and old age at 100 (`max_age`), with
-> which a patch that cannot breed dies with its founders. The raiders also
+> which a patch that cannot breed dies with its [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts."). The raiders also
 > carried B2's numbers, staking 70% and asking more than one and a half times
 > their target's tokens, until [Hand-written strategies in B1](hand-written-strategies-in-b1.md) made them read each world's own.
 > [Hand-written strategies in B1](hand-written-strategies-in-b1.md) plants the same
-> strategies in B1, which has none of those rules.
+> strategies in [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it."), which has none of those rules.
 
 ## What it teaches
 
@@ -212,7 +212,7 @@ raiders, and the poorer the world, the less a mob was worth, not the more:
   network a stranger next to a patch touches one or two of its agents. With
   each raider choosing alone, about one stranger in ten drew a mob. A crew
   that pools its stakes would have to choose its target together, and that
-  needs news about a third agent, which no message of a B2 brain carries
+  needs news about a third agent, which no [message](messages.md "Numbers an agent writes to itself and to each neighbour every phase, which their brains read.") of a B2 [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") carries
   ([What a brain can compute](what-a-brain-can-compute.md)).
 - **A raider written by hand is barren in a poor world.** Its rule asks for
   30 tokens before a child, and almost no agent of a late world holds that

@@ -1,29 +1,29 @@
 # What a simulation costs
 
 Every experiment in this notebook is sized by what it costs: the hours a
-computer spends on it, the memory a run needs, and the disk its frames take.
-Those are measured, not guessed. Every iteration a run records carries its
+computer spends on it, the memory a run needs, and the disk its [frames](frames-and-stats.md "A whole world as a run records it after one phase: every agent, its tokens and connections.") take.
+Those are measured, not guessed. Every [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") a run records carries its
 own wall-clock seconds, its processor seconds and the most memory its process
 has held, and `python3 gol_lab.py costs` fits the numbers below to all of
 them. This page is rewritten as the measurements accumulate.
 
 ## The model
 
-The cost of a run is close to proportional to the number of agents it has
-and to the size of their brains, because every agent's brain looks at every
-neighbour, twice per phase.
+The cost of a run is close to proportional to the number of [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") it has
+and to the size of their [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions."), because every agent's brain looks at every
+[neighbour](the-world.md#the-network "An agent joined to another by a connection."), twice per phase.
 
 What is measured, and how each figure is estimated:
 
 - **time** — seconds per agent per iteration, for every 10,000 weights in a
   brain;
-- **agents** — agents alive per token of the supply, from iteration 100 on,
+- **agents** — agents alive per [token](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") of the supply, from iteration 100 on,
   once a world has settled;
 - **disk** — bytes per agent per iteration, with every frame and its
   decisions kept;
 - **memory** — the most a run holds: a base, plus a multiple of every byte of
-  every brain, since the game copies them and a checkpoint stacks them. The
-  multiple is fitted by least squares over runs of every size, and the base
+  every brain, since the [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") copies them and a checkpoint stacks them. The
+  multiple is fitted by [least squares](least-squares.md "The straight line that fits a cloud of points best, and how much of their spread it explains.") over runs of every size, and the base
   is then raised until no recorded run lies above the line, so that the
   estimate bounds a run's peak rather than averaging it. (Read off small runs
   alone, whose memory is nearly all fixed overhead, the multiple came out
@@ -38,13 +38,13 @@ What is measured, and how each figure is estimated:
 Fitted to 246 recorded runs on 2026-10-14 by `python3 gol_lab.py costs`.
 <!-- /costs -->
 
-Each kind of run — the same settings apart from the size of the world and
-the seed — is fitted on its own, because kinds differ in more than the size
-of their brains: the baseline's brains are half as big again as the ones
+Each kind of run — the same [settings](settings.md "One number or switch of a run's rules, fixed before it starts.") apart from the size of the world and
+the [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") — is fitted on its own, because kinds differ in more than the size
+of their brains: the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.")'s brains are half as big again as the ones
 before it, and cost an agent hardly any more, since its agents have fewer
 neighbours to look at. Until a kind has been measured, it borrows from all
 runs; until anything has, the calibration of 2 October 2026 on the baseline
-stands: about 1.3 ms per agent per iteration in the lab, 0.18 agents per
+stands: about 1.3 ms per agent per iteration in the [lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world."), 0.18 agents per
 token once a world has settled, and 70 bytes per agent per iteration.
 
 ![Seconds per iteration, against the agents alive](../figures/costs/time.svg)
@@ -91,6 +91,6 @@ about seven hours. The thirty worlds of 100,000 tokens that
 
 ← [One world, many colours](one-world-many-colours.md) · [Methods and statistics](../README.md#methods-and-statistics) · [What goes with what](what-goes-with-what.md) →
 
-> [!info]- Pages that link here (2)
-> [What this notebook is about](what-this-notebook-is-about.md) · [What a run records](frames-and-stats.md)
+> [!info]- Pages that link here (3)
+> [What this notebook is about](what-this-notebook-is-about.md) · [The lab, the engine and pilots](the-lab.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

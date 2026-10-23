@@ -1,7 +1,7 @@
 # Many switches in few worlds: fractional factorial designs
 
 A world has many switches. To learn what each does, the plain way is to
-throw one at a time: B2, and B2 with the switch. That says what the switch
+throw one at a time: [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death."), and B2 with the switch. That says what the switch
 does *in B2*, but not whether it does the same once other switches are
 thrown too. Throwing every combination answers that, at a price: eight
 switches have 2⁸ = 256 combinations. A **fractional factorial design** plays
@@ -60,7 +60,7 @@ cannot say.
 
 ## How large is large?
 
-Each world is played once, with one seed. How much a difference of means
+Each world is played once, with one [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world."). How much a difference of means
 between two groups of eight moves by chance alone can be read from worlds
 that differ *only* in their seed: if one world's measure varies with the
 seed by a standard deviation σ, a difference of two means of eight varies by
@@ -79,6 +79,6 @@ if every pair added nothing, the seven chains would scatter like chance too.
 
 **Also about:** [Changing the rules](../README.md#changing-the-rules).
 
-> [!info]- Pages that link here (2)
-> [Rules in company](rules-in-company.md) · [Eight switches at once](eight-switches-at-once.md)
+> [!info]- Pages that link here (3)
+> [Glossary](glossary.md) · [Rules in company](rules-in-company.md) · [Eight switches at once](eight-switches-at-once.md)
 <!-- /turns -->

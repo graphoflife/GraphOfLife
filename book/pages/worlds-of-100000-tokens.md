@@ -2,12 +2,12 @@
 
 > [!question] Questions of this page
 > - How does a line take over a world ten times the size: ten times slower,
->   as chance would, about as fast, as a better brain in a well-mixed world
+>   as chance would, about as fast, as a better [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") in a well-mixed world
 >   would, or at the pace of a front that has twice as far to go?
-> - Is a world of 100,000 tokens ten copies of a world of 10,000, or does
+> - Is a world of 100,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") ten copies of a world of 10,000, or does
 >   anything appear only at size: longer-lived regions, coexisting lines,
 >   structure that a small world has no room for?
-> - Do the measures of space of the baseline's study — dimension, correlation length,
+> - Do the measures of space of the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.")'s study — [dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space."), [correlation length](correlation-function.md "How far apart two agents can be and still be alike: how fast likeness fades with distance."),
 >   the width of a world — read the same at ten times the size?
 
 <!-- experiment E10 -->
@@ -15,7 +15,7 @@
 ## Why ask
 
 When this experiment was planned, every finding about the baseline had
-been made on worlds of 10,000 tokens, about 1,300 agents each. That is
+been made on worlds of 10,000 tokens, about 1,300 [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") each. That is
 small. A world of 1,300 agents is some 30 steps across
 ([The geometry of a world](the-geometry-of-a-world.md)), and its structure fades
 within three ([Like next to like](like-next-to-like.md)): there is room for a
@@ -24,10 +24,10 @@ and about whether different kinds of agents can live side by side need
 worlds with more room.
 
 [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) showed that a
-bigger world is, on average, more of the same: agents, connections and
+bigger world is, on average, more of the same: agents, [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") and
 births all follow the tokens in proportion. It ran only three worlds of each
 size, for 600 iterations. This experiment makes a **second set of baseline
-worlds** — of B1 itself, not of the second baseline B2 of
+worlds** — of [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") itself, not of the second baseline [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.") of
 [A world that cannot break](a-world-that-cannot-break.md): thirty worlds of 100,000
 tokens, ten times the first, each run for 1,500 iterations. The physics of space builds
 on it — *Dimensions at scale* is to measure its dimensions at scale, and *Which properties have no scale?* to
@@ -56,8 +56,8 @@ A world is a space: it has a finite dimension
 ([How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)), new connections
 are only ever made inside a neighbourhood
 ([How the network grows](how-the-network-grows.md)), and a node can only be taken by
-a neighbour. Ten times the agents make a world only about twice as wide: its
-diameter grows as agents^0.30 ([How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)).
+a [neighbour](the-world.md#the-network "An agent joined to another by a connection."). Ten times the agents make a world only about twice as wide: its
+[diameter](radius-and-diameter.md "The longest of the shortest paths between two agents of a world.") grows as agents^0.30 ([How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)).
 So the third answer predicts two to three times as long, the first ten, the
 second barely longer.
 
@@ -65,7 +65,7 @@ second barely longer.
 first answer: the brains are nearly blind and agree on every decision that
 matters, which leaves little for one line to be better at. The worlds of
 [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) point to the third: at 102,400 tokens, all three came from a
-single founder by iterations 400, 400 and 525, where the median baseline
+single [founder](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.") by iterations 400, 400 and 525, where the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") baseline
 world needed 175.
 
 ## The thesis
@@ -144,7 +144,7 @@ world needed 175.
 > A value in **bold** differs from the baseline B1.
 <!-- /runs -->
 
-Thirty worlds of the baseline B1 at 100,000 tokens, seeds 1 to 30, for
+Thirty worlds of the baseline B1 at 100,000 tokens, [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1 to 30, for
 1,500 iterations each. Nothing else changes. A world of 100,000 tokens
 starts with 1,000 founders in a ring and settles at about 13,000 agents.
 
@@ -155,16 +155,16 @@ starts with 1,000 founders in a ring and settles at about 13,000 agents.
   descend from a single founder ([The common ancestor](common-ancestor.md)):
   the thesis. Against the baseline's 30 worlds over the same iterations, and
   against the time a front would need, from the worlds' diameters.
-- **Everything the study of the baseline measures**, over the settled life from
-  iteration 500 to 1,499: agents, connections, births, deaths, inequality, genotypes and
+- **Everything the study of the baseline measures**, over the [settled life](settled-life.md "A world from iteration 500 to its end, after its youth, where it is measured.") from
+  iteration 500 to 1,499: agents, connections, births, deaths, inequality, [genotypes](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.") and
   families, each per token or per agent and set beside the baseline.
 - **Space**, in the frames of iterations 500, 1,000 and 1,499: the two
   rulers of [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md), the
-  correlation functions of [Like next to like](like-next-to-like.md), the
+  [correlation](correlation.md "Whether two quantities go up and down together, from −1 to 1.") functions of [Like next to like](like-next-to-like.md), the
   domains of lines — how far apart two agents can be that share an ancestor
   of 25, 50 and 100 iterations back — and the widths of the worlds.
 
-**What it costs.** The lab estimates about 40 hours on four workers, 52 GB
+**What it costs.** The [lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") estimates about 40 hours on four workers, 52 GB
 of disk (frames and checkpoints) and up to 3.7 GB of memory per run. At
 this size a world needs about 12 seconds per iteration, and a run about
 five hours. Together with Experiment 9 (48 GB), it fits on the disk as it is now
@@ -322,19 +322,19 @@ tokens, over the same iterations:
 > **To make it again:** `python3 book_figures.py takeover`.
 <!-- /figure -->
 
-Per agent, almost nothing changes. The Gini coefficient, the richest tenth's
-share, the share of nodes taken by coalitions or kept by their own agent and
+Per agent, almost nothing changes. The [Gini coefficient](gini-coefficient.md "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all."), the [richest tenth](richest-tenth.md "The share of all tokens held by the richest tenth of the agents.")'s
+share, the share of nodes taken by [coalitions](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.") or kept by their own agent and
 the genotypes per agent are within 3% of their values at 10,000 tokens; there
 are 8% more connections per agent and 5% fewer leaves; births and deaths per
 agent are 13 to 21% higher ([How ages change over a world's life](how-ages-change.md) finds the
 old dying more often too). A large world is made of the same kind of agents,
 living the same kind of lives, a little faster.
 
-Its shape is not the same. Clustering — the share of an agent's pairs of
+Its shape is not the same. [Clustering](clustering.md "How often an agent's neighbours are also each other's neighbours.") — the share of an agent's pairs of
 neighbours that are joined — is **less than half** (0.039 against 0.088),
 and the spectral gap, which says how fast a random walk forgets where it
 began ([The spectral gap](spectral-gap.md)), is half too. The
-large worlds have 23% more loops per agent, 18% fewer bridges, a 9% larger
+large worlds have 23% more [loops](loops.md "A path through the network that comes back to where it started without using a connection twice.") per agent, 18% fewer [bridges](bridges.md "A connection that lies on no loop: cut it and the network falls into two pieces."), a 9% larger
 core, and a ball dimension 15% higher. Their distances grow as the width of a
 world does: the
 mean distance between two agents is 1.8 times as long, the diameter 2.0 times
@@ -365,7 +365,7 @@ matters.
   worlds; distances, clustering, loops and the extremes differ much more. A
   finding made at one size holds, per agent, roughly at the other — but a
   finding about shape has to be checked at both.
-- **For open-ended evolution, a large world has room for lines to live side
+- **For [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau."), a large world has room for lines to live side
   by side for most of a run.** At 10,000 tokens one founder's line held a
   world from iteration 175 on; here the median world was still shared by
   several until iteration 1,000. That is time and room for lines to differ —
@@ -380,7 +380,7 @@ To make every figure of this page: `python3 book_figures.py takeover`.
 <!-- turns -->
 ---
 
-← [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [Space and dimension](../README.md#space-and-dimension) · [What folds a world](what-folds-a-world.md) →
+← [The random twin: is a world a space?](random-twin.md) · [Space and dimension](../README.md#space-and-dimension) · [What folds a world](what-folds-a-world.md) →
 
 **Also about:** [Size and riches of a world](../README.md#size-and-riches-of-a-world).
 

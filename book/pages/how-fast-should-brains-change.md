@@ -1,25 +1,25 @@
 # How fast should brains change?
 
 > [!question] Questions of this page
-> - Does the rate at which brains change decide where evolution stops, or
+> - Does the rate at which [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") change decide where evolution stops, or
 >   only how soon it gets there?
 > - Is there a rate past which selection can no longer keep what it has found?
 > - What does the rate do to a world — to how many kinds of brain it holds, and
->   how often its nodes change hands?
+>   how often its [nodes](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") change hands?
 
 <!-- experiment E09 -->
 
 ## Why ask
 
 Evolution needs **variation** ([What this notebook is about](what-this-notebook-is-about.md)).
-In B2 a brain changes only when it is copied — into a newborn, or into a node
+In [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.") a brain changes only when it is copied — into a newborn, or into a node
 its owner has just won — and then with probability *p* = 0.2
 ([How a brain changes](mutation.md);
 [`mutate_on_replication`](settings.md#mutate_on_replication)). One
-copy in five is a new genotype. Is that a lot or a little?
+copy in five is a new [genotype](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was."). Is that a lot or a little?
 
 [Why evolution stops](why-evolution-stops.md) proposed that evolution stops because
-the game has an answer: a contest for nodes is best played at random, and
+the [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") has an answer: a contest for nodes is best played at random, and
 once a population plays it well, nothing better exists to be selected. That
 reading makes a prediction about *p*. Theory offers three pictures of what the
 rate of change can do:
@@ -41,7 +41,7 @@ rates. If evolution stops for another reason — because damage keeps pace with
 repair — the second or third should.
 
 > [!info] Added later: the game is not solved
-> Since this was written, Experiment 16 showed that the brains of iteration
+> Since this was written, Experiment 16 showed that the brains of [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.")
 > 2,000 are a little *worse* than those of iteration 500 in nine of ten B2
 > worlds ([Why evolution stops](why-evolution-stops.md#what-the-twenty-worlds-did)),
 > and a strategy written by hand took half of one of those worlds
@@ -52,9 +52,9 @@ repair — the second or third should.
 
 ## Why the question moved
 
-This experiment was first planned on the baseline B1, to ask whether three
+This experiment was first planned on the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it."), to ask whether three
 births per hundred agents is a rate selection finds or the churn of
-mutation. Two pilots at 10,000 tokens (seed 1, 600 iterations) pointed to
+mutation. Two [pilots](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") at 10,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") ([seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1, 600 iterations) pointed to
 churn: births per hundred agents were 2.0 at *p* = 0.05, 2.9 at the baseline's
 0.2 and 8.0 at 0.8, and genotypes per agent 0.32, 0.60 and 0.98 — a
 mutation–selection balance, in a world whose brains are nearly blind.
@@ -63,14 +63,14 @@ In B2 that test is gone. Every agent dies at age 100, so births are held at
 one in a hundred agents per iteration whatever the brains want
 ([Who dies, and why](who-dies-and-why.md)). What the rate of change can still
 move is how good the brains become — and that is the question the work on
-open-ended evolution needs answered.
+[open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.") needs answered.
 
 ## How the rates are compared
 
 Five rates, each double the one before: *p* = 0.05, 0.1, 0.2 (B2), 0.4 and
 0.8 — from one copy in twenty changed to four in five. Each is run with ten
 seeds at 10,000 tokens for 1,500 iterations, archiving the whole world every
-100. Worlds with the same seed start from the same founders, the same brains
+100. Worlds with the same seed start from the same [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts."), the same brains
 and the same ring; they part at the first copy one of them changes and the
 other does not.
 
@@ -85,7 +85,7 @@ twenty iterations, and the share each side holds at the end:
   Under the first picture every pair ties; under the second the slower rate
   wins, the more the further apart; under the third the fastest rate loses to
   all the others.
-- **Within a rate.** Each world plays its own eras, as in [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) — to see
+- **Within a rate.** Each world plays its own [eras](eras-and-contests.md "Brains of a world at two moments, its eras, played against each other: do the later ones win?"), as in [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) — to see
   when each rate stops, and whether the slowest has stopped at all by
   iteration 1,500.
 
@@ -196,16 +196,16 @@ All fifty worlds lived to iteration 1,500, and none came near dying out.
 the more kinds of brain a world holds. There were 0.20 genotypes per agent at
 *p* = 0.05, then 0.31, 0.46 (B2), 0.65 and 0.90 at *p* = 0.8, where nearly
 every agent carries a brain of its own. Groups of clones shrink to match:
-neighbours that carry the same brain formed groups of about 8 agents on
+[neighbours](the-world.md#the-network "An agent joined to another by a connection.") that carry the same brain formed groups of about 8 agents on
 average at the slowest rate and 1.2 at the fastest. Births stayed at one agent in a
 hundred an iteration at every rate, since the age limit sets them, and so
 did the share of agents that kept their own node in a game, 0.91 to 0.92.
 
 The worlds differ in one more way. The faster brains change, the fewer agents
-a world holds: 3,730 in the median world at *p* = 0.05, 3,250 in B2 and 2,600
+a world holds: 3,730 in the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world at *p* = 0.05, 3,250 in B2 and 2,600
 at *p* = 0.8. The extra agents of a slowly changing world are poor ones. At
 0.05 and 0.1 half of all agents or more held a single token, against a median of 1.6
-at 0.4 and 2 at 0.8, while inequality, by its Gini coefficient, was 0.50 to
+at 0.4 and 2 at 0.8, while inequality, by its [Gini coefficient](gini-coefficient.md "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all."), was 0.50 to
 0.52 at every rate. Why a world of fast change keeps fewer poor agents alive
 is not measured here.
 
@@ -267,7 +267,7 @@ any single seed was 0.57.
 > this page says that evolution stops, read: it stops *as far as a short
 > contest can see*.
 >
-> Played a lifetime long (T = 100, once in each era's world; five seeds of each
+> Played a [lifetime](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death.") long (T = 100, once in each era's world; five seeds of each
 > rate, `research/oee/checks/lab_rejudge_worlds.txt`), the brains of iteration
 > 1,000 beat those of 500 in every world at every rate: 0.74 at a chance of
 > change of 0.05, 0.67 at 0.1, 0.68 at B2's own 0.2 (ten worlds), 0.67 at 0.4

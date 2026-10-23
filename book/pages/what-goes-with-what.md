@@ -1,17 +1,17 @@
 # What goes with what
 
 > [!question] Questions of this appendix
-> - Which quantities move together in these worlds: for an agent from one game
+> - Which quantities move together in these worlds: for an [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") from one [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.")
 >   to the next, for a whole world over time, and between one world and
 >   another?
-> - Does an agent's token curvature say how its tokens will change?
+> - Does an agent's [token](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") curvature say how its tokens will change?
 > - Which relations show only on logarithmic axes?
-> - Which correlations are findings, and which are true by definition?
+> - Which [correlations](correlation.md "Whether two quantities go up and down together, from −1 to 1.") are findings, and which are true by definition?
 
 This appendix is an atlas rather than an experiment. Nothing in it was
 predicted. It is a search: every quantity the notebook measures for an agent
 against every other, on every combination of linear and logarithmic axes, in
-twenty worlds; and every statistic the lab records for a whole world against
+twenty worlds; and every statistic the [lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") records for a whole world against
 every other. A search of this size finds hundreds of correlations, and most of
 them say nothing. Two quantities computed from the same numbers correlate by
 definition. Two that both drift over a run correlate whether or not they have
@@ -24,9 +24,9 @@ its sign.
 
 ## The agents
 
-**The rows.** For every 20th game from iteration 1,000 to 2,000, one row for
-every agent alive at the start of the game, in the ten B2 worlds of
-Experiment 16 and the first ten B1 worlds of the baseline set: 1,690,320
+**The rows.** For every 20th game from [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") 1,000 to 2,000, one row for
+every agent alive at the start of the game, in the ten [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.") worlds of
+Experiment 16 and the first ten [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") worlds of the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") set: 1,690,320
 rows from B2 and 634,832 from B1. A node keeps its number when another agent takes it, so what is
 measured after the game (its change of tokens, ten games later) is of the
 node, held by whoever holds it then.
@@ -37,9 +37,9 @@ node, held by whoever holds it then.
 |---|---|
 | `tokens` | the tokens it held at the start of the game |
 | `age` | iterations since it was born |
-| `clones` | agents carrying its brain, itself included |
-| `degree` | its connections |
-| `curvature` | [token curvature](token-curvature.md): the sum over its neighbours of their tokens minus its own |
+| `clones` | agents carrying its [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions."), itself included |
+| `degree` | its [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") |
+| `curvature` | [token curvature](token-curvature.md): the sum over its [neighbours](the-world.md#the-network "An agent joined to another by a connection.") of their tokens minus its own |
 | `nbr_tokens`, `nbr_max` | its neighbours' mean tokens, its richest neighbour's |
 | `poorer_nbrs` | the share of its neighbours holding fewer tokens than it |
 | `nbr_degree` | its neighbours' mean connections |
@@ -61,7 +61,7 @@ log(1 + *x*) of a count that can be zero, and sign(*x*) log(1 + |*x*|) of a
 signed one, so that a peak and a valley of the same depth sit at the same
 distance from zero. Shares and yes-or-no stay linear. And the rank
 correlation (Spearman's), which no monotone change of axes can alter. Each
-correlation is taken in each world and the median of the ten is reported.
+correlation is taken in each world and the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") of the ten is reported.
 
 <!-- figure atlas/before_after -->
 ![What comes before, and what follows](../figures/atlas/before_after.svg)
@@ -107,8 +107,8 @@ where the tokens sit (rank correlations, B2 against B1):
 | the largest stake and the nodes taken | +0.64 | −0.29 |
 | age and still alive ten iterations later | −0.52 | +0.22 |
 
-In B1 the rich are the well-connected, the central and the old: the even
-split ([Where the tokens flow](where-the-tokens-flow.md)) pours tokens into whoever
+In B1 the rich are the well-connected, the central and the old: the [even
+split](even-split.md "What the rules do when a brain scores no candidate above zero: the stake is spread evenly.") ([Where the tokens flow](where-the-tokens-flow.md)) pours tokens into whoever
 has most neighbours, and nothing ages. They spread their stakes, and the
 nodes they take come from spreading. In B2 wealth has come loose from the
 network. Its links are capped at eight, its agents die at a hundred, and
@@ -118,7 +118,7 @@ shows as plainly as a rule can: in B2 the old are the ones about to die.
 
 **In B2, nothing here says who will lose its node.** In B1 an agent's node is
 kept by agents that stake at home (+0.47) and lost by the well-connected
-(−0.43 on a logarithmic axis for connections). In B2 the strongest of all 21
+(−0.43 on a [logarithmic axis](logarithmic-axes.md "An axis on which each step multiplies by the same factor, so that numbers of very different sizes fit on one chart.") for connections). In B2 the strongest of all 21
 quantities known before the game predicts keeping one's node at 0.16. As far
 as anything measured here can tell, losing one's node in B2 is a lottery.
 Having a child next is hardly predictable in either world (at most 0.18).
@@ -193,7 +193,7 @@ connections show nothing on linear axes (0.05) and 0.64 on logarithmic ones:
 an agent among well-connected neighbours lives in a valley, because
 well-connected agents are rich. In B2 the logarithm reveals almost nothing.
 Its links are capped at eight and most agents hold one to three tokens, so
-there is little range for a power law to hide in. Only tokens per link
+there is little range for a [power law](power-law-fit.md "A quantity whose frequency falls as a power of its size: few huge values, many small ones.") to hide in. Only tokens per link
 against betweenness and PageRank gain much (−0.17 to −0.57, −0.30 to
 −0.62).
 
@@ -208,8 +208,8 @@ Grouped by what they measure, the couplings *between* groups that held with
 the same sign in every one of ten worlds are the findings
 (`research/atlas/world_series.py`; groups in `research/atlas/groups.py`).
 
-**In B1, the dead's estate levels the world.** In games in which more of the
-dead's tokens are scattered over the survivors, the Gini coefficient falls
+**In B1, the dead's [estate](estate.md "The tokens a dead agent leaves, and who gets them.") levels the world.** In games in which more of the
+dead's tokens are scattered over the survivors, the [Gini coefficient](gini-coefficient.md "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") falls
 (−0.78 between the changes, from −0.65 to −0.83 in the ten worlds), the top
 tenth holds less (−0.76), more agents gain (+0.74) and the median holding
 rises (+0.65). A world that splits feeds the rest: when pieces break off, the
@@ -218,8 +218,8 @@ tokens of their agents are scattered (+0.75).
 **In B2, hoarding goes with inequality.** In games in which agents keep more
 of their tokens at home, inequality rises (+0.43) and fewer agents gain
 (−0.46). And when the share of agents with many connections falls off more
-steeply, with fewer hubs (a larger exponent γ of the degree distribution), the
-network has fewer bridges (−0.65), a smaller risk of being cut apart (−0.70)
+steeply, with fewer [hubs](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.") (a larger exponent γ of the [degree](degree.md "The number of an agent's connections: how many neighbours it has.") distribution), the
+network has fewer [bridges](bridges.md "A connection that lies on no loop: cut it and the network falls into two pieces.") (−0.65), a smaller risk of being cut apart (−0.70)
 and a larger core (+0.65).
 
 ## Between worlds
@@ -227,8 +227,8 @@ and a larger core (+0.65).
 Thirty worlds of B1 at 100,000 tokens (Experiment 10), each described by the
 means of its statistics over iterations 500 to 1,500. Thirty pairs of numbers
 make a correlation above 0.36 unlikely by chance, and dozens of pairs reach
-0.95 and more: the largest hub, the richest agent, assortativity, the core,
-the flows and the dimension all move together from world to world. That many
+0.95 and more: the largest hub, the richest agent, [assortativity](assortativity.md "Whether agents tend to be joined to agents like them: the well connected to the well connected."), the core,
+the flows and the [dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") all move together from world to world. That many
 correlations that strong mean fewer things than there are statistics.
 
 <!-- figure atlas/worlds -->
@@ -252,7 +252,7 @@ correlations that strong mean fewer things than there are statistics.
 variance of their 79 standardised statistics, the first principal component
 holds 47%, and ordering the worlds along it orders them by their
 best-connected agent's share of the world, from 1% to 61%. The second
-component (18%) is how clustering and triangles grow with an agent's
+component (18%) is how [clustering](clustering.md "How often an agent's neighbours are also each other's neighbours.") and triangles grow with an agent's
 connections; the third (16%) is the population. The seven "star" worlds of
 [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) are the far end of the first:
 a world is first of all a world with or without a star.
@@ -288,6 +288,6 @@ whole worlds; the tables are in `GraphOfLifeRuns/.pilots/atlas/`.
 
 ← [What a simulation costs](what-a-simulation-costs.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Every simulation: what was run, and what was measured](every-simulation.md) →
 
-> [!info]- Pages that link here (3)
-> [Where tokens go](where-tokens-go.md) · [Every world side by side](every-world-side-by-side.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (6)
+> [The estate of the dead](estate.md) · [Where tokens go](where-tokens-go.md) · [The even split](even-split.md) · [Stars and hubs](stars-and-hubs.md) · [Every world side by side](every-world-side-by-side.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

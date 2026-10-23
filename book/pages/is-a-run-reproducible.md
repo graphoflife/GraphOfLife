@@ -1,13 +1,13 @@
 # Is a run reproducible?
 
-Every later page compares worlds: many seeds against many, one setting
+Every later page compares worlds: many seeds against many, one [setting](settings.md "One number or switch of a run's rules, fixed before it starts.")
 against another. That only means something if a world is decided by its
 settings and its seed and by **nothing else** — not by when it was stopped
 and continued, not by a crash, not by which computer or how many processor
 cores ran it.
 
 > [!question] Questions of this page
-> - Does the same seed always give the same world, frame for frame?
+> - Does the same seed always give the same world, [frame](frames-and-stats.md "A whole world as a run records it after one phase: every agent, its tokens and connections.") for frame?
 > - Does stopping a run and continuing it later, in a new process, change it?
 > - Does a crash, after which the run is resumed from its last save, change it?
 > - Does the number of processor threads the matrix library uses change it?
@@ -21,18 +21,18 @@ if three things hold.
    generator produces a fixed sequence of numbers from its starting value. In
    Graph of Life every world owns its own generator, started from its seed,
    and draws everything from it ([Seeds and the random stream](random-numbers.md)).
-2. **Everything is done in a fixed order.** Agents act in increasing order of
-   id; neighbours are listed in increasing order of id; messages are held
+2. **Everything is done in a fixed order.** [Agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") act in increasing order of
+   id; [neighbours](the-world.md#the-network "An agent joined to another by a connection.") are listed in increasing order of id; [messages](messages.md "Numbers an agent writes to itself and to each neighbour every phase, which their brains read.") are held
    back in an outbox and delivered together once every agent has written —
    after the look that only talks, and again at the end of the phase — so
    that no agent reads a message another agent wrote a moment earlier in the
    same look.
 3. **A saved world is the whole world.** To stop a run and continue it later,
-   the program saves a **checkpoint**: every agent's tokens, brain weights,
-   genotype and age, every connection and when it last carried tokens, every
+   the program saves a **checkpoint**: every agent's [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes."), [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") weights,
+   [genotype](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.") and age, every [connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") and when it last carried tokens, every
    message in flight — and the state of the random generator. A run continued
    from a checkpoint first deletes any frames recorded after it, then lives
-   those iterations again.
+   those [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") again.
 
 What these do not cover is arithmetic itself. Adding real numbers on a
 computer is not associative: (*a* + *b*) + *c* can differ from
@@ -180,7 +180,7 @@ continuing and crashing it holds exactly.
 
 A run is decided by its settings and its seed — given one thread for the
 matrix library, which every run in this notebook uses. Stopping it, continuing it
-or crashing it changes nothing, so the lab can pause and resume runs freely,
+or crashing it changes nothing, so the [lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") can pause and resume runs freely,
 and every difference between two runs in later pages comes from what was
 changed, not from how they were run.
 
@@ -215,6 +215,6 @@ The limits that remain:
 
 **Also about:** [Methods and statistics](../README.md#methods-and-statistics).
 
-> [!info]- Pages that link here (7)
-> [How to read this notebook](../README.md) · [What this notebook is about](what-this-notebook-is-about.md) · [The world: tokens, agents and a network](the-world.md) · [Seeds and the random stream](random-numbers.md) · [What the baseline world is](what-the-baseline-world-is.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (9)
+> [How to read this notebook](../README.md) · [What this notebook is about](what-this-notebook-is-about.md) · [How this notebook is written](how-this-notebook-is-written.md) · [The world: tokens, agents and a network](the-world.md) · [Seeds and the random stream](random-numbers.md) · [What the baseline world is](what-the-baseline-world-is.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [The lab, the engine and pilots](the-lab.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

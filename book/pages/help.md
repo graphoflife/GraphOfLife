@@ -1,13 +1,13 @@
 # Help
 
-What would cooperation be in a game whose only act is to stake tokens on
-nodes? This note defines **help** from the rules of the game alone, without
+What would cooperation be in a game whose only act is to stake [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") on
+[nodes](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.")? This note defines **help** from the rules of the game alone, without
 asking what an agent meant, and the three signs by which help becomes
 **cooperation**. [Gliders, and who helps whom](gliders-and-who-helps-whom.md) measures both.
 
 ## A stake that saves a node
 
-Every stake an agent $u$ puts on a neighbour $v$'s node changes the chance that
+Every stake an agent $u$ puts on a [neighbour](the-world.md#the-network "An agent joined to another by a connection.") $v$'s node changes the chance that
 $v$ keeps it. Compare the game as it was with the same game without $u$'s
 stake, everyone else's stakes unchanged:
 
@@ -19,11 +19,11 @@ at all, because the node would have gone the same way without them.
 
 Both probabilities come from the world's own rule for deciding a node, counted
 exactly, nothing sampled (`research/oee/checks/decisive.py`). Under the
-engine's rule ([One iteration, step by step](one-iteration.md)) the largest stake
-wins, the owner's own stake counting one and a half times in B2, ties drawn at
+[engine](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s rule ([One iteration, step by step](one-iteration.md)) the largest stake
+wins, the owner's own stake counting one and a half times in [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death."), ties drawn at
 random, unless a crowd of revolutionary stakes outweighs the largest staker and
 everyone above the crowd, in which case the winner is drawn from the step of the
-crowd that tipped it. Under the pilots' alliances
+crowd that tipped it. Under the [pilots](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.")' alliances
 ([Alliances](alliances.md)) the side with the largest total
 wins. A tie between $k$ stakers gives each a probability $1/k$. In both cases
 the probability is what the rule would give if the game were played many
@@ -31,7 +31,7 @@ times, so the effect is a fraction of a node: a stake that turns a lost node
 into a tie has the effect $1/2$.
 
 Only two rules let one agent's stake raise another's chance to keep its node.
-Revolutions do, because a stake on $v$'s node can join $v$'s own in the crowd
+[Revolutions](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.") do, because a stake on $v$'s node can join $v$'s own in the crowd
 that overthrows an attacker. Pooled alliances do, because an ally's stake
 counts for $v$'s side. Without either, a stake on someone else's node is a bid
 against its holder and can only lower that chance: help is then impossible
@@ -43,7 +43,7 @@ $U$ stakes 6 tokens on $V$'s node and marks none of them revolutionary. $V$
 stakes 4 on its own node, all revolutionary. $V$'s neighbour $W$ stakes 3 on
 $V$'s node, all revolutionary.
 
-**Under B1's rule** (no extra weight for the owner): the largest stake is
+**Under [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.")'s rule** (no extra weight for the owner): the largest stake is
 $U$'s, so $U$ is the one the crowd must beat. The crowd is $W$ with 3 and $V$
 with 4, together 7, more than 6. Counted up from the smallest, $W$'s 3 is not
 yet more than $V$'s 4 plus $U$'s 6, but $W$'s and $V$'s 7 is more than $U$'s 6
@@ -69,7 +69,7 @@ few routes, each of which leaves its own mark in who helps whom (Martin Nowak,
 *Five rules for the evolution of cooperation*, Science, 2006). Three can be
 read from the record of the games, each against the level chance would give:
 
-- **Kin.** Help goes to clones, agents carrying the helper's own brain, more
+- **Kin.** Help goes to clones, agents carrying the helper's own [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions."), more
   often than clones are among the helper's neighbours.
 - **Direct reciprocity.** Help is returned: of the pairs in which $u$ helped
   $v$ within a stretch of 50 games, the share in which $v$ also helped $u$. Its

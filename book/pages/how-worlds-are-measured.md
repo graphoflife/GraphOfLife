@@ -1,8 +1,8 @@
 # How worlds are measured
 
-A world of 10,000 tokens holds about 1,300 agents and lives 3,000
-iterations: some four million agent-moments, recorded twice per iteration.
-(The baseline worlds of 100,000 tokens hold about 14,000 agents
+A world of 10,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") holds about 1,300 [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") and lives 3,000
+[iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."): some four million agent-moments, recorded twice per iteration.
+(The [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") worlds of 100,000 tokens hold about 14,000 agents
 for 1,500 iterations: some twenty million.) This page teaches with the
 smaller worlds.
 This page explains, step by step, how that becomes the numbers and figures
@@ -19,16 +19,16 @@ it exactly and works an example.
 ## Step 1 · A row of statistics per phase
 
 After every phase the world is recorded as a frame, and from every frame a
-**row** of statistics is computed: the number of agents, of connections, how
+**row** of statistics is computed: the number of agents, of [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes."), how
 unequal the tokens are, how many agents starved, and so on
 ([What a run records](frames-and-stats.md)). A row with `phase` = 1
 describes the world just after a reproduction phase, one with `phase` = 2
-just after a game. Unless a figure says otherwise, the notebook reads the rows of
+just after a [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."). Unless a figure says otherwise, the notebook reads the rows of
 phase 2: the world **at the end of each iteration**. Births are the
 exception: they are counted in the rows of phase 1, where they happen.
 
 Most statistics are computed for every row. Those that need a walk through
-the whole network — bridges, the core, clustering, distances — are computed
+the whole network — [bridges](bridges.md "A connection that lies on no loop: cut it and the network falls into two pieces."), the core, [clustering](clustering.md "How often an agent's neighbours are also each other's neighbours."), distances — are computed
 every 25 iterations.
 
 ## Step 2 · One world: means over stretches
@@ -67,12 +67,12 @@ world **settles**, it takes the mean from iteration 500 to its end — its
 
 ## Step 3 · Many worlds: lines, bands and dots
 
-Every world is a matter of chance: the seed decides the starting ring, the
-founders' brains and every random decision after. So the notebook makes many
-worlds — thirty for each setting, with seeds 1, 2, …, 30, unless a page
+Every world is a matter of chance: the [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") decides the starting ring, the
+[founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.")' [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") and every random decision after. So the notebook makes many
+worlds — thirty for each [setting](settings.md "One number or switch of a run's rules, fixed before it starts."), with seeds 1, 2, …, 30, unless a page
 says otherwise (three per size in
 [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md), ten per
-condition for B2). Drawn one line per world, they look like this:
+condition for [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.")). Drawn one line per world, they look like this:
 
 <!-- figure measure/thirty -->
 ![30 worlds, each a line](../figures/measure/thirty.svg)
@@ -159,7 +159,7 @@ that died.
 
 ## Step 6 · How long things last
 
-For lifetimes — of agents, of genotypes — the notebook draws the share that
+For [lifetimes](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death.") — of agents, of [genotypes](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.") — the notebook draws the share that
 lasted **at least** *L* iterations, for every *L*, as a
 [Kaplan–Meier survival curve](kaplan-meier.md), which counts lives
 still going at the end of a run correctly. Such curves, and many
@@ -177,7 +177,7 @@ the figures (`book_figures.py`, with the package `book_chapters/`, drawing with
 <!-- turns -->
 ---
 
-← [Every world side by side](every-world-side-by-side.md) · [Methods and statistics](../README.md#methods-and-statistics) · [One world, many colours](one-world-many-colours.md) →
+← [The lab, the engine and pilots](the-lab.md) · [Methods and statistics](../README.md#methods-and-statistics) · [One world, many colours](one-world-many-colours.md) →
 
 > [!info]- Pages that link here (2)
 > [Where do the tokens go?](where-do-the-tokens-go.md) · [What a brain can compute](what-a-brain-can-compute.md)

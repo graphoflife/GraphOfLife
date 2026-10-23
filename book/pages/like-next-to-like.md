@@ -6,12 +6,12 @@ and of another? In physics the question is answered by asking how far the
 state of one place reaches: whether two places some distance apart are more
 alike than two places drawn at random, and up to what distance. This
 page asks it of the worlds of Graph of Life, with distance counted in
-steps along connections.
+steps along [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.").
 
 > [!question] Questions of this page
-> - Are neighbours alike in their tokens, their age, their connections?
+> - Are [neighbours](the-world.md#the-network "An agent joined to another by a connection.") alike in their [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes."), their age, their connections?
 > - How far does likeness reach — two steps, ten, across the world?
-> - How much of it comes from an agent's place in the network, and how much
+> - How much of it comes from an [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.")'s place in the network, and how much
 >   from closeness itself?
 > - Do kin live together, and in territories?
 
@@ -80,7 +80,7 @@ both are given.
 ## Neighbours
 
 Take every connection of a world and the two agents at its ends, and ask
-whether their values go together: the correlation, over all connections, of
+whether their values go together: the [correlation](correlation.md "Whether two quantities go up and down together, from −1 to 1."), over all connections, of
 the value at one end with the value at the other. A positive correlation
 means like beside like, a negative one unlike beside unlike.
 
@@ -101,11 +101,11 @@ means like beside like, a negative one unlike beside unlike.
 <!-- /figure -->
 
 - **Tokens: unlike.** Neighbours' tokens are correlated at **−0.16** in the
-  median world (−0.10 at 10,000 tokens). The rich sit among the poor.
+  [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world (−0.10 at 10,000 tokens). The rich sit among the poor.
 - **Age: like.** **+0.14** (+0.15). The old sit among the old, the young among
   the young.
-- **Connections: unlike.** **−0.20** (−0.19): hubs sit among agents with few
-  connections, the assortativity of [How properties scale together](how-properties-scale-together.md).
+- **Connections: unlike.** **−0.20** (−0.19): [hubs](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.") sit among agents with few
+  connections, the [assortativity](assortativity.md "Whether agents tend to be joined to agents like them: the well connected to the well connected.") of [How properties scale together](how-properties-scale-together.md).
 
 All three are small in the median world. Neighbours are alike or unlike only
 a little, and the worlds differ: the age correlation ranges from −0.09 to
@@ -180,7 +180,7 @@ other.
 
 ## Kin, near and far
 
-The last question is about families. Do agents of one genotype live
+The last question is about families. Do agents of one [genotype](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.") live
 together?
 
 <!-- figure alike/kin -->
@@ -218,10 +218,10 @@ So kin live together, but only as small clusters: a parent, its children,
 the nodes it has just conquered, within two or three steps. There are no
 territories of genotypes. A genotype is a few agents, not a region.
 
-Two reasons keep it so. A genotype lasts about two iterations before a
+Two reasons keep it so. A genotype lasts about two [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") before a
 change renames it ([Genotypes and lineages](genotypes-and-lineages.md)), so a
 cluster of one genotype has little time to grow. And more than half of all
-nodes change hands in every game ([How the game is played](how-the-game-is-played.md)),
+nodes change hands in every [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") ([How the game is played](how-the-game-is-played.md)),
 so any territory is broken up as soon as it forms. Lines, which last much
 longer than genotypes, might well hold larger domains.
 [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) measures them, asking the same
@@ -254,7 +254,7 @@ iterations back.
   these worlds — and [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)
   finds something — it is not what the agents hold, which is alike only
   within three steps.
-- **For open-ended evolution, there is no room for a second kind of world
+- **For [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau."), there is no room for a second kind of world
   to form inside the first.** Matter in a vacuum, a cell in its medium, a
   species in its habitat: each is a region that differs from its
   surroundings and keeps differing. A world whose correlations die within

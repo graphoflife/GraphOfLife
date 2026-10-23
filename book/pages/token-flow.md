@@ -1,6 +1,6 @@
 # Token flow
 
-In every game every agent stakes all its tokens on itself and its neighbours
+In every game every [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") stakes all its [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") on itself and its [neighbours](the-world.md#the-network "An agent joined to another by a connection.")
 ([One iteration, step by step](one-iteration.md)). A stake of agent *u* on a
 neighbour *v*'s node is a **flow** of tokens from *u* to *v*: whatever happens
 to the node, those tokens end the game at *v*'s node. These statistics, in the
@@ -14,7 +14,7 @@ Write *a*(*u* → *v*) for the tokens *u* staked on neighbour *v*'s node.
 | field | definition |
 |---|---|
 | `totalFlow` | Σ over all *u* ≠ *v* of *a*(*u* → *v*): every token staked on a neighbour |
-| `meanEdgeFlow` | the mean, over the connections that carried anything, of *a*(*u* → *v*) + *a*(*v* → *u*) |
+| `meanEdgeFlow` | the mean, over the [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") that carried anything, of *a*(*u* → *v*) + *a*(*v* → *u*) |
 | `maxEdgeFlow` | the largest such sum on one connection |
 | `netFlowShare` | the share of `totalFlow` left after cancelling each pair's two directions against each other (below) |
 | `flowImbalance` | the share of `totalFlow` that must flow one way ([Lightning](lightning.md)) |
@@ -54,6 +54,6 @@ it goes.
 
 ← [Staking at home, and keeping one's node](home-stake.md) · [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens) · [Lightning: tokens that go round](lightning.md) →
 
-> [!info]- Pages that link here (7)
-> [Where the tokens flow](where-the-tokens-flow.md) · [What crosses a connection](what-crosses-a-connection.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [Lightning in every world](lightning-in-every-world.md) · [Lightning: tokens that go round](lightning.md) · [What a run records](frames-and-stats.md) · [What the viewer can colour by](viewer-colours.md)
+> [!info]- Pages that link here (8)
+> [Glossary](glossary.md) · [Where the tokens flow](where-the-tokens-flow.md) · [What crosses a connection](what-crosses-a-connection.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [Lightning in every world](lightning-in-every-world.md) · [Lightning: tokens that go round](lightning.md) · [What a run records](frames-and-stats.md) · [What the viewer can colour by](viewer-colours.md)
 <!-- /turns -->

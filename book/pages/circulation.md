@@ -1,8 +1,8 @@
 # Flows that go round
 
-Tokens move over the network every game: an agent's stake on a neighbour's
-node goes to that node, whoever takes it. Add up what each connection carried
-each way over a stretch of games and every connection has a **net flow**: the
+[Tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") move over the network every [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."): an [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.")'s stake on a [neighbour](the-world.md#the-network "An agent joined to another by a connection.")'s
+node goes to that node, whoever takes it. Add up what each [connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") carried
+each way over a stretch of games and every connection has a **[net flow](token-flow.md "The tokens a game moves along each connection, from the agent who stakes to the node staked on.")**: the
 tokens that went one way minus those that came back. This note shows how such
 a flow splits into a part that runs downhill and a part that goes round, and
 how to tell whether a world's flow goes round more than chance would make it.
@@ -18,7 +18,7 @@ agent:
 
 $$F_{uv} = \varphi_u - \varphi_v .$$
 
-Tokens leave the high agents and arrive at the low ones. Round any loop of the
+Tokens leave the high agents and arrive at the low ones. Round any [loop](loops.md "A path through the network that comes back to where it started without using a connection twice.") of the
 network a gradient flow adds up to nothing, since the differences cancel:
 $(\varphi_a - \varphi_b) + (\varphi_b - \varphi_c) + (\varphi_c - \varphi_a) = 0$.
 
@@ -32,7 +32,7 @@ their squared values over the connections, add up to the flow's. This is the
 discrete **Helmholtz–Hodge decomposition** (Jiang, Lim, Yao and Ye, 2011, use it
 to rank from pairwise comparisons; Candogan, Menache, Ozdaglar and Parrilo,
 2011, to split games into their potential and cyclic parts). The gradient part
-is found by least squares, the pressure that explains as much of the flow as
+is found by [least squares](least-squares.md "The straight line that fits a cloud of points best, and how much of their spread it explains."), the pressure that explains as much of the flow as
 possible, which means solving one linear system with the network's Laplacian.
 The circulation is what is left over. The **circulation share** is the
 circulation's energy as a fraction of the flow's.
@@ -80,7 +80,7 @@ is
 $$\frac{\sum_e P_{ee} F_e^2}{\sum_e F_e^2},$$
 
 where $P_{ee}$ is how much of a unit flow on connection $e$ alone is
-circulation: one third for each side of the triangle, zero for the bridge
+circulation: one third for each side of the triangle, zero for the [bridge](bridges.md "A connection that lies on no loop: cut it and the network falls into two pieces.")
 $C$–$D$. In the example it is $(9 + 9 + 1)/3/23 = 19/69 \approx 0.28$, and averaging
 over all sixteen ways of flipping the four directions gives the same. In a
 world it is estimated by flipping the directions at random a few times.
@@ -95,13 +95,13 @@ A ring that is there in one stretch of games and gone in the next is an
 accident of those games. A ring that **persists** is a structure. Split the
 flow of two consecutive stretches (50 games each in
 [Gliders, and who helps whom](gliders-and-who-helps-whom.md)), and over the connections both used
-take the correlation of their circulations, and of their gradient parts. A
+take the [correlation](correlation.md "Whether two quantities go up and down together, from −1 to 1.") of their circulations, and of their gradient parts. A
 correlation near zero means each stretch's rings are new; a positive one,
 rings or slopes that come back on the same connections.
 
 ## In this notebook
 
-`research/oee/checks/circulation.py` does all of the above for a lab run's
+`research/oee/checks/circulation.py` does all of the above for a [lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") run's
 recorded games, for the whole flow and separately for **gifts** (stakes that
 did not take their target, so their tokens went to whoever held it) and
 **takeovers** (stakes that took it). Gifts going round would be generalised
@@ -130,6 +130,6 @@ only closed rings, raise the share.
 
 ← [Token curvature](token-curvature.md) · [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens) · [Flow modules and the map equation](map-equation.md) →
 
-> [!info]- Pages that link here (5)
-> [Flow modules: the groups tokens stay in](flow-modules.md) · [Lightning in every world](lightning-in-every-world.md) · [Who helps whom](who-helps-whom.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Help](help.md)
+> [!info]- Pages that link here (6)
+> [Glossary](glossary.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [Lightning in every world](lightning-in-every-world.md) · [Who helps whom](who-helps-whom.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Help](help.md)
 <!-- /turns -->

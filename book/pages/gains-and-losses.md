@@ -1,7 +1,7 @@
 # Gains and losses
 
-In every game every agent stakes **all** of its tokens, on its own node and on
-its neighbours' ([One iteration, step by step](one-iteration.md)), and every node ends the
+In every game every [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") stakes **all** of its [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes."), on its own node and on
+its [neighbours](the-world.md#the-network "An agent joined to another by a connection.")' ([One iteration, step by step](one-iteration.md)), and every node ends the
 game holding exactly the tokens staked on it. So a game reshuffles every token
 of the world, every iteration. This page asks what that does to the agents
 one by one: who gains, who loses, who dies — and whether there is a law to it.
@@ -92,11 +92,11 @@ what others put on it it gains. **An example.** A holds 6 tokens and B 2, and
 they are neighbours. A stakes 3 at home and 3 on B; B stakes 1 at home and 1
 on A. After the game A's node holds 3 + 1 = 4 (Δ = −2) and B's 1 + 3 = 4
 (Δ = +2). Had A put 5 at home and only 1 on B, the two stakes across the
-connection would have matched, and neither balance would have changed (A:
+[connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") would have matched, and neither balance would have changed (A:
 5 + 1 = 6, B: 1 + 1 = 2). Exactly-zero changes come from exactly that: what
 goes out comes back.
 
-Who *wins* a node — whose brain it takes — is a separate matter
+Who *wins* a node — whose [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") it takes — is a separate matter
 ([How a coalition takes a node](revolution.md)): the tokens are the
 node's whoever wins it. This page is about the tokens; the identity of an
 agent here is its node, as in the frames.
@@ -124,7 +124,7 @@ The first game is a scramble. Of the agents alive at its start, 57% lose
 tokens and 41% gain; fewer than one in a hundred come out with exactly what
 they had. Few die in it: 0.8% starve — nobody, not even they themselves,
 staked on their node — and 0.4% are cut off from the network. (In the worlds
-of 10,000 tokens, whose founders had four neighbours each instead of ten, the
+of 10,000 tokens, whose [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.") had four neighbours each instead of ten, the
 first game was violent: 3.8% starved and 4.0% were cut off.)
 
 Settled games are calm. 0.7% starve and 2.1% are cut off; 24% lose and 26%
@@ -138,7 +138,7 @@ returned).
 
 In numbers per game in a settled world of about 14,400: some 3,800 agents
 gain, 3,600 lose; the largest single gain is about 1,400 tokens and the
-largest loss about 1,400 — a hub's worth, changing hands in one game. (At
+largest loss about 1,400 — a [hub](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.")'s worth, changing hands in one game. (At
 10,000 tokens: 330 and 320 agents, and about 640 and 620 tokens.)
 
 ## Rich and poor
@@ -244,9 +244,9 @@ $$
 
 The change would be **proportional to the curvature**: the discrete heat
 equation, in which heat flows from warm to cold in proportion to the
-difference. Real agents do not split exactly evenly, and degrees differ —
+difference. Real agents do not split exactly evenly, and [degrees](degree.md "The number of an agent's connections: how many neighbours it has.") differ —
 which is why the relation is a tendency and not a law — but
-[Where the tokens flow](where-the-tokens-flow.md) shows how close to an even split the
+[Where the tokens flow](where-the-tokens-flow.md) shows how close to an [even split](even-split.md "What the rules do when a brain scores no candidate above zero: the stake is spread evenly.") the
 brains in fact play.
 
 ## The lottery

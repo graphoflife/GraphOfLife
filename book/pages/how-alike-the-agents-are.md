@@ -1,13 +1,13 @@
 # How alike the agents are
 
 > [!question] Questions of this page
-> - How many kinds of agent does a world hold — counted by name, by the numbers
->   in their brains, or by what they do?
+> - How many kinds of [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") does a world hold — counted by name, by the numbers
+>   in their [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions."), or by what they do?
 > - What makes the agents of a world alike, and what keeps them apart?
 > - Does the variety last, or is it churn?
 > - What would it take for many kinds to evolve, and to stay?
 
-Open-ended evolution needs variety: many kinds alive at once, and new kinds
+[Open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.") needs variety: many kinds alive at once, and new kinds
 that keep appearing ([What this notebook is about](what-this-notebook-is-about.md)). Several
 pages of this notebook have counted the variety of a world, each in its own
 way. This page puts them side by side, adds one measure taken in every
@@ -19,7 +19,7 @@ evolution.
 A world's agents can be told apart by three things, and each gives a
 different count.
 
-| what is counted | how | B1 (10,000 tokens) | B2 (10,000 tokens) | pages |
+| what is counted | how | [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") (10,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.")) | [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.") (10,000 tokens) | pages |
 |---|---|---|---|---|
 | **names** | genotypes: a brain gets a new one at every change | 0.65 per agent | 0.46 per agent | [Genotypes and lineages](genotypes-and-lineages.md), [How even is a world?](how-even-is-a-world.md) |
 | **numbers** | how far apart two brains' weights are | two agents of one world as far apart as two random brains | — | [What the brains are like](what-the-brains-are-like.md) |
@@ -34,15 +34,15 @@ dozen kinds. Most of what makes two genotypes two changes nothing they do.
 
 | finding | page |
 |---|---|
-| A genotype lasts a couple of iterations; what lasts long enough for selection to act on is a line, a family that can take a world over in a few hundred iterations. | [Genotypes and lineages](genotypes-and-lineages.md), [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) |
+| A genotype lasts a couple of [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."); what lasts long enough for selection to act on is a line, a family that can take a world over in a few hundred iterations. | [Genotypes and lineages](genotypes-and-lineages.md), [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) |
 | B1 keeps five genotypes for every eight agents, in every world and at every size: a balance of making and copying, which moves with the rate of change and nothing else. | [How even is a world?](how-even-is-a-world.md), [How fast should brains change?](how-fast-should-brains-change.md) |
 | Two brains of one B1 world are as far apart in their numbers as two brains drawn at random: nearly all of a brain is neutral, free to drift because nothing depends on it. | [What the brains are like](what-the-brains-are-like.md) |
 | Selection set B1's constants alike in every world: no children, the stake spread, every token revolutionary. | [How the game is played](how-the-game-is-played.md), [What the brains are like](what-the-brains-are-like.md) |
 | Without evolution, worlds started from random brains end in very different places; with it, they all end alike. | [Do the brains matter?](do-the-brains-matter.md) |
-| In the same situation, B1's agents act nearly alike — seven times more alike than random brains — and its largest kind of staking is the even split the rules make of scores at or below zero. | [How different are the agents?](how-different-are-the-agents.md) |
+| In the same situation, B1's agents act nearly alike — seven times more alike than random brains — and its largest kind of staking is the [even split](even-split.md "What the rules do when a brain scores no candidate above zero: the stake is spread evenly.") the rules make of scores at or below zero. | [How different are the agents?](how-different-are-the-agents.md) |
 | B2's agents differ as widely as random brains, but steadily: nine pairs in ten stake measurably differently. They share one habit, all in, and differ in when and on whom. | [How different are the agents?](how-different-are-the-agents.md) |
-| Where agents differ, they differ in how they answer a place, hardly ever in a fixed leaning — and much of the place reaches them through the rules: a single token kept at home, an even split over the neighbours. | [How different are the agents?](how-different-are-the-agents.md) |
-| The groups tokens stay in are the network's regions; only B2's agents keep a partner longer than chance, for a few games. | [Flow modules: the groups tokens stay in](flow-modules.md) |
+| Where agents differ, they differ in how they answer a place, hardly ever in a fixed leaning — and much of the place reaches them through the rules: a single token kept at home, an even split over the [neighbours](the-world.md#the-network "An agent joined to another by a connection."). | [How different are the agents?](how-different-are-the-agents.md) |
+| The groups tokens stay in are the network's regions; only B2's agents keep a partner longer than chance, for a few [games](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."). | [Flow modules: the groups tokens stay in](flow-modules.md) |
 
 ## Why B1's agents are alike and B2's are not
 
@@ -55,7 +55,7 @@ lists them), so the difference has more than one candidate cause:
   A blind brain can differ from another only in its constants.
 - **How the stake is made.** B1's brains spread their stake, and a spread
   stake changes little when the scores change; B2's go all in, and an all-in
-  stake goes to whichever candidate scores highest, so that a small difference
+  stake goes to whichever [candidate](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides.") scores highest, so that a small difference
   between two brains flips the choice.
 - **How brains change.** B1 changes every brain after every game; B2 only
   when a brain is copied, so a brain keeps its quirks for as long as it lives.
@@ -69,8 +69,8 @@ on its own.
 ## In every kind of world
 
 The measures of [How different are the agents?](how-different-are-the-agents.md) were taken
-again in three seeds of every condition the lab has run, at the end of each
-run (58 worlds), and in both seeds of every pilot condition (69).
+again in three [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") of every condition the [lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") has run, at the end of each
+run (58 worlds), and in both seeds of every [pilot](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") condition (69).
 
 <!-- figure how_alike/lab -->
 ![How alike the agents are, in every lab condition](../figures/how_alike/lab.svg)
@@ -93,7 +93,7 @@ run (58 worlds), and in both seeds of every pilot condition (69).
 **B2's agents stay as different as random brains in nearly every variant.**
 Brains that change more or less often, the last token or half the tokens kept
 at home, children of any size, half the tokens, no links at birth, no cap on
-links, handover: in each, two agents stake as differently as two fresh founder
+links, handover: in each, two agents stake as differently as two fresh [founder](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.")
 brains in the same situations (0.88 to 1.07 times as far apart). Only without
 mending are they somewhat more alike (0.69). (Without old age they are as
 different too, 1.06, but there it says nothing: most of the agents are the
@@ -176,7 +176,7 @@ more. What the notebook has measured over time:
   found 5,000 iterations later, against 0.90 for the same moment sampled twice,
   and one of the two long worlds settled on a single kind of staking for good.
 - **Better brains do keep coming in B2** — the brains of 2,000 iterations beat
-  those of 500 over an agent's lifetime
+  those of 500 over an agent's [lifetime](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death.")
   ([Why evolution stops](why-evolution-stops.md#would-we-notice-if-it-went-on)) —
   but more and more slowly, towards a plateau from about 5,000 iterations on.
 
@@ -191,7 +191,7 @@ is added to the old ones rather than taking their place. The notebook's evidence
 points to four directions, none of them needing a tuned number:
 
 1. **Places that differ in what pays.** B2's kinds already sit at different
-   degrees in the network ([How different are the agents?](how-different-are-the-agents.md)).
+   [degrees](degree.md "The number of an agent's connections: how many neighbours it has.") in the network ([How different are the agents?](how-different-are-the-agents.md)).
    Whether that is a niche or a family living together is the next experiment
    to run: move a kind to another place and see whether it does worse there.
 2. **Payoffs that depend on how common a kind is**, so that a rare kind has an

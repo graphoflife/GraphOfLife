@@ -1,40 +1,40 @@
 # The candidates, played on
 
 > [!question] Questions of this page
-> - The worlds that came nearest the author's picture at iteration 1,000 —
+> - The worlds that came nearest the author's picture at [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") 1,000 —
 >   do they stay there over 10,000 iterations?
-> - Which of them live, which fall back to B2's poverty, and which keep
+> - Which of them live, which fall back to [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.")'s poverty, and which keep
 >   evolving?
 
 <!-- experiment E20 -->
 
 ## Why ask
 
-A world that meets every mark of the health bar at iteration 1,000, with a
-diversity score above B2's median world, is a **candidate**
+A world that meets every mark of the [health bar](health-bar.md "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.") at iteration 1,000, with a
+[diversity score](diversity-score.md "How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes.") above B2's [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world, is a **[candidate](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides.")**
 ([Healthy and rich](healthy-and-rich.md)). One moment says little: mixed
 worlds drift in size, and their riches drift with it
 ([What holds a world's size](what-holds-a-worlds-size.md)). So every candidate is
 played on to 10,000 iterations, and read by **[Healthy and rich](healthy-and-rich.md)'s test of a long run**:
-at 10,000 it is still alive — it never fell to 20 agents or fewer, where the
-lab calls a world extinct — it meets every mark, it is more diverse than B2's
+at 10,000 it is still alive — it never fell to 20 [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") or fewer, where the
+[lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") calls a world [extinct](extinction.md "A world's end before its last iteration: it has dropped to its threshold of agents or fewer.") — it meets every mark, it is more diverse than B2's
 median world at 10,000, and it holds a smaller share of its agents at three
-tokens or fewer than the least poor of B2's ten worlds.
+[tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") or fewer than the least poor of B2's ten worlds.
 
-Twenty-five candidates were played on as pilot worlds (batch LC), each in a
+Twenty-five candidates were played on as [pilot](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds (batch LC), each in a
 copy of its own. Nineteen reached 10,000 iterations. Then, on 18 October 2026,
 the computer was restarted: the pilots had been running out of sight, in no
 page of the notebook, and from then on every simulation of this notebook runs
 where it can be seen — in the lab, started with ▶ beside the page that
 asks for it.
 
-Six candidates were left. Two of them use only the engine's own settings:
+Six candidates were left. Two of them use only the engine's own [settings](settings.md "One number or switch of a run's rules, fixed before it starts."):
 links to strangers by a free reach, forced on the other end
-([Links to strangers](links-to-strangers.md)), and brains mixed at birth with only
+([Links to strangers](links-to-strangers.md)), and [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") mixed at birth with only
 the last token kept at home
 ([Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md)). **Experiment 20** plays
-them in the lab from iteration 0. A pilot plays the engine's own game, so a
-pilot with a lab world's settings and seed is that lab world — the two mixed
+them in the lab from iteration 0. A pilot plays the engine's own [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."), so a
+pilot with a lab world's settings and [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") is that lab world — the two mixed
 worlds of batch Q turned out to be Experiment 17's worlds of seeds 1 and 2,
 agent for agent ([Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md)) — and
 the lab's two worlds should be the pilots' two worlds again, game for game.
@@ -151,14 +151,14 @@ Experiment 23 is to play them.
 **Five of nineteen held.** Nineteen long runs can be read at iteration
 10,000: seventeen pilots, and the two of Experiment 20 in place of their
 unfinished pilots. Five passed [Healthy and rich](healthy-and-rich.md)'s test there, all of them mixed at
-birth: with a fast change of brains (a mutation probability of 0.8) in both
-its seeds, and in one seed each without random inputs, without revolutions,
+birth: with a fast change of brains (a [mutation](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") probability of 0.8) in both
+its seeds, and in one seed each without random inputs, without [revolutions](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake."),
 and with an input that tells an agent where its brain came from. Eleven fell
 back — seven of them into B2's poverty, two thirds of their agents or more at
 three tokens or fewer, and four by a single mark of the health bar: a
-dimension above four in two large worlds, an agent joined to more than 5% of
+[dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") above four in two large worlds, an agent joined to more than 5% of
 the others in two small ones. **Three died out on the way**: mixing with the
-estate of a dead agent left to its own children (at iteration 4,043), with
+[estate](estate.md "The tokens a dead agent leaves, and who gets them.") of a dead agent left to its own children (at iteration 4,043), with
 brains that grow (3,158) and with an input that tells who helped (4,271).
 Each fell to a single agent, from which the pilot, which plays on where the
 lab would stop, filled its world again.
@@ -176,7 +176,7 @@ lab would stop, filled its world again.
 > - **Two that fell back did so on the share of the poor alone.** They meet
 >   every other count, with tokens less even than B2's: mixing with only the
 >   last token kept at home, seed 2 (80% at three or fewer, a Gini of 0.66),
->   and with an input that tells which neighbours carry the agent's own
+>   and with an input that tells which [neighbours](the-world.md#the-network "An agent joined to another by a connection.") carry the agent's own
 >   brain, seed 2 (69%, 0.56).
 > - **Only the input of where a brain came from (seed 2) passes both
 >   readings.**
@@ -185,12 +185,12 @@ lab would stop, filled its world again.
 > median world, and no more even than B2 — **three of nineteen held**:
 > where a brain came from, the last token kept, and the sense of kin, each in
 > one seed. Across the nineteen, a world's size goes with its share of poor
-> agents (a rank correlation of 0.85) far more than with how evenly its
+> agents (a rank [correlation](correlation.md "Whether two quantities go up and down together, from −1 to 1.") of 0.85) far more than with how evenly its
 > tokens are spread (0.46 with the Gini). The small rich worlds are the even
 > ones; the large poor ones are not.
 
 **Diversity fell in sixteen of the nineteen.** What a candidate had at
-iteration 1,000 — agents that differ in tokens, links, ages and genotypes —
+iteration 1,000 — agents that differ in tokens, links, ages and [genotypes](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.") —
 mostly wore off: the median diversity score fell from 0.63 to 0.56, and the
 two worlds that fell furthest, mixing with the estate to the poorest and
 with stakes pooled by genotype, ended less diverse than any of B2's worlds
@@ -239,7 +239,7 @@ by how eagerly its agents breed, and a full world is a poor one
 <!-- /figure -->
 
 **None became a space.** At iteration 1,000 a few candidates were wider than
-their random twins by half or more; by 10,000 all but one were folded, at
+their [random twins](random-twin.md "A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all.") by half or more; by 10,000 all but one were folded, at
 1.09 to 1.44 times the twin's typical distance, as B2's own worlds are. The
 exception, mixing with the estate to the poorest (1.79), is one of the poor
 worlds ([What folds a world](what-folds-a-world.md)).
@@ -260,7 +260,7 @@ worlds ([What folds a world](what-folds-a-world.md)).
 > **To make it again:** `python3 book_figures.py candidates`.
 <!-- /figure -->
 
-**Evolution goes on, slowing, as in Experiment 17.** Played for a lifetime,
+**Evolution goes on, slowing, as in Experiment 17.** Played for a [lifetime](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death."),
 the brains of 1,000 beat those of 500 in seventeen of eighteen worlds (a
 median share of a contested world of 0.72), those of 5,000 beat those of 2,000
 in fifteen of sixteen (0.60), and those of 10,000 beat those of 5,000 in
@@ -295,6 +295,6 @@ eleven of sixteen (0.55); Experiment 17's mixed worlds held 0.84, 0.66 and
 
 ← [A mate that pays its share](a-mate-that-pays-its-share.md) · [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world) · [Five more seeds for the rules that held](five-more-seeds-for-the-rules-that-held.md) →
 
-> [!info]- Pages that link here (5)
-> [Every era against three](every-era-against-three.md) · [Rules in company](rules-in-company.md) · [Healthy and rich](healthy-and-rich.md) · [Five more seeds for the rules that held](five-more-seeds-for-the-rules-that-held.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (8)
+> [The random twin: is a world a space?](random-twin.md) · [Every era against three](every-era-against-three.md) · [Rules in company](rules-in-company.md) · [Healthy and rich](healthy-and-rich.md) · [The health bar](health-bar.md) · [The diversity score](diversity-score.md) · [Five more seeds for the rules that held](five-more-seeds-for-the-rules-that-held.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

@@ -1,11 +1,11 @@
 # What the measurements say about open-ended evolution
 
-The pages on the baseline measured its world in every way the viewer can, and a few
-more — in this second edition on thirty worlds of 100,000 tokens, with two new
-pages on what crosses a connection ([What crosses a connection](what-crosses-a-connection.md))
+The pages on the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") measured its world in every way the viewer can, and a few
+more — in this second edition on thirty worlds of 100,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes."), with two new
+pages on what crosses a [connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") ([What crosses a connection](what-crosses-a-connection.md))
 and on the largest and the smallest ([The largest and the smallest](the-largest-and-the-smallest.md)).
 This page steps back and asks what all of it means for the question the
-notebook exists for: **can open-ended evolution happen in Graph of Life, and
+notebook exists for: **can [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.") happen in Graph of Life, and
 what would it take?** It is written the way a researcher keeps a notebook —
 what we now know, what we think it means, what we propose to do about it, and
 how we will know whether it worked — and, as in every page, so that a
@@ -29,7 +29,7 @@ it, and from then on only reshuffles ([The ideas this builds on](the-ideas-this-
 [What this notebook is about](what-this-notebook-is-about.md) set out a ladder of four claims,
 each needed before the next:
 
-1. **P1 — there is evolution:** lineages last long enough for selection to act
+1. **P1 — there is evolution:** [lineages](families.md "A line of descent: the agents whose genotypes go back to one ancestor.") last long enough for selection to act
    on them, and selection changes the outcome.
 2. **P2 — adaptation accumulates:** a late population would beat its own
    ancestors.
@@ -39,8 +39,8 @@ each needed before the next:
 
 The project's research plan (`research/Research.md`) adopts a definition aimed
 at the top of the ladder: open-endedness as unbounded growth in the space of
-**multi-agent organisations** — structures made of agents, which persist and
-are reproduced. The reason is a counting argument: a brain has a fixed number
+**multi-agent organisations** — structures made of [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions."), which persist and
+are reproduced. The reason is a counting argument: a [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") has a fixed number
 of weights, so the space of brains is a fixed box; but the number of ways to
 arrange *n* agents grows faster than any exponential in *n*. If anything here
 can grow without bound, it is how agents are arranged and what they do to each
@@ -54,13 +54,13 @@ reach ([Where the tokens flow](where-the-tokens-flow.md)), so tokens settle loca
 proportion to connections plus one ([How properties scale together](how-properties-scale-together.md)),
 run downhill from rich neighbourhoods to poor ([Gains and losses](gains-and-losses.md)),
 and never circulate. Two connections in three carry one or two tokens a
-game, most of them one each way: an equal exchange that keeps the connection
+[game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."), most of them one each way: an equal exchange that keeps the connection
 alive at its price of a token a game, and every connection that carries
 nothing is cut ([What crosses a connection](what-crosses-a-connection.md),
 [Do agents cooperate?](do-agents-cooperate.md)). The **network** is a stretched web
-of stars, grown locally by children joining their parents' neighbourhoods,
+of [stars](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub."), grown locally by children joining their parents' neighbourhoods,
 four and a half times as long as a random network with the same
-connections, with a thirty-third of its spectral gap
+connections, with a thirty-third of its [spectral gap](spectral-gap.md "How hard a network is to cut into two halves, and how fast a walker on it forgets where it began.")
 ([The geometry of a world](the-geometry-of-a-world.md));
 it breaks along its poor regions, whose borders go quiet, and the global cull
 kills whatever falls off ([How a world breaks](how-a-world-breaks.md)). Some worlds
@@ -83,16 +83,16 @@ brains — change almost every game.
 ## Where the world stands on the ladder
 
 **P1, evolution: partly.** There are lineages, and they matter: a whole world
-of 10,000 tokens descends from one branch of the family tree about every 350
-iterations, a world of 100,000 about once in a run
+of 10,000 tokens descends from one branch of the [family tree](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.") about every 350
+[iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."), a world of 100,000 about once in a run
 ([Genotypes and lineages](genotypes-and-lineages.md)); families occupy regions that
 widen as their line ages, about as a random walk spreads
 ([One world, many colours](one-world-many-colours.md), [Worlds of 100,000 tokens](worlds-of-100000-tokens.md));
 and worlds whose brains never change end up in very different places, while
 worlds that evolve all end up alike ([Do the brains matter?](do-the-brains-matter.md)). But heredity is weak. A brain
 is changed with probability 0.2 after every game whether or not it is copied,
-and a brain is overwritten whenever its node is won. The project's pilot
-measurements (`research/pilot_heredity.py`, at a higher mutation rate) found a
+and a brain is overwritten whenever its node is won. The project's [pilot](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.")
+measurements (`research/pilot_heredity.py`, at a higher [mutation](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") rate) found a
 lineage 45% of the way to a stranger after one iteration and 92% after ten.
 Selection can only work on what is inherited; here, little is inherited for
 long.
@@ -105,13 +105,13 @@ answer it.
 > [!info] Added later: asked, and answered for the baseline
 > [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) ran this
 > tournament on ten worlds of 5,000 tokens (Experiment 12). By iteration 50
-> every world's brains beat their founders — +361 Elo in the median world,
+> every world's brains beat their [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.") — +361 Elo in the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world,
 > +400 by iteration 100 — and then nothing more: the brains of iteration
 > 1,000 held 0.483 of a world contested with those of iteration 300, every
-> era tied with the one before it (0.47 to 0.52), and a dominance tournament
+> [era](eras-and-contests.md "Brains of a world at two moments, its eras, played against each other: do the later ones win?") tied with the one before it (0.47 to 0.52), and a dominance tournament
 > crowned no more champions than chance. Adaptation accumulates for fifty to
 > a hundred iterations and stops. [Why evolution stops](why-evolution-stops.md)
-> finds the same plateau in every pilot for B2.
+> finds the same plateau in every pilot for [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.").
 
 **P3, organisations: not found.** The candidates exist — family regions, hubs
 with their stars — but nothing yet shows a group that persists while its
@@ -119,7 +119,7 @@ members change. The nearest thing is a star's **dynasty**: a centre joined to
 thousands, passed from parent to newborn child for hundreds of iterations
 while the brain on it changes every game
 ([The largest and the smallest](the-largest-and-the-smallest.md)). It persists while its
-members come and go — but it is a place, kept by the rules of the even split,
+members come and go — but it is a place, kept by the rules of the [even split](even-split.md "What the rules do when a brain scores no candidate above zero: the stake is spread evenly."),
 not a group that does anything together. The same two brains face each other
 one more game in only one case in twenty-five; positions are not held by any
 brain.
@@ -159,11 +159,11 @@ examined in [Questioning the mechanics](questioning-the-mechanics.md).
 >    ([Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md),
 >    [A world that cannot break](a-world-that-cannot-break.md)).
 > 2. Conquest still erases.
-> 3. A home stake counts 1.5 times ([Who dies, and why](who-dies-and-why.md));
+> 3. A [home stake](home-stake.md "The tokens an agent stakes on its own node, to keep it.") counts 1.5 times ([Who dies, and why](who-dies-and-why.md));
 >    how long partners last has not been measured again.
 > 4. A yield on stakes returned, and support stakes, were tried and gave
 >    nothing that lasted ([Why evolution stops](why-evolution-stops.md)).
-> 5. Brains that see could tell kin by the names in their messages
+> 5. Brains that see could tell kin by the names in their [messages](messages.md "Numbers an agent writes to itself and to each neighbour every phase, which their brains read.")
 >    ([What agents say to each other](what-agents-say-to-each-other.md),
 >    [Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md)); whether they
 >    do has not been measured.
@@ -194,7 +194,7 @@ examined in [Questioning the mechanics](questioning-the-mechanics.md).
 ## What we propose to change
 
 Each proposal is a rule that can be switched on, run against the baseline with
-thirty seeds, and measured — the method of [Do the brains matter?](do-the-brains-matter.md). Those marked with a §
+thirty [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world."), and measured — the method of [Do the brains matter?](do-the-brains-matter.md). Those marked with a §
 come from the research plan (`research/Research.md`, §4); the others from what
 the measurements found. They are ordered by what has to come first, not by how
 interesting they are.
@@ -224,7 +224,7 @@ interesting they are.
 ### Second: let individuals last
 
 - **Incumbency.** The agent on a node gets an advantage in defending it — its
-  home stake counts double, or a coalition must outweigh the home stake too.
+  home stake counts double, or a [coalition](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.") must outweigh the home stake too.
   Measure: how long brains hold hubs; how long partners last.
 - **Recombination at conquest.** A won node takes a mix of the winner's brain
   and its own, not a replacement — the closest thing to sex this world could
@@ -251,7 +251,7 @@ interesting they are.
   Now two agents together can be worth more than two apart, and there is a
   defection problem to solve, which is what cooperation theory is about.
 - **Heritable tags.** Every brain carries a few numbers — a tag — copied with
-  it and changed rarely; every agent sees its candidates' tags among its
+  it and changed rarely; every agent sees its [candidates](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides.")' tags among its
   inputs. Tags are how cooperation can evolve without memory or reputation
   (Riolo, Cohen and Axelrod 2001), and they give relatives a way to recognise
   each other.
@@ -274,7 +274,7 @@ interesting they are.
 - **Let separate pieces live.** Drop the global cull: a piece that separates
   becomes its own world, with its own tokens, and may meet the main world again
   through the long-range connections above. Isolation, divergence and
-  reunion — the oldest engine of new species — would become possible.
+  reunion — the oldest [engine](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") of new species — would become possible.
 - **Several kinds of tokens** (§4.3): tokens of different colours, which agents
   value differently by inheritance. Niches, and a reason to trade.
 
@@ -305,7 +305,7 @@ only once the earlier steps hold.
 > as in every other pilot. §4.7 to §4.9 have not been tried.
 
 Three smaller repairs from [Questioning the mechanics](questioning-the-mechanics.md) can go
-along with any of these: a smooth share function, a separate output for
+along with any of these: a smooth [share function](share-function.md "How a brain's two numbers become one share between 0 and 1: of tokens for a child, or of a stake marked revolutionary."), a separate output for
 whole-agent decisions, and the option to hold tokens back from the game.
 
 > [!info] Added later: one of the three, in part
@@ -331,10 +331,10 @@ measures, by rung of the ladder:
   pattern of bands is cycling, as rock–paper–scissors would give.
 - **For cooperation** — the measures of [Do agents cooperate?](do-agents-cooperate.md):
   kin discrimination, Hamilton's accounting Σ(*rB* − *C*), reciprocity beyond
-  the even split, the lifetimes of partnerships, coalitions that repeat, and
+  the even split, the [lifetimes](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death.") of partnerships, coalitions that repeat, and
   whether regions held by one family outlast mixed ones.
 - **For P3.** Groups that persist while their members turn over, found by
-  methods that do not assume them — flow modules (Rosvall and Bergstrom 2008),
+  methods that do not assume them — [flow modules](map-equation.md "A group of agents that a token, following the flow, tends to stay inside.") (Rosvall and Bergstrom 2008),
   or groups that carry information about their own past into their future
   better than their surroundings do (Krakauer et al. 2020) — always against a
   network rewired at random with the same connections, which the measurements showed
@@ -385,7 +385,7 @@ Some questions need no new runs, only new looks at the old ones:
   they age. Whether a patch is ever more than the sum of its agents is the
   next question.
 - **What does a brain respond to?** Feed a stored brain the same inputs with one
-  changed — a neighbour's tokens, a message — and see what its stakes do. If
+  changed — a [neighbour](the-world.md#the-network "An agent joined to another by a connection.")'s tokens, a message — and see what its stakes do. If
   brains mostly tell "me" from "others" and little else, the even split is no
   surprise. [What the brains are like](what-the-brains-are-like.md) did this: doubling
   every neighbour's tokens changes the stakes of 1.5% of agents, setting every
@@ -418,8 +418,8 @@ a tenth, the same inequality, the same game, the same brains
 ([Worlds of 100,000 tokens](worlds-of-100000-tokens.md)). What changed is how the agents
 are arranged and how fast anything crosses a world:
 
-- **The shape changes.** Half the clustering, more loops per agent, fewer
-  bridges, distances twice as long, a ball dimension that rises with size
+- **The shape changes.** Half the [clustering](clustering.md "How often an agent's neighbours are also each other's neighbours."), more [loops](loops.md "A path through the network that comes back to where it started without using a connection twice.") per agent, fewer
+  [bridges](bridges.md "A connection that lies on no loop: cut it and the network falls into two pieces."), distances twice as long, a [ball dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") that rises with size
   ([How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md),
   [The core of a world](the-core-of-a-world.md)).
 - **Stars can take a world.** One world in four condensed around a single
@@ -472,7 +472,7 @@ be changed and tested on its own.
 > [!info] Added later: the second aim
 > [Physical inspiration](physical-inspiration.md), written after this page, sets
 > out the notebook's second aim — a world that grows a space and stable things in
-> it — and finds it pointing at the same rules. The cull and the share-out,
+> it — and finds it pointing at the same rules. The cull and the [share-out](gains-losses-and-the-share-out.md "How a cleanup deals the tokens of the dead out among the living: in the baseline, each token to a survivor drawn at random."),
 > which this page questions for evolution's sake, also break locality, the
 > speed limit physics insists on; and the organisations of P3 are what a
 > physicist would call particles. [Space and dimension](../README.md#space-and-dimension) follows that aim,
@@ -481,10 +481,10 @@ be changed and tested on its own.
 <!-- turns -->
 ---
 
-[Does evolution keep going?](../README.md#does-evolution-keep-going) · [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) →
+[Does evolution keep going?](../README.md#does-evolution-keep-going) · [Eras and contests: does a world keep getting better?](eras-and-contests.md) →
 
 **Also about:** [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2).
 
-> [!info]- Pages that link here (18)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [What the baseline world is](what-the-baseline-world-is.md) · [Thirty worlds](thirty-worlds.md) · [Who dies, and why](who-dies-and-why.md) · [How agents have children](how-agents-have-children.md) · [How even is a world?](how-even-is-a-world.md) · [Gains and losses](gains-and-losses.md) · [Where the tokens flow](where-the-tokens-flow.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [How properties scale together](how-properties-scale-together.md) · [How a world breaks](how-a-world-breaks.md) · [Physical inspiration](physical-inspiration.md) · [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) · [What the brains are like](what-the-brains-are-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Do agents cooperate?](do-agents-cooperate.md)
+> [!info]- Pages that link here (19)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [What the baseline world is](what-the-baseline-world-is.md) · [Thirty worlds](thirty-worlds.md) · [Who dies, and why](who-dies-and-why.md) · [How agents have children](how-agents-have-children.md) · [How even is a world?](how-even-is-a-world.md) · [Gains and losses](gains-and-losses.md) · [Where the tokens flow](where-the-tokens-flow.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [How properties scale together](how-properties-scale-together.md) · [How a world breaks](how-a-world-breaks.md) · [Stars and hubs](stars-and-hubs.md) · [Physical inspiration](physical-inspiration.md) · [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) · [What the brains are like](what-the-brains-are-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Do agents cooperate?](do-agents-cooperate.md)
 <!-- /turns -->

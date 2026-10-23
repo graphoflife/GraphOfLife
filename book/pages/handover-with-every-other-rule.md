@@ -1,8 +1,8 @@
 # Handover, with every other rule
 
 > [!question] Questions of this page
-> - A parent may pass some of its own links to its newborn — B1's rule,
->   switched off in B2. What does it do to a world, whatever its other rules?
+> - A parent may pass some of its own links to its newborn — [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.")'s rule,
+>   switched off in [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death."). What does it do to a world, whatever its other rules?
 > - Does it cost the same health with every rule, and does it buy anything?
 
 With **handover**
@@ -10,11 +10,11 @@ With **handover**
 of its links to its newborn, and a parent that hands over all but one hangs
 on that one. B1 has it; B2 was built without it, because in
 [A world that cannot break](a-world-that-cannot-break.md) handover left 40% of a world's
-agents in trees outside its core, and one link's loss could cut off 4% of it.
+[agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") in trees outside its core, and one link's loss could cut off 4% of it.
 The author asked for handover in combination (16 October 2026): batch X plays
 B2 with handover together with each of 23 other rules — the switches of
 [Revolutions, with every other rule](revolutions-with-every-other-rule.md) and batch S's other ways
-of deciding a node — two seeds each, 1,000 iterations, every world the fourth
+of deciding a node — two [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") each, 1,000 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."), every world the fourth
 corner of a two-by-two whose other corners are B2, B2 with handover alone,
 and B2 with the other rule alone.
 
@@ -37,20 +37,20 @@ and B2 with the other rule alone.
 > **To make it again:** `python3 book_figures.py handovercombos`.
 <!-- /figure -->
 
-**It costs health with nearly every rule** — two marks of the health bar at
-the median, up to four; in five of the 46 worlds, none. The marks it costs are
+**It costs health with nearly every rule** — two marks of the [health bar](health-bar.md "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.") at
+the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above."), up to four; in five of the 46 worlds, none. The marks it costs are
 the network's: with handover, 38 of the 46 worlds have less than 0.8 of their
-agents in the 2-core, 42 have a link whose loss would cut off more than 1% of
+agents in the [2-core](core-trees-leaves.md "What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them."), 42 have a link whose loss would cut off more than 1% of
 the world, and 36 an agent whose loss would cut off more than 2%; without it,
 none, two and three do. A parent that gives its links away thins the network
 into trees — 1.8 links fewer per agent at the median — and trees hang on
 single links.
 
 **It makes worlds a little poorer, and a little more diverse.** The share
-of agents holding three tokens or fewer rises by 0.04 at the median, and the
-diversity score by 0.08.
+of agents holding three [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") or fewer rises by 0.04 at the median, and the
+[diversity score](diversity-score.md "How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes.") by 0.08.
 
-**It cancels the riches of mixing.** B2 with brains mixed at birth holds 28%
+**It cancels the riches of mixing.** B2 with [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") mixed at birth holds 28%
 and 40% of its agents at three tokens or fewer at iteration 1,000; with
 handover as well, 48 and 32 more of every hundred are that poor — handover is one of the rules
 [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) found to cancel mixing's
@@ -60,15 +60,15 @@ more of every hundred poor).
 **It unfolds a world a little.** A parent that passes links on does not
 gather them till it dies, and the dying leave rings of 3.7 groups fewer
 ([What folds a world](what-folds-a-world.md)): a typical agent is further from
-everyone than in B2 — the typical distance over the random twin's rises by
+everyone than in B2 — the typical distance over the [random twin](random-twin.md "A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all.")'s rises by
 0.24 at the median, in 41 of 46 worlds. The room is bought with the trees and
-bridges above: room and resilience pull apart, as [What folds a world](what-folds-a-world.md) found.
+[bridges](bridges.md "A connection that lies on no loop: cut it and the network falls into two pieces.") above: room and resilience pull apart, as [What folds a world](what-folds-a-world.md) found.
 
 **Evolution goes on, more slowly.** In lifetime contests the brains of 1,000
 take more than half of a contested world from those of 500 in 35 of the 46
-worlds, with a median of 0.57 — below B2's 0.68 and B2 without revolutions'
+worlds, with a median of 0.57 — below B2's 0.68 and B2 without [revolutions](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.")'
 0.64, and as with handover alone (0.60 and 0.60). It is slowest where every
-unused link lapses (0.47 and 0.47), with the estate to the newborns (0.48 and
+unused link lapses (0.47 and 0.47), with the [estate](estate.md "The tokens a dead agent leaves, and who gets them.") to the newborns (0.48 and
 0.49), and in one seed each with a faster change of brains (0.40), units that
 hold a token (0.45) and mixing (0.47); fastest with half kept at home (0.65
 and 0.75) and brains that grow (0.60 and 0.72).

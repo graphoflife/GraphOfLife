@@ -108,6 +108,31 @@
       "summary": "Life on Earth has been producing new kinds of things for about four billion years: new molecules, cells, bodies, ways of living together."
     },
     {
+      "id": "glossary",
+      "title": "Glossary",
+      "file": "pages/glossary.md",
+      "topics": [
+        "start"
+      ],
+      "kind": "overview",
+      "status": "written",
+      "added": "2026-10-23",
+      "summary": "Every term of the notebook, from A to Z: what it is in one line, and the page that explains it."
+    },
+    {
+      "id": "how-this-notebook-is-written",
+      "title": "How this notebook is written",
+      "file": "pages/how-this-notebook-is-written.md",
+      "topics": [
+        "start",
+        "methods"
+      ],
+      "kind": "method",
+      "status": "written",
+      "added": "2026-10-23",
+      "summary": "How a page is laid out, what every page promises its reader, the rules of the research, and how mistakes are corrected."
+    },
+    {
       "id": "the-ideas-this-builds-on",
       "title": "The ideas this builds on",
       "file": "pages/the-ideas-this-builds-on.md",
@@ -333,6 +358,19 @@
       "summary": "A run goes for a fixed number of iterations — 3,000 for the baseline runs — unless its world **dies out** first."
     },
     {
+      "id": "b1-and-b2",
+      "title": "B1 and B2: the two baselines",
+      "file": "pages/b1-and-b2.md",
+      "topics": [
+        "baselines",
+        "simulation"
+      ],
+      "kind": "term",
+      "status": "written",
+      "added": "2026-10-23",
+      "summary": "The two sets of rules every experiment starts from: B1, the algorithm as a new run is offered it, and B2, built so that its network cannot break."
+    },
+    {
       "id": "what-the-baseline-world-is",
       "title": "What the baseline world is",
       "file": "pages/what-the-baseline-world-is.md",
@@ -497,6 +535,19 @@
       "status": "written",
       "added": "2026-10-08",
       "summary": "An agent comes into a world in one way and leaves it in one of four."
+    },
+    {
+      "id": "estate",
+      "title": "The estate of the dead",
+      "file": "pages/estate.md",
+      "topics": [
+        "lives",
+        "rules"
+      ],
+      "kind": "term",
+      "status": "written",
+      "added": "2026-10-23",
+      "summary": "What happens to the tokens of an agent that dies, and the other ways of passing them on that the notebook tried."
     },
     {
       "id": "age-and-lifetime",
@@ -682,6 +733,19 @@
       "status": "written",
       "added": "2026-10-08",
       "summary": "How much of their tokens do agents stake on their own node? Do they spread their stakes or put everything on one candidate? Who wins the nodes — the agent living there, or a neighbour; the largest staker, or a coalition?"
+    },
+    {
+      "id": "even-split",
+      "title": "The even split",
+      "file": "pages/even-split.md",
+      "topics": [
+        "game",
+        "brains"
+      ],
+      "kind": "term",
+      "status": "written",
+      "added": "2026-10-23",
+      "summary": "What the rules do when a brain scores no candidate above zero, how often that happens, and why it makes the game almost a random walk."
     },
     {
       "id": "where-the-tokens-flow",
@@ -909,6 +973,19 @@
       "summary": "The **degree** of an agent is the number of connections it has — the number of its neighbours."
     },
     {
+      "id": "stars-and-hubs",
+      "title": "Stars and hubs",
+      "file": "pages/stars-and-hubs.md",
+      "topics": [
+        "network",
+        "wealth"
+      ],
+      "kind": "term",
+      "status": "written",
+      "added": "2026-10-23",
+      "summary": "Agents joined to far more agents than most, and worlds held together by a single one of them."
+    },
+    {
       "id": "preferential-attachment",
       "title": "Preferential attachment and its kernel",
       "file": "pages/preferential-attachment.md",
@@ -1080,6 +1157,19 @@
       "status": "written",
       "added": "2026-10-09",
       "summary": "What does it mean for a network to have a dimension, and how is it measured? How many dimensions do the worlds have? Is the answer the same at every scale, and by every ruler? Is the dimension made by how the worlds are wired, or would any network with the same numbers of connections have it?"
+    },
+    {
+      "id": "random-twin",
+      "title": "The random twin: is a world a space?",
+      "file": "pages/random-twin.md",
+      "topics": [
+        "space",
+        "network"
+      ],
+      "kind": "term",
+      "status": "written",
+      "added": "2026-10-23",
+      "summary": "A world's network wired again at random, with as many links per agent: what a world would be if it were no space, and how wide a world is beside it."
     },
     {
       "id": "worlds-of-100000-tokens",
@@ -1462,6 +1552,19 @@
       "status": "written",
       "added": "2026-10-08",
       "summary": "What is the baseline world, now that it has been measured every way? Where does it stand on the ladder of What this notebook is about? What stands in the way of open-ended evolution, and which changes to the rules could remove it?"
+    },
+    {
+      "id": "eras-and-contests",
+      "title": "Eras and contests: does a world keep getting better?",
+      "file": "pages/eras-and-contests.md",
+      "topics": [
+        "evolution",
+        "methods"
+      ],
+      "kind": "term",
+      "status": "written",
+      "added": "2026-10-23",
+      "summary": "The brains of a world at two moments played against each other: the yardstick of whether evolution keeps going."
     },
     {
       "id": "how-to-tell-a-world-that-keeps-evolving",
@@ -1931,6 +2034,32 @@
       "summary": "What do we look for in a world before we ask how it evolves? When is a world healthy, and when is it still interesting? When do we give up on a setting?"
     },
     {
+      "id": "health-bar",
+      "title": "The health bar",
+      "file": "pages/health-bar.md",
+      "topics": [
+        "healthy",
+        "network"
+      ],
+      "kind": "term",
+      "status": "written",
+      "added": "2026-10-23",
+      "summary": "The seven marks a world's network must meet to count as healthy, why each is there, and how a world is read against them."
+    },
+    {
+      "id": "diversity-score",
+      "title": "The diversity score",
+      "file": "pages/diversity-score.md",
+      "topics": [
+        "healthy",
+        "brains"
+      ],
+      "kind": "term",
+      "status": "written",
+      "added": "2026-10-23",
+      "summary": "How much the agents of a world differ, in one number, and how much their decisions differ."
+    },
+    {
       "id": "mixed-at-birth-ten-long-worlds",
       "title": "Mixed at birth: ten long worlds",
       "file": "pages/mixed-at-birth-ten-long-worlds.md",
@@ -2078,6 +2207,19 @@
       "status": "written",
       "added": "2026-10-16",
       "summary": "Every simulation made so far in one table: two clouds of worlds, what the settings decide and what the seed does, and which measure has been taken of which world."
+    },
+    {
+      "id": "the-lab",
+      "title": "The lab, the engine and pilots",
+      "file": "pages/the-lab.md",
+      "topics": [
+        "methods",
+        "simulation"
+      ],
+      "kind": "method",
+      "status": "written",
+      "added": "2026-10-23",
+      "summary": "How an experiment is run: its plan, the lab that runs it on a frozen copy of the engine, and the pilots that come before."
     },
     {
       "id": "how-worlds-are-measured",

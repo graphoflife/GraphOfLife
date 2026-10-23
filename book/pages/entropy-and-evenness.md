@@ -1,10 +1,10 @@
 # Entropy and evenness
 
-How evenly is something shared out — tokens over agents, agents over
-genotypes, agents over numbers of connections? **Shannon entropy** answers
+How evenly is something shared out — [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") over [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions."), agents over
+[genotypes](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was."), agents over numbers of [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.")? **Shannon entropy** answers
 with one number, measured in **bits** (Shannon 1948). This note explains it
 from the beginning, then the two numbers built on it that the notebook uses:
-**evenness** and the **effective number**.
+**evenness** and the **[effective number](effective-number.md "How many kinds there really are, when kinds are counted by how much of the population they hold.")**.
 
 ## The idea: how many yes-or-no questions?
 
@@ -38,7 +38,7 @@ $$
 | what is shared | the shares *pᵢ* | the field | its ceiling |
 |---|---|---|---|
 | tokens over agents | τᵢ / *T*, one per agent | `tokenEntropy` | log₂ *n* (*n* agents) |
-| agents over degrees | share of agents with exactly *d* connections, one per *d* that occurs | `degreeEntropy` | log₂ (number of distinct degrees) |
+| agents over [degrees](degree.md "The number of an agent's connections: how many neighbours it has.") | share of agents with exactly *d* connections, one per *d* that occurs | `degreeEntropy` | log₂ (number of distinct degrees) |
 | agents over genotypes | share of agents carrying genotype *g*, one per genotype | (computed for [How even is a world?](how-even-is-a-world.md)) | log₂ *n* |
 
 For tokens the question is: *if you pick one token at random, whose is it?*
@@ -88,6 +88,6 @@ histogram of degrees.
 
 ← [Tokens per agent: mean, median, extremes](tokens-per-agent.md) · [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens) · [Gains, losses and the share-out](gains-losses-and-the-share-out.md) →
 
-> [!info]- Pages that link here (4)
-> [How even is a world?](how-even-is-a-world.md) · [Brain diversity](brain-diversity.md) · [What a run records](frames-and-stats.md) · [How many directions a cloud of points uses](participation-ratio.md)
+> [!info]- Pages that link here (6)
+> [Glossary](glossary.md) · [How even is a world?](how-even-is-a-world.md) · [Brain diversity](brain-diversity.md) · [The diversity score](diversity-score.md) · [What a run records](frames-and-stats.md) · [How many directions a cloud of points uses](participation-ratio.md)
 <!-- /turns -->

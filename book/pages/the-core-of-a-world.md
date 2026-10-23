@@ -1,15 +1,15 @@
 # The core of a world
 
-Peel away every agent with one connection or none, again and again, and what
+Peel away every [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") with one [connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") or none, again and again, and what
 is left is a world's **core**: the agents that lie on a loop, or on a path
 between loops ([Core, trees and leaves](core-trees-leaves.md)).
 Everything peeled hangs off the core in trees. [What shape does the network take?](what-shape-does-the-network-take.md)
 found that the core holds more than half the agents, and
 [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) measured how many
-dimensions a whole world has. This page asks the same of the core.
+[dimensions](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") a whole world has. This page asks the same of the core.
 
 > [!question] Questions of this page
-> - How much of a world is core — of its agents, and of its tokens?
+> - How much of a world is core — of its agents, and of its [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.")?
 > - How many dimensions does the core have, by the same two rulers that
 >   measured the whole world? Is the core a space of its own, with the trees as
 >   decoration — or are the trees what makes a world look the way it does?
@@ -82,7 +82,7 @@ lies on a loop or on a path between loops. Cutting one on a loop splits
 nothing — there is another way round — but one on a path between loops is a
 bridge, and its loss splits the core in two ([Bridges](bridges.md)):
 in one world of [How a world breaks](how-a-world-breaks.md), a third to almost
-half of the world hung on a single connection for 140 iterations. A tree is
+half of the world hung on a single connection for 140 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."). A tree is
 cut off whole by the loss of the one connection that holds it. Anything
 larger than an agent that might persist and evolve — a group of agents that
 holds together while its members come and go — can only live in the core.
@@ -99,7 +99,7 @@ the trees inflate it.
 
 ## Peeling a world
 
-Every 25 iterations, at the start of the game, each world is peeled, and its
+Every 25 iterations, at the start of the [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."), each world is peeled, and its
 agents and tokens are counted in the three parts:
 
 <!-- figure core/parts -->
@@ -118,7 +118,7 @@ agents and tokens are counted in the three parts:
 > **To make it again:** `python3 book_figures.py core`.
 <!-- /figure -->
 
-Over the settled stretch the core holds **60%** of the agents in the median
+Over the settled stretch the core holds **60%** of the agents in the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.")
 world (the middle half of the worlds between 56% and 63%), the hanging trees
 7.5% and the leaves 32%. These are counted at the start of a game, just after
 the births; [What shape does the network take?](what-shape-does-the-network-take.md) counts after
@@ -152,8 +152,8 @@ from:
 Most of what hangs off the core hangs close to it. Of the agents off the
 core, 77% are one step from it — mostly leaves joined straight to a core
 agent — 15% are two steps away, 5% three, 1.8% four. From the third step on,
-each step holds about 40% of the agents of the one before: on the logarithmic
-axis the points fall along a straight line, the mark of a share that shrinks
+each step holds about 40% of the agents of the one before: on the [logarithmic
+axis](logarithmic-axes.md "An axis on which each step multiplies by the same factor, so that numbers of very different sizes fit on one chart.") the points fall along a straight line, the mark of a share that shrinks
 by the same factor at every step. The deepest agent of a world is about **9
 steps** from the core. A core agent from which anything hangs carries 3
 agents on average, but the largest tree of a world holds some 345 agents in
@@ -192,7 +192,7 @@ the group — a world's densest knot.
 
 ## The loops live in the core
 
-A world after cleanup is one piece. Its number of **independent loops** — the
+A world after [cleanup](one-iteration.md#cleanup "The end of every phase: only the largest connected piece of the network lives on, and the tokens of the dead are shared out.") is one piece. Its number of **independent loops** — the
 connections that could be cut without splitting it, its cycle rank,
 connections − agents + 1 ([Loops](loops.md)) — counts how much it is
 more than a tree. All of those loops are in the core:
@@ -256,7 +256,7 @@ The two rulers of [How many dimensions does a world have?](how-many-dimensions-d
 measure a network's dimension: from how the number of agents within *r*
 steps grows with *r* (balls), and from how often a random walk is back where
 it started after *t* steps (walks). Both, on the whole world, on its core
-alone, and on a random twin of the world, wired at random with the same
+alone, and on a [random twin](random-twin.md "A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all.") of the world, wired at random with the same
 connections per agent:
 
 <!-- figure core/dimension -->
@@ -296,7 +296,7 @@ planned (see [the contents](../README.md)), is to follow it further.
 
 ## Over a world's life
 
-The same readings after the games of five moments of the settled life, for
+The same readings after the games of five moments of the [settled life](settled-life.md "A world from iteration 500 to its end, after its youth, where it is measured."), for
 the whole world, its core and its 3-core:
 
 <!-- figure core/over-life -->
@@ -337,14 +337,14 @@ So a world's dimension is not an artefact of its trees; it is the dimension
 of its core, and by balls, like the world's, it grows with the world's size
 over the sizes run so far.
 
-For open-ended evolution, the core is where anything lasting would have to
+For [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau."), the core is where anything lasting would have to
 live: a group of agents that holds together needs loops, and the loops are
 all in the core. That the core dies as fast as the leaves — 2.7% in every
 game — means the core as a whole is not protected either. A part of the
 world that lasted would show as agents of the core that die less often than
-the rest; in these worlds there is none but the hubs, which die about half as
+the rest; in these worlds there is none but the [hubs](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub."), which die about half as
 often as other agents ([Do the rich stay rich?](do-the-rich-stay-rich.md)) — and a
-hub is a place, not an individual: the brain on it changes in nearly every
+hub is a place, not an individual: the [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") on it changes in nearly every
 game ([How the game is played](how-the-game-is-played.md)).
 
 To make every figure of this page: `python3 book_figures.py core`.
@@ -354,6 +354,6 @@ To make every figure of this page: `python3 book_figures.py core`.
 
 ← [How the network grows](how-the-network-grows.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Power laws, real and apparent](power-laws-real-and-apparent.md) →
 
-> [!info]- Pages that link here (6)
-> [What the baseline world is](what-the-baseline-world-is.md) · [Thirty worlds](thirty-worlds.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [Core, trees and leaves](core-trees-leaves.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md)
+> [!info]- Pages that link here (7)
+> [What the baseline world is](what-the-baseline-world-is.md) · [Thirty worlds](thirty-worlds.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [Core, trees and leaves](core-trees-leaves.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [The random twin: is a world a space?](random-twin.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md)
 <!-- /turns -->

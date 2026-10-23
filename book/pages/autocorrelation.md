@@ -1,7 +1,7 @@
 # Autocorrelation: how long a world remembers
 
 A world wanders: its size, its inequality, its births go up and down over
-hundreds of iterations. How long does it **remember** where it was? If a
+hundreds of [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."). How long does it **remember** where it was? If a
 world is crowded now, is it still crowded 100 iterations later? 500? The
 **autocorrelation** answers: the [correlation](correlation.md) of a world
 with itself, some time later.
@@ -26,8 +26,8 @@ throughout would look like a world with a long memory.
 
 - Close to 1: a world is still where it was.
 - Close to 0: where a world was says nothing about where it will be.
-- In the baseline: 0.61 for the number of agents after 100 iterations in
-  the worlds of 100,000 tokens (0.68 in those of 10,000), about a third of that
+- In the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2."): 0.61 for the number of [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") after 100 iterations in
+  the worlds of 100,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") (0.68 in those of 10,000), about a third of that
   after 200, nothing after 300
   ([How much does the seed decide?](how-much-does-the-seed-decide.md)).
 
@@ -63,6 +63,6 @@ worlds over their settled life ([The settled life of a world](settled-life.md)).
 
 ← [Correlation](correlation.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Mobility](mobility.md) →
 
-> [!info]- Pages that link here (6)
-> [The ideas this builds on](the-ideas-this-builds-on.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [How worlds are measured](how-worlds-are-measured.md) · [Between worlds and within them](between-and-within.md) · [The power spectrum of a time series](power-spectrum.md)
+> [!info]- Pages that link here (7)
+> [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [How worlds are measured](how-worlds-are-measured.md) · [Between worlds and within them](between-and-within.md) · [The power spectrum of a time series](power-spectrum.md)
 <!-- /turns -->

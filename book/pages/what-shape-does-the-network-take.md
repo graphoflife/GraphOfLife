@@ -98,7 +98,7 @@ beside them.
 
 The pictures colour every agent by its place in the network
 ([Core, trees and leaves](core-trees-leaves.md)): blue for the
-**core**, where every agent lies on a loop or on a path between loops; red
+**core**, where every agent lies on a [loop](loops.md "A path through the network that comes back to where it started without using a connection twice.") or on a path between loops; red
 for **leaves**, agents with a single connection; yellow for the agents in
 between, on trees that hang off the core.
 
@@ -134,14 +134,14 @@ The figure is a complementary cumulative distribution on logarithmic axes
 for every *d*, the share of agents with at least *d* connections. After the
 last game of the thirty worlds, 35% of all agents have exactly one
 connection and 23% two; the mean is 3.5. But 4.7% have ten or more, and the
-curve reaches out to an agent with 10,735 — the centre of a star
+curve reaches out to an agent with 10,735 — the centre of a [star](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.")
 ([The largest and the smallest](the-largest-and-the-smallest.md)). Every founder started
 with ten. (At 10,000 tokens: 37% and 23%, a mean of 3.2, 4% with ten or
 more, the largest 1,399; the founders started with four.)
 
 So the network is very unequal in connections: most agents have one or two,
 a few are **hubs** joined to hundreds. The curve bends downward on the
-log–log axes rather than running straight, so it is not a clean power law.
+log–log axes rather than running straight, so it is not a clean [power law](power-law-fit.md "A quantity whose frequency falls as a power of its size: few huge values, many small ones.").
 
 ## Core, leaves and bridges
 
@@ -166,7 +166,7 @@ Three shares settle within the first hundred or so iterations and then hold
 ([Bridges](bridges.md)):
 
 - **The core** holds 97% of the agents after the first game and settles
-  near 57% (the median world over iterations 500 to 1,499; between 19% and
+  near 57% (the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world over iterations 500 to 1,499; between 19% and
   64% across the thirty worlds; 54% at 10,000 tokens).
 - **Leaves** rise from 3% to about 35% of all agents (36%).
 - **Bridges** — connections on no loop, whose cut would split the world —
@@ -178,7 +178,7 @@ nothing have just been cut. Counted at the start of a game, as
 agents and the leaves 32%.
 
 The worlds at the far ends of these ranges are the stars: in the world with
-seed 28, whose largest hub is joined to more than half of all agents, only
+[seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 28, whose largest hub is joined to more than half of all agents, only
 19% of the agents are in the core, 72% are leaves, and 72% of the
 connections are bridges.
 
@@ -321,7 +321,7 @@ all connections are bridges (a median of 32%, more than a fifth in every one
 of the 26 worlds); and clustering stays below 0.1 (a median of 0.077; above
 0.2 in no world). It fails in the fourth: the core holds about half of all
 agents (a median of 53%, less than half in only 6 of the 26 worlds), not
-less. Over the settled life, from iteration 500 on, the numbers are almost
+less. Over the [settled life](settled-life.md "A world from iteration 500 to its end, after its youth, where it is measured."), from iteration 500 on, the numbers are almost
 the same: 31%, 0.075 and 54%. So the thesis is **refuted**, narrowly, on its
 last clause.
 
@@ -346,7 +346,7 @@ hold together while their members change (P3 in
 the only part of the world where a group is joined by more than one path, so
 that losing one connection does not cut it in two.
 
-The measurements of the baseline found the mechanism behind this shape, and measured it against a
+The measurements of the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") found the mechanism behind this shape, and measured it against a
 sharper null. A child is joined to part of its parent's neighbourhood, so the
 world grows only locally, by copying: that gives hubs whose connections grow
 with their connections, a triangle for nearly every connection a hub gains,
@@ -355,7 +355,7 @@ and clustering that falls as one over the number of connections — a
 ([Power laws, real and apparent](power-laws-real-and-apparent.md),
 [How properties scale together](how-properties-scale-together.md)). Against a random network
 with exactly the same number of connections at every agent, the world is four
-and a half times as long (twice at 10,000 tokens), and its spectral gap —
+and a half times as long (twice at 10,000 tokens), and its [spectral gap](spectral-gap.md "How hard a network is to cut into two halves, and how fast a walker on it forgets where it began.") —
 which says how hard a network is to cut into two large parts — is a
 thirty-third of the random network's: the world has bottlenecks
 ([The geometry of a world](the-geometry-of-a-world.md)). And it breaks, when it breaks,
@@ -368,6 +368,6 @@ To make every figure of this page: `python3 book_figures.py shape`.
 
 [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [How the network grows](how-the-network-grows.md) →
 
-> [!info]- Pages that link here (16)
-> [What the baseline world is](what-the-baseline-world-is.md) · [Thirty worlds](thirty-worlds.md) · [A world's life](a-worlds-life.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [How even is a world?](how-even-is-a-world.md) · [How the network grows](how-the-network-grows.md) · [The core of a world](the-core-of-a-world.md) · [How a world breaks](how-a-world-breaks.md) · [Degree](degree.md) · [Clustering](clustering.md) · [Path length](path-length.md) · [Core, trees and leaves](core-trees-leaves.md) · [Bridges](bridges.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [One world, many colours](one-world-many-colours.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (17)
+> [What the baseline world is](what-the-baseline-world-is.md) · [Thirty worlds](thirty-worlds.md) · [A world's life](a-worlds-life.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [How even is a world?](how-even-is-a-world.md) · [How the network grows](how-the-network-grows.md) · [The core of a world](the-core-of-a-world.md) · [How a world breaks](how-a-world-breaks.md) · [Degree](degree.md) · [Stars and hubs](stars-and-hubs.md) · [Clustering](clustering.md) · [Path length](path-length.md) · [Core, trees and leaves](core-trees-leaves.md) · [Bridges](bridges.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [One world, many colours](one-world-many-colours.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

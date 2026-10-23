@@ -1,11 +1,11 @@
 # How the network grows
 
 The network of a world is not given. It is made and unmade by the rules,
-connection by connection. Connections are **made** in only one place: in
+[connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") by connection. Connections are **made** in only one place: in
 the reproduction phase, when a newborn child is joined to some of its
 parent's candidates and the parent may hand it some of its own connections.
 They are **lost** in two: after the game, when a connection that carried no
-tokens is cut, and whenever an agent dies, taking its connections with it
+[tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") is cut, and whenever an [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") dies, taking its connections with it
 ([One iteration, step by step](one-iteration.md)). [What shape does the network take?](what-shape-does-the-network-take.md)
 described the shape that results. This page watches the making and the
 unmaking, and asks the question that decides the shape: who gains
@@ -16,7 +16,7 @@ connections, and who loses them?
 >   In proportion to what they have?
 > - Do they lose them in proportion too?
 > - Do agents gather connections as they grow old, so that the oldest are
->   the hubs?
+>   the [hubs](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.")?
 
 The worlds are the thirty of 100,000 tokens of [Thirty worlds](thirty-worlds.md);
 where the thirty of 10,000 tokens this page was first written from differ,
@@ -92,7 +92,7 @@ else.
 
 That has a consequence worth stating exactly. Every connection the rules
 make runs from a newborn to its parent or to one of its parent's
-neighbours, and a handover only moves a parent's connection to its child.
+[neighbours](the-world.md#the-network "An agent joined to another by a connection."), and a handover only moves a parent's connection to its child.
 So **no connection ever brings two agents that already lived closer
 together**: two neighbours of a parent were at most two steps apart,
 through the parent, before the child arrived, and the child adds only
@@ -204,7 +204,7 @@ exception the other way: they pass from parent to newborn child —
   lets a world keep a geometry ([How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)).
   A network that added connections between random agents would collapse
   into a small world in which everything is a few steps from everything.
-- **For open-ended evolution**, the network is a churn of proportional
+- **For [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.")**, the network is a churn of proportional
   gains and losses. Connections, which [Do the rich stay rich?](do-the-rich-stay-rich.md)
   found to be the only lasting form of wealth, are themselves turned over at
   every scale. No structure is built up that lasts longer than the agents in
@@ -219,6 +219,6 @@ To make every figure of this page: `python3 book_figures.py grows`.
 
 **Also about:** [Agents' lives: births, deaths, ages](../README.md#agents-lives-births-deaths-ages).
 
-> [!info]- Pages that link here (8)
-> [What the baseline world is](what-the-baseline-world-is.md) · [Thirty worlds](thirty-worlds.md) · [How ages change over a world's life](how-ages-change.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [Preferential attachment and its kernel](preferential-attachment.md) · [Like next to like](like-next-to-like.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md)
+> [!info]- Pages that link here (9)
+> [What the baseline world is](what-the-baseline-world-is.md) · [Thirty worlds](thirty-worlds.md) · [How ages change over a world's life](how-ages-change.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [Stars and hubs](stars-and-hubs.md) · [Preferential attachment and its kernel](preferential-attachment.md) · [Like next to like](like-next-to-like.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md)
 <!-- /turns -->

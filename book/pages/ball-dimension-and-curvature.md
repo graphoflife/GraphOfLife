@@ -1,6 +1,6 @@
 # Dimension and curvature from ball growth
 
-How many agents are within *r* steps of a given agent? The answer, as a
+How many [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") are within *r* steps of a given agent? The answer, as a
 function of *r*, says what kind of space a network is — a line, a sheet, a
 tree — and two of the viewer's statistics read it off.
 
@@ -59,13 +59,13 @@ radii are needed): the first coefficient gives *d* − 1, the second −*R*/(6*d
 Both are fitted to five or fewer points, on networks that are not
 lattices. They are indices for comparing worlds and moments, not exact
 geometry. [The geometry of a world](the-geometry-of-a-world.md) reads them on
-the baseline worlds, beside a picture of the ball growth itself.
+the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") worlds, beside a picture of the ball growth itself.
 
 <!-- turns -->
 ---
 
 ← [How alike at a distance](correlation-function.md) · [Space and dimension](../README.md#space-and-dimension) · [The spectral dimension](spectral-dimension.md) →
 
-> [!info]- Pages that link here (6)
-> [The geometry of a world](the-geometry-of-a-world.md) · [Physical inspiration](physical-inspiration.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [The spectral dimension](spectral-dimension.md) · [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) · [What a run records](frames-and-stats.md)
+> [!info]- Pages that link here (9)
+> [Glossary](glossary.md) · [The geometry of a world](the-geometry-of-a-world.md) · [Physical inspiration](physical-inspiration.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [The random twin: is a world a space?](random-twin.md) · [The spectral dimension](spectral-dimension.md) · [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) · [The health bar](health-bar.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

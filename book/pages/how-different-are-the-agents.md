@@ -1,7 +1,7 @@
 # How different are the agents?
 
 > [!question] Questions of this page
-> - Put two agents in exactly the same place, with the same random inputs: do
+> - Put two [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") in exactly the same place, with the same random inputs: do
 >   they do the same thing?
 > - How much of what an agent does comes from where it is, how much from who
 >   it is, and how much from chance?
@@ -11,11 +11,11 @@
 
 A world of 3,000 agents holds about a thousand genotypes
 ([Genotypes and lineages](genotypes-and-lineages.md)). But a genotype is a name: a brain
-gets a new one whenever a mutation touches it, even when the change changes
+gets a new one whenever a [mutation](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") touches it, even when the change changes
 nothing the brain does ([Brain diversity](brain-diversity.md)).
-[What the brains are like](what-the-brains-are-like.md) opened the brains of B1's worlds
+[What the brains are like](what-the-brains-are-like.md) opened the brains of [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.")'s worlds
 and found that selection had set **constants**: never have children, spread
-the stake, mark every token revolutionary — the same in every world. So is a
+the stake, mark every [token](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") revolutionary — the same in every world. So is a
 world a thousand variations on one way of playing, or do several ways of
 playing live side by side?
 
@@ -25,32 +25,32 @@ down to the random numbers — and compares what each one does.
 
 ## The experiment
 
-- **Situations.** After one game, so that the messages in flight are fresh,
+- **Situations.** After one [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."), so that the [messages](messages.md "Numbers an agent writes to itself and to each neighbour every phase, which their brains read.") in flight are fresh,
   take 200 living agents at random and record what each of them reads: its
-  tokens and links, its neighbours', the messages it holds
+  tokens and links, its [neighbours](the-world.md#the-network "An agent joined to another by a connection.")', the messages it holds
   ([What a brain sees](brain-inputs.md)). The messages are part of the
   situation; they are what the agent holds at that moment. A brain also reads a
   few random numbers ([The brain](the-brain.md)). Draw those 8 times for
   each situation, and give every brain the same 8 draws.
 - **Brains.** Take 400 agents at random and put each one's brain into every
   situation and draw. A brain carried by many agents is drawn as often as it is
-  carried. Beside them, 400 fresh **founder** brains, which have never met
+  carried. Beside them, 400 fresh **[founder](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.")** brains, which have never met
   selection: what brains do by chance.
-- **Decisions**, by the engine's own rules (`research/oee/checks/diversity.py`):
+- **Decisions**, by the [engine](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s own rules (`research/oee/checks/diversity.py`):
 
 | decision | what it is |
 |---|---|
 | the stake | the shares of its tokens the agent puts on its own node and on each neighbour's |
 | kept at home | the share on its own node ([Staking at home](home-stake.md)) |
 | given to a child | the share it would give a child; 0 when no child would be made |
-| spread or all in | 1 if it spreads its stake over its candidates, 0 if it puts it all on one |
+| spread or all in | 1 if it spreads its stake over its [candidates](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides."), 0 if it puts it all on one |
 | a newborn's links | how likely a child of its own is to be linked to each of its neighbours |
 | marked revolutionary | the share of its stakes on others marked revolutionary ([How a coalition takes a node](revolution.md)) |
 
 The worlds are of 10,000 tokens:
 
-- **B2**: the ten worlds of Experiment 16, from the archives they keep every
-  100 iterations, at 0, 100, 500, 1,000 and 2,000 iterations;
+- **[B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.")**: the ten worlds of Experiment 16, from the archives they keep every
+  100 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."), at 0, 100, 500, 1,000 and 2,000 iterations;
 - **B1**: the first ten worlds of Experiment 2, at the end of their 3,000
   iterations;
 - **the long runs**: two B1 [pilot worlds](pilot-worlds.md) of the
@@ -113,7 +113,7 @@ much of it is the rules.
   larger part in B2 than among founders (29% against 17%).
 - **In B1** nearly every brain spreads its stake (94–99% of cases in the ten
   worlds), and most split it evenly ([What the brains are like](what-the-brains-are-like.md)).
-  An even split puts 1/(*k* + 1) of the stake at home for an agent with *k*
+  An [even split](even-split.md "What the rules do when a brain scores no candidate above zero: the stake is spread evenly.") puts 1/(*k* + 1) of the stake at home for an agent with *k*
   neighbours: again where the agent is, not what its brain makes of it. That
   fits [What the brains are like](what-the-brains-are-like.md)'s finding that B1's brains are nearly blind; the situation
   reaches B1's stakes mostly through the rules.
@@ -172,7 +172,7 @@ noise.
 In B2 (left):
 
 - At the start two founders differ by 0.46, and each from itself by 0.26 (the
-  median of ten worlds).
+  [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") of ten worlds).
 - By 2,000 iterations two agents differ by 0.19, and one from itself by 0.13.
   The evolved brains are steadier: their stakes depend less on the random
   numbers.
@@ -380,7 +380,7 @@ every experiment and to the pilot worlds.
   iterations later.
 - **Kinds sit in somewhat different places**, by links in B2 and by tokens in
   B1 — niches or families, not yet told apart.
-- **For open-ended evolution**, B2 has the raw material and B1 has not: many
+- **For [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.")**, B2 has the raw material and B1 has not: many
   kinds of behaviour at once, steadily renewed. What B2 lacks is a reason for a
   kind to *stay*: a place where it does better than the others, so that new
   kinds are added to the old ones rather than replacing them. Whether the
@@ -405,6 +405,6 @@ every experiment and to the pilot worlds.
 
 ← [Do the brains matter?](do-the-brains-matter.md) · [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are) · [Genotypes and the family tree](genotype.md) →
 
-> [!info]- Pages that link here (11)
-> [Flow modules: the groups tokens stay in](flow-modules.md) · [How alike the agents are](how-alike-the-agents-are.md) · [What would count as open-ended evolution](open-ended-test.md) · [Healthy and rich](healthy-and-rich.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md) · [A screen of random worlds](a-screen-of-random-worlds.md) · [Every world side by side](every-world-side-by-side.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Where, who and chance: splitting a decision's variance](variance-split.md) · [Effective numbers: how many kinds there really are](effective-number.md)
+> [!info]- Pages that link here (14)
+> [Glossary](glossary.md) · [The even split](even-split.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [How alike the agents are](how-alike-the-agents-are.md) · [What would count as open-ended evolution](open-ended-test.md) · [Healthy and rich](healthy-and-rich.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The diversity score](diversity-score.md) · [Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md) · [A screen of random worlds](a-screen-of-random-worlds.md) · [Every world side by side](every-world-side-by-side.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Where, who and chance: splitting a decision's variance](variance-split.md) · [Effective numbers: how many kinds there really are](effective-number.md)
 <!-- /turns -->

@@ -1,13 +1,13 @@
 # How ages change over a world's life
 
-[Births, deaths and ages](births-deaths-and-ages.md) measured how long agents live and
+[Births, deaths and ages](births-deaths-and-ages.md) measured how long [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") live and
 how old the living are at the end of a run. This page follows ages and
 lifetimes through a world's whole life: how old the living are at each
 moment, how long the agents born at each moment live, and at which age an
 agent is most at risk.
 
 > [!question] Questions of this page
-> - How old are the living, iteration by iteration — the typical agent and the
+> - How old are the living, [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") by iteration — the typical agent and the
 >   oldest?
 > - Do agents born late in a world's life live longer than agents born early?
 > - At which age is an agent most likely to die, and does that change?
@@ -78,8 +78,8 @@ A world whose size holds still is not necessarily in a steady state. If births
 slow while deaths slow too, the population can stay the same size while it
 grows older — births do slow, over a world's first few hundred iterations
 ([A world's life](a-worlds-life.md)) — and an older population is a
-different one: older agents have had more time to gather connections and
-tokens, and their brains have survived more games. For evolution, what matters
+different one: older agents have had more time to gather [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") and
+[tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes."), and their [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") have survived more [games](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."). For evolution, what matters
 is how long a brain lasts and what it does in that time; for a picture of a
 world as a physical system, whether it ever reaches an equilibrium.
 
@@ -92,8 +92,8 @@ an age, the share that die at it.
 
 ## How old the living are, iteration by iteration
 
-At iteration 0 every agent is a founder or a founder's first child, and all
-are of age 0. From then on, after every game, a frame lists the age of every
+At iteration 0 every agent is a [founder](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.") or a founder's first child, and all
+are of age 0. From then on, after every game, a [frame](frames-and-stats.md "A whole world as a run records it after one phase: every agent, its tokens and connections.") lists the age of every
 agent alive:
 
 <!-- figure ages/over-time -->
@@ -113,7 +113,7 @@ agent alive:
 > **To make it again:** `python3 book_figures.py ages`.
 <!-- /figure -->
 
-The median age climbs for two hundred iterations — 12 at iteration 50, 28 at
+The [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") age climbs for two hundred iterations — 12 at iteration 50, 28 at
 100, 48 at 200 — and then stops. It is 46 at iteration 300, 51 at 500, 57 at
 1,000 and 51 at the last iteration, and over the settled stretch from 500 to
 1,499 the median world's median age is **55 iterations** (the middle half of
@@ -225,7 +225,7 @@ lifetime is the longest *L* that more than half of the lives reach.)
 
 A finer view: for every stretch of 25 birth iterations, in each world on its
 own, how many of their first 100 iterations the agents live on average — the
-**restricted mean lifetime**, the area under the survival curve up to 100
+**restricted mean lifetime**, the area under the [survival curve](kaplan-meier.md "The share of lives that last at least so long, counted fairly when some are cut short by the end of a run.") up to 100
 ([Age and lifetime](age-and-lifetime.md)), which every agent born at
 least 100 iterations before the end can be measured by in full:
 
@@ -285,7 +285,7 @@ never more at risk than a young one, and beyond an age of about a hundred the
 risk hardly changes — about one game in a hundred is an old agent's last,
 whether it is a hundred iterations old or four hundred. A constant risk
 makes the survival curve fall exponentially from there on — a straight line
-if the share is drawn on a logarithmic axis against a plain axis of *L* —
+if the share is drawn on a [logarithmic axis](logarithmic-axes.md "An axis on which each step multiplies by the same factor, so that numbers of very different sizes fit on one chart.") against a plain axis of *L* —
 which is what lets the estimate of the oldest agent above work.
 
 Agents born early, in iterations 1 to 249, were at more risk at every age —
@@ -337,7 +337,7 @@ game to game.
 > [How the network grows](how-the-network-grows.md) sorts the living by age and looks
 > at the median instead of the mean: the median agent has 2 connections at
 > every age, from a few iterations to over 700. The old classes' higher means
-> come from the hubs among them, which die far less often than leaves
+> come from the [hubs](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.") among them, which die far less often than leaves
 > ([Do the rich stay rich?](do-the-rich-stay-rich.md)), and an agent's tokens follow
 > its connections ([How properties scale together](how-properties-scale-together.md)).
 > Connections give an agent age, not age connections. And an agent's age is
@@ -372,7 +372,7 @@ curve.
 
 ## Two sizes
 
-The worlds of 10,000 tokens, which the study of the baseline was first written from, ran for 3,000
+The worlds of 10,000 tokens, which the study of the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") was first written from, ran for 3,000
 iterations. Their ages, beside these:
 
 <!-- figure ages/two-sizes -->
@@ -434,7 +434,7 @@ game in a hundred; long lives are almost memoryless, and the oldest agent is
 set by how many agents there are, not by any limit on a life. The old are the
 rich.
 
-For open-ended evolution this is a world whose demography is finished early:
+For [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.") this is a world whose demography is finished early:
 from iteration 500 on nothing about who lives how long changes. Evolution, if
 it acts, would have to act inside that steady turnover — through which brains
 the 2.4% of newborns carry, and which brains take over nodes in the games
@@ -443,7 +443,7 @@ last.
 
 > [!info] Added later: the brains settle even earlier
 > [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) played the
-> brains of different eras of ten worlds of 5,000 tokens against each other.
+> brains of different [eras](eras-and-contests.md "Brains of a world at two moments, its eras, played against each other: do the later ones win?") of ten worlds of 5,000 tokens against each other.
 > The baseline's brains improve over their first 50 to 100 iterations and
 > not after: from then on every era ties with the one before it. Inside this
 > steady turnover, the brains stop improving even before the ages stop

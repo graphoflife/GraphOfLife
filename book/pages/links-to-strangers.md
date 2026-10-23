@@ -1,7 +1,7 @@
 # Links to strangers
 
 > [!question] Questions of this page
-> - If an agent can reach past its neighbours and propose a link to someone it
+> - If an [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") can reach past its [neighbours](the-world.md#the-network "An agent joined to another by a connection.") and propose a link to someone it
 >   does not know, does it?
 > - Who does it reach, and what does that do to the network, to the riches of
 >   the world, to evolution?
@@ -16,15 +16,15 @@ a link or force one.
 
 ## What was built
 
-Three settings of the engine, all off unless a run turns them on
+Three settings of the [engine](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world."), all off unless a run turns them on
 ([`link_search`](settings.md#link_search),
 [`link_steering`](settings.md#link_steering),
 [`link_consent`](settings.md#link_consent)). After a reproduction
-phase, an agent's brain says how many of its tokens it spends on a search:
+phase, an agent's [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") says how many of its [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") it spends on a search:
 
 | search | what the agent does |
 |---|---|
-| **jump** | a walk as many steps long as the tokens it spends, all in one iteration; a link is proposed where the walk ends, if it ends at a stranger |
+| **jump** | a walk as many steps long as the tokens it spends, all in one [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."); a link is proposed where the walk ends, if it ends at a stranger |
 | **walk** | a scout that goes one step further in every iteration the agent pays for, and proposes where it stands when that is a stranger |
 | **reach** | a jump whose steps are free, as many as the tokens it holds would pay for |
 
@@ -36,11 +36,11 @@ if both ends agree (**mutual**) or if the proposer alone wants it
 
 ## The worlds
 
-Batch K: B2 at 10,000 tokens with every search, every steering and every
-consent — twelve kinds of world — seeds 1 and 2, 1,000 iterations, as pilot
+Batch K: [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.") at 10,000 tokens with every search, every steering and every
+consent — twelve kinds of world — [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1 and 2, 1,000 iterations, as [pilot](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.")
 worlds. The control is B2 itself with the same seeds (`P/B2-s1`, `-s2`, the
 lab's Experiment 16 worlds again, game for game). From each world's
-checkpoint at iteration 1,000, fifty more games were played and recorded, and
+checkpoint at iteration 1,000, fifty more [games](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") were played and recorded, and
 every proposal in them counted (`research/oee/checks/k_links.py`).
 
 ## Do they search?
@@ -70,7 +70,7 @@ per hundred agents an iteration, and 0.1 to 3 new links. Most proposals fail —
 or is already at its valence. How a search steers, and whether a link needs
 both ends' consent, matters less than the seed of the world.
 
-**And the strangers are near.** The median proposal, in every world, goes to an
+**And the strangers are near.** The [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") proposal, in every world, goes to an
 agent two or three steps away — a neighbour's neighbour, or one step beyond.
 No proposal in any world went twenty steps or more. A search walks the
 network as it is, and a short walk on a network where every agent has five or
@@ -97,7 +97,7 @@ six links rarely leaves the neighbourhood.
 - **More links, shorter paths — with the free reach.** Its worlds hold 6.0 to
   8.1 links per agent against B2's 5.4 to 5.5, and two agents are 4.4 to 5.5
   steps apart against 5.2 to 5.4. The paid searches leave both as they were.
-- **The dimension does not change.** It stays at 3.8 to 4.6 in every searching
+- **The [dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") does not change.** It stays at 3.8 to 4.6 in every searching
   world, B2's own range: links to friends of friends make the network denser
   where it already is, not wider.
 - **Smaller worlds, a little richer.** Every kind of searching world holds
@@ -130,7 +130,7 @@ six links rarely leaves the neighbourhood.
 
 **Yes, and faster than in B2.** In every one of the 24 worlds the brains of
 iteration 1,000 took more than half of a contested world from those of 500,
-over an agent's lifetime — 70% to 91% — where B2's took 68% in the median of
+over an agent's [lifetime](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death.") — 70% to 91% — where B2's took 68% in the median of
 its ten lab worlds. The median world with a jump took 79%, with a walk 78%,
 with the reach 83%. And it hardly matters how much the agents searched: the
 worlds of the paid searches, whose agents almost never propose a link, evolve

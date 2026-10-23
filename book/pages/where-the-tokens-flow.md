@@ -1,21 +1,21 @@
 # Where the tokens flow
 
-[Gains and losses](gains-and-losses.md) followed the agents through a game:
-who gains, who loses. This page follows the **tokens**: where each staked
+[Gains and losses](gains-and-losses.md) followed the [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") through a [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."):
+who gains, who loses. This page follows the **[tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.")**: where each staked
 token goes, how much of it comes back, and whether the whole movement obeys
 a simple law. It does — nearly — and the law explains several findings of
 earlier pages at once.
 
 > [!question] Questions of this page
 > - Of all the tokens staked in a game, how many stay at home, how many cross
->   a connection and are matched by a stake coming back, and how many go one
+>   a [connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") and are matched by a stake coming back, and how many go one
 >   way only?
 > - How widely do agents spread their stakes, and how close is that to
 >   splitting them evenly?
 > - Can a game be described as a random walk of tokens? What would that
 >   predict about who is rich?
 > - Who keeps their node?
-> - Do tokens go round in loops?
+> - Do tokens go round in [loops](loops.md "A path through the network that comes back to where it started without using a connection twice.")?
 
 The worlds are the thirty of 100,000 tokens of [Thirty worlds](thirty-worlds.md);
 where the thirty of 10,000 tokens this page was first written from differ,
@@ -86,7 +86,7 @@ token, by whoever holds it. Each staked token lands in one of three places
 ([Token flow](token-flow.md)):
 
 1. on the staker's **own node**;
-2. on a neighbour's node, **matched** by a stake coming back: if A puts 5 on
+2. on a [neighbour](the-world.md#the-network "An agent joined to another by a connection.")'s node, **matched** by a stake coming back: if A puts 5 on
    B's node and B puts 3 on A's, 3 tokens go each way and cancel — neither
    balance changes because of them;
 3. on a neighbour's node, **one way**: the 2 left over in the example. Only
@@ -110,7 +110,7 @@ token, by whoever holds it. Each staked token lands in one of three places
 <!-- /figure -->
 
 In the first game, 13% stays home, 23% is matched and 64% goes one way — the
-founders, with ten neighbours each, keep less at home than the founders of a
+[founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts."), with ten neighbours each, keep less at home than the founders of a
 world of 10,000 tokens, with four (a quarter, a quarter and a half there). In
 settled games, at both sizes, 30% stays home, **51% is matched** and only 20%
 goes one way. Most of what agents send to their neighbours is an exchange of
@@ -148,7 +148,7 @@ staked on B — a question for [Do agents cooperate?](do-agents-cooperate.md).
 
 ## How widely agents stake
 
-An agent with *d* connections has *d* + 1 **candidates**: its own node and its
+An agent with *d* connections has *d* + 1 **[candidates](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides.")**: its own node and its
 neighbours' nodes. If it split its tokens evenly, it would put 1/(*d* + 1) of
 them on each, home included.
 
@@ -172,7 +172,7 @@ them on each, home included.
 
 Agents stake on almost all their candidates: 96% for agents with one
 connection, falling to 81–82% for agents with ten or more. And their **home
-share** follows the even split closely — a little above it:
+share** follows the [even split](even-split.md "What the rules do when a brain scores no candidate above zero: the stake is spread evenly.") closely — a little above it:
 
 | connections | 1 | 2 | 3–4 | 5–9 | 10–49 | 50+ |
 |---|---|---|---|---|---|---|
@@ -180,7 +180,7 @@ share** follows the even split closely — a little above it:
 | even split, 1/(*d*+1) | 50% | 33% | 23% | 14% | 7% | 1.2% |
 | even split, in whole tokens | 60% | 44% | 34% | 23% | 13% | 3.0% |
 
-The extra at home is not the brains' doing. Tokens are whole, and an even
+The extra at home is not the [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.")' doing. Tokens are whole, and an even
 split rarely comes out even: an agent with 3 tokens and 2 candidates cannot
 stake 1.5 on each. The rules deal the tokens left over to the candidates
 with the largest remainders ([Splitting tokens into whole numbers](largest-remainder.md)),
@@ -190,7 +190,7 @@ in whole tokens this way, an exact even split would put 60% at home for an
 agent with one connection, 44% with two. The brains put a little *less* at
 home than that.
 
-Often there is not even a split to round. In the median world, 42% of agents
+Often there is not even a split to round. In the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world, 42% of agents
 give every candidate a score of zero or below, and then the rules split
 their tokens evenly by default ([What the brains are like](what-the-brains-are-like.md)).
 And the brains that do give positive scores give nearly the same one to
@@ -231,7 +231,7 @@ tokens it holds — and set it against the balance it really ended with.
 
 Over 1,798,806 agents of the thirty worlds, the real balances follow the
 even split's with a slope of only 0.65, and the even split accounts for 34% of
-the variance. But that is the stars speaking. Without the seven worlds held
+the variance. But that is the [stars](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.") speaking. Without the seven worlds held
 together by one hub ([The largest and the smallest](the-largest-and-the-smallest.md)), the
 slope is **0.94** and the even split accounts for **45%** — exactly as in the
 worlds of 10,000 tokens (0.94 and 46%), and the median world, fitted on its
@@ -281,7 +281,7 @@ on such a network can settle at all.
 The winner of a node — whose brain the node takes — is its largest staker,
 unless a coalition of smaller stakers outweighs it
 ([How a coalition takes a node](revolution.md)). Under the even
-split, the agent living on a node of degree *d* is one of *d* + 1 stakers of
+split, the agent living on a node of [degree](degree.md "The number of an agent's connections: how many neighbours it has.") *d* is one of *d* + 1 stakers of
 roughly equal size there.
 
 <!-- figure flow/kept -->
@@ -375,13 +375,13 @@ circulate.
 - **The game is close to a random walk of tokens.** The evolved brains spread
   their tokens nearly evenly over everyone they can reach. The world's
   economy, in tokens, is an exchange of equal stakes plus a diffusion
-  downhill. There is no circulation to speak of.
+  downhill. There is no [circulation](circulation.md "The part of a flow that goes round in loops, as against the part that runs from sources to sinks.") to speak of.
 - **Wealth follows connections.** At rest, an agent holds tokens in proportion
   to its connections plus one. Being rich is a matter of being well connected
   — of being in a place.
 - **Hubs are places.** The brains on hubs change almost every game. The
   network's most important positions are not held by anyone.
-- **For open-ended evolution this is a warning.** A behaviour this close to
+- **For [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.") this is a warning.** A behaviour this close to
   "split evenly" leaves little for brains to differ in, and a world whose
   wealth and positions are set by the network rather than by the brains gives
   selection little to grip. [Questioning the mechanics](questioning-the-mechanics.md)
@@ -402,8 +402,8 @@ To make every figure of this page: `python3 book_figures.py flow`.
 <!-- turns -->
 ---
 
-← [How the game is played](how-the-game-is-played.md) · [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens) · [What crosses a connection](what-crosses-a-connection.md) →
+← [The even split](even-split.md) · [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens) · [What crosses a connection](what-crosses-a-connection.md) →
 
-> [!info]- Pages that link here (21)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [What the baseline world is](what-the-baseline-world-is.md) · [How agents have children](how-agents-have-children.md) · [Where do the tokens go?](where-do-the-tokens-go.md) · [Do the rich stay rich?](do-the-rich-stay-rich.md) · [Gains and losses](gains-and-losses.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Where tokens go](where-tokens-go.md) · [How the game is played](how-the-game-is-played.md) · [What crosses a connection](what-crosses-a-connection.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [Lightning in every world](lightning-in-every-world.md) · [Token flow](token-flow.md) · [Token curvature](token-curvature.md) · [How properties scale together](how-properties-scale-together.md) · [The geometry of a world](the-geometry-of-a-world.md) · [Physical inspiration](physical-inspiration.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [Do agents cooperate?](do-agents-cooperate.md) · [What goes with what](what-goes-with-what.md)
+> [!info]- Pages that link here (23)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [What the baseline world is](what-the-baseline-world-is.md) · [How agents have children](how-agents-have-children.md) · [Where do the tokens go?](where-do-the-tokens-go.md) · [Do the rich stay rich?](do-the-rich-stay-rich.md) · [Gains and losses](gains-and-losses.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Where tokens go](where-tokens-go.md) · [How the game is played](how-the-game-is-played.md) · [The even split](even-split.md) · [What crosses a connection](what-crosses-a-connection.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [Lightning in every world](lightning-in-every-world.md) · [Token flow](token-flow.md) · [Token curvature](token-curvature.md) · [How properties scale together](how-properties-scale-together.md) · [The geometry of a world](the-geometry-of-a-world.md) · [Stars and hubs](stars-and-hubs.md) · [Physical inspiration](physical-inspiration.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [Do agents cooperate?](do-agents-cooperate.md) · [What goes with what](what-goes-with-what.md)
 <!-- /turns -->

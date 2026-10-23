@@ -1,7 +1,7 @@
 # Thirty worlds
 
-The study of the baseline looks at one kind of world, the baseline B1, from every side. It does
-so with thirty worlds that differ only in their seed. This page introduces
+The study of the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") looks at one kind of world, the baseline [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it."), from every side. It does
+so with thirty worlds that differ only in their [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world."). This page introduces
 them: the pages summed up in [What the baseline world is](what-the-baseline-world-is.md), and the
 measurements summed up in [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md), read these same thirty runs.
 
@@ -12,7 +12,7 @@ measurements summed up in [What the measurements say about open-ended evolution]
 > [Worlds of 100,000 tokens](worlds-of-100000-tokens.md)): worlds big enough for space, for
 > scale and for rare events to show. Where the two sizes differ, the pages
 > give both. The worlds of 10,000 tokens remain the ones the pages on how the simulation
-> works teach with, and the baseline the experiments that change one setting compare against.
+> works teach with, and the baseline the experiments that change one [setting](settings.md "One number or switch of a run's rules, fixed before it starts.") compare against.
 
 ## The runs
 
@@ -74,11 +74,11 @@ measurements summed up in [What the measurements say about open-ended evolution]
 > A value in **bold** differs from the baseline B1.
 <!-- /runs -->
 
-Thirty runs of the baseline at 100,000 tokens — so a thousand founders of a
-hundred tokens each — with seeds 1 to 30, each run for 1,500 iterations.
+Thirty runs of the baseline at 100,000 tokens — so a thousand [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.") of a
+hundred tokens each — with seeds 1 to 30, each run for 1,500 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.").
 Every frame was kept, with every decision; every statistic was recorded for
-every frame, and the statistics that walk the whole network (bridges, the
-core, clustering, distances, the flow's loops) every 25 iterations
+every frame, and the statistics that walk the whole network ([bridges](bridges.md "A connection that lies on no loop: cut it and the network falls into two pieces."), the
+core, [clustering](clustering.md "How often an agent's neighbours are also each other's neighbours."), distances, the flow's [loops](loops.md "A path through the network that comes back to where it started without using a connection twice.")) every 25 iterations
 ([What a run records](frames-and-stats.md)).
 
 Together they took 211 hours of computing, done in a little over two days on
@@ -146,20 +146,20 @@ which replays a run frame by frame.
   does is decided by its seed?
 - [Where do the tokens go?](where-do-the-tokens-go.md) — Where do the tokens go — how
   unequal does a world become?
-- [How the game is played](how-the-game-is-played.md) — How is the game played: where
+- [How the game is played](how-the-game-is-played.md) — How is the [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") played: where
   do agents stake, who wins the nodes?
 - [What shape does the network take?](what-shape-does-the-network-take.md) — What shape does the
   network take?
-- [Genotypes and lineages](genotypes-and-lineages.md) — How long do genotypes last, and
-  do lineages take over?
+- [Genotypes and lineages](genotypes-and-lineages.md) — How long do [genotypes](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.") last, and
+  do [lineages](families.md "A line of descent: the agents whose genotypes go back to one ancestor.") take over?
 - [What the brains are like](what-the-brains-are-like.md) and
-  [What agents say to each other](what-agents-say-to-each-other.md) — What are the brains like,
+  [What agents say to each other](what-agents-say-to-each-other.md) — What are the [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") like,
   and what do agents say to each other?
 - [Do the rich stay rich?](do-the-rich-stay-rich.md) — Do the rich stay rich?
 - [How the network grows](how-the-network-grows.md) — How does the network grow?
 - [Like next to like](like-next-to-like.md) — Are neighbours alike?
 - [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) and
-  [The core of a world](the-core-of-a-world.md) — How many dimensions does a world
+  [The core of a world](the-core-of-a-world.md) — How many [dimensions](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") does a world
   have, and its core?
 - [What the baseline world is](what-the-baseline-world-is.md) — What the baseline world is, in sum.
 
@@ -173,6 +173,6 @@ ask.
 
 ← [What the baseline world is](what-the-baseline-world-is.md) · [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2) · [A world's life](a-worlds-life.md) →
 
-> [!info]- Pages that link here (35)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [What the baseline world is](what-the-baseline-world-is.md) · [A world's life](a-worlds-life.md) · [The first hundred iterations](the-first-hundred-iterations.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How ages change over a world's life](how-ages-change.md) · [How agents have children](how-agents-have-children.md) · [Where do the tokens go?](where-do-the-tokens-go.md) · [How even is a world?](how-even-is-a-world.md) · [Do the rich stay rich?](do-the-rich-stay-rich.md) · [Gains and losses](gains-and-losses.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [How the game is played](how-the-game-is-played.md) · [Where the tokens flow](where-the-tokens-flow.md) · [What crosses a connection](what-crosses-a-connection.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [How the network grows](how-the-network-grows.md) · [The core of a world](the-core-of-a-world.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [How properties scale together](how-properties-scale-together.md) · [The geometry of a world](the-geometry-of-a-world.md) · [How a world breaks](how-a-world-breaks.md) · [Like next to like](like-next-to-like.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) · [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Do agents cooperate?](do-agents-cooperate.md) · [One world, many colours](one-world-many-colours.md) · [What a simulation costs](what-a-simulation-costs.md)
+> [!info]- Pages that link here (37)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [What the baseline world is](what-the-baseline-world-is.md) · [A world's life](a-worlds-life.md) · [The first hundred iterations](the-first-hundred-iterations.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How ages change over a world's life](how-ages-change.md) · [How agents have children](how-agents-have-children.md) · [Where do the tokens go?](where-do-the-tokens-go.md) · [How even is a world?](how-even-is-a-world.md) · [Do the rich stay rich?](do-the-rich-stay-rich.md) · [Gains and losses](gains-and-losses.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [How the game is played](how-the-game-is-played.md) · [The even split](even-split.md) · [Where the tokens flow](where-the-tokens-flow.md) · [What crosses a connection](what-crosses-a-connection.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [How the network grows](how-the-network-grows.md) · [The core of a world](the-core-of-a-world.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [How properties scale together](how-properties-scale-together.md) · [The geometry of a world](the-geometry-of-a-world.md) · [How a world breaks](how-a-world-breaks.md) · [Like next to like](like-next-to-like.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) · [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Do agents cooperate?](do-agents-cooperate.md) · [One world, many colours](one-world-many-colours.md) · [What a simulation costs](what-a-simulation-costs.md)
 <!-- /turns -->

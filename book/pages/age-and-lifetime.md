@@ -1,19 +1,19 @@
 # Age and lifetime
 
-Two different questions: *how old are the agents alive now?* and *how long
+Two different questions: *how old are the [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") alive now?* and *how long
 does an agent live?* They have different answers, and the difference is
 worth understanding.
 
 ## Age
 
-An agent's **age** is the number of iterations since it was born: 0 in the
-iteration of its birth, 1 in the next, and so on. Founders are born at
+An agent's **age** is the number of [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") since it was born: 0 in the
+iteration of its birth, 1 in the next, and so on. [Founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.") are born at
 iteration 0. Every frame records the age of every living agent
 ([What a run records](frames-and-stats.md)).
 
 Note that an agent keeps its id and its age when its node is won in the
-game; only its brain changes. Age is the age of the agent, not of its
-genotype.
+[game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."); only its [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") changes. Age is the age of the agent, not of its
+[genotype](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.").
 
 ## Lifetime
 
@@ -47,7 +47,7 @@ second kind is alive at 99 times as many moments as one of the first, so 99 in
 100 of the agents you see are long-lived ones. The **living are a sample
 weighted by lifetime**. This is why, in
 [Births, deaths and ages](births-deaths-and-ages.md), half of all agents
-are gone within ten iterations, while the median age of the agents alive at
+are gone within ten iterations, while the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") age of the agents alive at
 the end is 54.
 
 In general: in a world in a steady state, where lifetimes *L* occur with
@@ -60,7 +60,7 @@ $$
 
 so long lives are over-represented in proportion to their length, and each
 such agent is equally likely to be at any point of its life. This is the
-*inspection paradox* of renewal theory. (The baseline worlds of 10,000 tokens
+*inspection paradox* of renewal theory. (The [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") worlds of 10,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.")
 are not exactly in a steady state — their births slow down for over a
 thousand iterations — but the effect is the same in kind; those of 100,000
 tokens are in one from iteration 500 on,
@@ -106,7 +106,7 @@ $$
 
 If the hazard is the same at every age, an agent's past says nothing about
 its future: lives are **memoryless**, and *S*(*L*) falls along a straight
-line when it is drawn on a logarithmic axis against *L*. A hazard that falls
+line when it is drawn on a [logarithmic axis](logarithmic-axes.md "An axis on which each step multiplies by the same factor, so that numbers of very different sizes fit on one chart.") against *L*. A hazard that falls
 with age means that those who survive become safer — the young die most,
 as in a population with high infant mortality. A hazard that rises with age
 is ageing in the usual sense.
@@ -126,8 +126,8 @@ at least 100 iterations before the end can be measured by it in full
 <!-- turns -->
 ---
 
-← [Births and the four ways to die](births-and-deaths.md) · [Agents' lives: births, deaths, ages](../README.md#agents-lives-births-deaths-ages) · [Reproduction statistics](reproduction-statistics.md) →
+← [The estate of the dead](estate.md) · [Agents' lives: births, deaths, ages](../README.md#agents-lives-births-deaths-ages) · [Reproduction statistics](reproduction-statistics.md) →
 
-> [!info]- Pages that link here (5)
-> [The world: tokens, agents and a network](the-world.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How ages change over a world's life](how-ages-change.md) · [Genotypes and the family tree](genotype.md) · [What the viewer can colour by](viewer-colours.md)
+> [!info]- Pages that link here (6)
+> [Glossary](glossary.md) · [The world: tokens, agents and a network](the-world.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How ages change over a world's life](how-ages-change.md) · [Genotypes and the family tree](genotype.md) · [What the viewer can colour by](viewer-colours.md)
 <!-- /turns -->

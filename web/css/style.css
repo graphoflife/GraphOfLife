@@ -1043,6 +1043,16 @@ details.control-group > summary:hover h3 { color: var(--text); }
 .md li { margin-bottom: 7px; }
 .md hr { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
 .md a { color: var(--accent); }
+/* A term, linked where a page first uses it (book_fill.link_terms): it reads as
+   part of the sentence, a dotted line saying there is more, and its title, on
+   hover, says what it is. A link to a page stays a link. */
+.md a[title][data-md] {
+  color: inherit;
+  text-decoration: underline dotted;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+}
+.md a[title][data-md]:hover { color: var(--accent); }
 .md b { color: #fff; }
 
 .md blockquote {

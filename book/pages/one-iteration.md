@@ -8,8 +8,8 @@ answer is used; [The brain](the-brain.md) says how the brain arrives at it.
 
 > [!question] Questions of this page
 > - In what order does everything happen in one iteration?
-> - How exactly does a decision of the brain turn into tokens moved,
->   children born and nodes won?
+> - How exactly does a decision of the brain turn into [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") moved,
+>   children born and [nodes](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") won?
 > - Why does the number of tokens never change?
 > - What does one iteration do, on average, to a settled world?
 
@@ -50,12 +50,12 @@ Splitting 11 tokens by the scores (2, 1, −0.5, 0.5) gives (6, 3, 0, 2).
 
 ## Phase 1: reproduction
 
-1. **Measure.** The tokens and degree of every agent, and the summaries of
+1. **Measure.** The tokens and [degree](degree.md "The number of an agent's connections: how many neighbours it has.") of every agent, and the summaries of
    every neighbourhood, are measured once, now. Every decision in this phase
    reads these numbers, so the order in which agents act does not change
    what they see.
 2. **Everyone speaks.** Every agent looks at its **candidates** — itself and
-   its neighbours, in increasing order of id — and writes a message to each.
+   its [neighbours](the-world.md#the-network "An agent joined to another by a connection."), in increasing order of id — and writes a message to each.
    The messages are delivered before anyone acts ([Messages](messages.md)).
 3. **Every agent with tokens decides.** The agents are taken one at a time,
    in increasing order of id. Agent *u*, holding τ(*u*) ≥ 1 tokens, looks at
@@ -69,10 +69,10 @@ Splitting 11 tokens by the scores (2, 1, −0.5, 0.5) gives (6, 3, 0, 2).
      holds *c* tokens; the parent keeps τ(*u*) − *c*. The child's brain is a
      copy of the parent's, which then changes with probability 0.2
      ([How a brain changes](mutation.md)) — a changed brain is a new
-     genotype.
+     [genotype](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.").
    - **Whom the child joins.** For each candidate — the parent itself
      included — a yes-or-no decision: join the child to it or not. The
-     connections are made at once.
+     [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") are made at once.
    - **Which connections to hand over.** For each neighbour *v* of the
      parent, a yes-or-no decision: give the connection {*u*, *v*} to the
      child. These are noted, not yet done.
@@ -187,7 +187,7 @@ So after every phase Σ τ(*u*) = *T*.
 
 Once a world has settled ([A world's life](a-worlds-life.md)), how many agents
 does one iteration add and remove? Here is the average over iterations 500
-to 2,999 of the 26 baseline worlds that lived that long, per hundred agents
+to 2,999 of the 26 [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") worlds that lived that long, per hundred agents
 alive at the start of the phase:
 
 <!-- figure iteration/flows -->
@@ -233,6 +233,6 @@ world stay; their brains are replaced all the time.
 
 ← [The world: tokens, agents and a network](the-world.md) · [How the simulation works](../README.md#how-the-simulation-works) · [The brain](the-brain.md) →
 
-> [!info]- Pages that link here (31)
-> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [The world: tokens, agents and a network](the-world.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [The share function f(a, b)](share-function.md) · [A yes-or-no decision](binary-decision.md) · [Splitting tokens into whole numbers](largest-remainder.md) · [What a brain says](brain-outputs.md) · [How a coalition takes a node](revolution.md) · [The first hundred iterations](the-first-hundred-iterations.md) · [Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md) · [A world that cannot break](a-world-that-cannot-break.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How agents have children](how-agents-have-children.md) · [Births and the four ways to die](births-and-deaths.md) · [Reproduction statistics](reproduction-statistics.md) · [Gains and losses](gains-and-losses.md) · [How the game is played](how-the-game-is-played.md) · [Staking at home, and keeping one's node](home-stake.md) · [Token flow](token-flow.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [How the network grows](how-the-network-grows.md) · [How a world breaks](how-a-world-breaks.md) · [Core, trees and leaves](core-trees-leaves.md) · [Cut risk](cut-risk.md) · [Physical inspiration](physical-inspiration.md) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) · [Do the brains matter?](do-the-brains-matter.md) · [How a signal fades through layers](vanishing-signal.md) · [Help](help.md)
+> [!info]- Pages that link here (38)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [The world: tokens, agents and a network](the-world.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [The share function f(a, b)](share-function.md) · [A yes-or-no decision](binary-decision.md) · [Splitting tokens into whole numbers](largest-remainder.md) · [What a brain says](brain-outputs.md) · [How a coalition takes a node](revolution.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [The first hundred iterations](the-first-hundred-iterations.md) · [Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md) · [A world that cannot break](a-world-that-cannot-break.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How agents have children](how-agents-have-children.md) · [Births and the four ways to die](births-and-deaths.md) · [The estate of the dead](estate.md) · [Reproduction statistics](reproduction-statistics.md) · [Gains and losses](gains-and-losses.md) · [How the game is played](how-the-game-is-played.md) · [The even split](even-split.md) · [Staking at home, and keeping one's node](home-stake.md) · [Token flow](token-flow.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [How the network grows](how-the-network-grows.md) · [How a world breaks](how-a-world-breaks.md) · [Core, trees and leaves](core-trees-leaves.md) · [Cut risk](cut-risk.md) · [Physical inspiration](physical-inspiration.md) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) · [Do the brains matter?](do-the-brains-matter.md) · [How a signal fades through layers](vanishing-signal.md) · [Eras and contests: does a world keep getting better?](eras-and-contests.md) · [Help](help.md) · [The health bar](health-bar.md) · [The lab, the engine and pilots](the-lab.md)
 <!-- /turns -->

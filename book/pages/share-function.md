@@ -1,7 +1,7 @@
 # The share function f(a, b)
 
 Many decisions in Graph of Life come out of a brain as **two numbers**, and
-must be turned into **one share** between 0 and 1: how much of my tokens to
+must be turned into **one share** between 0 and 1: how much of my [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") to
 give my child, how much of a stake to mark revolutionary, how likely I am to
 say yes. One function does it everywhere.
 
@@ -40,9 +40,9 @@ is one half.
 - The share is exactly 0 or exactly 1 whenever one of the two numbers is
   zero or negative and the other positive, and exactly ½ whenever both are.
   A brain can therefore say "all", "nothing" or "half" outright — and random
-  brains do: in the first reproduction phase of the 30 baseline worlds of
+  brains do: in the first reproduction phase of the 30 [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") worlds of
   10,000 tokens, of
-  the 2,241 founders that had a child, 33% gave it every token they had (and
+  the 2,241 [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.") that had a child, 33% gave it every token they had (and
   died for it, holding none), and another 33% gave exactly half
   ([The brain](the-brain.md)).
 
@@ -51,7 +51,7 @@ is one half.
 - **The child's tokens.** A parent with τ tokens gives its child
   ⌊*f*(*ā*, *b̄*) · τ⌋, where *ā* and *b̄* are its two reproduction outputs
   averaged over all its candidates ([One iteration, step by step](one-iteration.md)).
-- **The revolutionary part of a stake.** Of *a* tokens staked on a node,
+- **The revolutionary part of a stake.** Of *a* tokens staked on a [node](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions."),
   ⌊*f* · *a*⌋ are marked revolutionary ([How a coalition takes a node](revolution.md)).
 - **A probability.** A yes-or-no decision read as a probability says yes
   with probability *f*(*y*, *n*) ([A yes-or-no decision](binary-decision.md)).
@@ -63,6 +63,6 @@ In the code it is `_share_of_first(a, b)` in `GraphOfLifeSimple.py`.
 
 ← [Seeds and the random stream](random-numbers.md) · [How the simulation works](../README.md#how-the-simulation-works) · [A yes-or-no decision](binary-decision.md) →
 
-> [!info]- Pages that link here (8)
-> [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [A yes-or-no decision](binary-decision.md) · [What a brain says](brain-outputs.md) · [How a coalition takes a node](revolution.md) · [How agents have children](how-agents-have-children.md) · [What the brains are like](what-the-brains-are-like.md)
+> [!info]- Pages that link here (9)
+> [Glossary](glossary.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [A yes-or-no decision](binary-decision.md) · [What a brain says](brain-outputs.md) · [How a coalition takes a node](revolution.md) · [How agents have children](how-agents-have-children.md) · [What the brains are like](what-the-brains-are-like.md)
 <!-- /turns -->

@@ -1,7 +1,7 @@
 # Core, trees and leaves
 
 Every connected network can be cut into two kinds of part: a **core**, where
-every agent lies on a loop or on a path between loops, and **trees** that hang
+every [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") lies on a [loop](loops.md "A path through the network that comes back to where it started without using a connection twice.") or on a path between loops, and **trees** that hang
 off it. This note says how the cut is made and why it matters for Graph of
 Life.
 
@@ -9,9 +9,9 @@ Life.
 
 Take the network and repeat:
 
-> remove every agent that has one connection or none,
+> remove every agent that has one [connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") or none,
 
-until no such agent is left. Removing a leaf can make its neighbour a leaf,
+until no such agent is left. Removing a leaf can make its [neighbour](the-world.md#the-network "An agent joined to another by a connection.") a leaf,
 so the peeling goes on until it stops by itself. What is left is the
 **2-core**: the largest part of the network in which every agent has at least
 two connections *within that part*. It can be empty (a tree peels away
@@ -46,7 +46,7 @@ leaves = {d, h, i}; tree = {g}.
 
 ## Why it matters here
 
-In the game, every connection that carries no tokens is cut
+In the game, every connection that carries no [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") is cut
 ([One iteration, step by step](one-iteration.md)). Cutting a connection on a
 loop never disconnects anything — there is always another way round the
 loop. Every other connection is a [bridge](bridges.md): one of a tree cuts
@@ -55,7 +55,7 @@ cuts the core itself in two. The cleanup then removes whatever is no longer
 joined to the largest piece. So a single cut can lose any tree whole — and,
 through a bridge of the core, part of the core too.
 
-In a settled baseline world of 100,000 tokens about 57% of agents are in the
+In a settled [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") world of 100,000 tokens about 57% of agents are in the
 core, 35% are leaves and the rest in trees; at 10,000 tokens, 54% and 36%
 ([What shape does the network take?](what-shape-does-the-network-take.md),
 [The core of a world](the-core-of-a-world.md)).
@@ -87,7 +87,7 @@ core number 1. A network in which many agents have high core numbers is
 held together by many overlapping loops, not by single rings.
 
 The viewer records only the share of agents in the 2-core (`coreShare`);
-the deeper cores, the trees and the dimension of the core are measured in
+the deeper cores, the trees and the [dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") of the core are measured in
 [The core of a world](the-core-of-a-world.md).
 
 <!-- turns -->
@@ -95,6 +95,6 @@ the deeper cores, the trees and the dimension of the core are measured in
 
 ← [Path length](path-length.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Bridges](bridges.md) →
 
-> [!info]- Pages that link here (11)
-> [The ideas this builds on](the-ideas-this-builds-on.md) · [Thirty worlds](thirty-worlds.md) · [Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [The core of a world](the-core-of-a-world.md) · [Bridges](bridges.md) · [Loops](loops.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) · [What a run records](frames-and-stats.md)
+> [!info]- Pages that link here (15)
+> [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Thirty worlds](thirty-worlds.md) · [Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [The core of a world](the-core-of-a-world.md) · [Stars and hubs](stars-and-hubs.md) · [Bridges](bridges.md) · [Loops](loops.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) · [The health bar](health-bar.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

@@ -7,10 +7,10 @@ pictures in 1932 — shows it as stacked layers.
 ## How the notebook draws one
 
 1. **Choose the lines.** Fix a moment *t*₀ and a set of ancestors: the 100
-   founders at iteration 0, or every genotype alive after the game of some
+   [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.") at [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") 0, or every genotype alive after the [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") of some
    iteration *t*₀. Each ancestor starts a **line**: itself and every genotype
    descended from it ([Genotypes and the family tree](genotype.md)).
-2. **Count.** After every later game, follow each living agent's genotype
+2. **Count.** After every later game, follow each living [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.")'s genotype
    up the family tree until one of the chosen ancestors is reached, and count
    the agents in each line. Divide by the number of living agents: each
    line's **share** of the living. The shares add up to 1.
@@ -28,14 +28,14 @@ pictures in 1932 — shows it as stacked layers.
   that one ancestor: the line has **swept** the world.
 
 A line spreads in two ways in Graph of Life: by births, and — far more often
-— by winning nodes in the game, which copies its brain onto the conquered
+— by winning nodes in the game, which copies its [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") onto the conquered
 node ([How the game is played](how-the-game-is-played.md)). A Muller plot
 does not tell them apart.
 
 ## In this notebook
 
 - [The first hundred iterations](the-first-hundred-iterations.md): the lines of
-  the 100 founders in the first 300 iterations of the world with seed 1.
+  the 100 founders in the first 300 iterations of the world with [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1.
 - [Genotypes and lineages](genotypes-and-lineages.md): the families of
   the genotypes alive at a later moment, in two worlds.
 
@@ -46,6 +46,6 @@ does not tell them apart.
 
 **Also about:** [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are).
 
-> [!info]- Pages that link here (3)
-> [The ideas this builds on](the-ideas-this-builds-on.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [Genotypes and the family tree](genotype.md)
+> [!info]- Pages that link here (4)
+> [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [Genotypes and the family tree](genotype.md)
 <!-- /turns -->

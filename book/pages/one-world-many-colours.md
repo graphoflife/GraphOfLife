@@ -1,12 +1,12 @@
 # One world, many colours
 
 Statistics average. A picture does not: it shows **where** things are — which
-agents are rich, which are old, which belong together. The viewer draws a
+[agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") are rich, which are old, which belong together. The viewer draws a
 world as dots and lines and can colour them by any quantity it measures
 ([What the viewer can colour by](viewer-colours.md)). This page
-takes one world, the world of seed 1 after its last game, draws a piece of
-it once, and colours that one drawing six ways, then its connections by the
-tokens that crossed them. Each picture is read for what it shows, and for the questions
+takes one world, the world of [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1 after its last [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."), draws a piece of
+it once, and colours that one drawing six ways, then its [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") by the
+[tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") that crossed them. Each picture is read for what it shows, and for the questions
 it raises.
 
 > [!question] Questions of this page
@@ -87,7 +87,7 @@ that it can be made again; the viewer does the same thing live, in three
 dimensions.
 
 Reading such a drawing needs one rule: **only closeness means anything.**
-Agents joined to each other, or to the same neighbours, end up close; a tight
+Agents joined to each other, or to the same [neighbours](the-world.md#the-network "An agent joined to another by a connection."), end up close; a tight
 group of mutual connections becomes a clump; a chain becomes an arm. Left and
 right, up and down mean nothing — rotate the picture and it says the same.
 
@@ -121,22 +121,22 @@ same places in every picture. What each colouring shows:
   and on arms. No region holds the wealth. The richest agent drawn holds 1,487
   tokens.
 - **Age.** Old and young are mixed, but not at random: here and there a
-  clump of agents is old together — up to 806 iterations — beside a clump of
+  clump of agents is old together — up to 806 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") — beside a clump of
   young ones. That is what [Like next to like](like-next-to-like.md) measured:
   ages are alike over two or three steps, as cohorts that arrived and live
   together. (At 10,000 tokens the oldest sat far out on the arms of the
-  drawing, and the clumps around the hubs were younger; one picture is not a
+  drawing, and the clumps around the [hubs](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.") were younger; one picture is not a
   proof either way.)
 - **Change in the last game.** Almost everything is dark: most agents ended the
   game with what they had or close to it ([Gains and losses](gains-and-losses.md)).
   The few bright dots are the big winners and losers of the game.
-- **Token curvature before the game.** Blue dots are richer than their
+- **[Token curvature](token-curvature.md "How much richer an agent's neighbourhood is than the agent itself.") before the game.** Blue dots are richer than their
   neighbourhood (hills), red dots poorer (valleys). The hubs are blue, and the
   clump around the largest hub is red: every agent there is poorer than its
   rich neighbour. The landscape of wealth is a set of peaks with valleys
   around them — and tokens flow downhill, from the peaks into the valleys
   ([Gains and losses](gains-and-losses.md)).
-- **Families.** Each agent is coloured by the genotype, among those alive 100
+- **Families.** Each agent is coloured by the [genotype](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was."), among those alive 100
   iterations earlier, from which its own genotype descends
   ([Families](families.md)). The seven largest families of the whole
   world hold 344, 333, 314, 290, 285, 245 and 244 agents — 2,055 of 14,870;
@@ -146,7 +146,7 @@ same places in every picture. What each colouring shows:
   belongs to many smaller families. A family is a region — a small one in a
   large world, where many more lines live side by side
   ([Worlds of 100,000 tokens](worlds-of-100000-tokens.md)).
-- **Loops.** The clumps around hubs carry the loops — up to 1,012 of the
+- **[Loops](loops.md "A path through the network that comes back to where it started without using a connection twice.").** The clumps around hubs carry the loops — up to 1,012 of the
   world's 11,297 independent loops pass through one agent — and the arms carry
   none ([The geometry of a world](the-geometry-of-a-world.md)).
 
@@ -184,7 +184,7 @@ Five cautions, which apply to every picture the viewer draws:
 
 - **The layout is one of many.** A different seed gives a different drawing of
   the same network. Clumps and arms are real; their places are not.
-- **Colours are relative to the frame.** A colour scale runs from the frame's
+- **Colours are relative to the [frame](frames-and-stats.md "A whole world as a run records it after one phase: every agent, its tokens and connections.").** A colour scale runs from the frame's
   smallest value to its largest (or is centred on zero for signed quantities),
   so the same colour can mean different values in different frames. Read the
   legend.
@@ -198,7 +198,7 @@ Five cautions, which apply to every picture the viewer draws:
 
 ## What this means
 
-- **Families live together.** Descent is regional: a line of brains holds a
+- **Families live together.** Descent is regional: a line of [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") holds a
   part of the world, not scattered agents. Spatial structure like this is what
   kin selection and network reciprocity need ([Do agents cooperate?](do-agents-cooperate.md)
   asks whether it is used).

@@ -1,8 +1,8 @@
 # Every simulation: what was run, and what was measured
 
-This appendix lists every world the notebook has made: the lab's experiments,
+This appendix lists every world the notebook has made: the [lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s experiments,
 which were planned before they ran and are judged against a thesis, and the
-pilot batches, smaller sets of worlds that try an idea quickly. For each it
+[pilot](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") batches, smaller sets of worlds that try an idea quickly. For each it
 gives the settings, how many worlds, how far they ran, the page that reports
 them, and which measures have been taken on them.
 
@@ -14,9 +14,9 @@ got; run that command again and the tables catch up.
 
 ## The two rule sets
 
-Every world starts from one of two sets of rules. **B1** is the algorithm
-exactly as a new run is offered it; the study of the baseline and the experiments that change one
-setting at a time read it. **B2** is the world built for open-ended evolution, built so that its network cannot break apart
+Every world starts from one of two sets of rules. **[B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.")** is the algorithm
+exactly as a new run is offered it; the study of the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") and the experiments that change one
+setting at a time read it. **[B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.")** is the world built for [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau."), built so that its network cannot break apart
 ([A world that cannot break](a-world-that-cannot-break.md)). They differ in these settings,
 and in no other:
 
@@ -44,7 +44,7 @@ Every other setting, and what each one means, is in the note
 ## The lab's experiments
 
 An experiment of the lab is a plan written before any of its runs existed: a
-question, a thesis, the conditions, the seeds and how far to run. The runs are
+question, a thesis, the conditions, the [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") and how far to run. The runs are
 made with `python3 gol_lab.py run E…` or ▶ in the Research Notebook tab; every one of them
 writes its settings and engine version beside its record. Several experiments
 answer their questions from the runs of another (Experiments 3 to 6 read
@@ -75,7 +75,7 @@ Experiment 2's).
 | E21 | Five more seeds for the rules that held | B2 | *mixed at birth* (mix_at_birth = on); *mixed at birth, fast brain change* (mix_at_birth = on, mutation_probability = 0.8); *mixed at birth, no random inputs* (mix_at_birth = on, random_input_amount = 0); *mixed at birth, no revolutions* (mix_at_birth = on, allow_revolutions = off) | 3–7 | 10,000 | 10,000 | 20 | [Five more seeds for the rules that held](five-more-seeds-for-the-rules-that-held.md) |
 <!-- /table -->
 
-Experiment 11 — one world of 204,800 tokens for 100,000 iterations
+Experiment 11 — one world of 204,800 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") for 100,000 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.")
 ([A hundred thousand iterations](a-hundred-thousand-iterations.md)) — is planned and has not
 run. Experiment 1's runs are thirty iterations long: they test that a run can
 be repeated exactly.
@@ -84,7 +84,7 @@ be repeated exactly.
 
 A pilot world is run by `research/oee/pilots/run.py` rather than by the lab:
 quicker to set up, without a thesis written in advance, usually two seeds of
-each condition. Since batch S, pilots play the engine's own game
+each condition. Since batch S, pilots play the engine's own [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.")
 (`--proto engine=true`), so a pilot with a lab world's settings and seed *is*
 that lab world, game for game. The earlier batches (A, AL, N) ran in the
 prototype's own code. What each batch asked:
@@ -366,13 +366,13 @@ worlds of that experiment or batch the measure has been taken on:
 - **the record of every game** — the statistics every run keeps, game by game
   (a lab run's `stats.jsonl`, a pilot's `series.jsonl`;
   [What a run records](frames-and-stats.md));
-- **lifetime contests (T = 100)** — the brains of a later moment against those
-  of an earlier one, for an agent's lifetime
+- **lifetime contests (T = 100)** — the [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") of a later moment against those
+  of an earlier one, for an [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.")'s [lifetime](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death.")
   ([Why evolution stops](why-evolution-stops.md#would-we-notice-if-it-went-on));
 - **games recorded and read again** — takeover chains, help, flows that go
   round ([Gliders, and who helps whom](gliders-and-who-helps-whom.md)) and, where there are
   gifts, who gives to whom;
-- **flow modules** — the groups tokens stay in
+- **[flow modules](map-equation.md "A group of agents that a token, following the flow, tends to stay inside.")** — the groups tokens stay in
   ([Flow modules: the groups tokens stay in](flow-modules.md));
 - **how different the agents are** — every brain in the same situations
   ([How different are the agents?](how-different-are-the-agents.md));
@@ -427,8 +427,8 @@ worlds of that experiment or batch the measure has been taken on:
 <!-- /table -->
 
 Older yardsticks are not counted here: the contests of 20 iterations that built B2 (the lab's Experiments 12 to 16 and the pilot batches of
-that time), the health bar of [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)
-(every world from Experiment 12 on), and the correlations among agents of
+that time), the [health bar](health-bar.md "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.") of [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)
+(every world from Experiment 12 on), and the [correlations](correlation.md "Whether two quantities go up and down together, from −1 to 1.") among agents of
 [What goes with what](what-goes-with-what.md) (ten B1 and ten B2 worlds, and any run
 in the Research tab).
 
@@ -437,6 +437,6 @@ in the Research tab).
 
 ← [What goes with what](what-goes-with-what.md) · [Methods and statistics](../README.md#methods-and-statistics) · [What a run records](frames-and-stats.md) →
 
-> [!info]- Pages that link here (1)
-> [Healthy and rich](healthy-and-rich.md)
+> [!info]- Pages that link here (3)
+> [B1 and B2: the two baselines](b1-and-b2.md) · [Healthy and rich](healthy-and-rich.md) · [The lab, the engine and pilots](the-lab.md)
 <!-- /turns -->

@@ -13,18 +13,18 @@ will eventually have to face:
 
 - **Evolutionary activity** (Bedau and Packard 1992; Bedau, Snyder, Brown and
   Packard 1997; Bedau, Snyder and Packard 1998). Give every component — a
-  gene, a genotype — a counter that grows while it is present and in use, and
+  gene, a [genotype](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.") — a counter that grows while it is present and in use, and
   watch three numbers: how many components there are, how much *new*
   activity appears, and how much activity accumulates. Systems fall into
   three classes: no adaptive activity; unbounded new activity but bounded
   diversity; and both unbounded, which is what the fossil record shows. The
   lasting lesson is the **neutral shadow**: activity counts only above what an
   identical system without adaptation produces. [Do the brains matter?](do-the-brains-matter.md) builds a shadow of
-  this kind for lineages, and finds it hard.
+  this kind for [lineages](families.md "A line of descent: the agents whose genotypes go back to one ancestor."), and finds it hard.
 - **MODES** (Dolson, Vostinar, Wiser and Ofria 2019) splits open-endedness
   into four measurable kinds of growth — change, novelty, complexity and
   ecology — and adds a **persistence filter**: count a component only once it
-  has survived for a while, or random mutation will look like novelty. In
+  has survived for a while, or random [mutation](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") will look like novelty. In
   this world, where a genotype typically lasts two iterations ([Genotypes and lineages](genotypes-and-lineages.md)),
   that filter decides almost everything.
 - **Three kinds of open-endedness** (Taylor 2019): *exploratory* — new
@@ -37,7 +37,7 @@ will eventually have to face:
   opportunities to meet it; individuals must decide for themselves how they
   interact; and the representation must not limit how complex an individual
   can become. Graph of Life meets the first (a child costs at least one token)
-  and the third more fully than most systems (every action is a brain output);
+  and the third more fully than most systems (every action is a [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") output);
   the second only partly; and the fourth not at all, since a brain's size is
   fixed.
 - **Unbounded evolution as a property of dynamical systems** (Adams, Zenil,
@@ -87,7 +87,7 @@ fought over by neighbours is such a setting.
 
 > [!info] Added later: a game with an answer
 > Here the game has not kept the population moving. Played against the
-> brains of earlier eras, the baseline's brains stop improving within their
+> brains of earlier [eras](eras-and-contests.md "Brains of a world at two moments, its eras, played against each other: do the later ones win?"), the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.")'s brains stop improving within their
 > first hundred iterations, and later eras neither beat the ones before them
 > nor run in place: they tie
 > ([How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)).
@@ -95,7 +95,7 @@ fought over by neighbours is such a setting.
 > game has a mixed-strategy answer — be unpredictable — and evolution finds
 > it quickly, using the brains' random inputs as dice. Experiment 16 found
 > that evolution does stop in a world that cannot break, but the reason did
-> not survive the tests that followed. Random founder brains already roll
+> not survive the tests that followed. Random [founder](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.") brains already roll
 > those dice, and a strategy written by hand took half of an evolved world
 > ([Strategies written by hand](strategies-written-by-hand.md)). The game is not solved;
 > evolution stops short of better play that needs several agents acting
@@ -129,7 +129,7 @@ fought over by neighbours is such a setting.
   individual at a time is copied and one replaced, at random. Even with no
   differences between them, one lineage eventually takes over.
 - **The coalescent** (Kingman 1982): followed backwards, the lineages of the
-  living merge, two by two, until all meet in one **common ancestor**. In a
+  living merge, two by two, until all meet in one **[common ancestor](common-ancestor.md "The genotype every living agent descends from, and how far back it lies.")**. In a
   population of fixed size *N* replaced by chance alone, that ancestor lived
   a number of generations back proportional to *N*. [Genotypes and lineages](genotypes-and-lineages.md) finds the
   common ancestor of each world's living agents, and [Do the brains matter?](do-the-brains-matter.md) compares its
@@ -145,13 +145,13 @@ fought over by neighbours is such a setting.
 - **Inequality**: the **Lorenz curve** (Lorenz 1905) and the **Gini
   coefficient** (Gini 1912): [Where do the tokens go?](where-do-the-tokens-go.md) and
   [the note](gini-coefficient.md).
-- **Lifetimes with censoring**: the Kaplan–Meier estimate (Kaplan and Meier
+- **[Lifetimes](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death.") with censoring**: the Kaplan–Meier estimate (Kaplan and Meier
   1958): [Survival curves](kaplan-meier.md).
-- **Intervals by resampling**: the bootstrap (Efron 1979). **Intervals for
-  proportions**: Wilson (1927). **Correlations of a series with itself**, and
+- **Intervals by resampling**: the [bootstrap](bootstrap.md "How sure a number is, found by redrawing the worlds it came from many times.") (Efron 1979). **Intervals for
+  proportions**: Wilson (1927). **[Correlations](correlation.md "Whether two quantities go up and down together, from −1 to 1.") of a series with itself**, and
   the bias of measuring them against the series' own mean: Bartlett (1946),
   Marriott and Pope (1954), Kendall (1954) — see [Autocorrelation](autocorrelation.md).
-- **Power laws**, and why a straight stretch on log–log axes is weak evidence
+- **[Power laws](power-law-fit.md "A quantity whose frequency falls as a power of its size: few huge values, many small ones.")**, and why a straight stretch on log–log axes is weak evidence
   of one: Clauset, Shalizi and Newman (2009); see [Logarithmic axes](logarithmic-axes.md).
 - **Testing by shuffling**: the permutation test goes back to Fisher (1935);
   see [Permutation tests](permutation-test.md).
@@ -169,7 +169,7 @@ fought over by neighbours is such a setting.
 
 ## References
 
-- Adams, A., Zenil, H., Davies, P. C. W. and Walker, S. I. (2017). Formal definitions of unbounded evolution and innovation reveal universal mechanisms for open-ended evolution in dynamical systems. *Scientific Reports* 7, 997.
+- Adams, A., Zenil, H., Davies, P. C. W. and Walker, S. I. (2017). Formal definitions of unbounded evolution and innovation reveal universal mechanisms for [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.") in dynamical systems. *Scientific Reports* 7, 997.
 - Bartlett, M. S. (1946). On the theoretical specification and sampling properties of autocorrelated time-series. *Supplement to the Journal of the Royal Statistical Society* 8(1), 27–41.
 - Bedau, M. A. and Packard, N. H. (1992). Measurement of evolutionary activity, teleology, and life. In *Artificial Life II*, 431–461. Addison-Wesley.
 - Bedau, M. A., Snyder, E., Brown, C. T. and Packard, N. H. (1997). A comparison of evolutionary activity in artificial evolving systems and in the biosphere. In *Proceedings of the Fourth European Conference on Artificial Life*, 125–134. MIT Press.
@@ -215,7 +215,7 @@ fought over by neighbours is such a setting.
 <!-- turns -->
 ---
 
-← [What this notebook is about](what-this-notebook-is-about.md) · [Start here](../README.md#start-here)
+← [How this notebook is written](how-this-notebook-is-written.md) · [Start here](../README.md#start-here)
 
 **Also about:** [Does evolution keep going?](../README.md#does-evolution-keep-going).
 

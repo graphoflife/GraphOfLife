@@ -1,28 +1,28 @@
 # Where tokens go
 
 > [!question] Questions of this page
-> - Every game, every token is staked somewhere. Where does it go, and does
+> - Every [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."), every [token](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") is staked somewhere. Where does it go, and does
 >   anything come back?
 > - What do the notebook's measures of flow — the budget of a game, the links,
->   the loops, the circulation, the groups, the estate of the dead — say
+>   the [loops](loops.md "A path through the network that comes back to where it started without using a connection twice."), the [circulation](circulation.md "The part of a flow that goes round in loops, as against the part that runs from sources to sinks."), the groups, the [estate](estate.md "The tokens a dead agent leaves, and who gets them.") of the dead — say
 >   together?
 
 Seven pages measured how tokens move, each with its own tool. This page
 puts them side by side. Most of what they found is the arithmetic of one rule
-— every agent splits its tokens over its node and its neighbours' — played out
-on a network; what the brains add on top is small, and the notebook can say where.
+— every [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") splits its tokens over its node and its [neighbours](the-world.md#the-network "An agent joined to another by a connection.")' — played out
+on a network; what the [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") add on top is small, and the notebook can say where.
 
 ## The budget of a game
 
 Every token is staked in every game: on the agent's own node, on a neighbour
-that stakes back (matched), or one way. In a settled world of B1, **30% of the
+that stakes back (matched), or one way. In a settled world of [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it."), **30% of the
 tokens stay home, 51% are matched and 20% go one way**, at 10,000 tokens and
 at 100,000 alike ([Where the tokens flow](where-the-tokens-flow.md#the-budget-of-a-game)).
 Nine stakes in ten are returned — but that is what breadth alone gives, since
 agents stake on 81% to 96% of the agents they could stake on
 ([Where the tokens flow](where-the-tokens-flow.md#stakes-that-are-returned)).
 
-The brains come close to the **even split**: each agent's tokens shared
+The brains come close to the **[even split](even-split.md "What the rules do when a brain scores no candidate above zero: the stake is spread evenly.")**: each agent's tokens shared
 equally over its node and its links. Agents with one link keep 58% at home
 where an even split gives 50%, agents with ten to forty-nine links 10% where
 it gives 7%, and nearly all the difference is the rounding of tokens into
@@ -40,11 +40,11 @@ that carries nothing is cut, every one of 1,650,222 of them in B1's worlds
 An even split on a network is a random walk, and a random walk on a network
 comes to rest in proportion to each node's links: **an agent's share of the
 tokens settles near (links + 1) / Σ(links + 1)**. B1's games follow it with a
-slope of 0.94 in the worlds without a giant star
+slope of 0.94 in the worlds without a giant [star](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.")
 ([Where the tokens flow](where-the-tokens-flow.md#the-game-as-a-random-walk)). So in
 B1 wealth is a matter of place: tokens and links go together (a rank
-correlation of +0.56), a rich agent is still rich ten games later (+0.78), and
-the richest tenth holds about two fifths of the tokens (39% to 44%)
+[correlation](correlation.md "Whether two quantities go up and down together, from −1 to 1.") of +0.56), a rich agent is still rich ten games later (+0.78), and
+the [richest tenth](richest-tenth.md "The share of all tokens held by the richest tenth of the agents.") holds about two fifths of the tokens (39% to 44%)
 ([Where do the tokens go?](where-do-the-tokens-go.md#rich-agents-are-connected-agents),
 [What goes with what](what-goes-with-what.md#the-agents)). The place is rich, not its
 holder: the more links a node has, the more often its holder loses it — an
@@ -52,7 +52,7 @@ agent with one link keeps its node in 74% of games, one with fifty or more in
 2%, and a hub of a hundred links changes hands in 98 games of 100
 ([Where the tokens flow](where-the-tokens-flow.md#who-keeps-their-node)).
 
-In B2 wealth has come loose from place: tokens and links go *against* each
+In [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.") wealth has come loose from place: tokens and links go *against* each
 other (−0.18), and wealth sticks half as well (+0.41 over ten games), because
 B2's agents keep their nodes — 88% to 98% of the time — and tokens move
 through stakes that fail instead
@@ -65,7 +65,7 @@ neighbours loses, on average, and one that holds less gains — at about a
 fifth of the pace a plain even split would give (a slope of 0.20 in B2 and
 0.21 in B1, where the even split would be 1)
 ([What goes with what](what-goes-with-what.md#token-curvature-and-token-change)). The
-two baselines run downhill differently
+two [baselines](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") run downhill differently
 ([Gliders, and who helps whom](gliders-and-who-helps-whom.md#chains-of-takeovers)):
 
 - **B1 through gliders.** A rich agent takes a neighbour's node and moves on,
@@ -80,7 +80,7 @@ two baselines run downhill differently
 ## Round and round?
 
 Within one game almost nothing goes round. After the returned stakes are
-cancelled, a greedy search finds 0.3% of the net flow in loops, and the
+cancelled, a greedy search finds 0.3% of the [net flow](token-flow.md "The tokens a game moves along each connection, from the agent who stakes to the node staked on.") in loops, and the
 conservation of tokens allows at most 16%: the net flow of a game runs downhill
 ([Where the tokens flow](where-the-tokens-flow.md#do-tokens-go-round),
 [What crosses a connection](what-crosses-a-connection.md#the-flow-in-round-figures)).
@@ -124,7 +124,7 @@ in every game, handed out one token at a time, and it levels the world: over
 a world's life, the estate goes with falling inequality
 ([Where do the tokens go?](where-do-the-tokens-go.md#the-tokens-of-the-dead),
 [What goes with what](what-goes-with-what.md#a-whole-world-over-time)). In B2 the
-pool is small — about seventy tokens an iteration among 3,600 agents — and
+pool is small — about seventy tokens an [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") among 3,600 agents — and
 where it goes matters more than how much it is: **an estate that pays for
 births fills a world**, to half as many agents again and poorer
 ([Who inherits?](who-inherits.md),
@@ -164,6 +164,6 @@ births fills a world**, to half as many agents again and poorer
 
 [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens) · [How the game is played](how-the-game-is-played.md) →
 
-> [!info]- Pages that link here (1)
-> [Lightning in every world](lightning-in-every-world.md)
+> [!info]- Pages that link here (2)
+> [The estate of the dead](estate.md) · [Lightning in every world](lightning-in-every-world.md)
 <!-- /turns -->

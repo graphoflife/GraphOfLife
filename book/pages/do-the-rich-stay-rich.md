@@ -1,9 +1,9 @@
 # Do the rich stay rich?
 
-[Where do the tokens go?](where-do-the-tokens-go.md) found the tokens of a world held
-unequally, with a Gini coefficient that hardly moves over a world's settled
-life. But an unchanging inequality can hide two very different worlds. In
-one, the same agents are rich game after game. In the other, wealth is as
+[Where do the tokens go?](where-do-the-tokens-go.md) found the [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") of a world held
+unequally, with a [Gini coefficient](gini-coefficient.md "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") that hardly moves over a world's [settled
+life](settled-life.md "A world from iteration 500 to its end, after its youth, where it is measured."). But an unchanging inequality can hide two very different worlds. In
+one, the same [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") are rich [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") after game. In the other, wealth is as
 unequal at every moment, but who holds it keeps changing. This page
 follows single agents through time to tell which world Graph of Life is.
 
@@ -112,9 +112,9 @@ that forgets a fixed fraction every game would have ρ falling like
 the worlds, instead, **ρ falls by about 0.1 every time the lag doubles**:
 0.07 from 10 to 20 games, 0.11 from 50 to 100 and 0.13 from 100 to 200.
 That is how memory fades when it is held by many things that last for very
-different times. Here the likely holders are the connections. An agent's tokens follow its number of
+different times. Here the likely holders are the [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes."). An agent's tokens follow its number of
 connections plus one ([How properties scale together](how-properties-scale-together.md)),
-and a hub's connections outlast many games, while a leaf's change all the
+and a [hub](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.")'s connections outlast many games, while a leaf's change all the
 time.
 
 ## A two-game rhythm
@@ -122,11 +122,11 @@ time.
 The left panel has a small surprise at its start. After **two** games the
 order is *closer* to the first than after one: ρ = 0.88 against 0.86. The
 richest show it too (below): 76% of the richest hundredth are still in the
-richest tenth two games later, but only 73% one game later.
+[richest tenth](richest-tenth.md "The share of all tokens held by the richest tenth of the agents.") two games later, but only 73% one game later.
 
-[Where the tokens flow](where-the-tokens-flow.md) shows that the brains move tokens
-almost as an even split would: each agent stakes the same share on itself
-and on each of its neighbours. Take a hub with *k* neighbours that have no
+[Where the tokens flow](where-the-tokens-flow.md) shows that the [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") move tokens
+almost as an [even split](even-split.md "What the rules do when a brain scores no candidate above zero: the stake is spread evenly.") would: each agent stakes the same share on itself
+and on each of its [neighbours](the-world.md#the-network "An agent joined to another by a connection."). Take a hub with *k* neighbours that have no
 other connections. The hub keeps 1/(*k* + 1) of its tokens and gives each
 leaf as much; each leaf keeps half of its tokens and gives the hub half.
 After one game,
@@ -209,7 +209,7 @@ most connections to hold it there.
 Follow the richest hundredth of a world — 36,656 agents over all the moments
 and worlds. One game later, 73% are still in the richest tenth and 4% are
 dead. Ten games later, 56% and 25%; a hundred games later, 19% and 70%. The
-survivors keep almost all they had for ten games (87% in the median), then
+survivors keep almost all they had for ten games (87% in the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.")), then
 lose it steadily: a hundred games later they hold a quarter of what they held.
 
 So the very richest **die faster** at first than agents in general: 25%
@@ -264,8 +264,8 @@ connectedness is taxed away in this manner, a little at a time.
   sign that the game, as the brains play it, is close to a random walk of
   tokens ([Where the tokens flow](where-the-tokens-flow.md)). The rich are those
   that the walk's resting state favours, not those that played well.
-- **For open-ended evolution**, this world rewards position, not strategy.
-  A lineage cannot bank an advantage as tokens for long. Wealth drains back
+- **For [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.")**, this world rewards position, not strategy.
+  A [lineage](families.md "A line of descent: the agents whose genotypes go back to one ancestor.") cannot bank an advantage as tokens for long. Wealth drains back
   towards the resting share of its connections within tens of games.
   Selection can only act on what persists: connections, and the brains that
   sit on them.
@@ -277,6 +277,6 @@ To make every figure of this page: `python3 book_figures.py rich`.
 
 ← [How even is a world?](how-even-is-a-world.md) · [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens) · [Gains and losses](gains-and-losses.md) →
 
-> [!info]- Pages that link here (7)
-> [What the baseline world is](what-the-baseline-world-is.md) · [Thirty worlds](thirty-worlds.md) · [How ages change over a world's life](how-ages-change.md) · [How the network grows](how-the-network-grows.md) · [The core of a world](the-core-of-a-world.md) · [Physical inspiration](physical-inspiration.md) · [Mobility](mobility.md)
+> [!info]- Pages that link here (8)
+> [What the baseline world is](what-the-baseline-world-is.md) · [Thirty worlds](thirty-worlds.md) · [How ages change over a world's life](how-ages-change.md) · [The even split](even-split.md) · [How the network grows](how-the-network-grows.md) · [The core of a world](the-core-of-a-world.md) · [Physical inspiration](physical-inspiration.md) · [Mobility](mobility.md)
 <!-- /turns -->

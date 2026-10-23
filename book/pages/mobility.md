@@ -1,6 +1,6 @@
 # Mobility
 
-A world can be unequal in two very different ways. In one, the same agents
+A world can be unequal in two very different ways. In one, the same [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.")
 are rich year after year. In the other, wealth is just as unequal at every
 moment, but who holds it keeps changing. The Gini coefficient
 ([The Gini coefficient](gini-coefficient.md)) cannot tell the two apart,
@@ -10,8 +10,8 @@ et al. 2014); this note gives the three measures the notebook uses.
 
 ## Rank correlation over time
 
-Take the agents alive at a moment *t* and again *k* games later. Rank them
-by their tokens at each moment, the poorest first; agents with equal tokens
+Take the agents alive at a moment *t* and again *k* [games](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") later. Rank them
+by their [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") at each moment, the poorest first; agents with equal tokens
 share the mean of their ranks. **Spearman's rank correlation** ρ is the
 ordinary correlation ([Correlation](correlation.md)) of the two lists of
 ranks:
@@ -52,7 +52,7 @@ order tends to reverse.
 ## Where it is used
 
 [Do the rich stay rich?](do-the-rich-stay-rich.md) measures all three in
-the baseline worlds.
+the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") worlds.
 
 ## References
 
@@ -69,6 +69,6 @@ the baseline worlds.
 
 **Also about:** [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens).
 
-> [!info]- Pages that link here (1)
-> [Do the rich stay rich?](do-the-rich-stay-rich.md)
+> [!info]- Pages that link here (2)
+> [Glossary](glossary.md) · [Do the rich stay rich?](do-the-rich-stay-rich.md)
 <!-- /turns -->

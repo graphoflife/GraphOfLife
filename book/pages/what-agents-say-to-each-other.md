@@ -1,11 +1,11 @@
 # What agents say to each other
 
-Every agent writes a message of 30 numbers to itself and to each of its
-neighbours, in every phase, and reads the messages written to it
+Every [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") writes a message of 30 numbers to itself and to each of its
+[neighbours](the-world.md#the-network "An agent joined to another by a connection."), in every phase, and reads the messages written to it
 ([Messages](messages.md)). Nothing in the rules reads them except
-the brains, and nothing gives the numbers a meaning. If a message says
+the [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions."), and nothing gives the numbers a meaning. If a message says
 anything, evolution made it say it. A free channel between neighbours is the
-classic setting for the evolution of signals, from Lewis's signalling games
+classic setting for the evolution of signals, from Lewis's signalling [games](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.")
 (Lewis 1969) to the evolution of meaning in populations of simple agents
 (Skyrms 2010). What do the agents of Graph of Life say?
 
@@ -16,7 +16,7 @@ classic setting for the evolution of signals, from Lewis's signalling games
 > - Do kin speak alike? Could an agent recognise its kin by what they say?
 > - How many of the 30 numbers are used?
 
-The worlds are the thirty of 100,000 tokens of [Thirty worlds](thirty-worlds.md);
+The worlds are the thirty of 100,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") of [Thirty worlds](thirty-worlds.md);
 where the thirty of 10,000 tokens this page was first written from differ,
 both are given.
 
@@ -82,10 +82,10 @@ both are given.
 
 As in [What the brains are like](what-the-brains-are-like.md), every one of the thirty
 worlds is rebuilt exactly as its last game left it. Every agent looks at its
-candidates, and its brain writes a message to each, 30 outputs squeezed by
+[candidates](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides."), and its brain writes a message to each, 30 outputs squeezed by
 tanh into −1 to 1. That gives between 32,000 and 79,000 messages per world,
-one for every connection in each direction and one from every agent to
-itself. As a control, a fresh founder's brain
+one for every [connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") in each direction and one from every agent to
+itself. As a control, a fresh [founder](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.")'s brain
 writes from exactly the same inputs.
 
 ## A name, not news
@@ -142,7 +142,7 @@ questions, one per panel:
 <!-- /figure -->
 
 **Kin speak alike.** Take the mean message of every writer, and ask how much
-of the variety between writers lies between genotypes, and how much among
+of the variety between writers lies between [genotypes](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was."), and how much among
 writers of one genotype. In every world, **all of it** (1.00) lies between
 genotypes. Two agents of one genotype write the same message, but for a
 thousandth or so. With the genotypes shuffled among the writers the share is
@@ -153,7 +153,7 @@ is one brain, and a brain that hardly sees writes the same thing whoever it
 is in. A message is the name **of a genotype**.
 
 **Few numbers are used.** Of the 30 numbers, a world's messages vary along
-only **15** independent directions in the median world (6 to 21), counted as
+only **15** independent directions in the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world (6 to 21), counted as
 a participation ratio ([How many directions a cloud of points uses](participation-ratio.md)).
 Founders' brains, independent of each other, use 30, all of them. A world's
 genotypes descend from a few lines ([Genotypes and lineages](genotypes-and-lineages.md)),
@@ -190,7 +190,7 @@ situation.
 
 Founders' messages pile up around 0, in a bell. Evolved messages are spread
 almost evenly from −0.7 to +0.7, with more numbers near the ends: 2.5% lie
-beyond ±0.9, against 0.4% for founders. Larger weights would do this. Mutation
+beyond ±0.9, against 0.4% for founders. Larger weights would do this. [Mutation](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.")
 alone leaves the weights of an evolved brain larger than a founder's
 ([What the brains are like](what-the-brains-are-like.md)), so nothing here needs
 selection to explain it. The evolved values are no more informative for
@@ -201,7 +201,7 @@ being spread wider. They are still the same for every reader.
 [Do agents cooperate?](do-agents-cooperate.md) will find that kin live side by
 side — a tenth of an agent's neighbours carry its own genotype — but are
 staked on exactly like strangers. It will note that a brain cannot see
-genotypes and could only tell kin through messages, if a lineage evolved a
+genotypes and could only tell kin through messages, if a [lineage](families.md "A line of descent: the agents whose genotypes go back to one ancestor.") evolved a
 password, a **green beard** (Hamilton 1964; Dawkins 1976).
 
 This page shows that the password exists already, without any
@@ -225,7 +225,7 @@ it needs.
 > [Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md) gave the brains
 > sight: one hidden layer of 16, a founder's gain of about 0.2. Whether
 > seeing brains use the names to tell kin from strangers has not been
-> measured yet. In the pilots for B2, groups of kin shrank over time in
+> measured yet. In the [pilots](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") for [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death."), groups of kin shrank over time in
 > every world, and kin cooperation by pooled stakes is now being piloted;
 > there are no results yet.
 
@@ -238,7 +238,7 @@ it needs.
   sent depends on something — the sender's state, the receiver, the
   situation — and what is done on receipt depends on what was sent. Neither
   holds here: messages ignore the situation, and decisions ignore the
-  messages ([What the brains are like](what-the-brains-are-like.md): setting every
+  messages ([What the brains are like](what-the-brains-are-like.md): [setting](settings.md "One number or switch of a run's rules, fixed before it starts.") every
   message to 0 changes the stakes of only 9% of agents at all).
 - **The raw material is there.** The names identify kin exactly. If brains
   could compare what they read, kin recognition, and with it Hamilton's kin

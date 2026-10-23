@@ -29,8 +29,8 @@ CRITERIA = [
      "asks": "a dimension of 2 to 4, and a typical distance at least 1.5 times its random twin's: a true "
              "space, not a folded small world"},
     {"key": "diverse", "name": "diverse",
-     "asks": "tokens, links, ages and genotypes spread at least as widely as in B2's median world, and its "
-             "agents' decisions vary at least as much (effective kinds of staking)"},
+     "asks": "tokens, links, ages and genotypes spread more widely than in B2's median world, and its "
+             "agents' decisions vary more (effective kinds of staking)"},
     {"key": "uneven", "name": "not too even",
      "asks": "a Gini of the tokens no lower than B2's least even world"},
 ]

@@ -1,6 +1,6 @@
 # How many directions a cloud of points uses
 
-A message has 30 numbers, so the messages of a world are points in a space
+A [message](messages.md "Numbers an agent writes to itself and to each neighbour every phase, which their brains read.") has 30 numbers, so the messages of a world are points in a space
 of 30 dimensions. They need not use all 30. If every message were the same
 except for one number, the messages would vary along a single direction, and
 the other 29 numbers would carry nothing. The **participation ratio** counts
@@ -26,7 +26,7 @@ $$
 - If the variance is spread equally over *m* directions and the rest have
   none, PR = *m*. For example, *m* eigenvalues of 1 give *m*²/*m* = *m*.
 - If one direction holds almost everything, PR is close to 1.
-- In between, PR is an **effective number** of directions, in the same sense
+- In between, PR is an **[effective number](effective-number.md "How many kinds there really are, when kinds are counted by how much of the population they hold.")** of directions, in the same sense
   as 2^H is an effective number of kinds ([Entropy and evenness](entropy-and-evenness.md)):
   how many equally important directions would spread the cloud as unevenly
   as it is spread.
@@ -39,7 +39,7 @@ near 28 or 29.
 ## Where it is used
 
 [What agents say to each other](what-agents-say-to-each-other.md) uses it on the
-messages agents write, as the number of the 30 message numbers a world's
+messages [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") write, as the number of the 30 message numbers a world's
 messages actually use. The measure comes from physics, where it counts over
 how many sites a wave is spread (Bell and Dean 1970), and is used in
 neuroscience for the dimension of neural activity (Gao et al. 2017).
@@ -57,6 +57,6 @@ neuroscience for the dimension of neural activity (Gao et al. 2017).
 
 ← [Between worlds and within them](between-and-within.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Survival curves (Kaplan–Meier)](kaplan-meier.md) →
 
-> [!info]- Pages that link here (2)
-> [What agents say to each other](what-agents-say-to-each-other.md) · [Every world side by side](every-world-side-by-side.md)
+> [!info]- Pages that link here (3)
+> [Glossary](glossary.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Every world side by side](every-world-side-by-side.md)
 <!-- /turns -->

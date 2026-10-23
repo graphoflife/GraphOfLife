@@ -1,7 +1,7 @@
 # A yes-or-no decision
 
 Some decisions are a plain yes or no: *should my child be joined to this
-neighbour? should I hand this connection to my child?* A brain answers each
+[neighbour](the-world.md#the-network "An agent joined to another by a connection.")? should I hand this [connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") to my child?* A [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") answers each
 with **four numbers**, and the rule below turns them into the answer.
 
 ## The four numbers
@@ -37,11 +37,11 @@ For one candidate (one column of the brain's outputs, see
 Because then the brain decides not only *what* it prefers but also *whether
 to act on its preference every time or only sometimes* — and since the mode
 outputs are part of the brain, that choice is inherited and changes over
-generations like any other. A lineage can evolve to be decisive or to be
+generations like any other. A [lineage](families.md "A line of descent: the agents whose genotypes go back to one ancestor.") can evolve to be decisive or to be
 erratic.
 
 The same idea is used for the stake: a pair of mode outputs decides whether
-an agent spreads its tokens over its candidates or puts them all on one
+an [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") spreads its [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") over its candidates or puts them all on one
 ([One iteration, step by step](one-iteration.md)).
 
 ## Where it is used
@@ -60,6 +60,6 @@ stream ([Seeds and the random stream](random-numbers.md)).
 
 ← [The share function f(a, b)](share-function.md) · [How the simulation works](../README.md#how-the-simulation-works) · [Splitting tokens into whole numbers](largest-remainder.md) →
 
-> [!info]- Pages that link here (5)
-> [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Seeds and the random stream](random-numbers.md) · [The share function f(a, b)](share-function.md) · [What a brain says](brain-outputs.md)
+> [!info]- Pages that link here (6)
+> [Glossary](glossary.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Seeds and the random stream](random-numbers.md) · [The share function f(a, b)](share-function.md) · [What a brain says](brain-outputs.md)
 <!-- /turns -->

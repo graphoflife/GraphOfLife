@@ -1,9 +1,9 @@
 # What a brain can compute
 
 > [!question] Questions of this page
-> - Could an evolved brain play the raider of [Strategies written by hand](strategies-written-by-hand.md), or only a rule
+> - Could an evolved [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") play the raider of [Strategies written by hand](strategies-written-by-hand.md), or only a rule
 >   written in Python?
-> - What can no brain of B2 compute, whatever its size?
+> - What can no brain of [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.") compute, whatever its size?
 > - What is the smallest change to the rules that would let it?
 
 ## Why ask
@@ -11,12 +11,12 @@
 [Strategies written by hand](strategies-written-by-hand.md) planted strategies written
 by hand into evolved worlds, and a plain one, the **raider**, took half or
 more of three worlds in ten from brains that evolution had shaped for 2,000
-iterations. So the game had better play than evolution found. But the
+[iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."). So the [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") had better play than evolution found. But the
 raider was a rule written in Python. It read what a brain reads and wrote
 what a brain writes, yet nothing showed that a brain could compute it.
 
 That matters for the question the author put in October 2026: are there
-strategies that are ever better, with no top, and can the agents' networks
+strategies that are ever better, with no top, and can the [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.")' networks
 play them? If a strategy is beyond every brain a world can grow, evolution
 will never find it, however long it runs. If it is within reach, evolution
 failed for another reason, the way there, and the question becomes how to
@@ -30,13 +30,13 @@ would let one.
 ## What a brain is
 
 A B2 brain is small. When an agent decides anything, it looks at its
-**candidates**, itself first and then each neighbour, and the brain gets
+**[candidates](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides.")**, itself first and then each [neighbour](the-world.md#the-network "An agent joined to another by a connection."), and the brain gets
 one column of 66 numbers for each ([What a brain sees](brain-inputs.md)).
 The column holds:
-- the agent's tokens and links, and the candidate's;
-- six quantiles of the tokens and links of the agent's neighbours, and the
+- the agent's [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") and links, and the candidate's;
+- six [quantiles](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") of the tokens and links of the agent's neighbours, and the
   same for the candidate's neighbours;
-- four messages of eight numbers each: what the agent wrote to itself, to
+- four [messages](messages.md "Numbers an agent writes to itself and to each neighbour every phase, which their brains read.") of eight numbers each: what the agent wrote to itself, to
   the candidate, what the candidate wrote to the agent, and what the
   candidate wrote to itself;
 - five random numbers.
@@ -47,7 +47,7 @@ column, feeds 19 outputs, each a weighted sum of the units
 half precision (float16), about three decimal digits. The same weights
 score every column.
 
-The engine turns the outputs into decisions:
+The [engine](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") turns the outputs into decisions:
 - **The stake.** Everything the agent may stake (70% under B2, the rest
   stays home) goes on the column with the highest stake score, or is
   spread in proportion to the scores. Which of the two is decided by a
@@ -89,7 +89,7 @@ The outputs are weighted sums of these:
 - **Child:** a share of a third when rich, nothing otherwise.
 - **Links:** yes where the column is the agent itself or a teammate.
 - **Messages:** the password, then zeros.
-- **Revolutions:** none.
+- **[Revolutions](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake."):** none.
 
 The stake score's weights keep three orders:
 - a stranger that can be taken scores above home, even if its messages
@@ -142,7 +142,7 @@ the next weakest stranger instead.
 
 **Planted in its place**, the brain does what the rule did. The test of
 [Strategies written by hand](strategies-written-by-hand.md) was run again with the hand-set brain in place of the rule, on
-the same seeds and in the same places. Neither ever mutates.
+the same [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") and in the same places. Neither ever mutates.
 
 <!-- figure computable/replays -->
 ![The rule and the brain, planted in the same places](../figures/computable/replays.svg)

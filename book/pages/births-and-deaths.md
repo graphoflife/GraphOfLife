@@ -1,12 +1,12 @@
 # Births and the four ways to die
 
-An agent comes into a world in one way and leaves it in one of four. This
+An [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") comes into a world in one way and leaves it in one of four. This
 note defines each, says how it is counted, and how counts are turned into
 **rates**.
 
 ## Birth
 
-In the reproduction phase, every agent with at least one token decides how
+In the reproduction phase, every agent with at least one [token](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") decides how
 many tokens to give a child; if that number is at least 1, a child is born
 ([One iteration, step by step](one-iteration.md)). The phase-1 row of the
 statistics counts them as `births`.
@@ -26,7 +26,7 @@ With two phases, that makes four ways:
 | | after reproduction (phase 1) | after the game (phase 2) |
 |---|---|---|
 | **starved** | a parent that gave its child every token it had | an agent on whose node nobody staked anything, not even itself |
-| **cut off** | mostly a newborn joined to nobody; also any piece the handovers cut loose | anyone whose part of the network lost its last connection to the largest piece when unused connections were cut |
+| **cut off** | mostly a newborn joined to nobody; also any piece the handovers cut loose | anyone whose part of the network lost its last [connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") to the largest piece when unused connections were cut |
 
 They are counted in each row as `starved` and `orphaned`, so the four counts
 are `starved` and `orphaned` in the phase-1 rows and in the phase-2 rows.
@@ -61,10 +61,10 @@ world's life.
 <!-- turns -->
 ---
 
-← [How agents have children](how-agents-have-children.md) · [Agents' lives: births, deaths, ages](../README.md#agents-lives-births-deaths-ages) · [Age and lifetime](age-and-lifetime.md) →
+← [How agents have children](how-agents-have-children.md) · [Agents' lives: births, deaths, ages](../README.md#agents-lives-births-deaths-ages) · [The estate of the dead](estate.md) →
 
 **Also about:** [How the simulation works](../README.md#how-the-simulation-works).
 
-> [!info]- Pages that link here (7)
-> [One iteration, step by step](one-iteration.md) · [Who dies, and why](who-dies-and-why.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [Reproduction statistics](reproduction-statistics.md) · [Do the rich stay rich?](do-the-rich-stay-rich.md) · [Tokens per agent: mean, median, extremes](tokens-per-agent.md) · [What a run records](frames-and-stats.md)
+> [!info]- Pages that link here (8)
+> [One iteration, step by step](one-iteration.md) · [Who dies, and why](who-dies-and-why.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [The estate of the dead](estate.md) · [Reproduction statistics](reproduction-statistics.md) · [Do the rich stay rich?](do-the-rich-stay-rich.md) · [Tokens per agent: mean, median, extremes](tokens-per-agent.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

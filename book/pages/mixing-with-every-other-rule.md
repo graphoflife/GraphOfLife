@@ -1,34 +1,34 @@
 # Brains mixed at birth, with every other rule
 
 > [!question] Questions of this page
-> - Mixing brains at birth made B2's worlds smaller, richer and more diverse.
+> - Mixing [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") at birth made [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.")'s worlds smaller, richer and more diverse.
 >   Does it still, whatever else the rules say?
 > - Which rules cancel it, which make it stronger — and why those?
 
 Of every rule the notebook has tried, mixing a newborn's brain from its parent's
-and a neighbour's came closest to the author's picture of a world that might
+and a [neighbour](the-world.md#the-network "An agent joined to another by a connection.")'s came closest to the author's picture of a world that might
 keep evolving ([Healthy and rich](healthy-and-rich.md)), and
 [Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md) found out why it makes a
-world rich: agents put off having children, so the world never fills up to
+world rich: [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") put off having children, so the world never fills up to
 the point where hardly anyone can afford one. The author asked for mixing to
 be tested together with the other rules. This page does that, for 23 of
 them at once.
 
 ## The worlds
 
-Batch Y: B2 at 10,000 tokens with brains mixed at birth and one other rule,
-seeds 1 and 2, 1,000 iterations, as pilot worlds. Each world is the fourth
+Batch Y: B2 at 10,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") with brains mixed at birth and one other rule,
+[seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1 and 2, 1,000 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."), as [pilot](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds. Each world is the fourth
 corner of a two-by-two whose other three already existed:
 
 | corner | the worlds |
 |---|---|
-| B2 | the lab's Experiment 16 worlds, seeds 1 and 2 |
+| B2 | the [lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s Experiment 16 worlds, seeds 1 and 2 |
 | B2 with mixing | the lab's Experiment 17 worlds, seeds 1 and 2 |
 | B2 with the other rule | the batch or lab experiment that made it: batches P, Q, R, S, T and W, Experiments 9, 15 and 16 |
 | B2 with both | batch Y |
 
 The other rules are every switch of the notebook's pilots and lab experiments
-with B2 — who inherits the estate, links that hold a token, inputs that say
+with B2 — who inherits the [estate](estate.md "The tokens a dead agent leaves, and who gets them."), links that hold a token, inputs that say
 who helped or where an agent came from, handover, no random inputs, no old
 age, children of any size, how much is kept at home, brains that grow or
 whose units hold a token, slower or faster change of brains, unused links
@@ -94,10 +94,10 @@ not show.
 > **To make it again:** `python3 book_figures.py mixcombos`.
 <!-- /figure -->
 
-Mixing raises the diversity score with nearly every rule — even with most of
+Mixing raises the [diversity score](diversity-score.md "How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes.") with nearly every rule — even with most of
 those that cancel its riches: with children of any size from 0.25 to 0.54,
 with only the last token kept from 0.43 to 0.66. Part of that is built in.
-The score counts genotypes, and every mixed birth makes a new set of weights,
+The score counts [genotypes](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was."), and every mixed birth makes a new set of weights,
 so a mixed world always has more genotypes per agent. But tokens, links and
 ages spread wider too where the world is rich.
 
@@ -111,11 +111,11 @@ sense of kin or family (0.70, 0.71), with an input saying where an agent came fr
 > ([Healthy and rich](healthy-and-rich.md#two-halves)), so that they stay put
 > as worlds are added; three figures in this paragraph moved by 0.01. The
 > figures now also hold the second seed of every rule alone that had only one
-> before (batch W's worlds with revolutions, and handover alone).
+> before (batch W's worlds with [revolutions](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake."), and handover alone).
 
 ## Healthy?
 
-Nearly every world meets six or seven marks of the health bar, as B2's and the
+Nearly every world meets six or seven marks of the [health bar](health-bar.md "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4."), as B2's and the
 mixed worlds do. The exceptions are the rules that broke the network before
 mixing came: with every unused link lapsing, four or five marks; with handover,
 three.
@@ -147,7 +147,7 @@ small mixed worlds are the ones that die out.
 
 With almost every rule, yes. In 42 of the 46 worlds the brains of iteration
 1,000 took more than half of a contested world from those of 500, over an
-agent's lifetime (the median world 69%, where B2's take 68% and those of
+agent's [lifetime](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death.") (the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world 69%, where B2's take 68% and those of
 mixing alone 84%). The steps are largest with links that hold a token (93%),
 half kept at home (91%), units that hold a token (90%), the estate to the
 poorest and brains that grow (89% each). The four worlds whose later brains
@@ -170,7 +170,7 @@ it most where the agents stay rich.
   the tokens are fixed ([Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md)), and a small mixed world is a fragile one.
   None of these combinations was played long enough to say whether it holds
   its size; Experiment 18's five worlds of mixing alone did not.
-- **Candidates.** By riches and diversity together, mixing with a faster
+- **[Candidates](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides.").** By riches and diversity together, mixing with a faster
   change of brains, with a sense of kin or of family, with an input saying who
   helped or where an agent came from, and with nodes decided by lottery are
   the batch's closest worlds to the author's picture; those that meet every

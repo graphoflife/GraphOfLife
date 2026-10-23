@@ -1,21 +1,21 @@
 # Rules in company
 
 > [!question] Questions of this page
-> - Most experiments threw the notebook's rules into B2 one at a time. What does a rule do
+> - Most experiments threw the notebook's rules into [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.") one at a time. What does a rule do
 >   when other rules are thrown with it?
 > - Which rules matter whatever their company, and which only alone?
 > - Does any combination come nearer to a world that keeps evolving?
 
 Most experiments on B2 asked what one rule does to it. In October 2026 the
-author asked for the rules in combination, and six pilot batches answered:
-four played one rule together with each of the others in turn — brains mixed
+author asked for the rules in combination, and six [pilot](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") batches answered:
+four played one rule together with each of the others in turn — [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") mixed
 at birth (batch Y, [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md)), no
-revolutions (W, [Revolutions, with every other rule](revolutions-with-every-other-rule.md)),
+[revolutions](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.") (W, [Revolutions, with every other rule](revolutions-with-every-other-rule.md)),
 handover (X, [Handover, with every other rule](handover-with-every-other-rule.md)) and gifts
 (T, [Gifts, with every other rule](gifts-with-every-other-rule.md)) — and two threw eight
-rules at once, in sixteen worlds each, on B2 and on B1 (batches U and V,
+rules at once, in sixteen worlds each, on B2 and on [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") (batches U and V,
 [Eight switches at once](eight-switches-at-once.md)). Every world is a pilot of 10,000
-tokens played for 1,000 iterations — the four batches of pairs in two seeds,
+[tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") played for 1,000 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") — the four batches of pairs in two [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world."),
 the two of eight switches in one — and every one read the same way at
 iteration 1,000. This page gathers what they say together.
 
@@ -25,10 +25,10 @@ The plainest lesson is a warning. **What a rule does alone in B2 is often not
 what it does among other rules.**
 
 - **Mixing's riches.** Alone, brains mixed at birth take a third to a half of
-  B2's agents out of poverty. Paired with one other rule they survive sixteen
+  B2's [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") out of poverty. Paired with one other rule they survive sixteen
   of 23 ([Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md)); among the sixteen worlds of batch U, with four rules on
   in most, they all but vanish — 0.07 off the share of the poor on average
-  ([Eight switches at once](eight-switches-at-once.md)). Among the companions that undo them are the estate to the
+  ([Eight switches at once](eight-switches-at-once.md)). Among the companions that undo them are the [estate](estate.md "The tokens a dead agent leaves, and who gets them.") to the
   newborns or the parents, which pays for births; handover (48 and 32 more
   poor in every hundred, [Handover, with every other rule](handover-with-every-other-rule.md)); and, a little, gifts (11 and 17,
   [Gifts, with every other rule](gifts-with-every-other-rule.md)). And one companion they need: without revolutions, mixed
@@ -38,7 +38,7 @@ what it does among other rules.**
   does ([Gifts, with every other rule](gifts-with-every-other-rule.md)).
 - **Links that hold a token** take 0.29 and 0.33 off B2's share of the poor
   alone, and 0.06 among the sixteen; **every unused link lapsing** halves its
-  fall in dimension; **no revolutions** on B1 does not do in company what it
+  fall in [dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space."); **no revolutions** on B1 does not do in company what it
   does alone.
 
 The reason is that rules act together. Batch U's chains of pairs — the
@@ -50,7 +50,7 @@ be met in company.
 ## Three kinds of rules
 
 **Rules of rare events are details.** Revolutions win about one node in
-three hundred a game in B2 (a median of 0.24 per hundred agents an
+three hundred a [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") in B2 (a [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") of 0.24 per hundred agents an
 iteration), and gifts move one to four thousandths of the tokens a game.
 Switching either changes almost nothing whatever else the rules are: over
 their 24 and 21 companions, the median change in the share of the poor is
@@ -59,7 +59,7 @@ or count — mixed worlds, small and rich, where revolutions are five to ten
 times as common and hold the world small.
 
 **Rules that reshape the network do so everywhere.** Handover costs two marks
-of the health bar with nearly every companion, thinning the network into
+of the [health bar](health-bar.md "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.") with nearly every companion, thinning the network into
 trees on single links, and unfolds it a little ([Handover, with every other rule](handover-with-every-other-rule.md)). Every unused
 link lapsing makes worlds rich, small and about two-dimensional, and costs
 marks too ([Eight switches at once](eight-switches-at-once.md) and [What folds a world](what-folds-a-world.md)).
@@ -67,7 +67,7 @@ marks too ([Eight switches at once](eight-switches-at-once.md) and [What folds a
 **Rules that set a world's size set it in any company.** The estate of the
 dead paid to the newborns or the parents fills a world — about 1,000 agents
 more among the sixteen on B2, 1,400 on B1 — and makes it poorer and more
-alike, on both baselines, alone and in company ([Who inherits?](who-inherits.md) and [Eight switches at once](eight-switches-at-once.md)). Links
+alike, on both [baselines](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2."), alone and in company ([Who inherits?](who-inherits.md) and [Eight switches at once](eight-switches-at-once.md)). Links
 that hold a token shrink it. Who mates sets it too: with only parents as
 mates, all ten mixed worlds of Experiment 19 settled at about 2,000 agents
 ([Mixed at birth, with parents as mates](mixed-at-birth-with-parents-as-mates.md)). A world's size,
@@ -101,8 +101,8 @@ all of them holding one to three tokens ([Healthy and rich](healthy-and-rich.md)
 None of these combinations is all of that. The best of the sixteen on B2 —
 no revolutions, no random inputs, links that hold a token and mixing — meets
 every mark of the health bar with a quarter of its agents poor and a
-diversity score of 0.68, but its network is folded: a typical agent reaches
-half the world in 1.19 times the steps its random twin needs, as in nearly
+[diversity score](diversity-score.md "How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes.") of 0.68, but its network is folded: a typical agent reaches
+half the world in 1.19 times the steps its [random twin](random-twin.md "A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all.") needs, as in nearly
 every B2 world ([What folds a world](what-folds-a-world.md)).
 
 Read together at iteration 1,000, 161 of the 466 worlds measured then are
@@ -156,7 +156,7 @@ waits its turn.
 >   to 0.60): the half of their agents at three tokens or fewer no longer
 >   counts against them.
 >
-> So room costs evenness only where links lapse. What the spaces of births,
+> So room costs [evenness](entropy-and-evenness.md "How evenly something is shared out among the agents, from all in one place to spread perfectly evenly.") only where links lapse. What the spaces of births,
 > no old age and handover still miss is diversity, or marks. At 10,000
 > iterations it is the small rich worlds that grew even
 > ([The candidates, played on](the-candidates-played-on.md)), the second seed without
@@ -199,6 +199,6 @@ waits its turn.
 
 [Changing the rules](../README.md#changing-the-rules) · [The switches the world was built with](the-switches-the-world-was-built-with.md) →
 
-> [!info]- Pages that link here (5)
-> [What this notebook is about](what-this-notebook-is-about.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [Healthy and rich](healthy-and-rich.md) · [The search's best world, in new seeds](the-searchs-best-world-in-new-seeds.md) · [Room for the steadiest world](room-for-the-steadiest-world.md)
+> [!info]- Pages that link here (7)
+> [What this notebook is about](what-this-notebook-is-about.md) · [The random twin: is a world a space?](random-twin.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [Healthy and rich](healthy-and-rich.md) · [The diversity score](diversity-score.md) · [The search's best world, in new seeds](the-searchs-best-world-in-new-seeds.md) · [Room for the steadiest world](room-for-the-steadiest-world.md)
 <!-- /turns -->

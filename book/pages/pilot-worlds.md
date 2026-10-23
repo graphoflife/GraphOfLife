@@ -1,8 +1,8 @@
 # Pilot worlds
 
-Most pages read **runs**: worlds the lab made for an experiment, ten or
-thirty seeds of every condition, with a thesis written before the first of
-them existed. Some pages, most of them about B2, read **pilots** instead, worlds made by
+Most pages read **runs**: worlds the [lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") made for an experiment, ten or
+thirty [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") of every condition, with a thesis written before the first of
+them existed. Some pages, most of them about [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death."), read **pilots** instead, worlds made by
 hand to find out whether an idea is worth an experiment at all. This note says
 what a pilot is, what it records and how far it can be trusted.
 
@@ -25,30 +25,30 @@ mutate_on_replication, `keep_frac` for keep_home, `repair` for mend_on_death,
 as which links a crowded newborn may still make. With `--proto engine=true`
 the prototype instead plays the engine's own phases unchanged and only keeps
 its books; `research/oee/pilots/equiv.py` checks that such a world stays
-identical to the engine's, iteration for iteration. The pilots of
+identical to the engine's, [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") for iteration. The pilots of
 [The switches the world was built with](the-switches-the-world-was-built-with.md) and
 [Another game](another-game.md) run this way.
 
 ## What it records
 
 - `config.json`: every setting and prototype switch.
-- `series.jsonl`: one row per iteration. It holds the agents, the connections,
-  ages, the number of founder lineages and genotypes, and the Gini of tokens.
+- `series.jsonl`: one row per iteration. It holds the [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions."), the [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes."),
+  ages, the number of [founder](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.") [lineages](families.md "A line of descent: the agents whose genotypes go back to one ancestor.") and [genotypes](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was."), and the [Gini](gini-coefficient.md "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") of [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.").
   It also counts what happened in the iteration: births, nodes taken (and how
   many by kin), deaths (and of them, how many starved and how many were cut
-  off), mutations.
-  Every tenth row adds the network's health: the 2-core, the worst cut by one
+  off), [mutations](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.").
+  Every tenth row adds the network's health: the [2-core](core-trees-leaves.md "What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them."), the worst cut by one
   agent and by one connection, the best-connected agent's share, links per
-  agent and the ball dimension
+  agent and the [ball dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.")
   ([How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)).
-  It also adds the sizes of groups: clones (neighbours with the same brain),
+  It also adds the sizes of groups: clones ([neighbours](the-world.md#the-network "An agent joined to another by a connection.") with the same [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.")),
   kin (brains within four mutations), and sides where the rules have them.
 - `ckpt_<iteration>.npz`: the whole world every `--ckpt` iterations, with
   every agent's founder lineage. The tournaments are played from these.
 
 ## Tournaments between its eras
 
-`research/oee/pilots/tourney.py` plays the cross-time tournament of
+`research/oee/pilots/tourney.py` plays the [cross-time tournament](eras-and-contests.md "Brains of a world at two moments, its eras, played against each other: do the later ones win?") of
 [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) on a
 pilot's checkpoints. Each contest takes one era's world, its graph and tokens,
 and gives every agent a brain drawn from one era or the other. It switches
@@ -96,6 +96,6 @@ recipes and in `research/oee/pilots/LOG.md`.
 
 ← [What the viewer can colour by](viewer-colours.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Median and quantiles](median-and-quantiles.md) →
 
-> [!info]- Pages that link here (5)
-> [Every setting](settings.md) · [How different are the agents?](how-different-are-the-agents.md) · [Another game](another-game.md) · [Alliances](alliances.md) · [The switches the world was built with](the-switches-the-world-was-built-with.md)
+> [!info]- Pages that link here (11)
+> [Glossary](glossary.md) · [Every setting](settings.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [The estate of the dead](estate.md) · [How different are the agents?](how-different-are-the-agents.md) · [Eras and contests: does a world keep getting better?](eras-and-contests.md) · [Another game](another-game.md) · [Alliances](alliances.md) · [The switches the world was built with](the-switches-the-world-was-built-with.md) · [The health bar](health-bar.md) · [The lab, the engine and pilots](the-lab.md)
 <!-- /turns -->

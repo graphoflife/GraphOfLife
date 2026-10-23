@@ -1,8 +1,8 @@
 # Five more seeds for the rules that held
 
 > [!question] Questions of this page
-> - A few candidate worlds stayed healthy, diverse and richer than B2's for
->   10,000 iterations. Was it their rules, or their luck?
+> - A few candidate worlds stayed healthy, diverse and richer than [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.")'s for
+>   10,000 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."). Was it their rules, or their luck?
 > - Does any rule make a mixed world hold more often than mixing alone?
 
 <!-- experiment E21 -->
@@ -11,16 +11,16 @@
 
 Of the candidates played on to 10,000 iterations
 ([The candidates, played on](the-candidates-played-on.md)), a few passed [Healthy and rich](healthy-and-rich.md)'s test of
-a long run — alive, every mark of the health bar met, more diverse than B2's
-median world, and poorer than none of B2's worlds. Three rules stood out, all
-of them with brains mixed at birth:
+a long run — alive, every mark of the [health bar](health-bar.md "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.") met, more diverse than B2's
+[median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world, and poorer than none of B2's worlds. Three rules stood out, all
+of them with [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") mixed at birth:
 
-| rule, with mixing | seed | agents at 10,000 | agents with 3 tokens or fewer | diversity score |
+| rule, with mixing | [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") | [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") at 10,000 | agents with 3 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") or fewer | [diversity score](diversity-score.md "How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes.") |
 |---|---|---|---|---|
-| a fast change of brains (mutation probability 0.8) | 1 | 1,244 | 25% | 0.66 |
+| a fast change of brains ([mutation](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") probability 0.8) | 1 | 1,244 | 25% | 0.66 |
 | a fast change of brains (mutation probability 0.8) | 2 | 407 | 2% | 0.75 |
 | no random inputs | 2 | 372 | 4% | 0.63 |
-| no revolutions | 2 | 948 | 24% | 0.61 |
+| no [revolutions](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.") | 2 | 948 | 24% | 0.61 |
 
 But a mixed world's size drifts, and its riches drift with it
 ([What holds a world's size](what-holds-a-worlds-size.md)): plain mixing passed the
@@ -33,8 +33,8 @@ them beside Experiment 17's worlds of the same seeds, plain mixing, which
 passed in three of the five.
 
 A fourth rule held in one seed too: mixing with an input that tells each
-agent where its brain came from. That input exists so far only in the pilots'
-prototype; it joins this experiment once it is part of the engine.
+agent where its brain came from. That input exists so far only in the [pilots](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.")'
+prototype; it joins this experiment once it is part of the [engine](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.").
 
 ## The thesis
 
@@ -143,14 +143,14 @@ All five of its worlds lived to 10,000, none of them poor — 4% to 39% of
 their agents at three tokens or fewer — and all five more diverse than B2's
 median world, with diversity scores of 0.61 to 0.69, where plain mixing's
 ranged from 0.52 to 0.66. What three of them missed was one mark each: two
-had a dimension just above the bar's limit of 4 (4.03 and 4.22), and the
+had a [dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") just above the bar's limit of 4 (4.03 and 4.22), and the
 third, a small world of 445 agents, had an agent joined to more than 5% of
 the others.
 
 **Without random inputs, two of five worlds died out**, at iterations 3,835
 and 3,209. Of the three that lived, one passed (1,969 agents, 55% poor); one
 was small and rich but less diverse than any of B2's worlds (521 agents, a
-diversity score of 0.38); one small world had a hub.
+diversity score of 0.38); one small world had a [hub](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.").
 
 **Without revolutions, one world died out**, at iteration 9,338. Of the four
 that lived, one passed (1,996 agents, 59% poor); two missed B2's median
@@ -179,12 +179,12 @@ iterations before the end: for hundreds of iterations fewer were born than
 died, as in the mixed worlds of [Five mixed worlds, fifty thousand iterations](five-mixed-worlds-fifty-thousand-iterations.md).
 
 **Size still sets riches.** Across the seventeen worlds alive at 10,000, the
-more agents a world held, the poorer they were (a rank correlation of 0.86):
+more agents a world held, the poorer they were (a rank [correlation](correlation.md "Whether two quantities go up and down together, from −1 to 1.") of 0.86):
 the small worlds are rich, and the large ones half poor
 ([What holds a world's size](what-holds-a-worlds-size.md)).
 
 **Room is rare.** Fifteen of the seventeen are folded, as near as B2's
-worlds to their random twins (a typical distance of 1.09 to 1.29 times the
+worlds to their [random twins](random-twin.md "A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all.") (a typical distance of 1.09 to 1.29 times the
 twin's). The two that are wider, 1.68 and 1.40, are the worlds without random
 inputs and without revolutions that passed — two of the largest, half of
 their agents poor — while other worlds as large are as folded as the small
@@ -232,7 +232,7 @@ held by their seed's luck as much as by their rule's.
 >   0.34);
 > - four of its five are, at 8 to 22 tokens per agent.
 >
-> Its "not poor" was evenness. Plain mixing still passes in three, no random
+> Its "not poor" was [evenness](entropy-and-evenness.md "How evenly something is shared out among the agents, from all in one place to spread perfectly evenly."). Plain mixing still passes in three, no random
 > inputs and no revolutions in one each (Gini 0.52 to 0.55), so the verdict
 > stands. The author also counts a configuration that shows open-ended
 > evolution in a few seeds as enough, which is a claim about what a
@@ -241,7 +241,7 @@ held by their seed's luck as much as by their rule's.
 
 ## What it teaches
 
-- **One world says little about a rule.** A candidate that held was one
+- **One world says little about a rule.** A [candidate](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides.") that held was one
   draw from a wide spread: of the same rule's next five worlds, some held,
   some fell back and some died.
 - **A fast change of brains is the steadiest of the three**: every one of its
@@ -265,6 +265,6 @@ held by their seed's luck as much as by their rule's.
 
 ← [The candidates, played on](the-candidates-played-on.md) · [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world) · [The search's best world, in new seeds](the-searchs-best-world-in-new-seeds.md) →
 
-> [!info]- Pages that link here (4)
-> [Healthy and rich](healthy-and-rich.md) · [The candidates, played on](the-candidates-played-on.md) · [The search's best world, in new seeds](the-searchs-best-world-in-new-seeds.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (5)
+> [Healthy and rich](healthy-and-rich.md) · [The diversity score](diversity-score.md) · [The candidates, played on](the-candidates-played-on.md) · [The search's best world, in new seeds](the-searchs-best-world-in-new-seeds.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

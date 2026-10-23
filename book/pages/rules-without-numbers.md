@@ -1,7 +1,7 @@
 # Rules without numbers
 
 > [!question] Questions of this page
-> - Which numbers in B2's rules were chosen by hand, and what does each do?
+> - Which numbers in [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.")'s rules were chosen by hand, and what does each do?
 > - What is left of a world when all of them are taken away at once?
 > - Which numbers can be replaced by something the world decides for itself,
 >   and which are a matter of definition?
@@ -9,8 +9,8 @@
 ## Why ask
 
 The author of the simulation set a rule for everything that follows: no
-factor chosen by hand may sit in the rules, except the total of tokens and the
-parameters of mutation. Every other number should come out of the world. The
+factor chosen by hand may sit in the rules, except the total of [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") and the
+parameters of [mutation](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype."). Every other number should come out of the world. The
 one and a half by which an owner's stake counts was named as the example of
 what is not wanted.
 
@@ -22,17 +22,17 @@ stop one way a world was seen to fail, and each was tested in
 | number | in B2 | what it stops | shown in |
 |---|---|---|---|
 | `incumbency` | 1.5 | an owner's stake counts one and a half times: defending is cheaper than attacking | [Who dies, and why](who-dies-and-why.md) |
-| `birth_links` | 2 | a newborn is joined to its parent and two of the parent's neighbours: no world grows as a tree | [A world that cannot break](a-world-that-cannot-break.md) |
+| `birth_links` | 2 | a newborn is joined to its parent and two of the parent's [neighbours](the-world.md#the-network "An agent joined to another by a connection."): no world grows as a tree | [A world that cannot break](a-world-that-cannot-break.md) |
 | `prune_needs` | 2 | an unused link lapses only if its ends share two neighbours: pruning never cuts | [A world that cannot break](a-world-that-cannot-break.md) |
-| `valence` | 8 | a brain may choose at most 8 links: no hubs | [A world that cannot break](a-world-that-cannot-break.md) |
-| `keep_home` | 0.3 | 30% of an agent's tokens stay at home: no agent stakes itself to death, and no world of one-token zombies | [Who dies, and why](who-dies-and-why.md) |
+| `valence` | 8 | a [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") may choose at most 8 links: no [hubs](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.") | [A world that cannot break](a-world-that-cannot-break.md) |
+| `keep_home` | 0.3 | 30% of an [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.")'s tokens stay at home: no agent stakes itself to death, and no world of one-token zombies | [Who dies, and why](who-dies-and-why.md) |
 | `max_age` | 100 | every agent dies at 100: no hoarding queen, and room for the young | [Who dies, and why](who-dies-and-why.md) |
 | `min_child` | 10 | a child starts with at least 10 tokens: children are not spent as missiles | [Who dies, and why](who-dies-and-why.md) |
 
 Two more rules of B2 have no number in them: a death is mended by joining the
 dead agent's neighbours in a ring, and a brain changes only when it is
 copied. They stay. The brain itself has sizes too, one hidden layer of 16 and
-messages of 8 numbers. Those are the subject of *How big should a brain be?* and are left
+[messages](messages.md "Numbers an agent writes to itself and to each neighbour every phase, which their brains read.") of 8 numbers. Those are the subject of *How big should a brain be?* and are left
 alone here.
 
 Experiments 14 and 15 take six of B2's numbers away **one at a time**, all
@@ -42,14 +42,14 @@ be replaced by a rule with no number in it.
 
 ## B3: B2 without its numbers
 
-The pilots of this page (batch N in `research/oee/pilots/LOG.md`) run B1's
-game with every number at its original value. An owner's stake counts once.
-A newborn has only the links its brain chooses. Any connection that carries
+The [pilots](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") of this page (batch N in `research/oee/pilots/LOG.md`) run [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.")'s
+[game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") with every number at its original value. An owner's stake counts once.
+A newborn has only the links its brain chooses. Any [connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") that carries
 no tokens lapses. No agent has a cap on its links, none keeps anything at
 home by rule, none dies of age, and a child may have a single token. On top
 of that they have what B2 has without a number: brains with one hidden layer
 of 16 that change only when copied, deaths mended in a ring, and a memory of
-the last game's stakes. Revolutions are off. Three variants, two seeds each,
+the last game's stakes. [Revolutions](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.") are off. Three variants, two [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") each,
 at 10,000 tokens:
 
 - **B3a**: with alliances ([Alliances](alliances.md));
@@ -76,7 +76,7 @@ at 10,000 tokens:
 <!-- /figure -->
 
 **Without alliances, the worlds died.** Both B3c worlds died out, one at
-iteration 102 and the other at 432. Before they did, nearly every node
+[iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") 102 and the other at 432. Before they did, nearly every node
 changed hands in every game: 88 to 91 per hundred agents. In the
 longer-lived world, 96 agents in a hundred were born and 77 starved in every
 iteration from 100 to 400, so the average agent was one and a half iterations
@@ -94,7 +94,7 @@ world:
   agent was joined to between 58 and 98% of all the others. Nothing stopped
   brains from joining their children to the best-connected neighbour. When
   the star went, the world grew back as a tree: at the end, 2.2 links per
-  agent, 42% of agents with a single link, a third in the 2-core, and one
+  agent, 42% of agents with a single link, a third in the [2-core](core-trees-leaves.md "What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them."), and one
   agent or one link whose loss would cut off 39% of the world. It was a tree
   of old agents, with a mean age of 206. There were 3.5 births per hundred
   agents an iteration, and as many agents cut off.
@@ -102,7 +102,7 @@ world:
   hundred were born and 24 starved; the mean age was 21.
 - **B3b, birth among allies.** Seed 1 died out at iteration 74. Seed 2 lived
   dense and short. It had 8 links per agent, one agent joined to a fifth of
-  the world, and a ball dimension of 5.2. There were 53 births and 49
+  the world, and a [ball dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") of 5.2. There were 53 births and 49
   starvations per hundred agents an iteration, and the mean age was 5.
 
 <!-- figure numberless/ages -->
@@ -120,7 +120,7 @@ world:
 > **To make it again:** `python3 book_figures.py numberless`.
 <!-- /figure -->
 
-None of the six passes the health bar of
+None of the six passes the [health bar](health-bar.md "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.") of
 [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md), and none is a
 world in which evolution could work for long. The three that lived ended the
 fighting, and with it nearly all selection but that between who has children
@@ -145,7 +145,7 @@ them died, and three of the four with them lived. They did not make the
 difference between living and evolving.
 
 > [!info] Added later: contests a lifetime long
-> Played in contests of 100 iterations, once in each era's world
+> Played in contests of 100 iterations, once in each [era](eras-and-contests.md "Brains of a world at two moments, its eras, played against each other: do the later ones win?")'s world
 > ([Why evolution stops](why-evolution-stops.md#would-we-notice-if-it-went-on)), the
 > three worlds that lived answer three ways. In B3a, seed 1, the brains of
 > iteration 1,000 tied with those of 500 (0.50 and 0.46). In seed 2 they took
@@ -168,7 +168,7 @@ world would work, differently, at 1.4 or at 120.
 
 The author's rule is aimed at the magnitudes. Each needs a replacement that
 the world decides for itself, and each failure above says what that
-replacement must prevent. These are candidates, and the pilots that test them
+replacement must prevent. These are [candidates](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides."), and the pilots that test them
 come next:
 
 - **The owner's one and a half → none.** Alliances form without it
@@ -242,6 +242,6 @@ come next:
 
 **Also about:** [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2).
 
-> [!info]- Pages that link here (6)
-> [Another game](another-game.md) · [Alliances](alliances.md) · [The switches the world was built with](the-switches-the-world-was-built-with.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) · [Eight switches at once](eight-switches-at-once.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (7)
+> [How this notebook is written](how-this-notebook-is-written.md) · [Another game](another-game.md) · [Alliances](alliances.md) · [The switches the world was built with](the-switches-the-world-was-built-with.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) · [Eight switches at once](eight-switches-at-once.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

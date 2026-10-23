@@ -1,17 +1,17 @@
 # The settled life of a world
 
-To compare worlds — thirty seeds, or two conditions — each world has to be
+To compare worlds — thirty [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world."), or two conditions — each world has to be
 summed up in one number per statistic: *where does it settle?* This note
 gives the rule the notebook uses and why.
 
 ## The rule
 
-> A world's level for a statistic is its **mean over iterations 500 to the
-> end of the run** (2,999 for the baseline runs), over the rows of the phase
+> A world's level for a statistic is its **mean over [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") 500 to the
+> end of the run** (2,999 for the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") runs), over the rows of the phase
 > the statistic belongs to. Only worlds that lived to the end are measured
 > this way; worlds that died are counted apart.
 
-For the baseline that is the mean over 2,500 game rows — or, for a graph
+For the baseline that is the mean over 2,500 [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") rows — or, for a graph
 statistic measured every 25 iterations, over 100.
 
 ## Why from iteration 500?
@@ -51,6 +51,6 @@ when ([When a world ends](extinction.md)).
 
 ← [Bands: many worlds in one figure](bands.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Spread between worlds](spread-between-worlds.md) →
 
-> [!info]- Pages that link here (9)
-> [How to read this notebook](../README.md) · [What this notebook is about](what-this-notebook-is-about.md) · [When a world ends](extinction.md) · [What the baseline world is](what-the-baseline-world-is.md) · [A world's life](a-worlds-life.md) · [How worlds are measured](how-worlds-are-measured.md) · [Spread between worlds](spread-between-worlds.md) · [Autocorrelation: how long a world remembers](autocorrelation.md) · [How many seeds an experiment needs](seeds-needed.md)
+> [!info]- Pages that link here (11)
+> [How to read this notebook](../README.md) · [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [When a world ends](extinction.md) · [What the baseline world is](what-the-baseline-world-is.md) · [A world's life](a-worlds-life.md) · [Stars and hubs](stars-and-hubs.md) · [How worlds are measured](how-worlds-are-measured.md) · [Spread between worlds](spread-between-worlds.md) · [Autocorrelation: how long a world remembers](autocorrelation.md) · [How many seeds an experiment needs](seeds-needed.md)
 <!-- /turns -->

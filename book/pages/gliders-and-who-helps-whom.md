@@ -1,18 +1,18 @@
 # Gliders, and who helps whom
 
 > [!question] Questions of this page
-> - Does the game make patterns that last while the agents in them change, as
+> - Does the [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") make patterns that last while the [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") in them change, as
 >   Conway's Game of Life makes gliders out of cells that are born and die?
-> - Do tokens go round the network in rings, or run downhill?
+> - Do [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") go round the network in rings, or run downhill?
 > - What would cooperation be in a game whose only act is a stake, and how can
 >   it be seen without knowing what an agent meant?
-> - Is there any, in B2, in B1, and among allies?
+> - Is there any, in [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death."), in [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it."), and among allies?
 
 ## Why ask
 
-The measures of open-ended evolution so far look at agents one by one: what they hold, what they
-stake, how their brains do in a contest. [Why evolution stops](why-evolution-stops.md)
-found one blind spot in them, contests too short for what pays over a lifetime.
+The measures of [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.") so far look at agents one by one: what they hold, what they
+stake, how their [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") do in a contest. [Why evolution stops](why-evolution-stops.md)
+found one blind spot in them, contests too short for what pays over a [lifetime](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death.").
 The author suggested another: perhaps the worlds hold structures above the
 single agent that none of the measures can see, cyclic ones like the gliders of
 the Game of Life, and perhaps harder to spot because they live on a network
@@ -31,7 +31,7 @@ such patterns and the ways they meet.
 
 A network has no shapes: no diagonal, no row of three. A pattern has to be
 recognised by what it does, its motion measured in steps through a network
-that itself changes, and every candidate compared with what chance would make,
+that itself changes, and every [candidate](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides.") compared with what chance would make,
 since a world of 3,000 agents makes almost any small pattern somewhere by
 accident.
 
@@ -40,9 +40,9 @@ Cooperation is the other thing such structure could hide.
 ask whether the worlds without alliances cooperate in some way of their own.
 
 This page reads the record of play. B2's ten worlds of Experiment 16 and the
-first ten worlds of B1's baseline set record every game with every agent's
-stakes, and the games of iterations 1,000 to 2,000 are read: a settled world,
-long after the founders. For alliances, pilot worlds of [Alliances](alliances.md) are played
+first ten worlds of B1's [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") set record every game with every agent's
+stakes, and the games of [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") 1,000 to 2,000 are read: a settled world,
+long after the [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts."). For alliances, [pilot](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds of [Alliances](alliances.md) are played
 on for 200 iterations from a checkpoint, recording their games in the same form
 (`research/oee/checks/pilot_frames.py`), together with the same pilots without
 alliances as their control. Every check is a script in `research/oee/checks/`.
@@ -50,7 +50,7 @@ alliances as their control. Every check is a script in `research/oee/checks/`.
 ## Chains of takeovers
 
 The game moves two things over the network: tokens, and copies of brains. When
-an agent takes a neighbour's node, the node gets a copy of its brain and every
+an agent takes a [neighbour](the-world.md#the-network "An agent joined to another by a connection.")'s node, the node gets a copy of its brain and every
 token staked on it. Call a takeover made with at least half of the taker's
 tokens a **move**: the agent's wealth and a copy of its brain go to the node
 taken, together, as a packet. If, in the next game, the node taken makes a move
@@ -118,15 +118,15 @@ the longest are longer, 69 to 175 moves.
 
 **B2's chains are puffers, B1's are gliders.** In B2 the mover still holds the
 node it left after 93% of its moves and never leaves it to starve: a chain is
-a lineage copying itself outward, node by node, and its packet is small, three
-tokens at the start and two at the end in the median of each world's 300
+a [lineage](families.md "A line of descent: the agents whose genotypes go back to one ancestor.") copying itself outward, node by node, and its packet is small, three
+tokens at the start and two at the end in the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") of each world's 300
 longest chains. In B1 the mover keeps the node it left after only 9% of its
 moves; after 8% that node starves, and after the rest it is taken by another
 agent. The brain moves on, and the packet grows as it goes, from 18 tokens to
 82: B1's gliders are rich agents travelling the network and gathering what is
 staked on the nodes they take. In both, the brain changes as it goes: in B2
-each copy is made with mutations, and in B1 every brain may mutate after every
-game. After 70% of the moves the chain's holder no longer carries the genotype
+each copy is made with [mutations](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype."), and in B1 every brain may mutate after every
+game. After 70% of the moves the chain's holder no longer carries the [genotype](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.")
 it started with.
 
 Drawn on their networks, one chain of each kind, the one among each world's
@@ -164,7 +164,7 @@ B1 no more common than chance.
 walk of as many steps from the same node on the same network (0.8 of the walk's
 distance in B2, 1.0 in B1). A glider in the Game of Life flies straight; these
 have no direction. Nothing an agent senses says from which neighbour it came:
-its inputs are its own and each neighbour's tokens and connections, messages
+its inputs are its own and each neighbour's tokens and [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes."), [messages](messages.md "Numbers an agent writes to itself and to each neighbour every phase, which their brains read.")
 and noise. Messages could carry it in principle, but the brains write the name
 of their genotype in them ([What agents say to each other](what-agents-say-to-each-other.md)),
 and along a puffer's trail every neighbour carries the same name.
@@ -179,7 +179,7 @@ off steadily from a single game; there is no period at which a gun fires.
 by an agent whose own node is taken in the same game: everyone moves up a seat.
 Two agents taking each other's nodes in one game, a swap, happens as often as it
 would if every taker had picked its targets at random among its neighbours
-(1.02 times as often, 0.99 to 1.04 in the ten worlds). Loops of three agents or
+(1.02 times as often, 0.99 to 1.04 in the ten worlds). [Loops](loops.md "A path through the network that comes back to where it started without using a connection twice.") of three agents or
 more, each taking the next one's node in the same game, happen 1,500 to 4,800
 times in a world's 1,000 games, up to fourteen agents round one loop; how many
 chance would make is not known. In B2 swaps are rarer than chance (0.54 to
@@ -215,7 +215,7 @@ in the game itself. That comes after the tokens.
 ## Where the tokens go
 
 Every stake moves tokens over a connection, to the node staked on. Over a
-stretch of 50 games each connection carries a net flow, what went one way
+stretch of 50 games each connection carries a [net flow](token-flow.md "The tokens a game moves along each connection, from the agent who stakes to the node staked on."), what went one way
 minus what came back, and that flow splits exactly into a part that runs
 downhill, from some agents to others, and a part that goes round loops (the
 note [*Flows that go round*](circulation.md)). Tokens going round a
@@ -250,9 +250,9 @@ make (0.09 less in the median B2 world, 0.13 in B1), so gifts flow from some
 agents to others. The slope lasts: the downhill part of one stretch correlates
 with the next stretch's on the same connections, 0.20 in B2 and 0.50 in B1. In
 B1, whose agents spread their stakes over every neighbour, the gifts drain
-towards the best-connected agents (in two worlds checked, the rank correlation
+towards the best-connected agents (in two worlds checked, the rank [correlation](correlation.md "Whether two quantities go up and down together, from −1 to 1.")
 of an agent's height on the slope with its connections is −0.28 and −0.33):
-the even split of [Where do the tokens go?](where-do-the-tokens-go.md) again, tokens
+the [even split](even-split.md "What the rules do when a brain scores no candidate above zero: the stake is spread evenly.") of [Where do the tokens go?](where-do-the-tokens-go.md) again, tokens
 settling in proportion to connections. In B2, whose gifts are failed raids,
 they drain weakly towards the richer (−0.16 in two worlds): tribute, paid by
 failed raids to whoever withstood them.
@@ -284,7 +284,7 @@ Both chances follow from the world's own rule for deciding a node, counted
 exactly. If *v* was more likely to keep its node with *u*'s stake than without
 it, the stake **helped**.
 
-Only two rules make help possible. In a revolution, a crowd of small
+Only two rules make help possible. In a [revolution](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake."), a crowd of small
 revolutionary stakes overthrows the largest staker, so a neighbour's stake on
 *v*'s node can join *v*'s own stake in the crowd that saves it. B1 and B2 both
 have revolutions. With alliances, an ally's stake counts for *v*'s side. Without
@@ -425,7 +425,7 @@ can know. Two inputs would change that, and neither needs a number:
 > Both inputs were built (`came_from` and `helped_by` in
 > research/oee/pilots/proto.py, the second computed by the rules exactly as
 > above) and given to B2 worlds of 10,000 tokens for 2,000 iterations: each
-> alone and both together, two seeds each, beside two control worlds.
+> alone and both together, two [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") each, beside two control worlds.
 >
 > - **The sense of direction was used — to go back.** With `came_from` alone,
 >   chains of three takeovers or more were 20–35% more common than in the

@@ -1,12 +1,12 @@
 # Where do the tokens go?
 
-Tokens are the only thing of value in a world, and the only thing conserved.
-The founders start exactly equal: a hundred tokens each.
+[Tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") are the only thing of value in a world, and the only thing conserved.
+The [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.") start exactly equal: a hundred tokens each.
 
 > [!question] Questions of this page
 > - Who holds the tokens later? How unequal does a world become?
 > - Does inequality keep growing, or does it settle?
-> - Are the rich agents special in some way we can see?
+> - Are the rich [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") special in some way we can see?
 
 The worlds are the thirty of 100,000 tokens of [Thirty worlds](thirty-worlds.md);
 the thirty of 10,000 tokens this page was first written from are given
@@ -112,7 +112,7 @@ shows why, and works an example by hand.
 > **To make it again:** `python3 book_figures.py tokens`.
 <!-- /figure -->
 
-After the last game of the thirty worlds, in the median world the poorest
+After the last [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") of the thirty worlds, in the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world the poorest
 half of the agents hold 21% of all tokens; the poorest 80% hold 46%, so the
 richest fifth hold 54%; and the richest tenth hold 41%. The worlds' curves lie
 close together, and close to those of the worlds of 10,000 tokens (23%, 49%
@@ -142,7 +142,7 @@ Of the 394,056 agents alive at the end, half hold 5 tokens or fewer (62% do),
 the first ten or twenty tokens and then falls almost straight, over two powers
 of ten, to the richest agents. At 10,000 tokens it kept bending and showed no
 straight stretch; with ten times the agents there is room for a long tail.
-Whether it is a power law is the question of
+Whether it is a [power law](power-law-fit.md "A quantity whose frequency falls as a power of its size: few huge values, many small ones.") is the question of
 [Power laws, real and apparent](power-laws-real-and-apparent.md).
 
 ## Inequality over time
@@ -165,10 +165,10 @@ Whether it is a power law is the question of
 <!-- /figure -->
 
 The founders are equal, but the first reproduction phase ends that: a child
-gets only part of its parent's tokens. Over the first five iterations the
+gets only part of its parent's tokens. Over the first five [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") the
 median world's Gini is already 0.59 — higher than it will be again — and it
 falls back within a few more (at 10,000 tokens it was 0.48 from the start).
-Over the settled life, iterations 500 to 1,499, the median world's average is
+Over the [settled life](settled-life.md "A world from iteration 500 to its end, after its youth, where it is measured."), iterations 500 to 1,499, the median world's average is
 0.47, and the thirty worlds lie between 0.40 and 0.55 (0.49 at 10,000 tokens).
 Inequality appears at once and then, after its first jolt, neither grows nor
 shrinks.
@@ -258,15 +258,15 @@ lot.
 > **To make it again:** `python3 book_figures.py tokens`.
 <!-- /figure -->
 
-In the world with seed 1 at the end, agents with more connections hold more
+In the world with [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1 at the end, agents with more [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") hold more
 tokens: the median agent with one connection holds 3 tokens, with four 6,
-with nine 11, with thirteen 16, with twenty 23.5. (The correlation between the
+with nine 11, with thirteen 16, with twenty 23.5. (The [correlation](correlation.md "Whether two quantities go up and down together, from −1 to 1.") between the
 number of connections and the logarithm of the tokens is 0.59.) The game explains the
 direction of this: an agent gets every token staked on its node, and an agent
-with more neighbours can be staked on by more of them. Whether connections
+with more [neighbours](the-world.md#the-network "An agent joined to another by a connection.") can be staked on by more of them. Whether connections
 make agents rich, or rich agents attract connections, this figure cannot say.
 
-The measurements of the baseline found the law behind it. Agents spread their stakes nearly evenly
+The measurements of the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") found the law behind it. Agents spread their stakes nearly evenly
 over their own node and their neighbours' ([Where the tokens flow](where-the-tokens-flow.md)),
 and stakes spread that way move tokens like a random walk, which comes to rest
 when every agent holds tokens in proportion to its connections **plus one**.
@@ -395,6 +395,6 @@ To make every figure of this page: `python3 book_figures.py tokens`.
 
 [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens) · [How even is a world?](how-even-is-a-world.md) →
 
-> [!info]- Pages that link here (15)
-> [The ideas this builds on](the-ideas-this-builds-on.md) · [What the baseline world is](what-the-baseline-world-is.md) · [Thirty worlds](thirty-worlds.md) · [The first hundred iterations](the-first-hundred-iterations.md) · [How even is a world?](how-even-is-a-world.md) · [Do the rich stay rich?](do-the-rich-stay-rich.md) · [Gains and losses](gains-and-losses.md) · [Tokens per agent: mean, median, extremes](tokens-per-agent.md) · [Where tokens go](where-tokens-go.md) · [How the game is played](how-the-game-is-played.md) · [Where the tokens flow](where-the-tokens-flow.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Correlation](correlation.md)
+> [!info]- Pages that link here (16)
+> [The ideas this builds on](the-ideas-this-builds-on.md) · [What the baseline world is](what-the-baseline-world-is.md) · [Thirty worlds](thirty-worlds.md) · [The first hundred iterations](the-first-hundred-iterations.md) · [The estate of the dead](estate.md) · [How even is a world?](how-even-is-a-world.md) · [Do the rich stay rich?](do-the-rich-stay-rich.md) · [Gains and losses](gains-and-losses.md) · [Tokens per agent: mean, median, extremes](tokens-per-agent.md) · [Where tokens go](where-tokens-go.md) · [How the game is played](how-the-game-is-played.md) · [Where the tokens flow](where-the-tokens-flow.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Correlation](correlation.md)
 <!-- /turns -->

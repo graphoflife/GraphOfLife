@@ -1,6 +1,6 @@
 # Spread between worlds
 
-How different are worlds that differ only in their seed? The notebook answers
+How different are worlds that differ only in their [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.")? The notebook answers
 with one number per statistic: the **coefficient of variation** of the
 worlds' levels, which it calls the **spread** *c*.
 
@@ -25,8 +25,8 @@ $$
 
 It has no unit: a spread of 0.17 says the worlds typically lie about 17% of
 the mean away from the mean, whatever the statistic is measured in. That is
-what lets the notebook compare the spread of the number of agents with the spread
-of the Gini coefficient.
+what lets the notebook compare the spread of the number of [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") with the spread
+of the [Gini coefficient](gini-coefficient.md "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.").
 
 ## Example
 

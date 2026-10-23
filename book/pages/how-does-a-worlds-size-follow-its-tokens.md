@@ -1,12 +1,12 @@
 # How does a world's size follow its tokens?
 
-The study of the baseline looked at worlds of two sizes, 10,000 and 100,000 tokens.
+The study of the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") looked at worlds of two sizes, 10,000 and 100,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.").
 This one runs the baseline at ten sizes, from 800 tokens to 409,600 — each
 double the one before — and asks what changes with size and what does not.
 
 > [!question] Questions of this page
-> - Does a world of twice the tokens hold twice the agents and twice the
->   connections?
+> - Does a world of twice the tokens hold twice the [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") and twice the
+>   [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.")?
 > - Is a big world the same kind of world as a small one — as unequal, as
 >   diverse, as well connected per agent?
 > - Do big worlds settle down, or do they wander as much as small ones?
@@ -82,16 +82,16 @@ and every result belongs to the size it was found at.
 
 ## How it was measured
 
-Worlds of the baseline B1 at ten sizes, three seeds each, 600 iterations
+Worlds of the baseline [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") at ten sizes, three [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") each, 600 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.")
 each. A world starts with one founder for every hundred tokens, so the
 founders go from 8 to 4,096.
 
 **What is measured.** For every run, the mean number of agents alive after
-the game, and of connections, over iterations 500 to 599 — well past the
+the [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."), and of connections, over iterations 500 to 599 — well past the
 youth of [The first hundred iterations](the-first-hundred-iterations.md). The same means
 over iterations 400 to 499 say whether a world had settled.
 
-**How it is read.** On logarithmic axes, on both sides, a power law —
+**How it is read.** On logarithmic axes, on both sides, a [power law](power-law-fit.md "A quantity whose frequency falls as a power of its size: few huge values, many small ones.") —
 agents = *a* × tokens^*b*, some number *a* times the tokens to the power
 *b* — is a straight line, and its slope is the exponent *b*
 ([Logarithmic axes and power laws](logarithmic-axes.md)). An
@@ -141,7 +141,7 @@ is **1.00** (95% interval 0.95 to 1.06), the line explains 98% of the scatter,
 and the points do not bend away from it. A settled world holds about 0.14
 agents per token — a world of 409,600 tokens about 60,000 agents. The worlds
 of [A world's life](a-worlds-life.md) fall where the line says they should: 0.124 agents per token in
-the median world, against 0.140 predicted, well inside their own spread
+the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world, against 0.140 predicted, well inside their own spread
 (0.06 to 0.25).
 
 Below 3,200 tokens the line ends. The baseline stopped all three worlds of
@@ -277,12 +277,12 @@ flat within what three seeds per size can see:
 
 | property | exponent against the tokens | 95% interval |
 |---|---|---|
-| inequality (Gini) | 0.003 | −0.022 to 0.026 |
+| inequality ([Gini](gini-coefficient.md "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.")) | 0.003 | −0.022 to 0.026 |
 | share of stakes at home | −0.017 | −0.041 to 0.007 |
-| genotypes per agent | 0.003 | −0.017 to 0.024 |
+| [genotypes](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.") per agent | 0.003 | −0.017 to 0.024 |
 | births per 100 agents | −0.05 | −0.18 to 0.06 |
 | cut off per 100 agents | 0.000 | −0.14 to 0.11 |
-| dimension from ball growth | −0.001 | −0.048 to 0.045 |
+| [dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") from ball growth | −0.001 | −0.048 to 0.045 |
 
 Genotypes per agent are flatter than anything: 0.61 to 0.66 at every size —
 the balance of making and copying of [How even is a world?](how-even-is-a-world.md)
@@ -293,13 +293,13 @@ Three properties of the network's shape do change, slowly:
 - **Leaves**, the share of agents with a single connection, fall with an
   exponent of −0.08 (−0.12 to −0.04): from a median of 0.44 at 3,200 tokens to
   0.28 at 409,600.
-- **Loops per connection** rise with an exponent of 0.08 (0.02 to 0.14): from
+- **[Loops](loops.md "A path through the network that comes back to where it started without using a connection twice.") per connection** rise with an exponent of 0.08 (0.02 to 0.14): from
   0.28 to 0.45.
 - **Nodes kept by their own agent** fall with an exponent of −0.03 (−0.06 to
   −0.01): from 0.51 to 0.40.
 
 All three go with the slow rise in connections per agent: more connections,
-fewer leaves, more loops, more neighbours to lose one's node to. Over a
+fewer leaves, more loops, more [neighbours](the-world.md#the-network "An agent joined to another by a connection.") to lose one's node to. Over a
 128-fold range of sizes they shift by between a fifth and a half. The worlds
 of [A world's life](a-worlds-life.md) sit among the others in every panel: the numbers the study of the
 baseline first found at 10,000 tokens hold, roughly, at other sizes — as the
@@ -316,7 +316,7 @@ second edition of those parts, at 100,000 tokens, checks
 > [The geometry of a world](the-geometry-of-a-world.md)), births and deaths per agent
 > run 13 to 21% higher (as [Births, deaths and ages](births-deaths-and-ages.md) and
 > [How ages change over a world's life](how-ages-change.md) find too), leaves are only 5% fewer,
-> and clustering is less than half. Births, the rate of cutting and the
+> and [clustering](clustering.md "How often an agent's neighbours are also each other's neighbours.") is less than half. Births, the rate of cutting and the
 > dimension do change with size, a little; and the shape changes more than
 > leaves and loops alone show.
 
@@ -416,7 +416,7 @@ connections: 0.00, interval −0.12 to 0.12).
 
 But its reasoning missed a rule, and the miss shows. The thesis said nothing
 reaches across a world except the sharing out of the tokens of the dead. The
-cleanup does too: it keeps only the largest connected piece. That leaves the
+[cleanup](one-iteration.md#cleanup "The end of every phase: only the largest connected piece of the network lives on, and the tokens of the dead are shared out.") does too: it keeps only the largest connected piece. That leaves the
 averages alone — which is all the thesis tested — and shows in the
 fluctuations instead. **In its averages, a world of twice the tokens is two
 worlds of the same kind. In its ups and downs, it is one world**, which can
@@ -425,7 +425,7 @@ lose half of itself in a game.
 ## What this means
 
 - **Size can be chosen for cost — for averages.** Agents and connections
-  follow the tokens in proportion; inequality, home stakes, genotype
+  follow the tokens in proportion; inequality, [home stakes](home-stake.md "The tokens an agent stakes on its own node, to keep it."), genotype
   diversity, births and the rate of cutting are the same at every size; the
   network's shape shifts slowly. A result found at 10,000 tokens is, for its
   averages, a result about worlds from a few thousand tokens to hundreds of
@@ -434,9 +434,9 @@ lose half of itself in a game.
   down: the cull couples a world across its whole extent, and the regions it
   removes grow with it. And distances grow like a power of size, as in a
   three-dimensional body, not like a small world.
-- **For open-ended evolution, size is not a cure.** Selection in a bigger
+- **For [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau."), size is not a cure.** Selection in a bigger
   world is not less noisy: in every world, at every size, a game can remove a
-  third or half of everyone, whatever their brains — the noise comes from a
+  third or half of everyone, whatever their [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") — the noise comes from a
   rule, not from small numbers, and only a change of the rule removes it
   ([What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md)). What size does give is room: a world of 60,000
   agents is 25 steps across on average and 80 at its widest, and keeps the
@@ -459,7 +459,7 @@ lose half of itself in a game.
 > - **Survived to iteration 600:** baseline 25 of 30 (every world of 3,200
 >   tokens and more; one of three at 1,600; none at 800, all stopped after
 >   their first game); stopped only when empty, 12 of 12.
-> - **Engine:** snapshot `f820369a1583af53`, commit `4bc7165`, for all 42 runs.
+> - **[Engine](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world."):** snapshot `f820369a1583af53`, commit `4bc7165`, for all 42 runs.
 > - **Cost:** 56 hours of computing on one worker, from 6 to 9 October 2026;
 >   28 GB on disk; at most 11.0 GB of memory for one run (409,600 tokens).
 > - **Fits:** least squares on logarithmic axes; intervals from resampling the

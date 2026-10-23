@@ -1,7 +1,7 @@
 # Median and quantiles
 
 The notebook describes sets of numbers — thirty worlds' sizes, a million
-lifetimes — by a few **quantiles** rather than by their mean alone. This note
+[lifetimes](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death.") — by a few **quantiles** rather than by their mean alone. This note
 says what they are and exactly how they are computed.
 
 ## The median
@@ -31,7 +31,7 @@ Q(q) = x_{\lfloor h \rfloor} + \bigl(h - \lfloor h \rfloor\bigr)\,\bigl(x_{\lflo
 $$
 
 This is the default of numpy's `quantile` (statisticians call it "type 7"),
-and it is what every quantile in this notebook uses. The brain's six
+and it is what every quantile in this notebook uses. The [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.")'s six
 neighbourhood quantiles are computed the same way
 ([What a brain sees](brain-inputs.md)).
 
@@ -55,6 +55,6 @@ highest one or two. See [Bands](bands.md) for how this is drawn over time.
 
 ← [Pilot worlds](pilot-worlds.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Bands: many worlds in one figure](bands.md) →
 
-> [!info]- Pages that link here (7)
-> [What this notebook is about](what-this-notebook-is-about.md) · [What a brain sees](brain-inputs.md) · [Tokens per agent: mean, median, extremes](tokens-per-agent.md) · [Degree](degree.md) · [How worlds are measured](how-worlds-are-measured.md) · [Bands: many worlds in one figure](bands.md) · [The bootstrap](bootstrap.md)
+> [!info]- Pages that link here (9)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [What a brain sees](brain-inputs.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Tokens per agent: mean, median, extremes](tokens-per-agent.md) · [Degree](degree.md) · [How worlds are measured](how-worlds-are-measured.md) · [Bands: many worlds in one figure](bands.md) · [The bootstrap](bootstrap.md)
 <!-- /turns -->

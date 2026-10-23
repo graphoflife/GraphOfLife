@@ -73,6 +73,6 @@ Two things to keep in mind:
 
 ← [Muller plots](muller-plot.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Fitting a power law properly](power-law-fit.md) →
 
-> [!info]- Pages that link here (6)
-> [Where the tokens flow](where-the-tokens-flow.md) · [Scaling relations between agents' properties](scaling-relations.md) · [Dimension and curvature from ball growth](ball-dimension-and-curvature.md) · [Box dimension](box-dimension.md) · [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) · [Fitting a power law properly](power-law-fit.md)
+> [!info]- Pages that link here (9)
+> [Glossary](glossary.md) · [The even split](even-split.md) · [Where the tokens flow](where-the-tokens-flow.md) · [Scaling relations between agents' properties](scaling-relations.md) · [Dimension and curvature from ball growth](ball-dimension-and-curvature.md) · [Box dimension](box-dimension.md) · [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) · [Eras and contests: does a world keep getting better?](eras-and-contests.md) · [Fitting a power law properly](power-law-fit.md)
 <!-- /turns -->

@@ -1,11 +1,11 @@
 # Tokens per agent: mean, median, extremes
 
-Four simple numbers describe how the tokens of a world are held, after every
+Four simple numbers describe how the [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") of a world are held, after every
 phase. The viewer shows them in its *General* section.
 
 ## The four
 
-For the *n* agents alive, holding τ₁, …, τₙ tokens, with *T* = Σ τᵢ:
+For the *n* [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") alive, holding τ₁, …, τₙ tokens, with *T* = Σ τᵢ:
 
 | statistic | field | definition |
 |---|---|---|
@@ -17,7 +17,7 @@ For the *n* agents alive, holding τ₁, …, τₙ tokens, with *T* = Σ τᵢ:
 ## What each says
 
 - **The mean is not about wealth at all.** Tokens are conserved, so *T* is
-  the same after every phase — 100,000 in the baseline worlds the notebook
+  the same after every phase — 100,000 in the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") worlds the notebook
   studies, 10,000 in those it teaches with — and the mean is *T* divided by the number
   of agents. It rises when agents die and falls when they are born. A settled
   baseline world has a mean of about 7 at 100,000 tokens, 9 at 10,000.
@@ -30,7 +30,7 @@ For the *n* agents alive, holding τ₁, …, τₙ tokens, with *T* = Σ τᵢ:
   tokens — some 2,100 — and about 8%, some 800, at 10,000
   ([Where do the tokens go?](where-do-the-tokens-go.md)).
 - **The poorest is almost always 1.** An agent holding 0 tokens after a phase
-  has already been removed by the cleanup, so the poorest survivor holds at
+  has already been removed by the [cleanup](one-iteration.md#cleanup "The end of every phase: only the largest connected piece of the network lives on, and the tokens of the dead are shared out."), so the poorest survivor holds at
   least 1 ([Births and the four ways to die](births-and-deaths.md)).
 
 ## An example

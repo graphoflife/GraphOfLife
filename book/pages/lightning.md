@@ -1,8 +1,8 @@
 # Lightning: tokens that go round
 
-Does the flow of a game ([Token flow](token-flow.md)) go round in circles —
-tokens leaving an agent, crossing several connections, and arriving back
-where they started? The viewer calls such a closed loop of flow a
+Does the flow of a [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") ([Token flow](token-flow.md)) go round in circles —
+[tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") leaving an [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions."), crossing several [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes."), and arriving back
+where they started? The viewer calls such a closed [loop](loops.md "A path through the network that comes back to where it started without using a connection twice.") of flow a
 **lightning**. Ecologists measure the same thing in food webs as a *cycling
 index* (Finn 1976). This note explains what is measured and why only bounds
 can be given.
@@ -57,7 +57,7 @@ as a deficit.) This is exact, and an **upper bound**: at most
 
 ## The net version
 
-Two neighbours staking on each other form a loop of length 2 — circulation of
+Two [neighbours](the-world.md#the-network "An agent joined to another by a connection.") staking on each other form a loop of length 2 — [circulation](circulation.md "The part of a flow that goes round in loops, as against the part that runs from sources to sinks.") of
 the most trivial kind. The `net…` statistics repeat everything on the net flow
 (each pair's two directions cancelled), where loops of length 2 cannot exist:
 `netLightningScore`, `netCyclingShare` (÷ the net total), `netLightningLongest`.
@@ -77,6 +77,6 @@ ceiling 9/11 — the greedy peel found everything there was.
 
 ← [Token flow](token-flow.md) · [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens) · [Token curvature](token-curvature.md) →
 
-> [!info]- Pages that link here (7)
-> [Where the tokens flow](where-the-tokens-flow.md) · [What crosses a connection](what-crosses-a-connection.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [Lightning in every world](lightning-in-every-world.md) · [Token flow](token-flow.md) · [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) · [What a run records](frames-and-stats.md)
+> [!info]- Pages that link here (8)
+> [Glossary](glossary.md) · [Where the tokens flow](where-the-tokens-flow.md) · [What crosses a connection](what-crosses-a-connection.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [Lightning in every world](lightning-in-every-world.md) · [Token flow](token-flow.md) · [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

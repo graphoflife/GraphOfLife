@@ -1,8 +1,8 @@
 # The richest tenth's share
 
 A second, plainer measure of inequality than the
-[Gini coefficient](gini-coefficient.md): **what share of all tokens do the
-richest ten percent of agents hold?** If everyone held the same, it would be
+[Gini coefficient](gini-coefficient.md): **what share of all [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") do the
+richest ten percent of [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") hold?** If everyone held the same, it would be
 10%.
 
 ## Definition
@@ -40,6 +40,6 @@ point of it, the one people most often ask about.
 
 ← [The Gini coefficient and the Lorenz curve](gini-coefficient.md) · [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens) · [Tokens per agent: mean, median, extremes](tokens-per-agent.md) →
 
-> [!info]- Pages that link here (2)
-> [Where do the tokens go?](where-do-the-tokens-go.md) · [What a run records](frames-and-stats.md)
+> [!info]- Pages that link here (3)
+> [Glossary](glossary.md) · [Where do the tokens go?](where-do-the-tokens-go.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->
