@@ -49,7 +49,7 @@ A small λ₂ promises that a good cut exists; a large one proves that none does
 - A ring of *n* agents: λ₂ = 1 − cos(2π/*n*) ≈ 2π²/*n*², tiny for large *n* —
   a ring is easy to cut (twice) into two arcs.
 - A settled [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") world: about 0.0012 at 100,000 tokens, 0.0026 at
-  10,000 ([The geometry of a world](the-geometry-of-a-world.md)) — a random
+  10,000 ([The geometry of a world](what-shape-does-the-network-take.md#the-geometry-of-a-world)) — a random
   walk needs on the order of 1/0.0012 ≈ 800 steps (or 1/0.0026 ≈ 400) to
   forget its start.
 
@@ -68,5 +68,5 @@ more than its last digit.
 ← [Radius and diameter](radius-and-diameter.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Assortativity](assortativity.md) →
 
 > [!info]- Pages that link here (5)
-> [Glossary](glossary.md) · [The geometry of a world](the-geometry-of-a-world.md) · [Physical inspiration](physical-inspiration.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [What a run records](frames-and-stats.md)
+> [Glossary](glossary.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Physical inspiration](physical-inspiration.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

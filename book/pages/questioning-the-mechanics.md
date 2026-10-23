@@ -461,7 +461,7 @@ the tokens it holds. On its own that would make the split permanent, since a
 birth only joins a child to its parent's neighbourhood. So pair it with an
 occasional long-range connection — a child joined, rarely, to an agent
 anywhere. That would let separated populations meet again, and would also
-shorten the world's distances ([The geometry of a world](the-geometry-of-a-world.md)).
+shorten the world's distances ([The geometry of a world](what-shape-does-the-network-take.md#the-geometry-of-a-world)).
 
 **What B2 did.** It took the other road: a world that cannot split.
 [A world that cannot break](a-world-that-cannot-break.md) adds three local

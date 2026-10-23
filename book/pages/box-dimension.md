@@ -41,7 +41,7 @@ $$
 **Example.** In the world of [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1 after its last [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."): 1,336 boxes of size 1
 (every agent alone), 460 of size 3, 122 of size 5, 41 of size 9, 5 of size 17,
 2 of size 33 — a slope of about −2, a box dimension of about 2
-([The geometry of a world](the-geometry-of-a-world.md)).
+([The geometry of a world](what-shape-does-the-network-take.md#the-geometry-of-a-world)).
 
 ## Reading the R²
 
@@ -56,5 +56,5 @@ dimension to mean something, but not sufficient.
 ← [The spectral dimension](spectral-dimension.md) · [Space and dimension](../README.md#space-and-dimension)
 
 > [!info]- Pages that link here (4)
-> [Glossary](glossary.md) · [The geometry of a world](the-geometry-of-a-world.md) · [Physical inspiration](physical-inspiration.md) · [What a run records](frames-and-stats.md)
+> [Glossary](glossary.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Physical inspiration](physical-inspiration.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

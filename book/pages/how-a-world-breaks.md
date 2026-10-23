@@ -258,8 +258,8 @@ To make every figure of this page: `python3 book_figures.py breaking`.
 <!-- turns -->
 ---
 
-← [The geometry of a world](the-geometry-of-a-world.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Degree](degree.md) →
+← [How properties scale together](how-properties-scale-together.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Degree](degree.md) →
 
-> [!info]- Pages that link here (17)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Where tokens flow](where-the-tokens-flow.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [The core of a world](the-core-of-a-world.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [The geometry of a world](the-geometry-of-a-world.md) · [Bridges](bridges.md) · [Cut risk](cut-risk.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like](like-next-to-like.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Do agents cooperate?](do-agents-cooperate.md) · [One world, many colours](one-world-many-colours.md)
+> [!info]- Pages that link here (15)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [Bridges](bridges.md) · [Cut risk](cut-risk.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like](like-next-to-like.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Do agents cooperate?](do-agents-cooperate.md) · [One world, many colours](one-world-many-colours.md)
 <!-- /turns -->

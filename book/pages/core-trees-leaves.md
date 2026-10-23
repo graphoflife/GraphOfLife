@@ -58,7 +58,7 @@ through a bridge of the core, part of the core too.
 In a settled [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") world of 100,000 tokens about 57% of agents are in the
 core, 35% are leaves and the rest in trees; at 10,000 tokens, 54% and 36%
 ([What shape does the network take?](what-shape-does-the-network-take.md),
-[The core of a world](the-core-of-a-world.md)).
+[The core of a world](what-shape-does-the-network-take.md#the-core-of-a-world)).
 
 ## How far a tree hangs
 
@@ -88,13 +88,13 @@ held together by many overlapping loops, not by single rings.
 
 The viewer records only the share of agents in the 2-core (`coreShare`);
 the deeper cores, the trees and the [dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") of the core are measured in
-[The core of a world](the-core-of-a-world.md).
+[The core of a world](what-shape-does-the-network-take.md#the-core-of-a-world).
 
 <!-- turns -->
 ---
 
 ← [Path length](path-length.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Bridges](bridges.md) →
 
-> [!info]- Pages that link here (15)
-> [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [The life of a B1 world](a-worlds-life.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [The core of a world](the-core-of-a-world.md) · [Stars and hubs](stars-and-hubs.md) · [Bridges](bridges.md) · [Loops](loops.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) · [The health bar](health-bar.md) · [What a run records](frames-and-stats.md)
+> [!info]- Pages that link here (14)
+> [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [The life of a B1 world](a-worlds-life.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Stars and hubs](stars-and-hubs.md) · [Bridges](bridges.md) · [Loops](loops.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) · [The health bar](health-bar.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

@@ -266,8 +266,8 @@ To make every figure of this page: `python3 book_figures.py scaling`.
 <!-- turns -->
 ---
 
-← [Power laws, real and apparent](power-laws-real-and-apparent.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [The geometry of a world](the-geometry-of-a-world.md) →
+← [Power laws, real and apparent](power-laws-real-and-apparent.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [How a world breaks](how-a-world-breaks.md) →
 
-> [!info]- Pages that link here (10)
-> [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [The even split](even-split.md) · [Where tokens flow](where-the-tokens-flow.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [The geometry of a world](the-geometry-of-a-world.md) · [Assortativity](assortativity.md) · [Scaling relations between agents' properties](scaling-relations.md) · [Like next to like](like-next-to-like.md)
+> [!info]- Pages that link here (9)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [The even split](even-split.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Assortativity](assortativity.md) · [Scaling relations between agents' properties](scaling-relations.md) · [Like next to like](like-next-to-like.md)
 <!-- /turns -->

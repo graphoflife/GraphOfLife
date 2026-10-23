@@ -231,7 +231,7 @@ longer its plateau; the walker's reading hardly changes. Whether the reading
 by balls goes on rising with the size of a world, or settles near 3.3, these
 three sizes cannot tell.
 
-A word on the viewer's own dimension, which [The geometry of a world](the-geometry-of-a-world.md)
+A word on the viewer's own dimension, which [The geometry of a world](what-shape-does-the-network-take.md#the-geometry-of-a-world)
 finds to be about 3.4 in these worlds (3.0 at 10,000 tokens). It is fitted to the **mean** ball
 over radii 1 to 5, and the mean is pulled up by the few agents next to a
 [hub](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub."). The rulers here use the **typical** ball, the geometric mean over 40 to
@@ -263,7 +263,7 @@ not ways round. In the worlds of 409,600 tokens the core reads 3.1 by balls
 and 2.0 by walks at short range (radii 3 to 6, walks up to 64 steps), but
 2.7 and 1.5 over the whole range of scales: its [loops](loops.md "A path through the network that comes back to where it started without using a connection twice.") close at short range,
 and over long distances it seems to branch more than it meshes.
-[The core of a world](the-core-of-a-world.md) takes the core apart.
+[The core of a world](what-shape-does-the-network-take.md#the-core-of-a-world) takes the core apart.
 
 This matters beyond geometry. In the [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."), tokens move almost as a random
 walk would ([Where the tokens flow](where-the-tokens-flow.md)). On these worlds that
@@ -276,7 +276,7 @@ a random network.
 <!-- figure dimensions/life -->
 ![Dimension over a world's life](../figures/dimensions/life.svg)
 
-**Dimension over a world's life.** The two rulers, each read at one scale, after the games of iterations 10, 25, 50, 100, 200, 300, 500, 750, 1,000 and 1,499 of the 30 worlds, on a logarithmic axis of time. Left: the local dimension from balls between radius 2 and 3; right: the spectral dimension from walks of 4 to 8 steps. The line is the median of the worlds, the darker band the middle half of them and the paler band nine in ten. The viewer's own dimensions, every 25 iterations, are drawn in [The geometry of a world](the-geometry-of-a-world.md).
+**Dimension over a world's life.** The two rulers, each read at one scale, after the games of iterations 10, 25, 50, 100, 200, 300, 500, 750, 1,000 and 1,499 of the 30 worlds, on a logarithmic axis of time. Left: the local dimension from balls between radius 2 and 3; right: the spectral dimension from walks of 4 to 8 steps. The line is the median of the worlds, the darker band the middle half of them and the paler band nine in ten. The viewer's own dimensions, every 25 iterations, are drawn in [The geometry of a world](what-shape-does-the-network-take.md#the-geometry-of-a-world).
 
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Thirty worlds](a-worlds-life.md#thirty-worlds); `python3 gol_lab.py run E10`).
@@ -356,6 +356,6 @@ To make every figure of this page: `python3 book_figures.py dimensions`.
 
 ← [Like next to like](like-next-to-like.md) · [Space and dimension](../README.md#space-and-dimension) · [The random twin: is a world a space?](random-twin.md) →
 
-> [!info]- Pages that link here (14)
-> [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [How births build the network](how-agents-have-children.md) · [Where tokens flow](where-the-tokens-flow.md) · [The core of a world](the-core-of-a-world.md) · [The geometry of a world](the-geometry-of-a-world.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like](like-next-to-like.md) · [The random twin: is a world a space?](random-twin.md) · [What folds a world](what-folds-a-world.md) · [The spectral dimension](spectral-dimension.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Links to strangers](links-to-strangers.md) · [Healthy and rich](healthy-and-rich.md)
+> [!info]- Pages that link here (13)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [How births build the network](how-agents-have-children.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like](like-next-to-like.md) · [The random twin: is a world a space?](random-twin.md) · [What folds a world](what-folds-a-world.md) · [The spectral dimension](spectral-dimension.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Links to strangers](links-to-strangers.md) · [Healthy and rich](healthy-and-rich.md)
 <!-- /turns -->

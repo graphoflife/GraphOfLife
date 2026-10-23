@@ -26,7 +26,7 @@
   "22": "how-agents-have-children#how-the-network-grows",
   "23": "like-next-to-like",
   "24": "how-many-dimensions-does-a-world-have",
-  "25": "the-core-of-a-world",
+  "25": "what-shape-does-the-network-take#the-core-of-a-world",
   "26": "what-the-baseline-world-is",
   "27": "where-do-the-tokens-go#how-even-is-a-world",
   "28": "gains-and-losses",
@@ -36,7 +36,7 @@
   "32": "power-laws-real-and-apparent",
   "33": "the-largest-and-the-smallest",
   "34": "how-properties-scale-together",
-  "35": "the-geometry-of-a-world",
+  "35": "what-shape-does-the-network-take#the-geometry-of-a-world",
   "36": "how-a-world-breaks",
   "37": "one-world-many-colours",
   "38": "do-agents-cooperate",
@@ -296,6 +296,8 @@
   "do-the-rich-stay-rich": "where-do-the-tokens-go#do-the-rich-stay-rich",
   "how-ages-change": "births-deaths-and-ages#how-ages-change-over-a-worlds-life",
   "what-crosses-a-connection": "where-the-tokens-flow#what-crosses-a-connection",
-  "lightning-in-every-world": "where-the-tokens-flow#lightning-in-every-world"
+  "lightning-in-every-world": "where-the-tokens-flow#lightning-in-every-world",
+  "the-core-of-a-world": "what-shape-does-the-network-take#the-core-of-a-world",
+  "the-geometry-of-a-world": "what-shape-does-the-network-take#the-geometry-of-a-world"
  }
 }

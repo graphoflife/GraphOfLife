@@ -44,7 +44,7 @@ length), then once more from the furthest agent any of them reached — the
 
 In a settled [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") world of 100,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") the diameter is about 60
 steps, the radius about 36 and the mean path length about 18; in one of
-10,000 tokens, 29, 17 and 10 ([The geometry of a world](the-geometry-of-a-world.md)).
+10,000 tokens, 29, 17 and 10 ([The geometry of a world](what-shape-does-the-network-take.md#the-geometry-of-a-world)).
 
 <!-- turns -->
 ---
@@ -54,5 +54,5 @@ steps, the radius about 36 and the mean path length about 18; in one of
 **Also about:** [Space and dimension](../README.md#space-and-dimension).
 
 > [!info]- Pages that link here (4)
-> [Glossary](glossary.md) · [The geometry of a world](the-geometry-of-a-world.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [What a run records](frames-and-stats.md)
+> [Glossary](glossary.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

@@ -93,9 +93,9 @@ that made them. The line of 1.5 lies between the two.
 ## Where it is used
 
 - [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)
-  and [The core of a world](the-core-of-a-world.md): B1's worlds and their
+  and [The core of a world](what-shape-does-the-network-take.md#the-core-of-a-world): B1's worlds and their
   cores have a dimension; their twins have none.
-- [The geometry of a world](the-geometry-of-a-world.md): a B1 world with a
+- [The geometry of a world](what-shape-does-the-network-take.md#the-geometry-of-a-world): a B1 world with a
   mean [path length](path-length.md) of 27.9 steps, against 6.0 when wired at
   random.
 - [What folds a world](what-folds-a-world.md): the width of every kind of
@@ -126,6 +126,6 @@ that made them. The line of 1.5 lies between the two.
 
 **Also about:** [The shape and health of the network](../README.md#the-shape-and-health-of-the-network).
 
-> [!info]- Pages that link here (4)
-> [Glossary](glossary.md) · [The estate of the dead](estate.md) · [Healthy and rich](healthy-and-rich.md) · [The health bar](health-bar.md)
+> [!info]- Pages that link here (5)
+> [Glossary](glossary.md) · [The estate of the dead](estate.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Healthy and rich](healthy-and-rich.md) · [The health bar](health-bar.md)
 <!-- /turns -->

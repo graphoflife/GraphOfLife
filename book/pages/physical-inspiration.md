@@ -70,7 +70,7 @@ within *r* steps grows faster than any power of *r*.
 The [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") worlds measure as about **three-dimensional** by the first two:
 their balls grow as *r*^3 over the first few steps, at every size from a few
 hundred agents to sixty thousand
-([The geometry of a world](the-geometry-of-a-world.md),
+([The geometry of a world](what-shape-does-the-network-take.md#the-geometry-of-a-world),
 [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)), and their width
 grows as *N*^0.30 — as a body of 3.3 dimensions would. That is a surprise
 worth taking seriously, and also with care: by box covering they measure
@@ -522,5 +522,5 @@ part of the notebook (see [the contents](../README.md)):
 **Also about:** [Start here](../README.md#start-here).
 
 > [!info]- Pages that link here (16)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Seeds and the random stream](random-numbers.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [The even split](even-split.md) · [Where tokens flow](where-the-tokens-flow.md) · [The core of a world](the-core-of-a-world.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [What folds a world](what-folds-a-world.md) · [The spectral dimension](spectral-dimension.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [What a brain can compute](what-a-brain-can-compute.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The health bar](health-bar.md) · [What goes with what](what-goes-with-what.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Seeds and the random stream](random-numbers.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [The even split](even-split.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [What folds a world](what-folds-a-world.md) · [The spectral dimension](spectral-dimension.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [What a brain can compute](what-a-brain-can-compute.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The health bar](health-bar.md) · [What goes with what](what-goes-with-what.md)
 <!-- /turns -->

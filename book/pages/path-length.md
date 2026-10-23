@@ -54,6 +54,6 @@ is: in a lattice they grow like a power of the number of agents, in a
 
 **Also about:** [Space and dimension](../README.md#space-and-dimension).
 
-> [!info]- Pages that link here (11)
-> [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [The world: tokens, agents and a network](the-world.md) · [The starting ring](starting-ring.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [The geometry of a world](the-geometry-of-a-world.md) · [Radius and diameter](radius-and-diameter.md) · [Physical inspiration](physical-inspiration.md) · [The random twin: is a world a space?](random-twin.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [What a run records](frames-and-stats.md)
+> [!info]- Pages that link here (10)
+> [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [The world: tokens, agents and a network](the-world.md) · [The starting ring](starting-ring.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Radius and diameter](radius-and-diameter.md) · [Physical inspiration](physical-inspiration.md) · [The random twin: is a world a space?](random-twin.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

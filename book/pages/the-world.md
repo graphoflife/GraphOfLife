@@ -244,6 +244,6 @@ writes 3,000 frames, about 2 gigabytes.
 
 [How the simulation works](../README.md#how-the-simulation-works) · [One iteration, step by step](one-iteration.md) →
 
-> [!info]- Pages that link here (10)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [The starting ring](starting-ring.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [The life of a B1 world](a-worlds-life.md) · [How the game is played](how-the-game-is-played.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [Eras and contests: does a world keep getting better?](eras-and-contests.md) · [The lab, the engine and pilots](the-lab.md)
+> [!info]- Pages that link here (9)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [The starting ring](starting-ring.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [The life of a B1 world](a-worlds-life.md) · [How the game is played](how-the-game-is-played.md) · [Eras and contests: does a world keep getting better?](eras-and-contests.md) · [The lab, the engine and pilots](the-lab.md)
 <!-- /turns -->

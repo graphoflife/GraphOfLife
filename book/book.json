@@ -633,7 +633,7 @@
       "kind": "overview",
       "status": "analysed",
       "added": "2026-10-17",
-      "summary": "What the notebook knows about where tokens go: the budget of a game, the even split and where tokens come to rest, the downhill drain, how little goes round beyond chance, the groups tokens stay in, and the estate of the dead."
+      "summary": "In every game each agent stakes all its tokens, on its own node and on its neighbours'. Seven pages measured where the tokens go, each with its own tool, and this page puts them side by side."
     },
     {
       "id": "how-the-game-is-played",
@@ -761,10 +761,11 @@
     },
     {
       "id": "what-shape-does-the-network-take",
-      "title": "What shape does the network take?",
+      "title": "The shape of the network",
       "file": "pages/what-shape-does-the-network-take.md",
       "topics": [
-        "network"
+        "network",
+        "space"
       ],
       "kind": "experiment",
       "experiments": [
@@ -772,19 +773,7 @@
       ],
       "status": "analysed",
       "added": "2026-10-08",
-      "summary": "What happens to the founders' ring? How many connections does an agent have, and how unequally are they spread? Is the network a tree, a web, or something in between?"
-    },
-    {
-      "id": "the-core-of-a-world",
-      "title": "The core of a world",
-      "file": "pages/the-core-of-a-world.md",
-      "topics": [
-        "network"
-      ],
-      "kind": "study",
-      "status": "written",
-      "added": "2026-10-11",
-      "summary": "How much of a world is core — of its agents, and of its tokens? How many dimensions does the core have, by the same two rulers that measured the whole world? Is the core a space of its own, with the trees as decoration — or are the trees what makes a world look the way it does? How far do the trees hang from the core, and how large are they?"
+      "summary": "Within a hundred iterations, the founders' ring with its few shortcuts becomes a mesh, the core, with small trees hanging off it. The core holds more than half of the agents, three quarters of the tokens and every loop."
     },
     {
       "id": "power-laws-real-and-apparent",
@@ -810,19 +799,6 @@
       "status": "written",
       "added": "2026-10-08",
       "summary": "How do an agent's tokens grow with its connections? Is that the resting state of the even split (Where the tokens flow)? How closely knit is the neighbourhood of a well-connected agent? To whom are the well-connected joined?"
-    },
-    {
-      "id": "the-geometry-of-a-world",
-      "title": "The geometry of a world",
-      "file": "pages/the-geometry-of-a-world.md",
-      "topics": [
-        "network",
-        "space"
-      ],
-      "kind": "study",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "How far apart are the agents of a world, and is that far or near for a network of its kind? What kind of space is it: a line, a sheet, a tree? How easily could it be cut in two? How long would a random walk — or a token — need to cross it?"
     },
     {
       "id": "how-a-world-breaks",

@@ -111,11 +111,9 @@ How the game is played, where tokens flow, which loops they go round, and the gr
 
 Degrees, cores, bridges, power laws and cuts: what shape the links take, and how a world breaks.
 
-- [What shape does the network take?](pages/what-shape-does-the-network-take.md)
-- [The core of a world](pages/the-core-of-a-world.md)
+- [The shape of the network](pages/what-shape-does-the-network-take.md)
 - [Power laws, real and apparent](pages/power-laws-real-and-apparent.md)
 - [How properties scale together](pages/how-properties-scale-together.md)
-- [The geometry of a world](pages/the-geometry-of-a-world.md)
 - [How a world breaks](pages/how-a-world-breaks.md)
 - [Degree](pages/degree.md)
 - [Stars and hubs](pages/stars-and-hubs.md)

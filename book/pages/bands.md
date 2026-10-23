@@ -49,5 +49,5 @@ In the code: `bands` in `gol_analysis.py`.
 ← [Median and quantiles](median-and-quantiles.md) · [Methods and statistics](../README.md#methods-and-statistics) · [The settled life of a world](settled-life.md) →
 
 > [!info]- Pages that link here (5)
-> [The life of a B1 world](a-worlds-life.md) · [How the game is played](how-the-game-is-played.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [How worlds are measured](how-worlds-are-measured.md) · [Median and quantiles](median-and-quantiles.md)
+> [The life of a B1 world](a-worlds-life.md) · [How the game is played](how-the-game-is-played.md) · [The shape of the network](what-shape-does-the-network-take.md) · [How worlds are measured](how-worlds-are-measured.md) · [Median and quantiles](median-and-quantiles.md)
 <!-- /turns -->

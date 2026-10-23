@@ -34,7 +34,7 @@ It was first written after Experiments 1 to 5, on worlds of 10,000 tokens,
 and kept up to date as more pages were written. Its second edition reads
 thirty worlds of 100,000 tokens. Two pages are new with it:
 [How ages change over a world's life](births-deaths-and-ages.md#how-ages-change-over-a-worlds-life) and
-[The core of a world](the-core-of-a-world.md).
+[The core of a world](what-shape-does-the-network-take.md#the-core-of-a-world).
 
 ### The record
 
@@ -123,7 +123,7 @@ worlds of 10,000 tokens are given in brackets where they differ.
 - **A core** of three agents in five at the start of a game (57% after it,
   as above). It holds three quarters of the tokens and every loop. Its
   dimension by balls is a little lower than the whole world's (2.5), and the
-  same by walks ([The core of a world](the-core-of-a-world.md)).
+  same by walks ([The core of a world](what-shape-does-the-network-take.md#the-core-of-a-world)).
 
 ### What seems to hold across the pages
 
@@ -237,7 +237,7 @@ world grows as a body does. It does not become a "small world", in which
 everyone is a few steps from everyone. It has a finite dimension
 ([How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)),
 and its core is a space of the same kind
-([The core of a world](the-core-of-a-world.md)). Its width grows with its
+([The core of a world](what-shape-does-the-network-take.md#the-core-of-a-world)). Its width grows with its
 size ([How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)),
 where a random network with the same connections would be a small world.
 
@@ -400,7 +400,7 @@ connection that carries nothing is cut
 stretched web of stars, grown locally by children joining their parents'
 neighbourhoods. It is four and a half times as long as a random network with
 the same connections, with a thirty-third of its [spectral gap](spectral-gap.md "How hard a network is to cut into two halves, and how fast a walker on it forgets where it began.")
-([The geometry of a world](the-geometry-of-a-world.md)). It breaks along its
+([The geometry of a world](what-shape-does-the-network-take.md#the-geometry-of-a-world)). It breaks along its
 poor regions, whose borders go quiet. Then the [cull](one-iteration.md#cleanup),
 the rule that only the largest piece of the network lives on, kills whatever
 fell off ([How a world breaks](how-a-world-breaks.md)). **Brains** spread by
@@ -813,7 +813,7 @@ the agents are arranged, and how fast anything crosses a world:
 - **The shape changes.** Half the [clustering](clustering.md "How often an agent's neighbours are also each other's neighbours."), more loops per agent, fewer
   bridges, distances twice as long, and a ball dimension that rises with size
   ([How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md),
-  [The core of a world](the-core-of-a-world.md)).
+  [The core of a world](what-shape-does-the-network-take.md#the-core-of-a-world)).
 - **Stars can take a world.** One world in four condensed around a single
   centre, and then everything about it, its core, its game, its cuts, follows
   from the star ([Stars](#stars),

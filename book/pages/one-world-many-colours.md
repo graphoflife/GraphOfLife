@@ -106,7 +106,7 @@ right, up and down mean nothing — rotate the picture and it says the same.
 > 1. Read frames `2998` (start of the last game) and `2999` (after it): `ids`, `tokens`, `ages`, `delta`, `brain_ids`, `edges`.
 > 2. Curvature: in frame 2998, Σ over neighbours of (their tokens − own tokens).
 > 3. Families: read frames 2799 to 2999, note each genotype's parent, and climb from each living genotype to one alive after the game of iteration 1,399.
-> 4. Loops: as in [The geometry of a world](the-geometry-of-a-world.md).
+> 4. Loops: as in [The geometry of a world](what-shape-does-the-network-take.md#the-geometry-of-a-world).
 > 5. Which agents are drawn: as in [What shape does the network take?](what-shape-does-the-network-take.md) (`book_chapters.society.shown`).
 > 6. Lay out with `networkx.forceatlas2_layout(G, max_iter=200, seed=1)` and colour.
 >
@@ -148,7 +148,7 @@ same places in every picture. What each colouring shows:
   ([Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens)).
 - **[Loops](loops.md "A path through the network that comes back to where it started without using a connection twice.").** The clumps around hubs carry the loops — up to 1,012 of the
   world's 11,297 independent loops pass through one agent — and the arms carry
-  none ([The geometry of a world](the-geometry-of-a-world.md)).
+  none ([The geometry of a world](what-shape-does-the-network-take.md#the-geometry-of-a-world)).
 
 ## Where the tokens went
 

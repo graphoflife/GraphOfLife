@@ -330,7 +330,7 @@ and the genotypes per agent come out within 3% of each other. So the nodes
 kept do not fall with size after all.
 
 But at ten times the tokens, the dimension from ball growth is 15% higher
-(3.4 against 3.0, [The geometry of a world](the-geometry-of-a-world.md)).
+(3.4 against 3.0, [The geometry of a world](what-shape-does-the-network-take.md#the-geometry-of-a-world)).
 Births and deaths per agent run 13 to 21% higher, as
 [Births, deaths and ages](births-deaths-and-ages.md) and
 [How ages change over a world's life](births-deaths-and-ages.md#how-ages-change-over-a-worlds-life) find too. Leaves
@@ -376,7 +376,7 @@ shows it.
 
 At large scales, then, a world is less like a small world than like a
 three-dimensional body. It is grown locally, by children joined to their
-parents' neighbourhoods ([The geometry of a world](the-geometry-of-a-world.md)).
+parents' neighbourhoods ([The geometry of a world](what-shape-does-the-network-take.md#the-geometry-of-a-world)).
 It never makes the long jumps that keep a random network small. The mean
 distances scatter widely between worlds of one size, and bend a little; the
 diameter is the cleaner of the two.
@@ -447,7 +447,7 @@ fill it.
 When this experiment was planned, every finding about the baseline had been
 made on worlds of 10,000 tokens, about 1,300 agents each. That is small. A
 world of 1,300 agents is some 30 steps across
-([The geometry of a world](the-geometry-of-a-world.md)), and its structure
+([The geometry of a world](what-shape-does-the-network-take.md#the-geometry-of-a-world)), and its structure
 fades within three ([Like next to like](like-next-to-like.md)). There is room
 for a dozen regions side by side, no more. Questions about space, about
 scale, and about whether different kinds of agents can live side by side need
@@ -776,7 +776,7 @@ these matters.
 
 ## Where to go next
 
-- [The geometry of a world](the-geometry-of-a-world.md): distances, ball
+- [The geometry of a world](what-shape-does-the-network-take.md#the-geometry-of-a-world): distances, ball
   growth and the shape of the worlds of 100,000 tokens.
 - [Genotypes and lineages](genotypes-and-lineages.md): how lines of descent
   come and go, and take a world over.
@@ -979,6 +979,6 @@ iterations each.
 
 **Also about:** [Space and dimension](../README.md#space-and-dimension).
 
-> [!info]- Pages that link here (29)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [When a world ends](extinction.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Where tokens flow](where-the-tokens-flow.md) · [The core of a world](the-core-of-a-world.md) · [The geometry of a world](the-geometry-of-a-world.md) · [How a world breaks](how-a-world-breaks.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like](like-next-to-like.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do the brains matter?](do-the-brains-matter.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [How worlds are measured](how-worlds-are-measured.md) · [One world, many colours](one-world-many-colours.md) · [What a simulation costs](what-a-simulation-costs.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Logarithmic axes and power laws](logarithmic-axes.md)
+> [!info]- Pages that link here (28)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [When a world ends](extinction.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [How a world breaks](how-a-world-breaks.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like](like-next-to-like.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do the brains matter?](do-the-brains-matter.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [How worlds are measured](how-worlds-are-measured.md) · [One world, many colours](one-world-many-colours.md) · [What a simulation costs](what-a-simulation-costs.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Logarithmic axes and power laws](logarithmic-axes.md)
 <!-- /turns -->
