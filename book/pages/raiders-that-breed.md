@@ -62,7 +62,7 @@ plants the same strategies in [B1](b1-and-b2.md "The first baseline: the algorit
 ## The trials
 
 <!-- runs E34 -->
-> [!info] The trials behind this page
+> [!info]- The trials behind this page
 > **180 trials**, invasions: a patch of the world of one era given a strategy written by hand, and its agents counted after every iteration; each plays 300 iterations, from a world another run kept in its archive.
 >
 > - **breeding raiders** — 45 trials: worlds `pilot:L/B2-long-s001`, `pilot:L/B2-long-s002`, `pilot:L/B2-long-s003`, `pilot:L/B2-long-s004`, `pilot:L/B2-long-s005`; at iteration 2,000, 5,000, 10,000; strategies breeding-raider; patches of 5% of the world; places 1, 2, 3.

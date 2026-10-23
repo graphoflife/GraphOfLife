@@ -64,7 +64,7 @@ reports how even each new world is.
 ## The runs
 
 <!-- runs E24 -->
-> [!info] The runs behind this page
+> [!info]- The runs behind this page
 > **6 runs.** Every condition below is run once for each of its seeds, for 2,000 iterations — or until its world dies out. Every setting is that of the baseline **B2** (a world that cannot break) unless the condition changes it.
 >
 > - **the search's configuration** — changes `hidden_layers` = 32, `random_input_amount` = 0, `message_prepass` = on, `allow_gifting` = on, `prune_after` = reproduction, `inactive_window` = iteration, `incumbency` = 1.0, `birth_links` = 0, `mend_on_death` = off, `prune_needs` = 0, `keep_home` = 0.0, `max_age` = 0, `link_search` = walk, `mutation_probability` = 0.4, `extinction_threshold` = 0, `proto` = came_from, contest = lottery, grow, pool = genotype; 10,000 tokens; seeds 1 to 5. Runs `B2-10000-d2b0d2-s001` … `B2-10000-d2b0d2-s005`.
@@ -90,7 +90,7 @@ reports how even each new world is.
 > | [`message_prepass`](settings.md#message_prepass) | **on** | **on** | Whether every phase begins with an extra look in which agents only write messages, so the look that acts reads messages written this phase. |
 > | [`allow_handover`](settings.md#allow_handover) | off | off | Whether a parent may move some of its own connections to its newborn child. |
 > | [`allow_revolutions`](settings.md#allow_revolutions) | on | on | Whether a coalition of smaller stakers can take a node from its largest staker (see the note *How a coalition takes a node*). |
-> | [`allow_gifting`](settings.md#allow_gifting) | **on** | **on** | Whether agents may give tokens to neighbours during reproduction. Off in every run of this book. |
+> | [`allow_gifting`](settings.md#allow_gifting) | **on** | **on** | Whether agents may give tokens to neighbours during reproduction. Off in both baselines; on in a few pilots, in Experiment 24 and in half the worlds of the screen. |
 > | [`random_decisions`](settings.md#random_decisions) | off | off | The control: every number a brain would produce is replaced by a random draw from the standard normal distribution. |
 > | [`prune_after`](settings.md#prune_after) | **reproduction** | **reproduction** | After which phase connections that carried no tokens are cut: `blotto` (the game), `reproduction`, or `both`. |
 > | [`inactive_window`](settings.md#inactive_window) | **iteration** | **iteration** | How long a connection may go unused: `phase` means it must carry tokens in the phase being judged; `iteration` allows the two last phases. |

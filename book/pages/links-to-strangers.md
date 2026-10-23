@@ -169,6 +169,6 @@ a smaller world gives a later brain more room to win, this batch cannot say.
 
 **Also about:** [The shape and health of the network](../README.md#the-shape-and-health-of-the-network).
 
-> [!info]- Pages that link here (2)
-> [The candidates, played on](the-candidates-played-on.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (4)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [The candidates, played on](the-candidates-played-on.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

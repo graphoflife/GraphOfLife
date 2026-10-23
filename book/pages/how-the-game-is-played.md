@@ -21,7 +21,7 @@ where the thirty of 10,000 tokens this page was first written from differ,
 both are given.
 
 <!-- runs E10 -->
-> [!info] The runs behind this page
+> [!info]- The runs behind this page
 > **30 runs.** Every condition below is run once for every seed (1 to 30), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
 >
 > - **baseline** — changes nothing: B1 as it is; 100,000 tokens. Runs `B1-100000-s001` … `B1-100000-s030`.
@@ -44,7 +44,7 @@ both are given.
 > | [`message_prepass`](settings.md#message_prepass) | on | Whether every phase begins with an extra look in which agents only write messages, so the look that acts reads messages written this phase. |
 > | [`allow_handover`](settings.md#allow_handover) | on | Whether a parent may move some of its own connections to its newborn child. |
 > | [`allow_revolutions`](settings.md#allow_revolutions) | on | Whether a coalition of smaller stakers can take a node from its largest staker (see the note *How a coalition takes a node*). |
-> | [`allow_gifting`](settings.md#allow_gifting) | off | Whether agents may give tokens to neighbours during reproduction. Off in every run of this book. |
+> | [`allow_gifting`](settings.md#allow_gifting) | off | Whether agents may give tokens to neighbours during reproduction. Off in both baselines; on in a few pilots, in Experiment 24 and in half the worlds of the screen. |
 > | [`random_decisions`](settings.md#random_decisions) | off | The control: every number a brain would produce is replaced by a random draw from the standard normal distribution. |
 > | [`prune_after`](settings.md#prune_after) | blotto | After which phase connections that carried no tokens are cut: `blotto` (the game), `reproduction`, or `both`. |
 > | [`inactive_window`](settings.md#inactive_window) | phase | How long a connection may go unused: `phase` means it must carry tokens in the phase being judged; `iteration` allows the two last phases. |
@@ -309,6 +309,6 @@ To make every figure of this page: `python3 book_figures.py game`.
 
 ← [Where tokens go](where-tokens-go.md) · [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens) · [The even split](even-split.md) →
 
-> [!info]- Pages that link here (21)
-> [The world: tokens, agents and a network](the-world.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [What the baseline world is](what-the-baseline-world-is.md) · [Thirty worlds](thirty-worlds.md) · [Where do the tokens go?](where-do-the-tokens-go.md) · [How even is a world?](how-even-is-a-world.md) · [Gains and losses](gains-and-losses.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [Staking at home, and keeping one's node](home-stake.md) · [The core of a world](the-core-of-a-world.md) · [Stars and hubs](stars-and-hubs.md) · [Like next to like](like-next-to-like.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [Why evolution stops](why-evolution-stops.md) · [Do agents cooperate?](do-agents-cooperate.md) · [Muller plots](muller-plot.md)
+> [!info]- Pages that link here (23)
+> [The world: tokens, agents and a network](the-world.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [What a brain says](brain-outputs.md) · [How a coalition takes a node](revolution.md) · [What the baseline world is](what-the-baseline-world-is.md) · [Thirty worlds](thirty-worlds.md) · [Where do the tokens go?](where-do-the-tokens-go.md) · [How even is a world?](how-even-is-a-world.md) · [Gains and losses](gains-and-losses.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [Staking at home, and keeping one's node](home-stake.md) · [The core of a world](the-core-of-a-world.md) · [Stars and hubs](stars-and-hubs.md) · [Like next to like](like-next-to-like.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [Why evolution stops](why-evolution-stops.md) · [Do agents cooperate?](do-agents-cooperate.md) · [Muller plots](muller-plot.md)
 <!-- /turns -->

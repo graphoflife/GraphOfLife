@@ -299,6 +299,6 @@ physics, asks for exactly that kind of thing.
 
 **Also about:** [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are).
 
-> [!info]- Pages that link here (5)
-> [Every setting](settings.md) · [Every era against three](every-era-against-three.md) · [What would count as open-ended evolution](open-ended-test.md) · [How large a crowd a raider needs](how-large-a-crowd-a-raider-needs.md) · [A crew of raiders](a-crew-of-raiders.md)
+> [!info]- Pages that link here (8)
+> [Every setting](settings.md) · [What a brain sees](brain-inputs.md) · [What a brain says](brain-outputs.md) · [Messages](messages.md) · [Every era against three](every-era-against-three.md) · [What would count as open-ended evolution](open-ended-test.md) · [How large a crowd a raider needs](how-large-a-crowd-a-raider-needs.md) · [A crew of raiders](a-crew-of-raiders.md)
 <!-- /turns -->

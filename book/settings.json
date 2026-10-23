@@ -84,7 +84,7 @@
    "meaning": "Whether a coalition of smaller stakers can take a node from its largest staker (see the note *How a coalition takes a node*)."
   },
   "allow_gifting": {
-   "meaning": "Whether agents may give tokens to neighbours during reproduction. Off in every run of this book."
+   "meaning": "Whether agents may give tokens to neighbours during reproduction. Off in both baselines; on in a few pilots, in Experiment 24 and in half the worlds of the screen."
   },
   "random_decisions": {
    "meaning": "The control: every number a brain would produce is replaced by a random draw from the standard normal distribution."

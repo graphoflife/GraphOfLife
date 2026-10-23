@@ -22,7 +22,7 @@ where the thirty of 10,000 tokens this page was first written from differ,
 both are given.
 
 <!-- runs E10 -->
-> [!info] The runs behind this page
+> [!info]- The runs behind this page
 > **30 runs.** Every condition below is run once for every seed (1 to 30), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
 >
 > - **baseline** — changes nothing: B1 as it is; 100,000 tokens. Runs `B1-100000-s001` … `B1-100000-s030`.
@@ -45,7 +45,7 @@ both are given.
 > | [`message_prepass`](settings.md#message_prepass) | on | Whether every phase begins with an extra look in which agents only write messages, so the look that acts reads messages written this phase. |
 > | [`allow_handover`](settings.md#allow_handover) | on | Whether a parent may move some of its own connections to its newborn child. |
 > | [`allow_revolutions`](settings.md#allow_revolutions) | on | Whether a coalition of smaller stakers can take a node from its largest staker (see the note *How a coalition takes a node*). |
-> | [`allow_gifting`](settings.md#allow_gifting) | off | Whether agents may give tokens to neighbours during reproduction. Off in every run of this book. |
+> | [`allow_gifting`](settings.md#allow_gifting) | off | Whether agents may give tokens to neighbours during reproduction. Off in both baselines; on in a few pilots, in Experiment 24 and in half the worlds of the screen. |
 > | [`random_decisions`](settings.md#random_decisions) | off | The control: every number a brain would produce is replaced by a random draw from the standard normal distribution. |
 > | [`prune_after`](settings.md#prune_after) | blotto | After which phase connections that carried no tokens are cut: `blotto` (the game), `reproduction`, or `both`. |
 > | [`inactive_window`](settings.md#inactive_window) | phase | How long a connection may go unused: `phase` means it must carry tokens in the phase being judged; `iteration` allows the two last phases. |
@@ -404,6 +404,6 @@ To make every figure of this page: `python3 book_figures.py flow`.
 
 ← [The even split](even-split.md) · [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens) · [What crosses a connection](what-crosses-a-connection.md) →
 
-> [!info]- Pages that link here (23)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [What the baseline world is](what-the-baseline-world-is.md) · [How agents have children](how-agents-have-children.md) · [Where do the tokens go?](where-do-the-tokens-go.md) · [Do the rich stay rich?](do-the-rich-stay-rich.md) · [Gains and losses](gains-and-losses.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Where tokens go](where-tokens-go.md) · [How the game is played](how-the-game-is-played.md) · [The even split](even-split.md) · [What crosses a connection](what-crosses-a-connection.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [Lightning in every world](lightning-in-every-world.md) · [Token flow](token-flow.md) · [Token curvature](token-curvature.md) · [How properties scale together](how-properties-scale-together.md) · [The geometry of a world](the-geometry-of-a-world.md) · [Stars and hubs](stars-and-hubs.md) · [Physical inspiration](physical-inspiration.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [Do agents cooperate?](do-agents-cooperate.md) · [What goes with what](what-goes-with-what.md)
+> [!info]- Pages that link here (24)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [Splitting tokens into whole numbers](largest-remainder.md) · [What the baseline world is](what-the-baseline-world-is.md) · [How agents have children](how-agents-have-children.md) · [Where do the tokens go?](where-do-the-tokens-go.md) · [Do the rich stay rich?](do-the-rich-stay-rich.md) · [Gains and losses](gains-and-losses.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Where tokens go](where-tokens-go.md) · [How the game is played](how-the-game-is-played.md) · [The even split](even-split.md) · [What crosses a connection](what-crosses-a-connection.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [Lightning in every world](lightning-in-every-world.md) · [Token flow](token-flow.md) · [Token curvature](token-curvature.md) · [How properties scale together](how-properties-scale-together.md) · [The geometry of a world](the-geometry-of-a-world.md) · [Stars and hubs](stars-and-hubs.md) · [Physical inspiration](physical-inspiration.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [Do agents cooperate?](do-agents-cooperate.md) · [What goes with what](what-goes-with-what.md)
 <!-- /turns -->

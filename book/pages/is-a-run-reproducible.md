@@ -1,51 +1,93 @@
 # Is a run reproducible?
 
-Every later page compares worlds: many seeds against many, one [setting](settings.md "One number or switch of a run's rules, fixed before it starts.")
-against another. That only means something if a world is decided by its
-settings and its seed and by **nothing else** — not by when it was stopped
-and continued, not by a crash, not by which computer or how many processor
-cores ran it.
-
 > [!question] Questions of this page
 > - Does the same seed always give the same world, [frame](frames-and-stats.md "A whole world as a run records it after one phase: every agent, its tokens and connections.") for frame?
 > - Does stopping a run and continuing it later, in a new process, change it?
 > - Does a crash, after which the run is resumed from its last save, change it?
 > - Does the number of processor threads the matrix library uses change it?
 
+## In short
+
+Every comparison in this notebook assumes that a run is decided by its
+settings and its seed alone. Experiment 1 tested this on three seeds, each
+run four ways to [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") 30. Stopping a run and continuing it in a new
+process, or crashing it and resuming it, changed nothing, bit for bit.
+Letting the matrix library use every processor core changed the last bits of
+a few numbers, though not one decision in 150 iterations. So every run in
+this notebook uses one thread, and on the same kind of computer it can be
+made again exactly.
+
+## Why it matters
+
+Every later page compares worlds: many seeds against many, one setting
+against another. That only means something if a world is decided by its
+settings and its seed, and by **nothing else**. Not by when it was stopped
+and continued, not by a crash, and not by which computer, or how many
+processor cores, ran it.
+
 ## Why it could be true
 
-A computer program that uses random numbers can still be exactly repeatable,
-if three things hold.
+A computer program that uses random numbers can still be exactly repeatable.
+Think of a pseudo-random generator as a very long book of random-looking
+digits: whoever starts on the same page reads the same digits. A run is
+repeatable if three things hold.
 
 1. **Every random number comes from a seeded stream.** A pseudo-random
-   generator produces a fixed sequence of numbers from its starting value. In
-   Graph of Life every world owns its own generator, started from its seed,
-   and draws everything from it ([Seeds and the random stream](random-numbers.md)).
+   generator produces a fixed sequence of numbers from its starting value,
+   the seed. In Graph of Life every world owns its own generator, started
+   from its seed, and draws everything from it
+   ([Seeds and the random stream](random-numbers.md)).
 2. **Everything is done in a fixed order.** [Agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") act in increasing order of
-   id; [neighbours](the-world.md#the-network "An agent joined to another by a connection.") are listed in increasing order of id; [messages](messages.md "Numbers an agent writes to itself and to each neighbour every phase, which their brains read.") are held
-   back in an outbox and delivered together once every agent has written —
-   after the look that only talks, and again at the end of the phase — so
-   that no agent reads a message another agent wrote a moment earlier in the
+   id, and [neighbours](the-world.md#the-network "An agent joined to another by a connection.") are listed in increasing order of id. [Messages](messages.md "Numbers an agent writes to itself and to each neighbour every phase, which their brains read.") are held
+   back in an outbox and delivered together once every agent has written. That
+   happens after the look that only talks, and again at the end of the phase.
+   So no agent reads a message another agent wrote a moment earlier in the
    same look.
 3. **A saved world is the whole world.** To stop a run and continue it later,
-   the program saves a **checkpoint**: every agent's [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes."), [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") weights,
-   [genotype](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.") and age, every [connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") and when it last carried tokens, every
-   message in flight — and the state of the random generator. A run continued
-   from a checkpoint first deletes any frames recorded after it, then lives
-   those [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") again.
+   the program saves a **checkpoint**. It holds every agent's [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes."), [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.")
+   weights, [genotype](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.") and age. It holds every [connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes."), and when it last
+   carried tokens, and every message in flight. And it holds the state of the
+   random generator. A run continued from a checkpoint first deletes any
+   frames recorded after it (the pictures of the world it writes after every
+   phase). Then it lives those iterations again.
 
 What these do not cover is arithmetic itself. Adding real numbers on a
-computer is not associative: (*a* + *b*) + *c* can differ from
-*a* + (*b* + *c*) in its last bit, because each sum is rounded. A brain adds
-up thousands of products. The library that multiplies matrices (BLAS) may
-split such a sum over several processor cores, and then the order of the
-additions — and so the last bit of the result — depends on how many cores it
-uses.
+computer is not associative. That is, (*a* + *b*) + *c* can differ from
+*a* + (*b* + *c*) in its last bit, because each sum is rounded. For example,
+(0.1 + 0.2) + 0.3 gives 0.6000000000000001 on a computer, but
+0.1 + (0.2 + 0.3) gives 0.6. A brain adds up thousands of products. The
+library that multiplies matrices (BLAS) may split such a sum over several
+processor cores, as several threads of work. Then the order of the additions,
+and so the last bit of the result, depends on how many cores it uses.
 
 ## The experiment
 
+Each of three seeds is run four ways, each to iteration 30:
+
+![The four ways each seed is run](../diagrams/reproducibility.svg)
+
+- **straight**: in one process, from start to finish. This is the reference.
+- **stopped at 10**: stopped at iteration 10, saved, and continued in a *new*
+  process from the checkpoint on disk.
+- **cut off at 15**: the process is killed at iteration 15 without saving, as
+  if the power went. Its last checkpoint is from iteration 10, so it resumes
+  from there and lives iterations 10 to 15 a second time.
+- **all BLAS threads**: the matrix library may use every core. Every other
+  run in this notebook uses exactly one.
+
+Each variant is compared with the straight run of the same seed:
+
+- all 60 frames, written out as text with their keys sorted, so that two
+  identical frames give identical text;
+- all 60 rows of statistics;
+- every one of the 29 arrays of the final checkpoint, including the random
+  generator's state and the messages in flight.
+
+The files themselves cannot be compared byte by byte, because compressed
+files carry the time they were written.
+
 <!-- runs E01 -->
-> [!info] The runs behind this page
+> [!info]- The runs behind this page
 > **12 runs.** Every condition below is run once for every seed (1 to 3), for 30 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
 >
 > - **straight** — changes nothing: B1 as it is; 10,000 tokens. Runs `B1-10000-s001-straight` … `B1-10000-s003-straight`.
@@ -71,7 +113,7 @@ uses.
 > | [`message_prepass`](settings.md#message_prepass) | on | on | on | on | Whether every phase begins with an extra look in which agents only write messages, so the look that acts reads messages written this phase. |
 > | [`allow_handover`](settings.md#allow_handover) | on | on | on | on | Whether a parent may move some of its own connections to its newborn child. |
 > | [`allow_revolutions`](settings.md#allow_revolutions) | on | on | on | on | Whether a coalition of smaller stakers can take a node from its largest staker (see the note *How a coalition takes a node*). |
-> | [`allow_gifting`](settings.md#allow_gifting) | off | off | off | off | Whether agents may give tokens to neighbours during reproduction. Off in every run of this book. |
+> | [`allow_gifting`](settings.md#allow_gifting) | off | off | off | off | Whether agents may give tokens to neighbours during reproduction. Off in both baselines; on in a few pilots, in Experiment 24 and in half the worlds of the screen. |
 > | [`random_decisions`](settings.md#random_decisions) | off | off | off | off | The control: every number a brain would produce is replaced by a random draw from the standard normal distribution. |
 > | [`prune_after`](settings.md#prune_after) | blotto | blotto | blotto | blotto | After which phase connections that carried no tokens are cut: `blotto` (the game), `reproduction`, or `both`. |
 > | [`inactive_window`](settings.md#inactive_window) | phase | phase | phase | phase | How long a connection may go unused: `phase` means it must carry tokens in the phase being judged; `iteration` allows the two last phases. |
@@ -105,25 +147,12 @@ uses.
 > A value in **bold** differs from the baseline B1.
 <!-- /runs -->
 
-Each of three seeds is run four ways, each to iteration 30:
-
-![The four ways each seed is run](../diagrams/reproducibility.svg)
-
-- **straight** — in one process, from start to finish. This is the reference.
-- **stopped at 10** — stopped at iteration 10, saved, and continued in a
-  *new* process from the checkpoint on disk.
-- **cut off at 15** — the process is killed at iteration 15 without saving,
-  as if the power went. Its last checkpoint is from iteration 10, so it
-  resumes from there and lives iterations 10 to 15 a second time.
-- **all BLAS threads** — the matrix library may use every core. Every other
-  run in this notebook uses exactly one.
-
-Each variant is compared with the straight run of the same seed: all 60
-frames, written out as text with their keys sorted so that two identical
-frames give identical text; all 60 rows of statistics; and every one of the
-29 arrays of the final checkpoint, including the random generator's state and
-the messages in flight. (Files cannot be compared byte by byte, because
-compressed files carry the time they were written.)
+We expected all four ways to give the same run, bit for bit, with every core
+at work too. The reason was the first and the third condition above. Every
+random draw comes from the world's own stream, and a checkpoint saves that
+stream with everything else. So a resumed run should live its lost iterations
+again exactly as before. The thesis says so; it is quoted word for word, as
+it was written down before any of the runs existed:
 
 <!-- thesis E01 -->
 > [!quote] The thesis of Experiment 1, written down before any of its runs existed
@@ -138,60 +167,62 @@ compressed files carry the time they were written.)
 
 ## What happened
 
-**Stopping and crashing change nothing.** For all three seeds, the run
-stopped at 10 and the run cut off at 15 recorded exactly what the straight
-run recorded: every frame, every row, every array. Their records also show
-what they went through: the stopped runs were made in two processes,
-iterations 0 to 10 and 10 to 30; the cut-off runs too, the first ending at
-iteration 15 without a checkpoint and the second starting again from
+**Stopping and crashing change nothing.** For all three seeds, the run stopped
+at 10 and the run cut off at 15 recorded exactly what the straight run
+recorded. Every frame, every row and every array was the same. Their records
+also show what they went through. The stopped runs were made in two processes,
+iterations 0 to 10 and 10 to 30. So were the cut-off runs: the first process
+ended at iteration 15 without a checkpoint, and the second started again from
 iteration 10.
 
 **Threads change the last digits.** On all cores, seed 1 was identical to its
-reference. Seeds 2 and 3 recorded the same 60 frames and the same 60 rows —
-every agent, token, connection and decision — but their final checkpoints
-differed in one array: the messages in flight, the numbers agents had just
-written to each other, differed in their last bits. Run again on all cores,
-seed 2 gave exactly what it had given on all cores the first time; run again
-on one core, exactly what it gave on one. So each thread count is repeatable,
-and the two are not the same as each other. Over 150 iterations, seeds 2 and
-3 on one core and on all cores still never recorded a different frame: a
-last-bit difference in a message had not yet changed a single decision.
-Nothing guarantees it never will — a decision that hangs on a comparison of
-two nearly equal numbers can flip.
+reference. Seeds 2 and 3 recorded the same 60 frames and the same 60 rows:
+every agent, token, connection and decision. But their final checkpoints
+differed in one array, the messages in flight. The numbers agents had just
+written to each other differed in their last bits.
+
+Run again on all cores, seed 2 gave exactly what it had given on all cores the
+first time. Run again on one core, it gave exactly what it gave on one. So
+each thread count is repeatable, but the two do not give the same run. Over
+150 iterations, seeds 2 and 3 on one core and on all cores still never
+recorded a different frame. A last-bit difference in a message had not yet
+changed a single decision. Nothing guarantees it never will. A decision that
+hangs on a comparison of two nearly equal numbers can flip.
 
 **Made again from nothing.** Some hours later, all twelve runs were made
 again from their settings and seeds, each in a fresh process and an empty
-folder, and compared frame by frame and row by row: every one was identical.
+folder. Compared frame by frame and row by row, every one was identical.
 
 **Two simulations in one program.** Before this experiment, all worlds in one
-program drew their random numbers from numpy's single shared stream, and
+program drew their random numbers from numpy's single shared stream. And
 starting a world reset that stream for all of them. The server runs
-simulations side by side in one program, so two simulations running at the
+simulations side by side in one program. So two simulations running at the
 same time disturbed each other, and neither could be made again from its
 seed. Giving every world a stream of its own fixed it. A world on its own
 draws the same numbers as before, so its results did not change.
 
 By its own rule — anything differing anywhere refutes it — the thesis is
-**refuted**, but only by the number of threads, and only in the last bits of
-numbers that had changed no decision in 150 iterations. For stopping,
-continuing and crashing it holds exactly.
+**refuted**. But only the number of threads refutes it, and only in the
+last bits of numbers that had changed no decision in 150 iterations. For
+stopping, continuing and crashing, it holds exactly.
 
 ## What this means
 
-A run is decided by its settings and its seed — given one thread for the
-matrix library, which every run in this notebook uses. Stopping it, continuing it
-or crashing it changes nothing, so the [lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") can pause and resume runs freely,
-and every difference between two runs in later pages comes from what was
-changed, not from how they were run.
+A run is decided by its settings and its seed, given one thread for the
+matrix library, which every run in this notebook uses. Stopping it,
+continuing it or crashing it changes nothing. So the lab can pause and resume
+runs freely. And every difference between two runs in later pages comes from
+what was changed, not from how they were run.
 
-The limits that remain:
+Two limits remain:
 
 - **Other machines.** A different processor or library version can round a
   sum differently, just as a different number of threads does. So every run
   records its Python, numpy, networkx and BLAS versions, its processor and
-  instruction set, and the lab refuses to continue a run under different ones.
+  its instruction set. The lab refuses to continue a run under different
+  ones.
 - **The browser.** The version of the program that runs in a web page uses
-  other builds of numpy and networkx and is not expected to give the same
+  other builds of numpy and networkx. It is not expected to give the same
   runs.
 
 > [!info] Where everything came from
@@ -207,6 +238,15 @@ The limits that remain:
 >   checks: two worlds in turn, two runs in two threads, a stop and resume, a
 >   run cut between checkpoints, a worker terminated mid-run, and the server
 >   keeping the matrix library to one thread.
+
+## Where to go next
+
+- [Seeds and the random stream](random-numbers.md): how one number fixes
+  every random choice of a run.
+- [The lab, the engine and pilots](the-lab.md): how runs are made, paused and
+  resumed.
+- [Every setting](settings.md): the numbers and switches that, with the seed,
+  fix a run.
 
 <!-- turns -->
 ---

@@ -77,7 +77,7 @@ The plantings are those of [Does evolution close the door?](does-evolution-close
 ## The trials
 
 <!-- runs E35 -->
-> [!info] The trials behind this page
+> [!info]- The trials behind this page
 > **90 trials**, invasions: a patch of the world of one era given a strategy written by hand, and its agents counted after every iteration; each plays 300 iterations, from a world another run kept in its archive.
 >
 > - **crews** — 18 trials: worlds `pilot:L/B1-long-s1`, `pilot:L/B1-long-s2`; at iteration 2,000, 5,000, 10,000; strategies crew; patches of 5% of the world; places 1, 2, 3.

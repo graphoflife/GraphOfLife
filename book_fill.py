@@ -209,7 +209,7 @@ def trials(md: str, name: str, plan: Dict[str, Any]) -> str:
     lines.append(f"To play these trials again: `python3 gol_lab.py run {name}`, or ▶ in the Research Notebook tab "
                  "of a computer running `gol_server.py`. Each writes its settings and engine beside "
                  "its result, in `GraphOfLifeRuns/<trial>/meta.json` and `result.json`.")
-    return quote("\n".join(lines), "[!info] The trials behind this page")
+    return quote("\n".join(lines), "[!info]- The trials behind this page")
 
 
 def screen(md: str, name: str, plan: Dict[str, Any]) -> str:
@@ -244,7 +244,7 @@ def screen(md: str, name: str, plan: Dict[str, Any]) -> str:
     lines.append(f"To make these worlds again: `python3 gol_lab.py run {name}`, or ▶ in the Research Notebook tab of a "
                  "computer running `gol_server.py`. Each run writes its settings, seed and engine version "
                  "beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.")
-    summary = quote("\n".join(lines), "[!info] The worlds behind this page")
+    summary = quote("\n".join(lines), "[!info]- The worlds behind this page")
     rows = ["| world | seed | run | what differs from B1 |", "|---|---|---|---|"]
     for d in found:
         what = ", ".join(f"[`{k}`]({link(md, page_file('settings'))}#{k}) = {show(v)}"
@@ -309,7 +309,7 @@ def runs(md: str, name: str) -> str:
         lines.append("Runs that ask for the pilots' rules are played by the research prototype, frozen beside "
                      "the engine (`gol_pilot.py`): they keep no frames, but one row of the world's statistics "
                      "every iteration (`series.jsonl`) and a whole world at every checkpoint.")
-    summary = quote("\n".join(lines), "[!info] The runs behind this page")
+    summary = quote("\n".join(lines), "[!info]- The runs behind this page")
 
     head = "| setting | " + " | ".join(c["name"] for c in conditions) + " | what it is |"
     rule = "|---" * (len(conditions) + 2) + "|"

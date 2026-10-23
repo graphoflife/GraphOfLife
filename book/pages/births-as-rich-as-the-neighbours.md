@@ -52,7 +52,7 @@ The world can grow only as rich as it is.
 ## The runs
 
 <!-- runs E32 -->
-> [!info] The runs behind this page
+> [!info]- The runs behind this page
 > **6 runs.** Every condition below is run once for every seed (1 to 2), for 3,000 iterations — or until its world dies out. Every setting is that of the baseline **B2** (a world that cannot break) unless the condition changes it.
 >
 > - **estate to the newborns, a child as rich as its neighbours** — changes `mix_at_birth` = on, `mix_mates` = parents, `redistribution` = newborns, `child_floor` = neighbours; 10,000 tokens. Runs `B2-10000-12215f-s001` … `B2-10000-12215f-s002`.
@@ -77,7 +77,7 @@ The world can grow only as rich as it is.
 > | [`message_prepass`](settings.md#message_prepass) | off | off | off | Whether every phase begins with an extra look in which agents only write messages, so the look that acts reads messages written this phase. |
 > | [`allow_handover`](settings.md#allow_handover) | off | off | off | Whether a parent may move some of its own connections to its newborn child. |
 > | [`allow_revolutions`](settings.md#allow_revolutions) | on | on | on | Whether a coalition of smaller stakers can take a node from its largest staker (see the note *How a coalition takes a node*). |
-> | [`allow_gifting`](settings.md#allow_gifting) | off | off | off | Whether agents may give tokens to neighbours during reproduction. Off in every run of this book. |
+> | [`allow_gifting`](settings.md#allow_gifting) | off | off | off | Whether agents may give tokens to neighbours during reproduction. Off in both baselines; on in a few pilots, in Experiment 24 and in half the worlds of the screen. |
 > | [`random_decisions`](settings.md#random_decisions) | off | off | off | The control: every number a brain would produce is replaced by a random draw from the standard normal distribution. |
 > | [`prune_after`](settings.md#prune_after) | blotto | blotto | blotto | After which phase connections that carried no tokens are cut: `blotto` (the game), `reproduction`, or `both`. |
 > | [`inactive_window`](settings.md#inactive_window) | phase | phase | phase | How long a connection may go unused: `phase` means it must carry tokens in the phase being judged; `iteration` allows the two last phases. |
@@ -263,6 +263,6 @@ paupers a child's neighbours are paupers too.
 
 **Also about:** [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world).
 
-> [!info]- Pages that link here (6)
-> [The estate of the dead](estate.md) · [The random twin: is a world a space?](random-twin.md) · [The floor in plain B2 and in B1](the-floor-in-plain-b2-and-in-b1.md) · [The diversity score](diversity-score.md) · [Room for the steadiest world](room-for-the-steadiest-world.md) · [A screen of random worlds](a-screen-of-random-worlds.md)
+> [!info]- Pages that link here (7)
+> [Every setting](settings.md) · [The estate of the dead](estate.md) · [The random twin: is a world a space?](random-twin.md) · [The floor in plain B2 and in B1](the-floor-in-plain-b2-and-in-b1.md) · [The diversity score](diversity-score.md) · [Room for the steadiest world](room-for-the-steadiest-world.md) · [A screen of random worlds](a-screen-of-random-worlds.md)
 <!-- /turns -->

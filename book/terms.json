@@ -104,7 +104,7 @@
     {
       "name": "yes-or-no decision",
       "page": "binary-decision",
-      "says": "A decision a brain makes from two numbers: yes when the first is larger."
+      "says": "A yes or no a brain gives from four numbers: how strongly it means yes and no, and whether the stronger always wins or chance decides in proportion."
     },
     {
       "name": "largest remainder",

@@ -111,7 +111,7 @@ agent, and the share of nodes kept by their own agent in a game.
 ## The runs
 
 <!-- runs E09 -->
-> [!info] The runs behind this page
+> [!info]- The runs behind this page
 > **50 runs.** Every condition below is run once for every seed (1 to 10), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B2** (a world that cannot break) unless the condition changes it.
 >
 > - **mutation 0.05** — changes `mutation_probability` = 0.05; 10,000 tokens. Runs `B2-10000-bf74a9-s001` … `B2-10000-bf74a9-s010`.
@@ -138,7 +138,7 @@ agent, and the share of nodes kept by their own agent in a game.
 > | [`message_prepass`](settings.md#message_prepass) | off | off | off | off | off | Whether every phase begins with an extra look in which agents only write messages, so the look that acts reads messages written this phase. |
 > | [`allow_handover`](settings.md#allow_handover) | off | off | off | off | off | Whether a parent may move some of its own connections to its newborn child. |
 > | [`allow_revolutions`](settings.md#allow_revolutions) | on | on | on | on | on | Whether a coalition of smaller stakers can take a node from its largest staker (see the note *How a coalition takes a node*). |
-> | [`allow_gifting`](settings.md#allow_gifting) | off | off | off | off | off | Whether agents may give tokens to neighbours during reproduction. Off in every run of this book. |
+> | [`allow_gifting`](settings.md#allow_gifting) | off | off | off | off | off | Whether agents may give tokens to neighbours during reproduction. Off in both baselines; on in a few pilots, in Experiment 24 and in half the worlds of the screen. |
 > | [`random_decisions`](settings.md#random_decisions) | off | off | off | off | off | The control: every number a brain would produce is replaced by a random draw from the standard normal distribution. |
 > | [`prune_after`](settings.md#prune_after) | blotto | blotto | blotto | blotto | blotto | After which phase connections that carried no tokens are cut: `blotto` (the game), `reproduction`, or `both`. |
 > | [`inactive_window`](settings.md#inactive_window) | phase | phase | phase | phase | phase | How long a connection may go unused: `phase` means it must carry tokens in the phase being judged; `iteration` allows the two last phases. |
@@ -318,6 +318,6 @@ keeps evolution from going on.
 
 **Also about:** [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are).
 
-> [!info]- Pages that link here (5)
-> [How even is a world?](how-even-is-a-world.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Why evolution stops](why-evolution-stops.md) · [Another game](another-game.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (6)
+> [How a brain changes](mutation.md) · [How even is a world?](how-even-is-a-world.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Why evolution stops](why-evolution-stops.md) · [Another game](another-game.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

@@ -115,7 +115,7 @@ plays against itself four times. A score that differs from 0.5 by less than
 those self-contests do is noise.
 
 <!-- runs E28 -->
-> [!info] The trials behind this page
+> [!info]- The trials behind this page
 > **240 trials**, contests: the world of one era, its agents given brains drawn by coin from two eras, every mutation off, and the later era's share of the agents counted at the end; each plays 100 iterations, from a world another run kept in its archive.
 >
 > - **against 2,500** — 76 trials: worlds `B2-10000-4af4a3-s005`, `B2-10000-4af4a3-s006`; eras 2,500 to 50,000, every 2,500; coins 17.

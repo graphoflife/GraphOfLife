@@ -18,7 +18,7 @@ where the thirty of 10,000 tokens this page was first written from differ,
 both are given.
 
 <!-- runs E10 -->
-> [!info] The runs behind this page
+> [!info]- The runs behind this page
 > **30 runs.** Every condition below is run once for every seed (1 to 30), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
 >
 > - **baseline** — changes nothing: B1 as it is; 100,000 tokens. Runs `B1-100000-s001` … `B1-100000-s030`.
@@ -41,7 +41,7 @@ both are given.
 > | [`message_prepass`](settings.md#message_prepass) | on | Whether every phase begins with an extra look in which agents only write messages, so the look that acts reads messages written this phase. |
 > | [`allow_handover`](settings.md#allow_handover) | on | Whether a parent may move some of its own connections to its newborn child. |
 > | [`allow_revolutions`](settings.md#allow_revolutions) | on | Whether a coalition of smaller stakers can take a node from its largest staker (see the note *How a coalition takes a node*). |
-> | [`allow_gifting`](settings.md#allow_gifting) | off | Whether agents may give tokens to neighbours during reproduction. Off in every run of this book. |
+> | [`allow_gifting`](settings.md#allow_gifting) | off | Whether agents may give tokens to neighbours during reproduction. Off in both baselines; on in a few pilots, in Experiment 24 and in half the worlds of the screen. |
 > | [`random_decisions`](settings.md#random_decisions) | off | The control: every number a brain would produce is replaced by a random draw from the standard normal distribution. |
 > | [`prune_after`](settings.md#prune_after) | blotto | After which phase connections that carried no tokens are cut: `blotto` (the game), `reproduction`, or `both`. |
 > | [`inactive_window`](settings.md#inactive_window) | phase | How long a connection may go unused: `phase` means it must carry tokens in the phase being judged; `iteration` allows the two last phases. |
@@ -87,7 +87,7 @@ column of outputs for each of its candidates (itself and its [neighbours](the-wo
    ([The share function](share-function.md)). If *c* = 0 there is no
    child.
 2. **Whom it joins.** For every candidate, the parent included, a [yes-or-no
-   decision](binary-decision.md "A decision a brain makes from two numbers: yes when the first is larger."): join the child to it or not.
+   decision](binary-decision.md "A yes or no a brain gives from four numbers: how strongly it means yes and no, and whether the stronger always wins or chance decides in proportion."): join the child to it or not.
 3. **What it is handed.** For every neighbour of the parent, a yes-or-no
    decision: move the parent's [connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") to that neighbour over to the child.
 
@@ -274,6 +274,6 @@ To make every figure of this page: `python3 book_figures.py children`.
 
 **Also about:** [The shape and health of the network](../README.md#the-shape-and-health-of-the-network).
 
-> [!info]- Pages that link here (10)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [How ages change over a world's life](how-ages-change.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [How the network grows](how-the-network-grows.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [The geometry of a world](the-geometry-of-a-world.md) · [Stars and hubs](stars-and-hubs.md) · [Do the brains matter?](do-the-brains-matter.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [Do agents cooperate?](do-agents-cooperate.md)
+> [!info]- Pages that link here (12)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [The share function f(a, b)](share-function.md) · [A yes-or-no decision](binary-decision.md) · [How ages change over a world's life](how-ages-change.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [How the network grows](how-the-network-grows.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [The geometry of a world](the-geometry-of-a-world.md) · [Stars and hubs](stars-and-hubs.md) · [Do the brains matter?](do-the-brains-matter.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [Do agents cooperate?](do-agents-cooperate.md)
 <!-- /turns -->

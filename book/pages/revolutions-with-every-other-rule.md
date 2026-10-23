@@ -102,6 +102,6 @@ change and brains that grow (0.72 and 0.85 each), half kept at home (0.72 and
 
 ← [Eight switches at once](eight-switches-at-once.md) · [Changing the rules](../README.md#changing-the-rules) · [Handover, with every other rule](handover-with-every-other-rule.md) →
 
-> [!info]- Pages that link here (4)
-> [Rules in company](rules-in-company.md) · [Handover, with every other rule](handover-with-every-other-rule.md) · [Gifts, with every other rule](gifts-with-every-other-rule.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (5)
+> [How a coalition takes a node](revolution.md) · [Rules in company](rules-in-company.md) · [Handover, with every other rule](handover-with-every-other-rule.md) · [Gifts, with every other rule](gifts-with-every-other-rule.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

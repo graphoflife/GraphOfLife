@@ -97,6 +97,6 @@ is to try the remedies.
 
 **Also about:** [How the simulation works](../README.md#how-the-simulation-works).
 
-> [!info]- Pages that link here (4)
-> [B1 and B2: the two baselines](b1-and-b2.md) · [Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md) · [What the brains are like](what-the-brains-are-like.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md)
+> [!info]- Pages that link here (5)
+> [What a brain sees](brain-inputs.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md) · [What the brains are like](what-the-brains-are-like.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md)
 <!-- /turns -->

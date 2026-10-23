@@ -57,7 +57,7 @@ plantings, which it shares with that experiment.
 ## The trials
 
 <!-- runs E33 -->
-> [!info] The trials behind this page
+> [!info]- The trials behind this page
 > **135 trials**, invasions: a patch of the world of one era given a strategy written by hand, and its agents counted after every iteration; each plays 300 iterations, from a world another run kept in its archive.
 >
 > - **crews** — 45 trials: worlds `pilot:L/B2-long-s001`, `pilot:L/B2-long-s002`, `pilot:L/B2-long-s003`, `pilot:L/B2-long-s004`, `pilot:L/B2-long-s005`; at iteration 2,000, 5,000, 10,000; strategies crew; patches of 5% of the world; places 1, 2, 3.
@@ -234,6 +234,6 @@ raiders, and the poorer the world, the less a mob was worth, not the more:
 
 **Also about:** [Groups and cooperation](../README.md#groups-and-cooperation).
 
-> [!info]- Pages that link here (3)
-> [Does evolution close the door?](does-evolution-close-the-door.md) · [Raiders that breed](raiders-that-breed.md) · [Hand-written strategies in B1](hand-written-strategies-in-b1.md)
+> [!info]- Pages that link here (4)
+> [How a coalition takes a node](revolution.md) · [Does evolution close the door?](does-evolution-close-the-door.md) · [Raiders that breed](raiders-that-breed.md) · [Hand-written strategies in B1](hand-written-strategies-in-b1.md)
 <!-- /turns -->

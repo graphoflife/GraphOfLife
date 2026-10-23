@@ -59,7 +59,7 @@ Each trial is an [invasion test](invasion-test.md), as in
   agents and [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") are counted after every iteration.
 
 <!-- runs E29 -->
-> [!info] The trials behind this page
+> [!info]- The trials behind this page
 > **320 trials**, invasions: a patch of the world of one era given a strategy written by hand, and its agents counted after every iteration; each plays 300 iterations, from a world another run kept in its archive.
 >
 > - **raiders, worlds 2 and 3** — 120 trials: worlds `B2-10000-s002`, `B2-10000-s003`; at iteration 2,000; strategies raider; patches of 1, 3, 10, 30, 100 agents; 5% of the world; places 1 to 10, every 1.

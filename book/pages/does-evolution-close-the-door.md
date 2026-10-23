@@ -58,7 +58,7 @@ pilot's checkpoint, which holds a whole world, as a run's archive does.
 The test is the [invasion test](invasion-test.md "A strategy planted as a patch in an evolved world: does it spread, or die out?") of [How large a crowd a raider needs](how-large-a-crowd-a-raider-needs.md).
 
 <!-- runs E30 -->
-> [!info] The trials behind this page
+> [!info]- The trials behind this page
 > **120 trials**, invasions: a patch of the world of one era given a strategy written by hand, and its agents counted after every iteration; each plays 300 iterations, from a world another run kept in its archive.
 >
 > - **raiders** — 60 trials: worlds `pilot:L/B2-long-s001`, `pilot:L/B2-long-s002`, `pilot:L/B2-long-s003`, `pilot:L/B2-long-s004`, `pilot:L/B2-long-s005`; at iteration 500, 2,000, 5,000, 10,000; strategies raider; patches of 5% of the world; places 1, 2, 3.

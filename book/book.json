@@ -105,7 +105,7 @@
       "kind": "overview",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "Life on Earth has been producing new kinds of things for about four billion years: new molecules, cells, bodies, ways of living together."
+      "summary": "Living things have been inventing new kinds of things for about four billion years, and they have not stopped. No computer world has yet been shown to do the same. This notebook follows one computer world, Graph of Life."
     },
     {
       "id": "glossary",
@@ -143,7 +143,7 @@
       "kind": "explanation",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "Graph of Life puts together ideas from several fields: artificial life, game theory, network science, population genetics and statistics."
+      "summary": "Graph of Life puts together ideas from several fields: artificial life, game theory, network science, population genetics and statistics. This page introduces each one far enough to read the rest of the notebook, and says where it shows up in this world."
     },
     {
       "id": "the-world",
@@ -155,7 +155,7 @@
       "kind": "explanation",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "What exactly is a world: what does it consist of, and what stays fixed? How is a world built at the start, from its settings and its seed? What is written down about it as it runs?"
+      "summary": "A world is a network of nodes joined by connections, with one agent on every node. Every agent holds a whole number of tokens and a brain that takes all its decisions. Tokens move between agents but are never made or destroyed, so their total, T, never changes."
     },
     {
       "id": "one-iteration",
@@ -167,7 +167,7 @@
       "kind": "explanation",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "In what order does everything happen in one iteration? How exactly does a decision of the brain turn into tokens moved, children born and nodes won? Why does the number of tokens never change?"
+      "summary": "An iteration is one step of a world's time: first reproduction, then the game. In reproduction, agents give part of their tokens to children, who join their neighbourhood."
     },
     {
       "id": "the-brain",
@@ -179,7 +179,7 @@
       "kind": "explanation",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "What does a brain see, and what does it compute from it? How do its outputs become the decisions of One iteration, step by step? How is a brain inherited, and how does it change?"
+      "summary": "An agent's brain is a small neural network that takes all its decisions. For each candidate, the agent itself and each neighbour, it reads 154 numbers and gives 45, which the rules turn into decisions."
     },
     {
       "id": "questioning-the-mechanics",
@@ -192,7 +192,7 @@
       "kind": "study",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "How do brains spread, and where do new ones come from? Which rules decide most of what a world does? Which of them stand in the way of open-ended evolution, and what could replace them?"
+      "summary": "Much of what the first baseline, B1, does follows from a few of its rules, not from what its brains compute. This page takes those rules one at a time: what each does, whether that is what was meant, and what could replace it."
     },
     {
       "id": "is-a-run-reproducible",
@@ -208,7 +208,7 @@
       ],
       "status": "analysed",
       "added": "2026-10-08",
-      "summary": "Does the same seed always give the same world, frame for frame? Does stopping a run and continuing it later, in a new process, change it? Does a crash, after which the run is resumed from its last save, change it?"
+      "summary": "Every comparison in this notebook assumes that a run is decided by its settings and its seed alone. Experiment 1 tested this on three seeds, each run four ways to iteration 30."
     },
     {
       "id": "settings",
@@ -220,7 +220,7 @@
       "kind": "term",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "A run of Graph of Life is fixed by two things: its **settings** and its **seed** (Seeds and the random stream)."
+      "summary": "A run of Graph of Life is fixed by two things: its settings and its seed (Seeds and the random stream). A setting is one number or switch of a run's rules, fixed before the run starts."
     },
     {
       "id": "starting-ring",
@@ -232,7 +232,7 @@
       "kind": "term",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "Every world starts as a **ring of founders with a few shortcuts** — the \"small-world\" network of Watts and Strogatz (1998)."
+      "summary": "Every world starts as a ring of founders with a few shortcuts, the \"small-world\" network of Watts and Strogatz (1998). The founders, the agents a world begins with, sit around a circle, each joined to its nearest founders on either side."
     },
     {
       "id": "random-numbers",
@@ -244,7 +244,7 @@
       "kind": "term",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "Graph of Life is full of chance: random starting brains, random tie-breaks, probabilistic decisions, random inputs, random sharing out of tokens."
+      "summary": "Graph of Life is full of chance: random starting brains, random tie-breaks, probabilistic decisions, random inputs, random sharing out of tokens. Yet a run can be made again exactly."
     },
     {
       "id": "share-function",
@@ -256,7 +256,7 @@
       "kind": "term",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "Many decisions in Graph of Life come out of a brain as **two numbers**, and must be turned into **one share** between 0 and 1: how much of my tokens to give my child, how much of a stake to mark revolutionary, how likely I am to say yes."
+      "summary": "A brain often answers with two numbers where the rules need one share between 0 and 1. The share may be of its tokens for a child, of a stake to mark revolutionary, or the probability of saying yes. One function turns every such pair into its share."
     },
     {
       "id": "binary-decision",
@@ -268,7 +268,7 @@
       "kind": "term",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "Some decisions are a plain yes or no: *should my child be joined to this neighbour?"
+      "summary": "Some decisions are a plain yes or no, such as whether to join a newborn to a neighbour, or to hand it a connection. A brain answers each with four numbers."
     },
     {
       "id": "largest-remainder",
@@ -280,7 +280,7 @@
       "kind": "term",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "Tokens are whole: an agent cannot stake 3.7 tokens."
+      "summary": "Tokens are whole: an agent cannot stake 3.7 tokens. So when an agent spreads its τ tokens over several candidates in proportion to scores, the shares have to be rounded, and rounded so that no token is lost or made."
     },
     {
       "id": "brain-inputs",
@@ -293,7 +293,7 @@
       "kind": "term",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "Every time an agent decides anything, its brain **looks** at a list of **candidates**: the agent itself first, then each of its neighbours in increasing order of id."
+      "summary": "Every time an agent decides anything, its brain looks at its candidates: the agent itself first, then each of its neighbours in increasing order of id."
     },
     {
       "id": "brain-outputs",
@@ -306,7 +306,7 @@
       "kind": "term",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "For every candidate it looks at — itself and each neighbour — a brain produces one column of **45 numbers** (in the baseline)."
+      "summary": "For every candidate it looks at — itself and each neighbour — a brain produces one column of numbers: 45 in B1, 19 in B2."
     },
     {
       "id": "messages",
@@ -318,7 +318,7 @@
       "kind": "term",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "Agents can say things to each other."
+      "summary": "Agents can say things to each other: every time an agent looks at its neighbours, it writes a message to each of them, and one to itself. A message is a list of numbers between −1 and 1, 30 in B1 and 8 in B2."
     },
     {
       "id": "revolution",
@@ -330,7 +330,7 @@
       "kind": "term",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "In the game every node goes to someone."
+      "summary": "In the game every node goes to someone, usually whoever staked the most on it: the hegemon. But a coalition of smaller stakers takes the node if the parts of their stakes they marked revolutionary add up to more than the hegemon's whole stake."
     },
     {
       "id": "mutation",
@@ -343,7 +343,7 @@
       "kind": "term",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "Brains change — this is the **variation** evolution needs (What this notebook is about)."
+      "summary": "Brains change: this is the variation that evolution needs (What this notebook is about). A brain is offered a change whenever it is copied into a newborn, and it changes with probability 0.2."
     },
     {
       "id": "extinction",
@@ -355,7 +355,7 @@
       "kind": "term",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "A run goes for a fixed number of iterations — 3,000 for the baseline runs — unless its world **dies out** first."
+      "summary": "A run goes for a fixed number of iterations, unless its world dies out first. In this notebook that has an exact meaning: if an iteration's game leaves 20 agents or fewer, the world is extinct and its run stops."
     },
     {
       "id": "b1-and-b2",

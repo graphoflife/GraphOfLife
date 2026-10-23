@@ -66,8 +66,9 @@ thesis written while the notebook still numbered its chapters keeps those
 numbers, and each links to the page it meant that day.
 
 The runs behind a page — how many, which [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world."), every [setting](settings.md "One number or switch of a run's rules, fixed before it starts.") — are listed in
-a box that folds away, so that the page reads as an argument and the details
-are there for whoever wants to make it again.
+a box that folds away, in a last section, **How this was made**, so that the
+page reads as an argument and the details are there for whoever wants to make
+it again.
 
 ## The rules of the research
 
@@ -131,6 +132,6 @@ and the page that changed it. Nothing is quietly deleted.
 
 **Also about:** [Methods and statistics](../README.md#methods-and-statistics).
 
-> [!info]- Pages that link here (2)
-> [Welcome](../README.md) · [What this notebook is about](what-this-notebook-is-about.md)
+> [!info]- Pages that link here (3)
+> [Welcome](../README.md) · [What this notebook is about](what-this-notebook-is-about.md) · [When a world ends](extinction.md)
 <!-- /turns -->

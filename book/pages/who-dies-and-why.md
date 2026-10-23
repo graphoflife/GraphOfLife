@@ -167,7 +167,7 @@ nothing kept, half kept, children of any size, and no old age.
 ## The runs
 
 <!-- runs E15 -->
-> [!info] The runs behind this page
+> [!info]- The runs behind this page
 > **60 runs.** Every condition below is run once for every seed (1 to 10), for 1,000 iterations — or until its world dies out. Every setting is that of the baseline **B2** (a world that cannot break) unless the condition changes it.
 >
 > - **B2** — changes nothing: B2 as it is; 10,000 tokens. Runs `B2-10000-s001` … `B2-10000-s010`.
@@ -195,7 +195,7 @@ nothing kept, half kept, children of any size, and no old age.
 > | [`message_prepass`](settings.md#message_prepass) | off | off | off | off | off | off | Whether every phase begins with an extra look in which agents only write messages, so the look that acts reads messages written this phase. |
 > | [`allow_handover`](settings.md#allow_handover) | off | off | off | off | off | off | Whether a parent may move some of its own connections to its newborn child. |
 > | [`allow_revolutions`](settings.md#allow_revolutions) | on | on | on | on | on | on | Whether a coalition of smaller stakers can take a node from its largest staker (see the note *How a coalition takes a node*). |
-> | [`allow_gifting`](settings.md#allow_gifting) | off | off | off | off | off | off | Whether agents may give tokens to neighbours during reproduction. Off in every run of this book. |
+> | [`allow_gifting`](settings.md#allow_gifting) | off | off | off | off | off | off | Whether agents may give tokens to neighbours during reproduction. Off in both baselines; on in a few pilots, in Experiment 24 and in half the worlds of the screen. |
 > | [`random_decisions`](settings.md#random_decisions) | off | off | off | off | off | off | The control: every number a brain would produce is replaced by a random draw from the standard normal distribution. |
 > | [`prune_after`](settings.md#prune_after) | blotto | blotto | blotto | blotto | blotto | blotto | After which phase connections that carried no tokens are cut: `blotto` (the game), `reproduction`, or `both`. |
 > | [`inactive_window`](settings.md#inactive_window) | phase | phase | phase | phase | phase | phase | How long a connection may go unused: `phase` means it must carry tokens in the phase being judged; `iteration` allows the two last phases. |
@@ -396,6 +396,6 @@ as brains mixed at birth ([Mixed at birth: ten long worlds](mixed-at-birth-ten-l
 
 **Also about:** [Agents' lives: births, deaths, ages](../README.md#agents-lives-births-deaths-ages).
 
-> [!info]- Pages that link here (17)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [What the baseline world is](what-the-baseline-world-is.md) · [Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md) · [A world that cannot break](a-world-that-cannot-break.md) · [The estate of the dead](estate.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Where the tokens flow](where-the-tokens-flow.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [Eras and contests: does a world keep getting better?](eras-and-contests.md) · [Why evolution stops](why-evolution-stops.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [Do agents cooperate?](do-agents-cooperate.md) · [Alliances](alliances.md) · [Rules without numbers](rules-without-numbers.md) · [Who inherits?](who-inherits.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (18)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [When a world ends](extinction.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [What the baseline world is](what-the-baseline-world-is.md) · [Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md) · [A world that cannot break](a-world-that-cannot-break.md) · [The estate of the dead](estate.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Where the tokens flow](where-the-tokens-flow.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [Eras and contests: does a world keep getting better?](eras-and-contests.md) · [Why evolution stops](why-evolution-stops.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [Do agents cooperate?](do-agents-cooperate.md) · [Alliances](alliances.md) · [Rules without numbers](rules-without-numbers.md) · [Who inherits?](who-inherits.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

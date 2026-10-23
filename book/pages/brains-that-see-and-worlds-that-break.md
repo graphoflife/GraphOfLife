@@ -105,7 +105,7 @@ and the results below say what, exactly, kills them.
 ## The runs
 
 <!-- runs E13 -->
-> [!info] The runs behind this page
+> [!info]- The runs behind this page
 > **30 runs.** Every condition below is run once for every seed (1 to 10), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
 >
 > - **baseline** — changes nothing: B1 as it is; 5,000 tokens. Runs `B1-5000-s001` … `B1-5000-s010`.
@@ -130,7 +130,7 @@ and the results below say what, exactly, kills them.
 > | [`message_prepass`](settings.md#message_prepass) | on | on | on | Whether every phase begins with an extra look in which agents only write messages, so the look that acts reads messages written this phase. |
 > | [`allow_handover`](settings.md#allow_handover) | on | on | on | Whether a parent may move some of its own connections to its newborn child. |
 > | [`allow_revolutions`](settings.md#allow_revolutions) | on | on | on | Whether a coalition of smaller stakers can take a node from its largest staker (see the note *How a coalition takes a node*). |
-> | [`allow_gifting`](settings.md#allow_gifting) | off | off | off | Whether agents may give tokens to neighbours during reproduction. Off in every run of this book. |
+> | [`allow_gifting`](settings.md#allow_gifting) | off | off | off | Whether agents may give tokens to neighbours during reproduction. Off in both baselines; on in a few pilots, in Experiment 24 and in half the worlds of the screen. |
 > | [`random_decisions`](settings.md#random_decisions) | off | off | off | The control: every number a brain would produce is replaced by a random draw from the standard normal distribution. |
 > | [`prune_after`](settings.md#prune_after) | blotto | blotto | blotto | After which phase connections that carried no tokens are cut: `blotto` (the game), `reproduction`, or `both`. |
 > | [`inactive_window`](settings.md#inactive_window) | phase | phase | phase | How long a connection may go unused: `phase` means it must carry tokens in the phase being judged; `iteration` allows the two last phases. |
@@ -354,6 +354,6 @@ why: the subject of [Who dies, and why](who-dies-and-why.md).
 
 **Also about:** [Changing the rules](../README.md#changing-the-rules).
 
-> [!info]- Pages that link here (17)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [What the baseline world is](what-the-baseline-world-is.md) · [A world that cannot break](a-world-that-cannot-break.md) · [Who dies, and why](who-dies-and-why.md) · [How agents have children](how-agents-have-children.md) · [Where the tokens flow](where-the-tokens-flow.md) · [How a world breaks](how-a-world-breaks.md) · [How alike the agents are](how-alike-the-agents-are.md) · [What the brains are like](what-the-brains-are-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) · [Why evolution stops](why-evolution-stops.md) · [Do agents cooperate?](do-agents-cooperate.md) · [The health bar](health-bar.md) · [The lab, the engine and pilots](the-lab.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (18)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [When a world ends](extinction.md) · [What the baseline world is](what-the-baseline-world-is.md) · [A world that cannot break](a-world-that-cannot-break.md) · [Who dies, and why](who-dies-and-why.md) · [How agents have children](how-agents-have-children.md) · [Where the tokens flow](where-the-tokens-flow.md) · [How a world breaks](how-a-world-breaks.md) · [How alike the agents are](how-alike-the-agents-are.md) · [What the brains are like](what-the-brains-are-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) · [Why evolution stops](why-evolution-stops.md) · [Do agents cooperate?](do-agents-cooperate.md) · [The health bar](health-bar.md) · [The lab, the engine and pilots](the-lab.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

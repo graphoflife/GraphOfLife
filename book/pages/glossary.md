@@ -97,7 +97,7 @@ there.
 - **[token curvature](token-curvature.md)** — How much richer an agent's neighbourhood is than the agent itself.
 - **[token flow](token-flow.md)** (also net flow) — The tokens a game moves along each connection, from the agent who stakes to the node staked on.
 - **[Wilson interval](wilson-interval.md)** — The range a share probably lies in, when it was counted in only a few worlds.
-- **[yes-or-no decision](binary-decision.md)** — A decision a brain makes from two numbers: yes when the first is larger.
+- **[yes-or-no decision](binary-decision.md)** — A yes or no a brain gives from four numbers: how strongly it means yes and no, and whether the stronger always wins or chance decides in proportion.
 <!-- /glossary -->
 
 <!-- turns -->
