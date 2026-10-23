@@ -4,11 +4,12 @@
 Checks a rewrite of the notebook's pages into simple English (the author's
 request of 2026-10-23) against what the pages said before.
 
-    python3 research/tools/rewrite_check.py REV PAGE [PAGE ...] [--into NEW]
+    python3 research/tools/rewrite_check.py REV PAGE [PAGE ...] [--into NEW] [--file PATH]
 
 REV is the commit the pages are compared with; PAGE is a page id (its file
 name under book/pages/). With --into, the pages were merged into the page NEW,
-and the check reads them together.
+and the check reads them together. With --file, the rewritten page is read
+from PATH instead of book/pages/ (a rewrite made aside, while the pages change).
 
 For every page (or the pages merged, together) it reports:
 - **numbers lost**: every number the hand-written words held before (outside
@@ -118,12 +119,15 @@ def main() -> None:
     ap.add_argument("rev")
     ap.add_argument("pages", nargs="+")
     ap.add_argument("--into")
+    ap.add_argument("--file", help="the rewritten page, if not in book/pages/ (one page, or --into)")
     a = ap.parse_args()
+    if a.file and not a.into and len(a.pages) > 1:
+        ap.error("--file needs one page, or --into")
     kinds = {p["id"]: p.get("kind") for p in book_fill.pages()}
     groups = {a.into: a.pages} if a.into else {p: [p] for p in a.pages}
     bad = 0
     for new, olds in groups.items():
-        with open(os.path.join(ROOT, "book", "pages", f"{new}.md"), encoding="utf-8") as f:
+        with open(a.file or os.path.join(ROOT, "book", "pages", f"{new}.md"), encoding="utf-8") as f:
             after = f.read()
         report = check({p: old_text(a.rev, p) for p in olds}, after, kinds.get(new, ""))
         print(f"{new}: " + ("fine" if not report else "\n  " + "\n  ".join(report)))

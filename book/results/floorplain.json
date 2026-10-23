@@ -1,0 +1,120 @@
+{
+ "chapter": "floorplain",
+ "numbers": {
+  "E36": {
+   "B2-10000-60e522-s001": {
+    "floor": {
+     "1000": {
+      "able": 147,
+      "floor_above_min_child": 1,
+      "median_neighbours": 3.0,
+      "able_median_age": 55.0,
+      "able_aged_10_or_less": 0.12244897959183673
+     },
+     "2000": {
+      "able": 120,
+      "floor_above_min_child": 1,
+      "median_neighbours": 2.0,
+      "able_median_age": 45.0,
+      "able_aged_10_or_less": 0.1
+     },
+     "3000": {
+      "able": 82,
+      "floor_above_min_child": 1,
+      "median_neighbours": 1.5,
+      "able_median_age": 29.5,
+      "able_aged_10_or_less": 0.23170731707317074
+     }
+    },
+    "children": {
+     "1000-2000": {
+      "child_tokens": 12.406475279106859,
+      "agents": 3104.784
+     },
+     "2000-3000": {
+      "child_tokens": 12.031949356554819,
+      "agents": 3353.459
+     }
+    }
+   },
+   "B2-10000-60e522-s002": {
+    "floor": {
+     "1000": {
+      "able": 139,
+      "floor_above_min_child": 4,
+      "median_neighbours": 1.5,
+      "able_median_age": 46.0,
+      "able_aged_10_or_less": 0.12949640287769784
+     },
+     "2000": {
+      "able": 106,
+      "floor_above_min_child": 1,
+      "median_neighbours": 1.0,
+      "able_median_age": 33.5,
+      "able_aged_10_or_less": 0.22641509433962265
+     },
+     "3000": {
+      "able": 97,
+      "floor_above_min_child": 1,
+      "median_neighbours": 1.0,
+      "able_median_age": 34.0,
+      "able_aged_10_or_less": 0.26804123711340205
+     }
+    },
+    "children": {
+     "1000-2000": {
+      "child_tokens": 11.514011063752607,
+      "agents": 3305.24
+     },
+     "2000-3000": {
+      "child_tokens": 11.277835110652449,
+      "agents": 3482.107
+     }
+    }
+   }
+  },
+  "E36_without": {
+   "B2-10000-s001": {
+    "child_tokens": 11.529607415485279,
+    "agents": 3668.547
+   },
+   "B2-10000-s002": {
+    "child_tokens": 11.791223643899801,
+    "agents": 3341.308
+   },
+   "B2-10000-s003": {
+    "child_tokens": 11.165801597947162,
+    "agents": 3437.095
+   },
+   "B2-10000-s004": {
+    "child_tokens": 11.171404609734232,
+    "agents": 3438.084
+   },
+   "B2-10000-s005": {
+    "child_tokens": 11.381272532397935,
+    "agents": 3075.915
+   },
+   "B2-10000-s006": {
+    "child_tokens": 11.646203554119548,
+    "agents": 3534.533
+   },
+   "B2-10000-s007": {
+    "child_tokens": 11.51751562204128,
+    "agents": 3148.321
+   },
+   "B2-10000-s008": {
+    "child_tokens": 11.192445514891617,
+    "agents": 3365.15
+   },
+   "B2-10000-s009": {
+    "child_tokens": 11.735878212098667,
+    "agents": 3492.005
+   },
+   "B2-10000-s010": {
+    "child_tokens": 12.053404942220077,
+    "agents": 3318.696
+   }
+  }
+ },
+ "figures": {}
+}

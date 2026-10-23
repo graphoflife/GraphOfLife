@@ -1643,9 +1643,9 @@
       "experiments": [
         "E34"
       ],
-      "status": "ready",
+      "status": "analysed",
       "added": "2026-10-21",
-      "summary": "Experiment 34: the raider and the turtle given a child of ten tokens whenever they hold more, as the world's own agents breed, planted where the barren raiders failed (B2's worlds at 2,000, 5,000 and 10,000): does breeding open the door, and is it the raid that does it?"
+      "summary": "Raiders that have a child whenever they can give it ten tokens, planted in B2's late worlds, took hold in none of 30 plantings: there, one agent in thirty can afford such a child."
     },
     {
       "id": "hand-written-strategies-in-b1",
@@ -1659,9 +1659,9 @@
       "experiments": [
         "E35"
       ],
-      "status": "ready",
+      "status": "analysed",
       "added": "2026-10-21",
-      "summary": "Experiment 35: the raiders failed in B2's late worlds for reasons that are B2's rules (a home share, a holder's bonus, old age, a least child of ten). Lone raiders, crews, breeding raiders and turtles, their rules now reading each world's own, planted in B1's two long worlds, which have none of them, counted by the tokens they hold."
+      "summary": "The hand-written strategies planted in B1, which has none of B2's rules against them, failed faster: none of 90 plantings took hold, partly because B1 cuts every link that carries no tokens."
     },
     {
       "id": "one-agent-in-a-sea-of-average-agents",

@@ -85,9 +85,9 @@ def _ledger(run_id: str) -> Tuple[float, float]:
     return float(np.mean(births)), float(np.mean(agents))
 
 
-def _floor(run_id: str) -> Dict[str, Any]:
-    """How many agents could have a child at 3,000, and for how many the floor asks more than min_child."""
-    z = gol_store.load_archive(run_id, AT)
+def _floor(run_id: str, at: int = AT) -> Dict[str, Any]:
+    """How many agents could have a child at `at`, and for how many the floor asks more than min_child."""
+    z = gol_store.load_archive(run_id, at)
     tokens = z["tokens"].astype(float)
     n = len(tokens)
     nb: List[List[int]] = [[] for _ in range(n)]
@@ -178,3 +178,39 @@ def floor(ch: F.Chapter) -> None:
     ch.number("ledger", {w: {"births": round(b, 1), "agents": round(a), "agents_per_birth": round(a / b, 1)}
                          for w, (b, a) in ledger.items()})
     ch.number("floor_binds", {w: _floor(w) for w in worlds})
+
+
+def _children(run_id: str, start: int, end: int) -> Dict[str, float]:
+    """The tokens a child starts with on average, and the agents alive, over iterations start to end - 1."""
+    given = births = 0.0
+    agents = []
+    with open(os.path.join(gol_store.run_dir(run_id), "stats.jsonl")) as f:
+        for line in f:
+            r = json.loads(line)
+            if r.get("phase") == 1 and start <= r["iteration"] < end and r.get("births") is not None:
+                given += (r.get("reproTokenShare") or 0.0) * r["tokens"]
+                births += r["births"]
+                agents.append(r["nodes"])
+    return {"child_tokens": given / births if births else float("nan"), "agents": float(np.mean(agents))}
+
+
+@chapter
+def floorplain(ch: F.Chapter) -> None:
+    """
+    The floor in plain B2 (Experiment 36) and in B1 (Experiment 37): how often
+    it asks more than the least child, and what children start with, beside the
+    worlds of the same rules without it (Experiments 16 and 2). Numbers only.
+    """
+    import gol_plan
+    for name, worlds, without, window in (("E36", "B2-10000-60e522", [f"B2-10000-s{s:03d}" for s in range(1, 11)],
+                                           (1000, 2000)),
+                                          ("E37", "B1-10000-60e522", None, (2000, 3000))):
+        runs = [s.run_id for s in gol_plan.experiment_runs(name)]
+        if not all(os.path.exists(os.path.join(gol_store.run_dir(r), "archive", "world_003000.npz"))
+                   for r in runs):
+            continue
+        ch.number(name, {r: {"floor": {str(at): _floor(r, at) for at in (1000, 2000, 3000)},
+                             "children": {f"{a}-{b}": _children(r, a, b) for a, b in ((1000, 2000), (2000, 3000))}}
+                         for r in runs})
+        if without:
+            ch.number(f"{name}_without", {r: _children(r, *window) for r in without})

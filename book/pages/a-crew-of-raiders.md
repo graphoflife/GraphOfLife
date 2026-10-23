@@ -204,7 +204,8 @@ raiders, and the poorer the world, the less a mob was worth, not the more:
 > carried B2's numbers, staking 70% and asking more than one and a half times
 > their target's tokens, until [Hand-written strategies in B1](hand-written-strategies-in-b1.md) made them read each world's own.
 > [Hand-written strategies in B1](hand-written-strategies-in-b1.md) plants the same
-> strategies in [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it."), which has none of those rules.
+> strategies in [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it."), which has none of those rules. They failed there
+> too, and sooner: none of its 90 plantings took hold.
 
 ## What it teaches
 

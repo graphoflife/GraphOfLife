@@ -23,8 +23,9 @@ spaces of about three [dimensions](ball-dimension-and-curvature.md "How fast the
 tokens each. Experiment 32 then asked every child to start as rich as its
 parent's [neighbours](the-world.md#the-network "An agent joined to another by a connection."), and nothing changed: the [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."), not birth, makes the
 poor. These worlds are spaces because their young are the parents, so here
-room and riches come from the same coin. Experiments 36 and 37 try the same
-rule in plain B2 and in B1; their results are still to come.
+room and riches come from the same coin. In plain B2 the rule is just as idle
+(Experiment 36); whether it binds in B1, where a child may start with a single
+token, Experiment 37 will tell once it is played.
 
 ## Room for the steadiest world
 
@@ -518,11 +519,37 @@ median world (1,462).
 > *Written while the notebook still numbered its chapters: each number is a link to the page it meant that day.*
 <!-- /thesis -->
 
-### Results still to come
+### What the floor did in plain B2
 
-The runs of both experiments have been made, two worlds each, but they have
-not been analysed yet. Their results are still to come; until then, neither
-thesis is judged.
+In plain B2 the floor hardly ever asked for anything. Call an agent *able*
+when it could have a child: it holds eleven tokens or more, so that a child of
+ten leaves it one. At iterations 1,000, 2,000 and 3,000, the two worlds had
+82 to 147 able agents each. The floor asked more than ten tokens of 1 to 4 of
+them: 0.7% to 2.9%. The median agent's neighbours held a median of 1 to 3
+tokens, far below the ten every child gets anyway.
+
+So children started as they do without the floor. Over iterations 1,000 to
+2,000 they started with 12.4 and 11.5 tokens on average, against 11.2 to 12.1
+in Experiment 16's ten worlds of plain B2. And the worlds were as large:
+3,105 and 3,305 agents on average over those iterations, where Experiment
+16's held 3,076 to 3,669.
+
+### Verdict on plain B2: the thesis holds
+
+Both conditions of the thesis are met. At every moment it named, the floor
+asked more than ten tokens of fewer than one able agent in twenty (at most
+2.9%), and in both worlds children started with 11 to 13 tokens on average.
+
+So it was not the estates or the mixed brains that kept the floor idle in
+[Births as rich as the neighbours](#births-as-rich-as-the-neighbours). In
+any world of B2's rules, every child already gets ten tokens, and its
+parent's neighbours are poor: a floor set by them has nothing to add.
+
+### B1: still to be played
+
+Experiment 37's two worlds have not been played yet. The [lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") holds them
+ready, and they start when ▶ is pressed in the panel at the top of this
+section. Until then its thesis is not judged.
 
 ## What we learned
 
@@ -537,8 +564,8 @@ thesis is judged.
   tokens or more, and the game takes most of it within twenty iterations.
 - **In B2's mixed worlds, a floor set by the neighbours hardly binds.** A
   poor world's neighbours are poor, so the floor falls below the ten tokens
-  every child already gets. Whether it binds in plain B2 and in B1 is still
-  to be seen.
+  every child already gets. In plain B2 it is just as idle; whether it
+  binds in B1 is still to be seen.
 - **Where every agent dies at a fixed age, a world's size is a hundred times
   its births an iteration.**
 - **Room and riches come from the same coin.** Young parents keep a world a
@@ -689,6 +716,13 @@ the runs and every setting.
 <!-- /runs -->
 
 ### The runs of Experiment 36
+
+The numbers of [What the floor did in plain B2](#what-the-floor-did-in-plain-b2)
+are read from the two worlds' archives at 1,000, 2,000 and 3,000, and from
+their `stats.jsonl` (the tokens given to children over the births), beside
+Experiment 16's ten worlds read the same way:
+`python3 book_figures.py floorplain` writes them to
+`book/results/floorplain.json`.
 
 <!-- runs E36 -->
 > [!info]- The runs behind this page

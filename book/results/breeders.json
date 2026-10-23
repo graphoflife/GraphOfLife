@@ -1,0 +1,142 @@
+{
+ "chapter": "breeders",
+ "numbers": {
+  "held_by_agents": {
+   "breeding-raider": [
+    4,
+    0,
+    0
+   ],
+   "raider": [
+    4,
+    0,
+    0
+   ],
+   "breeding-turtle": [
+    0,
+    0,
+    0
+   ],
+   "resident": [
+    0,
+    0,
+    0
+   ]
+  },
+  "held_by_tokens": {
+   "breeding-raider": [
+    4,
+    0,
+    0
+   ],
+   "raider": [
+    4,
+    0,
+    0
+   ],
+   "breeding-turtle": [
+    0,
+    0,
+    0
+   ],
+   "resident": [
+    0,
+    0,
+    0
+   ]
+  },
+  "alive": {
+   "breeding-raider": [
+    5,
+    1,
+    0
+   ],
+   "raider": [
+    5,
+    0,
+    0
+   ],
+   "breeding-turtle": [
+    10,
+    8,
+    6
+   ],
+   "resident": [
+    11,
+    10,
+    7
+   ]
+  },
+  "life": {
+   "breeding-raider": {
+    "2000": 243.0,
+    "5000": 166.0,
+    "10000": 167.0
+   },
+   "raider": {
+    "2000": 206.0,
+    "5000": 151.0,
+    "10000": 155.0
+   },
+   "breeding-turtle": {
+    "2000": 300.0,
+    "5000": 300.0,
+    "10000": 265.0
+   },
+   "resident": {
+    "2000": 300.0,
+    "5000": 300.0,
+    "10000": 297.0
+   }
+  },
+  "peak": {
+   "breeding-raider": {
+    "2000": 1.502824858757062,
+    "5000": 1.2771084337349397,
+    "10000": 1.1790123456790123
+   },
+   "raider": {
+    "2000": 1.3559322033898304,
+    "5000": 1.2108433734939759,
+    "10000": 1.1393939393939394
+   },
+   "breeding-turtle": {
+    "2000": 1.0,
+    "5000": 1.0,
+    "10000": 1.0
+   },
+   "resident": {
+    "2000": 1.0112994350282485,
+    "5000": 1.0060240963855422,
+    "10000": 1.0
+   }
+  },
+  "patch": {
+   "2000": 168.0,
+   "5000": 173.0,
+   "10000": 165.0
+  },
+  "tokens_per_agent_planted": {
+   "2000": 2.259493670886076,
+   "5000": 2.0342857142857143,
+   "10000": 1.994535519125683
+  },
+  "able": {
+   "2000": 0.03340930902111324,
+   "5000": 0.03128106180202304,
+   "10000": 0.03313270961206126
+  }
+ },
+ "figures": {
+  "hold": {
+   "title": "Breeding raiders, beside barren raiders, breeding turtles and controls",
+   "caption": "Of the fifteen plantings at each era (five worlds, three places). Left: how many took hold \u2014 alive after 300 iterations, with more agents than the patch began with and than the control planted in the same place: breeding raiders (orange), lone raiders (violet), breeding turtles (green). Right: how many were still alive at all, the controls (grey) beside them.",
+   "recipe": "**Runs.** Experiment 34's 180 invasions (`python3 gol_lab.py run E34`): B2's worlds of Experiment 16 played on to 10,000 iterations as pilots of the engine's own rules (`GraphOfLifeRuns/.pilots/L/B2-long-s001` \u2026 `s005`), at iterations 2,000, 5,000 and 10,000, a patch of 5% on places 1 to 3, given the breeding raider's rule, the breeding turtle's, the lone raider's ([Strategies written by hand](strategies-written-by-hand.md)'s) or frozen copies of one patch member's brain (the control); the lone raiders' and the controls' plantings are those of Experiments 30 and 33.\n\n**Data.** From each trial's `result.json`.\n\n1. Load the world of the era; on place p, draw an agent at random and take its nearest neighbours, step by step, until the patch holds 5% of the world.\n2. Give the patch the rule, or the control; play 300 iterations under the world's own rules, counting the patch's strategy's agents and their tokens after every iteration (each trial's `result.json`).\n3. A planting takes hold when its strategy is alive after 300 iterations, holds more agents than the patch began with, and more than the control planted in the same place; count the plantings of each era that took hold, and those alive at all.\n\n**To make it again:** `python3 book_figures.py breeders`."
+  },
+  "patches": {
+   "title": "What became of the patches planted at 5,000 and 10,000",
+   "caption": "The median over the thirty plantings at 5,000 and 10,000 of each kind: breeding raiders (orange), lone raiders (violet), breeding turtles (green), controls (grey). Left: the strategy's agents as a share of the patch planted (0 once it has died out). Right: their tokens per agent, over the plantings still alive.",
+   "recipe": "**Runs.** Experiment 34's 180 invasions (`python3 gol_lab.py run E34`): B2's worlds of Experiment 16 played on to 10,000 iterations as pilots of the engine's own rules (`GraphOfLifeRuns/.pilots/L/B2-long-s001` \u2026 `s005`), at iterations 2,000, 5,000 and 10,000, a patch of 5% on places 1 to 3, given the breeding raider's rule, the breeding turtle's, the lone raider's ([Strategies written by hand](strategies-written-by-hand.md)'s) or frozen copies of one patch member's brain (the control); the lone raiders' and the controls' plantings are those of Experiments 30 and 33.\n\n**Data.** From each trial's `result.json`.\n\n1. Load the world of the era; on place p, draw an agent at random and take its nearest neighbours, step by step, until the patch holds 5% of the world.\n2. Give the patch the rule, or the control; play 300 iterations under the world's own rules, counting the patch's strategy's agents and their tokens after every iteration (each trial's `result.json`).\n3. At each iteration after planting, take the median over the thirty plantings of the strategy's agents over the patch planted, and of its tokens per agent over the plantings still alive.\n\n**To make it again:** `python3 book_figures.py breeders`."
+  }
+ }
+}

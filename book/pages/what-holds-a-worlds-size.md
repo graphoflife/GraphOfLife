@@ -325,9 +325,11 @@ against itself follows a poor world down
 
 The same experiment found where the poor come from. In the worlds with an
 estate, children start with ten tokens or more, and the game takes most of it
-within twenty iterations. Whether the floor binds in plain B2, or in [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it."), where
-a child may start with a single token, Experiments 36 and 37 will tell; their
-results are still to come.
+within twenty iterations. In plain B2 the floor is just as idle (Experiment
+36): every child already starts with ten tokens there too
+([The floor in plain B2 and in B1](room-for-the-steadiest-world.md#the-floor-in-plain-b2-and-in-b1)).
+Whether it binds in [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it."), where a child may start with a single token,
+Experiment 37 will tell once it is played.
 
 ## What we learned
 
@@ -393,6 +395,6 @@ results are still to come.
 
 **Also about:** [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world).
 
-> [!info]- Pages that link here (12)
-> [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [The estate of the dead](estate.md) · [Where tokens go](where-tokens-go.md) · [What folds a world](what-folds-a-world.md) · [Rules in company](rules-in-company.md) · [Eight switches at once](eight-switches-at-once.md) · [Healthy and rich](healthy-and-rich.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (13)
+> [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [The estate of the dead](estate.md) · [Where tokens go](where-tokens-go.md) · [What folds a world](what-folds-a-world.md) · [Raiders that breed](raiders-that-breed.md) · [Rules in company](rules-in-company.md) · [Eight switches at once](eight-switches-at-once.md) · [Healthy and rich](healthy-and-rich.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->
