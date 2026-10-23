@@ -59,14 +59,21 @@ the viewer charts, and every one has a note that says how it is computed.
 | `distinctBrains`, `distinctParents`, `brainDiversity` | genotypes among the living, their parent genotypes, genotypes per agent | [Brain diversity](brain-diversity.md) |
 | `cladesInWindow` | families: ancestors eight iterations back | [Families](families.md) |
 | `births` | children born (phase 1 rows) | [Births and deaths](births-and-deaths.md) |
-| `starved`, `orphaned` | agents the cleanup removed for having no tokens, or for being cut off | [Births and deaths](births-and-deaths.md) |
+| `starved`, `orphaned` | agents the cleanup removed for having no tokens, or for being cut off; deaths of age ([B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.")'s [`max_age`](settings.md#max_age)) are in no field, only in a frame's `cleanup.aged` | [Births and deaths](births-and-deaths.md) |
 | `gainers`, `losers`, `maxTokenAdded`, `maxTokenLost`, `redistributed` | who gained and who lost in the phase, the extremes, and the tokens of the dead dealt out | [Gains and losses](gains-losses-and-the-share-out.md) |
 | `meanInvestedShare`, `reproTokenShare`, `meanChildLinks`, `handovers` | how parents gave (phase 1) | [Reproduction statistics](reproduction-statistics.md) |
 | `selfAllocationShare`, `heldHomeShare` | staking on one's own node, and keeping it (phase 2) | [Staking at home](home-stake.md) |
 | `spreadShare`, `revoltShare`, `totalFlow`, `meanEdgeFlow`, `maxEdgeFlow`, `prunedEdges` | the stakes on [neighbours](the-world.md#the-network "An agent joined to another by a connection."), and the connections they keep alive (phase 2) | [Token flow](token-flow.md) |
 | `revolutions` | nodes won by a coalition (phase 2) | [Revolution](revolution.md) |
 | `cutRiskBefore` | the largest share of the world one cut could sever, before the cleanup | [Cut risk](cut-risk.md) |
-| `gifts`, `giftTokens`, `giftShare` | gifts of tokens — `null` in every run of this notebook, which has no gifts ([`allow_gifting`](settings.md#allow_gifting)) | |
+| `gifts`, `giftTokens`, `giftShare` | gifts of tokens (phase 1): 0 in a run without gifts, `null` in the game's rows ([`allow_gifting`](settings.md#allow_gifting)) | [Reproduction statistics](reproduction-statistics.md) |
+
+> [!note] Corrected on 23 October 2026
+> This table said the gift fields are `null` in every run of this notebook, which had no gifts. In a run
+> without gifts they are 0 in every reproduction row, and gifts have been switched on in [pilots](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") since
+> 15 October 2026, in Experiment 24 and in half the worlds of
+> [A screen of random worlds](a-screen-of-random-worlds.md). The table also did not say where deaths of
+> age are counted.
 
 **Graph statistics** cost far more to compute: they walk the whole network.
 They are filled in only on the rows of every 25th iteration (0, 25, 50, …);
